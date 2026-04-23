@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: {
@@ -32,10 +32,8 @@ export default async function LocaleLayout({
 
   const messages = await getMessages();
 
-  const htmlLang = locale;
-
   return (
-    <html lang={htmlLang}>
+    <html lang={locale}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -44,15 +42,15 @@ export default async function LocaleLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
           rel="stylesheet"
         />
       </head>
       <body className="antialiased">
         <NextIntlClientProvider messages={messages}>
-          <Navbar locale={locale} />
+          <Header />
           <main>{children}</main>
-          <Footer locale={locale} />
+          <Footer />
         </NextIntlClientProvider>
       </body>
     </html>

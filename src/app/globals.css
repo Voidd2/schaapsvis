@@ -1,12 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --kleur-zee: #1b4f72;
-  --kleur-zand: #f5e6c8;
-  --kleur-vis: #e8a87c;
-  --kleur-donker: #1a1a1a;
-  --kleur-wit: #fafaf8;
-  --kleur-groen: #2d6a4f;
+  --navy: #1c3557;
+  --cream: #f7f0e3;
+  --sand: #e8d5b0;
+  --salmon: #d4785a;
+  --gold: #c4943a;
+  --charcoal: #2c2c2c;
+  --seafoam: #2e6b5e;
 }
 
 html {
@@ -14,14 +15,28 @@ html {
 }
 
 body {
-  font-family: "Source Sans 3", "Source Sans Pro", sans-serif;
-  color: var(--kleur-donker);
-  background-color: var(--kleur-wit);
+  font-family: "Lato", "Helvetica Neue", Helvetica, sans-serif;
+  color: var(--charcoal);
+  background-color: var(--cream);
 }
 
 h1,
 h2,
 h3,
-h4 {
-  font-family: "Playfair Display", Georgia, serif;
+h4,
+h5 {
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  letter-spacing: -0.02em;
 }
+
+/* Utility classes for design system */
+.bg-navy { background-color: var(--navy); }
+.bg-cream { background-color: var(--cream); }
+.bg-sand { background-color: var(--sand); }
+.text-navy { color: var(--navy); }
+.text-cream { color: var(--cream); }
+.text-salmon { color: var(--salmon); }
+.text-gold { color: var(--gold); }
+.text-seafoam { color: var(--seafoam); }
+.bg-salmon { background-color: var(--salmon); }
+.bg-seafoam { background-color: var(--seafoam); }

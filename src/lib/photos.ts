@@ -1,0 +1,50 @@
+export const photos = {
+  hero: "https://images.unsplash.com/photo-1534482421-64566f976cfa?w=1600&q=85",
+  salmon:
+    "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=1200&q=85",
+  fishmarket:
+    "https://images.unsplash.com/photo-1543168256-418811576931?w=1200&q=85",
+  kibbeling:
+    "https://images.unsplash.com/photo-1598511726623-d2e9996e9ebe?w=800&q=85",
+  shopInterior:
+    "https://images.unsplash.com/photo-1571867424488-4565932edb41?w=1200&q=85",
+  leiden:
+    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=85",
+  arctic:
+    "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1200&q=85",
+  norway:
+    "https://images.unsplash.com/photo-1514993181858-13ef0d90e0f1?w=1200&q=85",
+  gallery1:
+    "https://images.unsplash.com/photo-1535914184764-ac8f0c8dd576?w=600&q=80",
+  gallery2:
+    "https://images.unsplash.com/photo-1604909052743-94e838986d24?w=600&q=80",
+  gallery3:
+    "https://images.unsplash.com/photo-1510130315030-87a1a0e6a7f1?w=600&q=80",
+  gallery4:
+    "https://images.unsplash.com/photo-1532232000-03a0edfad80c?w=600&q=80",
+  gallery5:
+    "https://images.unsplash.com/photo-1545816250-0e5b78ec8c5c?w=600&q=80",
+  gallery6:
+    "https://images.unsplash.com/photo-1559181567-c3190ca9d222?w=600&q=80",
+  gallery7:
+    "https://images.unsplash.com/photo-1612197527762-8cfb6f6eb6ce?w=600&q=80",
+  gallery8:
+    "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&q=80",
+  oldShop:
+    "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=800&q=85",
+  market:
+    "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800&q=85",
+};
+
+export const galleryPhotos = [
+  photos.gallery1,
+  photos.gallery2,
+  photos.gallery3,
+  photos.gallery4,
+  photos.gallery5,
+  photos.gallery6,
+  photos.gallery7,
+  photos.gallery8,
+  photos.salmon,
+  photos.fishmarket,
+];

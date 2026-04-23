@@ -1,8 +1,10 @@
-import { useTranslations } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import Image from "next/image";
 import Link from "next/link";
+import { useTranslations, useLocale } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
-import JsonLd from "@/components/JsonLd";
+import { photos } from "@/lib/photos";
+import { JsonLd } from "@/components/JsonLd";
 
 export async function generateMetadata({
   params,
@@ -10,15 +12,15 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "assortiment" });
+  const t = await getTranslations({ locale, namespace: "meta" });
 
   return {
-    title: t("metaTitle"),
-    description: t("metaDesc"),
+    title: t("assortimentTitle"),
+    description: t("assortimentDesc"),
     alternates: {
-      canonical: locale === "nl" ? "/assortiment" : `/${locale}/assortiment`,
+      canonical: `/${locale}/assortiment`,
       languages: {
-        nl: "/assortiment",
+        nl: "/nl/assortiment",
         en: "/en/assortiment",
         de: "/de/assortiment",
       },
@@ -27,107 +29,111 @@ export async function generateMetadata({
 }
 
 const products = [
-  { key: "p1", emoji: "🍤", highlight: false },
-  { key: "p2", emoji: "🐟", highlight: false },
-  { key: "p3", emoji: "🥖", highlight: false },
-  { key: "p4", emoji: "🍲", highlight: false },
-  { key: "p5", emoji: "🫙", highlight: false },
-  { key: "p6", emoji: "🦐", highlight: false },
-  { key: "p7", emoji: "🐠", highlight: true },
-  { key: "p8", emoji: "🐡", highlight: false },
-] as const;
+  { name: "Kibbeling", desc: "Knapperig gebakken, de Hollandse klassieker. Goudbruin van buiten, mals van binnen.", img: photos.kibbeling, highlight: false },
+  { name: "Lekkerbek", desc: "Verse wijting in een luchtig beslag. Heerlijk licht en knapperig.", img: photos.gallery1, highlight: false },
+  { name: "Broodje Haring", desc: "Vers, rauw, zoals het hoort. Met ui en augurk op een zacht broodje.", img: photos.gallery2, highlight: false },
+  { name: "Vissoep", desc: "Huisgemaakte soep vol smaak, elke dag vers bereid.", img: photos.gallery3, highlight: false },
+  { name: "Vispotje", desc: "Een verwend tussendoortje. Vol met lekkere stukken vis in een romige saus.", img: photos.gallery5, highlight: false },
+  { name: "Feestelijke Visschotel", desc: "Voor bijzondere gelegenheden. Een prachtige schaal met de beste vis.", img: photos.gallery6, highlight: false },
+  { name: "Varlaks Biologische Zalm", desc: "Premium Noorse biologische zalm — zonder antibiotica, GMO of hormonen.", img: photos.salmon, highlight: true },
+  { name: "Verse Vis (Seizoensaanbod)", desc: "Vers dagaanbod wisselt per seizoen. Vraag ons naar het aanbod van de dag.", img: photos.fishmarket, highlight: false },
+];
 
-function AssortimentContent({ locale }: { locale: string }) {
-  const t = useTranslations("assortiment");
-  const prefix = (path: string) => (locale === "nl" ? path : `/${locale}${path}`);
+function AssortimentContent() {
+  const t = useTranslations("assortimentPage");
+  const locale = useLocale();
 
   return (
     <>
       {/* Hero */}
-      <section className="bg-[#1B4F72] text-white py-16">
-        <div className="max-w-3xl mx-auto px-4 text-center">
-          <h1
-            className="text-4xl md:text-5xl font-bold mb-4"
-            style={{ fontFamily: "Playfair Display, serif" }}
-          >
-            {t("title")}
-          </h1>
-          <p className="text-white/80 text-lg">{t("sub")}</p>
-        </div>
+      <section style={{ backgroundColor: "var(--navy)" }} className="py-16 text-center px-4">
+        <h1
+          className="text-4xl md:text-5xl font-bold mb-4"
+          style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+        >
+          {t("title")}
+        </h1>
+        <p className="text-lg max-w-xl mx-auto" style={{ color: "rgba(247,240,227,0.75)" }}>
+          {t("sub")}
+        </p>
+        <p
+          className="mt-5 text-sm inline-block px-4 py-2"
+          style={{ backgroundColor: "rgba(247,240,227,0.1)", color: "rgba(247,240,227,0.6)" }}
+        >
+          📍 {t("note")}
+        </p>
       </section>
 
-      {/* Note */}
-      <div className="bg-[#F5E6C8] py-4">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <p className="text-[#1A1A1A]/70 text-sm">
-            📍 {t("note")}
-          </p>
-        </div>
-      </div>
-
-      {/* Products grid */}
-      <section className="bg-[#FAFAF8] py-16">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {products.map(({ key, emoji, highlight }) => (
-              <div
-                key={key}
-                className={`rounded-2xl p-6 border transition-shadow hover:shadow-md ${
-                  highlight
-                    ? "bg-[#2D6A4F] text-white border-[#2D6A4F]"
-                    : "bg-white border-[#E8A87C]/20"
-                }`}
+      {/* Grid */}
+      <section style={{ backgroundColor: "var(--cream)" }} className="py-16">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {products.map(({ name, desc, img, highlight }) => (
+              <article
+                key={name}
+                className={`group overflow-hidden ${highlight ? "outline outline-2 outline-[var(--seafoam)]" : ""}`}
               >
-                <div className="text-5xl mb-4">{emoji}</div>
-                <h3
-                  className={`text-lg font-bold mb-2 ${highlight ? "text-white" : "text-[#1B4F72]"}`}
-                  style={{ fontFamily: "Playfair Display, serif" }}
+                <div className="relative aspect-square overflow-hidden">
+                  <Image
+                    src={img}
+                    alt={name}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                  {highlight && (
+                    <div
+                      className="absolute top-3 left-3 text-xs font-semibold px-2 py-0.5"
+                      style={{ backgroundColor: "var(--seafoam)", color: "var(--cream)" }}
+                    >
+                      Biologisch
+                    </div>
+                  )}
+                </div>
+                <div
+                  className="p-4"
+                  style={{ backgroundColor: highlight ? "var(--sand)" : "white" }}
                 >
-                  {t(`${key}name` as Parameters<typeof t>[0])}
-                </h3>
-                <p
-                  className={`text-sm leading-relaxed mb-3 ${highlight ? "text-white/80" : "text-[#1A1A1A]/60"}`}
-                >
-                  {t(`${key}desc` as Parameters<typeof t>[0])}
-                </p>
-                {highlight && (
-                  <Link
-                    href={prefix("/varlaks-biologische-zalm")}
-                    className="inline-block text-xs text-[#E8A87C] font-semibold hover:text-white transition-colors"
+                  <h3
+                    className="font-bold text-base mb-1"
+                    style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
                   >
-                    {t("varlaksLink")}
-                  </Link>
-                )}
-                {key === "p8" && (
-                  <span className="inline-block text-xs text-[#1B4F72] font-semibold bg-[#F5E6C8] px-2 py-1 rounded-full">
-                    {t("dagsaanbod")}
-                  </span>
-                )}
-              </div>
+                    {name}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "var(--charcoal)", opacity: 0.7 }}>
+                    {desc}
+                  </p>
+                  {highlight && (
+                    <Link
+                      href={`/${locale}/varlaks`}
+                      className="inline-block mt-3 text-xs font-semibold underline underline-offset-2"
+                      style={{ color: "var(--seafoam)" }}
+                    >
+                      Meer over Varlaks →
+                    </Link>
+                  )}
+                </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="bg-[#F5E6C8] py-12">
-        <div className="max-w-xl mx-auto px-4 text-center">
-          <h2
-            className="text-2xl font-bold text-[#1B4F72] mb-4"
-            style={{ fontFamily: "Playfair Display, serif" }}
-          >
-            Alles vers — dagelijks aangeleverd
-          </h2>
-          <p className="text-[#1A1A1A]/70 mb-6 text-sm">
-            Prijzen en beschikbaarheid wisselen dagelijks. Kom langs of bel voor het dagsaanbod.
-          </p>
-          <a
-            href="tel:+31715149802"
-            className="inline-block bg-[#1B4F72] text-white font-semibold px-6 py-2.5 rounded-full hover:bg-[#163f5a] transition-colors"
-          >
-            071 514 9802
-          </a>
-        </div>
+      <section style={{ backgroundColor: "var(--sand)" }} className="py-12 text-center px-4">
+        <p className="font-bold text-xl mb-2" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+          Kom langs voor verse vis
+        </p>
+        <p className="text-sm mb-5" style={{ color: "var(--charcoal)", opacity: 0.7 }}>
+          Geen webshop — bel of kom langs voor actuele prijzen en aanbod.
+        </p>
+        <a
+          href="tel:+31715149802"
+          className="inline-block font-medium px-7 py-3 text-sm text-white transition-opacity hover:opacity-90"
+          style={{ backgroundColor: "var(--navy)" }}
+        >
+          071 514 9802
+        </a>
       </section>
     </>
   );
@@ -138,11 +144,11 @@ export default async function AssortimentPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
+  await params;
   return (
     <>
       <JsonLd />
-      <AssortimentContent locale={locale} />
+      <AssortimentContent />
     </>
   );
 }

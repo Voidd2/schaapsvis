@@ -1,8 +1,10 @@
-import { useTranslations } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import Image from "next/image";
 import Link from "next/link";
+import { useTranslations, useLocale } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
-import JsonLd from "@/components/JsonLd";
+import { photos, galleryPhotos } from "@/lib/photos";
+import { JsonLd } from "@/components/JsonLd";
 
 export async function generateMetadata({
   params,
@@ -10,328 +12,119 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "home" });
-
-  const descriptions: Record<string, string> = {
-    nl: "Schaaps Vis in Leiden verkoopt verse vis, kibbeling, haring en biologische Vårlaks zalm. Al 86 jaar op de Herenstraat. Ook op de markt en bij Hoogvliet Voorschoten.",
-    en: "Schaaps Vis in Leiden sells fresh fish, kibbeling, herring and organic Vårlaks salmon. 86 years on Herenstraat. Also at the market and Hoogvliet Voorschoten.",
-    de: "Schaaps Vis in Leiden verkauft frischen Fisch, Kibbeling, Hering und Bio-Vårlaks-Lachs. Seit 86 Jahren in der Herenstraat. Auch auf dem Markt und bei Hoogvliet Voorschoten.",
-  };
+  const t = await getTranslations({ locale, namespace: "meta" });
 
   return {
-    title: "Kibbeling & Verse Vis in Leiden | Schaaps Vis — Herenstraat",
-    description: descriptions[locale] ?? descriptions.nl,
+    title: t("homeTitle"),
+    description: t("homeDesc"),
     alternates: {
-      canonical: locale === "nl" ? "/" : `/${locale}`,
-      languages: { nl: "/", en: "/en", de: "/de" },
+      canonical: `/${locale}`,
+      languages: { nl: "/nl", en: "/en", de: "/de" },
     },
     openGraph: {
-      title: t("heroTitle") + " " + t("heroTitle2"),
-      description: descriptions[locale] ?? descriptions.nl,
+      title: t("homeTitle"),
+      description: t("homeDesc"),
       locale,
       type: "website",
     },
   };
 }
 
-function HeroSection({ locale }: { locale: string }) {
-  const t = useTranslations("home");
-  const prefix = (path: string) => (locale === "nl" ? path : `/${locale}${path}`);
+function HeroSection() {
+  const t = useTranslations("hero");
+  const locale = useLocale();
 
   return (
-    <section className="relative bg-[#1B4F72] text-white overflow-hidden min-h-[520px] flex items-center">
-      {/* Decorative wave */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0d2d42] to-transparent" />
-      </div>
-
-      {/* Placeholder image overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#1B4F72] via-[#1B4F72]/90 to-[#1B4F72]/60" />
-
-      <div className="relative max-w-6xl mx-auto px-4 py-20">
-        <div className="max-w-2xl">
-          <span className="inline-block bg-[#E8A87C]/20 border border-[#E8A87C]/40 text-[#E8A87C] text-xs font-semibold px-3 py-1 rounded-full mb-6 tracking-wide uppercase">
-            Opgericht 1938 · 86 jaar vakmanschap
-          </span>
-          <h1
-            className="text-4xl md:text-6xl font-bold leading-tight mb-4"
-            style={{ fontFamily: "Playfair Display, serif" }}
-          >
-            {t("heroTitle")}
-            <br />
-            <span className="text-[#E8A87C]">{t("heroTitle2")}</span>
-          </h1>
-          <p className="text-white/80 text-lg mb-8 leading-relaxed">
-            {t("heroSub")}
-          </p>
-          <Link
-            href={prefix("/bezoek-ons")}
-            className="inline-block bg-[#E8A87C] hover:bg-[#d4956a] text-white font-semibold px-8 py-3 rounded-full transition-colors shadow-lg"
-          >
-            {t("heroCta")}
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function OpeningstijdenStrip() {
-  const t = useTranslations("home");
-
-  return (
-    <section className="bg-[#F5E6C8] border-y border-[#E8A87C]/30">
-      <div className="max-w-6xl mx-auto px-4 py-5 grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-        {[
-          {
-            icon: "🏪",
-            title: t("shop"),
-            hours: t("shopHours"),
-          },
-          {
-            icon: "🛒",
-            title: t("markt"),
-            hours: t("marktHours"),
-          },
-          {
-            icon: "📍",
-            title: t("voorschoten"),
-            hours: t("voorschotenHours"),
-          },
-        ].map(({ icon, title, hours }) => (
-          <div key={title} className="flex items-center justify-center gap-3">
-            <span className="text-2xl">{icon}</span>
-            <div className="text-left">
-              <p className="font-semibold text-[#1B4F72] text-sm">{title}</p>
-              <p className="text-[#1A1A1A]/70 text-xs">{hours}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function AboutSection({ locale }: { locale: string }) {
-  const t = useTranslations("home");
-  const prefix = (path: string) => (locale === "nl" ? path : `/${locale}${path}`);
-
-  return (
-    <section className="bg-[#FAFAF8] py-16">
-      <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-        {/* Placeholder image */}
-        <div className="bg-[#F5E6C8] rounded-2xl aspect-[4/3] flex items-center justify-center shadow-inner">
-          <div className="text-center text-[#1B4F72]/40">
-            <div className="text-6xl mb-2">🐟</div>
-            <p className="text-sm">Foto winkel</p>
-          </div>
-        </div>
-        <div>
-          <h2
-            className="text-3xl font-bold text-[#1B4F72] mb-4"
-            style={{ fontFamily: "Playfair Display, serif" }}
-          >
-            {t("aboutTitle")}
-          </h2>
-          <p className="text-[#1A1A1A]/70 leading-relaxed mb-6">
-            {t("aboutText")}
-          </p>
-          <Link
-            href={prefix("/ons-verhaal")}
-            className="text-[#1B4F72] font-semibold hover:text-[#E8A87C] transition-colors"
-          >
-            {t("aboutLink")}
-          </Link>
-          <div className="flex flex-wrap gap-3 mt-8">
-            {[t("badge1"), t("badge2"), t("badge3")].map((badge) => (
-              <span
-                key={badge}
-                className="bg-[#F5E6C8] border border-[#E8A87C]/40 text-[#1B4F72] text-xs font-semibold px-3 py-1.5 rounded-full"
-              >
-                {badge}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function VarlaksSection({ locale }: { locale: string }) {
-  const t = useTranslations("home");
-  const prefix = (path: string) => (locale === "nl" ? path : `/${locale}${path}`);
-
-  return (
-    <section className="bg-[#1B4F72] text-white py-16">
-      <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-        <div>
-          <span className="inline-block bg-[#2D6A4F] text-white text-xs font-semibold px-3 py-1 rounded-full mb-4 uppercase tracking-wide">
-            Biologisch · Premium · Noors
-          </span>
-          <h2
-            className="text-3xl font-bold mb-4"
-            style={{ fontFamily: "Playfair Display, serif" }}
-          >
-            {t("varlaksTitle")}
-          </h2>
-          <p className="text-white/80 mb-6 leading-relaxed">{t("varlaksSub")}</p>
-          <ul className="space-y-2 mb-8 text-white/70 text-sm">
-            <li className="flex items-center gap-2">
-              <span className="text-[#E8A87C]">✓</span> Geen antibiotica of GMO
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-[#E8A87C]">✓</span> Familieboerderijen boven
-              de Poolcirkel
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-[#E8A87C]">✓</span> Volledig traceerbaar
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-[#E8A87C]">✓</span> Rijk aan omega-3
-            </li>
-          </ul>
-          <Link
-            href={prefix("/varlaks-biologische-zalm")}
-            className="inline-block bg-[#E8A87C] hover:bg-[#d4956a] text-white font-semibold px-6 py-2.5 rounded-full transition-colors"
-          >
-            {t("varlaksLink")}
-          </Link>
-        </div>
-        {/* Placeholder image */}
-        <div className="bg-white/10 rounded-2xl aspect-[4/3] flex items-center justify-center">
-          <div className="text-center text-white/40">
-            <div className="text-6xl mb-2">🐠</div>
-            <p className="text-sm">Foto Vårlaks zalm</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-const products = [
-  { key: "p1", emoji: "🍤" },
-  { key: "p2", emoji: "🐟" },
-  { key: "p3", emoji: "🥖" },
-  { key: "p4", emoji: "🍲" },
-  { key: "p5", emoji: "🫙" },
-  { key: "p6", emoji: "🦐" },
-];
-
-function AssortimentSection({ locale }: { locale: string }) {
-  const t = useTranslations("home");
-  const a = useTranslations("assortiment");
-
-  return (
-    <section className="bg-[#FAFAF8] py-16">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-10">
-          <h2
-            className="text-3xl font-bold text-[#1B4F72] mb-2"
-            style={{ fontFamily: "Playfair Display, serif" }}
-          >
-            {t("assortimentTitle")}
-          </h2>
-          <p className="text-[#1A1A1A]/60">{t("assortimentSub")}</p>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {products.map(({ key, emoji }) => (
-            <div
-              key={key}
-              className="bg-[#F5E6C8] rounded-xl p-6 text-center hover:shadow-md transition-shadow"
-            >
-              <div className="text-4xl mb-3">{emoji}</div>
-              <h3 className="font-semibold text-[#1B4F72] mb-1">
-                {a(`${key}name` as Parameters<typeof a>[0])}
-              </h3>
-              <p className="text-xs text-[#1A1A1A]/60 leading-relaxed">
-                {a(`${key}desc` as Parameters<typeof a>[0])}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function LocatiesSection() {
-  const t = useTranslations("home");
-
-  return (
-    <section className="bg-[#F5E6C8] py-16">
-      <div className="max-w-6xl mx-auto px-4">
-        <h2
-          className="text-3xl font-bold text-[#1B4F72] mb-10 text-center"
-          style={{ fontFamily: "Playfair Display, serif" }}
+    <section className="relative min-h-[88vh] flex items-center justify-center overflow-hidden">
+      <Image
+        src={photos.hero}
+        alt="Verse vis bij Schaaps Vis Leiden"
+        fill
+        className="object-cover"
+        priority
+        sizes="100vw"
+      />
+      <div
+        className="absolute inset-0"
+        style={{ backgroundColor: "rgba(28,53,87,0.62)" }}
+      />
+      <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
+        <p
+          className="text-xs tracking-[0.25em] uppercase mb-5 opacity-75"
+          style={{ color: "var(--sand)" }}
         >
-          {t("locatieTitle")}
-        </h2>
-        <div className="grid md:grid-cols-3 gap-6 mb-10">
-          {[
-            {
-              emoji: "🏪",
-              title: "Viswinkel Herenstraat",
-              addr: "Herenstraat 48, 2313 AL Leiden",
-              hours: "Maandag t/m Zaterdag",
-              tel: "071 514 9802",
-              maps: "https://maps.google.com/?q=Herenstraat+48,+Leiden",
-            },
-            {
-              emoji: "🛒",
-              title: "Markt Leiden",
-              addr: "Centrum Leiden",
-              hours: "Woensdag + Zaterdag",
-              maps: "https://maps.google.com/?q=Markt+Leiden",
-            },
-            {
-              emoji: "📍",
-              title: "Hoogvliet Voorschoten",
-              addr: "Hoogvliet, Voorschoten",
-              hours: "Vrijdag",
-              maps: "https://maps.google.com/?q=Hoogvliet+Voorschoten",
-            },
-          ].map(({ emoji, title, addr, hours, tel, maps }) => (
-            <div
-              key={title}
-              className="bg-white rounded-xl p-6 shadow-sm border border-[#E8A87C]/20"
-            >
-              <div className="text-3xl mb-3">{emoji}</div>
-              <h3 className="font-bold text-[#1B4F72] mb-1">{title}</h3>
-              <p className="text-sm text-[#1A1A1A]/70 mb-1">{addr}</p>
-              <p className="text-sm text-[#1A1A1A]/70 mb-1">{hours}</p>
-              {tel && (
-                <a
-                  href={`tel:+31715149802`}
-                  className="text-sm text-[#E8A87C] hover:underline block mb-3"
-                >
-                  {tel}
-                </a>
-              )}
-              <a
-                href={maps}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs text-[#1B4F72] font-semibold hover:text-[#E8A87C] transition-colors"
-              >
-                Route →
-              </a>
-            </div>
+          {t("tagline")}
+        </p>
+        <h1
+          className="text-5xl md:text-7xl font-bold leading-tight mb-6"
+          style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+        >
+          {t("heading").split("\n").map((line, i) => (
+            <span key={i}>
+              {line}
+              {i === 0 && <br />}
+            </span>
           ))}
-        </div>
+        </h1>
+        <p
+          className="text-lg md:text-xl max-w-xl mx-auto mb-10 leading-relaxed"
+          style={{ color: "rgba(247,240,227,0.85)" }}
+        >
+          {t("sub")}
+        </p>
+        <Link
+          href={`/${locale}/bezoek-ons`}
+          className="inline-block font-medium tracking-wide px-8 py-4 transition-colors text-white"
+          style={{ backgroundColor: "var(--salmon)" }}
+        >
+          {t("cta")} →
+        </Link>
+      </div>
+    </section>
+  );
+}
 
-        {/* Google Maps embed — Herenstraat */}
-        <div className="rounded-2xl overflow-hidden shadow-md">
-          <iframe
-            title="Schaaps Vis Leiden"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2448.5!2d4.494!3d52.1595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c5c688e89f5de3%3A0x0!2sHerenstraat+48%2C+2313+AL+Leiden!5e0!3m2!1snl!2snl!4v1"
-            width="100%"
-            height="320"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
+function AboutSection() {
+  const t = useTranslations("about");
+  const locale = useLocale();
+
+  return (
+    <section style={{ backgroundColor: "var(--cream)" }} className="py-20">
+      <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-14 items-center">
+        <div>
+          <p
+            className="text-xs tracking-[0.2em] uppercase mb-4 opacity-50"
+            style={{ color: "var(--navy)" }}
+          >
+            Since 1938
+          </p>
+          <h2
+            className="text-4xl font-bold mb-6 leading-tight"
+            style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+          >
+            {t("title")}
+          </h2>
+          <p
+            className="leading-relaxed mb-6 text-base"
+            style={{ color: "var(--charcoal)", opacity: 0.8 }}
+          >
+            {t("text")}
+          </p>
+          <Link
+            href={`/${locale}/ons-verhaal`}
+            className="text-sm font-semibold underline underline-offset-4 transition-opacity hover:opacity-70"
+            style={{ color: "var(--navy)" }}
+          >
+            {t("link")}
+          </Link>
+        </div>
+        <div className="relative aspect-[4/3] rounded overflow-hidden">
+          <Image
+            src={photos.shopInterior}
+            alt="Schaaps Vis winkel"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
       </div>
@@ -339,53 +132,316 @@ function LocatiesSection() {
   );
 }
 
-function ReviewsSection() {
-  const t = useTranslations("home");
-
-  const reviews = [
-    {
-      name: "Marieke V.",
-      stars: 5,
-      text: "De lekkerste kibbeling van heel Leiden! Al jaren vaste klant en het wordt alleen maar beter. Aldert maakt altijd even tijd voor een praatje.",
-    },
-    {
-      name: "Peter de B.",
-      stars: 5,
-      text: "Geweldige viswinkel met een fantastisch verhaal. De Vårlaks zalm is echt een klasse apart — je proeft meteen het verschil.",
-    },
-    {
-      name: "Annemiek R.",
-      stars: 5,
-      text: "Een echte familiebusiness zoals ze vroeger waren. Altijd vers, altijd vriendelijk, altijd eerlijk. Zou je zomaar kunnen vergeten in deze tijd!",
-    },
-  ];
+function VarlaksHighlight() {
+  const t = useTranslations("varlaksHighlight");
+  const locale = useLocale();
 
   return (
-    <section className="bg-[#1B4F72] text-white py-16">
+    <section style={{ backgroundColor: "var(--navy)" }} className="py-20">
+      <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-14 items-center">
+        <div className="relative aspect-[4/3] rounded overflow-hidden">
+          <Image
+            src={photos.norway}
+            alt="Noorse fjorden — Varlaks zalm"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </div>
+        <div>
+          <span
+            className="inline-block text-xs tracking-widest uppercase font-semibold px-3 py-1 mb-5"
+            style={{ backgroundColor: "var(--seafoam)", color: "var(--cream)" }}
+          >
+            Biologisch gecertificeerd
+          </span>
+          <h2
+            className="text-4xl font-bold mb-5 leading-tight"
+            style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+          >
+            {t("title")}
+          </h2>
+          <ul className="space-y-3 mb-8">
+            {[t("bullet1"), t("bullet2"), t("bullet3")].map((b) => (
+              <li
+                key={b}
+                className="flex items-start gap-3 text-sm"
+                style={{ color: "rgba(247,240,227,0.8)" }}
+              >
+                <span style={{ color: "var(--gold)" }}>✓</span>
+                {b}
+              </li>
+            ))}
+          </ul>
+          <Link
+            href={`/${locale}/varlaks`}
+            className="text-sm font-semibold underline underline-offset-4 transition-opacity hover:opacity-70"
+            style={{ color: "var(--sand)" }}
+          >
+            {t("link")}
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const productItems = [
+  {
+    name: "Kibbeling",
+    desc: "Knapperig gebakken, de Hollandse klassieker",
+    img: photos.kibbeling,
+  },
+  {
+    name: "Haring",
+    desc: "Vers, rauw, recht van de markt",
+    img: photos.gallery1,
+  },
+  {
+    name: "Lekkerbek",
+    desc: "Verse wijting in luchtig beslag",
+    img: photos.gallery2,
+  },
+  {
+    name: "Vissoep",
+    desc: "Huisgemaakte soep, elke dag anders",
+    img: photos.gallery3,
+  },
+  {
+    name: "Varlaks Zalm",
+    desc: "Biologisch, Noors, antibioticavrij",
+    img: photos.salmon,
+  },
+  {
+    name: "Feestschotel",
+    desc: "Voor bijzondere gelegenheden",
+    img: photos.gallery4,
+  },
+];
+
+function AssortimentGrid() {
+  const t = useTranslations("assortimentSection");
+
+  return (
+    <section style={{ backgroundColor: "var(--cream)" }} className="py-20">
+      <div className="max-w-6xl mx-auto px-4">
+        <p
+          className="text-xs tracking-[0.2em] uppercase text-center mb-3 opacity-50"
+          style={{ color: "var(--navy)" }}
+        >
+          Dagelijks vers
+        </p>
+        <h2
+          className="text-4xl font-bold text-center mb-12"
+          style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+        >
+          {t("title")}
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+          {productItems.map(({ name, desc, img }) => (
+            <article key={name} className="group">
+              <div className="relative aspect-square overflow-hidden mb-3">
+                <Image
+                  src={img}
+                  alt={name}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 640px) 50vw, 33vw"
+                />
+              </div>
+              <h3
+                className="font-bold text-base mb-1"
+                style={{
+                  color: "var(--navy)",
+                  fontFamily: "Playfair Display, serif",
+                }}
+              >
+                {name}
+              </h3>
+              <p className="text-sm opacity-60" style={{ color: "var(--charcoal)" }}>
+                {desc}
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PhotoGallery() {
+  return (
+    <section className="py-0 overflow-hidden">
+      <div className="flex gap-1" style={{ display: "flex" }}>
+        {galleryPhotos.map((src, i) => (
+          <div
+            key={i}
+            className="relative flex-shrink-0"
+            style={{ width: 260, height: 260 }}
+          >
+            <Image
+              src={src}
+              alt=""
+              fill
+              className="object-cover"
+              sizes="260px"
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+const reviews = [
+  {
+    name: "Marja van den Berg",
+    text: "Al meer dan twintig jaar haal ik hier mijn vis. De kibbeling is nergens beter dan bij Schaap. En Aldert staat altijd klaar met een goed verhaal.",
+    stars: 5,
+  },
+  {
+    name: "Pieter S.",
+    text: "De enige plek in Leiden waar je écht verse haring krijgt. Geen gedoe, gewoon lekker.",
+    stars: 5,
+  },
+  {
+    name: "Familie Hoekstra",
+    text: "Elke zaterdag op de markt — dat is onze vaste stop. Al jaren. De Varlaks zalm is een aanrader voor iedereen die iets bijzonders wil.",
+    stars: 5,
+  },
+];
+
+function ReviewsSection() {
+  const t = useTranslations("reviewsSection");
+
+  return (
+    <section style={{ backgroundColor: "var(--sand)" }} className="py-20">
       <div className="max-w-6xl mx-auto px-4">
         <h2
-          className="text-3xl font-bold text-center mb-10"
-          style={{ fontFamily: "Playfair Display, serif" }}
+          className="text-3xl font-bold text-center mb-12"
+          style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
         >
-          {t("reviewsTitle")}
+          {t("title")}
         </h2>
         <div className="grid md:grid-cols-3 gap-6">
           {reviews.map((r) => (
-            <div
-              key={r.name}
-              className="bg-white/10 backdrop-blur rounded-xl p-6"
-            >
-              <div className="flex gap-0.5 mb-3">
+            <div key={r.name} className="bg-white p-7">
+              <div className="flex gap-0.5 mb-4">
                 {Array.from({ length: r.stars }).map((_, i) => (
-                  <span key={i} className="text-[#E8A87C]">
+                  <span key={i} style={{ color: "var(--gold)" }}>
                     ★
                   </span>
                 ))}
               </div>
-              <p className="text-white/80 text-sm leading-relaxed mb-4 italic">
+              <p
+                className="text-sm leading-relaxed mb-5"
+                style={{ color: "var(--charcoal)", opacity: 0.8 }}
+              >
                 &ldquo;{r.text}&rdquo;
               </p>
-              <p className="text-[#E8A87C] text-sm font-semibold">— {r.name}</p>
+              <p
+                className="text-xs font-semibold tracking-wide uppercase"
+                style={{ color: "var(--navy)" }}
+              >
+                {r.name}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const locationItems = [
+  {
+    icon: "🏪",
+    name: "Viswinkel Herenstraat",
+    address: "Herenstraat 48, 2313 AL Leiden",
+    tel: "071 514 9802",
+    schedule: "Maandag t/m zaterdag",
+    mapsHref: "https://maps.google.com/?q=Herenstraat+48,+2313+AL+Leiden",
+  },
+  {
+    icon: "🛒",
+    name: "Markt Leiden",
+    address: "Centrum Leiden",
+    tel: null,
+    schedule: "Woensdag + Zaterdag",
+    mapsHref: "https://maps.google.com/?q=Markt+Leiden",
+  },
+  {
+    icon: "📍",
+    name: "Hoogvliet Voorschoten",
+    address: "Bij Hoogvliet, Voorschoten",
+    tel: null,
+    schedule: "Vrijdag",
+    mapsHref: "https://maps.google.com/?q=Hoogvliet+Voorschoten",
+  },
+];
+
+function LocationsSection() {
+  const t = useTranslations("locatiesSection");
+
+  return (
+    <section style={{ backgroundColor: "var(--navy)" }} className="py-20">
+      <div className="max-w-6xl mx-auto px-4">
+        <h2
+          className="text-3xl font-bold text-center mb-12"
+          style={{
+            color: "var(--cream)",
+            fontFamily: "Playfair Display, serif",
+          }}
+        >
+          {t("title")}
+        </h2>
+        <div className="grid md:grid-cols-3 gap-6">
+          {locationItems.map(({ icon, name, address, tel, schedule, mapsHref }) => (
+            <div
+              key={name}
+              className="p-6"
+              style={{ backgroundColor: "rgba(247,240,227,0.07)" }}
+            >
+              <div className="text-3xl mb-4">{icon}</div>
+              <h3
+                className="font-bold text-base mb-2"
+                style={{
+                  color: "var(--cream)",
+                  fontFamily: "Playfair Display, serif",
+                }}
+              >
+                {name}
+              </h3>
+              <p
+                className="text-sm mb-1"
+                style={{ color: "rgba(247,240,227,0.65)" }}
+              >
+                {address}
+              </p>
+              <p
+                className="text-sm mb-1"
+                style={{ color: "rgba(247,240,227,0.65)" }}
+              >
+                {schedule}
+              </p>
+              {tel && (
+                <a
+                  href="tel:+31715149802"
+                  className="text-sm block mb-3 transition-opacity hover:opacity-100"
+                  style={{ color: "var(--sand)" }}
+                >
+                  {tel}
+                </a>
+              )}
+              <a
+                href={mapsHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-semibold underline underline-offset-2 transition-opacity hover:opacity-70"
+                style={{ color: "var(--salmon)" }}
+              >
+                Route →
+              </a>
             </div>
           ))}
         </div>
@@ -399,18 +455,17 @@ export default async function HomePage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
-
+  await params;
   return (
     <>
       <JsonLd />
-      <HeroSection locale={locale} />
-      <OpeningstijdenStrip />
-      <AboutSection locale={locale} />
-      <VarlaksSection locale={locale} />
-      <AssortimentSection locale={locale} />
-      <LocatiesSection />
+      <HeroSection />
+      <AboutSection />
+      <VarlaksHighlight />
+      <AssortimentGrid />
+      <PhotoGallery />
       <ReviewsSection />
+      <LocationsSection />
     </>
   );
 }

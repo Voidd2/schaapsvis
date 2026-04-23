@@ -1,7 +1,8 @@
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
-import JsonLd from "@/components/JsonLd";
+import { MapPin, Phone, Clock } from "lucide-react";
+import { JsonLd } from "@/components/JsonLd";
 
 export async function generateMetadata({
   params,
@@ -9,15 +10,15 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "bezoek" });
+  const t = await getTranslations({ locale, namespace: "meta" });
 
   return {
-    title: t("metaTitle"),
-    description: t("metaDesc"),
+    title: t("bezoekTitle"),
+    description: t("bezoekDesc"),
     alternates: {
-      canonical: locale === "nl" ? "/bezoek-ons" : `/${locale}/bezoek-ons`,
+      canonical: `/${locale}/bezoek-ons`,
       languages: {
-        nl: "/bezoek-ons",
+        nl: "/nl/bezoek-ons",
         en: "/en/bezoek-ons",
         de: "/de/bezoek-ons",
       },
@@ -25,129 +26,120 @@ export async function generateMetadata({
   };
 }
 
-function BezoekContent() {
-  const t = useTranslations("bezoek");
+const locations = [
+  {
+    icon: "🏪",
+    name: "Viswinkel Herenstraat",
+    address: "Herenstraat 48, 2313 AL Leiden",
+    phone: "071 514 9802",
+    days: "Maandag t/m zaterdag",
+    hours: "08:30 – 17:30", // ← AANPASSEN
+    mapEmbed:
+      "https://maps.google.com/maps?q=Herenstraat+48+Leiden&output=embed",
+    mapsHref: "https://maps.google.com/?q=Herenstraat+48,+2313+AL+Leiden",
+  },
+  {
+    icon: "🛒",
+    name: "Markt Leiden",
+    address: "Nieuwe Rijn / centrum, Leiden",
+    phone: null,
+    days: "Woensdag + Zaterdag",
+    hours: "09:00 – 17:00", // ← AANPASSEN
+    mapEmbed:
+      "https://maps.google.com/maps?q=Leiden+Markt+Nieuwe+Rijn&output=embed",
+    mapsHref: "https://maps.google.com/?q=Leiden+Markt+Nieuwe+Rijn",
+  },
+  {
+    icon: "📍",
+    name: "Hoogvliet Voorschoten",
+    address: "Bij de Hoogvliet, Voorschoten",
+    phone: null,
+    days: "Vrijdag",
+    hours: "08:30 – 16:00", // ← AANPASSEN
+    mapEmbed:
+      "https://maps.google.com/maps?q=Hoogvliet+Voorschoten&output=embed",
+    mapsHref: "https://maps.google.com/?q=Hoogvliet+Voorschoten",
+  },
+];
 
-  const locations = [
-    {
-      icon: "🏪",
-      titleKey: "loc1title" as const,
-      addrKey: "loc1addr" as const,
-      hoursKey: "loc1hours" as const,
-      tel: "071 514 9802",
-      telKey: "loc1tel" as const,
-      mapsUrl:
-        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2449!2d4.494!3d52.1595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c5c688e89f5de3%3A0x0!2sHerenstraat+48%2C+2313+AL+Leiden!5e0!3m2!1snl!2snl!4v1",
-      directionsUrl:
-        "https://maps.google.com/?q=Herenstraat+48,+2313+AL+Leiden",
-    },
-    {
-      icon: "🛒",
-      titleKey: "loc2title" as const,
-      addrKey: "loc2addr" as const,
-      hoursKey: "loc2hours" as const,
-      tel: null,
-      telKey: null,
-      mapsUrl:
-        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2449!2d4.4947!3d52.1587!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c5c68d1cffffff%3A0x0!2sMarktplaats+Leiden!5e0!3m2!1snl!2snl!4v1",
-      directionsUrl: "https://maps.google.com/?q=Markt+Leiden+centrum",
-    },
-    {
-      icon: "📍",
-      titleKey: "loc3title" as const,
-      addrKey: "loc3addr" as const,
-      hoursKey: "loc3hours" as const,
-      tel: null,
-      telKey: null,
-      mapsUrl:
-        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2454!2d4.4425!3d52.1245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c5c2cfffffff%3A0x0!2sHoogvliet+Voorschoten!5e0!3m2!1snl!2snl!4v1",
-      directionsUrl: "https://maps.google.com/?q=Hoogvliet+Voorschoten",
-    },
-  ] as const;
+function BezoekContent() {
+  const t = useTranslations("bezoekPage");
 
   return (
     <>
       {/* Hero */}
-      <section className="bg-[#1B4F72] text-white py-16">
-        <div className="max-w-3xl mx-auto px-4 text-center">
-          <h1
-            className="text-4xl md:text-5xl font-bold mb-4"
-            style={{ fontFamily: "Playfair Display, serif" }}
-          >
-            {t("title")}
-          </h1>
-          <p className="text-white/80 text-lg">{t("sub")}</p>
-        </div>
+      <section style={{ backgroundColor: "var(--navy)" }} className="py-16 text-center px-4">
+        <h1
+          className="text-4xl md:text-5xl font-bold mb-4"
+          style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+        >
+          {t("title")}
+        </h1>
+        <p className="text-lg" style={{ color: "rgba(247,240,227,0.75)" }}>
+          {t("sub")}
+        </p>
       </section>
 
       {/* Locations */}
-      <section className="bg-[#FAFAF8] py-16">
-        <div className="max-w-5xl mx-auto px-4 space-y-16">
+      <section style={{ backgroundColor: "var(--cream)" }} className="py-16">
+        <div className="max-w-5xl mx-auto px-4 space-y-20">
           {locations.map(
-            ({ icon, titleKey, addrKey, hoursKey, tel, mapsUrl, directionsUrl }, idx) => (
+            ({ icon, name, address, phone, days, hours, mapEmbed, mapsHref }, idx) => (
               <div
-                key={titleKey}
+                key={name}
                 className={`grid md:grid-cols-2 gap-8 items-start ${
-                  idx % 2 === 1 ? "md:flex-row-reverse" : ""
+                  idx % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""
                 }`}
               >
-                {/* Info card */}
-                <div
-                  className={`bg-[#F5E6C8] rounded-2xl p-8 ${idx % 2 === 1 ? "md:order-2" : ""}`}
-                >
-                  <div className="text-4xl mb-4">{icon}</div>
+                {/* Info */}
+                <div style={{ backgroundColor: "var(--sand)" }} className="p-8">
+                  <div className="text-4xl mb-5">{icon}</div>
                   <h2
-                    className="text-2xl font-bold text-[#1B4F72] mb-3"
-                    style={{ fontFamily: "Playfair Display, serif" }}
+                    className="text-2xl font-bold mb-5"
+                    style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
                   >
-                    {t(titleKey)}
+                    {name}
                   </h2>
-                  <div className="space-y-2 text-sm">
-                    <p className="flex items-start gap-2">
-                      <span className="text-[#E8A87C] mt-0.5">📍</span>
-                      <span className="text-[#1A1A1A]/80">{t(addrKey)}</span>
+                  <div className="space-y-3 text-sm">
+                    <p className="flex items-start gap-3">
+                      <MapPin size={14} className="mt-0.5 flex-shrink-0 opacity-50" style={{ color: "var(--navy)" }} />
+                      <span style={{ color: "var(--charcoal)", opacity: 0.8 }}>{address}</span>
                     </p>
-                    <p className="flex items-start gap-2">
-                      <span className="text-[#E8A87C] mt-0.5">🕒</span>
-                      <span className="text-[#1A1A1A]/80">
-                        <span className="font-medium">{t("hours")}</span>{" "}
-                        {t(hoursKey)}
+                    <p className="flex items-center gap-3">
+                      <Clock size={14} className="flex-shrink-0 opacity-50" style={{ color: "var(--navy)" }} />
+                      <span style={{ color: "var(--charcoal)", opacity: 0.8 }}>
+                        <strong>{days}</strong> · {hours}
                       </span>
                     </p>
-                    {tel && (
-                      <p className="flex items-start gap-2">
-                        <span className="text-[#E8A87C] mt-0.5">📞</span>
-                        <span>
-                          <span className="font-medium text-[#1A1A1A]/80">
-                            {t("telephone")}
-                          </span>{" "}
-                          <a
-                            href="tel:+31715149802"
-                            className="text-[#1B4F72] font-semibold hover:text-[#E8A87C] transition-colors"
-                          >
-                            {tel}
-                          </a>
-                        </span>
+                    {phone && (
+                      <p className="flex items-center gap-3">
+                        <Phone size={14} className="flex-shrink-0 opacity-50" style={{ color: "var(--navy)" }} />
+                        <a
+                          href="tel:+31715149802"
+                          className="font-semibold transition-opacity hover:opacity-70"
+                          style={{ color: "var(--navy)" }}
+                        >
+                          {phone}
+                        </a>
                       </p>
                     )}
                   </div>
                   <a
-                    href={directionsUrl}
+                    href={mapsHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block mt-5 bg-[#1B4F72] text-white text-sm font-semibold px-5 py-2 rounded-full hover:bg-[#163f5a] transition-colors"
+                    className="inline-block mt-6 text-sm font-semibold px-5 py-2.5 text-white transition-opacity hover:opacity-90"
+                    style={{ backgroundColor: "var(--navy)" }}
                   >
-                    {t("directions")}
+                    Route →
                   </a>
                 </div>
 
                 {/* Map */}
-                <div
-                  className={`rounded-2xl overflow-hidden shadow-md h-[280px] ${idx % 2 === 1 ? "md:order-1" : ""}`}
-                >
+                <div className="h-[300px] overflow-hidden">
                   <iframe
-                    title={t(titleKey)}
-                    src={mapsUrl}
+                    title={name}
+                    src={mapEmbed}
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
@@ -162,18 +154,18 @@ function BezoekContent() {
         </div>
       </section>
 
-      {/* Contact strip */}
-      <section className="bg-[#1B4F72] text-white py-10">
-        <div className="max-w-xl mx-auto px-4 text-center">
-          <p className="text-white/80 mb-3">Vragen? Bel ons gerust op:</p>
-          <a
-            href="tel:+31715149802"
-            className="text-3xl font-bold text-[#E8A87C] hover:text-white transition-colors"
-            style={{ fontFamily: "Playfair Display, serif" }}
-          >
-            071 514 9802
-          </a>
-        </div>
+      {/* Phone CTA */}
+      <section style={{ backgroundColor: "var(--navy)" }} className="py-12 text-center px-4">
+        <p className="text-sm mb-3" style={{ color: "rgba(247,240,227,0.6)" }}>
+          Vragen? Bel ons gerust op:
+        </p>
+        <a
+          href="tel:+31715149802"
+          className="text-4xl font-bold transition-opacity hover:opacity-80"
+          style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+        >
+          071 514 9802
+        </a>
       </section>
     </>
   );

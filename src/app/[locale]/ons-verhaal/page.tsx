@@ -1,7 +1,9 @@
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
-import JsonLd from "@/components/JsonLd";
+import { photos } from "@/lib/photos";
+import { JsonLd } from "@/components/JsonLd";
 
 export async function generateMetadata({
   params,
@@ -9,135 +11,197 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "verhaal" });
+  const t = await getTranslations({ locale, namespace: "meta" });
 
   return {
-    title: t("metaTitle"),
-    description: t("metaDesc"),
+    title: t("verhaalTitle"),
+    description: t("verhaalDesc"),
     alternates: {
-      canonical: locale === "nl" ? "/ons-verhaal" : `/${locale}/ons-verhaal`,
+      canonical: `/${locale}/ons-verhaal`,
       languages: {
-        nl: "/ons-verhaal",
+        nl: "/nl/ons-verhaal",
         en: "/en/ons-verhaal",
         de: "/de/ons-verhaal",
       },
-    },
-    openGraph: {
-      title: t("metaTitle"),
-      description: t("metaDesc"),
     },
   };
 }
 
 const timelineItems = [
-  { yearKey: "t1year", textKey: "t1text", quoteKey: null, quoteAuthorKey: null },
-  { yearKey: "t2year", textKey: "t2text", quoteKey: null, quoteAuthorKey: null },
   {
-    yearKey: "t3year",
-    textKey: "t3text",
-    quoteKey: "t3quote",
-    quoteAuthorKey: "t3quoteAuthor",
+    year: "1938",
+    titleKey: "t1title" as const,
+    textKey: "t1text" as const,
+    quote: null,
+    img: photos.oldShop,
+    imgAlt: "Leiden Herenstraat 1938",
   },
   {
-    yearKey: "t4year",
-    textKey: "t4text",
-    quoteKey: "t4quote",
-    quoteAuthorKey: "t4quoteAuthor",
+    year: "1957",
+    titleKey: "t2title" as const,
+    textKey: "t2text" as const,
+    quote: null,
+    img: photos.market,
+    imgAlt: "Cor Haasnoot bij de viswinkel",
   },
-  { yearKey: "t5year", textKey: "t5text", quoteKey: null, quoteAuthorKey: null },
-] as const;
+  {
+    year: "2009",
+    titleKey: "t3title" as const,
+    textKey: "t3text" as const,
+    quote: "t3quote" as const,
+    img: photos.fishmarket,
+    imgAlt: "Aldert Haasnoot achter de toonbank",
+  },
+  {
+    year: "2018",
+    titleKey: "t4title" as const,
+    textKey: "t4text" as const,
+    quote: "t4quote" as const,
+    img: photos.leiden,
+    imgAlt: "80 jaar jubileum Schaaps Vis",
+  },
+  {
+    year: "Nu",
+    titleKey: "t5title" as const,
+    textKey: "t5text" as const,
+    quote: null,
+    img: photos.gallery8,
+    imgAlt: "Schaaps Vis markt vandaag",
+  },
+];
 
 function VerhaalContent() {
-  const t = useTranslations("verhaal");
+  const t = useTranslations("verhaalPage");
 
   return (
     <>
       {/* Hero */}
-      <section className="bg-[#1B4F72] text-white py-20">
-        <div className="max-w-3xl mx-auto px-4 text-center">
-          <span className="inline-block bg-[#E8A87C]/20 border border-[#E8A87C]/40 text-[#E8A87C] text-xs font-semibold px-3 py-1 rounded-full mb-6 uppercase tracking-wide">
-            Since 1938
-          </span>
-          <h1
-            className="text-4xl md:text-5xl font-bold mb-4"
-            style={{ fontFamily: "Playfair Display, serif" }}
-          >
-            {t("heroTitle")}
-          </h1>
-          <p className="text-white/70 text-lg">{t("heroSub")}</p>
-        </div>
+      <section
+        style={{ backgroundColor: "var(--navy)" }}
+        className="py-20 text-center px-4"
+      >
+        <p
+          className="text-xs tracking-[0.25em] uppercase mb-4 opacity-50"
+          style={{ color: "var(--sand)" }}
+        >
+          Since 1938
+        </p>
+        <h1
+          className="text-4xl md:text-6xl font-bold mb-4"
+          style={{
+            color: "var(--cream)",
+            fontFamily: "Playfair Display, serif",
+          }}
+        >
+          {t("heroTitle")}
+        </h1>
+        <p className="text-lg max-w-xl mx-auto" style={{ color: "rgba(247,240,227,0.7)" }}>
+          {t("heroSub")}
+        </p>
       </section>
 
       {/* Intro */}
-      <section className="bg-[#F5E6C8] py-12">
+      <section style={{ backgroundColor: "var(--sand)" }} className="py-12">
         <div className="max-w-2xl mx-auto px-4 text-center">
-          <p className="text-lg text-[#1A1A1A]/80 leading-relaxed italic">
+          <p
+            className="text-lg leading-relaxed italic"
+            style={{ color: "var(--charcoal)", opacity: 0.85 }}
+          >
             {t("intro")}
           </p>
         </div>
       </section>
 
       {/* Timeline */}
-      <section className="bg-[#FAFAF8] py-16">
-        <div className="max-w-3xl mx-auto px-4">
-          <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute left-6 md:left-8 top-0 bottom-0 w-0.5 bg-[#E8A87C]/40" />
-
-            <div className="space-y-12">
-              {timelineItems.map(
-                ({ yearKey, textKey, quoteKey, quoteAuthorKey }) => (
-                  <div key={yearKey} className="relative flex gap-6 md:gap-10">
-                    {/* Dot */}
-                    <div className="flex-shrink-0 w-12 md:w-16 flex justify-center">
-                      <div className="w-4 h-4 mt-1.5 rounded-full bg-[#E8A87C] border-2 border-[#1B4F72] z-10" />
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex-1 pb-4">
-                      <h3
-                        className="text-xl font-bold text-[#1B4F72] mb-2"
-                        style={{ fontFamily: "Playfair Display, serif" }}
+      <section style={{ backgroundColor: "var(--cream)" }} className="py-16">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="space-y-20">
+            {timelineItems.map(
+              ({ year, titleKey, textKey, quote, img, imgAlt }, idx) => {
+                const isEven = idx % 2 === 0;
+                return (
+                  <div
+                    key={year}
+                    className={`grid md:grid-cols-2 gap-12 items-center ${
+                      !isEven ? "md:[&>*:first-child]:order-2" : ""
+                    }`}
+                  >
+                    {/* Text */}
+                    <div>
+                      <span
+                        className="text-7xl font-bold leading-none block mb-3 opacity-15"
+                        style={{
+                          color: "var(--navy)",
+                          fontFamily: "Playfair Display, serif",
+                        }}
                       >
-                        🐟 {t(yearKey)}
-                      </h3>
-                      <p className="text-[#1A1A1A]/70 leading-relaxed">
+                        {year}
+                      </span>
+                      <h2
+                        className="text-2xl font-bold mb-4 -mt-10"
+                        style={{
+                          color: "var(--navy)",
+                          fontFamily: "Playfair Display, serif",
+                        }}
+                      >
+                        {t(titleKey)}
+                      </h2>
+                      <p
+                        className="leading-relaxed mb-4"
+                        style={{ color: "var(--charcoal)", opacity: 0.8 }}
+                      >
                         {t(textKey)}
                       </p>
-                      {quoteKey && (
-                        <blockquote className="mt-4 bg-[#F5E6C8] border-l-4 border-[#E8A87C] rounded-r-xl px-5 py-3">
-                          <p className="text-[#1A1A1A]/80 italic text-sm leading-relaxed">
-                            &ldquo;{t(quoteKey)}&rdquo;
-                          </p>
-                          {quoteAuthorKey && (
-                            <cite className="block mt-2 text-xs text-[#1B4F72] font-semibold not-italic">
-                              {t(quoteAuthorKey)}
-                            </cite>
-                          )}
+                      {quote && (
+                        <blockquote
+                          className="border-l-4 pl-5 py-1 mt-5 italic text-sm leading-relaxed"
+                          style={{
+                            borderColor: "var(--salmon)",
+                            color: "var(--charcoal)",
+                            opacity: 0.75,
+                          }}
+                        >
+                          &ldquo;{t(quote)}&rdquo;
                         </blockquote>
                       )}
                     </div>
+
+                    {/* Image */}
+                    <div className="relative aspect-[4/3] overflow-hidden">
+                      <Image
+                        src={img}
+                        alt={imgAlt}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                    </div>
                   </div>
-                )
-              )}
-            </div>
+                );
+              }
+            )}
           </div>
         </div>
       </section>
 
-      {/* Outro */}
-      <section className="bg-[#1B4F72] text-white py-16">
+      {/* Outro quote */}
+      <section style={{ backgroundColor: "var(--navy)" }} className="py-16">
         <div className="max-w-2xl mx-auto px-4 text-center">
-          <p className="text-white/80 leading-relaxed mb-6">{t("outro")}</p>
-          <blockquote className="bg-white/10 rounded-xl px-6 py-5 mb-8">
-            <p className="text-lg italic text-white mb-2">
-              &ldquo;{t("outroQuote")}&rdquo;
-            </p>
-            <cite className="text-[#E8A87C] text-sm font-semibold not-italic">
-              {t("outroQuoteAuthor")}
-            </cite>
+          <blockquote
+            className="text-2xl md:text-3xl font-bold italic leading-relaxed mb-6"
+            style={{
+              color: "var(--cream)",
+              fontFamily: "Playfair Display, serif",
+            }}
+          >
+            &ldquo;{t("outroQuote")}&rdquo;
           </blockquote>
-          <p className="text-white/90 font-medium">{t("cta")}</p>
+          <cite
+            className="text-sm not-italic"
+            style={{ color: "rgba(247,240,227,0.6)" }}
+          >
+            {t("outroAuthor")}
+          </cite>
         </div>
       </section>
     </>

@@ -6,7 +6,7 @@ const locales = ["nl", "en", "de"] as const;
 const pages = [
   "",
   "/ons-verhaal",
-  "/varlaks-biologische-zalm",
+  "/varlaks",
   "/assortiment",
   "/bezoek-ons",
   "/contact",
@@ -17,8 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   for (const page of pages) {
     for (const locale of locales) {
-      const url =
-        locale === "nl" ? `${baseUrl}${page || "/"}` : `${baseUrl}/${locale}${page || ""}`;
+      const url = `${baseUrl}/${locale}${page || ""}`;
 
       entries.push({
         url,

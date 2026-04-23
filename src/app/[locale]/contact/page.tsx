@@ -1,7 +1,8 @@
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
-import JsonLd from "@/components/JsonLd";
+import { MapPin, Phone, Clock } from "lucide-react";
+import { JsonLd } from "@/components/JsonLd";
 
 export async function generateMetadata({
   params,
@@ -9,85 +10,73 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "contact" });
+  const t = await getTranslations({ locale, namespace: "meta" });
 
   return {
-    title: t("metaTitle"),
-    description: t("metaDesc"),
+    title: t("contactTitle"),
+    description: t("contactDesc"),
     alternates: {
-      canonical: locale === "nl" ? "/contact" : `/${locale}/contact`,
-      languages: {
-        nl: "/contact",
-        en: "/en/contact",
-        de: "/de/contact",
-      },
+      canonical: `/${locale}/contact`,
+      languages: { nl: "/nl/contact", en: "/en/contact", de: "/de/contact" },
     },
   };
 }
 
 function ContactContent() {
-  const t = useTranslations("contact");
+  const t = useTranslations("contactPage");
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-[#1B4F72] text-white py-16">
-        <div className="max-w-3xl mx-auto px-4 text-center">
-          <h1
-            className="text-4xl md:text-5xl font-bold mb-4"
-            style={{ fontFamily: "Playfair Display, serif" }}
-          >
-            {t("title")}
-          </h1>
-          <p className="text-white/80 text-lg">{t("sub")}</p>
-        </div>
+      <section style={{ backgroundColor: "var(--navy)" }} className="py-16 text-center px-4">
+        <h1
+          className="text-4xl md:text-5xl font-bold mb-4"
+          style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+        >
+          {t("title")}
+        </h1>
+        <p className="text-lg" style={{ color: "rgba(247,240,227,0.75)" }}>
+          {t("sub")}
+        </p>
       </section>
 
-      <section className="bg-[#FAFAF8] py-16">
+      <section style={{ backgroundColor: "var(--cream)" }} className="py-16">
         <div className="max-w-4xl mx-auto px-4 grid md:grid-cols-2 gap-12">
-          {/* Contact form */}
+          {/* Form */}
           <div>
             <h2
-              className="text-2xl font-bold text-[#1B4F72] mb-6"
-              style={{ fontFamily: "Playfair Display, serif" }}
+              className="text-2xl font-bold mb-7"
+              style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
             >
-              Stuur een bericht
+              {t("formTitle")}
             </h2>
             <form className="space-y-4" action="#" method="post">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-[#1A1A1A]/80 mb-1"
-                >
-                  {t("nameLabel")}
-                </label>
-                <input
-                  id="name"
-                  type="text"
-                  name="name"
-                  required
-                  className="w-full border border-[#E8A87C]/40 rounded-lg px-4 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#1B4F72]/30 focus:border-[#1B4F72]"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-[#1A1A1A]/80 mb-1"
-                >
-                  {t("emailLabel")}
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  required
-                  className="w-full border border-[#E8A87C]/40 rounded-lg px-4 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#1B4F72]/30 focus:border-[#1B4F72]"
-                />
-              </div>
+              {[
+                { id: "name", label: t("nameLabel"), type: "text" },
+                { id: "email", label: t("emailLabel"), type: "email" },
+              ].map(({ id, label, type }) => (
+                <div key={id}>
+                  <label
+                    htmlFor={id}
+                    className="block text-sm font-medium mb-1.5"
+                    style={{ color: "var(--charcoal)", opacity: 0.8 }}
+                  >
+                    {label}
+                  </label>
+                  <input
+                    id={id}
+                    type={type}
+                    name={id}
+                    required
+                    className="w-full border px-4 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-offset-0"
+                    style={{ borderColor: "rgba(28,53,87,0.2)" }}
+                  />
+                </div>
+              ))}
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium text-[#1A1A1A]/80 mb-1"
+                  className="block text-sm font-medium mb-1.5"
+                  style={{ color: "var(--charcoal)", opacity: 0.8 }}
                 >
                   {t("messageLabel")}
                 </label>
@@ -96,62 +85,58 @@ function ContactContent() {
                   name="message"
                   rows={5}
                   required
-                  className="w-full border border-[#E8A87C]/40 rounded-lg px-4 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#1B4F72]/30 focus:border-[#1B4F72] resize-none"
+                  className="w-full border px-4 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-offset-0 resize-none"
+                  style={{ borderColor: "rgba(28,53,87,0.2)" }}
                 />
               </div>
               <button
                 type="submit"
-                className="w-full bg-[#1B4F72] text-white font-semibold py-3 rounded-full hover:bg-[#163f5a] transition-colors"
+                className="w-full font-medium py-3 text-sm text-white transition-opacity hover:opacity-90"
+                style={{ backgroundColor: "var(--navy)" }}
               >
                 {t("send")}
               </button>
             </form>
           </div>
 
-          {/* Contact info */}
+          {/* Info */}
           <div>
             <h2
-              className="text-2xl font-bold text-[#1B4F72] mb-6"
-              style={{ fontFamily: "Playfair Display, serif" }}
+              className="text-2xl font-bold mb-7"
+              style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
             >
-              Contactgegevens
+              {t("infoTitle")}
             </h2>
-
-            <div className="space-y-6">
-              <div className="bg-[#F5E6C8] rounded-xl p-5">
-                <p className="font-bold text-[#1B4F72] mb-1">📍 {t("address")}</p>
-                <p className="text-sm text-[#1A1A1A]/70">
-                  Herenstraat 48
-                  <br />
-                  2313 AL Leiden
+            <div className="space-y-5">
+              <div style={{ backgroundColor: "var(--sand)" }} className="p-5">
+                <p className="flex items-start gap-3 text-sm">
+                  <MapPin size={15} className="mt-0.5 flex-shrink-0" style={{ color: "var(--navy)" }} />
+                  <span style={{ color: "var(--charcoal)", opacity: 0.8 }}>
+                    Herenstraat 48<br />2313 AL Leiden
+                  </span>
                 </p>
               </div>
-
-              <div className="bg-[#F5E6C8] rounded-xl p-5">
-                <p className="font-bold text-[#1B4F72] mb-2">📞 {t("orCall")}</p>
-                <a
-                  href="tel:+31715149802"
-                  className="text-2xl font-bold text-[#1B4F72] hover:text-[#E8A87C] transition-colors"
-                  style={{ fontFamily: "Playfair Display, serif" }}
-                >
-                  071 514 9802
-                </a>
+              <div style={{ backgroundColor: "var(--sand)" }} className="p-5">
+                <p className="flex items-center gap-3">
+                  <Phone size={15} className="flex-shrink-0" style={{ color: "var(--navy)" }} />
+                  <a
+                    href="tel:+31715149802"
+                    className="text-2xl font-bold transition-opacity hover:opacity-70"
+                    style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+                  >
+                    071 514 9802
+                  </a>
+                </p>
               </div>
-
-              <div className="bg-[#F5E6C8] rounded-xl p-5">
-                <p className="font-bold text-[#1B4F72] mb-2">🕒 Openingstijden</p>
-                <div className="text-sm text-[#1A1A1A]/70 space-y-1">
-                  <p>
-                    <span className="font-medium">Winkel:</span> Ma t/m Za
-                  </p>
-                  <p>
-                    <span className="font-medium">Markt Leiden:</span> Wo + Za
-                  </p>
-                  <p>
-                    <span className="font-medium">Hoogvliet Voorschoten:</span>{" "}
-                    Vrijdag
-                  </p>
-                </div>
+              <div style={{ backgroundColor: "var(--sand)" }} className="p-5">
+                <p className="flex items-start gap-3 text-sm">
+                  <Clock size={15} className="mt-0.5 flex-shrink-0" style={{ color: "var(--navy)" }} />
+                  <span style={{ color: "var(--charcoal)", opacity: 0.8 }}>
+                    <strong>Winkel:</strong> Ma t/m Za<br />
+                    <strong>Markt Leiden:</strong> Wo + Za<br />
+                    <strong>Voorschoten:</strong> Vrijdag
+                  </span>
+                </p>
               </div>
             </div>
           </div>
