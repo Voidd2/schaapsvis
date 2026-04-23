@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+:root {
+  --kleur-zee: #1b4f72;
+  --kleur-zand: #f5e6c8;
+  --kleur-vis: #e8a87c;
+  --kleur-donker: #1a1a1a;
+  --kleur-wit: #fafaf8;
+  --kleur-groen: #2d6a4f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Source Sans 3", "Source Sans Pro", sans-serif;
+  color: var(--kleur-donker);
+  background-color: var(--kleur-wit);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Playfair Display", Georgia, serif;
+}
