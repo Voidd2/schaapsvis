@@ -21,26 +21,43 @@ export const openingHours: Record<Location, OpeningHour[]> = {
   ],
 };
 
-export type OpenStatus = {
-  open: boolean;
-  closesAt?: string;
+export type LocationStatus = {
+  isOpen: boolean;
+  label: string;
 };
 
-export function isOpenNow(location: Location): OpenStatus {
+const DAG_NAMEN = ["zo", "ma", "di", "wo", "do", "vr", "za"] as const;
+
+export function getLocationStatus(location: Location): LocationStatus {
   const now = new Date();
   const day = now.getDay();
-  const timeStr = `${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}`;
+  const timeStr = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
 
-  const todayHours = openingHours[location].find((h) =>
-    h.days.includes(day)
-  );
+  const todaySlot = openingHours[location].find((h) => h.days.includes(day));
 
-  if (
-    todayHours &&
-    timeStr >= todayHours.open &&
-    timeStr < todayHours.close
-  ) {
-    return { open: true, closesAt: todayHours.close };
+  if (todaySlot && timeStr >= todaySlot.open && timeStr < todaySlot.close) {
+    return { isOpen: true, label: `Open tot ${todaySlot.close}` };
   }
-  return { open: false };
+
+  // Vandaag nog open? (eerder op de dag, winkel opent later)
+  if (todaySlot && timeStr < todaySlot.open) {
+    return { isOpen: false, label: `Vandaag open vanaf ${todaySlot.open}` };
+  }
+
+  // Zoek de volgende openingsdag
+  for (let i = 1; i <= 7; i++) {
+    const nextDay = (day + i) % 7;
+    const nextSlot = openingHours[location].find((h) =>
+      h.days.includes(nextDay)
+    );
+    if (nextSlot) {
+      const label =
+        i === 1
+          ? `Morgen open vanaf ${nextSlot.open}`
+          : `${DAG_NAMEN[nextDay]} open vanaf ${nextSlot.open}`;
+      return { isOpen: false, label };
+    }
+  }
+
+  return { isOpen: false, label: "Bel voor openingstijden" };
 }

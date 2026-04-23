@@ -10,6 +10,7 @@ const pages = [
   "/assortiment",
   "/bezoek-ons",
   "/contact",
+  "/bestellen",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

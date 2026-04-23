@@ -4,7 +4,8 @@
     "verhaal": "Unsere Geschichte",
     "varlaks": "Varlaks Lachs",
     "locaties": "Uns finden",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "bestellen": "Bestellen"
   },
   "meta": {
     "homeTitle": "Schaaps Vis Leiden — Frischer Fisch & Kibbeling | Herenstraat",
@@ -18,7 +19,9 @@
     "bezoekTitle": "Besuchen Sie uns | Schaaps Vis Leiden — Herenstraat, Markt & Voorschoten",
     "bezoekDesc": "Besuchen Sie Schaaps Vis in der Herenstraat 48 in Leiden, auf dem Leidener Markt (Mi + Sa) oder bei Hoogvliet in Voorschoten (Fr).",
     "contactTitle": "Kontakt | Schaaps Vis Leiden",
-    "contactDesc": "Kontaktieren Sie Schaaps Vis Leiden. Rufen Sie uns an: 071 514 9802 oder senden Sie eine Nachricht."
+    "contactDesc": "Kontaktieren Sie Schaaps Vis Leiden. Rufen Sie uns an: 071 514 9802 oder senden Sie eine Nachricht.",
+    "bestellenTitle": "Online Bestellen | Schaaps Vis Leiden — Fisch vorbestellen",
+    "bestellenDesc": "Bestellen Sie Ihren Fisch im Voraus bei Schaaps Vis Leiden und holen Sie ihn im Laden, auf dem Markt oder in Voorschoten ab."
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Seit 1938",

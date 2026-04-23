@@ -4,28 +4,51 @@ import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
+import { usePathname } from "next/navigation";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { OpenStatusBar } from "../home/OpenStatusBar";
 
 export function Header() {
   const t = useTranslations("nav");
   const locale = useLocale();
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
+  const isVarlaks = pathname.includes("/varlaks");
   const p = (path: string) => `/${locale}${path}`;
 
   const navLinks = [
     { href: p("/assortiment"), label: t("assortiment") },
-    { href: p("/ons-verhaal"), label: t("verhaal") },
     { href: p("/varlaks"), label: t("varlaks") },
+    { href: p("/ons-verhaal"), label: t("verhaal") },
     { href: p("/bezoek-ons"), label: t("locaties") },
+    { href: p("/bestellen"), label: t("bestellen") },
     { href: p("/contact"), label: t("contact") },
   ];
 
+  const wrapperClass = isVarlaks
+    ? "fixed top-0 left-0 right-0 z-50 w-full"
+    : "sticky top-0 z-50 w-full";
+
+  const statusBg = isVarlaks
+    ? "bg-black/40 backdrop-blur-sm"
+    : "";
+
+  const headerBg = isVarlaks
+    ? "bg-transparent"
+    : "";
+
+  const headerStyle = isVarlaks
+    ? {}
+    : { backgroundColor: "var(--navy)" };
+
   return (
-    <>
-      <OpenStatusBar />
-      <header style={{ backgroundColor: "var(--navy)" }}>
+    <div className={wrapperClass}>
+      <div className={statusBg}>
+        <OpenStatusBar />
+      </div>
+
+      <header className={headerBg} style={headerStyle}>
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           {/* Logo */}
           <Link href={p("/")} className="group">
@@ -43,25 +66,40 @@ export function Header() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-7 text-sm font-medium">
-            {navLinks.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                className="transition-colors hover:underline underline-offset-4"
-                style={{ color: "rgba(247,240,227,0.85)" }}
-              >
-                {label}
-              </Link>
-            ))}
+          <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+            {navLinks.map(({ href, label }) => {
+              const isBestellen = href.includes("/bestellen");
+              if (isBestellen) {
+                return (
+                  <Link
+                    key={href}
+                    href={href}
+                    className="transition-colors px-4 py-1.5 text-sm"
+                    style={{
+                      backgroundColor: "var(--salmon)",
+                      color: "white",
+                    }}
+                  >
+                    {label}
+                  </Link>
+                );
+              }
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  className="transition-colors hover:underline underline-offset-4"
+                  style={{ color: "rgba(247,240,227,0.85)" }}
+                >
+                  {label}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Language + hamburger */}
           <div className="flex items-center gap-4">
-            <div
-              className="hidden md:block"
-              style={{ color: "var(--cream)" }}
-            >
+            <div className="hidden md:block" style={{ color: "var(--cream)" }}>
               <LanguageSwitcher />
             </div>
             <button
@@ -84,17 +122,28 @@ export function Header() {
               backgroundColor: "#162843",
             }}
           >
-            {navLinks.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                className="block text-sm py-1.5"
-                style={{ color: "rgba(247,240,227,0.85)" }}
-                onClick={() => setOpen(false)}
-              >
-                {label}
-              </Link>
-            ))}
+            {/* Mobile bestellen CTA */}
+            <Link
+              href={p("/bestellen")}
+              className="flex items-center justify-center py-2.5 text-sm font-semibold text-white mb-1"
+              style={{ backgroundColor: "var(--salmon)" }}
+              onClick={() => setOpen(false)}
+            >
+              {t("bestellen")} →
+            </Link>
+            {navLinks
+              .filter((l) => !l.href.includes("/bestellen"))
+              .map(({ href, label }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="block text-sm py-1.5"
+                  style={{ color: "rgba(247,240,227,0.85)" }}
+                  onClick={() => setOpen(false)}
+                >
+                  {label}
+                </Link>
+              ))}
             <div
               className="pt-3 border-t"
               style={{
@@ -107,6 +156,6 @@ export function Header() {
           </div>
         )}
       </header>
-    </>
+    </div>
   );
 }

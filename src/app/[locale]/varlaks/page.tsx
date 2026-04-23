@@ -1,8 +1,7 @@
-import Image from "next/image";
-import { useTranslations, useLocale } from "next-intl";
+import Link from "next/link";
+import { useLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
-import { photos } from "@/lib/photos";
 import { JsonLd } from "@/components/JsonLd";
 
 export async function generateMetadata({
@@ -23,223 +22,249 @@ export async function generateMetadata({
   };
 }
 
-const features = [
-  {
-    icon: "🌊",
-    titleKey: "f1title" as const,
-    textKey: "f1text" as const,
-  },
-  {
-    icon: "🏡",
-    titleKey: "f2title" as const,
-    textKey: "f2text" as const,
-  },
-  {
-    icon: "🚫",
-    titleKey: "f3title" as const,
-    textKey: "f3text" as const,
-  },
-  {
-    icon: "💚",
-    titleKey: "f4title" as const,
-    textKey: "f4text" as const,
-  },
-];
+const whatYouGet = [
+  [
+    "Boven de poolcirkel",
+    "Noord-Noorwegen, waar het water koud, schoon en zuurstofrijk is",
+  ],
+  [
+    "Familieboerderijen",
+    "Geen grote industrie — kleinschalig, persoonlijk, jaarlijks bezocht",
+  ],
+  [
+    "100% traceerbaar",
+    "Van eitje tot filet, elke stap is zichtbaar en aantoonbaar",
+  ],
+  [
+    "Laserbehandeling",
+    "Zeeluizen worden verwijderd met laser — geen chemicaliën",
+  ],
+  [
+    "AI-monitoring",
+    "Camera's onder water bewaken elk vis — vroege signalering, geen verrassingen",
+  ],
+] as const;
 
-const comparison = [
-  { our: "Geen antibiotica", them: "Vaak gebruikt" },
-  { our: "Geen GMO", them: "Niet gegarandeerd" },
-  { our: "Geen hormonen", them: "Niet gegarandeerd" },
-  { our: "Traceerbaar", them: "Herkomst onduidelijk" },
-  { our: "Familieboerderijen", them: "Industriekweek" },
-  { our: "Ruim opgekweekt", them: "Dicht op elkaar" },
-];
+const whatIsNot = [
+  ["Antibiotica", "De schone omgeving maakt het overbodig"],
+  ["Chemicaliën", "Geen pesticiden, geen kunstmatige middelen"],
+  ["GMO", "Gewone zalm, zoals de natuur hem bedoeld heeft"],
+  ["Hormonen", "Groeit in zijn eigen tempo — niet kunstmatig versneld"],
+  [
+    "Kleurstoffen",
+    "De roze kleur? Die is echt — van het natuurlijk voedsel",
+  ],
+] as const;
 
 function VarlaksContent() {
-  const t = useTranslations("varlaksPage");
   const locale = useLocale();
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative min-h-[60vh] flex items-end overflow-hidden">
-        <Image
-          src={photos.arctic}
-          alt="Arctische wateren Noorwegen — Varlaks zalm"
-          fill
-          className="object-cover"
-          priority
-          sizes="100vw"
-        />
+      {/* ── Hero met video achtergrond ─────────────────────────────── */}
+      {/* De header is fixed+transparant op deze pagina (zie Header.tsx) */}
+      <section
+        className="relative min-h-screen flex items-center overflow-hidden"
+        style={{ backgroundColor: "#0a1628" }}
+      >
+        {/* Achtergrondvideo van varlaks.no — fallback naar Unsplash als video blokkeerd */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ opacity: 0.4 }}
+          poster="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1600&q=85"
+        >
+          <source
+            src="https://varlaks.no/wp-content/uploads/2024/03/682448_Norway-Winter-Archipelago-Water_By_Up_North_Studio_Artlist_4K_1.mp4"
+            type="video/mp4"
+          />
+        </video>
+
+        {/* Gradient overlay */}
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: "rgba(28,53,87,0.55)" }}
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(10,22,40,0.3) 0%, transparent 40%, rgba(10,22,40,0.8) 100%)",
+          }}
         />
-        <div className="relative z-10 max-w-4xl mx-auto px-4 pb-16 w-full">
-          <span
-            className="inline-block text-xs tracking-widest uppercase font-semibold px-3 py-1 mb-5"
-            style={{ backgroundColor: "var(--seafoam)", color: "var(--cream)" }}
+
+        {/* Content */}
+        <div className="relative z-10 max-w-5xl mx-auto px-6 py-40 w-full">
+          <p
+            className="text-xs uppercase tracking-[0.3em] mb-6 font-medium"
+            style={{ color: "#7ec8d4" }}
           >
-            Biologisch gecertificeerd
-          </span>
+            Verkrijgbaar bij Schaap&apos;s Vis · Leiden
+          </p>
           <h1
-            className="text-4xl md:text-6xl font-bold leading-tight mb-4"
+            className="text-7xl md:text-9xl font-bold leading-none mb-8 text-white"
             style={{
-              color: "var(--cream)",
               fontFamily: "Playfair Display, serif",
+              letterSpacing: "-0.03em",
             }}
           >
-            {t("heroTitle")}
+            VARLAKS
           </h1>
           <p
-            className="text-lg max-w-xl"
-            style={{ color: "rgba(247,240,227,0.8)" }}
+            className="text-xl md:text-2xl max-w-2xl mb-4 font-light"
+            style={{ color: "rgba(255,255,255,0.85)" }}
           >
-            {t("heroSub")}
+            Zalm uit het hoge noorden van Noorwegen.
           </p>
-        </div>
-      </section>
-
-      {/* Story */}
-      <section style={{ backgroundColor: "var(--cream)" }} className="py-16">
-        <div className="max-w-2xl mx-auto px-4">
           <p
-            className="text-lg leading-relaxed"
-            style={{ color: "var(--charcoal)", opacity: 0.85 }}
+            className="text-base max-w-xl mb-14"
+            style={{ color: "rgba(255,255,255,0.55)" }}
           >
-            {t("story")}
+            Gekweekt door familieboeren boven de poolcirkel, in het koudste en
+            schoonste water ter wereld.
           </p>
-        </div>
-      </section>
-
-      {/* Features 2x2 */}
-      <section style={{ backgroundColor: "var(--sand)" }} className="py-16">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2
-            className="text-3xl font-bold text-center mb-12"
-            style={{
-              color: "var(--navy)",
-              fontFamily: "Playfair Display, serif",
-            }}
+          <a
+            href="#verhaal"
+            className="inline-block border text-white text-sm tracking-widest uppercase px-8 py-3 transition-colors hover:bg-white/10"
+            style={{ borderColor: "rgba(255,255,255,0.4)" }}
           >
-            {t("featuresTitle")}
-          </h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {features.map(({ icon, titleKey, textKey }) => (
-              <div key={titleKey} className="bg-white p-7">
-                <div className="text-3xl mb-4">{icon}</div>
-                <h3
-                  className="font-bold text-lg mb-2"
-                  style={{
-                    color: "var(--navy)",
-                    fontFamily: "Playfair Display, serif",
-                  }}
-                >
-                  {t(titleKey)}
-                </h3>
-                <p
-                  className="text-sm leading-relaxed"
-                  style={{ color: "var(--charcoal)", opacity: 0.75 }}
-                >
-                  {t(textKey)}
-                </p>
-              </div>
-            ))}
-          </div>
+            Ontdek het verhaal ↓
+          </a>
         </div>
       </section>
 
-      {/* Comparison */}
-      <section style={{ backgroundColor: "var(--cream)" }} className="py-16">
-        <div className="max-w-3xl mx-auto px-4">
-          <h2
-            className="text-3xl font-bold mb-10"
-            style={{
-              color: "var(--navy)",
-              fontFamily: "Playfair Display, serif",
-            }}
+      {/* ── Brand film (Vimeo embed) ───────────────────────────────── */}
+      <section
+        style={{ backgroundColor: "#0a1628" }}
+        className="py-24 px-6"
+      >
+        <div className="max-w-4xl mx-auto text-center">
+          <p
+            className="text-xs uppercase tracking-[0.3em] mb-4"
+            style={{ color: "#7ec8d4" }}
           >
-            {t("compareTitle")}
+            Brand Film
+          </p>
+          <h2
+            className="text-4xl font-bold text-white mb-12"
+            style={{ fontFamily: "Playfair Display, serif" }}
+          >
+            Zo groeit onze zalm op
           </h2>
-          <div className="grid grid-cols-2 gap-0 border border-gray-200">
-            <div
-              className="px-5 py-3 text-sm font-semibold border-b border-gray-200"
-              style={{ backgroundColor: "var(--seafoam)", color: "var(--cream)" }}
-            >
-              ✓ Varlaks
-            </div>
-            <div
-              className="px-5 py-3 text-sm font-semibold border-b border-l border-gray-200 opacity-70"
-              style={{ color: "var(--charcoal)" }}
-            >
-              ✗ Reguliere supermarktzalm
-            </div>
-            {comparison.map(({ our, them }, i) => (
-              <>
-                <div
-                  key={`our-${i}`}
-                  className="px-5 py-3 text-sm border-b border-gray-100"
-                  style={{
-                    backgroundColor: i % 2 === 0 ? "white" : "var(--cream)",
-                    color: "var(--seafoam)",
-                    fontWeight: 500,
-                  }}
-                >
-                  ✓ {our}
-                </div>
-                <div
-                  key={`them-${i}`}
-                  className="px-5 py-3 text-sm border-b border-l border-gray-100 opacity-55"
-                  style={{
-                    backgroundColor: i % 2 === 0 ? "white" : "var(--cream)",
-                    color: "var(--charcoal)",
-                  }}
-                >
-                  ✗ {them}
-                </div>
-              </>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Photo + CTA */}
-      <section style={{ backgroundColor: "var(--navy)" }} className="py-16">
-        <div className="max-w-4xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-          <div className="relative aspect-[4/3] overflow-hidden">
-            <Image
-              src={photos.salmon}
-              alt="Verse Varlaks zalm"
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
+          {/* Vimeo 16:9 responsive embed */}
+          <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+            <iframe
+              src="https://player.vimeo.com/video/932791452?autoplay=0&title=0&byline=0&portrait=0&color=7ec8d4"
+              className="absolute inset-0 w-full h-full"
+              frameBorder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+              title="Varlaks Brand Film"
             />
           </div>
-          <div>
-            <h2
-              className="text-3xl font-bold mb-5 leading-tight"
-              style={{
-                color: "var(--cream)",
-                fontFamily: "Playfair Display, serif",
-              }}
+          <p
+            className="text-sm mt-4"
+            style={{ color: "rgba(255,255,255,0.3)" }}
+          >
+            Film door VARLAKS · varlaks.no
+          </p>
+        </div>
+      </section>
+
+      {/* ── Cut the crap — wat erin zit vs wat er niet in zit ─────── */}
+      <section
+        id="verhaal"
+        style={{ backgroundColor: "#0d1e33" }}
+        className="py-24 px-6"
+      >
+        <div className="max-w-5xl mx-auto">
+          <div
+            className="grid md:grid-cols-2 gap-0 border"
+            style={{ borderColor: "rgba(255,255,255,0.1)" }}
+          >
+            {/* Wat je WEL krijgt */}
+            <div
+              className="p-10 md:p-12 border-b md:border-b-0 md:border-r"
+              style={{ borderColor: "rgba(255,255,255,0.1)" }}
             >
-              {t("ctaTitle")}
-            </h2>
-            <p
-              className="text-sm leading-relaxed mb-8"
-              style={{ color: "rgba(247,240,227,0.75)" }}
+              <p
+                className="text-xs uppercase tracking-[0.25em] mb-8"
+                style={{ color: "#7ec8d4" }}
+              >
+                Wat je krijgt
+              </p>
+              {whatYouGet.map(([title, desc]) => (
+                <div key={title} className="mb-8 last:mb-0">
+                  <p className="text-white font-medium mb-1">{title}</p>
+                  <p
+                    className="text-sm leading-relaxed"
+                    style={{ color: "rgba(255,255,255,0.5)" }}
+                  >
+                    {desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Wat er NIET in zit */}
+            <div
+              className="p-10 md:p-12"
+              style={{ backgroundColor: "rgba(255,255,255,0.02)" }}
             >
-              {t("ctaText")}
-            </p>
-            <a
-              href={`/${locale}/bezoek-ons`}
-              className="inline-block font-medium tracking-wide px-7 py-3 text-sm text-white transition-opacity hover:opacity-90"
-              style={{ backgroundColor: "var(--salmon)" }}
-            >
-              {t("ctaButton")} →
-            </a>
+              <p
+                className="text-xs uppercase tracking-[0.25em] mb-8"
+                style={{ color: "rgba(248,113,113,0.7)" }}
+              >
+                Wat er niet in zit
+              </p>
+              {whatIsNot.map(([title, desc]) => (
+                <div key={title} className="mb-8 last:mb-0">
+                  <p className="text-white font-medium mb-1">{title}</p>
+                  <p
+                    className="text-sm leading-relaxed"
+                    style={{ color: "rgba(255,255,255,0.5)" }}
+                  >
+                    {desc}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
+      </section>
+
+      {/* ── Waar te koop — terug naar warme huisstijl ─────────────── */}
+      <section
+        style={{ backgroundColor: "var(--navy)" }}
+        className="py-20 px-6 text-center"
+      >
+        <p
+          className="text-xs uppercase tracking-[0.25em] mb-4"
+          style={{ color: "#7ec8d4" }}
+        >
+          Vers verkrijgbaar
+        </p>
+        <h2
+          className="text-4xl font-bold text-white mb-6"
+          style={{ fontFamily: "Playfair Display, serif" }}
+        >
+          Varlaks zalm bij Schaap&apos;s Vis
+        </h2>
+        <p
+          className="max-w-xl mx-auto mb-10 leading-relaxed"
+          style={{ color: "rgba(247,240,227,0.7)" }}
+        >
+          We halen de Varlaks zalm vers op. Dagelijks in de winkel aan de
+          Herenstraat, woensdag en zaterdag op de markt in Leiden, en vrijdag
+          bij Hoogvliet in Voorschoten.
+        </p>
+        <Link
+          href={`/${locale}/bestellen`}
+          className="inline-block text-white px-8 py-4 tracking-wide transition-opacity hover:opacity-90"
+          style={{ backgroundColor: "var(--salmon)" }}
+        >
+          Vooruit bestellen →
+        </Link>
       </section>
     </>
   );

@@ -1,11 +1,10 @@
 "use client";
 
-import { isOpenNow } from "@/lib/openingHours";
+import { getLocationStatus } from "@/lib/openingHours";
 
 export function OpenStatusBar() {
-  const winkel = isOpenNow("winkel");
-  const markt = isOpenNow("markt");
-  const voorschoten = isOpenNow("voorschoten");
+  const winkel = getLocationStatus("winkel");
+  const markt = getLocationStatus("markt");
 
   return (
     <div
@@ -16,42 +15,29 @@ export function OpenStatusBar() {
         <span className="flex items-center gap-2">
           <span
             className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${
-              winkel.open ? "bg-green-400" : "bg-red-400"
+              winkel.isOpen ? "bg-green-400" : "bg-amber-400"
             }`}
           />
           <span>
-            Winkel Herenstraat:{" "}
-            <strong>
-              {winkel.open
-                ? `Open · sluit ${winkel.closesAt}`
-                : "Gesloten"}
-            </strong>
+            Winkel Herenstraat: <strong>{winkel.label}</strong>
           </span>
         </span>
+
         <span className="flex items-center gap-2">
           <span
             className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${
-              markt.open ? "bg-green-400" : "bg-gray-500"
+              markt.isOpen ? "bg-green-400" : "bg-amber-400"
             }`}
           />
           <span>
-            Markt Leiden:{" "}
-            <strong>
-              {markt.open ? "Open nu" : "Woensdag & Zaterdag"}
-            </strong>
+            Markt Leiden: <strong>{markt.label}</strong>
           </span>
         </span>
-        <span className="flex items-center gap-2">
-          <span
-            className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${
-              voorschoten.open ? "bg-green-400" : "bg-gray-500"
-            }`}
-          />
+
+        <span className="flex items-center gap-2 opacity-70">
+          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0 bg-amber-400" />
           <span>
-            Hoogvliet Voorschoten:{" "}
-            <strong>
-              {voorschoten.open ? "Open nu" : "Vrijdag"}
-            </strong>
+            Voorschoten (Hoogvliet): <strong>Elke vrijdag</strong>
           </span>
         </span>
       </div>

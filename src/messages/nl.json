@@ -4,7 +4,8 @@
     "verhaal": "Ons Verhaal",
     "varlaks": "Varlaks Zalm",
     "locaties": "Locaties",
-    "contact": "Contact"
+    "contact": "Contact",
+    "bestellen": "Bestellen"
   },
   "meta": {
     "homeTitle": "Schaaps Vis Leiden — Verse Vis & Kibbeling | Herenstraat",
@@ -18,7 +19,9 @@
     "bezoekTitle": "Bezoek Ons | Schaaps Vis Leiden — Herenstraat, Markt & Voorschoten",
     "bezoekDesc": "Bezoek Schaaps Vis op Herenstraat 48 in Leiden, de Leidse markt (wo + za) of bij Hoogvliet in Voorschoten (vrij).",
     "contactTitle": "Contact | Schaaps Vis Leiden",
-    "contactDesc": "Neem contact op met Schaaps Vis Leiden. Bel ons op 071 514 9802 of stuur een bericht."
+    "contactDesc": "Neem contact op met Schaaps Vis Leiden. Bel ons op 071 514 9802 of stuur een bericht.",
+    "bestellenTitle": "Online Bestellen | Schaaps Vis Leiden — Vis vooruit bestellen",
+    "bestellenDesc": "Bestel uw vis vooruit bij Schaaps Vis Leiden en haal op in de winkel, op de markt of in Voorschoten. Handig voor grote bestellingen en Varlaks zalm."
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Sinds 1938",

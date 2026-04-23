@@ -4,7 +4,8 @@
     "verhaal": "Our Story",
     "varlaks": "Varlaks Salmon",
     "locaties": "Find Us",
-    "contact": "Contact"
+    "contact": "Contact",
+    "bestellen": "Order"
   },
   "meta": {
     "homeTitle": "Schaaps Vis Leiden — Fresh Fish & Kibbeling | Herenstraat",
@@ -18,7 +19,9 @@
     "bezoekTitle": "Visit Us | Schaaps Vis Leiden — Herenstraat, Market & Voorschoten",
     "bezoekDesc": "Visit Schaaps Vis at Herenstraat 48 in Leiden, the Leiden market (Wed + Sat) or at Hoogvliet in Voorschoten (Fri).",
     "contactTitle": "Contact | Schaaps Vis Leiden",
-    "contactDesc": "Contact Schaaps Vis Leiden. Call us on 071 514 9802 or send a message."
+    "contactDesc": "Contact Schaaps Vis Leiden. Call us on 071 514 9802 or send a message.",
+    "bestellenTitle": "Order Online | Schaaps Vis Leiden — Pre-order fish",
+    "bestellenDesc": "Pre-order your fish at Schaaps Vis Leiden and collect from the shop, market or Voorschoten. Convenient for large orders and Varlaks salmon."
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Since 1938",
