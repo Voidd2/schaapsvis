@@ -20,7 +20,7 @@ export function Header() {
   const navLinks = [
     { href: p("/assortiment"), label: t("assortiment") },
     { href: p("/varlaks"), label: t("varlaks") },
-    { href: p("/betere-vis"), label: t("betereVis") },
+    { href: p("/eerlijke-vis"), label: t("betereVis") },
     { href: p("/recepten"), label: t("recepten") },
     { href: p("/ons-verhaal"), label: t("verhaal") },
     { href: p("/bezoek-ons"), label: t("locaties") },

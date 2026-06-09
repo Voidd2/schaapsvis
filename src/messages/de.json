@@ -3,7 +3,7 @@
     "assortiment": "Sortiment",
     "verhaal": "Unsere Geschichte",
     "varlaks": "Varlaks Lachs",
-    "betereVis": "Nachhaltige Fische",
+    "betereVis": "Ehrlicher Fisch",
     "recepten": "Rezepte",
     "locaties": "Uns finden",
     "contact": "Kontakt",
@@ -24,8 +24,8 @@
     "contactDesc": "Kontaktieren Sie Schaap's Vis Leiden. Rufen Sie +31 71 514 9802 an oder senden Sie eine Nachricht. Herenstraat 48, 2313 AL Leiden.",
     "bestellenTitle": "Fisch Bestellen Leiden | Schaap's Vis — Kibbeling, Hering & Lachs vorbestellen",
     "bestellenDesc": "Fisch im Voraus bestellen bei Schaap's Vis Leiden. Wählen Sie Ihren Fisch und holen Sie ihn im Laden, auf dem Markt oder in Voorschoten ab.",
-    "betereVisTitle": "Nachhaltiger Fisch | Schaaps Vis Leiden — Bio & nachhaltig gefangener Fisch",
-    "betereVisDesc": "Fisch mit Geschichte. Nachhaltig gefangen, biologisch gezüchtet und fair geerntet. Entdecken Sie, warum Schaap's Vis auf besseren Fisch setzt — MSC, ASC und biologisch zertifiziert.",
+    "eerlijkeVisTitle": "Ehrlicher Fisch | Schaaps Vis Leiden — Bio & nachhaltig gefangener Fisch",
+    "eerlijkeVisDesc": "Fisch mit Gewissen. Nachhaltig gefangen, biologisch gezüchtet und fair geerntet. Entdecken Sie, warum Schaap's Vis auf ehrlichen Fisch setzt — MSC, ASC und biologisch zertifiziert.",
     "receptenTitle": "Fischrezepte von Schaap's Vis Leiden | Kibbeling, Lachs, Hering & mehr",
     "receptenDesc": "Leckere Fischrezepte mit Fisch von Schaap's Vis Leiden. Von Kibbeling mit Knoblauchsauce bis Gravlaks und cremiger Fischsuppe. Mit Einkaufsliste und Zubereitungszeit."
   },
@@ -112,9 +112,9 @@
     "send": "Nachricht senden",
     "infoTitle": "Kontaktdaten"
   },
-  "betereVisPage": {
-    "heroTitle": "Fisch mit Geschichte",
-    "heroSub": "Nachhaltig gefangen. Biologisch gezüchtet. Ehrlich geerntet.",
+  "eerlijkeVisPage": {
+    "heroTitle": "Ehrlicher Fisch",
+    "heroSub": "Nachhaltig gefangen. Biologisch gezüchtet. Keine Ausreden.",
     "whyTitle": "Warum wir auf besseren Fisch setzen",
     "whyText1": "Bei Schaap's Vis geht es nicht nur um frisch und lecker — es geht auch darum, wie der Fisch auf Ihren Teller gekommen ist. Wir arbeiten bewusst mit Lieferanten zusammen, die Transparenz, Tierwohl und Nachhaltigkeit in den Vordergrund stellen.",
     "whyText2": "Das bedeutet rückverfolgbarer Fisch. Fisch, der mit Respekt vor dem Meer gefangen oder gezüchtet wird. Fisch, bei dem Sie wissen, was drin ist — und was nicht.",

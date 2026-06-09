@@ -14,19 +14,19 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "meta" });
 
   return {
-    title: t("betereVisTitle"),
-    description: t("betereVisDesc"),
+    title: t("eerlijkeVisTitle"),
+    description: t("eerlijkeVisDesc"),
     alternates: {
-      canonical: `/${locale}/betere-vis`,
+      canonical: `/${locale}/eerlijke-vis`,
       languages: {
-        nl: "/nl/betere-vis",
-        en: "/en/betere-vis",
-        de: "/de/betere-vis",
+        nl: "/nl/eerlijke-vis",
+        en: "/en/eerlijke-vis",
+        de: "/de/eerlijke-vis",
       },
     },
     openGraph: {
-      title: t("betereVisTitle"),
-      description: t("betereVisDesc"),
+      title: t("eerlijkeVisTitle"),
+      description: t("eerlijkeVisDesc"),
       locale,
       type: "website",
     },
@@ -36,57 +36,63 @@ export async function generateMetadata({
 const certifications = [
   {
     key: "cert1" as const,
+    label: "MSC",
+    color: "#1a6b8a",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M3 12a9 9 0 1 0 18 0A9 9 0 0 0 3 12z" />
+        <path d="M8 12c0-2.5 1.5-4 4-4s4 1.5 4 4-1.5 4-4 4" />
+        <circle cx="12" cy="12" r="1.5" fill="currentColor" />
       </svg>
     ),
-    color: "#2e8b57",
   },
   {
     key: "cert2" as const,
+    label: "ASC",
+    color: "#2e6b5e",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <polyline points="9 12 11 14 15 10" />
       </svg>
     ),
-    color: "#1a6b8a",
   },
   {
     key: "cert3" as const,
+    label: "BIO",
+    color: "#3a6b2e",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z" />
-        <path d="M8 12s.5-4 4-6" />
-        <path d="M12 6c0 0 4 2 4 6s-4 6-4 6" />
-        <path d="M8 18s4-2 4-6" />
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M12 22V12" />
+        <path d="M5 12C5 7 8 4 12 4c4 0 7 3 7 8s-3 7-7 7" />
+        <path d="M5 12h7" />
       </svg>
     ),
-    color: "#2e6b5e",
   },
   {
     key: "cert4" as const,
+    label: "100%",
+    color: "#8b5e14",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M9 11l3 3L22 4" />
         <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
       </svg>
     ),
-    color: "#8b6914",
   },
 ];
 
 const placeholderFish = [
-  { name: "Kabeljauw", badge: "MSC", fotoLabel: "FOTO TOEVOEGEN: Verse kabeljauw filet" },
-  { name: "Schol", badge: "MSC", fotoLabel: "FOTO TOEVOEGEN: Scholfilet of hele schol" },
-  { name: "Varlaks Zalm", badge: "BIO", fotoLabel: "FOTO TOEVOEGEN: Varlaks zalmfilet roze kleur" },
-  { name: "Forel", badge: "BIO", fotoLabel: "FOTO TOEVOEGEN: Regenboogforel" },
-  { name: "Mosselen", badge: "MSC", fotoLabel: "FOTO TOEVOEGEN: Verse mosselen in pan" },
-  { name: "Meer volgt...", badge: null, fotoLabel: "Meer duurzame vis volgt binnenkort" },
+  { name: "Kabeljauw", badge: "MSC", badgeColor: "#1a6b8a", fotoLabel: "FOTO TOEVOEGEN: Verse kabeljauwfilet, wit vlees" },
+  { name: "Schol", badge: "MSC", badgeColor: "#1a6b8a", fotoLabel: "FOTO TOEVOEGEN: Scholfilet of hele schol, oranje stippen" },
+  { name: "Varlaks Zalm", badge: "BIO", badgeColor: "#3a6b2e", fotoLabel: "FOTO TOEVOEGEN: Varlaks zalmfilet, roze kleur" },
+  { name: "Forel", badge: "BIO", badgeColor: "#3a6b2e", fotoLabel: "FOTO TOEVOEGEN: Regenboogforel, geheel of gefileerd" },
+  { name: "Mosselen", badge: "MSC", badgeColor: "#1a6b8a", fotoLabel: "FOTO TOEVOEGEN: Verse mosselen in pan of op ijs" },
+  { name: "Meer volgt binnenkort", badge: null, badgeColor: null, fotoLabel: "De volledige lijst duurzame vis van Schaap's Vis" },
 ];
 
-function BetereVisContent() {
-  const t = useTranslations("betereVisPage");
+function EerlijkeVisContent() {
+  const t = useTranslations("eerlijkeVisPage");
   const locale = useLocale();
 
   return (
@@ -94,14 +100,13 @@ function BetereVisContent() {
       {/* Hero */}
       <section
         className="relative py-28 px-6 text-center overflow-hidden"
-        style={{ backgroundColor: "#0a2318" }}
+        style={{ backgroundColor: "#0f2218" }}
       >
-        {/* Decorative background element */}
         <div
-          className="absolute inset-0 opacity-10"
+          className="absolute inset-0 opacity-15"
           style={{
             backgroundImage:
-              "radial-gradient(ellipse at 30% 50%, #2e8b57 0%, transparent 60%), radial-gradient(ellipse at 70% 50%, #1a6b8a 0%, transparent 60%)",
+              "radial-gradient(ellipse at 25% 60%, #2e8b57 0%, transparent 55%), radial-gradient(ellipse at 75% 40%, #1a6b8a 0%, transparent 55%)",
           }}
         />
         <div className="relative z-10 max-w-3xl mx-auto">
@@ -109,7 +114,7 @@ function BetereVisContent() {
             className="text-xs uppercase tracking-[0.35em] mb-6 font-medium"
             style={{ color: "#6ec89a" }}
           >
-            Schaap&apos;s Vis · Leiden · Est. 1938
+            Schaap&apos;s Vis · Leiden · Bewust kiezen
           </p>
           <h1
             className="text-5xl md:text-7xl font-bold leading-tight mb-6 text-white"
@@ -119,22 +124,22 @@ function BetereVisContent() {
           </h1>
           <p
             className="text-lg md:text-xl font-light max-w-xl mx-auto"
-            style={{ color: "rgba(255,255,255,0.7)" }}
+            style={{ color: "rgba(255,255,255,0.65)" }}
           >
             {t("heroSub")}
           </p>
         </div>
       </section>
 
-      {/* Why better fish */}
+      {/* Waarom */}
       <section style={{ backgroundColor: "var(--cream)" }} className="py-20 px-6">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-14 items-center">
           <div>
             <p
-              className="text-xs tracking-[0.2em] uppercase mb-4 opacity-50 font-semibold"
+              className="text-xs tracking-[0.2em] uppercase mb-4 font-semibold opacity-50"
               style={{ color: "var(--navy)" }}
             >
-              Onze filosofie
+              Onze overtuiging
             </p>
             <h2
               className="text-4xl font-bold mb-6 leading-tight"
@@ -142,27 +147,21 @@ function BetereVisContent() {
             >
               {t("whyTitle")}
             </h2>
-            <p
-              className="leading-relaxed mb-4"
-              style={{ color: "var(--charcoal)", opacity: 0.8 }}
-            >
+            <p className="leading-relaxed mb-4" style={{ color: "var(--charcoal)", opacity: 0.8 }}>
               {t("whyText1")}
             </p>
-            <p
-              className="leading-relaxed font-medium"
-              style={{ color: "var(--charcoal)", opacity: 0.9 }}
-            >
+            <p className="leading-relaxed font-medium" style={{ color: "var(--charcoal)", opacity: 0.9 }}>
               {t("whyText2")}
             </p>
           </div>
           <PhotoPlaceholder
-            label="FOTO TOEVOEGEN: Aldert aan de toonbank met verse vis of de winkel van buitenaf"
+            label="FOTO TOEVOEGEN: Aldert aan de toonbank of vis op ijs in de winkel"
             aspectRatio="aspect-[4/3]"
           />
         </div>
       </section>
 
-      {/* Certifications grid */}
+      {/* Keurmerken */}
       <section style={{ backgroundColor: "var(--sand)" }} className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
           <h2
@@ -172,17 +171,23 @@ function BetereVisContent() {
             {t("certTitle")}
           </h2>
           <p className="text-center text-sm mb-12 opacity-60" style={{ color: "var(--charcoal)" }}>
-            Keurmerken die u kunt vertrouwen
+            Wat betekenen die keurmerken eigenlijk?
           </p>
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
-            {certifications.map(({ key, icon, color }) => (
+            {certifications.map(({ key, label, color, icon }) => (
               <div
                 key={key}
                 className="p-6 bg-white"
-                style={{ borderTop: `3px solid ${color}` }}
+                style={{ borderTop: `4px solid ${color}` }}
               >
-                <div className="mb-4" style={{ color }}>
-                  {icon}
+                <div className="flex items-center gap-2 mb-4">
+                  <div style={{ color }}>{icon}</div>
+                  <span
+                    className="text-xs font-bold uppercase tracking-widest"
+                    style={{ color }}
+                  >
+                    {label}
+                  </span>
                 </div>
                 <h3
                   className="font-bold text-base mb-2"
@@ -199,18 +204,17 @@ function BetereVisContent() {
         </div>
       </section>
 
-      {/* Varlaks spotlight */}
+      {/* Varlaks */}
       <section style={{ backgroundColor: "#0a1628" }} className="py-20 px-6">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <PhotoPlaceholder
             label="FOTO TOEVOEGEN: Varlaks zalmfilet — roze kleur, close-up textuur"
             aspectRatio="aspect-square"
-            className="opacity-90"
           />
           <div>
             <span
-              className="inline-block text-xs tracking-widest uppercase font-semibold px-3 py-1 mb-5"
-              style={{ backgroundColor: "#2e6b5e", color: "white" }}
+              className="inline-block text-xs tracking-widest uppercase font-semibold px-3 py-1 mb-5 text-white"
+              style={{ backgroundColor: "#2e6b5e" }}
             >
               Biologisch gecertificeerd
             </span>
@@ -220,10 +224,7 @@ function BetereVisContent() {
             >
               {t("varlaksTitle")}
             </h2>
-            <p
-              className="leading-relaxed mb-8 text-sm"
-              style={{ color: "rgba(255,255,255,0.7)" }}
-            >
+            <p className="leading-relaxed mb-8 text-sm" style={{ color: "rgba(255,255,255,0.7)" }}>
               {t("varlaksText")}
             </p>
             <Link
@@ -237,7 +238,7 @@ function BetereVisContent() {
         </div>
       </section>
 
-      {/* Fish grid — ready for the list */}
+      {/* Vis grid */}
       <section style={{ backgroundColor: "var(--cream)" }} className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
           <h2
@@ -254,16 +255,14 @@ function BetereVisContent() {
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-            {placeholderFish.map(({ name, badge, fotoLabel }) => (
+            {placeholderFish.map(({ name, badge, badgeColor, fotoLabel }) => (
               <article key={name} className="group relative">
                 <div className="relative">
                   <PhotoPlaceholder label={fotoLabel} aspectRatio="aspect-square" />
-                  {badge && (
+                  {badge && badgeColor && (
                     <span
                       className="absolute top-3 left-3 text-xs font-bold px-2 py-0.5 text-white"
-                      style={{
-                        backgroundColor: badge === "BIO" ? "#2e6b5e" : "#1a6b8a",
-                      }}
+                      style={{ backgroundColor: badgeColor }}
                     >
                       {badge}
                     </span>
@@ -271,11 +270,11 @@ function BetereVisContent() {
                   {!badge && (
                     <div
                       className="absolute inset-0 flex items-center justify-center"
-                      style={{ backgroundColor: "rgba(0,0,0,0.15)" }}
+                      style={{ backgroundColor: "rgba(0,0,0,0.12)" }}
                     >
                       <span
-                        className="text-xs font-semibold px-3 py-1.5 text-white"
-                        style={{ backgroundColor: "rgba(28,53,87,0.85)" }}
+                        className="text-xs font-semibold px-3 py-1.5 text-white text-center"
+                        style={{ backgroundColor: "rgba(26,53,48,0.85)" }}
                       >
                         {t("comingSoonBadge")}
                       </span>
@@ -294,7 +293,6 @@ function BetereVisContent() {
             ))}
           </div>
 
-          {/* Coming soon notice */}
           <div
             className="mt-12 p-8 text-center"
             style={{ backgroundColor: "var(--sand)", borderLeft: "4px solid var(--seafoam)" }}
@@ -335,7 +333,7 @@ function BetereVisContent() {
   );
 }
 
-export default async function BetereVisPage({
+export default async function EerlijkeVisPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -344,7 +342,7 @@ export default async function BetereVisPage({
   return (
     <>
       <JsonLd />
-      <BetereVisContent />
+      <EerlijkeVisContent />
     </>
   );
 }
