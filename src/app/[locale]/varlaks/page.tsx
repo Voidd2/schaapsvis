@@ -75,7 +75,6 @@ function VarlaksContent() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
           style={{ opacity: 0.4 }}
-          poster="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1600&q=85"
         >
           <source
             src="https://varlaks.no/wp-content/uploads/2024/03/682448_Norway-Winter-Archipelago-Water_By_Up_North_Studio_Artlist_4K_1.mp4"

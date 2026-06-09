@@ -1,10 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
-import { photos, galleryPhotos } from "@/lib/photos";
 import { JsonLd } from "@/components/JsonLd";
+import { PhotoPlaceholder } from "@/components/shared/PhotoPlaceholder";
 
 export async function generateMetadata({
   params,
@@ -35,22 +34,13 @@ function HeroSection() {
   const locale = useLocale();
 
   return (
-    <section className="relative min-h-[88vh] flex items-center justify-center overflow-hidden">
-      <Image
-        src={photos.hero}
-        alt="Verse vis bij Schaaps Vis Leiden"
-        fill
-        className="object-cover"
-        priority
-        sizes="100vw"
-      />
-      <div
-        className="absolute inset-0"
-        style={{ backgroundColor: "rgba(28,53,87,0.62)" }}
-      />
-      <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
+    <section
+      className="relative min-h-[70vh] flex items-center"
+      style={{ backgroundColor: "var(--navy)" }}
+    >
+      <div className="max-w-4xl mx-auto px-6 py-24">
         <p
-          className="text-xs tracking-[0.25em] uppercase mb-5 opacity-75"
+          className="text-xs tracking-[0.25em] uppercase mb-5 opacity-60"
           style={{ color: "var(--sand)" }}
         >
           {t("tagline")}
@@ -67,17 +57,17 @@ function HeroSection() {
           ))}
         </h1>
         <p
-          className="text-lg md:text-xl max-w-xl mx-auto mb-10 leading-relaxed"
+          className="text-lg md:text-xl max-w-xl mb-10 leading-relaxed"
           style={{ color: "rgba(247,240,227,0.85)" }}
         >
           {t("sub")}
         </p>
         <Link
           href={`/${locale}/bezoek-ons`}
-          className="inline-block font-medium tracking-wide px-8 py-4 transition-colors text-white"
+          className="inline-block font-medium tracking-wide px-8 py-4 transition-colors text-white text-base"
           style={{ backgroundColor: "var(--salmon)" }}
         >
-          {t("cta")} →
+          {t("cta")} &rarr;
         </Link>
       </div>
     </section>
@@ -87,6 +77,8 @@ function HeroSection() {
 function AboutSection() {
   const t = useTranslations("about");
   const locale = useLocale();
+  const sindsLabel =
+    locale === "nl" ? "Sinds 1938" : locale === "de" ? "Seit 1938" : "Since 1938";
 
   return (
     <section style={{ backgroundColor: "var(--cream)" }} className="py-20">
@@ -96,7 +88,7 @@ function AboutSection() {
             className="text-xs tracking-[0.2em] uppercase mb-4 opacity-50"
             style={{ color: "var(--navy)" }}
           >
-            Since 1938
+            {sindsLabel}
           </p>
           <h2
             className="text-4xl font-bold mb-6 leading-tight"
@@ -105,7 +97,7 @@ function AboutSection() {
             {t("title")}
           </h2>
           <p
-            className="leading-relaxed mb-6 text-base"
+            className="leading-relaxed mb-6"
             style={{ color: "var(--charcoal)", opacity: 0.8 }}
           >
             {t("text")}
@@ -118,17 +110,28 @@ function AboutSection() {
             {t("link")}
           </Link>
         </div>
-        <div className="relative aspect-[4/3] rounded overflow-hidden">
-          <Image
-            src={photos.shopInterior}
-            alt="Schaaps Vis winkel"
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
-        </div>
+        <PhotoPlaceholder
+          label="FOTO TOEVOEGEN: Winkelgevel Herenstraat 48 of Aldert achter de toonbank"
+          aspectRatio="aspect-[3/4]"
+        />
       </div>
     </section>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      style={{ flexShrink: 0 }}
+    >
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
   );
 }
 
@@ -139,15 +142,10 @@ function VarlaksHighlight() {
   return (
     <section style={{ backgroundColor: "var(--navy)" }} className="py-20">
       <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-14 items-center">
-        <div className="relative aspect-[4/3] rounded overflow-hidden">
-          <Image
-            src={photos.norway}
-            alt="Noorse fjorden — Varlaks zalm"
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
-        </div>
+        <PhotoPlaceholder
+          label="FOTO TOEVOEGEN: Varlaks zalmfilet of Noorse zee"
+          aspectRatio="aspect-square"
+        />
         <div>
           <span
             className="inline-block text-xs tracking-widest uppercase font-semibold px-3 py-1 mb-5"
@@ -166,10 +164,10 @@ function VarlaksHighlight() {
               <li
                 key={b}
                 className="flex items-start gap-3 text-sm"
-                style={{ color: "rgba(247,240,227,0.8)" }}
+                style={{ color: "var(--gold)" }}
               >
-                <span style={{ color: "var(--gold)" }}>✓</span>
-                {b}
+                <CheckIcon />
+                <span style={{ color: "rgba(247,240,227,0.8)" }}>{b}</span>
               </li>
             ))}
           </ul>
@@ -187,36 +185,12 @@ function VarlaksHighlight() {
 }
 
 const productItems = [
-  {
-    name: "Kibbeling",
-    desc: "Knapperig gebakken, de Hollandse klassieker",
-    img: photos.kibbeling,
-  },
-  {
-    name: "Haring",
-    desc: "Vers, rauw, recht van de markt",
-    img: photos.gallery1,
-  },
-  {
-    name: "Lekkerbek",
-    desc: "Verse wijting in luchtig beslag",
-    img: photos.gallery2,
-  },
-  {
-    name: "Vissoep",
-    desc: "Huisgemaakte soep, elke dag anders",
-    img: photos.gallery3,
-  },
-  {
-    name: "Varlaks Zalm",
-    desc: "Biologisch, Noors, antibioticavrij",
-    img: photos.salmon,
-  },
-  {
-    name: "Feestschotel",
-    desc: "Voor bijzondere gelegenheden",
-    img: photos.gallery4,
-  },
+  { name: "Kibbeling",    desc: "Knapperig gebakken, de Hollandse klassieker",  fotoLabel: "FOTO TOEVOEGEN: Kibbeling op bakpapier" },
+  { name: "Haring",       desc: "Vers, rauw, recht van de markt",               fotoLabel: "FOTO TOEVOEGEN: Broodje haring met ui" },
+  { name: "Lekkerbek",    desc: "Verse wijting in luchtig beslag",               fotoLabel: "FOTO TOEVOEGEN: Lekkerbek in beslag" },
+  { name: "Vissoep",      desc: "Huisgemaakte soep, elke dag anders",            fotoLabel: "FOTO TOEVOEGEN: Kom vissoep" },
+  { name: "Varlaks Zalm", desc: "Biologisch, Noors, antibioticavrij",            fotoLabel: "FOTO TOEVOEGEN: Varlaks zalmfilet" },
+  { name: "Feestschotel", desc: "Voor bijzondere gelegenheden",                  fotoLabel: "FOTO TOEVOEGEN: Gevulde visschotel" },
 ];
 
 function AssortimentGrid() {
@@ -238,29 +212,20 @@ function AssortimentGrid() {
           {t("title")}
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-          {productItems.map(({ name, desc, img }) => (
+          {productItems.map(({ name, desc, fotoLabel }) => (
             <article key={name} className="group">
-              <div className="relative aspect-square overflow-hidden mb-3">
-                <Image
-                  src={img}
-                  alt={name}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 640px) 50vw, 33vw"
-                />
+              <PhotoPlaceholder label={fotoLabel} aspectRatio="aspect-square" />
+              <div className="pt-3">
+                <h3
+                  className="font-bold text-base mb-1"
+                  style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+                >
+                  {name}
+                </h3>
+                <p className="text-sm opacity-60" style={{ color: "var(--charcoal)" }}>
+                  {desc}
+                </p>
               </div>
-              <h3
-                className="font-bold text-base mb-1"
-                style={{
-                  color: "var(--navy)",
-                  fontFamily: "Playfair Display, serif",
-                }}
-              >
-                {name}
-              </h3>
-              <p className="text-sm opacity-60" style={{ color: "var(--charcoal)" }}>
-                {desc}
-              </p>
             </article>
           ))}
         </div>
@@ -269,27 +234,11 @@ function AssortimentGrid() {
   );
 }
 
-function PhotoGallery() {
+function StarIcon() {
   return (
-    <section className="py-0 overflow-hidden">
-      <div className="flex gap-1" style={{ display: "flex" }}>
-        {galleryPhotos.map((src, i) => (
-          <div
-            key={i}
-            className="relative flex-shrink-0"
-            style={{ width: 260, height: 260 }}
-          >
-            <Image
-              src={src}
-              alt=""
-              fill
-              className="object-cover"
-              sizes="260px"
-            />
-          </div>
-        ))}
-      </div>
-    </section>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style={{ color: "var(--gold)" }}>
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </svg>
   );
 }
 
@@ -301,12 +250,12 @@ const reviews = [
   },
   {
     name: "Pieter S.",
-    text: "De enige plek in Leiden waar je écht verse haring krijgt. Geen gedoe, gewoon lekker.",
+    text: "De enige plek in Leiden waar je echt verse haring krijgt. Geen gedoe, gewoon lekker.",
     stars: 5,
   },
   {
     name: "Familie Hoekstra",
-    text: "Elke zaterdag op de markt — dat is onze vaste stop. Al jaren. De Varlaks zalm is een aanrader voor iedereen die iets bijzonders wil.",
+    text: "Elke zaterdag op de markt - dat is onze vaste stop. Al jaren. De Varlaks zalm is een aanrader voor iedereen die iets bijzonders wil.",
     stars: 5,
   },
 ];
@@ -328,9 +277,7 @@ function ReviewsSection() {
             <div key={r.name} className="bg-white p-7">
               <div className="flex gap-0.5 mb-4">
                 {Array.from({ length: r.stars }).map((_, i) => (
-                  <span key={i} style={{ color: "var(--gold)" }}>
-                    ★
-                  </span>
+                  <StarIcon key={i} />
                 ))}
               </div>
               <p
@@ -353,9 +300,17 @@ function ReviewsSection() {
   );
 }
 
+function PinIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+      <circle cx="12" cy="9" r="2.5" />
+    </svg>
+  );
+}
+
 const locationItems = [
   {
-    icon: "🏪",
     name: "Viswinkel Herenstraat",
     address: "Herenstraat 48, 2313 AL Leiden",
     tel: "071 514 9802",
@@ -363,7 +318,6 @@ const locationItems = [
     mapsHref: "https://maps.google.com/?q=Herenstraat+48,+2313+AL+Leiden",
   },
   {
-    icon: "🛒",
     name: "Markt Leiden",
     address: "Centrum Leiden",
     tel: null,
@@ -371,7 +325,6 @@ const locationItems = [
     mapsHref: "https://maps.google.com/?q=Markt+Leiden",
   },
   {
-    icon: "📍",
     name: "Hoogvliet Voorschoten",
     address: "Bij Hoogvliet, Voorschoten",
     tel: null,
@@ -388,46 +341,36 @@ function LocationsSection() {
       <div className="max-w-6xl mx-auto px-4">
         <h2
           className="text-3xl font-bold text-center mb-12"
-          style={{
-            color: "var(--cream)",
-            fontFamily: "Playfair Display, serif",
-          }}
+          style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
         >
           {t("title")}
         </h2>
         <div className="grid md:grid-cols-3 gap-6">
-          {locationItems.map(({ icon, name, address, tel, schedule, mapsHref }) => (
+          {locationItems.map(({ name, address, tel, schedule, mapsHref }) => (
             <div
               key={name}
               className="p-6"
               style={{ backgroundColor: "rgba(247,240,227,0.07)" }}
             >
-              <div className="text-3xl mb-4">{icon}</div>
+              <div className="mb-4" style={{ color: "var(--sand)" }}>
+                <PinIcon />
+              </div>
               <h3
                 className="font-bold text-base mb-2"
-                style={{
-                  color: "var(--cream)",
-                  fontFamily: "Playfair Display, serif",
-                }}
+                style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
               >
                 {name}
               </h3>
-              <p
-                className="text-sm mb-1"
-                style={{ color: "rgba(247,240,227,0.65)" }}
-              >
+              <p className="text-sm mb-1" style={{ color: "rgba(247,240,227,0.65)" }}>
                 {address}
               </p>
-              <p
-                className="text-sm mb-1"
-                style={{ color: "rgba(247,240,227,0.65)" }}
-              >
+              <p className="text-sm mb-3" style={{ color: "rgba(247,240,227,0.65)" }}>
                 {schedule}
               </p>
               {tel && (
                 <a
                   href="tel:+31715149802"
-                  className="text-sm block mb-3 transition-opacity hover:opacity-100"
+                  className="text-sm block mb-3 transition-opacity hover:opacity-100 font-medium"
                   style={{ color: "var(--sand)" }}
                 >
                   {tel}
@@ -440,7 +383,7 @@ function LocationsSection() {
                 className="text-xs font-semibold underline underline-offset-2 transition-opacity hover:opacity-70"
                 style={{ color: "var(--salmon)" }}
               >
-                Route →
+                Route &rarr;
               </a>
             </div>
           ))}
@@ -463,7 +406,6 @@ export default async function HomePage({
       <AboutSection />
       <VarlaksHighlight />
       <AssortimentGrid />
-      <PhotoGallery />
       <ReviewsSection />
       <LocationsSection />
     </>
