@@ -4,6 +4,7 @@
     "verhaal": "Ons Verhaal",
     "varlaks": "Varlaks Zalm",
     "betereVis": "Betere Vis",
+    "recepten": "Recepten",
     "locaties": "Locaties",
     "contact": "Contact",
     "bestellen": "Bestellen"
@@ -24,7 +25,9 @@
     "bestellenTitle": "Vis Bestellen Leiden | Schaap's Vis — Kibbeling, Haring & Zalm Vooruit Bestellen",
     "bestellenDesc": "Vis vooruit bestellen bij Schaap's Vis Leiden. Kies uw vis, geef uw gewenste hoeveelheid op en haal op in de winkel, op de markt of in Voorschoten.",
     "betereVisTitle": "Betere Vis | Schaaps Vis Leiden — Duurzame & Biologische Vis",
-    "betereVisDesc": "Vis met een verhaal. Duurzaam gevangen, biologisch gekweekt en eerlijk geoogst. Ontdek waarom Schaap's Vis kiest voor betere vis — MSC, ASC en biologisch gecertificeerd."
+    "betereVisDesc": "Vis met een verhaal. Duurzaam gevangen, biologisch gekweekt en eerlijk geoogst. Ontdek waarom Schaap's Vis kiest voor betere vis — MSC, ASC en biologisch gecertificeerd.",
+    "receptenTitle": "Visrecepten van Schaap's Vis Leiden | Kibbeling, Zalm, Haring & meer",
+    "receptenDesc": "Heerlijke visrecepten met vis van Schaap's Vis Leiden. Van kibbeling met knoflooksaus tot gravlaks en romige vissoep. Inclusief boodschappenlijstje en bereidingstijd."
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Sinds 1938",

@@ -4,6 +4,7 @@
     "verhaal": "Unsere Geschichte",
     "varlaks": "Varlaks Lachs",
     "betereVis": "Nachhaltige Fische",
+    "recepten": "Rezepte",
     "locaties": "Uns finden",
     "contact": "Kontakt",
     "bestellen": "Bestellen"
@@ -24,7 +25,9 @@
     "bestellenTitle": "Fisch Bestellen Leiden | Schaap's Vis — Kibbeling, Hering & Lachs vorbestellen",
     "bestellenDesc": "Fisch im Voraus bestellen bei Schaap's Vis Leiden. Wählen Sie Ihren Fisch und holen Sie ihn im Laden, auf dem Markt oder in Voorschoten ab.",
     "betereVisTitle": "Nachhaltiger Fisch | Schaaps Vis Leiden — Bio & nachhaltig gefangener Fisch",
-    "betereVisDesc": "Fisch mit Geschichte. Nachhaltig gefangen, biologisch gezüchtet und fair geerntet. Entdecken Sie, warum Schaap's Vis auf besseren Fisch setzt — MSC, ASC und biologisch zertifiziert."
+    "betereVisDesc": "Fisch mit Geschichte. Nachhaltig gefangen, biologisch gezüchtet und fair geerntet. Entdecken Sie, warum Schaap's Vis auf besseren Fisch setzt — MSC, ASC und biologisch zertifiziert.",
+    "receptenTitle": "Fischrezepte von Schaap's Vis Leiden | Kibbeling, Lachs, Hering & mehr",
+    "receptenDesc": "Leckere Fischrezepte mit Fisch von Schaap's Vis Leiden. Von Kibbeling mit Knoblauchsauce bis Gravlaks und cremiger Fischsuppe. Mit Einkaufsliste und Zubereitungszeit."
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Seit 1938",

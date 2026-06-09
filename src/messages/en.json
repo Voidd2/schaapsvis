@@ -4,6 +4,7 @@
     "verhaal": "Our Story",
     "varlaks": "Varlaks Salmon",
     "betereVis": "Better Fish",
+    "recepten": "Recipes",
     "locaties": "Find Us",
     "contact": "Contact",
     "bestellen": "Order"
@@ -24,7 +25,9 @@
     "bestellenTitle": "Order Fish Leiden | Schaap's Vis — Pre-order Kibbeling, Herring & Salmon",
     "bestellenDesc": "Pre-order your fish at Schaap's Vis Leiden and collect from the shop, market or Voorschoten. Great for large orders and Varlaks salmon.",
     "betereVisTitle": "Better Fish | Schaaps Vis Leiden — Sustainable & Organic Fish",
-    "betereVisDesc": "Fish with a story. Sustainably caught, organically farmed and honestly harvested. Discover why Schaap's Vis chooses better fish — MSC, ASC and organically certified."
+    "betereVisDesc": "Fish with a story. Sustainably caught, organically farmed and honestly harvested. Discover why Schaap's Vis chooses better fish — MSC, ASC and organically certified.",
+    "receptenTitle": "Fish Recipes from Schaap's Vis Leiden | Kibbeling, Salmon, Herring & more",
+    "receptenDesc": "Delicious fish recipes using fish from Schaap's Vis Leiden. From kibbeling with garlic sauce to gravlaks and creamy fish soup. Includes shopping list and preparation time."
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Since 1938",

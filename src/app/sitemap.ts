@@ -8,6 +8,7 @@ const pages = [
   "/ons-verhaal",
   "/varlaks",
   "/betere-vis",
+  "/recepten",
   "/assortiment",
   "/bezoek-ons",
   "/contact",
