@@ -50,8 +50,8 @@ export const recepten: Recept[] = [
     moeilijkheid: "Makkelijk",
     tags: ["Zomers", "Snel", "Makkelijk", "Gezond"],
     fotoUrl:
-      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80",
-    fotoLabel: "Zomerse groene salade met zalm — licht en fris",
+      "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80",
+    fotoLabel: "Frisse saladekom met stukjes zalm en groenten",
     vanSchaap: [
       "Vers gerookte zalm (ca. 150g per persoon)",
       "Of: Varlaks zalmfilet — 12 min op 200°C in de oven",
@@ -84,8 +84,8 @@ export const recepten: Recept[] = [
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
     fotoUrl:
-      "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&q=80",
-    fotoLabel: "Zalmfilet op bord met citroen en dille",
+      "https://images.unsplash.com/photo-1614627293113-e7e68163d958?w=800&q=80",
+    fotoLabel: "Zalmfilets in ovenschaal met citroenschijfjes en kruiden",
     vanSchaap: ["Varlaks zalmfilet (150–200g per persoon)"],
     vanSupermarkt: [
       "1 citroen",
@@ -113,8 +113,8 @@ export const recepten: Recept[] = [
     moeilijkheid: "Gemiddeld",
     tags: ["Met de kids", "Bijzonder"],
     fotoUrl:
-      "https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?w=800&q=80",
-    fotoLabel: "Knapperig gebakken kibbeling op bord met citroen",
+      "https://images.unsplash.com/photo-1611599538235-128e54f1250f?w=800&q=80",
+    fotoLabel: "Goudbruin gebakken kibbeling met witte saus",
     vanSchaap: [
       "Kibbeling beslag (kabeljauw of pollak) — 200g per persoon is onze aanbeveling",
       "Keuze kabeljauw = steviger, diepe smaak (de authentieke keuze)",
@@ -150,8 +150,8 @@ export const recepten: Recept[] = [
     moeilijkheid: "Uitdagend",
     tags: ["Bijzonder"],
     fotoUrl:
-      "https://images.unsplash.com/photo-1607301405390-d831c242f59b?w=800&q=80",
-    fotoLabel: "Dunne plakjes gravlaks op roggebrood met roomkaas en dille",
+      "https://images.unsplash.com/photo-1498604819470-d34ff92b1341?w=800&q=80",
+    fotoLabel: "Gepekelde zalm met verse dille en roze peperbessen",
     vanSchaap: [
       "Hele Varlaks zalmfilet (500–800g, met vel) — vraag Aldert de graten te verwijderen",
     ],
@@ -183,8 +183,8 @@ export const recepten: Recept[] = [
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Zomers"],
     fotoUrl:
-      "https://images.unsplash.com/photo-1559847844-5315695dadae?w=800&q=80",
-    fotoLabel: "Verse haring op roggebrood met rode ui en dille",
+      "https://images.unsplash.com/photo-1665841265022-27fd74b83005?w=800&q=80",
+    fotoLabel: "Haring op roggebrood met rode ui en citroen",
     vanSchaap: ["4 verse haringen, gefileerd — haal ze op de dag zelf"],
     vanSupermarkt: [
       "1 zoetzure appel (Elstar)",
@@ -210,8 +210,8 @@ export const recepten: Recept[] = [
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
     fotoUrl:
-      "https://images.unsplash.com/photo-1547592180-85f173990554?w=800&q=80",
-    fotoLabel: "Dampende kom romige vissoep met verse kruiden",
+      "https://images.unsplash.com/photo-1620894580123-466ad3a0ca06?w=800&q=80",
+    fotoLabel: "Kom vissoep met stukken verse vis in een rijke bouillon",
     vanSchaap: [
       "300g gemengde visfilet (kabeljauw + schol of zalm)",
       "Tip: vraag Aldert welke vis die dag het lekkerst is",
@@ -240,8 +240,8 @@ export const recepten: Recept[] = [
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
     fotoUrl:
-      "https://images.unsplash.com/photo-1519984388953-d2406bc725e1?w=800&q=80",
-    fotoLabel: "Gegrilde witte vis met citroen en kruiden op bord",
+      "https://images.unsplash.com/photo-1714559899701-fd966509f726?w=800&q=80",
+    fotoLabel: "Gegrilde witte visfilet met groenten en limoen",
     vanSchaap: ["Verse scholfilet (150g per persoon)"],
     vanSupermarkt: [
       "30g roomboter",
