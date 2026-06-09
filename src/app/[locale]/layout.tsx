@@ -9,7 +9,7 @@ import { Footer } from "@/components/layout/Footer";
 export const metadata: Metadata = {
   title: {
     template: "%s | Schaaps Vis Leiden",
-    default: "Schaaps Vis Leiden — Vers vis since 1938",
+    default: "Schaaps Vis Leiden — Vers vis, Leiden",
   },
 };
 

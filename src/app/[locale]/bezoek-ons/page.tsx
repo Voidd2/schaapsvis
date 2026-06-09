@@ -28,7 +28,6 @@ export async function generateMetadata({
 
 const locations = [
   {
-    icon: "🏪",
     name: "Viswinkel Herenstraat",
     address: "Herenstraat 48, 2313 AL Leiden",
     phone: "071 514 9802",
@@ -39,7 +38,6 @@ const locations = [
     mapsHref: "https://maps.google.com/?q=Herenstraat+48,+2313+AL+Leiden",
   },
   {
-    icon: "🛒",
     name: "Markt Leiden",
     address: "Nieuwe Rijn / centrum, Leiden",
     phone: null,
@@ -50,7 +48,6 @@ const locations = [
     mapsHref: "https://maps.google.com/?q=Leiden+Markt+Nieuwe+Rijn",
   },
   {
-    icon: "📍",
     name: "Hoogvliet Voorschoten",
     address: "Bij de Hoogvliet, Voorschoten",
     phone: null,
@@ -84,7 +81,7 @@ function BezoekContent() {
       <section style={{ backgroundColor: "var(--cream)" }} className="py-16">
         <div className="max-w-5xl mx-auto px-4 space-y-20">
           {locations.map(
-            ({ icon, name, address, phone, days, hours, mapEmbed, mapsHref }, idx) => (
+            ({ name, address, phone, days, hours, mapEmbed, mapsHref }, idx) => (
               <div
                 key={name}
                 className={`grid md:grid-cols-2 gap-8 items-start ${
@@ -93,7 +90,12 @@ function BezoekContent() {
               >
                 {/* Info */}
                 <div style={{ backgroundColor: "var(--sand)" }} className="p-8">
-                  <div className="text-4xl mb-5">{icon}</div>
+                  <div
+                    className="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold text-white mb-5"
+                    style={{ backgroundColor: "var(--navy)" }}
+                  >
+                    {idx + 1}
+                  </div>
                   <h2
                     className="text-2xl font-bold mb-5"
                     style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
