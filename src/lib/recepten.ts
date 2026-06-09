@@ -41,7 +41,9 @@ export const TAG_ICON: Record<ReceptTag, string> = {
   Gezond: "◎",
 };
 
-export const recepten: Recept[] = [
+import { receptenVisrecepten } from "./recepten-visrecepten";
+
+const receptenOrigineel: Recept[] = [
   {
     slug: "zomerse-zalmsalade",
     title: "Zomerse zalmsalade",
@@ -644,4 +646,9 @@ export const recepten: Recept[] = [
     seoKeywords:
       "witlof garnalen salade, oesterzwam salade garnalen, hollandse garnalen recept",
   },
+];
+
+export const recepten: Recept[] = [
+  ...receptenOrigineel,
+  ...(receptenVisrecepten as Recept[]),
 ];
