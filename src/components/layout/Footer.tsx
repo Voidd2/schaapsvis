@@ -46,8 +46,10 @@ export function Footer() {
               {[
                 { href: p("/"), label: "Home" },
                 { href: p("/assortiment"), label: nav("assortiment") },
-                { href: p("/ons-verhaal"), label: nav("verhaal") },
+                { href: p("/betere-vis"), label: nav("betereVis") },
                 { href: p("/varlaks"), label: nav("varlaks") },
+                { href: p("/ons-verhaal"), label: nav("verhaal") },
+                { href: p("/bestellen"), label: nav("bestellen") },
                 { href: p("/bezoek-ons"), label: nav("locaties") },
                 { href: p("/contact"), label: nav("contact") },
               ].map(({ href, label }) => (
