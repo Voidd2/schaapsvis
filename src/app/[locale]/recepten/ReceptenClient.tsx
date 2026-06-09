@@ -222,6 +222,27 @@ export function ReceptenClient({ locale }: { locale: string }) {
         </div>
       </section>
 
+      {/* Credits */}
+      <section
+        className="py-6 px-6"
+        style={{ backgroundColor: "var(--cream)", borderTop: "1px solid var(--sand)" }}
+      >
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-xs" style={{ color: "var(--charcoal)", opacity: 0.5 }}>
+            Een deel van de recepten op deze pagina is met toestemming overgenomen van{" "}
+            <a
+              href="https://visrecepten.nl"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2 hover:opacity-100 transition-opacity"
+            >
+              visrecepten.nl
+            </a>
+            {" "}en aangepast voor Schaap&apos;s Vis Leiden.
+          </p>
+        </div>
+      </section>
+
       {/* CTA */}
       <section
         style={{ backgroundColor: "var(--navy)" }}
