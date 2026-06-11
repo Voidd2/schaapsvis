@@ -23,6 +23,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Gerookte paling",
     vanSchaap: [
       "150 g gerookte palingfilet",
@@ -55,6 +56,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Pappardelle",
     vanSchaap: [
       "300 g Hollandse garnalen",
@@ -86,6 +88,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Poké bowl",
     vanSchaap: [
       "2 visfilets van kabeljauw met vel, in reepjes gesneden",
@@ -114,6 +117,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1550942356-fcfc6eba2acb?w=800&q=80",
     fotoLabel: "Pijlinktvis gevuld",
     vanSchaap: [
       "4-6 pijlinktvissen (ca. 500 g)",
@@ -147,6 +151,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Tarbot uit de oven",
     vanSchaap: [
       "1 grote tarbot ca. 1200 g of 4 kleine van 350 - 400 g",
@@ -176,6 +181,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken harderfilet",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -206,6 +212,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalmclub",
     vanSchaap: [
       "2 blikjes roze zalm (à 213 g), uitgelekt",
@@ -236,6 +243,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Garnalenroerei",
     vanSchaap: [
       "100 g Hollandse garnalen",
@@ -260,6 +268,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haring stapelaar",
     vanSchaap: [
       "4 haringen, schoongemaakt",
@@ -290,6 +299,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Viskroketjes",
     vanSchaap: [
       "400 g witvis zoals kabeljauw of heek",
@@ -327,6 +337,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Vongole aglio e olio & pasta",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -362,6 +373,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Pasta",
     vanSchaap: [
       "200 g gerookte haringfilet, in stukje gescheurd",
@@ -390,6 +402,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Mexicaanse garnalencocktail",
     vanSchaap: [
       "500 g gamba’s, voorgekookt en gepeld",
@@ -423,6 +436,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Roerei",
     vanSchaap: [
       "200 g garnalen",
@@ -456,6 +470,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Salade caprese",
     vanSchaap: [
       "250 g roze garnalen",
@@ -482,6 +497,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Rucolastamppot",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -512,6 +528,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1585769448445-efca2df879e6?w=800&q=80",
     fotoLabel: "Marokkaanse couscoussalade",
     vanSchaap: [
       "8-12 verse sardines (schoongemaakt)",
@@ -545,6 +562,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Vispannetje",
     vanSchaap: [
       "300 g zalmfilet",
@@ -579,6 +597,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Scholrolletjes uit de oven",
     vanSchaap: [
       "6 grote scholfilets",
@@ -608,6 +627,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Hollandse garnalentortilla",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -637,6 +657,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Pulled fish taco’s",
     vanSchaap: [
       "400 g stevige witvis als kabeljauw, koolvis, schelvis of een combinatie van verschillende soorten",
@@ -668,6 +689,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Gegrilde knolselderij",
     vanSchaap: [
       "1 bakje Hollandse garnaal á 100 g",
@@ -706,6 +728,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haring",
     vanSchaap: [
       "5 haringen, schoongemaakt",
@@ -742,6 +765,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Tartare Hollandaise",
     vanSchaap: [
       "2 haringen",
@@ -771,6 +795,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Smash The Herring",
     vanSchaap: [
       "500 g rauwe haring, graten verwijderd",
@@ -808,6 +833,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Zeewolf",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -844,6 +870,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Makreel bao buns",
     vanSchaap: [
       "2 à ca. 300 g gerookte/ gestoomde makreelfilets",
@@ -872,6 +899,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Filipijnse ovenschotel",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -909,6 +937,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Salade Niçoise",
     vanSchaap: [
       "4 tonijnsteaks van 150 g",
@@ -941,6 +970,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Pakketje",
     vanSchaap: [
       "300 g scholfilets",
@@ -971,6 +1001,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1550942356-fcfc6eba2acb?w=800&q=80",
     fotoLabel: "Spaanse pijlinktvisjes",
     vanSchaap: [
       "500 g pijlinktvisjes ca. 10 stuks van 20 cm",
@@ -1005,6 +1036,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Ovenschar",
     vanSchaap: [
       "4 hele scharren, panklaar",
@@ -1034,6 +1066,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Roodbaars",
     vanSchaap: [
       "4 roodbaarsfilets zonder met vel",
@@ -1067,6 +1100,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Mexicaanse koolvis",
     vanSchaap: [
       "4 stukken verse koolvisfilet à 125 g",
@@ -1099,6 +1133,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Rolmops",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -1130,6 +1165,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Verse loempia",
     vanSchaap: [
       "100 g Hollandse garnalen",
@@ -1165,6 +1201,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Gegrilde tonijn",
     vanSchaap: [
       "2 stukken tonijn van 150 g elk",
@@ -1194,6 +1231,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1585769448445-efca2df879e6?w=800&q=80",
     fotoLabel: "Aardappelgratin",
     vanSchaap: [
       "1 blikje ansjovisfilets in olijfolie 50 g",
@@ -1221,6 +1259,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Gebakken kabeljauwfilet",
     vanSchaap: [
       "300 g kabeljauwfilet",
@@ -1253,6 +1292,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Gebakken kabeljauw",
     vanSchaap: [
       "600 g kabeljauwfilet",
@@ -1283,6 +1323,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Wrapmandje",
     vanSchaap: [
       "250 g Hollandse garnalen",
@@ -1315,6 +1356,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Provencaalse verse paling (stoofaal)",
     vanSchaap: [
       "1 kilo schoongemaakte verse paling (stoofaal)",
@@ -1346,6 +1388,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Oesters uit de oven & zwarte knoflookboter",
     vanSchaap: [
       "24 oesters, Zeeuwse Creuse",
@@ -1374,6 +1417,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=800&q=80",
     fotoLabel: "Forel",
     vanSchaap: [
       "4 forellen, schoongemaakt",
@@ -1399,6 +1443,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Gemarineerde haring",
     vanSchaap: [
       "Verse haring (vraag Aldert naar de dagselectie)",
@@ -1430,6 +1475,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=800&q=80",
     fotoLabel: "Forel",
     vanSchaap: [
       "4 schoongemaakte forellen",
@@ -1459,6 +1505,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken griet",
     vanSchaap: [
       "75 g zeekraal",
@@ -1493,6 +1540,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Italiaanse ovenschotel",
     vanSchaap: [
       "4 tongscharfilets (600 g)",
@@ -1518,6 +1566,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1550942356-fcfc6eba2acb?w=800&q=80",
     fotoLabel: "Bruschetta’s con pesce",
     vanSchaap: [
       "topping met ansjovis",
@@ -1561,6 +1610,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Vissticks",
     vanSchaap: [
       "500 g kabeljauwfilet",
@@ -1586,6 +1636,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Pitapuntjes",
     vanSchaap: [
       "150 g gerookte palingfilet",
@@ -1616,6 +1667,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Schelvis stroganoff",
     vanSchaap: [
       "500 g schelvisfilet, in blokjes",
@@ -1647,6 +1699,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Hollandse garnalen",
     vanSchaap: [
       "120 g Hollandse garnalen",
@@ -1685,6 +1738,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Garnalentruffels",
     vanSchaap: [
       "100 g Hollandse garnalen",
@@ -1710,6 +1764,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Zeeduivel",
     vanSchaap: [
       "4 zeeduivelstaarten à 150 - 200 g - voor lunch- of voorgerecht filets à 125g",
@@ -1738,6 +1793,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Griet",
     vanSchaap: [
       "5 ansjovisfilets",
@@ -1771,6 +1827,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1585769448445-efca2df879e6?w=800&q=80",
     fotoLabel: "Frittata",
     vanSchaap: [
       "2 blikjes sardinesfilets in zonnebloemolie, à 95 g, uitgelekt",
@@ -1798,6 +1855,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1585769448445-efca2df879e6?w=800&q=80",
     fotoLabel: "Gestoofde heek",
     vanSchaap: [
       "4 ansjovisfilets (blikje), fijngehakt",
@@ -1826,6 +1884,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Courgettesoep",
     vanSchaap: [
       "100 g gerookte zalm (plakjes)",
@@ -1853,6 +1912,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Garnalen-tomatentaartje",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -1886,6 +1946,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Klassiek gestoofde schar",
     vanSchaap: [
       "4 hele scharren, panklaar",
@@ -1914,6 +1975,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Schol",
     vanSchaap: [
       "4 ontvelde schollen (à 250 g)",
@@ -1950,6 +2012,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Coquilles",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -1980,6 +2043,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Thaise preicurry",
     vanSchaap: [
       "400 g koolvisfilet (diepvries), ontdooid en in blokjes",
@@ -2009,6 +2073,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Dorade",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -2040,6 +2105,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Wilde Alaska zalm uit de oven",
     vanSchaap: [
       "600 g wilde Alaska zalmfilet, aan 1 stuk, bevroren",
@@ -2075,6 +2141,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalm",
     vanSchaap: [
       "Zalmfiletjes van ongeveer 200 gram",
@@ -2101,6 +2168,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1644784643137-b9073dd262f6?w=800&q=80",
     fotoLabel: "Gegrilde zeebaars",
     vanSchaap: [
       "4 zeebaarsfilets met huid van 150 g",
@@ -2133,6 +2201,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1644784643137-b9073dd262f6?w=800&q=80",
     fotoLabel: "Op de huid gebakken zeebaars",
     vanSchaap: [
       "600 g zeebaars met huid, in 4 gelijke porties",
@@ -2169,6 +2238,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1644784643137-b9073dd262f6?w=800&q=80",
     fotoLabel: "Zeebaars",
     vanSchaap: [
       "4 stukjes zeebaars",
@@ -2204,6 +2274,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Romige spaghetti",
     vanSchaap: [
       "4 dubbele of 8 enkele makreelfilets met vel (totaal ca. 500 g",
@@ -2233,6 +2304,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Gemarineerde zalm",
     vanSchaap: [
       "600 gram zalmfilet",
@@ -2259,6 +2331,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "Open ravioli",
     vanSchaap: [
       "12 langoustines, schoongemaakt en gepeld",
@@ -2301,6 +2374,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Vissoep brodetto alla marchigiana",
     vanSchaap: [
       "1,5 kg gemengde visfilets",
@@ -2340,6 +2414,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Knolselderijstamppot",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -2368,6 +2443,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Makreel & cannellini bonen",
     vanSchaap: [
       "600 g verse makreelfilet",
@@ -2398,6 +2474,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Tilapiafilet",
     vanSchaap: [
       "600 g tilapiafilet",
@@ -2430,6 +2507,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Citroengras-Gamba spiesen",
     vanSchaap: [
       "12 grote garnalen, schoongemaakt",
@@ -2461,6 +2539,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken scholfilets",
     vanSchaap: [
       "8 scholfilets",
@@ -2490,6 +2569,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Tarbotfilet",
     vanSchaap: [
       "4 stukken tarbotfilet (met huid) à 150 g",
@@ -2517,6 +2597,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Scholfilets",
     vanSchaap: [
       "2 à 4 scholfilets",
@@ -2557,6 +2638,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Eggs Benedict",
     vanSchaap: [
       "200 g gerookte zalm",
@@ -2589,6 +2671,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Italiaanse mosselpan",
     vanSchaap: [
       "2 kg mosselen",
@@ -2619,6 +2702,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Romige pasta",
     vanSchaap: [
       "200 g Hollandse garnalen, gepeld",
@@ -2651,6 +2735,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Snoekbaarsfilet",
     vanSchaap: [
       "4 snoekbaarsfilets à 130 g met huid, zonder schubben",
@@ -2693,6 +2778,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1585769448445-efca2df879e6?w=800&q=80",
     fotoLabel: "Pizza",
     vanSchaap: [
       "10 ansjovisjes op olijfolie",
@@ -2722,6 +2808,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Griet",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -2757,6 +2844,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Broccolirijst",
     vanSchaap: [
       "1 blikje ansjovisfilets",
@@ -2787,6 +2875,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Thaise zalmkoekjes",
     vanSchaap: [
       "2 blikjes sockey zalm of roze zalm (à ca. 200 g)",
@@ -2821,6 +2910,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Viscurry van nijlbaars",
     vanSchaap: [
       "600 g nijlbaarsfilet",
@@ -2853,6 +2943,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gestoofde wijtingfilets",
     vanSchaap: [
       "8 wijtingfilets zonder huid à 75 g",
@@ -2884,6 +2975,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zarzuela, Spaanse visstoof",
     vanSchaap: [
       "250 g kabeljauwfilet",
@@ -2920,6 +3012,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalm",
     vanSchaap: [
       "4 stukken verse zalmfilet van 150 g",
@@ -2953,6 +3046,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Griet uit de oven",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -2991,6 +3085,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1585769448445-efca2df879e6?w=800&q=80",
     fotoLabel: "Griekse sardinespread",
     vanSchaap: [
       "1 blikje sardines (van 120 g), uitgelekt",
@@ -3020,6 +3115,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Aardappelspaghetti",
     vanSchaap: [
       "150 g Hollandse garnalen, gepeld",
@@ -3062,6 +3158,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Tasty Herring Tartare",
     vanSchaap: [
       "4 verse haringen",
@@ -3100,6 +3197,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Meerval Milanese",
     vanSchaap: [
       "4 meervalfilets van 150 g per stuk",
@@ -3128,6 +3226,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalm",
     vanSchaap: [
       "zalmzijde, huid verwijderd",
@@ -3176,6 +3275,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Rode mul",
     vanSchaap: [
       "4 rode mulfilets",
@@ -3212,6 +3312,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Tonijn (albacore)",
     vanSchaap: [
       "4 dikke stukken tonijn van 150 g",
@@ -3240,6 +3341,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Kerrietulband",
     vanSchaap: [
       "200 g gerookte paling",
@@ -3282,6 +3384,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalmsteaks",
     vanSchaap: [
       "4 zalmfilets (à 150 g)",
@@ -3313,6 +3416,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Taco’s",
     vanSchaap: [
       "400 g wijting filet, in repen gesneden",
@@ -3343,6 +3447,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Hartige muffins",
     vanSchaap: [
       "250 g Hollandse garnalen",
@@ -3377,6 +3482,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Geroosterde sliptong",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -3410,6 +3516,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Vis",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -3440,6 +3547,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Tijgergarnalen",
     vanSchaap: [
       "250 g (diepvries) tijgergarnalen, ontdooid",
@@ -3470,6 +3578,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Roergebakken zalm",
     vanSchaap: [
       "250 g zalmfilet, in blokjes",
@@ -3496,6 +3605,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gestoomde zeeduivel",
     vanSchaap: [
       "4 zeeduivelfilets van 150 g",
@@ -3525,6 +3635,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Heilbot",
     vanSchaap: [
       "500 g heilbot filets",
@@ -3555,6 +3666,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken scholfilet",
     vanSchaap: [
       "600 g scholfilet (4 grote filets of 8 kleine filets)",
@@ -3585,6 +3697,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Thaise mosselen",
     vanSchaap: [
       "4 kg verse mosselen",
@@ -3615,6 +3728,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Verse makreel gemarineerd",
     vanSchaap: [
       "4 verse makreelfilets",
@@ -3643,6 +3757,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Gegratineerde zalm",
     vanSchaap: [
       "4 zalmfilets van 150 g",
@@ -3671,6 +3786,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Pasteitje",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -3697,6 +3813,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauw-tartiflette",
     vanSchaap: [
       "500 g kabeljauwfilet",
@@ -3729,6 +3846,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Griet",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -3761,6 +3879,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gebakken scheermessen",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -3790,6 +3909,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Chili con ‘makreel’",
     vanSchaap: [
       "400 g gestoomde/gerookte makreelfilet",
@@ -3822,6 +3942,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Romige tagliatelle",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -3856,6 +3977,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalm",
     vanSchaap: [
       "2 moten zalm, zonder vel",
@@ -3896,6 +4018,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalmfilet",
     vanSchaap: [
       "4 stukken zalmfilet van 125 g",
@@ -3922,6 +4045,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Piramidebroodje",
     vanSchaap: [
       "4 zoute haringen",
@@ -3950,6 +4074,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Nijlbaars",
     vanSchaap: [
       "4 stukken Nijlbaarsfilet (van 150 g)",
@@ -3980,6 +4105,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1585769448445-efca2df879e6?w=800&q=80",
     fotoLabel: "Tortilla",
     vanSchaap: [
       "20 dubbele verse ansjovisfilets",
@@ -4009,6 +4135,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Pad Thai",
     vanSchaap: [
       "400 g scholfilet",
@@ -4048,6 +4175,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Pangasius",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -4078,6 +4206,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Noedelsoep",
     vanSchaap: [
       "1 kleine gerookte makreel",
@@ -4108,6 +4237,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Pittige zalmloempiaatjes",
     vanSchaap: [
       "1 blikje zalm (225 gram)",
@@ -4135,6 +4265,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Grietfilet",
     vanSchaap: [
       "100 g zeekraal",
@@ -4164,6 +4295,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegrilde harder",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -4193,6 +4325,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken sliptong",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -4223,6 +4356,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Gebakken sliptong",
     vanSchaap: [
       "100 g Hollandse garnalen",
@@ -4252,6 +4386,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Broccolischotel",
     vanSchaap: [
       "600 g koolvisfilet, in blokjes",
@@ -4278,6 +4413,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Vistajine",
     vanSchaap: [
       "600 g kabeljauwfilet",
@@ -4307,6 +4443,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "Langoustines alla busara",
     vanSchaap: [
       "8 medium grote langoustines, afgespoeld en drooggedept",
@@ -4341,6 +4478,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haringtartaar",
     vanSchaap: [
       "4 zoute haringen (Hollandse Nieuwe)",
@@ -4371,6 +4509,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalm",
     vanSchaap: [
       "4 stukken zalmfilet van 125 g",
@@ -4402,6 +4541,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Picknick palingpate",
     vanSchaap: [
       "2 gerookte palingen",
@@ -4426,6 +4566,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gebakken schar",
     vanSchaap: [
       "4 hele panklare scharren",
@@ -4461,6 +4602,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1553659971-f01207815844?w=800&q=80",
     fotoLabel: "Spicy Krabpoten",
     vanSchaap: [
       "1 kilo krabpoten",
@@ -4486,6 +4628,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Doradefilet",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -4517,6 +4660,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Op de huid gebakken snoekbaars",
     vanSchaap: [
       "4 stukken snoekbaarsfilet van 150 g",
@@ -4549,6 +4693,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haringsalade",
     vanSchaap: [
       "2 zoute haringen",
@@ -4575,6 +4720,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "\"Fish\" with a curry twist & sweet potato \"Chips\"",
     vanSchaap: [
       "4 dunne stukken kabeljauwfilet, van de staart",
@@ -4615,6 +4761,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Mini-visburgers",
     vanSchaap: [
       "400 g kabeljauw of andere vis of een combinatie",
@@ -4641,6 +4788,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken schol",
     vanSchaap: [
       "4 kant-en-klaar gebakken schollen (vers of diepvries)",
@@ -4668,6 +4816,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegratineerde zeewolf uit de oven",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -4699,6 +4848,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Scholpannetje",
     vanSchaap: [
       "2 scholfilets",
@@ -4739,6 +4889,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Vishapjes",
     vanSchaap: [
       "Tomaatjes gevuld met avocado en Hollandse garnalen:",
@@ -4776,6 +4927,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1644784643137-b9073dd262f6?w=800&q=80",
     fotoLabel: "Pasta",
     vanSchaap: [
       "4 zeebaarsfilet, met vel",
@@ -4810,6 +4962,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Makreel",
     vanSchaap: [
       "4 verse makreelfilets",
@@ -4842,6 +4995,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Caribische roodbaars",
     vanSchaap: [
       "1 hele roodbaars van 400-500 g, zonder kop en buikholte schoongemaakt",
@@ -4873,6 +5027,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Lekkerbekjes",
     vanSchaap: [
       "4 lekkerbekjes",
@@ -4900,6 +5055,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Gravad lax",
     vanSchaap: [
       "600 g verse zalmmoot, 1 stuk zonder graat",
@@ -4929,6 +5085,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Mini frittata's",
     vanSchaap: [
       "200 g gepelde rauwe gamba’s",
@@ -4960,6 +5117,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Maaltijdsalade",
     vanSchaap: [
       "2 gestoomde makrelen van 300 g of 500 g makreelfilet",
@@ -4991,6 +5149,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Pistolet",
     vanSchaap: [
       "200 g gerookte zalm",
@@ -5016,6 +5175,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauw",
     vanSchaap: [
       "500 g dikke kabeljauwfilet",
@@ -5042,6 +5202,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Velouté van bloemkool",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -5075,6 +5236,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Hollandse garnalencocktail",
     vanSchaap: [
       "300 g Hollandse garnalen",
@@ -5106,6 +5268,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalmschotel",
     vanSchaap: [
       "600 g zalmfilet",
@@ -5140,6 +5303,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Scholfilets",
     vanSchaap: [
       "4 grote scholfilets",
@@ -5169,6 +5333,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Enchiladas",
     vanSchaap: [
       "350 g verse makreelfilets, in stukjes",
@@ -5202,6 +5367,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gefrituurde tongschar",
     vanSchaap: [
       "600 g tongscharfilets",
@@ -5239,6 +5405,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Roergebakken pangasius",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -5270,6 +5437,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Vischowder",
     vanSchaap: [
       "8 rode mul, ongeveer een kilo",
@@ -5314,6 +5482,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Gefrituurde Hollandse garnalen",
     vanSchaap: [
       "500 g ongepeld garnalen",
@@ -5339,6 +5508,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Zeevruchtenpaella",
     vanSchaap: [
       "750 g zeeduivelfilet, in stukken",
@@ -5385,6 +5555,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Komkommergranita",
     vanSchaap: [
       "2 haringen, schoongemaakt",
@@ -5410,6 +5581,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "Langoustinespiesen",
     vanSchaap: [
       "20 langoustines, op kamertemperatuur",
@@ -5444,6 +5616,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Geroosterde tongfilet",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -5503,6 +5676,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Rode poon",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -5531,6 +5705,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Carpaccio van tonijn",
     vanSchaap: [
       "300 g tonijnfilet",
@@ -5561,6 +5736,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Gamba & feta cupcakes",
     vanSchaap: [
       "12 kleine gepelde rauwe gamba's met staart",
@@ -5599,6 +5775,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Toscaanse zalm",
     vanSchaap: [
       "4 grote of 8 kleine moten zalm, met of zonder vel naar smaak",
@@ -5635,6 +5812,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Dutch Herring Party",
     vanSchaap: [
       "2 haringen, in blokjes, met bijbehorende gesnipperde uitjes",
@@ -5671,6 +5849,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Orzosalade",
     vanSchaap: [
       "300 g wijtingfilet",
@@ -5709,6 +5888,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Bruschetta Niçoise",
     vanSchaap: [
       "200 g tonijn in 2 stukken",
@@ -5735,6 +5915,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Roergebakken mie",
     vanSchaap: [
       "200 g roze garnalen",
@@ -5760,6 +5941,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Makreel uit de wok",
     vanSchaap: [
       "4 makreelfilets",
@@ -5794,6 +5976,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauwquiche 'caprese'",
     vanSchaap: [
       "300 g kabeljauwfilet zonder huid, in blokjes",
@@ -5821,6 +6004,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Plaatpizza",
     vanSchaap: [
       "2 verse makreelfilets in stukjes",
@@ -5853,6 +6037,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Thais schelvispakketje",
     vanSchaap: [
       "500 g schelvisfilet, in 4 gelijke stukken",
@@ -5882,6 +6067,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "BBQ-poon",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -5918,6 +6104,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken tongfilet",
     vanSchaap: [
       "Verse aal (vraag Aldert naar de dagselectie)",
@@ -5951,6 +6138,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Avocadosalade",
     vanSchaap: [
       "250 g Hollandse garnalen",
@@ -5988,6 +6176,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Salade",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -6019,6 +6208,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1585769448445-efca2df879e6?w=800&q=80",
     fotoLabel: "Bruschetta",
     vanSchaap: [
       "1 blikje sardines in olijfolie (à 120 g), uitgelekt",
@@ -6049,6 +6239,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Saltimbocca van rode poon",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -6075,6 +6266,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Chinees gestoomde dorade",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -6107,6 +6299,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Pastasalade",
     vanSchaap: [
       "4 haringen, in stukjes",
@@ -6143,6 +6336,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1550942356-fcfc6eba2acb?w=800&q=80",
     fotoLabel: "Inktvisburger",
     vanSchaap: [
       "Inktvisbroodjes :",
@@ -6183,6 +6377,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Kruidige sandwich van knäckebröd",
     vanSchaap: [
       "250 g Hollandse garnalen",
@@ -6215,6 +6410,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Pasta",
     vanSchaap: [
       "16 grote gamba’s, gepeld met staart er aangelaten",
@@ -6253,6 +6449,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Tilapiafilet",
     vanSchaap: [
       "4 tilapiafilets à 150 g",
@@ -6284,6 +6481,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Salade",
     vanSchaap: [
       "2 stukken kabeljauwfilet à 75 g",
@@ -6315,6 +6513,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Fondue",
     vanSchaap: [
       "garnalen",
@@ -6352,6 +6551,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Meervalsalade",
     vanSchaap: [
       "200 gram gerookte meervalfilet",
@@ -6380,6 +6580,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken schol",
     vanSchaap: [
       "600 g scholfilet",
@@ -6410,6 +6611,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gestoomde poon",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -6441,6 +6643,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Hartige taart",
     vanSchaap: [
       "400 g tilapiafilet",
@@ -6476,6 +6679,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gebakken bot",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -6506,6 +6710,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Sliptong",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -6538,6 +6743,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1553659971-f01207815844?w=800&q=80",
     fotoLabel: "Hamburger",
     vanSchaap: [
       "vlees van 4 Noordzeekrabben, ongeveer 400 gram",
@@ -6569,6 +6775,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Koolvisfilet",
     vanSchaap: [
       "600 g koolvisfilet, in 4 stukken",
@@ -6600,6 +6807,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1644784643137-b9073dd262f6?w=800&q=80",
     fotoLabel: "Zeebaars, Szechuan style",
     vanSchaap: [
       "1 zeebaars van 1 kg, schoongemaakt langs de buik zonder ingewanden",
@@ -6642,6 +6850,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Sandwich",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -6669,6 +6878,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Panini",
     vanSchaap: [
       "100 g gerookte zalm",
@@ -6695,6 +6905,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Grietfilet",
     vanSchaap: [
       "100 g zeekraal",
@@ -6725,6 +6936,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Wijtingtaartje",
     vanSchaap: [
       "4 wijtingfilets met vel à 75 g",
@@ -6753,6 +6965,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Zachtgegaarde schelvis",
     vanSchaap: [
       "4 stukken schelvisfilet van ongeveer 120 g",
@@ -6783,6 +6996,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gestoomde coquilles",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -6816,6 +7030,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalm",
     vanSchaap: [
       "4 stukken zalmfilet van 100 g",
@@ -6850,6 +7065,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Carpaccio van verse tonijn",
     vanSchaap: [
       "400 g verse tonijn, aan een stuk",
@@ -6877,6 +7093,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Ciabatta",
     vanSchaap: [
       "300 g wijtingfilet",
@@ -6908,6 +7125,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Tonijn tataki gerold",
     vanSchaap: [
       "ca. 600 g verse tonijnfilet, smal hoog stuk",
@@ -6945,6 +7163,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Rode mul",
     vanSchaap: [
       "4 rode mulfilets",
@@ -6979,6 +7198,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gebakken tongschar",
     vanSchaap: [
       "4 tongscharren van 500 g",
@@ -7013,6 +7233,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Quiche",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -7047,6 +7268,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalmmousse",
     vanSchaap: [
       "500 g verse zalmfilet, in blokjes",
@@ -7082,6 +7304,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Drunken Me Cocktail",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -7107,6 +7330,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haringrolletje",
     vanSchaap: [
       "4 nieuwe haringen, schoongemaakt",
@@ -7133,6 +7357,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Roodbaarsfilet",
     vanSchaap: [
       "4 roodbaarsfilets van 150 gram",
@@ -7165,6 +7390,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Gegrilde tongschar",
     vanSchaap: [
       "Filet van 4 dikke tongscharren",
@@ -7203,6 +7429,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauw",
     vanSchaap: [
       "4 dikke stukken kabeljauwfilet van 150 g",
@@ -7231,6 +7458,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Scholfiletspiesjes",
     vanSchaap: [
       "16 enkele scholfilets - lunch- of voorgerecht 12 enkele scholfilets",
@@ -7260,6 +7488,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Taco",
     vanSchaap: [
       "4 haringen",
@@ -7291,6 +7520,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegratineerde oesters",
     vanSchaap: [
       "12 oesters",
@@ -7316,6 +7546,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Romige ‘vispie’",
     vanSchaap: [
       "500 g visfilets, naar keuze",
@@ -7350,6 +7581,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Hachee van heek",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -7383,6 +7615,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Lunchsalade",
     vanSchaap: [
       "400 g wijtingfilet, in 8 stukken",
@@ -7417,6 +7650,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauwcake",
     vanSchaap: [
       "300 g kabeljauw",
@@ -7450,6 +7684,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Zeeduivelcurry",
     vanSchaap: [
       "4 zeeduivelmoten",
@@ -7483,6 +7718,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegratineerde Sint Jacobsschelpen",
     vanSchaap: [
       "50 g zeekraal",
@@ -7514,6 +7750,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalm",
     vanSchaap: [
       "2 blikken zalm à 200 g",
@@ -7543,6 +7780,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haring",
     vanSchaap: [
       "2 haringen",
@@ -7574,6 +7812,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gebakken heilbot",
     vanSchaap: [
       "450 g stevige witvisfilets, bijvoorbeeld heilbot",
@@ -7605,6 +7844,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Tongschar",
     vanSchaap: [
       "600 g tongscharfilets met vel",
@@ -7639,6 +7879,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Broodje haring",
     vanSchaap: [
       "4 zoute haringen",
@@ -7669,6 +7910,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haringtaco’s",
     vanSchaap: [
       "8 panharingen, gefileerd, ontschubd, graten verwijderd",
@@ -7712,6 +7954,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Vispotje",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -7748,6 +7991,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Marokkaanse zeeduivel",
     vanSchaap: [
       "4 moten zeeduivel van 200 g elk",
@@ -7780,6 +8024,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Groene salade",
     vanSchaap: [
       "200 g gerookte zalm",
@@ -7808,6 +8053,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Heilbot rijstvel loempiaatjes",
     vanSchaap: [
       "500 g heilbotfilet",
@@ -7843,6 +8089,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Pasta",
     vanSchaap: [
       "100 g Hollandse garnalen",
@@ -7877,6 +8124,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Provençaalse mosselen",
     vanSchaap: [
       "2 kg mosselen panklaar",
@@ -7910,6 +8158,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Zomers", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Gegratineerde garnalen",
     vanSchaap: [
       "150 g Hollandse garnalen",
@@ -7938,6 +8187,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Mezze",
     vanSchaap: [
       "4 zoute haringen (Hollandse Nieuwe)",
@@ -7971,6 +8221,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=800&q=80",
     fotoLabel: "Gevulde forel",
     vanSchaap: [
       "4 forellen",
@@ -8008,6 +8259,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Paling",
     vanSchaap: [
       "300 g gevilde paling, in stukken (ESF)",
@@ -8042,6 +8294,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Palingsalade",
     vanSchaap: [
       "150 gram gerookte palingfilet",
@@ -8072,6 +8325,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Harderfilet",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -8102,6 +8356,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Gegratineerde kabeljauw",
     vanSchaap: [
       "600 g kabeljauwfilet",
@@ -8136,6 +8391,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gestoofde sliptong",
     vanSchaap: [
       "3 sjalotten, in halve ringen",
@@ -8169,6 +8425,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Herring In A Jacket",
     vanSchaap: [
       "2 haringfilets, in stukjes",
@@ -8197,6 +8454,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken scholfilets",
     vanSchaap: [
       "4 ontvelde scholfilets (500 g)",
@@ -8228,6 +8486,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken rode poon",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -8257,6 +8516,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1644784643137-b9073dd262f6?w=800&q=80",
     fotoLabel: "Gegrilde zeebaars",
     vanSchaap: [
       "4 zeebaarsfilets van 150 g",
@@ -8286,6 +8546,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Vispakketjes uit de oven",
     vanSchaap: [
       "400 g zalmfilet",
@@ -8316,6 +8577,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Tilapiaburgers",
     vanSchaap: [
       "500 g tilapiafilet",
@@ -8346,6 +8608,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haring flammkuchen en mierikswortelcrème",
     vanSchaap: [
       "2 haringen, schoongemaakt",
@@ -8378,6 +8641,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Courgette carpaccio",
     vanSchaap: [
       "4 mulfilets (van 60-80 g) of 8 kleine mulfilets",
@@ -8403,6 +8667,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Javaanse visspiesjes",
     vanSchaap: [
       "100 g gekookte mosselen",
@@ -8429,6 +8694,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Sushi",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -8461,6 +8727,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Koud bieslooksoepje",
     vanSchaap: [
       "400 gram Hollandse garnalen",
@@ -8491,6 +8758,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Salade",
     vanSchaap: [
       "2 tarbotfilets van 100 g",
@@ -8525,6 +8793,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Tataki van tonijn",
     vanSchaap: [
       "500 g (diepvries) tonijnsteaks, ontdooid",
@@ -8560,6 +8829,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalmkroketjes",
     vanSchaap: [
       "300 g zalmfilet zonder huid",
@@ -8595,6 +8865,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1644784643137-b9073dd262f6?w=800&q=80",
     fotoLabel: "Kidscorner",
     vanSchaap: [
       "250 g inktvisringen",
@@ -8628,6 +8899,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Scholfilet gesmoord",
     vanSchaap: [
       "1,2 kg scholfilet",
@@ -8666,6 +8938,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalm ovenschotel",
     vanSchaap: [
       "500 gr zalmfilet",
@@ -8699,6 +8972,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalmrolletjes",
     vanSchaap: [
       "4 plakjes wilde sockeye zalm",
@@ -8723,6 +8997,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Geroosterde schol",
     vanSchaap: [
       "4 schollen",
@@ -8749,6 +9024,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Tong Picasso 2.0",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -8784,6 +9060,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauw ovenpakketje",
     vanSchaap: [
       "75 g zeekraal",
@@ -8824,6 +9101,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Makreel Mafé / makreel",
     vanSchaap: [
       "400 g verse makreelfilets, in stukken",
@@ -8857,6 +9135,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Broodje paling",
     vanSchaap: [
       "100 gram gerookte palingfilet",
@@ -8882,6 +9161,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Mosseltapas borrelhapjes",
     vanSchaap: [
       "Gesmoorde mosselen :",
@@ -8923,6 +9203,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Gewokte mosselen",
     vanSchaap: [
       "4 kg verse mosselen",
@@ -8957,6 +9238,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Minitaco's",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -8999,6 +9281,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken tong",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -9042,6 +9325,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Amuse",
     vanSchaap: [
       "4 haringen, schoongemaakt en in kleine stukjes gesneden",
@@ -9077,6 +9361,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Gegrilde tonijn",
     vanSchaap: [
       "2 tonijnmoten (à 150 g)",
@@ -9107,6 +9392,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Scholfilet",
     vanSchaap: [
       "600 g scholfilet",
@@ -9140,6 +9426,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Zeewolf",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -9175,6 +9462,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Romige pasta",
     vanSchaap: [
       "150 g Hollandse garnalen",
@@ -9203,6 +9491,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Blini's",
     vanSchaap: [
       "100 g gerookte palingfilet",
@@ -9233,6 +9522,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Surf en turf",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -9265,6 +9555,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Pieterman",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -9296,6 +9587,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalm",
     vanSchaap: [
       "1 stuk zalmfilet zonder vel (ca. 1 kg), op kamertemperatuur",
@@ -9323,6 +9615,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Noedelsalade",
     vanSchaap: [
       "400 g (rode) mulfilet",
@@ -9357,6 +9650,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Palingsandwich",
     vanSchaap: [
       "1 gerookte palingfilet",
@@ -9383,6 +9677,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1585769448445-efca2df879e6?w=800&q=80",
     fotoLabel: "Gemarineerde ansjovis",
     vanSchaap: [
       "250 g verse ansjovis",
@@ -9409,6 +9704,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haringspiesje",
     vanSchaap: [
       "2 zoute haringen",
@@ -9432,6 +9728,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Schelvis",
     vanSchaap: [
       "200 g schelvisfilet, in 4 gelijke stukken",
@@ -9461,6 +9758,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Fish Fingers",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -9488,6 +9786,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Koolvis",
     vanSchaap: [
       "4 stukken koolvisfilet van 150 g",
@@ -9519,6 +9818,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gegrilde tarbot",
     vanSchaap: [
       "4 tarbotfilets (à 150 g)",
@@ -9553,6 +9853,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gegrilde roodbaarsfilet",
     vanSchaap: [
       "4 roodbaarsfilets (à 150 g)",
@@ -9580,6 +9881,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Cassoulette van de schol en de zeevruchten",
     vanSchaap: [
       "600 g scholfilet",
@@ -9614,6 +9916,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Gebakken zalm",
     vanSchaap: [
       "4 zalmfilets (à 150 g)",
@@ -9644,6 +9947,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Pikante kabeljauw",
     vanSchaap: [
       "4 stukken kabeljauwfilet van 150 g",
@@ -9676,6 +9980,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gebakken wijting",
     vanSchaap: [
       "4 hele wijtingen à 200 gram",
@@ -9709,6 +10014,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegratineerde oesters",
     vanSchaap: [
       "12 verse Zeeuwse oesters",
@@ -9742,6 +10048,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Plaattaart",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -9777,6 +10084,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Hollandse garnalen",
     vanSchaap: [
       "120 g Hollandse garnalen, ongepeld",
@@ -9799,6 +10107,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "Bruschetta",
     vanSchaap: [
       "200 g rivierkreeftjes",
@@ -9831,6 +10140,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Aziatische slawraps",
     vanSchaap: [
       "4 haringen, in stukjes gesneden",
@@ -9866,6 +10176,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauwhaasje",
     vanSchaap: [
       "4 stukjes kabeljauwfilet van 70 g",
@@ -9901,6 +10212,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Romige courgettesoep",
     vanSchaap: [
       "12 grote gamba’s (rauw en gepeld)",
@@ -9931,6 +10243,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haringtartaar",
     vanSchaap: [
       "Verse haring (vraag Aldert naar de dagselectie)",
@@ -9961,6 +10274,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Geurige zeewolf",
     vanSchaap: [
       "200 g zeekraal",
@@ -9998,6 +10312,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Coquilles",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -10032,6 +10347,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Spaghetti",
     vanSchaap: [
       "4 á 5 grote gamba’s per persoon",
@@ -10061,6 +10377,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Garnalencocktail",
     vanSchaap: [
       "250 g Hollandse garnalen",
@@ -10093,6 +10410,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=800&q=80",
     fotoLabel: "Forel",
     vanSchaap: [
       "4 forellen",
@@ -10116,6 +10434,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1550942356-fcfc6eba2acb?w=800&q=80",
     fotoLabel: "Inktvis salade",
     vanSchaap: [
       "500 g schoongemaakte pijlinktvis, met tentakels",
@@ -10145,6 +10464,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Zeeduivel",
     vanSchaap: [
       "600 g zeeduivelfilets in stukken",
@@ -10173,6 +10493,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Urban Cleopatra",
     vanSchaap: [
       "4 haringen",
@@ -10203,6 +10524,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=800&q=80",
     fotoLabel: "Gebakken forel",
     vanSchaap: [
       "2 forellen, schoongemaakt",
@@ -10236,6 +10558,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Gevulde paprika’s",
     vanSchaap: [
       "200 g verse makreel",
@@ -10269,6 +10592,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken scholfilet",
     vanSchaap: [
       "3 scholfilets à 100 g",
@@ -10298,6 +10622,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Spinazieomelet",
     vanSchaap: [
       "50 g Hollandse garnalen",
@@ -10327,6 +10652,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Koolvisschotel",
     vanSchaap: [
       "600 g koolvisfilet",
@@ -10358,6 +10684,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1553659971-f01207815844?w=800&q=80",
     fotoLabel: "Quiche",
     vanSchaap: [
       "200 g krabvlees",
@@ -10390,6 +10717,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Hele gesmoorde tarbot",
     vanSchaap: [
       "1 tarbot van 2½-3 kg",
@@ -10423,6 +10751,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Rodekoolsalade",
     vanSchaap: [
       "1 gestoomde makreel van 300 g",
@@ -10452,6 +10781,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Oosterse makreelspiesjes",
     vanSchaap: [
       "Verse makreel (vraag Aldert naar de dagselectie)",
@@ -10482,6 +10812,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=800&q=80",
     fotoLabel: "Gebakken forel",
     vanSchaap: [
       "2 forellen",
@@ -10511,6 +10842,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauw",
     vanSchaap: [
       "250 g kabeljauw, een zo recht mogelijk stuk",
@@ -10539,6 +10871,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gegrilde roodbaars",
     vanSchaap: [
       "4 roodbaarsfilets van 150 g",
@@ -10570,6 +10903,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Focacciasandwich",
     vanSchaap: [
       "1 blikje tonijn op olie (185 g)",
@@ -10604,6 +10938,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Heek",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -10645,6 +10980,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Aardappelsalade",
     vanSchaap: [
       "Verse makreel (vraag Aldert naar de dagselectie)",
@@ -10678,6 +11014,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Zeewolf",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -10709,6 +11046,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Flan van Hollandse garnalen",
     vanSchaap: [
       "120 g Hollandse garnalen, ongepeld",
@@ -10733,6 +11071,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=800&q=80",
     fotoLabel: "Gestoomde forel",
     vanSchaap: [
       "2 forellen, schoongemaakt",
@@ -10764,6 +11103,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Salty Shooter",
     vanSchaap: [
       "2 haringen",
@@ -10789,6 +11129,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegrilde sliptong",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -10824,6 +11165,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Tomaatjes",
     vanSchaap: [
       "100 g Hollandse garnalen",
@@ -10849,6 +11191,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Blini",
     vanSchaap: [
       "haringkaviaar potje",
@@ -10871,6 +11214,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=800&q=80",
     fotoLabel: "Gegrilde forel",
     vanSchaap: [
       "4 forellen",
@@ -10901,6 +11245,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=800&q=80",
     fotoLabel: "Forel-knolselderijsoep",
     vanSchaap: [
       "4 gerookte forelfilets",
@@ -10940,6 +11285,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Artisjok-zalmpaté",
     vanSchaap: [
       "2 kuipjes vispaté zalm met citroen 125 gram",
@@ -10968,6 +11314,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gestoomde zeeduivel",
     vanSchaap: [
       "2 stukken zeeduivelfilet (à 125 g)",
@@ -10998,6 +11345,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Dorade",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -11033,6 +11381,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Paddenstoelrisotto",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -11067,6 +11416,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Pangasius",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -11094,6 +11444,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Dorade",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -11126,6 +11477,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gebakken meervalfilets",
     vanSchaap: [
       "300 gram meervalfilet",
@@ -11153,6 +11505,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Clubsandwich",
     vanSchaap: [
       "3 Hollandse nieuwe of zoute haringen",
@@ -11181,6 +11534,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Krokant gebakken sliptong",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -11209,6 +11563,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Makreelsalade",
     vanSchaap: [
       "1 gestoomde/gerookte makreel van 400 g",
@@ -11239,6 +11594,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Gestoomde kabeljauw",
     vanSchaap: [
       "300 g kabeljauwfilet",
@@ -11268,6 +11624,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Pizza",
     vanSchaap: [
       "1 pakje gerookte zalm van 200 g",
@@ -11295,6 +11652,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Cocktail van paling en appel",
     vanSchaap: [
       "200 gram gerookte palingfilet",
@@ -11321,6 +11679,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Homemade makreel-/eiersalade wraps",
     vanSchaap: [
       "1 gerookte makreel",
@@ -11353,6 +11712,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Zwaardvis",
     vanSchaap: [
       "2 zwaardvissteaks van 125 g",
@@ -11380,6 +11740,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Gerookte zalm",
     vanSchaap: [
       "150-200 g gerookte zalm",
@@ -11406,6 +11767,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gegratineerde wijting uit de oven",
     vanSchaap: [
       "4 wijtingen, schoongemaakt",
@@ -11448,6 +11810,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Witlofschuitjes",
     vanSchaap: [
       "150 g Hollandse garnalen",
@@ -11477,6 +11840,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegratineerde tongrolletjes uit de oven",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -11510,6 +11874,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1585769448445-efca2df879e6?w=800&q=80",
     fotoLabel: "Sardientjes-spinazietaart",
     vanSchaap: [
       "2 blikjes wilde Schotse sardines in olijfolie 110 g",
@@ -11544,6 +11909,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Schol",
     vanSchaap: [
       "4 scholfilets met vel",
@@ -11583,6 +11949,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Pastinaakrösti",
     vanSchaap: [
       "3 haringen, in stukjes",
@@ -11622,6 +11989,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Schar",
     vanSchaap: [
       "400 g scharfilet",
@@ -11652,6 +12020,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Groene risotto",
     vanSchaap: [
       "4 scholfilets (ca. 600 g)",
@@ -11684,6 +12053,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Viskebab",
     vanSchaap: [
       "8 gepelde gamba’s (rauw)",
@@ -11711,6 +12081,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1550942356-fcfc6eba2acb?w=800&q=80",
     fotoLabel: "Krokante pijlinktvisjes",
     vanSchaap: [
       "500 g pijlinktvisjes (ca. 10 stuks van 20 cm)",
@@ -11740,6 +12111,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Bruschetta",
     vanSchaap: [
       "2 verse makreelfilets",
@@ -11775,6 +12147,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Healthy Taco Twist",
     vanSchaap: [
       "4 haringen",
@@ -11809,6 +12182,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Vrolijk broodje haring",
     vanSchaap: [
       "4 zoute haringen, in brede repen",
@@ -11836,6 +12210,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegrilde scholfilet",
     vanSchaap: [
       "6 scholfilets (ca. 600 g), in de lengte gehalveerd",
@@ -11868,6 +12243,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1553659971-f01207815844?w=800&q=80",
     fotoLabel: "Krab-sinaasappelcocktail",
     vanSchaap: [
       "200 g krabsticks",
@@ -11898,6 +12274,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Kort gerookte tongrolletjes",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -11935,6 +12312,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Gamba tajine",
     vanSchaap: [
       "12 grote of 16 kleinere gamba’s",
@@ -11978,6 +12356,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gegrilde mul",
     vanSchaap: [
       "4 mulfilets (van 60-80 g) of 8 kleine mulfilets",
@@ -12007,6 +12386,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Pappardelle",
     vanSchaap: [
       "400 g gepelde Hollandse garnalen",
@@ -12035,6 +12415,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Lentesalade",
     vanSchaap: [
       "250 g Hollandse garnalen",
@@ -12063,6 +12444,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Geurige noedelsoep",
     vanSchaap: [
       "500 g (diepvries) gamba’s, ontdooid en gepeld*",
@@ -12101,6 +12483,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Mediterraan rogvleugelpakketje",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -12131,6 +12514,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Tartaartje van gerookte zalm",
     vanSchaap: [
       "400 g gerookte zalm",
@@ -12160,6 +12544,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Gewokte gamba's",
     vanSchaap: [
       "400 g gepelde gamba’s, ontdooid",
@@ -12193,6 +12578,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Sliptong",
     vanSchaap: [
       "2 sjalotten",
@@ -12227,6 +12613,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Mul",
     vanSchaap: [
       "4 rode mullen",
@@ -12260,6 +12647,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "Langoustines",
     vanSchaap: [
       "10 langoustines, gehalveerd",
@@ -12289,6 +12677,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Tagliatelle",
     vanSchaap: [
       "150 g gekookte mosselen",
@@ -12319,6 +12708,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gevulde mul",
     vanSchaap: [
       "4 grote (rode) mullen of 8 kleine, schoongemaakt",
@@ -12345,6 +12735,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haringsushi",
     vanSchaap: [
       "4 nieuwe haringen, schoongemaakt",
@@ -12376,6 +12767,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Zeeduivel",
     vanSchaap: [
       "4 kleine zeeduivels of 4 dikke moten, ca. 600 g totaal",
@@ -12410,6 +12802,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Gratin van Hollandse garnalen, courgette en tomate",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -12440,6 +12833,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1644784643137-b9073dd262f6?w=800&q=80",
     fotoLabel: "Zeebaarsfilet",
     vanSchaap: [
       "4 zeebaarsfilets met huid à 150 g",
@@ -12466,6 +12860,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken schol",
     vanSchaap: [
       "4 scholfilets",
@@ -12497,6 +12892,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Zomers", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauw",
     vanSchaap: [
       "300 g stevige kabeljauwfilet",
@@ -12526,6 +12922,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gestoomde scholfilet",
     vanSchaap: [
       "4 gefileerde schollen (à 250 g)",
@@ -12556,6 +12953,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tongrolletjes gepocheerd",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -12587,6 +12985,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tajine van gemarineerde pangasius en geroosterde p",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -12625,6 +13024,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Bacalao con pan",
     vanSchaap: [
       "400 g geweekte bacalao filets of van verse kabeljauw",
@@ -12656,6 +13056,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=800&q=80",
     fotoLabel: "Broodje gerookte forel",
     vanSchaap: [
       "150 g gerookte forelfilet",
@@ -12684,6 +13085,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Rillettes van makreel",
     vanSchaap: [
       "400 g verse makreel (filets)",
@@ -12717,6 +13119,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Tacocups",
     vanSchaap: [
       "200 g verse makreelfilet, in stukjes",
@@ -12749,6 +13152,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Groene salade van avocado",
     vanSchaap: [
       "400 g tilapiafilet, in repen van ca. 3 cm breed",
@@ -12787,6 +13191,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Saffraanrisotto",
     vanSchaap: [
       "300 g Hollandse garnalen",
@@ -12819,6 +13224,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Broodje gevuld",
     vanSchaap: [
       "150 g gekookte mosselen",
@@ -12847,6 +13253,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Scholfilet",
     vanSchaap: [
       "8 scholfilets",
@@ -12875,6 +13282,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Gerookte palingsalade",
     vanSchaap: [
       "200 g gerookte paling",
@@ -12911,6 +13319,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Gegrilde makreel",
     vanSchaap: [
       "2 makrelen of 4 makreelfilets",
@@ -12940,6 +13349,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Aardappelsoep",
     vanSchaap: [
       "400 g verse zalm, op kamertemperatuur",
@@ -12971,6 +13381,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Boerensandwich",
     vanSchaap: [
       "4 zoute haringen",
@@ -12997,6 +13408,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Zeeduivelgratin",
     vanSchaap: [
       "600 g zeeduivelfilet",
@@ -13024,6 +13436,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegratineerde griet",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -13057,6 +13470,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Broodje haringsalade",
     vanSchaap: [
       "4 zoute haringen",
@@ -13088,6 +13502,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Scholfilet",
     vanSchaap: [
       "8 (diepvries) scholfilets",
@@ -13121,6 +13536,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Schelvis",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -13152,6 +13568,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Bonen-tonijnsalade",
     vanSchaap: [
       "2 potjes witte bonen, totaal netto 500 g",
@@ -13183,6 +13600,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Panini Olandesi",
     vanSchaap: [
       "4 haringen",
@@ -13221,6 +13639,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Ovenschotel van rode poon",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -13256,6 +13675,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haring",
     vanSchaap: [
       "4 haringen, schoongemaakt",
@@ -13284,6 +13704,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Lauwwarme kruidensalade",
     vanSchaap: [
       "2 stukken zalmforelfilet van 150 g",
@@ -13319,6 +13740,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Bladerdeegrondjes",
     vanSchaap: [
       "250 g Hollandse garnalen",
@@ -13347,6 +13769,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Salade",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -13378,6 +13801,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Roergebakken kibbeling",
     vanSchaap: [
       "250 g kibbeling",
@@ -13408,6 +13832,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Sigaartjes",
     vanSchaap: [
       "Verse tonijn (vraag Aldert naar de dagselectie)",
@@ -13442,6 +13867,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Vispakketje van de barbecue",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -13474,6 +13900,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Krokante doradefilet",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -13504,6 +13931,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gebakken tarbot",
     vanSchaap: [
       "4 moten tarbot van 100 g elk",
@@ -13530,6 +13958,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Pastasalade",
     vanSchaap: [
       "200 g gerookte zalm",
@@ -13563,6 +13992,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Pittige saucijzenbroodjes",
     vanSchaap: [
       "1 schoongemaakte gerookte makreel",
@@ -13597,6 +14027,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Roodbaars",
     vanSchaap: [
       "500 g roodbaarsfilet",
@@ -13626,6 +14057,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Oosterse gestoomde oesters",
     vanSchaap: [
       "1 mandje met 12 platte of creuse oesters",
@@ -13648,6 +14080,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Geroosterde zalmfilet",
     vanSchaap: [
       "2 zalmfilets (à 150 g)",
@@ -13682,6 +14115,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "Gegrilde langoustines",
     vanSchaap: [
       "8 grote langoustines",
@@ -13710,6 +14144,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Rolletjes van tong gevuld",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -13738,6 +14173,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tong",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -13774,6 +14210,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1644784643137-b9073dd262f6?w=800&q=80",
     fotoLabel: "Gebakken zeebaarsfilet",
     vanSchaap: [
       "2 zeebaarsfilets van 125-150 g",
@@ -13803,6 +14240,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Gestoomde tongrolletjes",
     vanSchaap: [
       "100 g roze garnalen, grof gesneden",
@@ -13839,6 +14277,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalmtortilla",
     vanSchaap: [
       "100 g gerookte zalm",
@@ -13864,6 +14303,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Soezentoren",
     vanSchaap: [
       "200 g dun gesneden gerookte zalm of zalmsnippers",
@@ -13899,6 +14339,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gebakken roodbaarsfilet",
     vanSchaap: [
       "4 roodbaarsfilet (à 150 gram)",
@@ -13929,6 +14370,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gegrilde rode mul",
     vanSchaap: [
       "4 grote of 8 kleine mulfilets",
@@ -13956,6 +14398,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Penne",
     vanSchaap: [
       "2 blikjes tonijn op olijfolie (à ca. 200 g)",
@@ -13987,6 +14430,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Tilapiaspiesen",
     vanSchaap: [
       "2 tilapiafilets, in de lengte elk in 6 repen",
@@ -14015,6 +14459,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Pita",
     vanSchaap: [
       "400 g gerookte makreelfilet, schoongemaakt en in stukjes",
@@ -14041,6 +14486,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauwschotel",
     vanSchaap: [
       "600 g kabeljauwfilet",
@@ -14068,6 +14514,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Ceviche van skrei-kabeljauw",
     vanSchaap: [
       "300 g skrei-kabeljauw, filet zonder huid",
@@ -14107,6 +14554,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Makreelfilet",
     vanSchaap: [
       "4 makreelfilets",
@@ -14148,6 +14596,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Mini paprika’s",
     vanSchaap: [
       "150 g wijtingfilet, in stukjes",
@@ -14181,6 +14630,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Ovenstamppot",
     vanSchaap: [
       "5 dubbele haringfilets (ca. 400 g)",
@@ -14209,6 +14659,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Zeeduivelbrochette",
     vanSchaap: [
       "300-400 g zeeduivelfilet",
@@ -14243,6 +14694,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Krokante sliptong",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -14269,6 +14721,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gestoofde wijtingfilet",
     vanSchaap: [
       "600 g wijtingfilets",
@@ -14301,6 +14754,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1553659971-f01207815844?w=800&q=80",
     fotoLabel: "Asperge-krabsoep",
     vanSchaap: [
       "250 g krabsticks, in repen",
@@ -14333,6 +14787,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Scholsandwich",
     vanSchaap: [
       "4 scholfilets van ca. 125 g",
@@ -14363,6 +14818,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gevulde scholfilet",
     vanSchaap: [
       "8 schollen als filet",
@@ -14391,6 +14847,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalmtaartje",
     vanSchaap: [
       "200 g verse zalmfilet",
@@ -14416,6 +14873,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Hartige panna cotta",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -14448,6 +14906,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Maaltijdsalade",
     vanSchaap: [
       "4 zalmfilets a 150 g",
@@ -14485,6 +14944,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "North Sea Sushi",
     vanSchaap: [
       "4 haringen",
@@ -14522,6 +14982,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "Geroosterde langoustines",
     vanSchaap: [
       "10 langoustines, gehalveerd",
@@ -14547,6 +15008,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gebakken scharfilet",
     vanSchaap: [
       "600 g scharfilets",
@@ -14575,6 +15037,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tongrolletjes",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -14607,6 +15070,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Hollandse garnalentaco’s",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -14648,6 +15112,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Ceviche van makreel en grapefruit",
     vanSchaap: [
       "2 makreelfilets, zo vers mogelijk",
@@ -14679,6 +15144,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Tomatentaartjes",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -14708,6 +15174,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Schar",
     vanSchaap: [
       "4 hele scharren, panklaar",
@@ -14737,6 +15204,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken schol",
     vanSchaap: [
       "4 ontvelde schollen (à 250 g)",
@@ -14771,6 +15239,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "(Rode) Mul",
     vanSchaap: [
       "600 gram (rode) mulfilets",
@@ -14804,6 +15273,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Tonijn",
     vanSchaap: [
       "2 blikjes tonijn op olie",
@@ -14836,6 +15306,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Oranje vissoep",
     vanSchaap: [
       "400 g gerookte zalmplakken",
@@ -14866,6 +15337,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken zeewolf",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -14899,6 +15371,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Schol",
     vanSchaap: [
       "2 scholletjes",
@@ -14933,6 +15406,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gegrilde mul",
     vanSchaap: [
       "800 g mulfilets of 4 panklare mullen à 300 g - voor lunch- of voorgerecht ca. de helft",
@@ -14961,6 +15435,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Zeeduivelmedaillons",
     vanSchaap: [
       "500 g zeeduivelfilet",
@@ -14995,6 +15470,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Gepocheerde rogvleugel",
     vanSchaap: [
       "75 g zeekraal",
@@ -15023,6 +15499,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Pittige vis",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -15057,6 +15534,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Wrap",
     vanSchaap: [
       "300 g Hollandse garnalen",
@@ -15085,6 +15563,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gesmoorde scheermessen",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -15114,6 +15593,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Sliptong",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -15150,6 +15630,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Wraps",
     vanSchaap: [
       "2 visfilets, zeebaars, wijting, kabeljauw",
@@ -15181,6 +15662,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Tempura van tongschar",
     vanSchaap: [
       "4 tongscharfilets",
@@ -15216,6 +15698,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gestoomde wijting",
     vanSchaap: [
       "300 g wijtingfilets",
@@ -15256,6 +15739,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Spaghetti",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -15283,6 +15767,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=800&q=80",
     fotoLabel: "Forel",
     vanSchaap: [
       "4 forellen",
@@ -15314,6 +15799,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Mexicolanda",
     vanSchaap: [
       "2 haringen",
@@ -15341,6 +15827,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Gamba’s",
     vanSchaap: [
       "12 gamba’s, gepeld",
@@ -15388,6 +15875,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Pittige tilapiafilet",
     vanSchaap: [
       "4 tilapiafilets à 150 g",
@@ -15420,6 +15908,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Gegrilde tonijn",
     vanSchaap: [
       "4 moten tonijnfilet (à 125 gram)",
@@ -15453,6 +15942,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Gepaneerde Hollandse garnalen",
     vanSchaap: [
       "50 g Hollandse garnalen",
@@ -15489,6 +15979,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Tilapia",
     vanSchaap: [
       "4 tilapiafilets zonder vel",
@@ -15520,6 +16011,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Witlofschotel",
     vanSchaap: [
       "500 g verse makreelfilets",
@@ -15546,6 +16038,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1553659971-f01207815844?w=800&q=80",
     fotoLabel: "Krabkoekjes",
     vanSchaap: [
       "2 blikjes krabstukken 170 g, uitgelekt",
@@ -15583,6 +16076,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Mediterrane heilbot",
     vanSchaap: [
       "600 g heilbotfilet, in 4 stukken",
@@ -15611,6 +16105,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Bretonse mosselen",
     vanSchaap: [
       "4 kg mosselen",
@@ -15641,6 +16136,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gegrilde tongscharfilet",
     vanSchaap: [
       "4 tongscharfilets (600 g)",
@@ -15672,6 +16168,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Tonijn",
     vanSchaap: [
       "4 tonijnsteaks",
@@ -15699,6 +16196,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Nijlbaarsschotel",
     vanSchaap: [
       "600 g nijlbaarsfilet",
@@ -15732,6 +16230,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Kokkels",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -15760,6 +16259,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Roerei",
     vanSchaap: [
       "100 g gerookte makreel",
@@ -15789,6 +16289,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Basisrecept mosselen",
     vanSchaap: [
       "4 kg mosselen",
@@ -15816,6 +16317,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegrilde oesters",
     vanSchaap: [
       "12 verse oesters",
@@ -15841,6 +16343,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Gegrilde groene asperges",
     vanSchaap: [
       "250 g warmgerookte zalmfilet",
@@ -15870,6 +16373,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Garnalen broodschuitjes",
     vanSchaap: [
       "500 g Roze garnalen, of andere naar keuze",
@@ -15908,6 +16412,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Brandade van heek",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -15943,6 +16448,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Waterzooi van vis en lentegroenten",
     vanSchaap: [
       "300 g zalmfilet, in 4 stukken",
@@ -15972,6 +16478,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Hollandse garnalen",
     vanSchaap: [
       "250 g Hollandse garnalen",
@@ -16005,6 +16512,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Paëlla",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -16040,6 +16548,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Gerookte en gestoomde makreel",
     vanSchaap: [
       "Verse makreel (vraag Aldert naar de dagselectie)",
@@ -16074,6 +16583,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Fusion tonijn niçoise salade",
     vanSchaap: [
       "4 tonijnbiefstukjes van 75 g",
@@ -16115,6 +16625,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Gevulde zalmforel",
     vanSchaap: [
       "2 dikke stukken zalmforel met vel van elk 500 g",
@@ -16145,6 +16656,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Hollandse garnalencocktail",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -16172,6 +16684,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Hollandse garnaaltjes",
     vanSchaap: [
       "400 gram Hollandse garnaaltjes",
@@ -16202,6 +16715,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalm",
     vanSchaap: [
       "500 g zalmfilet",
@@ -16236,6 +16750,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1644784643137-b9073dd262f6?w=800&q=80",
     fotoLabel: "Zeebaars",
     vanSchaap: [
       "Verse zeebaars (vraag Aldert naar de dagselectie)",
@@ -16264,6 +16779,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=800&q=80",
     fotoLabel: "Gestoofde forel",
     vanSchaap: [
       "4 stukken forelfilet (150 g)",
@@ -16292,6 +16808,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Dutchy Club Sandwich",
     vanSchaap: [
       "3 haringen",
@@ -16324,6 +16841,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Koolvis",
     vanSchaap: [
       "4 koolvisfilets",
@@ -16353,6 +16871,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Garnalenomelet",
     vanSchaap: [
       "250 g Hollandse garnalen",
@@ -16386,6 +16905,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Scholfiletsandwich",
     vanSchaap: [
       "8 dubbele scholfilets",
@@ -16419,6 +16939,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Sprotjes",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -16447,6 +16968,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Wijting",
     vanSchaap: [
       "4 wijtingfilets à 150 g",
@@ -16476,6 +16998,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Fish pie",
     vanSchaap: [
       "600 g wijtingfilet",
@@ -16509,6 +17032,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gemarineerde zeeduivelspiesen",
     vanSchaap: [
       "600 g zeeduivelfilet",
@@ -16535,6 +17059,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1585769448445-efca2df879e6?w=800&q=80",
     fotoLabel: "Sardines uit de oven",
     vanSchaap: [
       "800 g schoongemaakte sardines",
@@ -16564,6 +17089,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Salade",
     vanSchaap: [
       "4 zoute haringen (Hollandse nieuwe), in stukjes",
@@ -16595,6 +17121,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Pittige tilapia",
     vanSchaap: [
       "400 g tilapiafilet",
@@ -16625,6 +17152,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Poké bowl",
     vanSchaap: [
       "300 g gerookte Alaska zalm in plakken",
@@ -16667,6 +17195,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Garnalencocktail",
     vanSchaap: [
       "150 g gepelde Hollandse garnalen",
@@ -16700,6 +17229,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Snelle makreelmousse",
     vanSchaap: [
       "1 grote gerookte makreel (± 400 g)",
@@ -16727,6 +17257,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Crostini",
     vanSchaap: [
       "250 g gerookte heilbotfilet",
@@ -16755,6 +17286,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Zeeduivel",
     vanSchaap: [
       "600 g zeeduivel, in 4 stukken",
@@ -16781,6 +17313,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Tonijncarpaccio",
     vanSchaap: [
       "400 gram verse tonijn",
@@ -16805,6 +17338,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Visnuggets en worteltjes",
     vanSchaap: [
       "400 g diepvries kabeljauwfilet (MSC), ontdooid en in stukken van 4 cm",
@@ -16836,6 +17370,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Zeeuwse waterzooi",
     vanSchaap: [
       "2 kg mosselen",
@@ -16869,6 +17404,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Hollandse bloemkoolsoep",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -16898,6 +17434,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken schol",
     vanSchaap: [
       "6 scholfilets (ongeveer 500 g)",
@@ -16925,6 +17462,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1585769448445-efca2df879e6?w=800&q=80",
     fotoLabel: "Geroosterde sardines",
     vanSchaap: [
       "500 g sardines, schoongemaakt",
@@ -16953,6 +17491,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Ceviche van schar",
     vanSchaap: [
       "350 g scharfilet",
@@ -16987,6 +17526,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Forel",
     vanSchaap: [
       "1 dik stuk zalmforelfilet van 600-800 g, op kamertemperatuur",
@@ -17020,6 +17560,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Puur mosselen",
     vanSchaap: [
       "4 kg verse mosselen",
@@ -17046,6 +17587,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tong",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -17074,6 +17616,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Garnalenrisotto",
     vanSchaap: [
       "1 kg grote garnalen: diepvries, maat 8/12 easy peel, verkrijgbaar bij de visdetaillist",
@@ -17107,6 +17650,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "Langoustineroomsoep",
     vanSchaap: [
       "16 middelgrote langoustines",
@@ -17138,6 +17682,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Tartaar van heilbot en tonijn",
     vanSchaap: [
       "250 gram verse heilbot",
@@ -17171,6 +17716,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "Spring rolls",
     vanSchaap: [
       "1 gekookte kreeft, in reepjes",
@@ -17208,6 +17754,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Thaise mosselen",
     vanSchaap: [
       "2 kg mosselen",
@@ -17236,6 +17783,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Tarbot en papillotte",
     vanSchaap: [
       "4 tarbotfilets à 150 g",
@@ -17273,6 +17821,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Caesar salade",
     vanSchaap: [
       "4 zoute haringen (Hollandse Nieuwe)",
@@ -17304,6 +17853,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Glasblazersharing",
     vanSchaap: [
       "10 zoute haringen, schoongemaakt",
@@ -17334,6 +17884,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Geroosterde zeewolf",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -17362,6 +17913,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Schelvis",
     vanSchaap: [
       "600 g schelvisfilet, in 4-8 stukken",
@@ -17392,6 +17944,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1644784643137-b9073dd262f6?w=800&q=80",
     fotoLabel: "Zeebaarsfilet uit de airfryer",
     vanSchaap: [
       "4 zeebaarsfilets van 150 g",
@@ -17429,6 +17982,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Sliptong",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -17463,6 +18017,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Bisque van garnalen, bintjesaardappel, spitskool e",
     vanSchaap: [
       "250 g Hollandse garnalen (ongepeld)",
@@ -17500,6 +18055,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Mini spiesjes voor bij de borrel",
     vanSchaap: [
       "8 chili garnalen",
@@ -17523,6 +18079,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Grietfilet",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -17552,6 +18109,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Zwaardvis",
     vanSchaap: [
       "500 g zwaardvis, in stukken",
@@ -17582,6 +18140,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Schelvis spaghetti carbonara",
     vanSchaap: [
       "500 g schelvisfilet",
@@ -17617,6 +18176,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haringsalade",
     vanSchaap: [
       "2 zoute haringen",
@@ -17646,6 +18206,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalm en krab cheesecake",
     vanSchaap: [
       "100 g gerookte zalm",
@@ -17686,6 +18247,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Hartige tonijnstrudel",
     vanSchaap: [
       "450 g tonijnfilet",
@@ -17721,6 +18283,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Salade van gerookte krieltjes, zuurkool en Holland",
     vanSchaap: [
       "250 g gekookte schone Hollandse garnalen.",
@@ -17753,6 +18316,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Saucijzenbroodje",
     vanSchaap: [
       "200 g gerookte palingfilets",
@@ -17778,6 +18342,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Makreel traybake",
     vanSchaap: [
       "3 verse makreelfilets à 150 g afgespoeld en drooggedept",
@@ -17808,6 +18373,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Bagel",
     vanSchaap: [
       "125 g gerookte heilbotfilet",
@@ -17833,6 +18399,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Pittige lekkerbek",
     vanSchaap: [
       "4 lekkerbekjes",
@@ -17859,6 +18426,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond", "Zomers", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Pasta",
     vanSchaap: [
       "100 g Noordzeegarnaaltjes",
@@ -17886,6 +18454,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Sliptong",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -17921,6 +18490,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Taco’s",
     vanSchaap: [
       "700 g zeeduivel in repen gesneden",
@@ -17957,6 +18527,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gestoomde scheermes",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -17984,6 +18555,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Paprika's gevuld",
     vanSchaap: [
       "2 blikjes tonijn op olie (à 180 g)",
@@ -18013,6 +18585,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1644784643137-b9073dd262f6?w=800&q=80",
     fotoLabel: "Gegrilde zeebaarsfilet",
     vanSchaap: [
       "4 zeebaarsfilets met huid van 150 g",
@@ -18042,6 +18615,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Pilau",
     vanSchaap: [
       "350 g gerookte/ gestoomde makreelfilets",
@@ -18073,6 +18647,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegratineerde heekfilet",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -18098,6 +18673,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalmtaartje",
     vanSchaap: [
       "4 zalmfilets",
@@ -18126,6 +18702,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Gevulde eieren",
     vanSchaap: [
       "50 gram warm gerookte zalm",
@@ -18155,6 +18732,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Visclafoutis",
     vanSchaap: [
       "500 g visfilet (zeewolf, zalm en/of kabeljauw) – in blokjes",
@@ -18184,6 +18762,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Spaanse viskoekjes",
     vanSchaap: [
       "650 g wijtingfilet",
@@ -18215,6 +18794,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Rogvleugel",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -18245,6 +18825,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Garnalentostada",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -18271,6 +18852,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegratineerde mesheften",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -18304,6 +18886,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalm teriyaki",
     vanSchaap: [
       "600 g zalmfilet zonder huid, in 4 stukken",
@@ -18342,6 +18925,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Pizza frutti di mare",
     vanSchaap: [
       "200 g inktvisringen",
@@ -18376,6 +18960,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Doradefilet",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -18409,6 +18994,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Crostini",
     vanSchaap: [
       "200 g gerookte paling",
@@ -18438,6 +19024,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Blinisandwich",
     vanSchaap: [
       "4 zoute haringen, schoongemaakt",
@@ -18468,6 +19055,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gefrituurde calamares",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -18497,6 +19085,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Garnalentaartje",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -18526,6 +19115,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Sardientjes van de barbecue",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -18555,6 +19145,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Sushi bowl",
     vanSchaap: [
       "4 haringen",
@@ -18591,6 +19182,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=800&q=80",
     fotoLabel: "Forel",
     vanSchaap: [
       "2 forellen, panklaar",
@@ -18620,6 +19212,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Hollandse komkommer gazpacho",
     vanSchaap: [
       "150 g Hollandse garnalen",
@@ -18659,6 +19252,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Pastasalade",
     vanSchaap: [
       "1 blikje rode zalm 213 g, uitgelekt (vel en graten evt. verwijderen)",
@@ -18690,6 +19284,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1585769448445-efca2df879e6?w=800&q=80",
     fotoLabel: "Geroosterde sardientjes",
     vanSchaap: [
       "12-16 verse sardines,",
@@ -18720,6 +19315,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Gegrilde tonijn",
     vanSchaap: [
       "4 tonijnmoten (à 175 g)",
@@ -18749,6 +19345,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Gegrilde makreel",
     vanSchaap: [
       "1 hele makreel (vers)",
@@ -18777,6 +19374,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Krokante zalmfilet",
     vanSchaap: [
       "4 zalmfilets à 125 g",
@@ -18811,6 +19409,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Komkommer",
     vanSchaap: [
       "2 zoute haringen, in smalle reepjes",
@@ -18834,6 +19433,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Zachtgegaarde rode mul",
     vanSchaap: [
       "4 rode mulfilets",
@@ -18866,6 +19466,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Mediterrane kibbeling",
     vanSchaap: [
       "500 gram kibbeling",
@@ -18894,6 +19495,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Pittige zeewolfsaté",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -18928,6 +19530,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Couscous",
     vanSchaap: [
       "300 g verse makreelfilets",
@@ -18960,6 +19563,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "Spaanse rijst",
     vanSchaap: [
       "24 langoustines, op kamertemperatuur",
@@ -18992,6 +19596,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Gebakken makreel",
     vanSchaap: [
       "4 makreelfilets",
@@ -19030,6 +19635,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauwschotel",
     vanSchaap: [
       "600 g kabeljauwfilet",
@@ -19060,6 +19666,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Poké burrito",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -19106,6 +19713,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=800&q=80",
     fotoLabel: "Gegrilde forel",
     vanSchaap: [
       "2 forellen",
@@ -19139,6 +19747,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Coquilles crudo, jalapeños, yuzu",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -19173,6 +19782,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Temari sushi topped",
     vanSchaap: [
       "2 haringen",
@@ -19202,6 +19812,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=800&q=80",
     fotoLabel: "Forel",
     vanSchaap: [
       "4 forellen van ± 400 g",
@@ -19230,6 +19841,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Roergebakken pangasius",
     vanSchaap: [
       "3 el oestersaus",
@@ -19259,6 +19871,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gegratineerde tilapiaschotel",
     vanSchaap: [
       "600 g tilapiafilet",
@@ -19291,6 +19904,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Thaise tonijnsalade",
     vanSchaap: [
       "2 tonijnsteaks",
@@ -19325,6 +19939,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "Langoustine cassoulet",
     vanSchaap: [
       "20 langoustines",
@@ -19366,6 +19981,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1553659971-f01207815844?w=800&q=80",
     fotoLabel: "Krab",
     vanSchaap: [
       "200 g krabvlees",
@@ -19399,6 +20015,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Zomers", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Asperges",
     vanSchaap: [
       "250 g Hollandse garnalen",
@@ -19426,6 +20043,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Bretonse vistaart",
     vanSchaap: [
       "4 scholfilets, in reepjes",
@@ -19463,6 +20081,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegrilde poon",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -19499,6 +20118,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tong",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -19530,6 +20150,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Koude waterkerssoep",
     vanSchaap: [
       "100 g Hollandse garnalen",
@@ -19559,6 +20180,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Bouillabaisse",
     vanSchaap: [
       "600 g verse witvisfilet, in stukken (bv. wijting, rode poon, kabeljauw, zeebaars, schol etc.)",
@@ -19594,6 +20216,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Courgetterisotto",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -19625,6 +20248,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Zilte bietensalade",
     vanSchaap: [
       "100 g Hollandse garnalen",
@@ -19661,6 +20285,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Schelvispaella",
     vanSchaap: [
       "500 g schelvisfilet",
@@ -19698,6 +20323,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegratineerde scholrolletjes",
     vanSchaap: [
       "6 scholfilets à 100 g",
@@ -19726,6 +20352,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haring-aardappelsalade",
     vanSchaap: [
       "6 gefileerde nieuwe haringen",
@@ -19760,6 +20387,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauwschotel",
     vanSchaap: [
       "600 g kabeljauwfilet",
@@ -19792,6 +20420,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Mediterrane tilapiastoofpot",
     vanSchaap: [
       "300 g tilapiafilet (ASC), in stukken van 4 cm",
@@ -19824,6 +20453,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "Pappardelle",
     vanSchaap: [
       "400 g rivierkreeftjes",
@@ -19855,6 +20485,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1550942356-fcfc6eba2acb?w=800&q=80",
     fotoLabel: "Griekse boerensalade",
     vanSchaap: [
       "500 g pijlinktvisjes (ca. 10 stuks van 20 cm)",
@@ -19892,6 +20523,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1550942356-fcfc6eba2acb?w=800&q=80",
     fotoLabel: "Thaise rode pijlinktvis curry",
     vanSchaap: [
       "600 g pijlinktvis, schoongemaakt - 400 g voor lunchgerecht",
@@ -19920,6 +20552,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalmbonbon",
     vanSchaap: [
       "200 g gerookte zalmfilet",
@@ -19952,6 +20585,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Ceviche van griet",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -19990,6 +20624,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegrilde tong",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -20023,6 +20658,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Okonomiyaky",
     vanSchaap: [
       "500 g verse makreelfilets",
@@ -20059,6 +20695,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Gerookte paling",
     vanSchaap: [
       "4 gerookte palingfilets",
@@ -20087,6 +20724,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gestoomde scharrolletjes",
     vanSchaap: [
       "8-12 hele scharfilets",
@@ -20117,6 +20755,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gestoomde heilbotfilet",
     vanSchaap: [
       "4 stukken heilbotfilet van 200 g",
@@ -20146,6 +20785,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Spaanse mosselen uit de wok",
     vanSchaap: [
       "2 kg mosselen",
@@ -20174,6 +20814,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegratineerde oesters",
     vanSchaap: [
       "12 oesters",
@@ -20209,6 +20850,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Warme garnalenpasteitjes",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -20240,6 +20882,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Dutch Treat",
     vanSchaap: [
       "2 haringfilets",
@@ -20273,6 +20916,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Schelvis",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -20301,6 +20945,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Pakketje",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -20335,6 +20980,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Gebakken kabeljauwfilet",
     vanSchaap: [
       "4 kabeljauwfilets met huid à 150 g",
@@ -20363,6 +21009,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Dorade",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -20396,6 +21043,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Mediterrane wijtingsoep",
     vanSchaap: [
       "300 g wijtingfilet, in 8 stukken",
@@ -20428,6 +21076,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken rogvleugel",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -20459,6 +21108,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haring",
     vanSchaap: [
       "Verse haring (vraag Aldert naar de dagselectie)",
@@ -20488,6 +21138,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Gerookte paling",
     vanSchaap: [
       "200 gram gerookte palingfilet",
@@ -20514,6 +21165,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Mousse van witvis",
     vanSchaap: [
       "500 g gare witvis, zonder graten en vel vb. kabeljauw, koolvis, tilapia of pangasiusfilet",
@@ -20559,6 +21211,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Diverse vissoorten",
     vanSchaap: [
       "100 g zeekraal of lamsoren",
@@ -20589,6 +21242,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Provençaalse casserole",
     vanSchaap: [
       "600-800 g (diepvries) snoekbaarsfilet",
@@ -20619,6 +21273,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Makreel linzenstoof",
     vanSchaap: [
       "400 g verse makreelfilets",
@@ -20650,6 +21305,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Salade",
     vanSchaap: [
       "4 scholfilets",
@@ -20682,6 +21338,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Mediterrane mosselen uit de wok",
     vanSchaap: [
       "2 kg panklare mosselen",
@@ -20709,6 +21366,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Roerbak van pangasius",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -20739,6 +21397,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Asperge-visfestijn",
     vanSchaap: [
       "150 gr. gerookte zalm, in stukjes gesneden",
@@ -20767,6 +21426,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1644784643137-b9073dd262f6?w=800&q=80",
     fotoLabel: "Zeebaarsfilet",
     vanSchaap: [
       "4 zeebaarsfilets met huid (ca. 150 g per stuk)",
@@ -20795,6 +21455,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken koolvis",
     vanSchaap: [
       "600 g koolvisfilets",
@@ -20824,6 +21485,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tong alla puttanesca",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -20864,6 +21526,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Rogvleugelfilet",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -20892,6 +21555,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Thaise currysoep",
     vanSchaap: [
       "100 g Hollandse garnalen",
@@ -20932,6 +21596,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Rolletjes van tongschar",
     vanSchaap: [
       "8 tongscharfilets",
@@ -20961,6 +21626,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Palingsalade",
     vanSchaap: [
       "200 g gerookte paling",
@@ -20994,6 +21660,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gegrilde scharfilet",
     vanSchaap: [
       "600 g scharfilets",
@@ -21022,6 +21689,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Coquilles",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -21049,6 +21717,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Gemarineerde tonijn",
     vanSchaap: [
       "4 stukken tonijnfilet à 125 g",
@@ -21078,6 +21747,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Kabeljauw ovenpakketje",
     vanSchaap: [
       "600 g kabeljauw, in 6 stukken",
@@ -21118,6 +21788,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Ovenschotel van makreel en aubergine",
     vanSchaap: [
       "Verse makreel (vraag Aldert naar de dagselectie)",
@@ -21149,6 +21820,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauw",
     vanSchaap: [
       "800 g kabeljauwfilet met vel en graat",
@@ -21190,6 +21862,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Spaghetti makreel carbonara",
     vanSchaap: [
       "350 g gerookte/ gestoomde makreelfilets",
@@ -21221,6 +21894,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Zeebaars",
     vanSchaap: [
       "2 zeebaars filets",
@@ -21262,6 +21936,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Bao buns",
     vanSchaap: [
       "4 nieuwe haringen, schoongemaakt",
@@ -21291,6 +21966,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1644784643137-b9073dd262f6?w=800&q=80",
     fotoLabel: "Wilde zeebaars",
     vanSchaap: [
       "1 wilde zeebaarsfilet",
@@ -21323,6 +21999,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Crunchy Herring",
     vanSchaap: [
       "4 haringfilets",
@@ -21351,6 +22028,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Groentetagliatelle",
     vanSchaap: [
       "2 moten zalm à 150 g",
@@ -21382,6 +22060,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Thaise vissoep",
     vanSchaap: [
       "600 g kabeljauw in middelgrote stukken",
@@ -21416,6 +22095,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Oosterse ovenschotel",
     vanSchaap: [
       "700 g kabeljauwfilet",
@@ -21451,6 +22131,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Zarzuela",
     vanSchaap: [
       "350 g kabeljauw",
@@ -21487,6 +22168,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Broodje makreel",
     vanSchaap: [
       "300 g gestoomde makreel",
@@ -21516,6 +22198,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Pittig gepaneerde scholfilets",
     vanSchaap: [
       "4 gefileerde schollen (à 250 g)",
@@ -21545,6 +22228,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Rauw gemarineerde coquilles",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -21572,6 +22256,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1644784643137-b9073dd262f6?w=800&q=80",
     fotoLabel: "Zeebaars",
     vanSchaap: [
       "1 hele zeebaars van ± 1 kg",
@@ -21607,6 +22292,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Zeewolftaartje",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -21634,6 +22320,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Originele tonijn Clubsandwich",
     vanSchaap: [
       "500 g (diepvries) witte tonijnsteaks, ontdooid en gegaard in olijfolie met verse kruiden, gemalen peper en zeezout",
@@ -21667,6 +22354,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Garnalencocktail a la Marocain",
     vanSchaap: [
       "250 g Hollandse garnalen",
@@ -21697,6 +22385,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauw",
     vanSchaap: [
       "400g kabeljauw",
@@ -21728,6 +22417,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalm Umami",
     vanSchaap: [
       "400 g verse zalmfilet",
@@ -21754,6 +22444,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Sandwich",
     vanSchaap: [
       "1 verse makreelfilet (ca. 100 g) met vel",
@@ -21787,6 +22478,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Hollandse Nieuwe",
     vanSchaap: [
       "2 sjalotten",
@@ -21830,6 +22522,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tongrolletjes",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -21867,6 +22560,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Tarbotfilet",
     vanSchaap: [
       "4 tarbotfilets met huid van 150 g",
@@ -21897,6 +22591,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Witte aspergesalade",
     vanSchaap: [
       "250 g Hollandse garnalen",
@@ -21925,6 +22620,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Visclafoutis",
     vanSchaap: [
       "500 g visfilet, in blokjes",
@@ -21956,6 +22652,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Hollandse garnalen, mousseline van bier en asperge",
     vanSchaap: [
       "400 gram Hollandse garnalen",
@@ -21987,6 +22684,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Zeetong",
     vanSchaap: [
       "1 blikje ansjovisfilets",
@@ -22015,6 +22713,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Pompoen-erwtensoep",
     vanSchaap: [
       "150 g gerookte zalm, in stukjes",
@@ -22050,6 +22749,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "BBQ langoustines",
     vanSchaap: [
       "12 - 16 langoustines",
@@ -22083,6 +22783,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gebakken tilapia",
     vanSchaap: [
       "4 tilapiafilets à 125 g",
@@ -22115,6 +22816,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=800&q=80",
     fotoLabel: "Gegrilde gerookte forel",
     vanSchaap: [
       "4 forellen",
@@ -22157,6 +22859,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Tonijnsalade",
     vanSchaap: [
       "1 blikje tonijn op water of olie",
@@ -22184,6 +22887,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Indiase rijstsalade",
     vanSchaap: [
       "1 gerookte makreel van ca. 400 g",
@@ -22212,6 +22916,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Sliptong",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -22243,6 +22948,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Paprika",
     vanSchaap: [
       "1 blikje wilde rode zalm 213 g, uitgelekt (evt. vel en graten verwijderen)",
@@ -22274,6 +22980,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauw",
     vanSchaap: [
       "4 moten kabeljauwfilet zonder huid",
@@ -22309,6 +23016,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Makreeltosti",
     vanSchaap: [
       "2 blikjes gerookte makreelfilets in zonnebloemolie (à 145 g)",
@@ -22333,6 +23041,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Schelvis",
     vanSchaap: [
       "400 g schelvisfilet met huid, in 4 gelijke stukken",
@@ -22362,6 +23071,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalm",
     vanSchaap: [
       "4 stukken zalmfilet (à 125 g)",
@@ -22391,6 +23101,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Zeeduivelpakketjes",
     vanSchaap: [
       "600 g zeeduivelfilet 12 stukjes a 50 g",
@@ -22423,6 +23134,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Koolvispakketjes",
     vanSchaap: [
       "4 stukken koolvisfilet",
@@ -22454,6 +23166,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Tonijnspiesen",
     vanSchaap: [
       "500 g verse tonijn, in blokjes",
@@ -22478,6 +23191,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "Langoustinecocktail",
     vanSchaap: [
       "1 pak diepvries langoustines (16-20 stuks), ontdooid",
@@ -22506,6 +23220,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Stoom-gerookte rode poon",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -22534,6 +23249,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Clamshowder",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -22566,6 +23282,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalmcadeautje",
     vanSchaap: [
       "4 mootjes zalm à 120 g",
@@ -22606,6 +23323,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauw",
     vanSchaap: [
       "2 kabeljauwhaasjes met huid",
@@ -22650,6 +23368,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Gamba's",
     vanSchaap: [
       "12 grote gamba’s, rauw en gepeld",
@@ -22677,6 +23396,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Pastasalade",
     vanSchaap: [
       "150 g gerookte paling",
@@ -22702,6 +23422,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gestoomde oesters",
     vanSchaap: [
       "12 oesters",
@@ -22727,6 +23448,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Tapasspiesje",
     vanSchaap: [
       "1 zak gamba’s (16-20 stuks), ontdooid",
@@ -22752,6 +23474,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gebakken meerval",
     vanSchaap: [
       "2 meervalfilets van 150 g",
@@ -22777,6 +23500,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Pasta",
     vanSchaap: [
       "300 g Hollandse garnalen",
@@ -22807,6 +23531,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Melanzane alla parmigiana con pesce",
     vanSchaap: [
       "700 g kabeljauwfilet",
@@ -22843,6 +23568,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "American Chowder",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -22878,6 +23604,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalm-groente-pakketje",
     vanSchaap: [
       "4 moten zalmfilet",
@@ -22904,6 +23631,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Roergebakken tilapia",
     vanSchaap: [
       "300 g tilapiafilets",
@@ -22932,6 +23660,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Knapperige bakjes",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -22961,6 +23690,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Pittige paksoi",
     vanSchaap: [
       "400 g koolvisfilets",
@@ -22990,6 +23720,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Mosselsamosa",
     vanSchaap: [
       "1 kg mosselen",
@@ -23016,6 +23747,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken scholfilet",
     vanSchaap: [
       "3 scholfilets à 100 g",
@@ -23044,6 +23776,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken tong",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -23080,6 +23813,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken dorade",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -23114,6 +23848,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "Gegrilde langoustines",
     vanSchaap: [
       "10 langoustines",
@@ -23143,6 +23878,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Makreelquiche",
     vanSchaap: [
       "1 gerookte makreel (ca. 400 g)",
@@ -23172,6 +23908,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Vol au vent",
     vanSchaap: [
       "500 g kabeljauwfilet of een andere witvis, in grove stukken gesneden",
@@ -23208,6 +23945,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauwschotel",
     vanSchaap: [
       "600 g kabeljauwfilet",
@@ -23242,6 +23980,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Garnalencocktail",
     vanSchaap: [
       "100 g Hollandse garnalen",
@@ -23273,6 +24012,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Mini pizzaatjes",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -23302,6 +24042,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Salade van gemarineerde paling",
     vanSchaap: [
       "200 g gerookte paling",
@@ -23328,6 +24069,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Tonijncarpaccio",
     vanSchaap: [
       "250 g tonijnfilet (stuk, sushi-kwaliteit)",
@@ -23355,6 +24097,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Italiaanse bol",
     vanSchaap: [
       "4 gerookte makreelfilets",
@@ -23380,6 +24123,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Zeeduivel",
     vanSchaap: [
       "600 g zeeduivelfilet",
@@ -23409,6 +24153,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Roodbaars",
     vanSchaap: [
       "4 roodbaarsfilets (à 150 g)",
@@ -23443,6 +24188,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Mini-omeletten",
     vanSchaap: [
       "1 gerookte makreel of filets, ontdaan van vel en graten",
@@ -23472,6 +24218,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Broodje makreelmousse",
     vanSchaap: [
       "1 gerookte makreel",
@@ -23498,6 +24245,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "BBQ makreel",
     vanSchaap: [
       "600 g verse makreelfilet",
@@ -23529,6 +24277,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegratineerde oesters",
     vanSchaap: [
       "12 Zeeuwse oesters",
@@ -23555,6 +24304,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Tilapia",
     vanSchaap: [
       "300-400 g tilapiafilet",
@@ -23585,6 +24335,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Rolletjes van schol",
     vanSchaap: [
       "400 g scholfilet",
@@ -23618,6 +24369,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Filodeegpakketje",
     vanSchaap: [
       "4 stukken (diepvries) kabeljauwfilet, van 100 g",
@@ -23646,6 +24398,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Dorade",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -23686,6 +24439,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gegrilde zeeduivel",
     vanSchaap: [
       "500 g zeeduivel filet",
@@ -23725,6 +24479,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Crostini",
     vanSchaap: [
       "1 kuipje vispaté tonijn of een van de andere smaken vispaté 125 g",
@@ -23750,6 +24505,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Springrolls",
     vanSchaap: [
       "1 gerookte/ gestoomde makreelfilet",
@@ -23780,6 +24536,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Zeeduivel",
     vanSchaap: [
       "400 gram zeeduivel (dik stuk, zonder vel)",
@@ -23809,6 +24566,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "Pappardelle",
     vanSchaap: [
       "28 langoustines",
@@ -23841,6 +24599,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gebakken mulfilet",
     vanSchaap: [
       "8 mulfilets à 60-75 g",
@@ -23867,6 +24626,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken scholfilet",
     vanSchaap: [
       "600 g scholfilet",
@@ -23897,6 +24657,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Spaghetti fruits de mer",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -23928,6 +24689,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Mini hartige taart",
     vanSchaap: [
       "200 g mulfilet, in stukjes",
@@ -23962,6 +24724,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Herring Hawaï Style",
     vanSchaap: [
       "3 haringfilets, in stukjes",
@@ -23993,6 +24756,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Tortillarolletjes",
     vanSchaap: [
       "100 gram gerookte palingfilet",
@@ -24017,6 +24781,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gebakken tongschar",
     vanSchaap: [
       "4 kleine tongscharren of 2 grote, schoongemaakt",
@@ -24050,6 +24815,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Thaise roerbak",
     vanSchaap: [
       "500 g (diepvries) ongepelde reuzengarnalen",
@@ -24082,6 +24848,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Hele mul uit de oven",
     vanSchaap: [
       "2 hele mullen, schoongemaakt",
@@ -24106,6 +24873,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Gegrilde tonijn",
     vanSchaap: [
       "4 tonijnsteaks van 150 g",
@@ -24134,6 +24902,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Sandwich",
     vanSchaap: [
       "Verse tonijn (vraag Aldert naar de dagselectie)",
@@ -24163,6 +24932,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Oosterse tijgergarnalen",
     vanSchaap: [
       "500 g (diepvries) gepelde tijgergarnalen, ontdooid",
@@ -24193,6 +24963,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Knolselderijsoep",
     vanSchaap: [
       "150 g Hollandse garnalen",
@@ -24219,6 +24990,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1585769448445-efca2df879e6?w=800&q=80",
     fotoLabel: "Pissaladière",
     vanSchaap: [
       "1-2 blikjes ansjovis in olijfolie 50 g",
@@ -24250,6 +25022,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Poon",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -24280,6 +25053,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Pizza",
     vanSchaap: [
       "200 g witvis, kabeljauw, zeebaars, wijting of schelvis",
@@ -24307,6 +25081,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Scholfilet",
     vanSchaap: [
       "300 g scholfilet",
@@ -24335,6 +25110,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Thaise viscakejes",
     vanSchaap: [
       "250 g kabeljauwfilet",
@@ -24365,6 +25141,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Krokante palingburger",
     vanSchaap: [
       "200 g gerookte palingfilets",
@@ -24391,6 +25168,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gesmoorde wijting",
     vanSchaap: [
       "600 g wijtingfilet, in 4 stukken",
@@ -24422,6 +25200,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Makreel hutspot uit de oven",
     vanSchaap: [
       "250 g gerookte makreelfilet, in stukjes",
@@ -24456,6 +25235,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Mediterrane barbecue roerbak",
     vanSchaap: [
       "500 g verse tonijn",
@@ -24486,6 +25266,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Andijviestamppotje",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -24515,6 +25296,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Salade",
     vanSchaap: [
       "100 g rivierkreeftjes",
@@ -24555,6 +25337,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haringsalade",
     vanSchaap: [
       "4 schoongemaakte haringen",
@@ -24590,6 +25373,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauwhaasje",
     vanSchaap: [
       "4 stukjes kabeljauwhaasje van 80 tot 100 gram",
@@ -24625,6 +25409,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "Langoustines",
     vanSchaap: [
       "20 langoustines",
@@ -24657,6 +25442,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Meerval uit de oven",
     vanSchaap: [
       "300 gram meervalfilet",
@@ -24684,6 +25470,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Scholfilet à la meunière",
     vanSchaap: [
       "500 g scholfilet",
@@ -24723,6 +25510,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kibbeling van heek",
     vanSchaap: [
       "300 ml bruisend mineraalwater",
@@ -24752,6 +25540,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gepocheerde tongrolletjes",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -24785,6 +25574,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Vispaella",
     vanSchaap: [
       "1 blik tonijnstukken met groenten 185 gram",
@@ -24818,6 +25608,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Salade",
     vanSchaap: [
       "2 tonijnsteaks",
@@ -24846,6 +25637,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Ceviche van coquilles",
     vanSchaap: [
       "30 g zalmeitjes",
@@ -24878,6 +25670,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken pangasius",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -24909,6 +25702,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gegratineerde coquilles",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -24943,6 +25737,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Coquille",
     vanSchaap: [
       "100 g gerookte paling",
@@ -24976,6 +25771,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Carpaccio van gerookte heilbot",
     vanSchaap: [
       "150 g gerookte heilbot",
@@ -25002,6 +25798,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tong 'Wellington'",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -25032,6 +25829,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Spaghetti",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -25064,6 +25862,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Poké bowl",
     vanSchaap: [
       "300 gr verse tonijn",
@@ -25099,6 +25898,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Italiaanse vissoep",
     vanSchaap: [
       "400 g kabeljauw, eventueel diepvries",
@@ -25131,6 +25931,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Dorade",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -25161,6 +25962,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Garnalenkroketjes",
     vanSchaap: [
       "175 g Hollandse garnalen",
@@ -25193,6 +25995,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Dorade",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -25224,6 +26027,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Gepofte aardappel",
     vanSchaap: [
       "150 g Hollandse garnalen",
@@ -25252,6 +26056,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Snoekbaars",
     vanSchaap: [
       "500 g snoekbaarsfilet met vel (geschubd)",
@@ -25284,6 +26089,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Mini quichepuntjes",
     vanSchaap: [
       "100 g Hollandse garnalen",
@@ -25311,6 +26117,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Tarbot",
     vanSchaap: [
       "4 dikke stukken tarbotfilet van 150 g",
@@ -25344,6 +26151,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Scholrolletjes",
     vanSchaap: [
       "4 halve ontvelde scholfilets",
@@ -25372,6 +26180,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Wrap",
     vanSchaap: [
       "100-200 g Hollandse garnalen",
@@ -25400,6 +26209,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Fish and chips Asian style",
     vanSchaap: [
       "600 g kabeljauw, in grove stukken gesneden",
@@ -25428,6 +26238,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Gebakken kabeljauwfilet",
     vanSchaap: [
       "600 g kabeljauwfilet",
@@ -25457,6 +26268,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegrilde schol",
     vanSchaap: [
       "4 schollen",
@@ -25485,6 +26297,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Massala-tilapiapakketje",
     vanSchaap: [
       "4 tilapiafilets van 150 g",
@@ -25520,6 +26333,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauw",
     vanSchaap: [
       "400 g kabeljauwhaas, in 4 á 5 gelijke stukjes gesneden",
@@ -25555,6 +26369,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Aspergesoufflé",
     vanSchaap: [
       "250 g Hollandse garnalen",
@@ -25584,6 +26399,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1550942356-fcfc6eba2acb?w=800&q=80",
     fotoLabel: "Gevulde pijlinktvis",
     vanSchaap: [
       "4 schoongemaakte pijlinktvissen, tentakels niet weg doen, maar snijd die fijn",
@@ -25622,6 +26438,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Makreelpakketje",
     vanSchaap: [
       "1 gerookte makreel",
@@ -25653,6 +26470,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Pasta",
     vanSchaap: [
       "250 g verse makreelfilet, in stukjes",
@@ -25684,6 +26502,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1553659971-f01207815844?w=800&q=80",
     fotoLabel: "Visflensjes",
     vanSchaap: [
       "250 g surimi krabvleesstukjes",
@@ -25714,6 +26533,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Vispannetje",
     vanSchaap: [
       "600 g tongscharfilet, in stukken",
@@ -25754,6 +26574,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Mediterrane tilapiaroerbak",
     vanSchaap: [
       "250 g tilapiafilet",
@@ -25784,6 +26605,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gebakken mul",
     vanSchaap: [
       "8 mulfilets van ongeveer 120 gram",
@@ -25815,6 +26637,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Mosselspiesjes",
     vanSchaap: [
       "150 g gekookte mosselen",
@@ -25842,6 +26665,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Gegrilleerde zalm",
     vanSchaap: [
       "4 moten zalm (3 cm dik)",
@@ -25873,6 +26697,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Scholrolletjes",
     vanSchaap: [
       "300 g scholfilets",
@@ -25901,6 +26726,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken tongreepjes",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -25937,6 +26763,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haringsandwich",
     vanSchaap: [
       "2 zoute haringen",
@@ -25963,6 +26790,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haringtartaar",
     vanSchaap: [
       "4 zoute haringen",
@@ -25991,6 +26819,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Garnalencocktail",
     vanSchaap: [
       "100 g Hollandse garnalen",
@@ -26021,6 +26850,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Garnalen- en visspiesen",
     vanSchaap: [
       "16 (diepvries) gepelde tijgergarnalen",
@@ -26065,6 +26895,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Clubsandwich",
     vanSchaap: [
       "100 g gerookte zalm (plakjes)",
@@ -26097,6 +26928,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Frisse makreelburger",
     vanSchaap: [
       "4 makreelfilets",
@@ -26126,6 +26958,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haringcrostini",
     vanSchaap: [
       "2 haringen, schoongemaakt",
@@ -26154,6 +26987,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Makreelballetjes",
     vanSchaap: [
       "400 g gerookte makreelfilet",
@@ -26187,6 +27021,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Bruschetta",
     vanSchaap: [
       "3 haringen",
@@ -26215,6 +27050,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gin & Tonic oesters",
     vanSchaap: [
       "12 oesters",
@@ -26242,6 +27078,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Makreel filotaartjes",
     vanSchaap: [
       "4 verse makreelfilets à ca. 150 g - voor lunch- of voorgerecht à 75 - 100 g",
@@ -26272,6 +27109,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegratineerde schol",
     vanSchaap: [
       "4 ontvelde scholfilets (ca. 500 gram)",
@@ -26300,6 +27138,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1585769448445-efca2df879e6?w=800&q=80",
     fotoLabel: "Italiaanse sardines",
     vanSchaap: [
       "600 g sardines, schoongemaakt",
@@ -26329,6 +27168,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalmsoesjes",
     vanSchaap: [
       "150 g gerookte zalmsnippers",
@@ -26360,6 +27200,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Sandwich-spiraaltaart",
     vanSchaap: [
       "450 g warm gerookte visfilet zonder vel - schelvis, zalm, makreel",
@@ -26403,6 +27244,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Miso soep",
     vanSchaap: [
       "300 g zalmfilet, in stukjes",
@@ -26436,6 +27278,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Kruidige sprotjes",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -26471,6 +27314,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Tong",
     vanSchaap: [
       "80 g Hollandse garnalen",
@@ -26507,6 +27351,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Gegratineerde mosselen",
     vanSchaap: [
       "2 kilo gekookte mosselen",
@@ -26540,6 +27385,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Gegrilde tonijn",
     vanSchaap: [
       "4 moten tonijn à 150 g",
@@ -26571,6 +27417,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Gevulde makreel",
     vanSchaap: [
       "Verse makreel (vraag Aldert naar de dagselectie)",
@@ -26601,6 +27448,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Doradefilets",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -26629,6 +27477,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegrilde poon",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -26655,6 +27504,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Salade",
     vanSchaap: [
       "300 g gekookte mosselen",
@@ -26686,6 +27536,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Zilte garnalencocktail",
     vanSchaap: [
       "500 g ongepelde Hollandse garnalen",
@@ -26726,6 +27577,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Enchilada",
     vanSchaap: [
       "750 g kabeljauw, makreel of schelvis",
@@ -26763,6 +27615,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Heek a la Niçoise",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -26798,6 +27651,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Hollandse garnalen",
     vanSchaap: [
       "60 g Hollandse garnalen",
@@ -26829,6 +27683,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Zomers", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Hollandse garnalenpaté",
     vanSchaap: [
       "150 g heilbot of kabeljauwfilet",
@@ -26857,6 +27712,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Mosselen",
     vanSchaap: [
       "4 kg mosselen",
@@ -26885,6 +27741,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauwpakketjes",
     vanSchaap: [
       "4 dikke moten kabeljauw van ca. 150 g",
@@ -26916,6 +27773,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gerookte tongschar",
     vanSchaap: [
       "500 g tongscharfilet met vel",
@@ -26947,6 +27805,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Hollandse garnalen",
     vanSchaap: [
       "50 g Hollandse garnalen",
@@ -26974,6 +27833,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Ravioli gevuld",
     vanSchaap: [
       "2 bakjes grotere garnalen",
@@ -27004,6 +27864,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gefrituurde poon",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -27043,6 +27904,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haringsushi",
     vanSchaap: [
       "2 zoute haringen",
@@ -27071,6 +27933,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tongfilet",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -27101,6 +27964,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1550942356-fcfc6eba2acb?w=800&q=80",
     fotoLabel: "Geroosterde pijlinktvisjes",
     vanSchaap: [
       "500 g pijlinktvisjes (ca. 10 stuks van 20 cm)",
@@ -27126,6 +27990,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Romige kruidenrisotto",
     vanSchaap: [
       "300 g Hollandse garnalen",
@@ -27157,6 +28022,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegrilde rode poon",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -27183,6 +28049,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Wrap",
     vanSchaap: [
       "500 g (diepvries) tonijnsteaks, ontdooid",
@@ -27210,6 +28077,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Krokant gebakken schol",
     vanSchaap: [
       "4 panklare schollen",
@@ -27237,6 +28105,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Schol",
     vanSchaap: [
       "300 g scholfilet of 2 grote panklare schollen",
@@ -27268,6 +28137,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Bootjes van haringsalade",
     vanSchaap: [
       "1 dubbele haringfilet",
@@ -27299,6 +28169,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1550942356-fcfc6eba2acb?w=800&q=80",
     fotoLabel: "Gewokte pijlinktvis",
     vanSchaap: [
       "500 g pijlinktvisjes (ca. 10 stuks van 20 cm)",
@@ -27330,6 +28201,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gestoofde tarbotfilet",
     vanSchaap: [
       "600 g tarbotfilet zonder vel",
@@ -27358,6 +28230,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Doritos viskoekjes",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -27390,6 +28263,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=800&q=80",
     fotoLabel: "Forel boterham",
     vanSchaap: [
       "2 gerookte forellen",
@@ -27419,6 +28293,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Spaans visstoofpannetje",
     vanSchaap: [
       "600 g tarbotfilet zonder vel",
@@ -27450,6 +28325,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Zeeduivelbrochettes",
     vanSchaap: [
       "600 gram zeeduivelfilet",
@@ -27484,6 +28360,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "Gegrilde langoustines",
     vanSchaap: [
       "4 grote langoustines",
@@ -27511,6 +28388,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Omelet wrap",
     vanSchaap: [
       "400 g gerookte makreelfilet, schoongemaakt en in stukjes",
@@ -27544,6 +28422,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haring",
     vanSchaap: [
       "4 schoongemaakte haringen",
@@ -27578,6 +28457,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Wraphapje",
     vanSchaap: [
       "100 g Hollandse garnalen",
@@ -27605,6 +28485,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Tortellinisalade",
     vanSchaap: [
       "200 g gerookte zalm – in repen",
@@ -27633,6 +28514,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Mierikswortelmousse",
     vanSchaap: [
       "150 gram gerookte paling",
@@ -27660,6 +28542,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gebakken wijtingfilet",
     vanSchaap: [
       "600 g wijtingfilets",
@@ -27689,6 +28572,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1585769448445-efca2df879e6?w=800&q=80",
     fotoLabel: "Gegrilde groente en ansjovis bruschetta",
     vanSchaap: [
       "blikje ansjovis op olie",
@@ -27717,6 +28601,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Stifado van vis",
     vanSchaap: [
       "500 g filets van diverse soorten vis, naar keuze bv. kabeljauw, tong, rode mul, makreel",
@@ -27756,6 +28641,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken schol",
     vanSchaap: [
       "600 g scholfilet",
@@ -27788,6 +28674,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Zeewolffilet",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -27826,6 +28713,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Tilapiacurry",
     vanSchaap: [
       "500 g tilapiafilet",
@@ -27855,6 +28743,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalmfilet",
     vanSchaap: [
       "4 zalmfilets (à 150 g)",
@@ -27880,6 +28769,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Paling",
     vanSchaap: [
       "1 kg schoongemaakte stoofaal",
@@ -27916,6 +28806,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "Sliptong",
     vanSchaap: [
       "12 langoustines",
@@ -27963,6 +28854,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Salade Niçoise",
     vanSchaap: [
       "500 g (diepvries) witte tonijnsteaks, ontdooid en in dobbelstenen gesneden",
@@ -27997,6 +28889,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauwkoekjes",
     vanSchaap: [
       "200 g kabeljauwfilet",
@@ -28030,6 +28923,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Venkelrisotto",
     vanSchaap: [
       "250 gram garnalen (om te wokken), ontdooid",
@@ -28059,6 +28953,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Gegrilde kabeljauw",
     vanSchaap: [
       "600 g kabeljauwfilet",
@@ -28091,6 +28986,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Vissoep",
     vanSchaap: [
       "1 kg mosselen, schoongemaakt",
@@ -28127,6 +29023,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalm",
     vanSchaap: [
       "4 dikke stukken à 150 g zalmfilet",
@@ -28162,6 +29059,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegrilde rode poon",
     vanSchaap: [
       "1 takje rozemarijn, naaldjes fijngehakt",
@@ -28194,6 +29092,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Rode poon",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -28228,6 +29127,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Geroosterde schol",
     vanSchaap: [
       "2 panklare schollen",
@@ -28254,6 +29154,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Roergebakken zalm",
     vanSchaap: [
       "300 g zalmfilet",
@@ -28288,6 +29189,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Thaise bouillon",
     vanSchaap: [
       "80 g Hollandse garnalen",
@@ -28320,6 +29222,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Rode poon",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -28360,6 +29263,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Hartige no-bake cheesecake",
     vanSchaap: [
       "100 g garnalen",
@@ -28392,6 +29296,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "Mediterrane maaltijdsalade",
     vanSchaap: [
       "20 langoustines",
@@ -28425,6 +29330,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Lasagnesandwich",
     vanSchaap: [
       "300 g gerookte zalm, in plakjes",
@@ -28456,6 +29362,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "Gegrilde langoustines",
     vanSchaap: [
       "16 langoustines",
@@ -28482,6 +29389,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Gepofte krielaardappeltjes",
     vanSchaap: [
       "100 g reepjes gerookte zalm",
@@ -28508,6 +29416,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Geroosterde roodbaarsfilet",
     vanSchaap: [
       "4 roodbaarsfilets (à 150 g)",
@@ -28533,6 +29442,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haringclub",
     vanSchaap: [
       "8 zoute haringen",
@@ -28562,6 +29472,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=800&q=80",
     fotoLabel: "Mediterrane rijstsalade",
     vanSchaap: [
       "300 g gerookte forelfilet, in stukjes",
@@ -28594,6 +29505,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Wortel-pompoensoep",
     vanSchaap: [
       "400 g rauwe garnalen,middelmaat",
@@ -28629,6 +29541,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalmcurry",
     vanSchaap: [
       "250 g zalmfilet",
@@ -28659,6 +29572,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Heek",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -28688,6 +29602,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Pasta",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -28722,6 +29637,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Tongschar à la meunière",
     vanSchaap: [
       "4 tongscharren van 500 g",
@@ -28753,6 +29669,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Tonijn-kaastosti",
     vanSchaap: [
       "Verse tonijn (vraag Aldert naar de dagselectie)",
@@ -28778,6 +29695,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Zeeduivel gegaard",
     vanSchaap: [
       "600 g zeeduivel, 2 kleine of 1 grote",
@@ -28810,6 +29728,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Zeewolf",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -28846,6 +29765,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1550942356-fcfc6eba2acb?w=800&q=80",
     fotoLabel: "Pijlinktvisstoof",
     vanSchaap: [
       "600 g pijlinktvis, schoongemaakt",
@@ -28885,6 +29805,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Op de huid gebakken zeebaarsfilet",
     vanSchaap: [
       "4 stukken zeebaarsfilet met huid (ca 600 g)",
@@ -28919,6 +29840,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Roomkaasdip",
     vanSchaap: [
       "125 g gestoomde makreel filets, zonder vel",
@@ -28944,6 +29866,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Surf & Turf van garnalen en tartaar",
     vanSchaap: [
       "12-16 ongepelde grote garnalen, diepvries, ontdooid",
@@ -28977,6 +29900,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Hartige zalmquiche",
     vanSchaap: [
       "1 groot blik zalm (400 gram)",
@@ -29006,6 +29930,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Ceviche",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -29046,6 +29971,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Roergebakken tilapia",
     vanSchaap: [
       "500 g tilapiafilet",
@@ -29074,6 +30000,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gegratineerde wijting",
     vanSchaap: [
       "400 g wijtingfilet, in blokjes",
@@ -29104,6 +30031,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Gegratineerde makreelrolletjes",
     vanSchaap: [
       "Verse makreel (vraag Aldert naar de dagselectie)",
@@ -29136,6 +30064,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalmfilet",
     vanSchaap: [
       "4 stukken zalmfilet (à 150 g)",
@@ -29164,6 +30093,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Roerbak van garnalen en mosselen",
     vanSchaap: [
       "150 g grote garnalen of tijgergarnalen, gepeld",
@@ -29193,6 +30123,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Gegrilde zalm",
     vanSchaap: [
       "4 zalmfilets à 125 g",
@@ -29220,6 +30151,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1553659971-f01207815844?w=800&q=80",
     fotoLabel: "Pasta",
     vanSchaap: [
       "300 g krabvlees (van ongeveer 1 kg krabklauwen)",
@@ -29247,6 +30179,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Fajita’s",
     vanSchaap: [
       "500 g kabeljauwfilet",
@@ -29281,6 +30214,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Omgekeerde multaart",
     vanSchaap: [
       "6 à 8 kleine mulfilets",
@@ -29318,6 +30252,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Wrap",
     vanSchaap: [
       "1 bakje à 150 g zalm- of tonijnspread",
@@ -29342,6 +30277,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Witvis",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -29368,6 +30304,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gepocheerde rode poon",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -29395,6 +30332,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Snelle Mediterrane vissoep",
     vanSchaap: [
       "200 g kabeljauwfilet",
@@ -29431,6 +30369,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Mosselpotje",
     vanSchaap: [
       "600 gekookte mosselen, zonder schelp",
@@ -29463,6 +30402,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalm",
     vanSchaap: [
       "500 g (diepvries) zalmfilet",
@@ -29492,6 +30432,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Zomers", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Nacho's",
     vanSchaap: [
       "100 g Hollandse garnalen",
@@ -29516,6 +30457,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Blini's",
     vanSchaap: [
       "2 verse makreelfilets",
@@ -29549,6 +30491,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Mini vis pie",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -29587,6 +30530,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauw dimsum",
     vanSchaap: [
       "300 g kabeljauwfilet",
@@ -29622,6 +30566,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tongrolletjes",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -29652,6 +30597,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Tarbot",
     vanSchaap: [
       "800 g tarbotfilet met vel",
@@ -29688,6 +30634,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Zarzuela",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -29719,6 +30666,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Coquilles",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -29747,6 +30695,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Oosterse noedels",
     vanSchaap: [
       "Verse makreel (vraag Aldert naar de dagselectie)",
@@ -29776,6 +30725,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tartaar van Hollandse Nieuwe",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -29814,6 +30764,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1550942356-fcfc6eba2acb?w=800&q=80",
     fotoLabel: "Pittige pijlinktvis",
     vanSchaap: [
       "600 g schoongemaakte pijlinktvis",
@@ -29850,6 +30801,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Pastasalade",
     vanSchaap: [
       "1 blik tonijn op olie (400 g)",
@@ -29882,6 +30834,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Scholpakketje",
     vanSchaap: [
       "600 g scholfilet",
@@ -29910,6 +30863,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauw",
     vanSchaap: [
       "600 g dikke kabeljauwfilet (1 stuk)",
@@ -29940,6 +30894,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Sliptong",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -29971,6 +30926,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Venkelrisotto",
     vanSchaap: [
       "4 zalmfilets",
@@ -30001,6 +30957,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Scholfilet",
     vanSchaap: [
       "300 g scholfilet",
@@ -30025,6 +30982,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Mediterrane tonijnsteak",
     vanSchaap: [
       "2 tonijnsteaks van 150 g",
@@ -30056,6 +31014,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Wrap",
     vanSchaap: [
       "2 gestoomde makrelen van elk 300 g of 500 g gestoomde makreelfilet",
@@ -30086,6 +31045,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken scholfilet",
     vanSchaap: [
       "500 gram scholfilets",
@@ -30119,6 +31079,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1585769448445-efca2df879e6?w=800&q=80",
     fotoLabel: "Aspergesalade",
     vanSchaap: [
       "6 ansjovisfilets",
@@ -30156,6 +31117,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1644784643137-b9073dd262f6?w=800&q=80",
     fotoLabel: "Zeebaars",
     vanSchaap: [
       "4 zeebaarsfilets van ca. 80 g, zonder huid",
@@ -30187,6 +31149,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken heek",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -30221,6 +31184,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Oosterse roerbak van witlof",
     vanSchaap: [
       "400 g grote garnalen (diepvries)",
@@ -30252,6 +31216,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Schol",
     vanSchaap: [
       "4 scholfilets van 160 g",
@@ -30287,6 +31252,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gebakken bot",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -30315,6 +31281,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Spaghetti",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -30342,6 +31309,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Meerval",
     vanSchaap: [
       "2 meervalfilets van 150 g",
@@ -30367,6 +31335,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Blauwe maistortilla’s",
     vanSchaap: [
       "8 grote mul filets zonder graat",
@@ -30399,6 +31368,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Krokante scharrolletjes",
     vanSchaap: [
       "12-16 enkele scharfilets",
@@ -30430,6 +31400,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Zomerse viscocktail",
     vanSchaap: [
       "10 stuks rose jumbo garnalen",
@@ -30457,6 +31428,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1644784643137-b9073dd262f6?w=800&q=80",
     fotoLabel: "Op de huidgebakken zeebaarsfilet",
     vanSchaap: [
       "4 zeebaarsfilets van 150 g",
@@ -30486,6 +31458,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken schol",
     vanSchaap: [
       "2 hele schollen, panklaar",
@@ -30517,6 +31490,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken scholfilet",
     vanSchaap: [
       "600 g scholfilet",
@@ -30544,6 +31518,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Pizza",
     vanSchaap: [
       "2 blikjes rode zalmfilet (à 213 g, MSC), uitgelekt",
@@ -30573,6 +31548,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Hollandse garnalentorentjes",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -30600,6 +31576,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Gegrilde mosselen",
     vanSchaap: [
       "2 kg mosselen",
@@ -30631,6 +31608,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Schelvis",
     vanSchaap: [
       "4 stukken schelvisfilet van 150 g",
@@ -30660,6 +31638,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalmfilet",
     vanSchaap: [
       "1 dik stuk zalmfilet van 600 g",
@@ -30689,6 +31668,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Mediterrane meerval",
     vanSchaap: [
       "300 gram meervalfilet",
@@ -30720,6 +31700,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Op de huid gebakken kabeljauw",
     vanSchaap: [
       "4 stukken kabeljauw met huid",
@@ -30758,6 +31739,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Vis bitterballen van kabeljauw & risotto",
     vanSchaap: [
       "300 g verse kabeljauw",
@@ -30794,6 +31776,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Mediterrane stoofschotel",
     vanSchaap: [
       "500 g kabeljauw, in grote stukken gesneden",
@@ -30835,6 +31818,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Geroosterde tonijn",
     vanSchaap: [
       "4 tonijnmoten (à 150 g)",
@@ -30866,6 +31850,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Griet",
     vanSchaap: [
       "250 g oesterzwammen of kastanjechampignons",
@@ -30899,6 +31884,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Griet",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -30941,6 +31927,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Tapasspiesje van haring, komkommer en radijs",
     vanSchaap: [
       "2 haringen, schoongemaakt",
@@ -30969,6 +31956,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Garnalensalade",
     vanSchaap: [
       "250 g Hollandse garnalen",
@@ -31006,6 +31994,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "Gegrilde rode mul",
     vanSchaap: [
       "12 rode mulfilets",
@@ -31039,6 +32028,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Oosterse mosselen uit de wok",
     vanSchaap: [
       "2 kg mosselen",
@@ -31067,6 +32057,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Gegrilde tonijn",
     vanSchaap: [
       "4 moten verse tonijn (à 150 g)",
@@ -31097,6 +32088,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Catalaanse vissoep",
     vanSchaap: [
       "3-6 gamba's pp",
@@ -31149,6 +32141,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1571167366136-b57e07761625?w=800&q=80",
     fotoLabel: "Urker Scholvlootje van Baarssen",
     vanSchaap: [
       "6 stuks (rauwe) scholfilet van 95 a 100 g, zonder huid",
@@ -31183,6 +32176,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Bretonse vissoep",
     vanSchaap: [
       "400 g wijtingfilets, in grove stukken",
@@ -31213,6 +32207,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Trio van oesters",
     vanSchaap: [
       "12 verse Zeeuwse oesters",
@@ -31254,6 +32249,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Scheermessen 'Amêijoas à Bulhão Pato'",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -31284,6 +32280,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1550942356-fcfc6eba2acb?w=800&q=80",
     fotoLabel: "Pijlinktvis gevuld",
     vanSchaap: [
       "4 grote schoongemaakte pijlinktvissen",
@@ -31318,6 +32315,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gestoomde tarbot",
     vanSchaap: [
       "4 tarbotfilets van 150 g",
@@ -31350,6 +32348,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Tartaar van kabeljauw en Hollandse garnalen",
     vanSchaap: [
       "250 g Hollandse garnalen",
@@ -31377,6 +32376,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Bruschetta Amsterdam",
     vanSchaap: [
       "4 haringen",
@@ -31408,6 +32408,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Koreaanse maki",
     vanSchaap: [
       "4 coquilles met koraal, als tataki of gerookt",
@@ -31451,6 +32452,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Griet",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -31481,6 +32483,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauwfilet",
     vanSchaap: [
       "400 g kabeljauwfilet zonder huid, in blokjes",
@@ -31513,6 +32516,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1550942356-fcfc6eba2acb?w=800&q=80",
     fotoLabel: "Groentewraps",
     vanSchaap: [
       "400 g inktvisringen",
@@ -31546,6 +32550,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Quiche",
     vanSchaap: [
       "350 g wijtingfilets, in stukjes",
@@ -31585,6 +32590,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Mosselen",
     vanSchaap: [
       "2 kg verse mosselen",
@@ -31615,6 +32621,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Gerookte forel",
     vanSchaap: [
       "4 gerookte forelfilets",
@@ -31645,6 +32652,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Penne",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -31676,6 +32684,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Zomerse salade",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -31707,6 +32716,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gestoofde pietermanfilet",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -31741,6 +32751,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1644784643137-b9073dd262f6?w=800&q=80",
     fotoLabel: "Zeebaarsfilet",
     vanSchaap: [
       "4 zeebaarsfilets met huid à 125 g",
@@ -31770,6 +32781,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Hollands garnalen-tartaartje",
     vanSchaap: [
       "250 g gepelde Hollandse garnalen",
@@ -31798,6 +32810,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Geroosterde wijting",
     vanSchaap: [
       "8 wijtingfilets",
@@ -31829,6 +32842,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Ravioli van hand gepelde Hollandse garnalen",
     vanSchaap: [
       "hand gepelde Hollandse garnalen naar smaak",
@@ -31862,6 +32876,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Pieterman taco’s",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -31893,6 +32908,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken schol",
     vanSchaap: [
       "4 schollen",
@@ -31919,6 +32935,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Provençaalse vistaart",
     vanSchaap: [
       "500 g kabeljauw, in blokjes",
@@ -31948,6 +32965,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gepocheerde snoekbaars",
     vanSchaap: [
       "Voor de snoekbaars met courgette :",
@@ -31983,6 +33001,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Vis uit de oven",
     vanSchaap: [
       "4 tongscharretjes of 4 andere platvisjes",
@@ -32016,6 +33035,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kapsalon",
     vanSchaap: [
       "400 g kabeljauwfilet, in stukken",
@@ -32047,6 +33067,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Thaise viskoekjes",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -32080,6 +33101,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Turks brood",
     vanSchaap: [
       "1 gestoomde/gerookte makreel van 400 g",
@@ -32111,6 +33133,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Poon van de barbecue",
     vanSchaap: [
       "Voor de sjalottencompote :",
@@ -32149,6 +33172,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1585769448445-efca2df879e6?w=800&q=80",
     fotoLabel: "Zeewolffilet",
     vanSchaap: [
       "6 ansjovisfilets",
@@ -32180,6 +33204,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1553659971-f01207815844?w=800&q=80",
     fotoLabel: "Seafood Boil",
     vanSchaap: [
       "250 g langoustines",
@@ -32217,6 +33242,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Fish & Chips",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -32247,6 +33273,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken schol",
     vanSchaap: [
       "2 hele schollen, panklaar",
@@ -32275,6 +33302,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Eenvoudige viskoekjes",
     vanSchaap: [
       "400 g verse schelvis, kabeljauw of koolvis",
@@ -32305,6 +33333,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Witte (milde) curry",
     vanSchaap: [
       "800 g zeeduivel, moten of hele vis",
@@ -32342,6 +33371,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken heek",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -32373,6 +33403,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gegrilde tilapiafilet",
     vanSchaap: [
       "4 tilapiafilets à 125 g",
@@ -32399,6 +33430,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Gegrilde zalmfilets",
     vanSchaap: [
       "4 zalmfilets van ongeveer 200 g",
@@ -32428,6 +33460,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Groene aspergesalade",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -32454,6 +33487,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Mosselsaté",
     vanSchaap: [
       "2 kg mosselen",
@@ -32482,6 +33516,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Gestoomde kabeljauw",
     vanSchaap: [
       "4 stukken kabeljauwfilet van 150 g",
@@ -32508,6 +33543,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Horsmakreel uit de oven",
     vanSchaap: [
       "Verse makreel (vraag Aldert naar de dagselectie)",
@@ -32536,6 +33572,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Hollandse garnalen",
     vanSchaap: [
       "500 g Hollandse garnalen",
@@ -32564,6 +33601,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haringsalade",
     vanSchaap: [
       "2 zoute haringen",
@@ -32591,6 +33629,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Rode poon escabeche",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -32628,6 +33667,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Palingsalade",
     vanSchaap: [
       "200 g gerookte paling",
@@ -32661,6 +33701,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Dorade",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -32694,6 +33735,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tongpakketjes",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -32725,6 +33767,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauw",
     vanSchaap: [
       "4 stukken kabeljauwfilet (à 150 gram)",
@@ -32759,6 +33802,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Blini's",
     vanSchaap: [
       "200 g gerookte palingfilets",
@@ -32786,6 +33830,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Gebakken schar",
     vanSchaap: [
       "2 hele scharren, schoongemaakt",
@@ -32815,6 +33860,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Mul",
     vanSchaap: [
       "4 rode mullen, panklaar",
@@ -32844,6 +33890,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Hollandse garnalenrisotto",
     vanSchaap: [
       "250 g Hollandse garnalen",
@@ -32877,6 +33924,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gravad laks poké roll",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -32913,6 +33961,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Visstoofpot",
     vanSchaap: [
       "750 g stevige witvisfilet, in grove stukken",
@@ -32943,6 +33992,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gestoomde tongfilet",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -32973,6 +34023,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Toscaanse scholrolletjes",
     vanSchaap: [
       "500 g ontvelde scholfilets",
@@ -33006,6 +34057,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Knapperige tortilla's",
     vanSchaap: [
       "200 g roze garnalen",
@@ -33036,6 +34088,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Vis saucijzenbroodjes van heek",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -33070,6 +34123,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Makreel quesadilla's",
     vanSchaap: [
       "2 kleine gerookte/ gestoomde makreelfilets",
@@ -33098,6 +34152,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken schol",
     vanSchaap: [
       "2 scholfilets zonder vel (van 1 schol)",
@@ -33125,6 +34180,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Makreel tempura",
     vanSchaap: [
       "2 verse, grote makreelfilets",
@@ -33163,6 +34219,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Gebakken kabeljauw",
     vanSchaap: [
       "4 moten kabeljauw of filets à ca. 150 g en ca. 2 cm dikte",
@@ -33192,6 +34249,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Lasagne",
     vanSchaap: [
       "2 blikjes tonijnstukken in water 185 gram, uitgelekt",
@@ -33222,6 +34280,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Empanada",
     vanSchaap: [
       "2 blikjes rode zalm op olie (185 g)",
@@ -33258,6 +34317,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Gerookte makreel",
     vanSchaap: [
       "1 gerookte makreel of 2 lichtgerookte makreelfilets",
@@ -33286,6 +34346,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Smörrebröd",
     vanSchaap: [
       "4 zoute haringen, schoongemaakt",
@@ -33313,6 +34374,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Oooh La La Herring",
     vanSchaap: [
       "2 haringen",
@@ -33348,6 +34410,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalmcrostini",
     vanSchaap: [
       "200 g gerookte zalm",
@@ -33381,6 +34444,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Broodje paling speciaal",
     vanSchaap: [
       "100 gram gerookte palingfilet",
@@ -33407,6 +34471,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Waterzooi",
     vanSchaap: [
       "500 g wijtingfilet",
@@ -33440,6 +34505,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Bisque de crevettes (garnalensoep)",
     vanSchaap: [
       "200 g ongepelde Hollandse garnalen",
@@ -33479,6 +34545,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Pittige penne",
     vanSchaap: [
       "Verse makreel (vraag Aldert naar de dagselectie)",
@@ -33512,6 +34579,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Tartaar van heilbot en tonijn",
     vanSchaap: [
       "250 g verse heilbot",
@@ -33546,6 +34614,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Zeewolf",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -33576,6 +34645,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Makreel-aardappelslaatje",
     vanSchaap: [
       "2 gerookte makreelfilets",
@@ -33606,6 +34676,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Oosterse tilapiafilet",
     vanSchaap: [
       "200 g tilapiafilet, in blokjes",
@@ -33634,6 +34705,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=800&q=80",
     fotoLabel: "Temaki",
     vanSchaap: [
       "foreleitjes",
@@ -33668,6 +34740,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Tortillataart",
     vanSchaap: [
       "2 blikjes tonijn op olie (à 180 g)",
@@ -33699,6 +34772,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Tonijn",
     vanSchaap: [
       "200 g tonijnfilet",
@@ -33727,6 +34801,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Tagliatelle",
     vanSchaap: [
       "300 g gekookte mosselen",
@@ -33759,6 +34834,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Garnalencocktail",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -33788,6 +34864,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Bruschetta Hollandse garnalen",
     vanSchaap: [
       "150 g Hollandse garnalen",
@@ -33816,6 +34893,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Rendang van makreel",
     vanSchaap: [
       "600 g verse makreelfilet",
@@ -33842,6 +34920,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauw spread",
     vanSchaap: [
       "300 g kabeljauw",
@@ -33871,6 +34950,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Geroosterde dorade",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -33897,6 +34977,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Vietnamese Cha Ca La Vong",
     vanSchaap: [
       "800 g witvis zeeduivel, kabeljauw of steendolk in stukken gesneden",
@@ -33940,6 +35021,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken schol",
     vanSchaap: [
       "4 dubbele scholfilets",
@@ -33975,6 +35057,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Tarbot",
     vanSchaap: [
       "4 tarbotfilets",
@@ -34004,6 +35087,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Penne",
     vanSchaap: [
       "200 g Hollandse garnalen",
@@ -34034,6 +35118,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Scholfilet",
     vanSchaap: [
       "600 gram scholfilets",
@@ -34065,6 +35150,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kibbeling",
     vanSchaap: [
       "500 g kibbeling kant en klaar",
@@ -34091,6 +35177,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Wijting",
     vanSchaap: [
       "600 g wijtingfilets",
@@ -34124,6 +35211,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Zeeduivel",
     vanSchaap: [
       "600 gr zeeduivel, in 4 kleine moten",
@@ -34159,6 +35247,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gegratineerde scharrolletjes",
     vanSchaap: [
       "6 hele scharfilets",
@@ -34186,6 +35275,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Gemarineerde haringrolletjes",
     vanSchaap: [
       "6 zoute haringen",
@@ -34217,6 +35307,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Bruschetta",
     vanSchaap: [
       "4 nieuwe/zoute haringen",
@@ -34247,6 +35338,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Mulfilet uit de oven",
     vanSchaap: [
       "8 mulfilets (60-80 g)",
@@ -34273,6 +35365,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Pasta",
     vanSchaap: [
       "300 g zalmfilet",
@@ -34305,6 +35398,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Tomatencurry",
     vanSchaap: [
       "12 gamba's",
@@ -34336,6 +35430,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Indiase visschotel",
     vanSchaap: [
       "400 g tilapia, in blokjes of repen",
@@ -34373,6 +35468,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Mediterrane paprikasoep",
     vanSchaap: [
       "250 g tonijnsteak",
@@ -34406,6 +35502,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
     fotoLabel: "Bitterballen van gerookte paling",
     vanSchaap: [
       "150 g gerookte paling, in kleine stukjes gesneden",
@@ -34455,6 +35552,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalm",
     vanSchaap: [
       "4 zalmfilets met huid à 150 g",
@@ -34481,6 +35579,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Zalm",
     vanSchaap: [
       "600 g zalm, zonder vel",
@@ -34515,6 +35614,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Paashaas",
     vanSchaap: [
       "klein pakje gerookte zalmfilet",
@@ -34543,6 +35643,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Pieterman",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -34575,6 +35676,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Sunny Herring Salad",
     vanSchaap: [
       "4 verse haringen",
@@ -34610,6 +35712,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Bijzonder", "Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     fotoLabel: "Chinese fondue",
     vanSchaap: [
       "forelfilet",
@@ -34645,6 +35748,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Lauwwarme salade",
     vanSchaap: [
       "Verse vis (vraag Aldert naar de dagselectie)",
@@ -34677,6 +35781,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Makreel tajine",
     vanSchaap: [
       "600 g verse makreelfilet",
@@ -34707,6 +35812,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Surf en Turf, haring",
     vanSchaap: [
       "2 maatjes haringen",
@@ -34739,6 +35845,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauw tikka masala",
     vanSchaap: [
       "600 g kabeljauwfilet",
@@ -34777,6 +35884,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1706711053549-f52f73a8960c?w=800&q=80",
     fotoLabel: "Kabeljauw",
     vanSchaap: [
       "4 moten kabeljauw van ongeveer 200 gram",
@@ -34810,6 +35918,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Met de kids"],
+    fotoUrl: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
     fotoLabel: "Spaghetti",
     vanSchaap: [
       "100 gram roze garnalen",
@@ -34836,6 +35945,7 @@ export const receptenVisrecepten: {
     tijd: "30-60 min",
     moeilijkheid: "Uitdagend",
     tags: ["Gezond"],
+    fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Gelakte makreelfilets",
     vanSchaap: [
       "300 g makreelfilet",
@@ -34874,6 +35984,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Zomers"],
+    fotoUrl: "https://images.unsplash.com/photo-1710775694428-5f6e66ae6a4c?w=800&q=80",
     fotoLabel: "Mosselen",
     vanSchaap: [
       "1,5 kg mosselen per persoon, schoongemaakt en gespoeld",
