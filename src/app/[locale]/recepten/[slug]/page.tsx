@@ -2,9 +2,17 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { useLocale } from "next-intl";
 import type { Metadata } from "next";
-import { Clock, ChefHat, ShoppingBag, ShoppingCart, ArrowLeft } from "lucide-react";
+import { Clock, ChefHat, ShoppingBag, ShoppingCart, ArrowLeft, AlertCircle } from "lucide-react";
 import { PhotoPlaceholder } from "@/components/shared/PhotoPlaceholder";
 import { recepten, TAG_ICON, type Recept } from "@/lib/recepten";
+
+const OP_AANVRAAG_VIS = ["garnalen", "gamba", "scampi", "tarbot", "kreeft", "langoustine"];
+
+function isOpAanvraag(recept: Recept): string | null {
+  const text = [...recept.vanSchaap, recept.title].join(" ").toLowerCase();
+  const match = OP_AANVRAAG_VIS.find((v) => text.includes(v));
+  return match ?? null;
+}
 
 export async function generateStaticParams() {
   return recepten.map((r) => ({ slug: r.slug }));
@@ -39,6 +47,7 @@ function ReceptDetailContent({
   recept: Recept;
   locale: string;
 }) {
+  const opAanvraagVis = isOpAanvraag(recept);
   const moeilijkheidColor =
     recept.moeilijkheid === "Makkelijk"
       ? "var(--seafoam)"
@@ -144,7 +153,7 @@ function ReceptDetailContent({
                 className="text-xs font-bold uppercase tracking-widest mb-3 opacity-50"
                 style={{ color: "var(--navy)" }}
               >
-                Aldert vertelt
+                Van de zaak
               </p>
               <p
                 className="leading-relaxed italic"
@@ -213,13 +222,27 @@ function ReceptDetailContent({
                   </li>
                 ))}
               </ul>
-              <Link
-                href={`/${locale}/bestellen`}
-                className="inline-block mt-5 text-xs font-semibold px-4 py-2 text-white transition-opacity hover:opacity-90"
-                style={{ backgroundColor: "var(--salmon)" }}
-              >
-                Vooruit bestellen
-              </Link>
+              {opAanvraagVis ? (
+                <div
+                  className="mt-4 flex items-start gap-2 p-3 text-xs leading-relaxed"
+                  style={{ backgroundColor: "rgba(200,96,74,0.15)", color: "var(--sand)" }}
+                >
+                  <AlertCircle size={14} className="flex-shrink-0 mt-0.5" />
+                  <span>
+                    Verse {opAanvraagVis} is bij ons{" "}
+                    <strong>op aanvraag</strong> verkrijgbaar. Bel of mail ons
+                    even van tevoren.
+                  </span>
+                </div>
+              ) : (
+                <Link
+                  href={`/${locale}/bestellen`}
+                  className="inline-block mt-5 text-xs font-semibold px-4 py-2 text-white transition-opacity hover:opacity-90"
+                  style={{ backgroundColor: "var(--salmon)" }}
+                >
+                  Vooruit bestellen
+                </Link>
+              )}
             </div>
 
             {/* Van de supermarkt */}

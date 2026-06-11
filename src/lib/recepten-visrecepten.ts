@@ -23,7 +23,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Gerookte paling",
     vanSchaap: [
       "150 g gerookte palingfilet",
@@ -1356,7 +1356,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Provencaalse verse paling (stoofaal)",
     vanSchaap: [
       "1 kilo schoongemaakte verse paling (stoofaal)",
@@ -1636,7 +1636,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Pitapuntjes",
     vanSchaap: [
       "150 g gerookte palingfilet",
@@ -2735,7 +2735,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Snoekbaarsfilet",
     vanSchaap: [
       "4 snoekbaarsfilets à 130 g met huid, zonder schubben",
@@ -4541,7 +4541,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Zomers"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Picknick palingpate",
     vanSchaap: [
       "2 gerookte palingen",
@@ -8259,7 +8259,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Paling",
     vanSchaap: [
       "300 g gevilde paling, in stukken (ESF)",
@@ -8294,7 +8294,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Palingsalade",
     vanSchaap: [
       "150 gram gerookte palingfilet",
@@ -9135,7 +9135,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Broodje paling",
     vanSchaap: [
       "100 gram gerookte palingfilet",
@@ -9650,7 +9650,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Palingsandwich",
     vanSchaap: [
       "1 gerookte palingfilet",
@@ -11652,7 +11652,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Cocktail van paling en appel",
     vanSchaap: [
       "200 gram gerookte palingfilet",
@@ -13282,7 +13282,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Zomers"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Gerookte palingsalade",
     vanSchaap: [
       "200 g gerookte paling",
@@ -18316,7 +18316,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Saucijzenbroodje",
     vanSchaap: [
       "200 g gerookte palingfilets",
@@ -18994,7 +18994,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Crostini",
     vanSchaap: [
       "200 g gerookte paling",
@@ -20695,7 +20695,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Gerookte paling",
     vanSchaap: [
       "4 gerookte palingfilets",
@@ -21138,7 +21138,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Gerookte paling",
     vanSchaap: [
       "200 gram gerookte palingfilet",
@@ -21626,7 +21626,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Palingsalade",
     vanSchaap: [
       "200 g gerookte paling",
@@ -23396,7 +23396,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Pastasalade",
     vanSchaap: [
       "150 g gerookte paling",
@@ -24042,7 +24042,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Salade van gemarineerde paling",
     vanSchaap: [
       "200 g gerookte paling",
@@ -24756,7 +24756,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Tortillarolletjes",
     vanSchaap: [
       "100 gram gerookte palingfilet",
@@ -25141,7 +25141,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Krokante palingburger",
     vanSchaap: [
       "200 g gerookte palingfilets",
@@ -28514,7 +28514,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Bijzonder", "Zomers"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Mierikswortelmousse",
     vanSchaap: [
       "150 gram gerookte paling",
@@ -28769,7 +28769,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Bijzonder", "Gezond", "Zomers"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Paling",
     vanSchaap: [
       "1 kg schoongemaakte stoofaal",
@@ -33667,7 +33667,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Snel", "Gezond", "Zomers"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Palingsalade",
     vanSchaap: [
       "200 g gerookte paling",
@@ -33802,7 +33802,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Blini's",
     vanSchaap: [
       "200 g gerookte palingfilets",
@@ -34444,7 +34444,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Bijzonder", "Gezond"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Broodje paling speciaal",
     vanSchaap: [
       "100 gram gerookte palingfilet",
@@ -35502,7 +35502,7 @@ export const receptenVisrecepten: {
     tijd: "< 30 min",
     moeilijkheid: "Uitdagend",
     tags: ["Snel", "Gezond"],
-    fotoUrl: "https://images.unsplash.com/photo-1516684542079-927175cedbb0?w=800&q=80",
+    fotoUrl: "https://images.unsplash.com/photo-1709766593774-f36f9efedb15?w=800&q=80",
     fotoLabel: "Bitterballen van gerookte paling",
     vanSchaap: [
       "150 g gerookte paling, in kleine stukjes gesneden",

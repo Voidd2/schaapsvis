@@ -196,8 +196,7 @@ export function ReceptenClient({ locale }: { locale: string }) {
           >
             Bij elk recept staat precies{" "}
             <strong>wat u bij ons haalt</strong> en wat u nog even langs de
-            supermarkt voor moet. Altijd met het eerlijke advies van Aldert
-            erbij.
+            supermarkt voor moet. Altijd eerlijk over de moeilijkheidsgraad.
           </p>
         </div>
       </section>
@@ -224,22 +223,38 @@ export function ReceptenClient({ locale }: { locale: string }) {
 
       {/* Credits */}
       <section
-        className="py-6 px-6"
-        style={{ backgroundColor: "var(--cream)", borderTop: "1px solid var(--sand)" }}
+        className="py-8 px-6"
+        style={{ backgroundColor: "var(--sand)" }}
       >
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-xs" style={{ color: "var(--charcoal)", opacity: 0.5 }}>
-            Een deel van de recepten op deze pagina is met toestemming overgenomen van{" "}
+          <p
+            className="text-xs font-bold uppercase tracking-widest mb-2"
+            style={{ color: "var(--navy)", opacity: 0.5 }}
+          >
+            Recepten samenwerking
+          </p>
+          <p className="text-sm leading-relaxed mb-3" style={{ color: "var(--charcoal)", opacity: 0.8 }}>
+            De meeste recepten op deze pagina zijn met toestemming van{" "}
             <a
               href="https://visrecepten.nl"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline underline-offset-2 hover:opacity-100 transition-opacity"
+              className="font-semibold underline underline-offset-2 hover:opacity-70 transition-opacity"
+              style={{ color: "var(--navy)" }}
             >
               visrecepten.nl
-            </a>
-            {" "}en aangepast voor Schaap&apos;s Vis Leiden.
+            </a>{" "}
+            overgenomen en aangepast voor Schaap&apos;s Vis Leiden. Bezoek hun site voor nog meer visinspiratie.
           </p>
+          <a
+            href="https://visrecepten.nl"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block text-xs font-semibold px-4 py-2 transition-opacity hover:opacity-70"
+            style={{ backgroundColor: "var(--navy)", color: "var(--cream)" }}
+          >
+            Naar visrecepten.nl →
+          </a>
         </div>
       </section>
 

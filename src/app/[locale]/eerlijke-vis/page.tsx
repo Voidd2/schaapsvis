@@ -82,13 +82,62 @@ const certifications = [
   },
 ];
 
-const placeholderFish = [
-  { name: "Kabeljauw", badge: "MSC", badgeColor: "#1a6b8a", fotoLabel: "FOTO TOEVOEGEN: Verse kabeljauwfilet, wit vlees" },
-  { name: "Schol", badge: "MSC", badgeColor: "#1a6b8a", fotoLabel: "FOTO TOEVOEGEN: Scholfilet of hele schol, oranje stippen" },
-  { name: "Varlaks Zalm", badge: "BIO", badgeColor: "#3a6b2e", fotoLabel: "FOTO TOEVOEGEN: Varlaks zalmfilet, roze kleur" },
-  { name: "Forel", badge: "BIO", badgeColor: "#3a6b2e", fotoLabel: "FOTO TOEVOEGEN: Regenboogforel, geheel of gefileerd" },
-  { name: "Mosselen", badge: "MSC", badgeColor: "#1a6b8a", fotoLabel: "FOTO TOEVOEGEN: Verse mosselen in pan of op ijs" },
-  { name: "Meer volgt binnenkort", badge: null, badgeColor: null, fotoLabel: "De volledige lijst duurzame vis van Schaap's Vis" },
+const ourFish = [
+  {
+    name: "Noordzee Garnalen",
+    badge: "MSC",
+    badgeColor: "#1a6b8a",
+    opAanvraag: true,
+    foto: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
+    tagline: "Dagvers · Waddenkust · Familie depuis 1620",
+    herkomst:
+      "Gevangen door de 'Mannen van zee' — een rederij die al since 1620 in de familie is (Henk, Lammert, Johan en Lammert). MSC-gecertificeerd via SOLT. Dagvers aangevoerd, gekookt en gepeld aan de Waddenkust. Dit zijn echte Hollandse garnalen.",
+    leverancier: "SOLT · Waddenzee",
+  },
+  {
+    name: "Fine de Claire Oesters",
+    badge: "Premium",
+    badgeColor: "#8b5e14",
+    opAanvraag: false,
+    foto: "https://images.unsplash.com/photo-1627898292764-6733087b55ac?w=800&q=80",
+    tagline: "Crassostrea gigas · 60–90 g · France / Jersey",
+    herkomst:
+      "Geteeld in claires — kleirijke vijvers langs de Atlantische kust van Frankrijk of Jersey. NL 6075 EQ gecertificeerd. De naam 'Fine de Claire' staat voor een zorgvuldig kweekproces dat de oester een milde, nootachtige smaak geeft. Per 12 stuks verkrijgbaar.",
+    leverancier: "NL 6075 EQ",
+  },
+  {
+    name: "Gestoomde Makreel",
+    badge: "FAO 27",
+    badgeColor: "#2e6b5e",
+    opAanvraag: false,
+    foto: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
+    tagline: "Scomber scombrus · Noordoost Atlantisch",
+    herkomst:
+      "Makreel (Scomber scombrus) uit het Noordoost Atlantische gebied — FAO-zone 27. Denk aan de Noordzee en de Noorse Zee. Gestoomd met slechts drie ingrediënten: makreel, zout en rook. Geen toevoegingen. Een schoon product boordevol omega-3.",
+    leverancier: "FAO 27 · Noordzee / Noorse Zee",
+  },
+  {
+    name: "Tonijn AA Chunk",
+    badge: "AA",
+    badgeColor: "#b8832e",
+    opAanvraag: false,
+    foto: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
+    tagline: "Sri Lanka · Topkwaliteit stukken",
+    herkomst:
+      "AA-kwaliteit tonijn van John Searson & Co Ltd uit Sri Lanka. Geïmporteerd via W.G. Den Heijer & Zn. in Scheveningen (Vissershavenweg 50) — een van de oudste en meest betrouwbare visgrossiers van Nederland. Dikke, stevige chunks van verse tonijn.",
+    leverancier: "John Searson & Co Ltd · Sri Lanka via Den Heijer Scheveningen",
+  },
+  {
+    name: "Gerookte Zalm Snippers",
+    badge: "Premium",
+    badgeColor: "#8b5e14",
+    opAanvraag: false,
+    foto: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
+    tagline: "High Seas · Scheveningen vissershaven",
+    herkomst:
+      "Van het merk High Seas, via W.G. Den Heijer & Zn. in Scheveningen. Zalm snippers zijn de royale restukken bij het filetteren van heel grote zalmfilets — vol van smaak, ideaal voor op de borrelplank, door pasta of op een bagel. Per kilo verkrijgbaar.",
+    leverancier: "High Seas · W.G. Den Heijer & Zn., Scheveningen",
+  },
 ];
 
 function EerlijkeVisContent() {
@@ -155,7 +204,7 @@ function EerlijkeVisContent() {
             </p>
           </div>
           <PhotoPlaceholder
-            label="FOTO TOEVOEGEN: Aldert aan de toonbank of vis op ijs in de winkel"
+            label="FOTO TOEVOEGEN: Vis op ijs in de winkel of toonbank Schaap's Vis"
             aspectRatio="aspect-[4/3]"
           />
         </div>
@@ -207,9 +256,11 @@ function EerlijkeVisContent() {
       {/* Varlaks */}
       <section style={{ backgroundColor: "#0a1628" }} className="py-20 px-6">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <PhotoPlaceholder
-            label="FOTO TOEVOEGEN: Varlaks zalmfilet — roze kleur, close-up textuur"
-            aspectRatio="aspect-square"
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80"
+            alt="Varlaks biologische zalm"
+            className="w-full aspect-square object-cover"
           />
           <div>
             <span
@@ -238,7 +289,7 @@ function EerlijkeVisContent() {
         </div>
       </section>
 
-      {/* Vis grid */}
+      {/* Ons aanbod — real fish cards */}
       <section style={{ backgroundColor: "var(--cream)" }} className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
           <h2
@@ -248,46 +299,72 @@ function EerlijkeVisContent() {
             {t("listTitle")}
           </h2>
           <p
-            className="text-center text-sm mb-12 max-w-xl mx-auto leading-relaxed"
+            className="text-center text-sm mb-14 max-w-xl mx-auto leading-relaxed"
             style={{ color: "var(--charcoal)", opacity: 0.7 }}
           >
-            {t("listSub")}
+            Elk product met zijn eigen verhaal — waar het vandaan komt, hoe het gevangen of
+            gekweekt is, en waarom wij het bewust aanbieden.
           </p>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-            {placeholderFish.map(({ name, badge, badgeColor, fotoLabel }) => (
-              <article key={name} className="group relative">
-                <div className="relative">
-                  <PhotoPlaceholder label={fotoLabel} aspectRatio="aspect-square" />
-                  {badge && badgeColor && (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {ourFish.map((fish) => (
+              <article
+                key={fish.name}
+                className="bg-white flex flex-col"
+                style={{ border: "1px solid rgba(26,53,48,0.08)" }}
+              >
+                <div className="relative overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={fish.foto}
+                    alt={fish.name}
+                    className="w-full aspect-[4/3] object-cover"
+                    loading="lazy"
+                  />
+                  <span
+                    className="absolute top-3 left-3 text-xs font-bold px-2.5 py-1 text-white"
+                    style={{ backgroundColor: fish.badgeColor }}
+                  >
+                    {fish.badge}
+                  </span>
+                  {fish.opAanvraag && (
                     <span
-                      className="absolute top-3 left-3 text-xs font-bold px-2 py-0.5 text-white"
-                      style={{ backgroundColor: badgeColor }}
+                      className="absolute top-3 right-3 text-xs font-semibold px-2.5 py-1 text-white"
+                      style={{ backgroundColor: "var(--salmon)" }}
                     >
-                      {badge}
+                      Op aanvraag
                     </span>
                   )}
-                  {!badge && (
-                    <div
-                      className="absolute inset-0 flex items-center justify-center"
-                      style={{ backgroundColor: "rgba(0,0,0,0.12)" }}
-                    >
-                      <span
-                        className="text-xs font-semibold px-3 py-1.5 text-white text-center"
-                        style={{ backgroundColor: "rgba(26,53,48,0.85)" }}
-                      >
-                        {t("comingSoonBadge")}
-                      </span>
-                    </div>
-                  )}
                 </div>
-                <div className="pt-3">
+                <div className="p-5 flex flex-col flex-1">
                   <h3
-                    className="font-bold text-base"
+                    className="text-xl font-bold mb-1 leading-tight"
                     style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
                   >
-                    {name}
+                    {fish.name}
                   </h3>
+                  <p
+                    className="text-xs italic mb-4"
+                    style={{ color: "var(--charcoal)", opacity: 0.55 }}
+                  >
+                    {fish.tagline}
+                  </p>
+                  <p
+                    className="text-xs leading-relaxed flex-1"
+                    style={{ color: "var(--charcoal)", opacity: 0.75 }}
+                  >
+                    {fish.herkomst}
+                  </p>
+                  <div
+                    className="mt-4 pt-4 text-xs"
+                    style={{
+                      borderTop: "1px solid var(--sand)",
+                      color: "var(--navy)",
+                      opacity: 0.5,
+                    }}
+                  >
+                    {fish.leverancier}
+                  </div>
                 </div>
               </article>
             ))}
@@ -301,7 +378,8 @@ function EerlijkeVisContent() {
               className="text-sm leading-relaxed max-w-xl mx-auto"
               style={{ color: "var(--charcoal)", opacity: 0.8 }}
             >
-              {t("comingSoonText")}
+              Niet zeker welke vis u zoekt? Kom langs — we leggen u graag uit waar elke vis
+              vandaan komt en wat u er het beste mee kunt doen.
             </p>
           </div>
         </div>
@@ -319,7 +397,7 @@ function EerlijkeVisContent() {
           className="text-sm mb-8 max-w-md mx-auto leading-relaxed"
           style={{ color: "rgba(247,240,227,0.7)" }}
         >
-          {t("ctaText")}
+          Herenstraat 48, Leiden · Maandag t/m zaterdag · 071 514 9802
         </p>
         <Link
           href={`/${locale}/bezoek-ons`}
