@@ -24,35 +24,39 @@ export async function generateMetadata({
 
 const whatYouGet = [
   [
-    "Boven de poolcirkel",
-    "Noord-Noorwegen, waar het water koud, schoon en zuurstofrijk is",
+    "Skjerstadfjorden, Nordland",
+    "Boven de poolcirkel, nabij Bodø — hier is het water koud, schoon en zuurstofrijk. Een van de weinige plekken ter wereld waar zalm werkelijk optimaal kan opgroeien.",
   ],
   [
-    "Familieboerderijen",
-    "Geen grote industrie — kleinschalig, persoonlijk, jaarlijks bezocht",
+    "Wenberg & Edelfarm",
+    "Twee familieboerderijen — Wenberg Fiskeoppdrett in Fauske en Edelfarm in Saltdal — gekweekt op lage bezettingsdichtheid, geen grote industrie.",
+  ],
+  [
+    "ASC gecertificeerd",
+    "Aquaculture Stewardship Council — de internationale standaard voor verantwoorde visteelt. Seafood Watch kent Skjerstadfjorden zijn hoogste milieubeoordeling toe.",
   ],
   [
     "100% traceerbaar",
-    "Van eitje tot filet, elke stap is zichtbaar en aantoonbaar",
+    "Van eitje tot filet elke stap aantoonbaar. Verwerking via Salten Salmon in Bodø, onder toezicht van onafhankelijke certificeerders.",
   ],
   [
     "Laserbehandeling",
-    "Zeeluizen worden verwijderd met laser — geen chemicaliën",
+    "24/7 onderwatercamera's bewaken elk individueel dier. Detecteert een camera een zeeluis, vuurt een laser in een fractie van een seconde — geen chemicaliën, geen stress voor de vis.",
   ],
   [
-    "AI-monitoring",
-    "Camera's onder water bewaken elk vis — vroege signalering, geen verrassingen",
+    "Panaferd-AX — echte kleur",
+    "Vrijwel alle gekweekte zalm ter wereld kleurt roze door synthetische astaxanthine (petrochemisch). Varlaks gebruikt Panaferd-AX: natuurlijke astaxanthine gewonnen uit gefermenteerde bacteriën. De roze kleur is echt, niet kunstmatig.",
   ],
 ] as const;
 
 const whatIsNot = [
-  ["Antibiotica", "De schone omgeving maakt het overbodig"],
-  ["Chemicaliën", "Geen pesticiden, geen kunstmatige middelen"],
+  ["Antibiotica", "De schone omgeving en lage bezettingsdichtheid maken het overbodig"],
+  ["Chemicaliën", "Geen pesticiden, geen kunstmatige middelen — ook geen chemische luisbestrijding"],
   ["GMO", "Gewone zalm, zoals de natuur hem bedoeld heeft"],
   ["Hormonen", "Groeit in zijn eigen tempo — niet kunstmatig versneld"],
   [
-    "Kleurstoffen",
-    "De roze kleur? Die is echt — van het natuurlijk voedsel",
+    "Synthetische kleurstof",
+    "Geen petrochemische astaxanthine — de roze kleur komt van Panaferd-AX, een natuurlijke bron",
   ],
 ] as const;
 
@@ -112,14 +116,14 @@ function VarlaksContent() {
             className="text-xl md:text-2xl max-w-2xl mb-4 font-light"
             style={{ color: "rgba(255,255,255,0.85)" }}
           >
-            Zalm uit het hoge noorden van Noorwegen.
+            Zalm uit de Skjerstadfjorden — boven de poolcirkel in Noorwegen.
           </p>
           <p
             className="text-base max-w-xl mb-14"
             style={{ color: "rgba(255,255,255,0.55)" }}
           >
-            Gekweekt door familieboeren boven de poolcirkel, in het koudste en
-            schoonste water ter wereld.
+            Gekweekt door Wenberg Fiskeoppdrett en Edelfarm, boven de poolcirkel
+            in Nordland, in het koudste en schoonste water ter wereld.
           </p>
           <a
             href="#verhaal"
@@ -177,6 +181,28 @@ function VarlaksContent() {
         className="py-24 px-6"
       >
         <div className="max-w-5xl mx-auto">
+          {/* Certificeringsbadges */}
+          <div className="flex flex-wrap gap-4 justify-center mb-12">
+            <span
+              className="text-xs uppercase tracking-[0.2em] px-4 py-2 border font-medium"
+              style={{ borderColor: "#7ec8d4", color: "#7ec8d4" }}
+            >
+              ASC Gecertificeerd
+            </span>
+            <span
+              className="text-xs uppercase tracking-[0.2em] px-4 py-2 border font-medium"
+              style={{ borderColor: "rgba(255,255,255,0.3)", color: "rgba(255,255,255,0.6)" }}
+            >
+              Biologisch gecertificeerd
+            </span>
+            <span
+              className="text-xs uppercase tracking-[0.2em] px-4 py-2 border font-medium"
+              style={{ borderColor: "rgba(255,255,255,0.3)", color: "rgba(255,255,255,0.6)" }}
+            >
+              Seafood Watch — hoogste score
+            </span>
+          </div>
+
           <div
             className="grid md:grid-cols-2 gap-0 border"
             style={{ borderColor: "rgba(255,255,255,0.1)" }}

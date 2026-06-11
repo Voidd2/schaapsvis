@@ -82,63 +82,113 @@ const certifications = [
   },
 ];
 
-const ourFish = [
+type DuurzaamheidStatus = "groen" | "oranje" | "rood";
+
+interface FishCard {
+  name: string;
+  badge: string;
+  badgeColor: string;
+  opAanvraag: boolean;
+  duurzaamheid: DuurzaamheidStatus;
+  foto: string;
+  tagline: string;
+  herkomst: string;
+  vangenMethode: string;
+  duurzaamheidNote: string;
+  viswijzerLink: string | null;
+  leverancier: string;
+}
+
+const ourFish: FishCard[] = [
   {
-    name: "Noordzee Garnalen",
+    name: "Hollandse Garnalen",
     badge: "MSC",
     badgeColor: "#1a6b8a",
     opAanvraag: true,
-    foto: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=800&q=80",
-    tagline: "Dagvers · Waddenkust · Familie depuis 1620",
+    duurzaamheid: "groen",
+    foto: "https://www.mooijer.nl/wp-content/uploads/Introductie-over-de-Hollandse-garnaal-Mooijer-Volendam-1280x854.jpg",
+    tagline: "Crangon crangon · Waddenzee & Noordzee · dagvers · Zoutkamp",
     herkomst:
-      "Gevangen door de 'Mannen van zee' — een rederij die al since 1620 in de familie is (Henk, Lammert, Johan en Lammert). MSC-gecertificeerd via SOLT. Dagvers aangevoerd, gekookt en gepeld aan de Waddenkust. Dit zijn echte Hollandse garnalen.",
-    leverancier: "SOLT · Waddenzee",
+      "Dit zijn de échte Hollandse garnalen — klein, grijsbruin van kleur, en totaal anders dan de grote roze tropische garnalen die u in de supermarkt ziet. De wetenschappelijke naam is Crangon crangon. SOLT is een coöperatie van vijf garnalenvissers uit Zoutkamp. De boten van Zoutkamp (herkenbaar aan 'ZK') varen al vanaf 1620 op de Waddenzee en Noordzee. De garnalen worden direct aan boord in zeewater gekookt — daarna worden ze lichtroze van kleur — en vervolgens machinaal gepeld in Lauwersoog. Alles in Nederland, van vangst tot klaar product.",
+    vangenMethode:
+      "Gevangen met bokkennetten op de Waddenzee en Noordzee. SOLT gebruikt roller-chain systemen in plaats van traditionele wake chains, waardoor de zeebodem minder beschadigd wordt.",
+    duurzaamheidNote: "MSC gecertificeerd — duurzaam gevangen. Beoordeeld als groene keuze.",
+    viswijzerLink: "https://www.msc.org/nl/over-msc/wat-is-msc/wat-doet-MSC/populaire-vissoorten-in-nederland/noordzeegarnaal",
+    leverancier: "SOLT · Zoutkamp · soltmen.com",
   },
   {
-    name: "Fine de Claire Oesters",
-    badge: "Premium",
+    name: "Fine de Claire III Oesters",
+    badge: "IGP",
     badgeColor: "#8b5e14",
     opAanvraag: false,
-    foto: "https://images.unsplash.com/photo-1627898292764-6733087b55ac?w=800&q=80",
-    tagline: "Crassostrea gigas · 60–90 g · France / Jersey",
+    duurzaamheid: "groen",
+    foto: "https://i0.wp.com/oysterencyclopedia.com/wp-content/uploads/2025/07/fine-de-claire-food-origin_1024x_3648dbfa-30c3-4b75-aa7d-0cc41fcaa03c-1.webp",
+    tagline: "Crassostrea gigas · 60–90 g · Marennes-Oléron, Atlantische kust van Frankrijk",
     herkomst:
-      "Geteeld in claires — kleirijke vijvers langs de Atlantische kust van Frankrijk of Jersey. NL 6075 EQ gecertificeerd. De naam 'Fine de Claire' staat voor een zorgvuldig kweekproces dat de oester een milde, nootachtige smaak geeft. Per 12 stuks verkrijgbaar.",
-    leverancier: "NL 6075 EQ",
+      "Fine de Claire oesters komen uit Marennes-Oléron — het oudste en grootste oestergebied van Europa, aan de Atlantische kust van Frankrijk (tussen La Rochelle en Bordeaux). De naam 'claire' verwijst naar de ondiepe kleirijke vijvers (vroeger zoutvijvers) waar de oesters de laatste fase van hun groei doorbrengen. Minimaal 28 dagen, met maximaal 20 oesters per vierkante meter. Die rust en ruimte geven ze een milde, licht nootachtige smaak. De 'III' staat voor de maat: 60–90 gram per oester. Rauw eten met een druppel citroensap — niet te veel kauwen.",
+    vangenMethode:
+      "Geteeld in vijvers (claires) langs de Atlantische kust. Kweekvis, geen wilde vangst. IGP-beschermd: de naam 'Fine de Claire' is wettelijk beschermd — net zoals champagne of Goudse kaas. Alleen oesters uit dit specifieke gebied mogen deze naam dragen.",
+    duurzaamheidNote: "Kweekvis met IGP bescherming — gecontroleerde teelt, geen wilde vangst, lage milieudruk.",
+    viswijzerLink: null,
+    leverancier: "NL 6075 EQ · Marennes-Oléron, Frankrijk",
   },
   {
     name: "Gestoomde Makreel",
-    badge: "FAO 27",
-    badgeColor: "#2e6b5e",
+    badge: "Eerlijk",
+    badgeColor: "#b8832e",
     opAanvraag: false,
-    foto: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
-    tagline: "Scomber scombrus · Noordoost Atlantisch",
+    duurzaamheid: "rood",
+    foto: "https://images.unsplash.com/photo-_8nf7hmAiVQ?w=800&q=80",
+    tagline: "Scomber scombrus · Noordzee & Noorse Zee · makreel · zout · rook",
     herkomst:
-      "Makreel (Scomber scombrus) uit het Noordoost Atlantische gebied — FAO-zone 27. Denk aan de Noordzee en de Noorse Zee. Gestoomd met slechts drie ingrediënten: makreel, zout en rook. Geen toevoegingen. Een schoon product boordevol omega-3.",
-    leverancier: "FAO 27 · Noordzee / Noorse Zee",
+      "Makreel (Scomber scombrus) is gevangen in de Noordzee en de Noorse Zee. In vaktaal heet dit 'FAO-zone 27' — dat is gewoon de naam die wetenschappers gebruiken voor dit deel van de Atlantische Oceaan: de wateren van Noorwegen, IJsland, Groot-Brittannië en Nederland. Onze gestoomde makreel bevat maar drie ingrediënten: makreel, zout en rook. Geen conserveermiddelen, geen toevoegingen. De vis is boordevol omega-3 vetzuren en een van de meest voedingsrijke vissoorten die er bestaat. Stevige, volle smaak — heerlijk op brood of in een salade.",
+    vangenMethode:
+      "Makreel wordt gevangen met ringzegens of pelagische trawls. Makreel die met de handlijn gevangen wordt, is nog wel groen — maar dat is schaars en artisanaal. Onze gestoomde makreel is commercieel gevangen.",
+    duurzaamheidNote:
+      "Let op: makreel staat momenteel rood op de VISwijzer (april 2025). De oorzaak: de EU, Noorwegen, Groot-Brittannië, IJsland en Rusland kunnen het niet eens worden over visvangstquota. Er is geen breed verkrijgbaar duurzaam alternatief op commerciële schaal — wij zijn hierover eerlijk.",
+    viswijzerLink: "https://www.goodfish.nl/nl/makreel-overbevist-en-vanaf-vandaag-in-het-rood-op-de-viswijzer/",
+    leverancier: "FAO-zone 27 · Noordoost Atlantische Oceaan",
   },
   {
     name: "Tonijn AA Chunk",
     badge: "AA",
-    badgeColor: "#b8832e",
+    badgeColor: "#1a6b8a",
     opAanvraag: false,
-    foto: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
-    tagline: "Sri Lanka · Topkwaliteit stukken",
+    duurzaamheid: "oranje",
+    foto: "https://www.zalmvanurk.nl/cdn/shop/files/Tonijn-vers.png",
+    tagline: "Yellowfin tonijn (Thunnus albacares) · Sri Lanka · dikke stukken",
     herkomst:
-      "AA-kwaliteit tonijn van John Searson & Co Ltd uit Sri Lanka. Geïmporteerd via W.G. Den Heijer & Zn. in Scheveningen (Vissershavenweg 50) — een van de oudste en meest betrouwbare visgrossiers van Nederland. Dikke, stevige chunks van verse tonijn.",
-    leverancier: "John Searson & Co Ltd · Sri Lanka via Den Heijer Scheveningen",
+      "Yellowfin tonijn (Thunnus albacares) uit Sri Lanka — een van de beste tonijnregio's ter wereld. 'AA Chunk' betekent: de allerbeste kwaliteitsklasse, dikke stevige stukken (geen flinters). Sri Lanka heeft een lange traditie in het handmatig vangen van tonijn in de Indische Oceaan. Geïmporteerd via W.G. Den Heijer & Zn in Scheveningen — een familiebedrijf dat al since 1946 vis importeert vanuit de Scheveningse vissershaven (Vissershavenweg 50).",
+    vangenMethode:
+      "Gevangen in de Indische Oceaan door Sri Lankaanse vissers. W.G. Den Heijer is een van de oudste en meest gerespecteerde visgrossiers van Nederland.",
+    duurzaamheidNote:
+      "Geen MSC-certificaat. Yellowfin tonijn uit de Indische Oceaan staat oranje op de VISwijzer — de populatie staat onder druk, maar niet kritiek. Wij bieden dit als premium product aan en zijn transparant over de status.",
+    viswijzerLink: null,
+    leverancier: "John Searson & Co Ltd · Sri Lanka via W.G. Den Heijer & Zn, Scheveningen",
   },
   {
     name: "Gerookte Zalm Snippers",
-    badge: "Premium",
-    badgeColor: "#8b5e14",
+    badge: "ASC",
+    badgeColor: "#2e6b5e",
     opAanvraag: false,
-    foto: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
-    tagline: "High Seas · Scheveningen vissershaven",
+    duurzaamheid: "groen",
+    foto: "https://www.visdenhaag.nl/wp-content/uploads/2022/05/844E212B-662B-4EFA-B03D-A13F2F09E6ED_1_201_a-scaled.jpeg",
+    tagline: "Atlantische zalm · Noorwegen · gerookt in Urk · 1 kg",
     herkomst:
-      "Van het merk High Seas, via W.G. Den Heijer & Zn. in Scheveningen. Zalm snippers zijn de royale restukken bij het filetteren van heel grote zalmfilets — vol van smaak, ideaal voor op de borrelplank, door pasta of op een bagel. Per kilo verkrijgbaar.",
-    leverancier: "High Seas · W.G. Den Heijer & Zn., Scheveningen",
+      "Zalm snippers zijn de royale randstukken die overblijven bij het fileteren van grote zalmen. Niets gaat verloren — en deze stukken zijn vol van smaak, ideaal op de borrelplank, door pasta, scrambled eggs of op toast. Van het merk 'High Seas' — het huismerk van W.G. Den Heijer & Zn in Scheveningen. De zalm is Atlantische kweekzalm van Noorse familiebedrijven, gerookt in Urk. Per kilo verkrijgbaar.",
+    vangenMethode:
+      "Atlantische kweekzalm (Salmo salar) van Noorse kwekerijen. Gerookt in Urk, het vissersdorp aan het IJsselmeer. ASC gecertificeerd — vergelijkbaar met onze Varlaks zalm maar in een andere kwaliteitsklasse.",
+    duurzaamheidNote: "ASC gecertificeerd — verantwoorde kweekvis. Beoordeeld als groene keuze.",
+    viswijzerLink: null,
+    leverancier: "High Seas · W.G. Den Heijer & Zn, Scheveningen · gerookt in Urk",
   },
 ];
+
+const duurzaamheidConfig: Record<DuurzaamheidStatus, { label: string; color: string; bg: string }> = {
+  groen: { label: "✓ Duurzaam", color: "#2e6b5e", bg: "rgba(46,107,94,0.08)" },
+  oranje: { label: "◐ Let op", color: "#b8832e", bg: "rgba(184,131,46,0.08)" },
+  rood: { label: "⚠ Overbevist", color: "#c8604a", bg: "rgba(200,96,74,0.08)" },
+};
 
 function EerlijkeVisContent() {
   const t = useTranslations("eerlijkeVisPage");
@@ -204,13 +254,13 @@ function EerlijkeVisContent() {
             </p>
           </div>
           <PhotoPlaceholder
-            label="FOTO TOEVOEGEN: Vis op ijs in de winkel of toonbank Schaap's Vis"
+            label="FOTO TOEVOEGEN: Vis op ijs in de winkel — toonbank Schaap's Vis Leiden"
             aspectRatio="aspect-[4/3]"
           />
         </div>
       </section>
 
-      {/* Keurmerken */}
+      {/* Keurmerken uitgelegd */}
       <section style={{ backgroundColor: "var(--sand)" }} className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
           <h2
@@ -220,7 +270,7 @@ function EerlijkeVisContent() {
             {t("certTitle")}
           </h2>
           <p className="text-center text-sm mb-12 opacity-60" style={{ color: "var(--charcoal)" }}>
-            Wat betekenen die keurmerken eigenlijk?
+            Wat betekenen die keurmerken op het verpakking eigenlijk?
           </p>
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
             {certifications.map(({ key, label, color, icon }) => (
@@ -250,6 +300,33 @@ function EerlijkeVisContent() {
               </div>
             ))}
           </div>
+
+          {/* VISwijzer uitleg */}
+          <div
+            className="mt-8 p-6 bg-white"
+            style={{ borderTop: "4px solid var(--navy)" }}
+          >
+            <h3
+              className="font-bold text-base mb-2"
+              style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+            >
+              VISwijzer — de Nederlandse gids voor duurzame vis
+            </h3>
+            <p className="text-xs leading-relaxed opacity-70 mb-2" style={{ color: "var(--charcoal)" }}>
+              De VISwijzer (van Stichting de Noordzee en het Wereld Natuur Fonds) geeft vis een kleurcode:
+              groen = verantwoorde keuze, oranje = let op, rood = beter vermijden. Op deze pagina laten
+              wij voor elk product de VISwijzer-status zien — ook als die niet gunstig is.
+            </p>
+            <a
+              href="https://www.goodfish.nl"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-semibold underline underline-offset-2 hover:opacity-70 transition-opacity"
+              style={{ color: "var(--navy)" }}
+            >
+              Bekijk alle vissoorten op goodfish.nl ↗
+            </a>
+          </div>
         </div>
       </section>
 
@@ -259,15 +336,15 @@ function EerlijkeVisContent() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80"
-            alt="Varlaks biologische zalm"
+            alt="Varlaks biologische zalm — Skjerstadfjorden, Noorwegen"
             className="w-full aspect-square object-cover"
           />
           <div>
             <span
-              className="inline-block text-xs tracking-widest uppercase font-semibold px-3 py-1 mb-5 text-white"
+              className="inline-block text-xs tracking-widest uppercase font-semibold px-3 py-1 mb-2 text-white"
               style={{ backgroundColor: "#2e6b5e" }}
             >
-              Biologisch gecertificeerd
+              ASC Gecertificeerd · Biologisch
             </span>
             <h2
               className="text-4xl font-bold mb-5 leading-tight text-white"
@@ -275,8 +352,13 @@ function EerlijkeVisContent() {
             >
               {t("varlaksTitle")}
             </h2>
-            <p className="leading-relaxed mb-8 text-sm" style={{ color: "rgba(255,255,255,0.7)" }}>
+            <p className="leading-relaxed mb-4 text-sm" style={{ color: "rgba(255,255,255,0.7)" }}>
               {t("varlaksText")}
+            </p>
+            <p className="leading-relaxed mb-8 text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>
+              Gekweekt door Wenberg Fiskeoppdrett en Edelfarm in de Skjerstadfjorden, Nordland —
+              boven de poolcirkel, nabij Bodø. ASC gecertificeerd. Panaferd-AX: natuurlijke
+              astaxanthine — de roze kleur is echt, niet kunstmatig.
             </p>
             <Link
               href={`/${locale}/varlaks`}
@@ -289,7 +371,7 @@ function EerlijkeVisContent() {
         </div>
       </section>
 
-      {/* Ons aanbod — real fish cards */}
+      {/* Ons aanbod — echte viskaarten met herkomstverhalen */}
       <section style={{ backgroundColor: "var(--cream)" }} className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
           <h2
@@ -299,87 +381,134 @@ function EerlijkeVisContent() {
             {t("listTitle")}
           </h2>
           <p
-            className="text-center text-sm mb-14 max-w-xl mx-auto leading-relaxed"
+            className="text-center text-sm mb-14 max-w-2xl mx-auto leading-relaxed"
             style={{ color: "var(--charcoal)", opacity: 0.7 }}
           >
-            Elk product met zijn eigen verhaal — waar het vandaan komt, hoe het gevangen of
-            gekweekt is, en waarom wij het bewust aanbieden.
+            Elk product met zijn eigen verhaal — waar het vandaan komt, hoe het gevangen of gekweekt
+            wordt, en wat het VISwijzer-oordeel is. We zijn eerlijk, ook als het verhaal niet perfect is.
           </p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {ourFish.map((fish) => (
-              <article
-                key={fish.name}
-                className="bg-white flex flex-col"
-                style={{ border: "1px solid rgba(26,53,48,0.08)" }}
-              >
-                <div className="relative overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={fish.foto}
-                    alt={fish.name}
-                    className="w-full aspect-[4/3] object-cover"
-                    loading="lazy"
-                  />
-                  <span
-                    className="absolute top-3 left-3 text-xs font-bold px-2.5 py-1 text-white"
-                    style={{ backgroundColor: fish.badgeColor }}
-                  >
-                    {fish.badge}
-                  </span>
-                  {fish.opAanvraag && (
+            {ourFish.map((fish) => {
+              const ds = duurzaamheidConfig[fish.duurzaamheid];
+              return (
+                <article
+                  key={fish.name}
+                  className="bg-white flex flex-col"
+                  style={{ border: "1px solid rgba(26,53,48,0.08)" }}
+                >
+                  {/* Foto */}
+                  <div className="relative overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={fish.foto}
+                      alt={fish.name}
+                      className="w-full aspect-[4/3] object-cover"
+                      loading="lazy"
+                    />
                     <span
-                      className="absolute top-3 right-3 text-xs font-semibold px-2.5 py-1 text-white"
-                      style={{ backgroundColor: "var(--salmon)" }}
+                      className="absolute top-3 left-3 text-xs font-bold px-2.5 py-1 text-white"
+                      style={{ backgroundColor: fish.badgeColor }}
                     >
-                      Op aanvraag
+                      {fish.badge}
                     </span>
-                  )}
-                </div>
-                <div className="p-5 flex flex-col flex-1">
-                  <h3
-                    className="text-xl font-bold mb-1 leading-tight"
-                    style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
-                  >
-                    {fish.name}
-                  </h3>
-                  <p
-                    className="text-xs italic mb-4"
-                    style={{ color: "var(--charcoal)", opacity: 0.55 }}
-                  >
-                    {fish.tagline}
-                  </p>
-                  <p
-                    className="text-xs leading-relaxed flex-1"
-                    style={{ color: "var(--charcoal)", opacity: 0.75 }}
-                  >
-                    {fish.herkomst}
-                  </p>
-                  <div
-                    className="mt-4 pt-4 text-xs"
-                    style={{
-                      borderTop: "1px solid var(--sand)",
-                      color: "var(--navy)",
-                      opacity: 0.5,
-                    }}
-                  >
-                    {fish.leverancier}
+                    {fish.opAanvraag && (
+                      <span
+                        className="absolute top-3 right-3 text-xs font-semibold px-2.5 py-1 text-white"
+                        style={{ backgroundColor: "var(--salmon)" }}
+                      >
+                        Op aanvraag
+                      </span>
+                    )}
                   </div>
-                </div>
-              </article>
-            ))}
+
+                  {/* Content */}
+                  <div className="p-5 flex flex-col flex-1">
+                    <h3
+                      className="text-xl font-bold mb-1 leading-tight"
+                      style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+                    >
+                      {fish.name}
+                    </h3>
+                    <p
+                      className="text-xs italic mb-4"
+                      style={{ color: "var(--charcoal)", opacity: 0.5 }}
+                    >
+                      {fish.tagline}
+                    </p>
+
+                    {/* Herkomst */}
+                    <p
+                      className="text-xs leading-relaxed mb-3"
+                      style={{ color: "var(--charcoal)", opacity: 0.75 }}
+                    >
+                      {fish.herkomst}
+                    </p>
+
+                    {/* Vangstmethode */}
+                    <p
+                      className="text-xs leading-relaxed mb-4 flex-1"
+                      style={{ color: "var(--charcoal)", opacity: 0.55 }}
+                    >
+                      <strong style={{ opacity: 1 }}>Vangst/teelt:</strong> {fish.vangenMethode}
+                    </p>
+
+                    {/* VISwijzer / Duurzaamheid */}
+                    <div
+                      className="p-3 text-xs leading-relaxed mb-3"
+                      style={{ backgroundColor: ds.bg, borderLeft: `3px solid ${ds.color}` }}
+                    >
+                      <span className="font-bold" style={{ color: ds.color }}>
+                        {ds.label}
+                      </span>
+                      {" — "}
+                      <span style={{ color: "var(--charcoal)", opacity: 0.75 }}>
+                        {fish.duurzaamheidNote}
+                      </span>
+                      {fish.viswijzerLink && (
+                        <>
+                          {" "}
+                          <a
+                            href={fish.viswijzerLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline hover:opacity-70 transition-opacity"
+                            style={{ color: ds.color }}
+                          >
+                            Meer info ↗
+                          </a>
+                        </>
+                      )}
+                    </div>
+
+                    {/* Leverancier */}
+                    <div
+                      className="pt-3 text-xs"
+                      style={{
+                        borderTop: "1px solid var(--sand)",
+                        color: "var(--navy)",
+                        opacity: 0.45,
+                      }}
+                    >
+                      {fish.leverancier}
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
           </div>
 
           <div
-            className="mt-12 p-8 text-center"
+            className="mt-12 p-8"
             style={{ backgroundColor: "var(--sand)", borderLeft: "4px solid var(--seafoam)" }}
           >
             <p
-              className="text-sm leading-relaxed max-w-xl mx-auto"
-              style={{ color: "var(--charcoal)", opacity: 0.8 }}
+              className="text-sm leading-relaxed max-w-2xl"
+              style={{ color: "var(--charcoal)", opacity: 0.85 }}
             >
-              Niet zeker welke vis u zoekt? Kom langs — we leggen u graag uit waar elke vis
-              vandaan komt en wat u er het beste mee kunt doen.
+              <strong>Onze belofte:</strong> wij zijn transparant over de duurzaamheidsstatus van
+              elk product — ook als dat een rood of oranje oordeel is. Vis eten is goed voor u;
+              bewust vis eten is nog beter. Vraag ons gerust naar alternatieven.
             </p>
           </div>
         </div>
