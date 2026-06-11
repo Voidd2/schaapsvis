@@ -74,7 +74,7 @@ const receptenOrigineel: Recept[] = [
       "Rode ui erover, besprenkel met dressing. Direct serveren.",
     ],
     verhaal:
-      "De perfecte zomerse lunch of een licht diner. Vers gerookte zalm van Schaap's Vis maakt dit gerecht direct bijzonder — de rooksmaak past perfect bij de frisheid van citroen en avocado. Vraag Aldert welke zalm die dag het lekkerst ruikt.",
+      "De perfecte zomerse lunch of een licht diner. Vers gerookte zalm van Schaap's Vis maakt dit gerecht direct bijzonder — de rooksmaak past perfect bij de frisheid van citroen en avocado. Vraag ons welke zalm die dag het lekkerst ruikt.",
     highlight: "15 min · Zomer hit",
     seoKeywords: "zalmsalade recept, zomerse salade zalm, gerookte zalm salade",
   },
@@ -103,7 +103,7 @@ const receptenOrigineel: Recept[] = [
       "Direct serveren met krieltjes of rijst.",
     ],
     verhaal:
-      "De Varlaks zalm heeft zo'n rijke smaak dat er weinig bij nodig is. Aldert's advies: niet te lang in de oven. Rosé van binnen is geen fout — dat is precies goed.",
+      "De Varlaks zalm heeft zo'n rijke smaak dat er weinig bij nodig is. Ons advies: niet te lang in de oven. Rosé van binnen is geen fout — dat is precies goed.",
     highlight: "Varlaks special",
     seoKeywords: "zalm oven recept, zalm citroen dille, varlaks zalm recept",
   },
@@ -155,7 +155,7 @@ const receptenOrigineel: Recept[] = [
       "https://images.unsplash.com/photo-1498604819470-d34ff92b1341?w=800&q=80",
     fotoLabel: "Gepekelde zalm met verse dille en roze peperbessen",
     vanSchaap: [
-      "Hele Varlaks zalmfilet (500–800g, met vel) — vraag Aldert de graten te verwijderen",
+      "Hele Varlaks zalmfilet (500–800g, met vel) — vraag ons de graten te verwijderen",
     ],
     vanSupermarkt: [
       "200g grof zeezout + 150g suiker",
@@ -216,7 +216,7 @@ const receptenOrigineel: Recept[] = [
     fotoLabel: "Kom vissoep met stukken verse vis in een rijke bouillon",
     vanSchaap: [
       "300g gemengde visfilet (kabeljauw + schol of zalm)",
-      "Tip: vraag Aldert welke vis die dag het lekkerst is",
+      "Tip: vraag naar de vis van de dag",
     ],
     vanSupermarkt: [
       "1 ui, 2 stengels selderij, 2 wortelen",
@@ -231,7 +231,7 @@ const receptenOrigineel: Recept[] = [
       "Room erdoor, op smaak brengen. Direct serveren met brood.",
     ],
     verhaal:
-      "Niets gaat boven zelfgemaakte vissoep op een koude dag. Vraag Aldert welke vis die dag het lekkerst is — een combinatie van twee soorten geeft de meeste diepte.",
+      "Niets gaat boven zelfgemaakte vissoep op een koude dag. Vraag naar de vis van de dag — een combinatie van twee soorten geeft de meeste diepte.",
     seoKeywords: "vissoep recept, romige vissoep, zelfgemaakte vissoep",
   },
   {
@@ -381,7 +381,7 @@ const receptenOrigineel: Recept[] = [
       "Verdeel de groenten over 4 warme borden. Leg de kabeljauw met de velkant omhoog erop.",
     ],
     verhaal:
-      "Zeekraal halen ze hier soms ook rechtstreeks uit de Zeeuwse delta. Zout van zichzelf, knapperig — het past perfect bij de milde, vlokkerige structuur van kabeljauwlende. Vraag Aldert om de lende: dat is het dikste, vetste stuk van de vis.",
+      "Zeekraal halen ze hier soms ook rechtstreeks uit de Zeeuwse delta. Zout van zichzelf, knapperig — het past perfect bij de milde, vlokkerige structuur van kabeljauwlende. Vraag om de lende: dat is het dikste, vetste stuk van de vis.",
     seoKeywords:
       "kabeljauw zeekraal recept, kabeljauw venkel, kabeljauwlende bereiden",
   },
@@ -462,7 +462,7 @@ const receptenOrigineel: Recept[] = [
       "https://images.unsplash.com/photo-1616501268826-ee9731c915d4?w=800&q=80",
     fotoLabel: "Kom romige venkelsoep met dille en croutons",
     vanSchaap: [
-      "500 g wilde sockeye zalm — vraag Aldert om dunne plakken te snijden",
+      "500 g wilde sockeye zalm — vraag ons dunne plakken te snijden",
     ],
     vanSupermarkt: [
       "1 kg venkelknol",

@@ -3,7 +3,6 @@ import { useTranslations, useLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
-import { PhotoPlaceholder } from "@/components/shared/PhotoPlaceholder";
 
 export async function generateMetadata({
   params,
@@ -110,9 +109,11 @@ function AboutSection() {
             {t("link")}
           </Link>
         </div>
-        <PhotoPlaceholder
-          label="FOTO TOEVOEGEN: Winkelgevel Herenstraat 48 of Aldert achter de toonbank"
-          aspectRatio="aspect-[3/4]"
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80"
+          alt="Viswinkel toonbank met verse vis op ijs"
+          className="w-full aspect-[3/4] object-cover"
         />
       </div>
     </section>
@@ -142,9 +143,11 @@ function VarlaksHighlight() {
   return (
     <section style={{ backgroundColor: "var(--navy)" }} className="py-20">
       <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-14 items-center">
-        <PhotoPlaceholder
-          label="FOTO TOEVOEGEN: Varlaks zalmfilet of Noorse zee"
-          aspectRatio="aspect-square"
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80"
+          alt="Verse Varlaks zalmfilet"
+          className="w-full aspect-square object-cover"
         />
         <div>
           <span
@@ -185,12 +188,12 @@ function VarlaksHighlight() {
 }
 
 const productItems = [
-  { name: "Kibbeling",    desc: "Knapperig gebakken, de Hollandse klassieker",  fotoLabel: "FOTO TOEVOEGEN: Kibbeling op bakpapier" },
-  { name: "Haring",       desc: "Vers, rauw, recht van de markt",               fotoLabel: "FOTO TOEVOEGEN: Broodje haring met ui" },
-  { name: "Lekkerbek",    desc: "Verse wijting in luchtig beslag",               fotoLabel: "FOTO TOEVOEGEN: Lekkerbek in beslag" },
-  { name: "Vissoep",      desc: "Huisgemaakte soep, elke dag anders",            fotoLabel: "FOTO TOEVOEGEN: Kom vissoep" },
-  { name: "Varlaks Zalm", desc: "Biologisch, Noors, antibioticavrij",            fotoLabel: "FOTO TOEVOEGEN: Varlaks zalmfilet" },
-  { name: "Feestschotel", desc: "Voor bijzondere gelegenheden",                  fotoLabel: "FOTO TOEVOEGEN: Gevulde visschotel" },
+  { name: "Kibbeling",    desc: "Knapperig gebakken, de Hollandse klassieker",  foto: "https://images.unsplash.com/photo-1610614815803-cc45f99d64ab?w=600&q=80", alt: "Goudbruine kibbeling op bakpapier" },
+  { name: "Haring",       desc: "Vers, rauw, recht van de markt",               foto: "https://images.unsplash.com/photo-1534482421-64566f976cfa?w=600&q=80", alt: "Hollandse haring" },
+  { name: "Lekkerbek",    desc: "Verse wijting in luchtig beslag",               foto: "https://images.unsplash.com/photo-1559847844-5315695dadae?w=600&q=80", alt: "Gebakken vis in beslag" },
+  { name: "Vissoep",      desc: "Huisgemaakte soep, elke dag anders",            foto: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80", alt: "Kom verse vissoep" },
+  { name: "Varlaks Zalm", desc: "Biologisch, Noors, antibioticavrij",            foto: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600&q=80", alt: "Varlaks biologische zalmfilet" },
+  { name: "Feestschotel", desc: "Voor bijzondere gelegenheden",                  foto: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80", alt: "Feestelijke visschotel" },
 ];
 
 function AssortimentGrid() {
@@ -212,9 +215,10 @@ function AssortimentGrid() {
           {t("title")}
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-          {productItems.map(({ name, desc, fotoLabel }) => (
+          {productItems.map(({ name, desc, foto, alt }) => (
             <article key={name} className="group">
-              <PhotoPlaceholder label={fotoLabel} aspectRatio="aspect-square" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={foto} alt={alt} className="w-full aspect-square object-cover" />
               <div className="pt-3">
                 <h3
                   className="font-bold text-base mb-1"

@@ -3,7 +3,6 @@ import { useTranslations, useLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
-import { PhotoPlaceholder } from "@/components/shared/PhotoPlaceholder";
 
 export async function generateMetadata({
   params,
@@ -138,7 +137,7 @@ const ourFish: FishCard[] = [
     badgeColor: "#b8832e",
     opAanvraag: false,
     duurzaamheid: "rood",
-    foto: "https://images.unsplash.com/photo-_8nf7hmAiVQ?w=800&q=80",
+    foto: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80",
     tagline: "Scomber scombrus · Noordzee & Noorse Zee · makreel · zout · rook",
     herkomst:
       "Makreel (Scomber scombrus) is gevangen in de Noordzee en de Noorse Zee. In vaktaal heet dit 'FAO-zone 27' — dat is gewoon de naam die wetenschappers gebruiken voor dit deel van de Atlantische Oceaan: de wateren van Noorwegen, IJsland, Groot-Brittannië en Nederland. Onze gestoomde makreel bevat maar drie ingrediënten: makreel, zout en rook. Geen conserveermiddelen, geen toevoegingen. De vis is boordevol omega-3 vetzuren en een van de meest voedingsrijke vissoorten die er bestaat. Stevige, volle smaak — heerlijk op brood of in een salade.",
@@ -158,7 +157,7 @@ const ourFish: FishCard[] = [
     foto: "https://www.zalmvanurk.nl/cdn/shop/files/Tonijn-vers.png",
     tagline: "Yellowfin tonijn (Thunnus albacares) · Sri Lanka · dikke stukken",
     herkomst:
-      "Yellowfin tonijn (Thunnus albacares) uit Sri Lanka — een van de beste tonijnregio's ter wereld. 'AA Chunk' betekent: de allerbeste kwaliteitsklasse, dikke stevige stukken (geen flinters). Sri Lanka heeft een lange traditie in het handmatig vangen van tonijn in de Indische Oceaan. Geïmporteerd via W.G. Den Heijer & Zn in Scheveningen — een familiebedrijf dat al since 1946 vis importeert vanuit de Scheveningse vissershaven (Vissershavenweg 50).",
+      "Yellowfin tonijn (Thunnus albacares) uit Sri Lanka — een van de beste tonijnregio's ter wereld. 'AA Chunk' betekent: de allerbeste kwaliteitsklasse, dikke stevige stukken (geen flinters). Sri Lanka heeft een lange traditie in het handmatig vangen van tonijn in de Indische Oceaan. Geïmporteerd via W.G. Den Heijer & Zn in Scheveningen — een familiebedrijf dat al sinds 1946 vis importeert vanuit de Scheveningse vissershaven (Vissershavenweg 50).",
     vangenMethode:
       "Gevangen in de Indische Oceaan door Sri Lankaanse vissers. W.G. Den Heijer is een van de oudste en meest gerespecteerde visgrossiers van Nederland.",
     duurzaamheidNote:
@@ -253,9 +252,11 @@ function EerlijkeVisContent() {
               {t("whyText2")}
             </p>
           </div>
-          <PhotoPlaceholder
-            label="FOTO TOEVOEGEN: Vis op ijs in de winkel — toonbank Schaap's Vis Leiden"
-            aspectRatio="aspect-[4/3]"
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://images.unsplash.com/photo-1534482421-64566f976cfa?w=800&q=80"
+            alt="Verse vis op ijs bij een viswinkel toonbank"
+            className="w-full aspect-[4/3] object-cover"
           />
         </div>
       </section>
@@ -270,7 +271,7 @@ function EerlijkeVisContent() {
             {t("certTitle")}
           </h2>
           <p className="text-center text-sm mb-12 opacity-60" style={{ color: "var(--charcoal)" }}>
-            Wat betekenen die keurmerken op het verpakking eigenlijk?
+            Wat betekenen die keurmerken op de verpakking eigenlijk?
           </p>
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
             {certifications.map(({ key, label, color, icon }) => (

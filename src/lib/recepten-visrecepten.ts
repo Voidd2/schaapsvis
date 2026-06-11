@@ -184,7 +184,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken harderfilet",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 stukken harderfilet van 150 g",
@@ -340,7 +340,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Vongole aglio e olio & pasta",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "1 kg kokkels of vongole",
@@ -836,7 +836,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Zeewolf",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g zeewolf, gefileerd en zonder huid",
@@ -902,7 +902,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Filipijnse ovenschotel",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "350 g gerookte schelvis, ontdaan van vel",
@@ -1136,7 +1136,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Rolmops",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 rolmopsen uit pot",
@@ -1446,7 +1446,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Gemarineerde haring",
     vanSchaap: [
-      "Verse haring (vraag Aldert naar de dagselectie)",
+      "Verse haring (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "500 g Hollandse Nieuwe",
@@ -2015,7 +2015,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Coquilles",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "8 coquilles",
@@ -2076,7 +2076,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Dorade",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "2 hele schoongemaakte dorades à 500 g",
@@ -2417,7 +2417,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Knolselderijstamppot",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 poonfilets met vel, van 100 g elk",
@@ -2811,7 +2811,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Griet",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "1 hele griet",
@@ -3049,7 +3049,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Griet uit de oven",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 grietfilets van ongeveer 200 g",
@@ -3485,7 +3485,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Geroosterde sliptong",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 sliptongen, ontveld",
@@ -3519,7 +3519,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Vis",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "330 g passata",
@@ -3849,7 +3849,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Griet",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "400 g grietfilet",
@@ -3882,7 +3882,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gebakken scheermessen",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "1 kg scheermessen",
@@ -3945,7 +3945,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Romige tagliatelle",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "500 g coquilles (8 grote of 12 kleinere)",
@@ -4178,7 +4178,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Pangasius",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 pangasiusfilets à 150 g",
@@ -4298,7 +4298,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegrilde harder",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 stukken harderfilet van 150 g",
@@ -4328,7 +4328,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken sliptong",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 sliptongen of tongfilets",
@@ -4631,7 +4631,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Doradefilet",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 doradefilets zonder vel, van 75-100 g elk",
@@ -4819,7 +4819,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegratineerde zeewolf uit de oven",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 stukken zeewolffilet (à 150 g)",
@@ -5408,7 +5408,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Roergebakken pangasius",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "500 g pangasius",
@@ -5619,7 +5619,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Geroosterde tongfilet",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 tongfilets van 100 g",
@@ -5679,7 +5679,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Rode poon",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 panklare rode ponen (à 200 g)",
@@ -6070,7 +6070,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "BBQ-poon",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "1 kg panklare rode poon met kop",
@@ -6107,7 +6107,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken tongfilet",
     vanSchaap: [
-      "Verse aal (vraag Aldert naar de dagselectie)",
+      "Verse aal (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "500 g tongfilet",
@@ -6179,7 +6179,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Salade",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "8 tot 10 coquilles",
@@ -6242,7 +6242,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Saltimbocca van rode poon",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g rode poonfilet",
@@ -6269,7 +6269,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Chinees gestoomde dorade",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 hele panklare dorades à ca. 350 g of 4 fillets à 150 g",
@@ -6614,7 +6614,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gestoomde poon",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g rode poonfilet",
@@ -6682,7 +6682,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gebakken bot",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 hele botfilets met vel",
@@ -6713,7 +6713,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Sliptong",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 sliptongetjes",
@@ -6853,7 +6853,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Sandwich",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 gerookte spekbokkingen, schoongemaakt",
@@ -6999,7 +6999,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gestoomde coquilles",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "12 coquilles",
@@ -7236,7 +7236,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Quiche",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "250 g harderfilet, in stukjes",
@@ -7307,7 +7307,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Drunken Me Cocktail",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "100 gr wakame",
@@ -7584,7 +7584,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Hachee van heek",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g heekfilet",
@@ -7957,7 +7957,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Vispotje",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "2 grietfilets",
@@ -8328,7 +8328,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Harderfilet",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 stukken harderfilet van 150 g, zonder vel",
@@ -8489,7 +8489,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken rode poon",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g rode poonfilet",
@@ -9027,7 +9027,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Tong Picasso 2.0",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 medium tongen, heel of gefileerd",
@@ -9241,7 +9241,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Minitaco's",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "225 g filet van rauwe vis of tataki van vis",
@@ -9284,7 +9284,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken tong",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "8 kleine sliptongen of 4 grotere tongen, schoongemaakt",
@@ -9525,7 +9525,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Surf en turf",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "10 coquilles",
@@ -9558,7 +9558,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Pieterman",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "500 g pietermanfilets",
@@ -9761,7 +9761,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Fish Fingers",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "500 g fish fingers of snij gepaneerde vis in smalle repen",
@@ -10051,7 +10051,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Plaattaart",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "3 dorade filets, in stukjes",
@@ -10246,7 +10246,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haringtartaar",
     vanSchaap: [
-      "Verse haring (vraag Aldert naar de dagselectie)",
+      "Verse haring (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 Hollandse Nieuwe",
@@ -10315,7 +10315,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Coquilles",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "6 grote coquilles of 12 kleine",
@@ -10784,7 +10784,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Oosterse makreelspiesjes",
     vanSchaap: [
-      "Verse makreel (vraag Aldert naar de dagselectie)",
+      "Verse makreel (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "2 verse makrelen van 300 g, elk in 2 filets",
@@ -10941,7 +10941,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Heek",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g heek, in blokjes gesneden",
@@ -10983,7 +10983,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Aardappelsalade",
     vanSchaap: [
-      "Verse makreel (vraag Aldert naar de dagselectie)",
+      "Verse makreel (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "2 gerookte makrelen, zonder vel en graten",
@@ -11017,7 +11017,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Zeewolf",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g zeewolffilets",
@@ -11132,7 +11132,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegrilde sliptong",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "1 of 2 grote panklare sliptongen",
@@ -11348,7 +11348,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Dorade",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "1 grote dorade, schoongemaakt en ontveld",
@@ -11384,7 +11384,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Paddenstoelrisotto",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 poonfilets zonder vel à 100 g",
@@ -11419,7 +11419,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Pangasius",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 pangasiusfilets (à 150 gram)",
@@ -11447,7 +11447,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Dorade",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 dorades van ongeveer 400 g",
@@ -11537,7 +11537,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Krokant gebakken sliptong",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "8 ontvelde kleine sliptongetjes",
@@ -11843,7 +11843,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegratineerde tongrolletjes uit de oven",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g tongfilet",
@@ -12277,7 +12277,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Kort gerookte tongrolletjes",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "8 enkele tongfilets",
@@ -12486,7 +12486,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Mediterraan rogvleugelpakketje",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 rogvleugelfilets (800 g)",
@@ -12956,7 +12956,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tongrolletjes gepocheerd",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "6 tongfilets",
@@ -12988,7 +12988,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tajine van gemarineerde pangasius en geroosterde p",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600-800 g pangasiusfilet",
@@ -13439,7 +13439,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegratineerde griet",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 grietfilets à 150 g",
@@ -13539,7 +13539,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Schelvis",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 schelvishaasjes",
@@ -13642,7 +13642,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Ovenschotel van rode poon",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g rode poonfilet",
@@ -13835,7 +13835,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Sigaartjes",
     vanSchaap: [
-      "Verse tonijn (vraag Aldert naar de dagselectie)",
+      "Verse tonijn (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "1 zakje Tuna with a twist (met french dressing), à 85 g",
@@ -13870,7 +13870,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Vispakketje van de barbecue",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 pangasiusfilets van 150 g",
@@ -13903,7 +13903,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Krokante doradefilet",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 doradefilets met vel, van 150 g elk",
@@ -14147,7 +14147,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Rolletjes van tong gevuld",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "8 kleine tongfilets",
@@ -14176,7 +14176,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tong",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 grote sliptongen",
@@ -14697,7 +14697,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Krokante sliptong",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 sliptongetjes zonder vel",
@@ -15040,7 +15040,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tongrolletjes",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g tongfilets",
@@ -15340,7 +15340,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken zeewolf",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 zeewolffilets à 150 g",
@@ -15502,7 +15502,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Pittige vis",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "750 g witvis, in stukken gesneden",
@@ -15566,7 +15566,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gesmoorde scheermessen",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "300 g scheermessen (mesheften)",
@@ -15596,7 +15596,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Sliptong",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "8 ontvelde kleine sliptongetjes",
@@ -15742,7 +15742,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Spaghetti",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "1 kilo clams",
@@ -16233,7 +16233,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Kokkels",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "400 g kokkels",
@@ -16415,7 +16415,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Brandade van heek",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "300 g heek",
@@ -16551,7 +16551,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Gerookte en gestoomde makreel",
     vanSchaap: [
-      "Verse makreel (vraag Aldert naar de dagselectie)",
+      "Verse makreel (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 verse, schoongemaakte makrelen",
@@ -16753,7 +16753,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1644784643137-b9073dd262f6?w=800&q=80",
     fotoLabel: "Zeebaars",
     vanSchaap: [
-      "Verse zeebaars (vraag Aldert naar de dagselectie)",
+      "Verse zeebaars (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "2 hele zeebaarzen, schoongemaakt",
@@ -16942,7 +16942,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Sprotjes",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "1 bleekselderij (alleen het gele hart van de stronk)",
@@ -17407,7 +17407,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Hollandse bloemkoolsoep",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "400 g heekfilet, in stukjes",
@@ -17590,7 +17590,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tong",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 kleine sliptongen",
@@ -17887,7 +17887,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Geroosterde zeewolf",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 zeewolffilets (à 150 g)",
@@ -17985,7 +17985,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Sliptong",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "8 panklare sliptongen",
@@ -18082,7 +18082,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Grietfilet",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "Filet van 1 griet, ongeveer 600 g",
@@ -18457,7 +18457,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Sliptong",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 sliptongetjes",
@@ -18530,7 +18530,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gestoomde scheermes",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "300 g scheermessen",
@@ -18650,7 +18650,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegratineerde heekfilet",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g heekfilet",
@@ -18797,7 +18797,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Rogvleugel",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "2 rogvleugelfilets van 150 g",
@@ -18855,7 +18855,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegratineerde mesheften",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "1 kg scheermessen",
@@ -18963,7 +18963,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Doradefilet",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 doradefilets met huid van 150 g",
@@ -19058,7 +19058,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gefrituurde calamares",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "1 kilo calamares",
@@ -19118,7 +19118,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Sardientjes van de barbecue",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "12 sardientjes, schoongemaakt",
@@ -19498,7 +19498,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Pittige zeewolfsaté",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g zeewolf",
@@ -19669,7 +19669,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Poké burrito",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "150 g rauwe vis of tataki van vis",
@@ -19750,7 +19750,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Coquilles crudo, jalapeños, yuzu",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 coquilles",
@@ -20084,7 +20084,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegrilde poon",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "8 rode poonfilets, niet al te groot",
@@ -20121,7 +20121,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tong",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "8 kleine sliptongetjes",
@@ -20588,7 +20588,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Ceviche van griet",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "450 g grietfilet",
@@ -20627,7 +20627,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegrilde tong",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 tongen of 8 sliptongen",
@@ -20919,7 +20919,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Schelvis",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "1 schelvis (ca. 1 kg), zonder kop en schoongemaakt",
@@ -20948,7 +20948,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Pakketje",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 pangasiusfilets (à 150 gram)",
@@ -21012,7 +21012,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Dorade",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 doradefilets",
@@ -21079,7 +21079,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken rogvleugel",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "1 rogvleugel in 2 filets",
@@ -21111,7 +21111,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1487335414417-ac48b43a8cc7?w=800&q=80",
     fotoLabel: "Haring",
     vanSchaap: [
-      "Verse haring (vraag Aldert naar de dagselectie)",
+      "Verse haring (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 Hollandse Nieuwe",
@@ -21369,7 +21369,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Roerbak van pangasius",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "500 g pangasiusfilet",
@@ -21488,7 +21488,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tong alla puttanesca",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 tongen, schoongemaakt en zonder kop, maar niet gefileerd",
@@ -21529,7 +21529,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Rogvleugelfilet",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 rogvleugelfilets (800 g)",
@@ -21692,7 +21692,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Coquilles",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "2 plakken ham (Parma of Serrano)",
@@ -21791,7 +21791,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Ovenschotel van makreel en aubergine",
     vanSchaap: [
-      "Verse makreel (vraag Aldert naar de dagselectie)",
+      "Verse makreel (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "3 verse makrelen, schoongemaakt en in filets gesneden",
@@ -22231,7 +22231,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Rauw gemarineerde coquilles",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "1 Biologische handsinaasappel",
@@ -22295,7 +22295,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Zeewolftaartje",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "200 g zeewolffilet",
@@ -22525,7 +22525,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tongrolletjes",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "8 tot 12 tongfilets, afhankelijk van de grootte",
@@ -22919,7 +22919,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Sliptong",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 sliptongen of tongfilets",
@@ -23223,7 +23223,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Stoom-gerookte rode poon",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "rode poonfilets",
@@ -23252,7 +23252,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Clamshowder",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "1 kg clams",
@@ -23571,7 +23571,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "American Chowder",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "400 g heekfilet",
@@ -23779,7 +23779,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken tong",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "12 kleine tongfilets",
@@ -23816,7 +23816,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken dorade",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "700 g doradefilet met vel",
@@ -24015,7 +24015,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Mini pizzaatjes",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "kant en klaar pizzadeeg, koelvak",
@@ -24401,7 +24401,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Dorade",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "2 hele dorades (± 1 kilo)",
@@ -24660,7 +24660,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Spaghetti fruits de mer",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "450 g zeevruchten",
@@ -24905,7 +24905,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Sandwich",
     vanSchaap: [
-      "Verse tonijn (vraag Aldert naar de dagselectie)",
+      "Verse tonijn (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "1 stengel bleekselderij",
@@ -25025,7 +25025,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Poon",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 poonfilets",
@@ -25269,7 +25269,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Andijviestamppotje",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 rode ponen, panklaar",
@@ -25543,7 +25543,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gepocheerde tongrolletjes",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "12 ontvelde tongfilets",
@@ -25673,7 +25673,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken pangasius",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 pangasiusfilets à 125 g",
@@ -25705,7 +25705,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gegratineerde coquilles",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "12 Sint Jacobsschelpen",
@@ -25801,7 +25801,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tong 'Wellington'",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 tongfilets van 100 g",
@@ -25832,7 +25832,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Spaghetti",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "500 g (diepvries) pangasiusfilet, ontdooid",
@@ -25934,7 +25934,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Dorade",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "1 grote dorade, gefileerd",
@@ -25998,7 +25998,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Dorade",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 doradefilets",
@@ -26729,7 +26729,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken tongreepjes",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g tongfilets",
@@ -27281,7 +27281,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Kruidige sprotjes",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "300 g verse sprotjes, schoongemaakt",
@@ -27420,7 +27420,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Gevulde makreel",
     vanSchaap: [
-      "Verse makreel (vraag Aldert naar de dagselectie)",
+      "Verse makreel (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 verse makrelen, met kop, schoongemaakt en graat verwijderd",
@@ -27451,7 +27451,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Doradefilets",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 doradefilets 100 g per stuk",
@@ -27480,7 +27480,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegrilde poon",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 rode ponen (ca. 200-250 g)",
@@ -27618,7 +27618,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Heek a la Niçoise",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g heekfilet met vel",
@@ -27867,7 +27867,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gefrituurde poon",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 grote ponen op de graat zonder vel",
@@ -27936,7 +27936,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tongfilet",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 sliptongen of tongfilets",
@@ -28025,7 +28025,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gegrilde rode poon",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "2 rode ponen, schoongemaakt",
@@ -28233,7 +28233,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Doritos viskoekjes",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "250 g schelvis",
@@ -28677,7 +28677,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Zeewolffilet",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 stukken zeewolffilet (à 150 g)",
@@ -29095,7 +29095,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Rode poon",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 rode ponen, zonder vel",
@@ -29225,7 +29225,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Rode poon",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 filets rode poon van ongeveer 120 g",
@@ -29575,7 +29575,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Heek",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 heekfilets in moten van circa 200 g",
@@ -29605,7 +29605,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Pasta",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "500 g coquilles",
@@ -29672,7 +29672,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1772329320539-d297125453c1?w=800&q=80",
     fotoLabel: "Tonijn-kaastosti",
     vanSchaap: [
-      "Verse tonijn (vraag Aldert naar de dagselectie)",
+      "Verse tonijn (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "1 zakje tuna with a twist (with a touch of water), à 85 gram",
@@ -29731,7 +29731,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Zeewolf",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g zeewolf filets",
@@ -29933,7 +29933,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Ceviche",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "200 g rauwe vis",
@@ -30034,7 +30034,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Gegratineerde makreelrolletjes",
     vanSchaap: [
-      "Verse makreel (vraag Aldert naar de dagselectie)",
+      "Verse makreel (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 verse makrelen, in de lengte gehalveerd",
@@ -30280,7 +30280,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Witvis",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "500 g zeewolffilet of andere stevige witvis",
@@ -30307,7 +30307,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gepocheerde rode poon",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g poonfilet",
@@ -30494,7 +30494,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Mini vis pie",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g zeewolffilet, in stukjes",
@@ -30569,7 +30569,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tongrolletjes",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 grote, enkele van ca. 150 g elk, of 8 kleine tongfilets van ca. 75 g elk",
@@ -30637,7 +30637,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Zarzuela",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g heekfilet (zonder vel), in stukken",
@@ -30669,7 +30669,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Coquilles",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "12 coquilles",
@@ -30698,7 +30698,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Oosterse noedels",
     vanSchaap: [
-      "Verse makreel (vraag Aldert naar de dagselectie)",
+      "Verse makreel (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "2 gerookte of gestoomde makrelen, schoongemaakt",
@@ -30728,7 +30728,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tartaar van Hollandse Nieuwe",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 Hollandse Nieuwe",
@@ -30897,7 +30897,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Sliptong",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 el olijfolie en wat extra",
@@ -31152,7 +31152,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken heek",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g heekfilets met vel",
@@ -31255,7 +31255,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Gebakken bot",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "2 hele botten, schoongemaakt",
@@ -31887,7 +31887,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Griet",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "2 grieten, heel",
@@ -32252,7 +32252,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Scheermessen 'Amêijoas à Bulhão Pato'",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "400 g scheermessen",
@@ -32455,7 +32455,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Griet",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "6 stuks 150 g grietfilet",
@@ -32719,7 +32719,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gestoofde pietermanfilet",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g pietermanfilet",
@@ -32879,7 +32879,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Pieterman taco’s",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "400 g pietermanfilet, in reepjes gesneden",
@@ -33070,7 +33070,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Thaise viskoekjes",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "400 g (stevige witvis, in grove stukken en licht ontdooid)",
@@ -33245,7 +33245,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Fish & Chips",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g zeewolffilet",
@@ -33374,7 +33374,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gebakken heek",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g heekfilet (zonder vel), in 12 stukken",
@@ -33546,7 +33546,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Horsmakreel uit de oven",
     vanSchaap: [
-      "Verse makreel (vraag Aldert naar de dagselectie)",
+      "Verse makreel (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 horsmakrelen",
@@ -33632,7 +33632,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Rode poon escabeche",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "VOOR HET PEKELBAD: 1 l water en 60 g zout",
@@ -33704,7 +33704,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Dorade",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "1 dorade, schoongemaakt",
@@ -33738,7 +33738,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Tongpakketjes",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 panklare tongen à ca. 300 g of 16 enkele tongfilets",
@@ -33927,7 +33927,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gravad laks poké roll",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "ca. 300 g Alaska gravad laks in plakken",
@@ -33995,7 +33995,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Gestoomde tongfilet",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "8 tongfilets van 60 g elk",
@@ -34091,7 +34091,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Vis saucijzenbroodjes van heek",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "500 g heekfilet",
@@ -34548,7 +34548,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1567087978459-8a8eeac7bc75?w=800&q=80",
     fotoLabel: "Pittige penne",
     vanSchaap: [
-      "Verse makreel (vraag Aldert naar de dagselectie)",
+      "Verse makreel (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "2 gestoomde makrelen van 300 g",
@@ -34617,7 +34617,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Zeewolf",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g zeewolffilet",
@@ -34953,7 +34953,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Geroosterde dorade",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "4 dorades, panklaar",
@@ -35646,7 +35646,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Pieterman",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "400 g pietermanfilets",
@@ -35751,7 +35751,7 @@ export const receptenVisrecepten: {
     fotoUrl: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=800&q=80",
     fotoLabel: "Lauwwarme salade",
     vanSchaap: [
-      "Verse vis (vraag Aldert naar de dagselectie)",
+      "Verse vis (vraag naar onze dagselectie)",
     ],
     vanSupermarkt: [
       "600 g heekfilet, in 4 stukken",
