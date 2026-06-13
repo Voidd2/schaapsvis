@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import { useLocale } from "next-intl";
 import type { Metadata } from "next";
 import { Clock, ChefHat, ShoppingBag, ShoppingCart, ArrowLeft, AlertCircle } from "lucide-react";
@@ -91,29 +91,42 @@ function ReceptDetailContent({
           >
             {recept.title}
           </h1>
-          <p className="text-lg mb-6" style={{ color: "rgba(247,240,227,0.7)" }}>
+          <p className="text-lg mb-6" style={{ color: "rgba(246,250,253,0.7)" }}>
             {recept.subtitle}
           </p>
           <div className="flex flex-wrap gap-3 mb-2">
             <span
               className="inline-flex items-center gap-2 text-sm px-4 py-2 text-white"
-              style={{ backgroundColor: "rgba(247,240,227,0.1)" }}
+              style={{ backgroundColor: "rgba(246,250,253,0.1)" }}
             >
               <Clock size={15} /> {recept.tijd}
             </span>
             <span
               className="inline-flex items-center gap-2 text-sm px-4 py-2 text-white"
-              style={{ backgroundColor: "rgba(247,240,227,0.1)" }}
+              style={{ backgroundColor: "rgba(246,250,253,0.1)" }}
             >
               <ChefHat size={15} /> {recept.moeilijkheid}
             </span>
+            {recept.porties && (
+              <span
+                className="inline-flex items-center gap-2 text-sm px-4 py-2 text-white"
+                style={{ backgroundColor: "rgba(246,250,253,0.1)" }}
+              >
+                {recept.porties} {recept.porties === 1 ? "portie" : "personen"}
+              </span>
+            )}
           </div>
+          {recept.seizoen && (
+            <p className="text-sm mt-4" style={{ color: "var(--sand)" }}>
+              Seizoen: {recept.seizoen}
+            </p>
+          )}
           <div className="flex flex-wrap gap-2 mt-4">
             {recept.tags.map((tag) => (
               <span
                 key={tag}
                 className="text-xs px-2.5 py-1"
-                style={{ backgroundColor: "rgba(247,240,227,0.12)", color: "var(--sand)" }}
+                style={{ backgroundColor: "rgba(246,250,253,0.12)", color: "var(--sand)" }}
               >
                 {TAG_ICON[tag]} {tag}
               </span>
@@ -216,7 +229,7 @@ function ReceptDetailContent({
                   <li
                     key={item}
                     className="text-sm leading-snug"
-                    style={{ color: "rgba(247,240,227,0.85)" }}
+                    style={{ color: "rgba(246,250,253,0.85)" }}
                   >
                     · {item}
                   </li>
@@ -329,9 +342,42 @@ export default async function ReceptDetailPage({
 }: {
   params: Promise<{ slug: string; locale: string }>;
 }) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const recept = recepten.find((r) => r.slug === slug);
-  if (!recept) notFound();
+  // Oude recept-URL's (van de vorige receptendatabase) permanent doorsturen
+  if (!recept) permanentRedirect(`/${locale}/recepten`);
 
-  return <ReceptDetailWrapper recept={recept} />;
+  const recipeSchema = {
+    "@context": "https://schema.org",
+    "@type": "Recipe",
+    name: recept.title,
+    description: recept.subtitle,
+    image: recept.fotoUrl ? [recept.fotoUrl] : undefined,
+    recipeYield: recept.porties ? `${recept.porties} personen` : undefined,
+    totalTime: `PT${parseInt(recept.tijd) || 30}M`,
+    recipeCategory: "Visgerecht",
+    recipeCuisine: "Nederlands",
+    keywords: recept.seoKeywords,
+    recipeIngredient: [...recept.vanSchaap, ...recept.vanSupermarkt],
+    recipeInstructions: recept.bereidingswijze.map((stap, i) => ({
+      "@type": "HowToStep",
+      position: i + 1,
+      text: stap,
+    })),
+    author: {
+      "@type": "Organization",
+      name: "Schaap's Vishandel Leiden",
+      url: "https://schaapsvis.nl",
+    },
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(recipeSchema) }}
+      />
+      <ReceptDetailWrapper recept={recept} />
+    </>
+  );
 }

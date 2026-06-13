@@ -39,15 +39,17 @@ interface Product {
   omega3Badge?: string;
   nutrition: NutritionRow[];
   nutritionNote?: string;
+  bestelId?: string;
 }
 
 const products: Product[] = [
   {
     name: "Kibbeling",
     desc: "Knapperig gebakken stukjes kabeljauw in een luchtig, goudbruin beslag — de Hollandse klassieker op zijn best. Kabeljauw is van nature een magere, eiwitrijke vis; het beslag voegt een hartige krokante korst toe.",
-    photoUrl: "https://images.unsplash.com/photo-1610614815803-cc45f99d64ab?w=800&q=80",
+    photoUrl: "https://images.unsplash.com/photo-1598511726623-d2e9996892f0?w=800&q=80",
     photoAlt: "Goudbruine kibbeling op bakpapier",
     highlight: false,
+    bestelId: "kibbeling",
     nutrition: [
       { label: "Energie", value: "ca. 235 kcal" },
       { label: "Eiwit", value: "17 g" },
@@ -63,6 +65,7 @@ const products: Product[] = [
     photoUrl: null,
     photoAlt: "Lekkerbek in beslag",
     highlight: false,
+    bestelId: "lekkerbek",
     nutrition: [
       { label: "Energie", value: "ca. 220 kcal" },
       { label: "Eiwit", value: "16 g" },
@@ -77,6 +80,7 @@ const products: Product[] = [
     photoUrl: null,
     photoAlt: "Broodje haring met ui en augurk",
     highlight: false,
+    bestelId: "haring",
     omega3Badge: "Omega-3 topbron",
     nutrition: [
       { label: "Energie", value: "ca. 195 kcal" },
@@ -93,6 +97,7 @@ const products: Product[] = [
     photoUrl: null,
     photoAlt: "Kom huisgemaakte vissoep",
     highlight: false,
+    bestelId: "vissoep",
     nutrition: [
       { label: "Energie", value: "150–200 kcal" },
       { label: "Eiwit", value: "12–15 g" },
@@ -121,6 +126,7 @@ const products: Product[] = [
     photoUrl: null,
     photoAlt: "Gevulde feestelijke visschotel",
     highlight: false,
+    bestelId: "feestschotel",
     nutrition: [
       { label: "Energie", value: "afhankelijk" },
       { label: "Eiwit", value: "hoog" },
@@ -135,6 +141,7 @@ const products: Product[] = [
     photoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     photoAlt: "Verse Varlaks zalmfilet",
     highlight: true,
+    bestelId: "varlaks",
     badge: "Biologisch · ASC",
     omega3Badge: "Omega-3 uitstekend",
     nutrition: [
@@ -224,7 +231,7 @@ function NutritionGrid({ rows, note }: { rows: NutritionRow[]; note?: string }) 
           fontSize: "0.6rem",
         }}
       >
-        voedingswaarden ca. per 100&nbsp;g
+        voedingswaarden (indicatie)
       </div>
 
       {/* Value grid — 2 columns */}
@@ -291,12 +298,12 @@ function AssortimentContent() {
         >
           {t("title")}
         </h1>
-        <p className="text-lg max-w-xl mx-auto mb-5" style={{ color: "rgba(247,240,227,0.75)" }}>
+        <p className="text-lg max-w-xl mx-auto mb-5" style={{ color: "rgba(246,250,253,0.75)" }}>
           {t("sub")}
         </p>
         <div
           className="inline-block px-4 py-2 text-sm"
-          style={{ backgroundColor: "rgba(247,240,227,0.1)", color: "rgba(247,240,227,0.6)" }}
+          style={{ backgroundColor: "rgba(246,250,253,0.1)", color: "rgba(246,250,253,0.6)" }}
         >
           {t("note")}
         </div>
@@ -307,7 +314,7 @@ function AssortimentContent() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {products.map(
-              ({ name, desc, photoUrl, photoAlt, highlight, badge, omega3Badge, nutrition, nutritionNote }) => (
+              ({ name, desc, photoUrl, photoAlt, highlight, badge, omega3Badge, nutrition, nutritionNote, bestelId }) => (
                 <article
                   key={name}
                   className={`overflow-hidden flex flex-col${
@@ -370,6 +377,17 @@ function AssortimentContent() {
                         Meer over Varlaks &rarr;
                       </Link>
                     )}
+
+                    {/* Order CTA */}
+                    {bestelId && (
+                      <Link
+                        href={`/${locale}/bestellen?product=${bestelId}`}
+                        className="inline-block mt-auto pt-3 text-sm font-semibold text-center py-2 transition-opacity hover:opacity-90"
+                        style={{ backgroundColor: "var(--salmon)", color: "white", marginTop: "12px" }}
+                      >
+                        Bestel dit &rarr;
+                      </Link>
+                    )}
                   </div>
                 </article>
               )
@@ -381,21 +399,31 @@ function AssortimentContent() {
       {/* CTA */}
       <section style={{ backgroundColor: "var(--sand)" }} className="py-12 text-center px-4">
         <p
-          className="font-bold text-xl mb-2"
+          className="font-bold text-2xl mb-2"
           style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
         >
-          Kom langs voor verse vis
+          Verse vis afhalen of laten klaarzetten?
         </p>
-        <p className="text-sm mb-5" style={{ color: "var(--charcoal)", opacity: 0.7 }}>
-          Geen webshop — bel of kom langs voor actuele prijzen en aanbod.
+        <p className="text-sm mb-6 max-w-md mx-auto" style={{ color: "var(--charcoal)", opacity: 0.7 }}>
+          Bestel vooruit via onze bestelformulier — wij zetten het klaar voor u.
+          Of bel ons gewoon.
         </p>
-        <a
-          href="tel:+31715149802"
-          className="inline-block font-medium px-7 py-4 text-base text-white transition-opacity hover:opacity-90"
-          style={{ backgroundColor: "var(--navy)" }}
-        >
-          071 514 9802
-        </a>
+        <div className="flex flex-wrap gap-4 justify-center">
+          <Link
+            href={`/${locale}/bestellen`}
+            className="inline-block font-medium px-7 py-3.5 text-white transition-opacity hover:opacity-90"
+            style={{ backgroundColor: "var(--salmon)" }}
+          >
+            Bestel vooruit &rarr;
+          </Link>
+          <a
+            href="tel:+31715149802"
+            className="inline-block font-medium px-7 py-3.5 border transition-opacity hover:opacity-80"
+            style={{ borderColor: "var(--navy)", color: "var(--navy)" }}
+          >
+            071 514 9802
+          </a>
+        </div>
       </section>
     </>
   );

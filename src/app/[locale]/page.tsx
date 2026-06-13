@@ -57,16 +57,56 @@ function HeroSection() {
         </h1>
         <p
           className="text-lg md:text-xl max-w-xl mb-10 leading-relaxed"
-          style={{ color: "rgba(247,240,227,0.85)" }}
+          style={{ color: "rgba(246,250,253,0.85)" }}
         >
           {t("sub")}
         </p>
+        <div className="flex flex-wrap gap-4">
+          <Link
+            href={`/${locale}/bestellen`}
+            className="inline-block font-medium tracking-wide px-8 py-4 transition-opacity hover:opacity-90 text-white text-base"
+            style={{ backgroundColor: "var(--salmon)" }}
+          >
+            Bestel vooruit &rarr;
+          </Link>
+          <Link
+            href={`/${locale}/bezoek-ons`}
+            className="inline-block font-medium tracking-wide px-8 py-4 transition-colors text-base border"
+            style={{ borderColor: "rgba(246,250,253,0.4)", color: "var(--cream)" }}
+          >
+            {t("cta")}
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function VerrassingspakketBanner() {
+  const locale = useLocale();
+
+  return (
+    <section style={{ backgroundColor: "var(--sand)" }} className="py-5 px-6">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
+          <span
+            className="text-xs font-bold px-3 py-1.5 text-white flex-shrink-0"
+            style={{ backgroundColor: "var(--seafoam)" }}
+          >
+            NIEUW
+          </span>
+          <p className="text-sm md:text-base" style={{ color: "var(--navy)" }}>
+            <strong>Het Verrassingspakket</strong> — verse vis van de dag voor{" "}
+            <strong>€5,99</strong>. Tegen verspilling, vóór uw portemonnee.
+            Maximaal 2 pakketten per dag.
+          </p>
+        </div>
         <Link
-          href={`/${locale}/bezoek-ons`}
-          className="inline-block font-medium tracking-wide px-8 py-4 transition-colors text-white text-base"
-          style={{ backgroundColor: "var(--salmon)" }}
+          href={`/${locale}/bestellen?product=verrassingspakket`}
+          className="text-sm font-semibold px-5 py-2.5 text-white flex-shrink-0 transition-opacity hover:opacity-90"
+          style={{ backgroundColor: "var(--navy)" }}
         >
-          {t("cta")} &rarr;
+          Reserveer er één &rarr;
         </Link>
       </div>
     </section>
@@ -170,7 +210,7 @@ function VarlaksHighlight() {
                 style={{ color: "var(--gold)" }}
               >
                 <CheckIcon />
-                <span style={{ color: "rgba(247,240,227,0.8)" }}>{b}</span>
+                <span style={{ color: "rgba(246,250,253,0.8)" }}>{b}</span>
               </li>
             ))}
           </ul>
@@ -246,59 +286,47 @@ function StarIcon() {
   );
 }
 
-const reviews = [
-  {
-    name: "Marja van den Berg",
-    text: "Al meer dan twintig jaar haal ik hier mijn vis. De kibbeling is nergens beter dan bij Schaap. En Aldert staat altijd klaar met een goed verhaal.",
-    stars: 5,
-  },
-  {
-    name: "Pieter S.",
-    text: "De enige plek in Leiden waar je echt verse haring krijgt. Geen gedoe, gewoon lekker.",
-    stars: 5,
-  },
-  {
-    name: "Familie Hoekstra",
-    text: "Elke zaterdag op de markt - dat is onze vaste stop. Al jaren. De Varlaks zalm is een aanrader voor iedereen die iets bijzonders wil.",
-    stars: 5,
-  },
-];
-
 function ReviewsSection() {
   const t = useTranslations("reviewsSection");
 
   return (
     <section style={{ backgroundColor: "var(--sand)" }} className="py-20">
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-3xl mx-auto px-4 text-center">
         <h2
-          className="text-3xl font-bold text-center mb-12"
+          className="text-3xl font-bold mb-10"
           style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
         >
           {t("title")}
         </h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          {reviews.map((r) => (
-            <div key={r.name} className="bg-white p-7">
-              <div className="flex gap-0.5 mb-4">
-                {Array.from({ length: r.stars }).map((_, i) => (
-                  <StarIcon key={i} />
-                ))}
-              </div>
-              <p
-                className="text-sm leading-relaxed mb-5"
-                style={{ color: "var(--charcoal)", opacity: 0.8 }}
-              >
-                &ldquo;{r.text}&rdquo;
-              </p>
-              <p
-                className="text-xs font-semibold tracking-wide uppercase"
-                style={{ color: "var(--navy)" }}
-              >
-                {r.name}
-              </p>
-            </div>
-          ))}
+        <div className="bg-white p-8 md:p-10 mb-8">
+          <div className="flex justify-center gap-0.5 mb-5">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <StarIcon key={i} />
+            ))}
+          </div>
+          <p
+            className="text-lg leading-relaxed italic mb-5"
+            style={{ color: "var(--charcoal)", opacity: 0.85 }}
+          >
+            &ldquo;Bij het ophalen zei hij altijd: &lsquo;een doos kibbeling voor
+            het weeshuis!&rsquo; Ik moest er elke keer om lachen.&rdquo;
+          </p>
+          <p
+            className="text-xs font-semibold tracking-wide uppercase"
+            style={{ color: "var(--navy)" }}
+          >
+            Ria Verburg — uit ons 80-jarig jubileumboek
+          </p>
         </div>
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=Schaap%27s+Vishandel+Herenstraat+48+Leiden"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block text-sm font-semibold px-6 py-3 transition-opacity hover:opacity-85 text-white"
+          style={{ backgroundColor: "var(--navy)" }}
+        >
+          Lees onze reviews op Google →
+        </a>
       </div>
     </section>
   );
@@ -354,7 +382,7 @@ function LocationsSection() {
             <div
               key={name}
               className="p-6"
-              style={{ backgroundColor: "rgba(247,240,227,0.07)" }}
+              style={{ backgroundColor: "rgba(246,250,253,0.07)" }}
             >
               <div className="mb-4" style={{ color: "var(--sand)" }}>
                 <PinIcon />
@@ -365,10 +393,10 @@ function LocationsSection() {
               >
                 {name}
               </h3>
-              <p className="text-sm mb-1" style={{ color: "rgba(247,240,227,0.65)" }}>
+              <p className="text-sm mb-1" style={{ color: "rgba(246,250,253,0.65)" }}>
                 {address}
               </p>
-              <p className="text-sm mb-3" style={{ color: "rgba(247,240,227,0.65)" }}>
+              <p className="text-sm mb-3" style={{ color: "rgba(246,250,253,0.65)" }}>
                 {schedule}
               </p>
               {tel && (
@@ -407,6 +435,7 @@ export default async function HomePage({
     <>
       <JsonLd />
       <HeroSection />
+      <VerrassingspakketBanner />
       <AboutSection />
       <VarlaksHighlight />
       <AssortimentGrid />

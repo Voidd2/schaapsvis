@@ -72,7 +72,7 @@ function BezoekContent() {
         >
           {t("title")}
         </h1>
-        <p className="text-lg" style={{ color: "rgba(247,240,227,0.75)" }}>
+        <p className="text-lg" style={{ color: "rgba(246,250,253,0.75)" }}>
           {t("sub")}
         </p>
       </section>
@@ -158,7 +158,7 @@ function BezoekContent() {
 
       {/* Phone CTA */}
       <section style={{ backgroundColor: "var(--navy)" }} className="py-12 text-center px-4">
-        <p className="text-sm mb-3" style={{ color: "rgba(247,240,227,0.6)" }}>
+        <p className="text-sm mb-3" style={{ color: "rgba(246,250,253,0.6)" }}>
           Vragen? Bel ons gerust op:
         </p>
         <a

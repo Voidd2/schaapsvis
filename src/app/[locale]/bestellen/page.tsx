@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { BestellenForm } from "./BestellenForm";
@@ -34,7 +35,9 @@ export default async function BestellenPage({
   return (
     <>
       <JsonLd />
-      <BestellenForm />
+      <Suspense>
+        <BestellenForm />
+      </Suspense>
     </>
   );
 }

@@ -5,15 +5,16 @@
     "varlaks": "Varlaks Zalm",
     "betereVis": "Eerlijke Vis",
     "recepten": "Recepten",
+    "blog": "Blog",
     "locaties": "Locaties",
     "contact": "Contact",
     "bestellen": "Bestellen"
   },
   "meta": {
     "homeTitle": "Viswinkel Leiden | Verse Kibbeling, Haring & Vis | Schaap's Vis Herenstraat",
-    "homeDesc": "Schaap's Vishandel — de beste viswinkel van Leiden. Verse kibbeling, haring, biologische Varlaks zalm en duurzame vis. Al 86 jaar op de Herenstraat 48. Markt: wo + za. Voorschoten: vrijdag.",
-    "verhaalTitle": "Het Verhaal van Schaap's Vis Leiden | Al 86 Jaar de Visboer van Leiden",
-    "verhaalDesc": "Van Gerrit Schaap in 1938 tot Aldert Haasnoot vandaag — 86 jaar Leids vakmanschap, vier generaties, één adres: Herenstraat 48, Leiden.",
+    "homeDesc": "Schaap's Vishandel — de beste viswinkel van Leiden. Verse kibbeling, haring, biologische Varlaks zalm en duurzame vis. Al sinds 1938 op de Herenstraat 48. Markt: wo + za. Voorschoten: vrijdag.",
+    "verhaalTitle": "Het Verhaal van Schaap's Vis Leiden | Sinds 1938 de Visboer van Leiden",
+    "verhaalDesc": "Van Gerrit Schaap in 1938 tot Aldert Haasnoot vandaag — bijna negentig jaar Leids vakmanschap, vier generaties, één adres: Herenstraat 48, Leiden.",
     "varlaksTitle": "Varlaks Biologische Zalm Leiden | Schaap's Vis — Beste Zalm van Leiden",
     "varlaksDesc": "Varlaks biologische zalm — geen antibiotica, geen GMO, 100% traceerbaar. Dagelijks vers bij Schaap's Vis Leiden, Herenstraat 48. Ook op de markt.",
     "assortimentTitle": "Vers Vis Assortiment Leiden | Kibbeling, Haring, Lekkerbek | Schaap's Vis",
@@ -31,13 +32,13 @@
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Sinds 1938",
-    "heading": "Vers van zee.\nAl 86 jaar.",
+    "heading": "Vers van zee.\nAl sinds 1938.",
     "sub": "Kibbeling, haring, biologische zalm en alles wat de zee te bieden heeft.",
     "cta": "Vind ons"
   },
   "about": {
-    "title": "Al 86 jaar een Leids begrip",
-    "text": "Schaap's Vishandel staat al 86 jaar op de Herenstraat in Leiden. Vier generaties vakmanschap, eerlijke vis en een persoonlijk verhaal. Aldert Haasnoot — die in de buurt gewoon 'Schaap' wordt genoemd — staat elke dag klaar om u te helpen.",
+    "title": "Sinds 1938 een Leids begrip",
+    "text": "Schaap's Vishandel staat al sinds 1938 op de Herenstraat in Leiden. Vier generaties vakmanschap, eerlijke vis en een persoonlijk verhaal. Aldert Haasnoot — die in de buurt gewoon 'Schaap' wordt genoemd — staat elke dag klaar om u te helpen.",
     "link": "Lees ons verhaal →"
   },
   "varlaksHighlight": {
@@ -59,7 +60,7 @@
   "verhaalPage": {
     "heroTitle": "Van Gerrit Schaap tot de vierde generatie",
     "heroSub": "Een Leids begrip — opgericht in 1938",
-    "intro": "Op de Herenstraat in Leiden staat al meer dan 86 jaar een kleine, gezellige viswinkel die generaties Leidenaren heeft gevoed, vermaakt en verbonden. Schaap's Vishandel is niet zomaar een winkel — het is een stukje Leidse geschiedenis.",
+    "intro": "Op de Herenstraat in Leiden staat al bijna negentig jaar een kleine, gezellige viswinkel die generaties Leidenaren heeft gevoed, vermaakt en verbonden. Schaap's Vishandel is niet zomaar een winkel — het is een stukje Leidse geschiedenis.",
     "t1title": "Het begin",
     "t1text": "Gerrit Schaap opent zijn vishandel op Herenstraat 48 in Leiden. In een tijd dat vis nog echt vers van de boot kwam en elke Leidenaar zijn eigen visboer kende, legt Gerrit de basis voor wat zou uitgroeien tot een begrip in de stad.",
     "t2title": "Cor Haasnoot neemt het roer over",
@@ -142,6 +143,6 @@
     "address": "Herenstraat 48, 2313 AL Leiden",
     "phone": "071 514 9802",
     "facebook": "Volg ons op Facebook",
-    "copy": "© 2024 Schaap's Vishandel · Leiden · Opgericht 1938 door Gerrit Schaap"
+    "copy": "© 2026 Schaap's Vishandel · Leiden · Opgericht 1938 door Gerrit Schaap"
   }
 }

@@ -5,15 +5,16 @@
     "varlaks": "Varlaks Lachs",
     "betereVis": "Ehrlicher Fisch",
     "recepten": "Rezepte",
+    "blog": "Blog",
     "locaties": "Uns finden",
     "contact": "Kontakt",
     "bestellen": "Bestellen"
   },
   "meta": {
     "homeTitle": "Fischgeschäft Leiden | Frischer Fisch, Hering & Kibbeling | Schaap's Vis Herenstraat",
-    "homeDesc": "Schaap's Vishandel — das beste Fischgeschäft in Leiden. Frische Kibbeling, Hering, Bio-Varlaks-Lachs und nachhaltige Fische. Seit 86 Jahren in der Herenstraat 48. Markt: Mi + Sa. Voorschoten: Fr.",
+    "homeDesc": "Schaap's Vishandel — das beste Fischgeschäft in Leiden. Frische Kibbeling, Hering, Bio-Varlaks-Lachs und nachhaltige Fische. Seit 1938 in der Herenstraat 48. Markt: Mi + Sa. Voorschoten: Fr.",
     "verhaalTitle": "Die Geschichte von Schaap's Vis Leiden | Fischhandel seit 1938",
-    "verhaalDesc": "Von Gerrit Schaap 1938 bis Aldert Haasnoot heute — 86 Jahre Leidener Handwerk, vier Generationen, eine Adresse: Herenstraat 48, Leiden.",
+    "verhaalDesc": "Von Gerrit Schaap 1938 bis Aldert Haasnoot heute — fast neunzig Jahre Leidener Handwerk, vier Generationen, eine Adresse: Herenstraat 48, Leiden.",
     "varlaksTitle": "Varlaks Bio-Lachs Leiden | Schaap's Vis — Bester Lachs in Leiden",
     "varlaksDesc": "Varlaks Bio-Lachs — keine Antibiotika, kein GMO, 100% rückverfolgbar. Täglich frisch bei Schaap's Vis Leiden, Herenstraat 48. Auch auf dem Markt.",
     "assortimentTitle": "Frischer Fisch Leiden | Kibbeling, Hering, Lekkerbek | Schaap's Vis Sortiment",
@@ -31,12 +32,12 @@
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Seit 1938",
-    "heading": "Frisch vom Meer.\nSeit 86 Jahren.",
+    "heading": "Frisch vom Meer.\nSeit 1938.",
     "sub": "Kibbeling, Hering, Bio-Lachs und alles, was das Meer zu bieten hat.",
     "cta": "Uns finden"
   },
   "about": {
-    "title": "Seit 86 Jahren eine Leidener Institution",
+    "title": "Seit 1938 eine Leidener Institution",
     "text": "Schaap's Vishandel steht seit 1938 in der Herenstraat in Leiden. Vier Generationen Handwerk, ehrlicher Fisch und eine persönliche Geschichte. Aldert Haasnoot — im Viertel liebevoll 'Schaap' genannt — steht jeden Tag bereit, um Ihnen zu helfen.",
     "link": "Unsere Geschichte lesen →"
   },
@@ -59,7 +60,7 @@
   "verhaalPage": {
     "heroTitle": "Von Gerrit Schaap bis zur vierten Generation",
     "heroSub": "Ein Leidener Original — gegründet 1938",
-    "intro": "Seit mehr als 86 Jahren steht in der Herenstraat in Leiden ein kleines, gemütliches Fischgeschäft, das Generationen von Leidener Bürgern ernährt, erfreut und verbunden hat.",
+    "intro": "Seit mehr als seit 1938 steht in der Herenstraat in Leiden ein kleines, gemütliches Fischgeschäft, das Generationen von Leidener Bürgern ernährt, erfreut und verbunden hat.",
     "t1title": "Der Anfang",
     "t1text": "Gerrit Schaap eröffnet seinen Fischhandel in der Herenstraat 48 in Leiden. In einer Zeit, als Fisch wirklich frisch vom Boot kam, legt Gerrit den Grundstein für das, was zu einer Stadtinstitution werden sollte.",
     "t2title": "Cor Haasnoot übernimmt das Ruder",
@@ -68,10 +69,10 @@
     "t3text": "Aldert Haasnoot — im Viertel liebevoll 'Schaap' genannt — steht sein ganzes Leben hinter der Theke. 2009 übernimmt er das Geschäft offiziell von seinem Vater und bringt den Laden ins 21. Jahrhundert, bewahrt dabei aber die Atmosphäre, die die Leidener schätzen.",
     "t3quote": "Die Menschen kommen hier nicht nur wegen des Fisches, sondern auch für ein Gespräch. Manchmal ist es hier wie in einem Dorfkrug. — Aldert Haasnoot",
     "t4title": "80 Jahre!",
-    "t4text": "Am 1. Januar 2018 feiert Schaap's Vis 80-jähriges Bestehen. Die ganze Stadt feiert mit. Kunden senden Fotos und Erinnerungen für ein Jubiläumsbuch ein.",
+    "t4text": "Am 1. Januar 2018 feiert Schaap's Vis 80-jähriges Bestehen. Die ganze Stadt feiert mit. Kunden senden Fotos und Erinnerungen für ein Jubiläumsbuch ein. Eine der schönsten kommt von Ria Verburg, die monatlich Kibbeling für die Kindertagesstätte abholte und immer für den Scherz von Herrn Schaap wiederkam.",
     "t4quote": "Beim Abholen sagte er immer: 'eine Kiste Kibbeling für das Waisenhaus!' Das hat mich immer zum Lachen gebracht. — Ria Verburg",
-    "t5title": "Heute — bereit für die nächste Generation",
-    "t5text": "Schaap's Vis wird für die nächste Generation vorbereitet. Neben dem Laden in der Herenstraat ist das Team nun auch auf dem Leidener Markt (Mittwoch und Samstag) und bei Hoogvliet in Voorschoten freitags vertreten.",
+    "t5title": "Heute — bereit für die vierte Generation",
+    "t5text": "Schaap's Vis bereitet sich auf die vierte Generation vor. Neben dem Laden in der Herenstraat steht das Team heute auch auf dem Leidener Markt (Mittwoch und Samstag) und freitags bei Hoogvliet in Voorschoten. Das Sortiment ist gewachsen — die Herzlichkeit ist geblieben.",
     "outroQuote": "Wir sind ein nettes altes kleines Geschäft. Es muss nicht alles so neu und tipptopp sein.",
     "outroAuthor": "— Aldert Haasnoot"
   },
@@ -142,6 +143,6 @@
     "address": "Herenstraat 48, 2313 AL Leiden",
     "phone": "+31 71 514 9802",
     "facebook": "Folgen Sie uns auf Facebook",
-    "copy": "© 2024 Schaap's Vishandel · Leiden · Gegründet 1938 von Gerrit Schaap"
+    "copy": "© 2026 Schaap's Vishandel · Leiden · Gegründet 1938 von Gerrit Schaap"
   }
 }

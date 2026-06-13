@@ -19,13 +19,12 @@ export function Header() {
 
   const navLinks = [
     { href: p("/assortiment"), label: t("assortiment") },
-    { href: p("/varlaks"), label: t("varlaks") },
     { href: p("/eerlijke-vis"), label: t("betereVis") },
     { href: p("/recepten"), label: t("recepten") },
+    { href: p("/blog"), label: t("blog") },
     { href: p("/ons-verhaal"), label: t("verhaal") },
     { href: p("/bezoek-ons"), label: t("locaties") },
     { href: p("/bestellen"), label: t("bestellen") },
-    { href: p("/contact"), label: t("contact") },
   ];
 
   const wrapperClass = isVarlaks
@@ -80,7 +79,7 @@ export function Header() {
                   key={href}
                   href={href}
                   className="transition-colors hover:underline underline-offset-4"
-                  style={{ color: "rgba(247,240,227,0.85)" }}
+                  style={{ color: "rgba(246,250,253,0.85)" }}
                 >
                   {label}
                 </Link>
@@ -96,7 +95,7 @@ export function Header() {
 
             {/* Mobile: tap-to-call button */}
             <a
-              href="tel:0715149802"
+              href="tel:+31715149802"
               className="md:hidden flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-white"
               style={{ backgroundColor: "var(--salmon)" }}
               aria-label="Bel ons"
@@ -123,7 +122,7 @@ export function Header() {
         {open && (
           <div
             className="md:hidden border-t pb-5 pt-2 space-y-1"
-            style={{ borderColor: "rgba(247,240,227,0.15)", backgroundColor: "#162843" }}
+            style={{ borderColor: "rgba(246,250,253,0.15)", backgroundColor: "var(--navy-dark)" }}
           >
             <Link
               href={p("/bestellen")}
@@ -141,7 +140,7 @@ export function Header() {
                   key={href}
                   href={href}
                   className="block py-4 px-6 text-lg border-b"
-                  style={{ color: "rgba(247,240,227,0.85)", borderColor: "rgba(247,240,227,0.08)" }}
+                  style={{ color: "rgba(246,250,253,0.85)", borderColor: "rgba(246,250,253,0.08)" }}
                   onClick={() => setOpen(false)}
                 >
                   {label}
@@ -150,7 +149,7 @@ export function Header() {
 
             <div
               className="pt-3 px-6 border-t"
-              style={{ borderColor: "rgba(247,240,227,0.15)", color: "var(--cream)" }}
+              style={{ borderColor: "rgba(246,250,253,0.15)", color: "var(--cream)" }}
             >
               <LanguageSwitcher />
             </div>

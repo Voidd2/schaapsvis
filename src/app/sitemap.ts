@@ -1,4 +1,6 @@
 import { MetadataRoute } from "next";
+import { recepten } from "@/lib/recepten";
+import { blogPosts } from "@/lib/blog";
 
 const baseUrl = "https://schaapsvis.nl";
 const locales = ["nl", "en", "de"] as const;
@@ -9,6 +11,7 @@ const pages = [
   "/varlaks",
   "/eerlijke-vis",
   "/recepten",
+  "/blog",
   "/assortiment",
   "/bezoek-ons",
   "/contact",
@@ -20,15 +23,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   for (const page of pages) {
     for (const locale of locales) {
-      const url = `${baseUrl}/${locale}${page || ""}`;
-
       entries.push({
-        url,
+        url: `${baseUrl}/${locale}${page || ""}`,
         lastModified: new Date(),
         changeFrequency: page === "" ? "weekly" : "monthly",
         priority: page === "" ? 1.0 : 0.8,
       });
     }
+  }
+
+  // Recepten — detailpagina's (alleen nl: content is Nederlandstalig)
+  for (const recept of recepten) {
+    entries.push({
+      url: `${baseUrl}/nl/recepten/${recept.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    });
+  }
+
+  // Blogartikelen
+  for (const post of blogPosts) {
+    entries.push({
+      url: `${baseUrl}/nl/blog/${post.slug}`,
+      lastModified: new Date(post.datum),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    });
   }
 
   return entries;

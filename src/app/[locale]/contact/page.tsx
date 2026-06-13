@@ -34,7 +34,7 @@ function ContactContent() {
         >
           {t("title")}
         </h1>
-        <p className="text-lg" style={{ color: "rgba(247,240,227,0.75)" }}>
+        <p className="text-lg" style={{ color: "rgba(246,250,253,0.75)" }}>
           {t("sub")}
         </p>
       </section>

@@ -277,7 +277,7 @@ function VarlaksContent() {
         </h2>
         <p
           className="max-w-xl mx-auto mb-10 leading-relaxed"
-          style={{ color: "rgba(247,240,227,0.7)" }}
+          style={{ color: "rgba(246,250,253,0.7)" }}
         >
           We halen de Varlaks zalm vers op. Dagelijks in de winkel aan de
           Herenstraat, woensdag en zaterdag op de markt in Leiden, en vrijdag

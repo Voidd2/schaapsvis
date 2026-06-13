@@ -5,15 +5,16 @@
     "varlaks": "Varlaks Salmon",
     "betereVis": "Honest Fish",
     "recepten": "Recipes",
+    "blog": "Blog",
     "locaties": "Find Us",
     "contact": "Contact",
     "bestellen": "Order"
   },
   "meta": {
     "homeTitle": "Fish Shop Leiden | Fresh Kibbeling, Herring & Fish | Schaap's Vis Herenstraat",
-    "homeDesc": "Schaap's Vishandel — Leiden's best fish shop. Fresh kibbeling, herring, organic Varlaks salmon and sustainable fish. For 86 years at Herenstraat 48. Market: Wed + Sat. Voorschoten: Fri.",
-    "verhaalTitle": "The Story of Schaap's Vis Leiden | 86 Years the Fishmonger of Leiden",
-    "verhaalDesc": "From Gerrit Schaap in 1938 to Aldert Haasnoot today — 86 years of Leiden craftsmanship, four generations, one address: Herenstraat 48, Leiden.",
+    "homeDesc": "Schaap's Vishandel — Leiden's best fish shop. Fresh kibbeling, herring, organic Varlaks salmon and sustainable fish. Since 1938 at Herenstraat 48. Market: Wed + Sat. Voorschoten: Fri.",
+    "verhaalTitle": "The Story of Schaap's Vis Leiden | Leiden's Fishmonger Since 1938",
+    "verhaalDesc": "From Gerrit Schaap in 1938 to Aldert Haasnoot today — almost ninety years of Leiden craftsmanship, four generations, one address: Herenstraat 48, Leiden.",
     "varlaksTitle": "Varlaks Organic Salmon Leiden | Schaap's Vis — Best Salmon in Leiden",
     "varlaksDesc": "Varlaks organic salmon — no antibiotics, no GMO, 100% traceable. Daily fresh at Schaap's Vis Leiden, Herenstraat 48. Also at the market.",
     "assortimentTitle": "Fresh Fish Leiden | Kibbeling, Herring, Lekkerbek | Schaap's Vis Products",
@@ -31,13 +32,13 @@
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Since 1938",
-    "heading": "Fresh from the sea.\nFor 86 years.",
+    "heading": "Fresh from the sea.\nSince 1938.",
     "sub": "Kibbeling, herring, organic salmon and everything the sea has to offer.",
     "cta": "Find us"
   },
   "about": {
-    "title": "A Leiden institution for 86 years",
-    "text": "Schaap's Vishandel has been on Herenstraat in Leiden for 86 years. Four generations of craftsmanship, honest fish and a personal story. Aldert Haasnoot — known in the neighbourhood simply as 'Schaap' — is ready every day to help you.",
+    "title": "A Leiden institution since 1938",
+    "text": "Schaap's Vishandel has been on Herenstraat in Leiden since 1938. Four generations of craftsmanship, honest fish and a personal story. Aldert Haasnoot — known in the neighbourhood simply as 'Schaap' — is ready every day to help you.",
     "link": "Read our story →"
   },
   "varlaksHighlight": {
@@ -59,7 +60,7 @@
   "verhaalPage": {
     "heroTitle": "From Gerrit Schaap to the fourth generation",
     "heroSub": "A Leiden institution — founded in 1938",
-    "intro": "For more than 86 years, a small, cosy fish shop on Herenstraat in Leiden has fed, delighted and connected generations of Leiden residents. Schaap's Vishandel is not just a shop — it is a piece of Leiden history.",
+    "intro": "For almost ninety years, a small, cosy fish shop on Herenstraat in Leiden has fed, delighted and connected generations of Leiden residents. Schaap's Vishandel is not just a shop — it is a piece of Leiden history.",
     "t1title": "The beginning",
     "t1text": "Gerrit Schaap opens his fish shop at Herenstraat 48 in Leiden. At a time when fish truly came fresh from the boat and every Leiden resident had their own fishmonger, Gerrit lays the foundation for what would grow into a city institution.",
     "t2title": "Cor Haasnoot takes the helm",
@@ -142,6 +143,6 @@
     "address": "Herenstraat 48, 2313 AL Leiden",
     "phone": "+31 71 514 9802",
     "facebook": "Follow us on Facebook",
-    "copy": "© 2024 Schaap's Vishandel · Leiden · Est. 1938 by Gerrit Schaap"
+    "copy": "© 2026 Schaap's Vishandel · Leiden · Est. 1938 by Gerrit Schaap"
   }
 }

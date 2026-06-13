@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Share2, MapPin, Phone } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
+import { NewsletterSignup } from "@/components/shared/NewsletterSignup";
 
 export function Footer() {
   const t = useTranslations("footer");
@@ -11,6 +12,28 @@ export function Footer() {
   return (
     <footer style={{ backgroundColor: "var(--navy)", color: "var(--cream)" }}>
       <div className="max-w-6xl mx-auto px-4 pt-14 pb-8">
+        {/* Nieuwsbrief */}
+        <div
+          className="flex flex-col md:flex-row md:items-center justify-between gap-5 pb-10 mb-10 border-b"
+          style={{ borderColor: "rgba(246,250,253,0.15)" }}
+        >
+          <div>
+            <h3
+              className="text-xl font-bold mb-1"
+              style={{ fontFamily: "Playfair Display, serif" }}
+            >
+              Vers van de veiling — in uw inbox
+            </h3>
+            <p className="text-sm opacity-60 max-w-md leading-relaxed">
+              Elke week: wat er vers binnen is, de aanbieding van de week en
+              seizoenstips. Geen spam, wel vis.
+            </p>
+          </div>
+          <div className="md:min-w-[320px]">
+            <NewsletterSignup />
+          </div>
+        </div>
+
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
@@ -48,6 +71,7 @@ export function Footer() {
                 { href: p("/assortiment"), label: nav("assortiment") },
                 { href: p("/eerlijke-vis"), label: nav("betereVis") },
                 { href: p("/recepten"), label: nav("recepten") },
+                { href: p("/blog"), label: nav("blog") },
                 { href: p("/varlaks"), label: nav("varlaks") },
                 { href: p("/ons-verhaal"), label: nav("verhaal") },
                 { href: p("/bestellen"), label: nav("bestellen") },
@@ -114,7 +138,7 @@ export function Footer() {
 
         <div
           className="pt-6 border-t text-xs opacity-40 text-center"
-          style={{ borderColor: "rgba(247,240,227,0.15)" }}
+          style={{ borderColor: "rgba(246,250,253,0.15)" }}
         >
           {t("copy")}
         </div>

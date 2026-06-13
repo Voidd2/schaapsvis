@@ -13,6 +13,8 @@ export type Recept = {
   tijd: string;
   moeilijkheid: "Makkelijk" | "Gemiddeld" | "Uitdagend";
   tags: ReceptTag[];
+  porties?: number;
+  seizoen?: string;
   fotoUrl?: string;
   fotoLabel: string;
   vanSchaap: string[];
@@ -41,7 +43,7 @@ export const TAG_ICON: Record<ReceptTag, string> = {
   Gezond: "◎",
 };
 
-import { receptenVisrecepten } from "./recepten-visrecepten";
+import { receptenPraktisch } from "./recepten-praktisch";
 
 const receptenOrigineel: Recept[] = [
   {
@@ -265,37 +267,6 @@ const receptenOrigineel: Recept[] = [
   // === Recepten met dank aan visrecepten.nl ===
 
   {
-    slug: "zwaardvis-patat-dillesaus",
-    title: "Zwaardvis-patat in romige dillesaus",
-    subtitle: "Stevige vis als snack met een frisse dipsaus",
-    tijd: "25 min",
-    moeilijkheid: "Makkelijk",
-    tags: ["Snel", "Bijzonder"],
-    fotoUrl:
-      "https://images.unsplash.com/photo-1644784643137-b9073dd262f6?w=800&q=80",
-    fotoLabel: "Gebakken visreepjes op bord met saus en groenten",
-    vanSchaap: ["400 g zwaardvis"],
-    vanSupermarkt: [
-      "3 el visspecerijen",
-      "Versgemalen peper + bloem",
-      "Zonnebloemolie",
-      "4 el halfvolle mayonaise",
-      "3 el yoghurt",
-      "1 bosje verse dille",
-      "1 tl Dijonmosterd + 1 el honing",
-    ],
-    bereidingswijze: [
-      "Snijd de zwaardvis in lange reepjes van ±1 cm breed en max. 5 cm lang. Breng op smaak met visspecerijen en peper. Wentel door de bloem.",
-      "Bak de visreepjes in een pan met olie in 6 minuten gaar, af en toe omscheppend. Houd warm in een voorverwarmde oven op 100°C.",
-      "Maak ondertussen de dillesaus: hak de dille fijn en meng 2 el door de mayonaise, yoghurt, mosterd en honing. Breng op smaak met peper.",
-      "Serveer de gebakken zwaardvis met de saus ernaast.",
-    ],
-    verhaal:
-      "Zwaardvis is niet iets dat u in een gewone supermarkt vindt, maar bij Schaap's Vis weten we wat er binnenkomt. Stevig vlees, milde smaak — als visfrites maar dan voor volwassenen. De dille maakt het compleet.",
-    highlight: "Bijzondere vis",
-    seoKeywords: "zwaardvis recept, zwaardvis patat, visreepjes met dillesaus",
-  },
-  {
     slug: "krieltjessalade-haring",
     title: "Krieltjessalade met haring",
     subtitle: "Klassiek Hollands — aardappel, haring, kappertjes",
@@ -324,35 +295,6 @@ const receptenOrigineel: Recept[] = [
       "Dit is zo'n gerecht dat je in de zomer gewoon wil eten — buiten, in de zon, met een glas fris erbij. Verse haring van Schaap's Vis maakt hier echt het verschil. Vraag of we ze alvast fileren, dat scheelt u thuis werk.",
     seoKeywords:
       "krieltjessalade recept, aardappelsalade met haring, hollandse salade haring",
-  },
-  {
-    slug: "pasta-met-mosselen",
-    title: "Pasta met mosselen",
-    subtitle: "Romig, snel en boordevol smaak van de zee",
-    tijd: "25 min",
-    moeilijkheid: "Makkelijk",
-    tags: ["Snel", "Bijzonder"],
-    fotoUrl:
-      "https://images.unsplash.com/photo-1652480191212-13ecee3ec66b?w=800&q=80",
-    fotoLabel: "Pasta in kom met mosselen en basilicum",
-    vanSchaap: ["1 kg verse mosselen"],
-    vanSupermarkt: [
-      "1 citroen (rasp + sap)",
-      "200 g pasta",
-      "150 g Griekse yoghurt of 1 bakje zure room",
-      "125 ml slagroom",
-      "3 el verse basilicum (fijngesneden)",
-      "Zout en peper",
-    ],
-    bereidingswijze: [
-      "Rasp de citroen. Spoel de mosselen en verwijder kapotte en open exemplaren die niet sluiten na tikken.",
-      "Doe de mosselen in een pan, pers er een halve citroen over. Stoom afgedekt in 6–8 minuten open. Kook ondertussen de pasta al dente. Zeef het kookvocht.",
-      "Warm de yoghurt met slagroom op. Roer citroenrasp en 2–3 el mosselvocht erdoor tot een mooie saus.",
-      "Meng de uitgelekte pasta door de saus. Roer de basilicum erdoor. Verdeel over 2 diepe kommen en leg de mosselen in schelp erop.",
-    ],
-    verhaal:
-      "Mosselen met pasta klinkt als een restaurantgerecht, maar dit staat in 25 minuten op tafel. De truc zit in het mosselvocht — dat is pure zee-essentie. Gebruik het zuinig: 2 à 3 eetlepels is genoeg voor alle smaak.",
-    seoKeywords: "pasta mosselen recept, mosselpasta, pasta met mosselen romig",
   },
   {
     slug: "kabeljauw-zeekraal-venkel",
@@ -450,74 +392,6 @@ const receptenOrigineel: Recept[] = [
       "Hollandse garnalen zijn zo vol van smaak — het zou zonde zijn ze te verstopt in een saus. Hier zijn ze de ster. De pompoen geeft zoetheid, de edamame bite. Lekker met warme rijst of als poké bowl.",
     seoKeywords:
       "hollandse garnalensalade, garnalen salade pompoen, garnalen bowl recept",
-  },
-  {
-    slug: "venkelsoep-wilde-zalm",
-    title: "Venkelsoep met wilde zalm",
-    subtitle: "Romige, zachte soep — de zalm gaart erin terwijl u serveert",
-    tijd: "50 min",
-    moeilijkheid: "Gemiddeld",
-    tags: ["Bijzonder", "Gezond"],
-    fotoUrl:
-      "https://images.unsplash.com/photo-1616501268826-ee9731c915d4?w=800&q=80",
-    fotoLabel: "Kom romige venkelsoep met dille en croutons",
-    vanSchaap: [
-      "500 g wilde sockeye zalm — vraag ons dunne plakken te snijden",
-    ],
-    vanSupermarkt: [
-      "1 kg venkelknol",
-      "400 g uien",
-      "1 tl venkelzaadjes",
-      "1 l visbouillon (1 blokje)",
-      "125 ml slagroom",
-      "2 el olijfolie",
-    ],
-    bereidingswijze: [
-      "Snijd de venkel in repen. Bewaar het loof. Snijd de uien in ringen.",
-      "Verhit olijfolie in een pan en bak het venkelzaad aan. Voeg venkel en uien toe en bak zachtjes aan — niet bruin, anders wordt de soep donker.",
-      "Voeg de bouillon toe en laat 30 minuten sudderen. Pureer de soep glad. Roer er vlak voor het opdienen 3–4 el slagroom door.",
-      "Haal de zalm uit de koelkast. Verdeel de dunne plakken over 4 diepe borden. Schenk de hete soep erover — de zalm gaart mooi rosé door de warmte.",
-      "Garneer met venkelgroen of dille.",
-    ],
-    verhaal:
-      "Dit is een truc die chefs gebruiken: je gaart de zalm niet in de pan, maar in de borden. De hete soep trekt er overheen en de zalm wordt mooi rosé van binnen. Werkt perfect met wilde sockeye zalm — die heeft een intensere smaak dan kweekzalm.",
-    seoKeywords:
-      "venkelsoep zalm recept, zalm soep venkel, romige vissoep wilde zalm",
-  },
-  {
-    slug: "krokante-zeeduivel-spinazie",
-    title: "Krokante zeeduivel met spinazie",
-    subtitle: "De kreeft van de vis — knapperig sesamkorst, roerbak-spinazie",
-    tijd: "30 min",
-    moeilijkheid: "Gemiddeld",
-    tags: ["Bijzonder"],
-    fotoUrl:
-      "https://images.unsplash.com/photo-1580959375944-abd7e991f971?w=800&q=80",
-    fotoLabel: "Pan-seared visfilet op romige spinazie",
-    vanSchaap: ["600 g zeeduivelfilet, in 4 gelijke stukken"],
-    vanSupermarkt: [
-      "3 el bloem + 4 el sesamzaad",
-      "1 ei",
-      "250 g Japanse noedels",
-      "5 el olie",
-      "1 rode peper (in reepjes)",
-      "1 teen knoflook + 3 cm gemberwortel (geraspt)",
-      "600 g spinazie",
-      "2–3 el sojasaus",
-      "1 limoen in partjes",
-    ],
-    bereidingswijze: [
-      "Dep de zeeduivel droog. Breng op smaak met zout en peper.",
-      "Zet drie borden klaar: bloem, geklopt ei, sesamzaad. Haal de filets door bloem → ei → sesamzaad.",
-      "Kook de noedels al dente. Verhit 2 el olie in een wok. Roerbak peper, knoflook en gember 1 minuut. Voeg spinazie toe en laat slinken.",
-      "Verhit 3 el olie in een koekenpan op matig vuur. Bak zeeduivel 3–4 minuten per kant goudbruin — niet te heet, anders verbrandt het sesamzaad.",
-      "Verdeel noedels en spinazie over 4 borden, besprenkel met sojasaus. Leg de zeeduivel ernaast. Serveer met limoen.",
-    ],
-    verhaal:
-      "Zeeduivel wordt de kreeft van de vis genoemd — stevig, lekker vet en heel vergevingsgezind in de pan. Het sesamkorst geeft knapperigheid terwijl het vlees van binnen zacht blijft. Niet te heet bakken is de enige truc: medium vuur, geduld.",
-    highlight: "De kreeft van de vis",
-    seoKeywords:
-      "zeeduivel recept, krokante zeeduivel sesam, zeeduivel spinazie",
   },
   {
     slug: "gebakken-schol-tomaat-olijven",
@@ -650,5 +524,5 @@ const receptenOrigineel: Recept[] = [
 
 export const recepten: Recept[] = [
   ...receptenOrigineel,
-  ...(receptenVisrecepten as Recept[]),
+  ...receptenPraktisch,
 ];

@@ -34,13 +34,6 @@ export function JsonLd() {
       "https://maps.google.com/?q=Herenstraat+48,+2313+AL+Leiden",
     ],
     hasMap: "https://maps.google.com/?q=Herenstraat+48,+2313+AL+Leiden",
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "127",
-      bestRating: "5",
-      worstRating: "1",
-    },
     address: {
       "@type": "PostalAddress",
       streetAddress: "Herenstraat 48",
@@ -152,11 +145,6 @@ export function JsonLd() {
       "@type": "GeoCoordinates",
       latitude: 52.1595,
       longitude: 4.494,
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "127",
     },
     priceRange: "€€",
   };

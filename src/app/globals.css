@@ -1,13 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --navy: #1a3530;
-  --cream: #f7f0e3;
-  --sand: #e8d5b0;
-  --salmon: #c8604a;
-  --gold: #b8832e;
-  --charcoal: #2c2c2c;
-  --seafoam: #3a8060;
+  /* Schaap's Vis logo-palet (pixel-analyse Facebook-logo): marineblauw, lichtblauw, wit, rood accent */
+  --navy: #1d2472;        /* logo-marineblauw — primaire merkkleur */
+  --navy-dark: #14194f;   /* donkerder blauw voor menu's/hover */
+  --cream: #f7fbfe;       /* wit met lichte blauwzweem — achtergrond */
+  --sand: #d4e8f5;        /* logo-lichtblauw (van #A8D8F0) — secundaire vlakken */
+  --lichtblauw: #a8d8f0;  /* logo-lichtblauw puur — badges/accenten */
+  --salmon: #c0392b;      /* logo-rood — CTA's (bestellen) en acties */
+  --gold: #b8832e;        /* badges/keurmerken */
+  --charcoal: #252a3a;    /* tekst — koel antraciet */
+  --seafoam: #2e8b6e;     /* groen — duurzaamheidsindicatoren */
 }
 
 html {

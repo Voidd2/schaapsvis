@@ -88,7 +88,7 @@ function VerhaalContent() {
         >
           {t("heroTitle")}
         </h1>
-        <p className="text-lg max-w-xl mx-auto" style={{ color: "rgba(247,240,227,0.7)" }}>
+        <p className="text-lg max-w-xl mx-auto" style={{ color: "rgba(246,250,253,0.7)" }}>
           {t("heroSub")}
         </p>
       </section>
@@ -167,7 +167,7 @@ function VerhaalContent() {
           >
             &ldquo;{t("outroQuote")}&rdquo;
           </blockquote>
-          <cite className="text-sm not-italic" style={{ color: "rgba(247,240,227,0.6)" }}>
+          <cite className="text-sm not-italic" style={{ color: "rgba(246,250,253,0.6)" }}>
             {t("outroAuthor")}
           </cite>
         </div>

@@ -139,7 +139,7 @@ export function ReceptenClient({ locale }: { locale: string }) {
         </h1>
         <p
           className="text-base max-w-xl mx-auto leading-relaxed"
-          style={{ color: "rgba(247,240,227,0.75)" }}
+          style={{ color: "rgba(246,250,253,0.75)" }}
         >
           Wat u bij ons haalt + wat u in de supermarkt koopt. Van 15 minuten
           tot een weekend project. Eerlijk over de moeilijkheid.
@@ -271,7 +271,7 @@ export function ReceptenClient({ locale }: { locale: string }) {
         </h2>
         <p
           className="text-sm mb-8 max-w-md mx-auto"
-          style={{ color: "rgba(247,240,227,0.7)" }}
+          style={{ color: "rgba(246,250,253,0.7)" }}
         >
           Herenstraat 48, Leiden · Maandag t/m zaterdag · 071 514 9802
         </p>
@@ -286,7 +286,7 @@ export function ReceptenClient({ locale }: { locale: string }) {
           <Link
             href={`/${locale}/bezoek-ons`}
             className="inline-block px-8 py-4 font-medium border transition-opacity hover:opacity-70"
-            style={{ color: "var(--cream)", borderColor: "rgba(247,240,227,0.4)" }}
+            style={{ color: "var(--cream)", borderColor: "rgba(246,250,253,0.4)" }}
           >
             Route &amp; openingstijden
           </Link>
