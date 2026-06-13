@@ -40,6 +40,8 @@ interface Product {
   nutrition: NutritionRow[];
   nutritionNote?: string;
   bestelId?: string;
+  ingredienten: string;    // EU-formaat: allergenen in HOOFDLETTERS
+  bevat: string[];         // lijst van allergeennamen voor badges
 }
 
 const products: Product[] = [
@@ -58,6 +60,8 @@ const products: Product[] = [
     ],
     nutritionNote:
       "Kabeljauw zelf is vetarm en eiwitrijk — het beslag verhoogt het koolhydraatgehalte.",
+    ingredienten: "Kabeljauw (Gadus morhua) [VIS], TARWEBLOEM, water, zout, rijsmiddel (E450, E500), plantaardige olie (zonnebloem). Bereid in frituurvet. Saus: mayonaise (EIEREN, MOSTERD).",
+    bevat: ["VIS", "GLUTEN (tarwe)", "EIEREN", "MOSTERD"],
   },
   {
     name: "Lekkerbek",
@@ -73,6 +77,8 @@ const products: Product[] = [
       { label: "Koolhydr.", value: "17 g" },
     ],
     nutritionNote: "Wijting is een magere, lichte vis — vergelijkbaar met kabeljauw.",
+    ingredienten: "Wijting (Merlangius merlangus) [VIS], TARWEBLOEM, water, zout, rijsmiddel, plantaardige olie. Bereid in frituurvet.",
+    bevat: ["VIS", "GLUTEN (tarwe)"],
   },
   {
     name: "Broodje Haring",
@@ -90,6 +96,8 @@ const products: Product[] = [
       { label: "Omega-3", value: "ca. 2,7 g" },
     ],
     nutritionNote: "Haring is een van de beste omega-3 bronnen in ons assortiment.",
+    ingredienten: "HARING (Clupea harengus) [VIS], broodrol (TARWEBLOEM, gist, water, zout, plantaardige olie) [GLUTEN], ui, augurk (komkommer, azijn, suiker, zout, kruiden, MOSTERD), zout.",
+    bevat: ["VIS", "GLUTEN (tarwe)", "MOSTERD"],
   },
   {
     name: "Vissoep",
@@ -105,6 +113,8 @@ const products: Product[] = [
       { label: "Koolhydr.", value: "wisselend" },
     ],
     nutritionNote: "Voedingswaarden per 250 ml kom; wisselen per dag op basis van receptuur.",
+    ingredienten: "Verse vis (wisselend seizoensaanbod) [VIS], water, ui, wortel, SELDERIJ, prei, aardappel, kruiden, zout, peper. Samenstelling wisselt dagelijks. Kan MELK (room) bevatten.",
+    bevat: ["VIS", "SELDERIJ", "kan MELK bevatten"],
   },
   {
     name: "Vispotje",
@@ -119,6 +129,8 @@ const products: Product[] = [
       { label: "Omega-3", value: "aanwezig" },
     ],
     nutritionNote: "Voedingswaarden afhankelijk van vissoort en bereiding.",
+    ingredienten: "Verse vis (wisselend) [VIS], kookroom [MELK], ui, wortel, SELDERIJ, kruiden, zout, peper. Samenstelling wisselt per dag.",
+    bevat: ["VIS", "MELK", "SELDERIJ"],
   },
   {
     name: "Feestelijke Visschotel",
@@ -134,6 +146,8 @@ const products: Product[] = [
       { label: "Koolhydr.", value: "wisselend" },
     ],
     nutritionNote: "Voedingswaarden afhankelijk van vissoort en bereiding.",
+    ingredienten: "Wisselende selectie verse en gerookte VIS, SCHAALDIEREN en/of WEEKDIEREN, diverse garneringen. Samenstelling in overleg. Kan EIEREN, GLUTEN en MELK bevatten.",
+    bevat: ["VIS", "SCHAALDIEREN", "WEEKDIEREN", "kan EIEREN, GLUTEN, MELK bevatten"],
   },
   {
     name: "Varlaks Biologische Zalm",
@@ -152,6 +166,8 @@ const products: Product[] = [
       { label: "Omega-3", value: "ca. 3,5 g" },
     ],
     nutritionNote: "ASC gecertificeerd. Voedingswaarden voor rauwe filet per 100 g.",
+    ingredienten: "Atlantische zalm (Salmo salar) [VIS]. Biologisch gecertificeerd. Geen toegevoegde stoffen.",
+    bevat: ["VIS"],
   },
   {
     name: "Verse Vis (Seizoensaanbod)",
@@ -166,6 +182,8 @@ const products: Product[] = [
       { label: "Omega-3", value: "aanwezig" },
     ],
     nutritionNote: "Voedingswaarden afhankelijk van vissoort en bereiding.",
+    ingredienten: "Verse vis (soort wisselt dagelijks) [VIS]. Vraag het personeel naar de vis van vandaag.",
+    bevat: ["VIS — soort wisselt dagelijks"],
   },
 ];
 
@@ -282,6 +300,69 @@ function NutritionGrid({ rows, note }: { rows: NutritionRow[]; note?: string }) 
   );
 }
 
+function AllergenTag({ label }: { label: string }) {
+  return (
+    <span
+      className="inline-block text-xs px-2 py-0.5 font-semibold"
+      style={{
+        backgroundColor: "rgba(200,96,74,0.1)",
+        color: "#c8604a",
+        border: "1px solid rgba(200,96,74,0.25)",
+        borderRadius: "2px",
+      }}
+    >
+      {label}
+    </span>
+  );
+}
+
+function IngredientenSectie({ ingredienten, bevat }: { ingredienten: string; bevat: string[] }) {
+  return (
+    <details className="mt-3 group">
+      <summary
+        className="text-xs font-medium cursor-pointer select-none flex items-center gap-2 px-3 py-2"
+        style={{
+          backgroundColor: "rgba(26,53,48,0.04)",
+          color: "var(--charcoal)",
+          border: "1px solid rgba(26,53,48,0.08)",
+          listStyle: "none",
+        }}
+      >
+        <span style={{ color: "var(--navy)", opacity: 0.5, fontSize: "0.6rem" }}>▶</span>
+        <span style={{ opacity: 0.65 }}>Ingrediënten & allergenen</span>
+      </summary>
+      <div
+        className="px-3 py-3 text-xs leading-relaxed"
+        style={{
+          backgroundColor: "rgba(26,53,48,0.02)",
+          border: "1px solid rgba(26,53,48,0.08)",
+          borderTop: "none",
+        }}
+      >
+        <p className="mb-3" style={{ color: "var(--charcoal)", opacity: 0.7, lineHeight: "1.6" }}>
+          {ingredienten}
+        </p>
+        <div>
+          <span
+            className="text-xs font-bold uppercase tracking-wider mr-2"
+            style={{ color: "var(--charcoal)", opacity: 0.4, fontSize: "0.6rem" }}
+          >
+            Bevat:
+          </span>
+          <span className="inline-flex flex-wrap gap-1 mt-1">
+            {bevat.map((a) => (
+              <AllergenTag key={a} label={a} />
+            ))}
+          </span>
+        </div>
+        <p className="mt-2.5 text-xs" style={{ color: "var(--charcoal)", opacity: 0.35, fontSize: "0.6rem" }}>
+          Ondanks zorgvuldigheid kunnen sporen van andere allergenen aanwezig zijn. Bij twijfel: vraag ons.
+        </p>
+      </div>
+    </details>
+  );
+}
+
 // ─── Page content ─────────────────────────────────────────────────────────────
 
 function AssortimentContent() {
@@ -314,7 +395,7 @@ function AssortimentContent() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {products.map(
-              ({ name, desc, photoUrl, photoAlt, highlight, badge, omega3Badge, nutrition, nutritionNote, bestelId }) => (
+              ({ name, desc, photoUrl, photoAlt, highlight, badge, omega3Badge, nutrition, nutritionNote, bestelId, ingredienten, bevat }) => (
                 <article
                   key={name}
                   className={`overflow-hidden flex flex-col${
@@ -366,6 +447,9 @@ function AssortimentContent() {
 
                     {/* Nutritional info */}
                     <NutritionGrid rows={nutrition} note={nutritionNote} />
+
+                    {/* Ingredients & allergens */}
+                    <IngredientenSectie ingredienten={ingredienten} bevat={bevat} />
 
                     {/* Varlaks detail link */}
                     {highlight && (

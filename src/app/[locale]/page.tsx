@@ -3,6 +3,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
+import { NewsletterSignup } from "@/components/shared/NewsletterSignup";
 
 export async function generateMetadata({
   params,
@@ -37,7 +38,17 @@ function HeroSection() {
       className="relative min-h-[70vh] flex items-center"
       style={{ backgroundColor: "var(--navy)" }}
     >
-      <div className="max-w-4xl mx-auto px-6 py-24">
+      {/* Background image overlay */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=1200&q=60')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          opacity: 0.12,
+        }}
+      />
+      <div className="max-w-4xl mx-auto px-6 py-24 relative z-10">
         <p
           className="text-xs tracking-[0.25em] uppercase mb-5 opacity-60"
           style={{ color: "var(--sand)" }}
@@ -77,6 +88,45 @@ function HeroSection() {
             {t("cta")}
           </Link>
         </div>
+      </div>
+    </section>
+  );
+}
+
+function AanbiedingSection() {
+  const locale = useLocale();
+
+  return (
+    <section style={{ backgroundColor: "var(--gold)" }} className="py-6 px-6">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
+          <div
+            className="flex-shrink-0 text-xs font-bold px-3 py-2 text-white uppercase tracking-widest"
+            style={{ backgroundColor: "var(--navy)" }}
+          >
+            Aanbieding
+            <br />
+            van de week
+          </div>
+          <div>
+            <p
+              className="font-bold text-xl leading-tight"
+              style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+            >
+              Hollandse garnalen — nu 200g voor €4,95
+            </p>
+            <p className="text-sm mt-0.5" style={{ color: "var(--navy)", opacity: 0.7 }}>
+              Dagvers gepeld · MSC gecertificeerd · Zoutkamp — zolang de voorraad strekt
+            </p>
+          </div>
+        </div>
+        <Link
+          href={`/${locale}/bestellen?product=garnalen-hollands`}
+          className="text-sm font-semibold px-6 py-3 text-white flex-shrink-0 transition-opacity hover:opacity-90"
+          style={{ backgroundColor: "var(--navy)" }}
+        >
+          Bestel nu &rarr;
+        </Link>
       </div>
     </section>
   );
@@ -298,6 +348,15 @@ function ReviewsSection() {
         >
           {t("title")}
         </h2>
+        <div className="flex items-center justify-center gap-3 mb-8">
+          <div className="flex gap-0.5">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <StarIcon key={i} />
+            ))}
+          </div>
+          <span className="font-bold text-lg" style={{ color: "var(--navy)" }}>4.8</span>
+          <span className="text-sm" style={{ color: "var(--charcoal)", opacity: 0.6 }}>op Google Reviews</span>
+        </div>
         <div className="bg-white p-8 md:p-10 mb-8">
           <div className="flex justify-center gap-0.5 mb-5">
             {Array.from({ length: 5 }).map((_, i) => (
@@ -364,6 +423,38 @@ const locationItems = [
     mapsHref: "https://maps.google.com/?q=Hoogvliet+Voorschoten",
   },
 ];
+
+function NieuwsbriefSectie() {
+  return (
+    <section style={{ backgroundColor: "var(--salmon)" }} className="py-16 px-6">
+      <div className="max-w-3xl mx-auto text-center">
+        <p
+          className="text-xs tracking-[0.25em] uppercase mb-4 font-semibold"
+          style={{ color: "rgba(255,255,255,0.7)" }}
+        >
+          Gratis aanmelden
+        </p>
+        <h2
+          className="text-3xl md:text-4xl font-bold mb-4 text-white"
+          style={{ fontFamily: "Playfair Display, serif" }}
+        >
+          Nooit meer een aanbieding missen
+        </h2>
+        <p className="text-base mb-8 max-w-xl mx-auto leading-relaxed" style={{ color: "rgba(255,255,255,0.85)" }}>
+          Elke week: wat er vers binnen is, de aanbieding van de week en seizoenstips.
+          Als eerste horen wanneer de Hollandse Nieuwe er is?{" "}
+          <strong className="text-white">Meld u aan — gratis, altijd opzegbaar.</strong>
+        </p>
+        <div className="max-w-md mx-auto">
+          <NewsletterSignup compact />
+        </div>
+        <p className="text-xs mt-4" style={{ color: "rgba(255,255,255,0.5)" }}>
+          Geen spam. Geen reclame van anderen. Gewoon vis.
+        </p>
+      </div>
+    </section>
+  );
+}
 
 function LocationsSection() {
   const t = useTranslations("locatiesSection");
@@ -435,11 +526,13 @@ export default async function HomePage({
     <>
       <JsonLd />
       <HeroSection />
+      <AanbiedingSection />
       <VerrassingspakketBanner />
       <AboutSection />
       <VarlaksHighlight />
       <AssortimentGrid />
       <ReviewsSection />
+      <NieuwsbriefSectie />
       <LocationsSection />
     </>
   );
