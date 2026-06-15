@@ -21,6 +21,7 @@ export async function generateMetadata({
         nl: "/nl/bestellen",
         en: "/en/bestellen",
         de: "/de/bestellen",
+        "x-default": "/nl/bestellen",
       },
     },
   };

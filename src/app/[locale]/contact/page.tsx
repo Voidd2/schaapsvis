@@ -17,7 +17,7 @@ export async function generateMetadata({
     description: t("contactDesc"),
     alternates: {
       canonical: `/${locale}/contact`,
-      languages: { nl: "/nl/contact", en: "/en/contact", de: "/de/contact" },
+      languages: { nl: "/nl/contact", en: "/en/contact", de: "/de/contact", "x-default": "/nl/contact" },
     },
   };
 }

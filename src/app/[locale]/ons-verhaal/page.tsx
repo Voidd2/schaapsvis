@@ -20,6 +20,7 @@ export async function generateMetadata({
         nl: "/nl/ons-verhaal",
         en: "/en/ons-verhaal",
         de: "/de/ons-verhaal",
+        "x-default": "/nl/ons-verhaal",
       },
     },
   };

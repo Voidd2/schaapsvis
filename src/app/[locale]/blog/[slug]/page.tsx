@@ -57,7 +57,7 @@ export default async function BlogDetailPage({
     author: {
       "@type": "Organization",
       name: "Schaap's Vishandel Leiden",
-      url: "https://schaapsvis.nl",
+      url: "https://www.schaapsvishandel.nl",
     },
     publisher: {
       "@type": "Organization",

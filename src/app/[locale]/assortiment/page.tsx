@@ -22,6 +22,7 @@ export async function generateMetadata({
         nl: "/nl/assortiment",
         en: "/en/assortiment",
         de: "/de/assortiment",
+        "x-default": "/nl/assortiment",
       },
     },
   };

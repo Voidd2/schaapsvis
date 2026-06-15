@@ -16,7 +16,7 @@ export async function generateMetadata({
       "Verhalen van achter de toonbank: welke vis wanneer het lekkerst is, de geschiedenis van onze winkel sinds 1938, en eerlijke visweetjes. Vers uit Leiden.",
     alternates: {
       canonical: `/${locale}/blog`,
-      languages: { nl: "/nl/blog", en: "/en/blog", de: "/de/blog" },
+      languages: { nl: "/nl/blog", en: "/en/blog", de: "/de/blog", "x-default": "/nl/blog" },
     },
   };
 }

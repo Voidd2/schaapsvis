@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { recepten } from "@/lib/recepten";
 import { blogPosts } from "@/lib/blog";
 
-const baseUrl = "https://schaapsvis.nl";
+const baseUrl = "https://www.schaapsvishandel.nl";
 const locales = ["nl", "en", "de"] as const;
 
 const pages = [
@@ -17,6 +17,8 @@ const pages = [
   "/contact",
   "/bestellen",
   "/viskalender",
+  "/viswinkel-leiden",
+  "/frischer-fisch-leiden",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

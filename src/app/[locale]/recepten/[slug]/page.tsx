@@ -367,7 +367,7 @@ export default async function ReceptDetailPage({
     author: {
       "@type": "Organization",
       name: "Schaap's Vishandel Leiden",
-      url: "https://schaapsvis.nl",
+      url: "https://www.schaapsvishandel.nl",
     },
   };
 

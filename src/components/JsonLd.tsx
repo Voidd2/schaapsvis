@@ -2,12 +2,12 @@ export function JsonLd() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "FoodEstablishment",
-    "@id": "https://schaapsvis.nl",
+    "@id": "https://www.schaapsvishandel.nl",
     name: "Schaap's Vishandel",
     alternateName: ["Schaaps Vis", "Schaaps Vis Leiden", "Vishandel Schaap Leiden", "Schaap de visboer"],
     description:
       "Schaap's Vishandel in Leiden verkoopt verse vis, kibbeling, haring, biologische Varlaks zalm en duurzame vis. Al 86 jaar op de Herenstraat 48 in Leiden — de beste viswinkel van Leiden.",
-    url: "https://schaapsvis.nl",
+    url: "https://www.schaapsvishandel.nl",
     telephone: "+31715149802",
     foundingDate: "1938",
     founder: {
@@ -99,7 +99,7 @@ export function JsonLd() {
         ],
       },
     ],
-    menu: "https://schaapsvis.nl/nl/assortiment",
+    menu: "https://www.schaapsvishandel.nl/nl/assortiment",
     acceptsReservations: false,
     hasOfferCatalog: {
       "@type": "OfferCatalog",
@@ -122,7 +122,7 @@ export function JsonLd() {
         "@type": "ListItem",
         position: 1,
         name: "Schaap's Vis Leiden",
-        item: "https://schaapsvis.nl",
+        item: "https://www.schaapsvishandel.nl",
       },
     ],
   };
@@ -131,8 +131,8 @@ export function JsonLd() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: "Schaap's Vishandel Leiden",
-    "@id": "https://schaapsvis.nl/#localbusiness",
-    url: "https://schaapsvis.nl",
+    "@id": "https://www.schaapsvishandel.nl/#localbusiness",
+    url: "https://www.schaapsvishandel.nl",
     telephone: "+31715149802",
     address: {
       "@type": "PostalAddress",

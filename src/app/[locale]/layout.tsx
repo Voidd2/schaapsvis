@@ -8,24 +8,10 @@ import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://schaapsvis.nl"),
-  title: "Schaaps Vis Leiden — Viswinkel Herenstraat | Verse Vis & Kibbeling",
+  metadataBase: new URL("https://www.schaapsvishandel.nl"),
+  title: "Schaap's Vishandel Leiden — Viswinkel Herenstraat | Verse Vis & Kibbeling",
   description:
     "Schaap's Vishandel in Leiden. Verse kibbeling, haring, biologische Varlaks zalm en duurzame vis. Vier generaties op de Herenstraat 48. Ook op de Leidse markt en bij Hoogvliet Voorschoten.",
-  keywords: [
-    "viswinkel Leiden",
-    "verse vis Leiden",
-    "kibbeling Leiden",
-    "haring Leiden",
-    "biologische zalm Leiden",
-    "Varlaks zalm",
-    "duurzame vis Leiden",
-    "visboer Leiden",
-    "vishandel Leiden",
-    "Herenstraat Leiden",
-    "schaapsvis",
-    "Schaap Leiden",
-  ],
   openGraph: {
     siteName: "Schaap's Vis Leiden",
     type: "website",

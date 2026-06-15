@@ -18,7 +18,7 @@ export async function generateMetadata({
     description: t("homeDesc"),
     alternates: {
       canonical: `/${locale}`,
-      languages: { nl: "/nl", en: "/en", de: "/de" },
+      languages: { nl: "/nl", en: "/en", de: "/de", "x-default": "/nl" },
     },
     openGraph: {
       title: t("homeTitle"),

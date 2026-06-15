@@ -15,7 +15,7 @@ export async function generateMetadata({
     description: t("receptenDesc"),
     alternates: {
       canonical: `/${locale}/recepten`,
-      languages: { nl: "/nl/recepten", en: "/en/recepten", de: "/de/recepten" },
+      languages: { nl: "/nl/recepten", en: "/en/recepten", de: "/de/recepten", "x-default": "/nl/recepten" },
     },
   };
 }

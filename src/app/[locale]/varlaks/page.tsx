@@ -17,7 +17,7 @@ export async function generateMetadata({
     description: t("varlaksDesc"),
     alternates: {
       canonical: `/${locale}/varlaks`,
-      languages: { nl: "/nl/varlaks", en: "/en/varlaks", de: "/de/varlaks" },
+      languages: { nl: "/nl/varlaks", en: "/en/varlaks", de: "/de/varlaks", "x-default": "/nl/varlaks" },
     },
   };
 }

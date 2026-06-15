@@ -21,6 +21,7 @@ export async function generateMetadata({
         nl: "/nl/eerlijke-vis",
         en: "/en/eerlijke-vis",
         de: "/de/eerlijke-vis",
+        "x-default": "/nl/eerlijke-vis",
       },
     },
     openGraph: {
