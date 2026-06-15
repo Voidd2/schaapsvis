@@ -32,9 +32,9 @@ const locations = [
     address: "Herenstraat 48, 2313 AL Leiden",
     phone: "071 514 9802",
     days: "Maandag t/m zaterdag",
-    hours: "08:30 – 17:30", // ← AANPASSEN
-    mapEmbed:
-      "https://maps.google.com/maps?q=Herenstraat+48+Leiden&output=embed",
+    hours: "08:30 – 17:30",
+    fotoUrl: "https://images.unsplash.com/photo-1534482421-64566f976cfa?w=800&q=80",
+    fotoAlt: "Verse vis op de toonbank bij Schaap's Vishandel Herenstraat",
     mapsHref: "https://maps.google.com/?q=Herenstraat+48,+2313+AL+Leiden",
   },
   {
@@ -42,9 +42,9 @@ const locations = [
     address: "Nieuwe Rijn / centrum, Leiden",
     phone: null,
     days: "Woensdag + Zaterdag",
-    hours: "09:00 – 17:00", // ← AANPASSEN
-    mapEmbed:
-      "https://maps.google.com/maps?q=Leiden+Markt+Nieuwe+Rijn&output=embed",
+    hours: "09:00 – 17:00",
+    fotoUrl: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80",
+    fotoAlt: "Marktstand Schaap's Vis op de Leidse markt",
     mapsHref: "https://maps.google.com/?q=Leiden+Markt+Nieuwe+Rijn",
   },
   {
@@ -52,9 +52,9 @@ const locations = [
     address: "Bij de Hoogvliet, Voorschoten",
     phone: null,
     days: "Vrijdag",
-    hours: "08:30 – 16:00", // ← AANPASSEN
-    mapEmbed:
-      "https://maps.google.com/maps?q=Hoogvliet+Voorschoten&output=embed",
+    hours: "08:30 – 16:00",
+    fotoUrl: "https://images.unsplash.com/photo-1547592180-85f173990554?w=800&q=80",
+    fotoAlt: "Visstand bij Hoogvliet Voorschoten",
     mapsHref: "https://maps.google.com/?q=Hoogvliet+Voorschoten",
   },
 ];
@@ -81,7 +81,7 @@ function BezoekContent() {
       <section style={{ backgroundColor: "var(--cream)" }} className="py-16">
         <div className="max-w-5xl mx-auto px-4 space-y-20">
           {locations.map(
-            ({ name, address, phone, days, hours, mapEmbed, mapsHref }, idx) => (
+            ({ name, address, phone, days, hours, fotoUrl, fotoAlt, mapsHref }, idx) => (
               <div
                 key={name}
                 className={`grid md:grid-cols-2 gap-8 items-start ${
@@ -137,18 +137,23 @@ function BezoekContent() {
                   </a>
                 </div>
 
-                {/* Map */}
-                <div className="h-[300px] overflow-hidden">
-                  <iframe
-                    title={name}
-                    src={mapEmbed}
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
+                {/* Location photo */}
+                <div className="h-[300px] overflow-hidden relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={fotoUrl}
+                    alt={fotoAlt}
+                    className="w-full h-full object-cover"
                   />
+                  <a
+                    href={mapsHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute bottom-4 right-4 text-xs font-semibold px-3 py-2 text-white transition-opacity hover:opacity-90"
+                    style={{ backgroundColor: "rgba(29,36,114,0.9)" }}
+                  >
+                    Bekijk op kaart →
+                  </a>
                 </div>
               </div>
             )

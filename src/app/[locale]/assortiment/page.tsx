@@ -66,7 +66,7 @@ const products: Product[] = [
   {
     name: "Lekkerbek",
     desc: "Verse wijting gehuld in een luchtig, knapperig beslag. Wijting is een magere, fijne witte vis — vergelijkbaar met kabeljauw maar met een iets subtielere smaak. Een eerlijk en toegankelijk gerecht.",
-    photoUrl: null,
+    photoUrl: "https://images.unsplash.com/photo-1559847844-5315695dadae?w=800&q=80",
     photoAlt: "Lekkerbek in beslag",
     highlight: false,
     bestelId: "lekkerbek",
@@ -83,7 +83,7 @@ const products: Product[] = [
   {
     name: "Broodje Haring",
     desc: "Rauwe Hollandse Nieuwe haring op een zacht broodje, gegarneerd met fijngehakte ui en knapperige augurk. Haring bevat bijzonder veel omega-3 vetzuren en is een van de voedzaamste producten in ons assortiment.",
-    photoUrl: null,
+    photoUrl: "https://images.unsplash.com/photo-1534482421-64566f976cfa?w=800&q=80",
     photoAlt: "Broodje haring met ui en augurk",
     highlight: false,
     bestelId: "haring",
@@ -102,7 +102,7 @@ const products: Product[] = [
   {
     name: "Vissoep",
     desc: "Dagelijks vers bereid in onze eigen keuken. De samenstelling wisselt per dag op basis van het seizoensaanbod — altijd met verse vis als basis. Vol smaak, warm en voedzaam.",
-    photoUrl: null,
+    photoUrl: "https://images.unsplash.com/photo-1547592180-85f173990554?w=800&q=80",
     photoAlt: "Kom huisgemaakte vissoep",
     highlight: false,
     bestelId: "vissoep",
@@ -119,7 +119,7 @@ const products: Product[] = [
   {
     name: "Vispotje",
     desc: "Een romig stoofpotje met verse stukken vis in een rijke saus. Ideaal als uitgebreid tussendoortje of lichte maaltijd. De vissoort wisselt met het seizoen.",
-    photoUrl: null,
+    photoUrl: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80",
     photoAlt: "Vispotje in een schaaltje",
     highlight: false,
     nutrition: [
@@ -135,7 +135,7 @@ const products: Product[] = [
   {
     name: "Feestelijke Visschotel",
     desc: "Een indrukwekkende schaal met een selectie van onze beste producten — perfect voor bijzondere gelegenheden, borrels of een feestelijk diner. Inhoud en grootte in overleg.",
-    photoUrl: null,
+    photoUrl: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80",
     photoAlt: "Gevulde feestelijke visschotel",
     highlight: false,
     bestelId: "feestschotel",
@@ -172,7 +172,7 @@ const products: Product[] = [
   {
     name: "Verse Vis (Seizoensaanbod)",
     desc: "Ons dagelijks wisselende aanbod van verse vis — rechtstreeks van de veiling of onze vaste leveranciers. Wat er ligt hangt af van het seizoen en de vangst. Vraag ons gerust naar het aanbod van de dag.",
-    photoUrl: null,
+    photoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
     photoAlt: "Verse vis op ijs, wisselend dagaanbod",
     highlight: false,
     nutrition: [

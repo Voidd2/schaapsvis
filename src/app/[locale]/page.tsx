@@ -3,7 +3,6 @@ import { useTranslations, useLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
-import { NewsletterSignup } from "@/components/shared/NewsletterSignup";
 
 export async function generateMetadata({
   params,
@@ -201,7 +200,7 @@ function AboutSection() {
         </div>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80"
+          src="https://images.unsplash.com/photo-1534482421-64566f976cfa?w=800&q=80"
           alt="Viswinkel toonbank met verse vis op ijs"
           className="w-full aspect-[3/4] object-cover"
         />
@@ -278,7 +277,7 @@ function VarlaksHighlight() {
 }
 
 const productItems = [
-  { name: "Kibbeling",    desc: "Knapperig gebakken, de Hollandse klassieker",  foto: "https://images.unsplash.com/photo-1610614815803-cc45f99d64ab?w=600&q=80", alt: "Goudbruine kibbeling op bakpapier" },
+  { name: "Kibbeling",    desc: "Knapperig gebakken, de Hollandse klassieker",  foto: "https://images.unsplash.com/photo-1598511726623-d2e9996892f0?w=600&q=80", alt: "Goudbruine kibbeling op bakpapier" },
   { name: "Haring",       desc: "Vers, rauw, recht van de markt",               foto: "https://images.unsplash.com/photo-1534482421-64566f976cfa?w=600&q=80", alt: "Hollandse haring" },
   { name: "Lekkerbek",    desc: "Verse wijting in luchtig beslag",               foto: "https://images.unsplash.com/photo-1559847844-5315695dadae?w=600&q=80", alt: "Gebakken vis in beslag" },
   { name: "Vissoep",      desc: "Huisgemaakte soep, elke dag anders",            foto: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80", alt: "Kom verse vissoep" },
@@ -424,33 +423,55 @@ const locationItems = [
   },
 ];
 
-function NieuwsbriefSectie() {
+function DuurzaamheidStrip() {
+  const locale = useLocale();
+
+  const badges = [
+    { label: "MSC", sub: "Duurzaam gevangen" },
+    { label: "ASC", sub: "Verantwoord gekweekt" },
+    { label: "BIO", sub: "Biologisch gecertificeerd" },
+    { label: "100%", sub: "Traceerbaar" },
+  ];
+
   return (
-    <section style={{ backgroundColor: "var(--salmon)" }} className="py-16 px-6">
-      <div className="max-w-3xl mx-auto text-center">
+    <section style={{ backgroundColor: "var(--navy)" }} className="py-14 px-6">
+      <div className="max-w-4xl mx-auto text-center">
         <p
-          className="text-xs tracking-[0.25em] uppercase mb-4 font-semibold"
-          style={{ color: "rgba(255,255,255,0.7)" }}
+          className="text-xs tracking-[0.2em] uppercase mb-3 font-semibold opacity-50"
+          style={{ color: "var(--sand)" }}
         >
-          Gratis aanmelden
+          Vis met een geweten
         </p>
         <h2
-          className="text-3xl md:text-4xl font-bold mb-4 text-white"
-          style={{ fontFamily: "Playfair Display, serif" }}
+          className="text-3xl font-bold mb-6"
+          style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
         >
-          Nooit meer een aanbieding missen
+          Eerlijke vis — van eitje tot uw bord
         </h2>
-        <p className="text-base mb-8 max-w-xl mx-auto leading-relaxed" style={{ color: "rgba(255,255,255,0.85)" }}>
-          Elke week: wat er vers binnen is, de aanbieding van de week en seizoenstips.
-          Als eerste horen wanneer de Hollandse Nieuwe er is?{" "}
-          <strong className="text-white">Meld u aan — gratis, altijd opzegbaar.</strong>
-        </p>
-        <div className="max-w-md mx-auto">
-          <NewsletterSignup compact />
+        <div className="flex flex-wrap justify-center gap-6 mb-8">
+          {badges.map(({ label, sub }) => (
+            <div key={label} className="text-center">
+              <div
+                className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2 font-bold text-lg"
+                style={{ backgroundColor: "var(--seafoam)", color: "var(--cream)" }}
+              >
+                {label}
+              </div>
+              <p className="text-xs" style={{ color: "rgba(246,250,253,0.6)" }}>{sub}</p>
+            </div>
+          ))}
         </div>
-        <p className="text-xs mt-4" style={{ color: "rgba(255,255,255,0.5)" }}>
-          Geen spam. Geen reclame van anderen. Gewoon vis.
+        <p className="text-sm mb-6 max-w-lg mx-auto leading-relaxed" style={{ color: "rgba(246,250,253,0.7)" }}>
+          Wij kiezen bewust voor vis met certificering. MSC voor duurzaam gevangen vis,
+          ASC voor verantwoorde kweek — en Varlaks biologische zalm zonder antibiotica of GMO.
         </p>
+        <a
+          href={`/${locale}/eerlijke-vis`}
+          className="inline-block text-sm font-semibold px-6 py-3 transition-opacity hover:opacity-85"
+          style={{ backgroundColor: "var(--seafoam)", color: "var(--cream)" }}
+        >
+          Meer over onze eerlijke vis →
+        </a>
       </div>
     </section>
   );
@@ -532,7 +553,7 @@ export default async function HomePage({
       <VarlaksHighlight />
       <AssortimentGrid />
       <ReviewsSection />
-      <NieuwsbriefSectie />
+      <DuurzaamheidStrip />
       <LocationsSection />
     </>
   );

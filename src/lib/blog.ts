@@ -120,8 +120,8 @@ export const blogPosts: BlogPost[] = [
     datumLabel: "15 mei 2026",
     leestijd: "6 min",
     categorie: "Ons verhaal",
-    fotoUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=900&q=80",
-    fotoAlt: "De toonbank van een ambachtelijke viswinkel",
+    fotoUrl: "https://images.unsplash.com/photo-1534482421-64566f976cfa?w=900&q=80",
+    fotoAlt: "Verse vis op de toonbank van een viswinkel",
     secties: [
       {
         alineas: [
@@ -267,8 +267,8 @@ export const blogPosts: BlogPost[] = [
     datumLabel: "14 februari 2026",
     leestijd: "3 min",
     categorie: "Visweetjes",
-    fotoUrl: "https://images.unsplash.com/photo-1610614815803-cc45f99d64ab?w=900&q=80",
-    fotoAlt: "Goudbruine kibbeling",
+    fotoUrl: "https://images.unsplash.com/photo-1598511726623-d2e9996892f0?w=900&q=80",
+    fotoAlt: "Goudbruine kibbeling op bakpapier",
     secties: [
       {
         alineas: [
@@ -350,8 +350,8 @@ export const blogPosts: BlogPost[] = [
     datumLabel: "2 mei 2026",
     leestijd: "4 min",
     categorie: "Ons verhaal",
-    fotoUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=900&q=80",
-    fotoAlt: "Verse vis uitgestald op de markt",
+    fotoUrl: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=900&q=80",
+    fotoAlt: "Verse vis uitgestald op de markt in Leiden",
     secties: [
       {
         alineas: [
