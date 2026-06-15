@@ -47,11 +47,11 @@ interface Product {
 const products: Product[] = [
   {
     name: "Kibbeling",
-    desc: "Knapperig gebakken stukjes kabeljauw in een luchtig, goudbruin beslag — de Hollandse klassieker op zijn best. Kabeljauw is van nature een magere, eiwitrijke vis; het beslag voegt een hartige krokante korst toe.",
+    desc: "Knapperig gebakken stukjes witvis in een luchtig, goudbruin beslag — de Hollandse klassieker. Wij maken kibbeling van kabeljauw (Gadus morhua, rijkere smaak) óf van pollak/Alaska koolvis (Theragra chalcogramma, MSC-gecertificeerd, mild). Vraag naar de vis van de dag.",
     photoUrl: "https://images.unsplash.com/photo-1598511726623-d2e9996892f0?w=800&q=80",
     photoAlt: "Goudbruine kibbeling op bakpapier",
     highlight: false,
-    bestelId: "kibbeling",
+    bestelId: "kibbeling-pollak",
     nutrition: [
       { label: "Energie", value: "ca. 235 kcal" },
       { label: "Eiwit", value: "17 g" },
@@ -59,8 +59,8 @@ const products: Product[] = [
       { label: "Koolhydr.", value: "18 g" },
     ],
     nutritionNote:
-      "Kabeljauw zelf is vetarm en eiwitrijk — het beslag verhoogt het koolhydraatgehalte.",
-    ingredienten: "Kabeljauw (Gadus morhua) [VIS], TARWEBLOEM, water, zout, rijsmiddel (E450, E500), plantaardige olie (zonnebloem). Bereid in frituurvet. Saus: mayonaise (EIEREN, MOSTERD).",
+      "Witvis zelf is vetarm en eiwitrijk — het beslag verhoogt het koolhydraatgehalte. Waarden per 100 g bereid.",
+    ingredienten: "Witvis (kabeljauw Gadus morhua of pollak/koolvis Theragra chalcogramma) [VIS], TARWEBLOEM, water, zout, rijsmiddel (E450, E500), plantaardige olie (zonnebloem). Bereid in frituurvet. Saus: mayonaise (EIEREN, MOSTERD).",
     bevat: ["VIS", "GLUTEN (tarwe)", "EIEREN", "MOSTERD"],
   },
   {
@@ -172,7 +172,7 @@ const products: Product[] = [
   {
     name: "Verse Vis (Seizoensaanbod)",
     desc: "Ons dagelijks wisselende aanbod van verse vis — rechtstreeks van de veiling of onze vaste leveranciers. Wat er ligt hangt af van het seizoen en de vangst. Vraag ons gerust naar het aanbod van de dag.",
-    photoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
+    photoUrl: null,
     photoAlt: "Verse vis op ijs, wisselend dagaanbod",
     highlight: false,
     nutrition: [
@@ -184,6 +184,44 @@ const products: Product[] = [
     nutritionNote: "Voedingswaarden afhankelijk van vissoort en bereiding.",
     ingredienten: "Verse vis (soort wisselt dagelijks) [VIS]. Vraag het personeel naar de vis van vandaag.",
     bevat: ["VIS — soort wisselt dagelijks"],
+  },
+  {
+    name: "Hollandse Garnalen",
+    desc: "Dagverse Noordzeegarnalen (Crangon crangon) — gevangen door de traditionele garnalenvloot op de zuidelijke Noordzee en dagelijks vers gekookt en gepeld aan de Waddenkust. Wij voeren Heiploeg en SOLT, beide gevestigde Nederlandse garnalenbedrijven. MSC-gecertificeerd: de Noordzeegarnalensector in Nederland, Duitsland en Denemarken beschikt al sinds 2017 over het MSC-keurmerk.",
+    photoUrl: null,
+    photoAlt: "Verse gepelde Hollandse Noordzeegarnalen",
+    highlight: false,
+    badge: "MSC",
+    bestelId: "garnalen-hollands",
+    nutrition: [
+      { label: "Energie", value: "ca. 80 kcal" },
+      { label: "Eiwit", value: "18 g" },
+      { label: "Vet", value: "0,6 g" },
+      { label: "Koolhydr.", value: "0 g" },
+    ],
+    nutritionNote: "Extreem eiwitrijk, bijna vetvrij. Voedingswaarden per 100 g.",
+    ingredienten: "Hollandse garnalen (Crangon crangon) [SCHAALDIEREN], zout. Kan conserveermiddel E223 bevatten [SULFIET].",
+    bevat: ["SCHAALDIEREN", "SULFIET"],
+  },
+  {
+    name: "Gerookte Noorse Zalm — High Seas",
+    desc: "Koud gerookte kweekzalmfilet (Salmo salar) uit Noorwegen, 'lang gesneden' in dunne plakken — direct te gebruiken op brood, bij een visplankje of in een pasta. High Seas is het zalmmerk van W.G. Den Heijer & Zn. uit Scheveningen, een van de oudste visverwerkende bedrijven van Nederland. ASC gecertificeerd.",
+    photoUrl: null,
+    photoAlt: "Dunne plakken gerookte Noorse zalm van High Seas",
+    highlight: false,
+    badge: "ASC",
+    omega3Badge: "Omega-3 uitstekend",
+    bestelId: "zalm-gerookt",
+    nutrition: [
+      { label: "Energie", value: "ca. 160 kcal" },
+      { label: "Eiwit", value: "18 g" },
+      { label: "Vet", value: "9 g" },
+      { label: "Omega-3", value: "ca. 2,5 g" },
+      { label: "Koolhydr.", value: "0 g" },
+    ],
+    nutritionNote: "ASC gecertificeerd. Voedingswaarden voor gerookte zalm per 100 g.",
+    ingredienten: "Atlantische zalm (Salmo salar) [VIS], zout, rook.",
+    bevat: ["VIS"],
   },
 ];
 
