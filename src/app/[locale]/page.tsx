@@ -145,9 +145,9 @@ function VerrassingspakketBanner() {
             NIEUW
           </span>
           <p className="text-sm md:text-base" style={{ color: "var(--navy)" }}>
-            <strong>Het Verrassingspakket</strong> — verse vis van de dag voor{" "}
+            <strong>Schaap&apos;s Verrassingspakket</strong> — verse vis van de dag voor{" "}
             <strong>€5,99</strong>. Tegen verspilling, vóór uw portemonnee.
-            Maximaal 2 pakketten per dag.
+            Op = op — elke dag maar 2.
           </p>
         </div>
         <Link

@@ -281,12 +281,17 @@ export function BestellenForm() {
                   <Gift size={28} style={{ color: "var(--sand)" }} className="flex-shrink-0 mt-1" />
                   <div>
                     <p className="font-bold text-lg" style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}>
-                      Het Verrassingspakket — €5,99
+                      Schaap&apos;s Verrassingspakket — €5,99
                     </p>
                     <p className="text-sm leading-relaxed" style={{ color: "rgba(246,250,253,0.75)" }}>
                       Verse vis van de dag, ter waarde van minimaal het dubbele.
-                      Tegen verspilling. <strong>Maximaal 2 per dag</strong> — wij
-                      bevestigen telefonisch of er nog één voor u is.
+                      Tegen verspilling. <strong>Op = op — elke dag maar 2 beschikbaar.</strong>{" "}
+                      Wij bevestigen telefonisch of er nog één voor u is.
+                    </p>
+                    <p className="text-xs mt-2 leading-relaxed" style={{ color: "rgba(246,250,253,0.55)" }}>
+                      Ook te vinden via Too Good To Go — maar rechtstreeks bij ons
+                      reserveren is voordeliger én steunt de winkel direct, zonder
+                      commissie aan derden.
                     </p>
                   </div>
                 </div>
