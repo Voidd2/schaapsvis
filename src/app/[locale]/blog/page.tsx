@@ -62,6 +62,53 @@ export default async function BlogPage({
         </div>
       </section>
 
+      {/* Viskalender promo */}
+      <section style={{ backgroundColor: "var(--navy)" }} className="py-10 px-6">
+        <div className="max-w-5xl mx-auto">
+          <Link
+            href={`/${locale}/viskalender`}
+            className="flex flex-col md:flex-row items-start md:items-center gap-5 group"
+          >
+            <div
+              className="flex-shrink-0 w-14 h-14 flex items-center justify-center"
+              style={{ backgroundColor: "var(--gold)" }}
+            >
+              <svg viewBox="0 0 40 40" width="28" height="28" fill="var(--navy-dark)" aria-hidden="true">
+                {/* Clock/wheel icon */}
+                <circle cx="20" cy="20" r="18" stroke="var(--navy-dark)" strokeWidth="2" fill="none" />
+                <circle cx="20" cy="20" r="2.5" fill="var(--navy-dark)" />
+                <line x1="20" y1="20" x2="20" y2="6" stroke="var(--navy-dark)" strokeWidth="2" strokeLinecap="round" />
+                <line x1="20" y1="20" x2="30" y2="26" stroke="var(--navy-dark)" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p
+                className="text-xs uppercase tracking-widest mb-1 font-semibold"
+                style={{ color: "var(--gold)" }}
+              >
+                Interactief
+              </p>
+              <h2
+                className="text-xl font-bold mb-1 group-hover:underline underline-offset-4"
+                style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+              >
+                Het Visjaar — de interactieve viskalender
+              </h2>
+              <p className="text-sm" style={{ color: "rgba(246,250,253,0.65)" }}>
+                Maand voor maand: welke vis is nú op zijn best? De kalender springt automatisch naar de
+                huidige maand en laat zien wat het hele jaar te bieden heeft.
+              </p>
+            </div>
+            <span
+              className="text-sm font-semibold px-4 py-2.5 flex-shrink-0 transition-opacity group-hover:opacity-80"
+              style={{ backgroundColor: "var(--gold)", color: "var(--navy-dark)" }}
+            >
+              Bekijk kalender →
+            </span>
+          </Link>
+        </div>
+      </section>
+
       {/* Posts grid */}
       <section style={{ backgroundColor: "var(--cream)" }} className="py-14 px-6">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">

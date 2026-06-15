@@ -16,6 +16,7 @@ const pages = [
   "/bezoek-ons",
   "/contact",
   "/bestellen",
+  "/viskalender",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
