@@ -3,6 +3,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
+import { NewsletterSignup } from "@/components/shared/NewsletterSignup";
 
 export async function generateMetadata({
   params,
@@ -92,71 +93,50 @@ function HeroSection() {
   );
 }
 
-function AanbiedingSection() {
-  const locale = useLocale();
-
+function NewsletterSection() {
   return (
-    <section style={{ backgroundColor: "var(--gold)" }} className="py-6 px-6">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <div
-            className="flex-shrink-0 text-xs font-bold px-3 py-2 text-white uppercase tracking-widest"
-            style={{ backgroundColor: "var(--navy)" }}
-          >
-            Aanbieding
-            <br />
-            van de week
-          </div>
-          <div>
-            <p
-              className="font-bold text-xl leading-tight"
-              style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+    <section style={{ backgroundColor: "var(--navy-dark)" }} className="py-16 px-6">
+      <div className="max-w-2xl mx-auto text-center">
+        <p
+          className="text-xs tracking-[0.2em] uppercase mb-4 font-semibold"
+          style={{ color: "var(--gold)" }}
+        >
+          Gratis · Geen spam
+        </p>
+        <h2
+          className="text-3xl md:text-4xl font-bold mb-5 leading-tight"
+          style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+        >
+          Altijd als eerste weten wat er lekkers binnen is
+        </h2>
+        <p className="text-base mb-8" style={{ color: "rgba(246,250,253,0.65)" }}>
+          Schrijf u in op onze nieuwsbrief en ontvang:
+        </p>
+        <ul className="grid sm:grid-cols-2 gap-y-3 gap-x-10 mb-10 text-left max-w-lg mx-auto">
+          {[
+            "Speciale kortingen — exclusief voor abonnees, niet online zichtbaar",
+            "Verrassingspakket — reserveer vóórdat het op de website uitverkocht is",
+            "Seizoensinformatie — wanneer de Hollandse Nieuwe er is, welke vis op zijn best zijn",
+            "Recepten en tips van onze visvakman, gebaseerd op het aanbod van de week",
+          ].map((item) => (
+            <li
+              key={item}
+              className="flex items-start gap-2.5 text-sm"
+              style={{ color: "rgba(246,250,253,0.82)" }}
             >
-              Hollandse garnalen — nu 200g voor €4,95
-            </p>
-            <p className="text-sm mt-0.5" style={{ color: "var(--navy)", opacity: 0.7 }}>
-              Dagvers gepeld · MSC gecertificeerd · Zoutkamp — zolang de voorraad strekt
-            </p>
-          </div>
+              <span style={{ color: "var(--gold)", flexShrink: 0, marginTop: "2px" }}>
+                <CheckIcon />
+              </span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        <div className="flex justify-center">
+          <NewsletterSignup />
         </div>
-        <Link
-          href={`/${locale}/bestellen?product=garnalen-hollands`}
-          className="text-sm font-semibold px-6 py-3 text-white flex-shrink-0 transition-opacity hover:opacity-90"
-          style={{ backgroundColor: "var(--navy)" }}
-        >
-          Bestel nu &rarr;
-        </Link>
-      </div>
-    </section>
-  );
-}
-
-function VerrassingspakketBanner() {
-  const locale = useLocale();
-
-  return (
-    <section style={{ backgroundColor: "var(--sand)" }} className="py-5 px-6">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <span
-            className="text-xs font-bold px-3 py-1.5 text-white flex-shrink-0"
-            style={{ backgroundColor: "var(--seafoam)" }}
-          >
-            NIEUW
-          </span>
-          <p className="text-sm md:text-base" style={{ color: "var(--navy)" }}>
-            <strong>Schaap&apos;s Verrassingspakket</strong> — verse vis van de dag voor{" "}
-            <strong>€5,99</strong>. Tegen verspilling, vóór uw portemonnee.
-            Op = op — elke dag maar 2.
-          </p>
-        </div>
-        <Link
-          href={`/${locale}/bestellen?product=verrassingspakket`}
-          className="text-sm font-semibold px-5 py-2.5 text-white flex-shrink-0 transition-opacity hover:opacity-90"
-          style={{ backgroundColor: "var(--navy)" }}
-        >
-          Reserveer er één &rarr;
-        </Link>
+        <p className="text-xs mt-5" style={{ color: "rgba(246,250,253,0.35)" }}>
+          Uitschrijven via één klik. Wij sturen nooit reclame van derden.
+        </p>
       </div>
     </section>
   );
@@ -547,8 +527,7 @@ export default async function HomePage({
     <>
       <JsonLd />
       <HeroSection />
-      <AanbiedingSection />
-      <VerrassingspakketBanner />
+      <NewsletterSection />
       <AboutSection />
       <VarlaksHighlight />
       <AssortimentGrid />
