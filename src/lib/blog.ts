@@ -385,6 +385,58 @@ export const blogPosts: BlogPost[] = [
     seoKeywords:
       "markt leiden vis, vismarkt leiden, leidse markt woensdag zaterdag, vis kraam leiden, broodje haring markt leiden",
   },
+  {
+    slug: "waar-koop-je-biologische-vis-in-leiden",
+    title: "Waar koop je biologische vis in Leiden?",
+    excerpt:
+      "Biologische vis is in Leiden verrassend lastig te vinden. Wij leggen uit wat biologische vis precies is, waar je op moet letten, en waar je in Leiden écht biologische zalm en vis koopt.",
+    datum: "2026-06-15",
+    datumLabel: "15 juni 2026",
+    leestijd: "5 min",
+    categorie: "Duurzaam",
+    fotoUrl: "/images/scene-zalm.svg",
+    fotoAlt: "Biologische Varlaks zalm bij Schaap's Vishandel in Leiden",
+    secties: [
+      {
+        alineas: [
+          "Steeds meer Leidenaren willen bewuster eten: biologische groente, scharreleieren, en — terecht — ook biologische vis. Maar waar koop je die eigenlijk in Leiden? In de supermarkt is het aanbod beperkt en vaak onduidelijk, en lang niet elke visboer kan écht biologische vis leveren. Tijd om het uit te leggen.",
+        ],
+      },
+      {
+        kop: "Wat is biologische vis precies?",
+        alineas: [
+          "Belangrijk om te weten: biologische vis komt altijd uit gecertificeerde kweek. Wilde vis kan per definitie niet biologisch zijn — je kunt nu eenmaal niet controleren wat een wilde vis eet of hoe hij leeft. Voor het EU-biologisch keurmerk gelden strenge eisen, in Nederland gecontroleerd door Skal: biologisch voer, lage bezettingsdichtheid, geen preventieve antibiotica, geen synthetische kleurstoffen en aantoonbaar dierenwelzijn.",
+          "Wilde vis kán wel duurzaam zijn — let dan op het MSC-keurmerk en de VISwijzer. Kortom: biologisch staat voor verantwoorde kweek, MSC voor duurzame wildvangst. Allebei goede keuzes, maar het is niet hetzelfde.",
+        ],
+      },
+      {
+        kop: "Biologische zalm in Leiden: Varlaks",
+        alineas: [
+          "Onze biologische Varlaks zalm komt uit de Skjerstadfjorden in Noord-Noorwegen, boven de poolcirkel bij Bodø. Hij wordt gekweekt door twee familieboerderijen op lage bezettingsdichtheid, is ASC én EU-biologisch gecertificeerd, en groeit op zonder antibiotica, hormonen of GMO. De roze kleur komt niet van synthetische kleurstof maar van natuurlijke astaxanthine (Panaferd-AX).",
+          "Daarmee is Schaap's Vishandel een van de weinige plekken in Leiden waar je echte biologische zalm koopt — vers uit de toonbank, niet uit een vacuümverpakking in het schap.",
+        ],
+      },
+      {
+        kop: "En de rest van het assortiment?",
+        alineas: [
+          "Naast de biologische Varlaks zalm werken we met MSC-gecertificeerde wildvangst (zoals Hollandse garnalen en schol) en ASC-gecertificeerde kweekvis. Op onze biologische-vis-pagina laten we per product eerlijk de herkomst en de VISwijzer-status zien — ook als die oranje of rood is. Want eerlijk zijn over wat je verkoopt, hoort er wat ons betreft gewoon bij.",
+        ],
+      },
+      {
+        kop: "Waar te koop in Leiden",
+        alineas: [
+          "U vindt ons in de winkel aan de Herenstraat 48 (maandag t/m zaterdag), op de markt in Leiden — woensdag bij de Vismarkt aan de Nieuwe Rijn en zaterdag op de Aalmarkt voor de Waag — en op vrijdag bij Hoogvliet in Voorschoten. Vraag gerust naar de biologische zalm; we vertellen u er graag alles over. Bestel vooruit via WhatsApp of bel 071 514 9802, dan zetten we het voor u klaar.",
+        ],
+      },
+    ],
+    gerelateerdeLinks: [
+      { label: "Alles over onze biologische vis", href: "/biologische-vis" },
+      { label: "Biologische Varlaks zalm", href: "/varlaks" },
+      { label: "Bekijk het assortiment", href: "/assortiment" },
+    ],
+    seoKeywords:
+      "biologische vis leiden, biologische zalm leiden, bio vis leiden, duurzame vis leiden, varlaks zalm leiden, waar biologische vis kopen leiden",
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {
