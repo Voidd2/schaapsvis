@@ -9,9 +9,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   return {
-    title: "Viskalender — welke vis is wanneer het lekkerst? | Schaap's Vis Leiden",
+    title: "Viswijzer — welke vis is nu het lekkerst? | Schaap's Vis Leiden",
     description:
-      "Ontdek maand voor maand welke vis nu in het seizoen is. Van Hollandse Nieuwe in juni tot Zeeuwse mosselen in september — de interactieve viskalender van Schaap's Vis Leiden, sinds 1938.",
+      "Ontdek maand voor maand welke vis in het seizoen is. Van Hollandse Nieuwe in juni tot Zeeuwse mosselen in september. De Viswijzer van Schaap's Vis Leiden, sinds 1938.",
     alternates: {
       canonical: `/${locale}/viskalender`,
       languages: { nl: "/nl/viskalender" },
@@ -19,7 +19,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function ViskalenderPage({
+export default async function ViswijzerPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -30,32 +30,41 @@ export default async function ViskalenderPage({
     <>
       <JsonLd />
 
-      {/* Hero */}
-      <section style={{ backgroundColor: "var(--navy-dark)" }} className="py-14 px-6">
-        <div className="max-w-4xl mx-auto">
-          <p
-            className="text-xs tracking-[0.25em] uppercase mb-4 opacity-60"
-            style={{ color: "var(--sand)" }}
-          >
-            Seizoensvis
-          </p>
-          <h1
-            className="text-4xl md:text-5xl font-bold mb-5 leading-tight"
-            style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
-          >
-            Het Visjaar
-          </h1>
-          <p
-            className="text-lg leading-relaxed max-w-2xl"
-            style={{ color: "rgba(246,250,253,0.75)" }}
-          >
-            Welke vis is nú op zijn best? De kalender springt automatisch naar de huidige maand. Scroll
-            verder om te zien wat de komende maanden te bieden hebben.
-          </p>
-        </div>
+      {/* Hero — dark, blends into the first month section */}
+      <section
+        className="py-16 px-6 text-center"
+        style={{
+          background: "linear-gradient(180deg, #060820 0%, #060820 100%)",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
+        }}
+      >
+        <p
+          className="text-[10px] tracking-[0.35em] uppercase mb-4"
+          style={{ color: "rgba(168,216,240,0.45)" }}
+        >
+          Seizoensvis · Schaap&apos;s Vishandel Leiden
+        </p>
+        <h1
+          className="font-bold mb-4 leading-tight"
+          style={{
+            color:       "rgba(246,250,253,0.95)",
+            fontFamily:  "Playfair Display, serif",
+            fontSize:    "clamp(2.4rem, 7vw, 4rem)",
+            letterSpacing: "-0.02em",
+          }}
+        >
+          Viswijzer
+        </h1>
+        <p
+          className="text-sm md:text-base max-w-xl mx-auto leading-relaxed"
+          style={{ color: "rgba(246,250,253,0.5)" }}
+        >
+          Welke vis is nú op zijn best? De pagina springt automatisch naar de huidige maand.
+          Scroll om het hele jaar te ontdekken.
+        </p>
       </section>
 
-      {/* Interactive calendar */}
+      {/* Interactive viswijzer */}
       <ViskalenderClient />
     </>
   );

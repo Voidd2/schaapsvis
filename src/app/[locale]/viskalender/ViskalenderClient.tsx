@@ -4,293 +4,129 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { viskalenderData } from "@/lib/viskalender";
-import type { MaandData } from "@/lib/viskalender";
 
-// ── SVG wheel geometry ────────────────────────────────────────────────────────
-const CX = 100, CY = 100, R_OUT = 80, R_IN = 22;
-const toRad = (d: number) => (d * Math.PI) / 180;
-
-function slicePath(i: number): string {
-  const a0 = i * 30 - 90, a1 = a0 + 30;
-  const ox1 = CX + R_OUT * Math.cos(toRad(a0)), oy1 = CY + R_OUT * Math.sin(toRad(a0));
-  const ox2 = CX + R_OUT * Math.cos(toRad(a1)), oy2 = CY + R_OUT * Math.sin(toRad(a1));
-  const ix1 = CX + R_IN * Math.cos(toRad(a0)),  iy1 = CY + R_IN * Math.sin(toRad(a0));
-  const ix2 = CX + R_IN * Math.cos(toRad(a1)),  iy2 = CY + R_IN * Math.sin(toRad(a1));
-  const f = (n: number) => n.toFixed(2);
-  return `M ${f(ix1)},${f(iy1)} L ${f(ox1)},${f(oy1)} A ${R_OUT},${R_OUT} 0 0,1 ${f(ox2)},${f(oy2)} L ${f(ix2)},${f(iy2)} A ${R_IN},${R_IN} 0 0,0 ${f(ix1)},${f(iy1)} Z`;
-}
-
-function labelXY(i: number) {
-  const mid = (i + 0.5) * 30 - 90;
-  const r = (R_OUT + R_IN) / 2;
-  return { x: (CX + r * Math.cos(toRad(mid))).toFixed(1), y: (CY + r * Math.sin(toRad(mid))).toFixed(1) };
-}
-
-const SLICES = Array.from({ length: 12 }, (_, i) => ({ path: slicePath(i), xy: labelXY(i) }));
-const wheelRotation = (i: number) => -(i * 30 + 15);
-
-// ── Seasonal section backgrounds ──────────────────────────────────────────────
-const SEASON_BG: Record<string, string> = {
-  Winter:  "rgba(20,25,79,0.55)",
-  Lente:   "rgba(20,60,50,0.4)",
-  Zomer:   "rgba(80,50,20,0.4)",
-  Herfst:  "rgba(60,30,15,0.45)",
+// ── Season visual themes ───────────────────────────────────────────────────────
+const SEASON: Record<
+  string,
+  { bg: string; accent: string; strip: string; eyebrow: string }
+> = {
+  Winter: {
+    bg:      "linear-gradient(150deg, #060820 0%, #0f1340 50%, #1d2472 100%)",
+    accent:  "#a8d8f0",
+    strip:   "rgba(6,8,32,0.94)",
+    eyebrow: "rgba(168,216,240,0.4)",
+  },
+  Lente: {
+    bg:      "linear-gradient(150deg, #04100c 0%, #0a2a20 50%, #1a5c42 100%)",
+    accent:  "#7ad4a8",
+    strip:   "rgba(4,16,12,0.94)",
+    eyebrow: "rgba(122,212,168,0.35)",
+  },
+  Zomer: {
+    bg:      "linear-gradient(150deg, #140c00 0%, #2a1e00 50%, #7a4e10 100%)",
+    accent:  "#e8c46a",
+    strip:   "rgba(20,12,0,0.94)",
+    eyebrow: "rgba(232,196,106,0.35)",
+  },
+  Herfst: {
+    bg:      "linear-gradient(150deg, #120500 0%, #2a0e04 50%, #7a2810 100%)",
+    accent:  "#e88c6a",
+    strip:   "rgba(18,5,0,0.94)",
+    eyebrow: "rgba(232,140,106,0.35)",
+  },
 };
 
-// ── Fish SVG silhouette ───────────────────────────────────────────────────────
-function Fish({ color = "currentColor", size = 34 }: { color?: string; size?: number }) {
+// ── Fish SVG silhouette ────────────────────────────────────────────────────────
+function Fish({ color = "white", size = 26 }: { color?: string; size?: number }) {
   return (
-    <svg width={size} height={Math.round(size * 0.56)} viewBox="0 0 80 45" fill={color} aria-hidden="true" style={{ flexShrink: 0 }}>
+    <svg
+      width={size}
+      height={Math.round(size * 0.56)}
+      viewBox="0 0 80 45"
+      fill={color}
+      aria-hidden
+    >
       <ellipse cx="33" cy="22" rx="31" ry="18" />
       <polygon points="62,22 80,8 80,36" />
-      <circle cx="11" cy="17" r="4" fill="rgba(255,255,255,0.6)" />
+      <circle cx="11" cy="17" r="4" fill="rgba(0,0,0,0.28)" />
     </svg>
   );
 }
 
-// ── Keurmerk badge ────────────────────────────────────────────────────────────
-const BADGE_BG: Record<string, string> = { MSC: "var(--seafoam)", ASC: "var(--lichtblauw)", BIO: "var(--seafoam)" };
+const FISH_COLORS = [
+  "rgba(168,216,240,0.9)",
+  "rgba(246,250,253,0.75)",
+  "rgba(212,232,245,0.85)",
+  "rgba(184,131,46,0.9)",
+];
 
+// ── Badge ──────────────────────────────────────────────────────────────────────
 function Badge({ type }: { type: string }) {
+  const bg =
+    type === "MSC" ? "#2e8b6e" : type === "ASC" ? "#1d75b8" : "#2e8b6e";
   return (
     <span
-      className="text-[9px] font-bold px-1.5 py-0.5 leading-none"
-      style={{ backgroundColor: BADGE_BG[type] ?? "var(--gold)", color: "var(--navy-dark)" }}
+      className="flex-shrink-0 text-[9px] font-bold px-1.5 py-0.5 leading-none"
+      style={{ backgroundColor: bg, color: "white" }}
     >
       {type}
     </span>
   );
 }
 
-// ── Calendar wheel ────────────────────────────────────────────────────────────
-function CalendarWheel({
-  activeMaand,
-  currentDay,
-  noMotion,
-}: {
-  activeMaand: number;
-  currentDay: string;
-  noMotion: boolean;
-}) {
-  const rotation = wheelRotation(activeMaand);
-
-  return (
-    <div className="flex flex-col items-center gap-4">
-      <svg
-        viewBox="0 0 200 200"
-        width={260}
-        height={260}
-        role="img"
-        aria-label={`Viskalender — ${viskalenderData[activeMaand].naam} actief`}
-      >
-        <polygon points="93,3 107,3 100,16" fill="var(--gold)" />
-        <g
-          style={{
-            transform: `rotate(${rotation}deg)`,
-            transformOrigin: `${CX}px ${CY}px`,
-            transition: noMotion ? "none" : "transform 0.55s cubic-bezier(0.25,0.1,0.25,1)",
-          }}
-        >
-          {SLICES.map(({ path, xy }, i) => {
-            const active = i === activeMaand;
-            return (
-              <g key={i}>
-                <path
-                  d={path}
-                  fill={active ? "var(--gold)" : "var(--navy)"}
-                  stroke="var(--navy-dark)"
-                  strokeWidth="1.5"
-                />
-                <text
-                  x={xy.x}
-                  y={xy.y}
-                  textAnchor="middle"
-                  dominantBaseline="central"
-                  fontSize={active ? "8.5" : "6.5"}
-                  fontWeight={active ? "700" : "400"}
-                  fill={active ? "var(--navy-dark)" : "rgba(246,250,253,0.55)"}
-                  style={{ fontFamily: "sans-serif", pointerEvents: "none" }}
-                >
-                  {viskalenderData[i].afkorting}
-                </text>
-              </g>
-            );
-          })}
-        </g>
-        <circle cx={CX} cy={CY} r={R_IN - 1} fill="var(--navy-dark)" />
-        {currentDay ? (
-          <>
-            <text x={CX} y={CY - 7} textAnchor="middle" fontSize="5" fontWeight="700" letterSpacing="1" fill="var(--gold)" style={{ fontFamily: "sans-serif" }}>
-              VANDAAG
-            </text>
-            <text x={CX} y={CY + 4} textAnchor="middle" fontSize="7.5" fontWeight="600" fill="var(--cream)" style={{ fontFamily: "sans-serif" }}>
-              {viskalenderData[activeMaand].afkorting}
-            </text>
-            <text x={CX} y={CY + 13} textAnchor="middle" fontSize="4.5" fill="rgba(246,250,253,0.45)" style={{ fontFamily: "sans-serif" }}>
-              {currentDay}
-            </text>
-          </>
-        ) : (
-          <text x={CX} y={CY + 4} textAnchor="middle" fontSize="7" fill="var(--cream)" style={{ fontFamily: "sans-serif" }}>
-            {viskalenderData[activeMaand].afkorting}
-          </text>
-        )}
-      </svg>
-      <div className="text-center">
-        <p className="text-xs" style={{ color: "rgba(246,250,253,0.5)" }}>
-          Seizoen:{" "}
-          <strong style={{ color: "var(--gold)" }}>{viskalenderData[activeMaand].seizoen}</strong>
-        </p>
-      </div>
-    </div>
-  );
-}
-
 // ── Framer Motion variants ────────────────────────────────────────────────────
 const sectionReveal: Variants = {
-  hidden: { opacity: 0, y: 32 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] } },
+  hidden: { opacity: 0, y: 48 },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } },
 };
 const fishContainer: Variants = {
   hidden: {},
-  show:   { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
+  show:   { transition: { staggerChildren: 0.1, delayChildren: 0.35 } },
 };
 const fishItem: Variants = {
-  hidden: { opacity: 0, x: -36 },
-  show:   { opacity: 1, x: 0, transition: { duration: 0.45, ease: "easeOut" } },
+  hidden: { opacity: 0, x: -40 },
+  show:   { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
-// ── Month section ─────────────────────────────────────────────────────────────
-const FISH_COLORS = ["var(--sand)", "var(--lichtblauw)", "var(--gold)", "var(--cream)"];
-
-function MaandSection({
-  maand,
-  index,
-  activeMaand,
-  noMotion,
-  setRef,
-}: {
-  maand: MaandData;
-  index: number;
-  activeMaand: number;
-  noMotion: boolean;
-  setRef: (el: HTMLElement | null) => void;
-}) {
-  const isActive = index === activeMaand;
-  const bg = isActive ? (SEASON_BG[maand.seizoen] ?? "rgba(29,36,114,0.4)") : "var(--charcoal)";
-
-  return (
-    <motion.section
-      id={`maand-${index}`}
-      ref={setRef}
-      variants={noMotion ? undefined : sectionReveal}
-      initial={noMotion ? false : "hidden"}
-      whileInView={noMotion ? undefined : "show"}
-      viewport={{ once: true, margin: "0px 0px -80px 0px" }}
-      className="py-12 px-6 md:px-10 border-b"
-      style={{
-        borderColor: "rgba(255,255,255,0.07)",
-        backgroundColor: bg,
-        transition: noMotion ? "none" : "background-color 0.45s ease",
-      }}
-    >
-      {/* Season / current labels */}
-      <div className="flex items-center gap-2 mb-4 flex-wrap">
-        <span
-          className="text-xs uppercase tracking-widest font-semibold px-2.5 py-1"
-          style={{ backgroundColor: "var(--navy)", color: "var(--sand)" }}
-        >
-          {maand.seizoen}
-        </span>
-        {isActive && (
-          <span
-            className="text-xs uppercase tracking-widest font-bold px-2.5 py-1"
-            style={{ backgroundColor: "var(--gold)", color: "var(--navy-dark)" }}
-          >
-            Nu
-          </span>
-        )}
-      </div>
-
-      {/* Month heading */}
-      <h2
-        className="text-4xl font-bold mb-2 leading-tight"
-        style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
-      >
-        {maand.naam}
-      </h2>
-
-      {/* Highlight */}
-      <p className="text-base font-semibold mb-5" style={{ color: "var(--gold)" }}>
-        {maand.hoogtepunt}
-      </p>
-
-      {/* Body text */}
-      <p
-        className="text-sm leading-relaxed mb-8"
-        style={{ color: "rgba(246,250,253,0.72)", maxWidth: "54ch" }}
-      >
-        {maand.tekst}
-      </p>
-
-      {/* Fish list — stagger animation */}
-      <motion.ul
-        className="space-y-2.5 mb-8"
-        variants={noMotion ? undefined : fishContainer}
-        initial={noMotion ? false : "hidden"}
-        whileInView={noMotion ? undefined : "show"}
-        viewport={{ once: true }}
-      >
-        {maand.vis.map((vis, fi) => (
-          <motion.li
-            key={vis.naam}
-            className="flex items-center gap-3"
-            variants={noMotion ? undefined : fishItem}
-          >
-            <Fish color={FISH_COLORS[fi % FISH_COLORS.length]} size={30} />
-            <span className="text-sm font-medium" style={{ color: "var(--cream)" }}>
-              {vis.naam}
-            </span>
-            {vis.keurmerk && <Badge type={vis.keurmerk} />}
-          </motion.li>
-        ))}
-      </motion.ul>
-
-      {/* Links */}
-      <div className="flex flex-wrap gap-3">
-        {maand.links.map((link) => (
-          <Link
-            key={link.label}
-            href={link.href}
-            className="text-sm font-semibold px-4 py-2 transition-opacity hover:opacity-75"
-            style={{
-              backgroundColor: "var(--navy)",
-              color: "var(--sand)",
-              border: "1px solid rgba(255,255,255,0.18)",
-            }}
-          >
-            {link.label} →
-          </Link>
-        ))}
-      </div>
-    </motion.section>
-  );
-}
-
-// ── Main export ───────────────────────────────────────────────────────────────
+// ── Main component ────────────────────────────────────────────────────────────
 export function ViskalenderClient() {
   const prefersReducedMotion = useReducedMotion();
   const noMotion = prefersReducedMotion ?? false;
 
-  const [activeMaand, setActiveMaand] = useState(0);
-  const [currentDay, setCurrentDay]   = useState("");
+  const [activeMaand, setActiveMaand]   = useState(0);
+  const [currentDay, setCurrentDay]     = useState("");
+  const [activeSeason, setActiveSeason] = useState("Winter");
 
-  const sectionRefs        = useRef<(HTMLElement | null)[]>(Array(12).fill(null));
-  const isInitialScrollRef = useRef(true); // gates observer during initial auto-scroll
+  const sectionRefs     = useRef<(HTMLElement | null)[]>(Array(12).fill(null));
+  const monthBtnRefs    = useRef<(HTMLButtonElement | null)[]>(Array(12).fill(null));
+  const stripRef        = useRef<HTMLDivElement>(null);
+  const isScrollingRef  = useRef(true);
 
   const setRef = useCallback((el: HTMLElement | null, i: number) => {
     sectionRefs.current[i] = el;
   }, []);
+
+  // Scroll the month strip so active month is visible
+  const snapStrip = useCallback((i: number) => {
+    const btn   = monthBtnRefs.current[i];
+    const strip = stripRef.current;
+    if (!btn || !strip) return;
+    strip.scrollTo({
+      left: btn.offsetLeft - strip.offsetWidth / 2 + btn.offsetWidth / 2,
+      behavior: "smooth",
+    });
+  }, []);
+
+  // Public: jump to a month by clicking the strip
+  const jumpToMonth = useCallback(
+    (i: number) => {
+      isScrollingRef.current = true;
+      const el = sectionRefs.current[i];
+      if (el) el.scrollIntoView({ behavior: noMotion ? "auto" : "smooth", block: "start" });
+      setTimeout(() => { isScrollingRef.current = false; }, noMotion ? 50 : 900);
+    },
+    [noMotion]
+  );
 
   useEffect(() => {
     const now   = new Date();
@@ -298,83 +134,292 @@ export function ViskalenderClient() {
     const days  = ["zo", "ma", "di", "wo", "do", "vr", "za"];
 
     setActiveMaand(month);
+    setActiveSeason(viskalenderData[month].seizoen);
     setCurrentDay(`${days[now.getDay()]} ${now.getDate()}/${now.getMonth() + 1}`);
 
-    // Scroll to current month immediately — observer is still gated
-    const scrollEl = sectionRefs.current[month];
-    if (scrollEl) {
-      scrollEl.scrollIntoView({ behavior: noMotion ? "auto" : "smooth", block: "start" });
-    }
+    // Jump to current month
+    const el = sectionRefs.current[month];
+    if (el) el.scrollIntoView({ behavior: noMotion ? "auto" : "smooth", block: "start" });
+    snapStrip(month);
 
-    // Enable observer only after the scroll animation has finished
-    const enableTimer = setTimeout(() => {
-      isInitialScrollRef.current = false;
+    // Unlock observer after scroll
+    const unlock = setTimeout(() => {
+      isScrollingRef.current = false;
     }, noMotion ? 50 : 900);
 
-    // Active-month observer: tight viewport band
-    const activeObs = new IntersectionObserver(
+    // IntersectionObserver to track active month while scrolling
+    const obs = new IntersectionObserver(
       (entries) => {
-        if (isInitialScrollRef.current) return;
+        if (isScrollingRef.current) return;
         entries.forEach((e) => {
           if (!e.isIntersecting) return;
-          const idx = sectionRefs.current.findIndex((el) => el === e.target);
-          if (idx !== -1) setActiveMaand(idx);
+          const idx = sectionRefs.current.findIndex((s) => s === e.target);
+          if (idx === -1) return;
+          setActiveMaand(idx);
+          setActiveSeason(viskalenderData[idx].seizoen);
+          snapStrip(idx);
         });
       },
-      { rootMargin: "-28% 0px -62% 0px", threshold: 0 }
+      { rootMargin: "-30% 0px -60% 0px", threshold: 0 }
     );
 
-    sectionRefs.current.forEach((el) => {
-      if (el) activeObs.observe(el);
-    });
+    sectionRefs.current.forEach((el) => { if (el) obs.observe(el); });
 
     return () => {
-      activeObs.disconnect();
-      clearTimeout(enableTimer);
+      obs.disconnect();
+      clearTimeout(unlock);
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const theme     = SEASON[activeSeason] ?? SEASON.Winter;
+  const realMonth = currentDay ? new Date().getMonth() : -1;
+
   return (
-    <div style={{ backgroundColor: "var(--charcoal)" }}>
-      <div className="max-w-6xl mx-auto md:flex">
-        {/* Sticky wheel — desktop only */}
-        <aside
-          className="hidden md:flex flex-col items-center border-r w-80 flex-shrink-0"
-          style={{ borderColor: "rgba(255,255,255,0.07)" }}
-        >
-          <div className="sticky top-8 py-12">
-            <CalendarWheel activeMaand={activeMaand} currentDay={currentDay} noMotion={noMotion} />
-          </div>
-        </aside>
-
-        {/* Month sections */}
-        <div className="flex-1 min-w-0 overflow-hidden">
-          {/* Mobile: compact indicator */}
-          <div
-            className="md:hidden flex items-center gap-2 px-6 py-3 border-b"
-            style={{ borderColor: "rgba(255,255,255,0.07)", backgroundColor: "var(--navy-dark)" }}
-          >
-            <span className="text-xs" style={{ color: "rgba(246,250,253,0.5)" }}>Nu:</span>
-            <span className="text-sm font-semibold" style={{ color: "var(--gold)" }}>
-              {viskalenderData[activeMaand].naam}
-            </span>
-            <span className="text-xs" style={{ color: "rgba(246,250,253,0.4)" }}>
-              · {viskalenderData[activeMaand].seizoen}
-            </span>
-          </div>
-
-          {viskalenderData.map((maand, i) => (
-            <MaandSection
-              key={i}
-              maand={maand}
-              index={i}
-              activeMaand={activeMaand}
-              noMotion={noMotion}
-              setRef={(el) => setRef(el, i)}
-            />
-          ))}
+    <div style={{ backgroundColor: "#060820" }}>
+      {/* ── Sticky month navigation strip ────────────────────────────────── */}
+      <div
+        ref={stripRef}
+        className="sticky top-0 z-30 overflow-x-auto scrollbar-hide border-b"
+        style={{
+          backgroundColor: theme.strip,
+          backdropFilter: "blur(20px)",
+          borderColor: "rgba(255,255,255,0.07)",
+          transition: "background-color 0.6s ease",
+          WebkitOverflowScrolling: "touch",
+        }}
+      >
+        <div className="flex min-w-max px-2 py-2">
+          {viskalenderData.map((maand, i) => {
+            const active   = i === activeMaand;
+            const isToday  = i === realMonth;
+            return (
+              <button
+                key={i}
+                ref={(el) => { monthBtnRefs.current[i] = el; }}
+                onClick={() => jumpToMonth(i)}
+                className="relative px-3 py-2 text-[11px] font-bold uppercase tracking-[0.12em] transition-all duration-300 whitespace-nowrap"
+                style={{
+                  color:           active ? "var(--navy-dark)" : "rgba(246,250,253,0.38)",
+                  backgroundColor: active ? "var(--gold)"      : "transparent",
+                  minWidth:        42,
+                }}
+                aria-current={active ? "true" : undefined}
+              >
+                {maand.afkorting}
+                {isToday && (
+                  <span
+                    className="absolute top-1.5 right-1 w-1.5 h-1.5 rounded-full"
+                    style={{ backgroundColor: isToday && active ? "var(--navy-dark)" : "#ff6b6b" }}
+                  />
+                )}
+              </button>
+            );
+          })}
         </div>
       </div>
+
+      {/* ── Month sections ──────────────────────────────────────────────────── */}
+      {viskalenderData.map((maand, i) => {
+        const th       = SEASON[maand.seizoen] ?? SEASON.Winter;
+        const isActive = i === activeMaand;
+        const isNow    = i === realMonth;
+
+        return (
+          <section
+            key={i}
+            id={`maand-${i}`}
+            ref={(el) => setRef(el, i)}
+            className="relative flex flex-col justify-center overflow-hidden"
+            style={{
+              minHeight: "100svh",
+              background: th.bg,
+            }}
+          >
+            {/* Ghost month name in background */}
+            <span
+              aria-hidden
+              className="absolute inset-0 flex items-end pb-8 pl-4 md:pl-12 select-none pointer-events-none overflow-hidden"
+              style={{
+                fontSize:    "clamp(6rem, 28vw, 22rem)",
+                fontFamily:  "Playfair Display, serif",
+                fontWeight:  700,
+                color:       "white",
+                opacity:     0.045,
+                lineHeight:  1,
+                letterSpacing: "-0.04em",
+              }}
+            >
+              {maand.naam}
+            </span>
+
+            {/* Main content grid */}
+            <motion.div
+              className="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-14 py-16 md:py-24"
+              variants={noMotion ? undefined : sectionReveal}
+              initial={noMotion ? false : "hidden"}
+              whileInView={noMotion ? undefined : "show"}
+              viewport={{ once: true, margin: "0px 0px -8% 0px" }}
+            >
+              <div className="md:grid md:grid-cols-5 md:gap-16 md:items-start">
+
+                {/* ── Left: meta + heading + description ─────────────────── */}
+                <div className="md:col-span-3">
+                  {/* Badges row */}
+                  <div className="flex items-center flex-wrap gap-2 mb-5">
+                    <span
+                      className="text-[10px] font-bold uppercase tracking-[0.22em] px-3 py-1"
+                      style={{
+                        backgroundColor: th.eyebrow,
+                        color: "rgba(246,250,253,0.75)",
+                        backdropFilter: "blur(4px)",
+                      }}
+                    >
+                      {maand.seizoen}
+                    </span>
+                    {isNow && currentDay && (
+                      <span
+                        className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 flex items-center gap-1.5"
+                        style={{ backgroundColor: "var(--gold)", color: "var(--navy-dark)" }}
+                      >
+                        <span
+                          className="inline-block w-1.5 h-1.5 rounded-full bg-current"
+                          style={{ animation: "pulse 2s infinite" }}
+                        />
+                        Nu · {currentDay}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Month heading */}
+                  <h2
+                    className="font-bold leading-none mb-5"
+                    style={{
+                      fontFamily:    "Playfair Display, serif",
+                      color:         "rgba(246,250,253,0.95)",
+                      fontSize:      "clamp(2.8rem, 9vw, 5.5rem)",
+                      letterSpacing: "-0.025em",
+                    }}
+                  >
+                    {maand.naam}
+                  </h2>
+
+                  {/* Hoogtepunt */}
+                  <p
+                    className="text-base md:text-lg font-semibold mb-5 leading-snug"
+                    style={{ color: th.accent }}
+                  >
+                    {maand.hoogtepunt}
+                  </p>
+
+                  {/* Divider */}
+                  <div
+                    className="w-12 h-px mb-6"
+                    style={{ backgroundColor: "rgba(255,255,255,0.15)" }}
+                  />
+
+                  {/* Description */}
+                  <p
+                    className="text-sm md:text-base leading-relaxed mb-8"
+                    style={{ color: "rgba(246,250,253,0.6)", maxWidth: "52ch" }}
+                  >
+                    {maand.tekst}
+                  </p>
+
+                  {/* Links */}
+                  <div className="flex flex-wrap gap-3">
+                    {maand.links.map((link) => (
+                      <Link
+                        key={link.label}
+                        href={link.href}
+                        className="text-xs font-bold uppercase tracking-wider px-5 py-2.5 transition-opacity hover:opacity-75"
+                        style={{
+                          border:          "1px solid rgba(255,255,255,0.2)",
+                          color:           "rgba(246,250,253,0.8)",
+                          backgroundColor: "rgba(255,255,255,0.05)",
+                          backdropFilter:  "blur(4px)",
+                        }}
+                      >
+                        {link.label} →
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* ── Right: fish list ───────────────────────────────────── */}
+                <div className="md:col-span-2 mt-12 md:mt-0 md:pt-2">
+                  <p
+                    className="text-[10px] font-bold uppercase tracking-[0.22em] mb-5"
+                    style={{ color: "rgba(246,250,253,0.3)" }}
+                  >
+                    Seizoensvis
+                  </p>
+
+                  <motion.ul
+                    className="space-y-0"
+                    variants={noMotion ? undefined : fishContainer}
+                    initial={noMotion ? false : "hidden"}
+                    whileInView={noMotion ? undefined : "show"}
+                    viewport={{ once: true }}
+                  >
+                    {maand.vis.map((vis, fi) => (
+                      <motion.li
+                        key={vis.naam}
+                        variants={noMotion ? undefined : fishItem}
+                        className="flex items-center gap-3 py-3.5"
+                        style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+                      >
+                        {/* Fish icon box */}
+                        <div
+                          className="flex-shrink-0 flex items-center justify-center"
+                          style={{
+                            width:           38,
+                            height:          38,
+                            backgroundColor: "rgba(255,255,255,0.06)",
+                          }}
+                        >
+                          <Fish color={FISH_COLORS[fi % FISH_COLORS.length]} size={24} />
+                        </div>
+
+                        {/* Name */}
+                        <span
+                          className="flex-1 text-sm md:text-base font-medium"
+                          style={{ color: "rgba(246,250,253,0.82)" }}
+                        >
+                          {vis.naam}
+                        </span>
+
+                        {vis.keurmerk && <Badge type={vis.keurmerk} />}
+                      </motion.li>
+                    ))}
+                  </motion.ul>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Scroll hint — first month only */}
+            {i === 0 && (
+              <div
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
+                style={{ animation: "bounce 2s infinite" }}
+                aria-hidden
+              >
+                <span
+                  className="text-[9px] uppercase tracking-[0.3em]"
+                  style={{ color: "rgba(246,250,253,0.2)" }}
+                >
+                  scroll
+                </span>
+                <svg
+                  width="16" height="16" viewBox="0 0 24 24"
+                  fill="none" stroke="rgba(246,250,253,0.2)" strokeWidth="2"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </div>
+            )}
+          </section>
+        );
+      })}
     </div>
   );
 }
