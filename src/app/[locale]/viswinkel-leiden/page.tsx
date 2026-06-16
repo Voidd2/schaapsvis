@@ -39,7 +39,7 @@ const faqSchema = {
       name: "Waar is Schaap's Vishandel in Leiden?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "De winkel is op Herenstraat 48, 2313 AL Leiden (ma–za 08:30–17:30). Wij staan ook op de Leidse markt op de Nieuwe Rijn (woensdag en zaterdag) en bij Hoogvliet Voorschoten elke vrijdag.",
+        text: "De winkel is op Herenstraat 48, 2313 AL Leiden (ma–za 08:30–17:30). Op zaterdag staan wij bij de Waag (Aalmarkt) en op woensdag bij Dille & Camille. Op vrijdag staan wij op de parkeerplaats bij Hoogvliet in Voorschoten (08:30–17:30).",
       },
     },
     {
@@ -47,7 +47,7 @@ const faqSchema = {
       name: "Wanneer staat Schaap op de markt in Leiden?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Elke woensdag en zaterdag staat onze marktkraam op de Nieuwe Rijn in het centrum van Leiden. Open van 09:00 tot 17:00 uur.",
+        text: "Op zaterdag staan wij bij de Waag (Aalmarkt) en op woensdag bij Dille & Camille in Leiden. Beide markten open van 08:30 tot 17:00 uur.",
       },
     },
     {
@@ -93,7 +93,16 @@ export default async function ViswinkelLeidenPage({
       />
 
       {/* Hero ─────────────────────────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "var(--navy-dark)" }} className="py-16 px-6">
+      <section
+        style={{
+          backgroundColor: "var(--navy-dark)",
+          backgroundImage: "url(https://vishandelklaashartevelt.nl/wp-content/uploads/kabeljauw-1-600x400.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundBlendMode: "multiply",
+        }}
+        className="py-16 px-6"
+      >
         <div className="max-w-5xl mx-auto">
           <p className="text-xs tracking-[0.25em] uppercase mb-4 opacity-60" style={{ color: "var(--sand)" }}>
             Herenstraat 48 · Leiden

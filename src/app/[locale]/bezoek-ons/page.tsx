@@ -27,6 +27,8 @@ export async function generateMetadata({
   };
 }
 
+const HW = "https://vishandelklaashartevelt.nl/wp-content/uploads/";
+
 const locations = [
   {
     name: "Viswinkel Herenstraat",
@@ -34,29 +36,39 @@ const locations = [
     phone: "071 514 9802",
     days: "Maandag t/m zaterdag",
     hours: "08:30 – 17:30",
-    fotoUrl: "https://images.unsplash.com/photo-1534482421-64566f976cfa?w=800&q=80",
-    fotoAlt: "Verse vis op de toonbank bij Schaap's Vishandel Herenstraat",
+    fotoUrl: `${HW}kabeljauw-1-600x400.png`,
+    fotoAlt: "Verse kabeljauw op de toonbank bij Schaap's Vishandel Herenstraat",
     mapsHref: "https://maps.google.com/?q=Herenstraat+48,+2313+AL+Leiden",
   },
   {
-    name: "Markt Leiden",
-    address: "Nieuwe Rijn / centrum, Leiden",
+    name: "Markt Leiden — Zaterdag",
+    address: "Bij de Waag, Aalmarkt, Leiden",
     phone: null,
-    days: "Woensdag + Zaterdag",
-    hours: "09:00 – 17:00",
-    fotoUrl: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80",
-    fotoAlt: "Marktstand Schaap's Vis op de Leidse markt",
-    mapsHref: "https://maps.google.com/?q=Leiden+Markt+Nieuwe+Rijn",
+    days: "Zaterdag",
+    hours: "08:30 – 17:00",
+    fotoUrl: `${HW}Haring-Hollandse-nieuwe-600x400.png`,
+    fotoAlt: "Hollandse haring op de Leidse zaterdag markt bij de Waag",
+    mapsHref: "https://maps.google.com/?q=Aalmarkt+Leiden",
+  },
+  {
+    name: "Markt Leiden — Woensdag",
+    address: "Bij Dille & Camille, Leiden",
+    phone: null,
+    days: "Woensdag",
+    hours: "08:30 – 17:00",
+    fotoUrl: `${HW}Gerookte-Zalm-DV-1-600x400.png`,
+    fotoAlt: "Visstand op de Leidse woensdagmarkt bij Dille & Camille",
+    mapsHref: "https://maps.google.com/?q=Dille+en+Camille+Leiden+Haarlemmerstraat",
   },
   {
     name: "Hoogvliet Voorschoten",
-    address: "Bij de Hoogvliet, Voorschoten",
+    address: "Parkeerplaats bij Hoogvliet, Voorschoten",
     phone: null,
     days: "Vrijdag",
-    hours: "08:30 – 16:00",
-    fotoUrl: "https://images.unsplash.com/photo-1547592180-85f173990554?w=800&q=80",
-    fotoAlt: "Visstand bij Hoogvliet Voorschoten",
-    mapsHref: "https://maps.google.com/?q=Hoogvliet+Voorschoten",
+    hours: "08:30 – 17:30",
+    fotoUrl: `${HW}zalm-filet-5-600x400.png`,
+    fotoAlt: "Visstand op de parkeerplaats bij Hoogvliet Voorschoten",
+    mapsHref: "https://maps.google.com/?q=Hoogvliet+Voorschoterweg+Voorschoten",
   },
 ];
 

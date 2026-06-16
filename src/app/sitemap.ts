@@ -1,5 +1,4 @@
 import { MetadataRoute } from "next";
-import { recepten } from "@/lib/recepten";
 import { blogPosts } from "@/lib/blog";
 
 const baseUrl = "https://www.schaapsvishandel.nl";
@@ -10,7 +9,6 @@ const pages = [
   "/ons-verhaal",
   "/varlaks",
   "/eerlijke-vis",
-  "/recepten",
   "/blog",
   "/assortiment",
   "/bezoek-ons",
@@ -33,16 +31,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: page === "" ? 1.0 : 0.8,
       });
     }
-  }
-
-  // Recepten — detailpagina's (alleen nl: content is Nederlandstalig)
-  for (const recept of recepten) {
-    entries.push({
-      url: `${baseUrl}/nl/recepten/${recept.slug}`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.6,
-    });
   }
 
   // Blogartikelen

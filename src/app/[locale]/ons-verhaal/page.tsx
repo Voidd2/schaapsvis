@@ -26,46 +26,48 @@ export async function generateMetadata({
   };
 }
 
+const HW = "https://vishandelklaashartevelt.nl/wp-content/uploads/";
+
 const timelineItems = [
   {
     year: "1938",
     titleKey: "t1title" as const,
     textKey: "t1text" as const,
     quote: null,
-    fotoUrl: "https://images.unsplash.com/photo-1534482421-64566f976cfa?w=800&q=80",
-    fotoAlt: "Historische viswinkel aan de Herenstraat, Leiden",
+    fotoUrl: `${HW}kabeljauw-1-600x400.png`,
+    fotoAlt: "Verse kabeljauw — het visaanbod van Schaap's Vishandel in 1938",
   },
   {
     year: "1957",
     titleKey: "t2title" as const,
     textKey: "t2text" as const,
     quote: null,
-    fotoUrl: "https://images.unsplash.com/photo-1559847844-5315695dadae?w=800&q=80",
-    fotoAlt: "Viswinkel in de jaren vijftig",
+    fotoUrl: `${HW}Schelvis-1-600x400.png`,
+    fotoAlt: "Verse schelvis achter de toonbank — jaren vijftig",
   },
   {
     year: "2009",
     titleKey: "t3title" as const,
     textKey: "t3text" as const,
     quote: "t3quote" as const,
-    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
-    fotoAlt: "Verse vis op ijs achter de toonbank",
+    fotoUrl: `${HW}zalm-filet-5-600x400.png`,
+    fotoAlt: "Verse zalmfilet — Aldert Haasnoot breidt het aanbod uit met premium zalm",
   },
   {
     year: "2018",
     titleKey: "t4title" as const,
     textKey: "t4text" as const,
     quote: "t4quote" as const,
-    fotoUrl: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80",
-    fotoAlt: "Schaap's Vis — 80-jarig jubileum",
+    fotoUrl: `${HW}Verse-mosselen-1-600x400.png`,
+    fotoAlt: "Verse Zeeuwse mosselen — 80-jarig jubileum Schaap's Vishandel",
   },
   {
     year: "Nu",
     titleKey: "t5title" as const,
     textKey: "t5text" as const,
     quote: null,
-    fotoUrl: "https://images.unsplash.com/photo-1547592180-85f173990554?w=800&q=80",
-    fotoAlt: "Huidige viswinkel en marktstand Schaap's Vis",
+    fotoUrl: `${HW}Gerookte-Zalm-DV-1-600x400.png`,
+    fotoAlt: "Gerookte zalm — Schaap's Vis vandaag, met premium producten zoals Varlaks",
   },
 ];
 

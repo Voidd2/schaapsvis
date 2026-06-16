@@ -1,9 +1,9 @@
-import Link from "next/link";
-import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
+import { AssortimentFilter } from "./AssortimentFilter";
 
 export async function generateMetadata({
   params,
@@ -28,526 +28,153 @@ export async function generateMetadata({
   };
 }
 
-type NutritionRow = { label: string; value: string };
-
-interface Product {
-  name: string;
-  desc: string;
-  photoUrl: string | null;
-  photoAlt: string;
-  highlight: boolean;
-  badge?: string;
-  omega3Badge?: string;
-  nutrition: NutritionRow[];
-  nutritionNote?: string;
-  bestelId?: string;
-  ingredienten: string;    // EU-formaat: allergenen in HOOFDLETTERS
-  bevat: string[];         // lijst van allergeennamen voor badges
-}
-
-const products: Product[] = [
-  {
-    name: "Kibbeling",
-    desc: "Knapperig gebakken stukjes witvis in een luchtig, goudbruin beslag — de Hollandse klassieker. Wij maken kibbeling van kabeljauw (Gadus morhua, rijkere smaak) óf van pollak/Alaska koolvis (Theragra chalcogramma, MSC-gecertificeerd, mild). Vraag naar de vis van de dag.",
-    photoUrl: "https://images.unsplash.com/photo-1598511726623-d2e9996892f0?w=800&q=80",
-    photoAlt: "Goudbruine kibbeling op bakpapier",
-    highlight: false,
-    bestelId: "kibbeling-pollak",
-    nutrition: [
-      { label: "Energie", value: "ca. 235 kcal" },
-      { label: "Eiwit", value: "17 g" },
-      { label: "Vet", value: "10 g" },
-      { label: "Koolhydr.", value: "18 g" },
-    ],
-    nutritionNote:
-      "Witvis zelf is vetarm en eiwitrijk — het beslag verhoogt het koolhydraatgehalte. Waarden per 100 g bereid.",
-    ingredienten: "Witvis (kabeljauw Gadus morhua of pollak/koolvis Theragra chalcogramma) [VIS], TARWEBLOEM, water, zout, rijsmiddel (E450, E500), plantaardige olie (zonnebloem). Bereid in frituurvet. Saus: mayonaise (EIEREN, MOSTERD).",
-    bevat: ["VIS", "GLUTEN (tarwe)", "EIEREN", "MOSTERD"],
-  },
-  {
-    name: "Lekkerbek",
-    desc: "Verse wijting gehuld in een luchtig, knapperig beslag. Wijting is een magere, fijne witte vis — vergelijkbaar met kabeljauw maar met een iets subtielere smaak. Een eerlijk en toegankelijk gerecht.",
-    photoUrl: "https://images.unsplash.com/photo-1559847844-5315695dadae?w=800&q=80",
-    photoAlt: "Lekkerbek in beslag",
-    highlight: false,
-    bestelId: "lekkerbek",
-    nutrition: [
-      { label: "Energie", value: "ca. 220 kcal" },
-      { label: "Eiwit", value: "16 g" },
-      { label: "Vet", value: "9 g" },
-      { label: "Koolhydr.", value: "17 g" },
-    ],
-    nutritionNote: "Wijting is een magere, lichte vis — vergelijkbaar met kabeljauw.",
-    ingredienten: "Wijting (Merlangius merlangus) [VIS], TARWEBLOEM, water, zout, rijsmiddel, plantaardige olie. Bereid in frituurvet.",
-    bevat: ["VIS", "GLUTEN (tarwe)"],
-  },
-  {
-    name: "Broodje Haring",
-    desc: "Rauwe Hollandse Nieuwe haring op een zacht broodje, gegarneerd met fijngehakte ui en knapperige augurk. Haring bevat bijzonder veel omega-3 vetzuren en is een van de voedzaamste producten in ons assortiment.",
-    photoUrl: "https://images.unsplash.com/photo-1534482421-64566f976cfa?w=800&q=80",
-    photoAlt: "Broodje haring met ui en augurk",
-    highlight: false,
-    bestelId: "haring",
-    omega3Badge: "Omega-3 topbron",
-    nutrition: [
-      { label: "Energie", value: "ca. 195 kcal" },
-      { label: "Eiwit", value: "18 g" },
-      { label: "Vet", value: "12 g" },
-      { label: "Koolhydr.", value: "0 g" },
-      { label: "Omega-3", value: "ca. 2,7 g" },
-    ],
-    nutritionNote: "Haring is een van de beste omega-3 bronnen in ons assortiment.",
-    ingredienten: "HARING (Clupea harengus) [VIS], broodrol (TARWEBLOEM, gist, water, zout, plantaardige olie) [GLUTEN], ui, augurk (komkommer, azijn, suiker, zout, kruiden, MOSTERD), zout.",
-    bevat: ["VIS", "GLUTEN (tarwe)", "MOSTERD"],
-  },
-  {
-    name: "Vissoep",
-    desc: "Dagelijks vers bereid in onze eigen keuken. De samenstelling wisselt per dag op basis van het seizoensaanbod — altijd met verse vis als basis. Vol smaak, warm en voedzaam.",
-    photoUrl: "https://images.unsplash.com/photo-1547592180-85f173990554?w=800&q=80",
-    photoAlt: "Kom huisgemaakte vissoep",
-    highlight: false,
-    bestelId: "vissoep",
-    nutrition: [
-      { label: "Energie", value: "150–200 kcal" },
-      { label: "Eiwit", value: "12–15 g" },
-      { label: "Vet", value: "6–9 g" },
-      { label: "Koolhydr.", value: "wisselend" },
-    ],
-    nutritionNote: "Voedingswaarden per 250 ml kom; wisselen per dag op basis van receptuur.",
-    ingredienten: "Verse vis (wisselend seizoensaanbod) [VIS], water, ui, wortel, SELDERIJ, prei, aardappel, kruiden, zout, peper. Samenstelling wisselt dagelijks. Kan MELK (room) bevatten.",
-    bevat: ["VIS", "SELDERIJ", "kan MELK bevatten"],
-  },
-  {
-    name: "Vispotje",
-    desc: "Een romig stoofpotje met verse stukken vis in een rijke saus. Ideaal als uitgebreid tussendoortje of lichte maaltijd. De vissoort wisselt met het seizoen.",
-    photoUrl: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80",
-    photoAlt: "Vispotje in een schaaltje",
-    highlight: false,
-    nutrition: [
-      { label: "Energie", value: "afhankelijk van vis" },
-      { label: "Eiwit", value: "hoog" },
-      { label: "Vet", value: "wisselend" },
-      { label: "Omega-3", value: "aanwezig" },
-    ],
-    nutritionNote: "Voedingswaarden afhankelijk van vissoort en bereiding.",
-    ingredienten: "Verse vis (wisselend) [VIS], kookroom [MELK], ui, wortel, SELDERIJ, kruiden, zout, peper. Samenstelling wisselt per dag.",
-    bevat: ["VIS", "MELK", "SELDERIJ"],
-  },
-  {
-    name: "Feestelijke Visschotel",
-    desc: "Een indrukwekkende schaal met een selectie van onze beste producten — perfect voor bijzondere gelegenheden, borrels of een feestelijk diner. Inhoud en grootte in overleg.",
-    photoUrl: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80",
-    photoAlt: "Gevulde feestelijke visschotel",
-    highlight: false,
-    bestelId: "feestschotel",
-    nutrition: [
-      { label: "Energie", value: "afhankelijk" },
-      { label: "Eiwit", value: "hoog" },
-      { label: "Omega-3", value: "aanwezig" },
-      { label: "Koolhydr.", value: "wisselend" },
-    ],
-    nutritionNote: "Voedingswaarden afhankelijk van vissoort en bereiding.",
-    ingredienten: "Wisselende selectie verse en gerookte VIS, SCHAALDIEREN en/of WEEKDIEREN, diverse garneringen. Samenstelling in overleg. Kan EIEREN, GLUTEN en MELK bevatten.",
-    bevat: ["VIS", "SCHAALDIEREN", "WEEKDIEREN", "kan EIEREN, GLUTEN, MELK bevatten"],
-  },
-  {
-    name: "Varlaks Biologische Zalm",
-    desc: "Premium biologische zalmfilet uit Noord-Noorwegen, boven de poolcirkel gekweekt door familieboeren. ASC gecertificeerd, volledig traceerbaar — zonder antibiotica, GMO of hormonen. Een van de rijkste omega-3 bronnen die u kunt kopen.",
-    photoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
-    photoAlt: "Verse Varlaks zalmfilet",
-    highlight: true,
-    bestelId: "varlaks",
-    badge: "Biologisch · ASC",
-    omega3Badge: "Omega-3 uitstekend",
-    nutrition: [
-      { label: "Energie", value: "ca. 208 kcal" },
-      { label: "Eiwit", value: "20 g" },
-      { label: "Vet", value: "13 g" },
-      { label: "Koolhydr.", value: "0 g" },
-      { label: "Omega-3", value: "ca. 3,5 g" },
-    ],
-    nutritionNote: "ASC gecertificeerd. Voedingswaarden voor rauwe filet per 100 g.",
-    ingredienten: "Atlantische zalm (Salmo salar) [VIS]. Biologisch gecertificeerd. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-  },
-  {
-    name: "Verse Vis (Seizoensaanbod)",
-    desc: "Ons dagelijks wisselende aanbod van verse vis — rechtstreeks van de veiling of onze vaste leveranciers. Wat er ligt hangt af van het seizoen en de vangst. Vraag ons gerust naar het aanbod van de dag.",
-    photoUrl: null,
-    photoAlt: "Verse vis op ijs, wisselend dagaanbod",
-    highlight: false,
-    nutrition: [
-      { label: "Energie", value: "afhankelijk van vis" },
-      { label: "Eiwit", value: "hoog" },
-      { label: "Vet", value: "wisselend" },
-      { label: "Omega-3", value: "aanwezig" },
-    ],
-    nutritionNote: "Voedingswaarden afhankelijk van vissoort en bereiding.",
-    ingredienten: "Verse vis (soort wisselt dagelijks) [VIS]. Vraag het personeel naar de vis van vandaag.",
-    bevat: ["VIS — soort wisselt dagelijks"],
-  },
-  {
-    name: "Hollandse Garnalen",
-    desc: "Dagverse Noordzeegarnalen (Crangon crangon) — gevangen door de traditionele garnalenvloot op de zuidelijke Noordzee en dagelijks vers gekookt en gepeld aan de Waddenkust. Wij voeren Heiploeg en SOLT, beide gevestigde Nederlandse garnalenbedrijven. MSC-gecertificeerd: de Noordzeegarnalensector in Nederland, Duitsland en Denemarken beschikt al sinds 2017 over het MSC-keurmerk.",
-    photoUrl: null,
-    photoAlt: "Verse gepelde Hollandse Noordzeegarnalen",
-    highlight: false,
-    badge: "MSC",
-    bestelId: "garnalen-hollands",
-    nutrition: [
-      { label: "Energie", value: "ca. 80 kcal" },
-      { label: "Eiwit", value: "18 g" },
-      { label: "Vet", value: "0,6 g" },
-      { label: "Koolhydr.", value: "0 g" },
-    ],
-    nutritionNote: "Extreem eiwitrijk, bijna vetvrij. Voedingswaarden per 100 g.",
-    ingredienten: "Hollandse garnalen (Crangon crangon) [SCHAALDIEREN], zout. Kan conserveermiddel E223 bevatten [SULFIET].",
-    bevat: ["SCHAALDIEREN", "SULFIET"],
-  },
-  {
-    name: "Gerookte Noorse Zalm — High Seas",
-    desc: "Koud gerookte kweekzalmfilet (Salmo salar) uit Noorwegen, 'lang gesneden' in dunne plakken — direct te gebruiken op brood, bij een visplankje of in een pasta. High Seas is het zalmmerk van W.G. Den Heijer & Zn. uit Scheveningen, een van de oudste visverwerkende bedrijven van Nederland. ASC gecertificeerd.",
-    photoUrl: null,
-    photoAlt: "Dunne plakken gerookte Noorse zalm van High Seas",
-    highlight: false,
-    badge: "ASC",
-    omega3Badge: "Omega-3 uitstekend",
-    bestelId: "zalm-gerookt",
-    nutrition: [
-      { label: "Energie", value: "ca. 160 kcal" },
-      { label: "Eiwit", value: "18 g" },
-      { label: "Vet", value: "9 g" },
-      { label: "Omega-3", value: "ca. 2,5 g" },
-      { label: "Koolhydr.", value: "0 g" },
-    ],
-    nutritionNote: "ASC gecertificeerd. Voedingswaarden voor gerookte zalm per 100 g.",
-    ingredienten: "Atlantische zalm (Salmo salar) [VIS], zout, rook.",
-    bevat: ["VIS"],
-  },
-];
-
-// ─── Sub-components (no client directives needed — no state/events) ──────────
-
-function PhotoSlot({ photoUrl, photoAlt }: { photoUrl: string | null; photoAlt: string }) {
-  if (photoUrl) {
-    return (
-      <div className="relative aspect-square w-full overflow-hidden">
-        <Image
-          src={photoUrl}
-          alt={photoAlt}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-cover"
-        />
-      </div>
-    );
-  }
+// ─── Too Good To Go banner ────────────────────────────────────────────────────
+function TGTGBanner({ locale }: { locale: string }) {
   return (
-    <div
-      className="aspect-square flex flex-col items-center justify-center gap-2"
-      style={{ backgroundColor: "#ddd8cc", border: "2px dashed #bbb5a8" }}
+    <section
+      className="py-5 px-4 border-b"
+      style={{ backgroundColor: "#1a9e53", borderColor: "rgba(0,0,0,0.12)" }}
     >
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="1.5">
-        <rect x="3" y="3" width="18" height="18" rx="2" />
-        <circle cx="8.5" cy="8.5" r="1.5" />
-        <path d="m21 15-5-5L5 21" />
-      </svg>
-      <span
-        style={{
-          color: "#888",
-          fontSize: "0.7rem",
-          textAlign: "center",
-          padding: "0 1rem",
-          lineHeight: "1.3",
-          fontWeight: 500,
-        }}
-      >
-        {photoAlt}
-      </span>
-    </div>
-  );
-}
-
-function NutritionGrid({ rows, note }: { rows: NutritionRow[]; note?: string }) {
-  return (
-    <div
-      className="mt-3 rounded overflow-hidden"
-      style={{
-        backgroundColor: "rgba(26,53,48,0.04)",
-        border: "1px solid rgba(26,53,48,0.1)",
-      }}
-    >
-      {/* Header */}
-      <div
-        className="px-3 py-1 text-xs font-semibold uppercase tracking-wider"
-        style={{
-          color: "var(--navy)",
-          borderBottom: "1px solid rgba(26,53,48,0.1)",
-          opacity: 0.55,
-          letterSpacing: "0.08em",
-          fontSize: "0.6rem",
-        }}
-      >
-        voedingswaarden (indicatie)
-      </div>
-
-      {/* Value grid — 2 columns */}
-      <div className="grid grid-cols-2">
-        {rows.map(({ label, value }, i) => (
+      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
+          {/* TGTG logo mark */}
           <div
-            key={label}
-            className="px-3 py-1.5 flex justify-between items-baseline gap-1"
-            style={{
-              borderBottom:
-                i < rows.length - (rows.length % 2 === 0 ? 2 : 1)
-                  ? "1px solid rgba(26,53,48,0.07)"
-                  : "none",
-              borderRight: i % 2 === 0 ? "1px solid rgba(26,53,48,0.07)" : "none",
-            }}
+            className="flex-shrink-0 w-12 h-12 flex items-center justify-center font-black text-sm leading-tight text-center"
+            style={{ backgroundColor: "white", color: "#1a9e53", borderRadius: "10px" }}
           >
-            <span
-              className="text-xs"
-              style={{ color: "var(--charcoal)", opacity: 0.5, whiteSpace: "nowrap" }}
-            >
-              {label}
-            </span>
-            <span
-              className="text-xs font-semibold"
-              style={{ color: "var(--navy)", textAlign: "right" }}
-            >
-              {value}
-            </span>
+            TOO<br />GOOD
           </div>
-        ))}
-      </div>
-
-      {/* Note */}
-      {note && (
-        <p
-          className="px-3 py-2 text-xs leading-snug"
-          style={{
-            color: "var(--charcoal)",
-            opacity: 0.45,
-            borderTop: "1px solid rgba(26,53,48,0.07)",
-            fontSize: "0.65rem",
-          }}
-        >
-          {note}
-        </p>
-      )}
-    </div>
-  );
-}
-
-function AllergenTag({ label }: { label: string }) {
-  return (
-    <span
-      className="inline-block text-xs px-2 py-0.5 font-semibold"
-      style={{
-        backgroundColor: "rgba(200,96,74,0.1)",
-        color: "#c8604a",
-        border: "1px solid rgba(200,96,74,0.25)",
-        borderRadius: "2px",
-      }}
-    >
-      {label}
-    </span>
-  );
-}
-
-function IngredientenSectie({ ingredienten, bevat }: { ingredienten: string; bevat: string[] }) {
-  return (
-    <details className="mt-3 group">
-      <summary
-        className="text-xs font-medium cursor-pointer select-none flex items-center gap-2 px-3 py-2"
-        style={{
-          backgroundColor: "rgba(26,53,48,0.04)",
-          color: "var(--charcoal)",
-          border: "1px solid rgba(26,53,48,0.08)",
-          listStyle: "none",
-        }}
-      >
-        <span style={{ color: "var(--navy)", opacity: 0.5, fontSize: "0.6rem" }}>▶</span>
-        <span style={{ opacity: 0.65 }}>Ingrediënten & allergenen</span>
-      </summary>
-      <div
-        className="px-3 py-3 text-xs leading-relaxed"
-        style={{
-          backgroundColor: "rgba(26,53,48,0.02)",
-          border: "1px solid rgba(26,53,48,0.08)",
-          borderTop: "none",
-        }}
-      >
-        <p className="mb-3" style={{ color: "var(--charcoal)", opacity: 0.7, lineHeight: "1.6" }}>
-          {ingredienten}
-        </p>
-        <div>
-          <span
-            className="text-xs font-bold uppercase tracking-wider mr-2"
-            style={{ color: "var(--charcoal)", opacity: 0.4, fontSize: "0.6rem" }}
+          <div>
+            <p className="font-bold text-white text-sm md:text-base leading-tight">
+              Dagelijks vers restanten via Too Good To Go
+            </p>
+            <p className="text-xs md:text-sm mt-0.5" style={{ color: "rgba(255,255,255,0.82)" }}>
+              Vis die over is aan het einde van de dag — tegen een fractie van de prijs. Verrassing wat er in zit!
+            </p>
+          </div>
+        </div>
+        <div className="flex items-center gap-3 flex-shrink-0">
+          <a
+            href="https://toogoodtogo.com/nl/consumer"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-bold text-white border-2 border-white transition-opacity hover:opacity-90 whitespace-nowrap"
+            style={{ borderRadius: "6px" }}
           >
-            Bevat:
-          </span>
-          <span className="inline-flex flex-wrap gap-1 mt-1">
-            {bevat.map((a) => (
-              <AllergenTag key={a} label={a} />
-            ))}
+            Download de app →
+          </a>
+          <span className="hidden sm:block text-xs" style={{ color: "rgba(255,255,255,0.6)" }}>
+            Zoek op &ldquo;Schaap&apos;s Vis Leiden&rdquo;
           </span>
         </div>
-        <p className="mt-2.5 text-xs" style={{ color: "var(--charcoal)", opacity: 0.35, fontSize: "0.6rem" }}>
-          Ondanks zorgvuldigheid kunnen sporen van andere allergenen aanwezig zijn. Bij twijfel: vraag ons.
-        </p>
       </div>
-    </details>
+    </section>
   );
 }
 
-// ─── Page content ─────────────────────────────────────────────────────────────
+// ─── Hero ─────────────────────────────────────────────────────────────────────
+function AssortimentHero({
+  t,
+  locale,
+}: {
+  t: ReturnType<typeof useTranslations>;
+  locale: string;
+}) {
+  return (
+    <section style={{ backgroundColor: "var(--navy)" }} className="py-14 text-center px-4">
+      <p
+        className="text-xs tracking-[0.2em] uppercase mb-3 opacity-50"
+        style={{ color: "var(--sand)" }}
+      >
+        Vers · Duurzaam · Leiden
+      </p>
+      <h1
+        className="text-4xl md:text-5xl font-bold mb-4"
+        style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+      >
+        {t("title")}
+      </h1>
+      <p className="text-lg max-w-xl mx-auto mb-5" style={{ color: "rgba(246,250,253,0.75)" }}>
+        {t("sub")}
+      </p>
+      <div className="flex flex-wrap items-center justify-center gap-3">
+        <div
+          className="inline-flex items-center gap-2 px-4 py-2 text-sm"
+          style={{ backgroundColor: "rgba(246,250,253,0.1)", color: "rgba(246,250,253,0.65)" }}
+        >
+          <span>📍</span> {t("note")}
+        </div>
+        <a
+          href="https://wa.me/31715149802?text=Hallo%20Schaap%27s%20Vis%2C%20ik%20wil%20graag%20iets%20bestellen!"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+          style={{ backgroundColor: "#25D366" }}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.132.558 4.13 1.532 5.864L.057 23.885l6.186-1.443A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.955 0-3.78-.554-5.33-1.511l-.383-.226-3.676.858.87-3.582-.249-.396A9.944 9.944 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+          </svg>
+          Bestel via WhatsApp
+        </a>
+      </div>
+    </section>
+  );
+}
 
+// ─── CTA footer ───────────────────────────────────────────────────────────────
+function AssortimentCta({ locale }: { locale: string }) {
+  return (
+    <section style={{ backgroundColor: "var(--sand)" }} className="py-12 text-center px-4">
+      <p
+        className="font-bold text-2xl mb-2"
+        style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+      >
+        Verse vis afhalen of laten klaarzetten?
+      </p>
+      <p className="text-sm mb-6 max-w-md mx-auto" style={{ color: "var(--charcoal)", opacity: 0.7 }}>
+        Bestel vooruit via WhatsApp — wij zetten het klaar voor u. Of bel ons gewoon.
+      </p>
+      <div className="flex flex-wrap gap-4 justify-center">
+        <a
+          href="https://wa.me/31715149802?text=Hallo%20Schaap%27s%20Vis%2C%20ik%20wil%20graag%20iets%20bestellen!"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 font-semibold px-7 py-3.5 text-white transition-opacity hover:opacity-90"
+          style={{ backgroundColor: "#25D366" }}
+        >
+          Bestel via WhatsApp
+        </a>
+        <a
+          href="tel:+31715149802"
+          className="inline-block font-medium px-7 py-3.5 border transition-opacity hover:opacity-80"
+          style={{ borderColor: "var(--navy)", color: "var(--navy)" }}
+        >
+          071 514 9802
+        </a>
+        <Link
+          href={`/${locale}/bezoek-ons`}
+          className="inline-block font-medium px-7 py-3.5 border transition-opacity hover:opacity-80"
+          style={{ borderColor: "var(--navy)", color: "var(--navy)" }}
+        >
+          Locaties & tijden →
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+// ─── Page wrapper (server) ────────────────────────────────────────────────────
 function AssortimentContent() {
   const t = useTranslations("assortimentPage");
   const locale = useLocale();
 
   return (
     <>
-      {/* Hero */}
-      <section style={{ backgroundColor: "var(--navy)" }} className="py-16 text-center px-4">
-        <h1
-          className="text-4xl md:text-5xl font-bold mb-4"
-          style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
-        >
-          {t("title")}
-        </h1>
-        <p className="text-lg max-w-xl mx-auto mb-5" style={{ color: "rgba(246,250,253,0.75)" }}>
-          {t("sub")}
-        </p>
-        <div
-          className="inline-block px-4 py-2 text-sm"
-          style={{ backgroundColor: "rgba(246,250,253,0.1)", color: "rgba(246,250,253,0.6)" }}
-        >
-          {t("note")}
-        </div>
-      </section>
-
-      {/* Product grid */}
-      <section style={{ backgroundColor: "var(--cream)" }} className="py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {products.map(
-              ({ name, desc, photoUrl, photoAlt, highlight, badge, omega3Badge, nutrition, nutritionNote, bestelId, ingredienten, bevat }) => (
-                <article
-                  key={name}
-                  className={`overflow-hidden flex flex-col${
-                    highlight ? " outline outline-2 outline-[var(--seafoam)]" : ""
-                  }`}
-                >
-                  {/* Photo area */}
-                  <div className="relative">
-                    <PhotoSlot photoUrl={photoUrl} photoAlt={photoAlt} />
-
-                    {/* Top-left: Biologisch / ASC badge */}
-                    {badge && (
-                      <div
-                        className="absolute top-3 left-3 text-xs font-semibold px-2 py-0.5"
-                        style={{ backgroundColor: "var(--seafoam)", color: "var(--cream)" }}
-                      >
-                        {badge}
-                      </div>
-                    )}
-
-                    {/* Bottom-right: Omega-3 badge */}
-                    {omega3Badge && (
-                      <div
-                        className="absolute bottom-3 right-3 flex items-center gap-1 text-xs font-semibold px-2 py-0.5"
-                        style={{ backgroundColor: "var(--salmon)", color: "white" }}
-                      >
-                        <span aria-hidden="true" style={{ fontFamily: "serif" }}>
-                          Ω
-                        </span>
-                        {omega3Badge}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Card body */}
-                  <div
-                    className="p-4 flex flex-col flex-1"
-                    style={{ backgroundColor: highlight ? "var(--sand)" : "white" }}
-                  >
-                    <h3
-                      className="font-bold text-base mb-1"
-                      style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
-                    >
-                      {name}
-                    </h3>
-                    <p className="text-sm leading-relaxed" style={{ color: "var(--charcoal)", opacity: 0.7 }}>
-                      {desc}
-                    </p>
-
-                    {/* Nutritional info */}
-                    <NutritionGrid rows={nutrition} note={nutritionNote} />
-
-                    {/* Ingredients & allergens */}
-                    <IngredientenSectie ingredienten={ingredienten} bevat={bevat} />
-
-                    {/* Varlaks detail link */}
-                    {highlight && (
-                      <Link
-                        href={`/${locale}/varlaks`}
-                        className="inline-block mt-3 text-xs font-semibold underline underline-offset-2"
-                        style={{ color: "var(--seafoam)" }}
-                      >
-                        Meer over Varlaks &rarr;
-                      </Link>
-                    )}
-
-                    {/* Order CTA */}
-                    {bestelId && (
-                      <Link
-                        href={`/${locale}/bestellen?product=${bestelId}`}
-                        className="inline-block mt-auto pt-3 text-sm font-semibold text-center py-2 transition-opacity hover:opacity-90"
-                        style={{ backgroundColor: "var(--salmon)", color: "white", marginTop: "12px" }}
-                      >
-                        Bestel dit &rarr;
-                      </Link>
-                    )}
-                  </div>
-                </article>
-              )
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section style={{ backgroundColor: "var(--sand)" }} className="py-12 text-center px-4">
-        <p
-          className="font-bold text-2xl mb-2"
-          style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
-        >
-          Verse vis afhalen of laten klaarzetten?
-        </p>
-        <p className="text-sm mb-6 max-w-md mx-auto" style={{ color: "var(--charcoal)", opacity: 0.7 }}>
-          Bestel vooruit via onze bestelformulier — wij zetten het klaar voor u.
-          Of bel ons gewoon.
-        </p>
-        <div className="flex flex-wrap gap-4 justify-center">
-          <Link
-            href={`/${locale}/bestellen`}
-            className="inline-block font-medium px-7 py-3.5 text-white transition-opacity hover:opacity-90"
-            style={{ backgroundColor: "var(--salmon)" }}
-          >
-            Bestel vooruit &rarr;
-          </Link>
-          <a
-            href="tel:+31715149802"
-            className="inline-block font-medium px-7 py-3.5 border transition-opacity hover:opacity-80"
-            style={{ borderColor: "var(--navy)", color: "var(--navy)" }}
-          >
-            071 514 9802
-          </a>
-        </div>
-      </section>
+      <TGTGBanner locale={locale} />
+      <AssortimentHero t={t} locale={locale} />
+      <AssortimentFilter />
+      <AssortimentCta locale={locale} />
     </>
   );
 }
