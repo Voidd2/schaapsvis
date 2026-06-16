@@ -2,10 +2,11 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { viskalenderData } from "@/lib/viskalender";
 import type { MaandData } from "@/lib/viskalender";
 
-// ── SVG wheel geometry (pre-computed) ─────────────────────────────────────────
+// ── SVG wheel geometry ────────────────────────────────────────────────────────
 const CX = 100, CY = 100, R_OUT = 80, R_IN = 22;
 const toRad = (d: number) => (d * Math.PI) / 180;
 
@@ -26,11 +27,17 @@ function labelXY(i: number) {
 }
 
 const SLICES = Array.from({ length: 12 }, (_, i) => ({ path: slicePath(i), xy: labelXY(i) }));
-
-// Rotation to put month i at 12 o'clock (top)
 const wheelRotation = (i: number) => -(i * 30 + 15);
 
-// ── Fish SVG silhouette ────────────────────────────────────────────────────────
+// ── Seasonal section backgrounds ──────────────────────────────────────────────
+const SEASON_BG: Record<string, string> = {
+  Winter:  "rgba(20,25,79,0.55)",
+  Lente:   "rgba(20,60,50,0.4)",
+  Zomer:   "rgba(80,50,20,0.4)",
+  Herfst:  "rgba(60,30,15,0.45)",
+};
+
+// ── Fish SVG silhouette ───────────────────────────────────────────────────────
 function Fish({ color = "currentColor", size = 34 }: { color?: string; size?: number }) {
   return (
     <svg width={size} height={Math.round(size * 0.56)} viewBox="0 0 80 45" fill={color} aria-hidden="true" style={{ flexShrink: 0 }}>
@@ -55,7 +62,7 @@ function Badge({ type }: { type: string }) {
   );
 }
 
-// ── Calendar wheel ─────────────────────────────────────────────────────────────
+// ── Calendar wheel ────────────────────────────────────────────────────────────
 function CalendarWheel({
   activeMaand,
   currentDay,
@@ -76,10 +83,7 @@ function CalendarWheel({
         role="img"
         aria-label={`Viskalender — ${viskalenderData[activeMaand].naam} actief`}
       >
-        {/* Static pointer at 12 o'clock */}
         <polygon points="93,3 107,3 100,16" fill="var(--gold)" />
-
-        {/* Rotating ring of segments + labels */}
         <g
           style={{
             transform: `rotate(${rotation}deg)`,
@@ -113,8 +117,6 @@ function CalendarWheel({
             );
           })}
         </g>
-
-        {/* Static center */}
         <circle cx={CX} cy={CY} r={R_IN - 1} fill="var(--navy-dark)" />
         {currentDay ? (
           <>
@@ -134,7 +136,6 @@ function CalendarWheel({
           </text>
         )}
       </svg>
-
       <div className="text-center">
         <p className="text-xs" style={{ color: "rgba(246,250,253,0.5)" }}>
           Seizoen:{" "}
@@ -145,34 +146,51 @@ function CalendarWheel({
   );
 }
 
-// ── Month section ──────────────────────────────────────────────────────────────
+// ── Framer Motion variants ────────────────────────────────────────────────────
+const sectionReveal: Variants = {
+  hidden: { opacity: 0, y: 32 },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] } },
+};
+const fishContainer: Variants = {
+  hidden: {},
+  show:   { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
+};
+const fishItem: Variants = {
+  hidden: { opacity: 0, x: -36 },
+  show:   { opacity: 1, x: 0, transition: { duration: 0.45, ease: "easeOut" } },
+};
+
+// ── Month section ─────────────────────────────────────────────────────────────
 const FISH_COLORS = ["var(--sand)", "var(--lichtblauw)", "var(--gold)", "var(--cream)"];
 
 function MaandSection({
   maand,
   index,
   activeMaand,
-  seen,
   noMotion,
   setRef,
 }: {
   maand: MaandData;
   index: number;
   activeMaand: number;
-  seen: boolean;
   noMotion: boolean;
   setRef: (el: HTMLElement | null) => void;
 }) {
   const isActive = index === activeMaand;
+  const bg = isActive ? (SEASON_BG[maand.seizoen] ?? "rgba(29,36,114,0.4)") : "var(--charcoal)";
 
   return (
-    <section
+    <motion.section
       id={`maand-${index}`}
       ref={setRef}
+      variants={noMotion ? undefined : sectionReveal}
+      initial={noMotion ? false : "hidden"}
+      whileInView={noMotion ? undefined : "show"}
+      viewport={{ once: true, margin: "0px 0px -80px 0px" }}
       className="py-12 px-6 md:px-10 border-b"
       style={{
         borderColor: "rgba(255,255,255,0.07)",
-        backgroundColor: isActive ? "rgba(29,36,114,0.35)" : "transparent",
+        backgroundColor: bg,
         transition: noMotion ? "none" : "background-color 0.45s ease",
       }}
     >
@@ -215,28 +233,28 @@ function MaandSection({
         {maand.tekst}
       </p>
 
-      {/* Fish list — animate in when seen */}
-      <ul className="space-y-2.5 mb-8">
+      {/* Fish list — stagger animation */}
+      <motion.ul
+        className="space-y-2.5 mb-8"
+        variants={noMotion ? undefined : fishContainer}
+        initial={noMotion ? false : "hidden"}
+        whileInView={noMotion ? undefined : "show"}
+        viewport={{ once: true }}
+      >
         {maand.vis.map((vis, fi) => (
-          <li
+          <motion.li
             key={vis.naam}
             className="flex items-center gap-3"
-            style={{
-              opacity: noMotion || seen ? 1 : 0,
-              transform: noMotion || seen ? "translateX(0)" : "translateX(-44px)",
-              transition: noMotion
-                ? "none"
-                : `opacity 0.45s ease ${fi * 110}ms, transform 0.55s ease ${fi * 110}ms`,
-            }}
+            variants={noMotion ? undefined : fishItem}
           >
             <Fish color={FISH_COLORS[fi % FISH_COLORS.length]} size={30} />
             <span className="text-sm font-medium" style={{ color: "var(--cream)" }}>
               {vis.naam}
             </span>
             {vis.keurmerk && <Badge type={vis.keurmerk} />}
-          </li>
+          </motion.li>
         ))}
-      </ul>
+      </motion.ul>
 
       {/* Links */}
       <div className="flex flex-wrap gap-3">
@@ -255,38 +273,48 @@ function MaandSection({
           </Link>
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 }
 
-// ── Main export ────────────────────────────────────────────────────────────────
+// ── Main export ───────────────────────────────────────────────────────────────
 export function ViskalenderClient() {
-  const [activeMaand, setActiveMaand]     = useState(0);
-  const [currentDay, setCurrentDay]       = useState("");
-  const [seenSet, setSeenSet]             = useState<Set<number>>(new Set());
-  const [noMotion, setNoMotion]           = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+  const noMotion = prefersReducedMotion ?? false;
 
-  const sectionRefs = useRef<(HTMLElement | null)[]>(Array(12).fill(null));
-  const monthOnMount = useRef(0);
+  const [activeMaand, setActiveMaand] = useState(0);
+  const [currentDay, setCurrentDay]   = useState("");
+
+  const sectionRefs        = useRef<(HTMLElement | null)[]>(Array(12).fill(null));
+  const isInitialScrollRef = useRef(true); // gates observer during initial auto-scroll
 
   const setRef = useCallback((el: HTMLElement | null, i: number) => {
     sectionRefs.current[i] = el;
   }, []);
 
   useEffect(() => {
-    const now    = new Date();
-    const month  = now.getMonth();
-    monthOnMount.current = month;
-    const rm     = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const days   = ["zo", "ma", "di", "wo", "do", "vr", "za"];
+    const now   = new Date();
+    const month = now.getMonth();
+    const days  = ["zo", "ma", "di", "wo", "do", "vr", "za"];
 
     setActiveMaand(month);
-    setNoMotion(rm);
     setCurrentDay(`${days[now.getDay()]} ${now.getDate()}/${now.getMonth() + 1}`);
 
-    // Active-month observer: tight viewport band so only the section in focus triggers
+    // Scroll to current month immediately — observer is still gated
+    const scrollEl = sectionRefs.current[month];
+    if (scrollEl) {
+      scrollEl.scrollIntoView({ behavior: noMotion ? "auto" : "smooth", block: "start" });
+    }
+
+    // Enable observer only after the scroll animation has finished
+    const enableTimer = setTimeout(() => {
+      isInitialScrollRef.current = false;
+    }, noMotion ? 50 : 900);
+
+    // Active-month observer: tight viewport band
     const activeObs = new IntersectionObserver(
       (entries) => {
+        if (isInitialScrollRef.current) return;
         entries.forEach((e) => {
           if (!e.isIntersecting) return;
           const idx = sectionRefs.current.findIndex((el) => el === e.target);
@@ -296,42 +324,15 @@ export function ViskalenderClient() {
       { rootMargin: "-28% 0px -62% 0px", threshold: 0 }
     );
 
-    // Fish-animation observer: looser, one-shot
-    const fishObs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (!e.isIntersecting) return;
-          const idx = sectionRefs.current.findIndex((el) => el === e.target);
-          if (idx !== -1) {
-            setSeenSet((prev) => {
-              if (prev.has(idx)) return prev;
-              return new Set([...prev, idx]);
-            });
-            fishObs.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.08 }
-    );
-
     sectionRefs.current.forEach((el) => {
-      if (el) { activeObs.observe(el); fishObs.observe(el); }
+      if (el) activeObs.observe(el);
     });
-
-    // Scroll to current month after paint
-    const timer = setTimeout(() => {
-      sectionRefs.current[month]?.scrollIntoView({
-        behavior: rm ? "auto" : "smooth",
-        block: "start",
-      });
-    }, 350);
 
     return () => {
       activeObs.disconnect();
-      fishObs.disconnect();
-      clearTimeout(timer);
+      clearTimeout(enableTimer);
     };
-  }, []); // once on mount
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div style={{ backgroundColor: "var(--charcoal)" }}>
@@ -347,7 +348,7 @@ export function ViskalenderClient() {
         </aside>
 
         {/* Month sections */}
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 overflow-hidden">
           {/* Mobile: compact indicator */}
           <div
             className="md:hidden flex items-center gap-2 px-6 py-3 border-b"
@@ -368,7 +369,6 @@ export function ViskalenderClient() {
               maand={maand}
               index={i}
               activeMaand={activeMaand}
-              seen={seenSet.has(i)}
               noMotion={noMotion}
               setRef={(el) => setRef(el, i)}
             />

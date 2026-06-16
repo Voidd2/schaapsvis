@@ -6,6 +6,7 @@ import { routing } from "@/i18n/routing";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
+import { SmoothScrollProvider } from "@/components/shared/SmoothScrollProvider";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.schaapsvishandel.nl"),
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "",
+    google: "Ixvg5PEMPRLQQsLIhwaSxGUiVEjm7JRm0E0bMBXJQw8",
   },
 };
 
@@ -80,10 +81,12 @@ export default async function LocaleLayout({
       </head>
       <body className="antialiased">
         <NextIntlClientProvider messages={messages}>
-          <Header />
-          <main>{children}</main>
-          <Footer />
-          <WhatsAppButton />
+          <SmoothScrollProvider>
+            <Header />
+            <main>{children}</main>
+            <Footer />
+            <WhatsAppButton />
+          </SmoothScrollProvider>
         </NextIntlClientProvider>
       </body>
     </html>
