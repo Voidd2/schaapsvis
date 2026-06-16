@@ -31,6 +31,7 @@ export function JsonLd() {
       "viswinkel Leiden, verse vis Leiden, kibbeling Leiden, haring Leiden, biologische zalm Leiden, Varlaks zalm, duurzame vis Leiden, visboer Leiden, vishandel Leiden, Herenstraat Leiden, schaapsvis",
     sameAs: [
       "https://www.facebook.com/schaapsvishandel/",
+      "https://www.instagram.com/schaapsvishandel/",
       "https://maps.google.com/?q=Herenstraat+48,+2313+AL+Leiden",
     ],
     hasMap: "https://maps.google.com/?q=Herenstraat+48,+2313+AL+Leiden",
@@ -127,6 +128,21 @@ export function JsonLd() {
     ],
   };
 
+  const organization = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://www.schaapsvishandel.nl/#organization",
+    name: "Schaap's Vishandel",
+    alternateName: "Schaap's Vis Leiden",
+    url: "https://www.schaapsvishandel.nl",
+    logo: "https://www.schaapsvishandel.nl/images/og-image.svg",
+    foundingDate: "1938",
+    sameAs: [
+      "https://www.facebook.com/schaapsvishandel/",
+      "https://www.instagram.com/schaapsvishandel/",
+    ],
+  };
+
   const localBusiness = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -162,6 +178,10 @@ export function JsonLd() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusiness) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }}
       />
     </>
   );

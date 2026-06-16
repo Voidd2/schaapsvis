@@ -4,6 +4,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { AssortimentFilter } from "./AssortimentFilter";
+import { products, CATEGORIE_LABELS, type Categorie } from "@/lib/assortiment-data";
+
+const SCENE: Record<Categorie, string> = {
+  "verse-vis": "/images/scene-vis.svg",
+  "gerookte-vis": "/images/scene-gerookt.svg",
+  "schaal-schelp": "/images/scene-schaaldier.svg",
+  "vissalades": "/images/scene-vis.svg",
+  "bereid": "/images/scene-vis.svg",
+};
 
 export async function generateMetadata({
   params,
@@ -185,9 +194,33 @@ export default async function AssortimentPage({
   params: Promise<{ locale: string }>;
 }) {
   await params;
+
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Assortiment Schaap's Vishandel Leiden",
+    itemListElement: products.map((p, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "Product",
+        name: p.naam,
+        description: `${p.desc} Ingrediënten/allergenen: ${p.ingredienten}`,
+        category: CATEGORIE_LABELS[p.categorie],
+        brand: { "@type": "Brand", name: "Schaap's Vishandel" },
+        image: `https://www.schaapsvishandel.nl${SCENE[p.categorie]}`,
+        ...(p.badge ? { award: p.badge } : {}),
+      },
+    })),
+  };
+
   return (
     <>
       <JsonLd />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
       <AssortimentContent />
     </>
   );

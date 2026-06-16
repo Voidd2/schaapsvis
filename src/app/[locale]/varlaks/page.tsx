@@ -105,6 +105,12 @@ function VarlaksContent() {
             }}
           >
             VARLAKS
+            <span
+              className="block text-2xl md:text-4xl font-light mt-5"
+              style={{ color: "rgba(255,255,255,0.85)", letterSpacing: "-0.01em" }}
+            >
+              Biologische zalm uit Noord-Noorwegen
+            </span>
           </h1>
           <p
             className="text-xl md:text-2xl max-w-2xl mb-4 font-light"

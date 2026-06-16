@@ -23,12 +23,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [];
 
   for (const page of pages) {
+    const languages: Record<string, string> = {
+      nl: `${baseUrl}/nl${page}`,
+      en: `${baseUrl}/en${page}`,
+      de: `${baseUrl}/de${page}`,
+      "x-default": `${baseUrl}/nl${page}`,
+    };
     for (const locale of locales) {
       entries.push({
-        url: `${baseUrl}/${locale}${page || ""}`,
+        url: `${baseUrl}/${locale}${page}`,
         lastModified: new Date(),
         changeFrequency: page === "" ? "weekly" : "monthly",
         priority: page === "" ? 1.0 : 0.8,
+        alternates: { languages },
       });
     }
   }
