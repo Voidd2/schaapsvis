@@ -42,7 +42,7 @@ function HeroSection() {
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=1200&q=60')",
+          backgroundImage: "url('/images/scene-vis.svg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           opacity: 0.12,
@@ -180,8 +180,8 @@ function AboutSection() {
         </div>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://images.unsplash.com/photo-1534482421-64566f976cfa?w=800&q=80"
-          alt="Viswinkel toonbank met verse vis op ijs"
+          src="/images/scene-vis.svg"
+          alt="Verse vis op ijs bij Schaap's Vishandel aan de Herenstraat in Leiden"
           className="w-full aspect-[3/4] object-cover"
         />
       </div>
@@ -214,8 +214,8 @@ function VarlaksHighlight() {
       <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-14 items-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80"
-          alt="Verse Varlaks zalmfilet"
+          src="/images/scene-zalm.svg"
+          alt="Verse biologische Varlaks zalmfilet bij Schaap's Vishandel Leiden"
           className="w-full aspect-square object-cover"
         />
         <div>
@@ -257,12 +257,12 @@ function VarlaksHighlight() {
 }
 
 const productItems = [
-  { name: "Kibbeling",    desc: "Knapperig gebakken, de Hollandse klassieker",  foto: "https://images.unsplash.com/photo-1598511726623-d2e9996892f0?w=600&q=80", alt: "Goudbruine kibbeling op bakpapier" },
-  { name: "Haring",       desc: "Vers, rauw, recht van de markt",               foto: "https://images.unsplash.com/photo-1534482421-64566f976cfa?w=600&q=80", alt: "Hollandse haring" },
-  { name: "Lekkerbek",    desc: "Verse wijting in luchtig beslag",               foto: "https://images.unsplash.com/photo-1559847844-5315695dadae?w=600&q=80", alt: "Gebakken vis in beslag" },
-  { name: "Vissoep",      desc: "Huisgemaakte soep, elke dag anders",            foto: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80", alt: "Kom verse vissoep" },
-  { name: "Varlaks Zalm", desc: "Biologisch, Noors, antibioticavrij",            foto: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600&q=80", alt: "Varlaks biologische zalmfilet" },
-  { name: "Feestschotel", desc: "Voor bijzondere gelegenheden",                  foto: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80", alt: "Feestelijke visschotel" },
+  { name: "Kibbeling",    desc: "Knapperig gebakken, de Hollandse klassieker",  foto: "/images/scene-vis.svg",        alt: "Kibbeling van Schaap's Vishandel Leiden" },
+  { name: "Haring",       desc: "Vers, rauw, recht van de markt",               foto: "/images/scene-haring.svg",     alt: "Hollandse Nieuwe haring bij Schaap's Vishandel Leiden" },
+  { name: "Lekkerbek",    desc: "Verse wijting in luchtig beslag",               foto: "/images/scene-vis.svg",        alt: "Lekkerbek van verse wijting — Schaap's Vishandel Leiden" },
+  { name: "Vissoep",      desc: "Huisgemaakte soep, elke dag anders",            foto: "/images/scene-vis.svg",        alt: "Huisgemaakte vissoep van Schaap's Vishandel Leiden" },
+  { name: "Varlaks Zalm", desc: "Biologisch, Noors, antibioticavrij",            foto: "/images/scene-zalm.svg",       alt: "Biologische Varlaks zalm bij Schaap's Vishandel Leiden" },
+  { name: "Feestschotel", desc: "Voor bijzondere gelegenheden",                  foto: "/images/scene-schaaldier.svg", alt: "Feestelijke visschotel van Schaap's Vishandel Leiden" },
 ];
 
 function AssortimentGrid() {
@@ -426,7 +426,7 @@ function DuurzaamheidStrip() {
           className="text-3xl font-bold mb-6"
           style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
         >
-          Eerlijke vis — van eitje tot uw bord
+          Biologische &amp; eerlijke vis — van eitje tot uw bord
         </h2>
         <div className="flex flex-wrap justify-center gap-6 mb-8">
           {badges.map(({ label, sub }) => (
@@ -446,11 +446,11 @@ function DuurzaamheidStrip() {
           ASC voor verantwoorde kweek — en Varlaks biologische zalm zonder antibiotica of GMO.
         </p>
         <a
-          href={`/${locale}/eerlijke-vis`}
+          href={`/${locale}/biologische-vis`}
           className="inline-block text-sm font-semibold px-6 py-3 transition-opacity hover:opacity-85"
           style={{ backgroundColor: "var(--seafoam)", color: "var(--cream)" }}
         >
-          Meer over onze eerlijke vis →
+          Meer over onze biologische vis →
         </a>
       </div>
     </section>

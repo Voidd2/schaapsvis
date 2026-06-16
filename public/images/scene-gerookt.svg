@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Ambachtelijk gerookte vis — Schaap's Vishandel Leiden">
+  <defs>
+    <linearGradient id="bgg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2c2a24"/>
+      <stop offset="1" stop-color="#b8832e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bgg)"/>
+  <g fill="none" stroke="#f7fbfe" stroke-width="8" opacity="0.18" stroke-linecap="round">
+    <path d="M360 380 Q300 300 360 230 Q420 160 360 90"/>
+    <path d="M600 400 Q540 320 600 250 Q660 180 600 110"/>
+    <path d="M840 380 Q780 300 840 230 Q900 160 840 90"/>
+  </g>
+  <g transform="translate(600 560)">
+    <ellipse cx="0" cy="0" rx="250" ry="100" fill="#8a5a1e"/>
+    <polygon points="230,0 360,-78 360,78" fill="#6f481a"/>
+    <path d="M-90 -100 Q0 -150 90 -100" fill="#6f481a"/>
+    <circle cx="-160" cy="-18" r="18" fill="#2c2a24"/>
+    <g fill="none" stroke="#caa05a" stroke-width="6" opacity="0.7">
+      <path d="M-200 -10 Q-60 40 200 25"/>
+      <path d="M-200 20 Q-60 65 200 50"/>
+    </g>
+  </g>
+  <text x="60" y="855" font-family="Georgia, 'Times New Roman', serif" font-size="36" fill="#f7fbfe" opacity="0.9">Schaap's Vis · gerookt</text>
+</svg>

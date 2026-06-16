@@ -71,20 +71,14 @@ function VarlaksContent() {
         className="relative min-h-screen flex items-center overflow-hidden"
         style={{ backgroundColor: "#0a1628" }}
       >
-        {/* Achtergrondvideo van varlaks.no — fallback naar Unsplash als video blokkeerd */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
+        {/* Achtergrondbeeld — eigen merkillustratie van de Skjerstadfjorden (geen externe hotlink) */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/scene-noorwegen.svg"
+          alt="De Skjerstadfjorden boven de poolcirkel in Noord-Noorwegen — herkomst van de biologische Varlaks zalm"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ opacity: 0.4 }}
-        >
-          <source
-            src="https://varlaks.no/wp-content/uploads/2024/03/682448_Norway-Winter-Archipelago-Water_By_Up_North_Studio_Artlist_4K_1.mp4"
-            type="video/mp4"
-          />
-        </video>
+        />
 
         {/* Gradient overlay */}
         <div

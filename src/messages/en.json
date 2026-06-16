@@ -3,7 +3,7 @@
     "assortiment": "Our Fish",
     "verhaal": "Our Story",
     "varlaks": "Varlaks Salmon",
-    "betereVis": "Honest Fish",
+    "betereVis": "Organic Fish",
     "recepten": "Recipes",
     "viswijzer": "Fish Calendar",
     "blog": "Blog",
@@ -26,8 +26,8 @@
     "contactDesc": "Contact Schaap's Vis Leiden. Call +31 71 514 9802 or send a message. Herenstraat 48, 2313 AL Leiden.",
     "bestellenTitle": "Order Fish Leiden | Schaap's Vis — Pre-order Kibbeling, Herring & Salmon",
     "bestellenDesc": "Pre-order your fish at Schaap's Vis Leiden and collect from the shop, market or Voorschoten. Great for large orders and Varlaks salmon.",
-    "eerlijkeVisTitle": "Honest Fish | Schaaps Vis Leiden — Sustainable & Organic Fish",
-    "eerlijkeVisDesc": "Fish with a conscience. Sustainably caught, organically farmed and honestly harvested. Discover why Schaap's Vis chooses honest fish — MSC, ASC and organically certified.",
+    "eerlijkeVisTitle": "Organic Fish Leiden | Organic Salmon — Schaap's Vis",
+    "eerlijkeVisDesc": "Organic fish in Leiden at Schaap's Vishandel — organic Varlaks salmon (ASC + EU organic), MSC- and ASC-certified. Herenstraat 48, since 1938.",
     "receptenTitle": "Fish Recipes from Schaap's Vis Leiden | Kibbeling, Salmon, Herring & more",
     "receptenDesc": "Delicious fish recipes using fish from Schaap's Vis Leiden. From kibbeling with garlic sauce to gravlaks and creamy fish soup. Includes shopping list and preparation time."
   },
@@ -115,8 +115,8 @@
     "infoTitle": "Contact details"
   },
   "eerlijkeVisPage": {
-    "heroTitle": "Honest Fish",
-    "heroSub": "Sustainably caught. Organically farmed. No excuses.",
+    "heroTitle": "Organic fish in Leiden",
+    "heroSub": "Organic Varlaks salmon, MSC- and ASC-certified fish. Sustainable, honest and transparent — even when the story isn't perfect.",
     "whyTitle": "Why we choose better fish",
     "whyText1": "At Schaap's Vis it's not just about fresh and delicious — it's also about how the fish got to your plate. We consciously work with suppliers who put transparency, animal welfare and sustainability first.",
     "whyText2": "That means traceable fish. Fish caught or farmed with respect for the sea. Fish where you know what's in it — and what isn't.",

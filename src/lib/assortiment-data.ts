@@ -5,8 +5,6 @@ export type Categorie =
   | "vissalades"
   | "bereid";
 
-const H = "https://vishandelklaashartevelt.nl/wp-content/uploads/";
-
 export interface Product {
   slug: string;
   naam: string;
@@ -16,7 +14,7 @@ export interface Product {
   omega3?: boolean;
   highlight?: boolean;  // featured border
   bestelId?: string;
-  photo?: string;       // absolute URL
+  photo?: string;       // lokaal pad in /public (bv. /images/zalm.webp) — leeg = merkillustratie
   // Allergen info (EU-formaat: allergenen HOOFDLETTERS)
   ingredienten: string;
   bevat: string[];
@@ -46,7 +44,6 @@ export const products: Product[] = [
     naam: "Kabeljauw",
     desc: "Heel gevangen kabeljauw (Gadus morhua) uit de Noordoost-Atlantische Oceaan. Stevige, witte vlees met een milde smaak. De basis van onze kibbeling.",
     categorie: "verse-vis",
-    photo: `${H}kabeljauw-1-600x400.png`,
     ingredienten: "Kabeljauw (Gadus morhua) [VIS]. Geen toegevoegde stoffen.",
     bevat: ["VIS"],
     beschikbaar: "dagelijks",
@@ -184,7 +181,6 @@ export const products: Product[] = [
   {
     slug: "schelvis",
     naam: "Schelvis",
-    photo: `${H}Schelvis-1-600x400.png`,
     desc: "Schelvis (Melanogrammus aeglefinus), naaste familie van de kabeljauw. Licht zoete smaak, wit en mager vlees. Klassiek in Britse fish & chips.",
     categorie: "verse-vis",
     ingredienten: "Schelvis (Melanogrammus aeglefinus) [VIS]. Geen toegevoegde stoffen.",
@@ -248,7 +244,6 @@ export const products: Product[] = [
   {
     slug: "haring",
     naam: "Haring",
-    photo: `${H}Haring-Hollandse-nieuwe-600x400.png`,
     desc: "Hollandse Nieuwe haring (Clupea harengus) — gevlinderd of op het broodje. Een Hollandse klassieker, een van de rijkste omega-3 bronnen in ons assortiment.",
     categorie: "verse-vis",
     omega3: true,
@@ -259,7 +254,6 @@ export const products: Product[] = [
   {
     slug: "varlaks-zalm",
     naam: "Verse Zalm — Varlaks Biologisch",
-    photo: `${H}zalm-filet-5-600x400.png`,
     desc: "Premium biologische Atlantische zalm (Salmo salar) uit Noord-Noorwegen, boven de poolcirkel. Familieboeren, geen antibiotica, geen GMO. ASC gecertificeerd.",
     categorie: "verse-vis",
     badge: "Biologisch · ASC",
@@ -273,7 +267,6 @@ export const products: Product[] = [
   {
     slug: "zalmfilet",
     naam: "Zalmfilet",
-    photo: `${H}zalm-filet-5-600x400.png`,
     desc: "Verse zalmfilet — mals, rijk van smaak en boordevol omega-3 vetzuren. Wij leveren de Varlaks biologische variant.",
     categorie: "verse-vis",
     badge: "ASC",
@@ -315,7 +308,6 @@ export const products: Product[] = [
   {
     slug: "gerookte-zalm-high-seas",
     naam: "Gerookte Zalm — High Seas",
-    photo: `${H}Gerookte-Zalm-DV-1-600x400.png`,
     desc: "Koud gerookte kweekzalm (Salmo salar) uit Noorwegen, lang gesneden in dunne plakken. Van W.G. Den Heijer & Zn. uit Scheveningen. ASC gecertificeerd.",
     categorie: "gerookte-vis",
     badge: "ASC",
@@ -328,7 +320,6 @@ export const products: Product[] = [
   {
     slug: "gerookte-wilde-zalm",
     naam: "Gerookte Wilde Zalm",
-    photo: `${H}Gerookte-Zalm-DV-1-600x400.png`,
     desc: "Koud gerookte wilde zalm (Oncorhynchus spp.) uit Alaska — dieper van smaak dan kweekzalm. Een echte delicatesse voor bijzondere gelegenheden.",
     categorie: "gerookte-vis",
     omega3: true,
@@ -349,7 +340,6 @@ export const products: Product[] = [
   {
     slug: "gerookte-bokking",
     naam: "Gerookte Bokking",
-    photo: `${H}Gestoomde-bokking-2-600x400.png`,
     desc: "Warm gerookte haring (Clupea harengus) — een eeuwenoud Hollands product. Volle, rokerige smaak. Zowel heel als als bosje bokking verkrijgbaar.",
     categorie: "gerookte-vis",
     ingredienten: "Haring (Clupea harengus) [VIS], zout, rook.",
@@ -435,7 +425,6 @@ export const products: Product[] = [
   {
     slug: "zeeuwse-mosselen",
     naam: "Zeeuwse Mosselen",
-    photo: `${H}Verse-mosselen-1-600x400.png`,
     desc: "Verse Zeeuwse mosselen (Mytilus edulis) — gekweekt in de schone Zeeuwse wateren. Van nature met de seizoenen, het lekkerst van augustus tot april.",
     categorie: "schaal-schelp",
     ingredienten: "Mosselen (Mytilus edulis) [WEEKDIEREN].",
@@ -463,7 +452,6 @@ export const products: Product[] = [
   {
     slug: "coquilles",
     naam: "Coquilles",
-    photo: `${H}Coquilles-1.png`,
     desc: "Verse coquilles (Pecten maximus) — mals en licht zoet van smaak. Binnen 2 minuten klaar in de pan. Ideaal als voorgerecht of borrelschotel.",
     categorie: "schaal-schelp",
     ingredienten: "Coquilles (Pecten maximus) [WEEKDIEREN].",
@@ -482,7 +470,6 @@ export const products: Product[] = [
   {
     slug: "inktvis",
     naam: "Inktvis",
-    photo: `${H}Inktvis-dv-1-600x400.png`,
     desc: "Verse inktvis (Loligo vulgaris) — schoongemaakt en klaar voor de bereidng. Lekker op de grill, als fritto misto of in een stoofpot.",
     categorie: "schaal-schelp",
     ingredienten: "Inktvis (Loligo vulgaris) [WEEKDIEREN]. Geen toegevoegde stoffen.",
@@ -503,7 +490,6 @@ export const products: Product[] = [
   {
     slug: "zalmsalade",
     naam: "Zalmsalade",
-    photo: `${H}Zalmsalade-2-600x400.png`,
     desc: "Huisgemaakte zalmsalade van verse zalm, mayonaise, ui en kruiden. Heerlijk op brood of als borrelhapje.",
     categorie: "vissalades",
     ingredienten: "Zalm [VIS], mayonaise (zonnebloemolie, EIEREN, azijn, MOSTERD), ui, dille, zout, peper.",
@@ -522,7 +508,6 @@ export const products: Product[] = [
   {
     slug: "tonijnsalade",
     naam: "Tonijnsalade",
-    photo: `${H}tonijnsalade-2-600x400.png`,
     desc: "Klassieke tonijnsalade van tonijn uit blik, verse mayonaise, ui en augurk. Veelzijdig op brood of als snack.",
     categorie: "vissalades",
     ingredienten: "Tonijn (Thunnus albacares) [VIS], mayonaise (EIEREN, MOSTERD), ui, augurk, zout, peper.",
@@ -562,7 +547,6 @@ export const products: Product[] = [
   {
     slug: "kibbeling",
     naam: "Kibbeling",
-    photo: "https://images.unsplash.com/photo-1598511726623-d2e9996892f0?w=600&q=80",
     desc: "Knapperig gebakken stukjes witvis in een luchtig, goudbruin beslag — dé Hollandse klassieker. Wij maken kibbeling van kabeljauw (rijkere smaak) óf pollak (MSC, mild). Vraag naar de vis van de dag.",
     categorie: "bereid",
     bestelId: "kibbeling-pollak",
@@ -583,7 +567,6 @@ export const products: Product[] = [
   {
     slug: "broodje-haring",
     naam: "Broodje Haring",
-    photo: `${H}Haring-Hollandse-nieuwe-600x400.png`,
     desc: "Rauwe Hollandse Nieuwe haring op een zacht broodje met fijngehakte ui en knapperige augurk. Een van de voedzaamste producten in ons assortiment.",
     categorie: "bereid",
     omega3: true,

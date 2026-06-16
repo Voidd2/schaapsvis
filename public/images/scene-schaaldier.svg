@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Verse schaal- en schelpdieren — Schaap's Vishandel Leiden">
+  <defs>
+    <linearGradient id="bgs" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2e8b6e"/>
+      <stop offset="1" stop-color="#1f6b54"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bgs)"/>
+  <g fill="#a8d8f0" opacity="0.25">
+    <circle cx="220" cy="220" r="22"/>
+    <circle cx="300" cy="300" r="14"/>
+    <circle cx="980" cy="250" r="18"/>
+    <circle cx="1040" cy="330" r="11"/>
+  </g>
+  <!-- scallop shell -->
+  <g transform="translate(600 470)">
+    <path d="M0 150 C-260 150 -270 -90 -150 -150 L150 -150 C270 -90 260 150 0 150 Z" fill="#f3ead7"/>
+    <g stroke="#d8c7a3" stroke-width="9" opacity="0.8" fill="none">
+      <path d="M0 140 L0 -150"/>
+      <path d="M0 140 L-70 -150"/>
+      <path d="M0 140 L70 -150"/>
+      <path d="M0 140 L-140 -130"/>
+      <path d="M0 140 L140 -130"/>
+      <path d="M0 140 L-200 -80"/>
+      <path d="M0 140 L200 -80"/>
+    </g>
+    <path d="M-150 -150 L150 -150 L120 -185 L-120 -185 Z" fill="#e0d2b4"/>
+  </g>
+  <text x="60" y="855" font-family="Georgia, 'Times New Roman', serif" font-size="36" fill="#f7fbfe" opacity="0.9">Schaap's Vis · schaal &amp; schelp</text>
+</svg>

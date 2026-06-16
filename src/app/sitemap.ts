@@ -8,7 +8,7 @@ const pages = [
   "",
   "/ons-verhaal",
   "/varlaks",
-  "/eerlijke-vis",
+  "/biologische-vis",
   "/blog",
   "/assortiment",
   "/bezoek-ons",

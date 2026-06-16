@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="De Skjerstadfjorden in Noord-Noorwegen — herkomst van Varlaks biologische zalm">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d4e8f5"/>
+      <stop offset="1" stop-color="#a8d8f0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#sky)"/>
+  <circle cx="940" cy="200" r="70" fill="#f7fbfe" opacity="0.85"/>
+  <polygon points="0,560 220,300 380,520 560,250 760,540 980,330 1200,560 1200,560 0,560" fill="#1d2472" opacity="0.85"/>
+  <polygon points="0,560 220,300 300,400 380,330 470,460 0,560" fill="#f7fbfe" opacity="0.5"/>
+  <polygon points="560,250 660,400 760,330 760,540 560,250" fill="#f7fbfe" opacity="0.45"/>
+  <rect x="0" y="560" width="1200" height="340" fill="#14194f"/>
+  <polygon points="0,560 220,300 380,520 560,250 760,540 980,330 1200,560" fill="#1d2472" opacity="0.35" transform="translate(0 600) scale(1 -0.45)"/>
+  <g fill="none" stroke="#a8d8f0" stroke-width="3" opacity="0.25">
+    <path d="M0 700 Q300 680 600 700 T1200 700"/>
+    <path d="M0 780 Q300 760 600 780 T1200 780"/>
+  </g>
+  <text x="60" y="858" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#f7fbfe" opacity="0.85">Skjerstadfjorden · Nordland</text>
+</svg>

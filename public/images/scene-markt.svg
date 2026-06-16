@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Schaap's Vis op de markt in Leiden">
+  <rect width="1200" height="900" fill="#f7fbfe"/>
+  <rect width="1200" height="900" fill="#d4e8f5" opacity="0.4"/>
+  <!-- awning -->
+  <g>
+    <rect x="0" y="120" width="1200" height="40" fill="#14194f"/>
+    <path d="M0 160 H1200 V250 Q1140 300 1080 250 Q1020 300 960 250 Q900 300 840 250 Q780 300 720 250 Q660 300 600 250 Q540 300 480 250 Q420 300 360 250 Q300 300 240 250 Q180 300 120 250 Q60 300 0 250 Z" fill="#c0392b"/>
+    <g fill="#f7fbfe">
+      <path d="M120 160 v90 Q90 285 60 250 Q30 285 0 250 V160 Z" opacity="0.9"/>
+      <path d="M360 160 v90 Q330 285 300 250 Q270 285 240 250 V160 Z" opacity="0.9"/>
+      <path d="M600 160 v90 Q570 285 540 250 Q510 285 480 250 V160 Z" opacity="0.9"/>
+      <path d="M840 160 v90 Q810 285 780 250 Q750 285 720 250 V160 Z" opacity="0.9"/>
+      <path d="M1080 160 v90 Q1050 285 1020 250 Q990 285 960 250 V160 Z" opacity="0.9"/>
+    </g>
+  </g>
+  <!-- crate of fish on ice -->
+  <rect x="350" y="540" width="500" height="180" rx="12" fill="#b8832e"/>
+  <rect x="370" y="520" width="460" height="60" rx="10" fill="#a8d8f0"/>
+  <g transform="translate(470 545)">
+    <ellipse cx="0" cy="0" rx="90" ry="34" fill="#1d2472"/>
+    <polygon points="80,0 130,-28 130,28" fill="#1d2472"/>
+    <circle cx="-55" cy="-8" r="7" fill="#f7fbfe"/>
+  </g>
+  <g transform="translate(700 555) rotate(8)">
+    <ellipse cx="0" cy="0" rx="95" ry="34" fill="#14194f"/>
+    <polygon points="85,0 135,-28 135,28" fill="#14194f"/>
+    <circle cx="-58" cy="-8" r="7" fill="#f7fbfe"/>
+  </g>
+  <text x="60" y="850" font-family="Georgia, 'Times New Roman', serif" font-size="36" fill="#1d2472" opacity="0.85">Schaap's Vis · Markt Leiden</text>
+</svg>

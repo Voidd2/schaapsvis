@@ -53,8 +53,6 @@ const receptenOrigineel: Recept[] = [
     tijd: "15 min",
     moeilijkheid: "Makkelijk",
     tags: ["Zomers", "Snel", "Makkelijk", "Gezond"],
-    fotoUrl:
-      "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80",
     fotoLabel: "Frisse saladekom met stukjes zalm en groenten",
     vanSchaap: [
       "Vers gerookte zalm (ca. 150g per persoon)",
@@ -87,8 +85,6 @@ const receptenOrigineel: Recept[] = [
     tijd: "20 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
-    fotoUrl:
-      "https://images.unsplash.com/photo-1614627293113-e7e68163d958?w=800&q=80",
     fotoLabel: "Zalmfilets in ovenschaal met citroenschijfjes en kruiden",
     vanSchaap: ["Varlaks zalmfilet (150–200g per persoon)"],
     vanSupermarkt: [
@@ -116,8 +112,6 @@ const receptenOrigineel: Recept[] = [
     tijd: "30–35 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Met de kids", "Bijzonder"],
-    fotoUrl:
-      "https://images.unsplash.com/photo-1611599538235-128e54f1250f?w=800&q=80",
     fotoLabel: "Goudbruin gebakken kibbeling met witte saus",
     vanSchaap: [
       "Kibbeling beslag (kabeljauw of pollak) — 200g per persoon is onze aanbeveling",
@@ -153,8 +147,6 @@ const receptenOrigineel: Recept[] = [
     tijd: "48 uur (+ 15 min bereiding)",
     moeilijkheid: "Uitdagend",
     tags: ["Bijzonder"],
-    fotoUrl:
-      "https://images.unsplash.com/photo-1498604819470-d34ff92b1341?w=800&q=80",
     fotoLabel: "Gepekelde zalm met verse dille en roze peperbessen",
     vanSchaap: [
       "Hele Varlaks zalmfilet (500–800g, met vel) — vraag ons de graten te verwijderen",
@@ -186,8 +178,6 @@ const receptenOrigineel: Recept[] = [
     tijd: "15 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Zomers"],
-    fotoUrl:
-      "https://images.unsplash.com/photo-1665841265022-27fd74b83005?w=800&q=80",
     fotoLabel: "Haring op roggebrood met rode ui en citroen",
     vanSchaap: ["4 verse haringen, gefileerd — haal ze op de dag zelf"],
     vanSupermarkt: [
@@ -213,8 +203,6 @@ const receptenOrigineel: Recept[] = [
     tijd: "45 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Bijzonder", "Gezond"],
-    fotoUrl:
-      "https://images.unsplash.com/photo-1620894580123-466ad3a0ca06?w=800&q=80",
     fotoLabel: "Kom vissoep met stukken verse vis in een rijke bouillon",
     vanSchaap: [
       "300g gemengde visfilet (kabeljauw + schol of zalm)",
@@ -243,8 +231,6 @@ const receptenOrigineel: Recept[] = [
     tijd: "20 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
-    fotoUrl:
-      "https://images.unsplash.com/photo-1714559899701-fd966509f726?w=800&q=80",
     fotoLabel: "Gegrilde witte visfilet met groenten en limoen",
     vanSchaap: ["Verse scholfilet (150g per persoon)"],
     vanSupermarkt: [
@@ -273,8 +259,6 @@ const receptenOrigineel: Recept[] = [
     tijd: "30 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Zomers"],
-    fotoUrl:
-      "https://images.unsplash.com/photo-1552204081-7a832e4ee470?w=800&q=80",
     fotoLabel: "Krieltjessalade met kruiden en vis op een schaal",
     vanSchaap: ["4 verse haringen, gefileerd — haal ze zo vers mogelijk"],
     vanSupermarkt: [
@@ -303,8 +287,6 @@ const receptenOrigineel: Recept[] = [
     tijd: "30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Bijzonder"],
-    fotoUrl:
-      "https://images.unsplash.com/photo-1587913956756-4fcf4833241d?w=800&q=80",
     fotoLabel: "Kabeljauwfilet met tomaat en citroen op bord",
     vanSchaap: [
       "4 stukken kabeljauwlende met vel (elk 150 g)",
@@ -334,8 +316,6 @@ const receptenOrigineel: Recept[] = [
     tijd: "25 min",
     moeilijkheid: "Makkelijk",
     tags: ["Zomers", "Gezond", "Snel"],
-    fotoUrl:
-      "https://images.unsplash.com/photo-1597958792579-bd3517df6399?w=800&q=80",
     fotoLabel: "Kleurrijke poke bowl met vis, edamame en sesam",
     vanSchaap: ["4 verse haringen, in stukken"],
     vanSupermarkt: [
@@ -367,8 +347,6 @@ const receptenOrigineel: Recept[] = [
     tijd: "40 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers", "Gezond", "Bijzonder"],
-    fotoUrl:
-      "https://images.unsplash.com/photo-1551248429-40975aa4de74?w=800&q=80",
     fotoLabel: "Garnalensalade in een kom met kruiden en tomaten",
     vanSchaap: ["400 g Hollandse garnalen"],
     vanSupermarkt: [
@@ -400,8 +378,6 @@ const receptenOrigineel: Recept[] = [
     tijd: "25 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
-    fotoUrl:
-      "https://images.unsplash.com/photo-1633244092661-4519a1ffc67e?w=800&q=80",
     fotoLabel: "Goudbruin gebakken visfilet in een pan met citroen",
     vanSchaap: ["600 g scholfilet"],
     vanSupermarkt: [
@@ -431,8 +407,6 @@ const receptenOrigineel: Recept[] = [
     tijd: "10 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Bijzonder"],
-    fotoUrl:
-      "https://images.unsplash.com/photo-1650375592281-cd8250d81e27?w=800&q=80",
     fotoLabel: "Roggebrood met gerookte vis, roomkaas en bieslook",
     vanSchaap: ["100 g gerookte paling"],
     vanSupermarkt: [
@@ -461,8 +435,6 @@ const receptenOrigineel: Recept[] = [
     tijd: "20 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Zomers"],
-    fotoUrl:
-      "https://images.unsplash.com/photo-1625937712525-54a864ecf1c5?w=800&q=80",
     fotoLabel: "Frisse krabsalade als voorgerecht op een wit bord",
     vanSchaap: ["200 g krabsticks"],
     vanSupermarkt: [
@@ -494,8 +466,6 @@ const receptenOrigineel: Recept[] = [
     tijd: "20 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Gezond"],
-    fotoUrl:
-      "https://images.unsplash.com/photo-1624791836022-459a61fbb1a0?w=800&q=80",
     fotoLabel: "Salade met garnalen en paddenstoelen op een bord",
     vanSchaap: ["100 g Hollandse garnalen"],
     vanSupermarkt: [

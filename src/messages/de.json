@@ -3,7 +3,7 @@
     "assortiment": "Sortiment",
     "verhaal": "Unsere Geschichte",
     "varlaks": "Varlaks Lachs",
-    "betereVis": "Ehrlicher Fisch",
+    "betereVis": "Bio-Fisch",
     "recepten": "Rezepte",
     "viswijzer": "Fischkalender",
     "blog": "Blog",
@@ -26,8 +26,8 @@
     "contactDesc": "Kontaktieren Sie Schaap's Vis Leiden. Rufen Sie +31 71 514 9802 an oder senden Sie eine Nachricht. Herenstraat 48, 2313 AL Leiden.",
     "bestellenTitle": "Fisch Bestellen Leiden | Schaap's Vis — Kibbeling, Hering & Lachs vorbestellen",
     "bestellenDesc": "Fisch im Voraus bestellen bei Schaap's Vis Leiden. Wählen Sie Ihren Fisch und holen Sie ihn im Laden, auf dem Markt oder in Voorschoten ab.",
-    "eerlijkeVisTitle": "Ehrlicher Fisch | Schaaps Vis Leiden — Bio & nachhaltig gefangener Fisch",
-    "eerlijkeVisDesc": "Fisch mit Gewissen. Nachhaltig gefangen, biologisch gezüchtet und fair geerntet. Entdecken Sie, warum Schaap's Vis auf ehrlichen Fisch setzt — MSC, ASC und biologisch zertifiziert.",
+    "eerlijkeVisTitle": "Bio-Fisch Leiden | Bio-Lachs — Schaap's Vis",
+    "eerlijkeVisDesc": "Bio-Fisch in Leiden bei Schaap's Vishandel — Bio-Lachs Varlaks (ASC + EU-Bio), MSC- und ASC-zertifiziert. Herenstraat 48, seit 1938.",
     "receptenTitle": "Fischrezepte von Schaap's Vis Leiden | Kibbeling, Lachs, Hering & mehr",
     "receptenDesc": "Leckere Fischrezepte mit Fisch von Schaap's Vis Leiden. Von Kibbeling mit Knoblauchsauce bis Gravlaks und cremiger Fischsuppe. Mit Einkaufsliste und Zubereitungszeit."
   },
@@ -115,8 +115,8 @@
     "infoTitle": "Kontaktdaten"
   },
   "eerlijkeVisPage": {
-    "heroTitle": "Ehrlicher Fisch",
-    "heroSub": "Nachhaltig gefangen. Biologisch gezüchtet. Keine Ausreden.",
+    "heroTitle": "Bio-Fisch in Leiden",
+    "heroSub": "Bio-Lachs Varlaks, MSC- und ASC-zertifizierter Fisch. Nachhaltig, ehrlich und transparent — auch wenn die Geschichte nicht perfekt ist.",
     "whyTitle": "Warum wir auf besseren Fisch setzen",
     "whyText1": "Bei Schaap's Vis geht es nicht nur um frisch und lecker — es geht auch darum, wie der Fisch auf Ihren Teller gekommen ist. Wir arbeiten bewusst mit Lieferanten zusammen, die Transparenz, Tierwohl und Nachhaltigkeit in den Vordergrund stellen.",
     "whyText2": "Das bedeutet rückverfolgbarer Fisch. Fisch, der mit Respekt vor dem Meer gefangen oder gezüchtet wird. Fisch, bei dem Sie wissen, was drin ist — und was nicht.",

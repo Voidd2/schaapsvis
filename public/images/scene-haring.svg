@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Hollandse Nieuwe haring — Schaap's Vishandel Leiden">
+  <defs>
+    <linearGradient id="bgh" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a8d8f0"/>
+      <stop offset="1" stop-color="#d4e8f5"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bgh)"/>
+  <!-- Dutch flag accent -->
+  <g transform="translate(940 150)">
+    <rect x="0" y="0" width="6" height="320" fill="#14194f"/>
+    <rect x="6" y="0" width="170" height="36" fill="#ae1c28"/>
+    <rect x="6" y="36" width="170" height="36" fill="#f7fbfe"/>
+    <rect x="6" y="72" width="170" height="36" fill="#21468b"/>
+  </g>
+  <g transform="translate(560 470) rotate(-8)">
+    <path d="M-320 0 Q-180 -110 80 -95 Q300 -80 380 0 Q300 80 80 95 Q-180 110 -320 0 Z" fill="#5a6b86"/>
+    <polygon points="-300,0 -420,-78 -420,78" fill="#46566f"/>
+    <circle cx="300" cy="-12" r="20" fill="#14194f"/>
+    <path d="M-260 -8 Q0 40 330 18" fill="none" stroke="#d4e8f5" stroke-width="8" opacity="0.8"/>
+    <path d="M-260 22 Q0 60 320 40" fill="none" stroke="#46566f" stroke-width="5" opacity="0.5"/>
+  </g>
+  <text x="60" y="855" font-family="Georgia, 'Times New Roman', serif" font-size="36" fill="#1d2472" opacity="0.85">Schaap's Vis · Hollandse Nieuwe</text>
+</svg>

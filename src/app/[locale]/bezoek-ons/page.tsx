@@ -27,8 +27,6 @@ export async function generateMetadata({
   };
 }
 
-const HW = "https://vishandelklaashartevelt.nl/wp-content/uploads/";
-
 const locations = [
   {
     name: "Viswinkel Herenstraat",
@@ -36,7 +34,7 @@ const locations = [
     phone: "071 514 9802",
     days: "Maandag t/m zaterdag",
     hours: "08:30 – 17:30",
-    fotoUrl: `${HW}kabeljauw-1-600x400.png`,
+    fotoUrl: "/images/scene-winkel.svg",
     fotoAlt: "Verse kabeljauw op de toonbank bij Schaap's Vishandel Herenstraat",
     mapsHref: "https://maps.google.com/?q=Herenstraat+48,+2313+AL+Leiden",
   },
@@ -46,7 +44,7 @@ const locations = [
     phone: null,
     days: "Zaterdag",
     hours: "08:30 – 17:00",
-    fotoUrl: `${HW}Haring-Hollandse-nieuwe-600x400.png`,
+    fotoUrl: "/images/scene-markt.svg",
     fotoAlt: "Hollandse haring op de Leidse zaterdag markt bij de Waag",
     mapsHref: "https://maps.google.com/?q=Aalmarkt+Leiden",
   },
@@ -56,7 +54,7 @@ const locations = [
     phone: null,
     days: "Woensdag",
     hours: "08:30 – 17:00",
-    fotoUrl: `${HW}Gerookte-Zalm-DV-1-600x400.png`,
+    fotoUrl: "/images/scene-markt.svg",
     fotoAlt: "Visstand op de Leidse woensdagmarkt bij Dille & Camille",
     mapsHref: "https://maps.google.com/?q=Dille+en+Camille+Leiden+Haarlemmerstraat",
   },
@@ -66,7 +64,7 @@ const locations = [
     phone: null,
     days: "Vrijdag",
     hours: "08:30 – 17:30",
-    fotoUrl: `${HW}zalm-filet-5-600x400.png`,
+    fotoUrl: "/images/scene-vis.svg",
     fotoAlt: "Visstand op de parkeerplaats bij Hoogvliet Voorschoten",
     mapsHref: "https://maps.google.com/?q=Hoogvliet+Voorschoterweg+Voorschoten",
   },

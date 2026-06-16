@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useLocale } from "next-intl";
 import {
@@ -73,7 +72,15 @@ function Allergenen({ ingredienten, bevat }: { ingredienten: string; bevat: stri
   );
 }
 
-// ─── Card photo / placeholder ─────────────────────────────────────────────────
+// ─── Card photo (eigen merkillustratie per categorie; lokale foto indien aanwezig) ──
+const CATEGORIE_SCENE: Record<Categorie, string> = {
+  "verse-vis":     "/images/scene-vis.svg",
+  "gerookte-vis":  "/images/scene-gerookt.svg",
+  "schaal-schelp": "/images/scene-schaaldier.svg",
+  "vissalades":    "/images/scene-vis.svg",
+  "bereid":        "/images/scene-vis.svg",
+};
+
 function CardPhoto({
   photo,
   naam,
@@ -84,31 +91,20 @@ function CardPhoto({
   categorie: Categorie;
 }) {
   const kleur = CATEGORIE_KLEUR[categorie];
-
-  if (photo) {
-    return (
-      <div className="relative w-full overflow-hidden" style={{ height: 180 }}>
-        <Image
-          src={photo}
-          alt={naam}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-cover"
-        />
-      </div>
-    );
-  }
+  const src = photo || CATEGORIE_SCENE[categorie];
 
   return (
     <div
-      className="flex items-center justify-center"
-      style={{ height: 80, backgroundColor: kleur + "22", borderBottom: `3px solid ${kleur}` }}
+      className="relative w-full overflow-hidden"
+      style={{ height: 150, borderBottom: `3px solid ${kleur}` }}
     >
-      <svg width="38" height="22" viewBox="0 0 80 45" aria-hidden="true" style={{ opacity: 0.35 }}>
-        <ellipse cx="33" cy="22" rx="31" ry="18" fill={kleur} />
-        <polygon points="62,22 80,8 80,36" fill={kleur} />
-        <circle cx="11" cy="17" r="4" fill="white" />
-      </svg>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt={`${naam} — Schaap's Vishandel Leiden`}
+        className="w-full h-full object-cover"
+        loading="lazy"
+      />
     </div>
   );
 }

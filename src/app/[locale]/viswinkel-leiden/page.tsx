@@ -96,7 +96,7 @@ export default async function ViswinkelLeidenPage({
       <section
         style={{
           backgroundColor: "var(--navy-dark)",
-          backgroundImage: "url(https://vishandelklaashartevelt.nl/wp-content/uploads/kabeljauw-1-600x400.png)",
+          backgroundImage: "url(/images/scene-vis.svg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundBlendMode: "multiply",

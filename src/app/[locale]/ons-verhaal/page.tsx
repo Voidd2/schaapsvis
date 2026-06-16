@@ -26,15 +26,13 @@ export async function generateMetadata({
   };
 }
 
-const HW = "https://vishandelklaashartevelt.nl/wp-content/uploads/";
-
 const timelineItems = [
   {
     year: "1938",
     titleKey: "t1title" as const,
     textKey: "t1text" as const,
     quote: null,
-    fotoUrl: `${HW}kabeljauw-1-600x400.png`,
+    fotoUrl: "/images/scene-winkel.svg",
     fotoAlt: "Verse kabeljauw — het visaanbod van Schaap's Vishandel in 1938",
   },
   {
@@ -42,7 +40,7 @@ const timelineItems = [
     titleKey: "t2title" as const,
     textKey: "t2text" as const,
     quote: null,
-    fotoUrl: `${HW}Schelvis-1-600x400.png`,
+    fotoUrl: "/images/scene-vis.svg",
     fotoAlt: "Verse schelvis achter de toonbank — jaren vijftig",
   },
   {
@@ -50,7 +48,7 @@ const timelineItems = [
     titleKey: "t3title" as const,
     textKey: "t3text" as const,
     quote: "t3quote" as const,
-    fotoUrl: `${HW}zalm-filet-5-600x400.png`,
+    fotoUrl: "/images/scene-zalm.svg",
     fotoAlt: "Verse zalmfilet — Aldert Haasnoot breidt het aanbod uit met premium zalm",
   },
   {
@@ -58,7 +56,7 @@ const timelineItems = [
     titleKey: "t4title" as const,
     textKey: "t4text" as const,
     quote: "t4quote" as const,
-    fotoUrl: `${HW}Verse-mosselen-1-600x400.png`,
+    fotoUrl: "/images/scene-schaaldier.svg",
     fotoAlt: "Verse Zeeuwse mosselen — 80-jarig jubileum Schaap's Vishandel",
   },
   {
@@ -66,7 +64,7 @@ const timelineItems = [
     titleKey: "t5title" as const,
     textKey: "t5text" as const,
     quote: null,
-    fotoUrl: `${HW}Gerookte-Zalm-DV-1-600x400.png`,
+    fotoUrl: "/images/scene-gerookt.svg",
     fotoAlt: "Gerookte zalm — Schaap's Vis vandaag, met premium producten zoals Varlaks",
   },
 ];

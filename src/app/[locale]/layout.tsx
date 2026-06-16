@@ -19,17 +19,17 @@ export const metadata: Metadata = {
     locale: "nl_NL",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/images/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "Schaap's Vishandel Leiden — Herenstraat 48",
+        alt: "Schaap's Vishandel Leiden — verse en biologische vis sinds 1938",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     site: "@schaapsvis",
-    images: ["/og-image.jpg"],
+    images: ["/images/og-image.svg"],
   },
   robots: {
     index: true,

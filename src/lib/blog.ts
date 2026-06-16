@@ -31,7 +31,7 @@ export const blogPosts: BlogPost[] = [
     datumLabel: "1 juni 2026",
     leestijd: "5 min",
     categorie: "Seizoen",
-    fotoUrl: "https://images.unsplash.com/photo-1534482421-64566f976cfa?w=900&q=80",
+    fotoUrl: "/images/scene-vis.svg",
     fotoAlt: "Verse vis op ijs in de viswinkel",
     secties: [
       {
@@ -81,7 +81,7 @@ export const blogPosts: BlogPost[] = [
     datumLabel: "8 juni 2026",
     leestijd: "4 min",
     categorie: "Visweetjes",
-    fotoUrl: "https://images.unsplash.com/photo-1534482421-64566f976cfa?w=900&q=80",
+    fotoUrl: "/images/scene-haring.svg",
     fotoAlt: "Hollandse Nieuwe haring",
     secties: [
       {
@@ -120,7 +120,7 @@ export const blogPosts: BlogPost[] = [
     datumLabel: "15 mei 2026",
     leestijd: "6 min",
     categorie: "Ons verhaal",
-    fotoUrl: "https://images.unsplash.com/photo-1534482421-64566f976cfa?w=900&q=80",
+    fotoUrl: "/images/scene-winkel.svg",
     fotoAlt: "Verse vis op de toonbank van een viswinkel",
     secties: [
       {
@@ -175,7 +175,7 @@ export const blogPosts: BlogPost[] = [
     datumLabel: "20 april 2026",
     leestijd: "5 min",
     categorie: "Duurzaam",
-    fotoUrl: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=900&q=80",
+    fotoUrl: "/images/scene-zalm.svg",
     fotoAlt: "Verse zalmfilet",
     secties: [
       {
@@ -208,7 +208,7 @@ export const blogPosts: BlogPost[] = [
     gerelateerdeRecepten: ["varlaks-uit-de-oven"],
     gerelateerdeLinks: [
       { label: "Het volledige Varlaks-verhaal", href: "/varlaks" },
-      { label: "Lees meer over eerlijke vis", href: "/eerlijke-vis" },
+      { label: "Lees meer over biologische vis", href: "/biologische-vis" },
     ],
     seoKeywords:
       "wilde zalm vs kweekzalm, kweekzalm gezond, varlaks zalm, biologische zalm leiden, beste zalm kopen, zalm zonder antibiotica",
@@ -222,7 +222,7 @@ export const blogPosts: BlogPost[] = [
     datumLabel: "10 maart 2026",
     leestijd: "4 min",
     categorie: "Duurzaam",
-    fotoUrl: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=900&q=80",
+    fotoUrl: "/images/scene-vis.svg",
     fotoAlt: "Verse makreel",
     secties: [
       {
@@ -252,7 +252,7 @@ export const blogPosts: BlogPost[] = [
       },
     ],
     gerelateerdeLinks: [
-      { label: "Onze eerlijke vis-pagina", href: "/eerlijke-vis" },
+      { label: "Onze biologische vis-pagina", href: "/biologische-vis" },
       { label: "VISwijzer op goodfish.nl", href: "https://www.goodfish.nl" },
     ],
     seoKeywords:
@@ -267,7 +267,7 @@ export const blogPosts: BlogPost[] = [
     datumLabel: "14 februari 2026",
     leestijd: "3 min",
     categorie: "Visweetjes",
-    fotoUrl: "https://images.unsplash.com/photo-1598511726623-d2e9996892f0?w=900&q=80",
+    fotoUrl: "/images/scene-vis.svg",
     fotoAlt: "Goudbruine kibbeling op bakpapier",
     secties: [
       {
@@ -311,7 +311,7 @@ export const blogPosts: BlogPost[] = [
     datumLabel: "20 januari 2026",
     leestijd: "4 min",
     categorie: "Visweetjes",
-    fotoUrl: "https://www.mooijer.nl/wp-content/uploads/Introductie-over-de-Hollandse-garnaal-Mooijer-Volendam-1280x854.jpg",
+    fotoUrl: "/images/scene-schaaldier.svg",
     fotoAlt: "Hollandse garnalen, gekookt en gepeld",
     secties: [
       {
@@ -335,7 +335,7 @@ export const blogPosts: BlogPost[] = [
       },
     ],
     gerelateerdeLinks: [
-      { label: "Lees meer op onze eerlijke vis-pagina", href: "/eerlijke-vis" },
+      { label: "Lees meer op onze biologische vis-pagina", href: "/biologische-vis" },
       { label: "Garnalen op aanvraag bestellen", href: "/bestellen" },
     ],
     seoKeywords:
@@ -350,7 +350,7 @@ export const blogPosts: BlogPost[] = [
     datumLabel: "2 mei 2026",
     leestijd: "4 min",
     categorie: "Ons verhaal",
-    fotoUrl: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=900&q=80",
+    fotoUrl: "/images/scene-markt.svg",
     fotoAlt: "Verse vis uitgestald op de markt in Leiden",
     secties: [
       {
