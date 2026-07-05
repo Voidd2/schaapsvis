@@ -437,6 +437,187 @@ export const blogPosts: BlogPost[] = [
     seoKeywords:
       "biologische vis leiden, biologische zalm leiden, bio vis leiden, duurzame vis leiden, varlaks zalm leiden, waar biologische vis kopen leiden",
   },
+  {
+    slug: "wat-betekenen-msc-asc-en-het-eu-bio-logo",
+    title: "MSC, ASC en het EU-biologisch logo: wat betekenen die keurmerken?",
+    excerpt:
+      "Aan de toonbank wijzen klanten vaak naar een sticker op de verpakking: wat betekent dat logo nou eigenlijk? MSC, ASC en het groene EU-bio blaadje beloven alle drie iets anders. We leggen het rustig uit.",
+    datum: "2026-06-10",
+    datumLabel: "10 juni 2026",
+    leestijd: "5 min",
+    categorie: "Duurzaam",
+    fotoUrl: "/images/scene-vis.svg",
+    fotoAlt: "Verse vis op ijs in de toonbank van Schaap's Vishandel Leiden",
+    secties: [
+      {
+        alineas: [
+          "Aan onze toonbank wijzen klanten regelmatig naar een sticker op de verpakking: 'Wat betekent dat blauwe logo eigenlijk?' Of ze vragen of onze zalm 'echt biologisch' is. Goede vragen, want de wereld van viskeurmerken zit vol afkortingen. MSC, ASC, EU-biologisch: drie logo's die u steeds vaker tegenkomt, en die alle drie iets anders beloven. Tijd om ze eens rustig uit elkaar te trekken.",
+        ],
+      },
+      {
+        kop: "MSC — duurzame wildvangst",
+        alineas: [
+          "MSC staat voor Marine Stewardship Council, en dit blauwe logo gaat over wilde vis die met een net of een lijn uit zee wordt gehaald. Een visserij mag het MSC-keurmerk alleen dragen als het visbestand gezond is, de vangstmethode de zeebodem en andere dieren zo min mogelijk schaadt, en de visserij goed wordt beheerd. Denk bij ons bijvoorbeeld aan de Hollandse garnalen.",
+          "Het draait bij MSC dus om de vraag: kunnen we deze vissoort blijven vangen zonder de zee uit te putten? Een onafhankelijke controleur beoordeelt dat, en de certificering wordt periodiek opnieuw tegen het licht gehouden. Een blauw MSC-logo betekent kortom: verantwoord gevangen wilde vis.",
+        ],
+      },
+      {
+        kop: "ASC — verantwoorde kweek",
+        alineas: [
+          "ASC is het zusje van MSC, maar dan voor gekweekte vis: de Aquaculture Stewardship Council. Zalm, garnalen, pangasius en tilapia komen vaak uit kwekerijen, en ASC stelt eisen aan hoe die kwekerij werkt. Denk aan schoon water, controle op ziektes en medicijngebruik, verantwoord visvoer en goede arbeidsomstandigheden voor de mensen die er werken.",
+          "ASC zegt dus iets over de manier van kweken, maar het is niet hetzelfde als 'biologisch'. Een ASC-kwekerij is netter en beter gecontroleerd dan een doorsnee kwekerij, maar de eisen gaan minder ver dan die van het biologische keurmerk. Onze Varlaks zalm is bijvoorbeeld ASC-gecertificeerd én biologisch, dat kan prima samen.",
+        ],
+      },
+      {
+        kop: "EU-biologisch — gecontroleerd door Skal",
+        alineas: [
+          "Het groene blaadje van het EU-biologisch logo is de strengste van de drie. Biologische vis komt altijd uit kweek, en in Nederland controleert de organisatie Skal of een kwekerij zich aan de biologische regels houdt. Die regels zijn fors: biologisch visvoer, een lage bezettingsdichtheid (dus meer ruimte en minder stress per vis), geen preventieve antibiotica, en geen synthetische kleurstoffen of andere kunstmatige toevoegingen.",
+          "Dat laatste hoort u ons vaker zeggen bij de zalm: goedkope kweekzalm dankt zijn roze kleur soms aan een kleurstof uit de fabriek, terwijl die kleur bij biologische zalm uit een natuurlijke bron moet komen. Biologisch gaat dus een stap verder dan ASC: het is verantwoorde kweek plús strikte eisen aan voer, dierenwelzijn en toevoegingen.",
+        ],
+      },
+      {
+        kop: "Waarom wilde vis nooit 'biologisch' is",
+        alineas: [
+          "Een misverstand dat we vaak tegenkomen: 'die wilde kabeljauw is toch het meest natuurlijk, dus biologisch?' Logisch geredeneerd, maar zo werkt het keurmerk niet. Biologisch draait om controleerbare kweek: wat de vis eet, hoeveel ruimte hij heeft, welke middelen wel of niet gebruikt worden. Bij een wilde vis in de open zee kunt u dat allemaal niet controleren, dus kan hij per definitie geen biologisch logo dragen.",
+          "Wilde vis kán wel heel duurzaam zijn, en daarvoor kijkt u juist naar MSC. Kortom: biologisch is er voor kweek, MSC voor wildvangst. Twee verschillende vragen, twee verschillende logo's.",
+        ],
+      },
+      {
+        kop: "Zelf checken: de VISwijzer",
+        alineas: [
+          "Wilt u het per vissoort en vangstmethode precies weten, dan is de Nederlandse VISwijzer (goodfish.nl) een fijn hulpmiddel. Met een simpel groen-oranje-rood systeem laat die zien hoe een bepaalde vis ervoor staat. Wij gebruiken diezelfde bron en zijn er eerlijk over, ook als een vis op oranje of rood staat.",
+          "Loopt u er niet uit? Vraag het gewoon aan de toonbank. We leggen graag uit waar een vis vandaan komt en welk keurmerk erop zit. En wilt u zeker weten dat u biologisch koopt: onze Varlaks zalm is ASC én EU-biologisch gecertificeerd.",
+        ],
+      },
+    ],
+    gerelateerdeLinks: [
+      { label: "Alles over onze biologische vis", href: "/biologische-vis" },
+      { label: "Biologische Varlaks zalm", href: "/varlaks" },
+      { label: "Bekijk het assortiment", href: "/assortiment" },
+    ],
+    seoKeywords:
+      "msc keurmerk, asc keurmerk, eu biologisch logo, skal biologische vis, wat betekent msc asc, duurzame vis keurmerken, biologische vis leiden",
+  },
+  {
+    slug: "is-biologische-zalm-gezonder-omega-3",
+    title: "Is biologische zalm gezonder? Wat u moet weten over omega-3",
+    excerpt:
+      "Is de biologische zalm van Schaap's nou ook gezonder? Het eerlijke antwoord is genuanceerder dan een simpel ja of nee. Over omega-3, en over wat er vooral níet in zit.",
+    datum: "2026-06-12",
+    datumLabel: "12 juni 2026",
+    leestijd: "5 min",
+    categorie: "Visweetjes",
+    fotoUrl: "/images/scene-zalm.svg",
+    fotoAlt: "Biologische Varlaks zalmfilet bij Schaap's Vishandel Leiden",
+    secties: [
+      {
+        alineas: [
+          "'Is die biologische zalm van jullie nou ook gezonder?' Het is een vraag die we graag krijgen, maar het eerlijke antwoord is genuanceerder dan een simpel ja of nee. Zalm is sowieso een gezonde vis, en het grootste verschil tussen gewone en biologische zalm zit niet zozeer in wat erin zit, maar juist in wat er níet in zit. Laten we het uit elkaar halen.",
+        ],
+      },
+      {
+        kop: "Vette vis en omega-3",
+        alineas: [
+          "Zalm hoort bij de vette vissoorten, net als makreel, haring en sardines. Die vette vissen zijn een goede bron van omega-3-vetzuren, en dat is een belangrijke reden waarom vis zo'n gezonde reputatie heeft. Omega-3 speelt onder meer een rol bij hart en bloedvaten, en ons lichaam maakt het zelf niet of nauwelijks aan, dus we moeten het uit ons eten halen.",
+          "Hoeveel omega-3 er precies in een stuk zalm zit, verschilt per vis, per seizoen en per manier van kweken of vangen. Cijfers die u online tegenkomt lopen daarom flink uiteen. Wat wél vaststaat: vette vis in het algemeen is een van de rijkste natuurlijke bronnen van omega-3 die er zijn.",
+        ],
+      },
+      {
+        kop: "Wat adviseren de deskundigen?",
+        alineas: [
+          "In algemene zin adviseert de Gezondheidsraad om wekelijks vis te eten, waarbij vette vis extra wordt gewaardeerd om de omega-3. Meer dan dat willen wij er niet over beweren: wat voor u persoonlijk gezond is, hangt af van uw eigen situatie, en daarvoor is uw huisarts of diëtist een betere gesprekspartner dan uw visboer.",
+          "Wij verkopen graag vis en vertellen u graag waar hij vandaan komt, maar we doen geen gezondheidsbeloftes die we niet kunnen waarmaken. Eerlijk blijven hoort er wat ons betreft gewoon bij.",
+        ],
+      },
+      {
+        kop: "Het verschil zit in wat er níet in zit",
+        alineas: [
+          "Waar biologische zalm zich onderscheidt, is niet per se een hoger omega-3-gehalte, maar de manier van kweken. Bij onze biologische Varlaks zalm betekent dat: geen preventieve antibiotica, geen genetisch gemodificeerd (GMO) voer, en geen synthetische astaxanthine.",
+          "Dat laatste verdient uitleg. Astaxanthine is het stofje dat zalm zijn roze kleur geeft. In de natuur haalt zalm het uit zijn voedsel; bij goedkope kweek wordt vaak een synthetische, in de fabriek gemaakte variant aan het voer toegevoegd. Varlaks gebruikt in plaats daarvan natuurlijke astaxanthine, bekend onder de naam Panaferd-AX. De kleur komt dus uit een natuurlijke bron, niet uit een kleurpotje.",
+        ],
+      },
+      {
+        kop: "Dus: is het gezonder?",
+        alineas: [
+          "Het eerlijke antwoord: biologische zalm is niet automatisch een 'gezondere' zalm met méér omega-3. Dat kunnen en willen we niet beloven. Wat u wél krijgt, is zalm die is opgegroeid met meer ruimte, biologisch voer en zonder de synthetische toevoegingen die bij industriële kweek soms om de hoek komen kijken. Voor veel van onze klanten is dat precies de reden om ervoor te kiezen.",
+          "Zie het zo: de omega-3 krijgt u bij elke vette vis. De biologische keuze gaat vooral over hóe de vis geleefd heeft en wat er níet aan is toegevoegd.",
+        ],
+      },
+      {
+        kop: "Wekelijks vis, gewoon lekker",
+        alineas: [
+          "Wilt u vaker vette vis eten, wissel dan gerust af: de ene week zalm, de andere week makreel of haring. Zo houdt u het gevarieerd én lekker. Onze biologische Varlaks zalm ligt vers in de toonbank aan de Herenstraat, en we snijden hem op maat, voor de oven, de pan of rauw voor een tartaar.",
+          "Meer weten over waar onze zalm precies vandaan komt? Lees het volledige verhaal op de Varlaks-pagina, of vraag het gewoon even aan de toonbank.",
+        ],
+      },
+    ],
+    gerelateerdeLinks: [
+      { label: "Het volledige Varlaks-verhaal", href: "/varlaks" },
+      { label: "Lees meer over biologische vis", href: "/biologische-vis" },
+    ],
+    seoKeywords:
+      "biologische zalm gezonder, zalm omega 3, omega 3 vette vis, varlaks zalm gezond, natuurlijke astaxanthine, zalm zonder antibiotica, gezondheidsraad wekelijks vis",
+  },
+  {
+    slug: "verse-vis-bewaren-en-bereiden-tips",
+    title: "Verse vis bewaren en bereiden: de tips van de visboer",
+    excerpt:
+      "Verse vis is heerlijk, maar ook kwetsbaar. Met een paar simpele regels haalt u thuis het beste uit uw aankoop. Onze belangrijkste tips over bewaren, invriezen en bereiden.",
+    datum: "2026-06-14",
+    datumLabel: "14 juni 2026",
+    leestijd: "5 min",
+    categorie: "Visweetjes",
+    fotoUrl: "/images/scene-vis.svg",
+    fotoAlt: "Verse vis op ijs, klaar om te bewaren en te bereiden, bij Schaap's Vishandel Leiden",
+    secties: [
+      {
+        alineas: [
+          "Verse vis is heerlijk, maar ook een beetje kwetsbaar. Hij vraagt net iets meer aandacht dan een pak pasta in de kast. Toch is het helemaal niet ingewikkeld om vis thuis goed te bewaren en te bereiden: met een paar simpele regels haalt u het beste uit uw aankoop. Hieronder onze belangrijkste tips, precies zoals we ze ook aan de toonbank geven.",
+        ],
+      },
+      {
+        kop: "Zo herkent u echt verse vis",
+        alineas: [
+          "Verse vis ruikt niet 'vissig', maar fris, naar zee en naar zilt water. Een scherpe, ammoniakachtige of muffe geur is een teken dat de vis over zijn hoogtepunt heen is. Bij een hele vis kijkt u naar de ogen: die horen helder en bol te zijn, niet dof en ingevallen. De kieuwen moeten helderrood tot roze zijn, niet bruinig of grijs. En het vlees hoort terug te veren als u er zachtjes op drukt.",
+          "In een goede viswinkel is dit makkelijk te controleren: u ziet het, u ruikt het en u vraagt het gewoon. Bij ons ligt de vis op ijs en snijden we hem pas vers als u erom vraagt. Dat is niet voor niets.",
+        ],
+      },
+      {
+        kop: "Bewaren in de koelkast",
+        alineas: [
+          "Verse vis is echt een dagverse aankoop. Bewaar hem op de koudste plek van uw koelkast, meestal de onderste plank net boven de groentelade. Houd hem afgedekt, bij voorkeur op een bordje met wat ijs eronder als u het extra goed wilt doen. Eet verse vis het liefst op de dag zelf, en uiterlijk binnen één tot twee dagen.",
+          "Houd rauwe en gerookte vis gescheiden, en laat vis nooit urenlang op het aanrecht liggen. Koud is koning: hoe kouder u de vis houdt, hoe langer hij op smaak en veilig blijft. Twijfelt u? Ruik. Uw neus is een verrassend betrouwbare rechter.",
+        ],
+      },
+      {
+        kop: "Invriezen: kan dat?",
+        alineas: [
+          "Ja, verse vis invriezen kan prima, mits u het snel doet. Vries de vis in op de dag van aankoop, zo vers mogelijk, in een goed afgesloten zak of bakje zodat hij geen vriesbrand of vrieslucht oppikt. Vette vis zoals zalm en makreel bewaart u wat korter dan magere witvis, omdat het vet in de vriezer langzaam van smaak verandert.",
+          "Ontdooien doet u het beste langzaam in de koelkast, niet op het aanrecht. En let op: eenmaal ontdooide vis vriest u niet nog een keer in. Wilt u vis rauw eten, koop dan vis die al eerder ingevroren is geweest, of vraag ons even om advies.",
+        ],
+      },
+      {
+        kop: "Bereiden: de grootste fout is te lang",
+        alineas: [
+          "De meest gemaakte fout met vis? Te lang bakken. Vis is zó gaar, veel sneller dan vlees. Zodra het vlees van doorschijnend naar mat-wit omslaat en de vlokken makkelijk loslaten, is hij klaar. Een paar minuten per kant in een hete pan is voor de meeste filets al genoeg.",
+          "Dep de vis droog voordat u hem bakt, dan krijgt u een mooi korstje. Bak met de velkant eerst voor een knapperige huid. En haal de vis net iets vóór hij helemaal gaar lijkt uit de pan: hij gaart nog even na. Zo blijft hij mooi sappig in plaats van droog en rubberig.",
+        ],
+      },
+      {
+        kop: "Kort samengevat",
+        alineas: [
+          "Koop vers, houd koud, eet snel en bak kort, dan komt het eigenlijk altijd goed. Wilt u weten welke vis nú op zijn best is, kijk dan even op onze viskalender; vis heeft seizoenen, net als groente en fruit.",
+          "Loopt u vast bij een bereiding? Vraag het gerust. Aan de toonbank geven we graag advies over de juiste vis voor uw gerecht en hoe u hem klaarmaakt. Ons hele aanbod vindt u op de assortimentspagina. Tot bij Schaap's!",
+        ],
+      },
+    ],
+    gerelateerdeLinks: [
+      { label: "Bekijk ons assortiment", href: "/assortiment" },
+      { label: "Bekijk de viskalender", href: "/viskalender" },
+    ],
+    seoKeywords:
+      "verse vis bewaren, vis invriezen, verse vis herkennen, vis bereiden tips, hoe lang vis bewaren koelkast, vis niet te gaar bakken, verse vis leiden",
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {
