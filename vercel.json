@@ -1,4 +1,5 @@
 {
+  "buildCommand": "next build --webpack",
   "redirects": [
     { "source": "/", "destination": "/nl", "permanent": true }
   ]
