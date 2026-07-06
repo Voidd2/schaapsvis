@@ -122,8 +122,13 @@ function ProductCard({ product }: { product: (typeof products)[number] }) {
         outlineOffset: product.highlight ? "-1px" : undefined,
       }}
     >
-      {/* Photo / placeholder */}
-      <CardPhoto photo={product.photo} naam={product.naam} categorie={product.categorie} />
+      {/* Photo — klikbaar naar detailpagina met voedingswaarde */}
+      <Link
+        href={`/${locale}/assortiment/${product.slug}`}
+        aria-label={`${product.naam} — meer info en voedingswaarde`}
+      >
+        <CardPhoto photo={product.photo} naam={product.naam} categorie={product.categorie} />
+      </Link>
 
       {/* Card body */}
       <div className="px-4 pt-3 pb-3 flex flex-col flex-1">
@@ -158,7 +163,9 @@ function ProductCard({ product }: { product: (typeof products)[number] }) {
           className="font-bold text-[0.95rem] leading-snug mb-1.5"
           style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
         >
-          {product.naam}
+          <Link href={`/${locale}/assortiment/${product.slug}`} className="hover:underline">
+            {product.naam}
+          </Link>
         </h3>
 
         {/* Description */}
@@ -168,6 +175,14 @@ function ProductCard({ product }: { product: (typeof products)[number] }) {
         >
           {product.desc}
         </p>
+
+        <Link
+          href={`/${locale}/assortiment/${product.slug}`}
+          className="mt-2 text-xs font-semibold underline underline-offset-2"
+          style={{ color: "var(--navy)" }}
+        >
+          Voedingswaarde &amp; info →
+        </Link>
 
         {/* Availability */}
         {product.beschikbaar && (

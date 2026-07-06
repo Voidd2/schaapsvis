@@ -872,3 +872,124 @@ export const products: Product[] = [
     beschikbaar: "op bestelling",
   },
 ];
+
+// ─── VOEDINGSWAARDE (gemiddelde waarden per 100 g) ──────────────────────────
+export interface Voeding {
+  kcal: number; kj: number;
+  vet: number; verzadigd: number;
+  koolhydraten: number; suikers: number;
+  eiwit: number; zout: number;
+}
+
+// Profielen op basis van standaard voedingswaardetabellen (NEVO/USDA, gemiddelden).
+const VOEDING_PROFIELEN: Record<string, Voeding> = {
+  witvis:          { kcal: 82,  kj: 347,  vet: 0.8, verzadigd: 0.2, koolhydraten: 0, suikers: 0,   eiwit: 18, zout: 0.3 },
+  platvis:         { kcal: 86,  kj: 364,  vet: 1.5, verzadigd: 0.3, koolhydraten: 0, suikers: 0,   eiwit: 17, zout: 0.3 },
+  haring:          { kcal: 210, kj: 874,  vet: 15,  verzadigd: 3.3, koolhydraten: 0, suikers: 0,   eiwit: 18, zout: 1.2 },
+  zalm:            { kcal: 208, kj: 866,  vet: 13,  verzadigd: 3.1, koolhydraten: 0, suikers: 0,   eiwit: 20, zout: 0.2 },
+  forel:           { kcal: 140, kj: 585,  vet: 6,   verzadigd: 1.2, koolhydraten: 0, suikers: 0,   eiwit: 20, zout: 0.1 },
+  tonijn:          { kcal: 116, kj: 486,  vet: 2,   verzadigd: 0.6, koolhydraten: 0, suikers: 0,   eiwit: 24, zout: 0.4 },
+  garnaal:         { kcal: 71,  kj: 299,  vet: 0.8, verzadigd: 0.2, koolhydraten: 0, suikers: 0,   eiwit: 15, zout: 1.4 },
+  gamba:           { kcal: 85,  kj: 356,  vet: 1,   verzadigd: 0.3, koolhydraten: 0, suikers: 0,   eiwit: 18, zout: 0.6 },
+  mossel:          { kcal: 86,  kj: 360,  vet: 2,   verzadigd: 0.4, koolhydraten: 3, suikers: 0,   eiwit: 12, zout: 0.9 },
+  oester:          { kcal: 68,  kj: 285,  vet: 2,   verzadigd: 0.5, koolhydraten: 4, suikers: 0,   eiwit: 7,  zout: 1.0 },
+  schelp:          { kcal: 79,  kj: 331,  vet: 1,   verzadigd: 0.2, koolhydraten: 3, suikers: 0,   eiwit: 14, zout: 0.6 },
+  schaaldier:      { kcal: 90,  kj: 377,  vet: 1.5, verzadigd: 0.3, koolhydraten: 0, suikers: 0,   eiwit: 19, zout: 0.8 },
+  inktvis:         { kcal: 92,  kj: 385,  vet: 1.4, verzadigd: 0.4, koolhydraten: 3, suikers: 0,   eiwit: 16, zout: 0.6 },
+  "gerookte-zalm": { kcal: 180, kj: 750,  vet: 11,  verzadigd: 2.3, koolhydraten: 0, suikers: 0,   eiwit: 21, zout: 3.0 },
+  "gerookte-vis":  { kcal: 175, kj: 730,  vet: 10,  verzadigd: 2.2, koolhydraten: 0, suikers: 0,   eiwit: 21, zout: 2.5 },
+  vissalade:       { kcal: 250, kj: 1040, vet: 22,  verzadigd: 2.5, koolhydraten: 4, suikers: 2,   eiwit: 8,  zout: 1.0 },
+  zeewier:         { kcal: 60,  kj: 250,  vet: 3,   verzadigd: 0.4, koolhydraten: 5, suikers: 2,   eiwit: 2,  zout: 1.5 },
+  kibbeling:       { kcal: 230, kj: 960,  vet: 12,  verzadigd: 1.5, koolhydraten: 16, suikers: 0.5, eiwit: 14, zout: 0.9 },
+  vissoep:         { kcal: 65,  kj: 272,  vet: 3,   verzadigd: 1.0, koolhydraten: 4, suikers: 1,   eiwit: 5,  zout: 0.7 },
+  vispotje:        { kcal: 120, kj: 500,  vet: 8,   verzadigd: 3.5, koolhydraten: 3, suikers: 1,   eiwit: 9,  zout: 0.8 },
+  kroket:          { kcal: 240, kj: 1000, vet: 14,  verzadigd: 4,   koolhydraten: 20, suikers: 1,  eiwit: 7,  zout: 1.2 },
+  gemengd:         { kcal: 120, kj: 500,  vet: 6,   verzadigd: 1.5, koolhydraten: 3, suikers: 1,   eiwit: 14, zout: 1.0 },
+};
+
+const VOEDING_MAP: Record<string, keyof typeof VOEDING_PROFIELEN> = {
+  kabeljauw: "witvis", kabeljauwfilet: "witvis", kabeljauwhaas: "witvis", kabeljauwwangen: "witvis",
+  schol: "platvis", scholfilet: "platvis", zeetong: "platvis", griet: "platvis", grietfilet: "platvis",
+  tarbot: "platvis", tarbotfilet: "platvis", schar: "platvis", "verse-heilbot": "platvis", vleugelrog: "witvis",
+  zeebaars: "witvis", zeebaarsfilet: "witvis", dorade: "witvis", "dorade-filet": "witvis",
+  heek: "witvis", heekfilet: "witvis", schelvis: "witvis", schelvisfilet: "witvis",
+  wijting: "witvis", wijtingfilet: "witvis", "rode-poon": "witvis", "grauwe-poon": "witvis",
+  roodbaars: "witvis", koolvis: "witvis", leng: "witvis", zeeduivelfilet: "witvis", zeewolf: "witvis",
+  haring: "haring", "broodje-haring": "haring",
+  "varlaks-zalm": "zalm", zalmfilet: "zalm", zalmmoot: "zalm", zalmforel: "forel",
+  tonijnfilet: "tonijn", zwaardvis: "tonijn",
+  "gerookte-zalm-high-seas": "gerookte-zalm", "gerookte-wilde-zalm": "gerookte-zalm",
+  "gerookte-zalm-snippers": "gerookte-zalm", "warm-gerookte-zalm": "gerookte-zalm", "gravad-lax": "gerookte-zalm",
+  "gerookte-bokking": "gerookte-vis", "gerookte-kipper": "gerookte-vis", "bosje-sprot": "gerookte-vis",
+  "gerookte-forelfilet": "gerookte-vis", "gerookte-forel-heel": "gerookte-vis", "gerookte-heilbot": "gerookte-vis",
+  "hollandse-garnalen": "garnaal", "noorse-garnalen": "garnaal",
+  "franse-gambas": "gamba", "gekookte-gambas": "gamba", tijgergarnalen: "gamba",
+  "zeeuwse-mosselen": "mossel", "creuse-oesters": "oester", "fine-de-claire-oesters": "oester",
+  kokkels: "schelp", coquilles: "schelp", scheermessen: "schelp", vongole: "schelp", wulken: "schelp",
+  krabklauwen: "schaaldier", "hele-krab": "schaaldier", langoustines: "schaaldier", "hele-kreeft": "schaaldier",
+  inktvis: "inktvis",
+  zalmsalade: "vissalade", krabsalade: "vissalade", tonijnsalade: "vissalade", garnalensalade: "vissalade",
+  surimisalade: "vissalade", zeevruchtensalade: "vissalade", garnalencocktail: "vissalade",
+  zeewiersalade: "zeewier", visschaal: "gemengd",
+  kibbeling: "kibbeling", lekkerbek: "kibbeling", calamares: "kibbeling", "fish-and-chips": "kibbeling", visburger: "kibbeling",
+  vissoep: "vissoep", vispotje: "vispotje", feestschotel: "gemengd",
+  garnalenkroketten: "kroket", visspies: "gemengd",
+};
+
+// Seizoen "wanneer het lekkerst is" — alleen INDIEN VAN TOEPASSING.
+const SEIZOEN_MAP: Record<string, string> = {
+  haring: "Op zijn best als Hollandse Nieuwe, van half juni tot eind augustus.",
+  "broodje-haring": "Het lekkerst tijdens het Hollandse Nieuwe-seizoen (half juni–augustus).",
+  "zeeuwse-mosselen": "Mosselseizoen loopt van juli tot april — het vlezigst in oktober en november.",
+  "creuse-oesters": "Oesters zijn op hun best in de koude maanden, van september tot april.",
+  "fine-de-claire-oesters": "Oesters zijn op hun best in de koude maanden, van september tot april.",
+  "hollandse-garnalen": "Vers vanaf het vroege voorjaar; hoogseizoen in de nazomer en herfst.",
+  schol: "Schol is op zijn best van mei tot augustus, wanneer hij goed op vlees is.",
+  scholfilet: "Schol is op zijn best van mei tot augustus, wanneer hij goed op vlees is.",
+  coquilles: "Coquilles zijn op hun mooist in de herfst en winter.",
+  kokkels: "Kokkels zijn het lekkerst in de koelere maanden.",
+  kabeljauw: "Koud water maakt kabeljauw in de winter extra stevig en sneeuwwit.",
+  kabeljauwhaas: "In de wintermaanden is kabeljauw op zijn allerbest.",
+};
+
+// Korte VISwijzer-/duurzaamheidsnotitie — alleen INDIEN VAN TOEPASSING.
+const VISWIJZER_MAP: Record<string, string> = {
+  schol: "MSC-gecertificeerd — een groene keuze op de VISwijzer.",
+  scholfilet: "MSC-gecertificeerd — een groene keuze op de VISwijzer.",
+  heek: "MSC-gecertificeerd — verantwoord gevangen.",
+  heekfilet: "MSC-gecertificeerd — verantwoord gevangen.",
+  koolvis: "MSC-gecertificeerd — een duurzame, groene keuze.",
+  "hollandse-garnalen": "MSC-gecertificeerd sinds 2017 — verantwoord gevangen aan de Waddenkust.",
+  "varlaks-zalm": "ASC + EU-biologisch — hoogste duurzaamheidsbeoordeling.",
+  zalmfilet: "ASC-gecertificeerd — verantwoorde kweek.",
+  zalmmoot: "ASC-gecertificeerd — verantwoorde kweek.",
+  "gerookte-zalm-high-seas": "ASC-gecertificeerd — verantwoorde kweek.",
+  "gerookte-zalm-snippers": "ASC-gecertificeerd — verantwoorde kweek.",
+  "warm-gerookte-zalm": "ASC-gecertificeerd — verantwoorde kweek.",
+  tonijnfilet: "Geelvintonijn staat oranje op de VISwijzer — wij zijn hier transparant over.",
+  zwaardvis: "Zwaardvis: let op de VISwijzer-status. Vraag ons naar het actuele advies.",
+};
+
+export function getVoeding(slug: string): Voeding | undefined {
+  const key = VOEDING_MAP[slug];
+  return key ? VOEDING_PROFIELEN[key] : undefined;
+}
+export function getSeizoen(slug: string): string | undefined {
+  return SEIZOEN_MAP[slug] || undefined;
+}
+export function getViswijzer(slug: string): string | undefined {
+  return VISWIJZER_MAP[slug] || undefined;
+}
+export function getProduct(slug: string): Product | undefined {
+  return products.find((p) => p.slug === slug);
+}
+
+// Standaard besteleenheid per categorie (voor het bestelformulier).
+export function eenheidVoor(categorie: Categorie): string {
+  switch (categorie) {
+    case "schaal-schelp": return "per portie / kg";
+    case "vissalades":    return "per bakje (100 g)";
+    case "bereid":        return "per portie";
+    default:              return "per stuk / gram";
+  }
+}

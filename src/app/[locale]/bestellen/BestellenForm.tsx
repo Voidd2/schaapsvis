@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { CATALOG, type CatalogProduct, CATEGORIE_LABELS } from "@/lib/products";
-import { Search, X, Plus, ShoppingBag, ChevronDown, Gift } from "lucide-react";
+import { Search, X, Plus, ShoppingBag, ChevronDown } from "lucide-react";
 
 // TODO(eigenaar): vervang door uw echte Formspree-ID — gratis aan te maken op formspree.io
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/JOUW_FORMSPREE_ID";
@@ -92,7 +92,7 @@ export function BestellenForm() {
       setBestelling((prev) =>
         prev.find((i) => i.product.id === product.id)
           ? prev
-          : [...prev, { product, hoeveelheid: product.id === "verrassingspakket" ? "1" : "" }]
+          : [...prev, { product, hoeveelheid: "" }]
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -266,47 +266,6 @@ export function BestellenForm() {
 
       <section className="max-w-3xl mx-auto px-6 py-10">
         <form onSubmit={handleSubmit} className="space-y-6">
-
-          {/* === VERRASSINGSPAKKET === */}
-          {(() => {
-            const pakket = CATALOG.find((p) => p.id === "verrassingspakket");
-            const inBestelling = bestelling.some((i) => i.product.id === "verrassingspakket");
-            if (!pakket?.beschikbaar) return null;
-            return (
-              <div
-                className="p-6 md:p-7 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between"
-                style={{ backgroundColor: "var(--navy)", borderLeft: "4px solid var(--seafoam)" }}
-              >
-                <div className="flex items-start gap-4">
-                  <Gift size={28} style={{ color: "var(--sand)" }} className="flex-shrink-0 mt-1" />
-                  <div>
-                    <p className="font-bold text-lg" style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}>
-                      Schaap&apos;s Verrassingspakket — €5,99
-                    </p>
-                    <p className="text-sm leading-relaxed" style={{ color: "rgba(246,250,253,0.75)" }}>
-                      Verse vis van de dag, ter waarde van minimaal het dubbele.
-                      Tegen verspilling. <strong>Op = op — elke dag maar 2 beschikbaar.</strong>{" "}
-                      Wij bevestigen telefonisch of er nog één voor u is.
-                    </p>
-                    <p className="text-xs mt-2 leading-relaxed" style={{ color: "rgba(246,250,253,0.55)" }}>
-                      Ook te vinden via Too Good To Go — maar rechtstreeks bij ons
-                      reserveren is voordeliger én steunt de winkel direct, zonder
-                      commissie aan derden.
-                    </p>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  disabled={inBestelling}
-                  onClick={() => addToOrder(pakket)}
-                  className="flex-shrink-0 text-sm font-semibold px-5 py-3 text-white transition-opacity hover:opacity-90 disabled:opacity-50"
-                  style={{ backgroundColor: inBestelling ? "var(--seafoam)" : "var(--salmon)" }}
-                >
-                  {inBestelling ? "✓ Toegevoegd" : "Reserveer er één"}
-                </button>
-              </div>
-            );
-          })()}
 
           {/* === STAP 1: ZOEKEN === */}
           <div className="bg-white border p-6 md:p-8" style={{ borderColor: "var(--sand)" }}>

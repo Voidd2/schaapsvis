@@ -32,19 +32,6 @@ export const CATEGORIE_LABELS: Record<CatalogCategorie, string> = {
 };
 
 export const CATALOG: CatalogProduct[] = [
-  // Verrassingspakket — tegen verspilling
-  {
-    id: "verrassingspakket",
-    naam: "Schaap's Verrassingspakket (€5,99)",
-    beschrijving: "Verse vis van de dag — tegen verspilling, max 2 per dag",
-    categorie: "bereid",
-    eenheid: "pakket",
-    info: "Wat de dag overlaat, verrassend lekker. De inhoud wisselt per dag — altijd verse vis ter waarde van minimaal het dubbele. Maximaal 2 pakketten per dag beschikbaar, dus reserveer op tijd. Ook te vinden via Too Good To Go — maar rechtstreeks bij ons reserveren is voordeliger en steunt de winkel direct. Wij bevestigen telefonisch of er nog één voor u is.",
-    tip: "Maximaal 2 per dag — vol = vol",
-    zoekwoorden: ["verrassingspakket", "verrassing", "aanbieding", "too good to go", "magic box", "pakket"],
-    beschikbaar: true,
-  },
-
   // Bereid & gebakken
   {
     id: "kibbeling-kabeljauw",

@@ -115,7 +115,7 @@ function NewsletterSection() {
         <ul className="grid sm:grid-cols-2 gap-y-3 gap-x-10 mb-10 text-left max-w-lg mx-auto">
           {[
             "Speciale kortingen — exclusief voor abonnees, niet online zichtbaar",
-            "Verrassingspakket — reserveer vóórdat het op de website uitverkocht is",
+            "Voorrang op feestschotels en seizoensvis rond de feestdagen",
             "Seizoensinformatie — wanneer de Hollandse Nieuwe er is, welke vis op zijn best zijn",
             "Recepten en tips van onze visvakman, gebaseerd op het aanbod van de week",
           ].map((item) => (
