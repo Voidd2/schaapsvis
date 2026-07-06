@@ -1,30 +1,45 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Schaap's Vis op de markt in Leiden">
-  <rect width="1200" height="900" fill="#f7fbfe"/>
-  <rect width="1200" height="900" fill="#d4e8f5" opacity="0.4"/>
+  <defs>
+    <linearGradient id="mbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eaf3fb"/>
+      <stop offset="1" stop-color="#cfe4f4"/>
+    </linearGradient>
+    <linearGradient id="mcrate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c8912f"/>
+      <stop offset="1" stop-color="#9c6f1f"/>
+    </linearGradient>
+    <radialGradient id="mvig" cx="0.5" cy="0.5" r="0.8">
+      <stop offset="0.6" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0b2340" stop-opacity="0.22"/>
+    </radialGradient>
+    <filter id="msh" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="14"/></filter>
+  </defs>
+  <rect width="1200" height="900" fill="url(#mbg)"/>
   <!-- awning -->
-  <g>
-    <rect x="0" y="120" width="1200" height="40" fill="#14194f"/>
-    <path d="M0 160 H1200 V250 Q1140 300 1080 250 Q1020 300 960 250 Q900 300 840 250 Q780 300 720 250 Q660 300 600 250 Q540 300 480 250 Q420 300 360 250 Q300 300 240 250 Q180 300 120 250 Q60 300 0 250 Z" fill="#c0392b"/>
-    <g fill="#f7fbfe">
-      <path d="M120 160 v90 Q90 285 60 250 Q30 285 0 250 V160 Z" opacity="0.9"/>
-      <path d="M360 160 v90 Q330 285 300 250 Q270 285 240 250 V160 Z" opacity="0.9"/>
-      <path d="M600 160 v90 Q570 285 540 250 Q510 285 480 250 V160 Z" opacity="0.9"/>
-      <path d="M840 160 v90 Q810 285 780 250 Q750 285 720 250 V160 Z" opacity="0.9"/>
-      <path d="M1080 160 v90 Q1050 285 1020 250 Q990 285 960 250 V160 Z" opacity="0.9"/>
-    </g>
+  <rect x="0" y="120" width="1200" height="42" fill="#14194f"/>
+  <path d="M0 162 H1200 V255 Q1140 305 1080 255 Q1020 305 960 255 Q900 305 840 255 Q780 305 720 255 Q660 305 600 255 Q540 305 480 255 Q420 305 360 255 Q300 305 240 255 Q180 305 120 255 Q60 305 0 255 Z" fill="#c0392b"/>
+  <g fill="#f7fbfe" opacity="0.92">
+    <path d="M120 255 Q60 305 0 255 V162 H120 Z"/>
+    <path d="M360 255 Q300 305 240 255 V162 H360 Z"/>
+    <path d="M600 255 Q540 305 480 255 V162 H600 Z"/>
+    <path d="M840 255 Q780 305 720 255 V162 H840 Z"/>
+    <path d="M1080 255 Q1020 305 960 255 V162 H1080 Z"/>
   </g>
-  <!-- crate of fish on ice -->
-  <rect x="350" y="540" width="500" height="180" rx="12" fill="#b8832e"/>
-  <rect x="370" y="520" width="460" height="60" rx="10" fill="#a8d8f0"/>
-  <g transform="translate(470 545)">
-    <ellipse cx="0" cy="0" rx="90" ry="34" fill="#1d2472"/>
-    <polygon points="80,0 130,-28 130,28" fill="#1d2472"/>
-    <circle cx="-55" cy="-8" r="7" fill="#f7fbfe"/>
+  <!-- crate on ice -->
+  <ellipse cx="600" cy="742" rx="330" ry="34" fill="#0b2340" opacity="0.18" filter="url(#msh)"/>
+  <rect x="330" y="548" width="540" height="180" rx="14" fill="url(#mcrate)"/>
+  <rect x="352" y="520" width="496" height="64" rx="10" fill="#bfe0f4"/>
+  <g transform="translate(470 548)">
+    <ellipse cx="0" cy="0" rx="96" ry="34" fill="#1d2472"/>
+    <polygon points="84,0 138,-28 138,28" fill="#1d2472"/>
+    <circle cx="-58" cy="-8" r="8" fill="#f7fbfe"/>
   </g>
-  <g transform="translate(700 555) rotate(8)">
-    <ellipse cx="0" cy="0" rx="95" ry="34" fill="#14194f"/>
-    <polygon points="85,0 135,-28 135,28" fill="#14194f"/>
-    <circle cx="-58" cy="-8" r="7" fill="#f7fbfe"/>
+  <g transform="translate(712 558) rotate(9)">
+    <ellipse cx="0" cy="0" rx="100" ry="34" fill="#14194f"/>
+    <polygon points="88,0 142,-28 142,28" fill="#14194f"/>
+    <circle cx="-60" cy="-8" r="8" fill="#f7fbfe"/>
   </g>
-  <text x="60" y="850" font-family="Georgia, 'Times New Roman', serif" font-size="36" fill="#1d2472" opacity="0.85">Schaap's Vis · Markt Leiden</text>
+  <rect width="1200" height="900" fill="url(#mvig)"/>
+  <rect x="0" y="864" width="66" height="4" fill="#b8832e"/>
+  <text x="88" y="874" font-family="Georgia, 'Times New Roman', serif" font-size="30" fill="#1d2472" opacity="0.85">Schaap's Vis · Markt Leiden</text>
 </svg>

@@ -1,20 +1,39 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Verse biologische Varlaks zalmfilet — Schaap's Vishandel Leiden">
   <defs>
-    <linearGradient id="bgz" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#e8927c"/>
-      <stop offset="1" stop-color="#c0392b"/>
+    <linearGradient id="zbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eda28d"/>
+      <stop offset="0.5" stop-color="#d15b48"/>
+      <stop offset="1" stop-color="#a82f22"/>
     </linearGradient>
+    <radialGradient id="zglow" cx="0.32" cy="0.28" r="0.7">
+      <stop offset="0" stop-color="#ffd8cb" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#ffd8cb" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="zfil" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f8c3b3"/>
+      <stop offset="1" stop-color="#ef9d86"/>
+    </linearGradient>
+    <radialGradient id="zvig" cx="0.5" cy="0.5" r="0.75">
+      <stop offset="0.6" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.34"/>
+    </radialGradient>
+    <filter id="zsh" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="22"/></filter>
   </defs>
-  <rect width="1200" height="900" fill="url(#bgz)"/>
-  <g transform="translate(600 450) rotate(-12)">
-    <path d="M-330 0 Q-260 -150 0 -150 Q300 -150 360 0 Q300 150 0 150 Q-260 150 -330 0 Z" fill="#f3b3a1"/>
-    <g fill="none" stroke="#f7fbfe" stroke-width="10" opacity="0.6" stroke-linecap="round">
-      <path d="M-280 0 Q-100 -70 300 -45"/>
-      <path d="M-280 0 Q-100 70 300 45"/>
-      <path d="M-250 -45 Q-60 -95 320 -10"/>
-      <path d="M-250 45 Q-60 95 320 10"/>
+  <rect width="1200" height="900" fill="url(#zbg)"/>
+  <rect width="1200" height="900" fill="url(#zglow)"/>
+  <g transform="translate(600 452) rotate(-11)">
+    <path d="M-330 40 Q-250 -110 20 -110 Q320 -110 372 30 Q320 170 20 170 Q-250 170 -330 40 Z" fill="#7a1d13" opacity="0.35" filter="url(#zsh)"/>
+    <path d="M-330 0 Q-255 -150 10 -150 Q305 -150 362 0 Q305 150 10 150 Q-255 150 -330 0 Z" fill="url(#zfil)"/>
+    <g fill="none" stroke="#fbe3d8" stroke-width="11" opacity="0.7" stroke-linecap="round">
+      <path d="M-280 -6 Q-90 -74 305 -46"/>
+      <path d="M-268 42 Q-80 96 300 60"/>
+      <path d="M-252 -52 Q-56 -100 318 -14"/>
+      <path d="M-252 88 Q-40 132 300 96"/>
     </g>
-    <path d="M-330 0 Q-260 -150 0 -150 Q300 -150 360 0 Q300 150 0 150 Q-260 150 -330 0 Z" fill="none" stroke="#a83327" stroke-width="8" opacity="0.5"/>
+    <path d="M-330 0 Q-255 -150 10 -150 Q305 -150 362 0 Q305 150 10 150 Q-255 150 -330 0 Z" fill="none" stroke="#8f271b" stroke-width="7" opacity="0.45"/>
+    <path d="M-300 -60 Q-180 -140 40 -128" fill="none" stroke="#ffffff" stroke-width="9" opacity="0.4" stroke-linecap="round"/>
   </g>
-  <text x="60" y="855" font-family="Georgia, 'Times New Roman', serif" font-size="36" fill="#f7fbfe" opacity="0.95">Schaap's Vis · Varlaks zalm</text>
+  <rect width="1200" height="900" fill="url(#zvig)"/>
+  <rect x="0" y="864" width="66" height="4" fill="#f7fbfe"/>
+  <text x="88" y="874" font-family="Georgia, 'Times New Roman', serif" font-size="30" fill="#f7fbfe" opacity="0.95">Schaap's Vis · Varlaks zalm</text>
 </svg>

@@ -1,24 +1,46 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Verse vis op ijs — Schaap's Vishandel Leiden">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#1d2472"/>
-      <stop offset="1" stop-color="#14194f"/>
+    <linearGradient id="vbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#252d90"/>
+      <stop offset="0.55" stop-color="#1d2472"/>
+      <stop offset="1" stop-color="#10143f"/>
     </linearGradient>
+    <radialGradient id="vglow" cx="0.5" cy="0.26" r="0.62">
+      <stop offset="0" stop-color="#4a56be" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#4a56be" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="vbody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4f9fd"/>
+      <stop offset="1" stop-color="#b4d6ee"/>
+    </linearGradient>
+    <radialGradient id="vvig" cx="0.5" cy="0.48" r="0.75">
+      <stop offset="0.6" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    </radialGradient>
+    <filter id="vsh" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="20"/></filter>
   </defs>
-  <rect width="1200" height="900" fill="url(#bg)"/>
-  <g fill="none" stroke="#a8d8f0" stroke-width="3" opacity="0.18">
-    <path d="M0 220 Q300 170 600 220 T1200 220"/>
-    <path d="M0 290 Q300 240 600 290 T1200 290"/>
+  <rect width="1200" height="900" fill="url(#vbg)"/>
+  <rect width="1200" height="900" fill="url(#vglow)"/>
+  <g fill="none" stroke="#a8d8f0" stroke-width="2.5" opacity="0.13">
+    <path d="M0 205 Q300 160 600 205 T1200 205"/>
+    <path d="M0 270 Q300 225 600 270 T1200 270"/>
+    <path d="M0 335 Q300 290 600 335 T1200 335"/>
   </g>
   <g transform="translate(600 420)">
-    <ellipse cx="0" cy="0" rx="245" ry="118" fill="#d4e8f5"/>
-    <polygon points="225,0 365,-92 365,92" fill="#a8d8f0"/>
-    <path d="M-70 -118 Q0 -178 70 -118" fill="#a8d8f0"/>
-    <circle cx="-152" cy="-22" r="20" fill="#14194f"/>
-    <path d="M-235 5 Q-110 60 50 48" fill="none" stroke="#1d2472" stroke-width="6" opacity="0.35"/>
+    <ellipse cx="16" cy="52" rx="250" ry="78" fill="#080b2e" opacity="0.5" filter="url(#vsh)"/>
+    <polygon points="220,0 374,-92 374,92" fill="#9ac6e6"/>
+    <path d="M-42 -116 Q30 -172 96 -108 L52 -66 Z" fill="#9ac6e6"/>
+    <ellipse cx="0" cy="0" rx="248" ry="112" fill="url(#vbody)"/>
+    <path d="M-208 -38 Q-40 -98 180 -56" fill="none" stroke="#ffffff" stroke-width="11" opacity="0.55" stroke-linecap="round"/>
+    <path d="M-232 14 Q-80 60 150 46" fill="none" stroke="#7fb0d6" stroke-width="5" opacity="0.45"/>
+    <circle cx="-158" cy="-18" r="21" fill="#12163f"/>
+    <circle cx="-151" cy="-25" r="6.5" fill="#fff" opacity="0.9"/>
   </g>
-  <g fill="#a8d8f0" opacity="0.55">
-    <polygon points="0,900 0,770 120,825 240,758 360,825 480,758 600,825 720,758 840,825 960,758 1080,825 1200,770 1200,900"/>
+  <g>
+    <polygon points="0,900 0,778 100,822 200,764 300,824 400,762 500,822 600,767 700,824 800,760 900,822 1000,766 1100,822 1200,778 1200,900" fill="#c2e2f5" opacity="0.5"/>
+    <polygon points="0,900 0,824 160,854 330,814 500,858 660,820 830,860 1010,818 1200,854 1200,900" fill="#8fbfe6" opacity="0.4"/>
   </g>
-  <text x="60" y="855" font-family="Georgia, 'Times New Roman', serif" font-size="36" fill="#f7fbfe" opacity="0.9">Schaap's Vis · Leiden</text>
+  <rect width="1200" height="900" fill="url(#vvig)"/>
+  <rect x="0" y="864" width="66" height="4" fill="#b8832e"/>
+  <text x="88" y="874" font-family="Georgia, 'Times New Roman', serif" font-size="30" fill="#f7fbfe" opacity="0.9">Schaap's Vis · Leiden</text>
 </svg>

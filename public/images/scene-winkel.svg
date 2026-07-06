@@ -1,25 +1,47 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="De viswinkel van Schaap's Vishandel aan de Herenstraat 48 in Leiden">
-  <rect width="1200" height="900" fill="#14194f"/>
-  <rect x="150" y="220" width="900" height="560" fill="#1d2472"/>
-  <!-- awning -->
-  <path d="M120 360 H1080 V300 H120 Z" fill="#14194f"/>
-  <path d="M120 360 H1080 L1020 440 H180 Z" fill="#c0392b"/>
-  <g fill="#f7fbfe" opacity="0.9">
-    <path d="M180 360 H300 L276 440 H204 Z"/>
-    <path d="M420 360 H540 L516 440 H444 Z"/>
-    <path d="M660 360 H780 L756 440 H684 Z"/>
-    <path d="M900 360 H1020 L996 440 H924 Z"/>
-  </g>
+  <defs>
+    <linearGradient id="wbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#20287e"/>
+      <stop offset="1" stop-color="#0e1236"/>
+    </linearGradient>
+    <linearGradient id="wglass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe2b0"/>
+      <stop offset="1" stop-color="#cf9445"/>
+    </linearGradient>
+    <radialGradient id="wglow" cx="0.5" cy="0.58" r="0.5">
+      <stop offset="0" stop-color="#ffcf8a" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#ffcf8a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="wvig" cx="0.5" cy="0.5" r="0.78">
+      <stop offset="0.58" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.42"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#wbg)"/>
+  <rect width="1200" height="900" fill="url(#wglow)"/>
   <!-- sign -->
-  <rect x="150" y="220" width="900" height="90" fill="#0e1338"/>
-  <text x="600" y="283" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="52" fill="#b8832e">SCHAAP'S VIS</text>
-  <!-- window + door -->
-  <rect x="220" y="500" width="430" height="280" fill="#a8d8f0" opacity="0.85"/>
-  <rect x="700" y="500" width="280" height="280" fill="#0e1338"/>
-  <rect x="700" y="500" width="280" height="280" fill="none" stroke="#b8832e" stroke-width="6"/>
-  <g stroke="#1d2472" stroke-width="6" opacity="0.5">
-    <path d="M435 500 V780"/><path d="M220 640 H650"/>
+  <rect x="150" y="150" width="900" height="86" rx="6" fill="#0b1030"/>
+  <text x="600" y="211" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="52" fill="#c99a3e" letter-spacing="4">SCHAAP'S VIS</text>
+  <!-- awning -->
+  <path d="M120 250 H1080 V300 Q1020 350 960 300 Q900 350 840 300 Q780 350 720 300 Q660 350 600 300 Q540 350 480 300 Q420 350 360 300 Q300 350 240 300 Q180 350 120 300 Z" fill="#c0392b"/>
+  <g fill="#f7fbfe" opacity="0.92">
+    <path d="M240 300 Q180 350 120 300 V250 H240 Z"/>
+    <path d="M480 300 Q420 350 360 300 V250 H480 Z"/>
+    <path d="M720 300 Q660 350 600 300 V250 H720 Z"/>
+    <path d="M960 300 Q900 350 840 300 V250 H960 Z"/>
   </g>
-  <text x="840" y="650" text-anchor="middle" font-family="Georgia, serif" font-size="34" fill="#b8832e">VIS</text>
-  <text x="600" y="850" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="30" fill="#f7fbfe" opacity="0.7">Herenstraat 48 · Leiden · sinds 1938</text>
+  <!-- window -->
+  <rect x="250" y="360" width="700" height="400" rx="10" fill="url(#wglass)"/>
+  <rect x="250" y="360" width="700" height="400" rx="10" fill="none" stroke="#0b1030" stroke-width="10"/>
+  <line x1="600" y1="360" x2="600" y2="760" stroke="#0b1030" stroke-width="6" opacity="0.5"/>
+  <line x1="250" y1="500" x2="950" y2="500" stroke="#0b1030" stroke-width="6" opacity="0.5"/>
+  <!-- fish on display -->
+  <g transform="translate(600 620)" opacity="0.85">
+    <ellipse cx="0" cy="0" rx="150" ry="58" fill="#1d2472"/>
+    <polygon points="132,0 210,-46 210,46" fill="#1d2472"/>
+    <path d="M-40 -58 Q0 -92 40 -58 Z" fill="#1d2472"/>
+    <circle cx="-96" cy="-12" r="12" fill="#ffe2b0"/>
+  </g>
+  <rect width="1200" height="900" fill="url(#wvig)"/>
+  <text x="600" y="852" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="30" fill="#f7fbfe" opacity="0.72">Herenstraat 48 · Leiden · sinds 1938</text>
 </svg>

@@ -1,25 +1,37 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Ambachtelijk gerookte vis — Schaap's Vishandel Leiden">
   <defs>
-    <linearGradient id="bgg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#2c2a24"/>
+    <linearGradient id="gbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a2820"/>
+      <stop offset="0.6" stop-color="#7d5a24"/>
       <stop offset="1" stop-color="#b8832e"/>
     </linearGradient>
+    <linearGradient id="gbody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9c6a24"/>
+      <stop offset="1" stop-color="#6f481a"/>
+    </linearGradient>
+    <radialGradient id="gvig" cx="0.5" cy="0.5" r="0.78">
+      <stop offset="0.58" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    </radialGradient>
+    <filter id="gsh" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="20"/></filter>
   </defs>
-  <rect width="1200" height="900" fill="url(#bgg)"/>
-  <g fill="none" stroke="#f7fbfe" stroke-width="8" opacity="0.18" stroke-linecap="round">
+  <rect width="1200" height="900" fill="url(#gbg)"/>
+  <g fill="none" stroke="#f7fbfe" stroke-width="7" opacity="0.16" stroke-linecap="round">
     <path d="M360 380 Q300 300 360 230 Q420 160 360 90"/>
     <path d="M600 400 Q540 320 600 250 Q660 180 600 110"/>
     <path d="M840 380 Q780 300 840 230 Q900 160 840 90"/>
   </g>
   <g transform="translate(600 560)">
-    <ellipse cx="0" cy="0" rx="250" ry="100" fill="#8a5a1e"/>
-    <polygon points="230,0 360,-78 360,78" fill="#6f481a"/>
-    <path d="M-90 -100 Q0 -150 90 -100" fill="#6f481a"/>
-    <circle cx="-160" cy="-18" r="18" fill="#2c2a24"/>
-    <g fill="none" stroke="#caa05a" stroke-width="6" opacity="0.7">
-      <path d="M-200 -10 Q-60 40 200 25"/>
-      <path d="M-200 20 Q-60 65 200 50"/>
-    </g>
+    <ellipse cx="14" cy="46" rx="250" ry="72" fill="#1a160e" opacity="0.5" filter="url(#gsh)"/>
+    <polygon points="228,0 358,-76 358,76" fill="#5c3c15"/>
+    <path d="M-88 -98 Q0 -148 90 -96 L50 -58 Z" fill="#5c3c15"/>
+    <ellipse cx="0" cy="0" rx="250" ry="100" fill="url(#gbody)"/>
+    <path d="M-210 -32 Q-40 -84 180 -48" fill="none" stroke="#e2b56a" stroke-width="9" opacity="0.6" stroke-linecap="round"/>
+    <path d="M-200 22 Q-40 66 200 44" fill="none" stroke="#caa05a" stroke-width="6" opacity="0.6"/>
+    <circle cx="-160" cy="-16" r="18" fill="#241d10"/>
+    <circle cx="-153" cy="-22" r="6" fill="#e2b56a" opacity="0.85"/>
   </g>
-  <text x="60" y="855" font-family="Georgia, 'Times New Roman', serif" font-size="36" fill="#f7fbfe" opacity="0.9">Schaap's Vis · gerookt</text>
+  <rect width="1200" height="900" fill="url(#gvig)"/>
+  <rect x="0" y="864" width="66" height="4" fill="#f7fbfe"/>
+  <text x="88" y="874" font-family="Georgia, 'Times New Roman', serif" font-size="30" fill="#f7fbfe" opacity="0.9">Schaap's Vis · gerookt</text>
 </svg>

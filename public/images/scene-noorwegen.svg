@@ -1,20 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="De Skjerstadfjorden in Noord-Noorwegen — herkomst van Varlaks biologische zalm">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="De Skjerstadfjorden in Noord-Noorwegen — herkomst van de biologische Varlaks zalm">
   <defs>
-    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#d4e8f5"/>
-      <stop offset="1" stop-color="#a8d8f0"/>
+    <linearGradient id="nsky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e7f2fa"/>
+      <stop offset="0.6" stop-color="#bfe0f2"/>
+      <stop offset="1" stop-color="#8fc4e4"/>
     </linearGradient>
+    <radialGradient id="nsun" cx="0.78" cy="0.22" r="0.35">
+      <stop offset="0" stop-color="#fff7ec" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#fff7ec" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="nmnt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2b3488"/>
+      <stop offset="1" stop-color="#1a2060"/>
+    </linearGradient>
+    <linearGradient id="nwtr" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#16204f"/>
+      <stop offset="1" stop-color="#0c1338"/>
+    </linearGradient>
+    <radialGradient id="nvig" cx="0.5" cy="0.5" r="0.8">
+      <stop offset="0.62" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.3"/>
+    </radialGradient>
   </defs>
-  <rect width="1200" height="900" fill="url(#sky)"/>
-  <circle cx="940" cy="200" r="70" fill="#f7fbfe" opacity="0.85"/>
-  <polygon points="0,560 220,300 380,520 560,250 760,540 980,330 1200,560 1200,560 0,560" fill="#1d2472" opacity="0.85"/>
-  <polygon points="0,560 220,300 300,400 380,330 470,460 0,560" fill="#f7fbfe" opacity="0.5"/>
-  <polygon points="560,250 660,400 760,330 760,540 560,250" fill="#f7fbfe" opacity="0.45"/>
-  <rect x="0" y="560" width="1200" height="340" fill="#14194f"/>
-  <polygon points="0,560 220,300 380,520 560,250 760,540 980,330 1200,560" fill="#1d2472" opacity="0.35" transform="translate(0 600) scale(1 -0.45)"/>
-  <g fill="none" stroke="#a8d8f0" stroke-width="3" opacity="0.25">
-    <path d="M0 700 Q300 680 600 700 T1200 700"/>
-    <path d="M0 780 Q300 760 600 780 T1200 780"/>
+  <rect width="1200" height="900" fill="url(#nsky)"/>
+  <rect width="1200" height="900" fill="url(#nsun)"/>
+  <circle cx="936" cy="196" r="66" fill="#fffaf1" opacity="0.9"/>
+  <polygon points="0,565 210,300 360,520 560,250 770,540 985,330 1200,560 1200,565" fill="url(#nmnt)"/>
+  <polygon points="560,250 632,368 700,318 770,540 560,250" fill="#f4f9fd" opacity="0.55"/>
+  <polygon points="210,300 288,398 360,344 430,470 210,300" fill="#f4f9fd" opacity="0.5"/>
+  <polygon points="985,330 1050,430 1120,392 1200,470 1200,560 985,330" fill="#f4f9fd" opacity="0.4"/>
+  <rect x="0" y="560" width="1200" height="340" fill="url(#nwtr)"/>
+  <g opacity="0.4"><polygon points="0,560 210,300 360,520 560,250 770,540 985,330 1200,560" fill="#2b3488" transform="translate(0 590) scale(1 -0.4)"/></g>
+  <g fill="none" stroke="#a8d8f0" stroke-width="3" opacity="0.22">
+    <path d="M0 700 Q300 682 600 700 T1200 700"/>
+    <path d="M0 782 Q300 764 600 782 T1200 782"/>
   </g>
-  <text x="60" y="858" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#f7fbfe" opacity="0.85">Skjerstadfjorden · Nordland</text>
+  <rect width="1200" height="900" fill="url(#nvig)"/>
+  <rect x="0" y="862" width="66" height="4" fill="#b8832e"/>
+  <text x="88" y="872" font-family="Georgia, 'Times New Roman', serif" font-size="30" fill="#f7fbfe" opacity="0.9">Skjerstadfjorden · Nordland</text>
 </svg>
