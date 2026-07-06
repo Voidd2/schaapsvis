@@ -2,18 +2,46 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
-import { CATALOG, type CatalogProduct, CATEGORIE_LABELS } from "@/lib/products";
-import { Search, X, Plus, ShoppingBag, ChevronDown } from "lucide-react";
+import {
+  products,
+  CATEGORIE_LABELS,
+  eenheidVoor,
+  type Categorie,
+} from "@/lib/assortiment-data";
+import { Search, X, Plus, ShoppingBag, ChevronDown, Info } from "lucide-react";
 
 // TODO(eigenaar): vervang door uw echte Formspree-ID — gratis aan te maken op formspree.io
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/JOUW_FORMSPREE_ID";
 
 type FormState = "idle" | "sending" | "success" | "error";
 
+// Het bestelformulier gebruikt exact hetzelfde assortiment als de assortimentspagina.
+type FormProduct = {
+  id: string;
+  naam: string;
+  beschrijving: string;
+  categorie: Categorie;
+  eenheid: string;
+  beschikbaar: string;
+  opAanvraag: boolean;
+};
+
+const FORM_CATALOG: FormProduct[] = products.map((p) => {
+  const beschikbaar = p.beschikbaar ?? "dagelijks";
+  return {
+    id: p.slug,
+    naam: p.naam,
+    beschrijving: p.desc,
+    categorie: p.categorie,
+    eenheid: eenheidVoor(p.categorie),
+    beschikbaar,
+    opAanvraag: beschikbaar !== "dagelijks",
+  };
+});
+
 type OrderItem = {
-  product: CatalogProduct;
+  product: FormProduct;
   hoeveelheid: string;
-  notitie?: string;
 };
 
 const AFHAALDAGEN = [
@@ -25,41 +53,24 @@ const AFHAALDAGEN = [
   "Zaterdag — winkel Herenstraat of markt Leiden",
 ] as const;
 
-function searchProducts(query: string): CatalogProduct[] {
+function searchProducts(query: string): FormProduct[] {
   if (query.length < 1) return [];
   const q = query.toLowerCase();
-  return CATALOG.filter((p) => {
-    if (!p.beschikbaar) return false;
+  return FORM_CATALOG.filter((p) => {
     if (p.naam.toLowerCase().includes(q)) return true;
     if (p.beschrijving.toLowerCase().includes(q)) return true;
-    if (p.zoekwoorden?.some((w) => w.toLowerCase().includes(q))) return true;
+    if (CATEGORIE_LABELS[p.categorie].toLowerCase().includes(q)) return true;
     return false;
-  }).slice(0, 7);
+  }).slice(0, 8);
 }
 
-function InfoTooltip({ text }: { text: string }) {
-  const [open, setOpen] = useState(false);
+function OpAanvraagBadge() {
   return (
-    <span className="relative inline-block ml-1">
-      <button
-        type="button"
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
-        onClick={() => setOpen(!open)}
-        className="w-4 h-4 rounded-full text-xs font-bold flex items-center justify-center"
-        style={{ backgroundColor: "var(--navy)", color: "white" }}
-        aria-label="Meer info"
-      >
-        ?
-      </button>
-      {open && (
-        <span
-          className="absolute z-20 bottom-6 left-0 w-56 p-3 text-xs leading-relaxed shadow-lg"
-          style={{ backgroundColor: "var(--navy)", color: "var(--cream)" }}
-        >
-          {text}
-        </span>
-      )}
+    <span
+      className="inline-block text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 ml-1.5 align-middle"
+      style={{ backgroundColor: "rgba(184,131,46,0.15)", color: "var(--gold)" }}
+    >
+      Op aanvraag
     </span>
   );
 }
@@ -68,7 +79,7 @@ export function BestellenForm() {
   const searchParams = useSearchParams();
   const [status, setStatus] = useState<FormState>("idle");
   const [searchQuery, setSearchQuery] = useState("");
-  const [suggestions, setSuggestions] = useState<CatalogProduct[]>([]);
+  const [suggestions, setSuggestions] = useState<FormProduct[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [bestelling, setBestelling] = useState<OrderItem[]>([]);
   const [showBrowse, setShowBrowse] = useState(false);
@@ -83,11 +94,11 @@ export function BestellenForm() {
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Pre-fill product uit ?product= query (bijv. vanaf homepage of assortiment)
+  // Pre-fill product uit ?product= query (bijv. vanaf assortiment of detailpagina)
   useEffect(() => {
     const productId = searchParams.get("product");
     if (!productId) return;
-    const product = CATALOG.find((p) => p.id === productId && p.beschikbaar);
+    const product = FORM_CATALOG.find((p) => p.id === productId);
     if (product) {
       setBestelling((prev) =>
         prev.find((i) => i.product.id === product.id)
@@ -114,7 +125,7 @@ export function BestellenForm() {
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
-  function addToOrder(product: CatalogProduct) {
+  function addToOrder(product: FormProduct) {
     setBestelling((prev) => {
       if (prev.find((i) => i.product.id === product.id)) return prev;
       return [...prev, { product, hoeveelheid: "" }];
@@ -137,6 +148,7 @@ export function BestellenForm() {
 
   const bestellingLeeg = bestelling.length === 0;
   const bestellingIngevuld = bestelling.some((i) => i.hoeveelheid.trim());
+  const heeftOpAanvraag = bestelling.some((i) => i.product.opAanvraag);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -147,7 +159,9 @@ export function BestellenForm() {
       .filter((i) => i.hoeveelheid.trim())
       .map(
         (i) =>
-          `• ${i.product.naam}: ${i.hoeveelheid} (${i.product.eenheid})`
+          `• ${i.product.naam}: ${i.hoeveelheid} (${i.product.eenheid})${
+            i.product.opAanvraag ? " [OP AANVRAAG — inplannen]" : ""
+          }`
       )
       .join("\n");
 
@@ -161,6 +175,9 @@ export function BestellenForm() {
           email: klant.email || "(niet opgegeven)",
           ophaaldag: klant.ophaaldag,
           bestelling: regels || "Zie opmerking",
+          op_aanvraag: heeftOpAanvraag
+            ? "JA — bevat product(en) op aanvraag, plan rond inkoop (ma/do)"
+            : "nee",
           opmerking: klant.opmerking,
           nieuwsbrief: klant.nieuwsbrief ? "JA — wil aanbiedingen ontvangen" : "nee",
           _subject: `Bestelling van ${klant.naam} — ${klant.ophaaldag}`,
@@ -196,11 +213,17 @@ export function BestellenForm() {
           >
             Aanvraag ontvangen!
           </h1>
-          <p className="leading-relaxed text-base mb-8" style={{ color: "var(--charcoal)", opacity: 0.7 }}>
+          <p className="leading-relaxed text-base mb-4" style={{ color: "var(--charcoal)", opacity: 0.7 }}>
             We bellen u zo snel mogelijk terug op{" "}
             <strong>{klant.telefoon}</strong> om uw bestelling te bevestigen en
             de prijs door te geven.
           </p>
+          {heeftOpAanvraag && (
+            <p className="text-sm leading-relaxed mb-8 p-3" style={{ backgroundColor: "rgba(184,131,46,0.1)", color: "var(--charcoal)" }}>
+              Uw bestelling bevat vis <strong>op aanvraag</strong>. Wij bevestigen
+              telefonisch of we dit voor uw gekozen ophaaldag kunnen regelen.
+            </p>
+          )}
           <div className="pt-6 border-t" style={{ borderColor: "var(--sand)" }}>
             <p className="text-sm mb-2" style={{ color: "var(--charcoal)", opacity: 0.5 }}>
               Liever direct bellen?
@@ -232,7 +255,8 @@ export function BestellenForm() {
           className="max-w-xl mx-auto leading-relaxed"
           style={{ color: "rgba(246,250,253,0.75)" }}
         >
-          Typ wat u wilt — wij sturen zo snel mogelijk een prijs terug en houden uw vis voor u apart.
+          Kies uit ons volledige assortiment — wij sturen zo snel mogelijk een
+          prijs terug en houden uw vis voor u apart.
         </p>
       </section>
 
@@ -240,7 +264,7 @@ export function BestellenForm() {
       <section style={{ backgroundColor: "var(--sand)" }} className="py-8 px-6">
         <div className="max-w-3xl mx-auto grid md:grid-cols-3 gap-4">
           {[
-            ["1", "Kies uw vis", "Zoek of blader door ons assortiment"],
+            ["1", "Kies uw vis", "Zoek of blader door het volledige assortiment"],
             ["2", "Wij bellen terug", "U ontvangt de prijs en bevestiging"],
             ["3", "Ophalen & betalen", "Winkel, markt of Voorschoten — contant of pin"],
           ].map(([num, title, desc]) => (
@@ -266,7 +290,6 @@ export function BestellenForm() {
 
       <section className="max-w-3xl mx-auto px-6 py-10">
         <form onSubmit={handleSubmit} className="space-y-6">
-
           {/* === STAP 1: ZOEKEN === */}
           <div className="bg-white border p-6 md:p-8" style={{ borderColor: "var(--sand)" }}>
             <h2
@@ -276,7 +299,7 @@ export function BestellenForm() {
               Wat wilt u bestellen?
             </h2>
             <p className="text-sm mb-5 opacity-60" style={{ color: "var(--charcoal)" }}>
-              Zoek op productnaam of blader door het assortiment
+              Zoek op productnaam of blader door ons volledige assortiment ({FORM_CATALOG.length} producten)
             </p>
 
             {/* Search input */}
@@ -294,7 +317,7 @@ export function BestellenForm() {
                   onFocus={() => {
                     if (suggestions.length > 0) setShowSuggestions(true);
                   }}
-                  placeholder="Zoek bijv. kibbeling, garnalen, zalm..."
+                  placeholder="Zoek bijv. kibbeling, garnalen, zalm, oesters..."
                   className="flex-1 text-base focus:outline-none bg-transparent"
                   style={{ color: "var(--charcoal)" }}
                   autoComplete="off"
@@ -335,9 +358,10 @@ export function BestellenForm() {
                         <div>
                           <p className="font-medium text-sm" style={{ color: "var(--navy)" }}>
                             {product.naam}
+                            {product.opAanvraag && <OpAanvraagBadge />}
                           </p>
                           <p className="text-xs opacity-60" style={{ color: "var(--charcoal)" }}>
-                            {product.beschrijving} · {CATEGORIE_LABELS[product.categorie]}
+                            {CATEGORIE_LABELS[product.categorie]}
                           </p>
                         </div>
                         {alInBestelling ? (
@@ -373,49 +397,49 @@ export function BestellenForm() {
 
             {showBrowse && (
               <div className="space-y-6 pt-4 border-t" style={{ borderColor: "var(--sand)" }}>
-                {(Object.keys(CATEGORIE_LABELS) as (keyof typeof CATEGORIE_LABELS)[]).map(
-                  (cat) => {
-                    const items = CATALOG.filter(
-                      (p) => p.categorie === cat && p.beschikbaar
-                    );
-                    if (items.length === 0) return null;
-                    return (
-                      <div key={cat}>
-                        <h3
-                          className="text-xs uppercase tracking-widest mb-2 opacity-40 font-semibold"
-                          style={{ color: "var(--charcoal)" }}
-                        >
-                          {CATEGORIE_LABELS[cat]}
-                        </h3>
-                        <div className="flex flex-wrap gap-2">
-                          {items.map((product) => {
-                            const alIn = bestelling.some(
-                              (i) => i.product.id === product.id
-                            );
-                            return (
-                              <button
-                                key={product.id}
-                                type="button"
-                                disabled={alIn}
-                                onClick={() => addToOrder(product)}
-                                className="text-sm px-3 py-1.5 border transition-colors hover:opacity-80 disabled:opacity-40 disabled:cursor-default"
-                                style={{
-                                  borderColor: alIn ? "var(--seafoam)" : "var(--sand)",
-                                  backgroundColor: alIn
-                                    ? "rgba(58,128,96,0.08)"
-                                    : "white",
-                                  color: alIn ? "var(--seafoam)" : "var(--navy)",
-                                }}
-                              >
-                                {alIn ? "✓ " : ""}{product.naam}
-                              </button>
-                            );
-                          })}
-                        </div>
+                {(Object.keys(CATEGORIE_LABELS) as Categorie[]).map((cat) => {
+                  const items = FORM_CATALOG.filter((p) => p.categorie === cat);
+                  if (items.length === 0) return null;
+                  return (
+                    <div key={cat}>
+                      <h3
+                        className="text-xs uppercase tracking-widest mb-2 opacity-40 font-semibold"
+                        style={{ color: "var(--charcoal)" }}
+                      >
+                        {CATEGORIE_LABELS[cat]}
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {items.map((product) => {
+                          const alIn = bestelling.some(
+                            (i) => i.product.id === product.id
+                          );
+                          return (
+                            <button
+                              key={product.id}
+                              type="button"
+                              disabled={alIn}
+                              onClick={() => addToOrder(product)}
+                              className="text-sm px-3 py-1.5 border transition-colors hover:opacity-80 disabled:opacity-40 disabled:cursor-default"
+                              style={{
+                                borderColor: alIn ? "var(--seafoam)" : "var(--sand)",
+                                backgroundColor: alIn ? "rgba(58,128,96,0.08)" : "white",
+                                color: alIn ? "var(--seafoam)" : "var(--navy)",
+                              }}
+                            >
+                              {alIn ? "✓ " : ""}{product.naam}
+                              {product.opAanvraag && (
+                                <span style={{ color: "var(--gold)" }}> ·</span>
+                              )}
+                            </button>
+                          );
+                        })}
                       </div>
-                    );
-                  }
-                )}
+                    </div>
+                  );
+                })}
+                <p className="text-xs opacity-50 flex items-center gap-1.5" style={{ color: "var(--charcoal)" }}>
+                  <span style={{ color: "var(--gold)" }}>·</span> = op aanvraag (we bevestigen of we het voor uw dag kunnen regelen)
+                </p>
               </div>
             )}
 
@@ -437,13 +461,10 @@ export function BestellenForm() {
                     <div className="flex-1 min-w-0">
                       <p className="font-medium text-sm truncate" style={{ color: "var(--navy)" }}>
                         {item.product.naam}
-                        {item.product.info && <InfoTooltip text={item.product.info} />}
+                        {item.product.opAanvraag && <OpAanvraagBadge />}
                       </p>
                       <p className="text-xs opacity-50" style={{ color: "var(--charcoal)" }}>
-                        per {item.product.eenheid}
-                        {item.product.tip && (
-                          <> · <span style={{ color: "var(--salmon)" }}>{item.product.tip}</span></>
-                        )}
+                        {item.product.eenheid}
                       </p>
                     </div>
                     <input
@@ -465,6 +486,21 @@ export function BestellenForm() {
                     </button>
                   </div>
                 ))}
+
+                {heeftOpAanvraag && (
+                  <div
+                    className="mt-3 p-4 flex items-start gap-3"
+                    style={{ backgroundColor: "rgba(184,131,46,0.1)", borderLeft: "4px solid var(--gold)" }}
+                  >
+                    <Info size={18} style={{ color: "var(--gold)" }} className="flex-shrink-0 mt-0.5" />
+                    <p className="text-sm leading-relaxed" style={{ color: "var(--charcoal)" }}>
+                      Uw bestelling bevat vis <strong>op aanvraag</strong>. Dat regelen
+                      we graag — we bevestigen telefonisch of het voor uw gekozen
+                      ophaaldag lukt. Voor speciale bestellingen plannen we een paar
+                      dagen vooruit, dus kies bij voorkeur een dag verderop in de week.
+                    </p>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -486,9 +522,7 @@ export function BestellenForm() {
                   type="text"
                   required
                   value={klant.naam}
-                  onChange={(e) =>
-                    setKlant((p) => ({ ...p, naam: e.target.value }))
-                  }
+                  onChange={(e) => setKlant((p) => ({ ...p, naam: e.target.value }))}
                   placeholder="Voor- en achternaam"
                   className="w-full border px-4 py-3 text-base focus:outline-none"
                   style={{ borderColor: "var(--sand)" }}
@@ -503,9 +537,7 @@ export function BestellenForm() {
                   type="tel"
                   required
                   value={klant.telefoon}
-                  onChange={(e) =>
-                    setKlant((p) => ({ ...p, telefoon: e.target.value }))
-                  }
+                  onChange={(e) => setKlant((p) => ({ ...p, telefoon: e.target.value }))}
                   placeholder="06 12 34 56 78"
                   className="w-full border px-4 py-3 text-base focus:outline-none"
                   style={{ borderColor: "var(--sand)" }}
@@ -519,9 +551,7 @@ export function BestellenForm() {
                 <input
                   type="email"
                   value={klant.email}
-                  onChange={(e) =>
-                    setKlant((p) => ({ ...p, email: e.target.value }))
-                  }
+                  onChange={(e) => setKlant((p) => ({ ...p, email: e.target.value }))}
                   placeholder="uw@email.nl"
                   className="w-full border px-4 py-3 text-base focus:outline-none"
                   style={{ borderColor: "var(--sand)" }}
@@ -530,9 +560,7 @@ export function BestellenForm() {
                   <input
                     type="checkbox"
                     checked={klant.nieuwsbrief}
-                    onChange={(e) =>
-                      setKlant((p) => ({ ...p, nieuwsbrief: e.target.checked }))
-                    }
+                    onChange={(e) => setKlant((p) => ({ ...p, nieuwsbrief: e.target.checked }))}
                     className="mt-1"
                   />
                   <span className="text-sm leading-snug" style={{ color: "var(--charcoal)", opacity: 0.75 }}>
@@ -545,15 +573,12 @@ export function BestellenForm() {
 
               <div>
                 <label className="block text-base font-medium mb-2" style={{ color: "var(--charcoal)" }}>
-                  Wanneer wilt u ophalen?{" "}
-                  <span style={{ color: "var(--salmon)" }}>*</span>
+                  Wanneer wilt u ophalen? <span style={{ color: "var(--salmon)" }}>*</span>
                 </label>
                 <select
                   required
                   value={klant.ophaaldag}
-                  onChange={(e) =>
-                    setKlant((p) => ({ ...p, ophaaldag: e.target.value }))
-                  }
+                  onChange={(e) => setKlant((p) => ({ ...p, ophaaldag: e.target.value }))}
                   className="w-full border px-4 py-3 text-base bg-white focus:outline-none"
                   style={{ borderColor: "var(--sand)" }}
                 >
@@ -564,6 +589,12 @@ export function BestellenForm() {
                     </option>
                   ))}
                 </select>
+                {heeftOpAanvraag && (
+                  <p className="text-xs mt-2 leading-relaxed" style={{ color: "var(--gold)" }}>
+                    Uw bestelling bevat een product op aanvraag — houd bij voorkeur een
+                    paar dagen aan, dan kunnen we het voor u inplannen.
+                  </p>
+                )}
               </div>
 
               <div>
@@ -573,9 +604,7 @@ export function BestellenForm() {
                 <textarea
                   rows={4}
                   value={klant.opmerking}
-                  onChange={(e) =>
-                    setKlant((p) => ({ ...p, opmerking: e.target.value }))
-                  }
+                  onChange={(e) => setKlant((p) => ({ ...p, opmerking: e.target.value }))}
                   placeholder="Staat uw vis er niet bij? Typ het hier gewoon in. Bijv: 500g verse forel, schoongemaakt, zonder kop. Of: vaste wekelijkse bestelling kibbeling elke zaterdag."
                   className="w-full border px-4 py-3 text-base resize-none focus:outline-none"
                   style={{ borderColor: "var(--sand)" }}
