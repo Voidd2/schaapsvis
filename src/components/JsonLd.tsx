@@ -135,7 +135,7 @@ export function JsonLd() {
     name: "Schaap's Vishandel",
     alternateName: "Schaap's Vis Leiden",
     url: "https://www.schaapsvishandel.nl",
-    logo: "https://www.schaapsvishandel.nl/images/og-image.svg",
+    logo: "https://www.schaapsvishandel.nl/og-image.png",
     foundingDate: "1938",
     sameAs: [
       "https://www.facebook.com/schaapsvishandel/",

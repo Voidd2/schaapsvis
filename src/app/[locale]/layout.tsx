@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     locale: "nl_NL",
     images: [
       {
-        url: "/images/og-image.svg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Schaap's Vishandel Leiden — verse en biologische vis sinds 1938",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@schaapsvis",
-    images: ["/images/og-image.svg"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
