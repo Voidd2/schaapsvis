@@ -618,6 +618,59 @@ export const blogPosts: BlogPost[] = [
     seoKeywords:
       "verse vis bewaren, vis invriezen, verse vis herkennen, vis bereiden tips, hoe lang vis bewaren koelkast, vis niet te gaar bakken, verse vis leiden",
   },
+  {
+    slug: "echt-gerookte-vis-vs-kunstmatige-rooksmaak",
+    title: "Echt gerookte vis vs. kunstmatige rooksmaak: wat is het verschil?",
+    excerpt:
+      "Niet alle 'gerookte' vis is écht gerookt. Sommige producten danken hun smaak aan toegevoegd rookaroma. We leggen het verschil uit — en waarom u het proeft.",
+    datum: "2026-06-16",
+    datumLabel: "16 juni 2026",
+    leestijd: "5 min",
+    categorie: "Visweetjes",
+    fotoUrl: "/images/scene-gerookt.svg",
+    fotoAlt: "Ambachtelijk gerookte vis bij Schaap's Vishandel Leiden",
+    secties: [
+      {
+        alineas: [
+          "Gerookte zalm, gerookte makreel, bokking: rokerige vis is heerlijk. Maar wist u dat niet alle 'gerookte' vis in de winkel écht boven rokend hout heeft gehangen? Een deel van de goedkopere producten dankt die rooksmaak aan toegevoegd rookaroma. Het verschil proeft u — en het is de moeite waard om te weten waar u op moet letten.",
+        ],
+      },
+      {
+        kop: "Echt roken: koud en warm",
+        alineas: [
+          "Echt roken is een ambacht. Bij koud roken (rond 20–30 °C) hangt de vis urenlang in de rook van smeulend hout, zoals eiken- of beukensnippers. De vis blijft daarbij zijdezacht — denk aan klassieke gerookte zalm in dunne plakken. Bij warm roken (rond 70–90 °C) wordt de vis tegelijk gerookt én gegaard, wat een steviger, volle rokerige vis oplevert, zoals gerookte makreel of bokking.",
+          "In beide gevallen komt de smaak volledig uit het hout en de tijd. Dat geeft die diepe, natuurlijke rooksmaak en een mooie goudbruine kleur — iets wat je niet kunt namaken met een flesje aroma.",
+        ],
+      },
+      {
+        kop: "Kunstmatige rooksmaak: de snelle route",
+        alineas: [
+          "Om tijd en geld te besparen gebruiken sommige producenten 'rookaroma' (soms 'liquid smoke' genoemd): een geconcentreerde rooksmaakstof die door of over de vis wordt gebracht, zonder dat die ooit echt in de rook heeft gehangen. Op de verpakking staat dat soms verstopt in de ingrediëntenlijst als 'rookaroma' of 'aroma'.",
+          "Het resultaat is vaak een eendimensionale, wat scherpe rooksmaak die aan de buitenkant blijft plakken, in plaats van de smaak die bij echt roken door de hele vis trekt. Niets mis mee qua veiligheid, maar het is simpelweg niet hetzelfde product.",
+        ],
+      },
+      {
+        kop: "Zo herkent u echt gerookte vis",
+        alineas: [
+          "Kijk naar de ingrediëntenlijst: bij echt gerookte vis staat er idealiter alleen vis, zout en rook. Ziet u 'rookaroma' of 'aroma' staan, dan is de kans groot dat er kunstmatige rooksmaak is gebruikt. Echt gerookte vis heeft bovendien een natuurlijke, ongelijkmatige goudbruine kleur en een smaak die vol en rond is, niet scherp aan de oppervlakte.",
+          "En het simpelste van alles: vraag het gewoon aan uw visboer. Een goede visspecialist vertelt u precies hoe en waar de vis gerookt is.",
+        ],
+      },
+      {
+        kop: "Bij Schaap's: echt gerookt",
+        alineas: [
+          "Onze gerookte producten zijn écht gerookt, niet met aroma opgeleukt. Onze gerookte zalm (High Seas) komt via W.G. Den Heijer & Zn uit Scheveningen en wordt in Urk boven hout gerookt — ASC-gecertificeerd. Onze bokking en andere gerookte klassiekers volgen dezelfde eerlijke route: vis, zout en rook, meer niet.",
+          "Kom gerust langs op de Herenstraat of op de markt en proef het verschil. Wilt u meer weten over hoe wij duurzaamheid en eerlijkheid combineren? Lees dan onze pagina over biologische en duurzame vis.",
+        ],
+      },
+    ],
+    gerelateerdeLinks: [
+      { label: "Bekijk onze gerookte vis", href: "/assortiment" },
+      { label: "Meer over biologische & duurzame vis", href: "/biologische-vis" },
+    ],
+    seoKeywords:
+      "echt gerookte vis, gerookte vis vs kunstmatige rooksmaak, ambachtelijk gerookte vis leiden, gerookte zalm leiden, echt gerookte vis kopen, rookaroma",
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {

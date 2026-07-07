@@ -18,6 +18,7 @@ const pages = [
   "/viskalender",
   "/viswinkel-leiden",
   "/frischer-fisch-leiden",
+  "/marktkraam-leiden",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

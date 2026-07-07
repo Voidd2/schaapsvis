@@ -70,6 +70,7 @@ export function Footer() {
                 { href: p("/"), label: "Home" },
                 { href: p("/assortiment"), label: nav("assortiment") },
                 { href: p("/biologische-vis"), label: nav("betereVis") },
+                { href: p("/marktkraam-leiden"), label: "Marktkramen" },
                 { href: p("/recepten"), label: nav("recepten") },
                 { href: p("/blog"), label: nav("blog") },
                 { href: p("/varlaks"), label: nav("varlaks") },
