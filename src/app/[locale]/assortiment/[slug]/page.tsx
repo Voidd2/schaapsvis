@@ -26,6 +26,41 @@ const BESCHIKBAAR_LABEL: Record<string, string> = {
   "op bestelling": "Op aanvraag",
 };
 
+// Relevante eigen blogs per product (voor "wat maak je ermee?").
+const ALGEMENE_BLOGS: { slug: string; label: string }[] = [
+  { slug: "verse-vis-bewaren-en-bereiden-tips", label: "Verse vis bewaren en bereiden" },
+  { slug: "viskalender-welke-vis-in-welk-seizoen", label: "Welke vis is wanneer het lekkerst?" },
+];
+function recepteBlogs(naam: string, categorie: Categorie): { slug: string; label: string }[] {
+  const n = naam.toLowerCase();
+  const out: { slug: string; label: string }[] = [];
+  if (n.includes("zalm")) {
+    out.push({ slug: "wilde-zalm-vs-kweekzalm-waarom-wij-varlaks-kiezen", label: "Wilde zalm vs. kweekzalm" });
+    out.push({ slug: "is-biologische-zalm-gezonder-omega-3", label: "Is biologische zalm gezonder?" });
+  }
+  if (n.includes("garnaal") || n.includes("garnalen")) {
+    out.push({ slug: "de-echte-hollandse-garnaal", label: "De echte Hollandse garnaal" });
+  }
+  if (n.includes("haring")) {
+    out.push({ slug: "hollandse-nieuwe-waarom-juni-haring-anders-smaakt", label: "Hollandse Nieuwe: het haringseizoen" });
+  }
+  if (categorie === "bereid" && (n.includes("kibbeling") || n.includes("lekkerbek"))) {
+    out.push({ slug: "kibbeling-vs-lekkerbek-het-verschil", label: "Kibbeling vs. lekkerbek" });
+  }
+  out.push(...ALGEMENE_BLOGS);
+  const seen = new Set<string>();
+  return out.filter((b) => (seen.has(b.slug) ? false : (seen.add(b.slug), true))).slice(0, 3);
+}
+// Externe receptsites — beste bovenaan (search op de productnaam).
+function externeRecepten(naam: string): { label: string; href: string }[] {
+  const q = encodeURIComponent(naam);
+  return [
+    { label: "Allerhande (Albert Heijn)", href: `https://www.ah.nl/allerhande/zoeken?query=${q}` },
+    { label: "Leuke Recepten", href: `https://www.leukerecepten.nl/?s=${q}` },
+    { label: "Meer recepten via Google", href: `https://www.google.com/search?q=${q}+recept` },
+  ];
+}
+
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }
@@ -76,6 +111,8 @@ export default async function ProductDetailPage({
   const viswijzer = getViswijzer(slug);
   const beschikbaar = product.beschikbaar ? BESCHIKBAAR_LABEL[product.beschikbaar] : undefined;
   const opAanvraag = product.beschikbaar !== "dagelijks";
+  const blogs = recepteBlogs(product.naam, product.categorie);
+  const extern = externeRecepten(product.naam);
 
   const productSchema = {
     "@context": "https://schema.org",
@@ -262,6 +299,11 @@ export default async function ProductDetailPage({
                   </span>
                 ))}
               </div>
+              <p className="text-xs leading-relaxed mt-3 opacity-60" style={{ color: "var(--charcoal)" }}>
+                Dit is de wettelijk verplichte EU-allergeneninformatie — alleen van belang als u ergens
+                allergisch voor bent. Zo is bijvoorbeeld sulfiet (E223) een heel gangbaar bewaarmiddel op
+                garnalen; voor de meeste mensen is alles gewoon te eten. Twijfelt u? Vraag het ons gerust.
+              </p>
             </div>
 
             {(seizoen || viswijzer) && (
@@ -278,6 +320,46 @@ export default async function ProductDetailPage({
                 )}
               </div>
             )}
+          </div>
+        </div>
+
+        {/* Cross-sell: wat maak je ermee? — eigen blogs + beste externe receptsites */}
+        <div className="max-w-4xl mx-auto px-6 mt-10 pt-8" style={{ borderTop: "1px solid var(--sand)" }}>
+          <h2 className="text-xl font-bold mb-2" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+            Wat maak je ermee?
+          </h2>
+          <p className="text-sm mb-5 opacity-70" style={{ color: "var(--charcoal)" }}>
+            Inspiratie voor {product.naam.toLowerCase()} — uit onze eigen blog en van de beste receptsites.
+          </p>
+          <div className="grid sm:grid-cols-2 gap-6">
+            <div>
+              <p className="text-xs uppercase tracking-widest font-semibold mb-3 opacity-50" style={{ color: "var(--charcoal)" }}>
+                Uit onze blog
+              </p>
+              <ul className="space-y-2">
+                {blogs.map((b) => (
+                  <li key={b.slug}>
+                    <Link href={`/${locale}/blog/${b.slug}`} className="text-sm underline underline-offset-2" style={{ color: "var(--navy)" }}>
+                      {b.label} →
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-widest font-semibold mb-3 opacity-50" style={{ color: "var(--charcoal)" }}>
+                Receptinspiratie elders
+              </p>
+              <ul className="space-y-2">
+                {extern.map((r) => (
+                  <li key={r.href}>
+                    <a href={r.href} target="_blank" rel="noopener noreferrer" className="text-sm underline underline-offset-2" style={{ color: "var(--seafoam)" }}>
+                      {r.label} ↗
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 

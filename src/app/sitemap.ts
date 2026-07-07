@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { blogPosts } from "@/lib/blog";
+import { products } from "@/lib/assortiment-data";
 
 const baseUrl = "https://www.schaapsvishandel.nl";
 const locales = ["nl", "en", "de"] as const;
@@ -35,6 +36,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: new Date(),
         changeFrequency: page === "" ? "weekly" : "monthly",
         priority: page === "" ? 1.0 : 0.8,
+        alternates: { languages },
+      });
+    }
+  }
+
+  // Productdetailpagina's (assortiment) — met hreflang-alternates
+  for (const p of products) {
+    const seg = `/assortiment/${p.slug}`;
+    const languages: Record<string, string> = {
+      nl: `${baseUrl}/nl${seg}`,
+      en: `${baseUrl}/en${seg}`,
+      de: `${baseUrl}/de${seg}`,
+      "x-default": `${baseUrl}/nl${seg}`,
+    };
+    for (const locale of locales) {
+      entries.push({
+        url: `${baseUrl}/${locale}${seg}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly",
+        priority: 0.7,
         alternates: { languages },
       });
     }

@@ -239,14 +239,60 @@ function ProductCard({ product }: { product: (typeof products)[number] }) {
   );
 }
 
+// ─── Dieet-/allergenenfilter + sortering ──────────────────────────────────────
+const DIEET_FILTERS: { key: string; label: string }[] = [
+  { key: "GLUTEN",       label: "Zonder gluten" },
+  { key: "SCHAALDIEREN", label: "Zonder schaaldieren" },
+  { key: "WEEKDIEREN",   label: "Zonder weekdieren" },
+  { key: "MELK",         label: "Zonder melk" },
+  { key: "EIEREN",       label: "Zonder ei" },
+  { key: "MOSTERD",      label: "Zonder mosterd" },
+  { key: "SOJA",         label: "Zonder soja" },
+];
+
+const AVAIL_RANK: Record<string, number> = {
+  dagelijks: 0,
+  seizoensgebonden: 1,
+  "op bestelling": 2,
+};
+
 // ─── Main export ──────────────────────────────────────────────────────────────
 export function AssortimentFilter() {
   const [activeTab, setActiveTab] = useState<"alle" | Categorie>("alle");
+  const [query, setQuery] = useState("");
+  const [excluded, setExcluded] = useState<Set<string>>(new Set());
+  const [sortMode, setSortMode] = useState<"aanbevolen" | "naam">("aanbevolen");
 
-  const filtered =
-    activeTab === "alle"
-      ? products
-      : products.filter((p) => p.categorie === activeTab);
+  function toggleExcl(key: string) {
+    setExcluded((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  }
+  function wisFilters() {
+    setExcluded(new Set());
+    setQuery("");
+  }
+
+  const q = query.trim().toLowerCase();
+  let list = activeTab === "alle" ? products : products.filter((p) => p.categorie === activeTab);
+  if (q) list = list.filter((p) => (p.naam + " " + p.desc).toLowerCase().includes(q));
+  if (excluded.size) {
+    list = list.filter(
+      (p) => !p.bevat.some((b) => {
+        const up = b.toUpperCase();
+        return Array.from(excluded).some((k) => up.includes(k));
+      })
+    );
+  }
+  const rank = (p: (typeof products)[number]) => AVAIL_RANK[p.beschikbaar ?? "dagelijks"] ?? 1;
+  const sorted = [...list].sort((a, b) =>
+    sortMode === "naam"
+      ? a.naam.localeCompare(b.naam)
+      : rank(a) - rank(b) || a.naam.localeCompare(b.naam)
+  );
 
   return (
     <>
@@ -295,17 +341,79 @@ export function AssortimentFilter() {
         </div>
       </div>
 
-      {/* Product grid */}
-      <div
-        className="py-10"
-        style={{ backgroundColor: "var(--cream)" }}
-      >
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {filtered.map((product) => (
-              <ProductCard key={product.slug} product={product} />
-            ))}
+      {/* Zoeken, sorteren & dieetfilter */}
+      <div className="border-b" style={{ backgroundColor: "white", borderColor: "rgba(0,0,0,0.09)" }}>
+        <div className="max-w-6xl mx-auto px-4 py-3 space-y-3">
+          <div className="flex flex-wrap items-center gap-3">
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Zoek in het assortiment…"
+              className="flex-1 min-w-[180px] border px-3 py-2 text-sm focus:outline-none"
+              style={{ borderColor: "var(--sand)", color: "var(--charcoal)" }}
+            />
+            <select
+              value={sortMode}
+              onChange={(e) => setSortMode(e.target.value as "aanbevolen" | "naam")}
+              className="border px-3 py-2 text-sm bg-white focus:outline-none"
+              style={{ borderColor: "var(--sand)", color: "var(--navy)" }}
+              aria-label="Sorteren"
+            >
+              <option value="aanbevolen">Aanbevolen (dagelijks eerst)</option>
+              <option value="naam">Naam A–Z</option>
+            </select>
           </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-xs opacity-50" style={{ color: "var(--charcoal)" }}>Dieet:</span>
+            {DIEET_FILTERS.map(({ key, label }) => {
+              const on = excluded.has(key);
+              return (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => toggleExcl(key)}
+                  aria-pressed={on}
+                  className="text-xs px-2.5 py-1 border transition-colors"
+                  style={{
+                    borderColor: on ? "var(--seafoam)" : "var(--sand)",
+                    backgroundColor: on ? "var(--seafoam)" : "white",
+                    color: on ? "white" : "var(--charcoal)",
+                  }}
+                >
+                  {label}
+                </button>
+              );
+            })}
+            {(excluded.size > 0 || q) && (
+              <button type="button" onClick={wisFilters} className="text-xs px-2.5 py-1 underline" style={{ color: "var(--salmon)" }}>
+                Wis filters
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Product grid */}
+      <div className="py-10" style={{ backgroundColor: "var(--cream)" }}>
+        <div className="max-w-6xl mx-auto px-4">
+          <p className="text-xs mb-4 opacity-55" style={{ color: "var(--charcoal)" }}>
+            {sorted.length} {sorted.length === 1 ? "product" : "producten"}
+          </p>
+          {sorted.length === 0 ? (
+            <p className="text-sm py-12 text-center opacity-70" style={{ color: "var(--charcoal)" }}>
+              Geen producten gevonden met deze filters.{" "}
+              <button type="button" onClick={wisFilters} className="underline" style={{ color: "var(--navy)" }}>
+                Wis filters
+              </button>
+            </p>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+              {sorted.map((product) => (
+                <ProductCard key={product.slug} product={product} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </>
