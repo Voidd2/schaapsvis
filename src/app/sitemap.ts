@@ -19,6 +19,7 @@ const pages = [
   "/viswinkel-leiden",
   "/frischer-fisch-leiden",
   "/marktkraam-leiden",
+  "/viswinkel-voorschoten",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

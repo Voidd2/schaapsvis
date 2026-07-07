@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { NewsletterSignup } from "@/components/shared/NewsletterSignup";
+import { SeizoensBanner } from "@/components/shared/SeizoensBanner";
 
 export async function generateMetadata({
   params,
@@ -522,11 +523,12 @@ export default async function HomePage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  await params;
+  const { locale } = await params;
   return (
     <>
       <JsonLd />
       <HeroSection />
+      <SeizoensBanner locale={locale} />
       <NewsletterSection />
       <AboutSection />
       <VarlaksHighlight />

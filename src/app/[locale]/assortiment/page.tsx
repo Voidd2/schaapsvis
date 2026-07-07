@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
+import { SeizoensBanner } from "@/components/shared/SeizoensBanner";
 import { AssortimentFilter } from "./AssortimentFilter";
 import { products, CATEGORIE_LABELS, type Categorie } from "@/lib/assortiment-data";
 
@@ -193,7 +194,7 @@ export default async function AssortimentPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  await params;
+  const { locale } = await params;
 
   const productSchema = {
     "@context": "https://schema.org",
@@ -221,6 +222,7 @@ export default async function AssortimentPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
       />
+      <SeizoensBanner locale={locale} />
       <AssortimentContent />
     </>
   );
