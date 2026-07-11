@@ -674,7 +674,7 @@ function BiologischeVisContent() {
           className="text-sm mb-8 max-w-md mx-auto leading-relaxed"
           style={{ color: "rgba(246,250,253,0.7)" }}
         >
-          Herenstraat 48, Leiden · Maandag t/m zaterdag · 071 514 9802
+          Herenstraat 48, Leiden · Dinsdag t/m zaterdag · 071 514 9802
         </p>
         <Link
           href={`/${locale}/bezoek-ons`}

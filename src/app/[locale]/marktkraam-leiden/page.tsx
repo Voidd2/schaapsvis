@@ -64,7 +64,7 @@ const faq = [
   },
   {
     q: "Welke dagen staat Schaap's op de markt?",
-    a: "Woensdag (Vismarkt Leiden), zaterdag (Aalmarkt Leiden) en vrijdag (bij Hoogvliet in Voorschoten). De winkel aan de Herenstraat 48 is van maandag tot en met zaterdag open.",
+    a: "Woensdag (Vismarkt Leiden), zaterdag (Aalmarkt Leiden) en vrijdag (bij Hoogvliet in Voorschoten). De winkel aan de Herenstraat 48 is van dinsdag tot en met zaterdag open.",
   },
   {
     q: "Waar vind ik de viskraam op zaterdag in Leiden?",
@@ -166,7 +166,7 @@ export default async function MarktkraamPage({
         <div className="max-w-5xl mx-auto mt-8 p-6" style={{ backgroundColor: "var(--sand)", borderLeft: "4px solid var(--navy)" }}>
           <p className="text-sm leading-relaxed" style={{ color: "var(--charcoal)" }}>
             <strong>Liever naar de winkel?</strong> Onze vaste viswinkel vindt u op{" "}
-            <strong>Herenstraat 48</strong> in Leiden, maandag tot en met zaterdag.{" "}
+            <strong>Herenstraat 48</strong> in Leiden, dinsdag tot en met zaterdag.{" "}
             <Link href={`/${locale}/bezoek-ons`} className="underline" style={{ color: "var(--navy)" }}>
               Bekijk alle locaties &amp; openingstijden →
             </Link>

@@ -308,63 +308,65 @@ function AssortimentGrid() {
   );
 }
 
-function StarIcon() {
-  return (
+const googleReviews = [
+  { name: "Haikedaike", stars: 5, text: "Beste kibbeling van heel Leiden! Ruime porties, lekker krokant, lekker veel saus. Zoals het hoort! Gewoon echt waar voor je geld!", date: "9 maanden geleden" },
+  { name: "Giel Leupen", stars: 5, text: "De Hollandse Nieuwe haring 2026 was geweldig. Heerlijk zacht en zeker niet te zout.", date: "2 weken geleden" },
+  { name: "Ole M", stars: 5, text: "Lekkerste vis, goeie prijzen en heel lieve mensen", date: "5 maanden geleden" },
+  { name: "Dima Chuk", stars: 5, text: "Small but very nice place! Kibbeling and Dutch shrimps in bread highly recommended to try!", date: "11 maanden geleden" },
+  { name: "Martijn Holtkamp", stars: 5, text: "Naar aanleiding van de goede reviews bij Schaap een visschotel besteld. We kregen een mooie schotel met veel verse en smakelijke vissoorten. Prijs en kwaliteit prima in orde, we hebben er van genoten!", date: "2 jaar geleden" },
+  { name: "Martin Slootweg", stars: 4, text: "Lekkere vis en fantastische sushi laten maken.", date: "2 maanden geleden" },
+];
+
+function StarIcon({ filled = true }: { filled?: boolean }) {
+  return filled ? (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style={{ color: "var(--gold)" }}>
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </svg>
+  ) : (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ color: "var(--gold)", opacity: 0.3 }}>
       <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
     </svg>
   );
 }
 
 function ReviewsSection() {
-  const t = useTranslations("reviewsSection");
-
   return (
     <section style={{ backgroundColor: "var(--sand)" }} className="py-20">
-      <div className="max-w-3xl mx-auto px-4 text-center">
-        <h2
-          className="text-3xl font-bold mb-10"
-          style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
-        >
-          {t("title")}
+      <div className="max-w-5xl mx-auto px-4 text-center">
+        <h2 className="text-3xl font-bold mb-4" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+          Wat klanten zeggen
         </h2>
-        <div className="flex items-center justify-center gap-3 mb-8">
+        <div className="flex items-center justify-center gap-3 mb-12">
           <div className="flex gap-0.5">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <StarIcon key={i} />
-            ))}
+            {Array.from({ length: 5 }).map((_, i) => <StarIcon key={i} filled={true} />)}
           </div>
-          <span className="font-bold text-lg" style={{ color: "var(--navy)" }}>4.8</span>
-          <span className="text-sm" style={{ color: "var(--charcoal)", opacity: 0.6 }}>op Google Reviews</span>
+          <span className="font-bold text-lg" style={{ color: "var(--navy)" }}>4.6</span>
+          <span className="text-sm" style={{ color: "var(--charcoal)", opacity: 0.6 }}>op Google Reviews (115 beoordelingen)</span>
         </div>
-        <div className="bg-white p-8 md:p-10 mb-8">
-          <div className="flex justify-center gap-0.5 mb-5">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <StarIcon key={i} />
-            ))}
-          </div>
-          <p
-            className="text-lg leading-relaxed italic mb-5"
-            style={{ color: "var(--charcoal)", opacity: 0.85 }}
-          >
-            &ldquo;Bij het ophalen zei hij altijd: &lsquo;een doos kibbeling voor
-            het weeshuis!&rsquo; Ik moest er elke keer om lachen.&rdquo;
-          </p>
-          <p
-            className="text-xs font-semibold tracking-wide uppercase"
-            style={{ color: "var(--navy)" }}
-          >
-            Ria Verburg — uit ons 80-jarig jubileumboek
-          </p>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+          {googleReviews.map((review) => (
+            <div key={review.name} className="bg-white p-6 text-left flex flex-col">
+              <div className="flex gap-0.5 mb-3">
+                {Array.from({ length: 5 }).map((_, i) => <StarIcon key={i} filled={i < review.stars} />)}
+              </div>
+              <p className="text-sm leading-relaxed italic mb-4 flex-1" style={{ color: "var(--charcoal)", opacity: 0.85 }}>
+                &ldquo;{review.text}&rdquo;
+              </p>
+              <div>
+                <p className="text-xs font-semibold tracking-wide uppercase mb-0.5" style={{ color: "var(--navy)" }}>{review.name}</p>
+                <p className="text-xs" style={{ color: "var(--charcoal)", opacity: 0.5 }}>{review.date}</p>
+              </div>
+            </div>
+          ))}
         </div>
         <a
-          href="https://www.google.com/maps/search/?api=1&query=Schaap%27s+Vishandel+Herenstraat+48+Leiden"
+          href="https://www.google.com/maps/place/Schaap%27s+Vishandel/@52.1517798,4.4891644,17z/data=!4m6!3m5!1s0x47c5c68b327c5b31:0xb364be6e52553f5!8m2!3d52.1517798!4d4.4891644!16s%2Fg%2F1ptw4b069"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block text-sm font-semibold px-6 py-3 transition-opacity hover:opacity-85 text-white"
           style={{ backgroundColor: "var(--navy)" }}
         >
-          Lees onze reviews op Google →
+          Lees alle 115 reviews op Google &rarr;
         </a>
       </div>
     </section>
@@ -385,7 +387,7 @@ const locationItems = [
     name: "Viswinkel Herenstraat",
     address: "Herenstraat 48, 2313 AL Leiden",
     tel: "071 514 9802",
-    schedule: "Maandag t/m zaterdag",
+    schedule: "Dinsdag t/m zaterdag",
     mapsHref: "https://maps.google.com/?q=Herenstraat+48,+2313+AL+Leiden",
   },
   {

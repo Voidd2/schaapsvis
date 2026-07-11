@@ -9,8 +9,8 @@ interface OpeningHour {
 // ← AANPASSEN naar de exacte openingstijden van Aldert
 export const openingHours: Record<Location, OpeningHour[]> = {
   winkel: [
-    { days: [1, 2, 3, 4, 5], open: "08:30", close: "17:30" }, // ma-vr ← AANPASSEN
-    { days: [6], open: "08:00", close: "16:00" }, // za ← AANPASSEN
+    { days: [2, 3, 4, 5], open: "09:00", close: "18:00" }, // di-vr (maandag gesloten) — bron: Google Bedrijfsprofiel
+    { days: [6], open: "09:00", close: "17:00" }, // za
   ],
   markt: [
     { days: [3], open: "09:00", close: "17:00" }, // wo ← AANPASSEN

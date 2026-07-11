@@ -100,7 +100,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm opacity-75">
               <li>
                 <span className="opacity-60 text-xs block">Winkel</span>
-                Maandag t/m zaterdag
+                Dinsdag t/m zaterdag
               </li>
               <li>
                 <span className="opacity-60 text-xs block">

@@ -45,22 +45,37 @@ export function JsonLd() {
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: 52.1595,
-      longitude: 4.494,
+      latitude: 52.1517798,
+      longitude: 4.4891644,
     },
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "08:30",
-        closes: "17:30",
+        dayOfWeek: ["Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "09:00",
+        closes: "18:00",
       },
       {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: ["Saturday"],
-        opens: "08:00",
-        closes: "16:00",
+        opens: "09:00",
+        closes: "17:00",
       },
+    ],
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.6",
+      reviewCount: "115",
+      bestRating: "5",
+      worstRating: "1",
+    },
+    review: [
+      { "@type": "Review", author: { "@type": "Person", name: "Haikedaike" }, reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" }, reviewBody: "Beste kibbeling van heel Leiden! Ruime porties, lekker krokant, lekker veel saus. Zoals het hoort! Gewoon echt waar voor je geld!" },
+      { "@type": "Review", author: { "@type": "Person", name: "Giel Leupen" }, reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" }, reviewBody: "De Hollandse Nieuwe haring 2026 was geweldig. Heerlijk zacht en zeker niet te zout." },
+      { "@type": "Review", author: { "@type": "Person", name: "Ole M" }, reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" }, reviewBody: "Lekkerste vis, goeie prijzen en heel lieve mensen." },
+      { "@type": "Review", author: { "@type": "Person", name: "Dima Chuk" }, reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" }, reviewBody: "Small but very nice place! Kibbeling and Dutch shrimps in bread highly recommended to try!" },
+      { "@type": "Review", author: { "@type": "Person", name: "Martijn Holtkamp" }, reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" }, reviewBody: "Naar aanleiding van de goede reviews bij Schaap een visschotel besteld. We kregen een mooie schotel met veel verse en smakelijke vissoorten. Prijs en kwaliteit prima in orde, we hebben er van genoten!" },
+      { "@type": "Review", author: { "@type": "Person", name: "Martin Slootweg" }, reviewRating: { "@type": "Rating", ratingValue: "4", bestRating: "5" }, reviewBody: "Lekkere vis en fantastische sushi laten maken." },
     ],
     location: [
       {
@@ -159,8 +174,8 @@ export function JsonLd() {
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: 52.1595,
-      longitude: 4.494,
+      latitude: 52.1517798,
+      longitude: 4.4891644,
     },
     priceRange: "€€",
   };
