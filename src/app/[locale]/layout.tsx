@@ -98,7 +98,10 @@ export default async function LocaleLayout({
                 style={{ backgroundColor: "var(--gold)", color: "var(--navy-dark)" }}
               >
                 🔒 Besloten preview — jij bent ingelogd. Bezoekers zien de
-                &ldquo;binnenkort online&rdquo;-pagina; het wachtwoord staat aan.
+                &ldquo;binnenkort online&rdquo;-pagina.{" "}
+                <a href="/api/logout" className="underline font-bold">
+                  Uitloggen &amp; het slot testen
+                </a>
               </div>
             )}
             <Header />
