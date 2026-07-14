@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { NewsletterSignup } from "@/components/shared/NewsletterSignup";
 import { SeizoensBanner } from "@/components/shared/SeizoensBanner";
+import { googleReviews, googleRating, googleReviewCount, googleMapsUrl } from "@/lib/reviews";
 
 export async function generateMetadata({
   params,
@@ -308,15 +309,6 @@ function AssortimentGrid() {
   );
 }
 
-const googleReviews = [
-  { name: "Haikedaike", stars: 5, text: "Beste kibbeling van heel Leiden! Ruime porties, lekker krokant, lekker veel saus. Zoals het hoort! Gewoon echt waar voor je geld!", date: "9 maanden geleden" },
-  { name: "Giel Leupen", stars: 5, text: "De Hollandse Nieuwe haring 2026 was geweldig. Heerlijk zacht en zeker niet te zout.", date: "2 weken geleden" },
-  { name: "Ole M", stars: 5, text: "Lekkerste vis, goeie prijzen en heel lieve mensen", date: "5 maanden geleden" },
-  { name: "Dima Chuk", stars: 5, text: "Small but very nice place! Kibbeling and Dutch shrimps in bread highly recommended to try!", date: "11 maanden geleden" },
-  { name: "Martijn Holtkamp", stars: 5, text: "Naar aanleiding van de goede reviews bij Schaap een visschotel besteld. We kregen een mooie schotel met veel verse en smakelijke vissoorten. Prijs en kwaliteit prima in orde, we hebben er van genoten!", date: "2 jaar geleden" },
-  { name: "Martin Slootweg", stars: 4, text: "Lekkere vis en fantastische sushi laten maken.", date: "2 maanden geleden" },
-];
-
 function StarIcon({ filled = true }: { filled?: boolean }) {
   return filled ? (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style={{ color: "var(--gold)" }}>
@@ -340,8 +332,8 @@ function ReviewsSection() {
           <div className="flex gap-0.5">
             {Array.from({ length: 5 }).map((_, i) => <StarIcon key={i} filled={true} />)}
           </div>
-          <span className="font-bold text-lg" style={{ color: "var(--navy)" }}>4.6</span>
-          <span className="text-sm" style={{ color: "var(--charcoal)", opacity: 0.6 }}>op Google Reviews (115 beoordelingen)</span>
+          <span className="font-bold text-lg" style={{ color: "var(--navy)" }}>{googleRating}</span>
+          <span className="text-sm" style={{ color: "var(--charcoal)", opacity: 0.6 }}>op Google Reviews ({googleReviewCount} beoordelingen)</span>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
           {googleReviews.map((review) => (
@@ -360,13 +352,13 @@ function ReviewsSection() {
           ))}
         </div>
         <a
-          href="https://www.google.com/maps/place/Schaap%27s+Vishandel/@52.1517798,4.4891644,17z/data=!4m6!3m5!1s0x47c5c68b327c5b31:0xb364be6e52553f5!8m2!3d52.1517798!4d4.4891644!16s%2Fg%2F1ptw4b069"
+          href={googleMapsUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block text-sm font-semibold px-6 py-3 transition-opacity hover:opacity-85 text-white"
           style={{ backgroundColor: "var(--navy)" }}
         >
-          Lees alle 115 reviews op Google &rarr;
+          Lees alle {googleReviewCount} reviews op Google &rarr;
         </a>
       </div>
     </section>
