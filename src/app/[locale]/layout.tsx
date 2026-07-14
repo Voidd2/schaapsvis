@@ -7,6 +7,8 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
 import { SmoothScrollProvider } from "@/components/shared/SmoothScrollProvider";
+import { cookies } from "next/headers";
+import { ACCESS_COOKIE, ACCESS_TOKEN } from "@/lib/siteAccess";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.schaapsvishandel.nl"),
@@ -65,6 +67,14 @@ export default async function LocaleLayout({
 
   const messages = await getMessages();
 
+  // Besloten preview: alleen zichtbaar voor wie is ingelogd terwijl de
+  // onderhoudsmodus (wachtwoordslot) nog aanstaat. Zo verwar je je eigen
+  // weergave nooit met wat het publiek ziet (die krijgt de "binnenkort"-pagina).
+  const cookieStore = await cookies();
+  const isPreview =
+    process.env.MAINTENANCE_MODE !== "off" &&
+    cookieStore.get(ACCESS_COOKIE)?.value === ACCESS_TOKEN;
+
   return (
     <html lang={locale}>
       <head>
@@ -82,6 +92,15 @@ export default async function LocaleLayout({
       <body className="antialiased">
         <NextIntlClientProvider messages={messages}>
           <SmoothScrollProvider>
+            {isPreview && (
+              <div
+                className="w-full text-center px-4 py-2 text-xs font-semibold"
+                style={{ backgroundColor: "var(--gold)", color: "var(--navy-dark)" }}
+              >
+                🔒 Besloten preview — jij bent ingelogd. Bezoekers zien de
+                &ldquo;binnenkort online&rdquo;-pagina; het wachtwoord staat aan.
+              </div>
+            )}
             <Header />
             <main>{children}</main>
             <Footer />
