@@ -72,6 +72,7 @@ export function Footer() {
                 { href: p("/biologische-vis"), label: nav("betereVis") },
                 { href: p("/marktkraam-leiden"), label: "Marktkramen" },
                 { href: p("/viswinkel-voorschoten"), label: "Voorschoten" },
+                { href: p("/too-good-to-go"), label: "Too Good To Go" },
                 { href: p("/recepten"), label: nav("recepten") },
                 { href: p("/blog"), label: nav("blog") },
                 { href: p("/varlaks"), label: nav("varlaks") },

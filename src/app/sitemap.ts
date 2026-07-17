@@ -20,6 +20,7 @@ const pages = [
   "/frischer-fisch-leiden",
   "/marktkraam-leiden",
   "/viswinkel-voorschoten",
+  "/too-good-to-go",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
