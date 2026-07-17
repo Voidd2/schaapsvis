@@ -9,6 +9,7 @@ import {
   CATEGORIE_KLEUR,
   type Categorie,
 } from "@/lib/assortiment-data";
+import { matchesQuery, searchScore } from "@/lib/search";
 
 // ─── Category tabs ────────────────────────────────────────────────────────────
 const TABS: { id: "alle" | Categorie; label: string }[] = [
@@ -276,9 +277,14 @@ export function AssortimentFilter() {
     setQuery("");
   }
 
-  const q = query.trim().toLowerCase();
+  const q = query.trim();
+  const velden = (p: (typeof products)[number]) => ({
+    naam: p.naam,
+    desc: p.desc,
+    categorie: CATEGORIE_LABELS[p.categorie],
+  });
   let list = activeTab === "alle" ? products : products.filter((p) => p.categorie === activeTab);
-  if (q) list = list.filter((p) => (p.naam + " " + p.desc).toLowerCase().includes(q));
+  if (q) list = list.filter((p) => matchesQuery(velden(p), q));
   if (excluded.size) {
     list = list.filter(
       (p) => !p.bevat.some((b) => {
@@ -288,11 +294,16 @@ export function AssortimentFilter() {
     );
   }
   const rank = (p: (typeof products)[number]) => AVAIL_RANK[p.beschikbaar ?? "dagelijks"] ?? 1;
-  const sorted = [...list].sort((a, b) =>
-    sortMode === "naam"
+  const sorted = [...list].sort((a, b) => {
+    // Bij een zoekopdracht sorteren we op relevantie (tenzij naam A–Z is gekozen).
+    if (q && sortMode === "aanbevolen") {
+      const diff = searchScore(velden(b), q) - searchScore(velden(a), q);
+      if (diff !== 0) return diff;
+    }
+    return sortMode === "naam"
       ? a.naam.localeCompare(b.naam)
-      : rank(a) - rank(b) || a.naam.localeCompare(b.naam)
-  );
+      : rank(a) - rank(b) || a.naam.localeCompare(b.naam);
+  });
 
   return (
     <>

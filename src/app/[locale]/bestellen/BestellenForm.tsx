@@ -8,6 +8,7 @@ import {
   eenheidVoor,
   type Categorie,
 } from "@/lib/assortiment-data";
+import { searchScore } from "@/lib/search";
 import { Search, X, Plus, ShoppingBag, ChevronDown, Info } from "lucide-react";
 
 // TODO(eigenaar): vervang door uw echte Formspree-ID — gratis aan te maken op formspree.io
@@ -54,14 +55,18 @@ const AFHAALDAGEN = [
 ] as const;
 
 function searchProducts(query: string): FormProduct[] {
-  if (query.length < 1) return [];
-  const q = query.toLowerCase();
-  return FORM_CATALOG.filter((p) => {
-    if (p.naam.toLowerCase().includes(q)) return true;
-    if (p.beschrijving.toLowerCase().includes(q)) return true;
-    if (CATEGORIE_LABELS[p.categorie].toLowerCase().includes(q)) return true;
-    return false;
-  }).slice(0, 8);
+  if (query.trim().length < 1) return [];
+  return FORM_CATALOG.map((p) => ({
+    p,
+    score: searchScore(
+      { naam: p.naam, desc: p.beschrijving, categorie: CATEGORIE_LABELS[p.categorie] },
+      query
+    ),
+  }))
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 8)
+    .map((x) => x.p);
 }
 
 function OpAanvraagBadge() {
