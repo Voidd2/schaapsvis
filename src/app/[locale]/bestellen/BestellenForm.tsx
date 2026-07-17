@@ -43,7 +43,23 @@ const FORM_CATALOG: FormProduct[] = products.map((p) => {
 type OrderItem = {
   product: FormProduct;
   hoeveelheid: string;
+  snijwijze: string;
+  aantalMoten: string;
 };
+
+// Verwerking / snijwijze — alleen zinvol bij verse vis. Verschijnt pas nadat een
+// product aan de bestelling is toegevoegd (stapsgewijs, om het formulier rustig te houden).
+const SNIJ_MOTEN = "In moten / stukken";
+
+function snijOpties(p: FormProduct): string[] | null {
+  if (p.categorie !== "verse-vis") return null;
+  const n = p.naam.toLowerCase();
+  // Al gefileerd/gesneden aangeboden → beperkte keuze.
+  if (/filet|haas|moot|snippers|tongen|wangen/.test(n)) {
+    return ["Zoals aangeboden", "In stukken gesneden", "Anders — zie opmerking"];
+  }
+  return ["Heel — schoongemaakt", "Gefileerd (ontgraat)", SNIJ_MOTEN, "Anders — zie opmerking"];
+}
 
 const AFHAALDAGEN = [
   "Maandag — winkel Herenstraat",
@@ -108,7 +124,7 @@ export function BestellenForm() {
       setBestelling((prev) =>
         prev.find((i) => i.product.id === product.id)
           ? prev
-          : [...prev, { product, hoeveelheid: "" }]
+          : [...prev, { product, hoeveelheid: "", snijwijze: "", aantalMoten: "" }]
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -133,7 +149,7 @@ export function BestellenForm() {
   function addToOrder(product: FormProduct) {
     setBestelling((prev) => {
       if (prev.find((i) => i.product.id === product.id)) return prev;
-      return [...prev, { product, hoeveelheid: "" }];
+      return [...prev, { product, hoeveelheid: "", snijwijze: "", aantalMoten: "" }];
     });
     setSearchQuery("");
     setSuggestions([]);
@@ -141,9 +157,9 @@ export function BestellenForm() {
     inputRef.current?.focus();
   }
 
-  function updateHoeveelheid(id: string, hoeveelheid: string) {
+  function updateItem(id: string, patch: Partial<Omit<OrderItem, "product">>) {
     setBestelling((prev) =>
-      prev.map((i) => (i.product.id === id ? { ...i, hoeveelheid } : i))
+      prev.map((i) => (i.product.id === id ? { ...i, ...patch } : i))
     );
   }
 
@@ -162,12 +178,15 @@ export function BestellenForm() {
 
     const regels = bestelling
       .filter((i) => i.hoeveelheid.trim())
-      .map(
-        (i) =>
-          `• ${i.product.naam}: ${i.hoeveelheid} (${i.product.eenheid})${
-            i.product.opAanvraag ? " [OP AANVRAAG — inplannen]" : ""
-          }`
-      )
+      .map((i) => {
+        const snij = i.snijwijze ? ` — ${i.snijwijze}` : "";
+        const moten =
+          i.snijwijze === SNIJ_MOTEN && i.aantalMoten.trim()
+            ? ` (${i.aantalMoten.trim()} moten)`
+            : "";
+        const aanvraag = i.product.opAanvraag ? " [OP AANVRAAG — inplannen]" : "";
+        return `• ${i.product.naam}: ${i.hoeveelheid} (${i.product.eenheid})${snij}${moten}${aanvraag}`;
+      })
       .join("\n");
 
     try {
@@ -457,40 +476,88 @@ export function BestellenForm() {
                     Uw bestelling ({bestelling.length} {bestelling.length === 1 ? "product" : "producten"})
                   </h3>
                 </div>
-                {bestelling.map((item) => (
-                  <div
-                    key={item.product.id}
-                    className="flex items-center gap-3 py-3 border-b"
-                    style={{ borderColor: "var(--sand)" }}
-                  >
-                    <div className="flex-1 min-w-0">
-                      <p className="font-medium text-sm truncate" style={{ color: "var(--navy)" }}>
-                        {item.product.naam}
-                        {item.product.opAanvraag && <OpAanvraagBadge />}
-                      </p>
-                      <p className="text-xs opacity-50" style={{ color: "var(--charcoal)" }}>
-                        {item.product.eenheid}
-                      </p>
-                    </div>
-                    <input
-                      type="text"
-                      value={item.hoeveelheid}
-                      onChange={(e) =>
-                        updateHoeveelheid(item.product.id, e.target.value)
-                      }
-                      placeholder="Hoeveel?"
-                      className="w-28 border px-3 py-2 text-sm text-center focus:outline-none"
+                {bestelling.map((item) => {
+                  const opties = snijOpties(item.product);
+                  const toonMoten = item.snijwijze === SNIJ_MOTEN;
+                  return (
+                    <div
+                      key={item.product.id}
+                      className="py-3 border-b"
                       style={{ borderColor: "var(--sand)" }}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => removeItem(item.product.id)}
-                      className="p-1 opacity-30 hover:opacity-70 transition-opacity"
                     >
-                      <X size={16} />
-                    </button>
-                  </div>
-                ))}
+                      <div className="flex items-center gap-3">
+                        <div className="flex-1 min-w-0">
+                          <p className="font-medium text-sm truncate" style={{ color: "var(--navy)" }}>
+                            {item.product.naam}
+                            {item.product.opAanvraag && <OpAanvraagBadge />}
+                          </p>
+                          <p className="text-xs opacity-50" style={{ color: "var(--charcoal)" }}>
+                            {item.product.eenheid}
+                          </p>
+                        </div>
+                        <input
+                          type="text"
+                          value={item.hoeveelheid}
+                          onChange={(e) =>
+                            updateItem(item.product.id, { hoeveelheid: e.target.value })
+                          }
+                          placeholder="Hoeveel?"
+                          className="w-28 border px-3 py-2 text-sm text-center focus:outline-none"
+                          style={{ borderColor: "var(--sand)" }}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => removeItem(item.product.id)}
+                          className="p-1 opacity-30 hover:opacity-70 transition-opacity"
+                        >
+                          <X size={16} />
+                        </button>
+                      </div>
+
+                      {/* Stap: hoe wilt u de vis verwerkt hebben? (alleen verse vis) */}
+                      {opties && (
+                        <div className="mt-2.5 flex flex-wrap items-center gap-2">
+                          <span className="text-xs opacity-55" style={{ color: "var(--charcoal)" }}>
+                            Verwerking:
+                          </span>
+                          <select
+                            value={item.snijwijze}
+                            onChange={(e) =>
+                              updateItem(item.product.id, {
+                                snijwijze: e.target.value,
+                                ...(e.target.value === SNIJ_MOTEN ? {} : { aantalMoten: "" }),
+                              })
+                            }
+                            className="border px-2.5 py-1.5 text-xs bg-white focus:outline-none"
+                            style={{ borderColor: "var(--sand)", color: "var(--navy)" }}
+                            aria-label={`Verwerking voor ${item.product.naam}`}
+                          >
+                            <option value="">Geen voorkeur</option>
+                            {opties.map((o) => (
+                              <option key={o} value={o}>
+                                {o}
+                              </option>
+                            ))}
+                          </select>
+                          {toonMoten && (
+                            <input
+                              type="text"
+                              inputMode="numeric"
+                              value={item.aantalMoten}
+                              onChange={(e) =>
+                                updateItem(item.product.id, { aantalMoten: e.target.value })
+                              }
+                              placeholder="Aantal moten"
+                              className="w-32 border px-2.5 py-1.5 text-xs focus:outline-none"
+                              style={{ borderColor: "var(--sand)" }}
+                              aria-label={`Aantal moten voor ${item.product.naam}`}
+                            />
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
 
                 {heeftOpAanvraag && (
                   <div
