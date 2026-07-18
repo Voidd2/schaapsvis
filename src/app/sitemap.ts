@@ -22,6 +22,7 @@ const pages = [
   "/bezoek-ons",
   "/contact",
   "/bestellen",
+  "/visschalen",
   "/viskalender",
   "/viswinkel-leiden",
   "/marktkraam-leiden",

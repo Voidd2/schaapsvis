@@ -513,6 +513,58 @@ function LocationsSection() {
   );
 }
 
+function VisschalenFeature() {
+  const locale = useLocale();
+
+  return (
+    <section style={{ backgroundColor: "var(--sand)" }} className="py-20 px-4">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <span
+            className="inline-block text-xs tracking-widest uppercase font-semibold px-3 py-1 mb-5"
+            style={{ backgroundColor: "var(--salmon)", color: "white" }}
+          >
+            Borrel · Feest · Kerst
+          </span>
+          <h2
+            className="text-4xl font-bold mb-4 leading-tight"
+            style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+          >
+            Een visschaal maakt elk feest af
+          </h2>
+          <p className="text-base leading-relaxed mb-6" style={{ color: "var(--charcoal)", opacity: 0.8 }}>
+            Van een gezellige borrelplank tot een indrukwekkende feestschotel — wij stellen
+            een verse visschaal op maat voor u samen. Gerookte zalm, garnalen, oesters en
+            salades, helemaal naar uw wens en budget.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href={`/${locale}/visschalen`}
+              className="inline-block px-6 py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
+              style={{ backgroundColor: "var(--salmon)" }}
+            >
+              Bekijk visschalen &rarr;
+            </Link>
+            <Link
+              href={`/${locale}/bestellen?product=feestschotel`}
+              className="inline-block px-6 py-3 text-sm font-semibold border transition-opacity hover:opacity-80"
+              style={{ borderColor: "var(--navy)", color: "var(--navy)" }}
+            >
+              Direct bestellen
+            </Link>
+          </div>
+        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/scene-schaaldier.svg"
+          alt="Feestelijke visschaal met zeevruchten van Schaap's Vishandel Leiden"
+          className="w-full aspect-square object-cover"
+        />
+      </div>
+    </section>
+  );
+}
+
 export default async function HomePage({
   params,
 }: {
@@ -528,6 +580,7 @@ export default async function HomePage({
       <Reveal><AboutSection /></Reveal>
       <Reveal><VarlaksHighlight /></Reveal>
       <Reveal><AssortimentGrid /></Reveal>
+      <Reveal><VisschalenFeature /></Reveal>
       <Reveal><ReviewsSection /></Reveal>
       <Reveal><DuurzaamheidStrip /></Reveal>
       <Reveal><LocationsSection /></Reveal>

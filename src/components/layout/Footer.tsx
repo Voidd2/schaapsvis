@@ -69,6 +69,7 @@ export function Footer() {
               {[
                 { href: p("/"), label: "Home" },
                 { href: p("/assortiment"), label: nav("assortiment") },
+                { href: p("/visschalen"), label: "Visschalen & feest" },
                 { href: p("/biologische-vis"), label: nav("betereVis") },
                 { href: p("/marktkraam-leiden"), label: "Marktkramen" },
                 { href: p("/viswinkel-voorschoten"), label: "Voorschoten" },
