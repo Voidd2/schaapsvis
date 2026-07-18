@@ -70,6 +70,13 @@ const AFHAALDAGEN = [
   "Zaterdag — winkel Herenstraat of markt Leiden",
 ] as const;
 
+// Onthoud de mandje-inhoud lokaal, zodat een refresh of terugnavigeren de
+// bestelling niet wist (minder afhakers).
+const STORAGE_KEY = "sv_bestelling_v1";
+
+// Populaire producten voor toevoegen met één tik — scheelt zoeken.
+const POPULAIR = ["kibbeling", "haring", "hollandse-garnalen", "varlaks-zalm", "lekkerbek", "feestschotel"];
+
 function searchProducts(query: string): FormProduct[] {
   if (query.trim().length < 1) return [];
   return FORM_CATALOG.map((p) => ({
@@ -114,6 +121,7 @@ export function BestellenForm() {
   });
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const firstSave = useRef(true);
 
   // Pre-fill product uit ?product= query (bijv. vanaf assortiment of detailpagina)
   useEffect(() => {
@@ -129,6 +137,61 @@ export function BestellenForm() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Opgeslagen mandje terugladen (samenvoegen met eventuele ?product-prefill).
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const saved: { id: string; hoeveelheid: string; snijwijze?: string; aantalMoten?: string }[] =
+        JSON.parse(raw);
+      const rehydrated = saved
+        .map((s) => {
+          const product = FORM_CATALOG.find((p) => p.id === s.id);
+          return product
+            ? {
+                product,
+                hoeveelheid: s.hoeveelheid ?? "",
+                snijwijze: s.snijwijze ?? "",
+                aantalMoten: s.aantalMoten ?? "",
+              }
+            : null;
+        })
+        .filter(Boolean) as OrderItem[];
+      if (rehydrated.length) {
+        setBestelling((prev) => {
+          const ids = new Set(prev.map((i) => i.product.id));
+          return [...prev, ...rehydrated.filter((r) => !ids.has(r.product.id))];
+        });
+      }
+    } catch {
+      /* localStorage niet beschikbaar — negeren */
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Mandje opslaan bij elke wijziging (de eerste, lege render slaan we over).
+  useEffect(() => {
+    if (firstSave.current) {
+      firstSave.current = false;
+      return;
+    }
+    try {
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(
+          bestelling.map((i) => ({
+            id: i.product.id,
+            hoeveelheid: i.hoeveelheid,
+            snijwijze: i.snijwijze,
+            aantalMoten: i.aantalMoten,
+          }))
+        )
+      );
+    } catch {
+      /* negeren */
+    }
+  }, [bestelling]);
 
   useEffect(() => {
     const results = searchProducts(searchQuery);
@@ -207,6 +270,13 @@ export function BestellenForm() {
           _subject: `Bestelling van ${klant.naam} — ${klant.ophaaldag}`,
         }),
       });
+      if (res.ok) {
+        try {
+          localStorage.removeItem(STORAGE_KEY);
+        } catch {
+          /* negeren */
+        }
+      }
       setStatus(res.ok ? "success" : "error");
     } catch {
       setStatus("error");
@@ -400,6 +470,37 @@ export function BestellenForm() {
                   })}
                 </div>
               )}
+            </div>
+
+            {/* Snel toevoegen — populaire producten (1 tik) */}
+            <div className="mb-4">
+              <p className="text-xs opacity-50 mb-2" style={{ color: "var(--charcoal)" }}>
+                Populair — voeg toe met één tik:
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {POPULAIR.map((slug) => {
+                  const product = FORM_CATALOG.find((p) => p.id === slug);
+                  if (!product) return null;
+                  const alIn = bestelling.some((i) => i.product.id === product.id);
+                  return (
+                    <button
+                      key={slug}
+                      type="button"
+                      disabled={alIn}
+                      onClick={() => addToOrder(product)}
+                      className="text-sm px-3 py-1.5 border transition-colors hover:opacity-80 disabled:cursor-default"
+                      style={{
+                        borderColor: alIn ? "var(--seafoam)" : "var(--sand)",
+                        backgroundColor: alIn ? "rgba(58,128,96,0.08)" : "white",
+                        color: alIn ? "var(--seafoam)" : "var(--navy)",
+                      }}
+                    >
+                      {alIn ? "✓ " : "+ "}
+                      {product.naam}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
             {/* Browse by category toggle */}
