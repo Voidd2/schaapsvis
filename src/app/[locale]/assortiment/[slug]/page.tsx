@@ -11,6 +11,7 @@ import {
   CATEGORIE_KLEUR,
   type Categorie,
 } from "@/lib/assortiment-data";
+import { getPrijs, formatPrijs } from "@/lib/prijzen";
 
 const SCENE: Record<Categorie, string> = {
   "verse-vis": "/images/scene-vis.svg",
@@ -111,6 +112,7 @@ export default async function ProductDetailPage({
   const viswijzer = getViswijzer(slug);
   const beschikbaar = product.beschikbaar ? BESCHIKBAAR_LABEL[product.beschikbaar] : undefined;
   const opAanvraag = product.beschikbaar !== "dagelijks";
+  const prijs = getPrijs(slug);
   const blogs = recepteBlogs(product.naam, product.categorie);
   const extern = externeRecepten(product.naam);
 
@@ -123,6 +125,20 @@ export default async function ProductDetailPage({
     brand: { "@type": "Brand", name: "Schaap's Vishandel" },
     image: `https://www.schaapsvishandel.nl${SCENE[product.categorie]}`,
     ...(product.badge ? { award: product.badge } : {}),
+    ...(prijs
+      ? {
+          offers: {
+            "@type": "Offer",
+            priceCurrency: "EUR",
+            price: prijs.euro.toFixed(2),
+            availability: opAanvraag
+              ? "https://schema.org/PreOrder"
+              : "https://schema.org/InStock",
+            url: `https://www.schaapsvishandel.nl/${locale}/bestellen?product=${slug}`,
+            seller: { "@type": "Organization", name: "Schaap's Vishandel" },
+          },
+        }
+      : {}),
     ...(voeding
       ? {
           nutrition: {
@@ -210,13 +226,27 @@ export default async function ProductDetailPage({
               {product.desc}
             </p>
             {beschikbaar && (
-              <p className="text-sm font-semibold mb-5" style={{ color: opAanvraag ? "var(--gold)" : "var(--seafoam)" }}>
+              <p className="text-sm font-semibold mb-4" style={{ color: opAanvraag ? "var(--gold)" : "var(--seafoam)" }}>
                 {opAanvraag ? "◎ " : "✓ "}{beschikbaar}
                 {opAanvraag && (
                   <span className="font-normal opacity-70" style={{ color: "var(--charcoal)" }}>
                     {" "}— vraag ons of we het voor uw ophaaldatum kunnen regelen.
                   </span>
                 )}
+              </p>
+            )}
+            {prijs ? (
+              <div className="mb-5">
+                <span className="text-2xl font-bold" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+                  {formatPrijs(prijs)}
+                </span>
+                <span className="block text-xs mt-1 opacity-55" style={{ color: "var(--charcoal)" }}>
+                  Richtprijs — vis is dagvers, de dagprijs kan afwijken. Wij bevestigen bij uw bestelling.
+                </span>
+              </div>
+            ) : (
+              <p className="text-sm mb-5 opacity-60" style={{ color: "var(--charcoal)" }}>
+                Prijs op aanvraag — wij bellen u terug met de dagprijs.
               </p>
             )}
             <div className="flex flex-wrap gap-3">
