@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
+import { RevealGroup } from "@/components/shared/RevealGroup";
 import { MapPin, Phone, Clock } from "lucide-react";
 import { JsonLd } from "@/components/JsonLd";
 
@@ -39,6 +40,7 @@ function ContactContent() {
         </p>
       </section>
 
+      <RevealGroup>
       <section style={{ backgroundColor: "var(--cream)" }} className="py-16">
         <div className="max-w-4xl mx-auto px-4 grid md:grid-cols-2 gap-12">
           {/* Form */}
@@ -142,6 +144,7 @@ function ContactContent() {
           </div>
         </div>
       </section>
+      </RevealGroup>
     </>
   );
 }

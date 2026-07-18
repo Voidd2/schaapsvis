@@ -1,6 +1,7 @@
 import { useTranslations, useLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
+import { RevealGroup } from "@/components/shared/RevealGroup";
 import { JsonLd } from "@/components/JsonLd";
 
 export async function generateMetadata({
@@ -99,6 +100,7 @@ function VerhaalContent() {
       </section>
 
       {/* Intro */}
+      <RevealGroup>
       <section style={{ backgroundColor: "var(--sand)" }} className="py-12">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <p
@@ -179,6 +181,7 @@ function VerhaalContent() {
           </cite>
         </div>
       </section>
+      </RevealGroup>
     </>
   );
 }

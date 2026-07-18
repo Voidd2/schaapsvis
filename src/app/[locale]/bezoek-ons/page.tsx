@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
+import { RevealGroup } from "@/components/shared/RevealGroup";
 import { MapPin, Phone, Clock } from "lucide-react";
 import { JsonLd } from "@/components/JsonLd";
 
@@ -89,6 +90,7 @@ function BezoekContent() {
       </section>
 
       {/* Locations */}
+      <RevealGroup>
       <section style={{ backgroundColor: "var(--cream)" }} className="py-16">
         <div className="max-w-5xl mx-auto px-4 space-y-20">
           {locations.map(
@@ -185,6 +187,7 @@ function BezoekContent() {
           071 514 9802
         </a>
       </section>
+      </RevealGroup>
     </>
   );
 }

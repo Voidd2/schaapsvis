@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
+import { RevealGroup } from "@/components/shared/RevealGroup";
 import { googleRating, googleReviewCount, googleMapsUrl } from "@/lib/reviews";
 
 export async function generateMetadata({
@@ -109,6 +110,7 @@ export default async function TooGoodToGoPage({
         </div>
       </section>
 
+      <RevealGroup>
       {/* Waarom */}
       <section style={{ backgroundColor: "var(--cream)" }} className="py-14 px-6">
         <div className="max-w-3xl mx-auto text-center">
@@ -216,6 +218,7 @@ export default async function TooGoodToGoPage({
           </Link>
         </div>
       </section>
+      </RevealGroup>
     </>
   );
 }

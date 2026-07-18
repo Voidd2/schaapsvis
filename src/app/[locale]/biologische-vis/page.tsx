@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
+import { RevealGroup } from "@/components/shared/RevealGroup";
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 
@@ -315,6 +316,7 @@ function BiologischeVisContent() {
       </section>
 
       {/* Intro + money-page links */}
+      <RevealGroup>
       <section style={{ backgroundColor: "var(--navy)" }} className="py-14 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-base leading-relaxed mb-8" style={{ color: "rgba(246,250,253,0.85)" }}>
@@ -684,6 +686,7 @@ function BiologischeVisContent() {
           {t("ctaButton")} &rarr;
         </Link>
       </section>
+      </RevealGroup>
     </>
   );
 }
