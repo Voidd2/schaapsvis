@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { NewsletterSignup } from "@/components/shared/NewsletterSignup";
 import { SeizoensBanner } from "@/components/shared/SeizoensBanner";
+import { Reveal } from "@/components/shared/Reveal";
 import { googleReviews, googleRating, googleReviewCount, googleMapsUrl } from "@/lib/reviews";
 
 export async function generateMetadata({
@@ -523,13 +524,13 @@ export default async function HomePage({
       <JsonLd />
       <HeroSection />
       <SeizoensBanner locale={locale} />
-      <NewsletterSection />
-      <AboutSection />
-      <VarlaksHighlight />
-      <AssortimentGrid />
-      <ReviewsSection />
-      <DuurzaamheidStrip />
-      <LocationsSection />
+      <Reveal><NewsletterSection /></Reveal>
+      <Reveal><AboutSection /></Reveal>
+      <Reveal><VarlaksHighlight /></Reveal>
+      <Reveal><AssortimentGrid /></Reveal>
+      <Reveal><ReviewsSection /></Reveal>
+      <Reveal><DuurzaamheidStrip /></Reveal>
+      <Reveal><LocationsSection /></Reveal>
     </>
   );
 }
