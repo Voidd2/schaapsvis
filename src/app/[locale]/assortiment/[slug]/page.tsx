@@ -113,6 +113,8 @@ export default async function ProductDetailPage({
   const beschikbaar = product.beschikbaar ? BESCHIKBAAR_LABEL[product.beschikbaar] : undefined;
   const opAanvraag = product.beschikbaar !== "dagelijks";
   const prijs = getPrijs(slug);
+  // Upsell naar biologische Varlaks-zalm op elke zalmpagina behalve Varlaks zelf.
+  const isZalm = !product.highlight && /zalm|lax/.test(slug);
   const blogs = recepteBlogs(product.naam, product.categorie);
   const extern = externeRecepten(product.naam);
 
@@ -267,6 +269,24 @@ export default async function ProductDetailPage({
                 Vooruit bestellen →
               </Link>
             </div>
+            {isZalm && (
+              <Link
+                href={`/${locale}/varlaks`}
+                className="block mt-6 p-4 group"
+                style={{ backgroundColor: "rgba(46,139,110,0.08)", borderLeft: "4px solid var(--seafoam)" }}
+              >
+                <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: "var(--seafoam)" }}>
+                  Biologisch alternatief
+                </p>
+                <p className="text-sm font-semibold group-hover:underline" style={{ color: "var(--navy)" }}>
+                  Liever biologische zalm? Ontdek Varlaks →
+                </p>
+                <p className="text-xs mt-1 leading-relaxed" style={{ color: "var(--charcoal)", opacity: 0.72 }}>
+                  Onze Varlaks-zalm groeit antibioticavrij bij familiekwekers boven de poolcirkel —
+                  puurder van smaak en volledig te herleiden.
+                </p>
+              </Link>
+            )}
           </div>
         </div>
       </section>

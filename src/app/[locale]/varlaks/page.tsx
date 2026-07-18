@@ -283,13 +283,24 @@ function VarlaksContent() {
           Herenstraat, woensdag en zaterdag op de markt in Leiden, en vrijdag
           bij Hoogvliet in Voorschoten.
         </p>
-        <Link
-          href={`/${locale}/bestellen`}
-          className="inline-block text-white px-8 py-4 tracking-wide transition-opacity hover:opacity-90"
-          style={{ backgroundColor: "var(--salmon)" }}
-        >
-          Vooruit bestellen →
-        </Link>
+        <div className="flex flex-wrap gap-3 justify-center">
+          <Link
+            href={`/${locale}/bestellen?product=varlaks-zalm`}
+            className="inline-block text-white px-8 py-4 tracking-wide font-medium transition-opacity hover:opacity-90"
+            style={{ backgroundColor: "var(--salmon)" }}
+          >
+            Varlaks bestellen →
+          </Link>
+          <a
+            href="https://wa.me/31715149802?text=Hallo%20Schaap's%20Vishandel,%20ik%20wil%20graag%20Varlaks%20biologische%20zalm%20bestellen."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-8 py-4 tracking-wide font-medium border transition-opacity hover:opacity-80"
+            style={{ borderColor: "rgba(246,250,253,0.4)", color: "var(--cream)" }}
+          >
+            Bestel via WhatsApp
+          </a>
+        </div>
       </section>
     </>
   );
