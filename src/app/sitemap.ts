@@ -5,6 +5,13 @@ import { products } from "@/lib/assortiment-data";
 const baseUrl = "https://www.schaapsvishandel.nl";
 const locales = ["nl", "en", "de"] as const;
 
+// Vaste laatste-wijzigingsdatum i.p.v. de requesttijd, zodat lastmod bruikbaar
+// blijft voor crawlers (anders lijkt élke pagina bij elk request 'net gewijzigd').
+const LAST_UPDATE = new Date("2026-07-17");
+
+// Meertalige pagina's (nl/en/de). Let op: /frischer-fisch-leiden staat hier
+// bewust NIET tussen — die Duitstalige landingspagina is canoniek alléén /de/
+// (zie de aparte entry onderaan).
 const pages = [
   "",
   "/ons-verhaal",
@@ -17,7 +24,6 @@ const pages = [
   "/bestellen",
   "/viskalender",
   "/viswinkel-leiden",
-  "/frischer-fisch-leiden",
   "/marktkraam-leiden",
   "/viswinkel-voorschoten",
   "/too-good-to-go",
@@ -36,7 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const locale of locales) {
       entries.push({
         url: `${baseUrl}/${locale}${page}`,
-        lastModified: new Date(),
+        lastModified: LAST_UPDATE,
         changeFrequency: page === "" ? "weekly" : "monthly",
         priority: page === "" ? 1.0 : 0.8,
         alternates: { languages },
@@ -56,13 +62,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const locale of locales) {
       entries.push({
         url: `${baseUrl}/${locale}${seg}`,
-        lastModified: new Date(),
+        lastModified: LAST_UPDATE,
         changeFrequency: "monthly",
         priority: 0.7,
         alternates: { languages },
       });
     }
   }
+
+  // Duitstalige landingspagina — alleen onder /de/ (zelfverwijzende hreflang).
+  entries.push({
+    url: `${baseUrl}/de/frischer-fisch-leiden`,
+    lastModified: LAST_UPDATE,
+    changeFrequency: "monthly",
+    priority: 0.7,
+    alternates: {
+      languages: {
+        de: `${baseUrl}/de/frischer-fisch-leiden`,
+        nl: `${baseUrl}/nl/viswinkel-leiden`,
+        "x-default": `${baseUrl}/de/frischer-fisch-leiden`,
+      },
+    },
+  });
 
   // Blogartikelen
   for (const post of blogPosts) {

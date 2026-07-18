@@ -1,22 +1,20 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { permanentRedirect } from "next/navigation";
 import { JsonLd } from "@/components/JsonLd";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
+export async function generateMetadata(): Promise<Metadata> {
+  // Deze landingspagina is Duitstalig en hoort canoniek onder /de/ thuis.
   return {
     title: "Frischer Fisch in Leiden — Fischgeschäft seit 1938 | Schaap's Vishandel",
     description:
       "Entdecken Sie echten holländischen Fisch in Leiden: Kibbeling, Matjes/Hollandse Nieuwe, frische Nordseekrabben und Biolachs. Fischgeschäft Herenstraat 48 + Wochenmarkt Mi + Sa. Seit 1938.",
     alternates: {
-      canonical: `/${locale}/frischer-fisch-leiden`,
+      canonical: "/de/frischer-fisch-leiden",
       languages: {
         de: "/de/frischer-fisch-leiden",
-        "x-default": "/nl/viswinkel-leiden",
+        nl: "/nl/viswinkel-leiden",
+        "x-default": "/de/frischer-fisch-leiden",
       },
     },
     openGraph: {
@@ -76,6 +74,12 @@ export default async function FrischerFischLeidenPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+
+  // Duitstalige content: alleen canoniek onder /de/. Andere talen 308-redirecten
+  // naar de Duitse URL, zodat html lang="de" klopt en er geen dubbele content ontstaat.
+  if (locale !== "de") {
+    permanentRedirect("/de/frischer-fisch-leiden");
+  }
 
   return (
     <>

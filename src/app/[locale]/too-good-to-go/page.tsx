@@ -84,8 +84,8 @@ export default async function TooGoodToGoPage({
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
-      {/* Hero */}
-      <section className="py-16 px-6 text-center" style={{ backgroundColor: "#1a9e53" }}>
+      {/* Hero — merkblauw met Too Good To Go-groen als accent */}
+      <section className="py-16 px-6 text-center" style={{ backgroundColor: "var(--navy)" }}>
         <p className="text-xs tracking-[0.25em] uppercase mb-4 font-semibold" style={{ color: "rgba(255,255,255,0.85)" }}>
           Tegen voedselverspilling · Leiden
         </p>
@@ -101,8 +101,8 @@ export default async function TooGoodToGoPage({
             href="https://toogoodtogo.com/nl/consumer"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block px-6 py-3 text-sm font-bold border-2 border-white text-white transition-opacity hover:opacity-90"
-            style={{ borderRadius: "6px" }}
+            className="inline-block px-6 py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
+            style={{ backgroundColor: "#1a9e53", borderRadius: "6px" }}
           >
             Download de app &rarr;
           </a>

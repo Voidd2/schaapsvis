@@ -1,6 +1,16 @@
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
+  // Tijdens de onderhouds-/previewfase (slot staat aan): weer alle crawlers en
+  // publiceer de sitemap NIET. Zo ligt de volledige site-structuur (producten,
+  // categorieën, artikelen) niet al open voor concurrenten vóór de live-gang.
+  const maintenance = process.env.MAINTENANCE_MODE !== "off";
+  if (maintenance) {
+    return {
+      rules: [{ userAgent: "*", disallow: "/" }],
+    };
+  }
+
   return {
     rules: [
       {

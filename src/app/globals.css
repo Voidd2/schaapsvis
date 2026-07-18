@@ -24,10 +24,18 @@ html {
   }
 }
 
+/* Donkere basiskleur achter de pagina. Elke pagina zet zelf zijn eigen
+   sectie-achtergronden; deze donkere bodem voorkomt dat er tijdens de
+   Lenis smooth-scroll kortstondig wit doorheen flitst tussen secties
+   (vooral op de filmische donkere pagina's zoals home en de viswijzer). */
+html {
+  background-color: var(--navy-dark);
+}
+
 body {
   font-family: "Lato", "Helvetica Neue", Helvetica, sans-serif;
   color: var(--charcoal);
-  background-color: var(--cream);
+  background-color: var(--navy-dark);
 }
 
 h1,
