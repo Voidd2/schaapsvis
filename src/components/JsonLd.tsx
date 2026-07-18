@@ -92,7 +92,7 @@ export function JsonLd() {
           {
             "@type": "OpeningHoursSpecification",
             dayOfWeek: ["Wednesday", "Saturday"],
-            opens: "09:00",
+            opens: "08:30",
             closes: "17:00",
           },
         ],
@@ -111,7 +111,7 @@ export function JsonLd() {
             "@type": "OpeningHoursSpecification",
             dayOfWeek: ["Friday"],
             opens: "08:30",
-            closes: "16:00",
+            closes: "17:30",
           },
         ],
       },

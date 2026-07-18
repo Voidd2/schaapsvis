@@ -13,11 +13,11 @@ export const openingHours: Record<Location, OpeningHour[]> = {
     { days: [6], open: "09:00", close: "17:00" }, // za
   ],
   markt: [
-    { days: [3], open: "09:00", close: "17:00" }, // wo ← AANPASSEN
-    { days: [6], open: "09:00", close: "17:00" }, // za ← AANPASSEN
+    { days: [3], open: "08:30", close: "17:00" }, // wo — bevestigd door eigenaar
+    { days: [6], open: "08:30", close: "17:00" }, // za — bevestigd door eigenaar
   ],
   voorschoten: [
-    { days: [5], open: "08:30", close: "16:00" }, // vrij ← AANPASSEN
+    { days: [5], open: "08:30", close: "17:30" }, // vrij (Hoogvliet) — bevestigd door eigenaar
   ],
 };
 

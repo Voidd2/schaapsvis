@@ -54,7 +54,7 @@ const faqSchemaDE = {
       name: "Wann und wo ist der Fischmarkt in Leiden?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Unser Marktstand steht jeden Mittwoch und Samstag am Nieuwe Rijn im Stadtzentrum von Leiden, von 09:00 bis 17:00 Uhr. Das Geschäft auf der Herenstraat 48 ist Montag bis Samstag von 08:30 bis 17:30 geöffnet.",
+        text: "Unser Marktstand steht jeden Mittwoch und Samstag am Nieuwe Rijn im Stadtzentrum von Leiden, von 08:30 bis 17:00 Uhr. Das Geschäft auf der Herenstraat 48 ist dienstags bis freitags von 09:00 bis 18:00 und samstags von 09:00 bis 17:00 geöffnet (montags geschlossen).",
       },
     },
     {
@@ -242,13 +242,13 @@ export default async function FrischerFischLeidenPage({
               {
                 name: "Laden — Herenstraat",
                 addr: "Herenstraat 48, 2313 AL Leiden",
-                hours: "Mo–Sa 08:30–17:30 Uhr",
+                hours: "Di–Fr 09:00–18:00 · Sa 09:00–17:00 Uhr",
                 maps: "https://maps.google.com/?q=Herenstraat+48+Leiden",
               },
               {
                 name: "Wochenmarkt Leiden",
                 addr: "Nieuwe Rijn (Stadtzentrum)",
-                hours: "Mi + Sa 09:00–17:00 Uhr",
+                hours: "Mi + Sa 08:30–17:00 Uhr",
                 maps: "https://maps.google.com/?q=Nieuwe+Rijn+Leiden",
               },
               {
