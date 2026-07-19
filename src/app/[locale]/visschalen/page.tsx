@@ -29,19 +29,19 @@ export async function generateMetadata({
 }
 
 const stappen = [
-  ["1", "Vertel wat u wilt", "Vul het offerteformulier in of bel ons. Beschrijf de gelegenheid, het aantal personen en uw voorkeuren."],
-  ["2", "U ontvangt een offerte", "Wij stellen een voorstel op maat samen en sturen u vrijblijvend de prijs. Specifieke wensen? Dan passen we de offerte aan."],
+  ["1", "Stuur ons een appje", "App of bel ons met de gelegenheid, het aantal personen en uw wensen. Een voorbeeld uitkiezen mag, maar hoeft niet."],
+  ["2", "Wij maken een prijs op maat", "Elke schaal is maatwerk. Op basis van de grootte, het aantal en uw wensen — bijvoorbeeld extra Hollandse garnalen — laten we u vrijblijvend een prijs weten."],
   ["3", "Vers opgehaald", "Akkoord? Dan maken we uw schaal vers en mooi opgemaakt klaar. U haalt hem op aan de Herenstraat 48."],
 ];
 
 const faq = [
   {
     q: "Hoe werkt het bestellen van een visschaal?",
-    a: "U vertelt ons wat u zoekt via het offerteformulier of telefonisch. Wij stellen een voorstel op maat samen en sturen u een vrijblijvende offerte. Na uw akkoord maken we de schaal vers voor u klaar.",
+    a: "Het snelst gaat via WhatsApp: u appt ons wat u zoekt — de gelegenheid, het aantal personen en uw wensen. Wij laten u vrijblijvend een prijs op maat weten. Na uw akkoord maken we de schaal vers voor u klaar. Liever niet appen? Bel ons of laat uw gegevens achter via het formulier.",
   },
   {
     q: "Werken jullie met vaste prijzen?",
-    a: "We hebben standaardschalen als vertrekpunt, maar omdat vis een dagvers, marktgevoelig product is en u vaak specifieke wensen heeft, werken we met een offerte op maat. Zo weet u vooraf precies waar u aan toe bent, ook als u een bepaald aantal van iets wilt.",
+    a: "Nee, elke schaal is maatwerk. De prijs hangt af van de grootte, het aantal schalen en uw wensen — wilt u bijvoorbeeld extra Hollandse garnalen, dan verwerken we dat in de prijs. Daarom werken we met een prijs op maat in plaats van vaste bedragen.",
   },
   {
     q: "Hoe ver van tevoren moet ik aanvragen?",
@@ -97,8 +97,9 @@ export default async function VisschalenPage({
           Visschalen &amp; feestschotels op maat
         </h1>
         <p className="max-w-2xl mx-auto leading-relaxed mb-8" style={{ color: "rgba(246,250,253,0.85)" }}>
-          Geen kant-en-klare bestelling, maar een schaal precies zoals u hem wilt. U vertelt ons
-          de gelegenheid, het aantal personen en uw voorkeuren — wij maken er een offerte op maat van.
+          Geen kant-en-klare bestelling, maar een schaal precies zoals u hem wilt. We werken niet met
+          vaste prijzen — u stuurt ons een appje met wat u zoekt (gelegenheid, aantal personen, wensen)
+          en wij laten u een prijs op maat weten.
         </p>
         <div className="flex flex-wrap gap-3 justify-center">
           <a
@@ -106,7 +107,7 @@ export default async function VisschalenPage({
             className="inline-block px-7 py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
             style={{ backgroundColor: "var(--salmon)", borderRadius: "6px" }}
           >
-            Vraag een offerte aan &rarr;
+            Vraag uw schaal aan &rarr;
           </a>
           <a
             href="#voorbeelden"
