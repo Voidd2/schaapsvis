@@ -45,6 +45,7 @@ const SCHALEN: Schaal[] = [
     serves: "4–8 personen",
     desc: "Gerookte zalm, makreel, garnalen, haring en Hollandse hapjes. De klassieker voor een gezellige borrel.",
     gelegenheden: ["Borrel", "Verjaardag"],
+    foto: "/images/scene-gerookt.svg", // EIGENAAR: vervang door echte foto
   },
   {
     id: "feestschotel",
@@ -52,6 +53,7 @@ const SCHALEN: Schaal[] = [
     serves: "6–12 personen",
     desc: "Een royale selectie verse én gerookte vis, schaal- en schelpdieren, salades en garnering.",
     gelegenheden: ["Verjaardag", "Bruiloft", "Zakelijk"],
+    foto: "/images/scene-schaaldier.svg", // EIGENAAR: vervang door echte foto
   },
   {
     id: "zeevruchten",
@@ -59,6 +61,7 @@ const SCHALEN: Schaal[] = [
     serves: "op maat",
     desc: "Oesters, coquilles, gamba's, langoustines, krab en kreeft — een plateau fruits de mer op zijn Hollands.",
     gelegenheden: ["Bruiloft", "Zakelijk", "Kerst"],
+    foto: "/images/scene-schaaldier.svg", // EIGENAAR: vervang door echte foto
   },
   {
     id: "kerstschaal",
@@ -66,6 +69,7 @@ const SCHALEN: Schaal[] = [
     serves: "op maat",
     desc: "Feestelijke schaal voor de kerstdagen — gerookte zalm, garnalen, zeevruchten en meer, mooi opgemaakt.",
     gelegenheden: ["Kerst", "Oud & Nieuw"],
+    foto: "/images/scene-zalm.svg", // EIGENAAR: vervang door echte foto
   },
   {
     id: "haringschaal",
@@ -73,6 +77,7 @@ const SCHALEN: Schaal[] = [
     serves: "4–10 personen",
     desc: "Hollandse Nieuwe, haringhapjes, kibbeling en garnituur — echt Hollands genieten.",
     gelegenheden: ["Borrel", "Zakelijk"],
+    foto: "/images/scene-haring.svg", // EIGENAAR: vervang door echte foto
   },
 ];
 
