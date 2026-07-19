@@ -115,6 +115,8 @@ export default async function ProductDetailPage({
   const prijs = getPrijs(slug);
   // Upsell naar biologische Varlaks-zalm op elke zalmpagina behalve Varlaks zelf.
   const isZalm = !product.highlight && /zalm|lax/.test(slug);
+  // Visschaal/feestschotel gaan via de offerte-flow i.p.v. het bestelformulier.
+  const isSchaal = slug === "visschaal" || slug === "feestschotel";
   const blogs = recepteBlogs(product.naam, product.categorie);
   const extern = externeRecepten(product.naam);
 
@@ -262,11 +264,11 @@ export default async function ProductDetailPage({
                 Bestel via WhatsApp
               </a>
               <Link
-                href={`/${locale}/bestellen?product=${slug}`}
+                href={isSchaal ? `/${locale}/visschalen#offerte` : `/${locale}/bestellen?product=${slug}`}
                 className="inline-flex items-center px-5 py-3 text-sm font-semibold border transition-opacity hover:opacity-80"
                 style={{ borderColor: "var(--navy)", color: "var(--navy)" }}
               >
-                Vooruit bestellen →
+                {isSchaal ? "Offerte aanvragen →" : "Vooruit bestellen →"}
               </Link>
             </div>
             {isZalm && (

@@ -1,7 +1,7 @@
-import Link from "next/link";
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { RevealGroup } from "@/components/shared/RevealGroup";
+import { VisschaalAanvraag } from "./VisschaalAanvraag";
 
 export async function generateMetadata({
   params,
@@ -9,9 +9,9 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const title = "Visschalen & Feestschotels Leiden | Schaap's Vishandel — borrel & feest";
+  const title = "Visschalen & Feestschotels Leiden | Op maat + offerte — Schaap's Vis";
   const description =
-    "Laat een visschaal of feestschotel samenstellen bij Schaap's Vis Leiden: gerookte vis, garnalen, zeevruchten en salades. Perfect voor borrel, verjaardag, kerst of feest. Op bestelling, samenstelling in overleg.";
+    "Visschaal of feestschotel nodig in Leiden? Van borrelplank tot kerstschaal — u vertelt wat u wilt, wij maken een offerte op maat. Gerookte vis, garnalen, zeevruchten en salades. Op bestelling.";
   return {
     title,
     description,
@@ -28,56 +28,32 @@ export async function generateMetadata({
   };
 }
 
-const schalen = [
-  {
-    naam: "Borrel- & visplank",
-    voor: "4–8 personen",
-    tekst:
-      "Een royale plank met gerookte zalm, makreel, gerookte heilbot, garnalen, haring en Hollandse hapjes. De klassieker voor een gezellige borrel.",
-    accent: "var(--gold)",
-  },
-  {
-    naam: "Feestelijke visschotel",
-    voor: "6–12 personen",
-    tekst:
-      "Onze indrukwekkende schaal met een selectie van het beste dat we in huis hebben — verse én gerookte vis, schaaldieren, salades en garnering. Een showstopper op tafel.",
-    accent: "var(--seafoam)",
-  },
-  {
-    naam: "Luxe zeevruchtenschaal",
-    voor: "op maat",
-    tekst:
-      "Oesters, coquilles, gamba's, langoustines, krab en kreeft — een plateau fruits de mer op zijn Hollands. Voor wie echt wil uitpakken.",
-    accent: "var(--salmon)",
-  },
-];
-
 const stappen = [
-  ["1", "Neem contact op", "Bel, WhatsApp of vul het bestelformulier in. Vertel voor hoeveel personen en wat u lekker vindt."],
-  ["2", "Wij stellen het samen", "We denken met u mee over inhoud en budget, en bevestigen de prijs. Even vooruit plannen loont — bestel liefst een paar dagen van tevoren."],
-  ["3", "Vers opgehaald", "U haalt uw schaal vers en mooi opgemaakt op in de winkel aan de Herenstraat 48, klaar voor uw gelegenheid."],
+  ["1", "Vertel wat u wilt", "Vul het offerteformulier in of bel ons. Beschrijf de gelegenheid, het aantal personen en uw voorkeuren."],
+  ["2", "U ontvangt een offerte", "Wij stellen een voorstel op maat samen en sturen u vrijblijvend de prijs. Specifieke wensen? Dan passen we de offerte aan."],
+  ["3", "Vers opgehaald", "Akkoord? Dan maken we uw schaal vers en mooi opgemaakt klaar. U haalt hem op aan de Herenstraat 48."],
 ];
 
 const faq = [
   {
-    q: "Hoeveel personen kan een visschaal bedienen?",
-    a: "Van een borrelplank voor 4 personen tot een feestschotel voor een hele verjaardag of receptie — we stellen elke schaal op maat samen. Vertel ons het aantal personen en de gelegenheid, dan adviseren we de juiste maat.",
+    q: "Hoe werkt het bestellen van een visschaal?",
+    a: "U vertelt ons wat u zoekt via het offerteformulier of telefonisch. Wij stellen een voorstel op maat samen en sturen u een vrijblijvende offerte. Na uw akkoord maken we de schaal vers voor u klaar.",
   },
   {
-    q: "Hoe ver van tevoren moet ik een feestschotel bestellen?",
-    a: "Voor een mooie schaal plannen we graag een paar dagen vooruit, zodat we alles vers en op tijd voor u kunnen samenstellen. Rond feestdagen (Kerst, Oud & Nieuw) adviseren we om ruim op tijd te bestellen — die weken zijn druk.",
+    q: "Werken jullie met vaste prijzen?",
+    a: "We hebben standaardschalen als vertrekpunt, maar omdat vis een dagvers, marktgevoelig product is en u vaak specifieke wensen heeft, werken we met een offerte op maat. Zo weet u vooraf precies waar u aan toe bent, ook als u een bepaald aantal van iets wilt.",
   },
   {
-    q: "Wat kost een visschaal of feestschotel?",
-    a: "De prijs hangt af van de inhoud en het aantal personen. We stellen de schaal samen binnen uw budget en bevestigen de prijs altijd vooraf — geen verrassingen achteraf.",
+    q: "Hoe ver van tevoren moet ik aanvragen?",
+    a: "Voor een mooie schaal plannen we graag een paar dagen vooruit. Rond feestdagen (Kerst, Oud & Nieuw) adviseren we ruim op tijd aan te vragen — die weken zijn druk.",
   },
   {
-    q: "Kan ik zelf de inhoud bepalen?",
-    a: "Zeker. Houdt iemand niet van schaaldieren, of wilt u juist extra gerookte zalm of oesters? Alles kan in overleg. Geef uw wensen door en wij passen de schaal aan.",
+    q: "Kan ik rekening laten houden met allergieën?",
+    a: "Zeker. Geef uw allergieën of dieetwensen door in de aanvraag — bijvoorbeeld zonder schaaldieren of een deel zonder rauwe vis — en wij houden daar rekening mee.",
   },
   {
-    q: "Kan een visschaal ook zonder rauwe vis of schaaldieren?",
-    a: "Ja. We kunnen een schaal samenstellen met alleen gerookte en bereide vis, of rekening houden met allergieën. Laat het ons weten bij uw bestelling.",
+    q: "Kan ik zelf bepalen wat erop komt?",
+    a: "Ja, dat is juist de bedoeling. Beschrijf in uw eigen woorden wat u lekker vindt en voor welke gelegenheid, dan stellen wij de schaal daarop af.",
   },
 ];
 
@@ -115,81 +91,43 @@ export default async function VisschalenPage({
       {/* Hero */}
       <section className="py-16 px-6 text-center" style={{ backgroundColor: "var(--navy)" }}>
         <p className="text-xs tracking-[0.25em] uppercase mb-4 font-semibold" style={{ color: "rgba(246,250,253,0.6)" }}>
-          Borrel · Verjaardag · Feest · Kerst
+          Borrel · Verjaardag · Bruiloft · Kerst
         </p>
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white" style={{ fontFamily: "Playfair Display, serif" }}>
-          Visschalen &amp; feestschotels
+          Visschalen &amp; feestschotels op maat
         </h1>
         <p className="max-w-2xl mx-auto leading-relaxed mb-8" style={{ color: "rgba(246,250,253,0.85)" }}>
-          Maak van uw borrel of feest iets bijzonders. Wij stellen een verse visschaal
-          voor u samen — van een gezellige borrelplank tot een indrukwekkende
-          feestschotel. Op bestelling, helemaal naar uw wens.
+          Geen kant-en-klare bestelling, maar een schaal precies zoals u hem wilt. U vertelt ons
+          de gelegenheid, het aantal personen en uw voorkeuren — wij maken er een offerte op maat van.
         </p>
         <div className="flex flex-wrap gap-3 justify-center">
-          <Link
-            href={`/${locale}/bestellen?product=feestschotel`}
+          <a
+            href="#offerte"
             className="inline-block px-7 py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
             style={{ backgroundColor: "var(--salmon)", borderRadius: "6px" }}
           >
-            Visschaal bestellen &rarr;
-          </Link>
+            Vraag een offerte aan &rarr;
+          </a>
           <a
-            href="https://wa.me/31715149802?text=Hallo%20Schaap's%20Vishandel,%20ik%20wil%20graag%20een%20visschaal%20of%20feestschotel%20bestellen."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-7 py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
-            style={{ backgroundColor: "#25D366", borderRadius: "6px" }}
+            href="#voorbeelden"
+            className="inline-block px-7 py-3.5 text-sm font-bold transition-opacity hover:opacity-80"
+            style={{ border: "1px solid rgba(246,250,253,0.4)", color: "var(--cream)", borderRadius: "6px" }}
           >
-            Overleg via WhatsApp
+            Bekijk voorbeelden
           </a>
         </div>
       </section>
 
       <RevealGroup>
-      {/* Schalen */}
-      <section style={{ backgroundColor: "var(--cream)" }} className="py-16 px-6">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-3" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
-            Kies uw stijl — wij maken het op maat
-          </h2>
-          <p className="text-center text-sm mb-10 max-w-xl mx-auto opacity-70" style={{ color: "var(--charcoal)" }}>
-            Dit zijn onze favorieten om mee te beginnen. Elke schaal wordt vers en op
-            maat samengesteld, dus de inhoud bepaalt u samen met ons.
-          </p>
-          <div className="grid md:grid-cols-3 gap-6">
-            {schalen.map((s) => (
-              <div key={s.naam} className="bg-white p-6 flex flex-col" style={{ borderTop: `3px solid ${s.accent}` }}>
-                <p className="text-[10px] font-bold uppercase tracking-widest mb-2" style={{ color: s.accent }}>
-                  {s.voor}
-                </p>
-                <h3 className="text-xl font-bold mb-2" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
-                  {s.naam}
-                </h3>
-                <p className="text-sm leading-relaxed flex-1" style={{ color: "var(--charcoal)", opacity: 0.78 }}>
-                  {s.tekst}
-                </p>
-                <Link
-                  href={`/${locale}/bestellen?product=feestschotel`}
-                  className="mt-4 text-sm font-semibold underline underline-offset-2"
-                  style={{ color: "var(--navy)" }}
-                >
-                  Deze aanvragen &rarr;
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Zo werkt het */}
-      <section style={{ backgroundColor: "var(--sand)" }} className="py-16 px-6">
+      <section style={{ backgroundColor: "white" }} className="py-16 px-6">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold text-center mb-10" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
-            Zo bestelt u een visschaal
+            Zo werkt het
           </h2>
           <div className="grid sm:grid-cols-3 gap-6">
             {stappen.map(([num, titel, tekst]) => (
-              <div key={num} className="bg-white p-6 text-center">
+              <div key={num} className="text-center">
                 <div
                   className="w-10 h-10 rounded-full flex items-center justify-center text-base font-bold text-white mx-auto mb-4"
                   style={{ backgroundColor: "var(--navy)" }}
@@ -203,7 +141,12 @@ export default async function VisschalenPage({
           </div>
         </div>
       </section>
+      </RevealGroup>
 
+      {/* Voorbeelden + offerteformulier (interactief) */}
+      <VisschaalAanvraag />
+
+      <RevealGroup>
       {/* FAQ */}
       <section style={{ backgroundColor: "white" }} className="py-16 px-6">
         <div className="max-w-3xl mx-auto">
@@ -229,25 +172,27 @@ export default async function VisschalenPage({
       {/* CTA */}
       <section style={{ backgroundColor: "var(--navy)" }} className="py-16 px-6 text-center">
         <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white" style={{ fontFamily: "Playfair Display, serif" }}>
-          Klaar om te bestellen?
+          Zin gekregen?
         </h2>
         <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "rgba(246,250,253,0.7)" }}>
-          Vertel ons de gelegenheid en het aantal personen — wij maken er iets moois van.
+          Vraag vrijblijvend een offerte aan, of overleg even met ons — we denken graag mee.
         </p>
         <div className="flex flex-wrap gap-3 justify-center">
-          <Link
-            href={`/${locale}/bestellen?product=feestschotel`}
+          <a
+            href="#offerte"
             className="inline-block px-8 py-4 tracking-wide font-medium text-white transition-opacity hover:opacity-90"
             style={{ backgroundColor: "var(--salmon)" }}
           >
-            Visschaal bestellen &rarr;
-          </Link>
+            Offerte aanvragen &rarr;
+          </a>
           <a
-            href="tel:+31715149802"
+            href="https://wa.me/31715149802?text=Hallo%20Schaap's%20Vishandel,%20ik%20heb%20een%20vraag%20over%20een%20visschaal%20of%20feestschotel."
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block px-8 py-4 tracking-wide font-medium border transition-opacity hover:opacity-80"
             style={{ borderColor: "rgba(246,250,253,0.4)", color: "var(--cream)" }}
           >
-            Bel 071 514 9802
+            Overleg via WhatsApp
           </a>
         </div>
       </section>

@@ -546,11 +546,11 @@ function VisschalenFeature() {
               Bekijk visschalen &rarr;
             </Link>
             <Link
-              href={`/${locale}/bestellen?product=feestschotel`}
+              href={`/${locale}/visschalen#offerte`}
               className="inline-block px-6 py-3 text-sm font-semibold border transition-opacity hover:opacity-80"
               style={{ borderColor: "var(--navy)", color: "var(--navy)" }}
             >
-              Direct bestellen
+              Vraag een offerte aan
             </Link>
           </div>
         </div>

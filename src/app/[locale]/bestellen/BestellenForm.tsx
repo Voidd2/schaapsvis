@@ -75,7 +75,7 @@ const AFHAALDAGEN = [
 const STORAGE_KEY = "sv_bestelling_v1";
 
 // Populaire producten voor toevoegen met één tik — scheelt zoeken.
-const POPULAIR = ["kibbeling", "haring", "hollandse-garnalen", "varlaks-zalm", "lekkerbek", "feestschotel"];
+const POPULAIR = ["kibbeling", "haring", "hollandse-garnalen", "varlaks-zalm", "lekkerbek", "zalmfilet"];
 
 function searchProducts(query: string): FormProduct[] {
   if (query.trim().length < 1) return [];
