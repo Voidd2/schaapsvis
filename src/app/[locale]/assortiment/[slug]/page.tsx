@@ -248,11 +248,11 @@ export default async function ProductDetailPage({
                   Richtprijs — vis is dagvers, de dagprijs kan afwijken. Wij bevestigen bij uw bestelling.
                 </span>
               </div>
-            ) : (
+            ) : opAanvraag ? (
               <p className="text-sm mb-5 opacity-60" style={{ color: "var(--charcoal)" }}>
                 Prijs op aanvraag — wij bellen u terug met de dagprijs.
               </p>
-            )}
+            ) : null}
             <div className="flex flex-wrap gap-3">
               <a
                 href={waUrl(product.naam)}

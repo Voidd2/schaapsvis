@@ -17,6 +17,7 @@ export interface Prijs {
 export const PRIJZEN: Record<string, Prijs> = {
   // Verse vis
   haring: { euro: 2.5, eenheid: "per stuk" },
+  "broodje-haring": { euro: 3.0, eenheid: "per stuk" },
   dorade: { euro: 7.45, eenheid: "per stuk (±500 g)" },
   griet: { euro: 24.95, eenheid: "per kg" },
   heek: { euro: 18.95, eenheid: "per kg" },
