@@ -238,3 +238,56 @@ export function vraagSchema(vragen: { v: string; a: string }[]) {
 }
 
 export { ADRES_REGEL };
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Pagina's die maar in één taal bestaan
+   ───────────────────────────────────────────────────────────────────────────
+   Sommige pagina's zijn er alleen in het Nederlands (de blog, de recepten, de
+   marktkraam) of alleen in het Duits (de landingspagina voor Duitse
+   bezoekers). Die zijn wél bereikbaar onder /nl/, /en/ én /de/, en dan staat
+   dezelfde tekst dus op drie adressen. Google ziet dan drie pagina's die
+   elkaar beconcurreren en kiest er zelf één — meestal niet degene die je
+   bedoelde.
+
+   Met één canonical naar de taal waarin de pagina echt geschreven is, komt
+   alle waarde op dat ene adres terecht. `paren` koppelt daarnaast pagina's die
+   elkaars vertaling zijn onder een ánder pad — bijvoorbeeld de Nederlandse
+   /viswinkel-leiden en de Duitse /frischer-fisch-leiden.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+interface EenTaalSeo {
+  /** De taal waarin deze pagina geschreven is. */
+  taal: Locale;
+  /** Pad zonder taalvoorvoegsel. */
+  pad: string;
+  title: string;
+  description: string;
+  /** Vertalingen die onder een ander pad staan, als { taal: pad }. */
+  paren?: Partial<Record<Locale, string>>;
+}
+
+export function eenTaalMetadata({
+  taal,
+  pad,
+  title,
+  description,
+  paren,
+}: EenTaalSeo): Metadata {
+  const talen: Record<string, string> = { [taal]: `/${taal}${pad}` };
+  for (const [andereTaal, anderPad] of Object.entries(paren ?? {})) {
+    talen[andereTaal] = `/${andereTaal}${anderPad}`;
+  }
+  talen["x-default"] = talen.nl ?? `/${taal}${pad}`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical: `/${taal}${pad}`, languages: talen },
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      url: `${BEDRIJF.domein}/${taal}${pad}`,
+    },
+  };
+}

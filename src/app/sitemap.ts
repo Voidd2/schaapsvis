@@ -33,14 +33,33 @@ const MEERTALIG = [
   { pad: "/biologische-vis", prioriteit: 0.8, frequentie: "monthly" as const },
   { pad: "/varlaks", prioriteit: 0.8, frequentie: "monthly" as const },
   { pad: "/ons-verhaal", prioriteit: 0.7, frequentie: "yearly" as const },
-  { pad: "/viswinkel-leiden", prioriteit: 0.8, frequentie: "monthly" as const },
-  { pad: "/marktkraam-leiden", prioriteit: 0.7, frequentie: "monthly" as const },
-  { pad: "/viswinkel-voorschoten", prioriteit: 0.7, frequentie: "monthly" as const },
-  { pad: "/viskalender", prioriteit: 0.6, frequentie: "monthly" as const },
-  { pad: "/recepten", prioriteit: 0.6, frequentie: "monthly" as const },
-  { pad: "/blog", prioriteit: 0.6, frequentie: "weekly" as const },
   { pad: "/contact", prioriteit: 0.6, frequentie: "yearly" as const },
-  { pad: "/too-good-to-go", prioriteit: 0.5, frequentie: "monthly" as const },
+];
+
+/**
+ * Pagina's die maar in één taal geschreven zijn. Die zetten we ook maar één
+ * keer in de sitemap: een Duitse verwijzing naar een Nederlandse tekst is geen
+ * vertaling, en Google behandelt zo'n verkeerde koppeling als een fout.
+ */
+const EENTALIG: { taal: "nl" | "de"; pad: string; prioriteit: number; paar?: { taal: "nl" | "de"; pad: string } }[] = [
+  {
+    taal: "nl",
+    pad: "/viswinkel-leiden",
+    prioriteit: 0.8,
+    paar: { taal: "de", pad: "/frischer-fisch-leiden" },
+  },
+  {
+    taal: "de",
+    pad: "/frischer-fisch-leiden",
+    prioriteit: 0.75,
+    paar: { taal: "nl", pad: "/viswinkel-leiden" },
+  },
+  { taal: "nl", pad: "/marktkraam-leiden", prioriteit: 0.7 },
+  { taal: "nl", pad: "/viswinkel-voorschoten", prioriteit: 0.7 },
+  { taal: "nl", pad: "/viskalender", prioriteit: 0.6 },
+  { taal: "nl", pad: "/blog", prioriteit: 0.6 },
+  { taal: "nl", pad: "/recepten", prioriteit: 0.6 },
+  { taal: "nl", pad: "/too-good-to-go", prioriteit: 0.5 },
 ];
 
 function meertaligeAlternates(pad: string) {
@@ -97,21 +116,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  // ── Duitstalige landingspagina — bestaat alleen onder /de/ ───────────────
-  regels.push({
-    url: `${basis}/de/frischer-fisch-leiden`,
-    lastModified: LAATSTE_WIJZIGING,
-    changeFrequency: "monthly",
-    priority: 0.7,
-    alternates: {
-      languages: {
-        de: `${basis}/de/frischer-fisch-leiden`,
-        nl: `${basis}/nl/viswinkel-leiden`,
-        en: `${basis}/en/viswinkel-leiden`,
-        "x-default": `${basis}/nl/viswinkel-leiden`,
-      },
-    },
-  });
+  // ── Pagina's in één taal ────────────────────────────────────────────────
+  for (const { taal, pad, prioriteit, paar } of EENTALIG) {
+    const talen: Record<string, string> = { [taal]: `${basis}/${taal}${pad}` };
+    if (paar) talen[paar.taal] = `${basis}/${paar.taal}${paar.pad}`;
+    talen["x-default"] = talen.nl ?? `${basis}/${taal}${pad}`;
+    regels.push({
+      url: `${basis}/${taal}${pad}`,
+      lastModified: LAATSTE_WIJZIGING,
+      changeFrequency: "monthly",
+      priority: prioriteit,
+      alternates: { languages: talen },
+    });
+  }
 
   // ── Artikelen en recepten: alleen Nederlands, dus geen hreflang ──────────
   for (const post of blogPosts) {

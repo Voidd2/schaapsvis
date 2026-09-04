@@ -223,7 +223,6 @@ export function ViskalenderClient() {
       {/* ── Month sections ──────────────────────────────────────────────────── */}
       {viskalenderData.map((maand, i) => {
         const th       = SEASON[maand.seizoen] ?? SEASON.Winter;
-        const isActive = i === activeMaand;
         const isNow    = i === realMonth;
 
         return (

@@ -2,29 +2,19 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { permanentRedirect } from "next/navigation";
 import { JsonLd } from "@/components/JsonLd";
+import { eenTaalMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  // Deze landingspagina is Duitstalig en hoort canoniek onder /de/ thuis.
-  return {
+  // Deutschsprachige Landingpage; das niederländische Gegenstück steht unter
+  // /nl/viswinkel-leiden.
+  return eenTaalMetadata({
+    taal: "de",
+    pad: "/frischer-fisch-leiden",
     title: "Frischer Fisch in Leiden — Fischgeschäft seit 1938 | Schaap's Vishandel",
     description:
-      "Entdecken Sie echten holländischen Fisch in Leiden: Kibbeling, Matjes/Hollandse Nieuwe, frische Nordseekrabben und Biolachs. Fischgeschäft Herenstraat 48 + Wochenmarkt Mi + Sa. Seit 1938.",
-    alternates: {
-      canonical: "/de/frischer-fisch-leiden",
-      languages: {
-        de: "/de/frischer-fisch-leiden",
-        nl: "/nl/viswinkel-leiden",
-        "x-default": "/de/frischer-fisch-leiden",
-      },
-    },
-    openGraph: {
-      title: "Frischer Fisch in Leiden — Fischgeschäft seit 1938",
-      description:
-        "Kibbeling, Matjes, frische Nordseegarnelen und Bio-Lachs in Leiden. Vier Generationen Fischhändler auf der Herenstraat.",
-      locale: "de_DE",
-      type: "website",
-    },
-  };
+      "Echter holländischer Fisch in Leiden: Kibbeling, Matjes, frische Nordseekrabben und Bio-Lachs. Fischgeschäft in der Herenstraat 48 und Wochenmarkt Mi und Sa. Seit 1938.",
+    paren: { nl: "/viswinkel-leiden" },
+  });
 }
 
 // ── FAQ schema (DE) ───────────────────────────────────────────────────────────

@@ -117,9 +117,12 @@ export function Footer() {
               { href: p("/assortiment"), label: nav("assortiment") },
               { href: p("/biologische-vis"), label: nav("betereVis") },
               { href: p("/varlaks"), label: nav("varlaks") },
-              { href: p("/viskalender"), label: nav("viswijzer") },
-              { href: p("/recepten"), label: nav("recepten") },
-              { href: p("/blog"), label: nav("blog") },
+              // De viswijzer, de recepten en de blog bestaan alleen in het
+              // Nederlands, dus verwijzen we daar rechtstreeks naartoe in plaats
+              // van naar een /en/- of /de/-adres met Nederlandse tekst erop.
+              { href: "/nl/viskalender", label: nav("viswijzer") },
+              { href: "/nl/recepten", label: nav("recepten") },
+              { href: "/nl/blog", label: nav("blog") },
               { href: p("/ons-verhaal"), label: nav("verhaal") },
               { href: p("/bezoek-ons"), label: nav("locaties") },
               { href: p("/contact"), label: nav("contact") },

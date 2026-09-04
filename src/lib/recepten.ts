@@ -34,13 +34,15 @@ export const ALLE_TAGS: ReceptTag[] = [
   "Gezond",
 ];
 
+// Bewust leeg gelaten: de labels ("Snel", "Zomers") zeggen het al, en een rij
+// emoji is precies wat een handgemaakte site niet doet.
 export const TAG_ICON: Record<ReceptTag, string> = {
-  Snel: "⚡",
-  "Met de kids": "👨‍👧",
-  Zomers: "☀️",
-  Bijzonder: "✦",
-  Makkelijk: "✓",
-  Gezond: "◎",
+  Snel: "",
+  "Met de kids": "",
+  Zomers: "",
+  Bijzonder: "",
+  Makkelijk: "",
+  Gezond: "",
 };
 
 import { receptenPraktisch } from "./recepten-praktisch";

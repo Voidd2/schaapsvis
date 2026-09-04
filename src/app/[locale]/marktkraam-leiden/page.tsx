@@ -1,30 +1,16 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
+import { eenTaalMetadata } from "@/lib/seo";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  const title = "Viskraam Leiden — Vismarkt (wo) & Aalmarkt bij de Waag (za) | Schaap's Vis";
-  const description =
-    "De viskraam van Schaap's Vishandel: woensdag op de Vismarkt (Nieuwe Rijn) en zaterdag op de Aalmarkt bij de Waag in Leiden, en vrijdag bij Hoogvliet in Voorschoten.";
-  return {
-    title,
-    description,
-    alternates: {
-      canonical: `/${locale}/marktkraam-leiden`,
-      languages: {
-        nl: "/nl/marktkraam-leiden",
-        en: "/en/marktkraam-leiden",
-        de: "/de/marktkraam-leiden",
-        "x-default": "/nl/marktkraam-leiden",
-      },
-    },
-    openGraph: { title, description, locale, type: "website" },
-  };
+export async function generateMetadata(): Promise<Metadata> {
+  return eenTaalMetadata({
+    taal: "nl",
+    pad: "/marktkraam-leiden",
+    title: "Viskraam Leiden — Vismarkt (wo) en Aalmarkt bij de Waag (za) | Schaap's Vis",
+    description:
+      "De viskraam van Schaap's Vishandel: woensdag op de Vismarkt aan de Nieuwe Rijn, zaterdag op de Aalmarkt bij de Waag in Leiden en vrijdag bij Hoogvliet in Voorschoten.",
+  });
 }
 
 const kramen = [

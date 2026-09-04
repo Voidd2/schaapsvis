@@ -32,7 +32,7 @@ export function NewsletterSignup({ compact = false }: { compact?: boolean }) {
   if (status === "success") {
     return (
       <p className="text-sm" style={{ color: "var(--seafoam)" }}>
-        ✓ Aangemeld! U hoort van ons zodra er iets lekkers binnen is.
+        Aangemeld. U hoort van ons zodra er iets lekkers binnen is.
       </p>
     );
   }

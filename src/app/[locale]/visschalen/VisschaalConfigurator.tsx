@@ -17,6 +17,7 @@ import {
   type Keuze,
 } from "@/lib/visschaal";
 import { euro, whatsappLink } from "@/lib/bedrijf";
+import { useSchaalTekst } from "@/components/visschaal/tekst";
 
 /** Zodat de bestelpagina de samengestelde schaal kan overnemen. */
 export const SCHAAL_OPSLAG = "sv_visschaal_v1";
@@ -32,6 +33,7 @@ export function VisschaalConfigurator() {
   const t = useTranslations("visschaal");
   const g = useTranslations("gedeeld");
   const locale = useLocale();
+  const tekst = useSchaalTekst();
 
   const [keuze, setKeuze] = useState<Keuze>({});
   const [geladen, setGeladen] = useState(false);
@@ -103,16 +105,16 @@ export function VisschaalConfigurator() {
             </span>
           </div>
           <p className="text-sm mb-5" style={{ color: "var(--grijs)" }}>
-            {t("basisVoor", { personen: BASISSCHAAL.personen })}
+            {t("basisVoor", { personen: tekst.personen(BASISSCHAAL.personen) })}
           </p>
           <ul className="grid sm:grid-cols-2 gap-x-8">
-            {BASISSCHAAL.bevat.map((item) => (
+            {BASISSCHAAL.bevat.map((item, i) => (
               <li
                 key={item}
                 className="py-2 text-[0.95rem]"
                 style={{ borderTop: "1px solid var(--linen)", color: "var(--charcoal)" }}
               >
-                {item}
+                {tekst.basisregel(i, item)}
               </li>
             ))}
           </ul>
@@ -132,10 +134,10 @@ export function VisschaalConfigurator() {
                 className="text-[1.15rem] pb-2 mb-1"
                 style={{ borderBottom: "2px solid var(--navy)" }}
               >
-                {GROEP_LABELS[groep]}
+                {tekst.groep(groep, GROEP_LABELS[groep])}
               </h3>
               <p className="text-sm mb-3" style={{ color: "var(--grijs)" }}>
-                {GROEP_UITLEG[groep]}
+                {tekst.uitleg(groep, GROEP_UITLEG[groep])}
               </p>
               <ul>
                 {items.map((extra) => (
@@ -144,8 +146,10 @@ export function VisschaalConfigurator() {
                     extra={extra}
                     aantal={keuze[extra.id] ?? 0}
                     onZet={(n) => zet(extra.id, n)}
-                    seizoenLabel={(periode) => t("seizoen", { periode })}
-                    perLabel={(eenheid) => t("perStuk", { eenheid })}
+                    naam={tekst.naam(extra.id, extra.naam)}
+                    toelichting={tekst.toelichting(extra.id, extra.toelichting)}
+                    seizoenLabel={(periode) => t("seizoen", { periode: tekst.seizoen(periode) ?? periode })}
+                    perLabel={(eenheid) => t("perStuk", { eenheid: tekst.eenheid(eenheid) ?? eenheid })}
                   />
                 ))}
               </ul>
@@ -186,7 +190,7 @@ export function VisschaalConfigurator() {
                 >
                   <dt>
                     {r.aantal > 1 && <span style={{ opacity: 0.7 }}>{r.aantal}× </span>}
-                    {r.naam}
+                    {tekst.naam(r.id, r.naam)}
                   </dt>
                   <dd className="bedrag shrink-0">{euro(r.bedrag)}</dd>
                 </div>
@@ -242,12 +246,16 @@ export function VisschaalConfigurator() {
 
 function ExtraRegel({
   extra,
+  naam,
+  toelichting,
   aantal,
   onZet,
   seizoenLabel,
   perLabel,
 }: {
   extra: Extra;
+  naam: string;
+  toelichting?: string;
   aantal: number;
   onZet: (aantal: number) => void;
   seizoenLabel: (periode: string) => string;
@@ -262,16 +270,16 @@ function ExtraRegel({
     >
       <div className="flex-1 min-w-[13rem]">
         <p className="font-semibold text-[1rem]" style={{ color: "var(--ink)" }}>
-          {extra.naam}
+          {naam}
           {extra.seizoen && (
             <span className="ml-2 text-[0.72rem] font-normal" style={{ color: "var(--gold)" }}>
               {seizoenLabel(extra.seizoen)}
             </span>
           )}
         </p>
-        {extra.toelichting && (
+        {toelichting && (
           <p className="text-[0.87rem] leading-snug mt-0.5" style={{ color: "var(--grijs)" }}>
-            {extra.toelichting}
+            {toelichting}
           </p>
         )}
       </div>
@@ -295,7 +303,7 @@ function ExtraRegel({
               disabled={aantal === 0}
               className="w-9 h-9 text-lg leading-none disabled:opacity-30"
               style={{ color: "var(--navy)" }}
-              aria-label={`Minder ${extra.naam}`}
+              aria-label={`− ${naam}`}
             >
               −
             </button>
@@ -315,7 +323,7 @@ function ExtraRegel({
               onClick={() => onZet(aantal + 1)}
               className="w-9 h-9 text-lg leading-none"
               style={{ color: "var(--navy)" }}
-              aria-label={`Meer ${extra.naam}`}
+              aria-label={`+ ${naam}`}
             >
               +
             </button>
@@ -336,7 +344,7 @@ function ExtraRegel({
               onChange={(e) => onZet(e.target.checked ? 1 : 0)}
               className="sr-only"
             />
-            <span className="text-sm font-semibold">{gekozen ? "✓" : "+"}</span>
+            <span className="text-sm font-semibold" aria-hidden>{gekozen ? "−" : "+"}</span>
           </label>
         )}
       </div>

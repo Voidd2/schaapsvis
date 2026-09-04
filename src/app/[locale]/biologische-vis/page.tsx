@@ -193,9 +193,9 @@ const ourFish: FishCard[] = [
 ];
 
 const duurzaamheidConfig: Record<DuurzaamheidStatus, { label: string; color: string; bg: string }> = {
-  groen: { label: "✓ Duurzaam", color: "#2e6b5e", bg: "rgba(46,107,94,0.08)" },
+  groen: { label: "Duurzaam", color: "#2e6b5e", bg: "rgba(46,107,94,0.08)" },
   oranje: { label: "◐ Let op", color: "var(--gold)", bg: "rgba(184,131,46,0.08)" },
-  rood: { label: "⚠ Overbevist", color: "#c8604a", bg: "rgba(200,96,74,0.08)" },
+  rood: { label: "Overbevist", color: "#c8604a", bg: "rgba(200,96,74,0.08)" },
 };
 
 // FAQ — inhoud in de pagina (gespiegeld in FAQPage JSON-LD hieronder).

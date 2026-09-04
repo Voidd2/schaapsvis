@@ -15,7 +15,7 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
-  const { slug, locale } = await params;
+  const { slug } = await params;
   const post = getBlogPost(slug);
   if (!post) return {};
 
@@ -23,7 +23,9 @@ export async function generateMetadata({
     title: `${post.title} | Blog Schaap's Vis Leiden`,
     description: post.excerpt,
     keywords: post.seoKeywords,
-    alternates: { canonical: `/${locale}/blog/${slug}` },
+    // Deze artikelen bestaan alleen in het Nederlands; alle taalversies
+    // verwijzen daarom naar hetzelfde Nederlandse adres.
+    alternates: { canonical: `/nl/blog/${slug}` },
     openGraph: {
       title: post.title,
       description: post.excerpt,

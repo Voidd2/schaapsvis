@@ -127,7 +127,7 @@ export default async function ProductDetailPage({
     description: product.desc,
     category: CATEGORIE_LABELS[product.categorie],
     brand: { "@type": "Brand", name: "Schaap's Vishandel" },
-    image: `https://www.schaapsvishandel.nl${SCENE[product.categorie]}`,
+    image: `https://www.schaapsvishandel.nl${product.photo ?? SCENE[product.categorie]}`,
     ...(product.badge ? { award: product.badge } : {}),
     ...(prijs
       ? {
@@ -231,7 +231,7 @@ export default async function ProductDetailPage({
             </p>
             {beschikbaar && (
               <p className="text-sm font-semibold mb-4" style={{ color: opAanvraag ? "var(--gold)" : "var(--seafoam)" }}>
-                {opAanvraag ? "◎ " : "✓ "}{beschikbaar}
+                {beschikbaar}
                 {opAanvraag && (
                   <span className="font-normal opacity-70" style={{ color: "var(--charcoal)" }}>
                     {" "}— vraag ons of we het voor uw ophaaldatum kunnen regelen.

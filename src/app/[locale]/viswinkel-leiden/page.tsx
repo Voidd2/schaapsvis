@@ -1,32 +1,21 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
+import { googleRating, googleReviewCount } from "@/lib/reviews";
+import { eenTaalMetadata } from "@/lib/seo";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  return {
-    title: "Viswinkel in Leiden — Verse Vis sinds 1938 | Schaap's Vishandel",
+export async function generateMetadata(): Promise<Metadata> {
+  // Nederlandstalige landingspagina. De Duitse tegenhanger staat onder een
+  // eigen adres (/de/frischer-fisch-leiden) omdat "Fischgeschäft Leiden" een
+  // ander zoekwoord is dan "viswinkel Leiden".
+  return eenTaalMetadata({
+    taal: "nl",
+    pad: "/viswinkel-leiden",
+    title: "Viswinkel in Leiden — verse vis sinds 1938 | Schaap's Vishandel",
     description:
-      "Schaap's Vishandel is dé viswinkel in Leiden. Dagverse kibbeling, haring, Hollandse garnalen en biologische zalm op de Herenstraat 48 en de Leidse markt. Al vier generaties uw visboer.",
-    alternates: {
-      canonical: `/${locale}/viswinkel-leiden`,
-      languages: {
-        nl: "/nl/viswinkel-leiden",
-        "x-default": "/nl/viswinkel-leiden",
-      },
-    },
-    openGraph: {
-      title: "Viswinkel in Leiden — Verse Vis sinds 1938",
-      description:
-        "Dagverse vis, kibbeling, haring en biologische zalm. Vier generaties op de Herenstraat in Leiden.",
-      locale: "nl_NL",
-      type: "website",
-    },
-  };
+      "Schaap's Vishandel is de viswinkel op de Herenstraat 48 in Leiden. Dagverse kibbeling, haring, Hollandse garnalen en biologische zalm, ook op de Leidse markt. Vier generaties visboer.",
+    paren: { de: "/frischer-fisch-leiden" },
+  });
 }
 
 // ── FAQ schema for rich snippets ─────────────────────────────────────────────
@@ -152,7 +141,7 @@ export default async function ViswinkelLeidenPage({
             "Sinds 1938 — vier generaties",
             "Dagvers van de veiling",
             "MSC · ASC · Biologisch",
-            "4,8 ★ op Google",
+            `${googleRating} van 5 op Google (${googleReviewCount} beoordelingen)`,
             "Drie verkooppunten in de regio",
           ].map((u) => (
             <span key={u} className="text-sm font-semibold" style={{ color: "var(--navy-dark)" }}>

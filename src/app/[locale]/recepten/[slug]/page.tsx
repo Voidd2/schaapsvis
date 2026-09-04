@@ -31,6 +31,9 @@ export async function generateMetadata({
     title: `${recept.title} | Recepten Schaap's Vis Leiden`,
     description: `${recept.verhaal.slice(0, 155)}...`,
     keywords: recept.seoKeywords,
+    // Recepten staan alleen in het Nederlands, dus wijzen alle taalversies naar
+    // het Nederlandse adres in plaats van drie keer dezelfde tekst aan te bieden.
+    alternates: { canonical: `/nl/recepten/${slug}` },
     openGraph: {
       title: `${recept.title} | Schaap's Vis Leiden`,
       description: recept.subtitle,

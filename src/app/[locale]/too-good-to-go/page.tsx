@@ -3,30 +3,16 @@ import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { RevealGroup } from "@/components/shared/RevealGroup";
 import { googleRating, googleReviewCount, googleMapsUrl } from "@/lib/reviews";
+import { eenTaalMetadata } from "@/lib/seo";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  const title = "Too Good To Go bij Schaap's Vis Leiden | Duurzame vis tegen verspilling";
-  const description =
-    "Schaap's Vishandel doet mee aan Too Good To Go in Leiden: verse en gerookte vis die anders zou worden weggegooid, tegen een fractie van de prijs. Duurzaam, lekker en zonder verspilling.";
-  return {
-    title,
-    description,
-    alternates: {
-      canonical: `/${locale}/too-good-to-go`,
-      languages: {
-        nl: "/nl/too-good-to-go",
-        en: "/en/too-good-to-go",
-        de: "/de/too-good-to-go",
-        "x-default": "/nl/too-good-to-go",
-      },
-    },
-    openGraph: { title, description, locale, type: "website" },
-  };
+export async function generateMetadata(): Promise<Metadata> {
+  return eenTaalMetadata({
+    taal: "nl",
+    pad: "/too-good-to-go",
+    title: "Too Good To Go bij Schaap's Vis Leiden — vis die niet mag verdwijnen",
+    description:
+      "Schaap's Vishandel doet mee aan Too Good To Go in Leiden: verse en gerookte vis die aan het eind van de dag over is, voor een fractie van de prijs. Geen verspilling.",
+  });
 }
 
 const stappen = [

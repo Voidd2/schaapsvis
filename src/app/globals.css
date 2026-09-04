@@ -45,233 +45,253 @@
   --lijn-donker: 1px solid rgba(250, 246, 239, 0.22);
 }
 
-html {
-  font-size: 17px;
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-}
-
-@media (max-width: 640px) {
+/* Alles wat de standaardopmaak van de browser bijstelt hoort in de base-laag.
+   Stond dit erbuiten, dan won `a { color: inherit }` het van élke klasse die een
+   linkkleur zet — inclusief de knoppen, die daardoor donkerblauwe tekst op een
+   donkerblauwe knop kregen. Lagen bepalen hier de volgorde, niet de
+   specificiteit. */
+@layer base {
   html {
-    font-size: 16px;
+    font-size: 17px;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
-}
 
-body {
-  font-family: var(--font-body);
-  color: var(--charcoal);
-  background-color: var(--cream);
-  font-feature-settings: "kern" 1;
-  text-rendering: optimizeLegibility;
-}
+  @media (max-width: 640px) {
+    html {
+      font-size: 16px;
+    }
+  }
 
-h1,
-h2,
-h3,
-h4,
-h5 {
-  font-family: var(--font-display);
-  color: var(--ink);
-  letter-spacing: -0.005em;
-  line-height: 1.16;
-  font-weight: 700;
-}
+  body {
+    font-family: var(--font-body);
+    color: var(--charcoal);
+    background-color: var(--cream);
+    font-feature-settings: "kern" 1;
+    text-rendering: optimizeLegibility;
+  }
 
-/* Caslon heeft van zichzelf al veel karakter: koppen mogen daarom rustig zijn.
-   Geen extra negatieve letterafstand, dat leest juist als een technisch merk. */
-h1 {
-  letter-spacing: -0.015em;
-}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: var(--font-display);
+    color: var(--ink);
+    letter-spacing: -0.005em;
+    line-height: 1.16;
+    font-weight: 700;
+  }
 
-a {
-  color: inherit;
-}
+  /* Caslon heeft van zichzelf al veel karakter: koppen mogen daarom rustig zijn.
+     Geen extra negatieve letterafstand, dat leest juist als een technisch merk. */
+  h1 {
+    letter-spacing: -0.015em;
+  }
 
-::selection {
-  background: var(--navy);
-  color: var(--cream);
-}
+  a {
+    color: inherit;
+  }
 
-:focus-visible {
-  outline: 2px solid var(--navy);
-  outline-offset: 2px;
+  ::selection {
+    background: var(--navy);
+    color: var(--cream);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--navy);
+    outline-offset: 2px;
+  }
 }
 
 /* ── Kleur-hulpklassen (blijven bestaan voor oudere pagina's) ─────────────── */
-.bg-navy { background-color: var(--navy); }
-.bg-cream { background-color: var(--cream); }
-.bg-sand { background-color: var(--sand); }
-.text-navy { color: var(--navy); }
-.text-cream { color: var(--cream); }
-.text-salmon { color: var(--salmon); }
-.text-gold { color: var(--gold); }
-.text-seafoam { color: var(--seafoam); }
-.bg-salmon { background-color: var(--salmon); }
-.bg-seafoam { background-color: var(--seafoam); }
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   Redactionele bouwstenen
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-/* Kapitaaltjes-label boven een kop — vervangt de ronde icoontjes die elke
-   sjabloonsite gebruikt. */
-.kapitaal {
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gold);
+@layer components {
+  .bg-navy { background-color: var(--navy); }
+  .bg-cream { background-color: var(--cream); }
+  .bg-sand { background-color: var(--sand); }
+  .text-navy { color: var(--navy); }
+  .text-cream { color: var(--cream); }
+  .text-salmon { color: var(--salmon); }
+  .text-gold { color: var(--gold); }
+  .text-seafoam { color: var(--seafoam); }
+  .bg-salmon { background-color: var(--salmon); }
+  .bg-seafoam { background-color: var(--seafoam); }
 }
 
-.kapitaal-licht {
-  color: rgba(250, 246, 239, 0.55);
-}
+/* Deze eigen klassen staan bewust in de components-laag. Tailwind zet zijn
+   hulpklassen in de utilities-laag, die daar overheen gaat — anders wint
+   `display: inline-flex` van `.knop` het van `hidden sm:inline-flex` en staat
+   een knop die alleen op mobiel hoort ook op de desktop. */
+@layer components {
+  /* ═══════════════════════════════════════════════════════════════════════════
+     Redactionele bouwstenen
+     ═══════════════════════════════════════════════════════════════════════════ */
 
-/* Dunne scheidingslijn, zoals in gezet drukwerk. */
-.regel {
-  border: 0;
-  border-top: var(--lijn);
-  margin: 0;
-}
-
-.regel-donker {
-  border: 0;
-  border-top: var(--lijn-donker);
-  margin: 0;
-}
-
-/* Losstaand citaat met een liniaal ervoor in plaats van een reuzenaanhalingsteken. */
-.citaat {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.25rem;
-  line-height: 1.5;
-  color: var(--ink);
-  border-left: 2px solid var(--gold);
-  padding-left: 1.25rem;
-}
-
-/* Lopende tekst in een leesbare kolom. */
-.lees {
-  max-width: 62ch;
-  line-height: 1.7;
-}
-
-.lees p + p {
-  margin-top: 1rem;
-}
-
-/* ── Knoppen ─────────────────────────────────────────────────────────────── */
-.knop {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  padding: 0.85rem 1.6rem;
-  border: 1px solid transparent;
-  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-  cursor: pointer;
-}
-
-.knop-rood {
-  background-color: var(--rood);
-  color: #fff;
-}
-.knop-rood:hover {
-  background-color: var(--rood-dark);
-}
-
-.knop-navy {
-  background-color: var(--navy);
-  color: var(--cream);
-}
-.knop-navy:hover {
-  background-color: var(--navy-dark);
-}
-
-.knop-lijn {
-  background-color: transparent;
-  border-color: var(--navy);
-  color: var(--navy);
-}
-.knop-lijn:hover {
-  background-color: var(--navy);
-  color: var(--cream);
-}
-
-.knop-lijn-licht {
-  background-color: transparent;
-  border-color: rgba(250, 246, 239, 0.45);
-  color: var(--cream);
-}
-.knop-lijn-licht:hover {
-  background-color: rgba(250, 246, 239, 0.12);
-}
-
-.knop:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-/* ── Formuliervelden ─────────────────────────────────────────────────────── */
-.veld {
-  width: 100%;
-  font-family: var(--font-body);
-  font-size: 1rem;
-  color: var(--charcoal);
-  background-color: #fff;
-  border: 1px solid var(--linen);
-  padding: 0.7rem 0.85rem;
-  outline: none;
-  transition: border-color 0.15s ease;
-}
-
-.veld:focus {
-  border-color: var(--navy);
-  box-shadow: inset 0 0 0 1px var(--navy);
-}
-
-.veld::placeholder {
-  color: #a49d90;
-}
-
-.veld-label {
-  display: block;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--ink);
-  margin-bottom: 0.35rem;
-}
-
-/* ── Prijzen: tabelcijfers, zodat bedragen netjes onder elkaar staan ─────── */
-.bedrag {
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum" 1;
-}
-
-/* ── Zachte introductie bij het scrollen ─────────────────────────────────── */
-/* Bewust minimaal: alleen doorzichtigheid, geen verschuiving. Secties die één
-   voor één omhoog komen zwemmen is inmiddels hét kenmerk van een sjabloonsite. */
-@keyframes sv-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.sv-in {
-  animation: sv-in 0.5s ease both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+  /* Kapitaaltjes-label boven een kop — vervangt de ronde icoontjes die elke
+     sjabloonsite gebruikt. */
+  .kapitaal {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
   }
+
+  .kapitaal-licht {
+    color: rgba(250, 246, 239, 0.55);
+  }
+
+  /* Dunne scheidingslijn, zoals in gezet drukwerk. */
+  .regel {
+    border: 0;
+    border-top: var(--lijn);
+    margin: 0;
+  }
+
+  .regel-donker {
+    border: 0;
+    border-top: var(--lijn-donker);
+    margin: 0;
+  }
+
+  /* Losstaand citaat met een liniaal ervoor in plaats van een reuzenaanhalingsteken. */
+  .citaat {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: var(--ink);
+    border-left: 2px solid var(--gold);
+    padding-left: 1.25rem;
+  }
+
+  /* Lopende tekst in een leesbare kolom. */
+  .lees {
+    max-width: 62ch;
+    line-height: 1.7;
+  }
+
+  .lees p + p {
+    margin-top: 1rem;
+  }
+
+  /* ── Knoppen ─────────────────────────────────────────────────────────────── */
+  .knop {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    padding: 0.85rem 1.6rem;
+    border: 1px solid transparent;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    cursor: pointer;
+  }
+
+  .knop-rood {
+    background-color: var(--rood);
+    color: #fff;
+  }
+  .knop-rood:hover {
+    background-color: var(--rood-dark);
+  }
+
+  .knop-navy {
+    background-color: var(--navy);
+    color: var(--cream);
+  }
+  .knop-navy:hover {
+    background-color: var(--navy-dark);
+  }
+
+  .knop-lijn {
+    background-color: transparent;
+    border-color: var(--navy);
+    color: var(--navy);
+  }
+  .knop-lijn:hover {
+    background-color: var(--navy);
+    color: var(--cream);
+  }
+
+  .knop-lijn-licht {
+    background-color: transparent;
+    border-color: rgba(250, 246, 239, 0.45);
+    color: var(--cream);
+  }
+  .knop-lijn-licht:hover {
+    background-color: rgba(250, 246, 239, 0.12);
+  }
+
+  /* Een uitgeschakelde knop met alleen minder dekking wordt op een donkere
+     ondergrond een modderige vlek. Een eigen kleur leest op papier én op
+     marineblauw meteen als "nog niet klikbaar". */
+  .knop:disabled {
+    background-color: var(--linen);
+    border-color: transparent;
+    color: var(--grijs);
+    cursor: not-allowed;
+  }
+
+  /* ── Formuliervelden ─────────────────────────────────────────────────────── */
+  .veld {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--charcoal);
+    background-color: #fff;
+    border: 1px solid var(--linen);
+    padding: 0.7rem 0.85rem;
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+
+  .veld:focus {
+    border-color: var(--navy);
+    box-shadow: inset 0 0 0 1px var(--navy);
+  }
+
+  .veld::placeholder {
+    color: #a49d90;
+  }
+
+  .veld-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.35rem;
+  }
+
+  /* ── Prijzen: tabelcijfers, zodat bedragen netjes onder elkaar staan ─────── */
+  .bedrag {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+
+  /* ── Zachte introductie bij het scrollen ─────────────────────────────────── */
+  /* Bewust minimaal: alleen doorzichtigheid, geen verschuiving. Secties die één
+     voor één omhoog komen zwemmen is inmiddels hét kenmerk van een sjabloonsite. */
+  @keyframes sv-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
   .sv-in {
-    animation: none;
+    animation: sv-in 0.5s ease both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    .sv-in {
+      animation: none;
+    }
   }
 }
 

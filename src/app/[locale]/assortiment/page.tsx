@@ -9,15 +9,7 @@ import { AssortimentFilter } from "./AssortimentFilter";
 import { paginaMetadata, kruimelSchema } from "@/lib/seo";
 import { BEDRIJF } from "@/lib/bedrijf";
 import { bezorgdagenTekst } from "@/lib/bezorging";
-import { products, CATEGORIE_LABELS, type Categorie } from "@/lib/assortiment-data";
-
-const SCENE: Record<Categorie, string> = {
-  "verse-vis": "/images/scene-vis.svg",
-  "gerookte-vis": "/images/scene-gerookt.svg",
-  "schaal-schelp": "/images/scene-schaaldier.svg",
-  vissalades: "/images/scene-vis.svg",
-  bereid: "/images/scene-vis.svg",
-};
+import { products } from "@/lib/assortiment-data";
 
 export async function generateMetadata({
   params,
@@ -44,6 +36,10 @@ export default async function AssortimentPage({
   const nav = await getTranslations({ locale, namespace: "nav" });
   const h = await getTranslations({ locale, namespace: "home" });
 
+  // Alleen de adressen, geen volledige productgegevens. Die staan al op de
+  // detailpagina's zelf, en 129 producten mét beschrijving en allergenen maakte
+  // deze pagina 78 KB zwaarder — dat gaat ten koste van de laadscores waar
+  // Google op let, zonder dat het iets oplevert.
   const lijstSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -53,16 +49,7 @@ export default async function AssortimentPage({
       "@type": "ListItem",
       position: i + 1,
       url: `${BEDRIJF.domein}/${locale}/assortiment/${p.slug}`,
-      item: {
-        "@type": "Product",
-        name: p.naam,
-        url: `${BEDRIJF.domein}/${locale}/assortiment/${p.slug}`,
-        description: `${p.desc} Ingrediënten en allergenen: ${p.ingredienten}`,
-        category: CATEGORIE_LABELS[p.categorie],
-        brand: { "@type": "Brand", name: BEDRIJF.naam },
-        image: `${BEDRIJF.domein}${p.photo ?? SCENE[p.categorie]}`,
-        ...(p.badge ? { award: p.badge } : {}),
-      },
+      name: p.naam,
     })),
   };
 

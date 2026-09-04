@@ -1,30 +1,16 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
+import { eenTaalMetadata } from "@/lib/seo";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  const title = "Viswinkel Voorschoten — Verse Vis op de Vrijdagmarkt | Schaap's Vis";
-  const description =
-    "Verse vis in Voorschoten? Schaap's Vishandel staat elke vrijdag met de viskraam bij Hoogvliet. Kibbeling, haring, biologische Varlaks zalm en duurzame vis — sinds 1938.";
-  return {
-    title,
-    description,
-    alternates: {
-      canonical: `/${locale}/viswinkel-voorschoten`,
-      languages: {
-        nl: "/nl/viswinkel-voorschoten",
-        en: "/en/viswinkel-voorschoten",
-        de: "/de/viswinkel-voorschoten",
-        "x-default": "/nl/viswinkel-voorschoten",
-      },
-    },
-    openGraph: { title, description, locale, type: "website" },
-  };
+export async function generateMetadata(): Promise<Metadata> {
+  return eenTaalMetadata({
+    taal: "nl",
+    pad: "/viswinkel-voorschoten",
+    title: "Viswinkel Voorschoten — verse vis op de vrijdagmarkt | Schaap's Vis",
+    description:
+      "Verse vis in Voorschoten? Schaap's Vishandel staat elke vrijdag met de viskraam bij Hoogvliet. Kibbeling, haring, biologische Varlaks zalm en duurzame vis, sinds 1938. Bezorgen kan ook.",
+  });
 }
 
 const faq = [

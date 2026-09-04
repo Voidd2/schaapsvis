@@ -77,12 +77,12 @@ export function Header() {
             </span>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-6 text-[0.92rem]">
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-6 text-[0.9rem]">
             {links.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
-                className="transition-colors"
+                className="transition-colors whitespace-nowrap"
                 style={{
                   color: isActief(href) ? "var(--navy)" : "var(--charcoal)",
                   fontWeight: isActief(href) ? 600 : 400,
@@ -157,8 +157,9 @@ export function Header() {
               ))}
 
               {[
-                { href: p("/recepten"), label: t("recepten") },
-                { href: p("/blog"), label: t("blog") },
+                // Recepten en blog staan alleen in het Nederlands.
+                { href: "/nl/recepten", label: t("recepten") },
+                { href: "/nl/blog", label: t("blog") },
                 { href: p("/contact"), label: t("contact") },
               ].map(({ href, label }) => (
                 <Link

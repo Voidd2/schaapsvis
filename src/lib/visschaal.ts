@@ -271,13 +271,22 @@ export function berekenTotaal(keuze: Keuze): number {
   }, STARTBEDRAG);
 }
 
+export interface KeuzeRegel {
+  id: string;
+  /** Nederlandse naam — de bron. De schermen vertalen hem via de sleutel `id`. */
+  naam: string;
+  aantal: number;
+  bedrag: number;
+}
+
 /** Regels voor de samenvatting en voor het bericht dat naar de winkel gaat. */
-export function keuzeRegels(keuze: Keuze): { naam: string; aantal: number; bedrag: number }[] {
+export function keuzeRegels(keuze: Keuze): KeuzeRegel[] {
   return Object.entries(keuze)
-    .map(([id, aantal]) => {
+    .map((invoer): KeuzeRegel | null => {
+      const [id, aantal] = invoer;
       const extra = extraById(id);
       if (!extra || aantal <= 0) return null;
-      return { naam: extra.naam, aantal, bedrag: extra.prijs * aantal };
+      return { id, naam: extra.naam, aantal, bedrag: extra.prijs * aantal };
     })
-    .filter((r): r is { naam: string; aantal: number; bedrag: number } => r !== null);
+    .filter((r): r is KeuzeRegel => r !== null);
 }

@@ -291,7 +291,10 @@ export default async function HomePage({
                       src={`/images/producten/${slug}.png`}
                       alt={`${p.naam} bij Schaap's Vishandel in Leiden`}
                       loading="lazy"
-                      className="w-full aspect-square object-cover"
+                      // De foto's zijn uitsneden op wit in 3:2. Volledig tonen
+                      // (contain) in plaats van bijsnijden, anders blijft er
+                      // vooral wit over.
+                      className="w-full aspect-[3/2] object-contain p-2"
                       style={{ backgroundColor: "#fff", border: "1px solid var(--linen)" }}
                     />
                     <span
@@ -369,7 +372,7 @@ export default async function HomePage({
       {/* ── Waar u ons vindt ──────────────────────────────────────────────── */}
       <Sectie grond="zand">
         <Kop label={h("locatiesLabel")} titel={h("locatiesKop")} />
-        <ul className="grid md:grid-cols-3 gap-x-10 gap-y-8">
+        <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8">
           {VERKOOPPUNTEN.map((punt) => (
             <li key={punt.id} className="pt-4" style={{ borderTop: "2px solid var(--navy)" }}>
               <h3 className="text-[1.2rem] mb-1">{punt.naam}</h3>

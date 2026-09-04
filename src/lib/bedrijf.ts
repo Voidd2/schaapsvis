@@ -83,7 +83,7 @@ export const BETAALMETHODES = {
    Verkooppunten
    ═══════════════════════════════════════════════════════════════════════════ */
 
-export type VerkooppuntId = "winkel" | "markt" | "voorschoten";
+export type VerkooppuntId = "winkel" | "markt" | "markt-woensdag" | "voorschoten";
 
 export interface Verkooppunt {
   id: VerkooppuntId;
@@ -100,24 +100,32 @@ export const VERKOOPPUNTEN: Verkooppunt[] = [
     naam: "De winkel",
     adres: BEDRIJF.adres.straat,
     plaats: "Leiden",
-    dagen: "dinsdag t/m zaterdag",
+    dagen: "dinsdag t/m vrijdag 09:00–18:00, zaterdag tot 17:00",
     mapsUrl: BEDRIJF.maps.route,
   },
   {
     id: "markt",
-    naam: "Markt Leiden",
-    adres: "Nieuwe Rijn",
+    naam: "Zaterdagmarkt",
+    adres: "Aalmarkt, bij de Waag",
     plaats: "Leiden",
-    dagen: "woensdag en zaterdag",
-    mapsUrl: "https://maps.google.com/?q=Nieuwe+Rijn+markt+Leiden",
+    dagen: "zaterdag 08:30–17:00",
+    mapsUrl: "https://maps.google.com/?q=Aalmarkt+Leiden",
+  },
+  {
+    id: "markt-woensdag",
+    naam: "Woensdagmarkt",
+    adres: "Bij Dille & Camille",
+    plaats: "Leiden",
+    dagen: "woensdag 08:30–17:00",
+    mapsUrl: "https://maps.google.com/?q=Dille+en+Camille+Leiden+Haarlemmerstraat",
   },
   {
     id: "voorschoten",
     naam: "Bij Hoogvliet",
-    adres: "Hoogvliet Voorschoten",
+    adres: "Parkeerplaats Hoogvliet",
     plaats: "Voorschoten",
-    dagen: "vrijdag",
-    mapsUrl: "https://maps.google.com/?q=Hoogvliet+Voorschoten",
+    dagen: "vrijdag 08:30–17:30",
+    mapsUrl: "https://maps.google.com/?q=Hoogvliet+Voorschoterweg+Voorschoten",
   },
 ];
 

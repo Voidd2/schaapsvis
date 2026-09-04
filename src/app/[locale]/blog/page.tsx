@@ -3,22 +3,16 @@ import type { Metadata } from "next";
 import { Clock, Calendar } from "lucide-react";
 import { blogPostsGesorteerd } from "@/lib/blog";
 import { JsonLd } from "@/components/JsonLd";
+import { eenTaalMetadata } from "@/lib/seo";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  return {
-    title: "Blog | Schaap's Vis Leiden — Verhalen, seizoenen & visweetjes",
+export async function generateMetadata(): Promise<Metadata> {
+  return eenTaalMetadata({
+    taal: "nl",
+    pad: "/blog",
+    title: "Blog | Schaap's Vis Leiden — verhalen van achter de toonbank",
     description:
-      "Verhalen van achter de toonbank: welke vis wanneer het lekkerst is, de geschiedenis van onze winkel sinds 1938, en eerlijke visweetjes. Vers uit Leiden.",
-    alternates: {
-      canonical: `/${locale}/blog`,
-      languages: { nl: "/nl/blog", en: "/en/blog", de: "/de/blog", "x-default": "/nl/blog" },
-    },
-  };
+      "Welke vis wanneer het lekkerst is, hoe de winkel sinds 1938 loopt en wat we onderweg tegenkomen. Verhalen van achter de toonbank op de Herenstraat in Leiden.",
+  });
 }
 
 const categorieKleur: Record<string, string> = {

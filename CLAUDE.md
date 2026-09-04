@@ -1,143 +1,144 @@
 @AGENTS.md
 
-# Schaap's Vis — Project Briefing voor Claude
+# Schaap's Vis — projectbriefing
 
-## Wat is dit project?
-Website voor **Schaap's Vishandel**, een fysieke viswinkel in Leiden (Herenstraat 48). Opgericht in 1938, nu vierde generatie. Doel van de site: SEO-klanten trekken, online afhaalbestellingen verwerken, en e-mailadressen verzamelen via nieuwsbrief.
+## Wat is dit?
+De website van **Schaap's Vishandel**, een viswinkel aan de Herenstraat 48 in
+Leiden. Opgericht in 1938 door Gerrit Schaap, nu de vierde generatie. Eigenaar:
+Aldert Haasnoot, in de buurt gewoon "Schaap" genoemd. Telefoon 071 514 9802.
 
-**Eigenaar:** Aldert Haasnoot ("Schaap")
-**Contactnummer:** 071 514 9802 / +31715149802
-**GitHub repo:** voidd2/schaapsvis
-**Werkbranch:** `claude/schaaps-vis-website-seo-AGG5T`
+De site heeft drie taken: gevonden worden in Leiden en omgeving (in het
+Nederlands, Engels én Duits), bestellingen aannemen, en e-mailadressen
+verzamelen.
+
+**Lees `OVERDRACHT.md` voordat je aan bedragen, bezorging of betalen werkt.**
+Daar staat wat er nog voorlopig is en wat de eigenaar zelf invult.
+
+---
+
+## Hoe de zaak werkt (bepaalt de hele site)
+
+- **Bezorgen** doen we alleen van **verse vis** en **visschalen**, in Leiden,
+  Leiderdorp, Voorschoten, Wassenaar en Leidschendam. Gebakken vis (kibbeling,
+  lekkerbek) gaat níet mee de weg op — dat is na twintig minuten in een doos
+  niet lekker meer. Dat staat ook zo op de site; niet wegpoetsen.
+- **Afhalen** kan altijd, gratis, in de winkel of aan de kraam.
+- **Verse vis gaat op gewicht.** Er staat daarom geen totaalbedrag bij een
+  bestelling verse vis: we bellen met de dagprijs voordat we inpakken. Nooit een
+  bedrag beloven dat de weegschaal niet kan waarmaken.
+- **Een visschaal** begint bij één startbedrag met een volle basis, en alles wat
+  de klant erbij wil is een losse toevoeging met een eigen prijs. Die is wél op
+  de cent uit te rekenen en kan dus online worden afgerekend.
+
+---
+
+## Vormgeving
+
+Uitgangspunt: een oude Leidse viswinkel, geen webshopsjabloon. Warm papier
+(`--cream`), diep marineblauw uit het logo (`--navy`), messing (`--gold`) en een
+dof winkelrood (`--rood`). Koppen in Libre Caslon Text, lopende tekst in Source
+Sans 3 — allebei via `next/font`, dus meegebouwd en niet bij Google opgehaald.
+
+Rechte hoeken, dunne lijnen, kapitaaltjes-labels, weinig schaduw.
+
+**Wat we bewust niet doen**, omdat het een site er meteen als sjabloon laat
+uitzien:
+- secties die één voor één omhoog schuiven bij het scrollen
+- symmetrische rijen kaartjes met ronde icoontjes erboven
+- emoji in de interface
+- verlopen, zwevende kaarten met schaduw, doorzichtige balken met vervaging
+- marketingtaal zonder feiten ("beleef", "ontdek onze passie", drie
+  bijvoeglijke naamwoorden achter elkaar)
+
+Schrijf in plaats daarvan concreet: adres, tijden, bedragen, rijtijden,
+wijknamen. Korte zinnen, "u"-vorm, en durf te zeggen wat we níet doen.
 
 ---
 
 ## Tech stack
-- **Next.js 16** (App Router) — `params` is altijd `Promise<{locale, slug}>`, gebruik `await params`
-- **next-intl v4** — `useTranslations`, `useLocale` werken server-side; vertalingen in `src/messages/{nl,en,de}.json`
-- **Tailwind CSS v4** — `@import "tailwindcss"` (geen config file nodig)
-- **CSS custom properties** — gebruik ALTIJD `var(--navy)` etc., nooit hardcoded hex
-- **Build commando:** `npm run build -- --webpack` (geen Turbopack op dit platform)
-- **Formspree** voor formulieren — placeholder `JOUW_FORMSPREE_ID` (eigenaar vult zelf in)
+- **Next.js 16** (App Router) — `params` is een `Promise`, dus altijd `await params`
+- **next-intl v4** — nl/en/de, teksten in `src/messages/*.json`
+- **Tailwind CSS v4** — `@import "tailwindcss"`, geen configbestand
+- **Bouwen:** `npm run build -- --webpack` (Turbopack werkt hier niet)
 
-### Kleurpalet (logo-kleuren)
-```css
---navy: #1d2472        /* primair blauw */
---navy-dark: #14194f
---cream: #f7fbfe
---sand: #d4e8f5
---lichtblauw: #a8d8f0
---salmon: #c0392b      /* CTA-rood */
---gold: #b8832e
---charcoal: #252a3a
---seafoam: #2e8b6e
+### CSS-lagen — hier ging het eerder mis
+`globals.css` zet basisstijlen in `@layer base` en eigen klassen (`.knop`,
+`.veld`, `.kapitaal`, …) in `@layer components`. Dat moet zo blijven:
+
+- Stond `a { color: inherit }` buiten een laag, dan won het van élke klasse die
+  een linkkleur zet — met donkerblauwe tekst op donkerblauwe knoppen als
+  gevolg.
+- Stond `.knop { display: inline-flex }` buiten een laag, dan won het van
+  `hidden sm:inline-flex` en stond een knop die alleen op mobiel hoort ook op de
+  desktop.
+
+Kleuren altijd via `var(--navy)` en dergelijke, nooit een losse hexcode.
+
+---
+
+## Bestanden die je het eerst moet kennen
+
+```
+src/lib/
+  bedrijf.ts          NAP, openingstijden, verkooppunten, betaalmethodes, euro()
+  bezorging.ts        gemeenten, postcodes, tarieven, bezorgdagen, postcodecheck
+  visschaal.ts        startbedrag + toevoegingen + prijsberekening
+  betalen.ts          SumUp hosted checkout (alleen serverzijde!)
+  seo.ts              metadata, hreflang, alle schema.org-blokken
+  assortiment-data.ts 129 producten met allergenen
+  prijzen.ts          richtprijzen per product (leeg = op aanvraag)
+  reviews.ts          echte Google-beoordelingen — niets verzinnen
+
+src/app/api/bestelling/route.ts   neemt bestellingen aan, herberekent het bedrag
+                                  op de server en maakt eventueel de SumUp-checkout
+
+src/components/
+  ui/Sectie.tsx       Sectie, Kop, Vragen, Kruimels — de vaste bouwstenen
+  Schema.tsx          zet JSON-LD in de pagina
+  JsonLd.tsx          de vaste blokken (winkel, organisatie, site, bezorgdienst)
+  bezorgen/PostcodeCheck.tsx
+  visschaal/tekst.ts  vertaalt de onderdelen van een visschaal
 ```
 
 ---
 
-## Bestandsstructuur (belangrijk)
-```
-src/
-  app/
-    [locale]/
-      page.tsx              ← homepage (HeroSection, AanbiedingSection, etc.)
-      assortiment/page.tsx  ← productgrid met EU-allergeneninformatie
-      bestellen/
-        page.tsx            ← wraps BestellenForm in Suspense
-        BestellenForm.tsx   ← client component, Formspree, verrassingspakket
-      blog/
-        page.tsx            ← blogoverzicht
-        [slug]/page.tsx     ← blogdetail met Article JSON-LD
-      eerlijke-vis/page.tsx ← herkomstverhalen per product
-      recepten/
-        ReceptenClient.tsx  ← client zoekfilter
-        [slug]/page.tsx     ← recept detail met Recipe JSON-LD
-      varlaks/page.tsx      ← premium zalm pagina
-      ons-verhaal/page.tsx  ← tijdlijn 1938-heden
-      bezoek-ons/page.tsx   ← locaties + openingstijden
-      contact/page.tsx
-      layout.tsx            ← bevat WhatsAppButton
-    globals.css             ← kleurpalet + fonts
-    sitemap.ts              ← inclusief blog + recepten
-  components/
-    layout/
-      Header.tsx            ← navigatie (nl/en/de switcher)
-      Footer.tsx            ← nieuwsbrief + links
-    shared/
-      NewsletterSignup.tsx  ← client component, compact prop
-      WhatsAppButton.tsx    ← floating groen WhatsApp knop
-    JsonLd.tsx              ← LocalBusiness schema.org
-  lib/
-    blog.ts                 ← 8 blogartikelen (BlogPost type)
-    recepten.ts             ← merge origineel + praktisch
-    recepten-praktisch.ts   ← 25 eigen recepten
-    products.ts             ← CATALOG (bestelformulier zoekfunctie)
-  messages/
-    nl.json / en.json / de.json
-```
+## Vindbaarheid — de regels die gelden
+
+1. **Elke pagina gebruikt `paginaMetadata()` of `eenTaalMetadata()`** uit
+   `src/lib/seo.ts`. Zelf canonicals en hreflang schrijven leidt gegarandeerd
+   tot verschillen tussen pagina's.
+2. **hreflang alleen naar taalversies die echt bestaan.** Blog, recepten en de
+   viswijzer staan alleen in het Nederlands: die krijgen één canonical naar
+   `/nl/…`. Verwijzen naar een Duitse versie die er niet is kost je de koppeling
+   tussen de versies die er wél zijn.
+3. **Nieuwe pagina toevoegen = ook in `src/app/sitemap.ts`.** Meertalig in
+   `MEERTALIG`, in één taal in `EENTALIG`.
+4. **Geen `aggregateRating`** op basis van Google-beoordelingen. Zie
+   `OVERDRACHT.md` waarom.
+5. **Nieuwe tekst hoort in alle drie de taalbestanden.** Ze hebben nu volledige
+   pariteit; controleer dat met een sleuteltelling voordat je commit.
+6. **Alt-teksten beschrijvend en lokaal**: "Gerookte heilbot bij Schaap's
+   Vishandel in Leiden", niet "vis".
 
 ---
 
-## Wat al gedaan is
-- Kleurpalet naar logo-blauw (#1d2472)
-- Blog pagina + 8 artikelen met Article JSON-LD
-- 25 praktische recepten (1112 gescrapete recepten verwijderd)
-- Verrassingspakket (5,99 euro, max 2/dag) op homepage + bestelformulier
-- Nieuwsbrief: footer + prominente homepage sectie (salmon) + bestelformulier opt-in
-- WhatsApp floating button op alle pagina's
-- Aanbieding van de week banner op homepage
-- EU-allergeneninformatie per assortiment-product (uitklapbaar, VIS/GLUTEN/MELK/EIEREN/MOSTERD/SELDERIJ/SCHAALDIEREN/WEEKDIEREN)
-- "Bestel dit" knoppen per product op assortiment
-- Google Reviews badge (4.8 sterren) op homepage
-- Nep-reviews + aggregateRating verwijderd (SEO-risico)
-- Sitemap uitgebreid (blog + recepten detail-URLs)
-- Recipe + Article JSON-LD schema
-- 301 permanentRedirect voor onbekende slugs
+## Veelgemaakte fouten
+1. `params` vergeten te awaiten.
+2. `"use client"` op paginaniveau — gebruik een apart client-subcomponent.
+3. `useSearchParams` buiten een `<Suspense>`.
+4. Een bedrag uit de browser vertrouwen in de API-route. Altijd herberekenen.
+5. `betalen.ts` importeren in een client component. Daar staat de geheime
+   sleutel; die hoort nooit in de browser.
+6. Bouwen zonder `--webpack`.
 
 ---
 
-## Wat nog gedaan kan worden
-- Formspree-ID invullen (zoek op JOUW_FORMSPREE_ID) — eigenaar maakt gratis account op formspree.io
-- Echte productfoto's: lekkerbek, broodje haring, vissoep, vispotje, feestschotel
-- Weekaanbieding updaten (in src/app/[locale]/page.tsx, zoek "Hollandse garnalen")
-- Google Search Console koppelen (verificatiecode in layout.tsx, verification.google)
-- Prijzen toevoegen (nu: "wij bellen terug met prijs")
-- Instagram feed integreren (Facebook: facebook.com/schaapsvishandel)
-- Meer blogartikelen (lib/blog.ts, type BlogPost)
-- Meer recepten (lib/recepten-praktisch.ts, type Recept)
-- Haringparty / feestcatering pagina (zoals concurrent Dirks Vishandel)
-- Klantenreviews systeem (bijv. Google Reviews embed of Trustpilot)
+## Git
+Werkbranch: `claude/schaapsvis-website-remake-yfhbfu`
 
----
-
-## Veelgemaakte fouten — voorkom ze
-1. `params` altijd awaiten: `const { locale } = await params;`
-2. Nooit `"use client"` op pagina-niveau — gebruik aparte client sub-components
-3. `useSearchParams` altijd in Suspense — zie bestellen/page.tsx
-4. Kleuren altijd via CSS vars: `style={{ color: "var(--navy)" }}`
-5. Build: `npm run build -- --webpack` (niet zonder --webpack)
-6. Nieuwe pagina's ook toevoegen aan src/app/sitemap.ts
-7. Vertalingen voor nieuwe teksten toevoegen aan alle drie messages-bestanden
-
----
-
-## Concurrentiecontext
-- **Hartevelt** (vishandelklaashartevelt.nl): webshop met prijzen, gratis bezorging boven 75 euro, 4.9 ster op Google (92 reviews), WhatsApp
-- **Dirks** (dirksvishandel.nl): sushi workshops, haringparty, weekaanbiedingen, 9.5 ster (370 reviews)
-- **Onderscheidend voor Schaapsvis**: 4 generaties verhaal (1938), Varlaks biologische zalm, Eerlijke Vis pagina, blog
-
----
-
-## Git workflow
 ```bash
-# Altijd op deze branch werken:
-git checkout claude/schaaps-vis-website-seo-AGG5T
-
-# Bouwen (verplicht --webpack):
 npm run build -- --webpack
-
-# Committen en pushen:
-git add -A
-git commit -m "beschrijving van de wijziging"
-git push -u origin claude/schaaps-vis-website-seo-AGG5T
+npx eslint src
+git add -A && git commit -m "…"
+git push -u origin claude/schaapsvis-website-remake-yfhbfu
 ```

@@ -24,9 +24,15 @@ export function SeizoensBanner({ locale }: { locale: string }) {
   }
 
   const titel = aanbiedingVanDeWeek?.titel ?? "Deze maand op zijn best";
+  // Het maandhoogtepunt noemt het seizoen vaak al ("Mosselseizoen start …").
+  // Dan de seizoenszin er niet nóg eens achter plakken — dat leest als een
+  // machine die twee bronnen aan elkaar knoopt.
+  const hoogtepunt = maand?.hoogtepunt ?? "";
+  const eersteWoord = hoogtepunt.split(/[\s—·,]/)[0].toLowerCase();
+  const dubbelop = eersteWoord.length > 3 && extra.toLowerCase().includes(eersteWoord);
   const tekst =
     aanbiedingVanDeWeek?.tekst ??
-    [maand?.hoogtepunt, extra].filter(Boolean).join(" · ");
+    [hoogtepunt, dubbelop ? "" : extra].filter(Boolean).join(" · ");
 
   return (
     <section style={{ backgroundColor: "var(--gold)" }} className="px-6 py-3.5">

@@ -68,15 +68,12 @@ function Allergenen({ ingredienten, bevat }: { ingredienten: string; bevat: stri
   );
 }
 
-// ─── Card photo (eigen merkillustratie per categorie; lokale foto indien aanwezig) ──
-const CATEGORIE_SCENE: Record<Categorie, string> = {
-  "verse-vis":     "/images/scene-vis.svg",
-  "gerookte-vis":  "/images/scene-gerookt.svg",
-  "schaal-schelp": "/images/scene-schaaldier.svg",
-  "vissalades":    "/images/scene-vis.svg",
-  "bereid":        "/images/scene-vis.svg",
-};
-
+// ─── Afbeelding op de kaart ───────────────────────────────────────────────────
+// Voor producten waar we een echte foto van hebben tonen we die, volledig, op
+// wit — het zijn uitsneden, dus bijsnijden levert alleen wit op. Voor de rest
+// géén tekenfilm-vis: die illustraties vloekten met de rest en zien er
+// bovendien uit als opvulling. In plaats daarvan een rustig vlak met de naam
+// erin, zoals een kaartje bij de vis in de toonbank.
 function CardPhoto({
   photo,
   naam,
@@ -87,20 +84,44 @@ function CardPhoto({
   categorie: Categorie;
 }) {
   const kleur = CATEGORIE_KLEUR[categorie];
-  const src = photo || CATEGORIE_SCENE[categorie];
+
+  if (photo) {
+    return (
+      <div
+        className="w-full overflow-hidden"
+        style={{ height: 150, backgroundColor: "#fff", borderBottom: `2px solid ${kleur}` }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={photo}
+          alt={`${naam} — Schaap's Vishandel Leiden`}
+          className="w-full h-full object-contain p-2"
+          loading="lazy"
+        />
+      </div>
+    );
+  }
 
   return (
     <div
-      className="relative w-full overflow-hidden"
-      style={{ height: 150, borderBottom: `3px solid ${kleur}` }}
+      className="w-full flex items-center justify-center px-4 text-center"
+      style={{
+        height: 150,
+        backgroundColor: "var(--sand)",
+        borderBottom: `2px solid ${kleur}`,
+      }}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={src}
-        alt={`${naam} — Schaap's Vishandel Leiden`}
-        className="w-full h-full object-cover"
-        loading="lazy"
-      />
+      <span
+        style={{
+          fontFamily: "var(--font-display)",
+          color: "var(--navy)",
+          fontSize: "1.15rem",
+          lineHeight: 1.2,
+          opacity: 0.55,
+        }}
+      >
+        {naam}
+      </span>
     </div>
   );
 }

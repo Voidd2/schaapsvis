@@ -1,22 +1,16 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { ViskalenderClient } from "./ViskalenderClient";
+import { eenTaalMetadata } from "@/lib/seo";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  return {
+export async function generateMetadata(): Promise<Metadata> {
+  return eenTaalMetadata({
+    taal: "nl",
+    pad: "/viskalender",
     title: "Viswijzer — welke vis is nu het lekkerst? | Schaap's Vis Leiden",
     description:
-      "Ontdek maand voor maand welke vis in het seizoen is. Van Hollandse Nieuwe in juni tot Zeeuwse mosselen in september. De Viswijzer van Schaap's Vis Leiden, sinds 1938.",
-    alternates: {
-      canonical: `/${locale}/viskalender`,
-      languages: { nl: "/nl/viskalender" },
-    },
-  };
+      "Maand voor maand welke vis in het seizoen is. Van Hollandse Nieuwe in juni tot Zeeuwse mosselen in september. De viswijzer van Schaap's Vishandel in Leiden.",
+  });
 }
 
 export default async function ViswijzerPage({

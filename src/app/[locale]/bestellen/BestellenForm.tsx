@@ -16,6 +16,7 @@ import {
 import { BEDRIJF, euro, whatsappLink } from "@/lib/bedrijf";
 import { STARTBEDRAG, berekenTotaal, keuzeRegels, EXTRAS, type Keuze } from "@/lib/visschaal";
 import { SCHAAL_OPSLAG } from "../visschalen/VisschaalConfigurator";
+import { useSchaalTekst } from "@/components/visschaal/tekst";
 
 /**
  * Het bestelformulier.
@@ -100,6 +101,7 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
   const g = useTranslations("gedeeld");
   const locale = useLocale();
   const zoekParams = useSearchParams();
+  const schaalTekst = useSchaalTekst();
 
   const [soort, setSoort] = useState<Soort>("verse-vis");
   const [regels, setRegels] = useState<Regel[]>([]);
@@ -582,7 +584,7 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
                   >
                     <span>
                       {r.aantal > 1 && `${r.aantal}× `}
-                      {r.naam}
+                      {schaalTekst.naam(r.id, r.naam)}
                     </span>
                     <span className="bedrag shrink-0">{euro(r.bedrag)}</span>
                   </div>
@@ -873,7 +875,7 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
               {schaalRegels.map((r) => (
                 <Rij
                   key={r.naam}
-                  label={`${r.aantal > 1 ? `${r.aantal}× ` : ""}${r.naam}`}
+                  label={`${r.aantal > 1 ? `${r.aantal}× ` : ""}${schaalTekst.naam(r.id, r.naam)}`}
                   waarde={euro(r.bedrag)}
                 />
               ))}
