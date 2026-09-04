@@ -11,8 +11,8 @@ const SEASON: Record<
   { bg: string; accent: string; strip: string; eyebrow: string }
 > = {
   Winter: {
-    bg:      "linear-gradient(150deg, #060820 0%, #0f1340 50%, #1d2472 100%)",
-    accent:  "#a8d8f0",
+    bg:      "linear-gradient(150deg, #060820 0%, #0f1340 50%, var(--navy) 100%)",
+    accent:  "var(--lichtblauw)",
     strip:   "rgba(6,8,32,0.94)",
     eyebrow: "rgba(168,216,240,0.4)",
   },
@@ -55,7 +55,7 @@ function Fish({ color = "white", size = 26 }: { color?: string; size?: number })
 
 const FISH_COLORS = [
   "rgba(168,216,240,0.9)",
-  "rgba(246,250,253,0.75)",
+  "rgba(250,246,239,0.75)",
   "rgba(212,232,245,0.85)",
   "rgba(184,131,46,0.9)",
 ];
@@ -63,7 +63,7 @@ const FISH_COLORS = [
 // ── Badge ──────────────────────────────────────────────────────────────────────
 function Badge({ type }: { type: string }) {
   const bg =
-    type === "MSC" ? "#2e8b6e" : type === "ASC" ? "#1d75b8" : "#2e8b6e";
+    type === "MSC" ? "var(--seafoam)" : type === "ASC" ? "#1d75b8" : "var(--seafoam)";
   return (
     <span
       className="flex-shrink-0 text-[9px] font-bold px-1.5 py-0.5 leading-none"
@@ -128,11 +128,13 @@ export function ViskalenderClient() {
     [noMotion]
   );
 
+  // De maand hangt af van de klok van de bezoeker; die kent de server niet.
   useEffect(() => {
     const now   = new Date();
     const month = now.getMonth();
     const days  = ["zo", "ma", "di", "wo", "do", "vr", "za"];
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setActiveMaand(month);
     setActiveSeason(viskalenderData[month].seizoen);
     setCurrentDay(`${days[now.getDay()]} ${now.getDate()}/${now.getMonth() + 1}`);
@@ -199,7 +201,7 @@ export function ViskalenderClient() {
                 onClick={() => jumpToMonth(i)}
                 className="relative px-3 py-2 text-[11px] font-bold uppercase tracking-[0.12em] transition-all duration-300 whitespace-nowrap"
                 style={{
-                  color:           active ? "var(--navy-dark)" : "rgba(246,250,253,0.38)",
+                  color:           active ? "var(--navy-dark)" : "rgba(250,246,239,0.38)",
                   backgroundColor: active ? "var(--gold)"      : "transparent",
                   minWidth:        42,
                 }}
@@ -241,7 +243,7 @@ export function ViskalenderClient() {
               className="absolute inset-0 flex items-end pb-8 pl-4 md:pl-12 select-none pointer-events-none overflow-hidden"
               style={{
                 fontSize:    "clamp(6rem, 28vw, 22rem)",
-                fontFamily:  "Playfair Display, serif",
+                fontFamily:  "var(--font-display)",
                 fontWeight:  700,
                 color:       "white",
                 opacity:     0.045,
@@ -270,7 +272,7 @@ export function ViskalenderClient() {
                       className="text-[10px] font-bold uppercase tracking-[0.22em] px-3 py-1"
                       style={{
                         backgroundColor: th.eyebrow,
-                        color: "rgba(246,250,253,0.75)",
+                        color: "rgba(250,246,239,0.75)",
                         backdropFilter: "blur(4px)",
                       }}
                     >
@@ -294,8 +296,8 @@ export function ViskalenderClient() {
                   <h2
                     className="font-bold leading-none mb-5"
                     style={{
-                      fontFamily:    "Playfair Display, serif",
-                      color:         "rgba(246,250,253,0.95)",
+                      fontFamily:    "var(--font-display)",
+                      color:         "rgba(250,246,239,0.95)",
                       fontSize:      "clamp(2.8rem, 9vw, 5.5rem)",
                       letterSpacing: "-0.025em",
                     }}
@@ -320,7 +322,7 @@ export function ViskalenderClient() {
                   {/* Description */}
                   <p
                     className="text-sm md:text-base leading-relaxed mb-8"
-                    style={{ color: "rgba(246,250,253,0.6)", maxWidth: "52ch" }}
+                    style={{ color: "rgba(250,246,239,0.6)", maxWidth: "52ch" }}
                   >
                     {maand.tekst}
                   </p>
@@ -334,7 +336,7 @@ export function ViskalenderClient() {
                         className="text-xs font-bold uppercase tracking-wider px-5 py-2.5 transition-opacity hover:opacity-75"
                         style={{
                           border:          "1px solid rgba(255,255,255,0.2)",
-                          color:           "rgba(246,250,253,0.8)",
+                          color:           "rgba(250,246,239,0.8)",
                           backgroundColor: "rgba(255,255,255,0.05)",
                           backdropFilter:  "blur(4px)",
                         }}
@@ -349,7 +351,7 @@ export function ViskalenderClient() {
                 <div className="md:col-span-2 mt-12 md:mt-0 md:pt-2">
                   <p
                     className="text-[10px] font-bold uppercase tracking-[0.22em] mb-5"
-                    style={{ color: "rgba(246,250,253,0.3)" }}
+                    style={{ color: "rgba(250,246,239,0.3)" }}
                   >
                     Seizoensvis
                   </p>
@@ -383,7 +385,7 @@ export function ViskalenderClient() {
                         {/* Name */}
                         <span
                           className="flex-1 text-sm md:text-base font-medium"
-                          style={{ color: "rgba(246,250,253,0.82)" }}
+                          style={{ color: "rgba(250,246,239,0.82)" }}
                         >
                           {vis.naam}
                         </span>
@@ -405,13 +407,13 @@ export function ViskalenderClient() {
               >
                 <span
                   className="text-[9px] uppercase tracking-[0.3em]"
-                  style={{ color: "rgba(246,250,253,0.2)" }}
+                  style={{ color: "rgba(250,246,239,0.2)" }}
                 >
                   scroll
                 </span>
                 <svg
                   width="16" height="16" viewBox="0 0 24 24"
-                  fill="none" stroke="rgba(246,250,253,0.2)" strokeWidth="2"
+                  fill="none" stroke="rgba(250,246,239,0.2)" strokeWidth="2"
                 >
                   <path d="m6 9 6 6 6-6" />
                 </svg>

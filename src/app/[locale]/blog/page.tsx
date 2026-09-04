@@ -49,11 +49,11 @@ export default async function BlogPage({
           </p>
           <h1
             className="text-4xl md:text-5xl font-bold mb-4"
-            style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+            style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
           >
             Blog
           </h1>
-          <p className="max-w-2xl leading-relaxed" style={{ color: "rgba(246,250,253,0.75)" }}>
+          <p className="max-w-2xl leading-relaxed" style={{ color: "rgba(250,246,239,0.75)" }}>
             Welke vis is wanneer het lekkerst? Hoe werd een viswinkeltje uit 1938
             een Leids begrip? En wat is nou eigenlijk het verschil tussen
             kibbeling en lekkerbek? Hier delen we wat we achter de toonbank elke
@@ -90,11 +90,11 @@ export default async function BlogPage({
               </p>
               <h2
                 className="text-xl font-bold mb-1 group-hover:underline underline-offset-4"
-                style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+                style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
               >
                 Het Visjaar — de interactieve viskalender
               </h2>
-              <p className="text-sm" style={{ color: "rgba(246,250,253,0.65)" }}>
+              <p className="text-sm" style={{ color: "rgba(250,246,239,0.65)" }}>
                 Maand voor maand: welke vis is nú op zijn best? De kalender springt automatisch naar de
                 huidige maand en laat zien wat het hele jaar te bieden heeft.
               </p>
@@ -145,7 +145,7 @@ export default async function BlogPage({
                 </div>
                 <h2
                   className="text-2xl font-bold mb-3 leading-snug"
-                  style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+                  style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
                 >
                   <Link
                     href={`/${locale}/blog/${post.slug}`}
@@ -177,7 +177,7 @@ export default async function BlogPage({
       <section style={{ backgroundColor: "var(--sand)" }} className="py-14 px-6 text-center">
         <h2
           className="text-3xl font-bold mb-3"
-          style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+          style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
         >
           Liever proeven dan lezen?
         </h2>

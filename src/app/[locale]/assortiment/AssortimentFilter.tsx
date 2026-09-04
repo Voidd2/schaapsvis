@@ -10,6 +10,7 @@ import {
   type Categorie,
 } from "@/lib/assortiment-data";
 import { matchesQuery, searchScore } from "@/lib/search";
+import { isBezorgbaar } from "@/lib/bezorging";
 
 // ─── Category tabs ────────────────────────────────────────────────────────────
 const TABS: { id: "alle" | Categorie; label: string }[] = [
@@ -21,16 +22,10 @@ const TABS: { id: "alle" | Categorie; label: string }[] = [
   { id: "bereid",        label: "Bereid & Snacks" },
 ];
 
-// ─── WhatsApp deep link ───────────────────────────────────────────────────────
-function waUrl(naam: string) {
-  const msg = `Hallo Schaap's Vishandel, ik wil graag ${naam} bestellen of reserveren. Wanneer kan ik dit ophalen?`;
-  return `https://wa.me/31715149802?text=${encodeURIComponent(msg)}`;
-}
-
 // ─── Allergen accordion ───────────────────────────────────────────────────────
 function Allergenen({ ingredienten, bevat }: { ingredienten: string; bevat: string[] }) {
   return (
-    <details className="group border-t" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
+    <details className="group border-t" style={{ borderColor: "var(--linen)" }}>
       <summary
         className="flex items-center justify-between gap-2 cursor-pointer select-none px-4 py-3 text-xs font-medium"
         style={{ listStyle: "none", color: "var(--charcoal)", opacity: 0.6 }}
@@ -57,7 +52,7 @@ function Allergenen({ ingredienten, bevat }: { ingredienten: string; bevat: stri
               className="text-[10px] font-semibold px-1.5 py-0.5 rounded-sm"
               style={{
                 backgroundColor: "rgba(192,57,43,0.1)",
-                color: "#c0392b",
+                color: "var(--rood)",
                 border: "1px solid rgba(192,57,43,0.2)",
               }}
             >
@@ -117,10 +112,10 @@ function ProductCard({ product }: { product: (typeof products)[number] }) {
 
   return (
     <article
-      className="flex flex-col bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden"
+      className="flex flex-col overflow-hidden"
       style={{
-        outline: product.highlight ? `2px solid var(--seafoam)` : "none",
-        outlineOffset: product.highlight ? "-1px" : undefined,
+        backgroundColor: "#fff",
+        border: product.highlight ? "1px solid var(--seafoam)" : "1px solid var(--linen)",
       }}
     >
       {/* Photo — klikbaar naar detailpagina met voedingswaarde */}
@@ -162,7 +157,7 @@ function ProductCard({ product }: { product: (typeof products)[number] }) {
         {/* Name */}
         <h3
           className="font-bold text-[0.95rem] leading-snug mb-1.5"
-          style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+          style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
         >
           <Link href={`/${locale}/assortiment/${product.slug}`} className="hover:underline">
             {product.naam}
@@ -199,9 +194,9 @@ function ProductCard({ product }: { product: (typeof products)[number] }) {
               opacity: product.beschikbaar === "op bestelling" ? 0.55 : 1,
             }}
           >
-            {product.beschikbaar === "dagelijks" && "✓ Dagelijks beschikbaar"}
-            {product.beschikbaar === "seizoensgebonden" && "⊙ Seizoensgebonden"}
-            {product.beschikbaar === "op bestelling" && "◎ Op bestelling"}
+            {product.beschikbaar === "dagelijks" && "Dagelijks in de winkel"}
+            {product.beschikbaar === "seizoensgebonden" && "Seizoensgebonden"}
+            {product.beschikbaar === "op bestelling" && "Op bestelling"}
           </p>
         )}
 
@@ -216,22 +211,18 @@ function ProductCard({ product }: { product: (typeof products)[number] }) {
           </Link>
         )}
 
-        {/* WhatsApp order */}
-        {product.bestelId && (
-          <a
-            href={waUrl(product.naam)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-3 flex items-center justify-center gap-2 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-            style={{ backgroundColor: "#25D366" }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.132.558 4.13 1.532 5.864L.057 23.885l6.186-1.443A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.955 0-3.78-.554-5.33-1.511l-.383-.226-3.676.858.87-3.582-.249-.396A9.944 9.944 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
-            </svg>
-            Bestel via WhatsApp
-          </a>
-        )}
+        {/* Bestellen — en eerlijk erbij of het de weg op gaat */}
+        <p className="mt-3 text-[11px]" style={{ color: "var(--grijs)" }}>
+          {isBezorgbaar(product.categorie)
+            ? "Wordt bezorgd of afgehaald"
+            : "Alleen afhalen — gaat niet mee de weg op"}
+        </p>
+        <Link
+          href={`/${locale}/bestellen?product=${product.slug}`}
+          className="knop knop-navy mt-2 !py-2.5 !text-[0.85rem]"
+        >
+          Aan bestelling toevoegen
+        </Link>
       </div>
 
       {/* Allergen accordion */}
@@ -311,10 +302,10 @@ export function AssortimentFilter() {
       <div
         className="sticky z-30 border-b overflow-x-auto scrollbar-hide"
         style={{
-          top: 0,
-          backgroundColor: "white",
-          borderColor: "rgba(0,0,0,0.09)",
-          boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
+          // De vaste kop is 2rem informatiebalk + 4.4rem naam en navigatie hoog.
+          top: "6.4rem",
+          backgroundColor: "var(--cream)",
+          borderColor: "var(--linen)",
         }}
       >
         <div className="max-w-6xl mx-auto px-4">
@@ -332,15 +323,15 @@ export function AssortimentFilter() {
                   className="px-4 py-3.5 text-sm font-medium whitespace-nowrap border-b-2 transition-colors"
                   style={{
                     borderColor: active ? "var(--navy)" : "transparent",
-                    color: active ? "var(--navy)" : "rgba(37,42,58,0.5)",
+                    color: active ? "var(--navy)" : "var(--grijs)",
                   }}
                 >
                   {label}
                   <span
                     className="ml-1.5 text-[10px] px-1.5 py-0.5 rounded-sm"
                     style={{
-                      backgroundColor: active ? "var(--navy)" : "rgba(0,0,0,0.07)",
-                      color: active ? "white" : "rgba(37,42,58,0.5)",
+                      backgroundColor: active ? "var(--navy)" : "var(--sand)",
+                      color: active ? "var(--cream)" : "var(--grijs)",
                     }}
                   >
                     {count}
@@ -353,7 +344,7 @@ export function AssortimentFilter() {
       </div>
 
       {/* Zoeken, sorteren & dieetfilter */}
-      <div className="border-b" style={{ backgroundColor: "white", borderColor: "rgba(0,0,0,0.09)" }}>
+      <div className="border-b" style={{ backgroundColor: "var(--cream)", borderColor: "var(--linen)" }}>
         <div className="max-w-6xl mx-auto px-4 py-3 space-y-3">
           <div className="flex flex-wrap items-center gap-3">
             <input
@@ -362,13 +353,13 @@ export function AssortimentFilter() {
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Zoek in het assortiment…"
               className="flex-1 min-w-[180px] border px-3 py-2 text-sm focus:outline-none"
-              style={{ borderColor: "var(--sand)", color: "var(--charcoal)" }}
+              style={{ borderColor: "var(--linen)", color: "var(--charcoal)" }}
             />
             <select
               value={sortMode}
               onChange={(e) => setSortMode(e.target.value as "aanbevolen" | "naam")}
               className="border px-3 py-2 text-sm bg-white focus:outline-none"
-              style={{ borderColor: "var(--sand)", color: "var(--navy)" }}
+              style={{ borderColor: "var(--linen)", color: "var(--navy)" }}
               aria-label="Sorteren"
             >
               <option value="aanbevolen">Aanbevolen (dagelijks eerst)</option>
@@ -387,7 +378,7 @@ export function AssortimentFilter() {
                   aria-pressed={on}
                   className="text-xs px-2.5 py-1 border transition-colors"
                   style={{
-                    borderColor: on ? "var(--seafoam)" : "var(--sand)",
+                    borderColor: on ? "var(--seafoam)" : "var(--linen)",
                     backgroundColor: on ? "var(--seafoam)" : "white",
                     color: on ? "white" : "var(--charcoal)",
                   }}

@@ -100,7 +100,7 @@ function VarlaksContent() {
           <h1
             className="text-7xl md:text-9xl font-bold leading-none mb-8 text-white"
             style={{
-              fontFamily: "Playfair Display, serif",
+              fontFamily: "var(--font-display)",
               letterSpacing: "-0.03em",
             }}
           >
@@ -149,7 +149,7 @@ function VarlaksContent() {
           </p>
           <h2
             className="text-4xl font-bold text-white mb-12"
-            style={{ fontFamily: "Playfair Display, serif" }}
+            style={{ fontFamily: "var(--font-display)" }}
           >
             Zo groeit onze zalm op
           </h2>
@@ -271,13 +271,13 @@ function VarlaksContent() {
         </p>
         <h2
           className="text-4xl font-bold text-white mb-6"
-          style={{ fontFamily: "Playfair Display, serif" }}
+          style={{ fontFamily: "var(--font-display)" }}
         >
           Varlaks zalm bij Schaap&apos;s Vis
         </h2>
         <p
           className="max-w-xl mx-auto mb-10 leading-relaxed"
-          style={{ color: "rgba(246,250,253,0.7)" }}
+          style={{ color: "rgba(250,246,239,0.7)" }}
         >
           We halen de Varlaks zalm vers op. Dagelijks in de winkel aan de
           Herenstraat, woensdag en zaterdag op de markt in Leiden, en vrijdag
@@ -296,7 +296,7 @@ function VarlaksContent() {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-8 py-4 tracking-wide font-medium border transition-opacity hover:opacity-80"
-            style={{ borderColor: "rgba(246,250,253,0.4)", color: "var(--cream)" }}
+            style={{ borderColor: "rgba(250,246,239,0.4)", color: "var(--cream)" }}
           >
             Bestel via WhatsApp
           </a>

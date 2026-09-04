@@ -105,11 +105,11 @@ export default async function BlogDetailPage({
           </div>
           <h1
             className="text-3xl md:text-5xl font-bold leading-tight mb-4"
-            style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+            style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
           >
             {post.title}
           </h1>
-          <p className="text-lg leading-relaxed" style={{ color: "rgba(246,250,253,0.75)" }}>
+          <p className="text-lg leading-relaxed" style={{ color: "rgba(250,246,239,0.75)" }}>
             {post.excerpt}
           </p>
         </div>
@@ -130,7 +130,7 @@ export default async function BlogDetailPage({
               {sectie.kop && (
                 <h2
                   className="text-2xl font-bold mb-4"
-                  style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+                  style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
                 >
                   {sectie.kop}
                 </h2>
@@ -207,7 +207,7 @@ export default async function BlogDetailPage({
         <div className="max-w-xl mx-auto text-center" style={{ color: "var(--cream)" }}>
           <h2
             className="text-2xl font-bold mb-2"
-            style={{ fontFamily: "Playfair Display, serif" }}
+            style={{ fontFamily: "var(--font-display)" }}
           >
             Weten wanneer de Hollandse Nieuwe er is?
           </h2>

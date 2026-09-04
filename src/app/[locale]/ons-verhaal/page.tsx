@@ -90,11 +90,11 @@ function VerhaalContent() {
         </p>
         <h1
           className="text-4xl md:text-6xl font-bold mb-4"
-          style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+          style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
         >
           {t("heroTitle")}
         </h1>
-        <p className="text-lg max-w-xl mx-auto" style={{ color: "rgba(246,250,253,0.7)" }}>
+        <p className="text-lg max-w-xl mx-auto" style={{ color: "rgba(250,246,239,0.7)" }}>
           {t("heroSub")}
         </p>
       </section>
@@ -128,13 +128,13 @@ function VerhaalContent() {
                   <div>
                     <span
                       className="text-7xl font-bold leading-none block mb-3 opacity-15"
-                      style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+                      style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
                     >
                       {year}
                     </span>
                     <h2
                       className="text-2xl font-bold mb-4 -mt-10"
-                      style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+                      style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
                     >
                       {t(titleKey)}
                     </h2>
@@ -172,11 +172,11 @@ function VerhaalContent() {
         <div className="max-w-2xl mx-auto px-4 text-center">
           <blockquote
             className="text-2xl md:text-3xl font-bold italic leading-relaxed mb-6"
-            style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+            style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
           >
             &ldquo;{t("outroQuote")}&rdquo;
           </blockquote>
-          <cite className="text-sm not-italic" style={{ color: "rgba(246,250,253,0.6)" }}>
+          <cite className="text-sm not-italic" style={{ color: "rgba(250,246,239,0.6)" }}>
             {t("outroAuthor")}
           </cite>
         </div>

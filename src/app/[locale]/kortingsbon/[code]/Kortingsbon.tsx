@@ -17,8 +17,10 @@ export function Kortingsbon({ code, bon }: { code: string; bon: KortingsCampagne
     return totaalMs - (Date.now() - parseInt(raw, 10));
   }, [key, totaalMs]);
 
-  // Init
+  // Init — leest de resterende tijd uit localStorage, wat alleen in de browser
+  // kan en dus niet tijdens het renderen.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (!code || code.length < 3) return setStatus("ongeldig");
     if (!bon.actief) return setStatus("verlopen");
     const rem = leesResterend();
@@ -65,7 +67,7 @@ export function Kortingsbon({ code, bon }: { code: string; bon: KortingsCampagne
 
         {status === "ongeldig" && (
           <div className="bg-white p-8" style={{ color: "var(--charcoal)" }}>
-            <h1 className="text-2xl font-bold mb-3" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+            <h1 className="text-2xl font-bold mb-3" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
               Ongeldige bon
             </h1>
             <p className="text-sm opacity-70">Deze kortingslink is niet (meer) geldig. Volg onze nieuwsbrief voor nieuwe acties.</p>
@@ -75,9 +77,9 @@ export function Kortingsbon({ code, bon }: { code: string; bon: KortingsCampagne
         {status === "verlopen" && (
           <div className="bg-white p-8" style={{ color: "var(--charcoal)" }}>
             <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: "rgba(192,57,43,0.12)" }}>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c0392b" strokeWidth="2"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--rood)" strokeWidth="2"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
             </div>
-            <h1 className="text-2xl font-bold mb-3" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+            <h1 className="text-2xl font-bold mb-3" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
               Bon verlopen
             </h1>
             <p className="text-sm opacity-70">Deze kortingsbon is gebruikt of de 10 minuten zijn voorbij. Elke bon is eenmalig geldig.</p>
@@ -89,7 +91,7 @@ export function Kortingsbon({ code, bon }: { code: string; bon: KortingsCampagne
             <div className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 mb-4" style={{ backgroundColor: "var(--gold)", color: "var(--navy-dark)" }}>
               Kortingsbon
             </div>
-            <h1 className="text-3xl font-bold mb-3 leading-tight" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+            <h1 className="text-3xl font-bold mb-3 leading-tight" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
               {bon.titel}
             </h1>
             <p className="text-sm leading-relaxed mb-6 opacity-80">{bon.tekst}</p>
@@ -121,7 +123,7 @@ export function Kortingsbon({ code, bon }: { code: string; bon: KortingsCampagne
               <span className="inline-block w-2.5 h-2.5 rounded-full animate-pulse" style={{ backgroundColor: "var(--seafoam)" }} />
               <span className="text-xs font-bold uppercase tracking-widest" style={{ color: "var(--seafoam)" }}>Nu geldig</span>
             </div>
-            <h1 className="text-2xl font-bold mb-1 leading-tight" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+            <h1 className="text-2xl font-bold mb-1 leading-tight" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
               {bon.titel}
             </h1>
             <p className="text-sm mb-6 opacity-70">Toon dit scherm aan de medewerker</p>
@@ -131,7 +133,7 @@ export function Kortingsbon({ code, bon }: { code: string; bon: KortingsCampagne
               style={{ backgroundColor: "var(--navy)", color: "var(--cream)" }}
             >
               <p className="text-xs uppercase tracking-widest mb-1 opacity-70">Nog geldig</p>
-              <p className="text-6xl font-bold tabular-nums" style={{ fontFamily: "Playfair Display, serif" }}>
+              <p className="text-6xl font-bold tabular-nums" style={{ fontFamily: "var(--font-display)" }}>
                 {tijd}
               </p>
             </div>

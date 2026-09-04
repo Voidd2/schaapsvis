@@ -47,8 +47,8 @@ export default async function ViswijzerPage({
         <h1
           className="font-bold mb-4 leading-tight"
           style={{
-            color:       "rgba(246,250,253,0.95)",
-            fontFamily:  "Playfair Display, serif",
+            color:       "rgba(250,246,239,0.95)",
+            fontFamily:  "var(--font-display)",
             fontSize:    "clamp(2.4rem, 7vw, 4rem)",
             letterSpacing: "-0.02em",
           }}
@@ -57,7 +57,7 @@ export default async function ViswijzerPage({
         </h1>
         <p
           className="text-sm md:text-base max-w-xl mx-auto leading-relaxed"
-          style={{ color: "rgba(246,250,253,0.5)" }}
+          style={{ color: "rgba(250,246,239,0.5)" }}
         >
           Welke vis is nú op zijn best? De pagina springt automatisch naar de huidige maand.
           Scroll om het hele jaar te ontdekken.

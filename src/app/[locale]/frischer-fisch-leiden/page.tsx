@@ -97,11 +97,11 @@ export default async function FrischerFischLeidenPage({
           </p>
           <h1
             className="text-4xl md:text-5xl font-bold mb-5 leading-tight"
-            style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+            style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
           >
             Frischer Fisch in Leiden —<br />seit vier Generationen
           </h1>
-          <p className="text-lg leading-relaxed max-w-2xl mb-8" style={{ color: "rgba(246,250,253,0.78)" }}>
+          <p className="text-lg leading-relaxed max-w-2xl mb-8" style={{ color: "rgba(250,246,239,0.78)" }}>
             Sie besuchen Leiden? Probieren Sie echten holländischen Fisch dort, wo die Einheimischen
             seit 1938 einkaufen: Schaap&apos;s Vishandel auf der Herenstraat 48. Kibbeling, Matjes
             (Hollandse Nieuwe), frische Nordseegarnelen und zertifizierten Bio-Lachs.
@@ -139,7 +139,7 @@ export default async function FrischerFischLeidenPage({
         <div className="max-w-5xl mx-auto">
           <h2
             className="text-3xl font-bold mb-3"
-            style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+            style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
           >
             Was sollten Sie probieren?
           </h2>
@@ -176,7 +176,7 @@ export default async function FrischerFischLeidenPage({
             ].map(({ name, desc, badge, tip }) => (
               <div key={name} className="p-6" style={{ backgroundColor: "white", border: "1px solid var(--sand)" }}>
                 <div className="flex items-start justify-between mb-3">
-                  <h3 className="font-bold text-xl" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+                  <h3 className="font-bold text-xl" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
                     {name}
                   </h3>
                   <span className="text-[10px] font-bold px-2 py-0.5 ml-2 flex-shrink-0" style={{ backgroundColor: "var(--seafoam)", color: "white" }}>
@@ -204,11 +204,11 @@ export default async function FrischerFischLeidenPage({
             </p>
             <h2
               className="text-3xl font-bold mb-4 leading-tight"
-              style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+              style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
             >
               Matjessaison — der Höhepunkt des holländischen Fischkalenders
             </h2>
-            <p className="text-sm leading-relaxed" style={{ color: "rgba(246,250,253,0.75)" }}>
+            <p className="text-sm leading-relaxed" style={{ color: "rgba(250,246,239,0.75)" }}>
               Ab Mitte Juni beginnt die &ldquo;Hollandse Nieuwe&rdquo;-Saison: der erste frische Hering des
               Jahres, zart, fett und unvergleichlich im Geschmack. Dieser Moment gilt in den
               Niederlanden als kleines Nationalfest — Warteschlangen vor dem Fischstand inklusive.
@@ -233,7 +233,7 @@ export default async function FrischerFischLeidenPage({
         <div className="max-w-5xl mx-auto">
           <h2
             className="text-3xl font-bold mb-10"
-            style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+            style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
           >
             Wann &amp; Wo
           </h2>
@@ -259,7 +259,7 @@ export default async function FrischerFischLeidenPage({
               },
             ].map(({ name, addr, hours, maps }) => (
               <div key={name} className="p-6" style={{ backgroundColor: "white", border: "1px solid var(--sand)" }}>
-                <h3 className="font-bold text-lg mb-2" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+                <h3 className="font-bold text-lg mb-2" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
                   {name}
                 </h3>
                 <p className="text-sm mb-1" style={{ color: "var(--charcoal)", opacity: 0.75 }}>{addr}</p>
@@ -287,7 +287,7 @@ export default async function FrischerFischLeidenPage({
         <div className="max-w-3xl mx-auto">
           <h2
             className="text-3xl font-bold mb-10"
-            style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+            style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
           >
             Häufige Fragen
           </h2>
@@ -297,7 +297,7 @@ export default async function FrischerFischLeidenPage({
                 <h3 className="font-bold mb-2" style={{ color: "var(--gold)" }}>
                   {faq.name}
                 </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "rgba(246,250,253,0.75)" }}>
+                <p className="text-sm leading-relaxed" style={{ color: "rgba(250,246,239,0.75)" }}>
                   {faq.acceptedAnswer.text}
                 </p>
               </div>
@@ -310,7 +310,7 @@ export default async function FrischerFischLeidenPage({
       <section style={{ backgroundColor: "var(--gold)" }} className="py-12 px-6 text-center">
         <h2
           className="text-2xl font-bold mb-3"
-          style={{ color: "var(--navy-dark)", fontFamily: "Playfair Display, serif" }}
+          style={{ color: "var(--navy-dark)", fontFamily: "var(--font-display)" }}
         >
           Vorbestellen oder direkt vorbeikommen
         </h2>

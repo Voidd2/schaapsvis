@@ -90,7 +90,7 @@ export default async function TooGoodToGoPage({
         <p className="text-xs tracking-[0.25em] uppercase mb-4 font-semibold" style={{ color: "rgba(255,255,255,0.85)" }}>
           Tegen voedselverspilling · Leiden
         </p>
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white" style={{ fontFamily: "Playfair Display, serif" }}>
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white" style={{ fontFamily: "var(--font-display)" }}>
           Too Good To Go bij Schaap&apos;s Vishandel
         </h1>
         <p className="max-w-2xl mx-auto leading-relaxed" style={{ color: "rgba(255,255,255,0.9)" }}>
@@ -114,7 +114,7 @@ export default async function TooGoodToGoPage({
       {/* Waarom */}
       <section style={{ backgroundColor: "var(--cream)" }} className="py-14 px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-5" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+          <h2 className="text-3xl font-bold mb-5" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
             Waarom wij meedoen
           </h2>
           <p className="leading-relaxed mb-4" style={{ color: "var(--charcoal)", opacity: 0.85 }}>
@@ -136,7 +136,7 @@ export default async function TooGoodToGoPage({
       {/* Hoe werkt het */}
       <section style={{ backgroundColor: "var(--sand)" }} className="py-14 px-6">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold text-center mb-8" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+          <h2 className="text-2xl font-bold text-center mb-8" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
             Zo werkt het
           </h2>
           <div className="grid sm:grid-cols-3 gap-6">
@@ -148,7 +148,7 @@ export default async function TooGoodToGoPage({
                 >
                   {num}
                 </div>
-                <p className="font-bold text-base mb-1" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>{titel}</p>
+                <p className="font-bold text-base mb-1" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>{titel}</p>
                 <p className="text-sm leading-relaxed" style={{ color: "var(--charcoal)", opacity: 0.75 }}>{tekst}</p>
               </div>
             ))}
@@ -161,7 +161,7 @@ export default async function TooGoodToGoPage({
         <p className="text-sm mb-2" style={{ color: "var(--charcoal)", opacity: 0.7 }}>
           Onze klanten waarderen ons met een
         </p>
-        <p className="text-3xl font-bold mb-2" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+        <p className="text-3xl font-bold mb-2" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
           {googleRating} op Google
         </p>
         <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer" className="text-sm underline" style={{ color: "var(--navy)" }}>
@@ -172,13 +172,13 @@ export default async function TooGoodToGoPage({
       {/* FAQ */}
       <section style={{ backgroundColor: "white" }} className="py-14 px-6">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold text-center mb-8" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+          <h2 className="text-2xl font-bold text-center mb-8" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
             Veelgestelde vragen over Too Good To Go
           </h2>
           <div className="space-y-3">
             {faq.map((f) => (
               <details key={f.q} className="group p-5" style={{ border: "1px solid var(--sand)" }}>
-                <summary className="flex items-center justify-between gap-3 cursor-pointer select-none font-bold" style={{ listStyle: "none", color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+                <summary className="flex items-center justify-between gap-3 cursor-pointer select-none font-bold" style={{ listStyle: "none", color: "var(--navy)", fontFamily: "var(--font-display)" }}>
                   {f.q}
                   <svg className="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                     <path d="m6 9 6 6 6-6" />
@@ -193,10 +193,10 @@ export default async function TooGoodToGoPage({
 
       {/* CTA */}
       <section style={{ backgroundColor: "var(--navy)" }} className="py-14 px-6 text-center">
-        <h2 className="text-2xl font-bold mb-4 text-white" style={{ fontFamily: "Playfair Display, serif" }}>
+        <h2 className="text-2xl font-bold mb-4 text-white" style={{ fontFamily: "var(--font-display)" }}>
           Red mee tegen verspilling
         </h2>
-        <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "rgba(246,250,253,0.7)" }}>
+        <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "rgba(250,246,239,0.7)" }}>
           Zoek &ldquo;Schaap&apos;s Vis Leiden&rdquo; in de Too Good To Go-app, of kom gewoon langs in de winkel.
         </p>
         <div className="flex flex-wrap gap-3 justify-center">
@@ -212,7 +212,7 @@ export default async function TooGoodToGoPage({
           <Link
             href={`/${locale}/bezoek-ons`}
             className="inline-block px-8 py-4 tracking-wide font-medium border transition-opacity hover:opacity-80"
-            style={{ borderColor: "rgba(246,250,253,0.4)", color: "var(--cream)" }}
+            style={{ borderColor: "rgba(250,246,239,0.4)", color: "var(--cream)" }}
           >
             Bezoek de winkel
           </Link>

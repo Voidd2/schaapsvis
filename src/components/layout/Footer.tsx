@@ -1,150 +1,150 @@
 import Link from "next/link";
-import { Share2, MapPin, Phone } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { NewsletterSignup } from "@/components/shared/NewsletterSignup";
+import { BEDRIJF } from "@/lib/bedrijf";
+import { GEMEENTEN } from "@/lib/bezorging";
 
 export function Footer() {
   const t = useTranslations("footer");
   const nav = useTranslations("nav");
   const locale = useLocale();
-  const p = (path: string) => `/${locale}${path}`;
+  const p = (pad: string) => `/${locale}${pad}`;
+
+  const jaar = new Date().getFullYear();
 
   return (
-    <footer style={{ backgroundColor: "var(--navy)", color: "var(--cream)" }}>
-      <div className="max-w-6xl mx-auto px-4 pt-14 pb-8">
-        {/* Nieuwsbrief */}
-        <div
-          className="flex flex-col md:flex-row md:items-center justify-between gap-5 pb-10 mb-10 border-b"
-          style={{ borderColor: "rgba(246,250,253,0.15)" }}
-        >
+    <footer style={{ backgroundColor: "var(--navy-dark)", color: "rgba(250,246,239,0.75)" }}>
+      {/* ── Nieuwsbrief ──────────────────────────────────────────────────── */}
+      <div style={{ borderBottom: "1px solid rgba(250,246,239,0.14)" }}>
+        <div className="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-[1fr_auto] gap-6 md:gap-12 md:items-center">
           <div>
-            <h3
-              className="text-xl font-bold mb-1"
-              style={{ fontFamily: "Playfair Display, serif" }}
+            <h2
+              className="text-[1.4rem] mb-1"
+              style={{ fontFamily: "var(--font-display)", color: "var(--cream)" }}
             >
-              Vers van de veiling — in uw inbox
-            </h3>
-            <p className="text-sm opacity-60 max-w-md leading-relaxed">
-              Elke week: wat er vers binnen is, de aanbieding van de week en
-              seizoenstips. Geen spam, wel vis.
+              {t("nieuwsbriefTitel")}
+            </h2>
+            <p className="text-sm leading-relaxed max-w-lg" style={{ opacity: 0.7 }}>
+              {t("nieuwsbriefTekst")}
             </p>
           </div>
-          <div className="md:min-w-[320px]">
+          <div className="md:w-[22rem]">
             <NewsletterSignup />
           </div>
         </div>
+      </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-          {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
-            <div
-              className="text-2xl font-bold mb-1"
-              style={{ fontFamily: "Playfair Display, serif" }}
-            >
-              Schaap&apos;s Vis
-            </div>
-            <div className="text-xs tracking-widest uppercase opacity-50 mb-4">
-              Leiden · Est. 1938
-            </div>
-            <p className="text-sm opacity-60 leading-relaxed max-w-[200px]">
-              Vier generaties vakmanschap. Verse vis van de Herenstraat.
-            </p>
+      {/* ── Kolommen ─────────────────────────────────────────────────────── */}
+      <div className="max-w-6xl mx-auto px-4 py-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Adres */}
+        <div>
+          <h3 className="kapitaal kapitaal-licht mb-4">{t("kopWinkel")}</h3>
+          <address className="not-italic text-sm leading-relaxed" style={{ opacity: 0.8 }}>
+            <span style={{ color: "var(--cream)", fontWeight: 600 }}>{BEDRIJF.naam}</span>
+            <br />
+            {BEDRIJF.adres.straat}
+            <br />
+            {BEDRIJF.adres.postcode} {BEDRIJF.adres.plaats}
+            <br />
             <a
-              href="https://www.facebook.com/schaapsvishandel/"
+              href={`tel:${BEDRIJF.telefoon.e164}`}
+              className="hover:text-white transition-colors inline-block mt-2"
+            >
+              {BEDRIJF.telefoon.weergave}
+            </a>
+          </address>
+          <div className="flex gap-4 mt-4 text-sm" style={{ opacity: 0.65 }}>
+            <a
+              href={BEDRIJF.socials.facebook}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-4 text-sm opacity-60 hover:opacity-100 transition-opacity"
+              className="hover:text-white transition-colors underline underline-offset-4"
             >
-              <Share2 size={16} />
-              {t("facebook")}
+              Facebook
             </a>
-          </div>
-
-          {/* Nav */}
-          <div>
-            <h4 className="text-xs font-semibold tracking-widest uppercase opacity-50 mb-4">
-              Pagina&apos;s
-            </h4>
-            <ul className="space-y-2.5 text-sm opacity-75">
-              {[
-                { href: p("/"), label: "Home" },
-                { href: p("/assortiment"), label: nav("assortiment") },
-                { href: p("/visschalen"), label: "Visschalen & feest" },
-                { href: p("/biologische-vis"), label: nav("betereVis") },
-                { href: p("/marktkraam-leiden"), label: "Marktkramen" },
-                { href: p("/viswinkel-voorschoten"), label: "Voorschoten" },
-                { href: p("/too-good-to-go"), label: "Too Good To Go" },
-                { href: p("/recepten"), label: nav("recepten") },
-                { href: p("/blog"), label: nav("blog") },
-                { href: p("/varlaks"), label: nav("varlaks") },
-                { href: p("/ons-verhaal"), label: nav("verhaal") },
-                { href: p("/bestellen"), label: nav("bestellen") },
-                { href: p("/bezoek-ons"), label: nav("locaties") },
-                { href: p("/contact"), label: nav("contact") },
-              ].map(({ href, label }) => (
-                <li key={href}>
-                  <Link
-                    href={href}
-                    className="hover:opacity-100 transition-opacity"
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Openingstijden */}
-          <div>
-            <h4 className="text-xs font-semibold tracking-widest uppercase opacity-50 mb-4">
-              Openingstijden
-            </h4>
-            <ul className="space-y-2 text-sm opacity-75">
-              <li>
-                <span className="opacity-60 text-xs block">Winkel</span>
-                Dinsdag t/m zaterdag
-              </li>
-              <li>
-                <span className="opacity-60 text-xs block">
-                  Markt Leiden
-                </span>
-                Woensdag + Zaterdag
-              </li>
-              <li>
-                <span className="opacity-60 text-xs block">Voorschoten</span>
-                Vrijdag
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="text-xs font-semibold tracking-widest uppercase opacity-50 mb-4">
-              Contact
-            </h4>
-            <address className="not-italic text-sm opacity-75 space-y-2">
-              <p className="flex items-start gap-2">
-                <MapPin size={14} className="mt-0.5 flex-shrink-0 opacity-60" />
-                <span>{t("address")}</span>
-              </p>
-              <p className="flex items-center gap-2">
-                <Phone size={14} className="flex-shrink-0 opacity-60" />
-                <a
-                  href="tel:+31715149802"
-                  className="hover:opacity-100 transition-opacity"
-                >
-                  {t("phone")}
-                </a>
-              </p>
-            </address>
+            <a
+              href={BEDRIJF.socials.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors underline underline-offset-4"
+            >
+              Instagram
+            </a>
           </div>
         </div>
 
+        {/* Openingstijden */}
+        <div>
+          <h3 className="kapitaal kapitaal-licht mb-4">{t("kopTijden")}</h3>
+          <dl className="text-sm space-y-2" style={{ opacity: 0.8 }}>
+            {[
+              [t("winkel"), t("winkelTijden")],
+              [t("markt"), t("marktTijden")],
+              [t("voorschoten"), t("voorschotenTijden")],
+            ].map(([wat, wanneer]) => (
+              <div key={wat}>
+                <dt style={{ color: "var(--cream)", fontWeight: 600 }}>{wat}</dt>
+                <dd>{wanneer}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        {/* Bezorggebied — ook de weg naar de gemeentepagina's */}
+        <div>
+          <h3 className="kapitaal kapitaal-licht mb-4">{t("kopBezorgen")}</h3>
+          <ul className="text-sm space-y-1.5" style={{ opacity: 0.8 }}>
+            {GEMEENTEN.map((g) => (
+              <li key={g.slug}>
+                <Link
+                  href={p(`/bezorgen/${g.slug}`)}
+                  className="hover:text-white transition-colors"
+                >
+                  {t("bezorgenIn", { plaats: g.naam })}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Pagina's */}
+        <div>
+          <h3 className="kapitaal kapitaal-licht mb-4">{t("kopPaginas")}</h3>
+          <ul className="text-sm space-y-1.5" style={{ opacity: 0.8 }}>
+            {[
+              { href: p("/bestellen"), label: nav("bestellen") },
+              { href: p("/visschalen"), label: nav("visschalen") },
+              { href: p("/assortiment"), label: nav("assortiment") },
+              { href: p("/biologische-vis"), label: nav("betereVis") },
+              { href: p("/varlaks"), label: nav("varlaks") },
+              { href: p("/viskalender"), label: nav("viswijzer") },
+              { href: p("/recepten"), label: nav("recepten") },
+              { href: p("/blog"), label: nav("blog") },
+              { href: p("/ons-verhaal"), label: nav("verhaal") },
+              { href: p("/bezoek-ons"), label: nav("locaties") },
+              { href: p("/contact"), label: nav("contact") },
+            ].map(({ href, label }) => (
+              <li key={href}>
+                <Link href={href} className="hover:text-white transition-colors">
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* ── Onderrand ────────────────────────────────────────────────────── */}
+      <div style={{ borderTop: "1px solid rgba(250,246,239,0.14)" }}>
         <div
-          className="pt-6 border-t text-xs opacity-40 text-center"
-          style={{ borderColor: "rgba(246,250,253,0.15)" }}
+          className="max-w-6xl mx-auto px-4 py-5 text-xs flex flex-wrap gap-x-6 gap-y-2 justify-between"
+          style={{ opacity: 0.5 }}
         >
-          {t("copy")}
+          <span>
+            &copy; {jaar} {BEDRIJF.naam} &middot; {BEDRIJF.adres.plaats} &middot;{" "}
+            {t("opgericht", { jaar: BEDRIJF.opgericht, oprichter: BEDRIJF.oprichter })}
+          </span>
+          <span>{t("betalen")}</span>
         </div>
       </div>
     </footer>

@@ -31,11 +31,11 @@ function ContactContent() {
       <section style={{ backgroundColor: "var(--navy)" }} className="py-16 text-center px-4">
         <h1
           className="text-4xl md:text-5xl font-bold mb-4"
-          style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+          style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
         >
           {t("title")}
         </h1>
-        <p className="text-lg" style={{ color: "rgba(246,250,253,0.75)" }}>
+        <p className="text-lg" style={{ color: "rgba(250,246,239,0.75)" }}>
           {t("sub")}
         </p>
       </section>
@@ -47,7 +47,7 @@ function ContactContent() {
           <div>
             <h2
               className="text-2xl font-bold mb-7"
-              style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+              style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
             >
               {t("formTitle")}
             </h2>
@@ -105,7 +105,7 @@ function ContactContent() {
           <div>
             <h2
               className="text-2xl font-bold mb-7"
-              style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+              style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
             >
               {t("infoTitle")}
             </h2>
@@ -124,7 +124,7 @@ function ContactContent() {
                   <a
                     href="tel:+31715149802"
                     className="text-2xl font-bold transition-opacity hover:opacity-70"
-                    style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+                    style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
                   >
                     071 514 9802
                   </a>

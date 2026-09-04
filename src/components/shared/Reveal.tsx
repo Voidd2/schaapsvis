@@ -1,14 +1,19 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
-// Herbruikbare scroll-onthulling in dezelfde stijl als de viswijzer:
-// content vervaagt en schuift zacht omhoog zodra hij in beeld komt.
-// Respecteert "reduce motion" (dan gewoon direct zichtbaar, geen animatie).
+/**
+ * Rustige omhulling voor een sectie.
+ *
+ * Vroeger schoof elke sectie met framer-motion omhoog zodra hij in beeld kwam.
+ * Dat is inmiddels hét herkenningspunt van een sjabloonsite en het kostte een
+ * clientbundel én een extra JavaScript-laag op elke pagina. Wat er nu gebeurt is
+ * niets meer dan een korte vervaging bij het laden — puur CSS, geen JavaScript,
+ * en uit bij "beperk beweging".
+ *
+ * De props `y` en `delay` blijven bestaan zodat bestaande pagina's onveranderd
+ * blijven werken; `delay` wordt nog gebruikt, `y` bewust niet meer.
+ */
 export function Reveal({
   children,
-  y = 40,
   delay = 0,
   className,
 }: {
@@ -17,21 +22,12 @@ export function Reveal({
   delay?: number;
   className?: string;
 }) {
-  const reduce = useReducedMotion();
-
-  if (reduce) {
-    return className ? <div className={className}>{children}</div> : <>{children}</>;
-  }
-
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay }}
+    <div
+      className={className ? `sv-in ${className}` : "sv-in"}
+      style={delay ? { animationDelay: `${delay}s` } : undefined}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

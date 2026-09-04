@@ -1,845 +1,991 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import {
-  products,
-  CATEGORIE_LABELS,
-  eenheidVoor,
-  type Categorie,
-} from "@/lib/assortiment-data";
+import { useLocale, useTranslations } from "next-intl";
+import { products, CATEGORIE_LABELS, eenheidVoor, type Categorie } from "@/lib/assortiment-data";
 import { searchScore } from "@/lib/search";
-import { Search, X, Plus, ShoppingBag, ChevronDown, Info } from "lucide-react";
+import {
+  BEZORGING,
+  checkPostcode,
+  isBezorgbaar,
+  bezorgdagenTekst,
+  type PostcodeResultaat,
+} from "@/lib/bezorging";
+import { BEDRIJF, euro, whatsappLink } from "@/lib/bedrijf";
+import { STARTBEDRAG, berekenTotaal, keuzeRegels, EXTRAS, type Keuze } from "@/lib/visschaal";
+import { SCHAAL_OPSLAG } from "../visschalen/VisschaalConfigurator";
 
-// TODO(eigenaar): vervang door uw echte Formspree-ID — gratis aan te maken op formspree.io
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/JOUW_FORMSPREE_ID";
+/**
+ * Het bestelformulier.
+ *
+ * Twee soorten bestellingen komen hier samen:
+ *
+ *  • Verse vis — gaat op gewicht, dus er staat géén totaalbedrag. Dat zou een
+ *    belofte zijn die de weegschaal niet kan waarmaken. We bellen met de
+ *    dagprijs voordat we inpakken, en dat staat er ook zo.
+ *  • Een visschaal — die is wél op de cent uit te rekenen, en kan daarom straks
+ *    via SumUp meteen worden afgerekend.
+ *
+ * Het mandje blijft in de browser bewaard, zodat iemand die halverwege wordt
+ * weggeroepen niet opnieuw hoeft te beginnen.
+ */
 
-type FormState = "idle" | "sending" | "success" | "error";
+const MANDJE_OPSLAG = "sv_bestelling_v2";
 
-// Het bestelformulier gebruikt exact hetzelfde assortiment als de assortimentspagina.
-type FormProduct = {
-  id: string;
+type Soort = "verse-vis" | "visschaal";
+type Wijze = "bezorgen" | "afhalen";
+type Status = "invullen" | "versturen" | "gelukt" | "mislukt";
+
+interface Regel {
+  slug: string;
   naam: string;
-  beschrijving: string;
   categorie: Categorie;
   eenheid: string;
-  beschikbaar: string;
-  opAanvraag: boolean;
-};
-
-const FORM_CATALOG: FormProduct[] = products.map((p) => {
-  const beschikbaar = p.beschikbaar ?? "dagelijks";
-  return {
-    id: p.slug,
-    naam: p.naam,
-    beschrijving: p.desc,
-    categorie: p.categorie,
-    eenheid: eenheidVoor(p.categorie),
-    beschikbaar,
-    opAanvraag: beschikbaar !== "dagelijks",
-  };
-});
-
-type OrderItem = {
-  product: FormProduct;
+  bezorgbaar: boolean;
   hoeveelheid: string;
   snijwijze: string;
-  aantalMoten: string;
-};
+}
 
-// Verwerking / snijwijze — alleen zinvol bij verse vis. Verschijnt pas nadat een
-// product aan de bestelling is toegevoegd (stapsgewijs, om het formulier rustig te houden).
-const SNIJ_MOTEN = "In moten / stukken";
+const POPULAIR = [
+  "kabeljauwfilet",
+  "zalmfilet",
+  "hollandse-garnalen",
+  "zeetong",
+  "dorade",
+  "heilbotfilet",
+];
 
-function snijOpties(p: FormProduct): string[] | null {
-  if (p.categorie !== "verse-vis") return null;
-  const n = p.naam.toLowerCase();
-  // Al gefileerd/gesneden aangeboden → beperkte keuze.
-  if (/filet|haas|moot|snippers|tongen|wangen/.test(n)) {
+const AFHAALPUNTEN = [
+  "Winkel Herenstraat 48, Leiden",
+  "Markt Leiden (woensdag of zaterdag)",
+  "Hoogvliet Voorschoten (vrijdag)",
+];
+
+/** Snijwijzes zijn alleen zinvol bij verse vis die nog heel is. */
+function snijOpties(naam: string, categorie: Categorie): string[] | null {
+  if (categorie !== "verse-vis") return null;
+  if (/filet|haas|moot|snippers|tong(en)?\b|wangen/i.test(naam)) {
     return ["Zoals aangeboden", "In stukken gesneden", "Anders — zie opmerking"];
   }
-  return ["Heel — schoongemaakt", "Gefileerd (ontgraat)", SNIJ_MOTEN, "Anders — zie opmerking"];
+  return ["Heel, schoongemaakt", "Gefileerd", "In moten", "Anders — zie opmerking"];
 }
 
-const AFHAALDAGEN = [
-  "Maandag — winkel Herenstraat",
-  "Dinsdag — winkel Herenstraat",
-  "Woensdag — winkel Herenstraat of markt Leiden",
-  "Donderdag — winkel Herenstraat",
-  "Vrijdag — winkel Herenstraat of Hoogvliet Voorschoten",
-  "Zaterdag — winkel Herenstraat of markt Leiden",
-] as const;
+/** De eerstvolgende bezorgdagen, als lijst om uit te kiezen. */
+function bezorgdagen(aantal = 8): { waarde: string; label: string }[] {
+  const dagen: { waarde: string; label: string }[] = [];
+  const nu = new Date();
+  const [grensUur] = BEZORGING.uitersteBesteltijd.split(":").map(Number);
+  const start = nu.getHours() >= grensUur ? 2 : 1;
 
-// Onthoud de mandje-inhoud lokaal, zodat een refresh of terugnavigeren de
-// bestelling niet wist (minder afhakers).
-const STORAGE_KEY = "sv_bestelling_v1";
-
-// Populaire producten voor toevoegen met één tik — scheelt zoeken.
-const POPULAIR = ["kibbeling", "haring", "hollandse-garnalen", "varlaks-zalm", "lekkerbek", "zalmfilet"];
-
-function searchProducts(query: string): FormProduct[] {
-  if (query.trim().length < 1) return [];
-  return FORM_CATALOG.map((p) => ({
-    p,
-    score: searchScore(
-      { naam: p.naam, desc: p.beschrijving, categorie: CATEGORIE_LABELS[p.categorie] },
-      query
-    ),
-  }))
-    .filter((x) => x.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 8)
-    .map((x) => x.p);
+  for (let i = start; dagen.length < aantal && i < start + 21; i++) {
+    const dag = new Date(nu);
+    dag.setDate(nu.getDate() + i);
+    if (!(BEZORGING.bezorgdagen as readonly number[]).includes(dag.getDay())) continue;
+    dagen.push({
+      waarde: dag.toISOString().slice(0, 10),
+      label: dag.toLocaleDateString("nl-NL", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+      }),
+    });
+  }
+  return dagen;
 }
 
-function OpAanvraagBadge() {
-  return (
-    <span
-      className="inline-block text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 ml-1.5 align-middle"
-      style={{ backgroundColor: "rgba(184,131,46,0.15)", color: "var(--gold)" }}
-    >
-      Op aanvraag
-    </span>
-  );
-}
+export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
+  const t = useTranslations("bestel");
+  const g = useTranslations("gedeeld");
+  const locale = useLocale();
+  const zoekParams = useSearchParams();
 
-export function BestellenForm() {
-  const searchParams = useSearchParams();
-  const [status, setStatus] = useState<FormState>("idle");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [suggestions, setSuggestions] = useState<FormProduct[]>([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const [bestelling, setBestelling] = useState<OrderItem[]>([]);
-  const [showBrowse, setShowBrowse] = useState(false);
-  const [klant, setKlant] = useState({
-    naam: "",
-    telefoon: "",
-    email: "",
-    ophaaldag: "",
-    opmerking: "",
-    nieuwsbrief: false,
-  });
-  const searchRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const firstSave = useRef(true);
+  const [soort, setSoort] = useState<Soort>("verse-vis");
+  const [regels, setRegels] = useState<Regel[]>([]);
+  const [schaal, setSchaal] = useState<Keuze>({});
+  const [zoek, setZoek] = useState("");
+  const [bladeren, setBladeren] = useState(false);
 
-  // Pre-fill product uit ?product= query (bijv. vanaf assortiment of detailpagina)
+  const [wijze, setWijze] = useState<Wijze>("bezorgen");
+  const [postcode, setPostcode] = useState("");
+  const [huisnummer, setHuisnummer] = useState("");
+  const [straat, setStraat] = useState("");
+  const [datum, setDatum] = useState("");
+  const [tijdvak, setTijdvak] = useState("");
+  const [afhaalpunt, setAfhaalpunt] = useState(AFHAALPUNTEN[0]);
+
+  const [naam, setNaam] = useState("");
+  const [telefoon, setTelefoon] = useState("");
+  const [email, setEmail] = useState("");
+  const [allergie, setAllergie] = useState("");
+  const [opmerking, setOpmerking] = useState("");
+  const [nieuwsbrief, setNieuwsbrief] = useState(false);
+
+  const [status, setStatus] = useState<Status>("invullen");
+  const [fout, setFout] = useState("");
+  const [bestelnummer, setBestelnummer] = useState("");
+
+  const eersteOpslag = useRef(true);
+
+  /* ── Beginstand uit de URL en de opslag ──────────────────────────────── */
+  // Eén keer bij het openen: de adresbalk en localStorage uitlezen. Dat kan niet
+  // tijdens het renderen (de opslag bestaat op de server niet), dus dit is
+  // precies waarvoor een effect bedoeld is — het is geen afgeleide staat.
   useEffect(() => {
-    const productId = searchParams.get("product");
-    if (!productId) return;
-    const product = FORM_CATALOG.find((p) => p.id === productId);
-    if (product) {
-      setBestelling((prev) =>
-        prev.find((i) => i.product.id === product.id)
-          ? prev
-          : [...prev, { product, hoeveelheid: "", snijwijze: "", aantalMoten: "" }]
-      );
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (zoekParams.get("type") === "visschaal") setSoort("visschaal");
+
+    const slug = zoekParams.get("product");
+    if (slug) {
+      const product = products.find((p) => p.slug === slug);
+      if (product) {
+        setRegels((vorige) =>
+          vorige.some((r) => r.slug === slug) ? vorige : [...vorige, maakRegel(product.slug)!]
+        );
+      }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
-  // Opgeslagen mandje terugladen (samenvoegen met eventuele ?product-prefill).
-  useEffect(() => {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-      const saved: { id: string; hoeveelheid: string; snijwijze?: string; aantalMoten?: string }[] =
-        JSON.parse(raw);
-      const rehydrated = saved
-        .map((s) => {
-          const product = FORM_CATALOG.find((p) => p.id === s.id);
-          return product
-            ? {
-                product,
-                hoeveelheid: s.hoeveelheid ?? "",
-                snijwijze: s.snijwijze ?? "",
-                aantalMoten: s.aantalMoten ?? "",
-              }
-            : null;
-        })
-        .filter(Boolean) as OrderItem[];
-      if (rehydrated.length) {
-        setBestelling((prev) => {
-          const ids = new Set(prev.map((i) => i.product.id));
-          return [...prev, ...rehydrated.filter((r) => !ids.has(r.product.id))];
-        });
+      const opgeslagenSchaal = localStorage.getItem(SCHAAL_OPSLAG);
+      if (opgeslagenSchaal) {
+        const gelezen = JSON.parse(opgeslagenSchaal) as Keuze;
+        const geldig: Keuze = {};
+        for (const [id, n] of Object.entries(gelezen)) {
+          if (EXTRAS.some((e) => e.id === id) && Number(n) > 0) geldig[id] = Number(n);
+        }
+        setSchaal(geldig);
+      }
+
+      const opgeslagenMandje = localStorage.getItem(MANDJE_OPSLAG);
+      if (opgeslagenMandje) {
+        const gelezen = JSON.parse(opgeslagenMandje) as {
+          slug: string;
+          hoeveelheid?: string;
+          snijwijze?: string;
+        }[];
+        const hersteld = gelezen
+          .map((r) => {
+            const basis = maakRegel(r.slug);
+            return basis
+              ? { ...basis, hoeveelheid: r.hoeveelheid ?? "", snijwijze: r.snijwijze ?? "" }
+              : null;
+          })
+          .filter((r): r is Regel => r !== null);
+        if (hersteld.length) {
+          setRegels((vorige) => {
+            const bekend = new Set(vorige.map((r) => r.slug));
+            return [...vorige, ...hersteld.filter((r) => !bekend.has(r.slug))];
+          });
+        }
       }
     } catch {
-      /* localStorage niet beschikbaar — negeren */
+      /* geen opslag beschikbaar */
     }
+    // Alleen bij het openen van de pagina.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Mandje opslaan bij elke wijziging (de eerste, lege render slaan we over).
   useEffect(() => {
-    if (firstSave.current) {
-      firstSave.current = false;
+    if (eersteOpslag.current) {
+      eersteOpslag.current = false;
       return;
     }
     try {
       localStorage.setItem(
-        STORAGE_KEY,
+        MANDJE_OPSLAG,
         JSON.stringify(
-          bestelling.map((i) => ({
-            id: i.product.id,
-            hoeveelheid: i.hoeveelheid,
-            snijwijze: i.snijwijze,
-            aantalMoten: i.aantalMoten,
+          regels.map((r) => ({
+            slug: r.slug,
+            hoeveelheid: r.hoeveelheid,
+            snijwijze: r.snijwijze,
           }))
         )
       );
     } catch {
-      /* negeren */
+      /* niets aan te doen */
     }
-  }, [bestelling]);
+  }, [regels]);
 
-  useEffect(() => {
-    const results = searchProducts(searchQuery);
-    setSuggestions(results);
-    setShowSuggestions(results.length > 0 && searchQuery.length > 0);
-  }, [searchQuery]);
+  /* ── Afgeleide waarden ───────────────────────────────────────────────── */
+  const postcodeUitkomst: PostcodeResultaat | null = useMemo(
+    () => (postcode.replace(/\s/g, "").length >= 4 ? checkPostcode(postcode) : null),
+    [postcode]
+  );
 
-  useEffect(() => {
-    function handleClick(e: MouseEvent) {
-      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
-        setShowSuggestions(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
+  const bezorgkosten =
+    wijze === "bezorgen" && postcodeUitkomst?.status === "binnen" ? postcodeUitkomst.kosten : 0;
+
+  const schaalRegels = useMemo(() => keuzeRegels(schaal), [schaal]);
+  const schaalTotaal = useMemo(() => berekenTotaal(schaal), [schaal]);
+  const teBetalen = soort === "visschaal" ? schaalTotaal + bezorgkosten : null;
+
+  const suggesties = useMemo(() => {
+    if (zoek.trim().length < 1) return [];
+    return products
+      .map((p) => ({
+        p,
+        score: searchScore(
+          { naam: p.naam, desc: p.desc, categorie: CATEGORIE_LABELS[p.categorie] },
+          zoek
+        ),
+      }))
+      .filter((x) => x.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 8)
+      .map((x) => x.p);
+  }, [zoek]);
+
+  const dagen = useMemo(() => bezorgdagen(), []);
+  const bezorgdagenLabel = bezorgdagenTekst();
+
+  const nietBezorgbaar = regels.filter((r) => !r.bezorgbaar);
+  const bezorgenGeblokkeerd = wijze === "bezorgen" && nietBezorgbaar.length > 0;
+
+  /* ── Bewerkingen op het mandje ───────────────────────────────────────── */
+  const voegToe = useCallback((slug: string) => {
+    const regel = maakRegel(slug);
+    if (!regel) return;
+    setRegels((vorige) => (vorige.some((r) => r.slug === slug) ? vorige : [...vorige, regel]));
+    setZoek("");
   }, []);
 
-  function addToOrder(product: FormProduct) {
-    setBestelling((prev) => {
-      if (prev.find((i) => i.product.id === product.id)) return prev;
-      return [...prev, { product, hoeveelheid: "", snijwijze: "", aantalMoten: "" }];
-    });
-    setSearchQuery("");
-    setSuggestions([]);
-    setShowSuggestions(false);
-    inputRef.current?.focus();
-  }
-
-  function updateItem(id: string, patch: Partial<Omit<OrderItem, "product">>) {
-    setBestelling((prev) =>
-      prev.map((i) => (i.product.id === id ? { ...i, ...patch } : i))
+  function werkBij(slug: string, veld: "hoeveelheid" | "snijwijze", waarde: string) {
+    setRegels((vorige) =>
+      vorige.map((r) => (r.slug === slug ? { ...r, [veld]: waarde } : r))
     );
   }
 
-  function removeItem(id: string) {
-    setBestelling((prev) => prev.filter((i) => i.product.id !== id));
+  function verwijder(slug: string) {
+    setRegels((vorige) => vorige.filter((r) => r.slug !== slug));
   }
 
-  const bestellingLeeg = bestelling.length === 0;
-  const bestellingIngevuld = bestelling.some((i) => i.hoeveelheid.trim());
-  const heeftOpAanvraag = bestelling.some((i) => i.product.opAanvraag);
+  /* ── Versturen ───────────────────────────────────────────────────────── */
+  const kanVersturen =
+    naam.trim() !== "" &&
+    telefoon.trim() !== "" &&
+    (soort === "visschaal" || regels.length > 0) &&
+    (wijze === "afhalen" ||
+      (postcodeUitkomst?.status === "binnen" && straat.trim() !== "" && huisnummer.trim() !== "")) &&
+    !bezorgenGeblokkeerd;
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function verstuur(e: React.FormEvent) {
     e.preventDefault();
-    if (!bestellingIngevuld && !klant.opmerking.trim()) return;
-    setStatus("sending");
-
-    const regels = bestelling
-      .filter((i) => i.hoeveelheid.trim())
-      .map((i) => {
-        const snij = i.snijwijze ? ` — ${i.snijwijze}` : "";
-        const moten =
-          i.snijwijze === SNIJ_MOTEN && i.aantalMoten.trim()
-            ? ` (${i.aantalMoten.trim()} moten)`
-            : "";
-        const aanvraag = i.product.opAanvraag ? " [OP AANVRAAG — inplannen]" : "";
-        return `• ${i.product.naam}: ${i.hoeveelheid} (${i.product.eenheid})${snij}${moten}${aanvraag}`;
-      })
-      .join("\n");
+    if (!kanVersturen) return;
+    setStatus("versturen");
+    setFout("");
 
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      const antwoord = await fetch("/api/bestelling", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          naam: klant.naam,
-          telefoon: klant.telefoon,
-          email: klant.email || "(niet opgegeven)",
-          ophaaldag: klant.ophaaldag,
-          bestelling: regels || "Zie opmerking",
-          op_aanvraag: heeftOpAanvraag
-            ? "JA — bevat product(en) op aanvraag, plan rond inkoop (ma/do)"
-            : "nee",
-          opmerking: klant.opmerking,
-          nieuwsbrief: klant.nieuwsbrief ? "JA — wil aanbiedingen ontvangen" : "nee",
-          _subject: `Bestelling van ${klant.naam} — ${klant.ophaaldag}`,
+          soort,
+          locale,
+          klant: { naam, telefoon, email },
+          levering: {
+            wijze,
+            postcode,
+            huisnummer,
+            straat,
+            plaats:
+              postcodeUitkomst?.status === "binnen" ? postcodeUitkomst.gemeente.naam : "",
+            datum,
+            tijdvak,
+            afhaalpunt,
+          },
+          regels: regels.map((r) => ({
+            naam: r.naam,
+            hoeveelheid: r.hoeveelheid,
+            toelichting: r.snijwijze,
+          })),
+          visschaal: soort === "visschaal" ? { keuze: schaal } : undefined,
+          allergie,
+          opmerking,
+          nieuwsbrief,
         }),
       });
-      if (res.ok) {
-        try {
-          localStorage.removeItem(STORAGE_KEY);
-        } catch {
-          /* negeren */
-        }
+
+      const data = (await antwoord.json()) as {
+        ok?: boolean;
+        fout?: string;
+        referentie?: string;
+        betaalUrl?: string;
+      };
+
+      if (!antwoord.ok || !data.ok) {
+        setFout(data.fout ?? t("misluktTekst"));
+        setStatus("mislukt");
+        return;
       }
-      setStatus(res.ok ? "success" : "error");
+
+      // Mandje leegmaken; wat besteld is hoort niet in de volgende bestelling.
+      try {
+        localStorage.removeItem(MANDJE_OPSLAG);
+        if (soort === "visschaal") localStorage.removeItem(SCHAAL_OPSLAG);
+      } catch {
+        /* niets aan te doen */
+      }
+
+      if (data.betaalUrl) {
+        window.location.href = data.betaalUrl;
+        return;
+      }
+
+      setBestelnummer(data.referentie ?? "");
+      setStatus("gelukt");
     } catch {
-      setStatus("error");
+      setFout(t("misluktTekst"));
+      setStatus("mislukt");
     }
   }
 
-  if (status === "success") {
+  /* ── Gelukt ──────────────────────────────────────────────────────────── */
+  if (status === "gelukt") {
     return (
-      <main
-        className="min-h-screen flex items-center justify-center px-6"
-        style={{ backgroundColor: "var(--cream)" }}
+      <div
+        className="max-w-2xl mx-auto p-8 md:p-10 text-center"
+        style={{ backgroundColor: "#fff", border: "1px solid var(--linen)" }}
       >
-        <div
-          className="text-center max-w-md bg-white p-12 border"
-          style={{ borderColor: "var(--sand)" }}
-        >
-          <div
-            className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
-            style={{ backgroundColor: "var(--seafoam)" }}
-          >
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-          </div>
-          <h1
-            className="text-3xl font-bold mb-4"
-            style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
-          >
-            Aanvraag ontvangen!
-          </h1>
-          <p className="leading-relaxed text-base mb-4" style={{ color: "var(--charcoal)", opacity: 0.7 }}>
-            We bellen u zo snel mogelijk terug op{" "}
-            <strong>{klant.telefoon}</strong> om uw bestelling te bevestigen en
-            de prijs door te geven.
-          </p>
-          {heeftOpAanvraag && (
-            <p className="text-sm leading-relaxed mb-8 p-3" style={{ backgroundColor: "rgba(184,131,46,0.1)", color: "var(--charcoal)" }}>
-              Uw bestelling bevat vis <strong>op aanvraag</strong>. Wij bevestigen
-              telefonisch of we dit voor uw gekozen ophaaldag kunnen regelen.
-            </p>
-          )}
-          <div className="pt-6 border-t" style={{ borderColor: "var(--sand)" }}>
-            <p className="text-sm mb-2" style={{ color: "var(--charcoal)", opacity: 0.5 }}>
-              Liever direct bellen?
-            </p>
-            <a
-              href="tel:+31715149802"
-              className="text-xl font-bold underline"
-              style={{ color: "var(--salmon)" }}
-            >
-              071 514 9802
-            </a>
-          </div>
+        <h2 className="text-[1.8rem] mb-3">{t("gelukt", { naam: naam.split(" ")[0] })}</h2>
+        <p className="leading-relaxed mb-6" style={{ color: "var(--charcoal)" }}>
+          {t("geluktTekst", { nummer: bestelnummer })}
+        </p>
+        <p className="text-sm mb-7" style={{ color: "var(--grijs)" }}>
+          {t("betalenNu")}
+        </p>
+        <div className="flex flex-wrap gap-3 justify-center">
+          <Link href={`/${locale}`} className="knop knop-navy">
+            {g("terug")}
+          </Link>
+          <a href={`tel:${BEDRIJF.telefoon.e164}`} className="knop knop-lijn">
+            {g("bellen", { nummer: BEDRIJF.telefoon.weergave })}
+          </a>
         </div>
-      </main>
+      </div>
     );
   }
 
+  /* ── Formulier ───────────────────────────────────────────────────────── */
   return (
-    <main style={{ backgroundColor: "var(--cream)" }}>
-      {/* Hero */}
-      <section style={{ backgroundColor: "var(--navy)" }} className="py-16 px-6 text-center">
-        <h1
-          className="text-4xl md:text-5xl font-bold mb-4"
-          style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
-        >
-          Vooruit Bestellen
-        </h1>
-        <p
-          className="max-w-xl mx-auto leading-relaxed"
-          style={{ color: "rgba(246,250,253,0.75)" }}
-        >
-          Kies uit ons volledige assortiment — wij sturen zo snel mogelijk een
-          prijs terug en houden uw vis voor u apart.
-        </p>
-      </section>
-
-      {/* Stappenplan */}
-      <section style={{ backgroundColor: "var(--sand)" }} className="py-8 px-6">
-        <div className="max-w-3xl mx-auto grid md:grid-cols-3 gap-4">
-          {[
-            ["1", "Kies uw vis", "Zoek of blader door het volledige assortiment"],
-            ["2", "Wij bellen terug", "U ontvangt de prijs en bevestiging"],
-            ["3", "Ophalen & betalen", "Winkel, markt of Voorschoten — contant of pin"],
-          ].map(([num, title, desc]) => (
-            <div key={num} className="flex items-start gap-3">
-              <div
-                className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white flex-shrink-0 mt-0.5"
-                style={{ backgroundColor: "var(--navy)" }}
-              >
-                {num}
-              </div>
-              <div>
-                <p className="font-semibold text-base" style={{ color: "var(--navy)" }}>
-                  {title}
-                </p>
-                <p className="text-sm opacity-60" style={{ color: "var(--charcoal)" }}>
-                  {desc}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="max-w-3xl mx-auto px-6 py-10">
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* === STAP 1: ZOEKEN === */}
-          <div className="bg-white border p-6 md:p-8" style={{ borderColor: "var(--sand)" }}>
-            <h2
-              className="text-2xl font-bold mb-2"
-              style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
-            >
-              Wat wilt u bestellen?
-            </h2>
-            <p className="text-sm mb-5 opacity-60" style={{ color: "var(--charcoal)" }}>
-              Zoek op productnaam of blader door ons volledige assortiment ({FORM_CATALOG.length} producten)
-            </p>
-
-            {/* Search input */}
-            <div ref={searchRef} className="relative mb-4">
-              <div
-                className="flex items-center border px-4 py-3 gap-3"
-                style={{ borderColor: showSuggestions ? "var(--navy)" : "var(--sand)" }}
-              >
-                <Search size={18} style={{ color: "var(--navy)", opacity: 0.5 }} />
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onFocus={() => {
-                    if (suggestions.length > 0) setShowSuggestions(true);
-                  }}
-                  placeholder="Zoek bijv. kibbeling, garnalen, zalm, oesters..."
-                  className="flex-1 text-base focus:outline-none bg-transparent"
-                  style={{ color: "var(--charcoal)" }}
-                  autoComplete="off"
-                />
-                {searchQuery && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSearchQuery("");
-                      setSuggestions([]);
-                      setShowSuggestions(false);
-                    }}
-                  >
-                    <X size={16} style={{ color: "var(--charcoal)", opacity: 0.4 }} />
-                  </button>
-                )}
-              </div>
-
-              {/* Suggestions dropdown */}
-              {showSuggestions && (
-                <div
-                  className="absolute z-10 left-0 right-0 top-full border-t-0 shadow-lg"
-                  style={{ backgroundColor: "white", border: "1px solid var(--navy)" }}
-                >
-                  {suggestions.map((product) => {
-                    const alInBestelling = bestelling.some(
-                      (i) => i.product.id === product.id
-                    );
-                    return (
-                      <button
-                        key={product.id}
-                        type="button"
-                        disabled={alInBestelling}
-                        onClick={() => addToOrder(product)}
-                        className="w-full text-left px-4 py-3 border-b last:border-b-0 flex items-center justify-between gap-4 transition-colors hover:bg-amber-50 disabled:opacity-40"
-                        style={{ borderColor: "var(--sand)" }}
-                      >
-                        <div>
-                          <p className="font-medium text-sm" style={{ color: "var(--navy)" }}>
-                            {product.naam}
-                            {product.opAanvraag && <OpAanvraagBadge />}
-                          </p>
-                          <p className="text-xs opacity-60" style={{ color: "var(--charcoal)" }}>
-                            {CATEGORIE_LABELS[product.categorie]}
-                          </p>
-                        </div>
-                        {alInBestelling ? (
-                          <span className="text-xs opacity-40" style={{ color: "var(--charcoal)" }}>
-                            toegevoegd
-                          </span>
-                        ) : (
-                          <Plus size={16} style={{ color: "var(--seafoam)" }} />
-                        )}
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-
-            {/* Snel toevoegen — populaire producten (1 tik) */}
-            <div className="mb-4">
-              <p className="text-xs opacity-50 mb-2" style={{ color: "var(--charcoal)" }}>
-                Populair — voeg toe met één tik:
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {POPULAIR.map((slug) => {
-                  const product = FORM_CATALOG.find((p) => p.id === slug);
-                  if (!product) return null;
-                  const alIn = bestelling.some((i) => i.product.id === product.id);
-                  return (
-                    <button
-                      key={slug}
-                      type="button"
-                      disabled={alIn}
-                      onClick={() => addToOrder(product)}
-                      className="text-sm px-3 py-1.5 border transition-colors hover:opacity-80 disabled:cursor-default"
-                      style={{
-                        borderColor: alIn ? "var(--seafoam)" : "var(--sand)",
-                        backgroundColor: alIn ? "rgba(58,128,96,0.08)" : "white",
-                        color: alIn ? "var(--seafoam)" : "var(--navy)",
-                      }}
-                    >
-                      {alIn ? "✓ " : "+ "}
-                      {product.naam}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Browse by category toggle */}
-            <button
-              type="button"
-              onClick={() => setShowBrowse(!showBrowse)}
-              className="flex items-center gap-2 text-sm font-medium mb-4 transition-opacity hover:opacity-70"
-              style={{ color: "var(--navy)" }}
-            >
-              <ChevronDown
-                size={16}
+    <form onSubmit={verstuur} className="grid lg:grid-cols-[1fr_20rem] gap-10 lg:gap-14 items-start">
+      <div>
+        {/* ── Wat bestelt u? ────────────────────────────────────────────── */}
+        <fieldset className="mb-10">
+          <legend className="kapitaal mb-3">{t("stapProduct")}</legend>
+          <div className="flex gap-2 mb-6">
+            {(
+              [
+                ["verse-vis", t("soortVis")],
+                ["visschaal", t("soortSchaal")],
+              ] as [Soort, string][]
+            ).map(([waarde, label]) => (
+              <button
+                key={waarde}
+                type="button"
+                onClick={() => setSoort(waarde)}
+                className="px-4 py-2 text-sm font-semibold transition-colors"
                 style={{
-                  transform: showBrowse ? "rotate(180deg)" : "rotate(0deg)",
-                  transition: "transform 0.2s",
+                  border: "1px solid var(--navy)",
+                  backgroundColor: soort === waarde ? "var(--navy)" : "transparent",
+                  color: soort === waarde ? "var(--cream)" : "var(--navy)",
                 }}
-              />
-              Of blader door ons volledige assortiment
-            </button>
-
-            {showBrowse && (
-              <div className="space-y-6 pt-4 border-t" style={{ borderColor: "var(--sand)" }}>
-                {(Object.keys(CATEGORIE_LABELS) as Categorie[]).map((cat) => {
-                  const items = FORM_CATALOG.filter((p) => p.categorie === cat);
-                  if (items.length === 0) return null;
-                  return (
-                    <div key={cat}>
-                      <h3
-                        className="text-xs uppercase tracking-widest mb-2 opacity-40 font-semibold"
-                        style={{ color: "var(--charcoal)" }}
-                      >
-                        {CATEGORIE_LABELS[cat]}
-                      </h3>
-                      <div className="flex flex-wrap gap-2">
-                        {items.map((product) => {
-                          const alIn = bestelling.some(
-                            (i) => i.product.id === product.id
-                          );
-                          return (
-                            <button
-                              key={product.id}
-                              type="button"
-                              disabled={alIn}
-                              onClick={() => addToOrder(product)}
-                              className="text-sm px-3 py-1.5 border transition-colors hover:opacity-80 disabled:opacity-40 disabled:cursor-default"
-                              style={{
-                                borderColor: alIn ? "var(--seafoam)" : "var(--sand)",
-                                backgroundColor: alIn ? "rgba(58,128,96,0.08)" : "white",
-                                color: alIn ? "var(--seafoam)" : "var(--navy)",
-                              }}
-                            >
-                              {alIn ? "✓ " : ""}{product.naam}
-                              {product.opAanvraag && (
-                                <span style={{ color: "var(--gold)" }}> ·</span>
-                              )}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  );
-                })}
-                <p className="text-xs opacity-50 flex items-center gap-1.5" style={{ color: "var(--charcoal)" }}>
-                  <span style={{ color: "var(--gold)" }}>·</span> = op aanvraag (we bevestigen of we het voor uw dag kunnen regelen)
-                </p>
-              </div>
-            )}
-
-            {/* Order list */}
-            {!bestellingLeeg && (
-              <div className="mt-6 space-y-2">
-                <div className="flex items-center gap-2 mb-3">
-                  <ShoppingBag size={16} style={{ color: "var(--navy)" }} />
-                  <h3 className="font-semibold text-sm" style={{ color: "var(--navy)" }}>
-                    Uw bestelling ({bestelling.length} {bestelling.length === 1 ? "product" : "producten"})
-                  </h3>
-                </div>
-                {bestelling.map((item) => {
-                  const opties = snijOpties(item.product);
-                  const toonMoten = item.snijwijze === SNIJ_MOTEN;
-                  return (
-                    <div
-                      key={item.product.id}
-                      className="py-3 border-b"
-                      style={{ borderColor: "var(--sand)" }}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="flex-1 min-w-0">
-                          <p className="font-medium text-sm truncate" style={{ color: "var(--navy)" }}>
-                            {item.product.naam}
-                            {item.product.opAanvraag && <OpAanvraagBadge />}
-                          </p>
-                          <p className="text-xs opacity-50" style={{ color: "var(--charcoal)" }}>
-                            {item.product.eenheid}
-                          </p>
-                        </div>
-                        <input
-                          type="text"
-                          value={item.hoeveelheid}
-                          onChange={(e) =>
-                            updateItem(item.product.id, { hoeveelheid: e.target.value })
-                          }
-                          placeholder="Hoeveel?"
-                          className="w-28 border px-3 py-2 text-sm text-center focus:outline-none"
-                          style={{ borderColor: "var(--sand)" }}
-                        />
-                        <button
-                          type="button"
-                          onClick={() => removeItem(item.product.id)}
-                          className="p-1 opacity-30 hover:opacity-70 transition-opacity"
-                        >
-                          <X size={16} />
-                        </button>
-                      </div>
-
-                      {/* Stap: hoe wilt u de vis verwerkt hebben? (alleen verse vis) */}
-                      {opties && (
-                        <div className="mt-2.5 flex flex-wrap items-center gap-2">
-                          <span className="text-xs opacity-55" style={{ color: "var(--charcoal)" }}>
-                            Verwerking:
-                          </span>
-                          <select
-                            value={item.snijwijze}
-                            onChange={(e) =>
-                              updateItem(item.product.id, {
-                                snijwijze: e.target.value,
-                                ...(e.target.value === SNIJ_MOTEN ? {} : { aantalMoten: "" }),
-                              })
-                            }
-                            className="border px-2.5 py-1.5 text-xs bg-white focus:outline-none"
-                            style={{ borderColor: "var(--sand)", color: "var(--navy)" }}
-                            aria-label={`Verwerking voor ${item.product.naam}`}
-                          >
-                            <option value="">Geen voorkeur</option>
-                            {opties.map((o) => (
-                              <option key={o} value={o}>
-                                {o}
-                              </option>
-                            ))}
-                          </select>
-                          {toonMoten && (
-                            <input
-                              type="text"
-                              inputMode="numeric"
-                              value={item.aantalMoten}
-                              onChange={(e) =>
-                                updateItem(item.product.id, { aantalMoten: e.target.value })
-                              }
-                              placeholder="Aantal moten"
-                              className="w-32 border px-2.5 py-1.5 text-xs focus:outline-none"
-                              style={{ borderColor: "var(--sand)" }}
-                              aria-label={`Aantal moten voor ${item.product.naam}`}
-                            />
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-
-                {heeftOpAanvraag && (
-                  <div
-                    className="mt-3 p-4 flex items-start gap-3"
-                    style={{ backgroundColor: "rgba(184,131,46,0.1)", borderLeft: "4px solid var(--gold)" }}
-                  >
-                    <Info size={18} style={{ color: "var(--gold)" }} className="flex-shrink-0 mt-0.5" />
-                    <p className="text-sm leading-relaxed" style={{ color: "var(--charcoal)" }}>
-                      Uw bestelling bevat vis <strong>op aanvraag</strong>. Dat regelen
-                      we graag — we bevestigen telefonisch of het voor uw gekozen
-                      ophaaldag lukt. Voor speciale bestellingen plannen we een paar
-                      dagen vooruit, dus kies bij voorkeur een dag verderop in de week.
-                    </p>
-                  </div>
-                )}
-              </div>
-            )}
+              >
+                {label}
+              </button>
+            ))}
           </div>
 
-          {/* === STAP 2: GEGEVENS === */}
-          <div className="bg-white border p-6 md:p-8" style={{ borderColor: "var(--sand)" }}>
-            <h2
-              className="text-2xl font-bold mb-6"
-              style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
-            >
-              Uw gegevens
-            </h2>
-            <div className="space-y-5">
-              <div>
-                <label className="block text-base font-medium mb-2" style={{ color: "var(--charcoal)" }}>
-                  Naam <span style={{ color: "var(--salmon)" }}>*</span>
+          {soort === "verse-vis" ? (
+            <>
+              <label className="block mb-4">
+                <span className="veld-label">{t("zoekLabel")}</span>
+                <input
+                  type="search"
+                  value={zoek}
+                  onChange={(e) => setZoek(e.target.value)}
+                  placeholder={t("zoekPlaceholder")}
+                  className="veld"
+                  autoComplete="off"
+                />
+              </label>
+
+              {suggesties.length > 0 && (
+                <ul className="mb-6" style={{ border: "1px solid var(--linen)" }}>
+                  {suggesties.map((p) => (
+                    <li key={p.slug} style={{ borderBottom: "1px solid var(--linen)" }}>
+                      <button
+                        type="button"
+                        onClick={() => voegToe(p.slug)}
+                        className="w-full text-left px-4 py-3 hover:bg-[var(--sand)] transition-colors"
+                      >
+                        <span className="font-semibold" style={{ color: "var(--ink)" }}>
+                          {p.naam}
+                        </span>
+                        <span className="block text-sm" style={{ color: "var(--grijs)" }}>
+                          {CATEGORIE_LABELS[p.categorie]}
+                          {!isBezorgbaar(p.categorie) && ` · ${t("alleenAfhalen")}`}
+                        </span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {zoek.trim() === "" && (
+                <div className="mb-6">
+                  <p className="kapitaal mb-2">{t("populair")}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {POPULAIR.map((slug) => {
+                      const p = products.find((x) => x.slug === slug);
+                      if (!p) return null;
+                      return (
+                        <button
+                          key={slug}
+                          type="button"
+                          onClick={() => voegToe(slug)}
+                          className="px-3 py-1.5 text-sm"
+                          style={{ border: "1px solid var(--linen)", color: "var(--navy)" }}
+                        >
+                          + {p.naam}
+                        </button>
+                      );
+                    })}
+                    <button
+                      type="button"
+                      onClick={() => setBladeren(!bladeren)}
+                      className="px-3 py-1.5 text-sm underline underline-offset-4"
+                      style={{ color: "var(--grijs)" }}
+                    >
+                      {t("allesBekijken")}
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {bladeren && (
+                <div
+                  className="mb-6 max-h-80 overflow-y-auto"
+                  style={{ border: "1px solid var(--linen)" }}
+                >
+                  {(Object.keys(CATEGORIE_LABELS) as Categorie[]).map((cat) => (
+                    <div key={cat}>
+                      <p
+                        className="kapitaal px-4 py-2 sticky top-0"
+                        style={{ backgroundColor: "var(--sand)" }}
+                      >
+                        {CATEGORIE_LABELS[cat]}
+                      </p>
+                      {products
+                        .filter((p) => p.categorie === cat)
+                        .map((p) => (
+                          <button
+                            key={p.slug}
+                            type="button"
+                            onClick={() => voegToe(p.slug)}
+                            className="block w-full text-left px-4 py-2 text-sm hover:bg-[var(--sand)]"
+                          >
+                            {p.naam}
+                          </button>
+                        ))}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {regels.length === 0 ? (
+                <p className="py-6 text-sm" style={{ color: "var(--grijs)" }}>
+                  {t("leegMandje")}
+                </p>
+              ) : (
+                <ul>
+                  {regels.map((r) => {
+                    const opties = snijOpties(r.naam, r.categorie);
+                    return (
+                      <li
+                        key={r.slug}
+                        className="py-4"
+                        style={{ borderTop: "1px solid var(--linen)" }}
+                      >
+                        <div className="flex items-start justify-between gap-4 mb-3">
+                          <div>
+                            <p className="font-semibold" style={{ color: "var(--ink)" }}>
+                              {r.naam}
+                            </p>
+                            <p className="text-sm" style={{ color: "var(--grijs)" }}>
+                              {r.eenheid} · {g("dagprijs")}
+                              {!r.bezorgbaar && (
+                                <span style={{ color: "var(--gold)" }}> · {t("alleenAfhalen")}</span>
+                              )}
+                            </p>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => verwijder(r.slug)}
+                            className="text-sm underline underline-offset-4 shrink-0"
+                            style={{ color: "var(--grijs)" }}
+                          >
+                            {t("verwijderen")}
+                          </button>
+                        </div>
+
+                        <div className="grid sm:grid-cols-2 gap-3">
+                          <label>
+                            <span className="veld-label">{t("hoeveelheid")}</span>
+                            <input
+                              type="text"
+                              value={r.hoeveelheid}
+                              onChange={(e) => werkBij(r.slug, "hoeveelheid", e.target.value)}
+                              placeholder={t("hoeveelheidHint")}
+                              className="veld"
+                            />
+                          </label>
+                          {opties && (
+                            <label>
+                              <span className="veld-label">{t("snijwijze")}</span>
+                              <select
+                                value={r.snijwijze}
+                                onChange={(e) => werkBij(r.slug, "snijwijze", e.target.value)}
+                                className="veld"
+                              >
+                                <option value="">—</option>
+                                {opties.map((optie) => (
+                                  <option key={optie} value={optie}>
+                                    {optie}
+                                  </option>
+                                ))}
+                              </select>
+                            </label>
+                          )}
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+            </>
+          ) : (
+            <div>
+              <div
+                className="p-5 mb-4"
+                style={{ backgroundColor: "#fff", border: "1px solid var(--linen)" }}
+              >
+                <div className="flex justify-between gap-3 py-1.5">
+                  <span>{t("basisschaal")}</span>
+                  <span className="bedrag">{euro(STARTBEDRAG)}</span>
+                </div>
+                {schaalRegels.map((r) => (
+                  <div
+                    key={r.naam}
+                    className="flex justify-between gap-3 py-1.5 text-sm"
+                    style={{ borderTop: "1px solid var(--linen)", color: "var(--charcoal)" }}
+                  >
+                    <span>
+                      {r.aantal > 1 && `${r.aantal}× `}
+                      {r.naam}
+                    </span>
+                    <span className="bedrag shrink-0">{euro(r.bedrag)}</span>
+                  </div>
+                ))}
+                <div
+                  className="flex justify-between gap-3 pt-2.5 mt-1.5 font-semibold"
+                  style={{ borderTop: "2px solid var(--navy)" }}
+                >
+                  <span>{g("totaal")}</span>
+                  <span className="bedrag">{euro(schaalTotaal)}</span>
+                </div>
+              </div>
+              <Link
+                href={`/${locale}/visschalen#samenstellen`}
+                className="text-sm underline underline-offset-4"
+                style={{ color: "var(--navy)" }}
+              >
+                {schaalRegels.length === 0 ? t("schaalKiezen") : t("schaalAanpassen")}
+              </Link>
+            </div>
+          )}
+        </fieldset>
+
+        {/* ── Bezorgen of afhalen ───────────────────────────────────────── */}
+        <fieldset className="mb-10">
+          <legend className="kapitaal mb-3">{t("stapLevering")}</legend>
+
+          <div className="grid sm:grid-cols-2 gap-3 mb-6">
+            {(
+              [
+                ["bezorgen", t("bezorgenKop"), t("bezorgenTekst", { dagen: bezorgdagenLabel })],
+                ["afhalen", t("afhalenKop"), t("afhalenTekst")],
+              ] as [Wijze, string, string][]
+            ).map(([waarde, kop, uitleg]) => (
+              <label
+                key={waarde}
+                className="p-4 cursor-pointer transition-colors"
+                style={{
+                  border: "1px solid",
+                  borderColor: wijze === waarde ? "var(--navy)" : "var(--linen)",
+                  backgroundColor: wijze === waarde ? "var(--sand)" : "#fff",
+                }}
+              >
+                <input
+                  type="radio"
+                  name="wijze"
+                  value={waarde}
+                  checked={wijze === waarde}
+                  onChange={() => setWijze(waarde)}
+                  className="sr-only"
+                />
+                <span className="block font-semibold" style={{ color: "var(--ink)" }}>
+                  {kop}
+                </span>
+                <span className="block text-sm mt-0.5" style={{ color: "var(--grijs)" }}>
+                  {uitleg}
+                </span>
+              </label>
+            ))}
+          </div>
+
+          {wijze === "bezorgen" ? (
+            <>
+              <div className="grid sm:grid-cols-[1fr_1fr] gap-3 mb-3">
+                <label>
+                  <span className="veld-label">
+                    {t("postcode")} <Ster />
+                  </span>
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    autoComplete="postal-code"
+                    value={postcode}
+                    onChange={(e) => setPostcode(e.target.value)}
+                    placeholder="2313 AL"
+                    className="veld"
+                    required
+                  />
                 </label>
+                <label>
+                  <span className="veld-label">
+                    {t("huisnummer")} <Ster />
+                  </span>
+                  <input
+                    type="text"
+                    value={huisnummer}
+                    onChange={(e) => setHuisnummer(e.target.value)}
+                    className="veld"
+                    required
+                  />
+                </label>
+              </div>
+
+              <label className="block mb-3">
+                <span className="veld-label">
+                  {t("straat")} <Ster />
+                </span>
                 <input
                   type="text"
+                  autoComplete="street-address"
+                  value={straat}
+                  onChange={(e) => setStraat(e.target.value)}
+                  className="veld"
                   required
-                  value={klant.naam}
-                  onChange={(e) => setKlant((p) => ({ ...p, naam: e.target.value }))}
-                  placeholder="Voor- en achternaam"
-                  className="w-full border px-4 py-3 text-base focus:outline-none"
-                  style={{ borderColor: "var(--sand)" }}
                 />
-              </div>
+              </label>
 
-              <div>
-                <label className="block text-base font-medium mb-2" style={{ color: "var(--charcoal)" }}>
-                  Telefoonnummer <span style={{ color: "var(--salmon)" }}>*</span>
-                </label>
-                <input
-                  type="tel"
-                  required
-                  value={klant.telefoon}
-                  onChange={(e) => setKlant((p) => ({ ...p, telefoon: e.target.value }))}
-                  placeholder="06 12 34 56 78"
-                  className="w-full border px-4 py-3 text-base focus:outline-none"
-                  style={{ borderColor: "var(--sand)" }}
-                />
-              </div>
+              {postcodeUitkomst?.status === "binnen" && (
+                <p className="text-sm mb-4" style={{ color: "var(--seafoam)" }}>
+                  {postcodeUitkomst.gemeente.naam} · {t("bezorgkosten")}{" "}
+                  {euro(postcodeUitkomst.kosten)}
+                </p>
+              )}
+              {postcodeUitkomst?.status === "buiten" && (
+                <p className="text-sm mb-4" style={{ color: "var(--rood)" }}>
+                  {t("buitenGebied")}
+                </p>
+              )}
 
-              <div>
-                <label className="block text-base font-medium mb-2" style={{ color: "var(--charcoal)" }}>
-                  E-mailadres <span className="opacity-50 text-sm font-normal">(optioneel)</span>
+              <div className="grid sm:grid-cols-2 gap-3">
+                <label>
+                  <span className="veld-label">{t("datum")}</span>
+                  <select
+                    value={datum}
+                    onChange={(e) => setDatum(e.target.value)}
+                    className="veld"
+                  >
+                    <option value="">—</option>
+                    {dagen.map((d) => (
+                      <option key={d.waarde} value={d.waarde}>
+                        {d.label}
+                      </option>
+                    ))}
+                  </select>
                 </label>
-                <input
-                  type="email"
-                  value={klant.email}
-                  onChange={(e) => setKlant((p) => ({ ...p, email: e.target.value }))}
-                  placeholder="uw@email.nl"
-                  className="w-full border px-4 py-3 text-base focus:outline-none"
-                  style={{ borderColor: "var(--sand)" }}
-                />
-                <label className="flex items-start gap-2.5 mt-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={klant.nieuwsbrief}
-                    onChange={(e) => setKlant((p) => ({ ...p, nieuwsbrief: e.target.checked }))}
-                    className="mt-1"
-                  />
-                  <span className="text-sm leading-snug" style={{ color: "var(--charcoal)", opacity: 0.75 }}>
-                    Houd mij per e-mail op de hoogte van weekaanbiedingen en wat
-                    er vers binnen is. Geen spam, wel vis — u kunt zich altijd
-                    afmelden.
-                  </span>
+                <label>
+                  <span className="veld-label">{t("tijdvak")}</span>
+                  <select
+                    value={tijdvak}
+                    onChange={(e) => setTijdvak(e.target.value)}
+                    className="veld"
+                  >
+                    <option value="">—</option>
+                    {BEZORGING.tijdvakken.map((v) => (
+                      <option key={v} value={v}>
+                        {v}
+                      </option>
+                    ))}
+                  </select>
                 </label>
               </div>
-
-              <div>
-                <label className="block text-base font-medium mb-2" style={{ color: "var(--charcoal)" }}>
-                  Wanneer wilt u ophalen? <span style={{ color: "var(--salmon)" }}>*</span>
-                </label>
+            </>
+          ) : (
+            <div className="grid sm:grid-cols-2 gap-3">
+              <label>
+                <span className="veld-label">{t("afhaalpunt")}</span>
                 <select
-                  required
-                  value={klant.ophaaldag}
-                  onChange={(e) => setKlant((p) => ({ ...p, ophaaldag: e.target.value }))}
-                  className="w-full border px-4 py-3 text-base bg-white focus:outline-none"
-                  style={{ borderColor: "var(--sand)" }}
+                  value={afhaalpunt}
+                  onChange={(e) => setAfhaalpunt(e.target.value)}
+                  className="veld"
                 >
-                  <option value="">— Kies een dag —</option>
-                  {AFHAALDAGEN.map((d) => (
-                    <option key={d} value={d}>
-                      {d}
+                  {AFHAALPUNTEN.map((punt) => (
+                    <option key={punt} value={punt}>
+                      {punt}
                     </option>
                   ))}
                 </select>
-                {heeftOpAanvraag && (
-                  <p className="text-xs mt-2 leading-relaxed" style={{ color: "var(--gold)" }}>
-                    Uw bestelling bevat een product op aanvraag — houd bij voorkeur een
-                    paar dagen aan, dan kunnen we het voor u inplannen.
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <label className="block text-base font-medium mb-2" style={{ color: "var(--charcoal)" }}>
-                  Bijzonderheden of eigen wensen
-                </label>
-                <textarea
-                  rows={4}
-                  value={klant.opmerking}
-                  onChange={(e) => setKlant((p) => ({ ...p, opmerking: e.target.value }))}
-                  placeholder="Staat uw vis er niet bij? Typ het hier gewoon in. Bijv: 500g verse forel, schoongemaakt, zonder kop. Of: vaste wekelijkse bestelling kibbeling elke zaterdag."
-                  className="w-full border px-4 py-3 text-base resize-none focus:outline-none"
-                  style={{ borderColor: "var(--sand)" }}
+              </label>
+              <label>
+                <span className="veld-label">{t("datum")}</span>
+                <input
+                  type="date"
+                  value={datum}
+                  onChange={(e) => setDatum(e.target.value)}
+                  className="veld"
                 />
-              </div>
+              </label>
             </div>
+          )}
 
+          {bezorgenGeblokkeerd && (
             <p
-              className="text-sm mt-4 mb-6 leading-relaxed"
-              style={{ color: "var(--charcoal)", opacity: 0.45 }}
+              className="mt-4 p-3 text-sm"
+              style={{ backgroundColor: "rgba(156,43,33,0.08)", color: "var(--rood)" }}
             >
-              Wij bellen u terug voor prijs en bevestiging &mdash; geen aanbetaling vereist.
-              Betaling bij afhalen, contant of pin.
+              {t("alleenAfhalenUitleg")} —{" "}
+              {nietBezorgbaar.map((r) => r.naam).join(", ")}
             </p>
+          )}
+        </fieldset>
 
-            <button
-              type="submit"
-              disabled={
-                status === "sending" ||
-                (!bestellingIngevuld && !klant.opmerking.trim())
-              }
-              className="w-full py-5 text-base font-medium tracking-wide text-white transition-opacity hover:opacity-90 disabled:opacity-40"
-              style={{ backgroundColor: "var(--navy)" }}
-            >
-              {status === "sending"
-                ? "Bezig met versturen..."
-                : "Bestelling aanvragen →"}
-            </button>
+        {/* ── Uw gegevens ───────────────────────────────────────────────── */}
+        <fieldset>
+          <legend className="kapitaal mb-3">{t("stapGegevens")}</legend>
 
-            {status === "error" && (
+          <div className="grid sm:grid-cols-2 gap-3 mb-3">
+            <label>
+              <span className="veld-label">
+                {t("naam")} <Ster />
+              </span>
+              <input
+                type="text"
+                autoComplete="name"
+                value={naam}
+                onChange={(e) => setNaam(e.target.value)}
+                className="veld"
+                required
+              />
+            </label>
+            <label>
+              <span className="veld-label">
+                {t("telefoon")} <Ster />
+                <span className="font-normal" style={{ color: "var(--grijs)" }}>
+                  {" "}
+                  — {t("telefoonHint")}
+                </span>
+              </span>
+              <input
+                type="tel"
+                autoComplete="tel"
+                value={telefoon}
+                onChange={(e) => setTelefoon(e.target.value)}
+                className="veld"
+                required
+              />
+            </label>
+          </div>
+
+          <label className="block mb-3">
+            <span className="veld-label">
+              {t("email")}{" "}
+              <span className="font-normal" style={{ color: "var(--grijs)" }}>
+                ({g("optioneel")})
+              </span>
+            </span>
+            <input
+              type="email"
+              autoComplete="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="veld"
+            />
+          </label>
+
+          <label className="block mb-3">
+            <span className="veld-label">{t("allergie")}</span>
+            <textarea
+              rows={2}
+              value={allergie}
+              onChange={(e) => setAllergie(e.target.value)}
+              className="veld resize-none"
+            />
+          </label>
+
+          <label className="block mb-4">
+            <span className="veld-label">{t("opmerking")}</span>
+            <textarea
+              rows={3}
+              value={opmerking}
+              onChange={(e) => setOpmerking(e.target.value)}
+              placeholder={t("opmerkingHint")}
+              className="veld resize-none"
+            />
+          </label>
+
+          <label className="flex items-start gap-2.5 text-sm cursor-pointer">
+            <input
+              type="checkbox"
+              checked={nieuwsbrief}
+              onChange={(e) => setNieuwsbrief(e.target.checked)}
+              className="mt-1"
+            />
+            <span style={{ color: "var(--charcoal)" }}>{t("nieuwsbrief")}</span>
+          </label>
+        </fieldset>
+      </div>
+
+      {/* ── Overzicht en versturen ────────────────────────────────────────── */}
+      <aside className="lg:sticky lg:top-32">
+        <div className="p-6" style={{ backgroundColor: "var(--navy)", color: "rgba(250,246,239,0.85)" }}>
+          <h2 className="text-[1.2rem] mb-4" style={{ color: "var(--cream)" }}>
+            {t("stapProduct")}
+          </h2>
+
+          {soort === "visschaal" ? (
+            <dl className="text-sm">
+              <Rij label={t("basisschaal")} waarde={euro(STARTBEDRAG)} />
+              {schaalRegels.map((r) => (
+                <Rij
+                  key={r.naam}
+                  label={`${r.aantal > 1 ? `${r.aantal}× ` : ""}${r.naam}`}
+                  waarde={euro(r.bedrag)}
+                />
+              ))}
+              {wijze === "bezorgen" && bezorgkosten > 0 && (
+                <Rij label={t("bezorgkosten")} waarde={euro(bezorgkosten)} />
+              )}
               <div
-                className="mt-4 p-4 text-center border"
-                style={{ backgroundColor: "#fef2f2", borderColor: "#fecaca" }}
+                className="flex justify-between gap-3 pt-3 mt-1 text-[1.1rem] font-semibold"
+                style={{ borderTop: "2px solid rgba(250,246,239,0.5)", color: "var(--cream)" }}
               >
-                <p className="text-sm mb-2" style={{ color: "#b91c1c" }}>
-                  Er ging iets mis. Bel ons direct:
-                </p>
-                <a
-                  href="tel:+31715149802"
-                  className="font-bold text-lg underline"
-                  style={{ color: "#b91c1c" }}
-                >
-                  071 514 9802
-                </a>
+                <dt>{g("totaal")}</dt>
+                <dd className="bedrag">{euro(teBetalen ?? schaalTotaal)}</dd>
               </div>
-            )}
-          </div>
+            </dl>
+          ) : (
+            <ul className="text-sm">
+              {regels.length === 0 ? (
+                <li style={{ opacity: 0.6 }}>{t("leegMandje")}</li>
+              ) : (
+                regels.map((r) => (
+                  <li
+                    key={r.slug}
+                    className="flex justify-between gap-3 py-2"
+                    style={{ borderTop: "1px solid rgba(250,246,239,0.22)" }}
+                  >
+                    <span>{r.naam}</span>
+                    <span className="shrink-0" style={{ opacity: 0.6 }}>
+                      {r.hoeveelheid || "—"}
+                    </span>
+                  </li>
+                ))
+              )}
+              <li className="pt-3 mt-1 text-[0.85rem]" style={{ borderTop: "1px solid rgba(250,246,239,0.35)", opacity: 0.75 }}>
+                {g("dagprijs")} — {t("telefoonHint").toLowerCase()}
+              </li>
+            </ul>
+          )}
 
-          <div className="text-center pb-4">
-            <p className="text-sm" style={{ color: "var(--charcoal)", opacity: 0.5 }}>
-              Liever bellen?{" "}
+          <p className="mt-5 text-[0.8rem] leading-relaxed" style={{ opacity: 0.7 }}>
+            {t("betalenNu")}
+            {!sumupActief && ` ${t("betalenStraks")}`}
+          </p>
+
+          <button
+            type="submit"
+            disabled={!kanVersturen || status === "versturen"}
+            className="knop knop-rood w-full mt-5"
+          >
+            {status === "versturen"
+              ? t("bezig")
+              : sumupActief && soort === "visschaal"
+                ? t("versturenBetalen")
+                : t("versturen")}
+          </button>
+
+          {status === "mislukt" && (
+            <div className="mt-4 p-3 text-sm" style={{ backgroundColor: "rgba(250,246,239,0.12)" }}>
+              <p className="font-semibold mb-1" style={{ color: "var(--cream)" }}>
+                {t("mislukt")}
+              </p>
+              <p className="mb-2">{fout}</p>
               <a
-                href="tel:+31715149802"
-                className="font-medium underline"
-                style={{ color: "var(--navy)" }}
+                href={`tel:${BEDRIJF.telefoon.e164}`}
+                className="underline underline-offset-4 font-semibold"
+                style={{ color: "var(--cream)" }}
               >
-                071 514 9802
+                {BEDRIJF.telefoon.weergave}
               </a>
-            </p>
-          </div>
-        </form>
-      </section>
-    </main>
+            </div>
+          )}
+
+          <a
+            href={whatsappLink("Hallo Schaap's Vishandel, ik wil graag iets bestellen.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block text-center text-[0.8rem] underline underline-offset-4 mt-4"
+            style={{ opacity: 0.7 }}
+          >
+            {g("whatsapp")}
+          </a>
+        </div>
+      </aside>
+    </form>
+  );
+}
+
+function maakRegel(slug: string): Regel | null {
+  const product = products.find((p) => p.slug === slug);
+  if (!product) return null;
+  return {
+    slug: product.slug,
+    naam: product.naam,
+    categorie: product.categorie,
+    eenheid: eenheidVoor(product.categorie),
+    bezorgbaar: isBezorgbaar(product.categorie),
+    hoeveelheid: "",
+    snijwijze: "",
+  };
+}
+
+function Ster() {
+  return <span style={{ color: "var(--rood)" }}>*</span>;
+}
+
+function Rij({ label, waarde }: { label: string; waarde: string }) {
+  return (
+    <div
+      className="flex justify-between gap-3 py-2"
+      style={{ borderTop: "1px solid rgba(250,246,239,0.22)" }}
+    >
+      <dt>{label}</dt>
+      <dd className="bedrag shrink-0">{waarde}</dd>
+    </div>
   );
 }

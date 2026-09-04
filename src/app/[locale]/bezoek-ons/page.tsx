@@ -80,11 +80,11 @@ function BezoekContent() {
       <section style={{ backgroundColor: "var(--navy)" }} className="py-16 text-center px-4">
         <h1
           className="text-4xl md:text-5xl font-bold mb-4"
-          style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+          style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
         >
           {t("title")}
         </h1>
-        <p className="text-lg" style={{ color: "rgba(246,250,253,0.75)" }}>
+        <p className="text-lg" style={{ color: "rgba(250,246,239,0.75)" }}>
           {t("sub")}
         </p>
       </section>
@@ -111,7 +111,7 @@ function BezoekContent() {
                   </div>
                   <h2
                     className="text-2xl font-bold mb-5"
-                    style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+                    style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
                   >
                     {name}
                   </h2>
@@ -176,13 +176,13 @@ function BezoekContent() {
 
       {/* Phone CTA */}
       <section style={{ backgroundColor: "var(--navy)" }} className="py-12 text-center px-4">
-        <p className="text-sm mb-3" style={{ color: "rgba(246,250,253,0.6)" }}>
+        <p className="text-sm mb-3" style={{ color: "rgba(250,246,239,0.6)" }}>
           Vragen? Bel ons gerust op:
         </p>
         <a
           href="tel:+31715149802"
           className="text-4xl font-bold transition-opacity hover:opacity-80"
-          style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+          style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
         >
           071 514 9802
         </a>

@@ -91,10 +91,10 @@ export default async function ViswinkelVoorschotenPage({
         <p className="text-xs tracking-[0.25em] uppercase mb-4 opacity-70" style={{ color: "var(--sand)" }}>
           Elke vrijdag · bij Hoogvliet Voorschoten
         </p>
-        <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}>
+        <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}>
           Verse vis in Voorschoten
         </h1>
-        <p className="max-w-2xl mx-auto leading-relaxed" style={{ color: "rgba(246,250,253,0.8)" }}>
+        <p className="max-w-2xl mx-auto leading-relaxed" style={{ color: "rgba(250,246,239,0.8)" }}>
           Schaap&apos;s Vishandel — sinds 1938 — staat elke vrijdag met de viskraam in Voorschoten.
           Verse vis, kibbeling, haring en onze biologische Varlaks zalm, dicht bij huis.
         </p>
@@ -107,7 +107,7 @@ export default async function ViswinkelVoorschotenPage({
             <p className="text-xs tracking-[0.2em] uppercase mb-3 font-semibold opacity-50" style={{ color: "var(--navy)" }}>
               De vrijdagmarkt
             </p>
-            <h2 className="text-3xl font-bold mb-4 leading-tight" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+            <h2 className="text-3xl font-bold mb-4 leading-tight" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
               Elke vrijdag bij Hoogvliet
             </h2>
             <p className="leading-relaxed mb-4" style={{ color: "var(--charcoal)", opacity: 0.8 }}>
@@ -141,7 +141,7 @@ export default async function ViswinkelVoorschotenPage({
       {/* Waarom Schaap's */}
       <section style={{ backgroundColor: "var(--sand)" }} className="py-14 px-6">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold text-center mb-8" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+          <h2 className="text-2xl font-bold text-center mb-8" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
             Waarom klanten uit Voorschoten voor Schaap&apos;s kiezen
           </h2>
           <div className="grid sm:grid-cols-3 gap-5">
@@ -151,7 +151,7 @@ export default async function ViswinkelVoorschotenPage({
               ["Écht gerookt & MSC", "Duurzaam gevangen (MSC) en ambachtelijk gerookt — geen kunstmatige rooksmaak."],
             ].map(([t, d]) => (
               <div key={t} className="bg-white p-5">
-                <p className="font-bold text-base mb-1" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>{t}</p>
+                <p className="font-bold text-base mb-1" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>{t}</p>
                 <p className="text-sm leading-relaxed" style={{ color: "var(--charcoal)", opacity: 0.75 }}>{d}</p>
               </div>
             ))}
@@ -170,13 +170,13 @@ export default async function ViswinkelVoorschotenPage({
       {/* FAQ */}
       <section style={{ backgroundColor: "white" }} className="py-14 px-6">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold text-center mb-8" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+          <h2 className="text-2xl font-bold text-center mb-8" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
             Veelgestelde vragen — Voorschoten
           </h2>
           <div className="space-y-3">
             {faq.map((f) => (
               <details key={f.q} className="group p-5" style={{ border: "1px solid var(--sand)" }}>
-                <summary className="flex items-center justify-between gap-3 cursor-pointer select-none font-bold" style={{ listStyle: "none", color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+                <summary className="flex items-center justify-between gap-3 cursor-pointer select-none font-bold" style={{ listStyle: "none", color: "var(--navy)", fontFamily: "var(--font-display)" }}>
                   {f.q}
                   <svg className="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                     <path d="m6 9 6 6 6-6" />
@@ -191,10 +191,10 @@ export default async function ViswinkelVoorschotenPage({
 
       {/* CTA */}
       <section style={{ backgroundColor: "var(--navy)" }} className="py-14 px-6 text-center">
-        <h2 className="text-2xl font-bold mb-4 text-white" style={{ fontFamily: "Playfair Display, serif" }}>
+        <h2 className="text-2xl font-bold mb-4 text-white" style={{ fontFamily: "var(--font-display)" }}>
           Bestel vooruit voor de vrijdagmarkt
         </h2>
-        <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "rgba(246,250,253,0.7)" }}>
+        <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "rgba(250,246,239,0.7)" }}>
           Reserveer uw vis en haal het vrijdag op bij Hoogvliet in Voorschoten.
         </p>
         <Link href={`/${locale}/bestellen`} className="inline-block text-white px-8 py-4 tracking-wide font-medium transition-opacity hover:opacity-90" style={{ backgroundColor: "var(--salmon)" }}>

@@ -123,11 +123,11 @@ export default async function MarktkraamPage({
         </p>
         <h1
           className="text-4xl md:text-5xl font-bold mb-4"
-          style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+          style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
         >
           Onze viskramen in Leiden &amp; Voorschoten
         </h1>
-        <p className="max-w-2xl mx-auto leading-relaxed" style={{ color: "rgba(246,250,253,0.8)" }}>
+        <p className="max-w-2xl mx-auto leading-relaxed" style={{ color: "rgba(250,246,239,0.8)" }}>
           Verse vis, kibbeling en haring — vers van de kraam. Woensdag op de Vismarkt aan de Nieuwe Rijn,
           zaterdag op de Aalmarkt bij de Waag, en vrijdag bij Hoogvliet in Voorschoten.
         </p>
@@ -141,7 +141,7 @@ export default async function MarktkraamPage({
               <p className="text-xs uppercase tracking-widest font-bold mb-1" style={{ color: k.kleur }}>
                 {k.dag}
               </p>
-              <h2 className="text-lg font-bold mb-1 leading-snug" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+              <h2 className="text-lg font-bold mb-1 leading-snug" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
                 {k.titel}
               </h2>
               <p className="text-sm font-semibold mb-3" style={{ color: "var(--charcoal)", opacity: 0.6 }}>
@@ -177,7 +177,7 @@ export default async function MarktkraamPage({
       {/* FAQ */}
       <section style={{ backgroundColor: "white" }} className="py-14 px-6">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold text-center mb-8" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+          <h2 className="text-2xl font-bold text-center mb-8" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
             Veelgestelde vragen over onze marktkramen
           </h2>
           <div className="space-y-3">
@@ -185,7 +185,7 @@ export default async function MarktkraamPage({
               <details key={f.q} className="group p-5" style={{ border: "1px solid var(--sand)" }}>
                 <summary
                   className="flex items-center justify-between gap-3 cursor-pointer select-none font-bold"
-                  style={{ listStyle: "none", color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+                  style={{ listStyle: "none", color: "var(--navy)", fontFamily: "var(--font-display)" }}
                 >
                   {f.q}
                   <svg className="w-4 h-4 flex-shrink-0 transition-transform group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -203,10 +203,10 @@ export default async function MarktkraamPage({
 
       {/* CTA */}
       <section style={{ backgroundColor: "var(--navy)" }} className="py-14 px-6 text-center">
-        <h2 className="text-2xl font-bold mb-4 text-white" style={{ fontFamily: "Playfair Display, serif" }}>
+        <h2 className="text-2xl font-bold mb-4 text-white" style={{ fontFamily: "var(--font-display)" }}>
           Vis reserveren voor de markt?
         </h2>
-        <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "rgba(246,250,253,0.7)" }}>
+        <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "rgba(250,246,239,0.7)" }}>
           Bestel vooruit — dan ligt het voor u klaar op de kraam of in de winkel.
         </p>
         <Link

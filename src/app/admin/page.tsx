@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { PRODUCTEN, type Product } from "@/lib/products";
 
@@ -15,6 +16,7 @@ export default function AdminPage() {
 
   useEffect(() => {
     const stored = localStorage.getItem("schaapsvis_producten");
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setProducten(stored ? JSON.parse(stored) : PRODUCTEN);
   }, []);
 
@@ -142,9 +144,9 @@ export default function AdminPage() {
         ))}
 
         <div className="mt-8 text-center">
-          <a href="/nl" className="text-sm text-gray-400 underline hover:text-gray-600">
+          <Link href="/nl" className="text-sm text-gray-400 underline hover:text-gray-600">
             Terug naar de website
-          </a>
+          </Link>
         </div>
       </div>
     </main>

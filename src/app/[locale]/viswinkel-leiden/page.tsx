@@ -109,11 +109,11 @@ export default async function ViswinkelLeidenPage({
           </p>
           <h1
             className="text-4xl md:text-5xl font-bold mb-5 leading-tight"
-            style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+            style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
           >
             Viswinkel in Leiden —<br />verse vis sinds 1938
           </h1>
-          <p className="text-lg leading-relaxed max-w-2xl mb-8" style={{ color: "rgba(246,250,253,0.78)" }}>
+          <p className="text-lg leading-relaxed max-w-2xl mb-8" style={{ color: "rgba(250,246,239,0.78)" }}>
             Vier generaties vakmanschap op de Herenstraat. Dagverse kibbeling, haring, Hollandse
             garnalen en biologische zalm — direct van leverancier naar toonbank, zonder omwegen.
           </p>
@@ -167,7 +167,7 @@ export default async function ViswinkelLeidenPage({
         <div className="max-w-5xl mx-auto">
           <h2
             className="text-3xl font-bold mb-10 text-center"
-            style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+            style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
           >
             Wat vindt u bij ons?
           </h2>
@@ -187,7 +187,7 @@ export default async function ViswinkelLeidenPage({
                 style={{ backgroundColor: "white", border: "1px solid var(--sand)" }}
               >
                 <div className="flex items-start justify-between mb-3">
-                  <h3 className="font-bold text-lg leading-tight" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+                  <h3 className="font-bold text-lg leading-tight" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
                     {naam}
                   </h3>
                   {badge && (
@@ -219,7 +219,7 @@ export default async function ViswinkelLeidenPage({
         <div className="max-w-5xl mx-auto">
           <h2
             className="text-3xl font-bold mb-10"
-            style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+            style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
           >
             Waar vindt u ons?
           </h2>
@@ -245,11 +245,11 @@ export default async function ViswinkelLeidenPage({
               },
             ].map(({ naam, adres, uren, maps }) => (
               <div key={naam} className="p-6" style={{ backgroundColor: "rgba(255,255,255,0.07)" }}>
-                <h3 className="font-bold text-lg mb-2" style={{ color: "var(--gold)", fontFamily: "Playfair Display, serif" }}>
+                <h3 className="font-bold text-lg mb-2" style={{ color: "var(--gold)", fontFamily: "var(--font-display)" }}>
                   {naam}
                 </h3>
-                <p className="text-sm mb-1" style={{ color: "rgba(246,250,253,0.75)" }}>{adres}</p>
-                <p className="text-sm mb-4" style={{ color: "rgba(246,250,253,0.6)" }}>{uren}</p>
+                <p className="text-sm mb-1" style={{ color: "rgba(250,246,239,0.75)" }}>{adres}</p>
+                <p className="text-sm mb-4" style={{ color: "rgba(250,246,239,0.6)" }}>{uren}</p>
                 <a
                   href={maps}
                   target="_blank"
@@ -270,7 +270,7 @@ export default async function ViswinkelLeidenPage({
         <div className="max-w-3xl mx-auto">
           <h2
             className="text-3xl font-bold mb-10"
-            style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+            style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
           >
             Veelgestelde vragen
           </h2>
@@ -293,11 +293,11 @@ export default async function ViswinkelLeidenPage({
       <section style={{ backgroundColor: "var(--navy-dark)" }} className="py-14 px-6 text-center">
         <h2
           className="text-3xl font-bold mb-4"
-          style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+          style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
         >
           Bestel vooruit of kom langs
         </h2>
-        <p className="mb-8 max-w-xl mx-auto" style={{ color: "rgba(246,250,253,0.7)" }}>
+        <p className="mb-8 max-w-xl mx-auto" style={{ color: "rgba(250,246,239,0.7)" }}>
           Reserveer uw vis online of bel/app ons direct. Wij zorgen dat het klaarstaat.
         </p>
         <div className="flex flex-wrap justify-center gap-4">

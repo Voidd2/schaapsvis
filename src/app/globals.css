@@ -1,33 +1,68 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   Schaap's Vishandel — Leiden, sinds 1938
+   ───────────────────────────────────────────────────────────────────────────
+   Uitgangspunt van de vormgeving: een oude Leidse viswinkel, geen webshop-
+   template. Denk aan een geëmailleerd winkelbord en een gezet drukwerkje uit
+   de jaren dertig: warm papier, diep marineblauw, messing en een dof rood.
+   Rechte hoeken, dunne lijnen, weinig schaduw. Geen ronde icoontjes, geen
+   verlopen, geen zwevende kaartjes.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 :root {
-  /* Schaap's Vis logo-palet (pixel-analyse Facebook-logo): marineblauw, lichtblauw, wit, rood accent */
-  --navy: #1d2472;        /* logo-marineblauw — primaire merkkleur */
-  --navy-dark: #14194f;   /* donkerder blauw voor menu's/hover */
-  --cream: #f7fbfe;       /* wit met lichte blauwzweem — achtergrond */
-  --sand: #d4e8f5;        /* logo-lichtblauw (van #A8D8F0) — secundaire vlakken */
-  --lichtblauw: #a8d8f0;  /* logo-lichtblauw puur — badges/accenten */
-  --salmon: #c0392b;      /* logo-rood — CTA's (bestellen) en acties */
-  --gold: #b8832e;        /* badges/keurmerken */
-  --charcoal: #252a3a;    /* tekst — koel antraciet */
-  --seafoam: #2e8b6e;     /* groen — duurzaamheidsindicatoren */
+  /* ── Blauw: uit het logo, iets dieper en warmer gezet ───────────────────── */
+  --navy: #16225a;
+  --navy-dark: #0d1538;
+  --lichtblauw: #a9c7dd;
+
+  /* ── Papier ─────────────────────────────────────────────────────────────── */
+  --cream: #faf6ef; /* warm papierwit — de hoofdachtergrond */
+  --sand: #eee4d3; /* zandkleur — rustige vlakken */
+  --linen: #ded0b7; /* lijnen en randen */
+
+  /* ── Accenten ───────────────────────────────────────────────────────────── */
+  --salmon: #9c2b21; /* dof winkelrood — bestelknoppen (naam historisch) */
+  --rood: #9c2b21;
+  --rood-dark: #7a1f18;
+  --gold: #966a1c; /* messing — keurmerken, kapitaaltjes */
+  --seafoam: #2c5a4c; /* diep zeegroen — duurzaamheid, "open" */
+
+  /* ── Tekst ──────────────────────────────────────────────────────────────── */
+  --charcoal: #33302a; /* warm donkergrijs — lopende tekst */
+  --ink: #1c1a16; /* bijna zwart — koppen op papier */
+  --grijs: #6b665c; /* bijschriften */
+
+  /* ── Typografie ─────────────────────────────────────────────────────────── */
+  /* --font-caslon en --font-source worden door next/font gezet op <html>. */
+  --font-display: var(--font-caslon), "Iowan Old Style", "Hoefler Text", Georgia,
+    "Times New Roman", serif;
+  --font-body: var(--font-source), -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* ── Maatvoering ────────────────────────────────────────────────────────── */
+  --lijn: 1px solid var(--linen);
+  --lijn-donker: 1px solid rgba(250, 246, 239, 0.22);
 }
 
 html {
+  font-size: 17px;
   scroll-behavior: smooth;
-  font-size: 18px;
+  -webkit-text-size-adjust: 100%;
 }
 
 @media (max-width: 640px) {
   html {
-    font-size: 17px;
+    font-size: 16px;
   }
 }
 
 body {
-  font-family: "Lato", "Helvetica Neue", Helvetica, sans-serif;
+  font-family: var(--font-body);
   color: var(--charcoal);
   background-color: var(--cream);
+  font-feature-settings: "kern" 1;
+  text-rendering: optimizeLegibility;
 }
 
 h1,
@@ -35,11 +70,34 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  line-height: 1.16;
+  font-weight: 700;
 }
 
-/* Utility classes for design system */
+/* Caslon heeft van zichzelf al veel karakter: koppen mogen daarom rustig zijn.
+   Geen extra negatieve letterafstand, dat leest juist als een technisch merk. */
+h1 {
+  letter-spacing: -0.015em;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--navy);
+  color: var(--cream);
+}
+
+:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}
+
+/* ── Kleur-hulpklassen (blijven bestaan voor oudere pagina's) ─────────────── */
 .bg-navy { background-color: var(--navy); }
 .bg-cream { background-color: var(--cream); }
 .bg-sand { background-color: var(--sand); }
@@ -50,3 +108,194 @@ h5 {
 .text-seafoam { color: var(--seafoam); }
 .bg-salmon { background-color: var(--salmon); }
 .bg-seafoam { background-color: var(--seafoam); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Redactionele bouwstenen
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Kapitaaltjes-label boven een kop — vervangt de ronde icoontjes die elke
+   sjabloonsite gebruikt. */
+.kapitaal {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.kapitaal-licht {
+  color: rgba(250, 246, 239, 0.55);
+}
+
+/* Dunne scheidingslijn, zoals in gezet drukwerk. */
+.regel {
+  border: 0;
+  border-top: var(--lijn);
+  margin: 0;
+}
+
+.regel-donker {
+  border: 0;
+  border-top: var(--lijn-donker);
+  margin: 0;
+}
+
+/* Losstaand citaat met een liniaal ervoor in plaats van een reuzenaanhalingsteken. */
+.citaat {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: var(--ink);
+  border-left: 2px solid var(--gold);
+  padding-left: 1.25rem;
+}
+
+/* Lopende tekst in een leesbare kolom. */
+.lees {
+  max-width: 62ch;
+  line-height: 1.7;
+}
+
+.lees p + p {
+  margin-top: 1rem;
+}
+
+/* ── Knoppen ─────────────────────────────────────────────────────────────── */
+.knop {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 0.85rem 1.6rem;
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  cursor: pointer;
+}
+
+.knop-rood {
+  background-color: var(--rood);
+  color: #fff;
+}
+.knop-rood:hover {
+  background-color: var(--rood-dark);
+}
+
+.knop-navy {
+  background-color: var(--navy);
+  color: var(--cream);
+}
+.knop-navy:hover {
+  background-color: var(--navy-dark);
+}
+
+.knop-lijn {
+  background-color: transparent;
+  border-color: var(--navy);
+  color: var(--navy);
+}
+.knop-lijn:hover {
+  background-color: var(--navy);
+  color: var(--cream);
+}
+
+.knop-lijn-licht {
+  background-color: transparent;
+  border-color: rgba(250, 246, 239, 0.45);
+  color: var(--cream);
+}
+.knop-lijn-licht:hover {
+  background-color: rgba(250, 246, 239, 0.12);
+}
+
+.knop:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Formuliervelden ─────────────────────────────────────────────────────── */
+.veld {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--charcoal);
+  background-color: #fff;
+  border: 1px solid var(--linen);
+  padding: 0.7rem 0.85rem;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.veld:focus {
+  border-color: var(--navy);
+  box-shadow: inset 0 0 0 1px var(--navy);
+}
+
+.veld::placeholder {
+  color: #a49d90;
+}
+
+.veld-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+}
+
+/* ── Prijzen: tabelcijfers, zodat bedragen netjes onder elkaar staan ─────── */
+.bedrag {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* ── Zachte introductie bij het scrollen ─────────────────────────────────── */
+/* Bewust minimaal: alleen doorzichtigheid, geen verschuiving. Secties die één
+   voor één omhoog komen zwemmen is inmiddels hét kenmerk van een sjabloonsite. */
+@keyframes sv-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.sv-in {
+  animation: sv-in 0.5s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .sv-in {
+    animation: none;
+  }
+}
+
+/* ── Doorspringen naar de inhoud (toetsenbord en schermlezers) ───────────── */
+.sv-skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--navy);
+  color: var(--cream);
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.sv-skip:focus {
+  left: 0;
+}
+
+/* ── Details/summary zonder de standaard driehoek ────────────────────────── */
+summary {
+  cursor: pointer;
+  list-style: none;
+}
+summary::-webkit-details-marker {
+  display: none;
+}

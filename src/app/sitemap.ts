@@ -1,100 +1,136 @@
 import { MetadataRoute } from "next";
 import { blogPosts } from "@/lib/blog";
 import { products } from "@/lib/assortiment-data";
+import { recepten } from "@/lib/recepten";
+import { GEMEENTEN } from "@/lib/bezorging";
+import { BEDRIJF } from "@/lib/bedrijf";
+import { LOCALES } from "@/lib/seo";
 
-const baseUrl = "https://www.schaapsvishandel.nl";
-const locales = ["nl", "en", "de"] as const;
+const basis = BEDRIJF.domein;
 
-// Vaste laatste-wijzigingsdatum i.p.v. de requesttijd, zodat lastmod bruikbaar
-// blijft voor crawlers (anders lijkt élke pagina bij elk request 'net gewijzigd').
-const LAST_UPDATE = new Date("2026-07-17");
+/**
+ * De sitemap.
+ *
+ * Twee regels waar het vaak misgaat en die hier wél kloppen:
+ *
+ * 1. `lastModified` staat op een vaste datum en niet op "nu". Zet je daar de
+ *    requesttijd neer, dan lijkt élke pagina bij elk bezoek net gewijzigd en
+ *    negeert Google het veld — precies het tegenovergestelde van wat je wilt.
+ * 2. Alleen pagina's die in álle drie de talen bestaan krijgen hreflang-
+ *    verwijzingen naar die talen. Verwijzen naar een Duitse versie die er niet
+ *    is, kost je de koppeling tussen de versies die er wél zijn.
+ */
+const LAATSTE_WIJZIGING = new Date("2026-09-04");
 
-// Meertalige pagina's (nl/en/de). Let op: /frischer-fisch-leiden staat hier
-// bewust NIET tussen — die Duitstalige landingspagina is canoniek alléén /de/
-// (zie de aparte entry onderaan).
-const pages = [
-  "",
-  "/ons-verhaal",
-  "/varlaks",
-  "/biologische-vis",
-  "/blog",
-  "/assortiment",
-  "/bezoek-ons",
-  "/contact",
-  "/bestellen",
-  "/visschalen",
-  "/viskalender",
-  "/viswinkel-leiden",
-  "/marktkraam-leiden",
-  "/viswinkel-voorschoten",
-  "/too-good-to-go",
+/** Pagina's die in nl, en én de bestaan. */
+const MEERTALIG = [
+  { pad: "", prioriteit: 1.0, frequentie: "weekly" as const },
+  { pad: "/bezorgen", prioriteit: 0.95, frequentie: "weekly" as const },
+  { pad: "/visschalen", prioriteit: 0.95, frequentie: "weekly" as const },
+  { pad: "/bestellen", prioriteit: 0.9, frequentie: "weekly" as const },
+  { pad: "/assortiment", prioriteit: 0.9, frequentie: "weekly" as const },
+  { pad: "/bezoek-ons", prioriteit: 0.85, frequentie: "monthly" as const },
+  { pad: "/biologische-vis", prioriteit: 0.8, frequentie: "monthly" as const },
+  { pad: "/varlaks", prioriteit: 0.8, frequentie: "monthly" as const },
+  { pad: "/ons-verhaal", prioriteit: 0.7, frequentie: "yearly" as const },
+  { pad: "/viswinkel-leiden", prioriteit: 0.8, frequentie: "monthly" as const },
+  { pad: "/marktkraam-leiden", prioriteit: 0.7, frequentie: "monthly" as const },
+  { pad: "/viswinkel-voorschoten", prioriteit: 0.7, frequentie: "monthly" as const },
+  { pad: "/viskalender", prioriteit: 0.6, frequentie: "monthly" as const },
+  { pad: "/recepten", prioriteit: 0.6, frequentie: "monthly" as const },
+  { pad: "/blog", prioriteit: 0.6, frequentie: "weekly" as const },
+  { pad: "/contact", prioriteit: 0.6, frequentie: "yearly" as const },
+  { pad: "/too-good-to-go", prioriteit: 0.5, frequentie: "monthly" as const },
 ];
 
+function meertaligeAlternates(pad: string) {
+  const talen: Record<string, string> = {};
+  for (const taal of LOCALES) talen[taal] = `${basis}/${taal}${pad}`;
+  talen["x-default"] = `${basis}/nl${pad}`;
+  return { languages: talen };
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const entries: MetadataRoute.Sitemap = [];
+  const regels: MetadataRoute.Sitemap = [];
 
-  for (const page of pages) {
-    const languages: Record<string, string> = {
-      nl: `${baseUrl}/nl${page}`,
-      en: `${baseUrl}/en${page}`,
-      de: `${baseUrl}/de${page}`,
-      "x-default": `${baseUrl}/nl${page}`,
-    };
-    for (const locale of locales) {
-      entries.push({
-        url: `${baseUrl}/${locale}${page}`,
-        lastModified: LAST_UPDATE,
-        changeFrequency: page === "" ? "weekly" : "monthly",
-        priority: page === "" ? 1.0 : 0.8,
-        alternates: { languages },
+  // ── Vaste pagina's, in alle drie de talen ────────────────────────────────
+  for (const { pad, prioriteit, frequentie } of MEERTALIG) {
+    const alternates = meertaligeAlternates(pad);
+    for (const taal of LOCALES) {
+      regels.push({
+        url: `${basis}/${taal}${pad}`,
+        lastModified: LAATSTE_WIJZIGING,
+        changeFrequency: frequentie,
+        priority: prioriteit,
+        alternates,
       });
     }
   }
 
-  // Productdetailpagina's (assortiment) — met hreflang-alternates
-  for (const p of products) {
-    const seg = `/assortiment/${p.slug}`;
-    const languages: Record<string, string> = {
-      nl: `${baseUrl}/nl${seg}`,
-      en: `${baseUrl}/en${seg}`,
-      de: `${baseUrl}/de${seg}`,
-      "x-default": `${baseUrl}/nl${seg}`,
-    };
-    for (const locale of locales) {
-      entries.push({
-        url: `${baseUrl}/${locale}${seg}`,
-        lastModified: LAST_UPDATE,
+  // ── Bezorgpagina's per gemeente ──────────────────────────────────────────
+  for (const gemeente of GEMEENTEN) {
+    const pad = `/bezorgen/${gemeente.slug}`;
+    const alternates = meertaligeAlternates(pad);
+    for (const taal of LOCALES) {
+      regels.push({
+        url: `${basis}/${taal}${pad}`,
+        lastModified: LAATSTE_WIJZIGING,
         changeFrequency: "monthly",
-        priority: 0.7,
-        alternates: { languages },
+        priority: 0.85,
+        alternates,
       });
     }
   }
 
-  // Duitstalige landingspagina — alleen onder /de/ (zelfverwijzende hreflang).
-  entries.push({
-    url: `${baseUrl}/de/frischer-fisch-leiden`,
-    lastModified: LAST_UPDATE,
+  // ── Productpagina's ──────────────────────────────────────────────────────
+  for (const product of products) {
+    const pad = `/assortiment/${product.slug}`;
+    const alternates = meertaligeAlternates(pad);
+    for (const taal of LOCALES) {
+      regels.push({
+        url: `${basis}/${taal}${pad}`,
+        lastModified: LAATSTE_WIJZIGING,
+        changeFrequency: "monthly",
+        priority: 0.65,
+        alternates,
+      });
+    }
+  }
+
+  // ── Duitstalige landingspagina — bestaat alleen onder /de/ ───────────────
+  regels.push({
+    url: `${basis}/de/frischer-fisch-leiden`,
+    lastModified: LAATSTE_WIJZIGING,
     changeFrequency: "monthly",
     priority: 0.7,
     alternates: {
       languages: {
-        de: `${baseUrl}/de/frischer-fisch-leiden`,
-        nl: `${baseUrl}/nl/viswinkel-leiden`,
-        "x-default": `${baseUrl}/de/frischer-fisch-leiden`,
+        de: `${basis}/de/frischer-fisch-leiden`,
+        nl: `${basis}/nl/viswinkel-leiden`,
+        en: `${basis}/en/viswinkel-leiden`,
+        "x-default": `${basis}/nl/viswinkel-leiden`,
       },
     },
   });
 
-  // Blogartikelen
+  // ── Artikelen en recepten: alleen Nederlands, dus geen hreflang ──────────
   for (const post of blogPosts) {
-    entries.push({
-      url: `${baseUrl}/nl/blog/${post.slug}`,
+    regels.push({
+      url: `${basis}/nl/blog/${post.slug}`,
       lastModified: new Date(post.datum),
-      changeFrequency: "monthly",
-      priority: 0.6,
+      changeFrequency: "yearly",
+      priority: 0.5,
     });
   }
 
-  return entries;
+  for (const recept of recepten) {
+    regels.push({
+      url: `${basis}/nl/recepten/${recept.slug}`,
+      lastModified: LAATSTE_WIJZIGING,
+      changeFrequency: "yearly",
+      priority: 0.5,
+    });
+  }
+
+  return regels;
 }

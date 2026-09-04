@@ -48,8 +48,8 @@ export function NewsletterSignup({ compact = false }: { compact?: boolean }) {
           placeholder="uw@email.nl"
           className="flex-1 min-w-0 px-3 py-2.5 text-sm focus:outline-none"
           style={{
-            backgroundColor: "rgba(246,250,253,0.1)",
-            border: "1px solid rgba(246,250,253,0.25)",
+            backgroundColor: "rgba(250,246,239,0.1)",
+            border: "1px solid rgba(250,246,239,0.25)",
             color: "var(--cream)",
           }}
           aria-label="E-mailadres voor nieuwsbrief"

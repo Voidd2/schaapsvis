@@ -106,8 +106,8 @@ export function ComingSoon({ error = false }: { error?: boolean }) {
               aria-pressed={lang === code}
               className="px-3 py-1.5 text-xs font-bold tracking-widest transition-colors"
               style={{
-                backgroundColor: lang === code ? "var(--gold)" : "rgba(246,250,253,0.08)",
-                color: lang === code ? "var(--navy-dark)" : "rgba(246,250,253,0.7)",
+                backgroundColor: lang === code ? "var(--gold)" : "rgba(250,246,239,0.08)",
+                color: lang === code ? "var(--navy-dark)" : "rgba(250,246,239,0.7)",
               }}
             >
               {label}
@@ -133,18 +133,18 @@ export function ComingSoon({ error = false }: { error?: boolean }) {
 
           <h1
             className="text-4xl md:text-5xl font-bold leading-tight mb-6"
-            style={{ color: "var(--cream)", fontFamily: "Playfair Display, Georgia, serif" }}
+            style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
           >
             {t.title}
           </h1>
 
-          <p className="text-base mb-4" style={{ color: "rgba(246,250,253,0.8)" }}>
+          <p className="text-base mb-4" style={{ color: "rgba(250,246,239,0.8)" }}>
             {t.body}
           </p>
 
           <ul className="inline-flex flex-col gap-2 mb-8 text-left">
             {t.features.map((f) => (
-              <li key={f} className="flex items-center gap-3 text-sm" style={{ color: "rgba(246,250,253,0.92)" }}>
+              <li key={f} className="flex items-center gap-3 text-sm" style={{ color: "rgba(250,246,239,0.92)" }}>
                 <span
                   className="flex-shrink-0 inline-flex items-center justify-center w-5 h-5"
                   style={{ backgroundColor: "var(--seafoam)", borderRadius: "9999px" }}
@@ -158,19 +158,19 @@ export function ComingSoon({ error = false }: { error?: boolean }) {
             ))}
           </ul>
 
-          <p className="text-sm mb-8" style={{ color: "rgba(246,250,253,0.6)" }}>
+          <p className="text-sm mb-8" style={{ color: "rgba(250,246,239,0.6)" }}>
             {t.openLine}
           </p>
 
           {/* Contact */}
           <div
             className="px-6 py-5 mb-10"
-            style={{ backgroundColor: "rgba(246,250,253,0.06)" }}
+            style={{ backgroundColor: "rgba(250,246,239,0.06)" }}
           >
             <p className="font-semibold text-sm mb-2" style={{ color: "var(--cream)" }}>
               {t.contactLabel}
             </p>
-            <p className="text-xs mb-4 leading-relaxed" style={{ color: "rgba(246,250,253,0.6)" }}>
+            <p className="text-xs mb-4 leading-relaxed" style={{ color: "rgba(250,246,239,0.6)" }}>
               {t.hoursLine}
             </p>
             <div className="flex flex-wrap justify-center gap-3">
@@ -189,7 +189,7 @@ export function ComingSoon({ error = false }: { error?: boolean }) {
               <a
                 href="tel:+31715149802"
                 className="inline-block px-4 py-2 text-sm font-medium border transition-opacity hover:opacity-80"
-                style={{ borderColor: "rgba(246,250,253,0.35)", color: "var(--cream)" }}
+                style={{ borderColor: "rgba(250,246,239,0.35)", color: "var(--cream)" }}
               >
                 071 514 9802
               </a>
@@ -206,7 +206,7 @@ export function ComingSoon({ error = false }: { error?: boolean }) {
           <label
             htmlFor="password"
             className="block text-xs tracking-widest uppercase mb-2 text-center"
-            style={{ color: "rgba(246,250,253,0.45)" }}
+            style={{ color: "rgba(250,246,239,0.45)" }}
           >
             {t.loginLabel}
           </label>

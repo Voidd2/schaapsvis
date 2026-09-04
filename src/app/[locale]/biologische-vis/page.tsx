@@ -140,7 +140,7 @@ const ourFish: FishCard[] = [
   {
     name: "Gestoomde Makreel",
     badge: "Eerlijk",
-    badgeColor: "#b8832e",
+    badgeColor: "var(--gold)",
     opAanvraag: false,
     duurzaamheid: "rood",
     foto: "/images/scene-vis.svg",
@@ -194,7 +194,7 @@ const ourFish: FishCard[] = [
 
 const duurzaamheidConfig: Record<DuurzaamheidStatus, { label: string; color: string; bg: string }> = {
   groen: { label: "✓ Duurzaam", color: "#2e6b5e", bg: "rgba(46,107,94,0.08)" },
-  oranje: { label: "◐ Let op", color: "#b8832e", bg: "rgba(184,131,46,0.08)" },
+  oranje: { label: "◐ Let op", color: "var(--gold)", bg: "rgba(184,131,46,0.08)" },
   rood: { label: "⚠ Overbevist", color: "#c8604a", bg: "rgba(200,96,74,0.08)" },
 };
 
@@ -302,7 +302,7 @@ function BiologischeVisContent() {
           </p>
           <h1
             className="text-5xl md:text-7xl font-bold leading-tight mb-6 text-white"
-            style={{ fontFamily: "Playfair Display, serif", letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.02em" }}
           >
             {t("heroTitle")}
           </h1>
@@ -319,7 +319,7 @@ function BiologischeVisContent() {
       <RevealGroup>
       <section style={{ backgroundColor: "var(--navy)" }} className="py-14 px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-base leading-relaxed mb-8" style={{ color: "rgba(246,250,253,0.85)" }}>
+          <p className="text-base leading-relaxed mb-8" style={{ color: "rgba(250,246,239,0.85)" }}>
             {introByLocale[locale] ?? introByLocale.nl}
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
@@ -333,7 +333,7 @@ function BiologischeVisContent() {
             <Link
               href={`/${locale}/assortiment`}
               className="inline-block text-sm font-semibold px-6 py-3 transition-colors border"
-              style={{ borderColor: "rgba(246,250,253,0.4)", color: "var(--cream)" }}
+              style={{ borderColor: "rgba(250,246,239,0.4)", color: "var(--cream)" }}
             >
               {(moneyLinks[locale] ?? moneyLinks.nl).assortiment} →
             </Link>
@@ -353,7 +353,7 @@ function BiologischeVisContent() {
             </p>
             <h2
               className="text-4xl font-bold mb-6 leading-tight"
-              style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+              style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
             >
               {t("whyTitle")}
             </h2>
@@ -378,7 +378,7 @@ function BiologischeVisContent() {
         <div className="max-w-5xl mx-auto">
           <h2
             className="text-3xl font-bold text-center mb-3"
-            style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+            style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
           >
             {t("certTitle")}
           </h2>
@@ -403,7 +403,7 @@ function BiologischeVisContent() {
                 </div>
                 <h3
                   className="font-bold text-base mb-2"
-                  style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+                  style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
                 >
                   {t(key)}
                 </h3>
@@ -421,7 +421,7 @@ function BiologischeVisContent() {
           >
             <h3
               className="font-bold text-base mb-2"
-              style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+              style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
             >
               VISwijzer — de Nederlandse gids voor duurzame vis
             </h3>
@@ -461,7 +461,7 @@ function BiologischeVisContent() {
             </span>
             <h2
               className="text-4xl font-bold mb-5 leading-tight text-white"
-              style={{ fontFamily: "Playfair Display, serif" }}
+              style={{ fontFamily: "var(--font-display)" }}
             >
               {t("varlaksTitle")}
             </h2>
@@ -489,7 +489,7 @@ function BiologischeVisContent() {
         <div className="max-w-5xl mx-auto">
           <h2
             className="text-3xl font-bold text-center mb-3"
-            style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+            style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
           >
             {t("listTitle")}
           </h2>
@@ -539,7 +539,7 @@ function BiologischeVisContent() {
                   <div className="p-5 flex flex-col flex-1">
                     <h3
                       className="text-xl font-bold mb-1 leading-tight"
-                      style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+                      style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
                     >
                       {fish.name}
                     </h3>
@@ -632,7 +632,7 @@ function BiologischeVisContent() {
         <div className="max-w-3xl mx-auto">
           <h2
             className="text-3xl font-bold text-center mb-10"
-            style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+            style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
           >
             {faqHeading[locale] ?? faqHeading.nl}
           </h2>
@@ -645,7 +645,7 @@ function BiologischeVisContent() {
               >
                 <summary
                   className="flex items-center justify-between gap-3 cursor-pointer select-none font-bold"
-                  style={{ listStyle: "none", color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+                  style={{ listStyle: "none", color: "var(--navy)", fontFamily: "var(--font-display)" }}
                 >
                   {item.q}
                   <svg
@@ -668,13 +668,13 @@ function BiologischeVisContent() {
       <section style={{ backgroundColor: "var(--navy)" }} className="py-16 px-6 text-center">
         <h2
           className="text-3xl font-bold mb-4 text-white"
-          style={{ fontFamily: "Playfair Display, serif" }}
+          style={{ fontFamily: "var(--font-display)" }}
         >
           {t("ctaTitle")}
         </h2>
         <p
           className="text-sm mb-8 max-w-md mx-auto leading-relaxed"
-          style={{ color: "rgba(246,250,253,0.7)" }}
+          style={{ color: "rgba(250,246,239,0.7)" }}
         >
           Herenstraat 48, Leiden · Dinsdag t/m zaterdag · 071 514 9802
         </p>

@@ -87,30 +87,30 @@ function ReceptDetailContent({
           )}
           <h1
             className="text-4xl md:text-5xl font-bold mb-3 leading-tight"
-            style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+            style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
           >
             {recept.title}
           </h1>
-          <p className="text-lg mb-6" style={{ color: "rgba(246,250,253,0.7)" }}>
+          <p className="text-lg mb-6" style={{ color: "rgba(250,246,239,0.7)" }}>
             {recept.subtitle}
           </p>
           <div className="flex flex-wrap gap-3 mb-2">
             <span
               className="inline-flex items-center gap-2 text-sm px-4 py-2 text-white"
-              style={{ backgroundColor: "rgba(246,250,253,0.1)" }}
+              style={{ backgroundColor: "rgba(250,246,239,0.1)" }}
             >
               <Clock size={15} /> {recept.tijd}
             </span>
             <span
               className="inline-flex items-center gap-2 text-sm px-4 py-2 text-white"
-              style={{ backgroundColor: "rgba(246,250,253,0.1)" }}
+              style={{ backgroundColor: "rgba(250,246,239,0.1)" }}
             >
               <ChefHat size={15} /> {recept.moeilijkheid}
             </span>
             {recept.porties && (
               <span
                 className="inline-flex items-center gap-2 text-sm px-4 py-2 text-white"
-                style={{ backgroundColor: "rgba(246,250,253,0.1)" }}
+                style={{ backgroundColor: "rgba(250,246,239,0.1)" }}
               >
                 {recept.porties} {recept.porties === 1 ? "portie" : "personen"}
               </span>
@@ -126,7 +126,7 @@ function ReceptDetailContent({
               <span
                 key={tag}
                 className="text-xs px-2.5 py-1"
-                style={{ backgroundColor: "rgba(246,250,253,0.12)", color: "var(--sand)" }}
+                style={{ backgroundColor: "rgba(250,246,239,0.12)", color: "var(--sand)" }}
               >
                 {TAG_ICON[tag]} {tag}
               </span>
@@ -180,7 +180,7 @@ function ReceptDetailContent({
             <div>
               <h2
                 className="text-2xl font-bold mb-6"
-                style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+                style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
               >
                 Bereidingswijze
               </h2>
@@ -229,7 +229,7 @@ function ReceptDetailContent({
                   <li
                     key={item}
                     className="text-sm leading-snug"
-                    style={{ color: "rgba(246,250,253,0.85)" }}
+                    style={{ color: "rgba(250,246,239,0.85)" }}
                   >
                     · {item}
                   </li>

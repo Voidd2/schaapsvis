@@ -1,18 +1,10 @@
-"use client";
-
-import { Children, isValidElement } from "react";
 import type { ReactNode } from "react";
-import { Reveal } from "./Reveal";
 
-// Wikkelt elk direct kind (meestal een <section>) in een Reveal, zodat de
-// secties één voor één zacht in beeld schuiven bij het scrollen — de
-// viswijzer-bewegingstaal, met één wrapper per pagina i.p.v. per sectie.
+/**
+ * Voorheen wikkelde dit elk kind in een scroll-animatie. Dat is eruit: de
+ * secties staan er nu gewoon. Het component blijft bestaan zodat pagina's die
+ * het gebruiken ongewijzigd kunnen blijven.
+ */
 export function RevealGroup({ children }: { children: ReactNode }) {
-  return (
-    <>
-      {Children.map(children, (child, i) =>
-        isValidElement(child) ? <Reveal key={i}>{child}</Reveal> : child
-      )}
-    </>
-  );
+  return <>{children}</>;
 }

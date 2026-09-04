@@ -62,7 +62,7 @@ function ReceptCard({ recept, locale }: { recept: Recept; locale: string }) {
         </div>
         <h2
           className="text-lg font-bold mb-1 leading-tight"
-          style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}
+          style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
         >
           {recept.title}
         </h2>
@@ -133,13 +133,13 @@ export function ReceptenClient({ locale }: { locale: string }) {
         </p>
         <h1
           className="text-5xl md:text-6xl font-bold mb-5 leading-tight"
-          style={{ color: "var(--cream)", fontFamily: "Playfair Display, serif" }}
+          style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
         >
           Kook met verse vis
         </h1>
         <p
           className="text-base max-w-xl mx-auto leading-relaxed"
-          style={{ color: "rgba(246,250,253,0.75)" }}
+          style={{ color: "rgba(250,246,239,0.75)" }}
         >
           Wat u bij ons haalt + wat u in de supermarkt koopt. Van 15 minuten
           tot een weekend project. Eerlijk over de moeilijkheid.
@@ -265,13 +265,13 @@ export function ReceptenClient({ locale }: { locale: string }) {
       >
         <h2
           className="text-3xl font-bold mb-4 text-white"
-          style={{ fontFamily: "Playfair Display, serif" }}
+          style={{ fontFamily: "var(--font-display)" }}
         >
           Verse vis halen?
         </h2>
         <p
           className="text-sm mb-8 max-w-md mx-auto"
-          style={{ color: "rgba(246,250,253,0.7)" }}
+          style={{ color: "rgba(250,246,239,0.7)" }}
         >
           Herenstraat 48, Leiden · Dinsdag t/m zaterdag · 071 514 9802
         </p>
@@ -286,7 +286,7 @@ export function ReceptenClient({ locale }: { locale: string }) {
           <Link
             href={`/${locale}/bezoek-ons`}
             className="inline-block px-8 py-4 font-medium border transition-opacity hover:opacity-70"
-            style={{ color: "var(--cream)", borderColor: "rgba(246,250,253,0.4)" }}
+            style={{ color: "var(--cream)", borderColor: "rgba(250,246,239,0.4)" }}
           >
             Route &amp; openingstijden
           </Link>

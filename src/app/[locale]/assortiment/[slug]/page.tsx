@@ -223,7 +223,7 @@ export default async function ProductDetailPage({
                 </span>
               )}
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-3 leading-tight" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+            <h1 className="text-3xl md:text-4xl font-bold mb-3 leading-tight" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
               {product.naam}
             </h1>
             <p className="text-base leading-relaxed mb-4" style={{ color: "var(--charcoal)", opacity: 0.8 }}>
@@ -241,7 +241,7 @@ export default async function ProductDetailPage({
             )}
             {prijs ? (
               <div className="mb-5">
-                <span className="text-2xl font-bold" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+                <span className="text-2xl font-bold" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
                   {formatPrijs(prijs)}
                 </span>
                 <span className="block text-xs mt-1 opacity-55" style={{ color: "var(--charcoal)" }}>
@@ -298,7 +298,7 @@ export default async function ProductDetailPage({
         <div className="max-w-4xl mx-auto px-6 grid md:grid-cols-2 gap-8">
           {/* Voedingswaarde */}
           <div>
-            <h2 className="text-xl font-bold mb-4" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+            <h2 className="text-xl font-bold mb-4" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
               Voedingswaarde
             </h2>
             {voeding ? (
@@ -334,7 +334,7 @@ export default async function ProductDetailPage({
           {/* Allergenen + seizoen + viswijzer */}
           <div className="space-y-6">
             <div>
-              <h2 className="text-xl font-bold mb-3" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+              <h2 className="text-xl font-bold mb-3" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
                 Ingrediënten &amp; allergenen
               </h2>
               <p className="text-sm leading-relaxed mb-3" style={{ color: "var(--charcoal)", opacity: 0.75 }}>
@@ -345,7 +345,7 @@ export default async function ProductDetailPage({
                   <span
                     key={a}
                     className="text-[10px] font-semibold px-1.5 py-0.5"
-                    style={{ backgroundColor: "rgba(192,57,43,0.1)", color: "#c0392b", border: "1px solid rgba(192,57,43,0.2)" }}
+                    style={{ backgroundColor: "rgba(192,57,43,0.1)", color: "var(--rood)", border: "1px solid rgba(192,57,43,0.2)" }}
                   >
                     {a}
                   </span>
@@ -377,7 +377,7 @@ export default async function ProductDetailPage({
 
         {/* Cross-sell: wat maak je ermee? — eigen blogs + beste externe receptsites */}
         <div className="max-w-4xl mx-auto px-6 mt-10 pt-8" style={{ borderTop: "1px solid var(--sand)" }}>
-          <h2 className="text-xl font-bold mb-2" style={{ color: "var(--navy)", fontFamily: "Playfair Display, serif" }}>
+          <h2 className="text-xl font-bold mb-2" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
             Wat maak je ermee?
           </h2>
           <p className="text-sm mb-5 opacity-70" style={{ color: "var(--charcoal)" }}>
