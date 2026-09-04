@@ -109,6 +109,11 @@ Tot dat gezet is, ziet iedereen de "binnenkort online"-pagina **en weren we alle
 zoekmachines** (`robots.txt` staat op disallow). Dat is met opzet: je wilt niet
 dat Google de site indexeert terwijl hij nog niet af is.
 
+`robots.txt` wordt bij elk verzoek opnieuw bepaald, dus zodra de variabele
+omstaat is de site meteen vrijgegeven — je hoeft er niet apart voor te
+deployen. Controleer het na afloop even op
+`www.schaapsvishandel.nl/robots.txt`: daar hoort `Allow: /` te staan.
+
 Zet daarna in Vercel ook de doorverwijzing van `schaapsvishandel.nl` naar
 `www.schaapsvishandel.nl` aan, zodat er niet twee versies van de site bestaan.
 

@@ -1,5 +1,11 @@
 import { MetadataRoute } from "next";
 
+// Bij elk verzoek opnieuw bepalen, niet één keer bij het bouwen. Anders blijft
+// er "Disallow: /" staan nadat MAINTENANCE_MODE op "off" is gezet, tot iemand
+// toevallig opnieuw deployt — en zolang dat er staat komt de site simpelweg
+// niet in Google.
+export const dynamic = "force-dynamic";
+
 export default function robots(): MetadataRoute.Robots {
   // Tijdens de onderhouds-/previewfase (slot staat aan): weer alle crawlers en
   // publiceer de sitemap NIET. Zo ligt de volledige site-structuur (producten,

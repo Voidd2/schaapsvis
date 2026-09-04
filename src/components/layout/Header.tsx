@@ -56,16 +56,18 @@ export function Header() {
       <header
         style={{ backgroundColor: "var(--cream)", borderBottom: "1px solid var(--linen)" }}
       >
-        <div className="max-w-6xl mx-auto px-4 flex items-center justify-between gap-6 h-[4.4rem]">
-          <Link href={p("")} className="shrink-0 leading-none">
+        <div className="max-w-6xl mx-auto px-4 flex items-center justify-between gap-3 lg:gap-6 h-[4.4rem]">
+          <Link href={p("")} className="min-w-0 leading-none">
+            {/* Op een smal scherm moet de naam wijken voor de belknop en het
+                menu — anders wordt de hamburger van de rand geduwd. */}
             <span
-              className="block text-[1.65rem] leading-none"
+              className="block text-[1.25rem] sm:text-[1.45rem] lg:text-[1.65rem] leading-none whitespace-nowrap"
               style={{ fontFamily: "var(--font-display)", color: "var(--navy)", fontWeight: 700 }}
             >
               Schaap&rsquo;s Vishandel
             </span>
             <span
-              className="block text-[0.62rem] mt-1"
+              className="block text-[0.55rem] sm:text-[0.62rem] mt-1 whitespace-nowrap"
               style={{
                 color: "var(--gold)",
                 letterSpacing: "0.22em",
@@ -106,7 +108,7 @@ export function Header() {
 
             <a
               href={`tel:${BEDRIJF.telefoon.e164}`}
-              className="sm:hidden knop knop-rood !py-2.5 !px-4 !text-[0.85rem]"
+              className="sm:hidden knop knop-rood !py-2.5 !px-3.5 !text-[0.8rem]"
               aria-label={`Bel ${BEDRIJF.telefoon.weergave}`}
             >
               Bellen
