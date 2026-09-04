@@ -109,18 +109,24 @@
     "note": "No online checkout — but easy pre-ordering. We call you back with price and confirmation."
   },
   "bezoekPage": {
-    "title": "Visit Us",
-    "sub": "Three locations to serve you — always fresh, always friendly"
+    "title": "Where to find us",
+    "sub": "The shop on the Herenstraat, two market days in Leiden and Voorschoten on Fridays. And these days we bring it to you as well."
   },
   "contactPage": {
     "title": "Contact",
-    "sub": "Got a question? We are happy to help.",
+    "sub": "Calling is quickest — we are usually behind the counter. WhatsApp or email works too.",
     "formTitle": "Send a message",
     "nameLabel": "Name",
     "emailLabel": "Email address",
     "messageLabel": "Message",
     "send": "Send message",
-    "infoTitle": "Contact details"
+    "infoTitle": "Contact details",
+    "bezig": "Sending…",
+    "gelukt": "Thank you, your message has been sent. We will reply as soon as we can.",
+    "mislukt": "Something went wrong",
+    "openLabel": "Opening hours",
+    "adresLabel": "Address",
+    "telLabel": "Phone"
   },
   "eerlijkeVisPage": {
     "heroTitle": "Organic fish in Leiden",
@@ -233,7 +239,8 @@
     "verder": "Continue",
     "terug": "Back",
     "dagprijs": "Market price",
-    "opAanvraag": "Price on request"
+    "opAanvraag": "Price on request",
+    "telefoonLabel": "Phone"
   },
   "bezorgen": {
     "eyebrow": "New: to your door",
@@ -484,5 +491,39 @@
     "toelichting_extra-salade": "Salmon, crab, shrimp or Dutch potato salad with fish.",
     "toelichting_opmaak": "On a real platter with garnish, instead of in the box.",
     "seizoen_vanaf juni": "from June"
+  },
+  "plekken": {
+    "winkelNaam": "The shop",
+    "winkelToelichting": "The fixed address since 1938. The full range is here, the platters are made here, and this is where you collect your order.",
+    "zaterdagNaam": "Saturday market",
+    "zaterdagAdres": "Aalmarkt, by the Waag, Leiden",
+    "zaterdagToelichting": "The stall stands by the Waag, right in the centre.",
+    "woensdagNaam": "Wednesday market",
+    "woensdagAdres": "By Dille & Camille, Leiden",
+    "woensdagToelichting": "On the Haarlemmerstraat, on the Dille & Camille side.",
+    "voorschotenNaam": "Voorschoten, at Hoogvliet",
+    "voorschotenAdres": "Hoogvliet car park, Voorschoten",
+    "voorschotenToelichting": "Every Friday in the car park. Does that not suit? We deliver in Voorschoten too.",
+    "diVr": "Tuesday to Friday",
+    "za": "Saturday",
+    "wo": "Wednesday",
+    "vr": "Friday",
+    "zoMa": "Sunday and Monday",
+    "gesloten": "closed"
+  },
+  "status": {
+    "winkel": "Shop, Herenstraat",
+    "openTot": "open until {tijd}",
+    "vandaagVanaf": "opens today at {tijd}",
+    "morgenVanaf": "opens tomorrow at {tijd}",
+    "dagVanaf": "opens {dag} at {tijd}",
+    "onbekend": "call for opening hours",
+    "zo": "Sunday",
+    "ma": "Monday",
+    "di": "Tuesday",
+    "wo": "Wednesday",
+    "do": "Thursday",
+    "vr": "Friday",
+    "za": "Saturday"
   }
 }

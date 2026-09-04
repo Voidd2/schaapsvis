@@ -109,18 +109,24 @@
     "note": "Geen online afrekenen — wél eenvoudig vooruit bestellen. Wij bellen terug met prijs en bevestiging."
   },
   "bezoekPage": {
-    "title": "Bezoek Ons",
-    "sub": "Drie locaties om u te bedienen — altijd vers, altijd vriendelijk"
+    "title": "Waar u ons vindt",
+    "sub": "De winkel aan de Herenstraat, twee marktdagen in Leiden en op vrijdag Voorschoten. En sinds kort brengen we het ook."
   },
   "contactPage": {
     "title": "Contact",
-    "sub": "Heeft u een vraag? Wij helpen u graag.",
+    "sub": "Bellen gaat het snelst — we staan meestal achter de toonbank. Appen of mailen mag ook.",
     "formTitle": "Stuur een bericht",
     "nameLabel": "Naam",
     "emailLabel": "E-mailadres",
     "messageLabel": "Bericht",
-    "send": "Verstuur bericht",
-    "infoTitle": "Contactgegevens"
+    "send": "Bericht versturen",
+    "infoTitle": "Contactgegevens",
+    "bezig": "Bezig met versturen…",
+    "gelukt": "Bedankt, uw bericht is verstuurd. We reageren zo snel als het lukt.",
+    "mislukt": "Er ging iets mis",
+    "openLabel": "Openingstijden",
+    "adresLabel": "Adres",
+    "telLabel": "Telefoon"
   },
   "eerlijkeVisPage": {
     "heroTitle": "Biologische vis in Leiden",
@@ -233,7 +239,8 @@
     "verder": "Verder",
     "terug": "Terug",
     "dagprijs": "Dagprijs",
-    "opAanvraag": "Prijs op aanvraag"
+    "opAanvraag": "Prijs op aanvraag",
+    "telefoonLabel": "Telefoon"
   },
   "bezorgen": {
     "eyebrow": "Sinds kort ook aan huis",
@@ -484,5 +491,39 @@
     "toelichting_extra-salade": "Zalm-, krab-, garnalen- of huzarensalade met vis.",
     "toelichting_opmaak": "Op een echte schaal met garnering, in plaats van in de doos.",
     "seizoen_vanaf juni": "vanaf juni"
+  },
+  "plekken": {
+    "winkelNaam": "De winkel",
+    "winkelToelichting": "De vaste plek sinds 1938. Hier ligt het hele assortiment, hier worden de visschalen gemaakt en hier haalt u uw bestelling op.",
+    "zaterdagNaam": "Zaterdagmarkt",
+    "zaterdagAdres": "Aalmarkt, bij de Waag, Leiden",
+    "zaterdagToelichting": "De kraam staat bij de Waag, midden in de stad.",
+    "woensdagNaam": "Woensdagmarkt",
+    "woensdagAdres": "Bij Dille & Camille, Leiden",
+    "woensdagToelichting": "Op de Haarlemmerstraat, aan de kant van Dille & Camille.",
+    "voorschotenNaam": "Voorschoten, bij Hoogvliet",
+    "voorschotenAdres": "Parkeerplaats Hoogvliet, Voorschoten",
+    "voorschotenToelichting": "Elke vrijdag op de parkeerplaats. Komt het niet uit? In Voorschoten bezorgen we ook.",
+    "diVr": "Dinsdag t/m vrijdag",
+    "za": "Zaterdag",
+    "wo": "Woensdag",
+    "vr": "Vrijdag",
+    "zoMa": "Zondag en maandag",
+    "gesloten": "gesloten"
+  },
+  "status": {
+    "winkel": "Winkel Herenstraat",
+    "openTot": "open tot {tijd}",
+    "vandaagVanaf": "vandaag open vanaf {tijd}",
+    "morgenVanaf": "morgen open vanaf {tijd}",
+    "dagVanaf": "{dag} open vanaf {tijd}",
+    "onbekend": "bel voor openingstijden",
+    "zo": "zondag",
+    "ma": "maandag",
+    "di": "dinsdag",
+    "wo": "woensdag",
+    "do": "donderdag",
+    "vr": "vrijdag",
+    "za": "zaterdag"
   }
 }

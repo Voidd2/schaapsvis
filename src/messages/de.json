@@ -109,18 +109,24 @@
     "note": "Kein Online-Bezahlen — aber einfaches Vorbestellen. Wir rufen Sie mit Preis und Bestätigung zurück."
   },
   "bezoekPage": {
-    "title": "Besuchen Sie uns",
-    "sub": "Drei Standorte für Sie — immer frisch, immer freundlich"
+    "title": "Wo Sie uns finden",
+    "sub": "Das Geschäft in der Herenstraat, zwei Markttage in Leiden und freitags Voorschoten. Und seit Kurzem bringen wir es auch."
   },
   "contactPage": {
     "title": "Kontakt",
-    "sub": "Haben Sie eine Frage? Wir helfen Ihnen gerne.",
+    "sub": "Anrufen geht am schnellsten — wir stehen meistens hinter der Theke. WhatsApp oder E-Mail geht auch.",
     "formTitle": "Nachricht senden",
     "nameLabel": "Name",
     "emailLabel": "E-Mail-Adresse",
     "messageLabel": "Nachricht",
     "send": "Nachricht senden",
-    "infoTitle": "Kontaktdaten"
+    "infoTitle": "Kontaktdaten",
+    "bezig": "Wird gesendet…",
+    "gelukt": "Danke, Ihre Nachricht ist unterwegs. Wir melden uns, sobald es geht.",
+    "mislukt": "Da ist etwas schiefgegangen",
+    "openLabel": "Öffnungszeiten",
+    "adresLabel": "Adresse",
+    "telLabel": "Telefon"
   },
   "eerlijkeVisPage": {
     "heroTitle": "Bio-Fisch in Leiden",
@@ -233,7 +239,8 @@
     "verder": "Weiter",
     "terug": "Zurück",
     "dagprijs": "Tagespreis",
-    "opAanvraag": "Preis auf Anfrage"
+    "opAanvraag": "Preis auf Anfrage",
+    "telefoonLabel": "Telefon"
   },
   "bezorgen": {
     "eyebrow": "Neu: bis an die Tür",
@@ -484,5 +491,39 @@
     "toelichting_extra-salade": "Lachs-, Krab-, Krabben- oder Kartoffelsalat mit Fisch.",
     "toelichting_opmaak": "Auf einer echten Platte mit Garnitur statt in der Schachtel.",
     "seizoen_vanaf juni": "ab Juni"
+  },
+  "plekken": {
+    "winkelNaam": "Das Geschäft",
+    "winkelToelichting": "Der feste Platz seit 1938. Hier liegt das ganze Sortiment, hier werden die Fischplatten gemacht, und hier holen Sie Ihre Bestellung ab.",
+    "zaterdagNaam": "Samstagsmarkt",
+    "zaterdagAdres": "Aalmarkt, bei der Waag, Leiden",
+    "zaterdagToelichting": "Der Stand steht bei der Waag, mitten in der Stadt.",
+    "woensdagNaam": "Mittwochsmarkt",
+    "woensdagAdres": "Bei Dille & Camille, Leiden",
+    "woensdagToelichting": "In der Haarlemmerstraat, auf der Seite von Dille & Camille.",
+    "voorschotenNaam": "Voorschoten, bei Hoogvliet",
+    "voorschotenAdres": "Parkplatz Hoogvliet, Voorschoten",
+    "voorschotenToelichting": "Jeden Freitag auf dem Parkplatz. Passt das nicht? Nach Voorschoten liefern wir auch.",
+    "diVr": "Dienstag bis Freitag",
+    "za": "Samstag",
+    "wo": "Mittwoch",
+    "vr": "Freitag",
+    "zoMa": "Sonntag und Montag",
+    "gesloten": "geschlossen"
+  },
+  "status": {
+    "winkel": "Geschäft Herenstraat",
+    "openTot": "geöffnet bis {tijd}",
+    "vandaagVanaf": "heute ab {tijd} geöffnet",
+    "morgenVanaf": "morgen ab {tijd} geöffnet",
+    "dagVanaf": "{dag} ab {tijd} geöffnet",
+    "onbekend": "rufen Sie für die Öffnungszeiten an",
+    "zo": "Sonntag",
+    "ma": "Montag",
+    "di": "Dienstag",
+    "wo": "Mittwoch",
+    "do": "Donnerstag",
+    "vr": "Freitag",
+    "za": "Samstag"
   }
 }

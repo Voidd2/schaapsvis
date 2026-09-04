@@ -1,9 +1,12 @@
-import { useTranslations } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import Link from "next/link";
 import type { Metadata } from "next";
-import { RevealGroup } from "@/components/shared/RevealGroup";
-import { MapPin, Phone, Clock } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
+import { Schema } from "@/components/Schema";
+import { Sectie, Kop, Kruimels } from "@/components/ui/Sectie";
+import { paginaMetadata, kruimelSchema } from "@/lib/seo";
+import { BEDRIJF, ADRES_REGEL, euro } from "@/lib/bedrijf";
+import { BEZORGING, GEMEENTEN, bezorgdagenTekst } from "@/lib/bezorging";
 
 export async function generateMetadata({
   params,
@@ -12,196 +15,197 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
-
-  return {
+  return paginaMetadata({
+    locale,
+    pad: "/bezoek-ons",
     title: t("bezoekTitle"),
     description: t("bezoekDesc"),
-    alternates: {
-      canonical: `/${locale}/bezoek-ons`,
-      languages: {
-        nl: "/nl/bezoek-ons",
-        en: "/en/bezoek-ons",
-        de: "/de/bezoek-ons",
-        "x-default": "/nl/bezoek-ons",
-      },
-    },
-  };
+  });
 }
 
-const locations = [
+/**
+ * Waar je ons vindt.
+ *
+ * De plekken staan onder elkaar als een dienstregeling: adres, dagen, tijden,
+ * route. Dat leest sneller dan vier kaarten met een cijfer in een rondje, en
+ * het is precies wat iemand zoekt die wil weten of we er vanmiddag staan.
+ *
+ * De openingstijden staan hier in gewone tekst én in de schema.org-gegevens van
+ * `JsonLd`. Ze moeten met elkaar overeenkomen — Google leest allebei, en een
+ * verschil telt als een fout.
+ */
+const PLEKKEN = [
   {
-    name: "Viswinkel Herenstraat",
-    address: "Herenstraat 48, 2313 AL Leiden",
-    phone: "071 514 9802",
-    days: "Dinsdag t/m zaterdag",
-    hours: "Di–Vr 09:00–18:00 · Za 09:00–17:00",
-    fotoUrl: "/images/scene-winkel.svg",
-    fotoAlt: "Verse kabeljauw op de toonbank bij Schaap's Vishandel Herenstraat",
-    mapsHref: "https://maps.google.com/?q=Herenstraat+48,+2313+AL+Leiden",
+    id: "winkel",
+    adres: ADRES_REGEL,
+    /** Dagen als [sleutel van de dag, tijd]. "gesloten" krijgt zijn eigen sleutel. */
+    dagen: [
+      ["diVr", "09:00 – 18:00"],
+      ["za", "09:00 – 17:00"],
+      ["zoMa", null],
+    ],
+    telefoon: true,
+    maps: BEDRIJF.maps.route,
   },
   {
-    name: "Markt Leiden — Zaterdag",
-    address: "Bij de Waag, Aalmarkt, Leiden",
-    phone: null,
-    days: "Zaterdag",
-    hours: "08:30 – 17:00",
-    fotoUrl: "/images/scene-markt.svg",
-    fotoAlt: "Hollandse haring op de Leidse zaterdag markt bij de Waag",
-    mapsHref: "https://maps.google.com/?q=Aalmarkt+Leiden",
+    id: "zaterdag",
+    dagen: [["za", "08:30 – 17:00"]],
+    telefoon: false,
+    maps: "https://maps.google.com/?q=Aalmarkt+Leiden",
   },
   {
-    name: "Markt Leiden — Woensdag",
-    address: "Bij Dille & Camille, Leiden",
-    phone: null,
-    days: "Woensdag",
-    hours: "08:30 – 17:00",
-    fotoUrl: "/images/scene-markt.svg",
-    fotoAlt: "Visstand op de Leidse woensdagmarkt bij Dille & Camille",
-    mapsHref: "https://maps.google.com/?q=Dille+en+Camille+Leiden+Haarlemmerstraat",
+    id: "woensdag",
+    dagen: [["wo", "08:30 – 17:00"]],
+    telefoon: false,
+    maps: "https://maps.google.com/?q=Dille+en+Camille+Leiden+Haarlemmerstraat",
   },
   {
-    name: "Hoogvliet Voorschoten",
-    address: "Parkeerplaats bij Hoogvliet, Voorschoten",
-    phone: null,
-    days: "Vrijdag",
-    hours: "08:30 – 17:30",
-    fotoUrl: "/images/scene-vis.svg",
-    fotoAlt: "Visstand op de parkeerplaats bij Hoogvliet Voorschoten",
-    mapsHref: "https://maps.google.com/?q=Hoogvliet+Voorschoterweg+Voorschoten",
+    id: "voorschoten",
+    dagen: [["vr", "08:30 – 17:30"]],
+    telefoon: false,
+    maps: "https://maps.google.com/?q=Hoogvliet+Voorschoterweg+Voorschoten",
   },
-];
-
-function BezoekContent() {
-  const t = useTranslations("bezoekPage");
-
-  return (
-    <>
-      {/* Hero */}
-      <section style={{ backgroundColor: "var(--navy)" }} className="py-16 text-center px-4">
-        <h1
-          className="text-4xl md:text-5xl font-bold mb-4"
-          style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
-        >
-          {t("title")}
-        </h1>
-        <p className="text-lg" style={{ color: "rgba(250,246,239,0.75)" }}>
-          {t("sub")}
-        </p>
-      </section>
-
-      {/* Locations */}
-      <RevealGroup>
-      <section style={{ backgroundColor: "var(--cream)" }} className="py-16">
-        <div className="max-w-5xl mx-auto px-4 space-y-20">
-          {locations.map(
-            ({ name, address, phone, days, hours, fotoUrl, fotoAlt, mapsHref }, idx) => (
-              <div
-                key={name}
-                className={`grid md:grid-cols-2 gap-8 items-start ${
-                  idx % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""
-                }`}
-              >
-                {/* Info */}
-                <div style={{ backgroundColor: "var(--sand)" }} className="p-8">
-                  <div
-                    className="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold text-white mb-5"
-                    style={{ backgroundColor: "var(--navy)" }}
-                  >
-                    {idx + 1}
-                  </div>
-                  <h2
-                    className="text-2xl font-bold mb-5"
-                    style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
-                  >
-                    {name}
-                  </h2>
-                  <div className="space-y-3 text-sm">
-                    <p className="flex items-start gap-3">
-                      <MapPin size={14} className="mt-0.5 flex-shrink-0 opacity-50" style={{ color: "var(--navy)" }} />
-                      <span style={{ color: "var(--charcoal)", opacity: 0.8 }}>{address}</span>
-                    </p>
-                    <p className="flex items-center gap-3">
-                      <Clock size={14} className="flex-shrink-0 opacity-50" style={{ color: "var(--navy)" }} />
-                      <span style={{ color: "var(--charcoal)", opacity: 0.8 }}>
-                        <strong>{days}</strong> · {hours}
-                      </span>
-                    </p>
-                    {phone && (
-                      <p className="flex items-center gap-3">
-                        <Phone size={14} className="flex-shrink-0 opacity-50" style={{ color: "var(--navy)" }} />
-                        <a
-                          href="tel:+31715149802"
-                          className="font-semibold transition-opacity hover:opacity-70"
-                          style={{ color: "var(--navy)" }}
-                        >
-                          {phone}
-                        </a>
-                      </p>
-                    )}
-                  </div>
-                  <a
-                    href={mapsHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block mt-6 text-sm font-semibold px-5 py-2.5 text-white transition-opacity hover:opacity-90"
-                    style={{ backgroundColor: "var(--navy)" }}
-                  >
-                    Route →
-                  </a>
-                </div>
-
-                {/* Location photo */}
-                <div className="h-[300px] overflow-hidden relative">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={fotoUrl}
-                    alt={fotoAlt}
-                    className="w-full h-full object-cover"
-                  />
-                  <a
-                    href={mapsHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute bottom-4 right-4 text-xs font-semibold px-3 py-2 text-white transition-opacity hover:opacity-90"
-                    style={{ backgroundColor: "rgba(29,36,114,0.9)" }}
-                  >
-                    Bekijk op kaart →
-                  </a>
-                </div>
-              </div>
-            )
-          )}
-        </div>
-      </section>
-
-      {/* Phone CTA */}
-      <section style={{ backgroundColor: "var(--navy)" }} className="py-12 text-center px-4">
-        <p className="text-sm mb-3" style={{ color: "rgba(250,246,239,0.6)" }}>
-          Vragen? Bel ons gerust op:
-        </p>
-        <a
-          href="tel:+31715149802"
-          className="text-4xl font-bold transition-opacity hover:opacity-80"
-          style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
-        >
-          071 514 9802
-        </a>
-      </section>
-      </RevealGroup>
-    </>
-  );
-}
+] as const;
 
 export default async function BezoekOnsPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  await params;
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "bezoekPage" });
+  const nav = await getTranslations({ locale, namespace: "nav" });
+  const g = await getTranslations({ locale, namespace: "gedeeld" });
+  const b = await getTranslations({ locale, namespace: "bezorgen" });
+  const p = await getTranslations({ locale, namespace: "plekken" });
+
   return (
     <>
-      <JsonLd />
-      <BezoekContent />
+      <JsonLd locale={locale} />
+      <Schema
+        data={kruimelSchema(locale, [
+          { naam: BEDRIJF.naamKort, pad: "/" },
+          { naam: nav("locaties"), pad: "/bezoek-ons" },
+        ])}
+      />
+
+      {/* ── Kop ───────────────────────────────────────────────────────────── */}
+      <section style={{ backgroundColor: "var(--navy)" }} className="py-12 md:py-16">
+        <div className="max-w-6xl mx-auto px-4">
+          <Kruimels
+            donker
+            items={[{ naam: BEDRIJF.naamKort, href: `/${locale}` }, { naam: nav("locaties") }]}
+          />
+          <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-8 lg:gap-16 items-end">
+            <div>
+              <p className="kapitaal kapitaal-licht mb-3">{BEDRIJF.adres.plaats}</p>
+              <h1 className="text-[2.1rem] md:text-[2.9rem] mb-4" style={{ color: "var(--cream)" }}>
+                {t("title")}
+              </h1>
+              <p
+                className="text-[1.05rem] leading-relaxed max-w-2xl"
+                style={{ color: "rgba(250,246,239,0.82)" }}
+              >
+                {t("sub")}
+              </p>
+            </div>
+            <div style={{ borderTop: "1px solid rgba(250,246,239,0.3)" }} className="pt-4">
+              <p className="kapitaal kapitaal-licht mb-1">{g("telefoonLabel")}</p>
+              <a
+                href={`tel:${BEDRIJF.telefoon.e164}`}
+                className="text-[1.8rem] leading-tight"
+                style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
+              >
+                {BEDRIJF.telefoon.weergave}
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── De plekken ────────────────────────────────────────────────────── */}
+      <Sectie grond="papier">
+        <ul>
+          {PLEKKEN.map((plek) => (
+            <li
+              key={plek.id}
+              className="grid md:grid-cols-[1fr_1.3fr_auto] gap-4 md:gap-10 py-7 items-start"
+              style={{ borderTop: "1px solid var(--linen)" }}
+            >
+              <div>
+                <h2 className="text-[1.35rem] mb-1">{p(`${plek.id}Naam`)}</h2>
+                <p className="text-[0.95rem]" style={{ color: "var(--grijs)" }}>
+                  {"adres" in plek ? plek.adres : p(`${plek.id}Adres`)}
+                </p>
+              </div>
+
+              <div>
+                <dl className="text-[0.95rem]">
+                  {plek.dagen.map(([dag, tijd]) => (
+                    <div key={dag} className="flex flex-wrap gap-x-3 py-0.5">
+                      <dt style={{ color: "var(--ink)", fontWeight: 600, minWidth: "11rem" }}>
+                        {p(dag)}
+                      </dt>
+                      <dd className="bedrag" style={{ color: "var(--charcoal)" }}>
+                        {tijd ?? p("gesloten")}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+                <p className="text-[0.92rem] mt-2 leading-relaxed" style={{ color: "var(--charcoal)" }}>
+                  {p(`${plek.id}Toelichting`)}
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-2 md:items-end">
+                <a
+                  href={plek.maps}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-semibold underline underline-offset-4 whitespace-nowrap"
+                  style={{ color: "var(--navy)" }}
+                >
+                  {g("route")} &rarr;
+                </a>
+                {plek.telefoon && (
+                  <a
+                    href={`tel:${BEDRIJF.telefoon.e164}`}
+                    className="text-sm whitespace-nowrap"
+                    style={{ color: "var(--grijs)" }}
+                  >
+                    {BEDRIJF.telefoon.weergave}
+                  </a>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </Sectie>
+
+      {/* ── Of laat het brengen ───────────────────────────────────────────── */}
+      <Sectie grond="zand">
+        <div className="grid md:grid-cols-[1fr_auto] gap-8 md:items-end">
+          <div>
+            <Kop label={b("eyebrow")} titel={b("kop")} />
+            <p className="lees" style={{ color: "var(--charcoal)" }}>
+              {b("gebiedTekst")}
+            </p>
+            <p className="mt-4 text-[0.95rem]" style={{ color: "var(--charcoal)" }}>
+              {GEMEENTEN.map((gem) => gem.naam).join(" · ")} &middot;{" "}
+              {b("dagen", { dagen: bezorgdagenTekst() })}{" "}
+              {b("gratisVanaf", { bedrag: euro(BEZORGING.gratisVanaf) })}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Link href={`/${locale}/bezorgen`} className="knop knop-navy">
+              {nav("bezorgen")}
+            </Link>
+            <Link href={`/${locale}/bestellen`} className="knop knop-lijn">
+              {nav("bestellen")}
+            </Link>
+          </div>
+        </div>
+      </Sectie>
     </>
   );
 }

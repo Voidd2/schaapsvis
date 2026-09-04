@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { useTranslations } from "next-intl";
 import { getLocationStatus, type LocationStatus } from "@/lib/openingHours";
 
 /**
@@ -18,7 +19,7 @@ let laatsteSleutel = "";
 /** Zelfde uitkomst moet hetzelfde object opleveren, anders blijft React herhalen. */
 function huidigeStatus(): LocationStatus {
   const status = getLocationStatus("winkel");
-  const sleutel = `${status.isOpen}|${status.label}`;
+  const sleutel = `${status.isOpen}|${status.soort}|${status.tijd ?? ""}|${status.dag ?? ""}`;
   if (sleutel !== laatsteSleutel) {
     laatsteSleutel = sleutel;
     laatste = status;
@@ -31,13 +32,24 @@ function abonneer(opnieuw: () => void) {
   return () => clearInterval(timer);
 }
 
+const DAGSLEUTELS = ["zo", "ma", "di", "wo", "do", "vr", "za"] as const;
+
 export function WinkelStatus() {
+  const t = useTranslations("status");
   const status = useSyncExternalStore(abonneer, huidigeStatus, () => null);
 
   if (!status) {
     // Op de server en tijdens hydratie: ruimte reserveren, niets beweren.
     return <span className="min-h-[1em]" aria-hidden />;
   }
+
+  const zin =
+    status.soort === "onbekend"
+      ? t("onbekend")
+      : t(status.soort, {
+          tijd: status.tijd ?? "",
+          dag: status.dag !== undefined ? t(DAGSLEUTELS[status.dag]) : "",
+        });
 
   return (
     <span className="flex items-center gap-2">
@@ -52,10 +64,8 @@ export function WinkelStatus() {
         }}
       />
       <span>
-        <span className="hidden sm:inline">Winkel Herenstraat: </span>
-        <strong style={{ color: "rgba(250,246,239,0.95)", fontWeight: 600 }}>
-          {status.label}
-        </strong>
+        <span className="hidden sm:inline">{t("winkel")}: </span>
+        <strong style={{ color: "rgba(250,246,239,0.95)", fontWeight: 600 }}>{zin}</strong>
       </span>
     </span>
   );
