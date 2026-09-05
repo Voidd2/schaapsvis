@@ -40,7 +40,7 @@ export function Sectie({
         ...GROND[grond],
         ...(lijn ? { borderTop: "1px solid var(--linen)" } : {}),
       }}
-      className="py-14 md:py-20"
+      className="py-16 md:py-24"
     >
       <div className={`mx-auto px-4 ${smal ? "max-w-3xl" : "max-w-6xl"}`}>{children}</div>
     </section>
@@ -64,12 +64,16 @@ export function Kop({
 }) {
   const Titel = als;
   return (
-    <div className={`${gecentreerd ? "text-center mx-auto" : ""} max-w-3xl mb-8`}>
+    <div className={`${gecentreerd ? "text-center mx-auto" : ""} max-w-3xl mb-9`}>
       {label && (
         <p className={`kapitaal ${donker ? "kapitaal-licht" : ""} mb-3`}>{label}</p>
       )}
       <Titel
-        className={als === "h1" ? "text-[2.1rem] md:text-[3rem]" : "text-[1.7rem] md:text-[2.2rem]"}
+        className={
+          als === "h1"
+            ? "text-[2.3rem] md:text-[3.2rem] leading-[1.06]"
+            : "text-[1.85rem] md:text-[2.5rem] leading-[1.1]"
+        }
         style={{ color: donker ? "var(--cream)" : "var(--ink)" }}
       >
         {titel}

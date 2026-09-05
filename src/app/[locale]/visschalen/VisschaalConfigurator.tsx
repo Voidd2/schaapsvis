@@ -4,30 +4,39 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import {
-  BASISSCHAAL,
-  EXTRAS,
   GROEP_LABELS,
   GROEP_UITLEG,
   GROEP_VOLGORDE,
+  MARKT,
+  MINIMUM_BEDRAG,
+  ONDERDELEN,
+  PORTIES,
   PRIJZEN_DEFINITIEF,
-  STARTBEDRAG,
-  berekenTotaal,
-  keuzeRegels,
-  type Extra,
+  hoeveelheidTekst,
+  personenBorrel,
+  prijsPerPersoon,
+  regels as maakRegels,
+  totaal as berekenTotaal,
+  totaalGewicht,
   type Keuze,
+  type Onderdeel,
 } from "@/lib/visschaal";
 import { euro, whatsappLink } from "@/lib/bedrijf";
 import { useSchaalTekst } from "@/components/visschaal/tekst";
 
 /** Zodat de bestelpagina de samengestelde schaal kan overnemen. */
-export const SCHAAL_OPSLAG = "sv_visschaal_v1";
+export const SCHAAL_OPSLAG = "sv_visschaal_v2";
+
+/** Gewicht gaat met 100 gram tegelijk; stuks met één. */
+const STAP = 100;
 
 /**
- * De schaal samenstellen.
+ * De schaal samenstellen, per 100 gram.
  *
- * Bij de meeste vishandels moet je een offerte aanvragen en dan afwachten. Dat
- * kost de klant een dag en jou een telefoontje. Hier ziet iemand direct wat zijn
- * schaal kost terwijl hij hem samenstelt — en wat er precies op ligt.
+ * Bij vrijwel elke concurrent koop je een pakket per persoon: je betaalt dus
+ * ook voor de paling waar je niet van houdt. Hier kiest de klant zelf wat
+ * erop komt en hoeveel, en ziet hij het bedrag meelopen — inclusief wat het
+ * per persoon wordt, zodat het te vergelijken is met die pakketprijzen.
  */
 export function VisschaalConfigurator() {
   const t = useTranslations("visschaal");
@@ -38,8 +47,6 @@ export function VisschaalConfigurator() {
   const [keuze, setKeuze] = useState<Keuze>({});
   const [geladen, setGeladen] = useState(false);
 
-  // Eerder samengestelde schaal terughalen, zodat iemand die even weg navigeert
-  // niet opnieuw hoeft te beginnen.
   useEffect(() => {
     try {
       const opgeslagen = localStorage.getItem(SCHAAL_OPSLAG);
@@ -47,7 +54,7 @@ export function VisschaalConfigurator() {
         const gelezen = JSON.parse(opgeslagen) as Keuze;
         const geldig: Keuze = {};
         for (const [id, aantal] of Object.entries(gelezen)) {
-          if (EXTRAS.some((e) => e.id === id) && Number(aantal) > 0) {
+          if (ONDERDELEN.some((o) => o.id === id) && Number(aantal) > 0) {
             geldig[id] = Number(aantal);
           }
         }
@@ -69,14 +76,22 @@ export function VisschaalConfigurator() {
     }
   }, [keuze, geladen]);
 
+  const regels = useMemo(() => maakRegels(keuze), [keuze]);
   const totaal = useMemo(() => berekenTotaal(keuze), [keuze]);
-  const regels = useMemo(() => keuzeRegels(keuze), [keuze]);
+  const gewicht = useMemo(() => totaalGewicht(keuze), [keuze]);
+  const personen = useMemo(() => personenBorrel(keuze), [keuze]);
+  const perPersoon = useMemo(() => prijsPerPersoon(keuze), [keuze]);
 
-  function zet(id: string, aantal: number) {
+  const teWeinig = totaal > 0 && totaal < MINIMUM_BEDRAG;
+
+  function zet(onderdeel: Onderdeel, hoeveelheid: number) {
+    const stap = onderdeel.perStuk ? 1 : STAP;
+    const max = onderdeel.perStuk ? 20 : 5000;
     setKeuze((vorige) => {
       const volgende = { ...vorige };
-      if (aantal <= 0) delete volgende[id];
-      else volgende[id] = Math.min(aantal, 50);
+      const nieuw = Math.max(0, Math.min(hoeveelheid, max));
+      if (nieuw < stap) delete volgende[onderdeel.id];
+      else volgende[onderdeel.id] = nieuw;
       return volgende;
     });
   }
@@ -84,72 +99,42 @@ export function VisschaalConfigurator() {
   const whatsappBericht = [
     "Hallo Schaap's Vishandel, ik wil graag een visschaal bestellen.",
     "",
-    `Basisschaal: ${euro(STARTBEDRAG)}`,
-    ...regels.map((r) => `${r.aantal}× ${r.naam} — ${euro(r.bedrag)}`),
+    ...regels.map((r) => `${hoeveelheidTekst(r)} ${r.naam} — ${euro(r.bedrag)}`),
     "",
     `Totaal: ${euro(totaal)}`,
   ].join("\n");
 
   return (
-    <div className="grid lg:grid-cols-[1fr_20rem] gap-10 lg:gap-14 items-start">
-      {/* ── Basis en toevoegingen ─────────────────────────────────────────── */}
+    <div className="grid lg:grid-cols-[1fr_21rem] gap-12 lg:gap-16 items-start">
+      {/* ── Kiezen ────────────────────────────────────────────────────────── */}
       <div>
-        <div
-          className="p-6 md:p-7 mb-10"
-          style={{ backgroundColor: "#fff", border: "1px solid var(--linen)" }}
-        >
-          <div className="flex flex-wrap items-baseline justify-between gap-3 mb-1">
-            <h2 className="text-[1.4rem]">{t("basisKop")}</h2>
-            <span className="bedrag text-[1.3rem] font-semibold" style={{ color: "var(--navy)" }}>
-              {euro(STARTBEDRAG)}
-            </span>
-          </div>
-          <p className="text-sm mb-5" style={{ color: "var(--grijs)" }}>
-            {t("basisVoor", { personen: tekst.personen(BASISSCHAAL.personen) })}
-          </p>
-          <ul className="grid sm:grid-cols-2 gap-x-8">
-            {BASISSCHAAL.bevat.map((item, i) => (
-              <li
-                key={item}
-                className="py-2 text-[0.95rem]"
-                style={{ borderTop: "1px solid var(--linen)", color: "var(--charcoal)" }}
-              >
-                {tekst.basisregel(i, item)}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <h2 className="text-[1.6rem] mb-2">{t("extrasKop")}</h2>
-        <p className="mb-8 max-w-2xl" style={{ color: "var(--charcoal)" }}>
-          {t("extrasTekst")}
-        </p>
-
         {GROEP_VOLGORDE.map((groep) => {
-          const items = EXTRAS.filter((e) => e.groep === groep);
+          const items = ONDERDELEN.filter((o) => o.groep === groep);
           if (items.length === 0) return null;
           return (
-            <section key={groep} className="mb-9">
-              <h3
-                className="text-[1.15rem] pb-2 mb-1"
-                style={{ borderBottom: "2px solid var(--navy)" }}
-              >
-                {tekst.groep(groep, GROEP_LABELS[groep])}
-              </h3>
-              <p className="text-sm mb-3" style={{ color: "var(--grijs)" }}>
-                {tekst.uitleg(groep, GROEP_UITLEG[groep])}
-              </p>
-              <ul>
-                {items.map((extra) => (
-                  <ExtraRegel
-                    key={extra.id}
-                    extra={extra}
-                    aantal={keuze[extra.id] ?? 0}
-                    onZet={(n) => zet(extra.id, n)}
-                    naam={tekst.naam(extra.id, extra.naam)}
-                    toelichting={tekst.toelichting(extra.id, extra.toelichting)}
-                    seizoenLabel={(periode) => t("seizoen", { periode: tekst.seizoen(periode) ?? periode })}
-                    perLabel={(eenheid) => t("perStuk", { eenheid: tekst.eenheid(eenheid) ?? eenheid })}
+            <section key={groep} className="mb-12">
+              <div className="mb-5">
+                <h3 className="text-[1.5rem] mb-1">
+                  {tekst.groep(groep, GROEP_LABELS[groep])}
+                </h3>
+                <p className="text-[0.95rem]" style={{ color: "var(--grijs)" }}>
+                  {tekst.uitleg(groep, GROEP_UITLEG[groep])}
+                </p>
+              </div>
+              <ul style={{ borderTop: "1px solid var(--linen)" }}>
+                {items.map((onderdeel) => (
+                  <Regel
+                    key={onderdeel.id}
+                    onderdeel={onderdeel}
+                    naam={tekst.naam(onderdeel.id, onderdeel.naam)}
+                    toelichting={tekst.toelichting(onderdeel.id, onderdeel.toelichting)}
+                    hoeveelheid={keuze[onderdeel.id] ?? 0}
+                    onZet={(n) => zet(onderdeel, n)}
+                    perLabel={t("per100")}
+                    stukLabel={(eenheid) => t("perStuk", { eenheid })}
+                    seizoenLabel={(periode) =>
+                      t("seizoen", { periode: tekst.seizoen(periode) ?? periode })
+                    }
                   />
                 ))}
               </ul>
@@ -158,85 +143,124 @@ export function VisschaalConfigurator() {
         })}
       </div>
 
-      {/* ── Samenvatting ──────────────────────────────────────────────────── */}
+      {/* ── Uw schaal ─────────────────────────────────────────────────────── */}
       <aside className="lg:sticky lg:top-32">
-        <div
-          className="p-6"
-          style={{ backgroundColor: "var(--navy)", color: "rgba(250,246,239,0.85)" }}
-        >
-          <h2 className="text-[1.25rem] mb-4" style={{ color: "var(--cream)" }}>
-            {t("samenvattingKop")}
-          </h2>
-
-          <dl className="text-sm">
-            <div
-              className="flex justify-between gap-3 py-2"
-              style={{ borderTop: "1px solid rgba(250,246,239,0.22)" }}
-            >
-              <dt>{t("basisschaal")}</dt>
-              <dd className="bedrag shrink-0">{euro(STARTBEDRAG)}</dd>
-            </div>
+        <div style={{ backgroundColor: "var(--navy)", color: "rgba(250,246,239,0.85)" }}>
+          <div className="p-6">
+            <h2 className="text-[1.3rem] mb-4" style={{ color: "var(--cream)" }}>
+              {t("samenvattingKop")}
+            </h2>
 
             {regels.length === 0 ? (
-              <p className="py-3 text-[0.85rem]" style={{ opacity: 0.6 }}>
+              <p className="text-[0.9rem] py-2" style={{ opacity: 0.6 }}>
                 {t("niksGekozen")}
               </p>
             ) : (
-              regels.map((r) => (
-                <div
-                  key={r.naam}
-                  className="flex justify-between gap-3 py-2"
-                  style={{ borderTop: "1px solid rgba(250,246,239,0.22)" }}
-                >
-                  <dt>
-                    {r.aantal > 1 && <span style={{ opacity: 0.7 }}>{r.aantal}× </span>}
-                    {tekst.naam(r.id, r.naam)}
-                  </dt>
-                  <dd className="bedrag shrink-0">{euro(r.bedrag)}</dd>
-                </div>
-              ))
+              <dl className="text-sm">
+                {regels.map((r) => (
+                  <div
+                    key={r.id}
+                    className="flex justify-between gap-3 py-2"
+                    style={{ borderTop: "1px solid rgba(250,246,239,0.22)" }}
+                  >
+                    <dt>
+                      <span className="bedrag" style={{ opacity: 0.7 }}>
+                        {hoeveelheidTekst(r)}
+                      </span>{" "}
+                      {tekst.naam(r.id, r.naam)}
+                    </dt>
+                    <dd className="bedrag shrink-0">{euro(r.bedrag)}</dd>
+                  </div>
+                ))}
+              </dl>
             )}
 
             <div
-              className="flex justify-between gap-3 pt-3 mt-1 text-[1.15rem] font-semibold"
-              style={{ borderTop: "2px solid rgba(250,246,239,0.5)", color: "var(--cream)" }}
+              className="flex justify-between gap-3 pt-3 mt-2 text-[1.3rem]"
+              style={{
+                borderTop: "2px solid rgba(250,246,239,0.5)",
+                color: "var(--cream)",
+                fontFamily: "var(--font-display)",
+              }}
             >
-              <dt>{g("totaal")}</dt>
-              <dd className="bedrag shrink-0">{euro(totaal)}</dd>
+              <span>{g("totaal")}</span>
+              <span className="bedrag">{euro(totaal)}</span>
             </div>
-          </dl>
 
-          {!PRIJZEN_DEFINITIEF && (
-            <p className="mt-4 text-[0.8rem] leading-relaxed" style={{ opacity: 0.65 }}>
-              {t("voorlopig")}
-            </p>
-          )}
-
-          <div className="mt-6 space-y-2">
-            <Link
-              href={`/${locale}/bestellen?type=visschaal`}
-              className="knop knop-rood w-full"
-            >
-              {t("naarBestellen")}
-            </Link>
-            <a
-              href={whatsappLink(whatsappBericht)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="knop knop-lijn-licht w-full !text-[0.85rem]"
-            >
-              {t("viaWhatsapp")}
-            </a>
-            {regels.length > 0 && (
-              <button
-                type="button"
-                onClick={() => setKeuze({})}
-                className="w-full text-[0.8rem] underline underline-offset-4 pt-1"
-                style={{ opacity: 0.6 }}
-              >
-                {t("wissen")}
-              </button>
+            {gewicht > 0 && (
+              <p className="mt-2 text-[0.85rem]" style={{ opacity: 0.7 }}>
+                {t("gewichtRegel", {
+                  gewicht:
+                    gewicht >= 1000
+                      ? `${(gewicht / 1000).toFixed(1).replace(".", ",")} kg`
+                      : `${gewicht} g`,
+                })}
+                {personen >= 1 && ` · ${t("personenRegel", { personen })}`}
+              </p>
             )}
+
+            {/* Vergelijking met de goedkoopste pakketprijs die we in de regio
+                vonden. Alleen tonen als we er echt onder zitten. */}
+            {perPersoon !== null && perPersoon < MARKT.goedkoopstePerPersoon && (
+              <p
+                className="mt-3 p-3 text-[0.82rem] leading-relaxed"
+                style={{ backgroundColor: "rgba(250,246,239,0.1)", color: "var(--cream)" }}
+              >
+                {t("vergelijking", {
+                  bedrag: euro(perPersoon),
+                  markt: euro(MARKT.goedkoopstePerPersoon),
+                })}
+              </p>
+            )}
+
+            {teWeinig && (
+              <p className="mt-3 text-[0.82rem]" style={{ color: "#ffb4a8" }}>
+                {t("minimum", { bedrag: euro(MINIMUM_BEDRAG) })}
+              </p>
+            )}
+
+            {!PRIJZEN_DEFINITIEF && (
+              <p className="mt-3 text-[0.78rem] leading-relaxed" style={{ opacity: 0.6 }}>
+                {t("voorlopig")}
+              </p>
+            )}
+
+            <div className="mt-6 space-y-2">
+              <Link
+                href={`/${locale}/bestellen?type=visschaal`}
+                className="knop knop-rood w-full"
+                aria-disabled={teWeinig || regels.length === 0}
+              >
+                {t("naarBestellen")}
+              </Link>
+              <a
+                href={whatsappLink(whatsappBericht)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="knop knop-lijn-licht w-full !text-[0.85rem]"
+              >
+                {t("viaWhatsapp")}
+              </a>
+              {regels.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => setKeuze({})}
+                  className="w-full text-[0.8rem] underline underline-offset-4 pt-1"
+                  style={{ opacity: 0.6 }}
+                >
+                  {t("wissen")}
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Hulpje: hoeveel heb ik nodig? */}
+          <div
+            className="px-6 py-4 text-[0.82rem] leading-relaxed"
+            style={{ borderTop: "1px solid rgba(250,246,239,0.22)", opacity: 0.75 }}
+          >
+            <p className="kapitaal kapitaal-licht mb-1.5">{t("hoeveelKop")}</p>
+            <p>{t("hoeveelTekst", { borrel: PORTIES.borrel, maaltijd: PORTIES.maaltijd })}</p>
           </div>
         </div>
       </aside>
@@ -244,109 +268,101 @@ export function VisschaalConfigurator() {
   );
 }
 
-function ExtraRegel({
-  extra,
+function Regel({
+  onderdeel,
   naam,
   toelichting,
-  aantal,
+  hoeveelheid,
   onZet,
-  seizoenLabel,
   perLabel,
+  stukLabel,
+  seizoenLabel,
 }: {
-  extra: Extra;
+  onderdeel: Onderdeel;
   naam: string;
   toelichting?: string;
-  aantal: number;
-  onZet: (aantal: number) => void;
+  hoeveelheid: number;
+  onZet: (hoeveelheid: number) => void;
+  perLabel: string;
+  stukLabel: (eenheid: string) => string;
   seizoenLabel: (periode: string) => string;
-  perLabel: (eenheid: string) => string;
 }) {
-  const gekozen = aantal > 0;
+  const stap = onderdeel.perStuk ? 1 : STAP;
+  const gekozen = hoeveelheid > 0;
+
+  const weergave = onderdeel.perStuk
+    ? String(hoeveelheid)
+    : hoeveelheid >= 1000
+      ? `${(hoeveelheid / 1000).toFixed(1).replace(".", ",")} kg`
+      : `${hoeveelheid} g`;
 
   return (
     <li
-      className="py-3.5 flex flex-wrap items-start justify-between gap-x-5 gap-y-2"
-      style={{ borderBottom: "1px solid var(--linen)" }}
+      className="py-4 flex flex-wrap items-start justify-between gap-x-6 gap-y-3"
+      style={{
+        borderBottom: "1px solid var(--linen)",
+        backgroundColor: gekozen ? "rgba(22,34,90,0.04)" : undefined,
+      }}
     >
-      <div className="flex-1 min-w-[13rem]">
-        <p className="font-semibold text-[1rem]" style={{ color: "var(--ink)" }}>
+      <div className="flex-1 min-w-[12rem]">
+        <p className="text-[1.05rem]" style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}>
           {naam}
-          {extra.seizoen && (
-            <span className="ml-2 text-[0.72rem] font-normal" style={{ color: "var(--gold)" }}>
-              {seizoenLabel(extra.seizoen)}
+          {onderdeel.seizoen && (
+            <span className="ml-2 text-[0.72rem]" style={{ color: "var(--gold)", fontFamily: "var(--font-body)" }}>
+              {seizoenLabel(onderdeel.seizoen)}
             </span>
           )}
         </p>
         {toelichting && (
-          <p className="text-[0.87rem] leading-snug mt-0.5" style={{ color: "var(--grijs)" }}>
+          <p className="text-[0.87rem] leading-snug mt-0.5 max-w-md" style={{ color: "var(--grijs)" }}>
             {toelichting}
           </p>
         )}
       </div>
 
-      <div className="flex items-center gap-4">
-        <span className="bedrag text-[0.95rem] whitespace-nowrap" style={{ color: "var(--charcoal)" }}>
-          {euro(extra.prijs)}
-          {extra.meervoudig && extra.eenheid && (
-            <span className="text-[0.78rem]" style={{ color: "var(--grijs)" }}>
-              {" "}
-              {perLabel(extra.eenheid)}
-            </span>
-          )}
+      <div className="flex items-center gap-5 shrink-0">
+        <span className="text-right leading-tight">
+          <span className="bedrag block text-[1.05rem]" style={{ color: "var(--ink)" }}>
+            {euro(onderdeel.prijs)}
+          </span>
+          <span className="block text-[0.72rem]" style={{ color: "var(--grijs)" }}>
+            {onderdeel.perStuk ? stukLabel(onderdeel.perStuk) : perLabel}
+          </span>
         </span>
 
-        {extra.meervoudig ? (
-          <div className="flex items-stretch" style={{ border: "1px solid var(--linen)" }}>
-            <button
-              type="button"
-              onClick={() => onZet(aantal - 1)}
-              disabled={aantal === 0}
-              className="w-9 h-9 text-lg leading-none disabled:opacity-30"
-              style={{ color: "var(--navy)" }}
-              aria-label={`− ${naam}`}
-            >
-              −
-            </button>
-            <span
-              className="w-9 h-9 flex items-center justify-center bedrag text-sm font-semibold"
-              style={{
-                borderLeft: "1px solid var(--linen)",
-                borderRight: "1px solid var(--linen)",
-                backgroundColor: gekozen ? "var(--sand)" : "transparent",
-              }}
-              aria-live="polite"
-            >
-              {aantal}
-            </span>
-            <button
-              type="button"
-              onClick={() => onZet(aantal + 1)}
-              className="w-9 h-9 text-lg leading-none"
-              style={{ color: "var(--navy)" }}
-              aria-label={`+ ${naam}`}
-            >
-              +
-            </button>
-          </div>
-        ) : (
-          <label
-            className="flex items-center gap-2 cursor-pointer select-none px-3 h-9"
-            style={{
-              border: "1px solid",
-              borderColor: gekozen ? "var(--navy)" : "var(--linen)",
-              backgroundColor: gekozen ? "var(--navy)" : "transparent",
-              color: gekozen ? "var(--cream)" : "var(--navy)",
-            }}
+        <div className="flex items-stretch" style={{ border: "1px solid var(--linen)" }}>
+          <button
+            type="button"
+            onClick={() => onZet(hoeveelheid - stap)}
+            disabled={!gekozen}
+            className="w-9 h-10 text-lg leading-none disabled:opacity-25"
+            style={{ color: "var(--navy)" }}
+            aria-label={`Minder ${naam}`}
           >
-            <input
-              type="checkbox"
-              checked={gekozen}
-              onChange={(e) => onZet(e.target.checked ? 1 : 0)}
-              className="sr-only"
-            />
-            <span className="text-sm font-semibold" aria-hidden>{gekozen ? "−" : "+"}</span>
-          </label>
-        )}
+            −
+          </button>
+          <span
+            className="min-w-[4.2rem] h-10 flex items-center justify-center bedrag text-[0.88rem] font-semibold px-1"
+            style={{
+              borderLeft: "1px solid var(--linen)",
+              borderRight: "1px solid var(--linen)",
+              backgroundColor: gekozen ? "var(--sand)" : "transparent",
+              color: gekozen ? "var(--ink)" : "var(--grijs)",
+            }}
+            aria-live="polite"
+          >
+            {gekozen ? weergave : "—"}
+          </span>
+          <button
+            type="button"
+            onClick={() => onZet(hoeveelheid + stap)}
+            className="w-9 h-10 text-lg leading-none"
+            style={{ color: "var(--navy)" }}
+            aria-label={`Meer ${naam}`}
+          >
+            +
+          </button>
+        </div>
       </div>
     </li>
   );

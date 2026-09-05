@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import type { ExtraGroep } from "@/lib/visschaal";
+import type { Groep } from "@/lib/visschaal";
 
 /**
  * De namen van de onderdelen van een visschaal in de taal van de bezoeker.
@@ -17,11 +17,9 @@ export function useSchaalTekst() {
   const of = (sleutel: string, terugval: string) => (t.has(sleutel) ? t(sleutel) : terugval);
 
   return {
-    groep: (groep: ExtraGroep, terugval: string) => of(`groep_${groep}`, terugval),
-    uitleg: (groep: ExtraGroep, terugval: string) => of(`uitleg_${groep}`, terugval),
+    groep: (groep: Groep, terugval: string) => of(`groep_${groep}`, terugval),
+    uitleg: (groep: Groep, terugval: string) => of(`uitleg_${groep}`, terugval),
     naam: (id: string, terugval: string) => of(id, terugval),
-    basisregel: (index: number, terugval: string) => of(`basis_${index + 1}`, terugval),
-    personen: (terugval: string) => of("personen", terugval),
     toelichting: (id: string, terugval?: string) =>
       terugval === undefined ? undefined : of(`toelichting_${id}`, terugval),
     eenheid: (eenheid?: string) =>

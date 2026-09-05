@@ -9,7 +9,7 @@ import { NewsletterSignup } from "@/components/shared/NewsletterSignup";
 import { paginaMetadata } from "@/lib/seo";
 import { BEDRIJF, VERKOOPPUNTEN, euro } from "@/lib/bedrijf";
 import { BEZORGING, GEMEENTEN, bezorgdagenTekst } from "@/lib/bezorging";
-import { STARTBEDRAG } from "@/lib/visschaal";
+import { ONDERDELEN } from "@/lib/visschaal";
 import { products, CATEGORIE_LABELS, type Categorie } from "@/lib/assortiment-data";
 import { googleReviews, googleRating, googleReviewCount, googleMapsUrl } from "@/lib/reviews";
 
@@ -49,8 +49,14 @@ export default async function HomePage({
   const nav = await getTranslations({ locale, namespace: "nav" });
   const g = await getTranslations({ locale, namespace: "gedeeld" });
   const b = await getTranslations({ locale, namespace: "bezorgen" });
+  const v = await getTranslations({ locale, namespace: "visschaal" });
 
   const dagen = bezorgdagenTekst();
+  // De goedkoopste regel per 100 gram — daarmee kan de homepage "vanaf" zeggen
+  // zonder dat er ergens een tweede bedrag onderhouden moet worden.
+  const goedkoopstePer100 = Math.min(
+    ...ONDERDELEN.filter((o) => !o.perStuk).map((o) => o.prijs)
+  );
   const categorieAantallen = (Object.keys(CATEGORIE_LABELS) as Categorie[]).map((cat) => ({
     cat,
     aantal: products.filter((p) => p.categorie === cat).length,
@@ -82,13 +88,34 @@ export default async function HomePage({
             </div>
           </div>
 
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/scene-winkel.svg"
-            alt="Schaap's Vishandel aan de Herenstraat 48 in Leiden, viswinkel sinds 1938"
-            className="w-full aspect-[4/5] object-cover"
-            style={{ border: "1px solid var(--linen)" }}
-          />
+          {/* Eén stuk vis, groot en op wit, met een bijschrift eronder — als een
+              plaat in een catalogus. De tekenfilm-winkelpui die hier stond zag
+              er naast de echte productfoto's uit als plaatjesvulling.
+              De foto's zijn 300×200: daarom tonen we ze op ware grootte in een
+              royaal wit vlak in plaats van uitgerekt over de hele kolom. */}
+          <figure
+            className="w-full flex flex-col justify-center py-10 px-6"
+            style={{ backgroundColor: "#fff", border: "1px solid var(--linen)" }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/producten/gerookte-zalm-high-seas.png"
+              alt="Gerookte zalm van het mes gesneden bij Schaap's Vishandel aan de Herenstraat in Leiden"
+              width={300}
+              height={200}
+              className="w-full max-w-[22rem] mx-auto h-auto"
+            />
+            <figcaption
+              className="mt-6 pt-3 text-center text-[0.95rem] mx-auto w-full max-w-[22rem]"
+              style={{
+                borderTop: "1px solid var(--linen)",
+                color: "var(--ink)",
+                fontFamily: "var(--font-display)",
+              }}
+            >
+              {h("heroBijschrift")}
+            </figcaption>
+          </figure>
         </div>
       </section>
 
@@ -188,25 +215,45 @@ export default async function HomePage({
       {/* ── Visschalen ────────────────────────────────────────────────────── */}
       <Sectie grond="zand">
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/scene-schaaldier.svg"
-            alt="Visschaal met gerookte zalm, Hollandse garnalen en zeevruchten van Schaap's Vishandel Leiden"
-            className="w-full aspect-square object-cover order-2 lg:order-1"
-            style={{ border: "1px solid var(--linen)" }}
-          />
+          <figure
+            className="w-full flex flex-col justify-center py-10 px-6 order-2 lg:order-1"
+            style={{ backgroundColor: "#fff", border: "1px solid var(--linen)" }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/producten/langoustines.png"
+              alt="Langoustines voor een visschaal van Schaap's Vishandel in Leiden"
+              width={300}
+              height={200}
+              loading="lazy"
+              className="w-full max-w-[20rem] mx-auto h-auto"
+            />
+            <figcaption
+              className="mt-6 pt-3 text-center text-[0.95rem] mx-auto w-full max-w-[20rem]"
+              style={{
+                borderTop: "1px solid var(--linen)",
+                color: "var(--ink)",
+                fontFamily: "var(--font-display)",
+              }}
+            >
+              {h("visschaalBijschrift")}
+            </figcaption>
+          </figure>
           <div className="order-1 lg:order-2">
             <Kop label={h("visschaalLabel")} titel={h("visschaalKop")} />
             <p className="lees mb-7" style={{ color: "var(--charcoal)" }}>
               {h("visschaalTekst")}
             </p>
-            <p className="mb-7">
-              <span className="kapitaal block mb-1">{h("visschaalVanaf")}</span>
+            <p className="mb-8">
+              <span className="kapitaal block mb-1.5">{h("visschaalVanaf")}</span>
               <span
-                className="bedrag text-[2.4rem] leading-none"
+                className="bedrag text-[2.6rem] leading-none"
                 style={{ fontFamily: "var(--font-display)", color: "var(--navy)" }}
               >
-                {euro(STARTBEDRAG)}
+                {euro(goedkoopstePer100)}
+              </span>
+              <span className="ml-2 text-[0.95rem]" style={{ color: "var(--grijs)" }}>
+                {v("per100")}
               </span>
             </p>
             <Link href={`/${locale}/visschalen`} className="knop knop-rood">
@@ -217,17 +264,13 @@ export default async function HomePage({
       </Sectie>
 
       {/* ── Ons verhaal ───────────────────────────────────────────────────── */}
+      {/* Zonder afbeelding: het citaat van Aldert is hier het sterkste wat we
+          hebben, en dat verdient de ruimte. Zodra er een echte foto van de
+          winkel is, kan die hier links naast. */}
       <Sectie grond="papier">
-        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-20">
           <div>
             <Kop label={h("verhaalLabel")} titel={h("verhaalKop")} />
-            <p className="lees mb-7" style={{ color: "var(--charcoal)" }}>
-              {h("verhaalTekst")}
-            </p>
-            <blockquote className="citaat mb-3">{h("verhaalCitaat")}</blockquote>
-            <p className="text-sm mb-7" style={{ color: "var(--grijs)" }}>
-              — {h("verhaalBron")}
-            </p>
             <Link
               href={`/${locale}/ons-verhaal`}
               className="font-semibold underline underline-offset-4"
@@ -236,18 +279,28 @@ export default async function HomePage({
               {h("verhaalLink")} &rarr;
             </Link>
           </div>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/scene-markt.svg"
-            alt="Vier generaties Schaap's Vishandel, van de markt in Leiden tot de winkel op de Herenstraat"
-            className="w-full aspect-[4/5] object-cover"
-            style={{ border: "1px solid var(--linen)" }}
-          />
+          <div>
+            <p className="lees mb-8" style={{ color: "var(--charcoal)" }}>
+              {h("verhaalTekst")}
+            </p>
+            <blockquote
+              className="text-[1.6rem] md:text-[1.9rem] leading-[1.35] italic mb-4"
+              style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}
+            >
+              &ldquo;{h("verhaalCitaat")}&rdquo;
+            </blockquote>
+            <p className="text-sm" style={{ color: "var(--grijs)" }}>
+              &mdash; {h("verhaalBron")}
+            </p>
+          </div>
         </div>
       </Sectie>
 
       {/* ── Assortiment ───────────────────────────────────────────────────── */}
-      <Sectie grond="zand">
+      {/* Wit als ondergrond, met opzet: de productfoto's zijn uitsneden op wit.
+          Op een zandkleurig vlak worden dat harde witte rechthoeken die eruit
+          zien als kapotte plaatjes. Op wit ligt de vis gewoon op de pagina. */}
+      <Sectie grond="wit">
         <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-10 lg:gap-16">
           <div>
             <Kop label={h("assortimentLabel")} titel={h("assortimentKop")} />
@@ -279,27 +332,29 @@ export default async function HomePage({
             </Link>
           </div>
 
-          <ul className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <ul className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-8">
             {UITGELICHT.map((slug) => {
               const p = products.find((x) => x.slug === slug);
               if (!p) return null;
               return (
                 <li key={slug}>
                   <Link href={`/${locale}/assortiment/${p.slug}`} className="block group">
+                    {/* Geen kader en geen eigen achtergrond: de uitsnede staat
+                        al op wit, dus zo lijkt de vis op de pagina te liggen. */}
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={`/images/producten/${slug}.png`}
                       alt={`${p.naam} bij Schaap's Vishandel in Leiden`}
                       loading="lazy"
-                      // De foto's zijn uitsneden op wit in 3:2. Volledig tonen
-                      // (contain) in plaats van bijsnijden, anders blijft er
-                      // vooral wit over.
-                      className="w-full aspect-[3/2] object-contain p-2"
-                      style={{ backgroundColor: "#fff", border: "1px solid var(--linen)" }}
+                      className="w-full aspect-[3/2] object-contain transition-transform duration-300 group-hover:scale-[1.04]"
                     />
                     <span
-                      className="block mt-2 text-[0.95rem] group-hover:underline underline-offset-4"
-                      style={{ color: "var(--ink)", fontFamily: "var(--font-display)" }}
+                      className="block mt-3 pt-2.5 text-[1rem] group-hover:underline underline-offset-4"
+                      style={{
+                        color: "var(--ink)",
+                        fontFamily: "var(--font-display)",
+                        borderTop: "1px solid var(--linen)",
+                      }}
                     >
                       {p.naam}
                     </span>

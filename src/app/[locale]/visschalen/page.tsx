@@ -7,8 +7,13 @@ import { Sectie, Kop, Vragen, Kruimels } from "@/components/ui/Sectie";
 import { VisschaalConfigurator } from "./VisschaalConfigurator";
 import { paginaMetadata, kruimelSchema, vraagSchema } from "@/lib/seo";
 import { BEDRIJF, euro, whatsappLink } from "@/lib/bedrijf";
-import { BASISSCHAAL, EXTRAS, STARTBEDRAG } from "@/lib/visschaal";
+import { MARKT, MINIMUM_BEDRAG, ONDERDELEN } from "@/lib/visschaal";
 import { GEMEENTEN } from "@/lib/bezorging";
+
+/** De goedkoopste regel per 100 gram — waarmee de pagina "vanaf" kan zeggen. */
+const GOEDKOOPSTE = Math.min(
+  ...ONDERDELEN.filter((o) => !o.perStuk).map((o) => o.prijs)
+);
 
 export async function generateMetadata({
   params,
@@ -17,12 +22,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
-  const bedrag = euro(STARTBEDRAG);
   return paginaMetadata({
     locale,
     pad: "/visschalen",
-    title: t("visschalenTitle", { bedrag }),
-    description: t("visschalenDesc", { bedrag }),
+    title: t("visschalenTitle", { bedrag: euro(GOEDKOOPSTE) }),
+    description: t("visschalenDesc", { bedrag: euro(GOEDKOOPSTE) }),
   });
 }
 
@@ -38,33 +42,31 @@ export default async function VisschalenPage({
 
   const vragen = t.raw("faq") as { v: string; a: string }[];
 
-  // De schaal als product. Het hoogste bedrag is de basis plus één van alles —
-  // niet meer dan een bovengrens, maar zo klopt het bereik met wat er te kiezen valt.
-  const hoogste = STARTBEDRAG + EXTRAS.reduce((som, e) => som + e.prijs, 0);
+  const duurste = Math.max(...ONDERDELEN.filter((o) => !o.perStuk).map((o) => o.prijs));
 
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
     name:
       locale === "de"
-        ? "Fischplatte nach Wunsch"
+        ? "Fischplatte nach Gewicht zusammenstellen"
         : locale === "en"
-          ? "Made-to-order seafood platter"
-          : "Visschaal op maat",
+          ? "Build-your-own seafood platter, by weight"
+          : "Visschaal samenstellen per 100 gram",
     description:
       locale === "de"
-        ? `Grundplatte mit Räucherlachs, Makrele, Nordseekrabben, Salaten und Heringshäppchen, ab ${euro(STARTBEDRAG)}. Alle weiteren Zutaten wählen Sie selbst.`
+        ? `Sie wählen selbst, was auf die Platte kommt und wie viel, pro 100 Gramm — ab ${euro(GOEDKOOPSTE)} pro 100 g. Kein festes Paket.`
         : locale === "en"
-          ? `Base platter with smoked salmon, mackerel, Dutch shrimp, salads and herring bites from ${euro(STARTBEDRAG)}. You choose everything else that goes on it.`
-          : `Basisschaal met gerookte zalm, makreel, Hollandse garnalen, salades en haringhapjes vanaf ${euro(STARTBEDRAG)}. Alles wat er verder op komt, kiest u zelf.`,
+          ? `You choose what goes on the platter and how much, per 100 grams — from ${euro(GOEDKOOPSTE)} per 100 g. No fixed package.`
+          : `U kiest zelf wat er op de schaal komt en hoeveel, per 100 gram — vanaf ${euro(GOEDKOOPSTE)} per 100 g. Geen vast pakket.`,
     brand: { "@type": "Brand", name: BEDRIJF.naam },
     category: "Seafood platter",
     offers: {
       "@type": "AggregateOffer",
       priceCurrency: "EUR",
-      lowPrice: STARTBEDRAG.toFixed(2),
-      highPrice: hoogste.toFixed(2),
-      offerCount: EXTRAS.length + 1,
+      lowPrice: GOEDKOOPSTE.toFixed(2),
+      highPrice: duurste.toFixed(2),
+      offerCount: ONDERDELEN.length,
       availability: "https://schema.org/InStock",
       seller: { "@id": `${BEDRIJF.domein}/#winkel` },
       areaServed: GEMEENTEN.map((x) => ({ "@type": "City", name: x.naam })),
@@ -87,7 +89,7 @@ export default async function VisschalenPage({
       />
 
       {/* ── Kop ───────────────────────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "var(--navy)" }} className="py-14 md:py-18">
+      <section style={{ backgroundColor: "var(--navy)" }} className="pt-10 pb-14 md:pt-12 md:pb-20">
         <div className="max-w-6xl mx-auto px-4">
           <Kruimels
             donker
@@ -96,29 +98,34 @@ export default async function VisschalenPage({
               { naam: nav("visschalen") },
             ]}
           />
-          <div className="grid lg:grid-cols-[1.3fr_0.7fr] gap-8 lg:gap-16 items-end">
+          <div className="grid lg:grid-cols-[1.35fr_0.65fr] gap-10 lg:gap-16 items-end">
             <div>
-              <p className="kapitaal kapitaal-licht mb-3">{t("eyebrow")}</p>
-              <h1 className="text-[2.1rem] md:text-[3.1rem] mb-5" style={{ color: "var(--cream)" }}>
+              <p className="kapitaal kapitaal-licht mb-4">{t("eyebrow")}</p>
+              <h1
+                className="text-[2.3rem] md:text-[3.4rem] leading-[1.06] mb-6"
+                style={{ color: "var(--cream)" }}
+              >
                 {t("kop")}
               </h1>
               <p
                 className="text-[1.05rem] leading-relaxed max-w-2xl"
                 style={{ color: "rgba(250,246,239,0.82)" }}
               >
-                {t("inleiding", { bedrag: euro(STARTBEDRAG) })}
+                {t("inleiding")}
               </p>
             </div>
-            <div style={{ borderTop: "2px solid var(--gold)" }} className="pt-4">
-              <p className="kapitaal kapitaal-licht mb-1">{t("startbedrag")}</p>
+
+            {/* Het cijfer waar het om draait, groot gezet. */}
+            <div style={{ borderTop: "2px solid var(--gold)" }} className="pt-5">
+              <p className="kapitaal kapitaal-licht mb-2">{g("vanaf")}</p>
               <p
-                className="bedrag text-[2.6rem] leading-none"
+                className="bedrag text-[3rem] leading-none"
                 style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
               >
-                {euro(STARTBEDRAG)}
+                {euro(GOEDKOOPSTE)}
               </p>
-              <p className="text-sm mt-2" style={{ color: "rgba(250,246,239,0.6)" }}>
-                {t("basisVoor", { personen: BASISSCHAAL.personen })}
+              <p className="text-[0.9rem] mt-2" style={{ color: "rgba(250,246,239,0.65)" }}>
+                {t("per100")}
               </p>
             </div>
           </div>
@@ -137,6 +144,9 @@ export default async function VisschalenPage({
             <h2 className="text-[1.4rem] mb-3">{t("levertijdKop")}</h2>
             <p className="leading-relaxed" style={{ color: "var(--charcoal)" }}>
               {t("levertijdTekst")}
+            </p>
+            <p className="mt-3 text-[0.95rem]" style={{ color: "var(--grijs)" }}>
+              {t("minimum", { bedrag: euro(MINIMUM_BEDRAG) })}
             </p>
           </div>
           <div>
@@ -159,8 +169,8 @@ export default async function VisschalenPage({
         <h2 className="text-[1.8rem] mb-3" style={{ color: "var(--cream)" }}>
           {t("kop")}
         </h2>
-        <p className="mb-7" style={{ color: "rgba(250,246,239,0.78)" }}>
-          {t("extrasTekst")}
+        <p className="mb-7 leading-relaxed" style={{ color: "rgba(250,246,239,0.78)" }}>
+          {t("vergelijkingKort", { markt: euro(MARKT.goedkoopstePerPersoon) })}
         </p>
         <div className="flex flex-wrap gap-3">
           <a href="#samenstellen" className="knop knop-rood">
@@ -170,9 +180,7 @@ export default async function VisschalenPage({
             {nav("bezorgen")}
           </Link>
           <a
-            href={whatsappLink(
-              "Hallo Schaap's Vishandel, ik heb een vraag over een visschaal."
-            )}
+            href={whatsappLink("Hallo Schaap's Vishandel, ik heb een vraag over een visschaal.")}
             target="_blank"
             rel="noopener noreferrer"
             className="knop knop-lijn-licht"

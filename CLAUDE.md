@@ -26,9 +26,15 @@ Daar staat wat er nog voorlopig is en wat de eigenaar zelf invult.
 - **Verse vis gaat op gewicht.** Er staat daarom geen totaalbedrag bij een
   bestelling verse vis: we bellen met de dagprijs voordat we inpakken. Nooit een
   bedrag beloven dat de weegschaal niet kan waarmaken.
-- **Een visschaal** begint bij één startbedrag met een volle basis, en alles wat
-  de klant erbij wil is een losse toevoeging met een eigen prijs. Die is wél op
-  de cent uit te rekenen en kan dus online worden afgerekend.
+- **Een visschaal** heeft géén startbedrag en géén vaste samenstelling. De klant
+  kiest zelf wat erop komt en hoeveel, **per 100 gram** (`ONDERDELEN` in
+  `src/lib/visschaal.ts`). Een paar dingen gaan per stuk (oesters, kreeft) en
+  hebben `perStuk`. Dit is wél op de cent uit te rekenen en kan dus online
+  worden afgerekend.
+- **De prijzen zitten bewust onder de markt.** De benchmark staat bovenin
+  `visschaal.ts` met bron en datum. Wijzig je een prijs, controleer dan of de
+  vergelijking met `MARKT.goedkoopstePerPersoon` nog klopt — die claim staat op
+  de site en moet waar blijven.
 
 ---
 

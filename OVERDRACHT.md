@@ -12,24 +12,48 @@ te zoeken.
 
 Dit is het bestand dat je het vaakst zult openen.
 
+Er is **geen startbedrag en geen vast pakket** meer. De klant kiest zelf wat er
+op de schaal komt en hoeveel, **per 100 gram**. Alle prijzen staan in de lijst
+`ONDERDELEN`, in euro per 100 gram:
+
 ```ts
-export const PRIJZEN_DEFINITIEF = false;   // ← op true zetten als de bedragen kloppen
-export const STARTBEDRAG = 42.5;           // ← jouw startbedrag
+{ id: "gerookte-zalm", naam: "Gerookte zalm", prijs: 3.25, groep: "gerookt" }
 ```
 
-Zolang `PRIJZEN_DEFINITIEF` op `false` staat, zet de site er bij het totaal:
-*"Deze bedragen zijn richtprijzen. We bevestigen het definitieve bedrag voordat
-we beginnen."* Zo staat er nooit een bedrag op de site waar je aan vastzit.
+Een paar dingen verkoop je niet op gewicht — een oester is een oester. Die
+krijgen `perStuk` mee (`"dozijn"`, `"halve kreeft"`), en dan is `prijs` de prijs
+per stuk.
 
-Daaronder staat `BASISSCHAAL.bevat` (wat er standaard op ligt) en de lijst
-`EXTRAS`: elke toevoeging met een eigen prijs. Een toevoeging weghalen of
-toevoegen kan gewoon in die lijst; de configurator, het bestelformulier en de
-prijsberekening lopen automatisch mee.
+```ts
+export const PRIJZEN_DEFINITIEF = false;  // ← op true als de bedragen kloppen
+export const MINIMUM_BEDRAG = 25;         // ← daaronder is het geen schaal
+```
 
-Zet je nieuwe toevoegingen erbij, voeg dan ook een vertaling toe onder
+Zolang `PRIJZEN_DEFINITIEF` op `false` staat zegt de site erbij dat het
+richtprijzen zijn en dat je het definitieve bedrag bevestigt.
+
+**Waar de prijzen vandaan komen.** Uitgangspunt was: overal iets onder de markt
+zitten. Wat andere vishandels rekenen (opgehaald september 2026, staat ook
+bovenaan in het bestand):
+
+| Per 100 gram | Concurrentie | Wij |
+|---|---|---|
+| Gerookte zalm | € 3,50 – € 6,75 | **€ 3,25** |
+| Hollandse garnalen | € 4,50 – € 6,49 | **€ 4,25** |
+| Gerookte paling | € 5,50 – € 10,50 | **€ 4,95** |
+| Gerookte makreelfilet | € 2,75 – € 5,50 | **€ 2,50** |
+
+En complete schotels per persoon: Puurvis in Leidschendam € 14,50 (die zit ín
+je bezorggebied), Fieret € 19,95 tot € 33,95, Koelewijn € 28,50 tot € 30.
+
+Daarom rekent de configurator ook uit wat de schaal per persoon kost, en zet
+hij er zwart-op-wit bij dat de klant onder die € 14,50 uitkomt. Verhoog je een
+prijs, controleer dan even of dat nog klopt — `MARKT.goedkoopstePerPersoon`
+bovenin het bestand is het bedrag waarmee vergeleken wordt.
+
+Zet je een nieuw onderdeel in de lijst, voeg dan ook een vertaling toe onder
 `visschaalItems` in `src/messages/nl.json`, `en.json` en `de.json` — met de `id`
-als sleutel. Vergeet je dat, dan valt de site terug op de Nederlandse naam; niet
-fout, wel jammer voor een Duitse klant.
+als sleutel. Vergeet je dat, dan valt de site terug op het Nederlands.
 
 ### Bezorgkosten — `src/lib/bezorging.ts`
 

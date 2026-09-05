@@ -230,11 +230,13 @@
   /* Een uitgeschakelde knop met alleen minder dekking wordt op een donkere
      ondergrond een modderige vlek. Een eigen kleur leest op papier én op
      marineblauw meteen als "nog niet klikbaar". */
+  .knop[aria-disabled="true"],
   .knop:disabled {
     background-color: var(--linen);
     border-color: transparent;
     color: var(--grijs);
     cursor: not-allowed;
+    pointer-events: none;
   }
 
   /* ── Formuliervelden ─────────────────────────────────────────────────────── */

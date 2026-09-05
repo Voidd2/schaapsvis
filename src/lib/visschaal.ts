@@ -1,292 +1,357 @@
 /**
- * De visschaal: één basisschaal met een startbedrag, en alles wat de klant er
- * extra op wil is een losse toevoeging met een eigen prijs.
+ * De visschaal: de klant kiest zelf wat erop komt en hoeveel, per 100 gram.
+ *
+ * Er is geen startbedrag en geen vaste samenstelling meer. Dat is bewust: bij
+ * vrijwel elke concurrent koop je een pakket per persoon en betaal je dus ook
+ * voor de paling waar je niet van houdt. Hier reken je alleen af wat je kiest.
  *
  * ┌─ EIGENAAR ────────────────────────────────────────────────────────────────┐
- * │ `STARTBEDRAG` en de prijzen bij de toevoegingen hieronder zijn nog        │
- * │ VOORLOPIG. Zet `PRIJZEN_DEFINITIEF` op `true` zodra de bedragen kloppen;  │
- * │ tot die tijd zet de site er netjes bij dat de prijs een richtbedrag is en │
- * │ dat je hem bevestigt. Zo staat er nooit een bedrag op de site waar je     │
- * │ later aan vastzit.                                                        │
+ * │ Alle prijzen staan hieronder in `ONDERDELEN`, in euro per 100 gram. Pas   │
+ * │ ze aan wanneer je inkoop verandert; de configurator, het bestelformulier  │
+ * │ en de prijsberekening lopen automatisch mee.                              │
+ * │                                                                           │
+ * │ Zet `PRIJZEN_DEFINITIEF` op `true` zodra je de bedragen hebt bevestigd.   │
+ * │ Tot die tijd zet de site erbij dat het richtprijzen zijn.                 │
  * └───────────────────────────────────────────────────────────────────────────┘
+ *
+ * ── Waar de prijzen op gebaseerd zijn ──────────────────────────────────────
+ *
+ * Uitgangspunt: overal iets ónder de markt zitten, en dat kunnen navertellen.
+ * Prijzen per 100 gram bij andere vishandels (opgehaald september 2026):
+ *
+ *   Gerookte zalm        € 3,50 (Visspecialist Andre) · € 4,29 (Vismarine)
+ *                        · € 6,75 (Viswinkel Peter Tol, Amsterdam)
+ *   Hollandse garnalen   € 4,50 (Andre) · € 6,49 (Vismarine)
+ *   Gerookte paling      € 5,50 (Andre) · € 7,00 (Stevens) · € 10,50 (Krol)
+ *   Gerookte makreel     € 2,75 (Andre) · € 5,50 (Peter Tol)
+ *
+ * En complete schotels, per persoon:
+ *
+ *   Puurvis, Leidschendam        € 14,50   ← ligt in ons bezorggebied
+ *   Puurvis hors d'oeuvre        € 16,95
+ *   Fieret                       € 19,95 / € 29,95 / € 33,95
+ *   Koelewijn                    € 28,50 / € 30,00
+ *   Dirks, luxe 10–14 personen   € 160 per schaal (≈ € 11–16 p.p.)
+ *
+ * Daarom rekent de configurator ook een prijs per persoon uit: zo ziet een
+ * klant zwart-op-wit dat hij hier onder die € 14,50 uitkomt.
  */
 
 export const PRIJZEN_DEFINITIEF = false;
 
-/** Waar elke visschaal begint. Alles daarboven kiest de klant er zelf bij. */
-export const STARTBEDRAG = 42.5;
+/** Wat we bij de concurrentie zagen, zodat de site het kan laten zien. */
+export const MARKT = {
+  /** Goedkoopste complete schotel per persoon die we in de regio vonden. */
+  goedkoopstePerPersoon: 14.5,
+  concurrent: "Puurvis, Leidschendam",
+  peildatum: "september 2026",
+} as const;
 
-/** Onder dit aantal personen maken we geen schaal — dan is het een portie. */
-export const MINIMUM_PERSONEN = 4;
+/** Onder dit bedrag is het geen schaal maar een portie vis uit de winkel. */
+export const MINIMUM_BEDRAG = 25;
 
-export const BASISSCHAAL = {
-  naam: "De visschaal",
-  /** Waar het startbedrag ongeveer voor volstaat. */
-  personen: "vier tot zes personen",
-  /**
-   * Wat er standaard op ligt. Bewust concreet: "een selectie zeebanket" zegt
-   * niemand iets, "gerookte zalm, makreelfilet, Hollandse garnalen" wel.
-   */
-  bevat: [
-    "Gerookte zalm van het mes gesneden",
-    "Gerookte makreelfilet",
-    "Hollandse garnalen",
-    "Twee soorten vissalade",
-    "Gerookte forel",
-    "Haringhapjes met ui",
-    "Citroen, dille en toast",
-  ],
+/** Vuistregels om te bepalen hoeveel iemand nodig heeft. */
+export const PORTIES = {
+  /** Gram per persoon als borrelschaal, naast ander eten. */
+  borrel: 150,
+  /** Gram per persoon als de schaal de maaltijd is. */
+  maaltijd: 250,
 } as const;
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   Toevoegingen
+   Wat er op kan
    ═══════════════════════════════════════════════════════════════════════════ */
 
-export type ExtraGroep =
-  | "groter"
-  | "gerookt"
-  | "schaaldieren"
-  | "hollands"
-  | "erbij";
+export type Groep = "gerookt" | "schaaldieren" | "hollands" | "salades" | "erbij";
 
-export const GROEP_LABELS: Record<ExtraGroep, string> = {
-  groter: "De schaal groter maken",
+export const GROEP_LABELS: Record<Groep, string> = {
   gerookt: "Gerookte vis",
   schaaldieren: "Schaal- en schelpdieren",
   hollands: "Hollandse klassiekers",
+  salades: "Salades",
   erbij: "Erbij",
 };
 
-export const GROEP_UITLEG: Record<ExtraGroep, string> = {
-  groter: "Zit u met meer mensen aan tafel? Dan schalen we de hele schaal mee op.",
-  gerookt: "Alles wordt bij ons in huis gesneden, op de dag zelf.",
-  schaaldieren: "Verse aanvoer bepaalt wat er kan — bij twijfel bellen we u.",
-  hollands: "Waar de winkel al sinds 1938 om bekendstaat.",
-  erbij: "Kleinigheden die het af maken.",
+export const GROEP_UITLEG: Record<Groep, string> = {
+  gerookt: "Op de dag zelf bij ons van het mes gesneden.",
+  schaaldieren: "Wat de boten brengen bepaalt wat er kan. Bij twijfel bellen we u.",
+  hollands: "Waar de winkel sinds 1938 om bekendstaat.",
+  salades: "Huisgemaakt, elke ochtend vers aangemaakt.",
+  erbij: "De kleinigheden die het af maken.",
 };
 
-export interface Extra {
+export interface Onderdeel {
   id: string;
   naam: string;
-  /** Prijs in euro's die bovenop het startbedrag komt. */
+  /** Prijs per 100 gram, tenzij `perStuk` is gezet. */
   prijs: number;
-  groep: ExtraGroep;
-  /** Korte uitleg — alleen als die iets toevoegt. */
+  groep: Groep;
+  /**
+   * Sommige dingen verkoop je niet op gewicht. Een oester is een oester.
+   * Staat dit er, dan is `prijs` de prijs per stuk/dozijn en telt het niet mee
+   * in het gewicht van de schaal.
+   */
+  perStuk?: string;
   toelichting?: string;
-  /** Kan meerdere keren gekozen worden (bijv. per persoon of per 100 gram). */
-  meervoudig?: boolean;
-  /** Eenheid bij een meervoudige keuze. */
-  eenheid?: string;
-  /** Niet het hele jaar leverbaar. */
   seizoen?: string;
+  /** Wat een vergelijkbaar product elders kost, per 100 g. Alleen ter controle. */
+  marktprijs?: number;
 }
 
-export const EXTRAS: Extra[] = [
-  /* ── Groter ─────────────────────────────────────────────────────────────── */
-  {
-    id: "extra-persoon",
-    naam: "Extra persoon",
-    prijs: 9.5,
-    groep: "groter",
-    meervoudig: true,
-    eenheid: "persoon",
-    toelichting: "De hele schaal groeit mee, in dezelfde verhouding.",
-  },
-
+/**
+ * Prijzen per 100 gram. Elke regel zit onder wat we bij anderen zagen; bij de
+ * regels waar we een vergelijking van hebben staat die erbij in `marktprijs`.
+ */
+export const ONDERDELEN: Onderdeel[] = [
   /* ── Gerookte vis ───────────────────────────────────────────────────────── */
   {
-    id: "extra-zalm",
-    naam: "Extra gerookte zalm",
-    prijs: 8.5,
+    id: "gerookte-zalm",
+    naam: "Gerookte zalm",
+    prijs: 3.25,
+    marktprijs: 4.29,
     groep: "gerookt",
-    meervoudig: true,
-    eenheid: "portie van 100 g",
-    toelichting: "Verreweg het meest gevraagd.",
+    toelichting: "Van het mes gesneden. Verreweg het meest gekozen.",
   },
   {
     id: "varlaks",
-    naam: "Varlaks in plaats van gewone gerookte zalm",
-    prijs: 12.5,
+    naam: "Varlaks — biologische gerookte zalm",
+    prijs: 4.95,
     groep: "gerookt",
     toelichting:
-      "Biologische zalm van familiebedrijven boven de poolcirkel. Steviger van structuur, zuiverder van smaak.",
+      "Van familiebedrijven boven de poolcirkel, zonder antibiotica. Steviger van structuur, zuiverder van smaak.",
   },
   {
-    id: "gerookte-heilbot",
-    naam: "Gerookte heilbot",
-    prijs: 11.5,
+    id: "gravad-lax",
+    naam: "Gravad lax",
+    prijs: 3.5,
     groep: "gerookt",
-    toelichting: "Vet, mild en wit — de luxe van de rokerij.",
+    toelichting: "Gemarineerd met dille en zeezout in plaats van gerookt.",
+  },
+  {
+    id: "gerookte-makreel",
+    naam: "Gerookte makreelfilet",
+    prijs: 2.5,
+    marktprijs: 2.75,
+    groep: "gerookt",
   },
   {
     id: "gerookte-paling",
     naam: "Gerookte paling",
-    prijs: 16.5,
+    prijs: 4.95,
+    marktprijs: 5.5,
     groep: "gerookt",
-    toelichting: "Dagprijs kan afwijken; we bevestigen hem bij uw bestelling.",
+    toelichting: "Dagprijs kan meebewegen; we bevestigen hem bij uw bestelling.",
+  },
+  {
+    id: "gerookte-heilbot",
+    naam: "Gerookte heilbot",
+    prijs: 4.75,
+    groep: "gerookt",
+    toelichting: "Vet, mild en wit — het mooiste uit de rokerij.",
+  },
+  {
+    id: "gerookte-forel",
+    naam: "Gerookte forelfilet",
+    prijs: 2.75,
+    groep: "gerookt",
   },
 
   /* ── Schaal- en schelpdieren ────────────────────────────────────────────── */
   {
     id: "hollandse-garnalen",
-    naam: "Extra Hollandse garnalen",
-    prijs: 12.5,
+    naam: "Hollandse garnalen",
+    prijs: 4.25,
+    marktprijs: 4.5,
     groep: "schaaldieren",
-    meervoudig: true,
-    eenheid: "portie van 100 g",
     toelichting: "Met de hand gepeld. Hier vraagt bijna iedereen om.",
   },
   {
-    id: "creuse-oesters",
-    naam: "Creuse oesters",
-    prijs: 16.95,
+    id: "noorse-garnalen",
+    naam: "Noorse garnalen",
+    prijs: 2.25,
     groep: "schaaldieren",
-    meervoudig: true,
-    eenheid: "dozijn",
-    toelichting: "Ongeopend meegeleverd, met mesje. Openen doen we ook, zeg het erbij.",
   },
   {
-    id: "gamba-spies",
+    id: "gamba-s",
     naam: "Gamba's",
-    prijs: 9.75,
+    prijs: 3.75,
     groep: "schaaldieren",
-    meervoudig: true,
-    eenheid: "portie",
   },
   {
     id: "coquilles",
     naam: "Coquilles",
-    prijs: 13.5,
+    prijs: 5.5,
     groep: "schaaldieren",
-    meervoudig: true,
-    eenheid: "portie",
+  },
+  {
+    id: "rivierkreeft",
+    naam: "Rivierkreeftstaartjes",
+    prijs: 3.25,
+    groep: "schaaldieren",
   },
   {
     id: "krabklauwen",
     naam: "Krabklauwen",
-    prijs: 11.5,
+    prijs: 3.95,
     groep: "schaaldieren",
+  },
+  {
+    id: "creuse-oesters",
+    naam: "Creuse oesters",
+    prijs: 15.95,
+    perStuk: "dozijn",
+    groep: "schaaldieren",
+    toelichting: "Ongeopend mee, met mesje. Openen doen we ook — zeg het erbij.",
   },
   {
     id: "halve-kreeft",
     naam: "Halve kreeft",
-    prijs: 24.5,
+    prijs: 23.5,
+    perStuk: "halve kreeft",
     groep: "schaaldieren",
-    meervoudig: true,
-    eenheid: "halve kreeft",
     toelichting: "Minstens drie dagen vooruit bestellen.",
   },
 
   /* ── Hollandse klassiekers ──────────────────────────────────────────────── */
   {
-    id: "hollandse-nieuwe",
-    naam: "Hollandse Nieuwe",
-    prijs: 7.5,
+    id: "haringhapjes",
+    naam: "Haringhapjes met ui",
+    prijs: 2.75,
     groep: "hollands",
-    meervoudig: true,
-    eenheid: "portie",
-    seizoen: "vanaf juni",
-    toelichting: "In het seizoen; daarbuiten maatjesharing.",
+    seizoen: "Hollandse Nieuwe vanaf juni",
   },
   {
     id: "zure-haring",
     naam: "Zure haring en rolmops",
-    prijs: 6.5,
+    prijs: 2.5,
     groep: "hollands",
   },
   {
     id: "gerookte-bokking",
     naam: "Gerookte bokking",
-    prijs: 5.75,
+    prijs: 2.25,
     groep: "hollands",
-  },
-  {
-    id: "extra-salade",
-    naam: "Extra vissalade naar keuze",
-    prijs: 6.5,
-    groep: "hollands",
-    meervoudig: true,
-    eenheid: "bakje",
-    toelichting: "Zalm-, krab-, garnalen- of huzarensalade met vis.",
   },
 
+  /* ── Salades ────────────────────────────────────────────────────────────── */
+  { id: "zalmsalade", naam: "Zalmsalade", prijs: 2.25, groep: "salades" },
+  { id: "krabsalade", naam: "Krabsalade", prijs: 2.5, groep: "salades" },
+  { id: "garnalensalade", naam: "Garnalensalade", prijs: 2.75, groep: "salades" },
+  { id: "tonijnsalade", naam: "Tonijnsalade", prijs: 2.25, groep: "salades" },
+
   /* ── Erbij ──────────────────────────────────────────────────────────────── */
+  {
+    id: "garnering",
+    naam: "Opgemaakt op een schaal",
+    prijs: 7.5,
+    perStuk: "schaal",
+    groep: "erbij",
+    toelichting: "Met citroen, dille en garnering, in plaats van in de doos.",
+  },
   {
     id: "brood",
     naam: "Vers brood en roomboter",
     prijs: 4.95,
+    perStuk: "voor 6 personen",
     groep: "erbij",
   },
   {
     id: "sauzen",
     naam: "Sauzen: ravigote, cocktail en dille-mosterd",
     prijs: 4.5,
+    perStuk: "set van 3",
     groep: "erbij",
-  },
-  {
-    id: "opmaak",
-    naam: "Feestelijke opmaak",
-    prijs: 7.5,
-    groep: "erbij",
-    toelichting: "Op een echte schaal met garnering, in plaats van in de doos.",
   },
   {
     id: "bestek",
-    naam: "Wegwerpbordjes, bestek en servetten",
+    naam: "Bordjes, bestek en servetten",
     prijs: 3.95,
+    perStuk: "set van 6",
     groep: "erbij",
-    meervoudig: true,
-    eenheid: "set van 6",
   },
 ];
 
-export const GROEP_VOLGORDE: ExtraGroep[] = [
-  "groter",
+export const GROEP_VOLGORDE: Groep[] = [
   "gerookt",
   "schaaldieren",
   "hollands",
+  "salades",
   "erbij",
 ];
 
-export function extrasPerGroep(groep: ExtraGroep): Extra[] {
-  return EXTRAS.filter((e) => e.groep === groep);
-}
-
-export function extraById(id: string): Extra | undefined {
-  return EXTRAS.find((e) => e.id === id);
+export function onderdeelById(id: string): Onderdeel | undefined {
+  return ONDERDELEN.find((o) => o.id === id);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
    Rekenen
    ═══════════════════════════════════════════════════════════════════════════ */
 
-/** Gekozen toevoegingen als { id: aantal }. */
+/**
+ * De keuze van de klant.
+ * Bij producten op gewicht is de waarde het aantal grammen (stappen van 100).
+ * Bij producten per stuk is het simpelweg het aantal.
+ */
 export type Keuze = Record<string, number>;
 
-export function berekenTotaal(keuze: Keuze): number {
-  return Object.entries(keuze).reduce((som, [id, aantal]) => {
-    const extra = extraById(id);
-    if (!extra || aantal <= 0) return som;
-    return som + extra.prijs * aantal;
-  }, STARTBEDRAG);
-}
-
-export interface KeuzeRegel {
+export interface Regel {
   id: string;
-  /** Nederlandse naam — de bron. De schermen vertalen hem via de sleutel `id`. */
   naam: string;
-  aantal: number;
+  /** Grammen bij gewicht, aantal bij stuks. */
+  hoeveelheid: number;
+  perStuk?: string;
   bedrag: number;
 }
 
-/** Regels voor de samenvatting en voor het bericht dat naar de winkel gaat. */
-export function keuzeRegels(keuze: Keuze): KeuzeRegel[] {
+export function regels(keuze: Keuze): Regel[] {
   return Object.entries(keuze)
-    .map((invoer): KeuzeRegel | null => {
-      const [id, aantal] = invoer;
-      const extra = extraById(id);
-      if (!extra || aantal <= 0) return null;
-      return { id, naam: extra.naam, aantal, bedrag: extra.prijs * aantal };
+    .map((invoer): Regel | null => {
+      const [id, hoeveelheid] = invoer;
+      const onderdeel = onderdeelById(id);
+      if (!onderdeel || hoeveelheid <= 0) return null;
+      const bedrag = onderdeel.perStuk
+        ? onderdeel.prijs * hoeveelheid
+        : (onderdeel.prijs * hoeveelheid) / 100;
+      return {
+        id,
+        naam: onderdeel.naam,
+        hoeveelheid,
+        perStuk: onderdeel.perStuk,
+        bedrag,
+      };
     })
-    .filter((r): r is KeuzeRegel => r !== null);
+    .filter((r): r is Regel => r !== null);
+}
+
+export function totaal(keuze: Keuze): number {
+  return regels(keuze).reduce((som, r) => som + r.bedrag, 0);
+}
+
+/** Het gewicht van de schaal — stuks tellen niet mee. */
+export function totaalGewicht(keuze: Keuze): number {
+  return regels(keuze)
+    .filter((r) => !r.perStuk)
+    .reduce((som, r) => som + r.hoeveelheid, 0);
+}
+
+/** Voor hoeveel personen dit ongeveer volstaat, als borrelschaal. */
+export function personenBorrel(keuze: Keuze): number {
+  return Math.floor(totaalGewicht(keuze) / PORTIES.borrel);
+}
+
+/** Prijs per persoon, om te vergelijken met de pakketprijzen van anderen. */
+export function prijsPerPersoon(keuze: Keuze): number | null {
+  const personen = personenBorrel(keuze);
+  if (personen < 1) return null;
+  return totaal(keuze) / personen;
+}
+
+/** "300 g" of "2 × dozijn" — leesbaar gezet. */
+export function hoeveelheidTekst(regel: Regel): string {
+  if (regel.perStuk) {
+    return `${regel.hoeveelheid}× ${regel.perStuk}`;
+  }
+  return regel.hoeveelheid >= 1000
+    ? `${(regel.hoeveelheid / 1000).toFixed(1).replace(".", ",")} kg`
+    : `${regel.hoeveelheid} g`;
 }

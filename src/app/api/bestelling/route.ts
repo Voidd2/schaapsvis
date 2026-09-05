@@ -1,5 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { berekenTotaal, keuzeRegels, STARTBEDRAG, type Keuze } from "@/lib/visschaal";
+import {
+  MINIMUM_BEDRAG,
+  hoeveelheidTekst,
+  onderdeelById,
+  regels as schaalRegels,
+  totaal as schaalTotaalVan,
+  type Keuze,
+} from "@/lib/visschaal";
 import { checkPostcode, BEZORGING, kostenVoor } from "@/lib/bezorging";
 import { maakCheckout, nieuweReferentie, sumupBeschikbaar } from "@/lib/betalen";
 import { BEDRIJF } from "@/lib/bedrijf";
@@ -122,13 +129,31 @@ export async function POST(request: NextRequest) {
   const keuze: Keuze = {};
   if (isAfrekenbaar && body.visschaal?.keuze) {
     for (const [id, aantal] of Object.entries(body.visschaal.keuze)) {
+      const onderdeel = onderdeelById(id);
       const n = Number(aantal);
-      if (Number.isFinite(n) && n > 0) keuze[id] = Math.min(Math.floor(n), 50);
+      if (!onderdeel || !Number.isFinite(n) || n <= 0) continue;
+      // Gewicht in grammen, stuks als aantal — allebei begrensd, zodat een
+      // aangepast verzoek uit de browser geen absurde bestelling oplevert.
+      keuze[id] = onderdeel.perStuk
+        ? Math.min(Math.floor(n), 20)
+        : Math.min(Math.round(n / 100) * 100, 5000);
     }
   }
 
-  const schaalTotaal = isAfrekenbaar ? berekenTotaal(keuze) : 0;
-  const teBetalen = isAfrekenbaar ? schaalTotaal + bezorgkosten : 0;
+  const schaalTotaal = isAfrekenbaar ? schaalTotaalVan(keuze) : 0;
+  // Afronden op centen: optellen van kommagetallen levert anders
+  // 46.650000000000006 op, en dat wil je niet in een antwoord of bij SumUp.
+  const teBetalen = isAfrekenbaar
+    ? Math.round((schaalTotaal + bezorgkosten) * 100) / 100
+    : 0;
+
+  // Onder dit bedrag is het geen schaal maar een portie uit de winkel.
+  if (isAfrekenbaar && schaalTotaal > 0 && schaalTotaal < MINIMUM_BEDRAG) {
+    return NextResponse.json(
+      { fout: `Een visschaal maken we vanaf € ${MINIMUM_BEDRAG},-.` },
+      { status: 400 }
+    );
+  }
 
   if (
     isAfrekenbaar &&
@@ -158,12 +183,12 @@ export async function POST(request: NextRequest) {
     tijdvak: tekst(body.levering?.tijdvak) || "(geen voorkeur)",
     bestelling:
       soort === "visschaal"
-        ? [
-            `Basisschaal: € ${STARTBEDRAG.toFixed(2).replace(".", ",")}`,
-            ...keuzeRegels(keuze).map(
-              (r) => `${r.aantal}× ${r.naam} — € ${r.bedrag.toFixed(2).replace(".", ",")}`
-            ),
-          ].join("\n")
+        ? schaalRegels(keuze)
+            .map(
+              (r) =>
+                `${hoeveelheidTekst(r)} ${r.naam} — € ${r.bedrag.toFixed(2).replace(".", ",")}`
+            )
+            .join("\n")
         : (body.regels ?? [])
             .slice(0, 60)
             .map(

@@ -14,7 +14,13 @@ import {
   type PostcodeResultaat,
 } from "@/lib/bezorging";
 import { BEDRIJF, euro, whatsappLink } from "@/lib/bedrijf";
-import { STARTBEDRAG, berekenTotaal, keuzeRegels, EXTRAS, type Keuze } from "@/lib/visschaal";
+import {
+  ONDERDELEN,
+  hoeveelheidTekst,
+  regels as schaalRegelsVan,
+  totaal as schaalTotaalVan,
+  type Keuze,
+} from "@/lib/visschaal";
 import { SCHAAL_OPSLAG } from "../visschalen/VisschaalConfigurator";
 import { useSchaalTekst } from "@/components/visschaal/tekst";
 
@@ -154,7 +160,7 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
         const gelezen = JSON.parse(opgeslagenSchaal) as Keuze;
         const geldig: Keuze = {};
         for (const [id, n] of Object.entries(gelezen)) {
-          if (EXTRAS.some((e) => e.id === id) && Number(n) > 0) geldig[id] = Number(n);
+          if (ONDERDELEN.some((o) => o.id === id) && Number(n) > 0) geldig[id] = Number(n);
         }
         setSchaal(geldig);
       }
@@ -218,8 +224,8 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
   const bezorgkosten =
     wijze === "bezorgen" && postcodeUitkomst?.status === "binnen" ? postcodeUitkomst.kosten : 0;
 
-  const schaalRegels = useMemo(() => keuzeRegels(schaal), [schaal]);
-  const schaalTotaal = useMemo(() => berekenTotaal(schaal), [schaal]);
+  const schaalRegels = useMemo(() => schaalRegelsVan(schaal), [schaal]);
+  const schaalTotaal = useMemo(() => schaalTotaalVan(schaal), [schaal]);
   const teBetalen = soort === "visschaal" ? schaalTotaal + bezorgkosten : null;
 
   const suggesties = useMemo(() => {
@@ -572,10 +578,6 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
                 className="p-5 mb-4"
                 style={{ backgroundColor: "#fff", border: "1px solid var(--linen)" }}
               >
-                <div className="flex justify-between gap-3 py-1.5">
-                  <span>{t("basisschaal")}</span>
-                  <span className="bedrag">{euro(STARTBEDRAG)}</span>
-                </div>
                 {schaalRegels.map((r) => (
                   <div
                     key={r.naam}
@@ -583,7 +585,9 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
                     style={{ borderTop: "1px solid var(--linen)", color: "var(--charcoal)" }}
                   >
                     <span>
-                      {r.aantal > 1 && `${r.aantal}× `}
+                      <span className="bedrag" style={{ color: "var(--grijs)" }}>
+                        {hoeveelheidTekst(r)}
+                      </span>{" "}
                       {schaalTekst.naam(r.id, r.naam)}
                     </span>
                     <span className="bedrag shrink-0">{euro(r.bedrag)}</span>
@@ -871,11 +875,10 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
 
           {soort === "visschaal" ? (
             <dl className="text-sm">
-              <Rij label={t("basisschaal")} waarde={euro(STARTBEDRAG)} />
               {schaalRegels.map((r) => (
                 <Rij
                   key={r.naam}
-                  label={`${r.aantal > 1 ? `${r.aantal}× ` : ""}${schaalTekst.naam(r.id, r.naam)}`}
+                  label={`${hoeveelheidTekst(r)} ${schaalTekst.naam(r.id, r.naam)}`}
                   waarde={euro(r.bedrag)}
                 />
               ))}
