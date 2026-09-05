@@ -15,8 +15,16 @@ export type Recept = {
   tags: ReceptTag[];
   porties?: number;
   seizoen?: string;
+  /** Eigen foto van het gerecht. Zet die zodra de eigenaar er een heeft. */
   fotoUrl?: string;
   fotoLabel: string;
+  /**
+   * De vis uit het assortiment die dit gerecht draagt (`slug` uit
+   * `assortiment-data.ts`). Doet twee dingen: hij levert een beeld zolang er
+   * geen foto van het gerecht is, en hij legt de link van recept naar product —
+   * iemand die een recept leest wil daarna die vis kunnen bestellen.
+   */
+  hoofdproduct?: string;
   vanSchaap: string[];
   vanSupermarkt: string[];
   bereidingswijze: string[];
@@ -50,6 +58,7 @@ import { receptenPraktisch } from "./recepten-praktisch";
 const receptenOrigineel: Recept[] = [
   {
     slug: "zomerse-zalmsalade",
+    hoofdproduct: "gerookte-zalm-high-seas",
     title: "Zomerse zalmsalade",
     subtitle: "Licht, fris en in 15 minuten op tafel",
     tijd: "15 min",
@@ -82,6 +91,7 @@ const receptenOrigineel: Recept[] = [
   },
   {
     slug: "zalm-citroen-dille",
+    hoofdproduct: "varlaks-zalm",
     title: "Zalm in de oven met citroen en dille",
     subtitle: "Simpel, snel en verrassend lekker",
     tijd: "20 min",
@@ -109,6 +119,7 @@ const receptenOrigineel: Recept[] = [
   },
   {
     slug: "kibbeling-bakken",
+    hoofdproduct: "kibbeling",
     title: "Kibbeling thuis bakken",
     subtitle: "Knapperig van buiten, mals van binnen · leuk om met de kids te doen",
     tijd: "30–35 min",
@@ -144,6 +155,7 @@ const receptenOrigineel: Recept[] = [
   },
   {
     slug: "gravlaks",
+    hoofdproduct: "gravad-lax",
     title: "Gravlaks van Varlaks zalm",
     subtitle: "48 uur geduld — het meest indrukwekkende voorgerecht dat u ooit serveert",
     tijd: "48 uur (+ 15 min bereiding)",
@@ -175,6 +187,7 @@ const receptenOrigineel: Recept[] = [
   },
   {
     slug: "haring-salade",
+    hoofdproduct: "haring",
     title: "Haring met appel en rode ui",
     subtitle: "Fris, snel en klassiek Hollands",
     tijd: "15 min",
@@ -200,6 +213,7 @@ const receptenOrigineel: Recept[] = [
   },
   {
     slug: "romige-vissoep",
+    hoofdproduct: "kabeljauwfilet",
     title: "Romige vissoep",
     subtitle: "Verwarmend, vol van smaak en vol vis",
     tijd: "45 min",
@@ -228,6 +242,7 @@ const receptenOrigineel: Recept[] = [
   },
   {
     slug: "gegrilde-schol",
+    hoofdproduct: "scholfilet",
     title: "Gegrilde scholfilet met groene kruiden",
     subtitle: "Licht, gezond en in 20 minuten klaar",
     tijd: "20 min",
@@ -256,6 +271,7 @@ const receptenOrigineel: Recept[] = [
 
   {
     slug: "krieltjessalade-haring",
+    hoofdproduct: "haring",
     title: "Krieltjessalade met haring",
     subtitle: "Klassiek Hollands — aardappel, haring, kappertjes",
     tijd: "30 min",
@@ -284,6 +300,7 @@ const receptenOrigineel: Recept[] = [
   },
   {
     slug: "kabeljauw-zeekraal-venkel",
+    hoofdproduct: "kabeljauwhaas",
     title: "Kabeljauw met zeekraal en venkel",
     subtitle: "Knapperig vel, frisse groenten — in 30 minuten",
     tijd: "30 min",
@@ -313,6 +330,7 @@ const receptenOrigineel: Recept[] = [
   },
   {
     slug: "hollandse-bowl",
+    hoofdproduct: "haring",
     title: "Hollandse Bowl",
     subtitle: "Verse haring in een moderne poke bowl — met wortel en biet",
     tijd: "25 min",
@@ -344,6 +362,7 @@ const receptenOrigineel: Recept[] = [
   },
   {
     slug: "garnalensalade-pompoen",
+    hoofdproduct: "hollandse-garnalen",
     title: "Hollandse garnalensalade met gegrilde pompoen",
     subtitle: "Garnalen op hun best — met edamame en zwarte bonen",
     tijd: "40 min",
@@ -375,6 +394,7 @@ const receptenOrigineel: Recept[] = [
   },
   {
     slug: "gebakken-schol-tomaat-olijven",
+    hoofdproduct: "scholfilet",
     title: "Gebakken schol met tomaat en olijven",
     subtitle: "Lichte scholfilet met een mediterrane saus",
     tijd: "25 min",
@@ -432,6 +452,7 @@ const receptenOrigineel: Recept[] = [
   },
   {
     slug: "krabsalade-avocado",
+    hoofdproduct: "surimisalade",
     title: "Krabsalade met avocado",
     subtitle: "Licht, fris zomervoorgerecht",
     tijd: "20 min",
@@ -463,6 +484,7 @@ const receptenOrigineel: Recept[] = [
   },
   {
     slug: "witlof-garnalen-oesterzwam",
+    hoofdproduct: "hollandse-garnalen",
     title: "Witlof-oesterzwamsalade met Hollandse garnalen",
     subtitle: "Knapperige oesterzwam, romige garnalen, frisse witlof",
     tijd: "20 min",
@@ -498,3 +520,51 @@ export const recepten: Recept[] = [
   ...receptenOrigineel,
   ...receptenPraktisch,
 ];
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Beeld bij een recept
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+import { getProduct } from "./assortiment-data";
+
+export interface ReceptBeeld {
+  /** Ontbreekt als we niets hebben; toon dan het naamvlak. */
+  src?: string;
+  alt: string;
+  /** Waarom deze foto er staat. Alleen bij een productfoto. */
+  bijschrift?: string;
+  /** Naar welk product dit recept verwijst, als dat er is. */
+  productSlug?: string;
+  productNaam?: string;
+}
+
+/**
+ * Wat we bij een recept laten zien.
+ *
+ * Eerste keus is een foto van het gerecht zelf. Zolang die er niet is tonen we
+ * de vis die je ervoor bij ons haalt, mét een bijschrift dat zegt wat het is.
+ * Wat we níet doen is een foto van kabeljauw onder een receptnaam zetten en de
+ * lezer laten denken dat het het gerecht is.
+ */
+export function receptBeeld(recept: Recept): ReceptBeeld {
+  if (recept.fotoUrl) {
+    return { src: recept.fotoUrl, alt: `${recept.title} — recept van Schaap's Vishandel in Leiden` };
+  }
+
+  const product = recept.hoofdproduct ? getProduct(recept.hoofdproduct) : undefined;
+  if (product?.photo) {
+    return {
+      src: product.photo,
+      alt: `${product.naam} bij Schaap's Vishandel in Leiden — de vis voor ${recept.title.toLowerCase()}`,
+      bijschrift: `Wat u hiervoor bij ons haalt: ${product.naam}`,
+      productSlug: product.slug,
+      productNaam: product.naam,
+    };
+  }
+
+  return {
+    alt: recept.fotoLabel,
+    productSlug: product?.slug,
+    productNaam: product?.naam,
+  };
+}

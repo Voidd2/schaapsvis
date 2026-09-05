@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { permanentRedirect } from "next/navigation";
 import type { Metadata } from "next";
-import { recepten, type Recept } from "@/lib/recepten";
+import { recepten, receptBeeld, type Recept } from "@/lib/recepten";
+import { ReceptFoto } from "@/components/recepten/ReceptFoto";
 import { Schema } from "@/components/Schema";
 import { Sectie } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
@@ -65,13 +66,14 @@ export default async function ReceptDetailPage({
   if (!recept) permanentRedirect(`/${locale}/recepten`);
 
   const aanvraag = opAanvraag(recept);
+  const beeld = receptBeeld(recept);
 
   const recipeSchema = {
     "@context": "https://schema.org",
     "@type": "Recipe",
     name: recept.title,
     description: recept.subtitle,
-    image: recept.fotoUrl ? [recept.fotoUrl] : undefined,
+    image: beeld.src ? [`${BEDRIJF.domein}${beeld.src}`] : undefined,
     recipeYield: recept.porties ? `${recept.porties} personen` : undefined,
     totalTime: `PT${parseInt(recept.tijd) || 30}M`,
     recipeCategory: "Visgerecht",
@@ -146,6 +148,24 @@ export default async function ReceptDetailPage({
 
           {/* ── Boodschappen ─────────────────────────────────────────────── */}
           <div>
+            <ReceptFoto beeld={beeld} titel={recept.title} />
+            {beeld.bijschrift && (
+              <p className="mt-2 mb-8 text-sm" style={{ color: "var(--grijs)" }}>
+                {beeld.productSlug ? (
+                  <Link
+                    href={`/${locale}/assortiment/${beeld.productSlug}`}
+                    className="underline underline-offset-4"
+                    style={{ color: "var(--navy)" }}
+                  >
+                    {beeld.bijschrift}
+                  </Link>
+                ) : (
+                  beeld.bijschrift
+                )}
+              </p>
+            )}
+            {!beeld.bijschrift && <div className="mb-8" />}
+
             <div className="pt-4" style={{ borderTop: "2px solid var(--navy)" }}>
               <p className="kapitaal mb-3">Bij Schaap&apos;s Vis</p>
               <ul className="mb-5">

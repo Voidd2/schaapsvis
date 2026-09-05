@@ -22,52 +22,6 @@ const TABS: { id: "alle" | Categorie; label: string }[] = [
   { id: "bereid",        label: "Bereid & Snacks" },
 ];
 
-// ─── Allergen accordion ───────────────────────────────────────────────────────
-function Allergenen({ ingredienten, bevat }: { ingredienten: string; bevat: string[] }) {
-  return (
-    <details className="group border-t" style={{ borderColor: "var(--linen)" }}>
-      <summary
-        className="flex items-center justify-between gap-2 cursor-pointer select-none px-4 py-3 text-xs font-medium"
-        style={{ listStyle: "none", color: "var(--charcoal)", opacity: 0.6 }}
-      >
-        Ingrediënten & allergenen
-        <svg
-          className="w-3.5 h-3.5 flex-shrink-0 transition-transform group-open:rotate-180"
-          viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
-        >
-          <path d="m6 9 6 6 6-6" />
-        </svg>
-      </summary>
-      <div className="px-4 pb-4">
-        <p
-          className="text-xs leading-relaxed mb-2.5"
-          style={{ color: "var(--charcoal)", opacity: 0.6, fontSize: "0.7rem" }}
-        >
-          {ingredienten}
-        </p>
-        <div className="flex flex-wrap gap-1 mb-2">
-          {bevat.map((a) => (
-            <span
-              key={a}
-              className="text-[10px] font-semibold px-1.5 py-0.5 rounded-sm"
-              style={{
-                backgroundColor: "rgba(192,57,43,0.1)",
-                color: "var(--rood)",
-                border: "1px solid rgba(192,57,43,0.2)",
-              }}
-            >
-              {a}
-            </span>
-          ))}
-        </div>
-        <p style={{ color: "var(--charcoal)", opacity: 0.35, fontSize: "0.62rem" }}>
-          Ondanks zorgvuldigheid kunnen sporen van andere allergenen aanwezig zijn. Bij twijfel: vraag ons.
-        </p>
-      </div>
-    </details>
-  );
-}
-
 // ─── Afbeelding op de kaart ───────────────────────────────────────────────────
 // Voor producten waar we een echte foto van hebben tonen we die, volledig, op
 // wit — het zijn uitsneden, dus bijsnijden levert alleen wit op. Voor de rest
@@ -85,169 +39,114 @@ function CardPhoto({
 }) {
   const kleur = CATEGORIE_KLEUR[categorie];
 
-  if (photo) {
-    return (
-      <div
-        className="w-full overflow-hidden"
-        style={{ height: 150, backgroundColor: "#fff", borderBottom: `2px solid ${kleur}` }}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={photo}
-          alt={`${naam} — Schaap's Vishandel Leiden`}
-          className="w-full h-full object-contain p-2"
-          loading="lazy"
-        />
-      </div>
-    );
-  }
-
   return (
     <div
-      className="w-full flex items-center justify-center px-4 text-center"
+      className="w-full aspect-square flex items-center justify-center overflow-hidden"
       style={{
-        height: 150,
-        backgroundColor: "var(--sand)",
+        backgroundColor: photo ? "#fff" : "var(--sand)",
         borderBottom: `2px solid ${kleur}`,
       }}
     >
-      <span
-        style={{
-          fontFamily: "var(--font-display)",
-          color: "var(--navy)",
-          fontSize: "1.15rem",
-          lineHeight: 1.2,
-          opacity: 0.55,
-        }}
-      >
-        {naam}
-      </span>
+      {photo ? (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img
+          src={photo}
+          alt={`${naam} — Schaap's Vishandel Leiden`}
+          className="w-full h-full object-contain p-5"
+          loading="lazy"
+        />
+      ) : (
+        <span
+          className="px-5 text-center"
+          style={{
+            fontFamily: "var(--font-display)",
+            color: "var(--navy)",
+            fontSize: "1.15rem",
+            lineHeight: 1.25,
+            opacity: 0.5,
+          }}
+        >
+          {naam}
+        </span>
+      )}
     </div>
   );
 }
 
 // ─── Product card ─────────────────────────────────────────────────────────────
+const BESCHIKBAAR_TEKST: Record<string, { tekst: string; kleur: string }> = {
+  dagelijks: { tekst: "Dagelijks in de winkel", kleur: "var(--seafoam)" },
+  seizoensgebonden: { tekst: "Seizoensgebonden", kleur: "var(--gold)" },
+  "op bestelling": { tekst: "Op bestelling", kleur: "var(--grijs)" },
+};
+
 function ProductCard({ product }: { product: (typeof products)[number] }) {
   const locale = useLocale();
-  const kleur = CATEGORIE_KLEUR[product.categorie];
+  const detail = `/${locale}/assortiment/${product.slug}`;
+  const staat = product.beschikbaar ? BESCHIKBAAR_TEKST[product.beschikbaar] : undefined;
+  // Het keurmerk en Ω-3 stonden als gekleurde blokjes op de kaart. Drie
+  // vlakjes in drie kleuren boven elke naam maakt van een lijst met vis een
+  // rommeltje; als kapitaaltjes achter de categorie lezen ze net zo goed.
+  const merken = [product.badge, product.omega3 ? "Ω-3" : null].filter(Boolean);
 
   return (
     <article
-      className="flex flex-col overflow-hidden"
+      className="flex flex-col"
       style={{
         backgroundColor: "#fff",
         border: product.highlight ? "1px solid var(--seafoam)" : "1px solid var(--linen)",
       }}
     >
-      {/* Photo — klikbaar naar detailpagina met voedingswaarde */}
-      <Link
-        href={`/${locale}/assortiment/${product.slug}`}
-        aria-label={`${product.naam} — meer info en voedingswaarde`}
-      >
+      <Link href={detail} aria-label={`${product.naam} — meer info en voedingswaarde`}>
         <CardPhoto photo={product.photo} naam={product.naam} categorie={product.categorie} />
       </Link>
 
-      {/* Card body */}
-      <div className="px-4 pt-3 pb-3 flex flex-col flex-1">
-        {/* Badges row */}
-        <div className="flex flex-wrap gap-1.5 mb-2">
-          <span
-            className="text-[9px] uppercase tracking-widest font-bold px-2 py-0.5"
-            style={{ backgroundColor: kleur + "28", color: "var(--charcoal)" }}
-          >
-            {CATEGORIE_LABELS[product.categorie]}
-          </span>
-          {product.badge && (
-            <span
-              className="text-[9px] font-bold px-2 py-0.5"
-              style={{ backgroundColor: "var(--seafoam)", color: "white" }}
-            >
-              {product.badge}
-            </span>
+      <div className="px-4 pt-3.5 pb-4 flex flex-col flex-1">
+        <p className="kapitaal mb-2" style={{ color: "var(--grijs)" }}>
+          {CATEGORIE_LABELS[product.categorie]}
+          {merken.length > 0 && (
+            <span style={{ color: "var(--seafoam)" }}> · {merken.join(" · ")}</span>
           )}
-          {product.omega3 && (
-            <span
-              className="text-[9px] font-bold px-1.5 py-0.5"
-              style={{ backgroundColor: "var(--salmon)", color: "white" }}
-            >
-              Ω-3
-            </span>
-          )}
-        </div>
+        </p>
 
-        {/* Name */}
-        <h3
-          className="font-bold text-[0.95rem] leading-snug mb-1.5"
-          style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
-        >
-          <Link href={`/${locale}/assortiment/${product.slug}`} className="hover:underline">
+        <h3 className="text-[1.05rem] leading-snug mb-1.5">
+          <Link href={detail} className="hover:underline underline-offset-4">
             {product.naam}
           </Link>
         </h3>
 
-        {/* Description */}
         <p
-          className="text-sm leading-relaxed flex-1"
-          style={{ color: "var(--charcoal)", opacity: 0.68, fontSize: "0.82rem" }}
+          className="text-[0.88rem] leading-relaxed flex-1"
+          style={{ color: "var(--charcoal)" }}
         >
           {product.desc}
         </p>
 
-        <Link
-          href={`/${locale}/assortiment/${product.slug}`}
-          className="mt-2 text-xs font-semibold underline underline-offset-2"
-          style={{ color: "var(--navy)" }}
-        >
-          Voedingswaarde &amp; info →
-        </Link>
-
-        {/* Availability */}
-        {product.beschikbaar && (
-          <p
-            className="mt-2 text-[11px] font-semibold"
-            style={{
-              color:
-                product.beschikbaar === "dagelijks"
-                  ? "var(--seafoam)"
-                  : product.beschikbaar === "seizoensgebonden"
-                  ? "var(--gold)"
-                  : "var(--charcoal)",
-              opacity: product.beschikbaar === "op bestelling" ? 0.55 : 1,
-            }}
-          >
-            {product.beschikbaar === "dagelijks" && "Dagelijks in de winkel"}
-            {product.beschikbaar === "seizoensgebonden" && "Seizoensgebonden"}
-            {product.beschikbaar === "op bestelling" && "Op bestelling"}
+        {staat && (
+          <p className="mt-3 text-[0.8rem] font-semibold" style={{ color: staat.kleur }}>
+            {staat.tekst}
           </p>
         )}
-
-        {/* Varlaks link */}
-        {product.highlight && (
-          <Link
-            href={`/${locale}/varlaks`}
-            className="mt-1.5 text-xs font-semibold underline underline-offset-2"
-            style={{ color: "var(--seafoam)" }}
-          >
-            Meer over Varlaks →
-          </Link>
-        )}
-
-        {/* Bestellen — en eerlijk erbij of het de weg op gaat */}
-        <p className="mt-3 text-[11px]" style={{ color: "var(--grijs)" }}>
+        <p className="text-[0.8rem]" style={{ color: "var(--grijs)" }}>
           {isBezorgbaar(product.categorie)
-            ? "Wordt bezorgd of afgehaald"
+            ? "Bezorgen of afhalen"
             : "Alleen afhalen — gaat niet mee de weg op"}
         </p>
+
         <Link
           href={`/${locale}/bestellen?product=${product.slug}`}
-          className="knop knop-navy mt-2 !py-2.5 !text-[0.85rem]"
+          className="knop knop-navy mt-3 !py-2.5 !text-[0.85rem]"
         >
           Aan bestelling toevoegen
         </Link>
+        <Link
+          href={detail}
+          className="mt-2.5 text-[0.82rem] font-semibold underline underline-offset-4 text-center"
+          style={{ color: "var(--navy)" }}
+        >
+          Voedingswaarde &amp; info &rarr;
+        </Link>
       </div>
-
-      {/* Allergen accordion */}
-      <Allergenen ingredienten={product.ingredienten} bevat={product.bevat} />
     </article>
   );
 }

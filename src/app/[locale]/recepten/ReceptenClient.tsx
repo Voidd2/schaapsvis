@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { recepten, ALLE_TAGS, type ReceptTag } from "@/lib/recepten";
+import { recepten, receptBeeld, ALLE_TAGS, type ReceptTag } from "@/lib/recepten";
+import { ReceptFoto } from "@/components/recepten/ReceptFoto";
 
 /**
  * De receptenlijst met het filter.
@@ -59,42 +60,44 @@ export function ReceptenClient({ locale }: { locale: string }) {
           Geen recepten met dit label.
         </p>
       ) : (
-        <ul style={{ borderTop: "1px solid var(--linen)" }}>
-          {zichtbaar.map((recept) => (
-            <li key={recept.slug} style={{ borderBottom: "1px solid var(--linen)" }}>
-              <Link
-                href={`/${locale}/recepten/${recept.slug}`}
-                className="group grid md:grid-cols-[13rem_1fr] gap-x-10 gap-y-2 py-6"
-              >
-                <div>
-                  <p className="kapitaal mb-1">
-                    {recept.tijd} · {recept.moeilijkheid}
-                  </p>
-                  <p className="text-sm" style={{ color: "var(--grijs)" }}>
-                    {recept.tags.join(" · ")}
-                  </p>
-                </div>
-                <div>
-                  <h2
-                    className="text-[1.25rem] leading-snug mb-1 group-hover:underline underline-offset-4"
-                    style={{ color: "var(--ink)" }}
-                  >
-                    {recept.title}
-                  </h2>
-                  <p className="mb-2" style={{ color: "var(--charcoal)" }}>
-                    {recept.subtitle}
-                  </p>
-                  <p className="text-sm" style={{ color: "var(--grijs)" }}>
-                    <span className="kapitaal" style={{ color: "var(--gold)" }}>
-                      Bij ons
-                    </span>{" "}
-                    {recept.vanSchaap[0]}
-                    {recept.vanSchaap.length > 1 && " en meer"}
-                  </p>
-                </div>
-              </Link>
-            </li>
-          ))}
+        <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {zichtbaar.map((recept) => {
+            const beeld = receptBeeld(recept);
+            return (
+              <li key={recept.slug}>
+                <Link
+                  href={`/${locale}/recepten/${recept.slug}`}
+                  className="group flex flex-col h-full"
+                  style={{ backgroundColor: "#fff", border: "1px solid var(--linen)" }}
+                >
+                  <ReceptFoto beeld={beeld} titel={recept.title} klein />
+                  <div className="px-4 pt-3.5 pb-4 flex flex-col flex-1">
+                    <p className="kapitaal mb-2" style={{ color: "var(--grijs)" }}>
+                      {recept.tijd} · {recept.moeilijkheid}
+                    </p>
+                    <h2
+                      className="text-[1.1rem] leading-snug mb-1.5 group-hover:underline underline-offset-4"
+                      style={{ color: "var(--ink)" }}
+                    >
+                      {recept.title}
+                    </h2>
+                    <p
+                      className="text-[0.88rem] leading-relaxed flex-1"
+                      style={{ color: "var(--charcoal)" }}
+                    >
+                      {recept.subtitle}
+                    </p>
+                    <p className="mt-3 text-[0.8rem]" style={{ color: "var(--grijs)" }}>
+                      <span className="kapitaal" style={{ color: "var(--gold)" }}>
+                        Bij ons
+                      </span>{" "}
+                      {recept.vanSchaap[0]}
+                    </p>
+                  </div>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       )}
     </>

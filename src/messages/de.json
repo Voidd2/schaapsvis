@@ -33,7 +33,7 @@
     "receptenTitle": "Fischrezepte von Schaap's Vis Leiden | Kibbeling, Lachs, Hering & mehr",
     "receptenDesc": "Leckere Fischrezepte mit Fisch von Schaap's Vis Leiden. Von Kibbeling mit Knoblauchsauce bis Gravlaks und cremiger Fischsuppe. Mit Einkaufsliste und Zubereitungszeit.",
     "bezorgenTitle": "Frischen Fisch liefern lassen in Leiden und Umgebung | Schaap's Vishandel",
-    "bezorgenDesc": "Frischer Fisch und Fischplatten geliefert in Leiden, Leiderdorp, Voorschoten, Wassenaar und Leidschendam. Mittwoch bis Samstag, Bestellung bis 12:00 Uhr am Vortag. Lieferung ab 4,95 €.",
+    "bezorgenDesc": "Frischer Fisch und Fischplatten geliefert in Leiden, Leiderdorp, Voorschoten, Wassenaar und Leidschendam. Mittwoch bis Samstag, Bestellung bis 12:00 Uhr am Vortag. Lieferung 5,99 €, ab 35 € kostenlos.",
     "bezorgenPlaatsTitle": "Frischen Fisch liefern lassen in {plaats} | Fischhändler aus Leiden",
     "bezorgenPlaatsDesc": "Frischen Fisch oder eine Fischplatte in {plaats} liefern lassen? Schaap's Vishandel aus Leiden fährt {dagen} raus. Bestellung bis 12:00 Uhr am Vortag, Zahlung an der Tür oder demnächst online.",
     "visschalenTitle": "Fischplatte zusammenstellen in Leiden — ab {bedrag} pro 100 g | Schaap's Vishandel",
@@ -368,7 +368,7 @@
       },
       {
         "v": "Was kostet die Lieferung?",
-        "a": "In Leiden 4,95 €, in Leiderdorp und Voorschoten 5,95 €, in Wassenaar und Leidschendam 6,95 €. Ab 60 € liefern wir kostenlos. Der Mindestbestellwert beträgt 25 €."
+        "a": "5,99 € im gesamten Liefergebiet — ob Sie in der Leidener Innenstadt wohnen oder in Wassenaar. Ab 35 € liefern wir kostenlos. Der Mindestbestellwert beträgt 25 €."
       },
       {
         "v": "Wann liefern Sie?",
@@ -390,13 +390,16 @@
         "v": "Bleibt der Fisch unterwegs kalt?",
         "a": "Ja. Alles kommt gekühlt in eine Kühlbox mit Eis, und wir fahren selbst — der Fisch ist höchstens eine halbe bis dreiviertel Stunde im Wagen. Kein Paketdienst, kein Verteilzentrum."
       }
-    ]
+    ],
+    "kostenTarief": "Ein Tarif für das ganze Gebiet: {bedrag}.",
+    "gratisNog": "Bestellen Sie noch für {bedrag} und die Lieferung ist kostenlos.",
+    "gratisGehaald": "Lieferung kostenlos."
   },
   "gemeenten": {
     "leidenIntro": "Unsere eigene Stadt. Das Geschäft liegt in der Herenstraat, in Leiden ist der Fisch also oft eine halbe Stunde nach dem Einpacken bei Ihnen.",
     "leiderdorpIntro": "Über die Zijl und Sie sind da. Viele Leiderdorper stehen seit Jahren samstags an unserem Marktstand an der Nieuwe Rijn — das muss jetzt nicht mehr sein.",
     "voorschotenIntro": "In Voorschoten stehen wir jeden Freitag bei Hoogvliet. Wer es dann nicht schafft, lässt sich den Fisch einfach bringen.",
-    "wassenaarIntro": "Wassenaar ist unser weitester Punkt und die Fahrt geht durch die Dünen. Deshalb fahren wir hier eine feste Route, zu einem etwas höheren Satz.",
+    "wassenaarIntro": "Wassenaar ist unser entferntester Ort und die Fahrt führt durch die Dünen. Wir fahren dort eine feste Route, zum gleichen Tarif wie überall.",
     "leidschendamIntro": "Die Vliet entlang nach Leidschendam. Wir liefern in ganz Leidschendam, vom Damcentrum bis Essesteijn."
   },
   "visschaal": {

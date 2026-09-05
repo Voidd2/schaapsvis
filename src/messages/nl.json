@@ -33,7 +33,7 @@
     "receptenTitle": "Visrecepten van Schaap's Vis Leiden | Kibbeling, Zalm, Haring & meer",
     "receptenDesc": "Heerlijke visrecepten met vis van Schaap's Vis Leiden. Van kibbeling met knoflooksaus tot gravlaks en romige vissoep. Inclusief boodschappenlijstje en bereidingstijd.",
     "bezorgenTitle": "Verse vis bezorgen in Leiden en omgeving | Schaap's Vishandel",
-    "bezorgenDesc": "Verse vis en visschalen thuisbezorgd in Leiden, Leiderdorp, Voorschoten, Wassenaar en Leidschendam. Woensdag t/m zaterdag, bestellen tot 12:00 de dag ervoor. Vanaf € 4,95 bezorgkosten.",
+    "bezorgenDesc": "Verse vis en visschalen thuisbezorgd in Leiden, Leiderdorp, Voorschoten, Wassenaar en Leidschendam. Woensdag t/m zaterdag, bestellen tot 12:00 de dag ervoor. € 5,99 bezorgkosten, gratis vanaf € 35.",
     "bezorgenPlaatsTitle": "Verse vis bezorgen in {plaats} | Vishandel uit Leiden | Schaap's Vis",
     "bezorgenPlaatsDesc": "Verse vis en visschalen laten bezorgen in {plaats}? Schaap's Vishandel uit Leiden rijdt {dagen} langs. Bestellen tot 12:00 de dag ervoor, betalen bij de deur of straks online.",
     "visschalenTitle": "Visschaal samenstellen in Leiden — vanaf {bedrag} per 100 g | Schaap's Vishandel",
@@ -368,7 +368,7 @@
       },
       {
         "v": "Wat kost bezorgen?",
-        "a": "In Leiden € 4,95, in Leiderdorp en Voorschoten € 5,95, en in Wassenaar en Leidschendam € 6,95. Vanaf € 60 bezorgen we gratis. De minimale bestelling is € 25."
+        "a": "€ 5,99 in ons hele bezorggebied — of u nu in de Leidse binnenstad woont of in Wassenaar. Bestelt u voor € 35 of meer, dan bezorgen we gratis. De minimale bestelling is € 25."
       },
       {
         "v": "Wanneer bezorgen jullie?",
@@ -390,13 +390,16 @@
         "v": "Blijft de vis wel koud onderweg?",
         "a": "Ja. Alles gaat gekoeld in een koelbox met ijs en we rijden zelf, dus de vis zit hooguit een halfuur tot drie kwartier in de bus. Er komt geen pakketdienst of sorteercentrum aan te pas."
       }
-    ]
+    ],
+    "kostenTarief": "Eén tarief voor het hele gebied: {bedrag}.",
+    "gratisNog": "Bestel nog voor {bedrag} en de bezorging is gratis.",
+    "gratisGehaald": "Gratis bezorgd."
   },
   "gemeenten": {
     "leidenIntro": "Onze eigen stad. De winkel staat op de Herenstraat, dus in Leiden is de vis vaak binnen een half uur na het inpakken bij u aan de deur.",
     "leiderdorpIntro": "Over de Zijl en u bent er. Veel Leiderdorpers staan al jaren op zaterdag bij onze kraam op de Nieuwe Rijn — nu hoeft dat niet meer.",
     "voorschotenIntro": "In Voorschoten staan we elke vrijdag bij Hoogvliet. Wie er dan niet uitkomt, laat de vis voortaan gewoon thuisbezorgen.",
-    "wassenaarIntro": "Wassenaar is onze verste bestemming en de rit gaat door de duinen. Daarom rijden we hier met een vaste route en een iets hoger tarief.",
+    "wassenaarIntro": "Wassenaar is onze verste bestemming en de rit gaat door de duinen. We rijden hier met een vaste route, tegen hetzelfde tarief als de rest.",
     "leidschendamIntro": "Langs de Vliet naar Leidschendam. We bezorgen in heel Leidschendam, van het Damcentrum tot Essesteijn."
   },
   "visschaal": {

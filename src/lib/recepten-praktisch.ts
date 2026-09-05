@@ -6,6 +6,7 @@ export const receptenPraktisch: Recept[] = [
   // ── SNEL DOORDEWEEKS ──────────────────────────────────────────────
   {
     slug: "pasta-gerookte-zalm-roomsaus",
+    hoofdproduct: "gerookte-zalm-high-seas",
     title: "Pasta met gerookte zalm en roomsaus",
     subtitle: "Romige pasta in 20 minuten — de favoriet van elk gezin",
     tijd: "20 min",
@@ -38,6 +39,7 @@ export const receptenPraktisch: Recept[] = [
   },
   {
     slug: "gebakken-kabeljauw-botersaus",
+    hoofdproduct: "kabeljauwfilet",
     title: "Gebakken kabeljauw met citroen-botersaus",
     subtitle: "Restaurantwaardig, maar klaar in 20 minuten",
     tijd: "20 min",
@@ -69,6 +71,7 @@ export const receptenPraktisch: Recept[] = [
   },
   {
     slug: "gebakken-wijting-citroen",
+    hoofdproduct: "wijtingfilet",
     title: "Gebakken wijting met citroen en peterselie",
     subtitle: "De ondergewaardeerde Noordzeevis — fijn van smaak, klaar in 15 minuten",
     tijd: "15 min",
@@ -98,6 +101,7 @@ export const receptenPraktisch: Recept[] = [
   },
   {
     slug: "tonijnsteak-grillen-sesam",
+    hoofdproduct: "tonijnfilet",
     title: "Gegrilde tonijnsteak met sesam en sojadip",
     subtitle: "Kort en krachtig grillen — van binnen mooi rosé",
     tijd: "15 min",
@@ -160,6 +164,7 @@ export const receptenPraktisch: Recept[] = [
   },
   {
     slug: "snelle-viscurry-kabeljauw",
+    hoofdproduct: "kabeljauwfilet",
     title: "Snelle viscurry met kabeljauw",
     subtitle: "Milde kokoscurry waar ook kinderen blij van worden",
     tijd: "25 min",
@@ -192,6 +197,7 @@ export const receptenPraktisch: Recept[] = [
   },
   {
     slug: "poke-bowl-verse-zalm",
+    hoofdproduct: "varlaks-zalm",
     title: "Poké bowl met verse zalm",
     subtitle: "Frisse bowl met blokjes rauwe zalm — gezonder wordt het niet",
     tijd: "20 min",
@@ -225,6 +231,7 @@ export const receptenPraktisch: Recept[] = [
   },
   {
     slug: "teriyaki-zalm-rijst",
+    hoofdproduct: "varlaks-zalm",
     title: "Teriyaki-zalm met rijst en broccoli",
     subtitle: "Plakkerig-zoete glazuurlaag, klaar in 20 minuten",
     tijd: "20 min",
@@ -255,6 +262,7 @@ export const receptenPraktisch: Recept[] = [
   },
   {
     slug: "pasta-verse-tonijn-tomaat",
+    hoofdproduct: "tonijnfilet",
     title: "Pasta met verse tonijn, tomaat en olijven",
     subtitle: "Siciliaanse klassieker met verse tonijn in plaats van blik",
     tijd: "25 min",
@@ -289,6 +297,7 @@ export const receptenPraktisch: Recept[] = [
   // ── HOLLANDSE KLASSIEKERS ─────────────────────────────────────────
   {
     slug: "broodje-haring-uitjes",
+    hoofdproduct: "haring",
     title: "Broodje Hollandse Nieuwe met uitjes",
     subtitle: "De enige juiste manier: zacht broodje, verse haring, uitjes en zuur",
     tijd: "5 min",
@@ -312,6 +321,7 @@ export const receptenPraktisch: Recept[] = [
   },
   {
     slug: "kibbeling-knoflooksaus-salade",
+    hoofdproduct: "kibbeling",
     title: "Kibbeling met zelfgemaakte knoflooksaus en frisse salade",
     subtitle: "Haal de kibbeling warm bij ons — maak thuis alleen de saus en salade",
     tijd: "15 min",
@@ -341,6 +351,7 @@ export const receptenPraktisch: Recept[] = [
   },
   {
     slug: "lekkerbek-koolsalade",
+    hoofdproduct: "lekkerbek",
     title: "Lekkerbek met frisse koolsalade en remoulade",
     subtitle: "Knapperige lekkerbek als volwaardige maaltijd",
     tijd: "20 min",
@@ -373,6 +384,7 @@ export const receptenPraktisch: Recept[] = [
   },
   {
     slug: "vissoep-rouille-croutons",
+    hoofdproduct: "vissoep",
     title: "Rijke vissoep met rouille en croutons",
     subtitle: "Onze huisgemaakte vissoep, opgediend zoals in Frankrijk",
     tijd: "15 min",
@@ -405,6 +417,7 @@ export const receptenPraktisch: Recept[] = [
   },
   {
     slug: "hollandse-garnalencocktail",
+    hoofdproduct: "hollandse-garnalen",
     title: "Hollandse garnalencocktail",
     subtitle: "Retro-klassieker die nooit verveelt — in 15 minuten klaar",
     tijd: "15 min",
@@ -465,6 +478,7 @@ export const receptenPraktisch: Recept[] = [
   // ── GEZOND ────────────────────────────────────────────────────────
   {
     slug: "kabeljauw-oven-tomaat-olijven",
+    hoofdproduct: "kabeljauwfilet",
     title: "Kabeljauw uit de oven met tomaat en olijven",
     subtitle: "Mediterrane ovenschotel — alles in één schaal",
     tijd: "30 min",
@@ -497,6 +511,7 @@ export const receptenPraktisch: Recept[] = [
   },
   {
     slug: "vispakketje-oven-groenten",
+    hoofdproduct: "kabeljauwfilet",
     title: "Vispakketje uit de oven met groenten",
     subtitle: "Vis in een pakketje van bakpapier — sappig gegarandeerd",
     tijd: "30 min",
@@ -529,6 +544,7 @@ export const receptenPraktisch: Recept[] = [
   },
   {
     slug: "zalm-traybake-groenten",
+    hoofdproduct: "varlaks-zalm",
     title: "Zalm-traybake met geroosterde groenten",
     subtitle: "Alles op één bakplaat, de oven doet het werk",
     tijd: "35 min",
@@ -591,6 +607,7 @@ export const receptenPraktisch: Recept[] = [
   },
   {
     slug: "viskoekjes-wijting",
+    hoofdproduct: "wijtingfilet",
     title: "Viskoekjes van wijting met citroenmayo",
     subtitle: "Krokante viskoekjes — budgetvriendelijk en kindvriendelijk",
     tijd: "35 min",
@@ -627,6 +644,7 @@ export const receptenPraktisch: Recept[] = [
   // ── FEESTELIJK MAAR SIMPEL ────────────────────────────────────────
   {
     slug: "oesters-sjalottenazijn",
+    hoofdproduct: "fine-de-claire-oesters",
     title: "Oesters klassiek met sjalottenazijn",
     subtitle: "Oesters serveren zoals het hoort — met drie klassieke garnituren",
     tijd: "15 min",
@@ -658,6 +676,7 @@ export const receptenPraktisch: Recept[] = [
   },
   {
     slug: "gerookte-zalm-rolletjes-roomkaas",
+    hoofdproduct: "gerookte-zalm-high-seas",
     title: "Gerookte zalmrolletjes met roomkaas en dille",
     subtitle: "Feestelijk voorgerecht in 15 minuten — geen kookwerk",
     tijd: "15 min",
@@ -690,6 +709,7 @@ export const receptenPraktisch: Recept[] = [
   },
   {
     slug: "tonijntartaar-avocado",
+    hoofdproduct: "tonijnfilet",
     title: "Tonijntartaar met avocado en sesam",
     subtitle: "Chic voorgerecht zonder kookwerk — alleen snijden en stapelen",
     tijd: "20 min",
@@ -720,6 +740,7 @@ export const receptenPraktisch: Recept[] = [
   },
   {
     slug: "toast-hollandse-garnalen-avocado",
+    hoofdproduct: "hollandse-garnalen",
     title: "Toast met Hollandse garnalen en avocado",
     subtitle: "Luxe lunch of voorgerecht met de smaak van de Noordzee",
     tijd: "15 min",

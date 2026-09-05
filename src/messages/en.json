@@ -33,7 +33,7 @@
     "receptenTitle": "Fish Recipes from Schaap's Vis Leiden | Kibbeling, Salmon, Herring & more",
     "receptenDesc": "Delicious fish recipes using fish from Schaap's Vis Leiden. From kibbeling with garlic sauce to gravlaks and creamy fish soup. Includes shopping list and preparation time.",
     "bezorgenTitle": "Fresh fish delivery in Leiden and the surrounding area | Schaap's Vishandel",
-    "bezorgenDesc": "Fresh fish and seafood platters delivered in Leiden, Leiderdorp, Voorschoten, Wassenaar and Leidschendam. Wednesday to Saturday, order by 12:00 the day before. Delivery from € 4.95.",
+    "bezorgenDesc": "Fresh fish and seafood platters delivered in Leiden, Leiderdorp, Voorschoten, Wassenaar and Leidschendam. Wednesday to Saturday, order by 12:00 the day before. Delivery € 5.99, free from € 35.",
     "bezorgenPlaatsTitle": "Fresh fish delivery in {plaats} | Fishmonger from Leiden | Schaap's Vis",
     "bezorgenPlaatsDesc": "Want fresh fish or a seafood platter delivered in {plaats}? Schaap's Vishandel from Leiden drives out {dagen}. Order by 12:00 the day before and pay at the door, or online soon.",
     "visschalenTitle": "Build a seafood platter in Leiden — from {bedrag} per 100 g | Schaap's Vishandel",
@@ -368,7 +368,7 @@
       },
       {
         "v": "What does delivery cost?",
-        "a": "€ 4.95 in Leiden, € 5.95 in Leiderdorp and Voorschoten, and € 6.95 in Wassenaar and Leidschendam. Free from € 60. The minimum order is € 25."
+        "a": "€ 5.99 anywhere in our delivery area — whether you live in the centre of Leiden or in Wassenaar. Order € 35 or more and delivery is free. The minimum order is € 25."
       },
       {
         "v": "When do you deliver?",
@@ -390,13 +390,16 @@
         "v": "Does the fish stay cold on the way?",
         "a": "Yes. Everything goes into a cool box with ice and we drive ourselves, so the fish is in the van for at most half an hour to forty-five minutes. No courier, no sorting depot."
       }
-    ]
+    ],
+    "kostenTarief": "One rate for the whole area: {bedrag}.",
+    "gratisNog": "Add {bedrag} more and delivery is free.",
+    "gratisGehaald": "Delivery is free."
   },
   "gemeenten": {
     "leidenIntro": "Our own town. The shop is on the Herenstraat, so in Leiden the fish is often at your door within half an hour of being packed.",
     "leiderdorpIntro": "Across the Zijl and you are there. Plenty of Leiderdorpers have stood at our market stall on the Nieuwe Rijn for years — now they no longer have to.",
     "voorschotenIntro": "In Voorschoten we stand at Hoogvliet every Friday. If that does not fit your week, you can simply have the fish brought to you.",
-    "wassenaarIntro": "Wassenaar is our furthest stop and the run goes through the dunes. That is why we drive a fixed route here, at a slightly higher rate.",
+    "wassenaarIntro": "Wassenaar is our furthest stop and the drive goes through the dunes. We run a fixed route there, at the same rate as everywhere else.",
     "leidschendamIntro": "Along the Vliet to Leidschendam. We deliver across the whole of Leidschendam, from the Damcentrum to Essesteijn."
   },
   "visschaal": {

@@ -188,6 +188,7 @@ export default async function BezorgenPage({
         </div>
 
         <ul className="mt-6 space-y-1.5 text-[0.95rem]" style={{ color: "var(--charcoal)" }}>
+          <li>{t("kostenTarief", { bedrag: euro(BEZORGING.standaardKosten) })}</li>
           <li>{t("gratisVanaf", { bedrag: euro(BEZORGING.gratisVanaf) })}</li>
           <li>{t("minimum", { bedrag: euro(BEZORGING.minimumBedrag) })}</li>
           <li>{t("dagen", { dagen })}</li>

@@ -166,13 +166,40 @@ Het meest urgent, op volgorde:
 
 1. **De winkel van buiten en van binnen.** Eén goede foto van de toonbank met
    vis erop doet meer dan alle tekst eromheen.
-2. **Een visschaal**, zoals je hem echt maakt. Die hoort op de homepage én op de
-   visschaalpagina.
-3. **Jij achter de toonbank.** Voor de pagina "Ons verhaal", en voor Google:
-   foto's van echte mensen doen het aantoonbaar beter dan productplaatjes.
-4. De ontbrekende producten uit het assortiment.
+2. **De drie visschalen.** Die staan nu met een naamvlak op de site; met een
+   foto verkopen ze zichzelf. Zie sectie 1.
+3. **Negen productfoto's die tegelijk zeventien recepten vullen.** Elk recept
+   is gekoppeld aan de vis die je ervoor nodig hebt (`hoofdproduct` in
+   `src/lib/recepten.ts`). Staat er een foto bij dat product, dan staat hij
+   meteen ook bij het recept. Deze negen ontbreken nog:
 
-Formaat: liggend, minstens 1200 pixels breed, gewoon met de telefoon is prima.
+   | Product (`slug` in `assortiment-data.ts`) | Vult dit aantal recepten |
+   | --- | --- |
+   | `varlaks-zalm` | 4 |
+   | `tonijnfilet` | 3 |
+   | `kibbeling` | 2 |
+   | `scholfilet` | 2 |
+   | `wijtingfilet` | 2 |
+   | `lekkerbek` | 1 |
+   | `vissoep` | 1 |
+   | `fine-de-claire-oesters` | 1 |
+   | `surimisalade` | 1 |
+
+4. **Jij achter de toonbank.** Voor "Ons verhaal", en voor Google: foto's van
+   echte mensen doen het aantoonbaar beter dan productplaatjes.
+5. De overige producten uit het assortiment.
+
+Vier recepten hebben helemaal geen product om aan te koppelen, omdat **gerookte
+paling** en **gestoomde makreel** niet in `assortiment-data.ts` staan terwijl je
+ze wel verkoopt (ze staan wél bij de visschaal). Zet ze erbij, dan zijn ook die
+vier gedekt.
+
+Heb je een foto van het gerecht zélf, dan gaat die vóór de productfoto: zet hem
+op `fotoUrl` bij dat recept.
+
+Formaat: **vierkant**, minstens 1200 × 1200 pixels, met de telefoon is prima.
+De kaarten in het assortiment en bij de recepten zijn vierkant; een liggende
+foto krijgt daar witranden.
 Zet ze in `public/images/` en verwijs ernaar in `src/lib/assortiment-data.ts`
 (`photo:`) of rechtstreeks in de pagina.
 

@@ -22,11 +22,15 @@ export const BEZORGING = {
   /** Minimaal bestelbedrag voor bezorging (exclusief bezorgkosten). */
   minimumBedrag: 25,
 
-  /** Standaard bezorgkosten. Per gemeente te overschrijven, zie GEMEENTEN. */
-  standaardKosten: 5.95,
+  /**
+   * Bezorgkosten. Eén tarief voor het hele gebied — de rit naar Wassenaar duurt
+   * langer dan die naar de Merenwijk, maar drie verschillende tarieven op een
+   * site kost meer uitleg dan het oplevert.
+   */
+  standaardKosten: 5.99,
 
   /** Vanaf dit bedrag vervallen de bezorgkosten. */
-  gratisVanaf: 60,
+  gratisVanaf: 35,
 
   /** Bezorgdagen. 0 = zondag … 6 = zaterdag. */
   bezorgdagen: [3, 4, 5, 6] as const, // woensdag t/m zaterdag
@@ -68,7 +72,10 @@ export interface Gemeente {
   naam: string;
   /** Postcodecijfers die bij deze gemeente horen, als [van, tot] inclusief. */
   postcodes: [number, number][];
-  /** Bezorgkosten als die afwijken van het standaardtarief. */
+  /**
+   * Alleen invullen als deze gemeente écht een ander tarief krijgt. Normaal
+   * geldt `BEZORGING.standaardKosten` overal.
+   */
   kosten?: number;
   /** Reistijd vanaf de Herenstraat — eerlijk, geen marketing. */
   rijtijd: string;
@@ -83,7 +90,6 @@ export const GEMEENTEN: Gemeente[] = [
     slug: "leiden",
     naam: "Leiden",
     postcodes: [[2311, 2334]],
-    kosten: 4.95,
     rijtijd: "10 tot 20 minuten",
     wijken: [
       "Binnenstad",
@@ -140,7 +146,6 @@ export const GEMEENTEN: Gemeente[] = [
     slug: "wassenaar",
     naam: "Wassenaar",
     postcodes: [[2240, 2245]],
-    kosten: 6.95,
     rijtijd: "20 tot 25 minuten",
     wijken: [
       "Centrum",
@@ -152,13 +157,12 @@ export const GEMEENTEN: Gemeente[] = [
       "De Kieviet",
     ],
     intro:
-      "Wassenaar is onze verste bestemming en de rit gaat door de duinen. Daarom rijden we hier met een vaste route en een iets hoger tarief.",
+      "Wassenaar is onze verste bestemming en de rit gaat door de duinen. We rijden hier met een vaste route, tegen hetzelfde tarief als de rest.",
   },
   {
     slug: "leidschendam",
     naam: "Leidschendam",
     postcodes: [[2260, 2266]],
-    kosten: 6.95,
     rijtijd: "20 tot 25 minuten",
     wijken: [
       "Damcentrum",
@@ -183,10 +187,19 @@ export function kostenVoor(gemeente: Gemeente): number {
   return gemeente.kosten ?? BEZORGING.standaardKosten;
 }
 
-/** Het laagste en hoogste tarief, voor zinnen als "€ 4,95 tot € 6,95". */
+/**
+ * Het laagste en hoogste tarief. Zolang elke gemeente hetzelfde kost zijn die
+ * gelijk; de functie blijft bestaan zodat één afwijkend tarief later geen
+ * zoekactie door de hele site wordt.
+ */
 export function kostenBereik(): { laag: number; hoog: number } {
   const alle = GEMEENTEN.map(kostenVoor);
   return { laag: Math.min(...alle), hoog: Math.max(...alle) };
+}
+
+/** Waar de klant nog vandaan moet komen voor gratis bezorging. 0 = gehaald. */
+export function tekortVoorGratis(bedrag: number): number {
+  return Math.max(0, Math.round((BEZORGING.gratisVanaf - bedrag) * 100) / 100);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
