@@ -4,7 +4,8 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
-import { Sectie, Kop, Vragen, Kruimels } from "@/components/ui/Sectie";
+import { Sectie, Kop, Vragen } from "@/components/ui/Sectie";
+import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { PostcodeCheck } from "@/components/bezorgen/PostcodeCheck";
 import { paginaMetadata, alternates, kruimelSchema, vraagSchema, LOCALES } from "@/lib/seo";
 import { BEDRIJF, euro, whatsappLink } from "@/lib/bedrijf";
@@ -105,43 +106,22 @@ export default async function GemeentePage({
         ]}
       />
 
-      {/* ── Kop ───────────────────────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "var(--navy)" }} className="py-14 md:py-20">
-        <div className="max-w-6xl mx-auto px-4 grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-16 items-start">
-          <div>
-            <Kruimels
-              donker
-              items={[
-                { naam: BEDRIJF.naamKort, href: `/${locale}` },
-                { naam: nav("bezorgen"), href: `/${locale}/bezorgen` },
-                { naam: gem.naam },
-              ]}
-            />
-            <p className="kapitaal kapitaal-licht mb-3">{t("plaatsEyebrow")}</p>
-            <h1 className="text-[2.1rem] md:text-[3rem] mb-5" style={{ color: "var(--cream)" }}>
-              {t("plaatsKop", { plaats: gem.naam })}
-            </h1>
-            <p
-              className="text-[1.05rem] leading-relaxed max-w-2xl"
-              style={{ color: "rgba(250,246,239,0.82)" }}
-            >
-              {intro}
-            </p>
-
-            <dl className="mt-8 grid sm:grid-cols-3 gap-6 max-w-xl">
-              {[
-                [t("kolomKosten"), euro(kosten)],
-                [t("kolomRijtijd"), gem.rijtijd],
-                [g("bezorgen"), dagen],
-              ].map(([label, waarde]) => (
-                <div key={label} style={{ borderTop: "1px solid rgba(250,246,239,0.3)" }} className="pt-3">
-                  <dt className="kapitaal kapitaal-licht mb-1">{label}</dt>
-                  <dd style={{ color: "var(--cream)", fontWeight: 600 }}>{waarde}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-
+      <PaginaKop
+        kruimels={[
+          { naam: BEDRIJF.naamKort, href: `/${locale}` },
+          { naam: nav("bezorgen"), href: `/${locale}/bezorgen` },
+          { naam: gem.naam },
+        ]}
+        label={t("plaatsEyebrow")}
+        titel={t("plaatsKop", { plaats: gem.naam })}
+        intro={intro}
+        uitgelijnd="boven"
+        feiten={[
+          { label: t("kolomKosten"), waarde: euro(kosten) },
+          { label: t("kolomRijtijd"), waarde: gem.rijtijd },
+          { label: g("bezorgen"), waarde: dagen },
+        ]}
+        zijkant={
           <div
             className="p-6 md:p-7"
             style={{ backgroundColor: "var(--cream)", border: "1px solid var(--linen)" }}
@@ -152,8 +132,8 @@ export default async function GemeentePage({
             </p>
             <PostcodeCheck />
           </div>
-        </div>
-      </section>
+        }
+      />
 
       {/* ── Wijken ────────────────────────────────────────────────────────── */}
       <Sectie grond="papier">
@@ -238,33 +218,23 @@ export default async function GemeentePage({
         </ul>
       </Sectie>
 
-      {/* ── Afsluiting ────────────────────────────────────────────────────── */}
-      <Sectie grond="navy" smal>
-        <h2 className="text-[1.8rem] mb-3" style={{ color: "var(--cream)" }}>
-          {t("plaatsCtaKop", { plaats: gem.naam })}
-        </h2>
-        <p className="mb-7" style={{ color: "rgba(250,246,239,0.78)" }}>
-          {t("plaatsCtaTekst", { tijd: BEZORGING.uitersteBesteltijd, dagen })}
-        </p>
-        <div className="flex flex-wrap gap-3">
-          <Link href={`/${locale}/bestellen`} className="knop knop-rood">
-            {nav("bestellen")}
-          </Link>
-          <Link href={`/${locale}/visschalen`} className="knop knop-lijn-licht">
-            {nav("visschalen")}
-          </Link>
-          <a
-            href={whatsappLink(
+      <PaginaSlot
+        titel={t("plaatsCtaKop", { plaats: gem.naam })}
+        tekst={t("plaatsCtaTekst", { tijd: BEZORGING.uitersteBesteltijd, dagen })}
+        knoppen={[
+          { label: nav("bestellen"), href: `/${locale}/bestellen` },
+          { label: nav("visschalen"), href: `/${locale}/visschalen`, soort: "lijn" },
+          {
+            label: g("whatsapp"),
+            href: whatsappLink(
               `Hallo Schaap's Vishandel, ik wil graag verse vis laten bezorgen in ${gem.naam}.`
-            )}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="knop knop-lijn-licht"
-          >
-            {g("whatsapp")}
-          </a>
-        </div>
-      </Sectie>
+            ),
+            extern: true,
+            soort: "lijn",
+          },
+        ]}
+      />
+
     </>
   );
 }

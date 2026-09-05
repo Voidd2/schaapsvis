@@ -1,18 +1,29 @@
 import Link from "next/link";
 import { permanentRedirect } from "next/navigation";
-import { useLocale } from "next-intl";
 import type { Metadata } from "next";
-import { Clock, ChefHat, ShoppingBag, ShoppingCart, ArrowLeft, AlertCircle } from "lucide-react";
-import { PhotoPlaceholder } from "@/components/shared/PhotoPlaceholder";
-import { recepten, TAG_ICON, type Recept } from "@/lib/recepten";
+import { recepten, type Recept } from "@/lib/recepten";
+import { Schema } from "@/components/Schema";
+import { Sectie } from "@/components/ui/Sectie";
+import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
+import { BEDRIJF } from "@/lib/bedrijf";
 
+/**
+ * Sommige vis ligt niet standaard in de vitrine. Staat die in een recept, dan
+ * zeggen we dat erbij in plaats van een bestelknop te tonen die tot een
+ * teleurstelling leidt.
+ */
 const OP_AANVRAAG_VIS = ["garnalen", "gamba", "scampi", "tarbot", "kreeft", "langoustine"];
 
-function isOpAanvraag(recept: Recept): string | null {
-  const text = [...recept.vanSchaap, recept.title].join(" ").toLowerCase();
-  const match = OP_AANVRAAG_VIS.find((v) => text.includes(v));
-  return match ?? null;
+function opAanvraag(recept: Recept): string | null {
+  const tekst = [...recept.vanSchaap, recept.title].join(" ").toLowerCase();
+  return OP_AANVRAAG_VIS.find((vis) => tekst.includes(vis)) ?? null;
 }
+
+const MOEILIJKHEID_UITLEG: Record<Recept["moeilijkheid"], string> = {
+  Makkelijk: "Prima voor doordeweeks — geen gedoe.",
+  Gemiddeld: "Met aandacht en een beetje geduld goed te doen.",
+  Uitdagend: "Voor de liefhebber, en de moeite waard.",
+};
 
 export async function generateStaticParams() {
   return recepten.map((r) => ({ slug: r.slug }));
@@ -43,303 +54,6 @@ export async function generateMetadata({
   };
 }
 
-function ReceptDetailContent({
-  recept,
-  locale,
-}: {
-  recept: Recept;
-  locale: string;
-}) {
-  const opAanvraagVis = isOpAanvraag(recept);
-  const moeilijkheidColor =
-    recept.moeilijkheid === "Makkelijk"
-      ? "var(--seafoam)"
-      : recept.moeilijkheid === "Gemiddeld"
-      ? "var(--gold)"
-      : "var(--salmon)";
-
-  return (
-    <>
-      {/* Back */}
-      <div
-        className="py-4 px-6"
-        style={{ backgroundColor: "var(--cream)", borderBottom: "1px solid var(--sand)" }}
-      >
-        <div className="max-w-4xl mx-auto">
-          <Link
-            href={`/${locale}/recepten`}
-            className="inline-flex items-center gap-2 text-sm opacity-60 hover:opacity-100 transition-opacity"
-            style={{ color: "var(--navy)" }}
-          >
-            <ArrowLeft size={15} />
-            Alle recepten
-          </Link>
-        </div>
-      </div>
-
-      {/* Hero */}
-      <section style={{ backgroundColor: "var(--navy)" }} className="py-16 px-6">
-        <div className="max-w-4xl mx-auto">
-          {recept.highlight && (
-            <span
-              className="inline-block text-xs font-bold px-3 py-1 mb-5 text-white"
-              style={{ backgroundColor: "var(--salmon)" }}
-            >
-              {recept.highlight}
-            </span>
-          )}
-          <h1
-            className="text-4xl md:text-5xl font-bold mb-3 leading-tight"
-            style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
-          >
-            {recept.title}
-          </h1>
-          <p className="text-lg mb-6" style={{ color: "rgba(250,246,239,0.7)" }}>
-            {recept.subtitle}
-          </p>
-          <div className="flex flex-wrap gap-3 mb-2">
-            <span
-              className="inline-flex items-center gap-2 text-sm px-4 py-2 text-white"
-              style={{ backgroundColor: "rgba(250,246,239,0.1)" }}
-            >
-              <Clock size={15} /> {recept.tijd}
-            </span>
-            <span
-              className="inline-flex items-center gap-2 text-sm px-4 py-2 text-white"
-              style={{ backgroundColor: "rgba(250,246,239,0.1)" }}
-            >
-              <ChefHat size={15} /> {recept.moeilijkheid}
-            </span>
-            {recept.porties && (
-              <span
-                className="inline-flex items-center gap-2 text-sm px-4 py-2 text-white"
-                style={{ backgroundColor: "rgba(250,246,239,0.1)" }}
-              >
-                {recept.porties} {recept.porties === 1 ? "portie" : "personen"}
-              </span>
-            )}
-          </div>
-          {recept.seizoen && (
-            <p className="text-sm mt-4" style={{ color: "var(--sand)" }}>
-              Seizoen: {recept.seizoen}
-            </p>
-          )}
-          <div className="flex flex-wrap gap-2 mt-4">
-            {recept.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-xs px-2.5 py-1"
-                style={{ backgroundColor: "rgba(250,246,239,0.12)", color: "var(--sand)" }}
-              >
-                {TAG_ICON[tag]} {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Main */}
-      <section style={{ backgroundColor: "var(--cream)" }} className="py-14 px-6">
-        <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-10">
-          {/* Left: photo + verhaal + stappen */}
-          <div className="md:col-span-2 space-y-8">
-            {recept.fotoUrl ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={recept.fotoUrl}
-                alt={recept.title}
-                className="w-full aspect-video object-cover"
-              />
-            ) : (
-              <PhotoPlaceholder
-                label={recept.fotoLabel}
-                aspectRatio="aspect-video"
-              />
-            )}
-
-            {/* Verhaal */}
-            <div
-              className="p-6"
-              style={{
-                backgroundColor: "var(--sand)",
-                borderLeft: "4px solid var(--navy)",
-              }}
-            >
-              <p
-                className="text-xs font-bold uppercase tracking-widest mb-3 opacity-50"
-                style={{ color: "var(--navy)" }}
-              >
-                Van de zaak
-              </p>
-              <p
-                className="leading-relaxed italic"
-                style={{ color: "var(--charcoal)", opacity: 0.85 }}
-              >
-                &ldquo;{recept.verhaal}&rdquo;
-              </p>
-            </div>
-
-            {/* Bereidingswijze */}
-            <div>
-              <h2
-                className="text-2xl font-bold mb-6"
-                style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
-              >
-                Bereidingswijze
-              </h2>
-              <ol className="space-y-4">
-                {recept.bereidingswijze.map((stap, i) => (
-                  <li key={i} className="flex gap-4">
-                    <span
-                      className="w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold text-white flex-shrink-0 mt-0.5"
-                      style={{ backgroundColor: "var(--navy)" }}
-                    >
-                      {i + 1}
-                    </span>
-                    <p
-                      className="leading-relaxed text-sm pt-0.5"
-                      style={{ color: "var(--charcoal)", opacity: 0.85 }}
-                    >
-                      {stap}
-                    </p>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </div>
-
-          {/* Right: boodschappenlijst */}
-          <div className="space-y-5">
-            {/* Van Schaap's Vis */}
-            <div
-              className="p-5"
-              style={{
-                backgroundColor: "var(--navy)",
-                borderTop: "3px solid var(--salmon)",
-              }}
-            >
-              <div className="flex items-center gap-2 mb-4">
-                <ShoppingBag size={16} style={{ color: "var(--sand)" }} />
-                <h3
-                  className="text-sm font-bold uppercase tracking-wide"
-                  style={{ color: "var(--sand)" }}
-                >
-                  Van Schaap&apos;s Vis
-                </h3>
-              </div>
-              <ul className="space-y-2">
-                {recept.vanSchaap.map((item) => (
-                  <li
-                    key={item}
-                    className="text-sm leading-snug"
-                    style={{ color: "rgba(250,246,239,0.85)" }}
-                  >
-                    · {item}
-                  </li>
-                ))}
-              </ul>
-              {opAanvraagVis ? (
-                <div
-                  className="mt-4 flex items-start gap-2 p-3 text-xs leading-relaxed"
-                  style={{ backgroundColor: "rgba(200,96,74,0.15)", color: "var(--sand)" }}
-                >
-                  <AlertCircle size={14} className="flex-shrink-0 mt-0.5" />
-                  <span>
-                    Verse {opAanvraagVis} is bij ons{" "}
-                    <strong>op aanvraag</strong> verkrijgbaar. Bel of mail ons
-                    even van tevoren.
-                  </span>
-                </div>
-              ) : (
-                <Link
-                  href={`/${locale}/bestellen`}
-                  className="inline-block mt-5 text-xs font-semibold px-4 py-2 text-white transition-opacity hover:opacity-90"
-                  style={{ backgroundColor: "var(--salmon)" }}
-                >
-                  Vooruit bestellen
-                </Link>
-              )}
-            </div>
-
-            {/* Van de supermarkt */}
-            <div
-              className="p-5"
-              style={{
-                backgroundColor: "var(--sand)",
-                borderTop: "3px solid var(--charcoal)",
-              }}
-            >
-              <div className="flex items-center gap-2 mb-4">
-                <ShoppingCart
-                  size={16}
-                  style={{ color: "var(--charcoal)", opacity: 0.6 }}
-                />
-                <h3
-                  className="text-sm font-bold uppercase tracking-wide opacity-60"
-                  style={{ color: "var(--charcoal)" }}
-                >
-                  Van de supermarkt
-                </h3>
-              </div>
-              <ul className="space-y-2">
-                {recept.vanSupermarkt.map((item) => (
-                  <li
-                    key={item}
-                    className="text-sm leading-snug opacity-75"
-                    style={{ color: "var(--charcoal)" }}
-                  >
-                    · {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Moeilijkheid */}
-            <div className="p-4 bg-white">
-              <div
-                className="text-xs font-bold uppercase tracking-widest mb-1"
-                style={{ color: moeilijkheidColor }}
-              >
-                {recept.moeilijkheid}
-              </div>
-              <p
-                className="text-xs opacity-60"
-                style={{ color: "var(--charcoal)" }}
-              >
-                {recept.moeilijkheid === "Makkelijk"
-                  ? "Perfect voor doordeweeks — geen gedoe"
-                  : recept.moeilijkheid === "Gemiddeld"
-                  ? "Met aandacht en geduld prima te doen"
-                  : "Voor de echte liefhebber — de moeite waard"}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Back */}
-      <section
-        style={{ backgroundColor: "var(--navy)" }}
-        className="py-12 px-6 text-center"
-      >
-        <Link
-          href={`/${locale}/recepten`}
-          className="inline-flex items-center gap-2 text-sm font-medium underline underline-offset-4 transition-opacity hover:opacity-70"
-          style={{ color: "var(--sand)" }}
-        >
-          <ArrowLeft size={15} />
-          Meer recepten van Schaap&apos;s Vis
-        </Link>
-      </section>
-    </>
-  );
-}
-
-function ReceptDetailWrapper({ recept }: { recept: Recept }) {
-  const locale = useLocale();
-  return <ReceptDetailContent recept={recept} locale={locale} />;
-}
-
 export default async function ReceptDetailPage({
   params,
 }: {
@@ -347,8 +61,10 @@ export default async function ReceptDetailPage({
 }) {
   const { slug, locale } = await params;
   const recept = recepten.find((r) => r.slug === slug);
-  // Oude recept-URL's (van de vorige receptendatabase) permanent doorsturen
+  // Oude recept-URL's (van de vorige receptendatabase) permanent doorsturen.
   if (!recept) permanentRedirect(`/${locale}/recepten`);
+
+  const aanvraag = opAanvraag(recept);
 
   const recipeSchema = {
     "@context": "https://schema.org",
@@ -367,20 +83,139 @@ export default async function ReceptDetailPage({
       position: i + 1,
       text: stap,
     })),
-    author: {
-      "@type": "Organization",
-      name: "Schaap's Vishandel Leiden",
-      url: "https://www.schaapsvishandel.nl",
-    },
+    author: { "@type": "Organization", name: BEDRIJF.naam, url: BEDRIJF.domein },
   };
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(recipeSchema) }}
+      <Schema data={recipeSchema} />
+
+      <PaginaKop
+        kruimels={[
+          { naam: BEDRIJF.naamKort, href: `/${locale}` },
+          { naam: "Recepten", href: `/${locale}/recepten` },
+          { naam: recept.title },
+        ]}
+        label={recept.tags.join(" · ")}
+        titel={recept.title}
+        intro={recept.subtitle}
+        feiten={[
+          { label: "Tijd", waarde: recept.tijd },
+          { label: "Moeilijkheid", waarde: recept.moeilijkheid },
+          {
+            label: recept.porties ? "Voor" : "Seizoen",
+            waarde: recept.porties
+              ? `${recept.porties} ${recept.porties === 1 ? "portie" : "personen"}`
+              : (recept.seizoen ?? "Het hele jaar"),
+          },
+        ]}
       />
-      <ReceptDetailWrapper recept={recept} />
+
+      <Sectie grond="papier">
+        <div className="grid lg:grid-cols-[1.35fr_0.65fr] gap-10 lg:gap-16">
+          {/* ── Verhaal en bereiding ─────────────────────────────────────── */}
+          <div>
+            <blockquote className="citaat mb-10">{recept.verhaal}</blockquote>
+
+            <h2 className="text-[1.6rem] mb-6">Bereiding</h2>
+            <ol style={{ borderTop: "1px solid var(--linen)" }}>
+              {recept.bereidingswijze.map((stap, i) => (
+                <li
+                  key={i}
+                  className="grid grid-cols-[2.5rem_1fr] gap-x-4 py-4"
+                  style={{ borderBottom: "1px solid var(--linen)" }}
+                >
+                  <span
+                    className="text-[1.2rem] leading-tight"
+                    style={{ fontFamily: "var(--font-display)", color: "var(--gold)" }}
+                  >
+                    {i + 1}
+                  </span>
+                  <p className="leading-relaxed" style={{ color: "var(--charcoal)" }}>
+                    {stap}
+                  </p>
+                </li>
+              ))}
+            </ol>
+
+            <p className="mt-8 text-sm" style={{ color: "var(--grijs)" }}>
+              <span className="kapitaal">{recept.moeilijkheid}</span>{" "}
+              {MOEILIJKHEID_UITLEG[recept.moeilijkheid]}
+            </p>
+          </div>
+
+          {/* ── Boodschappen ─────────────────────────────────────────────── */}
+          <div>
+            <div className="pt-4" style={{ borderTop: "2px solid var(--navy)" }}>
+              <p className="kapitaal mb-3">Bij Schaap&apos;s Vis</p>
+              <ul className="mb-5">
+                {recept.vanSchaap.map((item) => (
+                  <li
+                    key={item}
+                    className="py-2"
+                    style={{ borderBottom: "1px solid var(--linen)", color: "var(--ink)" }}
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              {aanvraag ? (
+                <p
+                  className="pl-4 text-sm leading-relaxed"
+                  style={{ borderLeft: "2px solid var(--rood)", color: "var(--charcoal)" }}
+                >
+                  Verse {aanvraag} is bij ons <strong>op aanvraag</strong>. Bel even van tevoren
+                  op {BEDRIJF.telefoon.weergave}, dan zorgen we dat het er is.
+                </p>
+              ) : (
+                <Link href={`/${locale}/bestellen`} className="knop knop-rood">
+                  Vooruit bestellen
+                </Link>
+              )}
+            </div>
+
+            <div className="mt-10 pt-4" style={{ borderTop: "2px solid var(--linen)" }}>
+              <p className="kapitaal mb-3" style={{ color: "var(--grijs)" }}>
+                Uit de supermarkt
+              </p>
+              <ul>
+                {recept.vanSupermarkt.map((item) => (
+                  <li
+                    key={item}
+                    className="py-2"
+                    style={{ borderBottom: "1px solid var(--linen)", color: "var(--charcoal)" }}
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <Link
+          href={`/${locale}/recepten`}
+          className="inline-block mt-12 font-semibold underline underline-offset-4"
+          style={{ color: "var(--navy)" }}
+        >
+          &larr; Alle recepten
+        </Link>
+      </Sectie>
+
+      <PaginaSlot
+        titel="De vis haalt u bij ons"
+        tekst="Herenstraat 48 in Leiden, dinsdag tot en met zaterdag. Bestel vooruit, dan ligt het klaar wanneer u langskomt."
+        knoppen={[
+          { label: "Verse vis bestellen", href: `/${locale}/bestellen` },
+          { label: "Visschaal samenstellen", href: `/${locale}/visschalen`, soort: "lijn" },
+          {
+            label: BEDRIJF.telefoon.weergave,
+            href: `tel:${BEDRIJF.telefoon.e164}`,
+            extern: true,
+            soort: "lijn",
+          },
+        ]}
+      />
     </>
   );
 }

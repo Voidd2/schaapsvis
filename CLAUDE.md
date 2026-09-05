@@ -47,9 +47,24 @@ Sans 3 — allebei via `next/font`, dus meegebouwd en niet bij Google opgehaald.
 
 Rechte hoeken, dunne lijnen, kapitaaltjes-labels, weinig schaduw.
 
+Elke binnenpagina heeft hetzelfde ritme, en dat komt uit twee componenten in
+`src/components/ui/PaginaKop.tsx`:
+
+- **`PaginaKop`** — marineblauw vlak met kruimelpad, kapitaaltjes-label, kop,
+  inleiding en optioneel knoppen plus een rechterkolom (`feiten`, één groot
+  `cijfer`, of iets eigens via `zijkant`).
+- **`PaginaSlot`** — het afsluitende blok. Elke pagina moet eindigen bij één van
+  de drie dingen die we willen: een visschaal samenstellen, verse vis bestellen,
+  of langskomen. Geen enkele pagina houdt zomaar op.
+
+Daartussen wisselen `Sectie`-blokken elkaar af: papier, zand, papier. Bouw geen
+eigen `<section style={{ backgroundColor: … }}>` — dan loopt de opmaak binnen een
+paar pagina's weer uit elkaar.
+
 **Wat we bewust niet doen**, omdat het een site er meteen als sjabloon laat
 uitzien:
-- secties die één voor één omhoog schuiven bij het scrollen
+- secties die één voor één omhoog schuiven bij het scrollen (`framer-motion`
+  staat er daarom niet meer in)
 - symmetrische rijen kaartjes met ronde icoontjes erboven
 - emoji in de interface
 - verlopen, zwevende kaarten met schaduw, doorzichtige balken met vervaging
@@ -100,6 +115,8 @@ src/app/api/bestelling/route.ts   neemt bestellingen aan, herberekent het bedrag
 
 src/components/
   ui/Sectie.tsx       Sectie, Kop, Vragen, Kruimels — de vaste bouwstenen
+  ui/PaginaKop.tsx    PaginaKop en PaginaSlot — de kop en de afsluiting van
+                      élke binnenpagina. Nieuwe pagina? Begin hiermee.
   Schema.tsx          zet JSON-LD in de pagina
   JsonLd.tsx          de vaste blokken (winkel, organisatie, site, bezorgdienst)
   bezorgen/PostcodeCheck.tsx

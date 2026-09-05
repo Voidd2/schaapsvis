@@ -4,10 +4,12 @@ import { getTranslations } from "next-intl/server";
 import { BestellenForm } from "./BestellenForm";
 import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
-import { Sectie, Kruimels } from "@/components/ui/Sectie";
+import { Sectie } from "@/components/ui/Sectie";
 import { paginaMetadata, kruimelSchema } from "@/lib/seo";
 import { sumupBeschikbaar } from "@/lib/betalen";
-import { BEDRIJF } from "@/lib/bedrijf";
+import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
+import { BEDRIJF, euro } from "@/lib/bedrijf";
+import { BEZORGING, bezorgdagenTekst } from "@/lib/bezorging";
 
 export async function generateMetadata({
   params,
@@ -32,6 +34,7 @@ export default async function BestellenPage({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "bestel" });
   const nav = await getTranslations({ locale, namespace: "nav" });
+  const g = await getTranslations({ locale, namespace: "gedeeld" });
 
   // Of online betalen al kan, wordt op de server bepaald: de SumUp-sleutels
   // horen nooit in de browser terecht te komen.
@@ -47,24 +50,20 @@ export default async function BestellenPage({
         ])}
       />
 
-      <section style={{ backgroundColor: "var(--navy)" }} className="py-12 md:py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <Kruimels
-            donker
-            items={[{ naam: BEDRIJF.naamKort, href: `/${locale}` }, { naam: nav("bestellen") }]}
-          />
-          <p className="kapitaal kapitaal-licht mb-3">{t("eyebrow")}</p>
-          <h1 className="text-[2.1rem] md:text-[2.9rem] mb-4" style={{ color: "var(--cream)" }}>
-            {t("kop")}
-          </h1>
-          <p
-            className="text-[1.05rem] leading-relaxed max-w-2xl"
-            style={{ color: "rgba(250,246,239,0.82)" }}
-          >
-            {t("inleiding")}
-          </p>
-        </div>
-      </section>
+      <PaginaKop
+        kruimels={[{ naam: BEDRIJF.naamKort, href: `/${locale}` }, { naam: nav("bestellen") }]}
+        label={t("eyebrow")}
+        titel={t("kop")}
+        intro={t("inleiding")}
+        feiten={[
+          { label: g("bezorgen"), waarde: bezorgdagenTekst() },
+          {
+            label: g("gratis"),
+            waarde: `${g("vanaf")} ${euro(BEZORGING.gratisVanaf)}`,
+          },
+          { label: g("afhalen"), waarde: `${g("gratis")} — ${BEDRIJF.adres.straat}` },
+        ]}
+      />
 
       <Sectie grond="papier">
         <Suspense
@@ -77,6 +76,16 @@ export default async function BestellenPage({
           <BestellenForm sumupActief={sumupActief} />
         </Suspense>
       </Sectie>
+
+      <PaginaSlot
+        titel={g("slotTitel")}
+        tekst={g("slotTekst")}
+        knoppen={[
+          { label: nav("visschalen"), href: `/${locale}/visschalen` },
+          { label: nav("bezorgen"), href: `/${locale}/bezorgen`, soort: "lijn" },
+          { label: nav("locaties"), href: `/${locale}/bezoek-ons`, soort: "lijn" },
+        ]}
+      />
     </>
   );
 }

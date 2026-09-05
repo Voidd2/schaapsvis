@@ -101,7 +101,70 @@
     "compareTitle": "Varlaks vs. Normaler Lachs",
     "ctaTitle": "Täglich frisch erhältlich",
     "ctaText": "Varlaks-Lachs ist täglich in unserem Laden in der Herenstraat, auf dem Leidener Markt (Mittwoch & Samstag) und bei Hoogvliet Voorschoten freitags erhältlich.",
-    "ctaButton": "Besuchen Sie uns"
+    "ctaButton": "Besuchen Sie uns",
+    "label": "Bio-Lachs aus Nordnorwegen",
+    "storyTitle": "Warum wir gerade diesen Lachs verkaufen",
+    "welTitle": "Was Sie bekommen",
+    "wel": [
+      {
+        "t": "Skjerstadfjord, Nordland",
+        "d": "Nördlich des Polarkreises bei Bodø. Kaltes, sauberes, sauerstoffreiches Wasser — einer der wenigen Orte, an denen Lachs langsam wachsen darf."
+      },
+      {
+        "t": "Wenberg und Edelfarm",
+        "d": "Zwei Familienbetriebe: Wenberg Fiskeoppdrett in Fauske und Edelfarm in Saltdal. Wenig Fisch pro Netzgehege, keine Großindustrie."
+      },
+      {
+        "t": "ASC-zertifiziert",
+        "d": "Der internationale Standard für verantwortungsvolle Aquakultur. Seafood Watch gibt dem Skjerstadfjord die beste Umweltbewertung."
+      },
+      {
+        "t": "Vom Ei bis zum Filet nachvollziehbar",
+        "d": "Jeder Schritt ist belegt. Verarbeitung bei Salten Salmon in Bodø, geprüft von unabhängigen Zertifizierern."
+      },
+      {
+        "t": "Laser statt Chemie",
+        "d": "Unterwasserkameras schauen Tag und Nacht mit. Sitzt eine Seelaus, erledigt das ein Laserimpuls. Es kommt nichts ins Wasser."
+      },
+      {
+        "t": "Farbe aus Panaferd-AX",
+        "d": "Fast aller Zuchtlachs wird durch synthetisches Astaxanthin aus der Petrochemie rosa. Varlaks nutzt die natürliche Variante aus fermentierten Bakterien."
+      }
+    ],
+    "nietTitle": "Was nicht drin ist",
+    "niet": [
+      {
+        "t": "Antibiotika",
+        "d": "Sauberes Wasser und geringe Besatzdichte machen sie überflüssig."
+      },
+      {
+        "t": "Chemische Läusebekämpfung",
+        "d": "Keine Pestizide und keine künstlichen Mittel im Wasser."
+      },
+      {
+        "t": "GVO",
+        "d": "Normaler Lachs, nicht gentechnisch verändert."
+      },
+      {
+        "t": "Hormone",
+        "d": "Wächst im eigenen Tempo, nicht künstlich beschleunigt."
+      },
+      {
+        "t": "Synthetische Farbstoffe",
+        "d": "Kein petrochemisches Astaxanthin."
+      }
+    ],
+    "filmTitle": "So wächst dieser Lachs auf",
+    "filmBron": "Film von Varlaks — varlaks.no",
+    "feitHerkomstLabel": "Herkunft",
+    "feitHerkomstWaarde": "Skjerstadfjord, Norwegen",
+    "feitKeurmerkLabel": "Zertifikat",
+    "feitKeurmerkWaarde": "ASC und Bio",
+    "feitTeKoopLabel": "Erhältlich",
+    "feitTeKoopWaarde": "Laden, Markt, Voorschoten",
+    "bestelKnop": "Varlaks bestellen",
+    "slotTitle": "Varlaks abholen oder liefern lassen",
+    "slotText": "Täglich im Laden in der Herenstraat, mittwochs und samstags auf dem Markt in Leiden, freitags bei Hoogvliet in Voorschoten. Frischen Fisch liefern wir in Leiden, Leiderdorp, Voorschoten, Wassenaar und Leidschendam."
   },
   "assortimentPage": {
     "title": "Unser Sortiment",
@@ -242,7 +305,16 @@
     "terug": "Zurück",
     "dagprijs": "Tagespreis",
     "opAanvraag": "Preis auf Anfrage",
-    "telefoonLabel": "Telefon"
+    "telefoonLabel": "Telefon",
+    "sinds1938": "Seit 1938",
+    "slotTitel": "Kommen Sie vorbei — oder bestellen Sie vorab",
+    "slotTekst": "Herenstraat 48 in Leiden, dienstags bis samstags. Frischen Fisch und Fischplatten liefern wir in Leiden, Leiderdorp, Voorschoten, Wassenaar und Leidschendam.",
+    "labelGeneraties": "Generationen",
+    "labelWinkel": "Laden",
+    "labelEigenaar": "Inhaber",
+    "labelOpen": "Geöffnet",
+    "labelBezorgen": "Lieferung",
+    "waardeVier": "Vier"
   },
   "bezorgen": {
     "eyebrow": "Neu: bis an die Tür",

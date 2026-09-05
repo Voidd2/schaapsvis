@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
-import { Sectie, Kop, Vragen, Kruimels } from "@/components/ui/Sectie";
+import { Sectie, Kop, Vragen } from "@/components/ui/Sectie";
+import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { PostcodeCheck } from "@/components/bezorgen/PostcodeCheck";
 import { paginaMetadata, kruimelSchema, vraagSchema } from "@/lib/seo";
 import { BEDRIJF, euro, whatsappLink } from "@/lib/bedrijf";
@@ -51,32 +52,16 @@ export default async function BezorgenPage({
         ]}
       />
 
-      {/* ── Kop met postcodecheck ─────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "var(--navy)" }} className="py-14 md:py-20">
-        <div className="max-w-6xl mx-auto px-4 grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-16 items-start">
-          <div>
-            <Kruimels
-              donker
-              items={[
-                { naam: BEDRIJF.naamKort, href: `/${locale}` },
-                { naam: nav("bezorgen") },
-              ]}
-            />
-            <p className="kapitaal kapitaal-licht mb-3">{t("eyebrow")}</p>
-            <h1
-              className="text-[2.1rem] md:text-[3.1rem] mb-5"
-              style={{ color: "var(--cream)" }}
-            >
-              {t("kop")}
-            </h1>
-            <p
-              className="text-[1.05rem] leading-relaxed max-w-2xl"
-              style={{ color: "rgba(250,246,239,0.8)" }}
-            >
-              {t("inleiding")}
-            </p>
-          </div>
-
+      <PaginaKop
+        kruimels={[
+          { naam: BEDRIJF.naamKort, href: `/${locale}` },
+          { naam: nav("bezorgen") },
+        ]}
+        label={t("eyebrow")}
+        titel={t("kop")}
+        intro={t("inleiding")}
+        uitgelijnd="boven"
+        zijkant={
           <div
             className="p-6 md:p-7"
             style={{ backgroundColor: "var(--cream)", border: "1px solid var(--linen)" }}
@@ -87,8 +72,8 @@ export default async function BezorgenPage({
             </p>
             <PostcodeCheck />
           </div>
-        </div>
-      </section>
+        }
+      />
 
       {/* ── Wat wel en wat niet ───────────────────────────────────────────── */}
       <Sectie grond="papier">
@@ -230,33 +215,21 @@ export default async function BezorgenPage({
         <Vragen vragen={vragen} />
       </Sectie>
 
-      {/* ── Afsluiting ────────────────────────────────────────────────────── */}
-      <Sectie grond="navy" smal>
-        <h2 className="text-[1.8rem] mb-3" style={{ color: "var(--cream)" }}>
-          {t("ctaKop")}
-        </h2>
-        <p className="mb-7" style={{ color: "rgba(250,246,239,0.78)" }}>
-          {t("ctaTekst", { tijd: BEZORGING.uitersteBesteltijd })}
-        </p>
-        <div className="flex flex-wrap gap-3">
-          <Link href={`/${locale}/bestellen`} className="knop knop-rood">
-            {nav("bestellen")}
-          </Link>
-          <Link href={`/${locale}/visschalen`} className="knop knop-lijn-licht">
-            {nav("visschalen")}
-          </Link>
-          <a
-            href={whatsappLink(
-              "Hallo Schaap's Vishandel, ik heb een vraag over bezorgen."
-            )}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="knop knop-lijn-licht"
-          >
-            {g("whatsapp")}
-          </a>
-        </div>
-      </Sectie>
+      <PaginaSlot
+        titel={t("ctaKop")}
+        tekst={t("ctaTekst", { tijd: BEZORGING.uitersteBesteltijd })}
+        knoppen={[
+          { label: nav("bestellen"), href: `/${locale}/bestellen` },
+          { label: nav("visschalen"), href: `/${locale}/visschalen`, soort: "lijn" },
+          {
+            label: g("whatsapp"),
+            href: whatsappLink("Hallo Schaap's Vishandel, ik heb een vraag over bezorgen."),
+            extern: true,
+            soort: "lijn",
+          },
+        ]}
+      />
+
     </>
   );
 }

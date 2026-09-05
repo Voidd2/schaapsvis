@@ -1,9 +1,9 @@
-import Link from "next/link";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
-import { Sectie, Kop, Vragen, Kruimels } from "@/components/ui/Sectie";
+import { Sectie, Kop, Vragen } from "@/components/ui/Sectie";
+import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { VisschaalConfigurator } from "./VisschaalConfigurator";
 import { paginaMetadata, kruimelSchema, vraagSchema } from "@/lib/seo";
 import { BEDRIJF, euro, whatsappLink } from "@/lib/bedrijf";
@@ -88,49 +88,16 @@ export default async function VisschalenPage({
         ]}
       />
 
-      {/* ── Kop ───────────────────────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "var(--navy)" }} className="pt-10 pb-14 md:pt-12 md:pb-20">
-        <div className="max-w-6xl mx-auto px-4">
-          <Kruimels
-            donker
-            items={[
-              { naam: BEDRIJF.naamKort, href: `/${locale}` },
-              { naam: nav("visschalen") },
-            ]}
-          />
-          <div className="grid lg:grid-cols-[1.35fr_0.65fr] gap-10 lg:gap-16 items-end">
-            <div>
-              <p className="kapitaal kapitaal-licht mb-4">{t("eyebrow")}</p>
-              <h1
-                className="text-[2.3rem] md:text-[3.4rem] leading-[1.06] mb-6"
-                style={{ color: "var(--cream)" }}
-              >
-                {t("kop")}
-              </h1>
-              <p
-                className="text-[1.05rem] leading-relaxed max-w-2xl"
-                style={{ color: "rgba(250,246,239,0.82)" }}
-              >
-                {t("inleiding")}
-              </p>
-            </div>
-
-            {/* Het cijfer waar het om draait, groot gezet. */}
-            <div style={{ borderTop: "2px solid var(--gold)" }} className="pt-5">
-              <p className="kapitaal kapitaal-licht mb-2">{g("vanaf")}</p>
-              <p
-                className="bedrag text-[3rem] leading-none"
-                style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
-              >
-                {euro(GOEDKOOPSTE)}
-              </p>
-              <p className="text-[0.9rem] mt-2" style={{ color: "rgba(250,246,239,0.65)" }}>
-                {t("per100")}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PaginaKop
+        kruimels={[
+          { naam: BEDRIJF.naamKort, href: `/${locale}` },
+          { naam: nav("visschalen") },
+        ]}
+        label={t("eyebrow")}
+        titel={t("kop")}
+        intro={t("inleiding")}
+        cijfer={{ label: g("vanaf"), waarde: euro(GOEDKOOPSTE), onder: t("per100") }}
+      />
 
       {/* ── Samenstellen ──────────────────────────────────────────────────── */}
       <Sectie grond="papier" id="samenstellen">
@@ -164,31 +131,21 @@ export default async function VisschalenPage({
         <Vragen vragen={vragen} />
       </Sectie>
 
-      {/* ── Afsluiting ────────────────────────────────────────────────────── */}
-      <Sectie grond="navy" smal>
-        <h2 className="text-[1.8rem] mb-3" style={{ color: "var(--cream)" }}>
-          {t("kop")}
-        </h2>
-        <p className="mb-7 leading-relaxed" style={{ color: "rgba(250,246,239,0.78)" }}>
-          {t("vergelijkingKort", { markt: euro(MARKT.goedkoopstePerPersoon) })}
-        </p>
-        <div className="flex flex-wrap gap-3">
-          <a href="#samenstellen" className="knop knop-rood">
-            {t("naarBestellen")}
-          </a>
-          <Link href={`/${locale}/bezorgen`} className="knop knop-lijn-licht">
-            {nav("bezorgen")}
-          </Link>
-          <a
-            href={whatsappLink("Hallo Schaap's Vishandel, ik heb een vraag over een visschaal.")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="knop knop-lijn-licht"
-          >
-            {g("whatsapp")}
-          </a>
-        </div>
-      </Sectie>
+      <PaginaSlot
+        titel={t("kop")}
+        tekst={t("vergelijkingKort", { markt: euro(MARKT.goedkoopstePerPersoon) })}
+        knoppen={[
+          { label: t("naarBestellen"), href: "#samenstellen", extern: true },
+          { label: nav("bezorgen"), href: `/${locale}/bezorgen`, soort: "lijn" },
+          {
+            label: g("whatsapp"),
+            href: whatsappLink("Hallo Schaap's Vishandel, ik heb een vraag over een visschaal."),
+            extern: true,
+            soort: "lijn",
+          },
+        ]}
+      />
+
     </>
   );
 }

@@ -101,7 +101,70 @@
     "compareTitle": "Varlaks vs. Reguliere zalm",
     "ctaTitle": "Dagelijks vers verkrijgbaar",
     "ctaText": "Varlaks zalm is dagelijks verkrijgbaar in onze winkel aan de Herenstraat, op de markt in Leiden (woensdag & zaterdag) en bij Hoogvliet Voorschoten op vrijdag.",
-    "ctaButton": "Bezoek ons"
+    "ctaButton": "Bezoek ons",
+    "label": "Biologische zalm uit Noord-Noorwegen",
+    "storyTitle": "Waarom wij juist deze zalm verkopen",
+    "welTitle": "Wat u krijgt",
+    "wel": [
+      {
+        "t": "Skjerstadfjorden, Nordland",
+        "d": "Boven de poolcirkel, bij Bodø. Koud, schoon en zuurstofrijk water — een van de weinige plekken waar zalm langzaam mag groeien."
+      },
+      {
+        "t": "Wenberg en Edelfarm",
+        "d": "Twee familiebedrijven: Wenberg Fiskeoppdrett in Fauske en Edelfarm in Saltdal. Weinig vis per kooi, geen grootschalige industrie."
+      },
+      {
+        "t": "ASC-gecertificeerd",
+        "d": "De internationale standaard voor verantwoorde visteelt. Seafood Watch geeft de Skjerstadfjorden zijn hoogste milieubeoordeling."
+      },
+      {
+        "t": "Van eitje tot filet te volgen",
+        "d": "Elke stap is aantoonbaar. Verwerking bij Salten Salmon in Bodø, gecontroleerd door onafhankelijke certificeerders."
+      },
+      {
+        "t": "Laser in plaats van chemie",
+        "d": "Onderwatercamera's kijken dag en nacht mee. Zit er een zeeluis, dan gaat er een laserpuls op af. Er komt niets in het water."
+      },
+      {
+        "t": "Kleur uit Panaferd-AX",
+        "d": "Bijna alle gekweekte zalm kleurt roze door synthetische astaxanthine uit de petrochemie. Varlaks gebruikt de natuurlijke variant, uit gefermenteerde bacteriën."
+      }
+    ],
+    "nietTitle": "Wat er niet in zit",
+    "niet": [
+      {
+        "t": "Antibiotica",
+        "d": "Het schone water en de lage bezetting maken ze overbodig."
+      },
+      {
+        "t": "Chemische luisbestrijding",
+        "d": "Geen pesticiden en geen kunstmatige middelen in het water."
+      },
+      {
+        "t": "GMO",
+        "d": "Gewone zalm, niet genetisch aangepast."
+      },
+      {
+        "t": "Hormonen",
+        "d": "Groeit in zijn eigen tempo, niet kunstmatig versneld."
+      },
+      {
+        "t": "Synthetische kleurstof",
+        "d": "Geen petrochemische astaxanthine."
+      }
+    ],
+    "filmTitle": "Zo groeit deze zalm op",
+    "filmBron": "Film van Varlaks — varlaks.no",
+    "feitHerkomstLabel": "Herkomst",
+    "feitHerkomstWaarde": "Skjerstadfjorden, Noorwegen",
+    "feitKeurmerkLabel": "Keurmerk",
+    "feitKeurmerkWaarde": "ASC en biologisch",
+    "feitTeKoopLabel": "Te koop",
+    "feitTeKoopWaarde": "Winkel, markt, Voorschoten",
+    "bestelKnop": "Varlaks bestellen",
+    "slotTitle": "Varlaks halen of laten bezorgen",
+    "slotText": "Dagelijks in de winkel aan de Herenstraat, woensdag en zaterdag op de markt in Leiden, vrijdag bij Hoogvliet in Voorschoten. Verse vis bezorgen we in Leiden, Leiderdorp, Voorschoten, Wassenaar en Leidschendam."
   },
   "assortimentPage": {
     "title": "Ons Assortiment",
@@ -242,7 +305,16 @@
     "terug": "Terug",
     "dagprijs": "Dagprijs",
     "opAanvraag": "Prijs op aanvraag",
-    "telefoonLabel": "Telefoon"
+    "telefoonLabel": "Telefoon",
+    "sinds1938": "Sinds 1938",
+    "slotTitel": "Kom langs — of bestel vooruit",
+    "slotTekst": "Herenstraat 48 in Leiden, dinsdag tot en met zaterdag. Verse vis en visschalen bezorgen we in Leiden, Leiderdorp, Voorschoten, Wassenaar en Leidschendam.",
+    "labelGeneraties": "Generaties",
+    "labelWinkel": "Winkel",
+    "labelEigenaar": "Eigenaar",
+    "labelOpen": "Open",
+    "labelBezorgen": "Bezorgen",
+    "waardeVier": "Vier"
   },
   "bezorgen": {
     "eyebrow": "Sinds kort ook aan huis",

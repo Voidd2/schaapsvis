@@ -17,6 +17,9 @@
  * ── Waar de prijzen op gebaseerd zijn ──────────────────────────────────────
  *
  * Uitgangspunt: overal iets ónder de markt zitten, en dat kunnen navertellen.
+ * Vergeleken wordt alleen met ándere vishandels. Supermarkten tellen niet mee:
+ * dat is een ander product en een andere kwaliteit, en dus geen eerlijke maat.
+ *
  * Prijzen per 100 gram bij andere vishandels (opgehaald september 2026):
  *
  *   Gerookte zalm        € 3,50 (Visspecialist Andre) · € 4,29 (Vismarine)
@@ -24,7 +27,6 @@
  *   Hollandse garnalen   € 4,50 (Andre) · € 6,49 (Vismarine)
  *   Gerookte paling      € 5,50 (Andre) · € 7,00 (Stevens) · € 10,50 (Krol)
  *   Gerookte makreel     € 2,75 (Andre) · € 5,50 (Peter Tol)
- *   Surimi krab          € 1,59 (Albert Heijn) · € 1,75 (Jumbo)
  *
  * En complete schotels, per persoon:
  *
@@ -160,8 +162,9 @@ export const ONDERDELEN: Onderdeel[] = [
   {
     id: "surimi-krab",
     naam: "Surimi krab",
+    // EIGENAAR: nog jouw prijs invullen. Bewust geen supermarktprijs als
+    // ijkpunt genomen — dat is een ander product en een andere kwaliteit.
     prijs: 1.5,
-    marktprijs: 1.59,
     groep: "schaaldieren",
   },
   {

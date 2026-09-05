@@ -4,7 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
 import { SeizoensBanner } from "@/components/shared/SeizoensBanner";
-import { Sectie, Kruimels } from "@/components/ui/Sectie";
+import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { AssortimentFilter } from "./AssortimentFilter";
 import { paginaMetadata, kruimelSchema } from "@/lib/seo";
 import { BEDRIJF } from "@/lib/bedrijf";
@@ -68,68 +68,44 @@ export default async function AssortimentPage({
 
       <SeizoensBanner locale={locale} />
 
-      {/* ── Kop ───────────────────────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "var(--navy)" }} className="py-12 md:py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <Kruimels
-            donker
-            items={[{ naam: BEDRIJF.naamKort, href: `/${locale}` }, { naam: nav("assortiment") }]}
-          />
-          <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-8 lg:gap-16 items-end">
-            <div>
-              <p className="kapitaal kapitaal-licht mb-3">{h("assortimentLabel")}</p>
-              <h1 className="text-[2.1rem] md:text-[2.9rem] mb-4" style={{ color: "var(--cream)" }}>
-                {t("title")}
-              </h1>
-              <p
-                className="text-[1.05rem] leading-relaxed max-w-2xl"
-                style={{ color: "rgba(250,246,239,0.82)" }}
-              >
-                {t("sub")}
-              </p>
-            </div>
-
-            <div style={{ borderTop: "1px solid rgba(250,246,239,0.3)" }} className="pt-4">
-              <p className="kapitaal kapitaal-licht mb-2">{h("bezorgLabel")}</p>
-              <p className="text-[0.95rem] leading-relaxed" style={{ color: "rgba(250,246,239,0.82)" }}>
-                {h("bezorgWel1")}. {h("bezorgNiet1")} — {h("bezorgNietKop").toLowerCase()}.
-              </p>
-              <Link
-                href={`/${locale}/bezorgen`}
-                className="inline-block mt-3 text-sm font-semibold underline underline-offset-4"
-                style={{ color: "var(--cream)" }}
-              >
-                {h("bezorgLink")} &rarr;
-              </Link>
-            </div>
+      <PaginaKop
+        kruimels={[{ naam: BEDRIJF.naamKort, href: `/${locale}` }, { naam: nav("assortiment") }]}
+        label={h("assortimentLabel")}
+        titel={t("title")}
+        intro={t("sub")}
+        knoppen={[
+          { label: nav("bestellen"), href: `/${locale}/bestellen` },
+          { label: nav("visschalen"), href: `/${locale}/visschalen`, soort: "lijn" },
+        ]}
+        zijkant={
+          <div style={{ borderTop: "1px solid rgba(250,246,239,0.3)" }} className="pt-4">
+            <p className="kapitaal kapitaal-licht mb-2">{h("bezorgLabel")}</p>
+            <p className="text-[0.95rem] leading-relaxed" style={{ color: "rgba(250,246,239,0.82)" }}>
+              {h("bezorgWel1")}. {h("bezorgNiet1")} — {h("bezorgNietKop").toLowerCase()}.
+            </p>
+            <Link
+              href={`/${locale}/bezorgen`}
+              className="inline-block mt-3 text-sm font-semibold underline underline-offset-4"
+              style={{ color: "var(--cream)" }}
+            >
+              {h("bezorgLink")} &rarr;
+            </Link>
           </div>
-        </div>
-      </section>
+        }
+      />
 
       <AssortimentFilter />
 
-      {/* ── Afsluiting ────────────────────────────────────────────────────── */}
-      <Sectie grond="zand">
-        <div className="grid md:grid-cols-[1fr_auto] gap-6 md:items-end">
-          <div>
-            <h2 className="text-[1.6rem] mb-3">{h("bezorgKop")}</h2>
-            <p className="lees" style={{ color: "var(--charcoal)" }}>
-              {h("bezorgTekst")}
-            </p>
-            <p className="mt-3 text-[0.95rem]" style={{ color: "var(--charcoal)" }}>
-              {bezorgdagenTekst()}.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <Link href={`/${locale}/bestellen`} className="knop knop-rood">
-              {nav("bestellen")}
-            </Link>
-            <Link href={`/${locale}/bezoek-ons`} className="knop knop-lijn">
-              {nav("locaties")}
-            </Link>
-          </div>
-        </div>
-      </Sectie>
+      <PaginaSlot
+        titel={h("bezorgKop")}
+        tekst={`${h("bezorgTekst")} ${bezorgdagenTekst()}.`}
+        knoppen={[
+          { label: nav("bestellen"), href: `/${locale}/bestellen` },
+          { label: nav("visschalen"), href: `/${locale}/visschalen`, soort: "lijn" },
+          { label: nav("locaties"), href: `/${locale}/bezoek-ons`, soort: "lijn" },
+        ]}
+      />
+
     </>
   );
 }

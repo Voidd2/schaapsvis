@@ -2,6 +2,9 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { googleRating, googleReviewCount } from "@/lib/reviews";
+import { Sectie, Kop, Vragen } from "@/components/ui/Sectie";
+import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
+import { BEDRIJF, ADRES_REGEL, VERKOOPPUNTEN } from "@/lib/bedrijf";
 import { eenTaalMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -81,231 +84,122 @@ export default async function ViswinkelLeidenPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      {/* Hero ─────────────────────────────────────────────────────────────── */}
-      <section
-        style={{
-          backgroundColor: "var(--navy-dark)",
-          backgroundImage: "url(/images/scene-vis.svg)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundBlendMode: "multiply",
-        }}
-        className="py-16 px-6"
-      >
-        <div className="max-w-5xl mx-auto">
-          <p className="text-xs tracking-[0.25em] uppercase mb-4 opacity-60" style={{ color: "var(--sand)" }}>
-            Herenstraat 48 · Leiden
-          </p>
-          <h1
-            className="text-4xl md:text-5xl font-bold mb-5 leading-tight"
-            style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
-          >
-            Viswinkel in Leiden —<br />verse vis sinds 1938
-          </h1>
-          <p className="text-lg leading-relaxed max-w-2xl mb-8" style={{ color: "rgba(250,246,239,0.78)" }}>
-            Vier generaties vakmanschap op de Herenstraat. Dagverse kibbeling, haring, Hollandse
-            garnalen en biologische zalm — direct van leverancier naar toonbank, zonder omwegen.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <Link
-              href={`/${locale}/bestellen`}
-              className="font-semibold px-6 py-3 text-white transition-opacity hover:opacity-90"
-              style={{ backgroundColor: "var(--salmon)" }}
-            >
-              Bestel vooruit
-            </Link>
-            <a
-              href="tel:+31715149802"
-              className="font-semibold px-6 py-3 transition-opacity hover:opacity-80"
-              style={{ backgroundColor: "rgba(255,255,255,0.12)", color: "var(--cream)", border: "1px solid rgba(255,255,255,0.25)" }}
-            >
-              071 514 9802
-            </a>
-            <a
-              href="https://wa.me/31715149802"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold px-6 py-3 transition-opacity hover:opacity-80"
-              style={{ backgroundColor: "var(--seafoam)", color: "var(--cream)" }}
-            >
-              WhatsApp
-            </a>
-          </div>
-        </div>
-      </section>
+      <PaginaKop
+        kruimels={[
+          { naam: BEDRIJF.naamKort, href: `/${locale}` },
+          { naam: "Viswinkel Leiden" },
+        ]}
+        label={ADRES_REGEL}
+        titel="Viswinkel in Leiden — verse vis sinds 1938"
+        intro="Vier generaties vakmanschap op de Herenstraat. Dagverse kibbeling, haring, Hollandse garnalen en biologische zalm — direct van leverancier naar toonbank, zonder omwegen."
+        knoppen={[
+          { label: "Verse vis bestellen", href: `/${locale}/bestellen` },
+          { label: "Visschaal samenstellen", href: `/${locale}/visschalen`, soort: "lijn" },
+          { label: BEDRIJF.telefoon.weergave, href: `tel:${BEDRIJF.telefoon.e164}`, extern: true, soort: "lijn" },
+        ]}
+        feiten={[
+          { label: "Sinds", waarde: "1938 — vier generaties" },
+          { label: "Keurmerken", waarde: "MSC · ASC · biologisch" },
+          { label: "Google", waarde: `${googleRating} van 5 (${googleReviewCount})` },
+        ]}
+      />
 
-      {/* USP strip ───────────────────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "var(--gold)" }} className="py-5 px-6">
-        <div className="max-w-5xl mx-auto flex flex-wrap gap-6 justify-between items-center">
+      {/* ── Wat er ligt ───────────────────────────────────────────────────── */}
+      <Sectie grond="papier">
+        <Kop
+          label="In de toonbank"
+          titel="Wat u bij ons vindt"
+          intro="De aanvoer bepaalt het aanbod, dus dit wisselt. Dit is waar we het vaakst om gevraagd worden."
+        />
+        <ul style={{ borderTop: "1px solid var(--linen)" }}>
           {[
-            "Sinds 1938 — vier generaties",
-            "Dagvers van de veiling",
-            "MSC · ASC · Biologisch",
-            `${googleRating} van 5 op Google (${googleReviewCount} beoordelingen)`,
-            "Drie verkooppunten in de regio",
-          ].map((u) => (
-            <span key={u} className="text-sm font-semibold" style={{ color: "var(--navy-dark)" }}>
-              {u}
-            </span>
-          ))}
-        </div>
-      </section>
-
-      {/* Producten ──────────────────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "var(--cream)" }} className="py-16 px-6">
-        <div className="max-w-5xl mx-auto">
-          <h2
-            className="text-3xl font-bold mb-10 text-center"
-            style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
-          >
-            Wat vindt u bij ons?
-          </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { naam: "Kibbeling", omschrijving: "Knapperig gebakken kabeljauw of MSC-gecertificeerde Alaska koolvis — dé Hollandse klassieker.", href: `/${locale}/assortiment`, badge: "MSC" },
-              { naam: "Hollandse Haring", omschrijving: "Rauwe Hollandse Nieuwe haring op een zacht broodje met ui en augurk. Half juni is het feest.", href: `/${locale}/assortiment`, badge: null },
-              { naam: "Hollandse Garnalen", omschrijving: "Dagverse Noordzeegarnalen (Crangon crangon) van Heiploeg en SOLT, MSC-gecertificeerd van de Waddenkust.", href: `/${locale}/assortiment`, badge: "MSC" },
-              { naam: "Varlaks Biologische Zalm", omschrijving: "Premium biologische zalmfilet uit Noord-Noorwegen, boven de poolcirkel gekweekt. ASC gecertificeerd.", href: `/${locale}/varlaks`, badge: "BIO · ASC" },
-              { naam: "Gerookte Noorse Zalm", omschrijving: "Koud gerookte zalm van High Seas (Den Heijer), lang gesneden in dunne plakken. ASC gecertificeerd.", href: `/${locale}/assortiment`, badge: "ASC" },
-              { naam: "Lekkerbek & Vissoep", omschrijving: "Verse wijting in luchtig beslag, en huisgemaakte vissoep — elke dag vers bereid in de winkel.", href: `/${locale}/assortiment`, badge: null },
-            ].map(({ naam, omschrijving, href, badge }) => (
+            { naam: "Kibbeling", omschrijving: "Knapperig gebakken kabeljauw of MSC-gecertificeerde Alaska koolvis — de Hollandse klassieker.", href: `/${locale}/assortiment`, badge: "MSC" },
+            { naam: "Hollandse haring", omschrijving: "Rauwe Hollandse Nieuwe op een zacht broodje met ui en augurk. Half juni is het feest.", href: `/${locale}/assortiment`, badge: null },
+            { naam: "Hollandse garnalen", omschrijving: "Dagverse Noordzeegarnalen van Heiploeg en SOLT, MSC-gecertificeerd van de Waddenkust.", href: `/${locale}/assortiment`, badge: "MSC" },
+            { naam: "Varlaks biologische zalm", omschrijving: "Zalmfilet uit Noord-Noorwegen, boven de poolcirkel gekweekt.", href: `/${locale}/varlaks`, badge: "BIO · ASC" },
+            { naam: "Gerookte Noorse zalm", omschrijving: "Koud gerookt van High Seas, lang gesneden in dunne plakken.", href: `/${locale}/assortiment`, badge: "ASC" },
+            { naam: "Lekkerbek en vissoep", omschrijving: "Verse wijting in luchtig beslag, en huisgemaakte soep — elke dag vers bereid in de winkel.", href: `/${locale}/assortiment`, badge: null },
+          ].map(({ naam, omschrijving, href, badge }) => (
+            <li key={naam} style={{ borderBottom: "1px solid var(--linen)" }}>
               <Link
-                key={naam}
                 href={href}
-                className="block p-6 group transition-shadow hover:shadow-md"
-                style={{ backgroundColor: "white", border: "1px solid var(--sand)" }}
+                className="group grid sm:grid-cols-[15rem_1fr] gap-x-8 gap-y-1 py-5"
               >
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="font-bold text-lg leading-tight" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
+                <span className="flex items-baseline gap-3">
+                  <span
+                    className="text-[1.15rem] group-hover:underline underline-offset-4"
+                    style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}
+                  >
                     {naam}
-                  </h3>
+                  </span>
                   {badge && (
-                    <span className="text-[10px] font-bold px-2 py-0.5 ml-2 flex-shrink-0" style={{ backgroundColor: "var(--seafoam)", color: "white" }}>
+                    <span className="kapitaal shrink-0" style={{ color: "var(--seafoam)" }}>
                       {badge}
                     </span>
                   )}
-                </div>
-                <p className="text-sm leading-relaxed" style={{ color: "var(--charcoal)", opacity: 0.75 }}>
+                </span>
+                <span className="text-[0.98rem] leading-relaxed" style={{ color: "var(--charcoal)" }}>
                   {omschrijving}
-                </p>
+                </span>
               </Link>
-            ))}
-          </div>
-          <div className="text-center mt-8">
-            <Link
-              href={`/${locale}/assortiment`}
-              className="text-sm font-semibold underline underline-offset-4 transition-opacity hover:opacity-70"
-              style={{ color: "var(--navy)" }}
-            >
-              Volledig assortiment bekijken →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Locaties ────────────────────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "var(--navy)" }} className="py-16 px-6">
-        <div className="max-w-5xl mx-auto">
-          <h2
-            className="text-3xl font-bold mb-10"
-            style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
-          >
-            Waar vindt u ons?
-          </h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                naam: "Winkel — Herenstraat",
-                adres: "Herenstraat 48, 2313 AL Leiden",
-                uren: "Di–vr 09:00–18:00 · Za 09:00–17:00",
-                maps: "https://maps.google.com/?q=Herenstraat+48+Leiden",
-              },
-              {
-                naam: "Markt Leiden",
-                adres: "Nieuwe Rijn, centrum Leiden",
-                uren: "Wo + za 08:30–17:00",
-                maps: "https://maps.google.com/?q=Nieuwe+Rijn+Leiden",
-              },
-              {
-                naam: "Voorschoten",
-                adres: "Bij Hoogvliet Voorschoten",
-                uren: "Elke vrijdag",
-                maps: "https://maps.google.com/?q=Hoogvliet+Voorschoten",
-              },
-            ].map(({ naam, adres, uren, maps }) => (
-              <div key={naam} className="p-6" style={{ backgroundColor: "rgba(255,255,255,0.07)" }}>
-                <h3 className="font-bold text-lg mb-2" style={{ color: "var(--gold)", fontFamily: "var(--font-display)" }}>
-                  {naam}
-                </h3>
-                <p className="text-sm mb-1" style={{ color: "rgba(250,246,239,0.75)" }}>{adres}</p>
-                <p className="text-sm mb-4" style={{ color: "rgba(250,246,239,0.6)" }}>{uren}</p>
-                <a
-                  href={maps}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs font-semibold underline underline-offset-2 transition-opacity hover:opacity-70"
-                  style={{ color: "var(--salmon)" }}
-                >
-                  Route →
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ ─────────────────────────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "var(--cream)" }} className="py-16 px-6">
-        <div className="max-w-3xl mx-auto">
-          <h2
-            className="text-3xl font-bold mb-10"
-            style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}
-          >
-            Veelgestelde vragen
-          </h2>
-          <div className="space-y-6">
-            {faqSchema.mainEntity.map((faq) => (
-              <div key={faq.name} className="border-b pb-6" style={{ borderColor: "var(--sand)" }}>
-                <h3 className="font-bold mb-2" style={{ color: "var(--navy)" }}>
-                  {faq.name}
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "var(--charcoal)", opacity: 0.8 }}>
-                  {faq.acceptedAnswer.text}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA ─────────────────────────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "var(--navy-dark)" }} className="py-14 px-6 text-center">
-        <h2
-          className="text-3xl font-bold mb-4"
-          style={{ color: "var(--cream)", fontFamily: "var(--font-display)" }}
+            </li>
+          ))}
+        </ul>
+        <Link
+          href={`/${locale}/assortiment`}
+          className="inline-block mt-7 font-semibold underline underline-offset-4"
+          style={{ color: "var(--navy)" }}
         >
-          Bestel vooruit of kom langs
-        </h2>
-        <p className="mb-8 max-w-xl mx-auto" style={{ color: "rgba(250,246,239,0.7)" }}>
-          Reserveer uw vis online of bel/app ons direct. Wij zorgen dat het klaarstaat.
-        </p>
-        <div className="flex flex-wrap justify-center gap-4">
-          <Link
-            href={`/${locale}/bestellen`}
-            className="font-semibold px-8 py-3.5 text-white transition-opacity hover:opacity-90"
-            style={{ backgroundColor: "var(--salmon)" }}
-          >
-            Online bestellen →
-          </Link>
-          <a
-            href="tel:+31715149802"
-            className="font-semibold px-8 py-3.5 transition-opacity hover:opacity-80"
-            style={{ backgroundColor: "rgba(255,255,255,0.1)", color: "var(--cream)", border: "1px solid rgba(255,255,255,0.2)" }}
-          >
-            071 514 9802
-          </a>
-        </div>
-      </section>
+          Het hele assortiment &rarr;
+        </Link>
+      </Sectie>
+
+      {/* ── Waar u ons vindt ──────────────────────────────────────────────── */}
+      <Sectie grond="zand">
+        <Kop label="Drie plekken" titel="Waar u ons vindt" />
+        <ul className="grid sm:grid-cols-3 gap-x-10 gap-y-8">
+          {VERKOOPPUNTEN.filter((punt) => punt.id !== "markt-woensdag").map((punt) => (
+            <li key={punt.id} className="pt-4" style={{ borderTop: "2px solid var(--navy)" }}>
+              <h3 className="text-[1.15rem] mb-1">{punt.naam}</h3>
+              <p style={{ color: "var(--charcoal)" }}>
+                {punt.adres}
+                <br />
+                {punt.plaats}
+              </p>
+              <p className="text-sm mt-1" style={{ color: "var(--grijs)" }}>
+                {punt.dagen}
+              </p>
+              <a
+                href={punt.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mt-2 text-sm font-semibold underline underline-offset-4"
+                style={{ color: "var(--navy)" }}
+              >
+                Route &rarr;
+              </a>
+            </li>
+          ))}
+        </ul>
+      </Sectie>
+
+      {/* ── Vragen ───────────────────────────────────────────────────────── */}
+      <Sectie grond="papier" smal>
+        <Kop titel="Veelgestelde vragen" />
+        <Vragen
+          vragen={faqSchema.mainEntity.map((q) => ({ v: q.name, a: q.acceptedAnswer.text }))}
+        />
+      </Sectie>
+
+      <PaginaSlot
+        titel="Kom langs, of laat het brengen"
+        tekst="De winkel is dinsdag tot en met zaterdag open. Liever thuis? We bezorgen verse vis en visschalen in Leiden en vier gemeenten eromheen."
+        knoppen={[
+          { label: "Verse vis bestellen", href: `/${locale}/bestellen` },
+          { label: "Visschaal samenstellen", href: `/${locale}/visschalen`, soort: "lijn" },
+          { label: "Openingstijden en route", href: `/${locale}/bezoek-ons`, soort: "lijn" },
+        ]}
+      />
     </>
   );
 }

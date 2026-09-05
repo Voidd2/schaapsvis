@@ -101,7 +101,70 @@
     "compareTitle": "Varlaks vs. Regular salmon",
     "ctaTitle": "Fresh daily",
     "ctaText": "Varlaks salmon is available daily in our shop on Herenstraat, at the Leiden market (Wednesday & Saturday) and at Hoogvliet Voorschoten on Friday.",
-    "ctaButton": "Visit us"
+    "ctaButton": "Visit us",
+    "label": "Organic salmon from northern Norway",
+    "storyTitle": "Why we sell this salmon in particular",
+    "welTitle": "What you get",
+    "wel": [
+      {
+        "t": "Skjerstadfjorden, Nordland",
+        "d": "Above the Arctic Circle near Bodø. Cold, clean, oxygen-rich water — one of the few places where salmon is allowed to grow slowly."
+      },
+      {
+        "t": "Wenberg and Edelfarm",
+        "d": "Two family businesses: Wenberg Fiskeoppdrett in Fauske and Edelfarm in Saltdal. Few fish per pen, not large-scale industry."
+      },
+      {
+        "t": "ASC certified",
+        "d": "The international standard for responsible aquaculture. Seafood Watch gives Skjerstadfjorden its highest environmental rating."
+      },
+      {
+        "t": "Traceable from egg to fillet",
+        "d": "Every step is documented. Processed at Salten Salmon in Bodø, checked by independent certifiers."
+      },
+      {
+        "t": "Lasers instead of chemicals",
+        "d": "Underwater cameras watch day and night. Spot a sea louse and a laser pulse deals with it. Nothing goes into the water."
+      },
+      {
+        "t": "Colour from Panaferd-AX",
+        "d": "Nearly all farmed salmon turns pink from synthetic astaxanthin made from petrochemicals. Varlaks uses the natural version, grown from fermented bacteria."
+      }
+    ],
+    "nietTitle": "What is not in it",
+    "niet": [
+      {
+        "t": "Antibiotics",
+        "d": "The clean water and low stocking density make them unnecessary."
+      },
+      {
+        "t": "Chemical lice treatment",
+        "d": "No pesticides and no artificial agents in the water."
+      },
+      {
+        "t": "GMO",
+        "d": "Ordinary salmon, not genetically modified."
+      },
+      {
+        "t": "Hormones",
+        "d": "Grows at its own pace, not artificially sped up."
+      },
+      {
+        "t": "Synthetic colouring",
+        "d": "No petrochemical astaxanthin."
+      }
+    ],
+    "filmTitle": "How this salmon grows up",
+    "filmBron": "Film by Varlaks — varlaks.no",
+    "feitHerkomstLabel": "Origin",
+    "feitHerkomstWaarde": "Skjerstadfjorden, Norway",
+    "feitKeurmerkLabel": "Certification",
+    "feitKeurmerkWaarde": "ASC and organic",
+    "feitTeKoopLabel": "Available at",
+    "feitTeKoopWaarde": "Shop, market, Voorschoten",
+    "bestelKnop": "Order Varlaks",
+    "slotTitle": "Collect Varlaks or have it delivered",
+    "slotText": "Every day in the shop on Herenstraat, Wednesday and Saturday at the market in Leiden, Friday at Hoogvliet in Voorschoten. We deliver fresh fish in Leiden, Leiderdorp, Voorschoten, Wassenaar and Leidschendam."
   },
   "assortimentPage": {
     "title": "Our Products",
@@ -242,7 +305,16 @@
     "terug": "Back",
     "dagprijs": "Market price",
     "opAanvraag": "Price on request",
-    "telefoonLabel": "Phone"
+    "telefoonLabel": "Phone",
+    "sinds1938": "Since 1938",
+    "slotTitel": "Come by — or order ahead",
+    "slotTekst": "Herenstraat 48 in Leiden, Tuesday to Saturday. We deliver fresh fish and fish platters in Leiden, Leiderdorp, Voorschoten, Wassenaar and Leidschendam.",
+    "labelGeneraties": "Generations",
+    "labelWinkel": "Shop",
+    "labelEigenaar": "Owner",
+    "labelOpen": "Open",
+    "labelBezorgen": "Delivery",
+    "waardeVier": "Four"
   },
   "bezorgen": {
     "eyebrow": "New: to your door",

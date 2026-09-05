@@ -43,6 +43,12 @@
   /* ── Maatvoering ────────────────────────────────────────────────────────── */
   --lijn: 1px solid var(--linen);
   --lijn-donker: 1px solid rgba(250, 246, 239, 0.22);
+
+  /* Hoogte van de plakkende kop: informatiebalk (2rem) plus de balk met de
+     naam en de navigatie (4.4rem). Een tweede plakkende balk eronder — de
+     maandbalk van de viskalender — hangt hieraan, en een sectie waar je met
+     een ankerlink naartoe springt houdt hier zijn marge van. */
+  --kop-hoogte: 6.4rem;
 }
 
 /* Alles wat de standaardopmaak van de browser bijstelt hoort in de base-laag.
@@ -55,6 +61,13 @@
     font-size: 17px;
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+  }
+
+  /* Springt iemand naar een sectie, dan mag die niet onder de plakkende kop
+     verdwijnen. */
+  section[id],
+  article[id] {
+    scroll-margin-top: calc(var(--kop-hoogte) + 3rem);
   }
 
   @media (max-width: 640px) {

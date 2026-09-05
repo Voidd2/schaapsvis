@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
 import { Sectie, Kop } from "@/components/ui/Sectie";
+import { PaginaSlot } from "@/components/ui/PaginaKop";
 import { PostcodeCheck } from "@/components/bezorgen/PostcodeCheck";
 import { SeizoensBanner } from "@/components/shared/SeizoensBanner";
-import { NewsletterSignup } from "@/components/shared/NewsletterSignup";
 import { paginaMetadata } from "@/lib/seo";
 import { BEDRIJF, VERKOOPPUNTEN, euro } from "@/lib/bedrijf";
 import { BEZORGING, GEMEENTEN, bezorgdagenTekst } from "@/lib/bezorging";
@@ -452,28 +452,30 @@ export default async function HomePage({
           ))}
         </ul>
 
-        <div
-          className="mt-10 pt-8 grid md:grid-cols-[1fr_auto] gap-6 md:items-center"
-          style={{ borderTop: "1px solid var(--linen)" }}
-        >
-          <p style={{ color: "var(--charcoal)" }}>
-            <a
-              href={`tel:${BEDRIJF.telefoon.e164}`}
-              className="font-semibold underline underline-offset-4"
-              style={{ color: "var(--navy)" }}
-            >
-              {g("bellen", { nummer: BEDRIJF.telefoon.weergave })}
-            </a>{" "}
-            &middot;{" "}
-            <Link href={`/${locale}/bezoek-ons`} className="underline underline-offset-4">
-              {nav("locaties")}
-            </Link>
-          </p>
-          <div className="md:w-[22rem]">
-            <NewsletterSignup />
-          </div>
-        </div>
+        <p className="mt-10 pt-8" style={{ borderTop: "1px solid var(--linen)", color: "var(--charcoal)" }}>
+          <a
+            href={`tel:${BEDRIJF.telefoon.e164}`}
+            className="font-semibold underline underline-offset-4"
+            style={{ color: "var(--navy)" }}
+          >
+            {g("bellen", { nummer: BEDRIJF.telefoon.weergave })}
+          </a>{" "}
+          &middot;{" "}
+          <Link href={`/${locale}/bezoek-ons`} className="underline underline-offset-4">
+            {nav("locaties")}
+          </Link>
+        </p>
       </Sectie>
+
+      <PaginaSlot
+        titel={g("slotTitel")}
+        tekst={g("slotTekst")}
+        knoppen={[
+          { label: nav("visschalen"), href: `/${locale}/visschalen` },
+          { label: nav("bestellen"), href: `/${locale}/bestellen`, soort: "lijn" },
+          { label: nav("locaties"), href: `/${locale}/bezoek-ons`, soort: "lijn" },
+        ]}
+      />
     </>
   );
 }

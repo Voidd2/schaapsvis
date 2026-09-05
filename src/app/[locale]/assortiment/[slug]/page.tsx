@@ -12,6 +12,10 @@ import {
   type Categorie,
 } from "@/lib/assortiment-data";
 import { getPrijs, formatPrijs } from "@/lib/prijzen";
+import { Schema } from "@/components/Schema";
+import { Sectie, Kop } from "@/components/ui/Sectie";
+import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
+import { BEDRIJF, whatsappLink } from "@/lib/bedrijf";
 
 const SCENE: Record<Categorie, string> = {
   "verse-vis": "/images/scene-vis.svg",
@@ -93,8 +97,9 @@ export async function generateMetadata({
 }
 
 function waUrl(naam: string) {
-  const msg = `Hallo Schaap's Vishandel, ik wil graag ${naam} bestellen of reserveren. Wanneer kan ik dit ophalen?`;
-  return `https://wa.me/31715149802?text=${encodeURIComponent(msg)}`;
+  return whatsappLink(
+    `Hallo ${BEDRIJF.naam}, ik wil graag ${naam} bestellen of reserveren. Wanneer kan ik dit ophalen?`
+  );
 }
 
 export default async function ProductDetailPage({
@@ -182,245 +187,234 @@ export default async function ProductDetailPage({
       ]
     : [];
 
+
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <Schema data={[productSchema, breadcrumbSchema]} />
 
-      {/* Breadcrumb */}
-      <nav className="max-w-4xl mx-auto px-6 pt-6 text-xs" style={{ color: "var(--charcoal)" }} aria-label="Kruimelpad">
-        <Link href={`/${locale}/assortiment`} className="underline opacity-60 hover:opacity-100">
-          Assortiment
-        </Link>
-        <span className="opacity-40"> / {product.naam}</span>
-      </nav>
+      <PaginaKop
+        kruimels={[
+          { naam: BEDRIJF.naamKort, href: `/${locale}` },
+          { naam: "Assortiment", href: `/${locale}/assortiment` },
+          { naam: product.naam },
+        ]}
+        label={[CATEGORIE_LABELS[product.categorie], product.badge, product.omega3 ? "Omega-3" : null]
+          .filter(Boolean)
+          .join(" · ")}
+        titel={product.naam}
+        intro={product.desc}
+        knoppen={[
+          {
+            label: isSchaal ? "Offerte aanvragen" : "Vooruit bestellen",
+            href: isSchaal
+              ? `/${locale}/visschalen#samenstellen`
+              : `/${locale}/bestellen?product=${slug}`,
+          },
+          {
+            label: "Bestel via WhatsApp",
+            href: waUrl(product.naam),
+            extern: true,
+            soort: "lijn",
+          },
+        ]}
+        feiten={[
+          ...(beschikbaar ? [{ label: "Beschikbaar", waarde: beschikbaar }] : []),
+          {
+            label: "Prijs",
+            waarde: prijs ? `${formatPrijs(prijs)} — richtprijs` : "Op aanvraag, dagprijs",
+          },
+          ...(seizoen ? [{ label: "Op zijn best", waarde: seizoen }] : []),
+        ]}
+      />
 
-      {/* Header */}
-      <section className="max-w-4xl mx-auto px-6 pt-4 pb-8">
-        <div className="grid md:grid-cols-2 gap-8 items-start">
-          <div className="relative overflow-hidden" style={{ borderBottom: `4px solid ${kleur}` }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={product.photo || SCENE[product.categorie]}
-              alt={`${product.naam} — Schaap's Vishandel Leiden`}
-              className="w-full object-cover"
-              style={{ height: 260 }}
-            />
-          </div>
+      <Sectie grond="papier">
+        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16">
+          {/* ── Wat het is ───────────────────────────────────────────────── */}
           <div>
-            <div className="flex flex-wrap gap-1.5 mb-3">
-              <span className="text-[10px] uppercase tracking-widest font-bold px-2 py-0.5" style={{ backgroundColor: kleur + "28", color: "var(--charcoal)" }}>
-                {CATEGORIE_LABELS[product.categorie]}
-              </span>
-              {product.badge && (
-                <span className="text-[10px] font-bold px-2 py-0.5 text-white" style={{ backgroundColor: "var(--seafoam)" }}>
-                  {product.badge}
-                </span>
-              )}
-              {product.omega3 && (
-                <span className="text-[10px] font-bold px-1.5 py-0.5 text-white" style={{ backgroundColor: "var(--salmon)" }}>
-                  Ω-3
-                </span>
-              )}
-            </div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-3 leading-tight" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
-              {product.naam}
-            </h1>
-            <p className="text-base leading-relaxed mb-4" style={{ color: "var(--charcoal)", opacity: 0.8 }}>
-              {product.desc}
+            {product.photo && (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                src={product.photo}
+                alt={`${product.naam} bij ${BEDRIJF.naam} in Leiden`}
+                className="w-full mb-8"
+                style={{ backgroundColor: "#fff", borderBottom: `3px solid ${kleur}` }}
+              />
+            )}
+
+            <h2 className="text-[1.4rem] mb-3">Ingrediënten en allergenen</h2>
+            <p className="lees mb-4" style={{ color: "var(--charcoal)" }}>
+              {product.ingredienten}
             </p>
-            {beschikbaar && (
-              <p className="text-sm font-semibold mb-4" style={{ color: opAanvraag ? "var(--gold)" : "var(--seafoam)" }}>
-                {beschikbaar}
-                {opAanvraag && (
-                  <span className="font-normal opacity-70" style={{ color: "var(--charcoal)" }}>
-                    {" "}— vraag ons of we het voor uw ophaaldatum kunnen regelen.
-                  </span>
-                )}
+            {product.bevat.length > 0 && (
+              <p className="kapitaal mb-4" style={{ color: "var(--rood)" }}>
+                Bevat: {product.bevat.join(" · ")}
               </p>
             )}
-            {prijs ? (
-              <div className="mb-5">
-                <span className="text-2xl font-bold" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
-                  {formatPrijs(prijs)}
-                </span>
-                <span className="block text-xs mt-1 opacity-55" style={{ color: "var(--charcoal)" }}>
-                  Richtprijs — vis is dagvers, de dagprijs kan afwijken. Wij bevestigen bij uw bestelling.
-                </span>
+            <p className="text-sm leading-relaxed" style={{ color: "var(--grijs)" }}>
+              Dit is de wettelijk verplichte EU-allergeneninformatie — alleen van belang als u
+              ergens allergisch voor bent. Sulfiet (E223) is bijvoorbeeld een heel gangbaar
+              bewaarmiddel op garnalen. Twijfelt u? Vraag het ons gerust.
+            </p>
+
+            {(seizoen || viswijzer) && (
+              <div className="mt-8 pl-5" style={{ borderLeft: "2px solid var(--seafoam)" }}>
+                {seizoen && (
+                  <p className="mb-2" style={{ color: "var(--charcoal)" }}>
+                    <strong>Wanneer het lekkerst is:</strong> {seizoen}
+                  </p>
+                )}
+                {viswijzer && (
+                  <p style={{ color: "var(--charcoal)" }}>
+                    <strong>VISwijzer:</strong> {viswijzer}
+                  </p>
+                )}
               </div>
-            ) : opAanvraag ? (
-              <p className="text-sm mb-5 opacity-60" style={{ color: "var(--charcoal)" }}>
-                Prijs op aanvraag — wij bellen u terug met de dagprijs.
+            )}
+
+            {opAanvraag && (
+              <p className="mt-8 pl-5" style={{ borderLeft: "2px solid var(--gold)", color: "var(--charcoal)" }}>
+                Dit ligt niet elke dag in de vitrine. Vraag ons of het er is op uw ophaaldatum —
+                bel {BEDRIJF.telefoon.weergave} of zet het in de opmerking bij uw bestelling.
               </p>
-            ) : null}
-            <div className="flex flex-wrap gap-3">
-              <a
-                href={waUrl(product.naam)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-                style={{ backgroundColor: "#25D366" }}
-              >
-                Bestel via WhatsApp
-              </a>
-              <Link
-                href={isSchaal ? `/${locale}/visschalen#offerte` : `/${locale}/bestellen?product=${slug}`}
-                className="inline-flex items-center px-5 py-3 text-sm font-semibold border transition-opacity hover:opacity-80"
-                style={{ borderColor: "var(--navy)", color: "var(--navy)" }}
-              >
-                {isSchaal ? "Offerte aanvragen →" : "Vooruit bestellen →"}
-              </Link>
-            </div>
+            )}
+
             {isZalm && (
               <Link
                 href={`/${locale}/varlaks`}
-                className="block mt-6 p-4 group"
-                style={{ backgroundColor: "rgba(46,139,110,0.08)", borderLeft: "4px solid var(--seafoam)" }}
+                className="block mt-8 pl-5 group"
+                style={{ borderLeft: "2px solid var(--seafoam)" }}
               >
-                <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: "var(--seafoam)" }}>
+                <p className="kapitaal mb-1" style={{ color: "var(--seafoam)" }}>
                   Biologisch alternatief
                 </p>
-                <p className="text-sm font-semibold group-hover:underline" style={{ color: "var(--navy)" }}>
-                  Liever biologische zalm? Ontdek Varlaks →
+                <p className="font-semibold group-hover:underline underline-offset-4" style={{ color: "var(--navy)" }}>
+                  Liever biologische zalm? Bekijk Varlaks &rarr;
                 </p>
-                <p className="text-xs mt-1 leading-relaxed" style={{ color: "var(--charcoal)", opacity: 0.72 }}>
-                  Onze Varlaks-zalm groeit antibioticavrij bij familiekwekers boven de poolcirkel —
-                  puurder van smaak en volledig te herleiden.
+                <p className="text-sm mt-1 leading-relaxed" style={{ color: "var(--charcoal)" }}>
+                  Antibioticavrij gekweekt bij familiekwekers boven de poolcirkel, puurder van
+                  smaak en volledig te herleiden.
                 </p>
               </Link>
             )}
           </div>
-        </div>
-      </section>
 
-      {/* Voedingswaarde + allergenen + seizoen/viswijzer */}
-      <section style={{ backgroundColor: "var(--cream)" }} className="py-10">
-        <div className="max-w-4xl mx-auto px-6 grid md:grid-cols-2 gap-8">
-          {/* Voedingswaarde */}
+          {/* ── Voedingswaarde ───────────────────────────────────────────── */}
           <div>
-            <h2 className="text-xl font-bold mb-4" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
-              Voedingswaarde
-            </h2>
+            <h2 className="text-[1.4rem] mb-3">Voedingswaarde</h2>
             {voeding ? (
               <>
-                <p className="text-xs mb-3 opacity-55" style={{ color: "var(--charcoal)" }}>
-                  Gemiddelde waarden per 100 g
-                </p>
-                <table className="w-full text-sm bg-white" style={{ border: "1px solid var(--sand)" }}>
+                <p className="kapitaal mb-4">Gemiddeld per 100 gram</p>
+                <table className="w-full">
                   <tbody>
-                    {voedingRijen.map(([label, waarde], i) => (
-                      <tr key={label} style={{ borderTop: i === 0 ? "none" : "1px solid var(--sand)" }}>
-                        <td className={`px-4 py-2.5 ${label.startsWith("waarvan") ? "pl-8 opacity-60" : "font-medium"}`} style={{ color: "var(--charcoal)" }}>
+                    {voedingRijen.map(([label, waarde]) => (
+                      <tr key={label} style={{ borderBottom: "1px solid var(--linen)" }}>
+                        <th
+                          scope="row"
+                          className={`py-2.5 text-left font-normal ${label.startsWith("waarvan") ? "pl-6" : ""}`}
+                          style={{ color: label.startsWith("waarvan") ? "var(--grijs)" : "var(--ink)" }}
+                        >
                           {label}
-                        </td>
-                        <td className="px-4 py-2.5 text-right font-semibold" style={{ color: "var(--navy)" }}>
+                        </th>
+                        <td className="py-2.5 text-right bedrag" style={{ color: "var(--navy)" }}>
                           {waarde}
                         </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
-                <p className="text-[11px] mt-2 opacity-45 leading-relaxed" style={{ color: "var(--charcoal)" }}>
-                  Indicatieve gemiddelden op basis van standaard voedingswaardetabellen; werkelijke waarden variëren per vangst, seizoen en bereiding.
+                <p className="text-sm mt-3 leading-relaxed" style={{ color: "var(--grijs)" }}>
+                  Indicatieve gemiddelden uit standaard voedingswaardetabellen; de werkelijke
+                  waarden verschillen per vangst, seizoen en bereiding.
                 </p>
               </>
             ) : (
-              <p className="text-sm opacity-60" style={{ color: "var(--charcoal)" }}>
+              <p style={{ color: "var(--charcoal)" }}>
                 Voedingswaarde op aanvraag — vraag het gerust aan de toonbank.
               </p>
             )}
-          </div>
 
-          {/* Allergenen + seizoen + viswijzer */}
-          <div className="space-y-6">
-            <div>
-              <h2 className="text-xl font-bold mb-3" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
-                Ingrediënten &amp; allergenen
-              </h2>
-              <p className="text-sm leading-relaxed mb-3" style={{ color: "var(--charcoal)", opacity: 0.75 }}>
-                {product.ingredienten}
+            {prijs && (
+              <p className="text-sm mt-6 leading-relaxed" style={{ color: "var(--grijs)" }}>
+                {formatPrijs(prijs)} is een richtprijs. Vis is dagvers en gaat op gewicht, dus de
+                dagprijs kan afwijken. We bevestigen hem bij uw bestelling.
               </p>
-              <div className="flex flex-wrap gap-1.5">
-                {product.bevat.map((a) => (
-                  <span
-                    key={a}
-                    className="text-[10px] font-semibold px-1.5 py-0.5"
-                    style={{ backgroundColor: "rgba(192,57,43,0.1)", color: "var(--rood)", border: "1px solid rgba(192,57,43,0.2)" }}
-                  >
-                    {a}
-                  </span>
-                ))}
-              </div>
-              <p className="text-xs leading-relaxed mt-3 opacity-60" style={{ color: "var(--charcoal)" }}>
-                Dit is de wettelijk verplichte EU-allergeneninformatie — alleen van belang als u ergens
-                allergisch voor bent. Zo is bijvoorbeeld sulfiet (E223) een heel gangbaar bewaarmiddel op
-                garnalen; voor de meeste mensen is alles gewoon te eten. Twijfelt u? Vraag het ons gerust.
-              </p>
-            </div>
-
-            {(seizoen || viswijzer) && (
-              <div className="p-4" style={{ backgroundColor: "var(--sand)", borderLeft: "4px solid var(--seafoam)" }}>
-                {seizoen && (
-                  <p className="text-sm leading-relaxed mb-2" style={{ color: "var(--charcoal)" }}>
-                    <strong>Wanneer het lekkerst is:</strong> {seizoen}
-                  </p>
-                )}
-                {viswijzer && (
-                  <p className="text-sm leading-relaxed" style={{ color: "var(--charcoal)" }}>
-                    <strong>VISwijzer:</strong> {viswijzer}
-                  </p>
-                )}
-              </div>
             )}
           </div>
         </div>
+      </Sectie>
 
-        {/* Cross-sell: wat maak je ermee? — eigen blogs + beste externe receptsites */}
-        <div className="max-w-4xl mx-auto px-6 mt-10 pt-8" style={{ borderTop: "1px solid var(--sand)" }}>
-          <h2 className="text-xl font-bold mb-2" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
-            Wat maak je ermee?
-          </h2>
-          <p className="text-sm mb-5 opacity-70" style={{ color: "var(--charcoal)" }}>
-            Inspiratie voor {product.naam.toLowerCase()} — uit onze eigen blog en van de beste receptsites.
-          </p>
-          <div className="grid sm:grid-cols-2 gap-6">
-            <div>
-              <p className="text-xs uppercase tracking-widest font-semibold mb-3 opacity-50" style={{ color: "var(--charcoal)" }}>
-                Uit onze blog
-              </p>
-              <ul className="space-y-2">
-                {blogs.map((b) => (
-                  <li key={b.slug}>
-                    <Link href={`/${locale}/blog/${b.slug}`} className="text-sm underline underline-offset-2" style={{ color: "var(--navy)" }}>
-                      {b.label} →
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <p className="text-xs uppercase tracking-widest font-semibold mb-3 opacity-50" style={{ color: "var(--charcoal)" }}>
-                Receptinspiratie elders
-              </p>
-              <ul className="space-y-2">
-                {extern.map((r) => (
-                  <li key={r.href}>
-                    <a href={r.href} target="_blank" rel="noopener noreferrer" className="text-sm underline underline-offset-2" style={{ color: "var(--seafoam)" }}>
-                      {r.label} ↗
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+      {/* ── Wat maak je ermee ────────────────────────────────────────────── */}
+      <Sectie grond="zand">
+        <Kop
+          label="Inspiratie"
+          titel="Wat maakt u ermee?"
+          intro={`Ideeën voor ${product.naam.toLowerCase()} — uit onze eigen blog en van een paar goede receptsites.`}
+        />
+        <div className="grid sm:grid-cols-2 gap-x-14 gap-y-8">
+          <div>
+            <p className="kapitaal mb-3">Uit onze blog</p>
+            <ul style={{ borderTop: "1px solid var(--linen)" }}>
+              {blogs.map((b) => (
+                <li key={b.slug} style={{ borderBottom: "1px solid var(--linen)" }}>
+                  <Link
+                    href={`/${locale}/blog/${b.slug}`}
+                    className="block py-3 font-semibold underline underline-offset-4"
+                    style={{ color: "var(--navy)" }}
+                  >
+                    {b.label} &rarr;
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="kapitaal mb-3">Receptinspiratie elders</p>
+            <ul style={{ borderTop: "1px solid var(--linen)" }}>
+              {extern.map((r) => (
+                <li key={r.href} style={{ borderBottom: "1px solid var(--linen)" }}>
+                  <a
+                    href={r.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block py-3 font-semibold underline underline-offset-4"
+                    style={{ color: "var(--seafoam)" }}
+                  >
+                    {r.label} ↗
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        <div className="max-w-4xl mx-auto px-6 mt-8">
-          <Link href={`/${locale}/assortiment`} className="text-sm font-semibold underline" style={{ color: "var(--navy)" }}>
-            ← Terug naar het assortiment
-          </Link>
-        </div>
-      </section>
+        <Link
+          href={`/${locale}/assortiment`}
+          className="inline-block mt-9 font-semibold underline underline-offset-4"
+          style={{ color: "var(--navy)" }}
+        >
+          &larr; Terug naar het assortiment
+        </Link>
+      </Sectie>
+
+      <PaginaSlot
+        titel={`${product.naam} vooruit bestellen?`}
+        tekst="Dan ligt het klaar wanneer u langskomt. Verse vis en visschalen bezorgen we in Leiden, Leiderdorp, Voorschoten, Wassenaar en Leidschendam."
+        knoppen={[
+          {
+            label: isSchaal ? "Visschaal samenstellen" : "Vooruit bestellen",
+            href: isSchaal
+              ? `/${locale}/visschalen`
+              : `/${locale}/bestellen?product=${slug}`,
+          },
+          { label: "Openingstijden en route", href: `/${locale}/bezoek-ons`, soort: "lijn" },
+          {
+            label: BEDRIJF.telefoon.weergave,
+            href: `tel:${BEDRIJF.telefoon.e164}`,
+            extern: true,
+            soort: "lijn",
+          },
+        ]}
+      />
     </>
   );
 }

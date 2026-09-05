@@ -154,15 +154,19 @@ Zet in Vercel ook de doorverwijzing van `schaapsvishandel.nl` naar
 ## 5. Foto's
 
 Dit is nu de grootste winst die je nog kunt pakken. Er staan 37 echte
-productfoto's op de site; de rest van de producten toont een rustig vlak met de
-naam erin. Dat oogt netjes, maar een foto verkoopt beter.
+productfoto's op de site; bij de rest staat alleen de naam en de omschrijving.
+Dat leest netjes, maar een foto verkoopt beter.
+
+De tekenfilm-illustraties (`public/images/scene-*.svg`) staan nergens meer op
+een pagina. Ze zagen eruit als een sjabloon en dat is precies wat we niet
+willen. Ze staan nog wel bij de blogartikelen (`src/lib/blog.ts`); vervang die
+door echte foto's zodra je ze hebt, dan kan de map weg.
 
 Het meest urgent, op volgorde:
 
-1. **De winkel van buiten en van binnen** — staat nu op de homepage als
-   illustratie. Eén goede foto van de toonbank met vis erop doet meer dan alle
-   tekst eromheen.
-2. **Een visschaal**, zoals je hem echt maakt. Staat op de homepage én op de
+1. **De winkel van buiten en van binnen.** Eén goede foto van de toonbank met
+   vis erop doet meer dan alle tekst eromheen.
+2. **Een visschaal**, zoals je hem echt maakt. Die hoort op de homepage én op de
    visschaalpagina.
 3. **Jij achter de toonbank.** Voor de pagina "Ons verhaal", en voor Google:
    foto's van echte mensen doen het aantoonbaar beter dan productplaatjes.
@@ -217,6 +221,23 @@ Dit weegt zwaarder dan wat dan ook op de site zelf:
    meer dan tien van een linkverzamelaar.
 
 Zie ook `lokale-seo-acties.md` voor de langere lijst.
+
+---
+
+## 6b. Twee dingen die jij moet nakijken
+
+**De woensdagmarkt.** In `src/lib/bedrijf.ts` staat de woensdagkraam *bij Dille
+& Camille*. Op een paar oudere pagina's stond *de Vismarkt aan de Nieuwe Rijn*.
+Alles verwijst nu naar de bedrijfsgegevens, dus er staat overal hetzelfde — maar
+controleer even of het klopt. Twee verschillende adressen voor dezelfde kraam
+kost je in Google precies de koppeling die je wilt hebben; één adres, overal
+identiek, is wat telt (ook in je Google Bedrijfsprofiel).
+
+**De verhalen bij de vis op `/biologische-vis`.** Die staan alleen in het
+Nederlands, ook op de Engelse en Duitse versie van die pagina. Dat was al zo en
+is niet erger geworden, maar het is wel een punt om op te lossen als de Duitse
+bezoekers gaan komen. Ze staan bovenin `src/app/[locale]/biologische-vis/page.tsx`
+in `ourFish`.
 
 ---
 
