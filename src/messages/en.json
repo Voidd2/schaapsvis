@@ -225,7 +225,7 @@
     "locatiesKop": "Where to find us",
     "routeLink": "Directions",
     "heroBijschrift": "Smoked salmon, sliced by hand",
-    "visschaalBijschrift": "Langoustines — one of the things you can put on it"
+    "visschaalBijschrift": "Dutch shrimp — peeled by hand"
   },
   "gedeeld": {
     "bezorgen": "Delivery",
@@ -354,15 +354,19 @@
     "faq": [
       {
         "v": "What does a seafood platter cost?",
-        "a": "Every platter starts at the same price, already well filled: smoked salmon, mackerel fillet, Dutch shrimp, two salads, smoked trout and herring bites. Everything you add has its own price, and you see the total as you go."
+        "a": "That is up to you. There is no fixed package: you choose how much you want of each item, per 100 grams. Smoked salmon is € 3.25 per 100 grams, Dutch shrimp € 4.25, surimi crab € 1.50. The price moves along as you choose. From € 25 we make it into a platter."
       },
       {
-        "v": "How many people does the base platter serve?",
-        "a": "Comfortably four to six people as a drinks platter. Sitting down with more? Choose 'extra person' and we scale the whole platter up in the same proportion."
+        "v": "How many grams do I need?",
+        "a": "Count on 150 grams per person if there is other food too, and 250 grams per person if the platter is the meal. For six people at a drinks party that comes to around 900 grams. The builder works it out for you and says roughly how many people it will serve."
+      },
+      {
+        "v": "Why is this cheaper than a ready-made platter?",
+        "a": "Because you do not pay for what you did not choose. Complete platters in the region start at € 14.50 per person, and then there is eel or tuna on it that you may not touch. Here you pay only for what you pick, and our prices per 100 grams sit below what other fishmongers charge."
       },
       {
         "v": "How far in advance should I order?",
-        "a": "A few days' notice is welcome. Christmas and New Year are busy, so order well ahead then. For lobster we need at least three days."
+        "a": "A few days notice is welcome. Christmas and New Year are busy, so order well ahead then. For oysters we prefer about three days."
       },
       {
         "v": "Can you work around an allergy?",
@@ -374,7 +378,7 @@
       },
       {
         "v": "What if I want something that is not listed?",
-        "a": "Put it in the notes or send us a message. The list is what we make often, not a limit. If it can be had, we will put it on."
+        "a": "Give us a ring or send a message. The list is what we make often, not a limit. If it can be had, we will put it on."
       }
     ],
     "vergelijkingKort": "Choose what goes on it and how much. At most fishmongers in the region you pay from {markt} per person for a fixed package — here you decide, and you pay only for what you pick."
@@ -450,47 +454,28 @@
     "uitleg_salades": "Made in house, mixed fresh every morning.",
     "uitleg_erbij": "The small things that finish it off.",
     "gerookte-zalm": "Smoked salmon",
-    "varlaks": "Varlaks — organic smoked salmon",
     "gravad-lax": "Gravad lax",
     "gerookte-makreel": "Smoked mackerel fillet",
     "gerookte-paling": "Smoked eel",
-    "gerookte-heilbot": "Smoked halibut",
-    "gerookte-forel": "Smoked trout fillet",
     "hollandse-garnalen": "Dutch shrimp",
     "noorse-garnalen": "Norwegian prawns",
     "gamba-s": "King prawns",
-    "coquilles": "Scallops",
-    "rivierkreeft": "Crayfish tails",
-    "krabklauwen": "Crab claws",
     "creuse-oesters": "Creuse oysters",
-    "halve-kreeft": "Half a lobster",
     "haringhapjes": "Herring bites with onion",
     "zure-haring": "Soused herring and rollmops",
     "gerookte-bokking": "Smoked bloater",
     "zalmsalade": "Salmon salad",
     "krabsalade": "Crab salad",
-    "garnalensalade": "Shrimp salad",
     "tonijnsalade": "Tuna salad",
-    "garnering": "Arranged on a real platter",
-    "brood": "Fresh bread and butter",
-    "sauzen": "Sauces: ravigote, cocktail and dill mustard",
-    "bestek": "Plates, cutlery and napkins",
+    "sauzen": "Sauces: ravigote and cocktail",
     "eenheid_dozijn": "dozen",
-    "eenheid_halve kreeft": "half lobster",
-    "eenheid_schaal": "platter",
-    "eenheid_voor 6 personen": "for 6 people",
     "eenheid_set van 3": "set of 3",
-    "eenheid_set van 6": "set of 6",
-    "seizoen_Hollandse Nieuwe vanaf juni": "Hollandse Nieuwe from June",
     "toelichting_gerookte-zalm": "Sliced by hand. By far the most chosen.",
-    "toelichting_varlaks": "From family farms above the Arctic Circle, raised without antibiotics. Firmer texture, cleaner taste.",
-    "toelichting_gravad-lax": "Cured with dill and sea salt instead of smoked.",
     "toelichting_gerookte-paling": "The market price can move; we confirm it with your order.",
-    "toelichting_gerookte-heilbot": "Rich, mild and white — the best of the smokehouse.",
     "toelichting_hollandse-garnalen": "Peeled by hand. Almost everyone asks for these.",
     "toelichting_creuse-oesters": "Supplied unopened, with a knife. We can open them too — just say so.",
-    "toelichting_halve-kreeft": "Order at least three days ahead.",
-    "toelichting_garnering": "With lemon, dill and garnish, instead of in the box."
+    "surimi-krab": "Surimi crab",
+    "toelichting_gravad-lax": "Cured with dill and sea salt instead of smoked."
   },
   "plekken": {
     "winkelNaam": "The shop",

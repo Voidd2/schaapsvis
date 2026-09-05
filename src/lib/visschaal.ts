@@ -24,6 +24,7 @@
  *   Hollandse garnalen   € 4,50 (Andre) · € 6,49 (Vismarine)
  *   Gerookte paling      € 5,50 (Andre) · € 7,00 (Stevens) · € 10,50 (Krol)
  *   Gerookte makreel     € 2,75 (Andre) · € 5,50 (Peter Tol)
+ *   Surimi krab          € 1,59 (Albert Heijn) · € 1,75 (Jumbo)
  *
  * En complete schotels, per persoon:
  *
@@ -113,14 +114,6 @@ export const ONDERDELEN: Onderdeel[] = [
     toelichting: "Van het mes gesneden. Verreweg het meest gekozen.",
   },
   {
-    id: "varlaks",
-    naam: "Varlaks — biologische gerookte zalm",
-    prijs: 4.95,
-    groep: "gerookt",
-    toelichting:
-      "Van familiebedrijven boven de poolcirkel, zonder antibiotica. Steviger van structuur, zuiverder van smaak.",
-  },
-  {
     id: "gravad-lax",
     naam: "Gravad lax",
     prijs: 3.5,
@@ -141,19 +134,6 @@ export const ONDERDELEN: Onderdeel[] = [
     marktprijs: 5.5,
     groep: "gerookt",
     toelichting: "Dagprijs kan meebewegen; we bevestigen hem bij uw bestelling.",
-  },
-  {
-    id: "gerookte-heilbot",
-    naam: "Gerookte heilbot",
-    prijs: 4.75,
-    groep: "gerookt",
-    toelichting: "Vet, mild en wit — het mooiste uit de rokerij.",
-  },
-  {
-    id: "gerookte-forel",
-    naam: "Gerookte forelfilet",
-    prijs: 2.75,
-    groep: "gerookt",
   },
 
   /* ── Schaal- en schelpdieren ────────────────────────────────────────────── */
@@ -178,21 +158,10 @@ export const ONDERDELEN: Onderdeel[] = [
     groep: "schaaldieren",
   },
   {
-    id: "coquilles",
-    naam: "Coquilles",
-    prijs: 5.5,
-    groep: "schaaldieren",
-  },
-  {
-    id: "rivierkreeft",
-    naam: "Rivierkreeftstaartjes",
-    prijs: 3.25,
-    groep: "schaaldieren",
-  },
-  {
-    id: "krabklauwen",
-    naam: "Krabklauwen",
-    prijs: 3.95,
+    id: "surimi-krab",
+    naam: "Surimi krab",
+    prijs: 1.5,
+    marktprijs: 1.59,
     groep: "schaaldieren",
   },
   {
@@ -203,14 +172,6 @@ export const ONDERDELEN: Onderdeel[] = [
     groep: "schaaldieren",
     toelichting: "Ongeopend mee, met mesje. Openen doen we ook — zeg het erbij.",
   },
-  {
-    id: "halve-kreeft",
-    naam: "Halve kreeft",
-    prijs: 23.5,
-    perStuk: "halve kreeft",
-    groep: "schaaldieren",
-    toelichting: "Minstens drie dagen vooruit bestellen.",
-  },
 
   /* ── Hollandse klassiekers ──────────────────────────────────────────────── */
   {
@@ -218,7 +179,6 @@ export const ONDERDELEN: Onderdeel[] = [
     naam: "Haringhapjes met ui",
     prijs: 2.75,
     groep: "hollands",
-    seizoen: "Hollandse Nieuwe vanaf juni",
   },
   {
     id: "zure-haring",
@@ -236,37 +196,14 @@ export const ONDERDELEN: Onderdeel[] = [
   /* ── Salades ────────────────────────────────────────────────────────────── */
   { id: "zalmsalade", naam: "Zalmsalade", prijs: 2.25, groep: "salades" },
   { id: "krabsalade", naam: "Krabsalade", prijs: 2.5, groep: "salades" },
-  { id: "garnalensalade", naam: "Garnalensalade", prijs: 2.75, groep: "salades" },
   { id: "tonijnsalade", naam: "Tonijnsalade", prijs: 2.25, groep: "salades" },
 
   /* ── Erbij ──────────────────────────────────────────────────────────────── */
   {
-    id: "garnering",
-    naam: "Opgemaakt op een schaal",
-    prijs: 7.5,
-    perStuk: "schaal",
-    groep: "erbij",
-    toelichting: "Met citroen, dille en garnering, in plaats van in de doos.",
-  },
-  {
-    id: "brood",
-    naam: "Vers brood en roomboter",
-    prijs: 4.95,
-    perStuk: "voor 6 personen",
-    groep: "erbij",
-  },
-  {
     id: "sauzen",
-    naam: "Sauzen: ravigote, cocktail en dille-mosterd",
+    naam: "Sauzen: ravigote en cocktail",
     prijs: 4.5,
     perStuk: "set van 3",
-    groep: "erbij",
-  },
-  {
-    id: "bestek",
-    naam: "Bordjes, bestek en servetten",
-    prijs: 3.95,
-    perStuk: "set van 6",
     groep: "erbij",
   },
 ];

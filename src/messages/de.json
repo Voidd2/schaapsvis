@@ -225,7 +225,7 @@
     "locatiesKop": "Wo Sie uns antreffen",
     "routeLink": "Route",
     "heroBijschrift": "Räucherlachs, von Hand geschnitten",
-    "visschaalBijschrift": "Langustinen — eines der Dinge, die daraufkönnen"
+    "visschaalBijschrift": "Nordseekrabben — von Hand gepult"
   },
   "gedeeld": {
     "bezorgen": "Lieferung",
@@ -354,15 +354,19 @@
     "faq": [
       {
         "v": "Was kostet eine Fischplatte?",
-        "a": "Jede Platte beginnt beim selben Startbetrag und ist schon vollständig belegt: Räucherlachs, Makrelenfilet, Nordseekrabben, zwei Salate, Räucherforelle und Heringshäppchen. Alles, was Sie dazuwählen, hat einen eigenen Preis, und die Summe sehen Sie sofort."
+        "a": "Das bestimmen Sie selbst. Es gibt kein festes Paket: Sie wählen pro Position, wie viel Sie möchten, pro 100 Gramm. Räucherlachs kostet 3,25 € pro 100 Gramm, Nordseekrabben 4,25 €, Surimi-Krebsfleisch 1,50 €. Der Betrag läuft beim Wählen mit. Ab 25 € machen wir eine Platte daraus."
       },
       {
-        "v": "Für wie viele Personen reicht die Grundplatte?",
-        "a": "Reichlich für vier bis sechs Personen als Platte zum Umtrunk. Sind Sie mehr, wählen Sie 'Extra Person' — dann vergrößern wir die ganze Platte im selben Verhältnis."
+        "v": "Wie viel Gramm brauche ich?",
+        "a": "Rechnen Sie mit 150 Gramm pro Person, wenn es auch anderes Essen gibt, und 250 Gramm pro Person, wenn die Platte die Mahlzeit ist. Für sechs Personen zum Umtrunk sind das rund 900 Gramm. Der Zusammensteller rechnet es mit und sagt, für wie viele Personen es ungefähr reicht."
+      },
+      {
+        "v": "Warum ist das günstiger als eine fertige Platte?",
+        "a": "Weil Sie nicht für das mitbezahlen, was Sie nicht gewählt haben. Fertige Platten in der Region beginnen bei 14,50 € pro Person, und dann liegt Aal oder Thunfisch darauf, den Sie vielleicht gar nicht mögen. Hier zahlen Sie nur, was Sie selbst wählen, und unsere Preise pro 100 Gramm liegen unter denen anderer Fischhändler."
       },
       {
         "v": "Wie lange im Voraus muss ich bestellen?",
-        "a": "Ein paar Tage Vorlauf sind angenehm. Um Weihnachten und Silvester ist viel los, bestellen Sie dann früh. Für Hummer brauchen wir mindestens drei Tage."
+        "a": "Ein paar Tage Vorlauf sind angenehm. Um Weihnachten und Silvester ist viel los, bestellen Sie dann früh. Für Austern planen wir am liebsten etwa drei Tage voraus."
       },
       {
         "v": "Können Sie auf eine Allergie Rücksicht nehmen?",
@@ -374,7 +378,7 @@
       },
       {
         "v": "Und wenn ich etwas möchte, das nicht aufgeführt ist?",
-        "a": "Schreiben Sie es in die Bemerkung oder schicken Sie uns eine Nachricht. Die Liste ist das, was wir oft machen, keine Grenze. Wenn es zu bekommen ist, legen wir es darauf."
+        "a": "Rufen Sie an oder schreiben Sie uns. Die Liste ist das, was wir oft machen, keine Grenze. Wenn es zu bekommen ist, legen wir es darauf."
       }
     ],
     "vergelijkingKort": "Wählen Sie selbst, was daraufkommt und wie viel. Bei den meisten Fischhändlern der Region zahlen Sie ab {markt} pro Person für ein festes Paket — hier bestimmen Sie es, und Sie zahlen nur, was Sie wählen."
@@ -450,47 +454,28 @@
     "uitleg_salades": "Hausgemacht, jeden Morgen frisch angerührt.",
     "uitleg_erbij": "Die Kleinigkeiten, die es rundmachen.",
     "gerookte-zalm": "Räucherlachs",
-    "varlaks": "Varlaks — Bio-Räucherlachs",
     "gravad-lax": "Graved Lachs",
     "gerookte-makreel": "Geräuchertes Makrelenfilet",
     "gerookte-paling": "Räucheraal",
-    "gerookte-heilbot": "Geräucherter Heilbutt",
-    "gerookte-forel": "Geräuchertes Forellenfilet",
     "hollandse-garnalen": "Nordseekrabben",
     "noorse-garnalen": "Norwegische Garnelen",
     "gamba-s": "Garnelen",
-    "coquilles": "Jakobsmuscheln",
-    "rivierkreeft": "Flusskrebsschwänze",
-    "krabklauwen": "Krebsscheren",
     "creuse-oesters": "Creuse-Austern",
-    "halve-kreeft": "Halber Hummer",
     "haringhapjes": "Heringshäppchen mit Zwiebel",
     "zure-haring": "Saure Heringe und Rollmops",
     "gerookte-bokking": "Geräucherter Bückling",
     "zalmsalade": "Lachssalat",
     "krabsalade": "Krabbensalat",
-    "garnalensalade": "Garnelensalat",
     "tonijnsalade": "Thunfischsalat",
-    "garnering": "Auf einer echten Platte angerichtet",
-    "brood": "Frisches Brot und Butter",
-    "sauzen": "Saucen: Ravigote, Cocktail und Dill-Senf",
-    "bestek": "Teller, Besteck und Servietten",
+    "sauzen": "Saucen: Ravigote und Cocktail",
     "eenheid_dozijn": "Dutzend",
-    "eenheid_halve kreeft": "halber Hummer",
-    "eenheid_schaal": "Platte",
-    "eenheid_voor 6 personen": "für 6 Personen",
     "eenheid_set van 3": "Set à 3",
-    "eenheid_set van 6": "Set à 6",
-    "seizoen_Hollandse Nieuwe vanaf juni": "Matjes ab Juni",
     "toelichting_gerookte-zalm": "Von Hand geschnitten. Mit Abstand am häufigsten gewählt.",
-    "toelichting_varlaks": "Von Familienbetrieben nördlich des Polarkreises, ohne Antibiotika. Festere Struktur, reinerer Geschmack.",
-    "toelichting_gravad-lax": "Mit Dill und Meersalz gebeizt statt geräuchert.",
     "toelichting_gerookte-paling": "Der Tagespreis kann sich bewegen; wir bestätigen ihn bei Ihrer Bestellung.",
-    "toelichting_gerookte-heilbot": "Fett, mild und weiß — das Beste aus der Räucherei.",
     "toelichting_hollandse-garnalen": "Von Hand gepult. Danach fragt fast jeder.",
     "toelichting_creuse-oesters": "Ungeöffnet mit Messer dabei. Öffnen können wir auch — sagen Sie es einfach.",
-    "toelichting_halve-kreeft": "Mindestens drei Tage im Voraus bestellen.",
-    "toelichting_garnering": "Mit Zitrone, Dill und Garnitur, statt in der Schachtel."
+    "surimi-krab": "Surimi-Krebsfleisch",
+    "toelichting_gravad-lax": "Mit Dill und Meersalz gebeizt statt geräuchert."
   },
   "plekken": {
     "winkelNaam": "Das Geschäft",

@@ -221,8 +221,8 @@ export default async function HomePage({
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/producten/langoustines.png"
-              alt="Langoustines voor een visschaal van Schaap's Vishandel in Leiden"
+              src="/images/producten/hollandse-garnalen.png"
+              alt="Hollandse garnalen voor een visschaal van Schaap's Vishandel in Leiden"
               width={300}
               height={200}
               loading="lazy"

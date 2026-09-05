@@ -225,7 +225,7 @@
     "locatiesKop": "Waar u ons treft",
     "routeLink": "Route",
     "heroBijschrift": "Gerookte zalm, van het mes gesneden",
-    "visschaalBijschrift": "Langoustines — een van de dingen die u erop kunt leggen"
+    "visschaalBijschrift": "Hollandse garnalen — met de hand gepeld"
   },
   "gedeeld": {
     "bezorgen": "Bezorgen",
@@ -354,15 +354,19 @@
     "faq": [
       {
         "v": "Wat kost een visschaal?",
-        "a": "Elke schaal begint bij hetzelfde startbedrag, met een volledige basis erop: gerookte zalm, makreelfilet, Hollandse garnalen, twee salades, gerookte forel en haringhapjes. Alles wat u erbij kiest heeft een eigen prijs, en het totaal ziet u meteen staan."
+        "a": "Dat bepaalt u zelf. Er is geen vast pakket: u kiest per onderdeel hoeveel u wilt, per 100 gram. Gerookte zalm kost € 3,25 per 100 gram, Hollandse garnalen € 4,25, surimi krab € 1,50. Het bedrag loopt mee terwijl u kiest. Vanaf € 25 maken we er een schaal van."
       },
       {
-        "v": "Voor hoeveel personen is de basisschaal?",
-        "a": "Ruim voldoende voor vier tot zes personen als borrelschaal. Zit u met meer mensen aan tafel, kies dan 'extra persoon' — dan schalen we de hele schaal in dezelfde verhouding mee op."
+        "v": "Hoeveel gram heb ik nodig?",
+        "a": "Reken 150 gram per persoon als er ook ander eten is, en 250 gram per persoon als de schaal de maaltijd is. Voor zes personen op een borrel komt u dus rond de 900 gram uit. De configurator rekent het voor u mee en zegt erbij voor hoeveel personen het ongeveer volstaat."
+      },
+      {
+        "v": "Waarom is dit goedkoper dan een kant-en-klare schotel?",
+        "a": "Omdat u niet meebetaalt aan wat u niet kiest. Complete schotels in de regio kosten vanaf € 14,50 per persoon, en dan ligt er ook paling of tonijn op waar u misschien niets mee doet. Hier betaalt u alleen wat u zelf uitkiest, en onze prijzen per 100 gram liggen onder wat andere vishandels rekenen."
       },
       {
         "v": "Hoe lang van tevoren moet ik bestellen?",
-        "a": "Een paar dagen vooruit is prettig. Rond Kerst en Oud & Nieuw is het druk, bestel dan ruim op tijd. Voor kreeft hebben we minstens drie dagen nodig."
+        "a": "Een paar dagen vooruit is prettig. Rond Kerst en Oud & Nieuw is het druk, bestel dan ruim op tijd. Voor oesters plannen we het liefst een dag of drie vooruit."
       },
       {
         "v": "Kan ik rekening laten houden met een allergie?",
@@ -374,7 +378,7 @@
       },
       {
         "v": "Wat als ik iets wil wat er niet bij staat?",
-        "a": "Zet het in de opmerking of app ons even. De lijst is wat we vaak maken, geen grens. Als het te krijgen is, leggen we het erop."
+        "a": "App of bel ons even. De lijst is wat we vaak maken, geen grens. Als het te krijgen is, leggen we het erop."
       }
     ],
     "vergelijkingKort": "Kies zelf wat erop komt en hoeveel. Bij de meeste vishandels in de regio betaalt u vanaf {markt} per persoon voor een vast pakket — hier bepaalt u het zelf, en betaalt u alleen wat u kiest."
@@ -450,47 +454,28 @@
     "uitleg_salades": "Huisgemaakt, elke ochtend vers aangemaakt.",
     "uitleg_erbij": "De kleinigheden die het af maken.",
     "gerookte-zalm": "Gerookte zalm",
-    "varlaks": "Varlaks — biologische gerookte zalm",
     "gravad-lax": "Gravad lax",
     "gerookte-makreel": "Gerookte makreelfilet",
     "gerookte-paling": "Gerookte paling",
-    "gerookte-heilbot": "Gerookte heilbot",
-    "gerookte-forel": "Gerookte forelfilet",
     "hollandse-garnalen": "Hollandse garnalen",
     "noorse-garnalen": "Noorse garnalen",
     "gamba-s": "Gamba's",
-    "coquilles": "Coquilles",
-    "rivierkreeft": "Rivierkreeftstaartjes",
-    "krabklauwen": "Krabklauwen",
     "creuse-oesters": "Creuse oesters",
-    "halve-kreeft": "Halve kreeft",
     "haringhapjes": "Haringhapjes met ui",
     "zure-haring": "Zure haring en rolmops",
     "gerookte-bokking": "Gerookte bokking",
     "zalmsalade": "Zalmsalade",
     "krabsalade": "Krabsalade",
-    "garnalensalade": "Garnalensalade",
     "tonijnsalade": "Tonijnsalade",
-    "garnering": "Opgemaakt op een schaal",
-    "brood": "Vers brood en roomboter",
-    "sauzen": "Sauzen: ravigote, cocktail en dille-mosterd",
-    "bestek": "Bordjes, bestek en servetten",
+    "sauzen": "Sauzen: ravigote en cocktail",
     "eenheid_dozijn": "dozijn",
-    "eenheid_halve kreeft": "halve kreeft",
-    "eenheid_schaal": "schaal",
-    "eenheid_voor 6 personen": "voor 6 personen",
     "eenheid_set van 3": "set van 3",
-    "eenheid_set van 6": "set van 6",
-    "seizoen_Hollandse Nieuwe vanaf juni": "Hollandse Nieuwe vanaf juni",
     "toelichting_gerookte-zalm": "Van het mes gesneden. Verreweg het meest gekozen.",
-    "toelichting_varlaks": "Van familiebedrijven boven de poolcirkel, zonder antibiotica. Steviger van structuur, zuiverder van smaak.",
-    "toelichting_gravad-lax": "Gemarineerd met dille en zeezout in plaats van gerookt.",
     "toelichting_gerookte-paling": "Dagprijs kan meebewegen; we bevestigen hem bij uw bestelling.",
-    "toelichting_gerookte-heilbot": "Vet, mild en wit — het mooiste uit de rokerij.",
     "toelichting_hollandse-garnalen": "Met de hand gepeld. Hier vraagt bijna iedereen om.",
     "toelichting_creuse-oesters": "Ongeopend mee, met mesje. Openen doen we ook — zeg het erbij.",
-    "toelichting_halve-kreeft": "Minstens drie dagen vooruit bestellen.",
-    "toelichting_garnering": "Met citroen, dille en garnering, in plaats van in de doos."
+    "surimi-krab": "Surimi krab",
+    "toelichting_gravad-lax": "Gemarineerd met dille en zeezout in plaats van gerookt."
   },
   "plekken": {
     "winkelNaam": "De winkel",
