@@ -13,9 +13,15 @@ export function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Onderhoudsmodus staat standaard AAN. Zet hem UIT om live te gaan:
-  // environment variable MAINTENANCE_MODE=off in Vercel.
-  const maintenance = process.env.MAINTENANCE_MODE !== "off";
+  // De site is standaard gewoon zichtbaar. Wil je hem tijdelijk achter het
+  // "binnenkort online"-scherm zetten (verbouwing, vakantie), zet dan in Vercel
+  // MAINTENANCE_MODE=on. De oude waarde "off" blijft werken en betekent
+  // hetzelfde als niets invullen: zichtbaar.
+  //
+  // Dit stond andersom: het slot zat er standaard op, en dat betekende dat een
+  // nieuwe deploy zónder de juiste variabele voor iedereen — de eigenaar
+  // incluis — de "binnenkort"-pagina liet zien.
+  const maintenance = process.env.MAINTENANCE_MODE === "on";
   const hasAccess = request.cookies.get(ACCESS_COOKIE)?.value === ACCESS_TOKEN;
 
   if (maintenance && !hasAccess) {

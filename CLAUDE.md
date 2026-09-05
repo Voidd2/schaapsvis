@@ -133,6 +133,18 @@ src/components/
 
 ---
 
+## Zichtbaarheid en indexering
+- De site is standaard zichtbaar. `MAINTENANCE_MODE=on` zet het "binnenkort
+  online"-scherm ervoor; alles anders (of niets) betekent zichtbaar.
+- Preview-deploys (`VERCEL_ENV === "preview"`) geven altijd `Disallow: /`. Een
+  voorbeeld-adres in Google wordt een tweede versie van de site die met de
+  echte concurreert.
+- Zonder `BESTELLING_WEBHOOK_URL` neemt `/api/bestelling` géén bestellingen aan
+  en toont het telefoonnummer. Nooit "ok" teruggeven voor iets wat nergens
+  aankomt.
+
+---
+
 ## Git
 Werkbranch: `claude/schaapsvis-website-remake-yfhbfu`
 

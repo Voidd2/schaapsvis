@@ -7,11 +7,12 @@ import { MetadataRoute } from "next";
 export const dynamic = "force-dynamic";
 
 export default function robots(): MetadataRoute.Robots {
-  // Tijdens de onderhouds-/previewfase (slot staat aan): weer alle crawlers en
-  // publiceer de sitemap NIET. Zo ligt de volledige site-structuur (producten,
-  // categorieën, artikelen) niet al open voor concurrenten vóór de live-gang.
-  const maintenance = process.env.MAINTENANCE_MODE !== "off";
-  if (maintenance) {
+  // Twee redenen om alles te weren: de site staat achter het slot, of dit is
+  // een preview-deploy. Zo'n voorbeeld-adres mag nooit in Google terechtkomen —
+  // dat wordt een tweede versie van de site die met de echte concurreert.
+  const maintenance = process.env.MAINTENANCE_MODE === "on";
+  const preview = process.env.VERCEL_ENV === "preview";
+  if (maintenance || preview) {
     return {
       rules: [{ userAgent: "*", disallow: "/" }],
     };

@@ -95,7 +95,7 @@ export default async function LocaleLayout({
   // weergave nooit met wat het publiek ziet (die krijgt de "binnenkort"-pagina).
   const cookieStore = await cookies();
   const isPreview =
-    process.env.MAINTENANCE_MODE !== "off" &&
+    process.env.MAINTENANCE_MODE === "on" &&
     cookieStore.get(ACCESS_COOKIE)?.value === ACCESS_TOKEN;
 
   return (

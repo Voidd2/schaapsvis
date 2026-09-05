@@ -17,9 +17,9 @@ import { BEDRIJF } from "@/lib/bedrijf";
  *
  * ┌─ EIGENAAR ────────────────────────────────────────────────────────────────┐
  * │ Zet in Vercel de variabele BESTELLING_WEBHOOK_URL op je Formspree-adres   │
- * │ (https://formspree.io/f/xxxxxxx). Zolang die ontbreekt wordt de           │
- * │ bestelling wel netjes bevestigd, maar nergens heen gestuurd — handig om   │
- * │ te testen, niet om mee live te gaan.                                       │
+ * │ (https://formspree.io/f/xxxxxxx). Zolang die ontbreekt neemt de site geen  │
+ * │ bestellingen aan: de klant krijgt je telefoonnummer te zien in plaats van  │
+ * │ een bevestiging voor iets wat nergens aankomt.                            │
  * └───────────────────────────────────────────────────────────────────────────┘
  */
 
@@ -184,29 +184,36 @@ export async function POST(request: NextRequest) {
   };
 
   const webhook = process.env.BESTELLING_WEBHOOK_URL;
-  if (webhook) {
-    try {
-      const doorgestuurd = await fetch(webhook, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(samenvatting),
-      });
-      if (!doorgestuurd.ok) {
-        return NextResponse.json(
-          {
-            fout: `We konden uw bestelling niet doorzetten. Bel of app ons op ${BEDRIJF.telefoon.weergave}, dan regelen we het meteen.`,
-          },
-          { status: 502 }
-        );
-      }
-    } catch {
-      return NextResponse.json(
-        {
-          fout: `We konden uw bestelling niet doorzetten. Bel of app ons op ${BEDRIJF.telefoon.weergave}, dan regelen we het meteen.`,
-        },
-        { status: 502 }
-      );
-    }
+
+  // Geen webhook ingesteld? Dan komt de bestelling nergens aan. Eerder gaf dit
+  // adres gewoon "gelukt" terug: de klant zag een bevestiging en wij hoorden er
+  // nooit van. Liever eerlijk zeggen dat het niet werkt en het telefoonnummer
+  // tonen, dan een bestelling stilletjes laten verdampen.
+  if (!webhook) {
+    return NextResponse.json(
+      {
+        fout: `Online bestellen staat nog niet aan. Bel of app ons op ${BEDRIJF.telefoon.weergave} — dan noteren we het meteen.`,
+      },
+      { status: 503 }
+    );
+  }
+
+  const nietDoorgekomen = NextResponse.json(
+    {
+      fout: `We konden uw bestelling niet doorzetten. Bel of app ons op ${BEDRIJF.telefoon.weergave}, dan regelen we het meteen.`,
+    },
+    { status: 502 }
+  );
+
+  try {
+    const doorgestuurd = await fetch(webhook, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify(samenvatting),
+    });
+    if (!doorgestuurd.ok) return nietDoorgekomen;
+  } catch {
+    return nietDoorgekomen;
   }
 
   /* ── Online betalen, als SumUp klaarstaat ───────────────────────────────── */

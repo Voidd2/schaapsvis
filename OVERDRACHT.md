@@ -99,22 +99,30 @@ Het nieuwsbriefformulier gebruikt nog het losse Formspree-adres in
 
 ## 4. Live gaan
 
-De site staat achter een slot. In Vercel:
+De site is gewoon zichtbaar zodra hij is uitgerold — daar hoef je niets voor te
+doen. Wil je hem tijdelijk achter het "binnenkort online"-scherm zetten
+(verbouwing, vakantie, of even niets kunnen leveren), zet dan in Vercel:
 
 ```
-MAINTENANCE_MODE=off
+MAINTENANCE_MODE=on
 ```
 
-Tot dat gezet is, ziet iedereen de "binnenkort online"-pagina **en weren we alle
-zoekmachines** (`robots.txt` staat op disallow). Dat is met opzet: je wilt niet
-dat Google de site indexeert terwijl hij nog niet af is.
+Weghalen of op iets anders zetten maakt hem weer zichtbaar. Dit stond eerder
+andersom — het slot zat er standaard op — waardoor een deploy zonder de juiste
+variabele voor iedereen, jou incluis, de "binnenkort"-pagina liet zien.
 
-`robots.txt` wordt bij elk verzoek opnieuw bepaald, dus zodra de variabele
-omstaat is de site meteen vrijgegeven — je hoeft er niet apart voor te
-deployen. Controleer het na afloop even op
-`www.schaapsvishandel.nl/robots.txt`: daar hoort `Allow: /` te staan.
+Preview-adressen (de voorbeeld-URL's die Vercel per wijziging maakt) worden
+nooit door Google opgepakt: die geven altijd `Disallow: /`. Alleen de echte
+site mag geïndexeerd worden. Controleer dat na de eerste keer even op
+`/robots.txt`: daar hoort `Allow: /` te staan.
 
-Zet daarna in Vercel ook de doorverwijzing van `schaapsvishandel.nl` naar
+**Vóór je het domein `schaapsvishandel.nl` eraan hangt**: zet
+`BESTELLING_WEBHOOK_URL` (zie punt 3). Zonder die variabele neemt de site geen
+bestellingen aan — de klant krijgt dan je telefoonnummer te zien in plaats van
+een bevestiging. Dat is met opzet: een bestelling die stilletjes verdwijnt is
+erger dan een formulier dat eerlijk zegt dat het nog niet aanstaat.
+
+Zet in Vercel ook de doorverwijzing van `schaapsvishandel.nl` naar
 `www.schaapsvishandel.nl` aan, zodat er niet twee versies van de site bestaan.
 
 ---
