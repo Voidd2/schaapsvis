@@ -36,8 +36,8 @@
     "bezorgenDesc": "Frischer Fisch und Fischplatten geliefert in Leiden, Leiderdorp, Voorschoten, Wassenaar und Leidschendam. Mittwoch bis Samstag, Bestellung bis 12:00 Uhr am Vortag. Lieferung 5,99 €, ab 35 € kostenlos.",
     "bezorgenPlaatsTitle": "Frischen Fisch liefern lassen in {plaats} | Fischhändler aus Leiden",
     "bezorgenPlaatsDesc": "Frischen Fisch oder eine Fischplatte in {plaats} liefern lassen? Schaap's Vishandel aus Leiden fährt {dagen} raus. Bestellung bis 12:00 Uhr am Vortag, Zahlung an der Tür oder demnächst online.",
-    "visschalenTitle": "Fischplatte zusammenstellen in Leiden — ab {bedrag} pro 100 g | Schaap's Vishandel",
-    "visschalenDesc": "Eine Fischplatte für den Umtrunk, Geburtstag oder Weihnachten. Kein festes Paket: Sie wählen selbst, was daraufkommt und wie viel, pro 100 Gramm ab {bedrag}. Abholung in Leiden oder Lieferung."
+    "visschalenTitle": "Fischplatte bestellen in Leiden — drei Platten ab {bedrag} | Schaap's Vishandel",
+    "visschalenDesc": "Eine Fischplatte für den Umtrunk, einen Geburtstag oder Weihnachten. Drei Platten ab {bedrag}, mit Extras nach Wunsch. Abholung in der Herenstraat oder Lieferung."
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Seit 1938",
@@ -261,10 +261,10 @@
     "bezorgNiet2": "Warme Fischsuppe und einzelne Häppchen",
     "bezorgLink": "So läuft die Lieferung",
     "visschaalLabel": "Für den Anlass",
-    "visschaalKop": "Sie wählen, was daraufkommt — pro 100 Gramm",
-    "visschaalTekst": "Kein festes Paket pro Person, denn dann zahlen Sie auch für den Aal, den Sie nicht mögen. Wählen Sie den Räucherlachs, die Nordseekrabben, die Austern — und wie viel. Der Betrag läuft mit, und Sie liegen unter dem, was eine fertige Platte hier kostet.",
+    "visschaalKop": "Drei Fischplatten — legen Sie dazu, was Sie möchten",
+    "visschaalTekst": "Eine Platte für den Umtrunk für vier bis sechs Personen, eine Familienplatte oder die große Festplatte mit Austern und Gambas. Sie sehen genau, was darauf liegt. Möchten Sie noch etwas dazu — mehr Krabben, ein Dutzend Austern — legen Sie es selbst dazu und der Betrag läuft mit.",
     "visschaalVanaf": "Ab",
-    "visschaalLink": "Platte zusammenstellen",
+    "visschaalLink": "Die drei Platten ansehen",
     "verhaalLabel": "Seit 1938",
     "verhaalKop": "Gerrit Schaap hat angefangen, wir machen weiter",
     "verhaalTekst": "Gerrit Schaap eröffnete das Geschäft 1938. Cor Haasnoot fing hier mit dreizehn an und übernahm 1957. Heute steht sein Sohn Aldert hinter der Theke — im Viertel nennt ihn jeder schlicht 'Schaap'. Der Name über der Tür ist nie geändert worden.",
@@ -404,17 +404,16 @@
   },
   "visschaal": {
     "eyebrow": "Umtrunk · Geburtstag · Weihnachten",
-    "kop": "Stellen Sie Ihre Fischplatte zusammen, pro 100 Gramm",
-    "inleiding": "Bei den meisten Fischhändlern kaufen Sie ein Paket pro Person — und zahlen also auch für den Aal, den Sie nicht mögen. Bei uns wählen Sie selbst, was daraufkommt und wie viel, pro 100 Gramm. Der Betrag läuft beim Wählen mit.",
+    "kop": "Wählen Sie Ihre Fischplatte",
+    "inleiding": "Drei Platten zur Auswahl, ab 55,90 €. Sie sehen genau, was darauf liegt und für wie viele Personen sie reicht. Möchten Sie noch etwas dazu — ein halbes Pfund Krabben mehr, ein Dutzend Austern — legen Sie es selbst dazu und sehen den Betrag mitlaufen.",
     "per100": "pro 100 g",
     "perStuk": "pro {eenheid}",
     "seizoen": "{periode}",
     "samenvattingKop": "Ihre Platte",
-    "niksGekozen": "Wählen Sie, was daraufkommt. Alles geht pro 100 Gramm.",
-    "gewichtRegel": "{gewicht} Fisch",
+    "niksGekozen": "Wählen Sie oben eine Platte. Danach können Sie beliebig viel dazulegen.",
+    "gewichtRegel": "{gewicht} extra",
     "personenRegel": "reicht für ± {personen} Personen",
     "vergelijking": "Das sind {bedrag} pro Person. Die günstigste fertige Platte, die wir in der Region fanden, kostet {markt} pro Person — und dort wählen Sie nicht selbst, was darauf liegt.",
-    "minimum": "Ab {bedrag} machen wir eine Platte daraus. Darunter ist es einfach eine Portion aus dem Laden.",
     "voorlopig": "Richtpreise. Den endgültigen Betrag bestätigen wir, bevor wir anfangen — Sie gehen keine Verpflichtung ein.",
     "hoeveelKop": "Wie viel brauche ich?",
     "hoeveelTekst": "Rechnen Sie mit {borrel} Gramm pro Person, wenn es auch anderes Essen gibt, und {maaltijd} Gramm, wenn die Platte die Mahlzeit ist.",
@@ -429,34 +428,48 @@
     "faq": [
       {
         "v": "Was kostet eine Fischplatte?",
-        "a": "Das bestimmen Sie selbst. Es gibt kein festes Paket: Sie wählen pro Position, wie viel Sie möchten, pro 100 Gramm. Räucherlachs kostet 3,25 € pro 100 Gramm, Nordseekrabben 4,25 €, Surimi-Krebsfleisch 1,50 €. Der Betrag läuft beim Wählen mit. Ab 25 € machen wir eine Platte daraus."
+        "a": "Die Umtrunk-Platte beginnt bei 55,90 € für vier bis sechs Personen. Darüber liegen die Familienplatte und die Festplatte. Was Sie dazulegen, kommt obendrauf, pro 100 Gramm — Räucherlachs 3,25 € pro 100 Gramm, holländische Krabben 4,25 €. Der Betrag läuft beim Wählen mit."
       },
       {
-        "v": "Wie viel Gramm brauche ich?",
-        "a": "Rechnen Sie mit 150 Gramm pro Person, wenn es auch anderes Essen gibt, und 250 Gramm pro Person, wenn die Platte die Mahlzeit ist. Für sechs Personen zum Umtrunk sind das rund 900 Gramm. Der Zusammensteller rechnet es mit und sagt, für wie viele Personen es ungefähr reicht."
+        "v": "Für wie viele Personen reicht eine Platte?",
+        "a": "Das steht bei jeder Platte dabei. Als Faustregel: 150 Gramm Fisch pro Person, wenn es auch anderes Essen gibt, und 250 Gramm, wenn die Platte die Mahlzeit ist. Im Zweifel die größere nehmen — eine leere Platte ist ärgerlicher als ein Rest."
       },
       {
-        "v": "Warum ist das günstiger als eine fertige Platte?",
-        "a": "Weil Sie nicht für das mitbezahlen, was Sie nicht gewählt haben. Fertige Platten in der Region beginnen bei 14,50 € pro Person, und dann liegt Aal oder Thunfisch darauf, den Sie vielleicht gar nicht mögen. Hier zahlen Sie nur, was Sie selbst wählen, und unsere Preise pro 100 Gramm liegen unter denen anderer Fischhändler."
+        "v": "Kann ich die Platte anpassen?",
+        "a": "Ja. Wählen Sie eine Platte und legen Sie dazu, was Sie möchten. Möchten Sie etwas weglassen, rufen Sie uns kurz an — das regeln wir beim Anrichten."
       },
       {
-        "v": "Wie lange im Voraus muss ich bestellen?",
-        "a": "Ein paar Tage Vorlauf sind angenehm. Um Weihnachten und Silvester ist viel los, bestellen Sie dann früh. Für Austern planen wir am liebsten etwa drei Tage voraus."
+        "v": "Wie lange im Voraus soll ich bestellen?",
+        "a": "Ein paar Tage im Voraus ist angenehm. Um Weihnachten und Silvester ist viel los, bestellen Sie dann rechtzeitig. Für Austern planen wir am liebsten drei Tage im Voraus."
       },
       {
-        "v": "Können Sie auf eine Allergie Rücksicht nehmen?",
-        "a": "Selbstverständlich. Geben Sie es bei der Bestellung an: ohne Krustentiere, ohne rohen Fisch oder ein Teil separat. Wenn wir es wissen, richten wir es ein."
+        "v": "Können Sie eine Allergie berücksichtigen?",
+        "a": "Sicher. Geben Sie es bei der Bestellung an: ohne Schalentiere, ohne rohen Fisch, oder einen Teil separat. Wenn wir es wissen, regeln wir es."
       },
       {
         "v": "Kann eine Fischplatte geliefert werden?",
-        "a": "Ja, nach Leiden, Leiderdorp, Voorschoten, Wassenaar und Leidschendam. Abholung in der Herenstraat 48 ist natürlich auch möglich und kostenlos."
+        "a": "Ja, in Leiden, Leiderdorp, Voorschoten, Wassenaar und Leidschendam. Die Lieferung kostet 5,99 € und ist ab 35 € kostenlos — bei einer Platte fahren wir also gratis. Abholung in der Herenstraat 48 ist natürlich auch möglich."
       },
       {
-        "v": "Und wenn ich etwas möchte, das nicht aufgeführt ist?",
-        "a": "Rufen Sie an oder schreiben Sie uns. Die Liste ist das, was wir oft machen, keine Grenze. Wenn es zu bekommen ist, legen wir es darauf."
+        "v": "Was, wenn ich etwas möchte, das nicht dabeisteht?",
+        "a": "Schreiben oder rufen Sie uns. Die Liste ist, was wir oft machen, keine Grenze. Wenn es zu bekommen ist, legen wir es darauf."
       }
     ],
-    "vergelijkingKort": "Wählen Sie selbst, was daraufkommt und wie viel. Bei den meisten Fischhändlern der Region zahlen Sie ab {markt} pro Person für ein festes Paket — hier bestimmen Sie es, und Sie zahlen nur, was Sie wählen."
+    "vergelijkingKort": "Drei Platten ab 55,90 €, und Sie legen selbst dazu, was Sie möchten. Bei den meisten Fischhändlern der Region zahlen Sie ab {markt} pro Person für ein festes Paket.",
+    "perSchaal": "pro Platte",
+    "stap1": "Schritt 1",
+    "stap2": "Schritt 2",
+    "schaalKop": "Die drei Platten",
+    "schaalUitleg": "Jede Platte ist so angerichtet, wie wir sie im Laden machen. Der Betrag unten ist der Startpreis: Was Sie dazuwählen, kommt obendrauf.",
+    "voorPersonen": "Für {van} bis {tot} Personen",
+    "startbedrag": "Startpreis, ohne Extras",
+    "watErOpLigt": "Was darauf liegt",
+    "kiesSchaal": "Diese Platte wählen",
+    "gekozen": "Gewählt — zum Wechseln klicken",
+    "extrasKop": "Noch etwas dazu?",
+    "extrasUitleg": "Alles unten geht pro 100 Gramm, sofern nicht anders angegeben. Was Sie dazuwählen, kommt zum Startpreis Ihrer Platte.",
+    "extrasEerstSchaal": "Wählen Sie zuerst oben eine Platte. Danach können Sie hier beliebig viel hinzufügen.",
+    "extrasRegel": "Davon {bedrag} an Extras."
   },
   "bestel": {
     "eyebrow": "Bestellen",
@@ -585,5 +598,28 @@
     "do": "Donnerstag",
     "vr": "Freitag",
     "za": "Samstag"
+  },
+  "winkelwagen": {
+    "webshop": "Bestellen",
+    "wagen": "Warenkorb",
+    "openLabel": "Warenkorb öffnen — {aantal} im Korb",
+    "kop": "Ihre Bestellung",
+    "sluiten": "Schließen",
+    "leeg": "Noch nichts drin. Wählen Sie frischen Fisch aus dem Sortiment oder stellen Sie eine Fischplatte zusammen.",
+    "kopSchaal": "Fischplatte",
+    "kopVerseVis": "Frischer Fisch",
+    "schaalAanpassen": "Platte anpassen",
+    "opGewicht": "Frischer Fisch wird nach Gewicht verkauft. Wir rufen Sie mit dem Tagespreis an, bevor wir einpacken — Sie gehen keine Verpflichtung ein.",
+    "alleenAfhalen": "Nur Abholung",
+    "gratisLabel": "Auf dem Weg zur kostenlosen Lieferung",
+    "gratisNog": "Noch {bedrag} und die Lieferung ist kostenlos.",
+    "gratisGehaald": "Lieferung kostenlos.",
+    "gratisVanaf": "Die Lieferung kostet {kosten} und ist ab {bedrag} kostenlos.",
+    "balk": "Lieferung {kosten} · ab {gratis} kostenlos",
+    "afrekenen": "Zum Bestellformular",
+    "verderWinkelen": "Weiter wählen",
+    "naarAssortiment": "Zum Sortiment",
+    "terugNaarSite": "Zurück zur Ladenseite",
+    "gratisWeegvis": "Frischen Fisch rechnen wir nach Gewicht ab. Kommt Ihre Bestellung über {bedrag}, entfällt die Liefergebühr — das sagen wir dazu, wenn wir Sie mit dem Tagespreis anrufen."
   }
 }

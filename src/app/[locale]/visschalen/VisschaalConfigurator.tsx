@@ -7,36 +7,38 @@ import {
   GROEP_LABELS,
   GROEP_UITLEG,
   GROEP_VOLGORDE,
+  LEGE_SAMENSTELLING,
   MARKT,
-  MINIMUM_BEDRAG,
   ONDERDELEN,
   PORTIES,
   PRIJZEN_DEFINITIEF,
+  SCHALEN,
+  extrasGewicht,
+  extrasTotaal,
   hoeveelheidTekst,
-  personenBorrel,
+  personen as berekenPersonen,
   prijsPerPersoon,
   regels as maakRegels,
+  schaalById,
   totaal as berekenTotaal,
-  totaalGewicht,
-  type Keuze,
   type Onderdeel,
+  type Samenstelling,
+  type Schaal,
 } from "@/lib/visschaal";
+import { bewaarSamenstelling, leesSamenstelling } from "@/lib/mandje";
 import { euro, whatsappLink } from "@/lib/bedrijf";
 import { useSchaalTekst } from "@/components/visschaal/tekst";
-
-/** Zodat de bestelpagina de samengestelde schaal kan overnemen. */
-export const SCHAAL_OPSLAG = "sv_visschaal_v2";
 
 /** Gewicht gaat met 100 gram tegelijk; stuks met één. */
 const STAP = 100;
 
 /**
- * De schaal samenstellen, per 100 gram.
+ * De visschaal samenstellen.
  *
- * Bij vrijwel elke concurrent koop je een pakket per persoon: je betaalt dus
- * ook voor de paling waar je niet van houdt. Hier kiest de klant zelf wat
- * erop komt en hoeveel, en ziet hij het bedrag meelopen — inclusief wat het
- * per persoon wordt, zodat het te vergelijken is met die pakketprijzen.
+ * Eerst kiest de klant een schaal — dat is de beslissing die telt, en daarom
+ * staat die bovenaan met een foto en een bedrag. Pas daarna komt de vraag of er
+ * nog iets bij moet. Andersom (eerst een lange lijst met vinkjes) haakt de helft
+ * af voordat er iets in de schaal ligt.
  */
 export function VisschaalConfigurator() {
   const t = useTranslations("visschaal");
@@ -44,55 +46,45 @@ export function VisschaalConfigurator() {
   const locale = useLocale();
   const tekst = useSchaalTekst();
 
-  const [keuze, setKeuze] = useState<Keuze>({});
+  const [samen, setSamen] = useState<Samenstelling>(LEGE_SAMENSTELLING);
   const [geladen, setGeladen] = useState(false);
 
   useEffect(() => {
-    try {
-      const opgeslagen = localStorage.getItem(SCHAAL_OPSLAG);
-      if (opgeslagen) {
-        const gelezen = JSON.parse(opgeslagen) as Keuze;
-        const geldig: Keuze = {};
-        for (const [id, aantal] of Object.entries(gelezen)) {
-          if (ONDERDELEN.some((o) => o.id === id) && Number(aantal) > 0) {
-            geldig[id] = Number(aantal);
-          }
-        }
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setKeuze(geldig);
-      }
-    } catch {
-      /* opslag niet beschikbaar — dan begint iemand gewoon opnieuw */
-    }
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setSamen(leesSamenstelling());
     setGeladen(true);
   }, []);
 
   useEffect(() => {
     if (!geladen) return;
-    try {
-      localStorage.setItem(SCHAAL_OPSLAG, JSON.stringify(keuze));
-    } catch {
-      /* niets aan te doen */
-    }
-  }, [keuze, geladen]);
+    bewaarSamenstelling(samen);
+  }, [samen, geladen]);
 
-  const regels = useMemo(() => maakRegels(keuze), [keuze]);
-  const totaal = useMemo(() => berekenTotaal(keuze), [keuze]);
-  const gewicht = useMemo(() => totaalGewicht(keuze), [keuze]);
-  const personen = useMemo(() => personenBorrel(keuze), [keuze]);
-  const perPersoon = useMemo(() => prijsPerPersoon(keuze), [keuze]);
+  const regels = useMemo(() => maakRegels(samen), [samen]);
+  const totaal = useMemo(() => berekenTotaal(samen), [samen]);
+  const extras = useMemo(() => extrasTotaal(samen), [samen]);
+  const gewicht = useMemo(() => extrasGewicht(samen), [samen]);
+  const personen = useMemo(() => berekenPersonen(samen), [samen]);
+  const perPersoon = useMemo(() => prijsPerPersoon(samen), [samen]);
 
-  const teWeinig = totaal > 0 && totaal < MINIMUM_BEDRAG;
+  const gekozenSchaal = samen.schaal ? schaalById(samen.schaal) : undefined;
 
-  function zet(onderdeel: Onderdeel, hoeveelheid: number) {
+  function kiesSchaal(schaal: Schaal) {
+    setSamen((vorige) => ({
+      ...vorige,
+      schaal: vorige.schaal === schaal.id ? null : schaal.id,
+    }));
+  }
+
+  function zetExtra(onderdeel: Onderdeel, hoeveelheid: number) {
     const stap = onderdeel.perStuk ? 1 : STAP;
     const max = onderdeel.perStuk ? 20 : 5000;
-    setKeuze((vorige) => {
-      const volgende = { ...vorige };
+    setSamen((vorige) => {
+      const extras = { ...vorige.extras };
       const nieuw = Math.max(0, Math.min(hoeveelheid, max));
-      if (nieuw < stap) delete volgende[onderdeel.id];
-      else volgende[onderdeel.id] = nieuw;
-      return volgende;
+      if (nieuw < stap) delete extras[onderdeel.id];
+      else extras[onderdeel.id] = nieuw;
+      return { ...vorige, extras };
     });
   }
 
@@ -106,41 +98,154 @@ export function VisschaalConfigurator() {
 
   return (
     <div className="grid lg:grid-cols-[1fr_21rem] gap-12 lg:gap-16 items-start">
-      {/* ── Kiezen ────────────────────────────────────────────────────────── */}
       <div>
-        {GROEP_VOLGORDE.map((groep) => {
-          const items = ONDERDELEN.filter((o) => o.groep === groep);
-          if (items.length === 0) return null;
-          return (
-            <section key={groep} className="mb-12">
-              <div className="mb-5">
-                <h3 className="text-[1.5rem] mb-1">
-                  {tekst.groep(groep, GROEP_LABELS[groep])}
-                </h3>
-                <p className="text-[0.95rem]" style={{ color: "var(--grijs)" }}>
-                  {tekst.uitleg(groep, GROEP_UITLEG[groep])}
-                </p>
-              </div>
-              <ul style={{ borderTop: "1px solid var(--linen)" }}>
-                {items.map((onderdeel) => (
-                  <Regel
-                    key={onderdeel.id}
-                    onderdeel={onderdeel}
-                    naam={tekst.naam(onderdeel.id, onderdeel.naam)}
-                    toelichting={tekst.toelichting(onderdeel.id, onderdeel.toelichting)}
-                    hoeveelheid={keuze[onderdeel.id] ?? 0}
-                    onZet={(n) => zet(onderdeel, n)}
-                    perLabel={t("per100")}
-                    stukLabel={(eenheid) => t("perStuk", { eenheid })}
-                    seizoenLabel={(periode) =>
-                      t("seizoen", { periode: tekst.seizoen(periode) ?? periode })
-                    }
-                  />
-                ))}
-              </ul>
-            </section>
-          );
-        })}
+        {/* ── Stap 1: de schaal ───────────────────────────────────────────── */}
+        <section className="mb-14">
+          <p className="kapitaal mb-2">{t("stap1")}</p>
+          <h3 className="text-[1.6rem] mb-2">{t("schaalKop")}</h3>
+          <p className="mb-7 max-w-2xl" style={{ color: "var(--charcoal)" }}>
+            {t("schaalUitleg")}
+          </p>
+
+          <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {SCHALEN.map((schaal) => {
+              const gekozen = samen.schaal === schaal.id;
+              return (
+                <li key={schaal.id}>
+                  <article
+                    className="flex flex-col h-full"
+                    style={{
+                      backgroundColor: "#fff",
+                      border: gekozen ? "2px solid var(--navy)" : "1px solid var(--linen)",
+                    }}
+                  >
+                    <div
+                      className="w-full aspect-square flex items-center justify-center overflow-hidden"
+                      style={{
+                        backgroundColor: schaal.foto ? "#fff" : "var(--sand)",
+                        borderBottom: "2px solid var(--gold)",
+                      }}
+                    >
+                      {schaal.foto ? (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img
+                          src={schaal.foto}
+                          alt={`${schaal.naam} van Schaap's Vishandel in Leiden`}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <span
+                          className="px-5 text-center text-[1.4rem]"
+                          style={{
+                            fontFamily: "var(--font-display)",
+                            color: "var(--navy)",
+                            opacity: 0.5,
+                          }}
+                        >
+                          {schaal.naam}
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="p-5 flex flex-col flex-1">
+                      <h4 className="text-[1.25rem] mb-1">{schaal.naam}</h4>
+                      <p className="kapitaal mb-3" style={{ color: "var(--grijs)" }}>
+                        {t("voorPersonen", {
+                          van: schaal.personenVan,
+                          tot: schaal.personenTot,
+                        })}
+                      </p>
+                      <p
+                        className="bedrag text-[1.9rem] leading-none mb-1"
+                        style={{ fontFamily: "var(--font-display)", color: "var(--navy)" }}
+                      >
+                        {euro(schaal.prijs)}
+                      </p>
+                      <p className="text-sm mb-4" style={{ color: "var(--grijs)" }}>
+                        {t("startbedrag")}
+                      </p>
+
+                      <p className="leading-relaxed mb-4" style={{ color: "var(--charcoal)" }}>
+                        {schaal.omschrijving}
+                      </p>
+
+                      <p className="kapitaal mb-2">{t("watErOpLigt")}</p>
+                      <ul className="mb-5 flex-1" style={{ borderTop: "1px solid var(--linen)" }}>
+                        {schaal.bevat.map((wat) => (
+                          <li
+                            key={wat}
+                            className="py-2 text-[0.9rem]"
+                            style={{
+                              borderBottom: "1px solid var(--linen)",
+                              color: "var(--charcoal)",
+                            }}
+                          >
+                            {wat}
+                          </li>
+                        ))}
+                      </ul>
+
+                      <button
+                        type="button"
+                        onClick={() => kiesSchaal(schaal)}
+                        className={`knop w-full ${gekozen ? "knop-lijn" : "knop-rood"}`}
+                        aria-pressed={gekozen}
+                      >
+                        {gekozen ? t("gekozen") : t("kiesSchaal")}
+                      </button>
+                    </div>
+                  </article>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+
+        {/* ── Stap 2: de extra's ──────────────────────────────────────────── */}
+        <section>
+          <p className="kapitaal mb-2">{t("stap2")}</p>
+          <h3 className="text-[1.6rem] mb-2">{t("extrasKop")}</h3>
+          <p className="mb-8 max-w-2xl" style={{ color: "var(--charcoal)" }}>
+            {gekozenSchaal ? t("extrasUitleg") : t("extrasEerstSchaal")}
+          </p>
+
+          <div style={{ opacity: gekozenSchaal ? 1 : 0.55 }}>
+            {GROEP_VOLGORDE.map((groep) => {
+              const items = ONDERDELEN.filter((o) => o.groep === groep);
+              if (items.length === 0) return null;
+              return (
+                <section key={groep} className="mb-12">
+                  <div className="mb-5">
+                    <h4 className="text-[1.35rem] mb-1">
+                      {tekst.groep(groep, GROEP_LABELS[groep])}
+                    </h4>
+                    <p className="text-[0.95rem]" style={{ color: "var(--grijs)" }}>
+                      {tekst.uitleg(groep, GROEP_UITLEG[groep])}
+                    </p>
+                  </div>
+                  <ul style={{ borderTop: "1px solid var(--linen)" }}>
+                    {items.map((onderdeel) => (
+                      <Regel
+                        key={onderdeel.id}
+                        onderdeel={onderdeel}
+                        naam={tekst.naam(onderdeel.id, onderdeel.naam)}
+                        toelichting={tekst.toelichting(onderdeel.id, onderdeel.toelichting)}
+                        hoeveelheid={samen.extras[onderdeel.id] ?? 0}
+                        onZet={(n) => zetExtra(onderdeel, n)}
+                        uitgeschakeld={!gekozenSchaal}
+                        perLabel={t("per100")}
+                        stukLabel={(eenheid) => t("perStuk", { eenheid })}
+                        seizoenLabel={(periode) =>
+                          t("seizoen", { periode: tekst.seizoen(periode) ?? periode })
+                        }
+                      />
+                    ))}
+                  </ul>
+                </section>
+              );
+            })}
+          </div>
+        </section>
       </div>
 
       {/* ── Uw schaal ─────────────────────────────────────────────────────── */}
@@ -167,12 +272,18 @@ export function VisschaalConfigurator() {
                       <span className="bedrag" style={{ opacity: 0.7 }}>
                         {hoeveelheidTekst(r)}
                       </span>{" "}
-                      {tekst.naam(r.id, r.naam)}
+                      {r.isSchaal ? r.naam : tekst.naam(r.id, r.naam)}
                     </dt>
                     <dd className="bedrag shrink-0">{euro(r.bedrag)}</dd>
                   </div>
                 ))}
               </dl>
+            )}
+
+            {extras > 0 && (
+              <p className="mt-2 text-[0.85rem]" style={{ opacity: 0.7 }}>
+                {t("extrasRegel", { bedrag: euro(extras) })}
+              </p>
             )}
 
             <div
@@ -187,15 +298,16 @@ export function VisschaalConfigurator() {
               <span className="bedrag">{euro(totaal)}</span>
             </div>
 
-            {gewicht > 0 && (
+            {personen > 0 && (
               <p className="mt-2 text-[0.85rem]" style={{ opacity: 0.7 }}>
-                {t("gewichtRegel", {
-                  gewicht:
-                    gewicht >= 1000
-                      ? `${(gewicht / 1000).toFixed(1).replace(".", ",")} kg`
-                      : `${gewicht} g`,
-                })}
-                {personen >= 1 && ` · ${t("personenRegel", { personen })}`}
+                {t("personenRegel", { personen })}
+                {gewicht > 0 &&
+                  ` · ${t("gewichtRegel", {
+                    gewicht:
+                      gewicht >= 1000
+                        ? `${(gewicht / 1000).toFixed(1).replace(".", ",")} kg`
+                        : `${gewicht} g`,
+                  })}`}
               </p>
             )}
 
@@ -213,12 +325,6 @@ export function VisschaalConfigurator() {
               </p>
             )}
 
-            {teWeinig && (
-              <p className="mt-3 text-[0.82rem]" style={{ color: "#ffb4a8" }}>
-                {t("minimum", { bedrag: euro(MINIMUM_BEDRAG) })}
-              </p>
-            )}
-
             {!PRIJZEN_DEFINITIEF && (
               <p className="mt-3 text-[0.78rem] leading-relaxed" style={{ opacity: 0.6 }}>
                 {t("voorlopig")}
@@ -226,13 +332,15 @@ export function VisschaalConfigurator() {
             )}
 
             <div className="mt-6 space-y-2">
-              <Link
-                href={`/${locale}/bestellen?type=visschaal`}
-                className="knop knop-rood w-full"
-                aria-disabled={teWeinig || regels.length === 0}
-              >
-                {t("naarBestellen")}
-              </Link>
+              {gekozenSchaal ? (
+                <Link href={`/${locale}/bestellen?type=visschaal`} className="knop knop-rood w-full">
+                  {t("naarBestellen")}
+                </Link>
+              ) : (
+                <span className="knop knop-rood w-full" aria-disabled="true">
+                  {t("naarBestellen")}
+                </span>
+              )}
               <a
                 href={whatsappLink(whatsappBericht)}
                 target="_blank"
@@ -244,7 +352,7 @@ export function VisschaalConfigurator() {
               {regels.length > 0 && (
                 <button
                   type="button"
-                  onClick={() => setKeuze({})}
+                  onClick={() => setSamen(LEGE_SAMENSTELLING)}
                   className="w-full text-[0.8rem] underline underline-offset-4 pt-1"
                   style={{ opacity: 0.6 }}
                 >
@@ -274,6 +382,7 @@ function Regel({
   toelichting,
   hoeveelheid,
   onZet,
+  uitgeschakeld,
   perLabel,
   stukLabel,
   seizoenLabel,
@@ -283,6 +392,7 @@ function Regel({
   toelichting?: string;
   hoeveelheid: number;
   onZet: (hoeveelheid: number) => void;
+  uitgeschakeld: boolean;
   perLabel: string;
   stukLabel: (eenheid: string) => string;
   seizoenLabel: (periode: string) => string;
@@ -305,16 +415,25 @@ function Regel({
       }}
     >
       <div className="flex-1 min-w-[12rem]">
-        <p className="text-[1.05rem]" style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}>
+        <p
+          className="text-[1.05rem]"
+          style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}
+        >
           {naam}
           {onderdeel.seizoen && (
-            <span className="ml-2 text-[0.72rem]" style={{ color: "var(--gold)", fontFamily: "var(--font-body)" }}>
+            <span
+              className="ml-2 text-[0.72rem]"
+              style={{ color: "var(--gold)", fontFamily: "var(--font-body)" }}
+            >
               {seizoenLabel(onderdeel.seizoen)}
             </span>
           )}
         </p>
         {toelichting && (
-          <p className="text-[0.87rem] leading-snug mt-0.5 max-w-md" style={{ color: "var(--grijs)" }}>
+          <p
+            className="text-[0.87rem] leading-snug mt-0.5 max-w-md"
+            style={{ color: "var(--grijs)" }}
+          >
             {toelichting}
           </p>
         )}
@@ -330,24 +449,23 @@ function Regel({
           </span>
         </span>
 
-        <div className="flex items-stretch" style={{ border: "1px solid var(--linen)" }}>
+        <span className="flex items-stretch" style={{ border: "1px solid var(--navy)" }}>
           <button
             type="button"
             onClick={() => onZet(hoeveelheid - stap)}
-            disabled={!gekozen}
-            className="w-9 h-10 text-lg leading-none disabled:opacity-25"
+            disabled={uitgeschakeld || hoeveelheid === 0}
+            className="px-3 py-1.5 text-[1.1rem] leading-none disabled:opacity-30"
             style={{ color: "var(--navy)" }}
             aria-label={`Minder ${naam}`}
           >
             −
           </button>
           <span
-            className="min-w-[4.2rem] h-10 flex items-center justify-center bedrag text-[0.88rem] font-semibold px-1"
+            className="bedrag px-3 py-1.5 min-w-[4.5rem] text-center text-[0.9rem]"
             style={{
-              borderLeft: "1px solid var(--linen)",
-              borderRight: "1px solid var(--linen)",
-              backgroundColor: gekozen ? "var(--sand)" : "transparent",
-              color: gekozen ? "var(--ink)" : "var(--grijs)",
+              borderLeft: "1px solid var(--navy)",
+              borderRight: "1px solid var(--navy)",
+              color: gekozen ? "var(--navy)" : "var(--grijs)",
             }}
             aria-live="polite"
           >
@@ -356,13 +474,14 @@ function Regel({
           <button
             type="button"
             onClick={() => onZet(hoeveelheid + stap)}
-            className="w-9 h-10 text-lg leading-none"
+            disabled={uitgeschakeld}
+            className="px-3 py-1.5 text-[1.1rem] leading-none disabled:opacity-30"
             style={{ color: "var(--navy)" }}
             aria-label={`Meer ${naam}`}
           >
             +
           </button>
-        </div>
+        </span>
       </div>
     </li>
   );

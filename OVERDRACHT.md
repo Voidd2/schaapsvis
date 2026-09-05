@@ -12,28 +12,49 @@ te zoeken.
 
 Dit is het bestand dat je het vaakst zult openen.
 
-Er is **geen startbedrag en geen vast pakket** meer. De klant kiest zelf wat er
-op de schaal komt en hoeveel, **per 100 gram**. Alle prijzen staan in de lijst
-`ONDERDELEN`, in euro per 100 gram:
+**Drie schalen, elk met een startbedrag.** Ze staan bovenin in `SCHALEN`:
+
+```ts
+{
+  id: "borrelschaal",
+  naam: "Borrelschaal",
+  prijs: 55.9,              // ← het startbedrag
+  personenVan: 4,
+  personenTot: 6,
+  omschrijving: "De schaal waar de meeste mensen om vragen. …",
+  bevat: ["Gerookte zalm van het mes", "Hollandse garnalen", …],
+  foto: "/images/visschalen/borrelschaal.jpg",   // ← nog leeg
+}
+```
+
+┌─ WAT JIJ NOG MOET DOEN ─────────────────────────────────────────────────────┐
+│ Alleen **€ 55,90** is wat je hebt doorgegeven. De namen, de andere twee     │
+│ bedragen (€ 89,90 en € 139,90), voor hoeveel personen ze zijn en wat erop   │
+│ ligt zijn ingevuld zodat de site te bouwen was. **Vervang ze door je eigen  │
+│ schalen.** Bij de twee bedragen staat `// EIGENAAR: jouw bedrag hier`.      │
+│                                                                             │
+│ En de foto's: zet ze in `public/images/visschalen/` en vul `foto:` in.      │
+│ Zolang dat leeg is toont de site een net naamvlak, geen leeg gat.           │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+**De extra's** staan in `ONDERDELEN`, in euro per 100 gram:
 
 ```ts
 { id: "gerookte-zalm", naam: "Gerookte zalm", prijs: 3.25, groep: "gerookt" }
 ```
 
 Een paar dingen verkoop je niet op gewicht — een oester is een oester. Die
-krijgen `perStuk` mee (`"dozijn"`, `"halve kreeft"`), en dan is `prijs` de prijs
-per stuk.
+krijgen `perStuk` mee (`"dozijn"`), en dan is `prijs` de prijs per stuk.
 
 ```ts
 export const PRIJZEN_DEFINITIEF = false;  // ← op true als de bedragen kloppen
-export const MINIMUM_BEDRAG = 25;         // ← daaronder is het geen schaal
 ```
 
 Zolang `PRIJZEN_DEFINITIEF` op `false` staat zegt de site erbij dat het
 richtprijzen zijn en dat je het definitieve bedrag bevestigt.
 
-**Waar de prijzen vandaan komen.** Uitgangspunt was: overal iets onder de markt
-zitten. Wat andere vishandels rekenen (opgehaald september 2026, staat ook
+**Waar de prijzen van de extra's vandaan komen.** Uitgangspunt was: onder de
+markt zitten. Wat andere vishandels rekenen (opgehaald september 2026, staat ook
 bovenaan in het bestand):
 
 | Per 100 gram | Concurrentie | Wij |
@@ -46,9 +67,11 @@ bovenaan in het bestand):
 En complete schotels per persoon: Puurvis in Leidschendam € 14,50 (die zit ín
 je bezorggebied), Fieret € 19,95 tot € 33,95, Koelewijn € 28,50 tot € 30.
 
-Daarom rekent de configurator ook uit wat de schaal per persoon kost, en zet
-hij er zwart-op-wit bij dat de klant onder die € 14,50 uitkomt. Verhoog je een
-prijs, controleer dan even of dat nog klopt — `MARKT.goedkoopstePerPersoon`
+De configurator rekent uit wat de schaal per persoon kost en zet erbij dat de
+klant onder die € 14,50 uitkomt — maar **alleen als dat ook echt zo is**. Met de
+huidige voorbeeldbedragen (€ 55,90 voor 4 personen = € 13,98 p.p.) klopt het net;
+zet je de prijs hoger of het aantal personen lager, dan verdwijnt die zin
+vanzelf. Controleer dat als je de bedragen invult — `MARKT.goedkoopstePerPersoon`
 bovenin het bestand is het bedrag waarmee vergeleken wordt.
 
 Zet je een nieuw onderdeel in de lijst, voeg dan ook een vertaling toe onder
@@ -59,16 +82,26 @@ als sleutel. Vergeet je dat, dan valt de site terug op het Nederlands.
 
 ```ts
 minimumBedrag: 25,        // minimale bestelling
-standaardKosten: 5.95,    // standaardtarief
-gratisVanaf: 60,          // vanaf dit bedrag gratis
+standaardKosten: 5.99,    // één tarief voor het hele gebied
+gratisVanaf: 35,          // vanaf dit bedrag gratis
 bezorgdagen: [3, 4, 5, 6] // 0 = zondag … 6 = zaterdag
 uitersteBesteltijd: "12:00"
 ```
 
-Per gemeente kun je een afwijkend tarief zetten (`kosten:` bij Leiden, Wassenaar
-en Leidschendam staat dat al). Wijzig je hier iets, dan verandert het meteen op
-de bezorgpagina's, in het bestelformulier, in de postcodecheck én in de
-gegevens die Google uitleest.
+Eén tarief overal — de rit naar Wassenaar duurt langer dan die naar de
+Merenwijk, maar drie tarieven op een site kosten meer uitleg dan ze opleveren.
+Wil je toch één gemeente anders, zet dan `kosten:` in dat blok in `GEMEENTEN`;
+nu doet geen enkele gemeente dat.
+
+Wijzig je hier iets, dan verandert het meteen op de bezorgpagina's, in het
+bestelformulier, in de winkelwagen, in de postcodecheck én in de gegevens die
+Google uitleest.
+
+**Let op bij verse vis.** Die gaat op gewicht, dus de site kan niet weten of een
+bestelling boven de € 35 uitkomt. De winkelwagen zegt daarom bij verse vis dat de
+bezorging vervalt vanaf € 35, en in de bestelling die jij binnenkrijgt staat
+`€ 5,99 — vervalt vanaf € 35,-`. Dat reken jij af als je met de dagprijs belt.
+Bij een visschaal is het bedrag wél exact en vervalt de bezorging automatisch.
 
 **Bezorggebied:** Leiden, Leiderdorp, Voorschoten, Wassenaar en Leidschendam,
 op postcode. Een gemeente erbij? Voeg een blok toe aan `GEMEENTEN` met de

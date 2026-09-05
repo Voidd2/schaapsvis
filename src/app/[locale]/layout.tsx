@@ -6,6 +6,8 @@ import { Libre_Caslon_Text, Source_Sans_3 } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { Chrome } from "@/components/layout/Chrome";
+import { WinkelwagenProvider } from "@/components/winkel/Winkelwagen";
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
 import { cookies } from "next/headers";
 import { ACCESS_COOKIE, ACCESS_TOKEN } from "@/lib/siteAccess";
@@ -103,7 +105,7 @@ export default async function LocaleLayout({
       <head>
         <meta property="og:locale" content={OG_LOCALE[locale] ?? "nl_NL"} />
       </head>
-      <body className="antialiased">
+      <body className="antialiased min-h-screen flex flex-col">
         <NextIntlClientProvider messages={messages}>
           {isPreview && (
             <div
@@ -123,10 +125,17 @@ export default async function LocaleLayout({
           <a href="#inhoud" className="sv-skip">
             Naar de inhoud
           </a>
-          <Header />
-          <main id="inhoud">{children}</main>
-          <Footer />
-          <WhatsAppButton />
+          {/* De winkelwagen leeft boven de kop en de voet: hij moet dezelfde
+              inhoud kennen op de winkelsite én in de webshop. */}
+          <WinkelwagenProvider>
+            <Chrome
+              header={<Header />}
+              footer={<Footer />}
+              extras={<WhatsAppButton />}
+            >
+              {children}
+            </Chrome>
+          </WinkelwagenProvider>
         </NextIntlClientProvider>
       </body>
     </html>

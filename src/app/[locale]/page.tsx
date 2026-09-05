@@ -9,7 +9,7 @@ import { SeizoensBanner } from "@/components/shared/SeizoensBanner";
 import { paginaMetadata } from "@/lib/seo";
 import { BEDRIJF, VERKOOPPUNTEN, euro } from "@/lib/bedrijf";
 import { BEZORGING, GEMEENTEN, bezorgdagenTekst } from "@/lib/bezorging";
-import { ONDERDELEN } from "@/lib/visschaal";
+import { VANAF_BEDRAG } from "@/lib/visschaal";
 import { products, CATEGORIE_LABELS, type Categorie } from "@/lib/assortiment-data";
 import { googleReviews, googleRating, googleReviewCount, googleMapsUrl } from "@/lib/reviews";
 
@@ -52,11 +52,6 @@ export default async function HomePage({
   const v = await getTranslations({ locale, namespace: "visschaal" });
 
   const dagen = bezorgdagenTekst();
-  // De goedkoopste regel per 100 gram — daarmee kan de homepage "vanaf" zeggen
-  // zonder dat er ergens een tweede bedrag onderhouden moet worden.
-  const goedkoopstePer100 = Math.min(
-    ...ONDERDELEN.filter((o) => !o.perStuk).map((o) => o.prijs)
-  );
   const categorieAantallen = (Object.keys(CATEGORIE_LABELS) as Categorie[]).map((cat) => ({
     cat,
     aantal: products.filter((p) => p.categorie === cat).length,
@@ -250,10 +245,10 @@ export default async function HomePage({
                 className="bedrag text-[2.6rem] leading-none"
                 style={{ fontFamily: "var(--font-display)", color: "var(--navy)" }}
               >
-                {euro(goedkoopstePer100)}
+                {euro(VANAF_BEDRAG)}
               </span>
               <span className="ml-2 text-[0.95rem]" style={{ color: "var(--grijs)" }}>
-                {v("per100")}
+                {v("perSchaal")}
               </span>
             </p>
             <Link href={`/${locale}/visschalen`} className="knop knop-rood">

@@ -1,11 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
 import {
-  MINIMUM_BEDRAG,
   hoeveelheidTekst,
   onderdeelById,
   regels as schaalRegels,
+  schaalById,
   totaal as schaalTotaalVan,
   type Keuze,
+  type Samenstelling,
 } from "@/lib/visschaal";
 import { checkPostcode, BEZORGING, kostenVoor } from "@/lib/bezorging";
 import { maakCheckout, nieuweReferentie, sumupBeschikbaar } from "@/lib/betalen";
@@ -58,7 +59,7 @@ interface Payload {
   klant?: Klant;
   levering?: Levering;
   regels?: Regel[];
-  visschaal?: { keuze?: Keuze; personen?: string };
+  visschaal?: { samenstelling?: Partial<Samenstelling>; personen?: string };
   opmerking?: string;
   allergie?: string;
   nieuwsbrief?: boolean;
@@ -126,34 +127,49 @@ export async function POST(request: NextRequest) {
   // visschaal is wél op de cent uit te rekenen: startbedrag plus toevoegingen.
   const isAfrekenbaar = soort === "visschaal";
 
-  const keuze: Keuze = {};
-  if (isAfrekenbaar && body.visschaal?.keuze) {
-    for (const [id, aantal] of Object.entries(body.visschaal.keuze)) {
-      const onderdeel = onderdeelById(id);
-      const n = Number(aantal);
-      if (!onderdeel || !Number.isFinite(n) || n <= 0) continue;
-      // Gewicht in grammen, stuks als aantal — allebei begrensd, zodat een
-      // aangepast verzoek uit de browser geen absurde bestelling oplevert.
-      keuze[id] = onderdeel.perStuk
-        ? Math.min(Math.floor(n), 20)
-        : Math.min(Math.round(n / 100) * 100, 5000);
-    }
+  const extras: Keuze = {};
+  const gevraagd = body.visschaal?.samenstelling;
+  for (const [id, aantal] of Object.entries(gevraagd?.extras ?? {})) {
+    const onderdeel = onderdeelById(id);
+    const n = Number(aantal);
+    if (!onderdeel || !Number.isFinite(n) || n <= 0) continue;
+    // Gewicht in grammen, stuks als aantal — allebei begrensd, zodat een
+    // aangepast verzoek uit de browser geen absurde bestelling oplevert.
+    extras[id] = onderdeel.perStuk
+      ? Math.min(Math.floor(n), 20)
+      : Math.min(Math.round(n / 100) * 100, 5000);
   }
 
-  const schaalTotaal = isAfrekenbaar ? schaalTotaalVan(keuze) : 0;
+  // De schaal-id komt uit de browser en wordt hier tegen de echte lijst gelegd;
+  // een verzonnen id levert geen schaal op en dus ook geen bedrag.
+  const gekozenSchaal =
+    typeof gevraagd?.schaal === "string" && schaalById(gevraagd.schaal)
+      ? gevraagd.schaal
+      : null;
+
+  const samenstelling: Samenstelling = { schaal: gekozenSchaal, extras };
+
+  if (isAfrekenbaar && !gekozenSchaal) {
+    return NextResponse.json(
+      { fout: "Kies eerst een visschaal." },
+      { status: 400 }
+    );
+  }
+
+  const schaalTotaal = isAfrekenbaar ? schaalTotaalVan(samenstelling) : 0;
+
+  // Boven de drempel rijden we gratis. Dat staat op de site, dus het moet hier
+  // ook echt gebeuren — anders belooft de winkelwagen iets wat de rekening niet
+  // waarmaakt.
+  const gratisBezorging =
+    wijze === "bezorgen" && isAfrekenbaar && schaalTotaal >= BEZORGING.gratisVanaf;
+  if (gratisBezorging) bezorgkosten = 0;
+
   // Afronden op centen: optellen van kommagetallen levert anders
   // 46.650000000000006 op, en dat wil je niet in een antwoord of bij SumUp.
   const teBetalen = isAfrekenbaar
     ? Math.round((schaalTotaal + bezorgkosten) * 100) / 100
     : 0;
-
-  // Onder dit bedrag is het geen schaal maar een portie uit de winkel.
-  if (isAfrekenbaar && schaalTotaal > 0 && schaalTotaal < MINIMUM_BEDRAG) {
-    return NextResponse.json(
-      { fout: `Een visschaal maken we vanaf € ${MINIMUM_BEDRAG},-.` },
-      { status: 400 }
-    );
-  }
 
   if (
     isAfrekenbaar &&
@@ -183,7 +199,7 @@ export async function POST(request: NextRequest) {
     tijdvak: tekst(body.levering?.tijdvak) || "(geen voorkeur)",
     bestelling:
       soort === "visschaal"
-        ? schaalRegels(keuze)
+        ? schaalRegels(samenstelling)
             .map(
               (r) =>
                 `${hoeveelheidTekst(r)} ${r.naam} — € ${r.bedrag.toFixed(2).replace(".", ",")}`
@@ -198,7 +214,14 @@ export async function POST(request: NextRequest) {
                 }`
             )
             .join("\n"),
-    bezorgkosten: wijze === "bezorgen" ? `€ ${bezorgkosten.toFixed(2).replace(".", ",")}` : "—",
+    // Bij verse vis kent de site het bedrag niet, dus staat hier voor de winkel
+    // wat er moet gebeuren als de weegschaal boven de drempel uitkomt.
+    bezorgkosten:
+      wijze !== "bezorgen"
+        ? "—"
+        : isAfrekenbaar
+          ? `€ ${bezorgkosten.toFixed(2).replace(".", ",")}${gratisBezorging ? " (vervallen — boven de drempel)" : ""}`
+          : `€ ${bezorgkosten.toFixed(2).replace(".", ",")} — vervalt vanaf € ${BEZORGING.gratisVanaf},-`,
     totaal: isAfrekenbaar
       ? `€ ${teBetalen.toFixed(2).replace(".", ",")}`
       : "Op gewicht — dagprijs bij aflevering",

@@ -36,8 +36,8 @@
     "bezorgenDesc": "Verse vis en visschalen thuisbezorgd in Leiden, Leiderdorp, Voorschoten, Wassenaar en Leidschendam. Woensdag t/m zaterdag, bestellen tot 12:00 de dag ervoor. € 5,99 bezorgkosten, gratis vanaf € 35.",
     "bezorgenPlaatsTitle": "Verse vis bezorgen in {plaats} | Vishandel uit Leiden | Schaap's Vis",
     "bezorgenPlaatsDesc": "Verse vis en visschalen laten bezorgen in {plaats}? Schaap's Vishandel uit Leiden rijdt {dagen} langs. Bestellen tot 12:00 de dag ervoor, betalen bij de deur of straks online.",
-    "visschalenTitle": "Visschaal samenstellen in Leiden — vanaf {bedrag} per 100 g | Schaap's Vishandel",
-    "visschalenDesc": "Visschaal voor een borrel, verjaardag of kerst. Geen vast pakket: u kiest zelf wat erop komt en hoeveel, per 100 gram vanaf {bedrag}. Afhalen in Leiden of laten bezorgen."
+    "visschalenTitle": "Visschaal bestellen in Leiden — drie schalen vanaf {bedrag} | Schaap's Vishandel",
+    "visschalenDesc": "Een visschaal voor de borrel, een verjaardag of de kerstdagen. Drie schalen vanaf {bedrag}, met extra's naar keuze. Afhalen aan de Herenstraat of laten bezorgen."
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Sinds 1938",
@@ -261,10 +261,10 @@
     "bezorgNiet2": "Warme vissoep en losse hapjes",
     "bezorgLink": "Zo werkt bezorgen",
     "visschaalLabel": "Voor de gelegenheid",
-    "visschaalKop": "U kiest wat erop komt, per 100 gram",
-    "visschaalTekst": "Geen vast pakket per persoon, want dan betaalt u ook voor de paling waar u niet van houdt. Kies zelf de gerookte zalm, de Hollandse garnalen, de oesters — en hoeveel. Het bedrag loopt mee terwijl u kiest, en u zit onder wat een kant-en-klare schotel in de regio kost.",
+    "visschaalKop": "Drie visschalen — u legt erbij wat u wilt",
+    "visschaalTekst": "Een borrelschaal voor vier tot zes man, een familieschaal, of de grote feestschaal met oesters en gamba's. U ziet precies wat erop ligt. Wilt u er nog iets bij — extra garnalen, een dozijn oesters — dan legt u dat er zelf op en loopt het bedrag mee.",
     "visschaalVanaf": "Vanaf",
-    "visschaalLink": "Stel uw schaal samen",
+    "visschaalLink": "Bekijk de drie schalen",
     "verhaalLabel": "Sinds 1938",
     "verhaalKop": "Gerrit Schaap begon het, wij houden het vol",
     "verhaalTekst": "Gerrit Schaap opende de winkel in 1938. Cor Haasnoot kwam er op zijn dertiende werken en nam de zaak in 1957 over. Zijn zoon Aldert staat er nu — in de buurt gewoon 'Schaap' genoemd. De naam boven de deur is nooit veranderd.",
@@ -404,17 +404,16 @@
   },
   "visschaal": {
     "eyebrow": "Borrel · verjaardag · kerst",
-    "kop": "Stel uw visschaal samen, per 100 gram",
-    "inleiding": "Bij de meeste vishandels koopt u een pakket per persoon — en betaalt u dus ook voor de paling waar u niet van houdt. Bij ons kiest u zelf wat erop komt en hoeveel, per 100 gram. U ziet het bedrag meelopen terwijl u kiest.",
+    "kop": "Kies uw visschaal",
+    "inleiding": "Drie schalen om uit te kiezen, vanaf € 55,90. U ziet precies wat erop ligt en voor hoeveel mensen hij is. Wilt u er nog iets bij — een half pond extra garnalen, een dozijn oesters — dan legt u dat er zelf op en ziet u het bedrag meelopen.",
     "per100": "per 100 g",
     "perStuk": "per {eenheid}",
     "seizoen": "{periode}",
     "samenvattingKop": "Uw schaal",
-    "niksGekozen": "Kies hiernaast wat erop moet. Alles gaat per 100 gram.",
-    "gewichtRegel": "{gewicht} vis",
+    "niksGekozen": "Kies hierboven een schaal. Daarna kunt u er zoveel bij leggen als u wilt.",
+    "gewichtRegel": "{gewicht} extra",
     "personenRegel": "genoeg voor ± {personen} personen",
     "vergelijking": "Dat komt neer op {bedrag} per persoon. De goedkoopste kant-en-klare schotel die we in de regio vonden kost {markt} per persoon — en daar kiest u niet zelf wat erop ligt.",
-    "minimum": "Vanaf {bedrag} maken we er een schaal van. Daaronder is het gewoon een portie uit de winkel.",
     "voorlopig": "Richtprijzen. We bevestigen het definitieve bedrag voordat we beginnen — u zit nergens aan vast.",
     "hoeveelKop": "Hoeveel heb ik nodig?",
     "hoeveelTekst": "Reken {borrel} gram per persoon als er ook ander eten is, en {maaltijd} gram als de schaal de maaltijd is.",
@@ -429,15 +428,15 @@
     "faq": [
       {
         "v": "Wat kost een visschaal?",
-        "a": "Dat bepaalt u zelf. Er is geen vast pakket: u kiest per onderdeel hoeveel u wilt, per 100 gram. Gerookte zalm kost € 3,25 per 100 gram, Hollandse garnalen € 4,25, surimi krab € 1,50. Het bedrag loopt mee terwijl u kiest. Vanaf € 25 maken we er een schaal van."
+        "a": "De borrelschaal begint bij € 55,90 voor vier tot zes personen. Daarboven zit de familieschaal en de feestschaal. Wat u er zelf bij legt komt daarbovenop, per 100 gram — gerookte zalm € 3,25 per 100 gram, Hollandse garnalen € 4,25. Het bedrag loopt mee terwijl u kiest."
       },
       {
-        "v": "Hoeveel gram heb ik nodig?",
-        "a": "Reken 150 gram per persoon als er ook ander eten is, en 250 gram per persoon als de schaal de maaltijd is. Voor zes personen op een borrel komt u dus rond de 900 gram uit. De configurator rekent het voor u mee en zegt erbij voor hoeveel personen het ongeveer volstaat."
+        "v": "Hoeveel personen kan ik met een schaal doen?",
+        "a": "Bij elke schaal staat het erbij. Reken als vuistregel 150 gram vis per persoon als er ook ander eten is, en 250 gram als de schaal de maaltijd is. Twijfelt u tussen twee maten, neem dan de grootste — een lege schaal is vervelender dan een restje."
       },
       {
-        "v": "Waarom is dit goedkoper dan een kant-en-klare schotel?",
-        "a": "Omdat u niet meebetaalt aan wat u niet kiest. Complete schotels in de regio kosten vanaf € 14,50 per persoon, en dan ligt er ook paling of tonijn op waar u misschien niets mee doet. Hier betaalt u alleen wat u zelf uitkiest, en onze prijzen per 100 gram liggen onder wat andere vishandels rekenen."
+        "v": "Kan ik de schaal aanpassen?",
+        "a": "Ja. Kies een schaal en leg erbij wat u wilt. Wilt u juist iets eraf, bel of app ons even — dan regelen we het bij het opmaken."
       },
       {
         "v": "Hoe lang van tevoren moet ik bestellen?",
@@ -449,14 +448,28 @@
       },
       {
         "v": "Kan een visschaal bezorgd worden?",
-        "a": "Ja, in Leiden, Leiderdorp, Voorschoten, Wassenaar en Leidschendam. Afhalen aan de Herenstraat 48 kan natuurlijk ook en is gratis."
+        "a": "Ja, in Leiden, Leiderdorp, Voorschoten, Wassenaar en Leidschendam. Bezorgen kost € 5,99 en is gratis vanaf € 35, dus bij een schaal rijden we gratis. Afhalen aan de Herenstraat 48 kan natuurlijk ook."
       },
       {
         "v": "Wat als ik iets wil wat er niet bij staat?",
         "a": "App of bel ons even. De lijst is wat we vaak maken, geen grens. Als het te krijgen is, leggen we het erop."
       }
     ],
-    "vergelijkingKort": "Kies zelf wat erop komt en hoeveel. Bij de meeste vishandels in de regio betaalt u vanaf {markt} per persoon voor een vast pakket — hier bepaalt u het zelf, en betaalt u alleen wat u kiest."
+    "vergelijkingKort": "Drie schalen vanaf € 55,90, en u legt er zelf bij wat u wilt. Bij de meeste vishandels in de regio betaalt u vanaf {markt} per persoon voor een vast pakket.",
+    "perSchaal": "per schaal",
+    "stap1": "Stap 1",
+    "stap2": "Stap 2",
+    "schaalKop": "De drie schalen",
+    "schaalUitleg": "Elke schaal is opgemaakt zoals we hem in de winkel maken. Het bedrag hieronder is het startbedrag: wat u er zelf bij kiest komt daarbovenop.",
+    "voorPersonen": "Voor {van} tot {tot} personen",
+    "startbedrag": "Startbedrag, zonder extra's",
+    "watErOpLigt": "Wat erop ligt",
+    "kiesSchaal": "Kies deze schaal",
+    "gekozen": "Gekozen — klik om te wisselen",
+    "extrasKop": "Er nog iets bij?",
+    "extrasUitleg": "Alles hieronder gaat per 100 gram, behalve waar het anders staat. Wat u kiest komt bovenop het startbedrag van uw schaal.",
+    "extrasEerstSchaal": "Kies eerst een schaal hierboven. Daarna kunt u hier zoveel toevoegen als u wilt.",
+    "extrasRegel": "Waarvan {bedrag} aan extra's."
   },
   "bestel": {
     "eyebrow": "Bestellen",
@@ -585,5 +598,28 @@
     "do": "donderdag",
     "vr": "vrijdag",
     "za": "zaterdag"
+  },
+  "winkelwagen": {
+    "webshop": "Bestellen",
+    "wagen": "Wagen",
+    "openLabel": "Winkelwagen openen — {aantal} in de wagen",
+    "kop": "Uw bestelling",
+    "sluiten": "Sluiten",
+    "leeg": "Er zit nog niets in. Kies verse vis uit het assortiment of stel een visschaal samen.",
+    "kopSchaal": "Visschaal",
+    "kopVerseVis": "Verse vis",
+    "schaalAanpassen": "Schaal aanpassen",
+    "opGewicht": "Verse vis gaat op gewicht. We bellen u met de dagprijs voordat we inpakken — u zit nergens aan vast.",
+    "alleenAfhalen": "Alleen afhalen",
+    "gratisLabel": "Op weg naar gratis bezorging",
+    "gratisNog": "Nog {bedrag} en de bezorging is gratis.",
+    "gratisGehaald": "Gratis bezorgd.",
+    "gratisVanaf": "Bezorgen kost {kosten}, en is gratis vanaf {bedrag}.",
+    "balk": "Bezorgen {kosten} · gratis vanaf {gratis}",
+    "afrekenen": "Naar het bestelformulier",
+    "verderWinkelen": "Verder kiezen",
+    "naarAssortiment": "Naar het assortiment",
+    "terugNaarSite": "Terug naar de winkelsite",
+    "gratisWeegvis": "Verse vis rekenen we op gewicht af. Komt uw bestelling boven {bedrag} uit, dan vervalt de bezorging — dat zeggen we erbij als we u met de dagprijs bellen."
   }
 }

@@ -7,13 +7,8 @@ import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { VisschaalConfigurator } from "./VisschaalConfigurator";
 import { paginaMetadata, kruimelSchema, vraagSchema } from "@/lib/seo";
 import { BEDRIJF, euro, whatsappLink } from "@/lib/bedrijf";
-import { MARKT, MINIMUM_BEDRAG, ONDERDELEN } from "@/lib/visschaal";
+import { MARKT, SCHALEN, VANAF_BEDRAG } from "@/lib/visschaal";
 import { GEMEENTEN } from "@/lib/bezorging";
-
-/** De goedkoopste regel per 100 gram — waarmee de pagina "vanaf" kan zeggen. */
-const GOEDKOOPSTE = Math.min(
-  ...ONDERDELEN.filter((o) => !o.perStuk).map((o) => o.prijs)
-);
 
 export async function generateMetadata({
   params,
@@ -25,8 +20,8 @@ export async function generateMetadata({
   return paginaMetadata({
     locale,
     pad: "/visschalen",
-    title: t("visschalenTitle", { bedrag: euro(GOEDKOOPSTE) }),
-    description: t("visschalenDesc", { bedrag: euro(GOEDKOOPSTE) }),
+    title: t("visschalenTitle", { bedrag: euro(VANAF_BEDRAG) }),
+    description: t("visschalenDesc", { bedrag: euro(VANAF_BEDRAG) }),
   });
 }
 
@@ -42,31 +37,31 @@ export default async function VisschalenPage({
 
   const vragen = t.raw("faq") as { v: string; a: string }[];
 
-  const duurste = Math.max(...ONDERDELEN.filter((o) => !o.perStuk).map((o) => o.prijs));
+  const duurste = Math.max(...SCHALEN.map((schaal) => schaal.prijs));
 
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
     name:
       locale === "de"
-        ? "Fischplatte nach Gewicht zusammenstellen"
+        ? "Fischplatte von Schaap's Vishandel"
         : locale === "en"
-          ? "Build-your-own seafood platter, by weight"
-          : "Visschaal samenstellen per 100 gram",
+          ? "Seafood platter from Schaap's Vishandel"
+          : "Visschaal van Schaap's Vishandel",
     description:
       locale === "de"
-        ? `Sie wählen selbst, was auf die Platte kommt und wie viel, pro 100 Gramm — ab ${euro(GOEDKOOPSTE)} pro 100 g. Kein festes Paket.`
+        ? `Drei Fischplatten ab ${euro(VANAF_BEDRAG)}, mit Extras nach Wunsch. Abholen in Leiden oder liefern lassen.`
         : locale === "en"
-          ? `You choose what goes on the platter and how much, per 100 grams — from ${euro(GOEDKOOPSTE)} per 100 g. No fixed package.`
-          : `U kiest zelf wat er op de schaal komt en hoeveel, per 100 gram — vanaf ${euro(GOEDKOOPSTE)} per 100 g. Geen vast pakket.`,
+          ? `Three seafood platters from ${euro(VANAF_BEDRAG)}, with extras of your choosing. Collect in Leiden or have it delivered.`
+          : `Drie visschalen vanaf ${euro(VANAF_BEDRAG)}, met extra's naar keuze. Afhalen in Leiden of laten bezorgen.`,
     brand: { "@type": "Brand", name: BEDRIJF.naam },
     category: "Seafood platter",
     offers: {
       "@type": "AggregateOffer",
       priceCurrency: "EUR",
-      lowPrice: GOEDKOOPSTE.toFixed(2),
+      lowPrice: VANAF_BEDRAG.toFixed(2),
       highPrice: duurste.toFixed(2),
-      offerCount: ONDERDELEN.length,
+      offerCount: SCHALEN.length,
       availability: "https://schema.org/InStock",
       seller: { "@id": `${BEDRIJF.domein}/#winkel` },
       areaServed: GEMEENTEN.map((x) => ({ "@type": "City", name: x.naam })),
@@ -96,7 +91,7 @@ export default async function VisschalenPage({
         label={t("eyebrow")}
         titel={t("kop")}
         intro={t("inleiding")}
-        cijfer={{ label: g("vanaf"), waarde: euro(GOEDKOOPSTE), onder: t("per100") }}
+        cijfer={{ label: g("vanaf"), waarde: euro(VANAF_BEDRAG), onder: t("perSchaal") }}
       />
 
       {/* ── Samenstellen ──────────────────────────────────────────────────── */}
@@ -111,9 +106,6 @@ export default async function VisschalenPage({
             <h2 className="text-[1.4rem] mb-3">{t("levertijdKop")}</h2>
             <p className="leading-relaxed" style={{ color: "var(--charcoal)" }}>
               {t("levertijdTekst")}
-            </p>
-            <p className="mt-3 text-[0.95rem]" style={{ color: "var(--grijs)" }}>
-              {t("minimum", { bedrag: euro(MINIMUM_BEDRAG) })}
             </p>
           </div>
           <div>

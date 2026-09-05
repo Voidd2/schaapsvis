@@ -36,8 +36,8 @@
     "bezorgenDesc": "Fresh fish and seafood platters delivered in Leiden, Leiderdorp, Voorschoten, Wassenaar and Leidschendam. Wednesday to Saturday, order by 12:00 the day before. Delivery € 5.99, free from € 35.",
     "bezorgenPlaatsTitle": "Fresh fish delivery in {plaats} | Fishmonger from Leiden | Schaap's Vis",
     "bezorgenPlaatsDesc": "Want fresh fish or a seafood platter delivered in {plaats}? Schaap's Vishandel from Leiden drives out {dagen}. Order by 12:00 the day before and pay at the door, or online soon.",
-    "visschalenTitle": "Build a seafood platter in Leiden — from {bedrag} per 100 g | Schaap's Vishandel",
-    "visschalenDesc": "A platter for drinks, a birthday or Christmas. No fixed package: you choose what goes on it and how much, per 100 grams from {bedrag}. Collect in Leiden or have it delivered."
+    "visschalenTitle": "Order a seafood platter in Leiden — three platters from {bedrag} | Schaap's Vishandel",
+    "visschalenDesc": "A seafood platter for drinks, a birthday or Christmas. Three platters from {bedrag}, with extras of your choosing. Collect on Herenstraat or have it delivered."
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Since 1938",
@@ -261,10 +261,10 @@
     "bezorgNiet2": "Hot fish soup and loose snacks",
     "bezorgLink": "How delivery works",
     "visschaalLabel": "For the occasion",
-    "visschaalKop": "You choose what goes on it, by the 100 grams",
-    "visschaalTekst": "No fixed package per person, because then you also pay for the eel you do not like. Pick the smoked salmon, the Dutch shrimp, the oysters — and how much of each. The price moves along as you choose, and it lands below what a ready-made platter costs around here.",
+    "visschaalKop": "Three seafood platters — add what you like",
+    "visschaalTekst": "A drinks platter for four to six, a family platter, or the big party platter with oysters and prawns. You see exactly what is on each. Want something extra — more prawns, a dozen oysters — you add it yourself and the price moves along.",
     "visschaalVanaf": "From",
-    "visschaalLink": "Build your platter",
+    "visschaalLink": "See the three platters",
     "verhaalLabel": "Since 1938",
     "verhaalKop": "Gerrit Schaap started it, we keep it going",
     "verhaalTekst": "Gerrit Schaap opened the shop in 1938. Cor Haasnoot started working here at thirteen and took over in 1957. His son Aldert runs it now — everyone in the neighbourhood simply calls him 'Schaap'. The name above the door never changed.",
@@ -404,17 +404,16 @@
   },
   "visschaal": {
     "eyebrow": "Drinks · birthday · Christmas",
-    "kop": "Build your platter, by the 100 grams",
-    "inleiding": "At most fishmongers you buy a set package per person — so you also pay for the eel you do not like. Here you choose what goes on it and how much, per 100 grams. The price moves along as you pick.",
+    "kop": "Choose your seafood platter",
+    "inleiding": "Three platters to choose from, from € 55.90. You see exactly what is on each one and how many people it feeds. Want something extra — half a pound more prawns, a dozen oysters — you add it yourself and watch the price move along.",
     "per100": "per 100 g",
     "perStuk": "per {eenheid}",
     "seizoen": "{periode}",
     "samenvattingKop": "Your platter",
-    "niksGekozen": "Pick what should go on it. Everything is sold by the 100 grams.",
-    "gewichtRegel": "{gewicht} of fish",
+    "niksGekozen": "Pick a platter above. After that you can add as much as you like.",
+    "gewichtRegel": "{gewicht} extra",
     "personenRegel": "enough for ± {personen} people",
     "vergelijking": "That works out at {bedrag} per person. The cheapest ready-made platter we found in the region costs {markt} per person — and there you do not choose what is on it.",
-    "minimum": "From {bedrag} we make it into a platter. Below that it is simply a portion from the shop.",
     "voorlopig": "Guide prices. We confirm the final amount before we start — you are not committed to anything.",
     "hoeveelKop": "How much do I need?",
     "hoeveelTekst": "Count on {borrel} grams per person if there is other food too, and {maaltijd} grams if the platter is the meal.",
@@ -429,34 +428,48 @@
     "faq": [
       {
         "v": "What does a seafood platter cost?",
-        "a": "That is up to you. There is no fixed package: you choose how much you want of each item, per 100 grams. Smoked salmon is € 3.25 per 100 grams, Dutch shrimp € 4.25, surimi crab € 1.50. The price moves along as you choose. From € 25 we make it into a platter."
+        "a": "The drinks platter starts at € 55.90 for four to six people. Above that come the family platter and the party platter. Whatever you add comes on top, per 100 grams — smoked salmon € 3.25 per 100 grams, Dutch prawns € 4.25. The price moves along as you pick."
       },
       {
-        "v": "How many grams do I need?",
-        "a": "Count on 150 grams per person if there is other food too, and 250 grams per person if the platter is the meal. For six people at a drinks party that comes to around 900 grams. The builder works it out for you and says roughly how many people it will serve."
+        "v": "How many people does a platter feed?",
+        "a": "It says so on each platter. As a rule of thumb, count 150 grams of fish per person when there is other food too, and 250 grams when the platter is the meal. In doubt between two sizes, take the larger one — an empty platter is worse than leftovers."
       },
       {
-        "v": "Why is this cheaper than a ready-made platter?",
-        "a": "Because you do not pay for what you did not choose. Complete platters in the region start at € 14.50 per person, and then there is eel or tuna on it that you may not touch. Here you pay only for what you pick, and our prices per 100 grams sit below what other fishmongers charge."
+        "v": "Can I change the platter?",
+        "a": "Yes. Pick a platter and add whatever you like. Want something taken off instead, ring or message us and we will sort it while we lay it out."
       },
       {
         "v": "How far in advance should I order?",
-        "a": "A few days notice is welcome. Christmas and New Year are busy, so order well ahead then. For oysters we prefer about three days."
+        "a": "A few days ahead is helpful. It is busy around Christmas and New Year, so order well in time then. For oysters we prefer about three days' notice."
       },
       {
-        "v": "Can you work around an allergy?",
-        "a": "Certainly. Tell us with your order: no shellfish, no raw fish, or a section kept separate. If we know, we arrange it."
+        "v": "Can you allow for an allergy?",
+        "a": "Certainly. Tell us with your order: no shellfish, no raw fish, or a portion kept separate. If we know, we arrange it."
       },
       {
         "v": "Can a platter be delivered?",
-        "a": "Yes, in Leiden, Leiderdorp, Voorschoten, Wassenaar and Leidschendam. Collecting at Herenstraat 48 is of course also possible, and free."
+        "a": "Yes, in Leiden, Leiderdorp, Voorschoten, Wassenaar and Leidschendam. Delivery is € 5.99 and free from € 35, so with a platter we drive out for free. Collecting at Herenstraat 48 is of course also possible."
       },
       {
         "v": "What if I want something that is not listed?",
-        "a": "Give us a ring or send a message. The list is what we make often, not a limit. If it can be had, we will put it on."
+        "a": "Message or ring us. The list is what we make often, not a limit. If it can be had, we will put it on."
       }
     ],
-    "vergelijkingKort": "Choose what goes on it and how much. At most fishmongers in the region you pay from {markt} per person for a fixed package — here you decide, and you pay only for what you pick."
+    "vergelijkingKort": "Three platters from € 55.90, and you add whatever you like. At most fishmongers in the region you pay from {markt} per person for a fixed package.",
+    "perSchaal": "per platter",
+    "stap1": "Step 1",
+    "stap2": "Step 2",
+    "schaalKop": "The three platters",
+    "schaalUitleg": "Each platter is laid out the way we make it in the shop. The amount below is the starting price: whatever you add comes on top of it.",
+    "voorPersonen": "For {van} to {tot} people",
+    "startbedrag": "Starting price, without extras",
+    "watErOpLigt": "What is on it",
+    "kiesSchaal": "Choose this platter",
+    "gekozen": "Chosen — click to switch",
+    "extrasKop": "Anything else on it?",
+    "extrasUitleg": "Everything below is per 100 grams unless it says otherwise. What you add comes on top of your platter's starting price.",
+    "extrasEerstSchaal": "Pick a platter above first. After that you can add as much as you like here.",
+    "extrasRegel": "Of which {bedrag} in extras."
   },
   "bestel": {
     "eyebrow": "Order",
@@ -585,5 +598,28 @@
     "do": "Thursday",
     "vr": "Friday",
     "za": "Saturday"
+  },
+  "winkelwagen": {
+    "webshop": "Order",
+    "wagen": "Basket",
+    "openLabel": "Open basket — {aantal} in the basket",
+    "kop": "Your order",
+    "sluiten": "Close",
+    "leeg": "Nothing in it yet. Pick fresh fish from the range or build a seafood platter.",
+    "kopSchaal": "Seafood platter",
+    "kopVerseVis": "Fresh fish",
+    "schaalAanpassen": "Change the platter",
+    "opGewicht": "Fresh fish is sold by weight. We ring you with the price of the day before we pack — you are not committed to anything.",
+    "alleenAfhalen": "Collection only",
+    "gratisLabel": "On the way to free delivery",
+    "gratisNog": "Another {bedrag} and delivery is free.",
+    "gratisGehaald": "Delivery is free.",
+    "gratisVanaf": "Delivery costs {kosten}, and is free from {bedrag}.",
+    "balk": "Delivery {kosten} · free from {gratis}",
+    "afrekenen": "To the order form",
+    "verderWinkelen": "Keep choosing",
+    "naarAssortiment": "To the range",
+    "terugNaarSite": "Back to the shop site",
+    "gratisWeegvis": "Fresh fish is settled by weight. If your order comes to more than {bedrag}, delivery is free — we will say so when we ring you with the price of the day."
   }
 }

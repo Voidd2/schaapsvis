@@ -22,19 +22,49 @@ Daar staat wat er nog voorlopig is en wat de eigenaar zelf invult.
   Leiderdorp, Voorschoten, Wassenaar en Leidschendam. Gebakken vis (kibbeling,
   lekkerbek) gaat níet mee de weg op — dat is na twintig minuten in een doos
   niet lekker meer. Dat staat ook zo op de site; niet wegpoetsen.
+- **Bezorgen kost € 5,99**, overal hetzelfde, en is **gratis vanaf € 35**. Eén
+  tarief voor het hele gebied; `GEMEENTEN` kán een afwijkend tarief zetten, maar
+  doet dat nergens.
 - **Afhalen** kan altijd, gratis, in de winkel of aan de kraam.
 - **Verse vis gaat op gewicht.** Er staat daarom geen totaalbedrag bij een
   bestelling verse vis: we bellen met de dagprijs voordat we inpakken. Nooit een
   bedrag beloven dat de weegschaal niet kan waarmaken.
-- **Een visschaal** heeft géén startbedrag en géén vaste samenstelling. De klant
-  kiest zelf wat erop komt en hoeveel, **per 100 gram** (`ONDERDELEN` in
-  `src/lib/visschaal.ts`). Een paar dingen gaan per stuk (oesters, kreeft) en
-  hebben `perStuk`. Dit is wél op de cent uit te rekenen en kan dus online
-  worden afgerekend.
+- **Een visschaal is een keuze uit drie schalen** (`SCHALEN` in
+  `src/lib/visschaal.ts`), elk met een startbedrag; de goedkoopste is € 55,90.
+  Daarbovenop legt de klant zelf extra's, **per 100 gram** (`ONDERDELEN`). Een
+  paar dingen gaan per stuk (oesters) en hebben `perStuk`. Dit is wél op de cent
+  uit te rekenen en kan dus online worden afgerekend.
+  Het geheel heet een `Samenstelling`: `{ schaal, extras }`. Zonder gekozen
+  schaal is er niets te bestellen — dat controleert de API-route ook.
 - **De prijzen zitten bewust onder de markt.** De benchmark staat bovenin
   `visschaal.ts` met bron en datum. Wijzig je een prijs, controleer dan of de
   vergelijking met `MARKT.goedkoopstePerPersoon` nog klopt — die claim staat op
   de site en moet waar blijven.
+
+---
+
+## Twee gezichten: winkelsite en webshop
+
+`schaapsvishandel.nl` is de **winkelsite**: assortiment, waar we staan, ons
+verhaal, de blog, de recepten. Klikt iemand op Bestellen, dan komt hij in de
+**webshop** — en die hoort er anders uit te zien.
+
+Dat schakelen doet `src/components/layout/Chrome.tsx`, op het pad: alles onder
+`/{taal}/bestellen` krijgt `ShopHeader` + `ShopFooter` in plaats van de gewone
+`Header` + `Footer`. De webshop heeft een smalle kop met de winkelwagen
+rechtsboven, een gouden balk met het bezorgtarief, en geen menu dat wegleidt.
+
+De **winkelwagen** (`src/components/winkel/Winkelwagen.tsx`) staat bóven die
+keuze en geldt dus op de hele site. Hij houdt twee dingen vast:
+
+- `regels` — verse vis. **Geen bedragen**: vis gaat op gewicht, dat weten we pas
+  op de weegschaal. Er staat dus ook geen voortgangsbalk naar gratis bezorging,
+  want die zou nergens op slaan.
+- `samenstelling` — de visschaal. Die is wél exact, en dáár staat het balkje
+  "nog € X en de bezorging is gratis".
+
+Alles staat in `localStorage` (`sv_bestelling_v2`, `sv_visschaal_v3`), gelezen en
+geschreven via `src/lib/mandje.ts` — nergens anders.
 
 ---
 
@@ -103,7 +133,8 @@ Kleuren altijd via `var(--navy)` en dergelijke, nooit een losse hexcode.
 src/lib/
   bedrijf.ts          NAP, openingstijden, verkooppunten, betaalmethodes, euro()
   bezorging.ts        gemeenten, postcodes, tarieven, bezorgdagen, postcodecheck
-  visschaal.ts        startbedrag + toevoegingen + prijsberekening
+  visschaal.ts        de drie schalen, de extra's en de prijsberekening
+  mandje.ts           wat er in de winkelwagen zit, en het lezen/schrijven ervan
   betalen.ts          SumUp hosted checkout (alleen serverzijde!)
   seo.ts              metadata, hreflang, alle schema.org-blokken
   assortiment-data.ts 129 producten met allergenen
@@ -121,6 +152,8 @@ src/components/
   JsonLd.tsx          de vaste blokken (winkel, organisatie, site, bezorgdienst)
   bezorgen/PostcodeCheck.tsx
   visschaal/tekst.ts  vertaalt de onderdelen van een visschaal
+  winkel/             de winkelwagen: context, knop en paneel
+  layout/Chrome.tsx   kiest tussen winkelsite en webshop
 ```
 
 ---
@@ -153,6 +186,8 @@ src/components/
 5. `betalen.ts` importeren in een client component. Daar staat de geheime
    sleutel; die hoort nooit in de browser.
 6. Bouwen zonder `--webpack`.
+7. Een bedrag tonen bij verse vis. Dat kan niet: het gaat op gewicht. Alleen de
+   visschaal heeft een hard bedrag.
 
 ---
 

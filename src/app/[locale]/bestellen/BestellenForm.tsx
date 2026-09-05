@@ -1,10 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import { products, CATEGORIE_LABELS, eenheidVoor, type Categorie } from "@/lib/assortiment-data";
+import { products, CATEGORIE_LABELS, type Categorie } from "@/lib/assortiment-data";
 import { searchScore } from "@/lib/search";
 import {
   BEZORGING,
@@ -15,14 +15,12 @@ import {
 } from "@/lib/bezorging";
 import { BEDRIJF, euro, whatsappLink } from "@/lib/bedrijf";
 import {
-  ONDERDELEN,
   hoeveelheidTekst,
   regels as schaalRegelsVan,
   totaal as schaalTotaalVan,
-  type Keuze,
 } from "@/lib/visschaal";
-import { SCHAAL_OPSLAG } from "../visschalen/VisschaalConfigurator";
 import { useSchaalTekst } from "@/components/visschaal/tekst";
+import { useWinkelwagen } from "@/components/winkel/Winkelwagen";
 
 /**
  * Het bestelformulier.
@@ -39,21 +37,9 @@ import { useSchaalTekst } from "@/components/visschaal/tekst";
  * weggeroepen niet opnieuw hoeft te beginnen.
  */
 
-const MANDJE_OPSLAG = "sv_bestelling_v2";
-
 type Soort = "verse-vis" | "visschaal";
 type Wijze = "bezorgen" | "afhalen";
 type Status = "invullen" | "versturen" | "gelukt" | "mislukt";
-
-interface Regel {
-  slug: string;
-  naam: string;
-  categorie: Categorie;
-  eenheid: string;
-  bezorgbaar: boolean;
-  hoeveelheid: string;
-  snijwijze: string;
-}
 
 const POPULAIR = [
   "kabeljauwfilet",
@@ -108,10 +94,16 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
   const locale = useLocale();
   const zoekParams = useSearchParams();
   const schaalTekst = useSchaalTekst();
+  const w = useTranslations("winkelwagen");
+
+  // Wat er in de wagen zit is niet van dit formulier maar van de winkelwagen:
+  // de knop rechtsboven, het paneel en dit formulier moeten hetzelfde weten.
+  const wagen = useWinkelwagen();
+  const regels = wagen.regels;
+  const setRegels = wagen.zetRegels;
+  const schaal = wagen.samenstelling;
 
   const [soort, setSoort] = useState<Soort>("verse-vis");
-  const [regels, setRegels] = useState<Regel[]>([]);
-  const [schaal, setSchaal] = useState<Keuze>({});
   const [zoek, setZoek] = useState("");
   const [bladeren, setBladeren] = useState(false);
 
@@ -134,86 +126,19 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
   const [fout, setFout] = useState("");
   const [bestelnummer, setBestelnummer] = useState("");
 
-  const eersteOpslag = useRef(true);
-
   /* ── Beginstand uit de URL en de opslag ──────────────────────────────── */
-  // Eén keer bij het openen: de adresbalk en localStorage uitlezen. Dat kan niet
-  // tijdens het renderen (de opslag bestaat op de server niet), dus dit is
-  // precies waarvoor een effect bedoeld is — het is geen afgeleide staat.
+  // Eén keer bij het openen: kijken wat er in de adresbalk staat. Het mandje
+  // zelf wordt door de winkelwagen bewaard en teruggelezen — dat hoeft hier dus
+  // niet nog een keer.
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     if (zoekParams.get("type") === "visschaal") setSoort("visschaal");
 
     const slug = zoekParams.get("product");
-    if (slug) {
-      const product = products.find((p) => p.slug === slug);
-      if (product) {
-        setRegels((vorige) =>
-          vorige.some((r) => r.slug === slug) ? vorige : [...vorige, maakRegel(product.slug)!]
-        );
-      }
-    }
-
-    try {
-      const opgeslagenSchaal = localStorage.getItem(SCHAAL_OPSLAG);
-      if (opgeslagenSchaal) {
-        const gelezen = JSON.parse(opgeslagenSchaal) as Keuze;
-        const geldig: Keuze = {};
-        for (const [id, n] of Object.entries(gelezen)) {
-          if (ONDERDELEN.some((o) => o.id === id) && Number(n) > 0) geldig[id] = Number(n);
-        }
-        setSchaal(geldig);
-      }
-
-      const opgeslagenMandje = localStorage.getItem(MANDJE_OPSLAG);
-      if (opgeslagenMandje) {
-        const gelezen = JSON.parse(opgeslagenMandje) as {
-          slug: string;
-          hoeveelheid?: string;
-          snijwijze?: string;
-        }[];
-        const hersteld = gelezen
-          .map((r) => {
-            const basis = maakRegel(r.slug);
-            return basis
-              ? { ...basis, hoeveelheid: r.hoeveelheid ?? "", snijwijze: r.snijwijze ?? "" }
-              : null;
-          })
-          .filter((r): r is Regel => r !== null);
-        if (hersteld.length) {
-          setRegels((vorige) => {
-            const bekend = new Set(vorige.map((r) => r.slug));
-            return [...vorige, ...hersteld.filter((r) => !bekend.has(r.slug))];
-          });
-        }
-      }
-    } catch {
-      /* geen opslag beschikbaar */
-    }
+    if (slug) wagen.voegToe(slug);
     // Alleen bij het openen van de pagina.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    if (eersteOpslag.current) {
-      eersteOpslag.current = false;
-      return;
-    }
-    try {
-      localStorage.setItem(
-        MANDJE_OPSLAG,
-        JSON.stringify(
-          regels.map((r) => ({
-            slug: r.slug,
-            hoeveelheid: r.hoeveelheid,
-            snijwijze: r.snijwijze,
-          }))
-        )
-      );
-    } catch {
-      /* niets aan te doen */
-    }
-  }, [regels]);
 
   /* ── Afgeleide waarden ───────────────────────────────────────────────── */
   const postcodeUitkomst: PostcodeResultaat | null = useMemo(
@@ -221,11 +146,18 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
     [postcode]
   );
 
-  const bezorgkosten =
-    wijze === "bezorgen" && postcodeUitkomst?.status === "binnen" ? postcodeUitkomst.kosten : 0;
-
   const schaalRegels = useMemo(() => schaalRegelsVan(schaal), [schaal]);
   const schaalTotaal = useMemo(() => schaalTotaalVan(schaal), [schaal]);
+
+  // Boven de drempel vervalt de bezorging. Alleen bij een visschaal kunnen we
+  // dat vooraf zeggen; verse vis gaat op gewicht en dat weten we pas op de
+  // weegschaal. Hetzelfde staat in de API-route, want die rekent opnieuw.
+  const gratisBezorging = soort === "visschaal" && schaalTotaal >= BEZORGING.gratisVanaf;
+  const bezorgkosten =
+    wijze === "bezorgen" && postcodeUitkomst?.status === "binnen" && !gratisBezorging
+      ? postcodeUitkomst.kosten
+      : 0;
+
   const teBetalen = soort === "visschaal" ? schaalTotaal + bezorgkosten : null;
 
   const suggesties = useMemo(() => {
@@ -251,12 +183,13 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
   const bezorgenGeblokkeerd = wijze === "bezorgen" && nietBezorgbaar.length > 0;
 
   /* ── Bewerkingen op het mandje ───────────────────────────────────────── */
-  const voegToe = useCallback((slug: string) => {
-    const regel = maakRegel(slug);
-    if (!regel) return;
-    setRegels((vorige) => (vorige.some((r) => r.slug === slug) ? vorige : [...vorige, regel]));
-    setZoek("");
-  }, []);
+  const voegToe = useCallback(
+    (slug: string) => {
+      wagen.voegToe(slug);
+      setZoek("");
+    },
+    [wagen]
+  );
 
   function werkBij(slug: string, veld: "hoeveelheid" | "snijwijze", waarde: string) {
     setRegels((vorige) =>
@@ -272,7 +205,7 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
   const kanVersturen =
     naam.trim() !== "" &&
     telefoon.trim() !== "" &&
-    (soort === "visschaal" || regels.length > 0) &&
+    (soort === "visschaal" ? schaal.schaal !== null : regels.length > 0) &&
     (wijze === "afhalen" ||
       (postcodeUitkomst?.status === "binnen" && straat.trim() !== "" && huisnummer.trim() !== "")) &&
     !bezorgenGeblokkeerd;
@@ -307,7 +240,7 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
             hoeveelheid: r.hoeveelheid,
             toelichting: r.snijwijze,
           })),
-          visschaal: soort === "visschaal" ? { keuze: schaal } : undefined,
+          visschaal: soort === "visschaal" ? { samenstelling: schaal } : undefined,
           allergie,
           opmerking,
           nieuwsbrief,
@@ -327,13 +260,8 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
         return;
       }
 
-      // Mandje leegmaken; wat besteld is hoort niet in de volgende bestelling.
-      try {
-        localStorage.removeItem(MANDJE_OPSLAG);
-        if (soort === "visschaal") localStorage.removeItem(SCHAAL_OPSLAG);
-      } catch {
-        /* niets aan te doen */
-      }
+      // Wagen leegmaken; wat besteld is hoort niet in de volgende bestelling.
+      wagen.leeg();
 
       if (data.betaalUrl) {
         window.location.href = data.betaalUrl;
@@ -875,15 +803,21 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
 
           {soort === "visschaal" ? (
             <dl className="text-sm">
+              {schaalRegels.length === 0 && (
+                <p style={{ opacity: 0.6 }}>{w("leeg")}</p>
+              )}
               {schaalRegels.map((r) => (
                 <Rij
-                  key={r.naam}
-                  label={`${hoeveelheidTekst(r)} ${schaalTekst.naam(r.id, r.naam)}`}
+                  key={r.id}
+                  label={`${hoeveelheidTekst(r)} ${r.isSchaal ? r.naam : schaalTekst.naam(r.id, r.naam)}`}
                   waarde={euro(r.bedrag)}
                 />
               ))}
               {wijze === "bezorgen" && bezorgkosten > 0 && (
                 <Rij label={t("bezorgkosten")} waarde={euro(bezorgkosten)} />
+              )}
+              {wijze === "bezorgen" && gratisBezorging && (
+                <Rij label={t("bezorgkosten")} waarde={w("gratisGehaald")} />
               )}
               <div
                 className="flex justify-between gap-3 pt-3 mt-1 text-[1.1rem] font-semibold"
@@ -963,20 +897,6 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
       </aside>
     </form>
   );
-}
-
-function maakRegel(slug: string): Regel | null {
-  const product = products.find((p) => p.slug === slug);
-  if (!product) return null;
-  return {
-    slug: product.slug,
-    naam: product.naam,
-    categorie: product.categorie,
-    eenheid: eenheidVoor(product.categorie),
-    bezorgbaar: isBezorgbaar(product.categorie),
-    hoeveelheid: "",
-    snijwijze: "",
-  };
 }
 
 function Ster() {
