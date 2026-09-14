@@ -154,24 +154,48 @@ Het nieuwsbriefformulier gebruikt nog het losse Formspree-adres in
 
 ---
 
-## 4. Live gaan
+## 4. Het wachtwoord, en live gaan
 
-De site is gewoon zichtbaar zodra hij is uitgerold — daar hoef je niets voor te
-doen. Wil je hem tijdelijk achter het "binnenkort online"-scherm zetten
-(verbouwing, vakantie, of even niets kunnen leveren), zet dan in Vercel:
+### De site zit nu op slot
+
+**Elke pagina vraagt om een wachtwoord.** Dat geldt voor de homepage, het
+assortiment, de blog, de sitemap, `/admin` — alles. Ook als iemand rechtstreeks
+een adres intikt of vanaf Google binnenkomt.
+
+Het wachtwoord is **`Malaga5010`**. Wijzigen doe je zonder code aan te passen:
+zet in Vercel de variabele `SITE_PASSWORD` op iets anders.
+
+Wie het wachtwoord invult krijgt een cookie die dertig dagen meegaat. Wil je
+iedereen er in één keer uit gooien (bijvoorbeeld omdat je het wachtwoord aan
+iemand gaf die het niet meer hoeft te weten), zet dan `SITE_ACCESS_TOKEN` op een
+nieuwe willekeurige waarde — alle bestaande cookies zijn dan meteen ongeldig.
+
+Zelf even controleren of het slot echt werkt? Ga naar `/api/logout`. Dan ben je
+uitgelogd en zie je precies wat een bezoeker ziet.
+
+### De site openzetten voor het publiek
+
+Eén variabele in Vercel:
 
 ```
-MAINTENANCE_MODE=on
+SITE_PUBLIC=on
 ```
 
-Weghalen of op iets anders zetten maakt hem weer zichtbaar. Dit stond eerder
-andersom — het slot zat er standaard op — waardoor een deploy zonder de juiste
-variabele voor iedereen, jou incluis, de "binnenkort"-pagina liet zien.
+Weghalen, leeglaten of iets anders invullen zet het slot er weer op.
+
+> **Waarom andersom dan eerst?** Het stond zo dat de site standaard zichtbaar
+> was, tenzij je `MAINTENANCE_MODE=on` zette. Die variabele was nooit gezet, en
+> daardoor stond de hele site zonder enig wachtwoord online. Nu kan dat niet
+> meer: vergeet je de variabele, dan zit het slot erop. Vervelender om zelf open
+> te moeten zetten, maar dat is de goede kant om het mis te hebben.
+
+### Wat er verder bij live gaan hoort
 
 Preview-adressen (de voorbeeld-URL's die Vercel per wijziging maakt) worden
 nooit door Google opgepakt: die geven altijd `Disallow: /`. Alleen de echte
-site mag geïndexeerd worden. Controleer dat na de eerste keer even op
-`/robots.txt`: daar hoort `Allow: /` te staan.
+site mag geïndexeerd worden. Controleer na het openzetten even `/robots.txt`:
+daar hoort `Allow: /` te staan. Zolang het slot erop zit zie je daar het
+wachtwoordscherm — dat klopt.
 
 **Vóór je het domein `schaapsvishandel.nl` eraan hangt**: zet
 `BESTELLING_WEBHOOK_URL` (zie punt 3). Zonder die variabele neemt de site geen
@@ -181,6 +205,14 @@ erger dan een formulier dat eerlijk zegt dat het nog niet aanstaat.
 
 Zet in Vercel ook de doorverwijzing van `schaapsvishandel.nl` naar
 `www.schaapsvishandel.nl` aan, zodat er niet twee versies van de site bestaan.
+
+### Nog één ding: `/admin`
+
+Die pagina controleert het wachtwoord in de browser, met
+`NEXT_PUBLIC_ADMIN_WACHTWOORD` — en alles met `NEXT_PUBLIC_` ervoor staat
+gewoon in de broncode die iedere bezoeker kan lezen. Dat is dus geen echt slot.
+Nu de site als geheel op slot zit is het geen acuut probleem meer, maar gebruik
+die pagina niet voor iets wat niemand mag zien zolang dat zo is.
 
 ---
 

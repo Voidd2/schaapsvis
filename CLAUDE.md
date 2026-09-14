@@ -192,8 +192,36 @@ src/components/
 ---
 
 ## Zichtbaarheid en indexering
-- De site is standaard zichtbaar. `MAINTENANCE_MODE=on` zet het "binnenkort
-  online"-scherm ervoor; alles anders (of niets) betekent zichtbaar.
+
+**De site zit standaard ACHTER EEN WACHTWOORD, op elk pad.** Openzetten voor het
+publiek doe je met één variabele in Vercel:
+
+```
+SITE_PUBLIC = on
+```
+
+Elke andere waarde — en niets invullen — houdt het slot erop. Dat is met opzet:
+het stond andersom (open tenzij `MAINTENANCE_MODE=on`) en toen stond de site
+maandenlang zonder enig slot online, omdat die variabele nooit gezet was. Een
+slot dat standaard uit staat is geen slot.
+
+Wat het slot precies afdekt, staat in `src/proxy.ts`:
+
+- **Alles** krijgt het wachtwoordscherm, inclusief `/sitemap.xml`, `/robots.txt`
+  en `/admin`. De vorige matcher liet `api`, alles met een punt erin en dus ook
+  de sitemap ongemoeid.
+- **API-routes** krijgen geen scherm maar `503` met een JSON-foutmelding. Een
+  bestelling die "gelukt" lijkt terwijl de site op slot staat is erger dan een
+  foutmelding.
+- Alleen dit blijft open, en dat staat op één plek in `altijdToegestaan()`:
+  `/coming-soon`, `/api/unlock`, `/api/logout`, `/_next/`, `/_vercel/` en
+  `/favicon.ico`. Het slotscherm heeft verder niets uit `/public` nodig — daarom
+  staat daar het woordmerk in letters en geen plaatje.
+
+Het wachtwoord staat in `src/app/api/unlock/route.ts` en is te wijzigen met
+`SITE_PASSWORD`, zonder code aan te passen. Met `SITE_ACCESS_TOKEN` maak je in
+één klap alle bestaande sessies ongeldig.
+
 - Preview-deploys (`VERCEL_ENV === "preview"`) geven altijd `Disallow: /`. Een
   voorbeeld-adres in Google wordt een tweede versie van de site die met de
   echte concurreert.

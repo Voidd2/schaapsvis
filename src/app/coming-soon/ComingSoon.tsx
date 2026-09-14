@@ -22,7 +22,7 @@ const COPY: Record<
   }
 > = {
   nl: {
-    eyebrow: "Schaap's Vishandel · Leiden · sinds 1938",
+    eyebrow: "Leiden · sinds 1938",
     title: "We werken aan onze nieuwe website",
     body: "Binnenkort kunt u hier terecht voor:",
     features: [
@@ -41,7 +41,7 @@ const COPY: Record<
     error: "Onjuist wachtwoord. Probeer het opnieuw.",
   },
   en: {
-    eyebrow: "Schaap's Vishandel · Leiden · since 1938",
+    eyebrow: "Leiden · since 1938",
     title: "We're working on our new website",
     body: "Soon you'll be able to use this site for:",
     features: [
@@ -60,7 +60,7 @@ const COPY: Record<
     error: "Incorrect password. Please try again.",
   },
   de: {
-    eyebrow: "Schaap's Vishandel · Leiden · seit 1938",
+    eyebrow: "Leiden · seit 1938",
     title: "Wir arbeiten an unserer neuen Website",
     body: "Bald können Sie hier:",
     features: [
@@ -116,13 +116,14 @@ export function ComingSoon({ error = false }: { error?: boolean }) {
         </div>
 
         <div className="text-center">
-          {/* Logo / merk */}
-          <img
-            src="/images/scene-winkel.svg"
-            alt="Schaap's Vishandel, Herenstraat 48 Leiden"
-            className="w-40 h-40 object-cover mx-auto mb-8 rounded-full"
-            style={{ border: "3px solid var(--gold)" }}
-          />
+          {/* Het woordmerk, niet een plaatje: dit scherm moet ook staan als er
+              verder niets van de site geladen mag worden. */}
+          <p
+            className="mb-8 text-[2rem] md:text-[2.4rem] leading-none"
+            style={{ fontFamily: "var(--font-display)", color: "var(--cream)", fontWeight: 700 }}
+          >
+            Schaap&rsquo;s Vishandel
+          </p>
 
           <p
             className="text-xs tracking-[0.25em] uppercase mb-5"

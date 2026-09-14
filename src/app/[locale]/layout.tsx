@@ -10,7 +10,7 @@ import { Chrome } from "@/components/layout/Chrome";
 import { WinkelwagenProvider } from "@/components/winkel/Winkelwagen";
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
 import { cookies } from "next/headers";
-import { ACCESS_COOKIE, ACCESS_TOKEN } from "@/lib/siteAccess";
+import { ACCESS_COOKIE, ACCESS_TOKEN, siteOpSlot } from "@/lib/siteAccess";
 import { BEDRIJF } from "@/lib/bedrijf";
 
 /* Lettertypen worden meegebouwd en vanaf ons eigen domein geserveerd. Dat
@@ -96,9 +96,7 @@ export default async function LocaleLayout({
   // onderhoudsmodus (wachtwoordslot) nog aanstaat. Zo verwar je je eigen
   // weergave nooit met wat het publiek ziet (die krijgt de "binnenkort"-pagina).
   const cookieStore = await cookies();
-  const isPreview =
-    process.env.MAINTENANCE_MODE === "on" &&
-    cookieStore.get(ACCESS_COOKIE)?.value === ACCESS_TOKEN;
+  const isPreview = siteOpSlot() && cookieStore.get(ACCESS_COOKIE)?.value === ACCESS_TOKEN;
 
   return (
     <html lang={locale} className={`${caslon.variable} ${sourceSans.variable}`}>

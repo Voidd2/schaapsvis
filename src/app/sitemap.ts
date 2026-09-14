@@ -5,6 +5,7 @@ import { recepten } from "@/lib/recepten";
 import { GEMEENTEN } from "@/lib/bezorging";
 import { BEDRIJF } from "@/lib/bedrijf";
 import { LOCALES } from "@/lib/seo";
+import { siteOpSlot } from "@/lib/siteAccess";
 
 const basis = BEDRIJF.domein;
 
@@ -69,7 +70,15 @@ function meertaligeAlternates(pad: string) {
   return { languages: talen };
 }
 
+// Net als robots.txt bij elk verzoek opnieuw bepalen; anders blijft een lege
+// sitemap staan nadat de site is opengezet.
+export const dynamic = "force-dynamic";
+
 export default function sitemap(): MetadataRoute.Sitemap {
+  // Staat het slot erop, dan valt er niets te indexeren. De proxy houdt een
+  // crawler hier sowieso weg; dit is het tweede slot.
+  if (siteOpSlot()) return [];
+
   const regels: MetadataRoute.Sitemap = [];
 
   // ── Vaste pagina's, in alle drie de talen ────────────────────────────────
