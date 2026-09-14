@@ -6,6 +6,8 @@ import { Sectie, Kop, Vragen } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { eenTaalMetadata, kruimelSchema, vraagSchema } from "@/lib/seo";
 import { BEDRIJF, VERKOOPPUNTEN } from "@/lib/bedrijf";
+import { Beeld } from "@/components/ui/Beeld";
+import type { BeeldNaam } from "@/lib/beeld";
 
 export async function generateMetadata(): Promise<Metadata> {
   return eenTaalMetadata({
@@ -26,6 +28,13 @@ export async function generateMetadata(): Promise<Metadata> {
  * over álle vermeldingen heen, en wat elkaar tegenspreekt telt niet mee.
  */
 const KRAMEN = VERKOOPPUNTEN.filter((punt) => punt.id !== "winkel");
+
+/** Welke foto bij welke kraam hoort. Zie `src/lib/beeld.ts`. */
+const BEELD_PER_KRAAM: Record<string, BeeldNaam> = {
+  markt: "marktZaterdag",
+  "markt-woensdag": "marktWoensdag",
+  voorschoten: "marktVoorschoten",
+};
 
 const TOELICHTING: Record<string, string> = {
   markt:
@@ -104,9 +113,14 @@ export default async function MarktkraamPage({
           {KRAMEN.map((kraam) => (
             <li
               key={kraam.id}
-              className="grid md:grid-cols-[14rem_1fr] gap-x-10 gap-y-2 py-7"
+              className="grid md:grid-cols-[13rem_1fr] lg:grid-cols-[13rem_12rem_1fr] gap-x-8 gap-y-4 py-7"
               style={{ borderBottom: "1px solid var(--linen)" }}
             >
+              <Beeld
+                naam={BEELD_PER_KRAAM[kraam.id]}
+                verhouding="liggend"
+                streep="var(--navy)"
+              />
               <div>
                 <h2 className="text-[1.25rem] mb-1">{kraam.naam}</h2>
                 <p className="text-sm" style={{ color: "var(--grijs)" }}>

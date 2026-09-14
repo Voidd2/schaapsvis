@@ -7,6 +7,16 @@ import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { paginaMetadata, kruimelSchema } from "@/lib/seo";
 import { BEDRIJF, ADRES_REGEL, euro } from "@/lib/bedrijf";
 import { BEZORGING, GEMEENTEN, bezorgdagenTekst } from "@/lib/bezorging";
+import { Beeld } from "@/components/ui/Beeld";
+import type { BeeldNaam } from "@/lib/beeld";
+
+/** Welke foto bij welke plek hoort. Zie `src/lib/beeld.ts`. */
+const BEELD_PER_PLEK: Record<string, BeeldNaam> = {
+  winkel: "winkelGevel",
+  zaterdag: "marktZaterdag",
+  woensdag: "marktWoensdag",
+  voorschoten: "marktVoorschoten",
+};
 
 export async function generateMetadata({
   params,
@@ -116,9 +126,14 @@ export default async function BezoekOnsPage({
           {PLEKKEN.map((plek) => (
             <li
               key={plek.id}
-              className="grid md:grid-cols-[1fr_1.3fr_auto] gap-4 md:gap-10 py-7 items-start"
+              className="grid md:grid-cols-[14rem_1fr_1.1fr_auto] gap-4 md:gap-8 py-7 items-start"
               style={{ borderTop: "1px solid var(--linen)" }}
             >
+              {/* Een foto per plek. De kraam bij de Waag ziet er anders uit dan
+                  die op de parkeerplaats bij Hoogvliet — met een foto weet
+                  iemand waar hij naar moet zoeken. */}
+              <Beeld naam={BEELD_PER_PLEK[plek.id]} verhouding="liggend" streep="var(--navy)" />
+
               <div>
                 <h2 className="text-[1.35rem] mb-1">{p(`${plek.id}Naam`)}</h2>
                 <p className="text-[0.95rem]" style={{ color: "var(--grijs)" }}>

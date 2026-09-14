@@ -216,11 +216,69 @@ die pagina niet voor iets wat niemand mag zien zolang dat zo is.
 
 ---
 
-## 5. Foto's
+## 5. Foto's en het logo
 
-Dit is nu de grootste winst die je nog kunt pakken. Er staan 37 echte
-productfoto's op de site; bij de rest staat alleen de naam en de omschrijving.
-Dat leest netjes, maar een foto verkoopt beter.
+Dit is nu veruit de grootste winst die je nog kunt pakken — en het enige
+waarvoor de site echt op jou wacht.
+
+### Het logo
+
+Het ronde logo dat op de gevel en op de kraam staat zit **nog niet in de site**:
+het bestand is er niet. Overal waar het hoort te staan — de kop van elke pagina,
+de homepage, Ons verhaal en de voet — staat nu de naam in letters. Dat ziet er
+verzorgd uit, maar het is niet jullie merk.
+
+Lever aan: het ronde logo vrijstaand (PNG met transparante achtergrond, of een
+SVG), en als je hem hebt ook de liggende versie met de vis links en de naam
+ernaast. Zet ze in `public/images/` en vul het pad in bij `logoBadge` en
+`logoLiggend` in `src/lib/beeld.ts` (zie hieronder).
+
+### Alle fotoplekken op één plek: `src/lib/beeld.ts`
+
+In dat bestand staat **elke plek waar de site een foto wil hebben**, met erbij
+wat erop moet staan, welk formaat het is en welke alt-tekst eronder komt. Het
+leest als een opdrachtlijst voor een middag fotograferen:
+
+```ts
+winkelGevel: {
+  waar: "Homepage (de grote foto bovenaan) en Bezoek ons",
+  wat: "De winkel van buiten, met de gevel en het uithangbord herkenbaar. …",
+  bestand: "",                                     // ← hier vul jij het pad in
+  alt: "De winkel van Schaap's Vishandel aan de Herenstraat 48 in Leiden",
+  verhouding: "liggend",
+  terugval: "Herenstraat 48, Leiden",
+}
+```
+
+Je hoeft maar één ding te doen: de foto in `public/images/` zetten en `bestand`
+invullen. Hij verschijnt dan meteen overal waar die plek gebruikt wordt — je
+hoeft geen pagina aan te raken. Zolang `bestand` leeg is toont de site een net
+zandvlak met de naam erin; geen gebroken plaatje en geen leeg gat.
+
+De plekken die nu nog leeg zijn:
+
+| Plek in `beeld.ts` | Wat erop moet |
+| --- | --- |
+| `logoBadge`, `logoLiggend` | Het logo, vrijstaand |
+| `winkelGevel` | De winkel van buiten, Herenstraat |
+| `toonbank` | De toonbank met vis erop — de belangrijkste foto van de site |
+| `achterDeToonbank` | Iemand aan het werk achter de toonbank |
+| `gebakkenVis` | Kibbeling of lekkerbek, net uit de pan |
+| `marktZaterdag` | De kraam op de Aalmarkt, met de Waag erop |
+| `marktWoensdag` | De woensdagkraam |
+| `marktVoorschoten` | De kraam bij Hoogvliet in Voorschoten |
+| `historie1938` … `historieNu` | Vijf foto's voor de tijdlijn op Ons verhaal |
+| `schaalBorrel`, `schaalFamilie`, `schaalFeest` | De drie visschalen |
+| `varlaksFilet` | Een Varlaks-filet op jullie eigen toonbank |
+
+Bij de historische foto's zit de meeste winst: **één vergeelde foto uit 1960
+doet meer voor de geloofwaardigheid dan twintig keer "sinds 1938" in de tekst.**
+Scheef, korrelig of vergeeld mag — dat maakt het juist echt.
+
+### En verder: de productfoto's
+
+Er staan 37 echte productfoto's op de site; bij de rest staat alleen de naam en
+de omschrijving.
 
 De tekenfilm-illustraties (`public/images/scene-*.svg`) staan nergens meer op
 een pagina. Ze zagen eruit als een sjabloon en dat is precies wat we niet
@@ -229,10 +287,10 @@ door echte foto's zodra je ze hebt, dan kan de map weg.
 
 Het meest urgent, op volgorde:
 
-1. **De winkel van buiten en van binnen.** Eén goede foto van de toonbank met
-   vis erop doet meer dan alle tekst eromheen.
-2. **De drie visschalen.** Die staan nu met een naamvlak op de site; met een
-   foto verkopen ze zichzelf. Zie sectie 1.
+1. **De winkel van buiten en van binnen** (`winkelGevel`, `toonbank`). Eén goede
+   foto van de toonbank met vis erop doet meer dan alle tekst eromheen.
+2. **De drie visschalen** (`schaalBorrel`, `schaalFamilie`, `schaalFeest`). Die
+   staan nu met een naamvlak op de site; met een foto verkopen ze zichzelf.
 3. **Negen productfoto's die tegelijk zeventien recepten vullen.** Elk recept
    is gekoppeld aan de vis die je ervoor nodig hebt (`hoofdproduct` in
    `src/lib/recepten.ts`). Staat er een foto bij dat product, dan staat hij
@@ -250,9 +308,11 @@ Het meest urgent, op volgorde:
    | `fine-de-claire-oesters` | 1 |
    | `surimisalade` | 1 |
 
-4. **Jij achter de toonbank.** Voor "Ons verhaal", en voor Google: foto's van
-   echte mensen doen het aantoonbaar beter dan productplaatjes.
-5. De overige producten uit het assortiment.
+4. **Jij achter de toonbank** (`achterDeToonbank`, `historieNu`). Voor "Ons
+   verhaal", en voor Google: foto's van echte mensen doen het aantoonbaar beter
+   dan productplaatjes.
+5. **De oude foto's voor de tijdlijn** (`historie1938` tot `historieNu`).
+6. De overige producten uit het assortiment.
 
 Vier recepten hebben helemaal geen product om aan te koppelen, omdat **gerookte
 paling** en **gestoomde makreel** niet in `assortiment-data.ts` staan terwijl je
@@ -262,11 +322,14 @@ vier gedekt.
 Heb je een foto van het gerecht zélf, dan gaat die vóór de productfoto: zet hem
 op `fotoUrl` bij dat recept.
 
-Formaat: **vierkant**, minstens 1200 × 1200 pixels, met de telefoon is prima.
-De kaarten in het assortiment en bij de recepten zijn vierkant; een liggende
-foto krijgt daar witranden.
-Zet ze in `public/images/` en verwijs ernaar in `src/lib/assortiment-data.ts`
-(`photo:`) of rechtstreeks in de pagina.
+Formaat voor de **producten**: vierkant, minstens 1200 × 1200 pixels, met de
+telefoon is prima. De kaarten in het assortiment en bij de recepten zijn
+vierkant; een liggende foto krijgt daar witranden. Zet ze in `public/images/` en
+verwijs ernaar in `src/lib/assortiment-data.ts` (`photo:`).
+
+Voor de plekken uit `beeld.ts` staat het gewenste formaat er per plek bij onder
+`verhouding`: `vierkant`, `liggend` (3:2), `portret` of `breed`. Fotografeer bij
+daglicht en ga bij de toonbank staan in plaats van ertegenin.
 
 Maak ook een `public/og-image.png` van 1200×630 met de winkel erop — dat is het
 plaatje dat verschijnt als iemand een link naar de site deelt in WhatsApp.
@@ -361,6 +424,8 @@ in `ourFish`.
 | Aanbieding van de week | `src/lib/aanbieding.ts` |
 | Google-beoordelingen | `src/lib/reviews.ts` |
 | Alle teksten in drie talen | `src/messages/nl.json`, `en.json`, `de.json` |
-| Kleuren en lettertypen | `src/app/globals.css` |
+| Foto's en het logo (elke plek op de site) | `src/lib/beeld.ts` |
+| Kleuren | `src/app/globals.css` |
+| Lettertypen | `src/lib/fonts.ts` |
 
 Bouwen doe je met `npm run build -- --webpack`.

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ComingSoon } from "./ComingSoon";
+import { FONT_KLASSEN } from "@/lib/fonts";
 
 export const metadata: Metadata = {
   title: "Binnenkort online — Schaap's Vishandel Leiden",
@@ -15,5 +16,12 @@ export default async function ComingSoonPage({
   searchParams: Promise<{ error?: string }>;
 }) {
   const sp = await searchParams;
-  return <ComingSoon error={sp.error === "1"} />;
+  // Deze pagina valt buiten de taal-layout en krijgt de lettertypen daar dus
+  // niet van mee. Zonder deze klassen viel het wachtwoordscherm terug op de
+  // systeemletter — en dat is het eerste wat een bezoeker van de site ziet.
+  return (
+    <div className={FONT_KLASSEN}>
+      <ComingSoon error={sp.error === "1"} />
+    </div>
+  );
 }

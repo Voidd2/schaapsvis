@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import { NewsletterSignup } from "@/components/shared/NewsletterSignup";
 import { BEDRIJF } from "@/lib/bedrijf";
+import { BEELD } from "@/lib/beeld";
 import { GEMEENTEN } from "@/lib/bezorging";
 
 /**
@@ -23,25 +24,44 @@ export function Footer() {
 
   const jaar = new Date().getFullYear();
 
-  const links = [
-    { href: p("/bestellen"), label: nav("bestellen") },
-    { href: p("/visschalen"), label: nav("visschalen") },
-    { href: p("/assortiment"), label: nav("assortiment") },
-    { href: p("/biologische-vis"), label: nav("betereVis") },
-    { href: p("/varlaks"), label: nav("varlaks") },
-    // De viswijzer, de recepten en de blog bestaan alleen in het Nederlands,
-    // dus verwijzen we daar rechtstreeks naartoe in plaats van naar een /en/-
-    // of /de/-adres met Nederlandse tekst erop.
-    { href: "/nl/viskalender", label: nav("viswijzer") },
-    { href: "/nl/recepten", label: nav("recepten") },
-    { href: "/nl/blog", label: nav("blog") },
-    { href: p("/ons-verhaal"), label: nav("verhaal") },
-    { href: p("/bezoek-ons"), label: nav("locaties") },
-    { href: p("/contact"), label: nav("contact") },
-    ...GEMEENTEN.map((g) => ({
-      href: p(`/bezorgen/${g.slug}`),
-      label: t("bezorgenIn", { plaats: g.naam }),
-    })),
+  /**
+   * Drie groepjes in plaats van één rij van zestien links.
+   *
+   * De gemeentelinks staan apart onderaan, klein. Ze moeten blijven — daar komt
+   * het zoekverkeer op "vis bezorgen Wassenaar" binnen — maar tussen de gewone
+   * navigatie maakten ze van de voet een lijst die eruitziet als SEO-vulling.
+   */
+  const groepen = [
+    {
+      kop: nav("bestellen"),
+      links: [
+        { href: p("/bestellen"), label: nav("bestellen") },
+        { href: p("/visschalen"), label: nav("visschalen") },
+        { href: p("/assortiment"), label: nav("assortiment") },
+        { href: p("/bezorgen"), label: nav("bezorgen") },
+      ],
+    },
+    {
+      kop: nav("verhaal"),
+      links: [
+        { href: p("/ons-verhaal"), label: nav("verhaal") },
+        { href: p("/biologische-vis"), label: nav("betereVis") },
+        { href: p("/varlaks"), label: nav("varlaks") },
+        // De viswijzer, de recepten en de blog bestaan alleen in het Nederlands,
+        // dus verwijzen we daar rechtstreeks naartoe in plaats van naar een
+        // /en/- of /de/-adres met Nederlandse tekst erop.
+        { href: "/nl/recepten", label: nav("recepten") },
+        { href: "/nl/viskalender", label: nav("viswijzer") },
+        { href: "/nl/blog", label: nav("blog") },
+      ],
+    },
+    {
+      kop: nav("locaties"),
+      links: [
+        { href: p("/bezoek-ons"), label: nav("locaties") },
+        { href: p("/contact"), label: nav("contact") },
+      ],
+    },
   ];
 
   return (
@@ -49,6 +69,16 @@ export function Footer() {
       <div className="max-w-6xl mx-auto px-4 py-9 grid gap-8 md:grid-cols-[1.1fr_1fr] lg:grid-cols-[1fr_1fr_20rem]">
         {/* ── Waar we zijn ──────────────────────────────────────────────── */}
         <div>
+          {/* De ronde badge klein terug laten komen: herkenbaar, zonder dat de
+              voet een reclamebord wordt. */}
+          {BEELD.logoBadge.bestand && (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              src={BEELD.logoBadge.bestand}
+              alt={BEELD.logoBadge.alt}
+              className="h-16 w-16 object-contain mb-4"
+            />
+          )}
           <address className="not-italic text-sm leading-relaxed" style={{ opacity: 0.85 }}>
             <span style={{ color: "var(--cream)", fontWeight: 600 }}>{BEDRIJF.naam}</span>
             <br />
@@ -99,23 +129,48 @@ export function Footer() {
         </div>
       </div>
 
-      {/* ── Alle pagina's op één regel ────────────────────────────────────── */}
+      {/* ── De pagina's, gegroepeerd ─────────────────────────────────────── */}
       <nav
         aria-label={t("kopPaginas")}
         style={{ borderTop: "1px solid rgba(250,246,239,0.14)" }}
       >
-        <ul
-          className="max-w-6xl mx-auto px-4 py-4 flex flex-wrap gap-x-5 gap-y-1.5 text-[0.8rem]"
-          style={{ opacity: 0.7 }}
-        >
-          {links.map(({ href, label }) => (
-            <li key={href}>
-              <Link href={href} className="hover:text-white transition-colors">
-                {label}
-              </Link>
-            </li>
+        <div className="max-w-6xl mx-auto px-4 py-7 grid gap-8 sm:grid-cols-3">
+          {groepen.map((groep) => (
+            <div key={groep.kop}>
+              <p className="kapitaal kapitaal-licht mb-3">{groep.kop}</p>
+              <ul className="space-y-1.5 text-[0.88rem]" style={{ opacity: 0.8 }}>
+                {groep.links.map(({ href, label }) => (
+                  <li key={href}>
+                    <Link href={href} className="hover:text-white transition-colors">
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </ul>
+        </div>
+
+        {/* De gemeenten klein onderaan: wél de interne links die het zoekverkeer
+            opleveren, zonder dat de voet eruitziet als een linklijst. */}
+        <p
+          className="max-w-6xl mx-auto px-4 pb-6 text-[0.78rem] leading-relaxed"
+          style={{ opacity: 0.55 }}
+        >
+          {t("bezorgenIntro")}{" "}
+          {GEMEENTEN.map((g, i) => (
+            <span key={g.slug}>
+              {i > 0 && (i === GEMEENTEN.length - 1 ? ` ${t("en")} ` : ", ")}
+              <Link
+                href={p(`/bezorgen/${g.slug}`)}
+                className="underline underline-offset-2 hover:text-white transition-colors"
+              >
+                {g.naam}
+              </Link>
+            </span>
+          ))}
+          .
+        </p>
       </nav>
 
       {/* ── Onderrand ────────────────────────────────────────────────────── */}

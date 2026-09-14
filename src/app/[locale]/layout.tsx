@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import { Libre_Caslon_Text, Source_Sans_3 } from "next/font/google";
+import { FONT_KLASSEN } from "@/lib/fonts";
 import { routing } from "@/i18n/routing";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -12,26 +12,6 @@ import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
 import { cookies } from "next/headers";
 import { ACCESS_COOKIE, ACCESS_TOKEN, siteOpSlot } from "@/lib/siteAccess";
 import { BEDRIJF } from "@/lib/bedrijf";
-
-/* Lettertypen worden meegebouwd en vanaf ons eigen domein geserveerd. Dat
-   scheelt een verbinding met Google én voorkomt dat de tekst pas verschijnt als
-   het lettertype binnen is — allebei goed voor de laadscores waar Google op
-   let. Caslon voor de koppen (een letter uit dezelfde eeuw als het vak),
-   Source Sans voor lopende tekst, formulieren en prijzen. */
-const caslon = Libre_Caslon_Text({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-caslon",
-  display: "swap",
-});
-
-const sourceSans = Source_Sans_3({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  variable: "--font-source",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(BEDRIJF.domein),
@@ -99,7 +79,7 @@ export default async function LocaleLayout({
   const isPreview = siteOpSlot() && cookieStore.get(ACCESS_COOKIE)?.value === ACCESS_TOKEN;
 
   return (
-    <html lang={locale} className={`${caslon.variable} ${sourceSans.variable}`}>
+    <html lang={locale} className={FONT_KLASSEN}>
       <head>
         <meta property="og:locale" content={OG_LOCALE[locale] ?? "nl_NL"} />
       </head>

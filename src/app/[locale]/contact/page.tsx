@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
 import { Sectie } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
+import { Beeld } from "@/components/ui/Beeld";
 import { ContactFormulier } from "./ContactFormulier";
 import { paginaMetadata, kruimelSchema } from "@/lib/seo";
 import { BEDRIJF, ADRES_REGEL, whatsappLink } from "@/lib/bedrijf";
@@ -70,6 +71,12 @@ export default async function ContactPage({
           {/* ── Meteen contact ────────────────────────────────────────────── */}
           <div>
             <h2 className="text-[1.5rem] mb-6">{t("infoTitle")}</h2>
+
+            {/* Iemand achter de toonbank naast het telefoonnummer: bellen wordt
+                makkelijker als je ziet wie er opneemt. */}
+            <div className="max-w-[16rem] mb-7">
+              <Beeld naam="achterDeToonbank" verhouding="vierkant" streep="var(--navy)" />
+            </div>
 
             <dl>
               <div className="py-4" style={{ borderTop: "1px solid var(--linen)" }}>

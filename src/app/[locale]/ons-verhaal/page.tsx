@@ -5,6 +5,8 @@ import { Sectie, Kop } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { paginaMetadata } from "@/lib/seo";
 import { BEDRIJF } from "@/lib/bedrijf";
+import { Beeld } from "@/components/ui/Beeld";
+import type { BeeldNaam } from "@/lib/beeld";
 
 export async function generateMetadata({
   params,
@@ -31,12 +33,18 @@ export async function generateMetadata({
  * kantlijn, zoals in een boek, en houdt de tekst één leeskolom.
  */
 const TIJDLIJN = [
-  { jaar: "1938", titel: "t1title", tekst: "t1text", citaat: null },
-  { jaar: "1957", titel: "t2title", tekst: "t2text", citaat: null },
-  { jaar: "2009", titel: "t3title", tekst: "t3text", citaat: "t3quote" },
-  { jaar: "2018", titel: "t4title", tekst: "t4text", citaat: "t4quote" },
-  { jaar: "Nu", titel: "t5title", tekst: "t5text", citaat: null },
-] as const;
+  { jaar: "1938", titel: "t1title", tekst: "t1text", citaat: null, beeld: "historie1938" },
+  { jaar: "1957", titel: "t2title", tekst: "t2text", citaat: null, beeld: "historie1960" },
+  { jaar: "2009", titel: "t3title", tekst: "t3text", citaat: "t3quote", beeld: "historie2000" },
+  { jaar: "2018", titel: "t4title", tekst: "t4text", citaat: "t4quote", beeld: "historie1980" },
+  { jaar: "Nu", titel: "t5title", tekst: "t5text", citaat: null, beeld: "historieNu" },
+] as const satisfies readonly {
+  jaar: string;
+  titel: string;
+  tekst: string;
+  citaat: string | null;
+  beeld: BeeldNaam;
+}[];
 
 export default async function OnsVerhaalPage({
   params,
@@ -71,18 +79,26 @@ export default async function OnsVerhaalPage({
         ]}
       />
 
-      <Sectie grond="zand" smal>
-        <p className="citaat">{t("intro")}</p>
+      {/* Eén grote historische foto direct onder de kop: dat zegt in één oogopslag
+          dat deze zaak er al lang staat. */}
+      <Sectie grond="zand">
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-16 items-center">
+          <Beeld naam="historie1938" verhouding="liggend" streep="var(--navy)" />
+          <p className="citaat">{t("intro")}</p>
+        </div>
       </Sectie>
 
       {/* ── Tijdlijn ──────────────────────────────────────────────────────── */}
+      {/* Het jaartal in de kantlijn, de foto ernaast. Eén vergeelde foto uit
+          1960 doet meer voor de geloofwaardigheid dan twintig keer "sinds 1938"
+          in de tekst — daarom heeft elk punt hier zijn eigen plek. */}
       <Sectie grond="papier">
         <Kop label="Vier generaties" titel="De tijdlijn" als="h2" />
         <ol style={{ borderTop: "1px solid var(--linen)" }}>
           {TIJDLIJN.map((punt) => (
             <li
               key={punt.jaar}
-              className="grid md:grid-cols-[7rem_1fr] gap-x-10 gap-y-2 py-8"
+              className="grid md:grid-cols-[7rem_1fr] lg:grid-cols-[7rem_1fr_18rem] gap-x-10 gap-y-4 py-8"
               style={{ borderBottom: "1px solid var(--linen)" }}
             >
               <p
@@ -100,6 +116,7 @@ export default async function OnsVerhaalPage({
                   </blockquote>
                 )}
               </div>
+              <Beeld naam={punt.beeld} verhouding="liggend" streep="var(--sand-diep)" />
             </li>
           ))}
         </ol>

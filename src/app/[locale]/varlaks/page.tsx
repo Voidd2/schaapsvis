@@ -5,6 +5,7 @@ import { Sectie, Kop } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { paginaMetadata } from "@/lib/seo";
 import { BEDRIJF, whatsappLink } from "@/lib/bedrijf";
+import { Beeld } from "@/components/ui/Beeld";
 
 export async function generateMetadata({
   params,
@@ -78,11 +79,18 @@ export default async function VarlaksPage({
       />
 
       {/* ── Het verhaal ───────────────────────────────────────────────────── */}
-      <Sectie grond="papier" smal>
-        <Kop titel={t("storyTitle")} />
-        <p className="text-[1.05rem] leading-relaxed" style={{ color: "var(--charcoal)" }}>
-          {t("story")}
-        </p>
+      <Sectie grond="papier">
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-16 items-center">
+          <div>
+            <Kop titel={t("storyTitle")} />
+            <p className="lees" style={{ color: "var(--charcoal)" }}>
+              {t("story")}
+            </p>
+          </div>
+          {/* Jullie eigen filet op jullie eigen toonbank. Overtuigender dan de
+              persfoto van de kweker, want die kan iedereen laten zien. */}
+          <Beeld naam="varlaksFilet" verhouding="liggend" streep="var(--navy)" />
+        </div>
       </Sectie>
 
       {/* ── Wat er wel en niet in zit ─────────────────────────────────────── */}

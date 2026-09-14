@@ -70,10 +70,30 @@ geschreven via `src/lib/mandje.ts` — nergens anders.
 
 ## Vormgeving
 
-Uitgangspunt: een oude Leidse viswinkel, geen webshopsjabloon. Warm papier
-(`--cream`), diep marineblauw uit het logo (`--navy`), messing (`--gold`) en een
-dof winkelrood (`--rood`). Koppen in Libre Caslon Text, lopende tekst in Source
-Sans 3 — allebei via `next/font`, dus meegebouwd en niet bij Google opgehaald.
+Uitgangspunt: een oude Leidse viswinkel, geen webshopsjabloon. **De kleuren
+komen uit het logo**: het diepe blauw van de banner (`--navy`, `#2f3e8f`), het
+lichtblauw van de vis (`--lichtblauw`), het zand van de buitenrand (`--sand`,
+`--sand-diep`) en het rood van de dubbele lijn (`--rood`, `#c62828`). Warm
+papier (`--cream`) is de grond van vrijwel alles.
+
+**De verhouding waarin we ze gebruiken staat bovenin `globals.css` en moet
+kloppen blijven:**
+
+```
+70%  crème        de achtergrond van vrijwel alles
+20%  donkerblauw  koppen, balken, de voet
+ 8%  lichtblauw en zand   rustige vlakken die een sectie afzetten
+ 2%  rood         knoppen die tot actie aanzetten, en verder niets
+```
+
+Zodra rood meer dan een paar procent van een scherm beslaat gaat het richting
+snackbar. Wil je iets laten opvallen zonder knop: neem zand of lichtblauw.
+
+Koppen in **Bitter** (schreefletter met blokvoetjes, zoals op een oud
+winkelbord), lopende tekst in **Source Sans 3** — allebei via `next/font` in
+`src/lib/fonts.ts`, dus meegebouwd en niet bij Google opgehaald. Dat bestand
+bestaat apart omdat `/coming-soon` buiten de taallayout valt en de letters
+tóch moet hebben.
 
 Rechte hoeken, dunne lijnen, kapitaaltjes-labels, weinig schaduw.
 
@@ -90,6 +110,31 @@ Elke binnenpagina heeft hetzelfde ritme, en dat komt uit twee componenten in
 Daartussen wisselen `Sectie`-blokken elkaar af: papier, zand, papier. Bouw geen
 eigen `<section style={{ backgroundColor: … }}>` — dan loopt de opmaak binnen een
 paar pagina's weer uit elkaar.
+
+### Foto's: altijd via `src/lib/beeld.ts`
+
+Er is nog **geen enkele** echte foto en ook geen logobestand; alle `bestand`-
+velden staan leeg en wachten op de eigenaar. Daarom staat elke fotoplek op de
+site in één bestand, met erbij wat erop moet komen, welk formaat het is en welke
+alt-tekst eronder hoort. `<Beeld naam="winkelGevel" />` toont de foto zodra die
+er is, en tot die tijd een net zandvlak met de naam erin.
+
+Nieuwe foto nodig op een pagina? **Zet er een plek voor in `beeld.ts` en gebruik
+`<Beeld>`** — nooit een los `<Image src="/images/…">`. Anders weet de eigenaar
+niet dat er een foto wordt gevraagd, en staat er straks een gebroken plaatje.
+`ontbrekendeBeelden()` geeft de lijst van wat nog leeg is.
+
+### De homepage: 1938 eerst, bezorgen later
+
+De volgorde is bewust en niet willekeurig: hero (sinds 1938) → seizoensbanner →
+de drie pijlers (gebakken vis, verse vis, visschalen) → **Sinds 1938** met de
+oudste foto → **gebakken vis** ("waar Leiden ons van kent") → feitenbalk →
+bezorgen → visschalen → assortiment → herkomst → beoordelingen → locaties →
+`PaginaSlot`.
+
+Bezorgen stond bovenaan; dat leest als een bezorgdienst die toevallig vis doet.
+Wat deze zaak onderscheidt is dat hij er al vier generaties staat en dat half
+Leiden er de kibbeling haalt — dus dat komt eerst.
 
 **Wat we bewust niet doen**, omdat het een site er meteen als sjabloon laat
 uitzien:
@@ -137,17 +182,26 @@ src/lib/
   mandje.ts           wat er in de winkelwagen zit, en het lezen/schrijven ervan
   betalen.ts          SumUp hosted checkout (alleen serverzijde!)
   seo.ts              metadata, hreflang, alle schema.org-blokken
+  beeld.ts            élke fotoplek op de site — logo, winkel, kramen, historie,
+                      de drie schalen. Nog allemaal leeg: wacht op de eigenaar.
+  fonts.ts            Bitter (koppen) en Source Sans 3 (tekst) via next/font
+  siteAccess.ts       het slot: cookie en de SITE_PUBLIC-schakelaar
   assortiment-data.ts 129 producten met allergenen
   prijzen.ts          richtprijzen per product (leeg = op aanvraag)
   reviews.ts          echte Google-beoordelingen — niets verzinnen
 
+src/proxy.ts          zet het wachtwoord op élk pad (heet in Next 16 geen
+                      middleware meer)
 src/app/api/bestelling/route.ts   neemt bestellingen aan, herberekent het bedrag
                                   op de server en maakt eventueel de SumUp-checkout
+src/app/api/unlock/route.ts       hier staat het wachtwoord — serverzijde, en
+                                  nergens anders
 
 src/components/
   ui/Sectie.tsx       Sectie, Kop, Vragen, Kruimels — de vaste bouwstenen
   ui/PaginaKop.tsx    PaginaKop en PaginaSlot — de kop en de afsluiting van
                       élke binnenpagina. Nieuwe pagina? Begin hiermee.
+  ui/Beeld.tsx        toont een plek uit beeld.ts, of het terugvalvlak
   Schema.tsx          zet JSON-LD in de pagina
   JsonLd.tsx          de vaste blokken (winkel, organisatie, site, bezorgdienst)
   bezorgen/PostcodeCheck.tsx
@@ -188,6 +242,11 @@ src/components/
 6. Bouwen zonder `--webpack`.
 7. Een bedrag tonen bij verse vis. Dat kan niet: het gaat op gewicht. Alleen de
    visschaal heeft een hard bedrag.
+8. `setState` in een `useEffect` om iets van de klok te tonen (welke maand het
+   is, of de winkel open is). Dat wordt door eslint afgekeurd én het geeft een
+   flits bij het laden — gebruik `useSyncExternalStore`, zoals `DezeMaand`.
+9. Rechtstreeks een `<Image>` naar `/images/…` zetten in plaats van een plek in
+   `beeld.ts`. Zie de fotoparagraaf hierboven.
 
 ---
 

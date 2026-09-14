@@ -198,10 +198,94 @@ const faqByLocale: Record<string, { v: string; a: string }[]> = {
   ],
 };
 
-const INTRO: Record<string, string> = {
-  nl: "Schaap's Vishandel is hét adres voor biologische vis in Leiden. Onze biologische Varlaks zalm is ASC- én EU-biologisch gecertificeerd. Daarnaast werken we met MSC-gecertificeerde wildvangst en verantwoorde kweek. Hieronder leggen we eerlijk uit wat de keurmerken betekenen — en tonen we per product de herkomst en de VISwijzer-status, ook als die niet perfect is.",
-  en: "Schaap's Vishandel is the address for organic fish in Leiden. Our organic Varlaks salmon is both ASC- and EU-organic certified. We also work with MSC-certified wild catch and responsible farming. Below we explain honestly what the labels mean — and for every product we show the origin and the VISwijzer status, even when it is not perfect.",
-  de: "Schaap's Vishandel ist die Adresse für Bio-Fisch in Leiden. Unser Bio-Lachs Varlaks ist sowohl ASC- als auch EU-Bio-zertifiziert. Außerdem arbeiten wir mit MSC-zertifiziertem Wildfang und verantwortungsvoller Zucht. Nachfolgend erklären wir ehrlich, was die Siegel bedeuten — und zeigen für jedes Produkt die Herkunft und den VISwijzer-Status, auch wenn er nicht perfekt ist.",
+/**
+ * Eén zin bovenaan, en daarna drie kaarten.
+ *
+ * Hier stond eerst een alinea van vijf regels over keurmerken, gevolgd door nog
+ * twee alinea's overtuiging, en pas daarna iets concreets. Wie op "biologische
+ * vis Leiden" binnenkomt wil eerst weten wát we doen; de uitleg van ASC, MSC en
+ * de herkomst per vissoort staat nu verderop de pagina, waar iemand die
+ * doorleest hem vindt.
+ */
+const KORTE_INTRO: Record<string, string> = {
+  nl: "Van elke vis in onze toonbank weten we waar hij vandaan komt — en we zeggen het er ook bij als het oordeel niet groen is.",
+  en: "For every fish on our counter we know where it comes from — and we say so too when the verdict is not green.",
+  de: "Von jedem Fisch in unserer Theke wissen wir, woher er kommt — und wir sagen es auch, wenn das Urteil nicht grün ist.",
+};
+
+interface Pijler {
+  label: string;
+  titel: string;
+  tekst: string;
+}
+
+const PIJLERS: Record<string, Pijler[]> = {
+  nl: [
+    {
+      label: "Wild gevangen",
+      titel: "MSC waar het kan",
+      tekst:
+        "Wilde vis met het MSC-keurmerk komt uit een visserij die op bevoorrading is gecontroleerd. Waar dat keurmerk er niet is, staat erbij waarom.",
+    },
+    {
+      label: "Verantwoord gekweekt",
+      titel: "ASC en biologische opties",
+      tekst:
+        "Kweekvis met ASC, en voor zalm ook de biologische Varlaks: EU-biologisch, dus geen preventieve antibiotica en geen synthetische kleurstof.",
+    },
+    {
+      label: "Volledig traceerbaar",
+      titel: "Wij vertellen waar uw vis vandaan komt",
+      tekst:
+        "Vraag ernaar aan de toonbank en u krijgt de vangstzone, de kweker of de leverancier te horen. Hieronder staat het per product uitgeschreven.",
+    },
+  ],
+  en: [
+    {
+      label: "Wild caught",
+      titel: "MSC wherever possible",
+      tekst:
+        "Wild fish with the MSC label comes from a fishery checked on its stocks. Where that label is missing, we say why.",
+    },
+    {
+      label: "Responsibly farmed",
+      titel: "ASC and organic options",
+      tekst:
+        "Farmed fish with ASC, and for salmon also the organic Varlaks: EU-organic, so no preventive antibiotics and no synthetic colouring.",
+    },
+    {
+      label: "Fully traceable",
+      titel: "We tell you where your fish comes from",
+      tekst:
+        "Ask at the counter and you get the catch area, the farm or the supplier. Below it is written out product by product.",
+    },
+  ],
+  de: [
+    {
+      label: "Wildfang",
+      titel: "MSC, wo es geht",
+      tekst:
+        "Wildfisch mit MSC-Siegel stammt aus einer Fischerei, deren Bestände geprüft sind. Fehlt das Siegel, steht dabei, warum.",
+    },
+    {
+      label: "Verantwortungsvolle Zucht",
+      titel: "ASC und Bio-Optionen",
+      tekst:
+        "Zuchtfisch mit ASC, und beim Lachs zusätzlich der Bio-Lachs Varlaks: EU-Bio, also keine vorbeugenden Antibiotika und kein synthetischer Farbstoff.",
+    },
+    {
+      label: "Voll rückverfolgbar",
+      titel: "Wir sagen Ihnen, woher Ihr Fisch kommt",
+      tekst:
+        "Fragen Sie an der Theke, und Sie erfahren Fanggebiet, Zucht oder Lieferant. Unten steht es Produkt für Produkt ausgeschrieben.",
+    },
+  ],
+};
+
+const NAAR_HERKOMST: Record<string, string> = {
+  nl: "Bekijk de volledige herkomst per vissoort",
+  en: "See the full origin per species",
+  de: "Die vollständige Herkunft je Fischart ansehen",
 };
 
 const FAQ_KOP: Record<string, string> = {
@@ -288,48 +372,31 @@ export default async function BiologischeVisPage({
         ]}
       />
 
-      {/* ── Waar we voor staan ────────────────────────────────────────────── */}
-      <Sectie grond="papier" smal>
-        <p className="text-[1.05rem] leading-relaxed mb-9" style={{ color: "var(--charcoal)" }}>
-          {INTRO[locale] ?? INTRO.nl}
+      {/* ── Drie pijlers ─────────────────────────────────────────────────── */}
+      <Sectie grond="papier">
+        <p
+          className="text-[1.2rem] md:text-[1.4rem] leading-snug max-w-3xl mb-12"
+          style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}
+        >
+          {KORTE_INTRO[locale] ?? KORTE_INTRO.nl}
         </p>
-        <Kop label="Onze overtuiging" titel={t("whyTitle")} />
-        <div className="lees">
-          <p>{t("whyText1")}</p>
-          <p>{t("whyText2")}</p>
-        </div>
-      </Sectie>
 
-      {/* ── Keurmerken ───────────────────────────────────────────────────── */}
-      <Sectie grond="zand">
-        <Kop
-          label="Wat staat er op de verpakking"
-          titel={t("certTitle")}
-          intro={viswijzer.tekst}
-        />
-        <dl className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-8">
-          {KEURMERKEN.map((keurmerk) => (
-            <div key={keurmerk.label} className="pt-4" style={{ borderTop: "2px solid var(--seafoam)" }}>
+        <div className="grid md:grid-cols-3 gap-x-10 gap-y-9">
+          {(PIJLERS[locale] ?? PIJLERS.nl).map((pijler) => (
+            <div key={pijler.label} className="pt-4" style={{ borderTop: "2px solid var(--navy)" }}>
               <p className="kapitaal mb-2" style={{ color: "var(--seafoam)" }}>
-                {keurmerk.label}
+                {pijler.label}
               </p>
-              <dt className="text-[1.1rem] mb-2" style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}>
-                {t(keurmerk.titel)}
-              </dt>
-              <dd className="text-[0.95rem] leading-relaxed" style={{ color: "var(--charcoal)" }}>
-                {t(keurmerk.uitleg)}
-              </dd>
+              <h2 className="text-[1.15rem] mb-2 leading-snug">{pijler.titel}</h2>
+              <p className="text-[0.97rem] leading-relaxed" style={{ color: "var(--charcoal)" }}>
+                {pijler.tekst}
+              </p>
             </div>
           ))}
-        </dl>
-        <a
-          href="https://www.goodfish.nl"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block mt-9 font-semibold underline underline-offset-4"
-          style={{ color: "var(--navy)" }}
-        >
-          {viswijzer.link} &rarr;
+        </div>
+
+        <a href="#herkomst" className="knop knop-rood mt-11">
+          {NAAR_HERKOMST[locale] ?? NAAR_HERKOMST.nl}
         </a>
       </Sectie>
 
@@ -356,7 +423,7 @@ export default async function BiologischeVisPage({
       </Sectie>
 
       {/* ── Product voor product ─────────────────────────────────────────── */}
-      <Sectie grond="papier">
+      <Sectie grond="papier" id="herkomst">
         <Kop
           label="Product voor product"
           titel={t("listTitle")}
@@ -430,6 +497,51 @@ export default async function BiologischeVisPage({
         >
           {BELOFTE[locale] ?? BELOFTE.nl}
         </p>
+      </Sectie>
+
+      {/* ── Keurmerken ───────────────────────────────────────────────────── */}
+      {/* De uitleg van de keurmerken staat bewust ná de herkomstlijst: wie
+          wil weten wat ASC of MSC precies inhoudt, leest door. Wie alleen
+          wilde weten of we het goed doen, heeft dat boven al gezien. */}
+      <Sectie grond="zand">
+        <Kop
+          label="Wat staat er op de verpakking"
+          titel={t("certTitle")}
+          intro={viswijzer.tekst}
+        />
+        <dl className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-8">
+          {KEURMERKEN.map((keurmerk) => (
+            <div key={keurmerk.label} className="pt-4" style={{ borderTop: "2px solid var(--seafoam)" }}>
+              <p className="kapitaal mb-2" style={{ color: "var(--seafoam)" }}>
+                {keurmerk.label}
+              </p>
+              <dt className="text-[1.1rem] mb-2" style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}>
+                {t(keurmerk.titel)}
+              </dt>
+              <dd className="text-[0.95rem] leading-relaxed" style={{ color: "var(--charcoal)" }}>
+                {t(keurmerk.uitleg)}
+              </dd>
+            </div>
+          ))}
+        </dl>
+        <a
+          href="https://www.goodfish.nl"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mt-9 font-semibold underline underline-offset-4"
+          style={{ color: "var(--navy)" }}
+        >
+          {viswijzer.link} &rarr;
+        </a>
+      </Sectie>
+
+      {/* ── Waar we voor staan ────────────────────────────────────────────── */}
+      <Sectie grond="papier" smal>
+        <Kop label="Onze overtuiging" titel={t("whyTitle")} />
+        <div className="lees">
+          <p>{t("whyText1")}</p>
+          <p>{t("whyText2")}</p>
+        </div>
       </Sectie>
 
       {/* ── Vragen ───────────────────────────────────────────────────────── */}

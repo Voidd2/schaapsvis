@@ -11,8 +11,8 @@
  * │    hoeveel personen, en wat erop ligt. Alles wat daar staat is voorlopig  │
  * │    behalve het bedrag van de kleinste — vervang het door jouw eigen       │
  * │    schalen zodra je ze hebt bepaald.                                      │
- * │ 2. `foto:` per schaal: zet de foto in `public/images/visschalen/` en vul  │
- * │    het pad in. Zonder foto toont de site een naamvlak, geen leeg gat.     │
+ * │ 2. De foto per schaal staat in `src/lib/beeld.ts`, samen met alle andere  │
+ * │    foto's van de site. Zonder foto toont de site een naamvlak.            │
  * │ 3. `ONDERDELEN`: de extra's, in euro per 100 gram.                        │
  * │ 4. Zet `PRIJZEN_DEFINITIEF` op `true` zodra alles klopt. Tot die tijd zet │
  * │    de site erbij dat het richtprijzen zijn.                               │
@@ -75,10 +75,10 @@ export interface Schaal {
   /** Wat er standaard op ligt. */
   bevat: string[];
   /**
-   * Foto van de schaal, bijvoorbeeld "/images/visschalen/borrelschaal.jpg".
-   * Zolang die er niet is toont de site een naamvlak.
+   * Welke foto hierbij hoort. De foto zelf staat in `src/lib/beeld.ts`, samen
+   * met alle andere foto's van de site — één plek waar de eigenaar paden invult.
    */
-  foto?: string;
+  beeld: "schaalBorrel" | "schaalFamilie" | "schaalFeest";
 }
 
 /**
@@ -93,6 +93,7 @@ export const SCHALEN: Schaal[] = [
   {
     id: "borrelschaal",
     naam: "Borrelschaal",
+    beeld: "schaalBorrel",
     prijs: 55.9,
     personenVan: 4,
     personenTot: 6,
@@ -110,6 +111,7 @@ export const SCHALEN: Schaal[] = [
   {
     id: "familieschaal",
     naam: "Familieschaal",
+    beeld: "schaalFamilie",
     // EIGENAAR: jouw bedrag hier.
     prijs: 89.9,
     personenVan: 8,
@@ -128,6 +130,7 @@ export const SCHALEN: Schaal[] = [
   {
     id: "feestschaal",
     naam: "Feestschaal",
+    beeld: "schaalFeest",
     // EIGENAAR: jouw bedrag hier.
     prijs: 139.9,
     personenVan: 12,

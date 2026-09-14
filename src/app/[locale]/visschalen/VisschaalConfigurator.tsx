@@ -28,6 +28,7 @@ import {
 import { bewaarSamenstelling, leesSamenstelling } from "@/lib/mandje";
 import { euro, whatsappLink } from "@/lib/bedrijf";
 import { useSchaalTekst } from "@/components/visschaal/tekst";
+import { Beeld } from "@/components/ui/Beeld";
 
 /** Gewicht gaat met 100 gram tegelijk; stuks met één. */
 const STAP = 100;
@@ -119,33 +120,7 @@ export function VisschaalConfigurator() {
                       border: gekozen ? "2px solid var(--navy)" : "1px solid var(--linen)",
                     }}
                   >
-                    <div
-                      className="w-full aspect-square flex items-center justify-center overflow-hidden"
-                      style={{
-                        backgroundColor: schaal.foto ? "#fff" : "var(--sand)",
-                        borderBottom: "2px solid var(--gold)",
-                      }}
-                    >
-                      {schaal.foto ? (
-                        /* eslint-disable-next-line @next/next/no-img-element */
-                        <img
-                          src={schaal.foto}
-                          alt={`${schaal.naam} van Schaap's Vishandel in Leiden`}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <span
-                          className="px-5 text-center text-[1.4rem]"
-                          style={{
-                            fontFamily: "var(--font-display)",
-                            color: "var(--navy)",
-                            opacity: 0.5,
-                          }}
-                        >
-                          {schaal.naam}
-                        </span>
-                      )}
-                    </div>
+                    <Beeld naam={schaal.beeld} verhouding="vierkant" streep="var(--navy)" />
 
                     <div className="p-5 flex flex-col flex-1">
                       <h4 className="text-[1.25rem] mb-1">{schaal.naam}</h4>
@@ -209,21 +184,51 @@ export function VisschaalConfigurator() {
             {gekozenSchaal ? t("extrasUitleg") : t("extrasEerstSchaal")}
           </p>
 
+          {/* Uitklapbaar per groep. Alle vijf de lijsten open onder elkaar werd
+              op een telefoon een prijslijst van twee schermen lang — en dan
+              scrolt iemand eroverheen in plaats van erdoorheen. Op de dichte kop
+              staat hoeveel je uit die groep al hebt gekozen, zodat je niet hoeft
+              open te klappen om te zien waar iets zit. */}
           <div style={{ opacity: gekozenSchaal ? 1 : 0.55 }}>
             {GROEP_VOLGORDE.map((groep) => {
               const items = ONDERDELEN.filter((o) => o.groep === groep);
               if (items.length === 0) return null;
+              const gekozenInGroep = items.filter((o) => (samen.extras[o.id] ?? 0) > 0).length;
               return (
-                <section key={groep} className="mb-12">
-                  <div className="mb-5">
-                    <h4 className="text-[1.35rem] mb-1">
-                      {tekst.groep(groep, GROEP_LABELS[groep])}
-                    </h4>
-                    <p className="text-[0.95rem]" style={{ color: "var(--grijs)" }}>
-                      {tekst.uitleg(groep, GROEP_UITLEG[groep])}
-                    </p>
-                  </div>
-                  <ul style={{ borderTop: "1px solid var(--linen)" }}>
+                <details
+                  key={groep}
+                  open={gekozenInGroep > 0}
+                  className="group"
+                  style={{ borderTop: "1px solid var(--linen)" }}
+                >
+                  <summary className="flex items-start justify-between gap-4 py-5 cursor-pointer">
+                    <span>
+                      <span className="block text-[1.25rem]" style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}>
+                        {tekst.groep(groep, GROEP_LABELS[groep])}
+                      </span>
+                      <span className="block text-[0.92rem] mt-0.5" style={{ color: "var(--grijs)" }}>
+                        {tekst.uitleg(groep, GROEP_UITLEG[groep])}
+                      </span>
+                    </span>
+                    <span className="flex items-center gap-3 shrink-0 pt-1">
+                      {gekozenInGroep > 0 && (
+                        <span
+                          className="kapitaal px-2 py-1"
+                          style={{ backgroundColor: "var(--navy)", color: "var(--cream)" }}
+                        >
+                          {gekozenInGroep}
+                        </span>
+                      )}
+                      <span
+                        className="transition-transform group-open:rotate-45"
+                        style={{ color: "var(--gold)", fontSize: "1.3rem", lineHeight: 1 }}
+                        aria-hidden
+                      >
+                        +
+                      </span>
+                    </span>
+                  </summary>
+                  <ul className="pb-4" style={{ borderTop: "1px solid var(--linen)" }}>
                     {items.map((onderdeel) => (
                       <Regel
                         key={onderdeel.id}
@@ -241,7 +246,7 @@ export function VisschaalConfigurator() {
                       />
                     ))}
                   </ul>
-                </section>
+                </details>
               );
             })}
           </div>

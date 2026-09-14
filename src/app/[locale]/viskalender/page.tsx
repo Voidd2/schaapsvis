@@ -4,6 +4,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { Sectie } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { MaandStrip } from "./MaandStrip";
+import { DezeMaand } from "./DezeMaand";
 import { viskalenderData } from "@/lib/viskalender";
 import { eenTaalMetadata } from "@/lib/seo";
 import { BEDRIJF } from "@/lib/bedrijf";
@@ -47,6 +48,8 @@ export default async function ViskalenderPage({
           { label: "Oesters", waarde: "De maanden met een r" },
         ]}
       />
+
+      <DezeMaand locale={locale} />
 
       <MaandStrip />
 

@@ -117,7 +117,13 @@ export default async function ReceptDetailPage({
         <div className="grid lg:grid-cols-[1.35fr_0.65fr] gap-10 lg:gap-16">
           {/* ── Verhaal en bereiding ─────────────────────────────────────── */}
           <div>
-            <blockquote className="citaat mb-10">{recept.verhaal}</blockquote>
+            {/* Geen anoniem receptenblog-inleidinkje maar iets wat uit de winkel
+                komt. Het label maakt zichtbaar dat dit van achter de toonbank
+                komt; de tekst zelf stond er al. */}
+            <div className="mb-10">
+              <p className="kapitaal mb-2">Van achter de toonbank</p>
+              <blockquote className="citaat">{recept.verhaal}</blockquote>
+            </div>
 
             <h2 className="text-[1.6rem] mb-6">Bereiding</h2>
             <ol style={{ borderTop: "1px solid var(--linen)" }}>

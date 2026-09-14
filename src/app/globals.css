@@ -4,39 +4,53 @@
    Schaap's Vishandel — Leiden, sinds 1938
    ───────────────────────────────────────────────────────────────────────────
    Uitgangspunt van de vormgeving: een oude Leidse viswinkel, geen webshop-
-   template. Denk aan een geëmailleerd winkelbord en een gezet drukwerkje uit
-   de jaren dertig: warm papier, diep marineblauw, messing en een dof rood.
-   Rechte hoeken, dunne lijnen, weinig schaduw. Geen ronde icoontjes, geen
-   verlopen, geen zwevende kaartjes.
+   template. De kleuren komen uit het logo: het diepe blauw van de banner, het
+   lichtblauw van de vis, het zand van de buitenrand en het rood van de dubbele
+   lijn. Rechte hoeken, dunne lijnen, weinig schaduw. Geen ronde icoontjes,
+   geen verlopen, geen zwevende kaartjes.
+
+   De verhouding waarin we ze gebruiken, en die klopt moet blijven:
+
+       70%  crème — de achtergrond van vrijwel alles
+       20%  donkerblauw — koppen, balken, de voet
+        8%  lichtblauw en zand — rustige vlakken die een sectie afzetten
+        2%  rood — knoppen die tot actie aanzetten, en verder niets
+
+   Zodra rood meer dan een paar procent van een scherm beslaat gaat het richting
+   snackbar. Wil je iets laten opvallen zonder knop: neem zand of lichtblauw.
    ═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── Blauw: uit het logo, iets dieper en warmer gezet ───────────────────── */
-  --navy: #16225a;
-  --navy-dark: #0d1538;
-  --lichtblauw: #a9c7dd;
+  /* ── Blauw: de bannerkleur uit het logo ─────────────────────────────────── */
+  --navy: #2f3e8f;
+  --navy-dark: #222d6b;
+  /* Lichtblauw uit de vis in het logo — voor rustige vlakken, niet voor tekst. */
+  --lichtblauw: #cfe8f7;
 
   /* ── Papier ─────────────────────────────────────────────────────────────── */
-  --cream: #faf6ef; /* warm papierwit — de hoofdachtergrond */
-  --sand: #eee4d3; /* zandkleur — rustige vlakken */
-  --linen: #ded0b7; /* lijnen en randen */
+  --cream: #fbf7ef; /* warm papierwit — de hoofdachtergrond */
+  --sand: #f0e6d6; /* zandvlak, lichter gezet dan de logorand zodat tekst leesbaar blijft */
+  --sand-diep: #d8c3a1; /* het zand uit de logorand zelf — lijnen en accenten */
+  --linen: #e0d3bd; /* lijnen en randen */
 
   /* ── Accenten ───────────────────────────────────────────────────────────── */
-  --salmon: #9c2b21; /* dof winkelrood — bestelknoppen (naam historisch) */
-  --rood: #9c2b21;
-  --rood-dark: #7a1f18;
-  --gold: #966a1c; /* messing — keurmerken, kapitaaltjes */
+  --rood: #c62828; /* het rood uit de dubbele lijn — alléén voor knoppen */
+  --rood-dark: #a11f1f;
+  --salmon: #c62828; /* oude naam, zelfde kleur — nog in gebruik op enkele plekken */
+  --gold: #8a6a2f; /* messing — keurmerken, kapitaaltjes */
   --seafoam: #2c5a4c; /* diep zeegroen — duurzaamheid, "open" */
 
   /* ── Tekst ──────────────────────────────────────────────────────────────── */
-  --charcoal: #33302a; /* warm donkergrijs — lopende tekst */
-  --ink: #1c1a16; /* bijna zwart — koppen op papier */
-  --grijs: #6b665c; /* bijschriften */
+  --charcoal: #3f4142; /* antraciet — lopende tekst */
+  --ink: #23262b; /* bijna zwart — koppen op papier */
+  --grijs: #6e7073; /* bijschriften */
 
   /* ── Typografie ─────────────────────────────────────────────────────────── */
-  /* --font-caslon en --font-source worden door next/font gezet op <html>. */
-  --font-display: var(--font-caslon), "Iowan Old Style", "Hoefler Text", Georgia,
-    "Times New Roman", serif;
+  /* --font-display en --font-source worden door next/font gezet op <html>.
+     Bitter voor de koppen: een schreefletter met blokvoetjes, zoals op een oud
+     winkelbord, maar wél gemaakt voor een scherm. Geen sierletter en ook geen
+     strak geometrisch merkfont. */
+  --font-display: var(--font-kop), "Bitter", Georgia, "Times New Roman", serif;
   --font-body: var(--font-source), -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, sans-serif;
 

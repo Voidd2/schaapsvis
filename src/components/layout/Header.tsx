@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { WinkelStatus } from "./WinkelStatus";
 import { BEDRIJF, ADRES_REGEL } from "@/lib/bedrijf";
+import { BEELD } from "@/lib/beeld";
 
 /**
  * De kop van de site is opgezet als een krantenkop: een smalle informatiebalk
@@ -33,6 +34,9 @@ export function Header() {
 
   const isActief = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
+  // Liefst de liggende variant; anders de ronde badge; anders alleen de naam.
+  const logo = BEELD.logoLiggend.bestand || BEELD.logoBadge.bestand;
+
   return (
     <div className="sticky top-0 z-50">
       {/* ── Informatiebalk ──────────────────────────────────────────────── */}
@@ -57,25 +61,39 @@ export function Header() {
         style={{ backgroundColor: "var(--cream)", borderBottom: "1px solid var(--linen)" }}
       >
         <div className="max-w-6xl mx-auto px-4 flex items-center justify-between gap-3 lg:gap-6 h-[4.4rem]">
-          <Link href={p("")} className="min-w-0 leading-none">
-            {/* Op een smal scherm moet de naam wijken voor de belknop en het
-                menu — anders wordt de hamburger van de rand geduwd. */}
-            <span
-              className="block text-[1.25rem] sm:text-[1.45rem] lg:text-[1.65rem] leading-none whitespace-nowrap"
-              style={{ fontFamily: "var(--font-display)", color: "var(--navy)", fontWeight: 700 }}
-            >
-              Schaap&rsquo;s Vishandel
-            </span>
-            <span
-              className="block text-[0.55rem] sm:text-[0.62rem] mt-1 whitespace-nowrap"
-              style={{
-                color: "var(--gold)",
-                letterSpacing: "0.22em",
-                textTransform: "uppercase",
-                fontWeight: 600,
-              }}
-            >
-              Leiden &middot; sinds 1938
+          <Link href={p("")} className="min-w-0 leading-none flex items-center gap-3">
+            {/* Het ronde logo, zodra de eigenaar het aanlevert. Klein gehouden:
+                een grote badge in de kop duwt de navigatie van de rand en maakt
+                de site ouderwets in plaats van herkenbaar. */}
+            {logo && (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                src={logo}
+                alt=""
+                aria-hidden
+                className="h-11 w-11 sm:h-12 sm:w-12 shrink-0 object-contain"
+              />
+            )}
+            <span className="min-w-0">
+              {/* Op een smal scherm moet de naam wijken voor de belknop en het
+                  menu — anders wordt de hamburger van de rand geduwd. */}
+              <span
+                className="block text-[1.25rem] sm:text-[1.45rem] lg:text-[1.65rem] leading-none whitespace-nowrap"
+                style={{ fontFamily: "var(--font-display)", color: "var(--navy)", fontWeight: 700 }}
+              >
+                Schaap&rsquo;s Vishandel
+              </span>
+              <span
+                className="block text-[0.55rem] sm:text-[0.62rem] mt-1 whitespace-nowrap"
+                style={{
+                  color: "var(--gold)",
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase",
+                  fontWeight: 600,
+                }}
+              >
+                Leiden &middot; sinds 1938
+              </span>
             </span>
           </Link>
 

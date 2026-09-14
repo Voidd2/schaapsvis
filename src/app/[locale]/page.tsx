@@ -4,10 +4,12 @@ import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
 import { Sectie, Kop } from "@/components/ui/Sectie";
 import { PaginaSlot } from "@/components/ui/PaginaKop";
+import { Beeld } from "@/components/ui/Beeld";
 import { PostcodeCheck } from "@/components/bezorgen/PostcodeCheck";
 import { SeizoensBanner } from "@/components/shared/SeizoensBanner";
 import { paginaMetadata } from "@/lib/seo";
-import { BEDRIJF, VERKOOPPUNTEN, euro } from "@/lib/bedrijf";
+import { BEDRIJF, VERKOOPPUNTEN, euro, type VerkooppuntId } from "@/lib/bedrijf";
+import type { BeeldNaam } from "@/lib/beeld";
 import { BEZORGING, GEMEENTEN, bezorgdagenTekst } from "@/lib/bezorging";
 import { VANAF_BEDRAG } from "@/lib/visschaal";
 import { products, CATEGORIE_LABELS, type Categorie } from "@/lib/assortiment-data";
@@ -39,6 +41,14 @@ const UITGELICHT = [
   "haring",
 ];
 
+/** Welke foto bij welk verkooppunt hoort. Zie `src/lib/beeld.ts`. */
+const BEELD_PER_PUNT: Partial<Record<VerkooppuntId, BeeldNaam>> = {
+  winkel: "winkelGevel",
+  markt: "marktZaterdag",
+  "markt-woensdag": "marktWoensdag",
+  voorschoten: "marktVoorschoten",
+};
+
 export default async function HomePage({
   params,
 }: {
@@ -62,6 +72,11 @@ export default async function HomePage({
       <JsonLd locale={locale} />
 
       {/* ── Kop ───────────────────────────────────────────────────────────── */}
+      {/* Wat hier stond: "Verse vis uit de Herenstraat, nu ook bij u thuis", met
+          een uitsnede van gerookte zalm ernaast. Dat maakte van tachtig jaar
+          winkel een bezorgdienst die toevallig 1938 in de tekst heeft staan.
+          De zaak zelf is het verhaal; bezorgen is een dienst die erbij is
+          gekomen en staat daarom verderop. */}
       <section style={{ backgroundColor: "var(--cream)" }}>
         <div className="max-w-6xl mx-auto px-4 grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center py-12 md:py-20">
           <div>
@@ -74,47 +89,115 @@ export default async function HomePage({
               {h("inleiding")}
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link href={`/${locale}/bestellen`} className="knop knop-rood">
-                {h("knopBestellen")}
+              <Link href={`/${locale}/assortiment`} className="knop knop-rood">
+                {h("knopVandaag")}
               </Link>
-              <Link href={`/${locale}/visschalen`} className="knop knop-lijn">
-                {h("knopVisschaal")}
+              <Link href={`/${locale}/bestellen`} className="knop knop-lijn">
+                {h("knopBestellen")}
               </Link>
             </div>
           </div>
 
-          {/* Eén stuk vis, groot en op wit, met een bijschrift eronder — als een
-              plaat in een catalogus. De tekenfilm-winkelpui die hier stond zag
-              er naast de echte productfoto's uit als plaatjesvulling.
-              De foto's zijn 300×200: daarom tonen we ze op ware grootte in een
-              royaal wit vlak in plaats van uitgerekt over de hele kolom. */}
-          <figure
-            className="w-full flex flex-col justify-center py-10 px-6"
-            style={{ backgroundColor: "#fff", border: "1px solid var(--linen)" }}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/producten/gerookte-zalm-high-seas.png"
-              alt="Gerookte zalm van het mes gesneden bij Schaap's Vishandel aan de Herenstraat in Leiden"
-              width={300}
-              height={200}
-              className="w-full max-w-[22rem] mx-auto h-auto"
-            />
-            <figcaption
-              className="mt-6 pt-3 text-center text-[0.95rem] mx-auto w-full max-w-[22rem]"
-              style={{
-                borderTop: "1px solid var(--linen)",
-                color: "var(--ink)",
-                fontFamily: "var(--font-display)",
-              }}
-            >
-              {h("heroBijschrift")}
-            </figcaption>
-          </figure>
+          {/* De winkel zelf, zodra die foto er is. Geen close-up van vis: die
+              heeft elke vishandel, een gevel aan de Herenstraat niet. */}
+          <Beeld naam="winkelGevel" prioriteit streep="var(--navy)" />
         </div>
       </section>
 
       <SeizoensBanner locale={locale} />
+
+      {/* ── Drie pijlers ──────────────────────────────────────────────────── */}
+      <Sectie grond="papier">
+        <Kop label={h("pijlerLabel")} titel={h("pijlerKop")} />
+        <ul className="grid sm:grid-cols-3 gap-x-8 gap-y-10">
+          {[
+            {
+              beeld: "gebakkenVis" as const,
+              kop: h("pijlerGebakkenKop"),
+              tekst: h("pijlerGebakkenTekst"),
+              href: `/${locale}/assortiment`,
+            },
+            {
+              beeld: "toonbank" as const,
+              kop: h("pijlerVersKop"),
+              tekst: h("pijlerVersTekst"),
+              href: `/${locale}/bestellen`,
+            },
+            {
+              beeld: "schaalBorrel" as const,
+              kop: h("pijlerSchaalKop"),
+              tekst: h("pijlerSchaalTekst"),
+              href: `/${locale}/visschalen`,
+            },
+          ].map(({ beeld, kop, tekst, href }) => (
+            <li key={kop}>
+              <Link href={href} className="group block">
+                <Beeld naam={beeld} verhouding="liggend" streep="var(--navy)" />
+                <h3 className="text-[1.3rem] mt-4 mb-2 group-hover:underline underline-offset-4">
+                  {kop}
+                </h3>
+                <p className="leading-relaxed" style={{ color: "var(--charcoal)" }}>
+                  {tekst}
+                </p>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </Sectie>
+
+      {/* ── Sinds 1938 ────────────────────────────────────────────────────── */}
+      <Sectie grond="zand">
+        <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-16 items-center">
+          <Beeld naam="historie1938" streep="var(--navy)" />
+          <div>
+            <Kop label={h("verhaalLabel")} titel={h("verhaalKop")} />
+            <p className="lees mb-7" style={{ color: "var(--charcoal)" }}>
+              {h("verhaalTekst")}
+            </p>
+            <blockquote
+              className="text-[1.5rem] md:text-[1.8rem] leading-[1.35] italic mb-3"
+              style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}
+            >
+              &ldquo;{h("verhaalCitaat")}&rdquo;
+            </blockquote>
+            <p className="text-sm mb-7" style={{ color: "var(--grijs)" }}>
+              &mdash; {h("verhaalBron")}
+            </p>
+            <Link
+              href={`/${locale}/ons-verhaal`}
+              className="font-semibold underline underline-offset-4"
+              style={{ color: "var(--navy)" }}
+            >
+              {h("verhaalLink")} &rarr;
+            </Link>
+          </div>
+        </div>
+      </Sectie>
+
+      {/* ── Gebakken vis ──────────────────────────────────────────────────── */}
+      {/* Dit stond alleen als "dit bezorgen we niet" onder het bezorgblok. Voor
+          een zaak die er juist om bekendstaat is dat de verkeerde kant van
+          hetzelfde verhaal. */}
+      <Sectie grond="papier">
+        <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center">
+          <div>
+            <Kop label={h("gebakkenLabel")} titel={h("gebakkenKop")} />
+            <p className="lees mb-6" style={{ color: "var(--charcoal)" }}>
+              {h("gebakkenTekst")}
+            </p>
+            <p
+              className="lees pl-5 mb-7"
+              style={{ borderLeft: "2px solid var(--gold)", color: "var(--charcoal)" }}
+            >
+              {h("gebakkenNiet")}
+            </p>
+            <Link href={`/${locale}/bezoek-ons`} className="knop knop-navy">
+              {h("gebakkenLink")}
+            </Link>
+          </div>
+          <Beeld naam="gebakkenVis" streep="var(--rood)" />
+        </div>
+      </Sectie>
 
       {/* ── Drie feiten ───────────────────────────────────────────────────── */}
       <section style={{ backgroundColor: "var(--navy)" }} className="py-8">
@@ -210,30 +293,9 @@ export default async function HomePage({
       {/* ── Visschalen ────────────────────────────────────────────────────── */}
       <Sectie grond="zand">
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-center">
-          <figure
-            className="w-full flex flex-col justify-center py-10 px-6 order-2 lg:order-1"
-            style={{ backgroundColor: "#fff", border: "1px solid var(--linen)" }}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/producten/hollandse-garnalen.png"
-              alt="Hollandse garnalen voor een visschaal van Schaap's Vishandel in Leiden"
-              width={300}
-              height={200}
-              loading="lazy"
-              className="w-full max-w-[20rem] mx-auto h-auto"
-            />
-            <figcaption
-              className="mt-6 pt-3 text-center text-[0.95rem] mx-auto w-full max-w-[20rem]"
-              style={{
-                borderTop: "1px solid var(--linen)",
-                color: "var(--ink)",
-                fontFamily: "var(--font-display)",
-              }}
-            >
-              {h("visschaalBijschrift")}
-            </figcaption>
-          </figure>
+          <div className="order-2 lg:order-1">
+            <Beeld naam="schaalBorrel" verhouding="liggend" streep="var(--navy)" />
+          </div>
           <div className="order-1 lg:order-2">
             <Kop label={h("visschaalLabel")} titel={h("visschaalKop")} />
             <p className="lees mb-7" style={{ color: "var(--charcoal)" }}>
@@ -254,39 +316,6 @@ export default async function HomePage({
             <Link href={`/${locale}/visschalen`} className="knop knop-rood">
               {h("visschaalLink")}
             </Link>
-          </div>
-        </div>
-      </Sectie>
-
-      {/* ── Ons verhaal ───────────────────────────────────────────────────── */}
-      {/* Zonder afbeelding: het citaat van Aldert is hier het sterkste wat we
-          hebben, en dat verdient de ruimte. Zodra er een echte foto van de
-          winkel is, kan die hier links naast. */}
-      <Sectie grond="papier">
-        <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-20">
-          <div>
-            <Kop label={h("verhaalLabel")} titel={h("verhaalKop")} />
-            <Link
-              href={`/${locale}/ons-verhaal`}
-              className="font-semibold underline underline-offset-4"
-              style={{ color: "var(--navy)" }}
-            >
-              {h("verhaalLink")} &rarr;
-            </Link>
-          </div>
-          <div>
-            <p className="lees mb-8" style={{ color: "var(--charcoal)" }}>
-              {h("verhaalTekst")}
-            </p>
-            <blockquote
-              className="text-[1.6rem] md:text-[1.9rem] leading-[1.35] italic mb-4"
-              style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}
-            >
-              &ldquo;{h("verhaalCitaat")}&rdquo;
-            </blockquote>
-            <p className="text-sm" style={{ color: "var(--grijs)" }}>
-              &mdash; {h("verhaalBron")}
-            </p>
           </div>
         </div>
       </Sectie>
@@ -424,7 +453,18 @@ export default async function HomePage({
         <Kop label={h("locatiesLabel")} titel={h("locatiesKop")} />
         <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8">
           {VERKOOPPUNTEN.map((punt) => (
-            <li key={punt.id} className="pt-4" style={{ borderTop: "2px solid var(--navy)" }}>
+            <li key={punt.id}>
+              {/* Een foto per plek: zo weet iemand letterlijk waar hij naar
+                  moet zoeken — de kraam bij de Waag ziet er anders uit dan de
+                  kraam op de parkeerplaats bij Hoogvliet. */}
+              {BEELD_PER_PUNT[punt.id] && (
+                <Beeld
+                  naam={BEELD_PER_PUNT[punt.id]!}
+                  verhouding="liggend"
+                  streep="var(--navy)"
+                  klasse="mb-4"
+                />
+              )}
               <h3 className="text-[1.2rem] mb-1">{punt.naam}</h3>
               <p style={{ color: "var(--charcoal)" }}>
                 {punt.adres}
