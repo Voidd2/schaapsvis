@@ -14,30 +14,30 @@
     "bezorgen": "Lieferung"
   },
   "meta": {
-    "homeTitle": "Fischgeschäft Leiden — Herenstraat 48 | Frischer Fisch & Lieferung | Schaap's Vishandel",
-    "homeDesc": "Familienfischhandlung im Zentrum von Leiden seit 1938. Frischer Fisch von der Auktion, Fischplatten nach Wunsch und Lieferung nach Leiden, Leiderdorp, Voorschoten, Wassenaar und Leidschendam.",
-    "verhaalTitle": "Die Geschichte von Schaap's Vis Leiden | Fischhandel seit 1938",
-    "verhaalDesc": "Von Gerrit Schaap 1938 bis Aldert Haasnoot heute — fast neunzig Jahre Leidener Handwerk, vier Generationen, eine Adresse: Herenstraat 48, Leiden.",
-    "varlaksTitle": "Bio-Lachs Varlaks in Leiden | Schaap's Vishandel",
-    "varlaksDesc": "Varlaks Bio-Lachs — keine Antibiotika, kein GMO, 100% rückverfolgbar. Täglich frisch bei Schaap's Vis Leiden, Herenstraat 48. Auch auf dem Markt.",
-    "assortimentTitle": "Frischer Fisch Leiden | Kibbeling, Hering, Lekkerbek | Schaap's Vis Sortiment",
-    "assortimentDesc": "Frisches Fischsortiment bei Schaap's Vis Leiden: Kibbeling, Lekkerbek, Hering, Fischsuppe, Bio-Lachs und mehr. Täglich frisch in der Herenstraat 48.",
-    "bezoekTitle": "Fischgeschäft Leiden Herenstraat 48 | Schaap's Vis — Öffnungszeiten & Anfahrt",
-    "bezoekDesc": "Schaap's Vis besuchen? Herenstraat 48 Leiden (Mo–Sa), Leidener Markt (Mi + Sa), oder Hoogvliet Voorschoten (Fr). Immer frisch, immer freundlich.",
+    "homeTitle": "Schaap’s Fischgeschäft in Leiden | Seit 1938",
+    "homeDesc": "Schaap’s gehört seit 1938 zu Leiden. An der Herenstraat finden Sie frischen Fisch, Hering, Backfisch, Salate und Fischplatten. Wir beraten Sie gern bei der Auswahl für Ihre Mahlzeit.",
+    "verhaalTitle": "Schaap’s Fischgeschäft, seit 1938",
+    "verhaalDesc": "Ein Leidener Fischgeschäft mit langer Geschichte. Sie finden uns an der Herenstraat 48, im Geschäft und auf dem Markt.",
+    "varlaksTitle": "Varlaks-Lachs bei Schaap’s",
+    "varlaksDesc": "Sie suchen Varlaks-Lachs in Leiden? Fragen Sie nach der aktuellen Verfügbarkeit, den Produktinformationen und den Bio-Optionen.",
+    "assortimentTitle": "Unser Sortiment",
+    "assortimentDesc": "Von frischem Fisch bis zu Salaten und fertigen Gerichten. Das Angebot kann nach Tag und Saison variieren. Sehen Sie sich die Produkte an oder fragen Sie nach dem heutigen Angebot.",
+    "bezoekTitle": "Geschäft und Marktstände",
+    "bezoekDesc": "Herenstraat 48 in Leiden, der Leidener Markt und unser Freitagsstand in Voorschoten. Hier sehen Sie, wann und wo Sie uns finden.",
     "contactTitle": "Kontakt Schaap's Vis Leiden | +31 71 514 9802 | Fischhandel Herenstraat",
     "contactDesc": "Kontaktieren Sie Schaap's Vis Leiden. Rufen Sie +31 71 514 9802 an oder senden Sie eine Nachricht. Herenstraat 48, 2313 AL Leiden.",
-    "bestellenTitle": "Fisch bestellen in Leiden — Lieferung oder Abholung | Schaap's Vishandel",
-    "bestellenDesc": "Bestellen Sie frischen Fisch oder eine Fischplatte bei Schaap's Vishandel in Leiden. Lieferung in der Region oder Abholung in der Herenstraat 48. Bestellung bis 12:00 Uhr am Vortag.",
-    "eerlijkeVisTitle": "Bio-Fisch Leiden | Bio-Lachs — Schaap's Vis",
-    "eerlijkeVisDesc": "Bio-Fisch in Leiden bei Schaap's Vishandel — Bio-Lachs Varlaks (ASC + EU-Bio), MSC- und ASC-zertifiziert. Herenstraat 48, seit 1938.",
+    "bestellenTitle": "Fisch bei Schaap’s bestellen",
+    "bestellenDesc": "Wählen Sie frischen Fisch zum Kochen, einen Salat dazu oder eine Fischplatte für Ihre Gäste.",
+    "eerlijkeVisTitle": "Bio-Fisch und Herkunft",
+    "eerlijkeVisDesc": "Möchten Sie wissen, woher Ihr Fisch kommt oder welche Bio-Produkte verfügbar sind? Wir helfen bei der Auswahl anhand der Produktinformationen zur aktuellen Lieferung.",
     "receptenTitle": "Fischrezepte von Schaap's Vis Leiden | Kibbeling, Lachs, Hering & mehr",
     "receptenDesc": "Leckere Fischrezepte mit Fisch von Schaap's Vis Leiden. Von Kibbeling mit Knoblauchsauce bis Gravlaks und cremiger Fischsuppe. Mit Einkaufsliste und Zubereitungszeit.",
-    "bezorgenTitle": "Frischen Fisch liefern lassen in Leiden und Umgebung | Schaap's Vishandel",
-    "bezorgenDesc": "Frischer Fisch und Fischplatten geliefert in Leiden, Leiderdorp, Voorschoten, Wassenaar und Leidschendam. Mittwoch bis Samstag, Bestellung bis 12:00 Uhr am Vortag. Lieferung 5,99 €, ab 35 € kostenlos.",
+    "bezorgenTitle": "Fischlieferung in Leiden und Umgebung",
+    "bezorgenDesc": "Jeden Donnerstag liefern wir frischen Fisch, Salate und Fischplatten in Leiden und Umgebung, von unserem Geschäft an der Herenstraat 48.",
     "bezorgenPlaatsTitle": "Frischen Fisch liefern lassen in {plaats} | Fischhändler aus Leiden",
     "bezorgenPlaatsDesc": "Frischen Fisch oder eine Fischplatte in {plaats} liefern lassen? Schaap's Vishandel aus Leiden fährt {dagen} raus. Bestellung bis 12:00 Uhr am Vortag, Zahlung an der Tür oder demnächst online.",
-    "visschalenTitle": "Fischplatte bestellen in Leiden — drei Platten ab {bedrag} | Schaap's Vishandel",
-    "visschalenDesc": "Eine Fischplatte für den Umtrunk, einen Geburtstag oder Weihnachten. Drei Platten ab {bedrag}, mit Extras nach Wunsch. Abholung in der Herenstraat oder Lieferung."
+    "visschalenTitle": "Fischplatten für Ihre Gäste",
+    "visschalenDesc": "Zum geselligen Abend, Geburtstag oder Abendessen. Wählen Sie eine passende Fischplatte. Aktuelle Platten, Zutaten und Preise finden Sie in unserem Onlineshop."
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Seit 1938",
@@ -169,7 +169,7 @@
   "assortimentPage": {
     "title": "Unser Sortiment",
     "sub": "Frisch, ehrlich und von höchster Qualität — täglich frisch angeliefert",
-    "note": "Kein Online-Bezahlen — aber einfaches Vorbestellen. Wir rufen Sie mit Preis und Bestätigung zurück."
+    "note": "Verfügbare Produkte, Preise, Lieferkosten, Bestellfristen und Abholmöglichkeiten finden Sie im Onlineshop. Prüfen Sie dort Ihre Adresse und den verfügbaren Donnerstag vor dem Bezahlen."
   },
   "bezoekPage": {
     "title": "Wo Sie uns finden",
@@ -177,7 +177,7 @@
   },
   "contactPage": {
     "title": "Kontakt",
-    "sub": "Anrufen geht am schnellsten — wir stehen meistens hinter der Theke. WhatsApp oder E-Mail geht auch.",
+    "sub": "Am schnellsten erreichen Sie uns telefonisch. Sie können uns auch über WhatsApp kontaktieren.",
     "formTitle": "Nachricht senden",
     "nameLabel": "Name",
     "emailLabel": "E-Mail-Adresse",
@@ -231,12 +231,12 @@
     "winkel": "Herenstraat 48",
     "winkelTijden": "Dienstag bis Freitag 09:00–18:00, Samstag 09:00–17:00",
     "markt": "Markt Leiden",
-    "marktTijden": "Mittwoch bei Dille & Camille, Samstag auf dem Aalmarkt bei der Waag — 08:30–17:00",
+    "marktTijden": "Mittwoch und Samstag 08:30–17:00 — für den aktuellen Standplatz bitte anrufen",
     "voorschoten": "Bei Hoogvliet, Voorschoten",
     "voorschotenTijden": "Freitag 08:30–17:30",
     "bezorgenIn": "Fisch liefern nach {plaats}",
     "opgericht": "gegründet {jaar} von {oprichter}",
-    "betalen": "Karte und bar · iDEAL und Kreditkarte folgen in Kürze",
+    "betalen": "Leiden seit 1938 · frischer Fisch, Salate und Fischplatten am Donnerstag geliefert",
     "bezorgenIntro": "Wir liefern auch in",
     "en": "und"
   },
@@ -324,7 +324,7 @@
     "telefoonLabel": "Telefon",
     "sinds1938": "Seit 1938",
     "slotTitel": "Kommen Sie vorbei — oder bestellen Sie vorab",
-    "slotTekst": "Herenstraat 48 in Leiden, dienstags bis samstags. Frischen Fisch und Fischplatten liefern wir in Leiden, Leiderdorp, Voorschoten, Wassenaar und Leidschendam.",
+    "slotTekst": "Wir liefern an einem Tag pro Woche: jeden Donnerstag. Ausschließlich frischer Fisch, Salate und Fischplatten sind für die Lieferung verfügbar.",
     "labelGeneraties": "Generationen",
     "labelWinkel": "Laden",
     "labelEigenaar": "Inhaber",
@@ -359,8 +359,8 @@
     "checkTekst": "Geben Sie Ihre Postleitzahl ein, dann sehen Sie es sofort.",
     "checkLabel": "Postleitzahl",
     "checkKnop": "Prüfen",
-    "checkBinnen": "Ja, wir liefern nach {plaats}. Die Lieferkosten betragen {bedrag}.",
-    "checkBuiten": "Diese Adresse liegt außerhalb unserer Route. Rufen Sie uns unter {nummer} an — manchmal geht mehr, als die Karte sagt.",
+    "checkBinnen": "Diese Postleitzahl liegt im Gebiet {plaats}. Prüfen Sie Ihre vollständige Adresse und den verfügbaren Donnerstag bei der Bestellung.",
+    "checkBuiten": "Diese Postleitzahl liegt außerhalb des genannten Gebiets. Rufen Sie uns an, um eine Abholung zu besprechen.",
     "checkOngeldig": "Bitte vier Ziffern eingeben, zum Beispiel 2313.",
     "betalenKop": "Bezahlen",
     "betalenTekst": "Zurzeit zahlen Sie beim Fahrer: mit Karte oder bar. Wir richten SumUp ein, damit Sie bald auch vorab mit iDEAL, Kreditkarte oder Apple Pay zahlen können. Sobald es läuft, steht es hier.",
@@ -412,11 +412,11 @@
     "gratisGehaald": "Lieferung kostenlos."
   },
   "gemeenten": {
-    "leidenIntro": "Unsere eigene Stadt. Das Geschäft liegt in der Herenstraat, in Leiden ist der Fisch also oft eine halbe Stunde nach dem Einpacken bei Ihnen.",
-    "leiderdorpIntro": "Über die Zijl und Sie sind da. Viele Leiderdorper stehen seit Jahren samstags an unserem Marktstand an der Nieuwe Rijn — das muss jetzt nicht mehr sein.",
-    "voorschotenIntro": "In Voorschoten stehen wir jeden Freitag bei Hoogvliet. Wer es dann nicht schafft, lässt sich den Fisch einfach bringen.",
-    "wassenaarIntro": "Wassenaar ist unser entferntester Ort und die Fahrt führt durch die Dünen. Wir fahren dort eine feste Route, zum gleichen Tarif wie überall.",
-    "leidschendamIntro": "Die Vliet entlang nach Leidschendam. Wir liefern in ganz Leidschendam, vom Damcentrum bis Essesteijn."
+    "leidenIntro": "Von unserem Geschäft an der Herenstraat zu Ihrer Adresse in Leiden: Donnerstag ist unser Liefertag. Sie können auch das Geschäft besuchen.",
+    "leiderdorpIntro": "Wir liefern donnerstags von Leiden nach Leiderdorp. Prüfen Sie Ihre Adresse bei der Bestellung; Abholung nach Absprache.",
+    "voorschotenIntro": "In Voorschoten liefern wir donnerstags. Freitags können Sie unseren Stand bei Hoogvliet besuchen.",
+    "wassenaarIntro": "Auch für Wassenaar ist Donnerstag unser Liefertag. Prüfen Sie, ob Ihre Adresse auf der verfügbaren Route liegt. Besuchen Sie auch unser Geschäft in Leiden.",
+    "leidschendamIntro": "Für Leidschendam planen wir die Lieferung am Donnerstag. Geschäft und Abholadresse von Schaap’s befinden sich an der Herenstraat 48 in Leiden."
   },
   "visschaal": {
     "eyebrow": "Umtrunk · Geburtstag · Weihnachten",
@@ -588,8 +588,8 @@
     "zaterdagAdres": "Aalmarkt, bei der Waag, Leiden",
     "zaterdagToelichting": "Der Stand steht bei der Waag, mitten in der Stadt.",
     "woensdagNaam": "Mittwochsmarkt",
-    "woensdagAdres": "Bei Dille & Camille, Leiden",
-    "woensdagToelichting": "In der Haarlemmerstraat, auf der Seite von Dille & Camille.",
+    "woensdagAdres": "Mittwochsmarkt, Leiden — für den genauen Standplatz bitte anrufen",
+    "woensdagToelichting": "Mittwochsmarkt, Leiden — für den genauen Standplatz bitte anrufen",
     "voorschotenNaam": "Voorschoten, bei Hoogvliet",
     "voorschotenAdres": "Parkplatz Hoogvliet, Voorschoten",
     "voorschotenToelichting": "Jeden Freitag auf dem Parkplatz. Passt das nicht? Nach Voorschoten liefern wir auch.",
@@ -637,5 +637,672 @@
     "naarAssortiment": "Zum Sortiment",
     "terugNaarSite": "Zurück zur Ladenseite",
     "gratisWeegvis": "Frischen Fisch rechnen wir nach Gewicht ab. Kommt Ihre Bestellung über {bedrag}, entfällt die Liefergebühr — das sagen wir dazu, wenn wir Sie mit dem Tagespreis anrufen."
+  },
+  "site": {
+    "brand": "Leiden · seit 1938",
+    "call": "Anrufen",
+    "skip": "Zum Inhalt",
+    "today": "Heute",
+    "delivery": "Jeden Donnerstag",
+    "deliveryLine": "Frischer Fisch, Salate und Fischplatten · Lieferung jeden Donnerstag",
+    "deliveryDetail": "Wir liefern an einem Tag pro Woche: jeden Donnerstag. Ausschließlich frischer Fisch, Salate und Fischplatten sind für die Lieferung verfügbar.",
+    "terms": "Verfügbare Produkte, Preise, Lieferkosten, Bestellfristen und Abholmöglichkeiten finden Sie im Onlineshop. Prüfen Sie dort Ihre Adresse und den verfügbaren Donnerstag vor dem Bezahlen.",
+    "pending": "Onlinebestellungen sind bald möglich. Rufen Sie uns an, um das aktuelle Angebot und Ihre Wünsche zu besprechen.",
+    "shop": "Zum SumUp-Onlineshop",
+    "shopExplain": "Sie wechseln zu unserem SumUp-Onlineshop. Dort wählen Sie Ihre Produkte aus und schließen Bestellung und Zahlung ab.",
+    "orderTitle": "Fisch bei Schaap’s bestellen",
+    "orderIntro": "Wählen Sie frischen Fisch zum Kochen, einen Salat dazu oder eine Fischplatte für Ihre Gäste.",
+    "fresh": "Frischer Fisch",
+    "salads": "Salate",
+    "platters": "Fischplatten",
+    "pickup": "Im Geschäft und auf dem Markt",
+    "freshText": "Im Ganzen, filetiert oder portioniert. Fragen Sie uns, welcher Fisch zu Ihrem Gericht passt.",
+    "saladsText": "Aufs Brot, zum Teilen oder als Beilage. Sehen Sie sich das aktuelle Angebot an.",
+    "plattersText": "Für einen geselligen Abend, Geburtstag oder ein Essen mit Freunden. Zutaten und Portionen finden Sie beim aktuellen Angebot.",
+    "storeOnly": "Im Geschäft und auf dem Markt erhältlich; dieses Produkt liefern wir nicht.",
+    "onlineEligible": "Lieferung am Donnerstag; Verfügbarkeit im Onlineshop.",
+    "deliveryTitle": "Fischlieferung in Leiden und Umgebung",
+    "deliveryIntro": "Jeden Donnerstag liefern wir frischen Fisch, Salate und Fischplatten in Leiden und Umgebung, von unserem Geschäft an der Herenstraat 48.",
+    "areaTitle": "Leiden und Umgebung",
+    "areaIntro": "Unsere Donnerstagsroute umfasst Leiden, Leiderdorp, Voorschoten, Wassenaar und Leidschendam. Prüfen Sie bei der Bestellung, ob Ihre Adresse auf der verfügbaren Route liegt.",
+    "areaCheck": "Diese Postleitzahl liegt im Gebiet {plaats}. Prüfen Sie Ihre vollständige Adresse und den verfügbaren Donnerstag bei der Bestellung.",
+    "areaOutside": "Diese Postleitzahl liegt außerhalb des genannten Gebiets. Rufen Sie uns an, um eine Abholung zu besprechen.",
+    "deliveryPlace": "Fischlieferung in {plaats}",
+    "placeIntro": "Frischer Fisch, Salate und Fischplatten von Schaap’s aus Leiden, donnerstags zu Ihnen nach {plaats} geliefert.",
+    "nearby": "Auch in der Umgebung",
+    "stepsTitle": "So bestellen Sie",
+    "step1": "Angebot ansehen",
+    "step1Text": "Wählen Sie Ihre Produkte im SumUp-Onlineshop. Das Angebot kann von Woche zu Woche wechseln.",
+    "step2": "Lieferung prüfen",
+    "step2Text": "Prüfen Sie Ihre Adresse, den verfügbaren Donnerstag und die Kosten. Für eine Abholung sehen Sie sich die verfügbaren Optionen an.",
+    "step3": "Bestellung abschließen",
+    "step3Text": "Sie erhalten die Bestätigung über den Onlineshop. Bewahren Sie diese für Ihre Bestellung auf.",
+    "faqTitle": "Häufige Fragen",
+    "faqDay": "An welchen Tagen liefern Sie?",
+    "faqDayText": "Ausschließlich donnerstags. Verfügbares Datum und Bestellfrist prüfen Sie bei der Bestellung.",
+    "faqProducts": "Welche Produkte liefern Sie?",
+    "faqProductsText": "Nur frischen Fisch, Salate und Fischplatten. Backfisch, Hering zum direkten Verzehr und fertige Gerichte erhalten Sie im Geschäft oder auf dem Markt.",
+    "faqCost": "Was kostet die Lieferung?",
+    "faqCostText": "Aktuelle Lieferkosten und ein möglicher Mindestbestellwert stehen vor dem Bezahlen im Onlineshop. Rufen Sie an, wenn Onlinebestellungen noch nicht möglich sind.",
+    "faqPickup": "Kann ich meine Bestellung abholen?",
+    "faqPickupText": "Prüfen Sie die Abholmöglichkeiten bei der Bestellung oder rufen Sie im Geschäft an. Öffnungszeiten und Markttage stehen unter Standorte.",
+    "recommendLabel": "Aus unserer Theke",
+    "recommendTitle": "Empfehlungen von Schaap’s",
+    "recommendIntro": "Etwas fürs Abendessen oder zum gemeinsamen Genießen. Fragen Sie nach dem heutigen Angebot.",
+    "vispotje": "Fischtöpfchen",
+    "vispotjeText": "Ein Fischgericht für zu Hause. Fragen Sie nach den heutigen Zutaten, der Portionsgröße und den Zubereitungshinweisen.",
+    "details": "Produkt ansehen",
+    "visit": "Öffnungszeiten und Anfahrt",
+    "photo": "Foto folgt",
+    "platterTitle": "Fischplatten für Ihre Gäste",
+    "platterIntro": "Zum geselligen Abend, Geburtstag oder Abendessen. Wählen Sie eine passende Fischplatte. Aktuelle Platten, Zutaten und Preise finden Sie in unserem Onlineshop.",
+    "platter1": "Zum gemeinsamen Genießen",
+    "platter1Text": "Besprechen Sie die Gästezahl und was Sie dazu servieren.",
+    "platter2": "Für Familie und Freunde",
+    "platter2Text": "Für ein Abendessen oder einen Geburtstag. Wählen Sie die Größe passend zu Ihrer Gruppe.",
+    "platter3": "Für ein Fest",
+    "platter3Text": "Für eine größere Gesellschaft. Besprechen Sie Zusammenstellung und Verfügbarkeit frühzeitig.",
+    "allergyTitle": "Allergene und Ernährungswünsche",
+    "allergyText": "Besprechen Sie eine Allergie immer vor der Bestellung. Zutaten und mögliche Kreuzkontakte unterscheiden sich nach Produkt und Zubereitung. Wir besprechen die Möglichkeiten; eine angepasste Platte ist nicht automatisch allergenfrei.",
+    "bioTitle": "Bio-Fisch und Herkunft",
+    "bioIntro": "Möchten Sie wissen, woher Ihr Fisch kommt oder welche Bio-Produkte verfügbar sind? Wir helfen bei der Auswahl anhand der Produktinformationen zur aktuellen Lieferung.",
+    "bio1": "Bio",
+    "bio1Text": "Bio-Zuchtfisch unterliegt den Regeln für ökologische Aquakultur. Fragen Sie nach dem Siegel und den Unterlagen zum jeweiligen Produkt.",
+    "bio2": "MSC und ASC",
+    "bio2Text": "MSC bezieht sich auf Wildfischerei, ASC auf Aquakultur. Eine Fischart ist nicht automatisch zertifiziert: Entscheidend sind das konkrete Produkt und sein Siegel.",
+    "bio3": "Herkunft Ihres Fisches",
+    "bio3Text": "Fanggebiet, Zuchtland und Produktinformationen helfen beim Vergleich. Fragen Sie nach den Angaben zum aktuell verfügbaren Fisch.",
+    "sources": "Mehr über die Siegel",
+    "varlaksTitle": "Varlaks-Lachs bei Schaap’s",
+    "varlaksIntro": "Sie suchen Varlaks-Lachs in Leiden? Fragen Sie nach der aktuellen Verfügbarkeit, den Produktinformationen und den Bio-Optionen.",
+    "varlaksText": "Wählen Sie eine Portion passend zu Ihrem Gericht. An der Theke beraten wir zu Menge und Zubereitung. Herkunft und mögliche Zertifizierung müssen zur gelieferten Charge passen; fragen Sie gern nach dem Etikett.",
+    "storyTitle": "Schaap’s Fischgeschäft, seit 1938",
+    "storyIntro": "Ein Leidener Fischgeschäft mit langer Geschichte. Sie finden uns an der Herenstraat 48, im Geschäft und auf dem Markt.",
+    "story1938": "1938 gründete Herr Schaap seinen Fischhandel in Leiden. Sein Name ist mit dem Geschäft verbunden geblieben.",
+    "storyNow": "Heute stehen bei Schaap’s Fisch und persönlicher Kontakt im Mittelpunkt: Beratung zu Auswahl, Menge und Zubereitung. Besuchen Sie uns an der Herenstraat oder an einem unserer Marktstände.",
+    "homeIntro": "Schaap’s gehört seit 1938 zu Leiden. An der Herenstraat finden Sie frischen Fisch, Hering, Backfisch, Salate und Fischplatten. Wir beraten Sie gern bei der Auswahl für Ihre Mahlzeit.",
+    "homeStory": "Von der Gründung 1938 bis zum heutigen Geschäft: Schaap’s gehört zu Leiden. Der persönliche Kontakt an der Theke bleibt im Mittelpunkt.",
+    "friedTitle": "Kibbeling, Lekkerbek und Hering",
+    "friedText": "Probieren Sie Kibbeling (Fischstücke im Backteig), Lekkerbek (Fischfilet im Backteig) oder niederländischen Hering. Besuchen Sie unser Geschäft oder den Marktstand für das heutige Angebot.",
+    "reviewTitle": "Erfahrungen unserer Kunden",
+    "reviewText": "Lesen Sie aktuelle Bewertungen auf Google.",
+    "reviews": "Bewertungen ansehen",
+    "catalogTitle": "Unser Sortiment",
+    "catalogIntro": "Von frischem Fisch bis zu Salaten und fertigen Gerichten. Das Angebot kann nach Tag und Saison variieren. Sehen Sie sich die Produkte an oder fragen Sie nach dem heutigen Angebot.",
+    "all": "Alle",
+    "search": "Produkt suchen",
+    "searchPlaceholder": "Zum Beispiel Lachs, Kabeljau oder Salat",
+    "noResults": "Keine Produkte gefunden. Versuchen Sie einen anderen Suchbegriff.",
+    "resultCount": "{count} Produkte",
+    "productTitle": "{name} in Leiden | Schaap’s Fischgeschäft",
+    "productDesc": "{name} bei Schaap’s, Herenstraat 48 in Leiden. Produktinformationen ansehen und nach dem aktuellen Angebot fragen.",
+    "productAvailability": "Das Angebot wechselt. Prüfen Sie die aktuelle Verfügbarkeit im Onlineshop oder rufen Sie im Geschäft an.",
+    "ingredients": "Produktinformationen",
+    "ingredientsText": "Fragen Sie nach Zutaten, Allergenen, Herkunft sowie Lager- und Zubereitungshinweisen zum aktuellen Produkt. Diese können je nach Charge oder Rezept variieren.",
+    "inspiration": "Zu Tisch",
+    "inspirationText": "Sie suchen eine Zubereitungsidee? Sehen Sie sich unsere Rezepte an oder lassen Sie sich an der Theke beraten.",
+    "recipesNl": "Fischrezepte (Niederländisch)",
+    "backCatalog": "Zurück zum Sortiment",
+    "thankTitle": "Ihre Bestellung prüfen",
+    "thankText": "Den Bestell- und Zahlungsstatus finden Sie in der Bestätigung des SumUp-Onlineshops. Diese Seite bestätigt keine Bestellung oder Zahlung. Bei Fragen wenden Sie sich bitte an das Geschäft.",
+    "contactFallback": "Rufen Sie uns mit Ihrer Frage an. Das Onlinekontaktformular ist derzeit nicht verfügbar.",
+    "locations": "Geschäft und Marktstände",
+    "locationsIntro": "Herenstraat 48 in Leiden, der Leidener Markt und unser Freitagsstand in Voorschoten. Hier sehen Sie, wann und wo Sie uns finden.",
+    "pickupText": "Möchten Sie etwas zurücklegen lassen? Rufen Sie an, um Abholort und Zeit zu vereinbaren.",
+    "localLeidenTitle": "Fischgeschäft in Leiden: Herenstraat 48",
+    "localLeidenIntro": "Frischer Fisch, Hering, Backfisch, Salate und Fischplatten bei Schaap’s. Seit 1938 mit Leiden verbunden.",
+    "localMarketTitle": "Schaap’s auf dem Markt in Leiden",
+    "localMarketIntro": "Unseren Fischstand finden Sie mittwochs und samstags in Leiden. Sehen Sie sich Markttage und Anfahrt an oder rufen Sie für eine Abholung an.",
+    "localVoorschotenTitle": "Schaap’s Fischstand in Voorschoten",
+    "localVoorschotenIntro": "Freitags steht unser Stand bei Hoogvliet in Voorschoten. Für Fisch und persönliche Beratung. Hauslieferungen erfolgen ausschließlich donnerstags.",
+    "privacy": "Datenschutz",
+    "footerNote": "Leiden seit 1938 · frischer Fisch, Salate und Fischplatten am Donnerstag geliefert",
+    "categories": {
+      "verse-vis": "Frischer Fisch",
+      "gerookte-vis": "Räucherfisch",
+      "schaal-schelp": "Krusten- und Weichtiere",
+      "vissalades": "Salate",
+      "bereid": "Fertige Gerichte und Snacks"
+    },
+    "images": {
+      "logoBadge": "Schaap’s Fischgeschäft",
+      "logoLiggend": "Schaap’s Fischgeschäft",
+      "winkelGevel": "Herenstraat 48, Leiden",
+      "toonbank": "Unsere Fischtheke",
+      "achterDeToonbank": "Hinter der Theke",
+      "gebakkenVis": "Niederländischer Backfisch",
+      "marktZaterdag": "Samstagsmarkt in Leiden",
+      "marktWoensdag": "Mittwochsmarkt in Leiden",
+      "marktVoorschoten": "Marktstand in Voorschoten",
+      "historie1938": "Seit 1938",
+      "historie1960": "Aus dem Familienarchiv",
+      "historie1980": "Aus dem Familienarchiv",
+      "historie2000": "Aus dem Familienarchiv",
+      "historieNu": "Schaap’s heute",
+      "schaalBorrel": "Zum Teilen",
+      "schaalFamilie": "Für Familie und Freunde",
+      "schaalFeest": "Für ein Fest",
+      "varlaksFilet": "Varlaks-Lachsfilet",
+      "aanraderVispotje": "Fischtöpfchen",
+      "aanraderSalade": "Salate"
+    }
+  },
+  "producten": {
+    "kabeljauw": {
+      "naam": "Kabeljau",
+      "desc": "Milder Weißfisch zum Backen oder Pochieren."
+    },
+    "kabeljauwfilet": {
+      "naam": "Kabeljaufilet",
+      "desc": "Weißfischfilet für Pfanne, Backofen oder Dampfgarer."
+    },
+    "schol": {
+      "naam": "Scholle",
+      "desc": "Ein Plattfisch mit feinem Geschmack, klassisch in der Pfanne gebraten."
+    },
+    "scholfilet": {
+      "naam": "Schollenfilet",
+      "desc": "Zarte Filets, die gut zu einer einfachen Buttersauce passen."
+    },
+    "zeetong": {
+      "naam": "Seezunge",
+      "desc": "Ein feiner Plattfisch, klassisch in der Pfanne zubereitet."
+    },
+    "zeebaars": {
+      "naam": "Wolfsbarsch",
+      "desc": "Weißfisch für Grill oder Backofen."
+    },
+    "zeebaarsfilet": {
+      "naam": "Wolfsbarschfilet",
+      "desc": "Ein festes Filet, gebraten mit Zitrone besonders lecker."
+    },
+    "dorade": {
+      "naam": "Dorade",
+      "desc": "Dorade eignet sich gut für die Zubereitung im Ganzen im Backofen."
+    },
+    "dorade-filet": {
+      "naam": "Doradenfilet",
+      "desc": "Ein mildes Filet für Pfanne oder Backofen."
+    },
+    "griet": {
+      "naam": "Glattbutt",
+      "desc": "Ein Plattfisch mit feinem weißem Fleisch zum Pochieren oder Backen."
+    },
+    "grietfilet": {
+      "naam": "Glattbuttfilet",
+      "desc": "Feine weiße Filets, passend zu einer leichten Sauce."
+    },
+    "tarbot": {
+      "naam": "Steinbutt",
+      "desc": "Ein fester Plattfisch für ein besonderes Essen."
+    },
+    "tarbotfilet": {
+      "naam": "Steinbuttfilet",
+      "desc": "Feste weiße Filets für Backofen oder Pfanne."
+    },
+    "heek": {
+      "naam": "Seehecht",
+      "desc": "Weißfisch mit mildem Geschmack zum Backen oder Pochieren."
+    },
+    "heekfilet": {
+      "naam": "Seehechtfilet",
+      "desc": "Zarte Filets zum Dämpfen, Pochieren oder Braten."
+    },
+    "schelvis": {
+      "naam": "Schellfisch",
+      "desc": "Ein Weißfisch, der häufig für Fish and Chips verwendet wird."
+    },
+    "schelvisfilet": {
+      "naam": "Schellfischfilet",
+      "desc": "Milde weiße Filets für Pfanne oder Backofen."
+    },
+    "wijting": {
+      "naam": "Wittling",
+      "desc": "Ein zarter Weißfisch, der sich gut zum Braten eignet."
+    },
+    "wijtingfilet": {
+      "naam": "Wittlingfilet",
+      "desc": "Dünne, zarte Filets für ein Fischgericht."
+    },
+    "rode-poon": {
+      "naam": "Roter Knurrhahn",
+      "desc": "Festes weißes Fleisch für Pfanne oder Fischeintopf."
+    },
+    "schar": {
+      "naam": "Kliesche",
+      "desc": "Ein kleiner Plattfisch, klassisch in der Pfanne zubereitet."
+    },
+    "roodbaars": {
+      "naam": "Rotbarsch",
+      "desc": "Festes weißes Fleisch für Backofen oder Grill."
+    },
+    "haring": {
+      "naam": "Niederländischer Hering",
+      "desc": "Ein niederländischer Klassiker, pur oder mit Zwiebeln."
+    },
+    "varlaks-zalm": {
+      "naam": "Varlaks-Lachs",
+      "desc": "Fragen Sie nach dem aktuellen Varlaks-Angebot und den Produktinformationen."
+    },
+    "zalmfilet": {
+      "naam": "Lachsfilet",
+      "desc": "Lachs für Pfanne, Backofen oder ein Pastagericht."
+    },
+    "zalmforel": {
+      "naam": "Lachsforelle",
+      "desc": "Forelle mit rosa Fleisch zum Backen oder Grillen."
+    },
+    "tonijnfilet": {
+      "naam": "Thunfischfilet",
+      "desc": "Fester Thunfisch für Grill oder Pfanne. Fragen Sie nach Zubereitungstipps."
+    },
+    "zeeduivelfilet": {
+      "naam": "Seeteufelfilet",
+      "desc": "Fester Weißfisch, der in Eintöpfen seine Form behält."
+    },
+    "gerookte-zalm-high-seas": {
+      "naam": "Räucherlachs — High Seas",
+      "desc": "Räucherlachs in Scheiben für Toast, Salate oder eine Fischplatte."
+    },
+    "gerookte-wilde-zalm": {
+      "naam": "Geräucherter Wildlachs",
+      "desc": "Geräucherter Wildlachs zum kalten Servieren mit Brot."
+    },
+    "gravad-lax": {
+      "naam": "Graved Lachs",
+      "desc": "Gebeizter Lachs, traditionell mit Dill zubereitet."
+    },
+    "gerookte-bokking": {
+      "naam": "Räucherhering",
+      "desc": "Geräucherter Hering mit kräftigem Geschmack."
+    },
+    "gerookte-forelfilet": {
+      "naam": "Geräuchertes Forellenfilet",
+      "desc": "Geräucherte Forellenfilets für Brot oder Salat."
+    },
+    "gerookte-heilbot": {
+      "naam": "Geräuchertes Heilbuttfilet",
+      "desc": "Geräucherter Heilbutt für eine Fischplatte oder Toast."
+    },
+    "gerookte-kipper": {
+      "naam": "Kipper — geräucherter Hering",
+      "desc": "Aufgeklappter Räucherhering, eine traditionelle Fischspezialität."
+    },
+    "bosje-sprot": {
+      "naam": "Geräucherte Sprotten",
+      "desc": "Kleine Räucherfische, lecker zu dunklem Brot."
+    },
+    "hollandse-garnalen": {
+      "naam": "Nordseegarnelen",
+      "desc": "Kleine Garnelen für Salat, Toast oder eine Fischplatte."
+    },
+    "noorse-garnalen": {
+      "naam": "Nordische Garnelen",
+      "desc": "Garnelen mit mildem, süßlichem Geschmack für Salat oder Pasta."
+    },
+    "franse-gambas": {
+      "naam": "Große Garnelen",
+      "desc": "Große Garnelen für Grill oder Pfanne."
+    },
+    "gekookte-gambas": {
+      "naam": "Gekochte Garnelen",
+      "desc": "Gekochte Garnelen mit Dip oder im Salat servieren."
+    },
+    "zeeuwse-mosselen": {
+      "naam": "Zeeland-Miesmuscheln",
+      "desc": "Miesmuscheln für einen klassischen Topf mit Gemüse und Brühe."
+    },
+    "creuse-oesters": {
+      "naam": "Felsenaustern",
+      "desc": "Fragen Sie nach der aktuellen Größe und den Zubereitungsmöglichkeiten."
+    },
+    "kokkels": {
+      "naam": "Herzmuscheln",
+      "desc": "Kleine Muscheln für Pasta oder ein Meeresfrüchtegericht."
+    },
+    "coquilles": {
+      "naam": "Jakobsmuscheln",
+      "desc": "Zarte Jakobsmuscheln, geeignet zum Braten in der Pfanne."
+    },
+    "krabklauwen": {
+      "naam": "Krabbenscheren",
+      "desc": "Krabbenscheren für eine Fischplatte oder Vorspeise."
+    },
+    "inktvis": {
+      "naam": "Tintenfisch",
+      "desc": "Tintenfisch zum Grillen, Braten oder Schmoren."
+    },
+    "scheermessen": {
+      "naam": "Schwertmuscheln",
+      "desc": "Längliche Muscheln, lecker mit Knoblauch und Petersilie."
+    },
+    "zalmsalade": {
+      "naam": "Lachssalat",
+      "desc": "Ein Lachssalat für Brot oder zum Teilen."
+    },
+    "krabsalade": {
+      "naam": "Krabbensalat",
+      "desc": "Fragen Sie, ob die aktuelle Rezeptur Krabben oder Surimi enthält."
+    },
+    "tonijnsalade": {
+      "naam": "Thunfischsalat",
+      "desc": "Thunfischsalat für Brot oder als Beilage."
+    },
+    "garnalensalade": {
+      "naam": "Garnelensalat",
+      "desc": "Garnelensalat für Toast oder als Vorspeise."
+    },
+    "zeewiersalade": {
+      "naam": "Wakame-Algensalat",
+      "desc": "Ein Algensalat als Beilage zu Fisch."
+    },
+    "visschaal": {
+      "naam": "Fischplatte",
+      "desc": "Eine Auswahl an Fisch zum Teilen; Zutaten und Größe nach Absprache."
+    },
+    "kibbeling": {
+      "naam": "Kibbeling — Fischstücke im Backteig",
+      "desc": "Ein niederländischer Backfischklassiker. Fragen Sie nach der heutigen Fischart."
+    },
+    "lekkerbek": {
+      "naam": "Lekkerbek — Fischfilet im Backteig",
+      "desc": "Ein Fischfilet im Backteig aus unserem Geschäft oder Marktstand."
+    },
+    "broodje-haring": {
+      "naam": "Heringsbrötchen",
+      "desc": "Niederländischer Hering im Brötchen. Fragen Sie nach den Beilagen."
+    },
+    "vissoep": {
+      "naam": "Fischsuppe",
+      "desc": "Eine Fischsuppe für Mittag- oder Abendessen. Fragen Sie nach der heutigen Rezeptur."
+    },
+    "vispotje": {
+      "naam": "Fischtöpfchen",
+      "desc": "Ein Fischgericht für zu Hause. Fragen Sie nach Portionen und Zubereitung."
+    },
+    "feestschotel": {
+      "naam": "Festliche Fischplatte",
+      "desc": "Eine Platte für ein Fest, Größe und Inhalt nach Absprache."
+    },
+    "koolvis": {
+      "naam": "Köhler",
+      "desc": "Ein fester Weißfisch zum Braten, Backen oder Schmoren."
+    },
+    "leng": {
+      "naam": "Leng",
+      "desc": "Fester, milder Weißfisch, geeignet für Eintöpfe."
+    },
+    "vleugelrog": {
+      "naam": "Rochenflügel",
+      "desc": "Ein besonderer Fischzuschnitt, klassisch mit brauner Butter serviert."
+    },
+    "kabeljauwhaas": {
+      "naam": "Kabeljaurücken",
+      "desc": "Das dicke Rückenstück des Kabeljaus für Backofen oder Pfanne."
+    },
+    "zalmmoot": {
+      "naam": "Lachssteak",
+      "desc": "Ein quer geschnittenes Lachsstück für Backofen oder Grill."
+    },
+    "gerookte-zalm-snippers": {
+      "naam": "Räucherlachsstücke",
+      "desc": "Kleine Räucherlachsstücke für Pasta oder Eierspeisen."
+    },
+    "langoustines": {
+      "naam": "Kaisergranat",
+      "desc": "Krustentiere mit zartem Fleisch zum Grillen oder Braten."
+    },
+    "hele-krab": {
+      "naam": "Ganze Krabbe",
+      "desc": "Ganze Krabbe zum Teilen. Fragen Sie nach Zubereitung und Servieren."
+    },
+    "vongole": {
+      "naam": "Venusmuscheln",
+      "desc": "Kleine Muscheln für ein klassisches Pastagericht."
+    },
+    "fine-de-claire-oesters": {
+      "naam": "Fine-de-Claire-Austern",
+      "desc": "Austern als Vorspeise oder für eine Fischplatte. Fragen Sie nach den Größen."
+    },
+    "surimisalade": {
+      "naam": "Surimisalat",
+      "desc": "Ein Salat mit Surimi für Brot oder Toast."
+    },
+    "garnalenkroketten": {
+      "naam": "Garnelenkroketten",
+      "desc": "Kroketten mit Garnelenfüllung als Snack."
+    },
+    "calamares": {
+      "naam": "Calamari-Ringe",
+      "desc": "Frittierte Tintenfischringe mit einem Dip genießen."
+    },
+    "visburger": {
+      "naam": "Fischburger",
+      "desc": "Ein Fischburger zum Mittagessen. Fragen Sie nach der Rezeptur."
+    },
+    "zeewolf": {
+      "naam": "Steinbeißer",
+      "desc": "Fester Weißfisch zum Braten oder Grillen."
+    },
+    "zwaardvis": {
+      "naam": "Schwertfischsteak",
+      "desc": "Ein festes Fischsteak für Grill oder Pfanne."
+    },
+    "verse-heilbot": {
+      "naam": "Heilbutt",
+      "desc": "Ein weißer Plattfisch zum Pochieren oder Backen."
+    },
+    "kabeljauwwangen": {
+      "naam": "Kabeljaubäckchen",
+      "desc": "Kleine Kabeljaubäckchen für die Pfanne."
+    },
+    "grauwe-poon": {
+      "naam": "Grauer Knurrhahn",
+      "desc": "Weißfisch für Fischsuppe, Eintopf oder Pfanne."
+    },
+    "hele-kreeft": {
+      "naam": "Ganzer Hummer",
+      "desc": "Ein ganzer Hummer für einen besonderen Anlass. Fragen Sie nach Verfügbarkeit."
+    },
+    "tijgergarnalen": {
+      "naam": "Tigergarnelen",
+      "desc": "Große Garnelen für Curry, Grill oder Pfanne."
+    },
+    "wulken": {
+      "naam": "Wellhornschnecken",
+      "desc": "Meeresschnecken mit festem Biss, häufig mit Dip serviert."
+    },
+    "gerookte-forel-heel": {
+      "naam": "Ganze Räucherforelle",
+      "desc": "Ganze Räucherforelle, lecker mit Brot und Meerrettich."
+    },
+    "warm-gerookte-zalm": {
+      "naam": "Heißgeräucherter Lachs",
+      "desc": "Räucherlachs zum Zerpflücken für Salate oder Pasta."
+    },
+    "zeevruchtensalade": {
+      "naam": "Meeresfrüchtesalat",
+      "desc": "Ein gemischter Meeresfrüchtesalat. Fragen Sie nach den aktuellen Zutaten."
+    },
+    "garnalencocktail": {
+      "naam": "Garnelencocktail",
+      "desc": "Garnelen als kalte Vorspeise mit Sauce."
+    },
+    "visspies": {
+      "naam": "Fischspieß",
+      "desc": "Fisch am Spieß für den Grill. Fragen Sie nach der Zusammenstellung."
+    },
+    "fish-and-chips": {
+      "naam": "Fish and Chips",
+      "desc": "Fisch im Backteig mit Pommes, ein britischer Klassiker."
+    },
+    "snoekbaars": {
+      "naam": "Zanderfilet",
+      "desc": "Weißer Süßwasserfisch zum Braten oder Backen."
+    },
+    "tongschar": {
+      "naam": "Rotzunge",
+      "desc": "Ein zarter Plattfisch für die Pfanne."
+    },
+    "bot": {
+      "naam": "Flunder",
+      "desc": "Ein milder Plattfisch zum Braten oder Backen."
+    },
+    "sardines": {
+      "naam": "Sardinen",
+      "desc": "Kleine, kräftig schmeckende Fische für Grill oder Backofen."
+    },
+    "ansjovis": {
+      "naam": "Frische Sardellen",
+      "desc": "Kleine Fische zum Braten. Fragen Sie nach Zubereitungstipps."
+    },
+    "spiering": {
+      "naam": "Stint",
+      "desc": "Kleine Fische, traditionell mehliert und gebraten."
+    },
+    "skrei": {
+      "naam": "Skrei — Winterkabeljau",
+      "desc": "Saisonaler Kabeljau. Fragen Sie nach dem aktuellen Angebot."
+    },
+    "zeeforel": {
+      "naam": "Meerforelle",
+      "desc": "Ein Verwandter des Lachses für Pfanne, Grill oder Backofen."
+    },
+    "tilapiafilet": {
+      "naam": "Tilapiafilet",
+      "desc": "Milde weiße Filets für Curry oder Pfanne."
+    },
+    "victoriabaars": {
+      "naam": "Nilbarschfilet",
+      "desc": "Fester Süßwasserfisch zum Backen oder Schmoren."
+    },
+    "gerookte-zalmmoot": {
+      "naam": "Heißgeräuchertes Lachssteak",
+      "desc": "Ein Stück heißgeräucherter Lachs für eine Mahlzeit oder einen Salat."
+    },
+    "gerookte-sprotfilet": {
+      "naam": "Geräucherte Sprottenfilets",
+      "desc": "Kleine Räucherfilets für Brot oder Kartoffelsalat."
+    },
+    "rivierkreeftstaartjes": {
+      "naam": "Flusskrebsschwänze",
+      "desc": "Flusskrebsschwänze für Salat, Pasta oder Vorspeise."
+    },
+    "alikruiken": {
+      "naam": "Strandschnecken",
+      "desc": "Kleine Meeresschnecken, traditionell aus dem Gehäuse gegessen."
+    },
+    "gamba-spiesen": {
+      "naam": "Garnelenspieße",
+      "desc": "Garnelen am Spieß zum Grillen oder Braten."
+    },
+    "krabpoten": {
+      "naam": "Krabbenbeine",
+      "desc": "Krabbenbeine mit Zitrone oder einem Dip servieren."
+    },
+    "halve-kreeft": {
+      "naam": "Halber Hummer",
+      "desc": "Ein halber Hummer als Vorspeise oder zum Überbacken."
+    },
+    "zalm-dillesalade": {
+      "naam": "Lachs-Dill-Salat",
+      "desc": "Ein Lachssalat mit Dill, lecker auf Toast."
+    },
+    "haringsalade": {
+      "naam": "Heringssalat",
+      "desc": "Ein Heringssalat zu Brot oder Kartoffeln."
+    },
+    "mosselsalade": {
+      "naam": "Miesmuschelsalat",
+      "desc": "Ein Miesmuschelsalat als Vorspeise oder auf Brot."
+    },
+    "poke-bowl-zalm": {
+      "naam": "Lachs-Poké-Bowl",
+      "desc": "Eine Bowl mit Lachs. Fragen Sie nach Zutaten und Verfügbarkeit."
+    },
+    "gamba-tempura": {
+      "naam": "Garnelen-Tempura",
+      "desc": "Garnelen im Tempurateig als frittierter Snack."
+    },
+    "visnuggets": {
+      "naam": "Fischnuggets",
+      "desc": "Panierte Fischstücke. Fragen Sie nach Zubereitungshinweisen."
+    },
+    "gebakken-mosselen": {
+      "naam": "Gebratene Miesmuscheln",
+      "desc": "Miesmuscheln als gebratener Snack."
+    },
+    "tongfilet": {
+      "naam": "Seezungenfilet",
+      "desc": "Feine Seezungenfilets, lecker in Butter zubereitet."
+    },
+    "wilde-zalmfilet": {
+      "naam": "Wildlachsfilet",
+      "desc": "Wildlachsfilet für Backofen oder Pfanne."
+    },
+    "heilbotfilet": {
+      "naam": "Heilbuttfilet",
+      "desc": "Weiße Plattfischfilets zum Pochieren oder Backen."
+    },
+    "zeebrasemfilet": {
+      "naam": "Meerbrassenfilet",
+      "desc": "Feine Weißfischfilets für Pfanne oder Backofen."
+    },
+    "red-snapperfilet": {
+      "naam": "Red-Snapper-Filet",
+      "desc": "Feste weiße Filets für Grill oder Fischcurry."
+    },
+    "gerookte-coquilles": {
+      "naam": "Geräucherte Jakobsmuscheln",
+      "desc": "Geräucherte Jakobsmuscheln für Vorspeise oder Fischplatte."
+    },
+    "gerookte-mosselen": {
+      "naam": "Geräucherte Miesmuscheln",
+      "desc": "Geräucherte Miesmuscheln für Brot oder eine Fischplatte."
+    },
+    "krabvlees": {
+      "naam": "Krabbenfleisch",
+      "desc": "Krabbenfleisch für Salat, Pasta oder Vorspeise."
+    },
+    "gerookte-garnalen": {
+      "naam": "Geräucherte Garnelen",
+      "desc": "Geräucherte Garnelen für Toast oder Pasta."
+    },
+    "kokkelvlees": {
+      "naam": "Herzmuschelfleisch",
+      "desc": "Ausgelöste Herzmuscheln für Pasta, Reisgerichte oder Fischsuppe."
+    },
+    "noorse-kreeftstaart": {
+      "naam": "Kaisergranatschwänze",
+      "desc": "Kaisergranatschwänze zum Braten oder für ein Meeresfrüchtegericht."
+    },
+    "kreeftensalade": {
+      "naam": "Hummersalat",
+      "desc": "Hummersalat für Toast oder Vorspeise. Fragen Sie nach den Zutaten."
+    },
+    "zeekraalsalade": {
+      "naam": "Quellersalat",
+      "desc": "Ein Salat aus Meeresgemüse als Beilage zu Fisch."
+    },
+    "vissticks": {
+      "naam": "Fischstäbchen",
+      "desc": "Panierte Fischstäbchen für Backofen oder Pfanne."
+    },
+    "sushi-mix": {
+      "naam": "Sushi-Auswahl",
+      "desc": "Eine gemischte Sushi-Auswahl. Fragen Sie nach Zutaten und Verfügbarkeit."
+    },
+    "kabeljauwtongen": {
+      "naam": "Kabeljauzungen",
+      "desc": "Kleine Stücke aus dem Unterkiefer des Kabeljaus, traditionell gebraten."
+    },
+    "gamba-kroketten": {
+      "naam": "Garnelenkroketten",
+      "desc": "Kroketten mit Garnelenfüllung zum Mittagessen oder als Snack."
+    },
+    "visbitterballen": {
+      "naam": "Fischbitterballen",
+      "desc": "Kleine frittierte Kroketten mit Fischfüllung."
+    }
   }
 }

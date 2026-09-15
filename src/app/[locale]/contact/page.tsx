@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
 import { Sectie } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
@@ -34,11 +33,11 @@ export default async function ContactPage({
   const t = await getTranslations({ locale, namespace: "contactPage" });
   const nav = await getTranslations({ locale, namespace: "nav" });
   const g = await getTranslations({ locale, namespace: "gedeeld" });
+  const site = await getTranslations({locale,namespace:"site"});
   const p = await getTranslations({ locale, namespace: "plekken" });
 
   return (
     <>
-      <JsonLd locale={locale} />
       <Schema
         data={kruimelSchema(locale, [
           { naam: BEDRIJF.naamKort, pad: "/" },
@@ -162,7 +161,7 @@ export default async function ContactPage({
           {/* ── Bericht sturen ────────────────────────────────────────────── */}
           <div>
             <h2 className="text-[1.5rem] mb-6">{t("formTitle")}</h2>
-            <ContactFormulier />
+            {(process.env.CONTACT_WEBHOOK_URL || process.env.BESTELLING_WEBHOOK_URL) ? <ContactFormulier /> : <p>{site("contactFallback")}</p>}
           </div>
         </div>
       </Sectie>

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
 import { Sectie, Kop, Vragen } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
@@ -54,7 +53,6 @@ export default async function TooGoodToGoPage({
 
   return (
     <>
-      <JsonLd />
       <Schema
         data={[
           vraagSchema(FAQ),

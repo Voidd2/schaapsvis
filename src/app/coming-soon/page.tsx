@@ -20,8 +20,8 @@ export default async function ComingSoonPage({
   // niet van mee. Zonder deze klassen viel het wachtwoordscherm terug op de
   // systeemletter — en dat is het eerste wat een bezoeker van de site ziet.
   return (
-    <div className={FONT_KLASSEN}>
+    <html lang="nl" className={FONT_KLASSEN}><body>
       <ComingSoon error={sp.error === "1"} />
-    </div>
+    </body></html>
   );
 }

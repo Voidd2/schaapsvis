@@ -1,4 +1,5 @@
 import { BEELD, type BeeldNaam, type Verhouding } from "@/lib/beeld";
+import { useTranslations } from "next-intl";
 
 /**
  * Een beeldvlak op de site.
@@ -36,6 +37,8 @@ export function Beeld({
   prioriteit?: boolean;
 }) {
   const plek = BEELD[naam];
+  const t = useTranslations("site");
+  const label = t(`images.${naam}`);
   const vorm = VERHOUDING[verhouding ?? plek.verhouding];
 
   return (
@@ -50,7 +53,7 @@ export function Beeld({
         /* eslint-disable-next-line @next/next/no-img-element */
         <img
           src={plek.bestand}
-          alt={plek.alt}
+          alt={`${label} — Schaap’s Vishandel, Leiden`}
           className={`w-full h-full ${vullend ? "object-cover" : "object-contain p-5"}`}
           loading={prioriteit ? "eager" : "lazy"}
           fetchPriority={prioriteit ? "high" : undefined}
@@ -64,7 +67,7 @@ export function Beeld({
             opacity: 0.45,
           }}
         >
-          {plek.terugval}
+          <span className="block">{label}<span className="block text-xs tracking-wide mt-3">{t("photo")}</span></span>
         </span>
       )}
     </div>

@@ -14,30 +14,30 @@
     "bezorgen": "Bezorgen"
   },
   "meta": {
-    "homeTitle": "Viswinkel Leiden — Herenstraat 48 | Verse vis, ook bezorgd | Schaap's Vishandel",
-    "homeDesc": "Viswinkel in hartje Leiden sinds 1938. Verse vis van de veiling, visschalen op maat en bezorging in Leiden, Leiderdorp, Voorschoten, Wassenaar en Leidschendam. Herenstraat 48, 071 514 9802.",
-    "verhaalTitle": "Het Verhaal van Schaap's Vis Leiden | Sinds 1938 de Visboer van Leiden",
-    "verhaalDesc": "Van Gerrit Schaap in 1938 tot Aldert Haasnoot vandaag — bijna negentig jaar Leids vakmanschap, vier generaties, één adres: Herenstraat 48, Leiden.",
-    "varlaksTitle": "Biologische Varlaks zalm in Leiden | Schaap's Vishandel",
-    "varlaksDesc": "Varlaks biologische zalm — geen antibiotica, geen GMO, 100% traceerbaar. Dagelijks vers bij Schaap's Vis Leiden, Herenstraat 48. Ook op de markt.",
-    "assortimentTitle": "Vers Vis Assortiment Leiden | Kibbeling, Haring, Lekkerbek | Schaap's Vis",
-    "assortimentDesc": "Vers vis assortiment bij Schaap's Vis Leiden: kibbeling, lekkerbek, haring, vissoep, biologische Varlaks zalm, feestschotels en meer. Dagelijks vers op Herenstraat 48.",
-    "bezoekTitle": "Viswinkel Leiden Herenstraat 48 | Schaap's Vis — Openingstijden & Route",
-    "bezoekDesc": "Schaap's Vis bezoeken? Herenstraat 48 Leiden (ma–za), Leidse markt (wo + za), of Hoogvliet Voorschoten (vrij). Altijd vers, altijd vriendelijk.",
+    "homeTitle": "Schaap’s Vishandel Leiden | Sinds 1938",
+    "homeDesc": "Sinds 1938 hoort Schaap’s bij Leiden. Kom naar de Herenstraat voor verse vis, haring, kibbeling, salades en visschalen. We helpen u kiezen voor de maaltijd of de borrel.",
+    "verhaalTitle": "Schaap’s Vishandel, sinds 1938",
+    "verhaalDesc": "Een Leidse vishandel met een lange geschiedenis. U vindt ons aan de Herenstraat 48, in de winkel en op de markt.",
+    "varlaksTitle": "Varlaks zalm bij Schaap’s",
+    "varlaksDesc": "Op zoek naar Varlaks zalm in Leiden? Vraag ons naar de huidige aanvoer, de productinformatie en de beschikbare biologische opties.",
+    "assortimentTitle": "Ons assortiment",
+    "assortimentDesc": "Van verse vis tot salades en bereide gerechten. Het aanbod kan per dag en seizoen verschillen. Bekijk de producten of vraag ons wat er vandaag is.",
+    "bezoekTitle": "Winkel en marktkramen",
+    "bezoekDesc": "Herenstraat 48 in Leiden, de Leidse markt en onze vrijdagkraam in Voorschoten. Bekijk waar en wanneer u ons vindt.",
     "contactTitle": "Contact Schaap's Vis Leiden | 071 514 9802 | Viswinkel Herenstraat",
     "contactDesc": "Neem contact op met Schaap's Vis Leiden. Bel 071 514 9802 of stuur een bericht. Herenstraat 48, 2313 AL Leiden.",
-    "bestellenTitle": "Vis bestellen in Leiden — bezorgen of afhalen | Schaap's Vishandel",
-    "bestellenDesc": "Bestel verse vis of een visschaal bij Schaap's Vishandel in Leiden. Laten bezorgen in de regio of afhalen aan de Herenstraat 48. Bestellen tot 12:00 de dag voor levering.",
-    "eerlijkeVisTitle": "Biologische Vis Leiden | Biologische Zalm — Schaap's Vis",
-    "eerlijkeVisDesc": "Biologische vis in Leiden bij Schaap's Vishandel — biologische Varlaks zalm (ASC + EU-bio), MSC- en ASC-gecertificeerd. Herenstraat 48, sinds 1938.",
+    "bestellenTitle": "Vis bestellen bij Schaap’s",
+    "bestellenDesc": "Kies verse vis voor thuis, een salade voor erbij of een visschaal voor uw gezelschap.",
+    "eerlijkeVisTitle": "Biologische vis en herkomst",
+    "eerlijkeVisDesc": "Wilt u weten waar uw vis vandaan komt of welke biologische opties er zijn? We helpen u kiezen met de productinformatie van de actuele aanvoer.",
     "receptenTitle": "Visrecepten van Schaap's Vis Leiden | Kibbeling, Zalm, Haring & meer",
     "receptenDesc": "Heerlijke visrecepten met vis van Schaap's Vis Leiden. Van kibbeling met knoflooksaus tot gravlaks en romige vissoep. Inclusief boodschappenlijstje en bereidingstijd.",
-    "bezorgenTitle": "Verse vis bezorgen in Leiden en omgeving | Schaap's Vishandel",
-    "bezorgenDesc": "Verse vis en visschalen thuisbezorgd in Leiden, Leiderdorp, Voorschoten, Wassenaar en Leidschendam. Woensdag t/m zaterdag, bestellen tot 12:00 de dag ervoor. € 5,99 bezorgkosten, gratis vanaf € 35.",
+    "bezorgenTitle": "Vis bezorgen in Leiden en omgeving",
+    "bezorgenDesc": "Iedere donderdag bezorgen we verse vis, salades en visschalen in Leiden en omgeving. Vanuit onze viswinkel aan de Herenstraat 48.",
     "bezorgenPlaatsTitle": "Verse vis bezorgen in {plaats} | Vishandel uit Leiden | Schaap's Vis",
     "bezorgenPlaatsDesc": "Verse vis en visschalen laten bezorgen in {plaats}? Schaap's Vishandel uit Leiden rijdt {dagen} langs. Bestellen tot 12:00 de dag ervoor, betalen bij de deur of straks online.",
-    "visschalenTitle": "Visschaal bestellen in Leiden — drie schalen vanaf {bedrag} | Schaap's Vishandel",
-    "visschalenDesc": "Een visschaal voor de borrel, een verjaardag of de kerstdagen. Drie schalen vanaf {bedrag}, met extra's naar keuze. Afhalen aan de Herenstraat of laten bezorgen."
+    "visschalenTitle": "Visschalen voor uw gezelschap",
+    "visschalenDesc": "Voor een borrel, verjaardag of etentje. Kies een schaal die past bij de gelegenheid. De actuele schalen, samenstelling en prijzen vindt u in onze webwinkel."
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Sinds 1938",
@@ -169,7 +169,7 @@
   "assortimentPage": {
     "title": "Ons Assortiment",
     "sub": "Vers, eerlijk en van topkwaliteit — dagelijks vers aangeleverd",
-    "note": "Geen online afrekenen — wél eenvoudig vooruit bestellen. Wij bellen terug met prijs en bevestiging."
+    "note": "Beschikbare producten, prijzen, bezorgkosten, besteltermijn en afhaalmogelijkheden staan in de bestelomgeving. Controleer daar uw adres en de beschikbare donderdag vóór u afrekent."
   },
   "bezoekPage": {
     "title": "Waar u ons vindt",
@@ -177,7 +177,7 @@
   },
   "contactPage": {
     "title": "Contact",
-    "sub": "Bellen gaat het snelst — we staan meestal achter de toonbank. Appen of mailen mag ook.",
+    "sub": "Bellen gaat het snelst. U kunt ons ook via WhatsApp bereiken.",
     "formTitle": "Stuur een bericht",
     "nameLabel": "Naam",
     "emailLabel": "E-mailadres",
@@ -231,12 +231,12 @@
     "winkel": "Herenstraat 48",
     "winkelTijden": "Dinsdag t/m vrijdag 09:00–18:00, zaterdag 09:00–17:00",
     "markt": "Markt Leiden",
-    "marktTijden": "Woensdag bij Dille & Camille, zaterdag op de Aalmarkt bij de Waag — 08:30–17:00",
+    "marktTijden": "Woensdag en zaterdag 08:30–17:00 — bel voor de actuele standplaats",
     "voorschoten": "Bij Hoogvliet, Voorschoten",
     "voorschotenTijden": "Vrijdag 08:30–17:30",
     "bezorgenIn": "Vis bezorgen in {plaats}",
     "opgericht": "opgericht in {jaar} door {oprichter}",
-    "betalen": "Pinnen en contant · iDEAL en creditcard volgen binnenkort",
+    "betalen": "Leiden sinds 1938 · iedere donderdag verse vis, salades en visschalen bezorgen",
     "bezorgenIntro": "Wij bezorgen ook in",
     "en": "en"
   },
@@ -324,7 +324,7 @@
     "telefoonLabel": "Telefoon",
     "sinds1938": "Sinds 1938",
     "slotTitel": "Kom langs — of bestel vooruit",
-    "slotTekst": "Herenstraat 48 in Leiden, dinsdag tot en met zaterdag. Verse vis en visschalen bezorgen we in Leiden, Leiderdorp, Voorschoten, Wassenaar en Leidschendam.",
+    "slotTekst": "Wij bezorgen één dag per week: iedere donderdag. Alleen verse vis, salades en visschalen komen voor bezorging in aanmerking.",
     "labelGeneraties": "Generaties",
     "labelWinkel": "Winkel",
     "labelEigenaar": "Eigenaar",
@@ -359,8 +359,8 @@
     "checkTekst": "Vul uw postcode in, dan ziet u het meteen.",
     "checkLabel": "Postcode",
     "checkKnop": "Controleren",
-    "checkBinnen": "Ja, we bezorgen in {plaats}. De bezorgkosten zijn {bedrag}.",
-    "checkBuiten": "Dat adres ligt buiten onze route. Bel ons gerust op {nummer} — soms kan er meer dan de kaart zegt.",
+    "checkBinnen": "Deze postcode valt binnen de regio {plaats}. Controleer uw volledige adres en de beschikbare donderdag bij het bestellen.",
+    "checkBuiten": "Deze postcode valt buiten de genoemde regio. Bel ons om te overleggen over afhalen.",
     "checkOngeldig": "Vul vier cijfers in, bijvoorbeeld 2313.",
     "betalenKop": "Betalen",
     "betalenTekst": "Op dit moment rekent u af bij de bezorger: pinnen of contant. We zijn bezig met SumUp, zodat u straks ook vooraf met iDEAL, creditcard of Apple Pay kunt betalen. Zodra dat werkt staat het hier.",
@@ -412,11 +412,11 @@
     "gratisGehaald": "Gratis bezorgd."
   },
   "gemeenten": {
-    "leidenIntro": "Onze eigen stad. De winkel staat op de Herenstraat, dus in Leiden is de vis vaak binnen een half uur na het inpakken bij u aan de deur.",
-    "leiderdorpIntro": "Over de Zijl en u bent er. Veel Leiderdorpers staan al jaren op zaterdag bij onze kraam op de Nieuwe Rijn — nu hoeft dat niet meer.",
-    "voorschotenIntro": "In Voorschoten staan we elke vrijdag bij Hoogvliet. Wie er dan niet uitkomt, laat de vis voortaan gewoon thuisbezorgen.",
-    "wassenaarIntro": "Wassenaar is onze verste bestemming en de rit gaat door de duinen. We rijden hier met een vaste route, tegen hetzelfde tarief als de rest.",
-    "leidschendamIntro": "Langs de Vliet naar Leidschendam. We bezorgen in heel Leidschendam, van het Damcentrum tot Essesteijn."
+    "leidenIntro": "Van onze winkel aan de Herenstraat naar uw adres in Leiden: donderdag is onze vaste bezorgdag. U kunt ook naar de winkel komen.",
+    "leiderdorpIntro": "Voor Leiderdorp bezorgen we op donderdag vanuit Leiden. Controleer uw adres bij het bestellen; afhalen bespreekt u met de winkel.",
+    "voorschotenIntro": "Bezorging in Voorschoten is op donderdag. Op vrijdag vindt u onze kraam bij Hoogvliet: een aparte mogelijkheid om langs te komen.",
+    "wassenaarIntro": "Ook voor Wassenaar is donderdag onze bezorgdag. Controleer of uw adres op de beschikbare route ligt. U kunt daarnaast onze winkel in Leiden bezoeken.",
+    "leidschendamIntro": "Voor Leidschendam plannen we de levering op donderdag. De winkel en het afhaaladres van Schaap’s liggen in Leiden, aan de Herenstraat 48."
   },
   "visschaal": {
     "eyebrow": "Borrel · verjaardag · kerst",
@@ -588,8 +588,8 @@
     "zaterdagAdres": "Aalmarkt, bij de Waag, Leiden",
     "zaterdagToelichting": "De kraam staat bij de Waag, midden in de stad.",
     "woensdagNaam": "Woensdagmarkt",
-    "woensdagAdres": "Bij Dille & Camille, Leiden",
-    "woensdagToelichting": "Op de Haarlemmerstraat, aan de kant van Dille & Camille.",
+    "woensdagAdres": "Woensdagmarkt, Leiden — bel voor de exacte standplaats",
+    "woensdagToelichting": "Woensdagmarkt, Leiden — bel voor de exacte standplaats",
     "voorschotenNaam": "Voorschoten, bij Hoogvliet",
     "voorschotenAdres": "Parkeerplaats Hoogvliet, Voorschoten",
     "voorschotenToelichting": "Elke vrijdag op de parkeerplaats. Komt het niet uit? In Voorschoten bezorgen we ook.",
@@ -637,5 +637,672 @@
     "naarAssortiment": "Naar het assortiment",
     "terugNaarSite": "Terug naar de winkelsite",
     "gratisWeegvis": "Verse vis rekenen we op gewicht af. Komt uw bestelling boven {bedrag} uit, dan vervalt de bezorging — dat zeggen we erbij als we u met de dagprijs bellen."
+  },
+  "site": {
+    "brand": "Leiden · sinds 1938",
+    "call": "Bellen",
+    "skip": "Naar de inhoud",
+    "today": "Vandaag",
+    "delivery": "Iedere donderdag",
+    "deliveryLine": "Verse vis, salades en visschalen · bezorging iedere donderdag",
+    "deliveryDetail": "Wij bezorgen één dag per week: iedere donderdag. Alleen verse vis, salades en visschalen komen voor bezorging in aanmerking.",
+    "terms": "Beschikbare producten, prijzen, bezorgkosten, besteltermijn en afhaalmogelijkheden staan in de bestelomgeving. Controleer daar uw adres en de beschikbare donderdag vóór u afrekent.",
+    "pending": "Online bestellen is binnenkort beschikbaar. Bel ons voor het actuele aanbod en om de mogelijkheden te bespreken.",
+    "shop": "Naar de SumUp-webwinkel",
+    "shopExplain": "U gaat naar onze SumUp-webwinkel. Daar kiest u uw producten en rondt u de bestelling en betaling af.",
+    "orderTitle": "Vis bestellen bij Schaap’s",
+    "orderIntro": "Kies verse vis voor thuis, een salade voor erbij of een visschaal voor uw gezelschap.",
+    "fresh": "Verse vis",
+    "salads": "Salades",
+    "platters": "Visschalen",
+    "pickup": "In de winkel en op de markt",
+    "freshText": "Heel, gefileerd of in porties. Vraag ons welke vis past bij uw gerecht.",
+    "saladsText": "Voor op brood, bij de borrel of als bijgerecht. Bekijk het beschikbare aanbod.",
+    "plattersText": "Voor een borrel, verjaardag of etentje. Bekijk de samenstelling en porties bij het actuele aanbod.",
+    "storeOnly": "Verkrijgbaar in de winkel en op de markt; dit product bezorgen we niet.",
+    "onlineEligible": "Bezorging op donderdag; beschikbaarheid in de webwinkel.",
+    "deliveryTitle": "Vis bezorgen in Leiden en omgeving",
+    "deliveryIntro": "Iedere donderdag bezorgen we verse vis, salades en visschalen in Leiden en omgeving. Vanuit onze viswinkel aan de Herenstraat 48.",
+    "areaTitle": "Leiden en de regio",
+    "areaIntro": "Onze donderdagroute richt zich op Leiden, Leiderdorp, Voorschoten, Wassenaar en Leidschendam. Controleer bij het bestellen of uw adres op de beschikbare route ligt.",
+    "areaCheck": "Deze postcode valt binnen de regio {plaats}. Controleer uw volledige adres en de beschikbare donderdag bij het bestellen.",
+    "areaOutside": "Deze postcode valt buiten de genoemde regio. Bel ons om te overleggen over afhalen.",
+    "deliveryPlace": "Vis bezorgen in {plaats}",
+    "placeIntro": "Verse vis, salades en visschalen van Schaap’s Vishandel uit Leiden, op donderdag bij u thuis in {plaats}.",
+    "nearby": "Ook in de regio",
+    "stepsTitle": "Zo bestelt u",
+    "step1": "Bekijk het aanbod",
+    "step1Text": "Kies uw producten in de SumUp-webwinkel. Het aanbod kan per week verschillen.",
+    "step2": "Controleer uw levering",
+    "step2Text": "Controleer uw adres, de beschikbare donderdag en de kosten. Wilt u afhalen, bekijk dan de beschikbare opties.",
+    "step3": "Rond uw bestelling af",
+    "step3Text": "U ontvangt de bevestiging via de bestelomgeving. Bewaar die voor uw bestelling.",
+    "faqTitle": "Veelgestelde vragen",
+    "faqDay": "Op welke dagen bezorgen jullie?",
+    "faqDayText": "Uitsluitend iedere donderdag. De beschikbare datum en besteltermijn controleert u bij het bestellen.",
+    "faqProducts": "Welke producten bezorgen jullie?",
+    "faqProductsText": "Alleen verse vis, salades en visschalen. Kibbeling, lekkerbek, haring voor directe consumptie en bereide gerechten koopt u in de winkel of op de markt.",
+    "faqCost": "Wat kost bezorgen?",
+    "faqCostText": "De actuele bezorgkosten en eventuele minimumwaarde staan vóór het afrekenen in de bestelomgeving. Bel ons als online bestellen nog niet beschikbaar is.",
+    "faqPickup": "Kan ik ook afhalen?",
+    "faqPickupText": "Bekijk de afhaalmogelijkheden bij het bestellen of bel de winkel. Openingstijden en marktdagen vindt u op Locaties.",
+    "recommendLabel": "Uit onze toonbank",
+    "recommendTitle": "Aanraders van Schaap’s",
+    "recommendIntro": "Iets voor vanavond of voor een gezellige borrel. Vraag naar het aanbod van vandaag.",
+    "vispotje": "Vispotje",
+    "vispotjeText": "Een visgerecht voor thuis. Vraag naar de samenstelling, portiegrootte en het bereidingsadvies van vandaag.",
+    "details": "Bekijk het product",
+    "visit": "Openingstijden en route",
+    "photo": "Foto volgt",
+    "platterTitle": "Visschalen voor uw gezelschap",
+    "platterIntro": "Voor een borrel, verjaardag of etentje. Kies een schaal die past bij de gelegenheid. De actuele schalen, samenstelling en prijzen vindt u in onze webwinkel.",
+    "platter1": "Voor de borrel",
+    "platter1Text": "Bespreek het aantal gasten en wat u erbij serveert.",
+    "platter2": "Voor familie en vrienden",
+    "platter2Text": "Voor een etentje of verjaardag. Kies het formaat bij het aantal personen.",
+    "platter3": "Voor een feest",
+    "platter3Text": "Voor een groter gezelschap. Overleg ruim vooraf over samenstelling en beschikbaarheid.",
+    "allergyTitle": "Allergenen en dieetwensen",
+    "allergyText": "Bespreek een allergie altijd vóór u bestelt. Ingrediënten en mogelijke kruisbesmetting verschillen per product en bereiding. We bespreken wat mogelijk is; een aangepaste schaal is niet automatisch allergeenvrij.",
+    "bioTitle": "Biologische vis en herkomst",
+    "bioIntro": "Wilt u weten waar uw vis vandaan komt of welke biologische opties er zijn? We helpen u kiezen met de productinformatie van de actuele aanvoer.",
+    "bio1": "Biologisch",
+    "bio1Text": "Biologische kweekvis valt onder regels voor biologische aquacultuur. Vraag naar het bijbehorende keurmerk en de documentatie van het specifieke product.",
+    "bio2": "MSC en ASC",
+    "bio2Text": "MSC heeft betrekking op wilde visserij; ASC op aquacultuur. Een vissoort is niet automatisch gecertificeerd: kijk naar het specifieke product en het keurmerk.",
+    "bio3": "Herkomst van uw vis",
+    "bio3Text": "Vangstgebied, kweekland en productinformatie helpen u vergelijken. Vraag ons naar de informatie bij de vis die vandaag beschikbaar is.",
+    "sources": "Meer over de keurmerken",
+    "varlaksTitle": "Varlaks zalm bij Schaap’s",
+    "varlaksIntro": "Op zoek naar Varlaks zalm in Leiden? Vraag ons naar de huidige aanvoer, de productinformatie en de beschikbare biologische opties.",
+    "varlaksText": "Kies een portie die bij uw gerecht past. Aan de toonbank helpen we met hoeveelheid en bereiding. De herkomst en eventuele certificering moeten aansluiten op de geleverde partij; vraag gerust naar het etiket.",
+    "storyTitle": "Schaap’s Vishandel, sinds 1938",
+    "storyIntro": "Een Leidse vishandel met een lange geschiedenis. U vindt ons aan de Herenstraat 48, in de winkel en op de markt.",
+    "story1938": "In 1938 begon meneer Schaap zijn vishandel in Leiden. Zijn naam is verbonden gebleven aan de zaak.",
+    "storyNow": "Vandaag draait het bij Schaap’s om vis en persoonlijk contact: advies over uw keuze, de hoeveelheid en de bereiding. Kom langs aan de Herenstraat of bij een van onze marktkramen.",
+    "homeIntro": "Sinds 1938 hoort Schaap’s bij Leiden. Kom naar de Herenstraat voor verse vis, haring, kibbeling, salades en visschalen. We helpen u kiezen voor de maaltijd of de borrel.",
+    "homeStory": "Van de oprichting in 1938 tot de winkel van vandaag: Schaap’s hoort bij Leiden. Het persoonlijke contact aan de toonbank blijft centraal staan.",
+    "friedTitle": "Kibbeling, lekkerbek en haring",
+    "friedText": "Een portie kibbeling, een lekkerbek of haring voor onderweg. Kom langs in de winkel of op de markt voor het aanbod van vandaag.",
+    "reviewTitle": "Ervaringen van onze klanten",
+    "reviewText": "Lees de actuele beoordelingen van bezoekers op Google.",
+    "reviews": "Bekijk de beoordelingen",
+    "catalogTitle": "Ons assortiment",
+    "catalogIntro": "Van verse vis tot salades en bereide gerechten. Het aanbod kan per dag en seizoen verschillen. Bekijk de producten of vraag ons wat er vandaag is.",
+    "all": "Alles",
+    "search": "Zoek een product",
+    "searchPlaceholder": "Bijvoorbeeld zalm, kabeljauw of salade",
+    "noResults": "Geen producten gevonden. Probeer een andere zoekterm.",
+    "resultCount": "{count} producten",
+    "productTitle": "{name} in Leiden | Schaap’s Vishandel",
+    "productDesc": "{name} bij Schaap’s Vishandel, Herenstraat 48 in Leiden. Bekijk het product en vraag naar het actuele aanbod.",
+    "productAvailability": "Het aanbod wisselt. Bekijk de actuele beschikbaarheid in de webwinkel of bel de winkel.",
+    "ingredients": "Productinformatie",
+    "ingredientsText": "Vraag naar de ingrediënten, allergenen, herkomst en bewaar- of bereidingsinstructies van het actuele product. Die kunnen per partij of receptuur verschillen.",
+    "inspiration": "Aan tafel",
+    "inspirationText": "Zoekt u een bereidingsidee? Bekijk onze recepten of vraag advies aan de toonbank.",
+    "recipesNl": "Visrecepten",
+    "backCatalog": "Terug naar het assortiment",
+    "thankTitle": "Uw bestelling controleren",
+    "thankText": "Uw bestel- en betaalstatus vindt u in de bevestiging van de SumUp-webwinkel. Deze pagina bevestigt geen bestelling of betaling. Neem bij vragen contact op met de winkel.",
+    "contactFallback": "Bel ons voor uw vraag. Het online contactformulier is momenteel niet beschikbaar.",
+    "locations": "Winkel en marktkramen",
+    "locationsIntro": "Herenstraat 48 in Leiden, de Leidse markt en onze vrijdagkraam in Voorschoten. Bekijk waar en wanneer u ons vindt.",
+    "pickupText": "Wilt u iets laten klaarleggen? Bel de winkel om het afhaalpunt en de tijd af te spreken.",
+    "localLeidenTitle": "Viswinkel in Leiden: Herenstraat 48",
+    "localLeidenIntro": "Verse vis, haring, kibbeling, salades en visschalen bij Schaap’s Vishandel. Sinds 1938 verbonden met Leiden.",
+    "localMarketTitle": "Schaap’s op de markt in Leiden",
+    "localMarketIntro": "U vindt onze viskraam op woensdag en zaterdag in Leiden. Bekijk de marktdagen en route, of bel ons als u iets wilt laten klaarleggen.",
+    "localVoorschotenTitle": "Schaap’s viskraam in Voorschoten",
+    "localVoorschotenIntro": "Op vrijdag staat onze kraam bij Hoogvliet in Voorschoten. Voor vis en persoonlijk advies. Bezorging is uitsluitend op donderdag.",
+    "privacy": "Privacy",
+    "footerNote": "Leiden sinds 1938 · iedere donderdag verse vis, salades en visschalen bezorgen",
+    "categories": {
+      "verse-vis": "Verse vis",
+      "gerookte-vis": "Gerookte vis",
+      "schaal-schelp": "Schaal- en schelpdieren",
+      "vissalades": "Salades",
+      "bereid": "Bereide gerechten en hapjes"
+    },
+    "images": {
+      "logoBadge": "Schaap’s Vishandel",
+      "logoLiggend": "Schaap’s Vishandel",
+      "winkelGevel": "Herenstraat 48, Leiden",
+      "toonbank": "Onze toonbank",
+      "achterDeToonbank": "Achter de toonbank",
+      "gebakkenVis": "Kibbeling en lekkerbek",
+      "marktZaterdag": "Zaterdagmarkt Leiden",
+      "marktWoensdag": "Woensdagmarkt Leiden",
+      "marktVoorschoten": "Marktkraam Voorschoten",
+      "historie1938": "Sinds 1938",
+      "historie1960": "Uit het familiearchief",
+      "historie1980": "Uit het familiearchief",
+      "historie2000": "Uit het familiearchief",
+      "historieNu": "Schaap’s vandaag",
+      "schaalBorrel": "Voor de borrel",
+      "schaalFamilie": "Voor familie en vrienden",
+      "schaalFeest": "Voor een feest",
+      "varlaksFilet": "Varlaks zalmfilet",
+      "aanraderVispotje": "Vispotje",
+      "aanraderSalade": "Salades"
+    }
+  },
+  "producten": {
+    "kabeljauw": {
+      "naam": "Kabeljauw",
+      "desc": "Kabeljauw met stevig wit vlees en een milde smaak. Geschikt voor de oven, pan of een stoofgerecht."
+    },
+    "kabeljauwfilet": {
+      "naam": "Kabeljauwfilet",
+      "desc": "Verse kabeljauwfilet, zorgvuldig gefileerd en gefileerd. Ideaal om te bakken, stomen of pocheren."
+    },
+    "schol": {
+      "naam": "Schol",
+      "desc": "Hollandse schol (Pleuronectes platessa), een platvis die bij uitstek thuishoort in onze Noordzee."
+    },
+    "scholfilet": {
+      "naam": "Scholfilet",
+      "desc": "Verse scholfilet, gefileerd en schoongemaakt. Licht van smaak, perfect om snel te bakken in boter."
+    },
+    "zeetong": {
+      "naam": "Zeetong",
+      "desc": "De koningin van de Noordzee. Fijnmazig vlees met een delicate, licht zoete smaak. Beschikbaar heel of als filet."
+    },
+    "zeebaars": {
+      "naam": "Zeebaars",
+      "desc": "Europese zeebaars (Dicentrarchus labrax), heel of als filet. Stevig wit vlees met een rijke, volle smaak — uitstekend op de grill."
+    },
+    "zeebaarsfilet": {
+      "naam": "Zeebaarsfilet",
+      "desc": "Verse zeebaarsfilet, perfect gefileerd. Lekker op de huid gebakken met een scheutje olijfolie en citroen."
+    },
+    "dorade": {
+      "naam": "Dorade",
+      "desc": "Dorade (Sparus aurata), ook wel goudbrasem. Sappig, smaakvol vlees — ideaal om heel te grillen of in de oven te bereiden."
+    },
+    "dorade-filet": {
+      "naam": "Dorade Filet",
+      "desc": "Verse dorade filet, soepel van structuur met een licht zoete smaak. Snel klaar in de pan."
+    },
+    "griet": {
+      "naam": "Griet",
+      "desc": "Griet (Scophthalmus rhombus) is een platvis vergelijkbaar met tarbot — iets vettiger van smaak en daardoor zeer geschikt om te stoven."
+    },
+    "grietfilet": {
+      "naam": "Grietfilet",
+      "desc": "Gefileerde griet met boterachtiger vlees dan kabeljauw. Uitstekend gepocheerd of met een romige saus."
+    },
+    "tarbot": {
+      "naam": "Tarbot",
+      "desc": "De tarbot (Psetta maxima) geldt als de meest prestigieuze platvis van de Noordzee. Vast, smaakvol vlees — een echte delicatesse voor feestelijke gelegenheden."
+    },
+    "tarbotfilet": {
+      "naam": "Tarbotfilet",
+      "desc": "Vers gefileerde tarbot. Stevig van structuur met een rijke, boterachtiger smaak — weinig bereiding nodig."
+    },
+    "heek": {
+      "naam": "Heek",
+      "desc": "Heek (Merluccius merluccius), een slanke zeevis met wit, zacht vlees. Vergelijkbaar met kabeljauw maar fijner van smaak."
+    },
+    "heekfilet": {
+      "naam": "Heekfilet",
+      "desc": "Verse heekfilet: mals, mager en licht van smaak. Uitstekend te bakken, stomen of pocheren."
+    },
+    "schelvis": {
+      "naam": "Schelvis",
+      "desc": "Schelvis (Melanogrammus aeglefinus), naaste familie van de kabeljauw. Licht zoete smaak, wit en mager vlees. Klassiek in Britse fish & chips."
+    },
+    "schelvisfilet": {
+      "naam": "Schelvisfilet",
+      "desc": "Verse schelvisfilet, dunner en malser dan kabeljauw. Perfect voor een snel, diner."
+    },
+    "wijting": {
+      "naam": "Wijting",
+      "desc": "Wijting (Merlangius merlangus) is een fijne witte vis met een delicaat, mals vlees. Snel klaar, makkelijk te bereiden — ideaal voor de lekkerbek."
+    },
+    "wijtingfilet": {
+      "naam": "Wijtingfilet",
+      "desc": "Gefileerde wijting — dun, mals en snel klaar. De basis van onze lekkerbek."
+    },
+    "rode-poon": {
+      "naam": "Rode Poon",
+      "desc": "Rode poon (Trigla lucerna) met zijn opvallende rode vinnen. Vast, zacht wit vlees dat uitstekend gebakken of gegrild kan worden."
+    },
+    "schar": {
+      "naam": "Schar",
+      "desc": "Schar (Limanda limanda), een kleinere platvis uit de Noordzee. Mager, licht van smaak en betaalbaar — een onderschatte klassieke Hollandse vis."
+    },
+    "roodbaars": {
+      "naam": "Roodbaars",
+      "desc": "Roodbaars met stevig wit vlees, geschikt voor de oven of grill."
+    },
+    "haring": {
+      "naam": "Haring",
+      "desc": "Haring voor in de winkel of op de markt. Vraag naar de aanvoer van vandaag."
+    },
+    "varlaks-zalm": {
+      "naam": "Varlaks zalm",
+      "desc": "Vraag naar de actuele Varlaks zalm, de productinformatie en de beschikbare biologische opties."
+    },
+    "zalmfilet": {
+      "naam": "Zalmfilet",
+      "desc": "Zalmfilet voor de oven, pan of een pastagerecht."
+    },
+    "zalmforel": {
+      "naam": "Zalmforel",
+      "desc": "Zalmforel (Oncorhynchus mykiss) heeft het roze vlees en de rijke smaak van zalm, maar iets milder. Een veelzijdige vis voor grillen of bakken."
+    },
+    "tonijnfilet": {
+      "naam": "Tonijnfilet",
+      "desc": "Stevige tonijnfilet voor de grill of pan. Vraag naar het bereidingsadvies."
+    },
+    "zeeduivelfilet": {
+      "naam": "Zeeduivelfilet",
+      "desc": "Zeeduivel (Lophius piscatorius) — stevig, lobstervlees-achtig wit vlees gefileerd. Perfect voor stoofpotjes, grillen of in een risotto."
+    },
+    "gerookte-zalm-high-seas": {
+      "naam": "Gerookte Zalm — High Seas",
+      "desc": "Gerookte zalm voor toast, een salade of een visschaal."
+    },
+    "gerookte-wilde-zalm": {
+      "naam": "Gerookte Wilde Zalm",
+      "desc": "Koud gerookte wilde zalm (Oncorhynchus spp.) uit Alaska — dieper van smaak dan kweekzalm. Een echte delicatesse voor bijzondere gelegenheden."
+    },
+    "gravad-lax": {
+      "naam": "Gravad Lax",
+      "desc": "Klassiek Scandinavisch gezouten en met dille gekruide zalm. Niet gerookt maar gedroogd met zout, suiker en dille — zijdezacht van textuur."
+    },
+    "gerookte-bokking": {
+      "naam": "Gerookte Bokking",
+      "desc": "Warm gerookte haring (Clupea harengus) — een eeuwenoud Hollands product. Volle, rokerige smaak. Zowel heel als als bosje bokking verkrijgbaar."
+    },
+    "gerookte-forelfilet": {
+      "naam": "Gerookte Forelfilet",
+      "desc": "Warm gerookte forelfilet (Oncorhynchus mykiss) — delicaat, mild rokerig en rijk van smaak. Heerlijk op een broodje of in een salade."
+    },
+    "gerookte-heilbot": {
+      "naam": "Gerookte Heilbotfilet",
+      "desc": "Fijnmazig, vet gerookt heilbotvlees (Hippoglossus hippoglossus) — bijna boterachtig van textuur. Een echte delicatesse op een borrelplank."
+    },
+    "gerookte-kipper": {
+      "naam": "Gerookte Kipper",
+      "desc": "Traditioneel gerookte haring, gespleten en koud gerookt. De kipper is een van de oudste conserveringsmethoden voor vis."
+    },
+    "bosje-sprot": {
+      "naam": "Bosje Sprot",
+      "desc": "Gerookte sprot (Sprattus sprattus) — kleine vette visjes met een intense, rokerige smaak. Uitstekend als borrelhapje of op donker brood."
+    },
+    "hollandse-garnalen": {
+      "naam": "Hollandse Garnalen",
+      "desc": "Kleine Noordzeegarnalen voor een salade, toast of een visschaal."
+    },
+    "noorse-garnalen": {
+      "naam": "Noorse Garnalen",
+      "desc": "Noorse garnalen (Pandalus borealis) uit de koude Noord-Atlantische Oceaan — gepeld en direct klaar voor gebruik. Klein, zoet en mals van smaak."
+    },
+    "franse-gambas": {
+      "naam": "Franse Gamba's",
+      "desc": "Grote, verse gamba's (Penaeus vannamei) — stevig van textuur en vol van smaak. Perfect om te grillen of te bakken in knoflookolie."
+    },
+    "gekookte-gambas": {
+      "naam": "Gekookte Gamba's (Crevettes)",
+      "desc": "Voorgekookte en gekoelde gamba's — direct klaar om te eten. Heerlijk bij een borrel met dipsaus of in een salade."
+    },
+    "zeeuwse-mosselen": {
+      "naam": "Zeeuwse Mosselen",
+      "desc": "Verse Zeeuwse mosselen (Mytilus edulis) — gekweekt in de schone Zeeuwse wateren. Van nature met de seizoenen, het lekkerst van augustus tot april."
+    },
+    "creuse-oesters": {
+      "naam": "Creuse Oesters",
+      "desc": "Franse creuse oesters (Crassostrea gigas) — zout, fris en romig van smaak. Wij leveren per dozijn. Vraag naar de maat van de dag."
+    },
+    "kokkels": {
+      "naam": "Kokkels",
+      "desc": "Verse Zeeuwse kokkels (Cerastoderma edule) — een Hollands borrelhapje bij uitstek. Zout, zilt en vol van smaak."
+    },
+    "coquilles": {
+      "naam": "Coquilles",
+      "desc": "Verse coquilles (Pecten maximus) — mals en licht zoet van smaak. Binnen 2 minuten klaar in de pan. Ideaal als voorgerecht of borrelschotel."
+    },
+    "krabklauwen": {
+      "naam": "Krabklauwen",
+      "desc": "Voorgekookte krabklauwen — vol smaak en direct klaar. Heerlijk met een citroenbotersausje of als onderdeel van een visplankje."
+    },
+    "inktvis": {
+      "naam": "Inktvis",
+      "desc": "Verse inktvis (Loligo vulgaris) — schoongemaakt en klaar voor de bereiding. Lekker op de grill, als fritto misto of in een stoofpot."
+    },
+    "scheermessen": {
+      "naam": "Scheermessen",
+      "desc": "Verse scheermessen (Ensis directus) — een bijzondere Noordzee-delicatesse. Snel te bereiden en heerlijk met look en peterselie."
+    },
+    "zalmsalade": {
+      "naam": "Zalmsalade",
+      "desc": "Zalmsalade voor op brood of bij de borrel. Vraag naar de actuele samenstelling."
+    },
+    "krabsalade": {
+      "naam": "Krabsalade",
+      "desc": "Verse krabsalade met surimi of echte krab, romige mayonaise en lenteui. Fris en smaakvol."
+    },
+    "tonijnsalade": {
+      "naam": "Tonijnsalade",
+      "desc": "Klassieke tonijnsalade van tonijn uit blik, verse mayonaise, ui en augurk. Veelzijdig op brood of als snack."
+    },
+    "garnalensalade": {
+      "naam": "Garnalensalade",
+      "desc": "Garnalensalade voor toast of als voorgerecht. Vraag naar de samenstelling."
+    },
+    "zeewiersalade": {
+      "naam": "Zeewiersalade (Wakame)",
+      "desc": "Frisse wakame zeewiersalade met sesamolie en sojasaus — een Japanse klassieker die uitstekend past bij gerookte vis."
+    },
+    "visschaal": {
+      "naam": "Visschaal / Vistrio op Bestelling",
+      "desc": "Een samengestelde visschotel naar wens — gerookte vis, salades, schaal- en schelpdieren. Ideaal voor feestjes en borrels. Inhoud in overleg."
+    },
+    "kibbeling": {
+      "naam": "Kibbeling",
+      "desc": "Gebakken stukjes witvis in beslag. Vraag naar de gebruikte vis van vandaag."
+    },
+    "lekkerbek": {
+      "naam": "Lekkerbek",
+      "desc": "Een visfilet in beslag, verkrijgbaar in de winkel of op de markt."
+    },
+    "broodje-haring": {
+      "naam": "Broodje Haring",
+      "desc": "Haring op een broodje. Vraag naar de beschikbare garnering."
+    },
+    "vissoep": {
+      "naam": "Vissoep",
+      "desc": "Vissoep voor de lunch of avondmaaltijd. Vraag naar de samenstelling van vandaag."
+    },
+    "vispotje": {
+      "naam": "Vispotje",
+      "desc": "Een visgerecht voor thuis. Vraag naar de samenstelling, portiegrootte en het bereidingsadvies."
+    },
+    "feestschotel": {
+      "naam": "Feestelijke Visschotel",
+      "desc": "Een indrukwekkende schaal met een selectie van onze beste producten — perfect voor bijzondere gelegenheden, borrels of een feestelijk diner. Inhoud en grootte in overleg."
+    },
+    "koolvis": {
+      "naam": "Koolvis (Pollak)",
+      "desc": "Koolvis (Pollachius virens), familie van de kabeljauw, met steviger en iets grijzer vlees dat wit opkookt."
+    },
+    "leng": {
+      "naam": "Leng",
+      "desc": "Leng (Molva molva), een langgerekte zeevis met stevig, mild wit vlees. Uitstekend om te bakken of te stoven en een mooi alternatief voor kabeljauw."
+    },
+    "vleugelrog": {
+      "naam": "Vleugelrog",
+      "desc": "Roggevleugel (Leucoraja naevus) — bijzonder mals vlees met kraakbeen in plaats van graten. Klassiek bereid met bruine boter en kappertjes."
+    },
+    "kabeljauwhaas": {
+      "naam": "Kabeljauwhaas",
+      "desc": "Het dikke ruggenstuk (de 'haas') van de kabeljauw (Gadus morhua) — het mooiste, gelijkmatigste deel met sneeuwwitte vlokken. Premium stuk voor de oven of pan."
+    },
+    "zalmmoot": {
+      "naam": "Zalmmoot",
+      "desc": "Een dwars gesneden zalmmoot voor oven of grill. Vraag naar het aanbod."
+    },
+    "gerookte-zalm-snippers": {
+      "naam": "Gerookte Zalm Snippers",
+      "desc": "Kleine stukken gerookte zalm voor pasta, toast of roerei."
+    },
+    "langoustines": {
+      "naam": "Langoustines",
+      "desc": "Noorse kreeftjes (Nephrops norvegicus) — fijn, zoet schaaldiervlees. Heerlijk kort gegrild of gebakken met knoflook en peterselie."
+    },
+    "hele-krab": {
+      "naam": "Hele Noordzeekrab",
+      "desc": "Gekookte hele Noordzeekrab (Cancer pagurus) — vol bruin en wit krabvlees. Een echte delicatesse om zelf uit te peuteren bij een glas witte wijn."
+    },
+    "vongole": {
+      "naam": "Vongole",
+      "desc": "Verse venusschelpen (Ruditapes decussatus) — klein, zout en vol van smaak. Onmisbaar in een echte spaghetti alle vongole."
+    },
+    "fine-de-claire-oesters": {
+      "naam": "Fine de Claire Oesters",
+      "desc": "Franse Fine de Claire oesters (Crassostrea gigas) uit Marennes-Oléron, IGP-beschermd. Mild en licht nootachtig — rijpen na in de kleirijke claires. Per dozijn."
+    },
+    "surimisalade": {
+      "naam": "Surimisalade",
+      "desc": "Frisse, romige salade van surimi met dressing. Lekker op brood of als borrelhapje."
+    },
+    "garnalenkroketten": {
+      "naam": "Garnalenkroketten",
+      "desc": "kroketten met een romige vulling van Hollandse garnalen. Knapperig gefrituurd — een klassieke borrel- of lunchsnack."
+    },
+    "calamares": {
+      "naam": "Calamares (Inktvisringen)",
+      "desc": "Knapperig gefrituurde inktvisringen in een luchtig beslag. Heerlijk met een knoflook- of aioli-dip — zo van de borrelplank."
+    },
+    "visburger": {
+      "naam": "Visburger",
+      "desc": "visburger van verse witvis met kruiden — sappig van binnen, krokant van buiten. Lekker op een broodje met sla en remouladesaus."
+    },
+    "zeewolf": {
+      "naam": "Zeewolf",
+      "desc": "Zeewolf (Anarhichas lupus) uit de koude noordelijke wateren. Stevig, wit vlees met een volle, licht zoete smaak — houdt goed zijn structuur bij bakken of grillen."
+    },
+    "zwaardvis": {
+      "naam": "Zwaardvismoot",
+      "desc": "Moot zwaardvis (Xiphias gladius) — stevig, mager vlees met een vleesachtig karakter. Kort en heet grillen; heerlijk met citroen en olijfolie."
+    },
+    "verse-heilbot": {
+      "naam": "Verse Heilbot",
+      "desc": "Heilbot (Hippoglossus hippoglossus), de grootste platvis van de noordelijke zeeën. Fijn, boterzacht wit vlees — een echte delicatesse, mals en mager."
+    },
+    "kabeljauwwangen": {
+      "naam": "Kabeljauwwangen",
+      "desc": "De wangen van de kabeljauw (Gadus morhua) — kleine, ronde stukjes met een fijne, bijna schaaldier-achtige structuur. Een geliefde delicatesse, snel gebakken in boter."
+    },
+    "grauwe-poon": {
+      "naam": "Grauwe Poon",
+      "desc": "Grauwe poon (Eutrigla gurnardus), een onderschatte Noordzeevis met stevig, smaakvol wit vlees. Uitstekend voor bouillabaisse of gewoon in de pan."
+    },
+    "hele-kreeft": {
+      "naam": "Hele Kreeft",
+      "desc": "Europese kreeft (Homarus gammarus) — het summum onder de schaaldieren. Zoet, stevig vlees. Gekookt verkrijgbaar; verse levering op bestelling."
+    },
+    "tijgergarnalen": {
+      "naam": "Tijgergarnalen",
+      "desc": "Grote tijgergarnalen (Penaeus monodon) met stevig, sappig vlees. Perfect voor de barbecue, in een curry of gebakken in knoflook en peterselie."
+    },
+    "wulken": {
+      "naam": "Wulken",
+      "desc": "Gekookte wulken (Buccinum undatum) — een traditioneel Hollands zeeslakje met een stevige beet en volle zeesmaak. Zo uit het vuistje of met een knoflookmayonaise."
+    },
+    "gerookte-forel-heel": {
+      "naam": "Gerookte Forel (heel)",
+      "desc": "Hele warm gerookte forel (Oncorhynchus mykiss) — mild rokerig, sappig en direct klaar om te eten. Heerlijk met een frisse mierikswortelsaus."
+    },
+    "warm-gerookte-zalm": {
+      "naam": "Warm Gerookte Zalm",
+      "desc": "Warm gerookte zalmfilet (Salmo salar) — steviger en voller van smaak dan de koud gerookte variant. Uit elkaar te plukken in salades of pasta."
+    },
+    "zeevruchtensalade": {
+      "naam": "Zeevruchtensalade",
+      "desc": "Frisse salade van gemengde zeevruchten met een lichte dressing. Mediterraan van smaak — heerlijk als voorgerecht of op een stukje stokbrood."
+    },
+    "garnalencocktail": {
+      "naam": "Garnalencocktail",
+      "desc": "Klassieke garnalencocktail van Hollandse Noordzeegarnalen op een bedje van sla met romige cocktailsaus. Een tijdloos voorgerecht."
+    },
+    "visspies": {
+      "naam": "Visspies",
+      "desc": "Spies van verse zalm, witvis en gamba — kant-en-klaar om te grillen of te bakken. Ideaal voor de barbecue of een snelle, feestelijke maaltijd."
+    },
+    "fish-and-chips": {
+      "naam": "Fish & Chips",
+      "desc": "Verse kabeljauw in een luchtig bierbeslag, knapperig gefrituurd — de Britse klassieker. Op bestelling met friet en remouladesaus."
+    },
+    "snoekbaars": {
+      "naam": "Snoekbaarsfilet",
+      "desc": "Snoekbaars (Sander lucioperca) — verfijnde zoetwatervis met stevig, wit en graatarm vlees. Een klassieker in de fijne keuken, mooi op de huid gebakken."
+    },
+    "tongschar": {
+      "naam": "Tongschar",
+      "desc": "Tongschar (Microstomus kitt) — een fijne platvis tussen tong en schar in. Delicaat, mals en licht zoet. Snel in de boter gebakken op zijn best."
+    },
+    "bot": {
+      "naam": "Bot",
+      "desc": "Bot (Platichthys flesus) — een Hollandse platvis uit de kust- en riviermondingen. Mager, betaalbaar en licht van smaak; heerlijk gebakken."
+    },
+    "sardines": {
+      "naam": "Verse Sardines",
+      "desc": "Verse sardines (Sardina pilchardus) — kleine, vette visjes boordevol omega-3. Op de grill met wat zeezout en citroen een mediterrane traktatie."
+    },
+    "ansjovis": {
+      "naam": "Verse Ansjovis",
+      "desc": "Verse ansjovis (Engraulis encrasicolus) — klein, vet en vol van smaak. Kort gebakken of gemarineerd (boquerones) een echte delicatesse."
+    },
+    "spiering": {
+      "naam": "Spiering",
+      "desc": "Spiering (Osmerus eperlanus) — een klein, traditioneel Hollands visje met een kenmerkende komkommergeur. Door de bloem en knapperig gebakken."
+    },
+    "skrei": {
+      "naam": "Skrei (winterkabeljauw)",
+      "desc": "Skrei — de premium winterkabeljauw (Gadus morhua) die vanuit de Barentszzee naar de Lofoten trekt om te paaien. Sneeuwwit, stevig en op zijn allerbest van januari tot april."
+    },
+    "zeeforel": {
+      "naam": "Zeeforel",
+      "desc": "Zeeforel (Salmo trutta) — familie van de zalm met roze, fijn vlees en een milde smaak. Veelzijdig: bakken, grillen of in de oven."
+    },
+    "tilapiafilet": {
+      "naam": "Tilapiafilet",
+      "desc": "Tilapiafilet (Oreochromis niloticus) — mild, mager en gefileerd wit visvlees. Neutraal van smaak en dankbaar in currygerechten of gepaneerd."
+    },
+    "victoriabaars": {
+      "naam": "Victoriabaarsfilet",
+      "desc": "Victoriabaars / nijlbaars (Lates niloticus) — een grote zoetwatervis met stevige, witte filets gefileerd. Houdt goed zijn vorm bij bakken of stoven."
+    },
+    "gerookte-zalmmoot": {
+      "naam": "Warm Gerookte Zalmmoot",
+      "desc": "Warm gerookte moot Atlantische zalm (Salmo salar) — stevig en vol van smaak, in dikke porties. Direct te eten of te verkruimelen door een salade."
+    },
+    "gerookte-sprotfilet": {
+      "naam": "Gerookte Sprotfilet",
+      "desc": "Fijne, ontgraten filetjes van gerookte sprot (Sprattus sprattus) — intens rokerig en zilt. Heerlijk op donker brood of door een aardappelsalade."
+    },
+    "rivierkreeftstaartjes": {
+      "naam": "Rivierkreeftstaartjes",
+      "desc": "Gepelde rivierkreeftstaartjes (Astacus spp.) in pekel — mals en zoet. Kant-en-klaar door een salade, pasta of cocktail."
+    },
+    "alikruiken": {
+      "naam": "Alikruiken",
+      "desc": "Gekookte alikruiken (Littorina littorea) — kleine zeeslakjes, een nostalgisch Hollands zeebanket. Met een speldje uit het huisje peuteren."
+    },
+    "gamba-spiesen": {
+      "naam": "Gambaspiesen",
+      "desc": "Spiesjes van grote gamba's (Penaeus vannamei), kant-en-klaar om te grillen of te bakken. Ideaal voor de barbecue of een borrelplank."
+    },
+    "krabpoten": {
+      "naam": "Krabpoten",
+      "desc": "Voorgekookte krabpoten — vol, zoet krabvlees dat u zelf uit de poot haalt. Feestelijk met een citroen-mayonaise."
+    },
+    "halve-kreeft": {
+      "naam": "Halve Kreeft",
+      "desc": "Gekookte halve kreeft (Homarus gammarus) — kant-en-klaar gehalveerd, ideaal om te gratineren of koud te serveren. Luxe zonder gedoe."
+    },
+    "zalm-dillesalade": {
+      "naam": "Zalm-dillesalade",
+      "desc": "Romige salade van gerookte zalm met verse dille en een vleugje citroen. Verfijnd op toast of bij de borrel."
+    },
+    "haringsalade": {
+      "naam": "Haringsalade",
+      "desc": "Traditionele haringsalade met stukjes haring, bietjes, appel en augurk in een romige dressing. Een Hollandse klassieker."
+    },
+    "mosselsalade": {
+      "naam": "Mosselsalade",
+      "desc": "Frisse salade van gekookte mosselen met een licht kruidige dressing. Lekker als voorgerecht of op brood."
+    },
+    "poke-bowl-zalm": {
+      "naam": "Poke Bowl Zalm",
+      "desc": "Verse poke bowl met rauwe zalm, sushirijst, edamame, avocado en sesam. Kant-en-klaar, fris en . Op bestelling."
+    },
+    "gamba-tempura": {
+      "naam": "Gamba Tempura",
+      "desc": "Gamba's in een luchtig tempurabeslag, knapperig gefrituurd. Direct van de frituur het lekkerst, met een zoetzure dip."
+    },
+    "visnuggets": {
+      "naam": "Visnuggets",
+      "desc": "Knapperige nuggets van witvis in een krokant jasje — een favoriet bij kinderen. Snel klaar in de oven of frituur."
+    },
+    "gebakken-mosselen": {
+      "naam": "Gebakken Mosselen",
+      "desc": "Gepaneerde en gebakken mosseltjes — knapperig van buiten, zacht van binnen. Een geliefde snack met knoflooksaus."
+    },
+    "tongfilet": {
+      "naam": "Tongfilet",
+      "desc": "Gefileerde zeetong (Solea solea) — de koningin van de Noordzee, nu gefileerd. Fijnmazig, licht zoet vlees; snel in roomboter gebakken een delicatesse."
+    },
+    "wilde-zalmfilet": {
+      "naam": "Wilde Zalmfilet",
+      "desc": "Wilde Pacifische zalm (Oncorhynchus spp.) — dieper van kleur en smaak dan kweekzalm, iets steviger van structuur. Een puur, natuurlijk product."
+    },
+    "heilbotfilet": {
+      "naam": "Heilbotfilet",
+      "desc": "Gefileerde heilbot (Hippoglossus hippoglossus) — boterzacht, mager wit vlees gefileerd. Een luxe platvis, mooi gepocheerd of uit de oven."
+    },
+    "zeebrasemfilet": {
+      "naam": "Zeebrasemfilet",
+      "desc": "Zeebrasem (Pagellus bogaraveo) — mediterrane witvis met sappig, fijn vlees en een milde smaak. Heerlijk op de huid gebakken of in de oven met kruiden."
+    },
+    "red-snapperfilet": {
+      "naam": "Red Snapper Filet",
+      "desc": "Red snapper (Lutjanus spp.) — kleurrijke tropische vis met stevig, licht zoet wit vlees. Uitstekend voor de grill of een pittige viscurry."
+    },
+    "gerookte-coquilles": {
+      "naam": "Gerookte Coquilles",
+      "desc": "Zachtgerookte coquilles (Pecten maximus) — subtiel rokerig en romig. Een verfijnd hapje bij de borrel of door een salade."
+    },
+    "gerookte-mosselen": {
+      "naam": "Gerookte Mosselen",
+      "desc": "Gerookte mosseltjes op olie — intens van smaak en direct te eten. Een klassiek borrelhapje op donker brood."
+    },
+    "krabvlees": {
+      "naam": "Krabvlees",
+      "desc": "Gepeld wit en bruin krabvlees (Cancer pagurus) — zoet en vol van smaak, kant-en-klaar. Voor een luxe salade, pasta of gevulde krab."
+    },
+    "gerookte-garnalen": {
+      "naam": "Gerookte Garnalen",
+      "desc": "Zachtgerookte garnalen — een bijzondere twist op de klassieker, met een subtiele rooksmaak. Heerlijk door een pasta of op toast."
+    },
+    "kokkelvlees": {
+      "naam": "Kokkelvlees",
+      "desc": "Gepeld kokkelvlees (Cerastoderma edule) — zilt en zoet, direct klaar voor gebruik. Perfect door een paella, pasta of vissoep."
+    },
+    "noorse-kreeftstaart": {
+      "naam": "Noorse Kreeftstaartjes",
+      "desc": "Gepelde staartjes van de langoustine (Nephrops norvegicus) — mals, zoet en direct klaar. Kort bakken in knoflookboter, meer heeft het niet nodig."
+    },
+    "kreeftensalade": {
+      "naam": "Kreeftensalade",
+      "desc": "Luxe salade van kreeft en garnalen in een romige, licht kruidige dressing. Een feestelijk hapje op toast of in een cocktailglas."
+    },
+    "zeekraalsalade": {
+      "naam": "Zeekraalsalade",
+      "desc": "Salade van zeekraal, een zeegroente. Lekker als bijgerecht bij vis."
+    },
+    "vissticks": {
+      "naam": "Vissticks",
+      "desc": "Krokant gepaneerde staafjes van witvis — snel klaar in de oven of pan. Een favoriet bij jong en oud."
+    },
+    "sushi-mix": {
+      "naam": "Sushi Mix",
+      "desc": "Wisselende selectie verse sushi (maki, nigiri) met zalm en tonijn — kant-en-klaar. Op bestelling, ideaal voor een borrel of lunch."
+    },
+    "kabeljauwtongen": {
+      "naam": "Kabeljauwtongen",
+      "desc": "Kabeljauwtongen (kaakspiertjes van de kabeljauw) — een Scandinavische delicatesse met een fijne, malse bite. Kort gebakken in boter."
+    },
+    "gamba-kroketten": {
+      "naam": "Gambakroketten",
+      "desc": "Romige kroketten gevuld met gamba's — knapperig gefrituurd. Een luxe variant op de klassieke garnalenkroket."
+    },
+    "visbitterballen": {
+      "naam": "Visbitterballen",
+      "desc": "Bitterballen met een romige visvulling — een borrelklassieker met een twist. Knapperig gefrituurd, met mosterd erbij."
+    }
   }
 }

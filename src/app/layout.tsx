@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Schaaps Vis Leiden — Vers vis, Leiden",
+  title: "Schaap’s Vishandel Leiden — sinds 1938",
   description:
-    "Schaaps Vis in Leiden verkoopt verse vis, kibbeling, haring en biologische Vårlaks zalm. Al 86 jaar op de Herenstraat.",
+    "Schaap’s Vishandel, Herenstraat 48 in Leiden. Sinds 1938. Verse vis, salades en visschalen bezorgen we iedere donderdag.",
 };
 
 export default function RootLayout({

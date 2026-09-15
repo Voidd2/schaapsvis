@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getTranslations, getMessages } from "next-intl/server";
 import { FONT_KLASSEN } from "@/lib/fonts";
 import { routing } from "@/i18n/routing";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Chrome } from "@/components/layout/Chrome";
-import { WinkelwagenProvider } from "@/components/winkel/Winkelwagen";
+import { JsonLd } from "@/components/JsonLd";
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
 import { cookies } from "next/headers";
 import { ACCESS_COOKIE, ACCESS_TOKEN, siteOpSlot } from "@/lib/siteAccess";
@@ -71,6 +71,7 @@ export default async function LocaleLayout({
   }
 
   const messages = await getMessages();
+  const t = await getTranslations({locale, namespace:"site"});
 
   // Besloten preview: alleen zichtbaar voor wie is ingelogd terwijl de
   // onderhoudsmodus (wachtwoordslot) nog aanstaat. Zo verwar je je eigen
@@ -101,11 +102,12 @@ export default async function LocaleLayout({
             </div>
           )}
           <a href="#inhoud" className="sv-skip">
-            Naar de inhoud
+            {t("skip")}
           </a>
           {/* De winkelwagen leeft boven de kop en de voet: hij moet dezelfde
               inhoud kennen op de winkelsite én in de webshop. */}
-          <WinkelwagenProvider>
+          <>
+            <JsonLd locale={locale} />
             <Chrome
               header={<Header />}
               footer={<Footer />}
@@ -113,7 +115,7 @@ export default async function LocaleLayout({
             >
               {children}
             </Chrome>
-          </WinkelwagenProvider>
+          </>
         </NextIntlClientProvider>
       </body>
     </html>

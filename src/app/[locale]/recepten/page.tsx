@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { ReceptenClient } from "./ReceptenClient";
-import { JsonLd } from "@/components/JsonLd";
 import { Sectie, Kop } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { eenTaalMetadata } from "@/lib/seo";
@@ -29,7 +28,6 @@ export default async function ReceptenPage({
 
   return (
     <>
-      <JsonLd />
 
       <PaginaKop
         kruimels={[{ naam: BEDRIJF.naamKort, href: `/${locale}` }, { naam: "Recepten" }]}

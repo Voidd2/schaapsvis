@@ -67,8 +67,16 @@ export function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
+  const editorial = pathname.match(/^\/(en|de)\/(blog|recepten|viskalender|too-good-to-go)(\/.*)?$/);
+  if (editorial) {
+    const target = request.nextUrl.clone();
+    target.pathname = "/nl/" + editorial[2] + (editorial[3] || "");
+    return NextResponse.redirect(target, 308);
+  }
   // Normale meertalige routing voor bezoekers mét toegang (of als de site open is).
-  return intlMiddleware(request);
+  const result = intlMiddleware(request);
+  if (opSlot || process.env.VERCEL_ENV === "preview") result.headers.set("X-Robots-Tag", "noindex, nofollow");
+  return result;
 }
 
 /**

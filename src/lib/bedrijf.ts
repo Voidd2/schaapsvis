@@ -114,10 +114,10 @@ export const VERKOOPPUNTEN: Verkooppunt[] = [
   {
     id: "markt-woensdag",
     naam: "Woensdagmarkt",
-    adres: "Bij Dille & Camille",
+    adres: "Woensdagmarkt Leiden — standplaats op aanvraag",
     plaats: "Leiden",
     dagen: "woensdag 08:30–17:00",
-    mapsUrl: "https://maps.google.com/?q=Dille+en+Camille+Leiden+Haarlemmerstraat",
+    mapsUrl: "https://maps.google.com/?q=Woensdagmarkt+Leiden",
   },
   {
     id: "voorschoten",

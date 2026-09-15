@@ -12,7 +12,7 @@ export function ContactFormulier() {
   const [status, setStatus] = useState<"invullen" | "versturen" | "gelukt" | "mislukt">(
     "invullen"
   );
-  const [fout, setFout] = useState("");
+
 
   async function verstuur(e: React.FormEvent) {
     e.preventDefault();
@@ -26,20 +26,18 @@ export function ContactFormulier() {
       });
       const data = (await antwoord.json()) as { ok?: boolean; fout?: string };
       if (!antwoord.ok || !data.ok) {
-        setFout(data.fout ?? "");
         setStatus("mislukt");
         return;
       }
       setStatus("gelukt");
     } catch {
-      setFout("");
       setStatus("mislukt");
     }
   }
 
   if (status === "gelukt") {
     return (
-      <p className="leading-relaxed" style={{ color: "var(--seafoam)", fontWeight: 600 }}>
+      <p role="status" className="leading-relaxed" style={{ color: "var(--seafoam)", fontWeight: 600 }}>
         {t("gelukt")}
       </p>
     );
@@ -90,15 +88,10 @@ export function ContactFormulier() {
       </button>
 
       {status === "mislukt" && (
-        <div className="p-4" style={{ border: "1px solid var(--rood)" }}>
+        <div role="alert" className="p-4" style={{ border: "1px solid var(--rood)" }}>
           <p className="font-semibold mb-1" style={{ color: "var(--rood)" }}>
             {t("mislukt")}
           </p>
-          {fout && (
-            <p className="text-sm mb-2" style={{ color: "var(--charcoal)" }}>
-              {fout}
-            </p>
-          )}
           <a
             href={`tel:${BEDRIJF.telefoon.e164}`}
             className="font-semibold underline underline-offset-4"

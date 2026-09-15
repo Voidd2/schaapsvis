@@ -17,6 +17,7 @@ import { BEELD } from "@/lib/beeld";
  */
 export function Header() {
   const t = useTranslations("nav");
+  const s = useTranslations("site");
   const locale = useLocale();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -24,9 +25,9 @@ export function Header() {
   const p = (pad: string) => `/${locale}${pad}`;
 
   const links = [
-    { href: p("/bezorgen"), label: t("bezorgen") },
-    { href: p("/visschalen"), label: t("visschalen") },
     { href: p("/assortiment"), label: t("assortiment") },
+    { href: p("/visschalen"), label: t("visschalen") },
+    { href: p("/bezorgen"), label: t("bezorgen") },
     { href: p("/biologische-vis"), label: t("betereVis") },
     { href: p("/ons-verhaal"), label: t("verhaal") },
     { href: p("/bezoek-ons"), label: t("locaties") },
@@ -92,16 +93,17 @@ export function Header() {
                   fontWeight: 600,
                 }}
               >
-                Leiden &middot; sinds 1938
+                {s("brand")}
               </span>
             </span>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-5 xl:gap-6 text-[0.9rem]">
+          <nav aria-label={t("assortiment")} className="hidden xl:flex items-center gap-4 text-[0.85rem]">
             {links.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
+                aria-current={isActief(href) ? "page" : undefined}
                 className="transition-colors whitespace-nowrap"
                 style={{
                   color: isActief(href) ? "var(--navy)" : "var(--charcoal)",
@@ -116,7 +118,7 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-3 shrink-0">
-            <div className="hidden lg:block" style={{ color: "var(--charcoal)" }}>
+            <div className="hidden xl:block" style={{ color: "var(--charcoal)" }}>
               <LanguageSwitcher />
             </div>
 
@@ -127,14 +129,14 @@ export function Header() {
             <a
               href={`tel:${BEDRIJF.telefoon.e164}`}
               className="sm:hidden knop knop-rood !py-2.5 !px-3.5 !text-[0.8rem]"
-              aria-label={`Bel ${BEDRIJF.telefoon.weergave}`}
+              aria-label={`${s("call")} ${BEDRIJF.telefoon.weergave}`}
             >
-              Bellen
+              {s("call")}
             </a>
 
             <button
               type="button"
-              className="lg:hidden p-2 -mr-2"
+              className="xl:hidden p-2 -mr-2"
               style={{ color: "var(--navy)" }}
               onClick={() => setOpen(!open)}
               aria-expanded={open}
@@ -148,7 +150,7 @@ export function Header() {
         {/* ── Uitgeklapt menu ───────────────────────────────────────────── */}
         {open && (
           <div
-            className="lg:hidden"
+            className="xl:hidden"
             style={{ backgroundColor: "var(--cream)", borderTop: "1px solid var(--linen)" }}
           >
             <nav className="max-w-6xl mx-auto px-4 py-2">
@@ -178,8 +180,8 @@ export function Header() {
 
               {[
                 // Recepten en blog staan alleen in het Nederlands.
-                { href: "/nl/recepten", label: t("recepten") },
-                { href: "/nl/blog", label: t("blog") },
+                { href: "/nl/recepten", label: s("recipesNl") },
+                { href: "/nl/blog", label: t("blog") + (locale === "nl" ? "" : " (NL)") },
                 { href: p("/contact"), label: t("contact") },
               ].map(({ href, label }) => (
                 <Link

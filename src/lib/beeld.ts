@@ -33,6 +33,22 @@ export interface Beeldplek {
 }
 
 export const BEELD = {
+  aanraderVispotje: {
+    waar: "Homepage aanraders en productpagina vispotje",
+    wat: "Jullie eigen vispotje zoals de klant het meekrijgt. Vierkant, daglicht, minimaal 1200 pixels. Bevestig ook samenstelling en bereidingsadvies.",
+    bestand: "",
+    alt: "Vispotje van Schaap's Vishandel in Leiden",
+    verhouding: "vierkant",
+    terugval: "Vispotje",
+  },
+  aanraderSalade: {
+    waar: "Homepage aanraders",
+    wat: "Een eigen salade in de verpakking of schaal zoals verkocht, vierkant minimaal 1200 pixels. Bevestig welke salade is afgebeeld.",
+    bestand: "",
+    alt: "Salade van Schaap's Vishandel in Leiden",
+    verhouding: "vierkant",
+    terugval: "Salades",
+  },
   /* ── Het logo ──────────────────────────────────────────────────────────── */
   logoBadge: {
     waar: "Homepage, Ons verhaal en de voet",

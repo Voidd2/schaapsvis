@@ -33,7 +33,7 @@ const COPY: Record<
     openLine: "Tot die tijd zijn we gewoon open in de winkel.",
     contactLabel: "Herenstraat 48, Leiden · 071 514 9802",
     hoursLine:
-      "Ma t/m za in de winkel · wo + za op de markt in Leiden · vr bij Hoogvliet Voorschoten",
+      "Di t/m za in de winkel · wo + za op de markt in Leiden · vr bij Hoogvliet Voorschoten",
     whatsapp: "Bestel via WhatsApp",
     loginLabel: "Beheer — voer het wachtwoord in",
     placeholder: "Wachtwoord",
@@ -52,7 +52,7 @@ const COPY: Record<
     openLine: "Until then, you're welcome to visit us in the shop.",
     contactLabel: "Herenstraat 48, Leiden · +31 71 514 9802",
     hoursLine:
-      "Mon–Sat in the shop · Wed + Sat at the Leiden market · Fri at Hoogvliet Voorschoten",
+      "Tue–Sat in the shop · Wed + Sat at the Leiden market · Fri at Hoogvliet Voorschoten",
     whatsapp: "Order via WhatsApp",
     loginLabel: "Admin — enter the password",
     placeholder: "Password",

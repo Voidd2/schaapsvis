@@ -19,6 +19,7 @@ import { GEMEENTEN } from "@/lib/bezorging";
 export function Footer() {
   const t = useTranslations("footer");
   const nav = useTranslations("nav");
+  const site = useTranslations("site");
   const locale = useLocale();
   const p = (pad: string) => `/${locale}${pad}`;
 
@@ -50,9 +51,9 @@ export function Footer() {
         // De viswijzer, de recepten en de blog bestaan alleen in het Nederlands,
         // dus verwijzen we daar rechtstreeks naartoe in plaats van naar een
         // /en/- of /de/-adres met Nederlandse tekst erop.
-        { href: "/nl/recepten", label: nav("recepten") },
-        { href: "/nl/viskalender", label: nav("viswijzer") },
-        { href: "/nl/blog", label: nav("blog") },
+        { href: "/nl/recepten", label: site("recipesNl") },
+        { href: "/nl/viskalender", label: nav("viswijzer") + (locale === "nl" ? "" : " (NL)") },
+        { href: "/nl/blog", label: nav("blog") + (locale === "nl" ? "" : " (NL)") },
       ],
     },
     {
@@ -181,7 +182,7 @@ export function Footer() {
         >
           <span>
             &copy; {jaar} {BEDRIJF.naam} &middot;{" "}
-            {t("opgericht", { jaar: BEDRIJF.opgericht, oprichter: BEDRIJF.oprichter })}
+            {site("brand")}
           </span>
           <span>{t("betalen")}</span>
         </div>

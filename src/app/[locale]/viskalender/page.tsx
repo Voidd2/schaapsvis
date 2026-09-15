@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { JsonLd } from "@/components/JsonLd";
 import { Sectie } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { MaandStrip } from "./MaandStrip";
@@ -28,7 +27,6 @@ export default async function ViskalenderPage({
 
   return (
     <>
-      <JsonLd />
 
       <PaginaKop
         kruimels={[

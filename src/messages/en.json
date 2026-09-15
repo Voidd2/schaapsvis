@@ -14,30 +14,30 @@
     "bezorgen": "Delivery"
   },
   "meta": {
-    "homeTitle": "Fishmonger in Leiden — Herenstraat 48 | Fresh fish & delivery | Schaap's Vishandel",
-    "homeDesc": "Family fishmonger in central Leiden since 1938. Fresh fish from the auction, made-to-order seafood platters and delivery to Leiden, Leiderdorp, Voorschoten, Wassenaar and Leidschendam. Herenstraat 48.",
-    "verhaalTitle": "The Story of Schaap's Vis Leiden | Leiden's Fishmonger Since 1938",
-    "verhaalDesc": "From Gerrit Schaap in 1938 to Aldert Haasnoot today — almost ninety years of Leiden craftsmanship, four generations, one address: Herenstraat 48, Leiden.",
-    "varlaksTitle": "Organic Varlaks salmon in Leiden | Schaap's Vishandel",
-    "varlaksDesc": "Varlaks organic salmon — no antibiotics, no GMO, 100% traceable. Daily fresh at Schaap's Vis Leiden, Herenstraat 48. Also at the market.",
-    "assortimentTitle": "Fresh Fish Leiden | Kibbeling, Herring, Lekkerbek | Schaap's Vis Products",
-    "assortimentDesc": "Fresh fish range at Schaap's Vis Leiden: kibbeling, lekkerbek, herring, fish soup, organic Varlaks salmon, party platters and more. Daily fresh at Herenstraat 48.",
-    "bezoekTitle": "Fish Shop Leiden Herenstraat 48 | Schaap's Vis — Opening Hours & Directions",
-    "bezoekDesc": "Visiting Schaap's Vis? Herenstraat 48 Leiden (Mon–Sat), Leiden market (Wed + Sat), or Hoogvliet Voorschoten (Fri). Always fresh, always friendly.",
+    "homeTitle": "Schaap’s fishmonger in Leiden | Since 1938",
+    "homeDesc": "Schaap’s has been part of Leiden since 1938. Visit Herenstraat for fresh fish, herring, fried fish, salads and seafood platters. We are happy to help you choose for dinner or a gathering.",
+    "verhaalTitle": "Schaap’s fishmonger, since 1938",
+    "verhaalDesc": "A Leiden fishmonger with a long history. Find us at Herenstraat 48, in our shop and at the market.",
+    "varlaksTitle": "Varlaks salmon at Schaap’s",
+    "varlaksDesc": "Looking for Varlaks salmon in Leiden? Ask about current availability, product information and organic options.",
+    "assortimentTitle": "Our selection",
+    "assortimentDesc": "From fresh fish to salads and prepared dishes. The selection may vary by day and season. Browse our products or ask what is available today.",
+    "bezoekTitle": "Shop and market stalls",
+    "bezoekDesc": "Herenstraat 48 in Leiden, the Leiden market and our Friday stall in Voorschoten. See where and when to find us.",
     "contactTitle": "Contact Schaap's Vis Leiden | +31 71 514 9802 | Fish Shop Herenstraat",
     "contactDesc": "Contact Schaap's Vis Leiden. Call +31 71 514 9802 or send a message. Herenstraat 48, 2313 AL Leiden.",
-    "bestellenTitle": "Order fish in Leiden — delivery or collection | Schaap's Vishandel",
-    "bestellenDesc": "Order fresh fish or a seafood platter from Schaap's Vishandel in Leiden. Delivered across the region or collected at Herenstraat 48. Order by 12:00 the day before delivery.",
-    "eerlijkeVisTitle": "Organic Fish Leiden | Organic Salmon — Schaap's Vis",
-    "eerlijkeVisDesc": "Organic fish in Leiden at Schaap's Vishandel — organic Varlaks salmon (ASC + EU organic), MSC- and ASC-certified. Herenstraat 48, since 1938.",
+    "bestellenTitle": "Order fish from Schaap’s",
+    "bestellenDesc": "Choose fresh fish for dinner, a salad to share or a seafood platter for your guests.",
+    "eerlijkeVisTitle": "Organic fish and provenance",
+    "eerlijkeVisDesc": "Want to know where your fish comes from or which organic options are available? We can help you choose using information about the current delivery.",
     "receptenTitle": "Fish Recipes from Schaap's Vis Leiden | Kibbeling, Salmon, Herring & more",
     "receptenDesc": "Delicious fish recipes using fish from Schaap's Vis Leiden. From kibbeling with garlic sauce to gravlaks and creamy fish soup. Includes shopping list and preparation time.",
-    "bezorgenTitle": "Fresh fish delivery in Leiden and the surrounding area | Schaap's Vishandel",
-    "bezorgenDesc": "Fresh fish and seafood platters delivered in Leiden, Leiderdorp, Voorschoten, Wassenaar and Leidschendam. Wednesday to Saturday, order by 12:00 the day before. Delivery € 5.99, free from € 35.",
+    "bezorgenTitle": "Fish delivery in Leiden and nearby towns",
+    "bezorgenDesc": "Every Thursday we deliver fresh fish, salads and seafood platters in Leiden and nearby towns, from our shop at Herenstraat 48.",
     "bezorgenPlaatsTitle": "Fresh fish delivery in {plaats} | Fishmonger from Leiden | Schaap's Vis",
     "bezorgenPlaatsDesc": "Want fresh fish or a seafood platter delivered in {plaats}? Schaap's Vishandel from Leiden drives out {dagen}. Order by 12:00 the day before and pay at the door, or online soon.",
-    "visschalenTitle": "Order a seafood platter in Leiden — three platters from {bedrag} | Schaap's Vishandel",
-    "visschalenDesc": "A seafood platter for drinks, a birthday or Christmas. Three platters from {bedrag}, with extras of your choosing. Collect on Herenstraat or have it delivered."
+    "visschalenTitle": "Seafood platters for your guests",
+    "visschalenDesc": "For drinks, birthdays or dinner. Choose a platter to suit the occasion. Find current platters, ingredients and prices in our online store."
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Since 1938",
@@ -169,7 +169,7 @@
   "assortimentPage": {
     "title": "Our Products",
     "sub": "Fresh, honest and top quality — delivered fresh daily",
-    "note": "No online checkout — but easy pre-ordering. We call you back with price and confirmation."
+    "note": "Available products, prices, delivery charges, order deadlines and collection options are shown in the online store. Check your address and the available Thursday before paying."
   },
   "bezoekPage": {
     "title": "Where to find us",
@@ -177,7 +177,7 @@
   },
   "contactPage": {
     "title": "Contact",
-    "sub": "Calling is quickest — we are usually behind the counter. WhatsApp or email works too.",
+    "sub": "Calling is the quickest way to reach us. You can also contact us through WhatsApp.",
     "formTitle": "Send a message",
     "nameLabel": "Name",
     "emailLabel": "Email address",
@@ -231,12 +231,12 @@
     "winkel": "Herenstraat 48",
     "winkelTijden": "Tuesday to Friday 09:00–18:00, Saturday 09:00–17:00",
     "markt": "Leiden market",
-    "marktTijden": "Wednesday at Dille & Camille, Saturday on the Aalmarkt by the Waag — 08:30–17:00",
+    "marktTijden": "Wednesday and Saturday 08:30–17:00 — call for the current stall location",
     "voorschoten": "At Hoogvliet, Voorschoten",
     "voorschotenTijden": "Friday 08:30–17:30",
     "bezorgenIn": "Fish delivery in {plaats}",
     "opgericht": "founded in {jaar} by {oprichter}",
-    "betalen": "Card and cash · iDEAL and credit card coming soon",
+    "betalen": "Leiden since 1938 · fresh fish, salads and seafood platters delivered on Thursdays",
     "bezorgenIntro": "We also deliver in",
     "en": "and"
   },
@@ -324,7 +324,7 @@
     "telefoonLabel": "Phone",
     "sinds1938": "Since 1938",
     "slotTitel": "Come by — or order ahead",
-    "slotTekst": "Herenstraat 48 in Leiden, Tuesday to Saturday. We deliver fresh fish and fish platters in Leiden, Leiderdorp, Voorschoten, Wassenaar and Leidschendam.",
+    "slotTekst": "We deliver one day a week: every Thursday. Delivery is available for fresh fish, salads and seafood platters only.",
     "labelGeneraties": "Generations",
     "labelWinkel": "Shop",
     "labelEigenaar": "Owner",
@@ -359,8 +359,8 @@
     "checkTekst": "Enter your postcode and you will see straight away.",
     "checkLabel": "Postcode",
     "checkKnop": "Check",
-    "checkBinnen": "Yes, we deliver in {plaats}. The delivery charge is {bedrag}.",
-    "checkBuiten": "That address is off our route. Do call us on {nummer} — sometimes more is possible than the map suggests.",
+    "checkBinnen": "This postcode is in the {plaats} area. Check your full address and the available Thursday when ordering.",
+    "checkBuiten": "This postcode is outside the listed area. Call us to discuss collection.",
     "checkOngeldig": "Enter four digits, for example 2313.",
     "betalenKop": "Payment",
     "betalenTekst": "For now you pay the driver: card or cash. We are setting up SumUp so that you will soon be able to pay in advance with iDEAL, credit card or Apple Pay. As soon as it works, it will say so here.",
@@ -412,11 +412,11 @@
     "gratisGehaald": "Delivery is free."
   },
   "gemeenten": {
-    "leidenIntro": "Our own town. The shop is on the Herenstraat, so in Leiden the fish is often at your door within half an hour of being packed.",
-    "leiderdorpIntro": "Across the Zijl and you are there. Plenty of Leiderdorpers have stood at our market stall on the Nieuwe Rijn for years — now they no longer have to.",
-    "voorschotenIntro": "In Voorschoten we stand at Hoogvliet every Friday. If that does not fit your week, you can simply have the fish brought to you.",
-    "wassenaarIntro": "Wassenaar is our furthest stop and the drive goes through the dunes. We run a fixed route there, at the same rate as everywhere else.",
-    "leidschendamIntro": "Along the Vliet to Leidschendam. We deliver across the whole of Leidschendam, from the Damcentrum to Essesteijn."
+    "leidenIntro": "From our shop on Herenstraat to your address in Leiden: Thursday is our delivery day. You can also visit the shop.",
+    "leiderdorpIntro": "We deliver to Leiderdorp from Leiden on Thursdays. Check your address when ordering; contact the shop about collection.",
+    "voorschotenIntro": "Delivery in Voorschoten is on Thursdays. On Fridays, visit our stall at Hoogvliet as a separate option.",
+    "wassenaarIntro": "Thursday is also our delivery day for Wassenaar. Check whether your address is on the available route. You can also visit our Leiden shop.",
+    "leidschendamIntro": "Delivery to Leidschendam is planned for Thursdays. Schaap’s shop and collection address are at Herenstraat 48 in Leiden."
   },
   "visschaal": {
     "eyebrow": "Drinks · birthday · Christmas",
@@ -588,8 +588,8 @@
     "zaterdagAdres": "Aalmarkt, by the Waag, Leiden",
     "zaterdagToelichting": "The stall stands by the Waag, right in the centre.",
     "woensdagNaam": "Wednesday market",
-    "woensdagAdres": "By Dille & Camille, Leiden",
-    "woensdagToelichting": "On the Haarlemmerstraat, on the Dille & Camille side.",
+    "woensdagAdres": "Wednesday market, Leiden — call for the exact stall location",
+    "woensdagToelichting": "Wednesday market, Leiden — call for the exact stall location",
     "voorschotenNaam": "Voorschoten, at Hoogvliet",
     "voorschotenAdres": "Hoogvliet car park, Voorschoten",
     "voorschotenToelichting": "Every Friday in the car park. Does that not suit? We deliver in Voorschoten too.",
@@ -637,5 +637,672 @@
     "naarAssortiment": "To the range",
     "terugNaarSite": "Back to the shop site",
     "gratisWeegvis": "Fresh fish is settled by weight. If your order comes to more than {bedrag}, delivery is free — we will say so when we ring you with the price of the day."
+  },
+  "site": {
+    "brand": "Leiden · since 1938",
+    "call": "Call",
+    "skip": "Skip to content",
+    "today": "Today",
+    "delivery": "Every Thursday",
+    "deliveryLine": "Fresh fish, salads and seafood platters · delivery every Thursday",
+    "deliveryDetail": "We deliver one day a week: every Thursday. Delivery is available for fresh fish, salads and seafood platters only.",
+    "terms": "Available products, prices, delivery charges, order deadlines and collection options are shown in the online store. Check your address and the available Thursday before paying.",
+    "pending": "Online ordering will be available soon. Call us for the current selection and to discuss your options.",
+    "shop": "Open the SumUp online store",
+    "shopExplain": "Continue to our SumUp online store to choose your products, place your order and pay.",
+    "orderTitle": "Order fish from Schaap’s",
+    "orderIntro": "Choose fresh fish for dinner, a salad to share or a seafood platter for your guests.",
+    "fresh": "Fresh fish",
+    "salads": "Salads",
+    "platters": "Seafood platters",
+    "pickup": "In our shop and at the market",
+    "freshText": "Whole, filleted or portioned. Ask us which fish suits your recipe.",
+    "saladsText": "For sandwiches, sharing or as a side dish. Browse the current selection.",
+    "plattersText": "For drinks, birthdays or dinner with friends. Check the current selection for ingredients and portions.",
+    "storeOnly": "Available in our shop and at the market; this product is not available for delivery.",
+    "onlineEligible": "Thursday delivery; check availability in the online store.",
+    "deliveryTitle": "Fish delivery in Leiden and nearby towns",
+    "deliveryIntro": "Every Thursday we deliver fresh fish, salads and seafood platters in Leiden and nearby towns, from our shop at Herenstraat 48.",
+    "areaTitle": "Leiden and the surrounding area",
+    "areaIntro": "Our Thursday route serves Leiden, Leiderdorp, Voorschoten, Wassenaar and Leidschendam. Check that your address is eligible for the available route when ordering.",
+    "areaCheck": "This postcode is in the {plaats} area. Check your full address and the available Thursday when ordering.",
+    "areaOutside": "This postcode is outside the listed area. Call us to discuss collection.",
+    "deliveryPlace": "Fish delivery in {plaats}",
+    "placeIntro": "Fresh fish, salads and seafood platters from Schaap’s fishmonger in Leiden, delivered to your home in {plaats} on Thursdays.",
+    "nearby": "Also in the area",
+    "stepsTitle": "How to order",
+    "step1": "Browse the selection",
+    "step1Text": "Choose your products in the SumUp online store. The selection may vary each week.",
+    "step2": "Check delivery",
+    "step2Text": "Check your address, the available Thursday and the charges. For collection, see the available options.",
+    "step3": "Complete your order",
+    "step3Text": "You will receive confirmation through the online store. Keep it for your order.",
+    "faqTitle": "Frequently asked questions",
+    "faqDay": "Which days do you deliver?",
+    "faqDayText": "Thursdays only. Check the available date and order deadline when ordering.",
+    "faqProducts": "Which products can be delivered?",
+    "faqProductsText": "Fresh fish, salads and seafood platters only. Fried fish, herring for immediate consumption and prepared meals are available in our shop or at the market.",
+    "faqCost": "How much does delivery cost?",
+    "faqCostText": "Current delivery charges and any minimum order value appear in the online store before payment. Please call if online ordering is not yet available.",
+    "faqPickup": "Can I collect my order?",
+    "faqPickupText": "Check collection options when ordering or call the shop. See Locations for opening hours and market days.",
+    "recommendLabel": "From our counter",
+    "recommendTitle": "Schaap’s recommendations",
+    "recommendIntro": "Something for dinner or to share with friends. Ask about today’s selection.",
+    "vispotje": "Fish casserole",
+    "vispotjeText": "A fish dish to enjoy at home. Ask about today’s ingredients, portion size and preparation instructions.",
+    "details": "View product",
+    "visit": "Opening hours and directions",
+    "photo": "Photo coming soon",
+    "platterTitle": "Seafood platters for your guests",
+    "platterIntro": "For drinks, birthdays or dinner. Choose a platter to suit the occasion. Find current platters, ingredients and prices in our online store.",
+    "platter1": "To share over drinks",
+    "platter1Text": "Tell us how many guests you expect and what else you are serving.",
+    "platter2": "For family and friends",
+    "platter2Text": "For dinner or a birthday. Choose a size to suit your group.",
+    "platter3": "For a celebration",
+    "platter3Text": "For a larger gathering. Discuss ingredients and availability well in advance.",
+    "allergyTitle": "Allergens and dietary requirements",
+    "allergyText": "Always discuss an allergy before ordering. Ingredients and potential cross-contact vary by product and preparation. We can discuss the options; a customised platter is not automatically allergen-free.",
+    "bioTitle": "Organic fish and provenance",
+    "bioIntro": "Want to know where your fish comes from or which organic options are available? We can help you choose using information about the current delivery.",
+    "bio1": "Organic",
+    "bio1Text": "Organic farmed fish is subject to organic aquaculture standards. Ask about the label and documentation for the specific product.",
+    "bio2": "MSC and ASC",
+    "bio2Text": "MSC relates to wild fisheries; ASC to aquaculture. A species is not automatically certified: check the specific product and its label.",
+    "bio3": "Where your fish comes from",
+    "bio3Text": "Catch area, country of farming and product information help you compare. Ask about the fish currently available.",
+    "sources": "Learn about the labels",
+    "varlaksTitle": "Varlaks salmon at Schaap’s",
+    "varlaksIntro": "Looking for Varlaks salmon in Leiden? Ask about current availability, product information and organic options.",
+    "varlaksText": "Choose a portion to suit your recipe. We can advise on quantities and preparation at the counter. Origin and any certification must match the batch supplied; please ask to see the label.",
+    "storyTitle": "Schaap’s fishmonger, since 1938",
+    "storyIntro": "A Leiden fishmonger with a long history. Find us at Herenstraat 48, in our shop and at the market.",
+    "story1938": "Mr Schaap started his fish business in Leiden in 1938. His name has stayed with the shop.",
+    "storyNow": "Today, Schaap’s is about fish and personal service: advice on your choice, quantities and preparation. Visit us on Herenstraat or at one of our market stalls.",
+    "homeIntro": "Schaap’s has been part of Leiden since 1938. Visit Herenstraat for fresh fish, herring, fried fish, salads and seafood platters. We are happy to help you choose for dinner or a gathering.",
+    "homeStory": "From its beginnings in 1938 to the shop today, Schaap’s is part of Leiden. Personal service at the counter remains at its heart.",
+    "friedTitle": "Kibbeling, lekkerbek and herring",
+    "friedText": "Try kibbeling (battered fish bites), lekkerbek (a battered fish fillet) or Dutch herring. Visit our shop or market stall for today’s selection.",
+    "reviewTitle": "What our customers say",
+    "reviewText": "Read current visitor reviews on Google.",
+    "reviews": "Read the reviews",
+    "catalogTitle": "Our selection",
+    "catalogIntro": "From fresh fish to salads and prepared dishes. The selection may vary by day and season. Browse our products or ask what is available today.",
+    "all": "All",
+    "search": "Find a product",
+    "searchPlaceholder": "For example salmon, cod or salad",
+    "noResults": "No products found. Try another search term.",
+    "resultCount": "{count} products",
+    "productTitle": "{name} in Leiden | Schaap’s fishmonger",
+    "productDesc": "{name} at Schaap’s fishmonger, Herenstraat 48 in Leiden. Browse product information and ask about the current selection.",
+    "productAvailability": "The selection varies. Check current availability in the online store or call the shop.",
+    "ingredients": "Product information",
+    "ingredientsText": "Ask for ingredients, allergens, origin and storage or cooking instructions for the current product. These may vary by batch or recipe.",
+    "inspiration": "At the table",
+    "inspirationText": "Looking for ideas? Browse our recipes or ask for advice at the counter.",
+    "recipesNl": "Fish recipes (Dutch)",
+    "backCatalog": "Back to the selection",
+    "thankTitle": "Check your order",
+    "thankText": "Find your order and payment status in the confirmation from the SumUp online store. This page does not confirm an order or payment. Please contact the shop if you have questions.",
+    "contactFallback": "Please call with your question. The online contact form is currently unavailable.",
+    "locations": "Shop and market stalls",
+    "locationsIntro": "Herenstraat 48 in Leiden, the Leiden market and our Friday stall in Voorschoten. See where and when to find us.",
+    "pickupText": "Would you like us to set something aside? Call to arrange the collection point and time.",
+    "localLeidenTitle": "Fishmonger in Leiden: Herenstraat 48",
+    "localLeidenIntro": "Fresh fish, herring, fried fish, salads and seafood platters at Schaap’s. Part of Leiden since 1938.",
+    "localMarketTitle": "Schaap’s at Leiden market",
+    "localMarketIntro": "Find our fish stall in Leiden on Wednesdays and Saturdays. Check the market days and directions, or call to arrange collection.",
+    "localVoorschotenTitle": "Schaap’s fish stall in Voorschoten",
+    "localVoorschotenIntro": "On Fridays our stall is at Hoogvliet in Voorschoten. Come for fish and personal advice. Home delivery is on Thursdays only.",
+    "privacy": "Privacy",
+    "footerNote": "Leiden since 1938 · fresh fish, salads and seafood platters delivered on Thursdays",
+    "categories": {
+      "verse-vis": "Fresh fish",
+      "gerookte-vis": "Smoked fish",
+      "schaal-schelp": "Shellfish",
+      "vissalades": "Salads",
+      "bereid": "Prepared dishes and snacks"
+    },
+    "images": {
+      "logoBadge": "Schaap’s fishmonger",
+      "logoLiggend": "Schaap’s fishmonger",
+      "winkelGevel": "Herenstraat 48, Leiden",
+      "toonbank": "Our fish counter",
+      "achterDeToonbank": "Behind the counter",
+      "gebakkenVis": "Dutch fried fish",
+      "marktZaterdag": "Saturday market in Leiden",
+      "marktWoensdag": "Wednesday market in Leiden",
+      "marktVoorschoten": "Market stall in Voorschoten",
+      "historie1938": "Since 1938",
+      "historie1960": "From the family archive",
+      "historie1980": "From the family archive",
+      "historie2000": "From the family archive",
+      "historieNu": "Schaap’s today",
+      "schaalBorrel": "To share",
+      "schaalFamilie": "For family and friends",
+      "schaalFeest": "For a celebration",
+      "varlaksFilet": "Varlaks salmon fillet",
+      "aanraderVispotje": "Fish casserole",
+      "aanraderSalade": "Salads"
+    }
+  },
+  "producten": {
+    "kabeljauw": {
+      "naam": "Cod",
+      "desc": "Mild white fish for baking or poaching."
+    },
+    "kabeljauwfilet": {
+      "naam": "Cod fillet",
+      "desc": "White fish fillet for the pan, oven or steamer."
+    },
+    "schol": {
+      "naam": "Plaice",
+      "desc": "A flatfish with a delicate flavour, traditionally pan-fried."
+    },
+    "scholfilet": {
+      "naam": "Plaice fillet",
+      "desc": "Delicate fillets that suit a simple butter sauce."
+    },
+    "zeetong": {
+      "naam": "Sole",
+      "desc": "A delicate flatfish, delicious simply pan-fried."
+    },
+    "zeebaars": {
+      "naam": "Sea bass",
+      "desc": "White fish that works well grilled or oven-baked."
+    },
+    "zeebaarsfilet": {
+      "naam": "Sea bass fillet",
+      "desc": "A firm fillet, delicious pan-fried with lemon."
+    },
+    "dorade": {
+      "naam": "Sea bream",
+      "desc": "Sea bream is well suited to cooking whole in the oven."
+    },
+    "dorade-filet": {
+      "naam": "Sea bream fillet",
+      "desc": "A mild fillet for the pan or oven."
+    },
+    "griet": {
+      "naam": "Brill",
+      "desc": "A flatfish with fine white flesh, for poaching or baking."
+    },
+    "grietfilet": {
+      "naam": "Brill fillet",
+      "desc": "Fine white fillets, well suited to a light sauce."
+    },
+    "tarbot": {
+      "naam": "Turbot",
+      "desc": "A firm flatfish for a special dinner."
+    },
+    "tarbotfilet": {
+      "naam": "Turbot fillet",
+      "desc": "Firm white fillets for the oven or pan."
+    },
+    "heek": {
+      "naam": "Hake",
+      "desc": "White fish with a gentle flavour, for baking or poaching."
+    },
+    "heekfilet": {
+      "naam": "Hake fillet",
+      "desc": "Tender fillets for steaming, poaching or pan-frying."
+    },
+    "schelvis": {
+      "naam": "Haddock",
+      "desc": "A white fish often used in fish and chips."
+    },
+    "schelvisfilet": {
+      "naam": "Haddock fillet",
+      "desc": "Mild white fillets for the pan or oven."
+    },
+    "wijting": {
+      "naam": "Whiting",
+      "desc": "A delicate white fish, suitable for frying."
+    },
+    "wijtingfilet": {
+      "naam": "Whiting fillet",
+      "desc": "Thin, delicate fillets for a fish dinner."
+    },
+    "rode-poon": {
+      "naam": "Red gurnard",
+      "desc": "Firm white flesh for the pan or a fish stew."
+    },
+    "schar": {
+      "naam": "Dab",
+      "desc": "A small flatfish, traditionally cooked in the pan."
+    },
+    "roodbaars": {
+      "naam": "Redfish",
+      "desc": "Firm white flesh, suitable for the oven or grill."
+    },
+    "haring": {
+      "naam": "Dutch herring",
+      "desc": "A Dutch classic, enjoyed on its own or with onion."
+    },
+    "varlaks-zalm": {
+      "naam": "Varlaks salmon",
+      "desc": "Ask about the current Varlaks selection and product information."
+    },
+    "zalmfilet": {
+      "naam": "Salmon fillet",
+      "desc": "Salmon for the pan, oven or a pasta dish."
+    },
+    "zalmforel": {
+      "naam": "Salmon trout",
+      "desc": "Trout with pink flesh, for baking or grilling."
+    },
+    "tonijnfilet": {
+      "naam": "Tuna fillet",
+      "desc": "Firm tuna for the grill or pan. Ask for preparation advice."
+    },
+    "zeeduivelfilet": {
+      "naam": "Monkfish fillet",
+      "desc": "Firm white fish that holds its shape in stews."
+    },
+    "gerookte-zalm-high-seas": {
+      "naam": "Smoked salmon — High Seas",
+      "desc": "Sliced smoked salmon for toast, salads or a platter."
+    },
+    "gerookte-wilde-zalm": {
+      "naam": "Smoked wild salmon",
+      "desc": "Smoked wild salmon to serve cold with bread."
+    },
+    "gravad-lax": {
+      "naam": "Gravlax",
+      "desc": "Cured salmon, traditionally prepared with dill."
+    },
+    "gerookte-bokking": {
+      "naam": "Smoked herring",
+      "desc": "Smoked herring with a full, savoury flavour."
+    },
+    "gerookte-forelfilet": {
+      "naam": "Smoked trout fillet",
+      "desc": "Smoked trout fillets for bread or a salad."
+    },
+    "gerookte-heilbot": {
+      "naam": "Smoked halibut fillet",
+      "desc": "Smoked halibut for a fish platter or toast."
+    },
+    "gerookte-kipper": {
+      "naam": "Kipper",
+      "desc": "Split smoked herring, a traditional fish product."
+    },
+    "bosje-sprot": {
+      "naam": "Smoked sprats",
+      "desc": "Small smoked fish, delicious with dark bread."
+    },
+    "hollandse-garnalen": {
+      "naam": "Brown shrimp",
+      "desc": "Small shrimp for a salad, toast or a seafood platter."
+    },
+    "noorse-garnalen": {
+      "naam": "Northern prawns",
+      "desc": "Prawns with a mild, sweet flavour for salads or pasta."
+    },
+    "franse-gambas": {
+      "naam": "Large prawns",
+      "desc": "Large prawns for the grill or pan."
+    },
+    "gekookte-gambas": {
+      "naam": "Cooked prawns",
+      "desc": "Cooked prawns to serve with a dip or in a salad."
+    },
+    "zeeuwse-mosselen": {
+      "naam": "Zeeland mussels",
+      "desc": "Mussels for a classic pot with vegetables and stock."
+    },
+    "creuse-oesters": {
+      "naam": "Pacific oysters",
+      "desc": "Ask about the current size and preparation options."
+    },
+    "kokkels": {
+      "naam": "Cockles",
+      "desc": "Small shellfish for pasta or a seafood dish."
+    },
+    "coquilles": {
+      "naam": "Scallops",
+      "desc": "Tender scallops, suitable for pan-frying."
+    },
+    "krabklauwen": {
+      "naam": "Crab claws",
+      "desc": "Crab claws for a seafood platter or a starter."
+    },
+    "inktvis": {
+      "naam": "Squid",
+      "desc": "Squid for the grill, frying or a stew."
+    },
+    "scheermessen": {
+      "naam": "Razor clams",
+      "desc": "Long shellfish, delicious with garlic and parsley."
+    },
+    "zalmsalade": {
+      "naam": "Salmon salad",
+      "desc": "A salmon salad for sandwiches or sharing."
+    },
+    "krabsalade": {
+      "naam": "Crab-style salad",
+      "desc": "Ask whether the current recipe contains crab or surimi."
+    },
+    "tonijnsalade": {
+      "naam": "Tuna salad",
+      "desc": "A tuna salad for bread or as a side dish."
+    },
+    "garnalensalade": {
+      "naam": "Shrimp salad",
+      "desc": "A shrimp salad for toast or as a starter."
+    },
+    "zeewiersalade": {
+      "naam": "Wakame seaweed salad",
+      "desc": "A seaweed salad to serve alongside fish."
+    },
+    "visschaal": {
+      "naam": "Seafood platter",
+      "desc": "A selection of fish to share; discuss ingredients and size."
+    },
+    "kibbeling": {
+      "naam": "Kibbeling — battered fish bites",
+      "desc": "A Dutch fried-fish classic. Ask which fish is used today."
+    },
+    "lekkerbek": {
+      "naam": "Lekkerbek — battered fish fillet",
+      "desc": "A battered fish fillet, served from our shop or stall."
+    },
+    "broodje-haring": {
+      "naam": "Herring roll",
+      "desc": "Dutch herring in a bread roll. Ask about the toppings."
+    },
+    "vissoep": {
+      "naam": "Fish soup",
+      "desc": "A fish soup for lunch or dinner. Ask about today’s recipe."
+    },
+    "vispotje": {
+      "naam": "Fish casserole",
+      "desc": "A fish dish for home. Ask about portions and preparation."
+    },
+    "feestschotel": {
+      "naam": "Celebration seafood platter",
+      "desc": "A platter for a celebration, with size and contents by arrangement."
+    },
+    "koolvis": {
+      "naam": "Saithe",
+      "desc": "A firm white fish for frying, baking or stewing."
+    },
+    "leng": {
+      "naam": "Ling",
+      "desc": "Firm, mild white fish suitable for stews."
+    },
+    "vleugelrog": {
+      "naam": "Skate wing",
+      "desc": "A distinctive fish cut, traditionally served with brown butter."
+    },
+    "kabeljauwhaas": {
+      "naam": "Cod loin",
+      "desc": "The thick back portion of cod for the oven or pan."
+    },
+    "zalmmoot": {
+      "naam": "Salmon steak",
+      "desc": "A cross-cut salmon portion for the oven or grill."
+    },
+    "gerookte-zalm-snippers": {
+      "naam": "Smoked salmon pieces",
+      "desc": "Small pieces of smoked salmon for pasta or eggs."
+    },
+    "langoustines": {
+      "naam": "Langoustines",
+      "desc": "Shellfish with delicate meat for grilling or pan-frying."
+    },
+    "hele-krab": {
+      "naam": "Whole crab",
+      "desc": "Whole crab to share. Ask about cooking and serving."
+    },
+    "vongole": {
+      "naam": "Clams",
+      "desc": "Small clams for a classic pasta dish."
+    },
+    "fine-de-claire-oesters": {
+      "naam": "Fine de Claire oysters",
+      "desc": "Oysters for a starter or seafood platter. Ask about sizes."
+    },
+    "surimisalade": {
+      "naam": "Surimi salad",
+      "desc": "A salad with surimi for bread or toast."
+    },
+    "garnalenkroketten": {
+      "naam": "Shrimp croquettes",
+      "desc": "Croquettes with a shrimp filling, served as a snack."
+    },
+    "calamares": {
+      "naam": "Calamari rings",
+      "desc": "Fried squid rings to enjoy with a dip."
+    },
+    "visburger": {
+      "naam": "Fish burger",
+      "desc": "A fish burger for lunch or a meal. Ask about the recipe."
+    },
+    "zeewolf": {
+      "naam": "Wolffish",
+      "desc": "Firm white fish that suits pan-frying or grilling."
+    },
+    "zwaardvis": {
+      "naam": "Swordfish steak",
+      "desc": "A firm fish steak for the grill or pan."
+    },
+    "verse-heilbot": {
+      "naam": "Halibut",
+      "desc": "A white flatfish for poaching or oven-baking."
+    },
+    "kabeljauwwangen": {
+      "naam": "Cod cheeks",
+      "desc": "Small pieces of cod cheek for the pan."
+    },
+    "grauwe-poon": {
+      "naam": "Grey gurnard",
+      "desc": "White fish for a fish soup, stew or the pan."
+    },
+    "hele-kreeft": {
+      "naam": "Whole lobster",
+      "desc": "A whole lobster for a special occasion. Ask about availability."
+    },
+    "tijgergarnalen": {
+      "naam": "Tiger prawns",
+      "desc": "Large prawns for a curry, grill or pan."
+    },
+    "wulken": {
+      "naam": "Whelks",
+      "desc": "Sea snails with a firm texture, often served with a dip."
+    },
+    "gerookte-forel-heel": {
+      "naam": "Whole smoked trout",
+      "desc": "Whole smoked trout, delicious with bread and horseradish."
+    },
+    "warm-gerookte-zalm": {
+      "naam": "Hot-smoked salmon",
+      "desc": "Smoked salmon to flake into salads or pasta."
+    },
+    "zeevruchtensalade": {
+      "naam": "Seafood salad",
+      "desc": "A mixed seafood salad. Ask about the current ingredients."
+    },
+    "garnalencocktail": {
+      "naam": "Shrimp cocktail",
+      "desc": "Shrimp served as a cold starter with sauce."
+    },
+    "visspies": {
+      "naam": "Fish skewer",
+      "desc": "Fish on a skewer for the grill. Ask about the selection."
+    },
+    "fish-and-chips": {
+      "naam": "Fish and chips",
+      "desc": "Battered fish with chips, a British classic."
+    },
+    "snoekbaars": {
+      "naam": "Pike-perch fillet",
+      "desc": "White freshwater fish for pan-frying or baking."
+    },
+    "tongschar": {
+      "naam": "Lemon sole",
+      "desc": "A delicate flatfish to cook in the pan."
+    },
+    "bot": {
+      "naam": "Flounder",
+      "desc": "A mild flatfish for frying or baking."
+    },
+    "sardines": {
+      "naam": "Sardines",
+      "desc": "Small, full-flavoured fish for the grill or oven."
+    },
+    "ansjovis": {
+      "naam": "Fresh anchovies",
+      "desc": "Small fish for frying. Ask for preparation advice."
+    },
+    "spiering": {
+      "naam": "Smelt",
+      "desc": "Small fish traditionally floured and fried."
+    },
+    "skrei": {
+      "naam": "Skrei — winter cod",
+      "desc": "Seasonal cod. Ask about the current supply."
+    },
+    "zeeforel": {
+      "naam": "Sea trout",
+      "desc": "A salmon relative for the pan, grill or oven."
+    },
+    "tilapiafilet": {
+      "naam": "Tilapia fillet",
+      "desc": "Mild white fillets for a curry or the pan."
+    },
+    "victoriabaars": {
+      "naam": "Nile perch fillet",
+      "desc": "Firm freshwater fish suitable for baking or stewing."
+    },
+    "gerookte-zalmmoot": {
+      "naam": "Hot-smoked salmon steak",
+      "desc": "A portion of hot-smoked salmon for a meal or salad."
+    },
+    "gerookte-sprotfilet": {
+      "naam": "Smoked sprat fillets",
+      "desc": "Small smoked fillets for bread or potato salad."
+    },
+    "rivierkreeftstaartjes": {
+      "naam": "Crayfish tails",
+      "desc": "Crayfish tails for a salad, pasta or starter."
+    },
+    "alikruiken": {
+      "naam": "Periwinkles",
+      "desc": "Small sea snails, traditionally eaten from the shell."
+    },
+    "gamba-spiesen": {
+      "naam": "Prawn skewers",
+      "desc": "Prawns on skewers for grilling or pan-frying."
+    },
+    "krabpoten": {
+      "naam": "Crab legs",
+      "desc": "Crab legs to serve with lemon or a dip."
+    },
+    "halve-kreeft": {
+      "naam": "Half lobster",
+      "desc": "Half a lobster for a starter or a gratin."
+    },
+    "zalm-dillesalade": {
+      "naam": "Salmon and dill salad",
+      "desc": "A salmon salad with dill, delicious on toast."
+    },
+    "haringsalade": {
+      "naam": "Herring salad",
+      "desc": "A herring salad to serve with bread or potatoes."
+    },
+    "mosselsalade": {
+      "naam": "Mussel salad",
+      "desc": "A mussel salad for a starter or a sandwich."
+    },
+    "poke-bowl-zalm": {
+      "naam": "Salmon poke bowl",
+      "desc": "A bowl with salmon. Ask about ingredients and availability."
+    },
+    "gamba-tempura": {
+      "naam": "Prawn tempura",
+      "desc": "Prawns in tempura batter, served as a fried snack."
+    },
+    "visnuggets": {
+      "naam": "Fish nuggets",
+      "desc": "Bite-sized coated fish pieces. Ask for preparation instructions."
+    },
+    "gebakken-mosselen": {
+      "naam": "Fried mussels",
+      "desc": "Mussels prepared as a fried snack."
+    },
+    "tongfilet": {
+      "naam": "Sole fillet",
+      "desc": "Fine sole fillets, delicious simply cooked in butter."
+    },
+    "wilde-zalmfilet": {
+      "naam": "Wild salmon fillet",
+      "desc": "Wild salmon fillet for the oven or pan."
+    },
+    "heilbotfilet": {
+      "naam": "Halibut fillet",
+      "desc": "White flatfish fillets for poaching or baking."
+    },
+    "zeebrasemfilet": {
+      "naam": "Sea bream fillet",
+      "desc": "Fine white fish fillets for the pan or oven."
+    },
+    "red-snapperfilet": {
+      "naam": "Red snapper fillet",
+      "desc": "Firm white fillets for the grill or a fish curry."
+    },
+    "gerookte-coquilles": {
+      "naam": "Smoked scallops",
+      "desc": "Smoked scallops for a starter or seafood platter."
+    },
+    "gerookte-mosselen": {
+      "naam": "Smoked mussels",
+      "desc": "Smoked mussels for bread or a seafood platter."
+    },
+    "krabvlees": {
+      "naam": "Crab meat",
+      "desc": "Crab meat for a salad, pasta or starter."
+    },
+    "gerookte-garnalen": {
+      "naam": "Smoked shrimp",
+      "desc": "Smoked shrimp for toast or pasta."
+    },
+    "kokkelvlees": {
+      "naam": "Cockle meat",
+      "desc": "Shelled cockles for pasta, rice dishes or fish soup."
+    },
+    "noorse-kreeftstaart": {
+      "naam": "Langoustine tails",
+      "desc": "Langoustine tails for pan-frying or a seafood dish."
+    },
+    "kreeftensalade": {
+      "naam": "Lobster salad",
+      "desc": "A lobster salad for toast or a starter. Ask about ingredients."
+    },
+    "zeekraalsalade": {
+      "naam": "Samphire salad",
+      "desc": "A sea-vegetable salad to serve alongside fish."
+    },
+    "vissticks": {
+      "naam": "Fish fingers",
+      "desc": "Breaded fish strips for the oven or pan."
+    },
+    "sushi-mix": {
+      "naam": "Sushi selection",
+      "desc": "A mixed sushi selection. Ask about ingredients and availability."
+    },
+    "kabeljauwtongen": {
+      "naam": "Cod tongues",
+      "desc": "Small cuts from the cod’s lower jaw, traditionally fried."
+    },
+    "gamba-kroketten": {
+      "naam": "Prawn croquettes",
+      "desc": "Croquettes with a prawn filling for lunch or a snack."
+    },
+    "visbitterballen": {
+      "naam": "Fish bitterballen",
+      "desc": "Small fried croquettes with a fish filling."
+    }
   }
 }

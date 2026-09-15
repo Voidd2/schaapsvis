@@ -30,7 +30,8 @@ export function LanguageSwitcher({ licht = false }: { licht?: boolean }) {
       {TALEN.map(({ code, label, naam }, i) => {
         const segmenten = [...paden];
         segmenten[1] = code;
-        const href = segmenten.join("/") || `/${code}`;
+        const editorial = ["blog", "recepten", "viskalender", "too-good-to-go"].includes(paden[2]);
+        const href = editorial && code !== "nl" ? `/${code}` : segmenten.join("/") || `/${code}`;
         const actief = huidige === code;
 
         return (

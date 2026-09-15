@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { blogPostsGesorteerd } from "@/lib/blog";
-import { JsonLd } from "@/components/JsonLd";
 import { Sectie, Kop } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { eenTaalMetadata } from "@/lib/seo";
@@ -26,7 +25,6 @@ export default async function BlogPage({
 
   return (
     <>
-      <JsonLd />
 
       <PaginaKop
         kruimels={[{ naam: BEDRIJF.naamKort, href: `/${locale}` }, { naam: "Blog" }]}

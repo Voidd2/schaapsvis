@@ -33,7 +33,7 @@ export const BEZORGING = {
   gratisVanaf: 35,
 
   /** Bezorgdagen. 0 = zondag … 6 = zaterdag. */
-  bezorgdagen: [3, 4, 5, 6] as const, // woensdag t/m zaterdag
+  bezorgdagen: [4] as const, // uitsluitend donderdag
 
   /** Uiterste besteltijd voor bezorging de volgende bezorgdag. */
   uitersteBesteltijd: "12:00",
@@ -48,7 +48,10 @@ export const BEZORGING = {
 export const BEZORGDAG_NAMEN = ["zondag", "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag"];
 
 /** "woensdag t/m zaterdag" of "woensdag, vrijdag en zaterdag" — leesbaar gezet. */
-export function bezorgdagenTekst(): string {
+export function bezorgdagenTekst(locale = "nl"): string {
+  if (BEZORGING.bezorgdagen.length === 1) {
+    return locale === "de" ? "donnerstags" : locale === "en" ? "Thursdays" : "iedere donderdag";
+  }
   const dagen = [...BEZORGING.bezorgdagen].sort((a, b) => a - b);
   const aaneengesloten = dagen.every((d, i) => i === 0 || d === dagen[i - 1] + 1);
   if (aaneengesloten && dagen.length > 2) {
@@ -216,7 +219,9 @@ export type PostcodeResultaat =
  * Accepteert "2313AL", "2313 al" en "2313" — alleen de vier cijfers tellen.
  */
 export function checkPostcode(invoer: string): PostcodeResultaat {
-  const cijfers = invoer.replace(/\s/g, "").slice(0, 4);
+  const compact = invoer.replace(/\s/g, "").toUpperCase();
+  if (!/^\d{4}([A-Z]{2})?$/.test(compact)) return { status: "ongeldig" };
+  const cijfers = compact.slice(0, 4);
   if (!/^\d{4}$/.test(cijfers)) return { status: "ongeldig" };
 
   const nummer = Number(cijfers);
@@ -235,7 +240,14 @@ export function checkPostcode(invoer: string): PostcodeResultaat {
    laten bezorgen, zet de categorie dan hieronder erbij.
    ═══════════════════════════════════════════════════════════════════════════ */
 
-export const BEZORGBARE_CATEGORIEEN = ["verse-vis"] as const;
+export const BEZORGBARE_CATEGORIEEN = ["verse-vis", "vissalades"] as const;
+
+/** Herring is for direct consumption; platters are a separate online group. */
+export function isProductBezorgbaar(product: { slug: string; categorie: string }): boolean {
+  if (["visschaal", "feestschotel"].includes(product.slug)) return true;
+  if (product.slug === "haring") return false;
+  return isBezorgbaar(product.categorie);
+}
 
 export function isBezorgbaar(categorie: string): boolean {
   return (BEZORGBARE_CATEGORIEEN as readonly string[]).includes(categorie);

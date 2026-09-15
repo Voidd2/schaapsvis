@@ -24,6 +24,7 @@ export async function POST(request: NextRequest) {
   let body: { naam?: string; email?: string; bericht?: string };
   try {
     body = await request.json();
+    if (!body || typeof body !== "object" || Array.isArray(body)) throw new Error("Invalid body");
   } catch {
     return NextResponse.json({ fout: "Onleesbare aanvraag" }, { status: 400 });
   }
@@ -31,6 +32,7 @@ export async function POST(request: NextRequest) {
   const naam = tekst(body.naam, 120);
   const email = tekst(body.email, 160);
   const bericht = tekst(body.bericht, 4000);
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return NextResponse.json({fout:"Invalid email"},{status:400});
 
   if (!naam || !bericht) {
     return NextResponse.json(
@@ -39,7 +41,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const webhook = process.env.BESTELLING_WEBHOOK_URL;
+  const webhook = process.env.CONTACT_WEBHOOK_URL || process.env.BESTELLING_WEBHOOK_URL;
   if (!webhook) {
     return NextResponse.json(
       {
@@ -53,6 +55,7 @@ export async function POST(request: NextRequest) {
     const antwoord = await fetch(webhook, {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
+      signal: AbortSignal.timeout(10000),
       body: JSON.stringify({
         type: "BERICHT VIA DE SITE",
         naam,
