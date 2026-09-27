@@ -23,6 +23,12 @@ export function Footer() {
   const p = (pad: string) => `/${locale}${pad}`;
 
   const jaar = new Date().getFullYear();
+  const cityGuideUrl = process.env.CITYGUIDE_URL?.replace(/\/$/, "");
+  const cityGuideCopy = {
+    nl: "Ontdek Schaap's Vis in de wandelroute langs de Leidse markt",
+    en: "Find Schaap's Vis on the Leiden market walking route",
+    de: "Schaap's Vis auf der Leidener Marktroute entdecken",
+  }[locale] ?? "Ontdek Schaap's Vis in de wandelroute langs de Leidse markt";
 
   /**
    * Drie groepjes in plaats van één rij van zestien links.
@@ -106,6 +112,14 @@ export function Footer() {
               Instagram
             </a>
           </div>
+          {cityGuideUrl && (
+            <a
+              href={`${cityGuideUrl}/${locale}/leiden/schaapsvishandel`}
+              className="mt-4 inline-block text-sm underline underline-offset-4 hover:text-white transition-colors"
+            >
+              {cityGuideCopy}
+            </a>
+          )}
         </div>
 
         {/* ── Wanneer we er zijn ────────────────────────────────────────── */}

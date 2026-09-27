@@ -156,6 +156,19 @@ Het nieuwsbriefformulier gebruikt nog het losse Formspree-adres in
 
 ## 4. Het wachtwoord, en live gaan
 
+### Teruglink naar YourLocalCityGuide
+
+Zet pas na keuze van het definitieve cityguide-domein deze servervariabele in
+Vercel (zonder slash aan het einde):
+
+```
+CITYGUIDE_URL=https://www.jouw-definitieve-cityguide-domein.nl
+```
+
+Daarna verschijnt in de footer van alle drie de talen een inhoudelijke link
+naar de Schaap's Vis-pagina in de Leidse wandelgids. Laat de variabele leeg bij
+preview-deploys en zolang alleen een tijdelijk Vercel-domein beschikbaar is.
+
 ### De site zit nu op slot
 
 **Elke pagina vraagt om een wachtwoord.** Dat geldt voor de homepage, het
