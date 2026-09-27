@@ -94,7 +94,7 @@ function ProductCard({ product }: { product: (typeof products)[number] }) {
       className="flex flex-col"
       style={{
         backgroundColor: "#fff",
-        border: product.highlight ? "1px solid var(--seafoam)" : "1px solid var(--linen)",
+        borderTop: product.highlight ? "2px solid var(--seafoam)" : "1px solid var(--linen)",
       }}
     >
       <Link href={detail} aria-label={`${product.naam} — meer info en voedingswaarde`}>
@@ -134,17 +134,11 @@ function ProductCard({ product }: { product: (typeof products)[number] }) {
         </p>
 
         <Link
-          href={`/${locale}/bestellen?product=${product.slug}`}
-          className="knop knop-navy mt-3 !py-2.5 !text-[0.85rem]"
-        >
-          Aan bestelling toevoegen
-        </Link>
-        <Link
           href={detail}
-          className="mt-2.5 text-[0.82rem] font-semibold underline underline-offset-4 text-center"
+          className="mt-4 text-[0.82rem] font-semibold underline underline-offset-4"
           style={{ color: "var(--navy)" }}
         >
-          Voedingswaarde &amp; info &rarr;
+          Bekijk product &amp; beschikbaarheid &rarr;
         </Link>
       </div>
     </article>
@@ -330,7 +324,7 @@ export function AssortimentFilter() {
               </button>
             </p>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-10">
               {sorted.map((product) => (
                 <ProductCard key={product.slug} product={product} />
               ))}

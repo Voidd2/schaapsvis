@@ -22,28 +22,28 @@
 
 :root {
   /* ── Blauw: de bannerkleur uit het logo ─────────────────────────────────── */
-  --navy: #2f3e8f;
-  --navy-dark: #222d6b;
+  --navy: #075b82;
+  --navy-dark: #06435f;
   /* Lichtblauw uit de vis in het logo — voor rustige vlakken, niet voor tekst. */
-  --lichtblauw: #cfe8f7;
+  --lichtblauw: #cdeefa;
 
   /* ── Papier ─────────────────────────────────────────────────────────────── */
-  --cream: #fbf7ef; /* warm papierwit — de hoofdachtergrond */
-  --sand: #f0e6d6; /* zandvlak, lichter gezet dan de logorand zodat tekst leesbaar blijft */
-  --sand-diep: #d8c3a1; /* het zand uit de logorand zelf — lijnen en accenten */
-  --linen: #e0d3bd; /* lijnen en randen */
+  --cream: #ffffff; /* heldere basis voor het lichtblauw-witte logo */
+  --sand: #effaff; /* lichtblauw vlak voor rustige afwisseling */
+  --sand-diep: #b8e5f5;
+  --linen: #d4eaf3;
 
   /* ── Accenten ───────────────────────────────────────────────────────────── */
-  --rood: #c62828; /* het rood uit de dubbele lijn — alléén voor knoppen */
-  --rood-dark: #a11f1f;
-  --salmon: #c62828; /* oude naam, zelfde kleur — nog in gebruik op enkele plekken */
-  --gold: #8a6a2f; /* messing — keurmerken, kapitaaltjes */
-  --seafoam: #2c5a4c; /* diep zeegroen — duurzaamheid, "open" */
+  --rood: #0b93ca; /* bestaande actienaam, nu helder merkblauw */
+  --rood-dark: #0875a3;
+  --salmon: #0b93ca;
+  --gold: #177da6; /* bestaande accentnaam, nu merkblauw */
+  --seafoam: #08715f; /* uitsluitend voor positieve duurzaamheidsstatus */
 
   /* ── Tekst ──────────────────────────────────────────────────────────────── */
-  --charcoal: #3f4142; /* antraciet — lopende tekst */
-  --ink: #23262b; /* bijna zwart — koppen op papier */
-  --grijs: #6e7073; /* bijschriften */
+  --charcoal: #28414e;
+  --ink: #063c57;
+  --grijs: #58717d;
 
   /* ── Typografie ─────────────────────────────────────────────────────────── */
   /* --font-display en --font-source worden door next/font gezet op <html>.
@@ -56,7 +56,7 @@
 
   /* ── Maatvoering ────────────────────────────────────────────────────────── */
   --lijn: 1px solid var(--linen);
-  --lijn-donker: 1px solid rgba(250, 246, 239, 0.22);
+  --lijn-donker: 1px solid rgba(255, 255, 255, 0.25);
 
   /* Hoogte van de plakkende kop: informatiebalk (2rem) plus de balk met de
      naam en de navigatie (4.4rem). Een tweede plakkende balk eronder — de
@@ -214,6 +214,7 @@
     font-weight: 600;
     letter-spacing: 0.01em;
     padding: 0.85rem 1.6rem;
+    border-radius: 0.35rem;
     border: 1px solid transparent;
     transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
     cursor: pointer;
@@ -236,7 +237,7 @@
   }
 
   .knop-lijn {
-    background-color: transparent;
+    background-color: #fff;
     border-color: var(--navy);
     color: var(--navy);
   }
@@ -247,8 +248,8 @@
 
   .knop-lijn-licht {
     background-color: transparent;
-    border-color: rgba(250, 246, 239, 0.45);
-    color: var(--cream);
+    border-color: rgba(255, 255, 255, 0.55);
+    color: #fff;
   }
   .knop-lijn-licht:hover {
     background-color: rgba(250, 246, 239, 0.12);
