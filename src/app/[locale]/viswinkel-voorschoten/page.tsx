@@ -8,13 +8,14 @@ import { PaginaSlot } from "@/components/ui/PaginaKop";
 import { eenTaalMetadata, kruimelSchema, vraagSchema } from "@/lib/seo";
 import { BEDRIJF, VERKOOPPUNTEN } from "@/lib/bedrijf";
 import { bestelContact } from "@/lib/bestel-contact";
+import { blogPosts } from "@/lib/blog";
 
 export async function generateMetadata(): Promise<Metadata> {
   return eenTaalMetadata({
     taal: "nl", pad: "/viswinkel-voorschoten",
-    title: "Viswinkel Voorschoten: vrijdag bij Hoogvliet | Schaap’s",
+    title: "Visboer Voorschoten: vrijdag bij Hoogvliet | Schaap’s",
     image: "/images/editorial/kibbeling.webp",
-    description: "Viswinkel in Voorschoten gezocht? Onze viskraam staat vrijdag 08:00–17:30 bij Hoogvliet. Verse vis, kibbeling, haring en zalm. Kom langs voor het avondeten.",
+    description: "Visboer in Voorschoten gezocht? Schaap’s staat vrijdag 08:00–17:30 bij Hoogvliet. Verse vis, kibbeling en zalm voor het avondeten. Bekijk de route en tips.",
   });
 }
 
@@ -53,7 +54,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     <JsonLd />
     <Schema data={[localSchema, vraagSchema(FAQ), kruimelSchema("nl", [{ naam: BEDRIJF.naamKort, pad: "/" }, { naam: "Viswinkel Voorschoten", pad: "/viswinkel-voorschoten" }])]} />
     <header className="fresh-hero"><div className="section-wrap fresh-hero-grid">
-      <div><p className="kapitaal">Elke vrijdag · bij Hoogvliet</p><h1>Viswinkel in Voorschoten gezocht?</h1><p className="fresh-intro">Kom naar onze viskraam bij Hoogvliet. Van 08:00 tot 17:30 staan we voor u klaar met verse vis, kibbeling, haring en onze VÅRLAKS-zalm — ook nog op tijd voor het avondeten.</p><div className="flex flex-wrap gap-3 mt-7"><a className="knop knop-rood" href={kraam.mapsUrl} target="_blank" rel="noopener noreferrer">Route naar de viskraam</a><a className="knop knop-lijn" href={contact.href}>Vraag via WhatsApp</a></div></div>
+      <div><p className="kapitaal">Elke vrijdag · bij Hoogvliet</p><h1>Uw visboer in Voorschoten</h1><p className="fresh-intro">Kom naar onze viskraam bij Hoogvliet. Van 08:00 tot 17:30 staan we voor u klaar met verse vis, kibbeling, haring en onze VÅRLAKS-zalm — ook nog op tijd voor het avondeten.</p><div className="flex flex-wrap gap-3 mt-7"><a className="knop knop-rood" href={kraam.mapsUrl} target="_blank" rel="noopener noreferrer">Route naar de viskraam</a><a className="knop knop-lijn" href={contact.href}>Vraag via WhatsApp</a></div></div>
       <Image src="/images/editorial/kibbeling.webp" alt="Krokante kibbeling met saus, een favoriet bij de viskraam" width={1400} height={933} sizes="(max-width: 800px) 100vw, 50vw" fetchPriority="high" className="rounded-2xl" />
     </div></header>
     <Sectie grond="papier"><div className="grid md:grid-cols-[1.2fr_0.8fr] gap-10 items-start">
@@ -61,6 +62,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       <aside className="rounded-2xl p-7" style={{ background: "var(--lichtblauw)" }}><h2 className="text-xl mb-4">Waar en wanneer?</h2><dl className="space-y-4"><div><dt className="kapitaal">Locatie</dt><dd>Parkeerplaats Hoogvliet, Voorschoten</dd></div><div><dt className="kapitaal">Open</dt><dd>Elke vrijdag 08:00–17:30</dd></div><div><dt className="kapitaal">Een vraag?</dt><dd><a className="underline" href={`tel:${BEDRIJF.telefoon.e164}`}>{BEDRIJF.telefoon.weergave}</a></dd></div></dl><a className="knop knop-lijn mt-6" href={kraam.mapsUrl} target="_blank" rel="noopener noreferrer">Bekijk de route →</a></aside>
     </div></Sectie>
     <Sectie grond="zand"><h2 className="text-3xl mb-7">Wat haalt u bij onze viskraam?</h2><div className="grid md:grid-cols-3 gap-6">{aanbod.map(p => <article key={p.slug} className="recipe-card"><Image src={p.src} alt={p.alt} width={1200} height={800} sizes="(max-width: 768px) 100vw, 33vw" className="w-full aspect-[3/2] object-cover" /><div className="recipe-card-body"><h3 className="text-xl mb-3">{p.title}</h3><p className="leading-relaxed mb-5">{p.text}</p><Link className="underline font-semibold" href={`/${locale}/assortiment/${p.slug}`}>Bekijk de vis →</Link></div></article>)}</div><p className="mt-7 max-w-3xl">Het aanbod wisselt met de vangst en levering. Bekijk het <Link className="underline" href={`/${locale}/assortiment`}>assortiment</Link>, onze <Link className="underline" href="/nl/viskalender">viskalender</Link> of de <Link className="underline" href="/nl/recepten">visrecepten</Link> voor inspiratie.</p></Sectie>
+    <Sectie grond="papier"><p className="kapitaal mb-3">Voor uw vrijdag in Voorschoten</p><h2 className="text-3xl mb-6">Van vis uitzoeken naar iets lekkers op tafel</h2><p className="max-w-3xl mb-7 leading-relaxed">Praktische tips voor een snelle maaltijd, vis uit de oven of een borrel met gasten. Zo kunt u gericht boodschappen doen en uw wensen met ons bespreken.</p><div className="grid md:grid-cols-3 gap-6">{blogPosts.filter(p => p.regio === "Voorschoten").map(post => <article key={post.slug} className="recipe-card"><Image src={post.fotoUrl} alt={post.fotoAlt} width={1200} height={800} sizes="(max-width: 768px) 100vw, 33vw" className="w-full aspect-[3/2] object-cover" /><div className="recipe-card-body"><h3 className="text-xl mb-3"><Link className="hover:underline" href={`/nl/blog/${post.slug}`}>{post.title}</Link></h3><p className="leading-relaxed mb-4">{post.excerpt}</p><Link className="underline font-semibold" href={`/nl/blog/${post.slug}`}>Lees de tips →</Link></div></article>)}</div></Sectie>
     <Sectie grond="papier" smal><h2 className="text-3xl mb-6">Vragen over vis kopen in Voorschoten</h2><Vragen vragen={FAQ} /></Sectie>
     <PaginaSlot titel="Vrijdag nog vis halen voor het avondeten?" tekst="Kom langs bij Hoogvliet tussen 08:00 en 17:30. Zoekt u iets speciaals? Stuur ons een WhatsApp-bericht, dan kijken we wat mogelijk is. Alleen visschalen bestelt u online." knoppen={[{ label: "Vraag via WhatsApp", href: contact.href, extern: true }, { label: "Bekijk de visschalen", href: `/${locale}/visschalen`, soort: "lijn" }]} />
   </>;

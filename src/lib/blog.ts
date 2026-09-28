@@ -1,4 +1,5 @@
 import { NIEUWE_ARTIKELEN, BIJGEWERKTE_ARTIKELEN } from "./blog-editorial";
+import { VOORSCHOTEN_ARTIKELEN } from "./blog-voorschoten";
 import { bestelContact } from "./bestel-contact";
 
 export type BlogCategorie = "Seizoen" | "Ons verhaal" | "Visweetjes" | "Duurzaam";
@@ -23,6 +24,8 @@ export type BlogPost = {
   gerelateerdeRecepten?: string[]; // recept-slugs
   gerelateerdeLinks?: { label: string; href: string }[];
   seoKeywords: string;
+  regio?: "Voorschoten";
+  vragen?: { v: string; a: string }[];
 };
 
 const bestaandePosts: BlogPost[] = [
@@ -692,7 +695,7 @@ const blogBeelden: Record<string, { src: string; alt: string }> = {
   "verse-vis-bewaren-en-bereiden-tips": { src: "/images/producten-hd/kabeljauwfilet.webp", alt: "Verse kabeljauwfilet om gekoeld te bewaren en te bereiden" },
   "echt-gerookte-vis-vs-kunstmatige-rooksmaak": { src: "/images/recepten/gerookte-zalm-rolletjes-roomkaas.webp", alt: "Gerookte zalmrolletjes met roomkaas" },
 };
-export const blogPosts: BlogPost[] = [...NIEUWE_ARTIKELEN, ...bestaandePosts.map(post => {
+export const blogPosts: BlogPost[] = [...VOORSCHOTEN_ARTIKELEN, ...NIEUWE_ARTIKELEN, ...bestaandePosts.map(post => {
   const wijziging = BIJGEWERKTE_ARTIKELEN[post.slug];
   const beeld = blogBeelden[post.slug] ?? { src: post.fotoUrl, alt: post.fotoAlt };
   return { ...post, ...wijziging, fotoUrl: beeld.src, fotoAlt: beeld.alt, secties: (wijziging?.secties ?? post.secties).map(s => ({ ...s, alineas: s.alineas.map(a => a.replaceAll("maandag t/m zaterdag", "dinsdag t/m zaterdag")) })), ...(wijziging ? { bijgewerkt: "2026-09-28", datumLabel: "Bijgewerkt 28 september 2026" } : {}) };

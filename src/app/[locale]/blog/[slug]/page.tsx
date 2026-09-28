@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { kruimelSchema } from "@/lib/seo";
+import { kruimelSchema, vraagSchema } from "@/lib/seo";
 import Link from "next/link";
 import { bestelContact } from "@/lib/bestel-contact";
 import { permanentRedirect } from "next/navigation";
@@ -8,9 +8,9 @@ import { blogPosts, getBlogPost } from "@/lib/blog";
 import { recepten } from "@/lib/recepten";
 import { NewsletterSignup } from "@/components/shared/NewsletterSignup";
 import { Schema } from "@/components/Schema";
-import { Sectie } from "@/components/ui/Sectie";
+import { Sectie, Vragen } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
-import { BEDRIJF } from "@/lib/bedrijf";
+import { BEDRIJF, VERKOOPPUNTEN } from "@/lib/bedrijf";
 
 export async function generateStaticParams() {
   return blogPosts.map((p) => ({ slug: p.slug }));
@@ -26,7 +26,7 @@ export async function generateMetadata({
   if (!post) return {};
 
   return {
-    title: post.title.length > 55 ? post.title : `${post.title} | Schaap's`,
+    title: post.regio || post.title.length > 55 ? post.title : `${post.title} | Schaap's`,
     description: post.excerpt.slice(0, 160),
     keywords: post.seoKeywords,
     // Deze artikelen bestaan alleen in het Nederlands; alle taalversies
@@ -51,6 +51,7 @@ export default async function BlogDetailPage({
   const { slug, locale } = await params;
   const post = getBlogPost(slug);
   if (!post) permanentRedirect(`/${locale}/blog`);
+  const kraam = post.regio === "Voorschoten" ? VERKOOPPUNTEN.find(p => p.id === "voorschoten") : undefined;
 
   const gerelateerdeRecepten = (post.gerelateerdeRecepten ?? [])
     .map((s) => recepten.find((r) => r.slug === s))
@@ -76,6 +77,7 @@ export default async function BlogDetailPage({
   return (
     <>
       <Schema data={articleSchema} />
+      {post.vragen?.length ? <Schema data={vraagSchema(post.vragen)} /> : null}
       <Schema data={kruimelSchema("nl", [{ naam: BEDRIJF.naamKort, pad: "/" }, { naam: "Blog", pad: "/blog" }, { naam: post.title, pad: `/blog/${slug}` }])} />
 
       <PaginaKop
@@ -91,6 +93,8 @@ export default async function BlogDetailPage({
 
       {/* ── Het stuk zelf ────────────────────────────────────────────────── */}
       <Sectie grond="papier" smal>
+        <p className="mb-5 text-sm" style={{ color: "var(--charcoal)" }}>Van <Link className="underline" href="/nl/ons-verhaal">Schaap’s Vishandel</Link> · viswinkel sinds 1938</p>
+        {kraam && <aside className="rounded-xl p-5 mb-8 border border-sky-100" style={{ background: "var(--lichtblauw)" }}><p className="font-semibold mb-2">Vrijdag bij Hoogvliet in Voorschoten · 08:00–17:30</p><p>Dit artikel helpt u kiezen. <Link className="underline font-semibold" href="/nl/viswinkel-voorschoten">Bekijk de locatie en route van onze visboer in Voorschoten →</Link></p></aside>}
         <Image src={post.fotoUrl} alt={post.fotoAlt} width={1400} height={933} sizes="(max-width: 800px) 100vw, 800px" className="article-photo mb-10" />
         <nav aria-label="In dit artikel" className="recipe-checklist mb-10"><p className="kapitaal mb-3">In dit artikel</p><ul className="space-y-2">{post.secties.map((s,i) => s.kop && <li key={i}><a className="underline underline-offset-4" href={`#onderdeel-${i}`}>{s.kop}</a></li>)}</ul></nav>
         <div className="lees">
@@ -105,6 +109,8 @@ export default async function BlogDetailPage({
             </div>
           ))}
         </div>
+
+        {post.vragen?.length ? <section className="mt-12"><h2 className="text-2xl mb-5">Veelgestelde vragen</h2><Vragen vragen={post.vragen} /></section> : null}
 
         {heeftVerderLezen && (
           <div className="mt-12 pt-6" style={{ borderTop: "2px solid var(--navy)" }}>
@@ -169,10 +175,11 @@ export default async function BlogDetailPage({
       </Sectie>
 
       <PaginaSlot
-        titel="Vandaag nog verse vis in huis?"
+        titel={kraam ? "Vrijdag vis halen in Voorschoten?" : "Vandaag nog verse vis in huis?"}
         tekst="Alleen visschalen bestelt u online. Voor andere producten kunt u ons via WhatsApp vragen naar beschikbaarheid en mogelijkheden."
         knoppen={[
           { label: bestelContact(locale).label, href: bestelContact(locale).href, extern: true },
+          ...(kraam ? [{ label: "Route naar Hoogvliet Voorschoten", href: kraam.mapsUrl, extern: true, soort: "lijn" as const }] : []),
           { label: "Visschaal samenstellen", href: `/${locale}/visschalen`, soort: "lijn" },
           { label: "Openingstijden en route", href: `/${locale}/bezoek-ons`, soort: "lijn" },
         ]}
