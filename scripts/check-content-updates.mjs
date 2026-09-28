@@ -36,6 +36,10 @@ for (const locale of ['nl', 'en', 'de']) {
   assert(bio.main.includes('VÅRLAKS'), `${locale}: salmon story missing`);
 }
 const blog = await page('/nl/blog');
+const gravlaks = await page('/nl/recepten/gravlaks');
+assert(gravlaks.main.includes('gravlaks regelmatig kant-en-klaar in de winkel'), 'Gravlaks: regular shop availability');
+assert(!/vraag expliciet|Bespreek vooraf|vraag vooraf naar geschikte|Begin alleen met vis/.test(gravlaks.main), 'Gravlaks: suitability questions removed');
+assert(gravlaks.main.includes('4°C') && gravlaks.main.includes('verminderde weerstand'), 'Gravlaks: cold storage and vulnerable-group advice preserved');
 const marketBlog = await page('/nl/blog/marktdag-in-leiden-achter-de-kraam');
 assert((marketBlog.main.match(/Open Google Maps/g) || []).length === 2, 'Market blog: two Google Maps buttons');
 assert(marketBlog.main.includes('Dille+%26+Kamille+Botermarkt+10+Leiden'), 'Market blog: correct Wednesday Maps link');

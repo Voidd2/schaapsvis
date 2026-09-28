@@ -171,7 +171,7 @@ const receptenOrigineel: Recept[] = [
     tags: ["Bijzonder"],
     fotoLabel: "Gepekelde zalm met verse dille en roze peperbessen",
     vanSchaap: [
-      "600 g Varlaks zalmfilet met vel — vraag expliciet naar geschiktheid voor rauwe bereiding en pekelen",
+      "600 g VÅRLAKS-zalmfilet met vel van Schaap’s Vishandel",
     ],
     vanSupermarkt: [
       "75 g grof zeezout",
@@ -186,7 +186,7 @@ const receptenOrigineel: Recept[] = [
       "Roggebrood om te serveren",
     ],
     bereidingswijze: [
-      "Bespreek vooraf met de viswinkel of de zalm geschikt is om ongegaard te eten en welke behandeling nodig is. Controleer op graten en dep de filet droog.",
+      "Controleer de VÅRLAKS-zalmfilet op graten en dep de filet droog. Werk met schoon keukengerei en houd de zalm gekoeld.",
       "Meng zout, suiker, peper, citroenrasp en de helft van de fijngehakte dille.",
       "Leg de zalm met het vel naar beneden in een schaal op vershoudfolie. Verdeel het pekelmengsel over het visvlees en verpak goed.",
       "Zet afgedekt 48 uur in de koelkast bij 4°C met een licht gewicht erop. Keer het pakket elke 12 uur en houd het gekoeld.",
@@ -194,12 +194,12 @@ const receptenOrigineel: Recept[] = [
       "Klop mosterd, honing, azijn en olie tot een saus en roer de resterende dille erdoor.",
       "Serveer kleine porties met de mosterd-dillesaus, roggebrood en citroen.",
     ],
-    verhaal: "Gravlaks is gepekelde zalm, geen gekookte zalm. Het zout verandert de structuur, maar maakt rauwe vis niet automatisch veilig. Begin alleen met vis die hiervoor geschikt is en houd hem tijdens de bereiding goed gekoeld.",
+    verhaal: "Met onze VÅRLAKS-zalm maakt u zachte gravlaks met dille en een frisse mosterd-dillesaus. Liever meteen genieten? We hebben gravlaks regelmatig kant-en-klaar in de winkel. Stuur ons gerust een WhatsApp-bericht voor de actuele beschikbaarheid.",
     highlight: "Weekend project",
     seoKeywords: "gravlaks recept, gepekelde zalm, zelf gravlax maken",
     porties: 6,
     keuken: "Scandinavisch",
-    veiligheid: "Dit gerecht bevat ongegaarde vis. Alleen versheid is geen garantie voor veilig rauw eten; vraag vooraf naar geschikte vis en benodigde behandeling. Zwangeren, jonge kinderen, ouderen en mensen met verminderde weerstand kiezen beter een door en door verhit visgerecht.",
+    veiligheid: "Gravlaks is gepekelde, ongegaarde zalm. Werk met schoon keukengerei en houd de vis tijdens de bereiding bij 4°C gekoeld. Zwangeren, jonge kinderen, ouderen en mensen met verminderde weerstand kiezen beter een door en door verhit visgerecht.",
   },
   {
     slug: "romige-vissoep",
