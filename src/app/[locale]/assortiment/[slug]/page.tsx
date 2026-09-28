@@ -19,6 +19,7 @@ import { BEDRIJF } from "@/lib/bedrijf";
 import { recepten } from "@/lib/recepten";
 import { bestelContact } from "@/lib/bestel-contact";
 import { productPhoto } from "@/lib/product-beeld";
+import { ProductPhotoCredit } from "@/components/ProductPhotoCredit";
 
 const BESCHIKBAAR_LABEL: Record<string, string> = {
   dagelijks: "Dagelijks vers",
@@ -234,6 +235,7 @@ export default async function ProductDetailPage({
               )}
             </div>}
 
+            <ProductPhotoCredit photo={photo} />
             {opAanvraag && (
               <p
                 className="mt-6 pl-5"

@@ -1,10 +1,27 @@
 import type { Product } from "./assortiment-data";
 
-// Serving inspiration, matched to the actual product rather than another species.
-const PRODUCT_BEELDEN: Record<string, { src: string; alt: string }> = {
+export type ProductPhoto = {
+  src: string;
+  alt: string;
+  editorial: boolean;
+  whole: boolean;
+  credit?: { author: string; source: string; license: string; licenseUrl: string };
+};
+
+// Product-matched photos, with attribution wherever an external license requires it.
+const PRODUCT_BEELDEN: Record<string, Pick<ProductPhoto, "src" | "alt" | "credit">> = {
   "krabsalade": { src: "/images/editorial/krabsalade.webp", alt: "Romige krabsalade met lenteui — serveerinspiratie" },
   "noorse-garnalen": { src: "/images/editorial/noorse-garnalen.webp", alt: "Gepelde Noorse garnalen met citroen — serveerinspiratie" },
-  "schol": { src: "/images/editorial/schol-v2.webp", alt: "Hele schol met kenmerkende oranje stippen" },
+  "schol": {
+    src: "/images/producten-hd/schol-hans-hillewaert.jpg",
+    alt: "Echte Noordzeeschol (Pleuronectes platessa), gefotografeerd door Hans Hillewaert",
+    credit: {
+      author: "Hans Hillewaert",
+      source: "https://commons.wikimedia.org/wiki/File:Pleuronectes_platessa.jpg",
+      license: "CC BY-SA 4.0",
+      licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+    },
+  },
   "zeebaars": { src: "/images/editorial/zeebaars.webp", alt: "Hele zeebaars op een witte schaal" },
   "zalmsalade": { src: "/images/editorial/zalmsalade.webp", alt: "Romige zalmsalade met dille — serveerinspiratie" },
   "tonijnsalade": { src: "/images/editorial/tonijnsalade.webp", alt: "Tonijnsalade met ui en augurk — serveerinspiratie" },
@@ -21,7 +38,7 @@ const PRODUCT_BEELDEN: Record<string, { src: string; alt: string }> = {
 };
 
 /** One source for catalogue cards, details and metadata. */
-export function productPhoto(product: Product) {
+export function productPhoto(product: Product): ProductPhoto | null {
   const beeld = PRODUCT_BEELDEN[product.slug];
   if (beeld) return { ...beeld, editorial: true, whole: ["schol", "zeebaars"].includes(product.slug) };
   if (["varlaks-zalm", "zalmfilet"].includes(product.slug)) {
