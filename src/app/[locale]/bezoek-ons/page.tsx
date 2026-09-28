@@ -6,7 +6,7 @@ import { Schema } from "@/components/Schema";
 import { Sectie } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { paginaMetadata, kruimelSchema } from "@/lib/seo";
-import { BEDRIJF, ADRES_REGEL } from "@/lib/bedrijf";
+import { BEDRIJF, ADRES_REGEL, VERKOOPPUNTEN } from "@/lib/bedrijf";
 
 import { BEELD } from "@/lib/beeld";
 import { Beeld } from "@/components/ui/Beeld";
@@ -63,13 +63,13 @@ const PLEKKEN = [
     id: "zaterdag",
     dagen: [["za", "08:30 – 17:00"]],
     telefoon: false,
-    maps: "https://maps.google.com/?q=Aalmarkt+Leiden",
+    maps: VERKOOPPUNTEN.find(punt => punt.id === "markt")!.mapsUrl,
   },
   {
     id: "woensdag",
     dagen: [["wo", "08:30 – 17:00"]],
     telefoon: false,
-    maps: "https://maps.google.com/?q=Dille+en+Camille+Leiden+Haarlemmerstraat",
+    maps: VERKOOPPUNTEN.find(punt => punt.id === "markt-woensdag")!.mapsUrl,
   },
   {
     id: "voorschoten",

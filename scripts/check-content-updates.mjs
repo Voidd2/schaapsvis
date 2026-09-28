@@ -16,6 +16,10 @@ function photos(html) {
   });
 }
 for (const locale of ['nl', 'en', 'de']) {
+  const locations = await page(`/${locale}/bezoek-ons`);
+  assert(locations.main.includes('De+Waag+Aalmarkt+Leiden'), `${locale}: Saturday location should link to De Waag`);
+  assert(locations.main.includes('Dille+%26+Kamille+Botermarkt+10+Leiden'), `${locale}: Wednesday location should use shared Maps link`);
+  assert(!locations.main.includes('Haarlemmerstraat'), `${locale}: stale Maps destination on locations page`);
   const home = await page(`/${locale}`);
   const freshFishCard = [...home.main.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)]
     .find(([, , content]) => /<h3\b/.test(content) && content.includes('/images/producten-hd/kabeljauw.webp'));
