@@ -62,7 +62,7 @@ export const BEELD = {
   toonbank: {
     waar: "Homepage en Contact",
     wat: "De toonbank met vis erop, van dichtbij. Dit is de belangrijkste foto van de hele site: hier ziet iemand wat hij koopt.",
-    bestand: "/images/producten/kabeljauw.png",
+    bestand: "/images/producten-hd/kabeljauw.webp",
     alt: "Verse kabeljauw uit het assortiment",
     verhouding: "liggend",
     terugval: "De toonbank",

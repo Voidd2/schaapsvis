@@ -296,7 +296,7 @@ export default async function HomePage({
                         al op wit, dus zo lijkt de vis op de pagina te liggen. */}
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={`/images/producten/${slug}.png`}
+                      src={p.photo}
                       alt={`${p.naam} bij Schaap's Vishandel in Leiden`}
                       loading="lazy"
                       className="w-full aspect-[3/2] object-contain transition-transform duration-300 group-hover:scale-[1.04]"

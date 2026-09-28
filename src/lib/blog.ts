@@ -678,9 +678,9 @@ const bestaandePosts: BlogPost[] = [
 ];
 
 const blogBeelden: Record<string, { src: string; alt: string }> = {
-  "hollandse-nieuwe-waarom-juni-haring-anders-smaakt": { src: "/images/producten/haring.png", alt: "Haring" },
+  "hollandse-nieuwe-waarom-juni-haring-anders-smaakt": { src: "/images/producten-hd/haring.webp", alt: "Haring" },
   "kibbeling-vs-lekkerbek-het-verschil": { src: "/images/editorial/kibbeling.webp", alt: "Krokante kibbeling met saus" },
-  "de-echte-hollandse-garnaal": { src: "/images/producten/hollandse-garnalen.png", alt: "Hollandse garnalen" },
+  "de-echte-hollandse-garnaal": { src: "/images/producten-hd/hollandse-garnalen.webp", alt: "Hollandse garnalen" },
 };
 export const blogPosts: BlogPost[] = [...NIEUWE_ARTIKELEN, ...bestaandePosts.map(post => {
   const wijziging = BIJGEWERKTE_ARTIKELEN[post.slug];
