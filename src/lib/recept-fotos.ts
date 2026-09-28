@@ -23,7 +23,7 @@ export const RECEPT_FOTOS: Record<string, string> = {
   "poke-bowl-verse-zalm": "/images/recepten/poke-bowl-verse-zalm.webp",
   "pasta-verse-tonijn-tomaat": "/images/recepten/pasta-verse-tonijn-tomaat.webp",
   "broodje-haring-uitjes": "/images/recepten/broodje-haring-uitjes.webp",
-  "kibbeling-knoflooksaus-salade": "/images/recepten/kibbeling-knoflooksaus-salade.webp",
+  "kibbeling-ravigotesaus-salade": "/images/recepten/kibbeling-knoflooksaus-salade.webp",
   "lekkerbek-koolsalade": "/images/recepten/lekkerbek-koolsalade.webp",
   "vissoep-rouille-croutons": "/images/recepten/vissoep-rouille-croutons.webp",
   "toast-gerookte-paling": "/images/recepten/toast-gerookte-paling-v2.webp",

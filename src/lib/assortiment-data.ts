@@ -578,7 +578,7 @@ export const products: Product[] = [
     desc: "Knapperig gebakken stukjes witvis in een luchtig, goudbruin beslag — dé Hollandse klassieker. Wij maken kibbeling van kabeljauw (rijkere smaak) óf pollak (MSC, mild). Vraag naar de vis van de dag.",
     categorie: "bereid",
     bestelId: "kibbeling-pollak",
-    ingredienten: "Witvis (kabeljauw Gadus morhua of pollak Theragra chalcogramma) [VIS], TARWEBLOEM, water, zout, rijsmiddel (E450, E500), plantaardige olie. Bereid in frituurvet. Knoflooksaus: mayonaise (EIEREN, MOSTERD).",
+    ingredienten: "Witvis (kabeljauw Gadus morhua of pollak Theragra chalcogramma) [VIS], TARWEBLOEM, water, zout, rijsmiddel (E450, E500), plantaardige olie. Bereid in frituurvet. Ravigotesaus apart verkrijgbaar; vraag naar de actuele ingrediënten en allergenen van de saus.",
     bevat: ["VIS", "GLUTEN (tarwe)", "EIEREN", "MOSTERD"],
     beschikbaar: "dagelijks",
   },

@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
   // remotePatterns meer (geen hotlinks naar concurrenten of stockfoto's).
   async redirects() {
     return [
+      ...["nl", "en", "de"].map((locale) => ({
+        source: `/${locale}/recepten/kibbeling-knoflooksaus-salade`,
+        destination: `/${locale}/recepten/kibbeling-ravigotesaus-salade`,
+        permanent: true,
+      })),
       // Vervallen haringgerechten verwijzen naar het klassieke broodje haring.
       ...["nl", "en", "de"].flatMap((locale) =>
         ["haring-salade", "krieltjessalade-haring", "hollandse-bowl"].map((slug) => ({
