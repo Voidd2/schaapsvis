@@ -8,6 +8,14 @@ const nextConfig: NextConfig = {
   // remotePatterns meer (geen hotlinks naar concurrenten of stockfoto's).
   async redirects() {
     return [
+      // Vervallen haringgerechten verwijzen naar het klassieke broodje haring.
+      ...["nl", "en", "de"].flatMap((locale) =>
+        ["haring-salade", "krieltjessalade-haring", "hollandse-bowl"].map((slug) => ({
+          source: `/${locale}/recepten/${slug}`,
+          destination: `/${locale}/recepten/broodje-haring-uitjes`,
+          permanent: true,
+        })),
+      ),
       // Algemene bezorgpagina's zijn vervallen: alleen visschalen zijn online te bestellen.
       ...["nl", "en", "de"].map((locale) => ({
         source: `/${locale}/bezorgen/:pad*`,

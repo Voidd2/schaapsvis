@@ -38,7 +38,7 @@ export default async function ReceptenPage({
         kruimels={[{ naam: BEDRIJF.naamKort, href: `/${locale}` }, { naam: "Recepten" }]}
         label="Koken met verse vis"
         titel="Goed eten begint bij goede vis."
-        intro="39 visrecepten voor doordeweeks, een lange lunch of een bijzonder diner. Kies uw vis, vind een gerecht en neem een handig boodschappenlijstje mee."
+        intro={`${recepten.length} visrecepten voor doordeweeks, een lange lunch of een bijzonder diner. Kies uw vis, vind een gerecht en neem een handig boodschappenlijstje mee.`}
         knoppen={[
           { label: bestelContact(locale).label, href: bestelContact(locale).href, extern: true },
           { label: "De viskalender", href: `/${locale}/viskalender`, soort: "lijn" },

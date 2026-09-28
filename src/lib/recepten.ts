@@ -187,32 +187,6 @@ const receptenOrigineel: Recept[] = [
     seoKeywords: "gravlaks recept, gepekelde zalm, zelf gravlax maken",
   },
   {
-    slug: "haring-salade",
-    hoofdproduct: "haring",
-    title: "Haring met appel en rode ui",
-    subtitle: "Fris, snel en klassiek Hollands",
-    tijd: "15 min",
-    moeilijkheid: "Makkelijk",
-    tags: ["Snel", "Makkelijk", "Zomers"],
-    fotoLabel: "Haring op roggebrood met rode ui en citroen",
-    vanSchaap: ["4 verse haringen, gefileerd — haal ze op de dag zelf"],
-    vanSupermarkt: [
-      "1 zoetzure appel (Elstar)",
-      "1 kleine rode ui",
-      "2 el crème fraîche + 1 tl grove mosterd",
-      "Verse bieslook, citroensap",
-    ],
-    bereidingswijze: [
-      "Haring in stukjes. Appel schillen en in blokjes. Ui fijn snipperen.",
-      "Crème fraîche + mosterd + citroensap + zout mengen.",
-      "Alles voorzichtig samenvoegen.",
-      "10 min koelen. Serveren op roggebrood.",
-    ],
-    verhaal:
-      "Verse haring is het paradepaardje van de Hollandse vishandel. Hoe verser, hoe beter — haal hem op de dag zelf bij Schaap's Vis.",
-    seoKeywords: "haring recept, verse haring met appel, haring salade",
-  },
-  {
     slug: "romige-vissoep",
     hoofdproduct: "kabeljauwfilet",
     title: "Romige vissoep",
@@ -271,35 +245,6 @@ const receptenOrigineel: Recept[] = [
   // === Recepten met dank aan visrecepten.nl ===
 
   {
-    slug: "krieltjessalade-haring",
-    hoofdproduct: "haring",
-    title: "Krieltjessalade met haring",
-    subtitle: "Klassiek Hollands — aardappel, haring, kappertjes",
-    tijd: "30 min",
-    moeilijkheid: "Makkelijk",
-    tags: ["Snel", "Zomers"],
-    fotoLabel: "Krieltjessalade met kruiden en vis op een schaal",
-    vanSchaap: ["4 verse haringen, gefileerd — haal ze zo vers mogelijk"],
-    vanSupermarkt: [
-      "1 kg krieltjes met schil",
-      "2 el kappertjes + 2 el kapperpekel",
-      "4 el mayonaise",
-      "3 el bieslook + 3 el peterselie (fijngesneden)",
-      "150 g gemengde sla",
-      "Peper en zout",
-    ],
-    bereidingswijze: [
-      "Kook de krieltjes in ruim gezouten water in ±20 minuten gaar. Giet af en laat iets uitstomen.",
-      "Meng de kappertjes, kapperpekel, mayonaise, bieslook en peterselie door de nog warme krieltjes. Breng op smaak.",
-      "Verdeel de sla over een platte schaal. Schep de krieltjes erop.",
-      "Verdeel de haringsstukken erover. Bestrooi met extra bieslook. Direct serveren.",
-    ],
-    verhaal:
-      "Dit is zo'n gerecht dat je in de zomer gewoon wil eten — buiten, in de zon, met een glas fris erbij. Verse haring van Schaap's Vis maakt hier echt het verschil. Vraag of we ze alvast fileren, dat scheelt u thuis werk.",
-    seoKeywords:
-      "krieltjessalade recept, aardappelsalade met haring, hollandse salade haring",
-  },
-  {
     slug: "kabeljauw-zeekraal-venkel",
     hoofdproduct: "kabeljauwhaas",
     title: "Kabeljauw met zeekraal en venkel",
@@ -328,38 +273,6 @@ const receptenOrigineel: Recept[] = [
       "Zeekraal halen ze hier soms ook rechtstreeks uit de Zeeuwse delta. Zout van zichzelf, knapperig — het past perfect bij de milde, vlokkerige structuur van kabeljauwlende. Vraag om de lende: dat is het dikste, vetste stuk van de vis.",
     seoKeywords:
       "kabeljauw zeekraal recept, kabeljauw venkel, kabeljauwlende bereiden",
-  },
-  {
-    slug: "hollandse-bowl",
-    hoofdproduct: "haring",
-    title: "Hollandse Bowl",
-    subtitle: "Verse haring in een moderne poke bowl — met wortel en biet",
-    tijd: "25 min",
-    moeilijkheid: "Makkelijk",
-    tags: ["Zomers", "Gezond", "Snel"],
-    fotoLabel: "Kleurrijke poke bowl met vis, edamame en sesam",
-    vanSchaap: ["4 verse haringen, in stukken"],
-    vanSupermarkt: [
-      "2 tl geroosterde sesamzaadjes",
-      "1 rode biet",
-      "1 bosuitje",
-      "30 g ramen noedels",
-      "2 el sojasaus",
-      "8 radijsjes",
-      "1 vel sushi nori (zeewier), in reepjes geknipt",
-      "175 g edamame sojabonen",
-      "1 wortel",
-    ],
-    bereidingswijze: [
-      "Bereid de ramen noedels volgens de verpakking. Doe ze in een kom en besprenkel met sojasaus. Laat iets afkoelen.",
-      "Snijd de wortel, radijsjes en bosuitje dun. Snijd de rode biet in dunne plakjes. Houd de haring apart in de koelkast tot serveren.",
-      "Verdeel de noedels over 4 kommen. Schik alle ingrediënten erop. Bestrooi met sesam.",
-      "Serveer met extra sojasaus en eventueel ingelegde gember en wasabi.",
-    ],
-    verhaal:
-      "De Hawaiiaanse poke bowl — maar dan Hollands. Verse haring i.p.v. zalm, wortel en biet als onze eigen accenten. Haring is eigenlijk perfect voor een bowl: vet, krachtig van smaak en supersnel klaar.",
-    highlight: "Hollandse draai",
-    seoKeywords: "hollandse bowl recept, haring poke bowl, haring bowl",
   },
   {
     slug: "garnalensalade-pompoen",
