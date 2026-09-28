@@ -16,6 +16,10 @@ function photos(html) {
   });
 }
 for (const locale of ['nl', 'en', 'de']) {
+  const assortment = await page(`/${locale}/assortiment`);
+  assert(!assortment.main.includes(`/assortiment/koolvis`), `${locale}: removed koolvis product still listed`);
+  const removedProduct = await fetch(`${origin}/${locale}/assortiment/koolvis`, {redirect: 'manual'});
+  assert(removedProduct.status === 308 && new URL(removedProduct.headers.get('location'), origin).pathname === `/${locale}/assortiment`, `${locale}: removed koolvis URL should redirect to assortment`);
   const locations = await page(`/${locale}/bezoek-ons`);
   assert(locations.main.includes('De+Waag+Aalmarkt+Leiden'), `${locale}: Saturday location should link to De Waag`);
   assert(locations.main.includes('Dille+%26+Kamille+Botermarkt+10+Leiden'), `${locale}: Wednesday location should use shared Maps link`);
@@ -36,6 +40,8 @@ for (const locale of ['nl', 'en', 'de']) {
   assert(bio.main.includes('VÅRLAKS'), `${locale}: salmon story missing`);
 }
 const blog = await page('/nl/blog');
+const sitemap = await page('/sitemap.xml');
+assert(!sitemap.html.includes('/assortiment/koolvis'), 'Removed koolvis product in sitemap');
 const gravlaks = await page('/nl/recepten/gravlaks');
 assert(gravlaks.main.includes('gravlaks regelmatig kant-en-klaar in de winkel'), 'Gravlaks: regular shop availability');
 assert(!/vraag expliciet|Bespreek vooraf|vraag vooraf naar geschikte|Begin alleen met vis/.test(gravlaks.main), 'Gravlaks: suitability questions removed');

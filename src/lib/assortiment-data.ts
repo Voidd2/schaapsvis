@@ -635,16 +635,6 @@ export const products: Product[] = [
 
   // ─── UITBREIDING — extra soorten & varianten ───────────────────────────────
   {
-    slug: "koolvis",
-    naam: "Koolvis (Pollak)",
-    desc: "Koolvis (Pollachius virens), familie van de kabeljauw, met steviger en iets grijzer vlees dat wit opkookt. Een duurzame, betaalbare witvis — MSC-gecertificeerd.",
-    categorie: "verse-vis",
-    badge: "MSC",
-    ingredienten: "Koolvis (Pollachius virens) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
     slug: "leng",
     naam: "Leng",
     desc: "Leng (Molva molva), een langgerekte zeevis met stevig, mild wit vlees. Uitstekend om te bakken of te stoven en een mooi alternatief voor kabeljauw.",
@@ -1340,7 +1330,7 @@ const VOEDING_MAP: Record<string, keyof typeof VOEDING_PROFIELEN> = {
   zeebaars: "witvis", zeebaarsfilet: "witvis", dorade: "witvis", "dorade-filet": "witvis",
   heek: "witvis", heekfilet: "witvis", schelvis: "witvis", schelvisfilet: "witvis",
   wijting: "witvis", wijtingfilet: "witvis", "rode-poon": "witvis", "grauwe-poon": "witvis",
-  roodbaars: "witvis", koolvis: "witvis", leng: "witvis", zeeduivelfilet: "witvis", zeewolf: "witvis",
+  roodbaars: "witvis", leng: "witvis", zeeduivelfilet: "witvis", zeewolf: "witvis",
   haring: "haring", "broodje-haring": "haring",
   "varlaks-zalm": "zalm", zalmfilet: "zalm", zalmmoot: "zalm", zalmforel: "forel",
   tonijnfilet: "tonijn", zwaardvis: "tonijn",
@@ -1405,7 +1395,6 @@ const VISWIJZER_MAP: Record<string, string> = {
   scholfilet: "MSC-gecertificeerd — een groene keuze op de VISwijzer.",
   heek: "MSC-gecertificeerd — verantwoord gevangen.",
   heekfilet: "MSC-gecertificeerd — verantwoord gevangen.",
-  koolvis: "MSC-gecertificeerd — een duurzame, groene keuze.",
   "hollandse-garnalen": "MSC-gecertificeerd sinds 2017 — verantwoord gevangen aan de Waddenkust.",
   "varlaks-zalm": "Vraag naar de actuele herkomst en productcertificering. BIO en ASC zijn verschillende aanduidingen.",
   zalmfilet: "Vraag naar de herkomst en het keurmerk van de actuele levering.",

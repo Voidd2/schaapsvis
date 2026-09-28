@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       ...["nl", "en", "de"].map((locale) => ({
+        source: `/${locale}/assortiment/koolvis`,
+        destination: `/${locale}/assortiment`,
+        permanent: true,
+      })),
+      ...["nl", "en", "de"].map((locale) => ({
         source: `/${locale}/recepten/kibbeling-knoflooksaus-salade`,
         destination: `/${locale}/recepten/kibbeling-ravigotesaus-salade`,
         permanent: true,
