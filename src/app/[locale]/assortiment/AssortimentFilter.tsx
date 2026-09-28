@@ -83,7 +83,7 @@ export function AssortimentFilter() {
         return <article key={p.slug} className="collection-item">
           <div className="collection-item-main">
             <div><p className="collection-category">{c.categories[categories.indexOf(p.categorie)]}</p><h3><Link href={`/${locale}/assortiment/${p.slug}`}>{p.naam}</Link></h3>{locale === "nl" && <p className="collection-description">{p.desc}</p>}</div>
-            {photo && <Link href={`/${locale}/assortiment/${p.slug}`} tabIndex={-1} aria-hidden="true" className="collection-thumb"><Image src={photo.src} alt="" width={600} height={450} sizes="(max-width: 600px) calc(100vw - 40px), 210px" className={photo.editorial ? "editorial" : ""} /></Link>}
+            {photo && <Link href={`/${locale}/assortiment/${p.slug}`} tabIndex={-1} aria-hidden="true" className="collection-thumb"><Image src={photo.src} alt="" width={600} height={450} sizes="(max-width: 600px) calc(100vw - 40px), 210px" className={`${photo.editorial ? "editorial" : ""} ${photo.whole ? "whole-product" : ""}`} /></Link>}
           </div>
           <div className="collection-item-actions">
             <Link href={`/${locale}/assortiment/${p.slug}`}>{c.detail}<ArrowUpRight size={14} aria-hidden="true" /></Link>

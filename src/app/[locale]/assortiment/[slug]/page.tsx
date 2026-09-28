@@ -229,7 +229,7 @@ export default async function ProductDetailPage({
                   alt={photo.alt}
                   width={900}
                   height={900}
-                  className={`w-full h-full ${photo.editorial ? "object-cover" : "object-contain p-6"}`}
+                  className={`w-full h-full ${photo.editorial ? (photo.whole ? "object-contain" : "object-cover") : "object-contain p-6"}`}
                 />
               )}
             </div>}
