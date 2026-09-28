@@ -32,6 +32,12 @@ for (const locale of ['nl', 'en', 'de']) {
   assert(bio.main.includes('VÅRLAKS'), `${locale}: salmon story missing`);
 }
 const blog = await page('/nl/blog');
+const marketBlog = await page('/nl/blog/marktdag-in-leiden-achter-de-kraam');
+assert((marketBlog.main.match(/Open Google Maps/g) || []).length === 2, 'Market blog: two Google Maps buttons');
+assert(marketBlog.main.includes('Dille+%26+Kamille+Botermarkt+10+Leiden'), 'Market blog: correct Wednesday Maps link');
+assert(marketBlog.main.includes('De+Waag+Aalmarkt+Leiden'), 'Market blog: Saturday Maps link');
+assert(marketBlog.main.includes('woensdag 08:30–17:00') && marketBlog.main.includes('zaterdag 08:30–17:00'), 'Market blog: both opening hours');
+assert(!marketBlog.main.includes('Haarlemmerstraat'), 'Market blog: incorrect Wednesday location removed');
 const blogPhotos = photos(blog.main);
 assert(blogPhotos.length >= 15, 'Blog photo coverage');
 assert(new Set(blogPhotos).size === blogPhotos.length, 'Repeated blog thumbnail');

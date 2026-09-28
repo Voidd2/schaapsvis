@@ -109,15 +109,15 @@ export const VERKOOPPUNTEN: Verkooppunt[] = [
     adres: "Aalmarkt, bij de Waag",
     plaats: "Leiden",
     dagen: "zaterdag 08:30–17:00",
-    mapsUrl: "https://maps.google.com/?q=Aalmarkt+Leiden",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=De+Waag+Aalmarkt+Leiden",
   },
   {
     id: "markt-woensdag",
     naam: "Woensdagmarkt",
-    adres: "Bij Dille & Camille",
+    adres: "Botermarkt, bij Dille & Kamille",
     plaats: "Leiden",
     dagen: "woensdag 08:30–17:00",
-    mapsUrl: "https://maps.google.com/?q=Dille+en+Camille+Leiden+Haarlemmerstraat",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Dille+%26+Kamille+Botermarkt+10+Leiden",
   },
   {
     id: "voorschoten",

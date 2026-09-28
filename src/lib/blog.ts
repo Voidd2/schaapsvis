@@ -1,6 +1,7 @@
 import { NIEUWE_ARTIKELEN, BIJGEWERKTE_ARTIKELEN } from "./blog-editorial";
 import { VOORSCHOTEN_ARTIKELEN } from "./blog-voorschoten";
 import { bestelContact } from "./bestel-contact";
+import type { VerkooppuntId } from "./bedrijf";
 
 export type BlogCategorie = "Seizoen" | "Ons verhaal" | "Visweetjes" | "Duurzaam";
 
@@ -25,6 +26,7 @@ export type BlogPost = {
   gerelateerdeLinks?: { label: string; href: string }[];
   seoKeywords: string;
   regio?: "Voorschoten";
+  verkooppunten?: VerkooppuntId[];
   vragen?: { v: string; a: string }[];
 };
 
@@ -350,6 +352,8 @@ const bestaandePosts: BlogPost[] = [
   },
   {
     slug: "marktdag-in-leiden-achter-de-kraam",
+    verkooppunten: ["markt-woensdag", "markt"],
+    bijgewerkt: "2026-09-28",
     title: "Marktdag in Leiden: een kijkje achter de kraam",
     excerpt:
       "Elke woensdag en zaterdag staan we op de Leidse markt. Wat komt daar eigenlijk bij kijken? Een dag mee achter de vistoonbank — van 5 uur 's ochtends tot de laatste haring.",

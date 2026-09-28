@@ -52,6 +52,10 @@ export default async function BlogDetailPage({
   const post = getBlogPost(slug);
   if (!post) permanentRedirect(`/${locale}/blog`);
   const kraam = post.regio === "Voorschoten" ? VERKOOPPUNTEN.find(p => p.id === "voorschoten") : undefined;
+  const markten = (post.verkooppunten ?? []).flatMap(id => {
+    const punt = VERKOOPPUNTEN.find(p => p.id === id);
+    return punt ? [punt] : [];
+  });
 
   const gerelateerdeRecepten = (post.gerelateerdeRecepten ?? [])
     .map((s) => recepten.find((r) => r.slug === s))
@@ -96,6 +100,26 @@ export default async function BlogDetailPage({
         <p className="mb-5 text-sm" style={{ color: "var(--charcoal)" }}>Van <Link className="underline" href="/nl/ons-verhaal">Schaap’s Vishandel</Link> · viswinkel sinds 1938</p>
         {kraam && <aside className="rounded-xl p-5 mb-8 border border-sky-100" style={{ background: "var(--lichtblauw)" }}><p className="font-semibold mb-2">Vrijdag bij Hoogvliet in Voorschoten · 08:00–17:30</p><p>Dit artikel helpt u kiezen. <Link className="underline font-semibold" href="/nl/viswinkel-voorschoten">Bekijk de locatie en route van onze visboer in Voorschoten →</Link></p></aside>}
         <Image src={post.fotoUrl} alt={post.fotoAlt} width={1400} height={933} sizes="(max-width: 800px) 100vw, 800px" className="article-photo mb-10" />
+        {markten.length > 0 && (
+          <section aria-labelledby="marktlocaties" className="mb-10">
+            <p className="kapitaal mb-3">Zo vindt u onze kraam</p>
+            <h2 id="marktlocaties" className="text-2xl mb-3 scroll-mt-32">Onze marktkraam in Leiden op Google Maps</h2>
+            <p className="mb-6 leading-relaxed">Op woensdag en zaterdag staan we op verschillende plekken. Open de juiste locatie in Google Maps en plan uw route naar het herkenningspunt bij onze kraam.</p>
+            <div className="grid sm:grid-cols-2 gap-5">
+              {markten.map(punt => (
+                <article key={punt.id} className="overflow-hidden rounded-2xl border border-sky-100" style={{ background: "var(--lichtblauw)" }}>
+                  <div className="p-5">
+                    <h3 className="text-xl mb-2">{punt.naam}</h3>
+                    <p className="mb-2">{punt.adres}, {punt.plaats}</p>
+                    <p className="font-semibold mb-4">{punt.dagen}</p>
+                    <a href={punt.mapsUrl} target="_blank" rel="noopener noreferrer" className="knop knop-navy">Open Google Maps ↗</a>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <Link href={`/${locale}/marktkraam-leiden`} className="inline-block mt-5 underline underline-offset-4">Meer over onze marktkraam en openingstijden →</Link>
+          </section>
+        )}
         <nav aria-label="In dit artikel" className="recipe-checklist mb-10"><p className="kapitaal mb-3">In dit artikel</p><ul className="space-y-2">{post.secties.map((s,i) => s.kop && <li key={i}><a className="underline underline-offset-4" href={`#onderdeel-${i}`}>{s.kop}</a></li>)}</ul></nav>
         <div className="lees">
           {post.secties.map((sectie, i) => (
