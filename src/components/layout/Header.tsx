@@ -120,8 +120,8 @@ export function Header() {
               <LanguageSwitcher />
             </div>
 
-            <Link href={p("/bestellen")} className="knop knop-rood hidden sm:inline-flex !py-2.5 !px-5 !text-[0.9rem]">
-              {t("bestellen")}
+            <Link href={p("/visschalen")} className="knop knop-rood hidden sm:inline-flex !py-2.5 !px-5 !text-[0.9rem]">
+              {t("visschalen")}
             </Link>
 
             <a
@@ -153,11 +153,11 @@ export function Header() {
           >
             <nav className="max-w-6xl mx-auto px-4 py-2">
               <Link
-                href={p("/bestellen")}
+                href={p("/visschalen")}
                 onClick={() => setOpen(false)}
                 className="knop knop-rood w-full my-3 sm:hidden"
               >
-                {t("bestellen")}
+                {t("visschalen")}
               </Link>
 
               {links.map(({ href, label }) => (

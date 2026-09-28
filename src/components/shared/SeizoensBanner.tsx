@@ -15,10 +15,10 @@ export function SeizoensBanner({ locale }: { locale: string }) {
   let extra = "";
   if (m === 11) {
     extra = "De feestdagen komen eraan — reserveer op tijd uw feestschotel.";
-    cta = { label: "Feestschotel reserveren", href: `/${locale}/bestellen?product=feestschotel` };
+    cta = { label: "Visschaal samenstellen", href: `/${locale}/visschalen` };
   } else if (m >= 4 && m <= 7) {
     extra = "Het is Hollandse Nieuwe-seizoen — vers van de kraam.";
-    cta = { label: "Haring bestellen", href: `/${locale}/bestellen?product=haring` };
+    cta = { label: "Vraag naar onze haring", href: `/${locale}/contact` };
   } else if (m === 8 || m === 9 || m === 10) {
     extra = "Mosselseizoen — de Zeeuwse mossel is nu op zijn best.";
   }

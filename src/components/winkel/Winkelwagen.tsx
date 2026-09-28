@@ -15,7 +15,6 @@ import {
 import {
   bewaarMandje,
   bewaarSamenstelling,
-  leesMandje,
   leesSamenstelling,
   maakRegel,
   type MandjeRegel,
@@ -68,7 +67,7 @@ export function WinkelwagenProvider({ children }: { children: ReactNode }) {
   // De opslag bestaat op de server niet, dus dit kan pas na de eerste render.
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setRegels(leesMandje());
+    setRegels([]);
     setSamenstelling(leesSamenstelling());
     geladen.current = true;
   }, []);

@@ -78,6 +78,10 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ fout: "Onleesbare aanvraag" }, { status: 400 });
   }
 
+  if (!body || body.soort !== "visschaal") {
+    return NextResponse.json({ fout: "Alleen visschalen kunt u online bestellen. Neem voor andere producten contact met ons op." }, { status: 400 });
+  }
+
   const naam = tekst(body.klant?.naam, 120);
   const telefoon = tekst(body.klant?.telefoon, 40);
   const email = tekst(body.klant?.email, 160);

@@ -143,7 +143,7 @@ export default async function ProductDetailPage({
             availability: opAanvraag
               ? "https://schema.org/PreOrder"
               : "https://schema.org/InStock",
-            url: `https://www.schaapsvishandel.nl/${locale}/bestellen?product=${slug}`,
+            url: `https://www.schaapsvishandel.nl/${locale}/contact`,
             seller: { "@type": "Organization", name: "Schaap's Vishandel" },
           },
         }
@@ -205,13 +205,13 @@ export default async function ProductDetailPage({
         intro={product.desc}
         knoppen={[
           {
-            label: isSchaal ? "Offerte aanvragen" : "Vooruit bestellen",
+            label: isSchaal ? "Visschaal samenstellen" : "Vraag naar dit product",
             href: isSchaal
               ? `/${locale}/visschalen#samenstellen`
-              : `/${locale}/bestellen?product=${slug}`,
+              : `/${locale}/contact`,
           },
           {
-            label: "Bestel via WhatsApp",
+            label: "Vraag naar beschikbaarheid",
             href: waUrl(product.naam),
             extern: true,
             soort: "lijn",
@@ -423,14 +423,14 @@ export default async function ProductDetailPage({
       </Sectie>
 
       <PaginaSlot
-        titel={`${product.naam} vooruit bestellen?`}
-        tekst="Dan ligt het klaar wanneer u langskomt. Verse vis en visschalen bezorgen we in Leiden, Leiderdorp, Voorschoten, Wassenaar en Leidschendam."
+        titel={`Op zoek naar ${product.naam.toLowerCase()}?`}
+        tekst="Neem contact met ons op voor uw bestelling. Dan kijken we samen wat mogelijk is. Alleen visschalen kunt u online bestellen."
         knoppen={[
           {
-            label: isSchaal ? "Visschaal samenstellen" : "Vooruit bestellen",
+            label: isSchaal ? "Visschaal samenstellen" : "Neem contact op",
             href: isSchaal
               ? `/${locale}/visschalen`
-              : `/${locale}/bestellen?product=${slug}`,
+              : `/${locale}/contact`,
           },
           { label: "Openingstijden en route", href: `/${locale}/bezoek-ons`, soort: "lijn" },
           {

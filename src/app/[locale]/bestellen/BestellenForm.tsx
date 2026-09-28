@@ -1,15 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import { products, CATEGORIE_LABELS, type Categorie } from "@/lib/assortiment-data";
-import { searchScore } from "@/lib/search";
 import {
   BEZORGING,
   checkPostcode,
-  isBezorgbaar,
   bezorgdagenTekst,
   type PostcodeResultaat,
 } from "@/lib/bezorging";
@@ -41,15 +37,6 @@ type Soort = "verse-vis" | "visschaal";
 type Wijze = "bezorgen" | "afhalen";
 type Status = "invullen" | "versturen" | "gelukt" | "mislukt";
 
-const POPULAIR = [
-  "kabeljauwfilet",
-  "zalmfilet",
-  "hollandse-garnalen",
-  "zeetong",
-  "dorade",
-  "heilbotfilet",
-];
-
 const AFHAALPUNTEN = [
   "Winkel Herenstraat 48, Leiden",
   "Markt Leiden (woensdag of zaterdag)",
@@ -57,15 +44,6 @@ const AFHAALPUNTEN = [
 ];
 
 /** Snijwijzes zijn alleen zinvol bij verse vis die nog heel is. */
-function snijOpties(naam: string, categorie: Categorie): string[] | null {
-  if (categorie !== "verse-vis") return null;
-  if (/filet|haas|moot|snippers|tong(en)?\b|wangen/i.test(naam)) {
-    return ["Zoals aangeboden", "In stukken gesneden", "Anders — zie opmerking"];
-  }
-  return ["Heel, schoongemaakt", "Gefileerd", "In moten", "Anders — zie opmerking"];
-}
-
-/** De eerstvolgende bezorgdagen, als lijst om uit te kiezen. */
 function bezorgdagen(aantal = 8): { waarde: string; label: string }[] {
   const dagen: { waarde: string; label: string }[] = [];
   const nu = new Date();
@@ -92,7 +70,6 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
   const t = useTranslations("bestel");
   const g = useTranslations("gedeeld");
   const locale = useLocale();
-  const zoekParams = useSearchParams();
   const schaalTekst = useSchaalTekst();
   const w = useTranslations("winkelwagen");
 
@@ -100,12 +77,9 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
   // de knop rechtsboven, het paneel en dit formulier moeten hetzelfde weten.
   const wagen = useWinkelwagen();
   const regels = wagen.regels;
-  const setRegels = wagen.zetRegels;
   const schaal = wagen.samenstelling;
 
-  const [soort, setSoort] = useState<Soort>("verse-vis");
-  const [zoek, setZoek] = useState("");
-  const [bladeren, setBladeren] = useState(false);
+  const [soort] = useState<Soort>("visschaal");
 
   const [wijze, setWijze] = useState<Wijze>("bezorgen");
   const [postcode, setPostcode] = useState("");
@@ -130,15 +104,6 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
   // Eén keer bij het openen: kijken wat er in de adresbalk staat. Het mandje
   // zelf wordt door de winkelwagen bewaard en teruggelezen — dat hoeft hier dus
   // niet nog een keer.
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (zoekParams.get("type") === "visschaal") setSoort("visschaal");
-
-    const slug = zoekParams.get("product");
-    if (slug) wagen.voegToe(slug);
-    // Alleen bij het openen van de pagina.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   /* ── Afgeleide waarden ───────────────────────────────────────────────── */
   const postcodeUitkomst: PostcodeResultaat | null = useMemo(
@@ -160,22 +125,6 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
 
   const teBetalen = soort === "visschaal" ? schaalTotaal + bezorgkosten : null;
 
-  const suggesties = useMemo(() => {
-    if (zoek.trim().length < 1) return [];
-    return products
-      .map((p) => ({
-        p,
-        score: searchScore(
-          { naam: p.naam, desc: p.desc, categorie: CATEGORIE_LABELS[p.categorie] },
-          zoek
-        ),
-      }))
-      .filter((x) => x.score > 0)
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 8)
-      .map((x) => x.p);
-  }, [zoek]);
-
   const dagen = useMemo(() => bezorgdagen(), []);
   const bezorgdagenLabel = bezorgdagenTekst();
 
@@ -183,24 +132,6 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
   const bezorgenGeblokkeerd = wijze === "bezorgen" && nietBezorgbaar.length > 0;
 
   /* ── Bewerkingen op het mandje ───────────────────────────────────────── */
-  const voegToe = useCallback(
-    (slug: string) => {
-      wagen.voegToe(slug);
-      setZoek("");
-    },
-    [wagen]
-  );
-
-  function werkBij(slug: string, veld: "hoeveelheid" | "snijwijze", waarde: string) {
-    setRegels((vorige) =>
-      vorige.map((r) => (r.slug === slug ? { ...r, [veld]: waarde } : r))
-    );
-  }
-
-  function verwijder(slug: string) {
-    setRegels((vorige) => vorige.filter((r) => r.slug !== slug));
-  }
-
   /* ── Versturen ───────────────────────────────────────────────────────── */
   const kanVersturen =
     naam.trim() !== "" &&
@@ -312,14 +243,12 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
           <div className="flex gap-2 mb-6">
             {(
               [
-                ["verse-vis", t("soortVis")],
                 ["visschaal", t("soortSchaal")],
               ] as [Soort, string][]
             ).map(([waarde, label]) => (
               <button
                 key={waarde}
                 type="button"
-                onClick={() => setSoort(waarde)}
                 className="px-4 py-2 text-sm font-semibold transition-colors"
                 style={{
                   border: "1px solid var(--navy)",
@@ -332,175 +261,6 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
             ))}
           </div>
 
-          {soort === "verse-vis" ? (
-            <>
-              <label className="block mb-4">
-                <span className="veld-label">{t("zoekLabel")}</span>
-                <input
-                  type="search"
-                  value={zoek}
-                  onChange={(e) => setZoek(e.target.value)}
-                  placeholder={t("zoekPlaceholder")}
-                  className="veld"
-                  autoComplete="off"
-                />
-              </label>
-
-              {suggesties.length > 0 && (
-                <ul className="mb-6" style={{ border: "1px solid var(--linen)" }}>
-                  {suggesties.map((p) => (
-                    <li key={p.slug} style={{ borderBottom: "1px solid var(--linen)" }}>
-                      <button
-                        type="button"
-                        onClick={() => voegToe(p.slug)}
-                        className="w-full text-left px-4 py-3 hover:bg-[var(--sand)] transition-colors"
-                      >
-                        <span className="font-semibold" style={{ color: "var(--ink)" }}>
-                          {p.naam}
-                        </span>
-                        <span className="block text-sm" style={{ color: "var(--grijs)" }}>
-                          {CATEGORIE_LABELS[p.categorie]}
-                          {!isBezorgbaar(p.categorie) && ` · ${t("alleenAfhalen")}`}
-                        </span>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              )}
-
-              {zoek.trim() === "" && (
-                <div className="mb-6">
-                  <p className="kapitaal mb-2">{t("populair")}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {POPULAIR.map((slug) => {
-                      const p = products.find((x) => x.slug === slug);
-                      if (!p) return null;
-                      return (
-                        <button
-                          key={slug}
-                          type="button"
-                          onClick={() => voegToe(slug)}
-                          className="px-3 py-1.5 text-sm"
-                          style={{ border: "1px solid var(--linen)", color: "var(--navy)" }}
-                        >
-                          + {p.naam}
-                        </button>
-                      );
-                    })}
-                    <button
-                      type="button"
-                      onClick={() => setBladeren(!bladeren)}
-                      className="px-3 py-1.5 text-sm underline underline-offset-4"
-                      style={{ color: "var(--grijs)" }}
-                    >
-                      {t("allesBekijken")}
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {bladeren && (
-                <div
-                  className="mb-6 max-h-80 overflow-y-auto"
-                  style={{ border: "1px solid var(--linen)" }}
-                >
-                  {(Object.keys(CATEGORIE_LABELS) as Categorie[]).map((cat) => (
-                    <div key={cat}>
-                      <p
-                        className="kapitaal px-4 py-2 sticky top-0"
-                        style={{ backgroundColor: "var(--sand)" }}
-                      >
-                        {CATEGORIE_LABELS[cat]}
-                      </p>
-                      {products
-                        .filter((p) => p.categorie === cat)
-                        .map((p) => (
-                          <button
-                            key={p.slug}
-                            type="button"
-                            onClick={() => voegToe(p.slug)}
-                            className="block w-full text-left px-4 py-2 text-sm hover:bg-[var(--sand)]"
-                          >
-                            {p.naam}
-                          </button>
-                        ))}
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {regels.length === 0 ? (
-                <p className="py-6 text-sm" style={{ color: "var(--grijs)" }}>
-                  {t("leegMandje")}
-                </p>
-              ) : (
-                <ul>
-                  {regels.map((r) => {
-                    const opties = snijOpties(r.naam, r.categorie);
-                    return (
-                      <li
-                        key={r.slug}
-                        className="py-4"
-                        style={{ borderTop: "1px solid var(--linen)" }}
-                      >
-                        <div className="flex items-start justify-between gap-4 mb-3">
-                          <div>
-                            <p className="font-semibold" style={{ color: "var(--ink)" }}>
-                              {r.naam}
-                            </p>
-                            <p className="text-sm" style={{ color: "var(--grijs)" }}>
-                              {r.eenheid} · {g("dagprijs")}
-                              {!r.bezorgbaar && (
-                                <span style={{ color: "var(--gold)" }}> · {t("alleenAfhalen")}</span>
-                              )}
-                            </p>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => verwijder(r.slug)}
-                            className="text-sm underline underline-offset-4 shrink-0"
-                            style={{ color: "var(--grijs)" }}
-                          >
-                            {t("verwijderen")}
-                          </button>
-                        </div>
-
-                        <div className="grid sm:grid-cols-2 gap-3">
-                          <label>
-                            <span className="veld-label">{t("hoeveelheid")}</span>
-                            <input
-                              type="text"
-                              value={r.hoeveelheid}
-                              onChange={(e) => werkBij(r.slug, "hoeveelheid", e.target.value)}
-                              placeholder={t("hoeveelheidHint")}
-                              className="veld"
-                            />
-                          </label>
-                          {opties && (
-                            <label>
-                              <span className="veld-label">{t("snijwijze")}</span>
-                              <select
-                                value={r.snijwijze}
-                                onChange={(e) => werkBij(r.slug, "snijwijze", e.target.value)}
-                                className="veld"
-                              >
-                                <option value="">—</option>
-                                {opties.map((optie) => (
-                                  <option key={optie} value={optie}>
-                                    {optie}
-                                  </option>
-                                ))}
-                              </select>
-                            </label>
-                          )}
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              )}
-            </>
-          ) : (
             <div>
               <div
                 className="p-5 mb-4"
@@ -537,7 +297,6 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
                 {schaalRegels.length === 0 ? t("schaalKiezen") : t("schaalAanpassen")}
               </Link>
             </div>
-          )}
         </fieldset>
 
         {/* ── Bezorgen of afhalen ───────────────────────────────────────── */}

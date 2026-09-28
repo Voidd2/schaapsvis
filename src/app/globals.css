@@ -1,5 +1,54 @@
 @import "tailwindcss";
 
+/* Lichte, fotografische collectiepagina's. */
+.section-wrap { max-width: 1200px; margin-inline: auto; padding-inline: 24px; }
+.fresh-hero { background: #effaff; padding: 64px 0; }
+.fresh-hero-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 64px; }
+.fresh-hero h1 { font-family: var(--font-body); font-weight: 650; font-size: clamp(2.5rem,5vw,4.75rem); line-height: 1.05; letter-spacing: -.045em; white-space: pre-line; margin: 18px 0 24px; color: var(--navy-dark); }
+.fresh-intro { max-width: 480px; font-size: 1.15rem; line-height: 1.75; color: var(--charcoal); }
+.fresh-hero figure { position: relative; }
+.fresh-hero figure img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 28px 4px 28px 4px; }
+.fresh-hero figcaption { font-size: .7rem; color: var(--grijs); margin-top: 8px; text-align: right; }
+.catalog-notice { margin-block: 30px; color: var(--navy-dark); }
+.catalog-notice p { border-left: 3px solid #90d4ef; padding-left: 20px; line-height: 1.6; }
+.catalog { padding-block: 24px 80px; }
+.catalog-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+.catalog-tabs button { padding: 10px 17px; border-radius: 30px; background: #eff6f9; color: #06435f; border: 1px solid transparent; cursor: pointer; }
+.catalog-tabs button.active { background: var(--navy); color: white; }
+.catalog-tools { display: flex; gap: 16px; align-items: center; }
+.catalog-search { flex: 1; }
+.catalog-tools input,.catalog-tools select { border: 1px solid #c4dbe6; border-radius: 8px; padding: 13px 16px; background: white; width: 100%; min-height: 50px; }
+.catalog-count { color: var(--grijs); font-size: .9rem; margin: 24px 0 16px; }
+.catalog-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; align-items: stretch; }
+.catalog-card { border: 1px solid #dcebf1; border-radius: 14px; overflow: hidden; background: white; transition: border-color .2s,transform .2s; }
+.catalog-card:hover { border-color: #65bddd; transform: translateY(-3px); }
+.catalog-card:focus-visible,.catalog-tabs button:focus-visible { outline: 3px solid #0b93ca; outline-offset: 4px; }
+.catalog-photo { background: #f6fafc; aspect-ratio: 3/2; overflow: hidden; }
+.catalog-photo img { width: 100%; height: 100%; object-fit: contain; padding: 22px; mix-blend-mode: multiply; }
+.catalog-photo img.editorial { padding: 0; object-fit: cover; mix-blend-mode: normal; }
+.catalog-card-copy { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+.catalog-card { display: flex; flex-direction: column; }
+.catalog-card.compact { background: linear-gradient(160deg,#f1faff,white 70%); }
+.catalog-category { color: #38728b; font-size: .73rem; text-transform: uppercase; letter-spacing: .09em; margin-bottom: 10px; }
+.catalog-card h2 { font-family: var(--font-body); font-size: 1.5rem; font-weight: 650; letter-spacing: -.02em; color: var(--navy-dark); margin-bottom: 12px; }
+.catalog-description { color: var(--grijs); line-height: 1.6; font-size: .95rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.catalog-detail { display: flex; justify-content: space-between; color: var(--navy); font-weight: 600; margin-top: auto; padding-top: 22px; font-size: .9rem; }
+.fresh-contact { padding: 64px 0; background: #effaff; }
+.fresh-contact h2,.story-section h2 { font-family: var(--font-body); color: var(--navy-dark); font-size: clamp(1.8rem,3vw,2.8rem); letter-spacing: -.025em; font-weight: 650; margin-bottom: 20px; }
+.fresh-contact p { max-width: 640px; line-height: 1.75; }
+.story-section { padding-block: 80px; }
+.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.story-grid p { line-height: 1.8; color: var(--charcoal); margin-bottom: 18px; }
+.supplier-film { aspect-ratio: 16/9; background: var(--navy-dark); border-radius: 16px; overflow: hidden; }
+.supplier-film button { display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; flex-direction: column; gap: 18px; color: white; cursor: pointer; background: linear-gradient(135deg,#06435f,#1789ae); padding: 24px; }
+.supplier-film iframe { width: 100%; height: 100%; border: 0; }
+.cert-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+.cert-grid article { padding: 30px; border: 1px solid #cce6f1; border-radius: 16px; background: white; }
+.cert-grid h3 { font-size: 1.4rem; font-family: var(--font-body); color: var(--navy); margin-bottom: 14px; }
+.cert-grid p { line-height: 1.75; }
+@media(max-width:800px) { .fresh-hero-grid,.story-grid { grid-template-columns: 1fr; gap: 32px; } .fresh-hero { padding-block: 36px; } .catalog-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } .cert-grid { grid-template-columns: 1fr; } }
+@media(max-width:520px) { .section-wrap { padding-inline: 20px; } .catalog-grid { grid-template-columns: 1fr; gap: 18px; } .catalog-tools { flex-direction: column; align-items: stretch; } .catalog-photo { aspect-ratio: 2/1; } .story-section { padding-block: 48px; } }
+
 /* ═══════════════════════════════════════════════════════════════════════════
    Schaap's Vishandel — Leiden, sinds 1938
    ───────────────────────────────────────────────────────────────────────────

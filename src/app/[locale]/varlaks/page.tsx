@@ -63,7 +63,7 @@ export default async function VarlaksPage({
         titel={t("heroTitle")}
         intro={t("heroSub")}
         knoppen={[
-          { label: t("bestelKnop"), href: `/${locale}/bestellen?product=varlaks-zalm` },
+          { label: nav("contact"), href: `/${locale}/contact` },
           {
             label: BEDRIJF.telefoon.weergave,
             href: `tel:${BEDRIJF.telefoon.e164}`,
@@ -165,7 +165,7 @@ export default async function VarlaksPage({
         titel={t("slotTitle")}
         tekst={t("slotText")}
         knoppen={[
-          { label: t("bestelKnop"), href: `/${locale}/bestellen?product=varlaks-zalm` },
+          { label: nav("contact"), href: `/${locale}/contact` },
           {
             label: nav("visschalen"),
             href: `/${locale}/visschalen`,
