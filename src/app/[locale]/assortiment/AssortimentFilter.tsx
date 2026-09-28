@@ -16,21 +16,21 @@ const copy = {
     detail: "Productinformatie", count: "producten", empty: "Niets gevonden? Vraag het ons gerust via WhatsApp.",
     favorites: "Begin met onze favorieten", favoritesSub: "Een paar vertrouwde keuzes uit onze toonbank.",
     browse: "Het hele assortiment", browseSub: "Kijk rustig rond. Voor beschikbaarheid en uw wensen helpen we u graag via WhatsApp.",
-    photo: "AI-sfeerbeeld", categories: ["Verse vis", "Gerookte vis", "Schaal- & schelpdieren", "Vissalades", "Bereid & snacks"],
+    categories: ["Verse vis", "Gerookte vis", "Schaal- & schelpdieren", "Vissalades", "Bereid & snacks"],
   },
   en: {
     all: "All", search: "Which fish are you looking for?", popular: "Favourites first", az: "Name A–Z",
     detail: "Product information", count: "products", empty: "Can't find it? Ask us on WhatsApp.",
     favorites: "Start with our favourites", favoritesSub: "A few familiar favourites from our fish counter.",
     browse: "Explore our full range", browseSub: "Take a look around. Ask us on WhatsApp about availability and your wishes.",
-    photo: "AI illustration", categories: ["Fresh fish", "Smoked fish", "Shellfish", "Fish salads", "Prepared & snacks"],
+    categories: ["Fresh fish", "Smoked fish", "Shellfish", "Fish salads", "Prepared & snacks"],
   },
   de: {
     all: "Alle", search: "Welchen Fisch suchen Sie?", popular: "Favoriten zuerst", az: "Name A–Z",
     detail: "Produktinformationen", count: "Produkte", empty: "Nicht gefunden? Fragen Sie uns per WhatsApp.",
     favorites: "Unsere Favoriten entdecken", favoritesSub: "Einige bewährte Favoriten aus unserer Fischtheke.",
     browse: "Das gesamte Sortiment", browseSub: "Schauen Sie sich in Ruhe um. Fragen zu Verfügbarkeit und Wünschen beantworten wir gerne per WhatsApp.",
-    photo: "KI-Stimmungsbild", categories: ["Frischer Fisch", "Räucherfisch", "Schalentiere", "Fischsalate", "Zubereitet & Snacks"],
+    categories: ["Frischer Fisch", "Räucherfisch", "Schalentiere", "Fischsalate", "Zubereitet & Snacks"],
   },
 };
 
@@ -64,9 +64,8 @@ export function AssortimentFilter() {
         return <article key={p.slug} className="favorite-card">
           <Link href={`/${locale}/assortiment/${p.slug}`} className="favorite-image">
             <Image src={photo.src} width={700} height={500} sizes="(max-width: 700px) 100vw, 33vw"
-              alt={p.naam + (photo.editorial ? " — " + c.photo : "")} className={photo.editorial ? "editorial" : ""} />
+              alt={p.naam} className={photo.editorial ? "editorial" : ""} />
             <span className="favorite-number">0{i + 1}</span>
-            {photo.editorial && <span className="favorite-caption">{c.photo}</span>}
           </Link>
           <div className="favorite-heading"><div><p>{c.categories[categories.indexOf(p.categorie)]}</p><h3><Link href={`/${locale}/assortiment/${p.slug}`}>{p.naam}</Link></h3></div><ArrowUpRight size={22} aria-hidden="true" /></div>
           <a href={bestelContact(locale, p.naam).href} className="collection-whatsapp"><MessageCircle size={16} aria-hidden="true" />{bestelContact(locale).label}</a>

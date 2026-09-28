@@ -17,7 +17,7 @@ const copy = {
     browse: "Ontdek het assortiment", platter: "Visschaal samenstellen",
     policy: "Alleen visschalen bestelt u online.", policySub: "Zoekt u iets anders? Stuur ons een WhatsApp-bericht. Dan kijken we samen wat mogelijk is.",
     question: "Iets in gedachten?", note: "Een bepaalde vis, een speciale wens of iets wat u hier niet ziet? App ons gerust. We bespreken de mogelijkheden en beschikbaarheid met u.",
-    image: "Zalm met citroen en dille — AI-sfeerbeeld", caption: "Sfeerbeeld · AI-illustratie",
+    image: "Zalm met citroen en dille",
   },
   en: {
     label: "Schaap’s Vishandel · Leiden", title: "Our fish selection.",
@@ -25,7 +25,7 @@ const copy = {
     browse: "Explore our range", platter: "Create a seafood platter",
     policy: "Only seafood platters can be ordered online.", policySub: "Looking for something else? Send us a WhatsApp message to discuss the options.",
     question: "Something in mind?", note: "A particular fish, a special request or something you can't find here? Ask us on WhatsApp about availability and options.",
-    image: "Salmon with lemon and dill — AI illustration", caption: "Illustrative scene · AI image",
+    image: "Salmon with lemon and dill",
   },
   de: {
     label: "Schaap’s Vishandel · Leiden", title: "Unser Sortiment.",
@@ -33,7 +33,7 @@ const copy = {
     browse: "Sortiment entdecken", platter: "Fischplatte zusammenstellen",
     policy: "Nur Fischplatten können Sie online bestellen.", policySub: "Suchen Sie etwas anderes? Schreiben Sie uns per WhatsApp. Gemeinsam schauen wir, was möglich ist.",
     question: "Einen besonderen Wunsch?", note: "Ein bestimmter Fisch, ein besonderer Wunsch oder etwas, das Sie hier nicht finden? Fragen Sie uns per WhatsApp nach Verfügbarkeit und Möglichkeiten.",
-    image: "Lachs mit Zitrone und Dill — KI-Stimmungsbild", caption: "Stimmungsbild · KI-Illustration",
+    image: "Lachs mit Zitrone und Dill",
   },
 };
 
@@ -68,7 +68,6 @@ export default async function AssortimentPage({ params }: { params: Promise<{ lo
         </div>
         <figure className="collection-hero-image">
           <Image width={1400} height={933} sizes="(max-width: 800px) 100vw, 50vw" src="/images/editorial/zalm.webp" alt={c.image} priority />
-          <figcaption>{c.caption}</figcaption>
         </figure>
       </div>
     </header>
