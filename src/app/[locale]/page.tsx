@@ -123,7 +123,7 @@ export default async function HomePage({
               beeld: "toonbank" as const,
               kop: h("pijlerVersKop"),
               tekst: h("pijlerVersTekst"),
-              href: bestelContact(locale).href,
+              href: `/${locale}/assortiment`,
             },
             {
               beeld: "schaalBorrel" as const,

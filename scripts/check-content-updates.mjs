@@ -16,6 +16,10 @@ function photos(html) {
   });
 }
 for (const locale of ['nl', 'en', 'de']) {
+  const home = await page(`/${locale}`);
+  const freshFishCard = [...home.main.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)]
+    .find(([, , content]) => /<h3\b/.test(content) && content.includes('/images/producten-hd/kabeljauw.webp'));
+  assert(freshFishCard?.[1] === `/${locale}/assortiment`, `${locale}: fresh fish card should open assortment, not WhatsApp`);
   const platters = await page(`/${locale}/visschalen`);
   const images = photos(platters.main);
   for (const name of ['familieschaal', 'feestschaal']) {
