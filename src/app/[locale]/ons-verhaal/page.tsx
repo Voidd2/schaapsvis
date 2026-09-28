@@ -6,7 +6,7 @@ import { Sectie, Kop } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { paginaMetadata } from "@/lib/seo";
 import { BEDRIJF } from "@/lib/bedrijf";
-import { Beeld } from "@/components/ui/Beeld";
+import { Beeld, heeftBeeld } from "@/components/ui/Beeld";
 import type { BeeldNaam } from "@/lib/beeld";
 
 export async function generateMetadata({
@@ -83,7 +83,7 @@ export default async function OnsVerhaalPage({
       {/* Eén grote historische foto direct onder de kop: dat zegt in één oogopslag
           dat deze zaak er al lang staat. */}
       <Sectie grond="zand">
-        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-16 items-center">
+        <div className={`grid ${heeftBeeld("historie1938") ? "lg:grid-cols-[1.1fr_0.9fr]" : "max-w-3xl"} gap-10 lg:gap-16 items-center`}>
           <Beeld naam="historie1938" verhouding="liggend" streep="var(--navy)" />
           <p className="citaat">{t("intro")}</p>
         </div>
@@ -99,7 +99,7 @@ export default async function OnsVerhaalPage({
           {TIJDLIJN.map((punt) => (
             <li
               key={punt.jaar}
-              className="grid md:grid-cols-[7rem_1fr] lg:grid-cols-[7rem_1fr_18rem] gap-x-10 gap-y-4 py-8"
+              className={`grid md:grid-cols-[7rem_1fr] ${heeftBeeld(punt.beeld) ? "lg:grid-cols-[7rem_1fr_18rem]" : ""} gap-x-10 gap-y-4 py-8`}
               style={{ borderBottom: "1px solid var(--linen)" }}
             >
               <p

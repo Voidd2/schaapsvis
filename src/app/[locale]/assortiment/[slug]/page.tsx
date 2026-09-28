@@ -18,14 +18,7 @@ import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { BEDRIJF } from "@/lib/bedrijf";
 import { recepten } from "@/lib/recepten";
 import { bestelContact } from "@/lib/bestel-contact";
-
-const SCENE: Record<Categorie, string> = {
-  "verse-vis": "/images/scene-vis.svg",
-  "gerookte-vis": "/images/scene-gerookt.svg",
-  "schaal-schelp": "/images/scene-schaaldier.svg",
-  "vissalades": "/images/scene-vis.svg",
-  "bereid": "/images/scene-vis.svg",
-};
+import { productPhoto } from "@/lib/product-beeld";
 
 const BESCHIKBAAR_LABEL: Record<string, string> = {
   dagelijks: "Dagelijks vers",
@@ -86,7 +79,7 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical: `/nl/assortiment/${slug}` },
-    openGraph: { title, description, locale: "nl_NL", type: "website", images: [{ url: product.photo || "/og-image.png", alt: product.naam }] },
+    openGraph: { title, description, locale: "nl_NL", type: "website", images: [{ url: productPhoto(product)?.src || "/og-image.png", alt: productPhoto(product)?.alt ?? product.naam }] },
   };
 }
 
@@ -105,6 +98,7 @@ export default async function ProductDetailPage({
   const viswijzer = getViswijzer(slug);
   const beschikbaar = product.beschikbaar ? BESCHIKBAAR_LABEL[product.beschikbaar] : undefined;
   const opAanvraag = product.beschikbaar !== "dagelijks";
+  const photo = productPhoto(product);
   const prijs = getPrijs(slug);
   // Upsell naar biologische Varlaks-zalm op elke zalmpagina behalve Varlaks zelf.
   const isZalm = !product.highlight && /zalm|lax/.test(slug);
@@ -121,7 +115,7 @@ export default async function ProductDetailPage({
     description: product.desc,
     category: CATEGORIE_LABELS[product.categorie],
     brand: { "@type": "Brand", name: "Schaap's Vishandel" },
-    image: `https://www.schaapsvishandel.nl${product.photo ?? SCENE[product.categorie]}`,
+    image: photo ? `${BEDRIJF.domein}${photo.src}` : undefined,
     ...(product.badge ? { award: product.badge } : {}),
     ...(prijs
       ? {
@@ -218,31 +212,26 @@ export default async function ProductDetailPage({
 
       {/* ── Foto, recepten en voedingswaarde ─────────────────────────────── */}
       <Sectie grond="papier">
-        <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-16">
-          <div>
-            <div
+        <div className={`grid ${photo ? "lg:grid-cols-[0.95fr_1.05fr]" : "max-w-3xl"} gap-10 lg:gap-16`}>
+          {(photo || opAanvraag || isZalm) && <div>
+            {photo && <div
               className="w-full aspect-square flex items-center justify-center"
               style={{
-                backgroundColor: product.photo ? "#fff" : "var(--sand)",
+                backgroundColor: "#fff",
                 borderBottom: `3px solid ${kleur}`,
               }}
             >
-              {product.photo ? (
+              {(
                 /* eslint-disable-next-line @next/next/no-img-element */
                 <img
-                  src={product.photo}
-                  alt={`${product.naam} bij ${BEDRIJF.naam} in Leiden`}
-                  className="w-full h-full object-contain p-6"
+                  src={photo.src}
+                  alt={photo.alt}
+                  width={900}
+                  height={900}
+                  className={`w-full h-full ${photo.editorial ? "object-cover" : "object-contain p-6"}`}
                 />
-              ) : (
-                <span
-                  className="px-8 text-center text-[1.6rem]"
-                  style={{ fontFamily: "var(--font-display)", color: "var(--navy)", opacity: 0.45 }}
-                >
-                  {product.naam}
-                </span>
               )}
-            </div>
+            </div>}
 
             {opAanvraag && (
               <p
@@ -250,7 +239,7 @@ export default async function ProductDetailPage({
                 style={{ borderLeft: "2px solid var(--gold)", color: "var(--charcoal)" }}
               >
                 Dit ligt niet elke dag in de vitrine. Vraag ons of het er is op uw ophaaldatum —
-                bel {BEDRIJF.telefoon.weergave} of zet het in de opmerking bij uw bestelling.
+                bel {BEDRIJF.telefoon.weergave} of stuur ons een bericht via WhatsApp.
               </p>
             )}
 
@@ -275,7 +264,7 @@ export default async function ProductDetailPage({
                 </p>
               </Link>
             )}
-          </div>
+          </div>}
 
           {/* ── Wat maakt u ermee? ──────────────────────────────────────────
               Stond eerst onderaan, na de voedingswaardetabel en de

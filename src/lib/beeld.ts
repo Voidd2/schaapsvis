@@ -7,9 +7,8 @@
  * │ Meer hoef je niet te doen: de foto verschijnt dan overal waar die plek     │
  * │ gebruikt wordt.                                                            │
  * │                                                                            │
- * │ Zolang `bestand` leeg is toont de site een net vlak met de naam erin.      │
- * │ Geen gebroken plaatje, geen leeg gat — maar ook geen foto, en een foto     │
- * │ verkoopt nu eenmaal beter dan een vlak.                                    │
+ * │ Zolang `bestand` leeg is wordt het fotovak niet getoond. Echte winkel-    │
+ * │ en historische foto's blijven gereserveerd voor eigenaarfoto's.          │
  * │                                                                            │
  * │ Formaat: zie `verhouding`. Met de telefoon is prima, maar zorg dat het     │
  * │ licht is: bij de toonbank staan, niet ertegenin fotograferen.              │
@@ -28,7 +27,7 @@ export interface Beeldplek {
   /** Alt-tekst. Beschrijvend en lokaal — dat leest Google mee. */
   alt: string;
   verhouding: Verhouding;
-  /** Wat er in het vlak staat zolang er geen foto is. */
+  /** Intern label voor een nog ontbrekende eigenaarfoto. */
   terugval: string;
 }
 
@@ -63,8 +62,8 @@ export const BEELD = {
   toonbank: {
     waar: "Homepage en Contact",
     wat: "De toonbank met vis erop, van dichtbij. Dit is de belangrijkste foto van de hele site: hier ziet iemand wat hij koopt.",
-    bestand: "",
-    alt: "De toonbank met verse vis bij Schaap's Vishandel in Leiden",
+    bestand: "/images/producten/kabeljauw.png",
+    alt: "Verse kabeljauw uit het assortiment",
     verhouding: "liggend",
     terugval: "De toonbank",
   },
@@ -79,8 +78,8 @@ export const BEELD = {
   gebakkenVis: {
     waar: "Homepage, het blok over gebakken vis",
     wat: "Verse kibbeling of lekkerbek, warm, net uit de pan. Bij voorkeur in het bakje zoals de klant het meekrijgt.",
-    bestand: "",
-    alt: "Verse kibbeling bij Schaap's Vishandel in Leiden",
+    bestand: "/images/editorial/kibbeling.webp",
+    alt: "Krokante kibbeling met saus",
     verhouding: "liggend",
     terugval: "Kibbeling en lekkerbek",
   },
@@ -161,8 +160,8 @@ export const BEELD = {
   schaalBorrel: {
     waar: "Visschalen en de homepage",
     wat: "De borrelschaal zoals jullie hem echt maken, van bovenaf, op een neutrale ondergrond.",
-    bestand: "",
-    alt: "Borrelschaal van Schaap's Vishandel in Leiden",
+    bestand: "/images/editorial/visschaal-inspiratie.webp",
+    alt: "Serveerinspiratie: visschaal met gerookte vis, garnalen en salades",
     verhouding: "vierkant",
     terugval: "Borrelschaal",
   },

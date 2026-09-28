@@ -3,10 +3,8 @@ import { BEELD, type BeeldNaam, type Verhouding } from "@/lib/beeld";
 /**
  * Een beeldvlak op de site.
  *
- * Is er een foto, dan staat die er. Is die er nog niet, dan komt er geen
- * gebroken plaatje en geen leeg gat, maar een zandvlak met de naam erin — zoals
- * een kaartje bij de vis in de toonbank. Dat ziet er bewust uit in plaats van
- * kapot, en het maakt meteen zichtbaar waar nog een foto hoort.
+ * Is er een foto, dan staat die er. Zonder foto wordt geen leeg vlak gerenderd.
+ * Winkel- en historische foto's moeten echte eigenaarfoto's blijven.
  *
  * Welke foto's de site wil hebben staat in `src/lib/beeld.ts`.
  */
@@ -36,6 +34,8 @@ export function Beeld({
   prioriteit?: boolean;
 }) {
   const plek = BEELD[naam];
+  // Do not reserve a giant empty photo box when an owner photo is unavailable.
+  if (!plek.bestand) return null;
   const vorm = VERHOUDING[verhouding ?? plek.verhouding];
 
   return (
@@ -46,7 +46,7 @@ export function Beeld({
         ...(streep ? { borderBottom: `2px solid ${streep}` } : {}),
       }}
     >
-      {plek.bestand ? (
+      {
         /* eslint-disable-next-line @next/next/no-img-element */
         <img
           src={plek.bestand}
@@ -55,18 +55,7 @@ export function Beeld({
           loading={prioriteit ? "eager" : "lazy"}
           fetchPriority={prioriteit ? "high" : undefined}
         />
-      ) : (
-        <span
-          className="px-6 text-center text-[1.15rem] md:text-[1.4rem] leading-tight"
-          style={{
-            fontFamily: "var(--font-display)",
-            color: "var(--navy)",
-            opacity: 0.45,
-          }}
-        >
-          {plek.terugval}
-        </span>
-      )}
+      }
     </div>
   );
 }

@@ -5,7 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Search, ArrowUpRight, MessageCircle, SlidersHorizontal } from "lucide-react";
 import { useLocale } from "next-intl";
-import { CATEGORIE_LABELS, type Categorie, type Product } from "@/lib/assortiment-data";
+import { CATEGORIE_LABELS, type Categorie } from "@/lib/assortiment-data";
+import { productPhoto } from "@/lib/product-beeld";
 import { gesorteerdAssortiment } from "@/lib/assortiment-volgorde";
 import { matchesQuery } from "@/lib/search";
 import { bestelContact } from "@/lib/bestel-contact";
@@ -37,12 +38,6 @@ const copy = {
 const categories = Object.keys(CATEGORIE_LABELS) as Categorie[];
 const featuredSlugs = ["varlaks-zalm", "kibbeling", "haring"];
 
-function productPhoto(p: Product) {
-  if (["varlaks-zalm", "zalmfilet"].includes(p.slug)) return { src: "/images/editorial/zalm.webp", editorial: true };
-  if (p.slug === "kibbeling") return { src: "/images/editorial/kibbeling.webp", editorial: true };
-  return p.photo ? { src: p.photo, editorial: false } : null;
-}
-
 export function AssortimentFilter() {
   const locale = useLocale();
   const c = copy[locale as keyof typeof copy] ?? copy.nl;
@@ -64,7 +59,7 @@ export function AssortimentFilter() {
         return <article key={p.slug} className="favorite-card">
           <Link href={`/${locale}/assortiment/${p.slug}`} className="favorite-image">
             <Image src={photo.src} width={700} height={500} sizes="(max-width: 700px) 100vw, 33vw"
-              alt={p.naam} className={photo.editorial ? "editorial" : ""} />
+              alt={photo.alt} className={photo.editorial ? "editorial" : ""} />
             <span className="favorite-number">0{i + 1}</span>
           </Link>
           <div className="favorite-heading"><div><p>{c.categories[categories.indexOf(p.categorie)]}</p><h3><Link href={`/${locale}/assortiment/${p.slug}`}>{p.naam}</Link></h3></div><ArrowUpRight size={22} aria-hidden="true" /></div>

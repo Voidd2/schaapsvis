@@ -6,7 +6,7 @@ import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
 import { Sectie, Kop } from "@/components/ui/Sectie";
 import { PaginaSlot } from "@/components/ui/PaginaKop";
-import { Beeld } from "@/components/ui/Beeld";
+import { Beeld, heeftBeeld } from "@/components/ui/Beeld";
 
 import { SeizoensBanner } from "@/components/shared/SeizoensBanner";
 import { paginaMetadata } from "@/lib/seo";
@@ -149,7 +149,7 @@ export default async function HomePage({
 
       {/* ── Sinds 1938 ────────────────────────────────────────────────────── */}
       <Sectie grond="zand">
-        <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-16 items-center">
+        <div className={`grid ${heeftBeeld("historie1938") ? "lg:grid-cols-[0.95fr_1.05fr]" : "max-w-3xl"} gap-10 lg:gap-16 items-center`}>
           <Beeld naam="historie1938" streep="var(--navy)" />
           <div>
             <Kop label={h("verhaalLabel")} titel={h("verhaalKop")} />
