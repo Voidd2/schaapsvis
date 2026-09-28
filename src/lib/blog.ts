@@ -690,7 +690,7 @@ const blogBeelden: Record<string, { src: string; alt: string }> = {
   "waarom-staat-makreel-op-rood": { src: "/images/recepten/makreelsalade-brood.webp", alt: "Makreelsalade op brood" },
   "marktdag-in-leiden-achter-de-kraam": { src: "/images/recepten/broodje-haring-uitjes.webp", alt: "Broodje haring met uitjes, een vertrouwde marktklassieker" },
   "waar-koop-je-biologische-vis-in-leiden": { src: "/images/recepten/zomerse-zalmsalade.webp", alt: "Serveersuggestie: zalm in een frisse salade" },
-  "wat-betekenen-msc-asc-en-het-eu-bio-logo": { src: "/images/producten-hd/coquilles.webp", alt: "Coquilles uit het assortiment; controleer het keurmerk per levering" },
+  "wat-betekenen-msc-asc-en-het-eu-bio-logo": { src: "/images/editorial/viskeurmerken-bio-asc-msc.webp", alt: "BIO, ASC en MSC uitgelegd: biologische kweek, verantwoorde kweek en duurzame wildvangst" },
   "is-biologische-zalm-gezonder-omega-3": { src: "/images/recepten/zalm-traybake-groenten-v2.webp", alt: "Zalm met groenten uit de oven" },
   "verse-vis-bewaren-en-bereiden-tips": { src: "/images/producten-hd/kabeljauwfilet.webp", alt: "Verse kabeljauwfilet om gekoeld te bewaren en te bereiden" },
   "echt-gerookte-vis-vs-kunstmatige-rooksmaak": { src: "/images/recepten/gerookte-zalm-rolletjes-roomkaas.webp", alt: "Gerookte zalmrolletjes met roomkaas" },
