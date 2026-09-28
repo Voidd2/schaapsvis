@@ -83,7 +83,7 @@ export default async function ReceptDetailPage({
     inLanguage: "nl-NL",
     url: `${BEDRIJF.domein}/nl/recepten/${slug}`,
     recipeCategory: "Visgerecht",
-    recipeCuisine: "Nederlands",
+    recipeCuisine: recept.keuken ?? "Nederlands",
     keywords: recept.seoKeywords,
     recipeIngredient: [...recept.vanSchaap, ...recept.vanSupermarkt],
     recipeInstructions: recept.bereidingswijze.map((stap, i) => ({
@@ -111,6 +111,7 @@ export default async function ReceptDetailPage({
         feiten={[
           { label: "Tijd", waarde: recept.tijd },
           { label: "Moeilijkheid", waarde: recept.moeilijkheid },
+          { label: "Keuken", waarde: recept.keuken ?? "Nederlands" },
           {
             label: recept.porties ? "Voor" : "Seizoen",
             waarde: recept.porties
@@ -134,6 +135,10 @@ export default async function ReceptDetailPage({
             </div>
 
             <h2 id="bereiding" className="text-[1.6rem] mb-6 scroll-mt-32">Bereiding</h2>
+            <p className="mb-6 text-sm leading-relaxed" style={{ color: "var(--grijs)" }}>
+              {recept.porties ? `Hoeveelheden voor ${recept.porties} personen. ` : ""}
+              De totale tijd omvat voorbereiding en eventuele wachttijd. Bereidingstijden zijn richtlijnen: dikte van de vis en uw oven of pan maken verschil.
+            </p>
             <ol style={{ borderTop: "1px solid var(--linen)" }}>
               {recept.bereidingswijze.map((stap, i) => (
                 <li
@@ -153,6 +158,14 @@ export default async function ReceptDetailPage({
                 </li>
               ))}
             </ol>
+
+            <aside className="mt-8 rounded-xl p-5" style={{ background: "var(--linen)" }}>
+              <h3 className="mb-2 text-lg">Veilig bereiden</h3>
+              <p className="text-sm leading-relaxed">
+                {recept.veiligheid ?? "Houd vis gekoeld bij 4°C, werk met schoon keukengerei en voorkom contact tussen rauwe vis en klaar eten. Gaar rauwe vis door en door. Zwangeren, jonge kinderen, ouderen en mensen met verminderde weerstand vermijden rauwe en niet door en door verhitte gerookte vis. Volg het bewaar- en bereidingsadvies dat u bij aankoop krijgt."}
+              </p>
+              <a className="inline-block mt-3 text-sm underline underline-offset-4" href="https://www.voedingscentrum.nl/nl/thema/5xveilig/vis.aspx" target="_blank" rel="noopener noreferrer">Veilig omgaan met vis — Voedingscentrum</a>
+            </aside>
 
             <p className="mt-8 text-sm" style={{ color: "var(--grijs)" }}>
               <span className="kapitaal">{recept.moeilijkheid}</span>{" "}

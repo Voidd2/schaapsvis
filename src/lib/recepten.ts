@@ -15,14 +15,15 @@ export type Recept = {
   tags: ReceptTag[];
   porties?: number;
   seizoen?: string;
+  keuken?: string;
+  veiligheid?: string;
   /** Eigen foto van het gerecht. Zet die zodra de eigenaar er een heeft. */
   fotoUrl?: string;
   fotoLabel: string;
   /**
    * De vis uit het assortiment die dit gerecht draagt (`slug` uit
-   * `assortiment-data.ts`). Doet twee dingen: hij levert een beeld zolang er
-   * geen foto van het gerecht is, en hij legt de link van recept naar product —
-   * iemand die een recept leest wil daarna die vis kunnen bestellen.
+   * `assortiment-data.ts`). Legt de link van recept naar product voor advies.
+   * Een productfoto mag nooit een foto van het bereide gerecht vervangen.
    */
   hoofdproduct?: string;
   vanSchaap: string[];
@@ -67,28 +68,30 @@ const receptenOrigineel: Recept[] = [
     tags: ["Zomers", "Snel", "Makkelijk", "Gezond"],
     fotoLabel: "Frisse saladekom met stukjes zalm en groenten",
     vanSchaap: [
-      "Vers gerookte zalm (ca. 150g per persoon)",
-      "Of: Varlaks zalmfilet — 12 min op 200°C in de oven",
+      "300 g gerookte zalm",
     ],
     vanSupermarkt: [
-      "Rucola of veldsla (100g)",
+      "100 g rucola of veldsla",
       "½ komkommer",
       "1 avocado",
-      "½ rode ui, dun gesneden",
-      "Sap van 1 citroen + olijfolie",
-      "Optioneel: kappertjes, verse dille",
+      "½ rode ui",
+      "1 citroen",
+      "2 el olijfolie",
+      "1 el kappertjes (optioneel)",
+      "1 el fijngehakte dille",
+      "Peper",
     ],
     bereidingswijze: [
-      "Als u de zalm zelf bakt: oven op 200°C, zalm 12 min — klaar als hij makkelijk uiteen valt.",
-      "Dressing: citroensap + olijfolie + zout + peper mengen.",
-      "Sla op een schaal. Komkommer en avocado verdelen.",
-      "Zalm bovenop leggen en in stukken trekken.",
-      "Rode ui erover, besprenkel met dressing. Direct serveren.",
+      "Was en droog de sla. Snijd komkommer en avocado, en snijd de ui in dunne ringen.",
+      "Meng 2 el citroensap met de olijfolie en peper.",
+      "Verdeel sla, komkommer en avocado over vier borden.",
+      "Verdeel de gerookte zalm en rode ui erover. Voeg eventueel kappertjes toe.",
+      "Besprenkel met dressing, strooi de dille erover en serveer direct.",
     ],
-    verhaal:
-      "De perfecte zomerse lunch of een licht diner. Vers gerookte zalm van Schaap's Vis maakt dit gerecht direct bijzonder — de rooksmaak past perfect bij de frisheid van citroen en avocado. Vraag ons welke zalm die dag het lekkerst ruikt.",
+    verhaal: "Een frisse salade met gerookte zalm, komkommer en avocado. Serveer als voorgerecht of lichte lunch; voeg voor een grotere maaltijd brood toe.",
     highlight: "15 min · Zomer hit",
     seoKeywords: "zalmsalade recept, zomerse salade zalm, gerookte zalm salade",
+    porties: 4,
   },
   {
     slug: "zalm-citroen-dille",
@@ -99,92 +102,104 @@ const receptenOrigineel: Recept[] = [
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond"],
     fotoLabel: "Zalmfilets in ovenschaal met citroenschijfjes en kruiden",
-    vanSchaap: ["Varlaks zalmfilet (150–200g per persoon)"],
+    vanSchaap: [
+      "4 Varlaks zalmfilets van 150–200 g",
+    ],
     vanSupermarkt: [
       "1 citroen",
-      "Verse dille",
-      "Olijfolie, zout, peper",
-      "Optioneel: knoflook, kappertjes",
+      "15 g verse dille",
+      "2 el olijfolie",
+      "Zout en peper",
+      "600 g krieltjes of 300 g rijst (optioneel bijgerecht)",
     ],
     bereidingswijze: [
-      "Oven voorverwarmen op 200°C.",
-      "Zalm op bakpapier. Besprenkel met olijfolie, zout en peper.",
-      "Citroenschijfjes en dille erop.",
-      "Bak 12–15 min. Iets rosé van binnen is perfect — niet te gaar maken.",
-      "Direct serveren met krieltjes of rijst.",
+      "Verwarm de oven voor op 200°C (180°C hetelucht). Kook eventueel de krieltjes of rijst volgens de verpakking.",
+      "Leg de zalm in een ovenschaal, bestrijk met olie en voeg zout en peper toe.",
+      "Leg citroenschijfjes en de helft van de dille op de zalm.",
+      "Bak circa 12–18 minuten, afhankelijk van de dikte. Controleer dat de vis ook in het dikste deel gaar is; hij valt dan gemakkelijk in vlokken uiteen.",
+      "Strooi de resterende dille erover en serveer met het gekozen bijgerecht.",
     ],
-    verhaal:
-      "De Varlaks zalm heeft zo'n rijke smaak dat er weinig bij nodig is. Ons advies: niet te lang in de oven. Rosé van binnen is geen fout — dat is precies goed.",
+    verhaal: "Citroen en dille passen bij de zachte smaak van zalm. De dikte van de filet bepaalt de oventijd: controleer de vis, niet alleen de klok.",
     highlight: "Varlaks special",
     seoKeywords: "zalm oven recept, zalm citroen dille, varlaks zalm recept",
+    porties: 4,
   },
   {
     slug: "kibbeling-bakken",
     hoofdproduct: "kibbeling",
     title: "Kibbeling thuis bakken",
     subtitle: "Knapperig van buiten, mals van binnen · leuk om met de kids te doen",
-    tijd: "30–35 min",
+    tijd: "40 min",
     moeilijkheid: "Gemiddeld",
-    tags: ["Met de kids", "Bijzonder"],
+    tags: [
+      "Bijzonder",
+    ],
     fotoLabel: "Goudbruin gebakken kibbeling met witte saus",
     vanSchaap: [
-      "Kibbeling beslag (kabeljauw of pollak) — 200g per persoon is onze aanbeveling",
-      "Keuze kabeljauw = steviger, diepe smaak (de authentieke keuze)",
-      "Keuze pollak = milder, luchtig — de populairste tegenwoordig",
-      "Optioneel: extra bloem (±€1–4 afhankelijk van hoeveelheid)",
+      "800 g kabeljauw- of pollakfilet, zonder graten",
     ],
     vanSupermarkt: [
-      "1–1,5 liter frituurolie of zonnebloemolie",
-      "Keukenpapier",
-      "Dipsaus naar keuze: tartaarsaus, mayonaise of zure room",
-      "Optioneel: friet of stokbrood erbij",
+      "150 g bloem + 2 el extra om de vis te bestuiven",
+      "1 tl bakpoeder",
+      "200 ml koud bruiswater",
+      "1 tl paprikapoeder",
+      "½ tl zout en peper naar smaak",
+      "Frituurolie: hoeveelheid volgens de frituurpan, of voldoende voor een laag van 5 cm in een hoge pan",
+      "Citroen en tartaarsaus (optioneel)",
     ],
     bereidingswijze: [
-      "Haal de kibbeling 15 min van tevoren uit de koelkast — koude vis verlaagt de olietemperatuur.",
-      "GEEN frituurpan? Geen probleem — gebruik een diepe pan met 5 cm olie. Vul niet te vol: olie schuimt bij het bakken.",
-      "Verhit olie tot 175–180°C. Test: houtje in de olie — als het snel borrelt, is het goed.",
-      "Bak in kleine porties: maximaal 4–6 stukken tegelijk. Meer tegelijk = temperatuur zakt = vettige kibbeling.",
-      "Bak 3–4 minuten goudbruin, één keer omdraaien.",
-      "Uitlekken op keukenpapier, direct bestrooien met zout.",
-      "Meteen serveren — kibbeling wacht niet.",
+      "Snijd de vis in stukken van ongeveer 4 cm en dep goed droog. Houd de vis gekoeld tot gebruik.",
+      "Meng 150 g bloem, bakpoeder, paprikapoeder, zout en peper. Klop het koude bruiswater erdoor tot een glad, dik vloeibaar beslag.",
+      "Verhit de olie tot 175°C en controleer met een frituurthermometer. Vul een gewone hoge pan niet meer dan voor een derde met olie.",
+      "Bestuif de vis licht met de extra bloem en haal de stukken door het beslag.",
+      "Bak in kleine porties circa 4–5 minuten tot goudbruin en van binnen gaar. Laat de olie tussen porties weer op temperatuur komen.",
+      "Laat uitlekken op keukenpapier en serveer direct, eventueel met citroen en saus.",
     ],
-    verhaal:
-      "Kibbeling bakken is makkelijker dan het lijkt, maar er zijn twee dingen die het verschil maken: olietemp en portiegrootte. Met de kids is dit een perfect kookproject — laat ze de kibbeling voorzichtig in de pan laten zakken (altijd met tang, op veilige afstand van het spatten). De keuze tussen kabeljauw en pollak: kabeljauw heeft een stevigere bite en een uitgesprokenere vissmaak. Pollak is milder. Beide zijn lekker — het is maar net wat u wilt.",
+    verhaal: "Zelf kibbeling maken begint met rauwe visfilet en een koud beslag. Dep de vis goed droog en bak in kleine porties, zodat het korstje krokant blijft. Laat het frituren aan een volwassene over; kinderen kunnen op veilige afstand helpen met het beslag.",
     highlight: "200g p.p. aanbevolen",
     seoKeywords:
       "kibbeling recept thuis, kibbeling bakken, kabeljauw kibbeling, pollak kibbeling",
+    porties: 4,
   },
   {
     slug: "gravlaks",
-    hoofdproduct: "gravad-lax",
+    hoofdproduct: "varlaks-zalm",
     title: "Gravlaks van Varlaks zalm",
     subtitle: "48 uur geduld — het meest indrukwekkende voorgerecht dat u ooit serveert",
-    tijd: "48 uur (+ 15 min bereiding)",
+    tijd: "48 uur (+ 25 min bereiding)",
     moeilijkheid: "Uitdagend",
     tags: ["Bijzonder"],
     fotoLabel: "Gepekelde zalm met verse dille en roze peperbessen",
     vanSchaap: [
-      "Hele Varlaks zalmfilet (500–800g, met vel) — vraag ons de graten te verwijderen",
+      "600 g Varlaks zalmfilet met vel — vraag expliciet naar geschiktheid voor rauwe bereiding en pekelen",
     ],
     vanSupermarkt: [
-      "200g grof zeezout + 150g suiker",
-      "1 grote bos verse dille",
-      "1 el grofgemalen peper",
-      "Optioneel: 2 el cognac",
-      "Serveren: roggebrood, roomkaas, rode ui, kappertjes",
+      "75 g grof zeezout",
+      "75 g suiker",
+      "20 g verse dille",
+      "1 tl grofgemalen zwarte peper",
+      "1 citroen",
+      "2 el grove mosterd",
+      "1 el honing",
+      "1 el wittewijnazijn",
+      "2 el neutrale olie",
+      "Roggebrood om te serveren",
     ],
     bereidingswijze: [
-      "Dille fijnhakken. Mengen met zout, suiker en peper.",
-      "Zalm met velzijde naar onder op vershoudfolie. Volledig afdekken met het mengsel.",
-      "Strak in folie wikkelen. In schaal met gewicht erop (snijplank + blikjes).",
-      "48 uur in de koelkast. Na 24 uur omdraaien.",
-      "Afspoelen, droogdeppen. In flinterdunne plakjes snijden met lang scherp mes.",
-      "Serveren op roggebrood met roomkaas.",
+      "Bespreek vooraf met de viswinkel of de zalm geschikt is om ongegaard te eten en welke behandeling nodig is. Controleer op graten en dep de filet droog.",
+      "Meng zout, suiker, peper, citroenrasp en de helft van de fijngehakte dille.",
+      "Leg de zalm met het vel naar beneden in een schaal op vershoudfolie. Verdeel het pekelmengsel over het visvlees en verpak goed.",
+      "Zet afgedekt 48 uur in de koelkast bij 4°C met een licht gewicht erop. Keer het pakket elke 12 uur en houd het gekoeld.",
+      "Verwijder de pekel zorgvuldig en dep de vis droog. Snijd vlak voor het serveren dunne plakjes van het vel af.",
+      "Klop mosterd, honing, azijn en olie tot een saus en roer de resterende dille erdoor.",
+      "Serveer kleine porties met de mosterd-dillesaus, roggebrood en citroen.",
     ],
-    verhaal:
-      "Gravlaks is een Scandinavisch recept waarbij de zalm 'gaart' door pekelen — geen oven nodig. Eerlijk: dit gerecht duurt lang en is voor gevorderden. Maar de reactie van uw gasten maakt het absoluut waard. Gebruik altijd verse Varlaks zalm — de kwaliteit is allesbepalend bij rauw eten.",
+    verhaal: "Gravlaks is gepekelde zalm, geen gekookte zalm. Het zout verandert de structuur, maar maakt rauwe vis niet automatisch veilig. Begin alleen met vis die hiervoor geschikt is en houd hem tijdens de bereiding goed gekoeld.",
     highlight: "Weekend project",
     seoKeywords: "gravlaks recept, gepekelde zalm, zelf gravlax maken",
+    porties: 6,
+    keuken: "Scandinavisch",
+    veiligheid: "Dit gerecht bevat ongegaarde vis. Alleen versheid is geen garantie voor veilig rauw eten; vraag vooraf naar geschikte vis en benodigde behandeling. Zwangeren, jonge kinderen, ouderen en mensen met verminderde weerstand kiezen beter een door en door verhit visgerecht.",
   },
   {
     slug: "romige-vissoep",
@@ -196,50 +211,65 @@ const receptenOrigineel: Recept[] = [
     tags: ["Bijzonder", "Gezond"],
     fotoLabel: "Kom vissoep met stukken verse vis in een rijke bouillon",
     vanSchaap: [
-      "300g gemengde visfilet (kabeljauw + schol of zalm)",
-      "Tip: vraag naar de vis van de dag",
+      "600 g gemengde visfilet, bijvoorbeeld kabeljauw, schol en zalm",
     ],
     vanSupermarkt: [
-      "1 ui, 2 stengels selderij, 2 wortelen",
-      "200ml slagroom, 1L visbouillon",
-      "1 dl droge witte wijn, tomaten, kruiden",
+      "1 ui",
+      "2 stengels bleekselderij",
+      "2 wortelen",
+      "400 g tomatenblokjes uit blik",
+      "1 liter visbouillon",
+      "200 ml slagroom",
+      "100 ml droge witte wijn of extra bouillon",
+      "1 el olijfolie",
+      "1 laurierblad",
+      "2 el fijngehakte peterselie",
+      "Zout en peper",
     ],
     bereidingswijze: [
-      "Groenten fruiten — 5 min.",
-      "Wijn toevoegen, 2 min inkoken.",
-      "Bouillon + tomaten + kruiden erbij. 15 min sudderen.",
-      "Vis in stukken toevoegen. 8–10 min op laag vuur — NIET koken, vis wordt dan taai.",
-      "Room erdoor, op smaak brengen. Direct serveren met brood.",
+      "Snipper de ui en snijd selderij en wortel klein. Snijd de vis in stukken van circa 3 cm en houd gekoeld.",
+      "Fruit de groenten 5 minuten in olijfolie.",
+      "Voeg wijn of extra bouillon toe. Laat 2 minuten zacht koken.",
+      "Voeg bouillon, tomaten en laurier toe en laat circa 15 minuten zachtjes koken tot de groenten gaar zijn.",
+      "Leg de vis in de soep en laat 6–10 minuten zachtjes garen. Vermijd hard koken en veel roeren.",
+      "Roer de room erdoor, verwarm goed en verwijder het laurierblad. Breng op smaak en strooi de peterselie erover.",
     ],
     verhaal:
       "Niets gaat boven zelfgemaakte vissoep op een koude dag. Vraag naar de vis van de dag — een combinatie van twee soorten geeft de meeste diepte.",
     seoKeywords: "vissoep recept, romige vissoep, zelfgemaakte vissoep",
+    porties: 4,
   },
   {
     slug: "gegrilde-schol",
     hoofdproduct: "scholfilet",
-    title: "Gegrilde scholfilet met groene kruiden",
+    title: "Gebakken scholfilet met groene kruiden",
     subtitle: "Licht, gezond en in 20 minuten klaar",
     tijd: "20 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk", "Gezond", "Zomers"],
-    fotoLabel: "Gegrilde witte visfilet met groenten en limoen",
-    vanSchaap: ["Verse scholfilet (150g per persoon)"],
+    fotoLabel: "Gebakken scholfilet met peterselie en citroen",
+    vanSchaap: [
+      "600 g scholfilet",
+    ],
     vanSupermarkt: [
-      "30g roomboter",
-      "Sap van 1 citroen",
-      "Peterselie en bieslook",
+      "30 g roomboter",
+      "1 el olijfolie",
+      "1 citroen",
+      "2 el fijngehakte peterselie",
+      "1 el fijngeknipte bieslook",
+      "Zout en peper",
     ],
     bereidingswijze: [
-      "Schol droogdeppen met keukenpapier.",
-      "Zout en peper aan beide kanten.",
-      "Boter in pan op middelhoog vuur. Schol 2–3 min per kant — geduld.",
-      "Citroensap erbij (let op: spettert!). Kruiden erover.",
-      "Direct serveren.",
+      "Controleer de scholfilets op graten en dep droog. Bestrooi met zout en peper.",
+      "Verhit boter en olie in een koekenpan op middelhoog vuur. Bak zo nodig in twee porties.",
+      "Bak de schol circa 2–3 minuten per kant; de exacte tijd hangt af van de dikte. Keer voorzichtig en controleer of de vis gaar is.",
+      "Zet het vuur laag en voeg een beetje citroensap, peterselie en bieslook toe.",
+      "Schep de kruidenboter over de vis en serveer direct.",
     ],
     verhaal:
       "Schol is een onderschatte vis die thuis zelden klaargemaakt wordt. Snel, licht en gezond. Overkoken is de enige fout die u kunt maken — ze heeft vrijwel geen bereidingstijd nodig.",
-    seoKeywords: "schol recept, scholfilet bakken, platvis recept",
+    seoKeywords: "scholfilet bakken, gebakken schol recept, schol met groene kruiden",
+    porties: 4,
   },
 
   // === Recepten met dank aan visrecepten.nl ===
@@ -252,15 +282,15 @@ const receptenOrigineel: Recept[] = [
     tijd: "30 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Gezond", "Bijzonder"],
-    fotoLabel: "Kabeljauwfilet met tomaat en citroen op bord",
+    fotoLabel: "Gebakken kabeljauw met zeekraal en venkel",
     vanSchaap: [
-      "4 stukken kabeljauwlende met vel (elk 150 g)",
-      "250 g verse zeekraal",
+      "4 kabeljauwfilets met vel van 150 g — vraag naar beschikbaarheid",
     ],
     vanSupermarkt: [
+      "250 g zeekraal",
       "1 grote venkelknol",
-      "4 el rijst- of arachideolie",
-      "Zout en peper",
+      "4 el olie",
+      "Peper en zo nodig een beetje zout",
     ],
     bereidingswijze: [
       "Verwarm de oven voor op 125°C. Breng de kabeljauw op smaak met zout en peper.",
@@ -269,42 +299,43 @@ const receptenOrigineel: Recept[] = [
       "Snijd de venkel in dunne reepjes. Verhit 2 el olie in een wok en roerbak venkel en zeekraal 3–4 minuten — gaar maar nog met bite.",
       "Verdeel de groenten over 4 warme borden. Leg de kabeljauw met de velkant omhoog erop.",
     ],
-    verhaal:
-      "Zeekraal halen ze hier soms ook rechtstreeks uit de Zeeuwse delta. Zout van zichzelf, knapperig — het past perfect bij de milde, vlokkerige structuur van kabeljauwlende. Vraag om de lende: dat is het dikste, vetste stuk van de vis.",
+    verhaal: "Kabeljauw met vel krijgt in de pan een krokante buitenkant. Venkel en zeekraal vormen een fris bijgerecht. Proef voordat u zout toevoegt: zeekraal is van zichzelf al zout.",
     seoKeywords:
       "kabeljauw zeekraal recept, kabeljauw venkel, kabeljauwlende bereiden",
+    porties: 4,
   },
   {
     slug: "garnalensalade-pompoen",
     hoofdproduct: "hollandse-garnalen",
-    title: "Hollandse garnalensalade met gegrilde pompoen",
+    title: "Hollandse garnalensalade met geroosterde pompoen",
     subtitle: "Garnalen op hun best — met edamame en zwarte bonen",
     tijd: "40 min",
     moeilijkheid: "Gemiddeld",
     tags: ["Zomers", "Gezond", "Bijzonder"],
-    fotoLabel: "Garnalensalade in een kom met kruiden en tomaten",
-    vanSchaap: ["400 g Hollandse garnalen"],
+    fotoLabel: "Salade met Hollandse garnalen, geroosterde pompoen en bonen",
+    vanSchaap: ["400 g gepelde, gekookte Hollandse garnalen"],
     vanSupermarkt: [
-      "1 kleine pompoen (±1 kg)",
+      "1 kleine pompoen van circa 1 kg",
       "1 kleine krop eikenbladsla",
       "6 el Caesardressing + 2 el mayonaise",
-      "2 el sojasaus",
-      "1 klein blik (200 g) zwarte bonen",
+      "½ el sojasaus",
+      "200 g zwarte bonen uit blik, uitgelekt",
       "125 g voorgekookte edamame",
       "3 el kappertjes",
-      "Kerrypoeder + zonnebloemolie",
+      "1 tl kerrypoeder",
+      "2 el zonnebloemolie",
     ],
     bereidingswijze: [
-      "Halveer de pompoen, verwijder de zaden en snijd in smalle repen. Schil de repen.",
-      "Verwarm de grill op de hoogste stand. Bestrijk de pompoenrepen met olie en bestrooi met kerrypoeder. Grill 5–8 minuten, regelmatig kerend.",
+      "Verwarm de oven voor op 200°C. Halveer en schil de pompoen, verwijder de zaden en snijd in repen van circa 1 cm dik.",
+      "Meng de pompoen met 1 el olie en het kerrypoeder. Verdeel over een bakplaat en rooster 20–25 minuten tot zacht; keer halverwege.",
       "Was de sla. Meng de Caesardressing met de mayonaise en ½ el sojasaus.",
-      "Warm de zwarte bonen op en laat uitlekken. Bak de edamame kort in olie.",
+      "Spoel de zwarte bonen af en laat uitlekken. Bak de voorgekookte edamame 2–3 minuten in de resterende 1 el olie. Laat pompoen en edamame iets afkoelen.",
       "Verdeel sla, pompoen, edamame, bonen en kappertjes over 4 kommen. Leg de garnalen erop. Serveer de dressing apart.",
     ],
-    verhaal:
-      "Hollandse garnalen zijn zo vol van smaak — het zou zonde zijn ze te verstopt in een saus. Hier zijn ze de ster. De pompoen geeft zoetheid, de edamame bite. Lekker met warme rijst of als poké bowl.",
+    verhaal: "Een maaltijdsalade waarin de garnalen worden gecombineerd met zoete pompoen en bonen. Snijd de pompoen in dunne repen en controleer of ze zacht zijn voordat u de salade opmaakt.",
     seoKeywords:
       "hollandse garnalensalade, garnalen salade pompoen, garnalen bowl recept",
+    porties: 4,
   },
   {
     slug: "gebakken-schol-tomaat-olijven",
@@ -314,16 +345,18 @@ const receptenOrigineel: Recept[] = [
     tijd: "25 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Makkelijk"],
-    fotoLabel: "Goudbruin gebakken visfilet in een pan met citroen",
+    fotoLabel: "Gebakken schol op tomatensaus met groene en zwarte olijven",
     vanSchaap: ["600 g scholfilet"],
     vanSupermarkt: [
       "4 el bloem + ½ tl paprikapoeder",
       "3 el olijfolie",
-      "2 sjalotjes (gesnipperd) + 2 teentjes knoflook",
+      "2 sjalotten + 2 tenen knoflook",
       "1 el balsamicoazijn",
       "200 ml gezeefde tomaten",
-      "50 g groene olijven + 50 g zwarte olijven (gehalveerd)",
-      "2 el groene of rode pesto",
+      "50 g groene olijven + 50 g zwarte olijven",
+      "2 el pesto",
+      "Zout en peper",
+      "300 g pasta of 600 g krieltjes (optioneel bijgerecht)",
     ],
     bereidingswijze: [
       "Meng bloem met peper, zout en paprikapoeder. Wentel de scholfilets erdoor.",
@@ -335,6 +368,8 @@ const receptenOrigineel: Recept[] = [
       "Schol met een mediterrane twist — de tomaat-olijvensaus past verrassend goed bij de zachte smaak van schol. Snel klaar en ook nog eens mooi op tafel. Probeer eens met kerstomaten door de saus.",
     seoKeywords:
       "gebakken schol recept, schol tomaat olijven, scholfilet bereiden",
+    porties: 4,
+    keuken: "Mediterraan",
   },
   {
     slug: "roggebrood-paling-appelsalsa",
@@ -346,55 +381,58 @@ const receptenOrigineel: Recept[] = [
     fotoLabel: "Roggebrood met gerookte vis, roomkaas en bieslook",
     vanSchaap: ["100 g gerookte paling"],
     vanSupermarkt: [
-      "1 appel (geschild)",
-      "1 el citroensap + ½ el gembersiroop",
-      "1 el kervel of bieslook (fijngesneden)",
-      "3 roggebroodjes",
-      "Mayonaise",
+      "1 kleine appel",
+      "1 el citroensap",
+      "½ el gembersiroop",
+      "1 el fijngeknipte bieslook",
+      "4 plakken roggebrood",
+      "1 el mayonaise",
     ],
     bereidingswijze: [
-      "Hak de appel fijn en meng met citroensap, gembersiroop en kervel of bieslook.",
-      "Snijd de paling in stukken van 5 cm.",
-      "Snijd de roggebroodjes elk in 3 plakken. Besmeer dun met mayonaise.",
-      "Leg de palingsstukken op de mayonaise. Schep de appelsalsa erover. Direct serveren.",
+      "Snijd de appel in kleine blokjes en meng met citroensap, gembersiroop en bieslook.",
+      "Snijd de palingfilet in smalle stukken. Controleer op achtergebleven graten.",
+      "Snijd elke plak roggebrood in twee kleine hapjes en bestrijk dun met mayonaise.",
+      "Verdeel de paling en appelsalsa over de acht hapjes en serveer direct.",
     ],
     verhaal:
       "Gerookte paling is het best bewaarde geheim van de Hollandse vishandel. Diegenen die het kennen, zweren erbij. De zoetzure appelsalsa snijdt door de rijkheid van de paling — een hapje dat indruk maakt zonder dat het u meer dan 10 minuten kost.",
     highlight: "Amuse in 10 min",
     seoKeywords:
       "roggebrood paling recept, gerookte paling amuse, paling appel hapje",
+    porties: 4,
   },
   {
     slug: "krabsalade-avocado",
-    hoofdproduct: "surimisalade",
-    title: "Krabsalade met avocado",
+    title: "Surimisalade met avocado",
     subtitle: "Licht, fris zomervoorgerecht",
     tijd: "20 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Zomers"],
-    fotoLabel: "Frisse krabsalade als voorgerecht op een wit bord",
-    vanSchaap: ["200 g krabsticks"],
+    fotoLabel: "Salade met surimi, avocado en tomaat",
+    vanSchaap: [
+      "200 g surimi (krabsticks) — vraag naar beschikbaarheid",
+    ],
     vanSupermarkt: [
-      "1 lente-uitje",
-      "3 kleine tomaatjes",
+      "1 lente-ui",
+      "100 g kerstomaten",
       "2 rijpe avocado's",
       "3 el citroensap",
       "40 g veldsla",
-      "1 tl mosterd + ½ tl suiker",
-      "2 el bieslook (fijngeknipt)",
-      "6 el olijfolie",
-      "Peper en zout",
+      "1 tl mosterd",
+      "½ tl suiker",
+      "2 el fijngeknipte bieslook",
+      "3 el olijfolie",
+      "Zout en peper",
     ],
     bereidingswijze: [
-      "Snijd de lente-uitjes in ringetjes en de tomaatjes in partjes. Halveer de avocado's, verwijder de pit, schil en snijd in plakken. Besprenkel met 1 el citroensap.",
-      "Trek de krabsticks met een vork uit elkaar tot lange slierten.",
-      "Verdeel veldsla, tomaat en krab over 4 borden. Schik avocadoplakken waaiergewijs erop. Bestrooi met lente-ui.",
-      "Meng mosterd, suiker, zout, peper en bieslook. Voeg olie toe en klop tot een gladde dressing. Schenk over de salade.",
+      "Snijd lente-ui en tomaten. Halveer de avocado's, verwijder de pit en snijd het vruchtvlees in plakken. Besprenkel met 1 el citroensap.",
+      "Snijd de surimi in stukken of trek voorzichtig uit elkaar.",
+      "Meng de resterende 2 el citroensap met mosterd, suiker, olijfolie, bieslook en peper.",
+      "Verdeel veldsla, surimi, tomaten en avocado over vier borden. Voeg lente-ui en dressing toe.",
     ],
-    verhaal:
-      "Krabsalade hoeft niet ingewikkeld te zijn — het gaat om de kwaliteit van de krabsticks en de rijpheid van de avocado. Een mooie zomerstart voor een diner, of als lunch met een stuk brood.",
-    seoKeywords:
-      "krabsalade avocado recept, krab salade voorgerecht, krabsticks salade",
+    verhaal: "Surimi, ook bekend als krabsticks, is een product van vis en is geen echt krabvlees. Met avocado en een citroendressing maakt u er een eenvoudig voorgerecht van.",
+    seoKeywords: "surimisalade avocado recept, krabsticks salade, surimi voorgerecht",
+    porties: 4,
   },
   {
     slug: "witlof-garnalen-oesterzwam",
@@ -405,28 +443,33 @@ const receptenOrigineel: Recept[] = [
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Gezond"],
     fotoLabel: "Salade met garnalen en paddenstoelen op een bord",
-    vanSchaap: ["100 g Hollandse garnalen"],
+    vanSchaap: [
+      "200 g gepelde, gekookte Hollandse garnalen",
+    ],
     vanSupermarkt: [
       "2 stronkjes witlof",
-      "1 stronk little gem sla",
+      "1 little gem",
       "150 g oesterzwammen",
       "½ komkommer",
-      "100 g cherrytomaatjes",
-      "4 stengels bosui",
-      "Royale scheut azijn",
-      "2 el olijfolie",
-      "Verse dille, zout en peper",
+      "100 g kerstomaten",
+      "2 bosuien",
+      "1 el wittewijnazijn",
+      "3 el olijfolie",
+      "1 el fijngehakte dille",
+      "Zout en peper",
     ],
     bereidingswijze: [
-      "Scheur de witlofbladeren los en meng met een royale scheut azijn. Verwijder little gem-blaadjes en laat uitlekken.",
-      "Verhit een pan op hoog vuur. Scheur grotere oesterzwammen in gelijke stukken en bak in olijfolie goudbruin en knapperig — regelmatig omscheppen.",
-      "Snijd komkommer in reepjes, tomaatjes doormidden, hak bosui en dille fijn. Meng in een kom met olijfolie, zout en peper.",
-      "Schik sla- en witlofbladeren op de borden. Verdeel de salade en gebakken oesterzwammen erover. Garneer met Hollandse garnalen.",
+      "Was en droog de sla en witlof. Snijd komkommer, tomaten en bosui.",
+      "Scheur de oesterzwammen in stukken. Bak in 2 el olie circa 5–7 minuten goudbruin en laat even afkoelen.",
+      "Meng 1 el olie met azijn, dille, zout en peper tot een dressing.",
+      "Verdeel sla, witlof en gesneden groenten over vier borden. Voeg de oesterzwammen en garnalen toe.",
+      "Besprenkel met de dressing en serveer direct.",
     ],
     verhaal:
       "Hollandse garnalen hebben zo'n puur, zoet smaakje — ze hoeven weinig. De oesterzwammen worden knapperig gebakken en vormen een mooie tegenhanger. Dit is een lunch die er feestelijk uitziet maar in 20 minuten klaar staat.",
     seoKeywords:
       "witlof garnalen salade, oesterzwam salade garnalen, hollandse garnalen recept",
+    porties: 4,
   },
 ];
 
@@ -455,10 +498,8 @@ export interface ReceptBeeld {
 /**
  * Wat we bij een recept laten zien.
  *
- * Eerste keus is een foto van het gerecht zelf. Zolang die er niet is tonen we
- * de vis die je ervoor bij ons haalt, mét een bijschrift dat zegt wat het is.
- * Wat we níet doen is een foto van kabeljauw onder een receptnaam zetten en de
- * lezer laten denken dat het het gerecht is.
+ * Alleen een gerechtfoto wordt als receptbeeld gebruikt. Zonder gerechtfoto
+ * blijft het naamvlak staan; een rauwe productfoto is geen vervanging.
  */
 export function receptBeeld(recept: Recept): ReceptBeeld {
   if (recept.fotoUrl) {
@@ -466,16 +507,6 @@ export function receptBeeld(recept: Recept): ReceptBeeld {
   }
 
   const product = recept.hoofdproduct ? getProduct(recept.hoofdproduct) : undefined;
-  if (product?.photo) {
-    return {
-      src: product.photo,
-      alt: `${product.naam} bij Schaap's Vishandel in Leiden — de vis voor ${recept.title.toLowerCase()}`,
-      bijschrift: `Wat u hiervoor bij ons haalt: ${product.naam}`,
-      productSlug: product.slug,
-      productNaam: product.naam,
-    };
-  }
-
   return {
     alt: recept.fotoLabel,
     productSlug: product?.slug,
