@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import {
@@ -22,10 +22,9 @@ import {
   schaalById,
   totaal as berekenTotaal,
   type Onderdeel,
-  type Samenstelling,
   type Schaal,
 } from "@/lib/visschaal";
-import { bewaarSamenstelling, leesSamenstelling } from "@/lib/mandje";
+import { useWinkelwagen } from "@/components/winkel/Winkelwagen";
 import { euro, whatsappLink } from "@/lib/bedrijf";
 import { useSchaalTekst } from "@/components/visschaal/tekst";
 import { Beeld } from "@/components/ui/Beeld";
@@ -47,19 +46,9 @@ export function VisschaalConfigurator() {
   const locale = useLocale();
   const tekst = useSchaalTekst();
 
-  const [samen, setSamen] = useState<Samenstelling>(LEGE_SAMENSTELLING);
-  const [geladen, setGeladen] = useState(false);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setSamen(leesSamenstelling());
-    setGeladen(true);
-  }, []);
-
-  useEffect(() => {
-    if (!geladen) return;
-    bewaarSamenstelling(samen);
-  }, [samen, geladen]);
+  // Eén gedeelde samenstelling: ook bij client-side navigatie ziet de
+  // checkout direct de schaal en extra's die hier zijn gekozen.
+  const { samenstelling: samen, zetSamenstelling: setSamen } = useWinkelwagen();
 
   const regels = useMemo(() => maakRegels(samen), [samen]);
   const totaal = useMemo(() => berekenTotaal(samen), [samen]);
