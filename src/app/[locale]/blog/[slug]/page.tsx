@@ -1,3 +1,5 @@
+import Image from "next/image";
+import { kruimelSchema } from "@/lib/seo";
 import Link from "next/link";
 import { bestelContact } from "@/lib/bestel-contact";
 import { permanentRedirect } from "next/navigation";
@@ -25,7 +27,7 @@ export async function generateMetadata({
 
   return {
     title: `${post.title} | Blog Schaap's Vis Leiden`,
-    description: post.excerpt,
+    description: post.excerpt.slice(0, 160),
     keywords: post.seoKeywords,
     // Deze artikelen bestaan alleen in het Nederlands; alle taalversies
     // verwijzen daarom naar hetzelfde Nederlandse adres.
@@ -57,8 +59,9 @@ export default async function BlogDetailPage({
     "@type": "Article",
     headline: post.title,
     description: post.excerpt,
-    image: [post.fotoUrl],
+    image: [`${BEDRIJF.domein}${post.fotoUrl}`],
     datePublished: post.datum,
+    dateModified: post.bijgewerkt ?? post.datum,
     inLanguage: "nl-NL",
     author: { "@type": "Organization", name: BEDRIJF.naam, url: BEDRIJF.domein },
     publisher: { "@type": "Organization", name: BEDRIJF.naam },
@@ -70,6 +73,7 @@ export default async function BlogDetailPage({
   return (
     <>
       <Schema data={articleSchema} />
+      <Schema data={kruimelSchema("nl", [{ naam: BEDRIJF.naamKort, pad: "/" }, { naam: "Blog", pad: "/blog" }, { naam: post.title, pad: `/blog/${slug}` }])} />
 
       <PaginaKop
         kruimels={[
@@ -84,10 +88,12 @@ export default async function BlogDetailPage({
 
       {/* ── Het stuk zelf ────────────────────────────────────────────────── */}
       <Sectie grond="papier" smal>
+        <Image src={post.fotoUrl} alt={post.fotoAlt} width={1400} height={933} sizes="(max-width: 800px) 100vw, 800px" className="article-photo mb-10" />
+        <nav aria-label="In dit artikel" className="recipe-checklist mb-10"><p className="kapitaal mb-3">In dit artikel</p><ul className="space-y-2">{post.secties.map((s,i) => s.kop && <li key={i}><a className="underline underline-offset-4" href={`#onderdeel-${i}`}>{s.kop}</a></li>)}</ul></nav>
         <div className="lees">
           {post.secties.map((sectie, i) => (
             <div key={i} className={i > 0 ? "mt-9" : undefined}>
-              {sectie.kop && <h2 className="text-[1.5rem] mb-3">{sectie.kop}</h2>}
+              {sectie.kop && <h2 id={`onderdeel-${i}`} className="text-[1.5rem] mb-3 scroll-mt-32">{sectie.kop}</h2>}
               {sectie.alineas.map((alinea, j) => (
                 <p key={j} style={{ color: "var(--charcoal)" }}>
                   {alinea}

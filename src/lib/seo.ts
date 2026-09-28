@@ -51,6 +51,7 @@ export function paginaMetadata({
       title,
       description,
       type: "website",
+      images: [{ url: `${BEDRIJF.domein}/og-image.png`, alt: BEDRIJF.naam }],
       url: `${BEDRIJF.domein}/${locale}${pad === "/" ? "" : pad}`,
     },
     ...(geenIndex ? { robots: { index: false, follow: true } } : {}),
@@ -100,18 +101,16 @@ const OPENINGSTIJDEN = [
 export function winkelSchema(locale: string) {
   return {
     "@context": "https://schema.org",
-    // FishStore is het meest specifieke type dat schema.org kent voor een
-    // viswinkel — specifieker is beter dan een algemeen "LocalBusiness".
-    "@type": ["FishStore", "LocalBusiness"],
+    "@type": "GroceryStore",
     "@id": `${BEDRIJF.domein}/#winkel`,
     name: BEDRIJF.naam,
     alternateName: [...BEDRIJF.ookBekendAls],
     description:
       locale === "de"
-        ? "Familienfischhandlung in der Herenstraat 48 in Leiden, seit 1938. Frischer Fisch, Fischplatten und Lieferung in Leiden und Umgebung."
+        ? "Familienfischhandlung in der Herenstraat 48 in Leiden, seit 1938. Frischer und geräucherter Fisch, Fischplatten und persönliche Beratung."
         : locale === "en"
-          ? "Family fishmonger at Herenstraat 48 in Leiden, trading since 1938. Fresh fish, seafood platters and delivery across Leiden and the surrounding area."
-          : "Viswinkel aan de Herenstraat 48 in Leiden, sinds 1938. Verse vis, visschalen en bezorging in Leiden en omgeving.",
+          ? "Family fishmonger at Herenstraat 48 in Leiden, trading since 1938. Fresh and smoked fish, seafood platters and personal advice."
+          : "Viswinkel aan de Herenstraat 48 in Leiden, sinds 1938. Verse en gerookte vis, visschalen en persoonlijk advies over herkomst en bereiding.",
     url: `${BEDRIJF.domein}/${locale}`,
     telephone: BEDRIJF.telefoon.e164,
     address: ADRES,
@@ -133,10 +132,6 @@ export function winkelSchema(locale: string) {
       name: g.naam,
       address: { "@type": "PostalAddress", addressLocality: g.naam, addressCountry: "NL" },
     })),
-    hasDeliveryMethod: [
-      { "@type": "DeliveryMethod", name: "Bezorging aan huis" },
-      { "@type": "DeliveryMethod", name: "Afhalen in de winkel" },
-    ],
     knowsLanguage: ["nl", "en", "de"],
   };
 }
@@ -149,15 +144,15 @@ export function bezorgdienstSchema(locale: string) {
     "@id": `${BEDRIJF.domein}/#bezorgdienst`,
     serviceType:
       locale === "de"
-        ? "Lieferung von frischem Fisch"
+        ? "Fischplatten auf Anfrage"
         : locale === "en"
-          ? "Fresh fish delivery"
-          : "Verse vis bezorgen",
+          ? "Seafood platter enquiries"
+          : "Visschalen op aanvraag",
     provider: { "@id": `${BEDRIJF.domein}/#winkel` },
     areaServed: GEMEENTEN.map((g) => ({ "@type": "City", name: g.naam })),
     availableChannel: {
       "@type": "ServiceChannel",
-      serviceUrl: `${BEDRIJF.domein}/${locale}/bezorgen`,
+      serviceUrl: `${BEDRIJF.domein}/${locale}/visschalen`,
       servicePhone: BEDRIJF.telefoon.e164,
       serviceLocation: { "@type": "Place", address: ADRES },
     },
@@ -287,6 +282,7 @@ export function eenTaalMetadata({
       title,
       description,
       type: "website",
+      images: [{ url: `${BEDRIJF.domein}/og-image.png`, alt: BEDRIJF.naam }],
       url: `${BEDRIJF.domein}/${taal}${pad}`,
     },
   };

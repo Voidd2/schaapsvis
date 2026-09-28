@@ -19,7 +19,7 @@ export function ReceptFoto({
 }) {
   return (
     <div
-      className="w-full aspect-square flex items-center justify-center overflow-hidden"
+      className="w-full aspect-[4/3] flex items-center justify-center overflow-hidden"
       style={{
         backgroundColor: beeld.src ? "#fff" : "var(--sand)",
         borderBottom: "2px solid var(--gold)",
@@ -30,8 +30,10 @@ export function ReceptFoto({
         <img
           src={beeld.src}
           alt={beeld.alt}
-          className="w-full h-full object-contain p-5"
+          className={beeld.bijschrift ? "w-full h-full object-contain p-5" : "w-full h-full object-cover"}
           loading="lazy"
+          width={1400}
+          height={1050}
         />
       ) : (
         <span

@@ -3,7 +3,6 @@ import {
   winkelSchema,
   organisatieSchema,
   websiteSchema,
-  bezorgdienstSchema,
 } from "@/lib/seo";
 
 /**
@@ -24,7 +23,7 @@ export function JsonLd({ locale = "nl" }: { locale?: string }) {
         winkelSchema(locale),
         organisatieSchema(),
         websiteSchema(locale),
-        bezorgdienstSchema(locale),
+
       ]}
     />
   );

@@ -4,7 +4,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { NewsletterSignup } from "@/components/shared/NewsletterSignup";
 import { BEDRIJF } from "@/lib/bedrijf";
 import { BEELD } from "@/lib/beeld";
-import { GEMEENTEN } from "@/lib/bezorging";
+
 
 /**
  * De footer.
@@ -45,7 +45,7 @@ export function Footer() {
         { href: bestelContact(locale).href, label: bestelContact(locale).label },
         { href: p("/visschalen"), label: nav("visschalen") },
         { href: p("/assortiment"), label: nav("assortiment") },
-        { href: p("/bezorgen"), label: nav("bezorgen") },
+
       ],
     },
     {
@@ -67,6 +67,10 @@ export function Footer() {
       links: [
         { href: p("/bezoek-ons"), label: nav("locaties") },
         { href: p("/contact"), label: nav("contact") },
+        { href: "/nl/viswinkel-leiden", label: "Viswinkel Leiden" },
+        { href: "/nl/marktkraam-leiden", label: "Marktkraam Leiden" },
+        { href: "/nl/viswinkel-voorschoten", label: "Marktkraam Voorschoten" },
+        { href: "/nl/too-good-to-go", label: "Too Good To Go" },
       ],
     },
   ];
@@ -166,26 +170,6 @@ export function Footer() {
           ))}
         </div>
 
-        {/* De gemeenten klein onderaan: wél de interne links die het zoekverkeer
-            opleveren, zonder dat de voet eruitziet als een linklijst. */}
-        <p
-          className="max-w-6xl mx-auto px-4 pb-6 text-[0.78rem] leading-relaxed"
-          style={{ opacity: 0.55 }}
-        >
-          {t("bezorgenIntro")}{" "}
-          {GEMEENTEN.map((g, i) => (
-            <span key={g.slug}>
-              {i > 0 && (i === GEMEENTEN.length - 1 ? ` ${t("en")} ` : ", ")}
-              <Link
-                href={p(`/bezorgen/${g.slug}`)}
-                className="underline underline-offset-2 hover:text-white transition-colors"
-              >
-                {g.naam}
-              </Link>
-            </span>
-          ))}
-          .
-        </p>
       </nav>
 
       {/* ── Onderrand ────────────────────────────────────────────────────── */}

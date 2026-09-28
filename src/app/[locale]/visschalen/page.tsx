@@ -128,7 +128,6 @@ export default async function VisschalenPage({
         tekst={t("vergelijkingKort", { markt: euro(MARKT.goedkoopstePerPersoon) })}
         knoppen={[
           { label: t("naarBestellen"), href: "#samenstellen", extern: true },
-          { label: nav("bezorgen"), href: `/${locale}/bezorgen`, soort: "lijn" },
           {
             label: g("whatsapp"),
             href: whatsappLink("Hallo Schaap's Vishandel, ik heb een vraag over een visschaal."),

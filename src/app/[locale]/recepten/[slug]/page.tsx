@@ -1,3 +1,6 @@
+import { ReceptTools } from "@/components/recepten/ReceptTools";
+import { receptDuur } from "@/lib/recept-hulp";
+import { kruimelSchema } from "@/lib/seo";
 import Link from "next/link";
 import { bestelContact } from "@/lib/bestel-contact";
 import { permanentRedirect } from "next/navigation";
@@ -51,7 +54,7 @@ export async function generateMetadata({
       title: `${recept.title} | Schaap's Vis Leiden`,
       description: recept.subtitle,
       type: "article",
-      images: recept.fotoUrl ? [{ url: recept.fotoUrl }] : [],
+      images: [{ url: recept.fotoUrl || "/og-image.png", alt: recept.title }],
     },
   };
 }
@@ -74,9 +77,11 @@ export default async function ReceptDetailPage({
     "@type": "Recipe",
     name: recept.title,
     description: recept.subtitle,
-    image: beeld.src ? [`${BEDRIJF.domein}${beeld.src}`] : undefined,
+    image: recept.fotoUrl ? [`${BEDRIJF.domein}${recept.fotoUrl}`] : undefined,
     recipeYield: recept.porties ? `${recept.porties} personen` : undefined,
-    totalTime: `PT${parseInt(recept.tijd) || 30}M`,
+    totalTime: receptDuur(recept.tijd),
+    inLanguage: "nl-NL",
+    url: `${BEDRIJF.domein}/nl/recepten/${slug}`,
     recipeCategory: "Visgerecht",
     recipeCuisine: "Nederlands",
     keywords: recept.seoKeywords,
@@ -92,6 +97,7 @@ export default async function ReceptDetailPage({
   return (
     <>
       <Schema data={recipeSchema} />
+      <Schema data={kruimelSchema("nl", [{ naam: BEDRIJF.naamKort, pad: "/" }, { naam: "Recepten", pad: "/recepten" }, { naam: recept.title, pad: `/recepten/${slug}` }])} />
 
       <PaginaKop
         kruimels={[
@@ -115,6 +121,7 @@ export default async function ReceptDetailPage({
       />
 
       <Sectie grond="papier">
+        <ReceptTools items={[...recept.vanSchaap, ...recept.vanSupermarkt]} />
         <div className="grid lg:grid-cols-[1.35fr_0.65fr] gap-10 lg:gap-16">
           {/* ── Verhaal en bereiding ─────────────────────────────────────── */}
           <div>
@@ -126,7 +133,7 @@ export default async function ReceptDetailPage({
               <blockquote className="citaat">{recept.verhaal}</blockquote>
             </div>
 
-            <h2 className="text-[1.6rem] mb-6">Bereiding</h2>
+            <h2 id="bereiding" className="text-[1.6rem] mb-6 scroll-mt-32">Bereiding</h2>
             <ol style={{ borderTop: "1px solid var(--linen)" }}>
               {recept.bereidingswijze.map((stap, i) => (
                 <li
@@ -173,6 +180,7 @@ export default async function ReceptDetailPage({
             )}
             {!beeld.bijschrift && <div className="mb-8" />}
 
+            {recept.hoofdproduct && <Link className="inline-block mb-5 underline font-semibold" href={`/nl/assortiment/${recept.hoofdproduct}`}>Meer over de vis in dit recept →</Link>}
             <div className="pt-4" style={{ borderTop: "2px solid var(--navy)" }}>
               <p className="kapitaal mb-3">Bij Schaap&apos;s Vis</p>
               <ul className="mb-5">
@@ -192,7 +200,7 @@ export default async function ReceptDetailPage({
                   style={{ borderLeft: "2px solid var(--rood)", color: "var(--charcoal)" }}
                 >
                   Verse {aanvraag} is bij ons <strong>op aanvraag</strong>. Bel even van tevoren
-                  op {BEDRIJF.telefoon.weergave}, dan zorgen we dat het er is.
+                  op {BEDRIJF.telefoon.weergave}, dan kijken we naar de beschikbaarheid.
                 </p>
               ) : (
                 <a href={bestelContact(locale).href} className="knop knop-rood">{bestelContact(locale).label}</a>

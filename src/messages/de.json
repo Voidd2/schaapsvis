@@ -14,8 +14,8 @@
     "bezorgen": "Lieferung"
   },
   "meta": {
-    "homeTitle": "Fischgeschäft Leiden — Herenstraat 48 | Frischer Fisch & Lieferung | Schaap's Vishandel",
-    "homeDesc": "Familienfischhandlung im Zentrum von Leiden seit 1938. Frischer Fisch von der Auktion, Fischplatten nach Wunsch und Lieferung nach Leiden, Leiderdorp, Voorschoten, Wassenaar und Leidschendam.",
+    "homeTitle": "Fischgeschäft in Leiden seit 1938 | Schaap’s Vishandel",
+    "homeDesc": "Frischer und geräucherter Fisch, Lachs und Fischplatten in Leiden. Entdecken Sie unser Geschäft, Marktstände, Rezepte und die Herkunft.",
     "verhaalTitle": "Die Geschichte von Schaap's Vis Leiden | Fischhandel seit 1938",
     "verhaalDesc": "Von Gerrit Schaap 1938 bis Aldert Haasnoot heute — fast neunzig Jahre Leidener Handwerk, vier Generationen, eine Adresse: Herenstraat 48, Leiden.",
     "varlaksTitle": "Bio-Lachs Varlaks in Leiden | Schaap's Vishandel",
@@ -163,8 +163,8 @@
     "feitTeKoopLabel": "Erhältlich",
     "feitTeKoopWaarde": "Laden, Markt, Voorschoten",
     "bestelKnop": "Varlaks bestellen",
-    "slotTitle": "Varlaks abholen oder liefern lassen",
-    "slotText": "Täglich im Laden in der Herenstraat, mittwochs und samstags auf dem Markt in Leiden, freitags bei Hoogvliet in Voorschoten. Frischen Fisch liefern wir in Leiden, Leiderdorp, Voorschoten, Wassenaar und Leidschendam."
+    "slotTitle": "Suchen Sie VÅRLAKS-Lachs?",
+    "slotText": "Fragen Sie nach Verfügbarkeit, Herkunft und Zertifizierung. Nur Fischplatten können online bestellt werden."
   },
   "assortimentPage": {
     "title": "Unser Sortiment",
@@ -173,7 +173,7 @@
   },
   "bezoekPage": {
     "title": "Wo Sie uns finden",
-    "sub": "Das Geschäft in der Herenstraat, zwei Markttage in Leiden und freitags Voorschoten. Und seit Kurzem bringen wir es auch."
+    "sub": "Unser Geschäft in der Herenstraat, zwei Markttage in Leiden und freitags in Voorschoten. Wählen Sie einen Standort für Adresse, Zeiten und Route."
   },
   "contactPage": {
     "title": "Kontakt",
@@ -236,7 +236,7 @@
     "voorschotenTijden": "Freitag 08:30–17:30",
     "bezorgenIn": "Fisch liefern nach {plaats}",
     "opgericht": "gegründet {jaar} von {oprichter}",
-    "betalen": "Karte und bar · iDEAL und Kreditkarte folgen in Kürze",
+    "betalen": "Im Geschäft bar oder mit Karte bezahlen.",
     "bezorgenIntro": "Wir liefern auch in",
     "en": "und"
   },
@@ -303,7 +303,7 @@
     "gebakkenLabel": "Aus der Pfanne",
     "gebakkenKop": "Wofür Leiden uns kennt",
     "gebakkenTekst": "Kibbeling, Lekkerbek und gebackener Fisch. Jeden Tag frisch in der Pfanne, im Schälchen zum Mitnehmen, mit Knoblauchsauce wenn Sie mögen. Dafür kommen die meisten zum ersten Mal herein.",
-    "gebakkenNiet": "Das liefern wir bewusst nicht. Gebackener Fisch wird nach zwanzig Minuten in der Schachtel weich, und dann verkaufen wir Ihnen etwas, das wir selbst nicht essen würden. Bei uns bekommen Sie ihn so, wie er gedacht ist: heiß und knusprig.",
+    "gebakkenNiet": "Kibbeling und Backfisch erhalten Sie frisch und warm im Geschäft oder am Marktstand.",
     "gebakkenLink": "Kommen Sie für gebackenen Fisch vorbei"
   },
   "gedeeld": {
@@ -592,7 +592,7 @@
     "woensdagToelichting": "In der Haarlemmerstraat, auf der Seite von Dille & Camille.",
     "voorschotenNaam": "Voorschoten, bei Hoogvliet",
     "voorschotenAdres": "Parkplatz Hoogvliet, Voorschoten",
-    "voorschotenToelichting": "Jeden Freitag auf dem Parkplatz. Passt das nicht? Nach Voorschoten liefern wir auch.",
+    "voorschotenToelichting": "Jeden Freitag bei Hoogvliet.",
     "diVr": "Dienstag bis Freitag",
     "za": "Samstag",
     "wo": "Mittwoch",

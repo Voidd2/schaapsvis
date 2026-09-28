@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { bestelContact } from "@/lib/bestel-contact";
 import type { Metadata } from "next";
@@ -6,12 +7,12 @@ import { JsonLd } from "@/components/JsonLd";
 import { Sectie, Kop } from "@/components/ui/Sectie";
 import { PaginaSlot } from "@/components/ui/PaginaKop";
 import { Beeld } from "@/components/ui/Beeld";
-import { PostcodeCheck } from "@/components/bezorgen/PostcodeCheck";
+
 import { SeizoensBanner } from "@/components/shared/SeizoensBanner";
 import { paginaMetadata } from "@/lib/seo";
 import { BEDRIJF, VERKOOPPUNTEN, euro, type VerkooppuntId } from "@/lib/bedrijf";
 import type { BeeldNaam } from "@/lib/beeld";
-import { BEZORGING, GEMEENTEN, bezorgdagenTekst } from "@/lib/bezorging";
+import { bezorgdagenTekst } from "@/lib/bezorging";
 import { VANAF_BEDRAG } from "@/lib/visschaal";
 import { products, CATEGORIE_LABELS, type Categorie } from "@/lib/assortiment-data";
 import { googleReviews, googleRating, googleReviewCount, googleMapsUrl } from "@/lib/reviews";
@@ -59,7 +60,7 @@ export default async function HomePage({
   const h = await getTranslations({ locale, namespace: "home" });
   const nav = await getTranslations({ locale, namespace: "nav" });
   const g = await getTranslations({ locale, namespace: "gedeeld" });
-  const b = await getTranslations({ locale, namespace: "bezorgen" });
+
   const v = await getTranslations({ locale, namespace: "visschaal" });
 
   const dagen = bezorgdagenTekst();
@@ -101,7 +102,7 @@ export default async function HomePage({
 
           {/* De winkel zelf, zodra die foto er is. Geen close-up van vis: die
               heeft elke vishandel, een gevel aan de Herenstraat niet. */}
-          <Beeld naam="winkelGevel" prioriteit streep="var(--navy)" />
+          <Image src="/images/recepten/zalm-citroen-dille.webp" alt={locale === "nl" ? "Zalm uit de oven met citroen en dille" : locale === "de" ? "Ofenlachs mit Zitrone und Dill" : "Oven-baked salmon with lemon and dill"} width={1400} height={933} sizes="(max-width: 800px) 100vw, 50vw" className="rounded-2xl w-full" fetchPriority="high" />
         </div>
       </section>
 
@@ -218,79 +219,6 @@ export default async function HomePage({
         </dl>
       </section>
 
-      {/* ── Bezorgen ──────────────────────────────────────────────────────── */}
-      <Sectie grond="papier">
-        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-16">
-          <div>
-            <Kop label={h("bezorgLabel")} titel={h("bezorgKop")} />
-            <p className="lees mb-7" style={{ color: "var(--charcoal)" }}>
-              {h("bezorgTekst")}
-            </p>
-
-            <div className="grid sm:grid-cols-2 gap-8 mb-8">
-              {[
-                { kop: h("bezorgWelKop"), kleur: "var(--seafoam)", regels: [h("bezorgWel1"), h("bezorgWel2")] },
-                { kop: h("bezorgNietKop"), kleur: "var(--grijs)", regels: [h("bezorgNiet1"), h("bezorgNiet2")] },
-              ].map(({ kop, kleur, regels }) => (
-                <div key={kop}>
-                  <h3 className="kapitaal mb-2" style={{ color: kleur }}>
-                    {kop}
-                  </h3>
-                  <ul className="text-[0.96rem]" style={{ color: "var(--charcoal)" }}>
-                    {regels.map((regel) => (
-                      <li
-                        key={regel}
-                        className="py-2 leading-snug"
-                        style={{ borderTop: "1px solid var(--linen)" }}
-                      >
-                        {regel}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-
-            <p className="text-[0.95rem] mb-5" style={{ color: "var(--charcoal)" }}>
-              {b("dagen", { dagen })} {b("besteltijd", { tijd: BEZORGING.uitersteBesteltijd })}{" "}
-              {b("gratisVanaf", { bedrag: euro(BEZORGING.gratisVanaf) })}
-            </p>
-
-            <Link
-              href={`/${locale}/bezorgen`}
-              className="font-semibold underline underline-offset-4"
-              style={{ color: "var(--navy)" }}
-            >
-              {h("bezorgLink")} &rarr;
-            </Link>
-          </div>
-
-          <div
-            className="p-6 md:p-7 self-start"
-            style={{ backgroundColor: "#fff", border: "1px solid var(--linen)" }}
-          >
-            <h3 className="text-[1.3rem] mb-1">{b("checkKop")}</h3>
-            <p className="text-sm mb-4" style={{ color: "var(--grijs)" }}>
-              {b("checkTekst")}
-            </p>
-            <PostcodeCheck />
-            <ul className="mt-6 flex flex-wrap gap-x-4 gap-y-1 text-sm">
-              {GEMEENTEN.map((gem) => (
-                <li key={gem.slug}>
-                  <Link
-                    href={`/${locale}/bezorgen/${gem.slug}`}
-                    className="underline underline-offset-4"
-                    style={{ color: "var(--navy)" }}
-                  >
-                    {gem.naam}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </Sectie>
-
       {/* ── Visschalen ────────────────────────────────────────────────────── */}
       <Sectie grond="zand">
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-center">
@@ -390,6 +318,8 @@ export default async function HomePage({
           </ul>
         </div>
       </Sectie>
+
+      <Sectie grond="zand"><Kop label={locale === "nl" ? "Van de toonbank naar uw keuken" : "Recepten · Nederlands"} titel={locale === "nl" ? "Wat eten we vanavond?" : "Cooking inspiration"} intro={locale === "nl" ? "Zalm uit de oven, romige pasta of kabeljauw met citroen: vind een gerecht op vissoort, bereidingstijd en moeilijkheid." : "Discover our Dutch-language fish recipes."} /><div className="flex flex-wrap gap-3"><Link href="/nl/recepten" className="knop knop-navy">{nav("recepten")}</Link><Link href="/nl/blog" className="knop knop-lijn">{nav("blog")}</Link></div></Sectie>
 
       {/* ── Herkomst ──────────────────────────────────────────────────────── */}
       <Sectie grond="navy" smal>

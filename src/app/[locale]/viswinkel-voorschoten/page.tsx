@@ -6,8 +6,8 @@ import { Schema } from "@/components/Schema";
 import { Sectie, Kop, Vragen } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { eenTaalMetadata, kruimelSchema, vraagSchema } from "@/lib/seo";
-import { BEDRIJF, VERKOOPPUNTEN, euro } from "@/lib/bedrijf";
-import { BEZORGING, gemeenteBySlug, kostenVoor } from "@/lib/bezorging";
+import { BEDRIJF, VERKOOPPUNTEN } from "@/lib/bedrijf";
+
 
 export async function generateMetadata(): Promise<Metadata> {
   return eenTaalMetadata({
@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
     pad: "/viswinkel-voorschoten",
     title: "Viswinkel Voorschoten — verse vis op de vrijdagmarkt | Schaap's Vis",
     description:
-      "Verse vis in Voorschoten? Schaap's Vishandel staat elke vrijdag met de viskraam bij Hoogvliet. Kibbeling, haring, biologische Varlaks zalm en duurzame vis, sinds 1938. Bezorgen kan ook.",
+      "Verse vis in Voorschoten? Schaap's Vishandel staat elke vrijdag met de viskraam bij Hoogvliet. Kibbeling, haring, VÅRLAKS-zalm en duurzame vis, sinds 1938.",
   });
 }
 
@@ -29,12 +29,12 @@ const FAQ = [
     a: "Op vrijdag. De rest van de week vindt u ons in de winkel op Herenstraat 48 in Leiden en op de Leidse markt (woensdag en zaterdag).",
   },
   {
-    v: "Bezorgen jullie ook in Voorschoten?",
-    a: "Ja, verse vis en visschalen. Rijtijd vanaf de winkel is ongeveer 15 minuten. Bezorgkosten € 4,95, gratis vanaf € 60. Gebakken vis bezorgen we niet — kibbeling en lekkerbek zijn na twintig minuten in een doos niet lekker meer.",
+    v: "Kan ik vis bestellen?",
+    a: "Alleen visschalen kunt u online bestellen. Voor andere producten of wensen stuurt u ons een WhatsApp-bericht; we kijken graag wat mogelijk is.",
   },
   {
     v: "Hebben jullie biologische zalm in Voorschoten?",
-    a: "Ja. Onze biologische Varlaks zalm (ASC en EU-biologisch, zonder antibiotica of hormonen) gaat mee naar de vrijdagmarkt. Reserveer gerust vooruit, dan leggen we hem apart.",
+    a: "Vraag via WhatsApp naar het actuele aanbod en de certificering van de zalm op de vrijdagmarkt.",
   },
   {
     v: "Kan ik in Voorschoten vooruit bestellen?",
@@ -48,8 +48,8 @@ const REDENEN = [
     "Vier generaties Leids visvakmanschap, en al jaren hetzelfde gezicht achter de kraam bij Hoogvliet.",
   ],
   [
-    "Biologische Varlaks zalm",
-    "ASC én EU-biologisch, gekweekt boven de poolcirkel zonder antibiotica of hormonen. Zeldzaam in de regio.",
+    "VÅRLAKS-zalm",
+    "Zalm uit Noord-Noorwegen. Vraag naar actuele herkomst en productcertificering.",
   ],
   [
     "Écht gerookt, MSC gevangen",
@@ -64,7 +64,7 @@ export default async function ViswinkelVoorschotenPage({
 }) {
   const { locale } = await params;
   const kraam = VERKOOPPUNTEN.find((punt) => punt.id === "voorschoten")!;
-  const gemeente = gemeenteBySlug("voorschoten")!;
+
 
   return (
     <>
@@ -86,19 +86,17 @@ export default async function ViswinkelVoorschotenPage({
         ]}
         label="Elke vrijdag bij Hoogvliet"
         titel="Verse vis in Voorschoten"
-        intro="Schaap's Vishandel staat sinds jaar en dag op vrijdag met de kraam in Voorschoten. Kibbeling, haring, verse filet en biologische Varlaks zalm — en wie er niet uitkomt, laat het bezorgen."
+        intro="Schaap's Vishandel staat sinds jaar en dag op vrijdag met de kraam in Voorschoten. Kibbeling, haring, verse filet en VÅRLAKS-zalm. Vraag ons naar actuele beschikbaarheid."
         knoppen={[
           { label: bestelContact(locale).label, href: bestelContact(locale).href, extern: true },
           {
-            label: "Bezorgen in Voorschoten",
-            href: `/${locale}/bezorgen/voorschoten`,
+            label: "Visschalen samenstellen",
+            href: `/${locale}/visschalen`,
             soort: "lijn",
           },
         ]}
         feiten={[
           { label: "Kraam", waarde: `${kraam.adres} — ${kraam.dagen}` },
-          { label: "Bezorgen", waarde: `${euro(kostenVoor(gemeente))}, gratis vanaf ${euro(BEZORGING.gratisVanaf)}` },
-          { label: "Rijtijd", waarde: `${gemeente.rijtijd} vanaf de winkel` },
         ]}
       />
 
@@ -129,19 +127,19 @@ export default async function ViswinkelVoorschotenPage({
           </div>
 
           <div className="pt-6" style={{ borderTop: "2px solid var(--navy)" }}>
-            <p className="kapitaal mb-3">Wijken waar we bezorgen</p>
+            <p className="kapitaal mb-3">Visschalen voor uw gezelschap</p>
             <p className="leading-relaxed" style={{ color: "var(--charcoal)" }}>
-              {gemeente.wijken.join(" · ")}
+              Voor een borrel, verjaardag of feest.
             </p>
             <p className="text-sm mt-4" style={{ color: "var(--grijs)" }}>
-              {gemeente.intro}
+              Alleen visschalen kunt u online bestellen. Andere vis of een bijzondere wens? Neem contact met ons op via WhatsApp.
             </p>
             <Link
-              href={`/${locale}/bezorgen/voorschoten`}
+              href={`/${locale}/visschalen`}
               className="inline-block mt-4 font-semibold underline underline-offset-4"
               style={{ color: "var(--navy)" }}
             >
-              Bezorging in Voorschoten &rarr;
+              Stel uw visschaal samen &rarr;
             </Link>
           </div>
         </div>
@@ -165,7 +163,7 @@ export default async function ViswinkelVoorschotenPage({
             Het assortiment
           </Link>
           <Link href={`/${locale}/varlaks`} className="knop knop-lijn">
-            Over Varlaks biologische zalm
+            Over VÅRLAKS-zalm
           </Link>
         </div>
       </Sectie>
@@ -178,7 +176,7 @@ export default async function ViswinkelVoorschotenPage({
 
       <PaginaSlot
         titel="Een vraag voor de vrijdagmarkt?"
-        tekst="Reserveer uw vis en haal het vrijdag op bij Hoogvliet. Liever thuis? We bezorgen verse vis en visschalen in heel Voorschoten."
+        tekst="Kom vrijdag langs bij Hoogvliet. Alleen visschalen kunt u online bestellen; voor andere vis bespreken we de mogelijkheden graag via WhatsApp."
         knoppen={[
           { label: bestelContact(locale).label, href: bestelContact(locale).href, extern: true },
           { label: "Visschaal samenstellen", href: `/${locale}/visschalen`, soort: "lijn" },

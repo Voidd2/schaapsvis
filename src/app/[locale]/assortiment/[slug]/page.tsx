@@ -16,6 +16,7 @@ import { Schema } from "@/components/Schema";
 import { Sectie } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { BEDRIJF } from "@/lib/bedrijf";
+import { recepten } from "@/lib/recepten";
 import { bestelContact } from "@/lib/bestel-contact";
 
 const SCENE: Record<Categorie, string> = {
@@ -76,24 +77,16 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
-  const { locale, slug } = await params;
+  const { slug } = await params;
   const product = getProduct(slug);
   if (!product) return {};
-  const title = `${product.naam} — voedingswaarde & info | Schaap's Vis Leiden`;
-  const description = `${product.naam}: ${product.desc} Voedingswaarde, allergenen en herkomst bij Schaap's Vishandel Leiden.`.slice(0, 300);
+  const title = `${product.naam} | Schaap's Vishandel Leiden`;
+  const description = `${product.naam}: ${product.desc} Voedingswaarde, allergenen en herkomst bij Schaap's Vishandel Leiden.`.slice(0, 160);
   return {
     title,
     description,
-    alternates: {
-      canonical: `/${locale}/assortiment/${slug}`,
-      languages: {
-        nl: `/nl/assortiment/${slug}`,
-        en: `/en/assortiment/${slug}`,
-        de: `/de/assortiment/${slug}`,
-        "x-default": `/nl/assortiment/${slug}`,
-      },
-    },
-    openGraph: { title, description, locale, type: "website" },
+    alternates: { canonical: `/nl/assortiment/${slug}` },
+    openGraph: { title, description, locale: "nl_NL", type: "website", images: [{ url: product.photo || "/og-image.png", alt: product.naam }] },
   };
 }
 
@@ -117,6 +110,7 @@ export default async function ProductDetailPage({
   const isZalm = !product.highlight && /zalm|lax/.test(slug);
   // Visschaal/feestschotel gaan via de offerte-flow i.p.v. het bestelformulier.
   const isSchaal = slug === "visschaal" || slug === "feestschotel";
+  const eigenRecepten = recepten.filter((r) => r.hoofdproduct === product.slug).slice(0, 4);
   const blogs = recepteBlogs(product.naam, product.categorie);
   const extern = externeRecepten(product.naam);
 
@@ -310,6 +304,7 @@ export default async function ProductDetailPage({
               ))}
             </ul>
 
+            {eigenRecepten.length > 0 && <div className="mb-8"><h2 className="text-xl mb-3">Koken met {product.naam.toLowerCase()}</h2><ul className="space-y-3">{eigenRecepten.map((r) => <li key={r.slug}><Link href={`/nl/recepten/${r.slug}`} className="underline font-semibold">{r.title}</Link><p className="text-sm mt-1">{r.tijd} · {r.moeilijkheid}</p></li>)}</ul></div>}
             <p className="kapitaal mb-2">Receptinspiratie elders</p>
             <ul style={{ borderTop: "1px solid var(--linen)" }}>
               {extern.map((r) => (

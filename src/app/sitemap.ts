@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { blogPosts } from "@/lib/blog";
 import { products } from "@/lib/assortiment-data";
 import { recepten } from "@/lib/recepten";
-import { GEMEENTEN } from "@/lib/bezorging";
+
 import { BEDRIJF } from "@/lib/bedrijf";
 import { LOCALES } from "@/lib/seo";
 import { siteOpSlot } from "@/lib/siteAccess";
@@ -21,14 +21,14 @@ const basis = BEDRIJF.domein;
  *    verwijzingen naar die talen. Verwijzen naar een Duitse versie die er niet
  *    is, kost je de koppeling tussen de versies die er wél zijn.
  */
-const LAATSTE_WIJZIGING = new Date("2026-09-04");
+const LAATSTE_WIJZIGING = new Date("2026-09-28");
 
 /** Pagina's die in nl, en én de bestaan. */
 const MEERTALIG = [
   { pad: "", prioriteit: 1.0, frequentie: "weekly" as const },
-  { pad: "/bezorgen", prioriteit: 0.95, frequentie: "weekly" as const },
+
   { pad: "/visschalen", prioriteit: 0.95, frequentie: "weekly" as const },
-  { pad: "/bestellen", prioriteit: 0.9, frequentie: "weekly" as const },
+
   { pad: "/assortiment", prioriteit: 0.9, frequentie: "weekly" as const },
   { pad: "/bezoek-ons", prioriteit: 0.85, frequentie: "monthly" as const },
   { pad: "/biologische-vis", prioriteit: 0.8, frequentie: "monthly" as const },
@@ -95,34 +95,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  // ── Bezorgpagina's per gemeente ──────────────────────────────────────────
-  for (const gemeente of GEMEENTEN) {
-    const pad = `/bezorgen/${gemeente.slug}`;
-    const alternates = meertaligeAlternates(pad);
-    for (const taal of LOCALES) {
-      regels.push({
-        url: `${basis}/${taal}${pad}`,
-        lastModified: LAATSTE_WIJZIGING,
-        changeFrequency: "monthly",
-        priority: 0.85,
-        alternates,
-      });
-    }
-  }
-
   // ── Productpagina's ──────────────────────────────────────────────────────
   for (const product of products) {
     const pad = `/assortiment/${product.slug}`;
-    const alternates = meertaligeAlternates(pad);
-    for (const taal of LOCALES) {
-      regels.push({
-        url: `${basis}/${taal}${pad}`,
-        lastModified: LAATSTE_WIJZIGING,
-        changeFrequency: "monthly",
-        priority: 0.65,
-        alternates,
-      });
-    }
+    regels.push({ url: `${basis}/nl${pad}`, lastModified: new Date("2026-09-28"), changeFrequency: "monthly", priority: 0.65 });
   }
 
   // ── Pagina's in één taal ────────────────────────────────────────────────
@@ -143,7 +119,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const post of blogPosts) {
     regels.push({
       url: `${basis}/nl/blog/${post.slug}`,
-      lastModified: new Date(post.datum),
+      lastModified: new Date(post.bijgewerkt ?? post.datum),
       changeFrequency: "yearly",
       priority: 0.5,
     });

@@ -24,11 +24,10 @@ export function Header() {
   const p = (pad: string) => `/${locale}${pad}`;
 
   const links = [
-    { href: p("/bezorgen"), label: t("bezorgen") },
-    { href: p("/visschalen"), label: t("visschalen") },
     { href: p("/assortiment"), label: t("assortiment") },
+    { href: "/nl/recepten", label: t("recepten") },
     { href: p("/biologische-vis"), label: t("betereVis") },
-    { href: p("/ons-verhaal"), label: t("verhaal") },
+    { href: "/nl/blog", label: t("blog") },
     { href: p("/bezoek-ons"), label: t("locaties") },
   ];
 
@@ -178,8 +177,7 @@ export function Header() {
 
               {[
                 // Recepten en blog staan alleen in het Nederlands.
-                { href: "/nl/recepten", label: t("recepten") },
-                { href: "/nl/blog", label: t("blog") },
+                { href: p("/ons-verhaal"), label: t("verhaal") },
                 { href: p("/contact"), label: t("contact") },
               ].map(({ href, label }) => (
                 <Link

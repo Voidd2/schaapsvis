@@ -1,3 +1,4 @@
+import { NIEUWE_ARTIKELEN, BIJGEWERKTE_ARTIKELEN } from "./blog-editorial";
 import { bestelContact } from "./bestel-contact";
 
 export type BlogCategorie = "Seizoen" | "Ons verhaal" | "Visweetjes" | "Duurzaam";
@@ -13,6 +14,7 @@ export type BlogPost = {
   excerpt: string;
   datum: string; // ISO, voor sortering + Article schema
   datumLabel: string;
+  bijgewerkt?: string;
   leestijd: string;
   categorie: BlogCategorie;
   fotoUrl: string;
@@ -23,7 +25,7 @@ export type BlogPost = {
   seoKeywords: string;
 };
 
-export const blogPosts: BlogPost[] = [
+const bestaandePosts: BlogPost[] = [
   {
     slug: "viskalender-welke-vis-in-welk-seizoen",
     title: "De viskalender: welke vis is wanneer het lekkerst?",
@@ -675,10 +677,21 @@ export const blogPosts: BlogPost[] = [
   },
 ];
 
+const blogBeelden: Record<string, { src: string; alt: string }> = {
+  "hollandse-nieuwe-waarom-juni-haring-anders-smaakt": { src: "/images/producten/haring.png", alt: "Haring" },
+  "kibbeling-vs-lekkerbek-het-verschil": { src: "/images/editorial/kibbeling.webp", alt: "Krokante kibbeling met saus" },
+  "de-echte-hollandse-garnaal": { src: "/images/producten/hollandse-garnalen.png", alt: "Hollandse garnalen" },
+};
+export const blogPosts: BlogPost[] = [...NIEUWE_ARTIKELEN, ...bestaandePosts.map(post => {
+  const wijziging = BIJGEWERKTE_ARTIKELEN[post.slug];
+  const beeld = blogBeelden[post.slug] ?? { src: "/images/editorial/zalm.webp", alt: "Zalmfilet met citroen en dille" };
+  return { ...post, ...wijziging, fotoUrl: beeld.src, fotoAlt: beeld.alt, secties: (wijziging?.secties ?? post.secties).map(s => ({ ...s, alineas: s.alineas.map(a => a.replaceAll("maandag t/m zaterdag", "dinsdag t/m zaterdag")) })), ...(wijziging ? { bijgewerkt: "2026-09-28", datumLabel: "Bijgewerkt 28 september 2026" } : {}) };
+})];
+
 export function getBlogPost(slug: string): BlogPost | undefined {
   return blogPosts.find((p) => p.slug === slug);
 }
 
 export const blogPostsGesorteerd = [...blogPosts].sort((a, b) =>
-  b.datum.localeCompare(a.datum)
+  (b.bijgewerkt ?? b.datum).localeCompare(a.bijgewerkt ?? a.datum)
 );

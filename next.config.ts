@@ -8,6 +8,13 @@ const nextConfig: NextConfig = {
   // remotePatterns meer (geen hotlinks naar concurrenten of stockfoto's).
   async redirects() {
     return [
+      // Algemene bezorgpagina's zijn vervallen: alleen visschalen zijn online te bestellen.
+      ...["nl", "en", "de"].map((locale) => ({
+        source: `/${locale}/bezorgen/:pad*`,
+        destination: `/${locale}/visschalen`,
+        permanent: true,
+      })),
+      { source: "/bezorgen/:pad*", destination: "/nl/visschalen", permanent: true },
       // ── "Eerlijke Vis" is geherpositioneerd naar "Biologische Vis" ──
       { source: "/nl/eerlijke-vis", destination: "/nl/biologische-vis", permanent: true },
       { source: "/en/eerlijke-vis", destination: "/en/biologische-vis", permanent: true },

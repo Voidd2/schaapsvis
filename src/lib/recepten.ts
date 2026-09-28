@@ -53,6 +53,7 @@ export const TAG_ICON: Record<ReceptTag, string> = {
   Gezond: "",
 };
 
+import { RECEPT_FOTOS } from "./recept-fotos";
 import { receptenPraktisch } from "./recepten-praktisch";
 
 const receptenOrigineel: Recept[] = [
@@ -519,7 +520,7 @@ const receptenOrigineel: Recept[] = [
 export const recepten: Recept[] = [
   ...receptenOrigineel,
   ...receptenPraktisch,
-];
+].map((recept) => ({ ...recept, fotoUrl: RECEPT_FOTOS[recept.slug] ?? recept.fotoUrl }));
 
 /* ═══════════════════════════════════════════════════════════════════════════
    Beeld bij een recept

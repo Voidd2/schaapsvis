@@ -14,8 +14,8 @@
     "bezorgen": "Bezorgen"
   },
   "meta": {
-    "homeTitle": "Viswinkel Leiden — Herenstraat 48 | Verse vis, ook bezorgd | Schaap's Vishandel",
-    "homeDesc": "Viswinkel in hartje Leiden sinds 1938. Verse vis van de veiling, visschalen op maat en bezorging in Leiden, Leiderdorp, Voorschoten, Wassenaar en Leidschendam. Herenstraat 48, 071 514 9802.",
+    "homeTitle": "Viswinkel Leiden sinds 1938 | Schaap’s Vishandel",
+    "homeDesc": "Verse en gerookte vis, zalm en visschalen bij Schaap’s Vishandel in Leiden. Ontdek recepten, herkomst en onze winkel en marktkramen.",
     "verhaalTitle": "Het Verhaal van Schaap's Vis Leiden | Sinds 1938 de Visboer van Leiden",
     "verhaalDesc": "Van Gerrit Schaap in 1938 tot Aldert Haasnoot vandaag — bijna negentig jaar Leids vakmanschap, vier generaties, één adres: Herenstraat 48, Leiden.",
     "varlaksTitle": "Biologische Varlaks zalm in Leiden | Schaap's Vishandel",
@@ -163,8 +163,8 @@
     "feitTeKoopLabel": "Te koop",
     "feitTeKoopWaarde": "Winkel, markt, Voorschoten",
     "bestelKnop": "Varlaks bestellen",
-    "slotTitle": "Varlaks halen of laten bezorgen",
-    "slotText": "Dagelijks in de winkel aan de Herenstraat, woensdag en zaterdag op de markt in Leiden, vrijdag bij Hoogvliet in Voorschoten. Verse vis bezorgen we in Leiden, Leiderdorp, Voorschoten, Wassenaar en Leidschendam."
+    "slotTitle": "Op zoek naar VÅRLAKS-zalm?",
+    "slotText": "Vraag ons naar actuele beschikbaarheid, herkomst en certificering. Alleen visschalen kunt u online bestellen."
   },
   "assortimentPage": {
     "title": "Ons Assortiment",
@@ -173,7 +173,7 @@
   },
   "bezoekPage": {
     "title": "Waar u ons vindt",
-    "sub": "De winkel aan de Herenstraat, twee marktdagen in Leiden en op vrijdag Voorschoten. En sinds kort brengen we het ook."
+    "sub": "De winkel aan de Herenstraat, twee marktdagen in Leiden en op vrijdag Voorschoten. Kies uw locatie voor het adres, de tijden en de route."
   },
   "contactPage": {
     "title": "Contact",
@@ -236,7 +236,7 @@
     "voorschotenTijden": "Vrijdag 08:30–17:30",
     "bezorgenIn": "Vis bezorgen in {plaats}",
     "opgericht": "opgericht in {jaar} door {oprichter}",
-    "betalen": "Pinnen en contant · iDEAL en creditcard volgen binnenkort",
+    "betalen": "Betalen in de winkel: contant of pin.",
     "bezorgenIntro": "Wij bezorgen ook in",
     "en": "en"
   },
@@ -303,7 +303,7 @@
     "gebakkenLabel": "Uit de pan",
     "gebakkenKop": "Waar Leiden ons van kent",
     "gebakkenTekst": "Kibbeling, lekkerbek en gebakken vis. Elke dag vers in de pan, in een bakje mee, met knoflooksaus als u wilt. Dit is waar de meeste mensen voor de eerste keer binnenlopen.",
-    "gebakkenNiet": "Dit bezorgen we bewust niet. Gebakken vis is na twintig minuten in een doos slap, en dan verkopen we u iets wat we zelf niet zouden eten. Die eet u bij ons zoals hij bedoeld is: warm en krokant.",
+    "gebakkenNiet": "Kibbeling en lekkerbek haalt u warm bij ons in de winkel of op de markt. Zo eet u ze zoals ze bedoeld zijn: krokant en vers bereid.",
     "gebakkenLink": "Kom langs voor gebakken vis"
   },
   "gedeeld": {
@@ -592,7 +592,7 @@
     "woensdagToelichting": "Op de Haarlemmerstraat, aan de kant van Dille & Camille.",
     "voorschotenNaam": "Voorschoten, bij Hoogvliet",
     "voorschotenAdres": "Parkeerplaats Hoogvliet, Voorschoten",
-    "voorschotenToelichting": "Elke vrijdag op de parkeerplaats. Komt het niet uit? In Voorschoten bezorgen we ook.",
+    "voorschotenToelichting": "Elke vrijdag bij Hoogvliet. Bekijk de route en kom langs voor uw vis.",
     "diVr": "Dinsdag t/m vrijdag",
     "za": "Zaterdag",
     "wo": "Woensdag",

@@ -1,105 +1,35 @@
 "use client";
-
 import Link from "next/link";
 import { useState } from "react";
+import { Search, Clock, ArrowUpRight } from "lucide-react";
 import { recepten, receptBeeld, ALLE_TAGS, type ReceptTag } from "@/lib/recepten";
+import { receptMinuten, receptVis } from "@/lib/recept-hulp";
 import { ReceptFoto } from "@/components/recepten/ReceptFoto";
-
-/**
- * De receptenlijst met het filter.
- *
- * Alleen het filteren hoeft in de browser te gebeuren; de kop, de credits en de
- * afsluiting staan in de pagina zelf. De kaartjes met een tekening erboven zijn
- * weg: een recept is tekst, en een lijst leest sneller dan een raster.
- */
-export function ReceptenClient({ locale }: { locale: string }) {
+const vissoorten = [...new Set(recepten.map(receptVis))].sort();
+export function ReceptenClient() {
   const [filter, setFilter] = useState<ReceptTag | null>(null);
-  const zichtbaar = filter ? recepten.filter((r) => r.tags.includes(filter)) : recepten;
-
-  return (
-    <>
-      <div className="flex flex-wrap gap-2 mb-10">
-        <button
-          type="button"
-          onClick={() => setFilter(null)}
-          className="kapitaal px-4 py-2"
-          style={{
-            border: "1px solid var(--navy)",
-            backgroundColor: filter === null ? "var(--navy)" : "transparent",
-            color: filter === null ? "var(--cream)" : "var(--navy)",
-          }}
-          aria-pressed={filter === null}
-        >
-          Alles ({recepten.length})
-        </button>
-        {ALLE_TAGS.map((tag) => {
-          const aantal = recepten.filter((r) => r.tags.includes(tag)).length;
-          if (aantal === 0) return null;
-          const actief = filter === tag;
-          return (
-            <button
-              key={tag}
-              type="button"
-              onClick={() => setFilter(actief ? null : tag)}
-              className="kapitaal px-4 py-2"
-              style={{
-                border: `1px solid ${actief ? "var(--navy)" : "var(--linen)"}`,
-                backgroundColor: actief ? "var(--navy)" : "transparent",
-                color: actief ? "var(--cream)" : "var(--charcoal)",
-              }}
-              aria-pressed={actief}
-            >
-              {tag} ({aantal})
-            </button>
-          );
-        })}
+  const [zoek, setZoek] = useState("");
+  const [vis, setVis] = useState("");
+  const [tijd, setTijd] = useState("");
+  const [niveau, setNiveau] = useState("");
+  const reset = () => { setFilter(null); setZoek(""); setVis(""); setTijd(""); setNiveau(""); };
+  const zichtbaar = recepten.filter((r) =>
+    (!filter || r.tags.includes(filter)) && (!vis || receptVis(r) === vis) &&
+    (!tijd || receptMinuten(r.tijd) <= Number(tijd)) && (!niveau || r.moeilijkheid === niveau) &&
+    [r.title, r.subtitle, ...r.vanSchaap].join(" ").toLowerCase().includes(zoek.toLowerCase().trim())
+  ).sort((a,b) => Number(Boolean(b.fotoUrl)) - Number(Boolean(a.fotoUrl)));
+  return <>
+    <div className="recipe-filters">
+      <label className="recipe-search"><Search size={20} aria-hidden /><span className="sr-only">Zoek een recept of ingrediënt</span><input type="search" value={zoek} onChange={e => setZoek(e.target.value)} placeholder="Waar heeft u zin in? Bijvoorbeeld zalm…" /></label>
+      <div className="recipe-selects">
+        <label>Vissoort<select value={vis} onChange={e => setVis(e.target.value)}><option value="">Alle vissoorten</option>{vissoorten.map(v => <option key={v}>{v}</option>)}</select></label>
+        <label>Bereidingstijd<select value={tijd} onChange={e => setTijd(e.target.value)}><option value="">Alle tijden</option><option value="15">Tot 15 minuten</option><option value="20">Tot 20 minuten</option><option value="30">Tot 30 minuten</option><option value="45">Tot 45 minuten</option></select></label>
+        <label>Moeilijkheid<select value={niveau} onChange={e => setNiveau(e.target.value)}><option value="">Elk niveau</option>{["Makkelijk","Gemiddeld","Uitdagend"].map(n => <option key={n}>{n}</option>)}</select></label>
       </div>
-
-      {zichtbaar.length === 0 ? (
-        <p className="py-10" style={{ color: "var(--grijs)" }}>
-          Geen recepten met dit label.
-        </p>
-      ) : (
-        <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {zichtbaar.map((recept) => {
-            const beeld = receptBeeld(recept);
-            return (
-              <li key={recept.slug}>
-                <Link
-                  href={`/${locale}/recepten/${recept.slug}`}
-                  className="group flex flex-col h-full"
-                  style={{ backgroundColor: "#fff", border: "1px solid var(--linen)" }}
-                >
-                  <ReceptFoto beeld={beeld} titel={recept.title} klein />
-                  <div className="px-4 pt-3.5 pb-4 flex flex-col flex-1">
-                    <p className="kapitaal mb-2" style={{ color: "var(--grijs)" }}>
-                      {recept.tijd} · {recept.moeilijkheid}
-                    </p>
-                    <h2
-                      className="text-[1.1rem] leading-snug mb-1.5 group-hover:underline underline-offset-4"
-                      style={{ color: "var(--ink)" }}
-                    >
-                      {recept.title}
-                    </h2>
-                    <p
-                      className="text-[0.88rem] leading-relaxed flex-1"
-                      style={{ color: "var(--charcoal)" }}
-                    >
-                      {recept.subtitle}
-                    </p>
-                    <p className="mt-3 text-[0.8rem]" style={{ color: "var(--grijs)" }}>
-                      <span className="kapitaal" style={{ color: "var(--gold)" }}>
-                        Bij ons
-                      </span>{" "}
-                      {recept.vanSchaap[0]}
-                    </p>
-                  </div>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      )}
-    </>
-  );
+      <div className="recipe-tags"><button type="button" aria-pressed={!filter} onClick={()=>setFilter(null)}>Alle gerechten</button>{ALLE_TAGS.map(tag=><button type="button" key={tag} aria-pressed={filter===tag} onClick={()=>setFilter(filter===tag?null:tag)}>{tag}</button>)}</div>
+    </div>
+    <div className="flex justify-between items-center gap-4 my-7"><p role="status" aria-live="polite" className="text-sm">{zichtbaar.length} {zichtbaar.length===1?"recept":"recepten"} gevonden</p><button type="button" onClick={reset} className="underline text-sm underline-offset-4">Wis filters</button></div>
+    {zichtbaar.length===0 ? <div className="recipe-empty"><h3>Geen gerecht gevonden</h3><p>Probeer een andere vissoort of geef uzelf iets meer tijd.</p><button type="button" className="knop knop-navy mt-5" onClick={reset}>Toon alle recepten</button></div> :
+    <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">{zichtbaar.map(r=><li key={r.slug}><Link href={`/nl/recepten/${r.slug}`} className="recipe-card group"><ReceptFoto beeld={receptBeeld(r)} titel={r.title} klein /><div className="recipe-card-body"><p className="recipe-meta"><Clock size={15} aria-hidden />{r.tijd}<span>· {r.moeilijkheid}</span></p><h3>{r.title}</h3><p>{r.subtitle}</p><span className="recipe-card-link">Bekijk het recept <ArrowUpRight size={17} aria-hidden /></span></div></Link></li>)}</ul>}
+  </>;
 }

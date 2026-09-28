@@ -6,8 +6,9 @@ import { Schema } from "@/components/Schema";
 import { Sectie } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { paginaMetadata, kruimelSchema } from "@/lib/seo";
-import { BEDRIJF, ADRES_REGEL, euro } from "@/lib/bedrijf";
-import { BEZORGING, GEMEENTEN, bezorgdagenTekst } from "@/lib/bezorging";
+import { BEDRIJF, ADRES_REGEL } from "@/lib/bedrijf";
+
+import { BEELD } from "@/lib/beeld";
 import { Beeld } from "@/components/ui/Beeld";
 import type { BeeldNaam } from "@/lib/beeld";
 
@@ -87,7 +88,7 @@ export default async function BezoekOnsPage({
   const t = await getTranslations({ locale, namespace: "bezoekPage" });
   const nav = await getTranslations({ locale, namespace: "nav" });
   const g = await getTranslations({ locale, namespace: "gedeeld" });
-  const b = await getTranslations({ locale, namespace: "bezorgen" });
+
   const p = await getTranslations({ locale, namespace: "plekken" });
 
   return (
@@ -117,23 +118,23 @@ export default async function BezoekOnsPage({
         feiten={[
           { label: g("telefoonLabel"), waarde: BEDRIJF.telefoon.weergave },
           { label: g("labelWinkel"), waarde: ADRES_REGEL },
-          { label: g("labelBezorgen"), waarde: bezorgdagenTekst() },
+
         ]}
       />
 
       {/* ── De plekken ────────────────────────────────────────────────────── */}
       <Sectie grond="papier">
-        <ul>
+        <ul className="grid lg:grid-cols-2 gap-6">
           {PLEKKEN.map((plek) => (
             <li
               key={plek.id}
-              className="grid md:grid-cols-[14rem_1fr_1.1fr_auto] gap-4 md:gap-8 py-7 items-start"
-              style={{ borderTop: "1px solid var(--linen)" }}
+              className="location-card flex flex-col gap-5 p-7"
+              style={{ border: "1px solid #d4e8f2", borderRadius: "14px", background: "#f0f8fc" }}
             >
               {/* Een foto per plek. De kraam bij de Waag ziet er anders uit dan
                   die op de parkeerplaats bij Hoogvliet — met een foto weet
                   iemand waar hij naar moet zoeken. */}
-              <Beeld naam={BEELD_PER_PLEK[plek.id]} verhouding="liggend" streep="var(--navy)" />
+              {BEELD[BEELD_PER_PLEK[plek.id]].bestand && <Beeld naam={BEELD_PER_PLEK[plek.id]} verhouding="liggend" streep="var(--navy)" />}
 
               <div>
                 <h2 className="text-[1.35rem] mb-1">{p(`${plek.id}Naam`)}</h2>
@@ -186,12 +187,12 @@ export default async function BezoekOnsPage({
       </Sectie>
 
       <PaginaSlot
-        titel={b("kop")}
-        tekst={`${b("gebiedTekst")} ${GEMEENTEN.map((gem) => gem.naam).join(" · ")}. ${b("dagen", { dagen: bezorgdagenTekst() })} ${b("gratisVanaf", { bedrag: euro(BEZORGING.gratisVanaf) })}`}
+        titel={nav("visschalen")}
+        tekst={locale === "nl" ? "Alleen visschalen kunt u online bestellen. Zoekt u andere vis? Stuur ons een WhatsApp-bericht, dan kijken we wat mogelijk is." : locale === "de" ? "Nur Fischplatten können Sie online bestellen. Für andere Produkte kontaktieren Sie uns über WhatsApp." : "Only seafood platters can be ordered online. For other products, contact us on WhatsApp."}
         knoppen={[
           { label: nav("visschalen"), href: `/${locale}/visschalen` },
           { ...bestelContact(locale), extern: true, soort: "lijn" },
-          { label: nav("bezorgen"), href: `/${locale}/bezorgen`, soort: "lijn" },
+
         ]}
       />
 

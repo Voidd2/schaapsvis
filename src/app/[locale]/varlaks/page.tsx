@@ -1,180 +1,26 @@
-import { getTranslations } from "next-intl/server";
+import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
-import { JsonLd } from "@/components/JsonLd";
-import { Sectie, Kop } from "@/components/ui/Sectie";
-import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
-import { paginaMetadata } from "@/lib/seo";
+import { paginaMetadata, kruimelSchema } from "@/lib/seo";
 import { BEDRIJF } from "@/lib/bedrijf";
 import { bestelContact } from "@/lib/bestel-contact";
-import { Beeld } from "@/components/ui/Beeld";
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "meta" });
-
-  return paginaMetadata({
-    locale,
-    pad: "/varlaks",
-    title: t("varlaksTitle"),
-    description: t("varlaksDesc"),
-  });
+import { VarlaksFilm } from "@/components/shared/VarlaksFilm";
+import { Schema } from "@/components/Schema";
+const copy = {
+ nl: { title: "VÅRLAKS-zalm in Leiden", intro: "Goede zalm verdient een goed verhaal. Ontdek de herkomst van onze VÅRLAKS-zalm en vind een gerecht dat erbij past.", story: "Volgens VÅRLAKS komt hun zalm uit Noord-Noorwegen, van familiebedrijven. De leverancier beschrijft traceerbaarheid van ei tot bord. Bekijk hieronder hun eigen presentatiefilm.", origin: "Van leverancier naar toonbank", note: "Vraag ons naar de herkomst en certificering van het specifieke product. Een duurzaamheidsverhaal is niet hetzelfde als een biologisch keurmerk.", advice: "Vraag naar beschikbaarheid", product: "Bekijk de zalm", recipe: "Zalm in de oven met citroen en dille", labels: "Biologisch, ASC of MSC?", source: "Informatie van de leverancier", cooking: "Van toonbank naar keuken" },
+ en: { title: "VÅRLAKS salmon in Leiden", intro: "Good salmon deserves a good story. Explore the origins of our VÅRLAKS salmon and find a dish to cook.", story: "VÅRLAKS describes salmon from family farms in Northern Norway, traceable from egg to plate. Watch the supplier’s own film below.", origin: "From supplier to fish counter", note: "Ask us about the origin and certification of the specific product. A sustainability story is not the same as an organic label.", advice: "Ask about availability", product: "Discover the salmon", recipe: "Oven-baked salmon recipe in Dutch", labels: "Organic, ASC or MSC?", source: "Supplier information", cooking: "From fish counter to kitchen" },
+ de: { title: "VÅRLAKS-Lachs in Leiden", intro: "Guter Lachs verdient eine gute Geschichte. Entdecken Sie die Herkunft unseres VÅRLAKS-Lachses und passende Rezepte.", story: "VÅRLAKS beschreibt Lachs aus Familienbetrieben in Nordnorwegen, vom Ei bis zum Teller rückverfolgbar. Sehen Sie unten den Film des Anbieters.", origin: "Vom Anbieter zur Fischtheke", note: "Fragen Sie nach Herkunft und Zertifizierung des konkreten Produkts. Nachhaltigkeit bedeutet nicht automatisch ein Bio-Siegel.", advice: "Nach Verfügbarkeit fragen", product: "Lachs entdecken", recipe: "Ofenlachs-Rezept auf Niederländisch", labels: "Bio, ASC oder MSC?", source: "Informationen des Anbieters", cooking: "Von der Fischtheke in die Küche" }
+};
+export async function generateMetadata({params}:{params:Promise<{locale:string}>}):Promise<Metadata>{
+ const {locale}=await params; const c=copy[locale as keyof typeof copy]||copy.nl;
+ return paginaMetadata({locale,pad:"/varlaks",title:c.title+" | Schaap’s Vishandel",description:c.intro});
 }
-
-interface Punt {
-  t: string;
-  d: string;
-}
-
-/**
- * De Varlaks-pagina.
- *
- * Deze pagina had een eigen huisstijl: een schermvullende hero met een
- * verlopende overlay, ijsblauwe accenten en twee eigen donkerblauwtinten die
- * nergens anders op de site voorkwamen. Dat leest als een tweede website. De
- * inhoud is gebleven — die is inhoudelijk sterk — maar staat nu in dezelfde
- * kop, secties en afsluiting als elke andere pagina.
- */
-export default async function VarlaksPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "varlaksPage" });
-  const nav = await getTranslations({ locale, namespace: "nav" });
-
-
-  const wel = t.raw("wel") as Punt[];
-  const niet = t.raw("niet") as Punt[];
-
-  return (
-    <>
-      <JsonLd />
-
-      <PaginaKop
-        kruimels={[
-          { naam: BEDRIJF.naamKort, href: `/${locale}` },
-          { naam: nav("varlaks") },
-        ]}
-        label={t("label")}
-        titel={t("heroTitle")}
-        intro={t("heroSub")}
-        knoppen={[
-          { ...bestelContact(locale, "VÅRLAKS"), extern: true },
-          {
-            label: BEDRIJF.telefoon.weergave,
-            href: `tel:${BEDRIJF.telefoon.e164}`,
-            extern: true,
-            soort: "lijn",
-          },
-        ]}
-        feiten={[
-          { label: t("feitHerkomstLabel"), waarde: t("feitHerkomstWaarde") },
-          { label: t("feitKeurmerkLabel"), waarde: t("feitKeurmerkWaarde") },
-          { label: t("feitTeKoopLabel"), waarde: t("feitTeKoopWaarde") },
-        ]}
-      />
-
-      {/* ── Het verhaal ───────────────────────────────────────────────────── */}
-      <Sectie grond="papier">
-        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-16 items-center">
-          <div>
-            <Kop titel={t("storyTitle")} />
-            <p className="lees" style={{ color: "var(--charcoal)" }}>
-              {t("story")}
-            </p>
-          </div>
-          {/* Jullie eigen filet op jullie eigen toonbank. Overtuigender dan de
-              persfoto van de kweker, want die kan iedereen laten zien. */}
-          <Beeld naam="varlaksFilet" verhouding="liggend" streep="var(--navy)" />
-        </div>
-      </Sectie>
-
-      {/* ── Wat er wel en niet in zit ─────────────────────────────────────── */}
-      <Sectie grond="zand">
-        <Kop label="ASC · biologisch" titel={t("featuresTitle")} />
-        <div className="grid md:grid-cols-2 gap-x-14 gap-y-10">
-          <div>
-            <p className="kapitaal mb-5" style={{ color: "var(--seafoam)" }}>
-              {t("welTitle")}
-            </p>
-            <dl style={{ borderTop: "1px solid var(--linen)" }}>
-              {wel.map((punt) => (
-                <div key={punt.t} className="py-4" style={{ borderBottom: "1px solid var(--linen)" }}>
-                  <dt
-                    className="text-[1.05rem] mb-1"
-                    style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}
-                  >
-                    {punt.t}
-                  </dt>
-                  <dd className="text-[0.97rem] leading-relaxed" style={{ color: "var(--charcoal)" }}>
-                    {punt.d}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-
-          <div>
-            <p className="kapitaal mb-5" style={{ color: "var(--rood)" }}>
-              {t("nietTitle")}
-            </p>
-            <dl style={{ borderTop: "1px solid var(--linen)" }}>
-              {niet.map((punt) => (
-                <div key={punt.t} className="py-4" style={{ borderBottom: "1px solid var(--linen)" }}>
-                  <dt
-                    className="text-[1.05rem] mb-1"
-                    style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}
-                  >
-                    {punt.t}
-                  </dt>
-                  <dd className="text-[0.97rem] leading-relaxed" style={{ color: "var(--charcoal)" }}>
-                    {punt.d}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </div>
-      </Sectie>
-
-      {/* ── De film van de kwekerij ───────────────────────────────────────── */}
-      <Sectie grond="navy" smal>
-        <Kop donker label="Nordland" titel={t("filmTitle")} />
-        <div
-          className="relative w-full"
-          style={{ paddingBottom: "56.25%", border: "1px solid rgba(250,246,239,0.22)" }}
-        >
-          <iframe
-            src="https://player.vimeo.com/video/932791452?title=0&byline=0&portrait=0"
-            className="absolute inset-0 w-full h-full"
-            allow="fullscreen; picture-in-picture"
-            allowFullScreen
-            title={t("filmTitle")}
-          />
-        </div>
-        <p className="text-sm mt-3" style={{ color: "rgba(250,246,239,0.55)" }}>
-          {t("filmBron")}
-        </p>
-      </Sectie>
-
-      <PaginaSlot
-        titel={t("slotTitle")}
-        tekst={t("slotText")}
-        knoppen={[
-          { ...bestelContact(locale, "VÅRLAKS"), extern: true },
-          {
-            label: nav("visschalen"),
-            href: `/${locale}/visschalen`,
-            soort: "lijn",
-          },
-
-        ]}
-      />
-    </>
-  );
+export default async function VarlaksPage({params}:{params:Promise<{locale:string}>}){
+ const {locale}=await params; const c=copy[locale as keyof typeof copy]||copy.nl;
+ return <>
+ <Schema data={kruimelSchema(locale,[{naam:BEDRIJF.naamKort,pad:"/"},{naam:"VÅRLAKS",pad:"/varlaks"}])}/>
+ <header className="fresh-hero"><div className="section-wrap fresh-hero-grid"><div><p className="kapitaal">VÅRLAKS · Northern Norway</p><h1>{c.title}</h1><p className="fresh-intro">{c.intro}</p><a className="knop knop-navy mt-6" href={bestelContact(locale,"VÅRLAKS-zalm").href}>{c.advice}</a></div><Image src="/images/editorial/zalm.webp" alt={locale==="nl"?"Zalmfilet met citroen en dille":locale==="de"?"Lachsfilet mit Zitrone und Dill":"Salmon fillet with lemon and dill"} width={1400} height={933} sizes="(max-width:800px) 100vw, 50vw" className="rounded-2xl" /></div></header>
+ <section className="story-section section-wrap"><div className="story-grid"><div><h2>{c.origin}</h2><p>{c.story}</p><p>{c.note}</p><a className="underline font-semibold" href="https://varlaks.no/" target="_blank" rel="noopener noreferrer">{c.source} ↗</a></div><VarlaksFilm locale={locale}/></div></section>
+ <section className="fresh-contact"><div className="section-wrap"><h2 className="mb-6">{c.cooking}</h2><div className="flex flex-wrap gap-3"><Link className="knop knop-navy" href="/nl/assortiment/varlaks-zalm">{c.product}</Link><Link className="knop knop-lijn" href="/nl/recepten/zalm-citroen-dille">{c.recipe}</Link><Link className="knop knop-lijn" href={`/${locale}/biologische-vis`}>{c.labels}</Link></div></div></section>
+ </>;
 }

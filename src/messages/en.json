@@ -14,8 +14,8 @@
     "bezorgen": "Delivery"
   },
   "meta": {
-    "homeTitle": "Fishmonger in Leiden — Herenstraat 48 | Fresh fish & delivery | Schaap's Vishandel",
-    "homeDesc": "Family fishmonger in central Leiden since 1938. Fresh fish from the auction, made-to-order seafood platters and delivery to Leiden, Leiderdorp, Voorschoten, Wassenaar and Leidschendam. Herenstraat 48.",
+    "homeTitle": "Fishmonger in Leiden since 1938 | Schaap’s Vishandel",
+    "homeDesc": "Discover fresh and smoked fish, salmon and seafood platters in Leiden. Find our shop and market stalls, recipes and fish origins.",
     "verhaalTitle": "The Story of Schaap's Vis Leiden | Leiden's Fishmonger Since 1938",
     "verhaalDesc": "From Gerrit Schaap in 1938 to Aldert Haasnoot today — almost ninety years of Leiden craftsmanship, four generations, one address: Herenstraat 48, Leiden.",
     "varlaksTitle": "Organic Varlaks salmon in Leiden | Schaap's Vishandel",
@@ -163,8 +163,8 @@
     "feitTeKoopLabel": "Available at",
     "feitTeKoopWaarde": "Shop, market, Voorschoten",
     "bestelKnop": "Order Varlaks",
-    "slotTitle": "Collect Varlaks or have it delivered",
-    "slotText": "Every day in the shop on Herenstraat, Wednesday and Saturday at the market in Leiden, Friday at Hoogvliet in Voorschoten. We deliver fresh fish in Leiden, Leiderdorp, Voorschoten, Wassenaar and Leidschendam."
+    "slotTitle": "Looking for VÅRLAKS salmon?",
+    "slotText": "Ask about availability, origin and product certification. Only seafood platters can be ordered online."
   },
   "assortimentPage": {
     "title": "Our Products",
@@ -173,7 +173,7 @@
   },
   "bezoekPage": {
     "title": "Where to find us",
-    "sub": "The shop on the Herenstraat, two market days in Leiden and Voorschoten on Fridays. And these days we bring it to you as well."
+    "sub": "Our shop in Herenstraat, two market days in Leiden and Fridays in Voorschoten. Choose a location for its address, hours and route."
   },
   "contactPage": {
     "title": "Contact",
@@ -236,7 +236,7 @@
     "voorschotenTijden": "Friday 08:30–17:30",
     "bezorgenIn": "Fish delivery in {plaats}",
     "opgericht": "founded in {jaar} by {oprichter}",
-    "betalen": "Card and cash · iDEAL and credit card coming soon",
+    "betalen": "Pay in the shop by cash or card.",
     "bezorgenIntro": "We also deliver in",
     "en": "and"
   },
@@ -303,7 +303,7 @@
     "gebakkenLabel": "From the pan",
     "gebakkenKop": "What Leiden knows us for",
     "gebakkenTekst": "Kibbeling, lekkerbek and fried fish. Fresh in the pan every day, in a box to take away, with garlic sauce if you like. This is what most people walk in for the first time.",
-    "gebakkenNiet": "We deliberately do not deliver this. Fried fish goes soft after twenty minutes in a box, and then we would be selling you something we would not eat ourselves. You have it here the way it is meant to be: hot and crisp.",
+    "gebakkenNiet": "Pick up freshly cooked kibbeling and fried fish at our shop or market stalls.",
     "gebakkenLink": "Come by for fried fish"
   },
   "gedeeld": {
@@ -592,7 +592,7 @@
     "woensdagToelichting": "On the Haarlemmerstraat, on the Dille & Camille side.",
     "voorschotenNaam": "Voorschoten, at Hoogvliet",
     "voorschotenAdres": "Hoogvliet car park, Voorschoten",
-    "voorschotenToelichting": "Every Friday in the car park. Does that not suit? We deliver in Voorschoten too.",
+    "voorschotenToelichting": "Find us at Hoogvliet every Friday.",
     "diVr": "Tuesday to Friday",
     "za": "Saturday",
     "wo": "Wednesday",

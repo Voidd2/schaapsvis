@@ -64,7 +64,7 @@ const faqSchema = {
       name: "Verkoopt Schaap's Vishandel duurzame vis?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Ja. Wij voeren MSC-gecertificeerde Hollandse garnalen (Heiploeg en SOLT), ASC-gecertificeerde gerookte Noorse zalm (High Seas), en biologische Varlaks-zalm uit Noord-Noorwegen. Op onze Eerlijke Vis-pagina leggen wij per product uit waar het vandaan komt.",
+        text: "Ja. Wij voeren MSC-gecertificeerde Hollandse garnalen (Heiploeg en SOLT), ASC-gecertificeerde gerookte Noorse zalm (High Seas), en VÅRLAKS-zalm uit Noord-Noorwegen. Op onze biologische-vispagina leggen we herkomst en keurmerken uit. Vraag naar de certificering van het specifieke product.",
       },
     },
   ],
@@ -117,7 +117,7 @@ export default async function ViswinkelLeidenPage({
             { naam: "Kibbeling", omschrijving: "Knapperig gebakken kabeljauw of MSC-gecertificeerde Alaska koolvis — de Hollandse klassieker.", href: `/${locale}/assortiment`, badge: "MSC" },
             { naam: "Hollandse haring", omschrijving: "Rauwe Hollandse Nieuwe op een zacht broodje met ui en augurk. Half juni is het feest.", href: `/${locale}/assortiment`, badge: null },
             { naam: "Hollandse garnalen", omschrijving: "Dagverse Noordzeegarnalen van Heiploeg en SOLT, MSC-gecertificeerd van de Waddenkust.", href: `/${locale}/assortiment`, badge: "MSC" },
-            { naam: "Varlaks biologische zalm", omschrijving: "Zalmfilet uit Noord-Noorwegen, boven de poolcirkel gekweekt.", href: `/${locale}/varlaks`, badge: "BIO · ASC" },
+            { naam: "VÅRLAKS-zalm", omschrijving: "Zalmfilet uit Noord-Noorwegen, boven de poolcirkel gekweekt.", href: `/${locale}/varlaks`, badge: "VÅRLAKS" },
             { naam: "Gerookte Noorse zalm", omschrijving: "Koud gerookt van High Seas, lang gesneden in dunne plakken.", href: `/${locale}/assortiment`, badge: "ASC" },
             { naam: "Lekkerbek en vissoep", omschrijving: "Verse wijting in luchtig beslag, en huisgemaakte soep — elke dag vers bereid in de winkel.", href: `/${locale}/assortiment`, badge: null },
           ].map(({ naam, omschrijving, href, badge }) => (
@@ -193,8 +193,8 @@ export default async function ViswinkelLeidenPage({
       </Sectie>
 
       <PaginaSlot
-        titel="Kom langs, of laat het brengen"
-        tekst="De winkel is dinsdag tot en met zaterdag open. Liever thuis? We bezorgen verse vis en visschalen in Leiden en vier gemeenten eromheen."
+        titel="Kom langs voor uw vis"
+        tekst="De winkel is dinsdag tot en met zaterdag open. Alleen visschalen bestelt u online. Voor andere visproducten kunt u ons via WhatsApp vragen wat mogelijk is."
         knoppen={[
           { label: bestelContact(locale).label, href: bestelContact(locale).href, extern: true },
           { label: "Visschaal samenstellen", href: `/${locale}/visschalen`, soort: "lijn" },

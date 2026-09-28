@@ -49,23 +49,23 @@ export default async function BlogPage({
       <Sectie grond="papier">
         <Kop
           label="Alles op een rij"
-          titel="Wat we schreven"
+          titel="Kennis die u helpt kiezen"
           intro="Van de eerste haring van het jaar tot de vraag waarom garnalen pellen zo veel werk is."
         />
-        <ul style={{ borderTop: "1px solid var(--linen)" }}>
+        <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
           {blogPostsGesorteerd.map((post) => (
-            <li key={post.slug} style={{ borderBottom: "1px solid var(--linen)" }}>
+            <li key={post.slug}>
               <Link
-                href={`/${locale}/blog/${post.slug}`}
-                className="group grid md:grid-cols-[12rem_1fr] gap-x-10 gap-y-2 py-7"
+                href={`/nl/blog/${post.slug}`}
+                className="recipe-card group"
               >
-                <div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={post.fotoUrl} alt={post.fotoAlt} width={1400} height={933} loading="lazy" className="w-full aspect-[3/2] object-cover" />
+                <div className="recipe-card-body">
                   <p className="kapitaal mb-1">{post.categorie}</p>
                   <p className="text-sm" style={{ color: "var(--grijs)" }}>
                     {post.datumLabel} · {post.leestijd}
                   </p>
-                </div>
-                <div>
                   <h2
                     className="text-[1.35rem] leading-snug mb-2 group-hover:underline underline-offset-4"
                     style={{ color: "var(--ink)" }}
@@ -96,7 +96,7 @@ export default async function BlogPage({
 
       <PaginaSlot
         titel="Liever proeven dan lezen?"
-        tekst="Alles waar we hier over schrijven ligt gewoon in de vitrine. Herenstraat 48 in Leiden, dinsdag tot en met zaterdag — of bestel vooruit."
+        tekst="Kom langs aan de Herenstraat 48 in Leiden, dinsdag tot en met zaterdag. Vraag ons via WhatsApp naar beschikbaarheid. Alleen visschalen bestelt u online."
         knoppen={[
           { label: bestelContact(locale).label, href: bestelContact(locale).href, extern: true },
           { label: "Visschaal samenstellen", href: `/${locale}/visschalen`, soort: "lijn" },

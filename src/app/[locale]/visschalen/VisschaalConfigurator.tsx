@@ -92,7 +92,7 @@ export function VisschaalConfigurator() {
         {/* ── Stap 1: de schaal ───────────────────────────────────────────── */}
         <section className="mb-14">
           <p className="kapitaal mb-2">{t("stap1")}</p>
-          <h3 className="text-[1.6rem] mb-2">{t("schaalKop")}</h3>
+          <h2 className="text-[1.6rem] mb-2">{t("schaalKop")}</h2>
           <p className="mb-7 max-w-2xl" style={{ color: "var(--charcoal)" }}>
             {t("schaalUitleg")}
           </p>
@@ -112,7 +112,7 @@ export function VisschaalConfigurator() {
                     <Beeld naam={schaal.beeld} verhouding="vierkant" streep="var(--navy)" />
 
                     <div className="p-5 flex flex-col flex-1">
-                      <h4 className="text-[1.25rem] mb-1">{schaal.naam}</h4>
+                      <h3 className="text-[1.25rem] mb-1">{schaal.naam}</h3>
                       <p className="kapitaal mb-3" style={{ color: "var(--grijs)" }}>
                         {t("voorPersonen", {
                           van: schaal.personenVan,
@@ -168,7 +168,7 @@ export function VisschaalConfigurator() {
         {/* ── Stap 2: de extra's ──────────────────────────────────────────── */}
         <section>
           <p className="kapitaal mb-2">{t("stap2")}</p>
-          <h3 className="text-[1.6rem] mb-2">{t("extrasKop")}</h3>
+          <h2 className="text-[1.6rem] mb-2">{t("extrasKop")}</h2>
           <p className="mb-8 max-w-2xl" style={{ color: "var(--charcoal)" }}>
             {gekozenSchaal ? t("extrasUitleg") : t("extrasEerstSchaal")}
           </p>
