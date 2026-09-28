@@ -10,7 +10,7 @@
     "blog": "Blog",
     "locaties": "Uns finden",
     "contact": "Kontakt",
-    "bestellen": "Bestellen",
+    "bestellen": "Fischplatten bestellen",
     "bezorgen": "Lieferung"
   },
   "meta": {
@@ -27,7 +27,7 @@
     "contactTitle": "Kontakt Schaap's Vis Leiden | +31 71 514 9802 | Fischhandel Herenstraat",
     "contactDesc": "Kontaktieren Sie Schaap's Vis Leiden. Rufen Sie +31 71 514 9802 an oder senden Sie eine Nachricht. Herenstraat 48, 2313 AL Leiden.",
     "bestellenTitle": "Fischplatte bestellen in Leiden | Schaap's Vishandel",
-    "bestellenDesc": "Fischplatte zusammenstellen und zur Lieferung oder Abholung bestellen. Für andere Fischprodukte kontaktieren Sie uns.",
+    "bestellenDesc": "Nur Fischplatten können Sie online bestellen. Für andere Fischprodukte schreiben Sie uns per WhatsApp. Wir besprechen gerne die Möglichkeiten.",
     "eerlijkeVisTitle": "Bio-Fisch Leiden | Bio-Lachs — Schaap's Vis",
     "eerlijkeVisDesc": "Bio-Fisch in Leiden bei Schaap's Vishandel — Bio-Lachs Varlaks (ASC + EU-Bio), MSC- und ASC-zertifiziert. Herenstraat 48, seit 1938.",
     "receptenTitle": "Fischrezepte von Schaap's Vis Leiden | Kibbeling, Lachs, Hering & mehr",
@@ -169,7 +169,7 @@
   "assortimentPage": {
     "title": "Unser Sortiment",
     "sub": "Frisch, ehrlich und von höchster Qualität — täglich frisch angeliefert",
-    "note": "Kein Online-Bezahlen — aber einfaches Vorbestellen. Wir rufen Sie mit Preis und Bestätigung zurück."
+    "note": "Nur Fischplatten können Sie online bestellen. Für andere Fischprodukte schreiben Sie uns per WhatsApp. Wir besprechen gerne die Möglichkeiten."
   },
   "bezoekPage": {
     "title": "Wo Sie uns finden",
@@ -324,7 +324,7 @@
     "telefoonLabel": "Telefon",
     "sinds1938": "Seit 1938",
     "slotTitel": "Besuchen Sie uns — oder wählen Sie eine Fischplatte",
-    "slotTekst": "Sie finden uns in der Herenstraat 48 in Leiden. Fischplatten können Sie online bestellen; für andere Produkte kontaktieren Sie uns.",
+    "slotTekst": "Nur Fischplatten können Sie online bestellen. Für andere Fischprodukte schreiben Sie uns per WhatsApp. Wir besprechen gerne die Möglichkeiten.",
     "labelGeneraties": "Generationen",
     "labelWinkel": "Laden",
     "labelEigenaar": "Inhaber",
@@ -340,9 +340,9 @@
     "watTekst": "Zwei Dinge, und bewusst nicht mehr. Frischen Fisch von der Auktion, genau so, wie Sie ihn möchten: ganz, filetiert oder in Scheiben. Und Fischplatten, von der kleinen Platte für den Umtrunk bis zur Weihnachtsplatte. Frittierter Fisch bleibt im Laden — Kibbeling ist nach zwanzig Minuten in der Schachtel einfach nicht mehr gut, und dann lieber gar nicht.",
     "hoeKop": "So läuft es",
     "stap1Kop": "Sie bestellen",
-    "stap1Tekst": "Wählen Sie Ihren Fisch oder stellen Sie eine Platte zusammen und sagen Sie uns, wann es passt. Bestellung bis {tijd} Uhr am Vortag.",
+    "stap1Tekst": "Stellen Sie Ihre Fischplatte zusammen und wählen Sie Lieferung oder Abholung. Bestellen Sie bis {tijd} am Vortag. Für andere Produkte schreiben Sie uns per WhatsApp.",
     "stap2Kop": "Wir rufen kurz an",
-    "stap2Tekst": "Frischer Fisch wird nach Gewicht verkauft, den genauen Betrag kennen wir also erst auf der Waage. Wir rufen Sie mit dem Tagespreis an, bevor wir einpacken.",
+    "stap2Tekst": "Sie sehen den Richtpreis Ihrer Fischplatte und Extras. Wir bestätigen Verfügbarkeit und den endgültigen Betrag vor der Zubereitung.",
     "stap3Kop": "Wir fahren raus",
     "stap3Tekst": "Gekühlt verpackt, von jemandem aus dem Laden gebracht, im gewählten Zeitfenster.",
     "kostenKop": "Lieferkosten und Bedingungen",
@@ -367,7 +367,7 @@
     "betalenBinnenkort": "Demnächst: iDEAL, Kreditkarte, Apple Pay und Google Pay",
     "faqKop": "Häufige Fragen zur Lieferung",
     "ctaKop": "Lust auf Fisch?",
-    "ctaTekst": "Bestellen Sie bis {tijd} Uhr am Vortag, dann sind wir da.",
+    "ctaTekst": "Bestellen Sie Ihre Fischplatte bis {tijd} am Vortag. Fragen zu anderen Produkten besprechen wir per WhatsApp.",
     "plaatsKop": "Frischen Fisch liefern lassen in {plaats}",
     "plaatsEyebrow": "Liefergebiet",
     "plaatsWijkenKop": "In welchen Vierteln von {plaats} wir unterwegs sind",
@@ -376,7 +376,7 @@
     "plaatsRijtijd": "Fahrzeit ab der Herenstraat: {tijd}.",
     "plaatsAndere": "Wir liefern außerdem nach",
     "plaatsCtaKop": "Bestellen für {plaats}",
-    "plaatsCtaTekst": "Wählen Sie Ihren Fisch oder stellen Sie eine Platte zusammen. Bestellen Sie bis {tijd} Uhr am Vortag, dann stehen wir {dagen} vor Ihrer Tür.",
+    "plaatsCtaTekst": "Stellen Sie Ihre Fischplatte zusammen. Bestellen Sie bis {tijd} am Vortag für Lieferung am {dagen}. Für andere Produkte schreiben Sie uns per WhatsApp.",
     "faq": [
       {
         "v": "Liefern Sie auch zu mir?",
@@ -392,11 +392,11 @@
       },
       {
         "v": "Was liefern Sie und was nicht?",
-        "a": "Frischen Fisch und Fischplatten. Frittierter Fisch wie Kibbeling und Lekkerbek bleibt im Laden: nach zwanzig Minuten in der Schachtel ist er einfach nicht mehr gut. Bestellen und in der Herenstraat 48 abholen geht natürlich."
+        "a": "Fischplatten können Sie online bestellen. Für andere Fischprodukte fragen Sie uns per WhatsApp nach Verfügbarkeit und Möglichkeiten. Gebackener Fisch wird nicht auf unserer Lieferrunde geliefert."
       },
       {
         "v": "Wie erfahre ich den Preis, wenn Fisch nach Gewicht verkauft wird?",
-        "a": "Den kennen wir auch erst auf der Waage. Deshalb rufen wir Sie mit dem Tagespreis an, bevor wir einpacken. Erst wenn Sie einverstanden sind, geht es in die Box."
+        "a": "Ihre Fischplatte zeigt den Richtpreis der gewählten Platte und Extras. Wir bestätigen den endgültigen Betrag und die Verfügbarkeit. Für andere Produkte schreiben Sie uns per WhatsApp."
       },
       {
         "v": "Wie kann ich bezahlen?",
@@ -616,7 +616,7 @@
     "za": "Samstag"
   },
   "winkelwagen": {
-    "webshop": "Bestellen",
+    "webshop": "Fischplatten",
     "wagen": "Warenkorb",
     "openLabel": "Warenkorb öffnen — {aantal} im Korb",
     "kop": "Ihre Bestellung",
@@ -632,7 +632,7 @@
     "gratisGehaald": "Lieferung kostenlos.",
     "gratisVanaf": "Die Lieferung kostet {kosten} und ist ab {bedrag} kostenlos.",
     "balk": "Lieferung {kosten} · ab {gratis} kostenlos",
-    "afrekenen": "Zum Bestellformular",
+    "afrekenen": "Fischplatte abschließen",
     "verderWinkelen": "Weiter wählen",
     "naarAssortiment": "Zum Sortiment",
     "terugNaarSite": "Zurück zur Ladenseite",

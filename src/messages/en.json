@@ -10,7 +10,7 @@
     "blog": "Blog",
     "locaties": "Find Us",
     "contact": "Contact",
-    "bestellen": "Order",
+    "bestellen": "Order seafood platters",
     "bezorgen": "Delivery"
   },
   "meta": {
@@ -27,7 +27,7 @@
     "contactTitle": "Contact Schaap's Vis Leiden | +31 71 514 9802 | Fish Shop Herenstraat",
     "contactDesc": "Contact Schaap's Vis Leiden. Call +31 71 514 9802 or send a message. Herenstraat 48, 2313 AL Leiden.",
     "bestellenTitle": "Order a seafood platter in Leiden | Schaap's Vishandel",
-    "bestellenDesc": "Create and order your seafood platter for delivery or collection. Contact us for other fish products.",
+    "bestellenDesc": "Only seafood platters can be ordered online. Looking for other fish? Send us a WhatsApp message to discuss the options.",
     "eerlijkeVisTitle": "Organic Fish Leiden | Organic Salmon — Schaap's Vis",
     "eerlijkeVisDesc": "Organic fish in Leiden at Schaap's Vishandel — organic Varlaks salmon (ASC + EU organic), MSC- and ASC-certified. Herenstraat 48, since 1938.",
     "receptenTitle": "Fish Recipes from Schaap's Vis Leiden | Kibbeling, Salmon, Herring & more",
@@ -169,7 +169,7 @@
   "assortimentPage": {
     "title": "Our Products",
     "sub": "Fresh, honest and top quality — delivered fresh daily",
-    "note": "No online checkout — but easy pre-ordering. We call you back with price and confirmation."
+    "note": "Only seafood platters can be ordered online. Looking for other fish? Send us a WhatsApp message to discuss the options."
   },
   "bezoekPage": {
     "title": "Where to find us",
@@ -324,7 +324,7 @@
     "telefoonLabel": "Phone",
     "sinds1938": "Since 1938",
     "slotTitel": "Visit us — or create a seafood platter",
-    "slotTekst": "Find us at Herenstraat 48 in Leiden. Order seafood platters online; contact us for other products.",
+    "slotTekst": "Only seafood platters can be ordered online. Looking for other fish? Send us a WhatsApp message to discuss the options.",
     "labelGeneraties": "Generations",
     "labelWinkel": "Shop",
     "labelEigenaar": "Owner",
@@ -340,9 +340,9 @@
     "watTekst": "Two things, and deliberately no more. Fresh fish from the auction, prepared however you like it: whole, filleted or in steaks. And seafood platters, from a small one for drinks to a full Christmas platter. Fried fish stays in the shop — kibbeling in a box for twenty minutes simply is not good any more, and then we would rather not.",
     "hoeKop": "How it works",
     "stap1Kop": "You order",
-    "stap1Tekst": "Choose your fish or build a platter and tell us when it suits you. Order by {tijd} the day before.",
+    "stap1Tekst": "Create your seafood platter and choose delivery or collection. Order before {tijd} the day before. Ask us on WhatsApp about other products.",
     "stap2Kop": "We call you",
-    "stap2Tekst": "Fresh fish is sold by weight, so we only know the exact amount once it is on the scales. We ring you with the price before we pack.",
+    "stap2Tekst": "You see the indicative price of your platter and extras. We confirm availability and the final amount before preparing it.",
     "stap3Kop": "We drive out",
     "stap3Tekst": "Packed cold, brought by someone from the shop, within the time slot you picked.",
     "kostenKop": "Delivery charges and conditions",
@@ -367,7 +367,7 @@
     "betalenBinnenkort": "Coming soon: iDEAL, credit card, Apple Pay and Google Pay",
     "faqKop": "Frequently asked questions about delivery",
     "ctaKop": "Fancy some fish?",
-    "ctaTekst": "Order by {tijd} the day before and we will be there.",
+    "ctaTekst": "Order your platter before {tijd} the day before. Ask us on WhatsApp about other products.",
     "plaatsKop": "Fresh fish delivery in {plaats}",
     "plaatsEyebrow": "Delivery area",
     "plaatsWijkenKop": "Which parts of {plaats} we cover",
@@ -376,7 +376,7 @@
     "plaatsRijtijd": "Drive time from the Herenstraat: {tijd}.",
     "plaatsAndere": "We also deliver in",
     "plaatsCtaKop": "Ordering for {plaats}",
-    "plaatsCtaTekst": "Choose your fish or build a platter. Order by {tijd} the day before and we will be at your door {dagen}.",
+    "plaatsCtaTekst": "Create your seafood platter. Order before {tijd} the day before for delivery on {dagen}. Ask us on WhatsApp about other products.",
     "faq": [
       {
         "v": "Do you deliver in my area?",
@@ -392,11 +392,11 @@
       },
       {
         "v": "What do you deliver, and what not?",
-        "a": "Fresh fish and seafood platters. Fried fish such as kibbeling and lekkerbek stays in the shop: after twenty minutes in a box it simply is not good any more. You can order it and collect it at Herenstraat 48."
+        "a": "Seafood platters can be ordered online. Ask us on WhatsApp about availability and options for other fish products. Fried fish is not delivered on our delivery round."
       },
       {
         "v": "How do I know the price if fish is sold by weight?",
-        "a": "We only know once it is on the scales. That is why we ring you with the price before we pack. Nothing goes in the box until you agree."
+        "a": "Your platter shows an indicative price for the selected platter and extras. We confirm availability and the final amount. Ask us on WhatsApp about other products."
       },
       {
         "v": "How can I pay?",
@@ -616,7 +616,7 @@
     "za": "Saturday"
   },
   "winkelwagen": {
-    "webshop": "Order",
+    "webshop": "Seafood platters",
     "wagen": "Basket",
     "openLabel": "Open basket — {aantal} in the basket",
     "kop": "Your order",
@@ -632,7 +632,7 @@
     "gratisGehaald": "Delivery is free.",
     "gratisVanaf": "Delivery costs {kosten}, and is free from {bedrag}.",
     "balk": "Delivery {kosten} · free from {gratis}",
-    "afrekenen": "To the order form",
+    "afrekenen": "Complete your platter",
     "verderWinkelen": "Keep choosing",
     "naarAssortiment": "To the range",
     "terugNaarSite": "Back to the shop site",

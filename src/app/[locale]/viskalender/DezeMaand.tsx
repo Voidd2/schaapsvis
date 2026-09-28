@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { bestelContact } from "@/lib/bestel-contact";
 import { useSyncExternalStore } from "react";
 import { viskalenderData } from "@/lib/viskalender";
 
@@ -60,9 +60,7 @@ export function DezeMaand({ locale }: { locale: string }) {
             gebracht — bel even of vraag het aan de toonbank.
           </p>
           <div className="flex flex-wrap gap-3 mt-6">
-            <Link href={`/${locale}/bestellen`} className="knop knop-rood">
-              Verse vis bestellen
-            </Link>
+            <a href={bestelContact(locale).href} className="knop knop-rood">{bestelContact(locale).label}</a>
             <a href={`#maand-${nu}`} className="knop knop-lijn">
               Alles over {maand.naam.toLowerCase()}
             </a>

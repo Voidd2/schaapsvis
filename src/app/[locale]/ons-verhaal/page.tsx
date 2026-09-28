@@ -1,3 +1,4 @@
+import { bestelContact } from "@/lib/bestel-contact";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
@@ -69,7 +70,7 @@ export default async function OnsVerhaalPage({
         titel={t("heroTitle")}
         intro={t("heroSub")}
         knoppen={[
-          { label: nav("bestellen"), href: `/${locale}/bestellen` },
+          { label: nav("visschalen"), href: `/${locale}/visschalen` },
           { label: nav("locaties"), href: `/${locale}/bezoek-ons`, soort: "lijn" },
         ]}
         feiten={[
@@ -135,7 +136,7 @@ export default async function OnsVerhaalPage({
         tekst={gedeeld("slotTekst")}
         knoppen={[
           { label: nav("visschalen"), href: `/${locale}/visschalen` },
-          { label: nav("bestellen"), href: `/${locale}/bestellen`, soort: "lijn" },
+          { ...bestelContact(locale), extern: true, soort: "lijn" },
           { label: nav("locaties"), href: `/${locale}/bezoek-ons`, soort: "lijn" },
         ]}
       />

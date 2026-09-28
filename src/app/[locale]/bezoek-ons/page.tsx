@@ -1,3 +1,4 @@
+import { bestelContact } from "@/lib/bestel-contact";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
@@ -105,7 +106,7 @@ export default async function BezoekOnsPage({
         titel={t("title")}
         intro={t("sub")}
         knoppen={[
-          { label: nav("bestellen"), href: `/${locale}/bestellen` },
+          { label: nav("visschalen"), href: `/${locale}/visschalen` },
           {
             label: g("bellen", { nummer: BEDRIJF.telefoon.weergave }),
             href: `tel:${BEDRIJF.telefoon.e164}`,
@@ -188,8 +189,8 @@ export default async function BezoekOnsPage({
         titel={b("kop")}
         tekst={`${b("gebiedTekst")} ${GEMEENTEN.map((gem) => gem.naam).join(" · ")}. ${b("dagen", { dagen: bezorgdagenTekst() })} ${b("gratisVanaf", { bedrag: euro(BEZORGING.gratisVanaf) })}`}
         knoppen={[
-          { label: nav("bestellen"), href: `/${locale}/bestellen` },
-          { label: nav("visschalen"), href: `/${locale}/visschalen`, soort: "lijn" },
+          { label: nav("visschalen"), href: `/${locale}/visschalen` },
+          { ...bestelContact(locale), extern: true, soort: "lijn" },
           { label: nav("bezorgen"), href: `/${locale}/bezorgen`, soort: "lijn" },
         ]}
       />

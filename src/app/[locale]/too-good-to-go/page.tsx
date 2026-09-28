@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { bestelContact } from "@/lib/bestel-contact";
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
@@ -156,7 +157,7 @@ export default async function TooGoodToGoPage({
         knoppen={[
           { label: "Naar de app", href: APP_URL, extern: true },
           { label: "Bezoek de winkel", href: `/${locale}/bezoek-ons`, soort: "lijn" },
-          { label: "Verse vis bestellen", href: `/${locale}/bestellen`, soort: "lijn" },
+          { label: bestelContact(locale).label, href: bestelContact(locale).href, extern: true, soort: "lijn" },
         ]}
       />
     </>

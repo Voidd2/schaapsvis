@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { bestelContact } from "@/lib/bestel-contact";
 import { useTranslations, useLocale } from "next-intl";
 import { NewsletterSignup } from "@/components/shared/NewsletterSignup";
 import { BEDRIJF } from "@/lib/bedrijf";
@@ -39,9 +40,9 @@ export function Footer() {
    */
   const groepen = [
     {
-      kop: nav("bestellen"),
+      kop: nav("assortiment"),
       links: [
-        { href: p("/bestellen"), label: nav("bestellen") },
+        { href: bestelContact(locale).href, label: bestelContact(locale).label },
         { href: p("/visschalen"), label: nav("visschalen") },
         { href: p("/assortiment"), label: nav("assortiment") },
         { href: p("/bezorgen"), label: nav("bezorgen") },

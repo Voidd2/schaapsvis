@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { bestelContact } from "@/lib/bestel-contact";
 import type { Metadata } from "next";
 import { blogPostsGesorteerd } from "@/lib/blog";
 import { JsonLd } from "@/components/JsonLd";
@@ -35,7 +36,7 @@ export default async function BlogPage({
         intro="Welke vis is wanneer het lekkerst? Hoe werd een viswinkeltje uit 1938 een Leids begrip? En wat is nou eigenlijk het verschil tussen kibbeling en lekkerbek? Hier staat wat we achter de toonbank elke dag vertellen."
         knoppen={[
           { label: "De viskalender", href: `/${locale}/viskalender` },
-          { label: "Verse vis bestellen", href: `/${locale}/bestellen`, soort: "lijn" },
+          { label: bestelContact(locale).label, href: bestelContact(locale).href, extern: true, soort: "lijn" },
         ]}
         feiten={[
           { label: "Artikelen", waarde: `${blogPostsGesorteerd.length}` },
@@ -97,7 +98,7 @@ export default async function BlogPage({
         titel="Liever proeven dan lezen?"
         tekst="Alles waar we hier over schrijven ligt gewoon in de vitrine. Herenstraat 48 in Leiden, dinsdag tot en met zaterdag — of bestel vooruit."
         knoppen={[
-          { label: "Verse vis bestellen", href: `/${locale}/bestellen` },
+          { label: bestelContact(locale).label, href: bestelContact(locale).href, extern: true },
           { label: "Visschaal samenstellen", href: `/${locale}/visschalen`, soort: "lijn" },
           { label: "Het assortiment", href: `/${locale}/assortiment`, soort: "lijn" },
         ]}

@@ -1,3 +1,5 @@
+import { bestelContact } from "./bestel-contact";
+
 export type ViskeurmerkBadge = "MSC" | "ASC" | "BIO";
 
 export interface MaandVis {
@@ -64,7 +66,7 @@ export const viskalenderData: MaandData[] = [
     tekst:
       "Het voorjaar brengt de eerste signalen van de garnalenvloot. Eind maart verschijnen de eerste verse Hollandse garnalen (Crangon crangon) weer op de toonbank — fris, zoet en MSC-gecertificeerd van de Waddenkust. Schol en tong zijn dit seizoen op hun best.",
     hoogtepunt: "Eerste Hollandse garnalen van het seizoen",
-    links: [{ label: "Hollandse Garnalen reserveren", href: "/nl/bestellen" }],
+    links: [{ ...bestelContact("nl") }],
   },
   {
     naam: "April",
@@ -110,7 +112,7 @@ export const viskalenderData: MaandData[] = [
       "Juni is het hoogtepunt van het visseizoen: traditioneel arriveert de Hollandse Nieuwe vanaf half juni — de rauwe, licht gezouten haring die ieder jaar opnieuw het feestelijkste moment achter onze toonbank is. Naast de Nieuwe zijn garnalen volop verkrijgbaar en is onze biologische Varlaks-zalm een verfijnd alternatief.",
     hoogtepunt: "HOLLANDSE NIEUWE — het moment van het jaar",
     links: [
-      { label: "Broodje Haring bestellen", href: "/nl/bestellen?product=haring" },
+      { ...bestelContact("nl") },
       { label: "Varlaks biologische zalm", href: "/nl/varlaks" },
     ],
   },
@@ -127,7 +129,7 @@ export const viskalenderData: MaandData[] = [
       "Het haringseizoen is in volle gang. Zomerse warmte maakt een broodje haring of een bakje verse garnalen extra aantrekkelijk. Juli is ook een topmaand voor een feestelijk visplankje met gerookte Noorse zalm van High Seas (ASC), perfect voor een zomers borrel.",
     hoogtepunt: "Hoogseizoen haring en garnalen — ideaal voor een visplankje",
     links: [
-      { label: "Feestschotel bestellen", href: "/nl/bestellen?product=feestschotel" },
+      { label: "Visschaal samenstellen", href: "/nl/visschalen" },
       { label: "Gerookte Noorse Zalm", href: "/nl/assortiment" },
     ],
   },
@@ -143,7 +145,7 @@ export const viskalenderData: MaandData[] = [
     tekst:
       "Augustus is vakantiemaand én haringseizoen. Kibbeling is in de zomerdrukte altijd een favoriet: knapperig en snel. Onze kibbeling wordt gemaakt van kabeljauw of MSC-gecertificeerde Alaska koolvis (Theragra chalcogramma) — vraag het personeel naar het aanbod van de dag.",
     hoogtepunt: "Kibbeling en haring: de zomerse klassieker",
-    links: [{ label: "Kibbeling bestellen", href: "/nl/bestellen?product=kibbeling-pollak" }],
+    links: [{ ...bestelContact("nl") }],
   },
   {
     naam: "September",
@@ -192,7 +194,7 @@ export const viskalenderData: MaandData[] = [
     tekst:
       "Mosselen en oesters zijn volop in het seizoen. November is de aanloop naar de feestdagen — hét moment voor een eerste proeverij van oesters en voor het reserveren van een feestelijke visschotel. Onze gerookte Noorse zalm (High Seas, ASC) is een klassieke keuze voor een festief plateau.",
     hoogtepunt: "Aanloop feestdagen — oesters, mosselen, gerookte zalm",
-    links: [{ label: "Feestschotel bestellen", href: "/nl/bestellen?product=feestschotel" }],
+    links: [{ label: "Visschaal samenstellen", href: "/nl/visschalen" }],
   },
   {
     naam: "December",
@@ -208,7 +210,7 @@ export const viskalenderData: MaandData[] = [
       "December is hét feestseizoen voor vis. Oesters en mosselen zijn op hun allerbest, gerookte zalm staat op elk feestelijk plateau, en onze feestelijke visschotels zijn op bestelling verkrijgbaar voor uw kerst- of oudjaarsavond. Bestel op tijd — we zijn erg populair in december.",
     hoogtepunt: "Kerstvis, oesters en feestschotels — bestel op tijd!",
     links: [
-      { label: "Feestschotel bestellen", href: "/nl/bestellen?product=feestschotel" },
+      { label: "Visschaal samenstellen", href: "/nl/visschalen" },
       { label: "Assortiment bekijken", href: "/nl/assortiment" },
     ],
   },

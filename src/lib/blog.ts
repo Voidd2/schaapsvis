@@ -1,3 +1,5 @@
+import { bestelContact } from "./bestel-contact";
+
 export type BlogCategorie = "Seizoen" | "Ons verhaal" | "Visweetjes" | "Duurzaam";
 
 export type BlogSectie = {
@@ -67,7 +69,7 @@ export const blogPosts: BlogPost[] = [
     ],
     gerelateerdeLinks: [
       { label: "Bekijk ons assortiment", href: "/assortiment" },
-      { label: "Bestel vooruit", href: "/bestellen" },
+      { ...bestelContact("nl") },
     ],
     seoKeywords:
       "viskalender, vis seizoen, welke vis wanneer, verse vis seizoen, hollandse nieuwe wanneer, mosselseizoen",
@@ -105,7 +107,7 @@ export const blogPosts: BlogPost[] = [
       },
     ],
     gerelateerdeLinks: [
-      { label: "Broodje haring bestellen", href: "/bestellen" },
+      { ...bestelContact("nl") },
       { label: "Bekijk de viskalender", href: "/blog/viskalender-welke-vis-in-welk-seizoen" },
     ],
     seoKeywords:
@@ -296,7 +298,7 @@ export const blogPosts: BlogPost[] = [
       },
     ],
     gerelateerdeLinks: [
-      { label: "Kibbeling vooruit bestellen", href: "/bestellen" },
+      { ...bestelContact("nl") },
       { label: "Bekijk de voedingswaarden", href: "/assortiment" },
     ],
     seoKeywords:
@@ -336,7 +338,7 @@ export const blogPosts: BlogPost[] = [
     ],
     gerelateerdeLinks: [
       { label: "Lees meer op onze biologische vis-pagina", href: "/biologische-vis" },
-      { label: "Garnalen op aanvraag bestellen", href: "/bestellen" },
+      { ...bestelContact("nl") },
     ],
     seoKeywords:
       "hollandse garnalen, noordzeegarnalen, crangon crangon, garnalen leiden, hollandse garnalen kopen, solt garnalen",
@@ -380,7 +382,7 @@ export const blogPosts: BlogPost[] = [
     ],
     gerelateerdeLinks: [
       { label: "Alle locaties en tijden", href: "/bezoek-ons" },
-      { label: "Bestel vooruit voor de markt", href: "/bestellen" },
+      { ...bestelContact("nl") },
     ],
     seoKeywords:
       "markt leiden vis, vismarkt leiden, leidse markt woensdag zaterdag, vis kraam leiden, broodje haring markt leiden",

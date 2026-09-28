@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { bestelContact } from "@/lib/bestel-contact";
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { googleRating, googleReviewCount } from "@/lib/reviews";
@@ -47,7 +48,7 @@ const faqSchema = {
       name: "Kan ik vis vooruit bestellen bij Schaap's Vishandel?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Ja! Via onze website kunt u kibbeling, haring, vissoep, feestschotels en meer vooraf reserveren. Wij bellen of appen u terug met een bevestiging en de ophaaltijd.",
+        text: "Alleen visschalen kunt u online bestellen. Voor andere producten stuurt u ons een WhatsApp-bericht. Dan bespreken we wat mogelijk is en wat beschikbaar is.",
       },
     },
     {
@@ -93,7 +94,7 @@ export default async function ViswinkelLeidenPage({
         titel="Viswinkel in Leiden — verse vis sinds 1938"
         intro="Vier generaties vakmanschap op de Herenstraat. Dagverse kibbeling, haring, Hollandse garnalen en biologische zalm — direct van leverancier naar toonbank, zonder omwegen."
         knoppen={[
-          { label: "Verse vis bestellen", href: `/${locale}/bestellen` },
+          { label: bestelContact(locale).label, href: bestelContact(locale).href, extern: true },
           { label: "Visschaal samenstellen", href: `/${locale}/visschalen`, soort: "lijn" },
           { label: BEDRIJF.telefoon.weergave, href: `tel:${BEDRIJF.telefoon.e164}`, extern: true, soort: "lijn" },
         ]}
@@ -195,7 +196,7 @@ export default async function ViswinkelLeidenPage({
         titel="Kom langs, of laat het brengen"
         tekst="De winkel is dinsdag tot en met zaterdag open. Liever thuis? We bezorgen verse vis en visschalen in Leiden en vier gemeenten eromheen."
         knoppen={[
-          { label: "Verse vis bestellen", href: `/${locale}/bestellen` },
+          { label: bestelContact(locale).label, href: bestelContact(locale).href, extern: true },
           { label: "Visschaal samenstellen", href: `/${locale}/visschalen`, soort: "lijn" },
           { label: "Openingstijden en route", href: `/${locale}/bezoek-ons`, soort: "lijn" },
         ]}

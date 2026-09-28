@@ -171,7 +171,7 @@ export default async function ContactPage({
         titel={g("slotTitel")}
         tekst={g("slotTekst")}
         knoppen={[
-          { label: nav("bestellen"), href: `/${locale}/bestellen` },
+          { label: nav("visschalen"), href: `/${locale}/visschalen` },
           { label: nav("visschalen"), href: `/${locale}/visschalen`, soort: "lijn" },
           { label: nav("locaties"), href: `/${locale}/bezoek-ons`, soort: "lijn" },
         ]}

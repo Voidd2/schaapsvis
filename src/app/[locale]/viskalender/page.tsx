@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { bestelContact } from "@/lib/bestel-contact";
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { Sectie } from "@/components/ui/Sectie";
@@ -39,7 +40,7 @@ export default async function ViskalenderPage({
         titel="De viskalender — wat is nu op zijn best?"
         intro="Vis heeft een seizoen, net als aardbeien. Hieronder staat maand voor maand wat er dan het mooist ligt, wat er dan juist niet is, en waar u het bij ons vindt."
         knoppen={[
-          { label: "Verse vis bestellen", href: `/${locale}/bestellen` },
+          { label: bestelContact(locale).label, href: bestelContact(locale).href, extern: true },
           { label: "Het assortiment", href: `/${locale}/assortiment`, soort: "lijn" },
         ]}
         feiten={[
@@ -111,7 +112,7 @@ export default async function ViskalenderPage({
         titel="Weten wanneer het binnen is?"
         tekst="Bel of bestel vooruit, dan leggen we het apart zodra het er is. De Hollandse Nieuwe gaat elk jaar hard: wie vroeg vraagt, heeft hem op dag één."
         knoppen={[
-          { label: "Verse vis bestellen", href: `/${locale}/bestellen` },
+          { label: bestelContact(locale).label, href: bestelContact(locale).href, extern: true },
           { label: "Visschaal samenstellen", href: `/${locale}/visschalen`, soort: "lijn" },
           {
             label: BEDRIJF.telefoon.weergave,

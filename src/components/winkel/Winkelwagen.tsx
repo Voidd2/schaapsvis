@@ -16,7 +16,6 @@ import {
   bewaarMandje,
   bewaarSamenstelling,
   leesSamenstelling,
-  maakRegel,
   type MandjeRegel,
 } from "@/lib/mandje";
 import {
@@ -40,7 +39,6 @@ interface WinkelwagenWaarde {
   open: boolean;
   zetOpen: (open: boolean) => void;
 
-  voegToe: (slug: string) => void;
   verwijder: (slug: string) => void;
   wijzig: (slug: string, velden: Partial<MandjeRegel>) => void;
   zetRegels: Dispatch<SetStateAction<MandjeRegel[]>>;
@@ -82,14 +80,6 @@ export function WinkelwagenProvider({ children }: { children: ReactNode }) {
     bewaarSamenstelling(samenstelling);
   }, [samenstelling]);
 
-  const voegToe = useCallback((slug: string) => {
-    setRegels((vorige) => {
-      if (vorige.some((r) => r.slug === slug)) return vorige;
-      const nieuw = maakRegel(slug);
-      return nieuw ? [...vorige, nieuw] : vorige;
-    });
-  }, []);
-
   const verwijder = useCallback((slug: string) => {
     setRegels((vorige) => vorige.filter((r) => r.slug !== slug));
   }, []);
@@ -116,14 +106,13 @@ export function WinkelwagenProvider({ children }: { children: ReactNode }) {
       heeftWeegvis: regels.length > 0,
       open,
       zetOpen,
-      voegToe,
       verwijder,
       wijzig,
       zetRegels: setRegels,
       zetSamenstelling: setSamenstelling,
       leeg,
     };
-  }, [regels, samenstelling, open, voegToe, verwijder, wijzig, leeg]);
+  }, [regels, samenstelling, open, verwijder, wijzig, leeg]);
 
   return <Context.Provider value={waarde}>{children}</Context.Provider>;
 }

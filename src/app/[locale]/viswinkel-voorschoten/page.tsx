@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { bestelContact } from "@/lib/bestel-contact";
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
@@ -37,7 +38,7 @@ const FAQ = [
   },
   {
     v: "Kan ik in Voorschoten vooruit bestellen?",
-    a: "Zeker. Bestel online of bel 071 514 9802 en geef aan dat u het op vrijdag in Voorschoten wilt ophalen — dan staat het klaar.",
+    a: "Alleen visschalen kunt u online bestellen. Stuur ons voor andere producten een WhatsApp-bericht en geef aan dat u in Voorschoten wilt ophalen. We bespreken graag wat mogelijk is.",
   },
 ];
 
@@ -87,7 +88,7 @@ export default async function ViswinkelVoorschotenPage({
         titel="Verse vis in Voorschoten"
         intro="Schaap's Vishandel staat sinds jaar en dag op vrijdag met de kraam in Voorschoten. Kibbeling, haring, verse filet en biologische Varlaks zalm — en wie er niet uitkomt, laat het bezorgen."
         knoppen={[
-          { label: "Vooruit bestellen", href: `/${locale}/bestellen` },
+          { label: bestelContact(locale).label, href: bestelContact(locale).href, extern: true },
           {
             label: "Bezorgen in Voorschoten",
             href: `/${locale}/bezorgen/voorschoten`,
@@ -176,10 +177,10 @@ export default async function ViswinkelVoorschotenPage({
       </Sectie>
 
       <PaginaSlot
-        titel="Bestel vooruit voor de vrijdagmarkt"
+        titel="Een vraag voor de vrijdagmarkt?"
         tekst="Reserveer uw vis en haal het vrijdag op bij Hoogvliet. Liever thuis? We bezorgen verse vis en visschalen in heel Voorschoten."
         knoppen={[
-          { label: "Vooruit bestellen", href: `/${locale}/bestellen` },
+          { label: bestelContact(locale).label, href: bestelContact(locale).href, extern: true },
           { label: "Visschaal samenstellen", href: `/${locale}/visschalen`, soort: "lijn" },
           {
             label: BEDRIJF.telefoon.weergave,

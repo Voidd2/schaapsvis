@@ -222,7 +222,7 @@ export default async function GemeentePage({
         titel={t("plaatsCtaKop", { plaats: gem.naam })}
         tekst={t("plaatsCtaTekst", { tijd: BEZORGING.uitersteBesteltijd, dagen })}
         knoppen={[
-          { label: nav("bestellen"), href: `/${locale}/bestellen` },
+          { label: nav("visschalen"), href: `/${locale}/visschalen` },
           { label: nav("visschalen"), href: `/${locale}/visschalen`, soort: "lijn" },
           {
             label: g("whatsapp"),

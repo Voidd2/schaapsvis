@@ -4,7 +4,8 @@ import { JsonLd } from "@/components/JsonLd";
 import { Sectie, Kop } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { paginaMetadata } from "@/lib/seo";
-import { BEDRIJF, whatsappLink } from "@/lib/bedrijf";
+import { BEDRIJF } from "@/lib/bedrijf";
+import { bestelContact } from "@/lib/bestel-contact";
 import { Beeld } from "@/components/ui/Beeld";
 
 export async function generateMetadata({
@@ -45,7 +46,7 @@ export default async function VarlaksPage({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "varlaksPage" });
   const nav = await getTranslations({ locale, namespace: "nav" });
-  const gedeeld = await getTranslations({ locale, namespace: "gedeeld" });
+
 
   const wel = t.raw("wel") as Punt[];
   const niet = t.raw("niet") as Punt[];
@@ -63,7 +64,7 @@ export default async function VarlaksPage({
         titel={t("heroTitle")}
         intro={t("heroSub")}
         knoppen={[
-          { label: nav("contact"), href: `/${locale}/contact` },
+          { ...bestelContact(locale, "VÅRLAKS"), extern: true },
           {
             label: BEDRIJF.telefoon.weergave,
             href: `tel:${BEDRIJF.telefoon.e164}`,
@@ -165,20 +166,13 @@ export default async function VarlaksPage({
         titel={t("slotTitle")}
         tekst={t("slotText")}
         knoppen={[
-          { label: nav("contact"), href: `/${locale}/contact` },
+          { ...bestelContact(locale, "VÅRLAKS"), extern: true },
           {
             label: nav("visschalen"),
             href: `/${locale}/visschalen`,
             soort: "lijn",
           },
-          {
-            label: gedeeld("whatsapp"),
-            href: whatsappLink(
-              `Hallo ${BEDRIJF.naamKort}, ik wil graag Varlaks biologische zalm bestellen.`
-            ),
-            extern: true,
-            soort: "lijn",
-          },
+
         ]}
       />
     </>

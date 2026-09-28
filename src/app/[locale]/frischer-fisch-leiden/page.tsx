@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { bestelContact } from "@/lib/bestel-contact";
 import type { Metadata } from "next";
 import { permanentRedirect } from "next/navigation";
 import { JsonLd } from "@/components/JsonLd";
@@ -125,7 +126,7 @@ export default async function FrischerFischLeidenPage({
         titel="Frischer Fisch in Leiden — seit vier Generationen"
         intro="Sie besuchen Leiden? Probieren Sie echten holländischen Fisch dort, wo die Einheimischen seit 1938 einkaufen. Kibbeling, Matjes, frische Nordseegarnelen und zertifizierter Bio-Lachs."
         knoppen={[
-          { label: "Jetzt vorbestellen", href: "/de/bestellen" },
+          { label: bestelContact("de").label, href: bestelContact("de").href, extern: true },
           { label: "Fischplatte zusammenstellen", href: "/de/visschalen", soort: "lijn" },
           {
             label: BEDRIJF.telefoon.weergave,
@@ -228,10 +229,10 @@ export default async function FrischerFischLeidenPage({
       </Sectie>
 
       <PaginaSlot
-        titel="Vorbestellen oder einfach vorbeikommen"
-        tekst="Über das Bestellformular reservieren Sie Kibbeling, Hering oder eine Fischplatte. Wir bereiten alles frisch vor und melden uns telefonisch oder per WhatsApp."
+        titel="Fragen Sie uns — oder kommen Sie vorbei"
+        tekst="Nur Fischplatten können Sie online bestellen. Für Kibbeling, Hering und andere Produkte schreiben Sie uns per WhatsApp. Gemeinsam besprechen wir Verfügbarkeit und Möglichkeiten."
         knoppen={[
-          { label: "Jetzt bestellen", href: "/de/bestellen" },
+          { label: bestelContact("de").label, href: bestelContact("de").href, extern: true },
           { label: "Fischplatte zusammenstellen", href: "/de/visschalen", soort: "lijn" },
           {
             label: "WhatsApp",

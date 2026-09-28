@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { bestelContact } from "@/lib/bestel-contact";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
@@ -92,8 +93,8 @@ export default async function HomePage({
               <Link href={`/${locale}/assortiment`} className="knop knop-rood">
                 {h("knopVandaag")}
               </Link>
-              <Link href={`/${locale}/bestellen`} className="knop knop-lijn">
-                {h("knopBestellen")}
+              <Link href={`/${locale}/visschalen`} className="knop knop-lijn">
+                {nav("visschalen")}
               </Link>
             </div>
           </div>
@@ -121,7 +122,7 @@ export default async function HomePage({
               beeld: "toonbank" as const,
               kop: h("pijlerVersKop"),
               tekst: h("pijlerVersTekst"),
-              href: `/${locale}/bestellen`,
+              href: bestelContact(locale).href,
             },
             {
               beeld: "schaalBorrel" as const,
@@ -507,7 +508,7 @@ export default async function HomePage({
         tekst={g("slotTekst")}
         knoppen={[
           { label: nav("visschalen"), href: `/${locale}/visschalen` },
-          { label: nav("bestellen"), href: `/${locale}/bestellen`, soort: "lijn" },
+          { ...bestelContact(locale), extern: true, soort: "lijn" },
           { label: nav("locaties"), href: `/${locale}/bezoek-ons`, soort: "lijn" },
         ]}
       />

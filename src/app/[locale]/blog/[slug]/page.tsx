@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { bestelContact } from "@/lib/bestel-contact";
 import { permanentRedirect } from "next/navigation";
 import type { Metadata } from "next";
 import { blogPosts, getBlogPost } from "@/lib/blog";
@@ -160,9 +161,9 @@ export default async function BlogDetailPage({
 
       <PaginaSlot
         titel="Vandaag nog verse vis in huis?"
-        tekst="Bestel vooruit en haal het op in de winkel of aan de kraam. Verse vis en visschalen bezorgen we in Leiden en vier gemeenten eromheen."
+        tekst="Alleen visschalen bestelt u online. Voor andere producten kunt u ons via WhatsApp vragen naar beschikbaarheid en mogelijkheden."
         knoppen={[
-          { label: "Verse vis bestellen", href: `/${locale}/bestellen` },
+          { label: bestelContact(locale).label, href: bestelContact(locale).href, extern: true },
           { label: "Visschaal samenstellen", href: `/${locale}/visschalen`, soort: "lijn" },
           { label: "Openingstijden en route", href: `/${locale}/bezoek-ons`, soort: "lijn" },
         ]}

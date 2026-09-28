@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { bestelContact } from "@/lib/bestel-contact";
 import { permanentRedirect } from "next/navigation";
 import type { Metadata } from "next";
 import { recepten, receptBeeld, type Recept } from "@/lib/recepten";
@@ -194,9 +195,7 @@ export default async function ReceptDetailPage({
                   op {BEDRIJF.telefoon.weergave}, dan zorgen we dat het er is.
                 </p>
               ) : (
-                <Link href={`/${locale}/bestellen`} className="knop knop-rood">
-                  Vooruit bestellen
-                </Link>
+                <a href={bestelContact(locale).href} className="knop knop-rood">{bestelContact(locale).label}</a>
               )}
             </div>
 
@@ -230,9 +229,9 @@ export default async function ReceptDetailPage({
 
       <PaginaSlot
         titel="De vis haalt u bij ons"
-        tekst="Herenstraat 48 in Leiden, dinsdag tot en met zaterdag. Bestel vooruit, dan ligt het klaar wanneer u langskomt."
+        tekst="Op zoek naar vis voor dit recept? Vraag ons via WhatsApp naar beschikbaarheid en mogelijkheden. Alleen visschalen kunt u online bestellen."
         knoppen={[
-          { label: "Verse vis bestellen", href: `/${locale}/bestellen` },
+          { label: bestelContact(locale).label, href: bestelContact(locale).href, extern: true },
           { label: "Visschaal samenstellen", href: `/${locale}/visschalen`, soort: "lijn" },
           {
             label: BEDRIJF.telefoon.weergave,

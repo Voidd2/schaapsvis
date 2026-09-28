@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { bestelContact } from "@/lib/bestel-contact";
 import { ReceptenClient } from "./ReceptenClient";
 import { JsonLd } from "@/components/JsonLd";
 import { Sectie, Kop } from "@/components/ui/Sectie";
@@ -37,7 +38,7 @@ export default async function ReceptenPage({
         titel="Recepten met vis van de Herenstraat"
         intro="Bij elk recept staat wat u bij ons haalt en wat u nog even in de supermarkt meeneemt. Van vijftien minuten tot een middag werk — en eerlijk over hoe lastig het is."
         knoppen={[
-          { label: "Verse vis bestellen", href: `/${locale}/bestellen` },
+          { label: bestelContact(locale).label, href: bestelContact(locale).href, extern: true },
           { label: "De viskalender", href: `/${locale}/viskalender`, soort: "lijn" },
         ]}
         feiten={[
@@ -76,9 +77,9 @@ export default async function ReceptenPage({
 
       <PaginaSlot
         titel="Eerst de vis, dan het recept"
-        tekst="Herenstraat 48 in Leiden, dinsdag tot en met zaterdag. Bestel vooruit, dan ligt het klaar — en vraag gerust wat er die dag het mooist is."
+        tekst="Op zoek naar vis voor uw recept? Stuur ons een WhatsApp-bericht. We kijken graag wat mogelijk is. Alleen visschalen kunt u online bestellen."
         knoppen={[
-          { label: "Verse vis bestellen", href: `/${locale}/bestellen` },
+          { label: bestelContact(locale).label, href: bestelContact(locale).href, extern: true },
           { label: "Visschaal samenstellen", href: `/${locale}/visschalen`, soort: "lijn" },
           { label: "Openingstijden en route", href: `/${locale}/bezoek-ons`, soort: "lijn" },
         ]}

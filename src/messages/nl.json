@@ -10,7 +10,7 @@
     "blog": "Blog",
     "locaties": "Locaties",
     "contact": "Contact",
-    "bestellen": "Bestellen",
+    "bestellen": "Visschalen bestellen",
     "bezorgen": "Bezorgen"
   },
   "meta": {
@@ -27,7 +27,7 @@
     "contactTitle": "Contact Schaap's Vis Leiden | 071 514 9802 | Viswinkel Herenstraat",
     "contactDesc": "Neem contact op met Schaap's Vis Leiden. Bel 071 514 9802 of stuur een bericht. Herenstraat 48, 2313 AL Leiden.",
     "bestellenTitle": "Visschaal bestellen in Leiden | Schaap's Vishandel",
-    "bestellenDesc": "Stel uw visschaal samen en bestel voor bezorgen of afhalen. Voor andere visproducten neemt u contact met ons op.",
+    "bestellenDesc": "Alleen visschalen bestelt u online. Zoekt u andere vis? Stuur ons een WhatsApp-bericht; we kijken graag wat mogelijk is.",
     "eerlijkeVisTitle": "Biologische Vis Leiden | Biologische Zalm — Schaap's Vis",
     "eerlijkeVisDesc": "Biologische vis in Leiden bij Schaap's Vishandel — biologische Varlaks zalm (ASC + EU-bio), MSC- en ASC-gecertificeerd. Herenstraat 48, sinds 1938.",
     "receptenTitle": "Visrecepten van Schaap's Vis Leiden | Kibbeling, Zalm, Haring & meer",
@@ -169,7 +169,7 @@
   "assortimentPage": {
     "title": "Ons Assortiment",
     "sub": "Vers, eerlijk en van topkwaliteit — dagelijks vers aangeleverd",
-    "note": "Geen online afrekenen — wél eenvoudig vooruit bestellen. Wij bellen terug met prijs en bevestiging."
+    "note": "Alleen visschalen bestelt u online. Zoekt u andere vis? Stuur ons een WhatsApp-bericht; we kijken graag wat mogelijk is."
   },
   "bezoekPage": {
     "title": "Waar u ons vindt",
@@ -324,7 +324,7 @@
     "telefoonLabel": "Telefoon",
     "sinds1938": "Sinds 1938",
     "slotTitel": "Kom langs — of stel uw visschaal samen",
-    "slotTekst": "U vindt ons aan de Herenstraat 48 in Leiden. Visschalen kunt u online bestellen; neem voor andere producten contact met ons op.",
+    "slotTekst": "Alleen visschalen bestelt u online. Zoekt u andere vis? Stuur ons een WhatsApp-bericht; we kijken graag wat mogelijk is.",
     "labelGeneraties": "Generaties",
     "labelWinkel": "Winkel",
     "labelEigenaar": "Eigenaar",
@@ -340,9 +340,9 @@
     "watTekst": "Twee dingen, en met opzet niet meer. Verse vis van de veiling, precies zoals u hem wilt hebben: heel, gefileerd of in moten. En visschalen, van een borrelschaal tot een schaal voor de kerstdagen. Gebakken vis laten we in de winkel — kibbeling is na twintig minuten in een doos gewoon niet lekker meer, en dan liever helemaal niet.",
     "hoeKop": "Hoe het gaat",
     "stap1Kop": "U bestelt",
-    "stap1Tekst": "Kies uw vis of stel een visschaal samen en geef door wanneer het uitkomt. Bestel uiterlijk om {tijd} de dag ervoor.",
+    "stap1Tekst": "Stel uw visschaal samen en kies bezorgen of afhalen. Bestel uiterlijk om {tijd} de dag ervoor. Andere producten? Vraag het ons via WhatsApp.",
     "stap2Kop": "Wij bellen even",
-    "stap2Tekst": "Verse vis gaat op gewicht, dus het exacte bedrag weten we pas als het op de weegschaal ligt. We bellen u met de dagprijs voordat we inpakken.",
+    "stap2Tekst": "U ziet de richtprijs van uw schaal en extra's. We bevestigen de beschikbaarheid en het definitieve bedrag voordat we beginnen.",
     "stap3Kop": "Wij rijden",
     "stap3Tekst": "Gekoeld ingepakt, door iemand van de winkel gebracht, binnen het tijdvak dat u koos.",
     "kostenKop": "Bezorgkosten en voorwaarden",
@@ -367,7 +367,7 @@
     "betalenBinnenkort": "Binnenkort: iDEAL, creditcard, Apple Pay en Google Pay",
     "faqKop": "Veelgestelde vragen over bezorgen",
     "ctaKop": "Zin in vis?",
-    "ctaTekst": "Bestel voor {tijd} de dag ervoor, dan staan we er.",
+    "ctaTekst": "Bestel uw visschaal voor {tijd} de dag ervoor. Voor andere producten bespreken we de mogelijkheden via WhatsApp.",
     "plaatsKop": "Verse vis bezorgen in {plaats}",
     "plaatsEyebrow": "Bezorggebied",
     "plaatsWijkenKop": "In welke wijken van {plaats} we komen",
@@ -376,7 +376,7 @@
     "plaatsRijtijd": "Rijtijd vanaf de Herenstraat: {tijd}.",
     "plaatsAndere": "We bezorgen ook in",
     "plaatsCtaKop": "Bestellen voor {plaats}",
-    "plaatsCtaTekst": "Kies uw vis of stel een visschaal samen. Bestel voor {tijd} de dag ervoor, dan staan we {dagen} bij u voor de deur.",
+    "plaatsCtaTekst": "Stel uw visschaal samen. Bestel voor {tijd} de dag ervoor voor bezorging op {dagen}. Vraag ons via WhatsApp naar andere producten.",
     "faq": [
       {
         "v": "Bezorgen jullie bij mij in de buurt?",
@@ -392,11 +392,11 @@
       },
       {
         "v": "Wat bezorgen jullie wel en niet?",
-        "a": "Verse vis en visschalen. Gebakken vis zoals kibbeling en lekkerbek blijft in de winkel: dat is na twintig minuten in een doos niet lekker meer. Dat kunt u wel bestellen en ophalen aan de Herenstraat 48."
+        "a": "Visschalen kunt u online bestellen. Vraag ons via WhatsApp naar beschikbaarheid en mogelijkheden voor andere visproducten. Gebakken vis nemen we niet mee op onze bezorgronde."
       },
       {
         "v": "Hoe weet ik wat het kost als vis op gewicht gaat?",
-        "a": "Dat weten wij ook pas als het op de weegschaal ligt. Daarom bellen we u met de dagprijs voordat we inpakken. Pas als u akkoord bent, gaat het de doos in."
+        "a": "Bij uw visschaal ziet u de richtprijs van de gekozen schaal en extra's. We bevestigen beschikbaarheid en het definitieve bedrag. Voor andere producten overleggen we via WhatsApp."
       },
       {
         "v": "Hoe kan ik betalen?",
@@ -616,7 +616,7 @@
     "za": "zaterdag"
   },
   "winkelwagen": {
-    "webshop": "Bestellen",
+    "webshop": "Visschalen",
     "wagen": "Winkelmand",
     "openLabel": "Winkelmand openen — {aantal} in de mand",
     "kop": "Uw bestelling",
@@ -632,7 +632,7 @@
     "gratisGehaald": "Gratis bezorgd.",
     "gratisVanaf": "Bezorgen kost {kosten}, en is gratis vanaf {bedrag}.",
     "balk": "Bezorgen {kosten} · gratis vanaf {gratis}",
-    "afrekenen": "Naar het bestelformulier",
+    "afrekenen": "Visschaal afronden",
     "verderWinkelen": "Verder kiezen",
     "naarAssortiment": "Naar het assortiment",
     "terugNaarSite": "Terug naar de winkelsite",

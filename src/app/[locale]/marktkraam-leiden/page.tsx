@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { bestelContact } from "@/lib/bestel-contact";
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
@@ -56,7 +57,7 @@ const FAQ = [
   },
   {
     v: "Kan ik vis vooruit bestellen voor de kraam?",
-    a: "Ja. Bestel vooruit via de site of bel 071 514 9802, dan ligt het klaar op de kraam of in de winkel. Handig als u zeker wilt weten dat het er is.",
+    a: "Alleen visschalen bestelt u online. Voor andere producten kunt u ons via WhatsApp vragen naar beschikbaarheid en de mogelijkheden om het bij de kraam op te halen.",
   },
   {
     v: "Staat Schaap's ook op de markt in Voorschoten?",
@@ -93,7 +94,7 @@ export default async function MarktkraamPage({
         titel="Onze viskramen in Leiden en Voorschoten"
         intro="Verse vis, kibbeling en haring, vers van de kraam. Drie dagen in de week staan we buiten; de rest van de week vindt u ons in de winkel op de Herenstraat."
         knoppen={[
-          { label: "Vooruit bestellen", href: `/${locale}/bestellen` },
+          { label: bestelContact(locale).label, href: bestelContact(locale).href, extern: true },
           { label: "Visschaal samenstellen", href: `/${locale}/visschalen`, soort: "lijn" },
         ]}
         feiten={KRAMEN.map((kraam) => ({
@@ -168,9 +169,9 @@ export default async function MarktkraamPage({
 
       <PaginaSlot
         titel="Vis reserveren voor de kraam?"
-        tekst="Bestel vooruit, dan ligt het klaar op de kraam of in de winkel. Voor een visschaal vragen we twee dagen van tevoren; verse vis kan korter."
+        tekst="Zoekt u iets voor bij de kraam? Vraag ons via WhatsApp naar de mogelijkheden. Alleen visschalen kunt u online bestellen."
         knoppen={[
-          { label: "Vooruit bestellen", href: `/${locale}/bestellen` },
+          { label: bestelContact(locale).label, href: bestelContact(locale).href, extern: true },
           { label: "Visschaal samenstellen", href: `/${locale}/visschalen`, soort: "lijn" },
           {
             label: BEDRIJF.telefoon.weergave,

@@ -15,7 +15,8 @@ import { getPrijs, formatPrijs } from "@/lib/prijzen";
 import { Schema } from "@/components/Schema";
 import { Sectie } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
-import { BEDRIJF, whatsappLink } from "@/lib/bedrijf";
+import { BEDRIJF } from "@/lib/bedrijf";
+import { bestelContact } from "@/lib/bestel-contact";
 
 const SCENE: Record<Categorie, string> = {
   "verse-vis": "/images/scene-vis.svg",
@@ -94,12 +95,6 @@ export async function generateMetadata({
     },
     openGraph: { title, description, locale, type: "website" },
   };
-}
-
-function waUrl(naam: string) {
-  return whatsappLink(
-    `Hallo ${BEDRIJF.naam}, ik wil graag ${naam} bestellen of reserveren. Wanneer kan ik dit ophalen?`
-  );
 }
 
 export default async function ProductDetailPage({
@@ -205,15 +200,15 @@ export default async function ProductDetailPage({
         intro={product.desc}
         knoppen={[
           {
-            label: isSchaal ? "Visschaal samenstellen" : "Vraag naar dit product",
+            label: isSchaal ? "Visschaal samenstellen" : bestelContact(locale).label,
             href: isSchaal
               ? `/${locale}/visschalen#samenstellen`
-              : `/${locale}/contact`,
+              : bestelContact(locale, product.naam).href,
+            extern: !isSchaal,
           },
           {
-            label: "Vraag naar beschikbaarheid",
-            href: waUrl(product.naam),
-            extern: true,
+            label: "Bekijk het assortiment",
+            href: `/${locale}/assortiment`,
             soort: "lijn",
           },
         ]}
@@ -424,13 +419,14 @@ export default async function ProductDetailPage({
 
       <PaginaSlot
         titel={`Op zoek naar ${product.naam.toLowerCase()}?`}
-        tekst="Neem contact met ons op voor uw bestelling. Dan kijken we samen wat mogelijk is. Alleen visschalen kunt u online bestellen."
+        tekst="Alleen visschalen kunt u online bestellen. Zoekt u iets anders? Stuur ons een WhatsApp-bericht, dan kijken we samen wat mogelijk is."
         knoppen={[
           {
-            label: isSchaal ? "Visschaal samenstellen" : "Neem contact op",
+            label: isSchaal ? "Visschaal samenstellen" : bestelContact(locale).label,
             href: isSchaal
               ? `/${locale}/visschalen`
-              : `/${locale}/contact`,
+              : bestelContact(locale, product.naam).href,
+            extern: !isSchaal,
           },
           { label: "Openingstijden en route", href: `/${locale}/bezoek-ons`, soort: "lijn" },
           {

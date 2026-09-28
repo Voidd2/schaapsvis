@@ -220,7 +220,7 @@ export default async function BezorgenPage({
         titel={t("ctaKop")}
         tekst={t("ctaTekst", { tijd: BEZORGING.uitersteBesteltijd })}
         knoppen={[
-          { label: nav("bestellen"), href: `/${locale}/bestellen` },
+          { label: nav("visschalen"), href: `/${locale}/visschalen` },
           { label: nav("visschalen"), href: `/${locale}/visschalen`, soort: "lijn" },
           {
             label: g("whatsapp"),
