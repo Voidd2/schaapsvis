@@ -678,13 +678,23 @@ const bestaandePosts: BlogPost[] = [
 ];
 
 const blogBeelden: Record<string, { src: string; alt: string }> = {
+  "viskalender-welke-vis-in-welk-seizoen": { src: "/images/recepten/gebakken-schol-tomaat-olijven.webp", alt: "Gebakken schol met tomaat en olijven" },
   "hollandse-nieuwe-waarom-juni-haring-anders-smaakt": { src: "/images/producten-hd/haring.webp", alt: "Haring" },
   "kibbeling-vs-lekkerbek-het-verschil": { src: "/images/editorial/kibbeling.webp", alt: "Krokante kibbeling met saus" },
   "de-echte-hollandse-garnaal": { src: "/images/producten-hd/hollandse-garnalen.webp", alt: "Hollandse garnalen" },
+  "sinds-1938-de-geschiedenis-van-schaaps-vis": { src: "/images/producten-hd/kabeljauw.webp", alt: "Verse kabeljauw, een klassieker bij de vishandel" },
+  "wilde-zalm-vs-kweekzalm-waarom-wij-varlaks-kiezen": { src: "/images/editorial/zalm.webp", alt: "Verse zalmfilet met citroen en dille" },
+  "waarom-staat-makreel-op-rood": { src: "/images/recepten/makreelsalade-brood.webp", alt: "Makreelsalade op brood" },
+  "marktdag-in-leiden-achter-de-kraam": { src: "/images/recepten/broodje-haring-uitjes.webp", alt: "Broodje haring met uitjes, een vertrouwde marktklassieker" },
+  "waar-koop-je-biologische-vis-in-leiden": { src: "/images/recepten/zomerse-zalmsalade.webp", alt: "Serveersuggestie: zalm in een frisse salade" },
+  "wat-betekenen-msc-asc-en-het-eu-bio-logo": { src: "/images/producten-hd/coquilles.webp", alt: "Coquilles uit het assortiment; controleer het keurmerk per levering" },
+  "is-biologische-zalm-gezonder-omega-3": { src: "/images/recepten/zalm-traybake-groenten-v2.webp", alt: "Zalm met groenten uit de oven" },
+  "verse-vis-bewaren-en-bereiden-tips": { src: "/images/producten-hd/kabeljauwfilet.webp", alt: "Verse kabeljauwfilet om gekoeld te bewaren en te bereiden" },
+  "echt-gerookte-vis-vs-kunstmatige-rooksmaak": { src: "/images/recepten/gerookte-zalm-rolletjes-roomkaas.webp", alt: "Gerookte zalmrolletjes met roomkaas" },
 };
 export const blogPosts: BlogPost[] = [...NIEUWE_ARTIKELEN, ...bestaandePosts.map(post => {
   const wijziging = BIJGEWERKTE_ARTIKELEN[post.slug];
-  const beeld = blogBeelden[post.slug] ?? { src: "/images/editorial/zalm.webp", alt: "Zalmfilet met citroen en dille" };
+  const beeld = blogBeelden[post.slug] ?? { src: post.fotoUrl, alt: post.fotoAlt };
   return { ...post, ...wijziging, fotoUrl: beeld.src, fotoAlt: beeld.alt, secties: (wijziging?.secties ?? post.secties).map(s => ({ ...s, alineas: s.alineas.map(a => a.replaceAll("maandag t/m zaterdag", "dinsdag t/m zaterdag")) })), ...(wijziging ? { bijgewerkt: "2026-09-28", datumLabel: "Bijgewerkt 28 september 2026" } : {}) };
 })];
 

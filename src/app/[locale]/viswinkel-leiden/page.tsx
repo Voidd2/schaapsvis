@@ -32,7 +32,7 @@ const faqSchema = {
       name: "Waar is Schaap's Vishandel in Leiden?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "De winkel is op Herenstraat 48, 2313 AL Leiden (di–vr 09:00–18:00, za 09:00–17:00; maandag gesloten). Op zaterdag staan wij bij de Waag (Aalmarkt) en op woensdag bij Dille & Camille. Op vrijdag staan wij op de parkeerplaats bij Hoogvliet in Voorschoten (08:30–17:30).",
+        text: "De winkel is op Herenstraat 48, 2313 AL Leiden (di–vr 09:00–18:00, za 09:00–17:00; maandag gesloten). Op zaterdag staan wij bij de Waag (Aalmarkt) en op woensdag bij Dille & Camille. Op vrijdag staan wij op de parkeerplaats bij Hoogvliet in Voorschoten (08:00–17:30).",
       },
     },
     {

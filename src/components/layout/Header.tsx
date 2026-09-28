@@ -26,6 +26,7 @@ export function Header() {
   const links = [
     { href: p("/assortiment"), label: t("assortiment") },
     { href: "/nl/recepten", label: t("recepten") },
+    { href: "/nl/viskalender", label: locale === "de" ? "Fischkalender" : locale === "en" ? "Fish calendar" : "Viskalender" },
     { href: p("/biologische-vis"), label: t("betereVis") },
     { href: "/nl/blog", label: t("blog") },
     { href: p("/bezoek-ons"), label: t("locaties") },
@@ -96,7 +97,7 @@ export function Header() {
             </span>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-5 xl:gap-6 text-[0.9rem]">
+          <nav className="hidden lg:flex items-center gap-3 xl:gap-4 text-[0.85rem]">
             {links.map(({ href, label }) => (
               <Link
                 key={href}

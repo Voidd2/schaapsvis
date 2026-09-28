@@ -44,7 +44,7 @@ export async function generateMetadata({
   if (!recept) return {};
 
   return {
-    title: `${recept.title} | Recepten Schaap's Vis Leiden`,
+    title: `${recept.title} | Schaap's`,
     description: `${recept.verhaal.slice(0, 155)}...`,
     keywords: recept.seoKeywords,
     // Recepten staan alleen in het Nederlands, dus wijzen alle taalversies naar
@@ -54,8 +54,10 @@ export async function generateMetadata({
       title: `${recept.title} | Schaap's Vis Leiden`,
       description: recept.subtitle,
       type: "article",
+      url: `${BEDRIJF.domein}/nl/recepten/${slug}`,
       images: [{ url: recept.fotoUrl || "/og-image.png", alt: recept.title }],
     },
+    twitter: { card: "summary_large_image", title: recept.title, description: recept.subtitle, images: [recept.fotoUrl || "/og-image.png"] },
   };
 }
 

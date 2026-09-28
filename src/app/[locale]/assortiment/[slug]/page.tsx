@@ -79,7 +79,8 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical: `/nl/assortiment/${slug}` },
-    openGraph: { title, description, locale: "nl_NL", type: "website", images: [{ url: productPhoto(product)?.src || "/og-image.png", alt: productPhoto(product)?.alt ?? product.naam }] },
+    openGraph: { title, description, url: `${BEDRIJF.domein}/nl/assortiment/${slug}`, locale: "nl_NL", type: "website", images: [{ url: productPhoto(product)?.src || "/og-image.png", alt: productPhoto(product)?.alt ?? product.naam }] },
+    twitter: { card: "summary_large_image", title, description, images: [productPhoto(product)?.src || "/og-image.png"] },
   };
 }
 

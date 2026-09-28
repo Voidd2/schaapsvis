@@ -32,6 +32,7 @@ interface PaginaSeo {
   pad: string;
   title: string;
   description: string;
+  image?: string;
   /** Zet op true voor pagina's die niet in de zoekresultaten horen. */
   geenIndex?: boolean;
 }
@@ -41,6 +42,7 @@ export function paginaMetadata({
   pad,
   title,
   description,
+  image = "/og-image.png",
   geenIndex,
 }: PaginaSeo): Metadata {
   return {
@@ -51,10 +53,11 @@ export function paginaMetadata({
       title,
       description,
       type: "website",
-      images: [{ url: `${BEDRIJF.domein}/og-image.png`, alt: BEDRIJF.naam }],
+      images: [{ url: `${BEDRIJF.domein}${image}`, alt: title }],
       url: `${BEDRIJF.domein}/${locale}${pad === "/" ? "" : pad}`,
     },
     ...(geenIndex ? { robots: { index: false, follow: true } } : {}),
+    twitter: { card: "summary_large_image", title, description, images: [`${BEDRIJF.domein}${image}`] },
   };
 }
 
@@ -257,6 +260,7 @@ interface EenTaalSeo {
   pad: string;
   title: string;
   description: string;
+  image?: string;
   /** Vertalingen die onder een ander pad staan, als { taal: pad }. */
   paren?: Partial<Record<Locale, string>>;
 }
@@ -267,6 +271,7 @@ export function eenTaalMetadata({
   title,
   description,
   paren,
+  image = "/og-image.png",
 }: EenTaalSeo): Metadata {
   const talen: Record<string, string> = { [taal]: `/${taal}${pad}` };
   for (const [andereTaal, anderPad] of Object.entries(paren ?? {})) {
@@ -282,8 +287,9 @@ export function eenTaalMetadata({
       title,
       description,
       type: "website",
-      images: [{ url: `${BEDRIJF.domein}/og-image.png`, alt: BEDRIJF.naam }],
+      images: [{ url: `${BEDRIJF.domein}${image}`, alt: title }],
       url: `${BEDRIJF.domein}/${taal}${pad}`,
     },
+    twitter: { card: "summary_large_image", title, description, images: [`${BEDRIJF.domein}${image}`] },
   };
 }

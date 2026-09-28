@@ -18,7 +18,7 @@ import { viskalenderData } from "@/lib/viskalender";
  */
 /** De maand is een gegeven van buiten React: de klok van de bezoeker. */
 function huidigeMaand(): number {
-  return new Date().getMonth();
+  return Number(new Intl.DateTimeFormat("nl-NL", { month: "numeric", timeZone: "Europe/Amsterdam" }).format(new Date())) - 1;
 }
 
 /** Eén keer per uur nakijken is ruim genoeg voor een maandovergang. */
@@ -49,7 +49,7 @@ export function MaandStrip() {
               className="kapitaal block px-3.5 py-3"
               style={{
                 color: i === nu ? "var(--navy)" : "rgba(250,246,239,0.65)",
-                backgroundColor: i === nu ? "var(--gold)" : "transparent",
+                backgroundColor: i === nu ? "var(--lichtblauw)" : "transparent",
               }}
               aria-current={i === nu ? "true" : undefined}
             >

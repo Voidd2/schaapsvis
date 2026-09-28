@@ -124,7 +124,7 @@ export const VERKOOPPUNTEN: Verkooppunt[] = [
     naam: "Bij Hoogvliet",
     adres: "Parkeerplaats Hoogvliet",
     plaats: "Voorschoten",
-    dagen: "vrijdag 08:30–17:30",
+    dagen: "vrijdag 08:00–17:30",
     mapsUrl: "https://maps.google.com/?q=Hoogvliet+Voorschoterweg+Voorschoten",
   },
 ];

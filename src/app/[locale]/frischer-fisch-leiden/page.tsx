@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return eenTaalMetadata({
     taal: "de",
     pad: "/frischer-fisch-leiden",
-    title: "Frischer Fisch in Leiden — Fischgeschäft seit 1938 | Schaap's Vishandel",
+    title: "Frischer Fisch in Leiden seit 1938 | Schaap's Vis",
     description:
       "Echter holländischer Fisch in Leiden: Kibbeling, Matjes, frische Nordseekrabben und Bio-Lachs. Fischgeschäft in der Herenstraat 48 und Wochenmarkt Mi und Sa. Seit 1938.",
     paren: { nl: "/viswinkel-leiden" },
@@ -81,7 +81,7 @@ const DAGEN_DE: Record<string, string> = {
   winkel: "Di–Fr 09:00–18:00 · Sa 09:00–17:00 Uhr",
   markt: "Samstags 08:30–17:00 Uhr",
   "markt-woensdag": "Mittwochs 08:30–17:00 Uhr",
-  voorschoten: "Freitags 08:30–17:30 Uhr",
+  voorschoten: "Freitags 08:00–17:30 Uhr",
 };
 
 const NAAM_DE: Record<string, string> = {

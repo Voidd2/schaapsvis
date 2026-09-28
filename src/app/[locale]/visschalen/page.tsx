@@ -7,7 +7,7 @@ import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { VisschaalConfigurator } from "./VisschaalConfigurator";
 import { paginaMetadata, kruimelSchema, vraagSchema } from "@/lib/seo";
 import { BEDRIJF, euro, whatsappLink } from "@/lib/bedrijf";
-import { MARKT, SCHALEN, VANAF_BEDRAG } from "@/lib/visschaal";
+import { SCHALEN, VANAF_BEDRAG } from "@/lib/visschaal";
 import { GEMEENTEN } from "@/lib/bezorging";
 
 export async function generateMetadata({
@@ -125,7 +125,7 @@ export default async function VisschalenPage({
 
       <PaginaSlot
         titel={t("kop")}
-        tekst={t("vergelijkingKort", { markt: euro(MARKT.goedkoopstePerPersoon) })}
+        tekst={t("schaalUitleg")}
         knoppen={[
           { label: t("naarBestellen"), href: "#samenstellen", extern: true },
           {

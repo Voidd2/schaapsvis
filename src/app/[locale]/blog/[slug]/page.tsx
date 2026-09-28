@@ -26,7 +26,7 @@ export async function generateMetadata({
   if (!post) return {};
 
   return {
-    title: `${post.title} | Blog Schaap's Vis Leiden`,
+    title: post.title.length > 55 ? post.title : `${post.title} | Schaap's`,
     description: post.excerpt.slice(0, 160),
     keywords: post.seoKeywords,
     // Deze artikelen bestaan alleen in het Nederlands; alle taalversies
@@ -36,8 +36,10 @@ export async function generateMetadata({
       title: post.title,
       description: post.excerpt,
       type: "article",
+      url: `${BEDRIJF.domein}/nl/blog/${slug}`,
       images: [{ url: post.fotoUrl }],
     },
+    twitter: { card: "summary_large_image", title: post.title, description: post.excerpt, images: [post.fotoUrl] },
   };
 }
 
@@ -62,6 +64,7 @@ export default async function BlogDetailPage({
     image: [`${BEDRIJF.domein}${post.fotoUrl}`],
     datePublished: post.datum,
     dateModified: post.bijgewerkt ?? post.datum,
+    mainEntityOfPage: `${BEDRIJF.domein}/nl/blog/${slug}`,
     inLanguage: "nl-NL",
     author: { "@type": "Organization", name: BEDRIJF.naam, url: BEDRIJF.domein },
     publisher: { "@type": "Organization", name: BEDRIJF.naam },

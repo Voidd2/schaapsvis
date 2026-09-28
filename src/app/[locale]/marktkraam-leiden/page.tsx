@@ -61,7 +61,7 @@ const FAQ = [
   },
   {
     v: "Staat Schaap's ook op de markt in Voorschoten?",
-    a: "Ja, op vrijdag van 08:30 tot 17:30 op de parkeerplaats bij Hoogvliet in Voorschoten.",
+    a: "Ja, op vrijdag van 08:00 tot 17:30 op de parkeerplaats bij Hoogvliet in Voorschoten.",
   },
 ];
 

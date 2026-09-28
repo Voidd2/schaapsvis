@@ -8,7 +8,6 @@ import {
   GROEP_UITLEG,
   GROEP_VOLGORDE,
   LEGE_SAMENSTELLING,
-  MARKT,
   ONDERDELEN,
   PORTIES,
   PRIJZEN_DEFINITIEF,
@@ -17,7 +16,6 @@ import {
   extrasTotaal,
   hoeveelheidTekst,
   personen as berekenPersonen,
-  prijsPerPersoon,
   regels as maakRegels,
   schaalById,
   totaal as berekenTotaal,
@@ -55,7 +53,6 @@ export function VisschaalConfigurator() {
   const extras = useMemo(() => extrasTotaal(samen), [samen]);
   const gewicht = useMemo(() => extrasGewicht(samen), [samen]);
   const personen = useMemo(() => berekenPersonen(samen), [samen]);
-  const perPersoon = useMemo(() => prijsPerPersoon(samen), [samen]);
 
   const gekozenSchaal = samen.schaal ? schaalById(samen.schaal) : undefined;
 
@@ -109,7 +106,12 @@ export function VisschaalConfigurator() {
                       border: gekozen ? "2px solid var(--navy)" : "1px solid var(--linen)",
                     }}
                   >
-                    <Beeld naam={schaal.beeld} verhouding="vierkant" streep="var(--navy)" />
+                    <figure>
+                      <Beeld naam={schaal.beeld} verhouding="vierkant" streep="var(--navy)" />
+                      <figcaption className="px-5 py-3 text-xs leading-relaxed" style={{ background: "var(--lichtblauw)", color: "var(--navy)" }}>
+                        {t("fotoVoorbeeld")}
+                      </figcaption>
+                    </figure>
 
                     <div className="p-5 flex flex-col flex-1">
                       <h3 className="text-[1.25rem] mb-1">{schaal.naam}</h3>
@@ -302,20 +304,6 @@ export function VisschaalConfigurator() {
                         ? `${(gewicht / 1000).toFixed(1).replace(".", ",")} kg`
                         : `${gewicht} g`,
                   })}`}
-              </p>
-            )}
-
-            {/* Vergelijking met de goedkoopste pakketprijs die we in de regio
-                vonden. Alleen tonen als we er echt onder zitten. */}
-            {perPersoon !== null && perPersoon < MARKT.goedkoopstePerPersoon && (
-              <p
-                className="mt-3 p-3 text-[0.82rem] leading-relaxed"
-                style={{ backgroundColor: "rgba(250,246,239,0.1)", color: "var(--cream)" }}
-              >
-                {t("vergelijking", {
-                  bedrag: euro(perPersoon),
-                  markt: euro(MARKT.goedkoopstePerPersoon),
-                })}
               </p>
             )}
 

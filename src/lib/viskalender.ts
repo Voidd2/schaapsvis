@@ -1,12 +1,6 @@
-import { bestelContact } from "./bestel-contact";
-
 export type ViskeurmerkBadge = "MSC" | "ASC" | "BIO";
 
-export interface MaandVis {
-  naam: string;
-  keurmerk?: ViskeurmerkBadge;
-}
-
+export interface MaandVis { naam: string; keurmerk?: ViskeurmerkBadge; }
 export interface MaandData {
   naam: string;
   afkorting: string;
@@ -14,204 +8,434 @@ export interface MaandData {
   vis: MaandVis[];
   tekst: string;
   hoogtepunt: string;
+  foto: { src: string; alt: string };
   links: { label: string; href: string }[];
 }
 
+// Seizoensindicaties, geen live voorraad. Zie mosselen.nl/nl/mosselinfo/seizoen/.
+// Een soortnaam is geen bewijs van certificering; alleen bevestigde MSC-garnalen
+// krijgen hier een badge. Controleer steeds de actuele productlevering.
 export const viskalenderData: MaandData[] = [
   {
-    naam: "Januari",
-    afkorting: "Jan",
-    seizoen: "Winter",
-    vis: [
-      { naam: "Zeeuwse Mosselen", keurmerk: "MSC" },
-      { naam: "Oesters" },
-      { naam: "Noordzee Schol" },
-      { naam: "Tong" },
+    "naam": "Januari",
+    "afkorting": "Jan",
+    "seizoen": "Winter",
+    "vis": [
+      {
+        "naam": "Kabeljauw"
+      },
+      {
+        "naam": "Skrei (bij seizoensaanvoer)"
+      },
+      {
+        "naam": "Oesters"
+      },
+      {
+        "naam": "Mosselen"
+      }
     ],
-    tekst:
-      "De wintermaanden zijn hét seizoen voor mosselen en oesters — maanden met een 'r', zo luidt het spreekwoord. Verse schol en tong zijn volop beschikbaar uit de Noordzee en bijzonder smaakvol in de kou.",
-    hoogtepunt: "Zeeuwse mosselen en verse oesters op hun allerbest",
-    links: [
-      { label: "Assortiment bekijken", href: "/nl/assortiment" },
-      { label: "Recepten voor vissoep", href: "/nl/recepten" },
-    ],
+    "tekst": "Skrei komt doorgaans van januari tot april uit Noorwegen. Kabeljauw past bij warme ovengerechten; mosselen en oesters zijn ook in de winter een mooie keuze. Vraag ons wat er vandaag beschikbaar is.",
+    "hoogtepunt": "Winterse kabeljauw, skrei en schelpdieren",
+    "foto": {
+      "src": "/images/recepten/gebakken-kabeljauw-botersaus-v2.webp",
+      "alt": "Kabeljauw met citroen-botersaus"
+    },
+    "links": [
+      {
+        "label": "Meer over deze vis",
+        "href": "/nl/assortiment/kabeljauwfilet"
+      },
+      {
+        "label": "Recepten om mee te koken",
+        "href": "/nl/recepten"
+      }
+    ]
   },
   {
-    naam: "Februari",
-    afkorting: "Feb",
-    seizoen: "Winter",
-    vis: [
-      { naam: "Mosselen", keurmerk: "MSC" },
-      { naam: "Oesters" },
-      { naam: "Gerookte Noorse Zalm", keurmerk: "ASC" },
-      { naam: "Kabeljauw" },
+    "naam": "Februari",
+    "afkorting": "Feb",
+    "seizoen": "Winter",
+    "vis": [
+      {
+        "naam": "Kabeljauw"
+      },
+      {
+        "naam": "Skrei"
+      },
+      {
+        "naam": "Coquilles"
+      },
+      {
+        "naam": "Mosselen"
+      }
     ],
-    tekst:
-      "Februari is de laatste maand van het mosselseizoen voordat het mosselbed rust krijgt. Grijp uw kans — daarna tot september wachten. Gerookte Noorse zalm (ASC) en kabeljauw zijn jaarrond en bijzonder geschikt voor winterse ovengerechten.",
-    hoogtepunt: "Laatste kans voor verse mosselen van dit seizoen",
-    links: [
-      { label: "Gerookte Noorse Zalm", href: "/nl/assortiment" },
-      { label: "Recepten", href: "/nl/recepten" },
-    ],
+    "tekst": "Kies voor een winterse vismaaltijd of coquilles als voorgerecht. Het mosselseizoen is in februari nog niet voorbij: Zeeuwse bodemcultuurmosselen zijn doorgaans van juli tot april verkrijgbaar.",
+    "hoogtepunt": "Een goed moment voor kabeljauw en coquilles",
+    "foto": {
+      "src": "/images/producten-hd/coquilles.webp",
+      "alt": "Coquilles uit het assortiment"
+    },
+    "links": [
+      {
+        "label": "Meer over deze vis",
+        "href": "/nl/assortiment/coquilles"
+      },
+      {
+        "label": "Recepten om mee te koken",
+        "href": "/nl/recepten"
+      }
+    ]
   },
   {
-    naam: "Maart",
-    afkorting: "Mar",
-    seizoen: "Lente",
-    vis: [
-      { naam: "Schol" },
-      { naam: "Tong" },
-      { naam: "Eerste Hollandse Garnalen", keurmerk: "MSC" },
+    "naam": "Maart",
+    "afkorting": "Mar",
+    "seizoen": "Lente",
+    "vis": [
+      {
+        "naam": "Kabeljauw"
+      },
+      {
+        "naam": "Oesters"
+      },
+      {
+        "naam": "Mosselen"
+      },
+      {
+        "naam": "Hollandse garnalen",
+        "keurmerk": "MSC"
+      }
     ],
-    tekst:
-      "Het voorjaar brengt de eerste signalen van de garnalenvloot. Eind maart verschijnen de eerste verse Hollandse garnalen (Crangon crangon) weer op de toonbank — fris, zoet en MSC-gecertificeerd van de Waddenkust. Schol en tong zijn dit seizoen op hun best.",
-    hoogtepunt: "Eerste Hollandse garnalen van het seizoen",
-    links: [{ ...bestelContact("nl") }],
+    "tekst": "In maart kunt u vaak nog mosselen vinden. Hollandse garnalen zijn niet alleen een lenteproduct: aanvoer is ook in andere maanden mogelijk. Een frisse garnalensalade of oesters passen bij het voorjaar.",
+    "hoogtepunt": "Van winterse vis naar frisse lentegerechten",
+    "foto": {
+      "src": "/images/recepten/oesters-sjalottenazijn.webp",
+      "alt": "Oesters met sjalottenazijn"
+    },
+    "links": [
+      {
+        "label": "Meer over deze vis",
+        "href": "/nl/assortiment/creuse-oesters"
+      },
+      {
+        "label": "Recepten om mee te koken",
+        "href": "/nl/recepten"
+      }
+    ]
   },
   {
-    naam: "April",
-    afkorting: "Apr",
-    seizoen: "Lente",
-    vis: [
-      { naam: "Hollandse Garnalen", keurmerk: "MSC" },
-      { naam: "Schol" },
-      { naam: "Tong" },
+    "naam": "April",
+    "afkorting": "Apr",
+    "seizoen": "Lente",
+    "vis": [
+      {
+        "naam": "Schol"
+      },
+      {
+        "naam": "Kabeljauw"
+      },
+      {
+        "naam": "Hollandse garnalen",
+        "keurmerk": "MSC"
+      }
     ],
-    tekst:
-      "De garnalenvloot vaart op volle kracht. MSC-gecertificeerde Hollandse garnalen (Crangon crangon) zijn nu dagelijks vers beschikbaar — gepeld aan de Waddenkust door Heiploeg en SOLT. Tong en schol uit eigen Noordzeewaters zijn bijzonder smaakvol in het vroege voorjaar.",
-    hoogtepunt: "Dagverse MSC garnalen van Heiploeg en SOLT",
-    links: [{ label: "Hollandse Garnalen (Heiploeg & SOLT)", href: "/nl/assortiment" }],
+    "tekst": "In april loopt het gebruikelijke seizoen van Zeeuwse bodemcultuurmosselen af. Het exacte einde verschilt per oogst. Kies voor verse filet met voorjaarsgroenten of Hollandse garnalen en vraag naar de mooiste aanvoer.",
+    "hoogtepunt": "Lichter koken met verse vis",
+    "foto": {
+      "src": "/images/recepten/kabeljauw-zeekraal-venkel.webp",
+      "alt": "Kabeljauw met zeekraal en venkel"
+    },
+    "links": [
+      {
+        "label": "Meer over deze vis",
+        "href": "/nl/assortiment/kabeljauwfilet"
+      },
+      {
+        "label": "Recepten om mee te koken",
+        "href": "/nl/recepten"
+      }
+    ]
   },
   {
-    naam: "Mei",
-    afkorting: "Mei",
-    seizoen: "Lente",
-    vis: [
-      { naam: "Hollandse Garnalen", keurmerk: "MSC" },
-      { naam: "Schol" },
-      { naam: "Biologische Zalm", keurmerk: "BIO" },
+    "naam": "Mei",
+    "afkorting": "Mei",
+    "seizoen": "Lente",
+    "vis": [
+      {
+        "naam": "Schol"
+      },
+      {
+        "naam": "Tong"
+      },
+      {
+        "naam": "Hollandse garnalen",
+        "keurmerk": "MSC"
+      },
+      {
+        "naam": "Zalm"
+      }
     ],
-    tekst:
-      "Mei is garnalentijd, maar ook de maand van de anticipatie: de haringvloot maakt zich klaar en de eerste berichten over de aankomende Hollandse Nieuwe bereiken de kust. Verse schol uit de Noordzee is nu op zijn best — ideaal om in boter te bakken.",
-    hoogtepunt: "Seizoensschol + aankondiging van de Hollandse Nieuwe",
-    links: [
-      { label: "Assortiment", href: "/nl/assortiment" },
-      { label: "Varlaks biologische zalm", href: "/nl/varlaks" },
-    ],
+    "tekst": "In mei passen lichte visgerechten goed bij het seizoen. De nieuwe haringvangst komt later: de start van Hollandse Nieuwe wordt ieder jaar vastgesteld. Zalm blijft een veelzijdige keuze, ook buiten één specifiek seizoen.",
+    "hoogtepunt": "Verse filet bij voorjaarsgroenten",
+    "foto": {
+      "src": "/images/recepten/gegrilde-schol.webp",
+      "alt": "Gegrilde schol met groenten"
+    },
+    "links": [
+      {
+        "label": "Meer over deze vis",
+        "href": "/nl/assortiment/schol"
+      },
+      {
+        "label": "Recepten om mee te koken",
+        "href": "/nl/recepten"
+      }
+    ]
   },
   {
-    naam: "Juni",
-    afkorting: "Jun",
-    seizoen: "Zomer",
-    vis: [
-      { naam: "Hollandse Nieuwe Haring" },
-      { naam: "Hollandse Garnalen", keurmerk: "MSC" },
-      { naam: "Varlaks Biologische Zalm", keurmerk: "BIO" },
+    "naam": "Juni",
+    "afkorting": "Jun",
+    "seizoen": "Zomer",
+    "vis": [
+      {
+        "naam": "Hollandse Nieuwe (vanaf de seizoensstart)"
+      },
+      {
+        "naam": "Hollandse garnalen",
+        "keurmerk": "MSC"
+      },
+      {
+        "naam": "Zalm"
+      }
     ],
-    tekst:
-      "Juni is het hoogtepunt van het visseizoen: traditioneel arriveert de Hollandse Nieuwe vanaf half juni — de rauwe, licht gezouten haring die ieder jaar opnieuw het feestelijkste moment achter onze toonbank is. Naast de Nieuwe zijn garnalen volop verkrijgbaar en is onze biologische Varlaks-zalm een verfijnd alternatief.",
-    hoogtepunt: "HOLLANDSE NIEUWE — het moment van het jaar",
-    links: [
-      { ...bestelContact("nl") },
-      { label: "Varlaks biologische zalm", href: "/nl/varlaks" },
-    ],
+    "tekst": "De verkoop van Hollandse Nieuwe begint doorgaans in juni. De exacte startdatum en aanvoer verschillen per jaar. Vraag ons wanneer de nieuwe haring er is; lekker met uitjes of op een broodje.",
+    "hoogtepunt": "Uitkijken naar de Hollandse Nieuwe",
+    "foto": {
+      "src": "/images/producten-hd/haring.webp",
+      "alt": "Haring met garnituur"
+    },
+    "links": [
+      {
+        "label": "Meer over deze vis",
+        "href": "/nl/assortiment/haring"
+      },
+      {
+        "label": "Recepten om mee te koken",
+        "href": "/nl/recepten"
+      }
+    ]
   },
   {
-    naam: "Juli",
-    afkorting: "Jul",
-    seizoen: "Zomer",
-    vis: [
-      { naam: "Hollandse Nieuwe Haring" },
-      { naam: "Hollandse Garnalen", keurmerk: "MSC" },
-      { naam: "Gerookte Noorse Zalm", keurmerk: "ASC" },
+    "naam": "Juli",
+    "afkorting": "Jul",
+    "seizoen": "Zomer",
+    "vis": [
+      {
+        "naam": "Haring"
+      },
+      {
+        "naam": "Mosselen (nieuwe oogst)"
+      },
+      {
+        "naam": "Hollandse garnalen",
+        "keurmerk": "MSC"
+      },
+      {
+        "naam": "Schol"
+      }
     ],
-    tekst:
-      "Het haringseizoen is in volle gang. Zomerse warmte maakt een broodje haring of een bakje verse garnalen extra aantrekkelijk. Juli is ook een topmaand voor een feestelijk visplankje met gerookte Noorse zalm van High Seas (ASC), perfect voor een zomers borrel.",
-    hoogtepunt: "Hoogseizoen haring en garnalen — ideaal voor een visplankje",
-    links: [
-      { label: "Visschaal samenstellen", href: "/nl/visschalen" },
-      { label: "Gerookte Noorse Zalm", href: "/nl/assortiment" },
-    ],
+    "tekst": "Het seizoen van Zeeuwse bodemcultuurmosselen begint doorgaans in juli, soms eerder. Dat hangt af van weer, kwaliteit en aanvoer. Ook haring en schol zijn mooie keuzes voor een zomerse maaltijd.",
+    "hoogtepunt": "Zomerse haring en de nieuwe mosseloogst",
+    "foto": {
+      "src": "/images/recepten/broodje-haring-uitjes.webp",
+      "alt": "Broodje haring met uitjes"
+    },
+    "links": [
+      {
+        "label": "Meer over deze vis",
+        "href": "/nl/assortiment/haring"
+      },
+      {
+        "label": "Recepten om mee te koken",
+        "href": "/nl/recepten"
+      }
+    ]
   },
   {
-    naam: "Augustus",
-    afkorting: "Aug",
-    seizoen: "Zomer",
-    vis: [
-      { naam: "Haring" },
-      { naam: "Hollandse Garnalen", keurmerk: "MSC" },
-      { naam: "Kibbeling (Alaska koolvis)", keurmerk: "MSC" },
+    "naam": "Augustus",
+    "afkorting": "Aug",
+    "seizoen": "Zomer",
+    "vis": [
+      {
+        "naam": "Hollandse garnalen",
+        "keurmerk": "MSC"
+      },
+      {
+        "naam": "Haring"
+      },
+      {
+        "naam": "Mosselen"
+      },
+      {
+        "naam": "Kibbeling"
+      }
     ],
-    tekst:
-      "Augustus is vakantiemaand én haringseizoen. Kibbeling is in de zomerdrukte altijd een favoriet: knapperig en snel. Onze kibbeling wordt gemaakt van kabeljauw of MSC-gecertificeerde Alaska koolvis (Theragra chalcogramma) — vraag het personeel naar het aanbod van de dag.",
-    hoogtepunt: "Kibbeling en haring: de zomerse klassieker",
-    links: [{ ...bestelContact("nl") }],
+    "tekst": "Een garnalencocktail, haringhapjes of mosselen op tafel: augustus biedt veel inspiratie. Kibbeling is het hele jaar een favoriet, niet alleen seizoensvis. Vraag welke vis wij die dag voor de kibbeling gebruiken.",
+    "hoogtepunt": "Garnalen, haring en een pan mosselen",
+    "foto": {
+      "src": "/images/recepten/hollandse-garnalencocktail.webp",
+      "alt": "Hollandse garnalencocktail"
+    },
+    "links": [
+      {
+        "label": "Meer over deze vis",
+        "href": "/nl/assortiment/hollandse-garnalen"
+      },
+      {
+        "label": "Recepten om mee te koken",
+        "href": "/nl/recepten"
+      }
+    ]
   },
   {
-    naam: "September",
-    afkorting: "Sep",
-    seizoen: "Herfst",
-    vis: [
-      { naam: "Zeeuwse Mosselen", keurmerk: "MSC" },
-      { naam: "Oesters" },
-      { naam: "Schol" },
+    "naam": "September",
+    "afkorting": "Sep",
+    "seizoen": "Herfst",
+    "vis": [
+      {
+        "naam": "Mosselen"
+      },
+      {
+        "naam": "Oesters"
+      },
+      {
+        "naam": "Schol"
+      },
+      {
+        "naam": "Hollandse garnalen",
+        "keurmerk": "MSC"
+      }
     ],
-    tekst:
-      "September luidt het mosselseizoen in. De Zeeuwse mosselen zijn dit jaar in topconditie — stevig, vol en zoet. Tegelijk verschijnen de eerste oesters van het nieuwe seizoen. Een mooi moment voor een dampende pan mosselen op een koelere avond.",
-    hoogtepunt: "Mosselseizoen start — oesters zijn terug",
-    links: [
-      { label: "Assortiment bekijken", href: "/nl/assortiment" },
-      { label: "Recepten", href: "/nl/recepten" },
-    ],
+    "tekst": "In september is het mosselseizoen meestal al bezig, niet pas net gestart. Schol en Hollandse garnalen passen ook bij de overgang naar de herfst. De kwaliteit en beschikbaarheid blijven afhankelijk van de actuele aanvoer.",
+    "hoogtepunt": "De zomer loopt door in de mosselpan",
+    "foto": {
+      "src": "/images/recepten/gebakken-schol-tomaat-olijven.webp",
+      "alt": "Gebakken schol met tomaat en olijven"
+    },
+    "links": [
+      {
+        "label": "Meer over deze vis",
+        "href": "/nl/assortiment/schol"
+      },
+      {
+        "label": "Recepten om mee te koken",
+        "href": "/nl/recepten"
+      }
+    ]
   },
   {
-    naam: "Oktober",
-    afkorting: "Okt",
-    seizoen: "Herfst",
-    vis: [
-      { naam: "Mosselen", keurmerk: "MSC" },
-      { naam: "Oesters" },
-      { naam: "Kabeljauw" },
-      { naam: "Alaska Koolvis", keurmerk: "MSC" },
+    "naam": "Oktober",
+    "afkorting": "Okt",
+    "seizoen": "Herfst",
+    "vis": [
+      {
+        "naam": "Kabeljauw"
+      },
+      {
+        "naam": "Mosselen"
+      },
+      {
+        "naam": "Oesters"
+      },
+      {
+        "naam": "Koolvis"
+      }
     ],
-    tekst:
-      "Oktober is ideaal voor stevigere visgerechten nu de temperaturen dalen. Mosselen en oesters zijn in hun beste periode, en kabeljauw of MSC-gecertificeerde Alaska koolvis leent zich uitstekend voor een warme visstoof, stamppot of ovenschotel.",
-    hoogtepunt: "Visstoof met kabeljauw of koolvis — herfstcomfort",
-    links: [
-      { label: "Recepten", href: "/nl/recepten" },
-      { label: "Assortiment", href: "/nl/assortiment" },
-    ],
+    "tekst": "Kabeljauw en koolvis lenen zich voor een ovenschotel of stoof. Ook een pan mosselen past bij een herfstavond. De kalender geeft inspiratie, geen voorraadgarantie: vraag ons welke filet vandaag het mooist is.",
+    "hoogtepunt": "Warme ovengerechten en visstoof",
+    "foto": {
+      "src": "/images/recepten/kabeljauw-oven-tomaat-olijven-v2.webp",
+      "alt": "Kabeljauw uit de oven met tomaat en olijven"
+    },
+    "links": [
+      {
+        "label": "Meer over deze vis",
+        "href": "/nl/assortiment/kabeljauwfilet"
+      },
+      {
+        "label": "Recepten om mee te koken",
+        "href": "/nl/recepten"
+      }
+    ]
   },
   {
-    naam: "November",
-    afkorting: "Nov",
-    seizoen: "Herfst",
-    vis: [
-      { naam: "Mosselen", keurmerk: "MSC" },
-      { naam: "Oesters" },
-      { naam: "Gerookte Noorse Zalm", keurmerk: "ASC" },
+    "naam": "November",
+    "afkorting": "Nov",
+    "seizoen": "Herfst",
+    "vis": [
+      {
+        "naam": "Mosselen"
+      },
+      {
+        "naam": "Oesters"
+      },
+      {
+        "naam": "Kabeljauw"
+      },
+      {
+        "naam": "Gerookte zalm"
+      }
     ],
-    tekst:
-      "Mosselen en oesters zijn volop in het seizoen. November is de aanloop naar de feestdagen — hét moment voor een eerste proeverij van oesters en voor het reserveren van een feestelijke visschotel. Onze gerookte Noorse zalm (High Seas, ASC) is een klassieke keuze voor een festief plateau.",
-    hoogtepunt: "Aanloop feestdagen — oesters, mosselen, gerookte zalm",
-    links: [{ label: "Visschaal samenstellen", href: "/nl/visschalen" }],
+    "tekst": "Een dampende vissoep past bij november. Mosselen en oesters zijn vaak goed beschikbaar; gerookte zalm is een jaarrond product. Denk alvast na over uw feestmenu en bespreek bijzondere wensen met ons.",
+    "hoogtepunt": "Vissoep en ideeën voor de feestdagen",
+    "foto": {
+      "src": "/images/recepten/romige-vissoep.webp",
+      "alt": "Romige vissoep met groenten"
+    },
+    "links": [
+      {
+        "label": "Meer over deze vis",
+        "href": "/nl/assortiment/kabeljauwfilet"
+      },
+      {
+        "label": "Recepten om mee te koken",
+        "href": "/nl/recepten"
+      }
+    ]
   },
   {
-    naam: "December",
-    afkorting: "Dec",
-    seizoen: "Winter",
-    vis: [
-      { naam: "Oesters" },
-      { naam: "Mosselen", keurmerk: "MSC" },
-      { naam: "Gerookte Noorse Zalm", keurmerk: "ASC" },
-      { naam: "Biologische Zalm", keurmerk: "BIO" },
+    "naam": "December",
+    "afkorting": "Dec",
+    "seizoen": "Winter",
+    "vis": [
+      {
+        "naam": "Oesters"
+      },
+      {
+        "naam": "Mosselen"
+      },
+      {
+        "naam": "Gerookte zalm"
+      },
+      {
+        "naam": "Hollandse garnalen",
+        "keurmerk": "MSC"
+      }
     ],
-    tekst:
-      "December is hét feestseizoen voor vis. Oesters en mosselen zijn op hun allerbest, gerookte zalm staat op elk feestelijk plateau, en onze feestelijke visschotels zijn op bestelling verkrijgbaar voor uw kerst- of oudjaarsavond. Bestel op tijd — we zijn erg populair in december.",
-    hoogtepunt: "Kerstvis, oesters en feestschotels — bestel op tijd!",
-    links: [
-      { label: "Visschaal samenstellen", href: "/nl/visschalen" },
-      { label: "Assortiment bekijken", href: "/nl/assortiment" },
-    ],
-  },
+    "tekst": "Gerookte zalm, garnalen en schelpdieren geven uw feestmenu kleur. Zalm en garnalen zijn niet beperkt tot december. Wilt u een visschaal voor een groter gezelschap? Bespreek de inhoud en uw budget op tijd.",
+    "hoogtepunt": "Een feestelijke tafel met vis",
+    "foto": {
+      "src": "/images/recepten/gerookte-zalm-rolletjes-roomkaas.webp",
+      "alt": "Gerookte zalmrolletjes met roomkaas"
+    },
+    "links": [
+      {
+        "label": "Visschalen bekijken",
+        "href": "/nl/visschalen"
+      },
+      {
+        "label": "Recepten om mee te koken",
+        "href": "/nl/recepten"
+      }
+    ]
+  }
 ];

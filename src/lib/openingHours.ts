@@ -19,7 +19,7 @@ export const openingHours: Record<Location, OpeningHour[]> = {
     { days: [6], open: "08:30", close: "17:00" }, // za — Aalmarkt bij de Waag
   ],
   voorschoten: [
-    { days: [5], open: "08:30", close: "17:30" }, // vr — bij Hoogvliet
+    { days: [5], open: "08:00", close: "17:30" }, // vr — bij Hoogvliet
   ],
 };
 
