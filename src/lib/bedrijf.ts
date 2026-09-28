@@ -92,6 +92,8 @@ export interface Verkooppunt {
   plaats: string;
   dagen: string;
   mapsUrl: string;
+  straat?: string;
+  postcode?: string;
 }
 
 export const VERKOOPPUNTEN: Verkooppunt[] = [
@@ -122,10 +124,12 @@ export const VERKOOPPUNTEN: Verkooppunt[] = [
   {
     id: "voorschoten",
     naam: "Bij Hoogvliet",
-    adres: "Parkeerplaats Hoogvliet",
+    adres: "Parkeerplaats Hoogvliet, Veurseweg 18",
+    straat: "Veurseweg 18",
+    postcode: "2252 AA",
     plaats: "Voorschoten",
     dagen: "vrijdag 08:00–17:30",
-    mapsUrl: "https://maps.google.com/?q=Hoogvliet+Voorschoterweg+Voorschoten",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Hoogvliet+Veurseweg+18+2252+AA+Voorschoten",
   },
 ];
 

@@ -69,7 +69,7 @@ export function Footer() {
         { href: p("/contact"), label: nav("contact") },
         { href: "/nl/viswinkel-leiden", label: "Viswinkel Leiden" },
         { href: "/nl/marktkraam-leiden", label: "Marktkraam Leiden" },
-        { href: "/nl/viswinkel-voorschoten", label: "Marktkraam Voorschoten" },
+        { href: "/nl/viswinkel-voorschoten", label: locale === "nl" ? "Visboer Voorschoten" : locale === "de" ? "Fischstand Voorschoten (NL)" : "Fish stall Voorschoten (NL)" },
         { href: "/nl/too-good-to-go", label: "Too Good To Go" },
       ],
     },

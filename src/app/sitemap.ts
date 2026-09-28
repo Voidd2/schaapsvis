@@ -108,7 +108,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     talen["x-default"] = talen.nl ?? `${basis}/${taal}${pad}`;
     regels.push({
       url: `${basis}/${taal}${pad}`,
-      lastModified: LAATSTE_WIJZIGING,
+      lastModified: pad === "/viswinkel-voorschoten" ? new Date("2026-09-29") : LAATSTE_WIJZIGING,
       changeFrequency: "monthly",
       priority: prioriteit,
       alternates: { languages: talen },

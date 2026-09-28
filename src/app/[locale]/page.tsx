@@ -414,6 +414,7 @@ export default async function HomePage({
               >
                 {h("routeLink")} &rarr;
               </a>
+              {punt.id === "voorschoten" && locale === "nl" && <Link href="/nl/viswinkel-voorschoten" className="block mt-3 font-semibold underline underline-offset-4">Visboer Voorschoten: vrijdag bij Hoogvliet →</Link>}
             </li>
           ))}
         </ul>
