@@ -1,4 +1,48 @@
 import type { Product } from "./assortiment-data";
+const dirksPhotoMap: Record<string,string> = {
+  "kabeljauwfilet": "kabeljauwfilet-rugstuk",
+  "schol": "schol",
+  "scholfilet": "scholfilet",
+  "zeebaars": "zeebaars-ca-500-gram",
+  "zeebaarsfilet": "zeebaarsfilet-ca-2-x-110-gram",
+  "dorade": "dorade-ca-450-gram",
+  "dorade-filet": "dorade-filet-ca-2-x-125-gram",
+  "tarbotfilet": "tarbotfilet",
+  "rode-poon": "rode-poon",
+  "roodbaars": "roodbaars",
+  "haring": "haring",
+  "tonijnfilet": "tonijnfilet",
+  "gerookte-zalm-high-seas": "gerookte-zalmfilet",
+  "gerookte-wilde-zalm": "gerookte-wilde-zalm",
+  "gerookte-bokking": "bokking",
+  "gerookte-forelfilet": "gerookte-forelfilet",
+  "noorse-garnalen": "noorse-garnalen",
+  "gekookte-gambas": "gambas-gekookt",
+  "zeeuwse-mosselen": "zeeuwse-mosselen",
+  "kokkels": "kokkels",
+  "coquilles": "coquilles-vlees",
+  "inktvis": "pijlinktvis",
+  "scheermessen": "scheermessen",
+  "zalmsalade": "zalmsalade",
+  "krabsalade": "krabsalade",
+  "tonijnsalade": "tonijnsalade",
+  "zeewiersalade": "wakame",
+  "kibbeling": "kibbeling",
+  "lekkerbek": "lekkerbek",
+  "broodje-haring": "broodje-haring",
+  "vissoep": "vissoep",
+  "vispotje": "vispotje-1-persoon",
+  "gerookte-zalm-snippers": "gerookte-zalmsnippers",
+  "fine-de-claire-oesters": "fines-de-claires",
+  "garnalenkroketten": "garnalen-kroket",
+  "calamares": "gebakken-inktvisringen",
+  "hele-kreeft": "kreeft-levend",
+  "sardines": "sardines",
+  "wilde-zalmfilet": "wilde-zalmfilet",
+  "heilbotfilet": "heilbotfilet",
+  "gebakken-mosselen": "gebakken-mosselen",
+  "zeekraal": "zeekraal"
+};
 
 export type ProductPhoto = {
   src: string;
@@ -341,6 +385,13 @@ const ALTS:Record<string,readonly[string,string]>={
 "bosje-sprot":["Smoked sprats, Sprattus sprattus","Geräucherte Sprotten, Sprattus sprattus"]
 };
 export function productPhoto(product:Product,locale="nl"):ProductPhoto|null{
+ const source=dirksPhotoMap[product.slug as keyof typeof dirksPhotoMap];
+ if(source){
+  const l=locale==="de"?"de":locale==="en"?"en":"nl";
+  const alt={nl:`${product.naam} op een lichte ondergrond — voorbeeldfoto`,en:`${product.naam} on a light background — illustrative photo`,de:`${product.naam} auf hellem Hintergrund — Beispielfoto`}[l];
+  const caption={nl:"Voorbeeldfoto; herkomst, presentatie en beschikbaarheid bij ons kunnen verschillen.",en:"Illustrative photo; origin, presentation and availability at our shop may differ.",de:"Beispielfoto; Herkunft, Präsentation und Verfügbarkeit bei uns können abweichen."}[l];
+  return {src:`/images/dirks/${source}.webp`,alt,caption,editorial:true,whole:false};
+ }
  const internet=INTERNET_BEELDEN[product.slug];
  if(internet){
   const l=locale==="de"?"de":locale==="en"?"en":"nl";

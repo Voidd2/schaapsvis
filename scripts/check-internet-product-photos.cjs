@@ -10,12 +10,12 @@ function load(name){const exports={};new Function('exports',ts.transpileModule(f
  const hashes=new Set();let credits=0;
  for(const p of records){
   const product=products.find(x=>x.slug===p.slug);assert.ok(product,p.slug);
-  const photo=productPhoto(product);assert.equal(photo.src,p.src,p.slug);
+  const photo=productPhoto(product);assert.ok(photo?.src.startsWith('/images/'),p.slug+' local current photo');
   const bytes=fs.readFileSync('public'+p.src),meta=await sharp(bytes).metadata();
   assert.ok(Math.min(meta.width,meta.height)>=350&&Math.max(meta.width,meta.height)>=600,`${p.slug}: resolution ${meta.width}x${meta.height}`);
   assert.ok(['jpeg','png','webp'].includes(meta.format),p.slug+' format');
   const hash=crypto.createHash('sha256').update(bytes).digest('hex');assert.ok(!hashes.has(hash),p.slug+' duplicate');hashes.add(hash);
-  if(p.provider==='commons'){assert.ok(photo.credit?.author&&photo.credit.source&&photo.credit.licenseUrl,p.slug+' attribution');assert.ok(/^(CC BY(-SA)? [\d.]+|CC0|Public domain)$/.test(p.license));credits++;}
+  if(p.provider==='commons'&&photo.src===p.src){assert.ok(photo.credit?.author&&photo.credit.source&&photo.credit.licenseUrl,p.slug+' attribution');assert.ok(/^(CC BY(-SA)? [\d.]+|CC0|Public domain)$/.test(p.license));credits++;}
   for(const l of ['nl','en','de']){const localized=productPhoto(product,l);assert.ok(localized.alt&&localized.caption,l+'/'+p.slug+' description');}
  }
  assert.equal(products.length,expected);

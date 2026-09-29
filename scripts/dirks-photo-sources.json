@@ -1,0 +1,2171 @@
+{
+  "source": "https://www.dirksvishandel.nl",
+  "retrieved": "2026-09-29",
+  "rights": "Gebruikstoestemming voor foto's niet bevestigd; uitsluitend op verzoek van de site-eigenaar tijdelijk gebruikt. Vervang door eigen beelden of regel schriftelijke toestemming.",
+  "collections": {"barbecue":["gourmet-trio-1-persoon","gourmet-schotel-3-4-pers","gourmetschotel-5-6-pers","gourmetstukjes-tonijn","gourmet-stukjes-kabeljauw","gourmetstukjes-zalm","barbecuepakket","barbecuepakket-xxl","zalmspies","tonijnspies","gambaspies-in-knoflook","zalm-kabeljauwspies","vispakketje"],"platters":["borrelbox-groot-4-5-pers","borrelbox-klein-2-3-pers","borrelbox-luxe-2-4-pers","visschotel-klein-2-3-pers","visschotel-klein-3-5-pers","visschotel-middel-5-8-pers","visschotel-groot-8-10-pers","visschotel-luxe-2-3-pers","visschotel-luxe-3-5-pers","visschotel-luxe-5-8-pers","visschotel-luxe-8-10-pers","visschotel-luxe-10-14-pers","visschotel-hapjes-2-3-pers","visschotel-hapjes-3-5-pers","visschotel-hapjes-6-10-pers","visschotel-kreeft","visschotel-glutenvrij-1-persoon","vleesschotel-2-3-pers","vleesschotel-klein-3-5-pers","vleesschotel-middel-5-8-pers","vleesschotel-groot-8-10-pers"]},
+  "images": [
+    {
+      "slug": "cadeaubon",
+      "title": "Cadeaubon € 10,00",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/09/Cadeaubon.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "cadeaubon-e-1500",
+      "title": "Cadeaubon € 15,00",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/09/Cadeaubon.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "cadeaubon-e-2000",
+      "title": "Cadeaubon € 20,00",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/09/Cadeaubon.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "cadeaubon-e-3000-2",
+      "title": "Cadeaubon € 30,00",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/09/Cadeaubon.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "cadeaubon-e-3000",
+      "title": "Cadeaubon € 40,00",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/09/Cadeaubon.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "cadeaubon-e-5000",
+      "title": "Cadeaubon € 50,00",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/09/Cadeaubon.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "borrelbox-groot-4-5-pers",
+      "title": "Borrelbox groot 4-5 pers.",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/borrelbox-groot-4-5-pers.jpg",
+      "width": 2000,
+      "height": 2000
+    },
+    {
+      "slug": "borrelbox-klein-2-3-pers",
+      "title": "Borrelbox klein 2-3 pers.",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/borrelbox-klein-2-3-pers.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "borrelbox-luxe-2-4-pers",
+      "title": "Borrelbox luxe 2-4 pers.",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/borrelbox-luxe-2-4-pers.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "sushi-voordeel-schaal-30-stuks",
+      "title": "Sushi voordeel schaal 30 stuks",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/sushi-voordeel-schaal-30-stuks.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "visschotel-klein-2-3-pers",
+      "title": "Visschotel klein 2-3 pers.",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/visschotel-klein-2-3-pers.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "visschotel-klein-3-5-pers",
+      "title": "Visschotel klein 3-5 pers.",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/visschotel-klein-3-5-pers.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "visschotel-middel-5-8-pers",
+      "title": "Visschotel middel 5-8 pers.",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/visschotel-middel-5-8-pers.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "visschotel-groot-8-10-pers",
+      "title": "Visschotel groot 8-10 pers.",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/visschotel-groot-8-10-pers.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "visschotel-luxe-2-3-pers",
+      "title": "Visschotel luxe 2-3 pers.",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/visschotel-luxe-2-3-pers.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "visschotel-luxe-3-5-pers",
+      "title": "Visschotel luxe 3-5 pers.",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/visschotel-luxe-3-5-pers.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "visschotel-luxe-5-8-pers",
+      "title": "Visschotel luxe 5-8 pers.",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/visschotel-luxe-5-8-pers.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "visschotel-luxe-8-10-pers",
+      "title": "Visschotel luxe 8-10 pers.",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/visschotel-luxe-8-10-pers.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "visschotel-luxe-10-14-pers",
+      "title": "Visschotel luxe 10-14 pers.",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/visschotel-luxe-10-14-pers.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "visschotel-hapjes-2-3-pers",
+      "title": "Visschotel hapjes 2-3 pers.",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/visschotel-hapjes-2-3-pers.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "visschotel-hapjes-3-5-pers",
+      "title": "Visschotel hapjes 3-5 pers.",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/visschotel-hapjes-3-5-pers.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "visschotel-hapjes-6-10-pers",
+      "title": "Visschotel hapjes 6-10 pers.",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/visschotel-hapjes-6-10-pers.jpg",
+      "width": 2000,
+      "height": 1330
+    },
+    {
+      "slug": "visschotel-kreeft",
+      "title": "Visschotel kreeft",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/visschotel-kreeft.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gourmet-trio-1-persoon",
+      "title": "Gourmet trio 1 persoon",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/gourmet-trio-1-persoon.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gourmet-schotel-3-4-pers",
+      "title": "Gourmet schotel 3-4 pers.",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/gourmet-schotel-3-4-pers.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gourmetschotel-5-6-pers",
+      "title": "Gourmetschotel 5-6 pers.",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/gourmetschotel-5-6-pers.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "garnalencocktail",
+      "title": "Garnalencocktail",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/garnalencocktail.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "zalmrollade",
+      "title": "Zalmrollade",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/zalmrollade.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "zalmcarpaccio",
+      "title": "Zalmcarpaccio",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/zalmcarpaccio.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "tonijncarpaccio",
+      "title": "Tonijncarpaccio",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/tonijncarpaccio.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "tong-zalmrol",
+      "title": "Tong-zalmrol",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/tong-zalmrol.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "crabdiable",
+      "title": "Crabdiable",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/crabdiable.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "amuse-set",
+      "title": "Amuse set",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/amuse-set.jpg",
+      "width": 2000,
+      "height": 1330
+    },
+    {
+      "slug": "sushi-schaal-culinair",
+      "title": "Sushi schaal culinair",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/sushi-schaal-culinair.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "amuse-gegrilde-tonijn",
+      "title": "Amuse gegrilde tonijn",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/amuse-gegrilde-tonijn.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "amuse-hollandse-garnalen",
+      "title": "Amuse Hollandse garnalen",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/amuse-hollandse-garnalen.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "amuse-gerookte-wilde-zalm",
+      "title": "Amuse gerookte wilde zalm",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/amuse-gerookte-wilde-zalm.jpg",
+      "width": 2000,
+      "height": 1330
+    },
+    {
+      "slug": "zalmsashimi",
+      "title": "Zalmsashimi",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/zalmsashimi.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gegrilde-tonijn",
+      "title": "Gegrilde tonijn",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/gegrilde-tonijn.jpg",
+      "width": 2000,
+      "height": 1330
+    },
+    {
+      "slug": "zalm-sashimi-ongesneden",
+      "title": "Zalm sashimi ongesneden",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/zalm-sashimi-ongesneden.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "tonijn-sashimi-ongesneden",
+      "title": "Tonijn sashimi ongesneden",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/sonijn-sashimi-ongesneden.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "luxe-trio-klein",
+      "title": "Luxe trio klein",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/luxe-trio-klein.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "luxe-vistrio",
+      "title": "Luxe vistrio",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/luxe-vistrio.jpg",
+      "width": 2000,
+      "height": 1330
+    },
+    {
+      "slug": "salade-trio",
+      "title": "Salade trio",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/salade-trio.jpg",
+      "width": 2000,
+      "height": 1330
+    },
+    {
+      "slug": "borrelschaaltje",
+      "title": "Borrelschaaltje",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/borrelschaaltje.jpg",
+      "width": 1500,
+      "height": 1044
+    },
+    {
+      "slug": "zalmslaatje-de-luxe",
+      "title": "Zalmslaatje de luxe",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/zalmslaatje-de-luxe.jpg",
+      "width": 2000,
+      "height": 1330
+    },
+    {
+      "slug": "wrap-hapjes",
+      "title": "Wrap hapjes",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/wrap-hapjes.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "zalmwrap",
+      "title": "Zalmwrap",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/zalmwrap.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "tonijnwrap",
+      "title": "Tonijnwrap",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/tonijnwrap.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "kabeljauw-mosterdsoep",
+      "title": "Kabeljauw-mosterdsoep",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/kabeljauw-mosterdsoep.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "vissoep",
+      "title": "Vissoep",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/vissoep.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "kreeftensoep",
+      "title": "Kreeftensoep",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/kreeftensoep.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "visschotel-glutenvrij-1-persoon",
+      "title": "Visschotel glutenvrij 1 persoon",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/visschotel-glutenvrij-1-persoon.jpg",
+      "width": 2000,
+      "height": 1330
+    },
+    {
+      "slug": "vleesschotel-2-3-pers",
+      "title": "Vleesschotel 2-3 pers.",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/vleesschotel-2-3-pers.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "vleesschotel-klein-3-5-pers",
+      "title": "Vleesschotel klein 3-5 pers.",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/vleesschotel-klein-3-5-pers.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "vleesschotel-middel-5-8-pers",
+      "title": "Vleesschotel middel 5-8 pers.",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/vleesschotel-middel-5-8-pers.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "vleesschotel-groot-8-10-pers",
+      "title": "Vleesschotel groot 8-10 pers.",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/vleesschotel-groot-8-10-pers.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "sushi-workshop-ticket",
+      "title": "Sushi Workshop Ticket: 16-10-2026",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/sushi-workshop-ticket.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "crispy-poke-bowl",
+      "title": "Crispy Poké Bowl",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/crispy-poke-bowl.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "crispy-gambas-gebakken",
+      "title": "Crispy Gamba’s gebakken",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/crispy-gambas-gebakken.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "sushi-kibmaki",
+      "title": "Sushi Kibmaki",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/sushi-kibmaki.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "gyoza-garnalen",
+      "title": "Gyoza Garnalen",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/gyoza-garnalen.jpg",
+      "width": 1500,
+      "height": 1000
+    },
+    {
+      "slug": "gyoza-kip-groente",
+      "title": "Gyoza Kip/groente",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/gyoza-kipgroente.jpg",
+      "width": 1500,
+      "height": 1000
+    },
+    {
+      "slug": "poke-bowl",
+      "title": "Poké Bowl",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/poke-bowl.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "crispy-sushi-sandwich-zalm",
+      "title": "Crispy Sushi Sandwich Zalm",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/crispy-sushi-sandwich-zalm-scaled.jpg",
+      "width": 2560,
+      "height": 1706
+    },
+    {
+      "slug": "crispy-sushi-sandwich-tonijn",
+      "title": "Crispy Sushi Sandwich Tonijn",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/crispy-sushi-sandwich-tonijn-scaled.jpg",
+      "width": 2560,
+      "height": 1706
+    },
+    {
+      "slug": "sushi-set-10-stuks",
+      "title": "Sushi set 10 stuks",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/sushi-set-10-stuks.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "sushi-nigiri-tonijn-4-stuks",
+      "title": "Sushi Nigiri Tonijn 4 stuks",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/sushi-nigiri-tonijn-4-stuks.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "sushi-nigiri-zalm-4-stuks",
+      "title": "Sushi Nigiri Zalm 4 stuks",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/sushi-nigiri-zalm-4-stuks.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "sushi-nigiri-zalm-speciaal-4-stuks",
+      "title": "Sushi Nigiri Zalm speciaal 4 stuks",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/sushi-nigiri-zalm-speciaal-4-stuks.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "sushi-carpaccio-roll",
+      "title": "Sushi Carpaccio Roll",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/sushi-carpaccio-rol.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "sushi-dragon-roll",
+      "title": "Sushi Dragon Roll",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/sushi-dragon-roll.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "sushi-ura-maki-tonijn-truffel",
+      "title": "Sushi Ura Maki Tonijn Truffel",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/sushi-ura-maki-tonijn-truffel.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "sushi-ura-maki-zalm-komkommer",
+      "title": "Sushi Ura Maki Zalm Komkommer",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/sushi-ura-maki-zalm-komkommer.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "sushi-ura-maki-zalm-komkommer-furikake",
+      "title": "Sushi Ura Maki Zalm Komkommer Furikake",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/sushi-ura-maki-zalm-komkommer-furikake.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "sushi-ura-maki-kippeling",
+      "title": "Sushi Ura Maki Kippeling",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/sushi-ura-maki-kippeling.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "sashimi-set-klein",
+      "title": "Sashimi set klein",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/sashimi-set-klein.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "sashimi-set-groot",
+      "title": "Sashimi set groot",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/sashimi-set-groot.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "crispy-gambas",
+      "title": "Crispy gamba’s",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/crispy-gambas.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "visloempia",
+      "title": "Visloempia",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/visloempia.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "zalmslaatje",
+      "title": "Zalmslaatje",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/zalmslaatje.jpg",
+      "width": 2000,
+      "height": 1340
+    },
+    {
+      "slug": "calzone-zalm",
+      "title": "Calzone zalm",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/calzone-zalm.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "calzone-tonijn",
+      "title": "Calzone tonijn",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/calzone-tonijn.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gourmetstukjes-tonijn",
+      "title": "Gourmetstukjes tonijn",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/gourmetstukjes-tonijn.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gourmet-stukjes-kabeljauw",
+      "title": "Gourmet stukjes kabeljauw",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/gourmet-stukjes-kabeljauw.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gourmetstukjes-zalm",
+      "title": "Gourmetstukjes zalm",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/gourmetstukjes-zalm.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "barbecuepakket",
+      "title": "Barbecuepakket",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/barbecuepakket.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "barbecuepakket-xxl",
+      "title": "Barbecuepakket XXL",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/barbecuepakket-xxl.jpg",
+      "width": 2000,
+      "height": 2000
+    },
+    {
+      "slug": "zalmspies",
+      "title": "Zalmspies",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/zalmspies.jpg",
+      "width": 2000,
+      "height": 1330
+    },
+    {
+      "slug": "tonijnspies",
+      "title": "Tonijnspies",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/tonijnspies.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gambaspies-in-knoflook",
+      "title": "Gambaspies in knoflook",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/gambaspies-in-knoflookstuk.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "zalm-kabeljauwspies",
+      "title": "Zalm-kabeljauwspies",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/zalm-kabeljauwspies.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "vispakketje",
+      "title": "Vispakketje",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/vispakketje.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "lengfilet",
+      "title": "Lengfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/lengfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "kabeljauwfilet-staartstuk",
+      "title": "Kabeljauwfilet staartstuk",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/kabeljauwfilet-staartstuk.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "kabeljauwfilet-rugstuk",
+      "title": "Kabeljauwfilet rugstuk",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/kabeljauwfilet-rugstuk.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "zalmfilet",
+      "title": "Zalmfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/zalmfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "zalmfilet-in-pesto",
+      "title": "Zalmfilet in pesto",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/zalmfilet-in-pesto.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "zalmmoot",
+      "title": "Zalmmoot",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/zalmmoot.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "tonijnfilet",
+      "title": "Tonijnfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/tonijnfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "zalm-heel",
+      "title": "Zalm heel",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/zalm-heel.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "sliptong",
+      "title": "Sliptong",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/sliptong.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "tong-middel",
+      "title": "Tong middel",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/tong-middel.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "tong-groot",
+      "title": "Tong groot",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/tong-groot.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "tongfilet",
+      "title": "Tongfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/tongfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "zeebaarsfilet-ca-2-x-110-gram",
+      "title": "Zeebaarsfilet (ca. 2 x 110 gram)",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/zeebaarsfilet-ca.-2-x-110-gram.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "zeebaars-ca-500-gram",
+      "title": "Zeebaars (ca. 500 gram)",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/zeebaars-ca.-500-gram.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "schelvis",
+      "title": "Schelvis",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/schelvis.jpg",
+      "width": 2000,
+      "height": 1366
+    },
+    {
+      "slug": "schelvisfilet",
+      "title": "Schelvisfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/schelvisfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "roodbaarsfilet",
+      "title": "Roodbaarsfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/roodbaarsfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "roodbaars",
+      "title": "Roodbaars",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/roodbaars.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "dorade-filet-ca-2-x-125-gram",
+      "title": "Dorade filet (ca. 2 x 125 gram)",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/dorade-filet-ca.-2-x-125-gram.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "dorade-ca-450-gram",
+      "title": "Dorade (ca. 450 gram)",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/dorade-ca.-450-gram.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "snoekbaarsfilet",
+      "title": "Snoekbaarsfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/snoekbaarsfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "tarbotfilet",
+      "title": "Tarbotfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/tarbotfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "grietfilet",
+      "title": "Grietfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/grietfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "zeewolffilet",
+      "title": "Zeewolffilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/05/zeewolffilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "zeeduivelfilet",
+      "title": "Zeeduivelfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/zeeduivelfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "zeeduivelmoot",
+      "title": "Zeeduivelmoot",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/zeeduivelmoot.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "heilbotfilet",
+      "title": "Heilbotfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/heilbotfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "heekfilet",
+      "title": "Heekfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/heekfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "wilde-zalmfilet",
+      "title": "Wilde zalmfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/wilde-zalmfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "rode-forelfilet-ca-2-x-130-gram",
+      "title": "Rode forelfilet (ca. 2 x 130 gram)",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/rode-forelfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "rode-forel-ca-400-gram",
+      "title": "Rode forel (ca. 400 gram)",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/rode-forel-ca.-400-gram.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "makreelfilet-ca-2-x-80-gram",
+      "title": "Makreelfilet (ca. 2 x 80 gram)",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/makreelfilet-ca.-2-x-80-gram.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "pietermanfilet-ca-2-x-80-gram",
+      "title": "Pietermanfilet (ca. 2 x 80 gram)",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/pietermanfilet-ca.-2-x-80-gram.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "rode-poon",
+      "title": "Rode poon",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/rode-poon.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "rode-poonfilet-ca-150-gram",
+      "title": "Rode poonfilet (ca. 150 gram)",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/rode-poonfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "schar",
+      "title": "Schar",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/schar.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "scholfilet",
+      "title": "Scholfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/scholfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "schol",
+      "title": "Schol",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/schol.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "tongschar",
+      "title": "Tongschar",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/tongschar.jpg",
+      "width": 2000,
+      "height": 1330
+    },
+    {
+      "slug": "rogvleugelfilet-ca-150-gram",
+      "title": "Rogvleugelfilet (ca. 150 gram)",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/rogvleugelfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "sardines",
+      "title": "Sardines",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/sardines.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "zwaardvisfilet",
+      "title": "Zwaardvisfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/zwaardvisfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "zeekraal",
+      "title": "Zeekraal",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/zeekraal.jpg",
+      "width": 2000,
+      "height": 1330
+    },
+    {
+      "slug": "haring-op-schaal",
+      "title": "Haring op schaal",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/haring-op-schaal.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "haring",
+      "title": "Haring",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/haring.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "emmer-nieuwe-haring-10-12-stuks",
+      "title": "Emmer nieuwe haring 10-12 stuks",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/emmer-nieuwe-haring-10-12-stuks.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "emmer-nieuwe-haring-22-24-stuks",
+      "title": "Emmer nieuwe haring 22-24 stuks",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/emmer-nieuwe-haring-22-24-stuks.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "emmertje-zure-haring-klein",
+      "title": "Emmertje zure haring klein",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/emmertje-zure-haring-klein.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "emmertje-rolmops-klein",
+      "title": "Emmertje rolmops klein",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/emmertje-rolmops-klein.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "paling-forelsalade",
+      "title": "Paling-forelsalade",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/paling-forelsalade.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "makreelsalade",
+      "title": "Makreelsalade",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/makreelsalade.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "seafoodsalade",
+      "title": "Seafoodsalade",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/seafoodsalade.jpg",
+      "width": 2000,
+      "height": 1330
+    },
+    {
+      "slug": "krabsalade",
+      "title": "Krabsalade",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/krabsalade.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "tonijnsalade",
+      "title": "Tonijnsalade",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/tonijnsalade.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "zalm-eiersalade",
+      "title": "Zalm-eiersalade",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/zalm-eiersalade.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "haringsalade-rood",
+      "title": "Haringsalade rood",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/haringsalade-rood.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "haringsalade-dille",
+      "title": "Haringsalade dille",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/haringsalade-dille.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "zalmsalade",
+      "title": "Zalmsalade",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/zalmsalade.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "kartoffelsalade",
+      "title": "Kartoffelsalade",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/kartoffelsalade.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "rundvleessalade",
+      "title": "Rundvleessalade",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/rundvleessalade.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "wakame",
+      "title": "Wakame",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/wakame.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gerookte-paling-heel",
+      "title": "Gerookte paling heel",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gerookte-paling-heel.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gerookte-makreel",
+      "title": "Gerookte makreel",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gerookte-makreel.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gerookte-palingfilet",
+      "title": "Gerookte palingfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gerookte-palingfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gerookte-zalmfilet",
+      "title": "Gerookte zalmfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gerookte-zalmfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gerookte-zalmsnippers",
+      "title": "Gerookte zalmsnippers",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gerookte-zalmsnippers.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gerookte-wilde-zalm",
+      "title": "Gerookte wilde zalm",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gerookte-wilde-zalm.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gestoomde-zalmmoot",
+      "title": "Gestoomde zalmmoot",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gestoomde-zalmmoot.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "zalmbuikjes",
+      "title": "Zalmbuikjes",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/zalmbuikjes.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gestoomde-makreelfilet",
+      "title": "Gestoomde makreelfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gestoomde-makreelfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "pepermakreelfilet",
+      "title": "Pepermakreelfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/pepermakreelfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "brado",
+      "title": "Brado",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/brado.jpg",
+      "width": 2000,
+      "height": 1330
+    },
+    {
+      "slug": "bokking",
+      "title": "Bokking",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/bokking.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gerookte-forelfilet",
+      "title": "Gerookte forelfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gerookte-forelfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "catch-of-the-day-menu",
+      "title": "Catch of the day menu",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/catch-of-the-day-menu.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "kibbeling",
+      "title": "Kibbeling",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/kibbeling.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "crispy-kibbeling",
+      "title": "Crispy kibbeling",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/crispy-kibbeling.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "kibbeling-500-gram-gezinszak-patat",
+      "title": "Kibbeling 500 gram + gezinszak patat",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/kibbeling-500-gram-gezinszak-patat.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "crispy-kibbeling-500-gram-gezinszak-patat",
+      "title": "Crispy kibbeling 500 gram + gezinszak patat",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/crispy-kibbeling-500-gram-gezinszak-patat.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "lekkerbek",
+      "title": "Lekkerbek",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/lekkerbek.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "crispy-lekkerbek",
+      "title": "Crispy lekkerbek",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/crispy-lekkerbek.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "kidsbox",
+      "title": "Kidsbox",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/kidsbox.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "vispatat",
+      "title": "Vispatat",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/vispatat.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gebakken-mosselen",
+      "title": "Gebakken mosselen",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gebakken-mosselen.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gebakken-gambas",
+      "title": "Gebakken gamba’s",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gebakken-gambas.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gebakken-inktvisringen",
+      "title": "Gebakken inktvisringen",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gebakken-inktvisringen.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gebakken-schol",
+      "title": "Gebakken schol",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gebakken-schol.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gebakken-schar",
+      "title": "Gebakken schar",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gebakken-schar.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "sliptong-2",
+      "title": "Sliptong",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/sliptong.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gebakken-schelvisfilet",
+      "title": "Gebakken schelvisfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gebakken-schelvisfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "garnalen-kroket",
+      "title": "Garnalen kroket",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/garnalen-kroket.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "kibbeling-menu",
+      "title": "Kibbeling menu",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/kibbeling-menu.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "menu-crispy-kibbeling",
+      "title": "Menu crispy kibbeling",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/menu-crispy-kibbeling.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "menu-lekkerbek",
+      "title": "Menu lekkerbek",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/menu-lekkerbek.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "menu-crispy-lekkerbek",
+      "title": "Menu crispy lekkerbek",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/menu-crispy-lekkerbek.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "menu-gambas",
+      "title": "Menu gamba’s",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/menu-gambas.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "menu-schol",
+      "title": "Menu schol",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/menu-schol.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "menu-inktvisringen",
+      "title": "Menu inktvisringen",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/menu-inktvisringen.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "menu-mosselen",
+      "title": "Menu mosselen",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/menu-mosselen.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "menu-sliptong",
+      "title": "Menu sliptong",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/menu-sliptong.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "portie-patat",
+      "title": "Portie patat",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/portie-patat.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gezinszak-patat",
+      "title": "Gezinszak patat",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gezinszak-patat.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "kibbelingwrap",
+      "title": "Kibbelingwrap",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/kibbelingwrap.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gebakken-poon",
+      "title": "Gebakken poon",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gebakken-poon.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gebakken-haring",
+      "title": "Gebakken haring",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gebakken-haring.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gebakken-hom-van-haring",
+      "title": "Gebakken hom van haring",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gebakken-hom-van-haring.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gebakken-kuit-van-haring",
+      "title": "Gebakken kuit van haring",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gebakken-kuit-van-haring.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "paella",
+      "title": "Paella",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/paella.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "mihoen-met-gambas",
+      "title": "Mihoen met gamba’s",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/mihoen-met-gambas.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "visbami",
+      "title": "Visbami",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/visbami.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "tagliatelle-met-zalm",
+      "title": "Tagliatelle met zalm",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/tagliatelle-met-zalm.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "tonijnroerbak",
+      "title": "Tonijnroerbak",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/tonijnroerbak.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "visroerbak-italiaans",
+      "title": "Visroerbak italiaans",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/visroerbak-italiaans.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "visroerbak-kerrie",
+      "title": "Visroerbak kerrie",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/visroerbak-kerrie.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "zalmroerbak",
+      "title": "Zalmroerbak",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/zalmroerbak.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "vispotje-1-persoon",
+      "title": "Vispotje 1 persoon",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/vispotje-1-persoon.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "vispotje-zeebaars",
+      "title": "Vispotje zeebaars",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/vispotje-zeebaars.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "pistolet-zalm-gezond",
+      "title": "Pistolet zalm gezond",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/pistolet-zalm-gezond.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "pistolet-warme-gerookte-zalm",
+      "title": "Pistolet warme gerookte zalm",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/pistolet-warme-gerookte-zalm.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "pistolet-garnalencocktail",
+      "title": "Pistolet garnalencocktail",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/pistolet-garnalencocktail.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "pistolet-gegrilde-tonijn",
+      "title": "Pistolet gegrilde tonijn",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/pistolet-gegrilde-tonijn.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "pistolet-warme-krab",
+      "title": "Pistolet warme krab",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/pistolet-warme-krab.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "pistolet-kibbeling",
+      "title": "Pistolet kibbeling",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/pistolet-kibbeling.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "broodje-haring",
+      "title": "Broodje haring",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/broodje-haring.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "broodje-garnalen-kroket",
+      "title": "Broodje garnalen kroket",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/broodje-garnalen-kroket.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "broodje-makreelfilet",
+      "title": "Broodje makreelfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/broodje-makreelfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "broodje-palingfilet",
+      "title": "Broodje palingfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/broodje-palingfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "broodje-gerookte-zalmfilet",
+      "title": "Broodje gerookte zalmfilet",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/broodje-gerookte-zalmfilet.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "broodje-hollandse-garnalen",
+      "title": "Broodje hollandse garnalen",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/broodje-hollandse-garnalen.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "broodje-noorse-garnalen",
+      "title": "Broodje Noorse garnalen",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/broodje-noorse-garnalen.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "broodje-makreelsalade",
+      "title": "Broodje makreelsalade",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/broodje-makreelsalade.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "broodje-tonijnsalade",
+      "title": "Broodje tonijnsalade",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/broodje-tonijnsalade.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "broodje-seafoodsalade",
+      "title": "Broodje seafoodsalade",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/broodje-seafoodsalade.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "broodje-zalm-eiersalade",
+      "title": "Broodje zalm-eiersalade",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/broodje-zalm-eiersalade.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "broodje-zalmsalade",
+      "title": "Broodje zalmsalade",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/broodje-zalmsalade.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "broodje-haringsalade-in-dille",
+      "title": "Broodje haringsalade in dille",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/broodje-haringsalade-in-dille.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "broodje-krab",
+      "title": "Broodje krab",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/broodje-krab.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "hollandse-garnalen",
+      "title": "Hollandse garnalen",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/hollandse-garnalen.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "noorse-garnalen",
+      "title": "Noorse garnalen",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/noorse-garnalen.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "rivierkreeftjes",
+      "title": "Rivierkreeftjes",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/rivierkreeftjes.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gambas-in-knoflook",
+      "title": "Gamba’s in knoflook",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gambas-in-knoflook.jpg",
+      "width": 2000,
+      "height": 1330
+    },
+    {
+      "slug": "gambas-gekookt",
+      "title": "Gamba’s gekookt",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gambas-gekookt.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gambas-gekookt-kilo-zak",
+      "title": "Gamba’s gekookt, kilo zak",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gambas-gekookt-kilo-zak.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gambas-rauw-gepeld",
+      "title": "Gamba’s rauw gepeld",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gambas-rauw-gepeld.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gambas-rauw-gepeld-kilo-zak",
+      "title": "Gamba’s rauw gepeld, kilo zak",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gambas-rauw-gepeld-kilo-zakkilo.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gambas-rauw",
+      "title": "Gamba’s rauw",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gambas-rauw.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gambas-rauw-zonder-kop-kilo-zak",
+      "title": "Gamba’s rauw zonder kop, kilo zak",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gambas-rauw-zonder-kop-kilo-zak.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gambas-heel",
+      "title": "Gamba’s heel",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gambas-heel.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "coquilles-vlees",
+      "title": "Coquilles vlees",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/coquilles-vlees.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "langoustine",
+      "title": "Langoustine",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/langoustine.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "fruit-de-mer",
+      "title": "Fruit de mer",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/fruit-de-mer.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "inktvistubes",
+      "title": "Inktvistubes",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/inktvistubes.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "pijlinktvis",
+      "title": "Pijlinktvis",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/pijlinktvis.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "kreeft-levend",
+      "title": "Kreeft Levend",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/kreeft-levend.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "kreeft-gekookt",
+      "title": "Kreeft gekookt",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/kreeft-gekookt.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "gillardeau-oester",
+      "title": "Gillardeau oester",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gillardeau-oester.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "fines-de-claires",
+      "title": "Fines de claires",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/fines-de-claires.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "zeeuwse-mosselen",
+      "title": "Zeeuwse mosselen",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/zeeuwse-mosselen.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "kokkels",
+      "title": "Kokkels",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/kokkels.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "vongoles",
+      "title": "Vongoles",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/vongoles.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "scheermessen",
+      "title": "Scheermessen",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/scheermessen.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "cadeaubon-e10-fles-wijn",
+      "title": "Cadeaubon €10,00 + fles wijn",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/cadeaubon-fles-wijn.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "cadeaubon-e1500-fles-wijn",
+      "title": "Cadeaubon €15,00 + fles wijn",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/cadeaubon-fles-wijn.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "cadeaubon-e-2000-fles-wijn",
+      "title": "Cadeaubon € 20,00 + fles wijn",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/cadeaubon-fles-wijn.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "cadeaubon-e-3000-fles-wijn",
+      "title": "Cadeaubon € 30,00 + fles wijn",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/cadeaubon-fles-wijn.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "cadeaubon-e40-fles-wijn",
+      "title": "Cadeaubon € 40,00 + fles wijn",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/cadeaubon-fles-wijn.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "cadeaubon-e-5000-fles-wijn",
+      "title": "Cadeaubon € 50,00 + fles wijn",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/cadeaubon-fles-wijn.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "gerookte-zalmzijde-getrancheerd",
+      "title": "Gerookte zalmzijde getrancheerd",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/gerookte-zalmzijde-getrancheerd.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "zijde-schepzalm",
+      "title": "Zijde schepzalm",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/zijde-schepzalm.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "cadeaupakket-klein",
+      "title": "Cadeaupakket klein",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/cadeaupakket-klein.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "cadeaupakket-klein-luxe",
+      "title": "Cadeaupakket klein luxe",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/cadeaupakket-klein-luxe.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "cadeaupakket-middel",
+      "title": "Cadeaupakket middel",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/cadeaupakket-middel.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "cadeaupakket-middel-luxe",
+      "title": "Cadeaupakket middel luxe",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/cadeaupakket-middel-luxe.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "cadeaupakket-groot",
+      "title": "Cadeaupakket groot",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/cadeaupakket-groot.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "cadeaupakket-groot-luxe",
+      "title": "Cadeaupakket groot luxe",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/cadeaupakket-groot-luxe.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "ravigottesaus",
+      "title": "Ravigottesaus",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/ravigottesaus.jpg",
+      "width": 2000,
+      "height": 1330
+    },
+    {
+      "slug": "knoflooksaus",
+      "title": "Knoflooksaus",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/knoflooksaus.jpg",
+      "width": 2000,
+      "height": 1339
+    },
+    {
+      "slug": "cocktailsaus",
+      "title": "Cocktailsaus",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/cocktailsaus.jpg",
+      "width": 2000,
+      "height": 1339
+    },
+    {
+      "slug": "chilisaus",
+      "title": "Chilisaus",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/chilisaus.jpg",
+      "width": 2000,
+      "height": 1339
+    },
+    {
+      "slug": "mayonaise",
+      "title": "Mayonaise",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/Mayonaise.png",
+      "width": 1530,
+      "height": 1028
+    },
+    {
+      "slug": "honing-mosterdsaus",
+      "title": "Honing-mosterdsaus",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/honing-mosterdsaus.jpg",
+      "width": 2000,
+      "height": 1339
+    },
+    {
+      "slug": "visbakmeel",
+      "title": "Visbakmeel",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/visbakmeel-scaled.jpg",
+      "width": 2560,
+      "height": 1703
+    },
+    {
+      "slug": "kibbeling-kruiden",
+      "title": "Kibbeling kruiden",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/kibbeling-kruiden.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "marinade-italiaans",
+      "title": "Marinade Italiaans",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/marinade-italiaans.jpg",
+      "width": 2000,
+      "height": 1339
+    },
+    {
+      "slug": "marinade-kerrie",
+      "title": "Marinade kerrie",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/marinade-kerrie.jpg",
+      "width": 2000,
+      "height": 1339
+    },
+    {
+      "slug": "marinade-knoflook",
+      "title": "Marinade knoflook",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/marinade-knoflook.jpg",
+      "width": 2000,
+      "height": 1339
+    },
+    {
+      "slug": "marinade-pesto",
+      "title": "Marinade pesto",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/marinade-pesto.jpg",
+      "width": 2000,
+      "height": 1339
+    },
+    {
+      "slug": "marinade-piri-piri",
+      "title": "Marinade piri piri",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/marinade-piri-piri.jpg",
+      "width": 2000,
+      "height": 1339
+    },
+    {
+      "slug": "marinade-roomboter",
+      "title": "Marinade roomboter",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/marinade-roomboter.jpg",
+      "width": 2000,
+      "height": 1339
+    },
+    {
+      "slug": "soja-sesamsaus",
+      "title": "Soja -sesamsaus",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/soja-sesamsaus.jpg",
+      "width": 2000,
+      "height": 1339
+    },
+    {
+      "slug": "dillesaus",
+      "title": "Dillesaus",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/dillesaus.jpg",
+      "width": 2000,
+      "height": 1459
+    },
+    {
+      "slug": "hollandaisesaus",
+      "title": "Hollandaisesaus",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/hollandaisesaus.jpg",
+      "width": 2000,
+      "height": 1459
+    },
+    {
+      "slug": "kreeftensaus",
+      "title": "Kreeftensaus",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/kreeftensaus.jpg",
+      "width": 2000,
+      "height": 1459
+    },
+    {
+      "slug": "mosterdsaus",
+      "title": "Mosterdsaus",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/mosterdsaus.jpg",
+      "width": 2000,
+      "height": 1459
+    },
+    {
+      "slug": "vissaus-culinair",
+      "title": "Vissaus culinair",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/vissaus-culinair.jpg",
+      "width": 2000,
+      "height": 1459
+    },
+    {
+      "slug": "witte-wijnsaus",
+      "title": "Witte wijnsaus",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/witte-wijnsaus.jpg",
+      "width": 2000,
+      "height": 1459
+    },
+    {
+      "slug": "mosselkruiden",
+      "title": "Mosselkruiden",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/mosselkruiden.jpg",
+      "width": 2000,
+      "height": 1460
+    },
+    {
+      "slug": "viskruiden",
+      "title": "Viskruiden",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/viskruiden.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "viskruiden-zonder-zout",
+      "title": "Viskruiden zonder zout",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/viskruiden-zonder-zout.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "zalmkruiden",
+      "title": "Zalmkruiden",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/zalmkruiden.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "kaviaar",
+      "title": "Kaviaar",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/kaviaar.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "imitatie-kaviaar-rood",
+      "title": "Imitatie kaviaar rood",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/imitatie-kaviaar-rood.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "imitatie-kaviaar-zwart",
+      "title": "Imitatie kaviaar zwart",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/imitatie-kaviaar-zwart.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "kreeftenpasta",
+      "title": "Kreeftenpasta",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/kreeftenpasta.jpg",
+      "width": 1500,
+      "height": 998
+    },
+    {
+      "slug": "sushi-stokjes",
+      "title": "Sushi stokjes",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/sushi-stokjes.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "sushi-matje",
+      "title": "Sushi matje",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/sushi-matje.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "zalmeitjes",
+      "title": "Zalmeitjes",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/zalmeitjes.jpg",
+      "width": 2000,
+      "height": 1331
+    },
+    {
+      "slug": "sojasaus-umami",
+      "title": "Sojasaus umami",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/sojasaus-umami.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "wasabi",
+      "title": "Wasabi",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/wasabi.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "chocomel",
+      "title": "Chocomel",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/chocomel.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "cola-zero",
+      "title": "Cola zero",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/cola-zero.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "coca-cola",
+      "title": "Coca cola",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/coca-cola.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "fanta",
+      "title": "Fanta",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/fanta.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "ice-tea",
+      "title": "Ice tea",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/ice-tea.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "red-bull",
+      "title": "Red bull",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/red-bull.jpg",
+      "width": 2000,
+      "height": 1333
+    },
+    {
+      "slug": "spa-blauw",
+      "title": "Spa blauw",
+      "source": "https://www.dirksvishandel.nl/wp-content/uploads/2026/06/spa-blauw.jpg",
+      "width": 2000,
+      "height": 1333
+    }
+  ]
+}

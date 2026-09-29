@@ -155,29 +155,28 @@ export const BEELD = {
   },
 
   /* ── De drie visschalen ────────────────────────────────────────────────── */
-  /* Geen algemene plaat van vis: een foto van precies díe schaal, zoals jullie
-     hem opmaken. Iemand moet het gevoel hebben dat hij naar de toonbank kijkt. */
+  /* Tijdelijke voorbeeldfoto's. De werkelijke schalen en samenstelling wijken af. */
   schaalBorrel: {
     waar: "Visschalen en de homepage",
-    wat: "De borrelschaal zoals jullie hem echt maken, van bovenaf, op een neutrale ondergrond.",
-    bestand: "/images/editorial/visschaal-inspiratie.webp",
-    alt: "Serveerinspiratie: visschaal met gerookte vis, garnalen en salades",
+    wat: "Tijdelijk voorbeeld van een borrelschaal; vervangen door eigen foto.",
+    bestand: "/images/dirks/visschotel-hapjes-3-5-pers.webp",
+    alt: "Voorbeeldschaal met gerookte vis, garnalen en hapjes op een zwarte schaal",
     verhouding: "vierkant",
     terugval: "Borrelschaal",
   },
   schaalFamilie: {
     waar: "Visschalen",
-    wat: "De familieschaal, dezelfde opzet en dezelfde belichting als de andere twee.",
-    bestand: "/images/editorial/familieschaal-voorbeeld.webp",
-    alt: "Voorbeeld van een familieschaal met gerookte zalm, paling, garnalen en salades",
+    wat: "Tijdelijk voorbeeld van een grotere visschaal; vervangen door eigen foto.",
+    bestand: "/images/dirks/visschotel-middel-5-8-pers.webp",
+    alt: "Voorbeeld van een grotere visschaal met gerookte zalm, garnalen en salades",
     verhouding: "vierkant",
     terugval: "Familieschaal",
   },
   schaalFeest: {
     waar: "Visschalen",
-    wat: "De feestschaal, dezelfde opzet en dezelfde belichting als de andere twee.",
-    bestand: "/images/editorial/feestschaal-voorbeeld.webp",
-    alt: "Voorbeeld van een feestschaal met gerookte vis, garnalen, gamba’s en oesters",
+    wat: "Tijdelijk voorbeeld van een ruime visschaal; vervangen door eigen foto.",
+    bestand: "/images/dirks/visschotel-luxe-10-14-pers.webp",
+    alt: "Voorbeeld van een ruime feestschaal met diverse gerookte vis, garnalen en salades",
     verhouding: "vierkant",
     terugval: "Feestschaal",
   },

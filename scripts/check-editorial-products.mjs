@@ -16,17 +16,14 @@ for (const slug of newSlugs) {
   assert.ok(!paths.has(photo.src), `${slug}: duplicated image`);
   paths.add(photo.src);
   const bytes = await fs.readFile('public' + photo.src);
-  if (slug === 'schol') assert.equal(bytes.readUInt16BE(0), 0xffd8, 'Real unmodified JPEG photograph');
-  else {
-    assert.equal(bytes.toString('ascii', 0, 4), 'RIFF');
-    assert.equal(bytes.toString('ascii', 8, 12), 'WEBP');
-  }
-  assert.ok(bytes.length > 100_000, `${slug}: suspicious thumbnail`);
-  assert.equal(photo.whole, ['schol', 'zeebaars'].includes(slug), `${slug}: crop policy`);
+  assert.equal(bytes.toString('ascii', 0, 4), 'RIFF');
+  assert.equal(bytes.toString('ascii', 8, 12), 'WEBP');
+  assert.ok(bytes.length > 60_000, `${slug}: suspicious thumbnail`);
+  assert.ok(photo.src.startsWith('/images/dirks/'), `${slug}: locally hosted sample`);
 }
 const schol = productPhoto(products.find(p => p.slug === 'schol'));
-assert.equal(schol.src, '/images/producten-hd/schol-hans-hillewaert.jpg');
-assert.equal(schol.credit.author, 'Hans Hillewaert');
+assert.equal(schol.src, '/images/dirks/schol.webp');
+assert.ok(schol.alt.toLowerCase().includes('schol'), 'Real plaice photo should have a descriptive alt');
 const missing = products.filter(p => !productPhoto(p)).map(p => p.slug);
 assert.equal(missing.length, 0, 'Every catalogue product must have a photograph');
 console.log(JSON.stringify({newUniquePhotos: paths.size, productsWithPhotos: products.length - missing.length, missingPhotos: missing.length, missing}, null, 2));

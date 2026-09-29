@@ -17,21 +17,21 @@ const copy = {
     all: "Alles", search: "Welke vis zoekt u?", popular: "Favorieten eerst", az: "Naam A–Z",
     detail: "Productinformatie", count: "producten", empty: "Niets gevonden? Vraag het ons gerust via WhatsApp.",
     favorites: "Begin met onze favorieten", favoritesSub: "Een paar vertrouwde keuzes uit onze toonbank.",
-    browse: "Het hele assortiment", browseSub: "Kijk rustig rond. Voor beschikbaarheid en uw wensen helpen we u graag via WhatsApp.",
+    browse: "Het hele assortiment", browseSub: "Kijk rustig rond. Voor beschikbaarheid en uw wensen helpen we u graag via WhatsApp.", photoNote: "Foto’s zijn voorbeelden. De vis, bereiding en presentatie bij ons kunnen afwijken.",
     categories: ["Verse vis", "Gerookte vis", "Schaal- & schelpdieren", "Vissalades", "Bereid & snacks", "Zeegroenten"],
   },
   en: {
     all: "All", search: "Which fish are you looking for?", popular: "Favourites first", az: "Name A–Z",
     detail: "Product information", count: "products", empty: "Can't find it? Ask us on WhatsApp.",
     favorites: "Start with our favourites", favoritesSub: "A few familiar favourites from our fish counter.",
-    browse: "Explore our full range", browseSub: "Take a look around. Ask us on WhatsApp about availability and your wishes.",
+    browse: "Explore our full range", browseSub: "Take a look around. Ask us on WhatsApp about availability and your wishes.", photoNote: "Photos are examples. The fish, preparation and presentation in our shop may differ.",
     categories: ["Fresh fish", "Smoked fish", "Shellfish", "Fish salads", "Prepared & snacks", "Sea vegetables"],
   },
   de: {
     all: "Alle", search: "Welchen Fisch suchen Sie?", popular: "Favoriten zuerst", az: "Name A–Z",
     detail: "Produktinformationen", count: "Produkte", empty: "Nicht gefunden? Fragen Sie uns per WhatsApp.",
     favorites: "Unsere Favoriten entdecken", favoritesSub: "Einige bewährte Favoriten aus unserer Fischtheke.",
-    browse: "Das gesamte Sortiment", browseSub: "Schauen Sie sich in Ruhe um. Fragen zu Verfügbarkeit und Wünschen beantworten wir gerne per WhatsApp.",
+    browse: "Das gesamte Sortiment", browseSub: "Schauen Sie sich in Ruhe um. Fragen zu Verfügbarkeit und Wünschen beantworten wir gerne per WhatsApp.", photoNote: "Die Fotos sind Beispiele. Fisch, Zubereitung und Präsentation bei uns können abweichen.",
     categories: ["Frischer Fisch", "Räucherfisch", "Schalentiere", "Fischsalate", "Zubereitet & Snacks", "Meeresgemüse"],
   },
 };
@@ -78,6 +78,7 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
       </div>
       <div className="collection-tabs" role="group" aria-label={c.browse}>{["all", ...categories].map((id, i) =>
         <button key={id} onClick={() => setCategory(id)} aria-pressed={category === id} className={category === id ? "active" : ""}>{i === 0 ? c.all : c.categories[i - 1]}</button>)}</div>
+      <p className="collection-photo-note">{c.photoNote}</p>
       <p className="collection-count" role="status">{found.length} {c.count}</p>
       <div className="collection-list">{rows.map(p => {
         const photo = productPhoto(p,locale);
@@ -85,13 +86,13 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
         const platter = ["visschaal", "feestschotel"].includes(p.slug);
         return <article key={p.slug} className="collection-item">
           <div className="collection-item-main">
-            <div><p className="collection-category">{c.categories[categories.indexOf(p.categorie)]}</p><h3><Link href={`/${locale}/assortiment/${p.slug}`}>{p.naam}</Link></h3><p className="collection-description">{p.desc}</p></div>
-            {photo && <Link href={`/${locale}/assortiment/${p.slug}`} tabIndex={-1} className="collection-thumb"><Image src={photo.src} alt={photo.alt} width={600} height={450} sizes="(max-width: 600px) calc(100vw - 40px), 210px" className={`${photo.editorial ? "editorial" : ""} ${photo.whole ? "whole-product" : ""}`} /></Link>}
+            {photo && <Link href={`/${locale}/assortiment/${p.slug}`} tabIndex={-1} className="collection-thumb"><Image src={photo.src} alt={photo.alt} width={800} height={570} sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 1100px) 45vw, 30vw" className={`${photo.editorial ? "editorial" : ""} ${photo.whole ? "whole-product" : ""}`} /></Link>}
+            <div className="collection-item-copy"><p className="collection-category">{c.categories[categories.indexOf(p.categorie)]}</p><h3><Link href={`/${locale}/assortiment/${p.slug}`}>{p.naam}</Link></h3><p className="collection-description">{p.desc}</p></div>
           </div>
-          <div className={`mt-3 mb-3 text-sm leading-relaxed ${stock.unavailable?"text-rose-700":"text-slate-700"}`} data-stock={p.beschikbaar}>
+          <div className={`collection-item-stock mt-3 mb-3 text-sm leading-relaxed ${stock.unavailable?"text-rose-700":"text-slate-700"}`} data-stock={p.beschikbaar}>
             <p className="font-semibold">{stock.label}</p><p className="mt-1">{stock.note}</p>
           </div>
-          <ProductPhotoCredit photo={photo} locale={locale} />
+          {photo?.credit && <div className="collection-item-credit"><ProductPhotoCredit photo={photo} locale={locale} /></div>}
           <div className="collection-item-actions">
             <Link href={`/${locale}/assortiment/${p.slug}`}>{c.detail}<ArrowUpRight size={14} aria-hidden="true" /></Link>
             {platter ? <Link href={`/${locale}/visschalen`}>{locale === "nl" ? "Visschaal samenstellen" : locale === "de" ? "Fischplatte zusammenstellen" : "Create a seafood platter"}</Link>
