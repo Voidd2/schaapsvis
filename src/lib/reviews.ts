@@ -42,3 +42,15 @@ export const googleReviews: GoogleReview[] = [
   { name: "Nerina Enlightened", stars: 5, date: "een jaar geleden", datePublished: "2025-07-01", text: "Had just moved to Leiden that day and just before closing I walked into this shop to buy some kibbeling. The man at the counter was super friendly and informed me that I could definitely still get a portion…" },
   { name: "Martin Slootweg", stars: 4, date: "2 maanden geleden", datePublished: "2026-05-01", text: "Lekkere vis en fantastische sushi laten maken." },
 ];
+
+/** Translate the three displayed quotes faithfully; retain original author and rating. */
+export function localizeReview(review: GoogleReview, locale: string): GoogleReview {
+  const quotes: Record<string, readonly [string, string]> = {
+    "Giel Leupen": ["The 2026 Hollandse Nieuwe herring was wonderful. Lovely and tender, and certainly not too salty.", "Der Hollandse-Nieuwe-Matjes 2026 war wunderbar. Herrlich zart und bestimmt nicht zu salzig."],
+    "Ole M": ["The tastiest fish, good prices and very kind people.", "Der leckerste Fisch, gute Preise und sehr freundliche Menschen."],
+    "Martijn Holtkamp": ["Following the good reviews, we ordered a seafood platter from Schaap. We received a beautiful platter with plenty of fresh and tasty varieties of fish. Price and quality were both very good; we really enjoyed it!", "Aufgrund der guten Bewertungen bestellten wir bei Schaap eine Fischplatte. Wir erhielten eine schöne Platte mit vielen frischen und leckeren Fischsorten. Preis und Qualität waren sehr gut, wir haben es genossen!"],
+  };
+  const text = locale === "nl" ? review.text : quotes[review.name]?.[locale === "de" ? 1 : 0];
+  if (!text) throw new Error("Missing displayed review translation: " + review.name);
+  return {...review, text, date: new Intl.DateTimeFormat(locale, {month: "long", year: "numeric"}).format(new Date(review.datePublished + "T12:00:00Z"))};
+}

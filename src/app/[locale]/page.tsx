@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { localLocations } from "@/lib/local-pages-copy";
 import { CATEGORY_NAMES, localizeProduct } from "@/lib/product-localization";
 import { productPhoto } from "@/lib/product-beeld";
 import { bestelContact } from "@/lib/bestel-contact";
@@ -13,12 +15,12 @@ import { heeftBeeld } from "@/lib/beeld";
 
 import { SeizoensBanner } from "@/components/shared/SeizoensBanner";
 import { paginaMetadata } from "@/lib/seo";
-import { BEDRIJF, VERKOOPPUNTEN, euro, type VerkooppuntId } from "@/lib/bedrijf";
+import { BEDRIJF, euro, type VerkooppuntId } from "@/lib/bedrijf";
 import type { BeeldNaam } from "@/lib/beeld";
 import { bezorgdagenTekst } from "@/lib/bezorging";
 import { VANAF_BEDRAG } from "@/lib/visschaal";
 import { products, CATEGORIE_LABELS, type Categorie } from "@/lib/assortiment-data";
-import { googleReviews, googleRating, googleReviewCount, googleMapsUrl } from "@/lib/reviews";
+import { googleReviews, googleRating, googleReviewCount, googleMapsUrl, localizeReview } from "@/lib/reviews";
 
 export async function generateMetadata({
   params,
@@ -26,6 +28,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  if (!["nl", "en", "de"].includes(locale)) notFound();
   const t = await getTranslations({ locale, namespace: "meta" });
   return paginaMetadata({
     locale,
@@ -60,13 +63,14 @@ export default async function HomePage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  if (!["nl", "en", "de"].includes(locale)) notFound();
   const h = await getTranslations({ locale, namespace: "home" });
   const nav = await getTranslations({ locale, namespace: "nav" });
   const g = await getTranslations({ locale, namespace: "gedeeld" });
 
   const v = await getTranslations({ locale, namespace: "visschaal" });
 
-  const dagen = bezorgdagenTekst();
+  const dagen = bezorgdagenTekst(locale);
   const categorieAantallen = (Object.keys(CATEGORIE_LABELS) as Categorie[]).map((cat) => ({
     cat,
     aantal: products.filter((p) => p.categorie === cat).length,
@@ -358,7 +362,7 @@ export default async function HomePage({
         </div>
 
         <ul className="grid md:grid-cols-3 gap-x-8">
-          {googleReviews.slice(0, 3).map((review) => (
+          {googleReviews.slice(0, 3).map((review) => localizeReview(review, locale)).map((review) => (
             <li key={review.name} className="pt-4" style={{ borderTop: "2px solid var(--navy)" }}>
               <blockquote
                 className="text-[0.98rem] leading-relaxed mb-3"
@@ -369,6 +373,7 @@ export default async function HomePage({
               <p className="text-sm" style={{ color: "var(--grijs)" }}>
                 {review.name} &middot; {review.date}
               </p>
+              {locale !== "nl" && <p className="text-xs mt-1" style={{color:"var(--grijs)"}}>{locale === "de" ? "Aus dem Niederländischen übersetzt." : "Translated from Dutch."}</p>}
             </li>
           ))}
         </ul>
@@ -388,7 +393,7 @@ export default async function HomePage({
       <Sectie grond="zand">
         <Kop label={h("locatiesLabel")} titel={h("locatiesKop")} />
         <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8">
-          {VERKOOPPUNTEN.map((punt) => (
+          {localLocations(locale).map((punt) => (
             <li key={punt.id}>
               {/* Een foto per plek: zo weet iemand letterlijk waar hij naar
                   moet zoeken — de kraam bij de Waag ziet er anders uit dan de

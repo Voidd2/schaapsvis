@@ -33,7 +33,7 @@ export function ShopFooter() {
             gratis: euro(BEZORGING.gratisVanaf),
           })}
         </span>
-        <span>{g("bezorgen")}: {bezorgdagenTekst()}</span>
+        <span>{g("bezorgen")}: {bezorgdagenTekst(locale)}</span>
         <Link
           href={`/${locale}`}
           className="ml-auto underline underline-offset-4 hover:text-white transition-colors"

@@ -387,7 +387,7 @@ function Regel({
   const weergave = onderdeel.perStuk
     ? String(hoeveelheid)
     : hoeveelheid >= 1000
-      ? `${(hoeveelheid / 1000).toFixed(1).replace(".", ",")} kg`
+      ? `${new Intl.NumberFormat(locale, {minimumFractionDigits:1,maximumFractionDigits:1}).format(hoeveelheid / 1000)} kg`
       : `${hoeveelheid} g`;
 
   return (

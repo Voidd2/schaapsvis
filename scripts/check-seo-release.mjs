@@ -62,11 +62,15 @@ await Promise.all(Array.from({length: 6}, async () => {
     pagesChecked++;
   }
 }));
-for (const path of links) {
-  const response = await fetch(origin + path);
-  await response.text();
-  if (response.status !== 200) failures.push({link:path, status:response.status});
-}
+const linkQueue = [...links];
+await Promise.all(Array.from({length: 6}, async () => {
+  while (linkQueue.length) {
+    const path = linkQueue.shift();
+    const response = await fetch(origin + path);
+    await response.text();
+    if (response.status !== 200) failures.push({link:path, status:response.status});
+  }
+}));
 for (const locale of ['nl','en','de']) {
   for (const suffix of ['', '/leiden', '/voorschoten']) {
     const response = await fetch(origin + '/' + locale + '/bezorgen' + suffix, {redirect:'manual'});

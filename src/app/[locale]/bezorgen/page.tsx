@@ -37,7 +37,7 @@ export default async function BezorgenPage({
   const h = await getTranslations({ locale, namespace: "home" });
 
   const vragen = t.raw("faq") as { v: string; a: string }[];
-  const dagen = bezorgdagenTekst();
+  const dagen = bezorgdagenTekst(locale);
 
   return (
     <>

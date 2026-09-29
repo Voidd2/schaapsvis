@@ -46,7 +46,7 @@ export async function generateMetadata({
   if (!gem) return {};
 
   const t = await getTranslations({ locale, namespace: "meta" });
-  const dagen = bezorgdagenTekst();
+  const dagen = bezorgdagenTekst(locale);
 
   return {
     ...paginaMetadata({
@@ -74,7 +74,7 @@ export default async function GemeentePage({
   const h = await getTranslations({ locale, namespace: "home" });
   const plaatsen = await getTranslations({ locale, namespace: "gemeenten" });
 
-  const dagen = bezorgdagenTekst();
+  const dagen = bezorgdagenTekst(locale);
   const kosten = kostenVoor(gem);
   const intro = plaatsen(`${gem.slug}Intro`);
   const andere = GEMEENTEN.filter((x) => x.slug !== gem.slug);

@@ -25,7 +25,8 @@ for(const l of locales){
  }
  for(const group of platters.GROEP_VOLGORDE)for(const prefix of ['groep_','uitleg_'])check(!!items[prefix+group],`Missing platter group ${l}/${group}`);
  const texts=platters.SCHALEN.flatMap(s=>{const t=platterCopy.localizePlatter(s,l);check(t.bevat.length===s.bevat.length,`Platter ingredients ${l}/${s.id}`);return [t.naam,t.omschrijving,...t.bevat];});
- for(const suffix of ['','/visschalen','/assortiment','/bezoek-ons','/biologische-vis','/varlaks','/ons-verhaal','/contact','/recepten','/blog','/viswinkel-voorschoten'])pages.push({path:`/${l}${suffix}`,texts:suffix==='/visschalen'?texts:[]});
+ const homeTexts=[...load('local-pages-copy').localLocations(l).flatMap(p=>[p.naam,p.adres,p.dagen]),...load('reviews').googleReviews.slice(0,3).map(r=>load('reviews').localizeReview(r,l).text)];
+ for(const suffix of ['','/visschalen','/assortiment','/bezoek-ons','/biologische-vis','/varlaks','/ons-verhaal','/contact','/recepten','/blog','/viswinkel-voorschoten'])pages.push({path:`/${l}${suffix}`,texts:suffix==='/visschalen'?texts:suffix===''?homeTexts:[]});
  for(const p of products.products){const t=translatedProducts.localizeProduct(p,l),photo=photos.productPhoto(t,l);if(photo)check(!!photo.alt,`Missing image description ${l}/${p.slug}`);}
 }
 function flatten(value,prefix=''){return Object.fromEntries(Object.entries(value).flatMap(([k,v])=>typeof v==='object'&&v!==null?Object.entries(flatten(v,prefix+k+'.')):[[prefix+k,v]]));}
@@ -70,6 +71,11 @@ if(origin&&!errors.length){
    }catch(e){errors.push(p.path+': '+e.message);}
   }
  }));
+ for(const path of ['/favicon.ico','/unsupported-locale']){
+  const res=await fetch(origin+path);
+  check(res.status===404,path+' should be a clean 404, not a server error');
+  await res.text();
+ }
 }
 console.log(JSON.stringify({products:products.products.length,recipes:recipes.length,blogs:blogs.length,locales,dataPages:pages.length,rendered,uiKeys:Object.keys(flat.nl).length,failures:errors.length,details:errors.slice(0,40)},null,2));
 if(errors.length)process.exitCode=1;
