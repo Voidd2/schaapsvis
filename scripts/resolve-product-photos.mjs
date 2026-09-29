@@ -12,4 +12,9 @@ const records=selections.map(([slug,provider,key,index,kind])=>{
  const ext=provider==='commons'?(/\.png(?:\?|$)/i.test(p.url)?'png':'jpg'):key.split('.').pop();
  return {slug,src:`/images/assortiment-internet/${slug}.${ext}`,kind,provider,...p};
 });
-console.log(JSON.stringify(records,null,2));
+// Preserve later individually reviewed additions, including supplier photos.
+const existing=JSON.parse(await fs.readFile('scripts/internet-product-sources.json','utf8'));
+const decisions=JSON.parse(await fs.readFile('src/lib/assortiment-besluiten.json','utf8'));
+const selected=new Set(records.map(p=>p.slug));
+const preserved=existing.filter(p=>!selected.has(p.slug)&&!decisions.removed.includes(p.slug));
+console.log(JSON.stringify([...records,...preserved],null,2));

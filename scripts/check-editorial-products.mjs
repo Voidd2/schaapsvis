@@ -8,7 +8,7 @@ function module(text) {
 }
 const {products} = module(await fs.readFile('src/lib/assortiment-data.ts', 'utf8'));
 const {productPhoto} = module(await fs.readFile('src/lib/product-beeld.ts', 'utf8'));
-const newSlugs = ['krabsalade', 'noorse-garnalen', 'schol', 'zeebaars', 'zalmsalade', 'tonijnsalade', 'garnalensalade', 'zeeuwse-mosselen'];
+const newSlugs = ['krabsalade', 'noorse-garnalen', 'schol', 'zeebaars', 'zalmsalade', 'tonijnsalade', 'zeeuwse-mosselen'];
 const paths = new Set();
 for (const slug of newSlugs) {
   const photo = productPhoto(products.find(p => p.slug === slug));

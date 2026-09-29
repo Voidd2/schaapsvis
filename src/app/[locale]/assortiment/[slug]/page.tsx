@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { products, getVoeding, getSeizoen, getViswijzer, CATEGORIE_KLEUR } from "@/lib/assortiment-data";
 import { localizedProduct, CATEGORY_NAMES, siteLanguage } from "@/lib/product-localization";
 import { productCopy, productNote } from "@/lib/product-copy";
+import { productAvailability } from "@/lib/product-availability";
 import { getPrijs, formatPrijs } from "@/lib/prijzen";
 import { Schema } from "@/components/Schema";
 import { Sectie } from "@/components/ui/Sectie";
@@ -25,7 +26,7 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   const product = localizedProduct(slug, locale);
   if (!product) return {};
   const c = productCopy(locale);
-  return paginaMetadata({locale, pad: `/assortiment/${slug}`, title: `${product.naam} | ${c.range} Leiden`, description: `${product.naam}. ${c.meta}`.slice(0, 160), image: productPhoto(product)?.src || "/og-image.png"});
+  return paginaMetadata({locale, pad: `/assortiment/${slug}`, title: `${product.naam} | ${c.range} Leiden`, description: `${product.naam}: ${productAvailability(product,locale).label}. ${product.desc}`.slice(0, 160), image: productPhoto(product)?.src || "/og-image.png"});
 }
 export default async function ProductDetailPage({params}: Props) {
   const {locale, slug} = await params;
@@ -33,7 +34,7 @@ export default async function ProductDetailPage({params}: Props) {
   if (!product) notFound();
   const c = productCopy(lang), category = CATEGORY_NAMES[lang][product.categorie], photo = productPhoto(product,lang), voeding = getVoeding(slug);
   const seizoen = productNote(getSeizoen(slug), lang), viswijzer = productNote(getViswijzer(slug), lang), prijs = getPrijs(slug);
-  const availability = product.beschikbaar === "dagelijks" ? c.daily : product.beschikbaar === "seizoensgebonden" ? c.seasonal : c.request;
+  const availability = productAvailability(product,lang);
   const isPlatter = ["visschaal", "feestschotel"].includes(slug), isSalmon = !product.highlight && /zalm|lax/.test(slug);
   const action = {label: isPlatter ? c.platter : bestelContact(lang).label, href: isPlatter ? `/${lang}/visschalen` : bestelContact(lang, product.naam).href, extern: !isPlatter};
   const ownRecipes = recepten.filter(r => r.hoofdproduct === slug).slice(0, 4).map(r => localizeRecipe(r,lang));
@@ -47,14 +48,14 @@ export default async function ProductDetailPage({params}: Props) {
   const productSchema = {"@context":"https://schema.org", "@type":"Product", name:product.naam, description:product.desc, category, brand:{"@type":"Brand", name:BEDRIJF.naam}, image:photo ? `${BEDRIJF.domein}${photo.src}` : undefined, url:`${BEDRIJF.domein}/${lang}/assortiment/${slug}`};
   return <>
     <Schema data={[productSchema, kruimelSchema(lang, [{naam:BEDRIJF.naamKort,pad:"/"},{naam:c.range,pad:"/assortiment"},{naam:product.naam,pad:`/assortiment/${slug}`}])]} />
-    <PaginaKop kruimels={[{naam:BEDRIJF.naamKort,href:`/${lang}`},{naam:c.range,href:`/${lang}/assortiment`},{naam:product.naam}]} label={[category,product.badge,product.omega3?"Omega-3":null].filter(Boolean).join(" · ")} titel={product.naam} intro={product.desc} knoppen={[action,{label:c.browse,href:`/${lang}/assortiment`,soort:"lijn"}]} feiten={[{label:c.available,waarde:availability},{label:c.price,waarde:prijs?`${formatPrijs(prijs,lang)} — ${c.guidePrice}`:c.dailyPrice},...(seizoen?[{label:c.best,waarde:seizoen}]:[])]} />
+    <PaginaKop kruimels={[{naam:BEDRIJF.naamKort,href:`/${lang}`},{naam:c.range,href:`/${lang}/assortiment`},{naam:product.naam}]} label={[category,product.badge,product.omega3?"Omega-3":null].filter(Boolean).join(" · ")} titel={product.naam} intro={product.desc} knoppen={[action,{label:c.browse,href:`/${lang}/assortiment`,soort:"lijn"}]} feiten={[{label:c.available,waarde:availability.label},{label:c.price,waarde:prijs?`${formatPrijs(prijs,lang)} — ${c.guidePrice}`:c.dailyPrice},...(seizoen?[{label:c.best,waarde:seizoen}]:[])]} />
     <Sectie grond="papier"><div className={`grid ${photo?"lg:grid-cols-[0.95fr_1.05fr]":"max-w-3xl"} gap-10 lg:gap-16`}>
       {(photo || product.beschikbaar !== "dagelijks" || isSalmon) && <div>
         {photo && <div className="relative w-full aspect-[4/3] flex items-center justify-center" style={{backgroundColor:"#fff",borderBottom:`3px solid ${CATEGORIE_KLEUR[product.categorie]}`}}>
           <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 1024px) calc(100vw - 40px), 45vw" loading="lazy" className={`w-full h-full ${photo.editorial?(photo.whole?"object-contain":"object-cover"):"object-contain"}`} />
         </div>}
         <ProductPhotoCredit photo={photo} locale={lang} />
-        {product.beschikbaar !== "dagelijks" && <p className="mt-6 pl-5" style={{borderLeft:"2px solid var(--navy)"}}>{c.availabilityNote}</p>}
+        <p className="mt-6 pl-5" style={{borderLeft:`2px solid ${availability.unavailable?"#be123c":"var(--navy)"}`}}>{availability.note}</p>
         {isSalmon && <Link href={`/${lang}/varlaks`} className="block mt-6 pl-5" style={{borderLeft:"2px solid var(--seafoam)"}}><p className="kapitaal mb-2">{c.alternative}</p><p className="font-semibold underline">{c.salmon}</p><p className="text-sm mt-2 leading-relaxed">{c.salmonNote}</p></Link>}
       </div>}
       <div><p className="kapitaal mb-2">{c.inspiration}</p><h2 className="text-2xl mb-3">{c.cooking}</h2><p className="mb-6">{c.ideas}</p><p className="kapitaal mb-2">{c.blog}</p><ul className="mb-7">{articles.map(([article,label])=><li key={article} className="border-b border-sky-100"><Link href={`/${lang}/blog/${article}`} className="block py-3 underline font-semibold">{label} →</Link></li>)}</ul>

@@ -279,7 +279,7 @@ export const viskalenderData: MaandData[] = [
         "naam": "Kibbeling"
       }
     ],
-    "tekst": "Een garnalencocktail, haringhapjes of mosselen op tafel: augustus biedt veel inspiratie. Kibbeling is het hele jaar een favoriet, niet alleen seizoensvis. Vraag welke vis wij die dag voor de kibbeling gebruiken.",
+    "tekst": "Een garnalencocktail, haringhapjes of mosselen op tafel: augustus biedt veel inspiratie. Kibbeling is het hele jaar een favoriet, niet alleen seizoensvis. Onze kibbeling maken we van pollak.",
     "hoogtepunt": "Garnalen, haring en een pan mosselen",
     "foto": {
       "src": "/images/recepten/hollandse-garnalencocktail.webp",

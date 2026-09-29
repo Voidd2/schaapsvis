@@ -1,6 +1,8 @@
 // Read-only browser checks: decode every catalogue photo and follow detail links.
 const {chromium}=require('playwright'),assert=require('assert/strict'),path=require('path');
 const origin=process.argv[2]||'http://localhost:3011';
+const decisions=JSON.parse(require('fs').readFileSync('src/lib/assortiment-besluiten.json','utf8'));
+const expected=decisions.originalCount-decisions.removed.length+decisions.added.length;
 (async()=>{
  const browser=await chromium.launch({channel:'chrome',headless:true});
  const errors=[];let decoded=0,details=0;
@@ -9,7 +11,7 @@ const origin=process.argv[2]||'http://localhost:3011';
    const page=await browser.newPage({viewport:{width:390,height:844}});
    page.on('pageerror',e=>errors.push(locale+': '+e.message));
    await page.goto(`${origin}/${locale}/assortiment`,{waitUntil:'networkidle'});
-   assert.equal(await page.locator('.collection img').count(),128,locale+' catalogue coverage');
+   assert.equal(await page.locator('.collection img').count(),expected,locale+' catalogue coverage');
    const images=await page.locator('.collection img').evaluateAll(async imgs=>{
     imgs.forEach(img=>img.loading='eager');
     await Promise.all(imgs.map(img=>img.decode()));
@@ -19,10 +21,11 @@ const origin=process.argv[2]||'http://localhost:3011';
    assert.ok(await page.locator('body').evaluate(el=>el.scrollWidth<=innerWidth+1),locale+' mobile overflow');
    if(locale==='nl'){
     await page.locator('input[type="search"]').fill('tonijn');
+    await page.waitForFunction(()=>!document.querySelector('.collection-favorites')&&[...document.querySelectorAll('.collection-item h3')].every(el=>/tonijn/i.test(el.textContent)));
     await page.locator('.collection-item').first().screenshot({path:path.resolve('../../outputs/assortiment-internet-mobiel.png')});
     await page.locator('input[type="search"]').fill('');
    }
-   for(const slug of ['scholfilet','tonijnfilet','zeewiersalade','zeeforel','sushi-mix']){
+   for(const slug of ['scholfilet','tonijnfilet','zeewiersalade','blacktiger-garnalen','zeekraal','gerookte-zalmmoot','hollandse-garnalen']){
     const link=page.locator(`a[href="/${locale}/assortiment/${slug}"]`).first();
     await link.click();await page.waitForURL(`**/${locale}/assortiment/${slug}`);
     const img=page.locator('main img').first();await img.scrollIntoViewIfNeeded();await img.evaluate(i=>i.decode());

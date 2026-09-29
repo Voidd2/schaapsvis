@@ -10,6 +10,7 @@ import { productPhoto } from "@/lib/product-beeld";
 import { ProductPhotoCredit } from "@/components/ProductPhotoCredit";
 import { matchesQuery } from "@/lib/search";
 import { bestelContact } from "@/lib/bestel-contact";
+import { productAvailability } from "@/lib/product-availability";
 
 const copy = {
   nl: {
@@ -17,25 +18,25 @@ const copy = {
     detail: "Productinformatie", count: "producten", empty: "Niets gevonden? Vraag het ons gerust via WhatsApp.",
     favorites: "Begin met onze favorieten", favoritesSub: "Een paar vertrouwde keuzes uit onze toonbank.",
     browse: "Het hele assortiment", browseSub: "Kijk rustig rond. Voor beschikbaarheid en uw wensen helpen we u graag via WhatsApp.",
-    categories: ["Verse vis", "Gerookte vis", "Schaal- & schelpdieren", "Vissalades", "Bereid & snacks"],
+    categories: ["Verse vis", "Gerookte vis", "Schaal- & schelpdieren", "Vissalades", "Bereid & snacks", "Zeegroenten"],
   },
   en: {
     all: "All", search: "Which fish are you looking for?", popular: "Favourites first", az: "Name A–Z",
     detail: "Product information", count: "products", empty: "Can't find it? Ask us on WhatsApp.",
     favorites: "Start with our favourites", favoritesSub: "A few familiar favourites from our fish counter.",
     browse: "Explore our full range", browseSub: "Take a look around. Ask us on WhatsApp about availability and your wishes.",
-    categories: ["Fresh fish", "Smoked fish", "Shellfish", "Fish salads", "Prepared & snacks"],
+    categories: ["Fresh fish", "Smoked fish", "Shellfish", "Fish salads", "Prepared & snacks", "Sea vegetables"],
   },
   de: {
     all: "Alle", search: "Welchen Fisch suchen Sie?", popular: "Favoriten zuerst", az: "Name A–Z",
     detail: "Produktinformationen", count: "Produkte", empty: "Nicht gefunden? Fragen Sie uns per WhatsApp.",
     favorites: "Unsere Favoriten entdecken", favoritesSub: "Einige bewährte Favoriten aus unserer Fischtheke.",
     browse: "Das gesamte Sortiment", browseSub: "Schauen Sie sich in Ruhe um. Fragen zu Verfügbarkeit und Wünschen beantworten wir gerne per WhatsApp.",
-    categories: ["Frischer Fisch", "Räucherfisch", "Schalentiere", "Fischsalate", "Zubereitet & Snacks"],
+    categories: ["Frischer Fisch", "Räucherfisch", "Schalentiere", "Fischsalate", "Zubereitet & Snacks", "Meeresgemüse"],
   },
 };
 
-const categories: Categorie[] = ["verse-vis", "gerookte-vis", "schaal-schelp", "vissalades", "bereid"];
+const categories: Categorie[] = ["verse-vis", "gerookte-vis", "schaal-schelp", "vissalades", "bereid", "zeegroenten"];
 const featuredSlugs = ["varlaks-zalm", "kibbeling", "haring"];
 
 export function AssortimentFilter({ localized }: { localized: Product[] }) {
@@ -63,6 +64,7 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
             <span className="favorite-number">0{i + 1}</span>
           </Link>
           <div className="favorite-heading"><div><p>{c.categories[categories.indexOf(p.categorie)]}</p><h3><Link href={`/${locale}/assortiment/${p.slug}`}>{p.naam}</Link></h3></div><ArrowUpRight size={22} aria-hidden="true" /></div>
+          <p className="text-sm font-semibold mb-3">{productAvailability(p,locale).label}</p>
           <a href={bestelContact(locale, p.naam).href} className="collection-whatsapp"><MessageCircle size={16} aria-hidden="true" />{bestelContact(locale).label}</a>
         </article>;
       })}</div>
@@ -79,11 +81,15 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
       <p className="collection-count" role="status">{found.length} {c.count}</p>
       <div className="collection-list">{rows.map(p => {
         const photo = productPhoto(p,locale);
+        const stock = productAvailability(p,locale);
         const platter = ["visschaal", "feestschotel"].includes(p.slug);
         return <article key={p.slug} className="collection-item">
           <div className="collection-item-main">
             <div><p className="collection-category">{c.categories[categories.indexOf(p.categorie)]}</p><h3><Link href={`/${locale}/assortiment/${p.slug}`}>{p.naam}</Link></h3><p className="collection-description">{p.desc}</p></div>
             {photo && <Link href={`/${locale}/assortiment/${p.slug}`} tabIndex={-1} className="collection-thumb"><Image src={photo.src} alt={photo.alt} width={600} height={450} sizes="(max-width: 600px) calc(100vw - 40px), 210px" className={`${photo.editorial ? "editorial" : ""} ${photo.whole ? "whole-product" : ""}`} /></Link>}
+          </div>
+          <div className={`mt-3 mb-3 text-sm leading-relaxed ${stock.unavailable?"text-rose-700":"text-slate-700"}`} data-stock={p.beschikbaar}>
+            <p className="font-semibold">{stock.label}</p><p className="mt-1">{stock.note}</p>
           </div>
           <ProductPhotoCredit photo={photo} locale={locale} />
           <div className="collection-item-actions">

@@ -6,7 +6,7 @@ export type ProductPhoto = {
   editorial: boolean;
   whole: boolean;
   caption?: string;
-  credit?: { author: string; source: string; license: string; licenseUrl: string };
+  credit?: { author: string; source: string; license?: string; licenseUrl?: string };
 };
 
 type InternetPhoto = { src: string; kind: "product" | "serving" | "species"; credit?: ProductPhoto["credit"] };
@@ -33,10 +33,6 @@ const INTERNET_BEELDEN: Record<string, InternetPhoto> = {
     "src": "/images/assortiment-internet/tarbotfilet.png",
     "kind": "product"
   },
-  "schelvis": {
-    "src": "/images/assortiment-internet/schelvis.png",
-    "kind": "product"
-  },
   "wijting": {
     "src": "/images/assortiment-internet/wijting.png",
     "kind": "product"
@@ -49,22 +45,14 @@ const INTERNET_BEELDEN: Record<string, InternetPhoto> = {
     "src": "/images/assortiment-internet/schar.jpg",
     "kind": "species",
     "credit": {
-      "author": "Hans Hillewaert",
+      "author": "\nHans Hillewaert",
       "source": "https://commons.wikimedia.org/wiki/File:Limanda_limanda.jpg",
       "license": "CC BY-SA 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     }
   },
-  "zalmforel": {
-    "src": "/images/assortiment-internet/zalmforel.png",
-    "kind": "product"
-  },
   "tonijnfilet": {
     "src": "/images/assortiment-internet/tonijnfilet.png",
-    "kind": "product"
-  },
-  "zeeduivelfilet": {
-    "src": "/images/assortiment-internet/zeeduivelfilet.png",
     "kind": "product"
   },
   "gerookte-forelfilet": {
@@ -101,34 +89,6 @@ const INTERNET_BEELDEN: Record<string, InternetPhoto> = {
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
     }
   },
-  "leng": {
-    "src": "/images/assortiment-internet/leng.jpg",
-    "kind": "species",
-    "credit": {
-      "author": "Vsevolod",
-      "source": "https://commons.wikimedia.org/wiki/File:Molva_molva_155653858.jpg",
-      "license": "CC BY 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
-    }
-  },
-  "zalmmoot": {
-    "src": "/images/assortiment-internet/zalmmoot.png",
-    "kind": "product"
-  },
-  "hele-krab": {
-    "src": "/images/assortiment-internet/hele-krab.jpg",
-    "kind": "product",
-    "credit": {
-      "author": "Wolfmann",
-      "source": "https://commons.wikimedia.org/wiki/File:TASKEKRABBE_r%C3%B8dkrabbe_(Cancer_pagurus)_Hele,_kokte_krabber_servert_som_mat_p%C3%A5_fat_(panne)_Vestfold_2021-09_Cooked_edible_brown_crab_Norway.jpg",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
-    }
-  },
-  "vongole": {
-    "src": "/images/assortiment-internet/vongole.png",
-    "kind": "product"
-  },
   "fine-de-claire-oesters": {
     "src": "/images/assortiment-internet/fine-de-claire-oesters.jpg",
     "kind": "serving",
@@ -159,24 +119,6 @@ const INTERNET_BEELDEN: Record<string, InternetPhoto> = {
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     }
   },
-  "visburger": {
-    "src": "/images/assortiment-internet/visburger.jpg",
-    "kind": "serving",
-    "credit": {
-      "author": "jeffreyw",
-      "source": "https://commons.wikimedia.org/wiki/File:Fish_sandwich_with_dilled_tartar_sauce.jpg",
-      "license": "CC BY 2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
-    }
-  },
-  "zeewolf": {
-    "src": "/images/assortiment-internet/zeewolf.png",
-    "kind": "product"
-  },
-  "zwaardvis": {
-    "src": "/images/assortiment-internet/zwaardvis.png",
-    "kind": "product"
-  },
   "verse-heilbot": {
     "src": "/images/assortiment-internet/verse-heilbot.jpg",
     "kind": "species",
@@ -187,101 +129,11 @@ const INTERNET_BEELDEN: Record<string, InternetPhoto> = {
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
     }
   },
-  "grauwe-poon": {
-    "src": "/images/assortiment-internet/grauwe-poon.jpg",
-    "kind": "species",
-    "credit": {
-      "author": "Arnstein Rønning",
-      "source": "https://commons.wikimedia.org/wiki/File:Eutrigla_gurnardus.JPG",
-      "license": "CC BY 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
-    }
-  },
-  "wulken": {
-    "src": "/images/assortiment-internet/wulken.jpg",
-    "kind": "product",
-    "credit": {
-      "author": "Arnaud 25",
-      "source": "https://commons.wikimedia.org/wiki/File:Bulots_01.jpg",
-      "license": "CC0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
-    }
-  },
-  "warm-gerookte-zalm": {
-    "src": "/images/assortiment-internet/warm-gerookte-zalm.jpg",
-    "kind": "serving",
-    "credit": {
-      "author": "FotoosVanRobin",
-      "source": "https://commons.wikimedia.org/wiki/File:Hot_Smoked_Salmon_with_black_Tagliatelle.jpg",
-      "license": "CC BY-SA 2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
-    }
-  },
-  "zeevruchtensalade": {
-    "src": "/images/assortiment-internet/zeevruchtensalade.jpg",
-    "kind": "serving",
-    "credit": {
-      "author": "E4024",
-      "source": "https://commons.wikimedia.org/wiki/File:Seafood_salad.jpg",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
-    }
-  },
-  "garnalencocktail": {
-    "src": "/images/assortiment-internet/garnalencocktail.jpg",
-    "kind": "serving",
-    "credit": {
-      "author": "Hortensja Bukietowa",
-      "source": "https://commons.wikimedia.org/wiki/File:Garnalencocktail.jpg",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
-    }
-  },
-  "visspies": {
-    "src": "/images/assortiment-internet/visspies.jpg",
-    "kind": "serving",
-    "credit": {
-      "author": "PAULIX04",
-      "source": "https://commons.wikimedia.org/wiki/File:Fish_Fillet_Skewers_at_Davao_City.jpg",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
-    }
-  },
-  "fish-and-chips": {
-    "src": "/images/assortiment-internet/fish-and-chips.jpg",
-    "kind": "serving",
-    "credit": {
-      "author": "Grendelkhan",
-      "source": "https://commons.wikimedia.org/wiki/File:Fish_and_chips_plate_with_peas.jpg",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
-    }
-  },
-  "snoekbaars": {
-    "src": "/images/assortiment-internet/snoekbaars.jpg",
-    "kind": "species",
-    "credit": {
-      "author": "eLNuko",
-      "source": "https://commons.wikimedia.org/wiki/File:Sander_lucioperca_1.jpg",
-      "license": "Public domain",
-      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/"
-    }
-  },
-  "tongschar": {
-    "src": "/images/assortiment-internet/tongschar.jpg",
-    "kind": "species",
-    "credit": {
-      "author": "Hans Hillewaert",
-      "source": "https://commons.wikimedia.org/wiki/File:Microstomus_kitt_1.jpg",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
-    }
-  },
   "bot": {
     "src": "/images/assortiment-internet/bot.jpg",
     "kind": "species",
     "credit": {
-      "author": "Hans Hillewaert",
+      "author": "\nHans Hillewaert",
       "source": "https://commons.wikimedia.org/wiki/File:Platichthys_flesus_1.jpg",
       "license": "CC BY-SA 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
@@ -297,47 +149,13 @@ const INTERNET_BEELDEN: Record<string, InternetPhoto> = {
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     }
   },
-  "spiering": {
-    "src": "/images/assortiment-internet/spiering.jpg",
-    "kind": "species",
-    "credit": {
-      "author": "Виктор",
-      "source": "https://commons.wikimedia.org/wiki/File:Osmerus_eperlanus_117759646.jpg",
-      "license": "CC BY 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
-    }
-  },
-  "skrei": {
-    "src": "/images/assortiment-internet/skrei.jpg",
-    "kind": "species",
-    "credit": {
-      "author": "Wilhelm Thomas Fiege",
-      "source": "https://commons.wikimedia.org/wiki/File:Atlantic_Cod,_Atlantischer_Kabeljau_(Gadus_morhua).jpg",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
-    }
-  },
   "tilapiafilet": {
     "src": "/images/assortiment-internet/tilapiafilet.png",
-    "kind": "product"
-  },
-  "gerookte-zalmmoot": {
-    "src": "/images/assortiment-internet/gerookte-zalmmoot.png",
     "kind": "product"
   },
   "gerookte-sprotfilet": {
     "src": "/images/assortiment-internet/gerookte-sprotfilet.png",
     "kind": "product"
-  },
-  "alikruiken": {
-    "src": "/images/assortiment-internet/alikruiken.jpg",
-    "kind": "product",
-    "credit": {
-      "author": "L'irlandés",
-      "source": "https://commons.wikimedia.org/wiki/File:Caracolillos.JPG",
-      "license": "CC BY-SA 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
-    }
   },
   "gamba-spiesen": {
     "src": "/images/assortiment-internet/gamba-spiesen.jpg",
@@ -347,30 +165,6 @@ const INTERNET_BEELDEN: Record<string, InternetPhoto> = {
       "source": "https://commons.wikimedia.org/wiki/File:Grilled_Shrimp_Skewers.jpg",
       "license": "CC BY-SA 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
-    }
-  },
-  "krabpoten": {
-    "src": "/images/assortiment-internet/krabpoten.png",
-    "kind": "product"
-  },
-  "haringsalade": {
-    "src": "/images/assortiment-internet/haringsalade.jpg",
-    "kind": "serving",
-    "credit": {
-      "author": "Roede",
-      "source": "https://commons.wikimedia.org/wiki/File:Sildesalat_2.jpg",
-      "license": "CC BY-SA 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
-    }
-  },
-  "mosselsalade": {
-    "src": "/images/assortiment-internet/mosselsalade.jpg",
-    "kind": "serving",
-    "credit": {
-      "author": "FotoosVanRobin",
-      "source": "https://commons.wikimedia.org/wiki/File:Musselsalade_with_saffrondressing.jpg",
-      "license": "CC BY-SA 2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
     }
   },
   "gamba-tempura": {
@@ -383,16 +177,6 @@ const INTERNET_BEELDEN: Record<string, InternetPhoto> = {
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     }
   },
-  "visnuggets": {
-    "src": "/images/assortiment-internet/visnuggets.jpg",
-    "kind": "serving",
-    "credit": {
-      "author": "Jason Lam",
-      "source": "https://commons.wikimedia.org/wiki/File:06_fried_fish_nugget_with_tartar_sauce_inside_(3042906372).jpg",
-      "license": "CC BY-SA 2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
-    }
-  },
   "gebakken-mosselen": {
     "src": "/images/assortiment-internet/gebakken-mosselen.jpg",
     "kind": "serving",
@@ -403,16 +187,6 @@ const INTERNET_BEELDEN: Record<string, InternetPhoto> = {
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     }
   },
-  "tongfilet": {
-    "src": "/images/assortiment-internet/tongfilet.jpg",
-    "kind": "serving",
-    "credit": {
-      "author": "Ben Brown",
-      "source": "https://commons.wikimedia.org/wiki/File:Dover_Sole_Fillets_(14943823963).jpg",
-      "license": "CC BY 2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
-    }
-  },
   "wilde-zalmfilet": {
     "src": "/images/assortiment-internet/wilde-zalmfilet.png",
     "kind": "product",
@@ -421,86 +195,6 @@ const INTERNET_BEELDEN: Record<string, InternetPhoto> = {
       "source": "https://commons.wikimedia.org/wiki/File:Sockeye_salmon_fillets.png",
       "license": "Public domain",
       "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/"
-    }
-  },
-  "red-snapperfilet": {
-    "src": "/images/assortiment-internet/red-snapperfilet.jpg",
-    "kind": "serving",
-    "credit": {
-      "author": "Parkerman & Christie from San Diego, USA",
-      "source": "https://commons.wikimedia.org/wiki/File:Pan-fried_Red_Snapper_Fillet.jpg",
-      "license": "CC BY 2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
-    }
-  },
-  "gerookte-coquilles": {
-    "src": "/images/assortiment-internet/gerookte-coquilles.jpg",
-    "kind": "serving",
-    "credit": {
-      "author": "stu_spivack",
-      "source": "https://commons.wikimedia.org/wiki/File:Smoked_scallops_(Sapore).jpg",
-      "license": "CC BY-SA 2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
-    }
-  },
-  "gerookte-mosselen": {
-    "src": "/images/assortiment-internet/gerookte-mosselen.jpg",
-    "kind": "serving",
-    "credit": {
-      "author": "Daderot",
-      "source": "https://commons.wikimedia.org/wiki/File:Smoked_mussels,_peas,_and_wild_rice_-_Massachusetts.jpg",
-      "license": "CC0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
-    }
-  },
-  "krabvlees": {
-    "src": "/images/assortiment-internet/krabvlees.jpg",
-    "kind": "product",
-    "credit": {
-      "author": "BrokenSphere",
-      "source": "https://commons.wikimedia.org/wiki/File:Peeled_crab_meat.JPG",
-      "license": "CC BY-SA 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
-    }
-  },
-  "gerookte-garnalen": {
-    "src": "/images/assortiment-internet/gerookte-garnalen.jpg",
-    "kind": "product",
-    "credit": {
-      "author": "MOs810",
-      "source": "https://commons.wikimedia.org/wiki/File:Smoked_polish_shrimps.jpg",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
-    }
-  },
-  "zeekraalsalade": {
-    "src": "/images/assortiment-internet/zeekraalsalade.jpg",
-    "kind": "species",
-    "credit": {
-      "author": "Hortensja Bukietowa",
-      "source": "https://commons.wikimedia.org/wiki/File:Verse_zeekraal01.jpg",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
-    }
-  },
-  "schelvisfilet": {
-    "src": "/images/assortiment-internet/schelvisfilet.jpg",
-    "kind": "serving",
-    "credit": {
-      "author": "Daderot",
-      "source": "https://commons.wikimedia.org/wiki/File:Pan_roasted_haddock_with_mushrooms,_green_beans,_rice,_and_broccolini_-_Summer_Shack_-_Cambridge,_MA.jpg",
-      "license": "CC0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
-    }
-  },
-  "kabeljauwwangen": {
-    "src": "/images/assortiment-internet/kabeljauwwangen.jpg",
-    "kind": "species",
-    "credit": {
-      "author": "Matthieu Godbout",
-      "source": "https://commons.wikimedia.org/wiki/File:Gadus_morhua-idlm2006.jpg",
-      "license": "CC BY-SA 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
     }
   },
   "hele-kreeft": {
@@ -523,106 +217,12 @@ const INTERNET_BEELDEN: Record<string, InternetPhoto> = {
       "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
     }
   },
-  "zeeforel": {
-    "src": "/images/assortiment-internet/zeeforel.jpg",
-    "kind": "species",
-    "credit": {
-      "author": "Caught by Lars Olaf Simonsen, photographed by Anne Blindheim, retouched by Lars, consumed by both.",
-      "source": "https://commons.wikimedia.org/wiki/File:Salmo_trutta_trutta_retouched.jpg",
-      "license": "CC BY-SA 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
-    }
-  },
   "victoriabaars": {
     "src": "/images/assortiment-internet/victoriabaars.jpg",
     "kind": "product",
     "credit": {
       "author": "Siam Canadian India",
       "source": "https://commons.wikimedia.org/wiki/File:Nile_Perch_Fillets.jpg",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
-    }
-  },
-  "halve-kreeft": {
-    "src": "/images/assortiment-internet/halve-kreeft.jpg",
-    "kind": "serving",
-    "credit": {
-      "author": "Syced",
-      "source": "https://commons.wikimedia.org/wiki/File:Le_homard_Breton,Chawanmushi,_huile_de_fenouil._L%27Anthocyane,_Lannion_(94306).jpg",
-      "license": "CC0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
-    }
-  },
-  "zalm-dillesalade": {
-    "src": "/images/assortiment-internet/zalm-dillesalade.png",
-    "kind": "product"
-  },
-  "zeebrasemfilet": {
-    "src": "/images/assortiment-internet/zeebrasemfilet.jpg",
-    "kind": "species",
-    "credit": {
-      "author": "Llez",
-      "source": "https://commons.wikimedia.org/wiki/File:Pagellus_bogaraveo_-_Mercado_Municipal_Funchal_.jpg",
-      "license": "CC BY-SA 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
-    }
-  },
-  "kokkelvlees": {
-    "src": "/images/assortiment-internet/kokkelvlees.jpg",
-    "kind": "product",
-    "credit": {
-      "author": "Juan Emilio Prades Bel",
-      "source": "https://commons.wikimedia.org/wiki/File:Berberechos.jpg",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
-    }
-  },
-  "noorse-kreeftstaart": {
-    "src": "/images/assortiment-internet/noorse-kreeftstaart.jpg",
-    "kind": "serving",
-    "credit": {
-      "author": "Navin75",
-      "source": "https://commons.wikimedia.org/wiki/File:La_Langoustine_(14589980444).jpg",
-      "license": "CC BY-SA 2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
-    }
-  },
-  "kreeftensalade": {
-    "src": "/images/assortiment-internet/kreeftensalade.jpg",
-    "kind": "serving",
-    "credit": {
-      "author": "إيان",
-      "source": "https://commons.wikimedia.org/wiki/File:Lobster_salad_roll.jpg",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
-    }
-  },
-  "vissticks": {
-    "src": "/images/assortiment-internet/vissticks.jpg",
-    "kind": "product",
-    "credit": {
-      "author": "Superbass",
-      "source": "https://commons.wikimedia.org/wiki/File:Fishfinger_classic_fried_1.jpg",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
-    }
-  },
-  "sushi-mix": {
-    "src": "/images/assortiment-internet/sushi-mix.jpg",
-    "kind": "serving",
-    "credit": {
-      "author": "www.bluewaikiki.com",
-      "source": "https://commons.wikimedia.org/wiki/File:Salmon_and_Tuna_Nigiri_Sushi,_2008.jpg",
-      "license": "CC BY 2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
-    }
-  },
-  "kabeljauwtongen": {
-    "src": "/images/assortiment-internet/kabeljauwtongen.jpg",
-    "kind": "serving",
-    "credit": {
-      "author": "Abuluntu",
-      "source": "https://commons.wikimedia.org/wiki/File:Abuluntu_cod_tounge.jpg",
       "license": "CC BY-SA 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     }
@@ -637,12 +237,44 @@ const INTERNET_BEELDEN: Record<string, InternetPhoto> = {
       "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/"
     }
   },
-  "visbitterballen": {
-    "src": "/images/assortiment-internet/visbitterballen.jpg",
+  "blacktiger-garnalen": {
+    "src": "/images/assortiment-internet/blacktiger-garnalen.jpg",
+    "kind": "product",
+    "credit": {
+      "author": "Almandine; Epipelagic (ruler removal)",
+      "source": "https://commons.wikimedia.org/wiki/File:Penaeus_monodon.jpg",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    }
+  },
+  "gebakken-ansjovis": {
+    "src": "/images/assortiment-internet/gebakken-ansjovis.jpg",
     "kind": "serving",
     "credit": {
-      "author": "ChristianCelestial",
-      "source": "https://commons.wikimedia.org/wiki/File:Delicious_Crunchy_Fish_Croquettes.jpg",
+      "author": "E4024",
+      "source": "https://commons.wikimedia.org/wiki/File:Hamsi_tava_-_roka.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    }
+  },
+  "gerookte-zalmmoot": {
+    "src": "/images/assortiment-internet/warm-gerookte-zalmmoten.jpg",
+    "kind": "product"
+  },
+  "hollandse-garnalen": {
+    "src": "/images/assortiment-internet/hollandse-garnalen-solt.jpeg",
+    "kind": "product",
+    "credit": {
+      "author": "Dulk Haasnoot Seafood",
+      "source": "https://www.dulkhaasnoot.nl/onze-producten/hollandse-garnalen/"
+    }
+  },
+  "zeekraal": {
+    "src": "/images/assortiment-internet/zeekraalsalade.jpg",
+    "kind": "product",
+    "credit": {
+      "author": "Hortensja Bukietowa",
+      "source": "https://commons.wikimedia.org/wiki/File:Verse_zeekraal01.jpg",
       "license": "CC BY-SA 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     }
@@ -669,23 +301,19 @@ const PRODUCT_BEELDEN: Record<string, Pick<ProductPhoto, "src" | "alt" | "credit
   "zeebaars": { src: "/images/editorial/zeebaars.webp", alt: "Hele zeebaars op een witte schaal" },
   "zalmsalade": { src: "/images/editorial/zalmsalade.webp", alt: "Romige zalmsalade met dille — serveerinspiratie" },
   "tonijnsalade": { src: "/images/editorial/tonijnsalade.webp", alt: "Tonijnsalade met ui en augurk — serveerinspiratie" },
-  "garnalensalade": { src: "/images/editorial/garnalensalade.webp", alt: "Hollandse garnalen in cocktailsaus — serveerinspiratie" },
   "zeeuwse-mosselen": { src: "/images/editorial/zeeuwse-mosselen.webp", alt: "Zeeuwse mosselen in gesloten schelpen" },
   "haring": { src: "/images/editorial/hollandse-nieuwe-uitjes.webp", alt: "Hollandse haring met uitjes en augurk — serveerinspiratie" },
   "gravad-lax": { src: "/images/recepten/gravlaks.webp", alt: "Gesneden gravlaks met dille — serveerinspiratie" },
   "lekkerbek": { src: "/images/recepten/lekkerbek-koolsalade.webp", alt: "Gebakken heek als lekkerbek met koolsalade — serveerinspiratie" },
   "broodje-haring": { src: "/images/recepten/broodje-haring-uitjes.webp", alt: "Broodje haring met uitjes — serveerinspiratie" },
   "vissoep": { src: "/images/recepten/romige-vissoep.webp", alt: "Romige vissoep — serveerinspiratie" },
-  "poke-bowl-zalm": { src: "/images/recepten/poke-bowl-verse-zalm.webp", alt: "Pokébowl met zalm, rijst en groenten — serveerinspiratie" },
-  "visschaal": { src: "/images/editorial/visschaal-inspiratie.webp", alt: "Voorbeeld van een visschaal; inhoud en formaat in overleg" },
-  "feestschotel": { src: "/images/editorial/feestschaal-voorbeeld.webp", alt: "Voorbeeld van een feestschaal; inhoud en formaat in overleg" },
 };
 
 /** One source for catalogue cards, details and metadata. */
 function sourcePhoto(product: Product): ProductPhoto | null {
   const beeld = PRODUCT_BEELDEN[product.slug];
   if (beeld) return { ...beeld, editorial: true, whole: ["schol", "zeebaars"].includes(product.slug) };
-  if (["varlaks-zalm", "zalmfilet"].includes(product.slug)) {
+  if (product.slug === "varlaks-zalm") {
     return { src: "/images/editorial/zalm.webp", editorial: true, whole: false, alt: "Zalm met citroen en dille — serveerinspiratie" };
   }
   if (product.slug === "kibbeling") {
@@ -700,17 +328,12 @@ const ALTS:Record<string,readonly[string,string]>={
 "zeebaars":["Whole sea bass on a white platter","Ganzer Wolfsbarsch auf einer weißen Platte"],
 "zalmsalade":["Creamy salmon salad with dill, serving suggestion","Cremiger Lachssalat mit Dill, Serviervorschlag"],
 "tonijnsalade":["Tuna salad with onion and gherkin, serving suggestion","Thunfischsalat mit Zwiebeln und Gewürzgurken, Serviervorschlag"],
-"garnalensalade":["Dutch shrimp in cocktail sauce, serving suggestion","Holländische Garnelen in Cocktailsauce, Serviervorschlag"],
 "zeeuwse-mosselen":["Zeeland mussels in closed shells","Zeeländische Miesmuscheln in geschlossenen Schalen"],
 "haring":["Dutch herring with onion and gherkin, serving suggestion","Holländischer Matjes mit Zwiebeln und Gewürzgurken, Serviervorschlag"],
 "gravad-lax":["Sliced gravlax with dill, serving suggestion","Aufgeschnittener Graved Lachs mit Dill, Serviervorschlag"],
 "lekkerbek":["Fried battered hake with coleslaw, serving suggestion","Frittierter Seehecht im Backteig mit Krautsalat, Serviervorschlag"],
 "broodje-haring":["Herring roll with onion, serving suggestion","Matjesbrötchen mit Zwiebeln, Serviervorschlag"],
 "vissoep":["Creamy fish soup, serving suggestion","Cremige Fischsuppe, Serviervorschlag"],
-"poke-bowl-zalm":["Salmon poke bowl with rice and vegetables, serving suggestion","Lachs-Poké-Bowl mit Reis und Gemüse, Serviervorschlag"],
-"visschaal":["Example seafood platter; contents and size agreed individually","Beispiel einer Fischplatte; Inhalt und Größe nach Absprache"],
-"feestschotel":["Example celebration platter; contents and size agreed individually","Beispiel einer Festplatte; Inhalt und Größe nach Absprache"],
-"zalmfilet":["Salmon fillet with lemon and dill, serving suggestion","Lachsfilet mit Zitrone und Dill, Serviervorschlag"],
 "varlaks-zalm":["Salmon fillet with lemon and dill, serving suggestion","Lachsfilet mit Zitrone und Dill, Serviervorschlag"],
 "kibbeling":["Crispy kibbeling with ravigote sauce, serving suggestion","Knuspriger Kibbeling mit Ravigotesauce, Serviervorschlag"],
 "gerookte-zalm-high-seas":["Thin slices of smoked salmon with dill on a platter, serving suggestion","Dünne Räucherlachsscheiben mit Dill auf einer Platte, Serviervorschlag"],
@@ -733,6 +356,7 @@ export function productPhoto(product:Product,locale="nl"):ProductPhoto|null{
   return {src:internet.src,alt:subjects[product.slug]?.[l]||product.naam+" — "+labels[internet.kind],caption:captions[internet.kind],editorial:true,whole:internet.kind!=="serving",credit:internet.credit};
  }
  const photo=sourcePhoto(product);if(!photo)return null;
+ if(["krabsalade","tonijnsalade","zalmsalade"].includes(product.slug))photo.caption=locale==="en"?"Serving illustration; the ingredients and presentation in our shop may differ.":locale==="de"?"Servierbeispiel; Zutaten und Präsentation in unserem Geschäft können abweichen.":"Serveervoorbeeld; samenstelling en presentatie in onze winkel kunnen afwijken.";
  if(locale==="nl")return photo;
  const translated=ALTS[product.slug];
  return {...photo,alt:translated?translated[locale==="de"?1:0]:product.naam};

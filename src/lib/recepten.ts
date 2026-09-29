@@ -136,7 +136,7 @@ const receptenOrigineel: Recept[] = [
     ],
     fotoLabel: "Goudbruin gebakken kibbeling met witte saus",
     vanSchaap: [
-      "800 g kabeljauw- of pollakfilet, zonder graten",
+      "800 g rauwe pollakfilet, zonder graten — vraag vooraf naar de mogelijkheden",
     ],
     vanSupermarkt: [
       "150 g bloem + 2 el extra om de vis te bestuiven",
@@ -158,7 +158,7 @@ const receptenOrigineel: Recept[] = [
     verhaal: "Zelf kibbeling maken begint met rauwe visfilet en een koud beslag. Dep de vis goed droog en bak in kleine porties, zodat het korstje krokant blijft. Laat het frituren aan een volwassene over; kinderen kunnen op veilige afstand helpen met het beslag.",
     highlight: "200g p.p. aanbevolen",
     seoKeywords:
-      "kibbeling recept thuis, kibbeling bakken, kabeljauw kibbeling, pollak kibbeling",
+      "kibbeling recept thuis, kibbeling bakken, pollak kibbeling",
     porties: 4,
   },
   {
@@ -276,7 +276,7 @@ const receptenOrigineel: Recept[] = [
 
   {
     slug: "kabeljauw-zeekraal-venkel",
-    hoofdproduct: "kabeljauwhaas",
+    hoofdproduct: "kabeljauwfilet",
     title: "Kabeljauw met zeekraal en venkel",
     subtitle: "Knapperig vel, frisse groenten — in 30 minuten",
     tijd: "30 min",

@@ -31,8 +31,8 @@ if(!/^http:\/\/(localhost|127\.0\.0\.1):/.test(origin))throw new Error('Local se
     await page.waitForFunction(n=>document.querySelector('main')?.innerText.includes(n),name);
    }
    await page.goto(origin+'/'+locale+'/assortiment',{waitUntil:'networkidle'});
-   const product=page.locator('a[href="/'+locale+'/assortiment/zalmfilet"]').first();
-   await product.click();await page.waitForURL('**/'+locale+'/assortiment/zalmfilet');await page.waitForLoadState('networkidle');
+   const product=page.locator('a[href="/'+locale+'/assortiment/varlaks-zalm"]').first();
+   await product.click();await page.waitForURL('**/'+locale+'/assortiment/varlaks-zalm');await page.waitForLoadState('networkidle');
    const image=page.locator('main img').first();
    await image.scrollIntoViewIfNeeded();await image.evaluate(img=>img.decode());
    assert.ok(await image.getAttribute('alt'),'Product photo description '+locale);
@@ -43,7 +43,7 @@ if(!/^http:\/\/(localhost|127\.0\.0\.1):/.test(origin))throw new Error('Local se
     assert.ok(await page.locator('a[href*="/recepten/"]').count(),'Recipe filter '+locale);
     await input.fill('');
    }
-   assert.equal(await page.locator('.recipe-card').count(),36,'All recipes visible '+locale);
+   assert.equal(await page.locator('.recipe-card').count(),37,'All recipes visible '+locale);
    assert.equal(await page.locator('body').evaluate(el=>el.scrollWidth<=window.innerWidth+1),true,'Recipes mobile overflow '+locale);
    for(const img of await page.locator('main img').all()){
     await img.scrollIntoViewIfNeeded();await img.evaluate(el=>el.decode());

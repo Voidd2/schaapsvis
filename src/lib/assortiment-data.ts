@@ -3,7 +3,8 @@ export type Categorie =
   | "gerookte-vis"
   | "schaal-schelp"
   | "vissalades"
-  | "bereid";
+  | "bereid"
+  | "zeegroenten";
 
 export interface Product {
   slug: string;
@@ -18,7 +19,7 @@ export interface Product {
   // Allergen info (EU-formaat: allergenen HOOFDLETTERS)
   ingredienten: string;
   bevat: string[];
-  beschikbaar?: string; // "dagelijks" | "op bestelling" | "seizoensgebonden"
+  beschikbaar?: string; // Owner-approved stock key; localized by product-availability.ts.
 }
 
 export const CATEGORIE_LABELS: Record<Categorie, string> = {
@@ -27,6 +28,7 @@ export const CATEGORIE_LABELS: Record<Categorie, string> = {
   "schaal-schelp":"Schaal- & Schelpdieren",
   "vissalades":   "Vissalades",
   "bereid":       "Bereid & Snacks",
+  "zeegroenten":  "Zeegroenten",
 };
 
 export const CATEGORIE_KLEUR: Record<Categorie, string> = {
@@ -35,1258 +37,830 @@ export const CATEGORIE_KLEUR: Record<Categorie, string> = {
   "schaal-schelp":"var(--seafoam)",
   "vissalades":   "var(--sand)",
   "bereid":       "var(--salmon)",
+  "zeegroenten":  "var(--seafoam)",
 };
 
 export const products: Product[] = [
-  // ─── VERSE VIS ─────────────────────────────────────────────────────────────
-  {
-    slug: "kabeljauw",
-    naam: "Kabeljauw",
-    desc: "Heel gevangen kabeljauw (Gadus morhua) uit de Noordoost-Atlantische Oceaan. Stevige, witte vlees met een milde smaak. De basis van onze kibbeling.",
-    categorie: "verse-vis",
-    photo: "/images/producten-hd/kabeljauw.webp",
-    ingredienten: "Kabeljauw (Gadus morhua) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "kabeljauwfilet",
-    naam: "Kabeljauwfilet",
-    desc: "Verse kabeljauwfilet, zorgvuldig gefileerd en ontgraat. Ideaal om te bakken, stomen of pocheren.",
-    categorie: "verse-vis",
-    photo: "/images/producten-hd/kabeljauwfilet.webp",
-    ingredienten: "Kabeljauw (Gadus morhua) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "schol",
-    naam: "Schol",
-    desc: "Hollandse schol (Pleuronectes platessa), een platvis die bij uitstek thuishoort in onze Noordzee. MSC-gecertificeerd — duurzaam gevangen.",
-    categorie: "verse-vis",
-    badge: "MSC",
-    ingredienten: "Schol (Pleuronectes platessa) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "scholfilet",
-    naam: "Scholfilet",
-    desc: "Verse scholfilet, ontgraat en schoongemaakt. Licht van smaak, perfect om snel te bakken in boter.",
-    categorie: "verse-vis",
-    badge: "MSC",
-    ingredienten: "Schol (Pleuronectes platessa) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "zeetong",
-    naam: "Zeetong",
-    desc: "De koningin van de Noordzee. Fijnmazig vlees met een delicate, licht zoete smaak. Beschikbaar heel of als filet.",
-    categorie: "verse-vis",
-    photo: "/images/producten-hd/zeetong.webp",
-    ingredienten: "Zeetong (Solea solea) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "zeebaars",
-    naam: "Zeebaars",
-    desc: "Europese zeebaars (Dicentrarchus labrax), heel of als filet. Stevig wit vlees met een rijke, volle smaak — uitstekend op de grill.",
-    categorie: "verse-vis",
-    ingredienten: "Zeebaars (Dicentrarchus labrax) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "seizoensgebonden",
-  },
-  {
-    slug: "zeebaarsfilet",
-    naam: "Zeebaarsfilet",
-    desc: "Verse zeebaarsfilet, perfect gefileerd. Lekker op de huid gebakken met een scheutje olijfolie en citroen.",
-    categorie: "verse-vis",
-    ingredienten: "Zeebaars (Dicentrarchus labrax) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "seizoensgebonden",
-  },
-  {
-    slug: "dorade",
-    naam: "Dorade",
-    desc: "Dorade (Sparus aurata), ook wel goudbrasem. Sappig, smaakvol vlees — ideaal om heel te grillen of in de oven te bereiden.",
-    categorie: "verse-vis",
-    photo: "/images/producten-hd/dorade.webp",
-    ingredienten: "Dorade (Sparus aurata) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "seizoensgebonden",
-  },
-  {
-    slug: "dorade-filet",
-    naam: "Dorade Filet",
-    desc: "Verse dorade filet, soepel van structuur met een licht zoete smaak. Snel klaar in de pan.",
-    categorie: "verse-vis",
-    photo: "/images/producten-hd/dorade-filet.webp",
-    ingredienten: "Dorade (Sparus aurata) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "seizoensgebonden",
-  },
-  {
-    slug: "griet",
-    naam: "Griet",
-    desc: "Griet (Scophthalmus rhombus) is een platvis vergelijkbaar met tarbot — iets vettiger van smaak en daardoor zeer geschikt om te stoven.",
-    categorie: "verse-vis",
-    photo: "/images/producten-hd/griet.webp",
-    ingredienten: "Griet (Scophthalmus rhombus) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "grietfilet",
-    naam: "Grietfilet",
-    desc: "Gefileerde griet met boterachtiger vlees dan kabeljauw. Uitstekend gepocheerd of met een romige saus.",
-    categorie: "verse-vis",
-    photo: "/images/producten-hd/grietfilet.webp",
-    ingredienten: "Griet (Scophthalmus rhombus) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "tarbot",
-    naam: "Tarbot",
-    desc: "De tarbot (Psetta maxima) geldt als de meest prestigieuze platvis van de Noordzee. Vast, smaakvol vlees — een echte delicatesse voor feestelijke gelegenheden.",
-    categorie: "verse-vis",
-    ingredienten: "Tarbot (Psetta maxima) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "tarbotfilet",
-    naam: "Tarbotfilet",
-    desc: "Vers gefileerde tarbot. Stevig van structuur met een rijke, boterachtiger smaak — weinig bereiding nodig.",
-    categorie: "verse-vis",
-    ingredienten: "Tarbot (Psetta maxima) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "heek",
-    naam: "Heek",
-    desc: "Heek (Merluccius merluccius), een slanke zeevis met wit, zacht vlees. Vergelijkbaar met kabeljauw maar fijner van smaak. MSC-gecertificeerd.",
-    categorie: "verse-vis",
-    badge: "MSC",
-    photo: "/images/producten-hd/heek.webp",
-    ingredienten: "Heek (Merluccius merluccius) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "heekfilet",
-    naam: "Heekfilet",
-    desc: "Verse heekfilet: mals, mager en licht van smaak. Uitstekend te bakken, stomen of pocheren.",
-    categorie: "verse-vis",
-    badge: "MSC",
-    photo: "/images/producten-hd/heekfilet.webp",
-    ingredienten: "Heek (Merluccius merluccius) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "schelvis",
-    naam: "Schelvis",
-    desc: "Schelvis (Melanogrammus aeglefinus), naaste familie van de kabeljauw. Licht zoete smaak, wit en mager vlees. Klassiek in Britse fish & chips.",
-    categorie: "verse-vis",
-    ingredienten: "Schelvis (Melanogrammus aeglefinus) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "schelvisfilet",
-    naam: "Schelvisfilet",
-    desc: "Verse schelvisfilet, dunner en malser dan kabeljauw. Perfect voor een snel, gezond diner.",
-    categorie: "verse-vis",
-    ingredienten: "Melanogrammus aeglefinus [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "wijting",
-    naam: "Wijting",
-    desc: "Wijting (Merlangius merlangus) is een fijne witte vis met delicaat, mals vlees. Snel klaar en makkelijk te bereiden — lekker gebakken in de pan.",
-    categorie: "verse-vis",
-    ingredienten: "Wijting (Merlangius merlangus) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "wijtingfilet",
-    naam: "Wijtingfilet",
-    desc: "Gefileerde wijting — dun, mals en snel klaar. Lekker gebakken in de pan of bereid in de oven.",
-    categorie: "verse-vis",
-    ingredienten: "Wijting (Merlangius merlangus) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "rode-poon",
-    naam: "Rode Poon",
-    desc: "Rode poon (Trigla lucerna) met zijn opvallende rode vinnen. Vast, zacht wit vlees dat uitstekend gebakken of gegrild kan worden.",
-    categorie: "verse-vis",
-    photo: "/images/producten-hd/rode-poon.webp",
-    ingredienten: "Rode poon (Trigla lucerna) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "seizoensgebonden",
-  },
-  {
-    slug: "schar",
-    naam: "Schar",
-    desc: "Schar (Limanda limanda), een kleinere platvis uit de Noordzee. Mager, licht van smaak en betaalbaar — een onderschatte klassieke Hollandse vis.",
-    categorie: "verse-vis",
-    ingredienten: "Schar (Limanda limanda) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "roodbaars",
-    naam: "Roodbaars",
-    desc: "Roodbaars (Sebastes marinus) uit de koude Noord-Atlantische Oceaan. Stevig, smaakvol rood vlees — heerlijk gegrild of in de oven.",
-    categorie: "verse-vis",
-    photo: "/images/producten-hd/roodbaars.webp",
-    ingredienten: "Roodbaars (Sebastes marinus) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "haring",
-    naam: "Haring",
-    desc: "Hollandse Nieuwe haring (Clupea harengus) — gevlinderd of op het broodje. Een Hollandse klassieker, een van de rijkste omega-3 bronnen in ons assortiment.",
-    categorie: "verse-vis",
-    omega3: true,
-    photo: "/images/producten-hd/haring.webp",
-    ingredienten: "Haring (Clupea harengus) [VIS]. Geen toegevoegde stoffen. Rauwe haring, conform EU parasietenverordening voorbehandeld.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "varlaks-zalm",
-    naam: "Verse Zalm — VÅRLAKS",
-    desc: "Atlantische zalm (Salmo salar) van VÅRLAKS uit Noord-Noorwegen. Vraag ons naar actuele herkomst, beschikbaarheid en certificering van de levering.",
-    categorie: "verse-vis",
-    badge: "VÅRLAKS",
-    omega3: true,
-    highlight: true,
-    bestelId: "varlaks",
-    ingredienten: "Atlantische zalm (Salmo salar) [VIS].",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "zalmfilet",
-    naam: "Zalmfilet",
-    desc: "Verse zalmfilet — mals en rijk van smaak. Vraag ons naar de actuele VÅRLAKS-levering, herkomst en certificering.",
-    categorie: "verse-vis",
-    badge: "ASC",
-    omega3: true,
-    bestelId: "varlaks",
-    ingredienten: "Atlantische zalm (Salmo salar) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "zalmforel",
-    naam: "Zalmforel",
-    desc: "Zalmforel (Oncorhynchus mykiss) heeft het roze vlees en de rijke smaak van zalm, maar iets milder. Een veelzijdige vis voor grillen of bakken.",
-    categorie: "verse-vis",
-    ingredienten: "Zalmforel (Oncorhynchus mykiss) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "tonijnfilet",
-    naam: "Tonijnfilet",
-    desc: "Verse tonijnfilet (Thunnus albacares) — stevig, rood visvlees met een volle smaak. Lekker gegrild of gebakken. Voor rauwe bereidingen gelden aparte veiligheidsmaatregelen.",
-    categorie: "verse-vis",
-    ingredienten: "Geelvintonijn (Thunnus albacares) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "zeeduivelfilet",
-    naam: "Zeeduivelfilet",
-    desc: "Zeeduivel (Lophius piscatorius) — stevig, lobstervlees-achtig wit vlees zonder graat. Perfect voor stoofpotjes, grillen of in een risotto.",
-    categorie: "verse-vis",
-    ingredienten: "Zeeduivel / Hamvis (Lophius piscatorius) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-
-  // ─── GEROOKTE VIS ──────────────────────────────────────────────────────────
-  {
-    slug: "gerookte-zalm-high-seas",
-    naam: "Gerookte Zalm — High Seas",
-    desc: "Koud gerookte kweekzalm (Salmo salar) uit Noorwegen, lang gesneden in dunne plakken. Van W.G. Den Heijer & Zn. uit Scheveningen. ASC gecertificeerd.",
-    categorie: "gerookte-vis",
-    badge: "ASC",
-    omega3: true,
-    bestelId: "zalm-gerookt",
-    photo: "/images/producten-hd/gerookte-zalm-high-seas.webp",
-    ingredienten: "Atlantische zalm (Salmo salar) [VIS], zout, rook.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "gerookte-wilde-zalm",
-    naam: "Gerookte Wilde Zalm",
-    desc: "Koud gerookte wilde zalm (Oncorhynchus spp.) uit Alaska — dieper van smaak dan kweekzalm. Een echte delicatesse voor bijzondere gelegenheden.",
-    categorie: "gerookte-vis",
-    omega3: true,
-    photo: "/images/producten-hd/gerookte-wilde-zalm.webp",
-    ingredienten: "Wilde Pacifische zalm (Oncorhynchus spp.) [VIS], zout, rook.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "gravad-lax",
-    naam: "Gravad Lax",
-    desc: "Klassiek Scandinavisch gezouten en met dille gekruide zalm. Niet gerookt maar gedroogd met zout, suiker en dille — zijdezacht van textuur.",
-    categorie: "gerookte-vis",
-    omega3: true,
-    photo: "/images/producten-hd/gravad-lax.webp",
-    ingredienten: "Atlantische zalm (Salmo salar) [VIS], zout, suiker, dille.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "gerookte-bokking",
-    naam: "Gerookte Bokking",
-    desc: "Warm gerookte haring (Clupea harengus) — een eeuwenoud Hollands product. Volle, rokerige smaak. Zowel heel als als bosje bokking verkrijgbaar.",
-    categorie: "gerookte-vis",
-    photo: "/images/producten-hd/gerookte-bokking.webp",
-    ingredienten: "Haring (Clupea harengus) [VIS], zout, rook.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "gerookte-forelfilet",
-    naam: "Gerookte Forelfilet",
-    desc: "Warm gerookte forelfilet (Oncorhynchus mykiss) — delicaat, mild rokerig en rijk van smaak. Heerlijk op een broodje of in een salade.",
-    categorie: "gerookte-vis",
-    ingredienten: "Forel (Oncorhynchus mykiss) [VIS], zout, rook.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "gerookte-heilbot",
-    naam: "Gerookte Heilbotfilet",
-    desc: "Fijnmazig, vet gerookt heilbotvlees (Hippoglossus hippoglossus) — bijna boterarchtig van textuur. Een echte delicatesse op een borrelplank.",
-    categorie: "gerookte-vis",
-    photo: "/images/producten-hd/gerookte-heilbot.webp",
-    ingredienten: "Heilbot (Hippoglossus hippoglossus) [VIS], zout, rook.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "gerookte-kipper",
-    naam: "Gerookte Kipper",
-    desc: "Traditioneel gerookte haring, gespleten en koud gerookt. De kipper is een van de oudste conserveringsmethoden voor vis.",
-    categorie: "gerookte-vis",
-    photo: "/images/producten-hd/gerookte-kipper.webp",
-    ingredienten: "Haring (Clupea harengus) [VIS], zout, rook.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "bosje-sprot",
-    naam: "Bosje Sprot",
-    desc: "Gerookte sprot (Sprattus sprattus) — kleine vette visjes met een intense, rokerige smaak. Uitstekend als borrelhapje of op donker brood.",
-    categorie: "gerookte-vis",
-    photo: "/images/producten-hd/bosje-sprot.webp",
-    ingredienten: "Sprot (Sprattus sprattus) [VIS], zout, rook.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-
-  // ─── SCHAAL- & SCHELPDIEREN ────────────────────────────────────────────────
-  {
-    slug: "hollandse-garnalen",
-    naam: "Hollandse Garnalen",
-    desc: "Dagverse Noordzeegarnalen (Crangon crangon) van Heiploeg & SOLT — gevangen door de traditionele garnalenvloot, dagelijks gekookt en gepeld aan de Waddenkust. MSC-gecertificeerd sinds 2017.",
-    categorie: "schaal-schelp",
-    badge: "MSC",
-    bestelId: "garnalen-hollands",
-    photo: "/images/producten-hd/hollandse-garnalen.webp",
-    ingredienten: "Hollandse garnalen (Crangon crangon) [SCHAALDIEREN], zout. Kan conserveermiddel E223 bevatten [SULFIET].",
-    bevat: ["SCHAALDIEREN", "SULFIET"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "noorse-garnalen",
-    naam: "Noorse Garnalen",
-    desc: "Noorse garnalen (Pandalus borealis) uit de koude Noord-Atlantische Oceaan — gepeld en direct klaar voor gebruik. Klein, zoet en mals van smaak.",
-    categorie: "schaal-schelp",
-    photo: "/images/producten-hd/noorse-garnalen.webp",
-    ingredienten: "Noorse garnalen (Pandalus borealis) [SCHAALDIEREN], zout. Kan conserveermiddel (E221) bevatten.",
-    bevat: ["SCHAALDIEREN"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "franse-gambas",
-    naam: "Franse Gamba's",
-    desc: "Grote, verse gamba's (Penaeus vannamei) — stevig van textuur en vol van smaak. Perfect om te grillen of te bakken in knoflookolie.",
-    categorie: "schaal-schelp",
-    photo: "/images/producten-hd/franse-gambas.webp",
-    ingredienten: "Gamba's (Litopenaeus vannamei) [SCHAALDIEREN]. Geen toegevoegde stoffen.",
-    bevat: ["SCHAALDIEREN"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "gekookte-gambas",
-    naam: "Gekookte Gamba's (Crevettes)",
-    desc: "Voorgekookte en gekoelde gamba's — direct klaar om te eten. Heerlijk bij een borrel met dipsaus of in een salade.",
-    categorie: "schaal-schelp",
-    photo: "/images/producten-hd/gekookte-gambas.webp",
-    ingredienten: "Gamba's (Penaeus spp.) [SCHAALDIEREN], water, zout.",
-    bevat: ["SCHAALDIEREN"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "zeeuwse-mosselen",
-    naam: "Zeeuwse Mosselen",
-    desc: "Verse Zeeuwse mosselen (Mytilus edulis) — gekweekt in de Zeeuwse wateren. Het Zeeuwse mosselseizoen loopt meestal van juli tot april. De start en beschikbaarheid kunnen per jaar verschillen.",
-    categorie: "schaal-schelp",
-    ingredienten: "Mosselen (Mytilus edulis) [WEEKDIEREN].",
-    bevat: ["WEEKDIEREN"],
-    beschikbaar: "seizoensgebonden",
-  },
-  {
-    slug: "creuse-oesters",
-    naam: "Creuse Oesters",
-    desc: "Franse creuse oesters (Crassostrea gigas) — zout, fris en romig van smaak. Wij leveren per dozijn. Vraag naar de maat van de dag.",
-    categorie: "schaal-schelp",
-    ingredienten: "Oesters (Crassostrea gigas) [WEEKDIEREN].",
-    bevat: ["WEEKDIEREN"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "kokkels",
-    naam: "Kokkels",
-    desc: "Verse Zeeuwse kokkels (Cerastoderma edule) — een Hollands borrelhapje bij uitstek. Zout, zeers en vol van smaak.",
-    categorie: "schaal-schelp",
-    photo: "/images/producten-hd/kokkels.webp",
-    ingredienten: "Kokkels (Cerastoderma edule) [WEEKDIEREN], zout, azijn.",
-    bevat: ["WEEKDIEREN"],
-    beschikbaar: "seizoensgebonden",
-  },
-  {
-    slug: "coquilles",
-    naam: "Coquilles",
-    desc: "Verse coquilles (Pecten maximus) — mals en licht zoet van smaak. Binnen 2 minuten klaar in de pan. Ideaal als voorgerecht of borrelschotel.",
-    categorie: "schaal-schelp",
-    photo: "/images/producten-hd/coquilles.webp",
-    ingredienten: "Coquilles (Pecten maximus) [WEEKDIEREN].",
-    bevat: ["WEEKDIEREN"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "krabklauwen",
-    naam: "Krabklauwen",
-    desc: "Voorgekookte krabklauwen — vol smaak en direct klaar. Heerlijk met een citroenbotersausje of als onderdeel van een visplankje.",
-    categorie: "schaal-schelp",
-    photo: "/images/producten-hd/krabklauwen.webp",
-    ingredienten: "Krab (Cancer pagurus) [SCHAALDIEREN], zout, water.",
-    bevat: ["SCHAALDIEREN"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "inktvis",
-    naam: "Inktvis",
-    desc: "Verse inktvis (Loligo vulgaris) — schoongemaakt en klaar voor de bereidng. Lekker op de grill, als fritto misto of in een stoofpot.",
-    categorie: "schaal-schelp",
-    photo: "/images/producten-hd/inktvis.webp",
-    ingredienten: "Inktvis (Loligo vulgaris) [WEEKDIEREN]. Geen toegevoegde stoffen.",
-    bevat: ["WEEKDIEREN"],
-    beschikbaar: "seizoensgebonden",
-  },
-  {
-    slug: "scheermessen",
-    naam: "Scheermessen",
-    desc: "Verse scheermessen (Ensis directus) — een bijzondere Noordzee-delicatesse. Snel te bereiden en heerlijk met look en peterselie.",
-    categorie: "schaal-schelp",
-    ingredienten: "Scheermessen (Ensis directus) [WEEKDIEREN].",
-    bevat: ["WEEKDIEREN"],
-    beschikbaar: "seizoensgebonden",
-  },
-
-  // ─── VISSALADES ────────────────────────────────────────────────────────────
-  {
-    slug: "zalmsalade",
-    naam: "Zalmsalade",
-    desc: "Huisgemaakte zalmsalade van verse zalm, mayonaise, ui en kruiden. Heerlijk op brood of als borrelhapje.",
-    categorie: "vissalades",
-    ingredienten: "Zalm [VIS], mayonaise (zonnebloemolie, EIEREN, azijn, MOSTERD), ui, dille, zout, peper.",
-    bevat: ["VIS", "EIEREN", "MOSTERD"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "krabsalade",
-    naam: "Krabsalade",
-    desc: "Verse krabsalade met surimi of echte krab, romige mayonaise en lenteui. Fris en smaakvol.",
-    categorie: "vissalades",
-    photo: "/images/producten-hd/krabsalade.webp",
-    ingredienten: "Krab / surimi [VIS, SCHAALDIEREN], mayonaise (EIEREN, MOSTERD), lenteui, zout, paprika.",
-    bevat: ["VIS", "SCHAALDIEREN", "EIEREN", "MOSTERD"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "tonijnsalade",
-    naam: "Tonijnsalade",
-    desc: "Klassieke tonijnsalade van tonijn uit blik, verse mayonaise, ui en augurk. Veelzijdig op brood of als snack.",
-    categorie: "vissalades",
-    ingredienten: "Tonijn (Thunnus albacares) [VIS], mayonaise (EIEREN, MOSTERD), ui, augurk, zout, peper.",
-    bevat: ["VIS", "EIEREN", "MOSTERD"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "garnalensalade",
-    naam: "Garnalensalade",
-    desc: "Verse garnalensalade van Hollandse Noordzeegarnalen met huisgemaakte cocktailsaus. Romig, zoet en licht pittig.",
-    categorie: "vissalades",
-    ingredienten: "Hollandse garnalen (Crangon crangon) [SCHAALDIEREN], mayonaise (EIEREN, MOSTERD), cocktailsaus (tomatenpuree, suiker, citroensap), zout.",
-    bevat: ["SCHAALDIEREN", "EIEREN", "MOSTERD"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "zeewiersalade",
-    naam: "Zeewiersalade (Wakame)",
-    desc: "Frisse wakame zeewiersalade met sesamolie en sojasaus — een Japanse klassieker die uitstekend past bij gerookte vis.",
-    categorie: "vissalades",
-    ingredienten: "Wakame zeewier (Undaria pinnatifida), sesamolie, SOJA saus (water, sojabonen [SOJA], tarwe [GLUTEN], zout), azijn, suiker, sesamzaad [SESAMZAAD].",
-    bevat: ["SOJA", "GLUTEN", "SESAMZAAD"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "visschaal",
-    naam: "Visschaal / Vistrio op Bestelling",
-    desc: "Een samengestelde visschotel naar wens — gerookte vis, salades, schaal- en schelpdieren. Ideaal voor feestjes en borrels. Inhoud in overleg.",
-    categorie: "vissalades",
-    bestelId: "feestschotel",
-    ingredienten: "Wisselende selectie VIS, SCHAALDIEREN en/of WEEKDIEREN, diverse sauzen en garneringen. Bevat EIEREN, MOSTERD. Kan GLUTEN en MELK bevatten. Samenstelling in overleg.",
-    bevat: ["VIS", "SCHAALDIEREN", "WEEKDIEREN", "EIEREN", "MOSTERD"],
-    beschikbaar: "op bestelling",
-  },
-
-  // ─── BEREID & SNACKS ───────────────────────────────────────────────────────
-  {
-    slug: "kibbeling",
-    naam: "Kibbeling",
-    desc: "Knapperig gebakken stukjes witvis in een luchtig, goudbruin beslag — dé Hollandse klassieker. Wij maken kibbeling van kabeljauw (rijkere smaak) óf pollak (MSC, mild). Vraag naar de vis van de dag.",
-    categorie: "bereid",
-    bestelId: "kibbeling-pollak",
-    ingredienten: "Witvis (kabeljauw Gadus morhua of pollak Theragra chalcogramma) [VIS], TARWEBLOEM, water, zout, rijsmiddel (E450, E500), plantaardige olie. Bereid in frituurvet. Ravigotesaus apart verkrijgbaar; vraag naar de actuele ingrediënten en allergenen van de saus.",
-    bevat: ["VIS", "GLUTEN (tarwe)", "EIEREN", "MOSTERD"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "lekkerbek",
-    naam: "Lekkerbek",
-    desc: "Lekkerbek van heekfilet, gebakken in een luchtig, knapperig beslag. Heerlijk warm uit de winkel of van onze marktkraam.",
-    categorie: "bereid",
-    bestelId: "lekkerbek",
-    ingredienten: "Heek [VIS], TARWEBLOEM, water, zout, rijsmiddel, plantaardige olie. Bereid in frituurvet.",
-    bevat: ["VIS", "GLUTEN (tarwe)"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "broodje-haring",
-    naam: "Broodje Haring",
-    desc: "Rauwe Hollandse Nieuwe haring op een zacht broodje met fijngehakte ui en knapperige augurk. Een van de voedzaamste producten in ons assortiment.",
-    categorie: "bereid",
-    omega3: true,
-    bestelId: "haring",
-    ingredienten: "HARING (Clupea harengus) [VIS], broodrol (TARWEBLOEM, gist, water, zout) [GLUTEN], ui, augurk (komkommer, azijn, suiker, MOSTERD), zout.",
-    bevat: ["VIS", "GLUTEN (tarwe)", "MOSTERD"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "vissoep",
-    naam: "Vissoep",
-    desc: "Dagelijks vers bereid in onze eigen keuken. Samenstelling wisselt op basis van het seizoensaanbod — altijd met verse vis als basis. Vol smaak, warm en voedzaam.",
-    categorie: "bereid",
-    bestelId: "vissoep",
-    ingredienten: "Verse vis (wisselend) [VIS], water, ui, wortel, SELDERIJ, prei, aardappel, kruiden, zout. Kan room [MELK] bevatten.",
-    bevat: ["VIS", "SELDERIJ", "kan MELK bevatten"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "vispotje",
-    naam: "Vispotje",
-    desc: "Een romig stoofpotje met verse stukken vis in een rijke saus. Ideaal als uitgebreid tussendoortje of lichte maaltijd. De vissoort wisselt met het seizoen.",
-    categorie: "bereid",
-    ingredienten: "Verse vis (wisselend) [VIS], kookroom [MELK], ui, wortel, SELDERIJ, kruiden, zout, peper.",
-    bevat: ["VIS", "MELK", "SELDERIJ"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "feestschotel",
-    naam: "Feestelijke Visschotel",
-    desc: "Een indrukwekkende schaal met een selectie van onze beste producten — perfect voor bijzondere gelegenheden, borrels of een feestelijk diner. Inhoud en grootte in overleg.",
-    categorie: "bereid",
-    bestelId: "feestschotel",
-    ingredienten: "Wisselende selectie verse en gerookte VIS, SCHAALDIEREN en/of WEEKDIEREN, diverse sauzen. Kan EIEREN, GLUTEN en MELK bevatten.",
-    bevat: ["VIS", "SCHAALDIEREN", "WEEKDIEREN", "kan EIEREN, GLUTEN, MELK bevatten"],
-    beschikbaar: "op bestelling",
-  },
-
-  // ─── UITBREIDING — extra soorten & varianten ───────────────────────────────
-  {
-    slug: "leng",
-    naam: "Leng",
-    desc: "Leng (Molva molva), een langgerekte zeevis met stevig, mild wit vlees. Uitstekend om te bakken of te stoven en een mooi alternatief voor kabeljauw.",
-    categorie: "verse-vis",
-    ingredienten: "Leng (Molva molva) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "vleugelrog",
-    naam: "Vleugelrog",
-    desc: "Roggevleugel (Leucoraja naevus) — bijzonder mals vlees met kraakbeen in plaats van graten. Klassiek bereid met bruine boter en kappertjes.",
-    categorie: "verse-vis",
-    photo: "/images/producten-hd/vleugelrog.webp",
-    ingredienten: "Rog (Leucoraja naevus) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "kabeljauwhaas",
-    naam: "Kabeljauwhaas",
-    desc: "Het dikke ruggenstuk (de 'haas') van de kabeljauw (Gadus morhua) — het mooiste, gelijkmatigste deel met sneeuwwitte vlokken. Premium stuk voor de oven of pan.",
-    categorie: "verse-vis",
-    photo: "/images/producten-hd/kabeljauwhaas.webp",
-    ingredienten: "Kabeljauw (Gadus morhua) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "zalmmoot",
-    naam: "Zalmmoot",
-    desc: "Dwars gesneden moot Atlantische zalm (Salmo salar) met graat en huid — ideaal om te grillen of in de oven. Vraag naar actuele herkomst en productinformatie.",
-    categorie: "verse-vis",
-    badge: "ASC",
-    omega3: true,
-    bestelId: "varlaks",
-    ingredienten: "Atlantische zalm (Salmo salar) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "gerookte-zalm-snippers",
-    naam: "Gerookte Zalm Snippers",
-    desc: "Royale randstukken van gerookte zalm — vol van smaak en voordelig. Heerlijk door de pasta, op toast of door roerei. Van High Seas (W.G. Den Heijer, Scheveningen). ASC.",
-    categorie: "gerookte-vis",
-    badge: "ASC",
-    omega3: true,
-    photo: "/images/producten-hd/gerookte-zalm-snippers.webp",
-    ingredienten: "Atlantische zalm (Salmo salar) [VIS], zout, rook.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "langoustines",
-    naam: "Langoustines",
-    desc: "Noorse kreeftjes (Nephrops norvegicus) — fijn, zoet schaaldiervlees. Heerlijk kort gegrild of gebakken met knoflook en peterselie.",
-    categorie: "schaal-schelp",
-    photo: "/images/producten-hd/langoustines.webp",
-    ingredienten: "Langoustines (Nephrops norvegicus) [SCHAALDIEREN].",
-    bevat: ["SCHAALDIEREN"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "hele-krab",
-    naam: "Hele Noordzeekrab",
-    desc: "Gekookte hele Noordzeekrab (Cancer pagurus) — vol bruin en wit krabvlees. Een echte delicatesse om zelf uit te peuteren bij een glas witte wijn.",
-    categorie: "schaal-schelp",
-    ingredienten: "Noordzeekrab (Cancer pagurus) [SCHAALDIEREN], zout.",
-    bevat: ["SCHAALDIEREN"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "vongole",
-    naam: "Vongole",
-    desc: "Verse venusschelpen (Ruditapes decussatus) — klein, zout en vol van smaak. Onmisbaar in een echte spaghetti alle vongole.",
-    categorie: "schaal-schelp",
-    ingredienten: "Venusschelpen (Ruditapes decussatus) [WEEKDIEREN].",
-    bevat: ["WEEKDIEREN"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "fine-de-claire-oesters",
-    naam: "Fine de Claire Oesters",
-    desc: "Franse Fine de Claire oesters (Crassostrea gigas) uit Marennes-Oléron, IGP-beschermd. Mild en licht nootachtig — rijpen na in de kleirijke claires. Per dozijn.",
-    categorie: "schaal-schelp",
-    badge: "IGP",
-    ingredienten: "Oesters (Crassostrea gigas) [WEEKDIEREN].",
-    bevat: ["WEEKDIEREN"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "surimisalade",
-    naam: "Surimisalade",
-    desc: "Frisse, romige salade van surimi met huisgemaakte dressing. Lekker op brood of als borrelhapje.",
-    categorie: "vissalades",
-    ingredienten: "Surimi (witvis [VIS], zetmeel, suiker), mayonaise (zonnebloemolie, EIEREN, azijn, MOSTERD), ui, kruiden, zout. Kan SCHAALDIEREN en SOJA bevatten.",
-    bevat: ["VIS", "EIEREN", "MOSTERD"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "garnalenkroketten",
-    naam: "Garnalenkroketten",
-    desc: "Ambachtelijke kroketten met een romige vulling van Hollandse garnalen. Knapperig gefrituurd — een klassieke borrel- of lunchsnack.",
-    categorie: "bereid",
-    photo: "/images/producten-hd/garnalenkroketten.webp",
-    ingredienten: "Hollandse garnalen (Crangon crangon) [SCHAALDIEREN], bechamel (TARWEBLOEM [GLUTEN], boter [MELK], MELK), paneermeel [GLUTEN], EIEREN, kruiden, zout. Bereid in frituurvet.",
-    bevat: ["SCHAALDIEREN", "GLUTEN (tarwe)", "MELK", "EIEREN"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "calamares",
-    naam: "Calamares (Inktvisringen)",
-    desc: "Knapperig gefrituurde inktvisringen in een luchtig beslag. Heerlijk met een knoflook- of aioli-dip — zo van de borrelplank.",
-    categorie: "bereid",
-    ingredienten: "Inktvis (Loligo vulgaris) [WEEKDIEREN], TARWEBLOEM [GLUTEN], water, zout, plantaardige olie. Bereid in frituurvet.",
-    bevat: ["WEEKDIEREN", "GLUTEN (tarwe)"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "visburger",
-    naam: "Visburger",
-    desc: "Huisgemaakte visburger van verse witvis met kruiden — sappig van binnen, krokant van buiten. Lekker op een broodje met sla en remouladesaus.",
-    categorie: "bereid",
-    ingredienten: "Witvis (kabeljauw of koolvis) [VIS], paneermeel/TARWEBLOEM [GLUTEN], EIEREN, ui, peterselie, kruiden, zout. Bereid in frituurvet.",
-    bevat: ["VIS", "GLUTEN (tarwe)", "EIEREN"],
-    beschikbaar: "dagelijks",
-  },
-
-  // ─── UITBREIDING 2 — extra soorten & varianten ─────────────────────────────
-  {
-    slug: "zeewolf",
-    naam: "Zeewolf",
-    desc: "Zeewolf (Anarhichas lupus) uit de koude noordelijke wateren. Stevig, wit vlees met een volle, licht zoete smaak — houdt goed zijn structuur bij bakken of grillen.",
-    categorie: "verse-vis",
-    ingredienten: "Zeewolf (Anarhichas lupus) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "zwaardvis",
-    naam: "Zwaardvismoot",
-    desc: "Moot zwaardvis (Xiphias gladius) — stevig, mager vlees met een vleesachtig karakter. Kort en heet grillen; heerlijk met citroen en olijfolie.",
-    categorie: "verse-vis",
-    ingredienten: "Zwaardvis (Xiphias gladius) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "verse-heilbot",
-    naam: "Verse Heilbot",
-    desc: "Heilbot (Hippoglossus hippoglossus), de grootste platvis van de noordelijke zeeën. Fijn, boterzacht wit vlees — een echte delicatesse, mals en mager.",
-    categorie: "verse-vis",
-    ingredienten: "Heilbot (Hippoglossus hippoglossus) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "kabeljauwwangen",
-    naam: "Kabeljauwwangen",
-    desc: "De wangen van de kabeljauw (Gadus morhua) — kleine, ronde stukjes met een fijne, bijna schaaldier-achtige structuur. Een geliefde delicatesse, snel gebakken in boter.",
-    categorie: "verse-vis",
-    ingredienten: "Kabeljauw (Gadus morhua) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "grauwe-poon",
-    naam: "Grauwe Poon",
-    desc: "Grauwe poon (Eutrigla gurnardus), een onderschatte Noordzeevis met stevig, smaakvol wit vlees. Uitstekend voor bouillabaisse of gewoon in de pan.",
-    categorie: "verse-vis",
-    ingredienten: "Grauwe poon (Eutrigla gurnardus) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "seizoensgebonden",
-  },
-  {
-    slug: "hele-kreeft",
-    naam: "Hele Kreeft",
-    desc: "Europese kreeft (Homarus gammarus) — het summum onder de schaaldieren. Zoet, stevig vlees. Gekookt verkrijgbaar; verse levering op bestelling.",
-    categorie: "schaal-schelp",
-    ingredienten: "Kreeft (Homarus gammarus) [SCHAALDIEREN], zout.",
-    bevat: ["SCHAALDIEREN"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "tijgergarnalen",
-    naam: "Tijgergarnalen",
-    desc: "Grote tijgergarnalen (Penaeus monodon) met stevig, sappig vlees. Perfect voor de barbecue, in een curry of gebakken in knoflook en peterselie.",
-    categorie: "schaal-schelp",
-    photo: "/images/producten-hd/tijgergarnalen.webp",
-    ingredienten: "Tijgergarnalen (Penaeus monodon) [SCHAALDIEREN]. Geen toegevoegde stoffen.",
-    bevat: ["SCHAALDIEREN"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "wulken",
-    naam: "Wulken",
-    desc: "Gekookte wulken (Buccinum undatum) — een traditioneel Hollands zeeslakje met een stevige beet en volle zeesmaak. Zo uit het vuistje of met een knoflookmayonaise.",
-    categorie: "schaal-schelp",
-    ingredienten: "Wulken (Buccinum undatum) [WEEKDIEREN], zout.",
-    bevat: ["WEEKDIEREN"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "gerookte-forel-heel",
-    naam: "Gerookte Forel (heel)",
-    desc: "Hele warm gerookte forel (Oncorhynchus mykiss) — mild rokerig, sappig en direct klaar om te eten. Heerlijk met een frisse mierikswortelsaus.",
-    categorie: "gerookte-vis",
-    omega3: true,
-    photo: "/images/producten-hd/gerookte-forel-heel.webp",
-    ingredienten: "Forel (Oncorhynchus mykiss) [VIS], zout, rook.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "warm-gerookte-zalm",
-    naam: "Warm Gerookte Zalm",
-    desc: "Warm gerookte zalmfilet (Salmo salar) — steviger en voller van smaak dan de koud gerookte variant. Uit elkaar te plukken in salades of pasta. ASC.",
-    categorie: "gerookte-vis",
-    badge: "ASC",
-    omega3: true,
-    ingredienten: "Atlantische zalm (Salmo salar) [VIS], zout, rook.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "zeevruchtensalade",
-    naam: "Zeevruchtensalade",
-    desc: "Frisse salade van gemengde zeevruchten met een lichte dressing. Mediterraan van smaak — heerlijk als voorgerecht of op een stukje stokbrood.",
-    categorie: "vissalades",
-    ingredienten: "Zeevruchten (inktvis [WEEKDIEREN], mosselen [WEEKDIEREN], garnalen [SCHAALDIEREN]), olijfolie, azijn, knoflook, peterselie, zout, peper.",
-    bevat: ["WEEKDIEREN", "SCHAALDIEREN"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "garnalencocktail",
-    naam: "Garnalencocktail",
-    desc: "Klassieke garnalencocktail van Hollandse Noordzeegarnalen op een bedje van sla met romige cocktailsaus. Een tijdloos voorgerecht.",
-    categorie: "bereid",
-    ingredienten: "Hollandse garnalen (Crangon crangon) [SCHAALDIEREN], sla, cocktailsaus (mayonaise [EIEREN, MOSTERD], tomatenketchup, citroensap), zout.",
-    bevat: ["SCHAALDIEREN", "EIEREN", "MOSTERD"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "visspies",
-    naam: "Visspies",
-    desc: "Spies van verse zalm, witvis en gamba — kant-en-klaar om te grillen of te bakken. Ideaal voor de barbecue of een snelle, feestelijke maaltijd.",
-    categorie: "bereid",
-    ingredienten: "Zalm (Salmo salar) [VIS], witvis [VIS], gamba's [SCHAALDIEREN], kruiden, olijfolie, zout, peper.",
-    bevat: ["VIS", "SCHAALDIEREN"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "fish-and-chips",
-    naam: "Fish & Chips",
-    desc: "Verse kabeljauw in een luchtig bierbeslag, knapperig gefrituurd — de Britse klassieker. Op bestelling met huisgemaakte friet en remouladesaus.",
-    categorie: "bereid",
-    bestelId: "kibbeling-pollak",
-    ingredienten: "Kabeljauw (Gadus morhua) [VIS], bierbeslag (TARWEBLOEM [GLUTEN], bier [GLUTEN], water, rijsmiddel), plantaardige olie. Bereid in frituurvet. Remouladesaus: mayonaise (EIEREN, MOSTERD).",
-    bevat: ["VIS", "GLUTEN (tarwe)", "EIEREN", "MOSTERD"],
-    beschikbaar: "op bestelling",
-  },
-
-  // ─── UITBREIDING 3 — richting volledig assortiment ─────────────────────────
-  {
-    slug: "snoekbaars",
-    naam: "Snoekbaarsfilet",
-    desc: "Snoekbaars (Sander lucioperca) — verfijnde zoetwatervis met stevig, wit en graatarm vlees. Een klassieker in de fijne keuken, mooi op de huid gebakken.",
-    categorie: "verse-vis",
-    ingredienten: "Snoekbaars (Sander lucioperca) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "tongschar",
-    naam: "Tongschar",
-    desc: "Tongschar (Microstomus kitt) — een fijne platvis tussen tong en schar in. Delicaat, mals en licht zoet. Snel in de boter gebakken op zijn best.",
-    categorie: "verse-vis",
-    ingredienten: "Tongschar (Microstomus kitt) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "seizoensgebonden",
-  },
-  {
-    slug: "bot",
-    naam: "Bot",
-    desc: "Bot (Platichthys flesus) — een Hollandse platvis uit de kust- en riviermondingen. Mager, betaalbaar en licht van smaak; heerlijk gebakken.",
-    categorie: "verse-vis",
-    ingredienten: "Bot (Platichthys flesus) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "seizoensgebonden",
-  },
-  {
-    slug: "sardines",
-    naam: "Verse Sardines",
-    desc: "Verse sardines (Sardina pilchardus) — kleine, vette visjes boordevol omega-3. Op de grill met wat zeezout en citroen een mediterrane traktatie.",
-    categorie: "verse-vis",
-    omega3: true,
-    ingredienten: "Sardines (Sardina pilchardus) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "seizoensgebonden",
-  },
-  {
-    slug: "ansjovis",
-    naam: "Verse Ansjovis",
-    desc: "Verse ansjovis (Engraulis encrasicolus) — klein, vet en vol van smaak. Kort gebakken of gemarineerd (boquerones) een echte delicatesse.",
-    categorie: "verse-vis",
-    omega3: true,
-    ingredienten: "Ansjovis (Engraulis encrasicolus) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "spiering",
-    naam: "Spiering",
-    desc: "Spiering (Osmerus eperlanus) — een klein, traditioneel Hollands visje met een kenmerkende komkommergeur. Door de bloem en knapperig gebakken.",
-    categorie: "verse-vis",
-    ingredienten: "Spiering (Osmerus eperlanus) [VIS]. Bij gebakken bereiding: TARWEBLOEM [GLUTEN].",
-    bevat: ["VIS"],
-    beschikbaar: "seizoensgebonden",
-  },
-  {
-    slug: "skrei",
-    naam: "Skrei (winterkabeljauw)",
-    desc: "Skrei — de premium winterkabeljauw (Gadus morhua) die vanuit de Barentszzee naar de Lofoten trekt om te paaien. Sneeuwwit, stevig en op zijn allerbest van januari tot april.",
-    categorie: "verse-vis",
-    ingredienten: "Kabeljauw / Skrei (Gadus morhua) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "seizoensgebonden",
-  },
-  {
-    slug: "zeeforel",
-    naam: "Zeeforel",
-    desc: "Zeeforel (Salmo trutta) — familie van de zalm met roze, fijn vlees en een milde smaak. Veelzijdig: bakken, grillen of in de oven.",
-    categorie: "verse-vis",
-    omega3: true,
-    ingredienten: "Zeeforel (Salmo trutta) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "tilapiafilet",
-    naam: "Tilapiafilet",
-    desc: "Tilapiafilet (Oreochromis niloticus) — mild, mager en graatvrij wit visvlees. Neutraal van smaak en dankbaar in currygerechten of gepaneerd.",
-    categorie: "verse-vis",
-    ingredienten: "Tilapia (Oreochromis niloticus) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "victoriabaars",
-    naam: "Victoriabaarsfilet",
-    desc: "Victoriabaars / nijlbaars (Lates niloticus) — een grote zoetwatervis met stevige, witte filets zonder graat. Houdt goed zijn vorm bij bakken of stoven.",
-    categorie: "verse-vis",
-    ingredienten: "Victoriabaars (Lates niloticus) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "gerookte-zalmmoot",
-    naam: "Warm Gerookte Zalmmoot",
-    desc: "Warm gerookte moot Atlantische zalm (Salmo salar) — stevig en vol van smaak, in dikke porties. Direct te eten of te verkruimelen door een salade. ASC.",
-    categorie: "gerookte-vis",
-    badge: "ASC",
-    omega3: true,
-    ingredienten: "Atlantische zalm (Salmo salar) [VIS], zout, rook.",
-    bevat: ["VIS"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "gerookte-sprotfilet",
-    naam: "Gerookte Sprotfilet",
-    desc: "Fijne, ontgraten filetjes van gerookte sprot (Sprattus sprattus) — intens rokerig en zilt. Heerlijk op donker brood of door een aardappelsalade.",
-    categorie: "gerookte-vis",
-    ingredienten: "Sprot (Sprattus sprattus) [VIS], zout, rook.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "rivierkreeftstaartjes",
-    naam: "Rivierkreeftstaartjes",
-    desc: "Gepelde rivierkreeftstaartjes (Astacus spp.) in pekel — mals en zoet. Kant-en-klaar door een salade, pasta of cocktail.",
-    categorie: "schaal-schelp",
-    photo: "/images/producten-hd/rivierkreeftstaartjes.webp",
-    ingredienten: "Rivierkreeft (Astacus spp.) [SCHAALDIEREN], water, zout, zuurteregelaar.",
-    bevat: ["SCHAALDIEREN"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "alikruiken",
-    naam: "Alikruiken",
-    desc: "Gekookte alikruiken (Littorina littorea) — kleine zeeslakjes, een nostalgisch Hollands zeebanket. Met een speldje uit het huisje peuteren.",
-    categorie: "schaal-schelp",
-    ingredienten: "Alikruiken (Littorina littorea) [WEEKDIEREN], zout.",
-    bevat: ["WEEKDIEREN"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "gamba-spiesen",
-    naam: "Gambaspiesen",
-    desc: "Spiesjes van grote gamba's (Penaeus vannamei), kant-en-klaar om te grillen of te bakken. Ideaal voor de barbecue of een borrelplank.",
-    categorie: "schaal-schelp",
-    ingredienten: "Gamba's (Penaeus vannamei) [SCHAALDIEREN], kruiden, olie.",
-    bevat: ["SCHAALDIEREN"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "krabpoten",
-    naam: "Krabpoten",
-    desc: "Voorgekookte krabpoten — vol, zoet krabvlees dat u zelf uit de poot haalt. Feestelijk met een citroen-mayonaise.",
-    categorie: "schaal-schelp",
-    ingredienten: "Krab (Cancer pagurus) [SCHAALDIEREN], zout, water.",
-    bevat: ["SCHAALDIEREN"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "halve-kreeft",
-    naam: "Halve Kreeft",
-    desc: "Gekookte halve kreeft (Homarus gammarus) — kant-en-klaar gehalveerd, ideaal om te gratineren of koud te serveren. Luxe zonder gedoe.",
-    categorie: "schaal-schelp",
-    ingredienten: "Kreeft (Homarus gammarus) [SCHAALDIEREN], zout.",
-    bevat: ["SCHAALDIEREN"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "zalm-dillesalade",
-    naam: "Zalm-dillesalade",
-    desc: "Romige salade van gerookte zalm met verse dille en een vleugje citroen. Verfijnd op toast of bij de borrel.",
-    categorie: "vissalades",
-    ingredienten: "Gerookte zalm [VIS], mayonaise (zonnebloemolie, EIEREN, azijn, MOSTERD), dille, citroen, ui, zout, peper.",
-    bevat: ["VIS", "EIEREN", "MOSTERD"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "haringsalade",
-    naam: "Haringsalade",
-    desc: "Traditionele haringsalade met stukjes haring, bietjes, appel en augurk in een romige dressing. Een Hollandse klassieker.",
-    categorie: "vissalades",
-    ingredienten: "Haring [VIS], rode biet, appel, augurk (MOSTERD), mayonaise (EIEREN, MOSTERD), ui, zout.",
-    bevat: ["VIS", "EIEREN", "MOSTERD"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "mosselsalade",
-    naam: "Mosselsalade",
-    desc: "Frisse salade van gekookte mosselen met een licht kruidige dressing. Lekker als voorgerecht of op brood.",
-    categorie: "vissalades",
-    ingredienten: "Mosselen (Mytilus edulis) [WEEKDIEREN], mayonaise (EIEREN, MOSTERD), ui, peterselie, azijn, zout.",
-    bevat: ["WEEKDIEREN", "EIEREN", "MOSTERD"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "poke-bowl-zalm",
-    naam: "Poke Bowl Zalm",
-    desc: "Verse poke bowl met rauwe zalm, sushirijst, edamame, avocado en sesam. Kant-en-klaar, fris en voedzaam. Op bestelling.",
-    categorie: "bereid",
-    omega3: true,
-    ingredienten: "Zalm (Salmo salar) [VIS], sushirijst, SOJASAUS (SOJA, tarwe [GLUTEN]), edamame [SOJA], avocado, SESAMZAAD, wortel, zeewier, azijn.",
-    bevat: ["VIS", "SOJA", "GLUTEN (tarwe)", "SESAMZAAD"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "gamba-tempura",
-    naam: "Gamba Tempura",
-    desc: "Gamba's in een luchtig tempurabeslag, knapperig gefrituurd. Direct van de frituur het lekkerst, met een zoetzure dip.",
-    categorie: "bereid",
-    ingredienten: "Gamba's (Penaeus vannamei) [SCHAALDIEREN], tempurabeslag (TARWEBLOEM [GLUTEN], water, rijsmiddel), plantaardige olie. Bereid in frituurvet.",
-    bevat: ["SCHAALDIEREN", "GLUTEN (tarwe)"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "visnuggets",
-    naam: "Visnuggets",
-    desc: "Knapperige nuggets van witvis in een krokant jasje — een favoriet bij kinderen. Snel klaar in de oven of frituur.",
-    categorie: "bereid",
-    ingredienten: "Witvis (koolvis of kabeljauw) [VIS], paneermeel/TARWEBLOEM [GLUTEN], EIEREN, kruiden, zout. Bereid in frituurvet.",
-    bevat: ["VIS", "GLUTEN (tarwe)", "EIEREN"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "gebakken-mosselen",
-    naam: "Gebakken Mosselen",
-    desc: "Gepaneerde en gebakken mosseltjes — knapperig van buiten, zacht van binnen. Een geliefde snack met knoflooksaus.",
-    categorie: "bereid",
-    ingredienten: "Mosselen (Mytilus edulis) [WEEKDIEREN], paneermeel/TARWEBLOEM [GLUTEN], EIEREN, plantaardige olie. Knoflooksaus: mayonaise (EIEREN, MOSTERD). Bereid in frituurvet.",
-    bevat: ["WEEKDIEREN", "GLUTEN (tarwe)", "EIEREN", "MOSTERD"],
-    beschikbaar: "op bestelling",
-  },
-
-  // ─── UITBREIDING 4 — richting volledig assortiment ─────────────────────────
-  {
-    slug: "tongfilet",
-    naam: "Tongfilet",
-    desc: "Gefileerde zeetong (Solea solea) — de koningin van de Noordzee, nu graatvrij. Fijnmazig, licht zoet vlees; snel in roomboter gebakken een delicatesse.",
-    categorie: "verse-vis",
-    ingredienten: "Zeetong (Solea solea) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "wilde-zalmfilet",
-    naam: "Wilde Zalmfilet",
-    desc: "Wilde Pacifische zalm (Oncorhynchus spp.) — dieper van kleur en smaak dan kweekzalm, iets steviger van structuur. Een puur, natuurlijk product.",
-    categorie: "verse-vis",
-    omega3: true,
-    ingredienten: "Wilde zalm (Oncorhynchus spp.) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "heilbotfilet",
-    naam: "Heilbotfilet",
-    desc: "Gefileerde heilbot (Hippoglossus hippoglossus) — boterzacht, mager wit vlees zonder graat. Een luxe platvis, mooi gepocheerd of uit de oven.",
-    categorie: "verse-vis",
-    photo: "/images/producten-hd/heilbotfilet.webp",
-    ingredienten: "Heilbot (Hippoglossus hippoglossus) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "zeebrasemfilet",
-    naam: "Zeebrasemfilet",
-    desc: "Zeebrasem (Pagellus bogaraveo) — mediterrane witvis met sappig, fijn vlees en een milde smaak. Heerlijk op de huid gebakken of in de oven met kruiden.",
-    categorie: "verse-vis",
-    ingredienten: "Zeebrasem (Pagellus bogaraveo) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "red-snapperfilet",
-    naam: "Red Snapper Filet",
-    desc: "Red snapper (Lutjanus spp.) — kleurrijke tropische vis met stevig, licht zoet wit vlees. Uitstekend voor de grill of een pittige viscurry.",
-    categorie: "verse-vis",
-    ingredienten: "Red snapper (Lutjanus spp.) [VIS]. Geen toegevoegde stoffen.",
-    bevat: ["VIS"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "gerookte-coquilles",
-    naam: "Gerookte Coquilles",
-    desc: "Zachtgerookte coquilles (Pecten maximus) — subtiel rokerig en romig. Een verfijnd hapje bij de borrel of door een salade.",
-    categorie: "gerookte-vis",
-    ingredienten: "Coquilles (Pecten maximus) [WEEKDIEREN], zout, rook.",
-    bevat: ["WEEKDIEREN"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "gerookte-mosselen",
-    naam: "Gerookte Mosselen",
-    desc: "Gerookte mosseltjes op olie — intens van smaak en direct te eten. Een klassiek borrelhapje op donker brood.",
-    categorie: "gerookte-vis",
-    ingredienten: "Mosselen (Mytilus edulis) [WEEKDIEREN], zonnebloemolie, zout, rook.",
-    bevat: ["WEEKDIEREN"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "krabvlees",
-    naam: "Krabvlees",
-    desc: "Gepeld wit en bruin krabvlees (Cancer pagurus) — zoet en vol van smaak, kant-en-klaar. Voor een luxe salade, pasta of gevulde krab.",
-    categorie: "schaal-schelp",
-    ingredienten: "Krab (Cancer pagurus) [SCHAALDIEREN], zout.",
-    bevat: ["SCHAALDIEREN"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "gerookte-garnalen",
-    naam: "Gerookte Garnalen",
-    desc: "Zachtgerookte garnalen — een bijzondere twist op de klassieker, met een subtiele rooksmaak. Heerlijk door een pasta of op toast.",
-    categorie: "schaal-schelp",
-    ingredienten: "Garnalen (Penaeus vannamei) [SCHAALDIEREN], zout, rook.",
-    bevat: ["SCHAALDIEREN"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "kokkelvlees",
-    naam: "Kokkelvlees",
-    desc: "Gepeld kokkelvlees (Cerastoderma edule) — zilt en zoet, direct klaar voor gebruik. Perfect door een paella, pasta of vissoep.",
-    categorie: "schaal-schelp",
-    ingredienten: "Kokkels (Cerastoderma edule) [WEEKDIEREN], zout, azijn.",
-    bevat: ["WEEKDIEREN"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "noorse-kreeftstaart",
-    naam: "Noorse Kreeftstaartjes",
-    desc: "Gepelde staartjes van de langoustine (Nephrops norvegicus) — mals, zoet en direct klaar. Kort bakken in knoflookboter, meer heeft het niet nodig.",
-    categorie: "schaal-schelp",
-    ingredienten: "Langoustine (Nephrops norvegicus) [SCHAALDIEREN], zout.",
-    bevat: ["SCHAALDIEREN"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "kreeftensalade",
-    naam: "Kreeftensalade",
-    desc: "Luxe salade van kreeft en garnalen in een romige, licht kruidige dressing. Een feestelijk hapje op toast of in een cocktailglas.",
-    categorie: "vissalades",
-    ingredienten: "Kreeft [SCHAALDIEREN], garnalen [SCHAALDIEREN], mayonaise (zonnebloemolie, EIEREN, azijn, MOSTERD), kruiden, zout.",
-    bevat: ["SCHAALDIEREN", "EIEREN", "MOSTERD"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "zeekraalsalade",
-    naam: "Zeekraalsalade",
-    desc: "Frisse zeekraal (zeegroente) met een lichte dressing — knapperig en zilt. Vraag ons naar de ingrediënten en allergenen van de dressing. Een verrassend bijgerecht bij vis.",
-    categorie: "vissalades",
-    ingredienten: "Zeekraal (Salicornia), olijfolie, azijn, zout.",
-    bevat: [],
-    beschikbaar: "seizoensgebonden",
-  },
-  {
-    slug: "vissticks",
-    naam: "Vissticks",
-    desc: "Krokant gepaneerde staafjes van witvis — snel klaar in de oven of pan. Een favoriet bij jong en oud.",
-    categorie: "bereid",
-    ingredienten: "Witvis (koolvis Pollachius virens) [VIS], paneermeel/TARWEBLOEM [GLUTEN], EIEREN, plantaardige olie.",
-    bevat: ["VIS", "GLUTEN (tarwe)", "EIEREN"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "sushi-mix",
-    naam: "Sushi Mix",
-    desc: "Wisselende selectie verse sushi (maki, nigiri) met zalm en tonijn — kant-en-klaar. Op bestelling, ideaal voor een borrel of lunch.",
-    categorie: "bereid",
-    ingredienten: "Zalm [VIS], tonijn [VIS], sushirijst, nori (zeewier), SOJASAUS (SOJA, tarwe [GLUTEN]), SESAMZAAD, azijn, wasabi (MOSTERD).",
-    bevat: ["VIS", "SOJA", "GLUTEN (tarwe)", "SESAMZAAD", "MOSTERD"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "kabeljauwtongen",
-    naam: "Kabeljauwtongen",
-    desc: "Kabeljauwtongen (kaakspiertjes van de kabeljauw) — een Scandinavische delicatesse met een fijne, malse bite. Kort gebakken in boter.",
-    categorie: "bereid",
-    ingredienten: "Kabeljauw (Gadus morhua) [VIS]. Gebakken in boter [MELK] en TARWEBLOEM [GLUTEN].",
-    bevat: ["VIS", "MELK", "GLUTEN (tarwe)"],
-    beschikbaar: "op bestelling",
-  },
-  {
-    slug: "gamba-kroketten",
-    naam: "Gambakroketten",
-    desc: "Romige kroketten gevuld met gamba's — knapperig gefrituurd. Een luxe variant op de klassieke garnalenkroket.",
-    categorie: "bereid",
-    ingredienten: "Gamba's (Penaeus vannamei) [SCHAALDIEREN], bechamel (TARWEBLOEM [GLUTEN], boter [MELK], MELK), paneermeel [GLUTEN], EIEREN, kruiden. Bereid in frituurvet.",
-    bevat: ["SCHAALDIEREN", "GLUTEN (tarwe)", "MELK", "EIEREN"],
-    beschikbaar: "dagelijks",
-  },
-  {
-    slug: "visbitterballen",
-    naam: "Visbitterballen",
-    desc: "Bitterballen met een romige visvulling — een borrelklassieker met een twist. Knapperig gefrituurd, met mosterd erbij.",
-    categorie: "bereid",
-    ingredienten: "Witvis [VIS], bechamel (TARWEBLOEM [GLUTEN], boter [MELK], MELK), paneermeel [GLUTEN], EIEREN, kruiden. Bereid in frituurvet.",
-    bevat: ["VIS", "GLUTEN (tarwe)", "MELK", "EIEREN"],
-    beschikbaar: "dagelijks",
-  },
+  {
+    "slug": "kabeljauwfilet",
+    "naam": "Kabeljauwfilet",
+    "desc": "Verse kabeljauwfilet, zorgvuldig gefileerd en ontgraat. Ideaal om te bakken, stomen of pocheren.",
+    "categorie": "verse-vis",
+    "photo": "/images/producten-hd/kabeljauwfilet.webp",
+    "ingredienten": "Kabeljauw (Gadus morhua) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "dagelijks"
+  },
+  {
+    "slug": "schol",
+    "naam": "Schol",
+    "desc": "Hollandse schol (Pleuronectes platessa), een platvis die bij uitstek thuishoort in onze Noordzee. MSC-gecertificeerd — duurzaam gevangen.",
+    "categorie": "verse-vis",
+    "badge": "MSC",
+    "ingredienten": "Schol (Pleuronectes platessa) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "dagelijks"
+  },
+  {
+    "slug": "scholfilet",
+    "naam": "Scholfilet",
+    "desc": "Verse scholfilet, ontgraat en schoongemaakt. Licht van smaak, perfect om snel te bakken in boter.",
+    "categorie": "verse-vis",
+    "badge": "MSC",
+    "ingredienten": "Schol (Pleuronectes platessa) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "dagelijks"
+  },
+  {
+    "slug": "zeebaars",
+    "naam": "Zeebaars",
+    "desc": "Europese zeebaars (Dicentrarchus labrax), heel of als filet. Stevig wit vlees met een rijke, volle smaak — uitstekend op de grill.",
+    "categorie": "verse-vis",
+    "ingredienten": "Zeebaars (Dicentrarchus labrax) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "shop-often-cart-request"
+  },
+  {
+    "slug": "zeebaarsfilet",
+    "naam": "Zeebaarsfilet",
+    "desc": "Verse zeebaarsfilet, perfect gefileerd. Lekker op de huid gebakken met een scheutje olijfolie en citroen.",
+    "categorie": "verse-vis",
+    "ingredienten": "Zeebaars (Dicentrarchus labrax) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "shop-and-cart-usually"
+  },
+  {
+    "slug": "dorade",
+    "naam": "Dorade",
+    "desc": "Dorade (Sparus aurata), ook wel goudbrasem. Sappig, smaakvol vlees — ideaal om heel te grillen of in de oven te bereiden.",
+    "categorie": "verse-vis",
+    "photo": "/images/producten-hd/dorade.webp",
+    "ingredienten": "Dorade (Sparus aurata) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "shop-always"
+  },
+  {
+    "slug": "dorade-filet",
+    "naam": "Dorade Filet",
+    "desc": "Verse dorade filet, soepel van structuur met een licht zoete smaak. Snel klaar in de pan.",
+    "categorie": "verse-vis",
+    "photo": "/images/producten-hd/dorade-filet.webp",
+    "ingredienten": "Dorade (Sparus aurata) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "request"
+  },
+  {
+    "slug": "tarbot",
+    "naam": "Tarbot",
+    "desc": "De tarbot (Psetta maxima) geldt als de meest prestigieuze platvis van de Noordzee. Vast, smaakvol vlees — een echte delicatesse voor feestelijke gelegenheden.",
+    "categorie": "verse-vis",
+    "ingredienten": "Tarbot (Psetta maxima) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "request"
+  },
+  {
+    "slug": "tarbotfilet",
+    "naam": "Tarbotfilet",
+    "desc": "Vers gefileerde tarbot. Stevig van structuur met een rijke, boterachtiger smaak — weinig bereiding nodig.",
+    "categorie": "verse-vis",
+    "ingredienten": "Tarbot (Psetta maxima) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "request"
+  },
+  {
+    "slug": "wijting",
+    "naam": "Wijting",
+    "desc": "Wijting (Merlangius merlangus) is een fijne witte vis met delicaat, mals vlees. Snel klaar en makkelijk te bereiden — lekker gebakken in de pan.",
+    "categorie": "verse-vis",
+    "ingredienten": "Wijting (Merlangius merlangus) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "sometimes-request"
+  },
+  {
+    "slug": "wijtingfilet",
+    "naam": "Wijtingfilet",
+    "desc": "Gefileerde wijting — dun, mals en snel klaar. Lekker gebakken in de pan of bereid in de oven.",
+    "categorie": "verse-vis",
+    "ingredienten": "Wijting (Merlangius merlangus) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "request"
+  },
+  {
+    "slug": "rode-poon",
+    "naam": "Rode Poon",
+    "desc": "Rode poon (Trigla lucerna) met zijn opvallende rode vinnen. Vast, zacht wit vlees dat uitstekend gebakken of gegrild kan worden.",
+    "categorie": "verse-vis",
+    "photo": "/images/producten-hd/rode-poon.webp",
+    "ingredienten": "Rode poon (Trigla lucerna) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "request"
+  },
+  {
+    "slug": "schar",
+    "naam": "Schar",
+    "desc": "Schar (Limanda limanda), een kleinere platvis uit de Noordzee. Mager, licht van smaak en betaalbaar — een onderschatte klassieke Hollandse vis.",
+    "categorie": "verse-vis",
+    "ingredienten": "Schar (Limanda limanda) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "request"
+  },
+  {
+    "slug": "roodbaars",
+    "naam": "Roodbaars",
+    "desc": "Roodbaars (Sebastes marinus) uit de koude Noord-Atlantische Oceaan. Stevig, smaakvol rood vlees — heerlijk gegrild of in de oven.",
+    "categorie": "verse-vis",
+    "photo": "/images/producten-hd/roodbaars.webp",
+    "ingredienten": "Roodbaars (Sebastes marinus) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "request"
+  },
+  {
+    "slug": "haring",
+    "naam": "Haring",
+    "desc": "Hollandse Nieuwe haring (Clupea harengus) — gevlinderd of op het broodje. Een Hollandse klassieker, een van de rijkste omega-3 bronnen in ons assortiment.",
+    "categorie": "verse-vis",
+    "omega3": true,
+    "photo": "/images/producten-hd/haring.webp",
+    "ingredienten": "Haring (Clupea harengus) [VIS]. Geen toegevoegde stoffen. Rauwe haring, conform EU parasietenverordening voorbehandeld.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "dagelijks"
+  },
+  {
+    "slug": "varlaks-zalm",
+    "naam": "Verse Zalm — VÅRLAKS",
+    "desc": "Atlantische zalm (Salmo salar) van VÅRLAKS uit Noord-Noorwegen. Vraag ons naar actuele herkomst, beschikbaarheid en certificering van de levering.",
+    "categorie": "verse-vis",
+    "badge": "VÅRLAKS",
+    "omega3": true,
+    "highlight": true,
+    "bestelId": "varlaks",
+    "ingredienten": "Atlantische zalm (Salmo salar) [VIS].",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "dagelijks"
+  },
+  {
+    "slug": "tonijnfilet",
+    "naam": "Tonijnfilet",
+    "desc": "Verse tonijnfilet (Thunnus albacares) — stevig, rood visvlees met een volle smaak. Lekker gegrild of gebakken. Voor rauwe bereidingen gelden aparte veiligheidsmaatregelen.",
+    "categorie": "verse-vis",
+    "ingredienten": "Geelvintonijn (Thunnus albacares) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "op bestelling"
+  },
+  {
+    "slug": "gerookte-zalm-high-seas",
+    "naam": "Gerookte Zalm — High Seas",
+    "desc": "Koud gerookte kweekzalm (Salmo salar) uit Noorwegen, lang gesneden in dunne plakken. Van W.G. Den Heijer & Zn. uit Scheveningen. ASC gecertificeerd.",
+    "categorie": "gerookte-vis",
+    "badge": "ASC",
+    "omega3": true,
+    "bestelId": "zalm-gerookt",
+    "photo": "/images/producten-hd/gerookte-zalm-high-seas.webp",
+    "ingredienten": "Atlantische zalm (Salmo salar) [VIS], zout, rook.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "dagelijks"
+  },
+  {
+    "slug": "gerookte-wilde-zalm",
+    "naam": "Gerookte Wilde Zalm",
+    "desc": "Koud gerookte wilde zalm (Oncorhynchus spp.) uit Alaska — dieper van smaak dan kweekzalm. Een echte delicatesse voor bijzondere gelegenheden.",
+    "categorie": "gerookte-vis",
+    "omega3": true,
+    "photo": "/images/producten-hd/gerookte-wilde-zalm.webp",
+    "ingredienten": "Wilde Pacifische zalm (Oncorhynchus spp.) [VIS], zout, rook.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "quality"
+  },
+  {
+    "slug": "gravad-lax",
+    "naam": "Gravad Lax",
+    "desc": "Zalm gepekeld met zout, suiker en dille. Verkrijgbaar wanneer de rokerij goede kwaliteit kan leveren; neem contact op voor de actuele voorraad of een aanvraag.",
+    "categorie": "gerookte-vis",
+    "omega3": true,
+    "photo": "/images/producten-hd/gravad-lax.webp",
+    "ingredienten": "Atlantische zalm (Salmo salar) [VIS], zout, suiker, dille.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "smokehouse-quality"
+  },
+  {
+    "slug": "gerookte-bokking",
+    "naam": "Gerookte Bokking",
+    "desc": "Warm gerookte haring (Clupea harengus) — een eeuwenoud Hollands product. Volle, rokerige smaak. Zowel heel als als bosje bokking verkrijgbaar.",
+    "categorie": "gerookte-vis",
+    "photo": "/images/producten-hd/gerookte-bokking.webp",
+    "ingredienten": "Haring (Clupea harengus) [VIS], zout, rook.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "always"
+  },
+  {
+    "slug": "gerookte-forelfilet",
+    "naam": "Gerookte Forelfilet",
+    "desc": "Warm gerookte forelfilet (Oncorhynchus mykiss) — delicaat, mild rokerig en rijk van smaak. Heerlijk op een broodje of in een salade.",
+    "categorie": "gerookte-vis",
+    "ingredienten": "Forel (Oncorhynchus mykiss) [VIS], zout, rook.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "request"
+  },
+  {
+    "slug": "gerookte-heilbot",
+    "naam": "Gerookte Heilbotfilet",
+    "desc": "Fijnmazig, vet gerookt heilbotvlees (Hippoglossus hippoglossus) — bijna boterarchtig van textuur. Een echte delicatesse op een borrelplank.",
+    "categorie": "gerookte-vis",
+    "photo": "/images/producten-hd/gerookte-heilbot.webp",
+    "ingredienten": "Heilbot (Hippoglossus hippoglossus) [VIS], zout, rook.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "shop-often"
+  },
+  {
+    "slug": "gerookte-kipper",
+    "naam": "Gerookte Kipper",
+    "desc": "Traditioneel gerookte haring, gespleten en koud gerookt. De kipper is een van de oudste conserveringsmethoden voor vis.",
+    "categorie": "gerookte-vis",
+    "photo": "/images/producten-hd/gerookte-kipper.webp",
+    "ingredienten": "Haring (Clupea harengus) [VIS], zout, rook.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "always"
+  },
+  {
+    "slug": "bosje-sprot",
+    "naam": "Bosje Sprot",
+    "desc": "Gerookte sprot (Sprattus sprattus) — kleine vette visjes met een intense, rokerige smaak. Uitstekend als borrelhapje of op donker brood.",
+    "categorie": "gerookte-vis",
+    "photo": "/images/producten-hd/bosje-sprot.webp",
+    "ingredienten": "Sprot (Sprattus sprattus) [VIS], zout, rook.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "request"
+  },
+  {
+    "slug": "hollandse-garnalen",
+    "naam": "Hollandse Garnalen — SOLT",
+    "desc": "Hollandse garnalen van SOLT (Crangon crangon), gepeld en verpakt in Nederland. Bekijk het SOLT-pakket op de foto. MSC-gecertificeerd; controleer het keurmerk en de actuele productinformatie op de verpakking.",
+    "categorie": "schaal-schelp",
+    "badge": "MSC",
+    "bestelId": "garnalen-hollands",
+    "photo": "/images/assortiment-internet/hollandse-garnalen-solt.jpeg",
+    "ingredienten": "Hollandse garnalen (Crangon crangon) [SCHAALDIEREN], zout. Kan conserveermiddel E223 bevatten [SULFIET].",
+    "bevat": [
+      "SCHAALDIEREN",
+      "SULFIET"
+    ],
+    "beschikbaar": "dagelijks"
+  },
+  {
+    "slug": "noorse-garnalen",
+    "naam": "Noorse Garnalen",
+    "desc": "Noorse garnalen (Pandalus borealis) uit de koude Noord-Atlantische Oceaan — gepeld en direct klaar voor gebruik. Klein, zoet en mals van smaak.",
+    "categorie": "schaal-schelp",
+    "photo": "/images/producten-hd/noorse-garnalen.webp",
+    "ingredienten": "Noorse garnalen (Pandalus borealis) [SCHAALDIEREN], zout. Kan conserveermiddel (E221) bevatten.",
+    "bevat": [
+      "SCHAALDIEREN"
+    ],
+    "beschikbaar": "dagelijks"
+  },
+  {
+    "slug": "gekookte-gambas",
+    "naam": "Gekookte Gamba's (Crevettes)",
+    "desc": "Voorgekookte en gekoelde gamba's — direct klaar om te eten. Heerlijk bij een borrel met dipsaus of in een salade.",
+    "categorie": "schaal-schelp",
+    "photo": "/images/producten-hd/gekookte-gambas.webp",
+    "ingredienten": "Gamba's (Penaeus spp.) [SCHAALDIEREN], water, zout.",
+    "bevat": [
+      "SCHAALDIEREN"
+    ],
+    "beschikbaar": "sometimes"
+  },
+  {
+    "slug": "zeeuwse-mosselen",
+    "naam": "Zeeuwse Mosselen",
+    "desc": "Verse Zeeuwse mosselen (Mytilus edulis) — gekweekt in de Zeeuwse wateren. Het Zeeuwse mosselseizoen loopt meestal van juli tot april. De start en beschikbaarheid kunnen per jaar verschillen.",
+    "categorie": "schaal-schelp",
+    "ingredienten": "Mosselen (Mytilus edulis) [WEEKDIEREN].",
+    "bevat": [
+      "WEEKDIEREN"
+    ],
+    "beschikbaar": "request"
+  },
+  {
+    "slug": "creuse-oesters",
+    "naam": "Creuse Oesters",
+    "desc": "Franse creuse oesters (Crassostrea gigas) — zout, fris en romig van smaak. Wij leveren per dozijn. Vraag naar de maat van de dag.",
+    "categorie": "schaal-schelp",
+    "ingredienten": "Oesters (Crassostrea gigas) [WEEKDIEREN].",
+    "bevat": [
+      "WEEKDIEREN"
+    ],
+    "beschikbaar": "always"
+  },
+  {
+    "slug": "kokkels",
+    "naam": "Kokkels",
+    "desc": "Verse Zeeuwse kokkels (Cerastoderma edule) — een Hollands borrelhapje bij uitstek. Zout, zeers en vol van smaak.",
+    "categorie": "schaal-schelp",
+    "photo": "/images/producten-hd/kokkels.webp",
+    "ingredienten": "Kokkels (Cerastoderma edule) [WEEKDIEREN], zout, azijn.",
+    "bevat": [
+      "WEEKDIEREN"
+    ],
+    "beschikbaar": "shop-sometimes-or-request"
+  },
+  {
+    "slug": "coquilles",
+    "naam": "Coquilles",
+    "desc": "Verse coquilles (Pecten maximus) — mals en licht zoet van smaak. Binnen 2 minuten klaar in de pan. Ideaal als voorgerecht of borrelschotel.",
+    "categorie": "schaal-schelp",
+    "photo": "/images/producten-hd/coquilles.webp",
+    "ingredienten": "Coquilles (Pecten maximus) [WEEKDIEREN].",
+    "bevat": [
+      "WEEKDIEREN"
+    ],
+    "beschikbaar": "usually"
+  },
+  {
+    "slug": "inktvis",
+    "naam": "Inktvis",
+    "desc": "Inktvis voor uw eigen bereiding, uitsluitend op aanvraag. Geef uw wensen en gewenste ophaallocatie op tijd door.",
+    "categorie": "schaal-schelp",
+    "photo": "/images/producten-hd/inktvis.webp",
+    "ingredienten": "Inktvis (Loligo vulgaris) [WEEKDIEREN]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "WEEKDIEREN"
+    ],
+    "beschikbaar": "request"
+  },
+  {
+    "slug": "scheermessen",
+    "naam": "Scheermessen",
+    "desc": "Verse scheermessen (Ensis directus) — een bijzondere Noordzee-delicatesse. Snel te bereiden en heerlijk met look en peterselie.",
+    "categorie": "schaal-schelp",
+    "ingredienten": "Scheermessen (Ensis directus) [WEEKDIEREN].",
+    "bevat": [
+      "WEEKDIEREN"
+    ],
+    "beschikbaar": "request-bunch"
+  },
+  {
+    "slug": "zalmsalade",
+    "naam": "Zalmsalade",
+    "desc": "Huisgemaakte zalmsalade van verse zalm, mayonaise, ui en kruiden. Heerlijk op brood of als borrelhapje.",
+    "categorie": "vissalades",
+    "ingredienten": "Zalm [VIS], mayonaise (zonnebloemolie, EIEREN, azijn, MOSTERD), ui, dille, zout, peper.",
+    "bevat": [
+      "VIS",
+      "EIEREN",
+      "MOSTERD"
+    ],
+    "beschikbaar": "dagelijks"
+  },
+  {
+    "slug": "krabsalade",
+    "naam": "Krabsalade",
+    "desc": "Verse krabsalade met surimi of echte krab, romige mayonaise en lenteui. Fris en smaakvol.",
+    "categorie": "vissalades",
+    "photo": "/images/producten-hd/krabsalade.webp",
+    "ingredienten": "Krab / surimi [VIS, SCHAALDIEREN], mayonaise (EIEREN, MOSTERD), lenteui, zout, paprika.",
+    "bevat": [
+      "VIS",
+      "SCHAALDIEREN",
+      "EIEREN",
+      "MOSTERD"
+    ],
+    "beschikbaar": "dagelijks"
+  },
+  {
+    "slug": "tonijnsalade",
+    "naam": "Tonijnsalade",
+    "desc": "Klassieke tonijnsalade van tonijn uit blik, verse mayonaise, ui en augurk. Veelzijdig op brood of als snack.",
+    "categorie": "vissalades",
+    "ingredienten": "Tonijn (Thunnus albacares) [VIS], mayonaise (EIEREN, MOSTERD), ui, augurk, zout, peper.",
+    "bevat": [
+      "VIS",
+      "EIEREN",
+      "MOSTERD"
+    ],
+    "beschikbaar": "dagelijks"
+  },
+  {
+    "slug": "zeewiersalade",
+    "naam": "Zeewiersalade (Wakame)",
+    "desc": "Frisse wakame zeewiersalade met sesamolie en sojasaus — een Japanse klassieker die uitstekend past bij gerookte vis.",
+    "categorie": "vissalades",
+    "ingredienten": "Wakame zeewier (Undaria pinnatifida), sesamolie, SOJA saus (water, sojabonen [SOJA], tarwe [GLUTEN], zout), azijn, suiker, sesamzaad [SESAMZAAD].",
+    "bevat": [
+      "SOJA",
+      "GLUTEN",
+      "SESAMZAAD"
+    ],
+    "beschikbaar": "dagelijks"
+  },
+  {
+    "slug": "kibbeling",
+    "naam": "Kibbeling",
+    "desc": "Knapperig gebakken stukjes pollak in een luchtig, goudbruin beslag. Onze kibbeling maken we van pollak; lekker met ravigotesaus.",
+    "categorie": "bereid",
+    "bestelId": "kibbeling-pollak",
+    "ingredienten": "Pollak [VIS], TARWEBLOEM, water, zout, rijsmiddel (E450, E500), plantaardige olie. Bereid in frituurvet. Ravigotesaus apart verkrijgbaar; vraag naar de actuele ingrediënten en allergenen van de saus.",
+    "bevat": [
+      "VIS",
+      "GLUTEN (tarwe)",
+      "EIEREN",
+      "MOSTERD"
+    ],
+    "beschikbaar": "dagelijks"
+  },
+  {
+    "slug": "lekkerbek",
+    "naam": "Lekkerbek",
+    "desc": "Lekkerbek van heekfilet, gebakken in een luchtig, knapperig beslag. Heerlijk warm uit de winkel of van onze marktkraam.",
+    "categorie": "bereid",
+    "bestelId": "lekkerbek",
+    "ingredienten": "Heek [VIS], TARWEBLOEM, water, zout, rijsmiddel, plantaardige olie. Bereid in frituurvet.",
+    "bevat": [
+      "VIS",
+      "GLUTEN (tarwe)"
+    ],
+    "beschikbaar": "dagelijks"
+  },
+  {
+    "slug": "broodje-haring",
+    "naam": "Broodje Haring",
+    "desc": "Rauwe Hollandse Nieuwe haring op een zacht broodje met fijngehakte ui en knapperige augurk. Een van de voedzaamste producten in ons assortiment.",
+    "categorie": "bereid",
+    "omega3": true,
+    "bestelId": "haring",
+    "ingredienten": "HARING (Clupea harengus) [VIS], broodrol (TARWEBLOEM, gist, water, zout) [GLUTEN], ui, augurk (komkommer, azijn, suiker, MOSTERD), zout.",
+    "bevat": [
+      "VIS",
+      "GLUTEN (tarwe)",
+      "MOSTERD"
+    ],
+    "beschikbaar": "dagelijks"
+  },
+  {
+    "slug": "vissoep",
+    "naam": "Vissoep",
+    "desc": "Vissoep uit onze viswinkel in Leiden. Wilt u de soep op de markt of bij Hoogvliet ophalen? Geef dit op tijd door, dan bespreken we wat mogelijk is.",
+    "categorie": "bereid",
+    "bestelId": "vissoep",
+    "ingredienten": "Verse vis (wisselend) [VIS], water, ui, wortel, SELDERIJ, prei, aardappel, kruiden, zout. Kan room [MELK] bevatten.",
+    "bevat": [
+      "VIS",
+      "SELDERIJ",
+      "kan MELK bevatten"
+    ],
+    "beschikbaar": "shop-only"
+  },
+  {
+    "slug": "vispotje",
+    "naam": "Vispotje",
+    "desc": "Een romig stoofpotje met verse stukken vis in een rijke saus. Ideaal als uitgebreid tussendoortje of lichte maaltijd. De vissoort wisselt met het seizoen.",
+    "categorie": "bereid",
+    "ingredienten": "Verse vis (wisselend) [VIS], kookroom [MELK], ui, wortel, SELDERIJ, kruiden, zout, peper.",
+    "bevat": [
+      "VIS",
+      "MELK",
+      "SELDERIJ"
+    ],
+    "beschikbaar": "dagelijks"
+  },
+  {
+    "slug": "gerookte-zalm-snippers",
+    "naam": "Gerookte Zalm Snippers",
+    "desc": "Royale randstukken van gerookte zalm — vol van smaak en voordelig. Heerlijk door de pasta, op toast of door roerei. Van High Seas (W.G. Den Heijer, Scheveningen). ASC.",
+    "categorie": "gerookte-vis",
+    "badge": "ASC",
+    "omega3": true,
+    "photo": "/images/producten-hd/gerookte-zalm-snippers.webp",
+    "ingredienten": "Atlantische zalm (Salmo salar) [VIS], zout, rook.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "always"
+  },
+  {
+    "slug": "fine-de-claire-oesters",
+    "naam": "Fine de Claire Oesters",
+    "desc": "Franse Fine de Claire oesters (Crassostrea gigas) uit Marennes-Oléron, IGP-beschermd. Mild en licht nootachtig — rijpen na in de kleirijke claires. Per dozijn.",
+    "categorie": "schaal-schelp",
+    "badge": "IGP",
+    "ingredienten": "Oesters (Crassostrea gigas) [WEEKDIEREN].",
+    "bevat": [
+      "WEEKDIEREN"
+    ],
+    "beschikbaar": "oyster-choice"
+  },
+  {
+    "slug": "surimisalade",
+    "naam": "Surimisalade",
+    "desc": "Frisse, romige salade van surimi met huisgemaakte dressing. Lekker op brood of als borrelhapje.",
+    "categorie": "vissalades",
+    "ingredienten": "Surimi (witvis [VIS], zetmeel, suiker), mayonaise (zonnebloemolie, EIEREN, azijn, MOSTERD), ui, kruiden, zout. Kan SCHAALDIEREN en SOJA bevatten.",
+    "bevat": [
+      "VIS",
+      "EIEREN",
+      "MOSTERD"
+    ],
+    "beschikbaar": "dagelijks"
+  },
+  {
+    "slug": "garnalenkroketten",
+    "naam": "Garnalenkroketten",
+    "desc": "Ambachtelijke kroketten met een romige vulling van Hollandse garnalen. Knapperig gefrituurd — een klassieke borrel- of lunchsnack.",
+    "categorie": "bereid",
+    "photo": "/images/producten-hd/garnalenkroketten.webp",
+    "ingredienten": "Hollandse garnalen (Crangon crangon) [SCHAALDIEREN], bechamel (TARWEBLOEM [GLUTEN], boter [MELK], MELK), paneermeel [GLUTEN], EIEREN, kruiden, zout. Bereid in frituurvet.",
+    "bevat": [
+      "SCHAALDIEREN",
+      "GLUTEN (tarwe)",
+      "MELK",
+      "EIEREN"
+    ],
+    "beschikbaar": "sometimes"
+  },
+  {
+    "slug": "calamares",
+    "naam": "Calamares (Inktvisringen)",
+    "desc": "Knapperig gefrituurde inktvisringen in een luchtig beslag. Heerlijk met een knoflook- of aioli-dip — zo van de borrelplank.",
+    "categorie": "bereid",
+    "ingredienten": "Inktvis (Loligo vulgaris) [WEEKDIEREN], TARWEBLOEM [GLUTEN], water, zout, plantaardige olie. Bereid in frituurvet.",
+    "bevat": [
+      "WEEKDIEREN",
+      "GLUTEN (tarwe)"
+    ],
+    "beschikbaar": "dagelijks"
+  },
+  {
+    "slug": "verse-heilbot",
+    "naam": "Verse Heilbot",
+    "desc": "Heilbot (Hippoglossus hippoglossus), de grootste platvis van de noordelijke zeeën. Fijn, boterzacht wit vlees — een echte delicatesse, mals en mager.",
+    "categorie": "verse-vis",
+    "ingredienten": "Heilbot (Hippoglossus hippoglossus) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "op bestelling"
+  },
+  {
+    "slug": "hele-kreeft",
+    "naam": "Levende Kreeft",
+    "desc": "Levende kreeft, uitsluitend op aanvraag. We nemen een levend dier alleen voor een aanvraag mee, zodat het niet onverkocht blijft. Bespreek uw gewenste datum en ophaallocatie vooraf met ons.",
+    "categorie": "schaal-schelp",
+    "ingredienten": "Levende kreeft [SCHAALDIEREN]. Vraag naar de soort en de actuele productinformatie.",
+    "bevat": [
+      "SCHAALDIEREN"
+    ],
+    "beschikbaar": "live-request"
+  },
+  {
+    "slug": "gerookte-forel-heel",
+    "naam": "Gerookte Forel (heel)",
+    "desc": "Hele warm gerookte forel (Oncorhynchus mykiss) — mild rokerig, sappig en direct klaar om te eten. Heerlijk met een frisse mierikswortelsaus.",
+    "categorie": "gerookte-vis",
+    "omega3": true,
+    "photo": "/images/producten-hd/gerookte-forel-heel.webp",
+    "ingredienten": "Forel (Oncorhynchus mykiss) [VIS], zout, rook.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "request"
+  },
+  {
+    "slug": "bot",
+    "naam": "Bot",
+    "desc": "Bot (Platichthys flesus) — een Hollandse platvis uit de kust- en riviermondingen. Mager, betaalbaar en licht van smaak; heerlijk gebakken.",
+    "categorie": "verse-vis",
+    "ingredienten": "Bot (Platichthys flesus) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "request"
+  },
+  {
+    "slug": "sardines",
+    "naam": "Verse Sardines",
+    "desc": "Verse sardines (Sardina pilchardus) — kleine, vette visjes boordevol omega-3. Op de grill met wat zeezout en citroen een mediterrane traktatie.",
+    "categorie": "verse-vis",
+    "omega3": true,
+    "ingredienten": "Sardines (Sardina pilchardus) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "rare-request"
+  },
+  {
+    "slug": "ansjovis",
+    "naam": "Verse Ansjovis",
+    "desc": "Verse ansjovis (Engraulis encrasicolus) — klein, vet en vol van smaak. Kort gebakken of gemarineerd (boquerones) een echte delicatesse.",
+    "categorie": "verse-vis",
+    "omega3": true,
+    "ingredienten": "Ansjovis (Engraulis encrasicolus) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "request"
+  },
+  {
+    "slug": "tilapiafilet",
+    "naam": "Tilapiafilet",
+    "desc": "Tilapiafilet (Oreochromis niloticus) — mild, mager en graatvrij wit visvlees. Neutraal van smaak en dankbaar in currygerechten of gepaneerd.",
+    "categorie": "verse-vis",
+    "ingredienten": "Tilapia (Oreochromis niloticus) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "always"
+  },
+  {
+    "slug": "victoriabaars",
+    "naam": "Victoriabaarsfilet",
+    "desc": "Victoriabaars / nijlbaars (Lates niloticus) — een grote zoetwatervis met stevige, witte filets zonder graat. Houdt goed zijn vorm bij bakken of stoven.",
+    "categorie": "verse-vis",
+    "ingredienten": "Victoriabaars (Lates niloticus) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "op bestelling"
+  },
+  {
+    "slug": "gerookte-zalmmoot",
+    "naam": "Warm Gerookte Zalmmoot",
+    "desc": "Warm gerookte moot Atlantische zalm (Salmo salar) — stevig en vol van smaak, in dikke porties. Direct te eten of te verkruimelen door een salade. ASC.",
+    "categorie": "gerookte-vis",
+    "badge": "ASC",
+    "omega3": true,
+    "ingredienten": "Atlantische zalm (Salmo salar) [VIS], zout, rook.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "dagelijks"
+  },
+  {
+    "slug": "gerookte-sprotfilet",
+    "naam": "Gerookte Sprotfilet",
+    "desc": "Fijne, ontgraten filetjes van gerookte sprot (Sprattus sprattus) — intens rokerig en zilt. Heerlijk op donker brood of door een aardappelsalade.",
+    "categorie": "gerookte-vis",
+    "ingredienten": "Sprot (Sprattus sprattus) [VIS], zout, rook.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "shop-often"
+  },
+  {
+    "slug": "gamba-spiesen",
+    "naam": "Gambaspiesen",
+    "desc": "Spiesjes van grote gamba's (Penaeus vannamei), kant-en-klaar om te grillen of te bakken. Ideaal voor de barbecue of een borrelplank.",
+    "categorie": "schaal-schelp",
+    "ingredienten": "Gamba's (Penaeus vannamei) [SCHAALDIEREN], kruiden, olie.",
+    "bevat": [
+      "SCHAALDIEREN"
+    ],
+    "beschikbaar": "unavailable"
+  },
+  {
+    "slug": "gamba-tempura",
+    "naam": "Gamba Tempura",
+    "desc": "Gamba's in een luchtig tempurabeslag, knapperig gefrituurd. Direct van de frituur het lekkerst, met een zoetzure dip.",
+    "categorie": "bereid",
+    "ingredienten": "Gamba's (Penaeus vannamei) [SCHAALDIEREN], tempurabeslag (TARWEBLOEM [GLUTEN], water, rijsmiddel), plantaardige olie. Bereid in frituurvet.",
+    "bevat": [
+      "SCHAALDIEREN",
+      "GLUTEN (tarwe)"
+    ],
+    "beschikbaar": "unavailable"
+  },
+  {
+    "slug": "gebakken-mosselen",
+    "naam": "Gebakken Mosselen",
+    "desc": "Gepaneerde en gebakken mosseltjes — knapperig van buiten, zacht van binnen. Een geliefde snack met knoflooksaus.",
+    "categorie": "bereid",
+    "ingredienten": "Mosselen (Mytilus edulis) [WEEKDIEREN], paneermeel/TARWEBLOEM [GLUTEN], EIEREN, plantaardige olie. Knoflooksaus: mayonaise (EIEREN, MOSTERD). Bereid in frituurvet.",
+    "bevat": [
+      "WEEKDIEREN",
+      "GLUTEN (tarwe)",
+      "EIEREN",
+      "MOSTERD"
+    ],
+    "beschikbaar": "op bestelling"
+  },
+  {
+    "slug": "wilde-zalmfilet",
+    "naam": "Wilde Zalmfilet — ongerookt",
+    "desc": "Wilde Pacifische zalm (Oncorhynchus spp.) — dieper van kleur en smaak dan kweekzalm, iets steviger van structuur. Een puur, natuurlijk product.",
+    "categorie": "verse-vis",
+    "omega3": true,
+    "ingredienten": "Wilde zalm (Oncorhynchus spp.) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "op bestelling"
+  },
+  {
+    "slug": "heilbotfilet",
+    "naam": "Heilbotfilet",
+    "desc": "Gefileerde heilbot (Hippoglossus hippoglossus) — boterzacht, mager wit vlees zonder graat. Een luxe platvis, mooi gepocheerd of uit de oven.",
+    "categorie": "verse-vis",
+    "photo": "/images/producten-hd/heilbotfilet.webp",
+    "ingredienten": "Heilbot (Hippoglossus hippoglossus) [VIS]. Geen toegevoegde stoffen.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "always"
+  },
+  {
+    "slug": "gamba-kroketten",
+    "naam": "Gambakroketten",
+    "desc": "Romige kroketten gevuld met gamba's — knapperig gefrituurd. Een luxe variant op de klassieke garnalenkroket.",
+    "categorie": "bereid",
+    "ingredienten": "Gamba's (Penaeus vannamei) [SCHAALDIEREN], bechamel (TARWEBLOEM [GLUTEN], boter [MELK], MELK), paneermeel [GLUTEN], EIEREN, kruiden. Bereid in frituurvet.",
+    "bevat": [
+      "SCHAALDIEREN",
+      "GLUTEN (tarwe)",
+      "MELK",
+      "EIEREN"
+    ],
+    "beschikbaar": "unavailable"
+  },
+  {
+    "slug": "blacktiger-garnalen",
+    "naam": "Black Tiger Garnalen",
+    "desc": "Black Tiger-garnalen met stevig vlees en een volle smaak. Lekker om zelf te bakken of te grillen. Vraag naar de actuele maat, uitvoering en voorraad.",
+    "categorie": "schaal-schelp",
+    "ingredienten": "Black Tiger-garnalen [SCHAALDIEREN]. Vraag naar de actuele ingrediënten en allergenen op de verpakking.",
+    "bevat": [
+      "SCHAALDIEREN"
+    ],
+    "beschikbaar": "current"
+  },
+  {
+    "slug": "gebakken-ansjovis",
+    "naam": "Gebakken Ansjovis",
+    "desc": "Gebakken ansjovis als hartig visgerecht. Vraag naar de actuele voorraad; verse ansjovis is een apart product, uitsluitend op aanvraag.",
+    "categorie": "bereid",
+    "ingredienten": "Ansjovis [VIS]. Vraag naar de ingrediënten en allergenen van de bereiding.",
+    "bevat": [
+      "VIS"
+    ],
+    "beschikbaar": "current"
+  },
+  {
+    "slug": "zeekraal",
+    "naam": "Verse Zeekraal",
+    "desc": "Verse zeekraal om zelf te bereiden, bijvoorbeeld kort gebakken bij vis. We verkopen zeekraal als groente, niet als kant-en-klare zeekraalsalade.",
+    "categorie": "zeegroenten",
+    "ingredienten": "Zeekraal. Vraag naar de actuele productinformatie.",
+    "bevat": [],
+    "beschikbaar": "current"
+  }
 ];
 
 // ─── VOEDINGSWAARDE (gemiddelde waarden per 100 g) ──────────────────────────

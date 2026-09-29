@@ -1,5 +1,6 @@
 /** Bestandsnamen kunnen later vervangen worden door eigen gerechtfoto's. */
 export const RECEPT_FOTOS: Record<string, string> = {
+  "garnalensalade": "/images/recepten/garnalensalade.webp",
   "zalm-citroen-dille": "/images/recepten/zalm-citroen-dille.webp",
   "pasta-gerookte-zalm-roomsaus": "/images/recepten/pasta-gerookte-zalm-roomsaus.webp",
   "gebakken-kabeljauw-botersaus": "/images/recepten/gebakken-kabeljauw-botersaus-v2.webp",

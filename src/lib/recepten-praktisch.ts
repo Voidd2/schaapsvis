@@ -812,4 +812,38 @@ export const receptenPraktisch: Recept[] = [
     verhaal: "Gebruik reeds gekookte en gepelde Hollandse garnalen. Avocado maakt de toast romig; citroen en bieslook zorgen voor frisheid.",
     seoKeywords: "toast garnalen avocado, hollandse garnalen recept, garnalen lunch recept",
   },
+  {
+    slug: "garnalensalade",
+    hoofdproduct: "hollandse-garnalen",
+    title: "Zelfgemaakte garnalensalade met citroen en bieslook",
+    subtitle: "Een frisse salade voor op toast — zelf thuis maken",
+    tijd: "15 min",
+    moeilijkheid: "Makkelijk",
+    tags: [
+      "Snel"
+    ],
+    porties: 4,
+    seizoen: "Jaarrond",
+    fotoLabel: "Garnalensalade in een kom met citroen en verse kruiden",
+    vanSchaap: [
+      "250 g gepelde, gekookte Hollandse garnalen — vraag naar de actuele voorraad"
+    ],
+    vanSupermarkt: [
+      "2 el mayonaise",
+      "2 el Griekse yoghurt",
+      "½ citroen",
+      "½ kleine komkommer",
+      "1 el fijngeknipte bieslook",
+      "Zwarte peper",
+      "4 sneden geroosterd brood"
+    ],
+    bereidingswijze: [
+      "Was de komkommer, verwijder de zaadlijst en snijd in kleine blokjes. Dep droog zodat de salade niet waterig wordt.",
+      "Meng de mayonaise met yoghurt, 1 tl citroensap, bieslook en een beetje zwarte peper.",
+      "Schep de reeds gekookte, gepelde garnalen en komkommer voorzichtig door de saus. Houd gekoeld tot het serveren.",
+      "Proef en voeg naar wens wat citroensap toe. Serveer direct op het geroosterde brood."
+    ],
+    verhaal: "Dit is een recept om thuis te maken, geen kant-en-klare garnalensalade uit ons assortiment. De Hollandse garnalen zijn al gekookt en hoeven niet opnieuw te worden verhit. Bewaar ze gekoeld en volg het bewaaradvies op de verpakking.",
+    seoKeywords: "garnalensalade recept, Hollandse garnalen salade, garnalensalade zelf maken"
+  },
 ];

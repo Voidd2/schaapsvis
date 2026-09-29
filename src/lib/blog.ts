@@ -288,7 +288,7 @@ const bestaandePosts: BlogPost[] = [
       {
         kop: "Kibbeling: stukjes",
         alineas: [
-          "Kibbeling zijn stukjes witvis in beslag, gefrituurd tot ze goudbruin zijn. Traditioneel van kabeljauw — het woord komt van 'kabeljauwwang', de kibbeling van vroeger was letterlijk het wangvlees. Tegenwoordig wordt vaak ook pollak (koolvis) gebruikt: milder van smaak en vriendelijker geprijsd. Bij ons kunt u kiezen: de authentieke kabeljauw of de populaire pollak.",
+          "Onze kibbeling maken we van pollak: stukjes vis in beslag, goudbruin gebakken. Lekker met ravigottesaus. Voor lekkerbek gebruiken we heek, geen pollak.",
         ],
       },
       {
@@ -310,7 +310,7 @@ const bestaandePosts: BlogPost[] = [
       { label: "Bekijk de voedingswaarden", href: "/assortiment" },
     ],
     seoKeywords:
-      "verschil kibbeling lekkerbek, kibbeling leiden, lekkerbek leiden, kibbeling kabeljauw of koolvis, kibbeling bestellen",
+      "verschil kibbeling lekkerbek, kibbeling leiden, lekkerbek leiden, kibbeling pollak, kibbeling ravigottesaus",
   },
   {
     slug: "de-echte-hollandse-garnaal",
