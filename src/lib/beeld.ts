@@ -195,6 +195,11 @@ export const BEELD = {
 
 export type BeeldNaam = keyof typeof BEELD;
 
+/** Pure data check, safe to call from server and client components. */
+export function heeftBeeld(naam: BeeldNaam): boolean {
+  return BEELD[naam].bestand !== "";
+}
+
 /** Hoeveel foto's er nog ontbreken — gebruikt in OVERDRACHT.md en de controle. */
 export function ontbrekendeBeelden(): BeeldNaam[] {
   return (Object.keys(BEELD) as BeeldNaam[]).filter((naam) => BEELD[naam].bestand === "");

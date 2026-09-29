@@ -14,7 +14,6 @@ import {
   SCHALEN,
   extrasGewicht,
   extrasTotaal,
-  hoeveelheidTekst,
   personen as berekenPersonen,
   regels as maakRegels,
   schaalById,
@@ -25,6 +24,7 @@ import {
 import { useWinkelwagen } from "@/components/winkel/Winkelwagen";
 import { euro, whatsappLink } from "@/lib/bedrijf";
 import { useSchaalTekst } from "@/components/visschaal/tekst";
+import { localizePlatter, platterQuantity } from "@/lib/platter-localization";
 import { Beeld } from "@/components/ui/Beeld";
 
 /** Gewicht gaat met 100 gram tegelijk; stuks met één. */
@@ -76,11 +76,11 @@ export function VisschaalConfigurator() {
   }
 
   const whatsappBericht = [
-    "Hallo Schaap's Vishandel, ik wil graag een visschaal bestellen.",
+    locale === "nl" ? "Hallo Schaap’s Vishandel, ik wil graag een visschaal aanvragen." : locale === "de" ? "Hallo Schaap’s Vishandel, ich möchte eine Fischplatte anfragen." : "Hello Schaap’s Vishandel, I would like to request a seafood platter.",
     "",
-    ...regels.map((r) => `${hoeveelheidTekst(r)} ${r.naam} — ${euro(r.bedrag)}`),
+    ...regels.map((r) => `${platterQuantity(r,locale)} ${tekst.naam(r.id,r.naam)} — ${euro(r.bedrag)}`),
     "",
-    `Totaal: ${euro(totaal)}`,
+    `${g("totaal")}: ${euro(totaal)}`,
   ].join("\n");
 
   return (
@@ -95,7 +95,8 @@ export function VisschaalConfigurator() {
           </p>
 
           <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {SCHALEN.map((schaal) => {
+            {SCHALEN.map((bron) => {
+              const schaal = localizePlatter(bron,locale);
               const gekozen = samen.schaal === schaal.id;
               return (
                 <li key={schaal.id}>
@@ -230,7 +231,7 @@ export function VisschaalConfigurator() {
                         onZet={(n) => zetExtra(onderdeel, n)}
                         uitgeschakeld={!gekozenSchaal}
                         perLabel={t("per100")}
-                        stukLabel={(eenheid) => t("perStuk", { eenheid })}
+                        stukLabel={(eenheid) => t("perStuk", { eenheid: tekst.eenheid(eenheid)! })}
                         seizoenLabel={(periode) =>
                           t("seizoen", { periode: tekst.seizoen(periode) ?? periode })
                         }
@@ -266,9 +267,9 @@ export function VisschaalConfigurator() {
                   >
                     <dt>
                       <span className="bedrag" style={{ opacity: 0.7 }}>
-                        {hoeveelheidTekst(r)}
+                        {platterQuantity(r,locale)}
                       </span>{" "}
-                      {r.isSchaal ? r.naam : tekst.naam(r.id, r.naam)}
+                      {tekst.naam(r.id, r.naam)}
                     </dt>
                     <dd className="bedrag shrink-0">{euro(r.bedrag)}</dd>
                   </div>
@@ -379,6 +380,7 @@ function Regel({
   stukLabel: (eenheid: string) => string;
   seizoenLabel: (periode: string) => string;
 }) {
+  const locale = useLocale();
   const stap = onderdeel.perStuk ? 1 : STAP;
   const gekozen = hoeveelheid > 0;
 
@@ -438,7 +440,7 @@ function Regel({
             disabled={uitgeschakeld || hoeveelheid === 0}
             className="px-3 py-1.5 text-[1.1rem] leading-none disabled:opacity-30"
             style={{ color: "var(--navy)" }}
-            aria-label={`Minder ${naam}`}
+            aria-label={`${locale === "en" ? "Less" : locale === "de" ? "Weniger" : "Minder"} ${naam}`}
           >
             −
           </button>
@@ -459,7 +461,7 @@ function Regel({
             disabled={uitgeschakeld}
             className="px-3 py-1.5 text-[1.1rem] leading-none disabled:opacity-30"
             style={{ color: "var(--navy)" }}
-            aria-label={`Meer ${naam}`}
+            aria-label={`${locale === "en" ? "More" : locale === "de" ? "Mehr" : "Meer"} ${naam}`}
           >
             +
           </button>

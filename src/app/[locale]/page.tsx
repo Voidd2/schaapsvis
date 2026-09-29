@@ -1,12 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
+import { CATEGORY_NAMES, localizeProduct } from "@/lib/product-localization";
+import { productPhoto } from "@/lib/product-beeld";
 import { bestelContact } from "@/lib/bestel-contact";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
 import { Sectie, Kop } from "@/components/ui/Sectie";
 import { PaginaSlot } from "@/components/ui/PaginaKop";
-import { Beeld, heeftBeeld } from "@/components/ui/Beeld";
+import { Beeld } from "@/components/ui/Beeld";
+import { heeftBeeld } from "@/lib/beeld";
 
 import { SeizoensBanner } from "@/components/shared/SeizoensBanner";
 import { paginaMetadata } from "@/lib/seo";
@@ -268,7 +271,7 @@ export default async function HomePage({
                   style={{ borderTop: "1px solid var(--linen)" }}
                 >
                   <span style={{ color: "var(--ink)", fontFamily: "var(--font-display)", fontSize: "1.05rem" }}>
-                    {CATEGORIE_LABELS[cat]}
+                    {CATEGORY_NAMES[locale as "nl"|"en"|"de"][cat]}
                   </span>
                   <span className="text-sm bedrag" style={{ color: "var(--grijs)" }}>
                     {h("assortimentAantal", { aantal })}
@@ -287,8 +290,10 @@ export default async function HomePage({
 
           <ul className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-8">
             {UITGELICHT.map((slug) => {
-              const p = products.find((x) => x.slug === slug);
-              if (!p) return null;
+              const bron = products.find((x) => x.slug === slug);
+              if (!bron) return null;
+              const p = localizeProduct(bron,locale), photo = productPhoto(p,locale);
+              if(!photo) return null;
               return (
                 <li key={slug}>
                   <Link href={`/${locale}/assortiment/${p.slug}`} className="block group">
@@ -296,8 +301,8 @@ export default async function HomePage({
                         al op wit, dus zo lijkt de vis op de pagina te liggen. */}
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={p.photo}
-                      alt={`${p.naam} bij Schaap's Vishandel in Leiden`}
+                      src={photo.src}
+                      alt={photo.alt}
                       loading="lazy"
                       className="w-full aspect-[3/2] object-contain transition-transform duration-300 group-hover:scale-[1.04]"
                     />
@@ -319,7 +324,7 @@ export default async function HomePage({
         </div>
       </Sectie>
 
-      <Sectie grond="zand"><Kop label={locale === "nl" ? "Van de toonbank naar uw keuken" : "Recepten · Nederlands"} titel={locale === "nl" ? "Wat eten we vanavond?" : "Cooking inspiration"} intro={locale === "nl" ? "Zalm uit de oven, romige pasta of kabeljauw met citroen: vind een gerecht op vissoort, bereidingstijd en moeilijkheid." : "Discover our Dutch-language fish recipes."} /><div className="flex flex-wrap gap-3"><Link href="/nl/recepten" className="knop knop-navy">{nav("recepten")}</Link><Link href="/nl/blog" className="knop knop-lijn">{nav("blog")}</Link></div></Sectie>
+      <Sectie grond="zand"><Kop label={locale === "nl" ? "Van de toonbank naar uw keuken" : locale === "de" ? "Von der Fischtheke in Ihre Küche" : "From our fish counter to your kitchen"} titel={locale === "nl" ? "Wat eten we vanavond?" : locale === "de" ? "Was kochen wir heute Abend?" : "What shall we cook tonight?"} intro={locale === "nl" ? "Zalm uit de oven, romige pasta of kabeljauw met citroen: vind een gerecht op vissoort, bereidingstijd en moeilijkheid." : locale === "de" ? "Lachs aus dem Ofen, cremige Pasta oder Kabeljau mit Zitrone: Finden Sie ein Gericht nach Fischart, Zubereitungszeit und Schwierigkeit." : "Oven-baked salmon, creamy pasta or cod with lemon: find a dish by fish type, cooking time and difficulty."} /><div className="flex flex-wrap gap-3"><Link href={`/${locale}/recepten`} className="knop knop-navy">{nav("recepten")}</Link><Link href={`/${locale}/blog`} className="knop knop-lijn">{nav("blog")}</Link></div></Sectie>
 
       {/* ── Herkomst ──────────────────────────────────────────────────────── */}
       <Sectie grond="navy" smal>
@@ -414,7 +419,7 @@ export default async function HomePage({
               >
                 {h("routeLink")} &rarr;
               </a>
-              {punt.id === "voorschoten" && locale === "nl" && <Link href="/nl/viswinkel-voorschoten" className="block mt-3 font-semibold underline underline-offset-4">Visboer Voorschoten: vrijdag bij Hoogvliet →</Link>}
+              {punt.id === "voorschoten" && <Link href={`/${locale}/viswinkel-voorschoten`} className="block mt-3 font-semibold underline underline-offset-4">{locale === "nl" ? "Visboer Voorschoten: vrijdag bij Hoogvliet" : locale === "de" ? "Fischstand Voorschoten: freitags bei Hoogvliet" : "Fishmonger Voorschoten: Fridays at Hoogvliet"} →</Link>}
             </li>
           ))}
         </ul>

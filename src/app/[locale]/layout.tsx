@@ -90,18 +90,17 @@ export default async function LocaleLayout({
               className="w-full text-center px-4 py-2 text-xs font-semibold"
               style={{ backgroundColor: "var(--gold)", color: "#fff" }}
             >
-              Besloten preview — je bent ingelogd. Bezoekers zien de
-              &ldquo;binnenkort online&rdquo;-pagina.{" "}
+              {locale === "en" ? "Private preview — you are logged in. Visitors see the coming-soon page." : locale === "de" ? "Private Vorschau — Sie sind angemeldet. Besucher sehen die Demnächst-Seite." : "Besloten preview — u bent ingelogd. Bezoekers zien de binnenkort-pagina."}{" "}
               {/* Route handler, geen pagina — moet een echte navigatie zijn zodat
                   de server de cookie kan wissen. */}
               {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
               <a href="/api/logout" className="underline font-bold">
-                Uitloggen en het slot testen
+                {locale === "en" ? "Log out and test access" : locale === "de" ? "Abmelden und Zugang testen" : "Uitloggen en het slot testen"}
               </a>
             </div>
           )}
           <a href="#inhoud" className="sv-skip">
-            Naar de inhoud
+            {locale === "en" ? "Skip to content" : locale === "de" ? "Zum Inhalt springen" : "Naar de inhoud"}
           </a>
           {/* De winkelwagen leeft boven de kop en de voet: hij moet dezelfde
               inhoud kennen op de winkelsite én in de webshop. */}

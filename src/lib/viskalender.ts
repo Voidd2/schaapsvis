@@ -178,7 +178,7 @@ export const viskalenderData: MaandData[] = [
     "hoogtepunt": "Verse filet bij voorjaarsgroenten",
     "foto": {
       "src": "/images/recepten/gegrilde-schol.webp",
-      "alt": "Gegrilde schol met groenten"
+      "alt": "Gebakken scholfilet met kruiden en citroen"
     },
     "links": [
       {
@@ -210,7 +210,7 @@ export const viskalenderData: MaandData[] = [
     "tekst": "De verkoop van Hollandse Nieuwe begint doorgaans in juni. De exacte startdatum en aanvoer verschillen per jaar. Vraag ons wanneer de nieuwe haring er is; lekker met uitjes of op een broodje.",
     "hoogtepunt": "Uitkijken naar de Hollandse Nieuwe",
     "foto": {
-      "src": "/images/producten-hd/haring.webp",
+      "src": "/images/editorial/hollandse-nieuwe-uitjes.webp",
       "alt": "Haring met garnituur"
     },
     "links": [
@@ -347,10 +347,10 @@ export const viskalenderData: MaandData[] = [
         "naam": "Oesters"
       },
       {
-        "naam": "Koolvis"
+        "naam": "Wijting"
       }
     ],
-    "tekst": "Kabeljauw en koolvis lenen zich voor een ovenschotel of stoof. Ook een pan mosselen past bij een herfstavond. De kalender geeft inspiratie, geen voorraadgarantie: vraag ons welke filet vandaag het mooist is.",
+    "tekst": "Kabeljauw en wijting lenen zich voor een ovenschotel of stoof. Ook een pan mosselen past bij een herfstavond. De kalender geeft inspiratie, geen voorraadgarantie: vraag ons welke filet vandaag het mooist is.",
     "hoogtepunt": "Warme ovengerechten en visstoof",
     "foto": {
       "src": "/images/recepten/kabeljauw-oven-tomaat-olijven-v2.webp",

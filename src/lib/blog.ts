@@ -1,5 +1,6 @@
 import { NIEUWE_ARTIKELEN, BIJGEWERKTE_ARTIKELEN } from "./blog-editorial";
 import { VOORSCHOTEN_ARTIKELEN } from "./blog-voorschoten";
+import { BLOG_CORRECTIONS } from "./blog-corrections";
 import { bestelContact } from "./bestel-contact";
 import type { VerkooppuntId } from "./bedrijf";
 
@@ -35,7 +36,7 @@ const bestaandePosts: BlogPost[] = [
     slug: "viskalender-welke-vis-in-welk-seizoen",
     title: "De viskalender: welke vis is wanneer het lekkerst?",
     excerpt:
-      "Vis heeft seizoenen, net als groente en fruit. Wie in het juiste seizoen koopt, eet lekkerder én vaak goedkoper. De complete kalender, maand voor maand.",
+      "Vis heeft seizoenen, net als groente en fruit. Ontdek ideeën per seizoen en vraag naar de actuele aanvoer en prijzen van deze week.",
     datum: "2026-06-01",
     datumLabel: "1 juni 2026",
     leestijd: "5 min",
@@ -45,32 +46,32 @@ const bestaandePosts: BlogPost[] = [
     secties: [
       {
         alineas: [
-          "Veel mensen denken dat vis het hele jaar hetzelfde smaakt. Niets is minder waar. Vis heeft seizoenen — momenten waarop hij op zijn vetst, vleziger en het meest op smaak is. Dat hangt samen met de paaitijd, de watertemperatuur en wat de vis zelf eet. Wie in het juiste seizoen koopt, eet niet alleen lekkerder, maar betaalt vaak ook minder: volop aanbod betekent een scherpere prijs.",
+          "De kwaliteit en beschikbaarheid van vis veranderen door paaitijd, watertemperatuur, voeding en aanvoer. Een seizoenskalender geeft inspiratie, geen voorraadlijst of prijsgarantie. Vraag welke vis deze week goed is en waar die vandaan komt.",
         ],
       },
       {
         kop: "Lente (maart – mei)",
         alineas: [
-          "Het seizoen van de eerste platvis. Schol is in mei op zijn best — na de paai in de winter heeft hij zich tegoed gedaan en is het vlees stevig en blank. Ook zeebaars en dorade komen in de lente goed op smaak. En wie van rauwe oesters houdt: tot eind april zijn ze nog op hun mooist, daarna beginnen ze melkig te worden door de voortplantingstijd.",
+          "Schol wordt vaak met de late lente en zomer geassocieerd, nadat hij is hersteld van de winterse paai. Zeebaars en dorade passen bij lichte lentegerechten, maar herkomst en kweek beïnvloeden de beschikbaarheid. Oesters verschillen per soort en producent: vraag naar de actuele levering in plaats van alleen op een maand af te gaan.",
         ],
       },
       {
         kop: "Zomer (juni – augustus)",
         alineas: [
-          "Hét hoogtepunt: de Hollandse Nieuwe. De eerste vaatjes komen half juni binnen en dan is de nieuwe haring zes tot acht weken op zijn aller-romigst. Ook makreel is in de zomer op zijn vetst — perfect om te roken of te stomen. Sardines en ansjovis horen eveneens bij de zomer; op de grill zijn ze onverslaanbaar.",
+          "Het nieuwe haringseizoen begint meestal in juni; de exacte start wordt elk jaar bekendgemaakt. Makreel, sardines en ansjovis passen bij zomergerechten, maar bespreek naast smaak ook herkomst en vangstmethode. Zeeuwse bodemcultuurmosselen zijn meestal al in de zomer verkrijgbaar, niet alleen in maanden met een 'r'. De exacte start hangt af van de oogstkwaliteit en kan eerder vallen.",
         ],
       },
       {
         kop: "Herfst (september – november)",
         alineas: [
-          "Vanaf september begint het mosselseizoen pas écht (onthoud: de maanden met een 'r'). De Zeeuwse mossel is in oktober en november op zijn vleesvolst. Garnalen zijn in de nazomer en herfst op hun best, en ook de eerste wintervis — kabeljauw en wijting — komt dan mooi op smaak.",
+          "Mosselen blijven een populaire herfstkeuze. Het gebruikelijke seizoen van Zeeuwse bodemcultuurmosselen loopt ongeveer van juli tot april; de oude regel met de 'r' in de maand is geen betrouwbare beschikbaarheidskalender. Garnalen, kabeljauw en wijting geven ook ideeën voor herfstmaaltijden, afhankelijk van de aanvoer.",
         ],
       },
       {
         kop: "Winter (december – februari)",
         alineas: [
-          "Koud water maakt stevige, vette vis. Kabeljauw is in de winter op zijn allerbest: dikke, sneeuwwitte vlokken. Ook tarbot, griet en schelvis horen bij het winterseizoen. En de oester is terug — rond de feestdagen op zijn mooist. Gerookte paling en zalm zijn klassiekers op de kersttafel.",
-          "Twijfelt u wat er déze week goed is? Kom langs of bel ons — wij weten elke dag wat er vers van de veiling komt.",
+          "Kabeljauw, wijting en andere witvis passen bij warme wintergerechten. Tarbot, griet en schelvis geven meer mogelijkheden, afhankelijk van herkomst en aanvoer. Oesters, gerookte paling en gerookte zalm zijn populair rond de feestdagen, maar populariteit is geen voorraadgarantie.",
+          "Twijfelt u wat u deze week wilt kiezen? Kom langs of bel ons. We bespreken graag de actuele levering, bereiding en passende alternatieven.",
         ],
       },
     ],
@@ -703,7 +704,7 @@ export const blogPosts: BlogPost[] = [...VOORSCHOTEN_ARTIKELEN, ...NIEUWE_ARTIKE
   const wijziging = BIJGEWERKTE_ARTIKELEN[post.slug];
   const beeld = blogBeelden[post.slug] ?? { src: post.fotoUrl, alt: post.fotoAlt };
   return { ...post, ...wijziging, fotoUrl: beeld.src, fotoAlt: beeld.alt, secties: (wijziging?.secties ?? post.secties).map(s => ({ ...s, alineas: s.alineas.map(a => a.replaceAll("maandag t/m zaterdag", "dinsdag t/m zaterdag")) })), ...(wijziging ? { bijgewerkt: "2026-09-28", datumLabel: "Bijgewerkt 28 september 2026" } : {}) };
-})];
+})].map(post => BLOG_CORRECTIONS[post.slug] ? { ...post, ...BLOG_CORRECTIONS[post.slug], bijgewerkt: "2026-09-29", datumLabel: "Bijgewerkt 29 september 2026" } : post);
 
 export function getBlogPost(slug: string): BlogPost | undefined {
   return blogPosts.find((p) => p.slug === slug);

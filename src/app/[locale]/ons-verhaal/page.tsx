@@ -6,7 +6,8 @@ import { Sectie, Kop } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { paginaMetadata } from "@/lib/seo";
 import { BEDRIJF } from "@/lib/bedrijf";
-import { Beeld, heeftBeeld } from "@/components/ui/Beeld";
+import { Beeld } from "@/components/ui/Beeld";
+import { heeftBeeld } from "@/lib/beeld";
 import type { BeeldNaam } from "@/lib/beeld";
 
 export async function generateMetadata({
@@ -59,7 +60,7 @@ export default async function OnsVerhaalPage({
 
   return (
     <>
-      <JsonLd />
+      <JsonLd locale={locale} />
 
       <PaginaKop
         kruimels={[
@@ -98,7 +99,7 @@ export default async function OnsVerhaalPage({
         <ol style={{ borderTop: "1px solid var(--linen)" }}>
           {TIJDLIJN.map((punt) => (
             <li
-              key={punt.jaar}
+              key={punt.jaar === "Nu" ? (locale === "de" ? "Heute" : locale === "en" ? "Today" : "Nu") : punt.jaar}
               className={`grid md:grid-cols-[7rem_1fr] ${heeftBeeld(punt.beeld) ? "lg:grid-cols-[7rem_1fr_18rem]" : ""} gap-x-10 gap-y-4 py-8`}
               style={{ borderBottom: "1px solid var(--linen)" }}
             >

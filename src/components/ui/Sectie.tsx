@@ -146,7 +146,7 @@ export function Kruimels({
 }) {
   return (
     <nav
-      aria-label="Kruimelpad"
+      aria-label={items.find(i => i.href)?.href?.startsWith("/de") ? "Brotkrümelnavigation" : items.find(i => i.href)?.href?.startsWith("/en") ? "Breadcrumbs" : "Kruimelpad"}
       className="text-xs mb-6"
       style={{ color: donker ? "rgba(250,246,239,0.6)" : "var(--grijs)" }}
     >

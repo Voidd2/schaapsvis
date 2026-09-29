@@ -9,6 +9,7 @@ import { BEDRIJF } from "@/lib/bedrijf";
 import { bestelContact } from "@/lib/bestel-contact";
 import { gesorteerdAssortiment } from "@/lib/assortiment-volgorde";
 import { AssortimentFilter } from "./AssortimentFilter";
+import { localizeProduct } from "@/lib/product-localization";
 
 const copy = {
   nl: {
@@ -49,10 +50,10 @@ export default async function AssortimentPage({ params }: { params: Promise<{ lo
   const wa = bestelContact(locale);
   return <>
     <Schema data={{
-      "@context": "https://schema.org", "@type": "ItemList", name: `Assortiment ${BEDRIJF.naam}`,
+      "@context": "https://schema.org", "@type": "ItemList", name: `${c.title} ${BEDRIJF.naam}`,
       numberOfItems: gesorteerdAssortiment.length,
       itemListElement: gesorteerdAssortiment.map((p, i) => ({
-        "@type": "ListItem", position: i + 1, name: p.naam,
+        "@type": "ListItem", position: i + 1, name: localizeProduct(p, locale).naam,
         url: `${BEDRIJF.domein}/${locale}/assortiment/${p.slug}`,
       })),
     }} />
@@ -72,7 +73,7 @@ export default async function AssortimentPage({ params }: { params: Promise<{ lo
       </div>
     </header>
     <aside className="collection-policy"><div className="section-wrap"><div><strong>{c.policy}</strong><p>{c.policySub}</p></div><a href={wa.href}><MessageCircle size={19} aria-hidden="true" />{wa.label}<ArrowUpRight size={17} aria-hidden="true" /></a></div></aside>
-    <div id="assortiment"><AssortimentFilter /></div>
+    <div id="assortiment"><AssortimentFilter localized={gesorteerdAssortiment.map(p => localizeProduct(p, locale))} /></div>
     <section className="collection-contact"><div className="section-wrap"><div><p className="kapitaal">{locale === "nl" ? "Persoonlijk advies" : locale === "de" ? "Persönliche Beratung" : "Personal advice"}</p><h2>{c.question}</h2><p>{c.note}</p></div><a className="knop knop-rood" href={wa.href}><MessageCircle size={19} aria-hidden="true" />{wa.label}</a></div></section>
   </>;
 }

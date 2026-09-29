@@ -1,12 +1,15 @@
 "use client";
 
+import { useLocale } from "next-intl";
+
 export function WhatsAppButton() {
+  const locale = useLocale();
   return (
     <a
       href="https://wa.me/31715149802"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat via WhatsApp"
+      aria-label={locale === "de" ? "Kontakt über WhatsApp" : locale === "en" ? "Chat on WhatsApp" : "Chat via WhatsApp"}
       className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 shadow-lg transition-transform hover:scale-110"
       style={{ backgroundColor: "#25d366", borderRadius: "50%" }}
     >

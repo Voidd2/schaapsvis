@@ -1,5 +1,6 @@
 // Run against a local, public-mode server. Never submits a valid order.
 const origin = process.argv[2] || 'http://localhost:3000';
+if (!/^http:\/\/(localhost|127\.0\.0\.1):/.test(origin)) throw new Error('API rejection tests are restricted to a local server.');
 const sitemap = await (await fetch(`${origin}/sitemap.xml`)).text();
 const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => new URL(m[1]).pathname);
 if (!urls.length) throw new Error('Sitemap empty: start the local server with SITE_PUBLIC=on.');

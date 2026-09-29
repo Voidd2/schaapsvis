@@ -2,7 +2,9 @@
 import Link from "next/link";
 import { useLocale } from "next-intl";
 import { useWinkelwagen } from "@/components/winkel/Winkelwagen";
-import { regels, totaal, hoeveelheidTekst } from "@/lib/visschaal";
+import { regels, totaal } from "@/lib/visschaal";
+import { useSchaalTekst } from "@/components/visschaal/tekst";
+import { platterQuantity } from "@/lib/platter-localization";
 import { euro, whatsappLink } from "@/lib/bedrijf";
 import { MessageCircle } from "lucide-react";
 const copy = {
@@ -12,9 +14,10 @@ const copy = {
 };
 export function VisschaalAanvraag() {
  const locale = useLocale();
+ const tekst = useSchaalTekst();
  const c = copy[locale as keyof typeof copy] || copy.nl;
  const { samenstelling } = useWinkelwagen();
  const items = regels(samenstelling);
- const bericht = [c.start, ...items.map(r => r.naam + (r.isSchaal ? "" : " — " + hoeveelheidTekst(r))), "", c.total + ": " + euro(totaal(samenstelling)), "", c.end].join("\n");
- return <div className="recipe-checklist max-w-3xl mx-auto"><h2 className="text-2xl mb-4">{items.length ? c.title : c.empty}</h2><p className="leading-relaxed mb-6">{c.note}</p><ul className="mb-6">{items.map(r => <li key={r.id} className="py-3 border-b border-sky-200 flex gap-4 justify-between"><span>{r.naam}{!r.isSchaal && " — " + hoeveelheidTekst(r)}</span><span className="whitespace-nowrap">{euro(r.bedrag)}</span></li>)}</ul>{items.length > 0 && <><p className="text-sm mb-1">{c.total}</p><p className="text-2xl font-semibold mb-6">{euro(totaal(samenstelling))}</p><a href={whatsappLink(bericht)} target="_blank" rel="noopener noreferrer" className="knop knop-navy"><MessageCircle size={18} aria-hidden />{c.button}</a></>}<Link href={`/${locale}/visschalen`} className="block mt-5 underline font-semibold">{items.length ? c.change : c.empty} →</Link></div>;
+ const bericht = [c.start, ...items.map(r => tekst.naam(r.id,r.naam) + (r.isSchaal ? "" : " — " + platterQuantity(r,locale))), "", c.total + ": " + euro(totaal(samenstelling)), "", c.end].join("\n");
+ return <div className="recipe-checklist max-w-3xl mx-auto"><h2 className="text-2xl mb-4">{items.length ? c.title : c.empty}</h2><p className="leading-relaxed mb-6">{c.note}</p><ul className="mb-6">{items.map(r => <li key={r.id} className="py-3 border-b border-sky-200 flex gap-4 justify-between"><span>{tekst.naam(r.id,r.naam)}{!r.isSchaal && " — " + platterQuantity(r,locale)}</span><span className="whitespace-nowrap">{euro(r.bedrag)}</span></li>)}</ul>{items.length > 0 && <><p className="text-sm mb-1">{c.total}</p><p className="text-2xl font-semibold mb-6">{euro(totaal(samenstelling))}</p><a href={whatsappLink(bericht)} target="_blank" rel="noopener noreferrer" className="knop knop-navy"><MessageCircle size={18} aria-hidden />{c.button}</a></>}<Link href={`/${locale}/visschalen`} className="block mt-5 underline font-semibold">{items.length ? c.change : c.empty} →</Link></div>;
 }

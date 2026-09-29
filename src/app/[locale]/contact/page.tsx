@@ -8,7 +8,8 @@ import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { Beeld } from "@/components/ui/Beeld";
 import { ContactFormulier } from "./ContactFormulier";
 import { paginaMetadata, kruimelSchema } from "@/lib/seo";
-import { BEDRIJF, ADRES_REGEL, whatsappLink } from "@/lib/bedrijf";
+import { bestelContact } from "@/lib/bestel-contact";
+import { BEDRIJF, ADRES_REGEL } from "@/lib/bedrijf";
 
 export async function generateMetadata({
   params,
@@ -59,7 +60,7 @@ export default async function ContactPage({
           },
           {
             label: g("whatsapp"),
-            href: whatsappLink(`Hallo ${BEDRIJF.naamKort}, ik heb een vraag.`),
+            href: bestelContact(locale).href,
             extern: true,
             soort: "lijn",
           },
@@ -96,7 +97,7 @@ export default async function ContactPage({
                 <dt className="kapitaal mb-1">WhatsApp</dt>
                 <dd>
                   <a
-                    href={whatsappLink("Hallo Schaap's Vishandel, ik heb een vraag.")}
+                    href={bestelContact(locale).href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-semibold underline underline-offset-4"
@@ -172,7 +173,6 @@ export default async function ContactPage({
         tekst={g("slotTekst")}
         knoppen={[
           { label: nav("visschalen"), href: `/${locale}/visschalen` },
-          { label: nav("visschalen"), href: `/${locale}/visschalen`, soort: "lijn" },
           { label: nav("locaties"), href: `/${locale}/bezoek-ons`, soort: "lijn" },
         ]}
       />

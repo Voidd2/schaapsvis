@@ -36,7 +36,7 @@ await Promise.all(Array.from({length: 6}, async () => {
       const response = await fetch(`${origin}/${locale}/assortiment/${p.slug}`);
       const html = await response.text();
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      if (photo && !html.includes(`src="${photo.src}"`)) throw new Error('Detail image missing');
+      if (photo && !html.includes(`src="${photo.src}"`) && !html.includes(encodeURIComponent(photo.src))) throw new Error('Detail image missing');
       if (html.includes('opacity:0.45')) throw new Error('Empty labelled photo placeholder');
       checked++;
     } catch (error) { failures.push({slug: p.slug, locale, error: String(error)}); }

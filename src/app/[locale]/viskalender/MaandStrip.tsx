@@ -1,7 +1,6 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { viskalenderData } from "@/lib/viskalender";
 
 /**
  * De maandbalk boven de kalender.
@@ -27,13 +26,13 @@ function abonneer(opnieuw: () => void) {
   return () => clearInterval(timer);
 }
 
-export function MaandStrip() {
-  // Op de server weten we de maand van de bezoeker niet; dan markeren we niets.
-  const nu = useSyncExternalStore(abonneer, huidigeMaand, () => null);
+export function MaandStrip({maanden, maandIndex, label}: {maanden:{naam:string;afkorting:string}[];maandIndex:number;label:string}) {
+  // Both server and browser use Europe/Amsterdam on first render.
+  const nu = useSyncExternalStore(abonneer, huidigeMaand, () => maandIndex);
 
   return (
     <nav
-      aria-label="Maanden"
+      aria-label={label}
       className="sticky z-40 overflow-x-auto"
       style={{
         top: "var(--kop-hoogte)",
@@ -42,7 +41,7 @@ export function MaandStrip() {
       }}
     >
       <ul className="flex min-w-max px-2">
-        {viskalenderData.map((maand, i) => (
+        {maanden.map((maand, i) => (
           <li key={maand.naam}>
             <a
               href={`#maand-${i}`}

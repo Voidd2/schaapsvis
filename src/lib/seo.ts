@@ -125,7 +125,7 @@ export function winkelSchema(locale: string) {
     founder: { "@type": "Person", name: BEDRIJF.oprichter },
     priceRange: "€€",
     currenciesAccepted: "EUR",
-    paymentAccepted: "Contant, Pin, Maestro, V Pay",
+    paymentAccepted: "Cash, Debit card, Maestro, V Pay",
     openingHoursSpecification: OPENINGSTIJDEN,
     sameAs: [BEDRIJF.socials.facebook, BEDRIJF.socials.instagram, BEDRIJF.maps.profiel],
     // Elke gemeente waar we bezorgen apart benoemen: zo weet Google dat deze
@@ -161,7 +161,7 @@ export function bezorgdienstSchema(locale: string) {
     },
     offers: GEMEENTEN.map((g) => ({
       "@type": "Offer",
-      name: `Bezorging ${g.naam}`,
+      name: `${locale === "de" ? "Lieferung" : locale === "en" ? "Delivery" : "Bezorging"} ${g.naam}`,
       priceSpecification: {
         "@type": "DeliveryChargeSpecification",
         price: kostenVoor(g),

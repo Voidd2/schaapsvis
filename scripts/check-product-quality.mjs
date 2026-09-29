@@ -1,5 +1,7 @@
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
+import {createRequire} from 'node:module';
+const sharp=createRequire(import.meta.url)('sharp');
 const root = new URL('../', import.meta.url);
 const sources = JSON.parse(await fs.readFile(new URL('product-image-sources.json', import.meta.url), 'utf8'));
 function dimensions(buffer) {
@@ -25,3 +27,12 @@ for (const file of ['src/lib/assortiment-data.ts', 'src/lib/beeld.ts', 'src/lib/
   assert.ok(!source.includes('/images/producten/'), `${file} still uses low-resolution thumbnails`);
 }
 console.log('37 higher-resolution product images validated; no old thumbnail references in catalogue, homepage or blog.');
+for(const [file,width,height] of [
+ ['public/images/producten-hd/sprot-garitzko.jpg',1280,960],
+ ['public/images/editorial/gerookte-zalm-serveervoorbeeld.png',1536,1024],
+ ['public/images/editorial/creuse-oesters-serveervoorbeeld.png',1536,1024],
+]){
+ const metadata=await sharp(await fs.readFile(new URL(file,root))).metadata();
+ assert.equal(metadata.width,width,file);assert.equal(metadata.height,height,file);
+}
+console.log('3 additional high-resolution product photos validated (metadata inspection only).');

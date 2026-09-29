@@ -63,7 +63,7 @@ export default async function BestellenPage({
         titel={t("kop")}
         intro={process.env.BESTELLING_WEBHOOK_URL ? t("inleiding") : (aanvraagIntro[locale as keyof typeof aanvraagIntro] ?? aanvraagIntro.nl)}
         feiten={[
-          { label: g("bezorgen"), waarde: bezorgdagenTekst() },
+          { label: g("bezorgen"), waarde: bezorgdagenTekst(locale) },
           {
             label: g("gratis"),
             waarde: `${g("vanaf")} ${euro(BEZORGING.gratisVanaf)}`,

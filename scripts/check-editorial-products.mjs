@@ -40,7 +40,7 @@ if (origin) for (const locale of ['nl', 'en', 'de']) {
     const response = await fetch(`${origin}/${locale}/assortiment/${slug}`);
     assert.ok(response.ok);
     const detail = await response.text();
-    assert.ok(detail.includes(`src="${photo.src}"`), `${locale}/${slug}: detail photo`);
+    assert.ok(detail.includes(`src="${photo.src}"`) || detail.includes(encodeURIComponent(photo.src)), `${locale}/${slug}: detail photo`);
     if (photo.credit) {
       assert.ok(html.includes(photo.credit.source), `${locale}/${slug}: catalogue attribution`);
       assert.ok(detail.includes(photo.credit.licenseUrl), `${locale}/${slug}: detail license`);

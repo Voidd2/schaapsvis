@@ -40,12 +40,12 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/admin", "/api/"],
       },
       {
-        userAgent: "Claude-Web",
+        userAgent: ["Claude-SearchBot", "Claude-User", "ClaudeBot"],
         allow: "/",
         disallow: ["/admin", "/api/"],
       },
       {
-        userAgent: "anthropic-ai",
+        userAgent: "OAI-SearchBot",
         allow: "/",
         disallow: ["/admin", "/api/"],
       },

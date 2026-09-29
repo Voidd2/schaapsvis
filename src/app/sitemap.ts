@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 import { blogPosts } from "@/lib/blog";
 import { products } from "@/lib/assortiment-data";
 import { recepten } from "@/lib/recepten";
+import { productPhoto } from "@/lib/product-beeld";
 
 import { BEDRIJF } from "@/lib/bedrijf";
 import { LOCALES } from "@/lib/seo";
@@ -21,7 +22,7 @@ const basis = BEDRIJF.domein;
  *    verwijzingen naar die talen. Verwijzen naar een Duitse versie die er niet
  *    is, kost je de koppeling tussen de versies die er wél zijn.
  */
-const LAATSTE_WIJZIGING = new Date("2026-09-28");
+const LAATSTE_WIJZIGING = new Date("2026-09-29");
 
 /** Pagina's die in nl, en én de bestaan. */
 const MEERTALIG = [
@@ -35,33 +36,15 @@ const MEERTALIG = [
   { pad: "/varlaks", prioriteit: 0.8, frequentie: "monthly" as const },
   { pad: "/ons-verhaal", prioriteit: 0.7, frequentie: "yearly" as const },
   { pad: "/contact", prioriteit: 0.6, frequentie: "yearly" as const },
+  { pad: "/recepten", prioriteit: 0.6, frequentie: "monthly" as const },
+  { pad: "/blog", prioriteit: 0.6, frequentie: "monthly" as const },
+  { pad: "/viskalender", prioriteit: 0.6, frequentie: "monthly" as const },
+  { pad: "/viswinkel-voorschoten", prioriteit: 0.8, frequentie: "monthly" as const },
+  { pad: "/viswinkel-leiden", prioriteit: 0.8, frequentie: "monthly" as const },
+  { pad: "/marktkraam-leiden", prioriteit: 0.7, frequentie: "monthly" as const },
+  { pad: "/too-good-to-go", prioriteit: 0.5, frequentie: "monthly" as const },
 ];
 
-/**
- * Pagina's die maar in één taal geschreven zijn. Die zetten we ook maar één
- * keer in de sitemap: een Duitse verwijzing naar een Nederlandse tekst is geen
- * vertaling, en Google behandelt zo'n verkeerde koppeling als een fout.
- */
-const EENTALIG: { taal: "nl" | "de"; pad: string; prioriteit: number; paar?: { taal: "nl" | "de"; pad: string } }[] = [
-  {
-    taal: "nl",
-    pad: "/viswinkel-leiden",
-    prioriteit: 0.8,
-    paar: { taal: "de", pad: "/frischer-fisch-leiden" },
-  },
-  {
-    taal: "de",
-    pad: "/frischer-fisch-leiden",
-    prioriteit: 0.75,
-    paar: { taal: "nl", pad: "/viswinkel-leiden" },
-  },
-  { taal: "nl", pad: "/marktkraam-leiden", prioriteit: 0.7 },
-  { taal: "nl", pad: "/viswinkel-voorschoten", prioriteit: 0.7 },
-  { taal: "nl", pad: "/viskalender", prioriteit: 0.6 },
-  { taal: "nl", pad: "/blog", prioriteit: 0.6 },
-  { taal: "nl", pad: "/recepten", prioriteit: 0.6 },
-  { taal: "nl", pad: "/too-good-to-go", prioriteit: 0.5 },
-];
 
 function meertaligeAlternates(pad: string) {
   const talen: Record<string, string> = {};
@@ -98,40 +81,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // ── Productpagina's ──────────────────────────────────────────────────────
   for (const product of products) {
     const pad = `/assortiment/${product.slug}`;
-    regels.push({ url: `${basis}/nl${pad}`, lastModified: new Date("2026-09-28"), changeFrequency: "monthly", priority: 0.65 });
+    for (const taal of LOCALES) {
+      regels.push({url: `${basis}/${taal}${pad}`, lastModified: new Date("2026-09-29"), changeFrequency: "monthly", priority: 0.65, alternates: meertaligeAlternates(pad), images: productPhoto(product) ? [basis + productPhoto(product)!.src] : undefined});
+    }
   }
 
-  // ── Pagina's in één taal ────────────────────────────────────────────────
-  for (const { taal, pad, prioriteit, paar } of EENTALIG) {
-    const talen: Record<string, string> = { [taal]: `${basis}/${taal}${pad}` };
-    if (paar) talen[paar.taal] = `${basis}/${paar.taal}${paar.pad}`;
-    talen["x-default"] = talen.nl ?? `${basis}/${taal}${pad}`;
-    regels.push({
-      url: `${basis}/${taal}${pad}`,
-      lastModified: pad === "/viswinkel-voorschoten" ? new Date("2026-09-29") : LAATSTE_WIJZIGING,
-      changeFrequency: "monthly",
-      priority: prioriteit,
-      alternates: { languages: talen },
-    });
-  }
-
-  // ── Artikelen en recepten: alleen Nederlands, dus geen hreflang ──────────
+  // ── Volledig vertaalde artikelen en recepten ─────────────────────────────
   for (const post of blogPosts) {
-    regels.push({
-      url: `${basis}/nl/blog/${post.slug}`,
-      lastModified: new Date(post.bijgewerkt ?? post.datum),
-      changeFrequency: "yearly",
-      priority: 0.5,
-    });
+    const pad = `/blog/${post.slug}`;
+    for (const taal of LOCALES) regels.push({url:`${basis}/${taal}${pad}`,lastModified:new Date("2026-09-29"),changeFrequency:"yearly",priority:0.5,alternates:meertaligeAlternates(pad),images:[basis + post.fotoUrl]});
   }
 
   for (const recept of recepten) {
-    regels.push({
-      url: `${basis}/nl/recepten/${recept.slug}`,
-      lastModified: LAATSTE_WIJZIGING,
-      changeFrequency: "yearly",
-      priority: 0.5,
-    });
+    const pad = `/recepten/${recept.slug}`;
+    for (const taal of LOCALES) regels.push({url:`${basis}/${taal}${pad}`,lastModified:new Date("2026-09-29"),changeFrequency:"yearly",priority:0.5,alternates:meertaligeAlternates(pad),images:recept.fotoUrl ? [basis + recept.fotoUrl] : undefined});
   }
 
   return regels;

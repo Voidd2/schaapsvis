@@ -48,14 +48,15 @@ export const BEZORGING = {
 export const BEZORGDAG_NAMEN = ["zondag", "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag"];
 
 /** "woensdag t/m zaterdag" of "woensdag, vrijdag en zaterdag" — leesbaar gezet. */
-export function bezorgdagenTekst(): string {
+export function bezorgdagenTekst(locale = "nl"): string {
+  const namenPerDag = Array.from({length:7},(_,d)=>new Intl.DateTimeFormat(locale,{weekday:"long",timeZone:"UTC"}).format(new Date(Date.UTC(2026,8,27+d))));
   const dagen = [...BEZORGING.bezorgdagen].sort((a, b) => a - b);
   const aaneengesloten = dagen.every((d, i) => i === 0 || d === dagen[i - 1] + 1);
   if (aaneengesloten && dagen.length > 2) {
-    return `${BEZORGDAG_NAMEN[dagen[0]]} t/m ${BEZORGDAG_NAMEN[dagen[dagen.length - 1]]}`;
+    return `${namenPerDag[dagen[0]]} ${locale === "en" ? "to" : locale === "de" ? "bis" : "t/m"} ${namenPerDag[dagen[dagen.length - 1]]}`;
   }
-  const namen = dagen.map((d) => BEZORGDAG_NAMEN[d]);
-  return `${namen.slice(0, -1).join(", ")} en ${namen[namen.length - 1]}`;
+  const namen = dagen.map((d) => namenPerDag[d]);
+  return `${namen.slice(0, -1).join(", ")} ${locale === "en" ? "and" : locale === "de" ? "und" : "en"} ${namen[namen.length - 1]}`;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════

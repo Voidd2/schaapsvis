@@ -128,7 +128,7 @@ const receptenOrigineel: Recept[] = [
     slug: "kibbeling-bakken",
     hoofdproduct: "kibbeling",
     title: "Kibbeling thuis bakken",
-    subtitle: "Knapperig van buiten, mals van binnen · leuk om met de kids te doen",
+    subtitle: "Knapperig van buiten, mals van binnen — het frituren doet een volwassene",
     tijd: "40 min",
     moeilijkheid: "Gemiddeld",
     tags: [
@@ -145,7 +145,7 @@ const receptenOrigineel: Recept[] = [
       "1 tl paprikapoeder",
       "½ tl zout en peper naar smaak",
       "Frituurolie: hoeveelheid volgens de frituurpan, of voldoende voor een laag van 5 cm in een hoge pan",
-      "Citroen en tartaarsaus (optioneel)",
+      "Citroen en ravigottesaus (optioneel)",
     ],
     bereidingswijze: [
       "Snijd de vis in stukken van ongeveer 4 cm en dep goed droog. Houd de vis gekoeld tot gebruik.",
@@ -267,7 +267,7 @@ const receptenOrigineel: Recept[] = [
       "Schep de kruidenboter over de vis en serveer direct.",
     ],
     verhaal:
-      "Schol is een onderschatte vis die thuis zelden klaargemaakt wordt. Snel, licht en gezond. Overkoken is de enige fout die u kunt maken — ze heeft vrijwel geen bereidingstijd nodig.",
+      "Scholfilet is snel gaar en past goed bij een eenvoudige kruidenboter. Behandel de filets voorzichtig en controleer of het dikste deel gaar is: de baktijd hangt af van de dikte.",
     seoKeywords: "scholfilet bakken, gebakken schol recept, schol met groene kruiden",
     porties: 4,
   },
@@ -295,7 +295,7 @@ const receptenOrigineel: Recept[] = [
     bereidingswijze: [
       "Verwarm de oven voor op 125°C. Breng de kabeljauw op smaak met zout en peper.",
       "Verhit 2 el olie in een koekenpan. Leg de kabeljauw met de velkant naar beneden en bak 3–4 minuten tot het vel knapperig is. Keer om, bak 1 minuut.",
-      "Leg de filets in de oven en laat nog ±10 minuten nagaren.",
+      "Leg de filets in de oven en laat nog ±10 minuten nagaren. Controleer of het dikste deel gaar is.",
       "Snijd de venkel in dunne reepjes. Verhit 2 el olie in een wok en roerbak venkel en zeekraal 3–4 minuten — gaar maar nog met bite.",
       "Verdeel de groenten over 4 warme borden. Leg de kabeljauw met de velkant omhoog erop.",
     ],
@@ -362,7 +362,7 @@ const receptenOrigineel: Recept[] = [
       "Meng bloem met peper, zout en paprikapoeder. Wentel de scholfilets erdoor.",
       "Verhit 1 el olijfolie, bak de sjalotjes en knoflook aan. Blus af met azijn, voeg gezeefde tomaten, olijven en pesto toe. Warm kort op en zet apart.",
       "Verhit de rest van de olie en bak de scholfilets aan beide kanten goudbruin, ±5 minuten totaal.",
-      "Schep saus op 4 borden en leg de scholfilets erop. Lekker met pasta of krieltjes.",
+      "Schep saus op 4 borden en leg de scholfilets erop. Serveer met pasta of krieltjes, bereid volgens de verpakking.",
     ],
     verhaal:
       "Schol met een mediterrane twist — de tomaat-olijvensaus past verrassend goed bij de zachte smaak van schol. Snel klaar en ook nog eens mooi op tafel. Probeer eens met kerstomaten door de saus.",
@@ -378,7 +378,7 @@ const receptenOrigineel: Recept[] = [
     tijd: "10 min",
     moeilijkheid: "Makkelijk",
     tags: ["Snel", "Bijzonder"],
-    fotoLabel: "Roggebrood met gerookte vis, roomkaas en bieslook",
+    fotoLabel: "Roggebroodhapjes met gerookte paling en appelsalsa",
     vanSchaap: ["100 g gerookte paling"],
     vanSupermarkt: [
       "1 kleine appel",
@@ -427,7 +427,7 @@ const receptenOrigineel: Recept[] = [
     bereidingswijze: [
       "Snijd lente-ui en tomaten. Halveer de avocado's, verwijder de pit en snijd het vruchtvlees in plakken. Besprenkel met 1 el citroensap.",
       "Snijd de surimi in stukken of trek voorzichtig uit elkaar.",
-      "Meng de resterende 2 el citroensap met mosterd, suiker, olijfolie, bieslook en peper.",
+      "Meng de resterende 2 el citroensap met mosterd, suiker, olijfolie, bieslook en peper. Voeg zo nodig zout toe.",
       "Verdeel veldsla, surimi, tomaten en avocado over vier borden. Voeg lente-ui en dressing toe.",
     ],
     verhaal: "Surimi, ook bekend als krabsticks, is een product van vis en is geen echt krabvlees. Met avocado en een citroendressing maakt u er een eenvoudig voorgerecht van.",

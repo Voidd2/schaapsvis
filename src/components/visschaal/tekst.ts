@@ -1,6 +1,7 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { platterName } from "@/lib/platter-localization";
 import type { Groep } from "@/lib/visschaal";
 
 /**
@@ -8,18 +9,18 @@ import type { Groep } from "@/lib/visschaal";
  *
  * De Nederlandse teksten in `src/lib/visschaal.ts` blijven de bron — dat is waar
  * de eigenaar zijn schaal samenstelt. Hier worden ze omgezet aan de hand van de
- * id van elk onderdeel. Ontbreekt een vertaling, dan valt hij terug op het
- * Nederlands: liever één regel in de verkeerde taal dan een lege plek of een
- * sleutelnaam op het scherm.
+ * id van elk onderdeel. Ontbrekende Engelse of Duitse vertalingen zijn fouten,
+ * zodat de controles geen stilzwijgende Nederlandse terugval kunnen missen.
  */
 export function useSchaalTekst() {
+  const locale = useLocale();
   const t = useTranslations("visschaalItems");
-  const of = (sleutel: string, terugval: string) => (t.has(sleutel) ? t(sleutel) : terugval);
+  const of = (sleutel: string, terugval: string) => (t.has(sleutel) ? t(sleutel) : locale === "nl" ? terugval : (() => { throw new Error("Missing platter translation: " + sleutel); })());
 
   return {
     groep: (groep: Groep, terugval: string) => of(`groep_${groep}`, terugval),
     uitleg: (groep: Groep, terugval: string) => of(`uitleg_${groep}`, terugval),
-    naam: (id: string, terugval: string) => of(id, terugval),
+    naam: (id: string, terugval: string) =>(platterName(id,locale) ?? of(id, terugval)),
     toelichting: (id: string, terugval?: string) =>
       terugval === undefined ? undefined : of(`toelichting_${id}`, terugval),
     eenheid: (eenheid?: string) =>

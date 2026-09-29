@@ -2,10 +2,7 @@ import type { Metadata } from "next";
 import { actieveBon } from "@/lib/kortingsbonnen";
 import { Kortingsbon } from "./Kortingsbon";
 
-export const metadata: Metadata = {
-  title: "Kortingsbon — Schaap's Vishandel",
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata({params}:{params:Promise<{locale:string}>}):Promise<Metadata>{const {locale}=await params; return {title: `${locale === "de" ? "Rabattgutschein" : locale === "en" ? "Discount voucher" : "Kortingsbon"} — Schaap’s Vishandel`,robots:{index:false,follow:false}};}
 
 export default async function KortingsbonPage({
   params,

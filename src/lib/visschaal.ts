@@ -101,7 +101,7 @@ export const SCHALEN: Schaal[] = [
       "De schaal waar de meeste mensen om vragen. Genoeg voor een borrel met vier tot zes man, naast ander eten.",
     bevat: [
       "Gerookte zalm van het mes",
-      "Hollandse garnalen, met de hand gepeld",
+      "Hollandse garnalen",
       "Haringhapjes met ui",
       "Gerookte makreelfilet",
       "Huisgemaakte zalm- en krabsalade",

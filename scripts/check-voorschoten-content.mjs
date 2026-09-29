@@ -46,7 +46,7 @@ for (const post of posts) {
   assert(post.excerpt.length <= 160, `${path}: overly long description`);
   for (const locale of ['en', 'de']) {
     const alias = await (await fetch(origin + '/' + locale + '/blog/' + post.slug)).text();
-    assert(alias.includes(`rel="canonical" href="https://www.schaapsvishandel.nl${path}"`), `${locale}/${post.slug}: wrong language canonical`);
+    assert(alias.includes(`rel="canonical" href="https://www.schaapsvishandel.nl/${locale}/blog/${post.slug}"`), `${locale}/${post.slug}: wrong language canonical`);
   }
   details.push({path, words, titleLength:post.title.length, descriptionLength:post.excerpt.length});
 }

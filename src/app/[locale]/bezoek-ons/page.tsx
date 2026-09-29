@@ -75,7 +75,7 @@ const PLEKKEN = [
     id: "voorschoten",
     dagen: [["vr", "08:00 – 17:30"]],
     telefoon: false,
-    maps: "https://maps.google.com/?q=Hoogvliet+Voorschoterweg+Voorschoten",
+    maps: VERKOOPPUNTEN.find(punt => punt.id === "voorschoten")!.mapsUrl,
   },
 ] as const;
 

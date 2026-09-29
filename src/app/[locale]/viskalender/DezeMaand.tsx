@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { bestelContact } from "@/lib/bestel-contact";
-import { viskalenderData } from "@/lib/viskalender";
+import { calendarCopy, localizedCalendar } from "@/lib/calendar-localization";
 
 /**
  * Wat er déze maand ligt, bovenaan de kalender.
@@ -18,7 +18,8 @@ export function DezeMaand({ locale, maandIndex }: { locale: string; maandIndex: 
   // Server-rendered in Europe/Amsterdam: visible to crawlers without JavaScript.
   const nu = maandIndex;
 
-  const maand = viskalenderData[nu];
+  const c = calendarCopy(locale);
+  const maand = localizedCalendar(locale)[nu];
   if (!maand) return null;
 
   return (
@@ -26,10 +27,10 @@ export function DezeMaand({ locale, maandIndex }: { locale: string; maandIndex: 
       <div className="max-w-6xl mx-auto px-4 grid lg:grid-cols-[1.15fr_0.85fr] gap-8 lg:gap-14">
         <div>
           <p className="kapitaal mb-2" style={{ color: "var(--navy)" }}>
-            Deze maand
+            {c.thisMonth}
           </p>
           <h2 className="text-[2rem] md:text-[2.6rem] leading-none mb-3">
-            {`${maand.naam} bij Schaap’s`}
+            {`${maand.naam} ${c.at}`}
           </h2>
           <p
             className="text-[1.15rem] mb-4"
@@ -41,14 +42,12 @@ export function DezeMaand({ locale, maandIndex }: { locale: string; maandIndex: 
             {maand.tekst}
           </p>
           <p className="lees mt-4 text-[0.95rem]" style={{ color: "var(--charcoal)" }}>
-            Dit is wat er in {maand.naam.toLowerCase()} hoort te liggen. Wat er{" "}
-            <em>vandaag</em> daadwerkelijk ligt, hangt af van wat de boten hebben
-            gebracht — bel even of vraag het aan de toonbank.
+            {c.availability}
           </p>
           <div className="flex flex-wrap gap-3 mt-6">
             <a href={bestelContact(locale).href} className="knop knop-rood">{bestelContact(locale).label}</a>
             <a href={`#maand-${nu}`} className="knop knop-lijn">
-              Alles over {maand.naam.toLowerCase()}
+              {c.allAbout} {maand.naam}
             </a>
           </div>
         </div>
@@ -56,7 +55,7 @@ export function DezeMaand({ locale, maandIndex }: { locale: string; maandIndex: 
         <div>
           <Image src={maand.foto.src} alt={maand.foto.alt} width={1200} height={800} sizes="(max-width: 768px) 100vw, 50vw" className="w-full aspect-[16/9] object-cover rounded-2xl mb-6" />
           <p className="kapitaal mb-3" style={{ color: "var(--navy)" }}>
-            Nu in het seizoen
+            {c.now}
           </p>
           <ul style={{ borderTop: "1px solid var(--navy)" }}>
             {maand.vis.map((vis) => (

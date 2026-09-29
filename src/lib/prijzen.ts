@@ -41,7 +41,14 @@ export function getPrijs(slug: string): Prijs | undefined {
 }
 
 // "€ 24,95 per kg" — Nederlands decimaalteken.
-export function formatPrijs(p: Prijs): string {
-  const bedrag = p.euro.toFixed(2).replace(".", ",");
-  return `${p.vanaf ? "vanaf " : ""}€ ${bedrag} ${p.eenheid}`;
+export function formatPrijs(p: Prijs, locale = "nl"): string {
+  const units: Record<string, [string, string]> = {
+    "per stuk": ["each", "pro Stück"], "per kg": ["per kg", "pro kg"], "per bosje": ["per bunch", "pro Bündel"],
+    "per dozijn (12 st.)": ["per dozen (12)", "pro Dutzend (12 Stück)"], "per stuk (±500 g)": ["each (approx. 500 g)", "pro Stück (ca. 500 g)"],
+    "per stuk (±300 g)": ["each (approx. 300 g)", "pro Stück (ca. 300 g)"], "per stuk (200 g)": ["each (200 g)", "pro Stück (200 g)"],
+  };
+  const amount = new Intl.NumberFormat(locale === "en" ? "en-GB" : locale === "de" ? "de-DE" : "nl-NL", {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(p.euro);
+  const unit = locale === "nl" ? p.eenheid : units[p.eenheid]?.[locale === "en" ? 0 : 1];
+  if (!unit) throw new Error(`Missing price unit translation: ${p.eenheid}`);
+  return `${p.vanaf ? (locale === "en" ? "from " : locale === "de" ? "ab " : "vanaf ") : ""}€ ${amount} ${unit}`;
 }

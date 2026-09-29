@@ -11,10 +11,10 @@ import {
 } from "@/lib/bezorging";
 import { BEDRIJF, euro, whatsappLink } from "@/lib/bedrijf";
 import {
-  hoeveelheidTekst,
   regels as schaalRegelsVan,
   totaal as schaalTotaalVan,
 } from "@/lib/visschaal";
+import { platterQuantity } from "@/lib/platter-localization";
 import { useSchaalTekst } from "@/components/visschaal/tekst";
 import { useWinkelwagen } from "@/components/winkel/Winkelwagen";
 
@@ -44,7 +44,7 @@ const AFHAALPUNTEN = [
 ];
 
 /** Snijwijzes zijn alleen zinvol bij verse vis die nog heel is. */
-function bezorgdagen(aantal = 8): { waarde: string; label: string }[] {
+function bezorgdagen(locale:string, aantal = 8): { waarde: string; label: string }[] {
   const dagen: { waarde: string; label: string }[] = [];
   const nu = new Date();
   const [grensUur] = BEZORGING.uitersteBesteltijd.split(":").map(Number);
@@ -56,7 +56,7 @@ function bezorgdagen(aantal = 8): { waarde: string; label: string }[] {
     if (!(BEZORGING.bezorgdagen as readonly number[]).includes(dag.getDay())) continue;
     dagen.push({
       waarde: dag.toISOString().slice(0, 10),
-      label: dag.toLocaleDateString("nl-NL", {
+      label: dag.toLocaleDateString(locale, {
         weekday: "long",
         day: "numeric",
         month: "long",
@@ -71,6 +71,7 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
   const g = useTranslations("gedeeld");
   const locale = useLocale();
   const schaalTekst = useSchaalTekst();
+  const afhaalNaam = (punt:string) => locale === "nl" ? punt : ({ "Winkel Herenstraat 48, Leiden": locale === "de" ? "Geschäft Herenstraat 48, Leiden" : "Shop Herenstraat 48, Leiden", "Markt Leiden (woensdag of zaterdag)": locale === "de" ? "Markt Leiden (Mittwoch oder Samstag)" : "Leiden market (Wednesday or Saturday)", "Hoogvliet Voorschoten (vrijdag)": locale === "de" ? "Hoogvliet Voorschoten (Freitag)" : "Hoogvliet Voorschoten (Friday)" }[punt] ?? punt);
   const w = useTranslations("winkelwagen");
 
   // Wat er in de wagen zit is niet van dit formulier maar van de winkelwagen:
@@ -125,8 +126,8 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
 
   const teBetalen = soort === "visschaal" ? schaalTotaal + bezorgkosten : null;
 
-  const dagen = useMemo(() => bezorgdagen(), []);
-  const bezorgdagenLabel = bezorgdagenTekst();
+  const dagen = useMemo(() => bezorgdagen(locale), [locale]);
+  const bezorgdagenLabel = bezorgdagenTekst(locale);
 
   const nietBezorgbaar = regels.filter((r) => !r.bezorgbaar);
   const bezorgenGeblokkeerd = wijze === "bezorgen" && nietBezorgbaar.length > 0;
@@ -186,7 +187,7 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
       };
 
       if (!antwoord.ok || !data.ok) {
-        setFout(data.fout ?? t("misluktTekst"));
+        setFout(t("misluktTekst"));
         setStatus("mislukt");
         return;
       }
@@ -274,7 +275,7 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
                   >
                     <span>
                       <span className="bedrag" style={{ color: "var(--grijs)" }}>
-                        {hoeveelheidTekst(r)}
+                        {platterQuantity(r,locale)}
                       </span>{" "}
                       {schaalTekst.naam(r.id, r.naam)}
                     </span>
@@ -439,7 +440,7 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
                 >
                   {AFHAALPUNTEN.map((punt) => (
                     <option key={punt} value={punt}>
-                      {punt}
+                      {afhaalNaam(punt)}
                     </option>
                   ))}
                 </select>
@@ -568,7 +569,7 @@ export function BestellenForm({ sumupActief }: { sumupActief: boolean }) {
               {schaalRegels.map((r) => (
                 <Rij
                   key={r.id}
-                  label={`${hoeveelheidTekst(r)} ${r.isSchaal ? r.naam : schaalTekst.naam(r.id, r.naam)}`}
+                  label={`${platterQuantity(r,locale)} ${schaalTekst.naam(r.id, r.naam)}`}
                   waarde={euro(r.bedrag)}
                 />
               ))}

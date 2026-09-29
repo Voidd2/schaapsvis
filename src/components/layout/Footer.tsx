@@ -54,12 +54,9 @@ export function Footer() {
         { href: p("/ons-verhaal"), label: nav("verhaal") },
         { href: p("/biologische-vis"), label: nav("betereVis") },
         { href: p("/varlaks"), label: nav("varlaks") },
-        // De viswijzer, de recepten en de blog bestaan alleen in het Nederlands,
-        // dus verwijzen we daar rechtstreeks naartoe in plaats van naar een
-        // /en/- of /de/-adres met Nederlandse tekst erop.
-        { href: "/nl/recepten", label: nav("recepten") },
-        { href: "/nl/viskalender", label: nav("viswijzer") },
-        { href: "/nl/blog", label: nav("blog") },
+        { href: p("/recepten"), label: nav("recepten") },
+        { href: p("/viskalender"), label: nav("viswijzer") },
+        { href: p("/blog"), label: nav("blog") },
       ],
     },
     {
@@ -67,10 +64,10 @@ export function Footer() {
       links: [
         { href: p("/bezoek-ons"), label: nav("locaties") },
         { href: p("/contact"), label: nav("contact") },
-        { href: "/nl/viswinkel-leiden", label: "Viswinkel Leiden" },
-        { href: "/nl/marktkraam-leiden", label: "Marktkraam Leiden" },
-        { href: "/nl/viswinkel-voorschoten", label: locale === "nl" ? "Visboer Voorschoten" : locale === "de" ? "Fischstand Voorschoten (NL)" : "Fish stall Voorschoten (NL)" },
-        { href: "/nl/too-good-to-go", label: "Too Good To Go" },
+        { href: p("/viswinkel-leiden"), label: locale === "de" ? "Fischgeschäft Leiden" : locale === "en" ? "Fish shop Leiden" : "Viswinkel Leiden" },
+        { href: p("/marktkraam-leiden"), label: locale === "de" ? "Fischstände Leiden" : locale === "en" ? "Fish stalls Leiden" : "Marktkraam Leiden" },
+        { href: p("/viswinkel-voorschoten"), label: locale === "nl" ? "Visboer Voorschoten" : locale === "de" ? "Fischstand Voorschoten" : "Fishmonger Voorschoten" },
+        { href: p("/too-good-to-go"), label: "Too Good To Go" },
       ],
     },
   ];
@@ -86,7 +83,7 @@ export function Footer() {
             /* eslint-disable-next-line @next/next/no-img-element */
             <img
               src={BEELD.logoBadge.bestand}
-              alt={BEELD.logoBadge.alt}
+              alt={BEDRIJF.naam}
               className="h-16 w-16 object-contain mb-4"
             />
           )}
@@ -143,8 +140,8 @@ export function Footer() {
 
         {/* ── Nieuwsbrief ───────────────────────────────────────────────── */}
         <div>
-          <p className="kapitaal kapitaal-licht mb-2">{t("nieuwsbriefTitel")}</p>
-          <NewsletterSignup compact />
+          <p className="kapitaal kapitaal-licht mb-2">{locale === "de" ? "Neuigkeiten aus dem Geschäft" : locale === "en" ? "News from the shop" : "Nieuws uit de winkel"}</p>
+          <NewsletterSignup compact locale={locale} />
         </div>
       </div>
 

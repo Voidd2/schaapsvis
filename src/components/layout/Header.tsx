@@ -25,10 +25,10 @@ export function Header() {
 
   const links = [
     { href: p("/assortiment"), label: t("assortiment") },
-    { href: "/nl/recepten", label: t("recepten") },
-    { href: "/nl/viskalender", label: locale === "de" ? "Fischkalender" : locale === "en" ? "Fish calendar" : "Viskalender" },
+    { href: p("/recepten"), label: t("recepten") },
+    { href: p("/viskalender"), label: locale === "de" ? "Fischkalender" : locale === "en" ? "Fish calendar" : "Viskalender" },
     { href: p("/biologische-vis"), label: t("betereVis") },
-    { href: "/nl/blog", label: t("blog") },
+    { href: p("/blog"), label: t("blog") },
     { href: p("/bezoek-ons"), label: t("locaties") },
   ];
 
@@ -92,7 +92,7 @@ export function Header() {
                   fontWeight: 600,
                 }}
               >
-                Leiden &middot; sinds 1938
+                Leiden &middot; {locale === "de" ? "seit" : locale === "en" ? "since" : "sinds"} 1938
               </span>
             </span>
           </Link>
@@ -127,9 +127,9 @@ export function Header() {
             <a
               href={`tel:${BEDRIJF.telefoon.e164}`}
               className="sm:hidden knop knop-rood !py-2.5 !px-3.5 !text-[0.8rem]"
-              aria-label={`Bel ${BEDRIJF.telefoon.weergave}`}
+              aria-label={`${locale === "de" ? "Anrufen" : locale === "en" ? "Call" : "Bel"} ${BEDRIJF.telefoon.weergave}`}
             >
-              Bellen
+              {locale === "de" ? "Anrufen" : locale === "en" ? "Call" : "Bellen"}
             </a>
 
             <button
@@ -138,7 +138,7 @@ export function Header() {
               style={{ color: "var(--navy)" }}
               onClick={() => setOpen(!open)}
               aria-expanded={open}
-              aria-label="Menu"
+              aria-label={locale === "de" ? "Menü" : "Menu"}
             >
               {open ? <KruisIcoon /> : <MenuIcoon />}
             </button>
@@ -177,7 +177,6 @@ export function Header() {
               ))}
 
               {[
-                // Recepten en blog staan alleen in het Nederlands.
                 { href: p("/ons-verhaal"), label: t("verhaal") },
                 { href: p("/contact"), label: t("contact") },
               ].map(({ href, label }) => (

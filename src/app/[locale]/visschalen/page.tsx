@@ -6,7 +6,8 @@ import { Sectie, Kop, Vragen } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { VisschaalConfigurator } from "./VisschaalConfigurator";
 import { paginaMetadata, kruimelSchema, vraagSchema } from "@/lib/seo";
-import { BEDRIJF, euro, whatsappLink } from "@/lib/bedrijf";
+import { bestelContact } from "@/lib/bestel-contact";
+import { BEDRIJF, euro } from "@/lib/bedrijf";
 import { SCHALEN, VANAF_BEDRAG } from "@/lib/visschaal";
 import { GEMEENTEN } from "@/lib/bezorging";
 
@@ -62,7 +63,6 @@ export default async function VisschalenPage({
       lowPrice: VANAF_BEDRAG.toFixed(2),
       highPrice: duurste.toFixed(2),
       offerCount: SCHALEN.length,
-      availability: "https://schema.org/InStock",
       seller: { "@id": `${BEDRIJF.domein}/#winkel` },
       areaServed: GEMEENTEN.map((x) => ({ "@type": "City", name: x.naam })),
       url: `${BEDRIJF.domein}/${locale}/visschalen`,
@@ -130,7 +130,7 @@ export default async function VisschalenPage({
           { label: t("naarBestellen"), href: "#samenstellen", extern: true },
           {
             label: g("whatsapp"),
-            href: whatsappLink("Hallo Schaap's Vishandel, ik heb een vraag over een visschaal."),
+            href: bestelContact(locale,nav("visschalen")).href,
             extern: true,
             soort: "lijn",
           },

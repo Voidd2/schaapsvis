@@ -300,7 +300,7 @@ export const products: Product[] = [
   {
     slug: "tonijnfilet",
     naam: "Tonijnfilet",
-    desc: "Verse tonijnfilet (Thunnus albacares) — stevig, rood vlees met een vleesvlees karakter. Heerlijk biefstuk-dun gegrild of als sashimi.",
+    desc: "Verse tonijnfilet (Thunnus albacares) — stevig, rood visvlees met een volle smaak. Lekker gegrild of gebakken. Voor rauwe bereidingen gelden aparte veiligheidsmaatregelen.",
     categorie: "verse-vis",
     ingredienten: "Geelvintonijn (Thunnus albacares) [VIS]. Geen toegevoegde stoffen.",
     bevat: ["VIS"],
@@ -448,7 +448,7 @@ export const products: Product[] = [
   {
     slug: "zeeuwse-mosselen",
     naam: "Zeeuwse Mosselen",
-    desc: "Verse Zeeuwse mosselen (Mytilus edulis) — gekweekt in de schone Zeeuwse wateren. Van nature met de seizoenen, het lekkerst van augustus tot april.",
+    desc: "Verse Zeeuwse mosselen (Mytilus edulis) — gekweekt in de Zeeuwse wateren. Het Zeeuwse mosselseizoen loopt meestal van juli tot april. De start en beschikbaarheid kunnen per jaar verschillen.",
     categorie: "schaal-schelp",
     ingredienten: "Mosselen (Mytilus edulis) [WEEKDIEREN].",
     bevat: ["WEEKDIEREN"],
@@ -1236,7 +1236,7 @@ export const products: Product[] = [
   {
     slug: "zeekraalsalade",
     naam: "Zeekraalsalade",
-    desc: "Frisse zeekraal (zeegroente) met een lichte dressing — knapperig, zilt en van nature allergenenvrij. Een verrassend bijgerecht bij vis.",
+    desc: "Frisse zeekraal (zeegroente) met een lichte dressing — knapperig en zilt. Vraag ons naar de ingrediënten en allergenen van de dressing. Een verrassend bijgerecht bij vis.",
     categorie: "vissalades",
     ingredienten: "Zeekraal (Salicornia), olijfolie, azijn, zout.",
     bevat: [],
@@ -1391,8 +1391,8 @@ const SEIZOEN_MAP: Record<string, string> = {
 
 // Korte VISwijzer-/duurzaamheidsnotitie — alleen INDIEN VAN TOEPASSING.
 const VISWIJZER_MAP: Record<string, string> = {
-  schol: "MSC-gecertificeerd — een groene keuze op de VISwijzer.",
-  scholfilet: "MSC-gecertificeerd — een groene keuze op de VISwijzer.",
+  schol: "MSC-gecertificeerd. Vraag naar het actuele VISwijzer-advies en de levering.",
+  scholfilet: "MSC-gecertificeerd. Vraag naar het actuele VISwijzer-advies en de levering.",
   heek: "MSC-gecertificeerd — verantwoord gevangen.",
   heekfilet: "MSC-gecertificeerd — verantwoord gevangen.",
   "hollandse-garnalen": "MSC-gecertificeerd sinds 2017 — verantwoord gevangen aan de Waddenkust.",
@@ -1402,7 +1402,7 @@ const VISWIJZER_MAP: Record<string, string> = {
   "gerookte-zalm-high-seas": "ASC-gecertificeerd — verantwoorde kweek.",
   "gerookte-zalm-snippers": "ASC-gecertificeerd — verantwoorde kweek.",
   "warm-gerookte-zalm": "ASC-gecertificeerd — verantwoorde kweek.",
-  tonijnfilet: "Geelvintonijn staat oranje op de VISwijzer — wij zijn hier transparant over.",
+  tonijnfilet: "Het VISwijzer-advies voor geelvintonijn hangt af van herkomst en vangstmethode. Vraag ons naar het actuele advies.",
   zwaardvis: "Zwaardvis: let op de VISwijzer-status. Vraag ons naar het actuele advies.",
 };
 

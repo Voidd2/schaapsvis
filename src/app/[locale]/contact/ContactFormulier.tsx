@@ -26,7 +26,7 @@ export function ContactFormulier() {
       });
       const data = (await antwoord.json()) as { ok?: boolean; fout?: string };
       if (!antwoord.ok || !data.ok) {
-        setFout(data.fout ?? "");
+        setFout(""); // API diagnostics are not customer-facing or translated; use the localized failure message.
         setStatus("mislukt");
         return;
       }
