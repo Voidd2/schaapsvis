@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo } from "react";
+import { Fragment, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import {
   GROEP_LABELS,
@@ -26,6 +27,7 @@ import { euro, whatsappLink } from "@/lib/bedrijf";
 import { useSchaalTekst } from "@/components/visschaal/tekst";
 import { localizePlatter, platterQuantity } from "@/lib/platter-localization";
 import { Beeld } from "@/components/ui/Beeld";
+import { DIRKS_VISSCHALEN } from "@/lib/dirks-selectie";
 
 /** Gewicht gaat met 100 gram tegelijk; stuks met één. */
 const STAP = 100;
@@ -95,11 +97,21 @@ export function VisschaalConfigurator() {
           </p>
 
           <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {SCHALEN.map((bron) => {
+            {SCHALEN.map((bron, index) => {
               const schaal = localizePlatter(bron,locale);
               const gekozen = samen.schaal === schaal.id;
+              const groep = DIRKS_VISSCHALEN.find((item) => item.slug === bron.id)?.groep ?? "eigen";
+              const vorigeGroep = DIRKS_VISSCHALEN.find((item) => item.slug === SCHALEN[index - 1]?.id)?.groep ?? "eigen";
+              const koppen = {
+                nl: { eigen: "Schaap’s klassiekers", borrelbox: "Borrelboxen", klassiek: "Klassieke visschotels", luxe: "Luxe visschotels", hapjes: "Vishapjesschotels" },
+                en: { eigen: "Schaap’s classics", borrelbox: "Sharing boxes", klassiek: "Classic seafood platters", luxe: "Deluxe seafood platters", hapjes: "Seafood bites platters" },
+                de: { eigen: "Schaap’s Klassiker", borrelbox: "Snackboxen", klassiek: "Klassische Fischplatten", luxe: "Deluxe-Fischplatten", hapjes: "Fischhäppchen-Platten" },
+              };
+              const taal = locale === "en" || locale === "de" ? locale : "nl";
               return (
-                <li key={schaal.id}>
+                <Fragment key={schaal.id}>
+                {(index === 0 || groep !== vorigeGroep) && <li className="col-span-full mt-4"><h3 className="text-[1.4rem]">{koppen[taal][groep as keyof typeof koppen.nl]}</h3></li>}
+                <li>
                   <article
                     className="flex flex-col h-full"
                     style={{
@@ -108,14 +120,18 @@ export function VisschaalConfigurator() {
                     }}
                   >
                     <figure>
-                      <Beeld naam={schaal.beeld} verhouding="vierkant" streep="var(--navy)" />
+                      {schaal.foto ? (
+                        <div className="relative aspect-square overflow-hidden bg-[#f2f8fb]">
+                          <Image src={schaal.foto} alt={`${schaal.naam} — ${locale === "de" ? "Servierbeispiel" : locale === "en" ? "serving suggestion" : "serveervoorbeeld"}`} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover" />
+                        </div>
+                      ) : schaal.beeld ? <Beeld naam={schaal.beeld} verhouding="vierkant" streep="var(--navy)" /> : null}
                       <figcaption className="px-5 py-3 text-xs leading-relaxed" style={{ background: "var(--lichtblauw)", color: "var(--navy)" }}>
                         {t("fotoVoorbeeld")}
                       </figcaption>
                     </figure>
 
                     <div className="p-5 flex flex-col flex-1">
-                      <h3 className="text-[1.25rem] mb-1">{schaal.naam}</h3>
+                      <h4 className="text-[1.25rem] mb-1">{schaal.naam}</h4>
                       <p className="kapitaal mb-3" style={{ color: "var(--grijs)" }}>
                         {t("voorPersonen", {
                           van: schaal.personenVan,
@@ -136,8 +152,8 @@ export function VisschaalConfigurator() {
                         {schaal.omschrijving}
                       </p>
 
-                      <p className="kapitaal mb-2">{t("watErOpLigt")}</p>
-                      <ul className="mb-5 flex-1" style={{ borderTop: "1px solid var(--linen)" }}>
+                      {schaal.bevat.length > 0 && <p className="kapitaal mb-2">{t("watErOpLigt")}</p>}
+                      <ul className="mb-5 flex-1" style={schaal.bevat.length > 0 ? { borderTop: "1px solid var(--linen)" } : undefined}>
                         {schaal.bevat.map((wat) => (
                           <li
                             key={wat}
@@ -163,6 +179,7 @@ export function VisschaalConfigurator() {
                     </div>
                   </article>
                 </li>
+                </Fragment>
               );
             })}
           </ul>

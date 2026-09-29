@@ -18,6 +18,8 @@ function photos(html) {
 for (const locale of ['nl', 'en', 'de']) {
   const assortment = await page(`/${locale}/assortiment`);
   assert(!assortment.main.includes(`/assortiment/koolvis`), `${locale}: removed koolvis product still listed`);
+  assert(assortment.main.includes('id="barbecue-gourmet"'), `${locale}: BBQ and gourmet catalogue missing`);
+  assert(!assortment.main.includes('www.dirksvishandel.nl'), `${locale}: competitor URL exposed in assortment`);
   const removedProduct = await fetch(`${origin}/${locale}/assortiment/koolvis`, {redirect: 'manual'});
   assert(removedProduct.status === 308 && new URL(removedProduct.headers.get('location'), origin).pathname === `/${locale}/assortiment`, `${locale}: removed koolvis URL should redirect to assortment`);
   const locations = await page(`/${locale}/bezoek-ons`);
@@ -30,10 +32,11 @@ for (const locale of ['nl', 'en', 'de']) {
   assert(freshFishCard?.[1] === `/${locale}/assortiment`, `${locale}: fresh fish card should open assortment, not WhatsApp`);
   const platters = await page(`/${locale}/visschalen`);
   const images = photos(platters.main);
-  for (const name of ['familieschaal', 'feestschaal']) {
-    assert(images.includes(`/images/editorial/${name}-voorbeeld.webp`), `${locale}: missing ${name} photo`);
+  for (const name of ['visschotel-middel-5-8-pers', 'visschotel-luxe-10-14-pers']) {
+    assert(images.includes(`/images/dirks/${name}.webp`), `${locale}: missing ${name} photo`);
   }
-  assert((platters.main.match(/<figcaption/g) || []).length === 3, `${locale}: example captions missing`);
+  assert((platters.main.match(/<figcaption/g) || []).length >= 20, `${locale}: example captions missing`);
+  assert(!platters.main.includes('www.dirksvishandel.nl'), `${locale}: competitor URL exposed in page`);
   const bio = await page(`/${locale}/biologische-vis`);
   assert(!/href="[^"\s]*\/visschalen/.test(bio.main), `${locale}: unrelated platter link on organic page`);
   assert(bio.main.includes('MSC') && bio.main.includes('/assortiment/hollandse-garnalen'), `${locale}: MSC shrimp missing`);

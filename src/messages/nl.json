@@ -21,7 +21,7 @@
     "varlaksTitle": "Biologische Varlaks zalm in Leiden | Schaap's Vishandel",
     "varlaksDesc": "Varlaks biologische zalm — geen antibiotica, geen GMO, 100% traceerbaar. Dagelijks vers bij Schaap's Vis Leiden, Herenstraat 48. Ook op de markt.",
     "assortimentTitle": "Visassortiment Leiden: zalm, haring en kibbeling | Schaap's",
-    "assortimentDesc": "Vers vis assortiment bij Schaap's Vis Leiden: kibbeling, lekkerbek, haring, vissoep, biologische Varlaks zalm, feestschotels en meer. Dagelijks vers op Herenstraat 48.",
+    "assortimentDesc": "Bekijk verse vis, kibbeling, haring, biologische zalm, barbecuepakketten, visspiesjes en visgourmet bij Schaap's Vishandel in Leiden. Vraag naar beschikbaarheid.",
     "bezoekTitle": "Locaties en openingstijden Leiden & Voorschoten | Schaap's",
     "bezoekDesc": "Schaap's Vis bezoeken? Herenstraat 48 Leiden (ma–za), Leidse markt (wo + za), of Hoogvliet Voorschoten (vrij). Altijd vers, altijd vriendelijk.",
     "contactTitle": "Contact Schaap's Vis Leiden | 071 514 9802 | Viswinkel Herenstraat",
@@ -37,7 +37,7 @@
     "bezorgenPlaatsTitle": "Verse vis bezorgen in {plaats} | Vishandel uit Leiden | Schaap's Vis",
     "bezorgenPlaatsDesc": "Verse vis en visschalen laten bezorgen in {plaats}? Schaap's Vishandel uit Leiden rijdt {dagen} langs. Bestellen tot 12:00 de dag ervoor, betalen bij de deur of straks online.",
     "visschalenTitle": "Visschaal bestellen Leiden vanaf {bedrag} | Schaap's",
-    "visschalenDesc": "Een visschaal voor de borrel, een verjaardag of de kerstdagen. Drie schalen vanaf {bedrag}, met extra's naar keuze. Afhalen aan de Herenstraat of laten bezorgen."
+    "visschalenDesc": "Visschalen, borrelboxen en vis voor barbecue of gourmet. Schalen vanaf {bedrag}, met extra's naar keuze. Afhalen in Leiden of bezorgen."
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Sinds 1938",
@@ -263,10 +263,10 @@
     "bezorgNiet2": "Warme vissoep en losse hapjes",
     "bezorgLink": "Zo werkt bezorgen",
     "visschaalLabel": "Voor de gelegenheid",
-    "visschaalKop": "Drie visschalen — u legt erbij wat u wilt",
+    "visschaalKop": "Visschalen en borrelboxen — stel uw favoriet samen",
     "visschaalTekst": "Een borrelschaal voor vier tot zes man, een familieschaal, of de grote feestschaal met oesters en gamba's. U ziet precies wat erop ligt. Wilt u er nog iets bij — extra garnalen, een dozijn oesters — dan legt u dat er zelf op en loopt het bedrag mee.",
     "visschaalVanaf": "Vanaf",
-    "visschaalLink": "Bekijk de drie schalen",
+    "visschaalLink": "Bekijk alle visschalen",
     "verhaalLabel": "Sinds 1938",
     "verhaalKop": "Gerrit Schaap begon het, wij houden het vol",
     "verhaalTekst": "Gerrit Schaap opende de winkel in 1938. Cor Haasnoot kwam er op zijn dertiende werken en nam de zaak in 1957 over. Zijn zoon Aldert staat er nu — in de buurt gewoon 'Schaap' genoemd. De naam boven de deur is nooit veranderd.",
@@ -299,7 +299,7 @@
     "pijlerVersKop": "Verse vis",
     "pijlerVersTekst": "Van de veiling naar de toonbank. Heel, gefileerd of in moten — zoals u hem wilt.",
     "pijlerSchaalKop": "Visschalen",
-    "pijlerSchaalTekst": "Drie schalen voor een borrel, een verjaardag of de kerstdagen.",
+    "pijlerSchaalTekst": "Visschalen en borrelboxen voor elk gezelschap.",
     "gebakkenLabel": "Uit de pan",
     "gebakkenKop": "Waar Leiden ons van kent",
     "gebakkenTekst": "Kibbeling, lekkerbek en gebakken vis. Elke dag vers in de pan, in een bakje mee, met ravigotesaus als u wilt. Dit is waar de meeste mensen voor de eerste keer binnenlopen.",
@@ -421,7 +421,7 @@
   "visschaal": {
     "eyebrow": "Borrel · verjaardag · kerst",
     "kop": "Kies uw visschaal",
-    "inleiding": "Drie schalen om uit te kiezen, vanaf € 55,90. U ziet precies wat erop ligt en voor hoeveel mensen hij is. Wilt u er nog iets bij — een half pond extra garnalen, een dozijn oesters — dan legt u dat er zelf op en ziet u het bedrag meelopen.",
+    "inleiding": "Kies uit visschalen en borrelboxen voor verschillende gezelschappen. U kunt extra vis toevoegen en uw aanvraag afronden. Barbecue, gourmet en bijzondere dieetwensen bespreken we via WhatsApp.",
     "per100": "per 100 g",
     "perStuk": "per {eenheid}",
     "seizoen": "{periode}",
@@ -439,12 +439,12 @@
     "levertijdKop": "Op tijd bestellen",
     "levertijdTekst": "Voor een schaal plannen we graag een paar dagen vooruit. Rond de kerstdagen en Oud & Nieuw is het druk — bestel dan ruim op tijd, dan weet u zeker dat het lukt.",
     "allergieKop": "Allergieën",
-    "allergieTekst": "Geef het door in uw bestelling. Zonder schaaldieren, zonder rauwe vis, een deel apart — dat kan allemaal, als we het maar weten.",
+    "allergieTekst": "Wij bereiden ook glutenvrije visgerechten voor mensen met coeliakie, op een hiervoor geplande dag. Geef uw dieetwensen vooraf door; wij bevestigen de veilige bereiding en de datum persoonlijk.",
     "faqKop": "Veelgestelde vragen over visschalen",
     "faq": [
       {
         "v": "Wat kost een visschaal?",
-        "a": "De borrelschaal begint bij € 55,90 voor vier tot zes personen. Daarboven zit de familieschaal en de feestschaal. Wat u er zelf bij legt komt daarbovenop, per 100 gram — gerookte zalm € 3,25 per 100 gram, Hollandse garnalen € 4,25. Het bedrag loopt mee terwijl u kiest."
+        "a": "De getoonde prijs is het startbedrag van de gekozen schaal of box. Extra's komen daarbovenop. Wij bevestigen de samenstelling, beschikbaarheid en definitieve prijs voordat we beginnen."
       },
       {
         "v": "Hoeveel personen kan ik met een schaal doen?",
@@ -460,7 +460,7 @@
       },
       {
         "v": "Kan ik rekening laten houden met een allergie?",
-        "a": "Zeker. Geef het door bij uw bestelling: zonder schaaldieren, zonder rauwe vis, of een deel apart gehouden. Als we het weten, regelen we het."
+        "a": "Ja, wij hebben ervaring met glutenvrije visgerechten voor mensen met coeliakie. Bespreek uw wens vooraf met ons, zodat wij de geschikte bereidingsdag en werkwijze kunnen bevestigen."
       },
       {
         "v": "Kan een visschaal bezorgd worden?",
@@ -471,11 +471,11 @@
         "a": "App of bel ons even. De lijst is wat we vaak maken, geen grens. Als het te krijgen is, leggen we het erop."
       }
     ],
-    "vergelijkingKort": "Drie schalen vanaf € 55,90, en u legt er zelf bij wat u wilt. Bij de meeste vishandels in de regio betaalt u vanaf {markt} per persoon voor een vast pakket.",
+    "vergelijkingKort": "Verschillende visschalen en borrelboxen, met extra's naar wens. Vraag ons welke samenstelling het best past bij uw gezelschap.",
     "perSchaal": "per schaal",
     "stap1": "Stap 1",
     "stap2": "Stap 2",
-    "schaalKop": "De drie schalen",
+    "schaalKop": "Kies uw schaal of borrelbox",
     "schaalUitleg": "Elke foto is een voorbeeld, niet de exacte schaal die u ontvangt. Uw schaal kan zelfs een stuk groter zijn. Wij stemmen de grootte en inhoud af op uw budget, het aantal personen en wat u graag op de borrelplank wilt. De bedragen hieronder zijn startprijzen; uw keuzes en extra’s kunnen de uiteindelijke prijs veranderen.",
     "fotoVoorbeeld": "Voorbeeldfoto — grootte en inhoud worden afgestemd op uw wensen en budget.",
     "voorPersonen": "Voor {van} tot {tot} personen",

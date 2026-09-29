@@ -1,54 +1,14 @@
 /**
- * De visschaal: drie schalen om uit te kiezen, en daarbovenop wat de klant zelf
- * toevoegt.
- *
- * Zo werkt het in de winkel ook: je wijst een schaal aan, en dan zegt iemand
- * "doe er nog wat extra garnalen bij". De schaal heeft een startbedrag, de
- * extra's gaan per 100 gram (een paar dingen per stuk).
- *
- * ┌─ EIGENAAR ────────────────────────────────────────────────────────────────┐
- * │ 1. `SCHALEN` hieronder: drie schalen met een naam, een startbedrag, voor  │
- * │    hoeveel personen, en wat erop ligt. Alles wat daar staat is voorlopig  │
- * │    behalve het bedrag van de kleinste — vervang het door jouw eigen       │
- * │    schalen zodra je ze hebt bepaald.                                      │
- * │ 2. De foto per schaal staat in `src/lib/beeld.ts`, samen met alle andere  │
- * │    foto's van de site. Zonder foto toont de site een naamvlak.            │
- * │ 3. `ONDERDELEN`: de extra's, in euro per 100 gram.                        │
- * │ 4. Zet `PRIJZEN_DEFINITIEF` op `true` zodra alles klopt. Tot die tijd zet │
- * │    de site erbij dat het richtprijzen zijn.                               │
- * └───────────────────────────────────────────────────────────────────────────┘
- *
- * ── Waar de prijzen op gebaseerd zijn ──────────────────────────────────────
- *
- * Uitgangspunt: per persoon onder de markt zitten, en dat kunnen navertellen.
- * Vergeleken wordt alleen met ándere vishandels. Supermarkten tellen niet mee:
- * dat is een ander product en een andere kwaliteit, en dus geen eerlijke maat.
- *
- * Complete schotels bij andere vishandels, per persoon (september 2026):
- *
- *   Puurvis, Leidschendam        € 14,50   ← ligt in ons bezorggebied
- *   Puurvis hors d'oeuvre        € 16,95
- *   Fieret                       € 19,95 / € 29,95 / € 33,95
- *   Koelewijn                    € 28,50 / € 30,00
- *   Dirks, luxe 10–14 personen   € 160 per schaal (≈ € 11–16 p.p.)
- *
- * Prijzen per 100 gram bij andere vishandels, voor de extra's:
- *
- *   Gerookte zalm        € 3,50 (Visspecialist Andre) · € 4,29 (Vismarine)
- *   Hollandse garnalen   € 4,50 (Andre) · € 6,49 (Vismarine)
- *   Gerookte paling      € 5,50 (Andre) · € 7,00 (Stevens) · € 10,50 (Krol)
- *   Gerookte makreel     € 2,75 (Andre) · € 5,50 (Peter Tol)
+ * De visschaal-aanvraag: één schaal of borrelbox en optionele extra's.
+ * Naast de drie oorspronkelijke Schaap-schalen staan hier schotels uit de
+ * eigenaar-goedgekeurde uitbreiding. Bronprijzen en peildatum zijn opgeslagen
+ * in scripts/dirks-price-research-2026-09-29.json. De site toont richtprijzen:
+ * samenstelling, beschikbaarheid en definitieve prijs worden bevestigd.
  */
 
-export const PRIJZEN_DEFINITIEF = false;
+import { DIRKS_VISSCHALEN } from "./dirks-selectie";
 
-/** Wat we bij de concurrentie zagen, zodat de site het kan laten zien. */
-export const MARKT = {
-  /** Goedkoopste complete schotel per persoon die we in de regio vonden. */
-  goedkoopstePerPersoon: 14.5,
-  concurrent: "Puurvis, Leidschendam",
-  peildatum: "september 2026",
-} as const;
+export const PRIJZEN_DEFINITIEF = false;
 
 /** Vuistregels om te bepalen hoeveel iemand nodig heeft. */
 export const PORTIES = {
@@ -59,7 +19,7 @@ export const PORTIES = {
 } as const;
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   De drie schalen
+   Eigen schalen en uitgebreide selectie
    ═══════════════════════════════════════════════════════════════════════════ */
 
 export interface Schaal {
@@ -78,7 +38,8 @@ export interface Schaal {
    * Welke foto hierbij hoort. De foto zelf staat in `src/lib/beeld.ts`, samen
    * met alle andere foto's van de site — één plek waar de eigenaar paden invult.
    */
-  beeld: "schaalBorrel" | "schaalFamilie" | "schaalFeest";
+  beeld?: "schaalBorrel" | "schaalFamilie" | "schaalFeest";
+  foto?: string;
 }
 
 /**
@@ -89,7 +50,7 @@ export interface Schaal {
  * │ te laten zien hoe het eruitziet. Vervang ze door je eigen schalen.        │
  * └───────────────────────────────────────────────────────────────────────────┘
  */
-export const SCHALEN: Schaal[] = [
+const EIGEN_SCHALEN: Schaal[] = [
   {
     id: "borrelschaal",
     naam: "Borrelschaal",
@@ -146,6 +107,33 @@ export const SCHALEN: Schaal[] = [
       "Sauzen: ravigote en cocktail",
     ],
   },
+];
+
+/** Uitbreiding op verzoek van de eigenaar, gebaseerd op de prijspeiling van 29-09-2026.
+ * Afbeeldingen zijn voorbeelden; de werkelijke inhoud stemmen wij met de klant af.
+ * Dieetwensen en kreeft worden uitsluitend handmatig aangevraagd.
+ */
+export const SCHALEN: Schaal[] = [
+  ...EIGEN_SCHALEN,
+  ...DIRKS_VISSCHALEN.filter((item) => !item.alleenAanvraag).sort((a, b) => {
+    const volgorde = ["borrelbox", "klassiek", "luxe", "hapjes"];
+    return volgorde.indexOf(a.groep) - volgorde.indexOf(b.groep) || a.prijs - b.prijs;
+  }).map((item) => ({
+    id: item.slug,
+    naam: item.naam,
+    foto: item.foto,
+    prijs: item.prijs,
+    personenVan: item.personenVan ?? 2,
+    personenTot: item.personenTot ?? 4,
+    omschrijving: item.groep === "borrelbox"
+      ? "Een box met vis voor een borrel. De precieze samenstelling en presentatie stemmen we met u af."
+      : item.groep === "hapjes"
+        ? "Kleine vishapjes om samen te delen. Vraag naar de invulling van de dag."
+        : item.groep === "luxe"
+          ? "Een ruimere, feestelijke visselectie. De inhoud hangt af van uw wensen en de verse aanvoer."
+          : "Een schaal met een selectie van vis en zeevruchten. We bespreken wat u erop wilt hebben.",
+    bevat: [],
+  })),
 ];
 
 export function schaalById(id: string): Schaal | undefined {

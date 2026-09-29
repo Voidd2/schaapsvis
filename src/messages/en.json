@@ -21,7 +21,7 @@
     "varlaksTitle": "Organic Varlaks salmon in Leiden | Schaap's Vishandel",
     "varlaksDesc": "Varlaks organic salmon — no antibiotics, no GMO, 100% traceable. Daily fresh at Schaap's Vis Leiden, Herenstraat 48. Also at the market.",
     "assortimentTitle": "Fish selection Leiden: salmon, herring & kibbeling | Schaap's",
-    "assortimentDesc": "Fresh fish range at Schaap's Vis Leiden: kibbeling, lekkerbek, herring, fish soup, organic Varlaks salmon, party platters and more. Daily fresh at Herenstraat 48.",
+    "assortimentDesc": "Explore fresh fish, kibbeling, herring, organic salmon, seafood barbecue packs, fish skewers and gourmet platters at Schaap's Vishandel in Leiden. Ask about availability.",
     "bezoekTitle": "Locations & opening hours Leiden and Voorschoten | Schaap's",
     "bezoekDesc": "Visiting Schaap's Vis? Herenstraat 48 Leiden (Mon–Sat), Leiden market (Wed + Sat), or Hoogvliet Voorschoten (Fri). Always fresh, always friendly.",
     "contactTitle": "Contact Schaap's Vis Leiden | +31 71 514 9802 | Fish Shop Herenstraat",
@@ -37,7 +37,7 @@
     "bezorgenPlaatsTitle": "Fresh fish delivery in {plaats} | Fishmonger from Leiden | Schaap's Vis",
     "bezorgenPlaatsDesc": "Want fresh fish or a seafood platter delivered in {plaats}? Schaap's Vishandel from Leiden drives out {dagen}. Order by 12:00 the day before and pay at the door, or online soon.",
     "visschalenTitle": "Seafood platters Leiden from {bedrag} | Schaap's",
-    "visschalenDesc": "A seafood platter for drinks, a birthday or Christmas. Three platters from {bedrag}, with extras of your choosing. Collect on Herenstraat or have it delivered."
+    "visschalenDesc": "Seafood platters, sharing boxes and fish for barbecue or tabletop grilling. Platters from {bedrag}, with extras to choose from. Collect in Leiden or arrange delivery."
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Since 1938",
@@ -263,10 +263,10 @@
     "bezorgNiet2": "Hot fish soup and loose snacks",
     "bezorgLink": "How delivery works",
     "visschaalLabel": "For the occasion",
-    "visschaalKop": "Three seafood platters — add what you like",
+    "visschaalKop": "Seafood platters and sharing boxes — choose your favourite",
     "visschaalTekst": "A drinks platter for four to six, a family platter, or the big party platter with oysters and prawns. You see exactly what is on each. Want something extra — more prawns, a dozen oysters — you add it yourself and the price moves along.",
     "visschaalVanaf": "From",
-    "visschaalLink": "See the three platters",
+    "visschaalLink": "See all seafood platters",
     "verhaalLabel": "Since 1938",
     "verhaalKop": "Gerrit Schaap started it, we keep it going",
     "verhaalTekst": "Gerrit Schaap opened the shop in 1938. Cor Haasnoot started working here at thirteen and took over in 1957. His son Aldert runs it now — everyone in the neighbourhood simply calls him 'Schaap'. The name above the door never changed.",
@@ -299,7 +299,7 @@
     "pijlerVersKop": "Fresh fish",
     "pijlerVersTekst": "From the auction to the counter. Whole, filleted or in steaks — however you like it.",
     "pijlerSchaalKop": "Seafood platters",
-    "pijlerSchaalTekst": "Three platters for drinks, a birthday or Christmas.",
+    "pijlerSchaalTekst": "Seafood platters and sharing boxes for every gathering.",
     "gebakkenLabel": "From the pan",
     "gebakkenKop": "What Leiden knows us for",
     "gebakkenTekst": "Kibbeling, lekkerbek and fried fish. Fresh in the pan every day, in a box to take away, with ravigote sauce if you like. This is what most people walk in for the first time.",
@@ -421,7 +421,7 @@
   "visschaal": {
     "eyebrow": "Drinks · birthday · Christmas",
     "kop": "Choose your seafood platter",
-    "inleiding": "Three platters to choose from, from € 55.90. You see exactly what is on each one and how many people it feeds. Want something extra — half a pound more prawns, a dozen oysters — you add it yourself and watch the price move along.",
+    "inleiding": "Choose from seafood platters and sharing boxes for different groups. Add extra fish and send your enquiry. Ask us on WhatsApp about barbecue, tabletop grilling and special dietary requirements.",
     "per100": "per 100 g",
     "perStuk": "per {eenheid}",
     "seizoen": "{periode}",
@@ -439,12 +439,12 @@
     "levertijdKop": "Order in good time",
     "levertijdTekst": "We like a few days' notice for a platter. Christmas and New Year are busy, so order well ahead then.",
     "allergieKop": "Allergies",
-    "allergieTekst": "Tell us with your order. No shellfish, no raw fish, a section kept separate — all fine, as long as we know.",
+    "allergieTekst": "We also prepare gluten-free fish dishes for people with coeliac disease on a designated day. Tell us your requirements in advance; we confirm the safe preparation and date with you personally.",
     "faqKop": "Frequently asked questions about platters",
     "faq": [
       {
         "v": "What does a seafood platter cost?",
-        "a": "The drinks platter starts at € 55.90 for four to six people. Above that come the family platter and the party platter. Whatever you add comes on top, per 100 grams — smoked salmon € 3.25 per 100 grams, Dutch prawns € 4.25. The price moves along as you pick."
+        "a": "The displayed price is the starting amount for your chosen platter or box. Extras are added on top. We confirm contents, availability and the final price before preparing it."
       },
       {
         "v": "How many people does a platter feed?",
@@ -460,7 +460,7 @@
       },
       {
         "v": "Can you allow for an allergy?",
-        "a": "Certainly. Tell us with your order: no shellfish, no raw fish, or a portion kept separate. If we know, we arrange it."
+        "a": "Yes. We have experience preparing gluten-free fish dishes for people with coeliac disease. Discuss your needs with us in advance so we can confirm the preparation day and procedure."
       },
       {
         "v": "Can a platter be delivered?",
@@ -471,11 +471,11 @@
         "a": "Message or ring us. The list is what we make often, not a limit. If it can be had, we will put it on."
       }
     ],
-    "vergelijkingKort": "Three platters from € 55.90, and you add whatever you like. At most fishmongers in the region you pay from {markt} per person for a fixed package.",
+    "vergelijkingKort": "Choose from seafood platters and sharing boxes with extras to suit you. Ask us which selection suits your guests.",
     "perSchaal": "per platter",
     "stap1": "Step 1",
     "stap2": "Step 2",
-    "schaalKop": "The three platters",
+    "schaalKop": "Choose your platter or sharing box",
     "schaalUitleg": "Each photo is an example, not the exact platter you will receive. Your platter may be considerably larger. We tailor its size and contents to your budget, number of guests and preferred seafood. The amounts below are starting prices; your choices and extras may change the final price.",
     "fotoVoorbeeld": "Example photo — size and contents are tailored to your preferences and budget.",
     "voorPersonen": "For {van} to {tot} people",

@@ -21,7 +21,7 @@
     "varlaksTitle": "Bio-Lachs Varlaks in Leiden | Schaap's Vishandel",
     "varlaksDesc": "Varlaks Bio-Lachs — keine Antibiotika, kein GMO, 100% rückverfolgbar. Täglich frisch bei Schaap's Vis Leiden, Herenstraat 48. Auch auf dem Markt.",
     "assortimentTitle": "Fischsortiment Leiden: Lachs, Hering & Kibbeling | Schaap's",
-    "assortimentDesc": "Frisches Fischsortiment bei Schaap's Vis Leiden: Kibbeling, Lekkerbek, Hering, Fischsuppe, Bio-Lachs und mehr. Täglich frisch in der Herenstraat 48.",
+    "assortimentDesc": "Entdecken Sie frischen Fisch, Kibbeling, Hering, Bio-Lachs, Fisch-Grillpakete, Fischspieße und Gourmetplatten bei Schaap's Vishandel in Leiden. Verfügbarkeit auf Anfrage.",
     "bezoekTitle": "Standorte & Öffnungszeiten Leiden und Voorschoten | Schaap's",
     "bezoekDesc": "Schaap's Vis besuchen? Herenstraat 48 Leiden (Mo–Sa), Leidener Markt (Mi + Sa), oder Hoogvliet Voorschoten (Fr). Immer frisch, immer freundlich.",
     "contactTitle": "Kontakt Schaap's Vis Leiden | +31 71 514 9802",
@@ -37,7 +37,7 @@
     "bezorgenPlaatsTitle": "Frischen Fisch liefern lassen in {plaats} | Fischhändler aus Leiden",
     "bezorgenPlaatsDesc": "Frischen Fisch oder eine Fischplatte in {plaats} liefern lassen? Schaap's Vishandel aus Leiden fährt {dagen} raus. Bestellung bis 12:00 Uhr am Vortag, Zahlung an der Tür oder demnächst online.",
     "visschalenTitle": "Fischplatten Leiden ab {bedrag} | Schaap's",
-    "visschalenDesc": "Eine Fischplatte für den Umtrunk, einen Geburtstag oder Weihnachten. Drei Platten ab {bedrag}, mit Extras nach Wunsch. Abholung in der Herenstraat oder Lieferung."
+    "visschalenDesc": "Fischplatten, Snackboxen und Fisch für Grill oder Tischgrill. Platten ab {bedrag}, mit Extras nach Wunsch. Abholung in Leiden oder Lieferung."
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Seit 1938",
@@ -263,10 +263,10 @@
     "bezorgNiet2": "Warme Fischsuppe und einzelne Häppchen",
     "bezorgLink": "So läuft die Lieferung",
     "visschaalLabel": "Für den Anlass",
-    "visschaalKop": "Drei Fischplatten — legen Sie dazu, was Sie möchten",
+    "visschaalKop": "Fischplatten und Snackboxen — wählen Sie Ihren Favoriten",
     "visschaalTekst": "Eine Platte für den Umtrunk für vier bis sechs Personen, eine Familienplatte oder die große Festplatte mit Austern und Gambas. Sie sehen genau, was darauf liegt. Möchten Sie noch etwas dazu — mehr Krabben, ein Dutzend Austern — legen Sie es selbst dazu und der Betrag läuft mit.",
     "visschaalVanaf": "Ab",
-    "visschaalLink": "Die drei Platten ansehen",
+    "visschaalLink": "Alle Fischplatten ansehen",
     "verhaalLabel": "Seit 1938",
     "verhaalKop": "Gerrit Schaap hat angefangen, wir machen weiter",
     "verhaalTekst": "Gerrit Schaap eröffnete das Geschäft 1938. Cor Haasnoot fing hier mit dreizehn an und übernahm 1957. Heute steht sein Sohn Aldert hinter der Theke — im Viertel nennt ihn jeder schlicht 'Schaap'. Der Name über der Tür ist nie geändert worden.",
@@ -299,7 +299,7 @@
     "pijlerVersKop": "Frischer Fisch",
     "pijlerVersTekst": "Von der Auktion an die Theke. Ganz, filetiert oder in Stücken — wie Sie möchten.",
     "pijlerSchaalKop": "Fischplatten",
-    "pijlerSchaalTekst": "Drei Platten für den Umtrunk, einen Geburtstag oder Weihnachten.",
+    "pijlerSchaalTekst": "Fischplatten und Snackboxen für jede Gesellschaft.",
     "gebakkenLabel": "Aus der Pfanne",
     "gebakkenKop": "Wofür Leiden uns kennt",
     "gebakkenTekst": "Kibbeling, Lekkerbek und gebackener Fisch. Jeden Tag frisch in der Pfanne, im Schälchen zum Mitnehmen, mit Ravigote-Sauce wenn Sie mögen. Dafür kommen die meisten zum ersten Mal herein.",
@@ -421,7 +421,7 @@
   "visschaal": {
     "eyebrow": "Umtrunk · Geburtstag · Weihnachten",
     "kop": "Wählen Sie Ihre Fischplatte",
-    "inleiding": "Drei Platten zur Auswahl, ab 55,90 €. Sie sehen genau, was darauf liegt und für wie viele Personen sie reicht. Möchten Sie noch etwas dazu — ein halbes Pfund Krabben mehr, ein Dutzend Austern — legen Sie es selbst dazu und sehen den Betrag mitlaufen.",
+    "inleiding": "Wählen Sie aus Fischplatten und Snackboxen für unterschiedliche Gruppen. Fügen Sie zusätzlichen Fisch hinzu und senden Sie Ihre Anfrage. Für Grill, Tischgrill und besondere Ernährungswünsche schreiben Sie uns per WhatsApp.",
     "per100": "pro 100 g",
     "perStuk": "pro {eenheid}",
     "seizoen": "{periode}",
@@ -439,12 +439,12 @@
     "levertijdKop": "Rechtzeitig bestellen",
     "levertijdTekst": "Für eine Platte planen wir gern ein paar Tage voraus. Um Weihnachten und Silvester ist viel los — bestellen Sie dann früh.",
     "allergieKop": "Allergien",
-    "allergieTekst": "Sagen Sie es bei der Bestellung dazu. Ohne Krustentiere, ohne rohen Fisch, ein Teil separat — alles möglich, wenn wir es wissen.",
+    "allergieTekst": "Wir bereiten auch glutenfreie Fischgerichte für Menschen mit Zöliakie an einem dafür vorgesehenen Tag zu. Teilen Sie uns Ihre Wünsche vorher mit; wir bestätigen die sichere Zubereitung und den Termin persönlich.",
     "faqKop": "Häufige Fragen zu Fischplatten",
     "faq": [
       {
         "v": "Was kostet eine Fischplatte?",
-        "a": "Die Umtrunk-Platte beginnt bei 55,90 € für vier bis sechs Personen. Darüber liegen die Familienplatte und die Festplatte. Was Sie dazulegen, kommt obendrauf, pro 100 Gramm — Räucherlachs 3,25 € pro 100 Gramm, holländische Krabben 4,25 €. Der Betrag läuft beim Wählen mit."
+        "a": "Der angezeigte Preis ist der Startbetrag für die gewählte Platte oder Box. Extras kommen dazu. Wir bestätigen Inhalt, Verfügbarkeit und Endpreis vor der Zubereitung."
       },
       {
         "v": "Für wie viele Personen reicht eine Platte?",
@@ -460,7 +460,7 @@
       },
       {
         "v": "Können Sie eine Allergie berücksichtigen?",
-        "a": "Sicher. Geben Sie es bei der Bestellung an: ohne Schalentiere, ohne rohen Fisch, oder einen Teil separat. Wenn wir es wissen, regeln wir es."
+        "a": "Ja. Wir haben Erfahrung mit glutenfreien Fischgerichten für Menschen mit Zöliakie. Besprechen Sie Ihre Wünsche vorher mit uns, damit wir Zubereitungstag und Vorgehen bestätigen können."
       },
       {
         "v": "Kann eine Fischplatte geliefert werden?",
@@ -471,11 +471,11 @@
         "a": "Schreiben oder rufen Sie uns. Die Liste ist, was wir oft machen, keine Grenze. Wenn es zu bekommen ist, legen wir es darauf."
       }
     ],
-    "vergelijkingKort": "Drei Platten ab 55,90 €, und Sie legen selbst dazu, was Sie möchten. Bei den meisten Fischhändlern der Region zahlen Sie ab {markt} pro Person für ein festes Paket.",
+    "vergelijkingKort": "Verschiedene Fischplatten und Snackboxen mit Extras nach Wunsch. Fragen Sie uns, welche Auswahl zu Ihren Gästen passt.",
     "perSchaal": "pro Platte",
     "stap1": "Schritt 1",
     "stap2": "Schritt 2",
-    "schaalKop": "Die drei Platten",
+    "schaalKop": "Wählen Sie Ihre Fischplatte oder Snackbox",
     "schaalUitleg": "Jedes Foto ist ein Beispiel, nicht die genaue Platte, die Sie erhalten. Ihre Platte kann sogar deutlich größer sein. Größe und Inhalt richten sich nach Ihrem Budget, der Personenzahl und Ihren Wünschen. Die Beträge unten sind Startpreise; Ihre Auswahl und Extras können den Endpreis verändern.",
     "fotoVoorbeeld": "Beispielfoto — Größe und Inhalt richten sich nach Ihren Wünschen und Ihrem Budget.",
     "voorPersonen": "Für {van} bis {tot} Personen",

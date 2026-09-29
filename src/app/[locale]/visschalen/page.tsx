@@ -5,6 +5,7 @@ import { Schema } from "@/components/Schema";
 import { Sectie, Kop, Vragen } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { VisschaalConfigurator } from "./VisschaalConfigurator";
+import { SelectieAanvraag } from "./SelectieAanvraag";
 import { paginaMetadata, kruimelSchema, vraagSchema } from "@/lib/seo";
 import { bestelContact } from "@/lib/bestel-contact";
 import { BEDRIJF, euro } from "@/lib/bedrijf";
@@ -51,10 +52,10 @@ export default async function VisschalenPage({
           : "Visschaal van Schaap's Vishandel",
     description:
       locale === "de"
-        ? `Drei Fischplatten ab ${euro(VANAF_BEDRAG)}, mit Extras nach Wunsch. Abholen in Leiden oder liefern lassen.`
+        ? `Fischplatten ab ${euro(VANAF_BEDRAG)}, mit Extras nach Wunsch. Abholen in Leiden oder liefern lassen.`
         : locale === "en"
-          ? `Three seafood platters from ${euro(VANAF_BEDRAG)}, with extras of your choosing. Collect in Leiden or have it delivered.`
-          : `Drie visschalen vanaf ${euro(VANAF_BEDRAG)}, met extra's naar keuze. Afhalen in Leiden of laten bezorgen.`,
+          ? `Seafood platters from ${euro(VANAF_BEDRAG)}, with extras of your choosing. Collect in Leiden or have it delivered.`
+          : `Visschalen vanaf ${euro(VANAF_BEDRAG)}, met extra's naar keuze. Afhalen in Leiden of laten bezorgen.`,
     brand: { "@type": "Brand", name: BEDRIJF.naam },
     category: "Seafood platter",
     offers: {
@@ -97,6 +98,10 @@ export default async function VisschalenPage({
       {/* ── Samenstellen ──────────────────────────────────────────────────── */}
       <Sectie grond="papier" id="samenstellen">
         <VisschaalConfigurator />
+      </Sectie>
+
+      <Sectie grond="zand">
+        <SelectieAanvraag locale={locale} showBarbecue={false} />
       </Sectie>
 
       {/* ── Praktisch ─────────────────────────────────────────────────────── */}

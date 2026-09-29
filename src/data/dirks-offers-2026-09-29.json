@@ -1,0 +1,155 @@
+{
+  "observedAt": "2026-09-29",
+  "offers": [
+    {
+      "slug": "gourmet-trio-1-persoon",
+      "sourceCents": 1899,
+      "targetCents": 1709
+    },
+    {
+      "slug": "gourmet-schotel-3-4-pers",
+      "sourceCents": 5899,
+      "targetCents": 5309
+    },
+    {
+      "slug": "gourmetschotel-5-6-pers",
+      "sourceCents": 7699,
+      "targetCents": 6929
+    },
+    {
+      "slug": "gourmetstukjes-tonijn",
+      "sourceCents": 1699,
+      "targetCents": 1529
+    },
+    {
+      "slug": "gourmet-stukjes-kabeljauw",
+      "sourceCents": 1100,
+      "targetCents": 990
+    },
+    {
+      "slug": "gourmetstukjes-zalm",
+      "sourceCents": 1200,
+      "targetCents": 1080
+    },
+    {
+      "slug": "barbecuepakket",
+      "sourceCents": 2999,
+      "targetCents": 2699
+    },
+    {
+      "slug": "barbecuepakket-xxl",
+      "sourceCents": 10999,
+      "targetCents": 9899
+    },
+    {
+      "slug": "zalmspies",
+      "sourceCents": 629,
+      "targetCents": 400
+    },
+    {
+      "slug": "tonijnspies",
+      "sourceCents": 850,
+      "targetCents": 765
+    },
+    {
+      "slug": "gambaspies-in-knoflook",
+      "sourceCents": 450,
+      "targetCents": 405
+    },
+    {
+      "slug": "zalm-kabeljauwspies",
+      "sourceCents": 750,
+      "targetCents": 675
+    },
+    {
+      "slug": "vispakketje",
+      "sourceCents": 475,
+      "targetCents": 428
+    },
+    {
+      "slug": "borrelbox-groot-4-5-pers",
+      "sourceCents": 7399,
+      "targetCents": 6659
+    },
+    {
+      "slug": "borrelbox-klein-2-3-pers",
+      "sourceCents": 3950,
+      "targetCents": 3555
+    },
+    {
+      "slug": "borrelbox-luxe-2-4-pers",
+      "sourceCents": 8899,
+      "targetCents": 8009
+    },
+    {
+      "slug": "visschotel-klein-2-3-pers",
+      "sourceCents": 5950,
+      "targetCents": 5355
+    },
+    {
+      "slug": "visschotel-klein-3-5-pers",
+      "sourceCents": 7350,
+      "targetCents": 6615
+    },
+    {
+      "slug": "visschotel-middel-5-8-pers",
+      "sourceCents": 9850,
+      "targetCents": 8865
+    },
+    {
+      "slug": "visschotel-groot-8-10-pers",
+      "sourceCents": 11550,
+      "targetCents": 10395
+    },
+    {
+      "slug": "visschotel-luxe-2-3-pers",
+      "sourceCents": 6950,
+      "targetCents": 6255
+    },
+    {
+      "slug": "visschotel-luxe-3-5-pers",
+      "sourceCents": 8450,
+      "targetCents": 7605
+    },
+    {
+      "slug": "visschotel-luxe-5-8-pers",
+      "sourceCents": 10950,
+      "targetCents": 9855
+    },
+    {
+      "slug": "visschotel-luxe-8-10-pers",
+      "sourceCents": 12550,
+      "targetCents": 11295
+    },
+    {
+      "slug": "visschotel-luxe-10-14-pers",
+      "sourceCents": 16000,
+      "targetCents": 14400
+    },
+    {
+      "slug": "visschotel-hapjes-2-3-pers",
+      "sourceCents": 5350,
+      "targetCents": 4815
+    },
+    {
+      "slug": "visschotel-hapjes-3-5-pers",
+      "sourceCents": 6750,
+      "targetCents": 6075
+    },
+    {
+      "slug": "visschotel-hapjes-6-10-pers",
+      "sourceCents": 8550,
+      "targetCents": 7695
+    },
+    {
+      "slug": "visschotel-kreeft",
+      "sourceCents": 7400,
+      "targetCents": 6660
+    },
+    {
+      "slug": "visschotel-glutenvrij-1-persoon",
+      "sourceCents": 2499,
+      "targetCents": 2249
+    }
+  ]
+}

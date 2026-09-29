@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url),ts=require('typescript'),cache=new Map();
-function load(name){const file=path.resolve('src/lib',name+'.ts');if(cache.has(file))return cache.get(file);const exports={};cache.set(file,exports);const source=ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText;new Function('exports','require',source)(exports,n=>n.startsWith('./')?load(n.slice(2)):n.startsWith('@/lib/')?load(n.slice(6)):require(n));return exports;}
+function load(name){const file=path.resolve('src/lib',name+'.ts');if(cache.has(file))return cache.get(file);const exports={};cache.set(file,exports);const source=ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText;new Function('exports','require',source)(exports,n=>n.startsWith('./')?load(n.slice(2)):n.startsWith('@/lib/')?load(n.slice(6)):n.startsWith('../data/')?{default:require(path.resolve('src/lib',n))}:require(n));return exports;}
 const locales=['nl','en','de'],errors=[],pages=[];
 const products=load('assortiment-data'),recipes=load('recepten').recepten,blogs=load('blog').blogPosts;
 const translatedProducts=load('product-localization'),translatedRecipes=load('recipe-localization'),translatedBlogs=load('blog-localization');
@@ -17,8 +17,17 @@ for(const l of locales){
 }
 // Every message key must exist in all languages; placeholders must match.
 const messages=Object.fromEntries(locales.map(l=>[l,JSON.parse(fs.readFileSync(`src/messages/${l}.json`,'utf8'))]));
-const platters=load('visschaal'),platterCopy=load('platter-localization'),photos=load('product-beeld');
+const platters=load('visschaal'),platterCopy=load('platter-localization'),photos=load('product-beeld'),selection=load('dirks-selectie');
+check(selection.DIRKS_SELECTIE.length===30,'Incomplete platter/BBQ selection');
+check(selection.DIRKS_VISSCHALEN.length===17,'Incomplete seafood platter selection');
+check(selection.DIRKS_BARBECUE.length===13,'Incomplete BBQ/gourmet selection');
+for(const item of selection.DIRKS_SELECTIE){
+ check(fs.existsSync(`public${item.foto}`),`Missing local photo ${item.slug}`);
+ check(item.slug==='zalmspies'?item.prijs===4:Math.round(item.bronPrijs*90)===Math.round(item.prijs*100),`Price calculation ${item.slug}`);
+ check(!item.slug.startsWith('vleesschotel-'),`Meat platter included ${item.slug}`);
+}
 for(const l of locales){
+ for(const item of selection.DIRKS_SELECTIE)check(!!selection.selectieNaam(item.slug,l),`Missing selection title ${l}/${item.slug}`);
  const items=messages[l].visschaalItems;
  for(const item of platters.ONDERDELEN){
   for(const key of [item.id,item.toelichting&&`toelichting_${item.id}`,item.perStuk&&`eenheid_${item.perStuk}`,item.seizoen&&`seizoen_${item.seizoen}`].filter(Boolean))check(!!items[key],`Missing platter item ${l}/${key}`);

@@ -1,0 +1,216 @@
+{
+  "source": "https://www.dirksvishandel.nl/wp-json/wc/store/v1/products",
+  "note": "Read-only competitor price observation on 2026-09-29. User requested all seafood platters and BBQ/gourmet products at 10% less, except salmon skewer €4 per piece. Do not publish source URLs in site assets.",
+  "offers": [
+    {
+      "slug": "gourmet-trio-1-persoon",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/gourmet-trio-1-persoon/",
+      "sourceCents": 1899,
+      "targetCents": 1709,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "gourmet-schotel-3-4-pers",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/gourmet-schotel-3-4-pers/",
+      "sourceCents": 5899,
+      "targetCents": 5309,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "gourmetschotel-5-6-pers",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/gourmetschotel-5-6-pers/",
+      "sourceCents": 7699,
+      "targetCents": 6929,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "gourmetstukjes-tonijn",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/gourmetstukjes-tonijn/",
+      "sourceCents": 1699,
+      "targetCents": 1529,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "gourmet-stukjes-kabeljauw",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/gourmet-stukjes-kabeljauw/",
+      "sourceCents": 1100,
+      "targetCents": 990,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "gourmetstukjes-zalm",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/gourmetstukjes-zalm/",
+      "sourceCents": 1200,
+      "targetCents": 1080,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "barbecuepakket",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/barbecuepakket/",
+      "sourceCents": 2999,
+      "targetCents": 2699,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "barbecuepakket-xxl",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/barbecuepakket-xxl/",
+      "sourceCents": 10999,
+      "targetCents": 9899,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "zalmspies",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/zalmspies/",
+      "sourceCents": 629,
+      "targetCents": 400,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "tonijnspies",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/tonijnspies/",
+      "sourceCents": 850,
+      "targetCents": 765,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "gambaspies-in-knoflook",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/gambaspies-in-knoflook/",
+      "sourceCents": 450,
+      "targetCents": 405,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "zalm-kabeljauwspies",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/zalm-kabeljauwspies/",
+      "sourceCents": 750,
+      "targetCents": 675,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "vispakketje",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/vispakketje/",
+      "sourceCents": 475,
+      "targetCents": 428,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "borrelbox-groot-4-5-pers",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/borrelbox-groot-4-5-pers/",
+      "sourceCents": 7399,
+      "targetCents": 6659,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "borrelbox-klein-2-3-pers",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/borrelbox-klein-2-3-pers/",
+      "sourceCents": 3950,
+      "targetCents": 3555,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "borrelbox-luxe-2-4-pers",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/borrelbox-luxe-2-4-pers/",
+      "sourceCents": 8899,
+      "targetCents": 8009,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "visschotel-klein-2-3-pers",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/visschotel-klein-2-3-pers/",
+      "sourceCents": 5950,
+      "targetCents": 5355,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "visschotel-klein-3-5-pers",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/visschotel-klein-3-5-pers/",
+      "sourceCents": 7350,
+      "targetCents": 6615,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "visschotel-middel-5-8-pers",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/visschotel-middel-5-8-pers/",
+      "sourceCents": 9850,
+      "targetCents": 8865,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "visschotel-groot-8-10-pers",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/visschotel-groot-8-10-pers/",
+      "sourceCents": 11550,
+      "targetCents": 10395,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "visschotel-luxe-2-3-pers",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/visschotel-luxe-2-3-pers/",
+      "sourceCents": 6950,
+      "targetCents": 6255,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "visschotel-luxe-3-5-pers",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/visschotel-luxe-3-5-pers/",
+      "sourceCents": 8450,
+      "targetCents": 7605,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "visschotel-luxe-5-8-pers",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/visschotel-luxe-5-8-pers/",
+      "sourceCents": 10950,
+      "targetCents": 9855,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "visschotel-luxe-8-10-pers",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/visschotel-luxe-8-10-pers/",
+      "sourceCents": 12550,
+      "targetCents": 11295,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "visschotel-luxe-10-14-pers",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/visschotel-luxe-10-14-pers/",
+      "sourceCents": 16000,
+      "targetCents": 14400,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "visschotel-hapjes-2-3-pers",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/visschotel-hapjes-2-3-pers/",
+      "sourceCents": 5350,
+      "targetCents": 4815,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "visschotel-hapjes-3-5-pers",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/visschotel-hapjes-3-5-pers/",
+      "sourceCents": 6750,
+      "targetCents": 6075,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "visschotel-hapjes-6-10-pers",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/visschotel-hapjes-6-10-pers/",
+      "sourceCents": 8550,
+      "targetCents": 7695,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "visschotel-kreeft",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/visschotel-kreeft/",
+      "sourceCents": 7400,
+      "targetCents": 6660,
+      "observedAt": "2026-09-29"
+    },
+    {
+      "slug": "visschotel-glutenvrij-1-persoon",
+      "sourceUrl": "https://www.dirksvishandel.nl/product/visschotel-glutenvrij-1-persoon/",
+      "sourceCents": 2499,
+      "targetCents": 2249,
+      "observedAt": "2026-09-29"
+    }
+  ]
+}
