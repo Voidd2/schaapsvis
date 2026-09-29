@@ -15,6 +15,7 @@ const { productPhoto } = await sourceModule('src/lib/product-beeld.ts');
 const { BEELD } = await sourceModule('src/lib/beeld.ts');
 const origin = process.argv[2];
 const failures = [];
+for (const p of products) if (!productPhoto(p)) failures.push({slug:p.slug,error:'Product photo is required'});
 const assets = new Set([...products.map(p => productPhoto(p)?.src), ...Object.values(BEELD).map(p => p.bestand)].filter(Boolean));
 for (const asset of assets) {
   try {

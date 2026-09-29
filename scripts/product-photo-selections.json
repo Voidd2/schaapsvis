@@ -1,0 +1,527 @@
+[
+  [
+    "scholfilet",
+    "commons",
+    "plaice fillet",
+    0,
+    "serving"
+  ],
+  [
+    "zeebaarsfilet",
+    "hartevelt",
+    "Zebaars-filet-1.png",
+    0,
+    "product"
+  ],
+  [
+    "tarbot",
+    "hartevelt",
+    "Tarbot-1.png",
+    0,
+    "product"
+  ],
+  [
+    "tarbotfilet",
+    "hartevelt",
+    "Tarbot-filet-2.png",
+    0,
+    "product"
+  ],
+  [
+    "schelvis",
+    "hartevelt",
+    "Schelvis-1.png",
+    0,
+    "product"
+  ],
+  [
+    "wijting",
+    "hartevelt",
+    "Wijting.png",
+    0,
+    "product"
+  ],
+  [
+    "wijtingfilet",
+    "hartevelt",
+    "Gevlinderde-wijting.png",
+    0,
+    "product"
+  ],
+  [
+    "schar",
+    "commons",
+    "Limanda limanda filetype:bitmap",
+    0,
+    "species"
+  ],
+  [
+    "zalmforel",
+    "hartevelt",
+    "Zalmforel.png",
+    0,
+    "product"
+  ],
+  [
+    "tonijnfilet",
+    "hartevelt",
+    "Tonijn-1.png",
+    0,
+    "product"
+  ],
+  [
+    "zeeduivelfilet",
+    "hartevelt",
+    "zeeduivelfilet-2.png",
+    0,
+    "product"
+  ],
+  [
+    "gerookte-forelfilet",
+    "commons",
+    "intitle:Forellenfilet filetype:bitmap",
+    3,
+    "serving"
+  ],
+  [
+    "scheermessen",
+    "hartevelt",
+    "Scheermes-1.png",
+    0,
+    "product"
+  ],
+  [
+    "zeewiersalade",
+    "commons",
+    "intitle:wakame filetype:bitmap",
+    1,
+    "product"
+  ],
+  [
+    "vispotje",
+    "commons",
+    "fish casserole",
+    1,
+    "serving"
+  ],
+  [
+    "leng",
+    "commons",
+    "Molva molva",
+    0,
+    "species"
+  ],
+  [
+    "zalmmoot",
+    "hartevelt",
+    "Zalmmoot-3.png",
+    0,
+    "product"
+  ],
+  [
+    "hele-krab",
+    "commons",
+    "Cancer pagurus cooked",
+    0,
+    "product"
+  ],
+  [
+    "vongole",
+    "hartevelt",
+    "Vongole-1.png",
+    0,
+    "product"
+  ],
+  [
+    "fine-de-claire-oesters",
+    "commons",
+    "fines de claire",
+    0,
+    "serving"
+  ],
+  [
+    "surimisalade",
+    "commons",
+    "surimi salad",
+    0,
+    "serving"
+  ],
+  [
+    "calamares",
+    "commons",
+    "fried calamari",
+    7,
+    "serving"
+  ],
+  [
+    "visburger",
+    "commons",
+    "fish burger",
+    7,
+    "serving"
+  ],
+  [
+    "zeewolf",
+    "hartevelt",
+    "Zeewolf.png",
+    0,
+    "product"
+  ],
+  [
+    "zwaardvis",
+    "hartevelt",
+    "Zwaardvis-1.png",
+    0,
+    "product"
+  ],
+  [
+    "verse-heilbot",
+    "commons",
+    "halibut fish",
+    3,
+    "species"
+  ],
+  [
+    "grauwe-poon",
+    "commons",
+    "Eutrigla gurnardus",
+    1,
+    "species"
+  ],
+  [
+    "wulken",
+    "commons",
+    "intitle:bulots filetype:bitmap",
+    0,
+    "product"
+  ],
+  [
+    "warm-gerookte-zalm",
+    "commons",
+    "hot smoked salmon",
+    1,
+    "serving"
+  ],
+  [
+    "zeevruchtensalade",
+    "commons",
+    "seafood salad",
+    6,
+    "serving"
+  ],
+  [
+    "garnalencocktail",
+    "commons",
+    "intitle:Garnalencocktail filetype:bitmap",
+    0,
+    "serving"
+  ],
+  [
+    "visspies",
+    "commons",
+    "fish skewers",
+    1,
+    "serving"
+  ],
+  [
+    "fish-and-chips",
+    "commons",
+    "fish and chips",
+    0,
+    "serving"
+  ],
+  [
+    "snoekbaars",
+    "commons",
+    "Sander lucioperca",
+    0,
+    "species"
+  ],
+  [
+    "tongschar",
+    "commons",
+    "Microstomus kitt",
+    0,
+    "species"
+  ],
+  [
+    "bot",
+    "commons",
+    "Platichthys flesus",
+    1,
+    "species"
+  ],
+  [
+    "ansjovis",
+    "commons",
+    "Engraulis encrasicolus fish",
+    0,
+    "species"
+  ],
+  [
+    "spiering",
+    "commons",
+    "Osmerus eperlanus",
+    1,
+    "species"
+  ],
+  [
+    "skrei",
+    "commons",
+    "Skrei",
+    0,
+    "species"
+  ],
+  [
+    "tilapiafilet",
+    "hartevelt",
+    "Tilapia-filet.png",
+    0,
+    "product"
+  ],
+  [
+    "gerookte-zalmmoot",
+    "hartevelt",
+    "Gestoomde-zalmoot-naturel-1.png",
+    0,
+    "product"
+  ],
+  [
+    "gerookte-sprotfilet",
+    "hartevelt",
+    "sprot-filet.png",
+    0,
+    "product"
+  ],
+  [
+    "alikruiken",
+    "commons",
+    "Littorina littorea food",
+    0,
+    "product"
+  ],
+  [
+    "gamba-spiesen",
+    "commons",
+    "shrimp skewers",
+    1,
+    "serving"
+  ],
+  [
+    "krabpoten",
+    "hartevelt",
+    "krabben-poot-3.png",
+    0,
+    "product"
+  ],
+  [
+    "haringsalade",
+    "commons",
+    "herring salad",
+    0,
+    "serving"
+  ],
+  [
+    "mosselsalade",
+    "commons",
+    "mussel salad",
+    4,
+    "serving"
+  ],
+  [
+    "gamba-tempura",
+    "commons",
+    "shrimp tempura",
+    6,
+    "serving"
+  ],
+  [
+    "visnuggets",
+    "commons",
+    "fish nuggets",
+    4,
+    "serving"
+  ],
+  [
+    "gebakken-mosselen",
+    "commons",
+    "fried mussels",
+    0,
+    "serving"
+  ],
+  [
+    "tongfilet",
+    "commons",
+    "sole fillet",
+    0,
+    "serving"
+  ],
+  [
+    "wilde-zalmfilet",
+    "commons",
+    "sockeye salmon fillet",
+    0,
+    "product"
+  ],
+  [
+    "red-snapperfilet",
+    "commons",
+    "red snapper fillet",
+    2,
+    "serving"
+  ],
+  [
+    "gerookte-coquilles",
+    "commons",
+    "smoked scallops",
+    5,
+    "serving"
+  ],
+  [
+    "gerookte-mosselen",
+    "commons",
+    "smoked mussels",
+    0,
+    "serving"
+  ],
+  [
+    "krabvlees",
+    "commons",
+    "crab meat",
+    2,
+    "product"
+  ],
+  [
+    "gerookte-garnalen",
+    "commons",
+    "smoked shrimp",
+    1,
+    "product"
+  ],
+  [
+    "zeekraalsalade",
+    "commons",
+    "samphire vegetables filetype:bitmap",
+    2,
+    "species"
+  ],
+  [
+    "schelvisfilet",
+    "commons",
+    "intitle:Haddock food filetype:bitmap",
+    2,
+    "serving"
+  ],
+  [
+    "kabeljauwwangen",
+    "commons",
+    "\"cod cheeks\" filetype:bitmap",
+    0,
+    "species"
+  ],
+  [
+    "hele-kreeft",
+    "commons",
+    "intitle:Homard filetype:bitmap",
+    0,
+    "species"
+  ],
+  [
+    "sardines",
+    "commons",
+    "sardines market filetype:bitmap",
+    0,
+    "product"
+  ],
+  [
+    "zeeforel",
+    "commons",
+    "Salmo trutta trutta fish filetype:bitmap",
+    6,
+    "species"
+  ],
+  [
+    "victoriabaars",
+    "commons",
+    "Nile perch fillets filetype:bitmap",
+    0,
+    "product"
+  ],
+  [
+    "halve-kreeft",
+    "commons",
+    "intitle:Homard filetype:bitmap",
+    2,
+    "serving"
+  ],
+  [
+    "zalm-dillesalade",
+    "hartevelt",
+    "Zamsalade-.png",
+    0,
+    "product"
+  ],
+  [
+    "zeebrasemfilet",
+    "commons",
+    "Pagellus bogaraveo fish filetype:bitmap",
+    0,
+    "species"
+  ],
+  [
+    "kokkelvlees",
+    "commons",
+    "Berberechos conserva filetype:bitmap",
+    0,
+    "product"
+  ],
+  [
+    "noorse-kreeftstaart",
+    "commons",
+    "langoustine food filetype:bitmap",
+    1,
+    "serving"
+  ],
+  [
+    "kreeftensalade",
+    "commons",
+    "lobster salad",
+    0,
+    "serving"
+  ],
+  [
+    "vissticks",
+    "commons",
+    "fish fingers",
+    1,
+    "product"
+  ],
+  [
+    "sushi-mix",
+    "commons",
+    "sushi nigiri salmon tuna",
+    0,
+    "serving"
+  ],
+  [
+    "kabeljauwtongen",
+    "commons",
+    "cod tongues",
+    4,
+    "serving"
+  ],
+  [
+    "gamba-kroketten",
+    "commons",
+    "shrimp croquettes",
+    0,
+    "serving"
+  ],
+  [
+    "visbitterballen",
+    "commons",
+    "fish croquettes",
+    0,
+    "serving"
+  ]
+]

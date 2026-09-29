@@ -28,6 +28,7 @@ const schol = productPhoto(products.find(p => p.slug === 'schol'));
 assert.equal(schol.src, '/images/producten-hd/schol-hans-hillewaert.jpg');
 assert.equal(schol.credit.author, 'Hans Hillewaert');
 const missing = products.filter(p => !productPhoto(p)).map(p => p.slug);
+assert.equal(missing.length, 0, 'Every catalogue product must have a photograph');
 console.log(JSON.stringify({newUniquePhotos: paths.size, productsWithPhotos: products.length - missing.length, missingPhotos: missing.length, missing}, null, 2));
 const origin = process.argv[2];
 if (origin) for (const locale of ['nl', 'en', 'de']) {
