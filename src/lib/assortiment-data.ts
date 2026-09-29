@@ -208,7 +208,7 @@ export const products: Product[] = [
   {
     slug: "wijting",
     naam: "Wijting",
-    desc: "Wijting (Merlangius merlangus) is een fijne witte vis met een delicaat, mals vlees. Snel klaar, makkelijk te bereiden — ideaal voor de lekkerbek.",
+    desc: "Wijting (Merlangius merlangus) is een fijne witte vis met delicaat, mals vlees. Snel klaar en makkelijk te bereiden — lekker gebakken in de pan.",
     categorie: "verse-vis",
     ingredienten: "Wijting (Merlangius merlangus) [VIS]. Geen toegevoegde stoffen.",
     bevat: ["VIS"],
@@ -217,7 +217,7 @@ export const products: Product[] = [
   {
     slug: "wijtingfilet",
     naam: "Wijtingfilet",
-    desc: "Gefileerde wijting — dun, mals en snel klaar. De basis van onze lekkerbek.",
+    desc: "Gefileerde wijting — dun, mals en snel klaar. Lekker gebakken in de pan of bereid in de oven.",
     categorie: "verse-vis",
     ingredienten: "Wijting (Merlangius merlangus) [VIS]. Geen toegevoegde stoffen.",
     bevat: ["VIS"],
@@ -585,10 +585,10 @@ export const products: Product[] = [
   {
     slug: "lekkerbek",
     naam: "Lekkerbek",
-    desc: "Verse wijting gehuld in een luchtig, knapperig beslag. Wijting is een magere, fijne witte vis — vergelijkbaar met kabeljauw maar iets subtieler van smaak.",
+    desc: "Lekkerbek van heekfilet, gebakken in een luchtig, knapperig beslag. Heerlijk warm uit de winkel of van onze marktkraam.",
     categorie: "bereid",
     bestelId: "lekkerbek",
-    ingredienten: "Wijting (Merlangius merlangus) [VIS], TARWEBLOEM, water, zout, rijsmiddel, plantaardige olie. Bereid in frituurvet.",
+    ingredienten: "Heek [VIS], TARWEBLOEM, water, zout, rijsmiddel, plantaardige olie. Bereid in frituurvet.",
     bevat: ["VIS", "GLUTEN (tarwe)"],
     beschikbaar: "dagelijks",
   },

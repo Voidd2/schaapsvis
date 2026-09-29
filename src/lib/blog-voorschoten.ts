@@ -16,7 +16,7 @@ export const VOORSCHOTEN_ARTIKELEN: BlogPost[] = [
       ] },
       { kop: "Ravigotesaus bij de kibbeling", alineas: [
         "Bij onze kibbeling hoort ravigotesaus. De frisse, kruidige saus past bij de krokante buitenkant van de vis. Neem de saus apart wanneer u zelf wilt bepalen hoeveel u gebruikt. Zo kunt u thuis ook een deel zonder saus serveren als iemand dat liever heeft.",
-        "Kibbeling en lekkerbek zijn niet dezelfde portie gebakken vis. Kibbeling bestaat uit kleinere stukken; bij een lekkerbek krijgt u een filet. Wat u kiest hangt af van uw voorkeur en hoe u het wilt eten. Vraag aan de kraam welke vis we die dag gebruiken en bekijk onze uitleg over het verschil als u twijfelt."
+        "Kibbeling en lekkerbek zijn niet dezelfde portie gebakken vis. Kibbeling bestaat uit kleinere stukken; onze lekkerbek is een gebakken heekfilet in beslag. Wat u kiest hangt af van uw voorkeur en hoe u het wilt eten. Vraag aan de kraam welke vis we voor de kibbeling gebruiken en bekijk onze uitleg over het verschil als u twijfelt."
       ] },
       { kop: "Drie manieren om kibbeling op tafel te zetten", alineas: [
         "Voor een snelle lunch: serveer de kibbeling met brood, wat komkommer en de saus apart. U hoeft daarvoor geen tweede warm gerecht te maken. Het werkt ook wanneer niet iedereen aan tafel dezelfde hoeveelheid wil eten.",

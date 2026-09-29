@@ -380,7 +380,7 @@ export const receptenPraktisch: Recept[] = [
     seizoen: "Jaarrond",
     fotoLabel: "Lekkerbek met koolsalade en remoulade",
     vanSchaap: [
-      "4 reeds gebakken lekkerbekken",
+      "4 reeds gebakken lekkerbekken van heek",
     ],
     vanSupermarkt: [
       "300 g witte kool",
@@ -401,7 +401,7 @@ export const receptenPraktisch: Recept[] = [
       "Verwarm de lekkerbek circa 8–10 minuten in een oven van 180°C tot hij weer knispert en ook het midden goed heet is.",
       "Serveer met de krieltjes, koolsalade, remoulade en citroen.",
     ],
-    verhaal: "Dit recept begint met reeds gebakken lekkerbek, niet met rauwe vis. Terwijl de aardappelen koken, maakt u de koolsalade en remoulade.",
+    verhaal: "Onze lekkerbek is van gebakken heek. Dit recept begint met reeds gebakken lekkerbek, niet met rauwe vis. Terwijl de aardappelen koken, maakt u de koolsalade en remoulade.",
     seoKeywords: "lekkerbek recept, lekkerbek maaltijd, koolsalade bij vis",
   },
   {

@@ -292,9 +292,9 @@ const bestaandePosts: BlogPost[] = [
         ],
       },
       {
-        kop: "Lekkerbek: een hele filet",
+        kop: "Lekkerbek: een hele filet van heek",
         alineas: [
-          "Een lekkerbek is een héle visfilet in beslag — meestal wijting, soms ook kabeljauw of schelvis. Groter, platter, en u eet hem als een soort visschnitzel. Wijting is een fijne, magere witvis die qua smaak verrassend dicht bij kabeljauw komt.",
+          "Onze lekkerbek is een heekfilet in beslag, goudbruin gebakken. U krijgt een hele filet in plaats van de kleine stukjes van kibbeling.",
         ],
       },
       {

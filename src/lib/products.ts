@@ -58,10 +58,10 @@ export const CATALOG: CatalogProduct[] = [
   {
     id: "lekkerbek",
     naam: "Lekkerbek",
-    beschrijving: "Verse witvis in luchtig beslag",
+    beschrijving: "Heekfilet, gebakken in luchtig beslag",
     categorie: "bereid",
     eenheid: "stuks",
-    zoekwoorden: ["lekkerbek", "gebakken", "witvis"],
+    zoekwoorden: ["lekkerbek", "gebakken", "heek", "witvis"],
     beschikbaar: true,
   },
   {
