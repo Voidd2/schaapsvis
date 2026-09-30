@@ -24,8 +24,8 @@
     "assortimentDesc": "Bekijk verse vis, kibbeling, haring, biologische zalm, barbecuepakketten, visspiesjes en visgourmet bij Schaap's Vishandel in Leiden. Vraag naar beschikbaarheid.",
     "bezoekTitle": "Locaties en openingstijden Leiden & Voorschoten | Schaap's",
     "bezoekDesc": "Schaap's Vis bezoeken? Herenstraat 48 Leiden (ma–za), Leidse markt (wo + za), of Hoogvliet Voorschoten (vrij). Altijd vers, altijd vriendelijk.",
-    "contactTitle": "Contact Schaap's Vis Leiden | 071 514 9802 | Viswinkel Herenstraat",
-    "contactDesc": "Neem contact op met Schaap's Vis Leiden. Bel 071 514 9802 of stuur een bericht. Herenstraat 48, 2313 AL Leiden.",
+    "contactTitle": "Contact Schaap's Vis Leiden | +31 6 2481 1678 | Viswinkel Herenstraat",
+    "contactDesc": "Neem contact op met Schaap's Vis Leiden. Bel of app +31 6 2481 1678. Herenstraat 48, 2313 AL Leiden.",
     "bestellenTitle": "Visschaal bestellen in Leiden | Schaap's Vishandel",
     "bestellenDesc": "Alleen visschalen bestelt u online. Zoekt u andere vis? Stuur ons een WhatsApp-bericht; we kijken graag wat mogelijk is.",
     "eerlijkeVisTitle": "Biologische Vis Leiden | Biologische Zalm — Schaap's Vis",
@@ -36,8 +36,8 @@
     "bezorgenDesc": "Verse vis en visschalen thuisbezorgd in Leiden, Leiderdorp, Voorschoten, Wassenaar en Leidschendam. Woensdag t/m zaterdag, bestellen tot 12:00 de dag ervoor. € 5,99 bezorgkosten, gratis vanaf € 35.",
     "bezorgenPlaatsTitle": "Verse vis bezorgen in {plaats} | Vishandel uit Leiden | Schaap's Vis",
     "bezorgenPlaatsDesc": "Verse vis en visschalen laten bezorgen in {plaats}? Schaap's Vishandel uit Leiden rijdt {dagen} langs. Bestellen tot 12:00 de dag ervoor, betalen bij de deur of straks online.",
-    "visschalenTitle": "Visschaal bestellen Leiden vanaf {bedrag} | Schaap's",
-    "visschalenDesc": "Visschalen, borrelboxen en vis voor barbecue of gourmet. Schalen vanaf {bedrag}, met extra's naar keuze. Afhalen in Leiden of bezorgen."
+    "visschalenTitle": "Visschalen Leiden voor borrels en evenementen | Schaap's",
+    "visschalenDesc": "Een visschaal voor een verjaardag, borrel of evenement in Leiden? We denken mee over smaak en gezelschap. Gemiddeld circa € 17,50 per persoon; vraag aan via WhatsApp."
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Sinds 1938",
@@ -219,7 +219,7 @@
   },
   "footer": {
     "address": "Herenstraat 48, 2313 AL Leiden",
-    "phone": "071 514 9802",
+    "phone": "+31 6 2481 1678",
     "facebook": "Volg ons op Facebook",
     "copy": "© 2026 Schaap's Vishandel · Leiden · Opgericht 1938 door Gerrit Schaap",
     "nieuwsbriefTitel": "Wat er deze week binnenkomt",
@@ -380,7 +380,7 @@
     "faq": [
       {
         "v": "Bezorgen jullie bij mij in de buurt?",
-        "a": "We bezorgen in Leiden, Leiderdorp, Voorschoten, Wassenaar en Leidschendam. Vul uw postcode in op deze pagina, dan ziet u het meteen. Woont u er net buiten? Bel ons op 071 514 9802 — als het op de route ligt, doen we het meestal gewoon."
+        "a": "We bezorgen in Leiden, Leiderdorp, Voorschoten, Wassenaar en Leidschendam. Vul uw postcode in op deze pagina, dan ziet u het meteen. Woont u er net buiten? Bel of app ons op +31 6 2481 1678 — als het op de route ligt, doen we het meestal gewoon."
       },
       {
         "v": "Wat kost bezorgen?",
@@ -420,21 +420,21 @@
   },
   "visschaal": {
     "eyebrow": "Borrel · verjaardag · kerst",
-    "kop": "Kies uw visschaal",
-    "inleiding": "Kies uit visschalen en borrelboxen voor verschillende gezelschappen. U kunt extra vis toevoegen en uw aanvraag afronden. Barbecue, gourmet en bijzondere dieetwensen bespreken we via WhatsApp.",
+    "kop": "Visschalen voor borrels en evenementen",
+    "inleiding": "Een visschaal voor een verjaardag, borrel, receptie of bedrijfsfeest in Leiden? Bekijk onze schalen en foto’s. We denken graag met u mee over uw favoriete vis, het aantal gasten en de gelegenheid. De gemiddelde prijs ligt rond € 17,50 per persoon; vraag uw visschaal aan via WhatsApp.",
     "per100": "per 100 g",
     "perStuk": "per {eenheid}",
     "seizoen": "{periode}",
     "samenvattingKop": "Uw schaal",
-    "niksGekozen": "Kies hierboven een schaal. Daarna kunt u er zoveel bij leggen als u wilt.",
+    "niksGekozen": "Kies hierboven een schaal en geef het aantal personen op.",
     "gewichtRegel": "{gewicht} extra",
-    "personenRegel": "genoeg voor ± {personen} personen",
-    "vergelijking": "Dat komt neer op {bedrag} per persoon. De goedkoopste kant-en-klare schotel die we in de regio vonden kost {markt} per persoon — en daar kiest u niet zelf wat erop ligt.",
-    "voorlopig": "Richtprijzen. We bevestigen het definitieve bedrag voordat we beginnen — u zit nergens aan vast.",
+    "personenRegel": "Voor {personen} personen",
+    "vergelijking": "De gemiddelde prijs ligt rond € 17,50 per persoon; we stemmen de uiteindelijke samenstelling en prijs met u af.",
+    "voorlopig": "De prijs is een gemiddelde indicatie; de invulling en eventuele duurdere vissoorten stemmen we met u af.",
     "hoeveelKop": "Hoeveel heb ik nodig?",
     "hoeveelTekst": "Reken {borrel} gram per persoon als er ook ander eten is, en {maaltijd} gram als de schaal de maaltijd is.",
     "wissen": "Alles wissen",
-    "naarBestellen": "Deze schaal bestellen",
+    "naarBestellen": "Vraag deze schaal aan via WhatsApp",
     "viaWhatsapp": "Liever even overleggen? App ons",
     "levertijdKop": "Op tijd bestellen",
     "levertijdTekst": "Voor een schaal plannen we graag een paar dagen vooruit. Rond de kerstdagen en Oud & Nieuw is het druk — bestel dan ruim op tijd, dan weet u zeker dat het lukt.",
@@ -444,15 +444,15 @@
     "faq": [
       {
         "v": "Wat kost een visschaal?",
-        "a": "De getoonde prijs is het startbedrag van de gekozen schaal of box. Extra's komen daarbovenop. Wij bevestigen de samenstelling, beschikbaarheid en definitieve prijs voordat we beginnen."
+        "a": "De gemiddelde prijs ligt rond € 17,50 per persoon. De uiteindelijke prijs hangt af van het aantal gasten, de samenstelling en eventuele duurdere vis. Bespreek uw wensen via WhatsApp; we bevestigen de prijs vooraf."
       },
       {
         "v": "Hoeveel personen kan ik met een schaal doen?",
-        "a": "Bij elke schaal staat het erbij. Reken als vuistregel 150 gram vis per persoon als er ook ander eten is, en 250 gram als de schaal de maaltijd is. Twijfelt u tussen twee maten, neem dan de grootste — een lege schaal is vervelender dan een restje."
+        "a": "U kiest het aantal personen als richtlijn. We stemmen de hoeveelheid en samenstelling af op uw gezelschap en gelegenheid. Reken gemiddeld op circa € 17,50 per persoon."
       },
       {
         "v": "Kan ik de schaal aanpassen?",
-        "a": "Ja. Kies een schaal en leg erbij wat u wilt. Wilt u juist iets eraf, bel of app ons even — dan regelen we het bij het opmaken."
+        "a": "Ja. Vertel ons via WhatsApp welke vissoorten of extra’s u graag wilt. Duurdere vissoorten of extra’s kunnen de prijs verhogen; we spreken de definitieve prijs vooraf met u af."
       },
       {
         "v": "Hoe lang van tevoren moet ik bestellen?",
@@ -464,29 +464,32 @@
       },
       {
         "v": "Kan een visschaal bezorgd worden?",
-        "a": "Ja, in Leiden, Leiderdorp, Voorschoten, Wassenaar en Leidschendam. Bezorgen kost € 5,99 en is gratis vanaf € 35, dus bij een schaal rijden we gratis. Afhalen aan de Herenstraat 48 kan natuurlijk ook."
+        "a": "Ja, we bezorgen in Leiden, Leiderdorp, Voorschoten, Wassenaar en Leidschendam. Afhalen aan de Herenstraat 48 kan natuurlijk ook. De bezorgkosten hangen af van de uiteindelijke bestelling; we bevestigen die vooraf."
       },
       {
         "v": "Wat als ik iets wil wat er niet bij staat?",
         "a": "App of bel ons even. De lijst is wat we vaak maken, geen grens. Als het te krijgen is, leggen we het erop."
       }
     ],
-    "vergelijkingKort": "Verschillende visschalen en borrelboxen, met extra's naar wens. Vraag ons welke samenstelling het best past bij uw gezelschap.",
-    "perSchaal": "per schaal",
+    "vergelijkingKort": "Visschalen in Leiden, afgestemd op uw smaak en gelegenheid. De gemiddelde richtprijs ligt rond € 17,50 per persoon.",
+    "perSchaal": "per persoon",
     "stap1": "Stap 1",
     "stap2": "Stap 2",
     "schaalKop": "Kies uw schaal of borrelbox",
-    "schaalUitleg": "Elke foto is een voorbeeld, niet de exacte schaal die u ontvangt. Uw schaal kan zelfs een stuk groter zijn. Wij stemmen de grootte en inhoud af op uw budget, het aantal personen en wat u graag op de borrelplank wilt. De bedragen hieronder zijn startprijzen; uw keuzes en extra’s kunnen de uiteindelijke prijs veranderen.",
+    "schaalUitleg": "Op zoek naar een visschaal in Leiden voor een verjaardag, borrel, receptie of bedrijfsfeest? Bekijk de foto’s ter inspiratie. De schaal op de foto kan afwijken en in werkelijkheid groter zijn. We bespreken graag uw favoriete vis, het aantal gasten en de gelegenheid. Gemiddeld rekenen we op circa € 17,50 per persoon; bijzondere wensen of duurdere vis kunnen de prijs beïnvloeden. Vraag uw visschaal aan via WhatsApp.",
     "fotoVoorbeeld": "Voorbeeldfoto — grootte en inhoud worden afgestemd op uw wensen en budget.",
     "voorPersonen": "Voor {van} tot {tot} personen",
-    "startbedrag": "Startbedrag, zonder extra's",
+    "startbedrag": "Gemiddelde richtprijs: circa {bedrag}",
+    "aantalPersonen": "Voor hoeveel personen?",
+    "gemiddeld": "Gemiddeld",
+    "gemiddeldePrijs": "Gemiddeld circa € 17,50 per persoon",
     "watErOpLigt": "Wat erop ligt",
     "kiesSchaal": "Kies deze schaal",
     "gekozen": "Gekozen — klik om te wisselen",
-    "extrasKop": "Er nog iets bij?",
-    "extrasUitleg": "Alles hieronder gaat per 100 gram, behalve waar het anders staat. Wat u kiest komt bovenop het startbedrag van uw schaal.",
-    "extrasEerstSchaal": "Kies eerst een schaal hierboven. Daarna kunt u hier zoveel toevoegen als u wilt.",
-    "extrasRegel": "Waarvan {bedrag} aan extra's."
+    "extrasKop": "Iets extra’s of een luxe vissoort?",
+    "extrasUitleg": "Vertel ons via WhatsApp wat u op de schaal wilt. We kunnen bijvoorbeeld extra of duurdere vissoorten toevoegen; daardoor kan de prijs hoger worden. We spreken de definitieve prijs altijd vooraf met u af.",
+    "extrasEerstSchaal": "Bespreek extra wensen via WhatsApp.",
+    "extrasRegel": ""
   },
   "bestel": {
     "eyebrow": "Bestellen",

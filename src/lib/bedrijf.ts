@@ -35,13 +35,13 @@ export const BEDRIJF = {
   geo: { lat: 52.1517798, lng: 4.4891644 },
 
   telefoon: {
-    weergave: "071 514 9802",
+    weergave: "+31 6 2481 1678",
     /** E.164 — voor tel:-links en schema.org. */
-    e164: "+31715149802",
+    e164: "+31624811678",
   },
 
   /** Zelfde nummer, zonder plus — voor wa.me-links. */
-  whatsapp: "31715149802",
+  whatsapp: "31624811678",
 
   /** EIGENAAR: vul hier je e-mailadres in; zolang dit null is toont de site geen e-mail. */
   email: null as string | null,

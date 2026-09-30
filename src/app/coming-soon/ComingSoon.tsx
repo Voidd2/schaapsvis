@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { BEDRIJF } from "@/lib/bedrijf";
 
 type Lang = "nl" | "en" | "de";
 
@@ -31,7 +32,7 @@ const COPY: Record<
       "Informatie over waar onze vis vandaan komt",
     ],
     openLine: "Tot die tijd zijn we gewoon open in de winkel.",
-    contactLabel: "Herenstraat 48, Leiden · 071 514 9802",
+    contactLabel: `Herenstraat 48, Leiden · ${BEDRIJF.telefoon.weergave}`,
     hoursLine:
       "Ma t/m za in de winkel · wo + za op de markt in Leiden · vr bij Hoogvliet Voorschoten",
     whatsapp: "Bestel via WhatsApp",
@@ -176,7 +177,7 @@ export function ComingSoon({ error = false }: { error?: boolean }) {
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <a
-                href="https://wa.me/31715149802"
+                href={`https://wa.me/${BEDRIJF.whatsapp}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
@@ -188,11 +189,11 @@ export function ComingSoon({ error = false }: { error?: boolean }) {
                 {t.whatsapp}
               </a>
               <a
-                href="tel:+31715149802"
+                href={`tel:${BEDRIJF.telefoon.e164}`}
                 className="inline-block px-4 py-2 text-sm font-medium border transition-opacity hover:opacity-80"
                 style={{ borderColor: "rgba(250,246,239,0.35)", color: "var(--cream)" }}
               >
-                071 514 9802
+                {BEDRIJF.telefoon.weergave}
               </a>
             </div>
           </div>

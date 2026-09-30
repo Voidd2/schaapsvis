@@ -9,7 +9,7 @@ import { SelectieAanvraag } from "./SelectieAanvraag";
 import { paginaMetadata, kruimelSchema, vraagSchema } from "@/lib/seo";
 import { bestelContact } from "@/lib/bestel-contact";
 import { BEDRIJF, euro } from "@/lib/bedrijf";
-import { SCHALEN, VANAF_BEDRAG } from "@/lib/visschaal";
+import { VANAF_BEDRAG } from "@/lib/visschaal";
 import { GEMEENTEN } from "@/lib/bezorging";
 
 export async function generateMetadata({
@@ -22,8 +22,8 @@ export async function generateMetadata({
   return paginaMetadata({
     locale,
     pad: "/visschalen",
-    title: t("visschalenTitle", { bedrag: euro(VANAF_BEDRAG) }),
-    description: t("visschalenDesc", { bedrag: euro(VANAF_BEDRAG) }),
+    title: t("visschalenTitle"),
+    description: t("visschalenDesc"),
   });
 }
 
@@ -39,35 +39,19 @@ export default async function VisschalenPage({
 
   const vragen = t.raw("faq") as { v: string; a: string }[];
 
-  const duurste = Math.max(...SCHALEN.map((schaal) => schaal.prijs));
-
   const productSchema = {
     "@context": "https://schema.org",
-    "@type": "Product",
-    name:
-      locale === "de"
-        ? "Fischplatte von Schaap's Vishandel"
-        : locale === "en"
-          ? "Seafood platter from Schaap's Vishandel"
-          : "Visschaal van Schaap's Vishandel",
+    "@type": "Service",
+    name: locale === "de" ? "Fischplatten für Veranstaltungen in Leiden" : locale === "en" ? "Seafood platters for events in Leiden" : "Visschalen voor evenementen in Leiden",
     description:
       locale === "de"
-        ? `Fischplatten ab ${euro(VANAF_BEDRAG)}, mit Extras nach Wunsch. Abholen in Leiden oder liefern lassen.`
+        ? `Fischplatten für Veranstaltungen in Leiden. Wir rechnen durchschnittlich mit etwa 17,50 € pro Person und beraten Sie per WhatsApp zu Auswahl und Anlass.`
         : locale === "en"
-          ? `Seafood platters from ${euro(VANAF_BEDRAG)}, with extras of your choosing. Collect in Leiden or have it delivered.`
-          : `Visschalen vanaf ${euro(VANAF_BEDRAG)}, met extra's naar keuze. Afhalen in Leiden of laten bezorgen.`,
-    brand: { "@type": "Brand", name: BEDRIJF.naam },
-    category: "Seafood platter",
-    offers: {
-      "@type": "AggregateOffer",
-      priceCurrency: "EUR",
-      lowPrice: VANAF_BEDRAG.toFixed(2),
-      highPrice: duurste.toFixed(2),
-      offerCount: SCHALEN.length,
-      seller: { "@id": `${BEDRIJF.domein}/#winkel` },
-      areaServed: GEMEENTEN.map((x) => ({ "@type": "City", name: x.naam })),
-      url: `${BEDRIJF.domein}/${locale}/visschalen`,
-    },
+        ? `Seafood platters for events in Leiden. We average around €17.50 per person and advise on selections for each occasion via WhatsApp.`
+          : `Visschalen voor evenementen in Leiden. We rekenen gemiddeld circa € 17,50 per persoon en denken via WhatsApp mee over smaak en gelegenheid.`,
+    serviceType: locale === "de" ? "Fischplatten für Feiern und Veranstaltungen" : locale === "en" ? "Seafood platters for parties and events" : "Visschalen voor borrels en evenementen",
+    provider: { "@id": `${BEDRIJF.domein}/#winkel` },
+    areaServed: GEMEENTEN.map((x) => ({ "@type": "City", name: x.naam })),
   };
 
   return (
@@ -92,7 +76,7 @@ export default async function VisschalenPage({
         label={t("eyebrow")}
         titel={t("kop")}
         intro={t("inleiding")}
-        cijfer={{ label: g("vanaf"), waarde: euro(VANAF_BEDRAG), onder: t("perSchaal") }}
+        cijfer={{ label: t("gemiddeld"), waarde: euro(VANAF_BEDRAG), onder: t("perSchaal") }}
       />
 
       {/* ── Samenstellen ──────────────────────────────────────────────────── */}
@@ -132,7 +116,7 @@ export default async function VisschalenPage({
         titel={t("kop")}
         tekst={t("schaalUitleg")}
         knoppen={[
-          { label: t("naarBestellen"), href: "#samenstellen", extern: true },
+          { label: t("schaalKop"), href: "#samenstellen" },
           {
             label: g("whatsapp"),
             href: bestelContact(locale,nav("visschalen")).href,

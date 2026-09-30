@@ -9,6 +9,8 @@
 import { DIRKS_VISSCHALEN } from "./dirks-selectie";
 
 export const PRIJZEN_DEFINITIEF = false;
+/** Basistarief voor elke visschaal; maatwerk wordt apart besproken. */
+export const PRIJS_PER_PERSOON = 17.5;
 
 /** Vuistregels om te bepalen hoeveel iemand nodig heeft. */
 export const PORTIES = {
@@ -44,10 +46,8 @@ export interface Schaal {
 
 /**
  * ┌─ EIGENAAR ────────────────────────────────────────────────────────────────┐
- * │ Dit zijn drie voorbeelden om de site mee te kunnen bouwen. Alleen het     │
- * │ startbedrag van de kleinste (€ 55,90) is wat je hebt doorgegeven; de      │
- * │ andere twee bedragen, de namen en alles wat er op ligt zijn ingevuld om   │
- * │ te laten zien hoe het eruitziet. Vervang ze door je eigen schalen.        │
+ * │ De schaalsoorten hebben voorbeelden van groepsgrootte; prijs is altijd    │
+ * │ € 17,50 per persoon. Inhoud en eventuele duurdere vis op aanvraag.        │
  * └───────────────────────────────────────────────────────────────────────────┘
  */
 const EIGEN_SCHALEN: Schaal[] = [
@@ -55,57 +55,31 @@ const EIGEN_SCHALEN: Schaal[] = [
     id: "borrelschaal",
     naam: "Borrelschaal",
     beeld: "schaalBorrel",
-    prijs: 55.9,
+    prijs: PRIJS_PER_PERSOON * 4,
     personenVan: 4,
     personenTot: 6,
-    omschrijving:
-      "De schaal waar de meeste mensen om vragen. Genoeg voor een borrel met vier tot zes man, naast ander eten.",
-    bevat: [
-      "Gerookte zalm van het mes",
-      "Hollandse garnalen",
-      "Haringhapjes met ui",
-      "Gerookte makreelfilet",
-      "Huisgemaakte zalm- en krabsalade",
-      "Sauzen: ravigote en cocktail",
-    ],
+    omschrijving: "Een visschaal voor een borrel of gezellig samenzijn. De invulling bespreken we graag met u.",
+    bevat: [],
   },
   {
     id: "familieschaal",
     naam: "Familieschaal",
     beeld: "schaalFamilie",
-    // EIGENAAR: jouw bedrag hier.
-    prijs: 89.9,
+    prijs: PRIJS_PER_PERSOON * 8,
     personenVan: 8,
     personenTot: 10,
-    omschrijving:
-      "Dezelfde opzet, ruimer gevuld, met gerookte paling erbij. Voor een verjaardag of een zondag met de familie.",
-    bevat: [
-      "Alles van de borrelschaal, ruimer gesneden",
-      "Gerookte paling",
-      "Gravad lax",
-      "Noorse garnalen",
-      "Zure haring en rolmops",
-      "Sauzen: ravigote en cocktail",
-    ],
+    omschrijving: "Een ruimere visschaal voor familie of vrienden. Bespreek uw gewenste vissoorten met ons.",
+    bevat: [],
   },
   {
     id: "feestschaal",
     naam: "Feestschaal",
     beeld: "schaalFeest",
-    // EIGENAAR: jouw bedrag hier.
-    prijs: 139.9,
+    prijs: PRIJS_PER_PERSOON * 12,
     personenVan: 12,
     personenTot: 16,
-    omschrijving:
-      "De grote schaal, met oesters en gamba's. Voor de kerstdagen, een receptie of een groot gezelschap.",
-    bevat: [
-      "Alles van de familieschaal",
-      "Creuse oesters, ongeopend met mesje",
-      "Gamba's",
-      "Surimi krab",
-      "Gerookte bokking",
-      "Sauzen: ravigote en cocktail",
-    ],
+    omschrijving: "Een feestelijke visschaal voor een bijzondere gelegenheid. Luxe vissoorten stemmen we met u af.",
+    bevat: [],
   },
 ];
 
@@ -122,7 +96,7 @@ export const SCHALEN: Schaal[] = [
     id: item.slug,
     naam: item.naam,
     foto: item.foto,
-    prijs: item.prijs,
+    prijs: PRIJS_PER_PERSOON * (item.personenVan ?? 2),
     personenVan: item.personenVan ?? 2,
     personenTot: item.personenTot ?? 4,
     omschrijving: item.groep === "borrelbox"
@@ -141,7 +115,7 @@ export function schaalById(id: string): Schaal | undefined {
 }
 
 /** Het bedrag waar de site "vanaf" mee adverteert. */
-export const VANAF_BEDRAG = Math.min(...SCHALEN.map((s) => s.prijs));
+export const VANAF_BEDRAG = PRIJS_PER_PERSOON;
 
 /* ═══════════════════════════════════════════════════════════════════════════
    De extra's — wat de klant er bovenop legt
@@ -320,6 +294,8 @@ export type Keuze = Record<string, number>;
 export interface Samenstelling {
   /** `null` zolang er nog geen schaal is gekozen. */
   schaal: string | null;
+  /** Gewenst aantal personen; de server begrenst dit op de gekozen schaal. */
+  personen?: number;
   extras: Keuze;
 }
 
@@ -334,6 +310,7 @@ export interface Regel {
   bedrag: number;
   /** De schaal zelf, in plaats van een extra. */
   isSchaal?: boolean;
+  personen?: number;
 }
 
 /** De schaal en de extra's als één lijst regels, de schaal voorop. */
@@ -345,23 +322,10 @@ export function regels(samen: Samenstelling): Regel[] {
     uit.push({
       id: schaal.id,
       naam: schaal.naam,
-      hoeveelheid: 1,
-      bedrag: schaal.prijs,
+      hoeveelheid: Math.max(schaal.personenVan, Math.min(schaal.personenTot, Math.floor(samen.personen ?? schaal.personenVan))),
+      personen: Math.max(schaal.personenVan, Math.min(schaal.personenTot, Math.floor(samen.personen ?? schaal.personenVan))),
+      bedrag: PRIJS_PER_PERSOON * Math.max(schaal.personenVan, Math.min(schaal.personenTot, Math.floor(samen.personen ?? schaal.personenVan))),
       isSchaal: true,
-    });
-  }
-
-  for (const [id, hoeveelheid] of Object.entries(samen.extras)) {
-    const onderdeel = onderdeelById(id);
-    if (!onderdeel || hoeveelheid <= 0) continue;
-    uit.push({
-      id,
-      naam: onderdeel.naam,
-      hoeveelheid,
-      perStuk: onderdeel.perStuk,
-      bedrag: onderdeel.perStuk
-        ? onderdeel.prijs * hoeveelheid
-        : (onderdeel.prijs * hoeveelheid) / 100,
     });
   }
 
@@ -375,18 +339,14 @@ export function totaal(samen: Samenstelling): number {
 
 /** Wat er aan extra's bovenop de schaal komt. */
 export function extrasTotaal(samen: Samenstelling): number {
-  return Math.round(
-    regels(samen)
-      .filter((r) => !r.isSchaal)
-      .reduce((som, r) => som + r.bedrag, 0) * 100
-  ) / 100;
+  void samen;
+  return 0;
 }
 
 /** Het gewicht van de extra's — stuks en de schaal zelf tellen niet mee. */
 export function extrasGewicht(samen: Samenstelling): number {
-  return regels(samen)
-    .filter((r) => !r.isSchaal && !r.perStuk)
-    .reduce((som, r) => som + r.hoeveelheid, 0);
+  void samen;
+  return 0;
 }
 
 /**
@@ -399,19 +359,19 @@ export function extrasGewicht(samen: Samenstelling): number {
 export function personen(samen: Samenstelling): number {
   const schaal = samen.schaal ? schaalById(samen.schaal) : undefined;
   if (!schaal) return 0;
-  return schaal.personenVan + Math.floor(extrasGewicht(samen) / PORTIES.borrel);
+  return Math.max(schaal.personenVan, Math.min(schaal.personenTot, Math.floor(samen.personen ?? schaal.personenVan)));
 }
 
 /** Prijs per persoon, om te vergelijken met de pakketprijzen van anderen. */
 export function prijsPerPersoon(samen: Samenstelling): number | null {
   const aantal = personen(samen);
   if (aantal < 1) return null;
-  return totaal(samen) / aantal;
+  return PRIJS_PER_PERSOON;
 }
 
 /** "300 g", "2 × dozijn" of "1 schaal" — leesbaar gezet. */
 export function hoeveelheidTekst(regel: Regel): string {
-  if (regel.isSchaal) return "1×";
+  if (regel.isSchaal) return `${regel.personen ?? regel.hoeveelheid} personen`;
   if (regel.perStuk) return `${regel.hoeveelheid}× ${regel.perStuk}`;
   return regel.hoeveelheid >= 1000
     ? `${(regel.hoeveelheid / 1000).toFixed(1).replace(".", ",")} kg`

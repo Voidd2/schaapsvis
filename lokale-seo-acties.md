@@ -13,7 +13,7 @@ Het profiel beheer je gratis via [business.google.com](https://business.google.c
 ### Basisgegevens (exacte NAP — overal identiek invullen)
 - [ ] **Naam:** `Schaap's Vishandel` (precies zo, met apostrof, geen extra toevoegingen zoals "Leiden" of "sinds 1938")
 - [ ] **Adres:** `Herenstraat 48, 2313 AL Leiden`
-- [ ] **Telefoon:** `071 514 9802`
+- [ ] **Telefoon/WhatsApp:** `+31 6 2481 1678`
 - [ ] **Website:** `https://www.schaapsvishandel.nl`
 
 ### Categorie
@@ -72,7 +72,7 @@ NAP = **N**aam, **A**dres, **P**hone. Google vertrouwt je bedrijf meer als deze 
 Schaap's Vishandel
 Herenstraat 48
 2313 AL Leiden
-071 514 9802
++31 6 2481 1678
 https://www.schaapsvishandel.nl
 ```
 Telefoon internationaal (voor velden die dat vragen, bijv. WhatsApp/schema): `+31 71 514 9802`

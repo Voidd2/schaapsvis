@@ -25,7 +25,12 @@ try {
       return image?.naturalWidth > 0;
     });
     await card.getByRole('button').click();
-    if (!(await page.locator('aside').innerText()).includes('35,55')) throw new Error(`${locale}: selected price incorrect`);
+    const asideText = await page.locator('aside').innerText();
+    const averagePrice = locale === 'en' ? '€17.50' : '17,50';
+    if (!asideText.includes(averagePrice)) throw new Error(`${locale}: average per-person guidance missing`);
+    if (await card.locator('text=/€\s?\d/').count()) throw new Error(`${locale}: a platter card exposes an individual price`);
+    const waHref = await page.locator('aside a[href*="wa.me"]').getAttribute('href');
+    if (!waHref?.includes('31624811678')) throw new Error(`${locale}: WhatsApp uses the wrong number`);
     const width = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     if (width > 2) throw new Error(`${locale}: horizontal overflow ${width}px`);
     if (errors.length) throw new Error(`${locale}: ${errors.join('; ')}`);
@@ -35,7 +40,7 @@ try {
     if (await bbqSection.getByRole('heading', { name: bbq, exact: true }).count() !== 1) throw new Error(`${locale}: BBQ pack missing`);
     const whatsapp = bbqSection.locator('a[href*="wa.me"]');
     if (await whatsapp.count() !== 13) throw new Error(`${locale}: expected 13 BBQ WhatsApp links`);
-    results.push({ locale, platterCards: await main.locator('article').count(), bbqCards: await bbqSection.locator('li').count(), whatsappLinks: await whatsapp.count(), selectedPrice: '€35,55', horizontalOverflow: width });
+    results.push({ locale, platterCards: await main.locator('article').count(), bbqCards: await bbqSection.locator('li').count(), whatsappLinks: await whatsapp.count(), platterCardPrices: 'none', averagePerPerson: '€17.50', horizontalOverflow: width });
     await assortment.close();
     await page.close();
   }

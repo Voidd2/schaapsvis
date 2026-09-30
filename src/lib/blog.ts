@@ -437,7 +437,7 @@ const bestaandePosts: BlogPost[] = [
       {
         kop: "Waar te koop in Leiden",
         alineas: [
-          "U vindt ons in de winkel aan de Herenstraat 48 (maandag t/m zaterdag), op de markt in Leiden — woensdag bij de Vismarkt aan de Nieuwe Rijn en zaterdag op de Aalmarkt voor de Waag — en op vrijdag bij Hoogvliet in Voorschoten. Vraag gerust naar de biologische zalm; we vertellen u er graag alles over. Bestel vooruit via WhatsApp of bel 071 514 9802, dan zetten we het voor u klaar.",
+          "U vindt ons in de winkel aan de Herenstraat 48 (maandag t/m zaterdag), op de markt in Leiden — woensdag bij de Vismarkt aan de Nieuwe Rijn en zaterdag op de Aalmarkt voor de Waag — en op vrijdag bij Hoogvliet in Voorschoten. Vraag gerust naar de biologische zalm; we vertellen u er graag alles over. Bestel vooruit via WhatsApp of bel +31 6 2481 1678, dan zetten we het voor u klaar.",
         ],
       },
     ],

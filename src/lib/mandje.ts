@@ -19,7 +19,6 @@ import { products, eenheidVoor, type Categorie } from "./assortiment-data";
 import { isBezorgbaar } from "./bezorging";
 import {
   LEGE_SAMENSTELLING,
-  ONDERDELEN,
   schaalById,
   type Samenstelling,
 } from "./visschaal";
@@ -111,15 +110,13 @@ export function leesSamenstelling(): Samenstelling {
     const rauw = localStorage.getItem(SCHAAL_OPSLAG);
     if (!rauw) return LEGE_SAMENSTELLING;
     const gelezen = JSON.parse(rauw) as Partial<Samenstelling>;
-    const extras: Record<string, number> = {};
-    for (const [id, aantal] of Object.entries(gelezen.extras ?? {})) {
-      if (ONDERDELEN.some((o) => o.id === id) && Number(aantal) > 0) {
-        extras[id] = Number(aantal);
-      }
-    }
     const schaal =
       typeof gelezen.schaal === "string" && schaalById(gelezen.schaal) ? gelezen.schaal : null;
-    return { schaal, extras };
+    const gegevens = schaal ? schaalById(schaal)! : undefined;
+    const personen = gegevens && Number.isFinite(Number(gelezen.personen))
+      ? Math.max(gegevens.personenVan, Math.min(gegevens.personenTot, Math.floor(Number(gelezen.personen))))
+      : gegevens?.personenVan;
+    return { schaal, personen, extras: {} };
   } catch {
     return LEGE_SAMENSTELLING;
   }
