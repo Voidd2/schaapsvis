@@ -105,7 +105,7 @@ export const VOORSCHOTEN_ARTIKELEN: BlogPost[] = [
         "Een gezelschap dat vooral gerookte vis lekker vindt, hoeft niet dezelfde schaal te krijgen als een groep die juist om garnalen vraagt. De mogelijkheid om extra’s te kiezen helpt daarbij. Geef ook door wanneer u bepaalde producten apart wilt laten serveren, zodat we kunnen bespreken of en hoe dat uitvoerbaar is."
       ] },
       { kop: "Budget en prijs vooraf afstemmen", alineas: [
-        "De online configurator toont startbedragen en de indicatieve kosten van uw extra’s. De uiteindelijke prijs kan veranderen door hoeveelheid, samenstelling en bijzondere wensen. We bevestigen het definitieve bedrag voordat we beginnen; behandel een voorbeeldfoto daarom niet als een vast pakket met een onveranderlijke prijs.",
+        "De basisprijs van een visschaal is € 17,50 per persoon. Extra’s of duurdere vissoorten kunnen de prijs verhogen. Bespreek uw wensen vooraf via WhatsApp; we bevestigen de definitieve prijs voordat we beginnen.",
         "Heeft u een budget voor de hele borrel? Vertel ons dat bedrag, het aantal gasten en uw favoriete producten. Dat geeft meer houvast dan alleen vragen om een grote schaal. Alleen visschalen kunt u online samenstellen en bestellen. Voor losse vis of andere verzoeken bespreken we de mogelijkheden via WhatsApp."
       ] },
       { kop: "Ophalen voor uw borrel in Voorschoten", alineas: [

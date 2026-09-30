@@ -5,7 +5,7 @@
 ## Wat is dit?
 De website van **Schaap's Vishandel**, een viswinkel aan de Herenstraat 48 in
 Leiden. Opgericht in 1938 door Gerrit Schaap, nu de vierde generatie. Eigenaar:
-Aldert Haasnoot, in de buurt gewoon "Schaap" genoemd. Telefoon 071 514 9802.
+Aldert Haasnoot, in de buurt gewoon "Schaap" genoemd. Telefoon/WhatsApp +31 6 2481 1678.
 
 De site heeft drie taken: gevonden worden in Leiden en omgeving (in het
 Nederlands, Engels én Duits), bestellingen aannemen, en e-mailadressen
@@ -30,7 +30,7 @@ Daar staat wat er nog voorlopig is en wat de eigenaar zelf invult.
   bestelling verse vis: we bellen met de dagprijs voordat we inpakken. Nooit een
   bedrag beloven dat de weegschaal niet kan waarmaken.
 - **Een visschaal is een keuze uit drie schalen** (`SCHALEN` in
-  `src/lib/visschaal.ts`), elk met een startbedrag; de goedkoopste is € 55,90.
+  `src/lib/visschaal.ts`), basistarief € 17,50 per persoon. Maatwerk/duurdere vis vooraf via WhatsApp afstemmen.
   Daarbovenop legt de klant zelf extra's, **per 100 gram** (`ONDERDELEN`). Een
   paar dingen gaan per stuk (oesters) en hebben `perStuk`. Dit is wél op de cent
   uit te rekenen en kan dus online worden afgerekend.

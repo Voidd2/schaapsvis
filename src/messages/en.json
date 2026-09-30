@@ -36,8 +36,8 @@
     "bezorgenDesc": "Fresh fish and seafood platters delivered in Leiden, Leiderdorp, Voorschoten, Wassenaar and Leidschendam. Wednesday to Saturday, order by 12:00 the day before. Delivery € 5.99, free from € 35.",
     "bezorgenPlaatsTitle": "Fresh fish delivery in {plaats} | Fishmonger from Leiden | Schaap's Vis",
     "bezorgenPlaatsDesc": "Want fresh fish or a seafood platter delivered in {plaats}? Schaap's Vishandel from Leiden drives out {dagen}. Order by 12:00 the day before and pay at the door, or online soon.",
-    "visschalenTitle": "Seafood platters Leiden from {bedrag} | Schaap's",
-    "visschalenDesc": "Seafood platters, sharing boxes and fish for barbecue or tabletop grilling. Platters from {bedrag}, with extras to choose from. Collect in Leiden or arrange delivery."
+    "visschalenTitle": "Seafood platters in Leiden for parties and events | Schaap's",
+    "visschalenDesc": "Seafood platters in Leiden for birthdays, drinks, receptions and events. We tailor the selection to your tastes and occasion; average around €17.50 per person. Enquire on WhatsApp."
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Since 1938",
@@ -420,21 +420,21 @@
   },
   "visschaal": {
     "eyebrow": "Drinks · birthday · Christmas",
-    "kop": "Choose your seafood platter",
-    "inleiding": "Choose from seafood platters and sharing boxes for different groups. Add extra fish and send your enquiry. Ask us on WhatsApp about barbecue, tabletop grilling and special dietary requirements.",
+    "kop": "Seafood platters for parties and events",
+    "inleiding": "Looking for a seafood platter in Leiden for a birthday, drinks, reception or company event? Browse our platters and photos. We will help choose fish to suit your tastes, guest numbers and occasion. We average around €17.50 per person; enquire on WhatsApp.",
     "per100": "per 100 g",
     "perStuk": "per {eenheid}",
     "seizoen": "{periode}",
     "samenvattingKop": "Your platter",
-    "niksGekozen": "Pick a platter above. After that you can add as much as you like.",
+    "niksGekozen": "Choose a platter above and select the number of people.",
     "gewichtRegel": "{gewicht} extra",
-    "personenRegel": "enough for ± {personen} people",
-    "vergelijking": "That works out at {bedrag} per person. The cheapest ready-made platter we found in the region costs {markt} per person — and there you do not choose what is on it.",
-    "voorlopig": "Guide prices. We confirm the final amount before we start — you are not committed to anything.",
+    "personenRegel": "For {personen} people",
+    "vergelijking": "The average is around €17.50 per person; we will discuss the final selection and price with you.",
+    "voorlopig": "The price is an average guide; we will discuss the selection and any premium fish with you.",
     "hoeveelKop": "How much do I need?",
     "hoeveelTekst": "Count on {borrel} grams per person if there is other food too, and {maaltijd} grams if the platter is the meal.",
     "wissen": "Clear all",
-    "naarBestellen": "Order this platter",
+    "naarBestellen": "Enquire about this platter on WhatsApp",
     "viaWhatsapp": "Rather talk it through? Message us",
     "levertijdKop": "Order in good time",
     "levertijdTekst": "We like a few days' notice for a platter. Christmas and New Year are busy, so order well ahead then.",
@@ -444,15 +444,15 @@
     "faq": [
       {
         "v": "What does a seafood platter cost?",
-        "a": "The displayed price is the starting amount for your chosen platter or box. Extras are added on top. We confirm contents, availability and the final price before preparing it."
+        "a": "The average price is around €17.50 per person. The final price depends on guest numbers, selection and any premium fish. Discuss your wishes on WhatsApp; we confirm the price beforehand."
       },
       {
         "v": "How many people does a platter feed?",
-        "a": "It says so on each platter. As a rule of thumb, count 150 grams of fish per person when there is other food too, and 250 grams when the platter is the meal. In doubt between two sizes, take the larger one — an empty platter is worse than leftovers."
+        "a": "Choose a guest count as a guide. We tailor the amount and selection to your group and occasion. The average is around €17.50 per person."
       },
       {
         "v": "Can I change the platter?",
-        "a": "Yes. Pick a platter and add whatever you like. Want something taken off instead, ring or message us and we will sort it while we lay it out."
+        "a": "Yes. Tell us on WhatsApp which fish or additions you would like. Premium fish or extras may increase the price; we agree the final amount with you beforehand."
       },
       {
         "v": "How far in advance should I order?",
@@ -464,29 +464,32 @@
       },
       {
         "v": "Can a platter be delivered?",
-        "a": "Yes, in Leiden, Leiderdorp, Voorschoten, Wassenaar and Leidschendam. Delivery is € 5.99 and free from € 35, so with a platter we drive out for free. Collecting at Herenstraat 48 is of course also possible."
+        "a": "Yes, we deliver in Leiden, Leiderdorp, Voorschoten, Wassenaar and Leidschendam. Collection at Herenstraat 48 is also possible. Delivery costs depend on the final order and will be confirmed beforehand."
       },
       {
         "v": "What if I want something that is not listed?",
         "a": "Message or ring us. The list is what we make often, not a limit. If it can be had, we will put it on."
       }
     ],
-    "vergelijkingKort": "Choose from seafood platters and sharing boxes with extras to suit you. Ask us which selection suits your guests.",
-    "perSchaal": "per platter",
+    "vergelijkingKort": "Seafood platters in Leiden, tailored to your tastes and occasion. The average guide price is around €17.50 per person.",
+    "perSchaal": "per person",
     "stap1": "Step 1",
     "stap2": "Step 2",
-    "schaalKop": "Choose your platter or sharing box",
-    "schaalUitleg": "Each photo is an example, not the exact platter you will receive. Your platter may be considerably larger. We tailor its size and contents to your budget, number of guests and preferred seafood. The amounts below are starting prices; your choices and extras may change the final price.",
+    "schaalKop": "Seafood platters for your occasion",
+    "schaalUitleg": "Looking for seafood platters in Leiden for a birthday, drinks, reception or company event? Browse the photos for inspiration. The actual platter may differ and can be larger. We will discuss your preferred fish, guest numbers and occasion. The average is around €17.50 per person; special requests or premium fish may affect the price. Enquire on WhatsApp.",
     "fotoVoorbeeld": "Example photo — size and contents are tailored to your preferences and budget.",
     "voorPersonen": "For {van} to {tot} people",
-    "startbedrag": "Starting price, without extras",
+    "startbedrag": "Average guide price: around {bedrag}",
+    "aantalPersonen": "How many people?",
+    "gemiddeld": "Average",
+    "gemiddeldePrijs": "Average: around €17.50 per person",
     "watErOpLigt": "What is on it",
     "kiesSchaal": "Choose this platter",
     "gekozen": "Chosen — click to switch",
-    "extrasKop": "Anything else on it?",
-    "extrasUitleg": "Everything below is per 100 grams unless it says otherwise. What you add comes on top of your platter's starting price.",
-    "extrasEerstSchaal": "Pick a platter above first. After that you can add as much as you like here.",
-    "extrasRegel": "Of which {bedrag} in extras."
+    "extrasKop": "Want an addition or premium fish?",
+    "extrasUitleg": "Tell us on WhatsApp which fish you would like on your platter. Additions or premium fish may increase the price; we will agree the final price with you beforehand.",
+    "extrasEerstSchaal": "Discuss any additions with us on WhatsApp.",
+    "extrasRegel": ""
   },
   "bestel": {
     "eyebrow": "Order",

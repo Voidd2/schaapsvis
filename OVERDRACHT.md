@@ -6,73 +6,17 @@ te zoeken.
 
 ---
 
-## 1. Bedragen die nog voorlopig zijn
+## 1. Visschaalprijzen — actuele afspraak (30 september 2026)
 
-### De visschaal — `src/lib/visschaal.ts`
+De actuele basisprijs voor **iedere visschaal is € 17,50 per persoon**. De
+configurator laat het aantal personen kiezen en rekent de basisprijs daarmee
+uit. Extra’s en duurdere vissoorten zijn maatwerk: de klant neemt daarvoor
+contact op via WhatsApp; bespreek en bevestig de eventuele meerprijs vooraf.
+Vertrouw dus niet op oudere schaalbedragen of losse extra-prijzen elders in
+oude notities.
 
-Dit is het bestand dat je het vaakst zult openen.
-
-**Drie schalen, elk met een startbedrag.** Ze staan bovenin in `SCHALEN`:
-
-```ts
-{
-  id: "borrelschaal",
-  naam: "Borrelschaal",
-  prijs: 55.9,              // ← het startbedrag
-  personenVan: 4,
-  personenTot: 6,
-  omschrijving: "De schaal waar de meeste mensen om vragen. …",
-  bevat: ["Gerookte zalm van het mes", "Hollandse garnalen", …],
-  foto: "/images/visschalen/borrelschaal.jpg",   // ← nog leeg
-}
-```
-
-┌─ WAT JIJ NOG MOET DOEN ─────────────────────────────────────────────────────┐
-│ Alleen **€ 55,90** is wat je hebt doorgegeven. De namen, de andere twee     │
-│ bedragen (€ 89,90 en € 139,90), voor hoeveel personen ze zijn en wat erop   │
-│ ligt zijn ingevuld zodat de site te bouwen was. **Vervang ze door je eigen  │
-│ schalen.** Bij de twee bedragen staat `// EIGENAAR: jouw bedrag hier`.      │
-│                                                                             │
-│ En de foto's: zet ze in `public/images/visschalen/` en vul `foto:` in.      │
-│ Zolang dat leeg is toont de site een net naamvlak, geen leeg gat.           │
-└─────────────────────────────────────────────────────────────────────────────┘
-
-**De extra's** staan in `ONDERDELEN`, in euro per 100 gram:
-
-```ts
-{ id: "gerookte-zalm", naam: "Gerookte zalm", prijs: 3.25, groep: "gerookt" }
-```
-
-Een paar dingen verkoop je niet op gewicht — een oester is een oester. Die
-krijgen `perStuk` mee (`"dozijn"`), en dan is `prijs` de prijs per stuk.
-
-```ts
-export const PRIJZEN_DEFINITIEF = false;  // ← op true als de bedragen kloppen
-```
-
-Zolang `PRIJZEN_DEFINITIEF` op `false` staat zegt de site erbij dat het
-richtprijzen zijn en dat je het definitieve bedrag bevestigt.
-
-**Waar de prijzen van de extra's vandaan komen.** Uitgangspunt was: onder de
-markt zitten. Wat andere vishandels rekenen (opgehaald september 2026, staat ook
-bovenaan in het bestand):
-
-| Per 100 gram | Concurrentie | Wij |
-|---|---|---|
-| Gerookte zalm | € 3,50 – € 6,75 | **€ 3,25** |
-| Hollandse garnalen | € 4,50 – € 6,49 | **€ 4,25** |
-| Gerookte paling | € 5,50 – € 10,50 | **€ 4,95** |
-| Gerookte makreelfilet | € 2,75 – € 5,50 | **€ 2,50** |
-
-En complete schotels per persoon: Puurvis in Leidschendam € 14,50 (die zit ín
-je bezorggebied), Fieret € 19,95 tot € 33,95, Koelewijn € 28,50 tot € 30.
-
-De configurator rekent uit wat de schaal per persoon kost en zet erbij dat de
-klant onder die € 14,50 uitkomt — maar **alleen als dat ook echt zo is**. Met de
-huidige voorbeeldbedragen (€ 55,90 voor 4 personen = € 13,98 p.p.) klopt het net;
-zet je de prijs hoger of het aantal personen lager, dan verdwijnt die zin
-vanzelf. Controleer dat als je de bedragen invult — `MARKT.goedkoopstePerPersoon`
-bovenin het bestand is het bedrag waarmee vergeleken wordt.
+Het actuele telefoon- en WhatsApp-nummer is **+31 6 2481 1678** (wa.me-nummer
+`31624811678`), centraal ingesteld in `src/lib/bedrijf.ts`.
 
 Zet je een nieuw onderdeel in de lijst, voeg dan ook een vertaling toe onder
 `visschaalItems` in `src/messages/nl.json`, `en.json` en `de.json` — met de `id`

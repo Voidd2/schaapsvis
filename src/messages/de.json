@@ -36,8 +36,8 @@
     "bezorgenDesc": "Frischer Fisch und Fischplatten geliefert in Leiden, Leiderdorp, Voorschoten, Wassenaar und Leidschendam. Mittwoch bis Samstag, Bestellung bis 12:00 Uhr am Vortag. Lieferung 5,99 €, ab 35 € kostenlos.",
     "bezorgenPlaatsTitle": "Frischen Fisch liefern lassen in {plaats} | Fischhändler aus Leiden",
     "bezorgenPlaatsDesc": "Frischen Fisch oder eine Fischplatte in {plaats} liefern lassen? Schaap's Vishandel aus Leiden fährt {dagen} raus. Bestellung bis 12:00 Uhr am Vortag, Zahlung an der Tür oder demnächst online.",
-    "visschalenTitle": "Fischplatten Leiden ab {bedrag} | Schaap's",
-    "visschalenDesc": "Fischplatten, Snackboxen und Fisch für Grill oder Tischgrill. Platten ab {bedrag}, mit Extras nach Wunsch. Abholung in Leiden oder Lieferung."
+    "visschalenTitle": "Fischplatten in Leiden für Feiern und Veranstaltungen | Schaap's",
+    "visschalenDesc": "Fischplatten in Leiden für Geburtstage, Empfänge und Veranstaltungen. Wir stimmen die Auswahl auf Geschmack und Anlass ab; durchschnittlich etwa 17,50 € pro Person. Anfrage per WhatsApp."
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Seit 1938",
@@ -420,21 +420,21 @@
   },
   "visschaal": {
     "eyebrow": "Umtrunk · Geburtstag · Weihnachten",
-    "kop": "Wählen Sie Ihre Fischplatte",
-    "inleiding": "Wählen Sie aus Fischplatten und Snackboxen für unterschiedliche Gruppen. Fügen Sie zusätzlichen Fisch hinzu und senden Sie Ihre Anfrage. Für Grill, Tischgrill und besondere Ernährungswünsche schreiben Sie uns per WhatsApp.",
+    "kop": "Fischplatten für Feiern und Veranstaltungen",
+    "inleiding": "Suchen Sie eine Fischplatte in Leiden für einen Geburtstag, Empfang oder eine Firmenfeier? Sehen Sie sich unsere Platten und Fotos an. Wir beraten Sie gern zu Fischsorten, Gästezahl und Anlass. Im Durchschnitt rechnen wir mit etwa 17,50 € pro Person; fragen Sie per WhatsApp an.",
     "per100": "pro 100 g",
     "perStuk": "pro {eenheid}",
     "seizoen": "{periode}",
     "samenvattingKop": "Ihre Platte",
-    "niksGekozen": "Wählen Sie oben eine Platte. Danach können Sie beliebig viel dazulegen.",
+    "niksGekozen": "Wählen Sie oben eine Platte und die Personenzahl.",
     "gewichtRegel": "{gewicht} extra",
-    "personenRegel": "reicht für ± {personen} Personen",
-    "vergelijking": "Das sind {bedrag} pro Person. Die günstigste fertige Platte, die wir in der Region fanden, kostet {markt} pro Person — und dort wählen Sie nicht selbst, was darauf liegt.",
-    "voorlopig": "Richtpreise. Den endgültigen Betrag bestätigen wir, bevor wir anfangen — Sie gehen keine Verpflichtung ein.",
+    "personenRegel": "Für {personen} Personen",
+    "vergelijking": "Der Durchschnittspreis liegt bei etwa 17,50 € pro Person; die endgültige Auswahl und den Preis besprechen wir mit Ihnen.",
+    "voorlopig": "Der Preis ist ein durchschnittlicher Richtwert; Auswahl und Edelfisch besprechen wir mit Ihnen.",
     "hoeveelKop": "Wie viel brauche ich?",
     "hoeveelTekst": "Rechnen Sie mit {borrel} Gramm pro Person, wenn es auch anderes Essen gibt, und {maaltijd} Gramm, wenn die Platte die Mahlzeit ist.",
     "wissen": "Alles löschen",
-    "naarBestellen": "Diese Platte bestellen",
+    "naarBestellen": "Diese Platte per WhatsApp anfragen",
     "viaWhatsapp": "Lieber kurz besprechen? Schreiben Sie uns",
     "levertijdKop": "Rechtzeitig bestellen",
     "levertijdTekst": "Für eine Platte planen wir gern ein paar Tage voraus. Um Weihnachten und Silvester ist viel los — bestellen Sie dann früh.",
@@ -444,15 +444,15 @@
     "faq": [
       {
         "v": "Was kostet eine Fischplatte?",
-        "a": "Der angezeigte Preis ist der Startbetrag für die gewählte Platte oder Box. Extras kommen dazu. Wir bestätigen Inhalt, Verfügbarkeit und Endpreis vor der Zubereitung."
+        "a": "Der Durchschnittspreis liegt bei etwa 17,50 € pro Person. Der Endpreis hängt von Gästezahl, Auswahl und Edelfisch ab. Besprechen Sie Ihre Wünsche per WhatsApp; den Preis bestätigen wir vorher."
       },
       {
         "v": "Für wie viele Personen reicht eine Platte?",
-        "a": "Das steht bei jeder Platte dabei. Als Faustregel: 150 Gramm Fisch pro Person, wenn es auch anderes Essen gibt, und 250 Gramm, wenn die Platte die Mahlzeit ist. Im Zweifel die größere nehmen — eine leere Platte ist ärgerlicher als ein Rest."
+        "a": "Wählen Sie die Gästezahl als Richtwert. Menge und Auswahl stimmen wir auf Ihre Gruppe und den Anlass ab. Im Durchschnitt sind es etwa 17,50 € pro Person."
       },
       {
         "v": "Kann ich die Platte anpassen?",
-        "a": "Ja. Wählen Sie eine Platte und legen Sie dazu, was Sie möchten. Möchten Sie etwas weglassen, rufen Sie uns kurz an — das regeln wir beim Anrichten."
+        "a": "Ja. Teilen Sie uns per WhatsApp mit, welchen Fisch oder welche Ergänzungen Sie möchten. Edelfisch und Extras können den Preis erhöhen; den Endpreis vereinbaren wir vorher."
       },
       {
         "v": "Wie lange im Voraus soll ich bestellen?",
@@ -464,29 +464,32 @@
       },
       {
         "v": "Kann eine Fischplatte geliefert werden?",
-        "a": "Ja, in Leiden, Leiderdorp, Voorschoten, Wassenaar und Leidschendam. Die Lieferung kostet 5,99 € und ist ab 35 € kostenlos — bei einer Platte fahren wir also gratis. Abholung in der Herenstraat 48 ist natürlich auch möglich."
+        "a": "Ja, wir liefern in Leiden, Leiderdorp, Voorschoten, Wassenaar und Leidschendam. Abholung in der Herenstraat 48 ist ebenfalls möglich. Die Lieferkosten richten sich nach der endgültigen Bestellung und werden vorher bestätigt."
       },
       {
         "v": "Was, wenn ich etwas möchte, das nicht dabeisteht?",
         "a": "Schreiben oder rufen Sie uns. Die Liste ist, was wir oft machen, keine Grenze. Wenn es zu bekommen ist, legen wir es darauf."
       }
     ],
-    "vergelijkingKort": "Verschiedene Fischplatten und Snackboxen mit Extras nach Wunsch. Fragen Sie uns, welche Auswahl zu Ihren Gästen passt.",
-    "perSchaal": "pro Platte",
+    "vergelijkingKort": "Fischplatten in Leiden, abgestimmt auf Ihren Geschmack und Anlass. Der durchschnittliche Richtpreis liegt bei etwa 17,50 € pro Person.",
+    "perSchaal": "pro Person",
     "stap1": "Schritt 1",
     "stap2": "Schritt 2",
-    "schaalKop": "Wählen Sie Ihre Fischplatte oder Snackbox",
-    "schaalUitleg": "Jedes Foto ist ein Beispiel, nicht die genaue Platte, die Sie erhalten. Ihre Platte kann sogar deutlich größer sein. Größe und Inhalt richten sich nach Ihrem Budget, der Personenzahl und Ihren Wünschen. Die Beträge unten sind Startpreise; Ihre Auswahl und Extras können den Endpreis verändern.",
+    "schaalKop": "Fischplatten für Ihren Anlass",
+    "schaalUitleg": "Suchen Sie Fischplatten in Leiden für einen Geburtstag, Empfang oder eine Firmenfeier? Die Fotos dienen als Inspiration. Ihre Platte kann anders aussehen und größer sein. Wir besprechen Ihre bevorzugten Fischsorten, die Gästezahl und den Anlass. Im Durchschnitt rechnen wir mit etwa 17,50 € pro Person; besondere Wünsche oder Edelfisch können den Preis beeinflussen. Fragen Sie per WhatsApp an.",
     "fotoVoorbeeld": "Beispielfoto — Größe und Inhalt richten sich nach Ihren Wünschen und Ihrem Budget.",
     "voorPersonen": "Für {van} bis {tot} Personen",
-    "startbedrag": "Startpreis, ohne Extras",
+    "startbedrag": "Durchschnittlicher Richtpreis: etwa {bedrag}",
+    "aantalPersonen": "Für wie viele Personen?",
+    "gemiddeld": "Durchschnittlich",
+    "gemiddeldePrijs": "Im Durchschnitt etwa 17,50 € pro Person",
     "watErOpLigt": "Was darauf liegt",
     "kiesSchaal": "Diese Platte wählen",
     "gekozen": "Gewählt — zum Wechseln klicken",
-    "extrasKop": "Noch etwas dazu?",
-    "extrasUitleg": "Alles unten geht pro 100 Gramm, sofern nicht anders angegeben. Was Sie dazuwählen, kommt zum Startpreis Ihrer Platte.",
-    "extrasEerstSchaal": "Wählen Sie zuerst oben eine Platte. Danach können Sie hier beliebig viel hinzufügen.",
-    "extrasRegel": "Davon {bedrag} an Extras."
+    "extrasKop": "Ergänzung oder Edelfisch gewünscht?",
+    "extrasUitleg": "Teilen Sie uns per WhatsApp mit, welchen Fisch Sie auf Ihrer Platte möchten. Ergänzungen oder Edelfisch können den Preis erhöhen; den Endpreis vereinbaren wir vorher.",
+    "extrasEerstSchaal": "Besprechen Sie Ergänzungen mit uns per WhatsApp.",
+    "extrasRegel": ""
   },
   "bestel": {
     "eyebrow": "Bestellen",

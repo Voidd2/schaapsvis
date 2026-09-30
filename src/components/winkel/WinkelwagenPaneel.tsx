@@ -5,9 +5,10 @@ import { useEffect } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useWinkelwagen } from "./Winkelwagen";
 import { useSchaalTekst } from "@/components/visschaal/tekst";
-import { hoeveelheidTekst, regels as schaalRegelsVan, schaalById } from "@/lib/visschaal";
+import { regels as schaalRegelsVan, schaalById } from "@/lib/visschaal";
 import { BEZORGING } from "@/lib/bezorging";
 import { euro } from "@/lib/bedrijf";
+import { platterQuantity } from "@/lib/platter-localization";
 
 /**
  * Het winkelwagenpaneel.
@@ -22,10 +23,9 @@ import { euro } from "@/lib/bedrijf";
  *    bedrag de bezorging gratis is, zodat het geen verrassing wordt.
  */
 export function WinkelwagenPaneel() {
-  const { open, zetOpen, regels, samenstelling, afrekenbaarBedrag, tekortGratis, aantal } =
+  const { open, zetOpen, regels, samenstelling, aantal } =
     useWinkelwagen();
   const t = useTranslations("winkelwagen");
-  const g = useTranslations("gedeeld");
   const locale = useLocale();
   const tekst = useSchaalTekst();
 
@@ -48,12 +48,6 @@ export function WinkelwagenPaneel() {
 
   const schaal = samenstelling.schaal ? schaalById(samenstelling.schaal) : undefined;
   const schaalRegels = schaal ? schaalRegelsVan(samenstelling) : [];
-  const gratisGehaald = afrekenbaarBedrag > 0 && tekortGratis === 0;
-  const voortgang =
-    afrekenbaarBedrag > 0
-      ? Math.min(100, Math.round((afrekenbaarBedrag / BEZORGING.gratisVanaf) * 100))
-      : 0;
-
   return (
     <div className="fixed inset-0 z-[60]">
       <button
@@ -105,23 +99,14 @@ export function WinkelwagenPaneel() {
                       >
                         <dt style={{ color: "var(--charcoal)" }}>
                           <span className="bedrag" style={{ color: "var(--grijs)" }}>
-                            {hoeveelheidTekst(r)}
+                            {platterQuantity(r, locale)}
                           </span>{" "}
                           {r.isSchaal ? r.naam : tekst.naam(r.id, r.naam)}
                         </dt>
-                        <dd className="bedrag shrink-0" style={{ color: "var(--ink)" }}>
-                          {euro(r.bedrag)}
-                        </dd>
                       </div>
                     ))}
                   </dl>
-                  <div
-                    className="flex justify-between gap-3 pt-2.5 mt-1 text-[1.15rem]"
-                    style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}
-                  >
-                    <span>{g("totaal")}</span>
-                    <span className="bedrag">{euro(afrekenbaarBedrag)}</span>
-                  </div>
+                  <p className="mt-2 text-sm" style={{ color: "var(--grijs)" }}>{t("visschaalPrijsWhatsApp")}</p>
                   <Link
                     href={`/${locale}/visschalen#samenstellen`}
                     onClick={() => zetOpen(false)}
@@ -166,35 +151,7 @@ export function WinkelwagenPaneel() {
 
         {/* ── Gratis bezorgen ────────────────────────────────────────────── */}
         <div className="px-5 py-4" style={{ borderTop: "1px solid var(--linen)" }}>
-          {afrekenbaarBedrag > 0 ? (
-            <>
-              <div
-                className="h-1.5 w-full mb-2"
-                style={{ backgroundColor: "var(--linen)" }}
-                role="progressbar"
-                aria-valuenow={voortgang}
-                aria-valuemin={0}
-                aria-valuemax={100}
-                aria-label={t("gratisLabel")}
-              >
-                <div
-                  className="h-full transition-all"
-                  style={{
-                    width: `${voortgang}%`,
-                    backgroundColor: gratisGehaald ? "var(--seafoam)" : "var(--gold)",
-                  }}
-                />
-              </div>
-              <p
-                className="text-sm font-semibold"
-                style={{ color: gratisGehaald ? "var(--seafoam)" : "var(--charcoal)" }}
-              >
-                {gratisGehaald
-                  ? t("gratisGehaald")
-                  : t("gratisNog", { bedrag: euro(tekortGratis) })}
-              </p>
-            </>
-          ) : regels.length > 0 ? (
+          {regels.length > 0 ? (
             /* Verse vis gaat op gewicht: we weten het bedrag nog niet, dus geen
                balkje dat doet alsof. Wél zeggen wanneer de bezorging vervalt. */
             <p className="text-sm leading-relaxed" style={{ color: "var(--charcoal)" }}>

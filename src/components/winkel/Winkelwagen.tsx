@@ -18,22 +18,13 @@ import {
   leesSamenstelling,
   type MandjeRegel,
 } from "@/lib/mandje";
-import {
-  LEGE_SAMENSTELLING,
-  totaal as schaalTotaalVan,
-  type Samenstelling,
-} from "@/lib/visschaal";
-import { BEZORGING, tekortVoorGratis } from "@/lib/bezorging";
+import { LEGE_SAMENSTELLING, type Samenstelling } from "@/lib/visschaal";
 
 interface WinkelwagenWaarde {
   regels: MandjeRegel[];
   samenstelling: Samenstelling;
   /** Aantal dingen in de wagen: de verse-visregels plus de schaal. */
   aantal: number;
-  /** Het bedrag dat we hard kunnen maken — dus alleen de visschaal. */
-  afrekenbaarBedrag: number;
-  /** Wat er nog bij moet voor gratis bezorging. 0 = gehaald. */
-  tekortGratis: number;
   /** Zit er verse vis in? Dan kan er geen totaalbedrag staan. */
   heeftWeegvis: boolean;
   open: boolean;
@@ -96,13 +87,10 @@ export function WinkelwagenProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const waarde = useMemo<WinkelwagenWaarde>(() => {
-    const afrekenbaarBedrag = samenstelling.schaal ? schaalTotaalVan(samenstelling) : 0;
     return {
       regels,
       samenstelling,
       aantal: regels.length + (samenstelling.schaal ? 1 : 0),
-      afrekenbaarBedrag,
-      tekortGratis: afrekenbaarBedrag > 0 ? tekortVoorGratis(afrekenbaarBedrag) : BEZORGING.gratisVanaf,
       heeftWeegvis: regels.length > 0,
       open,
       zetOpen,
