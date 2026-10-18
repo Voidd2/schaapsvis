@@ -4,6 +4,9 @@ Status: voorbereid, nog niet live gekoppeld. Dit document is de bron van waarhei
 
 ## Huidige situatie
 
+- Laatste account-preflight op 18 oktober 2026: account en zone zijn via de Cloudflare API opnieuw gecontroleerd. De zone `schaapsvishandel.nl` blijft `pending`; Cloudflare ziet nog `ns1.knothhosting02.nl` en `ns2.knothhosting02.nl`. R2 bucket listing blijft geblokkeerd met API-fout 10042 (“Please enable R2 through the Cloudflare Dashboard”), dus er zijn nog geen bewijsbuckets. De account bevat alleen een niet-gerelateerde Worker (`newlocalcityguides`), geen `schaapsvis-members` Worker. De twee D1-databases staan wel klaar met `jurisdiction: eu`; de zone bevat alleen de voorbereidende Google Search Console-TXT. Geen nameservers, live DNS-records of productiehost zijn gewijzigd.
+- De goedgekeurde studentenvoorwaarden zijn één studiejaar geldig en 10% uitsluitend op kibbeling, haring, broodjes haring en drinken; andere gebakken vis, visschalen en overige artikelen vallen erbuiten. Dit is gecontroleerd in de Nederlandse pagina, de serverkant van de Worker en de Worker-integratietest. Stapeling met andere acties is nog niet afgesproken.
+
 - De website is Next.js 16.2.4 en staat in GitHub-repo `Voidd2/schaapsvis`, branch `main`; de productiehosting is op Vercel ingericht.
 - Het Cloudflare-accountadres wordt om veiligheidsredenen niet in deze repository opgeslagen.
 - De D1-databases zijn op 17 oktober 2026 aangemaakt met `jurisdiction: eu`, zodat de databases binnen de EU blijven: preview `5f14693e-31bc-43d7-a49b-367c57a4b7f0` en productie `3e33d6ab-1ac5-430a-87e2-0ad7ef4702ad`. Op 18 oktober zijn migraties `0002` t/m `0004` via atomische D1-batches op preview én productie toegepast nadat was gecontroleerd dat productie nul gebruikers, aanvragen en passen bevatte. Daarna zijn migratiestatus, schema en nuldata op beide databases via de D1 API gecontroleerd. Migratie `0004` dwingt maximaal één open aanvraag per account af.
