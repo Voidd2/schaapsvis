@@ -732,7 +732,7 @@ export const products: Product[] = [
   {
     "slug": "gerookte-zalmmoot",
     "naam": "Warm Gerookte Zalmmoot",
-"desc": "Een stevige moot warmgerookte Atlantische zalmfilet (Salmo salar), met een volle rooksmaak. Direct te eten of kort warm te serveren met aardappelen en groenten. ASC-gecertificeerd.",
+    "desc": "Een stevige moot warmgerookte Atlantische zalmfilet (Salmo salar), met een volle rooksmaak. Direct te eten of kort warm te serveren met aardappelen en groenten. ASC-gecertificeerd.",
     "categorie": "gerookte-vis",
     "badge": "ASC",
     "omega3": true,
