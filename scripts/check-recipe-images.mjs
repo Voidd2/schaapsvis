@@ -11,7 +11,8 @@ const hashes = new Map();
 const details = Object.fromEntries(sources.flatMap(source => [...source.matchAll(/  \{\r?\n    slug: "([^"]+)"([\s\S]*?)\r?\n  \},/g)].map(m => [m[1], {porties: Number(m[2].match(/porties: (\d+)/)?.[1]), tijd: m[2].match(/tijd: "([^"]+)"/)?.[1]}])));
 let bytes = 0;
 const queue = [...slugs];
-await Promise.all(Array.from({length: 4}, async () => {
+const concurrency=/^http:\/\/(localhost|127\.0\.0\.1):/.test(origin??"")?1:4;
+await Promise.all(Array.from({length: concurrency}, async () => {
   while (queue.length) {
     const slug = queue.shift();
     const image = images[slug];

@@ -135,7 +135,7 @@ uitgelogd en zie je precies wat een bezoeker ziet.
 Eén variabele in Vercel:
 
 ```
-SITE_PUBLIC=on
+SITE_PUBLIC=launch-approved
 ```
 
 Weghalen, leeglaten of iets anders invullen zet het slot er weer op.
@@ -232,49 +232,53 @@ Bij de historische foto's zit de meeste winst: **één vergeelde foto uit 1960
 doet meer voor de geloofwaardigheid dan twintig keer "sinds 1938" in de tekst.**
 Scheef, korrelig of vergeeld mag — dat maakt het juist echt.
 
-### En verder: de productfoto's
+### En verder: de productfoto's — status bijgewerkt 18 oktober 2026
 
-Er staan 37 echte productfoto's op de site; bij de rest staat alleen de naam en
-de omschrijving.
+De actuele assortimentcontrole vindt 67 producten met 67 verschillende,
+lokaal gehoste afbeeldingsbestanden en 67 verschillende afbeeldingsbytes.
+Daarmee ontbreken er volgens de productcataloguscontrole geen foto's en worden
+productfoto's niet tussen die 67 producten hergebruikt. Dit zegt niet dat elke
+foto al een door Schaap's aangeleverde, professionele productfoto is: voor
+bronvermelding en gebruiksrechten van extern gevonden beelden, zie
+`docs/afbeeldingsbronnen.md`. De test controleert ook de Varlaks-bestanden en
+andere gedeclareerde fotoplekken, maar vervangt geen visuele beoordeling op de
+site.
 
-De tekenfilm-illustraties (`public/images/scene-*.svg`) staan nergens meer op
-een pagina. Ze zagen eruit als een sjabloon en dat is precies wat we niet
-willen. Ze staan nog wel bij de blogartikelen (`src/lib/blog.ts`); vervang die
-door echte foto's zodra je ze hebt, dan kan de map weg.
+De oudere onderstaande checklist was gebaseerd op een eerdere versie en is
+niet langer de actuele fotostatus. Controleer echte winkel-, markt- en
+familiefoto's in `fotos-aan-te-leveren.md`; die kunnen niet betrouwbaar worden
+vervangen door generieke productbeelden.
 
-Het meest urgent, op volgorde:
+De oude scène-illustraties (`public/images/scene-*.svg`) staan nog als
+legacy-bestanden en fallback in de brondata, maar worden niet getoond op de
+blogkaartjes: alle 18 zichtbare blogkaartjes gebruiken een eigen afbeeldingspad.
+`node scripts/check-content-updates.mjs http://127.0.0.1:3000` controleert dit
+en slaagde op 18 oktober 2026 met 18 unieke blogfoto's. Verwijder de oude SVG's
+pas nadat is vastgesteld dat geen andere route of component ze meer gebruikt.
+
+Historische prioriteiten (deze lijst is niet langer een inventaris van ontbrekende assortimentfoto's):
 
 1. **De winkel van buiten en van binnen** (`winkelGevel`, `toonbank`). Eén goede
    foto van de toonbank met vis erop doet meer dan alle tekst eromheen.
-2. **De drie visschalen** (`schaalBorrel`, `schaalFamilie`, `schaalFeest`). Die
-   staan nu met een naamvlak op de site; met een foto verkopen ze zichzelf.
-3. **Negen productfoto's die tegelijk zeventien recepten vullen.** Elk recept
-   is gekoppeld aan de vis die je ervoor nodig hebt (`hoofdproduct` in
-   `src/lib/recepten.ts`). Staat er een foto bij dat product, dan staat hij
-   meteen ook bij het recept. Deze negen ontbreken nog:
+2. **Eigen foto's van de visschalen** (`schaalBorrel`, `schaalFamilie`,
+   `schaalFeest`). Er staat nu voorbeeldbeeld bij alle drie; echte foto's van
+   de schalen die jullie maken sluiten beter aan op wat de klant ontvangt.
+3. **Recept- en productfoto's.** De actuele beeldscripts controleren dat elk
+   product een afbeelding heeft en dat de recepten unieke afbeeldingen
+   gebruiken. De vroegere lijst van negen ontbrekende producten is verouderd:
+   controleer de actuele status met `node scripts/check-product-images.mjs` en
+   `node scripts/check-recipe-images.mjs`.
 
-   | Product (`slug` in `assortiment-data.ts`) | Vult dit aantal recepten |
-   | --- | --- |
-   | `varlaks-zalm` | 4 |
-   | `tonijnfilet` | 3 |
-   | `kibbeling` | 2 |
-   | `scholfilet` | 2 |
-   | `wijtingfilet` | 2 |
-   | `lekkerbek` | 1 |
-   | `vissoep` | 1 |
-   | `fine-de-claire-oesters` | 1 |
-   | `surimisalade` | 1 |
+   Voor een volledige beeldkwaliteit- en hergebruikcontrole start de site
+   lokaal en geef het adres mee aan de scripts; een controle zonder server
+   controleert wel de bestanden, maar niet de gerenderde pagina's.
 
 4. **Jij achter de toonbank** (`achterDeToonbank`, `historieNu`). Voor "Ons
    verhaal", en voor Google: foto's van echte mensen doen het aantoonbaar beter
    dan productplaatjes.
 5. **De oude foto's voor de tijdlijn** (`historie1938` tot `historieNu`).
-6. De overige producten uit het assortiment.
-
-Vier recepten hebben helemaal geen product om aan te koppelen, omdat **gerookte
-paling** en **gestoomde makreel** niet in `assortiment-data.ts` staan terwijl je
-ze wel verkoopt (ze staan wél bij de visschaal). Zet ze erbij, dan zijn ook die
-vier gedekt.
+6. De drie marktkramen en winkelgevel. De fotoplekken blijven verborgen zolang
+   er geen eigen, herkenbare locatiebeelden zijn aangeleverd.
 
 Heb je een foto van het gerecht zélf, dan gaat die vóór de productfoto: zet hem
 op `fotoUrl` bij dat recept.
@@ -307,9 +311,9 @@ plaatje dat verschijnt als iemand een link naar de site deelt in WhatsApp.
   en de vijf gemeenten waar je bezorgt, de bezorging als aparte dienst met het
   tarief per gemeente, vraag-en-antwoordblokken, kruimelpaden en de visschaal
   als product met een vanaf-prijs.
-- Blog, recepten en de viswijzer staan alleen in het Nederlands en verwijzen
-  daar ook naar. Dezelfde tekst onder drie adressen laten staan levert drie
-  pagina's op die elkaar wegdrukken.
+- De product-, recept- en bloginhoud is beschikbaar in Nederlands, Engels en
+  Duits. De lokale vertaalcontrole telt 67 producten, 37 recepten en 18 blogs
+  in drie talen en rapporteerde 0 ontbrekende teksten op 18 oktober 2026.
 
 ### Wat alleen jij kunt doen
 
@@ -336,20 +340,19 @@ Zie ook `lokale-seo-acties.md` voor de langere lijst.
 
 ---
 
-## 6b. Twee dingen die jij moet nakijken
+## 6b. Bedrijfsdetails om actueel te houden
 
 **De woensdagmarkt.** In `src/lib/bedrijf.ts` staat de woensdagkraam *bij Dille
 & Camille*. Op een paar oudere pagina's stond *de Vismarkt aan de Nieuwe Rijn*.
-Alles verwijst nu naar de bedrijfsgegevens, dus er staat overal hetzelfde — maar
-controleer even of het klopt. Twee verschillende adressen voor dezelfde kraam
-kost je in Google precies de koppeling die je wilt hebben; één adres, overal
-identiek, is wat telt (ook in je Google Bedrijfsprofiel).
+De website en de Google Maps-link gebruiken dezelfde locatie. Bevestig dat de
+kraam daar nog steeds staat voordat je die locatie ook in je Google
+Bedrijfsprofiel bijwerkt; houd naam, adres, dag en openingstijden daar gelijk
+aan de website.
 
-**De verhalen bij de vis op `/biologische-vis`.** Die staan alleen in het
-Nederlands, ook op de Engelse en Duitse versie van die pagina. Dat was al zo en
-is niet erger geworden, maar het is wel een punt om op te lossen als de Duitse
-bezoekers gaan komen. Ze staan bovenin `src/app/[locale]/biologische-vis/page.tsx`
-in `ourFish`.
+De keurmerkpagina is in drie talen opgebouwd, gebruikt lokaal gehoste
+VÅRLAKS-beelden en vermeldt MSC voor Hollandse garnalen. Houd claims over BIO,
+ASC en MSC gekoppeld aan het concrete product en de actuele verpakking; vraag
+de eigenaar om bevestiging als levering of certificering verandert.
 
 ---
 

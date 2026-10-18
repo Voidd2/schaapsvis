@@ -1,11 +1,10 @@
-import { Bitter, Source_Sans_3 } from "next/font/google";
+import localFont from "next/font/local";
 
 /**
  * De twee lettertypen van de site, op één plek.
  *
- * Ze worden meegebouwd en vanaf ons eigen domein geserveerd: dat scheelt een
- * verbinding met Google én voorkomt dat de tekst pas verschijnt als het
- * lettertype binnen is — allebei goed voor de laadscores waar Google op let.
+ * De subsetbestanden staan in src/fonts en worden vanaf ons eigen domein
+ * geserveerd. Builds hoeven daardoor niet met Google Fonts te verbinden.
  *
  * **Bitter** voor de koppen: een schreefletter met blokvoetjes, zoals de letters
  * op een oud winkelbord, maar getekend voor een scherm. Hiervoor stond er Libre
@@ -19,17 +18,18 @@ import { Bitter, Source_Sans_3 } from "next/font/google";
  * viel dat scherm terug op de systeemletter — precies het eerste wat een
  * bezoeker van de site te zien krijgt.
  */
-export const fontKop = Bitter({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  style: ["normal", "italic"],
+export const fontKop = localFont({
+  src: [
+    { path: "../fonts/bitter-latin.woff2", weight: "500 700", style: "normal" },
+    { path: "../fonts/bitter-latin-italic.woff2", weight: "500 700", style: "italic" },
+  ],
   variable: "--font-kop",
   display: "swap",
 });
 
-export const fontTekst = Source_Sans_3({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
+export const fontTekst = localFont({
+  src: "../fonts/source-sans-3-latin.woff2",
+  weight: "400 700",
   variable: "--font-source",
   display: "swap",
 });

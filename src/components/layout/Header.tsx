@@ -30,6 +30,8 @@ export function Header() {
     { href: p("/biologische-vis"), label: t("betereVis") },
     { href: p("/blog"), label: t("blog") },
     { href: p("/bezoek-ons"), label: t("locaties") },
+    { href: p("/studentenkorting"), label: locale === "de" ? "Studentenrabatt" : locale === "en" ? "Student discount" : "Studentenkorting" },
+    { href: p("/account"), label: locale === "de" ? "Konto" : locale === "en" ? "Account" : "Account" },
   ];
 
   const isActief = (href: string) => pathname === href || pathname.startsWith(`${href}/`);

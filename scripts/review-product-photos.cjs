@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 // Render original files for human visual review; photographs are not modified.
 const fs=require('fs'),path=require('path'),{chromium}=require('playwright');
 (async()=>{

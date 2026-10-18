@@ -8,7 +8,6 @@ import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { paginaMetadata, kruimelSchema } from "@/lib/seo";
 import { BEDRIJF, ADRES_REGEL, VERKOOPPUNTEN } from "@/lib/bedrijf";
 
-import { BEELD } from "@/lib/beeld";
 import { Beeld } from "@/components/ui/Beeld";
 import type { BeeldNaam } from "@/lib/beeld";
 
@@ -134,7 +133,7 @@ export default async function BezoekOnsPage({
               {/* Een foto per plek. De kraam bij de Waag ziet er anders uit dan
                   die op de parkeerplaats bij Hoogvliet — met een foto weet
                   iemand waar hij naar moet zoeken. */}
-              {BEELD[BEELD_PER_PLEK[plek.id]].bestand && <Beeld naam={BEELD_PER_PLEK[plek.id]} verhouding="liggend" streep="var(--navy)" />}
+              <Beeld naam={BEELD_PER_PLEK[plek.id]} verhouding="liggend" streep="var(--navy)" placeholder />
 
               <div>
                 <h2 className="text-[1.35rem] mb-1">{p(`${plek.id}Naam`)}</h2>

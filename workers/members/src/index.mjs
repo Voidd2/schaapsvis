@@ -1,0 +1,1028 @@
+const COOKIE = "sv_member";
+const SESSION_MS = 30 * 24 * 60 * 60 * 1000;
+const EMAIL_TOKEN_MS = 60 * 60 * 1000;
+const PASSWORD_ITERATIONS = 210_000;
+const DUMMY_PASSWORD_HASH = "pbkdf2-sha256$210000$AAAAAAAAAAAAAAAAAAAAAA$AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+const MAX_PROOF_BYTES = 8 * 1024 * 1024;
+const PROOF_CONSENT_VERSION = "student-proof-2026-10";
+const NEWSLETTER_CONSENT_VERSION = "weekly-offers-2026-10";
+const LOCALES = new Set(["nl", "en", "de"]);
+const ACCOUNT_COPY = {
+  nl: {
+    verifySubject: "Bevestig uw e-mailadres — Schaap's Vishandel", verifyIntro: "Bevestig uw e-mailadres voor uw account bij Schaap's Vishandel.", verifyButton: "E-mailadres bevestigen", verifyExpiredTitle: "Bevestigingslink verlopen", verifyExpired: "Vraag in uw account opnieuw een e-mailbevestiging aan.", usedExpired: "Deze link is al gebruikt of verlopen.",
+    resetSubject: "Wachtwoord opnieuw instellen", resetIntro: "Stel uw wachtwoord opnieuw in via deze link:", resetTitle: "Wachtwoord instellen", resetLabel: "Nieuw wachtwoord (minimaal 12 tekens)", resetButton: "Wachtwoord opslaan", resetExpiredTitle: "Resetlink verlopen", resetExpired: "Deze link is al gebruikt of verlopen.",
+    newsletterSubject: "Bevestig uw e-maildeals", newsletterIntro: "Bevestig dat Schaap's Vishandel u e-maildeals mag sturen.", newsletterButton: "E-maildeals bevestigen", newsletterTitle: "E-maildeals bevestigen", newsletterExpiredTitle: "Aanmeldlink verlopen", newsletterExpired: "Deze link is al gebruikt of verlopen.",
+    unsubscribeTitle: "Afmelden voor e-maildeals", unsubscribeIntro: "U ontvangt daarna geen weekdeals meer.", unsubscribeButton: "Afmelden", unsubscribeExpiredTitle: "Afmeldlink verlopen", unsubscribeExpired: "Deze afmeldlink is verlopen.", unsubscribeDoneTitle: "Afgemeld", unsubscribeDone: "U ontvangt geen e-maildeals meer van Schaap's Vishandel.",
+    newsletterConfirmedSubject: "U ontvangt nu e-maildeals van Schaap's Vishandel", newsletterConfirmedIntro: "Bedankt voor uw bevestiging. U ontvangt onze aanbiedingen wanneer we een weekdeal delen.", unsubscribeLink: "Afmelden voor e-maildeals",
+    registrationGeneric: "Als dit adres nieuw is, ontvangt u de volgende stap per e-mail.", invalidRegistration: "Vul uw naam en een geldig e-mailadres in. Kies een wachtwoord van 12 tot 128 tekens.", verificationFailed: "Uw account is aangemaakt, maar de bevestigingsmail kon niet worden verstuurd. Vraag een nieuwe link aan.", resendGeneric: "Als er een onbevestigd account bij dit adres hoort, ontvangt u een nieuwe link.", resetGeneric: "Als er een account bij dit adres hoort, ontvangt u een e-mail.", alreadySubscribed: "U bent al aangemeld.", newsletterCheck: "Controleer uw e-mail om uw aanmelding te bevestigen.",
+  },
+  en: {
+    verifySubject: "Verify your email address — Schaap's Vishandel", verifyIntro: "Verify the email address for your Schaap's Vishandel account.", verifyButton: "Verify email address", verifyExpiredTitle: "Verification link expired", verifyExpired: "Request a new verification email from your account.", usedExpired: "This link has already been used or has expired.",
+    resetSubject: "Reset your password", resetIntro: "Reset your password using this link:", resetTitle: "Set a new password", resetLabel: "New password (at least 12 characters)", resetButton: "Save password", resetExpiredTitle: "Reset link expired", resetExpired: "This link has already been used or has expired.",
+    newsletterSubject: "Confirm your email offers", newsletterIntro: "Confirm that Schaap's Vishandel may send you email offers.", newsletterButton: "Confirm email offers", newsletterTitle: "Confirm email offers", newsletterExpiredTitle: "Subscription link expired", newsletterExpired: "This link has already been used or has expired.",
+    unsubscribeTitle: "Unsubscribe from email offers", unsubscribeIntro: "You will no longer receive weekly offers.", unsubscribeButton: "Unsubscribe", unsubscribeExpiredTitle: "Unsubscribe link expired", unsubscribeExpired: "This unsubscribe link has expired.", unsubscribeDoneTitle: "Unsubscribed", unsubscribeDone: "You will no longer receive email offers from Schaap's Vishandel.",
+    newsletterConfirmedSubject: "You are subscribed to email offers from Schaap's Vishandel", newsletterConfirmedIntro: "Thanks for confirming. You will receive our offers when we share a weekly deal.", unsubscribeLink: "Unsubscribe from email offers",
+    registrationGeneric: "If this is a new address, we will email you the next step.", invalidRegistration: "Enter your name and a valid email address. Choose a password of 12 to 128 characters.", verificationFailed: "Your account was created, but we could not send the verification email. Request a new link.", resendGeneric: "If this address belongs to an unverified account, we will send a new link.", resetGeneric: "If an account exists for this address, you will receive an email.", alreadySubscribed: "You are already subscribed.", newsletterCheck: "Check your email to confirm your subscription.",
+  },
+  de: {
+    verifySubject: "E-Mail-Adresse bestätigen — Schaap's Vishandel", verifyIntro: "Bestätigen Sie die E-Mail-Adresse für Ihr Konto bei Schaap's Vishandel.", verifyButton: "E-Mail-Adresse bestätigen", verifyExpiredTitle: "Bestätigungslink abgelaufen", verifyExpired: "Fordern Sie in Ihrem Konto eine neue Bestätigungs-E-Mail an.", usedExpired: "Dieser Link wurde bereits verwendet oder ist abgelaufen.",
+    resetSubject: "Passwort zurücksetzen", resetIntro: "Setzen Sie Ihr Passwort über diesen Link zurück:", resetTitle: "Neues Passwort festlegen", resetLabel: "Neues Passwort (mindestens 12 Zeichen)", resetButton: "Passwort speichern", resetExpiredTitle: "Link zum Zurücksetzen abgelaufen", resetExpired: "Dieser Link wurde bereits verwendet oder ist abgelaufen.",
+    newsletterSubject: "E-Mail-Angebote bestätigen", newsletterIntro: "Bestätigen Sie, dass Schaap's Vishandel Ihnen E-Mail-Angebote senden darf.", newsletterButton: "E-Mail-Angebote bestätigen", newsletterTitle: "E-Mail-Angebote bestätigen", newsletterExpiredTitle: "Anmeldelink abgelaufen", newsletterExpired: "Dieser Link wurde bereits verwendet oder ist abgelaufen.",
+    unsubscribeTitle: "E-Mail-Angebote abbestellen", unsubscribeIntro: "Sie erhalten danach keine Wochenangebote mehr.", unsubscribeButton: "Abbestellen", unsubscribeExpiredTitle: "Abmeldelink abgelaufen", unsubscribeExpired: "Dieser Abmeldelink ist abgelaufen.", unsubscribeDoneTitle: "Abgemeldet", unsubscribeDone: "Sie erhalten keine E-Mail-Angebote mehr von Schaap's Vishandel.",
+    newsletterConfirmedSubject: "Sie erhalten jetzt E-Mail-Angebote von Schaap's Vishandel", newsletterConfirmedIntro: "Vielen Dank für Ihre Bestätigung. Sie erhalten unsere Angebote, wenn wir ein Wochenangebot teilen.", unsubscribeLink: "E-Mail-Angebote abbestellen",
+    registrationGeneric: "Wenn dies eine neue Adresse ist, senden wir Ihnen den nächsten Schritt per E-Mail.", invalidRegistration: "Geben Sie Ihren Namen und eine gültige E-Mail-Adresse ein. Das Passwort muss 12 bis 128 Zeichen lang sein.", verificationFailed: "Ihr Konto wurde erstellt, aber die Bestätigungs-E-Mail konnte nicht gesendet werden. Fordern Sie einen neuen Link an.", resendGeneric: "Wenn diese Adresse zu einem unbestätigten Konto gehört, senden wir einen neuen Link.", resetGeneric: "Wenn es ein Konto zu dieser Adresse gibt, erhalten Sie eine E-Mail.", alreadySubscribed: "Sie haben den E-Mail-Angeboten bereits zugestimmt.", newsletterCheck: "Prüfen Sie Ihre E-Mails, um die Anmeldung zu bestätigen.",
+  },
+};
+
+const encoder = new TextEncoder();
+const decoder = new TextDecoder();
+
+function nowIso() {
+  return new Date().toISOString();
+}
+
+function localeFrom(value) {
+  const locale = String(value || "").trim().toLowerCase().split(/[,-]/, 1)[0];
+  return LOCALES.has(locale) ? locale : "nl";
+}
+
+function requestLocale(request, fallback = "") {
+  const queryLocale = new URL(request.url).searchParams.get("locale");
+  return localeFrom(queryLocale || fallback || request.headers.get("Accept-Language"));
+}
+
+function emailUrl(env, path, token, locale) {
+  const url = new URL(path, env.SITE_ORIGIN);
+  url.searchParams.set("token", token);
+  url.searchParams.set("locale", localeFrom(locale));
+  return url.toString();
+}
+
+function oneStudyYearFrom(value) {
+  const date = new Date(value);
+  date.setUTCFullYear(date.getUTCFullYear() + 1);
+  return date.toISOString();
+}
+
+function json(data, status = 200, headers = {}) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff",
+      ...headers,
+    },
+  });
+}
+
+function html(body, status = 200) {
+  return new Response(body, {
+    status,
+    headers: {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff",
+      "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'",
+      "Referrer-Policy": "no-referrer",
+    },
+  });
+}
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, (character) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+  })[character]);
+}
+
+function accountMessage(locale, title, message, token, action, button) {
+  return html(`<!doctype html><html lang="${locale}"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>${escapeHtml(title)}</title><body style="font:16px system-ui;max-width:38rem;margin:8vh auto;padding:1.5rem;color:#102f42"><main><h1>${escapeHtml(title)}</h1><p>${escapeHtml(message)}</p><form method="post" action="${action}"><input type="hidden" name="token" value="${escapeHtml(token)}"><input type="hidden" name="locale" value="${locale}"><button style="background:#087fa8;color:white;border:0;border-radius:.5rem;padding:.85rem 1.2rem;font:inherit;font-weight:700">${escapeHtml(button)}</button></form></main></body></html>`);
+}
+
+function accountResultPage(locale, title, message, status = 410) {
+  return html(`<!doctype html><html lang="${locale}"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>${escapeHtml(title)}</title><main style="font:16px system-ui;max-width:38rem;margin:8vh auto;padding:1.5rem;color:#102f42"><h1>${escapeHtml(title)}</h1><p>${escapeHtml(message)}</p></main>`, status);
+}
+
+function redirect(location, headers = {}) {
+  return new Response(null, { status: 303, headers: { Location: location, "Cache-Control": "no-store", ...headers } });
+}
+
+function cookieValue(request) {
+  const cookie = request.headers.get("Cookie") || "";
+  for (const part of cookie.split(";")) {
+    const [name, ...value] = part.trim().split("=");
+    if (name === COOKIE) return value.join("=");
+  }
+  return "";
+}
+
+function sessionCookie(token, maxAge = 60 * 60 * 24 * 30) {
+  // Host-only cookies keep preview and production sessions isolated, even
+  // when both hosts are subdomains of the same site.
+  return `${COOKIE}=${token}; Path=/api/members; Max-Age=${maxAge}; HttpOnly; Secure; SameSite=Lax`;
+}
+
+function sameOrigin(request, env) {
+  const origin = request.headers.get("Origin");
+  return Boolean(origin && origin === env.SITE_ORIGIN);
+}
+
+function base64url(bytes) {
+  let binary = "";
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  return btoa(binary).replaceAll("+", "-").replaceAll("/", "_").replace(/=+$/, "");
+}
+
+function fromBase64url(value) {
+  const padded = value.replaceAll("-", "+").replaceAll("_", "/") + "===".slice((value.length + 3) % 4);
+  return Uint8Array.from(atob(padded), (character) => character.charCodeAt(0));
+}
+
+async function digest(value) {
+  return base64url(new Uint8Array(await crypto.subtle.digest("SHA-256", encoder.encode(value))));
+}
+
+function safeEqual(left, right) {
+  if (typeof left !== "string" || typeof right !== "string" || left.length !== right.length) return false;
+  let difference = 0;
+  for (let index = 0; index < left.length; index++) difference |= left.charCodeAt(index) ^ right.charCodeAt(index);
+  return difference === 0;
+}
+
+async function randomToken() {
+  return base64url(crypto.getRandomValues(new Uint8Array(32)));
+}
+
+async function hmac(secret, value) {
+  const key = await crypto.subtle.importKey("raw", encoder.encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  return base64url(new Uint8Array(await crypto.subtle.sign("HMAC", key, encoder.encode(value))));
+}
+
+async function passwordHash(password, pepper) {
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const material = await crypto.subtle.importKey("raw", encoder.encode(`${password}${pepper}`), "PBKDF2", false, ["deriveBits"]);
+  const bits = await crypto.subtle.deriveBits({ name: "PBKDF2", hash: "SHA-256", salt, iterations: PASSWORD_ITERATIONS }, material, 256);
+  return `pbkdf2-sha256$${PASSWORD_ITERATIONS}$${base64url(salt)}$${base64url(new Uint8Array(bits))}`;
+}
+
+async function verifyPassword(password, stored, pepper) {
+  const [algorithm, iterationText, saltText, expectedText] = String(stored).split("$");
+  const iterations = Number(iterationText);
+  if (algorithm !== "pbkdf2-sha256" || !Number.isInteger(iterations) || iterations < 150_000 || iterations > 500_000) return false;
+  const material = await crypto.subtle.importKey("raw", encoder.encode(`${password}${pepper}`), "PBKDF2", false, ["deriveBits"]);
+  const bits = new Uint8Array(await crypto.subtle.deriveBits({ name: "PBKDF2", hash: "SHA-256", salt: fromBase64url(saltText), iterations }, material, 256));
+  const expected = fromBase64url(expectedText);
+  if (bits.length !== expected.length) return false;
+  let difference = 0;
+  for (let index = 0; index < bits.length; index++) difference |= bits[index] ^ expected[index];
+  return difference === 0;
+}
+
+async function rateLimit(db, key, limit, windowMs) {
+  const now = nowIso();
+  const row = await db.prepare(`
+    INSERT INTO auth_rate_limits (rate_key, attempts, window_started_at, updated_at)
+    VALUES (?, 1, ?, ?)
+    ON CONFLICT(rate_key) DO UPDATE SET
+      attempts = CASE WHEN julianday(?) - julianday(auth_rate_limits.window_started_at) > ? THEN 1 ELSE auth_rate_limits.attempts + 1 END,
+      window_started_at = CASE WHEN julianday(?) - julianday(auth_rate_limits.window_started_at) > ? THEN ? ELSE auth_rate_limits.window_started_at END,
+      updated_at = excluded.updated_at
+    RETURNING attempts
+  `).bind(key, now, now, now, windowMs / 86_400_000, now, windowMs / 86_400_000, now).first();
+  return Number(row?.attempts || 1) <= limit;
+}
+
+async function rateLimitIdentity(db, pepper, scope, ip, identity, ipLimit, identityLimit, windowMs) {
+  const [ipKey, identityKey] = await Promise.all([
+    hmac(pepper, `${scope}:ip:${ip}`),
+    hmac(pepper, `${scope}:identity:${identity}`),
+  ]);
+  const [ipAllowed, identityAllowed] = await Promise.all([
+    rateLimit(db, ipKey, ipLimit, windowMs),
+    rateLimit(db, identityKey, identityLimit, windowMs),
+  ]);
+  return ipAllowed && identityAllowed;
+}
+
+async function sendMail(env, to, subject, text, htmlBody) {
+  if (!env.EMAIL || !env.MAIL_FROM) throw new Error("mail-not-configured");
+  return env.EMAIL.send({ from: env.MAIL_FROM, to, subject, text, html: htmlBody });
+}
+
+async function issueEmailToken(env, { userId = null, email = null, purpose, ttlMs = EMAIL_TOKEN_MS }) {
+  const token = await randomToken();
+  const expiry = new Date(Date.now() + ttlMs).toISOString();
+  await env.DB.prepare(`INSERT INTO email_tokens (token_hash, user_id, email, purpose, created_at, expires_at) VALUES (?, ?, ?, ?, ?, ?)`)
+    .bind(await digest(token), userId, email, purpose, nowIso(), expiry).run();
+  return token;
+}
+
+async function sessionUser(request, env) {
+  const token = cookieValue(request);
+  if (!token) return null;
+  const row = await env.DB.prepare(`
+    SELECT u.id, u.email, u.full_name, u.email_verified_at, u.account_status
+    FROM sessions s JOIN users u ON u.id = s.user_id
+    WHERE s.token_hash = ? AND s.revoked_at IS NULL AND s.expires_at > ?
+  `).bind(await digest(token), nowIso()).first();
+  if (!row || !row.email_verified_at || row.account_status !== "active") return null;
+  return row;
+}
+
+async function requireAdmin(request, env) {
+  const user = await sessionUser(request, env);
+  const allowlist = String(env.ADMIN_EMAILS || "").split(",").map((email) => email.trim().toLowerCase()).filter(Boolean);
+  if (!user || !allowlist.includes(user.email.toLowerCase())) return null;
+  return user;
+}
+
+async function createSession(env, userId) {
+  const token = await randomToken();
+  const created = nowIso();
+  const expires = new Date(Date.now() + SESSION_MS).toISOString();
+  await env.DB.prepare(`INSERT INTO sessions (token_hash, user_id, created_at, expires_at) VALUES (?, ?, ?, ?)`)
+    .bind(await digest(token), userId, created, expires).run();
+  return token;
+}
+
+function normalizeEmail(value) {
+  const email = typeof value === "string" ? value.trim().toLowerCase() : "";
+  if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "";
+  return email;
+}
+
+async function readLimitedBytes(request, maxBytes) {
+  const reader = request.body?.getReader();
+  if (!reader) return { bytes: new Uint8Array() };
+  const chunks = [];
+  let totalBytes = 0;
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      totalBytes += value.byteLength;
+      if (totalBytes > maxBytes) {
+        try { await reader.cancel(); } catch { /* Reject the oversized payload either way. */ }
+        return { tooLarge: true };
+      }
+      chunks.push(value);
+    }
+    const body = new Uint8Array(totalBytes);
+    let offset = 0;
+    for (const chunk of chunks) {
+      body.set(chunk, offset);
+      offset += chunk.byteLength;
+    }
+    return { bytes: body };
+  } catch {
+    try { await reader.cancel(); } catch { /* The request stream may already be closed. */ }
+    return { invalid: true };
+  }
+}
+
+async function readJson(request) {
+  const result = await readLimitedBytes(request, 32_000);
+  if (!result.bytes) return null;
+  try { return JSON.parse(decoder.decode(result.bytes)); } catch { return null; }
+}
+
+async function readLimitedFormData(request, maxBytes) {
+  const result = await readLimitedBytes(request, maxBytes);
+  if (result.tooLarge) return { tooLarge: true };
+  if (!result.bytes) return { invalid: true };
+  try {
+    const boundedRequest = new Request(request.url, {
+      method: request.method,
+      headers: request.headers,
+      body: result.bytes,
+    });
+    return { form: await boundedRequest.formData() };
+  } catch {
+    return { invalid: true };
+  }
+}
+
+async function register(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  if (!env.AUTH_PEPPER || !env.SITE_ORIGIN || !env.EMAIL) return json({ error: "registration_unavailable" }, 503);
+  const body = await readJson(request);
+  const locale = localeFrom(body?.locale);
+  const copy = ACCOUNT_COPY[locale];
+  const email = normalizeEmail(body?.email);
+  const name = typeof body?.name === "string" ? body.name.trim().slice(0, 120) : "";
+  const password = typeof body?.password === "string" ? body.password : "";
+  if (!email || name.length < 2 || password.length < 12 || password.length > 128) {
+    return json({ error: "invalid_input", message: copy.invalidRegistration }, 400);
+  }
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  const limitKey = await hmac(env.AUTH_PEPPER, `register:${ip}`);
+  if (!await rateLimit(env.DB, limitKey, 8, 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
+  const userId = crypto.randomUUID();
+  const created = nowIso();
+  const passwordDigest = await passwordHash(password, env.AUTH_PEPPER);
+  const inserted = await env.DB.prepare(`INSERT INTO users (id, email, full_name, password_hash, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT(email) DO NOTHING`)
+    .bind(userId, email, name, passwordDigest, created, created).run();
+  if (!inserted.meta?.changes) return json({ ok: true, message: copy.registrationGeneric }, 202);
+
+  const verifyToken = await issueEmailToken(env, { userId, email, purpose: "verify_email" });
+  const verifyUrl = emailUrl(env, "/api/members/verify", verifyToken, locale);
+  try {
+    const validity = locale === "nl" ? "De link is één uur geldig." : locale === "de" ? "Der Link ist eine Stunde gültig." : "This link is valid for one hour.";
+    await sendMail(env, email, copy.verifySubject, `${copy.verifyIntro}\n${verifyUrl}\n${validity}`, `<p>${copy.verifyIntro}</p><p><a href="${verifyUrl}">${copy.verifyButton}</a></p><p>${validity}</p>`);
+  } catch {
+    return json({ error: "verification_email_failed", message: copy.verificationFailed }, 503);
+  }
+
+  if (body.marketingConsent === true) {
+    const consentAt = nowIso();
+    await env.DB.batch([
+      env.DB.prepare(`INSERT INTO consent_events (id, user_id, consent_type, granted, text_version, source, recorded_at) VALUES (?, ?, 'marketing_email', 1, ?, 'account-registration', ?)`)
+        .bind(crypto.randomUUID(), userId, NEWSLETTER_CONSENT_VERSION, consentAt),
+      env.DB.prepare(`INSERT INTO newsletter_subscriptions (email, user_id, status, consent_text_version, consented_at, source, created_at, updated_at) VALUES (?, ?, 'pending', ?, ?, 'account-registration', ?, ?) ON CONFLICT(email) DO UPDATE SET status='pending', consent_text_version=excluded.consent_text_version, consented_at=excluded.consented_at, updated_at=excluded.updated_at`)
+        .bind(email, userId, NEWSLETTER_CONSENT_VERSION, consentAt, consentAt, consentAt),
+    ]);
+    const marketingToken = await issueEmailToken(env, { userId, email, purpose: "newsletter_confirm" });
+    const confirmUrl = emailUrl(env, "/api/members/newsletter/confirm", marketingToken, locale);
+    const note = locale === "nl" ? "Dit staat los van uw account. U kunt zich altijd afmelden." : locale === "de" ? "Dies ist unabhängig von Ihrem Konto. Sie können sich jederzeit abmelden." : "This is separate from your account. You can unsubscribe at any time.";
+    await sendMail(env, email, copy.newsletterSubject, `${copy.newsletterIntro}\n${confirmUrl}`, `<p>${copy.newsletterIntro}</p><p><a href="${confirmUrl}">${copy.newsletterButton}</a></p><p>${note}</p>`);
+  }
+  return json({ ok: true, message: copy.registrationGeneric }, 202);
+}
+
+async function resendVerification(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  if (!env.AUTH_PEPPER || !env.EMAIL || !env.SITE_ORIGIN) return json({ error: "verification_unavailable" }, 503);
+  const body = await readJson(request);
+  const locale = localeFrom(body?.locale);
+  const copy = ACCOUNT_COPY[locale];
+  const email = normalizeEmail(body?.email);
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "verify-resend", ip, email || "invalid", 12, 4, 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
+  const user = email ? await env.DB.prepare(`SELECT id FROM users WHERE email = ? AND email_verified_at IS NULL AND account_status = 'active'`).bind(email).first() : null;
+  if (user) {
+    const time = nowIso();
+    await env.DB.prepare(`UPDATE email_tokens SET used_at = ? WHERE user_id = ? AND purpose = 'verify_email' AND used_at IS NULL`).bind(time, user.id).run();
+    const token = await issueEmailToken(env, { userId: user.id, email, purpose: "verify_email" });
+    const link = emailUrl(env, "/api/members/verify", token, locale);
+    try {
+      await sendMail(env, email, copy.verifySubject, `${copy.verifyIntro}\n${link}\n${locale === "nl" ? "De link is één uur geldig." : locale === "de" ? "Der Link ist eine Stunde gültig." : "This link is valid for one hour."}`, `<p>${copy.verifyIntro}</p><p><a href="${link}">${copy.verifyButton}</a></p>`);
+    } catch {
+      return json({ error: "verification_email_failed" }, 503);
+    }
+  }
+  return json({ ok: true, message: copy.resendGeneric }, 202);
+}
+
+async function verifyEmailPage(request, env) {
+  const locale = requestLocale(request);
+  const copy = ACCOUNT_COPY[locale];
+  const token = new URL(request.url).searchParams.get("token") || "";
+  const row = await env.DB.prepare(`SELECT token_hash FROM email_tokens WHERE token_hash = ? AND purpose = 'verify_email' AND used_at IS NULL AND expires_at > ?`)
+    .bind(await digest(token), nowIso()).first();
+  if (!row) return accountResultPage(locale, copy.verifyExpiredTitle, copy.verifyExpired);
+  return accountMessage(locale, copy.verifyButton, copy.verifyIntro, token, "/api/members/verify", copy.verifyButton);
+}
+
+async function verifyEmail(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  const parsed = await readLimitedFormData(request, 16_000);
+  if (parsed.tooLarge) return json({ error: "form_too_large" }, 413);
+  if (!parsed.form) return json({ error: "invalid_form" }, 400);
+  const form = parsed.form;
+  const locale = localeFrom(form.get("locale"));
+  const token = String(form.get("token") || "");
+  const tokenHash = await digest(token);
+  const row = await env.DB.prepare(`SELECT user_id FROM email_tokens WHERE token_hash = ? AND purpose = 'verify_email' AND used_at IS NULL AND expires_at > ?`)
+    .bind(tokenHash, nowIso()).first();
+  if (!row?.user_id) return accountResultPage(locale, ACCOUNT_COPY[locale].verifyExpiredTitle, ACCOUNT_COPY[locale].usedExpired);
+  const time = nowIso();
+  await env.DB.batch([
+    env.DB.prepare(`UPDATE users SET email_verified_at = COALESCE(email_verified_at, ?), updated_at = ? WHERE id = ?`).bind(time, time, row.user_id),
+    env.DB.prepare(`UPDATE email_tokens SET used_at = ? WHERE token_hash = ? AND used_at IS NULL`).bind(time, tokenHash),
+  ]);
+  return redirect(`${env.SITE_ORIGIN}/${locale}/account?verified=1`);
+}
+
+async function login(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  if (!env.AUTH_PEPPER) return json({ error: "login_unavailable" }, 503);
+  const body = await readJson(request);
+  const email = normalizeEmail(body?.email);
+  const password = typeof body?.password === "string" ? body.password : "";
+  if (!email || password.length > 128) return json({ error: "invalid_credentials" }, 401);
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "login", ip, email, 30, 8, 15 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
+  const user = await env.DB.prepare(`SELECT id, email, password_hash, email_verified_at, account_status FROM users WHERE email = ?`).bind(email).first();
+  // Always pay the PBKDF2 cost, including for missing or inactive accounts, to
+  // avoid exposing account existence through login response timing.
+  const passwordMatches = await verifyPassword(password, user?.password_hash || DUMMY_PASSWORD_HASH, env.AUTH_PEPPER);
+  const valid = Boolean(user && user.account_status === "active" && passwordMatches);
+  if (!valid) return json({ error: "invalid_credentials" }, 401);
+  if (!user.email_verified_at) return json({ error: "email_unverified", message: "Bevestig eerst uw e-mailadres." }, 403);
+  const token = await createSession(env, user.id);
+  return json({ ok: true }, 200, { "Set-Cookie": sessionCookie(token) });
+}
+
+async function logout(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  const token = cookieValue(request);
+  if (token) await env.DB.prepare(`UPDATE sessions SET revoked_at = ? WHERE token_hash = ? AND revoked_at IS NULL`).bind(nowIso(), await digest(token)).run();
+  return json({ ok: true }, 200, { "Set-Cookie": sessionCookie("", 0) });
+}
+
+async function me(request, env) {
+  const user = await sessionUser(request, env);
+  if (!user) return json({ user: null }, 401);
+  const [application, pass] = await Promise.all([
+    env.DB.prepare(`SELECT status, education_level, institution, submitted_at, reviewed_at FROM student_applications WHERE user_id = ? ORDER BY submitted_at DESC LIMIT 1`).bind(user.id).first(),
+    env.DB.prepare(`SELECT p.id, p.status, p.issued_at, p.expires_at FROM student_passes p JOIN student_applications a ON a.id = p.application_id WHERE p.user_id = ? AND p.status = 'active' AND p.revoked_at IS NULL AND a.status = 'approved' ORDER BY a.reviewed_at DESC, p.issued_at DESC LIMIT 1`).bind(user.id).first(),
+  ]);
+  let discountPass = null;
+  if (pass && env.PASS_SIGNING_KEY && (!pass.expires_at || pass.expires_at > nowIso())) {
+    const code = `${pass.id}.${await hmac(env.PASS_SIGNING_KEY, pass.id)}`;
+    discountPass = { code, issuedAt: pass.issued_at, expiresAt: pass.expires_at };
+  }
+  const subscription = await env.DB.prepare(`SELECT status FROM newsletter_subscriptions WHERE email = ?`).bind(user.email).first();
+  return json({ user: { id: user.id, name: user.full_name, email: user.email }, studentApplication: application || null, discountPass, newsletter: subscription?.status || "not-subscribed" });
+}
+
+async function requestPasswordReset(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  if (!env.EMAIL || !env.SITE_ORIGIN) return json({ error: "reset_unavailable" }, 503);
+  if (!env.AUTH_PEPPER) return json({ error: "reset_unavailable" }, 503);
+  const body = await readJson(request);
+  const locale = localeFrom(body?.locale);
+  const copy = ACCOUNT_COPY[locale];
+  const email = normalizeEmail(body?.email);
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "reset", ip, email || "invalid", 15, 5, 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
+  if (email) {
+    const user = await env.DB.prepare(`SELECT id FROM users WHERE email = ? AND email_verified_at IS NOT NULL AND account_status = 'active'`).bind(email).first();
+    if (user) {
+      const token = await issueEmailToken(env, { userId: user.id, email, purpose: "password_reset" });
+      const link = emailUrl(env, "/api/members/password-reset/confirm", token, locale);
+      try {
+        const note = locale === "nl" ? "De link is één uur geldig. Heeft u dit niet aangevraagd? Negeer deze e-mail." : locale === "de" ? "Der Link ist eine Stunde gültig. Wenn Sie dies nicht angefordert haben, ignorieren Sie diese E-Mail." : "The link is valid for one hour. If you did not request this, ignore this email.";
+        await sendMail(env, email, copy.resetSubject, `${copy.resetIntro}\n${link}\n${note}`, `<p>${copy.resetIntro}</p><p><a href="${link}">${copy.resetButton}</a></p><p>${note}</p>`);
+      } catch { /* Keep the response identical for existing and unknown addresses. */ }
+    }
+  }
+  return json({ ok: true, message: copy.resetGeneric }, 202);
+}
+
+async function passwordResetPage(request, env) {
+  const locale = requestLocale(request);
+  const copy = ACCOUNT_COPY[locale];
+  const token = new URL(request.url).searchParams.get("token") || "";
+  const row = await env.DB.prepare(`SELECT token_hash FROM email_tokens WHERE token_hash = ? AND purpose = 'password_reset' AND used_at IS NULL AND expires_at > ?`)
+    .bind(await digest(token), nowIso()).first();
+  if (!row) return accountResultPage(locale, copy.resetExpiredTitle, copy.resetExpired);
+  return html(`<!doctype html><html lang="${locale}"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>${escapeHtml(copy.resetTitle)}</title><body style="font:16px system-ui;max-width:38rem;margin:8vh auto;padding:1.5rem;color:#102f42"><main><h1>${escapeHtml(copy.resetTitle)}</h1><form method="post" action="/api/members/password-reset/confirm"><input type="hidden" name="token" value="${escapeHtml(token)}"><input type="hidden" name="locale" value="${locale}"><label>${escapeHtml(copy.resetLabel)}<input name="password" type="password" minlength="12" maxlength="128" required autocomplete="new-password"></label><button>${escapeHtml(copy.resetButton)}</button></form></main></body></html>`);
+}
+
+async function confirmPasswordReset(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  const parsed = await readLimitedFormData(request, 16_000);
+  if (parsed.tooLarge) return json({ error: "form_too_large" }, 413);
+  if (!parsed.form) return json({ error: "invalid_form" }, 400);
+  const form = parsed.form;
+  const locale = localeFrom(form.get("locale"));
+  const tokenHash = await digest(String(form.get("token") || ""));
+  const password = String(form.get("password") || "");
+  if (password.length < 12 || password.length > 128 || !env.AUTH_PEPPER) return json({ error: "invalid_password" }, 400);
+  const token = await env.DB.prepare(`SELECT user_id FROM email_tokens WHERE token_hash = ? AND purpose = 'password_reset' AND used_at IS NULL AND expires_at > ?`).bind(tokenHash, nowIso()).first();
+  if (!token?.user_id) return accountResultPage(locale, ACCOUNT_COPY[locale].resetExpiredTitle, ACCOUNT_COPY[locale].usedExpired);
+  const time = nowIso();
+  const newHash = await passwordHash(password, env.AUTH_PEPPER);
+  await env.DB.batch([
+    env.DB.prepare(`UPDATE users SET password_hash = ?, updated_at = ? WHERE id = ?`).bind(newHash, time, token.user_id),
+    env.DB.prepare(`UPDATE sessions SET revoked_at = ? WHERE user_id = ? AND revoked_at IS NULL`).bind(time, token.user_id),
+    env.DB.prepare(`UPDATE email_tokens SET used_at = ? WHERE token_hash = ? AND used_at IS NULL`).bind(time, tokenHash),
+  ]);
+  return redirect(`${env.SITE_ORIGIN}/${locale}/account?password-reset=1`);
+}
+
+function proofMime(file) {
+  if (!file || file.size < 8 || file.size > MAX_PROOF_BYTES) return "";
+  return file.type === "application/pdf" || file.type === "image/jpeg" || file.type === "image/png" ? file.type : "";
+}
+
+async function validProofBytes(file, mime) {
+  const head = new Uint8Array(await file.slice(0, 12).arrayBuffer());
+  if (mime === "application/pdf") return decoder.decode(head.slice(0, 5)) === "%PDF-";
+  if (mime === "image/png") return head[0] === 0x89 && decoder.decode(head.slice(1, 4)) === "PNG";
+  if (mime === "image/jpeg") return head[0] === 0xff && head[1] === 0xd8 && head[2] === 0xff;
+  return false;
+}
+
+async function submitStudentApplication(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  const contentLength = Number(request.headers.get("Content-Length") || 0);
+  if (contentLength > MAX_PROOF_BYTES + 64_000) return json({ error: "file_too_large" }, 413);
+  const user = await sessionUser(request, env);
+  if (!user) return json({ error: "authentication_required" }, 401);
+  if (!env.AUTH_PEPPER) return json({ error: "application_unavailable" }, 503);
+  const applicationLimitKey = await hmac(env.AUTH_PEPPER, `student-application:${user.id}`);
+  if (!await rateLimit(env.DB, applicationLimitKey, 4, 24 * 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
+  if (!env.STUDENT_PROOFS) return json({ error: "proof_storage_unavailable" }, 503);
+  const parsed = await readLimitedFormData(request, MAX_PROOF_BYTES + 64_000);
+  if (parsed.tooLarge) return json({ error: "file_too_large" }, 413);
+  if (!parsed.form) return json({ error: "invalid_form" }, 400);
+  const form = parsed.form;
+  const institution = String(form.get("institution") || "").trim().slice(0, 180);
+  const level = String(form.get("educationLevel") || "");
+  const studiesInLeiden = form.get("studiesInLeiden") === "true";
+  const consented = form.get("proofConsent") === "true";
+  const file = form.get("proof");
+  const mime = proofMime(file);
+  if (!institution || !["mbo", "hbo", "wo"].includes(level) || !studiesInLeiden || !consented || !mime || !await validProofBytes(file, mime)) {
+    return json({ error: "invalid_application", message: "Controleer uw opleiding, de toestemming en het bewijsbestand (PDF, JPG of PNG, maximaal 8 MB)." }, 400);
+  }
+  const existing = await env.DB.prepare(`SELECT status FROM student_applications WHERE user_id = ? ORDER BY submitted_at DESC LIMIT 1`).bind(user.id).first();
+  if (existing?.status === "pending") return json({ error: "application_exists" }, 409);
+  if (existing?.status === "approved") {
+    const currentPass = await env.DB.prepare(`SELECT expires_at FROM student_passes WHERE user_id = ? AND status = 'active' AND revoked_at IS NULL ORDER BY issued_at DESC LIMIT 1`).bind(user.id).first();
+    if (!currentPass?.expires_at || currentPass.expires_at > nowIso()) return json({ error: "application_exists" }, 409);
+  }
+
+  const id = crypto.randomUUID();
+  const objectKey = `student-proofs/${user.id}/${id}`;
+  const submittedAt = nowIso();
+  try {
+    // Persist a cleanup handle before R2 can receive any bytes. If the later
+    // D1 transaction fails and immediate R2 deletion also fails, cron can retry.
+    await env.DB.prepare(`INSERT INTO student_proof_cleanup_queue (object_key, application_id, queued_at) VALUES (?, ?, ?)`).bind(objectKey, id, submittedAt).run();
+    await env.STUDENT_PROOFS.put(objectKey, file.stream(), { httpMetadata: { contentType: mime, cacheControl: "private, no-store" } });
+    await env.DB.prepare(`UPDATE student_proof_cleanup_queue SET queued_at=? WHERE object_key=?`).bind(nowIso(), objectKey).run();
+    const results = await env.DB.batch([
+      env.DB.prepare(`INSERT INTO student_applications (id, user_id, institution, education_level, proof_object_key, proof_mime_type, proof_consent_version, proof_consent_at, status, submitted_at)
+        SELECT ?, ?, ?, ?, ?, ?, ?, ?, 'pending', ?
+        WHERE EXISTS (SELECT 1 FROM student_proof_cleanup_queue WHERE object_key=?)`)
+        .bind(id, user.id, institution, level, objectKey, mime, PROOF_CONSENT_VERSION, submittedAt, submittedAt, objectKey),
+      env.DB.prepare(`INSERT INTO consent_events (id, user_id, consent_type, granted, text_version, source, recorded_at)
+        SELECT ?, ?, 'student_proof_processing', 1, ?, 'student-application', ?
+        WHERE EXISTS (SELECT 1 FROM student_applications WHERE id=? AND user_id=?)`)
+        .bind(crypto.randomUUID(), user.id, PROOF_CONSENT_VERSION, submittedAt, id, user.id),
+      env.DB.prepare(`DELETE FROM student_proof_cleanup_queue WHERE object_key=?`).bind(objectKey),
+    ]);
+    if (Number(results?.[0]?.meta?.changes || 0) !== 1) throw new Error("proof cleanup reservation expired");
+  } catch {
+    try {
+      const linked = await env.DB.prepare(`SELECT 1 AS present FROM student_applications WHERE id=? AND proof_object_key=?`).bind(id, objectKey).first();
+      // A D1 batch can have committed even if its response was lost. Never
+      // delete an object that is already referenced by a saved application.
+      if (linked) return json({ ok: true, status: "pending" }, 202);
+      await env.STUDENT_PROOFS.delete(objectKey);
+      await env.DB.prepare(`DELETE FROM student_proof_cleanup_queue WHERE object_key=?`).bind(objectKey).run();
+    } catch {
+      // If D1 is unavailable, keep the queue row and object rather than risk
+      // deleting a proof whose application transaction may have committed.
+    }
+    return json({ error: "application_unavailable" }, 503);
+  }
+  return json({ ok: true, status: "pending" }, 202);
+}
+
+async function adminQueue(request, env) {
+  const admin = await requireAdmin(request, env);
+  if (!admin) return json({ error: "forbidden" }, 403);
+  const rows = await env.DB.prepare(`SELECT a.id, a.institution, a.education_level, a.submitted_at, u.full_name, u.email FROM student_applications a JOIN users u ON u.id=a.user_id WHERE a.status='pending' ORDER BY a.submitted_at ASC LIMIT 100`).all();
+  return json({ applications: rows.results || [] });
+}
+
+async function adminProof(request, env, applicationId) {
+  const admin = await requireAdmin(request, env);
+  if (!admin) return json({ error: "forbidden" }, 403);
+  const application = await env.DB.prepare(`SELECT id, proof_object_key, proof_mime_type FROM student_applications WHERE id = ? AND status = 'pending'`).bind(applicationId).first();
+  if (!application?.proof_object_key) return json({ error: "proof_not_found" }, 404);
+  const object = await env.STUDENT_PROOFS.get(application.proof_object_key);
+  if (!object) return json({ error: "proof_not_found" }, 404);
+  await env.DB.prepare(`INSERT INTO admin_audit_log (id, reviewer_user_id, action, application_id, occurred_at) VALUES (?, ?, 'proof_viewed', ?, ?)`)
+    .bind(crypto.randomUUID(), admin.id, application.id, nowIso()).run();
+  return new Response(object.body, { headers: {
+    "Content-Type": application.proof_mime_type,
+    "Content-Disposition": `attachment; filename="studentbewijs-${application.id}.${application.proof_mime_type === "application/pdf" ? "pdf" : application.proof_mime_type === "image/png" ? "png" : "jpg"}"`,
+    "Cache-Control": "private, no-store",
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "no-referrer",
+    "Content-Security-Policy": "default-src 'none'; sandbox",
+  } });
+}
+
+async function adminDecision(request, env, applicationId) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  const admin = await requireAdmin(request, env);
+  if (!admin) return json({ error: "forbidden" }, 403);
+  const body = await readJson(request);
+  const decision = body?.decision;
+  if (decision !== "approved" && decision !== "rejected") return json({ error: "invalid_decision" }, 400);
+  const application = await env.DB.prepare(`SELECT id, user_id, proof_object_key, status FROM student_applications WHERE id = ?`).bind(applicationId).first();
+  if (!application || application.status !== "pending") return json({ error: "application_not_pending" }, 409);
+  const time = nowIso();
+  const expiresAt = decision === "approved" ? oneStudyYearFrom(time) : null;
+  const passId = decision === "approved" ? crypto.randomUUID() : null;
+  const passCode = passId && env.PASS_SIGNING_KEY ? `${passId}.${await hmac(env.PASS_SIGNING_KEY, passId)}` : null;
+  if (decision === "approved" && !passCode) return json({ error: "pass_signing_unavailable" }, 503);
+  const statements = [
+    env.DB.prepare(`UPDATE student_applications SET status = ?, reviewed_at = ?, reviewed_by = ?, reviewer_note = ? WHERE id = ? AND status = 'pending'`)
+      .bind(decision, time, admin.id, String(body?.note || "").trim().slice(0, 500) || null, applicationId),
+  ];
+  if (passId && passCode) statements.push(env.DB.prepare(`INSERT INTO student_passes (id, user_id, application_id, public_code_hash, status, issued_at, expires_at) SELECT ?, user_id, id, ?, 'active', ?, ? FROM student_applications WHERE id = ? AND status = 'approved' AND reviewed_by = ? AND reviewed_at = ?`)
+    .bind(passId, await digest(passCode), time, expiresAt, applicationId, admin.id, time));
+  statements.push(env.DB.prepare(`INSERT INTO admin_audit_log (id, reviewer_user_id, action, application_id, occurred_at)
+    SELECT ?, ?, ?, ?, ? WHERE EXISTS (
+      SELECT 1 FROM student_applications WHERE id = ? AND status = ? AND reviewed_by = ? AND reviewed_at = ?
+    )`)
+    .bind(crypto.randomUUID(), admin.id, decision === "approved" ? "application_approved" : "application_rejected", applicationId, time, applicationId, decision, admin.id, time));
+  let results;
+  try { results = await env.DB.batch(statements); } catch { return json({ error: "decision_not_saved" }, 409); }
+  // Another reviewer may have decided after our initial pending-state read.
+  // The conditional audit insert and pass creation stay in the same atomic
+  // batch; report conflict rather than a false success for the losing review.
+  if (Number(results?.[0]?.meta?.changes || 0) !== 1) return json({ error: "application_not_pending" }, 409);
+
+  let proofDeleted = false;
+  if (application.proof_object_key) {
+    try {
+      await env.STUDENT_PROOFS.delete(application.proof_object_key);
+      await env.DB.prepare(`UPDATE student_applications SET proof_object_key = NULL, proof_deleted_at = ? WHERE id = ?`).bind(nowIso(), applicationId).run();
+      proofDeleted = true;
+    } catch { /* Keep the key private so an admin can retry cleanup; never grant access after review. */ }
+  }
+  return json({ ok: true, decision, proofDeleted });
+}
+
+async function verifyPass(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  const admin = await requireAdmin(request, env);
+  if (!admin) return json({ error: "forbidden" }, 403);
+  const body = await readJson(request);
+  const code = typeof body?.code === "string" ? body.code.trim() : "";
+  if (code.length > 160 || !code.includes(".") || !env.PASS_SIGNING_KEY) return json({ valid: false }, 400);
+  const [id, signature] = code.split(".", 2);
+  if (!id || !signature || !safeEqual(signature, await hmac(env.PASS_SIGNING_KEY, id))) return json({ valid: false });
+  const pass = await env.DB.prepare(`SELECT p.status, p.expires_at, p.revoked_at, a.status AS application_status, u.full_name FROM student_passes p JOIN users u ON u.id=p.user_id JOIN student_applications a ON a.id=p.application_id AND a.user_id=p.user_id WHERE p.id = ?`)
+    .bind(id).first();
+  const valid = pass?.status === "active" && !pass.revoked_at && pass.application_status === "approved" && (!pass.expires_at || pass.expires_at > nowIso());
+  if (!valid) return json({ valid: false });
+  const storedCode = await env.DB.prepare(`SELECT public_code_hash FROM student_passes WHERE id = ?`).bind(id).first();
+  if (!safeEqual(await digest(code), storedCode?.public_code_hash)) return json({ valid: false });
+  return json({ valid: true, name: pass.full_name, discountPercent: 10, eligibleProducts: ["kibbeling", "haring", "broodje-haring", "drinks"] });
+}
+
+async function subscribeNewsletter(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  if (!env.EMAIL || !env.SITE_ORIGIN) return json({ error: "newsletter_unavailable" }, 503);
+  const body = await readJson(request);
+  const locale = localeFrom(body?.locale);
+  const copy = ACCOUNT_COPY[locale];
+  const email = normalizeEmail(body?.email);
+  if (!email || body?.consent !== true) return json({ error: "consent_required" }, 400);
+  if (!env.AUTH_PEPPER) return json({ error: "newsletter_unavailable" }, 503);
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "newsletter", ip, email, 12, 4, 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
+  const at = nowIso();
+  const user = await sessionUser(request, env);
+  await env.DB.prepare(`INSERT INTO newsletter_subscriptions (email, user_id, status, consent_text_version, consented_at, source, created_at, updated_at) VALUES (?, ?, 'pending', ?, ?, ?, ?, ?) ON CONFLICT(email) DO UPDATE SET user_id=COALESCE(excluded.user_id, newsletter_subscriptions.user_id), status=CASE WHEN newsletter_subscriptions.status='subscribed' THEN 'subscribed' ELSE 'pending' END, consent_text_version=excluded.consent_text_version, consented_at=excluded.consented_at, source=excluded.source, updated_at=excluded.updated_at`)
+    .bind(email, user?.email === email ? user.id : null, NEWSLETTER_CONSENT_VERSION, at, user ? "account" : "newsletter-form", at, at).run();
+  const subscription = await env.DB.prepare(`SELECT status FROM newsletter_subscriptions WHERE email = ?`).bind(email).first();
+  if (subscription?.status === "subscribed") return json({ ok: true, message: copy.alreadySubscribed }, 202);
+  const token = await issueEmailToken(env, { userId: user?.email === email ? user.id : null, email, purpose: "newsletter_confirm" });
+  const link = emailUrl(env, "/api/members/newsletter/confirm", token, locale);
+  await sendMail(env, email, copy.newsletterSubject, `${copy.newsletterIntro}\n${link}`, `<p>${copy.newsletterIntro}</p><p><a href="${link}">${copy.newsletterButton}</a></p>`);
+  return json({ ok: true, message: copy.newsletterCheck }, 202);
+}
+
+async function newsletterConfirmPage(request, env) {
+  const locale = requestLocale(request);
+  const copy = ACCOUNT_COPY[locale];
+  const token = new URL(request.url).searchParams.get("token") || "";
+  const row = await env.DB.prepare(`SELECT token_hash FROM email_tokens WHERE token_hash = ? AND purpose = 'newsletter_confirm' AND used_at IS NULL AND expires_at > ?`)
+    .bind(await digest(token), nowIso()).first();
+  if (!row) return accountResultPage(locale, copy.newsletterExpiredTitle, copy.newsletterExpired);
+  return accountMessage(locale, copy.newsletterTitle, copy.newsletterIntro, token, "/api/members/newsletter/confirm", copy.newsletterButton);
+}
+
+async function confirmNewsletter(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  const parsed = await readLimitedFormData(request, 16_000);
+  if (parsed.tooLarge) return json({ error: "form_too_large" }, 413);
+  if (!parsed.form) return json({ error: "invalid_form" }, 400);
+  const form = parsed.form;
+  const locale = localeFrom(form.get("locale"));
+  const copy = ACCOUNT_COPY[locale];
+  const tokenHash = await digest(String(form.get("token") || ""));
+  const token = await env.DB.prepare(`SELECT email FROM email_tokens WHERE token_hash = ? AND purpose = 'newsletter_confirm' AND used_at IS NULL AND expires_at > ?`).bind(tokenHash, nowIso()).first();
+  if (!token?.email) return accountResultPage(locale, copy.newsletterExpiredTitle, copy.usedExpired);
+  const time = nowIso();
+  await env.DB.batch([
+    env.DB.prepare(`UPDATE newsletter_subscriptions SET status='subscribed', confirmed_at=?, updated_at=? WHERE email=? AND status='pending'`).bind(time, time, token.email),
+    env.DB.prepare(`UPDATE email_tokens SET used_at=? WHERE token_hash=? AND used_at IS NULL`).bind(time, tokenHash),
+  ]);
+  const unsubscribeToken = await issueEmailToken(env, {
+    email: token.email,
+    purpose: "newsletter_unsubscribe",
+    ttlMs: 10 * 365 * 24 * 60 * 60 * 1000,
+  });
+  const unsubscribeUrl = emailUrl(env, "/api/members/newsletter/unsubscribe", unsubscribeToken, locale);
+  try {
+    await sendMail(
+      env,
+      token.email,
+      copy.newsletterConfirmedSubject,
+      `${copy.newsletterConfirmedIntro}\n\n${copy.unsubscribeLink}: ${unsubscribeUrl}`,
+      `<p>${copy.newsletterConfirmedIntro}</p><p><a href="${unsubscribeUrl}">${copy.unsubscribeLink}</a></p>`,
+    );
+  } catch { /* Confirmation is saved; every campaign still carries its own unsubscribe link. */ }
+  return redirect(`${env.SITE_ORIGIN}/${locale}/account?newsletter=confirmed`);
+}
+
+async function unsubscribePage(request, env) {
+  const locale = requestLocale(request);
+  const copy = ACCOUNT_COPY[locale];
+  const token = new URL(request.url).searchParams.get("token") || "";
+  const row = await env.DB.prepare(`SELECT token_hash FROM email_tokens WHERE token_hash = ? AND purpose='newsletter_unsubscribe' AND used_at IS NULL AND expires_at > ?`).bind(await digest(token), nowIso()).first();
+  if (!row) return accountResultPage(locale, copy.unsubscribeExpiredTitle, copy.unsubscribeExpired);
+  return accountMessage(locale, copy.unsubscribeTitle, copy.unsubscribeIntro, token, "/api/members/newsletter/unsubscribe", copy.unsubscribeButton);
+}
+
+async function unsubscribeNewsletter(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  const parsed = await readLimitedFormData(request, 16_000);
+  if (parsed.tooLarge) return json({ error: "form_too_large" }, 413);
+  if (!parsed.form) return json({ error: "invalid_form" }, 400);
+  const form = parsed.form;
+  const locale = localeFrom(form.get("locale"));
+  const copy = ACCOUNT_COPY[locale];
+  const tokenHash = await digest(String(form.get("token") || ""));
+  const token = await env.DB.prepare(`SELECT email FROM email_tokens WHERE token_hash = ? AND purpose='newsletter_unsubscribe' AND used_at IS NULL AND expires_at > ?`).bind(tokenHash, nowIso()).first();
+  if (!token?.email) return accountResultPage(locale, copy.unsubscribeExpiredTitle, copy.usedExpired);
+  const time = nowIso();
+  await env.DB.batch([
+    env.DB.prepare(`UPDATE newsletter_subscriptions SET status='unsubscribed', unsubscribed_at=?, updated_at=? WHERE email=?`).bind(time, time, token.email),
+    env.DB.prepare(`UPDATE email_tokens SET used_at=? WHERE token_hash=? AND used_at IS NULL`).bind(time, tokenHash),
+  ]);
+  return accountResultPage(locale, copy.unsubscribeDoneTitle, copy.unsubscribeDone, 200);
+}
+
+async function adminNewsletterCampaigns(request, env) {
+  const admin = await requireAdmin(request, env);
+  if (!admin) return json({ error: "forbidden" }, 403);
+  const campaigns = await env.DB.prepare(`
+    SELECT id, subject, status, recipient_count, sent_count, failed_count, created_at, queued_at, completed_at
+    FROM newsletter_campaigns ORDER BY created_at DESC LIMIT 50
+  `).all();
+  const subscriberCount = await env.DB.prepare(`SELECT COUNT(*) AS count FROM newsletter_subscriptions WHERE status = 'subscribed'`).first();
+  return json({ campaigns: campaigns.results || [], subscriberCount: Number(subscriberCount?.count || 0) });
+}
+
+async function createNewsletterCampaign(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  const admin = await requireAdmin(request, env);
+  if (!admin) return json({ error: "forbidden" }, 403);
+  const body = await readJson(request);
+  const subject = typeof body?.subject === "string" ? body.subject.trim() : "";
+  const content = typeof body?.body === "string" ? body.body.trim() : "";
+  if (!subject || subject.length > 140 || /[\r\n]/.test(subject) || !content || content.length > 3000) {
+    return json({ error: "invalid_campaign" }, 400);
+  }
+  const id = crypto.randomUUID();
+  const at = nowIso();
+  await env.DB.batch([
+    env.DB.prepare(`INSERT INTO newsletter_campaigns (id, subject, body_text, created_by, created_at) VALUES (?, ?, ?, ?, ?)`)
+      .bind(id, subject, content, admin.id, at),
+    env.DB.prepare(`INSERT INTO admin_audit_log (id, reviewer_user_id, action, occurred_at) VALUES (?, ?, 'newsletter_campaign_created', ?)`)
+      .bind(crypto.randomUUID(), admin.id, at),
+  ]);
+  return json({ ok: true, id }, 201);
+}
+
+async function sendNewsletterCampaign(request, env, campaignId) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  const admin = await requireAdmin(request, env);
+  if (!admin) return json({ error: "forbidden" }, 403);
+  const campaign = await env.DB.prepare(`SELECT id, status FROM newsletter_campaigns WHERE id = ?`).bind(campaignId).first();
+  if (!campaign || campaign.status !== "draft") return json({ error: "campaign_not_draft" }, 409);
+  const queuedAt = nowIso();
+  let results;
+  try {
+    results = await env.DB.batch([
+      env.DB.prepare(`UPDATE newsletter_campaigns SET
+        status=CASE WHEN EXISTS (SELECT 1 FROM newsletter_subscriptions WHERE status='subscribed') THEN 'queued' ELSE 'sent' END,
+        recipient_count=(SELECT COUNT(*) FROM newsletter_subscriptions WHERE status='subscribed'),
+        queued_at=?, completed_at=CASE WHEN EXISTS (SELECT 1 FROM newsletter_subscriptions WHERE status='subscribed') THEN NULL ELSE ? END
+        WHERE id=? AND status='draft'`).bind(queuedAt, queuedAt, campaignId),
+      env.DB.prepare(`INSERT INTO newsletter_deliveries (campaign_id, email, status, next_attempt_at)
+        SELECT ?, email, 'pending', ? FROM newsletter_subscriptions
+        WHERE status='subscribed' AND EXISTS (SELECT 1 FROM newsletter_campaigns WHERE id=? AND status='queued')`)
+        .bind(campaignId, queuedAt, campaignId),
+    ]);
+  } catch {
+    return json({ error: "campaign_not_draft" }, 409);
+  }
+  if (!Number(results[0]?.meta?.changes || 0)) return json({ error: "campaign_not_draft" }, 409);
+  const recipientCount = Number(results[1]?.meta?.changes || 0);
+  await env.DB.prepare(`INSERT INTO admin_audit_log (id, reviewer_user_id, action, occurred_at) VALUES (?, ?, 'newsletter_campaign_sent', ?)`)
+    .bind(crypto.randomUUID(), admin.id, queuedAt).run();
+  return json({ ok: true, recipientCount, status: recipientCount ? "queued" : "sent" }, 202);
+}
+
+async function processNewsletterDeliveries(env) {
+  if (!env.EMAIL || !env.MAIL_FROM || !env.SITE_ORIGIN) return;
+  const now = new Date();
+  const nowText = now.toISOString();
+  const staleBefore = new Date(now.getTime() - 10 * 60 * 1000).toISOString();
+  const pending = await env.DB.prepare(`
+    SELECT d.campaign_id, d.email, d.attempts, c.subject, c.body_text
+    FROM newsletter_deliveries d JOIN newsletter_campaigns c ON c.id=d.campaign_id
+    WHERE c.status='queued' AND d.attempts < 5 AND (
+      (d.status='pending' AND d.next_attempt_at <= ?) OR
+      (d.status='sending' AND d.claimed_at <= ?)
+    )
+    ORDER BY d.next_attempt_at ASC LIMIT 10
+  `).bind(nowText, staleBefore).all();
+
+  for (const delivery of pending.results || []) {
+    const claimed = await env.DB.prepare(`UPDATE newsletter_deliveries SET status='sending', attempts=attempts+1, claimed_at=? WHERE campaign_id=? AND email=? AND attempts < 5 AND ((status='pending' AND next_attempt_at <= ?) OR (status='sending' AND claimed_at <= ?)) RETURNING attempts`)
+      .bind(nowText, delivery.campaign_id, delivery.email, nowText, staleBefore).first();
+    if (!claimed) continue;
+    try {
+      const subscription = await env.DB.prepare(`SELECT status FROM newsletter_subscriptions WHERE email = ?`).bind(delivery.email).first();
+      if (subscription?.status !== "subscribed") {
+        await env.DB.prepare(`UPDATE newsletter_deliveries SET status='suppressed', claimed_at=NULL WHERE campaign_id=? AND email=?`)
+          .bind(delivery.campaign_id, delivery.email).run();
+        continue;
+      }
+      const token = await issueEmailToken(env, {
+        email: delivery.email,
+        purpose: "newsletter_unsubscribe",
+        ttlMs: 10 * 365 * 24 * 60 * 60 * 1000,
+      });
+      const unsubscribeUrl = `${env.SITE_ORIGIN}/api/members/newsletter/unsubscribe?token=${encodeURIComponent(token)}`;
+      const bodyHtml = escapeHtml(delivery.body_text).replace(/\n/g, "<br>");
+      await sendMail(
+        env,
+        delivery.email,
+        delivery.subject,
+        `${delivery.body_text}\n\nU ontvangt dit bericht omdat u zich heeft aangemeld voor e-maildeals. Afmelden: ${unsubscribeUrl}`,
+        `<main>${bodyHtml}</main><hr><p>U ontvangt dit bericht omdat u zich heeft aangemeld voor e-maildeals.</p><p><a href="${unsubscribeUrl}">Afmelden</a></p>`,
+      );
+      await env.DB.batch([
+        env.DB.prepare(`UPDATE newsletter_deliveries SET status='sent', sent_at=?, claimed_at=NULL, last_error=NULL WHERE campaign_id=? AND email=?`).bind(nowText, delivery.campaign_id, delivery.email),
+        env.DB.prepare(`UPDATE newsletter_campaigns SET sent_count=sent_count+1 WHERE id=?`).bind(delivery.campaign_id),
+      ]);
+    } catch (error) {
+      const attempts = Number(claimed.attempts);
+      const errorCode = String(error?.code || "delivery_failed").slice(0, 80);
+      const dailyQuotaReached = errorCode === "E_DAILY_LIMIT_EXCEEDED";
+      const retryAt = dailyQuotaReached
+        ? new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1)).toISOString()
+        : new Date(now.getTime() + Math.min(60, 2 ** attempts) * 60_000).toISOString();
+      await env.DB.batch([
+        env.DB.prepare(`UPDATE newsletter_deliveries SET status=?, attempts=CASE WHEN ? THEN MAX(0, attempts-1) ELSE attempts END, next_attempt_at=?, claimed_at=NULL, last_error=? WHERE campaign_id=? AND email=?`)
+          .bind(attempts >= 5 && !dailyQuotaReached ? "failed" : "pending", dailyQuotaReached ? 1 : 0, retryAt, errorCode, delivery.campaign_id, delivery.email),
+        ...(attempts >= 5 && !dailyQuotaReached ? [env.DB.prepare(`UPDATE newsletter_campaigns SET failed_count=failed_count+1 WHERE id=?`).bind(delivery.campaign_id)] : []),
+      ]);
+    }
+  }
+
+  await env.DB.prepare(`UPDATE newsletter_campaigns SET status=CASE WHEN EXISTS (SELECT 1 FROM newsletter_deliveries d WHERE d.campaign_id=newsletter_campaigns.id AND d.status IN ('pending','sending')) THEN 'queued' WHEN failed_count > 0 THEN 'partial_failure' ELSE 'sent' END, completed_at=CASE WHEN EXISTS (SELECT 1 FROM newsletter_deliveries d WHERE d.campaign_id=newsletter_campaigns.id AND d.status IN ('pending','sending')) THEN NULL ELSE COALESCE(completed_at, ?) END WHERE status='queued'`)
+    .bind(nowText).run();
+}
+
+function routeApplicationPath(pathname) {
+  const match = pathname.match(/^\/api\/members\/admin\/student-applications\/([0-9a-f-]+)(?:\/(proof|decision|cleanup))?$/i);
+  return match ? { id: match[1], action: match[2] || "" } : null;
+}
+
+function routeCampaignPath(pathname) {
+  const match = pathname.match(/^\/api\/members\/admin\/newsletter-campaigns\/([0-9a-f-]+)\/send$/i);
+  return match?.[1] || "";
+}
+
+const memberWorker = {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    const path = url.pathname.replace(/\/$/, "") || "/";
+    const method = request.method.toUpperCase();
+    if (path === "/api/members/health" && method === "GET") {
+      const enabled = env.MEMBERS_ENABLED === "on";
+      return json({ status: enabled ? "ok" : "disabled" }, enabled ? 200 : 503);
+    }
+    // Keep the API inert until the password-protected site is deliberately
+    // opened. Cloudflare Worker routes can bypass the Next.js access gate.
+    if (env.MEMBERS_ENABLED !== "on") return json({ error: "members_disabled" }, 503);
+    if (path === "/api/members/register" && method === "POST") return register(request, env);
+    if (path === "/api/members/verify/resend" && method === "POST") return resendVerification(request, env);
+    if (path === "/api/members/verify" && method === "GET") return verifyEmailPage(request, env);
+    if (path === "/api/members/verify" && method === "POST") return verifyEmail(request, env);
+    if (path === "/api/members/login" && method === "POST") return login(request, env);
+    if (path === "/api/members/logout" && method === "POST") return logout(request, env);
+    if (path === "/api/members/me" && method === "GET") return me(request, env);
+    if (path === "/api/members/password-reset" && method === "POST") return requestPasswordReset(request, env);
+    if (path === "/api/members/password-reset/confirm" && method === "GET") return passwordResetPage(request, env);
+    if (path === "/api/members/password-reset/confirm" && method === "POST") return confirmPasswordReset(request, env);
+    if (path === "/api/members/student-application" && method === "POST") return submitStudentApplication(request, env);
+    if (path === "/api/members/admin/student-applications" && method === "GET") return adminQueue(request, env);
+    if (path === "/api/members/admin/pass/verify" && method === "POST") return verifyPass(request, env);
+    if (path === "/api/members/admin/newsletter-campaigns" && method === "GET") return adminNewsletterCampaigns(request, env);
+    if (path === "/api/members/admin/newsletter-campaigns" && method === "POST") return createNewsletterCampaign(request, env);
+    if (path === "/api/members/newsletter/subscribe" && method === "POST") return subscribeNewsletter(request, env);
+    if (path === "/api/members/newsletter/confirm" && method === "GET") return newsletterConfirmPage(request, env);
+    if (path === "/api/members/newsletter/confirm" && method === "POST") return confirmNewsletter(request, env);
+    if (path === "/api/members/newsletter/unsubscribe" && method === "GET") return unsubscribePage(request, env);
+    if (path === "/api/members/newsletter/unsubscribe" && method === "POST") return unsubscribeNewsletter(request, env);
+    const applicationRoute = routeApplicationPath(path);
+    if (applicationRoute?.action === "proof" && method === "GET") return adminProof(request, env, applicationRoute.id);
+    if (applicationRoute?.action === "decision" && method === "POST") return adminDecision(request, env, applicationRoute.id);
+    if (applicationRoute?.action === "cleanup" && method === "POST") return cleanupReviewedProof(request, env, applicationRoute.id);
+    const campaignId = routeCampaignPath(path);
+    if (campaignId && method === "POST") return sendNewsletterCampaign(request, env, campaignId);
+    return json({ error: "not_found" }, 404);
+  },
+  async scheduled(_controller, env, context) {
+    // Privacy cleanup keeps running even while the account features are off.
+    // Newsletter delivery remains inert until the owner deliberately enables it.
+    const tasks = [cleanupReviewedStudentProofs(env), cleanupOrphanStudentProofs(env)];
+    if (env.MEMBERS_ENABLED === "on") tasks.push(processNewsletterDeliveries(env));
+    context.waitUntil(Promise.allSettled(tasks));
+  },
+};
+
+export default memberWorker;
+
+async function cleanupReviewedProof(request, env, applicationId) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  const admin = await requireAdmin(request, env);
+  if (!admin) return json({ error: "forbidden" }, 403);
+  const application = await env.DB.prepare(`SELECT status, proof_object_key FROM student_applications WHERE id = ?`).bind(applicationId).first();
+  if (!application || application.status === "pending") return json({ error: "not_reviewed" }, 409);
+  if (!application.proof_object_key) return json({ ok: true, alreadyDeleted: true });
+  try {
+    await env.STUDENT_PROOFS.delete(application.proof_object_key);
+    await env.DB.prepare(`UPDATE student_applications SET proof_object_key=NULL, proof_deleted_at=? WHERE id=?`).bind(nowIso(), applicationId).run();
+    await env.DB.prepare(`INSERT INTO admin_audit_log (id, reviewer_user_id, action, application_id, occurred_at) VALUES (?, ?, 'proof_deleted', ?, ?)`)
+      .bind(crypto.randomUUID(), admin.id, applicationId, nowIso()).run();
+    return json({ ok: true, deleted: true });
+  } catch {
+    return json({ ok: false, error: "proof_cleanup_failed" }, 503);
+  }
+}
+
+async function cleanupReviewedStudentProofs(env) {
+  if (!env.DB || !env.STUDENT_PROOFS) return;
+  let rows;
+  try {
+    rows = await env.DB.prepare(`SELECT id, proof_object_key FROM student_applications
+      WHERE status IN ('approved','rejected') AND proof_object_key IS NOT NULL
+      ORDER BY reviewed_at ASC LIMIT 20`).all();
+  } catch {
+    return;
+  }
+  for (const application of rows.results || []) {
+    try {
+      // R2 deletion is idempotent, so a retry is safe if the object was removed
+      // but recording proof_deleted_at failed on the previous cron run.
+      await env.STUDENT_PROOFS.delete(application.proof_object_key);
+      await env.DB.prepare(`UPDATE student_applications
+        SET proof_object_key=NULL, proof_deleted_at=?
+        WHERE id=? AND status IN ('approved','rejected') AND proof_object_key=?`)
+        .bind(nowIso(), application.id, application.proof_object_key).run();
+    } catch {
+      // Leave the key in D1; the next scheduled invocation will retry it.
+    }
+  }
+}
+
+async function cleanupOrphanStudentProofs(env) {
+  if (!env.DB || !env.STUDENT_PROOFS) return;
+  // Give slow uploads and their D1 commit a full hour before considering a
+  // queue entry abandoned. Successful submissions remove the row atomically.
+  const cutoff = new Date(Date.now() - 60 * 60 * 1000).toISOString();
+  let rows;
+  try {
+    rows = await env.DB.prepare(`SELECT object_key FROM student_proof_cleanup_queue
+      WHERE queued_at < ? ORDER BY queued_at ASC LIMIT 20`).bind(cutoff).all();
+  } catch {
+    return;
+  }
+  for (const row of rows.results || []) {
+    try {
+      // Claim the stale queue row atomically only while no application refers
+      // to it. Submissions require this same row in their insert transaction,
+      // so cleanup cannot race a successful application commit.
+      const claim = await env.DB.prepare(`DELETE FROM student_proof_cleanup_queue
+        WHERE object_key=? AND queued_at < ?
+          AND NOT EXISTS (SELECT 1 FROM student_applications WHERE proof_object_key=?)`)
+        .bind(row.object_key, cutoff, row.object_key).run();
+      if (Number(claim?.meta?.changes || 0) === 1) {
+        await env.STUDENT_PROOFS.delete(row.object_key);
+      } else {
+        const linked = await env.DB.prepare(`SELECT 1 AS present FROM student_applications WHERE proof_object_key=? LIMIT 1`).bind(row.object_key).first();
+        if (linked) await env.DB.prepare(`DELETE FROM student_proof_cleanup_queue WHERE object_key=? AND EXISTS (SELECT 1 FROM student_applications WHERE proof_object_key=?)`).bind(row.object_key, row.object_key).run();
+      }
+    } catch {
+      // Keep the durable queue row so the next scheduled run retries safely.
+    }
+  }
+}

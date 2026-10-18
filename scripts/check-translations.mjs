@@ -38,6 +38,10 @@ for(const l of locales){
  for(const suffix of ['','/visschalen','/assortiment','/bezoek-ons','/biologische-vis','/varlaks','/ons-verhaal','/contact','/recepten','/blog','/viswinkel-voorschoten'])pages.push({path:`/${l}${suffix}`,texts:suffix==='/visschalen'?texts:suffix===''?homeTexts:[]});
  for(const p of products.products){const t=translatedProducts.localizeProduct(p,l),photo=photos.productPhoto(t,l);if(photo)check(!!photo.alt,`Missing image description ${l}/${p.slug}`);}
 }
+for(const p of products.products){
+ const alts=locales.map(l=>photos.productPhoto(translatedProducts.localizeProduct(p,l),l)?.alt?.trim()??"");
+ if(alts.some(Boolean))for(let i=1;i<alts.length;i++)check(alts[i]!==alts[0],`Product image description not localized ${locales[0]}/${locales[i]}/${p.slug}`);
+}
 function flatten(value,prefix=''){return Object.fromEntries(Object.entries(value).flatMap(([k,v])=>typeof v==='object'&&v!==null?Object.entries(flatten(v,prefix+k+'.')):[[prefix+k,v]]));}
 const flat=Object.fromEntries(locales.map(l=>[l,flatten(messages[l])]));
 for(const key of Object.keys(flat.nl))for(const l of ['en','de']){check(key in flat[l],`Missing UI key ${l}/${key}`);const placeholders=s=>[...String(s).matchAll(/\{(\w+)[},]/g)].map(m=>m[1]).sort().join(',');check(placeholders(flat.nl[key])===placeholders(flat[l][key]),`UI placeholders ${l}/${key}`);}
@@ -46,7 +50,8 @@ const origin=process.argv[2];
 function decode(s){return s.replace(/&#x([0-9a-f]+);/gi,(_,n)=>String.fromCodePoint(parseInt(n,16))).replace(/&#(\d+);/g,(_,n)=>String.fromCodePoint(+n)).replace(/&quot;/g,'"').replace(/&amp;/g,'&').replace(/&apos;|&#x27;/g,"'").replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/\s+/g,' ').trim();}
 if(origin&&!errors.length){
  const queue=[...pages];
- await Promise.all(Array.from({length:5},async()=>{
+ const concurrency=/^http:\/\/(localhost|127\.0\.0\.1):/.test(origin)?1:5;
+ await Promise.all(Array.from({length:concurrency},async()=>{
   while(queue.length){
    const p=queue.shift();
    try{

@@ -32,12 +32,14 @@ const TEKST = {
   },
 } as const;
 
-function Kaarten({ items, locale }: { items: SelectieItem[]; locale: keyof typeof TEKST }) {
+function Kaarten({ items, locale, showPrice = true }: { items: SelectieItem[]; locale: keyof typeof TEKST; showPrice?: boolean }) {
   const t = TEKST[locale];
   return <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
     {items.map((item) => {
       const naam = selectieNaam(item.slug, locale);
-      const bericht = `${t.bericht} ${naam} (${t.prijs.toLowerCase()} ${euro(item.prijs)}${item.perStuk ? ` ${t.stuk}` : ""}). ${t.bevestig}`;
+      const bericht = showPrice
+        ? `${t.bericht} ${naam} (${t.prijs.toLowerCase()} ${euro(item.prijs)}${item.perStuk ? ` ${t.stuk}` : ""}). ${t.bevestig}`
+        : `${t.bericht} ${naam}. ${t.bevestig}`;
       return <li id={item.slug} key={item.slug} className="flex flex-col overflow-hidden border border-[#d9e7ee] bg-white rounded-lg">
         <figure>
           <div className="relative aspect-[4/3] bg-[#f2f8fb]"><Image src={item.foto} alt={`${naam} — ${t.foto}`} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover" /></div>
@@ -45,7 +47,7 @@ function Kaarten({ items, locale }: { items: SelectieItem[]; locale: keyof typeo
         </figure>
         <div className="p-5 pt-3 flex flex-col flex-1">
           <h3 className="text-[1.25rem] mb-2">{naam}</h3>
-          <p className="mb-5 text-[#4d6370]">{t.prijs} <strong className="text-[#004f70]">{euro(item.prijs)}</strong>{item.perStuk ? ` ${t.stuk}` : ""}</p>
+          {showPrice && <p className="mb-5 text-[#4d6370]">{t.prijs} <strong className="text-[#004f70]">{euro(item.prijs)}</strong>{item.perStuk ? ` ${t.stuk}` : ""}</p>}
           <a className="knop knop-rood mt-auto" target="_blank" rel="noopener noreferrer" href={whatsappLink(bericht)}>{t.vraag}</a>
         </div>
       </li>;
@@ -61,7 +63,7 @@ export function SelectieAanvraag({ locale, showSpecial = true, showBarbecue = tr
     {showSpecial && <section id="bijzondere-visschalen">
       <h2 className="text-[1.8rem] mb-2">{t.speciaal}</h2>
       <p className="max-w-3xl mb-6 text-[#4d6370]">{t.speciaalIntro}</p>
-      <Kaarten items={speciaal} locale={taal} />
+      <Kaarten items={speciaal} locale={taal} showPrice={false} />
       <p className="mt-4 text-sm text-[#4d6370]">{t.waarschuwing}</p>
     </section>}
     {showBarbecue && <section id="barbecue-gourmet">

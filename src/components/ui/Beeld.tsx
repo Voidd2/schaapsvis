@@ -5,8 +5,9 @@ import { BEELD, type BeeldNaam, type Verhouding } from "@/lib/beeld";
 /**
  * Een beeldvlak op de site.
  *
- * Is er een foto, dan staat die er. Zonder foto wordt geen leeg vlak gerenderd.
- * Winkel- en historische foto's moeten echte eigenaarfoto's blijven.
+ * Is er een foto, dan staat die er. Een tijdelijke plek kan optioneel worden
+ * getoond als placeholder; zo doen we nooit alsof een illustratie een echte
+ * winkel- of marktfoto is.
  *
  * Welke foto's de site wil hebben staat in `src/lib/beeld.ts`.
  */
@@ -22,6 +23,7 @@ export function Beeld({
   naam,
   verhouding,
   klasse = "",
+  placeholder = false,
   /** Een randje onderaan in de categoriekleur, zoals bij het assortiment. */
   streep = "var(--sand-diep)",
   /** Voor een foto die het vlak mag vullen in plaats van erin passen. */
@@ -31,15 +33,17 @@ export function Beeld({
   naam: BeeldNaam;
   verhouding?: Verhouding;
   klasse?: string;
+  placeholder?: boolean;
   streep?: string | null;
   vullend?: boolean;
   prioriteit?: boolean;
 }) {
   const locale = useLocale();
   const plek = BEELD[naam];
-  // Do not reserve a giant empty photo box when an owner photo is unavailable.
-  if (!plek.bestand) return null;
+  if (!plek.bestand && !placeholder) return null;
   const vorm = VERHOUDING[verhouding ?? plek.verhouding];
+  const alt = locale === "nl" ? plek.alt : ALT[naam][locale === "de" ? 1 : 0];
+  const photoComingSoon = locale === "nl" ? "Eigen foto volgt" : locale === "de" ? "Eigenes Foto folgt" : "Our photo coming soon";
 
   return (
     <div
@@ -49,16 +53,21 @@ export function Beeld({
         ...(streep ? { borderBottom: `2px solid ${streep}` } : {}),
       }}
     >
-      {
+      {plek.bestand ? (
         /* eslint-disable-next-line @next/next/no-img-element */
         <img
           src={plek.bestand}
-          alt={locale === "nl" ? plek.alt : ALT[naam][locale === "de" ? 1 : 0]}
+          alt={alt}
           className={`w-full h-full ${vullend ? "object-cover" : "object-contain p-5"}`}
           loading={prioriteit ? "eager" : "lazy"}
           fetchPriority={prioriteit ? "high" : undefined}
         />
-      }
+      ) : (
+        <div className="flex h-full w-full flex-col items-center justify-center gap-2 p-5 text-center" data-photo-placeholder={naam}>
+          <span className="text-xs font-bold uppercase tracking-[0.18em] text-sky-800">{photoComingSoon}</span>
+          <span className="max-w-sm text-sm font-medium text-slate-700">{alt}</span>
+        </div>
+      )}
     </div>
   );
 }

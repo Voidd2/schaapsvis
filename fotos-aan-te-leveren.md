@@ -1,39 +1,32 @@
-# Foto's aan te leveren — briefing voor Lucas
+# Foto's aan te leveren — echte locaties en winkel
 
-De website draait nu op eigen, neutrale **SVG-merkillustraties** in plaats van
-gehotlinkte foto's (zie `external-assets-report.md`). Dat is juridisch veilig en
-ziet er verzorgd uit, maar **echte foto's van de winkel, de vis en de mensen**
-zorgen voor véél meer vertrouwen én betere afbeeldings-SEO.
+De product- en receptpagina's hebben al lokale afbeeldingen. De controle van 67 assortimentproducten vindt 67 unieke bestanden en unieke afbeeldingsbytes; alle productbeelden zijn minimaal 1200 pixels breed. De 37 receptbeelden en 18 blogkaartbeelden zijn eveneens uniek. Dit betekent niet dat alle foto's door Schaap's zelf zijn gemaakt: bron, licentie en voorbeeldstatus staan in `docs/afbeeldingsbronnen.md`.
+
+Voor de locatiepagina en het verhaal van de winkel ontbreken nog herkenbare foto's van Schaap's zelf. Op `/bezoek-ons` staan daarom expliciete fotovakken met “Eigen foto volgt”; ze doen zich niet voor als foto's van onze winkel of kramen. De schaalfoto's zijn voorbeeldbeelden en kunnen afwijken van wat de klant ontvangt.
 
 ## Hoe aanleveren
-- **Formaat:** liggend (landscape), minimaal **1200 × 800 px**, scherp, goed licht.
-- **Bestandstype:** JPG of PNG (wij zetten ze om naar WebP). Stuur het origineel.
-- **Daglicht** werkt het best; vermijd harde flits en gele kunstverlichting.
-- Lever ze aan via WhatsApp/e-mail; wij plaatsen ze in `/public/images/` en
-  koppelen ze aan de juiste plekken (assortiment, home, ons-verhaal, blog).
-- **Geen rechtenruis:** alleen eigen foto's (of met aantoonbare toestemming).
 
-## Prioriteitenlijst (van meest naar minst belangrijk)
+- Liggend formaat, liefst minimaal **1200 × 800 px**, scherp en bij daglicht.
+- Stuur het originele JPG- of PNG-bestand; we optimaliseren een lokale WebP-versie.
+- Maak de foto bij voorkeur met een telefoon op ooghoogte of schuin van boven; vermijd harde flits en tegenlicht.
+- Deel foto's via WhatsApp of e-mail en vermeld welke locatie of personen erop staan.
+- Gebruik alleen foto's waarvoor Schaap's de rechten heeft of toestemming heeft gekregen. Online voorbeeldfoto's blijven lokaal gehost; we bewaren bron en licentie in `docs/afbeeldingsbronnen.md`.
 
-| # | Onderwerp | Waarvoor | Sfeer / aanwijzing |
+## Prioriteiten
+
+| # | Foto | Waarvoor | Wat moet herkenbaar zijn |
 |---|---|---|---|
-| 1 | **Winkelpui Herenstraat 48** | home, bezoek-ons, OG-image | Gevel met naam in beeld; recht van voren, overdag |
-| 2 | **De toonbank met verse vis op ijs** | home, assortiment, ons-verhaal | Volle toonbank, kleurrijk, van schuin boven |
-| 3 | **Aldert ("Schaap") achter de toonbank** | ons-verhaal, home, blog | Portret/handeling, vriendelijk, in de winkel |
-| 4 | **Biologische Varlaks zalm (filet)** | varlaks, biologische-vis, home | Close-up verse zalmfilet, natuurlijke kleur |
-| 5 | **Kibbeling (vers gefrituurd)** | assortiment, home | Goudbruin, bakje of schaal, stoom mag |
-| 6 | **Hollandse Nieuwe haring / broodje haring** | assortiment, blog haring | Gevlinderd met ui, of broodje in de hand |
-| 7 | **Marktkraam in Leiden** | bezoek-ons, blog marktdag | Kraam op de Aalmarkt/Vismarkt, klanten erbij |
-| 8 | **Gerookte vis (zalm/makreel/bokking)** | assortiment, gerookte-vis | Plakken/hele vis, warme tinten |
-| 9 | **Schaal- & schelpdieren (garnalen, mosselen, oesters)** | assortiment | Vers, op ijs, close-up |
-| 10 | **Feestschotel / visplateau** | assortiment, bestellen | Opgemaakte schaal, bovenaanzicht |
+| 1 | Winkelgevel Herenstraat 48 | Homepage, Bezoek ons, delen van links | Schaap's naam/gevel en een stukje Herenstraat |
+| 2 | Toonbank met verse vis | Homepage, winkelpagina's | De eigen toonbank en het assortiment op ijs |
+| 3 | Team achter de toonbank | Ons verhaal, contact, blog | Echte medewerkers, tijdens het werk |
+| 4 | Zaterdagkraam bij De Waag | Bezoek ons, marktdagblog | De eigen kraam en de Waag/Aalmarkt |
+| 5 | Woensdagkraam in Leiden | Bezoek ons | De eigen kraam en herkenbare omgeving |
+| 6 | Vrijdagkraam bij Hoogvliet in Voorschoten | Bezoek ons, viswinkel Voorschoten | De eigen kraam op de parkeerplaats |
+| 7 | Eigen borrel-, familie- en feestschaal | Visschalen, blog | De schalen zoals Schaap's ze werkelijk samenstelt |
+| 8 | Eigen VÅRLAKS-zalm in de winkel | Biologische vis, assortiment | De eigen levering of toonbank; huidige leverancierfoto's zijn al lokaal aanwezig |
 
-## Per categorie minimaal één foto
-Voor de assortiment-pagina is het ideaal om per categorie minimaal één goede foto te
-hebben: **verse vis, gerookte vis, schaal- & schelpdieren, vissalades, bereid/snacks.**
-Losse productfoto's (per soort) zijn mooi meegenomen — geef per foto door om welk
-product het gaat, dan koppelen wij het.
+Product-, recept- en blogafbeeldingen zijn al aanwezig; losse vervangingsfoto's daarvoor zijn alleen nodig als er een betere echte foto beschikbaar is. Geef bij een nieuwe foto het product of de pagina door, zodat die niet per ongeluk als een ander product wordt getoond.
 
-## Tot die tijd
-De SVG-illustraties blijven staan en zien er netjes uit. Zodra een echte foto
-binnen is, vervangt die automatisch de illustratie op die plek.
+## Waar foto's worden gekoppeld
+
+Alle vaste fotoplekken staan in `src/lib/beeld.ts`. Zodra een winkel- of locatiebeeld is goedgekeurd en onder `public/images/` staat, krijgt het daar een eigen lokaal bestandspad en passende alt-tekst. De pagina gebruikt de foto dan automatisch; externe afbeeldingsservers worden niet rechtstreeks aangeroepen.

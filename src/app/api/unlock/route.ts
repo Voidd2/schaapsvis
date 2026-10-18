@@ -3,9 +3,13 @@ import { ACCESS_COOKIE, ACCESS_TOKEN } from "@/lib/siteAccess";
 
 // Het wachtwoord leeft alleen hier (server-side). Wijzig het zonder code aan te
 // passen via de environment variable SITE_PASSWORD in Vercel.
-const SITE_PASSWORD = process.env.SITE_PASSWORD ?? "Malaga5010";
+const SITE_PASSWORD = process.env.SITE_PASSWORD ?? "";
 
 export async function POST(request: Request) {
+  if (!SITE_PASSWORD || !ACCESS_TOKEN) {
+    return NextResponse.json({ fout: "Site-toegang is nog niet ingesteld." }, { status: 503 });
+  }
+
   const form = await request.formData();
   const password = String(form.get("password") ?? "");
 

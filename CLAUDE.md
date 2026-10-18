@@ -256,7 +256,7 @@ src/components/
 publiek doe je met één variabele in Vercel:
 
 ```
-SITE_PUBLIC = on
+SITE_PUBLIC = launch-approved
 ```
 
 Elke andere waarde — en niets invullen — houdt het slot erop. Dat is met opzet:

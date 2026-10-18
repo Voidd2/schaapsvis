@@ -2,7 +2,7 @@
 // Missing records are errors in the translation audit, never silent Dutch fallbacks.
 export const PRODUCT_TRANSLATIONS: Record<string, readonly [string, string, string, string]> = {
   kabeljauwfilet: ["Cod fillet", "Fresh cod fillet, carefully filleted and deboned. Ideal for frying, steaming or poaching.", "Kabeljaufilet", "Frisches, sorgfältig filetiertes und entgrätetes Kabeljaufilet. Ideal zum Braten, Dämpfen oder Pochieren."],
-  schol: ["Plaice", "North Sea plaice (Pleuronectes platessa), a classic Dutch flatfish. MSC-certified, sustainably caught.", "Scholle", "Nordseescholle (Pleuronectes platessa), ein klassischer niederländischer Plattfisch. MSC-zertifiziert und nachhaltig gefangen."],
+  schol: ["Plaice", "North Sea plaice (Pleuronectes platessa), a classic flatfish with firm, mild-tasting flesh.", "Scholle", "Nordseescholle (Pleuronectes platessa), ein klassischer Plattfisch mit festem, mildem Fleisch."],
   scholfilet: ["Plaice fillet", "Fresh, cleaned and deboned plaice fillet. Mild in flavour and delicious quickly fried in butter.", "Schollenfilet", "Frisches, gesäubertes und entgrätetes Schollenfilet. Mild im Geschmack und besonders lecker kurz in Butter gebraten."],
   zeebaars: ["Sea bass", "European sea bass (Dicentrarchus labrax), whole or filleted. Firm white flesh with a rich flavour, excellent grilled.", "Wolfsbarsch", "Europäischer Wolfsbarsch (Dicentrarchus labrax), ganz oder filetiert. Festes, weißes Fleisch mit kräftigem Geschmack, ideal zum Grillen."],
   zeebaarsfilet: ["Sea bass fillet", "Fresh sea bass fillet. Delicious pan-fried skin-side down with olive oil and lemon.", "Wolfsbarschfilet", "Frisches Wolfsbarschfilet. Besonders lecker auf der Haut gebraten, mit Olivenöl und Zitrone."],

@@ -15,7 +15,7 @@ export const openingHours: Record<Location, OpeningHour[]> = {
     { days: [6], open: "09:00", close: "17:00" }, // za
   ],
   markt: [
-    { days: [3], open: "08:30", close: "17:00" }, // wo — bij Dille & Camille
+    { days: [3], open: "08:30", close: "17:00" }, // wo — bij Dille & Kamille
     { days: [6], open: "08:30", close: "17:00" }, // za — Aalmarkt bij de Waag
   ],
   voorschoten: [

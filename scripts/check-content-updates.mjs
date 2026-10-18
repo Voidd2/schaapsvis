@@ -16,6 +16,14 @@ function photos(html) {
   });
 }
 for (const locale of ['nl', 'en', 'de']) {
+  const student = await page(`/${locale}/studentenkorting`);
+  const studentRules = {
+    nl: ['10% studentenkorting op kibbeling, haring, broodjes haring en drinken', 'Middelbare scholieren vallen buiten deze actie', 'E-maildeals zijn optioneel', 'Maak een account'],
+    en: ['10% off kibbeling, herring, herring sandwiches and drinks', 'Secondary-school pupils are not eligible', 'Email offers are optional', 'Create an account'],
+    de: ['10 % Rabatt auf Kibbeling, Hering, Heringsbrötchen und Getränke', 'Schülerinnen und Schüler der weiterführenden Schule sind ausgeschlossen', 'E-Mail-Angebote sind freiwillig', 'Erstellen Sie ein Konto'],
+  }[locale];
+  for (const rule of studentRules) assert(student.main.includes(rule), `${locale}: student-discount page is translated and states ${rule}`);
+  assert(student.main.includes(`href="/${locale}/account"`), `${locale}: student-discount page links to account application`);
   const assortment = await page(`/${locale}/assortiment`);
   assert(!assortment.main.includes(`/assortiment/koolvis`), `${locale}: removed koolvis product still listed`);
   assert(assortment.main.includes('id="barbecue-gourmet"'), `${locale}: BBQ and gourmet catalogue missing`);
@@ -23,6 +31,8 @@ for (const locale of ['nl', 'en', 'de']) {
   const removedProduct = await fetch(`${origin}/${locale}/assortiment/koolvis`, {redirect: 'manual'});
   assert(removedProduct.status === 308 && new URL(removedProduct.headers.get('location'), origin).pathname === `/${locale}/assortiment`, `${locale}: removed koolvis URL should redirect to assortment`);
   const locations = await page(`/${locale}/bezoek-ons`);
+  const locationPhotoSlots = [...locations.main.matchAll(/data-photo-placeholder="([^"]+)"/g)].map(([, name]) => name);
+  assert(JSON.stringify(locationPhotoSlots.sort()) === JSON.stringify(['marktVoorschoten', 'marktWoensdag', 'marktZaterdag', 'winkelGevel'].sort()), `${locale}: all four real location-photo slots are prepared and clearly marked`);
   assert(locations.main.includes('De+Waag+Aalmarkt+Leiden'), `${locale}: Saturday location should link to De Waag`);
   assert(locations.main.includes('Dille+%26+Kamille+Botermarkt+10+Leiden'), `${locale}: Wednesday location should use shared Maps link`);
   assert(!locations.main.includes('Haarlemmerstraat'), `${locale}: stale Maps destination on locations page`);
@@ -38,6 +48,10 @@ for (const locale of ['nl', 'en', 'de']) {
   assert((platters.main.match(/<figcaption/g) || []).length >= 20, `${locale}: example captions missing`);
   assert(!platters.main.includes('www.dirksvishandel.nl'), `${locale}: competitor URL exposed in page`);
   const bio = await page(`/${locale}/biologische-vis`);
+  const bioPhotos = photos(bio.main);
+  for (const image of ['/images/varlaks/from-egg-to-plate-2.jpg.webp', '/images/varlaks/from-egg-to-plate-3.jpg.webp', '/images/varlaks/from-egg-to-plate-4.jpg.webp', '/images/producten-hd/hollandse-garnalen.webp']) {
+    assert(bioPhotos.includes(image), `${locale}: missing locally hosted BIO/ASC/MSC image ${image}`);
+  }
   assert(!/href="[^"\s]*\/visschalen/.test(bio.main), `${locale}: unrelated platter link on organic page`);
   assert(bio.main.includes('MSC') && bio.main.includes('/assortiment/hollandse-garnalen'), `${locale}: MSC shrimp missing`);
   assert(bio.main.includes('VÅRLAKS'), `${locale}: salmon story missing`);
@@ -45,6 +59,7 @@ for (const locale of ['nl', 'en', 'de']) {
 const blog = await page('/nl/blog');
 const sitemap = await page('/sitemap.xml');
 assert(!sitemap.html.includes('/assortiment/koolvis'), 'Removed koolvis product in sitemap');
+for (const locale of ['nl', 'en', 'de']) assert(sitemap.html.includes(`https://www.schaapsvishandel.nl/${locale}/studentenkorting`), `${locale}: student-discount landing page is indexed in sitemap`);
 const gravlaks = await page('/nl/recepten/gravlaks');
 assert(gravlaks.main.includes('gravlaks regelmatig kant-en-klaar in de winkel'), 'Gravlaks: regular shop availability');
 assert(!/vraag expliciet|Bespreek vooraf|vraag vooraf naar geschikte|Begin alleen met vis/.test(gravlaks.main), 'Gravlaks: suitability questions removed');

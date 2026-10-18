@@ -43,14 +43,15 @@ for(const p of products)for(const l of ['nl','en','de']){
 assert.equal(products.find(p=>p.slug==='inktvis').beschikbaar,'request');
 assert.match(products.find(p=>p.slug==='kibbeling').desc,/pollak/i);
 assert.match(products.find(p=>p.slug==='lekkerbek').desc,/heek/i);
-const origin=process.argv[2];let removedRoutes=0,activePages=0,redirects=0;
+const origin=process.argv[2];let removedRoutes=0,activePages=0,redirects=0,productPagesWithRecipeIndex=0,productRecipeLinks=0;const linkedRecipeSlugs=new Set(),recipeSlugs=new Set(recipes.map(r=>r.slug));
 if(origin){
  const sitemap=await(await fetch(origin+'/sitemap.xml')).text();
  const tasks=['nl','en','de'].flatMap(l=>[
   ...decisions.removed.map(slug=>({l,slug,removed:true})),
   ...products.map(p=>({l,slug:p.slug,product:p}))
  ]);
- await Promise.all(Array.from({length:5},async()=>{
+ const concurrency=/^http:\/\/(localhost|127\.0\.0\.1):/.test(origin)?1:5;
+ await Promise.all(Array.from({length:concurrency},async()=>{
   while(tasks.length){
    const task=tasks.shift(),url=origin+'/'+task.l+'/assortiment/'+task.slug;
    const r=await fetch(url,{redirect:'manual'});
@@ -68,8 +69,13 @@ if(origin){
    for(const tag of imgTags)assert.ok(!/src="https?:\/\/(?!www\.schaapsvishandel\.nl)/.test(tag),'External image server '+url);
    assert.ok(!/href="[^"]*(?:hartevelt|visarend|visenmaatjes)/i.test(main),'Competitor link '+url);
    assert.ok(!/href="\/[^"]*\/bestellen/.test(main),'No ordinary product checkout '+url);
+   const recipeIndexHref='/'+task.l+'/recepten';
+   const hrefs=[...main.matchAll(/href="([^"]+)"/g)].map(match=>match[1]);
+   assert.ok(hrefs.includes(recipeIndexHref),'Recipe index link '+url);productPagesWithRecipeIndex++;
+   for(const href of hrefs){const match=href.match(new RegExp('^/'+task.l+'/recepten/([^/?#]+)$'));if(!match)continue;assert.ok(recipeSlugs.has(match[1]),'Linked recipe exists '+url+' -> '+match[1]);linkedRecipeSlugs.add(task.l+'/'+match[1]);productRecipeLinks++;}
    activePages++;
   }
  }));
+ for(const target of linkedRecipeSlugs){const [locale,slug]=target.split('/');const response=await fetch(`${origin}/${locale}/recepten/${slug}`);assert.equal(response.status,200,'Linked recipe route '+target);await response.text();}
 }
-console.log(JSON.stringify({products:products.length,removedOrMerged:decisions.removed.length,added:decisions.added.length,availabilityRules:Object.keys(decisions.availability).length,recipes:recipes.length,allPhotosSelfHosted:true,removedRoutes,redirects,activePages,ordersSent:0,messagesSent:0,failures:0}));
+console.log(JSON.stringify({products:products.length,removedOrMerged:decisions.removed.length,added:decisions.added.length,availabilityRules:Object.keys(decisions.availability).length,recipes:recipes.length,allPhotosSelfHosted:true,removedRoutes,redirects,activePages,productPagesWithRecipeIndex,productRecipeLinks,linkedRecipeRoutes:linkedRecipeSlugs.size,ordersSent:0,messagesSent:0,failures:0}));

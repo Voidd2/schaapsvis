@@ -56,7 +56,7 @@ export function Kortingsbon({ code, bon }: { code: string; bon: KortingsCampagne
   const tijd = `${String(mm).padStart(2, "0")}:${String(ss).padStart(2, "0")}`;
 
   return (
-    <main
+    <div
       className="min-h-screen flex items-center justify-center px-6 py-16"
       style={{ backgroundColor: "var(--navy)", color: "var(--cream)" }}
     >
@@ -145,6 +145,6 @@ export function Kortingsbon({ code, bon }: { code: string; bon: KortingsCampagne
           </div>
         )}
       </div>
-    </main>
+    </div>
   );
 }

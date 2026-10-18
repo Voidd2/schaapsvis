@@ -16,7 +16,8 @@ if (!robots.includes('Sitemap:') || /Disallow: \/\s*(?:\n|$)/.test(robots)) fail
 const links = new Set();
 const queue = [...paths];
 let pagesChecked = 0, dishSchemas = 0;
-await Promise.all(Array.from({length: 6}, async () => {
+const concurrency=/^http:\/\/(localhost|127\.0\.0\.1):/.test(origin)?1:6;
+await Promise.all(Array.from({length: concurrency}, async () => {
   while (queue.length) {
     const path = queue.shift();
     const response = await fetch(origin + path);
@@ -63,7 +64,7 @@ await Promise.all(Array.from({length: 6}, async () => {
   }
 }));
 const linkQueue = [...links];
-await Promise.all(Array.from({length: 6}, async () => {
+await Promise.all(Array.from({length: concurrency}, async () => {
   while (linkQueue.length) {
     const path = linkQueue.shift();
     const response = await fetch(origin + path);

@@ -1,0 +1,57 @@
+{
+  "name": "schaapsvis-members",
+  "main": "src/index.mjs",
+  "compatibility_date": "2026-10-17",
+  "limits": { "cpu_ms": 30000 },
+  "workers_dev": false,
+  "triggers": { "crons": ["* * * * *"] },
+  "vars": {
+    "MEMBERS_ENABLED": "off",
+    "SITE_ORIGIN": "https://www.schaapsvishandel.nl",
+    "MAIL_FROM": "noreply@schaapsvishandel.nl",
+  },
+  // D1 staat per omgeving in de EU. De private R2-bucket en beheerder moeten
+  // nog worden ingesteld voordat de Worker veilig kan worden gedeployed.
+  "env": {
+    "preview": {
+      "name": "schaapsvis-members-preview",
+      "routes": [
+        { "pattern": "preview.schaapsvishandel.nl/api/members/*", "zone_name": "schaapsvishandel.nl" }
+      ],
+      "vars": {
+        "MEMBERS_ENABLED": "off",
+        "SITE_ORIGIN": "https://preview.schaapsvishandel.nl",
+        "MAIL_FROM": "noreply@schaapsvishandel.nl",
+      },
+      "d1_databases": [
+        { "binding": "DB", "database_name": "schaapsvis-members-preview", "database_id": "5f14693e-31bc-43d7-a49b-367c57a4b7f0", "migrations_dir": "../../migrations" }
+      ],
+      "r2_buckets": [
+        { "binding": "STUDENT_PROOFS", "bucket_name": "schaapsvis-student-proofs-preview", "jurisdiction": "eu" }
+      ],
+      "send_email": [
+        { "name": "EMAIL", "remote": true, "allowed_sender_addresses": ["noreply@schaapsvishandel.nl"] }
+      ]
+    },
+    "production": {
+      "name": "schaapsvis-members",
+      "routes": [
+        { "pattern": "www.schaapsvishandel.nl/api/members/*", "zone_name": "schaapsvishandel.nl" }
+      ],
+      "vars": {
+        "MEMBERS_ENABLED": "off",
+        "SITE_ORIGIN": "https://www.schaapsvishandel.nl",
+        "MAIL_FROM": "noreply@schaapsvishandel.nl",
+      },
+      "d1_databases": [
+        { "binding": "DB", "database_name": "schaapsvis-members", "database_id": "3e33d6ab-1ac5-430a-87e2-0ad7ef4702ad", "migrations_dir": "../../migrations" }
+      ],
+      "r2_buckets": [
+        { "binding": "STUDENT_PROOFS", "bucket_name": "schaapsvis-student-proofs", "jurisdiction": "eu" }
+      ],
+      "send_email": [
+        { "name": "EMAIL", "remote": true, "allowed_sender_addresses": ["noreply@schaapsvishandel.nl"] }
+      ]
+    }
+  }
+}

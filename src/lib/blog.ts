@@ -218,10 +218,10 @@ const bestaandePosts: BlogPost[] = [
     gerelateerdeRecepten: ["varlaks-uit-de-oven"],
     gerelateerdeLinks: [
       { label: "Het volledige Varlaks-verhaal", href: "/varlaks" },
-      { label: "Lees meer over biologische vis", href: "/biologische-vis" },
+      { label: "Lees meer over viskeurmerken", href: "/biologische-vis" },
     ],
     seoKeywords:
-      "wilde zalm vs kweekzalm, kweekzalm gezond, varlaks zalm, biologische zalm leiden, beste zalm kopen, zalm zonder antibiotica",
+      "wilde zalm vs kweekzalm, kweekzalm kwaliteit, varlaks zalm, zalm kopen leiden, ASC zalm Noorwegen",
   },
   {
     slug: "waarom-staat-makreel-op-rood",
@@ -401,110 +401,106 @@ const bestaandePosts: BlogPost[] = [
     slug: "waar-koop-je-biologische-vis-in-leiden",
     title: "Waar koop je biologische vis in Leiden?",
     excerpt:
-      "Biologische vis is in Leiden verrassend lastig te vinden. Wij leggen uit wat biologische vis precies is, waar je op moet letten, en waar je in Leiden écht biologische zalm en vis koopt.",
+      "Zoekt u biologische vis in Leiden? Lees hoe u een echt BIO-keurmerk herkent, wat ASC en MSC betekenen en welke certificering bij onze actuele producten hoort.",
     datum: "2026-06-15",
     datumLabel: "15 juni 2026",
     leestijd: "5 min",
     categorie: "Duurzaam",
     fotoUrl: "/images/scene-zalm.svg",
-    fotoAlt: "Biologische Varlaks zalm bij Schaap's Vishandel in Leiden",
+    fotoAlt: "Zalm als serveersuggestie; controleer het keurmerk op de verpakking van het product",
     secties: [
       {
         alineas: [
-          "Steeds meer Leidenaren willen bewuster eten: biologische groente, scharreleieren, en — terecht — ook biologische vis. Maar waar koop je die eigenlijk in Leiden? In de supermarkt is het aanbod beperkt en vaak onduidelijk, en lang niet elke visboer kan écht biologische vis leveren. Tijd om het uit te leggen.",
+          "Zoekt u biologische vis in Leiden? Let dan niet alleen op een verhaal over herkomst of duurzame kweek, maar op de biologische certificering van het concrete product. BIO, ASC en MSC zijn verschillende aanduidingen.",
         ],
       },
       {
         kop: "Wat is biologische vis precies?",
         alineas: [
-          "Belangrijk om te weten: biologische vis komt altijd uit gecertificeerde kweek. Wilde vis kan per definitie niet biologisch zijn — je kunt nu eenmaal niet controleren wat een wilde vis eet of hoe hij leeft. Voor het EU-biologisch keurmerk gelden strenge eisen, in Nederland gecontroleerd door Skal: biologisch voer, lage bezettingsdichtheid, geen preventieve antibiotica, geen synthetische kleurstoffen en aantoonbaar dierenwelzijn.",
-          "Wilde vis kán wel duurzaam zijn — let dan op het MSC-keurmerk en de VISwijzer. Kortom: biologisch staat voor verantwoorde kweek, MSC voor duurzame wildvangst. Allebei goede keuzes, maar het is niet hetzelfde.",
+          "Voor vis mag de term biologisch alleen worden gebruikt wanneer de aquacultuur en het product aan de biologische regels voldoen en daarvoor zijn gecertificeerd. Controleer het EU-biologo en de certificeringsgegevens op het etiket. De Europese regels beschrijven ook eisen voor voer, dierenwelzijn en bedrijfsvoering.",
+          "ASC is een keurmerk voor verantwoorde aquacultuur. MSC gaat over duurzame wildvangst en traceerbaarheid. Geen van beide vervangt een biologische certificering. Vraag de viswinkel om de informatie die bij de actuele levering hoort.",
         ],
       },
       {
-        kop: "Biologische zalm in Leiden: Varlaks",
+        kop: "VÅRLAKS-zalm en ASC",
         alineas: [
-          "Onze biologische Varlaks zalm komt uit de Skjerstadfjorden in Noord-Noorwegen, boven de poolcirkel bij Bodø. Hij wordt gekweekt door twee familieboerderijen op lage bezettingsdichtheid, is ASC én EU-biologisch gecertificeerd, en groeit op zonder antibiotica, hormonen of GMO. De roze kleur komt niet van synthetische kleurstof maar van natuurlijke astaxanthine (Panaferd-AX).",
-          "Daarmee is Schaap's Vishandel een van de weinige plekken in Leiden waar je echte biologische zalm koopt — vers uit de toonbank, niet uit een vacuümverpakking in het schap.",
+          "VÅRLAKS vermeldt dat zijn zalm ASC-gecertificeerd is en afkomstig is van familiebedrijven in Noord-Noorwegen. ASC staat voor verantwoorde aquacultuur; het is niet hetzelfde als biologische certificering.",
+          "Wij noemen deze zalm daarom niet biologisch zonder bewijs dat de specifieke levering ook een biologische certificering draagt. Vraag ons naar de actuele herkomst, beschikbaarheid en informatie op de verpakking.",
         ],
       },
       {
         kop: "En de rest van het assortiment?",
         alineas: [
-          "Naast de biologische Varlaks zalm werken we met MSC-gecertificeerde wildvangst (zoals Hollandse garnalen en schol) en ASC-gecertificeerde kweekvis. Op onze biologische-vis-pagina laten we per product eerlijk de herkomst en de VISwijzer-status zien — ook als die oranje of rood is. Want eerlijk zijn over wat je verkoopt, hoort er wat ons betreft gewoon bij.",
+          "Onze Hollandse garnalen dragen het MSC-keurmerk; VÅRLAKS vermeldt ASC-certificering voor zijn zalm. Een keurmerk geldt alleen voor het product en de levering waarop het is vermeld. Vraag ons wat er op dit moment beschikbaar is en welke informatie bij de verpakking hoort.",
         ],
       },
       {
         kop: "Waar te koop in Leiden",
         alineas: [
-          "U vindt ons in de winkel aan de Herenstraat 48 (maandag t/m zaterdag), op de markt in Leiden — woensdag bij de Vismarkt aan de Nieuwe Rijn en zaterdag op de Aalmarkt voor de Waag — en op vrijdag bij Hoogvliet in Voorschoten. Vraag gerust naar de biologische zalm; we vertellen u er graag alles over. Bestel vooruit via WhatsApp of bel +31 6 2481 1678, dan zetten we het voor u klaar.",
+          "U vindt ons in de winkel aan de Herenstraat 48, op de markt in Leiden en op vrijdag bij Hoogvliet in Voorschoten. Bekijk de actuele openingstijden en routes op onze locatiepagina. Vraag ons in de winkel of via WhatsApp naar productinformatie en beschikbaarheid; een bericht is geen bevestigde bestelling.",
         ],
       },
     ],
     gerelateerdeLinks: [
-      { label: "Alles over onze biologische vis", href: "/biologische-vis" },
-      { label: "Biologische Varlaks zalm", href: "/varlaks" },
+      { label: "BIO, ASC en MSC uitgelegd", href: "/biologische-vis" },
+      { label: "Meer over VÅRLAKS-zalm", href: "/varlaks" },
       { label: "Bekijk het assortiment", href: "/assortiment" },
     ],
     seoKeywords:
-      "biologische vis leiden, biologische zalm leiden, bio vis leiden, duurzame vis leiden, varlaks zalm leiden, waar biologische vis kopen leiden",
+      "biologische vis leiden, biologische vis kopen leiden, bio keurmerk vis, ASC keurmerk zalm, MSC hollandse garnalen, varlaks zalm leiden",
   },
   {
     slug: "wat-betekenen-msc-asc-en-het-eu-bio-logo",
-    title: "MSC, ASC en het EU-biologisch logo: wat betekenen die keurmerken?",
+    title: "BIO, ASC en MSC: wat betekenen de keurmerken op vis?",
     excerpt:
-      "Aan de toonbank wijzen klanten vaak naar een sticker op de verpakking: wat betekent dat logo nou eigenlijk? MSC, ASC en het groene EU-bio blaadje beloven alle drie iets anders. We leggen het rustig uit.",
+      "BIO, ASC en MSC staan voor verschillende standaarden. Lees wat ze betekenen en hoe u controleert of een keurmerk bij de vis en verpakking hoort.",
     datum: "2026-06-10",
     datumLabel: "10 juni 2026",
     leestijd: "5 min",
     categorie: "Duurzaam",
     fotoUrl: "/images/scene-vis.svg",
-    fotoAlt: "Verse vis op ijs in de toonbank van Schaap's Vishandel Leiden",
+    fotoAlt: "Verse vis in de toonbank; keurmerken moeten bij het specifieke product horen",
     secties: [
       {
         alineas: [
-          "Aan onze toonbank wijzen klanten regelmatig naar een sticker op de verpakking: 'Wat betekent dat blauwe logo eigenlijk?' Of ze vragen of onze zalm 'echt biologisch' is. Goede vragen, want de wereld van viskeurmerken zit vol afkortingen. MSC, ASC, EU-biologisch: drie logo's die u steeds vaker tegenkomt, en die alle drie iets anders beloven. Tijd om ze eens rustig uit elkaar te trekken.",
+          "Aan de toonbank vragen klanten soms wat een keurmerk op een verpakking betekent. BIO, ASC en MSC staan voor verschillende standaarden. Kijk steeds naar het keurmerk en de certificeringsinformatie van het specifieke product; een leveranciersverhaal alleen is geen productcertificaat.",
         ],
       },
       {
         kop: "MSC — duurzame wildvangst",
         alineas: [
-          "MSC staat voor Marine Stewardship Council, en dit blauwe logo gaat over wilde vis die met een net of een lijn uit zee wordt gehaald. Een visserij mag het MSC-keurmerk alleen dragen als het visbestand gezond is, de vangstmethode de zeebodem en andere dieren zo min mogelijk schaadt, en de visserij goed wordt beheerd. Denk bij ons bijvoorbeeld aan de Hollandse garnalen.",
-          "Het draait bij MSC dus om de vraag: kunnen we deze vissoort blijven vangen zonder de zee uit te putten? Een onafhankelijke controleur beoordeelt dat, en de certificering wordt periodiek opnieuw tegen het licht gehouden. Een blauw MSC-logo betekent kortom: verantwoord gevangen wilde vis.",
+          "MSC is een keurmerk voor duurzame wildvangst en traceerbaarheid. Onze Hollandse garnalen dragen volgens de productinformatie het MSC-keurmerk; controleer bij aankoop de actuele verpakking en vraag ons gerust om toelichting.",
         ],
       },
       {
         kop: "ASC — verantwoorde kweek",
         alineas: [
-          "ASC is het zusje van MSC, maar dan voor gekweekte vis: de Aquaculture Stewardship Council. Zalm, garnalen, pangasius en tilapia komen vaak uit kwekerijen, en ASC stelt eisen aan hoe die kwekerij werkt. Denk aan schoon water, controle op ziektes en medicijngebruik, verantwoord visvoer en goede arbeidsomstandigheden voor de mensen die er werken.",
-          "ASC zegt dus iets over de manier van kweken, maar het is niet hetzelfde als 'biologisch'. Een ASC-kwekerij is netter en beter gecontroleerd dan een doorsnee kwekerij, maar de eisen gaan minder ver dan die van het biologische keurmerk. Onze Varlaks zalm is bijvoorbeeld ASC-gecertificeerd én biologisch, dat kan prima samen.",
+          "ASC, de Aquaculture Stewardship Council, is een keurmerk voor verantwoorde aquacultuur. VÅRLAKS vermeldt ASC-certificering voor zijn zalm. ASC is niet hetzelfde als biologische certificering; controleer voor de actuele levering het productetiket en de bijbehorende documentatie.",
         ],
       },
       {
         kop: "EU-biologisch — gecontroleerd door Skal",
         alineas: [
-          "Het groene blaadje van het EU-biologisch logo is de strengste van de drie. Biologische vis komt altijd uit kweek, en in Nederland controleert de organisatie Skal of een kwekerij zich aan de biologische regels houdt. Die regels zijn fors: biologisch visvoer, een lage bezettingsdichtheid (dus meer ruimte en minder stress per vis), geen preventieve antibiotica, en geen synthetische kleurstoffen of andere kunstmatige toevoegingen.",
-          "Dat laatste hoort u ons vaker zeggen bij de zalm: goedkope kweekzalm dankt zijn roze kleur soms aan een kleurstof uit de fabriek, terwijl die kleur bij biologische zalm uit een natuurlijke bron moet komen. Biologisch gaat dus een stap verder dan ASC: het is verantwoorde kweek plús strikte eisen aan voer, dierenwelzijn en toevoegingen.",
+          "Voor biologische aquacultuur gelden EU-productieregels. Een producent mag het EU-biologo en de term biologisch gebruiken wanneer de activiteit volgens die regels is gecertificeerd. Kijk dus naar het logo en de certificeringsinformatie van het product en trek geen conclusies op basis van kleur, smaak of een algemene herkomstbeschrijving.",
         ],
       },
       {
         kop: "Waarom wilde vis nooit 'biologisch' is",
         alineas: [
-          "Een misverstand dat we vaak tegenkomen: 'die wilde kabeljauw is toch het meest natuurlijk, dus biologisch?' Logisch geredeneerd, maar zo werkt het keurmerk niet. Biologisch draait om controleerbare kweek: wat de vis eet, hoeveel ruimte hij heeft, welke middelen wel of niet gebruikt worden. Bij een wilde vis in de open zee kunt u dat allemaal niet controleren, dus kan hij per definitie geen biologisch logo dragen.",
-          "Wilde vis kán wel heel duurzaam zijn, en daarvoor kijkt u juist naar MSC. Kortom: biologisch is er voor kweek, MSC voor wildvangst. Twee verschillende vragen, twee verschillende logo's.",
+          "Wilde vis en gekweekte vis vallen onder verschillende vormen van productie. MSC beoordeelt gecertificeerde wildvisserijen; EU-biologische regels voor vis gelden onder meer voor aquacultuur. Dat zijn andere vragen en verschillende keurmerken.",
         ],
       },
       {
         kop: "Zelf checken: de VISwijzer",
         alineas: [
-          "Wilt u het per vissoort en vangstmethode precies weten, dan is de Nederlandse VISwijzer (goodfish.nl) een fijn hulpmiddel. Met een simpel groen-oranje-rood systeem laat die zien hoe een bepaalde vis ervoor staat. Wij gebruiken diezelfde bron en zijn er eerlijk over, ook als een vis op oranje of rood staat.",
-          "Loopt u er niet uit? Vraag het gewoon aan de toonbank. We leggen graag uit waar een vis vandaan komt en welk keurmerk erop zit. En wilt u zeker weten dat u biologisch koopt: onze Varlaks zalm is ASC én EU-biologisch gecertificeerd.",
+          "Wilt u een product beoordelen? Kijk op de verpakking naar het keurmerk, de productnaam, certificaat- of licentienummer en herkomst. Vraag de viswinkel om actuele informatie als iets niet duidelijk is.",
+          "Bij Schaap's Vishandel vermelden we voor VÅRLAKS-zalm ASC (volgens de leverancier) en voor Hollandse garnalen MSC. We noemen een product alleen biologisch als de actuele levering aantoonbaar biologisch gecertificeerd is.",
         ],
       },
     ],
     gerelateerdeLinks: [
-      { label: "Alles over onze biologische vis", href: "/biologische-vis" },
-      { label: "Biologische Varlaks zalm", href: "/varlaks" },
+      { label: "BIO, ASC en MSC uitgelegd", href: "/biologische-vis" },
+      { label: "Meer over VÅRLAKS-zalm", href: "/varlaks" },
       { label: "Bekijk het assortiment", href: "/assortiment" },
     ],
     seoKeywords:
@@ -514,17 +510,17 @@ const bestaandePosts: BlogPost[] = [
     slug: "is-biologische-zalm-gezonder-omega-3",
     title: "Is biologische zalm gezonder? Wat u moet weten over omega-3",
     excerpt:
-      "Is de biologische zalm van Schaap's nou ook gezonder? Het eerlijke antwoord is genuanceerder dan een simpel ja of nee. Over omega-3, en over wat er vooral níet in zit.",
+      "Is biologische zalm gezonder? Lees wat keurmerken zeggen, wat omega-3 is en waarom productinformatie geen persoonlijk gezondheidsadvies vervangt.",
     datum: "2026-06-12",
     datumLabel: "12 juni 2026",
     leestijd: "5 min",
     categorie: "Visweetjes",
     fotoUrl: "/images/scene-zalm.svg",
-    fotoAlt: "Biologische Varlaks zalmfilet bij Schaap's Vishandel Leiden",
+    fotoAlt: "Zalm met groenten uit de oven als receptinspiratie",
     secties: [
       {
         alineas: [
-          "'Is die biologische zalm van jullie nou ook gezonder?' Het is een vraag die we graag krijgen, maar het eerlijke antwoord is genuanceerder dan een simpel ja of nee. Zalm is sowieso een gezonde vis, en het grootste verschil tussen gewone en biologische zalm zit niet zozeer in wat erin zit, maar juist in wat er níet in zit. Laten we het uit elkaar halen.",
+          "Een biologisch keurmerk beschrijft productiemethoden; het is op zichzelf geen belofte dat een product voor iedere persoon gezonder is. Ook voedingswaarden kunnen verschillen per soort, product en bereiding. In dit artikel houden we die onderwerpen uit elkaar.",
         ],
       },
       {
@@ -544,31 +540,29 @@ const bestaandePosts: BlogPost[] = [
       {
         kop: "Het verschil zit in wat er níet in zit",
         alineas: [
-          "Waar biologische zalm zich onderscheidt, is niet per se een hoger omega-3-gehalte, maar de manier van kweken. Bij onze biologische Varlaks zalm betekent dat: geen preventieve antibiotica, geen genetisch gemodificeerd (GMO) voer, en geen synthetische astaxanthine.",
-          "Dat laatste verdient uitleg. Astaxanthine is het stofje dat zalm zijn roze kleur geeft. In de natuur haalt zalm het uit zijn voedsel; bij goedkope kweek wordt vaak een synthetische, in de fabriek gemaakte variant aan het voer toegevoegd. Varlaks gebruikt in plaats daarvan natuurlijke astaxanthine, bekend onder de naam Panaferd-AX. De kleur komt dus uit een natuurlijke bron, niet uit een kleurpotje.",
+          "Een keurmerk zoals EU-biologisch of ASC gaat over standaarden voor productie. Het vertelt niet automatisch hoeveel omega-3 een bepaalde portie bevat. Daarvoor zijn voedingswaardes van het concrete product nodig.",
         ],
       },
       {
         kop: "Dus: is het gezonder?",
         alineas: [
-          "Het eerlijke antwoord: biologische zalm is niet automatisch een 'gezondere' zalm met méér omega-3. Dat kunnen en willen we niet beloven. Wat u wél krijgt, is zalm die is opgegroeid met meer ruimte, biologisch voer en zonder de synthetische toevoegingen die bij industriële kweek soms om de hoek komen kijken. Voor veel van onze klanten is dat precies de reden om ervoor te kiezen.",
-          "Zie het zo: de omega-3 krijgt u bij elke vette vis. De biologische keuze gaat vooral over hóe de vis geleefd heeft en wat er níet aan is toegevoegd.",
+          "Een certificering beschrijft hoe een product is geproduceerd volgens de bijbehorende standaard. Het is verstandig om daar geen medische of persoonlijke gezondheidsconclusies aan te verbinden zonder bewijs voor dat specifieke product.",
         ],
       },
       {
         kop: "Wekelijks vis, gewoon lekker",
         alineas: [
-          "Wilt u vaker vette vis eten, wissel dan gerust af: de ene week zalm, de andere week makreel of haring. Zo houdt u het gevarieerd én lekker. Onze biologische Varlaks zalm ligt vers in de toonbank aan de Herenstraat, en we snijden hem op maat, voor de oven, de pan of rauw voor een tartaar.",
-          "Meer weten over waar onze zalm precies vandaan komt? Lees het volledige verhaal op de Varlaks-pagina, of vraag het gewoon even aan de toonbank.",
+          "Wilt u zalm kopen? Vraag ons naar de actuele aanvoer, herkomst en certificering. VÅRLAKS vermeldt ASC-certificering voor zijn zalm; we controleren productinformatie per levering.",
+          "Voor persoonlijke voedingsvragen kunt u terecht bij een diëtist of zorgprofessional. Voor bereiding en beschikbaarheid helpen wij u graag aan de toonbank.",
         ],
       },
     ],
     gerelateerdeLinks: [
       { label: "Het volledige Varlaks-verhaal", href: "/varlaks" },
-      { label: "Lees meer over biologische vis", href: "/biologische-vis" },
+      { label: "Lees meer over viskeurmerken", href: "/biologische-vis" },
     ],
     seoKeywords:
-      "biologische zalm gezonder, zalm omega 3, omega 3 vette vis, varlaks zalm gezond, natuurlijke astaxanthine, zalm zonder antibiotica, gezondheidsraad wekelijks vis",
+      "is biologische zalm gezonder, zalm omega 3, omega 3 vette vis, viskeurmerk uitleg, voedingswaarde zalm",
   },
   {
     slug: "verse-vis-bewaren-en-bereiden-tips",

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 // Read-only responsive smoke check; screenshots are local build artefacts.
 const {chromium}=require('playwright');
 const assert=require('node:assert/strict');

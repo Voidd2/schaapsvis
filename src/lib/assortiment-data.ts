@@ -56,9 +56,8 @@ export const products: Product[] = [
   {
     "slug": "schol",
     "naam": "Schol",
-    "desc": "Hollandse schol (Pleuronectes platessa), een platvis die bij uitstek thuishoort in onze Noordzee. MSC-gecertificeerd — duurzaam gevangen.",
+    "desc": "Hollandse schol (Pleuronectes platessa), een Noordzeeplatvis met stevig, mild smakend vlees.",
     "categorie": "verse-vis",
-    "badge": "MSC",
     "ingredienten": "Schol (Pleuronectes platessa) [VIS]. Geen toegevoegde stoffen.",
     "bevat": [
       "VIS"
@@ -70,7 +69,6 @@ export const products: Product[] = [
     "naam": "Scholfilet",
     "desc": "Verse scholfilet, ontgraat en schoongemaakt. Licht van smaak, perfect om snel te bakken in boter.",
     "categorie": "verse-vis",
-    "badge": "MSC",
     "ingredienten": "Schol (Pleuronectes platessa) [VIS]. Geen toegevoegde stoffen.",
     "bevat": [
       "VIS"
@@ -965,10 +963,6 @@ const SEIZOEN_MAP: Record<string, string> = {
 
 // Korte VISwijzer-/duurzaamheidsnotitie — alleen INDIEN VAN TOEPASSING.
 const VISWIJZER_MAP: Record<string, string> = {
-  schol: "MSC-gecertificeerd. Vraag naar het actuele VISwijzer-advies en de levering.",
-  scholfilet: "MSC-gecertificeerd. Vraag naar het actuele VISwijzer-advies en de levering.",
-  heek: "MSC-gecertificeerd — verantwoord gevangen.",
-  heekfilet: "MSC-gecertificeerd — verantwoord gevangen.",
   "hollandse-garnalen": "MSC-gecertificeerd sinds 2017 — verantwoord gevangen aan de Waddenkust.",
   "varlaks-zalm": "Vraag naar de actuele herkomst en productcertificering. BIO en ASC zijn verschillende aanduidingen.",
   zalmfilet: "Vraag naar de herkomst en het keurmerk van de actuele levering.",

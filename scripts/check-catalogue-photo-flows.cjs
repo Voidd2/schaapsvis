@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 // Read-only browser checks: decode every catalogue photo and follow detail links.
 const {chromium}=require('playwright'),assert=require('assert/strict'),path=require('path');
 const origin=process.argv[2]||'http://localhost:3011';
@@ -5,7 +6,7 @@ const decisions=JSON.parse(require('fs').readFileSync('src/lib/assortiment-beslu
 const expected=decisions.originalCount-decisions.removed.length+decisions.added.length;
 (async()=>{
  const browser=await chromium.launch({channel:'chrome',headless:true});
- const errors=[];let decoded=0,details=0;
+ const errors=[];let decoded=0,details=0,recipePages=0;
  try{
   for(const locale of ['nl','en','de']){
    const page=await browser.newPage({viewport:{width:390,height:844}});
@@ -25,17 +26,34 @@ const expected=decisions.originalCount-decisions.removed.length+decisions.added.
     await page.locator('.collection-item').first().screenshot({path:path.resolve('../../outputs/assortiment-internet-mobiel.png')});
     await page.locator('input[type="search"]').fill('');
    }
-   for(const slug of ['scholfilet','tonijnfilet','zeewiersalade','blacktiger-garnalen','zeekraal','gerookte-zalmmoot','hollandse-garnalen']){
-    const link=page.locator(`a[href="/${locale}/assortiment/${slug}"]`).first();
-    await link.click();await page.waitForURL(`**/${locale}/assortiment/${slug}`);
+   const productCards=await page.locator('.collection .favorite-card, .collection .collection-item').evaluateAll(cards=>cards.map(card=>({href:[...card.querySelectorAll('a[href]')].map(link=>link.getAttribute('href')).find(href=>href?.startsWith(`/${document.documentElement.lang}/assortiment/`)),title:card.querySelector('h3')?.textContent?.trim()})).filter(card=>card.href&&card.title));
+   assert.equal(productCards.length,expected,locale+' product cards with detail links');
+   assert.equal(new Set(productCards.map(card=>card.href)).size,expected,locale+' unique product links');
+   const recipeHrefs=new Set();
+   for(const {href,title} of productCards){
+    const link=page.locator(`.collection a[href="${href}"]`).first();
+    await link.click();await page.waitForURL(`**${href}`);
+    await page.waitForFunction(expectedTitle=>{
+     const heading=document.querySelector('main h1')?.textContent?.trim();
+     return heading===expectedTitle&&!document.querySelector('[data-next-error]');
+    },title);
+    assert.equal((await page.locator('main h1').innerText()).trim(),title,locale+href+' detail heading');
     const img=page.locator('main img').first();await img.scrollIntoViewIfNeeded();await img.evaluate(i=>i.decode());
-    assert.ok(await img.evaluate(i=>i.naturalWidth>0),locale+'/'+slug+' detail decode');details++;
-    if(locale==='nl'&&slug==='tonijnfilet')await page.screenshot({path:path.resolve('../../outputs/tonijnfilet-internet-mobiel.png'),fullPage:true});
+    assert.ok(await img.evaluate(i=>i.naturalWidth>0),locale+href+' detail decode');
+    details++;
+    for(const recipeHref of await page.locator(`a[href^="/${locale}/recepten/"]`).evaluateAll(links=>links.map(link=>link.getAttribute('href'))))recipeHrefs.add(recipeHref);
+    if(locale==='nl'&&href.endsWith('/tonijnfilet'))await page.screenshot({path:path.resolve('../../outputs/tonijnfilet-internet-mobiel.png'),fullPage:true});
     await page.goto(`${origin}/${locale}/assortiment`,{waitUntil:'networkidle'});
+   }
+   for(const href of recipeHrefs){
+    await page.goto(`${origin}${href}`,{waitUntil:'networkidle'});
+    assert.ok(await page.locator('main h1').count(),locale+href+' recipe heading');
+    assert.ok(await page.locator('main h1').first().innerText(),locale+href+' recipe title');
+    recipePages++;
    }
    await page.close();
   }
   assert.deepEqual(errors,[]);
-  console.log(JSON.stringify({catalogueImagesDecoded:decoded,languages:3,overviewToDetailFlows:details,mobileOverflow:false,browserErrors:errors,ordersSent:0,messagesSent:0}));
+  console.log(JSON.stringify({catalogueImagesDecoded:decoded,languages:3,overviewToDetailFlows:details,uniqueRecipePagesOpened:recipePages,mobileOverflow:false,browserErrors:errors,ordersSent:0,messagesSent:0}));
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1});

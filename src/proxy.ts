@@ -1,7 +1,7 @@
 import createMiddleware from "next-intl/middleware";
 import { NextResponse, type NextRequest } from "next/server";
 import { routing } from "./i18n/routing";
-import { ACCESS_COOKIE, ACCESS_TOKEN, siteOpSlot } from "./lib/siteAccess";
+import { ACCESS_COOKIE, heeftGeldigeSiteToegang, siteOpSlot } from "./lib/siteAccess";
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -19,6 +19,12 @@ function altijdToegestaan(pathname: string): boolean {
     // Inloggen en uitloggen. Zonder deze twee kom je er nooit meer in.
     pathname === "/api/unlock" ||
     pathname === "/api/logout" ||
+    // Keep valid crawl-control responses reachable while the public pages are
+    // locked. robots.txt then disallows crawling and sitemap.xml stays empty.
+    pathname === "/robots.txt" ||
+    pathname === "/sitemap.xml" ||
+    // Google Search Console's HTML ownership proof; the actual site remains locked.
+    pathname === "/googlee89efce6ff6c8463.html" ||
     // De bestanden waarmee de browser dat scherm tekent.
     pathname.startsWith("/_next/") ||
     pathname.startsWith("/_vercel/") ||
@@ -30,7 +36,7 @@ export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const opSlot = siteOpSlot();
-  const heeftToegang = request.cookies.get(ACCESS_COOKIE)?.value === ACCESS_TOKEN;
+  const heeftToegang = heeftGeldigeSiteToegang(request.cookies.get(ACCESS_COOKIE)?.value);
 
   if (opSlot && !heeftToegang && !altijdToegestaan(pathname)) {
     // API-verzoeken krijgen geen inlogscherm maar een duidelijk antwoord. Een
@@ -53,6 +59,15 @@ export function proxy(request: NextRequest) {
     res.headers.set("X-Robots-Tag", "noindex, nofollow");
     res.headers.set("Cache-Control", "no-store, must-revalidate");
     return res;
+  }
+
+  // The legacy /admin product editor only persisted to browser localStorage.
+  // Keep the short URL, but send owners to the role-checked student review UI.
+  if (pathname === "/admin") {
+    const url = request.nextUrl.clone();
+    url.pathname = "/nl/beheer/studenten";
+    url.search = "";
+    return NextResponse.redirect(url, 308);
   }
 
   // Alleen paden die door next-intl afgehandeld moeten worden gaan daarheen.

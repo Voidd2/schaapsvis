@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 // Local browser regression tests only; never sends orders or WhatsApp messages.
 const {chromium}=require('playwright');
 const assert=require('node:assert/strict');
@@ -14,6 +15,13 @@ if(!/^http:\/\/(localhost|127\.0\.0\.1):/.test(origin))throw new Error('Local se
    assert.equal(await page.locator('h1').count(),1);
    assert.equal(await page.locator('body').evaluate(el=>el.scrollWidth<=window.innerWidth+1),true,'Homepage mobile overflow '+locale);
    await page.goto(origin+'/'+locale+'/visschalen',{waitUntil:'networkidle'});
+   const special=page.locator('#bijzondere-visschalen');
+   assert.ok(await special.count(),'Special platter examples '+locale);
+   assert.ok(!/€\s*\d/.test(await special.innerText()),'No individual special platter prices '+locale);
+   for(const link of await special.locator('a[href^="https://wa.me/"]').all()){
+    const message=new URL(await link.getAttribute('href')).searchParams.get('text')||'';
+    assert.ok(!/€\s*\d/.test(message),'No individual price in special platter request '+locale);
+   }
    const select=page.locator('button[aria-pressed="false"]').first();
    assert.ok(await select.count(),'Platter selection button '+locale);
    await select.click();
@@ -21,15 +29,16 @@ if(!/^http:\/\/(localhost|127\.0\.0\.1):/.test(origin))throw new Error('Local se
    const summary=page.locator('aside').first();
    const name={nl:'Borrelschaal',en:'Sharing platter',de:'Snackplatte'}[locale];
    assert.ok((await summary.innerText()).includes(name),'Localized selection '+locale);
-   await page.locator('details summary').first().click();
-   const extra={nl:'Meer Gerookte zalm',en:'More Smoked salmon',de:'Mehr Räucherlachs'}[locale];
-   await page.getByRole('button',{name:extra,exact:true}).click();
-   assert.ok((await summary.innerText()).includes('100 g'),'Platter extra quantity '+locale);
-   const request=page.locator('a[href*="/bestellen"]').first();
-   if(await request.count()){
-    await request.click();await page.waitForURL('**/'+locale+'/bestellen**');await page.waitForLoadState('networkidle');
-    await page.waitForFunction(n=>document.querySelector('main')?.innerText.includes(n),name);
-   }
+   const summaryText=await summary.innerText();
+   const averagePrice=/€\s*17[.,]50|17[.,]50\s*€/;
+   assert.ok(averagePrice.test(summaryText),'Average platter price '+locale);
+   const noAveragePrice=summaryText.replace(averagePrice,'');
+   assert.ok(!/€\s*\d+[,.]\d{2}/.test(noAveragePrice),'No fixed platter price '+locale);
+   const request=summary.locator('a[href^="https://wa.me/31624811678"]');
+   assert.ok(await request.count(),'Platter WhatsApp request '+locale);
+   const message=new URL(await request.getAttribute('href')).searchParams.get('text')||'';
+   assert.ok(message.toLowerCase().includes(name.toLowerCase()),'Selected platter in WhatsApp request '+locale);
+   assert.ok(!/€\s*\d+[,.]\d{2}/.test(message),'No fixed platter amount in request '+locale);
    await page.goto(origin+'/'+locale+'/assortiment',{waitUntil:'networkidle'});
    const product=page.locator('a[href="/'+locale+'/assortiment/varlaks-zalm"]').first();
    await product.click();await page.waitForURL('**/'+locale+'/assortiment/varlaks-zalm');await page.waitForLoadState('networkidle');
