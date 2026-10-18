@@ -12,6 +12,7 @@
     "start:vinext": "vite preview",
     "deploy:vinext": "vinext-cloudflare deploy",
     "check:members": "node --check workers/members/src/index.mjs && node workers/members/test.mjs",
+    "check:members:wrangler": "npx --yes wrangler@4.151.1 deploy --dry-run --config workers/members/wrangler.jsonc --env preview",
     "build:cloudflare": "vite build",
     "preview:cloudflare": "vite preview",
     "deploy:cloudflare": "vite build && cf deploy --prebuilt"
