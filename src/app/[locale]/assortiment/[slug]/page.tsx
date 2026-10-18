@@ -39,6 +39,18 @@ export default async function ProductDetailPage({params}: Props) {
   const isPlatter = ["visschaal", "feestschotel"].includes(slug), isSalmon = !product.highlight && /zalm|lax/.test(slug);
   const action = {label: isPlatter ? c.platter : bestelContact(lang).label, href: isPlatter ? `/${lang}/visschalen` : bestelContact(lang, product.naam).href, extern: !isPlatter};
   const ownRecipes = recepten.filter(r => r.hoofdproduct === slug).slice(0, 4).map(r => localizeRecipe(r,lang));
+  const recipeIdeaGroups: Record<string, string[]> = {
+    "verse-vis": ["gebakken-kabeljauw-botersaus", "vispakketje-oven-groenten"],
+    "gerookte-vis": ["pasta-gerookte-zalm-roomsaus", "zomerse-zalmsalade"],
+    "schaal-schelp": ["garnalensalade-pompoen", "oesters-sjalottenazijn"],
+    "vissalades": ["garnalensalade-pompoen", "witlof-garnalen-oesterzwam"],
+    "bereid": ["kibbeling-ravigotesaus-salade", "lekkerbek-koolsalade"],
+    "zeegroenten": ["kabeljauw-zeekraal-venkel"],
+  };
+  const recipeIdeas = ownRecipes.length ? ownRecipes : (recipeIdeaGroups[product.categorie] || [])
+    .map(recipeSlug => recepten.find(r => r.slug === recipeSlug))
+    .filter((r): r is (typeof recepten)[number] => Boolean(r))
+    .map(r => localizeRecipe(r, lang));
   const articles = /zalm|lax/.test(slug) ? [
     ["wilde-zalm-vs-kweekzalm-waarom-wij-varlaks-kiezen", lang === "de" ? "Wildlachs und Zuchtlachs" : lang === "en" ? "Wild salmon and farmed salmon" : "Wilde zalm en kweekzalm"],
     ["is-biologische-zalm-gezonder-omega-3", lang === "de" ? "Bio-Lachs und Omega-3" : lang === "en" ? "Organic salmon and omega-3" : "Biologische zalm en omega-3"],
@@ -57,10 +69,8 @@ export default async function ProductDetailPage({params}: Props) {
           <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 1024px) calc(100vw - 40px), 45vw" loading="lazy" className={`w-full h-full ${photo.editorial?(photo.whole?"object-contain":"object-cover"):"object-contain"}`} />
         </div>}
         <ProductPhotoCredit photo={photo} locale={lang} />
-        <p className="mt-6 pl-5" style={{borderLeft:`2px solid ${availability.unavailable?"#be123c":"var(--navy)"}`}}>{availability.note}</p>
-        {isSalmon && <Link href={`/${lang}/varlaks`} className="block mt-6 pl-5" style={{borderLeft:"2px solid var(--seafoam)"}}><p className="kapitaal mb-2">{c.alternative}</p><p className="font-semibold underline">{c.salmon}</p><p className="text-sm mt-2 leading-relaxed">{c.salmonNote}</p></Link>}
-      </div>}
-      <div><p className="kapitaal mb-2">{c.inspiration}</p><h2 className="text-2xl mb-3">{c.cooking}</h2><p className="mb-6">{c.ideas}</p><p className="kapitaal mb-2">{c.blog}</p><ul className="mb-7">{articles.map(([article,label])=><li key={article} className="border-b border-sky-100"><Link href={`/${lang}/blog/${article}`} className="block py-3 underline font-semibold">{label} →</Link></li>)}</ul>
+        <p className="mt-6 pl-5" style={{borderLeft:`2px solid ${availability.unavailable?"#be123c":"var(--nav{recipeIdeas.length > 0 ? <div className="mb-8"><h2 className="text-xl mb-3">{c.recipes}</h2><ul className="space-y-3">{recipeIdeas.map(r=><li key={r.slug}><Link href={`/${lang}/recepten/${r.slug}`} className="underline font-semibold">{r.title}</Link><p className="text-sm mt-1">{r.tijd} · {recipeLabel(r.moeilijkheid,lang)}</p></li>)}</ul>{ownRecipes.length===0&&<p className="mt-3 text-sm text-slate-600">{lang==="de"?"Diese Rezeptideen lassen sich mit ähnlichen Fischarten anpassen.":lang==="en"?"These ideas can be adapted for similar fish species.":"Deze ideeën kunt u aanpassen voor vergelijkbare vissoorten."}</p>}</div> : <p className="mb-4">{c.noRecipe}</p>}
+">{c.inspiration}</p><h2 className="text-2xl mb-3">{c.cooking}</h2><p className="mb-6">{c.ideas}</p><p className="kapitaal mb-2">{c.blog}</p><ul className="mb-7">{articles.map(([article,label])=><li key={article} className="border-b border-sky-100"><Link href={`/${lang}/blog/${article}`} className="block py-3 underline font-semibold">{label} →</Link></li>)}</ul>
         {ownRecipes.length > 0 ? <div className="mb-8"><h2 className="text-xl mb-3">{c.recipes}</h2><ul className="space-y-3">{ownRecipes.map(r=><li key={r.slug}><Link href={`/${lang}/recepten/${r.slug}`} className="underline font-semibold">{r.title}</Link><p className="text-sm mt-1">{r.tijd} · {recipeLabel(r.moeilijkheid,lang)}</p></li>)}</ul></div> : <p className="mb-4">{c.noRecipe}</p>}
         <Link href={`/${lang}/recepten`} className="underline font-semibold">{c.recipes} →</Link><p className="mt-3">{c.recipesNote}</p>
       </div>

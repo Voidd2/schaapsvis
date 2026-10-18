@@ -35,7 +35,7 @@ const FAQNL = [
 
 const AANBOD = [
   { title: "Kibbeling voor de lunch of mee naar huis", text: "Krokante kibbeling met ravigotesaus. Een vertrouwde favoriet voor tijdens het boodschappen doen.", src: "/images/editorial/kibbeling.webp", alt: "Krokante kibbeling met saus", slug: "kibbeling" },
-  { title: "Haring en Hollandse garnalen", text: "Hollandse klassiekers voor op brood, bij de lunch of als voorgerecht. Vraag naar de aanvoer van de dag.", src: "/images/editorial/hollandse-nieuwe-uitjes.webp", alt: "Hollandse haring met uitjes en augurk", slug: "haring" },
+  { title: "Haring en Hollandse garnalen", text: "Hollandse klassiekers voor op brood, bij de lunch of als voorgerecht. Vraag wat er verkrijgbaar is.", src: "/images/editorial/hollandse-nieuwe-uitjes.webp", alt: "Hollandse haring met uitjes en augurk", slug: "haring" },
   { title: "Zalm en verse filet voor het avondeten", text: "Vertel ons wat u wilt koken. We helpen kiezen welke vis en hoeveel porties bij uw gerecht passen.", src: "/images/editorial/zalm.webp", alt: "Zalmfilet met citroen en dille", slug: "varlaks-zalm" },
 ];
 

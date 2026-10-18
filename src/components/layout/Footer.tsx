@@ -125,7 +125,7 @@ export function Footer() {
         </div>
 
         {/* ── Wanneer we er zijn ────────────────────────────────────────── */}
-        <dl className="text-base space-y-2" style={{ opacity: 0.9 }}>
+        <dl className="text-base leading-relaxed space-y-3 md:text-lg" style={{ opacity: 0.9 }}>
           {[
             [t("winkel"), t("winkelTijden")],
             [t("markt"), t("marktTijden")],

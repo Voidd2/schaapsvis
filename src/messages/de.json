@@ -228,12 +228,12 @@
     "kopTijden": "Öffnungszeiten",
     "kopBezorgen": "Wir liefern nach",
     "kopPaginas": "Auf dieser Seite",
-    "winkel": "Herenstraat 48",
+    "winkel": "Fischgeschäft Leiden · Herenstraat 48",
     "winkelTijden": "Dienstag bis Freitag 09:00–18:00, Samstag 09:00–17:00",
-    "markt": "Marktstände Leiden",
-    "marktTijden": "Mittwoch bei Dille & Kamille, Samstag auf dem Aalmarkt bei der Waag — 08:30–17:00",
-    "voorschoten": "Bei Hoogvliet, Voorschoten",
-    "voorschotenTijden": "Freitag 08:00–17:30",
+    "markt": "Markt in Leiden",
+    "marktTijden": "Mittwoch am Botermarkt bei Dille & Kamille und Samstag am Aalmarkt bei De Waag · 08:30–17:00",
+    "voorschoten": "Fischgeschäft Voorschoten · Hoogvliet",
+    "voorschotenTijden": "Freitag 08:00–17:30 · Veurseweg 18",
     "bezorgenIn": "Fisch liefern nach {plaats}",
     "opgericht": "gegründet {jaar} von {oprichter}",
     "betalen": "Im Geschäft bar oder mit Karte bezahlen.",
@@ -643,4 +643,3 @@
     "gratisWeegvis": "Frischen Fisch rechnen wir nach Gewicht ab. Kommt Ihre Bestellung über {bedrag}, entfällt die Liefergebühr — den Preis vereinbaren wir vorher mit Ihnen."
   }
 }
-

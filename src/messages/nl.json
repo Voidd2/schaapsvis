@@ -228,12 +228,12 @@
     "kopTijden": "Openingstijden",
     "kopBezorgen": "Wij bezorgen in",
     "kopPaginas": "Op deze site",
-    "winkel": "Herenstraat 48",
+    "winkel": "Viswinkel Leiden · Herenstraat 48",
     "winkelTijden": "Dinsdag t/m vrijdag 09:00–18:00, zaterdag 09:00–17:00",
-    "markt": "Leidse marktkramen",
-    "marktTijden": "Woensdag bij Dille & Kamille, zaterdag op de Aalmarkt bij de Waag — 08:30–17:00",
-    "voorschoten": "Bij Hoogvliet, Voorschoten",
-    "voorschotenTijden": "Vrijdag 08:00–17:30",
+    "markt": "Markt Leiden",
+    "marktTijden": "Woensdag Botermarkt bij Dille & Kamille en zaterdag Aalmarkt bij De Waag · 08:30–17:00",
+    "voorschoten": "Visboer Voorschoten · Hoogvliet",
+    "voorschotenTijden": "Vrijdag 08:00–17:30 · Veurseweg 18",
     "bezorgenIn": "Vis bezorgen in {plaats}",
     "opgericht": "opgericht in {jaar} door {oprichter}",
     "betalen": "Betalen in de winkel: contant of pin.",
@@ -643,4 +643,3 @@
     "gratisWeegvis": "Verse vis rekenen we op gewicht af. Komt uw bestelling boven {bedrag} uit, dan vervalt de bezorging — de prijs spreken we vooraf met u af."
   }
 }
-
