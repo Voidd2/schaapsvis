@@ -15,10 +15,9 @@ import { heeftBeeld } from "@/lib/beeld";
 
 import { SeizoensBanner } from "@/components/shared/SeizoensBanner";
 import { paginaMetadata } from "@/lib/seo";
-import { BEDRIJF, euro, type VerkooppuntId } from "@/lib/bedrijf";
+import { BEDRIJF, type VerkooppuntId } from "@/lib/bedrijf";
 import type { BeeldNaam } from "@/lib/beeld";
 import { bezorgdagenTekst } from "@/lib/bezorging";
-import { VANAF_BEDRAG } from "@/lib/visschaal";
 import { products, CATEGORIE_LABELS, type Categorie } from "@/lib/assortiment-data";
 import { googleReviews, googleRating, googleReviewCount, googleMapsUrl, localizeReview } from "@/lib/reviews";
 
@@ -41,10 +40,10 @@ export async function generateMetadata({
 /* Zes producten waar we echte foto's van hebben. Liever zes echte dan twaalf
    met een tekening ertussen — een gemengde rij valt meteen op. */
 const UITGELICHT = [
-  "kabeljauwfilet",
+  "varlaks-zalm",
+  "kibbeling",
   "hollandse-garnalen",
-  "zeetong",
-  "gerookte-heilbot",
+  "scholfilet",
   "coquilles",
   "haring",
 ];
@@ -67,8 +66,6 @@ export default async function HomePage({
   const h = await getTranslations({ locale, namespace: "home" });
   const nav = await getTranslations({ locale, namespace: "nav" });
   const g = await getTranslations({ locale, namespace: "gedeeld" });
-
-  const v = await getTranslations({ locale, namespace: "visschaal" });
 
   const dagen = bezorgdagenTekst(locale);
   const categorieAantallen = (Object.keys(CATEGORIE_LABELS) as Categorie[]).map((cat) => ({
@@ -98,7 +95,7 @@ export default async function HomePage({
               {h("inleiding")}
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link href={`/${locale}/assortiment`} className="knop knop-rood">
+              <Link href={`/${locale}/assortiment`} className="knop knop-navy">
                 {h("knopVandaag")}
               </Link>
               <Link href={`/${locale}/visschalen`} className="knop knop-lijn">
@@ -196,7 +193,7 @@ export default async function HomePage({
             </p>
             <p
               className="lees pl-5 mb-7"
-              style={{ borderLeft: "2px solid var(--gold)", color: "var(--charcoal)" }}
+              style={{ borderLeft: "2px solid var(--lichtblauw)", color: "var(--charcoal)" }}
             >
               {h("gebakkenNiet")}
             </p>
@@ -237,19 +234,7 @@ export default async function HomePage({
             <p className="lees mb-7" style={{ color: "var(--charcoal)" }}>
               {h("visschaalTekst")}
             </p>
-            <p className="mb-8">
-              <span className="kapitaal block mb-1.5">{h("visschaalVanaf")}</span>
-              <span
-                className="bedrag text-[2.6rem] leading-none"
-                style={{ fontFamily: "var(--font-display)", color: "var(--navy)" }}
-              >
-                {euro(VANAF_BEDRAG)}
-              </span>
-              <span className="ml-2 text-[0.95rem]" style={{ color: "var(--grijs)" }}>
-                {v("perSchaal")}
-              </span>
-            </p>
-            <Link href={`/${locale}/visschalen`} className="knop knop-rood">
+            <Link href={`/${locale}/visschalen`} className="knop knop-navy">
               {h("visschaalLink")}
             </Link>
           </div>
