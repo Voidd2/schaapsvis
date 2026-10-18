@@ -19,7 +19,16 @@ Deze Worker is de serverkant voor algemene accounts, e-mailbevestiging, wachtwoo
 ## Nog uit te voeren Cloudflare-stappen
 
 1. Beoordeel de pending DNS-scan tegen live DNS, hosting en mail. De actuele Cloudflare-zone ziet nog de Knoth-nameservers; de nieuwe zone is leeg en blijft daarom pending. Vergelijk Vercel, mail (MX/SPF/DKIM/DMARC), Search Console en alle overige actuele DNS-records voordat er records worden ingevoerd of nameservers bij Knoth worden gewijzigd. Accepteer nooit de gescande `localhost`-records.
-2. Schakel R2 in via het Cloudflare-dashboard en maak twee private buckets (`schaapsvis-student-proofs-preview` en `schaapsvis-student-proofs`). Koppel er geen publieke custom domain aan.
+2. Schakel R2 in via het Cloudflare-dashboard. Maak daarna de twee bewijsbuckets met EU-jurisdictie aan en controleer beide instellingen vóór gebruik:
+
+   ```sh
+   npx --yes wrangler@4.151.1 r2 bucket create schaapsvis-student-proofs-preview --jurisdiction eu
+   npx --yes wrangler@4.151.1 r2 bucket create schaapsvis-student-proofs --jurisdiction eu
+   npx --yes wrangler@4.151.1 r2 bucket info schaapsvis-student-proofs-preview --jurisdiction eu --json
+   npx --yes wrangler@4.151.1 r2 bucket info schaapsvis-student-proofs --jurisdiction eu --json
+   ```
+
+   Maak beide buckets privé: geen `r2.dev`-publieke URL en geen custom domain. De jurisdictie is na aanmaak niet wijzigbaar; controleer dus expliciet dat de API `eu` teruggeeft. Zie [Cloudflare R2-jurisdicties](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions) en [Wrangler R2-commando's](https://developers.cloudflare.com/workers/wrangler/commands/r2/).
 3. De preview- en productie-D1-ID's staan in `wrangler.jsonc`; beide zijn EU-databases. Remote preview en productie bevatten `0001` t/m `0004`. Controleer vóór een Worker-uitrol of de lokale migraties nog overeenkomen met beide remote migratiestatussen.
 4. Zodra Cloudflare DNS voor het domein actief is, onboard je `schaapsvishandel.nl` in **Email Service → Email Sending**. Controleer de gegenereerde SPF-, DKIM-, DMARC- en bounce-records en behoud alle bestaande mailrecords. De `EMAIL`-binding staat al in Wrangler; na onboarding mag `noreply@schaapsvishandel.nl` naar willekeurige ontvangers sturen met Workers Paid. Daarvóór kan Email Service alleen naar geverifieerde bestemmingsadressen sturen. De huidige API-verbinding kan Email Sending-status niet lezen (2036 Unauthorized), dus verifieer dit in het dashboard. Stel daarna `AUTH_PEPPER` en `PASS_SIGNING_KEY` in met Wrangler en gebruik per omgeving verschillende willekeurige secrets.
 5. Stel `ADMIN_EMAILS` als secret in op een gecontroleerd beheerdersadres (`npx wrangler secret put ADMIN_EMAILS --env preview`; herhaal veilig voor productie). De secret mag meerdere, komma-gescheiden adressen bevatten. Geen beheerder wordt aangemaakt op basis van een formulier; toegang vereist een bevestigd account met een expliciet toegestane e-mail.
