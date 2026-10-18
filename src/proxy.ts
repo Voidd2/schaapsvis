@@ -83,7 +83,7 @@ export function proxy(request: NextRequest) {
     pathname.startsWith("/_next/") ||
     pathname.startsWith("/_vercel/") ||
     pathname === "/coming-soon" ||
-    /\\.[^/]+$/.test(pathname)
+    /\.[^/]+$/.test(pathname)
   ) {
     return NextResponse.next();
   }
