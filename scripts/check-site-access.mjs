@@ -10,7 +10,14 @@ const exports = {};
 new Function("exports", "process", compiled)(exports, process);
 
 const original = process.env.SITE_PUBLIC;
+const originalIpAllowlist = process.env.SITE_ACCESS_IP_ALLOWLIST;
 try {
+  delete process.env.SITE_ACCESS_IP_ALLOWLIST;
+  assert.equal(exports.heeftToegestaanIp("212.120.114.226"), false, "an unset allowlist grants no IP access");
+  process.env.SITE_ACCESS_IP_ALLOWLIST = "198.51.100.1, 212.120.114.226";
+  assert.equal(exports.heeftToegestaanIp("212.120.114.226"), true, "an exact allowlisted IP is accepted");
+  assert.equal(exports.heeftToegestaanIp("212.120.114.226, 198.51.100.1"), false, "forwarded IP chains are not accepted");
+  assert.equal(exports.heeftToegestaanIp(undefined), false, "a missing client IP is never accepted");
   for (const value of [undefined, "", "off", "on", "true"]) {
     if (value === undefined) delete process.env.SITE_PUBLIC;
     else process.env.SITE_PUBLIC = value;
@@ -23,6 +30,8 @@ try {
 } finally {
   if (original === undefined) delete process.env.SITE_PUBLIC;
   else process.env.SITE_PUBLIC = original;
+  if (originalIpAllowlist === undefined) delete process.env.SITE_ACCESS_IP_ALLOWLIST;
+  else process.env.SITE_ACCESS_IP_ALLOWLIST = originalIpAllowlist;
 }
 
-console.log("Site access gate passed: missing, off and legacy values stay locked; only launch-approved opens the site.");
+console.log("Site access gate passed: launch policy and exact-IP allowlist checks passed.");

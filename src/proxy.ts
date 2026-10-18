@@ -1,7 +1,7 @@
 import createMiddleware from "next-intl/middleware";
 import { NextResponse, type NextRequest } from "next/server";
 import { routing } from "./i18n/routing";
-import { ACCESS_COOKIE, heeftGeldigeSiteToegang, siteOpSlot } from "./lib/siteAccess";
+import { ACCESS_COOKIE, heeftGeldigeSiteToegang, heeftToegestaanIp, siteOpSlot } from "./lib/siteAccess";
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -37,8 +37,14 @@ export function proxy(request: NextRequest) {
 
   const opSlot = siteOpSlot();
   const heeftToegang = heeftGeldigeSiteToegang(request.cookies.get(ACCESS_COOKIE)?.value);
+  // Trust only Vercel's platform-populated client-IP header, never a browser-
+  // supplied X-Forwarded-For value. The allowlist itself lives in a deployment
+  // environment variable so IP addresses do not have to be committed to Git.
+  const heeftIpToegang = process.env.VERCEL === "1" && heeftToegestaanIp(
+    request.headers.get("x-vercel-forwarded-for") ?? undefined,
+  );
 
-  if (opSlot && !heeftToegang && !altijdToegestaan(pathname)) {
+  if (opSlot && !heeftToegang && !heeftIpToegang && !altijdToegestaan(pathname)) {
     // API-verzoeken krijgen geen inlogscherm maar een duidelijk antwoord. Een
     // bestelling die "gelukt" lijkt terwijl de site op slot staat is erger dan
     // een foutmelding.
@@ -77,7 +83,7 @@ export function proxy(request: NextRequest) {
     pathname.startsWith("/_next/") ||
     pathname.startsWith("/_vercel/") ||
     pathname === "/coming-soon" ||
-    /\.[^/]+$/.test(pathname)
+    /\\.[^/]+$/.test(pathname)
   ) {
     return NextResponse.next();
   }
@@ -89,7 +95,7 @@ export function proxy(request: NextRequest) {
 /**
  * Alles loopt hierlangs.
  *
- * Eerder stond hier `/((?!api|_next|_vercel|.*\..*).*)`: dat liet de API-routes,
+ * Eerder stond hier `/((?!api|_next|_vercel|.*\\..*).*)`: dat liet de API-routes,
  * de sitemap, robots.txt en élk pad met een punt erin ongemoeid. Het slot zat
  * dus alleen op de gewone pagina's, en niet op de gegevens erachter.
  *

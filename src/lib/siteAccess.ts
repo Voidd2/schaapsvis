@@ -21,6 +21,16 @@ export function heeftGeldigeSiteToegang(cookieValue: string | undefined): boolea
   return ACCESS_TOKEN.length > 0 && cookieValue === ACCESS_TOKEN;
 }
 
+/** IP's die de eigenaar expliciet tijdelijk toegang heeft gegeven, los van het wachtwoord. */
+export function heeftToegestaanIp(clientIp: string | undefined): boolean {
+  if (!clientIp) return false;
+  const toegestaneIps = (process.env.SITE_ACCESS_IP_ALLOWLIST ?? "")
+    .split(",")
+    .map((ip) => ip.trim())
+    .filter(Boolean);
+  return toegestaneIps.includes(clientIp.trim());
+}
+
 /** Alleen publiek na de expliciete publicatiebevestiging SITE_PUBLIC=launch-approved. */
 export function siteIsOpenbaar(): boolean {
   return process.env.SITE_PUBLIC === "launch-approved";
