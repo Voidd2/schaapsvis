@@ -38,7 +38,7 @@ const translations = {
     reset: "Wachtwoord vergeten? Stuur een resetlink",
     resend: "Bevestigingsmail opnieuw sturen",
     studentTitle: "Studentenkorting aanvragen",
-    studentInfo: "De 10% korting geldt voor studenten die in Leiden een MBO-, HBO- of WO-opleiding volgen. Middelbare school is uitgesloten. De korting geldt alleen voor kibbeling, haring, broodjes haring en drinken. De pas is één studiejaar geldig; daarna is nieuw bewijs nodig.",
+    studentInfo: "De 10% korting geldt voor Nederlandse en internationale studenten die in Leiden een MBO-, HBO- of WO-opleiding volgen; middelbare school is uitgesloten. Alleen kibbeling, haring, broodjes haring en drinken doen mee. De korting is niet te combineren met nieuwsbriefkortingen of andere acties. De pas is één studiejaar geldig; daarna is nieuw bewijs nodig.",
     institution: "Onderwijsinstelling in Leiden",
     level: "Opleidingsniveau",
     mbo: "MBO",
@@ -54,7 +54,7 @@ const translations = {
     rejected: "Uw vorige aanvraag is afgewezen. U kunt met nieuw bewijs opnieuw aanvragen.",
     pass: "Digitale studentenpas",
     passCode: "Laat deze code door een medewerker controleren",
-    discount: "10% korting op kibbeling, haring, broodjes haring en drinken",
+    discount: "10% korting op kibbeling, haring, broodjes haring en drinken · niet combineerbaar met andere acties",
     unavailable: "De accountomgeving wordt nog gekoppeld. Probeer het later opnieuw.",
     accountCreated: "Als dit adres nieuw is, ontvangt u de volgende stap per e-mail.",
     genericError: "Dit lukte niet. Controleer uw gegevens of probeer het later opnieuw.",
@@ -79,7 +79,7 @@ const translations = {
     reset: "Forgot your password? Send a reset link",
     resend: "Resend verification email",
     studentTitle: "Apply for the student discount",
-    studentInfo: "The 10% discount is for students enrolled in an MBO, HBO or university programme in Leiden; secondary school is not eligible. It applies only to kibbeling, herring, herring sandwiches and drinks. The pass is valid for one academic year; new proof is then required.",
+    studentInfo: "The 10% discount is for Dutch and international students enrolled in an MBO, HBO or university programme in Leiden; secondary school is not eligible. It applies only to kibbeling, herring, herring sandwiches and drinks, and cannot be combined with newsletter discounts or other offers. The pass is valid for one academic year; new proof is then required.",
     institution: "Educational institution in Leiden",
     level: "Education level",
     mbo: "MBO",
@@ -95,7 +95,7 @@ const translations = {
     rejected: "Your previous application was declined. You can apply again with new proof.",
     pass: "Digital student pass",
     passCode: "Ask a staff member to verify this code",
-    discount: "10% off kibbeling, herring, herring sandwiches and drinks",
+    discount: "10% off kibbeling, herring, herring sandwiches and drinks · cannot be combined with other offers",
     unavailable: "The account area is still being connected. Please try again later.",
     accountCreated: "If this is a new address, we will email you the next step.",
     genericError: "That did not work. Check your details or try again later.",
@@ -120,7 +120,7 @@ const translations = {
     reset: "Passwort vergessen? Link zum Zurücksetzen senden",
     resend: "Bestätigungs-E-Mail erneut senden",
     studentTitle: "Studentenrabatt beantragen",
-    studentInfo: "Der Rabatt von 10 % gilt für Studierende einer MBO-, HBO- oder Hochschulausbildung in Leiden. Weiterführende Schulen sind ausgeschlossen. Er gilt ausschließlich für Kibbeling, Hering, Heringsbrötchen und Getränke. Der Pass ist ein Studienjahr gültig; danach ist ein neuer Nachweis erforderlich.",
+    studentInfo: "Der Rabatt von 10 % gilt für niederländische und internationale Studierende einer MBO-, HBO- oder Hochschulausbildung in Leiden; weiterführende Schulen sind ausgeschlossen. Er gilt nur für Kibbeling, Hering, Heringsbrötchen und Getränke und ist nicht mit Newsletter-Rabatten oder anderen Aktionen kombinierbar. Der Pass ist ein Studienjahr gültig; danach ist ein neuer Nachweis erforderlich.",
     institution: "Bildungseinrichtung in Leiden",
     level: "Ausbildungsniveau",
     mbo: "MBO",
@@ -136,7 +136,7 @@ const translations = {
     rejected: "Ihr vorheriger Antrag wurde abgelehnt. Sie können mit einem neuen Nachweis erneut beantragen.",
     pass: "Digitaler Studentenpass",
     passCode: "Lassen Sie diesen Code vom Personal prüfen",
-    discount: "10 % Rabatt auf Kibbeling, Hering, Heringsbrötchen und Getränke",
+    discount: "10 % Rabatt auf Kibbeling, Hering, Heringsbrötchen und Getränke · nicht mit anderen Aktionen kombinierbar",
     unavailable: "Der Kontobereich wird noch angebunden. Bitte versuchen Sie es später erneut.",
     accountCreated: "Wenn dies eine neue Adresse ist, senden wir Ihnen den nächsten Schritt per E-Mail.",
     genericError: "Das hat nicht funktioniert. Prüfen Sie Ihre Angaben oder versuchen Sie es später erneut.",
@@ -368,3 +368,4 @@ export function AccountPortal({ locale }: { locale: string }) {
     </div>
   );
 }
+

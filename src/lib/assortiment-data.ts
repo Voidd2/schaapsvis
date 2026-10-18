@@ -216,7 +216,7 @@ export const products: Product[] = [
   {
     "slug": "varlaks-zalm",
     "naam": "Verse Zalm — VÅRLAKS",
-    "desc": "Atlantische zalm (Salmo salar) van VÅRLAKS uit Noord-Noorwegen. Vraag ons naar actuele herkomst, beschikbaarheid en certificering van de levering.",
+    "desc": "Atlantische zalm (Salmo salar) van VÅRLAKS, afkomstig uit Noord-Noorwegen. Deze zalm is ASC-gecertificeerd en is de vis uit verantwoorde kweek waar we het meest trots op zijn.",
     "categorie": "verse-vis",
     "badge": "VÅRLAKS",
     "omega3": true,
@@ -242,7 +242,7 @@ export const products: Product[] = [
   {
     "slug": "gerookte-zalm-high-seas",
     "naam": "Gerookte Zalm — High Seas",
-    "desc": "Koud gerookte kweekzalm (Salmo salar) uit Noorwegen, lang gesneden in dunne plakken. Van W.G. Den Heijer & Zn. uit Scheveningen. ASC gecertificeerd.",
+    "desc": "Dun gesneden, koudgerookte Atlantische zalm (Salmo salar) uit Noorwegen, gerookt door W.G. den Heijer & Zn. in Scheveningen. De zalm is ASC-gecertificeerd: lekker op toast, bij een brunch of in een salade.",
     "categorie": "gerookte-vis",
     "badge": "ASC",
     "omega3": true,
@@ -342,7 +342,7 @@ export const products: Product[] = [
   {
     "slug": "hollandse-garnalen",
     "naam": "Hollandse Garnalen — SOLT",
-    "desc": "Hollandse garnalen van SOLT (Crangon crangon), gepeld en verpakt in Nederland. Bekijk het SOLT-pakket op de foto. MSC-gecertificeerd; controleer het keurmerk en de actuele productinformatie op de verpakking.",
+    "desc": "Hollandse garnalen (Crangon crangon) uit de Noordzee, gepeld en geleverd via SOLT. Deze garnalen zijn MSC-gecertificeerd. De kleine, zachte garnalen zijn heerlijk op toast, in een garnalencocktail of door een salade.",
     "categorie": "schaal-schelp",
     "badge": "MSC",
     "bestelId": "garnalen-hollands",
@@ -574,7 +574,7 @@ export const products: Product[] = [
   {
     "slug": "gerookte-zalm-snippers",
     "naam": "Gerookte Zalm Snippers",
-    "desc": "Royale randstukken van gerookte zalm — vol van smaak en voordelig. Heerlijk door de pasta, op toast of door roerei. Van High Seas (W.G. Den Heijer, Scheveningen). ASC.",
+    "desc": "Smaakvolle snippers van koudgerookte Atlantische zalm van High Seas, gerookt door W.G. den Heijer & Zn. in Scheveningen. De zalm is ASC-gecertificeerd. Lekker door pasta, op toast of door roerei.",
     "categorie": "gerookte-vis",
     "badge": "ASC",
     "omega3": true,
@@ -732,7 +732,7 @@ export const products: Product[] = [
   {
     "slug": "gerookte-zalmmoot",
     "naam": "Warm Gerookte Zalmmoot",
-    "desc": "Warm gerookte moot Atlantische zalm (Salmo salar) — stevig en vol van smaak, in dikke porties. Direct te eten of te verkruimelen door een salade. ASC.",
+    "desc": "Een moot warmgerookte Atlantische zalm (Salmo salar): een stevige, volle moot zalmfilet, geen kopstuk. Direct te eten of warm te serveren met aardappelen en groenten. ASC-gecertificeerd.",
     "categorie": "gerookte-vis",
     "badge": "ASC",
     "omega3": true,
@@ -965,11 +965,11 @@ const SEIZOEN_MAP: Record<string, string> = {
 const VISWIJZER_MAP: Record<string, string> = {
   "hollandse-garnalen": "MSC-gecertificeerd sinds 2017 — verantwoord gevangen aan de Waddenkust.",
   "varlaks-zalm": "Vraag naar de actuele herkomst en productcertificering. BIO en ASC zijn verschillende aanduidingen.",
-  zalmfilet: "Vraag naar de herkomst en het keurmerk van de actuele levering.",
-  zalmmoot: "Vraag naar de herkomst en het keurmerk van de actuele levering.",
-  "gerookte-zalm-high-seas": "ASC-gecertificeerd — verantwoorde kweek.",
-  "gerookte-zalm-snippers": "ASC-gecertificeerd — verantwoorde kweek.",
-  "warm-gerookte-zalm": "ASC-gecertificeerd — verantwoorde kweek.",
+  zalmfilet: "Vraag ons naar de herkomst en eventuele certificering van deze zalm.",
+  zalmmoot: "Vraag ons naar de herkomst en eventuele certificering van deze zalm.",
+  "gerookte-zalm-high-seas": "Gemaakt van Noorse zalm; zie de productinformatie voor de herkomst.",
+  "gerookte-zalm-snippers": "Gemaakt van Noorse zalm; zie de productinformatie voor de herkomst.",
+  "warm-gerookte-zalm": "Een warmgerookte moot zalm.",
   tonijnfilet: "Het VISwijzer-advies voor geelvintonijn hangt af van herkomst en vangstmethode. Vraag ons naar het actuele advies.",
   zwaardvis: "Zwaardvis: let op de VISwijzer-status. Vraag ons naar het actuele advies.",
 };
@@ -997,3 +997,4 @@ export function eenheidVoor(categorie: Categorie): string {
     default:              return "per stuk / gram";
   }
 }
+

@@ -87,7 +87,7 @@ export function Footer() {
               className="h-16 w-16 object-contain mb-4"
             />
           )}
-          <address className="not-italic text-sm leading-relaxed" style={{ opacity: 0.85 }}>
+          <address className="not-italic text-base leading-relaxed" style={{ opacity: 0.9 }}>
             <span style={{ color: "var(--cream)", fontWeight: 600 }}>{BEDRIJF.naam}</span>
             <br />
             {BEDRIJF.adres.straat}, {BEDRIJF.adres.postcode} {BEDRIJF.adres.plaats}
@@ -125,7 +125,7 @@ export function Footer() {
         </div>
 
         {/* ── Wanneer we er zijn ────────────────────────────────────────── */}
-        <dl className="text-sm space-y-1" style={{ opacity: 0.85 }}>
+        <dl className="text-base space-y-2" style={{ opacity: 0.9 }}>
           {[
             [t("winkel"), t("winkelTijden")],
             [t("markt"), t("marktTijden")],
@@ -154,7 +154,7 @@ export function Footer() {
           {groepen.map((groep) => (
             <div key={groep.kop}>
               <p className="kapitaal kapitaal-licht mb-3">{groep.kop}</p>
-              <ul className="space-y-1.5 text-[0.88rem]" style={{ opacity: 0.8 }}>
+              <ul className="space-y-2 text-base" style={{ opacity: 0.88 }}>
                 {groep.links.map(({ href, label }) => (
                   <li key={href}>
                     <Link href={href} className="hover:text-white transition-colors">
@@ -185,3 +185,4 @@ export function Footer() {
     </footer>
   );
 }
+

@@ -469,13 +469,13 @@ const bestaandePosts: BlogPost[] = [
       {
         kop: "MSC — duurzame wildvangst",
         alineas: [
-          "MSC is een keurmerk voor duurzame wildvangst en traceerbaarheid. Onze Hollandse garnalen dragen volgens de productinformatie het MSC-keurmerk; controleer bij aankoop de actuele verpakking en vraag ons gerust om toelichting.",
+          "MSC is een keurmerk voor duurzame wildvangst en traceerbaarheid. Onze Hollandse garnalen zijn MSC-gecertificeerd. Vraag ons gerust om uitleg over dit keurmerk.",
         ],
       },
       {
         kop: "ASC — verantwoorde kweek",
         alineas: [
-          "ASC, de Aquaculture Stewardship Council, is een keurmerk voor verantwoorde aquacultuur. VÅRLAKS vermeldt ASC-certificering voor zijn zalm. ASC is niet hetzelfde als biologische certificering; controleer voor de actuele levering het productetiket en de bijbehorende documentatie.",
+          "ASC, de Aquaculture Stewardship Council, is een keurmerk voor verantwoorde aquacultuur. Onze VÅRLAKS-zalm is ASC-gecertificeerd. ASC is niet hetzelfde als biologische certificering.",
         ],
       },
       {
@@ -494,7 +494,7 @@ const bestaandePosts: BlogPost[] = [
         kop: "Zelf checken: de VISwijzer",
         alineas: [
           "Wilt u een product beoordelen? Kijk op de verpakking naar het keurmerk, de productnaam, certificaat- of licentienummer en herkomst. Vraag de viswinkel om actuele informatie als iets niet duidelijk is.",
-          "Bij Schaap's Vishandel vermelden we voor VÅRLAKS-zalm ASC (volgens de leverancier) en voor Hollandse garnalen MSC. We noemen een product alleen biologisch als de actuele levering aantoonbaar biologisch gecertificeerd is.",
+          "Bij Schaap's Vishandel is onze VÅRLAKS-zalm ASC-gecertificeerd en zijn onze Hollandse garnalen MSC-gecertificeerd. We noemen een product alleen biologisch als het daarvoor gecertificeerd is.",
         ],
       },
     ],
@@ -707,3 +707,4 @@ export function getBlogPost(slug: string): BlogPost | undefined {
 export const blogPostsGesorteerd = [...blogPosts].sort((a, b) =>
   (b.bijgewerkt ?? b.datum).localeCompare(a.bijgewerkt ?? a.datum)
 );
+

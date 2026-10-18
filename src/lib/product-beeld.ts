@@ -392,7 +392,7 @@ export function productPhoto(product:Product,locale="nl"):ProductPhoto|null{
   const localeIndex=l==="nl"?0:l==="en"?1:2;
   const translatedAlt=ALTS[product.slug];
   const alt=translatedAlt?translatedAlt[localeIndex]:{nl:`${product.naam} op een lichte ondergrond — voorbeeldfoto`,en:`${product.naam} on a light background — illustrative photo`,de:`${product.naam} auf hellem Hintergrund — Beispielfoto`}[l];
-  const caption={nl:"Voorbeeldfoto; herkomst, presentatie en beschikbaarheid bij ons kunnen verschillen.",en:"Illustrative photo; origin, presentation and availability at our shop may differ.",de:"Beispielfoto; Herkunft, Präsentation und Verfügbarkeit bei uns können abweichen."}[l];
+  const caption=["gerookte-zalm-high-seas","hollandse-garnalen","gerookte-zalm-snippers"].includes(product.slug) ? undefined : {nl:"Productfoto; herkomst en beschikbaarheid staan bij de productinformatie.",en:"Product photo; origin and availability are listed in the product information.",de:"Produktfotos; Herkunft und Verfügbarkeit stehen in den Produktinformationen."}[l];
   return {src:`/images/dirks/${source}.webp`,alt,caption,editorial:true,whole:false};
  }
  const inHouseImage=PRODUCT_BEELDEN[product.slug];
@@ -406,7 +406,7 @@ export function productPhoto(product:Product,locale="nl"):ProductPhoto|null{
    bot:{nl:"Voorbeeldfoto van bot; exacte levering en presentatie kunnen verschillen.",en:"Illustrative photo of flounder; the exact supply and presentation may differ.",de:"Beispielfoto einer Flunder; aktuelle Lieferung und Präsentation können abweichen."},
    wijtingfilet:{nl:"Voorbeeldfoto; wijtingfilet is op aanvraag beschikbaar.",en:"Illustrative photo; whiting fillets are available on request.",de:"Beispielfoto; Wittlingsfilet ist auf Anfrage erhältlich."},
    victoriabaars:{nl:"Voorbeeldfoto van Victoriabaarsfilet; snit en presentatie kunnen verschillen.",en:"Illustrative photo of Nile perch fillet; cut and presentation may differ.",de:"Beispielfoto von Nilbarschfilet; Zuschnitt und Präsentation können abweichen."},
-   "gerookte-zalmmoot":{nl:"Voorbeeldfoto van warmgerookte zalm; uitvoering en presentatie kunnen verschillen.",en:"Illustrative photo of warm-smoked salmon; preparation and presentation may differ.",de:"Beispielfoto von heißgeräuchertem Lachs; Zubereitung und Präsentation können abweichen."},
+   "gerookte-zalmmoot":{nl:"Moot warmgerookte zalmfilet.",en:"A portion of warm-smoked salmon fillet.",de:"Ein Stück heißgeräuchertes Lachsfilet."},
    "gerookte-sprotfilet":{nl:"Serveervoorbeeld van gerookte sprotfilet; de verpakking en presentatie kunnen verschillen.",en:"Serving suggestion for smoked sprat fillets; packaging and presentation may differ.",de:"Serviervorschlag für geräucherte Sprottenfilets; Verpackung und Präsentation können abweichen."},
   };
   return {...inHouseImage,alt:translatedAlt?.[localeIndex]||inHouseImage.alt,caption:captions[product.slug][l],editorial:true,whole:false};
@@ -442,3 +442,4 @@ export function productPhoto(product:Product,locale="nl"):ProductPhoto|null{
  const translated=ALTS[product.slug];
  return {...photo,alt:translated?translated[locale==="de"?2:1]:product.naam};
 }
+

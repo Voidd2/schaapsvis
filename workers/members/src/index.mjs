@@ -677,14 +677,15 @@ async function subscribeNewsletter(request, env) {
   const locale = localeFrom(body?.locale);
   const copy = ACCOUNT_COPY[locale];
   const email = normalizeEmail(body?.email);
-  if (!email || body?.consent !== true) return json({ error: "consent_required" }, 400);
+  const regionTag = String(body?.regionTag || "");
+  if (!email || body?.consent !== true || !["leiden", "voorschoten", "anders"].includes(regionTag)) return json({ error: "consent_required" }, 400);
   if (!env.AUTH_PEPPER) return json({ error: "newsletter_unavailable" }, 503);
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
   if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "newsletter", ip, email, 12, 4, 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
   const at = nowIso();
   const user = await sessionUser(request, env);
-  await env.DB.prepare(`INSERT INTO newsletter_subscriptions (email, user_id, status, consent_text_version, consented_at, source, created_at, updated_at) VALUES (?, ?, 'pending', ?, ?, ?, ?, ?) ON CONFLICT(email) DO UPDATE SET user_id=COALESCE(excluded.user_id, newsletter_subscriptions.user_id), status=CASE WHEN newsletter_subscriptions.status='subscribed' THEN 'subscribed' ELSE 'pending' END, consent_text_version=excluded.consent_text_version, consented_at=excluded.consented_at, source=excluded.source, updated_at=excluded.updated_at`)
-    .bind(email, user?.email === email ? user.id : null, NEWSLETTER_CONSENT_VERSION, at, user ? "account" : "newsletter-form", at, at).run();
+  await env.DB.prepare(`INSERT INTO newsletter_subscriptions (email, user_id, status, consent_text_version, consented_at, source, created_at, updated_at, region_tag) VALUES (?, ?, 'pending', ?, ?, ?, ?, ?, ?) ON CONFLICT(email) DO UPDATE SET user_id=COALESCE(excluded.user_id, newsletter_subscriptions.user_id), status=CASE WHEN newsletter_subscriptions.status='subscribed' THEN 'subscribed' ELSE 'pending' END, consent_text_version=excluded.consent_text_version, consented_at=excluded.consented_at, source=excluded.source, updated_at=excluded.updated_at, region_tag=excluded.region_tag`)
+    .bind(email, user?.email === email ? user.id : null, NEWSLETTER_CONSENT_VERSION, at, user ? "account" : "newsletter-form", at, at, regionTag).run();
   const subscription = await env.DB.prepare(`SELECT status FROM newsletter_subscriptions WHERE email = ?`).bind(email).first();
   if (subscription?.status === "subscribed") return json({ ok: true, message: copy.alreadySubscribed }, 202);
   const token = await issueEmailToken(env, { userId: user?.email === email ? user.id : null, email, purpose: "newsletter_confirm" });
@@ -773,7 +774,8 @@ async function adminNewsletterCampaigns(request, env) {
     FROM newsletter_campaigns ORDER BY created_at DESC LIMIT 50
   `).all();
   const subscriberCount = await env.DB.prepare(`SELECT COUNT(*) AS count FROM newsletter_subscriptions WHERE status = 'subscribed'`).first();
-  return json({ campaigns: campaigns.results || [], subscriberCount: Number(subscriberCount?.count || 0) });
+  const subscriberRegions = await env.DB.prepare(`SELECT region_tag, COUNT(*) AS count FROM newsletter_subscriptions WHERE status = 'subscribed' GROUP BY region_tag ORDER BY region_tag`).all();
+  return json({ campaigns: campaigns.results || [], subscriberCount: Number(subscriberCount?.count || 0), subscriberRegions: subscriberRegions.results || [] });
 }
 
 async function createNewsletterCampaign(request, env) {
@@ -1026,3 +1028,4 @@ async function cleanupOrphanStudentProofs(env) {
     }
   }
 }
+

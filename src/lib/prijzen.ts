@@ -1,9 +1,8 @@
 // Richtprijzen (indicatief) per product-slug.
 // ─────────────────────────────────────────────────────────────────────────────
-// Vis is een dagvers, marktgevoelig product: de dagprijs kan afwijken. Deze
-// bedragen zijn daarom RICHTPRIJZEN, geen vaste online prijzen. Alleen producten
-// met een eenduidige prijs + eenheid staan hier; de rest blijft "prijs op
-// aanvraag" (we bellen terug met de dagprijs).
+// Gepubliceerde bedragen gelden per genoemde eenheid. Alleen producten met een
+// expliciete prijs + eenheid staan hier; zonder bedrag tonen we "prijs op
+// aanvraag". Gewicht kan het eindtotaal bepalen, maar we hanteren geen dagprijs.
 //
 // EIGENAAR: pas hier gerust aan of vul aan — dit is de enige plek die je hoeft
 // te wijzigen. Prijs weglaten = automatisch "op aanvraag".
@@ -52,3 +51,4 @@ export function formatPrijs(p: Prijs, locale = "nl"): string {
   if (!unit) throw new Error(`Missing price unit translation: ${p.eenheid}`);
   return `${p.vanaf ? (locale === "en" ? "from " : locale === "de" ? "ab " : "vanaf ") : ""}€ ${amount} ${unit}`;
 }
+

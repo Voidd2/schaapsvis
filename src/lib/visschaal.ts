@@ -191,7 +191,7 @@ export const ONDERDELEN: Onderdeel[] = [
     prijs: 4.95,
     marktprijs: 5.5,
     groep: "gerookt",
-    toelichting: "Dagprijs kan meebewegen; we bevestigen hem bij uw bestelling.",
+    toelichting: "Vraag ons naar de prijs en beschikbaarheid.",
   },
 
   /* ── Schaal- en schelpdieren ────────────────────────────────────────────── */
@@ -377,3 +377,4 @@ export function hoeveelheidTekst(regel: Regel): string {
     ? `${(regel.hoeveelheid / 1000).toFixed(1).replace(".", ",")} kg`
     : `${regel.hoeveelheid} g`;
 }
+

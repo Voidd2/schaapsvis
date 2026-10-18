@@ -16,6 +16,7 @@ import { localizeRecipe } from "@/lib/recipe-localization";
 import { recipeLabel } from "@/lib/recipe-copy";
 import { bestelContact } from "@/lib/bestel-contact";
 import { productPhoto } from "@/lib/product-beeld";
+import { productLeefgebied, productLeefgebiedNote } from "@/lib/product-leefgebied";
 import { ProductPhotoCredit } from "@/components/ProductPhotoCredit";
 import { paginaMetadata, kruimelSchema } from "@/lib/seo";
 
@@ -44,6 +45,7 @@ export default async function ProductDetailPage({params}: Props) {
   ] : [];
   articles.push(["verse-vis-bewaren-en-bereiden-tips", lang === "de" ? "Fisch aufbewahren und zubereiten" : lang === "en" ? "Storing and preparing fish" : "Verse vis bewaren en bereiden"]);
   const nutritionRows = voeding ? [[c.energy, `${voeding.kcal} kcal / ${voeding.kj} kJ`], [c.fat, `${voeding.vet} g`], [c.saturated, `${voeding.verzadigd} g`], [c.carbs, `${voeding.koolhydraten} g`], [c.sugars, `${voeding.suikers} g`], [c.protein, `${voeding.eiwit} g`], [c.salt, `${voeding.zout} g`]] : [];
+  const leefgebied = productLeefgebied(slug, lang);
   // Informational catalogue: no unverified stock status or online-sale offers.
   const productSchema = {"@context":"https://schema.org", "@type":"Product", name:product.naam, description:product.desc, category, brand:{"@type":"Brand", name:BEDRIJF.naam}, image:photo ? `${BEDRIJF.domein}${photo.src}` : undefined, url:`${BEDRIJF.domein}/${lang}/assortiment/${slug}`};
   return <>
@@ -59,14 +61,15 @@ export default async function ProductDetailPage({params}: Props) {
         {isSalmon && <Link href={`/${lang}/varlaks`} className="block mt-6 pl-5" style={{borderLeft:"2px solid var(--seafoam)"}}><p className="kapitaal mb-2">{c.alternative}</p><p className="font-semibold underline">{c.salmon}</p><p className="text-sm mt-2 leading-relaxed">{c.salmonNote}</p></Link>}
       </div>}
       <div><p className="kapitaal mb-2">{c.inspiration}</p><h2 className="text-2xl mb-3">{c.cooking}</h2><p className="mb-6">{c.ideas}</p><p className="kapitaal mb-2">{c.blog}</p><ul className="mb-7">{articles.map(([article,label])=><li key={article} className="border-b border-sky-100"><Link href={`/${lang}/blog/${article}`} className="block py-3 underline font-semibold">{label} →</Link></li>)}</ul>
-        {ownRecipes.length > 0 && <div className="mb-8"><h2 className="text-xl mb-3">{c.recipes}</h2><ul className="space-y-3">{ownRecipes.map(r=><li key={r.slug}><Link href={`/${lang}/recepten/${r.slug}`} className="underline font-semibold">{r.title}</Link><p className="text-sm mt-1">{r.tijd} · {recipeLabel(r.moeilijkheid,lang)}</p></li>)}</ul></div>}
+        {ownRecipes.length > 0 ? <div className="mb-8"><h2 className="text-xl mb-3">{c.recipes}</h2><ul className="space-y-3">{ownRecipes.map(r=><li key={r.slug}><Link href={`/${lang}/recepten/${r.slug}`} className="underline font-semibold">{r.title}</Link><p className="text-sm mt-1">{r.tijd} · {recipeLabel(r.moeilijkheid,lang)}</p></li>)}</ul></div> : <p className="mb-4">{c.noRecipe}</p>}
         <Link href={`/${lang}/recepten`} className="underline font-semibold">{c.recipes} →</Link><p className="mt-3">{c.recipesNote}</p>
       </div>
     </div></Sectie>
     <Sectie grond="zand"><div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
-      <div><h2 className="text-2xl mb-3">{c.ingredients}</h2><p className="mb-4 leading-relaxed">{product.ingredienten}</p>{product.bevat.length>0 && <p className="kapitaal mb-4">{c.contains}: {product.bevat.join(" · ")}</p>}<p className="text-sm leading-relaxed">{c.allergenNote}</p>{(seizoen||viswijzer) && <div className="mt-8 pl-5" style={{borderLeft:"2px solid var(--seafoam)"}}>{seizoen && <p className="mb-3"><strong>{c.season}:</strong> {seizoen}</p>}{viswijzer && <p><strong>VISwijzer:</strong> {viswijzer}</p>}</div>}</div>
+      <div><h2 className="text-2xl mb-3">{c.ingredients}</h2><p className="mb-4 leading-relaxed">{product.ingredienten}</p>{product.bevat.length>0 && <p className="kapitaal mb-4">{c.contains}: {product.bevat.join(" · ")}</p>}<p className="text-sm leading-relaxed">{c.allergenNote}</p>{leefgebied && <div className="mt-8 rounded-2xl border border-sky-100 bg-white p-5"><h3 className="font-semibold">{lang === "de" ? "Art und Lebensraum" : lang === "en" ? "Species and natural range" : "Vissoort en leefgebied"}</h3><p className="mt-2 leading-relaxed">{leefgebied}</p><p className="mt-3 text-sm text-slate-600">{productLeefgebiedNote(lang)}</p></div>}{(seizoen||viswijzer) && <div className="mt-8 pl-5" style={{borderLeft:"2px solid var(--seafoam)"}}>{seizoen && <p className="mb-3"><strong>{c.season}:</strong> {seizoen}</p>}{viswijzer && <p><strong>VISwijzer:</strong> {viswijzer}</p>}</div>}</div>
       <div><h2 className="text-2xl mb-3">{c.nutrition}</h2>{voeding?<><p className="kapitaal mb-4">{c.per100}</p><table className="w-full"><tbody>{nutritionRows.map(([label,value],i)=><tr key={label} className="border-b border-sky-100"><th scope="row" className={`py-2.5 text-left font-normal ${[2,4].includes(i)?"pl-6":""}`}>{label}</th><td className="py-2.5 text-right">{value}</td></tr>)}</tbody></table><p className="text-sm mt-3">{c.nutritionNote}</p></>:<p>{c.nutritionRequest}</p>}{prijs && <p className="text-sm mt-6">{formatPrijs(prijs,lang)} — {c.priceNote}</p>}</div>
     </div><Link href={`/${lang}/assortiment`} className="inline-block mt-10 underline font-semibold">← {c.back}</Link></Sectie>
     <PaginaSlot titel={`${c.looking} ${lang === "de" ? product.naam : product.naam.toLowerCase()}?`} tekst={c.orderNote} knoppen={[action,{label:c.hours,href:`/${lang}/bezoek-ons`,soort:"lijn"},{label:BEDRIJF.telefoon.weergave,href:`tel:${BEDRIJF.telefoon.e164}`,extern:true,soort:"lijn"}]} />
   </>;
 }
+

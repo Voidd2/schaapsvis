@@ -7,6 +7,7 @@ const schema = await readFile(new URL("../../migrations/0001_student_portal.sql"
 const renewalMigration = await readFile(new URL("../../migrations/0002_student_pass_renewals.sql", import.meta.url), "utf8");
 const proofCleanupMigration = await readFile(new URL("../../migrations/0003_student_proof_cleanup_queue.sql", import.meta.url), "utf8");
 const pendingApplicationMigration = await readFile(new URL("../../migrations/0004_one_pending_student_application.sql", import.meta.url), "utf8");
+const newsletterRegionMigration = await readFile(new URL("../../migrations/0005_newsletter_region_tag.sql", import.meta.url), "utf8");
 const upgradeDb = new DatabaseSync(":memory:");
 upgradeDb.exec(schema);
 upgradeDb.exec(`
@@ -20,6 +21,7 @@ upgradeDb.exec(`
 upgradeDb.exec(renewalMigration);
 upgradeDb.exec(proofCleanupMigration);
 upgradeDb.exec(pendingApplicationMigration);
+upgradeDb.exec(newsletterRegionMigration);
 assert.equal(upgradeDb.prepare("SELECT application_id FROM student_passes WHERE id='legacy-pass'").get().application_id, "legacy-application", "migration associates existing student passes with their approved application");
 upgradeDb.close();
 const sqlite = new DatabaseSync(":memory:");
@@ -27,6 +29,7 @@ sqlite.exec(schema);
 sqlite.exec(renewalMigration);
 sqlite.exec(proofCleanupMigration);
 sqlite.exec(pendingApplicationMigration);
+sqlite.exec(newsletterRegionMigration);
 let simulateApplicationCommitFailure = false;
 let decisionReadBarrier = null;
 
@@ -336,7 +339,7 @@ const expiredPassCheck = await call("/api/members/admin/pass/verify", { method: 
 assert.equal((await expiredPassCheck.json()).valid, false, "the expired former pass cannot be used after renewal");
 
 const subscription = await call("/api/members/newsletter/subscribe", {
-  method: "POST", body: { email: "deals@example.test", consent: true, locale: "de" },
+  method: "POST", body: { email: "deals@example.test", consent: true, locale: "de", regionTag: "leiden" },
 });
 assert.equal(subscription.status, 202);
 const confirmationUrl = sentEmails.at(-1).text.match(/https:\/\/[^\s]+/)[0];
@@ -355,6 +358,7 @@ assert.equal(confirmationResult.headers.get("Location"), "https://www.schaapsvis
 assert.equal(sentEmails.at(-1).subject, "Sie erhalten jetzt E-Mail-Angebote von Schaap's Vishandel");
 assert.match(sentEmails.at(-1).text, /locale=de/);
 assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='deals@example.test'").get().status, "subscribed");
+assert.equal(sqlite.prepare("SELECT region_tag FROM newsletter_subscriptions WHERE email='deals@example.test'").get().region_tag, "leiden", "newsletter stores the subscriber's chosen local-area tag");
 
 const draft = await call("/api/members/admin/newsletter-campaigns", {
   method: "POST", cookie: sessionCookie, body: { subject: "Weekdeal test", body: "Alleen voor de test." },
@@ -382,7 +386,7 @@ assert.match(await unsubscribeResult.text(), /<html lang="de">/);
 assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='deals@example.test'").get().status, "unsubscribed");
 
 const dailyLimitSubscription = await call("/api/members/newsletter/subscribe", {
-  method: "POST", body: { email: "quota@example.test", consent: true },
+  method: "POST", body: { email: "quota@example.test", consent: true, regionTag: "voorschoten" },
 });
 assert.equal(dailyLimitSubscription.status, 202);
 const quotaConfirmationUrl = sentEmails.at(-1).text.match(/https:\/\/[^\s]+/)[0];
@@ -425,3 +429,4 @@ assert.equal(resetResult.status, 303);
 assert.equal(resetResult.headers.get("Location"), "https://www.schaapsvishandel.nl/en/account?password-reset=1");
 
 console.log("Account worker integration tests passed: email verification, login, proof upload and orphan cleanup retries, private proof review, student pass renewal, newsletter double opt-in, campaign delivery, unsubscribe and daily quota recovery.");
+

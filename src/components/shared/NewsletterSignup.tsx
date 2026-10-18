@@ -8,6 +8,8 @@ const copy = {
     title: "Weekdeals per e-mail",
     intro: "Elke week een aanbieding op iets nieuws uit onze toonbank. Alleen als u daar zelf voor kiest.",
     email: "Uw e-mailadres",
+    region: "Waar woont u of haalt u meestal vis?",
+    regions: { leiden: "Leiden", voorschoten: "Voorschoten", anders: "Een andere plaats" },
     consent: "Ja, ik wil e-maildeals ontvangen. Ik kan mij altijd weer afmelden.",
     submit: "Houd mij op de hoogte",
     sending: "Versturen…",
@@ -19,6 +21,8 @@ const copy = {
     title: "Weekly offers by email",
     intro: "A weekly offer on something new from our counter. Only if you choose to sign up.",
     email: "Your email address",
+    region: "Where do you live or usually shop with us?",
+    regions: { leiden: "Leiden", voorschoten: "Voorschoten", anders: "Another town" },
     consent: "Yes, I want to receive email offers. I can unsubscribe at any time.",
     submit: "Keep me updated",
     sending: "Sending…",
@@ -30,6 +34,8 @@ const copy = {
     title: "Wochenangebote per E-Mail",
     intro: "Jede Woche ein Angebot zu Neuheiten aus unserer Theke – nur wenn Sie sich selbst anmelden.",
     email: "Ihre E-Mail-Adresse",
+    region: "Wo wohnen Sie oder kaufen Sie meistens bei uns ein?",
+    regions: { leiden: "Leiden", voorschoten: "Voorschoten", anders: "Ein anderer Ort" },
     consent: "Ja, ich möchte E-Mail-Angebote erhalten. Ich kann mich jederzeit abmelden.",
     submit: "Auf dem Laufenden bleiben",
     sending: "Wird gesendet…",
@@ -63,7 +69,7 @@ export function NewsletterSignup({ compact = false, locale = "nl" }: { compact?:
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "same-origin",
-        body: JSON.stringify({ email: form.get("email"), consent: form.get("consent") === "on", locale: language }),
+        body: JSON.stringify({ email: form.get("email"), consent: form.get("consent") === "on", locale: language, regionTag: form.get("regionTag") }),
       });
       if (!response.ok) throw new Error("newsletter-unavailable");
       setSuccess(true);
@@ -87,6 +93,13 @@ export function NewsletterSignup({ compact = false, locale = "nl" }: { compact?:
         {t.email}
         <input name="email" type="email" required autoComplete="email" maxLength={254} disabled={busy || success} className="mt-1 block w-full rounded-lg border border-sky-200 bg-white px-3 py-2.5 text-base text-slate-900 outline-none focus:border-sky-700 focus:ring-2 focus:ring-sky-100 disabled:opacity-70" />
       </label>
+      <label className={`block text-sm font-medium ${labelColor}`}>
+        {t.region}
+        <select name="regionTag" required disabled={busy || success} defaultValue="" className="mt-1 block w-full rounded-lg border border-sky-200 bg-white px-3 py-2.5 text-base text-slate-900 outline-none focus:border-sky-700 focus:ring-2 focus:ring-sky-100 disabled:opacity-70">
+          <option value="" disabled>—</option>
+          {Object.entries(t.regions).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+        </select>
+      </label>
       <label className={`flex items-start gap-2 text-sm leading-relaxed ${consentColor}`}>
         <input name="consent" type="checkbox" required disabled={busy || success} className="mt-1 size-4 shrink-0 accent-sky-700" />
         <span>{t.consent}</span>
@@ -99,3 +112,4 @@ export function NewsletterSignup({ compact = false, locale = "nl" }: { compact?:
     </form>
   );
 }
+

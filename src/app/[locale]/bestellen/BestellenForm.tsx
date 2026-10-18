@@ -25,7 +25,7 @@ import { useWinkelwagen } from "@/components/winkel/Winkelwagen";
  *
  *  • Verse vis — gaat op gewicht, dus er staat géén totaalbedrag. Dat zou een
  *    belofte zijn die de weegschaal niet kan waarmaken. We bellen met de
- *    dagprijs voordat we inpakken, en dat staat er ook zo.
+ *    vooraf met de klant af. Er wordt geen dagprijs gehanteerd.
  *  • Een visschaal — die is wél op de cent uit te rekenen, en kan daarom straks
  *    via SumUp meteen worden afgerekend.
  *
@@ -674,3 +674,4 @@ function Rij({ label, waarde }: { label: string; waarde: string }) {
     </div>
   );
 }
+

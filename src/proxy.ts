@@ -95,7 +95,7 @@ export function proxy(request: NextRequest) {
 /**
  * Alles loopt hierlangs.
  *
- * Eerder stond hier `/((?!api|_next|_vercel|.*\\..*).*)`: dat liet de API-routes,
+ * Eerder stond hier `/((?!api|_next|_vercel|.*\..*).*)`: dat liet de API-routes,
  * de sitemap, robots.txt en élk pad met een punt erin ongemoeid. Het slot zat
  * dus alleen op de gewone pagina's, en niet op de gegevens erachter.
  *
@@ -105,3 +105,4 @@ export function proxy(request: NextRequest) {
 export const config = {
   matcher: ["/((?!_next/static|_next/image).*)"],
 };
+

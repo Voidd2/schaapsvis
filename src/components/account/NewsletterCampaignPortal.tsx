@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 
 type Campaign = { id: string; subject: string; status: "draft" | "queued" | "sent" | "partial_failure"; recipient_count: number; sent_count: number; failed_count: number; created_at: string };
-type Data = { campaigns: Campaign[]; subscriberCount: number };
+type Data = { campaigns: Campaign[]; subscriberCount: number; subscriberRegions?: { region_tag: string | null; count: number }[] };
 
 const copy = {
   nl: { title: "Weekdeals per e-mail", intro: "Maak een concept en verstuur het alleen wanneer u daar zelf bewust voor kiest. Alleen bevestigde inschrijvers ontvangen de mail; iedere mail bevat een afmeldlink.", subject: "Onderwerp", body: "Aanbieding en voorwaarden", save: "Concept opslaan", send: "Stuur naar ingeschreven klanten", confirm: "Deze e-mail wordt verstuurd naar alle bevestigde inschrijvers. Doorgaan?", count: "bevestigde inschrijvers", drafts: "Campagnes", loading: "Gegevens laden…", forbidden: "Geen beheerderstoegang.", empty: "Nog geen campagnes.", fail: "Opslaan of versturen lukte niet.", saved: "Concept opgeslagen.", queued: "Campagne in de verzendwachtrij.", draft: "Concept", queuedStatus: "Wordt verzonden", sent: "Verzonden", partial: "Verzonden met fouten", sentCount: "verzonden", failedCount: "mislukt" },
@@ -81,7 +81,10 @@ export function NewsletterCampaignPortal({ locale }: { locale: string }) {
         <p className="mt-3 max-w-3xl leading-relaxed text-slate-700">{t.intro}</p>
         {data === null ? <p className="mt-8">{t.loading}</p> : forbidden ? <p role="alert" className="mt-8 rounded-xl bg-amber-50 p-5">{t.forbidden}</p> : (
           <>
-            <p className="mt-6 rounded-lg bg-sky-50 p-4 text-sm font-semibold text-sky-950">{data.subscriberCount} {t.count}</p>
+            <div className="mt-6 rounded-lg bg-sky-50 p-4 text-sm font-semibold text-sky-950">
+              <p>{data.subscriberCount} {t.count}</p>
+              {data.subscriberRegions && <p className="mt-2 font-normal">{language === "de" ? "Nach Ort" : language === "en" ? "By area" : "Per plaats"}: {data.subscriberRegions.map(({ region_tag, count }) => `${region_tag === "leiden" ? "Leiden" : region_tag === "voorschoten" ? "Voorschoten" : region_tag === "anders" ? (language === "de" ? "Andere Orte" : language === "en" ? "Other places" : "Andere plaatsen") : (language === "de" ? "Ohne Angabe" : language === "en" ? "Not specified" : "Niet opgegeven")}: ${count}`).join(" · ")}</p>}
+            </div>
             <form onSubmit={create} className="mt-6 space-y-4 rounded-2xl border border-sky-200 bg-white p-6 shadow-sm sm:p-8">
               <label className="block text-sm font-semibold">{t.subject}<input name="subject" required maxLength={140} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>
               <label className="block text-sm font-semibold">{t.body}<textarea name="body" required maxLength={3000} rows={7} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>
@@ -103,3 +106,4 @@ export function NewsletterCampaignPortal({ locale }: { locale: string }) {
     </div>
   );
 }
+

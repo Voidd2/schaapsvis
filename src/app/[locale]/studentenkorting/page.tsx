@@ -7,25 +7,25 @@ const copy = {
   nl: {
     title: "10% studentenkorting in Leiden | Schaap's Vis",
     description:
-      "Leidse MBO-, HBO- en WO-studenten krijgen 10% korting op kibbeling, haring, broodjes haring en drinken bij Schaap's Vishandel.",
-    eyebrow: "Voor studenten in Leiden",
-    heading: "Goed eten. Een beetje minder betalen.",
+      "Nederlandse en internationale studenten in Leiden krijgen 10% korting op kibbeling, haring, broodjes haring en drinken bij Schaap's Vishandel.",
+    eyebrow: "Voor Nederlandse én internationale studenten",
+    heading: "Student in Leiden? Eet lekker mee.",
     intro:
-      "Studeer je in Leiden aan het mbo, hbo of de universiteit? Na goedkeuring krijg je 10% studentenkorting op kibbeling, haring, broodjes haring en drinken bij Schaap's Vishandel.",
+      "Studeer je in Leiden aan het mbo, hbo of de universiteit? Nederlandse en internationale studenten kunnen na goedkeuring 10% korting krijgen op kibbeling, haring, broodjes haring en drinken bij Schaap's Vishandel.",
     categories: ["Kibbeling", "Haring", "Broodjes haring", "Drinken"],
     condition: "Voor wie is de korting?",
     conditionText:
-      "Voor studenten die in Leiden een MBO-, HBO- of WO-opleiding volgen. Middelbare scholieren vallen buiten deze actie. Na handmatige goedkeuring toon je je digitale studentenpas. Die is één studiejaar geldig; daarna lever je opnieuw bewijs aan.",
+      "Voor Nederlandse en internationale studenten die in Leiden een MBO-, HBO- of WO-opleiding volgen; middelbare scholieren vallen buiten de actie. De korting geldt alleen voor kibbeling, haring, broodjes haring en drinken en kan niet worden gecombineerd met nieuwsbriefkortingen of andere acties. Na goedkeuring is de digitale pas één studiejaar geldig; daarna is nieuw bewijs nodig.",
     card: "Je digitale studentenpas",
     cardExample: "Voorbeeld · na beoordeling beschikbaar in je account",
     steps: "Zo werkt aanmelden",
     step1: "Maak een account met je e-mailadres en bevestig dat adres.",
-    step2: "Dien je studentenaanvraag in en upload bewijs dat je in Leiden studeert.",
+    step2: "Voor de aanvraag willen we je inschrijving via je schoolmail controleren. Je persoonlijke e-mailadres blijft gekoppeld aan je account voor accountberichten.",
     step3: "We beoordelen je aanvraag handmatig. Na goedkeuring verschijnt je digitale kortingspas in je account.",
-    privacy: "Je bewijs is alleen zichtbaar voor de beoordelaar en wordt na de beoordeling verwijderd. E-maildeals zijn optioneel: je kiest daar apart voor en kunt je altijd afmelden.",
+    privacy: "De aanvraag voor studentenkorting is nog niet geopend. Je persoonlijke e-mailadres is nodig voor je account; schoolmailcontrole is een geplande verificatiestap. Nieuwsbrief en reclame zijn vrijwillig, staan los van de korting en kun je altijd afmelden.",
     weekly: "Elke week iets nieuws proeven",
     weeklyText:
-      "We testen geregeld nieuwe producten. Wie zich later vrijwillig aanmeldt voor e-mail, ontvangt onze weekdeals en kan ons laten weten wat ervan op tafel mag blijven.",
+      "Meld je apart en vrijwillig aan voor nieuws uit de toonbank en weekdeals. Deze nieuwsbriefaanbiedingen zijn niet te combineren met de studentenkorting of andere acties.",
     status: "Aanmelden voor korting opent zodra de veilige opslag, e-mail en beheeromgeving in Cloudflare zijn gekoppeld.",
     account: "Bekijk accountpagina",
     home: "Bekijk ons assortiment",
@@ -36,26 +36,26 @@ const copy = {
   en: {
     title: "10% student discount in Leiden | Schaap's Vis",
     description:
-      "Leiden MBO, college and university students get 10% off kibbeling, herring, herring sandwiches and drinks at Schaap's Vishandel.",
-    eyebrow: "For students in Leiden",
-    heading: "Good food. A little less to pay.",
+      "Dutch and international students in Leiden get 10% off kibbeling, herring, herring sandwiches and drinks at Schaap's Vishandel.",
+    eyebrow: "For Dutch and international students",
+    heading: "Studying in Leiden? Eat well with us.",
     intro:
-      "Studying in Leiden at MBO, HBO or university level? After approval, get 10% off kibbeling, herring, herring sandwiches and drinks at Schaap's Vishandel.",
+      "Studying in Leiden at MBO, HBO or university level? Dutch and international students can get 10% off kibbeling, herring, herring sandwiches and drinks at Schaap's Vishandel after approval.",
     categories: ["Kibbeling", "Herring", "Herring sandwiches", "Drinks"],
     condition: "Who is eligible?",
     conditionText:
-      "Students enrolled in an MBO, HBO or university programme in Leiden. Secondary-school pupils are not eligible. After manual approval, show your digital student pass. It is valid for one academic year; you must then submit proof again.",
+      "For Dutch and international students enrolled in an MBO, HBO or university programme in Leiden; secondary-school pupils are not eligible. The discount applies only to kibbeling, herring, herring sandwiches and drinks. It cannot be combined with newsletter discounts or other offers. After approval, the digital pass is valid for one academic year; new proof is then required.",
     card: "Your digital student pass",
     cardExample: "Preview · available in your account after approval",
     steps: "How to apply",
     step1: "Create an account with your email address and verify it.",
-    step2: "Submit a student application and upload proof that you study in Leiden.",
+    step2: "We plan to verify enrolment through your institutional email address. Your personal email address remains linked to your account for account messages.",
     step3: "We review each application manually. Once approved, your digital discount pass appears in your account.",
     privacy:
-      "Only the reviewer can access your proof, which is deleted after review. Email offers are optional: you choose separately and can unsubscribe at any time.",
+      "Student applications are not open yet. Your personal email is needed for your account; institutional-email verification is a planned step. Marketing emails are optional, separate from the discount, and can be cancelled at any time.",
     weekly: "Try something new each week",
     weeklyText:
-      "We regularly test new products. People who choose to join our email list receive our weekly offers and can tell us what deserves a place on the counter.",
+      "Sign up separately and voluntarily for shop news and weekly offers. Newsletter discounts cannot be combined with the student discount or other offers.",
     status: "Student applications open when secure storage, email and admin review are connected in Cloudflare.",
     account: "Open your account",
     home: "Explore our range",
@@ -66,26 +66,26 @@ const copy = {
   de: {
     title: "10 % Studentenrabatt in Leiden | Schaap's Vis",
     description:
-      "Studierende in Leiden (MBO, HBO oder Uni) erhalten 10 % Rabatt auf Kibbeling, Hering, Heringsbrötchen und Getränke bei Schaap's Vishandel.",
-    eyebrow: "Für Studierende in Leiden",
-    heading: "Gutes Essen. Ein bisschen günstiger.",
+      "Niederländische und internationale Studierende in Leiden erhalten 10 % Rabatt auf Kibbeling, Hering, Heringsbrötchen und Getränke bei Schaap's Vishandel.",
+    eyebrow: "Für niederländische und internationale Studierende",
+    heading: "Du studierst in Leiden? Iss gut bei uns.",
     intro:
-      "Studieren Sie in Leiden auf MBO-, HBO- oder Universitätsniveau? Nach der Genehmigung erhalten Sie 10 % Rabatt auf Kibbeling, Hering, Heringsbrötchen und Getränke bei Schaap's Vishandel.",
+      "Studieren Sie in Leiden auf MBO-, HBO- oder Universitätsniveau? Niederländische und internationale Studierende können nach Freigabe 10 % Rabatt auf Kibbeling, Hering, Heringsbrötchen und Getränke bei Schaap's Vishandel erhalten.",
     categories: ["Kibbeling", "Hering", "Heringsbrötchen", "Getränke"],
     condition: "Wer kann den Rabatt erhalten?",
     conditionText:
-      "Studierende, die in Leiden ein MBO-, HBO- oder Universitätsstudium absolvieren. Schülerinnen und Schüler der weiterführenden Schule sind ausgeschlossen. Nach manueller Genehmigung zeigen Sie Ihren digitalen Rabattpass. Er gilt ein Studienjahr; danach müssen Sie erneut einen Nachweis einreichen.",
+      "Für niederländische und internationale Studierende in einem MBO-, HBO- oder Hochschulstudium in Leiden; Schülerinnen und Schüler weiterführender Schulen sind ausgeschlossen. Der Rabatt gilt nur für Kibbeling, Hering, Heringsbrötchen und Getränke und ist nicht mit Newsletter-Rabatten oder anderen Aktionen kombinierbar. Nach Freigabe ist der digitale Pass ein Studienjahr gültig; danach ist ein neuer Nachweis nötig.",
     card: "Ihr digitaler Studentenausweis",
     cardExample: "Vorschau · nach der Prüfung in Ihrem Konto verfügbar",
     steps: "So funktioniert die Anmeldung",
     step1: "Erstellen Sie ein Konto mit Ihrer E-Mail-Adresse und bestätigen Sie diese.",
-    step2: "Stellen Sie einen Studenten-Antrag und laden Sie einen Nachweis Ihres Studiums in Leiden hoch.",
+    step2: "Wir planen, die Immatrikulation über Ihre Hochschul-E-Mail-Adresse zu prüfen. Ihre private E-Mail-Adresse bleibt für Kontonachrichten mit dem Konto verknüpft.",
     step3: "Wir prüfen jeden Antrag manuell. Nach der Freigabe erscheint Ihr digitaler Rabattpass im Konto.",
     privacy:
-      "Nur die prüfende Person kann den Nachweis sehen; nach der Prüfung wird er gelöscht. E-Mail-Angebote sind freiwillig und können jederzeit abbestellt werden.",
+      "Studentenanträge sind noch nicht geöffnet. Ihre private E-Mail-Adresse wird für das Konto benötigt; die Prüfung über die Hochschul-E-Mail ist geplant. Werbung per E-Mail ist freiwillig, unabhängig vom Rabatt und jederzeit abbestellbar.",
     weekly: "Jede Woche etwas Neues probieren",
     weeklyText:
-      "Wir testen regelmäßig neue Produkte. Wer sich freiwillig für E-Mails anmeldet, erhält unsere wöchentlichen Angebote und kann uns sagen, was im Sortiment bleiben soll.",
+      "Melden Sie sich separat und freiwillig für Neuigkeiten aus der Theke und Wochenangebote an. Newsletter-Rabatte sind nicht mit dem Studentenrabatt oder anderen Aktionen kombinierbar.",
     status: "Studentenanträge werden freigeschaltet, sobald sicherer Speicher, E-Mail und Verwaltung in Cloudflare verbunden sind.",
     account: "Kontoseite öffnen",
     home: "Sortiment entdecken",
@@ -195,3 +195,4 @@ export default async function StudentenkortingPage({ params }: { params: Promise
     </div>
   );
 }
+

@@ -3,10 +3,8 @@
  *
  * Twee soorten dingen kunnen erin, en die gedragen zich verschillend:
  *
- *  • **Verse vis** gaat op gewicht. Wat een kilo kabeljauw kost weten we pas als
- *    hij op de weegschaal ligt, dus staat er bij deze regels géén bedrag. We
- *    bellen met de dagprijs voordat we inpakken. Nooit een bedrag tonen dat de
- *    weegschaal niet kan waarmaken.
+ *  • **Verse vis** gaat op gewicht. Het totaal hangt af van het gekozen gewicht;
+ *    we spreken de prijs vooraf met de klant af. We tonen geen dagprijs.
  *  • **Een visschaal** is wél op de cent uit te rekenen: startbedrag plus de
  *    extra's die de klant erbij kiest.
  *
@@ -129,3 +127,4 @@ export function bewaarSamenstelling(samen: Samenstelling) {
     /* geen opslag beschikbaar */
   }
 }
+

@@ -40,3 +40,4 @@ export function siteIsOpenbaar(): boolean {
 export function siteOpSlot(): boolean {
   return !siteIsOpenbaar();
 }
+
