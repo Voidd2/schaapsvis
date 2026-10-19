@@ -7,7 +7,6 @@ import { Search, ArrowUpRight, MessageCircle, SlidersHorizontal } from "lucide-r
 import { useLocale } from "next-intl";
 import type { Product, Categorie } from "@/lib/assortiment-data";
 import { productPhoto } from "@/lib/product-beeld";
-import { ProductPhotoCredit } from "@/components/ProductPhotoCredit";
 import { matchesQuery } from "@/lib/search";
 import { bestelContact } from "@/lib/bestel-contact";
 import { productAvailability } from "@/lib/product-availability";
@@ -92,7 +91,6 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
           <div className={`collection-item-stock mt-3 mb-3 text-sm leading-relaxed ${stock.unavailable?"text-rose-700":"text-slate-700"}`} data-stock={p.beschikbaar}>
             <p className="font-semibold">{stock.label}</p><p className="mt-1">{stock.note}</p>
           </div>
-          {photo?.credit && <div className="collection-item-credit"><ProductPhotoCredit photo={photo} locale={locale} /></div>}
           <div className="collection-item-actions">
             <Link href={`/${locale}/assortiment/${p.slug}`}>{c.detail}<ArrowUpRight size={14} aria-hidden="true" /></Link>
             {platter ? <Link href={`/${locale}/visschalen`}>{locale === "nl" ? "Visschaal samenstellen" : locale === "de" ? "Fischplatte zusammenstellen" : "Create a seafood platter"}</Link>

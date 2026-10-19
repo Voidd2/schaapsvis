@@ -57,6 +57,7 @@ export function Footer() {
         { href: p("/recepten"), label: nav("recepten") },
         { href: p("/viskalender"), label: nav("viswijzer") },
         { href: p("/blog"), label: nav("blog") },
+        { href: p("/beeldverantwoording"), label: locale === "de" ? "Bildnachweise" : locale === "en" ? "Image credits" : "Beeldverantwoording" },
       ],
     },
     {

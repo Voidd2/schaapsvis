@@ -788,7 +788,7 @@ export const products: Product[] = [
       "EIEREN",
       "MOSTERD"
     ],
-    "beschikbaar": "op bestelling"
+    "beschikbaar": "always"
   },
   {
     "slug": "wilde-zalmfilet",
