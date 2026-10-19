@@ -78,7 +78,7 @@ export const BEELD = {
   gebakkenVis: {
     waar: "Homepage, het blok over gebakken vis",
     wat: "Verse kibbeling of lekkerbek, warm, net uit de pan. Bij voorkeur in het bakje zoals de klant het meekrijgt.",
-    bestand: "/images/editorial/kibbeling.webp",
+    bestand: "/images/editorial/kibbeling-schaapstray.png",
     alt: "Krokante kibbeling met saus",
     verhouding: "liggend",
     terugval: "Kibbeling en lekkerbek",

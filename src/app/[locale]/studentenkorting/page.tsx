@@ -23,9 +23,9 @@ const copy = {
     step2: "Voor de aanvraag willen we je inschrijving via je schoolmail controleren. Je persoonlijke e-mailadres blijft gekoppeld aan je account voor accountberichten.",
     step3: "We beoordelen je aanvraag handmatig. Na goedkeuring verschijnt je digitale kortingspas in je account.",
     privacy: "De aanvraag voor studentenkorting is nog niet geopend. Je persoonlijke e-mailadres is nodig voor je account; schoolmailcontrole is een geplande verificatiestap. Nieuwsbrief en reclame zijn vrijwillig, staan los van de korting en kun je altijd afmelden.",
-    weekly: "Elke week iets nieuws proeven",
+    weekly: "Regelmatig iets nieuws proeven",
     weeklyText:
-      "Meld je apart en vrijwillig aan voor nieuws uit de toonbank en weekdeals. Deze nieuwsbriefaanbiedingen zijn niet te combineren met de studentenkorting of andere acties.",
+      "Meld je apart en vrijwillig aan voor nieuws en aanbiedingen speciaal voor Schaap’s-klanten. We sturen een bericht wanneer er iets leuks te delen is. Deze aanbiedingen zijn niet te combineren met de studentenkorting of andere acties.",
     status: "Aanmelden voor korting opent zodra de veilige opslag, e-mail en beheeromgeving in Cloudflare zijn gekoppeld.",
     account: "Bekijk accountpagina",
     home: "Bekijk ons assortiment",
@@ -53,9 +53,9 @@ const copy = {
     step3: "We review each application manually. Once approved, your digital discount pass appears in your account.",
     privacy:
       "Student applications are not open yet. Your personal email is needed for your account; institutional-email verification is a planned step. Marketing emails are optional, separate from the discount, and can be cancelled at any time.",
-    weekly: "Try something new each week",
+    weekly: "Discover something new from time to time",
     weeklyText:
-      "Sign up separately and voluntarily for shop news and weekly offers. Newsletter discounts cannot be combined with the student discount or other offers.",
+      "Sign up separately and voluntarily for news and offers especially for Schaap’s customers. We will email when there is something worth sharing. These offers cannot be combined with the student discount or other promotions.",
     status: "Student applications open when secure storage, email and admin review are connected in Cloudflare.",
     account: "Open your account",
     home: "Explore our range",
@@ -83,9 +83,9 @@ const copy = {
     step3: "Wir prüfen jeden Antrag manuell. Nach der Freigabe erscheint Ihr digitaler Rabattpass im Konto.",
     privacy:
       "Studentenanträge sind noch nicht geöffnet. Ihre private E-Mail-Adresse wird für das Konto benötigt; die Prüfung über die Hochschul-E-Mail ist geplant. Werbung per E-Mail ist freiwillig, unabhängig vom Rabatt und jederzeit abbestellbar.",
-    weekly: "Jede Woche etwas Neues probieren",
+    weekly: "Ab und zu etwas Neues entdecken",
     weeklyText:
-      "Melden Sie sich separat und freiwillig für Neuigkeiten aus der Theke und Wochenangebote an. Newsletter-Rabatte sind nicht mit dem Studentenrabatt oder anderen Aktionen kombinierbar.",
+      "Melden Sie sich separat und freiwillig für Neuigkeiten und Angebote speziell für Schaap’s-Kunden an. Wir schreiben, wenn es etwas Schönes zu teilen gibt. Diese Angebote sind nicht mit dem Studentenrabatt oder anderen Aktionen kombinierbar.",
     status: "Studentenanträge werden freigeschaltet, sobald sicherer Speicher, E-Mail und Verwaltung in Cloudflare verbunden sind.",
     account: "Kontoseite öffnen",
     home: "Sortiment entdecken",
@@ -120,7 +120,7 @@ export default async function StudentenkortingPage({ params }: { params: Promise
             </div>
           </div>
           <figure className="relative overflow-hidden rounded-2xl min-h-[280px]">
-            <Image src="/images/editorial/kibbeling.webp" alt={c.alt} fill sizes="(max-width: 800px) 100vw, 50vw" className="object-cover" priority />
+            <Image src="/images/editorial/kibbeling-schaapstray.png" alt={c.alt} fill sizes="(max-width: 800px) 100vw, 50vw" className="object-cover" priority />
           </figure>
         </div>
       </section>

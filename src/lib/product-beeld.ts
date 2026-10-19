@@ -254,14 +254,8 @@ const INTERNET_BEELDEN: Record<string, InternetPhoto> = {
     }
   },
   "gamba-kroketten": {
-    "src": "/images/assortiment-internet/gamba-kroketten-commons.jpg",
+    "src": "/images/editorial/gambakroketten-eigen-product.png",
     "kind": "serving",
-    "credit": {
-      "author": "Ziko van Dijk",
-      "source": "https://commons.wikimedia.org/wiki/File:20231018_133452_shrimp_paste_croquette.jpg",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
-    }
   },
   "blacktiger-garnalen": {
     "src": "/images/assortiment-internet/blacktiger-garnalen.jpg",
@@ -322,15 +316,15 @@ const PRODUCT_BEELDEN: Record<string, Pick<ProductPhoto, "src" | "alt" | "credit
       licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
     },
   },
-  "schar": { src: "/images/editorial/schar-serveervoorbeeld.webp", alt: "Schar (Limanda limanda) op ijs — voorbeeldfoto", caption: "Voorbeeldfoto van schar; exacte levering en presentatie kunnen verschillen." },
-  "surimisalade": { src: "/images/editorial/surimisalade-serveervoorbeeld.webp", alt: "Romige surimisalade met surimi en bieslook — serveervoorbeeld", caption: "Serveervoorbeeld; samenstelling en presentatie in onze winkel kunnen verschillen." },
-  "bot": { src: "/images/editorial/bot-serveervoorbeeld.webp", alt: "Bot (Platichthys flesus) op ijs — voorbeeldfoto", caption: "Voorbeeldfoto van bot; exacte levering en presentatie kunnen verschillen." },
+  "schar": { src: "/images/editorial/schar-serveervoorbeeld.webp", alt: "Schar (Limanda limanda) op ijs — voorbeeldfoto", caption: "Schar (Limanda limanda)" },
+  "surimisalade": { src: "/images/editorial/surimisalade-serveervoorbeeld.webp", alt: "Romige surimisalade met surimi en bieslook — serveervoorbeeld", caption: "Surimisalade met bieslook" },
+  "bot": { src: "/images/editorial/bot-serveervoorbeeld.webp", alt: "Bot (Platichthys flesus) op ijs — voorbeeldfoto", caption: "Bot (Platichthys flesus)" },
   "wijtingfilet": { src: "/images/editorial/wijtingfilet-serveervoorbeeld.webp", alt: "Verse wijtingfilets op ijs — voorbeeldfoto", caption: "Voorbeeldfoto; wijtingfilet is op aanvraag beschikbaar." },
-  "victoriabaars": { src: "/images/editorial/victoriabaars-serveervoorbeeld.webp", alt: "Verse filets van Victoriabaars op ijs — voorbeeldfoto", caption: "Voorbeeldfoto van Victoriabaarsfilet; snit en presentatie kunnen verschillen." },
-  "gerookte-zalmmoot": { src: "/images/editorial/gerookte-zalmmoot-serveervoorbeeld.webp", alt: "Warmgerookte zalmmoot op een schaal — voorbeeldfoto", caption: "Voorbeeldfoto van warmgerookte zalm; uitvoering en presentatie kunnen verschillen." },
-  "gerookte-sprotfilet": { src: "/images/editorial/gerookte-sprotfilet-serveervoorbeeld.webp", alt: "Kleine gerookte sprotfilets op een schaal — serveervoorbeeld", caption: "Serveervoorbeeld van gerookte sprotfilet; de verpakking en presentatie kunnen verschillen." },
-  "gerookte-heilbot": { src: "/images/editorial/gerookte-heilbot-serveervoorbeeld.webp", alt: "Plakjes gerookte heilbot met dille en citroen — serveersuggestie", caption: "Serveersuggestie; snit en presentatie van onze gerookte heilbot kunnen verschillen." },
-  "gerookte-forel-heel": { src: "/images/editorial/gerookte-forel-heel-serveervoorbeeld.webp", alt: "Hele warmgerookte forel met citroen en dille — serveersuggestie", caption: "Serveersuggestie; formaat en presentatie van onze hele gerookte forel kunnen verschillen." },
+  "victoriabaars": { src: "/images/editorial/victoriabaars-serveervoorbeeld.webp", alt: "Verse filets van Victoriabaars op ijs — voorbeeldfoto", caption: "Victoriabaarsfilet" },
+  "gerookte-zalmmoot": { src: "/images/editorial/gerookte-zalmmoot-eigen-product.png", alt: "Warmgerookte zalmmoot van Schaap’s Vishandel", caption: "Moot warmgerookte zalmfilet." },
+  "gerookte-sprotfilet": { src: "/images/editorial/gerookte-sprotfilet-serveervoorbeeld.webp", alt: "Kleine gerookte sprotfilets op een schaal — serveervoorbeeld", caption: "Gerookte sprotfilet" },
+  "gerookte-heilbot": { src: "/images/editorial/gerookte-heilbot-serveervoorbeeld.webp", alt: "Plakjes gerookte heilbot met dille en citroen — serveersuggestie", caption: "Gerookte heilbot met dille en citroen" },
+  "gerookte-forel-heel": { src: "/images/editorial/gerookte-forel-heel-serveervoorbeeld.webp", alt: "Hele warmgerookte forel met citroen en dille — serveersuggestie", caption: "Warmgerookte forel met citroen en dille" },
   "zeebaars": { src: "/images/editorial/zeebaars.webp", alt: "Hele zeebaars op een witte schaal" },
   "zalmsalade": { src: "/images/editorial/zalmsalade.webp", alt: "Romige zalmsalade met dille — serveerinspiratie" },
   "tonijnsalade": { src: "/images/editorial/tonijnsalade.webp", alt: "Tonijnsalade met ui en augurk — serveerinspiratie" },
@@ -350,7 +344,7 @@ function sourcePhoto(product: Product): ProductPhoto | null {
     return { src: "/images/editorial/zalm.webp", editorial: true, whole: false, alt: "Zalm met citroen en dille — serveerinspiratie" };
   }
   if (product.slug === "kibbeling") {
-    return { src: "/images/editorial/kibbeling.webp", editorial: true, whole: false, alt: "Krokante kibbeling met saus" };
+    return { src: "/images/editorial/kibbeling-schaapstray.png", editorial: true, whole: false, alt: "Bakje krokante kibbeling met ravigotesaus" };
   }
   return product.photo ? { src: product.photo, editorial: false, whole: true, alt: product.naam } : null;
 }
@@ -387,7 +381,7 @@ const ALTS:Record<string,readonly[string,string,string]>={
 };
 export function productPhoto(product:Product,locale="nl"):ProductPhoto|null{
  const source=dirksPhotoMap[product.slug as keyof typeof dirksPhotoMap];
- if(source){
+ if(source && product.slug !== "kibbeling"){
   const l=locale==="de"?"de":locale==="en"?"en":"nl";
   const localeIndex=l==="nl"?0:l==="en"?1:2;
   const translatedAlt=ALTS[product.slug];
@@ -401,13 +395,13 @@ export function productPhoto(product:Product,locale="nl"):ProductPhoto|null{
   const localeIndex=l==="nl"?0:l==="en"?1:2;
   const translatedAlt=ALTS[product.slug];
   const captions:Record<string,Record<string,string>>={
-   schar:{nl:"Voorbeeldfoto van schar; exacte levering en presentatie kunnen verschillen.",en:"Illustrative photo of dab; the exact supply and presentation may differ.",de:"Beispielfoto einer Kliesche; aktuelle Lieferung und Präsentation können abweichen."},
-   surimisalade:{nl:"Serveervoorbeeld; samenstelling en presentatie in onze winkel kunnen verschillen.",en:"Serving suggestion; ingredients and presentation in our shop may differ.",de:"Serviervorschlag; Zutaten und Präsentation in unserem Geschäft können abweichen."},
-   bot:{nl:"Voorbeeldfoto van bot; exacte levering en presentatie kunnen verschillen.",en:"Illustrative photo of flounder; the exact supply and presentation may differ.",de:"Beispielfoto einer Flunder; aktuelle Lieferung und Präsentation können abweichen."},
+   schar:{nl:"Schar (Limanda limanda).",en:"European dab (Limanda limanda).",de:"Kliesche (Limanda limanda)."},
+   surimisalade:{nl:"Surimisalade met bieslook.",en:"Surimi salad with chives.",de:"Surimisalat mit Schnittlauch."},
+   bot:{nl:"Bot (Platichthys flesus).",en:"European flounder (Platichthys flesus).",de:"Flunder (Platichthys flesus)."},
    wijtingfilet:{nl:"Voorbeeldfoto; wijtingfilet is op aanvraag beschikbaar.",en:"Illustrative photo; whiting fillets are available on request.",de:"Beispielfoto; Wittlingsfilet ist auf Anfrage erhältlich."},
-   victoriabaars:{nl:"Voorbeeldfoto van Victoriabaarsfilet; snit en presentatie kunnen verschillen.",en:"Illustrative photo of Nile perch fillet; cut and presentation may differ.",de:"Beispielfoto von Nilbarschfilet; Zuschnitt und Präsentation können abweichen."},
+   victoriabaars:{nl:"Victoriabaarsfilet.",en:"Nile perch fillet.",de:"Nilbarschfilet."},
    "gerookte-zalmmoot":{nl:"Moot warmgerookte zalmfilet.",en:"A portion of warm-smoked salmon fillet.",de:"Ein Stück heißgeräuchertes Lachsfilet."},
-   "gerookte-sprotfilet":{nl:"Serveervoorbeeld van gerookte sprotfilet; de verpakking en presentatie kunnen verschillen.",en:"Serving suggestion for smoked sprat fillets; packaging and presentation may differ.",de:"Serviervorschlag für geräucherte Sprottenfilets; Verpackung und Präsentation können abweichen."},
+   "gerookte-sprotfilet":{nl:"Gerookte sprotfilet.",en:"Smoked sprat fillets.",de:"Geräucherte Sprottenfilets."},
   };
   return {...inHouseImage,alt:translatedAlt?.[localeIndex]||inHouseImage.alt,caption:captions[product.slug][l],editorial:true,whole:false};
  }
@@ -415,7 +409,7 @@ export function productPhoto(product:Product,locale="nl"):ProductPhoto|null{
  if(internet){
   const l=locale==="de"?"de":locale==="en"?"en":"nl";
   const labels={nl:{product:"Productfoto ter illustratie",serving:"Serveervoorbeeld",species:"Hoofdingrediënt ter illustratie"},en:{product:"Illustrative product photograph",serving:"Serving suggestion",species:"Illustrative photograph of the main ingredient"},de:{product:"Produktfoto zur Illustration",serving:"Serviervorschlag",species:"Beispielfoto der Hauptzutat"}}[l];
-  const captions={nl:{product:"Foto ter illustratie; uitvoering en presentatie kunnen verschillen.",serving:"Serveervoorbeeld; dit is geen foto van onze eigen bereiding.",species:"Foto van het hoofdingrediënt; de aangeboden snit of bereiding kan verschillen."},en:{product:"Illustrative photograph; presentation and preparation may differ.",serving:"Serving suggestion; this is not a photograph of our own preparation.",species:"Photograph of the main ingredient; the cut or preparation offered may differ."},de:{product:"Beispielfoto; Zubereitung und Präsentation können abweichen.",serving:"Serviervorschlag; kein Foto unserer eigenen Zubereitung.",species:"Foto der Hauptzutat; der angebotene Zuschnitt oder die Zubereitung kann abweichen."}}[l];
+  const captions={nl:{product:"Productfoto.",serving:"Serveersuggestie.",species:"De vissoort in beeld."},en:{product:"Product photo.",serving:"Serving suggestion.",species:"The fish shown."},de:{product:"Produktfoto.",serving:"Serviervorschlag.",species:"Die abgebildete Fischart."}}[l];
   const subjects:Record<string,Record<string,string>>={
    kabeljauwwangen:{nl:"Koppen van kabeljauw, waaruit de wangen worden gesneden",en:"Cod heads, from which the cheeks are cut",de:"Kabeljauköpfe, aus denen die Backen geschnitten werden"},
    zeebrasemfilet:{nl:"Hele zeebrasem (Pagellus bogaraveo), vóór het fileren",en:"Whole blackspot seabream (Pagellus bogaraveo), before filleting",de:"Ganze Graubarschbrasse (Pagellus bogaraveo), vor dem Filetieren"},
@@ -425,17 +419,17 @@ export function productPhoto(product:Product,locale="nl"):ProductPhoto|null{
    "verse-heilbot":{nl:"Heilbot op ijs — voorbeeldfoto",en:"Halibut on ice — illustrative photo",de:"Heilbutt auf Eis — Beispielfoto"},
   };
   const caption=product.slug==="verse-heilbot"
-   ? {nl:"Voorbeeldfoto van heilbot op ijs; de vis die wij leveren kan in formaat en presentatie verschillen.",en:"Illustrative photo of halibut on ice; the fish we supply may differ in size and presentation.",de:"Beispielfoto von Heilbutt auf Eis; der von uns angebotene Fisch kann sich in Größe und Präsentation unterscheiden."}[l]
+   ? {nl:"Heilbot op ijs.",en:"Halibut on ice.",de:"Heilbutt auf Eis."}[l]
    : captions[internet.kind];
   return {src:internet.src,alt:subjects[product.slug]?.[l]||product.naam+" — "+labels[internet.kind],caption,editorial:true,whole:internet.kind!=="serving",credit:internet.credit};
  }
  const photo=sourcePhoto(product);if(!photo)return null;
- if(["krabsalade","tonijnsalade","zalmsalade"].includes(product.slug))photo.caption=locale==="en"?"Serving illustration; the ingredients and presentation in our shop may differ.":locale==="de"?"Servierbeispiel; Zutaten und Präsentation in unserem Geschäft können abweichen.":"Serveervoorbeeld; samenstelling en presentatie in onze winkel kunnen afwijken.";
+ if(["krabsalade","tonijnsalade","zalmsalade"].includes(product.slug))photo.caption=locale==="en"?"Salad serving suggestion.":locale==="de"?"Serviervorschlag für Fischsalat.":"Serveersuggestie voor vissalade.";
  const captionBySlug:Record<string,Record<string,string>>={
-  "gerookte-kipper":{nl:"Serveervoorbeeld; de uitvoering en presentatie van onze gerookte kipper kunnen verschillen.",en:"Serving suggestion; the preparation and presentation of our smoked kipper may differ.",de:"Serviervorschlag; Zubereitung und Präsentation unseres Räucherkippers können abweichen."},
-  "gebakken-mosselen":{nl:"Serveervoorbeeld; de uitvoering en presentatie van onze gebakken mosselen kunnen verschillen.",en:"Serving suggestion; the preparation and presentation of our fried mussels may differ.",de:"Serviervorschlag; Zubereitung und Präsentation unserer gebratenen Miesmuscheln können abweichen."},
-  "gerookte-heilbot":{nl:"Serveersuggestie; snit en presentatie van onze gerookte heilbot kunnen verschillen.",en:"Serving suggestion; the cut and presentation of our smoked halibut may differ.",de:"Serviervorschlag; Zuschnitt und Präsentation unseres geräucherten Heilbutts können abweichen."},
-  "gerookte-forel-heel":{nl:"Serveersuggestie; formaat en presentatie van onze hele gerookte forel kunnen verschillen.",en:"Serving suggestion; the size and presentation of our whole smoked trout may differ.",de:"Serviervorschlag; Größe und Präsentation unserer ganzen Räucherforelle können abweichen."},
+  "gerookte-kipper":{nl:"Gerookte kipper met brood.",en:"Smoked kipper with bread.",de:"Räucherkipper mit Brot."},
+  "gebakken-mosselen":{nl:"Gebakken mosselen met citroen en peterselie.",en:"Fried mussels with lemon and parsley.",de:"Gebratene Miesmuscheln mit Zitrone und Petersilie."},
+  "gerookte-heilbot":{nl:"Gerookte heilbot met dille en citroen.",en:"Smoked halibut with dill and lemon.",de:"Räucherheilbutt mit Dill und Zitrone."},
+  "gerookte-forel-heel":{nl:"Warmgerookte forel met citroen en dille.",en:"Hot-smoked trout with lemon and dill.",de:"Heißgeräucherte Forelle mit Zitrone und Dill."},
  };
  if(captionBySlug[product.slug])photo.caption=captionBySlug[product.slug][locale==="de"?"de":locale==="en"?"en":"nl"];
  if(locale==="nl")return photo;

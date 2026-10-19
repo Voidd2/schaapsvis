@@ -18,7 +18,7 @@ export async function generateMetadata({params}:{params:Promise<{locale:string}>
   return paginaMetadata({
     locale, pad: "/viswinkel-voorschoten",
     title: t("Visboer Voorschoten bij Hoogvliet op vrijdag | Schaap’s"),
-    image: "/images/editorial/kibbeling.webp",
+    image: "/images/editorial/kibbeling-schaapstray.png",
     description: t("Visboer Voorschoten? Probeer Schaap’s bij Hoogvliet, Veurseweg 18. Elke vrijdag 08:00–17:30: verse vis, haring en kibbeling voor scherpe prijzen. Bekijk de route."),
   });
 }
@@ -34,7 +34,7 @@ const FAQNL = [
 ];
 
 const AANBOD = [
-  { title: "Kibbeling voor de lunch of mee naar huis", text: "Krokante kibbeling met ravigotesaus. Een vertrouwde favoriet voor tijdens het boodschappen doen.", src: "/images/editorial/kibbeling.webp", alt: "Krokante kibbeling met saus", slug: "kibbeling" },
+  { title: "Kibbeling voor de lunch of mee naar huis", text: "Krokante kibbeling met ravigotesaus. Een vertrouwde favoriet voor tijdens het boodschappen doen.", src: "/images/editorial/kibbeling-schaapstray.png", alt: "Bakje krokante kibbeling met ravigotesaus", slug: "kibbeling" },
   { title: "Haring en Hollandse garnalen", text: "Hollandse klassiekers voor op brood, bij de lunch of als voorgerecht. Vraag wat er verkrijgbaar is.", src: "/images/editorial/hollandse-nieuwe-uitjes.webp", alt: "Hollandse haring met uitjes en augurk", slug: "haring" },
   { title: "Zalm en verse filet voor het avondeten", text: "Vertel ons wat u wilt koken. We helpen kiezen welke vis en hoeveel porties bij uw gerecht passen.", src: "/images/editorial/zalm.webp", alt: "Zalmfilet met citroen en dille", slug: "varlaks-zalm" },
 ];
@@ -53,7 +53,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     description: t("Wekelijkse viskraam op de parkeerplaats bij Hoogvliet in Voorschoten, elke vrijdag van 08:00 tot 17:30."),
     url: `${BEDRIJF.domein}/${locale}/viswinkel-voorschoten`,
     telephone: BEDRIJF.telefoon.e164,
-    image: `${BEDRIJF.domein}/images/editorial/kibbeling.webp`,
+    image: `${BEDRIJF.domein}/images/editorial/kibbeling-schaapstray.png`,
     address: { "@type": "PostalAddress", streetAddress: kraam.straat, postalCode: kraam.postcode, addressLocality: "Voorschoten", addressRegion: "Zuid-Holland", addressCountry: "NL" },
     hasMap: kraam.mapsUrl,
     parentOrganization: { "@id": `${BEDRIJF.domein}/#organisatie` },
@@ -64,7 +64,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     <Schema data={[localSchema, vraagSchema(FAQ), kruimelSchema(locale, [{ naam: BEDRIJF.naamKort, pad: "/" }, { naam: t("Viswinkel Voorschoten"), pad: "/viswinkel-voorschoten" }])]} />
     <header className="fresh-hero"><div className="section-wrap fresh-hero-grid">
       <div><p className="kapitaal">{t("Schaap’s Vishandel · sinds 1938")}</p><h1>{t("Visboer Voorschoten: elke vrijdag bij Hoogvliet")}</h1><p className="fresh-intro">{t("Goede vis, scherpe prijzen en persoonlijk advies. Probeer onze viskraam op vrijdag: van verse zalm voor het avondeten tot krokante kibbeling met ravigotesaus en haring met uitjes.")}</p><div className="mt-6 rounded-xl border border-sky-200 bg-white p-5"><p className="font-semibold text-lg">{t("Elke vrijdag · 08:00–17:30")}</p><p className="mt-1">{t("Parkeerplaats Hoogvliet · Veurseweg 18")}<br />{t("2252 AA Voorschoten")}</p><p className="mt-3 text-sm">{t("Ook aan het einde van de middag nog vis halen voor het avondeten.")}</p></div><div className="flex flex-wrap gap-3 mt-6"><a className="knop knop-rood" href={kraam.mapsUrl} target="_blank" rel="noopener noreferrer">{t("Route naar Hoogvliet")}</a><Link className="knop knop-lijn" href={`/${locale}/assortiment`}>{t("Bekijk ons visassortiment")}</Link></div></div>
-      <Image src="/images/editorial/kibbeling.webp" alt={t("Krokante kibbeling met ravigotesaus — serveerinspiratie bij onze viskraam")} width={1400} height={933} sizes="(max-width: 800px) 100vw, 50vw" fetchPriority="high" className="rounded-2xl" />
+      <Image src="/images/editorial/kibbeling-schaapstray.png" alt={t("Bakje krokante kibbeling met ravigotesaus — bij onze viskraam in Voorschoten")} width={1400} height={933} sizes="(max-width: 800px) 100vw, 50vw" fetchPriority="high" className="rounded-2xl" />
     </div></header>
     <Sectie grond="papier"><div className="grid md:grid-cols-[1.2fr_0.8fr] gap-10 items-start">
       <div><p className="kapitaal mb-3">{t("Vis voor uw vrijdagavond")}</p><h2 className="text-3xl mb-5">{t("Van boodschappen naar een goed avondeten")}</h2><div className="lees"><p>{t("Zoekt u een viswinkel in Voorschoten? Onze wekelijkse kraam staat op de parkeerplaats bij Hoogvliet. U hoeft niet vroeg op de dag te komen: tot 17:30 kunt u nog vis uitzoeken voor de avond.")}</p><p>{t("Zalm uit de oven, gebakken kabeljauw of een snelle maaltijd met kibbeling: vertel ons wat u van plan bent. We denken mee over porties, bereiding en wat er vandaag het mooist ligt.")}</p><p>{t("Op andere dagen bent u welkom in onze")} <Link className="underline" href={`/${locale}/viswinkel-leiden`}>{t("viswinkel in Leiden")}</Link>{t(". Bekijk de")} <Link className="underline" href={`/${locale}/bezoek-ons`}>{t("locaties en openingstijden")}</Link> {t("voor alle verkooppunten.")}</p></div></div>

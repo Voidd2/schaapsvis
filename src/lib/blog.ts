@@ -682,7 +682,7 @@ const bestaandePosts: BlogPost[] = [
 const blogBeelden: Record<string, { src: string; alt: string }> = {
   "viskalender-welke-vis-in-welk-seizoen": { src: "/images/recepten/gebakken-schol-tomaat-olijven.webp", alt: "Gebakken schol met tomaat en olijven" },
   "hollandse-nieuwe-waarom-juni-haring-anders-smaakt": { src: "/images/editorial/hollandse-nieuwe-uitjes.webp", alt: "Hollandse Nieuwe met fijngesneden uitjes en augurk op een wit bord" },
-  "kibbeling-vs-lekkerbek-het-verschil": { src: "/images/editorial/kibbeling.webp", alt: "Krokante kibbeling met saus" },
+  "kibbeling-vs-lekkerbek-het-verschil": { src: "/images/editorial/kibbeling-schaapstray.png", alt: "Bakje krokante kibbeling met ravigotesaus" },
   "de-echte-hollandse-garnaal": { src: "/images/producten-hd/hollandse-garnalen.webp", alt: "Hollandse garnalen" },
   "sinds-1938-de-geschiedenis-van-schaaps-vis": { src: "/images/producten-hd/kabeljauw.webp", alt: "Verse kabeljauw, een klassieker bij de vishandel" },
   "wilde-zalm-vs-kweekzalm-waarom-wij-varlaks-kiezen": { src: "/images/editorial/zalm.webp", alt: "Verse zalmfilet met citroen en dille" },

@@ -5,8 +5,8 @@ import type { FormEvent } from "react";
 
 const copy = {
   nl: {
-    title: "Weekdeals per e-mail",
-    intro: "Elke week een aanbieding op iets nieuws uit onze toonbank. Alleen als u daar zelf voor kiest.",
+    title: "Regelmatig iets lekkers van Schaap’s",
+    intro: "Ontvang af en toe aanbiedingen en nieuws speciaal voor klanten van Schaap’s. We mailen wanneer er iets leuks te delen is.",
     email: "Uw e-mailadres",
     region: "Waar woont u of haalt u meestal vis?",
     regions: { leiden: "Leiden", voorschoten: "Voorschoten", anders: "Een andere plaats" },
@@ -18,8 +18,8 @@ const copy = {
     privacy: "Voorlopige privacyinformatie",
   },
   en: {
-    title: "Weekly offers by email",
-    intro: "A weekly offer on something new from our counter. Only if you choose to sign up.",
+    title: "Something good from Schaap’s, now and then",
+    intro: "Get occasional offers and news especially for Schaap’s customers. We’ll email when there’s something worth sharing.",
     email: "Your email address",
     region: "Where do you live or usually shop with us?",
     regions: { leiden: "Leiden", voorschoten: "Voorschoten", anders: "Another town" },
@@ -31,8 +31,8 @@ const copy = {
     privacy: "Preliminary privacy information",
   },
   de: {
-    title: "Wochenangebote per E-Mail",
-    intro: "Jede Woche ein Angebot zu Neuheiten aus unserer Theke – nur wenn Sie sich selbst anmelden.",
+    title: "Ab und zu etwas Gutes von Schaap’s",
+    intro: "Erhalten Sie gelegentlich Angebote und Neuigkeiten speziell für Schaap’s-Kunden. Wir schreiben, wenn es etwas Schönes zu teilen gibt.",
     email: "Ihre E-Mail-Adresse",
     region: "Wo wohnen Sie oder kaufen Sie meistens bei uns ein?",
     regions: { leiden: "Leiden", voorschoten: "Voorschoten", anders: "Ein anderer Ort" },

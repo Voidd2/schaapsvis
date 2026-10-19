@@ -29,21 +29,21 @@ export default async function Page({params}:{params:Promise<{locale:string}>}){
   items: [
    { image: "from-egg-to-plate-2.jpg.webp", title: "Auf der Farm", alt: "Mitarbeiter an einem VÅRLAKS-Netzgehege in Nordnorwegen", text: "Einblicke in die Aufzucht der Lieferantenfamilien in Nordnorwegen." },
    { image: "from-egg-to-plate-3.jpg.webp", title: "Der Lachs", alt: "VÅRLAKS-Lachsfilets in einer Transportbox", text: "VÅRLAKS beschreibt Rückverfolgbarkeit vom Ei bis zum fertigen Produkt." },
-   { image: "from-egg-to-plate-4.jpg.webp", title: "Auf dem Teller", alt: "Lachsgericht mit Gemüse, Sesam und Zitrone", text: "Serviervorschlag des Anbieters; Zubereitung und Präsentation bei uns können abweichen." },
+   { image: "from-egg-to-plate-4.jpg.webp", title: "Auf dem Teller", alt: "Lachsgericht mit Gemüse, Sesam und Zitrone", text: "Eine Idee, wie VÅRLAKS-Lachs mit Gemüse serviert werden kann." },
   ], credit: "Bilder: VÅRLAKS"
  } : locale === "en" ? {
   heading: "From farm to table",
   items: [
    { image: "from-egg-to-plate-2.jpg.webp", title: "At the farm", alt: "Worker beside a VÅRLAKS net pen in Northern Norway", text: "A glimpse of the supplier families’ salmon farming in Northern Norway." },
    { image: "from-egg-to-plate-3.jpg.webp", title: "The salmon", alt: "VÅRLAKS salmon fillets in a transport box", text: "VÅRLAKS describes traceability from egg to finished product." },
-   { image: "from-egg-to-plate-4.jpg.webp", title: "Ready to serve", alt: "Salmon dish with vegetables, sesame and lemon", text: "Supplier serving suggestion; our preparation and presentation may differ." },
+   { image: "from-egg-to-plate-4.jpg.webp", title: "Ready to serve", alt: "Salmon dish with vegetables, sesame and lemon", text: "An idea for serving VÅRLAKS salmon with vegetables." },
   ], credit: "Images: VÅRLAKS"
  } : {
   heading: "Van kwekerij tot aan tafel",
   items: [
    { image: "from-egg-to-plate-2.jpg.webp", title: "Op de kwekerij", alt: "Medewerker bij een VÅRLAKS-kweeknet in Noord-Noorwegen", text: "Een kijkje bij de zalmkweek van de leveranciersfamilies in Noord-Noorwegen." },
    { image: "from-egg-to-plate-3.jpg.webp", title: "De zalm", alt: "VÅRLAKS-zalmfilets in een transportbak", text: "VÅRLAKS beschrijft de traceerbaarheid van ei tot eindproduct." },
-   { image: "from-egg-to-plate-4.jpg.webp", title: "Op tafel", alt: "Zalmgerecht met groenten, sesam en citroen", text: "Serveersuggestie van de leverancier; onze bereiding en presentatie kunnen afwijken." },
+   { image: "from-egg-to-plate-4.jpg.webp", title: "Op tafel", alt: "Zalmgerecht met groenten, sesam en citroen", text: "Een idee om VÅRLAKS-zalm met groenten op tafel te zetten." },
   ], credit: "Beelden: VÅRLAKS"
  };
  const vragen = [{ v: c.cert, a: c.certintro + " " + c.biotext + " " + c.asctext + " " + c.msctext }, { v: c.contact + "?", a: c.note }];
