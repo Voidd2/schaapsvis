@@ -37,7 +37,31 @@
     "bezorgenPlaatsTitle": "Fresh fish delivery in {plaats} | Fishmonger from Leiden | Schaap's Vis",
     "bezorgenPlaatsDesc": "Want fresh fish or a seafood platter delivered in {plaats}? Schaap's Vishandel from Leiden drives out {dagen}. Order by 12:00 the day before and pay at the door, or online soon.",
     "visschalenTitle": "Seafood platters in Leiden for parties and events | Schaap's",
-    "visschalenDesc": "Seafood platters in Leiden for birthdays, drinks, receptions and events. We tailor the selection to your tastes and occasion; average around €17.50 per person. Enquire on WhatsApp."
+    "visschalenDesc": "Seafood platters in Leiden for birthdays, drinks, receptions and events. We tailor the selection to your tastes and occasion; average around €17.50 per person. Enquire on WhatsApp.",
+    "barbecueTitle": "Seafood for barbecue and gourmet in Leiden | Schaap’s Vishandel",
+    "barbecueDesc": "Seafood barbecue packs, gourmet selections and individual skewers in Leiden. Browse the range and discuss your choice directly with Schaap’s Vishandel on WhatsApp."
+  },
+  "barbecuePage": {
+    "crumb": "Barbecue & gourmet",
+    "label": "Schaap’s Vishandel · Leiden",
+    "title": "Choose seafood for your barbecue or gourmet table",
+    "intro": "From complete seafood barbecue packs to individual skewers and gourmet pieces: explore the options and discuss your choice with us on WhatsApp. We confirm availability, contents and price with you in advance.",
+    "browse": "Browse the selection",
+    "contactProduct": "seafood for a barbecue or gourmet evening",
+    "selectieKop": "Browse the barbecue and gourmet selection",
+    "selectieIntro": "See our packs, platters and individual seafood for the barbecue or tabletop grill. Choose what appeals to you and enquire directly with us on WhatsApp.",
+    "photoCaption": "An idea for your barbecue or gourmet table.",
+    "assortimentLink": "Explore barbecue & gourmet",
+    "assortimentHeading": "Planning a barbecue or gourmet night?",
+    "assortimentIntro": "Browse our seafood barbecue packs, gourmet selections, skewers and fish parcels. Discuss your choice directly with us on WhatsApp.",
+    "faqHeading": "Questions about seafood for barbecue and gourmet",
+    "faq": [
+      { "v": "How do I enquire about a barbecue pack or gourmet selection?", "a": "Choose a product on this page and tap its WhatsApp button. We will discuss your choice and confirm availability, contents and price before preparing anything." },
+      { "v": "Can I order individual seafood skewers?", "a": "Yes. The selection includes salmon, tuna and prawn skewers, among other options. A salmon skewer costs €4 each. Message us on WhatsApp with your choice and we will discuss the options." },
+      { "v": "Can I customise my selection?", "a": "Tell us what you have in mind on WhatsApp. We will discuss what combination is possible and agree the contents and price with you in advance." }
+    ],
+    "slotTitle": "Let’s choose what suits your table",
+    "slotText": "Tell us what the occasion is and which products appeal to you. We will discuss the options on WhatsApp and agree the selection and price with you in advance."
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Since 1938",

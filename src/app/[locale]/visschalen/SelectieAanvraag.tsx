@@ -32,7 +32,7 @@ const TEKST = {
   },
 } as const;
 
-function Kaarten({ items, locale, showPrice = true }: { items: SelectieItem[]; locale: keyof typeof TEKST; showPrice?: boolean }) {
+function Kaarten({ items, locale, showPrice = true, photoCaption }: { items: SelectieItem[]; locale: keyof typeof TEKST; showPrice?: boolean; photoCaption?: string }) {
   const t = TEKST[locale];
   return <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
     {items.map((item) => {
@@ -42,8 +42,8 @@ function Kaarten({ items, locale, showPrice = true }: { items: SelectieItem[]; l
         : `${t.bericht} ${naam}. ${t.bevestig}`;
       return <li id={item.slug} key={item.slug} className="flex flex-col overflow-hidden border border-[#d9e7ee] bg-white rounded-lg">
         <figure>
-          <div className="relative aspect-[4/3] bg-[#f2f8fb]"><Image src={item.foto} alt={`${naam} — ${t.foto}`} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover" /></div>
-          <figcaption className="px-5 py-2 text-xs text-[#547080]">{t.foto}</figcaption>
+          <div className="relative aspect-[4/3] bg-[#f2f8fb]"><Image src={item.foto} alt={naam} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover" /></div>
+          <figcaption className="px-5 py-2 text-xs text-[#547080]">{photoCaption ?? t.foto}</figcaption>
         </figure>
         <div className="p-5 pt-3 flex flex-col flex-1">
           <h3 className="text-[1.25rem] mb-2">{naam}</h3>
@@ -55,7 +55,7 @@ function Kaarten({ items, locale, showPrice = true }: { items: SelectieItem[]; l
   </ul>;
 }
 
-export function SelectieAanvraag({ locale, showSpecial = true, showBarbecue = true }: { locale: string; showSpecial?: boolean; showBarbecue?: boolean }) {
+export function SelectieAanvraag({ locale, showSpecial = true, showBarbecue = true, heading, intro, photoCaption }: { locale: string; showSpecial?: boolean; showBarbecue?: boolean; heading?: string; intro?: string; photoCaption?: string }) {
   const taal = locale === "en" || locale === "de" ? locale : "nl";
   const t = TEKST[taal];
   const speciaal = DIRKS_VISSCHALEN.filter((item) => item.alleenAanvraag);
@@ -67,11 +67,11 @@ export function SelectieAanvraag({ locale, showSpecial = true, showBarbecue = tr
       <p className="mt-4 text-sm text-[#4d6370]">{t.waarschuwing}</p>
     </section>}
     {showBarbecue && <section id="barbecue-gourmet">
-      <h2 className="text-[1.8rem] mb-2">{t.kop}</h2>
-      <p className="max-w-3xl mb-8 text-[#4d6370]">{t.intro}</p>
+      <h2 className="text-[1.8rem] mb-2">{heading ?? t.kop}</h2>
+      <p className="max-w-3xl mb-8 text-[#4d6370]">{intro ?? t.intro}</p>
       {(["barbecue", "gourmet", "los"] as const).map((groep) => <div key={groep} className="mb-12 last:mb-0">
         <h3 className="text-[1.45rem] mb-5">{groep === "barbecue" ? t.bbq : t[groep]}</h3>
-        <Kaarten items={DIRKS_BARBECUE.filter((item) => item.groep === groep)} locale={taal} />
+        <Kaarten items={DIRKS_BARBECUE.filter((item) => item.groep === groep)} locale={taal} photoCaption={photoCaption} />
       </div>)}
     </section>}
   </div>;

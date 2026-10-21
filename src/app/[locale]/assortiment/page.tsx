@@ -4,13 +4,13 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { ArrowUpRight, MessageCircle } from "lucide-react";
 import { Schema } from "@/components/Schema";
+import { Sectie } from "@/components/ui/Sectie";
 import { paginaMetadata } from "@/lib/seo";
 import { BEDRIJF } from "@/lib/bedrijf";
 import { bestelContact } from "@/lib/bestel-contact";
 import { gesorteerdAssortiment } from "@/lib/assortiment-volgorde";
 import { AssortimentFilter } from "./AssortimentFilter";
 import { localizeProduct } from "@/lib/product-localization";
-import { SelectieAanvraag } from "../visschalen/SelectieAanvraag";
 import { DIRKS_BARBECUE, selectieNaam } from "@/lib/dirks-selectie";
 
 const copy = {
@@ -21,7 +21,6 @@ const copy = {
     policy: "Alleen visschalen bestelt u online.", policySub: "Zoekt u iets anders? Stuur ons een WhatsApp-bericht. Dan kijken we samen wat mogelijk is.",
     question: "Iets in gedachten?", note: "Een bepaalde vis, een speciale wens of iets wat u hier niet ziet? App ons gerust. We bespreken de mogelijkheden en beschikbaarheid met u.",
     image: "Zalm met citroen en dille",
-    bbqAction: "Bekijk barbecue en gourmet",
   },
   en: {
     label: "Schaap’s Vishandel · Leiden", title: "Our fish selection.",
@@ -30,7 +29,6 @@ const copy = {
     policy: "Only seafood platters can be ordered online.", policySub: "Looking for something else? Send us a WhatsApp message to discuss the options.",
     question: "Something in mind?", note: "A particular fish, a special request or something you can't find here? Ask us on WhatsApp about availability and options.",
     image: "Salmon with lemon and dill",
-    bbqAction: "Explore barbecue and gourmet",
   },
   de: {
     label: "Schaap’s Vishandel · Leiden", title: "Unser Sortiment.",
@@ -39,7 +37,6 @@ const copy = {
     policy: "Nur Fischplatten können Sie online bestellen.", policySub: "Suchen Sie etwas anderes? Schreiben Sie uns per WhatsApp. Gemeinsam schauen wir, was möglich ist.",
     question: "Einen besonderen Wunsch?", note: "Ein bestimmter Fisch, ein besonderer Wunsch oder etwas, das Sie hier nicht finden? Fragen Sie uns per WhatsApp nach Verfügbarkeit und Möglichkeiten.",
     image: "Lachs mit Zitrone und Dill",
-    bbqAction: "Grill und Gourmet ansehen",
   },
 };
 
@@ -52,6 +49,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function AssortimentPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const c = copy[locale as keyof typeof copy] ?? copy.nl;
+  const bbq = await getTranslations({ locale, namespace: "barbecuePage" });
   const wa = bestelContact(locale);
   return <>
     <Schema data={{
@@ -63,7 +61,7 @@ export default async function AssortimentPage({ params }: { params: Promise<{ lo
       })), ...DIRKS_BARBECUE.map((item, i) => ({
         "@type": "ListItem", position: gesorteerdAssortiment.length + i + 1,
         name: selectieNaam(item.slug, locale),
-        url: `${BEDRIJF.domein}/${locale}/assortiment#${item.slug}`,
+        url: `${BEDRIJF.domein}/${locale}/barbecue-gourmet#${item.slug}`,
       }))],
     }} />
     <header className="collection-hero">
@@ -73,7 +71,7 @@ export default async function AssortimentPage({ params }: { params: Promise<{ lo
           <div className="collection-hero-actions">
             <a href="#assortiment" className="knop knop-rood">{c.browse}<ArrowUpRight size={17} aria-hidden="true" /></a>
             <Link href={`/${locale}/visschalen`} className="collection-text-link">{c.platter}<ArrowUpRight size={17} aria-hidden="true" /></Link>
-            <a href="#barbecue-gourmet" className="collection-text-link">{c.bbqAction}<ArrowUpRight size={17} aria-hidden="true" /></a>
+            <Link href={`/${locale}/barbecue-gourmet`} className="collection-text-link">{bbq("assortimentLink")}<ArrowUpRight size={17} aria-hidden="true" /></Link>
           </div>
           <p className="collection-heritage">Leiden · {locale === "nl" ? "Sinds" : locale === "de" ? "Seit" : "Since"} 1938</p>
         </div>
@@ -84,7 +82,10 @@ export default async function AssortimentPage({ params }: { params: Promise<{ lo
     </header>
     <aside className="collection-policy"><div className="section-wrap"><div><strong>{c.policy}</strong><p>{c.policySub}</p></div><a href={wa.href}><MessageCircle size={19} aria-hidden="true" />{wa.label}<ArrowUpRight size={17} aria-hidden="true" /></a></div></aside>
     <div id="assortiment"><AssortimentFilter localized={gesorteerdAssortiment.map(p => localizeProduct(p, locale))} /></div>
-    <section className="py-16 bg-[#eef8fc]"><div className="section-wrap"><SelectieAanvraag locale={locale} showSpecial={false} /></div></section>
+    <Sectie grond="zand"><div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+      <div><p className="kapitaal">{bbq("assortimentLink")}</p><h2 className="text-2xl md:text-3xl mt-2">{bbq("assortimentHeading")}</h2><p className="max-w-2xl mt-3 text-[#4d6370]">{bbq("assortimentIntro")}</p></div>
+      <Link href={`/${locale}/barbecue-gourmet`} className="knop knop-rood shrink-0">{bbq("assortimentLink")}<ArrowUpRight size={17} aria-hidden="true" /></Link>
+    </div></Sectie>
     <section className="collection-contact"><div className="section-wrap"><div><p className="kapitaal">{locale === "nl" ? "Persoonlijk advies" : locale === "de" ? "Persönliche Beratung" : "Personal advice"}</p><h2>{c.question}</h2><p>{c.note}</p></div><a className="knop knop-rood" href={wa.href}><MessageCircle size={19} aria-hidden="true" />{wa.label}</a></div></section>
   </>;
 }

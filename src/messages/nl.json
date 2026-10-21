@@ -37,7 +37,31 @@
     "bezorgenPlaatsTitle": "Verse vis bezorgen in {plaats} | Vishandel uit Leiden | Schaap's Vis",
     "bezorgenPlaatsDesc": "Verse vis en visschalen laten bezorgen in {plaats}? Schaap's Vishandel uit Leiden rijdt {dagen} langs. Bestellen tot 12:00 de dag ervoor, betalen bij de deur of straks online.",
     "visschalenTitle": "Visschalen Leiden voor borrels en evenementen | Schaap's",
-    "visschalenDesc": "Een visschaal voor een verjaardag, borrel of evenement in Leiden? We denken mee over smaak en gezelschap. Gemiddeld circa € 17,50 per persoon; vraag aan via WhatsApp."
+    "visschalenDesc": "Een visschaal voor een verjaardag, borrel of evenement in Leiden? We denken mee over smaak en gezelschap. Gemiddeld circa € 17,50 per persoon; vraag aan via WhatsApp.",
+    "barbecueTitle": "Vis voor barbecue en gourmet in Leiden | Schaap’s Vishandel",
+    "barbecueDesc": "Visbarbecuepakketten, visgourmet en losse visspiesjes in Leiden. Bekijk de selectie en bespreek uw keuze rechtstreeks via WhatsApp met Schaap’s Vishandel."
+  },
+  "barbecuePage": {
+    "crumb": "Barbecue & gourmet",
+    "label": "Schaap’s Vishandel · Leiden",
+    "title": "Barbecue & gourmet: stel uw visselectie samen",
+    "intro": "Van complete visbarbecuepakketten tot losse spiesjes en gourmetstukjes: bekijk de mogelijkheden en bespreek uw keuze met ons via WhatsApp. We stemmen beschikbaarheid, samenstelling en prijs vooraf met u af.",
+    "browse": "Bekijk de selectie",
+    "contactProduct": "vis voor barbecue of gourmet",
+    "selectieKop": "Bekijk de barbecue- en gourmetselectie",
+    "selectieIntro": "Bekijk de pakketten, schotels en losse vis voor op de barbecue of gourmet. Kies wat u aanspreekt en vraag het rechtstreeks bij ons aan via WhatsApp.",
+    "photoCaption": "Een idee voor uw barbecue- of gourmettafel.",
+    "assortimentLink": "Barbecue & gourmet bekijken",
+    "assortimentHeading": "Ook iets voor de barbecue of gourmet?",
+    "assortimentIntro": "Bekijk onze barbecuepakketten, visgourmet, losse spiesjes en vispakketjes. U bespreekt uw keuze rechtstreeks met ons via WhatsApp.",
+    "faqHeading": "Veelgestelde vragen over vis voor barbecue en gourmet",
+    "faq": [
+      { "v": "Hoe vraag ik een barbecuepakket of gourmetselectie aan?", "a": "Kies een product op deze pagina en klik op de WhatsApp-knop. We bespreken uw keuze en bevestigen de beschikbaarheid, samenstelling en prijs voordat we iets klaarmaken." },
+      { "v": "Kan ik losse visspiesjes bestellen?", "a": "Ja. U vindt hier onder meer zalm-, tonijn- en gambaspiesjes. Een zalmspies kost € 4 per stuk. Stuur ons via WhatsApp uw keuze en we bespreken de mogelijkheden." },
+      { "v": "Kan ik mijn selectie aanpassen?", "a": "Vertel ons via WhatsApp wat u in gedachten heeft. We bespreken samen welke samenstelling mogelijk is en spreken de inhoud en prijs vooraf af." }
+    ],
+    "slotTitle": "Samen kiezen we wat bij uw tafel past",
+    "slotText": "Vertel ons voor welke gelegenheid u vis zoekt en welke producten u aanspreken. Via WhatsApp bespreken we de mogelijkheden en spreken we de samenstelling en prijs vooraf met u af."
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Sinds 1938",

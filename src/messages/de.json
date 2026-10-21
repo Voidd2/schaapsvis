@@ -37,7 +37,31 @@
     "bezorgenPlaatsTitle": "Frischen Fisch liefern lassen in {plaats} | Fischhändler aus Leiden",
     "bezorgenPlaatsDesc": "Frischen Fisch oder eine Fischplatte in {plaats} liefern lassen? Schaap's Vishandel aus Leiden fährt {dagen} raus. Bestellung bis 12:00 Uhr am Vortag, Zahlung an der Tür oder demnächst online.",
     "visschalenTitle": "Fischplatten in Leiden für Feiern und Veranstaltungen | Schaap's",
-    "visschalenDesc": "Fischplatten in Leiden für Geburtstage, Empfänge und Veranstaltungen. Wir stimmen die Auswahl auf Geschmack und Anlass ab; durchschnittlich etwa 17,50 € pro Person. Anfrage per WhatsApp."
+    "visschalenDesc": "Fischplatten in Leiden für Geburtstage, Empfänge und Veranstaltungen. Wir stimmen die Auswahl auf Geschmack und Anlass ab; durchschnittlich etwa 17,50 € pro Person. Anfrage per WhatsApp.",
+    "barbecueTitle": "Fisch für Grill und Gourmet in Leiden | Schaap’s Vishandel",
+    "barbecueDesc": "Fisch-Grillpakete, Gourmetauswahl und einzelne Fischspieße in Leiden. Sehen Sie sich unser Angebot an und besprechen Sie Ihre Wünsche direkt per WhatsApp mit Schaap’s Vishandel."
+  },
+  "barbecuePage": {
+    "crumb": "Grill & Gourmet",
+    "label": "Schaap’s Vishandel · Leiden",
+    "title": "Stellen Sie Ihre Auswahl für Grill und Gourmet zusammen",
+    "intro": "Von kompletten Fisch-Grillpaketen bis zu einzelnen Spießen und Gourmetstücken: Entdecken Sie die Möglichkeiten und besprechen Sie Ihre Auswahl mit uns per WhatsApp. Verfügbarkeit, Zusammenstellung und Preis stimmen wir vorher mit Ihnen ab.",
+    "browse": "Auswahl ansehen",
+    "contactProduct": "Fisch für Grill oder Gourmet",
+    "selectieKop": "Unsere Auswahl für Grill und Gourmet",
+    "selectieIntro": "Sehen Sie sich unsere Pakete, Platten und einzelnen Fischprodukte für Grill oder Tischgrill an. Wählen Sie aus, was Ihnen gefällt, und fragen Sie direkt per WhatsApp bei uns an.",
+    "photoCaption": "Eine Idee für Ihren Grill- oder Gourmetabend.",
+    "assortimentLink": "Grill & Gourmet ansehen",
+    "assortimentHeading": "Planen Sie einen Grill- oder Gourmetabend?",
+    "assortimentIntro": "Sehen Sie sich unsere Grillpakete, Fisch-Gourmetauswahl, Spieße und Fischpäckchen an. Besprechen Sie Ihre Auswahl direkt mit uns per WhatsApp.",
+    "faqHeading": "Häufige Fragen zu Fisch für Grill und Gourmet",
+    "faq": [
+      { "v": "Wie frage ich ein Grillpaket oder eine Gourmetauswahl an?", "a": "Wählen Sie ein Produkt auf dieser Seite und tippen Sie auf die WhatsApp-Schaltfläche. Wir besprechen Ihre Auswahl und bestätigen Verfügbarkeit, Inhalt und Preis, bevor wir etwas vorbereiten." },
+      { "v": "Kann ich einzelne Fischspieße bestellen?", "a": "Ja. Die Auswahl umfasst unter anderem Lachs-, Thunfisch- und Garnelenspieße. Ein Lachsspieß kostet 4 € pro Stück. Schreiben Sie uns Ihre Auswahl per WhatsApp, dann besprechen wir die Möglichkeiten." },
+      { "v": "Kann ich meine Auswahl anpassen?", "a": "Teilen Sie uns per WhatsApp Ihre Wünsche mit. Wir besprechen, welche Zusammenstellung möglich ist, und stimmen Inhalt und Preis vorher mit Ihnen ab." }
+    ],
+    "slotTitle": "Gemeinsam finden wir die passende Auswahl",
+    "slotText": "Erzählen Sie uns, für welchen Anlass Sie Fisch suchen und welche Produkte Sie ansprechen. Wir besprechen die Möglichkeiten per WhatsApp und stimmen Auswahl und Preis vorher mit Ihnen ab."
   },
   "hero": {
     "tagline": "Leiden · Herenstraat 48 · Seit 1938",

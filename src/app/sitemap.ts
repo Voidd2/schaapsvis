@@ -25,12 +25,18 @@ const basis = BEDRIJF.domein;
 const LAATSTE_WIJZIGING = new Date("2026-09-29");
 
 /** Pagina's die in nl, en én de bestaan. */
-const MEERTALIG = [
+const MEERTALIG: {
+  pad: string;
+  prioriteit: number;
+  frequentie: "weekly" | "monthly" | "yearly";
+  gewijzigd?: Date;
+}[] = [
   { pad: "", prioriteit: 1.0, frequentie: "weekly" as const },
 
   { pad: "/visschalen", prioriteit: 0.95, frequentie: "weekly" as const },
 
   { pad: "/assortiment", prioriteit: 0.9, frequentie: "weekly" as const },
+  { pad: "/barbecue-gourmet", prioriteit: 0.8, frequentie: "monthly" as const, gewijzigd: new Date("2026-10-21") },
   { pad: "/bezoek-ons", prioriteit: 0.85, frequentie: "monthly" as const },
   { pad: "/biologische-vis", prioriteit: 0.8, frequentie: "monthly" as const },
   { pad: "/varlaks", prioriteit: 0.8, frequentie: "monthly" as const },
@@ -66,12 +72,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const regels: MetadataRoute.Sitemap = [];
 
   // ── Vaste pagina's, in alle drie de talen ────────────────────────────────
-  for (const { pad, prioriteit, frequentie } of MEERTALIG) {
+  for (const { pad, prioriteit, frequentie, gewijzigd } of MEERTALIG) {
     const alternates = meertaligeAlternates(pad);
     for (const taal of LOCALES) {
       regels.push({
         url: `${basis}/${taal}${pad}`,
-        lastModified: LAATSTE_WIJZIGING,
+        lastModified: gewijzigd ?? LAATSTE_WIJZIGING,
         changeFrequency: frequentie,
         priority: prioriteit,
         alternates,
