@@ -41,11 +41,11 @@ Wijzig je hier iets, dan verandert het meteen op de bezorgpagina's, in het
 bestelformulier, in de winkelwagen, in de postcodecheck én in de gegevens die
 Google uitleest.
 
-**Let op bij verse vis.** Die gaat op gewicht, dus de site kan niet weten of een
-bestelling boven de € 35 uitkomt. De winkelwagen zegt daarom bij verse vis dat de
-bezorging vervalt vanaf € 35, en in de bestelling die jij binnenkrijgt staat
-`€ 5,99 — vervalt vanaf € 35,-`. Dat reken jij af als je met de dagprijs belt.
-Bij een visschaal is het bedrag wél exact en vervalt de bezorging automatisch.
+**Let op bij verse vis.** Die kan op gewicht worden verkocht; we hanteren geen
+dagprijzen. Spreek de prijs vooraf met de klant af. De winkelwagen legt uit dat
+het totaal van het gekozen gewicht afhangt en dat de prijs vooraf wordt bevestigd.
+Visschalen zijn maatwerk via WhatsApp: toon geen vaste schaalprijzen, maar vermeld
+alleen de gemiddelde richtprijs van ongeveer € 17,50 per persoon.
 
 **Bezorggebied:** Leiden, Leiderdorp, Voorschoten, Wassenaar en Leidschendam,
 op postcode. Een gemeente erbij? Voeg een blok toe aan `GEMEENTEN` met de
@@ -67,11 +67,11 @@ SUMUP_MERCHANT_CODE  je merchant code, bijvoorbeeld MABC1234
 
 Wat er dan gebeurt:
 
-- **Een visschaal** is op de cent uit te rekenen, dus die kan de klant meteen
-  afrekenen. Hij klikt op bestellen en gaat naar de betaalpagina van SumUp.
+- **Een visschaal** is een aanvraag via WhatsApp; de inhoud en uiteindelijke prijs
+  worden vooraf besproken. Er is geen online afrekening voor visschalen.
 - **Verse vis** gaat op gewicht. Wat een kilo kabeljauw kost weet je pas als hij
   op de weegschaal ligt, dus daar valt vooraf niets af te rekenen. Die
-  bestellingen komen binnen zoals nu, en je belt met de dagprijs.
+  bestellingen komen binnen zoals nu; je spreekt de prijs vooraf met de klant af.
 
 Zolang de sleutels ontbreken werkt de site gewoon door en betaalt de klant bij
 de bezorger of aan de toonbank. Er verschijnt dus nooit een betaalknop die
@@ -366,9 +366,9 @@ de eigenaar om bevestiging als levering of certificering verandert.
 - **Bezorging van gebakken vis.** Kibbeling en lekkerbek zijn na twintig minuten
   in een doos niet lekker meer. Dat staat ook zo op de site. Wil je het toch,
   zet de categorie dan bij `BEZORGBARE_CATEGORIEEN` in `src/lib/bezorging.ts`.
-- **Vaste prijzen bij verse vis.** Vis gaat op gewicht en op dagprijs. De site
-  belooft daarom geen bedrag, maar zegt dat je belt. Richtprijzen die je wél
-  wilt tonen kun je kwijt in `src/lib/prijzen.ts`.
+- **Vaste prijzen bij verse vis.** Vis kan op gewicht worden verkocht, maar er
+  zijn geen dagprijzen. De prijs wordt vooraf met de klant afgesproken; toon geen
+  onverwachte toeslagen achteraf.
 
 ---
 
@@ -389,3 +389,4 @@ de eigenaar om bevestiging als levering of certificering verandert.
 | Lettertypen | `src/lib/fonts.ts` |
 
 Bouwen doe je met `npm run build -- --webpack`.
+
