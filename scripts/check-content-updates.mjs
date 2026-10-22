@@ -34,7 +34,7 @@ for (const locale of ['nl', 'en', 'de']) {
   assert(removedProduct.status === 308 && new URL(removedProduct.headers.get('location'), origin).pathname === `/${locale}/assortiment`, `${locale}: removed koolvis URL should redirect to assortment`);
   const locations = await page(`/${locale}/bezoek-ons`);
   const locationPhotoSlots = [...locations.main.matchAll(/data-photo-placeholder="([^"]+)"/g)].map(([, name]) => name);
-  assert(JSON.stringify(locationPhotoSlots.sort()) === JSON.stringify(['marktVoorschoten', 'marktWoensdag', 'marktZaterdag', 'winkelGevel'].sort()), `${locale}: all four real location-photo slots are prepared and clearly marked`);
+  assert(locationPhotoSlots.length === 0 && !/Eigen foto volgt|Eigenes Foto folgt|Our photo coming soon/.test(locations.main), `${locale}: no empty location-photo placeholders shown before authentic photos arrive`);
   assert(locations.main.includes('De+Waag+Aalmarkt+Leiden'), `${locale}: Saturday location should link to De Waag`);
   assert(locations.main.includes('Dille+%26+Kamille+Botermarkt+10+Leiden'), `${locale}: Wednesday location should use shared Maps link`);
   assert(!locations.main.includes('Haarlemmerstraat'), `${locale}: stale Maps destination on locations page`);
@@ -81,7 +81,7 @@ assert((calendar.main.match(/id="maand-\d+"/g) || []).length === 12, 'Calendar m
 assert(new Set(photos(calendar.main).slice(-12)).size === 12, 'Calendar month photo variety');
 assert(calendar.main.includes('Deze maand'), 'Server-rendered current month');
 const home = await page('/nl');
-assert(/href="\/nl\/viskalender"/.test(home.html.split('</header>')[0]), 'Calendar absent from header');
+assert(!/href="\/nl\/viskalender"/.test(home.html.split('</header>')[0]), 'Calendar stays out of the compact header navigation');
 const local = await page('/nl/viswinkel-voorschoten');
 assert(local.main.includes('08:00') && local.main.includes('17:30'), 'Voorschoten opening hours');
 assert(local.main.includes('vrijdag') && local.main.includes('Hoogvliet'), 'Voorschoten weekly stall information');

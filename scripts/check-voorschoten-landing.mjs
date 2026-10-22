@@ -25,7 +25,8 @@ check(!/visarend|vis en maatjes/i.test(main), 'Do not target competitor names in
 check(!/de scherpste|de beste|nummer [1é]/i.test(main), 'No unsupported comparative superlatives');
 check(!main.includes('Voorschoterweg'), 'No stale route');
 check(main.includes('Hoogvliet+Veurseweg+18+2252+AA+Voorschoten'), 'Correct Google Maps destination');
-check(main.includes('Alleen visschalen'), 'Platter-only ordering policy');
+check(/visschalen.{0,80}WhatsApp/i.test(main), 'Seafood platters are arranged through WhatsApp');
+check(!/dagprijs|day price|Tagespreis/i.test(main), 'No misleading variable day-price language');
 const schemas = [...html.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].flatMap(m => JSON.parse(m[1]));
 const location = schemas.find(s => s['@id']?.endsWith('#kraam-voorschoten'));
 check(location?.['@type'] === 'GroceryStore', 'Specific local business schema');
