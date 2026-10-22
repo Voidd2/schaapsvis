@@ -44,8 +44,9 @@
   "barbecuePage": {
     "crumb": "Barbecue & gourmet",
     "label": "Schaap’s Vishandel · Leiden",
-    "title": "Barbecue & gourmet: stel uw visselectie samen",
-    "intro": "Van complete visbarbecuepakketten tot losse spiesjes en gourmetstukjes: bekijk de mogelijkheden en bespreek uw keuze met ons via WhatsApp. We stemmen beschikbaarheid, samenstelling en prijs vooraf met u af.",
+    "title": "Vis voor barbecue en gourmet in Leiden",
+    "intro": "Maak uw barbecue of gourmetavond compleet met vis, spiesjes en pakketten van Schaap’s Vishandel. Bekijk de selectie en bespreek uw wensen rechtstreeks met ons via WhatsApp.",
+    "heroImageAlt": "Vispakket met verschillende vissoorten en spiesjes voor barbecue of gourmet",
     "browse": "Bekijk de selectie",
     "contactProduct": "vis voor barbecue of gourmet",
     "selectieKop": "Bekijk de barbecue- en gourmetselectie",
@@ -667,4 +668,5 @@
     "gratisWeegvis": "Verse vis rekenen we op gewicht af. Komt uw bestelling boven {bedrag} uit, dan vervalt de bezorging — de prijs spreken we vooraf met u af."
   }
 }
+
 
