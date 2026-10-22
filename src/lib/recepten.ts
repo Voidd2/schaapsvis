@@ -26,6 +26,8 @@ export type Recept = {
    * Een productfoto mag nooit een foto van het bereide gerecht vervangen.
    */
   hoofdproduct?: string;
+  /** Extra assortimentproducten waarvoor een bewust generiek recept ook klopt. */
+  geschiktVoor?: string[];
   vanSchaap: string[];
   vanSupermarkt: string[];
   bereidingswijze: string[];

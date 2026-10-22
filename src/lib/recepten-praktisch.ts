@@ -314,6 +314,7 @@ export const receptenPraktisch: Recept[] = [
   {
     slug: "broodje-haring-uitjes",
     hoofdproduct: "haring",
+    geschiktVoor: ["broodje-haring"],
     title: "Broodje Hollandse Nieuwe met uitjes",
     subtitle: "De enige juiste manier: zacht broodje, verse haring, uitjes en zuur",
     tijd: "5 min",
@@ -535,6 +536,7 @@ export const receptenPraktisch: Recept[] = [
   {
     slug: "vispakketje-oven-groenten",
     hoofdproduct: "kabeljauwfilet",
+    geschiktVoor: ["scholfilet", "zeebaarsfilet", "dorade-filet", "tarbotfilet", "wijtingfilet", "tilapiafilet", "victoriabaars", "wilde-zalmfilet", "heilbotfilet"],
     title: "Vispakketje uit de oven met groenten",
     subtitle: "Vis en groenten die samen garen in bakpapier",
     tijd: "40 min",
@@ -543,7 +545,7 @@ export const receptenPraktisch: Recept[] = [
     porties: 4,
     seizoen: "Jaarrond",
     fotoLabel: "Vis en papillote — vis in bakpapier met groenten",
-    vanSchaap: ["4 filets witvis naar keuze (kabeljauw, wijting) of zalm, à 150 g"],
+    vanSchaap: ["4 visfilets naar keuze (bijvoorbeeld kabeljauw, schol, zeebaars, dorade, tarbot, wijting, tilapia, victoriabaars, heilbot of zalm), à 150 g"],
     vanSupermarkt: [
       "1 courgette + 1 wortel + 1 prei",
       "1 citroen",
@@ -676,6 +678,7 @@ export const receptenPraktisch: Recept[] = [
   {
     slug: "oesters-sjalottenazijn",
     hoofdproduct: "fine-de-claire-oesters",
+    geschiktVoor: ["creuse-oesters"],
     title: "Oesters klassiek met sjalottenazijn",
     subtitle: "Oesters serveren zoals het hoort — met drie klassieke garnituren",
     tijd: "15 min",
@@ -711,6 +714,7 @@ export const receptenPraktisch: Recept[] = [
   {
     slug: "gerookte-zalm-rolletjes-roomkaas",
     hoofdproduct: "gerookte-zalm-high-seas",
+    geschiktVoor: ["gerookte-zalm-snippers", "gerookte-wilde-zalm"],
     title: "Gerookte zalmrolletjes met roomkaas en dille",
     subtitle: "Feestelijk voorgerecht: 15 minuten werk en 30 minuten koelen",
     tijd: "45 min",

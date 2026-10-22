@@ -37,7 +37,8 @@ export default async function ProductDetailPage({params}: Props) {
   const availability = productAvailability(product,lang);
   const isPlatter = ["visschaal", "feestschotel"].includes(slug), isSalmon = !product.highlight && /zalm|lax/.test(slug);
   const action = {label: isPlatter ? c.platter : bestelContact(lang).label, href: isPlatter ? `/${lang}/visschalen` : bestelContact(lang, product.naam).href, extern: !isPlatter};
-  const ownRecipes = recepten.filter(r => r.hoofdproduct === slug).slice(0, 4).map(r => localizeRecipe(r,lang));
+  const ownRecipes = recepten.filter(r => r.hoofdproduct === slug).map(r => localizeRecipe(r,lang));
+  const suitableRecipes = recepten.filter(r => r.geschiktVoor?.includes(slug)).map(r => localizeRecipe(r,lang));
   const recipeIdeasByProduct: Record<string, string[]> = {
     kabeljauwfilet: ["gebakken-kabeljauw-botersaus", "kabeljauw-zeekraal-venkel", "kabeljauw-oven-tomaat-olijven", "snelle-viscurry-kabeljauw"],
     scholfilet: ["gegrilde-schol", "gebakken-schol-tomaat-olijven"],
@@ -52,10 +53,11 @@ export default async function ProductDetailPage({params}: Props) {
     vissoep: ["vissoep-rouille-croutons"],
     "varlaks-zalm": ["zalm-citroen-dille", "teriyaki-zalm-rijst", "zalm-traybake-groenten"],
   };
-  const recipeIdeas = ownRecipes.length ? ownRecipes : (recipeIdeasByProduct[slug] || [])
+  const curatedRecipes = (recipeIdeasByProduct[slug] || [])
     .map(recipeSlug => recepten.find(r => r.slug === recipeSlug))
     .filter((r): r is (typeof recepten)[number] => Boolean(r))
     .map(r => localizeRecipe(r, lang));
+  const recipeIdeas = [...new Map([...ownRecipes, ...suitableRecipes, ...curatedRecipes].map(r => [r.slug, r])).values()].slice(0, 4);
   const nutritionRows = voeding ? [[c.energy, `${voeding.kcal} kcal / ${voeding.kj} kJ`], [c.fat, `${voeding.vet} g`], [c.saturated, `${voeding.verzadigd} g`], [c.carbs, `${voeding.koolhydraten} g`], [c.sugars, `${voeding.suikers} g`], [c.protein, `${voeding.eiwit} g`], [c.salt, `${voeding.zout} g`]] : [];
   // Informational catalogue: no unverified stock status or online-sale offers.
   const productSchema = {"@context":"https://schema.org", "@type":"Product", name:product.naam, description:product.desc, category, brand:{"@type":"Brand", name:BEDRIJF.naam}, image:photo ? `${BEDRIJF.domein}${photo.src}` : undefined, url:`${BEDRIJF.domein}/${lang}/assortiment/${slug}`};

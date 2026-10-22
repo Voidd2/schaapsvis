@@ -23,6 +23,7 @@ for(const slug of decisions.removed)assert.ok(!slugs.has(slug),'Removed '+slug);
 for(const slug of decisions.added)assert.ok(slugs.has(slug),'Added '+slug);
 for(const [slug,status] of Object.entries(decisions.availability))assert.equal(products.find(p=>p.slug===slug)?.beschikbaar,status,slug+' owner availability');
 for(const r of recipes)assert.ok(!r.hoofdproduct||slugs.has(r.hoofdproduct),'Recipe product '+r.slug);
+for(const r of recipes)for(const slug of r.geschiktVoor??[])assert.ok(slugs.has(slug),'Suitable recipe product '+r.slug+'/'+slug);
 for(const b of blogs)for(const link of b.gerelateerdeLinks??[]){
  const slug=link.href.match(/^\/assortiment\/([^/?#]+)/)?.[1];
  if(slug)assert.ok(slugs.has(slug),'Retired blog link '+b.slug+' '+slug);
@@ -72,7 +73,7 @@ if(origin){
    const recipeIndexHref='/'+task.l+'/recepten';
    const hrefs=[...main.matchAll(/href="([^"]+)"/g)].map(match=>match[1]);
    assert.ok(hrefs.includes(recipeIndexHref),'Recipe index link '+url);productPagesWithRecipeIndex++;
-   for(const href of hrefs){const match=href.match(new RegExp('^/'+task.l+'/recepten/([^/?#]+)$'));if(!match)continue;assert.ok(recipeSlugs.has(match[1]),'Linked recipe exists '+url+' -> '+match[1]);linkedRecipeSlugs.add(task.l+'/'+match[1]);productRecipeLinks++;}
+   for(const href of hrefs){const match=href.match(new RegExp('^/'+task.l+'/recepten/([^/?#]+)$'));if(!match)continue;assert.ok(recipeSlugs.has(match[1]),'Linked recipe exists '+url+' -> '+match[1]);const recipe=recipes.find(r=>r.slug===match[1]);assert.ok(recipe.hoofdproduct===task.slug||recipe.geschiktVoor?.includes(task.slug),'Recipe must be explicitly matched to product '+task.slug+' -> '+recipe.slug);linkedRecipeSlugs.add(task.l+'/'+match[1]);productRecipeLinks++;}
    activePages++;
   }
  }));
