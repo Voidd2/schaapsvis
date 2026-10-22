@@ -121,12 +121,28 @@ export default async function BezoekOnsPage({
         ]}
       />
 
+      <nav
+        aria-label={locale === "de" ? "Standort auswählen" : locale === "en" ? "Choose a location" : "Kies een locatie"}
+        className="section-wrap py-4"
+      >
+        <ul className="flex flex-wrap gap-2">
+          {PLEKKEN.map((plek) => (
+            <li key={plek.id}>
+              <a className="location-jump" href={`#locatie-${plek.id}`}>
+                {p(`${plek.id}Naam`)}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
       {/* ── De plekken ────────────────────────────────────────────────────── */}
       <Sectie grond="papier">
         <ul className="grid lg:grid-cols-2 gap-6">
           {PLEKKEN.map((plek) => (
             <li
               key={plek.id}
+              id={`locatie-${plek.id}`}
               className="location-card flex flex-col gap-5 p-7"
               style={{ border: "1px solid #d4e8f2", borderRadius: "14px", background: "#f0f8fc" }}
             >

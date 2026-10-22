@@ -617,6 +617,9 @@ summary::-webkit-details-marker {
 .recipe-card-link{display:flex;align-items:center;gap:8px;font-size:.85rem;font-weight:600;color:var(--navy);margin-top:auto;padding-top:22px}
 .recipe-empty{padding:50px;text-align:center;border:1px solid var(--linen);border-radius:12px}
 .recipe-tools{margin-bottom:42px}.recipe-checklist{background:#edf6fb;padding:24px;border-radius:12px}
+.location-jump{display:inline-flex;align-items:center;min-height:44px;padding:0 15px;border:1px solid #c8deea;border-radius:999px;background:#fff;color:var(--navy);font-size:.9rem;font-weight:600;text-decoration:none;transition:background .15s,color .15s}
+.location-jump:hover,.location-jump:focus-visible{background:var(--navy);color:#fff}
+.location-card{scroll-margin-top:6rem}
 .recipe-checklist label{display:flex;align-items:flex-start;gap:12px;padding:9px 0;line-height:1.5}
 .recipe-checklist input{margin-top:4px;accent-color:var(--navy);width:18px;height:18px;flex-shrink:0}
 .article-photo{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:14px}

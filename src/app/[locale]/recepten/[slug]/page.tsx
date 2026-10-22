@@ -39,7 +39,7 @@ export default async function RecipeDetail({params}:Props){
  <p className="mt-8 text-sm"><span className="kapitaal">{recipeLabel(r.moeilijkheid,locale)}</span> {recipeDifficultyNote(r.moeilijkheid,locale)}</p>
  </div><div>
  {r.hoofdproduct&&<Link className="inline-block mb-5 underline font-semibold" href={`/${locale}/assortiment/${r.hoofdproduct}`}>{c.more} →</Link>}
- <div className="pt-4" style={{borderTop:"2px solid var(--navy)"}}><p className="kapitaal mb-3">{c.shop}</p><ul className="mb-5">{r.vanSchaap.map(item=><li key={item} className="py-2 border-b border-sky-100">{item}</li>)}</ul><p className="text-sm mb-4">{c.checkAvailability}</p><a href={contact.href} className="knop knop-navy">{contact.label}</a></div>
+ <div id="ingredienten" className="pt-4 scroll-mt-28" style={{borderTop:"2px solid var(--navy)"}}><p className="kapitaal mb-3">{c.shop}</p><ul className="mb-5">{r.vanSchaap.map(item=><li key={item} className="py-2 border-b border-sky-100">{item}</li>)}</ul><p className="text-sm mb-4">{c.checkAvailability}</p><a href={contact.href} className="knop knop-navy">{contact.label}</a></div>
  <div className="mt-10 pt-4 border-t-2 border-sky-100"><p className="kapitaal mb-3">{c.market}</p><ul>{r.vanSupermarkt.map(item=><li key={item} className="py-2 border-b border-sky-100">{item}</li>)}</ul></div>
  </div></div><Link href={`/${locale}/recepten`} className="inline-block mt-12 font-semibold underline underline-offset-4">← {c.back}</Link></Sectie>
  <PaginaSlot titel={c.slot} tekst={c.policy} knoppen={[{label:contact.label,href:contact.href,extern:true},{label:c.platter,href:`/${locale}/visschalen`,soort:"lijn"},{label:BEDRIJF.telefoon.weergave,href:`tel:${BEDRIJF.telefoon.e164}`,extern:true,soort:"lijn"}]} />
