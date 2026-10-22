@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
-import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
-import { Sectie, Kop, Vragen } from "@/components/ui/Sectie";
+import { PaginaSlot } from "@/components/ui/PaginaKop";
+import { Sectie, Kop, Kruimels, Vragen } from "@/components/ui/Sectie";
 import { BEDRIJF } from "@/lib/bedrijf";
 import { bestelContact } from "@/lib/bestel-contact";
 import { DIRKS_BARBECUE, selectieNaam } from "@/lib/dirks-selectie";
@@ -63,21 +64,41 @@ export default async function BarbecueGourmetPage({
         ]}
       />
 
-      <PaginaKop
-        className="barbecue-page-heading"
-        kruimels={[
-          { naam: BEDRIJF.naamKort, href: `/${locale}` },
-          { naam: nav("assortiment"), href: `/${locale}/assortiment` },
-          { naam: t("crumb") },
-        ]}
-        label={t("label")}
-        titel={t("title")}
-        intro={t("intro")}
-        knoppen={[
-          { label: t("browse"), href: "#barbecue-gourmet", soort: "lijn" },
-          { label: contact.label, href: contact.href, extern: true },
-        ]}
-      />
+      <section className="collection-hero">
+        <div className="max-w-6xl mx-auto px-4 collection-hero-grid">
+          <div className="collection-hero-copy">
+            <Kruimels
+              items={[
+                { naam: BEDRIJF.naamKort, href: `/${locale}` },
+                { naam: nav("assortiment"), href: `/${locale}/assortiment` },
+                { naam: t("crumb") },
+              ]}
+            />
+            <p className="kapitaal">{t("label")}</p>
+            <h1>{t("title")}</h1>
+            <p className="collection-intro">{t("intro")}</p>
+            <div className="collection-hero-actions">
+              <a className="knop knop-rood" href={contact.href} target="_blank" rel="noopener noreferrer">
+                {contact.label}
+              </a>
+              <a className="collection-text-link" href="#barbecue-gourmet">
+                {t("browse")} <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+          <figure className="collection-hero-image">
+            <Image
+              src="/images/dirks/barbecuepakket.webp"
+              alt={t("heroImageAlt")}
+              width={1600}
+              height={1067}
+              priority
+              sizes="(max-width: 800px) 100vw, 50vw"
+            />
+            <figcaption>{t("photoCaption")}</figcaption>
+          </figure>
+        </div>
+      </section>
 
       <Sectie grond="papier" id="barbecue-gourmet">
         <SelectieAanvraag
@@ -105,3 +126,4 @@ export default async function BarbecueGourmetPage({
     </>
   );
 }
+
