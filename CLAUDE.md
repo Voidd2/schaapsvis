@@ -35,16 +35,13 @@ Daar staat wat er nog voorlopig is en wat de eigenaar zelf invult.
   tarief voor het hele gebied; `GEMEENTEN` kán een afwijkend tarief zetten, maar
   doet dat nergens.
 - **Afhalen** kan altijd, gratis, in de winkel of aan de kraam.
-- **Verse vis gaat op gewicht.** Er staat daarom geen totaalbedrag bij een
-  bestelling verse vis: we bellen met de dagprijs voordat we inpakken. Nooit een
-  bedrag beloven dat de weegschaal niet kan waarmaken.
-- **Een visschaal is een keuze uit drie schalen** (`SCHALEN` in
-  `src/lib/visschaal.ts`), basistarief € 17,50 per persoon. Maatwerk/duurdere vis vooraf via WhatsApp afstemmen.
-  Daarbovenop legt de klant zelf extra's, **per 100 gram** (`ONDERDELEN`). Een
-  paar dingen gaan per stuk (oesters) en hebben `perStuk`. Dit is wél op de cent
-  uit te rekenen en kan dus online worden afgerekend.
-  Het geheel heet een `Samenstelling`: `{ schaal, extras }`. Zonder gekozen
-  schaal is er niets te bestellen — dat controleert de API-route ook.
+- **Verse vis kan op gewicht worden verkocht, maar we werken niet met dagprijzen.**
+  Spreek de prijs vooraf met de klant af; de site mag nergens een dagprijs of
+  onverwachte prijs achteraf beloven.
+- **Visschalen zijn maatwerk via WhatsApp.** Toon inspiratiebeelden en een
+  gemiddelde richtprijs van ongeveer € 17,50 per persoon, geen vaste prijs per
+  schaal. Duidelijk vermelden dat duurdere vis of extra wensen de prijs kunnen
+  verhogen en vooraf met de klant worden afgestemd.
 - **De prijzen zitten bewust onder de markt.** De benchmark staat bovenin
   `visschaal.ts` met bron en datum. Wijzig je een prijs, controleer dan of de
   vergelijking met `MARKT.goedkoopstePerPersoon` nog klopt — die claim staat op
@@ -308,3 +305,4 @@ npx eslint src
 git add -A && git commit -m "…"
 git push -u origin claude/schaapsvis-website-remake-yfhbfu
 ```
+
