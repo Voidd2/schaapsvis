@@ -23,7 +23,7 @@ Eigen websites zijn waar mogelijk inhoudelijk bekeken. Zaken waarvoor geen betro
 | 10 | Voorschoten | [Vishandel De VisArend](https://www.vishandeldevisarend.nl/) | Eigen site | Duidelijke lokale identiteit, specialiteiten en contact. |
 | 11 | Wassenaar | [Roeleveld à la mer](https://www.roeleveldalamer.nl/) | Eigen site | Categorieën, acties, openingstijden en catering staan prominent. |
 | 12 | Wassenaar | [De Wassenaarsche Viswinkel](https://dewassenaarscheviswinkel.nl/) | Eigen domein; [lokale bron](https://winkelsinwassenaar.nl/winkels/de-wassenaarsche-viswinkel/) | Lokale naam en adres vindbaar; site-inhoud beperkt beoordeeld. |
-| 13 | Wassenaar | De Kuyper Visspecialist | [Wassenaar-overzicht](https://www.devishandel.nl/wassenaar) | Lokale vermelding; eigen website niet inhoudelijk bevestigd. |
+| 13 | Wassenaar | De Kuyper Visspecialist | [Openbare profielpagina](https://www.devishandel.nl/wassenaar/de-kuyper-visspecialist) | Lokale vermelding; eigen website niet inhoudelijk bevestigd. |
 | 14 | Oegstgeest | [Visgilde Hugo van der Meij](https://hugovdmeij.visgilde.nl/) | Eigen site | Assortimentsingangen, gebakken-visuren, acties, recepten en bestellen. |
 | 15 | Katwijk | [Schuitemaker](https://www.schuitemaker-vis.nl/winkels/viswinkel-in-katwijk-voorstraat/) | Eigen site | Locatiepagina combineert winkel, sfeer, aanbod, adres en openingstijden. |
 | 16 | Katwijk | [Piet van der Plas](https://pietvanderplas.nl/) | Eigen site | Familiegeschiedenis en ambacht als herkenbaar merkverhaal. |
@@ -31,7 +31,7 @@ Eigen websites zijn waar mogelijk inhoudelijk bekeken. Zaken waarvoor geen betro
 | 18 | Katwijk | [Visspecialiteiten Kees Hartevelt](https://www.harteveltvis.nl/contact/) | Eigen site | Kioskpagina legt locatie en seizoensopeningstijden uit. |
 | 19 | Katwijk | De Jong Vishandel | [Katwijk-overzicht](https://www.devishandel.nl/katwijk) | Lokale kandidaat; gidsinformatie is geen eigen site-audit. |
 | 20 | Noordwijk | [Hoek’s Vis](https://www.hoeksvis.nl/) | Eigen site; [Noordwijk.info](https://www.noordwijk.info/nl/locatie-overzicht/702297552/hoek-s-vis) | Familiebedrijf, assortiment en praktische openingstijden worden lokaal uitgelegd. |
-| 21 | Noordwijk | [Visspecialist Van der Marel](https://visspecialistvdmarel.nl/contact/) | Eigen site | Contact en gegevens per vestiging gescheiden. |
+| 21 | Den Haag | Viswinkel N. Zoutenbier | [Winkelcentrumprofiel](https://www.desavorninlohmanplein.nl/winkels/viswinkel-n-zoutenbier/) | Winkelcentrumprofiel noemt assortiment en openingstijden; geen volledige eigen site-audit. |
 | 22 | Noordwijkerhout/regio | [Visspecialist XL](https://visspecialistxl.nl/over-ons) | Eigen site | Eigen verhaal en lokale positionering. |
 | 23 | Leidschendam | [Puurvis](https://www.puurvis.com/) | Eigen site | Winkelbeleving, eigen keuken en productverhaal vormen de positionering. |
 | 24 | Scheveningen/Den Haag | [Simonis Vis](https://www.simonisvis.nl/vestigingen) | Eigen site | Duidelijk vestigingenoverzicht en herkenbare winkel-/restaurantbeleving. |
