@@ -44,8 +44,9 @@
   "barbecuePage": {
     "crumb": "Barbecue & gourmet",
     "label": "Schaap’s Vishandel · Leiden",
-    "title": "Choose seafood for your barbecue or gourmet table",
-    "intro": "From complete seafood barbecue packs to individual skewers and gourmet pieces: explore the options and discuss your choice with us on WhatsApp. We confirm availability, contents and price with you in advance.",
+    "title": "Seafood for your barbecue or gourmet night in Leiden",
+    "intro": "Complete your barbecue or tabletop-gourmet evening with fish, skewers and seafood packs from Schaap’s Vishandel. Explore the selection and discuss what you are looking for with us on WhatsApp.",
+    "heroImageAlt": "Seafood pack with assorted fish and skewers for a barbecue or tabletop grill",
     "browse": "Browse the selection",
     "contactProduct": "seafood for a barbecue or gourmet evening",
     "selectieKop": "Browse the barbecue and gourmet selection",
@@ -667,4 +668,5 @@
     "gratisWeegvis": "Fresh fish is settled by weight. If your order comes to more than {bedrag}, delivery is free — we agree the price with you in advance."
   }
 }
+
 
