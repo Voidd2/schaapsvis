@@ -44,8 +44,9 @@
   "barbecuePage": {
     "crumb": "Grill & Gourmet",
     "label": "Schaap’s Vishandel · Leiden",
-    "title": "Stellen Sie Ihre Auswahl für Grill und Gourmet zusammen",
-    "intro": "Von kompletten Fisch-Grillpaketen bis zu einzelnen Spießen und Gourmetstücken: Entdecken Sie die Möglichkeiten und besprechen Sie Ihre Auswahl mit uns per WhatsApp. Verfügbarkeit, Zusammenstellung und Preis stimmen wir vorher mit Ihnen ab.",
+    "title": "Fisch für Grill und Gourmet in Leiden",
+    "intro": "Ergänzen Sie Ihren Grillabend oder Tischgrill-Abend mit Fisch, Spießen und Paketen von Schaap’s Vishandel. Entdecken Sie die Auswahl und besprechen Sie Ihre Wünsche direkt per WhatsApp mit uns.",
+    "heroImageAlt": "Fischpaket mit verschiedenen Fischsorten und Spießen für Grill oder Tischgrill",
     "browse": "Auswahl ansehen",
     "contactProduct": "Fisch für Grill oder Gourmet",
     "selectieKop": "Unsere Auswahl für Grill und Gourmet",
@@ -667,4 +668,5 @@
     "gratisWeegvis": "Frischen Fisch rechnen wir nach Gewicht ab. Kommt Ihre Bestellung über {bedrag}, entfällt die Liefergebühr — den Preis vereinbaren wir vorher mit Ihnen."
   }
 }
+
 
