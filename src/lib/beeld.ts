@@ -186,7 +186,7 @@ export const BEELD = {
     waar: "De Varlaks-pagina",
     wat: "Een Varlaks-filet op jullie eigen toonbank. Niet de persfoto van de kweker: die van jullie is geloofwaardiger.",
     bestand: "",
-    alt: "Varlaks biologische zalmfilet bij Schaap's Vishandel in Leiden",
+    alt: "VÅRLAKS-zalmfilet bij Schaap's Vishandel in Leiden",
     verhouding: "liggend",
     terugval: "Varlaks zalmfilet",
   },
@@ -203,3 +203,4 @@ export function heeftBeeld(naam: BeeldNaam): boolean {
 export function ontbrekendeBeelden(): BeeldNaam[] {
   return (Object.keys(BEELD) as BeeldNaam[]).filter((naam) => BEELD[naam].bestand === "");
 }
+
