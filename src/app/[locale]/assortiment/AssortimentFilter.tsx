@@ -16,21 +16,21 @@ const copy = {
     all: "Alles", search: "Welke vis zoekt u?", popular: "Favorieten eerst", az: "Naam A–Z", more: "Toon meer producten",
     detail: "Productinformatie", count: "producten", empty: "Niets gevonden? Vraag het ons gerust via WhatsApp.",
     favorites: "Begin met onze favorieten", favoritesSub: "Een paar vertrouwde keuzes uit onze toonbank.",
-    browse: "Het hele assortiment", browseSub: "Kijk rustig rond. Voor beschikbaarheid en uw wensen helpen we u graag via WhatsApp.", photoNote: "Lees bij ieder product meer over de vissoort, herkomst en beschikbaarheid.",
+    browse: "Het hele assortiment", browseSub: "Kijk rustig rond. Voor beschikbaarheid en uw wensen helpen we u graag via WhatsApp.", photoNote: "Bekijk per product de beschikbaarheid, voedingsinformatie en passende recepten.",
     categories: ["Verse vis", "Gerookte vis", "Schaal- & schelpdieren", "Vissalades", "Bereid & snacks", "Zeegroenten"],
   },
   en: {
     all: "All", search: "Which fish are you looking for?", popular: "Favourites first", az: "Name A–Z", more: "Show more products",
     detail: "Product information", count: "products", empty: "Can't find it? Ask us on WhatsApp.",
     favorites: "Start with our favourites", favoritesSub: "A few familiar favourites from our fish counter.",
-    browse: "Explore our full range", browseSub: "Take a look around. Ask us on WhatsApp about availability and your wishes.", photoNote: "Find out more about each fish species, origin and availability on its product page.",
+    browse: "Explore our full range", browseSub: "Take a look around. Ask us on WhatsApp about availability and your wishes.", photoNote: "See availability, nutrition information and recipe ideas on each product page.",
     categories: ["Fresh fish", "Smoked fish", "Shellfish", "Fish salads", "Prepared & snacks", "Sea vegetables"],
   },
   de: {
     all: "Alle", search: "Welchen Fisch suchen Sie?", popular: "Favoriten zuerst", az: "Name A–Z", more: "Weitere Produkte anzeigen",
     detail: "Produktinformationen", count: "Produkte", empty: "Nicht gefunden? Fragen Sie uns per WhatsApp.",
     favorites: "Unsere Favoriten entdecken", favoritesSub: "Einige bewährte Favoriten aus unserer Fischtheke.",
-    browse: "Das gesamte Sortiment", browseSub: "Schauen Sie sich in Ruhe um. Fragen zu Verfügbarkeit und Wünschen beantworten wir gerne per WhatsApp.", photoNote: "Auf der Produktseite erfahren Sie mehr über Fischart, Herkunft und Verfügbarkeit.",
+    browse: "Das gesamte Sortiment", browseSub: "Schauen Sie sich in Ruhe um. Fragen zu Verfügbarkeit und Wünschen beantworten wir gerne per WhatsApp.", photoNote: "Auf jeder Produktseite finden Sie Verfügbarkeit, Nährwertangaben und passende Rezeptideen.",
     categories: ["Frischer Fisch", "Räucherfisch", "Schalentiere", "Fischsalate", "Zubereitet & Snacks", "Meeresgemüse"],
   },
 };
@@ -116,3 +116,4 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
     </section>
   </div>;
 }
+
