@@ -7,6 +7,7 @@ export const receptenPraktisch: Recept[] = [
   {
     slug: "pasta-gerookte-zalm-roomsaus",
     hoofdproduct: "gerookte-zalm-high-seas",
+    geschiktVoor: ["gerookte-zalm-snippers", "gerookte-wilde-zalm"],
     title: "Pasta met gerookte zalm en roomsaus",
     subtitle: "Romige pasta met gerookte zalm, klaar in 20 minuten",
     tijd: "20 min",
@@ -15,7 +16,7 @@ export const receptenPraktisch: Recept[] = [
     porties: 4,
     seizoen: "Jaarrond",
     fotoLabel: "Romige tagliatelle met gerookte zalm en dille",
-    vanSchaap: ["Gerookte zalm (200 g) — vraag naar de dikgesneden variant"],
+    vanSchaap: ["200 g gerookte zalm in plakjes of snippers"],
     vanSupermarkt: [
       "400 g tagliatelle of penne",
       "250 ml kookroom",
@@ -30,12 +31,12 @@ export const receptenPraktisch: Recept[] = [
       "Kook de pasta volgens de verpakking beetgaar.",
       "Fruit intussen de gesnipperde sjalot en knoflook 2 minuten in olijfolie op middelhoog vuur.",
       "Voeg de kookroom toe en laat 3–4 minuten zachtjes inkoken. Breng op smaak met peper en een kneep citroen.",
-      "Scheur de gerookte zalm in stukken.",
+      "Snijd de gerookte zalm in stukken als u plakjes gebruikt; snippers kunt u direct toevoegen.",
       "Schep de pasta met een lepel kookvocht door de saus, haal de pan van het vuur en voeg de zalm toe — niet meekoken, dan blijft hij zacht.",
       "Serveer met dille en Parmezaan.",
     ],
     verhaal:
-      "Voeg de zalm pas op het laatst toe, van het vuur af — zo blijft de rooksmaak intact. Vraag naar de dikgesneden variant voor dit gerecht.",
+      "Voeg de zalm pas op het laatst toe, van het vuur af — zo blijft de rooksmaak intact. Plakjes en snippers zijn allebei geschikt.",
     seoKeywords: "pasta gerookte zalm recept, romige zalmpasta, snelle zalmpasta",
     keuken: "Italiaans geïnspireerd",
     veiligheid: "De gerookte zalm wordt hier van het vuur af toegevoegd. Voor kwetsbare groepen moet ook de zalm door en door worden verhit; gebruik dan eventueel verse zalm die u eerst volledig gaart.",

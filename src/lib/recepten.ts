@@ -63,6 +63,7 @@ const receptenOrigineel: Recept[] = [
   {
     slug: "zomerse-zalmsalade",
     hoofdproduct: "gerookte-zalm-high-seas",
+    geschiktVoor: ["gerookte-zalm-snippers", "gerookte-wilde-zalm"],
     title: "Zomerse zalmsalade",
     subtitle: "Licht, fris en in 15 minuten op tafel",
     tijd: "15 min",
