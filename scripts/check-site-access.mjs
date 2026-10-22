@@ -13,10 +13,11 @@ const original = process.env.SITE_PUBLIC;
 const originalIpAllowlist = process.env.SITE_ACCESS_IP_ALLOWLIST;
 try {
   delete process.env.SITE_ACCESS_IP_ALLOWLIST;
-  assert.equal(exports.heeftToegestaanIp("212.120.114.226"), false, "an unset allowlist grants no IP access");
-  process.env.SITE_ACCESS_IP_ALLOWLIST = "198.51.100.1, 212.120.114.226";
-  assert.equal(exports.heeftToegestaanIp("212.120.114.226"), true, "an exact allowlisted IP is accepted");
-  assert.equal(exports.heeftToegestaanIp("212.120.114.226, 198.51.100.1"), false, "forwarded IP chains are not accepted");
+  assert.equal(exports.heeftToegestaanIp("192.0.2.1"), false, "an unset allowlist grants no IP access");
+  process.env.SITE_ACCESS_IP_ALLOWLIST = "198.51.100.1, 2001:db8::1";
+  assert.equal(exports.heeftToegestaanIp("198.51.100.1"), true, "an exact allowlisted IPv4 address is accepted");
+  assert.equal(exports.heeftToegestaanIp("2001:db8::1"), true, "an exact allowlisted IPv6 address is accepted");
+  assert.equal(exports.heeftToegestaanIp("198.51.100.1, 192.0.2.1"), false, "forwarded IP chains are not accepted");
   assert.equal(exports.heeftToegestaanIp(undefined), false, "a missing client IP is never accepted");
   for (const value of [undefined, "", "off", "on", "true"]) {
     if (value === undefined) delete process.env.SITE_PUBLIC;
@@ -35,4 +36,5 @@ try {
 }
 
 console.log("Site access gate passed: launch policy and exact-IP allowlist checks passed.");
+
 
