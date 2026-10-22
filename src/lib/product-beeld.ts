@@ -341,7 +341,7 @@ function sourcePhoto(product: Product): ProductPhoto | null {
   const beeld = PRODUCT_BEELDEN[product.slug];
   if (beeld) return { ...beeld, editorial: true, whole: ["schol", "zeebaars", "gerookte-forel-heel"].includes(product.slug) };
   if (product.slug === "varlaks-zalm") {
-    return { src: "/images/editorial/zalm.webp", editorial: true, whole: false, alt: "Zalm met citroen en dille — serveerinspiratie" };
+    return { src: "/images/editorial/varlaks-zalm-rauw-ai.webp", editorial: true, whole: false, alt: "Rauwe verse zalmfilet op ijs met citroen en dille" };
   }
   if (product.slug === "kibbeling") {
     return { src: "/images/editorial/kibbeling-schaapstray.png", editorial: true, whole: false, alt: "Bakje krokante kibbeling met ravigotesaus" };
@@ -373,7 +373,7 @@ const ALTS:Record<string,readonly[string,string,string]>={
 "lekkerbek":["Gebakken heek als lekkerbek met koolsalade — serveerinspiratie","Fried battered hake with coleslaw, serving suggestion","Frittierter Seehecht im Backteig mit Krautsalat, Serviervorschlag"],
 "broodje-haring":["Broodje haring met uitjes — serveersuggestie","Herring roll with onion, serving suggestion","Matjesbrötchen mit Zwiebeln, Serviervorschlag"],
 "vissoep":["Romige vissoep — serveersuggestie","Creamy fish soup, serving suggestion","Cremige Fischsuppe, Serviervorschlag"],
-"varlaks-zalm":["Zalmfilet met citroen en dille — serveersuggestie","Salmon fillet with lemon and dill, serving suggestion","Lachsfilet mit Zitrone und Dill, Serviervorschlag"],
+"varlaks-zalm":["Rauwe verse zalmfilet op ijs met citroen en dille","Raw fresh salmon fillet on ice with lemon and dill","Rohes frisches Lachsfilet auf Eis mit Zitrone und Dill"],
 "kibbeling":["Krokante kibbeling met ravigotesaus — serveersuggestie","Crispy kibbeling with ravigote sauce, serving suggestion","Knuspriger Kibbeling mit Ravigotesauce, Serviervorschlag"],
 "gerookte-zalm-high-seas":["Dunne plakken gerookte zalm met dille op een schaal — serveersuggestie","Thin slices of smoked salmon with dill on a platter, serving suggestion","Dünne Räucherlachsscheiben mit Dill auf einer Platte, Serviervorschlag"],
 "creuse-oesters":["Creuse oesters op ijs met citroen — serveersuggestie","Cupped Pacific oysters served on ice with lemon, serving suggestion","Felsenaustern auf Eis mit Zitrone, Serviervorschlag"],

@@ -119,7 +119,7 @@ export function StudentReviewPortal({ locale }: { locale: string }) {
         <p className="kapitaal">Schaap&apos;s Vishandel · beheer</p>
         <h1 className="font-display text-4xl font-bold text-slate-900">{t.title}</h1>
         <p className="mt-3 text-slate-700">{t.intro}</p>
-        <a href={`/${language}/beheer/emaildeals`} className="mt-4 inline-block font-semibold text-sky-800 underline underline-offset-4">{t.campaigns} →</a>
+        <nav className="mt-4 flex flex-wrap gap-x-5 gap-y-2"><a href={`/${language}/beheer/emaildeals`} className="font-semibold text-sky-800 underline underline-offset-4">{t.campaigns} →</a><a href={`/${language}/beheer/overzicht`} className="font-semibold text-sky-800 underline underline-offset-4">{language === "de" ? "Website-Statistiken" : language === "en" ? "Website analytics" : "Website-statistieken"} →</a></nav>
         {applications === null ? <p className="mt-8">{t.loading}</p> : forbidden ? <p role="alert" className="mt-8 rounded-xl bg-amber-50 p-5">{t.forbidden}</p> : applications.length === 0 ? <p className="mt-8 rounded-xl border border-sky-200 bg-sky-50 p-5">{t.none}</p> : (
           <ul className="mt-8 space-y-5">
             {applications.map((application) => (

@@ -69,7 +69,7 @@ export function VisschaalConfigurator() {
             {t("schaalUitleg")}
           </p>
 
-          <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <ul className="platter-selection-grid grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {SCHALEN.map((bron, index) => {
               const schaal = localizePlatter(bron,locale);
               const gekozen = samen.schaal === schaal.id;
@@ -86,7 +86,7 @@ export function VisschaalConfigurator() {
                 {(index === 0 || groep !== vorigeGroep) && <li className="col-span-full mt-4"><h3 className="text-[1.4rem]">{koppen[taal][groep as keyof typeof koppen.nl]}</h3></li>}
                 <li>
                   <article
-                    className="flex flex-col h-full"
+                    className="platter-option-card flex flex-col h-full"
                     style={{
                       backgroundColor: "#fff",
                       border: gekozen ? "2px solid var(--navy)" : "1px solid var(--linen)",
@@ -94,8 +94,8 @@ export function VisschaalConfigurator() {
                   >
                     <figure>
                       {schaal.foto ? (
-                        <div className="relative aspect-square overflow-hidden bg-[#f2f8fb]">
-                          <Image src={schaal.foto} alt={`${schaal.naam} — ${locale === "de" ? "Servierbeispiel" : locale === "en" ? "serving suggestion" : "serveervoorbeeld"}`} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover" />
+                        <div className="relative aspect-[4/3] overflow-hidden bg-[#f2f8fb]">
+                          <Image src={schaal.foto} alt={schaal.naam} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover" />
                         </div>
                       ) : schaal.beeld ? <Beeld naam={schaal.beeld} verhouding="vierkant" streep="var(--navy)" /> : null}
                       <figcaption className="px-5 py-3 text-xs leading-relaxed" style={{ background: "var(--lichtblauw)", color: "var(--navy)" }}>

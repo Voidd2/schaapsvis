@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { usePathname } from "next/navigation";
 import { LanguageSwitcher } from "./LanguageSwitcher";
@@ -20,15 +20,26 @@ export function Header() {
   const locale = useLocale();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        menuButton.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [open]);
 
   const p = (pad: string) => `/${locale}${pad}`;
 
   const links = [
     { href: p("/assortiment"), label: t("assortiment") },
+    { href: p("/barbecue-gourmet"), label: locale === "de" ? "Grill & Gourmet" : locale === "en" ? "Barbecue & gourmet" : "Barbecue & gourmet" },
     { href: p("/recepten"), label: t("recepten") },
-    { href: p("/viskalender"), label: locale === "de" ? "Fischkalender" : locale === "en" ? "Fish calendar" : "Viskalender" },
-    { href: p("/biologische-vis"), label: t("betereVis") },
-    { href: p("/blog"), label: t("blog") },
     { href: p("/bezoek-ons"), label: t("locaties") },
     { href: p("/studentenkorting"), label: locale === "de" ? "Studentenrabatt" : locale === "en" ? "Student discount" : "Studentenkorting" },
     { href: p("/account"), label: locale === "de" ? "Konto" : locale === "en" ? "Account" : "Account" },
@@ -99,8 +110,8 @@ export function Header() {
             </span>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-3 xl:gap-4 text-[0.85rem]">
-            {links.map(({ href, label }) => (
+          <nav className="hidden xl:flex items-center gap-3 xl:gap-4 text-[0.85rem]">
+            {links.slice(0, 4).map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
@@ -118,7 +129,7 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-3 shrink-0">
-            <div className="hidden lg:block" style={{ color: "var(--charcoal)" }}>
+            <div className="hidden xl:block" style={{ color: "var(--charcoal)" }}>
               <LanguageSwitcher />
             </div>
 
@@ -136,10 +147,12 @@ export function Header() {
 
             <button
               type="button"
-              className="lg:hidden p-2 -mr-2"
+              ref={menuButton}
+              className="xl:hidden p-2 -mr-2"
               style={{ color: "var(--navy)" }}
               onClick={() => setOpen(!open)}
               aria-expanded={open}
+              aria-controls="mobile-navigation"
               aria-label={locale === "de" ? "Menü" : "Menu"}
             >
               {open ? <KruisIcoon /> : <MenuIcoon />}
@@ -150,7 +163,8 @@ export function Header() {
         {/* ── Uitgeklapt menu ───────────────────────────────────────────── */}
         {open && (
           <div
-            className="lg:hidden"
+            id="mobile-navigation"
+            className="xl:hidden max-h-[calc(100dvh-6.4rem)] overflow-y-auto overscroll-contain"
             style={{ backgroundColor: "var(--cream)", borderTop: "1px solid var(--linen)" }}
           >
             <nav className="max-w-6xl mx-auto px-4 py-2">

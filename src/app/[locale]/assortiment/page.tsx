@@ -18,7 +18,7 @@ const copy = {
     label: "Schaap’s Vishandel · Leiden", title: "Ons assortiment.",
     intro: "Van een mooie zalmfilet tot vers gebakken kibbeling. Goede vis voor aan tafel, bij de borrel of gewoon tussendoor.",
     browse: "Ontdek het assortiment", platter: "Visschaal samenstellen",
-    policy: "Alleen visschalen bestelt u online.", policySub: "Zoekt u iets anders? Stuur ons een WhatsApp-bericht. Dan kijken we samen wat mogelijk is.",
+    policy: "Visschalen en barbecue op aanvraag via WhatsApp.", policySub: "Stel samen met ons iets samen dat past bij uw gezelschap en gelegenheid. We bespreken uw wensen persoonlijk.",
     question: "Iets in gedachten?", note: "Een bepaalde vis, een speciale wens of iets wat u hier niet ziet? App ons gerust. We bespreken de mogelijkheden en beschikbaarheid met u.",
     image: "Zalm met citroen en dille",
   },
@@ -26,7 +26,7 @@ const copy = {
     label: "Schaap’s Vishandel · Leiden", title: "Our fish selection.",
     intro: "From a beautiful salmon fillet to freshly fried kibbeling. Good fish for dinner, sharing or a little treat.",
     browse: "Explore our range", platter: "Create a seafood platter",
-    policy: "Only seafood platters can be ordered online.", policySub: "Looking for something else? Send us a WhatsApp message to discuss the options.",
+    policy: "Seafood platters and barbecue selections by WhatsApp request.", policySub: "We can help you put together a selection to suit your guests and occasion. Tell us what you have in mind.",
     question: "Something in mind?", note: "A particular fish, a special request or something you can't find here? Ask us on WhatsApp about availability and options.",
     image: "Salmon with lemon and dill",
   },
@@ -34,7 +34,7 @@ const copy = {
     label: "Schaap’s Vishandel · Leiden", title: "Unser Sortiment.",
     intro: "Vom schönen Lachsfilet bis zum frisch gebackenen Kibbeling. Guter Fisch zum Abendessen, zum Teilen oder für zwischendurch.",
     browse: "Sortiment entdecken", platter: "Fischplatte zusammenstellen",
-    policy: "Nur Fischplatten können Sie online bestellen.", policySub: "Suchen Sie etwas anderes? Schreiben Sie uns per WhatsApp. Gemeinsam schauen wir, was möglich ist.",
+    policy: "Fischplatten und Grillauswahl auf Anfrage per WhatsApp.", policySub: "Wir stellen gemeinsam eine Auswahl für Ihre Gäste und Ihren Anlass zusammen. Erzählen Sie uns von Ihren Wünschen.",
     question: "Einen besonderen Wunsch?", note: "Ein bestimmter Fisch, ein besonderer Wunsch oder etwas, das Sie hier nicht finden? Fragen Sie uns per WhatsApp nach Verfügbarkeit und Möglichkeiten.",
     image: "Lachs mit Zitrone und Dill",
   },
@@ -76,7 +76,7 @@ export default async function AssortimentPage({ params }: { params: Promise<{ lo
           <p className="collection-heritage">Leiden · {locale === "nl" ? "Sinds" : locale === "de" ? "Seit" : "Since"} 1938</p>
         </div>
         <figure className="collection-hero-image">
-          <Image width={1400} height={933} sizes="(max-width: 800px) 100vw, 50vw" src="/images/editorial/zalm.webp" alt={c.image} priority />
+          <Image width={1400} height={1050} sizes="(max-width: 800px) 100vw, 50vw" src="/images/editorial/varlaks-zalm-rauw-ai.webp" alt={locale === "de" ? "Rohes frisches Lachsfilet auf Eis mit Zitrone und Dill" : locale === "en" ? "Raw fresh salmon fillet on ice with lemon and dill" : "Rauwe verse zalmfilet op ijs met citroen en dille"} priority />
         </figure>
       </div>
     </header>

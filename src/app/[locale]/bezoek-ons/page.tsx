@@ -187,7 +187,7 @@ export default async function BezoekOnsPage({
 
       <PaginaSlot
         titel={nav("visschalen")}
-        tekst={locale === "nl" ? "Alleen visschalen kunt u online bestellen. Zoekt u andere vis? Stuur ons een WhatsApp-bericht, dan kijken we wat mogelijk is." : locale === "de" ? "Nur Fischplatten können Sie online bestellen. Für andere Produkte kontaktieren Sie uns über WhatsApp." : "Only seafood platters can be ordered online. For other products, contact us on WhatsApp."}
+        tekst={locale === "nl" ? "Visschalen vraagt u bij ons aan via WhatsApp. Zoekt u andere vis? Stuur ons een WhatsApp-bericht, dan kijken we wat mogelijk is." : locale === "de" ? "Fischplatten stimmen Sie mit uns per WhatsApp ab. Für andere Produkte kontaktieren Sie uns ebenfalls über WhatsApp." : "Please arrange seafood platters with us via WhatsApp. For other products, contact us on WhatsApp."}
         knoppen={[
           { label: nav("visschalen"), href: `/${locale}/visschalen` },
           { ...bestelContact(locale), extern: true, soort: "lijn" },

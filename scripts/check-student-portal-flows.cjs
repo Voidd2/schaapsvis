@@ -5,9 +5,9 @@ const assert = require('node:assert/strict');
 const origin = process.argv[2] || 'http://localhost:3011';
 if (!/^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(origin)) throw new Error('Local origin required');
 const agreedTerms = {
-  nl: ['De 10% korting geldt voor studenten die in Leiden een MBO-, HBO- of WO-opleiding volgen.', 'De korting geldt alleen voor kibbeling, haring, broodjes haring en drinken.', 'De pas is één studiejaar geldig; daarna is nieuw bewijs nodig.'],
-  en: ['The 10% discount is for students enrolled in an MBO, HBO or university programme in Leiden', 'It applies only to kibbeling, herring, herring sandwiches and drinks.', 'The pass is valid for one academic year; new proof is then required.'],
-  de: ['Der Rabatt von 10 % gilt für Studierende einer MBO-, HBO- oder Hochschulausbildung in Leiden.', 'Er gilt ausschließlich für Kibbeling, Hering, Heringsbrötchen und Getränke.', 'Der Pass ist ein Studienjahr gültig; danach ist ein neuer Nachweis erforderlich.'],
+  nl: ['Nederlandse en internationale studenten', 'Alleen kibbeling, haring, broodjes haring en drinken doen mee', 'studiejaar geldig', 'nieuw bewijs nodig'],
+  en: ['Dutch and international students', 'It applies only to kibbeling, herring, herring sandwiches and drinks', 'one academic year', 'new proof is then required'],
+  de: ['niederländische und internationale Studierende', 'Kibbeling, Hering, Heringsbrötchen und Getränke', 'Studienjahr gültig', 'neuer Nachweis erforderlich'],
 };
 
 (async () => {
@@ -32,6 +32,7 @@ const agreedTerms = {
         studentApplication: { status: 'approved', education_level: 'hbo', institution: 'Hogeschool Leiden', submitted_at: '2026-10-18T10:00:00.000Z' },
         discountPass: { code: 'svpass.example', issuedAt: '2026-10-18T10:00:00.000Z', expiresAt: '2027-10-18T10:00:00.000Z' },
       } }));
+      await passView.route('**/api/members/newsletter/start', route => route.fulfill({ json: { draftToken: 'local-newsletter-draft' } }));
       await passView.goto(`${origin}/${locale}/account`, { waitUntil: 'networkidle' });
       const passCode = passView.locator('code').filter({ hasText: 'svpass.example' });
       await passCode.waitFor();
@@ -41,10 +42,17 @@ const agreedTerms = {
       const footerColors = await passView.locator('footer').evaluate(footer => ({
         title: footer.querySelector('h2').classList.contains('text-white'),
         intro: footer.querySelector('h2 + p').classList.contains('text-slate-200'),
-        consent: footer.querySelector('input[name="consent"]').parentElement.classList.contains('text-slate-200'),
+        email: footer.querySelector('input[name="email"]') !== null,
         button: footer.querySelector('button[type="submit"]').classList.contains('bg-white') && footer.querySelector('button[type="submit"]').classList.contains('text-slate-900'),
       }));
-      assert.deepEqual(footerColors, { title: true, intro: true, consent: true, button: true }, `${locale}: newsletter footer uses high-contrast light text and button on dark background`);
+      assert.deepEqual(footerColors, { title: true, intro: true, email: true, button: true }, `${locale}: newsletter footer uses high-contrast text and button on the dark background`);
+      await passView.locator('footer input[name="email"]').fill('newsletter@example.test');
+      const newsletterNext = { nl: 'Verder', en: 'Continue', de: 'Weiter' }[locale];
+      await passView.getByRole('button', { name: newsletterNext }).click();
+      const newsletterConsent = passView.locator('footer input[name="consent"]');
+      await newsletterConsent.waitFor();
+      assert.equal(await newsletterConsent.evaluate(input => input.required), true, `${locale}: explicit newsletter consent is required to subscribe`);
+      assert.equal(await newsletterConsent.evaluate(input => input.parentElement.classList.contains('text-slate-200')), true, `${locale}: newsletter consent remains readable on the dark footer`);
       await passView.close();
 
       const student = await browser.newPage();
@@ -62,7 +70,8 @@ const agreedTerms = {
       const form = student.locator('form').filter({ has: student.locator('input[type="file"]') });
       await form.waitFor();
       const terms = await form.locator('div p').textContent();
-      for (const term of agreedTerms[locale]) assert.ok(terms?.includes(term), `${locale}: published student discount terms include “${term}”`);
+      const normalizedTerms = (terms ?? '').normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
+      for (const term of agreedTerms[locale]) assert.ok(normalizedTerms.includes(term.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase()), `${locale}: published student discount terms include "${term}"`);
       assert.equal(await form.locator('input[type="file"]').count(), 1, `${locale}: proof upload`);
       assert.equal(await form.locator('select[name="educationLevel"] option[value="mbo"]').count(), 1, `${locale}: MBO eligible`);
       assert.equal(await form.locator('select[name="educationLevel"] option[value="hbo"]').count(), 1, `${locale}: HBO eligible`);

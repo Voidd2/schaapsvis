@@ -56,6 +56,13 @@ const BEELD_PER_PUNT: Partial<Record<VerkooppuntId, BeeldNaam>> = {
   voorschoten: "marktVoorschoten",
 };
 
+const LOCATIE_PAGINA: Record<VerkooppuntId, string> = {
+  winkel: "/viswinkel-leiden",
+  markt: "/marktkraam-leiden",
+  "markt-woensdag": "/marktkraam-leiden",
+  voorschoten: "/viswinkel-voorschoten",
+};
+
 export default async function HomePage({
   params,
 }: {
@@ -111,6 +118,66 @@ export default async function HomePage({
       </section>
 
       <SeizoensBanner locale={locale} />
+
+      {/* Locatie-informatie direct boven de hoofdkeuzes: bezoekers zien meteen
+          waar en wanneer ze ons kunnen bezoeken, met een route én lokale uitleg. */}
+      <Sectie grond="zand">
+        <Kop label={h("locatiesLabel")} titel={h("locatiesKop")} />
+        <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8">
+          {localLocations(locale).map((punt) => (
+            <li key={punt.id}>
+              {BEELD_PER_PUNT[punt.id] && (
+                <Beeld
+                  naam={BEELD_PER_PUNT[punt.id]!}
+                  verhouding="liggend"
+                  streep="var(--navy)"
+                  klasse="mb-4"
+                />
+              )}
+              <h3 className="text-[1.2rem] mb-1">{punt.naam}</h3>
+              <p style={{ color: "var(--charcoal)" }}>
+                {punt.adres}
+                <br />
+                {punt.plaats}
+              </p>
+              <p className="text-sm mt-1" style={{ color: "var(--grijs)" }}>
+                {punt.dagen}
+              </p>
+              <a
+                href={punt.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mt-2 text-sm font-semibold underline underline-offset-4"
+                style={{ color: "var(--navy)" }}
+              >
+                {h("routeLink")} &rarr;
+              </a>
+              <Link
+                href={`/${locale}${LOCATIE_PAGINA[punt.id]}`}
+                className="block mt-3 font-semibold underline underline-offset-4"
+              >
+                {punt.id === "voorschoten"
+                  ? locale === "nl"
+                    ? "Visboer Voorschoten: vrijdag bij Hoogvliet"
+                    : locale === "de"
+                      ? "Fischstand in Voorschoten: freitags bei Hoogvliet"
+                      : "Fish stall in Voorschoten: Fridays at Hoogvliet"
+                  : locale === "nl"
+                    ? "Bekijk deze locatie"
+                    : locale === "de"
+                      ? "Standort ansehen"
+                      : "Explore this location"} →
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-8 pt-6" style={{ borderTop: "1px solid var(--linen)", color: "var(--charcoal)" }}>
+          <a href={`tel:${BEDRIJF.telefoon.e164}`} className="font-semibold underline underline-offset-4" style={{ color: "var(--navy)" }}>
+            {g("bellen", { nummer: BEDRIJF.telefoon.weergave })}
+          </a>{" "}&middot;{" "}
+          <Link href={`/${locale}/bezoek-ons`} className="underline underline-offset-4">{nav("locaties")}</Link>
+        </p>
+      </Sectie>
 
       {/* ── Drie pijlers ──────────────────────────────────────────────────── */}
       <Sectie grond="papier">
@@ -177,31 +244,6 @@ export default async function HomePage({
               {h("verhaalLink")} &rarr;
             </Link>
           </div>
-        </div>
-      </Sectie>
-
-      {/* ── Gebakken vis ──────────────────────────────────────────────────── */}
-      {/* Dit stond alleen als "dit bezorgen we niet" onder het bezorgblok. Voor
-          een zaak die er juist om bekendstaat is dat de verkeerde kant van
-          hetzelfde verhaal. */}
-      <Sectie grond="papier">
-        <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center">
-          <div>
-            <Kop label={h("gebakkenLabel")} titel={h("gebakkenKop")} />
-            <p className="lees mb-6" style={{ color: "var(--charcoal)" }}>
-              {h("gebakkenTekst")}
-            </p>
-            <p
-              className="lees pl-5 mb-7"
-              style={{ borderLeft: "2px solid var(--lichtblauw)", color: "var(--charcoal)" }}
-            >
-              {h("gebakkenNiet")}
-            </p>
-            <Link href={`/${locale}/bezoek-ons`} className="knop knop-navy">
-              {h("gebakkenLink")}
-            </Link>
-          </div>
-          <Beeld naam="gebakkenVis" streep="var(--rood)" />
         </div>
       </Sectie>
 
@@ -372,61 +414,6 @@ export default async function HomePage({
         >
           {h("reviewAlle", { aantal: googleReviewCount })} &rarr;
         </a>
-      </Sectie>
-
-      {/* ── Waar u ons vindt ──────────────────────────────────────────────── */}
-      <Sectie grond="zand">
-        <Kop label={h("locatiesLabel")} titel={h("locatiesKop")} />
-        <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8">
-          {localLocations(locale).map((punt) => (
-            <li key={punt.id}>
-              {/* Een foto per plek: zo weet iemand letterlijk waar hij naar
-                  moet zoeken — de kraam bij de Waag ziet er anders uit dan de
-                  kraam op de parkeerplaats bij Hoogvliet. */}
-              {BEELD_PER_PUNT[punt.id] && (
-                <Beeld
-                  naam={BEELD_PER_PUNT[punt.id]!}
-                  verhouding="liggend"
-                  streep="var(--navy)"
-                  klasse="mb-4"
-                />
-              )}
-              <h3 className="text-[1.2rem] mb-1">{punt.naam}</h3>
-              <p style={{ color: "var(--charcoal)" }}>
-                {punt.adres}
-                <br />
-                {punt.plaats}
-              </p>
-              <p className="text-sm mt-1" style={{ color: "var(--grijs)" }}>
-                {punt.dagen}
-              </p>
-              <a
-                href={punt.mapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block mt-2 text-sm font-semibold underline underline-offset-4"
-                style={{ color: "var(--navy)" }}
-              >
-                {h("routeLink")} &rarr;
-              </a>
-              {punt.id === "voorschoten" && <Link href={`/${locale}/viswinkel-voorschoten`} className="block mt-3 font-semibold underline underline-offset-4">{locale === "nl" ? "Visboer Voorschoten: vrijdag bij Hoogvliet" : locale === "de" ? "Fischstand Voorschoten: freitags bei Hoogvliet" : "Fishmonger Voorschoten: Fridays at Hoogvliet"} →</Link>}
-            </li>
-          ))}
-        </ul>
-
-        <p className="mt-10 pt-8" style={{ borderTop: "1px solid var(--linen)", color: "var(--charcoal)" }}>
-          <a
-            href={`tel:${BEDRIJF.telefoon.e164}`}
-            className="font-semibold underline underline-offset-4"
-            style={{ color: "var(--navy)" }}
-          >
-            {g("bellen", { nummer: BEDRIJF.telefoon.weergave })}
-          </a>{" "}
-          &middot;{" "}
-          <Link href={`/${locale}/bezoek-ons`} className="underline underline-offset-4">
-            {nav("locaties")}
-          </Link>
-        </p>
       </Sectie>
 
       <PaginaSlot

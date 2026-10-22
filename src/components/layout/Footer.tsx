@@ -45,6 +45,7 @@ export function Footer() {
         { href: bestelContact(locale).href, label: bestelContact(locale).label },
         { href: p("/visschalen"), label: nav("visschalen") },
         { href: p("/assortiment"), label: nav("assortiment") },
+        { href: p("/aanbiedingen"), label: locale === "de" ? "Kundenangebote" : locale === "en" ? "Customer offers" : "Aanbiedingen voor klanten" },
 
       ],
     },
@@ -54,6 +55,8 @@ export function Footer() {
         { href: p("/ons-verhaal"), label: nav("verhaal") },
         { href: p("/biologische-vis"), label: nav("betereVis") },
         { href: p("/varlaks"), label: nav("varlaks") },
+        { href: p("/studentenkorting"), label: locale === "de" ? "Studentenrabatt" : locale === "en" ? "Student discount" : "Studentenkorting" },
+        { href: p("/account"), label: locale === "de" ? "Konto" : "Account" },
         { href: p("/recepten"), label: nav("recepten") },
         { href: p("/viskalender"), label: nav("viswijzer") },
         { href: p("/blog"), label: nav("blog") },
@@ -155,7 +158,7 @@ export function Footer() {
           {groepen.map((groep) => (
             <div key={groep.kop}>
               <p className="kapitaal kapitaal-licht mb-3">{groep.kop}</p>
-              <ul className="space-y-2 text-base" style={{ opacity: 0.88 }}>
+              <ul className="footer-link-list grid grid-cols-2 gap-x-4 gap-y-2 text-base md:grid-cols-1" style={{ opacity: 0.88 }}>
                 {groep.links.map(({ href, label }) => (
                   <li key={href}>
                     <Link href={href} className="hover:text-white transition-colors">

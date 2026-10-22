@@ -34,7 +34,7 @@ const TEKST = {
 
 function Kaarten({ items, locale, showPrice = true, photoCaption }: { items: SelectieItem[]; locale: keyof typeof TEKST; showPrice?: boolean; photoCaption?: string }) {
   const t = TEKST[locale];
-  return <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  return <ul className="selection-request-grid grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
     {items.map((item) => {
       const naam = selectieNaam(item.slug, locale);
       const bericht = showPrice
@@ -69,7 +69,10 @@ export function SelectieAanvraag({ locale, showSpecial = true, showBarbecue = tr
     {showBarbecue && <section id="barbecue-gourmet">
       <h2 className="text-[1.8rem] mb-2">{heading ?? t.kop}</h2>
       <p className="max-w-3xl mb-8 text-[#4d6370]">{intro ?? t.intro}</p>
-      {(["barbecue", "gourmet", "los"] as const).map((groep) => <div key={groep} className="mb-12 last:mb-0">
+      <nav aria-label={t.kop} className="bbq-category-links mb-9">
+        {(["barbecue", "gourmet", "los"] as const).map((groep) => <a key={groep} href={`#${groep}`}>{groep === "barbecue" ? t.bbq : t[groep]}</a>)}
+      </nav>
+      {(["barbecue", "gourmet", "los"] as const).map((groep) => <div id={groep} key={groep} className="mb-12 last:mb-0 scroll-mt-32">
         <h3 className="text-[1.45rem] mb-5">{groep === "barbecue" ? t.bbq : t[groep]}</h3>
         <Kaarten items={DIRKS_BARBECUE.filter((item) => item.groep === groep)} locale={taal} photoCaption={photoCaption} />
       </div>)}

@@ -18,15 +18,17 @@ function photos(html) {
 for (const locale of ['nl', 'en', 'de']) {
   const student = await page(`/${locale}/studentenkorting`);
   const studentRules = {
-    nl: ['10% studentenkorting op kibbeling, haring, broodjes haring en drinken', 'Middelbare scholieren vallen buiten deze actie', 'E-maildeals zijn optioneel', 'Maak een account'],
-    en: ['10% off kibbeling, herring, herring sandwiches and drinks', 'Secondary-school pupils are not eligible', 'Email offers are optional', 'Create an account'],
-    de: ['10 % Rabatt auf Kibbeling, Hering, Heringsbrötchen und Getränke', 'Schülerinnen und Schüler der weiterführenden Schule sind ausgeschlossen', 'E-Mail-Angebote sind freiwillig', 'Erstellen Sie ein Konto'],
+    nl: ['10% korting krijgen op kibbeling, haring, broodjes haring en drinken', 'middelbare scholieren vallen buiten de actie', 'aanbiedingen per e-mail zijn vrijwillig', 'maak een account'],
+    en: ['10% off kibbeling, herring, herring sandwiches and drinks', 'secondary-school pupils are not eligible', 'email offers are optional', 'create an account'],
+    de: ['10 % rabatt auf kibbeling, hering, heringsbrötchen und getränke', 'schülerinnen und schüler weiterführender schulen sind ausgeschlossen', 'e-mail-angebote sind freiwillig', 'erstellen sie ein konto'],
   }[locale];
-  for (const rule of studentRules) assert(student.main.includes(rule), `${locale}: student-discount page is translated and states ${rule}`);
+  for (const rule of studentRules) assert(student.main.toLowerCase().includes(rule.toLowerCase()), `${locale}: student-discount page is translated and states ${rule}`);
   assert(student.main.includes(`href="/${locale}/account"`), `${locale}: student-discount page links to account application`);
   const assortment = await page(`/${locale}/assortiment`);
   assert(!assortment.main.includes(`/assortiment/koolvis`), `${locale}: removed koolvis product still listed`);
-  assert(assortment.main.includes('id="barbecue-gourmet"'), `${locale}: BBQ and gourmet catalogue missing`);
+  assert(assortment.main.includes(`href="/${locale}/barbecue-gourmet"`), `${locale}: assortment page must link to the dedicated BBQ and gourmet page`);
+  const barbecue = await page(`/${locale}/barbecue-gourmet`);
+  assert(barbecue.main.includes('id="barbecue-gourmet"'), `${locale}: BBQ and gourmet page should link to its selection section`);
   assert(!assortment.main.includes('www.dirksvishandel.nl'), `${locale}: competitor URL exposed in assortment`);
   const removedProduct = await fetch(`${origin}/${locale}/assortiment/koolvis`, {redirect: 'manual'});
   assert(removedProduct.status === 308 && new URL(removedProduct.headers.get('location'), origin).pathname === `/${locale}/assortiment`, `${locale}: removed koolvis URL should redirect to assortment`);

@@ -31,7 +31,7 @@ export const VOORSCHOTEN_ARTIKELEN: BlogPost[] = [
     vragen: [
       { v: "Waar kan ik vrijdag kibbeling halen in Voorschoten?", a: "Bij Schaap’s Vishandel op de parkeerplaats bij Hoogvliet, vrijdag van 08:00 tot 17:30. Vraag naar de actuele beschikbaarheid." },
       { v: "Welke saus serveren jullie bij kibbeling?", a: "Ravigotesaus. Geef uw voorkeur door aan de kraam; we bespreken graag wat mogelijk is." },
-      { v: "Kan ik losse kibbeling online bestellen?", a: "Nee, alleen visschalen hebben een online bestelroute. Voor kibbeling of andere vis kunt u via WhatsApp vragen naar beschikbaarheid en mogelijkheden." }
+      { v: "Kan ik losse kibbeling online bestellen?", a: "Nee, visschalen vraagt u bij ons aan via WhatsApp. Voor kibbeling of andere vis kunt u via WhatsApp vragen naar beschikbaarheid en mogelijkheden." }
     ],
     gerelateerdeRecepten: ["kibbeling-ravigotesaus-salade", "lekkerbek-koolsalade"],
     gerelateerdeLinks: [
@@ -67,7 +67,7 @@ export const VOORSCHOTEN_ARTIKELEN: BlogPost[] = [
       ] },
       { kop: "Neem verse vis gekoeld mee naar huis", alineas: [
         "Rond uw boodschappen zo af dat verse vis niet lang ongekoeld onderweg is. Het Voedingscentrum adviseert een koeltas voor het vervoer en om de vis thuis snel gekoeld op te bergen. Onverpakte verse vis van de visboer eet u volgens dat advies bij voorkeur op de dag van aankoop; bij verpakte vis volgt u de te-gebruiken-tot-datum.",
-        "Bespreek bij aankoop wanneer u wilt koken en volg de bewaarinformatie bij uw product. Wilt u zeker weten of uw voorkeursvis er vrijdag is? Stuur via WhatsApp welke vis u zoekt, voor hoeveel personen en dat het om Voorschoten gaat. We kijken wat mogelijk is. Alleen visschalen kunt u online samenstellen en bestellen."
+        "Bespreek bij aankoop wanneer u wilt koken en volg de bewaarinformatie bij uw product. Wilt u zeker weten of uw voorkeursvis er vrijdag is? Stuur via WhatsApp welke vis u zoekt, voor hoeveel personen en dat het om Voorschoten gaat. We kijken wat mogelijk is. Visschalen stelt u met ons samen via WhatsApp."
       ] }
     ],
     vragen: [
@@ -106,7 +106,7 @@ export const VOORSCHOTEN_ARTIKELEN: BlogPost[] = [
       ] },
       { kop: "Budget en prijs vooraf afstemmen", alineas: [
         "De basisprijs van een visschaal is € 17,50 per persoon. Extra’s of duurdere vissoorten kunnen de prijs verhogen. Bespreek uw wensen vooraf via WhatsApp; we bevestigen de definitieve prijs voordat we beginnen.",
-        "Heeft u een budget voor de hele borrel? Vertel ons dat bedrag, het aantal gasten en uw favoriete producten. Dat geeft meer houvast dan alleen vragen om een grote schaal. Alleen visschalen kunt u online samenstellen en bestellen. Voor losse vis of andere verzoeken bespreken we de mogelijkheden via WhatsApp."
+        "Heeft u een budget voor de hele borrel? Vertel ons dat bedrag, het aantal gasten en uw favoriete producten. Dat geeft meer houvast dan alleen vragen om een grote schaal. Visschalen stelt u met ons samen via WhatsApp. Voor losse vis of andere verzoeken bespreken we de mogelijkheden via WhatsApp."
       ] },
       { kop: "Ophalen voor uw borrel in Voorschoten", alineas: [
         "Onze viskraam staat vrijdag van 08:00 tot 17:30 op de parkeerplaats bij Hoogvliet in Voorschoten. Wilt u daar een schaal ophalen, spreek dat eerst met ons af. Een online aanvraag betekent niet automatisch dat een schaal op elke locatie of op ieder tijdstip klaarstaat. Datum, ophaallocatie en beschikbaarheid moeten samen worden bevestigd.",
@@ -114,7 +114,7 @@ export const VOORSCHOTEN_ARTIKELEN: BlogPost[] = [
       ] }
     ],
     vragen: [
-      { v: "Kan ik een visschaal voor Voorschoten online kiezen?", a: "Ja, visschalen kunt u online samenstellen. Spreek de datum en ophaallocatie met ons af; beschikbaarheid en de definitieve prijs worden bevestigd." },
+      { v: "Kan ik een visschaal voor Voorschoten online kiezen?", a: "Visschalen stelt u met ons samen via WhatsApp. Gemiddeld rekenen we € 17,50 per persoon; we denken graag mee over uw wensen en gelegenheid." },
       { v: "Is mijn visschaal precies zoals op de foto?", a: "Nee. De foto is een voorbeeld. Grootte en inhoud worden afgestemd op uw gezelschap, budget en wensen; uw schaal kan groter zijn en keuzes kunnen de prijs veranderen." },
       { v: "Kan ik een visschaal vrijdag bij Hoogvliet ophalen?", a: "Vraag dit vooraf aan en laat het door ons bevestigen. Onze kraam staat vrijdag 08:00–17:30 bij Hoogvliet in Voorschoten; ophalen van een specifieke schaal gebeurt op afspraak." }
     ],

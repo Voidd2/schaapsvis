@@ -69,6 +69,7 @@ export default async function VisschalenPage({
       />
 
       <PaginaKop
+        className="platter-page-heading"
         kruimels={[
           { naam: BEDRIJF.naamKort, href: `/${locale}` },
           { naam: nav("visschalen") },
@@ -76,6 +77,10 @@ export default async function VisschalenPage({
         label={t("eyebrow")}
         titel={t("kop")}
         intro={t("inleiding")}
+        knoppen={[
+          { label: t("schaalKop"), href: "#samenstellen" },
+          { label: g("whatsapp"), href: bestelContact(locale, nav("visschalen")).href, extern: true, soort: "lijn" },
+        ]}
         cijfer={{ label: t("gemiddeld"), waarde: euro(VANAF_BEDRAG), onder: t("perSchaal") }}
       />
 

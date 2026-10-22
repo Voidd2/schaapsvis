@@ -27,7 +27,7 @@
     "contactTitle": "Kontakt Schaap's Vis Leiden | +31 71 514 9802",
     "contactDesc": "Kontaktieren Sie Schaap's Vis Leiden. Rufen Sie +31 71 514 9802 an oder senden Sie eine Nachricht. Herenstraat 48, 2313 AL Leiden.",
     "bestellenTitle": "Fischplatte bestellen in Leiden | Schaap's Vishandel",
-    "bestellenDesc": "Nur Fischplatten können Sie online bestellen. Für andere Fischprodukte schreiben Sie uns per WhatsApp. Wir besprechen gerne die Möglichkeiten.",
+    "bestellenDesc": "Fischplatten stimmen Sie mit uns per WhatsApp ab. Für andere Fischprodukte schreiben Sie uns ebenfalls; wir besprechen gerne die Möglichkeiten.",
     "eerlijkeVisTitle": "Bio-Fisch in Leiden: Bio, ASC und MSC | Schaap's Vis",
     "eerlijkeVisDesc": "Bio-Fisch in Leiden? Erfahren Sie den Unterschied zwischen Bio, ASC und MSC. Entdecken Sie VÅRLAKS-Lachs (ASC) und holländische Garnelen (MSC).",
     "receptenTitle": "Fischrezepte von Schaap's Vis Leiden | Kibbeling, Lachs, Hering & mehr",
@@ -188,12 +188,12 @@
     "feitTeKoopWaarde": "Laden, Markt, Voorschoten",
     "bestelKnop": "Varlaks bestellen",
     "slotTitle": "Suchen Sie VÅRLAKS-Lachs?",
-    "slotText": "Fragen Sie nach Verfügbarkeit, Herkunft und Zertifizierung. Nur Fischplatten können online bestellt werden."
+    "slotText": "Fragen Sie nach Verfügbarkeit, Herkunft und Zertifizierung. Fischplatten fragen Sie bitte per WhatsApp bei uns an."
   },
   "assortimentPage": {
     "title": "Unser Sortiment",
     "sub": "Frisch, ehrlich und von höchster Qualität — täglich frisch angeliefert",
-    "note": "Nur Fischplatten können Sie online bestellen. Für andere Fischprodukte schreiben Sie uns per WhatsApp. Wir besprechen gerne die Möglichkeiten."
+    "note": "Fischplatten stimmen Sie mit uns per WhatsApp ab. Für andere Fischprodukte schreiben Sie uns ebenfalls; wir besprechen gerne die Möglichkeiten."
   },
   "bezoekPage": {
     "title": "Wo Sie uns finden",
@@ -246,17 +246,17 @@
     "phone": "+31 71 514 9802",
     "facebook": "Folgen Sie uns auf Facebook",
     "copy": "© 2026 Schaap's Vishandel · Leiden · Gegründet 1938 von Gerrit Schaap",
-    "nieuwsbriefTitel": "Was diese Woche hereinkommt",
-    "nieuwsbriefTekst": "Eine E-Mail pro Woche: welcher Fisch gerade gut ist, was im Angebot steht und wann der erste Matjes da ist. Abmeldung mit einem Klick.",
+    "nieuwsbriefTitel": "Ab und zu etwas Gutes von Schaap’s",
+    "nieuwsbriefTekst": "Erhalten Sie gelegentlich Neuigkeiten und Angebote speziell für Schaap’s-Kunden. Wir schreiben, wenn es etwas Schönes zu teilen gibt; eine Abmeldung ist jederzeit möglich.",
     "kopWinkel": "Das Geschäft",
     "kopTijden": "Öffnungszeiten",
     "kopBezorgen": "Wir liefern nach",
     "kopPaginas": "Auf dieser Seite",
     "winkel": "Fischgeschäft Leiden · Herenstraat 48",
     "winkelTijden": "Dienstag bis Freitag 09:00–18:00, Samstag 09:00–17:00",
-    "markt": "Markt in Leiden",
+    "markt": "Marktstand Leiden",
     "marktTijden": "Mittwoch am Botermarkt bei Dille & Kamille und Samstag am Aalmarkt bei De Waag · 08:30–17:00",
-    "voorschoten": "Fischgeschäft Voorschoten · Hoogvliet",
+    "voorschoten": "Marktstand Voorschoten · Hoogvliet",
     "voorschotenTijden": "Freitag 08:00–17:30 · Veurseweg 18",
     "bezorgenIn": "Fisch liefern nach {plaats}",
     "opgericht": "gegründet {jaar} von {oprichter}",
@@ -348,7 +348,7 @@
     "telefoonLabel": "Telefon",
     "sinds1938": "Seit 1938",
     "slotTitel": "Besuchen Sie uns — oder wählen Sie eine Fischplatte",
-    "slotTekst": "Nur Fischplatten können Sie online bestellen. Für andere Fischprodukte schreiben Sie uns per WhatsApp. Wir besprechen gerne die Möglichkeiten.",
+    "slotTekst": "Fischplatten stimmen Sie mit uns per WhatsApp ab. Für andere Fischprodukte schreiben Sie uns ebenfalls; wir besprechen gerne die Möglichkeiten.",
     "labelGeneraties": "Generationen",
     "labelWinkel": "Laden",
     "labelEigenaar": "Inhaber",
@@ -416,7 +416,7 @@
       },
       {
         "v": "Was liefern Sie und was nicht?",
-        "a": "Fischplatten können Sie online bestellen. Für andere Fischprodukte fragen Sie uns per WhatsApp nach Verfügbarkeit und Möglichkeiten. Gebackener Fisch wird nicht auf unserer Lieferrunde geliefert."
+        "a": "Fischplatten fragen Sie bitte per WhatsApp bei uns an. Für andere Fischprodukte helfen wir Ihnen dort ebenfalls gern weiter. Gebackener Fisch wird nicht auf unserer Lieferrunde geliefert."
       },
       {
         "v": "Wie erfahre ich den Preis, wenn Fisch nach Gewicht verkauft wird?",
@@ -500,8 +500,8 @@
     "stap1": "Schritt 1",
     "stap2": "Schritt 2",
     "schaalKop": "Fischplatten für Ihren Anlass",
-    "schaalUitleg": "Suchen Sie Fischplatten in Leiden für einen Geburtstag, Empfang oder eine Firmenfeier? Die Fotos dienen als Inspiration. Ihre Platte kann anders aussehen und größer sein. Wir besprechen Ihre bevorzugten Fischsorten, die Gästezahl und den Anlass. Im Durchschnitt rechnen wir mit etwa 17,50 € pro Person; besondere Wünsche oder Edelfisch können den Preis beeinflussen. Fragen Sie per WhatsApp an.",
-    "fotoVoorbeeld": "Beispielfoto — Größe und Inhalt richten sich nach Ihren Wünschen und Ihrem Budget.",
+    "schaalUitleg": "Suchen Sie eine Fischplatte in Leiden für einen Geburtstag, Empfang oder eine Firmenfeier? Sehen Sie sich die Fotos an und wählen Sie Ihren Favoriten. Wir beraten Sie zu Fisch, Menge und Anlass. Im Durchschnitt berechnen wir etwa 17,50 € pro Person. Extras oder Edelfisch können den Preis erhöhen; das besprechen wir vorab per WhatsApp.",
+    "fotoVoorbeeld": "Inspiration für Ihre Fischplatte",
     "voorPersonen": "Für {van} bis {tot} Personen",
     "startbedrag": "Durchschnittlicher Richtpreis: etwa {bedrag}",
     "aantalPersonen": "Für wie viele Personen?",

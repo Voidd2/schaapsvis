@@ -35,6 +35,7 @@ export function PaginaKop({
   cijfer,
   zijkant,
   uitgelijnd = "onder",
+  className = "",
 }: {
   kruimels: { naam: string; href?: string }[];
   label?: string;
@@ -47,6 +48,7 @@ export function PaginaKop({
   cijfer?: { label: string; waarde: string; onder?: string };
   /** Iets eigens rechts, zoals de postcodecheck op de bezorgpagina. */
   zijkant?: ReactNode;
+  className?: string;
   /** Een blok dat hoger is dan de tekst lijnt boven uit in plaats van onder. */
   uitgelijnd?: "onder" | "boven";
 }) {
@@ -77,7 +79,7 @@ export function PaginaKop({
   ) : null;
 
   return (
-    <section style={{ backgroundColor: "var(--navy)" }} className="pt-10 pb-14 md:pt-12 md:pb-18">
+    <section style={{ backgroundColor: "var(--navy)" }} className={`pt-10 pb-14 md:pt-12 md:pb-18 ${className}`}>
       <div className="max-w-6xl mx-auto px-4">
         <Kruimels donker items={kruimels} />
 

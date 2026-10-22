@@ -31,12 +31,18 @@ const translations = {
     register: "Account maken",
     name: "Naam",
     email: "E-mailadres",
+    schoolEmail: "E-mailadres van uw onderwijsinstelling",
     password: "Wachtwoord (minimaal 12 tekens)",
+    personalCode: "Code uit uw persoonlijke e-mail",
+    schoolCode: "Code uit uw schoolmail",
+    verifyCodes: "E-mailadressen bevestigen",
+    verificationHelp: "Vul beide codes in. Ze zijn 10 minuten geldig.",
+    invalidCodes: "De codes zijn onjuist of verlopen. Vraag nieuwe codes aan en probeer opnieuw.",
     optionalOffers: "Ja, ik wil vrijwillig e-maildeals ontvangen. Ik bevestig dit per e-mail en kan me altijd afmelden.",
     send: "Verder",
     logout: "Uitloggen",
     reset: "Wachtwoord vergeten? Stuur een resetlink",
-    resend: "Bevestigingsmail opnieuw sturen",
+    resend: "Nieuwe verificatiecodes sturen",
     studentTitle: "Studentenkorting aanvragen",
     studentInfo: "De 10% korting geldt voor Nederlandse en internationale studenten die in Leiden een MBO-, HBO- of WO-opleiding volgen; middelbare school is uitgesloten. Alleen kibbeling, haring, broodjes haring en drinken doen mee. De korting is niet te combineren met nieuwsbriefkortingen of andere acties. De pas is één studiejaar geldig; daarna is nieuw bewijs nodig.",
     institution: "Onderwijsinstelling in Leiden",
@@ -56,7 +62,7 @@ const translations = {
     passCode: "Laat deze code door een medewerker controleren",
     discount: "10% korting op kibbeling, haring, broodjes haring en drinken · niet combineerbaar met andere acties",
     unavailable: "De accountomgeving wordt nog gekoppeld. Probeer het later opnieuw.",
-    accountCreated: "Als dit adres nieuw is, ontvangt u de volgende stap per e-mail.",
+    accountCreated: "Als dit een nieuw account is, sturen we één code naar uw persoonlijke e-mailadres en één naar uw schoolmail.",
     genericError: "Dit lukte niet. Controleer uw gegevens of probeer het later opnieuw.",
     resetSent: "Als er een account bij dit adres hoort, ontvangt u een resetlink.",
     applicationSent: "Uw aanvraag is veilig ontvangen en wacht op beoordeling.",
@@ -72,12 +78,18 @@ const translations = {
     register: "Create account",
     name: "Name",
     email: "Email address",
+    schoolEmail: "Email address from your educational institution",
     password: "Password (at least 12 characters)",
+    personalCode: "Code from your personal email",
+    schoolCode: "Code from your school email",
+    verifyCodes: "Verify both email addresses",
+    verificationHelp: "Enter both codes. They are valid for 10 minutes.",
+    invalidCodes: "The codes are incorrect or expired. Request new codes and try again.",
     optionalOffers: "Yes, I would like to receive email offers. I will confirm by email and can unsubscribe at any time.",
     send: "Continue",
     logout: "Log out",
     reset: "Forgot your password? Send a reset link",
-    resend: "Resend verification email",
+    resend: "Resend verification codes",
     studentTitle: "Apply for the student discount",
     studentInfo: "The 10% discount is for Dutch and international students enrolled in an MBO, HBO or university programme in Leiden; secondary school is not eligible. It applies only to kibbeling, herring, herring sandwiches and drinks, and cannot be combined with newsletter discounts or other offers. The pass is valid for one academic year; new proof is then required.",
     institution: "Educational institution in Leiden",
@@ -97,7 +109,7 @@ const translations = {
     passCode: "Ask a staff member to verify this code",
     discount: "10% off kibbeling, herring, herring sandwiches and drinks · cannot be combined with other offers",
     unavailable: "The account area is still being connected. Please try again later.",
-    accountCreated: "If this is a new address, we will email you the next step.",
+    accountCreated: "If this is a new account, we will send one code to your personal email and one to your school email.",
     genericError: "That did not work. Check your details or try again later.",
     resetSent: "If an account exists for this address, you will receive a reset link.",
     applicationSent: "Your application was received securely and is awaiting review.",
@@ -113,12 +125,18 @@ const translations = {
     register: "Konto erstellen",
     name: "Name",
     email: "E-Mail-Adresse",
+    schoolEmail: "E-Mail-Adresse Ihrer Bildungseinrichtung",
     password: "Passwort (mindestens 12 Zeichen)",
+    personalCode: "Code aus Ihrer privaten E-Mail",
+    schoolCode: "Code aus Ihrer Schul-E-Mail",
+    verifyCodes: "Beide E-Mail-Adressen bestätigen",
+    verificationHelp: "Geben Sie beide Codes ein. Sie sind 10 Minuten gültig.",
+    invalidCodes: "Die Codes sind falsch oder abgelaufen. Fordern Sie neue Codes an und versuchen Sie es erneut.",
     optionalOffers: "Ja, ich möchte freiwillig E-Mail-Angebote erhalten. Ich bestätige dies per E-Mail und kann mich jederzeit abmelden.",
     send: "Weiter",
     logout: "Abmelden",
     reset: "Passwort vergessen? Link zum Zurücksetzen senden",
-    resend: "Bestätigungs-E-Mail erneut senden",
+    resend: "Neue Bestätigungscodes senden",
     studentTitle: "Studentenrabatt beantragen",
     studentInfo: "Der Rabatt von 10 % gilt für niederländische und internationale Studierende einer MBO-, HBO- oder Hochschulausbildung in Leiden; weiterführende Schulen sind ausgeschlossen. Er gilt nur für Kibbeling, Hering, Heringsbrötchen und Getränke und ist nicht mit Newsletter-Rabatten oder anderen Aktionen kombinierbar. Der Pass ist ein Studienjahr gültig; danach ist ein neuer Nachweis erforderlich.",
     institution: "Bildungseinrichtung in Leiden",
@@ -138,7 +156,7 @@ const translations = {
     passCode: "Lassen Sie diesen Code vom Personal prüfen",
     discount: "10 % Rabatt auf Kibbeling, Hering, Heringsbrötchen und Getränke · nicht mit anderen Aktionen kombinierbar",
     unavailable: "Der Kontobereich wird noch angebunden. Bitte versuchen Sie es später erneut.",
-    accountCreated: "Wenn dies eine neue Adresse ist, senden wir Ihnen den nächsten Schritt per E-Mail.",
+    accountCreated: "Wenn dies ein neues Konto ist, senden wir einen Code an Ihre private E-Mail und einen an Ihre Schul-E-Mail.",
     genericError: "Das hat nicht funktioniert. Prüfen Sie Ihre Angaben oder versuchen Sie es später erneut.",
     resetSent: "Wenn es ein Konto zu dieser Adresse gibt, erhalten Sie einen Link zum Zurücksetzen.",
     applicationSent: "Ihr Antrag wurde sicher empfangen und wird geprüft.",
@@ -158,6 +176,8 @@ export function AccountPortal({ locale }: { locale: string }) {
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
+  const [verificationPending, setVerificationPending] = useState(false);
+  const [verificationEmail, setVerificationEmail] = useState("");
 
   const refresh = useCallback(async () => {
     try {
@@ -201,6 +221,7 @@ export function AccountPortal({ locale }: { locale: string }) {
       const body: Record<string, unknown> = { email: fields.get("email"), password: fields.get("password"), locale: language };
       if (mode === "register") {
         body.name = fields.get("name");
+        body.schoolEmail = fields.get("schoolEmail");
         body.marketingConsent = fields.get("marketingConsent") === "on";
       }
       const response = await fetch(`/api/members/${mode}`, {
@@ -217,6 +238,8 @@ export function AccountPortal({ locale }: { locale: string }) {
       if (mode === "register") {
         setSuccess(true);
         setMessage(t.accountCreated);
+        setVerificationEmail(String(fields.get("email") || "").trim().toLowerCase());
+        setVerificationPending(true);
         setMode("login");
       } else {
         await refresh();
@@ -228,6 +251,26 @@ export function AccountPortal({ locale }: { locale: string }) {
     } finally {
       setBusy(false);
     }
+  }
+
+  async function verifyBothAddresses(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const fields = new FormData(event.currentTarget);
+    setBusy(true);
+    setMessage("");
+    try {
+      const response = await fetch("/api/members/verify-codes", {
+        method: "POST", headers: { "Content-Type": "application/json" }, credentials: "same-origin",
+        body: JSON.stringify({ email: verificationEmail, personalCode: fields.get("personalCode"), schoolCode: fields.get("schoolCode") }),
+      });
+      if (!response.ok) throw new Error("verification-failed");
+      setVerificationPending(false);
+      setSuccess(true);
+      setMessage(language === "nl" ? "Beide e-mailadressen zijn bevestigd. U kunt nu inloggen." : language === "de" ? "Beide E-Mail-Adressen wurden bestätigt. Sie können sich jetzt anmelden." : "Both email addresses are verified. You can now log in.");
+    } catch {
+      setSuccess(false);
+      setMessage(t.invalidCodes);
+    } finally { setBusy(false); }
   }
 
   async function requestPasswordReset(event: FormEvent<HTMLFormElement>) {
@@ -342,7 +385,20 @@ export function AccountPortal({ locale }: { locale: string }) {
             )}
           </section>
         ) : (
-          <section className="mt-10 grid gap-8 md:grid-cols-2">
+          verificationPending ? <section className="mt-10 max-w-xl rounded-2xl border border-sky-200 bg-white p-6 shadow-sm sm:p-8">
+            <h2 className="font-display text-2xl font-bold text-slate-900">{t.verifyCodes}</h2>
+            <p className="mt-3 text-sm leading-relaxed text-slate-700">{t.verificationHelp}<br /><span className="font-semibold">{verificationEmail}</span></p>
+            <form onSubmit={verifyBothAddresses} className="mt-6 space-y-4">
+              <label className="block text-sm font-medium">{t.personalCode}<input name="personalCode" type="text" inputMode="numeric" pattern="[0-9]{6}" autoComplete="one-time-code" required maxLength={6} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5 tracking-[.3em]" /></label>
+              <label className="block text-sm font-medium">{t.schoolCode}<input name="schoolCode" type="text" inputMode="numeric" pattern="[0-9]{6}" autoComplete="one-time-code" required maxLength={6} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5 tracking-[.3em]" /></label>
+              <button type="submit" disabled={busy} className="knop knop-navy w-full disabled:opacity-60">{busy ? "…" : t.verifyCodes}</button>
+            </form>
+            <form onSubmit={resendVerification} className="mt-4">
+              <input type="hidden" name="email" value={verificationEmail} />
+              <button type="submit" disabled={busy} className="text-sm font-semibold text-sky-800 underline underline-offset-4">{t.resend}</button>
+            </form>
+            {message && <p role="status" aria-live="polite" className={`mt-4 text-sm ${success ? "text-emerald-800" : "text-red-800"}`}>{message}</p>}
+          </section> : <section className="mt-10 grid gap-8 md:grid-cols-2">
             <div className="rounded-2xl border border-sky-200 bg-white p-6 shadow-sm sm:p-8">
               <div className="mb-6 flex gap-2" role="tablist" aria-label={t.title}>
                 <button type="button" role="tab" aria-selected={mode === "login"} onClick={() => { setMode("login"); setMessage(""); }} className={`rounded-full px-4 py-2 text-sm font-semibold ${mode === "login" ? "bg-sky-800 text-white" : "bg-sky-50 text-sky-900"}`}>{t.login}</button>
@@ -351,6 +407,7 @@ export function AccountPortal({ locale }: { locale: string }) {
               <form onSubmit={submitAuth} className="space-y-4">
                 {mode === "register" && <label className="block text-sm font-medium">{t.name}<input name="name" required minLength={2} maxLength={120} autoComplete="name" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>}
                 <label className="block text-sm font-medium">{t.email}<input name="email" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>
+                {mode === "register" && <label className="block text-sm font-medium">{t.schoolEmail}<input name="schoolEmail" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>}
                 <label className="block text-sm font-medium">{t.password}<input name="password" type="password" required minLength={12} maxLength={128} autoComplete={mode === "register" ? "new-password" : "current-password"} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>
                 {mode === "register" && <label className="flex items-start gap-2 text-sm leading-relaxed"><input type="checkbox" name="marketingConsent" className="mt-1 size-4 shrink-0 accent-sky-700" /><span>{t.optionalOffers}</span></label>}
                 <button type="submit" disabled={busy} className="knop knop-navy w-full disabled:opacity-60">{busy ? "…" : mode === "login" ? t.login : t.register}</button>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { paginaMetadata } from "@/lib/seo";
@@ -19,10 +20,10 @@ const copy = {
     card: "Je digitale studentenpas",
     cardExample: "Voorbeeld · na beoordeling beschikbaar in je account",
     steps: "Zo werkt aanmelden",
-    step1: "Maak een account met je e-mailadres en bevestig dat adres.",
-    step2: "Voor de aanvraag willen we je inschrijving via je schoolmail controleren. Je persoonlijke e-mailadres blijft gekoppeld aan je account voor accountberichten.",
+    step1: "Maak een account met je persoonlijke e-mailadres, je schoolmail en een sterk wachtwoord.",
+    step2: "Vul de twee aparte verificatiecodes in die we naar beide adressen sturen. Pas daarna kun je je inschrijvingsbewijs veilig indienen.",
     step3: "We beoordelen je aanvraag handmatig. Na goedkeuring verschijnt je digitale kortingspas in je account.",
-    privacy: "De aanvraag voor studentenkorting is nog niet geopend. Je persoonlijke e-mailadres is nodig voor je account; schoolmailcontrole is een geplande verificatiestap. Nieuwsbrief en reclame zijn vrijwillig, staan los van de korting en kun je altijd afmelden.",
+    privacy: "De registratie is technisch voorbereid, maar nog niet live. Voor studentverificatie controleren we beide adressen met een aparte code. Aanbiedingen per e-mail zijn vrijwillig, staan los van de korting en kun je altijd afmelden.",
     weekly: "Regelmatig iets nieuws proeven",
     weeklyText:
       "Meld je apart en vrijwillig aan voor nieuws en aanbiedingen speciaal voor Schaap’s-klanten. We sturen een bericht wanneer er iets leuks te delen is. Deze aanbiedingen zijn niet te combineren met de studentenkorting of andere acties.",
@@ -48,11 +49,11 @@ const copy = {
     card: "Your digital student pass",
     cardExample: "Preview · available in your account after approval",
     steps: "How to apply",
-    step1: "Create an account with your email address and verify it.",
-    step2: "We plan to verify enrolment through your institutional email address. Your personal email address remains linked to your account for account messages.",
+    step1: "Create an account with your personal email, school email and a strong password.",
+    step2: "Enter the two separate verification codes sent to both addresses. You can then securely submit proof of enrolment.",
     step3: "We review each application manually. Once approved, your digital discount pass appears in your account.",
     privacy:
-      "Student applications are not open yet. Your personal email is needed for your account; institutional-email verification is a planned step. Marketing emails are optional, separate from the discount, and can be cancelled at any time.",
+      "Registration is prepared in the codebase but is not live yet. Student verification checks both addresses with a separate code. Email offers are optional, separate from the discount, and can be cancelled at any time.",
     weekly: "Discover something new from time to time",
     weeklyText:
       "Sign up separately and voluntarily for news and offers especially for Schaap’s customers. We will email when there is something worth sharing. These offers cannot be combined with the student discount or other promotions.",
@@ -78,11 +79,11 @@ const copy = {
     card: "Ihr digitaler Studentenausweis",
     cardExample: "Vorschau · nach der Prüfung in Ihrem Konto verfügbar",
     steps: "So funktioniert die Anmeldung",
-    step1: "Erstellen Sie ein Konto mit Ihrer E-Mail-Adresse und bestätigen Sie diese.",
-    step2: "Wir planen, die Immatrikulation über Ihre Hochschul-E-Mail-Adresse zu prüfen. Ihre private E-Mail-Adresse bleibt für Kontonachrichten mit dem Konto verknüpft.",
+    step1: "Erstellen Sie ein Konto mit Ihrer privaten E-Mail-Adresse, Schul-E-Mail und einem sicheren Passwort.",
+    step2: "Geben Sie die zwei separaten Bestätigungscodes ein, die wir an beide Adressen senden. Danach können Sie den Studiennachweis sicher einreichen.",
     step3: "Wir prüfen jeden Antrag manuell. Nach der Freigabe erscheint Ihr digitaler Rabattpass im Konto.",
     privacy:
-      "Studentenanträge sind noch nicht geöffnet. Ihre private E-Mail-Adresse wird für das Konto benötigt; die Prüfung über die Hochschul-E-Mail ist geplant. Werbung per E-Mail ist freiwillig, unabhängig vom Rabatt und jederzeit abbestellbar.",
+      "Die Registrierung ist im Code vorbereitet, aber noch nicht live. Für die Studentenprüfung bestätigen wir beide Adressen mit separaten Codes. E-Mail-Angebote sind freiwillig, vom Rabatt getrennt und jederzeit abbestellbar.",
     weekly: "Ab und zu etwas Neues entdecken",
     weeklyText:
       "Melden Sie sich separat und freiwillig für Neuigkeiten und Angebote speziell für Schaap’s-Kunden an. Wir schreiben, wenn es etwas Schönes zu teilen gibt. Diese Angebote sind nicht mit dem Studentenrabatt oder anderen Aktionen kombinierbar.",
@@ -118,6 +119,7 @@ export default async function StudentenkortingPage({ params }: { params: Promise
             <div className="flex flex-wrap gap-3 mt-7" aria-label={locale === "nl" ? "Producten met korting" : locale === "de" ? "Produkte mit Rabatt" : "Discounted categories"}>
               {c.categories.map((category) => <span key={category} className="rounded-full border border-white/30 px-4 py-2 text-sm font-semibold">10% · {category}</span>)}
             </div>
+            <Link href={`/${locale}/account`} className="knop knop-rood mt-7 inline-flex">{c.account} →</Link>
           </div>
           <figure className="relative overflow-hidden rounded-2xl min-h-[280px]">
             <Image src="/images/editorial/kibbeling-schaapstray.png" alt={c.alt} fill sizes="(max-width: 800px) 100vw, 50vw" className="object-cover" priority />

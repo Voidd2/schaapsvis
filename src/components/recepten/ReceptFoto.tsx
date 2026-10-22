@@ -11,11 +11,13 @@ export function ReceptFoto({
   beeld,
   titel,
   klein = false,
+  priority = false,
 }: {
   beeld: ReceptBeeld;
   titel: string;
   /** In een lijst iets kleinere letters in het naamvlak. */
   klein?: boolean;
+  priority?: boolean;
 }) {
   return (
     <div
@@ -31,7 +33,8 @@ export function ReceptFoto({
           src={beeld.src}
           alt={beeld.alt}
           className={beeld.bijschrift ? "w-full h-full object-contain p-5" : "w-full h-full object-cover"}
-          loading="lazy"
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
           width={1400}
           height={1050}
         />

@@ -7,9 +7,18 @@ De website van **Schaap's Vishandel**, een viswinkel aan de Herenstraat 48 in
 Leiden. Opgericht in 1938 door Gerrit Schaap, nu de vierde generatie. Eigenaar:
 Aldert Haasnoot, in de buurt gewoon "Schaap" genoemd. Telefoon/WhatsApp +31 6 2481 1678.
 
-De site heeft drie taken: gevonden worden in Leiden en omgeving (in het
-Nederlands, Engels én Duits), bestellingen aannemen, en e-mailadressen
-verzamelen.
+De site moet eerst compleet, betrouwbaar en onderscheidend worden. Daarna is
+het groeipad: lokaal en organisch gevonden worden, Meta/Facebook-advertenties
+inzetten, met duidelijke toestemming e-mailinschrijvingen verzamelen en via
+Klaviyo regelmatig relevante aanbiedingen versturen. Op langere termijn moeten
+klanten die e-mailrelatie kunnen koppelen aan een veilig klantaccount voor
+bezorging, punten sparen en voordelen zoals studentenkorting. Zie
+`docs/bedrijfsdoel-en-platformstrategie.md` voor de volledige richting.
+
+De `.nl`-domeinregistratie blijft bij Knoth. De beoogde websitehosting is
+Cloudflare Workers; Vercel is hoogstens tijdelijk tijdens de migratie en is
+niet de eindbestemming. Houd de Cloudflare-accounts voor Schaap’s Vishandel en
+Citywalk Stories gescheiden.
 
 **Lees `OVERDRACHT.md` voordat je aan bedragen, bezorging of betalen werkt.**
 Daar staat wat er nog voorlopig is en wat de eigenaar zelf invult.

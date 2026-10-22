@@ -64,6 +64,7 @@ export default async function BarbecueGourmetPage({
       />
 
       <PaginaKop
+        className="barbecue-page-heading"
         kruimels={[
           { naam: BEDRIJF.naamKort, href: `/${locale}` },
           { naam: nav("assortiment"), href: `/${locale}/assortiment` },
@@ -78,7 +79,7 @@ export default async function BarbecueGourmetPage({
         ]}
       />
 
-      <Sectie grond="papier" id="selectie">
+      <Sectie grond="papier" id="barbecue-gourmet">
         <SelectieAanvraag
           locale={locale}
           showSpecial={false}

@@ -27,7 +27,7 @@
     "contactTitle": "Contact Schaap's Vis Leiden | +31 6 2481 1678 | Viswinkel Herenstraat",
     "contactDesc": "Neem contact op met Schaap's Vis Leiden. Bel of app +31 6 2481 1678. Herenstraat 48, 2313 AL Leiden.",
     "bestellenTitle": "Visschaal bestellen in Leiden | Schaap's Vishandel",
-    "bestellenDesc": "Alleen visschalen bestelt u online. Zoekt u andere vis? Stuur ons een WhatsApp-bericht; we kijken graag wat mogelijk is.",
+    "bestellenDesc": "Visschalen vraagt u bij ons aan via WhatsApp. Zoekt u andere vis? Stuur ons een WhatsApp-bericht; we kijken graag wat mogelijk is.",
     "eerlijkeVisTitle": "Biologische vis in Leiden: BIO, ASC en MSC | Schaap's Vis",
     "eerlijkeVisDesc": "Biologische vis in Leiden? Lees het verschil tussen BIO, ASC en MSC. Bekijk VÅRLAKS-zalm (ASC) en Hollandse garnalen (MSC); vraag naar het actuele aanbod.",
     "receptenTitle": "Visrecepten van Schaap's Vis Leiden | Kibbeling, Zalm, Haring & meer",
@@ -188,12 +188,12 @@
     "feitTeKoopWaarde": "Winkel, markt, Voorschoten",
     "bestelKnop": "Varlaks bestellen",
     "slotTitle": "Op zoek naar VÅRLAKS-zalm?",
-    "slotText": "Vraag ons naar actuele beschikbaarheid, herkomst en certificering. Alleen visschalen kunt u online bestellen."
+    "slotText": "Vraag ons naar actuele beschikbaarheid, herkomst en certificering. Visschalen vraagt u bij ons aan via WhatsApp."
   },
   "assortimentPage": {
     "title": "Ons Assortiment",
     "sub": "Vers, eerlijk en van topkwaliteit — dagelijks vers aangeleverd",
-    "note": "Alleen visschalen bestelt u online. Zoekt u andere vis? Stuur ons een WhatsApp-bericht; we kijken graag wat mogelijk is."
+    "note": "Visschalen vraagt u bij ons aan via WhatsApp. Zoekt u andere vis? Stuur ons een WhatsApp-bericht; we kijken graag wat mogelijk is."
   },
   "bezoekPage": {
     "title": "Waar u ons vindt",
@@ -246,17 +246,17 @@
     "phone": "+31 6 2481 1678",
     "facebook": "Volg ons op Facebook",
     "copy": "© 2026 Schaap's Vishandel · Leiden · Opgericht 1938 door Gerrit Schaap",
-    "nieuwsbriefTitel": "Wat er deze week binnenkomt",
-    "nieuwsbriefTekst": "Eén mail per week: welke vis er goed is, wat er in de aanbieding staat en wanneer de Hollandse Nieuwe er is. Uitschrijven kan met één klik.",
+    "nieuwsbriefTitel": "Af en toe iets lekkers van Schaap’s",
+    "nieuwsbriefTekst": "Ontvang af en toe nieuws en aanbiedingen speciaal voor Schaap’s-klanten. We mailen wanneer er iets moois te delen is; uitschrijven kan altijd.",
     "kopWinkel": "De winkel",
     "kopTijden": "Openingstijden",
     "kopBezorgen": "Wij bezorgen in",
     "kopPaginas": "Op deze site",
     "winkel": "Viswinkel Leiden · Herenstraat 48",
     "winkelTijden": "Dinsdag t/m vrijdag 09:00–18:00, zaterdag 09:00–17:00",
-    "markt": "Markt Leiden",
+    "markt": "Marktkraam Leiden",
     "marktTijden": "Woensdag Botermarkt bij Dille & Kamille en zaterdag Aalmarkt bij De Waag · 08:30–17:00",
-    "voorschoten": "Visboer Voorschoten · Hoogvliet",
+    "voorschoten": "Marktkraam Voorschoten · Hoogvliet",
     "voorschotenTijden": "Vrijdag 08:00–17:30 · Veurseweg 18",
     "bezorgenIn": "Vis bezorgen in {plaats}",
     "opgericht": "opgericht in {jaar} door {oprichter}",
@@ -348,7 +348,7 @@
     "telefoonLabel": "Telefoon",
     "sinds1938": "Sinds 1938",
     "slotTitel": "Kom langs — of stel uw visschaal samen",
-    "slotTekst": "Alleen visschalen bestelt u online. Zoekt u andere vis? Stuur ons een WhatsApp-bericht; we kijken graag wat mogelijk is.",
+    "slotTekst": "Visschalen vraagt u bij ons aan via WhatsApp. Zoekt u andere vis? Stuur ons een WhatsApp-bericht; we kijken graag wat mogelijk is.",
     "labelGeneraties": "Generaties",
     "labelWinkel": "Winkel",
     "labelEigenaar": "Eigenaar",
@@ -416,7 +416,7 @@
       },
       {
         "v": "Wat bezorgen jullie wel en niet?",
-        "a": "Visschalen kunt u online bestellen. Vraag ons via WhatsApp naar beschikbaarheid en mogelijkheden voor andere visproducten. Gebakken vis nemen we niet mee op onze bezorgronde."
+        "a": "Visschalen vraagt u bij ons aan via WhatsApp. Vraag ons via WhatsApp naar beschikbaarheid en mogelijkheden voor andere visproducten. Gebakken vis nemen we niet mee op onze bezorgronde."
       },
       {
         "v": "Hoe weet ik wat het kost als vis op gewicht gaat?",
@@ -500,8 +500,8 @@
     "stap1": "Stap 1",
     "stap2": "Stap 2",
     "schaalKop": "Kies uw schaal of borrelbox",
-    "schaalUitleg": "Op zoek naar een visschaal in Leiden voor een verjaardag, borrel, receptie of bedrijfsfeest? Bekijk de foto’s ter inspiratie. De schaal op de foto kan afwijken en in werkelijkheid groter zijn. We bespreken graag uw favoriete vis, het aantal gasten en de gelegenheid. Gemiddeld rekenen we op circa € 17,50 per persoon; bijzondere wensen of duurdere vis kunnen de prijs beïnvloeden. Vraag uw visschaal aan via WhatsApp.",
-    "fotoVoorbeeld": "Voorbeeldfoto — grootte en inhoud worden afgestemd op uw wensen en budget.",
+    "schaalUitleg": "Op zoek naar een visschaal in Leiden voor een verjaardag, borrel, receptie of bedrijfsfeest? Bekijk de foto’s en kies wat u aanspreekt. We denken met u mee over uw favoriete vis, het aantal gasten en de gelegenheid. Gemiddeld rekenen we circa € 17,50 per persoon. Extra’s of duurdere vissoorten kunnen de prijs verhogen; we bespreken dat vooraf via WhatsApp.",
+    "fotoVoorbeeld": "Inspiratie voor uw visschaal",
     "voorPersonen": "Voor {van} tot {tot} personen",
     "startbedrag": "Gemiddelde richtprijs: circa {bedrag}",
     "aantalPersonen": "Voor hoeveel personen?",

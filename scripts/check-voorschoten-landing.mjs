@@ -40,7 +40,7 @@ const sitemap = await (await fetch(origin + '/sitemap.xml')).text();
 const entry = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(m => m[1]).find(v => v.includes(`<loc>${canonical}</loc>`));
 check(entry?.includes('2026-09-29'), 'Accurate local page lastmod');
 const home = await (await fetch(origin + '/nl')).text();
-check(home.includes('Visboer Voorschoten: vrijdag bij Hoogvliet'), 'Descriptive homepage internal link');
+check(/<a\b[^>]*href="\/nl\/viswinkel-voorschoten"[^>]*>Visboer Voorschoten: vrijdag bij Hoogvliet/.test(home), 'Descriptive homepage internal link');
 const paths = [...new Set([...main.matchAll(/href="(\/nl[^"?#]*)/g)].map(m => m[1]))];
 await Promise.all(paths.map(async p => {
   const target = await fetch(origin + p, {redirect: 'manual'});

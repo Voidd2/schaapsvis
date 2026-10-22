@@ -27,7 +27,7 @@
     "contactTitle": "Contact Schaap's Vis Leiden | +31 71 514 9802 | Fish Shop Herenstraat",
     "contactDesc": "Contact Schaap's Vis Leiden. Call +31 71 514 9802 or send a message. Herenstraat 48, 2313 AL Leiden.",
     "bestellenTitle": "Order a seafood platter in Leiden | Schaap's Vishandel",
-    "bestellenDesc": "Only seafood platters can be ordered online. Looking for other fish? Send us a WhatsApp message to discuss the options.",
+    "bestellenDesc": "Please arrange seafood platters with us via WhatsApp. Looking for other fish? Send us a WhatsApp message to discuss the options.",
     "eerlijkeVisTitle": "Organic fish in Leiden: BIO, ASC and MSC | Schaap's Vis",
     "eerlijkeVisDesc": "Looking for organic fish in Leiden? Learn how BIO, ASC and MSC differ. See VÅRLAKS salmon (ASC) and Dutch shrimp (MSC); ask about current stock.",
     "receptenTitle": "Fish Recipes from Schaap's Vis Leiden | Kibbeling, Salmon, Herring & more",
@@ -188,12 +188,12 @@
     "feitTeKoopWaarde": "Shop, market, Voorschoten",
     "bestelKnop": "Order Varlaks",
     "slotTitle": "Looking for VÅRLAKS salmon?",
-    "slotText": "Ask about availability, origin and product certification. Only seafood platters can be ordered online."
+    "slotText": "Ask about availability, origin and product certification. Please arrange seafood platters with us via WhatsApp."
   },
   "assortimentPage": {
     "title": "Our Products",
     "sub": "Fresh, honest and top quality — delivered fresh daily",
-    "note": "Only seafood platters can be ordered online. Looking for other fish? Send us a WhatsApp message to discuss the options."
+    "note": "Please arrange seafood platters with us via WhatsApp. Looking for other fish? Send us a WhatsApp message to discuss the options."
   },
   "bezoekPage": {
     "title": "Where to find us",
@@ -246,17 +246,17 @@
     "phone": "+31 71 514 9802",
     "facebook": "Follow us on Facebook",
     "copy": "© 2026 Schaap's Vishandel · Leiden · Est. 1938 by Gerrit Schaap",
-    "nieuwsbriefTitel": "What is coming in this week",
-    "nieuwsbriefTekst": "One email a week: which fish is good right now, what is on offer and when the first Dutch herring arrives. One click to unsubscribe.",
+    "nieuwsbriefTitel": "Something good from Schaap’s, now and then",
+    "nieuwsbriefTekst": "Get occasional news and offers especially for Schaap’s customers. We’ll email when there’s something worth sharing; you can unsubscribe at any time.",
     "kopWinkel": "The shop",
     "kopTijden": "Opening hours",
     "kopBezorgen": "We deliver to",
     "kopPaginas": "On this site",
     "winkel": "Fish shop Leiden · Herenstraat 48",
     "winkelTijden": "Tuesday to Friday 09:00–18:00, Saturday 09:00–17:00",
-    "markt": "Leiden market",
+    "markt": "Market stall Leiden",
     "marktTijden": "Wednesday at Botermarkt by Dille & Kamille and Saturday at Aalmarkt by De Waag · 08:30–17:00",
-    "voorschoten": "Fishmonger Voorschoten · Hoogvliet",
+    "voorschoten": "Market stall Voorschoten · Hoogvliet",
     "voorschotenTijden": "Friday 08:00–17:30 · Veurseweg 18",
     "bezorgenIn": "Fish delivery in {plaats}",
     "opgericht": "founded in {jaar} by {oprichter}",
@@ -348,7 +348,7 @@
     "telefoonLabel": "Phone",
     "sinds1938": "Since 1938",
     "slotTitel": "Visit us — or create a seafood platter",
-    "slotTekst": "Only seafood platters can be ordered online. Looking for other fish? Send us a WhatsApp message to discuss the options.",
+    "slotTekst": "Please arrange seafood platters with us via WhatsApp. Looking for other fish? Send us a WhatsApp message to discuss the options.",
     "labelGeneraties": "Generations",
     "labelWinkel": "Shop",
     "labelEigenaar": "Owner",
@@ -416,7 +416,7 @@
       },
       {
         "v": "What do you deliver, and what not?",
-        "a": "Seafood platters can be ordered online. Ask us on WhatsApp about availability and options for other fish products. Fried fish is not delivered on our delivery round."
+        "a": "Please arrange seafood platters with us via WhatsApp. Ask us on WhatsApp about availability and options for other fish products. Fried fish is not delivered on our delivery round."
       },
       {
         "v": "How do I know the price if fish is sold by weight?",
@@ -500,8 +500,8 @@
     "stap1": "Step 1",
     "stap2": "Step 2",
     "schaalKop": "Seafood platters for your occasion",
-    "schaalUitleg": "Looking for seafood platters in Leiden for a birthday, drinks, reception or company event? Browse the photos for inspiration. The actual platter may differ and can be larger. We will discuss your preferred fish, guest numbers and occasion. The average is around €17.50 per person; special requests or premium fish may affect the price. Enquire on WhatsApp.",
-    "fotoVoorbeeld": "Example photo — size and contents are tailored to your preferences and budget.",
+    "schaalUitleg": "Looking for a seafood platter in Leiden for a birthday, drinks, reception or company event? Browse the photos and choose what appeals to you. We’ll help you choose the fish, portions and selection for your occasion. We charge an average of around €17.50 per person. Extras or premium fish may increase the price; we’ll agree that with you in advance on WhatsApp.",
+    "fotoVoorbeeld": "Ideas for your seafood platter",
     "voorPersonen": "For {van} to {tot} people",
     "startbedrag": "Average guide price: around {bedrag}",
     "aantalPersonen": "How many people?",

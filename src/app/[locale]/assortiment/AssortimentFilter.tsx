@@ -13,21 +13,21 @@ import { productAvailability } from "@/lib/product-availability";
 
 const copy = {
   nl: {
-    all: "Alles", search: "Welke vis zoekt u?", popular: "Favorieten eerst", az: "Naam A–Z",
+    all: "Alles", search: "Welke vis zoekt u?", popular: "Favorieten eerst", az: "Naam A–Z", more: "Toon meer producten",
     detail: "Productinformatie", count: "producten", empty: "Niets gevonden? Vraag het ons gerust via WhatsApp.",
     favorites: "Begin met onze favorieten", favoritesSub: "Een paar vertrouwde keuzes uit onze toonbank.",
     browse: "Het hele assortiment", browseSub: "Kijk rustig rond. Voor beschikbaarheid en uw wensen helpen we u graag via WhatsApp.", photoNote: "Lees bij ieder product meer over de vissoort, herkomst en beschikbaarheid.",
     categories: ["Verse vis", "Gerookte vis", "Schaal- & schelpdieren", "Vissalades", "Bereid & snacks", "Zeegroenten"],
   },
   en: {
-    all: "All", search: "Which fish are you looking for?", popular: "Favourites first", az: "Name A–Z",
+    all: "All", search: "Which fish are you looking for?", popular: "Favourites first", az: "Name A–Z", more: "Show more products",
     detail: "Product information", count: "products", empty: "Can't find it? Ask us on WhatsApp.",
     favorites: "Start with our favourites", favoritesSub: "A few familiar favourites from our fish counter.",
     browse: "Explore our full range", browseSub: "Take a look around. Ask us on WhatsApp about availability and your wishes.", photoNote: "Find out more about each fish species, origin and availability on its product page.",
     categories: ["Fresh fish", "Smoked fish", "Shellfish", "Fish salads", "Prepared & snacks", "Sea vegetables"],
   },
   de: {
-    all: "Alle", search: "Welchen Fisch suchen Sie?", popular: "Favoriten zuerst", az: "Name A–Z",
+    all: "Alle", search: "Welchen Fisch suchen Sie?", popular: "Favoriten zuerst", az: "Name A–Z", more: "Weitere Produkte anzeigen",
     detail: "Produktinformationen", count: "Produkte", empty: "Nicht gefunden? Fragen Sie uns per WhatsApp.",
     favorites: "Unsere Favoriten entdecken", favoritesSub: "Einige bewährte Favoriten aus unserer Fischtheke.",
     browse: "Das gesamte Sortiment", browseSub: "Schauen Sie sich in Ruhe um. Fragen zu Verfügbarkeit und Wünschen beantworten wir gerne per WhatsApp.", photoNote: "Auf der Produktseite erfahren Sie mehr über Fischart, Herkunft und Verfügbarkeit.",
@@ -36,7 +36,11 @@ const copy = {
 };
 
 const categories: Categorie[] = ["verse-vis", "gerookte-vis", "schaal-schelp", "vissalades", "bereid", "zeegroenten"];
-const featuredSlugs = ["varlaks-zalm", "kibbeling", "haring"];
+// The salmon is already the hero image at the top of this page. Keep the
+// selection focused on other everyday counter favourites instead of showing
+// salmon twice in the first viewport.
+const featuredSlugs = ["kibbeling", "kabeljauwfilet", "zeebaarsfilet", "creuse-oesters"];
+const stapleSlugs = new Set(["varlaks-zalm", "kibbeling", "lekkerbek", "haring", "broodje-haring", "kabeljauwfilet", "zeebaarsfilet"]);
 
 export function AssortimentFilter({ localized }: { localized: Product[] }) {
   const locale = useLocale();
@@ -44,14 +48,28 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
   const [category, setCategory] = useState("all");
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState("popular");
+  const [visibleCount, setVisibleCount] = useState(14);
   const found = localized.filter(p =>
     (category === "all" || p.categorie === category) && (!query || matchesQuery(p, query)));
   if (sort === "az") found.sort((a, b) => a.naam.localeCompare(b.naam, locale));
   const showFeatured = category === "all" && !query.trim() && sort === "popular";
   const featured = featuredSlugs.map(slug => localized.find(p => p.slug === slug)!);
   const rows = showFeatured ? found.filter(p => !featuredSlugs.includes(p.slug)) : found;
+  const visibleRows = rows.slice(0, visibleCount);
 
   return <div className="collection section-wrap">
+    <section className="collection-browse" aria-labelledby="browse-title">
+      <div className="collection-section-heading"><div><p className="kapitaal">{c.count}</p><h2 id="browse-title">{c.browse}</h2></div><p>{c.browseSub}</p></div>
+      <div className="collection-tools">
+        <label className="collection-search"><Search size={20} aria-hidden="true" /><span className="sr-only">{c.search}</span><input type="search" placeholder={c.search} value={query} onChange={e => { setQuery(e.target.value); setVisibleCount(14); }} /></label>
+        <label className="collection-sort"><SlidersHorizontal size={17} aria-hidden="true" /><span className="sr-only">{c.popular}</span><select value={sort} onChange={e => { setSort(e.target.value); setVisibleCount(14); }}><option value="popular">{c.popular}</option><option value="az">{c.az}</option></select></label>
+      </div>
+      <div className="collection-tabs" role="group" aria-label={c.browse}>{["all", ...categories].map((id, i) =>
+        <button key={id} onClick={() => { setCategory(id); setVisibleCount(14); }} aria-pressed={category === id} className={category === id ? "active" : ""}>{i === 0 ? c.all : c.categories[i - 1]}</button>)}</div>
+      <p className="collection-photo-note">{c.photoNote}</p>
+      <p className="collection-count" role="status">{found.length} {c.count}</p>
+    </section>
+
     {showFeatured && <section className="collection-favorites" aria-labelledby="favorites-title">
       <div className="collection-section-heading"><div><p className="kapitaal">{locale === "nl" ? "Schaap’s selectie" : locale === "de" ? "Schaap’s Auswahl" : "Schaap’s selection"}</p><h2 id="favorites-title">{c.favorites}</h2></div><p>{c.favoritesSub}</p></div>
       <div className="favorite-grid">{featured.map((p, i) => {
@@ -64,22 +82,13 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
           </Link>
           <div className="favorite-heading"><div><p>{c.categories[categories.indexOf(p.categorie)]}</p><h3><Link href={`/${locale}/assortiment/${p.slug}`}>{p.naam}</Link></h3></div><ArrowUpRight size={22} aria-hidden="true" /></div>
           <p className="text-sm font-semibold mb-3">{productAvailability(p,locale).label}</p>
-          <a href={bestelContact(locale, p.naam).href} className="collection-whatsapp"><MessageCircle size={16} aria-hidden="true" />{bestelContact(locale).label}</a>
+          {p.slug === "creuse-oesters" && <a href={bestelContact(locale, p.naam).href} className="collection-whatsapp"><MessageCircle size={16} aria-hidden="true" />{locale === "nl" ? "Grotere bestelling? App ons" : locale === "de" ? "Größere Bestellung? Schreiben Sie uns" : "Larger order? Message us"}</a>}
         </article>;
       })}</div>
     </section>}
 
-    <section className="collection-browse" aria-labelledby="browse-title">
-      <div className="collection-section-heading"><div><p className="kapitaal">{c.count}</p><h2 id="browse-title">{c.browse}</h2></div><p>{c.browseSub}</p></div>
-      <div className="collection-tools">
-        <label className="collection-search"><Search size={20} aria-hidden="true" /><span className="sr-only">{c.search}</span><input type="search" placeholder={c.search} value={query} onChange={e => setQuery(e.target.value)} /></label>
-        <label className="collection-sort"><SlidersHorizontal size={17} aria-hidden="true" /><span className="sr-only">{c.popular}</span><select value={sort} onChange={e => setSort(e.target.value)}><option value="popular">{c.popular}</option><option value="az">{c.az}</option></select></label>
-      </div>
-      <div className="collection-tabs" role="group" aria-label={c.browse}>{["all", ...categories].map((id, i) =>
-        <button key={id} onClick={() => setCategory(id)} aria-pressed={category === id} className={category === id ? "active" : ""}>{i === 0 ? c.all : c.categories[i - 1]}</button>)}</div>
-      <p className="collection-photo-note">{c.photoNote}</p>
-      <p className="collection-count" role="status">{found.length} {c.count}</p>
-      <div className="collection-list">{rows.map(p => {
+    <section className="collection-results" aria-label={c.browse}>
+      <div id="collection-results-list" className="collection-list">{visibleRows.map(p => {
         const photo = productPhoto(p,locale);
         const stock = productAvailability(p,locale);
         const platter = ["visschaal", "feestschotel"].includes(p.slug);
@@ -94,10 +103,15 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
           <div className="collection-item-actions">
             <Link href={`/${locale}/assortiment/${p.slug}`}>{c.detail}<ArrowUpRight size={14} aria-hidden="true" /></Link>
             {platter ? <Link href={`/${locale}/visschalen`}>{locale === "nl" ? "Visschaal samenstellen" : locale === "de" ? "Fischplatte zusammenstellen" : "Create a seafood platter"}</Link>
-              : <a href={bestelContact(locale, p.naam).href} className="collection-whatsapp"><MessageCircle size={15} aria-hidden="true" />{bestelContact(locale).label}</a>}
+              : (p.slug === "creuse-oesters" || p.slug === "fine-de-claire-oesters")
+                ? <a href={bestelContact(locale, p.naam).href} className="collection-whatsapp"><MessageCircle size={15} aria-hidden="true" />{locale === "nl" ? "Grotere bestelling? App ons" : locale === "de" ? "Größere Bestellung? Schreiben Sie uns" : "Larger order? Message us"}</a>
+                : !stapleSlugs.has(p.slug) && !["always", "dagelijks"].includes(p.beschikbaar ?? "")
+                  ? <a href={bestelContact(locale, p.naam).href} className="collection-whatsapp"><MessageCircle size={15} aria-hidden="true" />{bestelContact(locale).label}</a>
+                  : null}
           </div>
         </article>;
       })}</div>
+      {rows.length > visibleRows.length && <button type="button" className="collection-load-more" aria-controls="collection-results-list" onClick={() => setVisibleCount(count => count + 18)}>{c.more}</button>}
       {!found.length && <div className="collection-empty"><p>{c.empty}</p><a className="knop knop-rood" href={bestelContact(locale).href}>{bestelContact(locale).label}</a></div>}
     </section>
   </div>;

@@ -34,7 +34,7 @@ export const NIEUWE_ARTIKELEN: BlogPost[] = [
       {
         "kop": "Uw zalm in Leiden uitzoeken",
         "alineas": [
-          "U vindt Schaap’s Vishandel aan de Herenstraat 48. De winkel is open van dinsdag tot en met zaterdag. Vraag via WhatsApp naar de actuele beschikbaarheid of kom langs voor advies. Alleen visschalen bestelt u online."
+          "U vindt Schaap’s Vishandel aan de Herenstraat 48. De winkel is open van dinsdag tot en met zaterdag. Vraag via WhatsApp naar de actuele beschikbaarheid of kom langs voor advies. Visschalen vraagt u bij ons aan via WhatsApp."
         ]
       }
     ],
@@ -87,7 +87,7 @@ export const NIEUWE_ARTIKELEN: BlogPost[] = [
       {
         "kop": "Een visschaal voor een borrel of feest",
         "alineas": [
-          "Bekijk bij het samenstellen de aangegeven omvang van de schaal. Laat ons weten of het om een borrelhapje of onderdeel van een maaltijd gaat. De online keuze is uitsluitend voor visschalen. Voor losse vis, een andere hoeveelheid of een bijzondere wens stuurt u ons een WhatsApp-bericht; we kijken graag wat mogelijk is."
+          "Bekijk bij het samenstellen de aangegeven omvang van de schaal. Laat ons weten of het om een borrelhapje of onderdeel van een maaltijd gaat. Visschalen stelt u met ons samen via WhatsApp. Voor losse vis, een andere hoeveelheid of een bijzondere wens stuurt u ons een WhatsApp-bericht; we kijken graag wat mogelijk is."
         ]
       }
     ],
@@ -127,7 +127,7 @@ export const BIJGEWERKTE_ARTIKELEN: Record<string, Partial<BlogPost>> = {
       {
         "kop": "Vraag naar de actuele beschikbaarheid",
         "alineas": [
-          "Kom langs aan de Herenstraat 48 in Leiden, van dinsdag tot en met zaterdag, of stuur vooraf een WhatsApp-bericht. Vertel welke vis u zoekt en of biologische certificering belangrijk voor u is. We kijken graag wat we kunnen aanbieden. Alleen visschalen bestelt u online."
+          "Kom langs aan de Herenstraat 48 in Leiden, van dinsdag tot en met zaterdag, of stuur vooraf een WhatsApp-bericht. Vertel welke vis u zoekt en of biologische certificering belangrijk voor u is. We kijken graag wat we kunnen aanbieden. Visschalen vraagt u bij ons aan via WhatsApp."
         ]
       }
     ]
@@ -205,7 +205,7 @@ export const BIJGEWERKTE_ARTIKELEN: Record<string, Partial<BlogPost>> = {
       {
         "kop": "Van filet naar gerecht",
         "alineas": [
-          "Wilt u zalm bakken, in de oven bereiden of gerookt verwerken? Onze recepten helpen u kiezen. Stuur ons een WhatsApp-bericht voor de actuele beschikbaarheid; alleen visschalen kunt u online bestellen."
+          "Wilt u zalm bakken, in de oven bereiden of gerookt verwerken? Onze recepten helpen u kiezen. Stuur ons een WhatsApp-bericht voor de actuele beschikbaarheid; visschalen vraagt u bij ons aan via WhatsApp."
         ]
       }
     ],

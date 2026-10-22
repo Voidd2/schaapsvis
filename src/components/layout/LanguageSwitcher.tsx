@@ -26,7 +26,7 @@ export function LanguageSwitcher({ licht = false }: { licht?: boolean }) {
   const paden = pathname.split("/");
 
   return (
-    <div className="flex items-center gap-1.5 text-xs font-semibold tracking-[0.12em]">
+    <nav aria-label={huidige === "de" ? "Sprache wählen" : huidige === "en" ? "Choose language" : "Kies een taal"} className="flex items-center gap-1.5 text-xs font-semibold tracking-[0.12em]">
       {TALEN.map(({ code, label, naam }, i) => {
         const segmenten = [...paden];
         segmenten[1] = code;
@@ -37,7 +37,7 @@ export function LanguageSwitcher({ licht = false }: { licht?: boolean }) {
           <span key={code} className="flex items-center gap-1.5">
             {i > 0 && <span style={{ opacity: 0.3 }}>·</span>}
             {actief ? (
-              <span aria-current="true" style={{ opacity: 1 }}>
+              <span aria-current="page" className="inline-flex min-h-11 min-w-11 items-center justify-center" style={{ opacity: 1 }}>
                 {label}
               </span>
             ) : (
@@ -46,8 +46,8 @@ export function LanguageSwitcher({ licht = false }: { licht?: boolean }) {
                 hrefLang={code}
                 lang={code}
                 title={naam}
-                style={{ opacity: licht ? 0.6 : 0.5 }}
-                className="hover:opacity-100 transition-opacity"
+                style={{ opacity: licht ? 0.9 : 0.82 }}
+                className="inline-flex min-h-11 min-w-11 items-center justify-center underline-offset-4 hover:underline hover:opacity-100 transition-opacity"
               >
                 {label}
               </Link>
@@ -55,6 +55,6 @@ export function LanguageSwitcher({ licht = false }: { licht?: boolean }) {
           </span>
         );
       })}
-    </div>
+    </nav>
   );
 }

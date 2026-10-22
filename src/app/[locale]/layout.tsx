@@ -9,6 +9,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Chrome } from "@/components/layout/Chrome";
 import { WinkelwagenProvider } from "@/components/winkel/Winkelwagen";
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
+import { AnalyticsConsent } from "@/components/shared/AnalyticsConsent";
 import { cookies } from "next/headers";
 import { ACCESS_COOKIE, heeftGeldigeSiteToegang, siteOpSlot } from "@/lib/siteAccess";
 import { BEDRIJF } from "@/lib/bedrijf";
@@ -113,6 +114,7 @@ export default async function LocaleLayout({
               {children}
             </Chrome>
           </WinkelwagenProvider>
+          <AnalyticsConsent locale={locale} />
         </NextIntlClientProvider>
       </body>
     </html>

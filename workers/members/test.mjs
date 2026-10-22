@@ -8,6 +8,10 @@ const renewalMigration = await readFile(new URL("../../migrations/0002_student_p
 const proofCleanupMigration = await readFile(new URL("../../migrations/0003_student_proof_cleanup_queue.sql", import.meta.url), "utf8");
 const pendingApplicationMigration = await readFile(new URL("../../migrations/0004_one_pending_student_application.sql", import.meta.url), "utf8");
 const newsletterRegionMigration = await readFile(new URL("../../migrations/0005_newsletter_region_tag.sql", import.meta.url), "utf8");
+const studentEmailMigration = await readFile(new URL("../../migrations/0006_student_school_email_verification.sql", import.meta.url), "utf8");
+const expandedRegionsMigration = await readFile(new URL("../../migrations/0007_newsletter_regions.sql", import.meta.url), "utf8");
+const newsletterDraftsMigration = await readFile(new URL("../../migrations/0008_newsletter_signup_drafts.sql", import.meta.url), "utf8");
+const analyticsMigration = await readFile(new URL("../../migrations/0009_site_analytics.sql", import.meta.url), "utf8");
 const upgradeDb = new DatabaseSync(":memory:");
 upgradeDb.exec(schema);
 upgradeDb.exec(`
@@ -22,6 +26,10 @@ upgradeDb.exec(renewalMigration);
 upgradeDb.exec(proofCleanupMigration);
 upgradeDb.exec(pendingApplicationMigration);
 upgradeDb.exec(newsletterRegionMigration);
+upgradeDb.exec(studentEmailMigration);
+upgradeDb.exec(expandedRegionsMigration);
+upgradeDb.exec(newsletterDraftsMigration);
+upgradeDb.exec(analyticsMigration);
 assert.equal(upgradeDb.prepare("SELECT application_id FROM student_passes WHERE id='legacy-pass'").get().application_id, "legacy-application", "migration associates existing student passes with their approved application");
 upgradeDb.close();
 const sqlite = new DatabaseSync(":memory:");
@@ -30,6 +38,10 @@ sqlite.exec(renewalMigration);
 sqlite.exec(proofCleanupMigration);
 sqlite.exec(pendingApplicationMigration);
 sqlite.exec(newsletterRegionMigration);
+sqlite.exec(studentEmailMigration);
+sqlite.exec(expandedRegionsMigration);
+sqlite.exec(newsletterDraftsMigration);
+sqlite.exec(analyticsMigration);
 let simulateApplicationCommitFailure = false;
 let decisionReadBarrier = null;
 
@@ -84,6 +96,8 @@ const env = {
   SITE_ORIGIN: "https://www.schaapsvishandel.nl",
   MAIL_FROM: "noreply@schaapsvishandel.nl",
   ADMIN_EMAILS: "student@example.test",
+  ADMIN_IPS: "203.0.113.10,2001:db8::10",
+  ANALYTICS_ENABLED: "on",
   EMAIL: { async send(message) {
     if (simulateDailyQuota) throw Object.assign(new Error("daily quota reached"), { code: "E_DAILY_LIMIT_EXCEEDED" });
     sentEmails.push(message);
@@ -97,7 +111,7 @@ const env = {
 };
 
 async function call(path, { method = "GET", body, cookie = "", contentType, headers: extraHeaders = {} } = {}) {
-  const headers = new Headers({ Origin: env.SITE_ORIGIN });
+  const headers = new Headers({ Origin: env.SITE_ORIGIN, "CF-Connecting-IP": "203.0.113.10" });
   for (const [name, value] of Object.entries(extraHeaders)) headers.set(name, value);
   if (cookie) headers.set("Cookie", cookie);
   if (contentType) headers.set("Content-Type", contentType);
@@ -120,18 +134,29 @@ sqlite.prepare(`INSERT INTO student_applications (id,user_id,institution,educati
 sqlite.prepare(`INSERT INTO newsletter_subscriptions (email,user_id,status,consent_text_version,consented_at,confirmed_at,source,created_at,updated_at) VALUES ('disabled-cron@example.test','disabled-cron-admin','subscribed','test-v1','2026-10-18','2026-10-18','test','2026-10-18','2026-10-18')`).run();
 sqlite.prepare(`INSERT INTO newsletter_campaigns (id,subject,body_text,status,recipient_count,created_by,created_at,queued_at) VALUES ('disabled-cron-campaign','Must not send','test','queued',1,'disabled-cron-admin','2026-10-18','2026-10-18')`).run();
 sqlite.prepare(`INSERT INTO newsletter_deliveries (campaign_id,email,status,attempts,next_attempt_at) VALUES ('disabled-cron-campaign','disabled-cron@example.test','pending',0,?)`).run(new Date(Date.now() - 1000).toISOString());
+sqlite.prepare(`INSERT INTO newsletter_signup_drafts (token_hash,email,created_at,expires_at) VALUES ('expired-draft-hash','expired-draft@example.test','2000-01-01','2000-01-01')`).run();
 const disabledTasks = [];
 await memberWorker.scheduled({}, env, { waitUntil(task) { disabledTasks.push(task); } });
-assert.equal(disabledTasks.length, 1, "privacy cleanup remains scheduled while account features are disabled");
+assert.equal(disabledTasks.length, 1, "privacy cleanup and incomplete signup cleanup are scheduled while account features are disabled");
 await Promise.all(disabledTasks);
 assert.equal(objects.has(disabledProofKey), false, "privacy cleanup removes an already-reviewed proof even while accounts are disabled");
 assert.equal(sqlite.prepare("SELECT proof_object_key FROM student_applications WHERE id='disabled-cron-review'").get().proof_object_key, null, "disabled-mode cleanup records successful deletion");
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM newsletter_signup_drafts WHERE token_hash='expired-draft-hash'").get().count, 0, "expired temporary newsletter drafts are purged even while member services are disabled");
 assert.equal(sentEmails.length, 0, "newsletter delivery stays inert while member services are disabled");
 sqlite.exec(`DELETE FROM newsletter_deliveries WHERE campaign_id='disabled-cron-campaign'; DELETE FROM newsletter_campaigns WHERE id='disabled-cron-campaign'; DELETE FROM newsletter_subscriptions WHERE email='disabled-cron@example.test'; DELETE FROM users WHERE id='disabled-cron-admin';`);
 env.MEMBERS_ENABLED = "on";
 const health = await call("/api/members/health");
 assert.equal(health.status, 200);
 assert.equal((await call("/api/members/admin/student-applications")).status, 403, "admin API rejects anonymous requests");
+env.ANALYTICS_ENABLED = "off";
+assert.equal((await call("/api/members/analytics", { method: "POST", body: { consent: true, event: "page_view", path: "/nl" } })).status, 503, "analytics is disabled by default unless explicitly enabled");
+env.ANALYTICS_ENABLED = "on";
+assert.equal((await call("/api/members/analytics", { method: "POST", body: { consent: false, event: "page_view", path: "/nl" } })).status, 400, "analytics rejects events without affirmative consent");
+assert.equal((await call("/api/members/analytics", { method: "POST", body: { consent: true, event: "page_view", path: "/nl/account" } })).status, 400, "analytics excludes account paths");
+assert.equal((await call("/api/members/analytics", { method: "POST", body: { consent: true, event: "page_view", path: "/nl/assortiment" } })).status, 202, "analytics accepts a consented public page view");
+assert.equal((await call("/api/members/analytics", { method: "POST", body: { consent: true, event: "link_click", path: "/nl/varlaks", target: "https://www.schaapsvishandel.nl/nl/assortiment/varlaks-zalm?email=private@example.test" } })).status, 202, "analytics stores a sanitized link target");
+assert.equal(sqlite.prepare("SELECT count FROM site_analytics_daily WHERE event='link_click'").get().count, 1);
+assert.equal(sqlite.prepare("SELECT target FROM site_analytics_daily WHERE event='link_click'").get().target, "/nl/assortiment/varlaks-zalm", "analytics drops query strings that may contain private data");
 const oversizedRegistration = await call("/api/members/register", {
   method: "POST",
   body: { email: "oversized@example.test", name: "x".repeat(40_000), password: "correct horse battery" },
@@ -140,10 +165,13 @@ assert.equal(oversizedRegistration.status, 400, "JSON parsing is bounded even wh
 
 const registration = await call("/api/members/register", {
   method: "POST",
-  body: { email: "student@example.test", name: "Test Student", password: "correct horse battery", locale: "en" },
+  body: { email: "student@example.test", schoolEmail: "student@university.example.test", name: "Test Student", password: "correct horse battery", locale: "en" },
 });
 assert.equal(registration.status, 202);
-assert.equal(sentEmails.length, 1, "registration sends verification email");
+assert.equal(sentEmails.length, 2, "registration sends separate verification codes to both addresses");
+assert.match(sentEmails[0].text, /\b\d{6}\b/);
+assert.match(sentEmails[1].text, /\b\d{6}\b/);
+assert.notEqual(sentEmails[0].to, sentEmails[1].to, "personal and school emails must be different");
 assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM newsletter_subscriptions WHERE email='student@example.test'").get().count, 0, "account creation does not subscribe to marketing by default");
 const unknownAccountLogin = await call("/api/members/login", {
   method: "POST",
@@ -157,19 +185,18 @@ const lockedAccountLogin = await call("/api/members/login", {
   body: { email: "locked@example.test", password: "correct horse battery" },
 });
 assert.equal(lockedAccountLogin.status, 401, "locked accounts also receive a generic login failure");
-const verificationUrl = sentEmails[0].text.match(/https:\/\/[^\s]+/)[0];
-assert.match(sentEmails[0].subject, /Verify your email address/, "verification subject uses the selected language");
-const verification = new URL(verificationUrl);
-assert.equal(verification.searchParams.get("locale"), "en");
-const verificationPage = await call(`${verification.pathname}${verification.search}`);
-assert.match(await verificationPage.text(), /<html lang="en">/);
-const verifyToken = verification.searchParams.get("token");
-const verifyForm = new FormData();
-verifyForm.set("token", verifyToken);
-verifyForm.set("locale", "en");
-const verificationResult = await call("/api/members/verify", { method: "POST", body: verifyForm });
-assert.equal(verificationResult.status, 303);
-assert.equal(verificationResult.headers.get("Location"), "https://www.schaapsvishandel.nl/en/account?verified=1");
+const personalCode = sentEmails[0].text.match(/\b(\d{6})\b/)[1];
+const schoolCode = sentEmails[1].text.match(/\b(\d{6})\b/)[1];
+assert.match(sentEmails[0].subject, /personal email/i, "personal address receives its own code");
+assert.match(sentEmails[1].subject, /school email/i, "school address receives its own code");
+const invalidVerification = await call("/api/members/verify-codes", { method: "POST", body: { email: "student@example.test", personalCode, schoolCode: "000000" } });
+assert.equal(invalidVerification.status, 400, "both codes must match before either email is verified");
+assert.equal(sqlite.prepare("SELECT email_verified_at FROM users WHERE email='student@example.test'").get().email_verified_at, null, "failed verification does not partially verify the account");
+const verificationResult = await call("/api/members/verify-codes", { method: "POST", body: { email: "student@example.test", personalCode, schoolCode } });
+assert.equal(verificationResult.status, 200);
+assert.equal(sqlite.prepare("SELECT email_verified_at, school_email_verified_at FROM users WHERE email='student@example.test'").get().school_email_verified_at !== null, true, "both email addresses are verified");
+const reusedCodes = await call("/api/members/verify-codes", { method: "POST", body: { email: "student@example.test", personalCode, schoolCode } });
+assert.equal(reusedCodes.status, 400, "verification codes are single-use");
 
 const login = await call("/api/members/login", {
   method: "POST",
@@ -179,6 +206,10 @@ assert.equal(login.status, 200);
 assert.doesNotMatch(login.headers.get("Set-Cookie"), /Domain=/i, "sessions use host-only cookies to isolate preview and production");
 const sessionCookie = login.headers.get("Set-Cookie").split(";")[0];
 assert.equal((await call("/api/members/me", { cookie: sessionCookie })).status, 200);
+assert.equal((await call("/api/members/admin/analytics?days=7", { cookie: sessionCookie, headers: { "CF-Connecting-IP": "198.51.100.5" } })).status, 403, "admin analytics requires the server-side IP allowlist");
+const analyticsReport = await call("/api/members/admin/analytics?days=7", { cookie: sessionCookie });
+assert.equal(analyticsReport.status, 200, "allowlisted admin can view aggregate analytics");
+assert.equal((await analyticsReport.json()).rows.length, 2);
 for (let attempt = 0; attempt < 7; attempt++) {
   const blockedLogin = await call("/api/members/login", {
     method: "POST",
@@ -338,6 +369,24 @@ assert.equal((await renewedCheck.json()).valid, true, "the renewed pass verifies
 const expiredPassCheck = await call("/api/members/admin/pass/verify", { method: "POST", cookie: sessionCookie, body: { code: pass.code } });
 assert.equal((await expiredPassCheck.json()).valid, false, "the expired former pass cannot be used after renewal");
 
+const signupStart = await call("/api/members/newsletter/start", { method: "POST", body: { email: "staged-deals@example.test" } });
+assert.equal(signupStart.status, 201, "email-first signup stores a short-lived draft immediately");
+const signupState = await signupStart.json();
+assert.ok(signupState.draftToken, "the browser receives only an unguessable short-lived continuation token");
+assert.equal(sqlite.prepare("SELECT email FROM newsletter_signup_drafts WHERE token_hash=?").get(await (async () => {
+  const bytes = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(signupState.draftToken));
+  return Buffer.from(bytes).toString("base64url");
+})()).email, "staged-deals@example.test", "email is persisted before the region and marketing-consent step");
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM newsletter_subscriptions WHERE email='staged-deals@example.test'").get().count, 0, "a saved draft is not an active or pending marketing subscription");
+const stagedFinish = await call("/api/members/newsletter/subscribe", {
+  method: "POST", body: { email: "staged-deals@example.test", draftToken: signupState.draftToken, consent: true, locale: "nl", regionTag: "regio-071" },
+});
+assert.equal(stagedFinish.status, 202);
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM newsletter_signup_drafts WHERE email='staged-deals@example.test'").get().count, 0, "completed signup removes its temporary draft");
+assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='staged-deals@example.test'").get().status, "pending", "marketing remains off until double opt-in confirmation");
+assert.equal(sqlite.prepare("SELECT region_tag FROM newsletter_subscriptions WHERE email='staged-deals@example.test'").get().region_tag, "regio-071", "region tag is attached after explicit consent");
+assert.equal((await call("/api/members/newsletter/subscribe", { method: "POST", body: { email: "staged-deals@example.test", draftToken: signupState.draftToken, consent: true, regionTag: "regio-071" } })).status, 410, "signup continuation tokens are one-use");
+
 const subscription = await call("/api/members/newsletter/subscribe", {
   method: "POST", body: { email: "deals@example.test", consent: true, locale: "de", regionTag: "leiden" },
 });
@@ -355,7 +404,7 @@ confirmationForm.set("locale", "de");
 const confirmationResult = await call(confirmation.pathname, { method: "POST", body: confirmationForm });
 assert.equal(confirmationResult.status, 303);
 assert.equal(confirmationResult.headers.get("Location"), "https://www.schaapsvishandel.nl/de/account?newsletter=confirmed");
-assert.equal(sentEmails.at(-1).subject, "Sie erhalten jetzt E-Mail-Angebote von Schaap's Vishandel");
+assert.equal(sentEmails.at(-1).subject, "Sie erhalten jetzt Angebote von Schaap's Vishandel");
 assert.match(sentEmails.at(-1).text, /locale=de/);
 assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='deals@example.test'").get().status, "subscribed");
 assert.equal(sqlite.prepare("SELECT region_tag FROM newsletter_subscriptions WHERE email='deals@example.test'").get().region_tag, "leiden", "newsletter stores the subscriber's chosen local-area tag");

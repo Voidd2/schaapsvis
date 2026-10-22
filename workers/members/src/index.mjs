@@ -1,36 +1,37 @@
 const COOKIE = "sv_member";
 const SESSION_MS = 30 * 24 * 60 * 60 * 1000;
 const EMAIL_TOKEN_MS = 60 * 60 * 1000;
+const VERIFICATION_CODE_MS = 10 * 60 * 1000;
 const PASSWORD_ITERATIONS = 210_000;
 const DUMMY_PASSWORD_HASH = "pbkdf2-sha256$210000$AAAAAAAAAAAAAAAAAAAAAA$AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 const MAX_PROOF_BYTES = 8 * 1024 * 1024;
 const PROOF_CONSENT_VERSION = "student-proof-2026-10";
-const NEWSLETTER_CONSENT_VERSION = "weekly-offers-2026-10";
+const NEWSLETTER_CONSENT_VERSION = "customer-offers-2026-10";
 const LOCALES = new Set(["nl", "en", "de"]);
 const ACCOUNT_COPY = {
   nl: {
-    verifySubject: "Bevestig uw e-mailadres — Schaap's Vishandel", verifyIntro: "Bevestig uw e-mailadres voor uw account bij Schaap's Vishandel.", verifyButton: "E-mailadres bevestigen", verifyExpiredTitle: "Bevestigingslink verlopen", verifyExpired: "Vraag in uw account opnieuw een e-mailbevestiging aan.", usedExpired: "Deze link is al gebruikt of verlopen.",
+    verifySubject: "Bevestig uw persoonlijke e-mailadres — Schaap's Vishandel", verifyIntro: "Uw persoonlijke verificatiecode voor uw Schaap's-account is:", schoolVerifySubject: "Bevestig uw school-e-mailadres — Schaap's Vishandel", schoolVerifyIntro: "Uw verificatiecode voor uw school-e-mailadres is:", verifyButton: "E-mailadres bevestigen", verifyExpiredTitle: "Bevestigingslink verlopen", verifyExpired: "Vraag in uw account opnieuw een e-mailbevestiging aan.", usedExpired: "Deze link is al gebruikt of verlopen.",
     resetSubject: "Wachtwoord opnieuw instellen", resetIntro: "Stel uw wachtwoord opnieuw in via deze link:", resetTitle: "Wachtwoord instellen", resetLabel: "Nieuw wachtwoord (minimaal 12 tekens)", resetButton: "Wachtwoord opslaan", resetExpiredTitle: "Resetlink verlopen", resetExpired: "Deze link is al gebruikt of verlopen.",
     newsletterSubject: "Bevestig uw e-maildeals", newsletterIntro: "Bevestig dat Schaap's Vishandel u e-maildeals mag sturen.", newsletterButton: "E-maildeals bevestigen", newsletterTitle: "E-maildeals bevestigen", newsletterExpiredTitle: "Aanmeldlink verlopen", newsletterExpired: "Deze link is al gebruikt of verlopen.",
-    unsubscribeTitle: "Afmelden voor e-maildeals", unsubscribeIntro: "U ontvangt daarna geen weekdeals meer.", unsubscribeButton: "Afmelden", unsubscribeExpiredTitle: "Afmeldlink verlopen", unsubscribeExpired: "Deze afmeldlink is verlopen.", unsubscribeDoneTitle: "Afgemeld", unsubscribeDone: "U ontvangt geen e-maildeals meer van Schaap's Vishandel.",
-    newsletterConfirmedSubject: "U ontvangt nu e-maildeals van Schaap's Vishandel", newsletterConfirmedIntro: "Bedankt voor uw bevestiging. U ontvangt onze aanbiedingen wanneer we een weekdeal delen.", unsubscribeLink: "Afmelden voor e-maildeals",
-    registrationGeneric: "Als dit adres nieuw is, ontvangt u de volgende stap per e-mail.", invalidRegistration: "Vul uw naam en een geldig e-mailadres in. Kies een wachtwoord van 12 tot 128 tekens.", verificationFailed: "Uw account is aangemaakt, maar de bevestigingsmail kon niet worden verstuurd. Vraag een nieuwe link aan.", resendGeneric: "Als er een onbevestigd account bij dit adres hoort, ontvangt u een nieuwe link.", resetGeneric: "Als er een account bij dit adres hoort, ontvangt u een e-mail.", alreadySubscribed: "U bent al aangemeld.", newsletterCheck: "Controleer uw e-mail om uw aanmelding te bevestigen.",
+    unsubscribeTitle: "Afmelden voor e-maildeals", unsubscribeIntro: "U ontvangt daarna geen aanbiedingen per e-mail meer.", unsubscribeButton: "Afmelden", unsubscribeExpiredTitle: "Afmeldlink verlopen", unsubscribeExpired: "Deze afmeldlink is verlopen.", unsubscribeDoneTitle: "Afgemeld", unsubscribeDone: "U ontvangt geen e-maildeals meer van Schaap's Vishandel.",
+    newsletterConfirmedSubject: "U ontvangt nu aanbiedingen van Schaap's Vishandel", newsletterConfirmedIntro: "Bedankt voor uw bevestiging. U ontvangt onze aanbiedingen wanneer we iets moois te delen hebben.", unsubscribeLink: "Afmelden voor e-maildeals",
+    registrationGeneric: "Als dit een nieuw account is, ontvangt u twee codes: één op uw persoonlijke e-mailadres en één op uw schoolmail.", invalidRegistration: "Vul uw naam en twee verschillende geldige e-mailadressen in. Kies een wachtwoord van 12 tot 128 tekens.", verificationFailed: "Uw account is aangemaakt, maar een of beide e-mails konden niet worden verstuurd. Vraag de codes opnieuw aan.", resendGeneric: "Als er een onbevestigd account bij dit adres hoort, sturen we de verificatiecodes opnieuw.", resetGeneric: "Als er een account bij dit adres hoort, ontvangt u een e-mail.", alreadySubscribed: "U bent al aangemeld.", newsletterCheck: "Controleer uw e-mail om uw aanmelding te bevestigen.",
   },
   en: {
-    verifySubject: "Verify your email address — Schaap's Vishandel", verifyIntro: "Verify the email address for your Schaap's Vishandel account.", verifyButton: "Verify email address", verifyExpiredTitle: "Verification link expired", verifyExpired: "Request a new verification email from your account.", usedExpired: "This link has already been used or has expired.",
+    verifySubject: "Verify your personal email — Schaap's Vishandel", verifyIntro: "Your personal verification code for your Schaap's account is:", schoolVerifySubject: "Verify your school email — Schaap's Vishandel", schoolVerifyIntro: "Your verification code for your school email address is:", verifyButton: "Verify email address", verifyExpiredTitle: "Verification link expired", verifyExpired: "Request a new verification email from your account.", usedExpired: "This link has already been used or has expired.",
     resetSubject: "Reset your password", resetIntro: "Reset your password using this link:", resetTitle: "Set a new password", resetLabel: "New password (at least 12 characters)", resetButton: "Save password", resetExpiredTitle: "Reset link expired", resetExpired: "This link has already been used or has expired.",
     newsletterSubject: "Confirm your email offers", newsletterIntro: "Confirm that Schaap's Vishandel may send you email offers.", newsletterButton: "Confirm email offers", newsletterTitle: "Confirm email offers", newsletterExpiredTitle: "Subscription link expired", newsletterExpired: "This link has already been used or has expired.",
-    unsubscribeTitle: "Unsubscribe from email offers", unsubscribeIntro: "You will no longer receive weekly offers.", unsubscribeButton: "Unsubscribe", unsubscribeExpiredTitle: "Unsubscribe link expired", unsubscribeExpired: "This unsubscribe link has expired.", unsubscribeDoneTitle: "Unsubscribed", unsubscribeDone: "You will no longer receive email offers from Schaap's Vishandel.",
-    newsletterConfirmedSubject: "You are subscribed to email offers from Schaap's Vishandel", newsletterConfirmedIntro: "Thanks for confirming. You will receive our offers when we share a weekly deal.", unsubscribeLink: "Unsubscribe from email offers",
-    registrationGeneric: "If this is a new address, we will email you the next step.", invalidRegistration: "Enter your name and a valid email address. Choose a password of 12 to 128 characters.", verificationFailed: "Your account was created, but we could not send the verification email. Request a new link.", resendGeneric: "If this address belongs to an unverified account, we will send a new link.", resetGeneric: "If an account exists for this address, you will receive an email.", alreadySubscribed: "You are already subscribed.", newsletterCheck: "Check your email to confirm your subscription.",
+    unsubscribeTitle: "Unsubscribe from email offers", unsubscribeIntro: "You will no longer receive offers by email.", unsubscribeButton: "Unsubscribe", unsubscribeExpiredTitle: "Unsubscribe link expired", unsubscribeExpired: "This unsubscribe link has expired.", unsubscribeDoneTitle: "Unsubscribed", unsubscribeDone: "You will no longer receive email offers from Schaap's Vishandel.",
+    newsletterConfirmedSubject: "You are subscribed to offers from Schaap's Vishandel", newsletterConfirmedIntro: "Thanks for confirming. You will hear from us when we have something worth sharing.", unsubscribeLink: "Unsubscribe from email offers",
+    registrationGeneric: "If this is a new account, we will send two codes: one to your personal email and one to your school email.", invalidRegistration: "Enter your name and two different valid email addresses. Choose a password of 12 to 128 characters.", verificationFailed: "Your account was created, but one or both emails could not be sent. Request new codes.", resendGeneric: "If this address belongs to an unverified account, we will resend the verification codes.", resetGeneric: "If an account exists for this address, you will receive an email.", alreadySubscribed: "You are already subscribed.", newsletterCheck: "Check your email to confirm your subscription.",
   },
   de: {
-    verifySubject: "E-Mail-Adresse bestätigen — Schaap's Vishandel", verifyIntro: "Bestätigen Sie die E-Mail-Adresse für Ihr Konto bei Schaap's Vishandel.", verifyButton: "E-Mail-Adresse bestätigen", verifyExpiredTitle: "Bestätigungslink abgelaufen", verifyExpired: "Fordern Sie in Ihrem Konto eine neue Bestätigungs-E-Mail an.", usedExpired: "Dieser Link wurde bereits verwendet oder ist abgelaufen.",
+    verifySubject: "Private E-Mail bestätigen — Schaap's Vishandel", verifyIntro: "Ihr persönlicher Bestätigungscode für Ihr Schaap's-Konto lautet:", schoolVerifySubject: "Schul-E-Mail bestätigen — Schaap's Vishandel", schoolVerifyIntro: "Ihr Bestätigungscode für Ihre Schul-E-Mail-Adresse lautet:", verifyButton: "E-Mail-Adresse bestätigen", verifyExpiredTitle: "Bestätigungslink abgelaufen", verifyExpired: "Fordern Sie in Ihrem Konto eine neue Bestätigungs-E-Mail an.", usedExpired: "Dieser Link wurde bereits verwendet oder ist abgelaufen.",
     resetSubject: "Passwort zurücksetzen", resetIntro: "Setzen Sie Ihr Passwort über diesen Link zurück:", resetTitle: "Neues Passwort festlegen", resetLabel: "Neues Passwort (mindestens 12 Zeichen)", resetButton: "Passwort speichern", resetExpiredTitle: "Link zum Zurücksetzen abgelaufen", resetExpired: "Dieser Link wurde bereits verwendet oder ist abgelaufen.",
     newsletterSubject: "E-Mail-Angebote bestätigen", newsletterIntro: "Bestätigen Sie, dass Schaap's Vishandel Ihnen E-Mail-Angebote senden darf.", newsletterButton: "E-Mail-Angebote bestätigen", newsletterTitle: "E-Mail-Angebote bestätigen", newsletterExpiredTitle: "Anmeldelink abgelaufen", newsletterExpired: "Dieser Link wurde bereits verwendet oder ist abgelaufen.",
-    unsubscribeTitle: "E-Mail-Angebote abbestellen", unsubscribeIntro: "Sie erhalten danach keine Wochenangebote mehr.", unsubscribeButton: "Abbestellen", unsubscribeExpiredTitle: "Abmeldelink abgelaufen", unsubscribeExpired: "Dieser Abmeldelink ist abgelaufen.", unsubscribeDoneTitle: "Abgemeldet", unsubscribeDone: "Sie erhalten keine E-Mail-Angebote mehr von Schaap's Vishandel.",
-    newsletterConfirmedSubject: "Sie erhalten jetzt E-Mail-Angebote von Schaap's Vishandel", newsletterConfirmedIntro: "Vielen Dank für Ihre Bestätigung. Sie erhalten unsere Angebote, wenn wir ein Wochenangebot teilen.", unsubscribeLink: "E-Mail-Angebote abbestellen",
-    registrationGeneric: "Wenn dies eine neue Adresse ist, senden wir Ihnen den nächsten Schritt per E-Mail.", invalidRegistration: "Geben Sie Ihren Namen und eine gültige E-Mail-Adresse ein. Das Passwort muss 12 bis 128 Zeichen lang sein.", verificationFailed: "Ihr Konto wurde erstellt, aber die Bestätigungs-E-Mail konnte nicht gesendet werden. Fordern Sie einen neuen Link an.", resendGeneric: "Wenn diese Adresse zu einem unbestätigten Konto gehört, senden wir einen neuen Link.", resetGeneric: "Wenn es ein Konto zu dieser Adresse gibt, erhalten Sie eine E-Mail.", alreadySubscribed: "Sie haben den E-Mail-Angeboten bereits zugestimmt.", newsletterCheck: "Prüfen Sie Ihre E-Mails, um die Anmeldung zu bestätigen.",
+    unsubscribeTitle: "E-Mail-Angebote abbestellen", unsubscribeIntro: "Sie erhalten danach keine Angebote per E-Mail mehr.", unsubscribeButton: "Abbestellen", unsubscribeExpiredTitle: "Abmeldelink abgelaufen", unsubscribeExpired: "Dieser Abmeldelink ist abgelaufen.", unsubscribeDoneTitle: "Abgemeldet", unsubscribeDone: "Sie erhalten keine E-Mail-Angebote mehr von Schaap's Vishandel.",
+    newsletterConfirmedSubject: "Sie erhalten jetzt Angebote von Schaap's Vishandel", newsletterConfirmedIntro: "Vielen Dank für Ihre Bestätigung. Sie hören von uns, wenn wir etwas Schönes zu teilen haben.", unsubscribeLink: "E-Mail-Angebote abbestellen",
+    registrationGeneric: "Wenn dies ein neues Konto ist, senden wir zwei Codes: einen an Ihre private E-Mail und einen an Ihre Schul-E-Mail.", invalidRegistration: "Geben Sie Ihren Namen und zwei verschiedene gültige E-Mail-Adressen ein. Das Passwort muss 12 bis 128 Zeichen lang sein.", verificationFailed: "Ihr Konto wurde erstellt, aber eine oder beide E-Mails konnten nicht gesendet werden. Fordern Sie neue Codes an.", resendGeneric: "Wenn diese Adresse zu einem unbestätigten Konto gehört, senden wir die Bestätigungscodes erneut.", resetGeneric: "Wenn es ein Konto zu dieser Adresse gibt, erhalten Sie eine E-Mail.", alreadySubscribed: "Sie haben den E-Mail-Angeboten bereits zugestimmt.", newsletterCheck: "Prüfen Sie Ihre E-Mails, um die Anmeldung zu bestätigen.",
   },
 };
 
@@ -217,6 +218,14 @@ async function issueEmailToken(env, { userId = null, email = null, purpose, ttlM
   return token;
 }
 
+async function issueVerificationCode(env, { userId, email, purpose }) {
+  const code = String(crypto.getRandomValues(new Uint32Array(1))[0] % 1_000_000).padStart(6, "0");
+  const expiry = new Date(Date.now() + VERIFICATION_CODE_MS).toISOString();
+  await env.DB.prepare(`INSERT INTO email_tokens (token_hash, user_id, email, purpose, created_at, expires_at) VALUES (?, ?, ?, ?, ?, ?)`)
+    .bind(await hmac(env.AUTH_PEPPER, `verification-code:${userId}:${purpose}:${code}`), userId, email, purpose, nowIso(), expiry).run();
+  return code;
+}
+
 async function sessionUser(request, env) {
   const token = cookieValue(request);
   if (!token) return null;
@@ -232,8 +241,56 @@ async function sessionUser(request, env) {
 async function requireAdmin(request, env) {
   const user = await sessionUser(request, env);
   const allowlist = String(env.ADMIN_EMAILS || "").split(",").map((email) => email.trim().toLowerCase()).filter(Boolean);
-  if (!user || !allowlist.includes(user.email.toLowerCase())) return null;
+  const allowedIps = String(env.ADMIN_IPS || "").split(",").map((ip) => ip.trim().toLowerCase()).filter(Boolean);
+  const clientIp = String(request.headers.get("CF-Connecting-IP") || "").trim().toLowerCase();
+  if (!user || !allowlist.includes(user.email.toLowerCase()) || !clientIp || !allowedIps.includes(clientIp)) return null;
   return user;
+}
+
+function publicAnalyticsPath(value) {
+  if (typeof value !== "string" || value.length > 180 || !/^\/(nl|en|de)(?:\/[^?#]*)?$/.test(value)) return "";
+  const path = value.replace(/\/{2,}/g, "/").replace(/\/$/, "") || "/nl";
+  if (/^\/(nl|en|de)\/(account|beheer|studentenkorting|kortingsbon)(?:\/|$)/.test(path)) return "";
+  return path;
+}
+
+function analyticsTarget(value, origin) {
+  if (typeof value !== "string" || value.length > 500) return "";
+  try {
+    const url = new URL(value, origin);
+    if (url.origin !== origin) return `external:${url.hostname.toLowerCase()}`.slice(0, 180);
+    return publicAnalyticsPath(url.pathname);
+  } catch { return ""; }
+}
+
+async function collectAnalytics(request, env) {
+  if (env.ANALYTICS_ENABLED !== "on" || !sameOrigin(request, env)) return json({ error: "analytics_unavailable" }, 503);
+  const body = await readJson(request);
+  if (body?.consent !== true || !["page_view", "link_click"].includes(body?.event)) return json({ error: "invalid_event" }, 400);
+  const path = publicAnalyticsPath(body.path);
+  if (!path) return json({ error: "invalid_path" }, 400);
+  const target = body.event === "link_click" ? analyticsTarget(body.target, env.SITE_ORIGIN) : "";
+  if (body.event === "link_click" && !target) return json({ error: "invalid_target" }, 400);
+  if (!env.AUTH_PEPPER) return json({ error: "analytics_unavailable" }, 503);
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  const key = await hmac(env.AUTH_PEPPER, `analytics:ip:${ip}`);
+  if (!await rateLimit(env.DB, key, 240, 15 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
+  const date = new Date().toISOString().slice(0, 10);
+  await env.DB.prepare(`INSERT INTO site_analytics_daily (day, event, path, target, count, updated_at)
+    VALUES (?, ?, ?, ?, 1, ?)
+    ON CONFLICT(day, event, path, target) DO UPDATE SET count=count+1, updated_at=excluded.updated_at`)
+    .bind(date, body.event, path, target, nowIso()).run();
+  return json({ ok: true }, 202);
+}
+
+async function adminAnalytics(request, env) {
+  const admin = await requireAdmin(request, env);
+  if (!admin) return json({ error: "forbidden" }, 403);
+  const daysValue = Number(new URL(request.url).searchParams.get("days") || 30);
+  const days = Number.isInteger(daysValue) ? Math.min(90, Math.max(1, daysValue)) : 30;
+  const since = new Date(Date.now() - (days - 1) * 86_400_000).toISOString().slice(0, 10);
+  const rows = await env.DB.prepare(`SELECT day, event, path, target, count FROM site_analytics_daily WHERE day >= ? ORDER BY day DESC, count DESC LIMIT 2000`).bind(since).all();
+  return json({ since, days, rows: rows.results || [] });
 }
 
 async function createSession(env, userId) {
@@ -309,9 +366,10 @@ async function register(request, env) {
   const locale = localeFrom(body?.locale);
   const copy = ACCOUNT_COPY[locale];
   const email = normalizeEmail(body?.email);
+  const schoolEmail = normalizeEmail(body?.schoolEmail);
   const name = typeof body?.name === "string" ? body.name.trim().slice(0, 120) : "";
   const password = typeof body?.password === "string" ? body.password : "";
-  if (!email || name.length < 2 || password.length < 12 || password.length > 128) {
+  if (!email || !schoolEmail || email === schoolEmail || name.length < 2 || password.length < 12 || password.length > 128) {
     return json({ error: "invalid_input", message: copy.invalidRegistration }, 400);
   }
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
@@ -320,15 +378,23 @@ async function register(request, env) {
   const userId = crypto.randomUUID();
   const created = nowIso();
   const passwordDigest = await passwordHash(password, env.AUTH_PEPPER);
-  const inserted = await env.DB.prepare(`INSERT INTO users (id, email, full_name, password_hash, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT(email) DO NOTHING`)
-    .bind(userId, email, name, passwordDigest, created, created).run();
+  const schoolTaken = await env.DB.prepare(`SELECT 1 AS present FROM users WHERE school_email = ? AND account_status != 'deleted' LIMIT 1`).bind(schoolEmail).first();
+  if (schoolTaken) return json({ ok: true, message: copy.registrationGeneric }, 202);
+  let inserted;
+  try {
+    inserted = await env.DB.prepare(`INSERT INTO users (id, email, school_email, full_name, password_hash, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?) ON CONFLICT(email) DO NOTHING`)
+      .bind(userId, email, schoolEmail, name, passwordDigest, created, created).run();
+  } catch { return json({ ok: true, message: copy.registrationGeneric }, 202); }
   if (!inserted.meta?.changes) return json({ ok: true, message: copy.registrationGeneric }, 202);
 
-  const verifyToken = await issueEmailToken(env, { userId, email, purpose: "verify_email" });
-  const verifyUrl = emailUrl(env, "/api/members/verify", verifyToken, locale);
+  const personalCode = await issueVerificationCode(env, { userId, email, purpose: "verify_email" });
+  const schoolCode = await issueVerificationCode(env, { userId, email: schoolEmail, purpose: "verify_school" });
   try {
-    const validity = locale === "nl" ? "De link is één uur geldig." : locale === "de" ? "Der Link ist eine Stunde gültig." : "This link is valid for one hour.";
-    await sendMail(env, email, copy.verifySubject, `${copy.verifyIntro}\n${verifyUrl}\n${validity}`, `<p>${copy.verifyIntro}</p><p><a href="${verifyUrl}">${copy.verifyButton}</a></p><p>${validity}</p>`);
+    const validity = locale === "nl" ? "De code is 10 minuten geldig." : locale === "de" ? "Der Code ist 10 Minuten gültig." : "The code is valid for 10 minutes.";
+    await Promise.all([
+      sendMail(env, email, copy.verifySubject, `${copy.verifyIntro}\n${personalCode}\n${validity}`, `<p>${copy.verifyIntro}</p><p style="font-size:2rem;font-weight:700;letter-spacing:.2em">${personalCode}</p><p>${validity}</p>`),
+      sendMail(env, schoolEmail, copy.schoolVerifySubject, `${copy.schoolVerifyIntro}\n${schoolCode}\n${validity}`, `<p>${copy.schoolVerifyIntro}</p><p style="font-size:2rem;font-weight:700;letter-spacing:.2em">${schoolCode}</p><p>${validity}</p>`),
+    ]);
   } catch {
     return json({ error: "verification_email_failed", message: copy.verificationFailed }, 503);
   }
@@ -358,19 +424,54 @@ async function resendVerification(request, env) {
   const email = normalizeEmail(body?.email);
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
   if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "verify-resend", ip, email || "invalid", 12, 4, 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
-  const user = email ? await env.DB.prepare(`SELECT id FROM users WHERE email = ? AND email_verified_at IS NULL AND account_status = 'active'`).bind(email).first() : null;
+  const user = email ? await env.DB.prepare(`SELECT id, email, school_email FROM users WHERE email = ? AND (email_verified_at IS NULL OR school_email_verified_at IS NULL) AND account_status = 'active'`).bind(email).first() : null;
   if (user) {
     const time = nowIso();
-    await env.DB.prepare(`UPDATE email_tokens SET used_at = ? WHERE user_id = ? AND purpose = 'verify_email' AND used_at IS NULL`).bind(time, user.id).run();
-    const token = await issueEmailToken(env, { userId: user.id, email, purpose: "verify_email" });
-    const link = emailUrl(env, "/api/members/verify", token, locale);
+    await env.DB.prepare(`UPDATE email_tokens SET used_at = ? WHERE user_id = ? AND purpose IN ('verify_email','verify_school') AND used_at IS NULL`).bind(time, user.id).run();
     try {
-      await sendMail(env, email, copy.verifySubject, `${copy.verifyIntro}\n${link}\n${locale === "nl" ? "De link is één uur geldig." : locale === "de" ? "Der Link ist eine Stunde gültig." : "This link is valid for one hour."}`, `<p>${copy.verifyIntro}</p><p><a href="${link}">${copy.verifyButton}</a></p>`);
+      if (user.school_email) {
+        const personalCode = await issueVerificationCode(env, { userId: user.id, email: user.email, purpose: "verify_email" });
+        const schoolCode = await issueVerificationCode(env, { userId: user.id, email: user.school_email, purpose: "verify_school" });
+        const validity = locale === "nl" ? "De code is 10 minuten geldig." : locale === "de" ? "Der Code ist 10 Minuten gültig." : "The code is valid for 10 minutes.";
+        await Promise.all([
+          sendMail(env, user.email, copy.verifySubject, `${copy.verifyIntro}\n${personalCode}\n${validity}`, `<p>${copy.verifyIntro}</p><p><strong>${personalCode}</strong></p><p>${validity}</p>`),
+          sendMail(env, user.school_email, copy.schoolVerifySubject, `${copy.schoolVerifyIntro}\n${schoolCode}\n${validity}`, `<p>${copy.schoolVerifyIntro}</p><p><strong>${schoolCode}</strong></p><p>${validity}</p>`),
+        ]);
+      } else {
+        const token = await issueEmailToken(env, { userId: user.id, email: user.email, purpose: "verify_email" });
+        const link = emailUrl(env, "/api/members/verify", token, locale);
+        await sendMail(env, user.email, copy.verifySubject, `${copy.verifyIntro}\n${link}`, `<p>${copy.verifyIntro}</p><p><a href="${link}">${copy.verifyButton}</a></p>`);
+      }
     } catch {
       return json({ error: "verification_email_failed" }, 503);
     }
   }
   return json({ ok: true, message: copy.resendGeneric }, 202);
+}
+
+async function verifyRegistrationCodes(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  if (!env.AUTH_PEPPER) return json({ error: "verification_unavailable" }, 503);
+  const body = await readJson(request);
+  const email = normalizeEmail(body?.email);
+  const personalCode = typeof body?.personalCode === "string" ? body.personalCode.trim() : "";
+  const schoolCode = typeof body?.schoolCode === "string" ? body.schoolCode.trim() : "";
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "verify-codes", ip, email || "invalid", 20, 8, 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
+  if (!email || !/^\d{6}$/.test(personalCode) || !/^\d{6}$/.test(schoolCode)) return json({ error: "invalid_codes" }, 400);
+  const user = await env.DB.prepare(`SELECT id, email, school_email FROM users WHERE email = ? AND account_status = 'active'`).bind(email).first();
+  if (!user?.school_email || user.email === user.school_email) return json({ error: "invalid_codes" }, 400);
+  const [personal, school] = await Promise.all([
+    env.DB.prepare(`SELECT token_hash FROM email_tokens WHERE user_id=? AND email=? AND purpose='verify_email' AND token_hash=? AND used_at IS NULL AND expires_at>?`).bind(user.id, user.email, await hmac(env.AUTH_PEPPER, `verification-code:${user.id}:verify_email:${personalCode}`), nowIso()).first(),
+    env.DB.prepare(`SELECT token_hash FROM email_tokens WHERE user_id=? AND email=? AND purpose='verify_school' AND token_hash=? AND used_at IS NULL AND expires_at>?`).bind(user.id, user.school_email, await hmac(env.AUTH_PEPPER, `verification-code:${user.id}:verify_school:${schoolCode}`), nowIso()).first(),
+  ]);
+  if (!personal || !school) return json({ error: "invalid_codes" }, 400);
+  const time = nowIso();
+  await env.DB.batch([
+    env.DB.prepare(`UPDATE users SET email_verified_at=COALESCE(email_verified_at, ?), school_email_verified_at=COALESCE(school_email_verified_at, ?), updated_at=? WHERE id=?`).bind(time, time, time, user.id),
+    env.DB.prepare(`UPDATE email_tokens SET used_at=? WHERE user_id=? AND purpose IN ('verify_email','verify_school') AND used_at IS NULL`).bind(time, user.id),
+  ]);
+  return json({ ok: true });
 }
 
 async function verifyEmailPage(request, env) {
@@ -521,6 +622,8 @@ async function submitStudentApplication(request, env) {
   if (contentLength > MAX_PROOF_BYTES + 64_000) return json({ error: "file_too_large" }, 413);
   const user = await sessionUser(request, env);
   if (!user) return json({ error: "authentication_required" }, 401);
+  const verifiedAddresses = await env.DB.prepare(`SELECT school_email, school_email_verified_at FROM users WHERE id=?`).bind(user.id).first();
+  if (!verifiedAddresses?.school_email || !verifiedAddresses.school_email_verified_at) return json({ error: "student_emails_unverified" }, 403);
   if (!env.AUTH_PEPPER) return json({ error: "application_unavailable" }, 503);
   const applicationLimitKey = await hmac(env.AUTH_PEPPER, `student-application:${user.id}`);
   if (!await rateLimit(env.DB, applicationLimitKey, 4, 24 * 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
@@ -678,8 +781,13 @@ async function subscribeNewsletter(request, env) {
   const copy = ACCOUNT_COPY[locale];
   const email = normalizeEmail(body?.email);
   const regionTag = String(body?.regionTag || "");
-  if (!email || body?.consent !== true || !["leiden", "voorschoten", "anders"].includes(regionTag)) return json({ error: "consent_required" }, 400);
+  const draftToken = typeof body?.draftToken === "string" ? body.draftToken : "";
+  if (!email || body?.consent !== true || !["leiden", "voorschoten", "wassenaar", "leidschendam", "regio-071", "elders"].includes(regionTag)) return json({ error: "consent_required" }, 400);
   if (!env.AUTH_PEPPER) return json({ error: "newsletter_unavailable" }, 503);
+  if (draftToken) {
+    const draft = await env.DB.prepare(`SELECT email FROM newsletter_signup_drafts WHERE token_hash=? AND expires_at>?`).bind(await digest(draftToken), nowIso()).first();
+    if (!draft || draft.email !== email) return json({ error: "signup_expired" }, 410);
+  }
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
   if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "newsletter", ip, email, 12, 4, 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
   const at = nowIso();
@@ -687,11 +795,31 @@ async function subscribeNewsletter(request, env) {
   await env.DB.prepare(`INSERT INTO newsletter_subscriptions (email, user_id, status, consent_text_version, consented_at, source, created_at, updated_at, region_tag) VALUES (?, ?, 'pending', ?, ?, ?, ?, ?, ?) ON CONFLICT(email) DO UPDATE SET user_id=COALESCE(excluded.user_id, newsletter_subscriptions.user_id), status=CASE WHEN newsletter_subscriptions.status='subscribed' THEN 'subscribed' ELSE 'pending' END, consent_text_version=excluded.consent_text_version, consented_at=excluded.consented_at, source=excluded.source, updated_at=excluded.updated_at, region_tag=excluded.region_tag`)
     .bind(email, user?.email === email ? user.id : null, NEWSLETTER_CONSENT_VERSION, at, user ? "account" : "newsletter-form", at, at, regionTag).run();
   const subscription = await env.DB.prepare(`SELECT status FROM newsletter_subscriptions WHERE email = ?`).bind(email).first();
-  if (subscription?.status === "subscribed") return json({ ok: true, message: copy.alreadySubscribed }, 202);
+  if (subscription?.status === "subscribed") {
+    if (draftToken) await env.DB.prepare(`DELETE FROM newsletter_signup_drafts WHERE token_hash=?`).bind(await digest(draftToken)).run();
+    return json({ ok: true, message: copy.alreadySubscribed }, 202);
+  }
   const token = await issueEmailToken(env, { userId: user?.email === email ? user.id : null, email, purpose: "newsletter_confirm" });
   const link = emailUrl(env, "/api/members/newsletter/confirm", token, locale);
   await sendMail(env, email, copy.newsletterSubject, `${copy.newsletterIntro}\n${link}`, `<p>${copy.newsletterIntro}</p><p><a href="${link}">${copy.newsletterButton}</a></p>`);
+  if (draftToken) await env.DB.prepare(`DELETE FROM newsletter_signup_drafts WHERE token_hash=?`).bind(await digest(draftToken)).run();
   return json({ ok: true, message: copy.newsletterCheck }, 202);
+}
+
+async function startNewsletterSignup(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  if (!env.AUTH_PEPPER || !env.EMAIL || !env.SITE_ORIGIN) return json({ error: "newsletter_unavailable" }, 503);
+  const body = await readJson(request);
+  const email = normalizeEmail(body?.email);
+  if (!email) return json({ error: "invalid_email" }, 400);
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "newsletter-draft", ip, email, 12, 5, 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
+  const token = await randomToken();
+  const now = nowIso();
+  const expires = new Date(Date.now() + 30 * 60 * 1000).toISOString();
+  await env.DB.prepare(`INSERT INTO newsletter_signup_drafts (token_hash, email, created_at, expires_at) VALUES (?, ?, ?, ?)`)
+    .bind(await digest(token), email, now, expires).run();
+  return json({ ok: true, draftToken: token, expiresAt: expires }, 201);
 }
 
 async function newsletterConfirmPage(request, env) {
@@ -892,6 +1020,15 @@ async function processNewsletterDeliveries(env) {
     .bind(nowText).run();
 }
 
+async function cleanupAnalytics(env) {
+  if (!env.DB) return;
+  const cutoff = new Date(Date.now() - 395 * 86_400_000).toISOString().slice(0, 10);
+  try {
+    await env.DB.prepare(`DELETE FROM site_analytics_daily WHERE day < ?`).bind(cutoff).run();
+    await env.DB.prepare(`DELETE FROM auth_rate_limits WHERE updated_at < ?`).bind(new Date(Date.now() - 30 * 86_400_000).toISOString()).run();
+  } catch { /* A later scheduled run retries retention cleanup. */ }
+}
+
 function routeApplicationPath(pathname) {
   const match = pathname.match(/^\/api\/members\/admin\/student-applications\/([0-9a-f-]+)(?:\/(proof|decision|cleanup))?$/i);
   return match ? { id: match[1], action: match[2] || "" } : null;
@@ -911,6 +1048,7 @@ const memberWorker = {
       const enabled = env.MEMBERS_ENABLED === "on";
       return json({ status: enabled ? "ok" : "disabled" }, enabled ? 200 : 503);
     }
+    if (path === "/api/members/analytics" && method === "POST") return collectAnalytics(request, env);
     // Keep the API inert until the password-protected site is deliberately
     // opened. Cloudflare Worker routes can bypass the Next.js access gate.
     if (env.MEMBERS_ENABLED !== "on") return json({ error: "members_disabled" }, 503);
@@ -918,6 +1056,7 @@ const memberWorker = {
     if (path === "/api/members/verify/resend" && method === "POST") return resendVerification(request, env);
     if (path === "/api/members/verify" && method === "GET") return verifyEmailPage(request, env);
     if (path === "/api/members/verify" && method === "POST") return verifyEmail(request, env);
+    if (path === "/api/members/verify-codes" && method === "POST") return verifyRegistrationCodes(request, env);
     if (path === "/api/members/login" && method === "POST") return login(request, env);
     if (path === "/api/members/logout" && method === "POST") return logout(request, env);
     if (path === "/api/members/me" && method === "GET") return me(request, env);
@@ -926,9 +1065,11 @@ const memberWorker = {
     if (path === "/api/members/password-reset/confirm" && method === "POST") return confirmPasswordReset(request, env);
     if (path === "/api/members/student-application" && method === "POST") return submitStudentApplication(request, env);
     if (path === "/api/members/admin/student-applications" && method === "GET") return adminQueue(request, env);
+    if (path === "/api/members/admin/analytics" && method === "GET") return adminAnalytics(request, env);
     if (path === "/api/members/admin/pass/verify" && method === "POST") return verifyPass(request, env);
     if (path === "/api/members/admin/newsletter-campaigns" && method === "GET") return adminNewsletterCampaigns(request, env);
     if (path === "/api/members/admin/newsletter-campaigns" && method === "POST") return createNewsletterCampaign(request, env);
+    if (path === "/api/members/newsletter/start" && method === "POST") return startNewsletterSignup(request, env);
     if (path === "/api/members/newsletter/subscribe" && method === "POST") return subscribeNewsletter(request, env);
     if (path === "/api/members/newsletter/confirm" && method === "GET") return newsletterConfirmPage(request, env);
     if (path === "/api/members/newsletter/confirm" && method === "POST") return confirmNewsletter(request, env);
@@ -945,11 +1086,20 @@ const memberWorker = {
   async scheduled(_controller, env, context) {
     // Privacy cleanup keeps running even while the account features are off.
     // Newsletter delivery remains inert until the owner deliberately enables it.
-    const tasks = [cleanupReviewedStudentProofs(env), cleanupOrphanStudentProofs(env)];
+    const tasks = [cleanupReviewedStudentProofs(env), cleanupOrphanStudentProofs(env), cleanupNewsletterDrafts(env)];
+    const scheduledAt = new Date(_controller?.scheduledTime || Date.now());
+    if (scheduledAt.getUTCHours() === 2 && scheduledAt.getUTCMinutes() === 0) tasks.push(cleanupAnalytics(env));
     if (env.MEMBERS_ENABLED === "on") tasks.push(processNewsletterDeliveries(env));
     context.waitUntil(Promise.allSettled(tasks));
   },
 };
+
+async function cleanupNewsletterDrafts(env) {
+  if (!env.DB) return;
+  try {
+    await env.DB.prepare(`DELETE FROM newsletter_signup_drafts WHERE expires_at <= ?`).bind(nowIso()).run();
+  } catch { /* A later scheduled run retries expired draft cleanup. */ }
+}
 
 export default memberWorker;
 

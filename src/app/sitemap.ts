@@ -48,6 +48,7 @@ const MEERTALIG: {
   { pad: "/viswinkel-voorschoten", prioriteit: 0.8, frequentie: "monthly" as const },
   { pad: "/viswinkel-leiden", prioriteit: 0.8, frequentie: "monthly" as const },
   { pad: "/studentenkorting", prioriteit: 0.6, frequentie: "monthly" as const },
+  { pad: "/aanbiedingen", prioriteit: 0.6, frequentie: "monthly" as const },
   { pad: "/marktkraam-leiden", prioriteit: 0.7, frequentie: "monthly" as const },
   { pad: "/too-good-to-go", prioriteit: 0.5, frequentie: "monthly" as const },
 ];
