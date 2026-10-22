@@ -2,7 +2,7 @@
 
 > Family fishmonger in Leiden, Netherlands, founded in 1938. Fresh and smoked fish, kibbeling, herring, seafood platters and personal advice. This file is a factual guide to our public website, not a stock feed or a guarantee of search inclusion.
 
-Updated: 2026-10-19
+Updated: 2026-10-22
 Canonical website: https://www.schaapsvishandel.nl
 Languages: Dutch (nl), English (en), German (de)
 WhatsApp: +31 6 2481 1678
@@ -18,15 +18,15 @@ WhatsApp: +31 6 2481 1678
 - [Fischstand Voorschoten](https://www.schaapsvishandel.nl/de/viswinkel-voorschoten)
 
 ## Products and ordering
-Only seafood platters can be assembled and ordered online on this website. Other fish products are informational catalogue entries: customers can ask via WhatsApp about availability, quantities and price. Prices are not described as daily prices; agree the price with the shop before confirming a request. Kibbeling is made from pollock and served with ravigote sauce. Lekkerbek is made from hake.
-Platter photos are serving suggestions, not a promise of identical contents or size. Contents, portions and final price depend on the agreed preferences and budget.
+Seafood platters are arranged with us by WhatsApp, not ordered or paid for online. We think along with customers about their preferences and occasion; the average guideline is around €17.50 per person. Premium fish or extra requests can affect the price, which we agree in advance. Other fish products are catalogue entries: ask us via WhatsApp about availability, quantity and price. We do not use day prices. Kibbeling is made from pollock and served with ravigote sauce. Lekkerbek is made from hake.
+The platter images show inspiration for a seafood platter. Discuss the preferred contents and occasion with us by WhatsApp.
 Too Good To Go surprise bags are reserved and paid for in the separate Too Good To Go app.
 - [Seafood platters](https://www.schaapsvishandel.nl/en/visschalen)
 - [Fish catalogue](https://www.schaapsvishandel.nl/en/assortiment)
 - [Contact](https://www.schaapsvishandel.nl/en/contact)
 
 ## Certifications
-Our Dutch brown shrimp are MSC-certified. VÅRLAKS salmon comes from northern Norway. Ask about the certification of the specific current delivery. Organic, ASC and MSC describe different standards; do not assume all products carry the same certification.
+Our Dutch brown shrimp are MSC-certified. VÅRLAKS salmon comes from northern Norway and is described by the supplier as traceable and responsibly farmed. Check the specific label on the product currently in the shop before assigning a certification. Organic, ASC, GlobalG.A.P. and MSC describe different standards; do not assume all products carry the same certification.
 - [Organic fish and certifications](https://www.schaapsvishandel.nl/en/biologische-vis)
 - [VÅRLAKS salmon](https://www.schaapsvishandel.nl/en/varlaks)
 
@@ -40,7 +40,7 @@ Recipes and blog articles are fully available in Dutch, English and German. Cook
 - [Fish calendar](https://www.schaapsvishandel.nl/en/viskalender)
 
 ## Images and editorial pages
-Product and recipe images are illustrative of the named fish or finished dish. Availability, size, cut, garnish and presentation can differ from a particular item in the shop. Do not infer product origin or certification from a photograph. Prefer the page text and ask the fishmonger to verify current stock and product details.
+Product and recipe images identify the named fish or show a serving idea for the named dish. Do not infer product origin or certification from a photograph. Prefer the page text and ask the fishmonger to verify current stock and product details.
 - [Fish assortment and product information](https://www.schaapsvishandel.nl/en/assortiment)
 - [Fish recipes](https://www.schaapsvishandel.nl/en/recepten)
 - [Fish and sustainability certifications](https://www.schaapsvishandel.nl/en/biologische-vis)
@@ -50,4 +50,5 @@ Product and recipe images are illustrative of the named fish or finished dish. A
 - [Robots policy](https://www.schaapsvishandel.nl/robots.txt)
 - [Facebook](https://www.facebook.com/schaapsvishandel/)
 - [Instagram](https://www.instagram.com/schaapsvishandel/)
+
 
