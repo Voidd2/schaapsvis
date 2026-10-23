@@ -297,21 +297,37 @@ async function adminCustomers(request, env) {
   const admin = await requireAdmin(request, env);
   if (!admin) return json({ error: "forbidden" }, 403);
   const url = new URL(request.url);
-  const search = String(url.searchParams.get("q") || "").trim().slice(0, 80);
-  const escaped = search.replace(/[\\%_]/g, "\\$&");
-  const pattern = `%${escaped}%`;
-  const rows = await env.DB.prepare(`
-    SELECT u.id, u.full_name, u.email, u.email_verified_at, u.account_status, u.created_at,
+  const cursorValue = String(url.searchParams.get("cursor") || "");
+  let cursor = null;
+  if (cursorValue) {
+    if (cursorValue.length > 500) return json({ error: "invalid_cursor" }, 400);
+    try {
+      const decoded = JSON.parse(decoder.decode(fromBase64url(cursorValue)));
+      if (typeof decoded?.createdAt !== "string" || decoded.createdAt.length > 40 || typeof decoded?.id !== "string" || decoded.id.length > 128) {
+        return json({ error: "invalid_cursor" }, 400);
+      }
+      cursor = decoded;
+    } catch {
+      return json({ error: "invalid_cursor" }, 400);
+    }
+  }
+  const result = await env.DB.prepare(`
+    SELECT u.id, u.full_name, u.email, u.email_verified_at IS NOT NULL AS email_verified, u.account_status, u.created_at,
       COALESCE(n.status, 'not-subscribed') AS newsletter_status,
       (SELECT p.status FROM student_passes p WHERE p.user_id = u.id ORDER BY p.issued_at DESC LIMIT 1) AS student_pass_status
     FROM users u
     LEFT JOIN newsletter_subscriptions n ON n.email = u.email
     WHERE u.account_status IN ('active', 'locked')
-      AND (? = '' OR u.email LIKE ? ESCAPE '\\' OR u.full_name LIKE ? ESCAPE '\\')
-    ORDER BY u.created_at DESC
-    LIMIT 100
-  `).bind(search, pattern, pattern).all();
-  return json({ customers: rows.results || [], hasMore: (rows.results || []).length === 100 });
+      AND (? IS NULL OR u.created_at < ? OR (u.created_at = ? AND u.id < ?))
+    ORDER BY u.created_at DESC, u.id DESC
+    LIMIT 101
+  `).bind(cursor?.createdAt ?? null, cursor?.createdAt ?? null, cursor?.createdAt ?? null, cursor?.id ?? "").all();
+  const rows = result.results || [];
+  const hasMore = rows.length > 100;
+  const customers = rows.slice(0, 100);
+  const last = customers.at(-1);
+  const nextCursor = hasMore && last ? base64url(encoder.encode(JSON.stringify({ createdAt: last.created_at, id: last.id }))) : null;
+  return json({ customers, hasMore, nextCursor });
 }
 
 async function adminCustomerStatus(request, env, customerId) {
