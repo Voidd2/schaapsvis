@@ -14,6 +14,12 @@ for(const l of locales){
  for(const b of blogs)try{const t=translatedBlogs.localizeBlog(b,l);for(const slug of b.gerelateerdeRecepten??[])check(recipes.some(r=>r.slug===slug),`Missing blog recipe ${b.slug}: ${slug}`);pages.push({path:`/${l}/blog/${b.slug}`,title:t.title,texts:[t.excerpt,...t.secties.flatMap(s=>[s.kop,...s.alineas]),...(t.vragen??[]).flatMap(q=>[q.v,q.a])].filter(Boolean),schema:'Article'});}catch(e){errors.push(e.message);}
  const months=load('calendar-localization').localizedCalendar(l);check(months.length===12,`Calendar ${l}`);pages.push({path:`/${l}/viskalender`,texts:months.flatMap(m=>[m.naam,m.tekst,m.hoogtepunt,...m.vis.map(v=>v.naam)])});
  for(const kind of ['viswinkel-leiden','marktkraam-leiden','too-good-to-go']){const c=load('local-pages-copy').localPageCopy(kind,l);pages.push({path:`/${l}/${kind}`,title:c.title,texts:[c.intro,c.heading,...c.paragraphs,...c.questions.flatMap(q=>[q.v,q.a])]});}
+ const customerAccount={
+  nl:{title:'Een klantaccount komt eraan.',texts:['We bereiden een klantaccount voor waarmee u later bestellingen, bezorging en spaarpunten kunt beheren. Inloggen en registreren zijn nog niet beschikbaar; we activeren dit pas als de accountservice en opslag goed zijn ingericht.','Bekijk ons assortiment','Student? Naar het studentenaccount →']},
+  en:{title:'A customer account is coming.',texts:['We are preparing a customer account where you can manage orders, delivery and loyalty points in the future. Sign-in and registration are not available yet; we will enable them only after the account service and storage are properly configured.','Explore our range','Student? Go to the student account →']},
+  de:{title:'Ein Kundenkonto kommt bald.',texts:['Wir bereiten ein Kundenkonto vor, mit dem Sie später Bestellungen, Lieferung und Treuepunkte verwalten können. Anmeldung und Registrierung sind noch nicht verfügbar. Wir schalten sie erst frei, wenn Kontodienst und Speicher sicher eingerichtet sind.','Sortiment ansehen','Student? Zum Studentenkonto →']},
+ }[l];
+ pages.push({path:`/${l}/account/klant`,title:customerAccount.title,texts:customerAccount.texts});
 }
 // Every message key must exist in all languages; placeholders must match.
 const messages=Object.fromEntries(locales.map(l=>[l,JSON.parse(fs.readFileSync(`src/messages/${l}.json`,'utf8'))]));

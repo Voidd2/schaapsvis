@@ -44,7 +44,8 @@ export function Header() {
     { href: p("/studentenkorting"), label: locale === "de" ? "Studentenrabatt" : locale === "en" ? "Student discount" : "Studentenkorting" },
     { href: p("/recepten"), label: t("recepten") },
     { href: p("/bezoek-ons"), label: t("locaties") },
-    { href: p("/account"), label: locale === "de" ? "Konto" : locale === "en" ? "Account" : "Account" },
+    { href: p("/account"), label: locale === "de" ? "Studentenkonto" : locale === "en" ? "Student account" : "Studentenaccount" },
+    { href: p("/account/klant"), label: locale === "de" ? "Kundenkonto" : locale === "en" ? "Customer account" : "Klantaccount" },
   ];
 
   const isActief = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
@@ -112,7 +113,7 @@ export function Header() {
             </span>
           </Link>
 
-          <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="hidden xl:grid grid-cols-4 items-center justify-items-end gap-x-4 gap-y-2 text-[0.82rem]">
+          <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="hidden xl:grid grid-cols-5 items-center justify-items-end gap-x-4 gap-y-2 text-[0.82rem]">
             {links.map(({ href, label }) => (
               <Link
                 key={href}
