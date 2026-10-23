@@ -57,18 +57,9 @@
     "assortimentIntro": "Browse our seafood barbecue packs, gourmet selections, skewers and fish parcels. Discuss your choice directly with us on WhatsApp.",
     "faqHeading": "Questions about seafood for barbecue and gourmet",
     "faq": [
-      {
-        "v": "How do I enquire about a barbecue pack or gourmet selection?",
-        "a": "Choose a product on this page and tap its WhatsApp button. We will discuss your choice and confirm availability, contents and price before preparing anything."
-      },
-      {
-        "v": "Can I order individual seafood skewers?",
-        "a": "Yes. The selection includes salmon, tuna and prawn skewers, among other options. A salmon skewer costs €4 each. Message us on WhatsApp with your choice and we will discuss the options."
-      },
-      {
-        "v": "Can I customise my selection?",
-        "a": "Tell us what you have in mind on WhatsApp. We will discuss what combination is possible and agree the contents and price with you in advance."
-      }
+      { "v": "How do I enquire about a barbecue pack or gourmet selection?", "a": "Choose a product on this page and tap its WhatsApp button. We will discuss your choice and confirm availability, contents and price before preparing anything." },
+      { "v": "Can I order individual seafood skewers?", "a": "Yes. The selection includes salmon, tuna and prawn skewers, among other options. A salmon skewer costs €4 each. Message us on WhatsApp with your choice and we will discuss the options." },
+      { "v": "Can I customise my selection?", "a": "Tell us what you have in mind on WhatsApp. We will discuss what combination is possible and agree the contents and price with you in advance." }
     ],
     "slotTitle": "Let’s choose what suits your table",
     "slotText": "Tell us what the occasion is and which products appeal to you. We will discuss the options on WhatsApp and agree the selection and price with you in advance."
@@ -279,7 +270,7 @@
     "kop": "Fresh fish, chosen with care. Since 1938.",
     "inleiding": "For four generations, we have helped people in Leiden choose good fish and get honest advice. Gerrit Schaap started in 1938; today Aldert is here to help. Visit our fish shop on Herenstraat, find us at the Leiden markets or stop by Hoogvliet in Voorschoten on Fridays.",
     "knopBestellen": "Order",
-    "knopVisschaal": "View seafood platters",
+    "knopVisschaal": "Build a platter",
     "feit1Kop": "Delivery",
     "feit1Tekst": "{dagen}, in five municipalities",
     "feit2Kop": "Collection",
@@ -357,7 +348,7 @@
     "opAanvraag": "Price on request",
     "telefoonLabel": "Phone",
     "sinds1938": "Since 1938",
-    "slotTitel": "Visit us — or browse our seafood platters",
+    "slotTitel": "Visit us — or create a seafood platter",
     "slotTekst": "Please arrange seafood platters with us via WhatsApp. Looking for other fish? Send us a WhatsApp message to discuss the options.",
     "labelGeneraties": "Generations",
     "labelWinkel": "Shop",
@@ -374,9 +365,9 @@
     "watTekst": "Two things, and deliberately no more. Fresh fish from the auction, prepared however you like it: whole, filleted or in steaks. And seafood platters, from a small one for drinks to a full Christmas platter. Fried fish stays in the shop — kibbeling in a box for twenty minutes simply is not good any more, and then we would rather not.",
     "hoeKop": "How it works",
     "stap1Kop": "You order",
-    "stap1Tekst": "Choose delivery or collection and complete your order by {tijd} the day before. Please request seafood platters directly on WhatsApp.",
+    "stap1Tekst": "Create your seafood platter and choose delivery or collection. Order before {tijd} the day before. Ask us on WhatsApp about other products.",
     "stap2Kop": "We call you",
-    "stap2Tekst": "Please request seafood platters via WhatsApp; we will discuss the selection and confirm the price in advance. Feel free to ask us about availability and prices for other products.",
+    "stap2Tekst": "You see the indicative price of your platter and extras. We confirm availability and the final amount before preparing it.",
     "stap3Kop": "We drive out",
     "stap3Tekst": "Packed cold, brought by someone from the shop, within the time slot you picked.",
     "kostenKop": "Delivery charges and conditions",
@@ -401,7 +392,7 @@
     "betalenBinnenkort": "Coming soon: iDEAL, credit card, Apple Pay and Google Pay",
     "faqKop": "Frequently asked questions about delivery",
     "ctaKop": "Fancy some fish?",
-    "ctaTekst": "Browse our seafood platters and enquire about your selection on WhatsApp. Place delivery orders by {tijd} the day before.",
+    "ctaTekst": "Order your platter before {tijd} the day before. Ask us on WhatsApp about other products.",
     "plaatsKop": "Fresh fish delivery in {plaats}",
     "plaatsEyebrow": "Delivery area",
     "plaatsWijkenKop": "Which parts of {plaats} we cover",
@@ -410,7 +401,7 @@
     "plaatsRijtijd": "Drive time from the Herenstraat: {tijd}.",
     "plaatsAndere": "We also deliver in",
     "plaatsCtaKop": "Ordering for {plaats}",
-    "plaatsCtaTekst": "Browse our seafood platters and enquire about your selection on WhatsApp. Order by {tijd} the day before for delivery on {dagen}. Ask us on WhatsApp about other products.",
+    "plaatsCtaTekst": "Create your seafood platter. Order before {tijd} the day before for delivery on {dagen}. Ask us on WhatsApp about other products.",
     "faq": [
       {
         "v": "Do you deliver in my area?",
@@ -430,7 +421,7 @@
       },
       {
         "v": "How do I know the price if fish is sold by weight?",
-        "a": "Please enquire about seafood platters via WhatsApp. We will help with the selection and confirm the price in advance. Prices for our regular products are usually fixed; feel free to ask us about any item."
+        "a": "Your platter shows an indicative price for the selected platter and extras. We confirm availability and the final amount. Ask us on WhatsApp about other products."
       },
       {
         "v": "How can I pay?",
@@ -473,7 +464,7 @@
     "levertijdKop": "Order in good time",
     "levertijdTekst": "We like a few days' notice for a platter. Christmas and New Year are busy, so order well ahead then.",
     "allergieKop": "Allergies",
-    "allergieTekst": "On our weekly gluten-free day, we guarantee gluten-free preparation of kibbeling and fried prawns for people with coeliac disease. Contact us in advance to confirm the next date and discuss your order.",
+    "allergieTekst": "We also prepare gluten-free fish dishes for people with coeliac disease on a designated day. Tell us your requirements in advance; we confirm the safe preparation and date with you personally.",
     "faqKop": "Frequently asked questions about platters",
     "faq": [
       {
@@ -494,7 +485,7 @@
       },
       {
         "v": "Can you allow for an allergy?",
-        "a": "On our weekly gluten-free day, we guarantee gluten-free preparation of kibbeling and fried prawns for people with coeliac disease. Contact us in advance to confirm the next date and discuss your order."
+        "a": "Yes. We have experience preparing gluten-free fish dishes for people with coeliac disease. Discuss your needs with us in advance so we can confirm the preparation day and procedure."
       },
       {
         "v": "Can a platter be delivered?",
@@ -509,7 +500,7 @@
     "perSchaal": "per person",
     "stap1": "Step 1",
     "stap2": "Step 2",
-    "schaalKop": "View seafood platters",
+    "schaalKop": "Seafood platters for your occasion",
     "schaalUitleg": "Looking for a seafood platter in Leiden for a birthday, drinks, reception or company event? Browse the photos and choose what appeals to you. We’ll help you choose the fish, portions and selection for your occasion. We charge an average of around €17.50 per person. Extras or premium fish may increase the price; we’ll agree that with you in advance on WhatsApp.",
     "fotoVoorbeeld": "Ideas for your seafood platter",
     "voorPersonen": "For {van} to {tot} people",
@@ -527,8 +518,8 @@
   },
   "bestel": {
     "eyebrow": "Order",
-    "kop": "Complete your order",
-    "inleiding": "Check your order, enter your details and choose delivery or collection. Please request seafood platters directly on WhatsApp.",
+    "kop": "Order your seafood platter",
+    "inleiding": "Check your platter, enter your details and choose delivery or collection. Contact us to discuss orders for other fish products.",
     "stapProduct": "Your order",
     "stapLevering": "Delivery or collection",
     "stapGegevens": "Your details",
@@ -659,7 +650,7 @@
     "openLabel": "Open basket — {aantal} in the basket",
     "kop": "Your order",
     "sluiten": "Close",
-    "leeg": "Your shopping basket is empty. You can request seafood platters directly on WhatsApp.",
+    "leeg": "No platter selected yet. Create your seafood platter to continue.",
     "kopSchaal": "Seafood platter",
     "kopVerseVis": "Fresh fish",
     "schaalAanpassen": "Change the platter",
@@ -677,3 +668,5 @@
     "gratisWeegvis": "Fresh fish is settled by weight. If your order comes to more than {bedrag}, delivery is free — we agree the price with you in advance."
   }
 }
+
+
