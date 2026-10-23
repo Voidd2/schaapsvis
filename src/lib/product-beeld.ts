@@ -320,7 +320,7 @@ const PRODUCT_BEELDEN: Record<string, Pick<ProductPhoto, "src" | "alt" | "credit
   "bot": { src: "/images/editorial/bot-serveervoorbeeld.webp", alt: "Bot (Platichthys flesus) op ijs — voorbeeldfoto", caption: "Bot (Platichthys flesus)" },
   "wijtingfilet": { src: "/images/editorial/wijtingfilet-serveervoorbeeld.webp", alt: "Verse wijtingfilets op ijs — voorbeeldfoto", caption: "Voorbeeldfoto; wijtingfilet is op aanvraag beschikbaar." },
   "victoriabaars": { src: "/images/editorial/victoriabaars-serveervoorbeeld.webp", alt: "Verse filets van Victoriabaars op ijs — voorbeeldfoto", caption: "Victoriabaarsfilet" },
-  "gerookte-zalmmoot": { src: "/images/editorial/gerookte-zalmmoot-eigen-product.png", alt: "Warmgerookte zalmmoot van Schaap’s Vishandel", caption: "Moot warmgerookte zalmfilet." },
+  "gerookte-zalmmoot": { src: "/images/editorial/warm-gerookte-zalmmoten-eigen-product-ai.webp", alt: "Warmgerookte zalmmoten van Schaap’s Vishandel", caption: "Warmgerookte zalmmoten van Schaap’s Vishandel." },
   "gerookte-sprotfilet": { src: "/images/editorial/gerookte-sprotfilet-serveervoorbeeld.webp", alt: "Kleine gerookte sprotfilets op een schaal — serveervoorbeeld", caption: "Gerookte sprotfilet" },
   "gerookte-heilbot": { src: "/images/editorial/gerookte-heilbot-serveervoorbeeld.webp", alt: "Plakjes gerookte heilbot met dille en citroen — serveersuggestie", caption: "Gerookte heilbot met dille en citroen" },
   "gerookte-forel-heel": { src: "/images/editorial/gerookte-forel-heel-serveervoorbeeld.webp", alt: "Hele warmgerookte forel met citroen en dille — serveersuggestie", caption: "Warmgerookte forel met citroen en dille" },
@@ -357,7 +357,7 @@ const ALTS:Record<string,readonly[string,string,string]>={
 "bot":["Bot (Platichthys flesus) op ijs — voorbeeldfoto","European flounder (Platichthys flesus) on ice — illustrative photo","Flunder (Platichthys flesus) auf Eis — Beispielfoto"],
 "wijtingfilet":["Verse wijtingfilets op ijs — voorbeeldfoto","Fresh whiting fillets on ice — illustrative photo","Frische Wittlingsfilets auf Eis — Beispielfoto"],
 "victoriabaars":["Verse Victoriabaarsfilets op ijs — voorbeeldfoto","Fresh Nile perch fillets on ice — illustrative photo","Frische Nilbarschfilets auf Eis — Beispielfoto"],
-"gerookte-zalmmoot":["Warmgerookte zalmmoot op een schaal — voorbeeldfoto","Warm-smoked salmon steak on a platter — illustrative photo","Heißgeräuchertes Lachssteak auf einer Platte — Beispielfoto"],
+"gerookte-zalmmoot":["Warmgerookte zalmmoten van Schaap’s Vishandel","Warm-smoked salmon portions from Schaap’s Fishmonger","Warmgeräucherte Lachsportionen von Schaap’s Fischgeschäft"],
 "gerookte-sprotfilet":["Kleine gerookte sprotfilets op een schaal — serveersuggestie","Small smoked sprat fillets on a dish — serving suggestion","Kleine geräucherte Sprottenfilets auf einer Schale — Serviervorschlag"],
 "gerookte-kipper":["Gerookte kippers op een bord met brood — serveervoorbeeld","Smoked kippers served with bread — serving suggestion","Geräucherte Kipper mit Brot — Serviervorschlag"],
 "gebakken-mosselen":["Gebakken mosselen met citroen en peterselie — serveervoorbeeld","Fried mussels with lemon and parsley — serving suggestion","Gebratene Miesmuscheln mit Zitrone und Petersilie — Serviervorschlag"],
@@ -406,7 +406,7 @@ export function productPhoto(product:Product,locale="nl"):ProductPhoto|null{
    bot:{nl:"Bot (Platichthys flesus).",en:"European flounder (Platichthys flesus).",de:"Flunder (Platichthys flesus)."},
    wijtingfilet:{nl:"Voorbeeldfoto; wijtingfilet is op aanvraag beschikbaar.",en:"Illustrative photo; whiting fillets are available on request.",de:"Beispielfoto; Wittlingsfilet ist auf Anfrage erhältlich."},
    victoriabaars:{nl:"Victoriabaarsfilet.",en:"Nile perch fillet.",de:"Nilbarschfilet."},
-   "gerookte-zalmmoot":{nl:"Moot warmgerookte zalmfilet.",en:"A portion of warm-smoked salmon fillet.",de:"Ein Stück heißgeräuchertes Lachsfilet."},
+   "gerookte-zalmmoot":{nl:"Warmgerookte zalmmoten van Schaap’s Vishandel.",en:"Warm-smoked salmon portions from Schaap’s Fishmonger.",de:"Warmgeräucherte Lachsportionen von Schaap’s Fischgeschäft."},
    "gerookte-sprotfilet":{nl:"Gerookte sprotfilet.",en:"Smoked sprat fillets.",de:"Geräucherte Sprottenfilets."},
   };
   return {...inHouseImage,alt:accessiblePhotoAlt(translatedAlt?.[localeIndex]||inHouseImage.alt),caption:captions[product.slug][l],editorial:true,whole:false};
