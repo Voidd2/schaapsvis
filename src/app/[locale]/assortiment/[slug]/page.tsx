@@ -73,7 +73,7 @@ export default async function ProductDetailPage({params}: Props) {
         <h1 className="text-3xl md:text-4xl leading-tight mb-4" style={{color:"var(--navy-dark)"}}>{product.naam}</h1>
         <div className="mb-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
           <p><span className="kapitaal mr-2">{c.available}</span><strong>{availability.label}</strong></p>
-          <p><span className="kapitaal mr-2">{c.price}</span><strong>{prijs ? `${formatPrijs(prijs,lang)} — ${c.guidePrice}` : c.dailyPrice}</strong></p>
+          {(prijs || !availability.unavailable) && <p><span className="kapitaal mr-2">{c.price}</span><strong>{prijs ? `${formatPrijs(prijs,lang)} — ${c.guidePrice}` : c.dailyPrice}</strong></p>}
         </div>
         <p className="text-lg leading-relaxed">{product.desc}</p>
         <p className="mt-5 pl-5" style={{borderLeft:`2px solid ${availability.unavailable?"#be123c":"var(--navy)"}`}}>{availability.note}</p>
