@@ -46,6 +46,8 @@ export function Header() {
     { href: p("/bezoek-ons"), label: t("locaties") },
     { href: p("/account"), label: locale === "de" ? "Studentenkonto" : locale === "en" ? "Student account" : "Studentenaccount" },
     { href: p("/account/klant"), label: locale === "de" ? "Kundenkonto" : locale === "en" ? "Customer account" : "Klantaccount" },
+    { href: p("/ons-verhaal"), label: t("verhaal") },
+    { href: p("/contact"), label: t("contact") },
   ];
 
   const isActief = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
@@ -113,7 +115,7 @@ export function Header() {
             </span>
           </Link>
 
-          <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="hidden xl:grid grid-cols-5 items-center justify-items-end gap-x-4 gap-y-2 text-[0.82rem]">
+          <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="hidden xl:grid grid-cols-6 items-center justify-items-end gap-x-3 gap-y-2 text-[0.76rem]">
             {links.map(({ href, label }) => (
               <Link
                 key={href}
@@ -178,21 +180,6 @@ export function Header() {
                     color: "var(--navy)",
                     fontFamily: "var(--font-display)",
                   }}
-                >
-                  {label}
-                </Link>
-              ))}
-
-              {[
-                { href: p("/ons-verhaal"), label: t("verhaal") },
-                { href: p("/contact"), label: t("contact") },
-              ].map(({ href, label }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  onClick={() => setOpen(false)}
-                  className="block py-2.5 text-[0.95rem]"
-                  style={{ color: "var(--charcoal)" }}
                 >
                   {label}
                 </Link>
