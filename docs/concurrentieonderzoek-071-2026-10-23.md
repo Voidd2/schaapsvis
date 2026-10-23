@@ -78,7 +78,7 @@ Eigen websites zijn waar mogelijk inhoudelijk bekeken. Zaken waarvoor geen betro
 - Van de 30 zaken heeft niet iedere zaak een verifieerbare eigen website; die entries zijn gemarkeerd als directory-only en niet als website-audit.
 - Dit is geen actuele ranking-/zoekvolumeanalyse. Search Console is nog niet gekoppeld en er zijn geen betrouwbare rankdata gebruikt.
 - Echte foto’s van winkel, toonbank, team en kramen zijn toegezegd maar nog niet aangeleverd. De laatste locatiegerichte visuele stap wacht daarop.
-- De site blijft achter de wachtwoordbeveiliging. De recente GitHub-merge heeft succesvolle Vercel-statussen, maar de publieke domeinroute toont nog de lock-/“Binnenkort online”-pagina; de live inhoud kon daarom niet visueel worden bevestigd.
+- De site blijft achter de wachtwoordbeveiliging. De merge staat op GitHub `main` en de repositorychecks slaagden; de Vercel-buildstatus werd echter geblokkeerd door een build-rate-limit. Een succesvolle live deployment is dus niet bevestigd. De publieke domeinroute toont nog de lock-/“Binnenkort online”-pagina; de live inhoud kon daarom niet visueel worden bevestigd.
 
 ## Bronnen
 
