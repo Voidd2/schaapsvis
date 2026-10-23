@@ -30,7 +30,7 @@ on:
       - ".github/workflows/build-validation.yml"
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build:
@@ -38,24 +38,10 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.ref || github.ref_name }}
-          token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-      - run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
       - run: npm ci
       - run: npm run check:content
       - run: npm run build
-      - name: Commit npm-generated lockfile when needed
-        if: github.event_name == 'pull_request'
-        run: |
-          if ! git diff --quiet -- package-lock.json; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add package-lock.json
-            git commit -m "Sync npm package lock"
-            git push origin "HEAD:${GITHUB_HEAD_REF}"
-          fi
