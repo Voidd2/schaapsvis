@@ -279,7 +279,7 @@
     "kop": "Frischer Fisch, mit Sorgfalt ausgewählt. Seit 1938.",
     "inleiding": "Seit vier Generationen helfen wir den Menschen in Leiden mit gutem Fisch und ehrlicher Beratung. Gerrit Schaap fing 1938 an; heute ist Aldert für Sie da. Besuchen Sie unser Fischgeschäft in der Herenstraat, treffen Sie uns auf dem Leidener Markt oder kommen Sie freitags bei Hoogvliet in Voorschoten vorbei.",
     "knopBestellen": "Bestellen",
-    "knopVisschaal": "Fischplatte zusammenstellen",
+    "knopVisschaal": "Fischplatten ansehen",
     "feit1Kop": "Lieferung",
     "feit1Tekst": "{dagen}, in fünf Gemeinden",
     "feit2Kop": "Abholung",
@@ -401,7 +401,7 @@
     "betalenBinnenkort": "Demnächst: iDEAL, Kreditkarte, Apple Pay und Google Pay",
     "faqKop": "Häufige Fragen zur Lieferung",
     "ctaKop": "Lust auf Fisch?",
-    "ctaTekst": "Bestellen Sie Ihre Fischplatte bis {tijd} am Vortag. Fragen zu anderen Produkten besprechen wir per WhatsApp.",
+    "ctaTekst": "Sehen Sie sich unsere Fischplatten an und fragen Sie Ihre Auswahl per WhatsApp an. Bestellen Sie für die Lieferung bis {tijd} am Vortag.",
     "plaatsKop": "Frischen Fisch liefern lassen in {plaats}",
     "plaatsEyebrow": "Liefergebiet",
     "plaatsWijkenKop": "In welchen Vierteln von {plaats} wir unterwegs sind",
@@ -410,7 +410,7 @@
     "plaatsRijtijd": "Fahrzeit ab der Herenstraat: {tijd}.",
     "plaatsAndere": "Wir liefern außerdem nach",
     "plaatsCtaKop": "Bestellen für {plaats}",
-    "plaatsCtaTekst": "Stellen Sie Ihre Fischplatte zusammen. Bestellen Sie bis {tijd} am Vortag für Lieferung am {dagen}. Für andere Produkte schreiben Sie uns per WhatsApp.",
+    "plaatsCtaTekst": "Sehen Sie sich unsere Fischplatten an und fragen Sie Ihre Auswahl per WhatsApp an. Bestellen Sie bis {tijd} am Vortag für die Lieferung am {dagen}. Fragen Sie uns per WhatsApp zu anderen Produkten.",
     "faq": [
       {
         "v": "Liefern Sie auch zu mir?",
