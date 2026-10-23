@@ -55,14 +55,14 @@ Eigen websites zijn waar mogelijk inhoudelijk bekeken. Zaken waarvoor geen betro
 
 | Prioriteit | Aanpassing | Waarom | Klaar |
 |---|---|---|:---:|
-| Nu | Maak de mobiele assortimentspagina compacter: kernkeuzes eerst, categorieën daarna; haal dubbele zalm en niet-vaste favorieten uit de selectie. | De gedeelde mobiele screenshots laten veel introductieruimte vóór het kiezen zien. | [ ] |
-| Nu | Productdetailvolgorde: foto → concrete vis/productuitleg → voedingswaarden (alleen betrouwbare gegevens) → passende recepten → WhatsApp-vraag. | Duidelijke inhoudsvolgorde en betere product-receptrelatie. | [ ] |
+| Nu | Maak de mobiele assortimentspagina compacter: zoeken/categorieën vóór de resultaten en geen dubbele zalm in de favorieten. | De gedeelde mobiele screenshots lieten veel introductieruimte vóór het kiezen zien. | [x] |
+| Nu | Productdetailvolgorde: foto → concrete vis/productuitleg → voedingswaarden (alleen betrouwbare gegevens) → passende recepten → WhatsApp-vraag. | Duidelijke inhoudsvolgorde en betere product-receptrelatie. | [x] |
 | Nu | Voeg echte eigen foto’s toe van winkel, toonbank, team en marktkramen; begin met de belangrijkste producten en recepten. | Onderscheidend en geloofwaardig; geen concurrentfoto’s of AI-locaties voorstellen als echt. | [ ] |
-| Nu | Gebruik in de footer consequent “Viswinkel Leiden”, “Marktkraam Leiden” en “Marktkraam Voorschoten”. | Maakt de drie bezoekdoelen begrijpelijk. | [ ] |
+| Nu | Gebruik in de footer consequent “Viswinkel Leiden”, “Marktkraam Leiden” en “Marktkraam Voorschoten”. | Maakt de drie bezoekdoelen begrijpelijk. | [x] |
 | Hoog | Maak “Visboer in Voorschoten op vrijdag” concreet: Hoogvliet als herkenningspunt, juiste uren, route, aanbodindicatie en WhatsApp voor actuele voorraad. | Sluit aan op specifieke lokale zoekintentie. Geen “beste/scherpste” claims zonder bewijs. | [ ] |
 | Hoog | Geef “Marktkraam Leiden bij De Waag” eigen uren, kaartlink, herkenningspunt en later een echte kraamfoto. | Bezoekers willen weten waar en wanneer de kraam staat. | [ ] |
-| Hoog | Bundel visschalen en barbecue/gourmet als inspiratiegalerij met duidelijke WhatsApp-route; vermeld gemiddeld circa €17,50 per persoon en bespreek extra’s vooraf. | Prijsverwachting en maatwerk worden helder. | [ ] |
-| Hoog | Geef ieder recept een passende, duidelijke afbeelding, juiste vissoort, mobiel goede uitsnede en link terug naar het product. | Helpt zowel oriënteren als koken. | [ ] |
+| Hoog | Bundel visschalen en barbecue/gourmet als inspiratiegalerij met duidelijke WhatsApp-route; vermeld gemiddeld circa €17,50 per persoon en bespreek extra’s vooraf. | Prijsverwachting en maatwerk worden helder. | [x] |
+| Hoog | Geef ieder recept een passende, duidelijke afbeelding, juiste vissoort, mobiel goede uitsnede en link terug naar het product. | Helpt zowel oriënteren als koken. | [x] |
 | Later | Controleer NL/EN/DE-pagina’s handmatig op tekst, metadata, knoppen, alt-teksten en interne links. | Geautomatiseerde vertaaltests bewijzen niet dat elke tekst natuurlijk en zakelijk juist is. | [ ] |
 | Later | Meet route-, tel-, WhatsApp-, product- en receptkliks pas na correcte analytics- en toestemming-inrichting. | Voorkomt onvolledige of privacygevoelige metingen. | [ ] |
 
@@ -78,7 +78,7 @@ Eigen websites zijn waar mogelijk inhoudelijk bekeken. Zaken waarvoor geen betro
 - Van de 30 zaken heeft niet iedere zaak een verifieerbare eigen website; die entries zijn gemarkeerd als directory-only en niet als website-audit.
 - Dit is geen actuele ranking-/zoekvolumeanalyse. Search Console is nog niet gekoppeld en er zijn geen betrouwbare rankdata gebruikt.
 - Echte foto’s van winkel, toonbank, team en kramen zijn toegezegd maar nog niet aangeleverd. De laatste locatiegerichte visuele stap wacht daarop.
-- De site blijft achter de wachtwoordbeveiliging. Een GitHub-push maakt haar niet automatisch openbaar; Vercel-checks/publicatie zijn een externe stap.
+- De site blijft achter de wachtwoordbeveiliging. De recente GitHub-merge heeft succesvolle Vercel-statussen, maar de publieke domeinroute toont nog de lock-/“Binnenkort online”-pagina; de live inhoud kon daarom niet visueel worden bevestigd.
 
 ## Bronnen
 
