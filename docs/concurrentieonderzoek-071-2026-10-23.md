@@ -62,7 +62,7 @@ Eigen websites zijn waar mogelijk inhoudelijk bekeken. Zaken waarvoor geen betro
 | Hoog | Maak “Visboer in Voorschoten op vrijdag” concreet: Hoogvliet als herkenningspunt, juiste uren, route, aanbodindicatie en WhatsApp voor actuele voorraad. | Sluit aan op specifieke lokale zoekintentie. Geen “beste/scherpste” claims zonder bewijs. | [ ] |
 | Hoog | Geef “Marktkraam Leiden bij De Waag” eigen uren, kaartlink, herkenningspunt en later een echte kraamfoto. | Bezoekers willen weten waar en wanneer de kraam staat. | [ ] |
 | Hoog | Bundel visschalen en barbecue/gourmet als inspiratiegalerij met duidelijke WhatsApp-route; vermeld gemiddeld circa €17,50 per persoon en bespreek extra’s vooraf. | Prijsverwachting en maatwerk worden helder. | [x] |
-| Hoog | Geef ieder recept een passende, duidelijke afbeelding, juiste vissoort, mobiel goede uitsnede en link terug naar het product. | Alle 37 recepten hebben een unieke afbeelding; de visuele controle op juiste afbeelding, uitsnede en productmatch is nog niet per recept handmatig afgerond. | [ ] |
+| Hoog | Geef ieder recept een passende, duidelijke afbeelding, juiste vissoort, mobiel goede uitsnede en link terug naar het product. | Alle 37 recepten zijn visueel gecontroleerd met de 4:3-kaartuitsnede uit de site; de gerechten en titels passen en er is geen duidelijke verkeerde vissoortkoppeling gevonden. Geautomatiseerde product-receptcontroles slagen ook. | [x] |
 | Later | Controleer NL/EN/DE-pagina’s handmatig op tekst, metadata, knoppen, alt-teksten en interne links. | Geautomatiseerde vertaaltests bewijzen niet dat elke tekst natuurlijk en zakelijk juist is. | [ ] |
 | Later | Meet route-, tel-, WhatsApp-, product- en receptkliks pas na correcte analytics- en toestemming-inrichting. | Voorkomt onvolledige of privacygevoelige metingen. | [ ] |
 
@@ -78,7 +78,7 @@ Eigen websites zijn waar mogelijk inhoudelijk bekeken. Zaken waarvoor geen betro
 - Van de 30 zaken heeft niet iedere zaak een verifieerbare eigen website; die entries zijn gemarkeerd als directory-only en niet als website-audit.
 - Dit is geen actuele ranking-/zoekvolumeanalyse. Search Console is nog niet gekoppeld en er zijn geen betrouwbare rankdata gebruikt.
 - Echte foto’s van winkel, toonbank, team en kramen zijn toegezegd maar nog niet aangeleverd. De laatste locatiegerichte visuele stap wacht daarop.
-- De site blijft achter de wachtwoordbeveiliging. De merge staat op GitHub `main` en de repositorychecks slaagden; de Vercel-buildstatus werd echter geblokkeerd door een build-rate-limit. Een succesvolle live deployment is dus niet bevestigd. De publieke domeinroute toont nog de lock-/“Binnenkort online”-pagina; de live inhoud kon daarom niet visueel worden bevestigd.
+- De site blijft achter de wachtwoordbeveiliging. De huidige codewijzigingen staan in een open GitHub-pullrequest; de Vercel-preview slaagde, maar de productiebuild was geblokkeerd door een build-rate-limit. De `.nl`-site draait nog op Vercel terwijl de eigenaar de hosting/domeinmigratie naar Cloudflare voorbereidt. Er zijn geen DNS- of hostinginstellingen aangepast. De publieke domeinroute toont de lock-/“Binnenkort online”-pagina; de live inhoud kon daarom niet visueel worden bevestigd.
 
 ## Bronnen
 
