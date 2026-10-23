@@ -6,11 +6,11 @@ import { aanbiedingVanDeWeek } from "@/lib/aanbieding";
 export function SeizoensBanner({ locale }: { locale: string }) {
   const m = new Date().getMonth();
   const teksten = {
-    nl: { titel: "Uit de winkel", tekst: "Vraag ons naar het assortiment van vandaag.", assortiment: "Bekijk het assortiment", schalen: "Visschaal samenstellen" },
-    en: { titel: "From our fish shop", tekst: "Ask us what is available in the shop today.", assortiment: "Explore the range", schalen: "Create a fish platter" },
-    de: { titel: "Aus unserem Fischgeschäft", tekst: "Fragen Sie uns, was heute im Geschäft erhältlich ist.", assortiment: "Sortiment ansehen", schalen: "Fischplatte zusammenstellen" },
+    nl: { titel: "Uit de winkel", tekst: "Vraag ons naar het assortiment van vandaag.", assortiment: "Bekijk het assortiment", schalen: "Bekijk visschalen" },
+    en: { titel: "From our fish shop", tekst: "Ask us what is available in the shop today.", assortiment: "Explore the range", schalen: "View seafood platters" },
+    de: { titel: "Aus unserem Fischgeschäft", tekst: "Fragen Sie uns, was heute im Geschäft erhältlich ist.", assortiment: "Sortiment ansehen", schalen: "Fischplatten ansehen" },
   }[locale as "nl" | "en" | "de"] ?? {
-    titel: "Uit de winkel", tekst: "Vraag ons naar het assortiment van vandaag.", assortiment: "Bekijk het assortiment", schalen: "Visschaal samenstellen",
+    titel: "Uit de winkel", tekst: "Vraag ons naar het assortiment van vandaag.", assortiment: "Bekijk het assortiment", schalen: "Bekijk visschalen",
   };
   const handmatigAanbod = locale === "nl" ? aanbiedingVanDeWeek : null;
   const titel = handmatigAanbod?.titel ?? teksten.titel;
