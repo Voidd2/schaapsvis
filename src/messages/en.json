@@ -473,7 +473,7 @@
     "levertijdKop": "Order in good time",
     "levertijdTekst": "We like a few days' notice for a platter. Christmas and New Year are busy, so order well ahead then.",
     "allergieKop": "Allergies",
-    "allergieTekst": "One day each week we prepare gluten-free kibbeling and fried prawns for people with coeliac disease. Contact us in advance; we will tell you the next gluten-free day and discuss your order.",
+    "allergieTekst": "On our weekly gluten-free day, we guarantee gluten-free preparation of kibbeling and fried prawns for people with coeliac disease. Contact us in advance to confirm the next date and discuss your order.",
     "faqKop": "Frequently asked questions about platters",
     "faq": [
       {
@@ -494,7 +494,7 @@
       },
       {
         "v": "Can you allow for an allergy?",
-        "a": "One day each week we prepare gluten-free kibbeling and fried prawns for people with coeliac disease. Contact us in advance to ask about the next gluten-free day and discuss your order."
+        "a": "On our weekly gluten-free day, we guarantee gluten-free preparation of kibbeling and fried prawns for people with coeliac disease. Contact us in advance to confirm the next date and discuss your order."
       },
       {
         "v": "Can a platter be delivered?",
