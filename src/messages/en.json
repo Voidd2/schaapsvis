@@ -57,9 +57,18 @@
     "assortimentIntro": "Browse our seafood barbecue packs, gourmet selections, skewers and fish parcels. Discuss your choice directly with us on WhatsApp.",
     "faqHeading": "Questions about seafood for barbecue and gourmet",
     "faq": [
-      { "v": "How do I enquire about a barbecue pack or gourmet selection?", "a": "Choose a product on this page and tap its WhatsApp button. We will discuss your choice and confirm availability, contents and price before preparing anything." },
-      { "v": "Can I order individual seafood skewers?", "a": "Yes. The selection includes salmon, tuna and prawn skewers, among other options. A salmon skewer costs €4 each. Message us on WhatsApp with your choice and we will discuss the options." },
-      { "v": "Can I customise my selection?", "a": "Tell us what you have in mind on WhatsApp. We will discuss what combination is possible and agree the contents and price with you in advance." }
+      {
+        "v": "How do I enquire about a barbecue pack or gourmet selection?",
+        "a": "Choose a product on this page and tap its WhatsApp button. We will discuss your choice and confirm availability, contents and price before preparing anything."
+      },
+      {
+        "v": "Can I order individual seafood skewers?",
+        "a": "Yes. The selection includes salmon, tuna and prawn skewers, among other options. A salmon skewer costs €4 each. Message us on WhatsApp with your choice and we will discuss the options."
+      },
+      {
+        "v": "Can I customise my selection?",
+        "a": "Tell us what you have in mind on WhatsApp. We will discuss what combination is possible and agree the contents and price with you in advance."
+      }
     ],
     "slotTitle": "Let’s choose what suits your table",
     "slotText": "Tell us what the occasion is and which products appeal to you. We will discuss the options on WhatsApp and agree the selection and price with you in advance."
@@ -464,7 +473,7 @@
     "levertijdKop": "Order in good time",
     "levertijdTekst": "We like a few days' notice for a platter. Christmas and New Year are busy, so order well ahead then.",
     "allergieKop": "Allergies",
-    "allergieTekst": "We also prepare gluten-free fish dishes for people with coeliac disease on a designated day. Tell us your requirements in advance; we confirm the safe preparation and date with you personally.",
+    "allergieTekst": "One day each week we prepare gluten-free kibbeling and fried prawns for people with coeliac disease. Contact us in advance; we will tell you the next gluten-free day and discuss your order.",
     "faqKop": "Frequently asked questions about platters",
     "faq": [
       {
@@ -485,7 +494,7 @@
       },
       {
         "v": "Can you allow for an allergy?",
-        "a": "Yes. We have experience preparing gluten-free fish dishes for people with coeliac disease. Discuss your needs with us in advance so we can confirm the preparation day and procedure."
+        "a": "One day each week we prepare gluten-free kibbeling and fried prawns for people with coeliac disease. Contact us in advance to ask about the next gluten-free day and discuss your order."
       },
       {
         "v": "Can a platter be delivered?",
@@ -500,7 +509,7 @@
     "perSchaal": "per person",
     "stap1": "Step 1",
     "stap2": "Step 2",
-    "schaalKop": "Seafood platters for your occasion",
+    "schaalKop": "View seafood platters",
     "schaalUitleg": "Looking for a seafood platter in Leiden for a birthday, drinks, reception or company event? Browse the photos and choose what appeals to you. We’ll help you choose the fish, portions and selection for your occasion. We charge an average of around €17.50 per person. Extras or premium fish may increase the price; we’ll agree that with you in advance on WhatsApp.",
     "fotoVoorbeeld": "Ideas for your seafood platter",
     "voorPersonen": "For {van} to {tot} people",
@@ -668,5 +677,3 @@
     "gratisWeegvis": "Fresh fish is settled by weight. If your order comes to more than {bedrag}, delivery is free — we agree the price with you in advance."
   }
 }
-
-
