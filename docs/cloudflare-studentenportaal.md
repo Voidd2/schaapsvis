@@ -164,6 +164,12 @@ Next.js-productiebuild slaagt en de Vinext/Cloudflare-build slaagt. Dit bewijst
 lokale codepaden en builds, niet de werking van remote D1/R2, e-mailafzender,
 DNS, Klaviyo of een productie-uitrol.
 
+## Terminologiecorrectie 23 oktober 2026
+
+- In de Nederlandse productcopy blijft de door de eigenaar bevestigde visnaam `pollak` staan. De Engelse en Duitse vertaling van kibbeling gebruikt nu `pollack`, niet het Engelse `pollock`; de Europese Commissie noemt voor *Pollachius pollachius* onder meer `Pollack` voor Ierland/Duitsland en `Pollak` in Nederland/België. Er wordt geen Latijnse soort aan het verkochte kibbelingproduct toegeschreven, omdat de eigenaar die niet heeft bevestigd.
+- De productbeschrijving en Engelstalige gebakken-visteksten zijn aangepast. Bron: [EU Fish Names — Pollachius pollachius](https://fish-commercial-names.ec.europa.eu/fish-names/species/pollachius-pollachius_en?fao-code=POL).
+- `scripts/check-content-integrity.mjs` slaagde (67 producten, 37 recepten met bestaande foto's, 508 Nederlandse UI-teksten met Engelse en Duitse sleutels); volledige ESLint slaagde. De vertaalde teksten vragen nog steeds om native-speakerredactie.
+
 ## Lokale voortgang 21 oktober — VÅRLAKS en beheerstatistieken
 
 - De `/[locale]/varlaks`-pagina is opnieuw opgebouwd in NL/EN/DE met leverancierstekst, drie passende beelden, bronlinks naar VÅRLAKS/Freshly Fish/Urk Seafood/PLUS en de VÅRLAKS-folder, plus een route naar product, recept en WhatsApp. Een nieuwe eigen AI-serveersuggestie staat lokaal onder `public/images/editorial/varlaks-zalm-serveersuggestie-ai.png`; VÅRLAKS-beelden blijven lokaal gehost en worden als leveranciersbeeld benoemd.
