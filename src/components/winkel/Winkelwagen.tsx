@@ -15,7 +15,6 @@ import {
 import {
   bewaarMandje,
   bewaarSamenstelling,
-  leesSamenstelling,
   type MandjeRegel,
 } from "@/lib/mandje";
 import { LEGE_SAMENSTELLING, type Samenstelling } from "@/lib/visschaal";
@@ -57,7 +56,7 @@ export function WinkelwagenProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setRegels([]);
-    setSamenstelling(leesSamenstelling());
+    setSamenstelling(LEGE_SAMENSTELLING);
     geladen.current = true;
   }, []);
 
