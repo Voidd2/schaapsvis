@@ -81,7 +81,7 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
             <span className="favorite-number">0{i + 1}</span>
           </Link>
           <div className="favorite-heading"><div><p>{c.categories[categories.indexOf(p.categorie)]}</p><h3><Link href={`/${locale}/assortiment/${p.slug}`}>{p.naam}</Link></h3></div><ArrowUpRight size={22} aria-hidden="true" /></div>
-          <p className="text-sm font-semibold mb-3">{productAvailability(p,locale).label}</p>
+          <div className="text-sm mb-3"><p className="font-semibold">{productAvailability(p,locale).label}</p>{productAvailability(p,locale).note && <p className="mt-1">{productAvailability(p,locale).note}</p>}</div>
           {p.slug === "creuse-oesters" && <a href={bestelContact(locale, p.naam).href} className="collection-whatsapp"><MessageCircle size={16} aria-hidden="true" />{locale === "nl" ? "Grotere bestelling? App ons" : locale === "de" ? "Größere Bestellung? Schreiben Sie uns" : "Larger order? Message us"}</a>}
         </article>;
       })}</div>
