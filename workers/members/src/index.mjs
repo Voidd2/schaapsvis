@@ -293,6 +293,58 @@ async function adminAnalytics(request, env) {
   return json({ since, days, rows: rows.results || [] });
 }
 
+async function adminCustomers(request, env) {
+  const admin = await requireAdmin(request, env);
+  if (!admin) return json({ error: "forbidden" }, 403);
+  const url = new URL(request.url);
+  const search = String(url.searchParams.get("q") || "").trim().slice(0, 80);
+  const escaped = search.replace(/[\\%_]/g, "\\async function createSession(env, userId) {");
+  const pattern = `%${escaped}%`;
+  const rows = await env.DB.prepare(`
+    SELECT u.id, u.full_name, u.email, u.email_verified_at, u.account_status, u.created_at,
+      COALESCE(n.status, 'not-subscribed') AS newsletter_status,
+      (SELECT p.status FROM student_passes p WHERE p.user_id = u.id ORDER BY p.issued_at DESC LIMIT 1) AS student_pass_status
+    FROM users u
+    LEFT JOIN newsletter_subscriptions n ON n.email = u.email
+    WHERE u.account_status IN ('active', 'locked')
+      AND (? = '' OR u.email LIKE ? ESCAPE '\\' OR u.full_name LIKE ? ESCAPE '\\')
+    ORDER BY u.created_at DESC
+    LIMIT 100
+  `).bind(search, pattern, pattern).all();
+  return json({ customers: rows.results || [], hasMore: (rows.results || []).length === 100 });
+}
+
+async function adminCustomerStatus(request, env, customerId) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  const admin = await requireAdmin(request, env);
+  if (!admin) return json({ error: "forbidden" }, 403);
+  const body = await readJson(request);
+  const status = body?.status;
+  if (!["active", "locked"].includes(status)) return json({ error: "invalid_status" }, 400);
+  const customer = await env.DB.prepare(`SELECT id, email, account_status FROM users WHERE id = ? AND account_status IN ('active', 'locked')`).bind(customerId).first();
+  if (!customer) return json({ error: "customer_not_found" }, 404);
+  const adminEmails = String(env.ADMIN_EMAILS || "").split(",").map((email) => email.trim().toLowerCase()).filter(Boolean);
+  if (adminEmails.includes(String(customer.email).toLowerCase())) return json({ error: "administrator_protected" }, 409);
+  if (customer.account_status === status) return json({ ok: true, status, unchanged: true });
+
+  const now = nowIso();
+  const action = status === "locked" ? "account_locked" : "account_restored";
+  const statements = [
+    env.DB.prepare(`UPDATE users SET account_status = ?, updated_at = ? WHERE id = ? AND account_status = ?`)
+      .bind(status, now, customer.id, customer.account_status),
+    env.DB.prepare(`INSERT INTO admin_customer_audit (id, admin_user_id, customer_user_id, action, from_status, to_status, occurred_at)
+      SELECT ?, ?, ?, ?, ?, ?, ? WHERE changes() = 1`)
+      .bind(crypto.randomUUID(), admin.id, customer.id, action, customer.account_status, status, now),
+  ];
+  if (status === "locked") {
+    statements.push(env.DB.prepare(`UPDATE sessions SET revoked_at = ? WHERE user_id = ? AND revoked_at IS NULL`).bind(now, customer.id));
+  }
+  const result = await env.DB.batch(statements);
+  if (Number(result?.[0]?.meta?.changes || 0) !== 1) return json({ error: "customer_changed" }, 409);
+  if (Number(result?.[1]?.meta?.changes || 0) !== 1) return json({ error: "audit_failed" }, 503);
+  return json({ ok: true, status });
+}
+
 async function createSession(env, userId) {
   const token = await randomToken();
   const created = nowIso();
@@ -1066,6 +1118,9 @@ const memberWorker = {
     if (path === "/api/members/student-application" && method === "POST") return submitStudentApplication(request, env);
     if (path === "/api/members/admin/student-applications" && method === "GET") return adminQueue(request, env);
     if (path === "/api/members/admin/analytics" && method === "GET") return adminAnalytics(request, env);
+    if (path === "/api/members/admin/customers" && method === "GET") return adminCustomers(request, env);
+    const customerStatusMatch = path.match(/^\/api\/members\/admin\/customers\/([0-9a-f-]{36})\/status$/i);
+    if (customerStatusMatch && method === "POST") return adminCustomerStatus(request, env, customerStatusMatch[1]);
     if (path === "/api/members/admin/pass/verify" && method === "POST") return verifyPass(request, env);
     if (path === "/api/members/admin/newsletter-campaigns" && method === "GET") return adminNewsletterCampaigns(request, env);
     if (path === "/api/members/admin/newsletter-campaigns" && method === "POST") return createNewsletterCampaign(request, env);
