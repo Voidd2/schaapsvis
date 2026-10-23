@@ -325,7 +325,7 @@ async function adminCustomers(request, env) {
   const rows = result.results || [];
   const hasMore = rows.length > 100;
   const customers = rows.slice(0, 100);
-  const last = customers.at(-1);
+  const last = customers[customers.length - 1];
   const nextCursor = hasMore && last ? base64url(encoder.encode(JSON.stringify({ createdAt: last.created_at, id: last.id }))) : null;
   return json({ customers, hasMore, nextCursor });
 }
