@@ -192,3 +192,9 @@ DNS, Klaviyo of een productie-uitrol.
 - `/[locale]/beheer/overzicht` toont paginaweergaven, aangeklikte doelen en kliks per weergave, met uitleg dat exacte individuele uitstaproutes zonder bezoekersprofiel niet te meten zijn. De dashboard-API vereist bestaande sessie, een bevestigd e-mailadres in `ADMIN_EMAILS` en een Cloudflare-IP in `ADMIN_IPS`. De gebruikers-IP's zijn niet in Git vastgelegd; vul de door de eigenaar goedgekeurde waarden pas als Cloudflare Worker-secret in.
 - De statistiekencollector en admin-API zijn alleen lokaal getest; er is geen migratie 0009 op remote D1 uitgevoerd, geen secrets toegevoegd en geen code gedeployed. R2, Cloudflare-zone, e-mail, accountbeveiliging en de eerder beschreven DNS-stappen zijn onveranderd en blijven blokkades voor live beheer.
 
+
+## Worker-inlog — 24 oktober 2026
+
+- De eigenaar heeft ingestemd met twee afzonderlijke Cloudflare Worker Secrets voor de test-Worker `schaapsvis`: `SITE_PASSWORD` en `SITE_ACCESS_TOKEN`. Geen van beide waarden hoort in broncode of Git; de productie op Vercel en het domein blijven buiten deze handeling.
+- De Cloudflare-koppeling van deze sessie faalt momenteel al bij OAuth-tokenvernieuwing met `invalid_client: Client not found`. Daardoor is geen toegang tot het account of de secretinstellingen beschikbaar en zijn er geen Worker-secrets gewijzigd. Na opnieuw verbinden van Cloudflare met account Schaapsvis moeten beide secrets in de runtime-instellingen van de test-Worker worden toegevoegd en moet de unlockflow worden gecontroleerd.
+- De bestaande code houdt de site gesloten als publieke lancering niet expliciet is goedgekeurd. `/api/unlock` weigert wanneer een van beide geheimen ontbreekt; de lege password-fallback maakt succesvol inloggen niet mogelijk en opent de site niet. De lokale site-access-tests zijn geslaagd, maar bewijzen geen remote Worker-login.
