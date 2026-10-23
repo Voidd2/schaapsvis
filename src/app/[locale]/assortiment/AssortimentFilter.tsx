@@ -102,7 +102,7 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
           </div>
           <div className="collection-item-actions">
             <Link href={`/${locale}/assortiment/${p.slug}`}>{c.detail}<ArrowUpRight size={14} aria-hidden="true" /></Link>
-            {platter ? <Link href={`/${locale}/visschalen`}>{locale === "nl" ? "Visschaal samenstellen" : locale === "de" ? "Fischplatte zusammenstellen" : "Create a seafood platter"}</Link>
+            {platter ? <Link href={`/${locale}/visschalen`}>{locale === "nl" ? "Bekijk visschalen" : locale === "de" ? "Fischplatten ansehen" : "View seafood platters"}</Link>
               : (p.slug === "creuse-oesters" || p.slug === "fine-de-claire-oesters")
                 ? <a href={bestelContact(locale, p.naam).href} className="collection-whatsapp"><MessageCircle size={15} aria-hidden="true" />{locale === "nl" ? "Grotere bestelling? App ons" : locale === "de" ? "Größere Bestellung? Schreiben Sie uns" : "Larger order? Message us"}</a>
                 : !stapleSlugs.has(p.slug) && !["always", "dagelijks"].includes(p.beschikbaar ?? "")

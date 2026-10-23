@@ -57,9 +57,18 @@
     "assortimentIntro": "Bekijk onze barbecuepakketten, visgourmet, losse spiesjes en vispakketjes. U bespreekt uw keuze rechtstreeks met ons via WhatsApp.",
     "faqHeading": "Veelgestelde vragen over vis voor barbecue en gourmet",
     "faq": [
-      { "v": "Hoe vraag ik een barbecuepakket of gourmetselectie aan?", "a": "Kies een product op deze pagina en klik op de WhatsApp-knop. We bespreken uw keuze en bevestigen de beschikbaarheid, samenstelling en prijs voordat we iets klaarmaken." },
-      { "v": "Kan ik losse visspiesjes bestellen?", "a": "Ja. U vindt hier onder meer zalm-, tonijn- en gambaspiesjes. Een zalmspies kost € 4 per stuk. Stuur ons via WhatsApp uw keuze en we bespreken de mogelijkheden." },
-      { "v": "Kan ik mijn selectie aanpassen?", "a": "Vertel ons via WhatsApp wat u in gedachten heeft. We bespreken samen welke samenstelling mogelijk is en spreken de inhoud en prijs vooraf af." }
+      {
+        "v": "Hoe vraag ik een barbecuepakket of gourmetselectie aan?",
+        "a": "Kies een product op deze pagina en klik op de WhatsApp-knop. We bespreken uw keuze en bevestigen de beschikbaarheid, samenstelling en prijs voordat we iets klaarmaken."
+      },
+      {
+        "v": "Kan ik losse visspiesjes bestellen?",
+        "a": "Ja. U vindt hier onder meer zalm-, tonijn- en gambaspiesjes. Een zalmspies kost € 4 per stuk. Stuur ons via WhatsApp uw keuze en we bespreken de mogelijkheden."
+      },
+      {
+        "v": "Kan ik mijn selectie aanpassen?",
+        "a": "Vertel ons via WhatsApp wat u in gedachten heeft. We bespreken samen welke samenstelling mogelijk is en spreken de inhoud en prijs vooraf af."
+      }
     ],
     "slotTitle": "Samen kiezen we wat bij uw tafel past",
     "slotText": "Vertel ons voor welke gelegenheid u vis zoekt en welke producten u aanspreken. Via WhatsApp bespreken we de mogelijkheden en spreken we de samenstelling en prijs vooraf met u af."
@@ -270,7 +279,7 @@
     "kop": "Verse vis in Leiden. Met zorg gekozen, sinds 1938.",
     "inleiding": "Al vier generaties helpen we Leidenaren aan goede vis en eerlijk advies. Gerrit Schaap begon in 1938; vandaag staat Aldert voor u klaar. Bezoek onze viswinkel aan de Herenstraat, ontmoet ons op de Leidse markt of kom vrijdag langs bij Hoogvliet in Voorschoten.",
     "knopBestellen": "Bestellen",
-    "knopVisschaal": "Visschaal samenstellen",
+    "knopVisschaal": "Bekijk visschalen",
     "feit1Kop": "Bezorgen",
     "feit1Tekst": "{dagen}, in vijf gemeenten",
     "feit2Kop": "Afhalen",
@@ -392,7 +401,7 @@
     "betalenBinnenkort": "Binnenkort: iDEAL, creditcard, Apple Pay en Google Pay",
     "faqKop": "Veelgestelde vragen over bezorgen",
     "ctaKop": "Zin in vis?",
-    "ctaTekst": "Bestel uw visschaal voor {tijd} de dag ervoor. Voor andere producten bespreken we de mogelijkheden via WhatsApp.",
+    "ctaTekst": "Bekijk onze visschalen en vraag uw samenstelling via WhatsApp aan. Bestel uw bezorging voor {tijd} de dag ervoor.",
     "plaatsKop": "Verse vis bezorgen in {plaats}",
     "plaatsEyebrow": "Bezorggebied",
     "plaatsWijkenKop": "In welke wijken van {plaats} we komen",
@@ -401,7 +410,7 @@
     "plaatsRijtijd": "Rijtijd vanaf de Herenstraat: {tijd}.",
     "plaatsAndere": "We bezorgen ook in",
     "plaatsCtaKop": "Bestellen voor {plaats}",
-    "plaatsCtaTekst": "Stel uw visschaal samen. Bestel voor {tijd} de dag ervoor voor bezorging op {dagen}. Vraag ons via WhatsApp naar andere producten.",
+    "plaatsCtaTekst": "Bekijk onze visschalen en vraag uw samenstelling via WhatsApp aan. Bestel voor {tijd} de dag ervoor voor bezorging op {dagen}. Vraag ons via WhatsApp naar andere producten.",
     "faq": [
       {
         "v": "Bezorgen jullie bij mij in de buurt?",
@@ -421,7 +430,7 @@
       },
       {
         "v": "Hoe weet ik wat het kost als vis op gewicht gaat?",
-        "a": "Bij uw visschaal ziet u de richtprijs van de gekozen schaal en extra's. We bevestigen beschikbaarheid en het definitieve bedrag. Voor andere producten overleggen we via WhatsApp."
+        "a": "Visschalen vraagt u aan via WhatsApp. We denken mee over de samenstelling en bevestigen de prijs vooraf. De prijzen van onze gewone producten zijn meestal vast; vraag ons gerust naar de prijs van een product."
       },
       {
         "v": "Hoe kan ik betalen?",
@@ -464,7 +473,7 @@
     "levertijdKop": "Op tijd bestellen",
     "levertijdTekst": "Voor een schaal plannen we graag een paar dagen vooruit. Rond de kerstdagen en Oud & Nieuw is het druk — bestel dan ruim op tijd, dan weet u zeker dat het lukt.",
     "allergieKop": "Allergieën",
-    "allergieTekst": "Wij bereiden ook glutenvrije visgerechten voor mensen met coeliakie, op een hiervoor geplande dag. Geef uw dieetwensen vooraf door; wij bevestigen de veilige bereiding en de datum persoonlijk.",
+    "allergieTekst": "Op onze vaste glutenvrije dag garanderen we een glutenvrije bereiding van kibbeling en gebakken garnalen voor mensen met coeliakie. Neem vooraf contact op om de eerstvolgende dag te bevestigen en uw bestelling af te stemmen.",
     "faqKop": "Veelgestelde vragen over visschalen",
     "faq": [
       {
@@ -485,7 +494,7 @@
       },
       {
         "v": "Kan ik rekening laten houden met een allergie?",
-        "a": "Ja, wij hebben ervaring met glutenvrije visgerechten voor mensen met coeliakie. Bespreek uw wens vooraf met ons, zodat wij de geschikte bereidingsdag en werkwijze kunnen bevestigen."
+        "a": "Op onze vaste glutenvrije dag garanderen we een glutenvrije bereiding van kibbeling en gebakken garnalen voor mensen met coeliakie. Neem vooraf contact op om de eerstvolgende dag te bevestigen en uw bestelling af te stemmen."
       },
       {
         "v": "Kan een visschaal bezorgd worden?",
@@ -500,7 +509,7 @@
     "perSchaal": "per persoon",
     "stap1": "Stap 1",
     "stap2": "Stap 2",
-    "schaalKop": "Kies uw schaal of borrelbox",
+    "schaalKop": "Bekijk visschalen",
     "schaalUitleg": "Op zoek naar een visschaal in Leiden voor een verjaardag, borrel, receptie of bedrijfsfeest? Bekijk de foto’s en kies wat u aanspreekt. We denken met u mee over uw favoriete vis, het aantal gasten en de gelegenheid. Gemiddeld rekenen we circa € 17,50 per persoon. Extra’s of duurdere vissoorten kunnen de prijs verhogen; we bespreken dat vooraf via WhatsApp.",
     "fotoVoorbeeld": "Inspiratie voor uw visschaal",
     "voorPersonen": "Voor {van} tot {tot} personen",
@@ -668,5 +677,3 @@
     "gratisWeegvis": "Verse vis rekenen we op gewicht af. Komt uw bestelling boven {bedrag} uit, dan vervalt de bezorging — de prijs spreken we vooraf met u af."
   }
 }
-
-

@@ -17,7 +17,7 @@ const copy = {
   nl: {
     label: "Schaap’s Vishandel · Leiden", title: "Ons assortiment.",
     intro: "Van een mooie zalmfilet tot vers gebakken kibbeling. Goede vis voor aan tafel, bij de borrel of gewoon tussendoor.",
-    browse: "Ontdek het assortiment", platter: "Visschaal samenstellen",
+    browse: "Ontdek het assortiment", platter: "Bekijk visschalen",
     policy: "Visschalen en barbecue op aanvraag via WhatsApp.", policySub: "Stel samen met ons iets samen dat past bij uw gezelschap en gelegenheid. We bespreken uw wensen persoonlijk.",
     question: "Iets in gedachten?", note: "Een bepaalde vis, een speciale wens of iets wat u hier niet ziet? App ons gerust. We bespreken de mogelijkheden en beschikbaarheid met u.",
     image: "Zalm met citroen en dille",
@@ -25,7 +25,7 @@ const copy = {
   en: {
     label: "Schaap’s Vishandel · Leiden", title: "Our fish selection.",
     intro: "From a beautiful salmon fillet to freshly fried kibbeling. Good fish for dinner, sharing or a little treat.",
-    browse: "Explore our range", platter: "Create a seafood platter",
+    browse: "Explore our range", platter: "View seafood platters",
     policy: "Seafood platters and barbecue selections by WhatsApp request.", policySub: "We can help you put together a selection to suit your guests and occasion. Tell us what you have in mind.",
     question: "Something in mind?", note: "A particular fish, a special request or something you can't find here? Ask us on WhatsApp about availability and options.",
     image: "Salmon with lemon and dill",
@@ -33,7 +33,7 @@ const copy = {
   de: {
     label: "Schaap’s Vishandel · Leiden", title: "Unser Sortiment.",
     intro: "Vom schönen Lachsfilet bis zum frisch gebackenen Kibbeling. Guter Fisch zum Abendessen, zum Teilen oder für zwischendurch.",
-    browse: "Sortiment entdecken", platter: "Fischplatte zusammenstellen",
+    browse: "Sortiment entdecken", platter: "Fischplatten ansehen",
     policy: "Fischplatten und Grillauswahl auf Anfrage per WhatsApp.", policySub: "Wir stellen gemeinsam eine Auswahl für Ihre Gäste und Ihren Anlass zusammen. Erzählen Sie uns von Ihren Wünschen.",
     question: "Einen besonderen Wunsch?", note: "Ein bestimmter Fisch, ein besonderer Wunsch oder etwas, das Sie hier nicht finden? Fragen Sie uns per WhatsApp nach Verfügbarkeit und Möglichkeiten.",
     image: "Lachs mit Zitrone und Dill",

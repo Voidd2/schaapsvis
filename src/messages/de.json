@@ -57,9 +57,18 @@
     "assortimentIntro": "Sehen Sie sich unsere Grillpakete, Fisch-Gourmetauswahl, Spieße und Fischpäckchen an. Besprechen Sie Ihre Auswahl direkt mit uns per WhatsApp.",
     "faqHeading": "Häufige Fragen zu Fisch für Grill und Gourmet",
     "faq": [
-      { "v": "Wie frage ich ein Grillpaket oder eine Gourmetauswahl an?", "a": "Wählen Sie ein Produkt auf dieser Seite und tippen Sie auf die WhatsApp-Schaltfläche. Wir besprechen Ihre Auswahl und bestätigen Verfügbarkeit, Inhalt und Preis, bevor wir etwas vorbereiten." },
-      { "v": "Kann ich einzelne Fischspieße bestellen?", "a": "Ja. Die Auswahl umfasst unter anderem Lachs-, Thunfisch- und Garnelenspieße. Ein Lachsspieß kostet 4 € pro Stück. Schreiben Sie uns Ihre Auswahl per WhatsApp, dann besprechen wir die Möglichkeiten." },
-      { "v": "Kann ich meine Auswahl anpassen?", "a": "Teilen Sie uns per WhatsApp Ihre Wünsche mit. Wir besprechen, welche Zusammenstellung möglich ist, und stimmen Inhalt und Preis vorher mit Ihnen ab." }
+      {
+        "v": "Wie frage ich ein Grillpaket oder eine Gourmetauswahl an?",
+        "a": "Wählen Sie ein Produkt auf dieser Seite und tippen Sie auf die WhatsApp-Schaltfläche. Wir besprechen Ihre Auswahl und bestätigen Verfügbarkeit, Inhalt und Preis, bevor wir etwas vorbereiten."
+      },
+      {
+        "v": "Kann ich einzelne Fischspieße bestellen?",
+        "a": "Ja. Die Auswahl umfasst unter anderem Lachs-, Thunfisch- und Garnelenspieße. Ein Lachsspieß kostet 4 € pro Stück. Schreiben Sie uns Ihre Auswahl per WhatsApp, dann besprechen wir die Möglichkeiten."
+      },
+      {
+        "v": "Kann ich meine Auswahl anpassen?",
+        "a": "Teilen Sie uns per WhatsApp Ihre Wünsche mit. Wir besprechen, welche Zusammenstellung möglich ist, und stimmen Inhalt und Preis vorher mit Ihnen ab."
+      }
     ],
     "slotTitle": "Gemeinsam finden wir die passende Auswahl",
     "slotText": "Erzählen Sie uns, für welchen Anlass Sie Fisch suchen und welche Produkte Sie ansprechen. Wir besprechen die Möglichkeiten per WhatsApp und stimmen Auswahl und Preis vorher mit Ihnen ab."
@@ -270,7 +279,7 @@
     "kop": "Frischer Fisch, mit Sorgfalt ausgewählt. Seit 1938.",
     "inleiding": "Seit vier Generationen helfen wir den Menschen in Leiden mit gutem Fisch und ehrlicher Beratung. Gerrit Schaap fing 1938 an; heute ist Aldert für Sie da. Besuchen Sie unser Fischgeschäft in der Herenstraat, treffen Sie uns auf dem Leidener Markt oder kommen Sie freitags bei Hoogvliet in Voorschoten vorbei.",
     "knopBestellen": "Bestellen",
-    "knopVisschaal": "Fischplatte zusammenstellen",
+    "knopVisschaal": "Fischplatten ansehen",
     "feit1Kop": "Lieferung",
     "feit1Tekst": "{dagen}, in fünf Gemeinden",
     "feit2Kop": "Abholung",
@@ -392,7 +401,7 @@
     "betalenBinnenkort": "Demnächst: iDEAL, Kreditkarte, Apple Pay und Google Pay",
     "faqKop": "Häufige Fragen zur Lieferung",
     "ctaKop": "Lust auf Fisch?",
-    "ctaTekst": "Bestellen Sie Ihre Fischplatte bis {tijd} am Vortag. Fragen zu anderen Produkten besprechen wir per WhatsApp.",
+    "ctaTekst": "Sehen Sie sich unsere Fischplatten an und fragen Sie Ihre Auswahl per WhatsApp an. Bestellen Sie für die Lieferung bis {tijd} am Vortag.",
     "plaatsKop": "Frischen Fisch liefern lassen in {plaats}",
     "plaatsEyebrow": "Liefergebiet",
     "plaatsWijkenKop": "In welchen Vierteln von {plaats} wir unterwegs sind",
@@ -401,7 +410,7 @@
     "plaatsRijtijd": "Fahrzeit ab der Herenstraat: {tijd}.",
     "plaatsAndere": "Wir liefern außerdem nach",
     "plaatsCtaKop": "Bestellen für {plaats}",
-    "plaatsCtaTekst": "Stellen Sie Ihre Fischplatte zusammen. Bestellen Sie bis {tijd} am Vortag für Lieferung am {dagen}. Für andere Produkte schreiben Sie uns per WhatsApp.",
+    "plaatsCtaTekst": "Sehen Sie sich unsere Fischplatten an und fragen Sie Ihre Auswahl per WhatsApp an. Bestellen Sie bis {tijd} am Vortag für die Lieferung am {dagen}. Fragen Sie uns per WhatsApp zu anderen Produkten.",
     "faq": [
       {
         "v": "Liefern Sie auch zu mir?",
@@ -421,7 +430,7 @@
       },
       {
         "v": "Wie erfahre ich den Preis, wenn Fisch nach Gewicht verkauft wird?",
-        "a": "Ihre Fischplatte zeigt den Richtpreis der gewählten Platte und Extras. Wir bestätigen den endgültigen Betrag und die Verfügbarkeit. Für andere Produkte schreiben Sie uns per WhatsApp."
+        "a": "Fischplatten fragen Sie bitte per WhatsApp an. Wir beraten Sie zur Auswahl und bestätigen den Preis vorab. Die Preise unserer üblichen Produkte sind meist fest; fragen Sie uns gern nach dem Preis eines Produkts."
       },
       {
         "v": "Wie kann ich bezahlen?",
@@ -464,7 +473,7 @@
     "levertijdKop": "Rechtzeitig bestellen",
     "levertijdTekst": "Für eine Platte planen wir gern ein paar Tage voraus. Um Weihnachten und Silvester ist viel los — bestellen Sie dann früh.",
     "allergieKop": "Allergien",
-    "allergieTekst": "Wir bereiten auch glutenfreie Fischgerichte für Menschen mit Zöliakie an einem dafür vorgesehenen Tag zu. Teilen Sie uns Ihre Wünsche vorher mit; wir bestätigen die sichere Zubereitung und den Termin persönlich.",
+    "allergieTekst": "An unserem wöchentlichen glutenfreien Tag garantieren wir die glutenfreie Zubereitung von Kibbeling und gebratenen Garnelen für Menschen mit Zöliakie. Kontaktieren Sie uns vorher, um den nächsten Termin zu bestätigen und Ihre Bestellung abzustimmen.",
     "faqKop": "Häufige Fragen zu Fischplatten",
     "faq": [
       {
@@ -485,7 +494,7 @@
       },
       {
         "v": "Können Sie eine Allergie berücksichtigen?",
-        "a": "Ja. Wir haben Erfahrung mit glutenfreien Fischgerichten für Menschen mit Zöliakie. Besprechen Sie Ihre Wünsche vorher mit uns, damit wir Zubereitungstag und Vorgehen bestätigen können."
+        "a": "An unserem wöchentlichen glutenfreien Tag garantieren wir die glutenfreie Zubereitung von Kibbeling und gebratenen Garnelen für Menschen mit Zöliakie. Kontaktieren Sie uns vorher, um den nächsten Termin zu bestätigen und Ihre Bestellung abzustimmen."
       },
       {
         "v": "Kann eine Fischplatte geliefert werden?",
@@ -500,7 +509,7 @@
     "perSchaal": "pro Person",
     "stap1": "Schritt 1",
     "stap2": "Schritt 2",
-    "schaalKop": "Fischplatten für Ihren Anlass",
+    "schaalKop": "Fischplatten ansehen",
     "schaalUitleg": "Suchen Sie eine Fischplatte in Leiden für einen Geburtstag, Empfang oder eine Firmenfeier? Sehen Sie sich die Fotos an und wählen Sie Ihren Favoriten. Wir beraten Sie zu Fisch, Menge und Anlass. Im Durchschnitt berechnen wir etwa 17,50 € pro Person. Extras oder Edelfisch können den Preis erhöhen; das besprechen wir vorab per WhatsApp.",
     "fotoVoorbeeld": "Inspiration für Ihre Fischplatte",
     "voorPersonen": "Für {van} bis {tot} Personen",
@@ -668,5 +677,3 @@
     "gratisWeegvis": "Frischen Fisch rechnen wir nach Gewicht ab. Kommt Ihre Bestellung über {bedrag}, entfällt die Liefergebühr — den Preis vereinbaren wir vorher mit Ihnen."
   }
 }
-
-
