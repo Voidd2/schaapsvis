@@ -4,7 +4,6 @@ import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
 import { Sectie, Kop, Vragen } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
-import { VisschaalConfigurator } from "./VisschaalConfigurator";
 import { SelectieAanvraag } from "./SelectieAanvraag";
 import { paginaMetadata, kruimelSchema, vraagSchema } from "@/lib/seo";
 import { bestelContact } from "@/lib/bestel-contact";
@@ -86,11 +85,7 @@ export default async function VisschalenPage({
 
       {/* ── Samenstellen ──────────────────────────────────────────────────── */}
       <Sectie grond="papier" id="samenstellen">
-        <VisschaalConfigurator />
-      </Sectie>
-
-      <Sectie grond="zand">
-        <SelectieAanvraag locale={locale} showBarbecue={false} />
+        <SelectieAanvraag locale={locale} showSpecial={false} showBarbecue={false} showPlatters />
       </Sectie>
 
       {/* ── Praktisch ─────────────────────────────────────────────────────── */}
