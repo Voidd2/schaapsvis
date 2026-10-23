@@ -25,7 +25,8 @@ assert.equal((await searchConsoleVerification.text()).trim(), "google-site-verif
 
 const badForm = new FormData();
 badForm.set("password", "incorrect-test-password");
-const badLogin = await fetch(`${origin}/api/unlock`, { method: "POST", body: badForm, redirect: "manual" });
+const sameOriginHeaders = { origin };
+const badLogin = await fetch(`${origin}/api/unlock`, { method: "POST", headers: sameOriginHeaders, body: badForm, redirect: "manual" });
 assert.equal(badLogin.status, 303, "incorrect password returns to the error page");
 assert.equal(new URL(badLogin.headers.get("location"), origin).pathname + new URL(badLogin.headers.get("location"), origin).search, "/coming-soon?error=1");
 assert.ok(!badLogin.headers.get("set-cookie"), "incorrect password must not set an access cookie");
@@ -33,7 +34,7 @@ await badLogin.arrayBuffer();
 
 const goodForm = new FormData();
 goodForm.set("password", password);
-const goodLogin = await fetch(`${origin}/api/unlock`, { method: "POST", body: goodForm, redirect: "manual" });
+const goodLogin = await fetch(`${origin}/api/unlock`, { method: "POST", headers: sameOriginHeaders, body: goodForm, redirect: "manual" });
 assert.equal(goodLogin.status, 303, "correct password grants access");
 const setCookie = goodLogin.headers.get("set-cookie") || "";
 assert.ok(setCookie.startsWith(`sv_access=${token};`), "correct password sets the expected cookie");
@@ -41,6 +42,30 @@ assert.match(setCookie, /httponly/i);
 assert.match(setCookie, /samesite=lax/i);
 assert.match(setCookie, /path=\//i);
 await goodLogin.arrayBuffer();
+
+const crossOriginForm = new FormData();
+crossOriginForm.set("password", password);
+const crossOriginLogin = await fetch(`${origin}/api/unlock`, {
+  method: "POST",
+  headers: { origin: "https://attacker.example" },
+  body: crossOriginForm,
+  redirect: "manual",
+});
+assert.equal(crossOriginLogin.status, 403, "cross-origin form submissions are rejected");
+assert.ok(!crossOriginLogin.headers.get("set-cookie"), "cross-origin submissions cannot set an access cookie");
+await crossOriginLogin.arrayBuffer();
+
+const oversizedForm = new FormData();
+oversizedForm.set("password", "x".repeat(9 * 1024));
+const oversizedLogin = await fetch(`${origin}/api/unlock`, {
+  method: "POST",
+  headers: sameOriginHeaders,
+  body: oversizedForm,
+  redirect: "manual",
+});
+assert.equal(oversizedLogin.status, 413, "oversized login bodies are rejected before form parsing");
+assert.ok(!oversizedLogin.headers.get("set-cookie"), "oversized requests cannot set an access cookie");
+await oversizedLogin.arrayBuffer();
 
 const access = await fetch(`${origin}/nl/assortiment`, {
   headers: { cookie: `sv_access=${token}` },
