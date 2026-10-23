@@ -12,6 +12,7 @@ const studentEmailMigration = await readFile(new URL("../../migrations/0006_stud
 const expandedRegionsMigration = await readFile(new URL("../../migrations/0007_newsletter_regions.sql", import.meta.url), "utf8");
 const newsletterDraftsMigration = await readFile(new URL("../../migrations/0008_newsletter_signup_drafts.sql", import.meta.url), "utf8");
 const analyticsMigration = await readFile(new URL("../../migrations/0009_site_analytics.sql", import.meta.url), "utf8");
+const customerAdminMigration = await readFile(new URL("../../migrations/0010_admin_customer_management.sql", import.meta.url), "utf8");
 const upgradeDb = new DatabaseSync(":memory:");
 upgradeDb.exec(schema);
 upgradeDb.exec(`
@@ -30,6 +31,7 @@ upgradeDb.exec(studentEmailMigration);
 upgradeDb.exec(expandedRegionsMigration);
 upgradeDb.exec(newsletterDraftsMigration);
 upgradeDb.exec(analyticsMigration);
+upgradeDb.exec(customerAdminMigration);
 assert.equal(upgradeDb.prepare("SELECT application_id FROM student_passes WHERE id='legacy-pass'").get().application_id, "legacy-application", "migration associates existing student passes with their approved application");
 upgradeDb.close();
 const sqlite = new DatabaseSync(":memory:");
@@ -42,6 +44,7 @@ sqlite.exec(studentEmailMigration);
 sqlite.exec(expandedRegionsMigration);
 sqlite.exec(newsletterDraftsMigration);
 sqlite.exec(analyticsMigration);
+sqlite.exec(customerAdminMigration);
 let simulateApplicationCommitFailure = false;
 let decisionReadBarrier = null;
 
@@ -210,6 +213,34 @@ assert.equal((await call("/api/members/admin/analytics?days=7", { cookie: sessio
 const analyticsReport = await call("/api/members/admin/analytics?days=7", { cookie: sessionCookie });
 assert.equal(analyticsReport.status, 200, "allowlisted admin can view aggregate analytics");
 assert.equal((await analyticsReport.json()).rows.length, 2);
+assert.equal((await call("/api/members/admin/customers")).status, 403, "customer listing rejects anonymous requests");
+assert.equal((await call("/api/members/admin/customers", { cookie: sessionCookie, headers: { "CF-Connecting-IP": "198.51.100.5" } })).status, 403, "customer listing requires the server-side IP allowlist");
+const managedCustomerId = "123e4567-e89b-12d3-a456-426614174000";
+sqlite.prepare(`INSERT INTO users (id,email,full_name,password_hash,email_verified_at,account_status,created_at,updated_at) VALUES (?, 'customer@example.test', 'Customer Example', ?, '2026-10-18', 'active', '2026-10-18', '2026-10-18')`).run(managedCustomerId, registeredUser.password_hash);
+sqlite.prepare(`INSERT INTO sessions (token_hash,user_id,created_at,expires_at) VALUES ('managed-customer-session',?,'2026-10-18','2030-10-18')`).run(managedCustomerId);
+const customerList = await call("/api/members/admin/customers?q=customer", { cookie: sessionCookie });
+assert.equal(customerList.status, 200, "allowlisted administrator can search customer accounts");
+const customerRows = (await customerList.json()).customers;
+assert.equal(customerRows.length, 1);
+assert.equal(customerRows[0].email, "customer@example.test");
+assert.equal(customerRows[0].email_verified, 1);
+assert.equal("password_hash" in customerRows[0], false, "customer directory never returns password hashes");
+assert.equal("school_email" in customerRows[0], false, "customer directory omits school email addresses");
+const lockedCustomer = await call(`/api/members/admin/customers/${managedCustomerId}/status`, { method: "POST", cookie: sessionCookie, body: { status: "locked" } });
+assert.equal(lockedCustomer.status, 200, "allowlisted administrator can suspend a customer account");
+assert.equal(sqlite.prepare("SELECT account_status FROM users WHERE id=?").get(managedCustomerId).account_status, "locked");
+assert.notEqual(sqlite.prepare("SELECT revoked_at FROM sessions WHERE token_hash='managed-customer-session'").get().revoked_at, null, "suspending a customer revokes every active session");
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM admin_customer_audit WHERE customer_user_id=? AND action='account_locked'").get(managedCustomerId).count, 1, "suspension is recorded in the administrator audit trail");
+const protectedAdminId = sqlite.prepare("SELECT id FROM users WHERE email='student@example.test'").get().id;
+assert.equal((await call(`/api/members/admin/customers/${protectedAdminId}/status`, { method: "POST", cookie: sessionCookie, body: { status: "locked" } })).status, 409, "administrator accounts cannot be suspended through customer management");
+assert.equal((await call(`/api/members/admin/customers/${managedCustomerId}/status`, { method: "POST", cookie: sessionCookie, body: { status: "deleted" } })).status, 400, "customer management does not expose irreversible deletion");
+assert.equal((await call(`/api/members/admin/customers/${managedCustomerId}/status`, { method: "POST", cookie: sessionCookie, headers: { Origin: "https://attacker.example" }, body: { status: "active" } })).status, 403, "customer status changes require same-origin requests");
+const restoredCustomer = await call(`/api/members/admin/customers/${managedCustomerId}/status`, { method: "POST", cookie: sessionCookie, body: { status: "active" } });
+assert.equal(restoredCustomer.status, 200, "administrator can restore a suspended customer account");
+assert.equal(sqlite.prepare("SELECT account_status FROM users WHERE id=?").get(managedCustomerId).account_status, "active");
+assert.equal(sqlite.prepare("SELECT revoked_at FROM sessions WHERE token_hash='managed-customer-session'").get().revoked_at !== null, true, "restoring an account does not revive old sessions");
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM admin_customer_audit WHERE customer_user_id=?").get(managedCustomerId).count, 2, "both status changes are audited");
+
 for (let attempt = 0; attempt < 7; attempt++) {
   const blockedLogin = await call("/api/members/login", {
     method: "POST",
