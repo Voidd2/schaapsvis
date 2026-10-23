@@ -46,9 +46,11 @@ Legenda: ✅ klaar · ⚠️ gedeeltelijk / actie bij Lucas of hosting.
 
 ## Laatste lokale verificatie
 
-- `next build` op 22 oktober 2026 is geslaagd; Next.js genereerde 473 routes.
-- De geautomatiseerde SEO-release-, vertaalstructuur-, eigenaar-assortiment-, afbeeldings- en orderchecks zijn eerder uitgevoerd; deze bewijzen technische dekking, geen menselijke eindredactie van iedere alinea.
-- De wijzigingen voor de productdetailvolgorde, assortimentsfilters, receptzoekingang, VÅRLAKS-foto en correcte kabeljauwfotokeuze zijn via PR #1 naar `main` gemerged. Beide Vercel-statussen voor mergecommit `7188a0426f9b172467dbb2fc9efdbf2e721ad558` zijn inmiddels `success`.
+- `next build --webpack` op 23 oktober 2026 is geslaagd; Next.js genereerde 476 routes. Volledige ESLint slaagde.
+- De vertaal-/rendercheck controleerde 411 routes in NL/EN/DE: 559 UI-sleutels en alle verwachte vertaalde product-, recept-, blog-, locatie- en visschalenteksten werden gevonden. De controle gebruikt voor visschalen nu de werkelijke teksten en namen van de huidige WhatsApp-aanvraagkaarten; de vorige check controleerde daar ten onrechte teksten van de ongebruikte configurator.
+- De eigenaar-assortimentcheck controleerde 201 productpagina’s, 135 expliciet passende product-receptlinks en 87 unieke gekoppelde receptpagina’s, zonder fouten. De afbeeldingscontrole vond 67/67 unieke, lokaal gehoste productfoto’s.
+- PR #18 met de recente navigatie-, producttekst-, student/account- en contentupdates is naar GitHub gepusht maar staat nog open, niet gemerged. Beide Vercel-statussen op commit `11f77557a270c7b9619fbba6963536f50a14d1ec` falen met `build-rate-limit`; er is dus geen nieuwe deployment van deze PR bevestigd. De live `.nl`-site draait nog op Vercel en blijft achter het toegangsslot.
+- Deze geautomatiseerde controles bewijzen technische dekking en rendering, geen menselijke moedertaalredactie van iedere alinea of een bepaalde Google-ranking.
 - De publieke site is nog met een toegangsslot afgeschermd. Zolang dat zo is, kunnen zoekmachines de pagina’s niet normaal indexeren.
 - Echte foto’s van de winkel, toonbank, medewerkers en marktkramen ontbreken nog; zie `fotos-aan-te-leveren.md`.
 

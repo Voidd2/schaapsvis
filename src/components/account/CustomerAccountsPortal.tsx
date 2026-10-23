@@ -65,7 +65,6 @@ export function CustomerAccountsPortal({ locale }: { locale: string }) {
         };
 
   const loadPage = useCallback(async (next: string | null, append: boolean) => {
-    setLoading(true);
     setError("");
     try {
       const query = next ? `?cursor=${encodeURIComponent(next)}` : "";
@@ -82,7 +81,26 @@ export function CustomerAccountsPortal({ locale }: { locale: string }) {
     }
   }, [copy.denied]);
 
-  useEffect(() => { void loadPage(null, false); }, [loadPage]);
+  useEffect(() => {
+    let active = true;
+    const loadInitialPage = async () => {
+      try {
+        const response = await fetch("/api/members/admin/customers", { credentials: "same-origin", cache: "no-store" });
+        if (!response.ok) throw new Error("forbidden");
+        const page = await response.json() as CustomerPage;
+        if (!active) return;
+        setCustomers(page.customers);
+        setCursor(page.nextCursor);
+        setHasMore(page.hasMore);
+      } catch {
+        if (active) setError(copy.denied);
+      } finally {
+        if (active) setLoading(false);
+      }
+    };
+    void loadInitialPage();
+    return () => { active = false; };
+  }, [copy.denied]);
 
   const visible = useMemo(() => {
     const query = search.trim().toLocaleLowerCase();
@@ -147,6 +165,6 @@ export function CustomerAccountsPortal({ locale }: { locale: string }) {
         </tr>)}</tbody>
       </table>
     </div>}
-    {hasMore && <button className="mt-5 rounded-lg bg-sky-700 px-5 py-3 font-semibold text-white disabled:opacity-60" disabled={loading || !cursor} onClick={() => void loadPage(cursor, true)} type="button">{loading ? copy.loading : copy.more}</button>}
+    {hasMore && <button className="mt-5 rounded-lg bg-sky-700 px-5 py-3 font-semibold text-white disabled:opacity-60" disabled={loading || !cursor} onClick={() => { setLoading(true); void loadPage(cursor, true); }} type="button">{loading ? copy.loading : copy.more}</button>}
   </main>;
 }

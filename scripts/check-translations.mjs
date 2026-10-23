@@ -14,10 +14,39 @@ for(const l of locales){
  for(const b of blogs)try{const t=translatedBlogs.localizeBlog(b,l);for(const slug of b.gerelateerdeRecepten??[])check(recipes.some(r=>r.slug===slug),`Missing blog recipe ${b.slug}: ${slug}`);pages.push({path:`/${l}/blog/${b.slug}`,title:t.title,texts:[t.excerpt,...t.secties.flatMap(s=>[s.kop,...s.alineas]),...(t.vragen??[]).flatMap(q=>[q.v,q.a])].filter(Boolean),schema:'Article'});}catch(e){errors.push(e.message);}
  const months=load('calendar-localization').localizedCalendar(l);check(months.length===12,`Calendar ${l}`);pages.push({path:`/${l}/viskalender`,texts:months.flatMap(m=>[m.naam,m.tekst,m.hoogtepunt,...m.vis.map(v=>v.naam)])});
  for(const kind of ['viswinkel-leiden','marktkraam-leiden','too-good-to-go']){const c=load('local-pages-copy').localPageCopy(kind,l);pages.push({path:`/${l}/${kind}`,title:c.title,texts:[c.intro,c.heading,...c.paragraphs,...c.questions.flatMap(q=>[q.v,q.a])]});}
+ const customerAccount={
+  nl:{title:'Een klantaccount komt eraan.',texts:['We bereiden een klantaccount voor waarmee u later bestellingen, bezorging en spaarpunten kunt beheren. Inloggen en registreren zijn nog niet beschikbaar; we activeren dit pas als de accountservice en opslag goed zijn ingericht.','Bekijk ons assortiment','Student? Naar het studentenaccount →']},
+  en:{title:'A customer account is coming.',texts:['We are preparing a customer account where you can manage orders, delivery and loyalty points in the future. Sign-in and registration are not available yet; we will enable them only after the account service and storage are properly configured.','Explore our range','Student? Go to the student account →']},
+  de:{title:'Ein Kundenkonto kommt bald.',texts:['Wir bereiten ein Kundenkonto vor, mit dem Sie später Bestellungen, Lieferung und Treuepunkte verwalten können. Anmeldung und Registrierung sind noch nicht verfügbar. Wir schalten sie erst frei, wenn Kontodienst und Speicher sicher eingerichtet sind.','Sortiment ansehen','Student? Zum Studentenkonto →']},
+ }[l];
+ pages.push({path:`/${l}/account/klant`,title:customerAccount.title,texts:customerAccount.texts});
+ const voorschoten={
+  nl:{title:'Visboer Voorschoten: elke vrijdag bij Hoogvliet',texts:['Goede vis, persoonlijk advies en duidelijke prijzen. Probeer onze viskraam op vrijdag: van verse zalm voor het avondeten tot krokante kibbeling met ravigotesaus en haring met uitjes.','De prijs hangt af van de vissoort en hoeveelheid. Vraag ons bij de kraam of vooraf via WhatsApp; we noemen de prijs voordat u beslist.']},
+  en:{title:'Fishmonger in Voorschoten: every Friday at Hoogvliet',texts:['Good fish, personal advice and clear pricing. Visit our Friday fish stall: from fresh salmon for dinner to crispy kibbeling with ravigote sauce and herring with onions.','The price depends on the type and quantity of fish. Ask us at the stall or via WhatsApp in advance; we will tell you the price before you decide.']},
+  de:{title:'Fischstand in Voorschoten: jeden Freitag bei Hoogvliet',texts:['Guter Fisch, persönliche Beratung und klare Preise. Besuchen Sie freitags unseren Fischstand: von frischem Lachs fürs Abendessen bis zu knusprigem Kibbeling mit Ravigotesauce und Matjes mit Zwiebeln.','Der Preis hängt von Fischart und Menge ab. Fragen Sie uns am Stand oder vorab per WhatsApp; wir nennen Ihnen den Preis, bevor Sie sich entscheiden.']},
+ }[l];
+ pages.push({path:`/${l}/viswinkel-voorschoten`,title:voorschoten.title,texts:voorschoten.texts});
 }
 // Every message key must exist in all languages; placeholders must match.
 const messages=Object.fromEntries(locales.map(l=>[l,JSON.parse(fs.readFileSync(`src/messages/${l}.json`,'utf8'))]));
-const platters=load('visschaal'),platterCopy=load('platter-localization'),photos=load('product-beeld'),selection=load('dirks-selectie');
+const platters=load('visschaal'),photos=load('product-beeld'),selection=load('dirks-selectie');
+function componentConstant(name){
+ const file='src/app/[locale]/visschalen/SelectieAanvraag.tsx';
+ const source=ts.createSourceFile(file,fs.readFileSync(file,'utf8'),ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX);
+ for(const statement of source.statements){
+  if(!ts.isVariableStatement(statement))continue;
+  for(const declaration of statement.declarationList.declarations){
+   if(declaration.name.getText(source)===name&&declaration.initializer){
+    const transpiledModule={exports:{}};
+    const code=ts.transpile(`module.exports=${declaration.initializer.getText(source)};`,{target:ts.ScriptTarget.ES2022});
+    new Function('module',code)(transpiledModule);
+    return transpiledModule.exports;
+   }
+  }
+ }
+ throw new Error(`Missing component copy constant ${name}`);
+}
+const platterPageText=componentConstant('TEKST'),ownPlatterNames=componentConstant('EIGEN_SCHAAL_NAMEN');
 check(selection.DIRKS_SELECTIE.length===30,'Incomplete platter/BBQ selection');
 check(selection.DIRKS_VISSCHALEN.length===17,'Incomplete seafood platter selection');
 check(selection.DIRKS_BARBECUE.length===13,'Incomplete BBQ/gourmet selection');
@@ -33,7 +62,8 @@ for(const l of locales){
   for(const key of [item.id,item.toelichting&&`toelichting_${item.id}`,item.perStuk&&`eenheid_${item.perStuk}`,item.seizoen&&`seizoen_${item.seizoen}`].filter(Boolean))check(!!items[key],`Missing platter item ${l}/${key}`);
  }
  for(const group of platters.GROEP_VOLGORDE)for(const prefix of ['groep_','uitleg_'])check(!!items[prefix+group],`Missing platter group ${l}/${group}`);
- const texts=platters.SCHALEN.flatMap(s=>{const t=platterCopy.localizePlatter(s,l);check(t.bevat.length===s.bevat.length,`Platter ingredients ${l}/${s.id}`);return [t.naam,t.omschrijving,...t.bevat];});
+ const pageCopy=platterPageText[l];
+ const texts=[messages[l].visschaal.kop,messages[l].visschaal.inleiding,messages[l].visschaal.gemiddeld,messages[l].visschaal.perSchaal,pageCopy.visschalen,pageCopy.visschalenIntro,pageCopy.waarschuwing,pageCopy.vraag,pageCopy.foto,...Object.values(ownPlatterNames).map(names=>names[l]),...selection.DIRKS_VISSCHALEN.map(item=>selection.selectieNaam(item.slug,l))];
  const homeTexts=[...load('local-pages-copy').localLocations(l).flatMap(p=>[p.naam,p.adres,p.dagen]),...load('reviews').googleReviews.slice(0,3).map(r=>load('reviews').localizeReview(r,l).text)];
  for(const suffix of ['','/visschalen','/assortiment','/bezoek-ons','/biologische-vis','/varlaks','/ons-verhaal','/contact','/recepten','/blog','/viswinkel-voorschoten'])pages.push({path:`/${l}${suffix}`,texts:suffix==='/visschalen'?texts:suffix===''?homeTexts:[]});
  for(const p of products.products){const t=translatedProducts.localizeProduct(p,l),photo=photos.productPhoto(t,l);if(photo)check(!!photo.alt,`Missing image description ${l}/${p.slug}`);}

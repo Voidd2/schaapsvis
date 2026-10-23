@@ -3,6 +3,12 @@ import fs from "node:fs/promises";
 import ts from "typescript";
 
 const source = await fs.readFile("src/lib/siteAccess.ts", "utf8");
+const cloudflareConfig = await fs.readFile("cloudflare.config.ts", "utf8");
+assert.match(
+  cloudflareConfig,
+  /compatibilityFlags:\s*\[\s*"nodejs_compat"\s*,\s*"nodejs_compat_populate_process_env"\s*\]/,
+  "Cloudflare Worker secrets must be exposed to process.env for the site-access gate",
+);
 const compiled = ts.transpileModule(source, {
   compilerOptions: { module: ts.ModuleKind.CommonJS },
 }).outputText;
@@ -35,6 +41,6 @@ try {
   else process.env.SITE_ACCESS_IP_ALLOWLIST = originalIpAllowlist;
 }
 
-console.log("Site access gate passed: launch policy and exact-IP allowlist checks passed.");
+console.log("Site access gate passed: Cloudflare runtime secrets, launch policy and exact-IP allowlist checks passed.");
 
 

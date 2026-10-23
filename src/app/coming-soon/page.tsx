@@ -21,7 +21,7 @@ export default async function ComingSoonPage({
   // systeemletter — en dat is het eerste wat een bezoeker van de site ziet.
   return (
     <div className={FONT_KLASSEN}>
-      <ComingSoon error={sp.error === "1"} />
+      <ComingSoon error={sp.error === "setup" ? "setup" : sp.error === "1" ? "wrong" : null} />
     </div>
   );
 }

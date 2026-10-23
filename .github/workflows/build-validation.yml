@@ -13,6 +13,8 @@ on:
       - "cloudflare.config.*"
       - "wrangler.*"
       - "workers/**"
+      - "scripts/build.mjs"
+      - "scripts/check-build-target.mjs"
       - "tsconfig.json"
       - "postcss.config.*"
       - "tailwind.config.*"
@@ -31,6 +33,8 @@ on:
       - "cloudflare.config.*"
       - "wrangler.*"
       - "workers/**"
+      - "scripts/build.mjs"
+      - "scripts/check-build-target.mjs"
       - "tsconfig.json"
       - "postcss.config.*"
       - "tailwind.config.*"
@@ -52,5 +56,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check:content
+      - run: node scripts/check-build-target.mjs
       - run: npm run build
       - run: npm run build:cloudflare
+
