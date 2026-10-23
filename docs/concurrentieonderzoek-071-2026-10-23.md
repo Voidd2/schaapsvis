@@ -62,7 +62,7 @@ Eigen websites zijn waar mogelijk inhoudelijk bekeken. Zaken waarvoor geen betro
 | Hoog | Maak “Visboer in Voorschoten op vrijdag” concreet: Hoogvliet als herkenningspunt, juiste uren, route, aanbodindicatie en WhatsApp voor actuele voorraad. | Sluit aan op specifieke lokale zoekintentie. Geen “beste/scherpste” claims zonder bewijs. | [ ] |
 | Hoog | Geef “Marktkraam Leiden bij De Waag” eigen uren, kaartlink, herkenningspunt en later een echte kraamfoto. | Bezoekers willen weten waar en wanneer de kraam staat. | [ ] |
 | Hoog | Bundel visschalen en barbecue/gourmet als inspiratiegalerij met duidelijke WhatsApp-route; vermeld gemiddeld circa €17,50 per persoon en bespreek extra’s vooraf. | Prijsverwachting en maatwerk worden helder. | [x] |
-| Hoog | Geef ieder recept een passende, duidelijke afbeelding, juiste vissoort, mobiel goede uitsnede en link terug naar het product. | Helpt zowel oriënteren als koken. | [x] |
+| Hoog | Geef ieder recept een passende, duidelijke afbeelding, juiste vissoort, mobiel goede uitsnede en link terug naar het product. | Alle 37 recepten hebben een unieke afbeelding; de visuele controle op juiste afbeelding, uitsnede en productmatch is nog niet per recept handmatig afgerond. | [ ] |
 | Later | Controleer NL/EN/DE-pagina’s handmatig op tekst, metadata, knoppen, alt-teksten en interne links. | Geautomatiseerde vertaaltests bewijzen niet dat elke tekst natuurlijk en zakelijk juist is. | [ ] |
 | Later | Meet route-, tel-, WhatsApp-, product- en receptkliks pas na correcte analytics- en toestemming-inrichting. | Voorkomt onvolledige of privacygevoelige metingen. | [ ] |
 
