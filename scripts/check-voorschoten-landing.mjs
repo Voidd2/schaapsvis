@@ -18,9 +18,10 @@ check(html.includes('name="description" content="Visboer Voorschoten?'), 'Local 
 check(html.includes(`property="og:url" content="${canonical}"`), 'Social canonical');
 check((main.match(/<h1\b/g) || []).length === 1, 'Exactly one H1');
 const hero = main.match(/<header\b[^>]*class="fresh-hero"[\s\S]*?<\/header>/)?.[0] || '';
-for (const text of ['Visboer Voorschoten', 'Hoogvliet', '08:00', '17:30', 'Veurseweg 18', '2252 AA', 'scherpe prijzen']) {
+for (const text of ['Visboer Voorschoten', 'Hoogvliet', '08:00', '17:30', 'Veurseweg 18', '2252 AA', 'duidelijke prijzen']) {
   check(hero.includes(text), `Hero missing ${text}`);
 }
+check(main.includes('prijs voordat u beslist'), 'Price is made clear before purchase');
 check(!/visarend|vis en maatjes/i.test(main), 'Do not target competitor names in customer-facing copy');
 check(!/de scherpste|de beste|nummer [1é]/i.test(main), 'No unsupported comparative superlatives');
 check(!main.includes('Voorschoterweg'), 'No stale route');
@@ -37,6 +38,18 @@ check(location?.openingHoursSpecification?.[0]?.opens === '08:00' && location?.o
 const faq = schemas.find(s => s['@type'] === 'FAQPage');
 check(faq?.mainEntity?.length === 7, 'Seven practical questions');
 for (const q of faq.mainEntity) check(main.includes(q.name) && main.includes(q.acceptedAnswer.text), 'FAQ schema must describe visible content');
+for (const [locale, h1, pricePhrase] of [
+  ['en', 'Fishmonger in Voorschoten: every Friday at Hoogvliet', 'clear pricing'],
+  ['de', 'Fischstand in Voorschoten: jeden Freitag bei Hoogvliet', 'klare Preise'],
+]) {
+  const localized = await fetch(origin + `/${locale}/viswinkel-voorschoten`);
+  const localizedHtml = await localized.text();
+  const localizedMain = localizedHtml.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1] || '';
+  check(localized.status === 200, `${locale.toUpperCase()} location page returns 200`);
+  check(localizedMain.includes(h1), `${locale.toUpperCase()} heading is translated`);
+  check(localizedMain.includes(pricePhrase), `${locale.toUpperCase()} pricing message is translated`);
+  check(!/de scherpste|de beste|number [1é]|die beste/i.test(localizedMain), `${locale.toUpperCase()} has no unsupported superlative`);
+}
 const sitemap = await (await fetch(origin + '/sitemap.xml')).text();
 const entry = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(m => m[1]).find(v => v.includes(`<loc>${canonical}</loc>`));
 check(entry?.includes('2026-09-29'), 'Accurate local page lastmod');

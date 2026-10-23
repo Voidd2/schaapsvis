@@ -20,6 +20,12 @@ for(const l of locales){
   de:{title:'Ein Kundenkonto kommt bald.',texts:['Wir bereiten ein Kundenkonto vor, mit dem Sie später Bestellungen, Lieferung und Treuepunkte verwalten können. Anmeldung und Registrierung sind noch nicht verfügbar. Wir schalten sie erst frei, wenn Kontodienst und Speicher sicher eingerichtet sind.','Sortiment ansehen','Student? Zum Studentenkonto →']},
  }[l];
  pages.push({path:`/${l}/account/klant`,title:customerAccount.title,texts:customerAccount.texts});
+ const voorschoten={
+  nl:{title:'Visboer Voorschoten: elke vrijdag bij Hoogvliet',texts:['Goede vis, persoonlijk advies en duidelijke prijzen. Probeer onze viskraam op vrijdag: van verse zalm voor het avondeten tot krokante kibbeling met ravigotesaus en haring met uitjes.','De prijs hangt af van de vissoort en hoeveelheid. Vraag ons bij de kraam of vooraf via WhatsApp; we noemen de prijs voordat u beslist.']},
+  en:{title:'Fishmonger in Voorschoten: every Friday at Hoogvliet',texts:['Good fish, personal advice and clear pricing. Visit our Friday fish stall: from fresh salmon for dinner to crispy kibbeling with ravigote sauce and herring with onions.','The price depends on the type and quantity of fish. Ask us at the stall or via WhatsApp in advance; we will tell you the price before you decide.']},
+  de:{title:'Fischstand in Voorschoten: jeden Freitag bei Hoogvliet',texts:['Guter Fisch, persönliche Beratung und klare Preise. Besuchen Sie freitags unseren Fischstand: von frischem Lachs fürs Abendessen bis zu knusprigem Kibbeling mit Ravigotesauce und Matjes mit Zwiebeln.','Der Preis hängt von Fischart und Menge ab. Fragen Sie uns am Stand oder vorab per WhatsApp; wir nennen Ihnen den Preis, bevor Sie sich entscheiden.']},
+ }[l];
+ pages.push({path:`/${l}/viswinkel-voorschoten`,title:voorschoten.title,texts:voorschoten.texts});
 }
 // Every message key must exist in all languages; placeholders must match.
 const messages=Object.fromEntries(locales.map(l=>[l,JSON.parse(fs.readFileSync(`src/messages/${l}.json`,'utf8'))]));
