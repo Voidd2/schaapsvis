@@ -279,7 +279,7 @@
     "kop": "Fresh fish, chosen with care. Since 1938.",
     "inleiding": "For four generations, we have helped people in Leiden choose good fish and get honest advice. Gerrit Schaap started in 1938; today Aldert is here to help. Visit our fish shop on Herenstraat, find us at the Leiden markets or stop by Hoogvliet in Voorschoten on Fridays.",
     "knopBestellen": "Order",
-    "knopVisschaal": "Build a platter",
+    "knopVisschaal": "View seafood platters",
     "feit1Kop": "Delivery",
     "feit1Tekst": "{dagen}, in five municipalities",
     "feit2Kop": "Collection",
@@ -401,7 +401,7 @@
     "betalenBinnenkort": "Coming soon: iDEAL, credit card, Apple Pay and Google Pay",
     "faqKop": "Frequently asked questions about delivery",
     "ctaKop": "Fancy some fish?",
-    "ctaTekst": "Order your platter before {tijd} the day before. Ask us on WhatsApp about other products.",
+    "ctaTekst": "Browse our seafood platters and enquire about your selection on WhatsApp. Place delivery orders by {tijd} the day before.",
     "plaatsKop": "Fresh fish delivery in {plaats}",
     "plaatsEyebrow": "Delivery area",
     "plaatsWijkenKop": "Which parts of {plaats} we cover",
@@ -410,7 +410,7 @@
     "plaatsRijtijd": "Drive time from the Herenstraat: {tijd}.",
     "plaatsAndere": "We also deliver in",
     "plaatsCtaKop": "Ordering for {plaats}",
-    "plaatsCtaTekst": "Create your seafood platter. Order before {tijd} the day before for delivery on {dagen}. Ask us on WhatsApp about other products.",
+    "plaatsCtaTekst": "Browse our seafood platters and enquire about your selection on WhatsApp. Order by {tijd} the day before for delivery on {dagen}. Ask us on WhatsApp about other products.",
     "faq": [
       {
         "v": "Do you deliver in my area?",
