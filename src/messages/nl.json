@@ -464,7 +464,7 @@
     "levertijdKop": "Op tijd bestellen",
     "levertijdTekst": "Voor een schaal plannen we graag een paar dagen vooruit. Rond de kerstdagen en Oud & Nieuw is het druk — bestel dan ruim op tijd, dan weet u zeker dat het lukt.",
     "allergieKop": "Allergieën",
-    "allergieTekst": "Wij bereiden ook glutenvrije visgerechten voor mensen met coeliakie, op een hiervoor geplande dag. Geef uw dieetwensen vooraf door; wij bevestigen de veilige bereiding en de datum persoonlijk.",
+    "allergieTekst": "Op één vaste dag per week bereiden we glutenvrije kibbeling en gebakken garnalen voor mensen met coeliakie. Neem vooraf contact op; we vertellen u welke dag eraan komt en stemmen uw bestelling met u af.",
     "faqKop": "Veelgestelde vragen over visschalen",
     "faq": [
       {
@@ -485,7 +485,7 @@
       },
       {
         "v": "Kan ik rekening laten houden met een allergie?",
-        "a": "Ja, wij hebben ervaring met glutenvrije visgerechten voor mensen met coeliakie. Bespreek uw wens vooraf met ons, zodat wij de geschikte bereidingsdag en werkwijze kunnen bevestigen."
+        "a": "a": "We maken één dag per week glutenvrije kibbeling en gebakken garnalen voor mensen met coeliakie. Neem vooraf contact op voor de eerstvolgende glutenvrije dag en bespreek uw bestelling met ons."
       },
       {
         "v": "Kan een visschaal bezorgd worden?",
@@ -500,7 +500,7 @@
     "perSchaal": "per persoon",
     "stap1": "Stap 1",
     "stap2": "Stap 2",
-    "schaalKop": "Kies uw schaal of borrelbox",
+    "schaalKop": "Bekijk visschalen",
     "schaalUitleg": "Op zoek naar een visschaal in Leiden voor een verjaardag, borrel, receptie of bedrijfsfeest? Bekijk de foto’s en kies wat u aanspreekt. We denken met u mee over uw favoriete vis, het aantal gasten en de gelegenheid. Gemiddeld rekenen we circa € 17,50 per persoon. Extra’s of duurdere vissoorten kunnen de prijs verhogen; we bespreken dat vooraf via WhatsApp.",
     "fotoVoorbeeld": "Inspiratie voor uw visschaal",
     "voorPersonen": "Voor {van} tot {tot} personen",
