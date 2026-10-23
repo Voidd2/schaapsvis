@@ -57,9 +57,18 @@
     "assortimentIntro": "Bekijk onze barbecuepakketten, visgourmet, losse spiesjes en vispakketjes. U bespreekt uw keuze rechtstreeks met ons via WhatsApp.",
     "faqHeading": "Veelgestelde vragen over vis voor barbecue en gourmet",
     "faq": [
-      { "v": "Hoe vraag ik een barbecuepakket of gourmetselectie aan?", "a": "Kies een product op deze pagina en klik op de WhatsApp-knop. We bespreken uw keuze en bevestigen de beschikbaarheid, samenstelling en prijs voordat we iets klaarmaken." },
-      { "v": "Kan ik losse visspiesjes bestellen?", "a": "Ja. U vindt hier onder meer zalm-, tonijn- en gambaspiesjes. Een zalmspies kost € 4 per stuk. Stuur ons via WhatsApp uw keuze en we bespreken de mogelijkheden." },
-      { "v": "Kan ik mijn selectie aanpassen?", "a": "Vertel ons via WhatsApp wat u in gedachten heeft. We bespreken samen welke samenstelling mogelijk is en spreken de inhoud en prijs vooraf af." }
+      {
+        "v": "Hoe vraag ik een barbecuepakket of gourmetselectie aan?",
+        "a": "Kies een product op deze pagina en klik op de WhatsApp-knop. We bespreken uw keuze en bevestigen de beschikbaarheid, samenstelling en prijs voordat we iets klaarmaken."
+      },
+      {
+        "v": "Kan ik losse visspiesjes bestellen?",
+        "a": "Ja. U vindt hier onder meer zalm-, tonijn- en gambaspiesjes. Een zalmspies kost € 4 per stuk. Stuur ons via WhatsApp uw keuze en we bespreken de mogelijkheden."
+      },
+      {
+        "v": "Kan ik mijn selectie aanpassen?",
+        "a": "Vertel ons via WhatsApp wat u in gedachten heeft. We bespreken samen welke samenstelling mogelijk is en spreken de inhoud en prijs vooraf af."
+      }
     ],
     "slotTitle": "Samen kiezen we wat bij uw tafel past",
     "slotText": "Vertel ons voor welke gelegenheid u vis zoekt en welke producten u aanspreken. Via WhatsApp bespreken we de mogelijkheden en spreken we de samenstelling en prijs vooraf met u af."
@@ -464,7 +473,7 @@
     "levertijdKop": "Op tijd bestellen",
     "levertijdTekst": "Voor een schaal plannen we graag een paar dagen vooruit. Rond de kerstdagen en Oud & Nieuw is het druk — bestel dan ruim op tijd, dan weet u zeker dat het lukt.",
     "allergieKop": "Allergieën",
-    "allergieTekst": "Op één vaste dag per week bereiden we glutenvrije kibbeling en gebakken garnalen voor mensen met coeliakie. Neem vooraf contact op; we vertellen u welke dag eraan komt en stemmen uw bestelling met u af.",
+    "allergieTekst": "Op onze vaste glutenvrije dag garanderen we een glutenvrije bereiding van kibbeling en gebakken garnalen voor mensen met coeliakie. Neem vooraf contact op om de eerstvolgende dag te bevestigen en uw bestelling af te stemmen.",
     "faqKop": "Veelgestelde vragen over visschalen",
     "faq": [
       {
@@ -485,7 +494,7 @@
       },
       {
         "v": "Kan ik rekening laten houden met een allergie?",
-        "a": "We maken één dag per week glutenvrije kibbeling en gebakken garnalen voor mensen met coeliakie. Neem vooraf contact op voor de eerstvolgende glutenvrije dag en bespreek uw bestelling met ons."
+        "a": "Op onze vaste glutenvrije dag garanderen we een glutenvrije bereiding van kibbeling en gebakken garnalen voor mensen met coeliakie. Neem vooraf contact op om de eerstvolgende dag te bevestigen en uw bestelling af te stemmen."
       },
       {
         "v": "Kan een visschaal bezorgd worden?",
@@ -668,5 +677,3 @@
     "gratisWeegvis": "Verse vis rekenen we op gewicht af. Komt uw bestelling boven {bedrag} uit, dan vervalt de bezorging — de prijs spreken we vooraf met u af."
   }
 }
-
-
