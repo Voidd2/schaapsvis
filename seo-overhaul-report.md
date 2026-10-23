@@ -24,7 +24,7 @@ Koppel keurmerkclaims daarom alleen aan het etiket van de partij die daadwerkeli
 | 9 | hreflang nl/en/de + x-default, in beide richtingen | ✅ | Per-pagina `alternates` (was al aanwezig) + nu ook in sitemap. |
 | 10 | Indexeerbaarheid en www-canonicalisatie | ⚠️ | De productiehost staat bewust achter het wachtwoordslot; de openbare route toont “Binnenkort online” en kan dus niet normaal worden geïndexeerd. Metadata en sitemap zijn in de sitecode voorbereid; bevestig www-redirects en Search Console na de lancering. |
 | 11 | Eigen, actueel assortiment en productinformatie | ⚠️ | 67 producten volgens de huidige eigenaar-assortimentcheck; beschikbaarheid en foto’s worden per product beheerd. Geen doel om een concurrent ongewijzigd in productaantal te evenaren. |
-| 12 | 4–6 blogartikelen met interne links naar money-pages | ✅ | Er waren al 8 artikelen; +1 nieuw money-keyword-artikel ("Waar koop je biologische vis in Leiden?"); interne links wijzen naar `/biologische-vis` en `/varlaks`. |
+| 12 | Blogartikelen met interne links naar relevante product- en locatiepagina’s | ✅ / ⚠️ | Er zijn 18 artikelen en de technische contentcheck vindt geen ontbrekende blogfoto’s. Controleer inhoud en linkrelevantie handmatig; meer artikelen zijn niet automatisch beter. |
 | 13 | Lighthouse SEO ≥ 95, performance gemeten | ⚠️ | Nog niet gemeten. De productiebuild is succesvol, maar de afgeschermde site is niet visueel of met Lighthouse op de openbare route geaudit. Meet op de preview en herhaal na het uitzetten van het slot. |
 | 14 | `fotos-aan-te-leveren.md` + `lokale-seo-acties.md` opgeleverd | ✅ | Plus `external-assets-report.md`, `redirects-report.md` en dit rapport. |
 
@@ -38,7 +38,7 @@ Legenda: ✅ klaar · ⚠️ gedeeltelijk / actie bij Lucas of hosting.
 ## Belangrijkste resterende acties voor Lucas
 1. **Google Search Console** koppelen → "Pagina's" exporteren → oude URL's aanvullen in
    `next.config.ts` `redirects()` (zie `redirects-report.md`).
-2. **Echte foto's** aanleveren (`fotos-aan-te-leveren.md`) + een raster `og-image.png` (1200×630).
+2. **Echte foto's** aanleveren (`fotos-aan-te-leveren.md`). Een raster `og-image.png` van 1200×630 bestaat al; controleer de uiteindelijke weergave bij delen op sociale media.
 3. **Lokale SEO** uitvoeren (`lokale-seo-acties.md`): Google Bedrijfsprofiel, NAP-consistentie, reviews, backlinks.
 4. **non-www → www** redirect op de Vercel-domeininstellingen bevestigen.
 5. (Optioneel) Assortiment verder uitbreiden richting volledige Hartevelt-breedte.
