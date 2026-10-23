@@ -9,6 +9,10 @@ on:
       - "package.json"
       - "package-lock.json"
       - "next.config.*"
+      - "vite.config.*"
+      - "cloudflare.config.*"
+      - "wrangler.*"
+      - "workers/**"
       - "tsconfig.json"
       - "postcss.config.*"
       - "tailwind.config.*"
@@ -23,6 +27,10 @@ on:
       - "package.json"
       - "package-lock.json"
       - "next.config.*"
+      - "vite.config.*"
+      - "cloudflare.config.*"
+      - "wrangler.*"
+      - "workers/**"
       - "tsconfig.json"
       - "postcss.config.*"
       - "tailwind.config.*"
@@ -35,7 +43,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -45,3 +53,4 @@ jobs:
       - run: npm ci
       - run: npm run check:content
       - run: npm run build
+      - run: npm run build:cloudflare
