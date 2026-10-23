@@ -279,7 +279,7 @@
     "kop": "Verse vis in Leiden. Met zorg gekozen, sinds 1938.",
     "inleiding": "Al vier generaties helpen we Leidenaren aan goede vis en eerlijk advies. Gerrit Schaap begon in 1938; vandaag staat Aldert voor u klaar. Bezoek onze viswinkel aan de Herenstraat, ontmoet ons op de Leidse markt of kom vrijdag langs bij Hoogvliet in Voorschoten.",
     "knopBestellen": "Bestellen",
-    "knopVisschaal": "Visschaal samenstellen",
+    "knopVisschaal": "Bekijk visschalen",
     "feit1Kop": "Bezorgen",
     "feit1Tekst": "{dagen}, in vijf gemeenten",
     "feit2Kop": "Afhalen",
@@ -401,7 +401,7 @@
     "betalenBinnenkort": "Binnenkort: iDEAL, creditcard, Apple Pay en Google Pay",
     "faqKop": "Veelgestelde vragen over bezorgen",
     "ctaKop": "Zin in vis?",
-    "ctaTekst": "Bestel uw visschaal voor {tijd} de dag ervoor. Voor andere producten bespreken we de mogelijkheden via WhatsApp.",
+    "ctaTekst": "Bekijk onze visschalen en vraag uw samenstelling via WhatsApp aan. Bestel uw bezorging voor {tijd} de dag ervoor.",
     "plaatsKop": "Verse vis bezorgen in {plaats}",
     "plaatsEyebrow": "Bezorggebied",
     "plaatsWijkenKop": "In welke wijken van {plaats} we komen",
@@ -410,7 +410,7 @@
     "plaatsRijtijd": "Rijtijd vanaf de Herenstraat: {tijd}.",
     "plaatsAndere": "We bezorgen ook in",
     "plaatsCtaKop": "Bestellen voor {plaats}",
-    "plaatsCtaTekst": "Stel uw visschaal samen. Bestel voor {tijd} de dag ervoor voor bezorging op {dagen}. Vraag ons via WhatsApp naar andere producten.",
+    "plaatsCtaTekst": "Bekijk onze visschalen en vraag uw samenstelling via WhatsApp aan. Bestel voor {tijd} de dag ervoor voor bezorging op {dagen}. Vraag ons via WhatsApp naar andere producten.",
     "faq": [
       {
         "v": "Bezorgen jullie bij mij in de buurt?",
