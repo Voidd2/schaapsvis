@@ -17,7 +17,24 @@ for(const l of locales){
 }
 // Every message key must exist in all languages; placeholders must match.
 const messages=Object.fromEntries(locales.map(l=>[l,JSON.parse(fs.readFileSync(`src/messages/${l}.json`,'utf8'))]));
-const platters=load('visschaal'),platterCopy=load('platter-localization'),photos=load('product-beeld'),selection=load('dirks-selectie');
+const platters=load('visschaal'),photos=load('product-beeld'),selection=load('dirks-selectie');
+function componentConstant(name){
+ const file='src/app/[locale]/visschalen/SelectieAanvraag.tsx';
+ const source=ts.createSourceFile(file,fs.readFileSync(file,'utf8'),ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX);
+ for(const statement of source.statements){
+  if(!ts.isVariableStatement(statement))continue;
+  for(const declaration of statement.declarationList.declarations){
+   if(declaration.name.getText(source)===name&&declaration.initializer){
+    const transpiledModule={exports:{}};
+    const code=ts.transpile(`module.exports=${declaration.initializer.getText(source)};`,{target:ts.ScriptTarget.ES2022});
+    new Function('module',code)(transpiledModule);
+    return transpiledModule.exports;
+   }
+  }
+ }
+ throw new Error(`Missing component copy constant ${name}`);
+}
+const platterPageText=componentConstant('TEKST'),ownPlatterNames=componentConstant('EIGEN_SCHAAL_NAMEN');
 check(selection.DIRKS_SELECTIE.length===30,'Incomplete platter/BBQ selection');
 check(selection.DIRKS_VISSCHALEN.length===17,'Incomplete seafood platter selection');
 check(selection.DIRKS_BARBECUE.length===13,'Incomplete BBQ/gourmet selection');
@@ -33,7 +50,8 @@ for(const l of locales){
   for(const key of [item.id,item.toelichting&&`toelichting_${item.id}`,item.perStuk&&`eenheid_${item.perStuk}`,item.seizoen&&`seizoen_${item.seizoen}`].filter(Boolean))check(!!items[key],`Missing platter item ${l}/${key}`);
  }
  for(const group of platters.GROEP_VOLGORDE)for(const prefix of ['groep_','uitleg_'])check(!!items[prefix+group],`Missing platter group ${l}/${group}`);
- const texts=platters.SCHALEN.flatMap(s=>{const t=platterCopy.localizePlatter(s,l);check(t.bevat.length===s.bevat.length,`Platter ingredients ${l}/${s.id}`);return [t.naam,t.omschrijving,...t.bevat];});
+ const pageCopy=platterPageText[l];
+ const texts=[messages[l].visschaal.kop,messages[l].visschaal.inleiding,messages[l].visschaal.gemiddeld,messages[l].visschaal.perSchaal,pageCopy.visschalen,pageCopy.visschalenIntro,pageCopy.waarschuwing,pageCopy.vraag,pageCopy.foto,...Object.values(ownPlatterNames).map(names=>names[l]),...selection.DIRKS_VISSCHALEN.map(item=>selection.selectieNaam(item.slug,l))];
  const homeTexts=[...load('local-pages-copy').localLocations(l).flatMap(p=>[p.naam,p.adres,p.dagen]),...load('reviews').googleReviews.slice(0,3).map(r=>load('reviews').localizeReview(r,l).text)];
  for(const suffix of ['','/visschalen','/assortiment','/bezoek-ons','/biologische-vis','/varlaks','/ons-verhaal','/contact','/recepten','/blog','/viswinkel-voorschoten'])pages.push({path:`/${l}${suffix}`,texts:suffix==='/visschalen'?texts:suffix===''?homeTexts:[]});
  for(const p of products.products){const t=translatedProducts.localizeProduct(p,l),photo=photos.productPhoto(t,l);if(photo)check(!!photo.alt,`Missing image description ${l}/${p.slug}`);}
