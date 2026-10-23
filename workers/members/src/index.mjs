@@ -293,6 +293,74 @@ async function adminAnalytics(request, env) {
   return json({ since, days, rows: rows.results || [] });
 }
 
+async function adminCustomers(request, env) {
+  const admin = await requireAdmin(request, env);
+  if (!admin) return json({ error: "forbidden" }, 403);
+  const url = new URL(request.url);
+  const cursorValue = String(url.searchParams.get("cursor") || "");
+  let cursor = null;
+  if (cursorValue) {
+    if (cursorValue.length > 500) return json({ error: "invalid_cursor" }, 400);
+    try {
+      const decoded = JSON.parse(decoder.decode(fromBase64url(cursorValue)));
+      if (typeof decoded?.createdAt !== "string" || decoded.createdAt.length > 40 || typeof decoded?.id !== "string" || decoded.id.length > 128) {
+        return json({ error: "invalid_cursor" }, 400);
+      }
+      cursor = decoded;
+    } catch {
+      return json({ error: "invalid_cursor" }, 400);
+    }
+  }
+  const result = await env.DB.prepare(`
+    SELECT u.id, u.full_name, u.email, u.email_verified_at IS NOT NULL AS email_verified, u.account_status, u.created_at,
+      COALESCE(n.status, 'not-subscribed') AS newsletter_status,
+      (SELECT p.status FROM student_passes p WHERE p.user_id = u.id ORDER BY p.issued_at DESC LIMIT 1) AS student_pass_status
+    FROM users u
+    LEFT JOIN newsletter_subscriptions n ON n.email = u.email
+    WHERE u.account_status IN ('active', 'locked')
+      AND (? IS NULL OR u.created_at < ? OR (u.created_at = ? AND u.id < ?))
+    ORDER BY u.created_at DESC, u.id DESC
+    LIMIT 101
+  `).bind(cursor?.createdAt ?? null, cursor?.createdAt ?? null, cursor?.createdAt ?? null, cursor?.id ?? "").all();
+  const rows = result.results || [];
+  const hasMore = rows.length > 100;
+  const customers = rows.slice(0, 100);
+  const last = customers[customers.length - 1];
+  const nextCursor = hasMore && last ? base64url(encoder.encode(JSON.stringify({ createdAt: last.created_at, id: last.id }))) : null;
+  return json({ customers, hasMore, nextCursor });
+}
+
+async function adminCustomerStatus(request, env, customerId) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  const admin = await requireAdmin(request, env);
+  if (!admin) return json({ error: "forbidden" }, 403);
+  const body = await readJson(request);
+  const status = body?.status;
+  if (!["active", "locked"].includes(status)) return json({ error: "invalid_status" }, 400);
+  const customer = await env.DB.prepare(`SELECT id, email, account_status FROM users WHERE id = ? AND account_status IN ('active', 'locked')`).bind(customerId).first();
+  if (!customer) return json({ error: "customer_not_found" }, 404);
+  const adminEmails = String(env.ADMIN_EMAILS || "").split(",").map((email) => email.trim().toLowerCase()).filter(Boolean);
+  if (adminEmails.includes(String(customer.email).toLowerCase())) return json({ error: "administrator_protected" }, 409);
+  if (customer.account_status === status) return json({ ok: true, status, unchanged: true });
+
+  const now = nowIso();
+  const action = status === "locked" ? "account_locked" : "account_restored";
+  const statements = [
+    env.DB.prepare(`UPDATE users SET account_status = ?, updated_at = ? WHERE id = ? AND account_status = ?`)
+      .bind(status, now, customer.id, customer.account_status),
+    env.DB.prepare(`INSERT INTO admin_customer_audit (id, admin_user_id, customer_user_id, action, from_status, to_status, occurred_at)
+      SELECT ?, ?, ?, ?, ?, ?, ? WHERE changes() = 1`)
+      .bind(crypto.randomUUID(), admin.id, customer.id, action, customer.account_status, status, now),
+  ];
+  if (status === "locked") {
+    statements.push(env.DB.prepare(`UPDATE sessions SET revoked_at = ? WHERE user_id = ? AND revoked_at IS NULL`).bind(now, customer.id));
+  }
+  const result = await env.DB.batch(statements);
+  if (Number(result?.[0]?.meta?.changes || 0) !== 1) return json({ error: "customer_changed" }, 409);
+  if (Number(result?.[1]?.meta?.changes || 0) !== 1) return json({ error: "audit_failed" }, 503);
+  return json({ ok: true, status });
+}
+
 async function createSession(env, userId) {
   const token = await randomToken();
   const created = nowIso();
@@ -1066,6 +1134,9 @@ const memberWorker = {
     if (path === "/api/members/student-application" && method === "POST") return submitStudentApplication(request, env);
     if (path === "/api/members/admin/student-applications" && method === "GET") return adminQueue(request, env);
     if (path === "/api/members/admin/analytics" && method === "GET") return adminAnalytics(request, env);
+    if (path === "/api/members/admin/customers" && method === "GET") return adminCustomers(request, env);
+    const customerStatusMatch = path.match(/^\/api\/members\/admin\/customers\/([0-9a-f-]{36})\/status$/i);
+    if (customerStatusMatch && method === "POST") return adminCustomerStatus(request, env, customerStatusMatch[1]);
     if (path === "/api/members/admin/pass/verify" && method === "POST") return verifyPass(request, env);
     if (path === "/api/members/admin/newsletter-campaigns" && method === "GET") return adminNewsletterCampaigns(request, env);
     if (path === "/api/members/admin/newsletter-campaigns" && method === "POST") return createNewsletterCampaign(request, env);
