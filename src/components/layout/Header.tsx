@@ -39,9 +39,11 @@ export function Header() {
   const links = [
     { href: p("/assortiment"), label: t("assortiment") },
     { href: p("/barbecue-gourmet"), label: locale === "de" ? "Grill & Gourmet" : locale === "en" ? "Barbecue & gourmet" : "Barbecue & gourmet" },
+    { href: p("/biologische-vis"), label: locale === "de" ? "Bio, ASC & MSC" : locale === "en" ? "Organic, ASC & MSC" : "Biologische vis" },
+    { href: p("/visschalen"), label: t("visschalen") },
+    { href: p("/studentenkorting"), label: locale === "de" ? "Studentenrabatt" : locale === "en" ? "Student discount" : "Studentenkorting" },
     { href: p("/recepten"), label: t("recepten") },
     { href: p("/bezoek-ons"), label: t("locaties") },
-    { href: p("/studentenkorting"), label: locale === "de" ? "Studentenrabatt" : locale === "en" ? "Student discount" : "Studentenkorting" },
     { href: p("/account"), label: locale === "de" ? "Konto" : locale === "en" ? "Account" : "Account" },
   ];
 
@@ -73,7 +75,7 @@ export function Header() {
       <header
         style={{ backgroundColor: "var(--cream)", borderBottom: "1px solid var(--linen)" }}
       >
-        <div className="max-w-6xl mx-auto px-4 flex items-center justify-between gap-3 lg:gap-6 h-[4.4rem]">
+        <div className="max-w-6xl mx-auto px-4 flex items-center justify-between gap-3 lg:gap-6 min-h-[4.4rem] py-2">
           <Link href={p("")} className="min-w-0 leading-none flex items-center gap-3">
             {/* Het ronde logo, zodra de eigenaar het aanlevert. Klein gehouden:
                 een grote badge in de kop duwt de navigatie van de rand en maakt
@@ -110,8 +112,8 @@ export function Header() {
             </span>
           </Link>
 
-          <nav className="hidden xl:flex items-center gap-3 xl:gap-4 text-[0.85rem]">
-            {links.slice(0, 4).map(({ href, label }) => (
+          <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="hidden xl:grid grid-cols-4 items-center justify-items-end gap-x-4 gap-y-2 text-[0.82rem]">
+            {links.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
@@ -132,10 +134,6 @@ export function Header() {
             <div className="hidden xl:block" style={{ color: "var(--charcoal)" }}>
               <LanguageSwitcher />
             </div>
-
-            <Link href={p("/visschalen")} className="knop knop-rood hidden sm:inline-flex !py-2.5 !px-5 !text-[0.9rem]">
-              {t("visschalen")}
-            </Link>
 
             <a
               href={`tel:${BEDRIJF.telefoon.e164}`}
@@ -167,15 +165,7 @@ export function Header() {
             className="xl:hidden max-h-[calc(100dvh-6.4rem)] overflow-y-auto overscroll-contain"
             style={{ backgroundColor: "var(--cream)", borderTop: "1px solid var(--linen)" }}
           >
-            <nav className="max-w-6xl mx-auto px-4 py-2">
-              <Link
-                href={p("/visschalen")}
-                onClick={() => setOpen(false)}
-                className="knop knop-rood w-full my-3 sm:hidden"
-              >
-                {t("visschalen")}
-              </Link>
-
+            <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="max-w-6xl mx-auto px-4 py-2">
               {links.map(({ href, label }) => (
                 <Link
                   key={href}

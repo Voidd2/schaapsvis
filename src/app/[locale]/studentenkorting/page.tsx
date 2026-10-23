@@ -26,7 +26,7 @@ const copy = {
     privacy: "De registratie is technisch voorbereid, maar nog niet live. Voor studentverificatie controleren we beide adressen met een aparte code. Aanbiedingen per e-mail zijn vrijwillig, staan los van de korting en kun je altijd afmelden.",
     weekly: "Regelmatig iets nieuws proeven",
     weeklyText:
-      "Meld je apart en vrijwillig aan voor nieuws en aanbiedingen speciaal voor Schaap’s-klanten. We sturen een bericht wanneer er iets leuks te delen is. Deze aanbiedingen zijn niet te combineren met de studentenkorting of andere acties.",
+      "Meld je apart en vrijwillig aan voor nieuws en aanbiedingen speciaal voor Schaap’s-klanten. Soms delen we ook een groepsaanbieding voor studentenverenigingen. We sturen alleen een bericht wanneer er iets leuks te delen is. Deze aanbiedingen zijn niet te combineren met de studentenkorting of andere acties.",
     status: "Aanmelden voor korting opent zodra de veilige opslag, e-mail en beheeromgeving in Cloudflare zijn gekoppeld.",
     account: "Bekijk accountpagina",
     home: "Bekijk ons assortiment",
@@ -56,7 +56,7 @@ const copy = {
       "Registration is prepared in the codebase but is not live yet. Student verification checks both addresses with a separate code. Email offers are optional, separate from the discount, and can be cancelled at any time.",
     weekly: "Discover something new from time to time",
     weeklyText:
-      "Sign up separately and voluntarily for news and offers especially for Schaap’s customers. We will email when there is something worth sharing. These offers cannot be combined with the student discount or other promotions.",
+      "Sign up separately and voluntarily for news and offers especially for Schaap’s customers. From time to time, we may also share a group offer for student associations. We will email only when there is something worth sharing. These offers cannot be combined with the student discount or other promotions.",
     status: "Student applications open when secure storage, email and admin review are connected in Cloudflare.",
     account: "Open your account",
     home: "Explore our range",
@@ -86,7 +86,7 @@ const copy = {
       "Die Registrierung ist im Code vorbereitet, aber noch nicht live. Für die Studentenprüfung bestätigen wir beide Adressen mit separaten Codes. E-Mail-Angebote sind freiwillig, vom Rabatt getrennt und jederzeit abbestellbar.",
     weekly: "Ab und zu etwas Neues entdecken",
     weeklyText:
-      "Melden Sie sich separat und freiwillig für Neuigkeiten und Angebote speziell für Schaap’s-Kunden an. Wir schreiben, wenn es etwas Schönes zu teilen gibt. Diese Angebote sind nicht mit dem Studentenrabatt oder anderen Aktionen kombinierbar.",
+      "Melden Sie sich separat und freiwillig für Neuigkeiten und Angebote speziell für Schaap’s-Kunden an. Gelegentlich teilen wir auch ein Gruppenangebot für Studierendenvereine. Wir schreiben nur, wenn es etwas Schönes zu teilen gibt. Diese Angebote sind nicht mit dem Studentenrabatt oder anderen Aktionen kombinierbar.",
     status: "Studentenanträge werden freigeschaltet, sobald sicherer Speicher, E-Mail und Verwaltung in Cloudflare verbunden sind.",
     account: "Kontoseite öffnen",
     home: "Sortiment entdecken",
