@@ -298,7 +298,7 @@ async function adminCustomers(request, env) {
   if (!admin) return json({ error: "forbidden" }, 403);
   const url = new URL(request.url);
   const search = String(url.searchParams.get("q") || "").trim().slice(0, 80);
-  const escaped = search.replace(/[\\%_]/g, "\\async function createSession(env, userId) {");
+  const escaped = search.replace(/[\\%_]/g, "\\$&");
   const pattern = `%${escaped}%`;
   const rows = await env.DB.prepare(`
     SELECT u.id, u.full_name, u.email, u.email_verified_at, u.account_status, u.created_at,
