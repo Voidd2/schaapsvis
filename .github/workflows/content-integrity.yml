@@ -1,0 +1,37 @@
+name: Content integrity
+
+on:
+  pull_request:
+    paths:
+      - "src/messages/**"
+      - "src/lib/assortiment-data.ts"
+      - "src/lib/recepten.ts"
+      - "src/lib/recepten-praktisch.ts"
+      - "src/lib/recept-fotos.ts"
+      - "public/images/recepten/**"
+      - "scripts/check-content-integrity.mjs"
+      - ".github/workflows/content-integrity.yml"
+  push:
+    branches: [main]
+    paths:
+      - "src/messages/**"
+      - "src/lib/assortiment-data.ts"
+      - "src/lib/recepten.ts"
+      - "src/lib/recepten-praktisch.ts"
+      - "src/lib/recept-fotos.ts"
+      - "public/images/recepten/**"
+      - "scripts/check-content-integrity.mjs"
+      - ".github/workflows/content-integrity.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  content-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm run check:content
