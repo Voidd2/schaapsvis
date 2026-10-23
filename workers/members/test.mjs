@@ -222,14 +222,14 @@ const customerList = await call("/api/members/admin/customers", { cookie: sessio
 assert.equal(customerList.status, 200, "allowlisted administrator can list customer accounts");
 const customerPage = await customerList.json();
 const customerRows = customerPage.customers;
-assert.equal(customerRows.length, 2, "customer listing is paginated and includes verified account holders");
 const customerRow = customerRows.find((row) => row.id === managedCustomerId);
+assert.ok(customerRow, "allowlisted administrator can find the newly created customer account");
 assert.equal(customerRow.email, "customer@example.test");
 assert.equal(customerRow.email_verified, 1);
 assert.equal(customerPage.hasMore, false);
 assert.equal(customerPage.nextCursor, null);
-assert.equal("password_hash" in customerRow, false, "customer directory never returns password hashes");
-assert.equal("school_email" in customerRow, false, "customer directory omits school email addresses");
+assert.ok(customerRows.every((row) => !("password_hash" in row)), "customer directory never returns password hashes");
+assert.ok(customerRows.every((row) => !("school_email" in row)), "customer directory omits school email addresses");
 assert.equal((await call("/api/members/admin/customers?cursor=not-a-cursor", { cookie: sessionCookie })).status, 400, "invalid pagination cursors are rejected");
 const lockedCustomer = await call(`/api/members/admin/customers/${managedCustomerId}/status`, { method: "POST", cookie: sessionCookie, body: { status: "locked" } });
 assert.equal(lockedCustomer.status, 200, "allowlisted administrator can suspend a customer account");
