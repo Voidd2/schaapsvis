@@ -40,6 +40,7 @@ const translations = {
     altFarm: "Medewerker bij een zalmkweeknet in Noord-Noorwegen, beeld van VÅRLAKS",
     altPack: "VÅRLAKS-zalmfilets in een transportbak",
     altDish: "Ovengebakken zalm met citroen, dille en groenten, serveersuggestie",
+    heroAlt: "Rauwe VÅRLAKS-zalmfilet met citroen en dille",
   },
   en: {
     title: "VÅRLAKS salmon: salmon from Northern Norway",
@@ -73,6 +74,7 @@ const translations = {
     altFarm: "Worker beside a salmon farm net pen in Northern Norway, image by VÅRLAKS",
     altPack: "VÅRLAKS salmon fillets in a transport box",
     altDish: "Oven-baked salmon with lemon, dill and vegetables, serving suggestion",
+    heroAlt: "Raw VÅRLAKS salmon fillet with lemon and dill",
   },
   de: {
     title: "VÅRLAKS-Lachs aus Nordnorwegen",
@@ -106,6 +108,7 @@ const translations = {
     altFarm: "Mitarbeiter an einem Lachszuchtnetz in Nordnorwegen, Bild von VÅRLAKS",
     altPack: "VÅRLAKS-Lachsfilets in einer Transportbox",
     altDish: "Ofenlachs mit Zitrone, Dill und Gemüse, Serviervorschlag",
+    heroAlt: "Rohes VÅRLAKS-Lachsfilet mit Zitrone und Dill",
   },
 } as const;
 
@@ -139,7 +142,7 @@ export default async function VarlaksPage({ params }: { params: Promise<{ locale
     <Schema data={kruimelSchema(lang, [{ naam: BEDRIJF.naamKort, pad: "/" }, { naam: "VÅRLAKS", pad: "/varlaks" }])} />
     <header className="fresh-hero"><div className="section-wrap fresh-hero-grid">
       <div><p className="kapitaal">{c.eyebrow}</p><h1>{c.title}</h1><p className="fresh-intro">{c.intro}</p><div className="mt-7 flex flex-wrap gap-3"><Link className="knop knop-navy" href={`/${lang}/assortiment/varlaks-zalm`}>{c.product}</Link><a className="knop knop-lijn" href={ask.href}>{c.ask}</a></div></div>
-      <figure className="overflow-hidden rounded-2xl"><Image src="/images/varlaks/from-egg-to-plate-3.jpg.webp" alt={c.altPack} width={1400} height={933} sizes="(max-width: 800px) 100vw, 50vw" className="w-full aspect-[4/3] object-cover" fetchPriority="high" /><figcaption className="bg-white px-4 py-3 text-sm text-slate-600">{c.images}</figcaption></figure>
+      <figure className="overflow-hidden rounded-2xl"><Image src="/images/editorial/varlaks-zalm-rauw-ai.webp" alt={c.heroAlt} width={1400} height={1050} sizes="(max-width: 800px) 100vw, 50vw" className="w-full aspect-[4/3] object-cover" fetchPriority="high" /><figcaption className="bg-white px-4 py-3 text-sm text-slate-600">{c.heroAlt}</figcaption></figure>
     </div></header>
     <section className="story-section section-wrap"><div className="story-grid"><div><p className="kapitaal">VÅRLAKS · {lang === "nl" ? "Noord-Noorwegen" : lang === "de" ? "Nordnorwegen" : "Northern Norway"}</p><h2>{c.storyTitle}</h2><p>{c.story}</p><p className="mt-5 rounded-xl border border-sky-200 bg-sky-50 p-5 leading-relaxed">{c.distinction}</p><a className="mt-5 inline-block underline font-semibold" href="https://varlaks.no/retail/" target="_blank" rel="noopener noreferrer">{c.source} ↗</a></div><div><p className="kapitaal mb-3">{c.films}</p><VarlaksFilm locale={lang} /></div></div></section>
     <section className="section-wrap py-16 md:py-20"><div className="mb-8"><p className="kapitaal">{c.eyebrow}</p><h2 className="text-3xl md:text-4xl">{c.journey}</h2></div><div className="grid gap-6 md:grid-cols-3">{cards.map((card) => <article key={card.title} className="overflow-hidden rounded-2xl border border-sky-100 bg-white shadow-sm"><Image src={card.generated ? "/images/editorial/varlaks-zalm-serveersuggestie-ai.png" : `/images/varlaks/${card.image}`} alt={card.alt} width={1200} height={800} sizes="(max-width: 768px) 100vw, 33vw" className="aspect-[4/3] w-full object-cover" /><div className="p-5"><h3 className="mb-2 text-xl">{card.title}</h3><p className="leading-relaxed">{card.text}</p></div></article>)}</div><p className="mt-4 text-sm text-slate-600">{c.images}</p></section>
@@ -147,3 +150,4 @@ export default async function VarlaksPage({ params }: { params: Promise<{ locale
     <section className="story-section section-wrap"><div className="grid items-center gap-10 lg:grid-cols-2"><div><p className="kapitaal">{c.availability.split(".")[0]}</p><h2>{c.product}</h2><p className="mt-3 max-w-xl leading-relaxed">{c.availability}</p><div className="mt-6 flex flex-wrap gap-3"><Link className="knop knop-navy" href={`/${lang}/assortiment/varlaks-zalm`}>{c.product} →</Link><Link className="knop knop-lijn" href={`/${lang}/recepten/zalm-citroen-dille`}>{c.recipe} →</Link></div></div><div className="overflow-hidden rounded-2xl"><Image src="/images/editorial/varlaks-zalm-serveersuggestie-ai.png" alt={c.altDish} width={1536} height={1024} sizes="(max-width: 800px) 100vw, 50vw" className="aspect-[4/3] w-full object-cover" /></div></div></section>
   </>;
 }
+

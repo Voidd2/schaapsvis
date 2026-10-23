@@ -13,10 +13,12 @@ type Props={params:Promise<{locale:string}>};
 export async function generateMetadata({params}:Props):Promise<Metadata>{const {locale}=await params,c=recipeCopy(locale);return paginaMetadata({locale,pad:"/recepten",title:c.metaTitle,description:c.metaDescription});}
 export default async function RecipeIndex({params}:Props){
  const {locale}=await params,c=recipeCopy(locale),items=recepten.map(r=>localizeRecipe(r,locale)),contact=bestelContact(locale);
+ const findRecipe=locale==="de"?"Rezept suchen":locale==="en"?"Find a recipe":"Zoek een recept";
  return <><Schema data={{"@context":"https://schema.org","@type":"ItemList",name:c.recipes,itemListElement:items.map((r,i)=>({"@type":"ListItem",position:i+1,url:`${BEDRIJF.domein}/${locale}/recepten/${r.slug}`,name:r.title}))}} />
- <PaginaKop className="recipe-index-heading" kruimels={[{naam:BEDRIJF.naamKort,href:`/${locale}`},{naam:c.recipes}]} label={c.cook} titel={c.headline} intro={`${items.length} ${c.intro}`} knoppen={[{label:contact.label,href:contact.href,extern:true},{label:c.calendar,href:`/${locale}/viskalender`,soort:"lijn"}]} />
+ <PaginaKop className="recipe-index-heading" kruimels={[{naam:BEDRIJF.naamKort,href:`/${locale}`},{naam:c.recipes}]} label={c.cook} titel={c.headline} intro={`${items.length} ${c.intro}`} knoppen={[{label:findRecipe,href:"#recipe-filters"},{label:c.calendar,href:`/${locale}/viskalender`,soort:"lijn"}]} />
  <Sectie grond="papier"><Kop label={c.find} titel={c.back} intro={c.findIntro} /><ReceptenClient items={items} locale={locale} /></Sectie>
  <Sectie grond="zand" smal><Kop titel={c.origin} /><p className="lees">{c.inspired} <a href="https://visrecepten.nl" target="_blank" rel="noopener noreferrer" className="font-semibold underline underline-offset-4">visrecepten.nl</a>. {c.adapted}</p></Sectie>
  <PaginaSlot titel={c.slot} tekst={c.policy} knoppen={[{label:contact.label,href:contact.href,extern:true},{label:c.platter,href:`/${locale}/visschalen`,soort:"lijn"},{label:c.hours,href:`/${locale}/bezoek-ons`,soort:"lijn"}]} />
  </>;
 }
+

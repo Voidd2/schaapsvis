@@ -277,13 +277,5 @@ export function productLeefgebied(slug: string, locale: string): string | undefi
   return copy?.[siteLanguage(locale)];
 }
 
-export const leefgebiedNote = {
-  nl: "Dit is het algemene leef- of visserijgebied van de soort, niet een bewering over de vangstlocatie van iedere afzonderlijke levering.",
-  en: "This describes the species' general habitat or fishery area, not the catch location of every individual delivery.",
-  de: "Dies beschreibt das allgemeine Lebens- oder Fanggebiet der Art, nicht den Fangort jeder einzelnen Lieferung.",
-} as const;
 
-export function productLeefgebiedNote(locale: string): string {
-  return leefgebiedNote[siteLanguage(locale)];
-}
 

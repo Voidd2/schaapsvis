@@ -1,6 +1,5 @@
 import type { Product } from "./assortiment-data";
 const dirksPhotoMap: Record<string,string> = {
-  "kabeljauwfilet": "kabeljauwfilet-rugstuk",
   "schol": "schol",
   "scholfilet": "scholfilet",
   "zeebaars": "zeebaars-ca-500-gram",
@@ -379,15 +378,22 @@ const ALTS:Record<string,readonly[string,string,string]>={
 "creuse-oesters":["Creuse oesters op ijs met citroen — serveersuggestie","Cupped Pacific oysters served on ice with lemon, serving suggestion","Felsenaustern auf Eis mit Zitrone, Serviervorschlag"],
 "bosje-sprot":["Gerookte sprot (Sprattus sprattus)","Smoked sprats, Sprattus sprattus","Geräucherte Sprotten, Sprattus sprattus"]
 };
+function accessiblePhotoAlt(value:string):string {
+ return value
+  .replace(/\s*[—–-]\s*(?:voorbeeldfoto|illustrative photo|beispielfoto|serveersuggestie|serveervoorbeeld|serveerinspiratie|serving suggestion|serviervorschlag)\.?$/i,"")
+  .replace(/,\s*(?:serving suggestion|serviervorschlag)\.?$/i,"")
+  .replace(/;\s*(?:voorbeeldfoto|illustrative photo|beispielfoto)[^.]*\.?$/i,"")
+  .trim();
+}
 export function productPhoto(product:Product,locale="nl"):ProductPhoto|null{
  const source=dirksPhotoMap[product.slug as keyof typeof dirksPhotoMap];
  if(source && product.slug !== "kibbeling"){
   const l=locale==="de"?"de":locale==="en"?"en":"nl";
   const localeIndex=l==="nl"?0:l==="en"?1:2;
   const translatedAlt=ALTS[product.slug];
-  const alt=translatedAlt?translatedAlt[localeIndex]:{nl:`${product.naam} op een lichte ondergrond — voorbeeldfoto`,en:`${product.naam} on a light background — illustrative photo`,de:`${product.naam} auf hellem Hintergrund — Beispielfoto`}[l];
+  const alt=translatedAlt?translatedAlt[localeIndex]:{nl:`${product.naam} op een lichte ondergrond`,en:`${product.naam} on a light background`,de:`${product.naam} auf hellem Hintergrund`}[l];
   const caption=["gerookte-zalm-high-seas","hollandse-garnalen","gerookte-zalm-snippers"].includes(product.slug) ? undefined : {nl:"Productfoto; herkomst en beschikbaarheid staan bij de productinformatie.",en:"Product photo; origin and availability are listed in the product information.",de:"Produktfotos; Herkunft und Verfügbarkeit stehen in den Produktinformationen."}[l];
-  return {src:`/images/dirks/${source}.webp`,alt,caption,editorial:true,whole:false};
+  return {src:`/images/dirks/${source}.webp`,alt:accessiblePhotoAlt(alt),caption,editorial:true,whole:false};
  }
  const inHouseImage=PRODUCT_BEELDEN[product.slug];
  if(inHouseImage&&["bot","schar","surimisalade","wijtingfilet","victoriabaars","gerookte-zalmmoot","gerookte-sprotfilet"].includes(product.slug)){
@@ -403,12 +409,12 @@ export function productPhoto(product:Product,locale="nl"):ProductPhoto|null{
    "gerookte-zalmmoot":{nl:"Moot warmgerookte zalmfilet.",en:"A portion of warm-smoked salmon fillet.",de:"Ein Stück heißgeräuchertes Lachsfilet."},
    "gerookte-sprotfilet":{nl:"Gerookte sprotfilet.",en:"Smoked sprat fillets.",de:"Geräucherte Sprottenfilets."},
   };
-  return {...inHouseImage,alt:translatedAlt?.[localeIndex]||inHouseImage.alt,caption:captions[product.slug][l],editorial:true,whole:false};
+  return {...inHouseImage,alt:accessiblePhotoAlt(translatedAlt?.[localeIndex]||inHouseImage.alt),caption:captions[product.slug][l],editorial:true,whole:false};
  }
  const internet=INTERNET_BEELDEN[product.slug];
  if(internet){
   const l=locale==="de"?"de":locale==="en"?"en":"nl";
-  const labels={nl:{product:"Productfoto ter illustratie",serving:"Serveervoorbeeld",species:"Hoofdingrediënt ter illustratie"},en:{product:"Illustrative product photograph",serving:"Serving suggestion",species:"Illustrative photograph of the main ingredient"},de:{product:"Produktfoto zur Illustration",serving:"Serviervorschlag",species:"Beispielfoto der Hauptzutat"}}[l];
+  const labels={nl:{product:"product",serving:"gerecht",species:"vissoort"},en:{product:"product",serving:"dish",species:"fish species"},de:{product:"Produkt",serving:"Gericht",species:"Fischart"}}[l];
   const captions={nl:{product:"Productfoto.",serving:"Serveersuggestie.",species:"De vissoort in beeld."},en:{product:"Product photo.",serving:"Serving suggestion.",species:"The fish shown."},de:{product:"Produktfoto.",serving:"Serviervorschlag.",species:"Die abgebildete Fischart."}}[l];
   const subjects:Record<string,Record<string,string>>={
    kabeljauwwangen:{nl:"Koppen van kabeljauw, waaruit de wangen worden gesneden",en:"Cod heads, from which the cheeks are cut",de:"Kabeljauköpfe, aus denen die Backen geschnitten werden"},
@@ -421,7 +427,7 @@ export function productPhoto(product:Product,locale="nl"):ProductPhoto|null{
   const caption=product.slug==="verse-heilbot"
    ? {nl:"Heilbot op ijs.",en:"Halibut on ice.",de:"Heilbutt auf Eis."}[l]
    : captions[internet.kind];
-  return {src:internet.src,alt:subjects[product.slug]?.[l]||product.naam+" — "+labels[internet.kind],caption,editorial:true,whole:internet.kind!=="serving",credit:internet.credit};
+  return {src:internet.src,alt:accessiblePhotoAlt(subjects[product.slug]?.[l]||`${product.naam} — ${labels[internet.kind]}`),caption,editorial:true,whole:internet.kind!=="serving",credit:internet.credit};
  }
  const photo=sourcePhoto(product);if(!photo)return null;
  if(["krabsalade","tonijnsalade","zalmsalade"].includes(product.slug))photo.caption=locale==="en"?"Salad serving suggestion.":locale==="de"?"Serviervorschlag für Fischsalat.":"Serveersuggestie voor vissalade.";
@@ -432,8 +438,10 @@ export function productPhoto(product:Product,locale="nl"):ProductPhoto|null{
   "gerookte-forel-heel":{nl:"Warmgerookte forel met citroen en dille.",en:"Hot-smoked trout with lemon and dill.",de:"Heißgeräucherte Forelle mit Zitrone und Dill."},
  };
  if(captionBySlug[product.slug])photo.caption=captionBySlug[product.slug][locale==="de"?"de":locale==="en"?"en":"nl"];
+ photo.alt=accessiblePhotoAlt(photo.alt);
  if(locale==="nl")return photo;
  const translated=ALTS[product.slug];
- return {...photo,alt:translated?translated[locale==="de"?2:1]:product.naam};
+ return {...photo,alt:accessiblePhotoAlt(translated?translated[locale==="de"?2:1]:product.naam)};
 }
+
 
