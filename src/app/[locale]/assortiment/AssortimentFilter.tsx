@@ -81,7 +81,7 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
             <span className="favorite-number">0{i + 1}</span>
           </Link>
           <div className="favorite-heading"><div><p>{c.categories[categories.indexOf(p.categorie)]}</p><h3><Link href={`/${locale}/assortiment/${p.slug}`}>{p.naam}</Link></h3></div><ArrowUpRight size={22} aria-hidden="true" /></div>
-          <p className="text-sm font-semibold mb-3">{productAvailability(p,locale).label}</p>
+          <div className="text-sm mb-3"><p className="font-semibold">{productAvailability(p,locale).label}</p>{productAvailability(p,locale).note && <p className="mt-1">{productAvailability(p,locale).note}</p>}</div>
           {p.slug === "creuse-oesters" && <a href={bestelContact(locale, p.naam).href} className="collection-whatsapp"><MessageCircle size={16} aria-hidden="true" />{locale === "nl" ? "Grotere bestelling? App ons" : locale === "de" ? "Größere Bestellung? Schreiben Sie uns" : "Larger order? Message us"}</a>}
         </article>;
       })}</div>
@@ -98,7 +98,7 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
             <div className="collection-item-copy"><p className="collection-category">{c.categories[categories.indexOf(p.categorie)]}</p><h3><Link href={`/${locale}/assortiment/${p.slug}`}>{p.naam}</Link></h3><p className="collection-description">{p.desc}</p></div>
           </div>
           <div className={`collection-item-stock mt-3 mb-3 text-sm leading-relaxed ${stock.unavailable?"text-rose-700":"text-slate-700"}`} data-stock={p.beschikbaar}>
-            <p className="font-semibold">{stock.label}</p>
+            <p className="font-semibold">{stock.label}</p>{stock.note && <p className="mt-1">{stock.note}</p>}
           </div>
           <div className="collection-item-actions">
             <Link href={`/${locale}/assortiment/${p.slug}`}>{c.detail}<ArrowUpRight size={14} aria-hidden="true" /></Link>
