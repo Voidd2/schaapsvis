@@ -170,6 +170,20 @@ DNS, Klaviyo of een productie-uitrol.
 - De productbeschrijving en Engelstalige gebakken-visteksten zijn aangepast. Bron: [EU Fish Names — Pollachius pollachius](https://fish-commercial-names.ec.europa.eu/fish-names/species/pollachius-pollachius_en?fao-code=POL).
 - `scripts/check-content-integrity.mjs` slaagde (67 producten, 37 recepten met bestaande foto's, 508 Nederlandse UI-teksten met Engelse en Duitse sleutels); volledige ESLint slaagde. De vertaalde teksten vragen nog steeds om native-speakerredactie.
 
+## Hertest na commit `123f433` — 23 oktober 2026
+
+- `next build --webpack` genereerde 479 routes. Contentintegriteit en volledige ESLint slaagden. Een lokale productiehost, alleen gebonden aan `127.0.0.1`, controleerde de huidige render: 417 NL/EN/DE-contentroutes en 559 UI-sleutels; 67 producten, 64 verwijderde/gefuseerde ingangen, 3 toevoegingen, 201 productroutes, 192 oude routes met 36 redirects, 135 product-receptlinks en 87 bereikbare receptpagina's; nul fouten. De bijgewerkte copy voor pollack is meegenomen.
+- De aanvullende lokale controles vonden 127 contentchecks zonder fouten (18 unieke blogfoto's), 420 sitemaproutes en 432 interne links zonder SEO-waarschuwingen, 37 recepten met 37 unieke gerechtfoto's (8.152.754 WebP-bytes) en 58 Voorschoten-route-/inhoudschecks zonder fouten. Dit zijn geautomatiseerde controles, geen volledige menselijke/native-speakerbeoordeling.
+- De push staat op PR #18, commit `123f433`. GitHub/Vercel toont `schaapsvis-9sai` als geslaagd en `schaapsvis` als mislukt door Vercels `build-rate-limit`. De PR is niet gemerged en er is geen productie-uitrol bevestigd. De eigenaar bevestigt dat de `.nl`-site nog op Vercel staat en Cloudflare-/domeinmigratie in uitvoering is; er zijn geen DNS-, hosting- of providerinstellingen aangepast.
+- Niet-programmeerbare open punten blijven: echte eigen locatie-/team-/kraamfoto's zijn nog niet aangeleverd; rechten op de lokale Dirks-foto's zijn onbevestigd; menselijke redactie van elke vertaalde pagina en live analytics na privacy-/Cloudflare-configuratie zijn nog niet af. De huidige locale-tests controleren route- en tekstdekking en vervangen die stappen niet.
+
+## Vervolg — desktopnavigatie, 071-overzicht en herbouw
+
+- De desktopnavigatie toont de hoofdonderdelen Assortiment, Barbecue & gourmet, Biologische vis, Studentenkorting, Visschalen, Recepten en Locaties als gewone links; op brede desktop staan de studenten- en klantaccountingangen ernaast. Op kleinere schermen blijven alle onderdelen, beide accountlinks en de taalkeuze in hetzelfde hamburger-menu.
+- `next build --webpack` slaagde opnieuw met 479 routes. ESLint voor de gewijzigde header slaagde. Op lokale productie gaf de vertaalcontrole 417/417 contentroutes en 559 UI-sleutels zonder fout; contentintegriteit, 420 sitemaproutes, 432 interne links, 9 redirects, 67 assortimentproducten, 37 recepten met unieke gerechtbeelden en de 201 actieve/192 verwijderde productroutes zijn gecontroleerd zonder fouten.
+- Excel-overzicht: 30 regionale zaken, 10 afvinkbare siteacties en een tab met methode/bronbeperkingen. Directory- en winkelcentrumvermeldingen zijn nadrukkelijk geen volledige website-audits.
+- De eigenaar verduidelijkt dat de productie nog op Vercel draait en domein/hosting naar Cloudflare worden voorbereid. De Vercel-previewcheck voor project `schaapsvis-9sai` was geslaagd; de hoofdprojectcheck voor commit `123f433` faalde toen wegens `build-rate-limit`. Een build na de headerwijziging is lokaal geslaagd, maar daarmee is geen nieuwe GitHub/Vercel-preview of productie-uitrol bevestigd. DNS en hosting zijn niet aangepast.
+
 ## Lokale voortgang 21 oktober — VÅRLAKS en beheerstatistieken
 
 - De `/[locale]/varlaks`-pagina is opnieuw opgebouwd in NL/EN/DE met leverancierstekst, drie passende beelden, bronlinks naar VÅRLAKS/Freshly Fish/Urk Seafood/PLUS en de VÅRLAKS-folder, plus een route naar product, recept en WhatsApp. Een nieuwe eigen AI-serveersuggestie staat lokaal onder `public/images/editorial/varlaks-zalm-serveersuggestie-ai.png`; VÅRLAKS-beelden blijven lokaal gehost en worden als leveranciersbeeld benoemd.

@@ -36,19 +36,24 @@ export function Header() {
 
   const p = (pad: string) => `/${locale}${pad}`;
 
-  const links = [
+  const primaryLinks = [
     { href: p("/assortiment"), label: t("assortiment") },
     { href: p("/barbecue-gourmet"), label: locale === "de" ? "Grill & Gourmet" : locale === "en" ? "Barbecue & gourmet" : "Barbecue & gourmet" },
     { href: p("/biologische-vis"), label: locale === "de" ? "Bio, ASC & MSC" : locale === "en" ? "Organic, ASC & MSC" : "Biologische vis" },
-    { href: p("/visschalen"), label: t("visschalen") },
     { href: p("/studentenkorting"), label: locale === "de" ? "Studentenrabatt" : locale === "en" ? "Student discount" : "Studentenkorting" },
+    { href: p("/visschalen"), label: t("visschalen") },
     { href: p("/recepten"), label: t("recepten") },
     { href: p("/bezoek-ons"), label: t("locaties") },
+  ];
+  const accountLinks = [
     { href: p("/account"), label: locale === "de" ? "Studentenkonto" : locale === "en" ? "Student account" : "Studentenaccount" },
     { href: p("/account/klant"), label: locale === "de" ? "Kundenkonto" : locale === "en" ? "Customer account" : "Klantaccount" },
+  ];
+  const extraLinks = [
     { href: p("/ons-verhaal"), label: t("verhaal") },
     { href: p("/contact"), label: t("contact") },
   ];
+  const allLinks = [...primaryLinks, ...accountLinks, ...extraLinks];
 
   const isActief = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
@@ -115,8 +120,8 @@ export function Header() {
             </span>
           </Link>
 
-          <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="hidden xl:grid grid-cols-6 items-center justify-items-end gap-x-3 gap-y-2 text-[0.76rem]">
-            {links.map(({ href, label }) => (
+          <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="hidden 2xl:flex items-center justify-end gap-x-3 text-[0.72rem]">
+            {primaryLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
@@ -125,7 +130,7 @@ export function Header() {
                   color: isActief(href) ? "var(--navy)" : "var(--charcoal)",
                   fontWeight: isActief(href) ? 600 : 400,
                   borderBottom: isActief(href) ? "2px solid var(--gold)" : "2px solid transparent",
-                  paddingBottom: "2px",
+                  paddingBottom: "3px",
                 }}
               >
                 {label}
@@ -134,7 +139,15 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-3 shrink-0">
-            <div className="hidden xl:block" style={{ color: "var(--charcoal)" }}>
+            <div className="hidden 2xl:flex items-center gap-3 text-[0.7rem]" style={{ color: "var(--navy)" }}>
+              {accountLinks.map(({ href, label }) => (
+                <Link key={href} href={href} className="whitespace-nowrap hover:underline underline-offset-4">
+                  {label}
+                </Link>
+              ))}
+            </div>
+
+            <div className="hidden 2xl:block" style={{ color: "var(--charcoal)" }}>
               <LanguageSwitcher />
             </div>
 
@@ -149,7 +162,7 @@ export function Header() {
             <button
               type="button"
               ref={menuButton}
-              className="xl:hidden p-2 -mr-2"
+              className="2xl:hidden p-2 -mr-2"
               style={{ color: "var(--navy)" }}
               onClick={() => setOpen(!open)}
               aria-expanded={open}
@@ -165,11 +178,11 @@ export function Header() {
         {open && (
           <div
             id="mobile-navigation"
-            className="xl:hidden max-h-[calc(100dvh-6.4rem)] overflow-y-auto overscroll-contain"
+            className="2xl:hidden max-h-[calc(100dvh-6.4rem)] overflow-y-auto overscroll-contain"
             style={{ backgroundColor: "var(--cream)", borderTop: "1px solid var(--linen)" }}
           >
             <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="max-w-6xl mx-auto px-4 py-2">
-              {links.map(({ href, label }) => (
+              {allLinks.map(({ href, label }) => (
                 <Link
                   key={href}
                   href={href}
