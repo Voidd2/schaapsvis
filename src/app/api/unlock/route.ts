@@ -47,7 +47,13 @@ function passwordsMatch(candidate: string, expected: string): boolean {
 
 export async function POST(request: Request) {
   if (!SITE_PASSWORD || !ACCESS_TOKEN) {
-    return NextResponse.json({ fout: "Site-toegang is nog niet ingesteld." }, { status: 503 });
+    // This is the website's lightweight access gate, not the student/customer
+    // account API. Keep the form response readable when a deployment is missing
+    // its runtime secrets instead of sending the visitor to raw JSON.
+    return NextResponse.redirect(new URL("/coming-soon?error=setup", request.url), {
+      status: 303,
+      headers: { "Cache-Control": "no-store" },
+    });
   }
 
   const origin = request.headers.get("origin");
