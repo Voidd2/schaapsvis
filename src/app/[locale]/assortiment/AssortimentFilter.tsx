@@ -98,7 +98,7 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
             <div className="collection-item-copy"><p className="collection-category">{c.categories[categories.indexOf(p.categorie)]}</p><h3><Link href={`/${locale}/assortiment/${p.slug}`}>{p.naam}</Link></h3><p className="collection-description">{p.desc}</p></div>
           </div>
           <div className={`collection-item-stock mt-3 mb-3 text-sm leading-relaxed ${stock.unavailable?"text-rose-700":"text-slate-700"}`} data-stock={p.beschikbaar}>
-            <p className="font-semibold">{stock.label}</p><p className="mt-1">{stock.note}</p>
+            <p className="font-semibold">{stock.label}</p>
           </div>
           <div className="collection-item-actions">
             <Link href={`/${locale}/assortiment/${p.slug}`}>{c.detail}<ArrowUpRight size={14} aria-hidden="true" /></Link>

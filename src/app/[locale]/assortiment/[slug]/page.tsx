@@ -8,8 +8,8 @@ import { productCopy, productNote } from "@/lib/product-copy";
 import { productAvailability } from "@/lib/product-availability";
 import { getPrijs, formatPrijs } from "@/lib/prijzen";
 import { Schema } from "@/components/Schema";
-import { Sectie } from "@/components/ui/Sectie";
-import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
+import { Kruimels, Sectie } from "@/components/ui/Sectie";
+import { PaginaSlot } from "@/components/ui/PaginaKop";
 import { BEDRIJF } from "@/lib/bedrijf";
 import { recepten } from "@/lib/recepten";
 import { localizeRecipe } from "@/lib/recipe-localization";
@@ -63,22 +63,28 @@ export default async function ProductDetailPage({params}: Props) {
   const productSchema = {"@context":"https://schema.org", "@type":"Product", name:product.naam, description:product.desc, category, brand:{"@type":"Brand", name:BEDRIJF.naam}, image:photo ? `${BEDRIJF.domein}${photo.src}` : undefined, url:`${BEDRIJF.domein}/${lang}/assortiment/${slug}`};
   return <>
     <Schema data={[productSchema, kruimelSchema(lang, [{naam:BEDRIJF.naamKort,pad:"/"},{naam:c.range,pad:"/assortiment"},{naam:product.naam,pad:`/assortiment/${slug}`}])]} />
-    <PaginaKop className="product-page-heading" kruimels={[{naam:BEDRIJF.naamKort,href:`/${lang}`},{naam:c.range,href:`/${lang}/assortiment`},{naam:product.naam}]} label={[category,product.badge,product.omega3?"Omega-3":null].filter(Boolean).join(" · ")} titel={product.naam} knoppen={[{label:c.browse,href:`/${lang}/assortiment`,soort:"lijn"}]} feiten={[{label:c.available,waarde:availability.label},{label:c.price,waarde:prijs?`${formatPrijs(prijs,lang)} — ${c.guidePrice}`:c.dailyPrice},...(seizoen?[{label:c.best,waarde:seizoen}]:[])]} />
-    <Sectie grond="papier"><div className="mx-auto max-w-4xl">
-      {photo && <div className="relative mx-auto w-full max-w-3xl aspect-[4/3] flex items-center justify-center" style={{backgroundColor:"#fff",borderBottom:`3px solid ${CATEGORIE_KLEUR[product.categorie]}`}}>
+    <Sectie grond="papier"><div className="mx-auto max-w-5xl">
+      <Kruimels items={[{naam:BEDRIJF.naamKort,href:`/${lang}`},{naam:c.range,href:`/${lang}/assortiment`},{naam:product.naam}]} />
+      {photo && <div className="relative mx-auto mt-5 w-full max-w-4xl aspect-[4/3] flex items-center justify-center" style={{backgroundColor:"#fff",borderBottom:`3px solid ${CATEGORIE_KLEUR[product.categorie]}`}}>
         <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 1024px) calc(100vw - 40px), 768px" priority className={`w-full h-full ${photo.editorial?(photo.whole?"object-contain":"object-cover"):"object-contain"}`} />
       </div>}
       <div className="mx-auto max-w-3xl pt-7">
+        <p className="kapitaal mb-2">{[category,product.badge,product.omega3?"Omega-3":null].filter(Boolean).join(" · ")}</p>
+        <h1 className="text-3xl md:text-4xl leading-tight mb-4" style={{color:"var(--navy-dark)"}}>{product.naam}</h1>
+        <div className="mb-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+          <p><span className="kapitaal mr-2">{c.available}</span><strong>{availability.label}</strong></p>
+          {prijs && <p><span className="kapitaal mr-2">{c.price}</span><strong>{formatPrijs(prijs,lang)} — {c.guidePrice}</strong></p>}
+        </div>
         <p className="text-lg leading-relaxed">{product.desc}</p>
         <p className="mt-5 pl-5" style={{borderLeft:`2px solid ${availability.unavailable?"#be123c":"var(--navy)"}`}}>{availability.note}</p>
         {isSalmon && <Link href={`/${lang}/varlaks`} className="block mt-6 pl-5" style={{borderLeft:"2px solid var(--seafoam)"}}><p className="kapitaal mb-2">{c.alternative}</p><p className="font-semibold underline">{c.salmon}</p><p className="text-sm mt-2 leading-relaxed">{c.salmonNote}</p></Link>}
         {seizoen && <div className="mt-7 pl-5" style={{borderLeft:"2px solid var(--seafoam)"}}><p><strong>{c.season}:</strong> {seizoen}</p></div>}
-        <div className="mt-8 border-t border-sky-100 pt-7"><h2 className="text-xl mb-3">{c.ingredients}</h2><p className="mb-4 leading-relaxed">{product.ingredienten}</p>{product.bevat.length>0 && <p className="kapitaal mb-4">{c.contains}: {product.bevat.join(" · ")}</p>}<p className="text-sm leading-relaxed">{c.allergenNote}</p></div>
       </div>
     </div></Sectie>
     <Sectie grond="zand"><div className="mx-auto max-w-3xl">
       <h2 className="text-2xl mb-3">{c.nutrition}</h2>{voeding?<><p className="kapitaal mb-4">{c.per100}</p><table className="w-full"><tbody>{nutritionRows.map(([label,value],i)=><tr key={label} className="border-b border-sky-100"><th scope="row" className={`py-2.5 text-left font-normal ${[2,4].includes(i)?"pl-6":""}`}>{label}</th><td className="py-2.5 text-right">{value}</td></tr>)}</tbody></table><p className="text-sm mt-3">{c.nutritionNote}</p></>:<p>{c.nutritionRequest}</p>}
       {prijs && <p className="text-sm mt-6">{formatPrijs(prijs,lang)} — {c.priceNote}</p>}
+      <div className="mt-8 border-t border-sky-100 pt-7"><h2 className="text-xl mb-3">{c.ingredients}</h2><p className="mb-4 leading-relaxed">{product.ingredienten}</p>{product.bevat.length>0 && <p className="kapitaal mb-4">{c.contains}: {product.bevat.join(" · ")}</p>}<p className="text-sm leading-relaxed">{c.allergenNote}</p></div>
     </div></Sectie>
     <Sectie grond="papier"><div className="mx-auto max-w-5xl"><p className="kapitaal mb-2">{c.inspiration}</p><h2 className="text-2xl mb-3">{c.cooking}</h2><p className="mb-6">{c.ideas}</p>
       {recipeIdeas.length > 0 ? <div className="mb-8"><h3 className="text-xl mb-3">{c.recipes}</h3><ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{recipeIdeas.map(r=>{const image=receptBeeld(r);return <li key={r.slug} className="overflow-hidden rounded-xl border border-sky-100 bg-white"><Link href={`/${lang}/recepten/${r.slug}`} className="block h-full"><div className="relative aspect-[3/2] w-full bg-sky-50">{image.src&&<Image src={image.src} alt={image.alt} fill sizes="(max-width: 640px) 100vw, 30vw" className="object-cover" />}</div><div className="p-4"><span className="font-semibold underline">{r.title}</span><p className="text-sm mt-2">{r.tijd} · {recipeLabel(r.moeilijkheid,lang)}</p></div></Link></li>})}</ul></div> : <p className="mb-4">{c.noRecipe}</p>}
