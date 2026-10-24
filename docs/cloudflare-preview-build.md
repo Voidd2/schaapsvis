@@ -2,7 +2,7 @@
 
 Production remains on Vercel until the hosting migration is deliberately completed. Cloudflare branch previews are isolated test deployments and do not replace the live domain.
 
-For this repository's Vite/Vinext Worker, configure Workers Builds with Preview builds enabled, leave the separate Build command empty, and use `npx cf previews deploy` as the Preview command. That command creates the preview-mode build and deploys it.
+For this repository's Vite/Vinext Worker, enable Preview builds, leave the separate Build command empty, and use `npx cf previews deploy` as the Preview command. Apply and verify this in the settings of the specific branch preview as well as the base preview configuration: an explicit per-branch command can continue overriding the base setting. A successful build should show Build command `None` and Deploy command `npx cf previews deploy`.
 
 Do not use `npx cf previews deploy --prebuilt` with a production-mode artifact. A prebuilt artifact must have been produced in preview mode; otherwise `cf` rejects it instead of publishing a branch preview.
 
