@@ -7,7 +7,7 @@
   "triggers": { "crons": ["* * * * *"] },
   "vars": {
     "MEMBERS_ENABLED": "off",
-    "SITE_ORIGIN": "https://www.schaapsvishandel.nl",
+    "SITE_ORIGIN": "https://schaapsvishandel.nl",
     "MAIL_FROM": "noreply@schaapsvishandel.nl",
   },
   // D1 staat per omgeving in de EU. De private R2-bucket en beheerder moeten
@@ -40,7 +40,7 @@
       ],
       "vars": {
         "MEMBERS_ENABLED": "off",
-        "SITE_ORIGIN": "https://www.schaapsvishandel.nl",
+        "SITE_ORIGIN": "https://schaapsvishandel.nl",
         "MAIL_FROM": "noreply@schaapsvishandel.nl",
       },
       "d1_databases": [
