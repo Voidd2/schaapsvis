@@ -61,7 +61,7 @@ for (const locale of ['nl', 'en', 'de']) {
 const blog = await page('/nl/blog');
 const sitemap = await page('/sitemap.xml');
 assert(!sitemap.html.includes('/assortiment/koolvis'), 'Removed koolvis product in sitemap');
-for (const locale of ['nl', 'en', 'de']) assert(sitemap.html.includes(`https://www.schaapsvishandel.nl/${locale}/studentenkorting`), `${locale}: student-discount landing page is indexed in sitemap`);
+for (const locale of ['nl', 'en', 'de']) assert(sitemap.html.includes(`https://schaapsvishandel.nl/${locale}/studentenkorting`), `${locale}: student-discount landing page is indexed in sitemap`);
 const gravlaks = await page('/nl/recepten/gravlaks');
 assert(gravlaks.main.includes('gravlaks regelmatig kant-en-klaar in de winkel'), 'Gravlaks: regular shop availability');
 assert(!/vraag expliciet|Bespreek vooraf|vraag vooraf naar geschikte|Begin alleen met vis/.test(gravlaks.main), 'Gravlaks: suitability questions removed');
