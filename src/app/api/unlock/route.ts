@@ -2,8 +2,8 @@ import { createHash, timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
 import { ACCESS_COOKIE, ACCESS_TOKEN } from "@/lib/siteAccess";
 
-// Het wachtwoord leeft alleen hier (server-side). Wijzig het zonder code aan te
-// passen via de environment variable SITE_PASSWORD in Vercel.
+// Het wachtwoord leeft alleen server-side. Stel SITE_PASSWORD als runtime-secret
+// in bij de actieve host (Vercel of de Cloudflare Worker-preview).
 const SITE_PASSWORD = process.env.SITE_PASSWORD ?? "";
 const MAX_REQUEST_BYTES = 8 * 1024;
 
