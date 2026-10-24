@@ -14,6 +14,26 @@ if(!/^http:\/\/(localhost|127\.0\.0\.1):/.test(origin))throw new Error('Local se
    await page.goto(origin+'/'+locale,{waitUntil:'networkidle'});
    assert.equal(await page.locator('h1').count(),1);
    assert.equal(await page.locator('body').evaluate(el=>el.scrollWidth<=window.innerWidth+1),true,'Homepage mobile overflow '+locale);
+   const mobileMenu=page.locator('button[aria-controls="mobile-navigation"]');
+   assert.ok(await mobileMenu.isVisible(),'Mobile navigation toggle '+locale);
+   await mobileMenu.click();
+   for(const path of ['/biologische-vis','/studentenkorting','/visschalen','/account','/account/klant','/ons-verhaal','/contact']){
+    assert.equal(await page.locator('#mobile-navigation a[href="/'+locale+path+'"]').count(),1,'Mobile menu destination '+locale+path);
+   }
+   await mobileMenu.click();
+   await page.setViewportSize({width:1920,height:1080});
+   await page.goto(origin+'/'+locale,{waitUntil:'networkidle'});
+   assert.equal(await page.locator('body').evaluate(el=>el.scrollWidth<=window.innerWidth+1),true,'Homepage desktop overflow '+locale);
+   const desktopNav=page.locator('header nav').first();
+   for(const path of ['/assortiment','/barbecue-gourmet','/biologische-vis','/studentenkorting','/visschalen','/recepten','/bezoek-ons']){
+    assert.ok(await desktopNav.locator('a[href="/'+locale+path+'"]').isVisible(),'Desktop top navigation '+locale+path);
+   }
+   const desktopMenu=page.locator('button[aria-controls="mobile-navigation"]');
+   assert.ok(await desktopMenu.isVisible(),'Desktop navigation toggle '+locale);
+   await desktopMenu.click();
+   assert.equal(await page.locator('#mobile-navigation a[href="/'+locale+'/account/klant"]').count(),1,'Desktop menu exposes customer account '+locale);
+   await desktopMenu.click();
+   await page.setViewportSize({width:390,height:844});
    await page.goto(origin+'/'+locale+'/visschalen',{waitUntil:'networkidle'});
    const gallery=page.locator('#visschaal-inspiratie');
    assert.ok(await gallery.count(),'Fish platter photo gallery '+locale);
@@ -61,10 +81,10 @@ if(!/^http:\/\/(localhost|127\.0\.0\.1):/.test(origin))throw new Error('Local se
     await img.scrollIntoViewIfNeeded();await img.evaluate(el=>el.decode());
     assert.ok(await img.evaluate(el=>el.naturalWidth>0),'Recipe image loaded '+locale);
    }
-   await context.close();flows+=5;
+   await context.close();flows+=6;
   }
   assert.deepEqual(errors,[],'Hydration/browser errors');
-  console.log(JSON.stringify({languages:3,mobileViewport:'390×844',flows,browserErrors:errors,orderSubmissions:0,whatsappMessages:0}));
+  console.log(JSON.stringify({languages:3,mobileViewport:'390×844',desktopViewport:'1920×1080',flows,browserErrors:errors,orderSubmissions:0,whatsappMessages:0}));
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
 
