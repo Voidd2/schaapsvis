@@ -52,6 +52,35 @@ for (const [slug, image] of recipePhotos) {
   if (!fs.existsSync(path.join(root, "public", image.replace(/^\//, "")))) failures.push(`Missing recipe image file: ${image}`);
 }
 
+// Consent revocation must be checked at the point of transmission, not only
+// when React installs or removes the document-level click listener.
+const analyticsSource = read("src/components/shared/AnalyticsConsent.tsx");
+const analyticsSend = analyticsSource.match(/function send\([\s\S]*?\n\}/)?.[0];
+if (!analyticsSend) {
+  failures.push("Could not locate the analytics send function.");
+} else {
+  const consentCheck = analyticsSend.indexOf('localStorage.getItem(CONSENT_KEY) !== "accepted"');
+  const request = analyticsSend.indexOf('fetch("/api/members/analytics"');
+  if (consentCheck < 0 || request < 0 || consentCheck > request) {
+    failures.push("Analytics send must re-check consent before transmitting an event.");
+  }
+}
+
+// Keep the prominent barbecue hero locally hosted and independent of the
+// unlicensed competitor reference-photo directory.
+const barbecuePage = read("src/app/[locale]/barbecue-gourmet/page.tsx");
+const heroImage = barbecuePage.match(/<Image\s+src="([^"]+)"[\s\S]*?alt=/)?.[1];
+if (!heroImage) {
+  failures.push("Could not locate the barbecue/gourmet hero image.");
+} else {
+  if (heroImage.startsWith("/images/dirks/")) {
+    failures.push("The barbecue/gourmet hero must not use a competitor reference photo.");
+  }
+  if (!fs.existsSync(path.join(root, "public", heroImage.replace(/^\//, "")))) {
+    failures.push(`Missing locally hosted barbecue/gourmet hero image: ${heroImage}`);
+  }
+}
+
 if (failures.length) {
   console.error("Content integrity check failed:");
   for (const failure of failures) console.error(`- ${failure}`);
@@ -60,3 +89,4 @@ if (failures.length) {
   console.log(`Content integrity passed: ${productSlugs.size} products, ${recipeSlugs.size} recipes with existing photos, ${reference.values && Object.keys(reference.values).length} Dutch UI strings with matching EN/DE keys.`);
   console.log("Note: matching translation keys do not replace editorial review of translation quality.");
 }
+
