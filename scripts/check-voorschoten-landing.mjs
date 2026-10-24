@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 
 const origin = process.argv[2] || 'http://localhost:3011';
 const path = '/nl/viswinkel-voorschoten';
-const canonical = 'https://www.schaapsvishandel.nl' + path;
+const canonical = 'https://schaapsvishandel.nl' + path;
 let checks = 0;
 function check(condition, message) { checks++; assert.ok(condition, message); }
 const response = await fetch(origin + path, {redirect: 'manual'});
