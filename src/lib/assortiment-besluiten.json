@@ -83,6 +83,7 @@
     "feestschotel": "/visschalen"
   },
   "availability": {
+    "gebakken-mosselen": "always",
     "bosje-sprot": "request",
     "bot": "request",
     "coquilles": "usually",
