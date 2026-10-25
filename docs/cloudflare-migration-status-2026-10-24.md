@@ -1,28 +1,26 @@
 # Cloudflare-migratie — status gecontroleerd 26 oktober 2026
 
-Deze notitie houdt de migratiestatus bij op basis van de geopende Cloudflare-dashboardpagina, de GitHub-PR en de informatie van de eigenaar. De eigenaar meldt dat de productiesite nog op Vercel draait.
+Deze status is gebaseerd op het Schaapsvis-account in Cloudflare, de productie-Worker, de branch-preview en GitHub.
 
 ## Wat nu is bevestigd
 
-- De eigenaar meldt dat `schaapsvishandel.nl` nog via Vercel wordt gehost terwijl de Cloudflare-hosting wordt voorbereid. DNS-resolutie via Cloudflare alleen bewijst niet waar de sitecode draait.
-- De Cloudflare API-integratie in deze sessie toont alleen `Admin@haascom.com's Account`; zij heeft geen toegang tot Schaapsvis. De R2-configuratie is daarom via de door de eigenaar aangewezen, ingelogde dashboardpagina van het account **Schaapsvis** gecontroleerd en gewijzigd.
-- In account Schaapsvis zijn de R2-buckets `schaapsvis-student-proofs-preview` en `schaapsvis-student-proofs` aangemaakt. Beide zijn privé (public access uit), ingesteld op de EU-jurisdictie en leeg. De R2-pagina toonde na aanmaak $0 billable usage en 0 B opgeslagen.
-- De eigenaar noemde €10 per maand als gewenste bovengrens. Cloudflare-budgetmeldingen zijn waarschuwingen en geen harde bestedingslimiet. R2 kan dus niet technisch tot €10 per maand worden begrensd; gebruik boven de gratis bundel kan kosten opleveren. De eigenaar heeft R2 en mogelijke gebruikskosten geaccepteerd. Bekijk [R2-prijzen](https://developers.cloudflare.com/r2/pricing/) en [budgetmeldingen](https://developers.cloudflare.com/changelog/post/2026-06-15-budget-alerts-default-on/).
-- Workerconfiguratie in de sitebranch definieert een `STUDENT_PROOFS`-binding voor beide bucketnamen. Dat bewijst nog niet dat de binding in de Cloudflare Worker-runtime is gedeployed of getest.
-- De sitecode en Worker-build staan op de open concept-PR [#23](https://github.com/Voidd2/schaapsvis/pull/23). De PR is niet samengevoegd; dit is geen bewijs van een productie-uitrol.
-- GitHub rapporteert succesvolle Vercel-deploymentchecks voor branchcommit `c9bac10` voor projecten `schaapsvis` en `schaapsvis-9sai`. Dit zijn oudere branchchecks, geen bewijs van een huidige productie-deploy. [Project schaapsvis](https://vercel.com/voidd2s-projects/schaapsvis/CTW8LWPv25NL73EQnLSAEuuFUL5f) · [Project schaapsvis-9sai](https://vercel.com/voidd2s-projects/schaapsvis-9sai/DDRceh9M2obJ8WJR3Rd5Gn7mPwwU).
-- De GitHub Actions-workflow bouwt de Cloudflare Worker, maar publiceert hem niet. Een Cloudflare branch-preview/runtime-deployment is niet bevestigd.
-- De publieke root en Worker-preview zijn eerder gezien als afgeschermde “Binnenkort online”-pagina. Succesvolle wachtwoordontgrendeling op de huidige productiehost is niet bevestigd.
-- Studenten- en ledenfunctionaliteit blijft uit (`MEMBERS_ENABLED=off`) totdat de juiste bindings, migraties, runtime-geheimen, e-mail en privacy-/goedkeuringsflow in de beoogde omgevingen zijn gecontroleerd.
+- In het Schaapsvis-account staat productie-Worker `schaapsvis` met custom domain `schaapsvishandel.nl`. De Worker is aan GitHub-repository `Voidd2/schaapsvis` gekoppeld en volgt branch `main`.
+- De getoonde productie-deployment is commit `2d2b67900cb7b0b09dccdea92750db9cedd94a3a`, status Ready. De Cloudflare-dashboardpagina van het eigen domein toont de volledige site binnen een beheerderssessie. De uitgelogde toegang op productie moet nog afzonderlijk worden getest.
+- De productie-Worker heeft versleutelde secrets met namen `SITE_PASSWORD` en `SITE_ACCESS_TOKEN`; de waarden zijn niet uitgelezen of getoond. De actieve branch-preview heeft dezelfde geheimen als Preview secrets. De branch-preview op commit `86cf2be38bb76c8dd66d53a82a2afbd969c8517c` is met het opgegeven wachtwoord ontgrendeld en toont de volledige site; bezoekers horen de binnenkort-pagina te zien.
+- De open concept-PR [#23](https://github.com/Voidd2/schaapsvis/pull/23) is nog niet samengevoegd. Productie draait dus nog op `main` commit `2d2b679`, niet op de nieuwste PR-commit `86cf2be`. De productiebuild staat ingesteld op `npm run build` plus `npx --yes cf@1.0.0-beta.18 deploy --prebuilt`; branch previews gebruiken `npx cf previews deploy`.
+- In account Schaapsvis zijn R2-buckets `schaapsvis-student-proofs-preview` en `schaapsvis-student-proofs` aangemaakt. Beide zijn privé (public access uit), ingesteld op de EU-jurisdictie en leeg. Het dashboard toonde na aanmaak $0 billable usage en 0 B opgeslagen.
+- De naam `STUDENT_PROOFS` is in de Member Workerconfiguratie gekoppeld aan de preview- en productie-bucket. De Worker-lijst in het account toont momenteel alleen `schaapsvis`; de afzonderlijke Member Worker en zijn runtimebindingen zijn dus nog niet in Cloudflare geverifieerd.
+- De Cloudflare API-integratie van deze sessie toont alleen `Admin@haascom.com's Account`. Voor verificatie en wijzigingen in Schaapsvis is de ingelogde dashboardpagina gebruikt.
+- De eigenaar noemde €10 per maand als gewenste bovengrens. Cloudflare-budgetmeldingen zijn waarschuwingen, geen harde bestedingslimiet. R2-gebruik boven de gratis bundel kan daarom meer dan €10 kosten; de eigenaar heeft R2 en mogelijke gebruikskosten geaccepteerd. Bekijk [R2-prijzen](https://developers.cloudflare.com/r2/pricing/) en [budgetmeldingen](https://developers.cloudflare.com/changelog/post/2026-06-15-budget-alerts-default-on/).
+- GitHub Actions sitebuild en Member Worker tests slagen op de nieuwste PR-commit. Deze checks bevestigen geen productie-uitrol. Student-/ledenfunctionaliteit blijft uit (`MEMBERS_ENABLED=off`).
 
-## Nog nodig voor een aantoonbaar afgeronde migratie
+## Nog nodig voor een aantoonbaar afgeronde uitrol
 
-1. Controleer in het Schaapsvis-account de DNS-records en de origin van apex én `www`; exporteer de zone als herstelpunt. Wijzig records pas wanneer de Cloudflare-hostingdeploy en rollback zijn gecontroleerd.
-2. Voeg de aangemaakte R2-buckets als `STUDENT_PROOFS`-binding toe aan de bedoelde preview- en productie-Member Workers, en verifieer elke binding in Cloudflare. De configuratie staat in Git; de actieve runtimebindings zijn niet onafhankelijk geverifieerd.
-3. Rond de Cloudflare website-hostingdeploy af vanuit de bedoelde productiebranch en controleer in het Schaapsvis-dashboard welke commit daadwerkelijk production serveert. Bewaar Vercel als rollback totdat end-to-end-tests slagen.
-4. Configureer en verifieer sitegeheimen afzonderlijk in preview en productie. Eerder gedeelde waarden gelden niet meer als geheim; roteer ze voordat ze opnieuw worden gebruikt. Test toegang en ontgrendeling zonder geheimen in Git of logs te zetten.
-5. Test vanaf een gewone browser: apex en `www`, HTTPS, canonieke redirects inclusief pad/query, pagina's, afbeeldingen, formulieren/API's, robots/sitemap en mobiele/desktopnavigatie.
-6. Houd `MEMBERS_ENABLED=off` totdat opslag, D1-migraties, e-mail, privacykeuzes en previewflows in het juiste Cloudflare-account zijn getest. Zet studentkorting niet live zonder juiste goedkeurings- en e-mailconsentflow.
-7. Houd R2-gebruik en facturering in de gaten: de genoemde €10 is geen harde Cloudflare-limiet.
+1. Controleer DNS- en originrecords voor apex én `www`, exporteer de zone als herstelpunt en bevestig HTTPS/redirects.
+2. Beslis en voer de PR-uitrol uit: de nieuwste code is nu een werkende branch-preview, maar staat nog niet op `main`-productie.
+3. Maak de Member Worker als afzonderlijke Cloudflare-service aan of deploy hem via de goedgekeurde buildroute; controleer dan de R2-binding en D1-bindings in preview én productie. Laat `MEMBERS_ENABLED=off` totdat migraties, e-mail, goedkeuring en privacykeuzes zijn getest.
+4. Test de productie-site in een uitgelogde, schone browser en bevestig dat de gate voor bezoekers werkt; test vervolgens inloggen met het beheerderswachtwoord zonder geheimen in Git of logs te zetten.
+5. Test vanaf gewone browser: homepage, alle pagina's, afbeeldingen, formulieren/API's, robots/sitemap, mobiele en desktopnavigatie, apex/`www`, HTTPS en canonieke redirects.
+6. Houd R2-gebruik en facturering in de gaten: €10 is geen harde Cloudflare-limiet.
 
-Verwijder of deactiveer Vercel niet voordat alle controles zijn geslaagd en de eigenaar expliciet bevestigt dat Cloudflare-hosting productie overneemt.
+Laat een beschikbare rollback naar Vercel staan totdat alle productiecontroles slagen en de eigenaar expliciet bevestigt dat die niet meer nodig is.
