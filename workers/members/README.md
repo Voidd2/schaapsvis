@@ -4,7 +4,7 @@ Deze Worker is de serverkant voor algemene accounts, e-mailbevestiging, wachtwoo
 
 ## Huidige status
 
-- Dit is de afzonderlijke account-/studenten-Worker, niet de website-Worker. De apex en `www` wijzen publiek naar Cloudflare; op 25 oktober 2026 antwoordde de apex met Cloudflare-headers en de afgesproken toegangscode opende de volledige site. Zonder sessie blijft alleen de afgeschermde `Binnenkort online`-pagina zichtbaar. De aparte account-Worker is nog niet als actieve account-API bevestigd, dus registratie en studentaanvragen mogen niet als live worden beschouwd.
+- Dit is de afzonderlijke account-/studenten-Worker, niet de website-Worker. Op 25 oktober 2026 laden zowel `schaapsvishandel.nl` als de actuele `workers.dev`-preview de afgeschermde pagina `Binnenkort online`; de volledige website en de wachtwoordontgrendeling zijn op die hosts niet bevestigd. De huidige Cloudflare API-koppeling heeft geen toegang tot account `Schaapsvis`, dus de aanwezigheid van `SITE_PASSWORD` en `SITE_ACCESS_TOKEN` op de productie- en preview-Worker kan ik niet controleren of instellen. De aparte account-Worker is evenmin als actieve account-API bevestigd; registratie en studentaanvragen mogen niet als live worden beschouwd.
 - Preview en productie zijn in `wrangler.jsonc` gekoppeld aan de D1-databases `schaapsvis-members-preview` en `schaapsvis-members`. De huidige Cloudflare API-verbinding ziet uitsluitend `Admin@haascom.com’s Account`, niet het dashboardaccount `Schaapsvis`; daardoor zijn de actuele database-ID's, tabellen en migratiestatus niet opnieuw onafhankelijk bevestigd. Controleer de bindings en pas migraties `0001` t/m `0011` pas toe nadat de doelaccount en remote status in het Schaapsvis-account zijn geverifieerd.
 - `MEMBERS_ENABLED` staat in preview en productie standaard op `off`. Cloudflare-routes kunnen de Next.js-passcode omzeilen; zet deze schakel pas op `on` nadat de site openbaar mag zijn en alle diensten zijn geverifieerd.
 - De nieuwsbrief-cron controleert dezelfde schakel en blijft volledig inactief zolang `MEMBERS_ENABLED` niet `on` is; ook een eventueel achtergebleven campagne wordt dan niet verwerkt.
@@ -78,3 +78,4 @@ verzameld.
 Klaviyo is nog niet gekoppeld. Bij een latere koppeling blijven bevestigde
 toestemming en afmelding in deze Worker leidend. Er is nog niets gedeployed; de
 accountswitch blijft uit.
+
