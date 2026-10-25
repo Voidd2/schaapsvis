@@ -6,7 +6,7 @@ export default defineConfig(({ mode }) => ({
     entrypoint: "vinext/server/fetch-handler",
     // Match the production date and retain its strict fetch flag, plus the
     // Node compatibility required by vinext.
-    compatibilityDate: "2026-10-18",
+    compatibilityDate: "2026-10-19",
     compatibilityFlags: [
       "global_fetch_strictly_public",
       "nodejs_compat",
