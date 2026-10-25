@@ -5,6 +5,11 @@ const VERIFICATION_CODE_MS = 10 * 60 * 1000;
 const PASSWORD_ITERATIONS = 210_000;
 const DUMMY_PASSWORD_HASH = "pbkdf2-sha256$210000$AAAAAAAAAAAAAAAAAAAAAA$AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 const MAX_PROOF_BYTES = 8 * 1024 * 1024;
+const MAX_PROOF_STORAGE_BYTES = 4_000_000_000;
+const MAX_PROOF_PUTS_PER_MONTH = 400_000;
+const MAX_PROOF_GETS_PER_MONTH = 4_000_000;
+const MAX_PROOF_PUTS_PER_DAY = 10_000;
+const MAX_PROOF_GETS_PER_DAY = 50_000;
 const PROOF_CONSENT_VERSION = "student-proof-2026-10";
 const NEWSLETTER_CONSENT_VERSION = "customer-offers-2026-10";
 const LOCALES = new Set(["nl", "en", "de"]);
@@ -40,6 +45,64 @@ const decoder = new TextDecoder();
 
 function nowIso() {
   return new Date().toISOString();
+}
+
+async function reserveProofObject(env, objectKey, sizeBytes) {
+  const reserved = await env.DB.prepare(`UPDATE r2_proof_storage_budget
+    SET bytes_reserved = bytes_reserved + ?
+    WHERE id = 1 AND bytes_reserved + ? <= ?`).bind(sizeBytes, sizeBytes, MAX_PROOF_STORAGE_BYTES).run();
+  if (Number(reserved?.meta?.changes || 0) !== 1) return false;
+  try {
+    await env.DB.prepare(`INSERT INTO r2_proof_objects (object_key, size_bytes, created_at) VALUES (?, ?, ?)`)
+      .bind(objectKey, sizeBytes, nowIso()).run();
+    return true;
+  } catch (error) {
+    await env.DB.prepare(`UPDATE r2_proof_storage_budget SET bytes_reserved = MAX(0, bytes_reserved - ?) WHERE id = 1`).bind(sizeBytes).run();
+    throw error;
+  }
+}
+
+async function releaseProofObject(env, objectKey) {
+  // Couple releasing the byte reservation to deleting its object ledger row;
+  // retries and simultaneous cleanup paths therefore cannot double-decrement.
+  await env.DB.batch([
+    env.DB.prepare(`UPDATE r2_proof_storage_budget SET bytes_reserved = MAX(0, bytes_reserved - (
+      SELECT size_bytes FROM r2_proof_objects WHERE object_key = ?
+    )) WHERE id = 1 AND EXISTS (SELECT 1 FROM r2_proof_objects WHERE object_key = ?)`)
+      .bind(objectKey, objectKey),
+    env.DB.prepare(`DELETE FROM r2_proof_objects WHERE object_key = ?`).bind(objectKey),
+  ]);
+}
+
+async function deleteStudentProof(env, objectKey) {
+  await env.STUDENT_PROOFS.delete(objectKey);
+  await releaseProofObject(env, objectKey);
+}
+
+async function allowProofOperation(env, operation) {
+  const period = nowIso();
+  const month = period.slice(0, 7);
+  const day = period.slice(0, 10);
+  await env.DB.prepare(`INSERT INTO r2_proof_operation_budget (id, month, day, put_ops, get_ops, day_put_ops, day_get_ops)
+    VALUES (1, ?, ?, 0, 0, 0, 0)
+    ON CONFLICT(id) DO UPDATE SET
+      put_ops = CASE WHEN month <> excluded.month THEN 0 ELSE put_ops END,
+      get_ops = CASE WHEN month <> excluded.month THEN 0 ELSE get_ops END,
+      day_put_ops = CASE WHEN day <> excluded.day OR month <> excluded.month THEN 0 ELSE day_put_ops END,
+      day_get_ops = CASE WHEN day <> excluded.day OR month <> excluded.month THEN 0 ELSE day_get_ops END,
+      month = excluded.month,
+      day = excluded.day`).bind(month, day).run();
+
+  const isPut = operation === "put";
+  const monthlyColumn = isPut ? "put_ops" : "get_ops";
+  const dailyColumn = isPut ? "day_put_ops" : "day_get_ops";
+  const monthlyLimit = isPut ? MAX_PROOF_PUTS_PER_MONTH : MAX_PROOF_GETS_PER_MONTH;
+  const dailyLimit = isPut ? MAX_PROOF_PUTS_PER_DAY : MAX_PROOF_GETS_PER_DAY;
+  const result = await env.DB.prepare(`UPDATE r2_proof_operation_budget
+    SET ${monthlyColumn} = ${monthlyColumn} + 1, ${dailyColumn} = ${dailyColumn} + 1
+    WHERE id = 1 AND month = ? AND day = ? AND ${monthlyColumn} < ? AND ${dailyColumn} < ?`)
+    .bind(month, day, monthlyLimit, dailyLimit).run();
+  return Number(result?.meta?.changes || 0) === 1;
 }
 
 function localeFrom(value) {
@@ -719,6 +782,22 @@ async function submitStudentApplication(request, env) {
   const id = crypto.randomUUID();
   const objectKey = `student-proofs/${user.id}/${id}`;
   const submittedAt = nowIso();
+  let reserved = false;
+  try {
+    reserved = await reserveProofObject(env, objectKey, file.size);
+  } catch {
+    return json({ error: "proof_storage_unavailable" }, 503);
+  }
+  if (!reserved) return json({ error: "proof_storage_capacity_reached" }, 429);
+  try {
+    if (!await allowProofOperation(env, "put")) {
+      await releaseProofObject(env, objectKey);
+      return json({ error: "proof_storage_usage_limit_reached" }, 429);
+    }
+  } catch {
+    try { await releaseProofObject(env, objectKey); } catch { /* Keep a conservative reservation if D1 cannot release it. */ }
+    return json({ error: "proof_storage_unavailable" }, 503);
+  }
   try {
     // Persist a cleanup handle before R2 can receive any bytes. If the later
     // D1 transaction fails and immediate R2 deletion also fails, cron can retry.
@@ -743,7 +822,7 @@ async function submitStudentApplication(request, env) {
       // A D1 batch can have committed even if its response was lost. Never
       // delete an object that is already referenced by a saved application.
       if (linked) return json({ ok: true, status: "pending" }, 202);
-      await env.STUDENT_PROOFS.delete(objectKey);
+      await deleteStudentProof(env, objectKey);
       await env.DB.prepare(`DELETE FROM student_proof_cleanup_queue WHERE object_key=?`).bind(objectKey).run();
     } catch {
       // If D1 is unavailable, keep the queue row and object rather than risk
@@ -766,6 +845,11 @@ async function adminProof(request, env, applicationId) {
   if (!admin) return json({ error: "forbidden" }, 403);
   const application = await env.DB.prepare(`SELECT id, proof_object_key, proof_mime_type FROM student_applications WHERE id = ? AND status = 'pending'`).bind(applicationId).first();
   if (!application?.proof_object_key) return json({ error: "proof_not_found" }, 404);
+  try {
+    if (!await allowProofOperation(env, "get")) return json({ error: "proof_storage_usage_limit_reached" }, 429);
+  } catch {
+    return json({ error: "proof_storage_unavailable" }, 503);
+  }
   const object = await env.STUDENT_PROOFS.get(application.proof_object_key);
   if (!object) return json({ error: "proof_not_found" }, 404);
   await env.DB.prepare(`INSERT INTO admin_audit_log (id, reviewer_user_id, action, application_id, occurred_at) VALUES (?, ?, 'proof_viewed', ?, ?)`)
@@ -815,7 +899,7 @@ async function adminDecision(request, env, applicationId) {
   let proofDeleted = false;
   if (application.proof_object_key) {
     try {
-      await env.STUDENT_PROOFS.delete(application.proof_object_key);
+      await deleteStudentProof(env, application.proof_object_key);
       await env.DB.prepare(`UPDATE student_applications SET proof_object_key = NULL, proof_deleted_at = ? WHERE id = ?`).bind(nowIso(), applicationId).run();
       proofDeleted = true;
     } catch { /* Keep the key private so an admin can retry cleanup; never grant access after review. */ }
@@ -1182,7 +1266,7 @@ async function cleanupReviewedProof(request, env, applicationId) {
   if (!application || application.status === "pending") return json({ error: "not_reviewed" }, 409);
   if (!application.proof_object_key) return json({ ok: true, alreadyDeleted: true });
   try {
-    await env.STUDENT_PROOFS.delete(application.proof_object_key);
+    await deleteStudentProof(env, application.proof_object_key);
     await env.DB.prepare(`UPDATE student_applications SET proof_object_key=NULL, proof_deleted_at=? WHERE id=?`).bind(nowIso(), applicationId).run();
     await env.DB.prepare(`INSERT INTO admin_audit_log (id, reviewer_user_id, action, application_id, occurred_at) VALUES (?, ?, 'proof_deleted', ?, ?)`)
       .bind(crypto.randomUUID(), admin.id, applicationId, nowIso()).run();
@@ -1206,7 +1290,7 @@ async function cleanupReviewedStudentProofs(env) {
     try {
       // R2 deletion is idempotent, so a retry is safe if the object was removed
       // but recording proof_deleted_at failed on the previous cron run.
-      await env.STUDENT_PROOFS.delete(application.proof_object_key);
+      await deleteStudentProof(env, application.proof_object_key);
       await env.DB.prepare(`UPDATE student_applications
         SET proof_object_key=NULL, proof_deleted_at=?
         WHERE id=? AND status IN ('approved','rejected') AND proof_object_key=?`)
@@ -1239,7 +1323,7 @@ async function cleanupOrphanStudentProofs(env) {
           AND NOT EXISTS (SELECT 1 FROM student_applications WHERE proof_object_key=?)`)
         .bind(row.object_key, cutoff, row.object_key).run();
       if (Number(claim?.meta?.changes || 0) === 1) {
-        await env.STUDENT_PROOFS.delete(row.object_key);
+        await deleteStudentProof(env, row.object_key);
       } else {
         const linked = await env.DB.prepare(`SELECT 1 AS present FROM student_applications WHERE proof_object_key=? LIMIT 1`).bind(row.object_key).first();
         if (linked) await env.DB.prepare(`DELETE FROM student_proof_cleanup_queue WHERE object_key=? AND EXISTS (SELECT 1 FROM student_applications WHERE proof_object_key=?)`).bind(row.object_key, row.object_key).run();

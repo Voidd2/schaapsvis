@@ -29,10 +29,13 @@ if(!/^http:\/\/(localhost|127\.0\.0\.1):/.test(origin))throw new Error('Local se
     assert.ok(await desktopNav.locator('a[href="/'+locale+path+'"]').isVisible(),'Desktop top navigation '+locale+path);
    }
    const desktopMenu=page.locator('button[aria-controls="mobile-navigation"]');
-   assert.ok(await desktopMenu.isVisible(),'Desktop navigation toggle '+locale);
-   await desktopMenu.click();
-   assert.equal(await page.locator('#mobile-navigation a[href="/'+locale+'/account/klant"]').count(),1,'Desktop menu exposes customer account '+locale);
-   await desktopMenu.click();
+   assert.equal(await desktopMenu.isVisible(),false,'Mobile navigation toggle is hidden on desktop '+locale);
+   const desktopAccount=page.locator('header details').first();
+   const accountSummary=desktopAccount.locator('summary');
+   assert.ok(await accountSummary.isVisible(),'Desktop account menu '+locale);
+   await accountSummary.click();
+   assert.ok(await desktopAccount.locator('a[href="/'+locale+'/account/klant"]').isVisible(),'Desktop menu exposes customer account '+locale);
+   await accountSummary.click();
    await page.setViewportSize({width:390,height:844});
    await page.goto(origin+'/'+locale+'/visschalen',{waitUntil:'networkidle'});
    const gallery=page.locator('#visschaal-inspiratie');
@@ -64,6 +67,11 @@ if(!/^http:\/\/(localhost|127\.0\.0\.1):/.test(origin))throw new Error('Local se
    assert.equal(await barbecue.locator('form').count(),0,'Barbecue/gourmet is not an online order form '+locale);
    await page.goto(origin+'/'+locale+'/assortiment',{waitUntil:'networkidle'});
    const product=page.locator('a[href="/'+locale+'/assortiment/varlaks-zalm"]').first();
+   for(let attempt=0;attempt<5&&!(await product.count());attempt++){
+    const loadMore=page.locator('.collection-load-more');
+    if(!(await loadMore.isVisible()))break;
+    await loadMore.click();
+   }
    await product.click();await page.waitForURL('**/'+locale+'/assortiment/varlaks-zalm');await page.waitForLoadState('networkidle');
    const image=page.locator('main img').first();
    await image.scrollIntoViewIfNeeded();await image.evaluate(img=>img.decode());
