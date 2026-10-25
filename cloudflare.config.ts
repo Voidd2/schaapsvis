@@ -4,9 +4,9 @@ export default defineConfig(({ mode }) => ({
   worker: defineWorker({
     name: "schaapsvis",
     entrypoint: "vinext/server/fetch-handler",
-    // Match the existing production Worker, retaining its runtime flags and
-    // adding the Node compatibility required by vinext.
-    compatibilityDate: "2026-10-19",
+    // Match the production date and retain its strict fetch flag, plus the
+    // Node compatibility required by vinext.
+    compatibilityDate: "2026-10-18",
     compatibilityFlags: [
       "global_fetch_strictly_public",
       "nodejs_compat",
