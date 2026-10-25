@@ -4,8 +4,8 @@ Deze Worker is de serverkant voor algemene accounts, e-mailbevestiging, wachtwoo
 
 ## Huidige status
 
-- Dit is de afzonderlijke account-/studenten-Worker, niet de website-Worker. De website-Worker `schaapsvis` is live op de apex `https://schaapsvishandel.nl`. De Cloudflare-zone staat actief op `DNS Setup: Full`; de nameservermigratie is afgerond. De geproxiede `www`-CNAME verwijst naar de apex en de browser stuurt `www` door naar die canonieke host. De aparte account-Worker is nog niet gedeployed, dus accountregistratie blijft uit.
-- Preview en productie gebruiken de D1-databases `schaapsvis-members-preview` en `schaapsvis-members`; de ID's in `wrangler.jsonc` zijn geverifieerd aan de hand van de huidige Cloudflare-accountresources. Beide databases zijn recent aangemaakt en tonen 0 tabellen en 0 queries; pas daarom niet aan alsof oude migratiestatus op deze databases van toepassing is. De lokale migraties `0001` t/m `0010` zijn nog niet op deze databases toegepast.
+- Dit is de afzonderlijke account-/studenten-Worker, niet de website-Worker. De apex en `www` wijzen publiek naar Cloudflare; op 25 oktober 2026 antwoordde de apex met Cloudflare-headers en de afgesproken toegangscode opende de volledige site. Zonder sessie blijft alleen de afgeschermde `Binnenkort online`-pagina zichtbaar. De aparte account-Worker is nog niet als actieve account-API bevestigd, dus registratie en studentaanvragen mogen niet als live worden beschouwd.
+- Preview en productie zijn in `wrangler.jsonc` gekoppeld aan de D1-databases `schaapsvis-members-preview` en `schaapsvis-members`. De huidige Cloudflare API-verbinding ziet uitsluitend `Admin@haascom.com’s Account`, niet het dashboardaccount `Schaapsvis`; daardoor zijn de actuele database-ID's, tabellen en migratiestatus niet opnieuw onafhankelijk bevestigd. Controleer de bindings en pas migraties `0001` t/m `0011` pas toe nadat de doelaccount en remote status in het Schaapsvis-account zijn geverifieerd.
 - `MEMBERS_ENABLED` staat in preview en productie standaard op `off`. Cloudflare-routes kunnen de Next.js-passcode omzeilen; zet deze schakel pas op `on` nadat de site openbaar mag zijn en alle diensten zijn geverifieerd.
 - De nieuwsbrief-cron controleert dezelfde schakel en blijft volledig inactief zolang `MEMBERS_ENABLED` niet `on` is; ook een eventueel achtergebleven campagne wordt dan niet verwerkt.
 - De bewijsbucket moet privé blijven. Koppel geen publieke custom domain aan `STUDENT_PROOFS`.
@@ -13,13 +13,13 @@ Deze Worker is de serverkant voor algemene accounts, e-mailbevestiging, wachtwoo
 - De bewijsbucket hoort vanwege studentgegevens in de EU-jurisdictie. De binding vraagt daarom expliciet `jurisdiction: "eu"`; controleer deze onveranderlijke bucketinstelling bij het aanmaken. Een EU-locatiehint is niet gelijk aan de EU-jurisdictiegarantie ([Cloudflare R2 data location](https://developers.cloudflare.com/r2/reference/data-location/)).
 - Login-, wachtwoordreset-, bevestigingsmail- en nieuwsbriefverzoeken hebben afzonderlijke limieten per IP-adres en per e-mailadres. Accountgerichte tellers zijn HMAC-gehasht met `AUTH_PEPPER`, zodat e-mailadressen niet als rate-limit-sleutel in D1 worden opgeslagen.
 - Er is geen R2 lifecycle-/retentieregel ingesteld. Na een beoordeling probeert de Worker het bewijs direct te verwijderen; bij een fout probeert de cron dit opnieuw (maximaal 20 beoordeelde bewijzen per run) en kan een beheerder ook handmatig opnieuw proberen. Voor uploads wordt eerst een D1-opruimrij aangemaakt. Als de aanvraagtransactie én directe R2-verwijdering falen, probeert de cron het na een uur opnieuw (maximaal 20 weesbestanden per run); gekoppelde bewijzen worden nooit door deze weesopruiming verwijderd. Kies geen automatische bewaartermijn voor beoordeelde documenten zonder privacybesluit.
-- R2-buckets en Email Sending zijn nog niet ingericht. R2-aanmaak kan gebruiksafhankelijke kosten activeren; Email Sending aan willekeurige ontvangers vereist Workers Paid. Er zijn geen abonnementen aangeschaft. Productie `MEMBERS_ENABLED` blijft uit en er worden geen echte studentbewijzen of klantmails verwerkt.
+- R2-buckets en Email Sending zijn nog niet ingericht of via de huidige API-koppeling te bevestigen. R2-aanmaak kan gebruiksafhankelijke kosten activeren; Cloudflare heeft geen harde accountbrede uitgavenstop op €10 per maand. Workers-limieten en budgetalerts zijn geen garantie tegen accountbrede meerkosten. Email Sending aan willekeurige ontvangers vereist Workers Paid. Productie `MEMBERS_ENABLED` blijft uit en er worden geen echte studentbewijzen of klantmails verwerkt.
 - Sessiecookies zijn host-only; preview en productie delen geen login-cookie.
 - De leden-API-route hoort op `schaapsvishandel.nl/api/members/*` en de preview-route op `preview.schaapsvishandel.nl/api/members/*`; publiceer de route samen met de aparte account-Worker nadat bindings, secrets en preview zijn gecontroleerd.
 
 ## Nog uit te voeren Cloudflare-stappen
 
-1. Behoud de afgeronde nameservermigratie en wijzig geen nameservers. Voor eventuele Email Sending-onboarding: controleer de door Cloudflare opgegeven SPF-, DKIM-, DMARC- en bounce-records tegen de bestaande zone en behoud de huidige MX-, SPF- en mailrecords. De Cloudflare API-koppeling is niet verbonden met account Schaapsvis; het ingelogde Cloudflare-dashboard is wel het account Schaapsvis.
+1. Behoud de afgeronde nameservermigratie en wijzig geen nameservers. Publieke DNS-resolutie toont `joel.ns.cloudflare.com` en `serena.ns.cloudflare.com`. Voor eventuele Email Sending-onboarding: controleer de door Cloudflare opgegeven SPF-, DKIM-, DMARC- en bounce-records tegen de bestaande zone en behoud de huidige MX-, SPF- en mailrecords. De Cloudflare API-koppeling is niet verbonden met account Schaapsvis; accountbrede wijzigingen kunnen via die koppeling dus niet worden uitgevoerd.
 2. R2 is nog niet geactiveerd voor deze account. De Worker-limieten beschermen alleen het gebruik van de twee bewijsbuckets en garanderen geen accountbrede grens van €10 per maand. Maak de buckets pas aan als de rekeninghouder dit risico accepteert en het accountgebruik verder bewaakt:
    ```sh
    npx --yes wrangler@4.151.1 r2 bucket create schaapsvis-student-proofs-preview --jurisdiction eu
@@ -51,7 +51,7 @@ De integratietest met `npm run check:members` gebruikt eigen tijdelijke database
 
 ## Open bedrijfs- en privacykeuzes
 
-- De 10% geldt uitsluitend op gebakken kibbeling, haring, broodjes haring en drinken. Andere gebakken vis, visschalen en alle overige producten zijn uitgesloten. Stapeling met andere acties is nog niet afgesproken.
+- De 10% geldt uitsluitend op gebakken kibbeling, haring, broodjes haring en drinken. Andere gebakken vis, visschalen en alle overige producten zijn uitgesloten. De studentenkortingspagina vermeldt dat studentenkorting niet te combineren is met nieuwsbriefkortingen of andere acties.
 - De formele bewaartermijn voor aanvraagmetadata en procedure voor inzage/verwijdering.
 - De uiteindelijke privacyverklaring, verantwoordelijke beoordelaars en geverifieerde afzender.
 
@@ -63,8 +63,9 @@ De accountregistratie vraagt persoonlijk e-mailadres + schoolmail + wachtwoord.
 Twee afzonderlijke 6-cijferige codes moeten binnen 10 minuten worden ingevoerd;
 codes worden HMAC-gehasht, zijn eenmalig en rate limits begrenzen raden. De
 studentenaanvraag endpoint eist server-side dat beide adressen bevestigd zijn.
-Migraties 0006-0008 horen bij deze lokale wijzigingen en staan nog niet op
-remote D1.
+Migraties 0006-0008 horen bij deze lokale wijzigingen. De volledige lokale
+migratiereeks loopt inmiddels door t/m 0011; de actuele remote D1-status moet
+in account Schaapsvis opnieuw worden gecontroleerd voordat er iets wordt toegepast.
 
 De klanteninschrijving bewaart eerst tijdelijk een e-maildraft, daarna kiest
 de klant regio en geeft apart expliciet toestemming. Alleen dubbelbevestigde
