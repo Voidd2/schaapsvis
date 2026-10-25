@@ -18,7 +18,9 @@ export function generateStaticParams(){return recepten.map(r=>({slug:r.slug}));}
 export async function generateMetadata({params}:Props):Promise<Metadata>{
  const {slug,locale}=await params,raw=recepten.find(r=>r.slug===slug);if(!raw)return {};
  const r=localizeRecipe(raw,locale);
- const meta=paginaMetadata({locale,pad:`/recepten/${slug}`,title:`${r.title} | Schaap’s Vis`,description:r.subtitle.slice(0,160),image:r.fotoUrl||"/og-image.png"});
+ const shortTitleSuffix=locale==="en"?"Fish recipe from Schaap’s":locale==="de"?"Fischrezept von Schaap’s":"Visrecept van Schaap’s";
+ const title=r.title.length<30?`${r.title} | ${shortTitleSuffix}`:`${r.title} | Schaap’s Vis`;
+ const meta=paginaMetadata({locale,pad:`/recepten/${slug}`,title,description:r.subtitle.slice(0,160),image:r.fotoUrl||"/og-image.png"});
  return {...meta,keywords:r.seoKeywords,openGraph:{...meta.openGraph,type:"article"}};
 }
 export default async function RecipeDetail({params}:Props){
@@ -45,3 +47,4 @@ export default async function RecipeDetail({params}:Props){
  <PaginaSlot titel={c.slot} tekst={c.policy} knoppen={[{label:contact.label,href:contact.href,extern:true},{label:c.platter,href:`/${locale}/visschalen`,soort:"lijn"},{label:BEDRIJF.telefoon.weergave,href:`tel:${BEDRIJF.telefoon.e164}`,extern:true,soort:"lijn"}]} />
  </>;
 }
+
