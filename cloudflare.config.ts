@@ -13,8 +13,10 @@ export default defineConfig(({ mode }) => ({
       "nodejs_compat_populate_process_env",
     ],
     domains: ["schaapsvishandel.nl"],
-    workersDev: false,
-    previewUrls: false,
+    // Keep the existing Worker and version preview URLs reachable for QA.
+    // Site content remains gated by the runtime password/access secrets.
+    workersDev: true,
+    previewUrls: true,
     observability: {
       enabled: true,
       logs: { enabled: true, invocationLogs: true, persist: true },
