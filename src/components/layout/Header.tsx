@@ -94,6 +94,8 @@ export function Header() {
                 src={logo}
                 alt=""
                 aria-hidden
+                width={48}
+                height={48}
                 className="h-11 w-11 sm:h-12 sm:w-12 shrink-0 object-contain"
               />
             )}
@@ -240,4 +242,5 @@ function KruisIcoon() {
     </svg>
   );
 }
+
 

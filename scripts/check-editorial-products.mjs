@@ -1,6 +1,9 @@
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
+import { createRequire } from 'node:module';
 import ts from 'typescript';
+const require = createRequire(import.meta.url);
+const { chromium } = require('playwright');
 function module(text) {
   const exports = {};
   new Function('exports', ts.transpileModule(text, {compilerOptions: {module: ts.ModuleKind.CommonJS}}).outputText)(exports);
@@ -29,12 +32,23 @@ assert.equal(missing.length, 0, 'Every catalogue product must have a photograph'
 console.log(JSON.stringify({newUniquePhotos: paths.size, productsWithPhotos: products.length - missing.length, missingPhotos: missing.length, missing}, null, 2));
 const origin = process.argv[2];
 if (origin) for (const locale of ['nl', 'en', 'de']) {
-  const catalogue = await fetch(`${origin}/${locale}/assortiment`);
-  assert.ok(catalogue.ok);
-  const html = await catalogue.text();
+  const browser = await chromium.launch({channel: 'chrome', headless: true});
+  const page = await browser.newPage();
+  await page.goto(`${origin}/${locale}/assortiment`, {waitUntil: 'networkidle'});
   for (const slug of newSlugs) {
     const photo = productPhoto(products.find(p => p.slug === slug));
-    assert.ok(html.includes(encodeURIComponent(photo.src)) || html.includes(photo.src), `${locale}/${slug}: catalogue photo`);
+    const card = page.locator(`article.collection-item:has(a[href="/${locale}/assortiment/${slug}"])`);
+    const more = page.locator('.collection-load-more');
+    for (let attempt = 0; attempt < 6 && !(await card.count()); attempt++) {
+      if (!(await more.isVisible())) break;
+      await more.click();
+    }
+    assert.equal(await card.count(), 1, `${locale}/${slug}: product is reachable in the catalogue`);
+    const cardImage = card.locator('img').first();
+    await cardImage.scrollIntoViewIfNeeded();
+    await cardImage.evaluate(image => image.decode());
+    assert.ok((await cardImage.getAttribute('src'))?.includes(encodeURIComponent(photo.src)), `${locale}/${slug}: catalogue photo`);
+    assert.ok(await cardImage.evaluate(image => image.naturalWidth > 0), `${locale}/${slug}: catalogue photo loads`);
     const response = await fetch(`${origin}/${locale}/assortiment/${slug}`);
     assert.ok(response.ok);
     const detail = await response.text();
@@ -48,4 +62,6 @@ if (origin) for (const locale of ['nl', 'en', 'de']) {
       assert.ok(bio.includes(photo.credit.source), `${locale}: biological page attribution`);
     }
   }
+  await browser.close();
 }
+

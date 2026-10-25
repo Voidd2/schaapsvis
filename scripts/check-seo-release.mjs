@@ -27,7 +27,7 @@ await Promise.all(Array.from({length: concurrency}, async () => {
     if (response.headers.get('x-robots-tag')?.includes('noindex')) problems.push('Header noindex');
     if (!/<title>[^<]+<\/title>/.test(html)) problems.push('Missing title');
     if (!/name="description" content="[^"]+"/.test(html)) problems.push('Missing description');
-    if (!/rel="canonical" href="https:\/\/www\.schaapsvishandel\.nl\//.test(html)) problems.push('Missing canonical');
+    if (!/rel="canonical" href="https:\/\/schaapsvishandel\.nl\//.test(html)) problems.push('Missing apex canonical');
     if (!/property="og:image" content="https:\/\//.test(html)) problems.push('Missing OG image');
     if (!/property="og:url" content="https:\/\//.test(html)) problems.push('Missing OG URL');
     if (!/name="twitter:card" content="summary_large_image"/.test(html)) problems.push('Missing Twitter card');

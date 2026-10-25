@@ -13,6 +13,7 @@ const expandedRegionsMigration = await readFile(new URL("../../migrations/0007_n
 const newsletterDraftsMigration = await readFile(new URL("../../migrations/0008_newsletter_signup_drafts.sql", import.meta.url), "utf8");
 const analyticsMigration = await readFile(new URL("../../migrations/0009_site_analytics.sql", import.meta.url), "utf8");
 const customerAdminMigration = await readFile(new URL("../../migrations/0010_admin_customer_management.sql", import.meta.url), "utf8");
+const proofBudgetMigration = await readFile(new URL("../../migrations/0011_r2_proof_usage_budget.sql", import.meta.url), "utf8");
 const upgradeDb = new DatabaseSync(":memory:");
 upgradeDb.exec(schema);
 upgradeDb.exec(`
@@ -32,6 +33,7 @@ upgradeDb.exec(expandedRegionsMigration);
 upgradeDb.exec(newsletterDraftsMigration);
 upgradeDb.exec(analyticsMigration);
 upgradeDb.exec(customerAdminMigration);
+upgradeDb.exec(proofBudgetMigration);
 assert.equal(upgradeDb.prepare("SELECT application_id FROM student_passes WHERE id='legacy-pass'").get().application_id, "legacy-application", "migration associates existing student passes with their approved application");
 upgradeDb.close();
 const sqlite = new DatabaseSync(":memory:");
@@ -45,6 +47,7 @@ sqlite.exec(expandedRegionsMigration);
 sqlite.exec(newsletterDraftsMigration);
 sqlite.exec(analyticsMigration);
 sqlite.exec(customerAdminMigration);
+sqlite.exec(proofBudgetMigration);
 let simulateApplicationCommitFailure = false;
 let decisionReadBarrier = null;
 
@@ -282,6 +285,18 @@ applicationForm.set("educationLevel", "mbo");
 applicationForm.set("studiesInLeiden", "true");
 applicationForm.set("proofConsent", "true");
 applicationForm.set("proof", proof);
+sqlite.prepare("UPDATE r2_proof_storage_budget SET bytes_reserved=? WHERE id=1").run(4_000_000_000);
+sqlite.exec("DELETE FROM auth_rate_limits");
+assert.equal((await call("/api/members/student-application", { method: "POST", body: applicationForm, cookie: sessionCookie })).status, 429, "R2 storage hard ceiling blocks uploads before writing to the bucket");
+assert.equal(objects.size, 0, "a full storage reservation never reaches R2");
+sqlite.prepare("UPDATE r2_proof_storage_budget SET bytes_reserved=0 WHERE id=1").run();
+const budgetNow = new Date().toISOString();
+sqlite.prepare("UPDATE r2_proof_operation_budget SET month=?, day=?, put_ops=400000 WHERE id=1").run(budgetNow.slice(0, 7), budgetNow.slice(0, 10));
+sqlite.exec("DELETE FROM auth_rate_limits");
+assert.equal((await call("/api/members/student-application", { method: "POST", body: applicationForm, cookie: sessionCookie })).status, 429, "monthly R2 Class A quota prevents more uploads");
+assert.equal(sqlite.prepare("SELECT bytes_reserved FROM r2_proof_storage_budget WHERE id=1").get().bytes_reserved, 0, "denied operation quota releases its storage reservation");
+sqlite.prepare("UPDATE r2_proof_operation_budget SET put_ops=0 WHERE id=1").run();
+sqlite.exec("DELETE FROM auth_rate_limits");
 simulateApplicationCommitFailure = true;
 simulateProofDeleteFailure = true;
 assert.equal((await call("/api/members/student-application", { method: "POST", body: applicationForm, cookie: sessionCookie })).status, 503);
@@ -289,6 +304,7 @@ assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM student_applications"
 assert.equal(objects.size, 1, "if both the database commit and R2 delete fail, the object remains private until scheduled cleanup");
 const failedUpload = sqlite.prepare("SELECT object_key FROM student_proof_cleanup_queue").get();
 assert.ok(failedUpload?.object_key && objects.has(failedUpload.object_key), "the failed upload retains its durable cleanup handle");
+assert.equal(sqlite.prepare("SELECT bytes_reserved FROM r2_proof_storage_budget WHERE id=1").get().bytes_reserved, proof.size, "failed cleanup keeps its storage reservation to prevent undercounting");
 sqlite.prepare("UPDATE student_proof_cleanup_queue SET queued_at=? WHERE object_key=?").run("2000-01-01T00:00:00.000Z", failedUpload.object_key);
 simulateProofDeleteFailure = false;
 const orphanCleanupTasks = [];
@@ -296,6 +312,7 @@ await memberWorker.scheduled({}, env, { waitUntil(task) { orphanCleanupTasks.pus
 await Promise.all(orphanCleanupTasks);
 assert.equal(objects.has(failedUpload.object_key), false, "scheduled cleanup removes an old unlinked proof after R2 recovers");
 assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM student_proof_cleanup_queue").get().count, 0, "successful orphan cleanup clears its queue row");
+assert.equal(sqlite.prepare("SELECT bytes_reserved FROM r2_proof_storage_budget WHERE id=1").get().bytes_reserved, 0, "successful orphan cleanup releases its storage reservation once");
 const applicationResponse = await call("/api/members/student-application", { method: "POST", body: applicationForm, cookie: sessionCookie });
 assert.equal(applicationResponse.status, 202);
 assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM consent_events WHERE user_id=(SELECT id FROM users WHERE email='student@example.test') AND consent_type='student_proof_processing'").get().count, 1, "proof consent is committed with the application");
@@ -320,6 +337,10 @@ const queue = await call("/api/members/admin/student-applications", { cookie: se
 assert.equal(queue.status, 200);
 const application = (await queue.json()).applications[0];
 assert.equal(application.email, "student@example.test");
+const currentUsagePeriod = new Date().toISOString();
+sqlite.prepare("UPDATE r2_proof_operation_budget SET month=?, day=?, get_ops=4000000 WHERE id=1").run(currentUsagePeriod.slice(0, 7), currentUsagePeriod.slice(0, 10));
+assert.equal((await call(`/api/members/admin/student-applications/${application.id}/proof`, { cookie: sessionCookie })).status, 429, "monthly R2 Class B quota blocks additional proof reads");
+sqlite.prepare("UPDATE r2_proof_operation_budget SET get_ops=0 WHERE id=1").run();
 assert.equal((await call(`/api/members/admin/student-applications/${application.id}/proof`, { cookie: sessionCookie })).status, 200);
 
 simulateProofDeleteFailure = true;
@@ -333,6 +354,7 @@ assert.equal((await call(`/api/members/admin/student-applications/${application.
 simulateProofDeleteFailure = false;
 assert.equal((await call(`/api/members/admin/student-applications/${application.id}/cleanup`, { method: "POST", cookie: sessionCookie })).status, 200);
 assert.equal(objects.size, 0, "approved proof is removed from private R2 after retry");
+assert.equal(sqlite.prepare("SELECT bytes_reserved FROM r2_proof_storage_budget WHERE id=1").get().bytes_reserved, 0, "reviewed-proof retry releases the byte reservation");
 const account = await call("/api/members/me", { cookie: sessionCookie });
 const pass = (await account.json()).discountPass;
 assert.ok(pass?.code);

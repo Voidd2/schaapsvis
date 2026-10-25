@@ -4,6 +4,18 @@ const {chromium}=require('playwright'),assert=require('assert/strict'),path=requ
 const origin=process.argv[2]||'http://localhost:3011';
 const decisions=JSON.parse(require('fs').readFileSync('src/lib/assortiment-besluiten.json','utf8'));
 const expected=decisions.originalCount-decisions.removed.length+decisions.added.length;
+async function revealAllProducts(page,locale){
+ const images=page.locator('.collection img');
+ for(let attempt=0;attempt<10&&(await images.count())<expected;attempt++){
+  const before=await images.count();
+  const more=page.locator('.collection-load-more');
+  assert.ok(await more.isVisible(),`${locale} load-more control is visible`);
+  await more.scrollIntoViewIfNeeded();
+  await more.click();
+  await page.waitForFunction(previous=>document.querySelectorAll('.collection img').length>previous,before);
+ }
+ assert.equal(await images.count(),expected,locale+' catalogue coverage');
+}
 (async()=>{
  const browser=await chromium.launch({channel:'chrome',headless:true});
  const errors=[];let decoded=0,details=0,recipePages=0;
@@ -12,8 +24,9 @@ const expected=decisions.originalCount-decisions.removed.length+decisions.added.
    const page=await browser.newPage({viewport:{width:390,height:844}});
    page.on('pageerror',e=>errors.push(locale+': '+e.message));
    await page.goto(`${origin}/${locale}/assortiment`,{waitUntil:'networkidle'});
-   assert.equal(await page.locator('.collection img').count(),expected,locale+' catalogue coverage');
-   const images=await page.locator('.collection img').evaluateAll(async imgs=>{
+   await revealAllProducts(page,locale);
+   const catalogueImages=page.locator('.collection img');
+   const images=await catalogueImages.evaluateAll(async imgs=>{
     imgs.forEach(img=>img.loading='eager');
     await Promise.all(imgs.map(img=>img.decode()));
     return imgs.map(img=>({width:img.naturalWidth,height:img.naturalHeight,alt:img.alt}));
@@ -25,12 +38,21 @@ const expected=decisions.originalCount-decisions.removed.length+decisions.added.
     await page.waitForFunction(()=>!document.querySelector('.collection-favorites')&&[...document.querySelectorAll('.collection-item h3')].every(el=>/tonijn/i.test(el.textContent)));
     await page.locator('.collection-item').first().screenshot({path:path.resolve('../../outputs/assortiment-internet-mobiel.png')});
     await page.locator('input[type="search"]').fill('');
+    await page.waitForFunction(count=>document.querySelector('.collection-count')?.textContent?.match(/\d+/)?.[0]===String(count),expected);
+    await revealAllProducts(page,locale);
    }
    const productCards=await page.locator('.collection .favorite-card, .collection .collection-item').evaluateAll(cards=>cards.map(card=>({href:[...card.querySelectorAll('a[href]')].map(link=>link.getAttribute('href')).find(href=>href?.startsWith(`/${document.documentElement.lang}/assortiment/`)),title:card.querySelector('h3')?.textContent?.trim()})).filter(card=>card.href&&card.title));
    assert.equal(productCards.length,expected,locale+' product cards with detail links');
    assert.equal(new Set(productCards.map(card=>card.href)).size,expected,locale+' unique product links');
    const recipeHrefs=new Set();
    for(const {href,title} of productCards){
+    for(let attempt=0;attempt<10&&!await page.locator(`.collection a[href="${href}"]`).count();attempt++){
+     const more=page.locator('.collection-load-more');
+     if(!(await more.isVisible()))break;
+     const before=await page.locator('.collection img').count();
+     await more.scrollIntoViewIfNeeded();await more.click();
+     await page.waitForFunction(previous=>document.querySelectorAll('.collection img').length>previous,before);
+    }
     const link=page.locator(`.collection a[href="${href}"]`).first();
     await link.click();await page.waitForURL(`**${href}`);
     await page.waitForFunction(expectedTitle=>{
@@ -57,3 +79,4 @@ const expected=decisions.originalCount-decisions.removed.length+decisions.added.
   console.log(JSON.stringify({catalogueImagesDecoded:decoded,languages:3,overviewToDetailFlows:details,uniqueRecipePagesOpened:recipePages,mobileOverflow:false,browserErrors:errors,ordersSent:0,messagesSent:0}));
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1});
+
