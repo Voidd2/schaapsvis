@@ -39,7 +39,7 @@ const categories: Categorie[] = ["verse-vis", "gerookte-vis", "schaal-schelp", "
 // The salmon is already the hero image at the top of this page. Keep the
 // selection focused on other everyday counter favourites instead of showing
 // salmon twice in the first viewport.
-const featuredSlugs = ["kibbeling", "kabeljauwfilet", "zeebaarsfilet", "creuse-oesters"];
+const featuredSlugs = ["kabeljauwfilet", "lekkerbek", "zeebaarsfilet", "creuse-oesters"];
 const stapleSlugs = new Set(["varlaks-zalm", "kibbeling", "lekkerbek", "haring", "broodje-haring", "kabeljauwfilet", "zeebaarsfilet"]);
 
 export function AssortimentFilter({ localized }: { localized: Product[] }) {
