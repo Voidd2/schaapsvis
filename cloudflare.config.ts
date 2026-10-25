@@ -13,6 +13,8 @@ export default defineConfig(({ mode }) => ({
       "nodejs_compat_populate_process_env",
     ],
     domains: ["schaapsvishandel.nl"],
+    workersDev: false,
+    previewUrls: false,
     observability: {
       enabled: true,
       logs: { enabled: true, invocationLogs: true, persist: true },
@@ -25,7 +27,11 @@ export default defineConfig(({ mode }) => ({
     env: {
       ASSETS: bindings.assets(),
       IMAGES: bindings.images(),
-      WORKER_SELF_REFERENCE: bindings.worker({ worker: "schaapsvis" }),
+      // Keep the existing self-binding pinned to its current production environment.
+      WORKER_SELF_REFERENCE: bindings.worker({
+        worker: "schaapsvis",
+        environment: "production",
+      } as any),
       // Only local Vite development is public for page-by-page QA. A production
       // or deployed preview build gets no SITE_PUBLIC binding and stays locked
       // unless the owner explicitly configures its runtime variables/secrets.
