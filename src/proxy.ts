@@ -34,13 +34,6 @@ function altijdToegestaan(pathname: string): boolean {
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  if (request.nextUrl.hostname.toLowerCase() === "www.schaapsvishandel.nl") {
-    const canonicalUrl = request.nextUrl.clone();
-    canonicalUrl.protocol = "https:";
-    canonicalUrl.hostname = "schaapsvishandel.nl";
-    canonicalUrl.port = "";
-    return NextResponse.redirect(canonicalUrl, 301);
-  }
 
   const opSlot = siteOpSlot();
   const heeftToegang = heeftGeldigeSiteToegang(request.cookies.get(ACCESS_COOKIE)?.value);
