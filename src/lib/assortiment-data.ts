@@ -237,7 +237,7 @@ export const products: Product[] = [
     "bevat": [
       "VIS"
     ],
-    "beschikbaar": "op bestelling"
+    "beschikbaar": "always"
   },
   {
     "slug": "gerookte-zalm-high-seas",
@@ -842,13 +842,13 @@ export const products: Product[] = [
   {
     "slug": "gebakken-ansjovis",
     "naam": "Gebakken Ansjovis",
-    "desc": "Gebakken ansjovis als hartig visgerecht. Vraag naar de actuele voorraad; verse ansjovis is een apart product, uitsluitend op aanvraag.",
+    "desc": "Kleine gebakken ansjovisjes hebben we vaak in de winkel. Ze zijn op hun best gefrituurd: lekker krokant als hartige snack. Verse ansjovis is een apart product en alleen op aanvraag verkrijgbaar.",
     "categorie": "bereid",
     "ingredienten": "Ansjovis [VIS]. Vraag naar de ingrediënten en allergenen van de bereiding.",
     "bevat": [
       "VIS"
     ],
-    "beschikbaar": "current"
+    "beschikbaar": "shop-often"
   },
   {
     "slug": "zeekraal",

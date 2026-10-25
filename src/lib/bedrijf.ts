@@ -46,7 +46,7 @@ export const BEDRIJF = {
   /** EIGENAAR: vul hier je e-mailadres in; zolang dit null is toont de site geen e-mail. */
   email: null as string | null,
 
-  domein: "https://www.schaapsvishandel.nl",
+  domein: "https://schaapsvishandel.nl",
 
   socials: {
     facebook: "https://www.facebook.com/schaapsvishandel/",

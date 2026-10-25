@@ -19,7 +19,9 @@ function subscribeConsent(onChange: () => void) {
 function readConsent() { return window.localStorage.getItem(CONSENT_KEY) || ""; }
 
 function send(event: "page_view" | "link_click", path: string, target?: string) {
-  if (!path || PRIVATE_PATH.test(path)) return;
+  // Re-check consent at the moment of transmission. A document-level click
+  // listener can run before React removes it after the visitor revokes consent.
+  if (window.localStorage.getItem(CONSENT_KEY) !== "accepted" || !path || PRIVATE_PATH.test(path)) return;
   const body = JSON.stringify({ consent: true, event, path, ...(target ? { target } : {}) });
   void fetch("/api/members/analytics", { method: "POST", headers: { "Content-Type": "application/json" }, body, credentials: "same-origin", keepalive: true }).catch(() => undefined);
 }

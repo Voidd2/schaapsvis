@@ -96,7 +96,7 @@ const env = {
   MEMBERS_ENABLED: "off",
   AUTH_PEPPER: "test-only-pepper-never-use-in-production",
   PASS_SIGNING_KEY: "test-only-signing-key-never-use-in-production",
-  SITE_ORIGIN: "https://www.schaapsvishandel.nl",
+  SITE_ORIGIN: "https://schaapsvishandel.nl",
   MAIL_FROM: "noreply@schaapsvishandel.nl",
   ADMIN_EMAILS: "student@example.test",
   ADMIN_IPS: "203.0.113.10,2001:db8::10",
@@ -157,7 +157,7 @@ env.ANALYTICS_ENABLED = "on";
 assert.equal((await call("/api/members/analytics", { method: "POST", body: { consent: false, event: "page_view", path: "/nl" } })).status, 400, "analytics rejects events without affirmative consent");
 assert.equal((await call("/api/members/analytics", { method: "POST", body: { consent: true, event: "page_view", path: "/nl/account" } })).status, 400, "analytics excludes account paths");
 assert.equal((await call("/api/members/analytics", { method: "POST", body: { consent: true, event: "page_view", path: "/nl/assortiment" } })).status, 202, "analytics accepts a consented public page view");
-assert.equal((await call("/api/members/analytics", { method: "POST", body: { consent: true, event: "link_click", path: "/nl/varlaks", target: "https://www.schaapsvishandel.nl/nl/assortiment/varlaks-zalm?email=private@example.test" } })).status, 202, "analytics stores a sanitized link target");
+assert.equal((await call("/api/members/analytics", { method: "POST", body: { consent: true, event: "link_click", path: "/nl/varlaks", target: "https://schaapsvishandel.nl/nl/assortiment/varlaks-zalm?email=private@example.test" } })).status, 202, "analytics stores a sanitized link target");
 assert.equal(sqlite.prepare("SELECT count FROM site_analytics_daily WHERE event='link_click'").get().count, 1);
 assert.equal(sqlite.prepare("SELECT target FROM site_analytics_daily WHERE event='link_click'").get().target, "/nl/assortiment/varlaks-zalm", "analytics drops query strings that may contain private data");
 const oversizedRegistration = await call("/api/members/register", {
@@ -439,7 +439,7 @@ confirmationForm.set("token", confirmation.searchParams.get("token"));
 confirmationForm.set("locale", "de");
 const confirmationResult = await call(confirmation.pathname, { method: "POST", body: confirmationForm });
 assert.equal(confirmationResult.status, 303);
-assert.equal(confirmationResult.headers.get("Location"), "https://www.schaapsvishandel.nl/de/account?newsletter=confirmed");
+assert.equal(confirmationResult.headers.get("Location"), "https://schaapsvishandel.nl/de/account?newsletter=confirmed");
 assert.equal(sentEmails.at(-1).subject, "Sie erhalten jetzt Angebote von Schaap's Vishandel");
 assert.match(sentEmails.at(-1).text, /locale=de/);
 assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='deals@example.test'").get().status, "subscribed");
@@ -511,7 +511,7 @@ resetForm.set("locale", "en");
 resetForm.set("password", "updated secure password");
 const resetResult = await call(resetUrl.pathname, { method: "POST", body: resetForm });
 assert.equal(resetResult.status, 303);
-assert.equal(resetResult.headers.get("Location"), "https://www.schaapsvishandel.nl/en/account?password-reset=1");
+assert.equal(resetResult.headers.get("Location"), "https://schaapsvishandel.nl/en/account?password-reset=1");
 
 console.log("Account worker integration tests passed: email verification, login, proof upload and orphan cleanup retries, private proof review, student pass renewal, newsletter double opt-in, campaign delivery, unsubscribe and daily quota recovery.");
 

@@ -83,6 +83,7 @@
     "feestschotel": "/visschalen"
   },
   "availability": {
+    "gebakken-mosselen": "always",
     "bosje-sprot": "request",
     "bot": "request",
     "coquilles": "usually",
@@ -115,7 +116,9 @@
     "tarbot": "request",
     "tarbotfilet": "request",
     "tilapiafilet": "always",
+    "tonijnfilet": "always",
     "ansjovis": "request",
+    "gebakken-ansjovis": "shop-often",
     "sardines": "rare-request",
     "vissoep": "shop-only",
     "wijting": "sometimes-request",

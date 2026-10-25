@@ -57,7 +57,7 @@ if(origin){
    const task=tasks.shift(),url=origin+'/'+task.l+'/assortiment/'+task.slug;
    const r=await fetch(url,{redirect:'manual'});
    if(task.removed){
-    assert.ok(!sitemap.includes('<loc>https://www.schaapsvishandel.nl/'+task.l+'/assortiment/'+task.slug+'</loc>'),'Retired sitemap URL');
+    assert.ok(!sitemap.includes('<loc>https://schaapsvishandel.nl/'+task.l+'/assortiment/'+task.slug+'</loc>'),'Retired sitemap URL');
     const target=decisions.aliases[task.slug];
     assert.equal(r.status,target?308:404,url);
     if(target){assert.equal(new URL(r.headers.get('location'),origin).pathname,'/'+task.l+target);redirects++;}

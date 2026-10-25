@@ -9,8 +9,8 @@ export const ACCESS_COOKIE = "sv_access";
 /**
  * Cookiewaarde die toegang verleent.
  *
- * Zet in Vercel een eigen SITE_ACCESS_TOKEN, dan zijn alle bestaande cookies in
- * één klap ongeldig — handig als je iemand de toegang wilt ontnemen.
+ * Stel per host een eigen SITE_ACCESS_TOKEN als runtime-secret in; wijzigen
+ * maakt de bestaande toegangscookies voor die host direct ongeldig.
  */
 // No predictable fallback: a missing production secret must not create a
 // forgeable cookie that bypasses the site lock.

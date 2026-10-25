@@ -1,5 +1,7 @@
 # Overdracht — wat je zelf nog moet invullen
 
+> **Actuele status (24 oktober 2026):** de productie-website staat op de Cloudflare Worker `schaapsvis` via `https://schaapsvishandel.nl`. Deze overdracht bevat oudere Vercel-/wachtwoordstappen en is deels historisch; volg die niet zonder eerst [`docs/cloudflare-migration-status-2026-10-24.md`](docs/cloudflare-migration-status-2026-10-24.md) te lezen. De `www`-DNS-route, openbare productie-instelling en live eindcontroles zijn nog open. Er zijn geen secrets in Git gezet.
+
 Kort overzicht van wat er klaarstaat en wat er van jou nodig is voordat de site
 live kan. Alles staat op één plek per onderwerp, dus je hoeft nergens in de code
 te zoeken.
@@ -119,8 +121,7 @@ preview-deploys en zolang alleen een tijdelijk Vercel-domein beschikbaar is.
 assortiment, de blog, de sitemap, `/admin` — alles. Ook als iemand rechtstreeks
 een adres intikt of vanaf Google binnenkomt.
 
-Het wachtwoord is **`Malaga5010`**. Wijzigen doe je zonder code aan te passen:
-zet in Vercel de variabele `SITE_PASSWORD` op iets anders.
+Gebruik geen wachtwoord uit deze historische overdracht. De toegangssleutels moeten als runtime-secrets op de juiste Cloudflare Worker-omgeving worden ingesteld. De eerder in chat gedeelde waarden zijn niet meer geschikt als geheim; roteer ze. Zet nooit secretwaarden in deze repository.
 
 Wie het wachtwoord invult krijgt een cookie die dertig dagen meegaat. Wil je
 iedereen er in één keer uit gooien (bijvoorbeeld omdat je het wachtwoord aan
@@ -132,11 +133,7 @@ uitgelogd en zie je precies wat een bezoeker ziet.
 
 ### De site openzetten voor het publiek
 
-Eén variabele in Vercel:
-
-```
-SITE_PUBLIC=launch-approved
-```
+Voor de productie-Worker hoort de runtimevariabele `SITE_PUBLIC=launch-approved` pas te worden ingesteld wanneer de site inhoudelijk klaar is voor publiek. Dit moet in Cloudflare gebeuren; de variabele staat niet in Git.
 
 Weghalen, leeglaten of iets anders invullen zet het slot er weer op.
 

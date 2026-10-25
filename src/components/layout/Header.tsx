@@ -36,14 +36,24 @@ export function Header() {
 
   const p = (pad: string) => `/${locale}${pad}`;
 
-  const links = [
+  const primaryLinks = [
     { href: p("/assortiment"), label: t("assortiment") },
     { href: p("/barbecue-gourmet"), label: locale === "de" ? "Grill & Gourmet" : locale === "en" ? "Barbecue & gourmet" : "Barbecue & gourmet" },
+    { href: p("/biologische-vis"), label: locale === "de" ? "Bio, ASC & MSC" : locale === "en" ? "Organic, ASC & MSC" : "Biologische vis" },
+    { href: p("/studentenkorting"), label: locale === "de" ? "Studentenrabatt" : locale === "en" ? "Student discount" : "Studentenkorting" },
+    { href: p("/visschalen"), label: t("visschalen") },
     { href: p("/recepten"), label: t("recepten") },
     { href: p("/bezoek-ons"), label: t("locaties") },
-    { href: p("/studentenkorting"), label: locale === "de" ? "Studentenrabatt" : locale === "en" ? "Student discount" : "Studentenkorting" },
-    { href: p("/account"), label: locale === "de" ? "Konto" : locale === "en" ? "Account" : "Account" },
   ];
+  const accountLinks = [
+    { href: p("/account"), label: locale === "de" ? "Studentenkonto" : locale === "en" ? "Student account" : "Studentenaccount" },
+    { href: p("/account/klant"), label: locale === "de" ? "Kundenkonto" : locale === "en" ? "Customer account" : "Klantaccount" },
+  ];
+  const extraLinks = [
+    { href: p("/ons-verhaal"), label: t("verhaal") },
+    { href: p("/contact"), label: t("contact") },
+  ];
+  const allLinks = [...primaryLinks, ...accountLinks, ...extraLinks];
 
   const isActief = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
@@ -57,7 +67,7 @@ export function Header() {
         className="text-[0.72rem] tracking-wide"
         style={{ backgroundColor: "var(--navy-dark)", color: "rgba(250,246,239,0.72)" }}
       >
-        <div className="max-w-6xl mx-auto px-4 h-8 flex items-center justify-between gap-4">
+        <div className="max-w-7xl 2xl:max-w-[90rem] mx-auto px-4 h-8 flex items-center justify-between gap-4">
           <span className="hidden sm:inline">{ADRES_REGEL}</span>
           <WinkelStatus />
           <a
@@ -73,7 +83,7 @@ export function Header() {
       <header
         style={{ backgroundColor: "var(--cream)", borderBottom: "1px solid var(--linen)" }}
       >
-        <div className="max-w-6xl mx-auto px-4 flex items-center justify-between gap-3 lg:gap-6 h-[4.4rem]">
+        <div className="max-w-7xl 2xl:max-w-[90rem] mx-auto px-4 flex items-center justify-between gap-3 lg:gap-6 min-h-[4.4rem] py-2">
           <Link href={p("")} className="min-w-0 leading-none flex items-center gap-3">
             {/* Het ronde logo, zodra de eigenaar het aanlevert. Klein gehouden:
                 een grote badge in de kop duwt de navigatie van de rand en maakt
@@ -110,17 +120,17 @@ export function Header() {
             </span>
           </Link>
 
-          <nav className="hidden xl:flex items-center gap-3 xl:gap-4 text-[0.85rem]">
-            {links.slice(0, 4).map(({ href, label }) => (
+          <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="hidden 2xl:flex items-center justify-end gap-x-2 text-[0.68rem]">
+            {primaryLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
-                className="transition-colors whitespace-nowrap"
+                className="transition-colors whitespace-nowrap px-1.5 py-2 rounded-sm hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                 style={{
                   color: isActief(href) ? "var(--navy)" : "var(--charcoal)",
                   fontWeight: isActief(href) ? 600 : 400,
                   borderBottom: isActief(href) ? "2px solid var(--gold)" : "2px solid transparent",
-                  paddingBottom: "2px",
+                  paddingBottom: "3px",
                 }}
               >
                 {label}
@@ -129,13 +139,9 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-3 shrink-0">
-            <div className="hidden xl:block" style={{ color: "var(--charcoal)" }}>
+            <div className="hidden 2xl:block" style={{ color: "var(--charcoal)" }}>
               <LanguageSwitcher />
             </div>
-
-            <Link href={p("/visschalen")} className="knop knop-rood hidden sm:inline-flex !py-2.5 !px-5 !text-[0.9rem]">
-              {t("visschalen")}
-            </Link>
 
             <a
               href={`tel:${BEDRIJF.telefoon.e164}`}
@@ -148,7 +154,7 @@ export function Header() {
             <button
               type="button"
               ref={menuButton}
-              className="xl:hidden p-2 -mr-2"
+              className="p-2 -mr-2 rounded-md transition-colors hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
               style={{ color: "var(--navy)" }}
               onClick={() => setOpen(!open)}
               aria-expanded={open}
@@ -164,19 +170,11 @@ export function Header() {
         {open && (
           <div
             id="mobile-navigation"
-            className="xl:hidden max-h-[calc(100dvh-6.4rem)] overflow-y-auto overscroll-contain"
+            className="max-h-[calc(100dvh-6.4rem)] overflow-y-auto overscroll-contain"
             style={{ backgroundColor: "var(--cream)", borderTop: "1px solid var(--linen)" }}
           >
-            <nav className="max-w-6xl mx-auto px-4 py-2">
-              <Link
-                href={p("/visschalen")}
-                onClick={() => setOpen(false)}
-                className="knop knop-rood w-full my-3 sm:hidden"
-              >
-                {t("visschalen")}
-              </Link>
-
-              {links.map(({ href, label }) => (
+            <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="max-w-7xl 2xl:max-w-[90rem] mx-auto px-4 py-2">
+              {allLinks.map(({ href, label }) => (
                 <Link
                   key={href}
                   href={href}
@@ -187,21 +185,6 @@ export function Header() {
                     color: "var(--navy)",
                     fontFamily: "var(--font-display)",
                   }}
-                >
-                  {label}
-                </Link>
-              ))}
-
-              {[
-                { href: p("/ons-verhaal"), label: t("verhaal") },
-                { href: p("/contact"), label: t("contact") },
-              ].map(({ href, label }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  onClick={() => setOpen(false)}
-                  className="block py-2.5 text-[0.95rem]"
-                  style={{ color: "var(--charcoal)" }}
                 >
                   {label}
                 </Link>

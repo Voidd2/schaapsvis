@@ -20,6 +20,7 @@ const COPY: Record<
     placeholder: string;
     button: string;
     error: string;
+    setupError: string;
   }
 > = {
   nl: {
@@ -40,6 +41,7 @@ const COPY: Record<
     placeholder: "Wachtwoord",
     button: "Inloggen",
     error: "Onjuist wachtwoord. Probeer het opnieuw.",
+    setupError: "Inloggen is tijdelijk niet beschikbaar. Probeer het later opnieuw of neem contact met ons op.",
   },
   en: {
     eyebrow: "Leiden · since 1938",
@@ -59,6 +61,7 @@ const COPY: Record<
     placeholder: "Password",
     button: "Log in",
     error: "Incorrect password. Please try again.",
+    setupError: "Sign-in is temporarily unavailable. Please try again later or contact us.",
   },
   de: {
     eyebrow: "Leiden · seit 1938",
@@ -78,6 +81,7 @@ const COPY: Record<
     placeholder: "Passwort",
     button: "Anmelden",
     error: "Falsches Passwort. Bitte versuchen Sie es erneut.",
+    setupError: "Die Anmeldung ist vorübergehend nicht verfügbar. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns.",
   },
 };
 
@@ -87,7 +91,7 @@ const LANGS: { code: Lang; label: string }[] = [
   { code: "de", label: "DE" },
 ];
 
-export function ComingSoon({ error = false }: { error?: boolean }) {
+export function ComingSoon({ error = null }: { error?: "wrong" | "setup" | null }) {
   const [lang, setLang] = useState<Lang>("nl");
   const t = COPY[lang];
 
@@ -217,7 +221,7 @@ export function ComingSoon({ error = false }: { error?: boolean }) {
               className="text-sm text-center mb-3 px-3 py-2"
               style={{ backgroundColor: "rgba(192,57,43,0.2)", color: "#ffb4a8" }}
             >
-              {t.error}
+              {error === "setup" ? t.setupError : t.error}
             </p>
           )}
           <div className="flex gap-2">
