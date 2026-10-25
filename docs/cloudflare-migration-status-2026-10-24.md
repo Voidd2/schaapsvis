@@ -1,22 +1,24 @@
-# Cloudflare-migratie — status 24 oktober 2026
+# Cloudflare-migratie — status gecontroleerd 25 oktober 2026
 
-Deze notitie is de actuele controle na de eerdere, gedateerde migratielogboeken. Er zijn geen DNS-records of productievariabelen gewijzigd tijdens deze controle.
+Deze notitie vervangt de eerdere statusclaims die niet meer stroken met de huidige project- en accountinformatie. De eigenaar meldt dat de website nog op Vercel draait en dat hosting/domein nog worden overgezet. Er zijn in deze controle geen DNS-, Vercel-, Cloudflare- of billing-instellingen gewijzigd.
 
-## Wat is bevestigd
+## Wat nu is bevestigd
 
-- De autoritatieve nameservers voor `schaapsvishandel.nl` zijn `joel.ns.cloudflare.com` en `serena.ns.cloudflare.com`. De Cloudflare-zone meldt DNS Setup: Full.
-- De apex `schaapsvishandel.nl` heeft in Cloudflare een Worker-record naar productie-Worker `schaapsvis`. Het Cloudflare-dashboard toont een Ready-productieversie op `main` (commit `ed2d9ce`) en het hoofddomein als Custom Domain.
-- Een actuele HTTP-request naar de apex gaf status 200 met `server: cloudflare` en `x-opennext`. De response bevatte ook `x-robots-tag: noindex, nofollow`: de website is dus nog niet openbaar voor bezoekers/zoekmachines. De poging om HTTPS via deze Windows-shell te testen liep vast op de lokale Schannel-clientinstelling; daaruit volgt geen conclusie over de TLS-certificaatstatus.
-- `www.schaapsvishandel.nl` heeft momenteel geen A-, AAAA- of CNAME-record; Cloudflare waarschuwt dat bezoekers de host niet kunnen bereiken en publieke DNS-resolutie gaf geen record. De applicatiecode is op GitHub bijgewerkt om www-verzoeken met HTTP 301 naar de apex om te leiden, inclusief pad en queryparameters. De redirect kan pas worden getest nadat www weer naar de Worker wordt geleid.
-- De zakelijke mailrecords staan nog in de zone: `mail`, `smtp`, `pop` en `ftp` wijzen naar `91.220.37.174` en zijn DNS-only; MX verwijst naar `mail.schaapsvishandel.nl` met prioriteit 10; het SPF-record bevat `v=spf1 a mx ip4:91.220.37.174 ~all`. Er staan in de huidige zone geen DKIM- of DMARC-records; Cloudflare toont hiervoor een DMARC-aanbeveling. Die records zijn niet aangepast.
-- In de Worker-preview zijn `SITE_PASSWORD` en `SITE_ACCESS_TOKEN` als versleutelde secrets opgeslagen. Na uitloggen is het previewwachtwoord opnieuw getest en gaf de preview toegang. De waarden staan niet in GitHub, maar zijn later in chat gedeeld; roteer beide waarden voordat je ze nog als geheim of beveiliging gebruikt. `SITE_ACCESS_TOKEN` is bovendien de letterlijke toegangs-cookie, dus iedereen die deze waarde kent kan het slot omzeilen.
-- Pull request #18 staat open; de meest recente update bevat de apex-canonicalisatie, sitemapupdate, www-301-code en bijgewerkte tests. De nieuwe GitHub- en Vercel-checks waren bij het schrijven nog bezig.
+- De lokale DNS-resolver geeft voor zowel `schaapsvishandel.nl` als `www.schaapsvishandel.nl` Cloudflare-IP-adressen terug. Dit bewijst dat de hosts via Cloudflare proxy/DNS-resolutie lopen, maar niet welke origin de records gebruiken of waar de websitecode wordt gehost. De owner meldt dat hosting nog op Vercel staat.
+- HTTPS-tests vanuit deze omgeving konden geen verbinding openen. Daarom zijn redirects, TLS, de live HTML en de huidige origin niet onafhankelijk bevestigd in deze controle.
+- De Cloudflare API-verbinding is aangemeld als `admin@haascom.com`. `GET /accounts` toont alleen `Admin@haascom.com's Account`; een zonezoekopdracht voor `schaapsvishandel.nl` levert geen zone op. De aparte dashboardaccount `Schaapsvis`, Workers, secrets, DNS-originrecords en R2-billing kunnen via deze API-verbinding dus niet worden beheerd of geverifieerd.
+- De sitecode en Worker-build zijn bijgewerkt op de open concept-PR [#23](https://github.com/Voidd2/schaapsvis/pull/23). De nieuwste branchbuild en Cloudflare-build slagen, maar de PR is niet samengevoegd; dit is geen bewijs van een productie-uitrol.
+- De publieke root en Worker-preview zijn eerder in de browser gezien als afgeschermde “Binnenkort online”-pagina. Een geslaagde ontgrendeling op de huidige productiehost is niet bevestigd. Behandel de live site dus als niet geverifieerd; presenteer de volledige site of het wachtwoord niet als werkend.
+- R2 is niet geactiveerd. De eigenaar heeft €10 per maand als maximum genoemd. Cloudflare's gebruiksbudgetmeldingen zijn alleen waarschuwingen, geen bestedingslimiet; ze kunnen bovendien vertraagd zijn. Daarom kan een harde limiet van €10 niet worden gegarandeerd en is er geen betaalde R2-activatie uitgevoerd. Zie [R2-prijzen](https://developers.cloudflare.com/r2/pricing/) en [budgetmeldingen](https://developers.cloudflare.com/changelog/post/2026-06-15-budget-alerts-default-on/).
 
-## Nog nodig vóór de migratie echt af is
+## Nog nodig voor een aantoonbaar afgeronde migratie
 
-1. Exporteer de Cloudflare-DNS-zone als back-up vóór de eerstvolgende DNS-wijziging. Deze export is nog niet gelukt; er is nog niets gewijzigd.
-2. Maak `www` bereikbaar via een proxied CNAME naar de apex of voeg een passende Worker-custom-domain/route toe, en configureer HTTPS. Test daarna de 301 op minstens een URL met pad én querystring.
-3. Zet op de productie-Worker `SITE_PUBLIC=launch-approved` als runtime-variabele en controleer dat de gewone site publiek wordt. Laat privé-API's, studenten-/klantbeheer en andere accountdata server-side beschermd; de preview blijft een aparte afgeschermde omgeving.
-4. Test daarna HTTPS op beide hosts, de redirects, robots/sitemap en toegangsweigering van beheer-API's vanaf een niet-toegestaan account/IP.
-5. Verifieer dat GitHub `main` de juiste Cloudflare-productie-Worker automatisch uitrolt en dat de oude Vercel-projecten/-domeinkoppelingen niet meer voor live verkeer nodig zijn. Verwijder het Vercel-project niet zonder afzonderlijke toestemming.
+1. Bevestig in het `Schaapsvis`-account de DNS-records en de origin van apex én `www`; exporteer eerst de zone als herstelpunt. De records mogen pas wijzigen nadat de Cloudflare-hostingbuild en rollback zijn gecontroleerd.
+2. Rond de Cloudflare Workers-hostingdeploy af vanuit de bedoelde productiebranch en controleer in het Schaapsvis-dashboard dat de juiste commit als production is gepubliceerd. Bewaar Vercel als rollback totdat de Cloudflare-site end-to-end is getest.
+3. Configureer en verifieer de sitegeheimen afzonderlijk in preview en productie. Omdat eerder gedeelde waarden niet als geheim mogen gelden, roteer ze voordat ze opnieuw worden gebruikt. Test wachtwoordontgrendeling op de Worker-URL en het eigen domein zonder geheimen in Git of logs te zetten.
+4. Test vanaf een gewone browser: apex en `www`, HTTPS, canonieke redirect inclusief pad/query, pagina's, afbeeldingen, formulier/API's, robots/sitemap en mobiele/desktopnavigatie.
+5. De leden-/studenten-Worker is een aparte dienst. Laat `MEMBERS_ENABLED=off` totdat database-/R2-bindings, migraties, mail, privacykeuzes en volledige previewtests in het juiste Cloudflare-account zijn geverifieerd. Maak de studentkorting niet live zonder de juiste goedkeurings- en e-mailconsentflow.
+6. Activeer R2 alleen als extra gebruikskosten boven €10 per maand expliciet acceptabel worden óf Cloudflare een harde limiet kan garanderen. App-quota's begrenzen alleen de applicatie, niet de totale rekening van het Cloudflare-account.
+
+Verwijder of deactiveer Vercel niet voordat alle controles zijn geslaagd en de eigenaar expliciet bevestigt dat de Cloudflare-hosting de productie overneemt.
 
