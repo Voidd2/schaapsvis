@@ -36,7 +36,7 @@
     "production": {
       "name": "schaapsvis-members",
       "routes": [
-        { "pattern": "www.schaapsvishandel.nl/api/members/*", "zone_name": "schaapsvishandel.nl" }
+        { "pattern": "schaapsvishandel.nl/api/members/*", "zone_name": "schaapsvishandel.nl" }
       ],
       "vars": {
         "MEMBERS_ENABLED": "off",
