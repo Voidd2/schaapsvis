@@ -4,9 +4,16 @@ import ts from "typescript";
 
 const source = await fs.readFile("src/lib/siteAccess.ts", "utf8");
 const cloudflareConfig = await fs.readFile("cloudflare.config.ts", "utf8");
+const compatibilityFlags = cloudflareConfig.match(/compatibilityFlags:\s*\[([^\]]*)\]/)?.[1];
+assert.ok(compatibilityFlags, "Cloudflare Worker compatibility flags must be configured");
 assert.match(
-  cloudflareConfig,
-  /compatibilityFlags:\s*\[\s*"nodejs_compat"\s*,\s*"nodejs_compat_populate_process_env"\s*\]/,
+  compatibilityFlags,
+  /"nodejs_compat"/,
+  "Cloudflare Worker must enable Node.js compatibility",
+);
+assert.match(
+  compatibilityFlags,
+  /"nodejs_compat_populate_process_env"/,
   "Cloudflare Worker secrets must be exposed to process.env for the site-access gate",
 );
 const compiled = ts.transpileModule(source, {
@@ -25,6 +32,11 @@ try {
   assert.equal(exports.heeftToegestaanIp("2001:db8::1"), true, "an exact allowlisted IPv6 address is accepted");
   assert.equal(exports.heeftToegestaanIp("198.51.100.1, 192.0.2.1"), false, "forwarded IP chains are not accepted");
   assert.equal(exports.heeftToegestaanIp(undefined), false, "a missing client IP is never accepted");
+  const cloudflareHeaders = new Headers({ "cf-connecting-ip": "198.51.100.1", "x-forwarded-for": "198.51.100.1" });
+  assert.equal(exports.ipVanVertrouwdeProxy(cloudflareHeaders, "cloudflare"), "198.51.100.1", "Cloudflare uses its edge-provided CF-Connecting-IP");
+  const forgedCloudflareHeader = new Headers({ "cf-connecting-ip": "198.51.100.1", "x-vercel-forwarded-for": "192.0.2.1" });
+  assert.equal(exports.ipVanVertrouwdeProxy(forgedCloudflareHeader, "vercel"), "192.0.2.1", "Vercel trusts only its platform-specific client-IP header");
+  assert.equal(exports.ipVanVertrouwdeProxy(new Headers({ "x-forwarded-for": "198.51.100.1" }), "cloudflare"), undefined, "browser-supplied X-Forwarded-For cannot grant access");
   for (const value of [undefined, "", "off", "on", "true"]) {
     if (value === undefined) delete process.env.SITE_PUBLIC;
     else process.env.SITE_PUBLIC = value;
@@ -42,5 +54,6 @@ try {
 }
 
 console.log("Site access gate passed: Cloudflare runtime secrets, launch policy and exact-IP allowlist checks passed.");
+
 
 
