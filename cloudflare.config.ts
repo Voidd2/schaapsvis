@@ -27,11 +27,11 @@ export default defineConfig(({ mode }) => ({
     env: {
       ASSETS: bindings.assets(),
       IMAGES: bindings.images(),
-      // Keep the existing self-binding pinned to its current production environment.
+      // Cloudflare names an environment-specific service binding by appending
+      // the environment to the Worker name (schaapsvis-production).
       WORKER_SELF_REFERENCE: bindings.worker({
-        worker: "schaapsvis",
-        environment: "production",
-      } as any),
+        worker: "schaapsvis-production",
+      }),
       // Only local Vite development is public for page-by-page QA. A production
       // or deployed preview build gets no SITE_PUBLIC binding and stays locked
       // unless the owner explicitly configures its runtime variables/secrets.
