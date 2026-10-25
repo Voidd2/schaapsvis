@@ -120,7 +120,7 @@ export function Header() {
             </span>
           </Link>
 
-          <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="hidden 2xl:flex items-center justify-end gap-x-2 text-[0.68rem]">
+          <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="hidden xl:flex items-center justify-end gap-x-1 text-[0.68rem]">
             {primaryLinks.map(({ href, label }) => (
               <Link
                 key={href}
@@ -139,9 +139,33 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-3 shrink-0">
-            <div className="hidden 2xl:block" style={{ color: "var(--charcoal)" }}>
+            <div className="hidden xl:block" style={{ color: "var(--charcoal)" }}>
               <LanguageSwitcher />
             </div>
+
+            <details className="hidden xl:block relative">
+              <summary
+                className="cursor-pointer list-none whitespace-nowrap px-2.5 py-2 text-[0.72rem] font-semibold rounded-sm hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                style={{ color: "var(--navy)" }}
+              >
+                {locale === "de" ? "Konto" : locale === "en" ? "Account" : "Account"}
+              </summary>
+              <div
+                className="absolute right-0 top-full z-50 mt-2 min-w-52 border shadow-lg"
+                style={{ backgroundColor: "var(--cream)", borderColor: "var(--linen)" }}
+              >
+                {accountLinks.map(({ href, label }) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    className="block px-4 py-3 text-sm hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset"
+                    style={{ color: "var(--navy)", borderBottom: "1px solid var(--linen)" }}
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </div>
+            </details>
 
             <a
               href={`tel:${BEDRIJF.telefoon.e164}`}
@@ -154,7 +178,7 @@ export function Header() {
             <button
               type="button"
               ref={menuButton}
-              className="p-2 -mr-2 rounded-md transition-colors hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+              className="xl:hidden p-2 -mr-2 rounded-md transition-colors hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
               style={{ color: "var(--navy)" }}
               onClick={() => setOpen(!open)}
               aria-expanded={open}
@@ -170,7 +194,7 @@ export function Header() {
         {open && (
           <div
             id="mobile-navigation"
-            className="max-h-[calc(100dvh-6.4rem)] overflow-y-auto overscroll-contain"
+            className="xl:hidden max-h-[calc(100dvh-6.4rem)] overflow-y-auto overscroll-contain"
             style={{ backgroundColor: "var(--cream)", borderTop: "1px solid var(--linen)" }}
           >
             <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="max-w-7xl 2xl:max-w-[90rem] mx-auto px-4 py-2">
@@ -216,3 +240,4 @@ function KruisIcoon() {
     </svg>
   );
 }
+
