@@ -4,8 +4,19 @@ export default defineConfig(({ mode }) => ({
   worker: defineWorker({
     name: "schaapsvis",
     entrypoint: "vinext/server/fetch-handler",
-    compatibilityDate: "2026-10-18",
-    compatibilityFlags: ["nodejs_compat", "nodejs_compat_populate_process_env"],
+    // Match the existing production Worker, retaining its runtime flags and
+    // adding the Node compatibility required by vinext.
+    compatibilityDate: "2026-10-19",
+    compatibilityFlags: [
+      "global_fetch_strictly_public",
+      "nodejs_compat",
+      "nodejs_compat_populate_process_env",
+    ],
+    domains: ["schaapsvishandel.nl"],
+    observability: {
+      enabled: true,
+      logs: { enabled: true, invocationLogs: true, persist: true },
+    },
     assets: {
       htmlHandling: "none",
       notFoundHandling: "none",
@@ -13,6 +24,8 @@ export default defineConfig(({ mode }) => ({
     },
     env: {
       ASSETS: bindings.assets(),
+      IMAGES: bindings.images(),
+      WORKER_SELF_REFERENCE: bindings.worker({ worker: "schaapsvis" }),
       // Only local Vite development is public for page-by-page QA. A production
       // or deployed preview build gets no SITE_PUBLIC binding and stays locked
       // unless the owner explicitly configures its runtime variables/secrets.
