@@ -956,7 +956,7 @@ async function verifyPass(request, env) {
   if (!valid) return json({ valid: false });
   const storedCode = await env.DB.prepare(`SELECT public_code_hash FROM student_passes WHERE id = ?`).bind(id).first();
   if (!safeEqual(await digest(code), storedCode?.public_code_hash)) return json({ valid: false });
-  return json({ valid: true, name: pass.full_name, discountPercent: 10, eligibleProducts: ["kibbeling", "haring", "broodje-haring", "drinks"] });
+  return json({ valid: true, name: pass.full_name, discountPercent: 10, eligibleProducts: ["assortiment"] });
 }
 
 async function subscribeNewsletter(request, env) {
