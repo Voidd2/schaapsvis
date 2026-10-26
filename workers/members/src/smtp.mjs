@@ -165,7 +165,7 @@ export async function sendSmtpMail(env, message, connectSocket) {
     });
     try { await session.command("QUIT", ["221"]); } catch {}
   } finally {
-    await session.close();
+    if (session) await session.close();
   }
 }
 
@@ -182,10 +182,12 @@ export async function verifySmtpAuthentication(env, connectSocket) {
   if (!/^[a-z0-9.-]+$/i.test(host) || ![465, 587].includes(port)) throw new Error("smtp-check-invalid-config");
   if (typeof connectSocket !== "function") throw new Error("smtp-check-connector-missing");
 
-  const socket = connectSocket({ hostname: host, port }, { secureTransport: port === 465 ? "on" : "starttls" });
-  const session = new SmtpSession(socket);
-  let stage = "greeting";
+  let session;
+  let stage = "connect";
   try {
+    const socket = connectSocket({ hostname: host, port }, { secureTransport: port === 465 ? "on" : "starttls" });
+    session = new SmtpSession(socket);
+    stage = "greeting";
     const greeting = await session.reply();
     if (greeting.code !== "220") throw new Error(`smtp-greeting-rejected-${greeting.code}`);
     const ehlo = `EHLO ${env.SMTP_HELO_NAME || "schaapsvishandel.nl"}`;
