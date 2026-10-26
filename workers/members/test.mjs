@@ -595,6 +595,11 @@ assert.equal(rejectedDiagnostic.status, 403, "non-allowlisted IP cannot use diag
 assert.equal(Number(sqlite.prepare("SELECT COUNT(*) AS count FROM users").get().count), beforeDiagnosticUsers, "diagnostic creates no user");
 assert.equal(Number(sqlite.prepare("SELECT COUNT(*) AS count FROM student_applications").get().count), beforeDiagnosticApplications, "diagnostic creates no student application");
 env.SMTP_DIAGNOSTICS = "off";
+assert.equal((await call("/api/members/admin/smtp-check", { method: "POST" })).status, 404, "SMTP authentication diagnostic is hidden when disabled");
+env.SMTP_DIAGNOSTICS = "on";
+assert.equal((await call("/api/members/admin/smtp-check", { method: "POST", headers: { "CF-Connecting-IP": "198.51.100.2" } })).status, 403, "SMTP authentication diagnostic rejects non-admin IPs");
+assert.equal((await call("/api/members/admin/smtp-check", { method: "POST" })).status, 503, "SMTP authentication diagnostic reports missing SMTP without sending email");
+env.SMTP_DIAGNOSTICS = "off";
 env.MEMBERS_ENABLED = "off";
 
 console.log("Account worker integration tests passed: email verification, login, proof upload and orphan cleanup retries, private proof review, student pass renewal, newsletter double opt-in, campaign delivery, unsubscribe and daily quota recovery.");
