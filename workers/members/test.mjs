@@ -100,6 +100,7 @@ const env = {
   AUTH_PEPPER: "test-only-pepper-never-use-in-production",
   PASS_SIGNING_KEY: "test-only-signing-key-never-use-in-production",
   SITE_ORIGIN: "https://schaapsvishandel.nl",
+  SITE_PUBLIC: "launch-approved",
   MAIL_FROM: "noreply@schaapsvishandel.nl",
   ADMIN_EMAILS: "student@example.test",
   ADMIN_IPS: "203.0.113.10,2001:db8::10",
@@ -153,6 +154,16 @@ sqlite.exec(`DELETE FROM newsletter_deliveries WHERE campaign_id='disabled-cron-
 env.MEMBERS_ENABLED = "on";
 const health = await call("/api/members/health");
 assert.equal(health.status, 200);
+env.SITE_PUBLIC = "off";
+env.SITE_ACCESS_TOKEN = "test-only-site-access-token";
+env.SITE_ACCESS_IP_ALLOWLIST = "198.51.100.40,2001:db8::40";
+assert.equal((await call("/api/members/register", { method: "POST", body: {} })).status, 403, "account API cannot bypass the site's password gate through a Worker route");
+assert.equal((await call("/api/members/register", { method: "POST", body: {}, cookie: "sv_access=wrong-token" })).status, 403, "an incorrect site unlock cookie is rejected");
+assert.equal((await call("/api/members/register", { method: "POST", body: {}, cookie: "sv_access=test-only-site-access-token" })).status, 400, "the site's valid unlock cookie grants access to the account API");
+assert.equal((await call("/api/members/register", { method: "POST", body: {}, headers: { "CF-Connecting-IP": "198.51.100.40" } })).status, 400, "the trusted owner-IP allowlist grants access without trusting browser-supplied IP headers");
+env.SITE_PUBLIC = "launch-approved";
+delete env.SITE_ACCESS_TOKEN;
+delete env.SITE_ACCESS_IP_ALLOWLIST;
 assert.equal((await call("/api/members/admin/student-applications")).status, 403, "admin API rejects anonymous requests");
 env.ANALYTICS_ENABLED = "off";
 assert.equal((await call("/api/members/analytics", { method: "POST", body: { consent: true, event: "page_view", path: "/nl" } })).status, 503, "analytics is disabled by default unless explicitly enabled");
