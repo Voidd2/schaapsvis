@@ -1143,6 +1143,29 @@ async function sendNewsletterCampaign(request, env, campaignId) {
   return json({ ok: true, recipientCount, status: recipientCount ? "queued" : "sent" }, 202);
 }
 
+async function sendSmtpDiagnostic(request, env) {
+  if (env.SMTP_DIAGNOSTICS !== "on" || !env.SMTP_TEST_TO) return json({ error: "not_found" }, 404);
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  const ip = String(request.headers.get("CF-Connecting-IP") || "").trim().toLowerCase();
+  const allowedIps = String(env.ADMIN_IPS || "").split(",").map((value) => value.trim().toLowerCase()).filter(Boolean);
+  if (!ip || !allowedIps.includes(ip)) return json({ error: "forbidden" }, 403);
+  if (!isMailConfigured(env) || !env.DB) return json({ error: "mail_unavailable" }, 503);
+  const recipient = String(env.SMTP_TEST_TO).trim().toLowerCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recipient)) return json({ error: "mail_unavailable" }, 503);
+  if (!await rateLimit(env.DB, `smtp-diagnostic:${ip}:${await digest(recipient)}`, 1, 24 * 60 * 60 * 1000)) {
+    return json({ error: "rate_limited" }, 429);
+  }
+  const code = String(crypto.getRandomValues(new Uint32Array(1))[0] % 1_000_000).padStart(6, "0");
+  try {
+    await sendMail(env, recipient, "Testmail Schaap’s Vishandel",
+      `Dit is de eenmalige SMTP-bezorgtest. Tijdelijke testcode: ${code}. Deze code is geen account- of inlogcode.`,
+      `<p>Dit is de eenmalige SMTP-bezorgtest.</p><p>Tijdelijke testcode: <strong>${code}</strong></p><p>Deze code is geen account- of inlogcode.</p>`);
+    return json({ ok: true }, 202);
+  } catch {
+    return json({ error: "mail_delivery_failed" }, 502);
+  }
+}
+
 async function processNewsletterDeliveries(env) {
   if (!isMailConfigured(env) || !env.SITE_ORIGIN) return;
   const now = new Date();
@@ -1252,6 +1275,7 @@ const memberWorker = {
     if (path === "/api/members/password-reset/confirm" && method === "GET") return passwordResetPage(request, env);
     if (path === "/api/members/password-reset/confirm" && method === "POST") return confirmPasswordReset(request, env);
     if (path === "/api/members/student-application" && method === "POST") return submitStudentApplication(request, env);
+    if (path === "/api/members/admin/smtp-test" && method === "POST") return sendSmtpDiagnostic(request, env);
     if (path === "/api/members/admin/student-applications" && method === "GET") return adminQueue(request, env);
     if (path === "/api/members/admin/analytics" && method === "GET") return adminAnalytics(request, env);
     if (path === "/api/members/admin/customers" && method === "GET") return adminCustomers(request, env);

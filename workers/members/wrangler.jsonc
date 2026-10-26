@@ -22,6 +22,7 @@
         { "pattern": "preview.schaapsvishandel.nl/api/members/*", "zone_name": "schaapsvishandel.nl" }
       ],
       "vars": {
+        "SMTP_DIAGNOSTICS": "off",
         "MEMBERS_ENABLED": "off",
         "SITE_ORIGIN": "https://preview.schaapsvishandel.nl",
         "MAIL_FROM": "schaapsv@schaapsvishandel.nl",
@@ -42,6 +43,7 @@
         { "pattern": "schaapsvishandel.nl/api/members/*", "zone_name": "schaapsvishandel.nl" }
       ],
       "vars": {
+        "SMTP_DIAGNOSTICS": "off",
         "MEMBERS_ENABLED": "on",
         "SITE_ORIGIN": "https://schaapsvishandel.nl",
         "MAIL_FROM": "schaapsv@schaapsvishandel.nl",
