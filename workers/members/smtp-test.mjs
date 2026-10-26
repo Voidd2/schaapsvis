@@ -120,6 +120,17 @@ await assert.rejects(
   /smtp-check-auth-smtp-command-rejected-535/,
 );
 assert(!server.lines.some(({ line }) => /^(MAIL FROM:|RCPT TO:|DATA)$/.test(line)), "failed SMTP authentication must not submit a message");
+await assert.rejects(
+  verifySmtpAuthentication({
+    SMTP_HOST: "smtp.example.test",
+    SMTP_PORT: "587",
+    SMTP_USERNAME: "schaapsv@schaapsvishandel.nl",
+    SMTP_PASSWORD: "test-secret",
+    MAIL_FROM: "schaapsv@schaapsvishandel.nl",
+  }, () => { throw new Error("network failure"); }),
+  /smtp-check-connect-smtp-connection-failed/,
+);
+server.authCode = "235";
 server.authCode = "235";
 
 assert.equal(stuffSmtpData("header\r\n.dot\r\n..dot"), "header\r\n..dot\r\n...dot", "SMTP dot-stuffing preserves line boundaries");
