@@ -2,7 +2,6 @@
   "name": "schaapsvis-members",
   "main": "src/index.mjs",
   "compatibility_date": "2026-10-17",
-  "limits": { "cpu_ms": 30000 },
   "workers_dev": false,
   "triggers": { "crons": ["* * * * *"] },
   "vars": {
