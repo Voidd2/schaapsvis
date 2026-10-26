@@ -1151,7 +1151,7 @@ async function sendSmtpDiagnostic(request, env) {
   if (!ip || !allowedIps.includes(ip)) return json({ error: "forbidden" }, 403);
   if (!isMailConfigured(env) || !env.DB) return json({ error: "mail_unavailable" }, 503);
   const recipient = String(env.SMTP_TEST_TO).trim().toLowerCase();
-  if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(recipient)) return json({ error: "mail_unavailable" }, 503);
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recipient)) return json({ error: "mail_unavailable" }, 503);
   if (!await rateLimit(env.DB, `smtp-diagnostic:${ip}:${await digest(recipient)}`, 1, 24 * 60 * 60 * 1000)) {
     return json({ error: "rate_limited" }, 429);
   }
