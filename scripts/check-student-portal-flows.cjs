@@ -5,9 +5,9 @@ const assert = require('node:assert/strict');
 const origin = process.argv[2] || 'http://localhost:3011';
 if (!/^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(origin)) throw new Error('Local origin required');
 const agreedTerms = {
-  nl: ['Nederlandse en internationale studenten', 'Alleen kibbeling, haring, broodjes haring en drinken doen mee', 'studiejaar geldig', 'nieuw bewijs nodig'],
-  en: ['Dutch and international students', 'It applies only to kibbeling, herring, herring sandwiches and drinks', 'one academic year', 'new proof is then required'],
-  de: ['niederländische und internationale Studierende', 'Kibbeling, Hering, Heringsbrötchen und Getränke', 'Studienjahr gültig', 'neuer Nachweis erforderlich'],
+  nl: ['Nederlandse en internationale studenten', 'hele assortiment', 'studiejaar geldig', 'nieuw bewijs nodig'],
+  en: ['Dutch and international students', 'entire range', 'one academic year', 'new proof is then required'],
+  de: ['niederländische und internationale Studierende', 'gesamte Sortiment', 'Studienjahr gültig', 'neuer Nachweis erforderlich'],
 };
 
 (async () => {

@@ -18,9 +18,9 @@ function photos(html) {
 for (const locale of ['nl', 'en', 'de']) {
   const student = await page(`/${locale}/studentenkorting`);
   const studentRules = {
-    nl: ['10% korting krijgen op kibbeling, haring, broodjes haring en drinken', 'middelbare scholieren vallen buiten de actie', 'aanbiedingen per e-mail zijn vrijwillig', 'maak een account'],
-    en: ['10% off kibbeling, herring, herring sandwiches and drinks', 'secondary-school pupils are not eligible', 'email offers are optional', 'create an account'],
-    de: ['10 % rabatt auf kibbeling, hering, heringsbrötchen und getränke', 'schülerinnen und schüler weiterführender schulen sind ausgeschlossen', 'e-mail-angebote sind freiwillig', 'erstellen sie ein konto'],
+    nl: ['10% korting op het hele assortiment', 'middelbare scholieren vallen buiten de actie', 'aanbiedingen per e-mail zijn vrijwillig', 'maak een account'],
+    en: ['10% off the entire', 'secondary-school pupils are not eligible', 'email offers are optional', 'create an account'],
+    de: ['10 % rabatt auf das gesamte sortiment', 'schülerinnen und schüler weiterführender schulen sind ausgeschlossen', 'e-mail-angebote sind freiwillig', 'erstellen sie ein konto'],
   }[locale];
   for (const rule of studentRules) assert(student.main.toLowerCase().includes(rule.toLowerCase()), `${locale}: student-discount page is translated and states ${rule}`);
   assert(student.main.includes(`href="/${locale}/account"`), `${locale}: student-discount page links to account application`);

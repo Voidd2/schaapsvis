@@ -45,7 +45,7 @@ const copy = {
       let passIsValid = true;
       await page.route('**/api/members/admin/pass/verify', async route => {
         assert.equal(route.request().method(), 'POST');
-        await route.fulfill({ json: passIsValid ? { valid: true, name: 'Teststudent', discountPercent: 10, eligibleProducts: ['kibbeling', 'haring', 'broodje-haring', 'drinks'] } : { valid: false } });
+        await route.fulfill({ json: passIsValid ? { valid: true, name: 'Teststudent', discountPercent: 10, eligibleProducts: ['assortiment'] } : { valid: false } });
       });
       await page.goto(`${origin}/${locale}/beheer/studenten`, { waitUntil: 'networkidle' });
       await page.getByRole('heading', { name: t.name }).waitFor();
