@@ -8,10 +8,14 @@
   "vars": {
     "MEMBERS_ENABLED": "off",
     "SITE_ORIGIN": "https://schaapsvishandel.nl",
-    "MAIL_FROM": "noreply@schaapsvishandel.nl",
+    "MAIL_FROM": "schaapsv@schaapsvishandel.nl",
+    "SMTP_HOST": "mail.schaapsvishandel.nl",
+    "SMTP_PORT": "587",
+    "SMTP_USERNAME": "schaapsv@schaapsvishandel.nl",
   },
-  // D1 staat per omgeving in de EU. De private R2-bucket en beheerder moeten
-  // nog worden ingesteld voordat de Worker veilig kan worden gedeployed.
+  // D1 en private R2 staan per omgeving in de EU. Mail gebruikt de bestaande
+  // DirectAdmin-mailbox; SMTP_PASSWORD en overige auth-secrets moeten nog via
+  // Cloudflare Secrets worden ingesteld voordat mail kan worden verstuurd.
   "env": {
     "preview": {
       "name": "schaapsvis-members-preview",
@@ -21,16 +25,16 @@
       "vars": {
         "MEMBERS_ENABLED": "off",
         "SITE_ORIGIN": "https://preview.schaapsvishandel.nl",
-        "MAIL_FROM": "noreply@schaapsvishandel.nl",
+        "MAIL_FROM": "schaapsv@schaapsvishandel.nl",
+        "SMTP_HOST": "mail.schaapsvishandel.nl",
+        "SMTP_PORT": "587",
+        "SMTP_USERNAME": "schaapsv@schaapsvishandel.nl",
       },
       "d1_databases": [
         { "binding": "DB", "database_name": "schaapsvis-members-preview", "database_id": "0a97c8e6-c829-4b5e-9eb7-f4154282898d", "migrations_dir": "../../migrations" }
       ],
       "r2_buckets": [
         { "binding": "STUDENT_PROOFS", "bucket_name": "schaapsvis-student-proofs-preview", "jurisdiction": "eu" }
-      ],
-      "send_email": [
-        { "name": "EMAIL", "remote": true, "allowed_sender_addresses": ["noreply@schaapsvishandel.nl"] }
       ]
     },
     "production": {
@@ -41,16 +45,16 @@
       "vars": {
         "MEMBERS_ENABLED": "off",
         "SITE_ORIGIN": "https://schaapsvishandel.nl",
-        "MAIL_FROM": "noreply@schaapsvishandel.nl",
+        "MAIL_FROM": "schaapsv@schaapsvishandel.nl",
+        "SMTP_HOST": "mail.schaapsvishandel.nl",
+        "SMTP_PORT": "587",
+        "SMTP_USERNAME": "schaapsv@schaapsvishandel.nl",
       },
       "d1_databases": [
         { "binding": "DB", "database_name": "schaapsvis-members", "database_id": "cc7d01e2-914c-407d-b08f-269c85e67dc2", "migrations_dir": "../../migrations" }
       ],
       "r2_buckets": [
         { "binding": "STUDENT_PROOFS", "bucket_name": "schaapsvis-student-proofs", "jurisdiction": "eu" }
-      ],
-      "send_email": [
-        { "name": "EMAIL", "remote": true, "allowed_sender_addresses": ["noreply@schaapsvishandel.nl"] }
       ]
     }
   }
