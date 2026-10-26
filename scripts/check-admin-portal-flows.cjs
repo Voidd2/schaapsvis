@@ -73,11 +73,12 @@ const copy = {
         if (route.request().method() === 'POST') {
           const payload = route.request().postDataJSON();
           assert.ok(payload.subject && payload.body, `${locale}: campaign content submitted`);
+          assert.equal(payload.audience, 'students', `${locale}: student audience is the safe default`);
           campaignCreated = true;
           await route.fulfill({ status: 201, json: { id: 'campaign-1', status: 'draft' } });
           return;
         }
-        await route.fulfill({ json: { subscriberCount: 2, campaigns: campaignCreated ? [{ id: 'campaign-1', subject: 'Weekdeal', status: campaignStatus, recipient_count: 2, sent_count: 0, failed_count: 0, created_at: '2026-10-18T10:00:00.000Z' }] : [] } });
+        await route.fulfill({ json: { subscriberCount: 2, studentSubscriberCount: 1, campaigns: campaignCreated ? [{ id: 'campaign-1', subject: 'Weekdeal', audience: 'students', status: campaignStatus, recipient_count: 1, sent_count: 0, failed_count: 0, created_at: '2026-10-18T10:00:00.000Z' }] : [] } });
       });
       await page.route('**/api/members/admin/newsletter-campaigns/campaign-1/send', async route => {
         assert.equal(route.request().method(), 'POST');
