@@ -165,6 +165,52 @@ export async function sendSmtpMail(env, message, connectSocket) {
     });
     try { await session.command("QUIT", ["221"]); } catch {}
   } finally {
-    await session.close();
+    if (session) await session.close();
+  }
+}
+
+/**
+ * Verify Knoth SMTP connectivity and credentials without submitting a message.
+ * Only stable, sanitized error codes are propagated for an owner-only diagnostic.
+ */
+export async function verifySmtpAuthentication(env, connectSocket) {
+  const host = String(env.SMTP_HOST || "").trim();
+  const port = Number(env.SMTP_PORT || 587);
+  const username = String(env.SMTP_USERNAME || "").trim();
+  const password = String(env.SMTP_PASSWORD || "");
+  if (!host || !username || !password || !env.MAIL_FROM) throw new Error("smtp-check-not-configured");
+  if (!/^[a-z0-9.-]+$/i.test(host) || ![465, 587].includes(port)) throw new Error("smtp-check-invalid-config");
+  if (typeof connectSocket !== "function") throw new Error("smtp-check-connector-missing");
+
+  let session;
+  let stage = "connect";
+  try {
+    const socket = connectSocket({ hostname: host, port }, { secureTransport: port === 465 ? "on" : "starttls" });
+    session = new SmtpSession(socket);
+    stage = "greeting";
+    const greeting = await session.reply();
+    if (greeting.code !== "220") throw new Error(`smtp-greeting-rejected-${greeting.code}`);
+    const ehlo = `EHLO ${env.SMTP_HELO_NAME || "schaapsvishandel.nl"}`;
+    stage = "ehlo";
+    let capabilities = await session.command(ehlo, ["250"]);
+    if (port === 587) {
+      if (!capabilities.lines.some((line) => /\bSTARTTLS\b/i.test(line))) throw new Error("smtp-starttls-unavailable");
+      stage = "starttls";
+      await session.command("STARTTLS", ["220"]);
+      await session.upgradeToTls();
+      stage = "tls-ehlo";
+      capabilities = await session.command(ehlo, ["250"]);
+    }
+    if (!capabilities.lines.some((line) => /\bAUTH\b.*\bPLAIN\b/i.test(line))) throw new Error("smtp-auth-plain-unavailable");
+    stage = "auth";
+    await session.command(`AUTH PLAIN ${utf8Base64(`\0${username}\0${password}`)}`, ["235"]);
+    return { status: "authenticated" };
+  } catch (error) {
+    const cause = typeof error?.message === "string" && /^smtp-[a-z0-9-]{1,80}$/.test(error.message)
+      ? error.message
+      : "smtp-connection-failed";
+    throw new Error(`smtp-check-${stage}-${cause}`);
+  } finally {
+    if (session) await session.close();
   }
 }
