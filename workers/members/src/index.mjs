@@ -213,6 +213,27 @@ function safeEqual(left, right) {
   return difference === 0;
 }
 
+function requestCookie(request, name) {
+  for (const part of String(request.headers.get("Cookie") || "").split(";")) {
+    const separator = part.indexOf("=");
+    if (separator < 0 || part.slice(0, separator).trim() !== name) continue;
+    return part.slice(separator + 1).trim();
+  }
+  return "";
+}
+
+function siteAccessAllowed(request, env) {
+  if (env.SITE_PUBLIC === "launch-approved") return true;
+
+  const accessToken = String(env.SITE_ACCESS_TOKEN || "");
+  const accessCookie = requestCookie(request, "sv_access");
+  if (accessToken && safeEqual(accessCookie, accessToken)) return true;
+
+  const clientIp = String(request.headers.get("CF-Connecting-IP") || "").trim().toLowerCase();
+  const allowedIps = String(env.SITE_ACCESS_IP_ALLOWLIST || "").split(",").map((ip) => ip.trim().toLowerCase()).filter(Boolean);
+  return Boolean(clientIp && allowedIps.includes(clientIp));
+}
+
 async function randomToken() {
   return base64url(crypto.getRandomValues(new Uint8Array(32)));
 }
@@ -1213,10 +1234,12 @@ const memberWorker = {
       const enabled = env.MEMBERS_ENABLED === "on";
       return json({ status: enabled ? "ok" : "disabled" }, enabled ? 200 : 503);
     }
-    if (path === "/api/members/analytics" && method === "POST") return collectAnalytics(request, env);
-    // Keep the API inert until the password-protected site is deliberately
-    // opened. Cloudflare Worker routes can bypass the Next.js access gate.
     if (env.MEMBERS_ENABLED !== "on") return json({ error: "members_disabled" }, 503);
+    // Cloudflare Worker routes run before the site's page middleware. Until the
+    // public launch flag is set, require the site's own unlock cookie or its
+    // platform-trusted owner-IP allowlist before exposing any account endpoint.
+    if (!siteAccessAllowed(request, env)) return json({ error: "site_access_required" }, 403);
+    if (path === "/api/members/analytics" && method === "POST") return collectAnalytics(request, env);
     if (path === "/api/members/register" && method === "POST") return register(request, env);
     if (path === "/api/members/verify/resend" && method === "POST") return resendVerification(request, env);
     if (path === "/api/members/verify" && method === "GET") return verifyEmailPage(request, env);
