@@ -8,15 +8,15 @@ const copy = {
   nl: {
     title: "10% studentenkorting in Leiden | Schaap's Vis",
     description:
-      "Nederlandse en internationale studenten in Leiden krijgen 10% korting op kibbeling, haring, broodjes haring en drinken bij Schaap's Vishandel.",
+      "Nederlandse en internationale studenten in Leiden krijgen na goedkeuring 10% korting op het hele assortiment van Schaap's Vishandel.",
     eyebrow: "Voor Nederlandse én internationale studenten",
     heading: "Student in Leiden? Eet lekker mee.",
     intro:
-      "Studeer je in Leiden aan het mbo, hbo of de universiteit? Nederlandse en internationale studenten kunnen na goedkeuring 10% korting krijgen op kibbeling, haring, broodjes haring en drinken bij Schaap's Vishandel.",
-    categories: ["Kibbeling", "Haring", "Broodjes haring", "Drinken"],
+      "Studeer je in Leiden aan het mbo, hbo of de universiteit? Nederlandse en internationale studenten krijgen na goedkeuring 10% korting op het hele assortiment van Schaap's Vishandel.",
+    categories: ["Op het hele assortiment"],
     condition: "Voor wie is de korting?",
     conditionText:
-      "Voor Nederlandse en internationale studenten die in Leiden een MBO-, HBO- of WO-opleiding volgen; middelbare scholieren vallen buiten de actie. De korting geldt alleen voor kibbeling, haring, broodjes haring en drinken en kan niet worden gecombineerd met nieuwsbriefkortingen of andere acties.",
+      "Voor Nederlandse en internationale studenten die in Leiden een MBO-, HBO- of WO-opleiding volgen; middelbare scholieren vallen buiten de actie. Na goedkeuring geldt de korting op het hele assortiment. De korting kan niet worden gecombineerd met nieuwsbriefkortingen of andere acties.",
     card: "Je digitale studentenpas",
     cardText:
       "Na goedkeuring verschijnt je persoonlijke pas in je account. De pas is één studiejaar geldig; daarna lever je opnieuw bewijs aan. Het accountportaal wordt nu in een besloten preview getest.",
@@ -39,15 +39,15 @@ const copy = {
   en: {
     title: "10% student discount in Leiden | Schaap's Vis",
     description:
-      "Dutch and international students in Leiden get 10% off kibbeling, herring, herring sandwiches and drinks at Schaap's Vishandel.",
+      "Dutch and international students in Leiden receive 10% off the entire Schaap's Vishandel range after approval.",
     eyebrow: "For Dutch and international students",
     heading: "Studying in Leiden? Eat well with us.",
     intro:
-      "Studying in Leiden at MBO, HBO or university level? Dutch and international students can get 10% off kibbeling, herring, herring sandwiches and drinks at Schaap's Vishandel after approval.",
-    categories: ["Kibbeling", "Herring", "Herring sandwiches", "Drinks"],
+      "Studying in Leiden at MBO, HBO or university level? Dutch and international students receive 10% off the entire Schaap's Vishandel range after approval.",
+    categories: ["On the entire range"],
     condition: "Who is eligible?",
     conditionText:
-      "For Dutch and international students enrolled in an MBO, HBO or university programme in Leiden; secondary-school pupils are not eligible. The discount applies only to kibbeling, herring, herring sandwiches and drinks. It cannot be combined with newsletter discounts or other offers.",
+      "For Dutch and international students enrolled in an MBO, HBO or university programme in Leiden; secondary-school pupils are not eligible. Once approved, the discount applies to the entire range. It cannot be combined with newsletter discounts or other offers.",
     card: "Your digital student pass",
     cardText:
       "Once approved, your personal pass will appear in your account. It is valid for one academic year; you will need to provide new proof afterwards. The account portal is currently being tested in a restricted preview.",
@@ -71,15 +71,15 @@ const copy = {
   de: {
     title: "10 % Studentenrabatt in Leiden | Schaap's Vis",
     description:
-      "Niederländische und internationale Studierende in Leiden erhalten 10 % Rabatt auf Kibbeling, Hering, Heringsbrötchen und Getränke bei Schaap's Vishandel.",
+      "Niederländische und internationale Studierende in Leiden erhalten nach Freigabe 10 % Rabatt auf das gesamte Sortiment von Schaap's Vishandel.",
     eyebrow: "Für niederländische und internationale Studierende",
     heading: "Du studierst in Leiden? Iss gut bei uns.",
     intro:
-      "Studieren Sie in Leiden auf MBO-, HBO- oder Universitätsniveau? Niederländische und internationale Studierende können nach Freigabe 10 % Rabatt auf Kibbeling, Hering, Heringsbrötchen und Getränke bei Schaap's Vishandel erhalten.",
-    categories: ["Kibbeling", "Hering", "Heringsbrötchen", "Getränke"],
+      "Studieren Sie in Leiden auf MBO-, HBO- oder Universitätsniveau? Niederländische und internationale Studierende erhalten nach Freigabe 10 % Rabatt auf das gesamte Sortiment von Schaap's Vishandel.",
+    categories: ["Auf das gesamte Sortiment"],
     condition: "Wer kann den Rabatt erhalten?",
     conditionText:
-      "Für niederländische und internationale Studierende in einem MBO-, HBO- oder Hochschulstudium in Leiden; Schülerinnen und Schüler weiterführender Schulen sind ausgeschlossen. Der Rabatt gilt nur für Kibbeling, Hering, Heringsbrötchen und Getränke und ist nicht mit Newsletter-Rabatten oder anderen Aktionen kombinierbar.",
+      "Für niederländische und internationale Studierende in einem MBO-, HBO- oder Hochschulstudium in Leiden; Schülerinnen und Schüler weiterführender Schulen sind ausgeschlossen. Nach Freigabe gilt der Rabatt für das gesamte Sortiment. Er ist nicht mit Newsletter-Rabatten oder anderen Aktionen kombinierbar.",
     card: "Ihr digitaler Studentenausweis",
     cardText:
       "Nach der Freigabe erscheint Ihr persönlicher Pass im Konto. Er ist ein Studienjahr gültig; danach müssen Sie einen neuen Nachweis einreichen. Das Kontenportal wird derzeit in einer geschützten Vorschau getestet.",
