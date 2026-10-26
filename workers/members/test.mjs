@@ -92,6 +92,7 @@ const db = {
 
 const objects = new Map();
 const sentEmails = [];
+let simulateMailFailure = false;
 let simulateDailyQuota = false;
 let simulateProofDeleteFailure = false;
 const env = {
@@ -106,6 +107,7 @@ const env = {
   ADMIN_IPS: "203.0.113.10,2001:db8::10",
   ANALYTICS_ENABLED: "on",
   EMAIL: { async send(message) {
+    if (simulateMailFailure) throw new Error("simulated email delivery failure");
     if (simulateDailyQuota) throw Object.assign(new Error("daily quota reached"), { code: "E_DAILY_LIMIT_EXCEEDED" });
     sentEmails.push(message);
     return { messageId: `test-${sentEmails.length}` };
@@ -185,21 +187,35 @@ assert.equal(missingSmtpPasswordRegistration.status, 503, "registration refuses 
 assert.equal(sentEmails.length, sentBeforeMissingSmtpPassword, "an incomplete SMTP transport never falls back to another mail provider");
 delete env.SMTP_HOST;
 delete env.SMTP_USERNAME;
+simulateMailFailure = true;
+const failedDeliveryRegistration = await call("/api/members/register", {
+  method: "POST",
+  body: { email: "retry@example.test", schoolEmail: "retry@university.example.test", name: "Retry Test", password: "correct horse battery", locale: "en" },
+});
+assert.equal(failedDeliveryRegistration.status, 503, "a real mail transport failure is reported during registration");
+assert.ok(sqlite.prepare("SELECT id FROM users WHERE email='retry@example.test' AND email_verified_at IS NULL").get(), "a transient delivery failure leaves the new account eligible for code resend");
+simulateMailFailure = false;
+const sentBeforeRetry = sentEmails.length;
+const retryDelivery = await call("/api/members/verify/resend", { method: "POST", body: { email: "retry@example.test", locale: "en" } });
+assert.equal(retryDelivery.status, 202, "unverified users can recover from a transient initial mail failure");
+assert.equal(sentEmails.length, sentBeforeRetry + 2, "resend delivers fresh codes to both addresses after the transport recovers");
 const oversizedRegistration = await call("/api/members/register", {
   method: "POST",
   body: { email: "oversized@example.test", name: "x".repeat(40_000), password: "correct horse battery" },
 });
 assert.equal(oversizedRegistration.status, 400, "JSON parsing is bounded even when Content-Length is absent");
 
+const sentBeforeRegistration = sentEmails.length;
 const registration = await call("/api/members/register", {
   method: "POST",
   body: { email: "student@example.test", schoolEmail: "student@university.example.test", name: "Test Student", password: "correct horse battery", locale: "en" },
 });
 assert.equal(registration.status, 202);
-assert.equal(sentEmails.length, 2, "registration sends separate verification codes to both addresses");
-assert.match(sentEmails[0].text, /\b\d{6}\b/);
-assert.match(sentEmails[1].text, /\b\d{6}\b/);
-assert.notEqual(sentEmails[0].to, sentEmails[1].to, "personal and school emails must be different");
+assert.equal(sentEmails.length, sentBeforeRegistration + 2, "registration sends separate verification codes to both addresses");
+const registrationEmailOffset = sentBeforeRegistration;
+assert.match(sentEmails[registrationEmailOffset].text, /\b\d{6}\b/);
+assert.match(sentEmails[registrationEmailOffset + 1].text, /\b\d{6}\b/);
+assert.notEqual(sentEmails[registrationEmailOffset].to, sentEmails[registrationEmailOffset + 1].to, "personal and school emails must be different");
 assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM newsletter_subscriptions WHERE email='student@example.test'").get().count, 0, "account creation does not subscribe to marketing by default");
 const unknownAccountLogin = await call("/api/members/login", {
   method: "POST",
@@ -213,10 +229,10 @@ const lockedAccountLogin = await call("/api/members/login", {
   body: { email: "locked@example.test", password: "correct horse battery" },
 });
 assert.equal(lockedAccountLogin.status, 401, "locked accounts also receive a generic login failure");
-const personalCode = sentEmails[0].text.match(/\b(\d{6})\b/)[1];
-const schoolCode = sentEmails[1].text.match(/\b(\d{6})\b/)[1];
-assert.match(sentEmails[0].subject, /personal email/i, "personal address receives its own code");
-assert.match(sentEmails[1].subject, /school email/i, "school address receives its own code");
+const personalCode = sentEmails[registrationEmailOffset].text.match(/\b(\d{6})\b/)[1];
+const schoolCode = sentEmails[registrationEmailOffset + 1].text.match(/\b(\d{6})\b/)[1];
+assert.match(sentEmails[registrationEmailOffset].subject, /personal email/i, "personal address receives its own code");
+assert.match(sentEmails[registrationEmailOffset + 1].subject, /school email/i, "school address receives its own code");
 const invalidVerification = await call("/api/members/verify-codes", { method: "POST", body: { email: "student@example.test", personalCode, schoolCode: "000000" } });
 assert.equal(invalidVerification.status, 400, "both codes must match before either email is verified");
 assert.equal(sqlite.prepare("SELECT email_verified_at FROM users WHERE email='student@example.test'").get().email_verified_at, null, "failed verification does not partially verify the account");
