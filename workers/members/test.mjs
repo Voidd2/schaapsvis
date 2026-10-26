@@ -163,6 +163,17 @@ assert.equal((await call("/api/members/analytics", { method: "POST", body: { con
 assert.equal((await call("/api/members/analytics", { method: "POST", body: { consent: true, event: "link_click", path: "/nl/varlaks", target: "https://schaapsvishandel.nl/nl/assortiment/varlaks-zalm?email=private@example.test" } })).status, 202, "analytics stores a sanitized link target");
 assert.equal(sqlite.prepare("SELECT count FROM site_analytics_daily WHERE event='link_click'").get().count, 1);
 assert.equal(sqlite.prepare("SELECT target FROM site_analytics_daily WHERE event='link_click'").get().target, "/nl/assortiment/varlaks-zalm", "analytics drops query strings that may contain private data");
+env.SMTP_HOST = "mail.schaapsvishandel.nl";
+env.SMTP_USERNAME = "schaapsv@schaapsvishandel.nl";
+const sentBeforeMissingSmtpPassword = sentEmails.length;
+const missingSmtpPasswordRegistration = await call("/api/members/register", {
+  method: "POST",
+  body: { email: "smtp-unconfigured@example.test", schoolEmail: "smtp-unconfigured@university.example.test", name: "SMTP Setup Test", password: "correct horse battery", locale: "en" },
+});
+assert.equal(missingSmtpPasswordRegistration.status, 503, "registration refuses to proceed while a selected SMTP transport lacks its password");
+assert.equal(sentEmails.length, sentBeforeMissingSmtpPassword, "an incomplete SMTP transport never falls back to another mail provider");
+delete env.SMTP_HOST;
+delete env.SMTP_USERNAME;
 const oversizedRegistration = await call("/api/members/register", {
   method: "POST",
   body: { email: "oversized@example.test", name: "x".repeat(40_000), password: "correct horse battery" },
