@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 
-type Campaign = { id: string; subject: string; status: "draft" | "queued" | "sent" | "partial_failure"; recipient_count: number; sent_count: number; failed_count: number; created_at: string };
-type Data = { campaigns: Campaign[]; subscriberCount: number; subscriberRegions?: { region_tag: string | null; count: number }[] };
+type Campaign = { id: string; subject: string; audience: "all" | "students"; status: "draft" | "queued" | "sent" | "partial_failure"; recipient_count: number; sent_count: number; failed_count: number; created_at: string };
+type Data = { campaigns: Campaign[]; subscriberCount: number; studentSubscriberCount: number; subscriberRegions?: { region_tag: string | null; count: number }[] };
 
 const copy = {
   nl: { title: "Aanbiedingen per e-mail", intro: "Maak een concept en verstuur het alleen wanneer u daar zelf bewust voor kiest. Alleen bevestigde inschrijvers ontvangen de mail; iedere mail bevat een afmeldlink.", subject: "Onderwerp", body: "Aanbieding en voorwaarden", save: "Concept opslaan", send: "Stuur naar ingeschreven klanten", confirm: "Deze e-mail wordt verstuurd naar alle bevestigde inschrijvers. Doorgaan?", count: "bevestigde inschrijvers", drafts: "Campagnes", loading: "Gegevens laden…", forbidden: "Geen beheerderstoegang.", empty: "Nog geen campagnes.", fail: "Opslaan of versturen lukte niet.", saved: "Concept opgeslagen.", queued: "Campagne in de verzendwachtrij.", draft: "Concept", queuedStatus: "Wordt verzonden", sent: "Verzonden", partial: "Verzonden met fouten", sentCount: "verzonden", failedCount: "mislukt" },
@@ -22,9 +22,16 @@ const regionLabels: Record<string, Record<"nl" | "en" | "de", string>> = {
   unknown: { nl: "Niet opgegeven", en: "Not specified", de: "Ohne Angabe" },
 };
 
+const audienceCopy = {
+  nl: { audience: "Ontvangers", students: "Studenten met geldige korting en bevestigde e-mail", all: "Alle bevestigde inschrijvers", studentCount: "studenten in de maildoelgroep", confirmStudents: "Deze e-mail gaat alleen naar bevestigde inschrijvers met een geldige studentenkorting. Doorgaan?" },
+  en: { audience: "Recipients", students: "Students with a valid discount and confirmed email", all: "All confirmed subscribers", studentCount: "students in the email audience", confirmStudents: "Send this email only to confirmed subscribers with a valid student discount?" },
+  de: { audience: "Empfänger", students: "Studierende mit gültigem Rabatt und bestätigter E-Mail", all: "Alle bestätigten Abonnenten", studentCount: "Studierende im E-Mail-Verteiler", confirmStudents: "Diese E-Mail nur an bestätigte Abonnenten mit gültigem Studentenrabatt senden?" },
+} as const;
+
 export function NewsletterCampaignPortal({ locale }: { locale: string }) {
   const language = locale in copy ? locale as keyof typeof copy : "nl";
   const t = copy[language];
+  const audienceText = audienceCopy[language];
   const [data, setData] = useState<Data | null>(null);
   const [forbidden, setForbidden] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -32,7 +39,7 @@ export function NewsletterCampaignPortal({ locale }: { locale: string }) {
 
   async function reload() {
     const response = await fetch("/api/members/admin/newsletter-campaigns", { credentials: "same-origin", cache: "no-store" });
-    if (response.status === 403) { setForbidden(true); setData({ campaigns: [], subscriberCount: 0 }); return; }
+    if (response.status === 403) { setForbidden(true); setData({ campaigns: [], subscriberCount: 0, studentSubscriberCount: 0 }); return; }
     if (!response.ok) throw new Error("load-failed");
     setData(await response.json() as Data);
     setForbidden(false);
@@ -42,12 +49,12 @@ export function NewsletterCampaignPortal({ locale }: { locale: string }) {
     let active = true;
     fetch("/api/members/admin/newsletter-campaigns", { credentials: "same-origin", cache: "no-store" })
       .then(async (response) => {
-        if (response.status === 403) return { forbidden: true, data: { campaigns: [], subscriberCount: 0 } as Data };
+        if (response.status === 403) return { forbidden: true, data: { campaigns: [], subscriberCount: 0, studentSubscriberCount: 0 } as Data };
         if (!response.ok) throw new Error("load-failed");
         return { forbidden: false, data: await response.json() as Data };
       })
       .then((result) => { if (active) { setForbidden(result.forbidden); setData(result.data); } })
-      .catch(() => { if (active) { setData({ campaigns: [], subscriberCount: 0 }); setMessage(t.fail); } });
+      .catch(() => { if (active) { setData({ campaigns: [], subscriberCount: 0, studentSubscriberCount: 0 }); setMessage(t.fail); } });
     return () => { active = false; };
   }, [t.fail]);
 
@@ -60,7 +67,7 @@ export function NewsletterCampaignPortal({ locale }: { locale: string }) {
     try {
       const response = await fetch("/api/members/admin/newsletter-campaigns", {
         method: "POST", headers: { "Content-Type": "application/json" }, credentials: "same-origin",
-        body: JSON.stringify({ subject: fields.get("subject"), body: fields.get("body") }),
+        body: JSON.stringify({ subject: fields.get("subject"), body: fields.get("body"), audience: fields.get("audience") }),
       });
       if (!response.ok) throw new Error("save-failed");
       form.reset();
@@ -71,7 +78,7 @@ export function NewsletterCampaignPortal({ locale }: { locale: string }) {
   }
 
   async function send(campaign: Campaign) {
-    if (!window.confirm(t.confirm)) return;
+    if (!window.confirm(campaign.audience === "students" ? audienceText.confirmStudents : t.confirm)) return;
     setBusy(true);
     setMessage("");
     try {
@@ -93,10 +100,11 @@ export function NewsletterCampaignPortal({ locale }: { locale: string }) {
         {data === null ? <p className="mt-8">{t.loading}</p> : forbidden ? <p role="alert" className="mt-8 rounded-xl bg-amber-50 p-5">{t.forbidden}</p> : (
           <>
             <div className="mt-6 rounded-lg bg-sky-50 p-4 text-sm font-semibold text-sky-950">
-              <p>{data.subscriberCount} {t.count}</p>
+              <p>{data.subscriberCount} {t.count} · {data.studentSubscriberCount} {audienceText.studentCount}</p>
               {data.subscriberRegions && <p className="mt-2 font-normal">{language === "de" ? "Nach Ort" : language === "en" ? "By area" : "Per plaats"}: {data.subscriberRegions.map(({ region_tag, count }) => `${regionLabels[region_tag || "unknown"]?.[language] || regionLabels.unknown[language]}: ${count}`).join(" · ")}</p>}
             </div>
             <form onSubmit={create} className="mt-6 space-y-4 rounded-2xl border border-sky-200 bg-white p-6 shadow-sm sm:p-8">
+              <label className="block text-sm font-semibold">{audienceText.audience}<select name="audience" required defaultValue="students" className="mt-1 block w-full rounded-lg border border-sky-200 bg-white px-3 py-2.5"><option value="students">{audienceText.students}</option><option value="all">{audienceText.all}</option></select></label>
               <label className="block text-sm font-semibold">{t.subject}<input name="subject" required maxLength={140} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>
               <label className="block text-sm font-semibold">{t.body}<textarea name="body" required maxLength={3000} rows={7} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>
               <button disabled={busy} className="knop knop-navy">{t.save}</button>
@@ -105,8 +113,8 @@ export function NewsletterCampaignPortal({ locale }: { locale: string }) {
               <h2 className="font-display text-2xl font-bold text-slate-900">{t.drafts}</h2>
               {data.campaigns.length === 0 ? <p className="mt-4 text-slate-600">{t.empty}</p> : <ul className="mt-4 divide-y divide-sky-100 rounded-xl border border-sky-100 bg-white">
                 {data.campaigns.map((campaign) => <li key={campaign.id} className="flex flex-wrap items-center justify-between gap-4 p-4">
-                  <div><p className="font-semibold text-slate-900">{campaign.subject}</p><p className="mt-1 text-sm text-slate-600">{campaign.status === "draft" ? t.draft : campaign.status === "queued" ? t.queuedStatus : campaign.status === "sent" ? t.sent : t.partial} · {campaign.sent_count}/{campaign.recipient_count} {t.sentCount}{campaign.failed_count ? ` · ${campaign.failed_count} ${t.failedCount}` : ""}</p></div>
-                  {campaign.status === "draft" && <button type="button" disabled={busy || !data.subscriberCount} onClick={() => void send(campaign)} className="knop knop-lijn">{t.send}</button>}
+                  <div><p className="font-semibold text-slate-900">{campaign.subject}</p><p className="mt-1 text-sm text-slate-600">{campaign.audience === "students" ? audienceText.students : audienceText.all} · {campaign.status === "draft" ? t.draft : campaign.status === "queued" ? t.queuedStatus : campaign.status === "sent" ? t.sent : t.partial} · {campaign.sent_count}/{campaign.recipient_count} {t.sentCount}{campaign.failed_count ? ` · ${campaign.failed_count} ${t.failedCount}` : ""}</p></div>
+                  {campaign.status === "draft" && <button type="button" disabled={busy || !(campaign.audience === "students" ? data.studentSubscriberCount : data.subscriberCount)} onClick={() => void send(campaign)} className="knop knop-lijn">{t.send}</button>}
                 </li>)}
               </ul>}
             </section>
@@ -117,4 +125,3 @@ export function NewsletterCampaignPortal({ locale }: { locale: string }) {
     </div>
   );
 }
-
