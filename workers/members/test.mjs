@@ -587,7 +587,7 @@ const diagnostic = await call("/api/members/admin/smtp-test", { method: "POST" }
 assert.equal(diagnostic.status, 202, "allowlisted owner can request one SMTP diagnostic");
 assert.equal(sentEmails.length, beforeDiagnostic + 1);
 assert.equal(sentEmails.at(-1).to, "owner@example.test", "recipient is fixed by Worker configuration");
-assert.match(sentEmails.at(-1).text, /Temporary test code: \\d{6}/);
+assert.match(sentEmails.at(-1).text, /Tijdelijke testcode: \d{6}/);
 const limitedDiagnostic = await call("/api/members/admin/smtp-test", { method: "POST" });
 assert.equal(limitedDiagnostic.status, 429, "diagnostic is rate limited");
 const rejectedDiagnostic = await call("/api/members/admin/smtp-test", { method: "POST", headers: { "CF-Connecting-IP": "203.0.113.99" } });
