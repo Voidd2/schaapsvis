@@ -211,6 +211,6 @@ export async function verifySmtpAuthentication(env, connectSocket) {
       : "smtp-connection-failed";
     throw new Error(`smtp-check-${stage}-${cause}`);
   } finally {
-    await session.close();
+    if (session) await session.close();
   }
 }
