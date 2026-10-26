@@ -305,7 +305,7 @@ export default async function HomePage({
                     {CATEGORY_NAMES[locale as "nl"|"en"|"de"][cat]}
                   </span>
                   <span className="text-sm bedrag" style={{ color: "var(--grijs)" }}>
-                    {h("assortimentAantal", { aantal })}
+                    {h(aantal === 1 ? "assortimentAantalEen" : "assortimentAantal", { aantal })}
                   </span>
                 </li>
               ))}

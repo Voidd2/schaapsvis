@@ -268,9 +268,18 @@ async function rateLimitIdentity(db, pepper, scope, ip, identity, ipLimit, ident
   return ipAllowed && identityAllowed;
 }
 
+function isMailConfigured(env) {
+  return Boolean(env.MAIL_FROM && (
+    env.EMAIL ||
+    (env.SMTP_HOST && env.SMTP_USERNAME && env.SMTP_PASSWORD)
+  ));
+}
+
 async function sendMail(env, to, subject, text, htmlBody) {
-  if (!env.EMAIL || !env.MAIL_FROM) throw new Error("mail-not-configured");
-  return env.EMAIL.send({ from: env.MAIL_FROM, to, subject, text, html: htmlBody });
+  if (!isMailConfigured(env)) throw new Error("mail-not-configured");
+  if (env.EMAIL) return env.EMAIL.send({ from: env.MAIL_FROM, to, subject, text, html: htmlBody });
+  const smtp = await import("./smtp-worker.mjs");
+  return smtp.sendSmtpMail(env, { to, subject, text, html: htmlBody });
 }
 
 async function issueEmailToken(env, { userId = null, email = null, purpose, ttlMs = EMAIL_TOKEN_MS }) {
@@ -492,7 +501,7 @@ async function readLimitedFormData(request, maxBytes) {
 
 async function register(request, env) {
   if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
-  if (!env.AUTH_PEPPER || !env.SITE_ORIGIN || !env.EMAIL) return json({ error: "registration_unavailable" }, 503);
+  if (!env.AUTH_PEPPER || !env.SITE_ORIGIN || !isMailConfigured(env)) return json({ error: "registration_unavailable" }, 503);
   const body = await readJson(request);
   const locale = localeFrom(body?.locale);
   const copy = ACCOUNT_COPY[locale];
@@ -548,7 +557,7 @@ async function register(request, env) {
 
 async function resendVerification(request, env) {
   if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
-  if (!env.AUTH_PEPPER || !env.EMAIL || !env.SITE_ORIGIN) return json({ error: "verification_unavailable" }, 503);
+  if (!env.AUTH_PEPPER || !isMailConfigured(env) || !env.SITE_ORIGIN) return json({ error: "verification_unavailable" }, 503);
   const body = await readJson(request);
   const locale = localeFrom(body?.locale);
   const copy = ACCOUNT_COPY[locale];
@@ -680,7 +689,7 @@ async function me(request, env) {
 
 async function requestPasswordReset(request, env) {
   if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
-  if (!env.EMAIL || !env.SITE_ORIGIN) return json({ error: "reset_unavailable" }, 503);
+  if (!isMailConfigured(env) || !env.SITE_ORIGIN) return json({ error: "reset_unavailable" }, 503);
   if (!env.AUTH_PEPPER) return json({ error: "reset_unavailable" }, 503);
   const body = await readJson(request);
   const locale = localeFrom(body?.locale);
@@ -927,7 +936,7 @@ async function verifyPass(request, env) {
 
 async function subscribeNewsletter(request, env) {
   if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
-  if (!env.EMAIL || !env.SITE_ORIGIN) return json({ error: "newsletter_unavailable" }, 503);
+  if (!isMailConfigured(env) || !env.SITE_ORIGIN) return json({ error: "newsletter_unavailable" }, 503);
   const body = await readJson(request);
   const locale = localeFrom(body?.locale);
   const copy = ACCOUNT_COPY[locale];
@@ -960,7 +969,7 @@ async function subscribeNewsletter(request, env) {
 
 async function startNewsletterSignup(request, env) {
   if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
-  if (!env.AUTH_PEPPER || !env.EMAIL || !env.SITE_ORIGIN) return json({ error: "newsletter_unavailable" }, 503);
+  if (!env.AUTH_PEPPER || !isMailConfigured(env) || !env.SITE_ORIGIN) return json({ error: "newsletter_unavailable" }, 503);
   const body = await readJson(request);
   const email = normalizeEmail(body?.email);
   if (!email) return json({ error: "invalid_email" }, 400);
@@ -1110,7 +1119,7 @@ async function sendNewsletterCampaign(request, env, campaignId) {
 }
 
 async function processNewsletterDeliveries(env) {
-  if (!env.EMAIL || !env.MAIL_FROM || !env.SITE_ORIGIN) return;
+  if (!isMailConfigured(env) || !env.SITE_ORIGIN) return;
   const now = new Date();
   const nowText = now.toISOString();
   const staleBefore = new Date(now.getTime() - 10 * 60 * 1000).toISOString();

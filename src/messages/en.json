@@ -303,6 +303,7 @@
     "assortimentTekst": "From VÅRLAKS salmon and Dutch brown shrimp to fresh fish and something from the fryer: explore what we offer. Availability changes with the day’s supply. Looking for something specific? Message us on WhatsApp and we will be happy to help.",
     "assortimentLink": "See the full range",
     "assortimentAantal": "{aantal} kinds",
+    "assortimentAantalEen": "{aantal} kind",
     "biologischLabel": "Where it comes from",
     "biologischKop": "Proud of our VÅRLAKS salmon",
     "biologischTekst": "Sustainable fish deserves a clear story. We are proud of our VÅRLAKS salmon; MSC-certified Dutch brown shrimp are also part of our range. Organic, ASC and MSC do not mean the same thing. We can tell you which certification applies to the fish available now.",

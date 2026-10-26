@@ -16,8 +16,10 @@ const copy = {
     categories: ["Kibbeling", "Haring", "Broodjes haring", "Drinken"],
     condition: "Voor wie is de korting?",
     conditionText:
-      "Voor Nederlandse en internationale studenten die in Leiden een MBO-, HBO- of WO-opleiding volgen; middelbare scholieren vallen buiten de actie. De korting geldt alleen voor kibbeling, haring, broodjes haring en drinken en kan niet worden gecombineerd met nieuwsbriefkortingen of andere acties. Na goedkeuring is de digitale pas één studiejaar geldig; daarna is nieuw bewijs nodig.",
+      "Voor Nederlandse en internationale studenten die in Leiden een MBO-, HBO- of WO-opleiding volgen; middelbare scholieren vallen buiten de actie. De korting geldt alleen voor kibbeling, haring, broodjes haring en drinken en kan niet worden gecombineerd met nieuwsbriefkortingen of andere acties.",
     card: "Je digitale studentenpas",
+    cardText:
+      "Na goedkeuring verschijnt je persoonlijke pas in je account. De pas is één studiejaar geldig; daarna lever je opnieuw bewijs aan. Het accountportaal is nog niet geopend.",
     cardExample: "Voorbeeld · na beoordeling beschikbaar in je account",
     steps: "Zo werkt aanmelden",
     step1: "Maak een account met je persoonlijke e-mailadres, je schoolmail en een sterk wachtwoord.",
@@ -45,8 +47,10 @@ const copy = {
     categories: ["Kibbeling", "Herring", "Herring sandwiches", "Drinks"],
     condition: "Who is eligible?",
     conditionText:
-      "For Dutch and international students enrolled in an MBO, HBO or university programme in Leiden; secondary-school pupils are not eligible. The discount applies only to kibbeling, herring, herring sandwiches and drinks. It cannot be combined with newsletter discounts or other offers. After approval, the digital pass is valid for one academic year; new proof is then required.",
+      "For Dutch and international students enrolled in an MBO, HBO or university programme in Leiden; secondary-school pupils are not eligible. The discount applies only to kibbeling, herring, herring sandwiches and drinks. It cannot be combined with newsletter discounts or other offers.",
     card: "Your digital student pass",
+    cardText:
+      "Once approved, your personal pass will appear in your account. It is valid for one academic year; you will need to provide new proof afterwards. The account portal is not open yet.",
     cardExample: "Preview · available in your account after approval",
     steps: "How to apply",
     step1: "Create an account with your personal email, school email and a strong password.",
@@ -75,8 +79,10 @@ const copy = {
     categories: ["Kibbeling", "Hering", "Heringsbrötchen", "Getränke"],
     condition: "Wer kann den Rabatt erhalten?",
     conditionText:
-      "Für niederländische und internationale Studierende in einem MBO-, HBO- oder Hochschulstudium in Leiden; Schülerinnen und Schüler weiterführender Schulen sind ausgeschlossen. Der Rabatt gilt nur für Kibbeling, Hering, Heringsbrötchen und Getränke und ist nicht mit Newsletter-Rabatten oder anderen Aktionen kombinierbar. Nach Freigabe ist der digitale Pass ein Studienjahr gültig; danach ist ein neuer Nachweis nötig.",
+      "Für niederländische und internationale Studierende in einem MBO-, HBO- oder Hochschulstudium in Leiden; Schülerinnen und Schüler weiterführender Schulen sind ausgeschlossen. Der Rabatt gilt nur für Kibbeling, Hering, Heringsbrötchen und Getränke und ist nicht mit Newsletter-Rabatten oder anderen Aktionen kombinierbar.",
     card: "Ihr digitaler Studentenausweis",
+    cardText:
+      "Nach der Freigabe erscheint Ihr persönlicher Pass im Konto. Er ist ein Studienjahr gültig; danach müssen Sie einen neuen Nachweis einreichen. Das Kontenportal ist noch nicht geöffnet.",
     cardExample: "Vorschau · nach der Prüfung in Ihrem Konto verfügbar",
     steps: "So funktioniert die Anmeldung",
     step1: "Erstellen Sie ein Konto mit Ihrer privaten E-Mail-Adresse, Schul-E-Mail und einem sicheren Passwort.",
@@ -143,7 +149,7 @@ export default async function StudentenkortingPage({ params }: { params: Promise
           <div>
             <p className="kapitaal">{locale === "nl" ? "Na goedkeuring" : locale === "de" ? "Nach der Freigabe" : "After approval"}</p>
             <h2>{c.card}</h2>
-            <p className="mt-3 max-w-xl leading-relaxed">{c.conditionText}</p>
+            <p className="mt-3 max-w-xl leading-relaxed">{c.cardText}</p>
           </div>
           <div className="relative overflow-hidden rounded-3xl bg-[#073d56] p-7 text-white shadow-xl sm:p-9" aria-label={c.cardExample}>
             <div className="absolute -right-16 -top-20 h-64 w-64 rounded-full border-[36px] border-white/5" aria-hidden="true" />
