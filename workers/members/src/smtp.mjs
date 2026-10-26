@@ -199,7 +199,7 @@ export async function verifySmtpAuthentication(env, connectSocket) {
       stage = "tls-ehlo";
       capabilities = await session.command(ehlo, ["250"]);
     }
-    if (!capabilities.lines.some((line) => /\bAUTH\b.*\\bPLAIN\\b/i.test(line))) throw new Error("smtp-auth-plain-unavailable");
+    if (!capabilities.lines.some((line) => /\bAUTH\b.*\bPLAIN\b/i.test(line))) throw new Error("smtp-auth-plain-unavailable");
     stage = "auth";
     await session.command(`AUTH PLAIN ${utf8Base64(`\0${username}\0${password}`)}`, ["235"]);
     return { status: "authenticated" };
