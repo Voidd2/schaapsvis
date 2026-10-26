@@ -78,6 +78,8 @@ await sendSmtpMail({
 }, () => socket());
 
 assert.equal(server.tls, true, "authentication and content must be sent only after STARTTLS");
+assert(server.lines.some(({ line, tls }) => line === "EHLO mail.schaapsvishandel.nl" && !tls));
+assert(server.lines.some(({ line, tls }) => line === "EHLO mail.schaapsvishandel.nl" && tls));
 assert(server.lines.some(({ line, tls }) => line === "STARTTLS" && !tls));
 assert(server.lines.some(({ line, tls }) => line.startsWith("AUTH PLAIN ") && tls));
 assert(server.lines.some(({ line, tls }) => line.startsWith("MAIL FROM:<schaapsv@schaapsvishandel.nl>") && tls));
@@ -99,6 +101,8 @@ await verifySmtpAuthentication({
   SMTP_PASSWORD: "test-secret",
   MAIL_FROM: "schaapsv@schaapsvishandel.nl",
 }, () => socket());
+assert(server.lines.some(({ line, tls }) => line === "EHLO mail.schaapsvishandel.nl" && !tls));
+assert(server.lines.some(({ line, tls }) => line === "EHLO mail.schaapsvishandel.nl" && tls));
 assert(server.lines.some(({ line, tls }) => line === "STARTTLS" && !tls));
 assert(server.lines.some(({ line, tls }) => line.startsWith("AUTH PLAIN ") && tls));
 assert(!server.lines.some(({ line }) => /^(MAIL FROM:|RCPT TO:|DATA)$/.test(line)), "SMTP health check must never submit a message");
