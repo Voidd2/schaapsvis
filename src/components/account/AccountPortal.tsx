@@ -242,6 +242,13 @@ export function AccountPortal({ locale }: { locale: string }) {
       if (!response.ok) {
         const result = await response.json().catch(() => ({})) as { error?: string };
         if (result.error === "email_unverified") throw new Error("unverified");
+        if (mode === "register" && result.error === "verification_email_failed") {
+          setVerificationEmail(String(fields.get("email") || "").trim().toLowerCase());
+          setVerificationPending(true);
+          setMode("login");
+          setMessage(t.verificationFailed);
+          return;
+        }
         throw new Error("request-failed");
       }
       if (mode === "register") {
@@ -434,4 +441,5 @@ export function AccountPortal({ locale }: { locale: string }) {
     </div>
   );
 }
+
 
