@@ -307,6 +307,29 @@ async function sendMail(env, to, subject, text, htmlBody) {
   return env.EMAIL.send({ from: env.MAIL_FROM, to, subject, text, html: htmlBody });
 }
 
+async function sendSmtpDiagnostic(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  if (env.SMTP_DIAGNOSTICS !== "on" || !env.SMTP_TEST_TO) return json({ error: "not_found" }, 404);
+  const clientIp = String(request.headers.get("CF-Connecting-IP") || "").trim().toLowerCase();
+  const allowedIps = String(env.ADMIN_IPS || "").split(",").map((ip) => ip.trim().toLowerCase()).filter(Boolean);
+  if (!clientIp || !allowedIps.includes(clientIp)) return json({ error: "forbidden" }, 403);
+  const recipient = normalizeEmail(env.SMTP_TEST_TO);
+  if (!recipient || !env.AUTH_PEPPER || !isMailConfigured(env)) return json({ error: "mail_not_configured" }, 503);
+  if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "smtp-diagnostic", clientIp, recipient, 1, 1, 24 * 60 * 60 * 1000)) {
+    return json({ error: "rate_limited" }, 429);
+  }
+  const code = String(crypto.getRandomValues(new Uint32Array(1))[0] % 1_000_000).padStart(6, "0");
+  const subject = "Testmail Schaap’s Vishandel";
+  const text = `Dit is een eenmalige technische test van de e-mailbezorging. Uw tijdelijke testcode is: ${code}`;
+  const html = `<p>Dit is een eenmalige technische test van de e-mailbezorging.</p><p>Uw tijdelijke testcode is:</p><p style="font-size:2rem;font-weight:700;letter-spacing:.2em">${code}</p>`;
+  try {
+    await sendMail(env, recipient, subject, text, html);
+  } catch {
+    return json({ error: "mail_delivery_failed" }, 503);
+  }
+  return json({ ok: true }, 202, { "Cache-Control": "no-store" });
+}
+
 async function issueEmailToken(env, { userId = null, email = null, purpose, ttlMs = EMAIL_TOKEN_MS }) {
   const token = await randomToken();
   const expiry = new Date(Date.now() + ttlMs).toISOString();
@@ -1239,6 +1262,7 @@ const memberWorker = {
     // public launch flag is set, require the site's own unlock cookie or its
     // platform-trusted owner-IP allowlist before exposing any account endpoint.
     if (!siteAccessAllowed(request, env)) return json({ error: "site_access_required" }, 403);
+    if (path === "/api/members/admin/smtp-test" && method === "POST") return sendSmtpDiagnostic(request, env);
     if (path === "/api/members/analytics" && method === "POST") return collectAnalytics(request, env);
     if (path === "/api/members/register" && method === "POST") return register(request, env);
     if (path === "/api/members/verify/resend" && method === "POST") return resendVerification(request, env);
@@ -1369,4 +1393,5 @@ async function cleanupOrphanStudentProofs(env) {
     }
   }
 }
+
 
