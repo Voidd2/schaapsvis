@@ -405,7 +405,7 @@ assert.equal(pass.expiresAt, expectedPassExpiry.toISOString(), "pass expires exa
 const passCheck = await call("/api/members/admin/pass/verify", { method: "POST", cookie: sessionCookie, body: { code: pass.code } });
 const verifiedPass = await passCheck.json();
 assert.equal(verifiedPass.valid, true);
-assert.deepEqual(verifiedPass.eligibleProducts, ["kibbeling", "haring", "broodje-haring", "drinks"], "discount eligibility is restricted to the agreed products");
+assert.deepEqual(verifiedPass.eligibleProducts, ["assortiment"], "student discount applies to the entire assortment");
 sqlite.prepare("UPDATE student_passes SET expires_at='2000-01-01T00:00:00.000Z' WHERE user_id=(SELECT id FROM users WHERE email='student@example.test')").run();
 const expiredAccount = await call("/api/members/me", { cookie: sessionCookie });
 assert.equal((await expiredAccount.json()).discountPass, null, "expired pass is no longer shown as usable");
