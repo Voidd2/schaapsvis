@@ -1166,6 +1166,30 @@ async function sendSmtpDiagnostic(request, env) {
   }
 }
 
+async function checkSmtpAuthentication(request, env) {
+  if (env.SMTP_DIAGNOSTICS !== "on") return json({ error: "not_found" }, 404);
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  const clientIp = String(request.headers.get("CF-Connecting-IP") || "").trim().toLowerCase();
+  const allowedIps = String(env.ADMIN_IPS || "").split(",").map((ip) => ip.trim().toLowerCase()).filter(Boolean);
+  if (!clientIp || !allowedIps.includes(clientIp)) return json({ error: "forbidden" }, 403);
+  if (!env.AUTH_PEPPER || !env.DB || !env.SMTP_HOST || !env.SMTP_USERNAME || !env.SMTP_PASSWORD || !env.MAIL_FROM) {
+    return json({ error: "smtp_not_configured" }, 503);
+  }
+  if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "smtp-auth-diagnostic", clientIp, "knoth", 1, 1, 60 * 60 * 1000)) {
+    return json({ error: "rate_limited" }, 429);
+  }
+  try {
+    const smtp = await import("./smtp-worker.mjs");
+    await smtp.verifySmtpAuthentication(env);
+    return json({ ok: true, status: "authenticated" }, 200, { "Cache-Control": "no-store" });
+  } catch (error) {
+    const detail = typeof error?.message === "string" && /^smtp-check-[a-z0-9-]{1,120}$/.test(error.message)
+      ? error.message
+      : "smtp-check-failed";
+    return json({ ok: false, error: detail }, 503, { "Cache-Control": "no-store" });
+  }
+}
+
 async function processNewsletterDeliveries(env) {
   if (!isMailConfigured(env) || !env.SITE_ORIGIN) return;
   const now = new Date();
@@ -1275,7 +1299,7 @@ const memberWorker = {
     if (path === "/api/members/password-reset/confirm" && method === "GET") return passwordResetPage(request, env);
     if (path === "/api/members/password-reset/confirm" && method === "POST") return confirmPasswordReset(request, env);
     if (path === "/api/members/student-application" && method === "POST") return submitStudentApplication(request, env);
-    if (path === "/api/members/admin/smtp-test" && method === "POST") return sendSmtpDiagnostic(request, env);
+    if (path === "/api/members/admin/smtp-test" && method === "POST") return sendSmtpDiagnostic(request, env);\n    if (path === "/api/members/admin/smtp-check" && method === "POST") return checkSmtpAuthentication(request, env);
     if (path === "/api/members/admin/student-applications" && method === "GET") return adminQueue(request, env);
     if (path === "/api/members/admin/analytics" && method === "GET") return adminAnalytics(request, env);
     if (path === "/api/members/admin/customers" && method === "GET") return adminCustomers(request, env);
