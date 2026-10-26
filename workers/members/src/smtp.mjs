@@ -142,7 +142,7 @@ export async function sendSmtpMail(env, message, connectSocket) {
   try {
     const greeting = await session.reply();
     if (greeting.code !== "220") throw new Error(`smtp-greeting-rejected-${greeting.code}`);
-    const ehlo = `EHLO ${env.SMTP_HELO_NAME || "schaapsvishandel.nl"}`;
+    const ehlo = `EHLO ${env.SMTP_HELO_NAME || "mail.schaapsvishandel.nl"}`;
     let capabilities = await session.command(ehlo, ["250"]);
     if (port === 587) {
       if (!capabilities.lines.some((line) => /\bSTARTTLS\b/i.test(line))) throw new Error("smtp-starttls-unavailable");
@@ -190,7 +190,7 @@ export async function verifySmtpAuthentication(env, connectSocket) {
     stage = "greeting";
     const greeting = await session.reply();
     if (greeting.code !== "220") throw new Error(`smtp-greeting-rejected-${greeting.code}`);
-    const ehlo = `EHLO ${env.SMTP_HELO_NAME || "schaapsvishandel.nl"}`;
+    const ehlo = `EHLO ${env.SMTP_HELO_NAME || "mail.schaapsvishandel.nl"}`;
     stage = "ehlo";
     let capabilities = await session.command(ehlo, ["250"]);
     if (port === 587) {
