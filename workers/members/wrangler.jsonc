@@ -48,6 +48,7 @@
         "SMTP_HOST": "mail.schaapsvishandel.nl",
         "SMTP_PORT": "587",
         "SMTP_USERNAME": "schaapsv@schaapsvishandel.nl",
+        "SMTP_DIAGNOSTICS": "off",
         "ADMIN_EMAILS": "schaapsv@schaapsvishandel.nl",
         "ADMIN_IPS": "212.120.114.226,2001:4860:7:61f::f5",
       },
