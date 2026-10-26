@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { sendSmtpMail, stuffSmtpData } from "./src/smtp.mjs";
+import { sendSmtpMail, verifySmtpAuthentication, stuffSmtpData } from "./src/smtp.mjs";
 
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
@@ -10,6 +10,7 @@ const server = {
   inData: false,
   lines: [],
   message: "",
+  authCode: "235",
 };
 
 function reply(text) {
@@ -46,7 +47,7 @@ function socket() {
         server.lines.push({ line, tls: server.tls });
         if (line.startsWith("EHLO ")) reply("250-smtp.test\r\n250-STARTTLS\r\n250 AUTH PLAIN\r\n");
         else if (line === "STARTTLS") reply("220 go ahead\r\n");
-        else if (line.startsWith("AUTH PLAIN ")) reply("235 authenticated\r\n");
+        else if (line.startsWith("AUTH PLAIN ")) reply(`${server.authCode} authenticated\r\n`);
         else if (line.startsWith("MAIL FROM:")) reply("250 sender ok\r\n");
         else if (line.startsWith("RCPT TO:")) reply("250 recipient ok\r\n");
         else if (line === "DATA") { server.inData = true; reply("354 send data\r\n"); }
@@ -85,5 +86,41 @@ assert(server.message.includes("Content-Type: text/plain; charset=UTF-8"));
 assert(server.message.includes("Content-Type: text/html; charset=UTF-8"));
 assert(server.message.includes("=?UTF-8?B?"));
 assert(!server.message.includes("test-secret"), "the SMTP password must never appear in message data");
+
+server.greeted = false;
+server.tls = false;
+server.inData = false;
+server.lines = [];
+server.message = "";
+await verifySmtpAuthentication({
+  SMTP_HOST: "smtp.example.test",
+  SMTP_PORT: "587",
+  SMTP_USERNAME: "schaapsv@schaapsvishandel.nl",
+  SMTP_PASSWORD: "test-secret",
+  MAIL_FROM: "schaapsv@schaapsvishandel.nl",
+}, () => socket());
+assert(server.lines.some(({ line, tls }) => line === "STARTTLS" && !tls));
+assert(server.lines.some(({ line, tls }) => line.startsWith("AUTH PLAIN ") && tls));
+assert(!server.lines.some(({ line }) => /^(MAIL FROM:|RCPT TO:|DATA)$/.test(line)), "SMTP health check must never submit a message");
+
+server.greeted = false;
+server.tls = false;
+server.inData = false;
+server.lines = [];
+server.message = "";
+server.authCode = "535";
+await assert.rejects(
+  verifySmtpAuthentication({
+    SMTP_HOST: "smtp.example.test",
+    SMTP_PORT: "587",
+    SMTP_USERNAME: "schaapsv@schaapsvishandel.nl",
+    SMTP_PASSWORD: "test-secret",
+    MAIL_FROM: "schaapsv@schaapsvishandel.nl",
+  }, () => socket()),
+  /smtp-check-auth-smtp-command-rejected-535/,
+);
+assert(!server.lines.some(({ line }) => /^(MAIL FROM:|RCPT TO:|DATA)$/.test(line)), "failed SMTP authentication must not submit a message");
+server.authCode = "235";
+
 assert.equal(stuffSmtpData("header\r\n.dot\r\n..dot"), "header\r\n..dot\r\n...dot", "SMTP dot-stuffing preserves line boundaries");
 console.log("Knoth SMTP integration test passed: STARTTLS, PLAIN authentication and UTF-8 multipart email.");
