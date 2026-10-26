@@ -581,6 +581,8 @@ assert.equal(diagnosticDisabled.status, 404, "SMTP diagnostic is hidden when dis
 env.SMTP_DIAGNOSTICS = "on";
 env.SMTP_TEST_TO = "owner@example.test";
 const beforeDiagnostic = sentEmails.length;
+const beforeDiagnosticUsers = Number(sqlite.prepare("SELECT COUNT(*) AS count FROM users").get().count);
+const beforeDiagnosticApplications = Number(sqlite.prepare("SELECT COUNT(*) AS count FROM student_applications").get().count);
 const diagnostic = await call("/api/members/admin/smtp-test", { method: "POST" });
 assert.equal(diagnostic.status, 202, "allowlisted owner can request one SMTP diagnostic");
 assert.equal(sentEmails.length, beforeDiagnostic + 1);
@@ -590,8 +592,8 @@ const limitedDiagnostic = await call("/api/members/admin/smtp-test", { method: "
 assert.equal(limitedDiagnostic.status, 429, "diagnostic is rate limited");
 const rejectedDiagnostic = await call("/api/members/admin/smtp-test", { method: "POST", headers: { "CF-Connecting-IP": "203.0.113.99" } });
 assert.equal(rejectedDiagnostic.status, 403, "non-allowlisted IP cannot use diagnostic");
-assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM users").get().count, 0, "diagnostic creates no user");
-assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM student_applications").get().count, 0, "diagnostic creates no student application");
+assert.equal(Number(sqlite.prepare("SELECT COUNT(*) AS count FROM users").get().count), beforeDiagnosticUsers, "diagnostic creates no user");
+assert.equal(Number(sqlite.prepare("SELECT COUNT(*) AS count FROM student_applications").get().count), beforeDiagnosticApplications, "diagnostic creates no student application");
 env.SMTP_DIAGNOSTICS = "off";
 env.MEMBERS_ENABLED = "off";
 
