@@ -442,4 +442,3 @@ export function AccountPortal({ locale }: { locale: string }) {
   );
 }
 
-
