@@ -1,6 +1,3 @@
-Warning: truncated output (original token count: 12117)
-Total output lines: 578
-
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { DatabaseSync } from "node:sqlite";
@@ -290,7 +287,17 @@ assert.equal(sqlite.prepare("SELECT account_status FROM users WHERE id=?").get(m
 assert.equal(sqlite.prepare("SELECT revoked_at FROM sessions WHERE token_hash='managed-customer-session'").get().revoked_at !== null, true, "restoring an account does not revive old sessions");
 assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM admin_customer_audit WHERE customer_user_id=?").get(managedCustomerId).count, 2, "both status changes are audited");
 
-for (let attempt…117 tokens truncated…t@example.test", password: "correct horse battery" },
+for (let attempt = 0; attempt < 7; attempt++) {
+  const blockedLogin = await call("/api/members/login", {
+    method: "POST",
+    body: { email: "student@example.test", password: "wrong password" },
+    headers: { "CF-Connecting-IP": `198.51.100.${attempt + 1}` },
+  });
+  assert.equal(blockedLogin.status, 401, "account-specific login attempts remain possible up to the configured limit");
+}
+assert.equal((await call("/api/members/login", {
+  method: "POST",
+  body: { email: "student@example.test", password: "correct horse battery" },
   headers: { "CF-Connecting-IP": "203.0.113.99" },
 })).status, 429, "changing IP addresses cannot bypass the account-specific login limit");
 
@@ -567,5 +574,4 @@ assert.equal(resetResult.status, 303);
 assert.equal(resetResult.headers.get("Location"), "https://schaapsvishandel.nl/en/account?password-reset=1");
 
 console.log("Account worker integration tests passed: email verification, login, proof upload and orphan cleanup retries, private proof review, student pass renewal, newsletter double opt-in, campaign delivery, unsubscribe and daily quota recovery.");
-
 
