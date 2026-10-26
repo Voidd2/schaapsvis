@@ -14,6 +14,7 @@ const newsletterDraftsMigration = await readFile(new URL("../../migrations/0008_
 const analyticsMigration = await readFile(new URL("../../migrations/0009_site_analytics.sql", import.meta.url), "utf8");
 const customerAdminMigration = await readFile(new URL("../../migrations/0010_admin_customer_management.sql", import.meta.url), "utf8");
 const proofBudgetMigration = await readFile(new URL("../../migrations/0011_r2_proof_usage_budget.sql", import.meta.url), "utf8");
+const newsletterAudienceMigration = await readFile(new URL("../../migrations/0012_newsletter_audience.sql", import.meta.url), "utf8");
 const upgradeDb = new DatabaseSync(":memory:");
 upgradeDb.exec(schema);
 upgradeDb.exec(`
@@ -34,6 +35,7 @@ upgradeDb.exec(newsletterDraftsMigration);
 upgradeDb.exec(analyticsMigration);
 upgradeDb.exec(customerAdminMigration);
 upgradeDb.exec(proofBudgetMigration);
+upgradeDb.exec(newsletterAudienceMigration);
 assert.equal(upgradeDb.prepare("SELECT application_id FROM student_passes WHERE id='legacy-pass'").get().application_id, "legacy-application", "migration associates existing student passes with their approved application");
 upgradeDb.close();
 const sqlite = new DatabaseSync(":memory:");
@@ -48,6 +50,7 @@ sqlite.exec(newsletterDraftsMigration);
 sqlite.exec(analyticsMigration);
 sqlite.exec(customerAdminMigration);
 sqlite.exec(proofBudgetMigration);
+sqlite.exec(newsletterAudienceMigration);
 let simulateApplicationCommitFailure = false;
 let decisionReadBarrier = null;
 
@@ -507,8 +510,45 @@ assert.match(sentEmails.at(-1).text, /locale=de/);
 assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='deals@example.test'").get().status, "subscribed");
 assert.equal(sqlite.prepare("SELECT region_tag FROM newsletter_subscriptions WHERE email='deals@example.test'").get().region_tag, "leiden", "newsletter stores the subscriber's chosen local-area tag");
 
+assert.equal((await call("/api/members/admin/newsletter-campaigns", { method: "POST", cookie: sessionCookie, body: { subject: "Missing audience", body: "Test" } })).status, 400, "campaign creation requires an explicit audience");
+const studentSubscription = await call("/api/members/newsletter/subscribe", {
+  method: "POST", cookie: sessionCookie, body: { email: "student@example.test", consent: true, locale: "nl", regionTag: "leiden" },
+});
+assert.equal(studentSubscription.status, 202);
+const studentConfirmation = new URL(sentEmails.at(-1).text.match(/https:\/\/[^\s]+/)[0]);
+const studentConfirmationForm = new FormData();
+studentConfirmationForm.set("token", studentConfirmation.searchParams.get("token"));
+assert.equal((await call(studentConfirmation.pathname, { method: "POST", body: studentConfirmationForm })).status, 303);
+assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='student@example.test'").get().status, "subscribed");
+const segmentOverview = await call("/api/members/admin/newsletter-campaigns", { cookie: sessionCookie });
+assert.equal((await segmentOverview.json()).studentSubscriberCount, 1, "only confirmed subscribers with an active approved pass are in the student audience");
+const studentDraft = await call("/api/members/admin/newsletter-campaigns", {
+  method: "POST", cookie: sessionCookie, body: { subject: "Studentenaanbieding", body: "Alleen voor studenten.", audience: "students" },
+});
+assert.equal(studentDraft.status, 201);
+const studentCampaignId = (await studentDraft.json()).id;
+const studentQueue = await call(`/api/members/admin/newsletter-campaigns/${studentCampaignId}/send`, { method: "POST", cookie: sessionCookie });
+assert.equal((await studentQueue.json()).recipientCount, 1, "a student campaign excludes ordinary subscribers");
+assert.equal(sqlite.prepare("SELECT email FROM newsletter_deliveries WHERE campaign_id=?").get(studentCampaignId).email, "student@example.test");
+let studentJob;
+await memberWorker.scheduled({}, env, { waitUntil(promise) { studentJob = promise; } });
+await studentJob;
+assert.equal(sqlite.prepare("SELECT status FROM newsletter_deliveries WHERE campaign_id=?").get(studentCampaignId).status, "sent");
+const expiryDraft = await call("/api/members/admin/newsletter-campaigns", {
+  method: "POST", cookie: sessionCookie, body: { subject: "Verlopen studentenactie", body: "Dit mag niet aankomen.", audience: "students" },
+});
+const expiryCampaignId = (await expiryDraft.json()).id;
+await call(`/api/members/admin/newsletter-campaigns/${expiryCampaignId}/send`, { method: "POST", cookie: sessionCookie });
+sqlite.prepare("UPDATE student_passes SET expires_at='2000-01-01T00:00:00.000Z' WHERE user_id=(SELECT id FROM users WHERE email='student@example.test')").run();
+const mailCountBeforeExpiry = sentEmails.length;
+await memberWorker.scheduled({}, env, { waitUntil(promise) { studentJob = promise; } });
+await studentJob;
+assert.equal(sqlite.prepare("SELECT status FROM newsletter_deliveries WHERE campaign_id=?").get(expiryCampaignId).status, "suppressed", "a pass expiring after queueing suppresses delivery");
+assert.equal(sentEmails.length, mailCountBeforeExpiry, "expired student passes do not receive student campaigns");
+sqlite.prepare("UPDATE newsletter_subscriptions SET status='unsubscribed' WHERE email='student@example.test'").run();
+
 const draft = await call("/api/members/admin/newsletter-campaigns", {
-  method: "POST", cookie: sessionCookie, body: { subject: "Weekdeal test", body: "Alleen voor de test." },
+  method: "POST", cookie: sessionCookie, body: { subject: "Weekdeal test", body: "Alleen voor de test.", audience: "all" },
 });
 assert.equal(draft.status, 201);
 const campaignId = (await draft.json()).id;
@@ -542,7 +582,7 @@ const quotaForm = new FormData();
 quotaForm.set("token", quotaConfirmation.searchParams.get("token"));
 assert.equal((await call(quotaConfirmation.pathname, { method: "POST", body: quotaForm })).status, 303);
 const quotaDraft = await call("/api/members/admin/newsletter-campaigns", {
-  method: "POST", cookie: sessionCookie, body: { subject: "Quota test", body: "Test quota" },
+  method: "POST", cookie: sessionCookie, body: { subject: "Quota test", body: "Test quota", audience: "all" },
 });
 const quotaCampaignId = (await quotaDraft.json()).id;
 await call(`/api/members/admin/newsletter-campaigns/${quotaCampaignId}/send`, { method: "POST", cookie: sessionCookie });

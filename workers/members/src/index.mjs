@@ -1084,12 +1084,17 @@ async function adminNewsletterCampaigns(request, env) {
   const admin = await requireAdmin(request, env);
   if (!admin) return json({ error: "forbidden" }, 403);
   const campaigns = await env.DB.prepare(`
-    SELECT id, subject, status, recipient_count, sent_count, failed_count, created_at, queued_at, completed_at
+    SELECT id, subject, audience, status, recipient_count, sent_count, failed_count, created_at, queued_at, completed_at
     FROM newsletter_campaigns ORDER BY created_at DESC LIMIT 50
   `).all();
   const subscriberCount = await env.DB.prepare(`SELECT COUNT(*) AS count FROM newsletter_subscriptions WHERE status = 'subscribed'`).first();
+  const studentSubscriberCount = await env.DB.prepare(`SELECT COUNT(*) AS count FROM newsletter_subscriptions n WHERE n.status='subscribed' AND EXISTS (
+    SELECT 1 FROM users u JOIN student_passes p ON p.user_id=u.id JOIN student_applications a ON a.id=p.application_id AND a.user_id=u.id
+    WHERE u.id=n.user_id AND u.email=n.email AND u.account_status='active' AND u.email_verified_at IS NOT NULL
+      AND p.status='active' AND p.revoked_at IS NULL AND p.expires_at>? AND a.status='approved'
+  )`).bind(nowIso()).first();
   const subscriberRegions = await env.DB.prepare(`SELECT region_tag, COUNT(*) AS count FROM newsletter_subscriptions WHERE status = 'subscribed' GROUP BY region_tag ORDER BY region_tag`).all();
-  return json({ campaigns: campaigns.results || [], subscriberCount: Number(subscriberCount?.count || 0), subscriberRegions: subscriberRegions.results || [] });
+  return json({ campaigns: campaigns.results || [], subscriberCount: Number(subscriberCount?.count || 0), studentSubscriberCount: Number(studentSubscriberCount?.count || 0), subscriberRegions: subscriberRegions.results || [] });
 }
 
 async function createNewsletterCampaign(request, env) {
@@ -1099,14 +1104,15 @@ async function createNewsletterCampaign(request, env) {
   const body = await readJson(request);
   const subject = typeof body?.subject === "string" ? body.subject.trim() : "";
   const content = typeof body?.body === "string" ? body.body.trim() : "";
-  if (!subject || subject.length > 140 || /[\r\n]/.test(subject) || !content || content.length > 3000) {
+  const audience = body?.audience;
+  if (!subject || subject.length > 140 || /[\r\n]/.test(subject) || !content || content.length > 3000 || !["all", "students"].includes(audience)) {
     return json({ error: "invalid_campaign" }, 400);
   }
   const id = crypto.randomUUID();
   const at = nowIso();
   await env.DB.batch([
-    env.DB.prepare(`INSERT INTO newsletter_campaigns (id, subject, body_text, created_by, created_at) VALUES (?, ?, ?, ?, ?)`)
-      .bind(id, subject, content, admin.id, at),
+    env.DB.prepare(`INSERT INTO newsletter_campaigns (id, subject, body_text, audience, created_by, created_at) VALUES (?, ?, ?, ?, ?, ?)`)
+      .bind(id, subject, content, audience, admin.id, at),
     env.DB.prepare(`INSERT INTO admin_audit_log (id, reviewer_user_id, action, occurred_at) VALUES (?, ?, 'newsletter_campaign_created', ?)`)
       .bind(crypto.randomUUID(), admin.id, at),
   ]);
@@ -1117,20 +1123,26 @@ async function sendNewsletterCampaign(request, env, campaignId) {
   if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
   const admin = await requireAdmin(request, env);
   if (!admin) return json({ error: "forbidden" }, 403);
-  const campaign = await env.DB.prepare(`SELECT id, status FROM newsletter_campaigns WHERE id = ?`).bind(campaignId).first();
+  const campaign = await env.DB.prepare(`SELECT id, status, audience FROM newsletter_campaigns WHERE id = ?`).bind(campaignId).first();
   if (!campaign || campaign.status !== "draft") return json({ error: "campaign_not_draft" }, 409);
   const queuedAt = nowIso();
+  const studentFilter = campaign.audience === "students" ? `AND EXISTS (
+    SELECT 1 FROM users u JOIN student_passes p ON p.user_id=u.id JOIN student_applications a ON a.id=p.application_id AND a.user_id=u.id
+    WHERE u.id=n.user_id AND u.email=n.email AND u.account_status='active' AND u.email_verified_at IS NOT NULL
+      AND p.status='active' AND p.revoked_at IS NULL AND p.expires_at>'${queuedAt}' AND a.status='approved'
+  )` : "";
+  const recipients = `SELECT n.email FROM newsletter_subscriptions n WHERE n.status='subscribed' ${studentFilter}`;
   let results;
   try {
     results = await env.DB.batch([
       env.DB.prepare(`UPDATE newsletter_campaigns SET
-        status=CASE WHEN EXISTS (SELECT 1 FROM newsletter_subscriptions WHERE status='subscribed') THEN 'queued' ELSE 'sent' END,
-        recipient_count=(SELECT COUNT(*) FROM newsletter_subscriptions WHERE status='subscribed'),
-        queued_at=?, completed_at=CASE WHEN EXISTS (SELECT 1 FROM newsletter_subscriptions WHERE status='subscribed') THEN NULL ELSE ? END
+        status=CASE WHEN EXISTS (${recipients}) THEN 'queued' ELSE 'sent' END,
+        recipient_count=(SELECT COUNT(*) FROM (${recipients})),
+        queued_at=?, completed_at=CASE WHEN EXISTS (${recipients}) THEN NULL ELSE ? END
         WHERE id=? AND status='draft'`).bind(queuedAt, queuedAt, campaignId),
       env.DB.prepare(`INSERT INTO newsletter_deliveries (campaign_id, email, status, next_attempt_at)
-        SELECT ?, email, 'pending', ? FROM newsletter_subscriptions
-        WHERE status='subscribed' AND EXISTS (SELECT 1 FROM newsletter_campaigns WHERE id=? AND status='queued')`)
+        SELECT ?, n.email, 'pending', ? FROM newsletter_subscriptions n
+        WHERE n.status='subscribed' ${studentFilter} AND EXISTS (SELECT 1 FROM newsletter_campaigns WHERE id=? AND status='queued')`)
         .bind(campaignId, queuedAt, campaignId),
     ]);
   } catch {
@@ -1196,7 +1208,7 @@ async function processNewsletterDeliveries(env) {
   const nowText = now.toISOString();
   const staleBefore = new Date(now.getTime() - 10 * 60 * 1000).toISOString();
   const pending = await env.DB.prepare(`
-    SELECT d.campaign_id, d.email, d.attempts, c.subject, c.body_text
+    SELECT d.campaign_id, d.email, d.attempts, c.subject, c.body_text, c.audience
     FROM newsletter_deliveries d JOIN newsletter_campaigns c ON c.id=d.campaign_id
     WHERE c.status='queued' AND d.attempts < 5 AND (
       (d.status='pending' AND d.next_attempt_at <= ?) OR
@@ -1215,6 +1227,18 @@ async function processNewsletterDeliveries(env) {
         await env.DB.prepare(`UPDATE newsletter_deliveries SET status='suppressed', claimed_at=NULL WHERE campaign_id=? AND email=?`)
           .bind(delivery.campaign_id, delivery.email).run();
         continue;
+      }
+      if (delivery.audience === "students") {
+        const eligible = await env.DB.prepare(`SELECT 1 AS eligible FROM newsletter_subscriptions n WHERE n.email=? AND EXISTS (
+          SELECT 1 FROM users u JOIN student_passes p ON p.user_id=u.id JOIN student_applications a ON a.id=p.application_id AND a.user_id=u.id
+          WHERE u.id=n.user_id AND u.email=n.email AND u.account_status='active' AND u.email_verified_at IS NOT NULL
+            AND p.status='active' AND p.revoked_at IS NULL AND p.expires_at>? AND a.status='approved'
+        )`).bind(delivery.email, nowIso()).first();
+        if (!eligible) {
+          await env.DB.prepare(`UPDATE newsletter_deliveries SET status='suppressed', claimed_at=NULL WHERE campaign_id=? AND email=?`)
+            .bind(delivery.campaign_id, delivery.email).run();
+          continue;
+        }
       }
       const token = await issueEmailToken(env, {
         email: delivery.email,
