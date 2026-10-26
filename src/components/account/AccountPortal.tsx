@@ -182,6 +182,14 @@ export function AccountPortal({ locale }: { locale: string }) {
   const refresh = useCallback(async () => {
     try {
       const response = await fetch("/api/members/me", { credentials: "same-origin", cache: "no-store" });
+      // An unauthenticated visitor is a normal account state, not an offline
+      // API. Keep the register/login form available when the Worker returns
+      // its expected 401 with { user: null }.
+      if (response.status === 401) {
+        setData({ user: null });
+        setApiAvailable(true);
+        return;
+      }
       if (!response.ok) throw new Error("members-unavailable");
       const body = await response.json() as MemberData;
       setData(body);
@@ -197,6 +205,7 @@ export function AccountPortal({ locale }: { locale: string }) {
     let active = true;
     fetch("/api/members/me", { credentials: "same-origin", cache: "no-store" })
       .then(async (response) => {
+        if (response.status === 401) return { user: null } as MemberData;
         if (!response.ok) throw new Error("members-unavailable");
         return await response.json() as MemberData;
       })
