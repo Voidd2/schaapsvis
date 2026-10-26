@@ -13,8 +13,8 @@
     "SMTP_USERNAME": "schaapsv@schaapsvishandel.nl",
   },
   // D1 en private R2 staan per omgeving in de EU. Mail gebruikt de bestaande
-  // DirectAdmin-mailbox; SMTP_PASSWORD en overige auth-secrets moeten nog via
-  // Cloudflare Secrets worden ingesteld voordat mail kan worden verstuurd.
+  // DirectAdmin-mailbox. SMTP_PASSWORD en de auth-secrets staan als versleutelde
+  // Cloudflare secrets; stel ze lokaal alleen met aparte testwaarden in.
   "env": {
     "preview": {
       "name": "schaapsvis-members-preview",
@@ -42,7 +42,7 @@
         { "pattern": "schaapsvishandel.nl/api/members/*", "zone_name": "schaapsvishandel.nl" }
       ],
       "vars": {
-        "MEMBERS_ENABLED": "off",
+        "MEMBERS_ENABLED": "on",
         "SITE_ORIGIN": "https://schaapsvishandel.nl",
         "MAIL_FROM": "schaapsv@schaapsvishandel.nl",
         "SMTP_HOST": "mail.schaapsvishandel.nl",

@@ -4,34 +4,25 @@ Deze Worker is de serverkant voor algemene accounts, e-mailbevestiging, wachtwoo
 
 ## Huidige status
 
-- Gecontroleerd op 26 oktober 2026 in het account **Schaapsvis**: de hoofdsite-worker `schaapsvis` is actief; de aparte account-/studenten-preview-worker `schaapsvis-members-preview` bestaat en is gedeployed. De productie-accountworker `schaapsvis-members` is nog niet gedeployed. Registratie en studentaanvragen zijn dus niet live.
-- De preview-worker gebruikt D1 `schaapsvis-members-preview` en de privé-EU-R2-bucket `schaapsvis-student-proofs-preview`. De elf lokale migraties zijn eerder op deze previewdatabase toegepast; productie-D1 is ongemoeid gelaten. De previewbucket is leeg en niet publiek. Controleer vóór productie de productiemigraties apart.
-- De preview-worker heeft `MEMBERS_ENABLED=off`; `/api/members/health` antwoordt daarom `disabled`. Dit is bewust fail-closed. De members-API is niet gekoppeld aan de hoofdsite en moet pas na een werkende previewmail- en browserflow worden geactiveerd.
-- In Cloudflare staan voor de geïsoleerde preview-worker `schaapsvis-members-preview` de benodigde afzender- en SMTP-variabelen. `SMTP_PASSWORD` is als versleuteld geheim ingesteld op de Production-omgeving van deze preview-worker en in Previews Base; de waarde staat niet in de repository. `MEMBERS_ENABLED=off` blijft staan. De STARTTLS/PLAIN-protocolintegratietest en leden-worker-tests slagen lokaal; er is nog geen echte Knoth-mail verzonden.
-- De previewroute is geconfigureerd voor `preview.schaapsvishandel.nl/api/members/*`, maar de hostname heeft geen werkende DNS-resolutie; de `workers.dev`-healthroute is wel bereikbaar. De previewwebsite en de members-API zijn daardoor nog niet end-to-end in één browserflow getest.
-- De leden-worker bevat nog geen vastgestelde `ADMIN_EMAILS`/`ADMIN_IPS`-instellingen. Beheerdertoegang tot aanvragen/bewijzen is dus niet operationeel. Stel uitsluitend geverifieerde beheerders en het gewenste IP in nadat preview-login en mail zijn getest.
-- De Cloudflare API-koppeling in deze sessie ziet alleen `Admin@haascom.com’s Account`; wijzig accountresources niet via die API-koppeling. Gebruik het geopende dashboard met account **Schaapsvis**.
-- De privé-R2-buckets `schaapsvis-student-proofs` en `schaapsvis-student-proofs-preview` zijn aangemaakt in EU-jurisdictie. Cloudflare Email Sending aan willekeurige ontvangers vereist Workers Paid; dit abonnement is niet geactiveerd omdat Cloudflare geen harde kostenstop biedt. Er is gekozen voor Knoth SMTP; er is geen nieuwe betaalde dienst geactiveerd.
-- De website staat achter het toegangsslot totdat publicatie bewust wordt goedgekeurd. Verander `MEMBERS_ENABLED` of het site-slot niet op productie als onderdeel van previewtests.
-- De nieuwsbrief-cron controleert dezelfde schakel en blijft volledig inactief zolang `MEMBERS_ENABLED` niet `on` is; ook een eventueel achtergebleven campagne wordt dan niet verwerkt.
-- De bewijsbucket moet privé blijven. Koppel geen publieke custom domain aan `STUDENT_PROOFS`.
-- De Worker begrenst bewijsopslag per omgeving tot 4 GB, 400.000 uploads en 4 miljoen bewijslezingen per maand (plus daglimieten van 10.000 uploads en 50.000 lezingen). Preview en productie blijven samen onder het standaardvrije R2-volume zolang dit de enige R2-verbruiker op het account is. Dit is geen accountbrede factuurstop: ander R2-gebruik kan alsnog kosten veroorzaken; Cloudflare biedt hier geen harde limiet van €10 per maand.
-- De bewijsbucket hoort vanwege studentgegevens in de EU-jurisdictie. De binding vraagt daarom expliciet `jurisdiction: "eu"`; controleer deze onveranderlijke bucketinstelling bij het aanmaken. Een EU-locatiehint is niet gelijk aan de EU-jurisdictiegarantie ([Cloudflare R2 data location](https://developers.cloudflare.com/r2/reference/data-location/)).
-- Login-, wachtwoordreset-, bevestigingsmail- en nieuwsbriefverzoeken hebben afzonderlijke limieten per IP-adres en per e-mailadres. Accountgerichte tellers zijn HMAC-gehasht met `AUTH_PEPPER`, zodat e-mailadressen niet als rate-limit-sleutel in D1 worden opgeslagen.
-- Er is geen R2 lifecycle-/retentieregel ingesteld. Na een beoordeling probeert de Worker het bewijs direct te verwijderen; bij een fout probeert de cron dit opnieuw (maximaal 20 beoordeelde bewijzen per run) en kan een beheerder ook handmatig opnieuw proberen. Voor uploads wordt eerst een D1-opruimrij aangemaakt. Als de aanvraagtransactie én directe R2-verwijdering falen, probeert de cron het na een uur opnieuw (maximaal 20 weesbestanden per run); gekoppelde bewijzen worden nooit door deze weesopruiming verwijderd. Kies geen automatische bewaartermijn voor beoordeelde documenten zonder privacybesluit.
-- De privé-R2-buckets `schaapsvis-student-proofs` en `schaapsvis-student-proofs-preview` zijn aangemaakt in EU-jurisdictie. Cloudflare Email Sending aan willekeurige ontvangers vereist Workers Paid; dit abonnement is niet geactiveerd omdat de rekeninghouder een maximum van €5 per maand heeft gesteld en Cloudflare geen harde kostenstop biedt. De leden-Worker gebruikt daarom Knoth SMTP zodra de geverifieerde serverinstellingen en mailboxsecrets zijn ingesteld. Productie `MEMBERS_ENABLED` blijft uit; er worden geen echte studentbewijzen of klantmails verwerkt.
-- Sessiecookies zijn host-only; preview en productie delen geen login-cookie.
-- De leden-API-route hoort op `schaapsvishandel.nl/api/members/*` en de preview-route op `preview.schaapsvishandel.nl/api/members/*`; publiceer de route samen met de aparte account-Worker nadat bindings, secrets en preview zijn gecontroleerd.
+- Gecontroleerd op 26 oktober 2026 in account **Schaapsvis**: `schaapsvis-members` is gedeployed op de productieroute `schaapsvishandel.nl/api/members/*`. De website zelf blijft een besloten preview; bezoekers zonder geldige toegang zien de binnenkort-pagina.
+- Productie `MEMBERS_ENABLED=on` is bedoeld voor deze afgeschermde preview. De Worker eist daarnaast de site-unlock-cookie of het door Cloudflare vastgestelde IP op de allowlist; bezoekers kunnen niet alleen door de API-URL te kennen registreren. Zet de toegangspoort niet open als onderdeel van deze preview.
+- De productie-Worker heeft D1 `schaapsvis-members` en de private EU-R2-bucket `schaapsvis-student-proofs`; alle 11 migraties zijn toegepast. De database bevatte bij de laatste controle geen accounts of studentaanvragen. De R2-bucket blijft privé.
+- Cloudflare bevat de mailhost `mail.schaapsvishandel.nl`, poort 587, gebruikersnaam en versleuteld `SMTP_PASSWORD`; ook auth-, ondertekenings- en site-access-secrets zijn ingesteld. De configuratie is aanwezig, maar een echte Knoth-mailbezorging is nog niet end-to-end geverifieerd. De lokale STARTTLS/PLAIN-protocoltest is geslaagd; dit bewijst geen aflevering door Knoth.
+- Beheerdermail en IP-allowlist zijn ingesteld voor `schaapsv@schaapsvishandel.nl` en de door de eigenaar opgegeven IP-adressen. De beheer-API blijft bovendien achter de site-access-gate.
+- De aparte Worker `schaapsvis-members-preview` met eigen D1/R2 bestaat nog, maar `preview.schaapsvishandel.nl` heeft geen DNS-record en die Worker staat uit. De actieve besloten preview gebruikt daarom de hoofdsitehost, zoals de eigenaar heeft toegestaan.
+- De Worker begrenst bewijsopslag per omgeving tot 4 GB, 400.000 uploads en 4 miljoen bewijslezingen per maand (plus daglimieten van 10.000 uploads en 50.000 lezingen). Dit zijn applicatielimieten, geen harde accountbrede factuurstop. Cloudflare biedt hier geen harde limiet van €10 per maand. De Worker Paid-upgrade is niet geactiveerd.
+- Studentbewijs wordt na beoordeling verwijderd; bij een fout probeert de cron dit opnieuw. Er is geen automatische bewaartermijn voor aanvraagmetadata vastgesteld. Laat echte openbare registratie daarom dicht totdat de privacyinformatie, bewaartermijnen en daadwerkelijke e-mailaflevering zijn bevestigd.
+- Login-, wachtwoordreset-, bevestigingsmail- en nieuwsbriefverzoeken hebben afzonderlijke limieten per IP-adres en per e-mailadres. Accountgerichte tellers zijn HMAC-gehasht met `AUTH_PEPPER`.
+- De nieuwsbrief-cron blijft alleen actief zolang `MEMBERS_ENABLED=on`; alleen dubbelbevestigde aanmeldingen mogen campagnes ontvangen. De toestemming voor marketing blijft vrijwillig en los van studentenkorting.
+- Sessiecookies zijn host-only; productie en de losse preview-Worker delen geen accountsessie.
 
-## Nog uit te voeren Cloudflare-stappen
+## Resterende controles vóór publieke registratie
 
-1. `SMTP_PASSWORD` is voor de geïsoleerde Worker `schaapsvis-members-preview` als versleuteld Cloudflare-secret ingesteld (Production van die previewservice en Previews Base). Controleer alleen de secret-aanwezigheid, nooit de waarde. Stuur geen testmail zonder een expliciet opgegeven testontvanger; houd `MEMBERS_ENABLED=off` totdat de previewflow gecontroleerd wordt.
-2. Herstel een werkende previewhost vóór de end-to-endtest: controleer DNS/proxy en de previewsite-serving-worker voor `preview.schaapsvishandel.nl`. Behoud de afgeronde nameservermigratie; wijzig geen nameservers.
-3. Test na de DNS- en secretstap een bericht naar een eigen mailbox en daarna registratie, persoonlijke- en schoolmailverificatie, login/logout, reset en nieuwsbrief-double-opt-in. Houd `MEMBERS_ENABLED=off` tot deze previewtests succesvol zijn; zet het daarna alleen tijdelijk aan op de geïsoleerde preview, voer de tests uit en zet het weer uit.
-4. Stel `ADMIN_EMAILS` en `ADMIN_IPS` op de previewworker in zodra de beheerderse-mail is bevestigd. De Worker gebruikt Cloudflare's `CF-Connecting-IP`; door browsers aangeleverde IP-headers worden niet vertrouwd. Een dynamisch IP moet worden bijgewerkt wanneer het verandert.
-5. Controleer daarna de productieworkerconfiguratie, leg verschillende productie-authsecrets vast, pas de elf migraties gecontroleerd toe op de productiedatabase en koppel pas dan de productieroute. Houd productie `MEMBERS_ENABLED=off` totdat openbare lancering expliciet is goedgekeurd.
-6. `ANALYTICS_ENABLED` blijft uit totdat de privacytekst en toestemming definitief zijn goedgekeurd. De statistieken zijn geaggregeerd en bevatten geen individuele funnels of exacte uitvalmomenten.
-7. Houd de bewijsbuckets privé; activeer geen `r2.dev`-URL of custom domain. De R2-limieten in de Worker zijn geen harde accountbrede maandelijkse factuurstop. Zie [Cloudflare R2-jurisdicties](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions) en [Wrangler R2-commando's](https://developers.cloudflare.com/r2/reference/data-location/).
+1. Houd de website en account-API achter de bestaande site-access-gate. De leden-API staat aan voor de besloten preview; bezoekers zonder site-unlock-cookie of het vertrouwde eigenaar-IP worden door de Worker geweigerd.
+2. Verifieer echte Knoth-mailaflevering met een door de eigenaar opgegeven testontvanger. De lokale SMTP-protocoltest is geen bewijs van aflevering. Deel of log geen mailboxwachtwoord, verificatiecode of echte gebruikersgegevens.
+3. Controleer privacyverklaring, verwerkingsverantwoordelijke, grondslagen, verwerkers, bewaartermijnen en verwijderprocedure vóór publieke registratie. Gebruik tijdens preview geen echt inschrijvingsbewijs.
+4. Houd `ANALYTICS_ENABLED` uit totdat privacytekst en toestemming definitief zijn goedgekeurd. Statistieken zijn geaggregeerd en bevatten geen individuele funnels of exacte uitvalmomenten.
+5. Houd bewijsbuckets privé; activeer geen `r2.dev`-URL of custom domain. R2-limieten in de Worker zijn geen harde accountbrede maandelijkse factuurstop. Zie [Cloudflare R2-jurisdicties](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions) en [Wrangler R2-commando's](https://developers.cloudflare.com/r2/reference/data-location/).
 
 ## Lokale checks
 
@@ -43,7 +34,7 @@ npx wrangler dev --config workers/members/wrangler.jsonc --env preview --local -
 
 De `--local`-vlag is essentieel: de previewconfiguratie bevat een remote Email Service-binding. Met `--local` blijven D1 en R2 lokaal en wordt e-mail alleen gesimuleerd; zonder die vlag kan e-mail echt worden verstuurd. De twee commando's gebruiken dezelfde lokale opslagmap, los van de Cloudflare-databases.
 
-Maak voor handmatige lokale tests een niet-gecommitte `workers/members/.dev.vars.preview` met `MEMBERS_ENABLED="on"`, `SITE_ORIGIN="http://localhost:8787"`, `MAIL_FROM`, `ADMIN_EMAILS`, `AUTH_PEPPER` en `PASS_SIGNING_KEY`. Gebruik alleen aparte testwaarden, nooit productiegeheimen. Laat `MEMBERS_ENABLED` in preview en productie uit totdat de site bewust publiek mag zijn. Gebruik geen echte studentbewijzen of persoonsgegevens in fixtures.
+Maak voor handmatige lokale tests een niet-gecommitte `workers/members/.dev.vars.preview` met `MEMBERS_ENABLED="on"`, `SITE_ORIGIN="http://localhost:8787"`, `MAIL_FROM`, `ADMIN_EMAILS`, `AUTH_PEPPER` en `PASS_SIGNING_KEY`. Gebruik alleen aparte testwaarden, nooit productiegeheimen. De productiewaarde `MEMBERS_ENABLED="on"` hoort bij de password-gated preview; open de websitepoort niet zonder expliciete go-live-beslissing. Gebruik geen echte studentbewijzen of persoonsgegevens in fixtures.
 
 De integratietest met `npm run check:members` gebruikt eigen tijdelijke database- en e-mailmocks; daarvoor zijn geen Cloudflare-account, remote bindings of `.dev.vars` nodig.
 
@@ -74,6 +65,7 @@ Leidschendam, elders in regio 071 en elders. Leeftijd/geboortedatum wordt niet
 verzameld.
 
 Klaviyo is nog niet gekoppeld. Bij een latere koppeling blijven bevestigde
-toestemming en afmelding in deze Worker leidend. Er is nog niets gedeployed; de
-accountswitch blijft uit.
+toestemming en afmelding in deze Worker leidend. De site-, account- en
+studenten-Workers zijn gedeployed; klantaccounts voor bezorging en spaarpunten
+blijven toekomstige ontwikkeling.
 
