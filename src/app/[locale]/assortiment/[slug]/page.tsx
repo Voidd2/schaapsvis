@@ -21,12 +21,27 @@ import { paginaMetadata, kruimelSchema } from "@/lib/seo";
 
 type Props = {params: Promise<{locale: string; slug: string}>};
 export function generateStaticParams() { return products.map(p => ({slug: p.slug})); }
+function metaSnippet(value: string, max = 160) {
+  const text = value.replace(/\s+/g, " ").trim();
+  if (text.length <= max) return text;
+  const sentenceEnd = text.lastIndexOf(". ", max - 1);
+  if (sentenceEnd >= Math.floor(max * 0.65)) return text.slice(0, sentenceEnd + 1);
+  const wordEnd = text.lastIndexOf(" ", max - 2);
+  return `${text.slice(0, Math.max(1, wordEnd)).replace(/[,:;—–-]+$/, "")}…`;
+}
 export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {locale, slug} = await params;
   const product = localizedProduct(slug, locale);
   if (!product) return {};
-  const c = productCopy(locale);
-  return paginaMetadata({locale, pad: `/assortiment/${slug}`, title: `${product.naam} | ${c.range} Leiden`, description: `${product.naam}: ${productAvailability(product,locale).label}. ${product.desc}`.slice(0, 160), image: productPhoto(product)?.src || "/og-image.png"});
+  const availability = productAvailability(product, locale);
+  const storeName = locale === "de" ? "Schaap’s Fischgeschäft" : locale === "en" ? "Schaap’s Fishmonger" : "Schaap’s Vishandel";
+  return paginaMetadata({
+    locale,
+    pad: `/assortiment/${slug}`,
+    title: `${product.naam} in Leiden | ${storeName}`,
+    description: metaSnippet(`${product.naam}: ${availability.label}. ${product.desc}`),
+    image: productPhoto(product)?.src || "/og-image.png",
+  });
 }
 export default async function ProductDetailPage({params}: Props) {
   const {locale, slug} = await params;
@@ -93,5 +108,6 @@ export default async function ProductDetailPage({params}: Props) {
     <PaginaSlot titel={`${c.looking} ${lang === "de" ? product.naam : product.naam.toLowerCase()}?`} tekst={c.orderNote} knoppen={[action,{label:c.hours,href:`/${lang}/bezoek-ons`,soort:"lijn"},{label:BEDRIJF.telefoon.weergave,href:`tel:${BEDRIJF.telefoon.e164}`,extern:true,soort:"lijn"}]} />
   </>;
 }
+
 
 

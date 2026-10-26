@@ -89,6 +89,8 @@ export function Footer() {
             <img
               src={BEELD.logoBadge.bestand}
               alt={BEDRIJF.naam}
+              width={64}
+              height={64}
               className="h-16 w-16 object-contain mb-4"
             />
           )}
@@ -190,4 +192,5 @@ export function Footer() {
     </footer>
   );
 }
+
 

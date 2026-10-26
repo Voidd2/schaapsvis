@@ -21,3 +21,4 @@ assert.equal(buildTarget("true"), "Cloudflare Worker (Vite)");
 assert.equal(buildTarget("0"), "Vercel (Next.js)");
 
 console.log("Build target selection passed for Vercel and Cloudflare Workers Builds.");
+

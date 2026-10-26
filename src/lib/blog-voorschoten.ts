@@ -89,34 +89,34 @@ export const VOORSCHOTEN_ARTIKELEN: BlogPost[] = [
     title: "Een visschaal voor uw borrel in Voorschoten kiezen",
     excerpt: "Een borrel of verjaardag in Voorschoten? Kies een visschaal op basis van uw gasten, budget en voorkeuren. Lees wat u vooraf met ons kunt afstemmen.",
     datum: "2026-09-28", datumLabel: "28 september 2026", leestijd: "4 min", categorie: "Visweetjes", regio: "Voorschoten",
-    fotoUrl: "/images/editorial/familieschaal-voorbeeld.webp", fotoAlt: "Voorbeeld van een ruime visschaal met gerookte vis, garnalen en salades",
+    fotoUrl: "/images/editorial/familieschaal-voorbeeld.webp", fotoAlt: "Visschaal met gerookte vis, garnalen en salades",
     seoKeywords: "visschaal Voorschoten, borrelplank vis Voorschoten, visschotel verjaardag",
     secties: [
       { kop: "Begin bij de gelegenheid, niet alleen bij de foto", alineas: [
         "Een visschaal voor een borrel in Voorschoten kiezen begint bij uw plannen. Gaat het om hapjes naast brood, kaas en andere gerechten, of wilt u dat de vis het belangrijkste deel van de maaltijd is? Met alleen het aantal gasten is de juiste hoeveelheid nog niet duidelijk. Vertel daarom ook hoe u de schaal gaat serveren.",
-        "Bij Schaap’s Vishandel kunt u een borrelschaal, familieschaal of feestschaal als vertrekpunt kiezen. De foto’s laten serveervoorbeelden zien, niet exact wat u ontvangt. De werkelijke schaal kan een stuk groter zijn en krijgt een inhoud die past bij uw budget en wensen. Bespreek bijzondere wensen vooraf; een foto is geen voorraadgarantie."
+        "Bij Schaap’s Vishandel denken we graag met u mee over een visschaal die past bij uw smaak, gezelschap en gelegenheid. Gemiddeld rekenen we circa € 17,50 per persoon. De afbeeldingen tonen verschillende visschalen; via WhatsApp bespreekt u met ons wat u lekker vindt en hoe we de schaal kunnen samenstellen."
       ] },
       { kop: "Hoeveel gasten eten er mee?", alineas: [
-        "Onze borrelschaal is bedoeld voor ongeveer vier tot zes personen, de familieschaal voor acht tot tien en de feestschaal voor twaalf tot zestien. Gebruik dat als eerste indicatie. Een lange borrel met alleen een paar hapjes vraagt om een andere hoeveelheid dan een tafel waaraan de schaal een hoofdgerecht vervangt.",
+        "Hoeveel vis u nodig heeft, hangt af van het aantal gasten en van wat u verder serveert. Vertel ons of de schaal bedoeld is voor een borrel, lunch of maaltijd; dan denken we mee over een passende hoeveelheid.",
         "Laat ons weten of er kinderen mee-eten, welke andere gerechten u aanbiedt en of sommige gasten geen vis of schaaldieren willen. We kunnen dan samen kijken naar een passende opzet. Bestel niet uitsluitend op basis van de naam van de schaal: de context van uw menu is minstens zo belangrijk."
       ] },
       { kop: "Gerookte vis, garnalen of een combinatie?", alineas: [
-        "Voor een gemengde borrelplank kunt u denken aan gerookte zalm, makreel, haringhapjes, garnalen en salades. In de grotere voorbeelden ziet u ook paling, gamba’s of oesters. De beschikbare vis en uw voorkeuren bepalen wat passend is. Vraag naar de actuele samenstelling als een specifiek onderdeel voor u belangrijk is.",
+        "Voor een gemengde visschaal bespreken we samen welke vis, garnalen en salades u lekker vindt. Heeft u een voorkeur voor bepaalde soorten of wilt u iets voor een bijzondere gelegenheid? Vertel het ons via WhatsApp, dan kijken we met u mee naar een passende samenstelling.",
         "Een gezelschap dat vooral gerookte vis lekker vindt, hoeft niet dezelfde schaal te krijgen als een groep die juist om garnalen vraagt. De mogelijkheid om extra’s te kiezen helpt daarbij. Geef ook door wanneer u bepaalde producten apart wilt laten serveren, zodat we kunnen bespreken of en hoe dat uitvoerbaar is."
       ] },
       { kop: "Budget en prijs vooraf afstemmen", alineas: [
-        "De basisprijs van een visschaal is € 17,50 per persoon. Extra’s of duurdere vissoorten kunnen de prijs verhogen. Bespreek uw wensen vooraf via WhatsApp; we bevestigen de definitieve prijs voordat we beginnen.",
+        "Gemiddeld rekenen we circa € 17,50 per persoon voor een visschaal. Extra’s of duurdere vissoorten kunnen de prijs verhogen. Neem via WhatsApp contact op; we denken graag met u mee over uw wensen en gelegenheid.",
         "Heeft u een budget voor de hele borrel? Vertel ons dat bedrag, het aantal gasten en uw favoriete producten. Dat geeft meer houvast dan alleen vragen om een grote schaal. Visschalen stelt u met ons samen via WhatsApp. Voor losse vis of andere verzoeken bespreken we de mogelijkheden via WhatsApp."
       ] },
       { kop: "Ophalen voor uw borrel in Voorschoten", alineas: [
-        "Onze viskraam staat vrijdag van 08:00 tot 17:30 op de parkeerplaats bij Hoogvliet in Voorschoten. Wilt u daar een schaal ophalen, spreek dat eerst met ons af. Een online aanvraag betekent niet automatisch dat een schaal op elke locatie of op ieder tijdstip klaarstaat. Datum, ophaallocatie en beschikbaarheid moeten samen worden bevestigd.",
-        "Plan een paar dagen vooruit en neem rond drukke feestdagen eerder contact op. Vermeld bij uw aanvraag de gelegenheid, het gewenste moment, het aantal personen, uw budget en eventuele allergieën. Ga niet uit van een allergeenvrije bereiding: vertel ons wat er nodig is, zodat we de mogelijkheden en beperkingen kunnen bespreken."
+        "Wilt u een visschaal voor een borrel, verjaardag of andere gelegenheid? Neem via WhatsApp contact op om uw voorkeuren en de samenstelling te bespreken. We denken met u mee en stemmen ook eventuele extra’s en de prijs af.",
+        "Vertel ons voor welke gelegenheid de schaal is en hoeveel mensen ervan eten. Heeft u dieetwensen, geef die dan meteen door; we bespreken met u hoe we daar rekening mee kunnen houden."
       ] }
     ],
     vragen: [
-      { v: "Kan ik een visschaal voor Voorschoten online kiezen?", a: "Visschalen stelt u met ons samen via WhatsApp. Gemiddeld rekenen we € 17,50 per persoon; we denken graag mee over uw wensen en gelegenheid." },
-      { v: "Is mijn visschaal precies zoals op de foto?", a: "Nee. De foto is een voorbeeld. Grootte en inhoud worden afgestemd op uw gezelschap, budget en wensen; uw schaal kan groter zijn en keuzes kunnen de prijs veranderen." },
-      { v: "Kan ik een visschaal vrijdag bij Hoogvliet ophalen?", a: "Vraag dit vooraf aan en laat het door ons bevestigen. Onze kraam staat vrijdag 08:00–17:30 bij Hoogvliet in Voorschoten; ophalen van een specifieke schaal gebeurt op afspraak." }
+      { v: "Wat kost een visschaal?", a: "Gemiddeld rekenen we circa € 17,50 per persoon. Extra’s of duurdere vissoorten kunnen de prijs verhogen; neem via WhatsApp contact op, dan denken we mee over uw wensen en gelegenheid." },
+      { v: "Kan ik zelf meedenken over de samenstelling?", a: "Ja, we denken graag met u mee. Vertel via WhatsApp wat u lekker vindt en voor welke gelegenheid de schaal is." },
+      { v: "Hoe vraag ik een visschaal aan?", a: "Stuur ons een WhatsApp-bericht met uw voorkeuren en voor welke gelegenheid de schaal is. We bespreken samen de mogelijkheden." }
     ],
     gerelateerdeLinks: [
       { label: "Visschalen samenstellen en aanvragen", href: "/visschalen" },

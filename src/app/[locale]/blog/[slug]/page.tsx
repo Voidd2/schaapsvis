@@ -17,7 +17,7 @@ type Props={params:Promise<{slug:string;locale:string}>};
 export function generateStaticParams(){return blogPosts.map(p=>({slug:p.slug}));}
 export async function generateMetadata({params}:Props):Promise<Metadata>{
  const {slug,locale}=await params,raw=getBlogPost(slug);if(!raw)return {};
- const p=localizeBlog(raw,locale),meta=paginaMetadata({locale,pad:`/blog/${slug}`,title:p.title,description:p.excerpt.slice(0,160),image:p.fotoUrl});
+ const p=localizeBlog(raw,locale),title=p.title.length<36?`${p.title} | Schaap’s Vishandel Leiden`:p.title,meta=paginaMetadata({locale,pad:`/blog/${slug}`,title,description:p.excerpt.slice(0,160),image:p.fotoUrl});
  return {...meta,keywords:p.seoKeywords,openGraph:{...meta.openGraph,type:"article"}};
 }
 export default async function BlogDetail({params}:Props){
@@ -41,3 +41,4 @@ export default async function BlogDetail({params}:Props){
  <PaginaSlot titel={stall?c.slotLocal:c.slot} tekst={c.policy} knoppen={[{label:contact.label,href:contact.href,extern:true},...(stall?[{label:c.route,href:stall.mapsUrl,extern:true,soort:"lijn" as const}]:[]),{label:c.platter,href:`/${locale}/visschalen`,soort:"lijn"},{label:c.hours,href:`/${locale}/bezoek-ons`,soort:"lijn"}]} />
  </>;
 }
+

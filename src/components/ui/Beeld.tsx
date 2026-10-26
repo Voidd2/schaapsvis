@@ -59,6 +59,8 @@ export function Beeld({
           src={plek.bestand}
           alt={alt}
           className={`w-full h-full ${vullend ? "object-cover" : "object-contain p-5"}`}
+          width={plekkeMaten[verhouding ?? plek.verhouding][0]}
+          height={plekkeMaten[verhouding ?? plek.verhouding][1]}
           loading={prioriteit ? "eager" : "lazy"}
           fetchPriority={prioriteit ? "high" : undefined}
         />
@@ -71,6 +73,13 @@ export function Beeld({
     </div>
   );
 }
+
+const plekkeMaten: Record<Verhouding, readonly [number, number]> = {
+  vierkant: [1200, 1200],
+  liggend: [1200, 900],
+  portret: [900, 1200],
+  breed: [1600, 600],
+};
 
 const ALT:Record<BeeldNaam,readonly [string,string]> = {
 logoBadge:["Schaap’s Vishandel logo, Leiden, since 1938","Logo von Schaap’s Vishandel in Leiden, seit 1938"],
@@ -92,3 +101,4 @@ schaalFamilie:["Example family platter with smoked salmon, eel, shrimp and salad
 schaalFeest:["Example celebration platter with smoked fish, shrimp, prawns and oysters","Beispiel einer Festplatte mit Räucherfisch, Garnelen und Austern"],
 varlaksFilet:["VÅRLAKS salmon fillet at Schaap’s Vishandel, Leiden","VÅRLAKS-Lachsfilet bei Schaap’s Vishandel in Leiden"]
 };
+

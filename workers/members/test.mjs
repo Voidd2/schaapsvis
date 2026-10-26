@@ -13,6 +13,7 @@ const expandedRegionsMigration = await readFile(new URL("../../migrations/0007_n
 const newsletterDraftsMigration = await readFile(new URL("../../migrations/0008_newsletter_signup_drafts.sql", import.meta.url), "utf8");
 const analyticsMigration = await readFile(new URL("../../migrations/0009_site_analytics.sql", import.meta.url), "utf8");
 const customerAdminMigration = await readFile(new URL("../../migrations/0010_admin_customer_management.sql", import.meta.url), "utf8");
+const proofBudgetMigration = await readFile(new URL("../../migrations/0011_r2_proof_usage_budget.sql", import.meta.url), "utf8");
 const upgradeDb = new DatabaseSync(":memory:");
 upgradeDb.exec(schema);
 upgradeDb.exec(`
@@ -32,6 +33,7 @@ upgradeDb.exec(expandedRegionsMigration);
 upgradeDb.exec(newsletterDraftsMigration);
 upgradeDb.exec(analyticsMigration);
 upgradeDb.exec(customerAdminMigration);
+upgradeDb.exec(proofBudgetMigration);
 assert.equal(upgradeDb.prepare("SELECT application_id FROM student_passes WHERE id='legacy-pass'").get().application_id, "legacy-application", "migration associates existing student passes with their approved application");
 upgradeDb.close();
 const sqlite = new DatabaseSync(":memory:");
@@ -45,6 +47,7 @@ sqlite.exec(expandedRegionsMigration);
 sqlite.exec(newsletterDraftsMigration);
 sqlite.exec(analyticsMigration);
 sqlite.exec(customerAdminMigration);
+sqlite.exec(proofBudgetMigration);
 let simulateApplicationCommitFailure = false;
 let decisionReadBarrier = null;
 
@@ -96,7 +99,7 @@ const env = {
   MEMBERS_ENABLED: "off",
   AUTH_PEPPER: "test-only-pepper-never-use-in-production",
   PASS_SIGNING_KEY: "test-only-signing-key-never-use-in-production",
-  SITE_ORIGIN: "https://www.schaapsvishandel.nl",
+  SITE_ORIGIN: "https://schaapsvishandel.nl",
   MAIL_FROM: "noreply@schaapsvishandel.nl",
   ADMIN_EMAILS: "student@example.test",
   ADMIN_IPS: "203.0.113.10,2001:db8::10",
@@ -157,7 +160,7 @@ env.ANALYTICS_ENABLED = "on";
 assert.equal((await call("/api/members/analytics", { method: "POST", body: { consent: false, event: "page_view", path: "/nl" } })).status, 400, "analytics rejects events without affirmative consent");
 assert.equal((await call("/api/members/analytics", { method: "POST", body: { consent: true, event: "page_view", path: "/nl/account" } })).status, 400, "analytics excludes account paths");
 assert.equal((await call("/api/members/analytics", { method: "POST", body: { consent: true, event: "page_view", path: "/nl/assortiment" } })).status, 202, "analytics accepts a consented public page view");
-assert.equal((await call("/api/members/analytics", { method: "POST", body: { consent: true, event: "link_click", path: "/nl/varlaks", target: "https://www.schaapsvishandel.nl/nl/assortiment/varlaks-zalm?email=private@example.test" } })).status, 202, "analytics stores a sanitized link target");
+assert.equal((await call("/api/members/analytics", { method: "POST", body: { consent: true, event: "link_click", path: "/nl/varlaks", target: "https://schaapsvishandel.nl/nl/assortiment/varlaks-zalm?email=private@example.test" } })).status, 202, "analytics stores a sanitized link target");
 assert.equal(sqlite.prepare("SELECT count FROM site_analytics_daily WHERE event='link_click'").get().count, 1);
 assert.equal(sqlite.prepare("SELECT target FROM site_analytics_daily WHERE event='link_click'").get().target, "/nl/assortiment/varlaks-zalm", "analytics drops query strings that may contain private data");
 const oversizedRegistration = await call("/api/members/register", {
@@ -282,6 +285,18 @@ applicationForm.set("educationLevel", "mbo");
 applicationForm.set("studiesInLeiden", "true");
 applicationForm.set("proofConsent", "true");
 applicationForm.set("proof", proof);
+sqlite.prepare("UPDATE r2_proof_storage_budget SET bytes_reserved=? WHERE id=1").run(4_000_000_000);
+sqlite.exec("DELETE FROM auth_rate_limits");
+assert.equal((await call("/api/members/student-application", { method: "POST", body: applicationForm, cookie: sessionCookie })).status, 429, "R2 storage hard ceiling blocks uploads before writing to the bucket");
+assert.equal(objects.size, 0, "a full storage reservation never reaches R2");
+sqlite.prepare("UPDATE r2_proof_storage_budget SET bytes_reserved=0 WHERE id=1").run();
+const budgetNow = new Date().toISOString();
+sqlite.prepare("UPDATE r2_proof_operation_budget SET month=?, day=?, put_ops=400000 WHERE id=1").run(budgetNow.slice(0, 7), budgetNow.slice(0, 10));
+sqlite.exec("DELETE FROM auth_rate_limits");
+assert.equal((await call("/api/members/student-application", { method: "POST", body: applicationForm, cookie: sessionCookie })).status, 429, "monthly R2 Class A quota prevents more uploads");
+assert.equal(sqlite.prepare("SELECT bytes_reserved FROM r2_proof_storage_budget WHERE id=1").get().bytes_reserved, 0, "denied operation quota releases its storage reservation");
+sqlite.prepare("UPDATE r2_proof_operation_budget SET put_ops=0 WHERE id=1").run();
+sqlite.exec("DELETE FROM auth_rate_limits");
 simulateApplicationCommitFailure = true;
 simulateProofDeleteFailure = true;
 assert.equal((await call("/api/members/student-application", { method: "POST", body: applicationForm, cookie: sessionCookie })).status, 503);
@@ -289,6 +304,7 @@ assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM student_applications"
 assert.equal(objects.size, 1, "if both the database commit and R2 delete fail, the object remains private until scheduled cleanup");
 const failedUpload = sqlite.prepare("SELECT object_key FROM student_proof_cleanup_queue").get();
 assert.ok(failedUpload?.object_key && objects.has(failedUpload.object_key), "the failed upload retains its durable cleanup handle");
+assert.equal(sqlite.prepare("SELECT bytes_reserved FROM r2_proof_storage_budget WHERE id=1").get().bytes_reserved, proof.size, "failed cleanup keeps its storage reservation to prevent undercounting");
 sqlite.prepare("UPDATE student_proof_cleanup_queue SET queued_at=? WHERE object_key=?").run("2000-01-01T00:00:00.000Z", failedUpload.object_key);
 simulateProofDeleteFailure = false;
 const orphanCleanupTasks = [];
@@ -296,6 +312,7 @@ await memberWorker.scheduled({}, env, { waitUntil(task) { orphanCleanupTasks.pus
 await Promise.all(orphanCleanupTasks);
 assert.equal(objects.has(failedUpload.object_key), false, "scheduled cleanup removes an old unlinked proof after R2 recovers");
 assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM student_proof_cleanup_queue").get().count, 0, "successful orphan cleanup clears its queue row");
+assert.equal(sqlite.prepare("SELECT bytes_reserved FROM r2_proof_storage_budget WHERE id=1").get().bytes_reserved, 0, "successful orphan cleanup releases its storage reservation once");
 const applicationResponse = await call("/api/members/student-application", { method: "POST", body: applicationForm, cookie: sessionCookie });
 assert.equal(applicationResponse.status, 202);
 assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM consent_events WHERE user_id=(SELECT id FROM users WHERE email='student@example.test') AND consent_type='student_proof_processing'").get().count, 1, "proof consent is committed with the application");
@@ -320,6 +337,10 @@ const queue = await call("/api/members/admin/student-applications", { cookie: se
 assert.equal(queue.status, 200);
 const application = (await queue.json()).applications[0];
 assert.equal(application.email, "student@example.test");
+const currentUsagePeriod = new Date().toISOString();
+sqlite.prepare("UPDATE r2_proof_operation_budget SET month=?, day=?, get_ops=4000000 WHERE id=1").run(currentUsagePeriod.slice(0, 7), currentUsagePeriod.slice(0, 10));
+assert.equal((await call(`/api/members/admin/student-applications/${application.id}/proof`, { cookie: sessionCookie })).status, 429, "monthly R2 Class B quota blocks additional proof reads");
+sqlite.prepare("UPDATE r2_proof_operation_budget SET get_ops=0 WHERE id=1").run();
 assert.equal((await call(`/api/members/admin/student-applications/${application.id}/proof`, { cookie: sessionCookie })).status, 200);
 
 simulateProofDeleteFailure = true;
@@ -333,6 +354,7 @@ assert.equal((await call(`/api/members/admin/student-applications/${application.
 simulateProofDeleteFailure = false;
 assert.equal((await call(`/api/members/admin/student-applications/${application.id}/cleanup`, { method: "POST", cookie: sessionCookie })).status, 200);
 assert.equal(objects.size, 0, "approved proof is removed from private R2 after retry");
+assert.equal(sqlite.prepare("SELECT bytes_reserved FROM r2_proof_storage_budget WHERE id=1").get().bytes_reserved, 0, "reviewed-proof retry releases the byte reservation");
 const account = await call("/api/members/me", { cookie: sessionCookie });
 const pass = (await account.json()).discountPass;
 assert.ok(pass?.code);
@@ -439,7 +461,7 @@ confirmationForm.set("token", confirmation.searchParams.get("token"));
 confirmationForm.set("locale", "de");
 const confirmationResult = await call(confirmation.pathname, { method: "POST", body: confirmationForm });
 assert.equal(confirmationResult.status, 303);
-assert.equal(confirmationResult.headers.get("Location"), "https://www.schaapsvishandel.nl/de/account?newsletter=confirmed");
+assert.equal(confirmationResult.headers.get("Location"), "https://schaapsvishandel.nl/de/account?newsletter=confirmed");
 assert.equal(sentEmails.at(-1).subject, "Sie erhalten jetzt Angebote von Schaap's Vishandel");
 assert.match(sentEmails.at(-1).text, /locale=de/);
 assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='deals@example.test'").get().status, "subscribed");
@@ -511,7 +533,7 @@ resetForm.set("locale", "en");
 resetForm.set("password", "updated secure password");
 const resetResult = await call(resetUrl.pathname, { method: "POST", body: resetForm });
 assert.equal(resetResult.status, 303);
-assert.equal(resetResult.headers.get("Location"), "https://www.schaapsvishandel.nl/en/account?password-reset=1");
+assert.equal(resetResult.headers.get("Location"), "https://schaapsvishandel.nl/en/account?password-reset=1");
 
 console.log("Account worker integration tests passed: email verification, login, proof upload and orphan cleanup retries, private proof review, student pass renewal, newsletter double opt-in, campaign delivery, unsubscribe and daily quota recovery.");
 

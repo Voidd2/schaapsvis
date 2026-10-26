@@ -31,6 +31,19 @@ export function heeftToegestaanIp(clientIp: string | undefined): boolean {
   return toegestaneIps.includes(clientIp.trim());
 }
 
+/**
+ * Lees alleen het client-IP uit de header die door de actieve edge is gezet.
+ * Vercel en Cloudflare gebruiken verschillende headers; browsergestuurde
+ * X-Forwarded-For-waarden worden op beide platforms genegeerd.
+ */
+export function ipVanVertrouwdeProxy(
+  headers: Pick<Headers, "get">,
+  platform: "vercel" | "cloudflare",
+): string | undefined {
+  const header = platform === "vercel" ? "x-vercel-forwarded-for" : "cf-connecting-ip";
+  return headers.get(header) ?? undefined;
+}
+
 /** Alleen publiek na de expliciete publicatiebevestiging SITE_PUBLIC=launch-approved. */
 export function siteIsOpenbaar(): boolean {
   return process.env.SITE_PUBLIC === "launch-approved";
@@ -40,4 +53,5 @@ export function siteIsOpenbaar(): boolean {
 export function siteOpSlot(): boolean {
   return !siteIsOpenbaar();
 }
+
 

@@ -67,7 +67,7 @@ export function Header() {
         className="text-[0.72rem] tracking-wide"
         style={{ backgroundColor: "var(--navy-dark)", color: "rgba(250,246,239,0.72)" }}
       >
-        <div className="max-w-6xl mx-auto px-4 h-8 flex items-center justify-between gap-4">
+        <div className="max-w-7xl 2xl:max-w-[90rem] mx-auto px-4 h-8 flex items-center justify-between gap-4">
           <span className="hidden sm:inline">{ADRES_REGEL}</span>
           <WinkelStatus />
           <a
@@ -83,7 +83,7 @@ export function Header() {
       <header
         style={{ backgroundColor: "var(--cream)", borderBottom: "1px solid var(--linen)" }}
       >
-        <div className="max-w-6xl mx-auto px-4 flex items-center justify-between gap-3 lg:gap-6 min-h-[4.4rem] py-2">
+        <div className="max-w-7xl 2xl:max-w-[90rem] mx-auto px-4 flex items-center justify-between gap-3 lg:gap-6 min-h-[4.4rem] py-2">
           <Link href={p("")} className="min-w-0 leading-none flex items-center gap-3">
             {/* Het ronde logo, zodra de eigenaar het aanlevert. Klein gehouden:
                 een grote badge in de kop duwt de navigatie van de rand en maakt
@@ -94,6 +94,8 @@ export function Header() {
                 src={logo}
                 alt=""
                 aria-hidden
+                width={48}
+                height={48}
                 className="h-11 w-11 sm:h-12 sm:w-12 shrink-0 object-contain"
               />
             )}
@@ -120,12 +122,12 @@ export function Header() {
             </span>
           </Link>
 
-          <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="hidden 2xl:flex items-center justify-end gap-x-3 text-[0.72rem]">
+          <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="hidden xl:flex items-center justify-end gap-x-1 text-[0.68rem]">
             {primaryLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
-                className="transition-colors whitespace-nowrap"
+                className="transition-colors whitespace-nowrap px-1.5 py-2 rounded-sm hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                 style={{
                   color: isActief(href) ? "var(--navy)" : "var(--charcoal)",
                   fontWeight: isActief(href) ? 600 : 400,
@@ -139,17 +141,33 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-3 shrink-0">
-            <div className="hidden 2xl:flex items-center gap-3 text-[0.7rem]" style={{ color: "var(--navy)" }}>
-              {accountLinks.map(({ href, label }) => (
-                <Link key={href} href={href} className="whitespace-nowrap hover:underline underline-offset-4">
-                  {label}
-                </Link>
-              ))}
-            </div>
-
-            <div className="hidden 2xl:block" style={{ color: "var(--charcoal)" }}>
+            <div className="hidden xl:block" style={{ color: "var(--charcoal)" }}>
               <LanguageSwitcher />
             </div>
+
+            <details className="hidden xl:block relative">
+              <summary
+                className="cursor-pointer list-none whitespace-nowrap px-2.5 py-2 text-[0.72rem] font-semibold rounded-sm hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                style={{ color: "var(--navy)" }}
+              >
+                {locale === "de" ? "Konto" : locale === "en" ? "Account" : "Account"}
+              </summary>
+              <div
+                className="absolute right-0 top-full z-50 mt-2 min-w-52 border shadow-lg"
+                style={{ backgroundColor: "var(--cream)", borderColor: "var(--linen)" }}
+              >
+                {accountLinks.map(({ href, label }) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    className="block px-4 py-3 text-sm hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset"
+                    style={{ color: "var(--navy)", borderBottom: "1px solid var(--linen)" }}
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </div>
+            </details>
 
             <a
               href={`tel:${BEDRIJF.telefoon.e164}`}
@@ -162,7 +180,7 @@ export function Header() {
             <button
               type="button"
               ref={menuButton}
-              className="2xl:hidden p-2 -mr-2"
+              className="xl:hidden p-2 -mr-2 rounded-md transition-colors hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
               style={{ color: "var(--navy)" }}
               onClick={() => setOpen(!open)}
               aria-expanded={open}
@@ -178,10 +196,10 @@ export function Header() {
         {open && (
           <div
             id="mobile-navigation"
-            className="2xl:hidden max-h-[calc(100dvh-6.4rem)] overflow-y-auto overscroll-contain"
+            className="xl:hidden max-h-[calc(100dvh-6.4rem)] overflow-y-auto overscroll-contain"
             style={{ backgroundColor: "var(--cream)", borderTop: "1px solid var(--linen)" }}
           >
-            <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="max-w-6xl mx-auto px-4 py-2">
+            <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="max-w-7xl 2xl:max-w-[90rem] mx-auto px-4 py-2">
               {allLinks.map(({ href, label }) => (
                 <Link
                   key={href}
@@ -224,3 +242,5 @@ function KruisIcoon() {
     </svg>
   );
 }
+
+

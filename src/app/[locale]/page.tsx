@@ -305,7 +305,7 @@ export default async function HomePage({
                     {CATEGORY_NAMES[locale as "nl"|"en"|"de"][cat]}
                   </span>
                   <span className="text-sm bedrag" style={{ color: "var(--grijs)" }}>
-                    {h("assortimentAantal", { aantal })}
+                    {h(aantal === 1 ? "assortimentAantalEen" : "assortimentAantal", { aantal })}
                   </span>
                 </li>
               ))}
@@ -334,6 +334,8 @@ export default async function HomePage({
                     <img
                       src={photo.src}
                       alt={photo.alt}
+                      width={1400}
+                      height={933}
                       loading="lazy"
                       className="w-full aspect-[3/2] object-contain transition-transform duration-300 group-hover:scale-[1.04]"
                     />
@@ -428,3 +430,4 @@ export default async function HomePage({
     </>
   );
 }
+

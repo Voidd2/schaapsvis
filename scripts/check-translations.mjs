@@ -89,12 +89,12 @@ if(origin&&!errors.length){
     const main=html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1]??'';
     const visible=decode(main.replace(/<script\b[\s\S]*?<\/script>/g,'').replace(/<[^>]+>/g,' '));
     check(res.status===200,p.path+' HTTP '+res.status);
-    check(html.includes('rel="canonical" href="https://www.schaapsvishandel.nl'+p.path+'"'),p.path+' self-canonical');
+    check(html.includes('rel="canonical" href="https://schaapsvishandel.nl'+p.path+'"'),p.path+' self-canonical');
     if(p.title)check(visible.includes(decode(p.title)),p.path+' title not rendered');
     for(const text of p.texts)check(visible.includes(decode(text)),p.path+' text not rendered: '+text.slice(0,75));
     const alternates=[...html.matchAll(/<link[^>]*rel="alternate"[^>]*>/g)].map(m=>m[0]);
     for(const l of locales){
-     const expected='https://www.schaapsvishandel.nl/'+l+p.path.slice(3);
+     const expected='https://schaapsvishandel.nl/'+l+p.path.slice(3);
      check(alternates.some(tag=>(tag.includes('hrefLang="'+l+'"')||tag.includes('hreflang="'+l+'"'))&&tag.includes('href="'+expected+'"')),p.path+' hreflang target '+l);
     }
     if(p.schema){

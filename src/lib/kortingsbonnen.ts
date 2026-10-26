@@ -1,7 +1,7 @@
 // ─── Kortingsbon-campagne ──────────────────────────────────────────────────
 // Eigenaar: stel hier de ACTIEVE kortingsactie in. De unieke codes per klant
 // worden door je e-mailprogramma (nieuwsbrief/ESP) gegenereerd en in de mail
-// gezet als link: https://www.schaapsvishandel.nl/nl/kortingsbon/<UNIEKE-CODE>
+// gezet als link: https://schaapsvishandel.nl/nl/kortingsbon/<UNIEKE-CODE>
 //
 // Elke code kan (per apparaat) één keer geactiveerd worden en is daarna
 // `geldigheidMinuten` lang geldig — daarna verloopt de bon automatisch.

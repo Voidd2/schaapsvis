@@ -1,7 +1,7 @@
 import createMiddleware from "next-intl/middleware";
 import { NextResponse, type NextRequest } from "next/server";
 import { routing } from "./i18n/routing";
-import { ACCESS_COOKIE, heeftGeldigeSiteToegang, heeftToegestaanIp, siteOpSlot } from "./lib/siteAccess";
+import { ACCESS_COOKIE, heeftGeldigeSiteToegang, heeftToegestaanIp, ipVanVertrouwdeProxy, siteOpSlot } from "./lib/siteAccess";
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -37,12 +37,11 @@ export function proxy(request: NextRequest) {
 
   const opSlot = siteOpSlot();
   const heeftToegang = heeftGeldigeSiteToegang(request.cookies.get(ACCESS_COOKIE)?.value);
-  // Trust only Vercel's platform-populated client-IP header, never a browser-
-  // supplied X-Forwarded-For value. The allowlist itself lives in a deployment
-  // environment variable so IP addresses do not have to be committed to Git.
-  const heeftIpToegang = process.env.VERCEL === "1" && heeftToegestaanIp(
-    request.headers.get("x-vercel-forwarded-for") ?? undefined,
-  );
+  // Trust only the active platform's client-IP header, never a browser-supplied
+  // X-Forwarded-For value. On Cloudflare Workers, CF-Connecting-IP is added by
+  // Cloudflare's edge. The allowlist itself stays in a deployment variable.
+  const platform = process.env.VERCEL === "1" ? "vercel" : "cloudflare";
+  const heeftIpToegang = heeftToegestaanIp(ipVanVertrouwdeProxy(request.headers, platform));
 
   if (opSlot && !heeftToegang && !heeftIpToegang && !altijdToegestaan(pathname)) {
     // API-verzoeken krijgen geen inlogscherm maar een duidelijk antwoord. Een
@@ -105,4 +104,5 @@ export function proxy(request: NextRequest) {
 export const config = {
   matcher: ["/((?!_next/static|_next/image).*)"],
 };
+
 
