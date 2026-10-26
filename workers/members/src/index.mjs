@@ -1299,7 +1299,8 @@ const memberWorker = {
     if (path === "/api/members/password-reset/confirm" && method === "GET") return passwordResetPage(request, env);
     if (path === "/api/members/password-reset/confirm" && method === "POST") return confirmPasswordReset(request, env);
     if (path === "/api/members/student-application" && method === "POST") return submitStudentApplication(request, env);
-    if (path === "/api/members/admin/smtp-test" && method === "POST") return sendSmtpDiagnostic(request, env);\n    if (path === "/api/members/admin/smtp-check" && method === "POST") return checkSmtpAuthentication(request, env);
+    if (path === "/api/members/admin/smtp-test" && method === "POST") return sendSmtpDiagnostic(request, env);
+    if (path === "/api/members/admin/smtp-check" && method === "POST") return checkSmtpAuthentication(request, env);
     if (path === "/api/members/admin/student-applications" && method === "GET") return adminQueue(request, env);
     if (path === "/api/members/admin/analytics" && method === "GET") return adminAnalytics(request, env);
     if (path === "/api/members/admin/customers" && method === "GET") return adminCustomers(request, env);
