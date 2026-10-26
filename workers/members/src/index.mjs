@@ -269,17 +269,21 @@ async function rateLimitIdentity(db, pepper, scope, ip, identity, ipLimit, ident
 }
 
 function isMailConfigured(env) {
-  return Boolean(env.MAIL_FROM && (
-    env.EMAIL ||
-    (env.SMTP_HOST && env.SMTP_USERNAME && env.SMTP_PASSWORD)
-  ));
+  const smtpSelected = Boolean(env.SMTP_HOST || env.SMTP_USERNAME || env.SMTP_PASSWORD);
+  if (smtpSelected) {
+    return Boolean(env.MAIL_FROM && env.SMTP_HOST && env.SMTP_USERNAME && env.SMTP_PASSWORD);
+  }
+  return Boolean(env.MAIL_FROM && env.EMAIL);
 }
 
 async function sendMail(env, to, subject, text, htmlBody) {
   if (!isMailConfigured(env)) throw new Error("mail-not-configured");
-  if (env.EMAIL) return env.EMAIL.send({ from: env.MAIL_FROM, to, subject, text, html: htmlBody });
-  const smtp = await import("./smtp-worker.mjs");
-  return smtp.sendSmtpMail(env, { to, subject, text, html: htmlBody });
+  const smtpSelected = Boolean(env.SMTP_HOST || env.SMTP_USERNAME || env.SMTP_PASSWORD);
+  if (smtpSelected) {
+    const smtp = await import("./smtp-worker.mjs");
+    return smtp.sendSmtpMail(env, { to, subject, text, html: htmlBody });
+  }
+  return env.EMAIL.send({ from: env.MAIL_FROM, to, subject, text, html: htmlBody });
 }
 
 async function issueEmailToken(env, { userId = null, email = null, purpose, ttlMs = EMAIL_TOKEN_MS }) {

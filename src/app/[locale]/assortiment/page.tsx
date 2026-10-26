@@ -76,7 +76,9 @@ export default async function AssortimentPage({ params }: { params: Promise<{ lo
           <p className="collection-heritage">Leiden · {locale === "nl" ? "Sinds" : locale === "de" ? "Seit" : "Since"} 1938</p>
         </div>
         <figure className="collection-hero-image">
-          <Image width={1400} height={1050} sizes="(max-width: 800px) 100vw, 50vw" src="/images/editorial/varlaks-zalm-rauw-ai.webp" alt={locale === "de" ? "Rohes frisches Lachsfilet auf Eis mit Zitrone und Dill" : locale === "en" ? "Raw fresh salmon fillet on ice with lemon and dill" : "Rauwe verse zalmfilet op ijs met citroen en dille"} priority />
+          <Link href={`/${locale}/assortiment/varlaks-zalm`} aria-label={locale === "de" ? "Produktinformationen zu VÅRLAKS-Lachs ansehen" : locale === "en" ? "View VÅRLAKS salmon product information" : "Bekijk de productinformatie over VÅRLAKS-zalm"}>
+            <Image width={1400} height={1050} sizes="(max-width: 800px) 100vw, 50vw" src="/images/editorial/varlaks-zalm-rauw-ai.webp" alt={locale === "de" ? "Rohes frisches Lachsfilet auf Eis mit Zitrone und Dill" : locale === "en" ? "Raw fresh salmon fillet on ice with lemon and dill" : "Rauwe verse zalmfilet op ijs met citroen en dille"} priority />
+          </Link>
         </figure>
       </div>
     </header>
