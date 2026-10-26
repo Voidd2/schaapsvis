@@ -192,16 +192,16 @@ export async function verifySmtpAuthentication(env, connectSocket) {
     stage = "ehlo";
     let capabilities = await session.command(ehlo, ["250"]);
     if (port === 587) {
-      if (!capabilities.lines.some((line) => /\\bSTARTTLS\\b/i.test(line))) throw new Error("smtp-starttls-unavailable");
+      if (!capabilities.lines.some((line) => /\bSTARTTLS\b/i.test(line))) throw new Error("smtp-starttls-unavailable");
       stage = "starttls";
       await session.command("STARTTLS", ["220"]);
       await session.upgradeToTls();
       stage = "tls-ehlo";
       capabilities = await session.command(ehlo, ["250"]);
     }
-    if (!capabilities.lines.some((line) => /\\bAUTH\\b.*\\bPLAIN\\b/i.test(line))) throw new Error("smtp-auth-plain-unavailable");
+    if (!capabilities.lines.some((line) => /\bAUTH\b.*\\bPLAIN\\b/i.test(line))) throw new Error("smtp-auth-plain-unavailable");
     stage = "auth";
-    await session.command(`AUTH PLAIN ${utf8Base64(`\\0${username}\\0${password}`)}`, ["235"]);
+    await session.command(`AUTH PLAIN ${utf8Base64(`\0${username}\0${password}`)}`, ["235"]);
     return { status: "authenticated" };
   } catch (error) {
     const cause = typeof error?.message === "string" && /^smtp-[a-z0-9-]{1,80}$/.test(error.message)
