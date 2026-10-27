@@ -564,20 +564,26 @@ async function register(request, env) {
     return json({ error: "verification_email_failed", message: copy.verificationFailed }, 503);
   }
 
+  let marketingEmailFailed = false;
   if (body.marketingConsent === true) {
-    const consentAt = nowIso();
-    await env.DB.batch([
-      env.DB.prepare(`INSERT INTO consent_events (id, user_id, consent_type, granted, text_version, source, recorded_at) VALUES (?, ?, 'marketing_email', 1, ?, 'account-registration', ?)`)
-        .bind(crypto.randomUUID(), userId, NEWSLETTER_CONSENT_VERSION, consentAt),
-      env.DB.prepare(`INSERT INTO newsletter_subscriptions (email, user_id, status, consent_text_version, consented_at, source, created_at, updated_at) VALUES (?, ?, 'pending', ?, ?, 'account-registration', ?, ?) ON CONFLICT(email) DO UPDATE SET status='pending', consent_text_version=excluded.consent_text_version, consented_at=excluded.consented_at, updated_at=excluded.updated_at`)
-        .bind(email, userId, NEWSLETTER_CONSENT_VERSION, consentAt, consentAt, consentAt),
-    ]);
-    const marketingToken = await issueEmailToken(env, { userId, email, purpose: "newsletter_confirm" });
-    const confirmUrl = emailUrl(env, "/api/members/newsletter/confirm", marketingToken, locale);
-    const note = locale === "nl" ? "Dit staat los van uw account. U kunt zich altijd afmelden." : locale === "de" ? "Dies ist unabhängig von Ihrem Konto. Sie können sich jederzeit abmelden." : "This is separate from your account. You can unsubscribe at any time.";
-    await sendMail(env, email, copy.newsletterSubject, `${copy.newsletterIntro}\n${confirmUrl}`, `<p>${copy.newsletterIntro}</p><p><a href="${confirmUrl}">${copy.newsletterButton}</a></p><p>${note}</p>`);
+    try {
+      const consentAt = nowIso();
+      await env.DB.batch([
+        env.DB.prepare(`INSERT INTO consent_events (id, user_id, consent_type, granted, text_version, source, recorded_at) VALUES (?, ?, 'marketing_email', 1, ?, 'account-registration', ?)`)
+          .bind(crypto.randomUUID(), userId, NEWSLETTER_CONSENT_VERSION, consentAt),
+        env.DB.prepare(`INSERT INTO newsletter_subscriptions (email, user_id, status, consent_text_version, consented_at, source, created_at, updated_at) VALUES (?, ?, 'pending', ?, ?, 'account-registration', ?, ?) ON CONFLICT(email) DO UPDATE SET status='pending', consent_text_version=excluded.consent_text_version, consented_at=excluded.consented_at, updated_at=excluded.updated_at`)
+          .bind(email, userId, NEWSLETTER_CONSENT_VERSION, consentAt, consentAt, consentAt),
+      ]);
+      const marketingToken = await issueEmailToken(env, { userId, email, purpose: "newsletter_confirm" });
+      const confirmUrl = emailUrl(env, "/api/members/newsletter/confirm", marketingToken, locale);
+      const note = locale === "nl" ? "Dit staat los van uw account. U kunt zich altijd afmelden." : locale === "de" ? "Dies ist unabhängig von Ihrem Konto. Sie können sich jederzeit abmelden." : "This is separate from your account. You can unsubscribe at any time.";
+      await sendMail(env, email, copy.newsletterSubject, `${copy.newsletterIntro}\n${confirmUrl}`, `<p>${copy.newsletterIntro}</p><p><a href="${confirmUrl}">${copy.newsletterButton}</a></p><p>${note}</p>`);
+    } catch {
+      // An optional marketing email must not make a successfully created account look like a failed registration.
+      marketingEmailFailed = true;
+    }
   }
-  return json({ ok: true, message: copy.registrationGeneric }, 202);
+  return json({ ok: true, message: copy.registrationGeneric, marketingEmailFailed }, 202);
 }
 
 async function registerAdministrator(request, env) {

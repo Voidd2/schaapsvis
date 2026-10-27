@@ -96,6 +96,7 @@ const db = {
 const objects = new Map();
 const sentEmails = [];
 let simulateMailFailure = false;
+let simulateMarketingMailFailure = false;
 let simulateDailyQuota = false;
 let simulateProofDeleteFailure = false;
 const env = {
@@ -113,6 +114,7 @@ const env = {
   ANALYTICS_ENABLED: "on",
   EMAIL: { async send(message) {
     if (simulateMailFailure) throw new Error("simulated email delivery failure");
+    if (simulateMarketingMailFailure && /email offers|e-maildeals|e-mail-angebote/i.test(message.subject)) throw new Error("simulated marketing email failure");
     if (simulateDailyQuota) throw Object.assign(new Error("daily quota reached"), { code: "E_DAILY_LIMIT_EXCEEDED" });
     sentEmails.push(message);
     return { messageId: `test-${sentEmails.length}` };
@@ -222,6 +224,27 @@ assert.match(sentEmails[registrationEmailOffset].text, /\b\d{6}\b/);
 assert.match(sentEmails[registrationEmailOffset + 1].text, /\b\d{6}\b/);
 assert.notEqual(sentEmails[registrationEmailOffset].to, sentEmails[registrationEmailOffset + 1].to, "personal and school emails must be different");
 assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM newsletter_subscriptions WHERE email='student@example.test'").get().count, 0, "account creation does not subscribe to marketing by default");
+const consentedMailOffset = sentEmails.length;
+const consentedRegistration = await call("/api/members/register", {
+  method: "POST", headers: { "CF-Connecting-IP": "198.51.100.60" },
+  body: { email: "consented@example.test", schoolEmail: "consented@university.example.test", name: "Consented Student", password: "correct horse battery", locale: "en", marketingConsent: true },
+});
+assert.equal(consentedRegistration.status, 202);
+assert.equal((await consentedRegistration.json()).marketingEmailFailed, false);
+assert.equal(sentEmails.length, consentedMailOffset + 3, "student opt-in sends two verification codes and a separate marketing confirmation");
+assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='consented@example.test'").get().status, "pending", "student opt-in is not an active subscription until email confirmation");
+simulateMarketingMailFailure = true;
+const failedMarketingMailOffset = sentEmails.length;
+const marketingFailureRegistration = await call("/api/members/register", {
+  method: "POST", headers: { "CF-Connecting-IP": "198.51.100.60" },
+  body: { email: "marketing-retry@example.test", schoolEmail: "marketing-retry@university.example.test", name: "Marketing Retry", password: "correct horse battery", locale: "en", marketingConsent: true },
+});
+simulateMarketingMailFailure = false;
+assert.equal(marketingFailureRegistration.status, 202, "a failed optional marketing mail does not invalidate student account creation");
+assert.equal((await marketingFailureRegistration.json()).marketingEmailFailed, true, "the UI can explain that the marketing confirmation needs a retry");
+assert.equal(sentEmails.length, failedMarketingMailOffset + 2, "both account verification codes are still delivered");
+assert.ok(sqlite.prepare("SELECT id FROM users WHERE email='marketing-retry@example.test'").get(), "student account survives optional marketing mail failure");
+assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='marketing-retry@example.test'").get().status, "pending", "a failed marketing email cannot activate a subscription");
 const unknownAccountLogin = await call("/api/members/login", {
   method: "POST",
   body: { email: "unknown@example.test", password: "correct horse battery" },
