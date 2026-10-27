@@ -16,6 +16,10 @@ const copy = {
     resend: "Verificatielink opnieuw sturen",
     resent: "Als dit account nog onbevestigd is, ontvangt u een nieuwe verificatielink.",
     forbidden: "Dit kan alleen met het toegestane beheeradres vanaf het vertrouwde netwerk.",
+    invalid: "Controleer uw naam en gebruik een wachtwoord van minimaal 12 tekens.",
+    rateLimited: "Er zijn te veel pogingen gedaan. Wacht een uur en probeer het daarna opnieuw.",
+    unavailable: "Beheerregistratie is tijdelijk niet beschikbaar. De mail- of beveiligingsinstellingen ontbreken.",
+    deliveryFailed: "Het account is opgeslagen, maar de verificatiemail kon niet worden afgeleverd. Gebruik hieronder ‘Verificatielink opnieuw sturen’.",
     failed: "Dit is niet gelukt. Controleer de gegevens en probeer het later opnieuw. Als het account al is aangemaakt, gebruik dan de knop voor een nieuwe verificatielink.",
     login: "Naar inloggen",
   },
@@ -31,6 +35,10 @@ const copy = {
     resend: "Resend verification link",
     resent: "If this account is not verified yet, a new verification link will be sent.",
     forbidden: "Only the approved admin address on the trusted network can do this.",
+    invalid: "Check your name and use a password containing at least 12 characters.",
+    rateLimited: "Too many attempts were made. Wait one hour before trying again.",
+    unavailable: "Admin registration is temporarily unavailable because mail or security settings are missing.",
+    deliveryFailed: "The account was saved, but the verification email could not be delivered. Use ‘Resend verification link’ below.",
     failed: "This did not work. Check the details and try again later. If the account was already created, request a new verification link.",
     login: "Go to sign in",
   },
@@ -46,6 +54,10 @@ const copy = {
     resend: "Bestätigungslink erneut senden",
     resent: "Falls dieses Konto noch nicht bestätigt wurde, erhalten Sie einen neuen Bestätigungslink.",
     forbidden: "Dies ist nur mit der freigegebenen Verwaltungsadresse im vertrauenswürdigen Netzwerk möglich.",
+    invalid: "Prüfen Sie Ihren Namen und verwenden Sie ein Passwort mit mindestens 12 Zeichen.",
+    rateLimited: "Es gab zu viele Versuche. Warten Sie eine Stunde und versuchen Sie es danach erneut.",
+    unavailable: "Die Verwaltungsregistrierung ist vorübergehend nicht verfügbar, da Mail- oder Sicherheitseinstellungen fehlen.",
+    deliveryFailed: "Das Konto wurde gespeichert, aber die Bestätigungs-E-Mail konnte nicht zugestellt werden. Nutzen Sie unten ‘Bestätigungslink erneut senden’.",
     failed: "Das hat nicht funktioniert. Prüfen Sie die Angaben und versuchen Sie es später erneut. Falls das Konto bereits erstellt wurde, fordern Sie einen neuen Bestätigungslink an.",
     login: "Zur Anmeldung",
   },
@@ -77,7 +89,11 @@ export function AdminBootstrapPortal({ locale }: { locale: string }) {
           setEmail(address);
           throw new Error("delivery-failed");
         }
-        throw new Error(response.status === 403 ? "forbidden" : "failed");
+        if (response.status === 403) throw new Error("forbidden");
+        if (result.error === "invalid_input") throw new Error("invalid-input");
+        if (result.error === "rate_limited") throw new Error("rate-limited");
+        if (result.error === "registration_unavailable") throw new Error("unavailable");
+        throw new Error("failed");
       }
       setEmail(address);
       setSuccess(true);
@@ -85,7 +101,13 @@ export function AdminBootstrapPortal({ locale }: { locale: string }) {
       form.reset();
     } catch (error) {
       setSuccess(false);
-      setMessage(error instanceof Error && error.message === "forbidden" ? t.forbidden : t.failed);
+      const reason = error instanceof Error ? error.message : "failed";
+      setMessage(reason === "forbidden" ? t.forbidden
+        : reason === "invalid-input" ? t.invalid
+          : reason === "rate-limited" ? t.rateLimited
+            : reason === "unavailable" ? t.unavailable
+              : reason === "delivery-failed" ? t.deliveryFailed
+                : t.failed);
     } finally { setBusy(false); }
   }
 
