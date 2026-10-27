@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Schaap's Vishandel
 
-## Getting Started
+Website en ledenomgeving voor de viswinkel en marktkramen in Leiden en Voorschoten. Productie draait op **Cloudflare Workers**; Knoth beheert de `.nl`-registratie en zakelijke mailbox. GitHub `main` bouwt de site-Worker `schaapsvis` en de leden-Worker `schaapsvis-members`. De nog aanwezige Vercel-projecten zijn geen bewijs van de live versie.
 
-First, run the development server:
+## Waar staat wat?
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+| Onderwerp | Bron |
+| --- | --- |
+| Actuele architectuur, bewezen status en open werk | [Projectkaart](docs/project-map.md) |
+| Bedrijfsdoel en goedgekeurde richting | [Platformstrategie](docs/bedrijfsdoel-en-platformstrategie.md) |
+| Leden-API, privacygrenzen en tests | [Leden-Worker](workers/members/README.md) |
+| Sitepagina's | `src/app/[locale]/` |
+| Assortiment, recepten en productteksten | `src/lib/` |
+| Leden-API en database | `workers/members/src/`, `migrations/` |
+| Site-uitrol | `cloudflare.config.ts`, `vite.config.ts` |
+| Ledenuitrol | `workers/members/wrangler.jsonc` |
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Lees alleen de bron die bij de taak hoort. Gebruik `rg` om een concreet component of endpoint te vinden; oude voortgangsdocumenten kunnen achterhaald zijn.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Gerichte controles
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Leden-API of e-mail: `node workers/members/test.mjs` en `node workers/members/smtp-test.mjs`.
+- Assortiment of recepten: `node scripts/check-content-integrity.mjs`.
+- Sitebouw of routering: `npm run build` en `npm run build:cloudflare`.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Gebruik lokaal alleen testgeheimen. Productiegeheimen staan als versleutelde Cloudflare-variabelen en horen niet in Git, logs of documentatie.
