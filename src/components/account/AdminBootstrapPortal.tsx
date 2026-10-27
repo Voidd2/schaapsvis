@@ -71,7 +71,14 @@ export function AdminBootstrapPortal({ locale }: { locale: string }) {
         method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: fields.get("name"), email: address, password: fields.get("password"), locale: language }),
       });
-      if (!response.ok) throw new Error(response.status === 403 ? "forbidden" : "failed");
+      if (!response.ok) {
+        const result = await response.json().catch(() => ({})) as { error?: string };
+        if (result.error === "verification_email_failed") {
+          setEmail(address);
+          throw new Error("delivery-failed");
+        }
+        throw new Error(response.status === 403 ? "forbidden" : "failed");
+      }
       setEmail(address);
       setSuccess(true);
       setMessage(t.sent);
