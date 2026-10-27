@@ -642,5 +642,35 @@ assert.equal((await call("/api/members/admin/smtp-check", { method: "POST" })).s
 env.SMTP_DIAGNOSTICS = "off";
 env.MEMBERS_ENABLED = "off";
 
+env.MEMBERS_ENABLED = "on";
+env.ADMIN_EMAILS = "student@example.test,owner@example.test";
+const ownerDetails = { email: "owner@example.test", name: "Shop Owner", password: "owner test password 2026", locale: "en" };
+assert.equal((await call("/api/members/admin/register", { method: "POST", body: ownerDetails, headers: { "CF-Connecting-IP": "198.51.100.5" } })).status, 403, "admin registration requires the owner IP");
+assert.equal((await call("/api/members/admin/register", { method: "POST", body: { ...ownerDetails, email: "other@example.test" } })).status, 403, "admin registration requires an allowlisted business address");
+assert.equal((await call("/api/members/admin/register", { method: "POST", body: { ...ownerDetails, password: "short" } })).status, 400, "admin password must meet the normal account standard");
+const ownerMailOffset = sentEmails.length;
+assert.equal((await call("/api/members/admin/register", { method: "POST", body: ownerDetails })).status, 202, "owner can start a dedicated account without a school address");
+assert.equal(sentEmails.length, ownerMailOffset + 1, "owner receives one verification email at the allowlisted business address");
+assert.equal(sentEmails.at(-1).to, ownerDetails.email);
+assert.equal(sqlite.prepare("SELECT school_email FROM users WHERE email='owner@example.test'").get().school_email, null, "admin account does not fabricate a student school address");
+assert.equal(sqlite.prepare("SELECT email_verified_at FROM users WHERE email='owner@example.test'").get().email_verified_at, null, "admin email is unverified until the owner follows the link");
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM newsletter_subscriptions WHERE email='owner@example.test'").get().count, 0, "admin registration never subscribes the owner to marketing");
+assert.equal((await call("/api/members/admin/register", { method: "POST", body: ownerDetails })).status, 202, "duplicate admin registration has a generic response");
+assert.equal(sentEmails.length, ownerMailOffset + 1, "duplicate registration cannot trigger another verification message");
+const ownerVerificationUrl = new URL(sentEmails.at(-1).text.match(/https:\/\/[^\s]+/)[0]);
+assert.equal((await call(`${ownerVerificationUrl.pathname}${ownerVerificationUrl.search}`)).status, 200);
+const ownerVerificationForm = new FormData();
+ownerVerificationForm.set("token", ownerVerificationUrl.searchParams.get("token"));
+ownerVerificationForm.set("locale", "en");
+assert.equal((await call(ownerVerificationUrl.pathname, { method: "POST", body: ownerVerificationForm })).status, 303, "verified business mailbox activates the owner account");
+const ownerLogin = await call("/api/members/login", { method: "POST", body: { email: ownerDetails.email, password: ownerDetails.password } });
+assert.equal(ownerLogin.status, 200, "owner can log in after email verification");
+const ownerSession = ownerLogin.headers.get("Set-Cookie").split(";")[0];
+assert.equal((await (await call("/api/members/me", { cookie: ownerSession })).json()).isAdmin, true, "owner sees admin navigation on the trusted network");
+assert.equal((await (await call("/api/members/me", { cookie: ownerSession, headers: { "CF-Connecting-IP": "198.51.100.5" } })).json()).isAdmin, false, "admin navigation is hidden outside the trusted network");
+assert.equal((await call("/api/members/admin/newsletter-campaigns", { cookie: ownerSession })).status, 200, "owner session and IP can manage email campaigns");
+assert.equal((await call("/api/members/admin/student-applications", { cookie: ownerSession })).status, 200, "owner session and IP can review student applications");
+assert.equal((await call("/api/members/admin/newsletter-campaigns", { cookie: ownerSession, headers: { "CF-Connecting-IP": "198.51.100.5" } })).status, 403, "owner session is not enough from an untrusted IP");
+
 console.log("Account worker integration tests passed: email verification, login, proof upload and orphan cleanup retries, private proof review, student pass renewal, newsletter double opt-in, campaign delivery, unsubscribe and daily quota recovery.");
 

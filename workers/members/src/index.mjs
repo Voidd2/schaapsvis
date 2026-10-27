@@ -580,6 +580,44 @@ async function register(request, env) {
   return json({ ok: true, message: copy.registrationGeneric }, 202);
 }
 
+async function registerAdministrator(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  if (!env.AUTH_PEPPER || !env.SITE_ORIGIN || !isMailConfigured(env)) return json({ error: "registration_unavailable" }, 503);
+  const clientIp = String(request.headers.get("CF-Connecting-IP") || "").trim().toLowerCase();
+  const allowedIps = String(env.ADMIN_IPS || "").split(",").map((ip) => ip.trim().toLowerCase()).filter(Boolean);
+  if (!clientIp || !allowedIps.includes(clientIp)) return json({ error: "forbidden" }, 403);
+
+  const body = await readJson(request);
+  const email = normalizeEmail(body?.email);
+  const adminEmails = String(env.ADMIN_EMAILS || "").split(",").map((value) => value.trim().toLowerCase()).filter(Boolean);
+  if (!email || !adminEmails.includes(email)) return json({ error: "forbidden" }, 403);
+  const name = typeof body?.name === "string" ? body.name.trim().slice(0, 120) : "";
+  const password = typeof body?.password === "string" ? body.password : "";
+  const locale = localeFrom(body?.locale);
+  if (name.length < 2 || password.length < 12 || password.length > 128) return json({ error: "invalid_input" }, 400);
+  if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "admin-register", clientIp, email, 4, 4, 60 * 60 * 1000)) {
+    return json({ error: "rate_limited" }, 429);
+  }
+
+  const userId = crypto.randomUUID();
+  const created = nowIso();
+  const passwordDigest = await passwordHash(password, env.AUTH_PEPPER);
+  const inserted = await env.DB.prepare(`INSERT INTO users (id, email, full_name, password_hash, created_at, updated_at)
+    VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT(email) DO NOTHING`)
+    .bind(userId, email, name, passwordDigest, created, created).run();
+  if (!inserted.meta?.changes) return json({ ok: true }, 202);
+
+  const token = await issueEmailToken(env, { userId, email, purpose: "verify_email" });
+  const link = emailUrl(env, "/api/members/verify", token, locale);
+  const copy = ACCOUNT_COPY[locale];
+  try {
+    await sendMail(env, email, copy.verifySubject, `${copy.verifyIntro}\n${link}`, `<p>${copy.verifyIntro}</p><p><a href="${link}">${copy.verifyButton}</a></p>`);
+  } catch {
+    return json({ error: "verification_email_failed" }, 503);
+  }
+  return json({ ok: true }, 202);
+}
+
 async function resendVerification(request, env) {
   if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
   if (!env.AUTH_PEPPER || !isMailConfigured(env) || !env.SITE_ORIGIN) return json({ error: "verification_unavailable" }, 503);
@@ -699,6 +737,10 @@ async function logout(request, env) {
 async function me(request, env) {
   const user = await sessionUser(request, env);
   if (!user) return json({ user: null }, 401);
+  const allowedEmails = String(env.ADMIN_EMAILS || "").split(",").map((email) => email.trim().toLowerCase()).filter(Boolean);
+  const allowedIps = String(env.ADMIN_IPS || "").split(",").map((ip) => ip.trim().toLowerCase()).filter(Boolean);
+  const clientIp = String(request.headers.get("CF-Connecting-IP") || "").trim().toLowerCase();
+  const isAdmin = allowedEmails.includes(user.email.toLowerCase()) && Boolean(clientIp && allowedIps.includes(clientIp));
   const [application, pass] = await Promise.all([
     env.DB.prepare(`SELECT status, education_level, institution, submitted_at, reviewed_at FROM student_applications WHERE user_id = ? ORDER BY submitted_at DESC LIMIT 1`).bind(user.id).first(),
     env.DB.prepare(`SELECT p.id, p.status, p.issued_at, p.expires_at FROM student_passes p JOIN student_applications a ON a.id = p.application_id WHERE p.user_id = ? AND p.status = 'active' AND p.revoked_at IS NULL AND a.status = 'approved' ORDER BY a.reviewed_at DESC, p.issued_at DESC LIMIT 1`).bind(user.id).first(),
@@ -709,7 +751,7 @@ async function me(request, env) {
     discountPass = { code, issuedAt: pass.issued_at, expiresAt: pass.expires_at };
   }
   const subscription = await env.DB.prepare(`SELECT status FROM newsletter_subscriptions WHERE email = ?`).bind(user.email).first();
-  return json({ user: { id: user.id, name: user.full_name, email: user.email }, studentApplication: application || null, discountPass, newsletter: subscription?.status || "not-subscribed" });
+  return json({ user: { id: user.id, name: user.full_name, email: user.email }, isAdmin, studentApplication: application || null, discountPass, newsletter: subscription?.status || "not-subscribed" });
 }
 
 async function requestPasswordReset(request, env) {
@@ -1312,6 +1354,7 @@ const memberWorker = {
     if (!siteAccessAllowed(request, env)) return json({ error: "site_access_required" }, 403);
     if (path === "/api/members/analytics" && method === "POST") return collectAnalytics(request, env);
     if (path === "/api/members/register" && method === "POST") return register(request, env);
+    if (path === "/api/members/admin/register" && method === "POST") return registerAdministrator(request, env);
     if (path === "/api/members/verify/resend" && method === "POST") return resendVerification(request, env);
     if (path === "/api/members/verify" && method === "GET") return verifyEmailPage(request, env);
     if (path === "/api/members/verify" && method === "POST") return verifyEmail(request, env);

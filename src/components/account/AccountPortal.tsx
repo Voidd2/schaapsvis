@@ -18,6 +18,7 @@ type StudentApplication = {
 
 type MemberData = {
   user: Member | null;
+  isAdmin?: boolean;
   studentApplication?: StudentApplication | null;
   discountPass?: { code: string; issuedAt: string; expiresAt: string | null } | null;
   newsletter?: string;
@@ -365,6 +366,16 @@ export function AccountPortal({ locale }: { locale: string }) {
               <button type="button" onClick={logout} disabled={busy} className="knop knop-lijn">{t.logout}</button>
             </div>
 
+            {data.isAdmin && <nav aria-label={language === "nl" ? "Beheer" : language === "de" ? "Verwaltung" : "Administration"} className="rounded-2xl border border-sky-200 bg-white p-5">
+              <h2 className="font-display text-2xl font-bold text-slate-900">{language === "nl" ? "Beheer" : language === "de" ? "Verwaltung" : "Administration"}</h2>
+              <div className="mt-4 flex flex-wrap gap-x-6 gap-y-3">
+                <a href={`/${language}/beheer/studenten`} className="font-semibold text-sky-800 underline underline-offset-4">{language === "nl" ? "Studentaanvragen" : language === "de" ? "Studentenanträge" : "Student applications"} →</a>
+                <a href={`/${language}/beheer/emaildeals`} className="font-semibold text-sky-800 underline underline-offset-4">{language === "nl" ? "E-mailcampagnes" : language === "de" ? "E-Mail-Kampagnen" : "Email campaigns"} →</a>
+                <a href={`/${language}/beheer/klanten`} className="font-semibold text-sky-800 underline underline-offset-4">{language === "nl" ? "Klantaccounts" : language === "de" ? "Kundenkonten" : "Customer accounts"} →</a>
+                <a href={`/${language}/beheer/overzicht`} className="font-semibold text-sky-800 underline underline-offset-4">{language === "nl" ? "Website-statistieken" : language === "de" ? "Website-Statistiken" : "Website analytics"} →</a>
+              </div>
+            </nav>}
+
             {data.studentApplication?.status === "pending" && <p className="rounded-xl border border-amber-300 bg-amber-50 p-5">{t.pending}</p>}
             {data.studentApplication?.status === "approved" && data.discountPass && (
               <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-[#073d56] via-[#075c7c] to-[#0792b8] p-7 text-white shadow-xl sm:p-10">
@@ -384,7 +395,7 @@ export function AccountPortal({ locale }: { locale: string }) {
             {data.studentApplication?.status === "approved" && !data.discountPass && <p className="rounded-xl border border-amber-300 bg-amber-50 p-5">{t.expired}</p>}
             {data.studentApplication?.status === "rejected" && <p className="rounded-xl border border-rose-200 bg-rose-50 p-5">{t.rejected}</p>}
 
-            {data.studentApplication?.status !== "pending" && (data.studentApplication?.status !== "approved" || !data.discountPass) && (
+            {!data.isAdmin && data.studentApplication?.status !== "pending" && (data.studentApplication?.status !== "approved" || !data.discountPass) && (
               <form onSubmit={applyForDiscount} className="space-y-5 rounded-2xl border border-sky-200 bg-white p-6 shadow-sm sm:p-8">
                 <div><h2 className="font-display text-2xl font-bold text-slate-900">{t.studentTitle}</h2><p className="mt-2 text-sm leading-relaxed text-slate-700">{t.studentInfo}</p></div>
                 <label className="block text-sm font-medium">{t.institution}<input name="institution" required maxLength={180} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>
