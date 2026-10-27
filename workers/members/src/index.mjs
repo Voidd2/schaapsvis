@@ -2,8 +2,9 @@ const COOKIE = "sv_member";
 const SESSION_MS = 30 * 24 * 60 * 60 * 1000;
 const EMAIL_TOKEN_MS = 60 * 60 * 1000;
 const VERIFICATION_CODE_MS = 10 * 60 * 1000;
-const PASSWORD_ITERATIONS = 210_000;
-const DUMMY_PASSWORD_HASH = "pbkdf2-sha256$210000$AAAAAAAAAAAAAAAAAAAAAA$AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+// Cloudflare Workers caps WebCrypto PBKDF2 at 100,000 iterations.
+const PASSWORD_ITERATIONS = 100_000;
+const DUMMY_PASSWORD_HASH = "pbkdf2-sha256$100000$AAAAAAAAAAAAAAAAAAAAAA$AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 const MAX_PROOF_BYTES = 8 * 1024 * 1024;
 const MAX_PROOF_STORAGE_BYTES = 4_000_000_000;
 const MAX_PROOF_PUTS_PER_MONTH = 400_000;
@@ -253,7 +254,7 @@ async function passwordHash(password, pepper) {
 async function verifyPassword(password, stored, pepper) {
   const [algorithm, iterationText, saltText, expectedText] = String(stored).split("$");
   const iterations = Number(iterationText);
-  if (algorithm !== "pbkdf2-sha256" || !Number.isInteger(iterations) || iterations < 150_000 || iterations > 500_000) return false;
+  if (algorithm !== "pbkdf2-sha256" || iterations !== PASSWORD_ITERATIONS) return false;
   const material = await crypto.subtle.importKey("raw", encoder.encode(`${password}${pepper}`), "PBKDF2", false, ["deriveBits"]);
   const bits = new Uint8Array(await crypto.subtle.deriveBits({ name: "PBKDF2", hash: "SHA-256", salt: fromBase64url(saltText), iterations }, material, 256));
   const expected = fromBase64url(expectedText);
@@ -564,7 +565,6 @@ async function register(request, env) {
     return json({ error: "verification_email_failed", message: copy.verificationFailed }, 503);
   }
 
-  let marketingEmailFailed = false;
   if (body.marketingConsent === true) {
     try {
       const consentAt = nowIso();
@@ -580,10 +580,9 @@ async function register(request, env) {
       await sendMail(env, email, copy.newsletterSubject, `${copy.newsletterIntro}\n${confirmUrl}`, `<p>${copy.newsletterIntro}</p><p><a href="${confirmUrl}">${copy.newsletterButton}</a></p><p>${note}</p>`);
     } catch {
       // An optional marketing email must not make a successfully created account look like a failed registration.
-      marketingEmailFailed = true;
     }
   }
-  return json({ ok: true, message: copy.registrationGeneric, marketingEmailFailed }, 202);
+  return json({ ok: true, message: copy.registrationGeneric }, 202);
 }
 
 async function registerAdministrator(request, env) {

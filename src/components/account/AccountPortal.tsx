@@ -63,8 +63,7 @@ const translations = {
     passCode: "Laat deze code door een medewerker controleren",
     discount: "10% korting op het hele assortiment · niet combineerbaar met andere acties",
     unavailable: "De accountomgeving wordt nog gekoppeld. Probeer het later opnieuw.",
-    accountCreated: "Als dit een nieuw account is, sturen we één code naar uw persoonlijke e-mailadres en één naar uw schoolmail. Controleer zo nodig ook Ongewenste e-mail.",
-    marketingEmailFailed: "De bevestigingsmail voor aanbiedingen kon niet worden verstuurd. U kunt zich later opnieuw aanmelden voor e-maildeals.",
+    accountCreated: "Als dit een nieuw account is, sturen we één code naar uw persoonlijke e-mailadres en één naar uw schoolmail. Controleer zo nodig ook Ongewenste e-mail. Heeft u aanbiedingen aangevinkt maar geen aparte bevestigingsmail ontvangen? Meld u later opnieuw aan voor e-maildeals.",
     verificationFailed: "Uw account is aangemaakt, maar een of beide e-mails konden niet worden verstuurd. Vraag de codes opnieuw aan.",
     genericError: "Dit lukte niet. Controleer uw gegevens of probeer het later opnieuw.",
     resetSent: "Als er een account bij dit adres hoort, ontvangt u een resetlink.",
@@ -112,8 +111,7 @@ const translations = {
     passCode: "Ask a staff member to verify this code",
     discount: "10% off the entire range · cannot be combined with other offers",
     unavailable: "The account area is still being connected. Please try again later.",
-    accountCreated: "If this is a new account, we will send one code to your personal email and one to your school email. Check your spam folder if needed.",
-    marketingEmailFailed: "We could not send the offer confirmation email. You can sign up for email offers again later.",
+    accountCreated: "If this is a new account, we will send one code to your personal email and one to your school email. Check your spam folder if needed. If you opted in to offers but did not receive a separate confirmation, you can sign up for email offers again later.",
     verificationFailed: "Your account was created, but one or both emails could not be sent. Request new codes.",
     genericError: "That did not work. Check your details or try again later.",
     resetSent: "If an account exists for this address, you will receive a reset link.",
@@ -161,8 +159,7 @@ const translations = {
     passCode: "Lassen Sie diesen Code vom Personal prüfen",
     discount: "10 % Rabatt auf das gesamte Sortiment · nicht mit anderen Aktionen kombinierbar",
     unavailable: "Der Kontobereich wird noch angebunden. Bitte versuchen Sie es später erneut.",
-    accountCreated: "Wenn dies ein neues Konto ist, senden wir einen Code an Ihre private E-Mail und einen an Ihre Schul-E-Mail. Prüfen Sie bei Bedarf auch den Spamordner.",
-    marketingEmailFailed: "Die Bestätigung für E-Mail-Angebote konnte nicht gesendet werden. Sie können sich später erneut dafür anmelden.",
+    accountCreated: "Wenn dies ein neues Konto ist, senden wir einen Code an Ihre private E-Mail und einen an Ihre Schul-E-Mail. Prüfen Sie bei Bedarf auch den Spamordner. Wenn Sie Angebote gewählt, aber keine separate Bestätigung erhalten haben, können Sie sich später erneut für E-Mail-Angebote anmelden.",
     verificationFailed: "Ihr Konto wurde erstellt, aber eine oder beide E-Mails konnten nicht gesendet werden. Fordern Sie neue Codes an.",
     genericError: "Das hat nicht funktioniert. Prüfen Sie Ihre Angaben oder versuchen Sie es später erneut.",
     resetSent: "Wenn es ein Konto zu dieser Adresse gibt, erhalten Sie einen Link zum Zurücksetzen.",
@@ -252,9 +249,8 @@ export function AccountPortal({ locale }: { locale: string }) {
         throw new Error("request-failed");
       }
       if (mode === "register") {
-        const result = await response.json() as { marketingEmailFailed?: boolean };
         setSuccess(true);
-        setMessage(result.marketingEmailFailed ? `${t.accountCreated} ${t.marketingEmailFailed}` : t.accountCreated);
+        setMessage(t.accountCreated);
         setVerificationEmail(String(fields.get("email") || "").trim().toLowerCase());
         setVerificationPending(true);
         setMode("login");

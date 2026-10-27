@@ -3,6 +3,16 @@ import { readFile } from "node:fs/promises";
 import { DatabaseSync } from "node:sqlite";
 import memberWorker from "./src/index.mjs";
 
+// The local WebCrypto implementation accepts iteration counts production
+// Workers reject. Simulate the production cap for every auth flow in this test.
+const deriveBits = crypto.subtle.deriveBits.bind(crypto.subtle);
+crypto.subtle.deriveBits = (algorithm, key, length) => {
+  if (algorithm?.name === "PBKDF2" && algorithm.iterations > 100_000) {
+    throw new DOMException("PBKDF2 exceeds the Cloudflare Workers iteration cap", "NotSupportedError");
+  }
+  return deriveBits(algorithm, key, length);
+};
+
 const schema = await readFile(new URL("../../migrations/0001_student_portal.sql", import.meta.url), "utf8");
 const renewalMigration = await readFile(new URL("../../migrations/0002_student_pass_renewals.sql", import.meta.url), "utf8");
 const proofCleanupMigration = await readFile(new URL("../../migrations/0003_student_proof_cleanup_queue.sql", import.meta.url), "utf8");
@@ -230,7 +240,7 @@ const consentedRegistration = await call("/api/members/register", {
   body: { email: "consented@example.test", schoolEmail: "consented@university.example.test", name: "Consented Student", password: "correct horse battery", locale: "en", marketingConsent: true },
 });
 assert.equal(consentedRegistration.status, 202);
-assert.equal((await consentedRegistration.json()).marketingEmailFailed, false);
+const consentedRegistrationResponse = await consentedRegistration.json();
 assert.equal(sentEmails.length, consentedMailOffset + 3, "student opt-in sends two verification codes and a separate marketing confirmation");
 assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='consented@example.test'").get().status, "pending", "student opt-in is not an active subscription until email confirmation");
 simulateMarketingMailFailure = true;
@@ -241,10 +251,16 @@ const marketingFailureRegistration = await call("/api/members/register", {
 });
 simulateMarketingMailFailure = false;
 assert.equal(marketingFailureRegistration.status, 202, "a failed optional marketing mail does not invalidate student account creation");
-assert.equal((await marketingFailureRegistration.json()).marketingEmailFailed, true, "the UI can explain that the marketing confirmation needs a retry");
+assert.deepEqual(await marketingFailureRegistration.json(), consentedRegistrationResponse, "marketing delivery failures cannot reveal whether an account was created");
 assert.equal(sentEmails.length, failedMarketingMailOffset + 2, "both account verification codes are still delivered");
 assert.ok(sqlite.prepare("SELECT id FROM users WHERE email='marketing-retry@example.test'").get(), "student account survives optional marketing mail failure");
 assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='marketing-retry@example.test'").get().status, "pending", "a failed marketing email cannot activate a subscription");
+const duplicateRegistration = await call("/api/members/register", {
+  method: "POST", headers: { "CF-Connecting-IP": "198.51.100.60" },
+  body: { email: "consented@example.test", schoolEmail: "different@university.example.test", name: "Consented Student", password: "correct horse battery", locale: "en", marketingConsent: true },
+});
+assert.equal(duplicateRegistration.status, 202);
+assert.deepEqual(await duplicateRegistration.json(), consentedRegistrationResponse, "an existing account gets the same response as a new student account");
 const unknownAccountLogin = await call("/api/members/login", {
   method: "POST",
   body: { email: "unknown@example.test", password: "correct horse battery" },
