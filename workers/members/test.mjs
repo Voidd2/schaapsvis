@@ -136,8 +136,9 @@ const env = {
   },
 };
 
-async function call(path, { method = "GET", body, cookie = "", contentType, headers: extraHeaders = {} } = {}) {
-  const headers = new Headers({ Origin: env.SITE_ORIGIN, "CF-Connecting-IP": "203.0.113.10" });
+async function call(path, { method = "GET", body, cookie = "", contentType, headers: extraHeaders = {}, omitOrigin = false } = {}) {
+  const headers = new Headers({ "CF-Connecting-IP": "203.0.113.10" });
+  if (!omitOrigin) headers.set("Origin", env.SITE_ORIGIN);
   for (const [name, value] of Object.entries(extraHeaders)) headers.set(name, value);
   if (cookie) headers.set("Cookie", cookie);
   if (contentType) headers.set("Content-Type", contentType);
@@ -691,6 +692,8 @@ const ownerMailOffset = sentEmails.length;
 assert.equal((await call("/api/members/admin/register", { method: "POST", body: ownerDetails })).status, 202, "owner can start a dedicated account without a school address");
 assert.equal(sentEmails.length, ownerMailOffset + 1, "owner receives one verification email at the allowlisted business address");
 assert.equal(sentEmails.at(-1).to, ownerDetails.email);
+assert.match(sentEmails.at(-1).text, /Click below to verify the email address/, "link-based owner mail does not introduce a missing verification code");
+assert.doesNotMatch(sentEmails.at(-1).text, /verification code/i, "link-based owner mail is distinct from student code mail");
 const firstOwnerVerificationUrl = new URL(sentEmails.at(-1).text.match(/https:\/\/[^\s]+/)[0]);
 assert.equal(sqlite.prepare("SELECT school_email FROM users WHERE email='owner@example.test'").get().school_email, null, "admin account does not fabricate a student school address");
 assert.equal(sqlite.prepare("SELECT email_verified_at FROM users WHERE email='owner@example.test'").get().email_verified_at, null, "admin email is unverified until the owner follows the link");
@@ -707,7 +710,21 @@ assert.equal((await call(`${ownerVerificationUrl.pathname}${ownerVerificationUrl
 const ownerVerificationForm = new FormData();
 ownerVerificationForm.set("token", ownerVerificationUrl.searchParams.get("token"));
 ownerVerificationForm.set("locale", "en");
-assert.equal((await call(ownerVerificationUrl.pathname, { method: "POST", body: ownerVerificationForm })).status, 303, "verified business mailbox activates the owner account");
+assert.equal((await call(ownerVerificationUrl.pathname, {
+  method: "POST",
+  body: ownerVerificationForm,
+  omitOrigin: true,
+  headers: { "Sec-Fetch-Site": "same-origin", "Sec-Fetch-Mode": "navigate", "Sec-Fetch-Dest": "document" },
+})).status, 303, "same-origin browser form navigation activates the owner account when Chrome omits Origin");
+const forgedVerificationForm = new FormData();
+forgedVerificationForm.set("token", "forged-token");
+forgedVerificationForm.set("locale", "en");
+assert.equal((await call(ownerVerificationUrl.pathname, {
+  method: "POST",
+  body: forgedVerificationForm,
+  omitOrigin: true,
+  headers: { "Sec-Fetch-Site": "cross-site", "Sec-Fetch-Mode": "navigate", "Sec-Fetch-Dest": "document" },
+})).status, 403, "cross-site form navigation remains rejected without an approved Origin");
 assert.equal((await call("/api/members/login", { method: "POST", body: { email: ownerDetails.email, password: ownerDetails.password } })).status, 401, "retry replaces the unverified owner password instead of keeping a lost password");
 const ownerLogin = await call("/api/members/login", { method: "POST", body: { email: ownerDetails.email, password: retriedOwnerDetails.password } });
 assert.equal(ownerLogin.status, 200, "owner can log in after email verification");

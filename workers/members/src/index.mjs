@@ -16,7 +16,7 @@ const NEWSLETTER_CONSENT_VERSION = "customer-offers-2026-10";
 const LOCALES = new Set(["nl", "en", "de"]);
 const ACCOUNT_COPY = {
   nl: {
-    verifySubject: "Bevestig uw persoonlijke e-mailadres — Schaap's Vishandel", verifyIntro: "Uw persoonlijke verificatiecode voor uw Schaap's-account is:", schoolVerifySubject: "Bevestig uw school-e-mailadres — Schaap's Vishandel", schoolVerifyIntro: "Uw verificatiecode voor uw school-e-mailadres is:", verifyButton: "E-mailadres bevestigen", verifyExpiredTitle: "Bevestigingslink verlopen", verifyExpired: "Vraag in uw account opnieuw een e-mailbevestiging aan.", usedExpired: "Deze link is al gebruikt of verlopen.",
+    verifySubject: "Bevestig uw persoonlijke e-mailadres — Schaap's Vishandel", verifyIntro: "Uw persoonlijke verificatiecode voor uw Schaap's-account is:", verifyLinkIntro: "Klik hieronder om uw e-mailadres voor uw Schaap's-account te bevestigen.", schoolVerifySubject: "Bevestig uw school-e-mailadres — Schaap's Vishandel", schoolVerifyIntro: "Uw verificatiecode voor uw school-e-mailadres is:", verifyButton: "E-mailadres bevestigen", verifyExpiredTitle: "Bevestigingslink verlopen", verifyExpired: "Vraag in uw account opnieuw een e-mailbevestiging aan.", usedExpired: "Deze link is al gebruikt of verlopen.",
     resetSubject: "Wachtwoord opnieuw instellen", resetIntro: "Stel uw wachtwoord opnieuw in via deze link:", resetTitle: "Wachtwoord instellen", resetLabel: "Nieuw wachtwoord (minimaal 12 tekens)", resetButton: "Wachtwoord opslaan", resetExpiredTitle: "Resetlink verlopen", resetExpired: "Deze link is al gebruikt of verlopen.",
     newsletterSubject: "Bevestig uw e-maildeals", newsletterIntro: "Bevestig dat Schaap's Vishandel u e-maildeals mag sturen.", newsletterButton: "E-maildeals bevestigen", newsletterTitle: "E-maildeals bevestigen", newsletterExpiredTitle: "Aanmeldlink verlopen", newsletterExpired: "Deze link is al gebruikt of verlopen.",
     unsubscribeTitle: "Afmelden voor e-maildeals", unsubscribeIntro: "U ontvangt daarna geen aanbiedingen per e-mail meer.", unsubscribeButton: "Afmelden", unsubscribeExpiredTitle: "Afmeldlink verlopen", unsubscribeExpired: "Deze afmeldlink is verlopen.", unsubscribeDoneTitle: "Afgemeld", unsubscribeDone: "U ontvangt geen e-maildeals meer van Schaap's Vishandel.",
@@ -24,7 +24,7 @@ const ACCOUNT_COPY = {
     registrationGeneric: "Als dit een nieuw account is, ontvangt u twee codes: één op uw persoonlijke e-mailadres en één op uw schoolmail.", invalidRegistration: "Vul uw naam en twee verschillende geldige e-mailadressen in. Kies een wachtwoord van 12 tot 128 tekens.", verificationFailed: "Uw account is aangemaakt, maar een of beide e-mails konden niet worden verstuurd. Vraag de codes opnieuw aan.", resendGeneric: "Als er een onbevestigd account bij dit adres hoort, sturen we de verificatiecodes opnieuw.", resetGeneric: "Als er een account bij dit adres hoort, ontvangt u een e-mail.", alreadySubscribed: "U bent al aangemeld.", newsletterCheck: "Controleer uw e-mail om uw aanmelding te bevestigen.",
   },
   en: {
-    verifySubject: "Verify your personal email — Schaap's Vishandel", verifyIntro: "Your personal verification code for your Schaap's account is:", schoolVerifySubject: "Verify your school email — Schaap's Vishandel", schoolVerifyIntro: "Your verification code for your school email address is:", verifyButton: "Verify email address", verifyExpiredTitle: "Verification link expired", verifyExpired: "Request a new verification email from your account.", usedExpired: "This link has already been used or has expired.",
+    verifySubject: "Verify your personal email — Schaap's Vishandel", verifyIntro: "Your personal verification code for your Schaap's account is:", verifyLinkIntro: "Click below to verify the email address for your Schaap's account.", schoolVerifySubject: "Verify your school email — Schaap's Vishandel", schoolVerifyIntro: "Your verification code for your school email address is:", verifyButton: "Verify email address", verifyExpiredTitle: "Verification link expired", verifyExpired: "Request a new verification email from your account.", usedExpired: "This link has already been used or has expired.",
     resetSubject: "Reset your password", resetIntro: "Reset your password using this link:", resetTitle: "Set a new password", resetLabel: "New password (at least 12 characters)", resetButton: "Save password", resetExpiredTitle: "Reset link expired", resetExpired: "This link has already been used or has expired.",
     newsletterSubject: "Confirm your email offers", newsletterIntro: "Confirm that Schaap's Vishandel may send you email offers.", newsletterButton: "Confirm email offers", newsletterTitle: "Confirm email offers", newsletterExpiredTitle: "Subscription link expired", newsletterExpired: "This link has already been used or has expired.",
     unsubscribeTitle: "Unsubscribe from email offers", unsubscribeIntro: "You will no longer receive offers by email.", unsubscribeButton: "Unsubscribe", unsubscribeExpiredTitle: "Unsubscribe link expired", unsubscribeExpired: "This unsubscribe link has expired.", unsubscribeDoneTitle: "Unsubscribed", unsubscribeDone: "You will no longer receive email offers from Schaap's Vishandel.",
@@ -32,7 +32,7 @@ const ACCOUNT_COPY = {
     registrationGeneric: "If this is a new account, we will send two codes: one to your personal email and one to your school email.", invalidRegistration: "Enter your name and two different valid email addresses. Choose a password of 12 to 128 characters.", verificationFailed: "Your account was created, but one or both emails could not be sent. Request new codes.", resendGeneric: "If this address belongs to an unverified account, we will resend the verification codes.", resetGeneric: "If an account exists for this address, you will receive an email.", alreadySubscribed: "You are already subscribed.", newsletterCheck: "Check your email to confirm your subscription.",
   },
   de: {
-    verifySubject: "Private E-Mail bestätigen — Schaap's Vishandel", verifyIntro: "Ihr persönlicher Bestätigungscode für Ihr Schaap's-Konto lautet:", schoolVerifySubject: "Schul-E-Mail bestätigen — Schaap's Vishandel", schoolVerifyIntro: "Ihr Bestätigungscode für Ihre Schul-E-Mail-Adresse lautet:", verifyButton: "E-Mail-Adresse bestätigen", verifyExpiredTitle: "Bestätigungslink abgelaufen", verifyExpired: "Fordern Sie in Ihrem Konto eine neue Bestätigungs-E-Mail an.", usedExpired: "Dieser Link wurde bereits verwendet oder ist abgelaufen.",
+    verifySubject: "Private E-Mail bestätigen — Schaap's Vishandel", verifyIntro: "Ihr persönlicher Bestätigungscode für Ihr Schaap's-Konto lautet:", verifyLinkIntro: "Klicken Sie unten, um die E-Mail-Adresse für Ihr Schaap's-Konto zu bestätigen.", schoolVerifySubject: "Schul-E-Mail bestätigen — Schaap's Vishandel", schoolVerifyIntro: "Ihr Bestätigungscode für Ihre Schul-E-Mail-Adresse lautet:", verifyButton: "E-Mail-Adresse bestätigen", verifyExpiredTitle: "Bestätigungslink abgelaufen", verifyExpired: "Fordern Sie in Ihrem Konto eine neue Bestätigungs-E-Mail an.", usedExpired: "Dieser Link wurde bereits verwendet oder ist abgelaufen.",
     resetSubject: "Passwort zurücksetzen", resetIntro: "Setzen Sie Ihr Passwort über diesen Link zurück:", resetTitle: "Neues Passwort festlegen", resetLabel: "Neues Passwort (mindestens 12 Zeichen)", resetButton: "Passwort speichern", resetExpiredTitle: "Link zum Zurücksetzen abgelaufen", resetExpired: "Dieser Link wurde bereits verwendet oder ist abgelaufen.",
     newsletterSubject: "E-Mail-Angebote bestätigen", newsletterIntro: "Bestätigen Sie, dass Schaap's Vishandel Ihnen E-Mail-Angebote senden darf.", newsletterButton: "E-Mail-Angebote bestätigen", newsletterTitle: "E-Mail-Angebote bestätigen", newsletterExpiredTitle: "Anmeldelink abgelaufen", newsletterExpired: "Dieser Link wurde bereits verwendet oder ist abgelaufen.",
     unsubscribeTitle: "E-Mail-Angebote abbestellen", unsubscribeIntro: "Sie erhalten danach keine Angebote per E-Mail mehr.", unsubscribeButton: "Abbestellen", unsubscribeExpiredTitle: "Abmeldelink abgelaufen", unsubscribeExpired: "Dieser Abmeldelink ist abgelaufen.", unsubscribeDoneTitle: "Abgemeldet", unsubscribeDone: "Sie erhalten keine E-Mail-Angebote mehr von Schaap's Vishandel.",
@@ -190,6 +190,19 @@ function sessionCookie(token, maxAge = 60 * 60 * 24 * 30) {
 function sameOrigin(request, env) {
   const origin = request.headers.get("Origin");
   return Boolean(origin && origin === env.SITE_ORIGIN);
+}
+
+function sameOriginFormNavigation(request, env) {
+  if (sameOrigin(request, env)) return true;
+  // Chrome may omit Origin on a top-level form POST from one of our
+  // no-referrer confirmation pages. Sec-Fetch-* headers are controlled by
+  // the browser, and the single-use token remains required by every handler.
+  let requestOrigin = "";
+  try { requestOrigin = new URL(request.url).origin; } catch { return false; }
+  return requestOrigin === env.SITE_ORIGIN
+    && request.headers.get("Sec-Fetch-Site") === "same-origin"
+    && request.headers.get("Sec-Fetch-Mode") === "navigate"
+    && request.headers.get("Sec-Fetch-Dest") === "document";
 }
 
 function base64url(bytes) {
@@ -627,7 +640,7 @@ async function registerAdministrator(request, env) {
   const link = emailUrl(env, "/api/members/verify", token, locale);
   const copy = ACCOUNT_COPY[locale];
   try {
-    await sendMail(env, email, copy.verifySubject, `${copy.verifyIntro}\n${link}`, `<p>${copy.verifyIntro}</p><p><a href="${link}">${copy.verifyButton}</a></p>`);
+    await sendMail(env, email, copy.verifySubject, `${copy.verifyLinkIntro}\n${link}`, `<p>${copy.verifyLinkIntro}</p><p><a href="${link}">${copy.verifyButton}</a></p>`);
   } catch {
     return json({ error: "verification_email_failed" }, 503);
   }
@@ -659,7 +672,7 @@ async function resendVerification(request, env) {
       } else {
         const token = await issueEmailToken(env, { userId: user.id, email: user.email, purpose: "verify_email" });
         const link = emailUrl(env, "/api/members/verify", token, locale);
-        await sendMail(env, user.email, copy.verifySubject, `${copy.verifyIntro}\n${link}`, `<p>${copy.verifyIntro}</p><p><a href="${link}">${copy.verifyButton}</a></p>`);
+        await sendMail(env, user.email, copy.verifySubject, `${copy.verifyLinkIntro}\n${link}`, `<p>${copy.verifyLinkIntro}</p><p><a href="${link}">${copy.verifyButton}</a></p>`);
       }
     } catch {
       return json({ error: "verification_email_failed" }, 503);
@@ -700,11 +713,11 @@ async function verifyEmailPage(request, env) {
   const row = await env.DB.prepare(`SELECT token_hash FROM email_tokens WHERE token_hash = ? AND purpose = 'verify_email' AND used_at IS NULL AND expires_at > ?`)
     .bind(await digest(token), nowIso()).first();
   if (!row) return accountResultPage(locale, copy.verifyExpiredTitle, copy.verifyExpired);
-  return accountMessage(locale, copy.verifyButton, copy.verifyIntro, token, "/api/members/verify", copy.verifyButton);
+  return accountMessage(locale, copy.verifyButton, copy.verifyLinkIntro, token, "/api/members/verify", copy.verifyButton);
 }
 
 async function verifyEmail(request, env) {
-  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  if (!sameOriginFormNavigation(request, env)) return json({ error: "origin" }, 403);
   const parsed = await readLimitedFormData(request, 16_000);
   if (parsed.tooLarge) return json({ error: "form_too_large" }, 413);
   if (!parsed.form) return json({ error: "invalid_form" }, 400);
@@ -805,7 +818,7 @@ async function passwordResetPage(request, env) {
 }
 
 async function confirmPasswordReset(request, env) {
-  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  if (!sameOriginFormNavigation(request, env)) return json({ error: "origin" }, 403);
   const parsed = await readLimitedFormData(request, 16_000);
   if (parsed.tooLarge) return json({ error: "form_too_large" }, 413);
   if (!parsed.form) return json({ error: "invalid_form" }, 400);
@@ -1077,7 +1090,7 @@ async function newsletterConfirmPage(request, env) {
 }
 
 async function confirmNewsletter(request, env) {
-  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  if (!sameOriginFormNavigation(request, env)) return json({ error: "origin" }, 403);
   const parsed = await readLimitedFormData(request, 16_000);
   if (parsed.tooLarge) return json({ error: "form_too_large" }, 413);
   if (!parsed.form) return json({ error: "invalid_form" }, 400);
@@ -1120,7 +1133,7 @@ async function unsubscribePage(request, env) {
 }
 
 async function unsubscribeNewsletter(request, env) {
-  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  if (!sameOriginFormNavigation(request, env)) return json({ error: "origin" }, 403);
   const parsed = await readLimitedFormData(request, 16_000);
   if (parsed.tooLarge) return json({ error: "form_too_large" }, 413);
   if (!parsed.form) return json({ error: "invalid_form" }, 400);
