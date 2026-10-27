@@ -11,7 +11,7 @@
     "SMTP_HOST": "khsm1.khsmserver1.nl",
     "SMTP_HELO_NAME": "mail.schaapsvishandel.nl",
     "SMTP_PORT": "587",
-    "SMTP_USERNAME": "schaapsv@schaapsvishandel.nl",
+    "SMTP_USERNAME": "schaapsv",
   },
   // D1 en private R2 staan per omgeving in de EU. Mail gebruikt de bestaande
   // DirectAdmin-mailbox. SMTP_PASSWORD en de auth-secrets staan als versleutelde
@@ -28,9 +28,9 @@
         "SITE_ORIGIN": "https://preview.schaapsvishandel.nl",
         "MAIL_FROM": "schaapsv@schaapsvishandel.nl",
         "SMTP_HOST": "khsm1.khsmserver1.nl",
-    "SMTP_HELO_NAME": "mail.schaapsvishandel.nl",
+        "SMTP_HELO_NAME": "mail.schaapsvishandel.nl",
         "SMTP_PORT": "587",
-        "SMTP_USERNAME": "schaapsv@schaapsvishandel.nl",
+        "SMTP_USERNAME": "schaapsv",
       },
       "d1_databases": [
         { "binding": "DB", "database_name": "schaapsvis-members-preview", "database_id": "0a97c8e6-c829-4b5e-9eb7-f4154282898d", "migrations_dir": "../../migrations" }
@@ -50,9 +50,9 @@
         "SITE_ORIGIN": "https://schaapsvishandel.nl",
         "MAIL_FROM": "schaapsv@schaapsvishandel.nl",
         "SMTP_HOST": "khsm1.khsmserver1.nl",
-    "SMTP_HELO_NAME": "mail.schaapsvishandel.nl",
+        "SMTP_HELO_NAME": "mail.schaapsvishandel.nl",
         "SMTP_PORT": "587",
-        "SMTP_USERNAME": "schaapsv@schaapsvishandel.nl",
+        "SMTP_USERNAME": "schaapsv",
         "ADMIN_EMAILS": "schaapsv@schaapsvishandel.nl",
         "ADMIN_IPS": "212.120.114.226,2001:4860:7:61f::f5",
       },
