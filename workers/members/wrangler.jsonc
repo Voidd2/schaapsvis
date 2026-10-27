@@ -41,6 +41,7 @@
     },
     "production": {
       "name": "schaapsvis-members",
+      "observability": { "logs": { "enabled": true, "invocation_logs": true, "persist": true } },
       "routes": [
         { "pattern": "schaapsvishandel.nl/api/members/*", "zone_name": "schaapsvishandel.nl" }
       ],
