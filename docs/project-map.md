@@ -20,7 +20,7 @@ Deze kaart is de korte ingang voor vervolgwerk. De code en actuele Cloudflare-st
 
 - GitHub `main` commit `09dd62d` is in Cloudflare voor beide productie-Workers als **Ready, 100% verkeer** gezien. `https://schaapsvishandel.nl/api/members/health` gaf `{"status":"ok"}`.
 - De beheeraanmelding faalde eerder vóór accountopslag: de code vroeg 210.000 PBKDF2-rondes terwijl de productie-Worker maximaal 100.000 toestaat. `09dd62d` past de hash en de integratietest aan. Vóór een nieuwe eigenaarspoging bevatte D1 **nul** beheeraccounts. Verifieer dit opnieuw; het is geen blijvende toestand.
-- De directe Knoth SMTP-test kwam bij de eigenaar aan, in Gmail Spam. Op 27 oktober gaf een no-send controle vanuit de live leden-Worker `status: authenticated` (HTTP 200); `SMTP_DIAGNOSTICS` staat daarna weer `off`. Een volledige verificatiemail vanuit een echte registratie is nog niet bevestigd.
+- De directe Knoth SMTP-test kwam bij de eigenaar aan, in Gmail Spam. Op 27 oktober gaf een no-send controle vanuit de live leden-Worker `status: authenticated` (HTTP 200). Daarna accepteerde Knoth ook een echt vanuit die productie-Worker verstuurd diagnostisch bericht (HTTP 202); inboxplaatsing daarvan is niet afzonderlijk gecontroleerd. `SMTP_DIAGNOSTICS` staat weer `off`. Een volledige verificatiemail vanuit een echte registratie moet nog worden bevestigd.
 - In Cloudflare zijn voor beide productie-Workers `docs/*`, `README.md`, `AGENTS.md` en `workers/members/README.md` uitgesloten van automatische Git-builds. Codewijzigingen blijven builds starten; dit voorkomt nieuwe builds voor alleen deze projectdocumentatie. [Cloudflare-regels](https://developers.cloudflare.com/workers/ci-cd/builds/build-watch-paths/).
 - De aparte `schaapsvis-members-preview` Worker heeft eigen D1/R2 maar staat uit. De afgeschermde hoofdsite wordt momenteel als preview gebruikt. Cloudflare-account **Schaapsvis** is de juiste account; Citywalk Stories hoort bij de andere account.
 
@@ -42,3 +42,10 @@ Deze kaart is de korte ingang voor vervolgwerk. De code en actuele Cloudflare-st
 | Is een wijziging live? | GitHub `main`-SHA, vervolgens **beide** Cloudflare Deployments en de echte domeinroute |
 
 Gerichte tests staan in de hoofd-README. Run niet de volledige sitebuild voor een tekst- of documentwijziging zonder concrete reden.
+
+## Tokenzuinige werkroute
+
+1. Lees eerst deze projectkaart en alleen het bestand uit de tabel dat bij de vraag hoort; scan niet standaard de hele repository.
+2. Gebruik `rg` op route, component- of foutnaam en open daarna alleen de directe aanroepers. Cloudflare-status wordt pas bekeken als de lokale code of deploystatus daar aanleiding toe geeft.
+3. Draai de kleinste passende controle: `npm run check:members` voor accounts/mail, `npm run check:content` voor assortiment/recepten en alleen een volledige Next- plus Cloudflare-build wanneer componenten, routes of runtimecode wijzigen.
+4. Controleer livegang altijd in deze vaste volgorde: GitHub `main`-SHA, Worker `schaapsvis-members`, Worker `schaapsvis`, echte domeinroute. Zo wordt Vercel niet ten onrechte als bewijs voor Cloudflare gebruikt.

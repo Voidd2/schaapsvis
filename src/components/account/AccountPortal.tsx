@@ -65,6 +65,7 @@ const translations = {
     unavailable: "De accountomgeving wordt nog gekoppeld. Probeer het later opnieuw.",
     accountCreated: "Als dit een nieuw account is, sturen we één code naar uw persoonlijke e-mailadres en één naar uw schoolmail. Controleer zo nodig ook Ongewenste e-mail. Heeft u aanbiedingen aangevinkt maar geen aparte bevestigingsmail ontvangen? Meld u later opnieuw aan voor e-maildeals.",
     verificationFailed: "Uw account is aangemaakt, maar een of beide e-mails konden niet worden verstuurd. Vraag de codes opnieuw aan.",
+    verificationDeliveryFailed: "Uw account is aangemaakt, maar de verificatiemails konden niet worden bezorgd. Gebruik hieronder ‘Nieuwe verificatiecodes sturen’ om het opnieuw te proberen.",
     genericError: "Dit lukte niet. Controleer uw gegevens of probeer het later opnieuw.",
     resetSent: "Als er een account bij dit adres hoort, ontvangt u een resetlink.",
     applicationSent: "Uw aanvraag is veilig ontvangen en wacht op beoordeling.",
@@ -113,6 +114,7 @@ const translations = {
     unavailable: "The account area is still being connected. Please try again later.",
     accountCreated: "If this is a new account, we will send one code to your personal email and one to your school email. Check your spam folder if needed. If you opted in to offers but did not receive a separate confirmation, you can sign up for email offers again later.",
     verificationFailed: "Your account was created, but one or both emails could not be sent. Request new codes.",
+    verificationDeliveryFailed: "Your account was created, but the verification emails could not be delivered. Use ‘Resend verification codes’ below to try again.",
     genericError: "That did not work. Check your details or try again later.",
     resetSent: "If an account exists for this address, you will receive a reset link.",
     applicationSent: "Your application was received securely and is awaiting review.",
@@ -161,6 +163,7 @@ const translations = {
     unavailable: "Der Kontobereich wird noch angebunden. Bitte versuchen Sie es später erneut.",
     accountCreated: "Wenn dies ein neues Konto ist, senden wir einen Code an Ihre private E-Mail und einen an Ihre Schul-E-Mail. Prüfen Sie bei Bedarf auch den Spamordner. Wenn Sie Angebote gewählt, aber keine separate Bestätigung erhalten haben, können Sie sich später erneut für E-Mail-Angebote anmelden.",
     verificationFailed: "Ihr Konto wurde erstellt, aber eine oder beide E-Mails konnten nicht gesendet werden. Fordern Sie neue Codes an.",
+    verificationDeliveryFailed: "Ihr Konto wurde erstellt, aber die Bestätigungsmails konnten nicht zugestellt werden. Verwenden Sie unten ‘Neue Bestätigungscodes senden’, um es erneut zu versuchen.",
     genericError: "Das hat nicht funktioniert. Prüfen Sie Ihre Angaben oder versuchen Sie es später erneut.",
     resetSent: "Wenn es ein Konto zu dieser Adresse gibt, erhalten Sie einen Link zum Zurücksetzen.",
     applicationSent: "Ihr Antrag wurde sicher empfangen und wird geprüft.",
@@ -246,6 +249,12 @@ export function AccountPortal({ locale }: { locale: string }) {
       if (!response.ok) {
         const result = await response.json().catch(() => ({})) as { error?: string };
         if (result.error === "email_unverified") throw new Error("unverified");
+        if (mode === "register" && result.error === "verification_email_failed") {
+          setVerificationEmail(String(fields.get("email") || "").trim().toLowerCase());
+          setVerificationPending(true);
+          setMode("login");
+          throw new Error("verification-email-failed");
+        }
         throw new Error("request-failed");
       }
       if (mode === "register") {
@@ -259,7 +268,9 @@ export function AccountPortal({ locale }: { locale: string }) {
         setMessage("");
       }
     } catch (error) {
-      setMessage(error instanceof Error && error.message === "unverified" ? t.resend : t.genericError);
+      setMessage(error instanceof Error && error.message === "unverified" ? t.resend
+        : error instanceof Error && error.message === "verification-email-failed" ? t.verificationDeliveryFailed
+        : t.genericError);
       setSuccess(false);
     } finally {
       setBusy(false);

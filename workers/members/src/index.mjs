@@ -610,9 +610,20 @@ async function registerAdministrator(request, env) {
   const inserted = await env.DB.prepare(`INSERT INTO users (id, email, full_name, password_hash, created_at, updated_at)
     VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT(email) DO NOTHING`)
     .bind(userId, email, name, passwordDigest, created, created).run();
-  if (!inserted.meta?.changes) return json({ ok: true }, 202);
+  let verificationUserId = userId;
+  if (!inserted.meta?.changes) {
+    const existing = await env.DB.prepare(`SELECT id, email_verified_at, account_status FROM users WHERE email = ?`).bind(email).first();
+    if (!existing || existing.email_verified_at || existing.account_status !== "active") return json({ ok: true }, 202);
+    verificationUserId = existing.id;
+    await env.DB.batch([
+      env.DB.prepare(`UPDATE users SET full_name = ?, password_hash = ?, updated_at = ? WHERE id = ? AND email_verified_at IS NULL AND account_status = 'active'`)
+        .bind(name, passwordDigest, created, verificationUserId),
+      env.DB.prepare(`UPDATE email_tokens SET used_at = ? WHERE user_id = ? AND purpose = 'verify_email' AND used_at IS NULL`)
+        .bind(created, verificationUserId),
+    ]);
+  }
 
-  const token = await issueEmailToken(env, { userId, email, purpose: "verify_email" });
+  const token = await issueEmailToken(env, { userId: verificationUserId, email, purpose: "verify_email" });
   const link = emailUrl(env, "/api/members/verify", token, locale);
   const copy = ACCOUNT_COPY[locale];
   try {
