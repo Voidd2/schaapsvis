@@ -20,14 +20,15 @@ Deze kaart is de korte ingang voor vervolgwerk. De code en actuele Cloudflare-st
 
 - GitHub `main` commit `09dd62d` is in Cloudflare voor beide productie-Workers als **Ready, 100% verkeer** gezien. `https://schaapsvishandel.nl/api/members/health` gaf `{"status":"ok"}`.
 - De beheeraanmelding faalde eerder vóór accountopslag: de code vroeg 210.000 PBKDF2-rondes terwijl de productie-Worker maximaal 100.000 toestaat. `09dd62d` past de hash en de integratietest aan. Vóór een nieuwe eigenaarspoging bevatte D1 **nul** beheeraccounts. Verifieer dit opnieuw; het is geen blijvende toestand.
-- De directe Knoth SMTP-test kwam bij de eigenaar aan, in Gmail Spam. Een volledige verificatiemail vanuit de live leden-Worker is nog niet bevestigd. Vermeld dit niet als geslaagd totdat een echte registratie en mail zijn gecontroleerd.
+- De directe Knoth SMTP-test kwam bij de eigenaar aan, in Gmail Spam. Op 27 oktober gaf een no-send controle vanuit de live leden-Worker `status: authenticated` (HTTP 200); `SMTP_DIAGNOSTICS` staat daarna weer `off`. Een volledige verificatiemail vanuit een echte registratie is nog niet bevestigd.
+- In Cloudflare zijn voor beide productie-Workers `docs/*`, `README.md`, `AGENTS.md` en `workers/members/README.md` uitgesloten van automatische Git-builds. Codewijzigingen blijven builds starten; dit voorkomt nieuwe builds voor alleen deze projectdocumentatie. [Cloudflare-regels](https://developers.cloudflare.com/workers/ci-cd/builds/build-watch-paths/).
 - De aparte `schaapsvis-members-preview` Worker heeft eigen D1/R2 maar staat uit. De afgeschermde hoofdsite wordt momenteel als preview gebruikt. Cloudflare-account **Schaapsvis** is de juiste account; Citywalk Stories hoort bij de andere account.
 
 ## Volgende verificatie
 
 1. Laat de eigenaar het al geopende beheerformulier met zijn eigen wachtwoord indienen en de link in `schaapsv@schaapsvishandel.nl` bevestigen. De browserbeveiligingsregel vereist dat hij de definitieve indiening van een nieuw wachtwoord zelf doet. Deel of log het wachtwoord niet.
 2. Lees in productie-D1 of `users.email_verified_at` is gezet. Controleer daarna login, beheerpagina en een gecontroleerde studentenregistratie met beide verificatiecodes. Gebruik geen verzonnen adressen in productie.
-3. Controleer SMTP-aflevering, privacytekst, bewaartermijnen en bewijsverwijdering voordat de toegangspoort voor publiek opengaat.
+3. Controleer de aflevering van een echte registratiemail, privacytekst, bewaartermijnen en bewijsverwijdering voordat de toegangspoort voor publiek opengaat.
 
 ## Snelle route naar antwoorden
 
