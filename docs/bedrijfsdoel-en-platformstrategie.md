@@ -22,9 +22,9 @@ te ontwikkelen:
 3. Verzamel e-mailinschrijvingen met heldere toestemming en gebruik Klaviyo
    voor nieuws en aanbiedingen die speciaal voor Schaap’s-klanten zijn.
    Beloof geen vaste wekelijkse deals als die niet gegarandeerd zijn.
-4. Bouw op langere termijn de e-maillijst en klantrelatie uit naar veilige
-   klantaccounts, met functies zoals bezorgen, punten sparen en relevante
-   klantvoordelen.
+4. Bouw de e-maillijst en klantrelatie later uit naar veilige klantaccounts
+   wanneer daar een concrete functie voor is. Bezorging en punten sparen worden
+   nu niet beloofd of gebouwd.
 5. Maak de studentenregeling onderdeel van die veilige accountomgeving:
    betrouwbare aanmelding en verificatie, beperkte toegang tot bewijsstukken,
    bewaartermijnen en kortingsregels volgens de laatst door de eigenaar
@@ -57,13 +57,16 @@ niet is afgerond. Zie [Cloudflare: een domein onboarden](https://developers.clou
 
 - Nieuwsbriefinschrijving en marketingtoestemming moeten expliciet en
   aantoonbaar zijn; een account aanmaken is niet vanzelf toestemming voor
-  marketing.
+  marketing. Een duidelijke inschrijving mag direct als single opt-in worden
+  geactiveerd, zonder aparte bevestigingsmail, mits tekstversie, bron en tijdstip
+  worden vastgelegd en iedere campagne afmelden mogelijk maakt.
 - Elke campagne moet afmelden mogelijk maken en de geldende kortingsregels
   respecteren; studentenvoordeel stapelt niet met andere aanbiedingen volgens
   de vastgelegde voorwaarden.
-- Verzamel alleen gegevens die nodig zijn voor de gekozen functie. Behandel
-  studentbewijs als gevoelig: veilige opslag, beperkte beheerderstoegang en
-  verwijderen zodra beoordeling dit toelaat.
+- Verzamel alleen gegevens die nodig zijn voor de gekozen functie. Voor nieuwe
+  studentenaanvragen vervangt de bevestigde schoolmail de bewijsupload. Bestaande
+  bewijsbestanden blijven onder de bestaande beperkte toegang en
+  verwijderprocedure totdat ze zijn opgeschoond.
 - Een toekomstige bezorg- en spaarpuntenfunctie moet rekening houden met
   klantaccountbeveiliging, privacy, toestemming en operationele haalbaarheid.
 
@@ -99,18 +102,18 @@ relevant zijn via geaggregeerde campagneprestaties. Vraag alleen een leeftijd
 of leeftijdscategorie als een concrete, vooraf geteste functie dat nodig maakt
 en de privacytekst dit duidelijk verantwoordt.
 
-De e-mailinschrijving is ontworpen als twee stappen: eerst slaat de server het
+De e-mailinschrijving gebruikt twee formulierstappen: eerst slaat de server het
 ingevoerde adres tijdelijk op met een willekeurige vervolgcode; daarna kiest
-de bezoeker de regio en geeft expliciet toestemming. Zonder toestemming en
-bevestiging komt het adres niet op de verzendlijst. Een onafgemaakte stap
-verloopt na 30 minuten. Deze korte conceptopslag, de uiteindelijke
-bewaartermijn en de juridische grondslag moeten in de definitieve
-privacyverklaring worden nagekeken vóór live activering.
+de bezoeker de regio en geeft expliciet toestemming. Na die tweede stap wordt
+het adres direct actief (single opt-in); er volgt geen extra bevestigingsmail.
+Een onafgemaakte stap verloopt na 30 minuten. Deze korte conceptopslag, de
+uiteindelijke bewaartermijn, de toestemmingstekst en de juridische grondslag
+moeten in de definitieve privacyverklaring worden nagekeken vóór live activering.
 
 Klaviyo is de beoogde campagnetool, niet de bron die toestemming bepaalt. Het
 leden-/inschrijfsysteem blijft de bron van waarheid voor status,
-toestemmingsmoment, regio, bevestiging en afmelding; pas bevestigde
-inschrijvingen worden later naar Klaviyo gesynchroniseerd. Een koppeling,
+toestemmingsmoment, regio en afmelding; alleen actieve inschrijvingen worden
+later naar Klaviyo gesynchroniseerd. Een koppeling,
 vendor-/verwerkerscontrole en actuele Klaviyo-configuratie zijn nog niet
 uitgevoerd.
 

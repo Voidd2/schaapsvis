@@ -25,6 +25,7 @@ const analyticsMigration = await readFile(new URL("../../migrations/0009_site_an
 const customerAdminMigration = await readFile(new URL("../../migrations/0010_admin_customer_management.sql", import.meta.url), "utf8");
 const proofBudgetMigration = await readFile(new URL("../../migrations/0011_r2_proof_usage_budget.sql", import.meta.url), "utf8");
 const newsletterAudienceMigration = await readFile(new URL("../../migrations/0012_newsletter_audience.sql", import.meta.url), "utf8");
+const simplifiedStudentSignupMigration = await readFile(new URL("../../migrations/0013_student_signup_simplification.sql", import.meta.url), "utf8");
 const upgradeDb = new DatabaseSync(":memory:");
 upgradeDb.exec(schema);
 upgradeDb.exec(`
@@ -46,6 +47,7 @@ upgradeDb.exec(analyticsMigration);
 upgradeDb.exec(customerAdminMigration);
 upgradeDb.exec(proofBudgetMigration);
 upgradeDb.exec(newsletterAudienceMigration);
+upgradeDb.exec(simplifiedStudentSignupMigration);
 assert.equal(upgradeDb.prepare("SELECT application_id FROM student_passes WHERE id='legacy-pass'").get().application_id, "legacy-application", "migration associates existing student passes with their approved application");
 upgradeDb.close();
 const sqlite = new DatabaseSync(":memory:");
@@ -61,6 +63,7 @@ sqlite.exec(analyticsMigration);
 sqlite.exec(customerAdminMigration);
 sqlite.exec(proofBudgetMigration);
 sqlite.exec(newsletterAudienceMigration);
+sqlite.exec(simplifiedStudentSignupMigration);
 let simulateApplicationCommitFailure = false;
 let decisionReadBarrier = null;
 
@@ -226,7 +229,7 @@ assert.equal(oversizedRegistration.status, 400, "JSON parsing is bounded even wh
 const sentBeforeRegistration = sentEmails.length;
 const registration = await call("/api/members/register", {
   method: "POST",
-  body: { email: "student@example.test", schoolEmail: "student@university.example.test", name: "Test Student", password: "correct horse battery", locale: "en" },
+  body: { email: "student@example.test", schoolEmail: "student@university.example.test", firstName: "Test", lastName: "Student", password: "correct horse battery", locale: "en" },
 });
 assert.equal(registration.status, 202);
 assert.equal(sentEmails.length, sentBeforeRegistration + 2, "registration sends separate verification codes to both addresses");
@@ -234,6 +237,10 @@ const registrationEmailOffset = sentBeforeRegistration;
 assert.match(sentEmails[registrationEmailOffset].text, /\b\d{6}\b/);
 assert.match(sentEmails[registrationEmailOffset + 1].text, /\b\d{6}\b/);
 assert.notEqual(sentEmails[registrationEmailOffset].to, sentEmails[registrationEmailOffset + 1].to, "personal and school emails must be different");
+const registeredName = sqlite.prepare("SELECT first_name, last_name, full_name FROM users WHERE email='student@example.test'").get();
+assert.equal(registeredName.first_name, "Test");
+assert.equal(registeredName.last_name, "Student");
+assert.equal(registeredName.full_name, "Test Student", "registration stores first and last name separately while retaining the display name");
 assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM newsletter_subscriptions WHERE email='student@example.test'").get().count, 0, "account creation does not subscribe to marketing by default");
 const consentedMailOffset = sentEmails.length;
 const consentedRegistration = await call("/api/members/register", {
@@ -242,8 +249,8 @@ const consentedRegistration = await call("/api/members/register", {
 });
 assert.equal(consentedRegistration.status, 202);
 const consentedRegistrationResponse = await consentedRegistration.json();
-assert.equal(sentEmails.length, consentedMailOffset + 3, "student opt-in sends two verification codes and a separate marketing confirmation");
-assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='consented@example.test'").get().status, "pending", "student opt-in is not an active subscription until email confirmation");
+assert.equal(sentEmails.length, consentedMailOffset + 2, "student opt-in sends only the two necessary verification codes");
+assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='consented@example.test'").get().status, "pending", "student opt-in activates only after the personal email is verified");
 simulateMarketingMailFailure = true;
 const failedMarketingMailOffset = sentEmails.length;
 const marketingFailureRegistration = await call("/api/members/register", {
@@ -255,7 +262,7 @@ assert.equal(marketingFailureRegistration.status, 202, "a failed optional market
 assert.deepEqual(await marketingFailureRegistration.json(), consentedRegistrationResponse, "marketing delivery failures cannot reveal whether an account was created");
 assert.equal(sentEmails.length, failedMarketingMailOffset + 2, "both account verification codes are still delivered");
 assert.ok(sqlite.prepare("SELECT id FROM users WHERE email='marketing-retry@example.test'").get(), "student account survives optional marketing mail failure");
-assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='marketing-retry@example.test'").get().status, "pending", "a failed marketing email cannot activate a subscription");
+assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='marketing-retry@example.test'").get().status, "pending", "marketing consent waits for address verification without sending another email");
 const duplicateRegistration = await call("/api/members/register", {
   method: "POST", headers: { "CF-Connecting-IP": "198.51.100.60" },
   body: { email: "consented@example.test", schoolEmail: "different@university.example.test", name: "Consented Student", password: "correct horse battery", locale: "en", marketingConsent: true },
@@ -283,6 +290,7 @@ assert.equal(invalidVerification.status, 400, "both codes must match before eith
 assert.equal(sqlite.prepare("SELECT email_verified_at FROM users WHERE email='student@example.test'").get().email_verified_at, null, "failed verification does not partially verify the account");
 const verificationResult = await call("/api/members/verify-codes", { method: "POST", body: { email: "student@example.test", personalCode, schoolCode } });
 assert.equal(verificationResult.status, 200);
+assert.match(verificationResult.headers.get("Set-Cookie") || "", /sv_member=/, "successful code verification signs the new member in immediately");
 assert.equal(sqlite.prepare("SELECT email_verified_at, school_email_verified_at FROM users WHERE email='student@example.test'").get().school_email_verified_at !== null, true, "both email addresses are verified");
 const reusedCodes = await call("/api/members/verify-codes", { method: "POST", body: { email: "student@example.test", personalCode, schoolCode } });
 assert.equal(reusedCodes.status, 400, "verification codes are single-use");
@@ -346,98 +354,37 @@ assert.equal((await call("/api/members/login", {
   headers: { "CF-Connecting-IP": "203.0.113.99" },
 })).status, 429, "changing IP addresses cannot bypass the account-specific login limit");
 
-const proof = new File(["%PDF-1.7\nstudent enrollment proof"], "bewijs.pdf", { type: "application/pdf" });
-const missingConsentForm = new FormData();
-missingConsentForm.set("institution", "MBO Leiden");
-missingConsentForm.set("educationLevel", "mbo");
-missingConsentForm.set("studiesInLeiden", "true");
-missingConsentForm.set("proof", proof);
-assert.equal((await call("/api/members/student-application", { method: "POST", body: missingConsentForm, cookie: sessionCookie })).status, 400, "proof processing requires its own explicit consent");
-assert.equal(objects.size, 0, "proof is not uploaded without processing consent");
 const secondarySchoolForm = new FormData();
 secondarySchoolForm.set("institution", "Leidse middelbare school");
 secondarySchoolForm.set("educationLevel", "secondary");
-secondarySchoolForm.set("studiesInLeiden", "true");
-secondarySchoolForm.set("proofConsent", "true");
-secondarySchoolForm.set("proof", proof);
+secondarySchoolForm.set("studyCity", "Den Haag");
 assert.equal((await call("/api/members/student-application", { method: "POST", body: secondarySchoolForm, cookie: sessionCookie })).status, 400, "secondary-school applicants are not eligible");
-assert.equal(objects.size, 0, "ineligible proof is not uploaded");
+assert.equal(objects.size, 0, "student applications no longer upload proof objects");
 const applicationForm = new FormData();
-applicationForm.set("institution", "MBO Leiden");
+applicationForm.set("institution", "MBO Rijnland");
 applicationForm.set("educationLevel", "mbo");
-applicationForm.set("studiesInLeiden", "true");
-applicationForm.set("proofConsent", "true");
-applicationForm.set("proof", proof);
-sqlite.prepare("UPDATE r2_proof_storage_budget SET bytes_reserved=? WHERE id=1").run(4_000_000_000);
-sqlite.exec("DELETE FROM auth_rate_limits");
-assert.equal((await call("/api/members/student-application", { method: "POST", body: applicationForm, cookie: sessionCookie })).status, 429, "R2 storage hard ceiling blocks uploads before writing to the bucket");
-assert.equal(objects.size, 0, "a full storage reservation never reaches R2");
-sqlite.prepare("UPDATE r2_proof_storage_budget SET bytes_reserved=0 WHERE id=1").run();
-const budgetNow = new Date().toISOString();
-sqlite.prepare("UPDATE r2_proof_operation_budget SET month=?, day=?, put_ops=400000 WHERE id=1").run(budgetNow.slice(0, 7), budgetNow.slice(0, 10));
-sqlite.exec("DELETE FROM auth_rate_limits");
-assert.equal((await call("/api/members/student-application", { method: "POST", body: applicationForm, cookie: sessionCookie })).status, 429, "monthly R2 Class A quota prevents more uploads");
-assert.equal(sqlite.prepare("SELECT bytes_reserved FROM r2_proof_storage_budget WHERE id=1").get().bytes_reserved, 0, "denied operation quota releases its storage reservation");
-sqlite.prepare("UPDATE r2_proof_operation_budget SET put_ops=0 WHERE id=1").run();
-sqlite.exec("DELETE FROM auth_rate_limits");
-simulateApplicationCommitFailure = true;
-simulateProofDeleteFailure = true;
-assert.equal((await call("/api/members/student-application", { method: "POST", body: applicationForm, cookie: sessionCookie })).status, 503);
-assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM student_applications").get().count, 0, "failed application commit leaves no database reference");
-assert.equal(objects.size, 1, "if both the database commit and R2 delete fail, the object remains private until scheduled cleanup");
-const failedUpload = sqlite.prepare("SELECT object_key FROM student_proof_cleanup_queue").get();
-assert.ok(failedUpload?.object_key && objects.has(failedUpload.object_key), "the failed upload retains its durable cleanup handle");
-assert.equal(sqlite.prepare("SELECT bytes_reserved FROM r2_proof_storage_budget WHERE id=1").get().bytes_reserved, proof.size, "failed cleanup keeps its storage reservation to prevent undercounting");
-sqlite.prepare("UPDATE student_proof_cleanup_queue SET queued_at=? WHERE object_key=?").run("2000-01-01T00:00:00.000Z", failedUpload.object_key);
-simulateProofDeleteFailure = false;
-const orphanCleanupTasks = [];
-await memberWorker.scheduled({}, env, { waitUntil(task) { orphanCleanupTasks.push(task); } });
-await Promise.all(orphanCleanupTasks);
-assert.equal(objects.has(failedUpload.object_key), false, "scheduled cleanup removes an old unlinked proof after R2 recovers");
-assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM student_proof_cleanup_queue").get().count, 0, "successful orphan cleanup clears its queue row");
-assert.equal(sqlite.prepare("SELECT bytes_reserved FROM r2_proof_storage_budget WHERE id=1").get().bytes_reserved, 0, "successful orphan cleanup releases its storage reservation once");
+applicationForm.set("studyCity", "Alphen aan den Rijn");
 const applicationResponse = await call("/api/members/student-application", { method: "POST", body: applicationForm, cookie: sessionCookie });
 assert.equal(applicationResponse.status, 202);
-assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM consent_events WHERE user_id=(SELECT id FROM users WHERE email='student@example.test') AND consent_type='student_proof_processing'").get().count, 1, "proof consent is committed with the application");
-const activeApplication = sqlite.prepare("SELECT id, proof_object_key FROM student_applications WHERE status='pending'").get();
+assert.equal(objects.size, 0, "school-email applications never write to R2");
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM consent_events WHERE user_id=(SELECT id FROM users WHERE email='student@example.test') AND consent_type='student_proof_processing'").get().count, 0, "no proof-processing consent is collected when no proof is requested");
+const activeApplication = sqlite.prepare("SELECT id, proof_object_key, study_city, eligibility_method FROM student_applications WHERE status='pending'").get();
+assert.equal(activeApplication.proof_object_key, null);
+assert.equal(activeApplication.study_city, "Alphen aan den Rijn", "study city replaces the former Leiden-only checkbox");
+assert.equal(activeApplication.eligibility_method, "verified-school-email");
 assert.throws(() => sqlite.prepare(`INSERT INTO student_applications (id,user_id,institution,education_level,proof_mime_type,proof_consent_version,proof_consent_at,status,submitted_at) VALUES ('duplicate-pending','${sqlite.prepare("SELECT id FROM users WHERE email='student@example.test'").get().id}','MBO Leiden','mbo','application/pdf','test-v1','2026-10-18','pending','2026-10-18')`).run(), /UNIQUE constraint failed/, "database prevents concurrent duplicate pending applications for one account");
-sqlite.prepare("INSERT INTO student_proof_cleanup_queue (object_key, application_id, queued_at) VALUES (?, ?, ?)").run(activeApplication.proof_object_key, activeApplication.id, "2000-01-01T00:00:00.000Z");
-const linkedCleanupTasks = [];
-await memberWorker.scheduled({}, env, { waitUntil(task) { linkedCleanupTasks.push(task); } });
-await Promise.all(linkedCleanupTasks);
-assert.equal(objects.has(activeApplication.proof_object_key), true, "orphan cleanup never deletes proof objects linked to a pending application");
-assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM student_proof_cleanup_queue WHERE object_key=?").get(activeApplication.proof_object_key).count, 0, "a stale queue row for an already-linked proof is discarded safely");
-sqlite.exec("DELETE FROM auth_rate_limits"); // Keep later size-limit assertions independent of the per-user submission cap.
-const oversizedForm = new FormData();
-oversizedForm.set("institution", "MBO Leiden");
-oversizedForm.set("educationLevel", "mbo");
-oversizedForm.set("studiesInLeiden", "true");
-oversizedForm.set("proofConsent", "true");
-oversizedForm.set("proof", new File([new Uint8Array(8 * 1024 * 1024 + 64_001)], "bewijs.pdf", { type: "application/pdf" }));
-assert.equal((await call("/api/members/student-application", { method: "POST", body: oversizedForm, cookie: sessionCookie })).status, 413, "streaming cap rejects oversized multipart uploads even without Content-Length");
 assert.equal((await call("/api/members/admin/student-applications")).status, 403);
 const queue = await call("/api/members/admin/student-applications", { cookie: sessionCookie });
 assert.equal(queue.status, 200);
 const application = (await queue.json()).applications[0];
 assert.equal(application.email, "student@example.test");
-const currentUsagePeriod = new Date().toISOString();
-sqlite.prepare("UPDATE r2_proof_operation_budget SET month=?, day=?, get_ops=4000000 WHERE id=1").run(currentUsagePeriod.slice(0, 7), currentUsagePeriod.slice(0, 10));
-assert.equal((await call(`/api/members/admin/student-applications/${application.id}/proof`, { cookie: sessionCookie })).status, 429, "monthly R2 Class B quota blocks additional proof reads");
-sqlite.prepare("UPDATE r2_proof_operation_budget SET get_ops=0 WHERE id=1").run();
-assert.equal((await call(`/api/members/admin/student-applications/${application.id}/proof`, { cookie: sessionCookie })).status, 200);
-
-simulateProofDeleteFailure = true;
+assert.equal(application.study_city, "Alphen aan den Rijn");
+assert.equal(application.has_proof, 0, "new applications tell the admin UI there is no proof link");
 const decision = await call(`/api/members/admin/student-applications/${application.id}/decision`, {
   method: "POST", cookie: sessionCookie, body: { decision: "approved" },
 });
 assert.equal(decision.status, 200);
-assert.equal((await decision.json()).proofDeleted, false, "review result makes a failed proof deletion visible to the administrator");
-assert.equal(objects.size, 1, "failed deletion does not silently lose the private proof key");
-assert.equal((await call(`/api/members/admin/student-applications/${application.id}/cleanup`, { method: "POST", cookie: sessionCookie })).status, 503, "failed cleanup can be retried and remains explicit");
-simulateProofDeleteFailure = false;
-assert.equal((await call(`/api/members/admin/student-applications/${application.id}/cleanup`, { method: "POST", cookie: sessionCookie })).status, 200);
-assert.equal(objects.size, 0, "approved proof is removed from private R2 after retry");
-assert.equal(sqlite.prepare("SELECT bytes_reserved FROM r2_proof_storage_budget WHERE id=1").get().bytes_reserved, 0, "reviewed-proof retry releases the byte reservation");
+assert.equal((await decision.json()).proofDeleted, true, "proof-free applications need no cleanup retry");
 const account = await call("/api/members/me", { cookie: sessionCookie });
 const pass = (await account.json()).discountPass;
 assert.ok(pass?.code);
@@ -455,10 +402,8 @@ assert.equal((await expiredAccount.json()).discountPass, null, "expired pass is 
 const renewalForm = new FormData();
 renewalForm.set("institution", "MBO Leiden");
 renewalForm.set("educationLevel", "mbo");
-renewalForm.set("studiesInLeiden", "true");
-renewalForm.set("proofConsent", "true");
-renewalForm.set("proof", proof);
-assert.equal((await call("/api/members/student-application", { method: "POST", body: renewalForm, cookie: sessionCookie })).status, 202, "student can submit new proof after the pass expires");
+renewalForm.set("studyCity", "Leiden");
+assert.equal((await call("/api/members/student-application", { method: "POST", body: renewalForm, cookie: sessionCookie })).status, 202, "student can reapply after the pass expires");
 const renewalQueue = await call("/api/members/admin/student-applications", { cookie: sessionCookie });
 const renewalApplication = (await renewalQueue.json()).applications[0];
 let releaseDecisionReads;
@@ -468,12 +413,10 @@ decisionReadBarrier = {
   promise: new Promise((resolve) => { releaseDecisionReads = resolve; }),
   release() { releaseDecisionReads(); },
 };
-simulateProofDeleteFailure = true;
 const competingDecisions = await Promise.all([
   call(`/api/members/admin/student-applications/${renewalApplication.id}/decision`, { method: "POST", cookie: sessionCookie, body: { decision: "approved" } }),
   call(`/api/members/admin/student-applications/${renewalApplication.id}/decision`, { method: "POST", cookie: sessionCookie, body: { decision: "rejected" } }),
 ]);
-simulateProofDeleteFailure = false;
 assert.equal(decisionReadBarrier.reads, 2, "both administrators read the pending application before either decision is committed");
 decisionReadBarrier = null;
 const competingStatuses = await Promise.all(competingDecisions.map((response) => response.status));
@@ -481,20 +424,11 @@ assert.deepEqual([...competingStatuses].sort((a, b) => a - b), [200, 409], "only
 let winningDecision = competingStatuses[0] === 200 ? "approved" : "rejected";
 assert.equal(sqlite.prepare("SELECT status FROM student_applications WHERE id=?").get(renewalApplication.id).status, winningDecision, "the saved review matches the only successful response");
 assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM admin_audit_log WHERE application_id=? AND action IN ('application_approved','application_rejected')").get(renewalApplication.id).count, 1, "a race records exactly one review decision");
-const unresolvedProof = sqlite.prepare("SELECT proof_object_key FROM student_applications WHERE id=?").get(renewalApplication.id);
-assert.ok(unresolvedProof?.proof_object_key && objects.has(unresolvedProof.proof_object_key), "a failed immediate deletion leaves the reviewed proof queued for cleanup");
-const scheduledTasks = [];
-await memberWorker.scheduled({}, env, { waitUntil(task) { scheduledTasks.push(task); } });
-await Promise.all(scheduledTasks);
-assert.equal(objects.has(unresolvedProof.proof_object_key), false, "the scheduled retry deletes a reviewed proof after storage recovers");
-assert.equal(sqlite.prepare("SELECT proof_object_key FROM student_applications WHERE id=?").get(renewalApplication.id).proof_object_key, null, "the scheduled retry clears the stored key after deletion");
 if (winningDecision === "rejected") {
   const retryForm = new FormData();
   retryForm.set("institution", "MBO Leiden");
   retryForm.set("educationLevel", "mbo");
-  retryForm.set("studiesInLeiden", "true");
-  retryForm.set("proofConsent", "true");
-  retryForm.set("proof", proof);
+  retryForm.set("studyCity", "Leiden");
   assert.equal((await call("/api/members/student-application", { method: "POST", body: retryForm, cookie: sessionCookie })).status, 202, "a student can submit again after a rejected renewal");
   const retryQueue = await call("/api/members/admin/student-applications", { cookie: sessionCookie });
   const retryApplication = (await retryQueue.json()).applications[0];
@@ -524,7 +458,7 @@ const stagedFinish = await call("/api/members/newsletter/subscribe", {
 });
 assert.equal(stagedFinish.status, 202);
 assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM newsletter_signup_drafts WHERE email='staged-deals@example.test'").get().count, 0, "completed signup removes its temporary draft");
-assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='staged-deals@example.test'").get().status, "pending", "marketing remains off until double opt-in confirmation");
+assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='staged-deals@example.test'").get().status, "subscribed", "explicit form consent activates the subscription without another email");
 assert.equal(sqlite.prepare("SELECT region_tag FROM newsletter_subscriptions WHERE email='staged-deals@example.test'").get().region_tag, "regio-071", "region tag is attached after explicit consent");
 assert.equal((await call("/api/members/newsletter/subscribe", { method: "POST", body: { email: "staged-deals@example.test", draftToken: signupState.draftToken, consent: true, regionTag: "regio-071" } })).status, 410, "signup continuation tokens are one-use");
 
@@ -532,21 +466,6 @@ const subscription = await call("/api/members/newsletter/subscribe", {
   method: "POST", body: { email: "deals@example.test", consent: true, locale: "de", regionTag: "leiden" },
 });
 assert.equal(subscription.status, 202);
-const confirmationUrl = sentEmails.at(-1).text.match(/https:\/\/[^\s]+/)[0];
-const confirmation = new URL(confirmationUrl);
-assert.equal(sentEmails.at(-1).subject, "E-Mail-Angebote bestätigen", "newsletter confirmation email is localized");
-assert.equal(confirmation.searchParams.get("locale"), "de");
-const confirmationPage = await call(`${confirmation.pathname}${confirmation.search}`);
-assert.equal(confirmationPage.status, 200);
-assert.match(await confirmationPage.text(), /<html lang="de">/);
-const confirmationForm = new FormData();
-confirmationForm.set("token", confirmation.searchParams.get("token"));
-confirmationForm.set("locale", "de");
-const confirmationResult = await call(confirmation.pathname, { method: "POST", body: confirmationForm });
-assert.equal(confirmationResult.status, 303);
-assert.equal(confirmationResult.headers.get("Location"), "https://schaapsvishandel.nl/de/account?newsletter=confirmed");
-assert.equal(sentEmails.at(-1).subject, "Sie erhalten jetzt Angebote von Schaap's Vishandel");
-assert.match(sentEmails.at(-1).text, /locale=de/);
 assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='deals@example.test'").get().status, "subscribed");
 assert.equal(sqlite.prepare("SELECT region_tag FROM newsletter_subscriptions WHERE email='deals@example.test'").get().region_tag, "leiden", "newsletter stores the subscriber's chosen local-area tag");
 
@@ -555,10 +474,6 @@ const studentSubscription = await call("/api/members/newsletter/subscribe", {
   method: "POST", cookie: sessionCookie, body: { email: "student@example.test", consent: true, locale: "nl", regionTag: "leiden" },
 });
 assert.equal(studentSubscription.status, 202);
-const studentConfirmation = new URL(sentEmails.at(-1).text.match(/https:\/\/[^\s]+/)[0]);
-const studentConfirmationForm = new FormData();
-studentConfirmationForm.set("token", studentConfirmation.searchParams.get("token"));
-assert.equal((await call(studentConfirmation.pathname, { method: "POST", body: studentConfirmationForm })).status, 303);
 assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='student@example.test'").get().status, "subscribed");
 const segmentOverview = await call("/api/members/admin/newsletter-campaigns", { cookie: sessionCookie });
 assert.equal((await segmentOverview.json()).studentSubscriberCount, 1, "only confirmed subscribers with an active approved pass are in the student audience");
@@ -593,7 +508,7 @@ const draft = await call("/api/members/admin/newsletter-campaigns", {
 assert.equal(draft.status, 201);
 const campaignId = (await draft.json()).id;
 const queued = await call(`/api/members/admin/newsletter-campaigns/${campaignId}/send`, { method: "POST", cookie: sessionCookie });
-assert.equal((await queued.json()).recipientCount, 1);
+assert.equal((await queued.json()).recipientCount, 2, "single-opt-in subscribers are immediately eligible for a general campaign");
 let job;
 await memberWorker.scheduled({}, env, { waitUntil(promise) { job = promise; } });
 await job;
@@ -616,11 +531,6 @@ const dailyLimitSubscription = await call("/api/members/newsletter/subscribe", {
   method: "POST", body: { email: "quota@example.test", consent: true, regionTag: "voorschoten" },
 });
 assert.equal(dailyLimitSubscription.status, 202);
-const quotaConfirmationUrl = sentEmails.at(-1).text.match(/https:\/\/[^\s]+/)[0];
-const quotaConfirmation = new URL(quotaConfirmationUrl);
-const quotaForm = new FormData();
-quotaForm.set("token", quotaConfirmation.searchParams.get("token"));
-assert.equal((await call(quotaConfirmation.pathname, { method: "POST", body: quotaForm })).status, 303);
 const quotaDraft = await call("/api/members/admin/newsletter-campaigns", {
   method: "POST", cookie: sessionCookie, body: { subject: "Quota test", body: "Test quota", audience: "all" },
 });
@@ -738,5 +648,5 @@ assert.equal((await call("/api/members/admin/newsletter-campaigns", { cookie: ow
 assert.equal((await call("/api/members/admin/student-applications", { cookie: ownerSession })).status, 200, "owner session and IP can review student applications");
 assert.equal((await call("/api/members/admin/newsletter-campaigns", { cookie: ownerSession, headers: { "CF-Connecting-IP": "198.51.100.5" } })).status, 403, "owner session is not enough from an untrusted IP");
 
-console.log("Account worker integration tests passed: email verification, login, proof upload and orphan cleanup retries, private proof review, student pass renewal, newsletter double opt-in, campaign delivery, unsubscribe and daily quota recovery.");
+console.log("Account worker integration tests passed: email verification with immediate login, proof-free student applications, student pass renewal, newsletter single opt-in, campaign delivery, unsubscribe and daily quota recovery.");
 

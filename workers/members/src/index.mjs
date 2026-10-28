@@ -546,9 +546,14 @@ async function register(request, env) {
   const copy = ACCOUNT_COPY[locale];
   const email = normalizeEmail(body?.email);
   const schoolEmail = normalizeEmail(body?.schoolEmail);
-  const name = typeof body?.name === "string" ? body.name.trim().slice(0, 120) : "";
+  const firstName = typeof body?.firstName === "string" ? body.firstName.trim().replace(/\s+/g, " ").slice(0, 60) : "";
+  const lastName = typeof body?.lastName === "string" ? body.lastName.trim().replace(/\s+/g, " ").slice(0, 80) : "";
+  // Accept the previous single-name payload during the two-Worker rollout so
+  // an older cached page never breaks registration between deployments.
+  const legacyName = typeof body?.name === "string" ? body.name.trim().replace(/\s+/g, " ").slice(0, 120) : "";
+  const name = firstName && lastName ? `${firstName} ${lastName}` : legacyName;
   const password = typeof body?.password === "string" ? body.password : "";
-  if (!email || !schoolEmail || email === schoolEmail || name.length < 2 || password.length < 12 || password.length > 128) {
+  if (!email || !schoolEmail || email === schoolEmail || name.length < 2 || (!legacyName && (!firstName || !lastName)) || password.length < 12 || password.length > 128) {
     return json({ error: "invalid_input", message: copy.invalidRegistration }, 400);
   }
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
@@ -561,8 +566,8 @@ async function register(request, env) {
   if (schoolTaken) return json({ ok: true, message: copy.registrationGeneric }, 202);
   let inserted;
   try {
-    inserted = await env.DB.prepare(`INSERT INTO users (id, email, school_email, full_name, password_hash, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?) ON CONFLICT(email) DO NOTHING`)
-      .bind(userId, email, schoolEmail, name, passwordDigest, created, created).run();
+    inserted = await env.DB.prepare(`INSERT INTO users (id, email, school_email, full_name, first_name, last_name, password_hash, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(email) DO NOTHING`)
+      .bind(userId, email, schoolEmail, name, firstName || null, lastName || null, passwordDigest, created, created).run();
   } catch { return json({ ok: true, message: copy.registrationGeneric }, 202); }
   if (!inserted.meta?.changes) return json({ ok: true, message: copy.registrationGeneric }, 202);
 
@@ -584,15 +589,12 @@ async function register(request, env) {
       await env.DB.batch([
         env.DB.prepare(`INSERT INTO consent_events (id, user_id, consent_type, granted, text_version, source, recorded_at) VALUES (?, ?, 'marketing_email', 1, ?, 'account-registration', ?)`)
           .bind(crypto.randomUUID(), userId, NEWSLETTER_CONSENT_VERSION, consentAt),
-        env.DB.prepare(`INSERT INTO newsletter_subscriptions (email, user_id, status, consent_text_version, consented_at, source, created_at, updated_at) VALUES (?, ?, 'pending', ?, ?, 'account-registration', ?, ?) ON CONFLICT(email) DO UPDATE SET status='pending', consent_text_version=excluded.consent_text_version, consented_at=excluded.consented_at, updated_at=excluded.updated_at`)
+        env.DB.prepare(`INSERT INTO newsletter_subscriptions (email, user_id, status, consent_text_version, consented_at, source, created_at, updated_at) VALUES (?, ?, 'pending', ?, ?, 'account-registration', ?, ?) ON CONFLICT(email) DO UPDATE SET user_id=excluded.user_id, status='pending', consent_text_version=excluded.consent_text_version, consented_at=excluded.consented_at, confirmed_at=NULL, unsubscribed_at=NULL, source=excluded.source, updated_at=excluded.updated_at`)
           .bind(email, userId, NEWSLETTER_CONSENT_VERSION, consentAt, consentAt, consentAt),
       ]);
-      const marketingToken = await issueEmailToken(env, { userId, email, purpose: "newsletter_confirm" });
-      const confirmUrl = emailUrl(env, "/api/members/newsletter/confirm", marketingToken, locale);
-      const note = locale === "nl" ? "Dit staat los van uw account. U kunt zich altijd afmelden." : locale === "de" ? "Dies ist unabhängig von Ihrem Konto. Sie können sich jederzeit abmelden." : "This is separate from your account. You can unsubscribe at any time.";
-      await sendMail(env, email, copy.newsletterSubject, `${copy.newsletterIntro}\n${confirmUrl}`, `<p>${copy.newsletterIntro}</p><p><a href="${confirmUrl}">${copy.newsletterButton}</a></p><p>${note}</p>`);
     } catch {
-      // An optional marketing email must not make a successfully created account look like a failed registration.
+      // Optional marketing consent must never make a successfully created
+      // account look like a failed registration.
     }
   }
   return json({ ok: true, message: copy.registrationGeneric }, 202);
@@ -702,8 +704,10 @@ async function verifyRegistrationCodes(request, env) {
   await env.DB.batch([
     env.DB.prepare(`UPDATE users SET email_verified_at=COALESCE(email_verified_at, ?), school_email_verified_at=COALESCE(school_email_verified_at, ?), updated_at=? WHERE id=?`).bind(time, time, time, user.id),
     env.DB.prepare(`UPDATE email_tokens SET used_at=? WHERE user_id=? AND purpose IN ('verify_email','verify_school') AND used_at IS NULL`).bind(time, user.id),
+    env.DB.prepare(`UPDATE newsletter_subscriptions SET status='subscribed', confirmed_at=COALESCE(confirmed_at, ?), unsubscribed_at=NULL, updated_at=? WHERE user_id=? AND email=? AND source='account-registration' AND status='pending'`).bind(time, time, user.id, user.email),
   ]);
-  return json({ ok: true });
+  const token = await createSession(env, user.id);
+  return json({ ok: true }, 200, { "Set-Cookie": sessionCookie(token) });
 }
 
 async function verifyEmailPage(request, env) {
@@ -771,7 +775,7 @@ async function me(request, env) {
   const clientIp = String(request.headers.get("CF-Connecting-IP") || "").trim().toLowerCase();
   const isAdmin = allowedEmails.includes(user.email.toLowerCase()) && Boolean(clientIp && allowedIps.includes(clientIp));
   const [application, pass] = await Promise.all([
-    env.DB.prepare(`SELECT status, education_level, institution, submitted_at, reviewed_at FROM student_applications WHERE user_id = ? ORDER BY submitted_at DESC LIMIT 1`).bind(user.id).first(),
+    env.DB.prepare(`SELECT status, education_level, institution, study_city, submitted_at, reviewed_at FROM student_applications WHERE user_id = ? ORDER BY submitted_at DESC LIMIT 1`).bind(user.id).first(),
     env.DB.prepare(`SELECT p.id, p.status, p.issued_at, p.expires_at FROM student_passes p JOIN student_applications a ON a.id = p.application_id WHERE p.user_id = ? AND p.status = 'active' AND p.revoked_at IS NULL AND a.status = 'approved' ORDER BY a.reviewed_at DESC, p.issued_at DESC LIMIT 1`).bind(user.id).first(),
   ]);
   let discountPass = null;
@@ -854,8 +858,6 @@ async function validProofBytes(file, mime) {
 
 async function submitStudentApplication(request, env) {
   if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
-  const contentLength = Number(request.headers.get("Content-Length") || 0);
-  if (contentLength > MAX_PROOF_BYTES + 64_000) return json({ error: "file_too_large" }, 413);
   const user = await sessionUser(request, env);
   if (!user) return json({ error: "authentication_required" }, 401);
   const verifiedAddresses = await env.DB.prepare(`SELECT school_email, school_email_verified_at FROM users WHERE id=?`).bind(user.id).first();
@@ -863,19 +865,15 @@ async function submitStudentApplication(request, env) {
   if (!env.AUTH_PEPPER) return json({ error: "application_unavailable" }, 503);
   const applicationLimitKey = await hmac(env.AUTH_PEPPER, `student-application:${user.id}`);
   if (!await rateLimit(env.DB, applicationLimitKey, 4, 24 * 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
-  if (!env.STUDENT_PROOFS) return json({ error: "proof_storage_unavailable" }, 503);
-  const parsed = await readLimitedFormData(request, MAX_PROOF_BYTES + 64_000);
-  if (parsed.tooLarge) return json({ error: "file_too_large" }, 413);
+  const parsed = await readLimitedFormData(request, 64_000);
+  if (parsed.tooLarge) return json({ error: "form_too_large" }, 413);
   if (!parsed.form) return json({ error: "invalid_form" }, 400);
   const form = parsed.form;
   const institution = String(form.get("institution") || "").trim().slice(0, 180);
   const level = String(form.get("educationLevel") || "");
-  const studiesInLeiden = form.get("studiesInLeiden") === "true";
-  const consented = form.get("proofConsent") === "true";
-  const file = form.get("proof");
-  const mime = proofMime(file);
-  if (!institution || !["mbo", "hbo", "wo"].includes(level) || !studiesInLeiden || !consented || !mime || !await validProofBytes(file, mime)) {
-    return json({ error: "invalid_application", message: "Controleer uw opleiding, de toestemming en het bewijsbestand (PDF, JPG of PNG, maximaal 8 MB)." }, 400);
+  const studyCity = String(form.get("studyCity") || "").trim().replace(/\s+/g, " ").slice(0, 120);
+  if (!institution || !studyCity || !["mbo", "hbo", "wo"].includes(level)) {
+    return json({ error: "invalid_application", message: "Controleer uw onderwijsinstelling, opleidingsniveau en studiestad." }, 400);
   }
   const existing = await env.DB.prepare(`SELECT status FROM student_applications WHERE user_id = ? ORDER BY submitted_at DESC LIMIT 1`).bind(user.id).first();
   if (existing?.status === "pending") return json({ error: "application_exists" }, 409);
@@ -885,54 +883,12 @@ async function submitStudentApplication(request, env) {
   }
 
   const id = crypto.randomUUID();
-  const objectKey = `student-proofs/${user.id}/${id}`;
   const submittedAt = nowIso();
-  let reserved = false;
   try {
-    reserved = await reserveProofObject(env, objectKey, file.size);
+    await env.DB.prepare(`INSERT INTO student_applications (id, user_id, institution, education_level, study_city, eligibility_method, proof_object_key, proof_mime_type, proof_consent_version, proof_consent_at, status, submitted_at)
+      VALUES (?, ?, ?, ?, ?, 'verified-school-email', NULL, 'application/pdf', 'not-applicable-school-email-v1', ?, 'pending', ?)`)
+      .bind(id, user.id, institution, level, studyCity, submittedAt, submittedAt).run();
   } catch {
-    return json({ error: "proof_storage_unavailable" }, 503);
-  }
-  if (!reserved) return json({ error: "proof_storage_capacity_reached" }, 429);
-  try {
-    if (!await allowProofOperation(env, "put")) {
-      await releaseProofObject(env, objectKey);
-      return json({ error: "proof_storage_usage_limit_reached" }, 429);
-    }
-  } catch {
-    try { await releaseProofObject(env, objectKey); } catch { /* Keep a conservative reservation if D1 cannot release it. */ }
-    return json({ error: "proof_storage_unavailable" }, 503);
-  }
-  try {
-    // Persist a cleanup handle before R2 can receive any bytes. If the later
-    // D1 transaction fails and immediate R2 deletion also fails, cron can retry.
-    await env.DB.prepare(`INSERT INTO student_proof_cleanup_queue (object_key, application_id, queued_at) VALUES (?, ?, ?)`).bind(objectKey, id, submittedAt).run();
-    await env.STUDENT_PROOFS.put(objectKey, file.stream(), { httpMetadata: { contentType: mime, cacheControl: "private, no-store" } });
-    await env.DB.prepare(`UPDATE student_proof_cleanup_queue SET queued_at=? WHERE object_key=?`).bind(nowIso(), objectKey).run();
-    const results = await env.DB.batch([
-      env.DB.prepare(`INSERT INTO student_applications (id, user_id, institution, education_level, proof_object_key, proof_mime_type, proof_consent_version, proof_consent_at, status, submitted_at)
-        SELECT ?, ?, ?, ?, ?, ?, ?, ?, 'pending', ?
-        WHERE EXISTS (SELECT 1 FROM student_proof_cleanup_queue WHERE object_key=?)`)
-        .bind(id, user.id, institution, level, objectKey, mime, PROOF_CONSENT_VERSION, submittedAt, submittedAt, objectKey),
-      env.DB.prepare(`INSERT INTO consent_events (id, user_id, consent_type, granted, text_version, source, recorded_at)
-        SELECT ?, ?, 'student_proof_processing', 1, ?, 'student-application', ?
-        WHERE EXISTS (SELECT 1 FROM student_applications WHERE id=? AND user_id=?)`)
-        .bind(crypto.randomUUID(), user.id, PROOF_CONSENT_VERSION, submittedAt, id, user.id),
-      env.DB.prepare(`DELETE FROM student_proof_cleanup_queue WHERE object_key=?`).bind(objectKey),
-    ]);
-    if (Number(results?.[0]?.meta?.changes || 0) !== 1) throw new Error("proof cleanup reservation expired");
-  } catch {
-    try {
-      const linked = await env.DB.prepare(`SELECT 1 AS present FROM student_applications WHERE id=? AND proof_object_key=?`).bind(id, objectKey).first();
-      // A D1 batch can have committed even if its response was lost. Never
-      // delete an object that is already referenced by a saved application.
-      if (linked) return json({ ok: true, status: "pending" }, 202);
-      await deleteStudentProof(env, objectKey);
-      await env.DB.prepare(`DELETE FROM student_proof_cleanup_queue WHERE object_key=?`).bind(objectKey).run();
-    } catch {
-      // If D1 is unavailable, keep the queue row and object rather than risk
-      // deleting a proof whose application transaction may have committed.
-    }
     return json({ error: "application_unavailable" }, 503);
   }
   return json({ ok: true, status: "pending" }, 202);
@@ -941,7 +897,7 @@ async function submitStudentApplication(request, env) {
 async function adminQueue(request, env) {
   const admin = await requireAdmin(request, env);
   if (!admin) return json({ error: "forbidden" }, 403);
-  const rows = await env.DB.prepare(`SELECT a.id, a.institution, a.education_level, a.submitted_at, u.full_name, u.email FROM student_applications a JOIN users u ON u.id=a.user_id WHERE a.status='pending' ORDER BY a.submitted_at ASC LIMIT 100`).all();
+  const rows = await env.DB.prepare(`SELECT a.id, a.institution, a.education_level, a.study_city, a.submitted_at, a.proof_object_key IS NOT NULL AS has_proof, u.full_name, u.email FROM student_applications a JOIN users u ON u.id=a.user_id WHERE a.status='pending' ORDER BY a.submitted_at ASC LIMIT 100`).all();
   return json({ applications: rows.results || [] });
 }
 
@@ -1001,7 +957,7 @@ async function adminDecision(request, env, applicationId) {
   // batch; report conflict rather than a false success for the losing review.
   if (Number(results?.[0]?.meta?.changes || 0) !== 1) return json({ error: "application_not_pending" }, 409);
 
-  let proofDeleted = false;
+  let proofDeleted = !application.proof_object_key;
   if (application.proof_object_key) {
     try {
       await deleteStudentProof(env, application.proof_object_key);
@@ -1049,18 +1005,10 @@ async function subscribeNewsletter(request, env) {
   if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "newsletter", ip, email, 12, 4, 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
   const at = nowIso();
   const user = await sessionUser(request, env);
-  await env.DB.prepare(`INSERT INTO newsletter_subscriptions (email, user_id, status, consent_text_version, consented_at, source, created_at, updated_at, region_tag) VALUES (?, ?, 'pending', ?, ?, ?, ?, ?, ?) ON CONFLICT(email) DO UPDATE SET user_id=COALESCE(excluded.user_id, newsletter_subscriptions.user_id), status=CASE WHEN newsletter_subscriptions.status='subscribed' THEN 'subscribed' ELSE 'pending' END, consent_text_version=excluded.consent_text_version, consented_at=excluded.consented_at, source=excluded.source, updated_at=excluded.updated_at, region_tag=excluded.region_tag`)
-    .bind(email, user?.email === email ? user.id : null, NEWSLETTER_CONSENT_VERSION, at, user ? "account" : "newsletter-form", at, at, regionTag).run();
-  const subscription = await env.DB.prepare(`SELECT status FROM newsletter_subscriptions WHERE email = ?`).bind(email).first();
-  if (subscription?.status === "subscribed") {
-    if (draftToken) await env.DB.prepare(`DELETE FROM newsletter_signup_drafts WHERE token_hash=?`).bind(await digest(draftToken)).run();
-    return json({ ok: true, message: copy.alreadySubscribed }, 202);
-  }
-  const token = await issueEmailToken(env, { userId: user?.email === email ? user.id : null, email, purpose: "newsletter_confirm" });
-  const link = emailUrl(env, "/api/members/newsletter/confirm", token, locale);
-  await sendMail(env, email, copy.newsletterSubject, `${copy.newsletterIntro}\n${link}`, `<p>${copy.newsletterIntro}</p><p><a href="${link}">${copy.newsletterButton}</a></p>`);
+  await env.DB.prepare(`INSERT INTO newsletter_subscriptions (email, user_id, status, consent_text_version, consented_at, confirmed_at, source, created_at, updated_at, region_tag) VALUES (?, ?, 'subscribed', ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(email) DO UPDATE SET user_id=COALESCE(excluded.user_id, newsletter_subscriptions.user_id), status='subscribed', consent_text_version=excluded.consent_text_version, consented_at=excluded.consented_at, confirmed_at=excluded.confirmed_at, unsubscribed_at=NULL, source=excluded.source, updated_at=excluded.updated_at, region_tag=excluded.region_tag`)
+    .bind(email, user?.email === email ? user.id : null, NEWSLETTER_CONSENT_VERSION, at, at, user ? "account" : "newsletter-form", at, at, regionTag).run();
   if (draftToken) await env.DB.prepare(`DELETE FROM newsletter_signup_drafts WHERE token_hash=?`).bind(await digest(draftToken)).run();
-  return json({ ok: true, message: copy.newsletterCheck }, 202);
+  return json({ ok: true, message: copy.alreadySubscribed }, 202);
 }
 
 async function startNewsletterSignup(request, env) {
@@ -1105,21 +1053,8 @@ async function confirmNewsletter(request, env) {
     env.DB.prepare(`UPDATE newsletter_subscriptions SET status='subscribed', confirmed_at=?, updated_at=? WHERE email=? AND status='pending'`).bind(time, time, token.email),
     env.DB.prepare(`UPDATE email_tokens SET used_at=? WHERE token_hash=? AND used_at IS NULL`).bind(time, tokenHash),
   ]);
-  const unsubscribeToken = await issueEmailToken(env, {
-    email: token.email,
-    purpose: "newsletter_unsubscribe",
-    ttlMs: 10 * 365 * 24 * 60 * 60 * 1000,
-  });
-  const unsubscribeUrl = emailUrl(env, "/api/members/newsletter/unsubscribe", unsubscribeToken, locale);
-  try {
-    await sendMail(
-      env,
-      token.email,
-      copy.newsletterConfirmedSubject,
-      `${copy.newsletterConfirmedIntro}\n\n${copy.unsubscribeLink}: ${unsubscribeUrl}`,
-      `<p>${copy.newsletterConfirmedIntro}</p><p><a href="${unsubscribeUrl}">${copy.unsubscribeLink}</a></p>`,
-    );
-  } catch { /* Confirmation is saved; every campaign still carries its own unsubscribe link. */ }
+  // Legacy double-opt-in links remain valid, but no standalone confirmation
+  // or unsubscribe email is sent. Every campaign creates its own opt-out link.
   return redirect(`${env.SITE_ORIGIN}/${locale}/account?newsletter=confirmed`);
 }
 
