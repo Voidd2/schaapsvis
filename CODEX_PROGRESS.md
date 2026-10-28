@@ -17,14 +17,13 @@ Laatst bijgewerkt: 28 oktober 2026, 06:35 Europe/Amsterdam
 
 ## Eerstvolgende werkpakketten
 
-1. Wijzigingen committen, pushen, reviewen en via de bestaande deploymentflow live zetten.
-2. Studentenpas verbeteren met naam, Schaap's-logo, korte controlecode, QR en personeelscontrole.
-3. Verificatie- en resetmails vormgeven met merkstijl, logo, nuttige links en minder e-mailmomenten.
-4. Wachtwoord-resetpagina visueel gelijkmaken aan de rest van de website.
-5. Apple Wallet en Google Wallet voorbereiden; echte uitgifte vereist Apple-certificaten en Google Wallet issuer/service-account.
-6. Afzenderreputatie onderzoeken en SPF, DKIM, DMARC, PTR/EHLO en inhoud controleren; een nieuw afzenderadres alleen is geen oplossing.
-7. Desktop- en mobielmenu inhoudelijk gelijkmaken en account/studentenroutes logisch groeperen.
-8. Daarna: cookievoorkeuren, leesbaardere footer/nieuwsbrief-CTA en mobiele lightboxes voor schalen en barbecuefoto's.
+1. Studentenpas met naam, korte controlecode, lokale QR en personeelscontrole live zetten. *(lokaal gebouwd en getest; productie-uitrol volgt na migratie 0014)*
+2. Verificatie- en resetmails vormgeven met merkstijl, logo, nuttige links en minder e-mailmomenten.
+3. Wachtwoord-resetpagina visueel gelijkmaken aan de rest van de website. *(lokaal gebouwd en getest; productie-uitrol volgt)*
+4. Apple Wallet en Google Wallet uitgeven zodra de vereiste accounts en certificaten beschikbaar zijn; technische eisen staan in `docs/wallet-integratieplan.md`.
+5. Afzenderreputatie onderzoeken en SPF, DKIM, DMARC, PTR/EHLO en inhoud controleren; een nieuw afzenderadres alleen is geen oplossing.
+6. Desktop- en mobielmenu inhoudelijk gelijkmaken en account/studentenroutes logisch groeperen.
+7. Daarna: cookievoorkeuren, leesbaardere footer/nieuwsbrief-CTA en mobiele lightboxes voor schalen en barbecuefoto's.
 
 ## Model- en tokenkeuze
 

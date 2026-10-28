@@ -26,6 +26,7 @@ const customerAdminMigration = await readFile(new URL("../../migrations/0010_adm
 const proofBudgetMigration = await readFile(new URL("../../migrations/0011_r2_proof_usage_budget.sql", import.meta.url), "utf8");
 const newsletterAudienceMigration = await readFile(new URL("../../migrations/0012_newsletter_audience.sql", import.meta.url), "utf8");
 const simplifiedStudentSignupMigration = await readFile(new URL("../../migrations/0013_student_signup_simplification.sql", import.meta.url), "utf8");
+const studentPassDisplayCodeMigration = await readFile(new URL("../../migrations/0014_student_pass_display_code.sql", import.meta.url), "utf8");
 const upgradeDb = new DatabaseSync(":memory:");
 upgradeDb.exec(schema);
 upgradeDb.exec(`
@@ -48,7 +49,9 @@ upgradeDb.exec(customerAdminMigration);
 upgradeDb.exec(proofBudgetMigration);
 upgradeDb.exec(newsletterAudienceMigration);
 upgradeDb.exec(simplifiedStudentSignupMigration);
+upgradeDb.exec(studentPassDisplayCodeMigration);
 assert.equal(upgradeDb.prepare("SELECT application_id FROM student_passes WHERE id='legacy-pass'").get().application_id, "legacy-application", "migration associates existing student passes with their approved application");
+assert.equal(upgradeDb.prepare("SELECT display_code FROM student_passes WHERE id='legacy-pass'").get().display_code, null, "legacy pass receives its display code lazily");
 upgradeDb.close();
 const sqlite = new DatabaseSync(":memory:");
 sqlite.exec(schema);
@@ -64,6 +67,7 @@ sqlite.exec(customerAdminMigration);
 sqlite.exec(proofBudgetMigration);
 sqlite.exec(newsletterAudienceMigration);
 sqlite.exec(simplifiedStudentSignupMigration);
+sqlite.exec(studentPassDisplayCodeMigration);
 let simulateApplicationCommitFailure = false;
 let decisionReadBarrier = null;
 
@@ -389,6 +393,7 @@ assert.equal((await decision.json()).proofDeleted, true, "proof-free application
 const account = await call("/api/members/me", { cookie: sessionCookie });
 const pass = (await account.json()).discountPass;
 assert.ok(pass?.code);
+assert.match(pass?.displayCode || "", /^SV-[A-Z0-9]{4}-[A-Z0-9]{4}$/, "approved pass exposes a short staff lookup code");
 assert.ok(pass.expiresAt, "an approved student pass expires after one study year");
 const expectedPassExpiry = new Date(pass.issuedAt);
 expectedPassExpiry.setUTCFullYear(expectedPassExpiry.getUTCFullYear() + 1);
@@ -397,6 +402,10 @@ const passCheck = await call("/api/members/admin/pass/verify", { method: "POST",
 const verifiedPass = await passCheck.json();
 assert.equal(verifiedPass.valid, true);
 assert.deepEqual(verifiedPass.eligibleProducts, ["assortiment"], "student discount applies to the entire assortment");
+const shortPassCheck = await call("/api/members/admin/pass/verify", { method: "POST", cookie: sessionCookie, body: { code: pass.displayCode.toLowerCase() } });
+const shortVerifiedPass = await shortPassCheck.json();
+assert.equal(shortVerifiedPass.valid, true, "staff can verify the short display code case-insensitively");
+assert.equal(shortVerifiedPass.name, "Test Student", "short-code lookup returns the pass holder name");
 sqlite.prepare("UPDATE student_passes SET expires_at='2000-01-01T00:00:00.000Z' WHERE user_id=(SELECT id FROM users WHERE email='student@example.test')").run();
 const expiredAccount = await call("/api/members/me", { cookie: sessionCookie });
 assert.equal((await expiredAccount.json()).discountPass, null, "expired pass is no longer shown as usable");
