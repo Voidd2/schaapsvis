@@ -44,10 +44,10 @@ export function AnalyticsConsent({ locale }: { locale: string }) {
 
   if (choice === "unknown") return null;
   const copy = locale === "de"
-    ? { message: "Dürfen wir anonyme, aggregierte Seitenaufrufe und Linkklicks messen? Es werden keine Besucherprofile erstellt. Sie können diese Auswahl jederzeit über die Datenschutzeinstellungen ändern.", yes: "Einverstanden", no: "Nein danke", privacy: "Datenschutz", settings: "Datenschutzeinstellungen" }
+    ? { title: "Ihre Cookie-Auswahl", message: "Notwendige Cookies sorgen dafür, dass die Website richtig funktioniert. Mit Ihrer Zustimmung helfen uns einfache Statistiken, die Website zu verbessern.", yes: "Akzeptieren", no: "Ablehnen", privacy: "Mehr erfahren", settings: "Cookie-Einstellungen" }
     : locale === "en"
-      ? { message: "May we measure anonymous, aggregated page views and link clicks? We do not build visitor profiles. You can change this choice at any time in Privacy settings.", yes: "Allow", no: "No thanks", privacy: "Privacy", settings: "Privacy settings" }
-      : { message: "Mogen we anonieme, geaggregeerde paginaweergaven en linkklikken meten? We maken geen bezoekersprofielen. U kunt uw keuze altijd wijzigen via Privacy-instellingen.", yes: "Toestaan", no: "Nee bedankt", privacy: "Privacy", settings: "Privacy-instellingen" };
+      ? { title: "Your cookie choice", message: "Necessary cookies keep the website working properly. With your permission, simple statistics help us improve the website.", yes: "Accept", no: "Reject", privacy: "Read more", settings: "Cookie settings" }
+      : { title: "Uw cookiekeuze", message: "Noodzakelijke cookies zorgen dat de website goed werkt. Met uw toestemming helpen eenvoudige statistieken ons om de website te verbeteren.", yes: "Accepteren", no: "Weigeren", privacy: "Lees hier meer", settings: "Cookie-instellingen" };
 
   function choose(value: "accepted" | "declined") {
     window.localStorage.setItem(CONSENT_KEY, value);
@@ -56,22 +56,21 @@ export function AnalyticsConsent({ locale }: { locale: string }) {
 
   function reopenSettings() {
     window.localStorage.removeItem(CONSENT_KEY);
-    if (PRIVATE_PATH.test(pathname)) {
-      window.location.assign(`/${locale}`);
-      return;
-    }
     window.dispatchEvent(new Event(CONSENT_EVENT));
   }
 
-  if (choice || PRIVATE_PATH.test(pathname)) {
+  if (choice) {
     return <button type="button" onClick={reopenSettings} className="fixed bottom-3 left-3 z-[79] rounded-full border border-sky-200 bg-white px-4 py-2 text-sm font-semibold text-sky-900 shadow-lg hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-700 sm:bottom-5 sm:left-5">
       {copy.settings}
     </button>;
   }
 
-  return <aside aria-label="Privacykeuze" className="fixed inset-x-3 bottom-3 z-[80] mx-auto flex max-w-4xl flex-col gap-3 rounded-2xl border border-sky-200 bg-white p-4 shadow-xl sm:flex-row sm:items-center sm:justify-between">
-    <p className="text-sm leading-relaxed">{copy.message} <Link className="underline" href={`/${locale}/privacyverklaring`}>{copy.privacy}</Link></p>
-    <div className="flex shrink-0 gap-2"><button type="button" className="knop knop-lijn" onClick={() => choose("declined")}>{copy.no}</button><button type="button" className="knop knop-navy" onClick={() => choose("accepted")}>{copy.yes}</button></div>
+  return <aside aria-label={copy.title} className="fixed inset-x-3 bottom-3 z-[80] mx-auto flex max-w-4xl flex-col gap-4 rounded-2xl border border-sky-200 bg-white p-5 shadow-xl sm:flex-row sm:items-center sm:justify-between sm:p-6">
+    <div>
+      <h2 className="font-display text-xl font-bold text-slate-900">{copy.title}</h2>
+      <p className="mt-1 text-base leading-7 text-slate-700">{copy.message} <Link className="font-semibold text-sky-900 underline underline-offset-4" href={`/${locale}/privacyverklaring`}>{copy.privacy}</Link>.</p>
+    </div>
+    <div className="flex shrink-0 flex-wrap gap-2"><button type="button" className="knop knop-lijn min-w-28" onClick={() => choose("declined")}>{copy.no}</button><button type="button" className="knop knop-navy min-w-28" onClick={() => choose("accepted")}>{copy.yes}</button></div>
   </aside>;
 }
 

@@ -1,6 +1,6 @@
 # Schaap's Vishandel — voortgang
 
-Laatst bijgewerkt: 28 oktober 2026, 13:15 Europe/Amsterdam
+Laatst bijgewerkt: 28 oktober 2026, 16:58 Europe/Amsterdam
 
 ## Afgerond en gecontroleerd
 
@@ -21,13 +21,14 @@ Laatst bijgewerkt: 28 oktober 2026, 13:15 Europe/Amsterdam
 - De resetpagina vraagt en controleert nu tweemaal het nieuwe wachtwoord, bevat toon/verberg en gebruikt een nonce voor het kleine script.
 - Echte Gmail-headers zijn gecontroleerd: SPF, DKIM en DMARC slagen. De latere resetmail kwam in Postvak IN; de eerdere snelle reeks kale berichten kwam in Spam. De volledige diagnose staat in `docs/email-bezorging-audit.md`.
 - PR #51 is samengevoegd naar `main`. De site-Worker draait versie `82b9f1dc`, de leden-Worker versie `0609c49d`; beide staan op 100% en de live healthcheck geeft `{"status":"ok"}`.
-- De navigatie gebruikt lokaal dezelfde inhoudelijke groepen op desktop en mobiel. De primaire routes blijven zichtbaar, account bevat student en klant, en `Meer` bevat Ons verhaal en Contact. Build en inhoudscontrole slagen; productie-uitrol volgt via een aparte pull request.
+- PR #52 is samengevoegd naar `main`. Desktop en mobiel gebruiken dezelfde inhoudelijke groepen: de primaire routes blijven zichtbaar, `Account` bevat studenten- en klantaccount en `Meer` bevat Ons verhaal en Contact. De site-Worker draait versie `2d6ebdb0`, de leden-Worker versie `e66f77c3`; beide builds staan op Ready en de live healthcheck geeft `{"status":"ok"}`.
+- De volgende UI-opruiming staat lokaal klaar op `codex/privacy-footer-readability`: een eenvoudige cookiekeuze met `Weigeren`, `Accepteren` en `Lees hier meer`, plus grotere footertekst en de duidelijke nieuwsbrief-CTA `Korting in uw inbox`. Inhoudscontrole, TypeScript, 482 routes en een mobiele 390×844-controle slagen; productie-uitrol volgt via een aparte pull request.
 
 ## Eerstvolgende werkpakketten
 
-1. De lokaal afgeronde navigatieverbetering via pull request naar productie brengen en desktop/mobiel live controleren.
-2. Apple Wallet en Google Wallet uitgeven zodra de vereiste accounts en certificaten beschikbaar zijn; technische eisen staan in `docs/wallet-integratieplan.md`.
-3. Daarna: cookievoorkeuren, leesbaardere footer/nieuwsbrief-CTA en mobiele lightboxes voor schalen en barbecuefoto's.
+1. De lokaal afgeronde cookie- en footerverbetering via pull request naar productie brengen en live op desktop en mobiel controleren.
+2. Mobiele lightboxes toevoegen aan de foto's van visschalen en barbecue/gourmet, met sluiten, vorige/volgende en een beschrijving van de gekozen schaal.
+3. Apple Wallet en Google Wallet uitgeven zodra de vereiste accounts en certificaten beschikbaar zijn; technische eisen staan in `docs/wallet-integratieplan.md`.
 
 ## Model- en tokenkeuze
 
