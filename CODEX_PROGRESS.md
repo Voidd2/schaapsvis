@@ -1,6 +1,6 @@
 # Schaap's Vishandel — voortgang
 
-Laatst bijgewerkt: 28 oktober 2026, 06:35 Europe/Amsterdam
+Laatst bijgewerkt: 28 oktober 2026, 12:55 Europe/Amsterdam
 
 ## Afgerond en gecontroleerd
 
@@ -12,18 +12,21 @@ Laatst bijgewerkt: 28 oktober 2026, 06:35 Europe/Amsterdam
 - E-maildeals gebruiken één expliciete inschrijving; er wordt geen extra bevestigings- of losse afmeldmail gestuurd.
 - Het blok over toekomstige klantaccounts en spaarpunten is verwijderd.
 - Privacy- en begeleidende teksten zijn bijgewerkt in Nederlands, Engels en Duits.
-- Productiedatabase is uitgebreid met migratie 0013; gecontroleerd in Cloudflare D1 op 28 oktober 2026.
+- Productiedatabase is uitgebreid met migraties 0013 en 0014; gecontroleerd in Cloudflare D1 op 28 oktober 2026.
+- De studentenpas toont live de naam, een korte controlecode en een lokaal gegenereerde QR-code; beheer kan zowel de korte als de bestaande ondertekende code controleren.
+- De wachtwoord-resetpagina is live vormgegeven in dezelfde Schaap's-huisstijl als de rest van de website.
+- PR #50 is samengevoegd naar `main`; de site-Worker en leden-Worker zijn op Cloudflare uitgerold. De leden-Worker draait als versie `74051d04` en de live healthcheck geeft `{"status":"ok"}`.
 - Integratietests, TypeScript, inhoudscontrole en volledige productiebuild slagen.
+- Transactionele account- en resetmails hebben lokaal een herkenbare Schaap's-huisstijl; campagnemails hebben daarnaast een zichtbare afmeldlink en RFC 8058 one-click afmelding.
+- De resetpagina vraagt en controleert nu tweemaal het nieuwe wachtwoord, bevat toon/verberg en gebruikt een nonce voor het kleine script.
+- Echte Gmail-headers zijn gecontroleerd: SPF, DKIM en DMARC slagen. De latere resetmail kwam in Postvak IN; de eerdere snelle reeks kale berichten kwam in Spam. De volledige diagnose staat in `docs/email-bezorging-audit.md`.
 
 ## Eerstvolgende werkpakketten
 
-1. Studentenpas met naam, korte controlecode, lokale QR en personeelscontrole live zetten. *(lokaal gebouwd en getest; productie-uitrol volgt na migratie 0014)*
-2. Verificatie- en resetmails vormgeven met merkstijl, logo, nuttige links en minder e-mailmomenten.
-3. Wachtwoord-resetpagina visueel gelijkmaken aan de rest van de website. *(lokaal gebouwd en getest; productie-uitrol volgt)*
-4. Apple Wallet en Google Wallet uitgeven zodra de vereiste accounts en certificaten beschikbaar zijn; technische eisen staan in `docs/wallet-integratieplan.md`.
-5. Afzenderreputatie onderzoeken en SPF, DKIM, DMARC, PTR/EHLO en inhoud controleren; een nieuw afzenderadres alleen is geen oplossing.
-6. Desktop- en mobielmenu inhoudelijk gelijkmaken en account/studentenroutes logisch groeperen.
-7. Daarna: cookievoorkeuren, leesbaardere footer/nieuwsbrief-CTA en mobiele lightboxes voor schalen en barbecuefoto's.
+1. De afgeronde mail- en resetverbeteringen via pull request naar productie brengen en de twee Workers live controleren.
+2. Desktop- en mobielmenu inhoudelijk gelijkmaken en account/studentenroutes logisch groeperen.
+3. Apple Wallet en Google Wallet uitgeven zodra de vereiste accounts en certificaten beschikbaar zijn; technische eisen staan in `docs/wallet-integratieplan.md`.
+4. Daarna: cookievoorkeuren, leesbaardere footer/nieuwsbrief-CTA en mobiele lightboxes voor schalen en barbecuefoto's.
 
 ## Model- en tokenkeuze
 

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { sendSmtpMail, verifySmtpAuthentication, stuffSmtpData } from "./src/smtp.mjs";
+import { makeMessage, sendSmtpMail, verifySmtpAuthentication, stuffSmtpData } from "./src/smtp.mjs";
 
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
@@ -88,6 +88,18 @@ assert(server.message.includes("Content-Type: text/plain; charset=UTF-8"));
 assert(server.message.includes("Content-Type: text/html; charset=UTF-8"));
 assert(server.message.includes("=?UTF-8?B?"));
 assert(!server.message.includes("test-secret"), "the SMTP password must never appear in message data");
+
+const campaignMessage = makeMessage({
+  from: "schaapsv@schaapsvishandel.nl",
+  to: "customer@example.test",
+  subject: "Aanbieding",
+  text: "Een aanbieding.",
+  html: "<p>Een aanbieding.</p>",
+  listUnsubscribeUrl: "https://schaapsvishandel.nl/api/members/newsletter/unsubscribe-one-click?token=test-token",
+});
+assert.match(campaignMessage.body, /List-Unsubscribe: <https:\/\/schaapsvishandel\.nl\/api\/members\/newsletter\/unsubscribe-one-click\?token=test-token>/);
+assert.match(campaignMessage.body, /List-Unsubscribe-Post: List-Unsubscribe=One-Click/);
+assert.throws(() => makeMessage({ from: "schaapsv@schaapsvishandel.nl", to: "customer@example.test", subject: "Test", text: "Test", html: "<p>Test</p>", listUnsubscribeUrl: "http://example.test/unsubscribe" }), /invalid-list-unsubscribe-url/);
 
 server.greeted = false;
 server.tls = false;
