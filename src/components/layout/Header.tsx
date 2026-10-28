@@ -53,7 +53,8 @@ export function Header() {
     { href: p("/ons-verhaal"), label: t("verhaal") },
     { href: p("/contact"), label: t("contact") },
   ];
-  const allLinks = [...primaryLinks, ...accountLinks, ...extraLinks];
+  const accountLabel = locale === "de" ? "Konto" : "Account";
+  const moreLabel = locale === "de" ? "Mehr" : locale === "en" ? "More" : "Meer";
 
   const isActief = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
@@ -147,16 +148,40 @@ export function Header() {
 
             <details className="hidden xl:block relative">
               <summary
-                className="cursor-pointer list-none whitespace-nowrap px-2.5 py-2 text-[0.72rem] font-semibold rounded-sm hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-                style={{ color: "var(--navy)" }}
+                className="cursor-pointer list-none whitespace-nowrap border px-2.5 py-2 text-[0.72rem] font-semibold rounded-md hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                style={{ color: "var(--navy)", borderColor: "var(--linen)" }}
               >
-                {locale === "de" ? "Konto" : locale === "en" ? "Account" : "Account"}
+                {accountLabel}
               </summary>
               <div
-                className="absolute right-0 top-full z-50 mt-2 min-w-52 border shadow-lg"
+                className="absolute right-0 top-full z-50 mt-2 min-w-52 overflow-hidden rounded-md border shadow-lg"
                 style={{ backgroundColor: "var(--cream)", borderColor: "var(--linen)" }}
               >
                 {accountLinks.map(({ href, label }) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    className="block px-4 py-3 text-sm hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset"
+                    style={{ color: "var(--navy)", borderBottom: "1px solid var(--linen)" }}
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </div>
+            </details>
+
+            <details className="hidden xl:block relative">
+              <summary
+                className="cursor-pointer list-none whitespace-nowrap border px-2.5 py-2 text-[0.72rem] font-semibold rounded-md hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                style={{ color: "var(--navy)", borderColor: "var(--linen)" }}
+              >
+                {moreLabel}
+              </summary>
+              <div
+                className="absolute right-0 top-full z-50 mt-2 min-w-52 overflow-hidden rounded-md border shadow-lg"
+                style={{ backgroundColor: "var(--cream)", borderColor: "var(--linen)" }}
+              >
+                {extraLinks.map(({ href, label }) => (
                   <Link
                     key={href}
                     href={href}
@@ -200,7 +225,7 @@ export function Header() {
             style={{ backgroundColor: "var(--cream)", borderTop: "1px solid var(--linen)" }}
           >
             <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="max-w-7xl 2xl:max-w-[90rem] mx-auto px-4 py-2">
-              {allLinks.map(({ href, label }) => (
+              {primaryLinks.map(({ href, label }) => (
                 <Link
                   key={href}
                   href={href}
@@ -212,6 +237,24 @@ export function Header() {
                     fontFamily: "var(--font-display)",
                   }}
                 >
+                  {label}
+                </Link>
+              ))}
+
+              <p className="pt-5 pb-1 text-[0.68rem] font-bold uppercase tracking-[0.18em]" style={{ color: "var(--gold)" }}>
+                {accountLabel}
+              </p>
+              {accountLinks.map(({ href, label }) => (
+                <Link key={href} href={href} onClick={() => setOpen(false)} className="block py-3 text-base" style={{ borderBottom: "1px solid var(--linen)", color: "var(--navy)" }}>
+                  {label}
+                </Link>
+              ))}
+
+              <p className="pt-5 pb-1 text-[0.68rem] font-bold uppercase tracking-[0.18em]" style={{ color: "var(--gold)" }}>
+                {moreLabel}
+              </p>
+              {extraLinks.map(({ href, label }) => (
+                <Link key={href} href={href} onClick={() => setOpen(false)} className="block py-3 text-base" style={{ borderBottom: "1px solid var(--linen)", color: "var(--navy)" }}>
                   {label}
                 </Link>
               ))}
