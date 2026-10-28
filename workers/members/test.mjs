@@ -378,6 +378,7 @@ const queue = await call("/api/members/admin/student-applications", { cookie: se
 assert.equal(queue.status, 200);
 const application = (await queue.json()).applications[0];
 assert.equal(application.email, "student@example.test");
+assert.equal(application.school_email, "student@university.example.test", "reviewers can inspect the verified school address before approval");
 assert.equal(application.study_city, "Alphen aan den Rijn");
 assert.equal(application.has_proof, 0, "new applications tell the admin UI there is no proof link");
 const decision = await call(`/api/members/admin/student-applications/${application.id}/decision`, {

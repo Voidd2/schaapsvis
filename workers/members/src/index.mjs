@@ -897,7 +897,7 @@ async function submitStudentApplication(request, env) {
 async function adminQueue(request, env) {
   const admin = await requireAdmin(request, env);
   if (!admin) return json({ error: "forbidden" }, 403);
-  const rows = await env.DB.prepare(`SELECT a.id, a.institution, a.education_level, a.study_city, a.submitted_at, a.proof_object_key IS NOT NULL AS has_proof, u.full_name, u.email FROM student_applications a JOIN users u ON u.id=a.user_id WHERE a.status='pending' ORDER BY a.submitted_at ASC LIMIT 100`).all();
+  const rows = await env.DB.prepare(`SELECT a.id, a.institution, a.education_level, a.study_city, a.submitted_at, a.proof_object_key IS NOT NULL AS has_proof, u.full_name, u.email, u.school_email FROM student_applications a JOIN users u ON u.id=a.user_id WHERE a.status='pending' ORDER BY a.submitted_at ASC LIMIT 100`).all();
   return json({ applications: rows.results || [] });
 }
 
