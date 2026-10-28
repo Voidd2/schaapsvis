@@ -17,7 +17,7 @@ const LOCALES = new Set(["nl", "en", "de"]);
 const ACCOUNT_COPY = {
   nl: {
     verifySubject: "Bevestig uw persoonlijke e-mailadres — Schaap's Vishandel", verifyIntro: "Uw persoonlijke verificatiecode voor uw Schaap's-account is:", verifyLinkIntro: "Klik hieronder om uw e-mailadres voor uw Schaap's-account te bevestigen.", schoolVerifySubject: "Bevestig uw school-e-mailadres — Schaap's Vishandel", schoolVerifyIntro: "Uw verificatiecode voor uw school-e-mailadres is:", verifyButton: "E-mailadres bevestigen", verifyExpiredTitle: "Bevestigingslink verlopen", verifyExpired: "Vraag in uw account opnieuw een e-mailbevestiging aan.", usedExpired: "Deze link is al gebruikt of verlopen.",
-    resetSubject: "Wachtwoord opnieuw instellen", resetIntro: "Stel uw wachtwoord opnieuw in via deze link:", resetTitle: "Wachtwoord instellen", resetLabel: "Nieuw wachtwoord (minimaal 12 tekens)", resetButton: "Wachtwoord opslaan", resetExpiredTitle: "Resetlink verlopen", resetExpired: "Deze link is al gebruikt of verlopen.",
+    resetSubject: "Wachtwoord opnieuw instellen", resetIntro: "Stel uw wachtwoord opnieuw in via deze link:", resetTitle: "Wachtwoord instellen", resetLabel: "Nieuw wachtwoord (minimaal 12 tekens)", resetConfirmLabel: "Herhaal het nieuwe wachtwoord", resetShow: "Wachtwoorden tonen", resetHint: "Gebruik minimaal 12 tekens. Een lange unieke wachtwoordzin is het makkelijkst te onthouden.", resetMismatch: "De twee wachtwoorden zijn niet gelijk of voldoen niet aan de eisen.", resetButton: "Wachtwoord opslaan", resetExpiredTitle: "Resetlink verlopen", resetExpired: "Deze link is al gebruikt of verlopen.",
     newsletterSubject: "Bevestig uw e-maildeals", newsletterIntro: "Bevestig dat Schaap's Vishandel u e-maildeals mag sturen.", newsletterButton: "E-maildeals bevestigen", newsletterTitle: "E-maildeals bevestigen", newsletterExpiredTitle: "Aanmeldlink verlopen", newsletterExpired: "Deze link is al gebruikt of verlopen.",
     unsubscribeTitle: "Afmelden voor e-maildeals", unsubscribeIntro: "U ontvangt daarna geen aanbiedingen per e-mail meer.", unsubscribeButton: "Afmelden", unsubscribeExpiredTitle: "Afmeldlink verlopen", unsubscribeExpired: "Deze afmeldlink is verlopen.", unsubscribeDoneTitle: "Afgemeld", unsubscribeDone: "U ontvangt geen e-maildeals meer van Schaap's Vishandel.",
     newsletterConfirmedSubject: "U ontvangt nu aanbiedingen van Schaap's Vishandel", newsletterConfirmedIntro: "Bedankt voor uw bevestiging. U ontvangt onze aanbiedingen wanneer we iets moois te delen hebben.", unsubscribeLink: "Afmelden voor e-maildeals",
@@ -25,7 +25,7 @@ const ACCOUNT_COPY = {
   },
   en: {
     verifySubject: "Verify your personal email — Schaap's Vishandel", verifyIntro: "Your personal verification code for your Schaap's account is:", verifyLinkIntro: "Click below to verify the email address for your Schaap's account.", schoolVerifySubject: "Verify your school email — Schaap's Vishandel", schoolVerifyIntro: "Your verification code for your school email address is:", verifyButton: "Verify email address", verifyExpiredTitle: "Verification link expired", verifyExpired: "Request a new verification email from your account.", usedExpired: "This link has already been used or has expired.",
-    resetSubject: "Reset your password", resetIntro: "Reset your password using this link:", resetTitle: "Set a new password", resetLabel: "New password (at least 12 characters)", resetButton: "Save password", resetExpiredTitle: "Reset link expired", resetExpired: "This link has already been used or has expired.",
+    resetSubject: "Reset your password", resetIntro: "Reset your password using this link:", resetTitle: "Set a new password", resetLabel: "New password (at least 12 characters)", resetConfirmLabel: "Repeat the new password", resetShow: "Show passwords", resetHint: "Use at least 12 characters. A long, unique passphrase is easiest to remember.", resetMismatch: "The two passwords do not match or do not meet the requirements.", resetButton: "Save password", resetExpiredTitle: "Reset link expired", resetExpired: "This link has already been used or has expired.",
     newsletterSubject: "Confirm your email offers", newsletterIntro: "Confirm that Schaap's Vishandel may send you email offers.", newsletterButton: "Confirm email offers", newsletterTitle: "Confirm email offers", newsletterExpiredTitle: "Subscription link expired", newsletterExpired: "This link has already been used or has expired.",
     unsubscribeTitle: "Unsubscribe from email offers", unsubscribeIntro: "You will no longer receive offers by email.", unsubscribeButton: "Unsubscribe", unsubscribeExpiredTitle: "Unsubscribe link expired", unsubscribeExpired: "This unsubscribe link has expired.", unsubscribeDoneTitle: "Unsubscribed", unsubscribeDone: "You will no longer receive email offers from Schaap's Vishandel.",
     newsletterConfirmedSubject: "You are subscribed to offers from Schaap's Vishandel", newsletterConfirmedIntro: "Thanks for confirming. You will hear from us when we have something worth sharing.", unsubscribeLink: "Unsubscribe from email offers",
@@ -33,7 +33,7 @@ const ACCOUNT_COPY = {
   },
   de: {
     verifySubject: "Private E-Mail bestätigen — Schaap's Vishandel", verifyIntro: "Ihr persönlicher Bestätigungscode für Ihr Schaap's-Konto lautet:", verifyLinkIntro: "Klicken Sie unten, um die E-Mail-Adresse für Ihr Schaap's-Konto zu bestätigen.", schoolVerifySubject: "Schul-E-Mail bestätigen — Schaap's Vishandel", schoolVerifyIntro: "Ihr Bestätigungscode für Ihre Schul-E-Mail-Adresse lautet:", verifyButton: "E-Mail-Adresse bestätigen", verifyExpiredTitle: "Bestätigungslink abgelaufen", verifyExpired: "Fordern Sie in Ihrem Konto eine neue Bestätigungs-E-Mail an.", usedExpired: "Dieser Link wurde bereits verwendet oder ist abgelaufen.",
-    resetSubject: "Passwort zurücksetzen", resetIntro: "Setzen Sie Ihr Passwort über diesen Link zurück:", resetTitle: "Neues Passwort festlegen", resetLabel: "Neues Passwort (mindestens 12 Zeichen)", resetButton: "Passwort speichern", resetExpiredTitle: "Link zum Zurücksetzen abgelaufen", resetExpired: "Dieser Link wurde bereits verwendet oder ist abgelaufen.",
+    resetSubject: "Passwort zurücksetzen", resetIntro: "Setzen Sie Ihr Passwort über diesen Link zurück:", resetTitle: "Neues Passwort festlegen", resetLabel: "Neues Passwort (mindestens 12 Zeichen)", resetConfirmLabel: "Neues Passwort wiederholen", resetShow: "Passwörter anzeigen", resetHint: "Verwenden Sie mindestens 12 Zeichen. Eine lange, einzigartige Passphrase lässt sich am besten merken.", resetMismatch: "Die beiden Passwörter stimmen nicht überein oder erfüllen die Anforderungen nicht.", resetButton: "Passwort speichern", resetExpiredTitle: "Link zum Zurücksetzen abgelaufen", resetExpired: "Dieser Link wurde bereits verwendet oder ist abgelaufen.",
     newsletterSubject: "E-Mail-Angebote bestätigen", newsletterIntro: "Bestätigen Sie, dass Schaap's Vishandel Ihnen E-Mail-Angebote senden darf.", newsletterButton: "E-Mail-Angebote bestätigen", newsletterTitle: "E-Mail-Angebote bestätigen", newsletterExpiredTitle: "Anmeldelink abgelaufen", newsletterExpired: "Dieser Link wurde bereits verwendet oder ist abgelaufen.",
     unsubscribeTitle: "E-Mail-Angebote abbestellen", unsubscribeIntro: "Sie erhalten danach keine Angebote per E-Mail mehr.", unsubscribeButton: "Abbestellen", unsubscribeExpiredTitle: "Abmeldelink abgelaufen", unsubscribeExpired: "Dieser Abmeldelink ist abgelaufen.", unsubscribeDoneTitle: "Abgemeldet", unsubscribeDone: "Sie erhalten keine E-Mail-Angebote mehr von Schaap's Vishandel.",
     newsletterConfirmedSubject: "Sie erhalten jetzt Angebote von Schaap's Vishandel", newsletterConfirmedIntro: "Vielen Dank für Ihre Bestätigung. Sie hören von uns, wenn wir etwas Schönes zu teilen haben.", unsubscribeLink: "E-Mail-Angebote abbestellen",
@@ -141,14 +141,15 @@ function json(data, status = 200, headers = {}) {
   });
 }
 
-function html(body, status = 200) {
+function html(body, status = 200, { scriptNonce = "" } = {}) {
+  const scriptPolicy = scriptNonce ? `; script-src 'nonce-${scriptNonce}'` : "";
   return new Response(body, {
     status,
     headers: {
       "Content-Type": "text/html; charset=utf-8",
       "Cache-Control": "no-store",
       "X-Content-Type-Options": "nosniff",
-      "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'",
+      "Content-Security-Policy": `default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'${scriptPolicy}`,
       "Referrer-Policy": "no-referrer",
     },
   });
@@ -158,6 +159,53 @@ function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, (character) => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
   })[character]);
+}
+
+const EMAIL_PRESENTATION = {
+  nl: { account: "ACCOUNT", codeHint: "Neem deze code niet over in een ander bericht. De code verloopt automatisch.", footer: "Dit is een automatisch accountbericht van Schaap’s Vishandel, Leiden · sinds 1938." },
+  en: { account: "ACCOUNT", codeHint: "Do not copy this code into another message. It expires automatically.", footer: "This is an automated account message from Schaap’s Vishandel, Leiden · since 1938." },
+  de: { account: "KONTO", codeHint: "Übernehmen Sie diesen Code nicht in eine andere Nachricht. Er läuft automatisch ab.", footer: "Dies ist eine automatische Kontonachricht von Schaap’s Vishandel, Leiden · seit 1938." },
+};
+
+function brandedEmail({ locale = "nl", title, intro, contentHtml = "", buttonUrl = "", buttonLabel = "", footer = "" }) {
+  const language = localeFrom(locale);
+  const presentation = EMAIL_PRESENTATION[language];
+  const action = buttonUrl && buttonLabel
+    ? `<p style="margin:26px 0"><a href="${escapeHtml(buttonUrl)}" style="display:inline-block;background:#087fa8;color:#fff;text-decoration:none;font-weight:800;padding:13px 20px;border-radius:9px">${escapeHtml(buttonLabel)}</a></p>`
+    : "";
+  return `<!doctype html><html lang="${language}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"></head><body style="margin:0;background:#eefaff;color:#102f42;font:16px/1.55 Arial,sans-serif"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#eefaff;padding:24px 12px"><tr><td align="center"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:620px;background:#fff;border:1px solid #b9e3f0;border-radius:18px;overflow:hidden"><tr><td style="background:#075c7c;color:#fff;padding:24px 30px"><div style="font:800 24px Georgia,serif">Schaap’s Vishandel</div><div style="font-size:11px;letter-spacing:.22em;margin-top:4px">LEIDEN · SINDS 1938</div></td></tr><tr><td style="padding:32px 30px"><div style="color:#087fa8;font-size:11px;font-weight:800;letter-spacing:.2em">${presentation.account}</div><h1 style="font:800 30px/1.15 Georgia,serif;margin:10px 0 16px;color:#102f42">${escapeHtml(title)}</h1><p style="margin:0 0 18px;color:#496273">${escapeHtml(intro)}</p>${contentHtml}${action}</td></tr><tr><td style="border-top:1px solid #d7eef5;padding:18px 30px;color:#627987;font-size:12px">${escapeHtml(footer || presentation.footer)}</td></tr></table></td></tr></table></body></html>`;
+}
+
+function verificationCodeEmail(locale, subject, intro, code, validity) {
+  const language = localeFrom(locale);
+  return brandedEmail({
+    locale: language,
+    title: subject,
+    intro,
+    contentHtml: `<div style="margin:24px 0;padding:20px;text-align:center;background:#eefaff;border:1px solid #b9e3f0;border-radius:12px;font-size:32px;font-weight:800;letter-spacing:.24em;color:#075c7c">${escapeHtml(code)}</div><p style="margin:0;color:#496273">${escapeHtml(validity)}</p><p style="margin:10px 0 0;color:#627987;font-size:13px">${escapeHtml(EMAIL_PRESENTATION[language].codeHint)}</p>`,
+  });
+}
+
+function actionEmail(locale, subject, intro, buttonLabel, buttonUrl, note = "") {
+  return brandedEmail({
+    locale,
+    title: subject,
+    intro,
+    contentHtml: note ? `<p style="margin:0;color:#627987;font-size:13px">${escapeHtml(note)}</p>` : "",
+    buttonUrl,
+    buttonLabel,
+  });
+}
+
+function campaignEmail(subject, bodyText, unsubscribeUrl) {
+  const paragraphs = escapeHtml(bodyText).split(/\n{2,}/).map((paragraph) => `<p style="margin:0 0 16px">${paragraph.replace(/\n/g, "<br>")}</p>`).join("");
+  return brandedEmail({
+    locale: "nl",
+    title: subject,
+    intro: "Speciaal voor klanten van Schaap’s Vishandel.",
+    contentHtml: `<div style="color:#102f42">${paragraphs}</div><p style="margin:26px 0 0;color:#627987;font-size:12px">U ontvangt dit bericht omdat u zich heeft aangemeld voor e-maildeals. <a href="${escapeHtml(unsubscribeUrl)}" style="color:#075c7c">Afmelden</a>.</p>`,
+    footer: "Schaap’s Vishandel · Herenstraat 48, Leiden",
+  });
 }
 
 function accountMessage(locale, title, message, token, action, button) {
@@ -316,14 +364,14 @@ function isMailConfigured(env) {
   return Boolean(env.MAIL_FROM && env.EMAIL);
 }
 
-async function sendMail(env, to, subject, text, htmlBody) {
+async function sendMail(env, to, subject, text, htmlBody, options = {}) {
   if (!isMailConfigured(env)) throw new Error("mail-not-configured");
   const smtpSelected = Boolean(env.SMTP_HOST || env.SMTP_USERNAME || env.SMTP_PASSWORD);
   if (smtpSelected) {
     const smtp = await import("./smtp-worker.mjs");
-    return smtp.sendSmtpMail(env, { to, subject, text, html: htmlBody });
+    return smtp.sendSmtpMail(env, { to, subject, text, html: htmlBody, ...options });
   }
-  return env.EMAIL.send({ from: env.MAIL_FROM, to, subject, text, html: htmlBody });
+  return env.EMAIL.send({ from: env.MAIL_FROM, to, subject, text, html: htmlBody, ...options });
 }
 
 async function issueEmailToken(env, { userId = null, email = null, purpose, ttlMs = EMAIL_TOKEN_MS }) {
@@ -581,8 +629,8 @@ async function register(request, env) {
   try {
     const validity = locale === "nl" ? "De code is 10 minuten geldig." : locale === "de" ? "Der Code ist 10 Minuten gültig." : "The code is valid for 10 minutes.";
     await Promise.all([
-      sendMail(env, email, copy.verifySubject, `${copy.verifyIntro}\n${personalCode}\n${validity}`, `<p>${copy.verifyIntro}</p><p style="font-size:2rem;font-weight:700;letter-spacing:.2em">${personalCode}</p><p>${validity}</p>`),
-      sendMail(env, schoolEmail, copy.schoolVerifySubject, `${copy.schoolVerifyIntro}\n${schoolCode}\n${validity}`, `<p>${copy.schoolVerifyIntro}</p><p style="font-size:2rem;font-weight:700;letter-spacing:.2em">${schoolCode}</p><p>${validity}</p>`),
+      sendMail(env, email, copy.verifySubject, `${copy.verifyIntro}\n${personalCode}\n${validity}`, verificationCodeEmail(locale, copy.verifySubject, copy.verifyIntro, personalCode, validity)),
+      sendMail(env, schoolEmail, copy.schoolVerifySubject, `${copy.schoolVerifyIntro}\n${schoolCode}\n${validity}`, verificationCodeEmail(locale, copy.schoolVerifySubject, copy.schoolVerifyIntro, schoolCode, validity)),
     ]);
   } catch {
     return json({ error: "verification_email_failed", message: copy.verificationFailed }, 503);
@@ -647,7 +695,7 @@ async function registerAdministrator(request, env) {
   const link = emailUrl(env, "/api/members/verify", token, locale);
   const copy = ACCOUNT_COPY[locale];
   try {
-    await sendMail(env, email, copy.verifySubject, `${copy.verifyLinkIntro}\n${link}`, `<p>${copy.verifyLinkIntro}</p><p><a href="${link}">${copy.verifyButton}</a></p>`);
+    await sendMail(env, email, copy.verifySubject, `${copy.verifyLinkIntro}\n${link}`, actionEmail(locale, copy.verifySubject, copy.verifyLinkIntro, copy.verifyButton, link));
   } catch {
     return json({ error: "verification_email_failed" }, 503);
   }
@@ -673,13 +721,13 @@ async function resendVerification(request, env) {
         const schoolCode = await issueVerificationCode(env, { userId: user.id, email: user.school_email, purpose: "verify_school" });
         const validity = locale === "nl" ? "De code is 10 minuten geldig." : locale === "de" ? "Der Code ist 10 Minuten gültig." : "The code is valid for 10 minutes.";
         await Promise.all([
-          sendMail(env, user.email, copy.verifySubject, `${copy.verifyIntro}\n${personalCode}\n${validity}`, `<p>${copy.verifyIntro}</p><p><strong>${personalCode}</strong></p><p>${validity}</p>`),
-          sendMail(env, user.school_email, copy.schoolVerifySubject, `${copy.schoolVerifyIntro}\n${schoolCode}\n${validity}`, `<p>${copy.schoolVerifyIntro}</p><p><strong>${schoolCode}</strong></p><p>${validity}</p>`),
+          sendMail(env, user.email, copy.verifySubject, `${copy.verifyIntro}\n${personalCode}\n${validity}`, verificationCodeEmail(locale, copy.verifySubject, copy.verifyIntro, personalCode, validity)),
+          sendMail(env, user.school_email, copy.schoolVerifySubject, `${copy.schoolVerifyIntro}\n${schoolCode}\n${validity}`, verificationCodeEmail(locale, copy.schoolVerifySubject, copy.schoolVerifyIntro, schoolCode, validity)),
         ]);
       } else {
         const token = await issueEmailToken(env, { userId: user.id, email: user.email, purpose: "verify_email" });
         const link = emailUrl(env, "/api/members/verify", token, locale);
-        await sendMail(env, user.email, copy.verifySubject, `${copy.verifyLinkIntro}\n${link}`, `<p>${copy.verifyLinkIntro}</p><p><a href="${link}">${copy.verifyButton}</a></p>`);
+        await sendMail(env, user.email, copy.verifySubject, `${copy.verifyLinkIntro}\n${link}`, actionEmail(locale, copy.verifySubject, copy.verifyLinkIntro, copy.verifyButton, link));
       }
     } catch {
       return json({ error: "verification_email_failed" }, 503);
@@ -813,7 +861,7 @@ async function requestPasswordReset(request, env) {
       const link = emailUrl(env, "/api/members/password-reset/confirm", token, locale);
       try {
         const note = locale === "nl" ? "De link is één uur geldig. Heeft u dit niet aangevraagd? Negeer deze e-mail." : locale === "de" ? "Der Link ist eine Stunde gültig. Wenn Sie dies nicht angefordert haben, ignorieren Sie diese E-Mail." : "The link is valid for one hour. If you did not request this, ignore this email.";
-        await sendMail(env, email, copy.resetSubject, `${copy.resetIntro}\n${link}\n${note}`, `<p>${copy.resetIntro}</p><p><a href="${link}">${copy.resetButton}</a></p><p>${note}</p>`);
+        await sendMail(env, email, copy.resetSubject, `${copy.resetIntro}\n${link}\n${note}`, actionEmail(locale, copy.resetSubject, copy.resetIntro, copy.resetButton, link, note));
       } catch { /* Keep the response identical for existing and unknown addresses. */ }
     }
   }
@@ -828,7 +876,8 @@ async function passwordResetPage(request, env) {
     .bind(await digest(token), nowIso()).first();
   if (!row) return accountResultPage(locale, copy.resetExpiredTitle, copy.resetExpired);
   const helper = locale === "nl" ? "Kies een nieuw wachtwoord voor uw privé-e-mailadres. Na het opslaan wordt u teruggestuurd naar uw account." : locale === "de" ? "Wählen Sie ein neues Passwort für Ihre private E-Mail-Adresse. Danach gelangen Sie zurück zu Ihrem Konto." : "Choose a new password for your personal email address. After saving, you will return to your account.";
-  return html(`<!doctype html><html lang="${locale}"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>${escapeHtml(copy.resetTitle)} · Schaap's Vishandel</title><style>*{box-sizing:border-box}body{margin:0;min-height:100vh;background:linear-gradient(145deg,#eefaff,#fff 55%,#e8f7fb);font:16px/1.55 system-ui,-apple-system,sans-serif;color:#102f42;padding:clamp(1rem,4vw,3rem)}main{width:min(42rem,100%);margin:6vh auto;background:#fff;border:1px solid #b9e3f0;border-radius:1.5rem;padding:clamp(1.5rem,5vw,3.2rem);box-shadow:0 1.5rem 4rem #073d5618}.brand{color:#075c7c;font-family:Georgia,serif;font-size:1.45rem;font-weight:800}.since{margin:.15rem 0 2.2rem;color:#087fa8;font-size:.7rem;font-weight:800;letter-spacing:.2em}h1{font-family:Georgia,serif;font-size:clamp(2rem,6vw,3.25rem);line-height:1.05;margin:0}p{color:#496273;margin:1rem 0 2rem}label{display:block;font-weight:700}input{display:block;width:100%;margin:.5rem 0 1.25rem;padding:.9rem 1rem;border:1px solid #a9dceb;border-radius:.7rem;font:inherit;color:#102f42}input:focus{outline:3px solid #bceafa;border-color:#087fa8}button{width:100%;border:0;border-radius:.7rem;background:#075c7c;color:#fff;padding:.95rem 1.25rem;font:inherit;font-weight:800;cursor:pointer}button:hover{background:#063f58}</style><main><div class="brand">Schaap’s Vishandel</div><div class="since">LEIDEN · SINDS 1938</div><h1>${escapeHtml(copy.resetTitle)}</h1><p>${escapeHtml(helper)}</p><form method="post" action="/api/members/password-reset/confirm"><input type="hidden" name="token" value="${escapeHtml(token)}"><input type="hidden" name="locale" value="${locale}"><label>${escapeHtml(copy.resetLabel)}<input name="password" type="password" minlength="12" maxlength="128" required autocomplete="new-password"></label><button>${escapeHtml(copy.resetButton)}</button></form></main></html>`);
+  const scriptNonce = crypto.randomUUID().replaceAll("-", "");
+  return html(`<!doctype html><html lang="${locale}"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>${escapeHtml(copy.resetTitle)} · Schaap's Vishandel</title><style>*{box-sizing:border-box}body{margin:0;min-height:100vh;background:linear-gradient(145deg,#eefaff,#fff 55%,#e8f7fb);font:16px/1.55 system-ui,-apple-system,sans-serif;color:#102f42;padding:clamp(1rem,4vw,3rem)}main{width:min(42rem,100%);margin:6vh auto;background:#fff;border:1px solid #b9e3f0;border-radius:1.5rem;padding:clamp(1.5rem,5vw,3.2rem);box-shadow:0 1.5rem 4rem #073d5618}.brand{color:#075c7c;font-family:Georgia,serif;font-size:1.45rem;font-weight:800}.since{margin:.15rem 0 2.2rem;color:#087fa8;font-size:.7rem;font-weight:800;letter-spacing:.2em}h1{font-family:Georgia,serif;font-size:clamp(2rem,6vw,3.25rem);line-height:1.05;margin:0}p{color:#496273;margin:1rem 0 2rem}label{display:block;font-weight:700}.password{display:block;width:100%;margin:.5rem 0 1.25rem;padding:.9rem 1rem;border:1px solid #a9dceb;border-radius:.7rem;font:inherit;color:#102f42}.password:focus{outline:3px solid #bceafa;border-color:#087fa8}.hint{font-size:.84rem;margin:-.55rem 0 1.2rem}.toggle{display:flex;gap:.55rem;align-items:center;font-weight:600;margin:0 0 1.4rem}.toggle input{width:1.05rem;height:1.05rem}button{width:100%;border:0;border-radius:.7rem;background:#075c7c;color:#fff;padding:.95rem 1.25rem;font:inherit;font-weight:800;cursor:pointer}button:hover{background:#063f58}</style><main><div class="brand">Schaap’s Vishandel</div><div class="since">LEIDEN · SINDS 1938</div><h1>${escapeHtml(copy.resetTitle)}</h1><p>${escapeHtml(helper)}</p><form method="post" action="/api/members/password-reset/confirm"><input type="hidden" name="token" value="${escapeHtml(token)}"><input type="hidden" name="locale" value="${locale}"><label>${escapeHtml(copy.resetLabel)}<input class="password" name="password" type="password" minlength="12" maxlength="128" required autocomplete="new-password"></label><p class="hint">${escapeHtml(copy.resetHint)}</p><label>${escapeHtml(copy.resetConfirmLabel)}<input class="password" name="passwordConfirm" type="password" minlength="12" maxlength="128" required autocomplete="new-password"></label><label class="toggle"><input id="show-passwords" type="checkbox"> ${escapeHtml(copy.resetShow)}</label><button>${escapeHtml(copy.resetButton)}</button></form></main><script nonce="${scriptNonce}">document.getElementById('show-passwords').addEventListener('change',function(){for(const field of document.querySelectorAll('.password'))field.type=this.checked?'text':'password'});</script></html>`, 200, { scriptNonce });
 }
 
 async function confirmPasswordReset(request, env) {
@@ -840,7 +889,10 @@ async function confirmPasswordReset(request, env) {
   const locale = localeFrom(form.get("locale"));
   const tokenHash = await digest(String(form.get("token") || ""));
   const password = String(form.get("password") || "");
-  if (password.length < 12 || password.length > 128 || !env.AUTH_PEPPER) return json({ error: "invalid_password" }, 400);
+  const passwordConfirm = String(form.get("passwordConfirm") || "");
+  if (password.length < 12 || password.length > 128 || password !== passwordConfirm || !env.AUTH_PEPPER) {
+    return accountResultPage(locale, ACCOUNT_COPY[locale].resetTitle, ACCOUNT_COPY[locale].resetMismatch, 400);
+  }
   const token = await env.DB.prepare(`SELECT user_id FROM email_tokens WHERE token_hash = ? AND purpose = 'password_reset' AND used_at IS NULL AND expires_at > ?`).bind(tokenHash, nowIso()).first();
   if (!token?.user_id) return accountResultPage(locale, ACCOUNT_COPY[locale].resetExpiredTitle, ACCOUNT_COPY[locale].usedExpired);
   const time = nowIso();
@@ -1110,6 +1162,22 @@ async function unsubscribeNewsletter(request, env) {
   return accountResultPage(locale, copy.unsubscribeDoneTitle, copy.unsubscribeDone, 200);
 }
 
+async function unsubscribeNewsletterOneClick(request, env) {
+  const body = await request.text();
+  if (body.trim() !== "List-Unsubscribe=One-Click") return json({ error: "invalid_one_click_request" }, 400);
+  const tokenValue = new URL(request.url).searchParams.get("token") || "";
+  const tokenHash = await digest(tokenValue);
+  const token = await env.DB.prepare(`SELECT email FROM email_tokens WHERE token_hash = ? AND purpose='newsletter_unsubscribe' AND used_at IS NULL AND expires_at > ?`)
+    .bind(tokenHash, nowIso()).first();
+  if (!token?.email) return new Response(null, { status: 204, headers: { "Cache-Control": "no-store" } });
+  const time = nowIso();
+  await env.DB.batch([
+    env.DB.prepare(`UPDATE newsletter_subscriptions SET status='unsubscribed', unsubscribed_at=?, updated_at=? WHERE email=?`).bind(time, time, token.email),
+    env.DB.prepare(`UPDATE email_tokens SET used_at=? WHERE token_hash=? AND used_at IS NULL`).bind(time, tokenHash),
+  ]);
+  return new Response(null, { status: 204, headers: { "Cache-Control": "no-store" } });
+}
+
 async function adminNewsletterCampaigns(request, env) {
   const admin = await requireAdmin(request, env);
   if (!admin) return json({ error: "forbidden" }, 403);
@@ -1276,13 +1344,14 @@ async function processNewsletterDeliveries(env) {
         ttlMs: 10 * 365 * 24 * 60 * 60 * 1000,
       });
       const unsubscribeUrl = `${env.SITE_ORIGIN}/api/members/newsletter/unsubscribe?token=${encodeURIComponent(token)}`;
-      const bodyHtml = escapeHtml(delivery.body_text).replace(/\n/g, "<br>");
+      const oneClickUrl = `${env.SITE_ORIGIN}/api/members/newsletter/unsubscribe-one-click?token=${encodeURIComponent(token)}`;
       await sendMail(
         env,
         delivery.email,
         delivery.subject,
         `${delivery.body_text}\n\nU ontvangt dit bericht omdat u zich heeft aangemeld voor e-maildeals. Afmelden: ${unsubscribeUrl}`,
-        `<main>${bodyHtml}</main><hr><p>U ontvangt dit bericht omdat u zich heeft aangemeld voor e-maildeals.</p><p><a href="${unsubscribeUrl}">Afmelden</a></p>`,
+        campaignEmail(delivery.subject, delivery.body_text, unsubscribeUrl),
+        { listUnsubscribeUrl: oneClickUrl },
       );
       await env.DB.batch([
         env.DB.prepare(`UPDATE newsletter_deliveries SET status='sent', sent_at=?, claimed_at=NULL, last_error=NULL WHERE campaign_id=? AND email=?`).bind(nowText, delivery.campaign_id, delivery.email),
@@ -1336,6 +1405,9 @@ const memberWorker = {
       return json({ status: enabled ? "ok" : "disabled" }, enabled ? 200 : 503);
     }
     if (env.MEMBERS_ENABLED !== "on") return json({ error: "members_disabled" }, 503);
+    if (path === "/api/members/newsletter/unsubscribe" && method === "GET") return unsubscribePage(request, env);
+    if (path === "/api/members/newsletter/unsubscribe" && method === "POST") return unsubscribeNewsletter(request, env);
+    if (path === "/api/members/newsletter/unsubscribe-one-click" && method === "POST") return unsubscribeNewsletterOneClick(request, env);
     // Cloudflare Worker routes run before the site's page middleware. Until the
     // public launch flag is set, require the site's own unlock cookie or its
     // platform-trusted owner-IP allowlist before exposing any account endpoint.
@@ -1368,8 +1440,6 @@ const memberWorker = {
     if (path === "/api/members/newsletter/subscribe" && method === "POST") return subscribeNewsletter(request, env);
     if (path === "/api/members/newsletter/confirm" && method === "GET") return newsletterConfirmPage(request, env);
     if (path === "/api/members/newsletter/confirm" && method === "POST") return confirmNewsletter(request, env);
-    if (path === "/api/members/newsletter/unsubscribe" && method === "GET") return unsubscribePage(request, env);
-    if (path === "/api/members/newsletter/unsubscribe" && method === "POST") return unsubscribeNewsletter(request, env);
     const applicationRoute = routeApplicationPath(path);
     if (applicationRoute?.action === "proof" && method === "GET") return adminProof(request, env, applicationRoute.id);
     if (applicationRoute?.action === "decision" && method === "POST") return adminDecision(request, env, applicationRoute.id);

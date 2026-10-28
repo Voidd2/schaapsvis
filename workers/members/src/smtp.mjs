@@ -29,7 +29,18 @@ function encodedHeader(value) {
   return /^[\x20-\x7e]*$/.test(clean) ? clean : `=?UTF-8?B?${utf8Base64(clean)}?=`;
 }
 
-function makeMessage({ from, to, subject, text, html }) {
+function listUnsubscribeHeaders(value) {
+  if (!value) return [];
+  let url;
+  try { url = new URL(String(value)); } catch { throw new Error("invalid-list-unsubscribe-url"); }
+  if (url.protocol !== "https:" || /[\r\n]/.test(String(value))) throw new Error("invalid-list-unsubscribe-url");
+  return [
+    `List-Unsubscribe: <${url.toString()}>`,
+    "List-Unsubscribe-Post: List-Unsubscribe=One-Click",
+  ];
+}
+
+export function makeMessage({ from, to, subject, text, html, listUnsubscribeUrl }) {
   const fromAddress = mailbox(from);
   const toAddress = mailbox(to);
   const boundary = `sv-${crypto.randomUUID()}`;
@@ -41,6 +52,7 @@ function makeMessage({ from, to, subject, text, html }) {
     `Date: ${new Date().toUTCString()}`,
     `Message-ID: <${crypto.randomUUID()}@${domain}>`,
     "MIME-Version: 1.0",
+    ...listUnsubscribeHeaders(listUnsubscribeUrl),
     `Content-Type: multipart/alternative; boundary=\"${boundary}\"`,
     "",
     `--${boundary}`,
