@@ -43,8 +43,10 @@ export function SelectieGalerij({ kaarten, tekst }: { kaarten: SelectieGalerijKa
     setActief((huidig) => huidig === null ? huidig : (huidig + 1) % kaarten.length);
   }, [kaarten.length]);
 
+  const isOpen = actief !== null;
+
   useEffect(() => {
-    if (actief === null) {
+    if (!isOpen) {
       if (wasOpen.current) {
         wasOpen.current = false;
         requestAnimationFrame(() => opener.current?.focus());
@@ -91,7 +93,7 @@ export function SelectieGalerij({ kaarten, tekst }: { kaarten: SelectieGalerijKa
       document.removeEventListener("keydown", toetsen);
       document.body.style.overflow = oudeOverflow;
     };
-  }, [actief, sluiten, vorige, volgende]);
+  }, [isOpen, sluiten, vorige, volgende]);
 
   const actieveIndex = actief ?? 0;
   const kaart = actief === null ? null : kaarten[actief];
