@@ -1,6 +1,6 @@
 # Schaap's Vishandel — voortgang
 
-Laatst bijgewerkt: 28 oktober 2026, 22:09 Europe/Amsterdam
+Laatst bijgewerkt: 28 oktober 2026, 22:21 Europe/Amsterdam
 
 ## Afgerond en gecontroleerd
 
@@ -23,12 +23,11 @@ Laatst bijgewerkt: 28 oktober 2026, 22:09 Europe/Amsterdam
 - PR #51 is samengevoegd naar `main`. De site-Worker draait versie `82b9f1dc`, de leden-Worker versie `0609c49d`; beide staan op 100% en de live healthcheck geeft `{"status":"ok"}`.
 - PR #52 is samengevoegd naar `main`. Desktop en mobiel gebruiken dezelfde inhoudelijke groepen: de primaire routes blijven zichtbaar, `Account` bevat studenten- en klantaccount en `Meer` bevat Ons verhaal en Contact. De site-Worker draait versie `2d6ebdb0`, de leden-Worker versie `e66f77c3`; beide builds staan op Ready en de live healthcheck geeft `{"status":"ok"}`.
 - PR #53 is samengevoegd naar `main`. De eenvoudige cookiekeuze met `Weigeren`, `Accepteren` en `Lees hier meer`, grotere footertekst en de nieuwsbrief-CTA `Korting in uw inbox` zijn live gecontroleerd. De site-Worker draait versie `6ce41de5`, de leden-Worker versie `26e866e6`; beide staan op 100% en de live healthcheck geeft `{"status":"ok"}`.
-- De lightbox voor visschalen en barbecue/gourmet is lokaal afgerond. Iedere kaart opent de bestaande foto groot met gelokaliseerde titel en beschrijving, teller, sluiten en vorige/volgende. Escape, pijltjestoetsen, focuslus en focusherstel werken; de telefoonweergave is op 390×844 gecontroleerd. Inhoudscontrole en de volledige productiebuild met 482 routes slagen.
+- PR #54 is samengevoegd naar `main`. Iedere foto op Visschalen en Barbecue & gourmet opent live groot met gelokaliseerde titel en beschrijving, teller, sluiten en vorige/volgende. Escape, pijltjestoetsen, focuslus en focusherstel werken; desktop en 390×844 zijn gecontroleerd. De site-Worker draait versie `a7f0763a`, de leden-Worker versie `cce064da`; beide staan op 100% Ready. De live pagina's en `{"status":"ok"}` van de leden-API zijn na de uitrol opnieuw gecontroleerd.
 
 ## Eerstvolgende werkpakketten
 
-1. Lightboxwijzigingen via een pull request laten controleren, na groene GitHub- en Cloudflare-controles samenvoegen en live verifiëren.
-2. Apple Wallet en Google Wallet uitgeven zodra de vereiste accounts en certificaten beschikbaar zijn; technische eisen staan in `docs/wallet-integratieplan.md`.
+1. Apple Wallet en Google Wallet uitgeven zodra de vereiste accounts en certificaten beschikbaar zijn; technische eisen staan in `docs/wallet-integratieplan.md`.
 
 ## Model- en tokenkeuze
 
