@@ -257,6 +257,11 @@ async function hmac(secret, value) {
   return base64url(new Uint8Array(await crypto.subtle.sign("HMAC", key, encoder.encode(value))));
 }
 
+async function passDisplayCode(signingKey, passId) {
+  const source = (await hmac(signingKey, `display:${passId}`)).replace(/[^a-z0-9]/gi, "").toUpperCase();
+  return `SV-${source.slice(0, 4)}-${source.slice(4, 8)}`;
+}
+
 async function passwordHash(password, pepper) {
   const salt = crypto.getRandomValues(new Uint8Array(16));
   const material = await crypto.subtle.importKey("raw", encoder.encode(`${password}${pepper}`), "PBKDF2", false, ["deriveBits"]);
@@ -776,12 +781,16 @@ async function me(request, env) {
   const isAdmin = allowedEmails.includes(user.email.toLowerCase()) && Boolean(clientIp && allowedIps.includes(clientIp));
   const [application, pass] = await Promise.all([
     env.DB.prepare(`SELECT status, education_level, institution, study_city, submitted_at, reviewed_at FROM student_applications WHERE user_id = ? ORDER BY submitted_at DESC LIMIT 1`).bind(user.id).first(),
-    env.DB.prepare(`SELECT p.id, p.status, p.issued_at, p.expires_at FROM student_passes p JOIN student_applications a ON a.id = p.application_id WHERE p.user_id = ? AND p.status = 'active' AND p.revoked_at IS NULL AND a.status = 'approved' ORDER BY a.reviewed_at DESC, p.issued_at DESC LIMIT 1`).bind(user.id).first(),
+    env.DB.prepare(`SELECT p.id, p.status, p.display_code, p.issued_at, p.expires_at FROM student_passes p JOIN student_applications a ON a.id = p.application_id WHERE p.user_id = ? AND p.status = 'active' AND p.revoked_at IS NULL AND a.status = 'approved' ORDER BY a.reviewed_at DESC, p.issued_at DESC LIMIT 1`).bind(user.id).first(),
   ]);
   let discountPass = null;
   if (pass && env.PASS_SIGNING_KEY && (!pass.expires_at || pass.expires_at > nowIso())) {
     const code = `${pass.id}.${await hmac(env.PASS_SIGNING_KEY, pass.id)}`;
-    discountPass = { code, issuedAt: pass.issued_at, expiresAt: pass.expires_at };
+    const displayCode = pass.display_code || await passDisplayCode(env.PASS_SIGNING_KEY, pass.id);
+    if (!pass.display_code) {
+      try { await env.DB.prepare(`UPDATE student_passes SET display_code = ? WHERE id = ? AND display_code IS NULL`).bind(displayCode, pass.id).run(); } catch { /* A later account request retries persistence. */ }
+    }
+    discountPass = { code, displayCode, issuedAt: pass.issued_at, expiresAt: pass.expires_at };
   }
   const subscription = await env.DB.prepare(`SELECT status FROM newsletter_subscriptions WHERE email = ?`).bind(user.email).first();
   return json({ user: { id: user.id, name: user.full_name, email: user.email }, isAdmin, studentApplication: application || null, discountPass, newsletter: subscription?.status || "not-subscribed" });
@@ -818,7 +827,8 @@ async function passwordResetPage(request, env) {
   const row = await env.DB.prepare(`SELECT token_hash FROM email_tokens WHERE token_hash = ? AND purpose = 'password_reset' AND used_at IS NULL AND expires_at > ?`)
     .bind(await digest(token), nowIso()).first();
   if (!row) return accountResultPage(locale, copy.resetExpiredTitle, copy.resetExpired);
-  return html(`<!doctype html><html lang="${locale}"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>${escapeHtml(copy.resetTitle)}</title><body style="font:16px system-ui;max-width:38rem;margin:8vh auto;padding:1.5rem;color:#102f42"><main><h1>${escapeHtml(copy.resetTitle)}</h1><form method="post" action="/api/members/password-reset/confirm"><input type="hidden" name="token" value="${escapeHtml(token)}"><input type="hidden" name="locale" value="${locale}"><label>${escapeHtml(copy.resetLabel)}<input name="password" type="password" minlength="12" maxlength="128" required autocomplete="new-password"></label><button>${escapeHtml(copy.resetButton)}</button></form></main></body></html>`);
+  const helper = locale === "nl" ? "Kies een nieuw wachtwoord voor uw privé-e-mailadres. Na het opslaan wordt u teruggestuurd naar uw account." : locale === "de" ? "Wählen Sie ein neues Passwort für Ihre private E-Mail-Adresse. Danach gelangen Sie zurück zu Ihrem Konto." : "Choose a new password for your personal email address. After saving, you will return to your account.";
+  return html(`<!doctype html><html lang="${locale}"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>${escapeHtml(copy.resetTitle)} · Schaap's Vishandel</title><style>*{box-sizing:border-box}body{margin:0;min-height:100vh;background:linear-gradient(145deg,#eefaff,#fff 55%,#e8f7fb);font:16px/1.55 system-ui,-apple-system,sans-serif;color:#102f42;padding:clamp(1rem,4vw,3rem)}main{width:min(42rem,100%);margin:6vh auto;background:#fff;border:1px solid #b9e3f0;border-radius:1.5rem;padding:clamp(1.5rem,5vw,3.2rem);box-shadow:0 1.5rem 4rem #073d5618}.brand{color:#075c7c;font-family:Georgia,serif;font-size:1.45rem;font-weight:800}.since{margin:.15rem 0 2.2rem;color:#087fa8;font-size:.7rem;font-weight:800;letter-spacing:.2em}h1{font-family:Georgia,serif;font-size:clamp(2rem,6vw,3.25rem);line-height:1.05;margin:0}p{color:#496273;margin:1rem 0 2rem}label{display:block;font-weight:700}input{display:block;width:100%;margin:.5rem 0 1.25rem;padding:.9rem 1rem;border:1px solid #a9dceb;border-radius:.7rem;font:inherit;color:#102f42}input:focus{outline:3px solid #bceafa;border-color:#087fa8}button{width:100%;border:0;border-radius:.7rem;background:#075c7c;color:#fff;padding:.95rem 1.25rem;font:inherit;font-weight:800;cursor:pointer}button:hover{background:#063f58}</style><main><div class="brand">Schaap’s Vishandel</div><div class="since">LEIDEN · SINDS 1938</div><h1>${escapeHtml(copy.resetTitle)}</h1><p>${escapeHtml(helper)}</p><form method="post" action="/api/members/password-reset/confirm"><input type="hidden" name="token" value="${escapeHtml(token)}"><input type="hidden" name="locale" value="${locale}"><label>${escapeHtml(copy.resetLabel)}<input name="password" type="password" minlength="12" maxlength="128" required autocomplete="new-password"></label><button>${escapeHtml(copy.resetButton)}</button></form></main></html>`);
 }
 
 async function confirmPasswordReset(request, env) {
@@ -938,13 +948,14 @@ async function adminDecision(request, env, applicationId) {
   const expiresAt = decision === "approved" ? oneStudyYearFrom(time) : null;
   const passId = decision === "approved" ? crypto.randomUUID() : null;
   const passCode = passId && env.PASS_SIGNING_KEY ? `${passId}.${await hmac(env.PASS_SIGNING_KEY, passId)}` : null;
+  const displayCode = passId && env.PASS_SIGNING_KEY ? await passDisplayCode(env.PASS_SIGNING_KEY, passId) : null;
   if (decision === "approved" && !passCode) return json({ error: "pass_signing_unavailable" }, 503);
   const statements = [
     env.DB.prepare(`UPDATE student_applications SET status = ?, reviewed_at = ?, reviewed_by = ?, reviewer_note = ? WHERE id = ? AND status = 'pending'`)
       .bind(decision, time, admin.id, String(body?.note || "").trim().slice(0, 500) || null, applicationId),
   ];
-  if (passId && passCode) statements.push(env.DB.prepare(`INSERT INTO student_passes (id, user_id, application_id, public_code_hash, status, issued_at, expires_at) SELECT ?, user_id, id, ?, 'active', ?, ? FROM student_applications WHERE id = ? AND status = 'approved' AND reviewed_by = ? AND reviewed_at = ?`)
-    .bind(passId, await digest(passCode), time, expiresAt, applicationId, admin.id, time));
+  if (passId && passCode && displayCode) statements.push(env.DB.prepare(`INSERT INTO student_passes (id, user_id, application_id, public_code_hash, display_code, status, issued_at, expires_at) SELECT ?, user_id, id, ?, ?, 'active', ?, ? FROM student_applications WHERE id = ? AND status = 'approved' AND reviewed_by = ? AND reviewed_at = ?`)
+    .bind(passId, await digest(passCode), displayCode, time, expiresAt, applicationId, admin.id, time));
   statements.push(env.DB.prepare(`INSERT INTO admin_audit_log (id, reviewer_user_id, action, application_id, occurred_at)
     SELECT ?, ?, ?, ?, ? WHERE EXISTS (
       SELECT 1 FROM student_applications WHERE id = ? AND status = ? AND reviewed_by = ? AND reviewed_at = ?
@@ -974,16 +985,29 @@ async function verifyPass(request, env) {
   if (!admin) return json({ error: "forbidden" }, 403);
   const body = await readJson(request);
   const code = typeof body?.code === "string" ? body.code.trim() : "";
-  if (code.length > 160 || !code.includes(".") || !env.PASS_SIGNING_KEY) return json({ valid: false }, 400);
-  const [id, signature] = code.split(".", 2);
-  if (!id || !signature || !safeEqual(signature, await hmac(env.PASS_SIGNING_KEY, id))) return json({ valid: false });
-  const pass = await env.DB.prepare(`SELECT p.status, p.expires_at, p.revoked_at, a.status AS application_status, u.full_name FROM student_passes p JOIN users u ON u.id=p.user_id JOIN student_applications a ON a.id=p.application_id AND a.user_id=p.user_id WHERE p.id = ?`)
-    .bind(id).first();
+  if (!code || code.length > 160 || !env.PASS_SIGNING_KEY) return json({ valid: false }, 400);
+  let id = "";
+  let signedCode = "";
+  let pass;
+  if (code.includes(".")) {
+    const [passId, signature] = code.split(".", 2);
+    if (!passId || !signature || !safeEqual(signature, await hmac(env.PASS_SIGNING_KEY, passId))) return json({ valid: false });
+    id = passId;
+    signedCode = code;
+    pass = await env.DB.prepare(`SELECT p.status, p.display_code, p.expires_at, p.revoked_at, a.status AS application_status, u.full_name FROM student_passes p JOIN users u ON u.id=p.user_id JOIN student_applications a ON a.id=p.application_id AND a.user_id=p.user_id WHERE p.id = ?`).bind(id).first();
+  } else {
+    const displayCode = code.replace(/\s+/g, "").toUpperCase();
+    if (!/^SV-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(displayCode)) return json({ valid: false }, 400);
+    pass = await env.DB.prepare(`SELECT p.id, p.status, p.display_code, p.expires_at, p.revoked_at, a.status AS application_status, u.full_name FROM student_passes p JOIN users u ON u.id=p.user_id JOIN student_applications a ON a.id=p.application_id AND a.user_id=p.user_id WHERE p.display_code = ?`).bind(displayCode).first();
+    id = pass?.id || "";
+  }
   const valid = pass?.status === "active" && !pass.revoked_at && pass.application_status === "approved" && (!pass.expires_at || pass.expires_at > nowIso());
   if (!valid) return json({ valid: false });
-  const storedCode = await env.DB.prepare(`SELECT public_code_hash FROM student_passes WHERE id = ?`).bind(id).first();
-  if (!safeEqual(await digest(code), storedCode?.public_code_hash)) return json({ valid: false });
-  return json({ valid: true, name: pass.full_name, discountPercent: 10, eligibleProducts: ["assortiment"] });
+  if (signedCode) {
+    const storedCode = await env.DB.prepare(`SELECT public_code_hash FROM student_passes WHERE id = ?`).bind(id).first();
+    if (!safeEqual(await digest(signedCode), storedCode?.public_code_hash)) return json({ valid: false });
+  }
+  return json({ valid: true, name: pass.full_name, displayCode: pass.display_code, expiresAt: pass.expires_at, discountPercent: 10, eligibleProducts: ["assortiment"] });
 }
 
 async function subscribeNewsletter(request, env) {

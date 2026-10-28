@@ -21,7 +21,7 @@ const copy = {
   de: { title: "Studentenanträge", intro: "Nur Administratoren auf der Serverfreigabeliste können diese Anträge sehen.", campaigns: "E-Mail-Angebote verwalten", loading: "Anträge werden geladen…", forbidden: "Kein Administratorzugriff. Melden Sie sich mit einem freigegebenen Administratorkonto an.", none: "Es sind keine Anträge offen.", city: "Studienort", schoolEmail: "Bestätigte Schul-E-Mail", proof: "Älteren Nachweis sicher öffnen", approve: "Genehmigen", reject: "Ablehnen", note: "Notiz (optional)", done: "Entscheidung gespeichert.", cleanupNeeded: "Die Entscheidung wurde gespeichert, aber ein älterer Nachweis konnte nicht gelöscht werden. Bitte versuchen Sie es erneut.", cleanup: "Nachweis erneut löschen", fail: "Das hat nicht funktioniert. Aktualisieren Sie die Seite und versuchen Sie es erneut.", verify: "Rabattpass prüfen", code: "Passcode", check: "Prüfen", valid: "Gültiger Pass", invalid: "Pass ungültig oder abgelaufen", holder: "Pass ausgestellt für", discount: "Rabatt", eligible: "Gültig für", kibbeling: "Kibbeling", herring: "Hering", herringSandwich: "Heringsbrötchen", drinks: "Getränke", wholeRange: "das gesamte Sortiment", menu: "MBO", levelHbo: "HBO", levelWo: "Universität" },
 } as const;
 
-type VerifiedPass = { valid: boolean; name?: string; discountPercent?: number; eligibleProducts?: string[] };
+type VerifiedPass = { valid: boolean; name?: string; displayCode?: string; expiresAt?: string | null; discountPercent?: number; eligibleProducts?: string[] };
 const ELIGIBLE_LABEL: Record<string, keyof typeof copy.nl> = {
   assortiment: "wholeRange",
 };

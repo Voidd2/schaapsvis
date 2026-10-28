@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import type { FormEvent } from "react";
+import { PassQrCode } from "./PassQrCode";
 
 type Member = {
   id: string;
@@ -21,7 +22,7 @@ type MemberData = {
   user: Member | null;
   isAdmin?: boolean;
   studentApplication?: StudentApplication | null;
-  discountPass?: { code: string; issuedAt: string; expiresAt: string | null } | null;
+  discountPass?: { code: string; displayCode: string; issuedAt: string; expiresAt: string | null } | null;
   newsletter?: string;
 };
 
@@ -61,6 +62,8 @@ const translations = {
     rejected: "Uw vorige aanvraag is afgewezen. U kunt opnieuw aanvragen.",
     pass: "Digitale studentenpas",
     passCode: "Laat deze code door een medewerker controleren",
+    qrLabel: "QR-code van uw studentenpas",
+    holder: "Studentenpas van",
     discount: "10% korting op het hele assortiment · niet combineerbaar met andere acties",
     unavailable: "De accountomgeving wordt nog gekoppeld. Probeer het later opnieuw.",
     accountCreated: "We sturen één code naar uw privé-e-mailadres en één naar uw schoolmail. Controleer zo nodig ook Ongewenste e-mail.",
@@ -109,6 +112,8 @@ const translations = {
     rejected: "Your previous application was declined. You can apply again.",
     pass: "Digital student pass",
     passCode: "Ask a staff member to verify this code",
+    qrLabel: "QR code for your student pass",
+    holder: "Student pass for",
     discount: "10% off the entire range · cannot be combined with other offers",
     unavailable: "The account area is still being connected. Please try again later.",
     accountCreated: "We will send one code to your personal email and one to your school email. Check your spam folder if needed.",
@@ -157,6 +162,8 @@ const translations = {
     rejected: "Ihr vorheriger Antrag wurde abgelehnt. Sie können erneut beantragen.",
     pass: "Digitaler Studentenpass",
     passCode: "Lassen Sie diesen Code vom Personal prüfen",
+    qrLabel: "QR-Code Ihres Studentenpasses",
+    holder: "Studentenpass für",
     discount: "10 % Rabatt auf das gesamte Sortiment · nicht mit anderen Aktionen kombinierbar",
     unavailable: "Der Kontobereich wird noch angebunden. Bitte versuchen Sie es später erneut.",
     accountCreated: "Wir senden einen Code an Ihre private E-Mail und einen an Ihre Schul-E-Mail. Prüfen Sie bei Bedarf auch den Spamordner.",
@@ -389,15 +396,20 @@ export function AccountPortal({ locale }: { locale: string }) {
             {data.studentApplication?.status === "approved" && data.discountPass && (
               <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-[#073d56] via-[#075c7c] to-[#0792b8] p-7 text-white shadow-xl sm:p-10">
                 <div className="flex items-start justify-between gap-4">
-                  <div><p className="text-xs font-bold uppercase tracking-[0.24em] text-sky-200">Schaap&apos;s Vishandel</p><p className="mt-2 text-sm tracking-[0.18em] text-sky-100">LEIDEN · SINDS 1938</p></div>
+                  <div className="flex items-center gap-3"><span aria-hidden="true" className="grid size-12 place-items-center rounded-full border-2 border-white/70 bg-white/10 font-display text-lg font-bold">SV</span><div><p className="text-xs font-bold uppercase tracking-[0.24em] text-sky-200">Schaap&apos;s Vishandel</p><p className="mt-2 text-sm tracking-[0.18em] text-sky-100">LEIDEN · SINDS 1938</p></div></div>
                   <span className="rounded-full border border-white/30 px-3 py-1 text-xs font-bold uppercase tracking-widest">Student</span>
                 </div>
-                <div className="mt-10 flex flex-wrap items-end justify-between gap-5">
-                  <p className="text-6xl font-bold tracking-tight">10<span className="text-4xl">%</span></p>
-                  <p className="max-w-52 text-right text-sm leading-relaxed text-sky-100">{t.discount}</p>
+                <div className="mt-8 grid items-end gap-7 sm:grid-cols-[1fr_auto]">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-sky-200">{t.holder}</p>
+                    <p className="mt-1 font-display text-3xl font-bold">{data.user.name}</p>
+                    <p className="mt-7 text-6xl font-bold tracking-tight">10<span className="text-4xl">%</span></p>
+                    <p className="mt-3 max-w-64 text-sm leading-relaxed text-sky-100">{t.discount}</p>
+                  </div>
+                  <PassQrCode value={data.discountPass.displayCode} label={t.qrLabel} />
                 </div>
                 <p className="mt-8 border-t border-white/20 pt-4 text-xs uppercase tracking-widest text-sky-100">{t.passCode}</p>
-                <code className="mt-2 block break-all rounded-lg bg-black/20 p-3 font-mono text-sm">{data.discountPass.code}</code>
+                <code className="mt-2 block rounded-lg bg-black/20 p-3 text-center font-mono text-xl font-bold tracking-[0.14em]">{data.discountPass.displayCode}</code>
                 <p className="mt-4 text-xs text-sky-100">{t.date}: {new Date(data.discountPass.issuedAt).toLocaleDateString(language)}{data.discountPass.expiresAt && <> · {t.expiry}: {new Date(data.discountPass.expiresAt).toLocaleDateString(language)}</>}</p>
               </div>
             )}
