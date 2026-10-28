@@ -6,26 +6,26 @@ import { paginaMetadata } from "@/lib/seo";
 
 const copy = {
   nl: {
-    title: "10% studentenkorting in Leiden | Schaap's Vis",
+    title: "10% studentenkorting | Schaap's Vis",
     description:
-      "Nederlandse en internationale studenten in Leiden krijgen na goedkeuring 10% korting op het hele assortiment van Schaap's Vishandel.",
+      "Nederlandse en internationale mbo-, hbo- en wo-studenten krijgen na goedkeuring 10% korting op het hele assortiment van Schaap's Vishandel.",
     eyebrow: "Voor Nederlandse én internationale studenten",
-    heading: "Student in Leiden? Eet lekker mee.",
+    heading: "Student? Eet lekker mee.",
     intro:
-      "Studeer je in Leiden aan het mbo, hbo of de universiteit? Nederlandse en internationale studenten krijgen na goedkeuring 10% korting op het hele assortiment van Schaap's Vishandel.",
+      "Studeer je aan het mbo, hbo of de universiteit? Nederlandse en internationale studenten krijgen na goedkeuring 10% korting op het hele assortiment van Schaap's Vishandel.",
     categories: ["Op het hele assortiment"],
     condition: "Voor wie is de korting?",
     conditionText:
-      "Voor Nederlandse en internationale studenten die in Leiden een MBO-, HBO- of WO-opleiding volgen; middelbare scholieren vallen buiten de actie. Na goedkeuring geldt de korting op het hele assortiment. De korting kan niet worden gecombineerd met nieuwsbriefkortingen of andere acties.",
+      "Voor Nederlandse en internationale studenten met een bevestigde schoolmail die een MBO-, HBO- of WO-opleiding volgen; middelbare scholieren vallen buiten de actie. De opleiding hoeft niet in Leiden te zijn. Na goedkeuring geldt de korting op het hele assortiment en is deze niet te combineren met andere acties.",
     card: "Je digitale studentenpas",
     cardText:
-      "Na goedkeuring verschijnt je persoonlijke pas in je account. De pas is één studiejaar geldig; daarna lever je opnieuw bewijs aan. Het accountportaal wordt nu in een besloten preview getest.",
+      "Na goedkeuring verschijnt je persoonlijke pas in je account. De pas is één studiejaar geldig; daarna vraag je met je bevestigde schoolmail opnieuw aan. Het accountportaal wordt nu in een besloten preview getest.",
     cardExample: "Voorbeeld · na beoordeling beschikbaar in je account",
     steps: "Zo werkt aanmelden",
     step1: "Maak een account met je persoonlijke e-mailadres, je schoolmail en een sterk wachtwoord.",
-    step2: "Vul de twee aparte verificatiecodes in die we naar beide adressen sturen. Pas daarna kun je je inschrijvingsbewijs veilig indienen.",
+    step2: "Vul de twee aparte verificatiecodes in die we naar beide adressen sturen. Daarna ben je direct ingelogd en vul je onderwijsinstelling, opleidingsniveau en studiestad in.",
     step3: "We beoordelen je aanvraag handmatig. Na goedkeuring verschijnt je digitale kortingspas in je account.",
-    privacy: "Aanmelden is op dit moment alleen beschikbaar in de met wachtwoord afgeschermde preview. We testen de e-mailbezorging en privacy-informatie voordat registratie voor iedereen opengaat. Gebruik in deze testfase geen echt inschrijvingsbewijs. Aanbiedingen per e-mail zijn vrijwillig, staan los van de korting en kun je altijd afmelden.",
+    privacy: "Aanmelden is op dit moment alleen beschikbaar in de met wachtwoord afgeschermde preview. We testen de e-mailbezorging en privacy-informatie voordat registratie voor iedereen opengaat. Een bevestigde schoolmail is voldoende; we vragen geen inschrijvingsbewijs. Aanbiedingen per e-mail zijn vrijwillig, staan los van de korting en kun je altijd afmelden.",
     weekly: "Regelmatig iets nieuws proeven",
     weeklyText:
       "Meld je apart en vrijwillig aan voor nieuws en aanbiedingen speciaal voor Schaap’s-klanten. Soms delen we ook een groepsaanbieding voor studentenverenigingen. We sturen alleen een bericht wanneer er iets leuks te delen is. Deze aanbiedingen zijn niet te combineren met de studentenkorting of andere acties.",
@@ -37,27 +37,27 @@ const copy = {
     privacyPage: "Lees de privacyinformatie",
   },
   en: {
-    title: "10% student discount in Leiden | Schaap's Vis",
+    title: "10% student discount | Schaap's Vis",
     description:
-      "Dutch and international students in Leiden receive 10% off the entire Schaap's Vishandel range after approval.",
+      "Dutch and international MBO, HBO and university students receive 10% off the entire Schaap's Vishandel range after approval.",
     eyebrow: "For Dutch and international students",
-    heading: "Studying in Leiden? Eat well with us.",
+    heading: "Are you a student? Eat well with us.",
     intro:
-      "Studying in Leiden at MBO, HBO or university level? Dutch and international students receive 10% off the entire Schaap's Vishandel range after approval.",
+      "Studying at MBO, HBO or university level? Dutch and international students receive 10% off the entire Schaap's Vishandel range after approval.",
     categories: ["On the entire range"],
     condition: "Who is eligible?",
     conditionText:
-      "For Dutch and international students enrolled in an MBO, HBO or university programme in Leiden; secondary-school pupils are not eligible. Once approved, the discount applies to the entire range. It cannot be combined with newsletter discounts or other offers.",
+      "For Dutch and international students with a verified school email who attend an MBO, HBO or university programme; secondary-school pupils are not eligible. The programme does not have to be in Leiden. Once approved, the discount applies to the entire range and cannot be combined with other offers.",
     card: "Your digital student pass",
     cardText:
-      "Once approved, your personal pass will appear in your account. It is valid for one academic year; you will need to provide new proof afterwards. The account portal is currently being tested in a restricted preview.",
+      "Once approved, your personal pass will appear in your account. It is valid for one academic year; afterwards you apply again using your verified school email. The account portal is currently being tested in a restricted preview.",
     cardExample: "Preview · available in your account after approval",
     steps: "How to apply",
     step1: "Create an account with your personal email, school email and a strong password.",
-    step2: "Enter the two separate verification codes sent to both addresses. You can then securely submit proof of enrolment.",
+    step2: "Enter the two separate verification codes sent to both addresses. You are then signed in automatically and enter your institution, education level and study city.",
     step3: "We review each application manually. Once approved, your digital discount pass appears in your account.",
     privacy:
-      "Registration is currently available only in the password-protected preview. We are testing email delivery and privacy information before opening registration to everyone. Do not use real enrolment documents during this test phase. Email offers are optional, separate from the discount, and can be cancelled at any time.",
+      "Registration is currently available only in the password-protected preview. We are testing email delivery and privacy information before opening registration to everyone. A verified school email is sufficient; no enrolment document is requested. Email offers are optional, separate from the discount, and can be cancelled at any time.",
     weekly: "Discover something new from time to time",
     weeklyText:
       "Sign up separately and voluntarily for news and offers especially for Schaap’s customers. From time to time, we may also share a group offer for student associations. We will email only when there is something worth sharing. These offers cannot be combined with the student discount or other promotions.",
@@ -69,27 +69,27 @@ const copy = {
     privacyPage: "Read the privacy information",
   },
   de: {
-    title: "10 % Studentenrabatt in Leiden | Schaap's Vis",
+    title: "10 % Studentenrabatt | Schaap's Vis",
     description:
-      "Niederländische und internationale Studierende in Leiden erhalten nach Freigabe 10 % Rabatt auf das gesamte Sortiment von Schaap's Vishandel.",
+      "Niederländische und internationale MBO-, HBO- und Hochschulstudierende erhalten nach Freigabe 10 % Rabatt auf das gesamte Sortiment von Schaap's Vishandel.",
     eyebrow: "Für niederländische und internationale Studierende",
-    heading: "Du studierst in Leiden? Iss gut bei uns.",
+    heading: "Du studierst? Iss gut bei uns.",
     intro:
-      "Studieren Sie in Leiden auf MBO-, HBO- oder Universitätsniveau? Niederländische und internationale Studierende erhalten nach Freigabe 10 % Rabatt auf das gesamte Sortiment von Schaap's Vishandel.",
+      "Studieren Sie auf MBO-, HBO- oder Universitätsniveau? Niederländische und internationale Studierende erhalten nach Freigabe 10 % Rabatt auf das gesamte Sortiment von Schaap's Vishandel.",
     categories: ["Auf das gesamte Sortiment"],
     condition: "Wer kann den Rabatt erhalten?",
     conditionText:
-      "Für niederländische und internationale Studierende in einem MBO-, HBO- oder Hochschulstudium in Leiden; Schülerinnen und Schüler weiterführender Schulen sind ausgeschlossen. Nach Freigabe gilt der Rabatt für das gesamte Sortiment. Er ist nicht mit Newsletter-Rabatten oder anderen Aktionen kombinierbar.",
+      "Für niederländische und internationale Studierende mit bestätigter Schul-E-Mail in einem MBO-, HBO- oder Hochschulstudium; Schülerinnen und Schüler weiterführender Schulen sind ausgeschlossen. Das Studium muss nicht in Leiden sein. Nach Freigabe gilt der Rabatt für das gesamte Sortiment und ist nicht mit anderen Aktionen kombinierbar.",
     card: "Ihr digitaler Studentenausweis",
     cardText:
-      "Nach der Freigabe erscheint Ihr persönlicher Pass im Konto. Er ist ein Studienjahr gültig; danach müssen Sie einen neuen Nachweis einreichen. Das Kontenportal wird derzeit in einer geschützten Vorschau getestet.",
+      "Nach der Freigabe erscheint Ihr persönlicher Pass im Konto. Er ist ein Studienjahr gültig; danach beantragen Sie ihn mit Ihrer bestätigten Schul-E-Mail erneut. Das Kontenportal wird derzeit in einer geschützten Vorschau getestet.",
     cardExample: "Vorschau · nach der Prüfung in Ihrem Konto verfügbar",
     steps: "So funktioniert die Anmeldung",
     step1: "Erstellen Sie ein Konto mit Ihrer privaten E-Mail-Adresse, Schul-E-Mail und einem sicheren Passwort.",
-    step2: "Geben Sie die zwei separaten Bestätigungscodes ein, die wir an beide Adressen senden. Danach können Sie den Studiennachweis sicher einreichen.",
+    step2: "Geben Sie die zwei separaten Bestätigungscodes ein, die wir an beide Adressen senden. Danach sind Sie automatisch angemeldet und tragen Einrichtung, Ausbildungsniveau und Studienort ein.",
     step3: "Wir prüfen jeden Antrag manuell. Nach der Freigabe erscheint Ihr digitaler Rabattpass im Konto.",
     privacy:
-      "Die Anmeldung ist derzeit nur in der passwortgeschützten Vorschau verfügbar. Wir testen E-Mail-Zustellung und Datenschutzinformationen, bevor wir die Registrierung für alle öffnen. Verwenden Sie in dieser Testphase keinen echten Studiennachweis. E-Mail-Angebote sind freiwillig, vom Rabatt getrennt und jederzeit abbestellbar.",
+      "Die Anmeldung ist derzeit nur in der passwortgeschützten Vorschau verfügbar. Wir testen E-Mail-Zustellung und Datenschutzinformationen, bevor wir die Registrierung für alle öffnen. Eine bestätigte Schul-E-Mail genügt; ein Studiennachweis wird nicht verlangt. E-Mail-Angebote sind freiwillig, vom Rabatt getrennt und jederzeit abbestellbar.",
     weekly: "Ab und zu etwas Neues entdecken",
     weeklyText:
       "Melden Sie sich separat und freiwillig für Neuigkeiten und Angebote speziell für Schaap’s-Kunden an. Gelegentlich teilen wir auch ein Gruppenangebot für Studierendenvereine. Wir schreiben nur, wenn es etwas Schönes zu teilen gibt. Diese Angebote sind nicht mit dem Studentenrabatt oder anderen Aktionen kombinierbar.",

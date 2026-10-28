@@ -13,6 +13,7 @@ type StudentApplication = {
   status: "pending" | "approved" | "rejected";
   education_level: "mbo" | "hbo" | "wo";
   institution: string;
+  study_city?: string | null;
   submitted_at: string;
 };
 
@@ -30,8 +31,9 @@ const translations = {
     intro: "Maak een account aan, bekijk uw studentenaanvraag en toon na goedkeuring uw kortingspas in de winkel.",
     login: "Inloggen",
     register: "Account maken",
-    name: "Naam",
-    email: "E-mailadres",
+    firstName: "Voornaam",
+    lastName: "Achternaam",
+    email: "Privé-e-mailadres (hiermee logt u in)",
     schoolEmail: "E-mailadres van uw onderwijsinstelling",
     password: "Wachtwoord (minimaal 12 tekens)",
     personalCode: "Code uit uw persoonlijke e-mail",
@@ -39,31 +41,29 @@ const translations = {
     verifyCodes: "E-mailadressen bevestigen",
     verificationHelp: "Vul beide codes in. Ze zijn 10 minuten geldig. Kijk ook in Ongewenste e-mail als u geen bericht ziet.",
     invalidCodes: "De codes zijn onjuist of verlopen. Vraag nieuwe codes aan en probeer opnieuw.",
-    optionalOffers: "Ja, ik wil vrijwillig aanbiedingen per e-mail ontvangen, soms ook voor studentengroepen of verenigingen. Ik bevestig dit per e-mail en kan me altijd afmelden.",
+    optionalOffers: "Ja, ik wil aanbiedingen per e-mail ontvangen, soms ook voor studentengroepen of verenigingen. Mijn inschrijving wordt direct actief en ik kan me via iedere e-mail afmelden.",
     send: "Verder",
     logout: "Uitloggen",
     reset: "Wachtwoord vergeten? Stuur een resetlink",
     resend: "Nieuwe verificatiecodes sturen",
     studentTitle: "Studentenkorting aanvragen",
-    studentInfo: "De 10% korting geldt voor Nederlandse en internationale studenten die in Leiden een MBO-, HBO- of WO-opleiding volgen; middelbare school is uitgesloten. Na goedkeuring geldt de korting voor het hele assortiment. De korting is niet te combineren met nieuwsbriefkortingen of andere acties. De pas is één studiejaar geldig; daarna is nieuw bewijs nodig.",
-    institution: "Onderwijsinstelling in Leiden",
+    studentInfo: "De 10% korting geldt voor Nederlandse en internationale studenten met een bevestigde schoolmail die een MBO-, HBO- of WO-opleiding volgen; middelbare school is uitgesloten. Na goedkeuring geldt de korting voor het hele assortiment. De korting is niet te combineren met andere acties. De pas is één studiejaar geldig.",
+    institution: "Onderwijsinstelling",
+    studyCity: "Stad van uw opleiding",
     level: "Opleidingsniveau",
     mbo: "MBO",
     hbo: "HBO",
     wo: "Universiteit (WO)",
-    studies: "Ik volg deze opleiding in Leiden",
-    proof: "Bewijs van inschrijving (PDF, JPG of PNG; maximaal 8 MB)",
-    proofConsent: "Ik geef toestemming om dit bewijs uitsluitend te gebruiken om mijn studentenkorting te beoordelen. Het bestand wordt na de beoordeling verwijderd.",
     apply: "Aanvraag indienen",
     pending: "Uw aanvraag wacht op beoordeling. U krijgt uw pas zodra deze is goedgekeurd.",
     approved: "Uw aanvraag is goedgekeurd. Toon deze pas bij de kassa.",
-    expired: "Uw studentenpas is verlopen. Dien met nieuw bewijs opnieuw een aanvraag in.",
-    rejected: "Uw vorige aanvraag is afgewezen. U kunt met nieuw bewijs opnieuw aanvragen.",
+    expired: "Uw studentenpas is verlopen. U kunt met uw bevestigde schoolmail opnieuw een aanvraag indienen.",
+    rejected: "Uw vorige aanvraag is afgewezen. U kunt opnieuw aanvragen.",
     pass: "Digitale studentenpas",
     passCode: "Laat deze code door een medewerker controleren",
     discount: "10% korting op het hele assortiment · niet combineerbaar met andere acties",
     unavailable: "De accountomgeving wordt nog gekoppeld. Probeer het later opnieuw.",
-    accountCreated: "Als dit een nieuw account is, sturen we één code naar uw persoonlijke e-mailadres en één naar uw schoolmail. Controleer zo nodig ook Ongewenste e-mail. Heeft u aanbiedingen aangevinkt maar geen aparte bevestigingsmail ontvangen? Meld u later opnieuw aan voor e-maildeals.",
+    accountCreated: "We sturen één code naar uw privé-e-mailadres en één naar uw schoolmail. Controleer zo nodig ook Ongewenste e-mail.",
     verificationFailed: "Uw account is aangemaakt, maar een of beide e-mails konden niet worden verstuurd. Vraag de codes opnieuw aan.",
     verificationDeliveryFailed: "Uw account is aangemaakt, maar de verificatiemails konden niet worden bezorgd. Gebruik hieronder ‘Nieuwe verificatiecodes sturen’ om het opnieuw te proberen.",
     genericError: "Dit lukte niet. Controleer uw gegevens of probeer het later opnieuw.",
@@ -72,15 +72,16 @@ const translations = {
     accountLabel: "Ingelogd als",
     date: "Pas geldig vanaf",
     expiry: "Geldig tot",
-    privacy: "Lees de voorlopige privacyinformatie over accounts, studentenbewijs en e-maildeals.",
+    privacy: "Lees de voorlopige privacyinformatie over accounts, schoolmailverificatie en e-maildeals.",
   },
   en: {
     title: "Your Schaap's account",
     intro: "Create an account, check your student application and show your discount pass in store after approval.",
     login: "Log in",
     register: "Create account",
-    name: "Name",
-    email: "Email address",
+    firstName: "First name",
+    lastName: "Last name",
+    email: "Personal email address (used to log in)",
     schoolEmail: "Email address from your educational institution",
     password: "Password (at least 12 characters)",
     personalCode: "Code from your personal email",
@@ -88,31 +89,29 @@ const translations = {
     verifyCodes: "Verify both email addresses",
     verificationHelp: "Enter both codes. They are valid for 10 minutes. Check your spam folder if you do not see the messages.",
     invalidCodes: "The codes are incorrect or expired. Request new codes and try again.",
-    optionalOffers: "Yes, I would like to receive email offers, occasionally including offers for student groups or associations. I will confirm by email and can unsubscribe at any time.",
+    optionalOffers: "Yes, I would like to receive email offers, occasionally including offers for student groups or associations. My subscription starts immediately and I can unsubscribe from every email.",
     send: "Continue",
     logout: "Log out",
     reset: "Forgot your password? Send a reset link",
     resend: "Resend verification codes",
     studentTitle: "Apply for the student discount",
-    studentInfo: "The 10% discount is for Dutch and international students enrolled in an MBO, HBO or university programme in Leiden; secondary school is not eligible. After approval, it applies to the entire range and cannot be combined with newsletter discounts or other offers. The pass is valid for one academic year; new proof is then required.",
-    institution: "Educational institution in Leiden",
+    studentInfo: "The 10% discount is for Dutch and international students with a verified school email who attend an MBO, HBO or university programme; secondary school is not eligible. After approval, it applies to the entire range and cannot be combined with other offers. The pass is valid for one academic year.",
+    institution: "Educational institution",
+    studyCity: "City where you study",
     level: "Education level",
     mbo: "MBO",
     hbo: "HBO",
     wo: "University",
-    studies: "I study at this institution in Leiden",
-    proof: "Proof of enrolment (PDF, JPG or PNG; up to 8 MB)",
-    proofConsent: "I consent to this proof being used only to review my student discount application. The file will be deleted after review.",
     apply: "Submit application",
     pending: "Your application is awaiting review. Your pass will appear after approval.",
     approved: "Your application is approved. Show this pass at the counter.",
-    expired: "Your student pass has expired. Submit a new application with current proof.",
-    rejected: "Your previous application was declined. You can apply again with new proof.",
+    expired: "Your student pass has expired. You can apply again using your verified school email.",
+    rejected: "Your previous application was declined. You can apply again.",
     pass: "Digital student pass",
     passCode: "Ask a staff member to verify this code",
     discount: "10% off the entire range · cannot be combined with other offers",
     unavailable: "The account area is still being connected. Please try again later.",
-    accountCreated: "If this is a new account, we will send one code to your personal email and one to your school email. Check your spam folder if needed. If you opted in to offers but did not receive a separate confirmation, you can sign up for email offers again later.",
+    accountCreated: "We will send one code to your personal email and one to your school email. Check your spam folder if needed.",
     verificationFailed: "Your account was created, but one or both emails could not be sent. Request new codes.",
     verificationDeliveryFailed: "Your account was created, but the verification emails could not be delivered. Use ‘Resend verification codes’ below to try again.",
     genericError: "That did not work. Check your details or try again later.",
@@ -121,15 +120,16 @@ const translations = {
     accountLabel: "Signed in as",
     date: "Pass issued",
     expiry: "Valid until",
-    privacy: "Read the preliminary privacy information about accounts, student proof and email offers.",
+    privacy: "Read the preliminary privacy information about accounts, school-email verification and email offers.",
   },
   de: {
     title: "Ihr Schaap's-Konto",
     intro: "Erstellen Sie ein Konto, verfolgen Sie Ihren Studentenantrag und zeigen Sie nach der Freigabe Ihren Rabattpass im Geschäft.",
     login: "Anmelden",
     register: "Konto erstellen",
-    name: "Name",
-    email: "E-Mail-Adresse",
+    firstName: "Vorname",
+    lastName: "Nachname",
+    email: "Private E-Mail-Adresse (für die Anmeldung)",
     schoolEmail: "E-Mail-Adresse Ihrer Bildungseinrichtung",
     password: "Passwort (mindestens 12 Zeichen)",
     personalCode: "Code aus Ihrer privaten E-Mail",
@@ -137,31 +137,29 @@ const translations = {
     verifyCodes: "Beide E-Mail-Adressen bestätigen",
     verificationHelp: "Geben Sie beide Codes ein. Sie sind 10 Minuten gültig. Prüfen Sie auch den Spamordner, falls die Nachrichten fehlen.",
     invalidCodes: "Die Codes sind falsch oder abgelaufen. Fordern Sie neue Codes an und versuchen Sie es erneut.",
-    optionalOffers: "Ja, ich möchte freiwillig E-Mail-Angebote erhalten, gelegentlich auch für Studierendengruppen oder -vereine. Ich bestätige dies per E-Mail und kann mich jederzeit abmelden.",
+    optionalOffers: "Ja, ich möchte E-Mail-Angebote erhalten, gelegentlich auch für Studierendengruppen oder -vereine. Die Anmeldung wird sofort aktiv; ich kann mich über jede E-Mail abmelden.",
     send: "Weiter",
     logout: "Abmelden",
     reset: "Passwort vergessen? Link zum Zurücksetzen senden",
     resend: "Neue Bestätigungscodes senden",
     studentTitle: "Studentenrabatt beantragen",
-    studentInfo: "Der Rabatt von 10 % gilt für niederländische und internationale Studierende einer MBO-, HBO- oder Hochschulausbildung in Leiden; weiterführende Schulen sind ausgeschlossen. Nach Freigabe gilt der Rabatt für das gesamte Sortiment; er ist nicht mit Newsletter-Rabatten oder anderen Aktionen kombinierbar. Der Pass ist ein Studienjahr gültig; danach ist ein neuer Nachweis erforderlich.",
-    institution: "Bildungseinrichtung in Leiden",
+    studentInfo: "Der Rabatt von 10 % gilt für niederländische und internationale Studierende mit bestätigter Schul-E-Mail in einer MBO-, HBO- oder Hochschulausbildung; weiterführende Schulen sind ausgeschlossen. Nach Freigabe gilt er für das gesamte Sortiment und ist nicht mit anderen Aktionen kombinierbar. Der Pass ist ein Studienjahr gültig.",
+    institution: "Bildungseinrichtung",
+    studyCity: "Studienort",
     level: "Ausbildungsniveau",
     mbo: "MBO",
     hbo: "HBO",
     wo: "Universität",
-    studies: "Ich studiere an dieser Einrichtung in Leiden",
-    proof: "Immatrikulationsnachweis (PDF, JPG oder PNG; max. 8 MB)",
-    proofConsent: "Ich willige ein, dass dieser Nachweis ausschließlich zur Prüfung meines Studentenrabatts verwendet wird. Die Datei wird nach der Prüfung gelöscht.",
     apply: "Antrag einreichen",
     pending: "Ihr Antrag wird geprüft. Nach der Freigabe erscheint Ihr Rabattpass.",
     approved: "Ihr Antrag wurde genehmigt. Zeigen Sie diesen Pass an der Theke vor.",
-    expired: "Ihr Studentenpass ist abgelaufen. Reichen Sie mit einem aktuellen Nachweis einen neuen Antrag ein.",
-    rejected: "Ihr vorheriger Antrag wurde abgelehnt. Sie können mit einem neuen Nachweis erneut beantragen.",
+    expired: "Ihr Studentenpass ist abgelaufen. Sie können mit Ihrer bestätigten Schul-E-Mail erneut einen Antrag stellen.",
+    rejected: "Ihr vorheriger Antrag wurde abgelehnt. Sie können erneut beantragen.",
     pass: "Digitaler Studentenpass",
     passCode: "Lassen Sie diesen Code vom Personal prüfen",
     discount: "10 % Rabatt auf das gesamte Sortiment · nicht mit anderen Aktionen kombinierbar",
     unavailable: "Der Kontobereich wird noch angebunden. Bitte versuchen Sie es später erneut.",
-    accountCreated: "Wenn dies ein neues Konto ist, senden wir einen Code an Ihre private E-Mail und einen an Ihre Schul-E-Mail. Prüfen Sie bei Bedarf auch den Spamordner. Wenn Sie Angebote gewählt, aber keine separate Bestätigung erhalten haben, können Sie sich später erneut für E-Mail-Angebote anmelden.",
+    accountCreated: "Wir senden einen Code an Ihre private E-Mail und einen an Ihre Schul-E-Mail. Prüfen Sie bei Bedarf auch den Spamordner.",
     verificationFailed: "Ihr Konto wurde erstellt, aber eine oder beide E-Mails konnten nicht gesendet werden. Fordern Sie neue Codes an.",
     verificationDeliveryFailed: "Ihr Konto wurde erstellt, aber die Bestätigungsmails konnten nicht zugestellt werden. Verwenden Sie unten ‘Neue Bestätigungscodes senden’, um es erneut zu versuchen.",
     genericError: "Das hat nicht funktioniert. Prüfen Sie Ihre Angaben oder versuchen Sie es später erneut.",
@@ -170,7 +168,7 @@ const translations = {
     accountLabel: "Angemeldet als",
     date: "Pass ausgestellt am",
     expiry: "Gültig bis",
-    privacy: "Lesen Sie die vorläufigen Datenschutzhinweise zu Konto, Studiennachweis und E-Mail-Angeboten.",
+    privacy: "Lesen Sie die vorläufigen Datenschutzhinweise zu Konto, Schul-E-Mail-Bestätigung und E-Mail-Angeboten.",
   },
 } as const;
 
@@ -236,7 +234,8 @@ export function AccountPortal({ locale }: { locale: string }) {
     try {
       const body: Record<string, unknown> = { email: fields.get("email"), password: fields.get("password"), locale: language };
       if (mode === "register") {
-        body.name = fields.get("name");
+        body.firstName = fields.get("firstName");
+        body.lastName = fields.get("lastName");
         body.schoolEmail = fields.get("schoolEmail");
         body.marketingConsent = fields.get("marketingConsent") === "on";
       }
@@ -290,7 +289,8 @@ export function AccountPortal({ locale }: { locale: string }) {
       if (!response.ok) throw new Error("verification-failed");
       setVerificationPending(false);
       setSuccess(true);
-      setMessage(language === "nl" ? "Beide e-mailadressen zijn bevestigd. U kunt nu inloggen." : language === "de" ? "Beide E-Mail-Adressen wurden bestätigt. Sie können sich jetzt anmelden." : "Both email addresses are verified. You can now log in.");
+      setMessage(language === "nl" ? "Uw account is bevestigd. U bent nu ingelogd en kunt direct studentenkorting aanvragen." : language === "de" ? "Ihr Konto wurde bestätigt. Sie sind jetzt angemeldet und können den Studentenrabatt direkt beantragen." : "Your account is verified. You are now signed in and can apply for the student discount right away.");
+      await refresh();
     } catch {
       setSuccess(false);
       setMessage(t.invalidCodes);
@@ -342,8 +342,6 @@ export function AccountPortal({ locale }: { locale: string }) {
     event.preventDefault();
     const form = event.currentTarget;
     const fields = new FormData(form);
-    fields.set("studiesInLeiden", fields.get("studiesInLeiden") === "on" ? "true" : "false");
-    fields.set("proofConsent", fields.get("proofConsent") === "on" ? "true" : "false");
     setBusy(true);
     setMessage("");
     try {
@@ -410,10 +408,8 @@ export function AccountPortal({ locale }: { locale: string }) {
               <form onSubmit={applyForDiscount} className="space-y-5 rounded-2xl border border-sky-200 bg-white p-6 shadow-sm sm:p-8">
                 <div><h2 className="font-display text-2xl font-bold text-slate-900">{t.studentTitle}</h2><p className="mt-2 text-sm leading-relaxed text-slate-700">{t.studentInfo}</p></div>
                 <label className="block text-sm font-medium">{t.institution}<input name="institution" required maxLength={180} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>
+                <label className="block text-sm font-medium">{t.studyCity}<input name="studyCity" required maxLength={120} autoComplete="address-level2" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>
                 <label className="block text-sm font-medium">{t.level}<select name="educationLevel" required defaultValue="" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5"><option value="" disabled>{t.level}</option><option value="mbo">{t.mbo}</option><option value="hbo">{t.hbo}</option><option value="wo">{t.wo}</option></select></label>
-                <label className="flex items-start gap-2 text-sm leading-relaxed"><input type="checkbox" name="studiesInLeiden" required className="mt-1 size-4 shrink-0 accent-sky-700" /><span>{t.studies}</span></label>
-                <label className="block text-sm font-medium">{t.proof}<input name="proof" type="file" accept="application/pdf,image/jpeg,image/png" required className="mt-2 block w-full text-sm" /></label>
-                <label className="flex items-start gap-2 text-sm leading-relaxed"><input type="checkbox" name="proofConsent" required className="mt-1 size-4 shrink-0 accent-sky-700" /><span>{t.proofConsent}</span></label>
                 <button type="submit" disabled={busy} className="knop knop-navy disabled:opacity-60">{t.apply}</button>
               </form>
             )}
@@ -439,7 +435,7 @@ export function AccountPortal({ locale }: { locale: string }) {
                 <button type="button" role="tab" aria-selected={mode === "register"} onClick={() => { setMode("register"); setMessage(""); }} className={`rounded-full px-4 py-2 text-sm font-semibold ${mode === "register" ? "bg-sky-800 text-white" : "bg-sky-50 text-sky-900"}`}>{t.register}</button>
               </div>
               <form onSubmit={submitAuth} className="space-y-4">
-                {mode === "register" && <label className="block text-sm font-medium">{t.name}<input name="name" required minLength={2} maxLength={120} autoComplete="name" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>}
+                {mode === "register" && <div className="grid gap-4 sm:grid-cols-2"><label className="block text-sm font-medium">{t.firstName}<input name="firstName" required minLength={1} maxLength={60} autoComplete="given-name" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label><label className="block text-sm font-medium">{t.lastName}<input name="lastName" required minLength={1} maxLength={80} autoComplete="family-name" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label></div>}
                 <label className="block text-sm font-medium">{t.email}<input name="email" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>
                 {mode === "register" && <label className="block text-sm font-medium">{t.schoolEmail}<input name="schoolEmail" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>}
                 <label className="block text-sm font-medium">{t.password}<input name="password" type="password" required minLength={12} maxLength={128} autoComplete={mode === "register" ? "new-password" : "current-password"} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>

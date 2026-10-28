@@ -11,9 +11,9 @@ Deze kaart is de korte ingang voor vervolgwerk. De code en actuele Cloudflare-st
 
 ## Vaststaande productkeuzes
 
-- Goedgekeurde studenten krijgen **10% korting op het hele assortiment**, zonder stapeling met andere acties. Een persoonlijk e-mailadres en een apart schooladres worden bevestigd voordat een aanvraag kan worden ingediend.
-- Aanbiedingen per e-mail worden alleen na aparte dubbele bevestiging verzonden. Nieuwsbriefdeelname is momenteel vrijwillig; de wens om reclame verplicht te maken voor studentenkorting heeft nog een juridische beslissing nodig.
-- Campagnes kunnen op regio en op geverifieerde studenten worden gericht. Er is geen automatisch wekelijks aanbod en nu geen spaarpuntensysteem. Bezorging en een uitgebreider klantenaccount zijn later werk.
+- Goedgekeurde studenten krijgen **10% korting op het hele assortiment**, zonder stapeling met andere acties. Een privé-e-mailadres en een apart schooladres worden bevestigd voordat een aanvraag kan worden ingediend. Het schooladres vervangt voortaan de bewijsupload; de aanvraag vraagt wel onderwijsinstelling, niveau en studiestad.
+- Aanbiedingen per e-mail gaan over op aantoonbare single opt-in: een duidelijke afzonderlijke keuze wordt direct actief, zonder extra bevestigings- of losse afmeldmail. Iedere campagne houdt een werkende afmeldlink. Accountregistratie alleen is geen marketingtoestemming.
+- Campagnes kunnen op regio en op geverifieerde studenten worden gericht. Er is geen automatisch wekelijks aanbod. Bezorging en spaarpunten worden niet op de huidige accountpagina beloofd en vallen buiten de huidige scope.
 - Gebruik echte winkel- en kraamfoto's alleen als ze daadwerkelijk van Schaap's zijn. De eigenaar wil visschalen en gourmetschalen qua beeld grotendeels behouden.
 
 ## Bewezen status op 27 oktober 2026
@@ -38,6 +38,7 @@ Deze kaart is de korte ingang voor vervolgwerk. De code en actuele Cloudflare-st
 | Welke vis, prijs of beschikbaarheid? | `src/lib/assortiment-data.ts`, `src/lib/product-availability.ts`, `src/lib/prijzen.ts` |
 | Welk recept of beeld? | `src/lib/recepten.ts`, `src/lib/recept-fotos.ts` |
 | Hoe werken login, korting of nieuwsbrief? | `workers/members/src/index.mjs`, `workers/members/README.md` |
+| Wat is het plan voor registratie, pas en Wallet? | `docs/studentenaccount-uitvoerplan.md` |
 | Is een databasekolom aanwezig? | `migrations/`; daarna read-only controle in juiste D1-omgeving |
 | Is een wijziging live? | GitHub `main`-SHA, vervolgens **beide** Cloudflare Deployments en de echte domeinroute |
 
