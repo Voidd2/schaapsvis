@@ -5,45 +5,45 @@ import type { FormEvent } from "react";
 
 const copy = {
   nl: {
-    title: "Regelmatig iets lekkers van Schaap’s",
-    intro: "Ontvang af en toe aanbiedingen en nieuws speciaal voor klanten van Schaap’s. We mailen wanneer er iets leuks te delen is.",
+    title: "Korting in uw inbox",
+    intro: "Schrijf u in voor de nieuwsbrief en ontvang regelmatig kortingen en nieuws van Schaap’s in uw mail.",
     email: "Uw e-mailadres",
     next: "Verder",
     region: "Waar woont u of haalt u meestal vis?",
     regions: { leiden: "Leiden", voorschoten: "Voorschoten", wassenaar: "Wassenaar", leidschendam: "Leidschendam", "regio-071": "Ergens anders in regio 071", elders: "Elders" },
     consent: "Ja, ik wil e-maildeals ontvangen. Ik kan mij altijd weer afmelden.",
     draftPrivacy: "We bewaren uw e-mailadres maximaal 30 minuten terwijl u dit afrondt. Na uw duidelijke toestemming wordt de inschrijving direct actief.",
-    submit: "Houd mij op de hoogte",
+    submit: "Schrijf mij in",
     sending: "Versturen…",
     sent: "U bent aangemeld. We sturen alleen iets als we echt een leuke aanbieding of nieuwtje hebben.",
     error: "Aanmelden lukt nu niet. Probeer het later opnieuw.",
     privacy: "Voorlopige privacyinformatie",
   },
   en: {
-    title: "Something good from Schaap’s, now and then",
-    intro: "Get occasional offers and news especially for Schaap’s customers. We’ll email when there’s something worth sharing.",
+    title: "Offers in your inbox",
+    intro: "Sign up for the newsletter and receive regular offers and news from Schaap’s by email.",
     email: "Your email address",
     next: "Continue",
     region: "Where do you live or usually shop with us?",
     regions: { leiden: "Leiden", voorschoten: "Voorschoten", wassenaar: "Wassenaar", leidschendam: "Leidschendam", "regio-071": "Elsewhere in the 071 area", elders: "Elsewhere" },
     consent: "Yes, I want to receive email offers. I can unsubscribe at any time.",
     draftPrivacy: "We keep your email for up to 30 minutes while you finish signing up. Your subscription becomes active immediately after your clear consent.",
-    submit: "Keep me updated",
+    submit: "Sign me up",
     sending: "Sending…",
     sent: "You are subscribed. We will only email when we have a worthwhile offer or update.",
     error: "We could not sign you up right now. Please try again later.",
     privacy: "Preliminary privacy information",
   },
   de: {
-    title: "Ab und zu etwas Gutes von Schaap’s",
-    intro: "Erhalten Sie gelegentlich Angebote und Neuigkeiten speziell für Schaap’s-Kunden. Wir schreiben, wenn es etwas Schönes zu teilen gibt.",
+    title: "Angebote in Ihrem Postfach",
+    intro: "Abonnieren Sie den Newsletter und erhalten Sie regelmäßig Angebote und Neuigkeiten von Schaap’s per E-Mail.",
     email: "Ihre E-Mail-Adresse",
     next: "Weiter",
     region: "Wo wohnen Sie oder kaufen Sie meistens bei uns ein?",
     regions: { leiden: "Leiden", voorschoten: "Voorschoten", wassenaar: "Wassenaar", leidschendam: "Leidschendam", "regio-071": "Anderswo in der Region 071", elders: "Anderswo" },
     consent: "Ja, ich möchte E-Mail-Angebote erhalten. Ich kann mich jederzeit abmelden.",
     draftPrivacy: "Wir speichern Ihre E-Mail-Adresse bis zu 30 Minuten, während Sie die Anmeldung abschließen. Nach Ihrer eindeutigen Einwilligung wird die Anmeldung sofort aktiv.",
-    submit: "Auf dem Laufenden bleiben",
+    submit: "Jetzt anmelden",
     sending: "Wird gesendet…",
     sent: "Sie sind angemeldet. Wir schreiben nur, wenn es ein lohnendes Angebot oder Neuigkeiten gibt.",
     error: "Die Anmeldung ist gerade nicht möglich. Bitte versuchen Sie es später erneut.",
@@ -120,32 +120,32 @@ export function NewsletterSignup({ compact = false, locale = "nl" }: { compact?:
   return (
     <div className={compact ? "space-y-3" : "max-w-xl space-y-4"}>
       <div>
-        <h2 className={`font-display text-xl font-bold ${headingColor}`}>{t.title}</h2>
-        <p className={`mt-1 text-sm leading-relaxed ${introColor}`}>{t.intro}</p>
+        <h2 className={`font-display text-2xl font-bold ${headingColor}`}>{t.title}</h2>
+        <p className={`mt-2 text-base leading-7 ${introColor}`}>{t.intro}</p>
       </div>
       {step === "email" ? <form onSubmit={continueSignup} className="space-y-3">
-        <label className={`block text-sm font-medium ${labelColor}`}>
+        <label className={`block text-base font-medium ${labelColor}`}>
           {t.email}
           <input name="email" type="email" required autoComplete="email" maxLength={254} disabled={busy || success} className="mt-1 block w-full rounded-lg border border-sky-200 bg-white px-3 py-2.5 text-base text-slate-900 outline-none focus:border-sky-700 focus:ring-2 focus:ring-sky-100 disabled:opacity-70" />
         </label>
-        <p className={`text-xs ${privacyColor}`}>{t.draftPrivacy}</p>
+        <p className={`text-sm leading-6 ${privacyColor}`}>{t.draftPrivacy}</p>
         <button type="submit" disabled={busy || success} className={`${buttonStyle} disabled:cursor-not-allowed disabled:opacity-60`}>{busy ? t.sending : t.next}</button>
       </form> : <form onSubmit={finishSignup} className="space-y-3">
-        <p className={`text-sm font-semibold ${labelColor}`}>{draftEmail}</p>
-        <label className={`block text-sm font-medium ${labelColor}`}>
+        <p className={`text-base font-semibold ${labelColor}`}>{draftEmail}</p>
+        <label className={`block text-base font-medium ${labelColor}`}>
           {t.region}
           <select name="regionTag" required disabled={busy || success} defaultValue="" className="mt-1 block w-full rounded-lg border border-sky-200 bg-white px-3 py-2.5 text-base text-slate-900 outline-none focus:border-sky-700 focus:ring-2 focus:ring-sky-100 disabled:opacity-70">
             <option value="" disabled>—</option>
             {Object.entries(t.regions).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
           </select>
         </label>
-        <label className={`flex items-start gap-2 text-sm leading-relaxed ${consentColor}`}>
+        <label className={`flex items-start gap-2 text-base leading-7 ${consentColor}`}>
           <input name="consent" type="checkbox" required disabled={busy || success} className="mt-1 size-4 shrink-0 accent-sky-700" />
           <span>{t.consent}</span>
         </label>
         {!success && <button type="submit" disabled={busy} className={`${buttonStyle} disabled:cursor-not-allowed disabled:opacity-60`}>{busy ? t.sending : t.submit}</button>}
       </form>}
-      <p className={`text-xs ${privacyColor}`}><a className="underline underline-offset-4" href={`/${language}/privacyverklaring`}>{t.privacy}</a></p>
+      <p className={`text-sm ${privacyColor}`}><a className="underline underline-offset-4" href={`/${language}/privacyverklaring`}>{t.privacy}</a></p>
       {message && <p role="status" aria-live="polite" className={`text-sm ${success ? (compact ? "text-emerald-200" : "text-emerald-800") : (compact ? "text-rose-200" : "text-red-800")}`}>{message}</p>}
     </div>
   );

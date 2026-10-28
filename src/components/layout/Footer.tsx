@@ -147,7 +147,7 @@ export function Footer() {
 
         {/* ── Nieuwsbrief ───────────────────────────────────────────────── */}
         <div>
-          <p className="kapitaal kapitaal-licht mb-2">{locale === "de" ? "Neuigkeiten aus dem Geschäft" : locale === "en" ? "News from the shop" : "Nieuws uit de winkel"}</p>
+          <p className="kapitaal kapitaal-licht mb-2 text-sm tracking-[0.12em]">{locale === "de" ? "Rabatte und Neuigkeiten" : locale === "en" ? "Offers and news" : "Kortingen en nieuws"}</p>
           <NewsletterSignup compact locale={locale} />
         </div>
       </div>
@@ -160,7 +160,7 @@ export function Footer() {
         <div className="max-w-6xl mx-auto px-4 py-7 grid gap-8 sm:grid-cols-3">
           {groepen.map((groep) => (
             <div key={groep.kop}>
-              <p className="kapitaal kapitaal-licht mb-3">{groep.kop}</p>
+              <p className="kapitaal kapitaal-licht mb-3 text-sm tracking-[0.12em]">{groep.kop}</p>
               <ul className="footer-link-list grid grid-cols-2 gap-x-4 gap-y-2 text-base md:grid-cols-1" style={{ opacity: 0.88 }}>
                 {groep.links.map(({ href, label }) => (
                   <li key={href}>
@@ -179,8 +179,8 @@ export function Footer() {
       {/* ── Onderrand ────────────────────────────────────────────────────── */}
       <div style={{ borderTop: "1px solid rgba(250,246,239,0.14)" }}>
         <div
-          className="max-w-6xl mx-auto px-4 py-4 text-xs flex flex-wrap gap-x-6 gap-y-2 justify-between"
-          style={{ opacity: 0.5 }}
+          className="max-w-6xl mx-auto px-4 py-4 text-sm leading-6 flex flex-wrap gap-x-6 gap-y-2 justify-between"
+          style={{ opacity: 0.72 }}
         >
           <span>
             &copy; {jaar} {BEDRIJF.naam} &middot;{" "}
