@@ -310,6 +310,39 @@ async function passDisplayCode(signingKey, passId) {
   return `SV-${source.slice(0, 4)}-${source.slice(4, 8)}`;
 }
 
+function googleWalletConfig(env) {
+  const issuerId = String(env.GOOGLE_WALLET_ISSUER_ID || "").trim();
+  const classId = String(env.GOOGLE_WALLET_CLASS_ID || "").trim();
+  const serviceAccountEmail = String(env.GOOGLE_WALLET_SERVICE_ACCOUNT_EMAIL || "").trim();
+  const privateKey = String(env.GOOGLE_WALLET_PRIVATE_KEY || "").trim();
+  if (!/^\d+$/.test(issuerId)
+    || !classId.startsWith(`${issuerId}.`)
+    || !/^[^\s@]+@[^\s@]+$/.test(serviceAccountEmail)
+    || !privateKey.includes("-----BEGIN PRIVATE KEY-----")) return null;
+  return { issuerId, classId, serviceAccountEmail, privateKey };
+}
+
+function pemPrivateKeyBytes(pem) {
+  const body = pem.replace(/-----BEGIN PRIVATE KEY-----|-----END PRIVATE KEY-----|\s/g, "");
+  if (!body) throw new Error("google-wallet-private-key-empty");
+  return Uint8Array.from(atob(body), (character) => character.charCodeAt(0));
+}
+
+async function signGoogleWalletJwt(config, claims) {
+  const header = base64url(encoder.encode(JSON.stringify({ alg: "RS256", typ: "JWT" })));
+  const payload = base64url(encoder.encode(JSON.stringify(claims)));
+  const unsigned = `${header}.${payload}`;
+  const key = await crypto.subtle.importKey(
+    "pkcs8",
+    pemPrivateKeyBytes(config.privateKey),
+    { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
+    false,
+    ["sign"],
+  );
+  const signature = await crypto.subtle.sign("RSASSA-PKCS1-v1_5", key, encoder.encode(unsigned));
+  return `${unsigned}.${base64url(new Uint8Array(signature))}`;
+}
+
 async function passwordHash(password, pepper) {
   const salt = crypto.getRandomValues(new Uint8Array(16));
   const material = await crypto.subtle.importKey("raw", encoder.encode(`${password}${pepper}`), "PBKDF2", false, ["deriveBits"]);
@@ -841,7 +874,109 @@ async function me(request, env) {
     discountPass = { code, displayCode, issuedAt: pass.issued_at, expiresAt: pass.expires_at };
   }
   const subscription = await env.DB.prepare(`SELECT status FROM newsletter_subscriptions WHERE email = ?`).bind(user.email).first();
-  return json({ user: { id: user.id, name: user.full_name, email: user.email }, isAdmin, studentApplication: application || null, discountPass, newsletter: subscription?.status || "not-subscribed" });
+  return json({
+    user: { id: user.id, name: user.full_name, email: user.email },
+    isAdmin,
+    studentApplication: application || null,
+    discountPass,
+    newsletter: subscription?.status || "not-subscribed",
+    wallet: {
+      google: { available: Boolean(discountPass && googleWalletConfig(env)) },
+      // Apple Wallet remains hidden until its Pass Type certificate and
+      // PKCS#7 signing path have both been configured and tested.
+      apple: { available: false },
+    },
+  });
+}
+
+async function issueGoogleWalletPass(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  const user = await sessionUser(request, env);
+  if (!user) return json({ error: "authentication_required" }, 401);
+  const config = googleWalletConfig(env);
+  if (!config || !env.AUTH_PEPPER || !env.PASS_SIGNING_KEY) return json({ error: "google_wallet_unavailable" }, 503);
+  const limitKey = await hmac(env.AUTH_PEPPER, `google-wallet:${user.id}`);
+  if (!await rateLimit(env.DB, limitKey, 10, 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
+
+  const pass = await env.DB.prepare(`
+    SELECT p.id, p.display_code, p.issued_at, p.expires_at, u.full_name
+    FROM student_passes p
+    JOIN users u ON u.id = p.user_id
+    JOIN student_applications a ON a.id = p.application_id AND a.user_id = p.user_id
+    WHERE p.user_id = ? AND p.status = 'active' AND p.revoked_at IS NULL
+      AND a.status = 'approved' AND (p.expires_at IS NULL OR p.expires_at > ?)
+    ORDER BY a.reviewed_at DESC, p.issued_at DESC LIMIT 1
+  `).bind(user.id, nowIso()).first();
+  if (!pass) return json({ error: "active_student_pass_required" }, 409);
+
+  const displayCode = pass.display_code || await passDisplayCode(env.PASS_SIGNING_KEY, pass.id);
+  if (!pass.display_code) {
+    try { await env.DB.prepare(`UPDATE student_passes SET display_code = ? WHERE id = ? AND display_code IS NULL`).bind(displayCode, pass.id).run(); }
+    catch { return json({ error: "wallet_pass_unavailable" }, 503); }
+  }
+
+  const locale = requestLocale(request);
+  const language = locale === "de" ? "de-DE" : locale === "en" ? "en-GB" : "nl-NL";
+  const text = locale === "de"
+    ? { title: "Schaap’s Vishandel", discount: "10 % Studentenrabatt", discountBody: "Auf das gesamte Sortiment; nicht mit anderen Aktionen kombinierbar", valid: "Gültig bis", code: "Prüfcode", locations: "Standorte ansehen" }
+    : locale === "en"
+      ? { title: "Schaap’s Vishandel", discount: "10% student discount", discountBody: "On the entire range; cannot be combined with other offers", valid: "Valid until", code: "Verification code", locations: "View locations" }
+      : { title: "Schaap’s Vishandel", discount: "10% studentenkorting", discountBody: "Op het hele assortiment; niet combineerbaar met andere acties", valid: "Geldig tot", code: "Controlecode", locations: "Bekijk locaties" };
+  const localized = (value) => ({ defaultValue: { language, value } });
+  const externalId = `${config.issuerId}.${pass.id}`;
+  const genericObject = {
+    id: externalId,
+    classId: config.classId,
+    state: "ACTIVE",
+    genericType: "GENERIC_LOYALTY_CARD",
+    hexBackgroundColor: "#075c7c",
+    logo: {
+      sourceUri: { uri: `${env.SITE_ORIGIN}/og-image.png` },
+      contentDescription: localized(text.title),
+    },
+    cardTitle: localized(text.title),
+    header: localized(pass.full_name),
+    subheader: localized(text.discount),
+    barcode: { type: "QR_CODE", value: displayCode, alternateText: displayCode },
+    textModulesData: [
+      { id: "discount", header: text.discount, body: text.discountBody },
+      { id: "code", header: text.code, body: displayCode },
+      ...(pass.expires_at ? [{ id: "validity", header: text.valid, body: pass.expires_at.slice(0, 10) }] : []),
+    ],
+    linksModuleData: { uris: [
+      { id: "locations", uri: `${env.SITE_ORIGIN}/${locale}/bezoek-ons`, description: text.locations },
+      { id: "account", uri: `${env.SITE_ORIGIN}/${locale}/account`, description: text.title },
+    ] },
+    ...(pass.expires_at ? { validTimeInterval: { end: { date: pass.expires_at } } } : {}),
+  };
+  const issuedAt = Math.floor(Date.now() / 1000);
+  let token;
+  try {
+    token = await signGoogleWalletJwt(config, {
+      iss: config.serviceAccountEmail,
+      aud: "google",
+      typ: "savetowallet",
+      iat: issuedAt,
+      exp: issuedAt + 10 * 60,
+      origins: [env.SITE_ORIGIN],
+      payload: { genericObjects: [genericObject] },
+    });
+  } catch {
+    return json({ error: "google_wallet_signing_failed" }, 503);
+  }
+
+  const time = nowIso();
+  try {
+    await env.DB.prepare(`INSERT INTO student_wallet_passes
+      (id, pass_id, platform, external_id, status, created_at, updated_at)
+      VALUES (?, ?, 'google', ?, 'active', ?, ?)
+      ON CONFLICT(pass_id, platform) DO UPDATE SET
+        external_id=excluded.external_id, status='active', updated_at=excluded.updated_at, revoked_at=NULL`)
+      .bind(crypto.randomUUID(), pass.id, externalId, time, time).run();
+  } catch {
+    return json({ error: "wallet_pass_not_recorded" }, 503);
+  }
+  return redirect(`https://pay.google.com/gp/v/save/${token}`);
 }
 
 async function requestPasswordReset(request, env) {
@@ -1422,6 +1557,7 @@ const memberWorker = {
     if (path === "/api/members/login" && method === "POST") return login(request, env);
     if (path === "/api/members/logout" && method === "POST") return logout(request, env);
     if (path === "/api/members/me" && method === "GET") return me(request, env);
+    if (path === "/api/members/wallet/google" && method === "POST") return issueGoogleWalletPass(request, env);
     if (path === "/api/members/password-reset" && method === "POST") return requestPasswordReset(request, env);
     if (path === "/api/members/password-reset/confirm" && method === "GET") return passwordResetPage(request, env);
     if (path === "/api/members/password-reset/confirm" && method === "POST") return confirmPasswordReset(request, env);

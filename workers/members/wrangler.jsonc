@@ -16,6 +16,9 @@
   // D1 en private R2 staan per omgeving in de EU. Mail gebruikt de bestaande
   // DirectAdmin-mailbox. SMTP_PASSWORD en de auth-secrets staan als versleutelde
   // Cloudflare secrets; stel ze lokaal alleen met aparte testwaarden in.
+  // Google Wallet blijft verborgen totdat GOOGLE_WALLET_ISSUER_ID,
+  // GOOGLE_WALLET_CLASS_ID en GOOGLE_WALLET_SERVICE_ACCOUNT_EMAIL als vars en
+  // GOOGLE_WALLET_PRIVATE_KEY als secret zijn ingesteld.
   "env": {
     "preview": {
       "name": "schaapsvis-members-preview",

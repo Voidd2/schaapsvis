@@ -24,6 +24,7 @@ type MemberData = {
   studentApplication?: StudentApplication | null;
   discountPass?: { code: string; displayCode: string; issuedAt: string; expiresAt: string | null } | null;
   newsletter?: string;
+  wallet?: { google?: { available?: boolean }; apple?: { available?: boolean } };
 };
 
 const translations = {
@@ -75,6 +76,7 @@ const translations = {
     accountLabel: "Ingelogd als",
     date: "Pas geldig vanaf",
     expiry: "Geldig tot",
+    googleWallet: "Toevoegen aan Google Wallet",
     privacy: "Lees de voorlopige privacyinformatie over accounts, schoolmailverificatie en e-maildeals.",
   },
   en: {
@@ -125,6 +127,7 @@ const translations = {
     accountLabel: "Signed in as",
     date: "Pass issued",
     expiry: "Valid until",
+    googleWallet: "Add to Google Wallet",
     privacy: "Read the preliminary privacy information about accounts, school-email verification and email offers.",
   },
   de: {
@@ -175,6 +178,7 @@ const translations = {
     accountLabel: "Angemeldet als",
     date: "Pass ausgestellt am",
     expiry: "Gültig bis",
+    googleWallet: "Zu Google Wallet hinzufügen",
     privacy: "Lesen Sie die vorläufigen Datenschutzhinweise zu Konto, Schul-E-Mail-Bestätigung und E-Mail-Angeboten.",
   },
 } as const;
@@ -412,6 +416,13 @@ export function AccountPortal({ locale }: { locale: string }) {
                 <code className="mt-2 block rounded-lg bg-black/20 p-3 text-center font-mono text-xl font-bold tracking-[0.14em]">{data.discountPass.displayCode}</code>
                 <p className="mt-4 text-xs text-sky-100">{t.date}: {new Date(data.discountPass.issuedAt).toLocaleDateString(language)}{data.discountPass.expiresAt && <> · {t.expiry}: {new Date(data.discountPass.expiresAt).toLocaleDateString(language)}</>}</p>
               </div>
+            )}
+            {data.studentApplication?.status === "approved" && data.discountPass && data.wallet?.google?.available && (
+              <form method="post" action={`/api/members/wallet/google?locale=${language}`}>
+                <button type="submit" className="inline-flex min-h-12 items-center justify-center rounded-xl bg-black px-6 py-3 font-semibold text-white shadow-sm transition hover:bg-slate-800 focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-sky-600">
+                  {t.googleWallet}
+                </button>
+              </form>
             )}
             {data.studentApplication?.status === "approved" && !data.discountPass && <p className="rounded-xl border border-amber-300 bg-amber-50 p-5">{t.expired}</p>}
             {data.studentApplication?.status === "rejected" && <p className="rounded-xl border border-rose-200 bg-rose-50 p-5">{t.rejected}</p>}

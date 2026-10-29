@@ -6,6 +6,16 @@
 - De QR-code bevat alleen de korte controlecode (`SV-XXXX-XXXX`), geen e-mailadres of sessiesleutel.
 - Alleen een ingelogde beheerder op het toegestane netwerk kan de code controleren.
 - Dezelfde pas-id, naam, vervaldatum en controlecode kunnen later als bron voor beide Wallet-passen dienen.
+- Migratie `0015_student_wallet_passes.sql` bewaart per interne pas het platform,
+  externe object-id en de intrekstatus zonder persoonsgegevens in de QR-code te
+  zetten.
+- De leden-Worker kan een kort geldige, met RS256 ondertekende Google
+  Save-to-Wallet-link maken. De pas bevat de volledige naam, 10%, geldigheid,
+  korte controlecode, QR-code en links naar Account en Locaties.
+- De Google Wallet-knop verschijnt uitsluitend wanneer alle issuer-variabelen
+  en de versleutelde privésleutel aanwezig zijn. Zonder configuratie faalt het
+  endpoint gesloten met HTTP 503; een actieve goedgekeurde studentenpas blijft
+  altijd vereist.
 
 ## Apple Wallet
 
@@ -46,8 +56,15 @@ Officiële documentatie:
 ## Uitvoervolgorde zodra de accounts beschikbaar zijn
 
 1. Apple Pass Type ID/certificaat en Google issuer/serviceaccount aanmaken.
-2. Logo- en icoonbestanden in de vereiste Wallet-formaten maken.
-3. Wallet-endpoints in de leden-Worker bouwen met dezelfde actieve-pascontrole als de website.
-4. Secrets via Cloudflare instellen en testpassen uitsluitend voor het beheerdersaccount uitgeven.
-5. Vervallen of ingetrokken passen aan beide Wallets doorgeven.
-6. Pas na echte installatie- en intrekkingstests de twee Wallet-knoppen tonen.
+2. In Google een Generic Pass Class maken en de waarden
+   `GOOGLE_WALLET_ISSUER_ID`, `GOOGLE_WALLET_CLASS_ID` en
+   `GOOGLE_WALLET_SERVICE_ACCOUNT_EMAIL` instellen; zet de PKCS#8-sleutel
+   uitsluitend als Cloudflare-secret `GOOGLE_WALLET_PRIVATE_KEY`.
+3. Logo- en icoonbestanden in de vereiste Wallet-formaten maken en het officiële
+   Google-knopbeeld gebruiken vóór publieke activatie.
+4. Eén Google-testpas voor het beheerdersaccount installeren en intrekken; pas
+   daarna de Google-configuratie in productie laten staan.
+5. Het Apple `.pkpass`-endpoint bouwen zodra het certificaat beschikbaar is en
+   dezelfde actieve-pascontrole als Google gebruiken.
+6. Vervallen of ingetrokken passen aan beide Wallets doorgeven en pas na echte
+   installatie- en intrekkingstests beide Wallet-knoppen tonen.
