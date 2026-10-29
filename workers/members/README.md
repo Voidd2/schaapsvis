@@ -45,7 +45,7 @@ De Google Wallet-knop blijft standaard volledig verborgen. Hij wordt pas beschik
 - `GOOGLE_WALLET_SERVICE_ACCOUNT_EMAIL`: het e-mailadres van het geautoriseerde serviceaccount.
 - `GOOGLE_WALLET_PRIVATE_KEY`: de PKCS#8 private key van dat serviceaccount, uitsluitend als versleuteld Cloudflare-secret.
 
-Migratie `0015_student_wallet_passes.sql` is in productie al toegepast; pas haar ook toe op iedere andere omgeving voordat daar Wallet-credentials worden ingesteld. Stel daarna de eerste drie waarden in als gewone Worker-variabelen en de private key als secret. De Worker maakt vervolgens per aanvraag een tien minuten geldige, RS256-ondertekende officiële Save-to-Google-Wallet-link. Zonder volledige configuratie retourneert het endpoint veilig HTTP 503 en wordt geen knop getoond. Commit of log de private key nooit.
+Migratie `0015_student_wallet_passes.sql` is in productie al toegepast; pas haar ook toe op iedere andere omgeving voordat daar Wallet-credentials worden ingesteld. Migratie `0016_apple_wallet_updates.sql` bouwt daarop voort en moet vanaf de Apple-update-uitrol eveneens in elke omgeving staan. Stel daarna de eerste drie waarden in als gewone Worker-variabelen en de private key als secret. De Worker maakt vervolgens per aanvraag een tien minuten geldige, RS256-ondertekende officiële Save-to-Google-Wallet-link. Zonder volledige configuratie retourneert het endpoint veilig HTTP 503 en wordt geen knop getoond. Commit of log de private key nooit.
 
 ## Apple Wallet activeren
 
@@ -71,6 +71,14 @@ terechtkomen. Test eerst installatie én een daarna ingetrokken QR-code op een
 echt Apple-apparaat. Zonder complete configuratie blijft het endpoint gesloten
 met HTTP 503.
 
+De `.pkpass` bevat een `webServiceURL` en een stabiele per-pas
+`authenticationToken`. Onder die URL implementeert de Worker de officiële
+registratie-, update-, download-, afmeld- en logroutes. Device identifiers staan
+alleen als keyed hash in D1; APNs-tokens zijn AES-GCM-versleuteld. Pas migratie
+`0016_apple_wallet_updates.sql` toe vóór deze versie van de leden-Worker wordt
+uitgerold. Een onmiddellijke update op een echt toestel vraagt daarnaast nog
+een productie-APNs-configuratie met het Apple Pass Type-certificaat.
+
 De integratietest met `npm run check:members` gebruikt eigen tijdelijke database- en e-mailmocks; daarvoor zijn geen Cloudflare-account, remote bindings of `.dev.vars` nodig.
 
 ## Open bedrijfs- en privacykeuzes
@@ -89,8 +97,9 @@ Twee afzonderlijke 6-cijferige codes moeten binnen 10 minuten worden ingevoerd;
 codes worden HMAC-gehasht, zijn eenmalig en rate limits begrenzen raden. De
 studentenaanvraag endpoint eist server-side dat beide adressen bevestigd zijn.
 Migraties 0006-0008 horen bij deze lokale wijzigingen. De volledige lokale
-migratiereeks loopt inmiddels door t/m 0015. Productie is gecontroleerd t/m
-0015; pas deze reeks ook toe op iedere nieuw aangemaakte testomgeving.
+migratiereeks loopt inmiddels door t/m 0016. Productie is gecontroleerd t/m
+0015; pas 0016 toe vóór de Apple-updatecode wordt uitgerold en pas de volledige
+reeks ook toe op iedere nieuw aangemaakte testomgeving.
 
 De klanteninschrijving bewaart eerst tijdelijk een e-maildraft, daarna kiest
 de klant regio en geeft apart expliciet toestemming. Alleen dubbelbevestigde
