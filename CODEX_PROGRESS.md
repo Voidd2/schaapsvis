@@ -1,6 +1,6 @@
 # Schaap's Vishandel — voortgang
 
-Laatst bijgewerkt: 28 oktober 2026, 22:38 Europe/Amsterdam
+Laatst bijgewerkt: 29 oktober 2026, 03:13 Europe/Amsterdam
 
 ## Afgerond en gecontroleerd
 
@@ -24,7 +24,8 @@ Laatst bijgewerkt: 28 oktober 2026, 22:38 Europe/Amsterdam
 - PR #52 is samengevoegd naar `main`. Desktop en mobiel gebruiken dezelfde inhoudelijke groepen: de primaire routes blijven zichtbaar, `Account` bevat studenten- en klantaccount en `Meer` bevat Ons verhaal en Contact. De site-Worker draait versie `2d6ebdb0`, de leden-Worker versie `e66f77c3`; beide builds staan op Ready en de live healthcheck geeft `{"status":"ok"}`.
 - PR #53 is samengevoegd naar `main`. De eenvoudige cookiekeuze met `Weigeren`, `Accepteren` en `Lees hier meer`, grotere footertekst en de nieuwsbrief-CTA `Korting in uw inbox` zijn live gecontroleerd. De site-Worker draait versie `6ce41de5`, de leden-Worker versie `26e866e6`; beide staan op 100% en de live healthcheck geeft `{"status":"ok"}`.
 - PR #54 is samengevoegd naar `main`. Iedere foto op Visschalen en Barbecue & gourmet opent live groot met gelokaliseerde titel en beschrijving, teller, sluiten en vorige/volgende. Escape, pijltjestoetsen, focuslus en focusherstel werken; desktop en 390×844 zijn gecontroleerd. De site-Worker draait versie `a7f0763a`, de leden-Worker versie `cce064da`; beide staan op 100% Ready. De live pagina's en `{"status":"ok"}` van de leden-API zijn na de uitrol opnieuw gecontroleerd.
-- Google Wallet is technisch voorbereid op branch `codex/google-wallet-foundation`: migratie 0015 bewaart platformobjecten, de leden-Worker maakt alleen bij een volledige issuerconfiguratie een kort geldige RS256 Save-to-Wallet-link en de accountpagina toont de knop uitsluitend voor een actieve goedgekeurde pas. De testpas bevat naam, 10%, geldigheid, QR-code en de bestaande korte controlecode. Zonder secrets blijft alles verborgen en faalt uitgifte gesloten. Integratietests, SMTP-test, ESLint en de productiebuild met 482 routes slagen.
+- PR #55 is samengevoegd naar `main`. Migratie 0015 bewaart Wallet-platformobjecten; de leden-Worker maakt alleen bij een volledige issuerconfiguratie een kort geldige RS256 Save-to-Wallet-link en de accountpagina toont de knop uitsluitend voor een actieve goedgekeurde pas. De testpas bevat naam, 10%, geldigheid, Schaap's-brandbeeld, QR-code en de bestaande korte controlecode. Zonder secrets blijft alles verborgen en faalt uitgifte gesloten. Integratietests, SMTP-test, ESLint en de productiebuild met 482 routes slagen.
+- Productie-D1 bevat migratie `0015_student_wallet_passes.sql`, de tabel met 10 kolommen en de statusindex; dit is rechtstreeks in Cloudflare D1 geverifieerd. De site- en leden-Worker hebben commit `8e109b4` succesvol gebouwd en de live healthcheck geeft `{"status":"ok"}`.
 
 ## Eerstvolgende werkpakketten
 
