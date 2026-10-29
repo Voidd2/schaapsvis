@@ -6,7 +6,7 @@ Deze Worker is de serverkant voor algemene accounts, e-mailbevestiging, wachtwoo
 
 - Gecontroleerd op 26 oktober 2026 in account **Schaapsvis**: `schaapsvis-members` is gedeployed op de productieroute `schaapsvishandel.nl/api/members/*`. De website zelf blijft een besloten preview; bezoekers zonder geldige toegang zien de binnenkort-pagina.
 - Productie `MEMBERS_ENABLED=on` is bedoeld voor deze afgeschermde preview. De Worker eist daarnaast de site-unlock-cookie of het door Cloudflare vastgestelde IP op de allowlist; bezoekers kunnen niet alleen door de API-URL te kennen registreren. Zet de toegangspoort niet open als onderdeel van deze preview.
-- De productie-Worker heeft D1 `schaapsvis-members` en de private EU-R2-bucket `schaapsvis-student-proofs`; alle 13 migraties zijn toegepast. De R2-bucket blijft privé. Nieuwe aanvragen gebruiken de bevestigde schoolmail als bewijs en uploaden geen bestand meer; de bucket blijft alleen bestaan voor het opruimen van oudere bewijsbestanden.
+- De productie-Worker heeft D1 `schaapsvis-members` en de private EU-R2-bucket `schaapsvis-student-proofs`; migraties 0001 t/m 0014 zijn toegepast. Migratie 0015 voor de Wallet-uitgifteadministratie is lokaal getest en moet vóór het activeren van Wallet-credentials nog in productie worden toegepast. De R2-bucket blijft privé. Nieuwe aanvragen gebruiken de bevestigde schoolmail als bewijs en uploaden geen bestand meer; de bucket blijft alleen bestaan voor het opruimen van oudere bewijsbestanden.
 - Cloudflare bevat de mailhost `khsm1.khsmserver1.nl`, poort 587, mailboxgebruiker `schaapsv` en een versleuteld `SMTP_PASSWORD`; ook auth-, ondertekenings- en site-access-secrets zijn ingesteld. Een rechtstreekse testmail via Knoth is op 27 oktober 2026 bij de eigenaar in Gmail aangekomen, maar in Spam geplaatst. Die dag bevestigde een no-send controle vanuit de gedeployde Worker de SMTP-aanmelding (`status: authenticated`, HTTP 200). De tijdelijke diagnostiek staat weer uit. Een volledige registratiemail is nog niet getest.
 - Beheerdermail en IP-allowlist zijn ingesteld voor `schaapsv@schaapsvishandel.nl` en de door de eigenaar opgegeven IP-adressen. De beheer-API blijft bovendien achter de site-access-gate.
 - De aparte Worker `schaapsvis-members-preview` met eigen D1/R2 bestaat nog, maar `preview.schaapsvishandel.nl` heeft geen DNS-record en die Worker staat uit. De actieve besloten preview gebruikt daarom de hoofdsitehost, zoals de eigenaar heeft toegestaan.
@@ -36,6 +36,17 @@ De `--local`-vlag is essentieel: de previewconfiguratie bevat een remote Email S
 
 Maak voor handmatige lokale tests een niet-gecommitte `workers/members/.dev.vars.preview` met `MEMBERS_ENABLED="on"`, `SITE_ORIGIN="http://localhost:8787"`, `MAIL_FROM`, `ADMIN_EMAILS`, `AUTH_PEPPER` en `PASS_SIGNING_KEY`. Gebruik alleen aparte testwaarden, nooit productiegeheimen. De productiewaarde `MEMBERS_ENABLED="on"` hoort bij de password-gated preview; open de websitepoort niet zonder expliciete go-live-beslissing. Gebruik geen echte studentbewijzen of persoonsgegevens in fixtures.
 
+## Google Wallet activeren
+
+De Google Wallet-knop blijft standaard volledig verborgen. Hij wordt pas beschikbaar voor een goedgekeurde, geldige studentenpas wanneer alle onderstaande waarden aanwezig en geldig zijn:
+
+- `GOOGLE_WALLET_ISSUER_ID`: de numerieke issuer-id uit Google Wallet Business Console.
+- `GOOGLE_WALLET_CLASS_ID`: de vooraf aangemaakte Generic Pass-class, beginnend met dezelfde issuer-id.
+- `GOOGLE_WALLET_SERVICE_ACCOUNT_EMAIL`: het e-mailadres van het geautoriseerde serviceaccount.
+- `GOOGLE_WALLET_PRIVATE_KEY`: de PKCS#8 private key van dat serviceaccount, uitsluitend als versleuteld Cloudflare-secret.
+
+Pas eerst migratie `0015_student_wallet_passes.sql` toe. Stel daarna de eerste drie waarden in als gewone Worker-variabelen en de private key als secret. De Worker maakt vervolgens per aanvraag een tien minuten geldige, RS256-ondertekende officiële Save-to-Google-Wallet-link. Zonder volledige configuratie retourneert het endpoint veilig HTTP 503 en wordt geen knop getoond. Commit of log de private key nooit. Apple Wallet blijft uit totdat een Apple Developer-account, Pass Type ID en bijbehorend certificaat beschikbaar zijn.
+
 De integratietest met `npm run check:members` gebruikt eigen tijdelijke database- en e-mailmocks; daarvoor zijn geen Cloudflare-account, remote bindings of `.dev.vars` nodig.
 
 ## Open bedrijfs- en privacykeuzes
@@ -54,8 +65,8 @@ Twee afzonderlijke 6-cijferige codes moeten binnen 10 minuten worden ingevoerd;
 codes worden HMAC-gehasht, zijn eenmalig en rate limits begrenzen raden. De
 studentenaanvraag endpoint eist server-side dat beide adressen bevestigd zijn.
 Migraties 0006-0008 horen bij deze lokale wijzigingen. De volledige lokale
-migratiereeks loopt inmiddels door t/m 0011; de actuele remote D1-status moet
-in account Schaapsvis opnieuw worden gecontroleerd voordat er iets wordt toegepast.
+migratiereeks loopt inmiddels door t/m 0015. Productie is gecontroleerd t/m
+0014; 0015 hoort pas vóór het activeren van Wallet-credentials te worden toegepast.
 
 De klanteninschrijving bewaart eerst tijdelijk een e-maildraft, daarna kiest
 de klant regio en geeft apart expliciet toestemming. Alleen dubbelbevestigde
