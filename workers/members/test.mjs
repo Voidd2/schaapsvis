@@ -30,8 +30,12 @@ const newsletterAudienceMigration = await readFile(new URL("../../migrations/001
 const simplifiedStudentSignupMigration = await readFile(new URL("../../migrations/0013_student_signup_simplification.sql", import.meta.url), "utf8");
 const studentPassDisplayCodeMigration = await readFile(new URL("../../migrations/0014_student_pass_display_code.sql", import.meta.url), "utf8");
 const studentWalletPassesMigration = await readFile(new URL("../../migrations/0015_student_wallet_passes.sql", import.meta.url), "utf8");
-const appleTestSignerCert = await readFile(new URL("./test-fixtures/apple/signer-cert.pem", import.meta.url), "utf8");
-const appleTestWwdrCert = await readFile(new URL("./test-fixtures/apple/wwdr-cert.pem", import.meta.url), "utf8");
+const pemFixture = async (name, label) => {
+  const der = (await readFile(new URL(`./test-fixtures/apple/${name}.der.b64.txt`, import.meta.url), "utf8")).trim();
+  return `-----BEGIN ${label}-----\n${der.match(/.{1,64}/g).join("\n")}\n-----END ${label}-----`;
+};
+const appleTestSignerCert = await pemFixture("signer-cert", "CERTIFICATE");
+const appleTestWwdrCert = await pemFixture("wwdr-cert", "CERTIFICATE");
 const appleTestPrivateKeyDer = (await readFile(new URL("./test-fixtures/apple/signer-key.pkcs8.der.b64.txt", import.meta.url), "utf8")).trim();
 const appleTestPrivateKey = `-----BEGIN PRIVATE KEY-----\n${appleTestPrivateKeyDer.match(/.{1,64}/g).join("\n")}\n-----END PRIVATE KEY-----`;
 const upgradeDb = new DatabaseSync(":memory:");
