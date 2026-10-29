@@ -1,6 +1,6 @@
 # Schaap's Vishandel — voortgang
 
-Laatst bijgewerkt: 29 oktober 2026, 03:13 Europe/Amsterdam
+Laatst bijgewerkt: 29 oktober 2026, 19:25 Europe/Amsterdam
 
 ## Afgerond en gecontroleerd
 
@@ -27,12 +27,12 @@ Laatst bijgewerkt: 29 oktober 2026, 03:13 Europe/Amsterdam
 - PR #55 is samengevoegd naar `main`. Migratie 0015 bewaart Wallet-platformobjecten; de leden-Worker maakt alleen bij een volledige issuerconfiguratie een kort geldige RS256 Save-to-Wallet-link en de accountpagina toont de knop uitsluitend voor een actieve goedgekeurde pas. De testpas bevat naam, 10%, geldigheid, Schaap's-brandbeeld, QR-code en de bestaande korte controlecode. Zonder secrets blijft alles verborgen en faalt uitgifte gesloten. Integratietests, SMTP-test, ESLint en de productiebuild met 482 routes slagen.
 - Productie-D1 bevat migratie `0015_student_wallet_passes.sql`, de tabel met 10 kolommen en de statusindex; dit is rechtstreeks in Cloudflare D1 geverifieerd. De site- en leden-Worker hebben commit `8e109b4` succesvol gebouwd en de live healthcheck geeft `{"status":"ok"}`.
 - PR #56 is samengevoegd naar `main`. De leden-Worker maakt met een volledige certificaatconfiguratie een ondertekende Apple store-card `.pkpass` met naam, 10%, geldigheid, zichtbaar Schaap's-logo, QR-code en korte controlecode. Zonder echte Apple-configuratie blijft de knop verborgen en faalt uitgifte gesloten. De integratietest valideert ZIP-inhoud, CMS-handtekening, velden en databaseledger met een uitsluitend lokale TEST ONLY-certificaatketen. GitHub Build site en Member worker tests zijn groen. De site-Worker draait versie `c118858f`, de leden-Worker versie `a8459ea2`; beide staan op 100% Ready. De live healthcheck geeft `{"status":"ok"}`.
+- PR #57 is samengevoegd naar `main`. Migratie `0016_apple_wallet_updates.sql` staat aantoonbaar in productie-D1: de locale-kolom, versleutelde device-opslag, registratietabel en statusindex zijn aanwezig en de migratiehistorie bevat 0016. Het officiële Apple Wallet-updateprotocol is live met registratie, veilige device-/pushtokenopslag, gewijzigde-serienummeropvraag, opnieuw ondertekende of `voided` pas, `If-Modified-Since` en afmelding. De site-Worker draait versie `8449ea44`, de leden-Worker versie `39ba8046`; beide staan op 100% Ready. De live healthcheck geeft `{"status":"ok"}`.
 
 ## Eerstvolgende werkpakketten
 
-1. Apple Wallet-updateprotocol uit branch `codex/apple-wallet-updates` afronden en uitrollen: migratie 0016, registratie, veilige device-/pushtokenopslag, update-opvraag, opnieuw ondertekende/voided pas en afmelding zijn lokaal geïmplementeerd en getest. Productiemigratie, review en live uitrol moeten nog volgen.
-2. Google Wallet issuer/serviceaccount en Generic Pass Class aanmaken, de vier vereiste waarden als Cloudflare-vars/secrets instellen en één echte installatie- en intrekkingstest uitvoeren.
-3. Apple Wallet activeren zodra het Apple Developer-account, Pass Type ID, certificaat, privésleutel en WWDR-certificaat beschikbaar zijn; daarna APNs-updatepush en één echte installatie- en intrekkingstest uitvoeren. De servercode staat klaar; technische eisen staan in `docs/wallet-integratieplan.md`.
+1. Google Wallet issuer/serviceaccount en Generic Pass Class aanmaken, de vier vereiste waarden als Cloudflare-vars/secrets instellen en één echte installatie- en intrekkingstest uitvoeren.
+2. Apple Wallet activeren zodra het Apple Developer-account, Pass Type ID, certificaat, privésleutel en WWDR-certificaat beschikbaar zijn; daarna APNs-updatepush en één echte installatie- en intrekkingstest uitvoeren. De servercode en het updateprotocol staan klaar; technische eisen staan in `docs/wallet-integratieplan.md`.
 
 ## Model- en tokenkeuze
 
