@@ -45,7 +45,31 @@ De Google Wallet-knop blijft standaard volledig verborgen. Hij wordt pas beschik
 - `GOOGLE_WALLET_SERVICE_ACCOUNT_EMAIL`: het e-mailadres van het geautoriseerde serviceaccount.
 - `GOOGLE_WALLET_PRIVATE_KEY`: de PKCS#8 private key van dat serviceaccount, uitsluitend als versleuteld Cloudflare-secret.
 
-Migratie `0015_student_wallet_passes.sql` is in productie al toegepast; pas haar ook toe op iedere andere omgeving voordat daar Wallet-credentials worden ingesteld. Stel daarna de eerste drie waarden in als gewone Worker-variabelen en de private key als secret. De Worker maakt vervolgens per aanvraag een tien minuten geldige, RS256-ondertekende officiële Save-to-Google-Wallet-link. Zonder volledige configuratie retourneert het endpoint veilig HTTP 503 en wordt geen knop getoond. Commit of log de private key nooit. Apple Wallet blijft uit totdat een Apple Developer-account, Pass Type ID en bijbehorend certificaat beschikbaar zijn.
+Migratie `0015_student_wallet_passes.sql` is in productie al toegepast; pas haar ook toe op iedere andere omgeving voordat daar Wallet-credentials worden ingesteld. Stel daarna de eerste drie waarden in als gewone Worker-variabelen en de private key als secret. De Worker maakt vervolgens per aanvraag een tien minuten geldige, RS256-ondertekende officiële Save-to-Google-Wallet-link. Zonder volledige configuratie retourneert het endpoint veilig HTTP 503 en wordt geen knop getoond. Commit of log de private key nooit.
+
+## Apple Wallet activeren
+
+De Apple Wallet-knop blijft eveneens verborgen totdat een goedgekeurde,
+geldige studentenpas én alle onderstaande waarden aanwezig en geldig zijn:
+
+- `APPLE_WALLET_PASS_TYPE_ID`: de bij Apple geregistreerde identifier die met
+  `pass.` begint.
+- `APPLE_WALLET_TEAM_ID`: de tien tekens lange Apple Developer Team ID.
+- `APPLE_WALLET_SIGNER_CERT`: het PEM-gecodeerde Pass Type ID-certificaat,
+  uitsluitend als versleuteld Cloudflare-secret.
+- `APPLE_WALLET_WWDR_CERT`: het bijbehorende PEM-gecodeerde Apple WWDR-
+  intermediaire certificaat, uitsluitend als versleuteld Cloudflare-secret.
+- `APPLE_WALLET_PRIVATE_KEY`: de bij het Pass Type ID-certificaat horende
+  onversleutelde PKCS#8 PEM-private key, uitsluitend als versleuteld
+  Cloudflare-secret.
+
+De Worker maakt op verzoek een getekende Apple store card met naam, 10%,
+geldigheid, korte controlecode, QR-code en het Schaap's-icoon. De `.pkpass`
+wordt met het officiële MIME-type en `Cache-Control: private, no-store`
+gedownload. Certificaten of sleutels mogen nooit in Git, logs of screenshots
+terechtkomen. Test eerst installatie én een daarna ingetrokken QR-code op een
+echt Apple-apparaat. Zonder complete configuratie blijft het endpoint gesloten
+met HTTP 503.
 
 De integratietest met `npm run check:members` gebruikt eigen tijdelijke database- en e-mailmocks; daarvoor zijn geen Cloudflare-account, remote bindings of `.dev.vars` nodig.
 

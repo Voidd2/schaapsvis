@@ -19,6 +19,10 @@
   // Google Wallet blijft verborgen totdat GOOGLE_WALLET_ISSUER_ID,
   // GOOGLE_WALLET_CLASS_ID en GOOGLE_WALLET_SERVICE_ACCOUNT_EMAIL als vars en
   // GOOGLE_WALLET_PRIVATE_KEY als secret zijn ingesteld.
+  // Apple Wallet blijft verborgen totdat APPLE_WALLET_PASS_TYPE_ID en
+  // APPLE_WALLET_TEAM_ID als vars, en APPLE_WALLET_SIGNER_CERT,
+  // APPLE_WALLET_WWDR_CERT en APPLE_WALLET_PRIVATE_KEY als versleutelde
+  // secrets zijn ingesteld. Geen certificaatmateriaal in dit bestand zetten.
   "env": {
     "preview": {
       "name": "schaapsvis-members-preview",

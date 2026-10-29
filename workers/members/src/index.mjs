@@ -1,3 +1,6 @@
+import { Pass, SigningMaterial } from "passmint";
+import { APPLE_WALLET_ICON_2X } from "./wallet-assets.mjs";
+
 const COOKIE = "sv_member";
 const SESSION_MS = 30 * 24 * 60 * 60 * 1000;
 const EMAIL_TOKEN_MS = 60 * 60 * 1000;
@@ -320,6 +323,44 @@ function googleWalletConfig(env) {
     || !/^[^\s@]+@[^\s@]+$/.test(serviceAccountEmail)
     || !privateKey.includes("-----BEGIN PRIVATE KEY-----")) return null;
   return { issuerId, classId, serviceAccountEmail, privateKey };
+}
+
+function appleWalletConfig(env) {
+  const passTypeIdentifier = String(env.APPLE_WALLET_PASS_TYPE_ID || "").trim();
+  const teamIdentifier = String(env.APPLE_WALLET_TEAM_ID || "").trim();
+  const signerCertPem = String(env.APPLE_WALLET_SIGNER_CERT || "").trim();
+  const wwdrPem = String(env.APPLE_WALLET_WWDR_CERT || "").trim();
+  const privateKeyPkcs8Pem = String(env.APPLE_WALLET_PRIVATE_KEY || "").trim();
+  if (!/^pass\.[A-Za-z0-9.-]{3,200}$/.test(passTypeIdentifier)
+    || !/^[A-Z0-9]{10}$/.test(teamIdentifier)
+    || !signerCertPem.includes("-----BEGIN CERTIFICATE-----")
+    || !wwdrPem.includes("-----BEGIN CERTIFICATE-----")
+    || !privateKeyPkcs8Pem.includes("-----BEGIN PRIVATE KEY-----")) return null;
+  return { passTypeIdentifier, teamIdentifier, signerCertPem, wwdrPem, privateKeyPkcs8Pem };
+}
+
+let appleSigningMaterialCache = { fingerprint: "", promise: null };
+
+async function appleSigningMaterial(config) {
+  const fingerprint = await digest([
+    config.passTypeIdentifier,
+    config.teamIdentifier,
+    config.signerCertPem,
+    config.wwdrPem,
+    config.privateKeyPkcs8Pem,
+  ].join("\0"));
+  if (appleSigningMaterialCache.fingerprint !== fingerprint || !appleSigningMaterialCache.promise) {
+    const promise = SigningMaterial.fromPem({
+      signerCertPem: config.signerCertPem,
+      wwdrPem: config.wwdrPem,
+      privateKeyPkcs8Pem: config.privateKeyPkcs8Pem,
+    }).catch((error) => {
+      if (appleSigningMaterialCache.promise === promise) appleSigningMaterialCache = { fingerprint: "", promise: null };
+      throw error;
+    });
+    appleSigningMaterialCache = { fingerprint, promise };
+  }
+  return appleSigningMaterialCache.promise;
 }
 
 function pemPrivateKeyBytes(pem) {
@@ -882,9 +923,7 @@ async function me(request, env) {
     newsletter: subscription?.status || "not-subscribed",
     wallet: {
       google: { available: Boolean(discountPass && googleWalletConfig(env)) },
-      // Apple Wallet remains hidden until its Pass Type certificate and
-      // PKCS#7 signing path have both been configured and tested.
-      apple: { available: false },
+      apple: { available: Boolean(discountPass && appleWalletConfig(env)) },
     },
   });
 }
@@ -977,6 +1016,93 @@ async function issueGoogleWalletPass(request, env) {
     return json({ error: "wallet_pass_not_recorded" }, 503);
   }
   return redirect(`https://pay.google.com/gp/v/save/${token}`);
+}
+
+async function issueAppleWalletPass(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  const user = await sessionUser(request, env);
+  if (!user) return json({ error: "authentication_required" }, 401);
+  const config = appleWalletConfig(env);
+  if (!config || !env.AUTH_PEPPER || !env.PASS_SIGNING_KEY) return json({ error: "apple_wallet_unavailable" }, 503);
+  const limitKey = await hmac(env.AUTH_PEPPER, `apple-wallet:${user.id}`);
+  if (!await rateLimit(env.DB, limitKey, 10, 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
+
+  const pass = await env.DB.prepare(`
+    SELECT p.id, p.display_code, p.issued_at, p.expires_at, u.full_name
+    FROM student_passes p
+    JOIN users u ON u.id = p.user_id
+    JOIN student_applications a ON a.id = p.application_id AND a.user_id = p.user_id
+    WHERE p.user_id = ? AND p.status = 'active' AND p.revoked_at IS NULL
+      AND a.status = 'approved' AND (p.expires_at IS NULL OR p.expires_at > ?)
+    ORDER BY a.reviewed_at DESC, p.issued_at DESC LIMIT 1
+  `).bind(user.id, nowIso()).first();
+  if (!pass) return json({ error: "active_student_pass_required" }, 409);
+
+  const displayCode = pass.display_code || await passDisplayCode(env.PASS_SIGNING_KEY, pass.id);
+  if (!pass.display_code) {
+    try { await env.DB.prepare(`UPDATE student_passes SET display_code = ? WHERE id = ? AND display_code IS NULL`).bind(displayCode, pass.id).run(); }
+    catch { return json({ error: "wallet_pass_unavailable" }, 503); }
+  }
+
+  const locale = requestLocale(request);
+  const text = locale === "de"
+    ? { description: "Digitaler Studentenrabatt", student: "Student", discount: "Rabatt", discountValue: "10 %", holder: "Name", valid: "Gültig bis", code: "Prüfcode", terms: "10 % auf das gesamte Sortiment; nicht mit anderen Aktionen kombinierbar", locations: "Standorte" }
+    : locale === "en"
+      ? { description: "Digital student discount pass", student: "Student", discount: "Discount", discountValue: "10%", holder: "Name", valid: "Valid until", code: "Verification code", terms: "10% on the entire range; cannot be combined with other offers", locations: "Locations" }
+      : { description: "Digitale studentenpas", student: "Student", discount: "Korting", discountValue: "10%", holder: "Naam", valid: "Geldig tot", code: "Controlecode", terms: "10% op het hele assortiment; niet combineerbaar met andere acties", locations: "Locaties" };
+
+  let signed;
+  try {
+    const material = await appleSigningMaterial(config);
+    const builder = Pass.storeCard({
+      passTypeIdentifier: config.passTypeIdentifier,
+      serialNumber: pass.id,
+      teamIdentifier: config.teamIdentifier,
+      organizationName: "Schaap's Vishandel",
+      description: text.description,
+      logoText: "Schaap’s Vishandel",
+      colors: { background: "#075c7c", foreground: "#ffffff", label: "#bdebf5" },
+      ...(pass.expires_at ? { expirationDate: pass.expires_at } : {}),
+      sharingProhibited: true,
+      images: {
+        icon: { x2: { bytes: APPLE_WALLET_ICON_2X } },
+        logo: { x2: { bytes: APPLE_WALLET_ICON_2X } },
+      },
+      barcodes: [{ format: "qr", message: displayCode, messageEncoding: "utf-8", altText: displayCode }],
+    })
+      .headerField({ key: "student", label: text.student, value: text.student })
+      .primaryField({ key: "discount", label: text.discount, value: text.discountValue })
+      .secondaryField({ key: "holder", label: text.holder, value: pass.full_name })
+      .auxiliaryField({ key: "code", label: text.code, value: displayCode })
+      .backField({ key: "terms", label: text.discount, value: text.terms })
+      .backField({ key: "locations", label: text.locations, value: `${env.SITE_ORIGIN}/${locale}/bezoek-ons`, dataDetectorTypes: ["link"] });
+    if (pass.expires_at) builder.auxiliaryField({ key: "valid", label: text.valid, value: pass.expires_at, dateStyle: "medium", timeStyle: "none" });
+    signed = await builder.sign(material);
+  } catch {
+    return json({ error: "apple_wallet_signing_failed" }, 503);
+  }
+
+  const externalId = `${config.passTypeIdentifier}.${pass.id}`;
+  const time = nowIso();
+  try {
+    await env.DB.prepare(`INSERT INTO student_wallet_passes
+      (id, pass_id, platform, external_id, serial_number, status, created_at, updated_at)
+      VALUES (?, ?, 'apple', ?, ?, 'active', ?, ?)
+      ON CONFLICT(pass_id, platform) DO UPDATE SET
+        external_id=excluded.external_id, serial_number=excluded.serial_number,
+        status='active', updated_at=excluded.updated_at, revoked_at=NULL`)
+      .bind(crypto.randomUUID(), pass.id, externalId, pass.id, time, time).run();
+  } catch {
+    return json({ error: "wallet_pass_not_recorded" }, 503);
+  }
+
+  return signed.toResponse({
+    headers: {
+      "Cache-Control": "private, no-store",
+      "Content-Disposition": "attachment; filename=\"schaapsvis-studentenpas.pkpass\"",
+      "X-Content-Type-Options": "nosniff",
+    },
+  });
 }
 
 async function requestPasswordReset(request, env) {
@@ -1558,6 +1684,7 @@ const memberWorker = {
     if (path === "/api/members/logout" && method === "POST") return logout(request, env);
     if (path === "/api/members/me" && method === "GET") return me(request, env);
     if (path === "/api/members/wallet/google" && method === "POST") return issueGoogleWalletPass(request, env);
+    if (path === "/api/members/wallet/apple" && method === "POST") return issueAppleWalletPass(request, env);
     if (path === "/api/members/password-reset" && method === "POST") return requestPasswordReset(request, env);
     if (path === "/api/members/password-reset/confirm" && method === "GET") return passwordResetPage(request, env);
     if (path === "/api/members/password-reset/confirm" && method === "POST") return confirmPasswordReset(request, env);

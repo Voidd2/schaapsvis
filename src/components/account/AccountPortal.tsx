@@ -76,6 +76,7 @@ const translations = {
     accountLabel: "Ingelogd als",
     date: "Pas geldig vanaf",
     expiry: "Geldig tot",
+    appleWallet: "Toevoegen aan Apple Wallet",
     googleWallet: "Toevoegen aan Google Wallet",
     privacy: "Lees de voorlopige privacyinformatie over accounts, schoolmailverificatie en e-maildeals.",
   },
@@ -127,6 +128,7 @@ const translations = {
     accountLabel: "Signed in as",
     date: "Pass issued",
     expiry: "Valid until",
+    appleWallet: "Add to Apple Wallet",
     googleWallet: "Add to Google Wallet",
     privacy: "Read the preliminary privacy information about accounts, school-email verification and email offers.",
   },
@@ -178,6 +180,7 @@ const translations = {
     accountLabel: "Angemeldet als",
     date: "Pass ausgestellt am",
     expiry: "Gültig bis",
+    appleWallet: "Zu Apple Wallet hinzufügen",
     googleWallet: "Zu Google Wallet hinzufügen",
     privacy: "Lesen Sie die vorläufigen Datenschutzhinweise zu Konto, Schul-E-Mail-Bestätigung und E-Mail-Angeboten.",
   },
@@ -417,12 +420,19 @@ export function AccountPortal({ locale }: { locale: string }) {
                 <p className="mt-4 text-xs text-sky-100">{t.date}: {new Date(data.discountPass.issuedAt).toLocaleDateString(language)}{data.discountPass.expiresAt && <> · {t.expiry}: {new Date(data.discountPass.expiresAt).toLocaleDateString(language)}</>}</p>
               </div>
             )}
-            {data.studentApplication?.status === "approved" && data.discountPass && data.wallet?.google?.available && (
-              <form method="post" action={`/api/members/wallet/google?locale=${language}`}>
-                <button type="submit" className="inline-flex min-h-12 items-center justify-center rounded-xl bg-black px-6 py-3 font-semibold text-white shadow-sm transition hover:bg-slate-800 focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-sky-600">
-                  {t.googleWallet}
-                </button>
-              </form>
+            {data.studentApplication?.status === "approved" && data.discountPass && (data.wallet?.apple?.available || data.wallet?.google?.available) && (
+              <div className="flex flex-wrap gap-3">
+                {data.wallet?.apple?.available && <form method="post" action={`/api/members/wallet/apple?locale=${language}`}>
+                  <button type="submit" className="inline-flex min-h-12 items-center justify-center rounded-xl bg-black px-6 py-3 font-semibold text-white shadow-sm transition hover:bg-slate-800 focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-sky-600">
+                    {t.appleWallet}
+                  </button>
+                </form>}
+                {data.wallet?.google?.available && <form method="post" action={`/api/members/wallet/google?locale=${language}`}>
+                  <button type="submit" className="inline-flex min-h-12 items-center justify-center rounded-xl bg-black px-6 py-3 font-semibold text-white shadow-sm transition hover:bg-slate-800 focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-sky-600">
+                    {t.googleWallet}
+                  </button>
+                </form>}
+              </div>
             )}
             {data.studentApplication?.status === "approved" && !data.discountPass && <p className="rounded-xl border border-amber-300 bg-amber-50 p-5">{t.expired}</p>}
             {data.studentApplication?.status === "rejected" && <p className="rounded-xl border border-rose-200 bg-rose-50 p-5">{t.rejected}</p>}
