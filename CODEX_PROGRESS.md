@@ -30,8 +30,9 @@ Laatst bijgewerkt: 29 oktober 2026, 03:13 Europe/Amsterdam
 
 ## Eerstvolgende werkpakketten
 
-1. Google Wallet issuer/serviceaccount en Generic Pass Class aanmaken, de vier vereiste waarden als Cloudflare-vars/secrets instellen en één echte installatie- en intrekkingstest uitvoeren.
-2. Apple Wallet activeren zodra het Apple Developer-account, Pass Type ID, certificaat, privésleutel en WWDR-certificaat beschikbaar zijn; daarna één echte installatie- en intrekkingstest uitvoeren. De servercode staat klaar; technische eisen staan in `docs/wallet-integratieplan.md`.
+1. Apple Wallet-updateprotocol uit branch `codex/apple-wallet-updates` afronden en uitrollen: migratie 0016, registratie, veilige device-/pushtokenopslag, update-opvraag, opnieuw ondertekende/voided pas en afmelding zijn lokaal geïmplementeerd en getest. Productiemigratie, review en live uitrol moeten nog volgen.
+2. Google Wallet issuer/serviceaccount en Generic Pass Class aanmaken, de vier vereiste waarden als Cloudflare-vars/secrets instellen en één echte installatie- en intrekkingstest uitvoeren.
+3. Apple Wallet activeren zodra het Apple Developer-account, Pass Type ID, certificaat, privésleutel en WWDR-certificaat beschikbaar zijn; daarna APNs-updatepush en één echte installatie- en intrekkingstest uitvoeren. De servercode staat klaar; technische eisen staan in `docs/wallet-integratieplan.md`.
 
 ## Model- en tokenkeuze
 

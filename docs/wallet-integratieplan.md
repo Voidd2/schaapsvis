@@ -23,6 +23,12 @@
 - Ook de Apple Wallet-knop verschijnt pas bij een actieve goedgekeurde pas én
   een volledige certificaatconfiguratie. Zonder die configuratie blijft de knop
   verborgen en retourneert het endpoint veilig HTTP 503.
+- Migratie `0016_apple_wallet_updates.sql` voegt het officiële Apple
+  Wallet-updateprotocol toe. Een geïnstalleerde pas kan zich registreren,
+  gewijzigde serienummers opvragen, een opnieuw ondertekende pas downloaden en
+  zich afmelden. De device library identifier wordt alleen als keyed hash
+  bewaard en de APNs-pushtoken versleuteld. De authentication token is stabiel
+  per pas, maar staat niet leesbaar in D1.
 
 ## Apple Wallet
 
@@ -39,15 +45,19 @@ De implementatie gebruikt een store card. De ondertekeningssleutel en
 certificaten mogen nooit in de browser of GitHub staan; ze horen als
 versleutelde Cloudflare-secrets in de Worker. De tests gebruiken uitsluitend
 een herkenbare lokale TEST ONLY-certificaatketen. Een ingetrokken studentenpas
-wordt bij controle van de QR-code al geweigerd; het actief bijwerken of
-verwijderen van een reeds geïnstalleerde Apple-pas vereist later nog Apple's
-Wallet-updateprotocol en pushcertificaat.
+wordt bij controle van de QR-code geweigerd en de update-service retourneert
+hem als `voided`. Registreren, gewijzigde serienummers opvragen, opnieuw
+downloaden, `If-Modified-Since` en afmelden zijn geautomatiseerd getest. Voor
+een onmiddellijke update op het toestel moet productie later nog een lege APNs-
+push versturen met het echte Pass Type-certificaat; tot die configuratie er is,
+worden geregistreerde pushtokens alleen versleuteld bewaard.
 
 Officiële documentatie:
 
 - https://developer.apple.com/help/account/capabilities/create-wallet-identifiers-and-certificates
 - https://developer.apple.com/documentation/walletpasses/building-a-pass
 - https://developer.apple.com/documentation/walletpasses/distributing-and-updating-a-pass
+- https://developer.apple.com/documentation/walletpasses/adding-a-web-service-to-update-passes
 
 ## Google Wallet
 
@@ -83,5 +93,6 @@ Officiële documentatie:
    daarna de Google-configuratie in productie laten staan.
 6. Eén Apple-testpas op een echt Apple-apparaat installeren en de QR-code na
    intrekking controleren; laat de configuratie pas daarna in productie staan.
-7. Vervallen of ingetrokken passen aan beide Wallets doorgeven en pas na echte
-   installatie- en intrekkingstests beide Wallet-knoppen tonen.
+7. Voor Apple de APNs-updatepush activeren en voor Google de objectstatus via de
+   officiële API synchroniseren. Pas na echte installatie- en
+   intrekkingstests beide Wallet-knoppen tonen.
