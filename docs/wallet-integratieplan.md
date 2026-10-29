@@ -16,18 +16,32 @@
   en de versleutelde privésleutel aanwezig zijn. Zonder configuratie faalt het
   endpoint gesloten met HTTP 503; een actieve goedgekeurde studentenpas blijft
   altijd vereist.
+- De leden-Worker kan ook een ondertekend Apple `.pkpass`-bestand maken. De
+  store card bevat de volledige naam, 10%, geldigheid, korte controlecode,
+  QR-code en een Schaap's-icoon. De download gebruikt het officiële
+  `application/vnd.apple.pkpass`-MIME-type en wordt niet gecachet.
+- Ook de Apple Wallet-knop verschijnt pas bij een actieve goedgekeurde pas én
+  een volledige certificaatconfiguratie. Zonder die configuratie blijft de knop
+  verborgen en retourneert het endpoint veilig HTTP 503.
 
 ## Apple Wallet
 
-Apple vereist voordat een echte knop kan werken:
+De servercode en interface staan klaar. Apple vereist voor daadwerkelijke
+activatie nog:
 
 1. Een Apple Developer-account met de rol Account Holder of Admin.
 2. Een geregistreerde Pass Type ID.
 3. Een Pass Type ID Certificate met bijbehorende privé-sleutel.
-4. Servercode die een manifest en PKCS #7-handtekening maakt en een ondertekend `.pkpass`-bestand levert.
-5. Een downloadendpoint met het juiste Wallet MIME-type en een officiële “Add to Apple Wallet”-knop.
+4. Het Apple WWDR-intermediaire certificaat dat bij het Pass Type-certificaat hoort.
+5. Een echte installatie- en intrekkingstest op een Apple-apparaat.
 
-De pas past inhoudelijk het best als een generic pass of store card. De ondertekeningssleutel mag nooit in de browser of GitHub staan; die hoort als versleuteld Cloudflare-secret in de Worker.
+De implementatie gebruikt een store card. De ondertekeningssleutel en
+certificaten mogen nooit in de browser of GitHub staan; ze horen als
+versleutelde Cloudflare-secrets in de Worker. De tests gebruiken uitsluitend
+een herkenbare lokale TEST ONLY-certificaatketen. Een ingetrokken studentenpas
+wordt bij controle van de QR-code al geweigerd; het actief bijwerken of
+verwijderen van een reeds geïnstalleerde Apple-pas vereist later nog Apple's
+Wallet-updateprotocol en pushcertificaat.
 
 Officiële documentatie:
 
@@ -60,11 +74,14 @@ Officiële documentatie:
    `GOOGLE_WALLET_ISSUER_ID`, `GOOGLE_WALLET_CLASS_ID` en
    `GOOGLE_WALLET_SERVICE_ACCOUNT_EMAIL` instellen; zet de PKCS#8-sleutel
    uitsluitend als Cloudflare-secret `GOOGLE_WALLET_PRIVATE_KEY`.
-3. Logo- en icoonbestanden in de vereiste Wallet-formaten maken en het officiële
-   Google-knopbeeld gebruiken vóór publieke activatie.
-4. Eén Google-testpas voor het beheerdersaccount installeren en intrekken; pas
+3. Voor Apple `APPLE_WALLET_PASS_TYPE_ID` en `APPLE_WALLET_TEAM_ID` als
+   Worker-variabelen instellen. Zet `APPLE_WALLET_SIGNER_CERT`,
+   `APPLE_WALLET_WWDR_CERT` en `APPLE_WALLET_PRIVATE_KEY` uitsluitend als
+   versleutelde Cloudflare-secrets. Het Apple Wallet-icoon staat al klaar.
+4. Het officiële Google-knopbeeld gebruiken vóór publieke activatie.
+5. Eén Google-testpas voor het beheerdersaccount installeren en intrekken; pas
    daarna de Google-configuratie in productie laten staan.
-5. Het Apple `.pkpass`-endpoint bouwen zodra het certificaat beschikbaar is en
-   dezelfde actieve-pascontrole als Google gebruiken.
-6. Vervallen of ingetrokken passen aan beide Wallets doorgeven en pas na echte
+6. Eén Apple-testpas op een echt Apple-apparaat installeren en de QR-code na
+   intrekking controleren; laat de configuratie pas daarna in productie staan.
+7. Vervallen of ingetrokken passen aan beide Wallets doorgeven en pas na echte
    installatie- en intrekkingstests beide Wallet-knoppen tonen.

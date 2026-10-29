@@ -24,6 +24,7 @@
     "next": "16.2.4",
     "next-intl": "^4.9.1",
     "next-seo": "^7.2.0",
+    "passmint": "0.7.0",
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "react-server-dom-webpack": "19.3.1",
@@ -41,6 +42,7 @@
     "cf": "1.0.0-beta.18",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
+    "fflate": "0.8.3",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vite": "8.3.4"
