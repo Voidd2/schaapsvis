@@ -59,6 +59,35 @@ Officiële documentatie:
 - https://developer.apple.com/documentation/walletpasses/distributing-and-updating-a-pass
 - https://developer.apple.com/documentation/walletpasses/adding-a-web-service-to-update-passes
 
+### Wat de eigenaar concreet moet doen
+
+1. Schrijf Schaap's Vishandel in voor het Apple Developer Program. Voor een
+   organisatie vraagt Apple onder meer de wettelijke entiteit, een D‑U‑N‑S-
+   nummer, een zakelijk e-mailadres op het eigen domein en een publieke website.
+   Een organisatie-account heeft de voorkeur, zodat de bedrijfsnaam bij de
+   uitgever hoort. Het programma kost volgens Apple **USD 99 per jaar** (of het
+   lokale equivalent waar Apple dat aanbiedt).
+2. Open na goedkeuring **Certificates, Identifiers & Profiles → Identifiers →
+   Pass Type IDs** en registreer bijvoorbeeld
+   `pass.nl.schaapsvishandel.student`.
+3. Maak voor die Pass Type ID een **Pass Type ID Certificate**. Apple laat
+   hiervoor een Certificate Signing Request uploaden. Bewaar de bijbehorende
+   privésleutel op een vertrouwde computer en exporteer certificaat plus
+   privésleutel als beveiligd `.p12`-bestand.
+4. Noteer de **Team ID** en **Pass Type ID**. Die twee waarden zijn geen geheim.
+   Het `.p12`-bestand, het exportwachtwoord en de privésleutel zijn dat wel:
+   plaats die nooit in chat, Git of een e-mailbijlage.
+5. Download het actuele Apple WWDR-intermediaire certificaat. Daarna kunnen de
+   Pass Type ID, Team ID, het signer-certificaat, WWDR-certificaat en de
+   privésleutel via Cloudflare-secrets aan de leden-Worker worden gekoppeld.
+6. Installeer één testpas op een echte iPhone, trek de studentenpas in via
+   beheer en controleer vervolgens zowel de QR-status als de Wallet-update.
+
+Apple-bronnen voor inschrijving en kosten:
+
+- https://developer.apple.com/programs/enroll/
+- https://developer.apple.com/help/account/membership/program-enrollment/
+
 ## Google Wallet
 
 Google vereist voordat een echte knop kan werken:
@@ -76,6 +105,32 @@ Officiële documentatie:
 
 - https://developers.google.com/wallet/generic
 - https://developers.google.com/wallet/generic/getting-started/issuer-onboarding
+
+### Wat de eigenaar concreet moet doen
+
+1. Open de Google Pay & Wallet Console en maak een Wallet-issuer voor
+   Schaap's Vishandel. Een nieuwe issuer start in demo-modus.
+2. Kies of maak een Google Cloud-project en schakel de Google Wallet API in.
+3. Maak in dat project een serviceaccount en download een JSON-sleutel.
+4. Voeg het e-mailadres van dat serviceaccount in de Wallet-console toe met de
+   rol **Developer**.
+5. Maak een Generic Pass Class voor de Schaap's-studentenpas. Noteer issuer-ID,
+   class-ID en serviceaccount-e-mailadres; bewaar de private key uit het
+   JSON-bestand uitsluitend als geheim.
+6. Vul het Business Profile in en vraag publishing access aan. Tot goedkeuring
+   blijven testpassen als `TEST ONLY` zichtbaar.
+7. Koppel de drie openbare identifiers en de private key via Cloudflare-vars en
+   -secrets, installeer één testpas en controleer daarna intrekking.
+
+Google noemt in de officiële onboardingdocumentatie geen afzonderlijk
+abonnementstarief voor een Wallet-issuer. Dat is geen garantie dat andere
+Google Cloud- of betaalprofielkosten nooit kunnen gelden; controleer daarom het
+Cloud-project en de factureringsinstellingen voordat productie wordt geopend.
+
+Aanvullende Google-bronnen:
+
+- https://developers.google.com/wallet/generic/getting-started/auth/rest
+- https://developers.google.com/wallet/generic/test-and-go-live/request-publishing-access
 
 ## Uitvoervolgorde zodra de accounts beschikbaar zijn
 

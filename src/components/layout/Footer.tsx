@@ -43,6 +43,8 @@ export function Footer() {
       kop: nav("assortiment"),
       links: [
         { href: bestelContact(locale).href, label: bestelContact(locale).label },
+        { href: p("/feestdagen"), label: locale === "de" ? "Festtage 2026" : locale === "en" ? "Festive season 2026" : "Feestdagen 2026" },
+        { href: p("/relatiegeschenken"), label: locale === "de" ? "Firmengeschenke" : locale === "en" ? "Business gifts" : "Relatiegeschenken" },
         { href: p("/visschalen"), label: nav("visschalen") },
         { href: p("/assortiment"), label: nav("assortiment") },
         { href: p("/aanbiedingen"), label: locale === "de" ? "Kundenangebote" : locale === "en" ? "Customer offers" : "Aanbiedingen voor klanten" },
