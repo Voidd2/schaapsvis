@@ -119,6 +119,41 @@ export default async function HomePage({
 
       <SeizoensBanner locale={locale} />
 
+      {/* De seizoensroute staat vroeg op de homepage: bezoekers die in oktober
+          en december binnenkomen hoeven niet eerst door het hele assortiment.
+          Het patroon is geïnspireerd op sterke webshops, maar inhoud, beelden
+          en bestelwijze zijn bewust van Schaap's zelf. */}
+      <Sectie grond="navy">
+        <div className="grid lg:grid-cols-[1.08fr_0.92fr] gap-10 lg:gap-16 items-center">
+          <div>
+            <Kop
+              label={locale === "nl" ? "December bij Schaap’s" : locale === "de" ? "Dezember bei Schaap’s" : "December at Schaap’s"}
+              titel={locale === "nl" ? "Feestdagen 2026: goed voorbereid aan tafel" : locale === "de" ? "Festtage 2026: gut vorbereitet genießen" : "Festive season 2026: plan a table worth sharing"}
+              intro={locale === "nl" ? "Bekijk visschalen, gourmet, gerookte zalm, oesters en relatiegeschenken. Geen onzekere voorraadknoppen: we stemmen inhoud, hoeveelheid en prijs persoonlijk met u af." : locale === "de" ? "Entdecken Sie Fischplatten, Gourmet, Räucherlachs, Austern und Firmengeschenke. Inhalt, Menge und Preis stimmen wir persönlich ab." : "Explore seafood platters, gourmet, smoked salmon, oysters and business gifts. We agree contents, quantity and price personally."}
+              donker
+            />
+            <div className="flex flex-wrap gap-3">
+              <Link href={`/${locale}/feestdagen`} className="knop knop-rood">
+                {locale === "nl" ? "Bekijk Feestdagen 2026" : locale === "de" ? "Festtage 2026 ansehen" : "Explore festive season 2026"}
+              </Link>
+              <Link href={`/${locale}/relatiegeschenken`} className="knop knop-lijn-licht">
+                {locale === "nl" ? "Relatiegeschenken" : locale === "de" ? "Firmengeschenke" : "Business gifts"}
+              </Link>
+            </div>
+            <ul className="grid sm:grid-cols-3 gap-4 mt-9 pt-7" style={{ borderTop: "1px solid rgba(250,246,239,0.2)" }}>
+              {[
+                [locale === "nl" ? "Visschalen" : locale === "de" ? "Fischplatten" : "Seafood platters", `/${locale}/visschalen`],
+                [locale === "nl" ? "Gourmet" : "Gourmet", `/${locale}/barbecue-gourmet`],
+                [locale === "nl" ? "Cadeaus" : locale === "de" ? "Geschenke" : "Gifts", `/${locale}/relatiegeschenken`],
+              ].map(([label, href]) => <li key={href}><Link href={href} className="font-semibold underline underline-offset-4" style={{ color: "var(--cream)" }}>{label} →</Link></li>)}
+            </ul>
+          </div>
+          <Link href={`/${locale}/feestdagen`} className="group block overflow-hidden rounded-2xl border border-white/20 shadow-xl">
+            <Image src="/images/editorial/feestschaal-voorbeeld.webp" alt={locale === "nl" ? "Voorbeeld van een feestelijke visschaal" : locale === "de" ? "Beispiel einer festlichen Fischplatte" : "Example festive seafood platter"} width={1200} height={800} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.025]" />
+          </Link>
+        </div>
+      </Sectie>
+
       {/* Locatie-informatie direct boven de hoofdkeuzes: bezoekers zien meteen
           waar en wanneer ze ons kunnen bezoeken, met een route én lokale uitleg. */}
       <Sectie grond="zand">

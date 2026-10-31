@@ -1,6 +1,6 @@
 # Schaap's Vishandel — voortgang
 
-Laatst bijgewerkt: 29 oktober 2026, 19:25 Europe/Amsterdam
+Laatst bijgewerkt: 31 oktober 2026, Europe/Amsterdam
 
 ## Afgerond en gecontroleerd
 
@@ -28,11 +28,15 @@ Laatst bijgewerkt: 29 oktober 2026, 19:25 Europe/Amsterdam
 - Productie-D1 bevat migratie `0015_student_wallet_passes.sql`, de tabel met 10 kolommen en de statusindex; dit is rechtstreeks in Cloudflare D1 geverifieerd. De site- en leden-Worker hebben commit `8e109b4` succesvol gebouwd en de live healthcheck geeft `{"status":"ok"}`.
 - PR #56 is samengevoegd naar `main`. De leden-Worker maakt met een volledige certificaatconfiguratie een ondertekende Apple store-card `.pkpass` met naam, 10%, geldigheid, zichtbaar Schaap's-logo, QR-code en korte controlecode. Zonder echte Apple-configuratie blijft de knop verborgen en faalt uitgifte gesloten. De integratietest valideert ZIP-inhoud, CMS-handtekening, velden en databaseledger met een uitsluitend lokale TEST ONLY-certificaatketen. GitHub Build site en Member worker tests zijn groen. De site-Worker draait versie `c118858f`, de leden-Worker versie `a8459ea2`; beide staan op 100% Ready. De live healthcheck geeft `{"status":"ok"}`.
 - PR #57 is samengevoegd naar `main`. Migratie `0016_apple_wallet_updates.sql` staat aantoonbaar in productie-D1: de locale-kolom, versleutelde device-opslag, registratietabel en statusindex zijn aanwezig en de migratiehistorie bevat 0016. Het officiële Apple Wallet-updateprotocol is live met registratie, veilige device-/pushtokenopslag, gewijzigde-serienummeropvraag, opnieuw ondertekende of `voided` pas, `If-Modified-Since` en afmelding. De site-Worker draait versie `8449ea44`, de leden-Worker versie `39ba8046`; beide staan op 100% Ready. De live healthcheck geeft `{"status":"ok"}`.
+- Nieuwe homepage-merchandising voor Feestdagen 2026 is lokaal gebouwd in Schaap's-huisstijl, met duidelijke routes naar visschalen, gourmet en relatiegeschenken. Er zijn aparte gelokaliseerde pagina's voor `/feestdagen` en `/relatiegeschenken`, plus navigatie-, footer-, seizoensbanner- en sitemapkoppelingen. De opbouw gebruikt bruikbare categorie- en servicemodellen uit de markt, maar alle teksten zijn origineel en alle beelden komen uit de eigen projectbibliotheek; concurrentenmateriaal is niet gekopieerd.
+- De nieuwe homepage en beide pagina's zijn lokaal visueel gecontroleerd op desktop en 390×844 mobiel. ESLint, contentintegriteit en de volledige productiebuild slagen; de drie assortimentslinks voor gerookte zalm, oesters en warmgerookte zalm zijn tegen de echte product-slugs gecontroleerd.
+- `docs/wallet-integratieplan.md` bevat nu de concrete stappen voor Apple- en Google-onboarding, de veilige overdracht van certificaten/sleutels en de actuele kostencontext. Apple vermeldt USD 99 per jaar; Google vermeldt in de Wallet-onboarding geen afzonderlijk issuer-abonnement.
 
 ## Eerstvolgende werkpakketten
 
-1. Google Wallet issuer/serviceaccount en Generic Pass Class aanmaken, de vier vereiste waarden als Cloudflare-vars/secrets instellen en één echte installatie- en intrekkingstest uitvoeren.
-2. Apple Wallet activeren zodra het Apple Developer-account, Pass Type ID, certificaat, privésleutel en WWDR-certificaat beschikbaar zijn; daarna APNs-updatepush en één echte installatie- en intrekkingstest uitvoeren. De servercode en het updateprotocol staan klaar; technische eisen staan in `docs/wallet-integratieplan.md`.
+1. De homepage- en feestdagenwijzigingen via een afgebakende pull request laten bouwen en na groene controles uitrollen.
+2. Google Wallet issuer/serviceaccount en Generic Pass Class door de eigenaar aanmaken, de vier vereiste waarden als Cloudflare-vars/secrets instellen en één echte installatie- en intrekkingstest uitvoeren.
+3. Apple Wallet activeren zodra het Apple Developer-account, Pass Type ID, certificaat, privésleutel en WWDR-certificaat beschikbaar zijn; daarna APNs-updatepush en één echte installatie- en intrekkingstest uitvoeren. De servercode en het updateprotocol staan klaar; de exacte eigenaarstappen staan in `docs/wallet-integratieplan.md`.
 
 ## Model- en tokenkeuze
 

@@ -37,6 +37,7 @@ export function Header() {
   const p = (pad: string) => `/${locale}${pad}`;
 
   const primaryLinks = [
+    { href: p("/feestdagen"), label: locale === "de" ? "Festtage" : locale === "en" ? "Festive season" : "Feestdagen" },
     { href: p("/assortiment"), label: t("assortiment") },
     { href: p("/barbecue-gourmet"), label: locale === "de" ? "Grill & Gourmet" : locale === "en" ? "Barbecue & gourmet" : "Barbecue & gourmet" },
     { href: p("/biologische-vis"), label: locale === "de" ? "Bio, ASC & MSC" : locale === "en" ? "Organic, ASC & MSC" : "Biologische vis" },
@@ -50,6 +51,7 @@ export function Header() {
     { href: p("/account/klant"), label: locale === "de" ? "Kundenkonto" : locale === "en" ? "Customer account" : "Klantaccount" },
   ];
   const extraLinks = [
+    { href: p("/relatiegeschenken"), label: locale === "de" ? "Firmengeschenke" : locale === "en" ? "Business gifts" : "Relatiegeschenken" },
     { href: p("/ons-verhaal"), label: t("verhaal") },
     { href: p("/contact"), label: t("contact") },
   ];
