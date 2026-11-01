@@ -320,7 +320,7 @@ const PRODUCT_BEELDEN: Record<string, Pick<ProductPhoto, "src" | "alt" | "credit
   "bot": { src: "/images/editorial/bot-serveervoorbeeld.webp", alt: "Bot (Platichthys flesus) op ijs — voorbeeldfoto", caption: "Bot (Platichthys flesus)" },
   "wijtingfilet": { src: "/images/editorial/wijtingfilet-serveervoorbeeld.webp", alt: "Verse wijtingfilets op ijs — voorbeeldfoto", caption: "Voorbeeldfoto; wijtingfilet is op aanvraag beschikbaar." },
   "victoriabaars": { src: "/images/editorial/victoriabaars-serveervoorbeeld.webp", alt: "Verse filets van Victoriabaars op ijs — voorbeeldfoto", caption: "Victoriabaarsfilet" },
-  "gerookte-zalmmoot": { src: "/images/editorial/warm-gerookte-zalmmoten-eigen-product-ai.webp", alt: "Warmgerookte zalmmoten van Schaap’s Vishandel", caption: "Warmgerookte zalmmoten van Schaap’s Vishandel." },
+  "gerookte-zalmmoot": { src: "/images/editorial/gerookte-zalmmoot-eigen-product.png", alt: "Warmgerookte zalm met citroen en dille", caption: "Warmgerookte zalm — serveervoorbeeld." },
   "gerookte-sprotfilet": { src: "/images/editorial/gerookte-sprotfilet-serveervoorbeeld.webp", alt: "Kleine gerookte sprotfilets op een schaal — serveervoorbeeld", caption: "Gerookte sprotfilet" },
   "gerookte-heilbot": { src: "/images/editorial/gerookte-heilbot-serveervoorbeeld.webp", alt: "Plakjes gerookte heilbot met dille en citroen — serveersuggestie", caption: "Gerookte heilbot met dille en citroen" },
   "gerookte-forel-heel": { src: "/images/editorial/gerookte-forel-heel-serveervoorbeeld.webp", alt: "Hele warmgerookte forel met citroen en dille — serveersuggestie", caption: "Warmgerookte forel met citroen en dille" },
