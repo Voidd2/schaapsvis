@@ -1,6 +1,6 @@
 # Schaap's Vishandel — voortgang
 
-Laatst bijgewerkt: 1 november 2026, Europe/Amsterdam
+Laatst bijgewerkt: 2 november 2026, Europe/Amsterdam
 
 ## Afgerond en gecontroleerd
 
@@ -36,6 +36,8 @@ Laatst bijgewerkt: 1 november 2026, Europe/Amsterdam
 - PR #61 is samengevoegd naar `main`. De studentenpasbeveiliging staat live met herroepbare langlopende sessies, privacyvriendelijke apparaatherkenning, uitlegbare risicosignalen, gegroepeerde meldingen, beheeracties met auditlog, extra e-mail- en schoolmailverificatie, eenmalige inloglinks en dynamische twee-minuten-QR-codes. Fotoverificatie is bewust niet gebouwd zonder afzonderlijke juridische en privacybeoordeling.
 - Preview-D1 is gecontroleerd en aangevuld met migraties 0013 t/m 0017; productie-D1 bevat aantoonbaar `0017_student_pass_security.sql`. De leden-Worker bouwde commit `2b10e70` als versie `4b09794c`, de site-Worker als versie `fdbe4698`; beide stonden na de uitrol op Ready. De live healthcheck geeft `{"status":"ok"}`.
 - De live accountpagina toont wachtwoordlogin, eenmalige inloglink en wachtwoordherstel. De live beheerroute `/nl/beheer/beveiliging` is bereikbaar, maar weigert zonder zowel toegestaan beheerdersaccount als vertrouwd netwerk terecht met `forbidden`. GitHub Member worker tests en Build site zijn groen; de volledige productiebuild bevat 491 pagina's.
+- PR #63 is samengevoegd naar `main`. De Feestdagenpagina bevat nu 23 door de eigenaar geselecteerde producten met de op 1 november gecontroleerde namen, volledige prijzen en originele, lokaal gecomprimeerde productbeelden. Ieder product heeft een eigen detailroute met samenstelling, allergenenwaarschuwing, besteltermijn/formaat waar van toepassing en drie gerelateerde producten. Visschalen toont de twaalf bijbehorende schalen met volledige prijs en een link naar de detailpagina. De sitemap, Product-schema en beeldverantwoording zijn bijgewerkt; de verklaarde toestemming van Dirks en bronmomentopname staan in `docs/feestdagen-productcatalogus-2026-11-01.md`.
+- De productiebuild bevat 560 pagina's en slaagt samen met TypeScript, ESLint en de inhoudscontrole. Cloudflare heeft main als versie `8737ce49` op 100% Ready uitgerold. De live Feestdagenpagina, productdetail voor `visschotel-luxe-8-10-pers`, allergenenblok, gerelateerde producten en de twaalf Visschalen-links zijn in Chrome gecontroleerd; er zijn geen consolefouten gevonden.
 
 ## Eerstvolgende werkpakketten
 
