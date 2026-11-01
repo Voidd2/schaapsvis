@@ -126,16 +126,18 @@ export function Header() {
           </Link>
 
           <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="hidden xl:flex items-center justify-end gap-x-1 text-[0.68rem]">
-            {primaryLinks.map(({ href, label }) => (
+            {primaryLinks.map(({ href, label }, index) => (
               <Link
                 key={href}
                 href={href}
-                className="transition-colors whitespace-nowrap px-1.5 py-2 rounded-sm hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                className={`transition-colors whitespace-nowrap px-1.5 py-2 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${index === 0 ? "hover:brightness-105" : "hover:bg-sky-50"}`}
                 style={{
-                  color: isActief(href) ? "var(--navy)" : "var(--charcoal)",
-                  fontWeight: isActief(href) ? 600 : 400,
-                  borderBottom: isActief(href) ? "2px solid var(--gold)" : "2px solid transparent",
-                  paddingBottom: "3px",
+                  color: index === 0 ? "white" : isActief(href) ? "var(--navy)" : "var(--charcoal)",
+                  background: index === 0 ? (isActief(href) ? "#8f1722" : "#b32632") : undefined,
+                  fontWeight: index === 0 || isActief(href) ? 700 : 400,
+                  borderBottom: index === 0 ? "2px solid #ffd98b" : isActief(href) ? "2px solid var(--gold)" : "2px solid transparent",
+                  paddingBottom: index === 0 ? "8px" : "3px",
+                  paddingInline: index === 0 ? "10px" : undefined,
                 }}
               >
                 {label}
@@ -227,7 +229,7 @@ export function Header() {
             style={{ backgroundColor: "var(--cream)", borderTop: "1px solid var(--linen)" }}
           >
             <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="max-w-7xl 2xl:max-w-[90rem] mx-auto px-4 py-2">
-              {primaryLinks.map(({ href, label }) => (
+              {primaryLinks.map(({ href, label }, index) => (
                 <Link
                   key={href}
                   href={href}
@@ -235,7 +237,11 @@ export function Header() {
                   className="block py-3.5 text-lg"
                   style={{
                     borderBottom: "1px solid var(--linen)",
-                    color: "var(--navy)",
+                    color: index === 0 ? "white" : "var(--navy)",
+                    background: index === 0 ? "linear-gradient(90deg, #941b27, #b32632)" : undefined,
+                    paddingInline: index === 0 ? "14px" : undefined,
+                    marginBlock: index === 0 ? "8px 4px" : undefined,
+                    borderRadius: index === 0 ? "6px" : undefined,
                     fontFamily: "var(--font-display)",
                   }}
                 >

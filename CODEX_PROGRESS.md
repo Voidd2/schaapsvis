@@ -34,8 +34,10 @@ Laatst bijgewerkt: 31 oktober 2026, Europe/Amsterdam
 
 ## Eerstvolgende werkpakketten
 
-1. Google Wallet issuer/serviceaccount en Generic Pass Class door de eigenaar aanmaken, de vier vereiste waarden als Cloudflare-vars/secrets instellen en één echte installatie- en intrekkingstest uitvoeren.
-2. Apple Wallet activeren zodra het Apple Developer-account, Pass Type ID, certificaat, privésleutel en WWDR-certificaat beschikbaar zijn; daarna APNs-updatepush en één echte installatie- en intrekkingstest uitvoeren. De servercode en het updateprotocol staan klaar; de exacte eigenaarstappen staan in `docs/wallet-integratieplan.md`.
+1. Het feestdagenwerkpakket met mobiele uitgelicht-carousel, compact productraster, herkenbare headeraccenten, herstelde garnalen- en warmgerookte-zalmbeelden en de uitgebreide relatiegeschenkenpagina is lokaal gebouwd en op desktop en 390×844 gecontroleerd. Voor de relatiegeschenkenpagina is een nieuw project-eigen AI-voorbeeldbeeld met Schaap’s-logo gemaakt; prompt en beperkingen staan in `docs/image-generation-2026-09-29.md`. Nog uitrollen via PR en live verifiëren.
+2. Daarna de aangeleverde studentenpas-fraudebeveiliging uitvoeren: bestaande sessies en QR-stroom inventariseren, risicosignalen en beheerdashboard ontwerpen, migraties/API/UI/tests in aparte veilige PR’s uitrollen. Een gezichts-/pasfoto-optie blijft standaard uit totdat doelbinding, bewaartermijn, grondslag, toegang en een gelijkwaardig niet-foto-alternatief apart zijn vastgesteld.
+3. Google Wallet issuer/serviceaccount en Generic Pass Class door de eigenaar aanmaken, de vier vereiste waarden als Cloudflare-vars/secrets instellen en één echte installatie- en intrekkingstest uitvoeren.
+4. Apple Wallet activeren zodra het Apple Developer-account, Pass Type ID, certificaat, privésleutel en WWDR-certificaat beschikbaar zijn; daarna APNs-updatepush en één echte installatie- en intrekkingstest uitvoeren. De servercode en het updateprotocol staan klaar; de exacte eigenaarstappen staan in `docs/wallet-integratieplan.md`.
 
 ## Model- en tokenkeuze
 

@@ -7,6 +7,7 @@ import { Kop, Sectie, Vragen } from "@/components/ui/Sectie";
 import { bestelContact } from "@/lib/bestel-contact";
 import { feestdagenCopy } from "@/lib/feestdagen";
 import { paginaMetadata } from "@/lib/seo";
+import { FeestdagenUitgelicht } from "@/components/feestdagen/FeestdagenUitgelicht";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -28,6 +29,14 @@ export default async function FeestdagenPage({ params }: { params: Promise<{ loc
   const contact = bestelContact(locale, c.title);
 
   return <>
+    <FeestdagenUitgelicht
+      locale={locale}
+      label={c.featuredLabel}
+      title={c.featuredTitle}
+      hint={c.featuredHint}
+      linkLabel={c.featuredLink}
+      products={c.items}
+    />
     <PaginaKop
       kruimels={[{ naam: c.home, href: `/${locale}` }, { naam: c.title }]}
       label={c.label}
@@ -45,16 +54,17 @@ export default async function FeestdagenPage({ params }: { params: Promise<{ loc
 
     <Sectie grond="papier" id="mogelijkheden">
       <Kop label={c.categories} titel={c.categoriesTitle} intro={c.categoriesIntro} />
-      <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
-        {c.items.map(([titel, tekst, beeld, alt, href], index) => <li key={titel} className="group">
-          <Link href={`/${locale}${href}`} className="block h-full">
-            <div className="overflow-hidden bg-white aspect-[4/3]">
+      <ul className="grid grid-cols-2 lg:grid-cols-3 gap-x-3 sm:gap-x-6 gap-y-8 sm:gap-y-10">
+        {c.items.map(([titel, tekst, beeld, alt, href, prijs], index) => <li key={titel} className="group min-w-0">
+          <Link href={`/${locale}${href}`} className="flex h-full flex-col">
+            <div className="overflow-hidden rounded-lg bg-white aspect-[4/3]">
               <Image src={beeld} alt={alt} width={900} height={675} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.035]" />
             </div>
-            <p className="kapitaal mt-4 mb-2">{String(index + 1).padStart(2, "0")}</p>
-            <h2 className="text-[1.25rem] group-hover:underline underline-offset-4">{titel}</h2>
-            <p className="mt-2 text-[0.95rem] leading-relaxed" style={{ color: "var(--charcoal)" }}>{tekst}</p>
-            <span className="inline-block mt-3 text-sm font-semibold underline underline-offset-4" style={{ color: "var(--navy)" }}>
+            <p className="kapitaal mt-3 mb-1 sm:mt-4 sm:mb-2">{String(index + 1).padStart(2, "0")}</p>
+            <h2 className="text-[1.05rem] leading-tight sm:text-[1.25rem] group-hover:underline underline-offset-4">{titel}</h2>
+            <p className="mt-2 hidden text-[0.95rem] leading-relaxed sm:block" style={{ color: "var(--charcoal)" }}>{tekst}</p>
+            <p className="mt-2 text-[0.78rem] font-bold leading-snug sm:text-sm" style={{ color: "#a61f2b" }}>{prijs}</p>
+            <span className="mt-auto inline-block pt-3 text-[0.78rem] font-semibold underline underline-offset-4 sm:text-sm" style={{ color: "var(--navy)" }}>
               {locale === "nl" ? "Bekijk de mogelijkheden" : locale === "de" ? "Möglichkeiten ansehen" : "Explore the options"} →
             </span>
           </Link>

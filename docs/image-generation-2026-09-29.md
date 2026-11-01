@@ -23,4 +23,12 @@ Deze bronregistratie is intern. De website noemt de twee onderstaande beelden se
 - Productpagina en assortiment hebben bronvermelding.
 - De bestaande echte schol van Hans Hillewaert blijft behouden met CC BY-SA 4.0-bronvermelding. Er is geen nieuwe gegenereerde schol geplaatst.
 
+## Relatiegeschenk met Schaap’s-logo — 1 november 2026
+
+- Bestand: `public/images/editorial/schaaps-relatiegeschenk-zalmpakket-v1.png`
+- Tool: ingebouwde imagegen.
+- Referentie: het bestaande ronde Schaap’s-logo uit `public/images/brand/schaapsvis-wallet-icon@3x.png`.
+- Promptkern: een fotorealistische donkerblauwe, gekoelde geschenkdoos met gerookte zalm, smaakmaker, kaart, crèmekleurig-gouden lint en het ronde Schaap’s-logo als etiket; geen sushi, alcohol, externe merken, prijzen of watermerk.
+- Gebruik: voorbeeldbeeld op de relatiegeschenkenpagina. Het toont geen gegarandeerde verpakking of vaste inhoud; die beperking staat zichtbaar op de pagina.
+
 Productdetailfoto's gebruiken responsive Next.js-afbeeldingen. De originele bronfoto blijft via de sitemap bereikbaar. Beschrijvingen zijn beschikbaar in NL, EN en DE; geen verborgen keywordlijsten in alt-teksten.
