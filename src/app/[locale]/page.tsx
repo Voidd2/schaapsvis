@@ -90,10 +90,13 @@ export default async function HomePage({
           winkel een bezorgdienst die toevallig 1938 in de tekst heeft staan.
           De zaak zelf is het verhaal; bezorgen is een dienst die erbij is
           gekomen en staat daarom verderop. */}
-      <section style={{ backgroundColor: "var(--cream)" }}>
-        <div className="max-w-6xl mx-auto px-4 grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center py-12 md:py-20">
+      <section className="home-hero" style={{ backgroundColor: "var(--cream)" }}>
+        <div className="max-w-6xl mx-auto px-4 grid lg:grid-cols-[1.02fr_0.98fr] gap-10 lg:gap-16 items-center py-12 md:py-20">
           <div>
-            <p className="kapitaal mb-4">{h("eyebrow")}</p>
+            <div className="home-hero-kicker mb-5">
+              <span className="home-hero-dot" aria-hidden />
+              <p className="kapitaal">{h("eyebrow")}</p>
+            </div>
             <h1 className="text-[2.3rem] md:text-[3.4rem] leading-[1.08] mb-6">{h("kop")}</h1>
             <p
               className="text-[1.1rem] leading-relaxed max-w-xl mb-8"
@@ -109,15 +112,50 @@ export default async function HomePage({
                 {nav("visschalen")}
               </Link>
             </div>
+            <dl className="home-hero-facts mt-9">
+              <div><dt>{locale === "nl" ? "Sinds" : locale === "de" ? "Seit" : "Since"}</dt><dd>1938</dd></div>
+              <div><dt>{locale === "nl" ? "Vers" : locale === "de" ? "Frisch" : "Fresh"}</dt><dd>{locale === "nl" ? "elke dag" : locale === "de" ? "jeden Tag" : "every day"}</dd></div>
+              <div><dt>{locale === "nl" ? "Kom langs" : locale === "de" ? "Besuchen Sie uns" : "Visit us"}</dt><dd>Leiden</dd></div>
+            </dl>
           </div>
 
           {/* De winkel zelf, zodra die foto er is. Geen close-up van vis: die
               heeft elke vishandel, een gevel aan de Herenstraat niet. */}
-          <Image src="/images/recepten/zalm-citroen-dille.webp" alt={locale === "nl" ? "Zalm uit de oven met citroen en dille" : locale === "de" ? "Ofenlachs mit Zitrone und Dill" : "Oven-baked salmon with lemon and dill"} width={1400} height={933} sizes="(max-width: 800px) 100vw, 50vw" className="rounded-2xl w-full" fetchPriority="high" />
+          <div className="home-hero-image-wrap">
+            <Image src="/images/recepten/zalm-citroen-dille.webp" alt={locale === "nl" ? "Zalm uit de oven met citroen en dille" : locale === "de" ? "Ofenlachs mit Zitrone und Dill" : "Oven-baked salmon with lemon and dill"} width={1400} height={933} sizes="(max-width: 800px) 100vw, 50vw" className="home-hero-image" fetchPriority="high" />
+            <span className="home-hero-image-label">{locale === "nl" ? "Herenstraat 48 · Leiden" : locale === "de" ? "Herenstraat 48 · Leiden" : "Herenstraat 48 · Leiden"}</span>
+          </div>
         </div>
       </section>
 
       <SeizoensBanner locale={locale} />
+
+      <section className="home-quicklinks" aria-labelledby="home-quicklinks-title">
+        <div className="max-w-6xl mx-auto px-4 py-12 md:py-16">
+          <div className="flex flex-wrap items-end justify-between gap-5 mb-7">
+            <div>
+              <p className="kapitaal mb-2">{locale === "nl" ? "Kies waar u zin in heeft" : locale === "de" ? "Wählen Sie Ihren Geschmack" : "Choose what you are craving"}</p>
+              <h2 id="home-quicklinks-title" className="text-[1.8rem] md:text-[2.35rem] leading-tight">{locale === "nl" ? "Van toonbank tot tafel." : locale === "de" ? "Von der Fischtheke auf den Tisch." : "From our counter to your table."}</h2>
+            </div>
+            <Link href={`/${locale}/assortiment`} className="font-semibold underline underline-offset-4" style={{ color: "var(--navy)" }}>{h("assortimentLink")} →</Link>
+          </div>
+          <ul className="home-quicklinks-grid">
+            {[
+              [locale === "nl" ? "Verse vis" : locale === "de" ? "Frischer Fisch" : "Fresh fish", locale === "nl" ? "Voor vanavond" : locale === "de" ? "Für heute Abend" : "For tonight", `/${locale}/assortiment`, "toonbank"],
+              [locale === "nl" ? "Visschalen" : locale === "de" ? "Fischplatten" : "Seafood platters", locale === "nl" ? "Voor samen delen" : locale === "de" ? "Zum Teilen" : "For sharing", `/${locale}/visschalen`, "schaalBorrel"],
+              [locale === "nl" ? "Barbecue & gourmet" : "Barbecue & gourmet", locale === "nl" ? "Voor een lange avond" : locale === "de" ? "Für einen langen Abend" : "For a long evening", `/${locale}/barbecue-gourmet`, "gebakkenVis"],
+              [locale === "nl" ? "Feestdagen" : locale === "de" ? "Festtage" : "Festive season", locale === "nl" ? "Voor december" : locale === "de" ? "Für Dezember" : "For December", `/${locale}/feestdagen`, "schaalFeest"],
+            ].map(([label, sub, href, beeld]) => (
+              <li key={href}>
+                <Link href={href} className="home-quicklink-card group">
+                  <Beeld naam={beeld as BeeldNaam} verhouding="liggend" streep="var(--navy)" />
+                  <span className="home-quicklink-body"><strong>{label}</strong><small>{sub}</small><span aria-hidden>→</span></span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
       {/* De seizoensroute staat vroeg op de homepage: bezoekers die in oktober
           en december binnenkomen hoeven niet eerst door het hele assortiment.

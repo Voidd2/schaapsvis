@@ -398,6 +398,41 @@ body:has(#mobile-navigation) .sv-whatsapp { opacity: 0; visibility: hidden; poin
    `display: inline-flex` van `.knop` het van `hidden sm:inline-flex` en staat
    een knop die alleen op mobiel hoort ook op de desktop. */
 @layer components {
+  /* Homepage: een rustige, redactionele entree met duidelijke keuzes. */
+  .home-hero {
+    background-image: radial-gradient(circle at 80% 10%, rgba(205,238,250,.58), transparent 34%), linear-gradient(180deg, #fff 0%, #f6fcff 100%);
+  }
+  .home-hero-kicker { display: inline-flex; align-items: center; gap: .6rem; }
+  .home-hero-dot { width: .55rem; height: .55rem; border-radius: 999px; background: var(--rood); box-shadow: 0 0 0 5px rgba(11,147,202,.12); }
+  .home-hero-facts { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); max-width: 34rem; border-top: 1px solid var(--linen); }
+  .home-hero-facts > div { padding: .8rem .9rem .2rem 0; border-right: 1px solid var(--linen); }
+  .home-hero-facts > div:not(:first-child) { padding-left: .9rem; }
+  .home-hero-facts > div:last-child { border-right: 0; }
+  .home-hero-facts dt { color: var(--grijs); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; }
+  .home-hero-facts dd { margin-top: .2rem; color: var(--navy-dark); font-family: var(--font-display); font-size: 1.05rem; }
+  .home-hero-image-wrap { position: relative; }
+  .home-hero-image { display: block; width: 100%; border-radius: 1.25rem; box-shadow: 0 18px 40px rgba(6,67,95,.14); }
+  .home-hero-image-label { position: absolute; left: 1rem; bottom: 1rem; background: rgba(6,67,95,.9); color: #fff; padding: .55rem .8rem; border-radius: .35rem; font-size: .78rem; font-weight: 600; letter-spacing: .02em; }
+  .home-quicklinks { background: #fff; border-block: 1px solid var(--linen); }
+  .home-quicklinks-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 1rem; }
+  .home-quicklink-card { display: block; background: var(--sand); border: 1px solid var(--linen); border-radius: .75rem; overflow: hidden; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+  .home-quicklink-card:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(6,67,95,.1); border-color: var(--sand-diep); }
+  .home-quicklink-card .beeld { border-radius: 0; }
+  .home-quicklink-body { display: grid; grid-template-columns: 1fr auto; gap: .15rem .6rem; padding: .8rem .85rem .9rem; }
+  .home-quicklink-body strong { color: var(--navy-dark); font-family: var(--font-display); font-size: 1.05rem; }
+  .home-quicklink-body small { color: var(--grijs); font-size: .82rem; }
+  .home-quicklink-body > span { grid-column: 2; grid-row: 1 / span 2; align-self: center; color: var(--navy); font-size: 1.2rem; transition: transform .2s ease; }
+  .home-quicklink-card:hover .home-quicklink-body > span { transform: translateX(3px); }
+  @media (max-width: 900px) { .home-quicklinks-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+  @media (max-width: 560px) {
+    .home-hero-facts { max-width: none; }
+    .home-hero-facts dd { font-size: .95rem; }
+    .home-quicklinks-grid { grid-template-columns: 1fr; gap: .8rem; }
+    .home-quicklink-card { display: grid; grid-template-columns: 7rem 1fr; }
+    .home-quicklink-card .beeld { height: 100%; }
+    .home-quicklink-card .beeld img { height: 100%; object-fit: cover; }
+  }
+
   /* ═══════════════════════════════════════════════════════════════════════════
      Redactionele bouwstenen
      ═══════════════════════════════════════════════════════════════════════════ */
