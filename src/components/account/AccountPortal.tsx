@@ -22,10 +22,17 @@ type MemberData = {
   user: Member | null;
   isAdmin?: boolean;
   studentApplication?: StudentApplication | null;
-  discountPass?: { code: string; displayCode: string; issuedAt: string; expiresAt: string | null } | null;
+  securityVerification?: { id: string; method: "email_code" | "student_status" | "in_person"; reason: string; pass_policy: "keep_active" | "suspend"; expires_at?: string | null } | null;
+  discountPass?: { displayCode: string; issuedAt: string; expiresAt: string | null } | null;
+  inactivePass?: { displayCode: string | null; issuedAt: string; expiresAt: string | null; status: "suspended" | "expired" } | null;
   newsletter?: string;
   wallet?: { google?: { available?: boolean }; apple?: { available?: boolean } };
 };
+
+function appContextHeaders(json = false) {
+  const standalone = typeof window !== "undefined" && (window.matchMedia("(display-mode: standalone)").matches || (window.navigator as Navigator & { standalone?: boolean }).standalone === true);
+  return { ...(json ? { "Content-Type": "application/json" } : {}), "X-SV-App-Context": standalone ? "standalone" : "browser" };
+}
 
 const translations = {
   nl: {
@@ -47,6 +54,8 @@ const translations = {
     send: "Verder",
     logout: "Uitloggen",
     reset: "Wachtwoord vergeten? Stuur een resetlink",
+    magicLogin: "Inloggen zonder wachtwoord via e-mail",
+    magicSent: "Als er een bevestigd account bij dit adres hoort, ontvangt u een eenmalige inloglink.",
     resend: "Nieuwe verificatiecodes sturen",
     studentTitle: "Studentenkorting aanvragen",
     studentInfo: "De 10% korting geldt voor Nederlandse en internationale studenten met een bevestigde schoolmail die een MBO-, HBO- of WO-opleiding volgen; middelbare school is uitgesloten. Na goedkeuring geldt de korting voor het hele assortiment. De korting is niet te combineren met andere acties. De pas is één studiejaar geldig.",
@@ -64,6 +73,7 @@ const translations = {
     pass: "Digitale studentenpas",
     passCode: "Laat deze code door een medewerker controleren",
     qrLabel: "QR-code van uw studentenpas",
+    qrRefreshing: "Beveiligde QR-code vernieuwen…",
     holder: "Studentenpas van",
     discount: "10% korting op het hele assortiment · niet combineerbaar met andere acties",
     unavailable: "De accountomgeving wordt nog gekoppeld. Probeer het later opnieuw.",
@@ -79,6 +89,12 @@ const translations = {
     appleWallet: "Toevoegen aan Apple Wallet",
     googleWallet: "Toevoegen aan Google Wallet",
     privacy: "Lees de voorlopige privacyinformatie over accounts, schoolmailverificatie en e-maildeals.",
+    securityTitle: "Extra controle nodig",
+    securityIntro: "Een beheerder heeft om een aanvullende controle gevraagd. Dit is geen beschuldiging; hieronder staat de concrete reden.",
+    securityCode: "Eenmalige code uit uw e-mail",
+    securityVerify: "Code controleren",
+    securitySchool: "Controleer uw schoolmail en volg de instructies om uw studentenstatus opnieuw te bevestigen.",
+    securityPerson: "Neem uw studentenpas mee naar onze winkel of kraam. Een medewerker rondt de controle daarna af.",
   },
   en: {
     title: "Your Schaap's account",
@@ -99,6 +115,7 @@ const translations = {
     send: "Continue",
     logout: "Log out",
     reset: "Forgot your password? Send a reset link",
+    magicLogin: "Sign in by email without a password", magicSent: "If a verified account exists for this address, you will receive a one-time sign-in link.",
     resend: "Resend verification codes",
     studentTitle: "Apply for the student discount",
     studentInfo: "The 10% discount is for Dutch and international students with a verified school email who attend an MBO, HBO or university programme; secondary school is not eligible. After approval, it applies to the entire range and cannot be combined with other offers. The pass is valid for one academic year.",
@@ -116,6 +133,7 @@ const translations = {
     pass: "Digital student pass",
     passCode: "Ask a staff member to verify this code",
     qrLabel: "QR code for your student pass",
+    qrRefreshing: "Refreshing secure QR code…",
     holder: "Student pass for",
     discount: "10% off the entire range · cannot be combined with other offers",
     unavailable: "The account area is still being connected. Please try again later.",
@@ -131,6 +149,7 @@ const translations = {
     appleWallet: "Add to Apple Wallet",
     googleWallet: "Add to Google Wallet",
     privacy: "Read the preliminary privacy information about accounts, school-email verification and email offers.",
+    securityTitle: "Extra verification required", securityIntro: "An administrator requested an additional check. This is not an accusation; the concrete reason is shown below.", securityCode: "One-time code from your email", securityVerify: "Verify code", securitySchool: "Check your school email and follow the instructions to reconfirm your student status.", securityPerson: "Bring your student pass to our shop or stall. A staff member will complete the check.",
   },
   de: {
     title: "Ihr Schaap's-Konto",
@@ -151,6 +170,7 @@ const translations = {
     send: "Weiter",
     logout: "Abmelden",
     reset: "Passwort vergessen? Link zum Zurücksetzen senden",
+    magicLogin: "Ohne Passwort per E-Mail anmelden", magicSent: "Wenn für diese Adresse ein bestätigtes Konto besteht, erhalten Sie einen einmaligen Anmeldelink.",
     resend: "Neue Bestätigungscodes senden",
     studentTitle: "Studentenrabatt beantragen",
     studentInfo: "Der Rabatt von 10 % gilt für niederländische und internationale Studierende mit bestätigter Schul-E-Mail in einer MBO-, HBO- oder Hochschulausbildung; weiterführende Schulen sind ausgeschlossen. Nach Freigabe gilt er für das gesamte Sortiment und ist nicht mit anderen Aktionen kombinierbar. Der Pass ist ein Studienjahr gültig.",
@@ -168,6 +188,7 @@ const translations = {
     pass: "Digitaler Studentenpass",
     passCode: "Lassen Sie diesen Code vom Personal prüfen",
     qrLabel: "QR-Code Ihres Studentenpasses",
+    qrRefreshing: "Sicheren QR-Code aktualisieren…",
     holder: "Studentenpass für",
     discount: "10 % Rabatt auf das gesamte Sortiment · nicht mit anderen Aktionen kombinierbar",
     unavailable: "Der Kontobereich wird noch angebunden. Bitte versuchen Sie es später erneut.",
@@ -183,6 +204,7 @@ const translations = {
     appleWallet: "Zu Apple Wallet hinzufügen",
     googleWallet: "Zu Google Wallet hinzufügen",
     privacy: "Lesen Sie die vorläufigen Datenschutzhinweise zu Konto, Schul-E-Mail-Bestätigung und E-Mail-Angeboten.",
+    securityTitle: "Zusätzliche Prüfung erforderlich", securityIntro: "Ein Administrator hat eine zusätzliche Prüfung angefordert. Dies ist keine Beschuldigung; der konkrete Grund steht unten.", securityCode: "Einmaliger Code aus Ihrer E-Mail", securityVerify: "Code prüfen", securitySchool: "Prüfen Sie Ihre Schul-E-Mail und folgen Sie den Hinweisen, um Ihren Studierendenstatus erneut zu bestätigen.", securityPerson: "Bringen Sie Ihren Studentenpass in unser Geschäft oder zum Stand. Ein Mitarbeiter schließt die Prüfung ab.",
   },
 } as const;
 
@@ -197,10 +219,11 @@ export function AccountPortal({ locale }: { locale: string }) {
   const [success, setSuccess] = useState(false);
   const [verificationPending, setVerificationPending] = useState(false);
   const [verificationEmail, setVerificationEmail] = useState("");
+  const [dynamicQr, setDynamicQr] = useState("");
 
   const refresh = useCallback(async () => {
     try {
-      const response = await fetch("/api/members/me", { credentials: "same-origin", cache: "no-store" });
+      const response = await fetch("/api/members/me", { credentials: "same-origin", cache: "no-store", headers: appContextHeaders() });
       // An unauthenticated visitor is a normal account state, not an offline
       // API. Keep the register/login form available when the Worker returns
       // its expected 401 with { user: null }.
@@ -222,7 +245,7 @@ export function AccountPortal({ locale }: { locale: string }) {
 
   useEffect(() => {
     let active = true;
-    fetch("/api/members/me", { credentials: "same-origin", cache: "no-store" })
+    fetch("/api/members/me", { credentials: "same-origin", cache: "no-store", headers: appContextHeaders() })
       .then(async (response) => {
         if (response.status === 401) return { user: null } as MemberData;
         if (!response.ok) throw new Error("members-unavailable");
@@ -237,6 +260,21 @@ export function AccountPortal({ locale }: { locale: string }) {
       });
     return () => { active = false; };
   }, [t.unavailable]);
+
+  useEffect(() => {
+    if (!data?.user || !data.discountPass) return;
+    let active = true;
+    const load = () => fetch("/api/members/pass/qr", { credentials: "same-origin", cache: "no-store", headers: appContextHeaders() })
+      .then(async (response) => {
+        if (!response.ok) throw new Error("qr-unavailable");
+        return await response.json() as { value: string };
+      })
+      .then((body) => { if (active) setDynamicQr(body.value); })
+      .catch(() => { if (active) setDynamicQr(""); });
+    void load();
+    const interval = window.setInterval(load, 90_000);
+    return () => { active = false; window.clearInterval(interval); };
+  }, [data?.user, data?.discountPass]);
 
   async function submitAuth(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -255,7 +293,7 @@ export function AccountPortal({ locale }: { locale: string }) {
       }
       const response = await fetch(`/api/members/${mode}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: appContextHeaders(true),
         credentials: "same-origin",
         body: JSON.stringify(body),
       });
@@ -297,7 +335,7 @@ export function AccountPortal({ locale }: { locale: string }) {
     setMessage("");
     try {
       const response = await fetch("/api/members/verify-codes", {
-        method: "POST", headers: { "Content-Type": "application/json" }, credentials: "same-origin",
+        method: "POST", headers: appContextHeaders(true), credentials: "same-origin",
         body: JSON.stringify({ email: verificationEmail, personalCode: fields.get("personalCode"), schoolCode: fields.get("schoolCode") }),
       });
       if (!response.ok) throw new Error("verification-failed");
@@ -309,6 +347,19 @@ export function AccountPortal({ locale }: { locale: string }) {
       setSuccess(false);
       setMessage(t.invalidCodes);
     } finally { setBusy(false); }
+  }
+
+  async function completeSecurityCheck(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const code = String(new FormData(event.currentTarget).get("code") || "");
+    setBusy(true); setMessage("");
+    try {
+      const response = await fetch("/api/members/security/verification", { method: "POST", credentials: "same-origin", headers: appContextHeaders(true), body: JSON.stringify({ code }) });
+      if (!response.ok) throw new Error("security-check");
+      setSuccess(true);
+      setMessage(language === "nl" ? "De extra e-mailcontrole is afgerond." : language === "de" ? "Die zusätzliche E-Mail-Prüfung ist abgeschlossen." : "The additional email check is complete.");
+      await refresh();
+    } catch { setSuccess(false); setMessage(t.genericError); } finally { setBusy(false); }
   }
 
   async function requestPasswordReset(event: FormEvent<HTMLFormElement>) {
@@ -324,6 +375,17 @@ export function AccountPortal({ locale }: { locale: string }) {
       setSuccess(false);
       setMessage(t.genericError);
     } finally { setBusy(false); }
+  }
+
+  async function requestMagicLogin(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const email = String(new FormData(event.currentTarget).get("email") || "");
+    setBusy(true);
+    try {
+      const response = await fetch("/api/members/magic-login", { method: "POST", credentials: "same-origin", headers: appContextHeaders(true), body: JSON.stringify({ email, locale: language }) });
+      if (!response.ok) throw new Error("magic-login");
+      setSuccess(true); setMessage(t.magicSent);
+    } catch { setSuccess(false); setMessage(t.genericError); } finally { setBusy(false); }
   }
 
   async function resendVerification(event: FormEvent<HTMLFormElement>) {
@@ -396,8 +458,17 @@ export function AccountPortal({ locale }: { locale: string }) {
                 <a href={`/${language}/beheer/emaildeals`} className="font-semibold text-sky-800 underline underline-offset-4">{language === "nl" ? "E-mailcampagnes" : language === "de" ? "E-Mail-Kampagnen" : "Email campaigns"} →</a>
                 <a href={`/${language}/beheer/klanten`} className="font-semibold text-sky-800 underline underline-offset-4">{language === "nl" ? "Klantaccounts" : language === "de" ? "Kundenkonten" : "Customer accounts"} →</a>
                 <a href={`/${language}/beheer/overzicht`} className="font-semibold text-sky-800 underline underline-offset-4">{language === "nl" ? "Website-statistieken" : language === "de" ? "Website-Statistiken" : "Website analytics"} →</a>
+                <a href={`/${language}/beheer/beveiliging`} className="font-semibold text-sky-800 underline underline-offset-4">{language === "nl" ? "Studentenpas Beveiliging" : language === "de" ? "Studentenpass-Sicherheit" : "Student pass security"} →</a>
               </div>
             </nav>}
+
+            {data.securityVerification && <section className="rounded-2xl border border-amber-300 bg-amber-50 p-6" aria-labelledby="security-verification-title">
+              <h2 id="security-verification-title" className="font-display text-2xl font-bold text-slate-950">{t.securityTitle}</h2>
+              <p className="mt-2 leading-relaxed">{t.securityIntro}</p>
+              <p className="mt-3 rounded-lg bg-white/70 p-3 font-semibold">{data.securityVerification.reason}</p>
+              {data.securityVerification.pass_policy === "suspend" && <p className="mt-3 text-sm font-bold">{language === "nl" ? "Uw kortingspas is tijdens deze controle tijdelijk niet geldig." : language === "de" ? "Ihr Rabattpass ist während dieser Prüfung vorübergehend ungültig." : "Your discount pass is temporarily invalid during this check."}</p>}
+              {data.securityVerification.method !== "in_person" ? <><p className="mt-4 font-semibold">{data.securityVerification.method === "student_status" ? t.securitySchool : null}</p><form onSubmit={completeSecurityCheck} className="mt-5 flex flex-wrap items-end gap-3"><label className="text-sm font-bold">{data.securityVerification.method === "student_status" ? t.schoolCode : t.securityCode}<input name="code" required inputMode="numeric" pattern="[0-9]{6}" maxLength={6} autoComplete="one-time-code" className="mt-1 block rounded-lg border border-amber-300 bg-white px-3 py-2.5 tracking-[.25em]" /></label><button disabled={busy} className="knop knop-navy">{t.securityVerify}</button></form></> : <p className="mt-4 font-semibold">{t.securityPerson}</p>}
+            </section>}
 
             {data.studentApplication?.status === "pending" && <p className="rounded-xl border border-amber-300 bg-amber-50 p-5">{t.pending}</p>}
             {data.studentApplication?.status === "approved" && data.discountPass && (
@@ -413,7 +484,7 @@ export function AccountPortal({ locale }: { locale: string }) {
                     <p className="mt-7 text-6xl font-bold tracking-tight">10<span className="text-4xl">%</span></p>
                     <p className="mt-3 max-w-64 text-sm leading-relaxed text-sky-100">{t.discount}</p>
                   </div>
-                  <PassQrCode value={data.discountPass.displayCode} label={t.qrLabel} />
+                  {dynamicQr ? <PassQrCode value={dynamicQr} label={t.qrLabel} /> : <div role="status" className="grid size-40 place-items-center rounded-xl bg-white/95 p-4 text-center text-sm font-semibold text-sky-950">{t.qrRefreshing}</div>}
                 </div>
                 <p className="mt-8 border-t border-white/20 pt-4 text-xs uppercase tracking-widest text-sky-100">{t.passCode}</p>
                 <code className="mt-2 block rounded-lg bg-black/20 p-3 text-center font-mono text-xl font-bold tracking-[0.14em]">{data.discountPass.displayCode}</code>
@@ -434,7 +505,8 @@ export function AccountPortal({ locale }: { locale: string }) {
                 </form>}
               </div>
             )}
-            {data.studentApplication?.status === "approved" && !data.discountPass && <p className="rounded-xl border border-amber-300 bg-amber-50 p-5">{t.expired}</p>}
+            {data.studentApplication?.status === "approved" && !data.discountPass && data.inactivePass && <div className="overflow-hidden rounded-3xl border-2 border-slate-300 bg-slate-100 p-7 text-slate-700 shadow-sm sm:p-10"><div className="flex items-start justify-between gap-4"><div><p className="text-xs font-bold uppercase tracking-[0.24em]">Schaap&apos;s Vishandel</p><p className="mt-2 font-display text-3xl font-bold">{data.user.name}</p></div><span className="rounded-full bg-slate-800 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white">{data.inactivePass.status === "suspended" ? (language === "nl" ? "Tijdelijk geblokkeerd" : language === "de" ? "Vorübergehend gesperrt" : "Temporarily blocked") : (language === "nl" ? "Ongeldig" : language === "de" ? "Ungültig" : "Invalid")}</span></div><p className="mt-8 text-5xl font-bold opacity-50">10%</p>{data.inactivePass.displayCode && <code className="mt-6 block rounded-lg bg-white p-3 text-center font-mono text-lg font-bold tracking-[0.12em]">{data.inactivePass.displayCode}</code>}<p className="mt-4 text-sm">{t.expired}</p></div>}
+            {data.studentApplication?.status === "approved" && !data.discountPass && !data.inactivePass && <p className="rounded-xl border border-amber-300 bg-amber-50 p-5">{t.expired}</p>}
             {data.studentApplication?.status === "rejected" && <p className="rounded-xl border border-rose-200 bg-rose-50 p-5">{t.rejected}</p>}
 
             {!data.isAdmin && data.studentApplication?.status !== "pending" && (data.studentApplication?.status !== "approved" || !data.discountPass) && (
@@ -475,6 +547,7 @@ export function AccountPortal({ locale }: { locale: string }) {
                 {mode === "register" && <label className="flex items-start gap-2 text-sm leading-relaxed"><input type="checkbox" name="marketingConsent" className="mt-1 size-4 shrink-0 accent-sky-700" /><span>{t.optionalOffers}</span></label>}
                 <button type="submit" disabled={busy} className="knop knop-navy w-full disabled:opacity-60">{busy ? "…" : mode === "login" ? t.login : t.register}</button>
               </form>
+              {mode === "login" && <form onSubmit={requestMagicLogin} className="mt-5 space-y-2"><label className="block text-xs font-medium text-slate-600">{t.email}<input name="email" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2" /></label><button className="text-sm font-semibold text-sky-800 underline underline-offset-4">{t.magicLogin}</button></form>}
               <form onSubmit={requestPasswordReset} className="mt-5 space-y-2"><label className="block text-xs font-medium text-slate-600">{t.email}<input name="email" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2" /></label><button className="text-sm font-semibold text-sky-800 underline underline-offset-4">{t.reset}</button></form>
               {message === t.resend && <form onSubmit={resendVerification} className="mt-3 space-y-2"><label className="block text-xs font-medium text-slate-600">{t.email}<input name="email" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2" /></label><button className="text-sm font-semibold text-sky-800 underline underline-offset-4">{t.resend}</button></form>}
               {message && <p role="status" aria-live="polite" className={`mt-4 text-sm ${success ? "text-emerald-800" : "text-red-800"}`}>{message}</p>}

@@ -1,6 +1,6 @@
 # Schaap's Vishandel — voortgang
 
-Laatst bijgewerkt: 31 oktober 2026, Europe/Amsterdam
+Laatst bijgewerkt: 1 november 2026, Europe/Amsterdam
 
 ## Afgerond en gecontroleerd
 
@@ -31,11 +31,13 @@ Laatst bijgewerkt: 31 oktober 2026, Europe/Amsterdam
 - PR #58 is samengevoegd naar `main`. De homepage bevat nu Feestdagen 2026 in Schaap's-huisstijl, met duidelijke routes naar visschalen, gourmet en relatiegeschenken. Er zijn aparte gelokaliseerde pagina's voor `/feestdagen` en `/relatiegeschenken`, plus navigatie-, footer-, seizoensbanner- en sitemapkoppelingen. De opbouw gebruikt bruikbare categorie- en servicemodellen uit de markt, maar alle teksten zijn origineel en alle beelden komen uit de eigen projectbibliotheek; concurrentenmateriaal is niet gekopieerd.
 - De nieuwe homepage en beide pagina's zijn op desktop en 390×844 mobiel gecontroleerd. ESLint, contentintegriteit, de volledige productiebuild en GitHub main-build #198 slagen. De echte homepage, Feestdagen-route, navigatie, footer en productlinks zijn na de uitrol op `schaapsvishandel.nl` gecontroleerd.
 - `docs/wallet-integratieplan.md` bevat nu de concrete stappen voor Apple- en Google-onboarding, de veilige overdracht van certificaten/sleutels en de actuele kostencontext. Apple vermeldt USD 99 per jaar; Google vermeldt in de Wallet-onboarding geen afzonderlijk issuer-abonnement.
+- PR #60 is samengevoegd naar `main`. De Feestdagenpagina heeft een mobiele uitgelicht-carousel, compact productraster, een luxe vistrio zonder sushi, herstelde garnalen- en warmgerookte-zalmbeelden en een duidelijk seizoensaccent in desktop- en mobiele navigatie. Exacte verkoopprijzen blijven bewust voorlopig totdat de eigenaar ze aanlevert.
+- De relatiegeschenkenpagina is live uitgebreid met zes originele geschenkideeën, aanvraagroutes en een project-eigen AI-voorbeeldbeeld van een Schaap's-zalmpakket met het echte ronde logo. Prompt, bronbeeld en beperkingen zijn vastgelegd in `docs/image-generation-2026-09-29.md`. De echte routes `/nl/feestdagen` en `/nl/relatiegeschenken` zijn na de uitrol op `schaapsvishandel.nl` gecontroleerd.
 
 ## Eerstvolgende werkpakketten
 
-1. Het feestdagenwerkpakket met mobiele uitgelicht-carousel, compact productraster, herkenbare headeraccenten, herstelde garnalen- en warmgerookte-zalmbeelden en de uitgebreide relatiegeschenkenpagina is lokaal gebouwd en op desktop en 390×844 gecontroleerd. Voor de relatiegeschenkenpagina is een nieuw project-eigen AI-voorbeeldbeeld met Schaap’s-logo gemaakt; prompt en beperkingen staan in `docs/image-generation-2026-09-29.md`. Nog uitrollen via PR en live verifiëren.
-2. Daarna de aangeleverde studentenpas-fraudebeveiliging uitvoeren: bestaande sessies en QR-stroom inventariseren, risicosignalen en beheerdashboard ontwerpen, migraties/API/UI/tests in aparte veilige PR’s uitrollen. Een gezichts-/pasfoto-optie blijft standaard uit totdat doelbinding, bewaartermijn, grondslag, toegang en een gelijkwaardig niet-foto-alternatief apart zijn vastgesteld.
+1. De studentenpas-fraudebeveiliging staat lokaal compleet op branch `codex/studentenpas-fraudebeveiliging`: migratie 0017, 365-dagen-capabele herroepbare sessies, privacyvriendelijke apparaatherkenning, transparante risicosignalen, gegroepeerde meldingen, beheeracties met auditlog, extra verificatie, dynamische eenmalige twee-minuten-QR, handmatige code, beheerpagina en privacytekst. De integratietest dekt Safari/PWA-opslag, cookieverwijdering/nieuwe installatie, meerdere apparaten die de pas openen, ingetrokken sessie en installatie, schorsen/herstellen, e-mail- en schoolmailcontrole, rate limiting, verlopen/gekopieerde QR en onbevoegde beheertoegang. Fotoverificatie is bewust niet gebouwd.
+2. Voor uitrol eerst de volledige build en laatste codecontrole afronden, daarna migratie 0017 op preview-D1 toepassen, preview-Worker deployen en live testen. Pas daarna 0017 op productie-D1 toepassen en de productie-Worker deployen. De Cloudflare-MCP-koppeling in deze chat heeft nog geen toegang tot account Schaapsvis; gebruik de geautoriseerde Schaapsvis-dashboard/CLI-sessie en nooit het andere account.
 3. Google Wallet issuer/serviceaccount en Generic Pass Class door de eigenaar aanmaken, de vier vereiste waarden als Cloudflare-vars/secrets instellen en één echte installatie- en intrekkingstest uitvoeren.
 4. Apple Wallet activeren zodra het Apple Developer-account, Pass Type ID, certificaat, privésleutel en WWDR-certificaat beschikbaar zijn; daarna APNs-updatepush en één echte installatie- en intrekkingstest uitvoeren. De servercode en het updateprotocol staan klaar; de exacte eigenaarstappen staan in `docs/wallet-integratieplan.md`.
 

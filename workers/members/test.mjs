@@ -5,6 +5,15 @@ import { DatabaseSync } from "node:sqlite";
 import { unzipSync } from "fflate";
 import memberWorker from "./src/index.mjs";
 
+const testBase64url = (bytes) => Buffer.from(bytes).toString("base64url");
+async function testHmac(secret, value) {
+  const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  return testBase64url(new Uint8Array(await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(value))));
+}
+async function testDigest(value) {
+  return testBase64url(new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value))));
+}
+
 // The local WebCrypto implementation accepts iteration counts production
 // Workers reject. Simulate the production cap for every auth flow in this test.
 const deriveBits = crypto.subtle.deriveBits.bind(crypto.subtle);
@@ -31,6 +40,7 @@ const simplifiedStudentSignupMigration = await readFile(new URL("../../migration
 const studentPassDisplayCodeMigration = await readFile(new URL("../../migrations/0014_student_pass_display_code.sql", import.meta.url), "utf8");
 const studentWalletPassesMigration = await readFile(new URL("../../migrations/0015_student_wallet_passes.sql", import.meta.url), "utf8");
 const appleWalletUpdatesMigration = await readFile(new URL("../../migrations/0016_apple_wallet_updates.sql", import.meta.url), "utf8");
+const studentPassSecurityMigration = await readFile(new URL("../../migrations/0017_student_pass_security.sql", import.meta.url), "utf8");
 const pemFixture = async (name, label) => {
   const der = (await readFile(new URL(`./test-fixtures/apple/${name}.der.b64.txt`, import.meta.url), "utf8")).trim();
   return `-----BEGIN ${label}-----\n${der.match(/.{1,64}/g).join("\n")}\n-----END ${label}-----`;
@@ -64,10 +74,12 @@ upgradeDb.exec(simplifiedStudentSignupMigration);
 upgradeDb.exec(studentPassDisplayCodeMigration);
 upgradeDb.exec(studentWalletPassesMigration);
 upgradeDb.exec(appleWalletUpdatesMigration);
+upgradeDb.exec(studentPassSecurityMigration);
 assert.equal(upgradeDb.prepare("SELECT application_id FROM student_passes WHERE id='legacy-pass'").get().application_id, "legacy-application", "migration associates existing student passes with their approved application");
 assert.equal(upgradeDb.prepare("SELECT display_code FROM student_passes WHERE id='legacy-pass'").get().display_code, null, "legacy pass receives its display code lazily");
 assert.equal(upgradeDb.prepare("SELECT COUNT(*) AS count FROM student_wallet_passes").get().count, 0, "wallet migration preserves passes and starts with an empty issuance ledger");
 assert.equal(upgradeDb.prepare("SELECT COUNT(*) AS count FROM apple_wallet_registrations").get().count, 0, "Apple Wallet update migration starts without device registrations");
+assert.equal(upgradeDb.prepare("SELECT new_device_warning_count FROM security_settings WHERE id=1").get().new_device_warning_count, 3, "security migration installs conservative configurable defaults");
 upgradeDb.close();
 const sqlite = new DatabaseSync(":memory:");
 sqlite.exec(schema);
@@ -86,6 +98,7 @@ sqlite.exec(simplifiedStudentSignupMigration);
 sqlite.exec(studentPassDisplayCodeMigration);
 sqlite.exec(studentWalletPassesMigration);
 sqlite.exec(appleWalletUpdatesMigration);
+sqlite.exec(studentPassSecurityMigration);
 let simulateApplicationCommitFailure = false;
 let decisionReadBarrier = null;
 
@@ -173,6 +186,17 @@ async function call(path, { method = "GET", body, cookie = "", contentType, head
     requestBody = JSON.stringify(body);
   }
   return memberWorker.fetch(new Request(`${env.SITE_ORIGIN}${path}`, { method, headers, body: requestBody }), env);
+}
+
+function responseCookie(response, name) {
+  const values = typeof response.headers.getSetCookie === "function"
+    ? response.headers.getSetCookie()
+    : [response.headers.get("Set-Cookie") || ""];
+  for (const value of values.flatMap((entry) => entry.split(/,(?=\s*sv_)/))) {
+    const cookie = value.trim().split(";", 1)[0];
+    if (cookie.startsWith(`${name}=`)) return cookie;
+  }
+  return "";
 }
 
 const disabledHealth = await call("/api/members/health");
@@ -325,8 +349,28 @@ const login = await call("/api/members/login", {
 });
 assert.equal(login.status, 200);
 assert.doesNotMatch(login.headers.get("Set-Cookie"), /Domain=/i, "sessions use host-only cookies to isolate preview and production");
-const sessionCookie = login.headers.get("Set-Cookie").split(";")[0];
+assert.match(login.headers.get("Set-Cookie") || "", /Max-Age=31536000/, "member and device cookies can survive browser restarts for up to one year");
+const sessionCookie = responseCookie(login, "sv_member");
+const longSession = sqlite.prepare("SELECT device_id,last_seen_at,absolute_expires_at FROM sessions WHERE user_id=(SELECT id FROM users WHERE email='student@example.test') ORDER BY created_at DESC LIMIT 1").get();
+assert.ok(longSession.device_id, "login associates the server-side session with a random installation record");
+assert.ok(longSession.last_seen_at && longSession.absolute_expires_at, "long-lived sessions retain sliding and absolute expiry metadata");
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM member_devices WHERE user_id=(SELECT id FROM users WHERE email='student@example.test')").get().count >= 1, true, "a recognized member device is stored without a raw browser fingerprint");
 assert.equal((await call("/api/members/me", { cookie: sessionCookie })).status, 200);
+const magicMailOffset = sentEmails.length;
+assert.equal((await call("/api/members/magic-login", { method: "POST", body: { email: "student@example.test", locale: "nl" } })).status, 202, "a verified student can request a generic one-time sign-in response");
+assert.equal(sentEmails.length, magicMailOffset + 1, "the existing mail transport sends one magic sign-in link");
+const magicLink = sentEmails.at(-1).text.match(/https:\/\/[^\s]+/)?.[0];
+assert.ok(magicLink, "magic sign-in email contains a secure link");
+const magicUrl = new URL(magicLink);
+assert.equal((await call(`${magicUrl.pathname}${magicUrl.search}`)).status, 200, "unused magic sign-in links open a confirmation page");
+const magicForm = new FormData(); magicForm.set("token", magicUrl.searchParams.get("token")); magicForm.set("locale", "nl");
+const magicConfirm = await call("/api/members/magic-login/confirm", { method: "POST", body: magicForm });
+assert.equal(magicConfirm.status, 303, "confirming a magic link creates a new long-lived revocable session");
+assert.match(magicConfirm.headers.get("Set-Cookie") || "", /sv_member=/);
+const magicSessionCookie = responseCookie(magicConfirm, "sv_member");
+const magicDeviceCookie = responseCookie(magicConfirm, "sv_device");
+assert.ok(magicSessionCookie && magicDeviceCookie, "magic login creates both a revocable session and a random installation cookie");
+assert.match(await (await call(`${magicUrl.pathname}${magicUrl.search}`)).text(), /verlopen/i, "one-time sign-in links cannot be reused after confirmation");
 assert.equal((await call("/api/members/admin/analytics?days=7", { cookie: sessionCookie, headers: { "CF-Connecting-IP": "198.51.100.5" } })).status, 403, "admin analytics requires the server-side IP allowlist");
 const analyticsReport = await call("/api/members/admin/analytics?days=7", { cookie: sessionCookie });
 assert.equal(analyticsReport.status, 200, "allowlisted admin can view aggregate analytics");
@@ -377,6 +421,7 @@ assert.equal((await call("/api/members/login", {
   body: { email: "student@example.test", password: "correct horse battery" },
   headers: { "CF-Connecting-IP": "203.0.113.99" },
 })).status, 429, "changing IP addresses cannot bypass the account-specific login limit");
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM security_events WHERE user_id=(SELECT id FROM users WHERE email='student@example.test') AND event_type='login_rate_limited'").get().count, 1, "an excessive account-specific login pattern creates one grouped explainable warning");
 
 const secondarySchoolForm = new FormData();
 secondarySchoolForm.set("institution", "Leidse middelbare school");
@@ -413,7 +458,8 @@ assert.equal((await decision.json()).proofDeleted, true, "proof-free application
 const account = await call("/api/members/me", { cookie: sessionCookie });
 const accountData = await account.json();
 const pass = accountData.discountPass;
-assert.ok(pass?.code);
+assert.ok(pass?.displayCode);
+assert.equal("code" in pass, false, "the account API no longer exposes a permanently reusable signed pass token");
 assert.equal(accountData.wallet.google.available, false, "Google Wallet stays hidden until every issuer credential is configured");
 assert.equal(accountData.wallet.apple.available, false, "Apple Wallet stays hidden until its signing flow is available");
 assert.match(pass?.displayCode || "", /^SV-[A-Z0-9]{4}-[A-Z0-9]{4}$/, "approved pass exposes a short staff lookup code");
@@ -421,14 +467,91 @@ assert.ok(pass.expiresAt, "an approved student pass expires after one study year
 const expectedPassExpiry = new Date(pass.issuedAt);
 expectedPassExpiry.setUTCFullYear(expectedPassExpiry.getUTCFullYear() + 1);
 assert.equal(pass.expiresAt, expectedPassExpiry.toISOString(), "pass expires exactly one calendar year after approval");
-const passCheck = await call("/api/members/admin/pass/verify", { method: "POST", cookie: sessionCookie, body: { code: pass.code } });
-const verifiedPass = await passCheck.json();
-assert.equal(verifiedPass.valid, true);
-assert.deepEqual(verifiedPass.eligibleProducts, ["assortiment"], "student discount applies to the entire assortment");
+const dynamicQrResponse = await call("/api/members/pass/qr", { cookie: sessionCookie });
+assert.equal(dynamicQrResponse.status, 200, "an approved member can request a short-lived QR token");
+const dynamicQr = await dynamicQrResponse.json();
+assert.match(dynamicQr.value, /^SVQ1\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/, "dynamic QR contains a versioned opaque signed token");
+assert.doesNotMatch(dynamicQr.value, /student@example|Test Student/, "dynamic QR never contains direct personal data");
+const secondStudentSession = magicSessionCookie;
+const secondStudentDevice = magicDeviceCookie;
+assert.ok(secondStudentSession && secondStudentDevice, "a second installation receives separate session and installation cookies");
+const secondStudentDeviceId = sqlite.prepare("SELECT device_id FROM sessions WHERE token_hash=?").get(await testDigest(secondStudentSession.split("=", 2)[1])).device_id;
+assert.equal((await call("/api/members/pass/qr", { cookie: secondStudentSession })).status, 200, "the same pass can be opened on a second authenticated device");
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM security_events WHERE user_id=(SELECT id FROM users WHERE email='student@example.test') AND event_type='concurrent_devices'").get().count, 1, "two devices opening the active pass close together create an explainable warning");
+const dynamicPassCheck = await call("/api/members/admin/pass/verify", { method: "POST", cookie: sessionCookie, body: { code: dynamicQr.value } });
+assert.equal((await dynamicPassCheck.json()).valid, true, "staff verification accepts a current server-signed dynamic QR");
+assert.equal((await (await call("/api/members/admin/pass/verify", { method: "POST", cookie: sessionCookie, body: { code: dynamicQr.value } })).json()).valid, false, "a copied dynamic QR cannot be used twice even inside its two-minute lifetime");
+const expiredPayload = testBase64url(new TextEncoder().encode(JSON.stringify({ p: sqlite.prepare("SELECT id FROM student_passes WHERE display_code=?").get(pass.displayCode).id, e: Date.now() - 1_000, n: "expired-test" })));
+const expiredQr = `SVQ1.${expiredPayload}.${await testHmac(env.PASS_SIGNING_KEY, `pass-qr:${expiredPayload}`)}`;
+assert.equal((await (await call("/api/members/admin/pass/verify", { method: "POST", cookie: sessionCookie, body: { code: expiredQr } })).json()).valid, false, "an expired copied QR token is rejected even with a valid signature");
+const legacyPassId = sqlite.prepare("SELECT id FROM student_passes WHERE display_code=?").get(pass.displayCode).id;
+const legacyPermanentCode = `${legacyPassId}.${await testHmac(env.PASS_SIGNING_KEY, legacyPassId)}`;
+assert.equal((await (await call("/api/members/admin/pass/verify", { method: "POST", cookie: sessionCookie, body: { code: legacyPermanentCode } })).json()).valid, false, "permanently reusable legacy signed pass codes are no longer accepted");
 const shortPassCheck = await call("/api/members/admin/pass/verify", { method: "POST", cookie: sessionCookie, body: { code: pass.displayCode.toLowerCase() } });
 const shortVerifiedPass = await shortPassCheck.json();
 assert.equal(shortVerifiedPass.valid, true, "staff can verify the short display code case-insensitively");
 assert.equal(shortVerifiedPass.name, "Test Student", "short-code lookup returns the pass holder name");
+assert.deepEqual(shortVerifiedPass.eligibleProducts, ["assortiment"], "student discount applies to the entire assortment");
+const securityOverview = await call("/api/members/admin/security", { cookie: sessionCookie });
+assert.equal(securityOverview.status, 200, "allowlisted administrators can open the student-pass security overview");
+const securityOverviewData = await securityOverview.json();
+assert.equal(securityOverviewData.settings.newDeviceWarningCount, 3, "the dashboard exposes the active explainable thresholds");
+const securityStudent = securityOverviewData.students.find((row) => row.email === "student@example.test");
+assert.ok(securityStudent, "the approved student appears in the security overview");
+const securityDetailResponse = await call(`/api/members/admin/security/${securityStudent.id}`, { cookie: sessionCookie });
+assert.equal(securityDetailResponse.status, 200);
+const securityDetail = await securityDetailResponse.json();
+assert.ok(securityDetail.devices.length >= 1, "the detail view explains registered installation records");
+assert.ok(securityDetail.events.some((event) => event.event_type === "new_device"), "new-device registration is visible as informational evidence");
+const secondDeviceRecord = securityDetail.devices.find((device) => device.id === secondStudentDeviceId && device.status === "active");
+assert.ok(secondDeviceRecord, "the second installation is available for an explicit administrator action");
+assert.equal((await call(`/api/members/admin/security/${securityStudent.id}`, { method: "POST", cookie: sessionCookie, body: { action: "device_revoked", deviceId: secondDeviceRecord.id } })).status, 200, "an administrator can revoke one device and its sessions");
+const replacementMailOffset = sentEmails.length;
+assert.equal((await call("/api/members/magic-login", { method: "POST", body: { email: "student@example.test", locale: "nl" } })).status, 202);
+assert.equal(sentEmails.length, replacementMailOffset + 1);
+const replacementLink = new URL(sentEmails.at(-1).text.match(/https:\/\/[^\s]+/)[0]);
+const replacementForm = new FormData(); replacementForm.set("token", replacementLink.searchParams.get("token")); replacementForm.set("locale", "nl");
+const reloginRevokedInstallation = await call("/api/members/magic-login/confirm", { method: "POST", cookie: secondStudentDevice, body: replacementForm });
+assert.equal(reloginRevokedInstallation.status, 303, "a fresh magic link can sign in again after a device revocation");
+assert.ok(responseCookie(reloginRevokedInstallation, "sv_device"), "a revoked installation is replaced with a fresh identifier rather than silently reactivated");
+assert.equal(sqlite.prepare("SELECT status FROM member_devices WHERE id=?").get(secondDeviceRecord.id).status, "revoked", "the revoked installation and its audit history remain revoked");
+const repeatedMailOffset = sentEmails.length;
+assert.equal((await call("/api/members/magic-login", { method: "POST", body: { email: "student@example.test", locale: "nl" } })).status, 202);
+assert.equal(sentEmails.length, repeatedMailOffset + 1);
+const repeatedLink = new URL(sentEmails.at(-1).text.match(/https:\/\/[^\s]+/)[0]);
+const repeatedForm = new FormData(); repeatedForm.set("token", repeatedLink.searchParams.get("token")); repeatedForm.set("locale", "nl");
+assert.equal((await call("/api/members/magic-login/confirm", { method: "POST", body: repeatedForm })).status, 303, "a genuinely new installation can still sign in without automatic blocking");
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM security_events WHERE user_id=? AND event_type='repeated_devices'").get(securityStudent.id).count, 1, "continued device additions after the first threshold are marked for manual review");
+assert.equal((await call("/api/members/admin/security/settings", { method: "POST", cookie: sessionCookie, body: { newDeviceWarningCount: 4, newDeviceWindowDays: 8, concurrentDeviceMinutes: 12, qrIssueLimit: 32, qrCheckLimit: 26 } })).status, 200, "administrators can adjust bounded detection thresholds");
+assert.equal(sqlite.prepare("SELECT new_device_warning_count FROM security_settings WHERE id=1").get().new_device_warning_count, 4);
+const openDeviceEvent = securityDetail.events.find((event) => event.event_type === "new_device" && event.status === "open");
+assert.equal((await call(`/api/members/admin/security/${securityStudent.id}`, { method: "POST", cookie: sessionCookie, body: { action: "event_marked_safe", eventId: openDeviceEvent.id } })).status, 200, "an administrator can resolve a concrete event as safe");
+const securityMailOffset = sentEmails.length;
+assert.equal((await call(`/api/members/admin/security/${securityStudent.id}`, { method: "POST", cookie: sessionCookie, body: { action: "verification_requested", method: "email_code", reason: "Onverwachte apparaatwissel handmatig controleren", passPolicy: "keep_active" } })).status, 200, "an administrator can request a one-time email verification without automatically blocking the pass");
+assert.equal(sentEmails.length, securityMailOffset + 1, "the verification request sends one clear transactional email");
+const securityCode = sentEmails.at(-1).text.match(/\b(\d{6})\b/)?.[1];
+assert.ok(securityCode, "the one-time security code is delivered through the existing mail transport");
+assert.equal((await (await call("/api/members/me", { cookie: sessionCookie })).json()).securityVerification.method, "email_code", "the pending request is visible in the student's account");
+assert.equal((await call("/api/members/security/verification", { method: "POST", cookie: sessionCookie, body: { code: securityCode } })).status, 200, "the student can complete the requested one-time email check");
+assert.equal(sqlite.prepare("SELECT status FROM security_verification_requests WHERE user_id=? ORDER BY created_at DESC LIMIT 1").get(securityStudent.id).status, "completed");
+const schoolSecurityMailOffset = sentEmails.length;
+assert.equal((await call(`/api/members/admin/security/${securityStudent.id}`, { method: "POST", cookie: sessionCookie, body: { action: "verification_requested", method: "student_status", reason: "Schoolmail opnieuw controleren voor geldigheid", passPolicy: "keep_active" } })).status, 200, "an administrator can ask the student to prove continued access to the verified school mailbox");
+assert.equal(sentEmails.length, schoolSecurityMailOffset + 1);
+assert.equal(sentEmails.at(-1).to, "student@university.example.test", "student-status verification is delivered to the verified school address, not the personal address");
+const schoolSecurityCode = sentEmails.at(-1).text.match(/\b(\d{6})\b/)?.[1];
+assert.equal((await call("/api/members/security/verification", { method: "POST", cookie: sessionCookie, body: { code: schoolSecurityCode } })).status, 200, "continued school-mail access completes the student-status check");
+assert.equal((await call(`/api/members/admin/security/${securityStudent.id}`, { method: "POST", cookie: sessionCookie, body: { action: "verification_requested", method: "email_code", reason: "Controleer begrenzing van foutieve verificatiecodes", passPolicy: "keep_active" } })).status, 200);
+for (let attempt = 0; attempt < 8; attempt++) {
+  assert.equal((await call("/api/members/security/verification", { method: "POST", cookie: sessionCookie, body: { code: "999999" } })).status, 400, "incorrect extra-verification codes are rejected inside the bounded attempt window");
+}
+assert.equal((await call("/api/members/security/verification", { method: "POST", cookie: sessionCookie, body: { code: "999999" } })).status, 429, "extra-verification codes are rate limited against guessing");
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM security_events WHERE user_id=? AND event_type='verification_rate_limited'").get(securityStudent.id).count, 1, "verification-code guessing creates one grouped explainable warning");
+const rateLimitedVerification = sqlite.prepare("SELECT id FROM security_verification_requests WHERE user_id=? AND status='pending' ORDER BY created_at DESC LIMIT 1").get(securityStudent.id);
+assert.equal((await call(`/api/members/admin/security/${securityStudent.id}`, { method: "POST", cookie: sessionCookie, body: { action: "verification_cancelled", verificationId: rateLimitedVerification.id } })).status, 200, "an administrator can close a pending verification request without restoring a pass");
+assert.equal((await call(`/api/members/admin/security/${securityStudent.id}`, { method: "POST", cookie: sessionCookie, body: { action: "pass_suspended" } })).status, 200, "an administrator can temporarily suspend a pass with an audit trail");
+assert.equal(sqlite.prepare("SELECT status FROM student_passes WHERE user_id=? ORDER BY issued_at DESC LIMIT 1").get(securityStudent.id).status, "suspended");
+assert.equal((await call(`/api/members/admin/security/${securityStudent.id}`, { method: "POST", cookie: sessionCookie, body: { action: "pass_restored" } })).status, 200, "an administrator can restore the pass manually");
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM security_admin_audit WHERE target_user_id=?").get(securityStudent.id).count >= 4, true, "all consequential security actions are audited");
 assert.equal((await call("/api/members/wallet/google", { method: "POST", cookie: sessionCookie })).status, 503, "Wallet issuance fails closed without issuer credentials");
 assert.equal((await call("/api/members/wallet/apple", { method: "POST", cookie: sessionCookie })).status, 503, "Apple Wallet issuance fails closed without its certificate chain");
 const walletKeys = generateKeyPairSync("rsa", { modulusLength: 2048 });
@@ -531,7 +654,9 @@ delete env.APPLE_WALLET_WWDR_CERT;
 delete env.APPLE_WALLET_PRIVATE_KEY;
 sqlite.prepare("UPDATE student_passes SET expires_at='2000-01-01T00:00:00.000Z' WHERE user_id=(SELECT id FROM users WHERE email='student@example.test')").run();
 const expiredAccount = await call("/api/members/me", { cookie: sessionCookie });
-assert.equal((await expiredAccount.json()).discountPass, null, "expired pass is no longer shown as usable");
+const expiredAccountData = await expiredAccount.json();
+assert.equal(expiredAccountData.discountPass, null, "expired pass is no longer shown as usable");
+assert.equal(expiredAccountData.inactivePass.status, "expired", "an expired pass remains visible as explicitly invalid without signing the student out");
 const renewalForm = new FormData();
 renewalForm.set("institution", "MBO Leiden");
 renewalForm.set("educationLevel", "mbo");
@@ -571,10 +696,10 @@ if (winningDecision === "rejected") {
 assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM student_passes WHERE user_id=(SELECT id FROM users WHERE email='student@example.test')").get().count, 2, "renewal preserves the old pass record and issues a new one");
 const renewedAccount = await call("/api/members/me", { cookie: sessionCookie });
 const renewedPass = (await renewedAccount.json()).discountPass;
-assert.ok(renewedPass?.code && renewedPass.code !== pass.code, "the account shows the new pass after renewal");
-const renewedCheck = await call("/api/members/admin/pass/verify", { method: "POST", cookie: sessionCookie, body: { code: renewedPass.code } });
+assert.ok(renewedPass?.displayCode && renewedPass.displayCode !== pass.displayCode, "the account shows the new pass after renewal");
+const renewedCheck = await call("/api/members/admin/pass/verify", { method: "POST", cookie: sessionCookie, body: { code: renewedPass.displayCode } });
 assert.equal((await renewedCheck.json()).valid, true, "the renewed pass verifies against its own approved application");
-const expiredPassCheck = await call("/api/members/admin/pass/verify", { method: "POST", cookie: sessionCookie, body: { code: pass.code } });
+const expiredPassCheck = await call("/api/members/admin/pass/verify", { method: "POST", cookie: sessionCookie, body: { code: pass.displayCode } });
 assert.equal((await expiredPassCheck.json()).valid, false, "the expired former pass cannot be used after renewal");
 
 const signupStart = await call("/api/members/newsletter/start", { method: "POST", body: { email: "staged-deals@example.test" } });
@@ -804,6 +929,13 @@ assert.equal((await (await call("/api/members/me", { cookie: ownerSession, heade
 assert.equal((await call("/api/members/admin/newsletter-campaigns", { cookie: ownerSession })).status, 200, "owner session and IP can manage email campaigns");
 assert.equal((await call("/api/members/admin/student-applications", { cookie: ownerSession })).status, 200, "owner session and IP can review student applications");
 assert.equal((await call("/api/members/admin/newsletter-campaigns", { cookie: ownerSession, headers: { "CF-Connecting-IP": "198.51.100.5" } })).status, 403, "owner session is not enough from an untrusted IP");
+const ownerStandaloneLogin = await call("/api/members/login", { method: "POST", headers: { "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Version/18.0 Mobile/15E148 Safari/604.1", "X-SV-App-Context": "standalone" }, body: { email: ownerDetails.email, password: retriedOwnerDetails.password } });
+assert.equal(ownerStandaloneLogin.status, 200, "the same account can authenticate separately in an installed iOS web-app context");
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM member_devices WHERE user_id=(SELECT id FROM users WHERE email='owner@example.test')").get().count, 2, "separate browser/PWA storage or deleted cookies produces a new installation record without accusing the user");
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM security_events WHERE user_id=(SELECT id FROM users WHERE email='owner@example.test') AND event_type='concurrent_devices'").get().count, 0, "merely signing in on Safari and an iOS web app does not accuse a user before both open a student pass");
+assert.equal((await call("/api/members/logout", { method: "POST", cookie: ownerSession })).status, 200);
+assert.equal((await call("/api/members/me", { cookie: ownerSession })).status, 401, "a revoked session cannot be reused");
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM security_events WHERE user_id=(SELECT id FROM users WHERE email='owner@example.test') AND event_type='revoked_session_attempt'").get().count, 1, "reuse of a revoked session is recorded as a high concrete security event");
 
-console.log("Account worker integration tests passed: email verification with immediate login, proof-free student applications, student pass renewal, newsletter single opt-in, campaign delivery, unsubscribe and daily quota recovery.");
+console.log("Account worker integration tests passed: long-lived revocable sessions, device recognition, dynamic QR security, manual verification, student passes, email and campaign flows.");
 
