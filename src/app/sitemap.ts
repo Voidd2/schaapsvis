@@ -3,6 +3,7 @@ import { blogPosts } from "@/lib/blog";
 import { products } from "@/lib/assortiment-data";
 import { recepten } from "@/lib/recepten";
 import { productPhoto } from "@/lib/product-beeld";
+import { FEESTDAGEN_PRODUCTEN } from "@/lib/feestdagen-producten";
 
 import { BEDRIJF } from "@/lib/bedrijf";
 import { LOCALES } from "@/lib/seo";
@@ -93,6 +94,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const pad = `/assortiment/${product.slug}`;
     for (const taal of LOCALES) {
       regels.push({url: `${basis}/${taal}${pad}`, lastModified: new Date("2026-09-29"), changeFrequency: "monthly", priority: 0.65, alternates: meertaligeAlternates(pad), images: productPhoto(product) ? [basis + productPhoto(product)!.src] : undefined});
+    }
+  }
+
+  // ── Feestdagenproducten ──────────────────────────────────────────────────
+  for (const product of FEESTDAGEN_PRODUCTEN) {
+    const pad = `/feestdagen/${product.slug}`;
+    for (const taal of LOCALES) {
+      regels.push({
+        url: `${basis}/${taal}${pad}`,
+        lastModified: new Date("2026-11-02"),
+        changeFrequency: "weekly",
+        priority: 0.72,
+        alternates: meertaligeAlternates(pad),
+        images: [`${basis}${product.afbeelding}`],
+      });
     }
   }
 

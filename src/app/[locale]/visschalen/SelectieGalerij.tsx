@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 
 export type SelectieGalerijKaart = {
@@ -12,6 +13,8 @@ export type SelectieGalerijKaart = {
   prijsTekst?: string;
   whatsappHref: string;
   whatsappLabel: string;
+  detailsHref?: string;
+  detailsLabel?: string;
 };
 
 type GalerijTekst = {
@@ -121,7 +124,10 @@ export function SelectieGalerij({ kaarten, tekst }: { kaarten: SelectieGalerijKa
         <div className="flex flex-1 flex-col p-5 pt-3">
           <h3 className="mb-2 text-[1.25rem]">{item.naam}</h3>
           {item.prijsTekst && <p className="mb-5 text-[#4d6370]">{item.prijsTekst}</p>}
-          <a className="knop knop-rood mt-auto" target="_blank" rel="noopener noreferrer" href={item.whatsappHref}>{item.whatsappLabel}</a>
+          <div className="mt-auto grid gap-2">
+            {item.detailsHref && item.detailsLabel && <Link className="knop knop-lijn" href={item.detailsHref}>{item.detailsLabel}</Link>}
+            <a className="knop knop-rood" target="_blank" rel="noopener noreferrer" href={item.whatsappHref}>{item.whatsappLabel}</a>
+          </div>
         </div>
       </li>)}
     </ul>

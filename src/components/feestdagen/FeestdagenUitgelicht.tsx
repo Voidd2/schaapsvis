@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
-import type { FeestProduct } from "@/lib/feestdagen";
+import { feestdagenPrijs, type FeestdagenProduct } from "@/lib/feestdagen-producten";
 
 type Props = {
   locale: string;
@@ -11,7 +11,7 @@ type Props = {
   title: string;
   hint: string;
   linkLabel: string;
-  products: readonly FeestProduct[];
+  products: readonly FeestdagenProduct[];
 };
 
 export function FeestdagenUitgelicht({ locale, label, title, hint, linkLabel, products }: Props) {
@@ -43,17 +43,17 @@ export function FeestdagenUitgelicht({ locale, label, title, hint, linkLabel, pr
         </div>
 
         <ul ref={rail} className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:gap-5" aria-label={title}>
-          {featured.map(([productTitle, text, image, alt, href, price], index) => (
-            <li key={productTitle} className="min-w-[84%] snap-start overflow-hidden rounded-xl bg-white shadow-lg sm:min-w-[47%] lg:min-w-[31.5%]">
-              <Link href={`/${locale}${href}`} className="group grid h-full grid-rows-[auto_1fr] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-[-4px] focus-visible:outline-[#ffd98b]">
+          {featured.map((product, index) => (
+            <li key={product.slug} className="min-w-[84%] snap-start overflow-hidden rounded-xl bg-white shadow-lg sm:min-w-[47%] lg:min-w-[31.5%]">
+              <Link href={`/${locale}/feestdagen/${product.slug}`} className="group grid h-full grid-rows-[auto_1fr] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-[-4px] focus-visible:outline-[#ffd98b]">
                 <div className="relative aspect-[16/10] overflow-hidden bg-[#eaf7fc]">
-                  <Image src={image} alt={alt} fill sizes="(max-width: 640px) 84vw, (max-width: 1024px) 47vw, 32vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.035]" priority={index === 0} />
+                  <Image src={product.afbeelding} alt={product.naam} fill sizes="(max-width: 640px) 84vw, (max-width: 1024px) 47vw, 32vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.035]" priority={index === 0} />
                   <span className="absolute left-3 top-3 rounded-full bg-[#b32632] px-3 py-1.5 text-[0.62rem] font-bold uppercase tracking-[0.14em] text-white">{label}</span>
                 </div>
                 <div className="flex flex-col p-5">
-                  <h3 className="text-[1.28rem] leading-tight" style={{ color: "var(--navy-dark)" }}>{productTitle}</h3>
-                  <p className="mt-2 line-clamp-2 text-sm leading-relaxed" style={{ color: "var(--charcoal)" }}>{text}</p>
-                  <p className="mt-4 text-sm font-bold" style={{ color: "#a61f2b" }}>{price}</p>
+                  <h3 className="text-[1.28rem] leading-tight" style={{ color: "var(--navy-dark)" }}>{product.naam}</h3>
+                  <p className="mt-2 line-clamp-2 text-sm leading-relaxed" style={{ color: "var(--charcoal)" }}>{product.intro}</p>
+                  <p className="mt-4 text-sm font-bold" style={{ color: "#a61f2b" }}>{feestdagenPrijs(product, locale)}</p>
                   <span className="mt-3 text-sm font-semibold underline underline-offset-4" style={{ color: "var(--navy)" }}>{linkLabel} →</span>
                 </div>
               </Link>

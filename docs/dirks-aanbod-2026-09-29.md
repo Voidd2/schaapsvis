@@ -4,7 +4,9 @@ Bron: openbare WooCommerce-productpagina's van Dirks Vishandel (zie `scripts/dir
 
 Dit is een **momentopname**, geen automatische prijskoppeling. Controleer inkoop, marge, btw, beschikbaarheid en prijs vóór definitieve klantbevestiging. De website toont richtprijzen en laat barbecue/gourmet, kreeft en dieetwensen via WhatsApp aanvragen. Visschalen en borrelboxen lopen via de bestaande schalen-aanvraag.
 
-Voorbeelden van Dirks-foto's staan lokaal in `public/images/dirks`; de website laadt ze niet van hun server. Gebruiksrechten zijn niet bevestigd. Vervang de foto's door eigen fotografie of verkrijg toestemming. Foto's zijn serveervoorbeelden; werkelijke inhoud kan afwijken.
+Voorbeelden van Dirks-foto's staan lokaal in `public/images/dirks`; de website laadt ze niet van hun server. Op 1 november 2026 verklaarde de eigenaar van Schaap's Vishandel in de projectchat dat Dirks toestemming heeft gegeven voor het gebruik van de beelden. Bewaar het schriftelijke bewijs en de precieze reikwijdte van die toestemming buiten de openbare repository. Foto's zijn serveervoorbeelden; werkelijke inhoud kan afwijken.
+
+**Latere prijsinstructie:** voor de 23 feestdagenproducten uit `src/lib/feestdagen-producten.ts` gelden vanaf 1 november 2026 de volledige bronprijzen, niet de eerdere 90%-richtprijzen uit deze historische tabel.
 
 | Product bij bron | Bronprijs | Onze richtprijs | Slug |
 | --- | ---: | ---: | --- |
