@@ -6,7 +6,7 @@ Deze Worker is de serverkant voor algemene accounts, e-mailbevestiging, wachtwoo
 
 - Gecontroleerd op 26 oktober 2026 in account **Schaapsvis**: `schaapsvis-members` is gedeployed op de productieroute `schaapsvishandel.nl/api/members/*`. De website zelf blijft een besloten preview; bezoekers zonder geldige toegang zien de binnenkort-pagina.
 - Productie `MEMBERS_ENABLED=on` is bedoeld voor deze afgeschermde preview. De Worker eist daarnaast de site-unlock-cookie of het door Cloudflare vastgestelde IP op de allowlist; bezoekers kunnen niet alleen door de API-URL te kennen registreren. Zet de toegangspoort niet open als onderdeel van deze preview.
-- De productie-Worker heeft D1 `schaapsvis-members` en de private EU-R2-bucket `schaapsvis-student-proofs`; migraties 0001 t/m 0015 zijn toegepast. Migratie 0015 en de bijbehorende Wallet-index zijn op 29 oktober 2026 rechtstreeks in productie geverifieerd. De R2-bucket blijft privé. Nieuwe aanvragen gebruiken de bevestigde schoolmail als bewijs en uploaden geen bestand meer; de bucket blijft alleen bestaan voor het opruimen van oudere bewijsbestanden.
+- De productie-Worker heeft D1 `schaapsvis-members` en de private EU-R2-bucket `schaapsvis-student-proofs`; migraties 0001 t/m 0016 zijn toegepast en rechtstreeks in productie geverifieerd. Migratie 0017 voor studentenpasbeveiliging staat nog niet in productie en moet vóór de bijbehorende Worker-code worden toegepast. De R2-bucket blijft privé. Nieuwe aanvragen gebruiken de bevestigde schoolmail als bewijs en uploaden geen bestand meer; de bucket blijft alleen bestaan voor het opruimen van oudere bewijsbestanden.
 - Cloudflare bevat de mailhost `khsm1.khsmserver1.nl`, poort 587, mailboxgebruiker `schaapsv` en een versleuteld `SMTP_PASSWORD`; ook auth-, ondertekenings- en site-access-secrets zijn ingesteld. Een rechtstreekse testmail via Knoth is op 27 oktober 2026 bij de eigenaar in Gmail aangekomen, maar in Spam geplaatst. Die dag bevestigde een no-send controle vanuit de gedeployde Worker de SMTP-aanmelding (`status: authenticated`, HTTP 200). De tijdelijke diagnostiek staat weer uit. Een volledige registratiemail is nog niet getest.
 - Beheerdermail en IP-allowlist zijn ingesteld voor `schaapsv@schaapsvishandel.nl` en de door de eigenaar opgegeven IP-adressen. De beheer-API blijft bovendien achter de site-access-gate.
 - De aparte Worker `schaapsvis-members-preview` met eigen D1/R2 bestaat nog, maar `preview.schaapsvishandel.nl` heeft geen DNS-record en die Worker staat uit. De actieve besloten preview gebruikt daarom de hoofdsitehost, zoals de eigenaar heeft toegestaan.
@@ -81,6 +81,40 @@ een productie-APNs-configuratie met het Apple Pass Type-certificaat.
 
 De integratietest met `npm run check:members` gebruikt eigen tijdelijke database- en e-mailmocks; daarvoor zijn geen Cloudflare-account, remote bindings of `.dev.vars` nodig.
 
+## Studentenpasbeveiliging uitrollen
+
+Migratie `0017_student_pass_security.sql` voegt herroepbare langlopende sessies,
+gehashte installatiekenmerken, uitlegbare beveiligingsgebeurtenissen,
+verificatieverzoeken, beheer-audit en eenmalige twee-minuten-QR-codes toe. De
+migratie is achterwaarts compatibel met de huidige Worker; de nieuwe Worker is
+zonder deze tabellen niet compatibel. Volg daarom altijd deze volgorde:
+
+1. voer alle lokale integratiechecks en de volledige sitebuild uit;
+2. pas 0017 eerst toe op `schaapsvis-members-preview` en controleer tabellen,
+   kolommen en standaarddrempels;
+3. deploy de preview-Worker en test login, eenmalige inloglink, dynamische QR,
+   intrekken, schorsen, extra verificatie en onbevoegde beheertoegang;
+4. pas daarna 0017 toe op `schaapsvis-members` productie;
+5. deploy de productie-Worker en controleer de echte healthcheck en één
+   gecontroleerde accountstroom.
+
+Gebruik bij een aangemelde Wrangler-installatie de expliciete omgeving:
+
+```powershell
+npx wrangler d1 migrations apply schaapsvis-members-preview --remote --config workers/members/wrangler.jsonc --env preview
+npx wrangler deploy --config workers/members/wrangler.jsonc --env preview
+npx wrangler d1 migrations apply schaapsvis-members --remote --config workers/members/wrangler.jsonc --env production
+npx wrangler deploy --config workers/members/wrangler.jsonc --env production
+```
+
+De beheerpagina staat op `/<taal>/beheer/beveiliging` en blijft dubbel
+afgeschermd door de bestaande beheer-e-maillijst én IP-allowlist. Een
+waarschuwing blokkeert nooit automatisch. Een ingetrokken installatie wordt bij
+een latere geldige login niet heractiveerd, maar vervangen door een nieuw
+installatiekenmerk. De browser ontvangt geen permanent ondertekend pastoken;
+alleen de dynamische QR of de zichtbare handmatige korte code wordt geaccepteerd.
+Gezichts- en identiteitsfoto's zijn bewust niet geïmplementeerd.
+
 ## Open bedrijfs- en privacykeuzes
 
 - De 10% studentenkorting geldt na goedkeuring voor het hele assortiment en is niet te combineren met nieuwsbriefkortingen of andere acties.
@@ -97,9 +131,9 @@ Twee afzonderlijke 6-cijferige codes moeten binnen 10 minuten worden ingevoerd;
 codes worden HMAC-gehasht, zijn eenmalig en rate limits begrenzen raden. De
 studentenaanvraag endpoint eist server-side dat beide adressen bevestigd zijn.
 Migraties 0006-0008 horen bij deze lokale wijzigingen. De volledige lokale
-migratiereeks loopt inmiddels door t/m 0016. Productie is gecontroleerd t/m
-0015; pas 0016 toe vóór de Apple-updatecode wordt uitgerold en pas de volledige
-reeks ook toe op iedere nieuw aangemaakte testomgeving.
+migratiereeks loopt inmiddels door t/m 0017. Productie is gecontroleerd t/m
+0016; pas 0017 toe vóór de studentenpasbeveiligingscode wordt uitgerold en pas
+de volledige reeks ook toe op iedere nieuw aangemaakte testomgeving.
 
 De klanteninschrijving bewaart eerst tijdelijk een e-maildraft, daarna kiest
 de klant regio en geeft apart expliciet toestemming. Alleen dubbelbevestigde

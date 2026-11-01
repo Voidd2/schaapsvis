@@ -2,7 +2,11 @@ import { Pass, SigningMaterial } from "passmint";
 import { APPLE_WALLET_ICON_2X } from "./wallet-assets.mjs";
 
 const COOKIE = "sv_member";
-const SESSION_MS = 30 * 24 * 60 * 60 * 1000;
+const DEVICE_COOKIE = "sv_device";
+const SESSION_IDLE_MS = 90 * 24 * 60 * 60 * 1000;
+const SESSION_ABSOLUTE_MS = 365 * 24 * 60 * 60 * 1000;
+const SESSION_REFRESH_AFTER_MS = 24 * 60 * 60 * 1000;
+const DYNAMIC_QR_MS = 2 * 60 * 1000;
 const EMAIL_TOKEN_MS = 60 * 60 * 1000;
 const VERIFICATION_CODE_MS = 10 * 60 * 1000;
 // Cloudflare Workers caps WebCrypto PBKDF2 at 100,000 iterations.
@@ -223,6 +227,12 @@ function redirect(location, headers = {}) {
   return new Response(null, { status: 303, headers: { Location: location, "Cache-Control": "no-store", ...headers } });
 }
 
+function redirectWithCookies(location, cookies) {
+  const headers = new Headers({ Location: location, "Cache-Control": "no-store" });
+  for (const cookie of cookies) headers.append("Set-Cookie", cookie);
+  return new Response(null, { status: 303, headers });
+}
+
 function cookieValue(request) {
   const cookie = request.headers.get("Cookie") || "";
   for (const part of cookie.split(";")) {
@@ -232,10 +242,24 @@ function cookieValue(request) {
   return "";
 }
 
-function sessionCookie(token, maxAge = 60 * 60 * 24 * 30) {
+function sessionCookie(token, maxAge = 60 * 60 * 24 * 365) {
   // Host-only cookies keep preview and production sessions isolated, even
   // when both hosts are subdomains of the same site.
   return `${COOKIE}=${token}; Path=/api/members; Max-Age=${maxAge}; HttpOnly; Secure; SameSite=Lax`;
+}
+
+function deviceCookie(token, maxAge = 60 * 60 * 24 * 365) {
+  return `${DEVICE_COOKIE}=${token}; Path=/api/members; Max-Age=${maxAge}; HttpOnly; Secure; SameSite=Lax`;
+}
+
+function jsonWithCookies(data, cookies, status = 200) {
+  const headers = new Headers({
+    "Content-Type": "application/json; charset=utf-8",
+    "Cache-Control": "no-store",
+    "X-Content-Type-Options": "nosniff",
+  });
+  for (const cookie of cookies) headers.append("Set-Cookie", cookie);
+  return new Response(JSON.stringify(data), { status, headers });
 }
 
 function sameOrigin(request, env) {
@@ -485,15 +509,45 @@ async function issueVerificationCode(env, { userId, email, purpose }) {
   return code;
 }
 
+async function issueMagicLoginToken(env, userId, ttlMs = 15 * 60 * 1000) {
+  const token = await randomToken();
+  const expiry = new Date(Date.now() + ttlMs).toISOString();
+  await env.DB.prepare(`INSERT INTO member_login_tokens (token_hash, user_id, created_at, expires_at) VALUES (?, ?, ?, ?)`)
+    .bind(await digest(token), userId, nowIso(), expiry).run();
+  return token;
+}
+
 async function sessionUser(request, env) {
   const token = cookieValue(request);
   if (!token) return null;
+  const tokenHash = await digest(token);
   const row = await env.DB.prepare(`
-    SELECT u.id, u.email, u.full_name, u.email_verified_at, u.account_status
+    SELECT u.id, u.email, u.full_name, u.email_verified_at, u.account_status,
+      s.revoked_at AS session_revoked_at, s.expires_at AS session_expires_at,
+      s.absolute_expires_at, s.last_seen_at, s.device_id
     FROM sessions s JOIN users u ON u.id = s.user_id
-    WHERE s.token_hash = ? AND s.revoked_at IS NULL AND s.expires_at > ?
-  `).bind(await digest(token), nowIso()).first();
-  if (!row || !row.email_verified_at || row.account_status !== "active") return null;
+    WHERE s.token_hash = ?
+  `).bind(tokenHash).first();
+  if (!row) return null;
+  if (row.session_revoked_at) {
+    await recordSecurityEvent(env, {
+      userId: row.id, deviceId: row.device_id, eventType: "revoked_session_attempt", severity: "high", riskPoints: 50,
+      reason: "Een eerder ingetrokken sessiecookie is opnieuw aangeboden.",
+    });
+    return null;
+  }
+  const now = nowIso();
+  if (row.session_expires_at <= now || (row.absolute_expires_at && row.absolute_expires_at <= now)) return null;
+  if (!row.email_verified_at || row.account_status !== "active") return null;
+  const lastSeen = Date.parse(row.last_seen_at || row.session_expires_at);
+  if (!Number.isFinite(lastSeen) || Date.now() - lastSeen > SESSION_REFRESH_AFTER_MS) {
+    const absolute = row.absolute_expires_at || row.session_expires_at;
+    const refreshed = new Date(Math.min(Date.now() + SESSION_IDLE_MS, Date.parse(absolute))).toISOString();
+    await env.DB.batch([
+      env.DB.prepare(`UPDATE sessions SET last_seen_at=?, expires_at=? WHERE token_hash=? AND revoked_at IS NULL`).bind(now, refreshed, tokenHash),
+      ...(row.device_id ? [env.DB.prepare(`UPDATE member_devices SET last_seen_at=? WHERE id=? AND status='active'`).bind(now, row.device_id)] : []),
+    ]);
+  }
   return row;
 }
 
@@ -620,13 +674,146 @@ async function adminCustomerStatus(request, env, customerId) {
   return json({ ok: true, status });
 }
 
-async function createSession(env, userId) {
+function normalizedClientLabel(value, fallback = "Onbekend") {
+  const cleaned = String(value || "").replace(/[\u0000-\u001f\u007f]/g, "").trim();
+  return (cleaned || fallback).slice(0, 80);
+}
+
+function clientDeviceInfo(request) {
+  const ua = String(request.headers.get("User-Agent") || "");
+  const mobileHint = String(request.headers.get("Sec-CH-UA-Mobile") || "");
+  const accessContext = request.headers.get("X-SV-App-Context") === "standalone" ? "standalone" : "browser";
+  const isTablet = /iPad|Tablet|PlayBook|Silk/i.test(ua) || (/Android/i.test(ua) && !/Mobile/i.test(ua));
+  const isPhone = mobileHint === "?1" || /iPhone|iPod|Android.*Mobile|Windows Phone/i.test(ua);
+  const deviceType = isTablet ? "tablet" : isPhone ? "smartphone" : ua ? "desktop" : "unknown";
+  const operatingSystem = /iPhone|iPad|iPod/i.test(ua) ? "iOS/iPadOS"
+    : /Android/i.test(ua) ? "Android"
+      : /Windows/i.test(ua) ? "Windows"
+        : /Mac OS X|Macintosh/i.test(ua) ? "macOS"
+          : /Linux/i.test(ua) ? "Linux" : "Onbekend";
+  const browser = /Edg\//i.test(ua) ? "Edge"
+    : /CriOS|Chrome\//i.test(ua) ? "Chrome"
+      : /FxiOS|Firefox\//i.test(ua) ? "Firefox"
+        : /Safari\//i.test(ua) ? "Safari" : "Onbekend";
+  // Browsers usually withhold a trustworthy model. Store it only when a
+  // standardized client hint is explicitly supplied, never infer it.
+  const modelHint = request.headers.get("Sec-CH-UA-Model");
+  return {
+    deviceType,
+    operatingSystem: normalizedClientLabel(operatingSystem),
+    browser: normalizedClientLabel(browser),
+    deviceModel: modelHint ? normalizedClientLabel(modelHint.replace(/^"|"$/g, ""), "") || null : null,
+    accessContext,
+  };
+}
+
+async function securitySettings(env) {
+  const row = await env.DB.prepare(`SELECT new_device_warning_count,new_device_window_days,concurrent_device_minutes,qr_issue_limit,qr_check_limit FROM security_settings WHERE id=1`).first();
+  return {
+    newDeviceWarningCount: Number(row?.new_device_warning_count || 3),
+    newDeviceWindowDays: Number(row?.new_device_window_days || 7),
+    concurrentDeviceMinutes: Number(row?.concurrent_device_minutes || 10),
+    qrIssueLimit: Number(row?.qr_issue_limit || 30),
+    qrCheckLimit: Number(row?.qr_check_limit || 25),
+  };
+}
+
+async function recordSecurityEvent(env, { userId, deviceId = null, eventType, severity, riskPoints, reason, context = {} }) {
+  const now = nowIso();
+  const existing = await env.DB.prepare(`SELECT id FROM security_events
+    WHERE user_id=? AND event_type=? AND COALESCE(device_id,'')=COALESCE(?, '') AND status='open'
+      AND last_occurred_at>? ORDER BY last_occurred_at DESC LIMIT 1`)
+    .bind(userId, eventType, deviceId, new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()).first();
+  const safeContext = JSON.stringify(context).slice(0, 1000);
+  if (existing?.id) {
+    await env.DB.prepare(`UPDATE security_events SET occurrence_count=occurrence_count+1,
+      last_occurred_at=?, severity=?, risk_points=MAX(risk_points, ?), reason=?, context_json=? WHERE id=?`)
+      .bind(now, severity, riskPoints, reason.slice(0, 300), safeContext, existing.id).run();
+    return existing.id;
+  }
+  const id = crypto.randomUUID();
+  await env.DB.prepare(`INSERT INTO security_events
+    (id,user_id,device_id,event_type,severity,risk_points,reason,context_json,first_occurred_at,last_occurred_at)
+    VALUES (?,?,?,?,?,?,?,?,?,?)`)
+    .bind(id, userId, deviceId, eventType, severity, riskPoints, reason.slice(0, 300), safeContext, now, now).run();
+  if (severity === "high" && isMailConfigured(env)) {
+    const adminEmail = String(env.ADMIN_EMAILS || "").split(",").map((value) => normalizeEmail(value)).find(Boolean);
+    if (adminEmail) {
+      const securityUrl = `${env.SITE_ORIGIN}/nl/beheer/beveiliging`;
+      try { await sendMail(env, adminEmail, "Nieuw hoog beveiligingssignaal studentenpas", `${reason}\nBekijk het beveiligingsoverzicht: ${securityUrl}`, actionEmail("nl", "Nieuw beveiligingssignaal", reason, "Open beveiligingsoverzicht", securityUrl)); }
+      catch { /* The dashboard remains the durable notification source. */ }
+    }
+  }
+  return id;
+}
+
+async function registerMemberDevice(request, env, userId) {
+  let installationToken = requestCookie(request, DEVICE_COOKIE);
+  let setCookie = false;
+  if (!/^[A-Za-z0-9_-]{32,100}$/.test(installationToken)) {
+    installationToken = await randomToken();
+    setCookie = true;
+  }
+  let installationHash = await hmac(env.AUTH_PEPPER, `member-device:${installationToken}`);
+  const info = clientDeviceInfo(request);
+  const now = nowIso();
+  let device = await env.DB.prepare(`SELECT id,status FROM member_devices WHERE user_id=? AND installation_hash=?`)
+    .bind(userId, installationHash).first();
+  // A revoked installation record is never silently revived. A later valid
+  // login receives a fresh installation identifier and remains explainable as
+  // a new device, while the revoked record and its audit history stay intact.
+  if (device?.status === "revoked") {
+    installationToken = await randomToken();
+    installationHash = await hmac(env.AUTH_PEPPER, `member-device:${installationToken}`);
+    setCookie = true;
+    device = null;
+  }
+  let isNew = false;
+  if (!device) {
+    isNew = true;
+    device = { id: crypto.randomUUID(), status: "active" };
+    await env.DB.prepare(`INSERT INTO member_devices
+      (id,user_id,installation_hash,device_type,operating_system,browser,device_model,access_context,first_seen_at,last_seen_at)
+      VALUES (?,?,?,?,?,?,?,?,?,?)`)
+      .bind(device.id, userId, installationHash, info.deviceType, info.operatingSystem, info.browser, info.deviceModel, info.accessContext, now, now).run();
+    await recordSecurityEvent(env, {
+      userId, deviceId: device.id, eventType: "new_device", severity: "info", riskPoints: 0,
+      reason: "Nieuw apparaat geregistreerd; dit is op zichzelf geen verdachte activiteit.",
+      context: { deviceType: info.deviceType, operatingSystem: info.operatingSystem, browser: info.browser, accessContext: info.accessContext },
+    });
+    const settings = await securitySettings(env);
+    const recent = await env.DB.prepare(`SELECT COUNT(*) AS count FROM member_devices WHERE user_id=? AND first_seen_at>?`)
+      .bind(userId, new Date(Date.now() - settings.newDeviceWindowDays * 24 * 60 * 60 * 1000).toISOString()).first();
+    const deviceRuleExemption = await env.DB.prepare(`SELECT 1 AS exempt FROM member_devices WHERE user_id=? AND rule_exemptions_json LIKE '%device_threshold%' LIMIT 1`).bind(userId).first();
+    if (!deviceRuleExemption && Number(recent?.count || 0) >= settings.newDeviceWarningCount) await recordSecurityEvent(env, {
+      userId, deviceId: device.id, eventType: "device_threshold", severity: "warning", riskPoints: 25,
+      reason: `Binnen ${settings.newDeviceWindowDays} dagen zijn minimaal ${settings.newDeviceWarningCount} nieuwe installatiekenmerken geregistreerd.`,
+      context: { recentDeviceCount: Number(recent?.count || 0), windowDays: settings.newDeviceWindowDays, threshold: settings.newDeviceWarningCount },
+    });
+    if (!deviceRuleExemption && Number(recent?.count || 0) >= settings.newDeviceWarningCount + 2) await recordSecurityEvent(env, {
+      userId, deviceId: device.id, eventType: "repeated_devices", severity: "warning", riskPoints: 35,
+      reason: "Na de eerste waarschuwing zijn opnieuw meerdere installatiekenmerken toegevoegd; handmatige controle wordt aanbevolen.",
+      context: { recentDeviceCount: Number(recent?.count || 0), windowDays: settings.newDeviceWindowDays, threshold: settings.newDeviceWarningCount + 2 },
+    });
+  } else {
+    await env.DB.prepare(`UPDATE member_devices SET device_type=?, operating_system=?, browser=?,
+      device_model=COALESCE(?,device_model), access_context=?, last_seen_at=?,status='active',revoked_at=NULL WHERE id=?`)
+      .bind(info.deviceType, info.operatingSystem, info.browser, info.deviceModel, info.accessContext, now, device.id).run();
+  }
+  return { id: device.id, status: device.status, info, installationToken, setCookie, isNew };
+}
+
+async function createSession(env, userId, request) {
   const token = await randomToken();
   const created = nowIso();
-  const expires = new Date(Date.now() + SESSION_MS).toISOString();
-  await env.DB.prepare(`INSERT INTO sessions (token_hash, user_id, created_at, expires_at) VALUES (?, ?, ?, ?)`)
-    .bind(await digest(token), userId, created, expires).run();
-  return token;
+  const expires = new Date(Date.now() + SESSION_IDLE_MS).toISOString();
+  const absoluteExpires = new Date(Date.now() + SESSION_ABSOLUTE_MS).toISOString();
+  const device = await registerMemberDevice(request, env, userId);
+  await env.DB.prepare(`INSERT INTO sessions
+    (token_hash,user_id,created_at,expires_at,device_id,last_seen_at,absolute_expires_at,access_context)
+    VALUES (?,?,?,?,?,?,?,?)`)
+    .bind(await digest(token), userId, created, expires, device.id, created, absoluteExpires, device.info.accessContext).run();
+  return { token, device };
 }
 
 function normalizeEmail(value) {
@@ -854,8 +1041,8 @@ async function verifyRegistrationCodes(request, env) {
     env.DB.prepare(`UPDATE email_tokens SET used_at=? WHERE user_id=? AND purpose IN ('verify_email','verify_school') AND used_at IS NULL`).bind(time, user.id),
     env.DB.prepare(`UPDATE newsletter_subscriptions SET status='subscribed', confirmed_at=COALESCE(confirmed_at, ?), unsubscribed_at=NULL, updated_at=? WHERE user_id=? AND email=? AND source='account-registration' AND status='pending'`).bind(time, time, user.id, user.email),
   ]);
-  const token = await createSession(env, user.id);
-  return json({ ok: true }, 200, { "Set-Cookie": sessionCookie(token) });
+  const session = await createSession(env, user.id, request);
+  return jsonWithCookies({ ok: true }, [sessionCookie(session.token), ...(session.device.setCookie ? [deviceCookie(session.device.installationToken)] : [])]);
 }
 
 async function verifyEmailPage(request, env) {
@@ -896,7 +1083,15 @@ async function login(request, env) {
   const password = typeof body?.password === "string" ? body.password : "";
   if (!email || password.length > 128) return json({ error: "invalid_credentials" }, 401);
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
-  if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "login", ip, email, 30, 8, 15 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
+  if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "login", ip, email, 30, 8, 15 * 60 * 1000)) {
+    const limitedUser = await env.DB.prepare(`SELECT id FROM users WHERE email=?`).bind(email).first();
+    if (limitedUser?.id) await recordSecurityEvent(env, {
+      userId: limitedUser.id, eventType: "login_rate_limited", severity: "warning", riskPoints: 30,
+      reason: "De limiet voor inlogpogingen op dit account is overschreden.",
+      context: { identityLimit: 8, windowMinutes: 15 },
+    });
+    return json({ error: "rate_limited" }, 429);
+  }
   const user = await env.DB.prepare(`SELECT id, email, password_hash, email_verified_at, account_status FROM users WHERE email = ?`).bind(email).first();
   // Always pay the PBKDF2 cost, including for missing or inactive accounts, to
   // avoid exposing account existence through login response timing.
@@ -904,8 +1099,8 @@ async function login(request, env) {
   const valid = Boolean(user && user.account_status === "active" && passwordMatches);
   if (!valid) return json({ error: "invalid_credentials" }, 401);
   if (!user.email_verified_at) return json({ error: "email_unverified", message: "Bevestig eerst uw e-mailadres." }, 403);
-  const token = await createSession(env, user.id);
-  return json({ ok: true }, 200, { "Set-Cookie": sessionCookie(token) });
+  const session = await createSession(env, user.id, request);
+  return jsonWithCookies({ ok: true }, [sessionCookie(session.token), ...(session.device.setCookie ? [deviceCookie(session.device.installationToken)] : [])]);
 }
 
 async function logout(request, env) {
@@ -915,6 +1110,49 @@ async function logout(request, env) {
   return json({ ok: true }, 200, { "Set-Cookie": sessionCookie("", 0) });
 }
 
+async function requestMagicLogin(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  if (!env.AUTH_PEPPER || !isMailConfigured(env)) return json({ error: "magic_login_unavailable" }, 503);
+  const body = await readJson(request);
+  const email = normalizeEmail(body?.email);
+  const locale = localeFrom(body?.locale);
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "magic-login", ip, email || "invalid", 12, 4, 60 * 60 * 1000)) return json({ ok: true }, 202);
+  const user = email ? await env.DB.prepare(`SELECT id,email FROM users WHERE email=? AND account_status='active' AND email_verified_at IS NOT NULL`).bind(email).first() : null;
+  if (user) {
+    await env.DB.prepare(`UPDATE member_login_tokens SET used_at=? WHERE user_id=? AND used_at IS NULL`).bind(nowIso(), user.id).run();
+    const token = await issueMagicLoginToken(env, user.id);
+    const link = emailUrl(env, "/api/members/magic-login/confirm", token, locale);
+    const subject = locale === "de" ? "Einmalig bei Schaap’s anmelden" : locale === "en" ? "Sign in to Schaap’s once" : "Eenmalig inloggen bij Schaap’s";
+    const intro = locale === "de" ? "Dieser sichere Link meldet Sie einmalig an und ist 15 Minuten gültig." : locale === "en" ? "This secure one-time sign-in link is valid for 15 minutes." : "Deze veilige eenmalige inloglink is 15 minuten geldig.";
+    try { await sendMail(env, user.email, subject, `${intro}\n${link}`, actionEmail(locale, subject, intro, locale === "de" ? "Anmelden" : locale === "en" ? "Sign in" : "Inloggen", link)); } catch { /* Keep the generic response. */ }
+  }
+  return json({ ok: true }, 202);
+}
+
+async function magicLoginPage(request, env) {
+  const locale = requestLocale(request);
+  const token = new URL(request.url).searchParams.get("token") || "";
+  const row = await env.DB.prepare(`SELECT token_hash FROM member_login_tokens WHERE token_hash=? AND used_at IS NULL AND expires_at>?`).bind(await digest(token), nowIso()).first();
+  if (!row) return accountResultPage(locale, "Inloglink verlopen", "Vraag vanuit uw accountpagina een nieuwe eenmalige inloglink aan.");
+  return accountMessage(locale, locale === "de" ? "Sicher anmelden" : locale === "en" ? "Sign in securely" : "Veilig inloggen", locale === "de" ? "Bestätigen Sie die einmalige Anmeldung." : locale === "en" ? "Confirm this one-time sign-in." : "Bevestig deze eenmalige aanmelding.", token, "/api/members/magic-login/confirm", locale === "de" ? "Anmelden" : locale === "en" ? "Sign in" : "Inloggen");
+}
+
+async function confirmMagicLogin(request, env) {
+  if (!sameOriginFormNavigation(request, env)) return json({ error: "origin" }, 403);
+  const parsed = await readLimitedFormData(request, 16_000);
+  if (!parsed.form) return json({ error: "invalid_form" }, 400);
+  const locale = localeFrom(parsed.form.get("locale"));
+  const token = String(parsed.form.get("token") || "");
+  const tokenHash = await digest(token);
+  const row = await env.DB.prepare(`SELECT t.user_id FROM member_login_tokens t JOIN users u ON u.id=t.user_id WHERE t.token_hash=? AND t.used_at IS NULL AND t.expires_at>? AND u.account_status='active' AND u.email_verified_at IS NOT NULL`).bind(tokenHash, nowIso()).first();
+  if (!row?.user_id) return accountResultPage(locale, "Inloglink verlopen", "Vraag vanuit uw accountpagina een nieuwe eenmalige inloglink aan.");
+  const consumed = await env.DB.prepare(`UPDATE member_login_tokens SET used_at=? WHERE token_hash=? AND used_at IS NULL`).bind(nowIso(), tokenHash).run();
+  if (Number(consumed?.meta?.changes || 0) !== 1) return accountResultPage(locale, "Inloglink verlopen", "Vraag vanuit uw accountpagina een nieuwe eenmalige inloglink aan.");
+  const session = await createSession(env, row.user_id, request);
+  return redirectWithCookies(`${env.SITE_ORIGIN}/${locale}/account?magic-login=1`, [sessionCookie(session.token), ...(session.device.setCookie ? [deviceCookie(session.device.installationToken)] : [])]);
+}
+
 async function me(request, env) {
   const user = await sessionUser(request, env);
   if (!user) return json({ user: null }, 401);
@@ -922,31 +1160,80 @@ async function me(request, env) {
   const allowedIps = String(env.ADMIN_IPS || "").split(",").map((ip) => ip.trim().toLowerCase()).filter(Boolean);
   const clientIp = String(request.headers.get("CF-Connecting-IP") || "").trim().toLowerCase();
   const isAdmin = allowedEmails.includes(user.email.toLowerCase()) && Boolean(clientIp && allowedIps.includes(clientIp));
-  const [application, pass] = await Promise.all([
+  const [application, pass, verification] = await Promise.all([
     env.DB.prepare(`SELECT status, education_level, institution, study_city, submitted_at, reviewed_at FROM student_applications WHERE user_id = ? ORDER BY submitted_at DESC LIMIT 1`).bind(user.id).first(),
-    env.DB.prepare(`SELECT p.id, p.status, p.display_code, p.issued_at, p.expires_at FROM student_passes p JOIN student_applications a ON a.id = p.application_id WHERE p.user_id = ? AND p.status = 'active' AND p.revoked_at IS NULL AND a.status = 'approved' ORDER BY a.reviewed_at DESC, p.issued_at DESC LIMIT 1`).bind(user.id).first(),
+    env.DB.prepare(`SELECT p.id,p.status,p.display_code,p.issued_at,p.expires_at,p.revoked_at,a.status AS application_status FROM student_passes p LEFT JOIN student_applications a ON a.id=p.application_id AND a.user_id=p.user_id WHERE p.user_id=? ORDER BY p.issued_at DESC LIMIT 1`).bind(user.id).first(),
+    env.DB.prepare(`SELECT id,method,reason,pass_policy,expires_at,created_at FROM security_verification_requests WHERE user_id=? AND status='pending' ORDER BY created_at DESC LIMIT 1`).bind(user.id).first(),
   ]);
   let discountPass = null;
-  if (pass && env.PASS_SIGNING_KEY && (!pass.expires_at || pass.expires_at > nowIso())) {
-    const code = `${pass.id}.${await hmac(env.PASS_SIGNING_KEY, pass.id)}`;
+  let inactivePass = null;
+  const passIsValid = pass?.status === "active" && !pass.revoked_at && pass.application_status === "approved" && (!pass.expires_at || pass.expires_at > nowIso());
+  if (pass && env.PASS_SIGNING_KEY && passIsValid) {
     const displayCode = pass.display_code || await passDisplayCode(env.PASS_SIGNING_KEY, pass.id);
     if (!pass.display_code) {
       try { await env.DB.prepare(`UPDATE student_passes SET display_code = ? WHERE id = ? AND display_code IS NULL`).bind(displayCode, pass.id).run(); } catch { /* A later account request retries persistence. */ }
     }
-    discountPass = { code, displayCode, issuedAt: pass.issued_at, expiresAt: pass.expires_at };
+    // The permanent legacy signed code is intentionally not returned to the
+    // browser. The visible QR is issued separately and expires after 2 minutes;
+    // the short display code remains the manual staff fallback.
+    discountPass = { displayCode, issuedAt: pass.issued_at, expiresAt: pass.expires_at };
+  } else if (pass) {
+    inactivePass = { displayCode: pass.display_code, issuedAt: pass.issued_at, expiresAt: pass.expires_at, status: pass.status === "suspended" ? "suspended" : "expired" };
   }
   const subscription = await env.DB.prepare(`SELECT status FROM newsletter_subscriptions WHERE email = ?`).bind(user.email).first();
   return json({
     user: { id: user.id, name: user.full_name, email: user.email },
     isAdmin,
     studentApplication: application || null,
+    securityVerification: verification || null,
     discountPass,
+    inactivePass,
     newsletter: subscription?.status || "not-subscribed",
     wallet: {
       google: { available: Boolean(discountPass && googleWalletConfig(env)) },
       apple: { available: Boolean(discountPass && appleWalletConfig(env)) },
     },
   });
+}
+
+async function dynamicPassQr(request, env) {
+  const user = await sessionUser(request, env);
+  if (!user) return json({ error: "authentication_required" }, 401);
+  if (!env.PASS_SIGNING_KEY || !env.AUTH_PEPPER) return json({ error: "pass_signing_unavailable" }, 503);
+  const pass = await env.DB.prepare(`SELECT p.id FROM student_passes p
+    JOIN student_applications a ON a.id=p.application_id AND a.user_id=p.user_id
+    WHERE p.user_id=? AND p.status='active' AND p.revoked_at IS NULL AND a.status='approved'
+      AND (p.expires_at IS NULL OR p.expires_at>?)
+    ORDER BY p.issued_at DESC LIMIT 1`).bind(user.id, nowIso()).first();
+  if (!pass) return json({ error: "active_student_pass_required" }, 409);
+  const settings = await securitySettings(env);
+  const limitKey = await hmac(env.AUTH_PEPPER, `pass-qr-issue:${user.id}`);
+  if (!await rateLimit(env.DB, limitKey, settings.qrIssueLimit, 5 * 60 * 1000)) {
+    await recordSecurityEvent(env, {
+      userId: user.id, deviceId: user.device_id, eventType: "qr_rate_limited", severity: "warning", riskPoints: 30,
+      reason: "De limiet voor het vernieuwen van een studentenpas-QR is overschreden.",
+      context: { limit: settings.qrIssueLimit, windowMinutes: 5 },
+    });
+    return json({ error: "rate_limited" }, 429);
+  }
+  if (user.device_id) {
+    const otherRecent = await env.DB.prepare(`SELECT COUNT(DISTINCT device_id) AS count FROM pass_qr_tokens
+      WHERE pass_id=? AND device_id IS NOT NULL AND device_id<>? AND issued_at>?`)
+      .bind(pass.id, user.device_id, new Date(Date.now() - settings.concurrentDeviceMinutes * 60 * 1000).toISOString()).first();
+    const concurrentRuleExemption = await env.DB.prepare(`SELECT 1 AS exempt FROM member_devices WHERE user_id=? AND rule_exemptions_json LIKE '%concurrent_devices%' LIMIT 1`).bind(user.id).first();
+    if (!concurrentRuleExemption && Number(otherRecent?.count || 0) > 0) await recordSecurityEvent(env, {
+      userId: user.id, deviceId: user.device_id, eventType: "concurrent_devices", severity: "warning", riskPoints: 20,
+      reason: "Twee verschillende installatiekenmerken hebben kort na elkaar de actieve studentenpas geopend.",
+      context: { windowMinutes: settings.concurrentDeviceMinutes, otherActiveDevices: Number(otherRecent?.count || 0) },
+    });
+  }
+  const expiresAt = Date.now() + DYNAMIC_QR_MS;
+  const payload = base64url(encoder.encode(JSON.stringify({ p: pass.id, e: expiresAt, n: base64url(crypto.getRandomValues(new Uint8Array(9))) })));
+  const signature = await hmac(env.PASS_SIGNING_KEY, `pass-qr:${payload}`);
+  const value = `SVQ1.${payload}.${signature}`;
+  await env.DB.prepare(`INSERT INTO pass_qr_tokens (token_hash,pass_id,device_id,issued_at,expires_at) VALUES (?,?,?,?,?)`)
+    .bind(await digest(value), pass.id, user.device_id || null, nowIso(), new Date(expiresAt).toISOString()).run();
+  return json({ value, expiresAt: new Date(expiresAt).toISOString() });
 }
 
 async function issueGoogleWalletPass(request, env) {
@@ -1405,6 +1692,194 @@ async function adminQueue(request, env) {
   return json({ applications: rows.results || [] });
 }
 
+function securityFilterClause(filter) {
+  if (filter === "suspicious") return "AND EXISTS (SELECT 1 FROM security_events e WHERE e.user_id=u.id AND e.status='open' AND e.severity IN ('warning','high'))";
+  if (filter === "verification") return "AND EXISTS (SELECT 1 FROM security_verification_requests v WHERE v.user_id=u.id AND v.status='pending')";
+  if (filter === "blocked") return "AND p.status='suspended'";
+  if (filter === "new-devices") return "AND EXISTS (SELECT 1 FROM member_devices d WHERE d.user_id=u.id AND d.first_seen_at>datetime('now','-7 days'))";
+  return "";
+}
+
+async function adminSecurityOverview(request, env) {
+  const admin = await requireAdmin(request, env);
+  if (!admin) return json({ error: "forbidden" }, 403);
+  const filter = new URL(request.url).searchParams.get("filter") || "all";
+  if (!["all", "suspicious", "verification", "blocked", "new-devices"].includes(filter)) return json({ error: "invalid_filter" }, 400);
+  const rows = await env.DB.prepare(`SELECT u.id,u.full_name,u.email,
+      COALESCE(p.status,'none') AS pass_status,p.expires_at,
+      (SELECT COUNT(*) FROM member_devices d WHERE d.user_id=u.id) AS device_count,
+      (SELECT COUNT(*) FROM sessions s WHERE s.user_id=u.id AND s.revoked_at IS NULL AND s.expires_at>?) AS active_session_count,
+      (SELECT COUNT(*) FROM member_devices d WHERE d.user_id=u.id AND d.first_seen_at>datetime('now','-7 days')) AS recent_device_count,
+      (SELECT COALESCE(SUM(e.risk_points),0) FROM security_events e WHERE e.user_id=u.id AND e.status='open') AS risk_score,
+      (SELECT COUNT(*) FROM security_events e WHERE e.user_id=u.id AND e.status='open' AND e.severity IN ('warning','high')) AS open_warning_count,
+      (SELECT COUNT(*) FROM security_verification_requests v WHERE v.user_id=u.id AND v.status='pending') AS pending_verification_count
+    FROM users u
+    JOIN student_applications a ON a.user_id=u.id AND a.status='approved'
+    LEFT JOIN student_passes p ON p.id=(SELECT p2.id FROM student_passes p2 WHERE p2.user_id=u.id ORDER BY p2.issued_at DESC LIMIT 1)
+    WHERE u.account_status='active' ${securityFilterClause(filter)}
+    GROUP BY u.id ORDER BY risk_score DESC,u.full_name ASC LIMIT 200`).bind(nowIso()).all();
+  return json({ students: rows.results || [], filter, settings: await securitySettings(env) });
+}
+
+async function updateSecuritySettings(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  const admin = await requireAdmin(request, env);
+  if (!admin) return json({ error: "forbidden" }, 403);
+  const body = await readJson(request);
+  const values = {
+    newDeviceWarningCount: Number(body?.newDeviceWarningCount),
+    newDeviceWindowDays: Number(body?.newDeviceWindowDays),
+    concurrentDeviceMinutes: Number(body?.concurrentDeviceMinutes),
+    qrIssueLimit: Number(body?.qrIssueLimit),
+    qrCheckLimit: Number(body?.qrCheckLimit),
+  };
+  if (!Number.isInteger(values.newDeviceWarningCount) || values.newDeviceWarningCount < 2 || values.newDeviceWarningCount > 10
+    || !Number.isInteger(values.newDeviceWindowDays) || values.newDeviceWindowDays < 1 || values.newDeviceWindowDays > 30
+    || !Number.isInteger(values.concurrentDeviceMinutes) || values.concurrentDeviceMinutes < 2 || values.concurrentDeviceMinutes > 120
+    || !Number.isInteger(values.qrIssueLimit) || values.qrIssueLimit < 5 || values.qrIssueLimit > 120
+    || !Number.isInteger(values.qrCheckLimit) || values.qrCheckLimit < 5 || values.qrCheckLimit > 120) return json({ error: "invalid_settings" }, 400);
+  await env.DB.prepare(`UPDATE security_settings SET new_device_warning_count=?,new_device_window_days=?,concurrent_device_minutes=?,qr_issue_limit=?,qr_check_limit=?,updated_at=?,updated_by=? WHERE id=1`)
+    .bind(values.newDeviceWarningCount, values.newDeviceWindowDays, values.concurrentDeviceMinutes, values.qrIssueLimit, values.qrCheckLimit, nowIso(), admin.id).run();
+  await securityAudit(env, admin.id, admin.id, "settings_updated", { detail: values });
+  return json({ ok: true, settings: values });
+}
+
+async function adminSecurityStudent(request, env, userId) {
+  const admin = await requireAdmin(request, env);
+  if (!admin) return json({ error: "forbidden" }, 403);
+  const student = await env.DB.prepare(`SELECT u.id,u.full_name,u.email,u.school_email,u.account_status,
+      p.id AS pass_id,p.status AS pass_status,p.expires_at AS pass_expires_at
+    FROM users u JOIN student_applications a ON a.user_id=u.id AND a.status='approved'
+    LEFT JOIN student_passes p ON p.id=(SELECT p2.id FROM student_passes p2 WHERE p2.user_id=u.id ORDER BY p2.issued_at DESC LIMIT 1)
+    WHERE u.id=? LIMIT 1`).bind(userId).first();
+  if (!student) return json({ error: "student_not_found" }, 404);
+  const [devices, sessions, events, verifications, audit] = await Promise.all([
+    env.DB.prepare(`SELECT id,device_type,operating_system,browser,device_model,access_context,display_name,status,rule_exemptions_json,first_seen_at,last_seen_at,revoked_at FROM member_devices WHERE user_id=? ORDER BY last_seen_at DESC`).bind(userId).all(),
+    env.DB.prepare(`SELECT token_hash AS session_key,device_id,created_at,last_seen_at,expires_at,absolute_expires_at,access_context,revoked_at FROM sessions WHERE user_id=? ORDER BY COALESCE(last_seen_at,created_at) DESC LIMIT 50`).bind(userId).all(),
+    env.DB.prepare(`SELECT id,device_id,event_type,severity,risk_points,reason,context_json,occurrence_count,first_occurred_at,last_occurred_at,status,resolved_at FROM security_events WHERE user_id=? ORDER BY last_occurred_at DESC LIMIT 100`).bind(userId).all(),
+    env.DB.prepare(`SELECT id,method,reason,pass_policy,status,expires_at,created_at,completed_at FROM security_verification_requests WHERE user_id=? ORDER BY created_at DESC LIMIT 25`).bind(userId).all(),
+    env.DB.prepare(`SELECT action,detail_json,occurred_at FROM security_admin_audit WHERE target_user_id=? ORDER BY occurred_at DESC LIMIT 50`).bind(userId).all(),
+  ]);
+  return json({ student, devices: devices.results || [], sessions: sessions.results || [], events: events.results || [], verifications: verifications.results || [], audit: audit.results || [] });
+}
+
+async function securityAudit(env, adminId, userId, action, { deviceId = null, sessionKey = null, verificationId = null, detail = {} } = {}) {
+  await env.DB.prepare(`INSERT INTO security_admin_audit
+    (id,admin_user_id,target_user_id,device_id,session_token_hash,verification_request_id,action,detail_json,occurred_at)
+    VALUES (?,?,?,?,?,?,?,?,?)`).bind(crypto.randomUUID(), adminId, userId, deviceId, sessionKey, verificationId, action, JSON.stringify(detail).slice(0, 1000), nowIso()).run();
+}
+
+async function adminSecurityAction(request, env, userId) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  const admin = await requireAdmin(request, env);
+  if (!admin) return json({ error: "forbidden" }, 403);
+  const body = await readJson(request);
+  const action = String(body?.action || "");
+  const now = nowIso();
+  const student = await env.DB.prepare(`SELECT u.id,u.email,u.school_email,u.school_email_verified_at,u.full_name FROM users u WHERE u.id=? AND EXISTS (SELECT 1 FROM student_applications a WHERE a.user_id=u.id AND a.status='approved')`).bind(userId).first();
+  if (!student) return json({ error: "student_not_found" }, 404);
+
+  if (action === "event_marked_safe") {
+    const eventId = String(body?.eventId || "");
+    const result = await env.DB.prepare(`UPDATE security_events SET status='resolved',resolved_at=?,resolved_by=? WHERE id=? AND user_id=? AND status!='resolved'`).bind(now, admin.id, eventId, userId).run();
+    if (Number(result?.meta?.changes || 0) !== 1) return json({ error: "event_not_found" }, 404);
+    await securityAudit(env, admin.id, userId, "event_marked_safe", { detail: { eventId } });
+  } else if (action === "device_revoked") {
+    const deviceId = String(body?.deviceId || "");
+    const result = await env.DB.prepare(`UPDATE member_devices SET status='revoked',revoked_at=? WHERE id=? AND user_id=? AND status='active'`).bind(now, deviceId, userId).run();
+    if (Number(result?.meta?.changes || 0) !== 1) return json({ error: "device_not_found" }, 404);
+    await env.DB.prepare(`UPDATE sessions SET revoked_at=? WHERE user_id=? AND device_id=? AND revoked_at IS NULL`).bind(now, userId, deviceId).run();
+    await securityAudit(env, admin.id, userId, "device_revoked", { deviceId });
+  } else if (action === "session_revoked") {
+    const sessionKey = String(body?.sessionKey || "");
+    const result = await env.DB.prepare(`UPDATE sessions SET revoked_at=? WHERE token_hash=? AND user_id=? AND revoked_at IS NULL`).bind(now, sessionKey, userId).run();
+    if (Number(result?.meta?.changes || 0) !== 1) return json({ error: "session_not_found" }, 404);
+    await securityAudit(env, admin.id, userId, "session_revoked", { sessionKey });
+  } else if (action === "all_sessions_revoked") {
+    await env.DB.prepare(`UPDATE sessions SET revoked_at=? WHERE user_id=? AND revoked_at IS NULL`).bind(now, userId).run();
+    await securityAudit(env, admin.id, userId, "all_sessions_revoked");
+  } else if (action === "pass_suspended" || action === "pass_restored") {
+    const status = action === "pass_suspended" ? "suspended" : "active";
+    const result = await env.DB.prepare(`UPDATE student_passes SET status=? WHERE id=(SELECT id FROM student_passes WHERE user_id=? ORDER BY issued_at DESC LIMIT 1)`).bind(status, userId).run();
+    if (Number(result?.meta?.changes || 0) !== 1) return json({ error: "pass_not_found" }, 404);
+    await securityAudit(env, admin.id, userId, action);
+  } else if (action === "verification_requested") {
+    const method = String(body?.method || "");
+    const passPolicy = body?.passPolicy === "suspend" ? "suspend" : "keep_active";
+    const reason = String(body?.reason || "").trim().slice(0, 500);
+    if (!["email_code", "student_status", "in_person"].includes(method) || reason.length < 8) return json({ error: "invalid_verification" }, 400);
+    const id = crypto.randomUUID();
+    let code = "";
+    let tokenHash = null;
+    let expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString();
+    if (method === "email_code" || method === "student_status") {
+      if (method === "student_status" && (!student.school_email || !student.school_email_verified_at)) return json({ error: "verified_school_email_required" }, 409);
+      code = String(crypto.getRandomValues(new Uint32Array(1))[0] % 1_000_000).padStart(6, "0");
+      tokenHash = await hmac(env.AUTH_PEPPER, `security-code:${id}:${code}`);
+      expiresAt = new Date(Date.now() + 30 * 60 * 1000).toISOString();
+    }
+    try {
+      await env.DB.prepare(`INSERT INTO security_verification_requests (id,user_id,requested_by,method,reason,pass_policy,token_hash,expires_at,created_at) VALUES (?,?,?,?,?,?,?,?,?)`)
+        .bind(id, userId, admin.id, method, reason, passPolicy, tokenHash, expiresAt, now).run();
+    } catch { return json({ error: "verification_already_pending" }, 409); }
+    if (passPolicy === "suspend") await env.DB.prepare(`UPDATE student_passes SET status='suspended' WHERE id=(SELECT id FROM student_passes WHERE user_id=? ORDER BY issued_at DESC LIMIT 1)`).bind(userId).run();
+    await recordSecurityEvent(env, { userId, eventType: "verification_requested", severity: "warning", riskPoints: 0, reason: "Een beheerder heeft aanvullende verificatie gevraagd.", context: { method, passPolicy } });
+    const accountUrl = `${env.SITE_ORIGIN}/nl/account`;
+    const methodText = method === "email_code" ? `Gebruik deze eenmalige code in uw account: ${code}` : method === "student_status" ? `Bevestig opnieuw dat u toegang heeft tot uw schoolmail met deze code: ${code}` : "Neem uw studentenpas mee voor controle bij onze viskraam of winkel.";
+    const verificationEmail = method === "student_status" ? student.school_email : student.email;
+    try { await sendMail(env, verificationEmail, "Extra controle van uw studentenpas", `Er is een extra controle nodig. Reden: ${reason}\n${methodText}\n${accountUrl}`, actionEmail("nl", "Extra controle van uw studentenpas", `Er is een extra controle nodig. ${methodText}`, "Naar uw account", accountUrl)); }
+    catch { /* The in-account request remains visible and can be resent later. */ }
+    await securityAudit(env, admin.id, userId, "verification_requested", { verificationId: id, detail: { method, passPolicy } });
+  } else if (action === "verification_completed" || action === "verification_cancelled") {
+    const verificationId = String(body?.verificationId || "");
+    const targetStatus = action === "verification_completed" ? "completed" : "cancelled";
+    const result = await env.DB.prepare(`UPDATE security_verification_requests SET status=?,completed_at=?,completed_by=? WHERE id=? AND user_id=? AND status='pending'`).bind(targetStatus, now, admin.id, verificationId, userId).run();
+    if (Number(result?.meta?.changes || 0) !== 1) return json({ error: "verification_not_found" }, 404);
+    if (action === "verification_completed" && body?.restorePass === true) await env.DB.prepare(`UPDATE student_passes SET status='active' WHERE id=(SELECT id FROM student_passes WHERE user_id=? ORDER BY issued_at DESC LIMIT 1)`).bind(userId).run();
+    await securityAudit(env, admin.id, userId, action, { verificationId });
+  } else if (action === "rule_exemption_changed") {
+    const deviceId = String(body?.deviceId || "");
+    const rules = Array.isArray(body?.rules) ? body.rules.filter((rule) => ["device_threshold", "concurrent_devices"].includes(rule)).slice(0, 2) : [];
+    const exists = await env.DB.prepare(`SELECT id FROM member_devices WHERE id=? AND user_id=?`).bind(deviceId, userId).first();
+    if (!exists) return json({ error: "device_not_found" }, 404);
+    await env.DB.prepare(`UPDATE member_devices SET rule_exemptions_json=? WHERE user_id=?`).bind(JSON.stringify(rules), userId).run();
+    await securityAudit(env, admin.id, userId, "rule_exemption_changed", { deviceId, detail: { rules } });
+  } else return json({ error: "invalid_action" }, 400);
+  return json({ ok: true });
+}
+
+async function pendingSecurityVerification(request, env) {
+  const user = await sessionUser(request, env);
+  if (!user) return json({ error: "authentication_required" }, 401);
+  const row = await env.DB.prepare(`SELECT id,method,reason,pass_policy,expires_at,created_at FROM security_verification_requests WHERE user_id=? AND status='pending' ORDER BY created_at DESC LIMIT 1`).bind(user.id).first();
+  return json({ verification: row || null });
+}
+
+async function completeSecurityVerification(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  const user = await sessionUser(request, env);
+  if (!user) return json({ error: "authentication_required" }, 401);
+  const body = await readJson(request);
+  const row = await env.DB.prepare(`SELECT id,method,token_hash,expires_at FROM security_verification_requests WHERE user_id=? AND status='pending' ORDER BY created_at DESC LIMIT 1`).bind(user.id).first();
+  if (!row) return json({ error: "verification_not_found" }, 404);
+  if (!['email_code', 'student_status'].includes(row.method)) return json({ error: "admin_completion_required" }, 409);
+  const attemptKey = await hmac(env.AUTH_PEPPER, `security-verification:${row.id}`);
+  if (!await rateLimit(env.DB, attemptKey, 8, 30 * 60 * 1000)) {
+    await recordSecurityEvent(env, {
+      userId: user.id, deviceId: user.device_id, eventType: "verification_rate_limited", severity: "warning", riskPoints: 30,
+      reason: "De limiet voor pogingen met een extra verificatiecode is overschreden.",
+      context: { attemptLimit: 8, windowMinutes: 30 },
+    });
+    return json({ error: "rate_limited" }, 429);
+  }
+  const code = String(body?.code || "").trim();
+  if (!/^\d{6}$/.test(code) || row.expires_at <= nowIso() || !safeEqual(row.token_hash, await hmac(env.AUTH_PEPPER, `security-code:${row.id}:${code}`))) return json({ error: "invalid_code" }, 400);
+  const now = nowIso();
+  await env.DB.prepare(`UPDATE security_verification_requests SET status='completed',completed_at=?,completed_by=? WHERE id=? AND status='pending'`).bind(now, user.id, row.id).run();
+  await recordSecurityEvent(env, { userId: user.id, deviceId: user.device_id, eventType: "verification_completed", severity: "info", riskPoints: 0, reason: "De extra e-mailcontrole is succesvol afgerond.", context: { method: row.method } });
+  return json({ ok: true });
+}
+
 async function adminProof(request, env, applicationId) {
   const admin = await requireAdmin(request, env);
   if (!admin) return json({ error: "forbidden" }, 403);
@@ -1477,18 +1952,46 @@ async function verifyPass(request, env) {
   if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
   const admin = await requireAdmin(request, env);
   if (!admin) return json({ error: "forbidden" }, 403);
+  if (env.AUTH_PEPPER) {
+    const settings = await securitySettings(env);
+    const clientIp = String(request.headers.get("CF-Connecting-IP") || "unknown");
+    const checkKey = await hmac(env.AUTH_PEPPER, `staff-pass-check:${admin.id}:${clientIp}`);
+    if (!await rateLimit(env.DB, checkKey, settings.qrCheckLimit, 5 * 60 * 1000)) return json({ valid: false, error: "rate_limited" }, 429);
+  }
   const body = await readJson(request);
   const code = typeof body?.code === "string" ? body.code.trim() : "";
-  if (!code || code.length > 160 || !env.PASS_SIGNING_KEY) return json({ valid: false }, 400);
+  if (!code || code.length > 800 || !env.PASS_SIGNING_KEY) return json({ valid: false }, 400);
   let id = "";
-  let signedCode = "";
   let pass;
-  if (code.includes(".")) {
-    const [passId, signature] = code.split(".", 2);
-    if (!passId || !signature || !safeEqual(signature, await hmac(env.PASS_SIGNING_KEY, passId))) return json({ valid: false });
-    id = passId;
-    signedCode = code;
-    pass = await env.DB.prepare(`SELECT p.status, p.display_code, p.expires_at, p.revoked_at, a.status AS application_status, u.full_name FROM student_passes p JOIN users u ON u.id=p.user_id JOIN student_applications a ON a.id=p.application_id AND a.user_id=p.user_id WHERE p.id = ?`).bind(id).first();
+  if (code.startsWith("SVQ1.")) {
+    const parts = code.split(".");
+    if (parts.length !== 3 || !safeEqual(parts[2], await hmac(env.PASS_SIGNING_KEY, `pass-qr:${parts[1]}`))) return json({ valid: false });
+    let payload;
+    try { payload = JSON.parse(decoder.decode(fromBase64url(parts[1]))); } catch { return json({ valid: false }); }
+    const expiresAt = Number(payload?.e || 0);
+    if (!/^[0-9a-f-]{36}$/i.test(String(payload?.p || "")) || typeof payload?.n !== "string"
+      || expiresAt < Date.now() || expiresAt > Date.now() + DYNAMIC_QR_MS + 30_000) return json({ valid: false });
+    id = payload.p;
+    pass = await env.DB.prepare(`SELECT p.status, p.display_code, p.expires_at, p.revoked_at, a.status AS application_status, u.full_name, u.id AS user_id FROM student_passes p JOIN users u ON u.id=p.user_id JOIN student_applications a ON a.id=p.application_id AND a.user_id=p.user_id WHERE p.id = ?`).bind(id).first();
+    const consumed = await env.DB.prepare(`UPDATE pass_qr_tokens SET used_at=? WHERE token_hash=? AND pass_id=? AND used_at IS NULL AND expires_at>?`)
+      .bind(nowIso(), await digest(code), id, nowIso()).run();
+    if (Number(consumed?.meta?.changes || 0) !== 1) return json({ valid: false });
+    if (pass && env.AUTH_PEPPER) {
+      const settings = await securitySettings(env);
+      const limitKey = await hmac(env.AUTH_PEPPER, `pass-qr-check:${id}`);
+      if (!await rateLimit(env.DB, limitKey, settings.qrCheckLimit, 5 * 60 * 1000)) {
+        await recordSecurityEvent(env, {
+          userId: pass.user_id, eventType: "qr_rate_limited", severity: "warning", riskPoints: 30,
+          reason: "De limiet voor het controleren van dezelfde studentenpas is overschreden.",
+          context: { limit: settings.qrCheckLimit, windowMinutes: 5 },
+        });
+        return json({ valid: false, error: "rate_limited" }, 429);
+      }
+    }
+  } else if (code.includes(".")) {
+    // Permanently reusable legacy signed codes are deliberately refused. Only
+    // a short-lived SVQ1 token or the visible manual display code is valid.
+    return json({ valid: false });
   } else {
     const displayCode = code.replace(/\s+/g, "").toUpperCase();
     if (!/^SV-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(displayCode)) return json({ valid: false }, 400);
@@ -1497,10 +2000,6 @@ async function verifyPass(request, env) {
   }
   const valid = pass?.status === "active" && !pass.revoked_at && pass.application_status === "approved" && (!pass.expires_at || pass.expires_at > nowIso());
   if (!valid) return json({ valid: false });
-  if (signedCode) {
-    const storedCode = await env.DB.prepare(`SELECT public_code_hash FROM student_passes WHERE id = ?`).bind(id).first();
-    if (!safeEqual(await digest(signedCode), storedCode?.public_code_hash)) return json({ valid: false });
-  }
   return json({ valid: true, name: pass.full_name, displayCode: pass.display_code, expiresAt: pass.expires_at, discountPercent: 10, eligibleProducts: ["assortiment"] });
 }
 
@@ -1827,6 +2326,21 @@ async function cleanupAnalytics(env) {
   } catch { /* A later scheduled run retries retention cleanup. */ }
 }
 
+async function cleanupSecurityRecords(env) {
+  if (!env.DB) return;
+  const now = nowIso();
+  const resolvedCutoff = new Date(Date.now() - 395 * 86_400_000).toISOString();
+  const auditCutoff = new Date(Date.now() - 2 * 365 * 86_400_000).toISOString();
+  try {
+    await env.DB.batch([
+      env.DB.prepare(`UPDATE security_verification_requests SET status='expired' WHERE status='pending' AND expires_at IS NOT NULL AND expires_at<=?`).bind(now),
+      env.DB.prepare(`DELETE FROM security_events WHERE status='resolved' AND resolved_at<?`).bind(resolvedCutoff),
+      env.DB.prepare(`DELETE FROM security_admin_audit WHERE occurred_at<?`).bind(auditCutoff),
+      env.DB.prepare(`DELETE FROM pass_qr_tokens WHERE expires_at<?`).bind(new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()),
+    ]);
+  } catch { /* A later daily run retries retention cleanup. */ }
+}
+
 function routeApplicationPath(pathname) {
   const match = pathname.match(/^\/api\/members\/admin\/student-applications\/([0-9a-f-]+)(?:\/(proof|decision|cleanup))?$/i);
   return match ? { id: match[1], action: match[2] || "" } : null;
@@ -1899,8 +2413,14 @@ const memberWorker = {
     if (path === "/api/members/verify" && method === "POST") return verifyEmail(request, env);
     if (path === "/api/members/verify-codes" && method === "POST") return verifyRegistrationCodes(request, env);
     if (path === "/api/members/login" && method === "POST") return login(request, env);
+    if (path === "/api/members/magic-login" && method === "POST") return requestMagicLogin(request, env);
+    if (path === "/api/members/magic-login/confirm" && method === "GET") return magicLoginPage(request, env);
+    if (path === "/api/members/magic-login/confirm" && method === "POST") return confirmMagicLogin(request, env);
     if (path === "/api/members/logout" && method === "POST") return logout(request, env);
     if (path === "/api/members/me" && method === "GET") return me(request, env);
+    if (path === "/api/members/pass/qr" && method === "GET") return dynamicPassQr(request, env);
+    if (path === "/api/members/security/verification" && method === "GET") return pendingSecurityVerification(request, env);
+    if (path === "/api/members/security/verification" && method === "POST") return completeSecurityVerification(request, env);
     if (path === "/api/members/wallet/google" && method === "POST") return issueGoogleWalletPass(request, env);
     if (path === "/api/members/wallet/apple" && method === "POST") return issueAppleWalletPass(request, env);
     if (path === "/api/members/password-reset" && method === "POST") return requestPasswordReset(request, env);
@@ -1911,6 +2431,11 @@ const memberWorker = {
     if (path === "/api/members/admin/smtp-check" && method === "POST") return checkSmtpAuthentication(request, env);
     if (path === "/api/members/admin/student-applications" && method === "GET") return adminQueue(request, env);
     if (path === "/api/members/admin/analytics" && method === "GET") return adminAnalytics(request, env);
+    if (path === "/api/members/admin/security" && method === "GET") return adminSecurityOverview(request, env);
+    if (path === "/api/members/admin/security/settings" && method === "POST") return updateSecuritySettings(request, env);
+    const securityStudentMatch = path.match(/^\/api\/members\/admin\/security\/([0-9a-f-]{36})$/i);
+    if (securityStudentMatch && method === "GET") return adminSecurityStudent(request, env, securityStudentMatch[1]);
+    if (securityStudentMatch && method === "POST") return adminSecurityAction(request, env, securityStudentMatch[1]);
     if (path === "/api/members/admin/customers" && method === "GET") return adminCustomers(request, env);
     const customerStatusMatch = path.match(/^\/api\/members\/admin\/customers\/([0-9a-f-]{36})\/status$/i);
     if (customerStatusMatch && method === "POST") return adminCustomerStatus(request, env, customerStatusMatch[1]);
@@ -1934,7 +2459,7 @@ const memberWorker = {
     // Newsletter delivery remains inert until the owner deliberately enables it.
     const tasks = [cleanupReviewedStudentProofs(env), cleanupOrphanStudentProofs(env), cleanupNewsletterDrafts(env)];
     const scheduledAt = new Date(_controller?.scheduledTime || Date.now());
-    if (scheduledAt.getUTCHours() === 2 && scheduledAt.getUTCMinutes() === 0) tasks.push(cleanupAnalytics(env));
+    if (scheduledAt.getUTCHours() === 2 && scheduledAt.getUTCMinutes() === 0) tasks.push(cleanupAnalytics(env), cleanupSecurityRecords(env));
     if (env.MEMBERS_ENABLED === "on") tasks.push(processNewsletterDeliveries(env));
     context.waitUntil(Promise.allSettled(tasks));
   },
