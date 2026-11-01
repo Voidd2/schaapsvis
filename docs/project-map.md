@@ -5,7 +5,7 @@ Deze kaart is de korte ingang voor vervolgwerk. De code en actuele Cloudflare-st
 ## Architectuur
 
 - **Website:** Next.js 16 met vinext, pagina's in `src/app/[locale]/`, gedeeld materiaal in `src/components/` en `src/lib/`. Worker `schaapsvis` beheert `schaapsvishandel.nl`; configuratie staat in `cloudflare.config.ts`.
-- **Leden en studenten:** Worker `schaapsvis-members` ontvangt `/api/members/*`. Bron: `workers/members/src/index.mjs`; configuratie: `workers/members/wrangler.jsonc`; productiedatabase: D1 `schaapsvis-members`; studentbewijs: private EU-R2-bucket. Schema: `migrations/0001` t/m `0015`.
+- **Leden en studenten:** Worker `schaapsvis-members` ontvangt `/api/members/*`. Bron: `workers/members/src/index.mjs`; configuratie: `workers/members/wrangler.jsonc`; productiedatabase: D1 `schaapsvis-members`; historisch studentbewijs: private EU-R2-bucket. Schema: `migrations/0001` t/m `0017`.
 - **Mail:** de leden-Worker gebruikt Knoth SMTP op poort 587. De host en gebruikersnaam staan in de Worker-config; het wachtwoord en de auth-sleutels staan uitsluitend als Cloudflare-secrets. Knoth blijft domeinregistrar en mailboxprovider; Cloudflare beheert DNS en hosting.
 - **Toegang:** de website is nog met een sitewachtwoord afgeschermd. De leden-API controleert daarnaast de sitecookie of het vertrouwde eigenaar-IP. Openbare registratie is nog geen goedgekeurde livegang.
 
@@ -16,7 +16,10 @@ Deze kaart is de korte ingang voor vervolgwerk. De code en actuele Cloudflare-st
 - Campagnes kunnen op regio en op geverifieerde studenten worden gericht. Er is geen automatisch wekelijks aanbod. Bezorging en spaarpunten worden niet op de huidige accountpagina beloofd en vallen buiten de huidige scope.
 - Gebruik echte winkel- en kraamfoto's alleen als ze daadwerkelijk van Schaap's zijn. De eigenaar wil visschalen en gourmetschalen qua beeld grotendeels behouden.
 
-## Bewezen status op 27 oktober 2026
+## Bewezen status
+
+- Op 1 november 2026 is PR #61 samengevoegd en door Cloudflare gebouwd: leden-Worker `4b09794c` en site-Worker `fdbe4698` stonden op Ready. De live healthcheck gaf `{"status":"ok"}`. Preview-D1 bevat migraties 0013 t/m 0017 en productie-D1 bevat aantoonbaar 0017.
+- De studentenpasbeveiliging is live met herroepbare langlopende sessies, willekeurige gehashte installatiekenmerken, uitlegbare risicosignalen, auditlog, extra verificatie en eenmalige dynamische QR-codes. De live beheerroute weigert zonder toegestaan account én netwerk terecht met `forbidden`.
 
 - GitHub `main` commit `09dd62d` is in Cloudflare voor beide productie-Workers als **Ready, 100% verkeer** gezien. `https://schaapsvishandel.nl/api/members/health` gaf `{"status":"ok"}`.
 - De beheeraanmelding faalde eerder vóór accountopslag: de code vroeg 210.000 PBKDF2-rondes terwijl de productie-Worker maximaal 100.000 toestaat. `09dd62d` past de hash en de integratietest aan. Vóór een nieuwe eigenaarspoging bevatte D1 **nul** beheeraccounts. Verifieer dit opnieuw; het is geen blijvende toestand.
@@ -26,9 +29,9 @@ Deze kaart is de korte ingang voor vervolgwerk. De code en actuele Cloudflare-st
 
 ## Volgende verificatie
 
-1. Laat de eigenaar het al geopende beheerformulier met zijn eigen wachtwoord indienen en de link in `schaapsv@schaapsvishandel.nl` bevestigen. De browserbeveiligingsregel vereist dat hij de definitieve indiening van een nieuw wachtwoord zelf doet. Deel of log het wachtwoord niet.
-2. Lees in productie-D1 of `users.email_verified_at` is gezet. Controleer daarna login, beheerpagina en een gecontroleerde studentenregistratie met beide verificatiecodes. Gebruik geen verzonnen adressen in productie.
-3. Controleer de aflevering van een echte registratiemail, privacytekst, bewaartermijnen en bewijsverwijdering voordat de toegangspoort voor publiek opengaat.
+1. Test op een echt iOS-toestel normale Safari, PWA-installatie, uitloggen/intrekken en opnieuw aanmelden.
+2. Laat een beheerder vanaf het toegestane account en netwerk één gecontroleerde intrek-/herstelactie uitvoeren. De onbevoegde route is al fail-closed getest.
+3. Controleer vóór het publiek openen opnieuw echte registratiemail, privacytekst, bewaartermijnen en verwijderprocedure. Gebruik geen verzonnen adressen of echte bewijsstukken in productie.
 
 ## Snelle route naar antwoorden
 
