@@ -4,6 +4,7 @@ import { localizedProduct } from "@/lib/product-localization";
 import { productPhoto } from "@/lib/product-beeld";
 import { BEDRIJF } from "@/lib/bedrijf";
 import { paginaMetadata } from "@/lib/seo";
+import { FEESTDAGEN_PRODUCTEN } from "@/lib/feestdagen-producten";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -48,12 +49,24 @@ export default async function BeeldverantwoordingPage({ params }: Props) {
   const { locale } = await params;
   const lang = locale === "en" || locale === "de" ? locale : "nl";
   const copy = COPY[lang];
-  const entries = products.flatMap((product) => {
+  const productEntries = products.flatMap((product) => {
     const localized = localizedProduct(product.slug, lang);
     if (!localized) return [];
     const photo = productPhoto(localized, lang);
     return photo?.credit ? [{ name: localized.naam, credit: photo.credit }] : [];
   });
+  const feestEntries = FEESTDAGEN_PRODUCTEN.map((product) => ({
+    name: product.naam,
+    credit: {
+      author: "Dirks Vishandel",
+      source: `https://www.dirksvishandel.nl/product/${product.slug}/`,
+      license: lang === "de" ? "Nutzung mit Genehmigung (Angabe des Inhabers, 1. November 2026)" : lang === "en" ? "Used with permission (owner statement, 1 November 2026)" : "Gebruikt met toestemming (verklaring eigenaar, 1 november 2026)",
+      licenseUrl: `https://www.dirksvishandel.nl/product/${product.slug}/`,
+    },
+  }));
+  const entries = [...productEntries, ...feestEntries].filter((entry, index, all) =>
+    all.findIndex((candidate) => candidate.name === entry.name && candidate.credit.source === entry.credit.source) === index,
+  );
 
   return (
     <main className="section-wrap py-14 md:py-20">

@@ -1,5 +1,6 @@
 import offers from "../data/dirks-offers-2026-09-29.json";
 import { siteLanguage } from "./language";
+import { feestdagenProduct } from "./feestdagen-producten";
 
 export type SelectieGroep = "borrelbox" | "klassiek" | "luxe" | "hapjes" | "bijzonder" | "barbecue" | "gourmet" | "los";
 export type SelectieItem = {
@@ -72,12 +73,13 @@ export const DIRKS_SELECTIE: SelectieItem[] = offers.offers.map((offer) => {
   const titel = namen[offer.slug];
   if (!groep || !titel) throw new Error(`Ontbrekende catalogustekst: ${offer.slug}`);
   const bereik = personen(offer.slug);
+  const actueelFeestproduct = feestdagenProduct(offer.slug);
   return {
     slug: offer.slug,
     groep,
-    naam: titel[0],
+    naam: actueelFeestproduct?.naam ?? titel[0],
     foto: `/images/dirks/${offer.slug}.webp`,
-    prijs: offer.targetCents / 100,
+    prijs: actueelFeestproduct ? actueelFeestproduct.prijsCents / 100 : offer.targetCents / 100,
     bronPrijs: offer.sourceCents / 100,
     personenVan: bereik?.[0],
     personenTot: bereik?.[1],
@@ -90,6 +92,7 @@ export function selectieNaam(slug: string, locale: string): string {
   const taal = siteLanguage(locale);
   const vertaling = namen[slug];
   if (!vertaling) throw new Error(`Ontbrekende vertaling: ${slug}`);
+  if (taal === "nl") return feestdagenProduct(slug)?.naam ?? vertaling[0];
   return vertaling[taal === "en" ? 1 : taal === "de" ? 2 : 0];
 }
 
