@@ -6,7 +6,7 @@ Deze Worker is de serverkant voor algemene accounts, e-mailbevestiging, wachtwoo
 
 - Gecontroleerd op 26 oktober 2026 in account **Schaapsvis**: `schaapsvis-members` is gedeployed op de productieroute `schaapsvishandel.nl/api/members/*`. De website zelf blijft een besloten preview; bezoekers zonder geldige toegang zien de binnenkort-pagina.
 - Productie `MEMBERS_ENABLED=on` is bedoeld voor deze afgeschermde preview. De Worker eist daarnaast de site-unlock-cookie of het door Cloudflare vastgestelde IP op de allowlist; bezoekers kunnen niet alleen door de API-URL te kennen registreren. Zet de toegangspoort niet open als onderdeel van deze preview.
-- De productie-Worker heeft D1 `schaapsvis-members` en de private EU-R2-bucket `schaapsvis-student-proofs`; migraties 0001 t/m 0016 zijn toegepast en rechtstreeks in productie geverifieerd. Migratie 0017 voor studentenpasbeveiliging staat nog niet in productie en moet vóór de bijbehorende Worker-code worden toegepast. De R2-bucket blijft privé. Nieuwe aanvragen gebruiken de bevestigde schoolmail als bewijs en uploaden geen bestand meer; de bucket blijft alleen bestaan voor het opruimen van oudere bewijsbestanden.
+- De productie-Worker heeft D1 `schaapsvis-members` en de private EU-R2-bucket `schaapsvis-student-proofs`; migraties 0001 t/m 0017 zijn toegepast en rechtstreeks in productie geverifieerd. Preview-D1 is eveneens gecontroleerd en van 0013 t/m 0017 bijgewerkt. De R2-bucket blijft privé. Nieuwe aanvragen gebruiken de bevestigde schoolmail als bewijs en uploaden geen bestand meer; de bucket blijft alleen bestaan voor het opruimen van oudere bewijsbestanden.
 - Cloudflare bevat de mailhost `khsm1.khsmserver1.nl`, poort 587, mailboxgebruiker `schaapsv` en een versleuteld `SMTP_PASSWORD`; ook auth-, ondertekenings- en site-access-secrets zijn ingesteld. Een rechtstreekse testmail via Knoth is op 27 oktober 2026 bij de eigenaar in Gmail aangekomen, maar in Spam geplaatst. Die dag bevestigde een no-send controle vanuit de gedeployde Worker de SMTP-aanmelding (`status: authenticated`, HTTP 200). De tijdelijke diagnostiek staat weer uit. Een volledige registratiemail is nog niet getest.
 - Beheerdermail en IP-allowlist zijn ingesteld voor `schaapsv@schaapsvishandel.nl` en de door de eigenaar opgegeven IP-adressen. De beheer-API blijft bovendien achter de site-access-gate.
 - De aparte Worker `schaapsvis-members-preview` met eigen D1/R2 bestaat nog, maar `preview.schaapsvishandel.nl` heeft geen DNS-record en die Worker staat uit. De actieve besloten preview gebruikt daarom de hoofdsitehost, zoals de eigenaar heeft toegestaan.
@@ -83,6 +83,11 @@ De integratietest met `npm run check:members` gebruikt eigen tijdelijke database
 
 ## Studentenpasbeveiliging uitrollen
 
+Uitrolstatus 1 november 2026: migratie 0017 staat in preview- en productie-D1,
+PR #61 is samengevoegd, de productieleden-Worker `4b09794c` en site-Worker
+`fdbe4698` stonden op Ready en de live healthcheck gaf `{"status":"ok"}`.
+De onderstaande volgorde blijft gelden voor toekomstige omgevingen en updates.
+
 Migratie `0017_student_pass_security.sql` voegt herroepbare langlopende sessies,
 gehashte installatiekenmerken, uitlegbare beveiligingsgebeurtenissen,
 verificatieverzoeken, beheer-audit en eenmalige twee-minuten-QR-codes toe. De
@@ -130,10 +135,10 @@ De accountregistratie vraagt persoonlijk e-mailadres + schoolmail + wachtwoord.
 Twee afzonderlijke 6-cijferige codes moeten binnen 10 minuten worden ingevoerd;
 codes worden HMAC-gehasht, zijn eenmalig en rate limits begrenzen raden. De
 studentenaanvraag endpoint eist server-side dat beide adressen bevestigd zijn.
-Migraties 0006-0008 horen bij deze lokale wijzigingen. De volledige lokale
-migratiereeks loopt inmiddels door t/m 0017. Productie is gecontroleerd t/m
-0016; pas 0017 toe vóór de studentenpasbeveiligingscode wordt uitgerold en pas
-de volledige reeks ook toe op iedere nieuw aangemaakte testomgeving.
+Migraties 0006-0008 horen bij deze wijzigingen. De volledige lokale
+migratiereeks loopt inmiddels door t/m 0017. Preview en productie zijn
+gecontroleerd t/m 0017; pas de volledige reeks ook toe op iedere nieuw
+aangemaakte testomgeving.
 
 De klanteninschrijving bewaart eerst tijdelijk een e-maildraft, daarna kiest
 de klant regio en geeft apart expliciet toestemming. Alleen dubbelbevestigde

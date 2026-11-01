@@ -1,5 +1,22 @@
 # Studentenpas-fraudebeveiliging
 
+## Uitvoerstatus — 1 november 2026
+
+- Fasen 1 t/m 3 zijn via PR #61 samengevoegd en op de productieleden-Worker
+  uitgerold. Preview- en productie-D1 bevatten migratie
+  `0017_student_pass_security.sql`.
+- De integratietest bewijst onder meer herroepbare langlopende sessies,
+  Safari/PWA als afzonderlijke installaties, vervanging van een ingetrokken
+  installatie, uitlegbare risicogebeurtenissen, beheeracties met auditlog,
+  extra verificatie, rate limiting en eenmalig gebruik van de dynamische QR.
+- De live healthcheck is geslaagd en onbevoegde toegang tot het
+  beveiligingsbeheer faalt gesloten. Alleen de fysieke iOS/PWA-acceptatietest
+  en een geautoriseerde beheeractie vanaf het toegestane netwerk blijven
+  operationele controles door de eigenaar.
+- Fotoverificatie blijft bewust buiten de implementatie. Apple en Google Wallet
+  blijven verborgen totdat de vereiste externe issuer- en certificaatgegevens
+  beschikbaar zijn.
+
 ## Uitgangspunten
 
 - Bouw voort op de bestaande accounts, sessies, studentaanvragen, passen en beheerrollen.
