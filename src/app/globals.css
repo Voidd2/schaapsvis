@@ -837,3 +837,18 @@ summary::-webkit-details-marker {
   .platter-intro + #samenstellen h2 { margin-bottom: 20px; }
   .platter-family-card { height: auto; }
 }
+
+/* Scoped platter guidance and short personal enquiry. */
+.platter-photo-note { display: block; font-size: 1rem; line-height: 1.5; color: var(--charcoal); }
+.platter-photo-note strong, .platter-photo-note span { display: block; }
+.platter-photo-note strong { color: var(--navy); margin-bottom: .2rem; }
+#maatwerk { scroll-margin-top: 10rem; }
+.platter-inquiry { max-width: 58rem; }
+.platter-inquiry-fields { display: grid; gap: 1.25rem 2rem; }
+.platter-inquiry-fields label { display: block; font-weight: 600; }
+.platter-inquiry-fields input:not([type="checkbox"]), .platter-inquiry-fields select, .platter-inquiry-fields textarea { display: block; width: 100%; min-width: 0; margin-top: .4rem; padding: .75rem; border: 1px solid var(--linen); border-radius: .375rem; background: white; color: var(--navy); font: inherit; }
+.platter-inquiry-fields input:disabled { opacity: .55; }
+.platter-inquiry-fields .platter-date-unknown { display: flex; align-items: center; gap: .65rem; margin-top: .7rem; font-weight: 400; }
+.platter-date-unknown input { width: 1.1rem; height: 1.1rem; flex-shrink: 0; }
+.platter-inquiry :is(input, select, textarea):focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
+@media (min-width: 768px) { .platter-inquiry-fields { grid-template-columns: 1fr 1fr; } }

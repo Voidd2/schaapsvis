@@ -43,7 +43,7 @@ export function platterSizeLabel(slug: string, locale: string) {
 }
 
 export const platterLabels = {
-  nl: { back: "← Alle visschalen", size: "Kies het formaat", details: "Samenstelling en allergenen →", caption: "Bekijk de schaal als inspiratie voor uw eigen samenstelling." },
-  en: { back: "← All seafood platters", size: "Choose a size", details: "Contents and allergens →", caption: "Use this platter as inspiration for your own selection." },
-  de: { back: "← Alle Fischplatten", size: "Größe wählen", details: "Zusammenstellung und Allergene →", caption: "Lassen Sie sich von dieser Platte für Ihre eigene Auswahl inspirieren." },
+  nl: { back: "← Alle visschalen", size: "Kies het formaat", details: "Samenstelling en allergenen →" },
+  en: { back: "← All seafood platters", size: "Choose a size", details: "Contents and allergens →" },
+  de: { back: "← Alle Fischplatten", size: "Größe wählen", details: "Zusammenstellung und Allergene →" },
 };

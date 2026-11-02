@@ -1,3 +1,6 @@
+import { PlatterPhotoNote } from "@/components/PlatterPhotoNote";
+import { platterPhotoAlt, platterPrice, platterPresentation } from "@/lib/platter-presentation";
+import { localizedPlatterProduct } from "@/lib/platter-product-text";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -6,7 +9,7 @@ import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { Kop, Sectie, Vragen } from "@/components/ui/Sectie";
 import { bestelContact } from "@/lib/bestel-contact";
 import { feestdagenCopy } from "@/lib/feestdagen";
-import { FEESTDAGEN_CATEGORIEEN, FEESTDAGEN_PRODUCTEN, feestdagenPrijs } from "@/lib/feestdagen-producten";
+import { FEESTDAGEN_CATEGORIEEN, FEESTDAGEN_PRODUCTEN } from "@/lib/feestdagen-producten";
 import { paginaMetadata } from "@/lib/seo";
 import { FeestdagenUitgelicht } from "@/components/feestdagen/FeestdagenUitgelicht";
 
@@ -83,15 +86,16 @@ export default async function FeestdagenPage({ params }: { params: Promise<{ loc
             <p className="mt-2 leading-relaxed" style={{ color: "var(--charcoal)" }}>{categorieCopy[taal][categorie.id][1]}</p>
           </div>
           <ul className="grid grid-cols-2 gap-x-3 gap-y-9 sm:gap-x-6 lg:grid-cols-3">
-            {FEESTDAGEN_PRODUCTEN.filter((product) => product.categorie === categorie.id).map((product, index) => <li key={product.slug} className="group min-w-0">
+            {FEESTDAGEN_PRODUCTEN.filter((product) => product.categorie === categorie.id).map(product => localizedPlatterProduct(product, locale)).map((product, index) => <li key={product.slug} className="group min-w-0">
               <Link href={`/${locale}/feestdagen/${product.slug}`} className="flex h-full flex-col">
                 <div className="overflow-hidden rounded-lg bg-white aspect-[4/3]">
-                  <Image src={product.afbeelding} alt={product.naam} width={900} height={675} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.035]" />
+                  <Image src={product.afbeelding} alt={platterPhotoAlt(product, locale)} width={900} height={675} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.035]" />
                 </div>
+                {product.categorie === "visschalen" && <p className="mt-3"><PlatterPhotoNote locale={locale} /></p>}
                 <p className="kapitaal mt-3 mb-1 sm:mt-4 sm:mb-2">{String(index + 1).padStart(2, "0")}</p>
                 <h3 className="text-[1.05rem] leading-tight sm:text-[1.25rem] group-hover:underline underline-offset-4">{product.naam}</h3>
                 <p className="mt-2 hidden text-[0.95rem] leading-relaxed sm:block" style={{ color: "var(--charcoal)" }}>{product.intro}</p>
-                <p className="mt-2 text-[0.78rem] font-bold leading-snug sm:text-sm" style={{ color: "#a61f2b" }}>{feestdagenPrijs(product, locale)}</p>
+                <p className="mt-2 text-[0.78rem] font-bold leading-snug sm:text-sm" style={{ color: "#a61f2b" }}>{platterPrice(product, locale)}</p>
                 <span className="mt-auto inline-block pt-3 text-[0.78rem] font-semibold underline underline-offset-4 sm:text-sm" style={{ color: "var(--navy)" }}>
                   {locale === "nl" ? "Bekijk product" : locale === "de" ? "Produkt ansehen" : "View product"} →
                 </span>
@@ -103,11 +107,12 @@ export default async function FeestdagenPage({ params }: { params: Promise<{ loc
     </Sectie>
 
     <Sectie grond="zand">
-      <Kop label={c.orderLabel} titel={c.orderTitle} />
+      <Kop label={c.orderLabel} titel={platterPresentation(locale).stepsTitle} />
+      <p className="mb-6"><Link className="underline underline-offset-4" href={`/${locale}/visschalen#maatwerk`}>{platterPresentation(locale).custom}</Link></p>
       <ol className="grid md:grid-cols-3 gap-6">
-        {c.steps.map(([nummer, titel, tekst]) => <li key={nummer} className="bg-white p-6 md:p-8 border-t-4" style={{ borderColor: "var(--gold)" }}>
-          <span className="bedrag text-[2rem]" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>{nummer}</span>
-          <h3 className="text-[1.25rem] mt-4 mb-2">{titel}</h3>
+        {platterPresentation(locale).steps.map((tekst, index) => <li key={index} className="bg-white p-6 md:p-8 border-t-4" style={{ borderColor: "var(--gold)" }}>
+          <span className="bedrag text-[2rem]" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>{index + 1}</span>
+
           <p className="leading-relaxed" style={{ color: "var(--charcoal)" }}>{tekst}</p>
         </li>)}
       </ol>

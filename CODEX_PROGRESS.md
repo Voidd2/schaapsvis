@@ -2,6 +2,12 @@
 
 Laatst bijgewerkt: 2 november 2026, Europe/Amsterdam
 
+## Visschalen: uitleg en maatwerkaanvraag — publicatie voorbereiden
+
+- Gedeelde fotovermelding en familie-altteksten, vaste totaalprijs per schaal met personenbereik, aparte compacte WhatsApp-aanvraag en drie stappen in NL/EN/DE.
+- Alle twaalf variantkeuzes en 36 gerenderde details tegen de productbron gecontroleerd; terug/herladen behoudt de drie keuzes. Formulier mobiel/desktop, datum, optionele velden en concept gecontroleerd zonder iets te verzenden.
+- Next-build, TypeScript, ESLint, inhouds- en shopchecks geslaagd. Cloudflare-build en publicatie volgen. Bewijs per eis: `docs/visschalen-uitleg-en-maatwerk.md`.
+
 ## Afronding schaalselectie en vertalingen — live afgerond
 
 - Gerelateerde schaalroutes behouden nu alle geselecteerde families via de bestaande URL-helper. Alle twaalf productdetails hebben een gedeelde EN/DE tekstlaag; bedragen, inhoud en allergenen behouden. Gevelteksten voorbereid in drie talen.

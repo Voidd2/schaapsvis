@@ -1,3 +1,5 @@
+import { PlatterPhotoNote } from "@/components/PlatterPhotoNote";
+import { platterPhotoAlt, platterPresentation, platterPrice } from "@/lib/platter-presentation";
 import { Suspense } from "react";
 import { connection } from "next/server";
 import { PlatterNavigation } from "@/components/PlatterNavigation";
@@ -15,7 +17,6 @@ import { BEDRIJF } from "@/lib/bedrijf";
 import { bestelContact } from "@/lib/bestel-contact";
 import {
   FEESTDAGEN_PRODUCTEN,
-  feestdagenPrijs,
   feestdagenProduct,
   gerelateerdeFeestdagenProducten,
 } from "@/lib/feestdagen-producten";
@@ -75,6 +76,7 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
   const taal = locale === "en" || locale === "de" ? locale : "nl";
   const t = LABELS[taal];
   const family = platterFamily(slug);
+  const note = family ? platterPresentation(locale).confirmation : t.note;
   // Render incoming selection context on the server too: the back link must
   // retain other families even before this page's JavaScript has loaded.
   const selection = new URLSearchParams();
@@ -84,7 +86,7 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
       for (const entry of Array.isArray(value) ? value : value === undefined ? [] : [value]) selection.append(key, entry);
     }
   }
-  const contact = bestelContact(locale, `${product.naam} (${feestdagenPrijs(product, locale)})`);
+  const contact = bestelContact(locale, `${product.naam} (${platterPrice(product, locale)})`);
   const related = gerelateerdeFeestdagenProducten(source).map(item => localizedPlatterProduct(item, locale));
   const url = `${BEDRIJF.domein}/${locale}/feestdagen/${product.slug}`;
   const productSchema = {
@@ -116,8 +118,8 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
     <section className="bg-[#f7f3ec]">
       <div className="mx-auto grid max-w-7xl gap-9 px-4 py-8 md:px-8 md:py-14 lg:grid-cols-[1.08fr_.92fr] lg:gap-14">
         <figure><div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white shadow-sm">
-          <Image src={product.afbeelding} alt={product.naam} fill priority sizes="(max-width: 1024px) 100vw, 58vw" className={family ? "object-contain" : "object-cover"} />
-        </div>{family && <figcaption className="mt-3 text-sm text-[var(--grijs)]">{platterLabels[taal].caption}</figcaption>}</figure>
+          <Image src={product.afbeelding} alt={platterPhotoAlt(product, locale)} fill priority sizes="(max-width: 1024px) 100vw, 58vw" className={family ? "object-contain" : "object-cover"} />
+        </div>{family && <figcaption className="mt-3"><PlatterPhotoNote locale={locale} /></figcaption>}</figure>
         <div className="flex flex-col justify-center">
           <nav aria-label="Breadcrumb" className="mb-6 text-sm text-[#527080]">
             <Link href={`/${locale}`}>{t.home}</Link> <span aria-hidden="true">/</span> <Link href={`/${locale}/feestdagen`}>{t.season}</Link>
@@ -127,10 +129,11 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
           <p className="mt-5 max-w-xl text-[1.08rem] leading-8 text-[#38515e]">{product.intro}</p>
           <div className="mt-7 border-y border-[#bfd6df] py-5">
             <p className="text-xs font-bold uppercase tracking-[.17em] text-[#527080]">{t.price}</p>
-            <p className="mt-1 text-2xl font-bold text-[#a61f2b]">{feestdagenPrijs(product, locale)}</p>
+            <p className="mt-1 text-2xl font-bold text-[#a61f2b]">{platterPrice(product, locale)}</p>
           </div>
           {family && <Suspense fallback={null}><PlatterNavigation locale={taal} slug={slug} mode="size" /></Suspense>}
-          <p className="mt-5 text-sm leading-6 text-[#527080]">{t.note}</p>
+          <p className="mt-5 text-sm leading-6 text-[#527080]">{note}</p>
+          {family && <Link className="mt-4 underline underline-offset-4" href={platterOverviewHref(locale, slug, selection.toString()).replace(/#.*$/, "#maatwerk")}>{platterPresentation(locale).custom}</Link>}
           <a href={contact.href} target="_blank" rel="noopener noreferrer" className="knop knop-rood mt-7 w-full sm:w-fit">{t.order}</a>
         </div>
       </div>
@@ -168,11 +171,12 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
         {related.map((item) => <li key={item.slug} className="overflow-hidden rounded-xl bg-white shadow-sm">
           <Link href={platterDetailHref(locale, item.slug, selection.toString())} className="group block h-full">
             <div className="relative aspect-[4/3] overflow-hidden bg-[#eaf7fc]">
-              <Image src={item.afbeelding} alt={item.naam} fill sizes="(max-width: 640px) 100vw, 33vw" className="object-cover transition duration-500 group-hover:scale-[1.035]" />
+              <Image src={item.afbeelding} alt={platterPhotoAlt(item, locale)} fill sizes="(max-width: 640px) 100vw, 33vw" className="object-cover transition duration-500 group-hover:scale-[1.035]" />
             </div>
             <div className="p-5">
+              {platterFamily(item.slug) && <p className="mb-4"><PlatterPhotoNote locale={locale} /></p>}
               <h3 className="text-xl group-hover:underline">{item.naam}</h3>
-              <p className="mt-2 font-bold text-[#a61f2b]">{feestdagenPrijs(item, locale)}</p>
+              <p className="mt-2 font-bold text-[#a61f2b]">{platterPrice(item, locale)}</p>
               <span className="mt-4 inline-block text-sm font-semibold text-[#075b82] underline underline-offset-4">{t.view} →</span>
             </div>
           </Link>
@@ -180,7 +184,7 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
       </ul>
     </Sectie>
 
-    <PaginaSlot titel={product.naam} tekst={t.note} knoppen={[
+    <PaginaSlot titel={product.naam} tekst={note} knoppen={[
       { label: t.order, href: contact.href, extern: true },
       { label: t.season, href: `/${locale}/feestdagen`, soort: "lijn" },
     ]} />

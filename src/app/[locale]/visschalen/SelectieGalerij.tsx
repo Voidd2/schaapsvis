@@ -9,6 +9,8 @@ export type SelectieGalerijKaart = {
   naam: string;
   foto: string;
   fotoBijschrift: string;
+  fotoAlt?: string;
+  fotoLabel?: string;
   beschrijving: string;
   prijsTekst?: string;
   whatsappHref: string;
@@ -114,12 +116,12 @@ export function SelectieGalerij({ kaarten, tekst, family }: { kaarten: SelectieG
               setActief(index);
             }}
           >
-            <Image src={item.foto} alt={item.naam} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className={family ? "object-contain" : "object-cover transition duration-300 group-hover:scale-[1.02]"} />
+            <Image src={item.foto} alt={item.fotoAlt ?? item.naam} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className={family ? "object-contain" : "object-cover transition duration-300 group-hover:scale-[1.02]"} />
             <span className="absolute bottom-3 right-3 rounded-full bg-white/95 px-3 py-2 text-sm font-semibold text-[#004f70] shadow-md">
               <span aria-hidden="true">⌕</span> {tekst.open}
             </span>
           </button>
-          <figcaption className="px-5 py-2 text-xs text-[#547080]">{item.fotoBijschrift}</figcaption>
+          <figcaption className={item.fotoLabel ? "platter-photo-note px-5 py-3" : "px-5 py-2 text-xs text-[#547080]"}>{item.fotoLabel && <strong>{item.fotoLabel}</strong>}<span>{item.fotoBijschrift}</span></figcaption>
         </figure>
         <div className="flex flex-1 flex-col p-5 pt-3">
           {family ? <><p className="platter-choice-description">{family.description}</p>{family.sizeControl}</> : <h3 className="mb-2 text-[1.25rem]">{item.naam}</h3>}
@@ -156,7 +158,7 @@ export function SelectieGalerij({ kaarten, tekst, family }: { kaarten: SelectieG
 
         <div className="p-3 sm:p-6">
           <div className="relative mx-auto aspect-[4/3] w-full max-w-5xl overflow-hidden rounded-xl bg-[#eef6f9]">
-            <Image src={kaart.foto} alt={kaart.naam} fill sizes="(max-width: 768px) 100vw, 1100px" className="object-contain" />
+            <Image src={kaart.foto} alt={kaart.fotoAlt ?? kaart.naam} fill sizes="(max-width: 768px) 100vw, 1100px" className="object-contain" />
             {kaarten.length > 1 && <>
               <button type="button" className="absolute left-2 top-1/2 inline-flex size-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 text-3xl text-[#004f70] shadow-lg hover:bg-white sm:left-4" aria-label={tekst.previous} onClick={vorige}>
                 <span aria-hidden="true">‹</span>
@@ -168,6 +170,7 @@ export function SelectieGalerij({ kaarten, tekst, family }: { kaarten: SelectieG
           </div>
           <div className="mx-auto max-w-5xl px-1 pb-2 pt-5 sm:px-2">
             <h2 id={titelId} className="text-2xl sm:text-3xl">{kaart.naam}</h2>
+            {kaart.fotoLabel && <strong className="mt-3 block">{kaart.fotoLabel}</strong>}
             <p id={beschrijvingId} className="mt-2 max-w-3xl text-base leading-7 text-[#4d6370]">{kaart.beschrijving}</p>
           </div>
         </div>
