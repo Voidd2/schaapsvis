@@ -2,11 +2,12 @@
 
 Laatst bijgewerkt: 2 november 2026, Europe/Amsterdam
 
-## Afronding schaalselectie en vertalingen — lokaal gereed
+## Afronding schaalselectie en vertalingen — live afgerond
 
 - Gerelateerde schaalroutes behouden nu alle geselecteerde families via de bestaande URL-helper. Alle twaalf productdetails hebben een gedeelde EN/DE tekstlaag; bedragen, inhoud en allergenen behouden. Gevelteksten voorbereid in drie talen.
 - Volledige gerelateerde-route gereproduceerd en hersteld; 36 gerenderde pagina’s en 9 mobiele taal/familiecombinaties gecontroleerd. Gerichte tests en beide builds geslaagd.
-- Volgende stap: PR/CI, Cloudflare en live reproductie. Details: `docs/afronding-schaalselectie-vertalingen.md`.
+- PR #72 samengevoegd als `79673b0`; site-Worker `d4ddeb66` en leden-Worker `39f835f7` beide 100% Ready. Live gerelateerde-route plus herladen bevestigt klassiek 3–5, luxe 10–14 en hapjes 6–10. EN/DE drie families op 390/1440 zonder overflow of Nederlandse productteksten. Beide FAQ-prijsantwoorden behouden.
+- Alle drie onderdelen afgerond; details en bewijs: `docs/afronding-schaalselectie-vertalingen.md`.
 
 ## Derde verbeteringsronde — live afgerond
 

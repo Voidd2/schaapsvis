@@ -20,4 +20,10 @@
 
 ## Publicatie
 
-PR en productiecontrole volgen. Backend/accounts/toegangsbeveiliging en Wallet zijn ongemoeid.
+PR [#72](https://github.com/Voidd2/schaapsvis/pull/72) is samengevoegd als `79673b0ba4e7ab37215ad7dcac2db3fe944290da`. GitHub Build site geslaagd; Codex-review afgerond zonder bevindingen. Cloudflare site-Worker `d4ddeb66` en leden-Worker `39f835f7` staan beide op **100% Ready**. Backend/accounts/toegangsbeveiliging en Wallet zijn ongemoeid.
+
+Live op schaapsvishandel.nl is de volledige route opnieuw uitgevoerd: klassiek 8–10 + luxe 10–14 + hapjes 6–10 → klassieke detail → gerelateerd klassiek 3–5 → Alle visschalen → herladen. Resultaat: klassiek 3–5, luxe 10–14, hapjes 6–10, anker #schalen-klassiek. Bewijs: `../design-preview/platter-finish/live-route.json`.
+
+De drie families in EN en DE zijn live op 390 en 1440 CSS-pixels gecontroleerd: 12 combinaties, geen horizontale overflow of Nederlandse productzinnen/prijseenheden. EN/DE FAQ zichtbaar geopend: vaste prijs blijft voor de hele schaal; €17,50 p.p. uitsluitend maatwerk. Geen consolefouten tijdens de gecontroleerde navigatie.
+
+Bewijsbeelden: `../design-preview/platter-finish/de-product-live.png` en `de-mobile-live.png`; metingen in `live-layouts.json`. Alle drie onderdelen van de afrondingsopdracht zijn afgerond.
