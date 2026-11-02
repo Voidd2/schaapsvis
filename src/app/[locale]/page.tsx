@@ -1,3 +1,4 @@
+import { PlatterPhotoNote } from "@/components/PlatterPhotoNote";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -159,6 +160,7 @@ export default async function HomePage({
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-center">
           <div className="order-2 lg:order-1">
             <Beeld naam="schaalBorrel" verhouding="liggend" streep="var(--navy)" />
+            <p className="mt-3"><PlatterPhotoNote locale={locale} /></p>
           </div>
           <div className="order-1 lg:order-2">
             <Kop label={h("visschaalLabel")} titel={h("visschaalKop")} />

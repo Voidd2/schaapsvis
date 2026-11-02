@@ -3,6 +3,7 @@ import { euro, whatsappLink } from "@/lib/bedrijf";
 import { SelectieGalerij } from "./SelectieGalerij";
 import { FormaatKeuze } from "./FormaatKeuze";
 import { PLATTER_FAMILIES, platterFamilies, platterLabels } from "@/lib/platter-families";
+import { platterPhotoAlt, platterPresentation, platterPrice } from "@/lib/platter-presentation";
 import { localizedPlatterProduct } from "@/lib/platter-product-text";
 import { feestdagenBedrag, feestdagenProduct } from "@/lib/feestdagen-producten";
 
@@ -62,9 +63,11 @@ function maakKaarten({ items, locale, showPrice = true, photoCaption }: KaartPro
         formaat: `${item.personenVan}–${item.personenTot} ${locale === "nl" ? "personen" : locale === "de" ? "Personen" : "people"}`,
         naam,
         foto: item.foto,
-        fotoBijschrift: photoCaption ?? t.foto,
-        beschrijving: showPrice ? t.productBeschrijving(naam) : t.schaalBeschrijving(naam),
-        prijsTekst: showPrice ? `${t.prijs} ${bedrag}${item.perStuk ? ` ${t.stuk}` : ""}` : undefined,
+        fotoBijschrift: isPlatter ? platterPresentation(locale).photoText : photoCaption ?? t.foto,
+        fotoAlt: isPlatter ? platterPhotoAlt(product, locale) : undefined,
+        fotoLabel: isPlatter ? platterPresentation(locale).photoLabel : undefined,
+        beschrijving: isPlatter ? platterPresentation(locale).photoText : showPrice ? t.productBeschrijving(naam) : t.schaalBeschrijving(naam),
+        prijsTekst: isPlatter ? platterPrice(product, locale) : showPrice ? `${t.prijs} ${bedrag}${item.perStuk ? ` ${t.stuk}` : ""}` : undefined,
         whatsappHref: whatsappLink(bericht),
         whatsappLabel: t.vraag,
         detailsHref: feestdagenProduct(item.slug) ? `/${locale}/feestdagen/${item.slug}` : undefined,
@@ -91,7 +94,7 @@ export function SelectieAanvraag({ locale, showSpecial = true, showBarbecue = tr
         title={(taal === "nl" ? ["Klassieke visschaal", "Luxe visschaal", "Hapjesschaal"] : taal === "de" ? ["Klassische Fischplatte", "Deluxe Fischplatte", "Häppchenplatte"] : ["Classic seafood platter", "Deluxe seafood platter", "Seafood bites platter"])[i]}
         description={(taal === "nl" ? ["Zalmsalade, gerookte vis en garnalen, feestelijk opgemaakt.", "Een rijke selectie met onder andere tonijn, zalm, paling en garnalen.", "Kleine vishapjes, zalmwraps en garnalen om samen te delen."] : taal === "de" ? ["Lachssalat, Räucherfisch und Garnelen, festlich angerichtet.", "Eine reichhaltige Auswahl mit Thunfisch, Lachs, Aal und Garnelen.", "Kleine Fischhäppchen, Lachs-Wraps und Garnelen zum Teilen."] : ["Salmon salad, smoked fish and prawns, arranged for your occasion.", "A generous selection including tuna, salmon, eel and prawns.", "Seafood bites, salmon wraps and prawns to share."])[i]}
         label={taal === "nl" ? "Kies het formaat" : taal === "de" ? "Größe wählen" : "Choose a size"}
-        kaarten={maakKaarten({items:platterFamilies[group], locale:taal, photoCaption: photoCaption ?? platterLabels[taal].caption}).map(card => ({...card, detailsLabel:platterLabels[taal].details}))}
+        kaarten={maakKaarten({items:platterFamilies[group], locale:taal}).map(card => ({...card, detailsLabel:platterLabels[taal].details}))}
         tekst={{open:t.open, close:t.sluiten, previous:t.vorige, next:t.volgende, counter:t.teller}}
       />)}
       </div>

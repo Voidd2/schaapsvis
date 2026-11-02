@@ -1,3 +1,6 @@
+import { PlatterInquiry } from "@/components/PlatterInquiry";
+import { inquiryText } from "@/lib/platter-inquiry";
+import { platterPresentation } from "@/lib/platter-presentation";
 import { connection } from "next/server";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
@@ -37,6 +40,7 @@ export default async function VisschalenPage({
   const g = await getTranslations({ locale, namespace: "gedeeld" });
   const nav = await getTranslations({ locale, namespace: "nav" });
 
+  const presentation = platterPresentation(locale);
   const vragen = t.raw("faq") as { v: string; a: string }[];
 
   const productSchema = {
@@ -79,7 +83,15 @@ export default async function VisschalenPage({
         <SelectieAanvraag locale={locale} showSpecial={false} showBarbecue={false} showPlatters />
       </Sectie>
 
-      <aside className="section-wrap pb-8 text-sm"><p className="border-t pt-5 border-[var(--linen)]">{t("maatwerkRichtbedrag")}</p></aside>
+      <Sectie grond="zand" id="maatwerk">
+        <Kop titel={presentation.custom} intro={inquiryText(locale).intro} />
+        <PlatterInquiry locale={locale} />
+        <p className="mt-6 max-w-3xl text-sm leading-relaxed">{t("maatwerkRichtbedrag")}</p>
+      </Sectie>
+      <Sectie grond="papier">
+        <Kop titel={presentation.stepsTitle} />
+        <ol className="grid gap-6 md:grid-cols-3">{presentation.steps.map((step, i) => <li key={step} className="border-t border-[var(--linen)] pt-4"><strong className="mr-3">{i + 1}.</strong>{step}</li>)}</ol>
+      </Sectie>
 
       {/* ── Praktisch ─────────────────────────────────────────────────────── */}
       <Sectie grond="zand">

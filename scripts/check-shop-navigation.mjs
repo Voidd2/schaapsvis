@@ -54,6 +54,7 @@ assert.equal(relatedBack.hash, "#schalen-klassiek");
 assert.equal(platterDetailHref("de", "salade-trio", originalSelection), "/de/feestdagen/salade-trio");
 
 const { localizedPlatterProduct } = load("src/lib/platter-product-text.ts");
+const { platterPrice, platterPhotoAlt, platterPresentation } = load("src/lib/platter-presentation.ts");
 const { feestdagenBedrag, feestdagenPrijs } = load("src/lib/feestdagen-producten.ts");
 const allergens = {
   en: { Vis: "Fish", Schaaldieren: "Crustaceans", Gluten: "Gluten", Ei: "Egg", Mosterd: "Mustard", Soja: "Soy", Selderij: "Celery", Melk: "Milk", Sesam: "Sesame" },
@@ -83,7 +84,7 @@ if (process.env.PLATTER_DETAIL_EVIDENCE) {
   for (const row of rows) {
     const product = localizedPlatterProduct(FEESTDAGEN_PRODUCTEN.find(p => p.slug === row.slug), row.locale);
     assert.equal(row.name, product.naam);
-    assert.equal(row.alt, product.naam);
+    assert.equal(row.alt, platterPhotoAlt(product, row.locale));
     assert.ok(row.title.includes(product.naam));
     assert.equal(row.description, product.intro);
     assert.equal(row.schema.name, product.naam);
@@ -91,17 +92,17 @@ if (process.env.PLATTER_DETAIL_EVIDENCE) {
     assert.equal(row.schema.offers.price, (product.prijsCents / 100).toFixed(2));
     for (const text of [product.intro, product.formaat, product.besteltermijn, ...product.samenstelling, ...product.allergenen]) assert.ok(row.text.includes(text), `${row.locale}/${row.slug}: ${text}`);
     const price = feestdagenBedrag(product.prijsCents, row.locale);
-    assert.ok(row.text.includes(feestdagenPrijs(product, row.locale)));
+    assert.ok(row.text.includes(platterPrice(product, row.locale)));
     assert.ok(row.option.includes(price));
     const message = new URL(row.whatsapp).searchParams.get("text");
     assert.ok(message.includes(product.naam));
-    assert.ok(message.includes(feestdagenPrijs(product, row.locale)));
+    assert.ok(message.includes(platterPrice(product, row.locale)));
     for (const link of row.related) {
       const url = new URL(link.href, "https://example.test");
       const slug = url.pathname.split("/").at(-1);
       const related = localizedPlatterProduct(FEESTDAGEN_PRODUCTEN.find(p => p.slug === slug), row.locale);
       assert.ok(link.text.includes(related.naam));
-      assert.ok(link.text.includes(feestdagenPrijs(related, row.locale)));
+      assert.ok(link.text.includes(platterPrice(related, row.locale)));
       if (platterFamily(slug) !== "luxe") assert.equal(url.searchParams.get("luxe"), "visschotel-luxe-10-14-pers");
       if (platterFamily(slug) !== "hapjes") assert.equal(url.searchParams.get("hapjes"), "visschotel-hapjes-6-10-pers");
     }
@@ -110,6 +111,39 @@ if (process.env.PLATTER_DETAIL_EVIDENCE) {
   }
   console.log("36 rendered details verified: translations, canonical amounts, ingredients/allergens, metadata, schema, images, related links and WhatsApp.");
 }
+
+const { inquiryText, platterInquiryMessage } = load("src/lib/platter-inquiry.ts");
+const { whatsappLink } = load("src/lib/bedrijf.ts");
+for (const locale of ["nl", "en", "de"]) {
+  const t = inquiryText(locale);
+  const emptyOptional = { preference: "advies", people: "8", use: "advies", date: "2026-12-24", dateUnknown: true, budget: "  ", wishes: "  " };
+  const basic = platterInquiryMessage(locale, emptyOptional);
+  assert.ok(basic.includes(`${t.people}: 8`));
+  assert.ok(basic.includes(t.unknown));
+  assert.ok(!basic.includes("2026"));
+  assert.ok(!basic.includes(t.budgetMessage));
+  assert.ok(!basic.includes(t.wishesMessage));
+  const full = platterInquiryMessage(locale, { ...emptyOptional, preference: "eigen", use: "maaltijd", dateUnknown: false, budget: "125.50", wishes: "Graag zalm & paling\nAllergie: sesam?" });
+  assert.ok(full.includes(t.preferences.eigen));
+  assert.ok(full.includes(t.uses.maaltijd));
+  assert.ok(full.includes("2026"));
+  assert.ok(!full.includes(t.unknown));
+  assert.ok(full.includes(`${t.budgetMessage}: € 125.50`));
+  assert.ok(full.includes("Graag zalm & paling\nAllergie: sesam?"));
+  assert.ok(full.includes(t.note));
+  assert.ok(!full.includes("1004")); // Never multiply the budget by the guest count.
+  const link = new URL(whatsappLink(full));
+  assert.equal(link.hostname, "wa.me");
+  assert.equal(link.searchParams.get("text"), full);
+  for (const product of FEESTDAGEN_PRODUCTEN.filter(p => p.categorie === "visschalen")) {
+    const label = platterPrice(product, locale);
+    assert.ok(label.includes(feestdagenBedrag(product.prijsCents, locale)));
+    assert.ok(label.includes(platterPresentation(locale).unit));
+    assert.ok(label.includes(product.slug.match(/(\d+)-(\d+)-pers$/).slice(1).join("–")));
+    assert.doesNotMatch(platterPhotoAlt(product, locale), /\d/); // Example image never asserts a particular size.
+  }
+}
+console.log("Platter presentation and 3-language enquiry drafts passed; optional fields omitted and budget never multiplied.");
 
 const polluted = new URLSearchParams("klassiek=visschotel-luxe-8-10-pers&luxe=unknown&hapjes=https://evil.test");
 for (const family of Object.keys(platterFamilies)) {

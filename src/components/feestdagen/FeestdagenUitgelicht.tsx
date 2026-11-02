@@ -1,9 +1,14 @@
 "use client";
 
+import { PlatterPhotoNote } from "@/components/PlatterPhotoNote";
+import { platterPhotoAlt, platterPrice } from "@/lib/platter-presentation";
+import { localizedPlatterProduct } from "@/lib/platter-product-text";
+
+
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
-import { feestdagenPrijs, type FeestdagenProduct } from "@/lib/feestdagen-producten";
+import { type FeestdagenProduct } from "@/lib/feestdagen-producten";
 
 type Props = {
   locale: string;
@@ -16,7 +21,7 @@ type Props = {
 
 export function FeestdagenUitgelicht({ locale, label, title, hint, linkLabel, products }: Props) {
   const rail = useRef<HTMLUListElement>(null);
-  const featured = products.slice(0, 7);
+  const featured = products.slice(0, 7).map(product => localizedPlatterProduct(product, locale));
 
   function move(direction: -1 | 1) {
     const container = rail.current;
@@ -47,13 +52,14 @@ export function FeestdagenUitgelicht({ locale, label, title, hint, linkLabel, pr
             <li key={product.slug} className="min-w-[84%] snap-start overflow-hidden rounded-xl bg-white shadow-lg sm:min-w-[47%] lg:min-w-[31.5%]">
               <Link href={`/${locale}/feestdagen/${product.slug}`} className="group grid h-full grid-rows-[auto_1fr] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-[-4px] focus-visible:outline-[#ffd98b]">
                 <div className="relative aspect-[16/10] overflow-hidden bg-[#eaf7fc]">
-                  <Image src={product.afbeelding} alt={product.naam} fill sizes="(max-width: 640px) 84vw, (max-width: 1024px) 47vw, 32vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.035]" priority={index === 0} />
+                  <Image src={product.afbeelding} alt={platterPhotoAlt(product, locale)} fill sizes="(max-width: 640px) 84vw, (max-width: 1024px) 47vw, 32vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.035]" priority={index === 0} />
                   <span className="absolute left-3 top-3 rounded-full bg-[#b32632] px-3 py-1.5 text-[0.62rem] font-bold uppercase tracking-[0.14em] text-white">{label}</span>
                 </div>
                 <div className="flex flex-col p-5">
+                  {product.categorie === "visschalen" && <p className="mb-4"><PlatterPhotoNote locale={locale} /></p>}
                   <h3 className="text-[1.28rem] leading-tight" style={{ color: "var(--navy-dark)" }}>{product.naam}</h3>
                   <p className="mt-2 line-clamp-2 text-sm leading-relaxed" style={{ color: "var(--charcoal)" }}>{product.intro}</p>
-                  <p className="mt-4 text-sm font-bold" style={{ color: "#a61f2b" }}>{feestdagenPrijs(product, locale)}</p>
+                  <p className="mt-4 text-sm font-bold" style={{ color: "#a61f2b" }}>{platterPrice(product, locale)}</p>
                   <span className="mt-3 text-sm font-semibold underline underline-offset-4" style={{ color: "var(--navy)" }}>{linkLabel} →</span>
                 </div>
               </Link>
