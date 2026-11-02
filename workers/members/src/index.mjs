@@ -499,9 +499,16 @@ async function sendMail(env, to, subject, text, htmlBody, options = {}) {
 // gap is friendlier to shared-host reputation and mailbox threading rules.
 async function sendVerificationPair(env, { email, schoolEmail, copy, locale, personalCode, schoolCode, validity }) {
   const transactionalText = (intro, code) => `${intro}\n${code}\n${validity}\n\nSchaap’s Vishandel · Leiden · sinds 1938.`;
-  await sendMail(env, email, copy.verifySubject, transactionalText(copy.verifyIntro, personalCode), verificationCodeEmail(locale, copy.verifySubject, copy.verifyIntro, personalCode, validity));
-  await new Promise((resolve) => setTimeout(resolve, 1500));
-  await sendMail(env, schoolEmail, copy.schoolVerifySubject, transactionalText(copy.schoolVerifyIntro, schoolCode), verificationCodeEmail(locale, copy.schoolVerifySubject, copy.schoolVerifyIntro, schoolCode, validity));
+  const personal = await Promise.allSettled([
+    sendMail(env, email, copy.verifySubject, transactionalText(copy.verifyIntro, personalCode), verificationCodeEmail(locale, copy.verifySubject, copy.verifyIntro, personalCode, validity)),
+  ]);
+  if (env.SMTP_HOST || env.SMTP_USERNAME || env.SMTP_PASSWORD) {
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+  }
+  const school = await Promise.allSettled([
+    sendMail(env, schoolEmail, copy.schoolVerifySubject, transactionalText(copy.schoolVerifyIntro, schoolCode), verificationCodeEmail(locale, copy.schoolVerifySubject, copy.schoolVerifyIntro, schoolCode, validity)),
+  ]);
+  if (personal[0].status === "rejected" || school[0].status === "rejected") throw new Error("verification-email-failed");
 }
 
 async function issueEmailToken(env, { userId = null, email = null, purpose, ttlMs = EMAIL_TOKEN_MS }) {
