@@ -38,7 +38,7 @@
     "bezorgenPlaatsTitle": "Frischen Fisch liefern lassen in {plaats} | Fischhändler aus Leiden",
     "bezorgenPlaatsDesc": "Frischen Fisch oder eine Fischplatte in {plaats} liefern lassen? Schaap's Vishandel aus Leiden fährt {dagen} raus. Bestellung bis 12:00 Uhr am Vortag, Zahlung an der Tür oder demnächst online.",
     "visschalenTitle": "Fischplatten in Leiden für Feiern und Veranstaltungen | Schaap's",
-    "visschalenDesc": "Fischplatten in Leiden für Geburtstage, Empfänge und Veranstaltungen. Wir stimmen die Auswahl auf Geschmack und Anlass ab; durchschnittlich etwa 17,50 € pro Person. Anfrage per WhatsApp.",
+    "visschalenDesc": "Fischplatten in Leiden: klassisch, Deluxe oder Häppchen mit festem Gesamtpreis je Größe. Individuelle Platten nach Absprache, mit etwa 17,50 € pro Person als Richtbetrag.",
     "barbecueTitle": "Fisch für Grill und Gourmet in Leiden | Schaap’s Vishandel",
     "barbecueDesc": "Fisch-Grillpakete, Gourmetauswahl und einzelne Fischspieße in Leiden. Sehen Sie sich unser Angebot an und besprechen Sie Ihre Wünsche direkt per WhatsApp mit Schaap’s Vishandel."
   },
@@ -299,7 +299,7 @@
     "bezorgLink": "So läuft die Lieferung",
     "visschaalLabel": "Für den Anlass",
     "visschaalKop": "Eine Fischplatte passend zu Ihrem Anlass",
-    "visschaalTekst": "Für einen Umtrunk, Geburtstag oder ein Fest beraten wir Sie bei der Auswahl. Erzählen Sie uns, wie viele Gäste Sie erwarten und welchen Fisch Sie mögen. Im Durchschnitt rechnen wir mit etwa 17,50 € pro Person; Extras oder hochwertigere Fischsorten können den Preis verändern. Besprechen Sie Ihre Wünsche mit uns per WhatsApp.",
+    "visschaalTekst": "Für einen geselligen Abend, Geburtstag oder ein Fest. Wählen Sie eine klassische Fischplatte, eine Deluxe- oder Häppchenplatte und entdecken Sie Größen und Preise. Lieber nach Wunsch? Erzählen Sie uns davon.",
     "visschaalVanaf": "Ab",
     "visschaalLink": "Alle Fischplatten ansehen",
     "verhaalLabel": "Seit 1938",
@@ -457,7 +457,7 @@
   "visschaal": {
     "eyebrow": "Umtrunk · Geburtstag · Weihnachten",
     "kop": "Fischplatten zum Teilen.",
-    "inleiding": "Wählen Sie klassisch, deluxe oder Häppchen. Vergleichen Sie Größen und Gesamtpreise und besprechen Sie Ihre Bestellung per WhatsApp.",
+    "inleiding": "Wählen Sie klassisch, Deluxe oder Häppchen. Entdecken Sie Größe, Zusammenstellung und Preis.",
     "per100": "pro 100 g",
     "perStuk": "pro {eenheid}",
     "seizoen": "{periode}",
@@ -465,8 +465,8 @@
     "niksGekozen": "Wählen Sie oben eine Platte und die Personenzahl.",
     "gewichtRegel": "{gewicht} extra",
     "personenRegel": "Für {personen} Personen",
-    "vergelijking": "Der Durchschnittspreis liegt bei etwa 17,50 € pro Person; die endgültige Auswahl und den Preis besprechen wir mit Ihnen.",
-    "voorlopig": "Der Preis ist ein durchschnittlicher Richtwert; Auswahl und Edelfisch besprechen wir mit Ihnen.",
+    "vergelijking": "Nur für individuelle Platten verwenden wir etwa 17,50 € pro Person als Richtbetrag. Der Preis einer festen Ausführung gilt für die gesamte gewählte Größe.",
+    "voorlopig": "Nur für individuelle Platten verwenden wir etwa 17,50 € pro Person als Richtbetrag. Der Preis einer festen Ausführung gilt für die gesamte gewählte Größe.",
     "hoeveelKop": "Wie viel brauche ich?",
     "hoeveelTekst": "Rechnen Sie mit {borrel} Gramm pro Person, wenn es auch anderes Essen gibt, und {maaltijd} Gramm, wenn die Platte die Mahlzeit ist.",
     "wissen": "Alles löschen",
@@ -480,11 +480,11 @@
     "faq": [
       {
         "v": "Was kostet eine Fischplatte?",
-        "a": "Der Durchschnittspreis liegt bei etwa 17,50 € pro Person. Der Endpreis hängt von Gästezahl, Auswahl und Edelfisch ab. Besprechen Sie Ihre Wünsche per WhatsApp; den Preis bestätigen wir vorher."
+        "a": "Der angezeigte Preis gilt für die gesamte Platte in der genannten Größe. Nur für eine individuelle Platte verwenden wir etwa 17,50 € pro Person als Richtbetrag. Wir besprechen die Zusammenstellung und bestätigen den Betrag im Voraus."
       },
       {
         "v": "Für wie viele Personen reicht eine Platte?",
-        "a": "Wählen Sie die Gästezahl als Richtwert. Menge und Auswahl stimmen wir auf Ihre Gruppe und den Anlass ab. Im Durchschnitt sind es etwa 17,50 € pro Person."
+        "a": "Bei jeder Größe sehen Sie, für wie viele Personen die Platte gedacht ist. Unsicher, ob sie als Mahlzeit oder zum Umtrunk passt? Besprechen Sie Ihre Gruppe und Wünsche mit uns per WhatsApp."
       },
       {
         "v": "Kann ich die Platte anpassen?",
@@ -507,18 +507,18 @@
         "a": "Schreiben oder rufen Sie uns. Die Liste ist, was wir oft machen, keine Grenze. Wenn es zu bekommen ist, legen wir es darauf."
       }
     ],
-    "vergelijkingKort": "Fischplatten in Leiden, abgestimmt auf Ihren Geschmack und Anlass. Der durchschnittliche Richtpreis liegt bei etwa 17,50 € pro Person.",
+    "vergelijkingKort": "Nur für individuelle Platten verwenden wir etwa 17,50 € pro Person als Richtbetrag. Der Preis einer festen Ausführung gilt für die gesamte gewählte Größe.",
     "perSchaal": "pro Person",
     "stap1": "Schritt 1",
     "stap2": "Schritt 2",
-    "schaalKop": "Fischplatten für Ihren Anlass",
-    "schaalUitleg": "Suchen Sie eine Fischplatte in Leiden für einen Geburtstag, Empfang oder eine Firmenfeier? Sehen Sie sich die Fotos an und wählen Sie Ihren Favoriten. Wir beraten Sie zu Fisch, Menge und Anlass. Im Durchschnitt berechnen wir etwa 17,50 € pro Person. Extras oder Edelfisch können den Preis erhöhen; das besprechen wir vorab per WhatsApp.",
+    "schaalKop": "Fischplatte wählen",
+    "schaalUitleg": "Sagen Sie uns, für wie viele Personen und welchen Anlass Sie eine Platte suchen. Wir helfen Ihnen gerne bei der Auswahl.",
     "fotoVoorbeeld": "Inspiration für Ihre Fischplatte",
     "voorPersonen": "Für {van} bis {tot} Personen",
     "startbedrag": "Durchschnittlicher Richtpreis: etwa {bedrag}",
     "aantalPersonen": "Für wie viele Personen?",
     "gemiddeld": "Durchschnittlich",
-    "gemiddeldePrijs": "Im Durchschnitt etwa 17,50 € pro Person",
+    "gemiddeldePrijs": "Individuelle Platten: Richtbetrag etwa 17,50 € pro Person",
     "watErOpLigt": "Was darauf liegt",
     "kiesSchaal": "Diese Platte wählen",
     "gekozen": "Gewählt — zum Wechseln klicken",
@@ -526,7 +526,9 @@
     "extrasUitleg": "Teilen Sie uns per WhatsApp mit, welchen Fisch Sie auf Ihrer Platte möchten. Ergänzungen oder Edelfisch können den Preis erhöhen; den Endpreis vereinbaren wir vorher.",
     "extrasEerstSchaal": "Besprechen Sie Ergänzungen mit uns per WhatsApp.",
     "extrasRegel": "",
-    "maatwerkRichtbedrag": "Eine individuelle Platte für eine Feier? Rechnen Sie als Richtwert mit etwa 17,50 € pro Person. Die festen Ausführungen oben haben jeweils ihren eigenen Gesamtpreis."
+    "maatwerkRichtbedrag": "Nur für individuelle Platten verwenden wir etwa 17,50 € pro Person als Richtbetrag. Der Preis einer festen Ausführung gilt für die gesamte gewählte Größe.",
+    "hulpKop": "Hilfe bei der Auswahl?",
+    "adviesLink": "Beratung gewünscht? Schreiben Sie uns."
   },
   "bestel": {
     "eyebrow": "Bestellen",

@@ -65,10 +65,15 @@ export type LocationStatus = {
   dag?: number;
 };
 
-export function getLocationStatus(location: Location): LocationStatus {
-  const nu = new Date();
-  const dagVanDeWeek = nu.getDay();
-  const klok = `${String(nu.getHours()).padStart(2, "0")}:${String(nu.getMinutes()).padStart(2, "0")}`;
+const amsterdamClock = new Intl.DateTimeFormat("en-GB", {
+  timeZone: "Europe/Amsterdam", weekday: "short", hour: "2-digit", minute: "2-digit", hourCycle: "h23",
+});
+
+export function getLocationStatus(location: Location, nu = new Date()): LocationStatus {
+  const parts = amsterdamClock.formatToParts(nu);
+  const part = (type: Intl.DateTimeFormatPartTypes) => parts.find(item => item.type === type)!.value;
+  const dagVanDeWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(part("weekday"));
+  const klok = `${part("hour")}:${part("minute")}`;
 
   const vandaag = openingHours[location].find((h) => h.days.includes(dagVanDeWeek));
 

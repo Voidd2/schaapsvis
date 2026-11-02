@@ -678,7 +678,7 @@ summary::-webkit-details-marker {
   .home-visit-link { display: inline-block; padding-block: 14px; margin-top: 12px; color: var(--navy); text-decoration: underline; text-underline-offset: 4px; }
   .heritage-stamp { display: grid; place-content: center; float: right; margin: 0 0 20px 24px; width: 96px; height: 96px; border: 1px solid var(--navy); border-radius: 50%; text-align: center; color: var(--navy); font-size: .8rem; line-height: 1.2; }
   .heritage-stamp strong { font: 700 1.65rem var(--font-display); }
-  .home-student { background: var(--sand); border-block: 1px solid var(--linen); }
+  .home-student { background: var(--cream); border-block: 1px solid var(--linen); }
   .home-student > div { display: flex; align-items: center; gap: 32px; padding-block: 40px; }
   .home-student h2 { font-size: clamp(1.5rem,2.5vw,2.1rem); margin: 8px 0; }
   .home-student p:not(.kapitaal) { max-width: 570px; color: var(--charcoal); }
@@ -784,7 +784,8 @@ summary::-webkit-details-marker {
 #product-overzicht { padding-block: 32px 48px; }
 .product-intro { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: min-content 1fr; grid-template-areas: "image title" "image copy"; gap: 20px 48px; align-items: start; }
 .product-intro-title { grid-area: title; }
-.product-intro-image { grid-area: image; position: relative; width: 100%; aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; }
+.product-intro-figure { grid-area: image; min-width: 0; }
+.product-intro-image { position: relative; width: 100%; aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; }
 .product-intro-copy { grid-area: copy; }
 .product-intro-no-photo { grid-template-columns: 1fr; grid-template-areas: "title" "copy"; max-width: 760px; margin: auto; }
 .platter-choices { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 28px; }
@@ -813,4 +814,26 @@ summary::-webkit-details-marker {
   .home-story-with-photo .home-story-quote { grid-column: auto; }
   .home-story-quote blockquote { font-size: 1.35rem; }
   .home-products { gap: 24px 18px; }
+}
+
+/* Third round: limited to the platter overview and its family cards. */
+.platter-intro { padding-block: 28px 0; }
+.platter-intro h1 { font-size: clamp(2rem,5vw,3rem); line-height: 1.12; margin-bottom: 14px; }
+.platter-intro-text { max-width: 600px; font-size: 1.08rem; line-height: 1.6; }
+.platter-family-links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 12px; }
+.platter-family-links a,.platter-advice-link,.platter-back-link,.platter-details-link { display: inline-flex; align-items: center; min-height: 44px; color: var(--navy); font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+.platter-advice-link { font-weight: 400; }
+.platter-intro + #samenstellen { padding-top: 48px; }
+.platter-intro + #samenstellen h2 { margin-bottom: 24px; }
+.platter-choice-description { min-height: 0; line-height: 1.55; }
+.platter-family-card { height: calc(100% - 48px); }
+.platter-family-card > li { height: 100%; }
+.platter-total-price { color: var(--navy-dark); font-size: 1.5rem; font-weight: 600; margin-bottom: 16px; }
+.platter-details-link { justify-content: center; font-size: .95rem; text-align: center; }
+.platter-size select:disabled { cursor: wait; }
+@media(max-width:800px) {
+  .platter-intro { padding-top: 20px; }
+  .platter-intro + #samenstellen { padding-top: 32px; }
+  .platter-intro + #samenstellen h2 { margin-bottom: 20px; }
+  .platter-family-card { height: auto; }
 }

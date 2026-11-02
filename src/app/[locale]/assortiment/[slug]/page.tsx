@@ -85,14 +85,14 @@ export default async function ProductDetailPage({params}: Props) {
         <p className="kapitaal mb-2">{[category,product.badge,product.omega3?"Omega-3":null].filter(Boolean).join(" · ")}</p>
         <h1 className="text-3xl md:text-4xl leading-tight" style={{color:"var(--navy-dark)"}}>{product.naam}</h1>
       </div>
-      {photo && <div className="product-intro-image" style={{borderBottom:`3px solid ${CATEGORIE_KLEUR[product.categorie]}`}}>
+      {photo && <figure className="product-intro-figure"><div className="product-intro-image" style={{borderBottom:`3px solid ${CATEGORIE_KLEUR[product.categorie]}`}}>
         <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 800px) calc(100vw - 32px), 550px" priority className={photo.editorial && !photo.whole ? "object-cover" : "object-contain"} />
-      </div>}
+      </div>{photo.caption && <figcaption className="mt-3 text-sm text-[var(--grijs)]">{photo.caption}</figcaption>}</figure>}
       <div className="product-intro-copy">
         <p className="text-lg leading-relaxed mb-5">{product.desc}</p>
         <div className="mb-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
           <p><span className="kapitaal mr-2">{c.available}</span><strong>{availability.label}</strong></p>
-          {prijs && <p><span className="kapitaal mr-2">{c.price}</span><strong>{formatPrijs(prijs,lang)} — {c.guidePrice}</strong></p>}
+          <p className="product-price"><span className="kapitaal mr-2">{c.price}</span><strong>{prijs ? `${formatPrijs(prijs,lang)} — ${c.guidePrice}` : lang === "en" ? "Price on request" : lang === "de" ? "Preis auf Anfrage" : "Prijs op aanvraag"}</strong></p>
         </div>
         <div className="flex flex-wrap items-center gap-4 product-intro-actions">
           <a href={bestelContact(lang, product.naam).href} className="knop knop-navy">{lang === "nl" ? "Vraag naar dit product" : lang === "de" ? "Nach diesem Produkt fragen" : "Ask about this product"}</a>

@@ -1,3 +1,7 @@
+import { Suspense } from "react";
+import { connection } from "next/server";
+import { PlatterNavigation } from "@/components/PlatterNavigation";
+import { platterFamily, platterLabels, platterOverviewHref } from "@/lib/platter-families";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -67,6 +71,10 @@ export default async function FeestdagenProductPage({ params }: Props) {
   if (!product) notFound();
   const taal = locale === "en" || locale === "de" ? locale : "nl";
   const t = LABELS[taal];
+  const family = platterFamily(slug);
+  // Render incoming selection context on the server too: the back link must
+  // retain other families even before this page's JavaScript has loaded.
+  if (family) await connection();
   const contact = bestelContact(locale, `${product.naam} (${feestdagenPrijs(product, locale)})`);
   const related = gerelateerdeFeestdagenProducten(product);
   const url = `${BEDRIJF.domein}/${locale}/feestdagen/${product.slug}`;
@@ -95,11 +103,12 @@ export default async function FeestdagenProductPage({ params }: Props) {
       { naam: product.naam, pad: `/feestdagen/${product.slug}` },
     ])]} />
 
+    {family && <div className="section-wrap pt-6"><Suspense fallback={<Link className="platter-back-link" href={platterOverviewHref(locale, slug)}>{platterLabels[taal].back}</Link>}><PlatterNavigation locale={taal} slug={slug} mode="back" /></Suspense></div>}
     <section className="bg-[#f7f3ec]">
       <div className="mx-auto grid max-w-7xl gap-9 px-4 py-8 md:px-8 md:py-14 lg:grid-cols-[1.08fr_.92fr] lg:gap-14">
-        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white shadow-sm">
-          <Image src={product.afbeelding} alt={product.naam} fill priority sizes="(max-width: 1024px) 100vw, 58vw" className="object-cover" />
-        </div>
+        <figure><div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white shadow-sm">
+          <Image src={product.afbeelding} alt={product.naam} fill priority sizes="(max-width: 1024px) 100vw, 58vw" className={family ? "object-contain" : "object-cover"} />
+        </div>{family && <figcaption className="mt-3 text-sm text-[var(--grijs)]">{platterLabels[taal].caption}</figcaption>}</figure>
         <div className="flex flex-col justify-center">
           <nav aria-label="Breadcrumb" className="mb-6 text-sm text-[#527080]">
             <Link href={`/${locale}`}>{t.home}</Link> <span aria-hidden="true">/</span> <Link href={`/${locale}/feestdagen`}>{t.season}</Link>
@@ -111,6 +120,7 @@ export default async function FeestdagenProductPage({ params }: Props) {
             <p className="text-xs font-bold uppercase tracking-[.17em] text-[#527080]">{t.price}</p>
             <p className="mt-1 text-2xl font-bold text-[#a61f2b]">{feestdagenPrijs(product, locale)}</p>
           </div>
+          {family && <Suspense fallback={null}><PlatterNavigation locale={taal} slug={slug} mode="size" /></Suspense>}
           <p className="mt-5 text-sm leading-6 text-[#527080]">{t.note}</p>
           <a href={contact.href} target="_blank" rel="noopener noreferrer" className="knop knop-rood mt-7 w-full sm:w-fit">{t.order}</a>
         </div>

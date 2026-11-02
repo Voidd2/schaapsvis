@@ -26,6 +26,8 @@ export interface Beeldplek {
   bestand: string;
   /** Alt-tekst. Beschrijvend en lokaal — dat leest Google mee. */
   alt: string;
+  /** Visible caption describing the actual owner photo, when used in the hero. */
+  bijschrift?: string;
   verhouding: Verhouding;
   /** Intern label voor een nog ontbrekende eigenaarfoto. */
   terugval: string;
@@ -56,6 +58,7 @@ export const BEELD = {
     wat: "De winkel van buiten, met de gevel en het uithangbord herkenbaar. Liefst met daglicht en een stukje Herenstraat erbij.",
     bestand: "",
     alt: "De winkel van Schaap's Vishandel aan de Herenstraat 48 in Leiden",
+    bijschrift: "Onze winkel · Herenstraat 48, Leiden",
     verhouding: "liggend",
     terugval: "Herenstraat 48, Leiden",
   },
@@ -114,7 +117,7 @@ export const BEELD = {
   /* Hier zit de meeste winst. Eén vergeelde foto uit 1960 doet meer voor de
      geloofwaardigheid dan twintig keer "sinds 1938" in de tekst. */
   historie1938: {
-    waar: "Ons verhaal, bij 1938",
+    waar: "Homepage familieblok en Ons verhaal, bij 1938",
     wat: "De oudste foto die je hebt: de winkel, de viskar, Gerrit Schaap, een oud prijsbord. Scheef, korrelig of vergeeld mag — dat maakt het juist echt.",
     bestand: "",
     alt: "Schaap's Vishandel in Leiden rond de oprichting in 1938",
@@ -146,7 +149,7 @@ export const BEELD = {
     terugval: "2009",
   },
   historieNu: {
-    waar: "Ons verhaal, bij Vandaag",
+    waar: "Ons verhaal, bij Vandaag — actuele teamfoto, nooit als historische foto",
     wat: "De zaak zoals hij er nu bij staat, met het team erbij.",
     bestand: "",
     alt: "Het team van Schaap's Vishandel in Leiden vandaag",
@@ -204,3 +207,15 @@ export function ontbrekendeBeelden(): BeeldNaam[] {
   return (Object.keys(BEELD) as BeeldNaam[]).filter((naam) => BEELD[naam].bestand === "");
 }
 
+
+/** The storefront takes over only when a real owner image has been registered. */
+export function homepageHeroBeeld(locale: string) {
+  const gevel = BEELD.winkelGevel;
+  if (gevel.bestand) return { src: gevel.bestand, alt: gevel.alt, caption: gevel.bijschrift };
+  const copy = locale === "de"
+    ? ["Ofenlachs mit Zitrone und Dill", "Serviervorschlag · Lachs mit Zitrone und Dill"]
+    : locale === "en"
+      ? ["Oven-baked salmon with lemon and dill", "Serving idea · salmon with lemon and dill"]
+      : ["Zalm uit de oven met citroen en dille", "Aan tafel · zalm met citroen en dille"];
+  return { src: "/images/recepten/zalm-citroen-dille.webp", alt: copy[0], caption: copy[1] };
+}
