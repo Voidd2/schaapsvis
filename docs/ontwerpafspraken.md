@@ -17,6 +17,10 @@
 - Geen aanvraag, bestelling of registratie verstuurd.
 - Desktop- en telefoonscreenshots lokaal opgeslagen naast de repository in `../design-preview/`.
 
+## Publicatiebewijs
+
+PR #68 is samengevoegd als `2c5ffadcba8c7945687b39eb93e347c1cf9aa8ad`. Cloudflare site-Worker `schaapsvis` toont versie `5cf0b65f` als **100% Ready**. De nieuwe titel, themanavigatie en homepagevolgorde zijn op `https://schaapsvishandel.nl/nl` bevestigd. Live screenshots zijn op werkelijke breedtes 390 en 1441 px opgeslagen. De bestaande toegangscookie gaf toegang; er is geen wachtwoord of publicatie-instelling gewijzigd. Op mobiel staan de losse WhatsApp- en cookie-instellingenknoppen nu na de footer, zodat ze filters en inhoud niet bedekken.
+
 ## Nog aan te leveren / feitelijke tegenstrijdigheid
 
 - Eigen beelden ontbreken in de beeldregistratie voor de gevel Herenstraat, team/toonbank, historische familie/winkel en de drie kramen (Botermarkt, De Waag, Hoogvliet Voorschoten). Geen vervangende zaak of familie verzonnen.
