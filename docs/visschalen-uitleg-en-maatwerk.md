@@ -1,6 +1,6 @@
 # Visschalen: voorbeeldfoto, totaalprijs en maatwerk
 
-2 november 2026 — lokale uitvoering en controles afgerond; publicatie volgt.
+2 november 2026 — uitgevoerd, gecontroleerd en live afgerond.
 
 ## Uitvoering per eis
 
@@ -23,4 +23,10 @@
 
 ## Publicatie
 
-Cloudflare-build, PR, commit en livecontrole worden hieronder na afronding vastgelegd.
+- Cloudflare/Vinext-productiebuild geslaagd. PR #73: beide GitHub-controles groen en Codex-review voltooid zonder bevindingen.
+- Samengevoegd als `345e6a08a1425ea90db0725ac84206c63d84b449`.
+- Cloudflare site-Worker `fd4d198c` en leden-Worker `9bb08db0`: beide Ready met 100% verkeer voor deze commit. Ledenbron niet gewijzigd; bestaande automatische Git-build opnieuw gecontroleerd.
+- Live `https://schaapsvishandel.nl/nl/visschalen`: concept met luxe en 6 personen klopt, lege optionele velden ontbreken, URL bevat geen aanvraagtekst. Geen WhatsApp-bericht geopend of verzonden.
+- Live productdetail 3–5 personen toont €73,50 per schaal en voorbeeldfoto-uitleg. Maatwerklink keert terug naar het formulier met behoud van de gekozen klassieke variant.
+- Live 1440px desktop: twee formulierkolommen; 390px mobiel: één kolom, geen overflow. Fotovergroting bevat de volledige voorbeeldverklaring. Screenshots: `live-desktop.png`, `live-mobile-photo.png` in de bewijsmap.
+- Leden-healthcheck na uitrol: `{"status":"ok"}`. Alle vijf onderdelen van deze opdracht afgerond.
