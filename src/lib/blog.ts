@@ -386,7 +386,7 @@ const bestaandePosts: BlogPost[] = [
       {
         kop: "Drie plekken, één kwaliteit",
         alineas: [
-          "Winkel op de Herenstraat (maandag t/m zaterdag), markt Leiden (woensdag + zaterdag), en vrijdags bij Hoogvliet in Voorschoten. Zelfde vis, zelfde mensen, zelfde verhalen. Tot ziens bij de kraam!",
+          "Winkel op de Herenstraat (dinsdag t/m zaterdag), markt Leiden (woensdag + zaterdag), en vrijdags bij Hoogvliet in Voorschoten. Zelfde vis, zelfde mensen, zelfde verhalen. Tot ziens bij de kraam!",
         ],
       },
     ],

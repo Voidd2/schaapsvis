@@ -73,7 +73,7 @@ export default async function HomePage({
   const g = await getTranslations({ locale, namespace: "gedeeld" });
 
   return (
-    <>
+    <div className="home-page">
       <JsonLd locale={locale} />
 
       <section className="home-hero" style={{ backgroundColor: "var(--cream)" }}>
@@ -116,7 +116,7 @@ export default async function HomePage({
           <Kop label={h("assortimentLabel")} titel={locale === "nl" ? "Geliefd aan onze toonbank" : locale === "de" ? "Beliebt an unserer Fischtheke" : "Fish counter favourites"} />
           <Link href={`/${locale}/assortiment`} className="collection-text-link">{h("assortimentLink")} →</Link>
         </div>
-          <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-8">
+          <ul className="home-products grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-8">
             {UITGELICHT.map((slug) => {
               const bron = products.find((x) => x.slug === slug);
               if (!bron) return null;
@@ -124,7 +124,7 @@ export default async function HomePage({
               if(!photo) return null;
               return (
                 <li key={slug}>
-                  <Link href={`/${locale}/assortiment/${p.slug}`} className="block group">
+                  <Link href={`/${locale}/assortiment/${p.slug}`} className="home-product-card block group">
                     {/* Geen kader en geen eigen achtergrond: de uitsnede staat
                         al op wit, dus zo lijkt de vis op de pagina te liggen. */}
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -134,7 +134,7 @@ export default async function HomePage({
                       width={1400}
                       height={933}
                       loading="lazy"
-                      className="w-full aspect-[3/2] object-contain transition-transform duration-300 group-hover:scale-[1.04]"
+                      className="w-full aspect-[3/2] object-contain transition-transform duration-300 group-hover:scale-[1.02]"
                     />
                     <span
                       className="block mt-3 pt-2.5 text-[1rem] group-hover:underline underline-offset-4"
@@ -231,30 +231,17 @@ export default async function HomePage({
 
       {/* ── Sinds 1938 ────────────────────────────────────────────────────── */}
       <Sectie grond="zand">
-        <div className={`grid ${heeftBeeld("historie1938") ? "lg:grid-cols-[0.95fr_1.05fr]" : "max-w-3xl"} gap-10 lg:gap-16 items-center`}>
-          <Beeld naam="historie1938" streep="var(--navy)" />
-          <div>
-            <span className="heritage-stamp">{locale === "nl" ? "Sinds" : locale === "de" ? "Seit" : "Since"}<br /><strong>1938</strong></span><Kop label={h("verhaalLabel")} titel={h("verhaalKop")} />
-            <p className="lees mb-7" style={{ color: "var(--charcoal)" }}>
-              {h("verhaalTekst")}
-            </p>
-            <blockquote
-              className="text-[1.5rem] md:text-[1.8rem] leading-[1.35] italic mb-3"
-              style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}
-            >
-              &ldquo;{h("verhaalCitaat")}&rdquo;
-            </blockquote>
-            <p className="text-sm mb-7" style={{ color: "var(--grijs)" }}>
-              &mdash; {h("verhaalBron")}
-            </p>
-            <Link
-              href={`/${locale}/ons-verhaal`}
-              className="font-semibold underline underline-offset-4"
-              style={{ color: "var(--navy)" }}
-            >
-              {h("verhaalLink")} &rarr;
-            </Link>
+        <div className={`home-story ${heeftBeeld("historie1938") ? "home-story-with-photo" : ""}`}>
+          {heeftBeeld("historie1938") && <Beeld naam="historie1938" streep="var(--navy)" />}
+          <div className="home-story-narrative">
+            <Kop label={h("verhaalLabel")} titel={h("verhaalKop")} />
+            <p className="lees mb-6">{h("verhaalTekst")}</p>
+            <Link href={`/${locale}/ons-verhaal`} className="font-semibold underline underline-offset-4">{h("verhaalLink")} →</Link>
           </div>
+          <figure className="home-story-quote">
+            <blockquote>&ldquo;{h("verhaalCitaat")}&rdquo;</blockquote>
+            <figcaption>&mdash; {h("verhaalBron")}</figcaption>
+          </figure>
         </div>
       </Sectie>
 
@@ -315,7 +302,7 @@ export default async function HomePage({
           { label: nav("locaties"), href: `/${locale}/bezoek-ons`, soort: "lijn" },
         ]}
       />
-    </>
+    </div>
   );
 }
 

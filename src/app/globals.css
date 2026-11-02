@@ -606,6 +606,8 @@ body:has(#mobile-navigation) .sv-whatsapp { opacity: 0; visibility: hidden; poin
       animation: none;
     }
   }
+
+
 }
 
 /* ── Doorspringen naar de inhoud (toetsenbord en schermlezers) ───────────── */
@@ -729,10 +731,6 @@ summary::-webkit-details-marker {
   .nav-popover a:hover { background: var(--sand); }
   .mobile-main-link { display: block; padding: 12px; font-family: var(--font-display); font-weight: 700; border-bottom: 1px solid var(--linen); }
   .mobile-sub-link { display: inline-block; padding: 12px; font-size: .95rem; color: var(--navy); }
-  @media (min-width:1280px) and (max-width:1439px) {
-    header > div { flex-wrap: wrap; }
-    header nav { order: 3; width: 100%; justify-content: center; }
-  }
   @media (max-width:800px) {
     .collection-hero-grid { grid-template-columns: 1fr; gap: 20px; }
     .collection-hero-image { display: none; }
@@ -771,3 +769,48 @@ summary::-webkit-details-marker {
   @media (prefers-reduced-motion: reduce) {
     *,*::before,*::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
   }
+
+/* Second shop refinement: compact layouts and early product actions. */
+.home-page > section:not(.home-hero):not(.home-student) { padding-block: 48px; }
+.home-product-card { border-radius: 4px; padding: 8px; margin: -8px; transition: background .15s; }
+.home-product-card:hover,.home-product-card:focus-visible { background: var(--sand); }
+.home-story { display: grid; grid-template-columns: 1.25fr .75fr; gap: 48px; align-items: center; }
+.home-story-narrative { max-width: 650px; }
+.home-story-quote { border-left: 2px solid var(--navy); padding-left: 28px; }
+.home-story-quote blockquote { font: italic 1.6rem/1.5 var(--font-display); color: var(--navy-dark); }
+.home-story-quote figcaption { margin-top: 18px; font-size: .9rem; color: var(--grijs); }
+.home-story-with-photo { grid-template-columns: 1fr 1fr; }
+.home-story-with-photo .home-story-quote { grid-column: 2; }
+#product-overzicht { padding-block: 32px 48px; }
+.product-intro { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: min-content 1fr; grid-template-areas: "image title" "image copy"; gap: 20px 48px; align-items: start; }
+.product-intro-title { grid-area: title; }
+.product-intro-image { grid-area: image; position: relative; width: 100%; aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; }
+.product-intro-copy { grid-area: copy; }
+.product-intro-no-photo { grid-template-columns: 1fr; grid-template-areas: "title" "copy"; max-width: 760px; margin: auto; }
+.platter-choices { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 28px; }
+.platter-choice { scroll-margin-top: 150px; min-width: 0; }
+.platter-choice > h3 { font-size: 1.5rem; margin-bottom: 12px; }
+.platter-choice-description { min-height: 5em; color: var(--charcoal); }
+.platter-size { display: grid; gap: 8px; font-weight: 600; margin: 16px 0; }
+.platter-size select { width: 100%; min-height: 48px; border: 1px solid var(--navy); border-radius: 4px; background: white; padding: 10px 12px; color: var(--navy); }
+.platter-choice .selection-request-grid { display: block; }
+.platter-choice .selection-request-grid > li { border-color: var(--linen); border-radius: 6px; }
+.platter-choice .selection-request-grid h3 { min-height: 3em; }
+.locations-intro { padding-block: 28px 12px; }
+.locations-intro h1 { font: 700 clamp(2rem,4vw,3rem)/1.15 var(--font-display); }
+#locatieoverzicht { padding-block: 28px 48px; }
+.location-card > div:last-child { margin-top: 0; }
+@media(max-width:1000px) {
+  .platter-choices { grid-template-columns: 1fr; gap: 36px; max-width: 650px; margin-inline: auto; }
+  .platter-choice-description { min-height: 0; }
+  .platter-choice .selection-request-grid h3 { min-height: 0; }
+}
+@media(max-width:800px) {
+  .product-intro { grid-template-columns: 1fr; grid-template-areas: "title" "image" "copy"; gap: 20px; }
+  .product-intro-image { aspect-ratio: 3/2; max-height: 300px; }
+  .home-page > section:not(.home-hero):not(.home-student) { padding-block: 32px; }
+  .home-story,.home-story-with-photo { grid-template-columns: 1fr; gap: 24px; }
+  .home-story-with-photo .home-story-quote { grid-column: auto; }
+  .home-story-quote blockquote { font-size: 1.35rem; }
+  .home-products { gap: 24px 18px; }
+}

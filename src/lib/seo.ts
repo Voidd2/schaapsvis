@@ -1,3 +1,4 @@
+import { openingHours } from "@/lib/openingHours";
 import type { Metadata } from "next";
 import { BEDRIJF, ADRES_REGEL } from "@/lib/bedrijf";
 import { BEZORGING, GEMEENTEN, kostenVoor } from "@/lib/bezorging";
@@ -85,20 +86,13 @@ const GEO = {
   longitude: BEDRIJF.geo.lng,
 } as const;
 
-const OPENINGSTIJDEN = [
-  {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: ["Tuesday", "Wednesday", "Thursday", "Friday"],
-    opens: "09:00",
-    closes: "18:00",
-  },
-  {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: ["Saturday"],
-    opens: "09:00",
-    closes: "17:00",
-  },
-];
+const SCHEMA_DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const OPENINGSTIJDEN = openingHours.winkel.map(slot => ({
+  "@type": "OpeningHoursSpecification",
+  dayOfWeek: slot.days.map(day => SCHEMA_DAYS[day]),
+  opens: slot.open,
+  closes: slot.close,
+}));
 
 /** De winkel zelf. Eén @id, zodat alle andere blokken ernaar kunnen verwijzen. */
 export function winkelSchema(locale: string) {

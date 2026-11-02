@@ -24,7 +24,7 @@
     "assortimentTitle": "Fish selection Leiden: salmon, herring & kibbeling | Schaap's",
     "assortimentDesc": "Explore fresh fish, kibbeling, herring, VÅRLAKS salmon, seafood barbecue packs, fish skewers and gourmet platters at Schaap's Vishandel in Leiden. Ask about availability.",
     "bezoekTitle": "Locations & opening hours Leiden and Voorschoten | Schaap's",
-    "bezoekDesc": "Visiting Schaap's Vis? Herenstraat 48 Leiden (Mon–Sat), Leiden market (Wed + Sat), or Hoogvliet Voorschoten (Fri). Always fresh, always friendly.",
+    "bezoekDesc": "Visiting Schaap's Vis? Herenstraat 48 Leiden ({winkeldagen}), Leiden market (Wed + Sat), or Hoogvliet Voorschoten (Fri). Always fresh, always friendly.",
     "contactTitle": "Contact Schaap's Vis Leiden | +31 6 2481 1678 | Fish Shop Herenstraat",
     "contactDesc": "Contact Schaap's Vis Leiden. Call or WhatsApp +31 6 2481 1678. Herenstraat 48, 2313 AL Leiden.",
     "bestellenTitle": "Order a seafood platter in Leiden | Schaap's Vishandel",
@@ -278,7 +278,7 @@
   "home": {
     "eyebrow": "Herenstraat 48, Leiden · since 1938",
     "kop": "Good fish. Simply Schaap’s.",
-    "inleiding": "Four generations of good fish and personal advice. Visit us in Leiden at Herenstraat and the market, or in Voorschoten on Fridays. Since 1938.",
+    "inleiding": "Four generations of good fish and personal advice. Visit us in Leiden at Herenstraat and the market, or in Voorschoten on Fridays.",
     "knopBestellen": "Order",
     "knopVisschaal": "Build a platter",
     "feit1Kop": "Delivery",
@@ -526,7 +526,7 @@
     "extrasUitleg": "Tell us on WhatsApp which fish you would like on your platter. Additions or premium fish may increase the price; we will agree the final price with you beforehand.",
     "extrasEerstSchaal": "Discuss any additions with us on WhatsApp.",
     "extrasRegel": "",
-    "maatwerkRichtbedrag": "A custom platter for a party or event? Allow around €17.50 per person as a guide. The listed platters below each have their own full product price."
+    "maatwerkRichtbedrag": "A custom platter for a party or event? Allow around €17.50 per person as a guide. The listed platters above each have their own full product price."
   },
   "bestel": {
     "eyebrow": "Order",

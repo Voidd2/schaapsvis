@@ -24,7 +24,7 @@
     "assortimentTitle": "Visassortiment Leiden: zalm, haring en kibbeling | Schaap's",
     "assortimentDesc": "Bekijk verse vis, kibbeling, haring, VÅRLAKS-zalm, barbecuepakketten, visspiesjes en visgourmet bij Schaap's Vishandel in Leiden. Vraag naar beschikbaarheid.",
     "bezoekTitle": "Locaties en openingstijden Leiden & Voorschoten | Schaap's",
-    "bezoekDesc": "Schaap's Vis bezoeken? Herenstraat 48 Leiden (ma–za), Leidse markt (wo + za), of Hoogvliet Voorschoten (vrij). Altijd vers, altijd vriendelijk.",
+    "bezoekDesc": "Schaap's Vis bezoeken? Herenstraat 48 Leiden ({winkeldagen}), Leidse markt (wo + za), of Hoogvliet Voorschoten (vrij). Altijd vers, altijd vriendelijk.",
     "contactTitle": "Contact Schaap's Vis Leiden | +31 6 2481 1678 | Viswinkel Herenstraat",
     "contactDesc": "Neem contact op met Schaap's Vis Leiden. Bel of app +31 6 2481 1678. Herenstraat 48, 2313 AL Leiden.",
     "bestellenTitle": "Visschaal bestellen in Leiden | Schaap's Vishandel",
@@ -278,7 +278,7 @@
   "home": {
     "eyebrow": "Herenstraat 48, Leiden · sinds 1938",
     "kop": "Goede vis. Gewoon Schaap’s.",
-    "inleiding": "Al vier generaties goede vis en persoonlijk advies. U vindt ons in Leiden aan de Herenstraat en op de markt, en op vrijdag in Voorschoten. Sinds 1938.",
+    "inleiding": "Al vier generaties goede vis en persoonlijk advies. U vindt ons in Leiden aan de Herenstraat en op de markt, en op vrijdag in Voorschoten.",
     "knopBestellen": "Bestellen",
     "knopVisschaal": "Visschaal samenstellen",
     "feit1Kop": "Bezorgen",
@@ -526,7 +526,7 @@
     "extrasUitleg": "Vertel ons via WhatsApp wat u op de schaal wilt. We kunnen bijvoorbeeld extra of duurdere vissoorten toevoegen; daardoor kan de prijs hoger worden. We spreken de definitieve prijs altijd vooraf met u af.",
     "extrasEerstSchaal": "Bespreek extra wensen via WhatsApp.",
     "extrasRegel": "",
-    "maatwerkRichtbedrag": "Maatwerk voor een feest of evenement? Als richtbedrag rekenen we circa € 17,50 per persoon. De vaste uitvoeringen hieronder hebben hun eigen volledige productprijs."
+    "maatwerkRichtbedrag": "Maatwerk voor een feest of evenement? Als richtbedrag rekenen we circa € 17,50 per persoon. De vaste uitvoeringen hierboven hebben hun eigen volledige productprijs."
   },
   "bestel": {
     "eyebrow": "Bestellen",

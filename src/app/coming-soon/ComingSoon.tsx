@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { shopDayRange } from "@/lib/openingHours";
 import { BEDRIJF } from "@/lib/bedrijf";
 
 type Lang = "nl" | "en" | "de";
@@ -35,7 +36,7 @@ const COPY: Record<
     openLine: "Tot die tijd zijn we gewoon open in de winkel.",
     contactLabel: `Herenstraat 48, Leiden · ${BEDRIJF.telefoon.weergave}`,
     hoursLine:
-      "Ma t/m za in de winkel · wo + za op de markt in Leiden · vr bij Hoogvliet Voorschoten",
+      `${shopDayRange("nl")} in de winkel · wo + za op de markt in Leiden · vr bij Hoogvliet Voorschoten`,
     whatsapp: "Vraag ons via WhatsApp",
     loginLabel: "Beheer — voer het wachtwoord in",
     placeholder: "Wachtwoord",
@@ -55,7 +56,7 @@ const COPY: Record<
     openLine: "Until then, you're welcome to visit us in the shop.",
     contactLabel: `Herenstraat 48, Leiden · ${BEDRIJF.telefoon.weergave}`,
     hoursLine:
-      "Mon–Sat in the shop · Wed + Sat at the Leiden market · Fri at Hoogvliet Voorschoten",
+      `${shopDayRange("en")} in the shop · Wed + Sat at the Leiden market · Fri at Hoogvliet Voorschoten`,
     whatsapp: "Message us on WhatsApp",
     loginLabel: "Admin — enter the password",
     placeholder: "Password",
@@ -75,7 +76,7 @@ const COPY: Record<
     openLine: "Bis dahin besuchen Sie uns gerne im Laden.",
     contactLabel: `Herenstraat 48, Leiden · ${BEDRIJF.telefoon.weergave}`,
     hoursLine:
-      "Mo–Sa im Laden · Mi + Sa auf dem Markt in Leiden · Fr bei Hoogvliet Voorschoten",
+      `${shopDayRange("de")} im Laden · Mi + Sa auf dem Markt in Leiden · Fr bei Hoogvliet Voorschoten`,
     whatsapp: "Fragen Sie uns über WhatsApp",
     loginLabel: "Verwaltung — Passwort eingeben",
     placeholder: "Passwort",

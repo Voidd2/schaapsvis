@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Search, ArrowUpRight, MessageCircle, SlidersHorizontal } from "lucide-react";
@@ -14,21 +14,21 @@ import { productAvailability } from "@/lib/product-availability";
 const copy = {
   nl: {
     all: "Alles", search: "Welke vis zoekt u?", popular: "Favorieten eerst", az: "Naam A–Z", more: "Toon meer producten",
-    detail: "Productinformatie", count: "producten", empty: "Niets gevonden? Vraag het ons gerust via WhatsApp.",
+    detail: "Productinformatie", singular: "product", count: "producten", empty: "Geen producten gevonden. Probeer een andere zoekterm of vraag het ons via WhatsApp.",
     favorites: "Begin met onze favorieten", favoritesSub: "Een paar vertrouwde keuzes uit onze toonbank.",
     browse: "Het hele assortiment", browseSub: "Kijk rustig rond. Voor beschikbaarheid en uw wensen helpen we u graag via WhatsApp.", photoNote: "Bekijk per product de beschikbaarheid, voedingsinformatie en passende recepten.",
     categories: ["Verse vis", "Gerookte vis", "Schaal- & schelpdieren", "Vissalades", "Bereid & snacks", "Zeegroenten"],
   },
   en: {
     all: "All", search: "Which fish are you looking for?", popular: "Favourites first", az: "Name A–Z", more: "Show more products",
-    detail: "Product information", count: "products", empty: "Can't find it? Ask us on WhatsApp.",
+    detail: "Product information", singular: "product", count: "products", empty: "No products found. Try another search or ask us on WhatsApp.",
     favorites: "Start with our favourites", favoritesSub: "A few familiar favourites from our fish counter.",
     browse: "Explore our full range", browseSub: "Take a look around. Ask us on WhatsApp about availability and your wishes.", photoNote: "See availability, nutrition information and recipe ideas on each product page.",
     categories: ["Fresh fish", "Smoked fish", "Shellfish", "Fish salads", "Prepared & snacks", "Sea vegetables"],
   },
   de: {
     all: "Alle", search: "Welchen Fisch suchen Sie?", popular: "Favoriten zuerst", az: "Name A–Z", more: "Weitere Produkte anzeigen",
-    detail: "Produktinformationen", count: "Produkte", empty: "Nicht gefunden? Fragen Sie uns per WhatsApp.",
+    detail: "Produktinformationen", singular: "Produkt", count: "Produkte", empty: "Keine Produkte gefunden. Versuchen Sie einen anderen Suchbegriff oder fragen Sie uns per WhatsApp.",
     favorites: "Unsere Favoriten entdecken", favoritesSub: "Einige bewährte Favoriten aus unserer Fischtheke.",
     browse: "Das gesamte Sortiment", browseSub: "Schauen Sie sich in Ruhe um. Fragen zu Verfügbarkeit und Wünschen beantworten wir gerne per WhatsApp.", photoNote: "Auf jeder Produktseite finden Sie Verfügbarkeit, Nährwertangaben und passende Rezeptideen.",
     categories: ["Frischer Fisch", "Räucherfisch", "Schalentiere", "Fischsalate", "Zubereitet & Snacks", "Meeresgemüse"],
@@ -45,10 +45,23 @@ const stapleSlugs = new Set(["varlaks-zalm", "kibbeling", "lekkerbek", "haring",
 export function AssortimentFilter({ localized }: { localized: Product[] }) {
   const locale = useLocale();
   const c = copy[locale as keyof typeof copy] ?? copy.nl;
-  const [category, setCategory] = useState("all");
-  const [query, setQuery] = useState("");
-  const [sort, setSort] = useState("popular");
-  const [visibleCount, setVisibleCount] = useState(14);
+  const params = useSearchParams();
+  const requestedCategory = params.get("categorie") ?? "all";
+  const category = categories.includes(requestedCategory as Categorie) ? requestedCategory : "all";
+  const query = params.get("zoek") ?? "";
+  const sort = params.get("sortering") === "az" ? "az" : "popular";
+  const requestedCount = Number(params.get("aantal"));
+  const visibleCount = Number.isSafeInteger(requestedCount) && requestedCount >= 14 ? Math.min(requestedCount, localized.length) : 14;
+  // Next's native history integration updates useSearchParams without a server
+  // round trip. Replace the current entry: typing must never fill Back history.
+  function updateFilter(changes: Record<string, string>) {
+    const next = new URL(window.location.href);
+    for (const [key, value] of Object.entries(changes)) {
+      if (!value || (key === "categorie" && value === "all") || (key === "sortering" && value === "popular") || (key === "aantal" && value === "14")) next.searchParams.delete(key);
+      else next.searchParams.set(key, value);
+    }
+    window.history.replaceState(null, "", next.pathname + next.search + next.hash);
+  }
   const found = localized.filter(p =>
     (category === "all" || p.categorie === category) && (!query || matchesQuery(p, query)));
   if (sort === "az") found.sort((a, b) => a.naam.localeCompare(b.naam, locale));
@@ -61,13 +74,13 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
     <section className="collection-browse" aria-labelledby="browse-title">
       <div className="collection-section-heading"><div><p className="kapitaal">{c.count}</p><h2 id="browse-title">{c.browse}</h2></div><p>{c.browseSub}</p></div>
       <div className="collection-tools">
-        <label className="collection-search"><Search size={20} aria-hidden="true" /><span className="sr-only">{c.search}</span><input type="search" placeholder={c.search} value={query} onChange={e => { setQuery(e.target.value); setVisibleCount(14); }} /></label>
-        <label className="collection-sort"><SlidersHorizontal size={17} aria-hidden="true" /><span className="sr-only">{c.popular}</span><select value={sort} onChange={e => { setSort(e.target.value); setVisibleCount(14); }}><option value="popular">{c.popular}</option><option value="az">{c.az}</option></select></label>
+        <label className="collection-search"><Search size={20} aria-hidden="true" /><span className="sr-only">{c.search}</span><input type="search" placeholder={c.search} value={query} onChange={e => updateFilter({zoek:e.target.value, aantal:"14"})} /></label>
+        <label className="collection-sort"><SlidersHorizontal size={17} aria-hidden="true" /><span className="sr-only">{c.popular}</span><select value={sort} onChange={e => updateFilter({sortering:e.target.value, aantal:"14"})}><option value="popular">{c.popular}</option><option value="az">{c.az}</option></select></label>
       </div>
       <div className="collection-tabs" role="group" aria-label={c.browse}>{["all", ...categories].map((id, i) =>
-        <button key={id} onClick={() => { setCategory(id); setVisibleCount(14); }} aria-pressed={category === id} className={category === id ? "active" : ""}>{i === 0 ? c.all : c.categories[i - 1]}</button>)}</div>
+        <button key={id} onClick={() => updateFilter({categorie:id, aantal:"14"})} aria-pressed={category === id} className={category === id ? "active" : ""}>{i === 0 ? c.all : c.categories[i - 1]}</button>)}</div>
       <p className="collection-photo-note">{c.photoNote}</p>
-      <p className="collection-count" role="status">{found.length} {c.count}</p>
+      <p className="collection-count" role="status">{found.length} {found.length === 1 ? c.singular : c.count}</p>
     </section>
 
     {showFeatured && <section className="collection-favorites" aria-labelledby="favorites-title">
@@ -111,7 +124,7 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
           </div>
         </article>;
       })}</div>
-      {rows.length > visibleRows.length && <button type="button" className="collection-load-more" aria-controls="collection-results-list" onClick={() => setVisibleCount(count => count + 18)}>{c.more}</button>}
+      {rows.length > visibleRows.length && <button type="button" className="collection-load-more" aria-controls="collection-results-list" onClick={() => updateFilter({aantal:String(visibleCount + 18)})}>{c.more}</button>}
       {!found.length && <div className="collection-empty"><p>{c.empty}</p><a className="knop knop-rood" href={bestelContact(locale).href}>{bestelContact(locale).label}</a></div>}
     </section>
   </div>;

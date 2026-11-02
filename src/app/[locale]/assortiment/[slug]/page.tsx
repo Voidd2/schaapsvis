@@ -78,22 +78,30 @@ export default async function ProductDetailPage({params}: Props) {
   const productSchema = {"@context":"https://schema.org", "@type":"Product", name:product.naam, description:product.desc, category, brand:{"@type":"Brand", name:BEDRIJF.naam}, image:photo ? `${BEDRIJF.domein}${photo.src}` : undefined, url:`${BEDRIJF.domein}/${lang}/assortiment/${slug}`};
   return <>
     <Schema data={[productSchema, kruimelSchema(lang, [{naam:BEDRIJF.naamKort,pad:"/"},{naam:c.range,pad:"/assortiment"},{naam:product.naam,pad:`/assortiment/${slug}`}])]} />
-    <Sectie grond="papier"><div className="mx-auto max-w-5xl">
+    <Sectie grond="papier" id="product-overzicht"><div className="mx-auto max-w-6xl">
       <Kruimels items={[{naam:BEDRIJF.naamKort,href:`/${lang}`},{naam:c.range,href:`/${lang}/assortiment`},{naam:product.naam}]} />
-      {photo && <div className="relative mx-auto mt-5 w-full max-w-4xl aspect-[4/3] flex items-center justify-center" style={{backgroundColor:"#fff",borderBottom:`3px solid ${CATEGORIE_KLEUR[product.categorie]}`}}>
-        <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 1024px) calc(100vw - 40px), 768px" priority className={`w-full h-full ${photo.editorial?(photo.whole?"object-contain":"object-cover"):"object-contain"}`} />
-      </div>}
-      <div className="mx-auto max-w-3xl pt-7">
+      <div className={`product-intro ${photo ? "" : "product-intro-no-photo"}`}>
+      <div className="product-intro-title">
         <p className="kapitaal mb-2">{[category,product.badge,product.omega3?"Omega-3":null].filter(Boolean).join(" · ")}</p>
-        <h1 className="text-3xl md:text-4xl leading-tight mb-4" style={{color:"var(--navy-dark)"}}>{product.naam}</h1>
+        <h1 className="text-3xl md:text-4xl leading-tight" style={{color:"var(--navy-dark)"}}>{product.naam}</h1>
+      </div>
+      {photo && <div className="product-intro-image" style={{borderBottom:`3px solid ${CATEGORIE_KLEUR[product.categorie]}`}}>
+        <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 800px) calc(100vw - 32px), 550px" priority className={photo.editorial && !photo.whole ? "object-cover" : "object-contain"} />
+      </div>}
+      <div className="product-intro-copy">
+        <p className="text-lg leading-relaxed mb-5">{product.desc}</p>
         <div className="mb-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
           <p><span className="kapitaal mr-2">{c.available}</span><strong>{availability.label}</strong></p>
           {prijs && <p><span className="kapitaal mr-2">{c.price}</span><strong>{formatPrijs(prijs,lang)} — {c.guidePrice}</strong></p>}
         </div>
-        <p className="text-lg leading-relaxed">{product.desc}</p>
+        <div className="flex flex-wrap items-center gap-4 product-intro-actions">
+          <a href={bestelContact(lang, product.naam).href} className="knop knop-navy">{lang === "nl" ? "Vraag naar dit product" : lang === "de" ? "Nach diesem Produkt fragen" : "Ask about this product"}</a>
+          <Link href={`/${lang}/bezoek-ons`} className="font-semibold underline underline-offset-4">{lang === "nl" ? "Openingstijden en route" : lang === "de" ? "Öffnungszeiten und Anfahrt" : "Opening hours and directions"} →</Link>
+        </div>
         <p className="mt-5 pl-5" style={{borderLeft:`2px solid ${availability.unavailable?"#be123c":"var(--navy)"}`}}>{availability.note}</p>
         {isSalmon && <Link href={`/${lang}/varlaks`} className="block mt-6 pl-5" style={{borderLeft:"2px solid var(--seafoam)"}}><p className="kapitaal mb-2">{c.alternative}</p><p className="font-semibold underline">{c.salmon}</p><p className="text-sm mt-2 leading-relaxed">{c.salmonNote}</p></Link>}
         {seizoen && <div className="mt-7 pl-5" style={{borderLeft:"2px solid var(--seafoam)"}}><p><strong>{c.season}:</strong> {seizoen}</p></div>}
+      </div>
       </div>
     </div></Sectie>
     <Sectie grond="zand"><div className="mx-auto max-w-3xl">

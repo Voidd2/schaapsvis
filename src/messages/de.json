@@ -24,7 +24,7 @@
     "assortimentTitle": "Fischsortiment Leiden: Lachs, Hering & Kibbeling | Schaap's",
     "assortimentDesc": "Entdecken Sie frischen Fisch, Kibbeling, Hering, VÅRLAKS-Lachs, Fisch-Grillpakete, Fischspieße und Gourmetplatten bei Schaap's Vishandel in Leiden. Verfügbarkeit auf Anfrage.",
     "bezoekTitle": "Standorte & Öffnungszeiten Leiden und Voorschoten | Schaap's",
-    "bezoekDesc": "Schaap's Vis besuchen? Herenstraat 48 Leiden (Mo–Sa), Leidener Markt (Mi + Sa), oder Hoogvliet Voorschoten (Fr). Immer frisch, immer freundlich.",
+    "bezoekDesc": "Schaap's Vis besuchen? Herenstraat 48 Leiden ({winkeldagen}), Leidener Markt (Mi + Sa), oder Hoogvliet Voorschoten (Fr). Immer frisch, immer freundlich.",
     "contactTitle": "Kontakt Schaap's Vis Leiden | +31 6 2481 1678",
     "contactDesc": "Kontaktieren Sie Schaap's Vis Leiden. Rufen Sie +31 6 2481 1678 an oder schreiben Sie uns per WhatsApp. Herenstraat 48, 2313 AL Leiden.",
     "bestellenTitle": "Fischplatte bestellen in Leiden | Schaap's Vishandel",
@@ -278,7 +278,7 @@
   "home": {
     "eyebrow": "Herenstraat 48, Leiden · seit 1938",
     "kop": "Guter Fisch. Einfach Schaap’s.",
-    "inleiding": "Vier Generationen guter Fisch und persönliche Beratung. Besuchen Sie uns in Leiden an der Herenstraat und auf dem Markt oder freitags in Voorschoten. Seit 1938.",
+    "inleiding": "Vier Generationen guter Fisch und persönliche Beratung. Besuchen Sie uns in Leiden an der Herenstraat und auf dem Markt oder freitags in Voorschoten.",
     "knopBestellen": "Bestellen",
     "knopVisschaal": "Fischplatte zusammenstellen",
     "feit1Kop": "Lieferung",
@@ -526,7 +526,7 @@
     "extrasUitleg": "Teilen Sie uns per WhatsApp mit, welchen Fisch Sie auf Ihrer Platte möchten. Ergänzungen oder Edelfisch können den Preis erhöhen; den Endpreis vereinbaren wir vorher.",
     "extrasEerstSchaal": "Besprechen Sie Ergänzungen mit uns per WhatsApp.",
     "extrasRegel": "",
-    "maatwerkRichtbedrag": "Eine individuelle Platte für eine Feier? Rechnen Sie als Richtwert mit etwa 17,50 € pro Person. Die festen Ausführungen unten haben jeweils ihren eigenen Gesamtpreis."
+    "maatwerkRichtbedrag": "Eine individuelle Platte für eine Feier? Rechnen Sie als Richtwert mit etwa 17,50 € pro Person. Die festen Ausführungen oben haben jeweils ihren eigenen Gesamtpreis."
   },
   "bestel": {
     "eyebrow": "Bestellen",

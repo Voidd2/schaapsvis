@@ -1,3 +1,5 @@
+import { openingSummary } from "./openingHours";
+
 /**
  * Alle bedrijfsgegevens op één plek.
  *
@@ -102,7 +104,7 @@ export const VERKOOPPUNTEN: Verkooppunt[] = [
     naam: "De winkel",
     adres: BEDRIJF.adres.straat,
     plaats: "Leiden",
-    dagen: "dinsdag t/m vrijdag 09:00–18:00, zaterdag tot 17:00",
+    dagen: openingSummary("winkel", "nl"),
     mapsUrl: BEDRIJF.maps.route,
   },
   {

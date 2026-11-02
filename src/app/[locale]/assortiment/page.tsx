@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { connection } from "next/server";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
@@ -47,6 +48,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 export default async function AssortimentPage({ params }: { params: Promise<{ locale: string }> }) {
+  // Render URL filters on the first request as well as on client navigation.
+  await connection();
   const { locale } = await params;
   const c = copy[locale as keyof typeof copy] ?? copy.nl;
   const bbq = await getTranslations({ locale, namespace: "barbecuePage" });

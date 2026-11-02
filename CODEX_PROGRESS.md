@@ -2,6 +2,13 @@
 
 Laatst bijgewerkt: 2 november 2026, Europe/Amsterdam
 
+## Tweede verbeteringsronde — in uitvoering
+
+- Branch `codex/shop-round-two`: URL-gebaseerde assortimentfilters met browser-terugherstel, compacte productintro met directe contactactie, header zonder tweede rij, homepage met drie productkolommen en geïntegreerd familieverhaal, drie visschaalfamilies met twaalf gekoppelde formaatkeuzes, bezoekgerichte locatiepagina.
+- Lucas bevestigde maandag gesloten; winkeluren zijn gekoppeld aan de centrale bron voor status, metadata, schema, footer en locatieoverzicht.
+- Functionele browsercontrole en vergelijking van alle twaalf formaten met de productbron geslaagd. Geen echte aanvragen verstuurd. Details en ontbrekende echte foto's: `docs/tweede-verbeteringsronde.md`.
+- Nog te verifiëren vóór afronden: laatste live uitrol en productie-smoketest.
+
 ## Afgerond en gecontroleerd
 
 - Terugkerende Codex-automatisering actief: iedere 310 minuten in deze chat, zonder duplicaat.

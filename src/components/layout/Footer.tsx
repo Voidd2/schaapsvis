@@ -1,3 +1,4 @@
+import { openingSummary } from "@/lib/openingHours";
 import Link from "next/link";
 import { bestelContact } from "@/lib/bestel-contact";
 import { useTranslations, useLocale } from "next-intl";
@@ -136,7 +137,7 @@ export function Footer() {
         {/* ── Wanneer we er zijn ────────────────────────────────────────── */}
         <dl className="text-base leading-relaxed space-y-3 md:text-lg" style={{ opacity: 0.9 }}>
           {[
-            [t("winkel"), t("winkelTijden")],
+            [t("winkel"), openingSummary("winkel", locale)],
             [t("markt"), t("marktTijden")],
             [t("voorschoten"), t("voorschotenTijden")],
           ].map(([wat, wanneer]) => (
