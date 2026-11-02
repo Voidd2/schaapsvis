@@ -116,11 +116,6 @@ export default async function BezoekOnsPage({
             soort: "lijn",
           },
         ]}
-        feiten={[
-          { label: g("telefoonLabel"), waarde: BEDRIJF.telefoon.weergave },
-          { label: g("labelWinkel"), waarde: ADRES_REGEL },
-
-        ]}
       />
 
       <nav

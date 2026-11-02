@@ -69,7 +69,6 @@ export default async function AssortimentPage({ params }: { params: Promise<{ lo
         <div className="collection-hero-copy">
           <p className="kapitaal">{c.label}</p><h1>{c.title}</h1><p className="collection-intro">{c.intro}</p>
           <div className="collection-hero-actions">
-            <a href="#assortiment" className="knop knop-rood">{c.browse}<ArrowUpRight size={17} aria-hidden="true" /></a>
             <Link href={`/${locale}/visschalen`} className="collection-text-link">{c.platter}<ArrowUpRight size={17} aria-hidden="true" /></Link>
             <Link href={`/${locale}/barbecue-gourmet`} className="collection-text-link">{bbq("assortimentLink")}<ArrowUpRight size={17} aria-hidden="true" /></Link>
           </div>
