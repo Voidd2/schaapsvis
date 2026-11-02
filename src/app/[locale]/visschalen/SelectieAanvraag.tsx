@@ -3,7 +3,8 @@ import { euro, whatsappLink } from "@/lib/bedrijf";
 import { SelectieGalerij } from "./SelectieGalerij";
 import { FormaatKeuze } from "./FormaatKeuze";
 import { PLATTER_FAMILIES, platterFamilies, platterLabels } from "@/lib/platter-families";
-import { feestdagenProduct } from "@/lib/feestdagen-producten";
+import { localizedPlatterProduct } from "@/lib/platter-product-text";
+import { feestdagenBedrag, feestdagenProduct } from "@/lib/feestdagen-producten";
 
 const TEKST = {
   nl: {
@@ -48,9 +49,12 @@ type KaartProps = { items: SelectieItem[]; locale: keyof typeof TEKST; showPrice
 function maakKaarten({ items, locale, showPrice = true, photoCaption }: KaartProps) {
   const t = TEKST[locale];
   return items.map((item) => {
-      const naam = selectieNaam(item.slug, locale);
+      const product = feestdagenProduct(item.slug);
+      const isPlatter = product?.categorie === "visschalen";
+      const naam = isPlatter ? localizedPlatterProduct(product, locale).naam : selectieNaam(item.slug, locale);
+      const bedrag = isPlatter ? feestdagenBedrag(product.prijsCents, locale) : euro(item.prijs);
       const bericht = showPrice
-        ? `${t.bericht} ${naam} (${t.prijs.toLowerCase()} ${euro(item.prijs)}${item.perStuk ? ` ${t.stuk}` : ""}). ${t.bevestig}`
+        ? `${t.bericht} ${naam} (${t.prijs.toLowerCase()} ${bedrag}${item.perStuk ? ` ${t.stuk}` : ""}). ${t.bevestig}`
         : `${t.bericht} ${naam}. ${t.bevestig}`;
       return {
         slug: item.slug,
@@ -60,7 +64,7 @@ function maakKaarten({ items, locale, showPrice = true, photoCaption }: KaartPro
         foto: item.foto,
         fotoBijschrift: photoCaption ?? t.foto,
         beschrijving: showPrice ? t.productBeschrijving(naam) : t.schaalBeschrijving(naam),
-        prijsTekst: showPrice ? `${t.prijs} ${euro(item.prijs)}${item.perStuk ? ` ${t.stuk}` : ""}` : undefined,
+        prijsTekst: showPrice ? `${t.prijs} ${bedrag}${item.perStuk ? ` ${t.stuk}` : ""}` : undefined,
         whatsappHref: whatsappLink(bericht),
         whatsappLabel: t.vraag,
         detailsHref: feestdagenProduct(item.slug) ? `/${locale}/feestdagen/${item.slug}` : undefined,

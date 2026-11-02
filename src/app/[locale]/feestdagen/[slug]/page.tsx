@@ -1,7 +1,8 @@
 import { Suspense } from "react";
 import { connection } from "next/server";
 import { PlatterNavigation } from "@/components/PlatterNavigation";
-import { platterFamily, platterLabels, platterOverviewHref } from "@/lib/platter-families";
+import { platterFamily, platterLabels, platterOverviewHref, platterDetailHref } from "@/lib/platter-families";
+import { localizedPlatterProduct } from "@/lib/platter-product-text";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,25 +21,25 @@ import {
 } from "@/lib/feestdagen-producten";
 import { kruimelSchema, paginaMetadata } from "@/lib/seo";
 
-type Props = { params: Promise<{ locale: string; slug: string }> };
+type Props = { params: Promise<{ locale: string; slug: string }>; searchParams: Promise<Record<string, string | string[] | undefined>> };
 
 const LABELS = {
   nl: {
-    home: "Home", season: "Feestdagen", price: "Prijs", order: "Vraag of bestel via WhatsApp",
+    home: "Home", selection: "Schaap’s selectie", season: "Feestdagen", price: "Prijs", order: "Vraag of bestel via WhatsApp",
     contents: "Samenstelling", ingredients: "Ingrediënten & allergenen", allergens: "Bevat de volgende allergenen",
     important: "Belangrijk bij allergieën", disclaimer: "Samenstelling en productetiketten kunnen wijzigen. Meld allergieën altijd bij uw aanvraag; de actuele productinformatie in de winkel is leidend.",
     related: "Gerelateerde producten", relatedIntro: "Meer feestelijke keuzes uit dezelfde selectie.", view: "Bekijk product",
     note: "Beschikbaarheid en afhaalmoment bevestigen we persoonlijk. De getoonde prijs hoort bij de genoemde uitvoering.",
   },
   en: {
-    home: "Home", season: "Festive season", price: "Price", order: "Ask or order on WhatsApp",
+    home: "Home", selection: "Schaap’s selection", season: "Festive season", price: "Price", order: "Ask or order on WhatsApp",
     contents: "Contents", ingredients: "Ingredients & allergens", allergens: "Contains the following allergens",
     important: "Important for allergies", disclaimer: "Contents and labels may change. Always mention allergies in your request; the current product information in store is decisive.",
     related: "Related products", relatedIntro: "More festive choices from this selection.", view: "View product",
     note: "We confirm availability and collection personally. The displayed price applies to the stated version.",
   },
   de: {
-    home: "Startseite", season: "Festtage", price: "Preis", order: "Per WhatsApp anfragen oder bestellen",
+    home: "Startseite", selection: "Schaap’s Auswahl", season: "Festtage", price: "Preis", order: "Per WhatsApp anfragen oder bestellen",
     contents: "Zusammenstellung", ingredients: "Zutaten & Allergene", allergens: "Enthält folgende Allergene",
     important: "Wichtig bei Allergien", disclaimer: "Zusammenstellung und Etiketten können sich ändern. Bitte Allergien immer bei der Anfrage nennen; die aktuellen Produktinformationen im Geschäft sind maßgeblich.",
     related: "Ähnliche Produkte", relatedIntro: "Weitere festliche Produkte aus dieser Auswahl.", view: "Produkt ansehen",
@@ -53,8 +54,9 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   if (!["nl", "en", "de"].includes(locale)) notFound();
-  const product = feestdagenProduct(slug);
-  if (!product) notFound();
+  const source = feestdagenProduct(slug);
+  if (!source) notFound();
+  const product = localizedPlatterProduct(source, locale);
   return paginaMetadata({
     locale,
     pad: `/feestdagen/${product.slug}`,
@@ -64,19 +66,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-export default async function FeestdagenProductPage({ params }: Props) {
+export default async function FeestdagenProductPage({ params, searchParams }: Props) {
   const { locale, slug } = await params;
   if (!["nl", "en", "de"].includes(locale)) notFound();
-  const product = feestdagenProduct(slug);
-  if (!product) notFound();
+  const source = feestdagenProduct(slug);
+  if (!source) notFound();
+  const product = localizedPlatterProduct(source, locale);
   const taal = locale === "en" || locale === "de" ? locale : "nl";
   const t = LABELS[taal];
   const family = platterFamily(slug);
   // Render incoming selection context on the server too: the back link must
   // retain other families even before this page's JavaScript has loaded.
-  if (family) await connection();
+  const selection = new URLSearchParams();
+  if (family) {
+    await connection();
+    for (const [key, value] of Object.entries(await searchParams)) {
+      for (const entry of Array.isArray(value) ? value : value === undefined ? [] : [value]) selection.append(key, entry);
+    }
+  }
   const contact = bestelContact(locale, `${product.naam} (${feestdagenPrijs(product, locale)})`);
-  const related = gerelateerdeFeestdagenProducten(product);
+  const related = gerelateerdeFeestdagenProducten(source).map(item => localizedPlatterProduct(item, locale));
   const url = `${BEDRIJF.domein}/${locale}/feestdagen/${product.slug}`;
   const productSchema = {
     "@context": "https://schema.org",
@@ -103,7 +112,7 @@ export default async function FeestdagenProductPage({ params }: Props) {
       { naam: product.naam, pad: `/feestdagen/${product.slug}` },
     ])]} />
 
-    {family && <div className="section-wrap pt-6"><Suspense fallback={<Link className="platter-back-link" href={platterOverviewHref(locale, slug)}>{platterLabels[taal].back}</Link>}><PlatterNavigation locale={taal} slug={slug} mode="back" /></Suspense></div>}
+    {family && <div className="section-wrap pt-6"><Suspense fallback={<Link className="platter-back-link" href={platterOverviewHref(locale, slug, selection.toString())}>{platterLabels[taal].back}</Link>}><PlatterNavigation locale={taal} slug={slug} mode="back" /></Suspense></div>}
     <section className="bg-[#f7f3ec]">
       <div className="mx-auto grid max-w-7xl gap-9 px-4 py-8 md:px-8 md:py-14 lg:grid-cols-[1.08fr_.92fr] lg:gap-14">
         <figure><div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white shadow-sm">
@@ -113,7 +122,7 @@ export default async function FeestdagenProductPage({ params }: Props) {
           <nav aria-label="Breadcrumb" className="mb-6 text-sm text-[#527080]">
             <Link href={`/${locale}`}>{t.home}</Link> <span aria-hidden="true">/</span> <Link href={`/${locale}/feestdagen`}>{t.season}</Link>
           </nav>
-          <p className="kapitaal mb-3">{t.season} · Schaap’s selectie</p>
+          <p className="kapitaal mb-3">{t.season} · {t.selection}</p>
           <h1 className="text-[2.4rem] leading-[1.04] sm:text-[3.4rem]">{product.naam}</h1>
           <p className="mt-5 max-w-xl text-[1.08rem] leading-8 text-[#38515e]">{product.intro}</p>
           <div className="mt-7 border-y border-[#bfd6df] py-5">
@@ -157,7 +166,7 @@ export default async function FeestdagenProductPage({ params }: Props) {
       <Kop label={t.season} titel={t.related} intro={t.relatedIntro} />
       <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {related.map((item) => <li key={item.slug} className="overflow-hidden rounded-xl bg-white shadow-sm">
-          <Link href={`/${locale}/feestdagen/${item.slug}`} className="group block h-full">
+          <Link href={platterDetailHref(locale, item.slug, selection.toString())} className="group block h-full">
             <div className="relative aspect-[4/3] overflow-hidden bg-[#eaf7fc]">
               <Image src={item.afbeelding} alt={item.naam} fill sizes="(max-width: 640px) 100vw, 33vw" className="object-cover transition duration-500 group-hover:scale-[1.035]" />
             </div>

@@ -333,12 +333,15 @@ export function feestdagenProduct(slug: string): FeestdagenProduct | undefined {
   return FEESTDAGEN_PRODUCTEN.find((product) => product.slug === slug);
 }
 
-export function feestdagenPrijs(product: FeestdagenProduct, locale = "nl"): string {
-  const bedrag = new Intl.NumberFormat(locale === "de" ? "de-DE" : locale === "en" ? "en-NL" : "nl-NL", {
+export function feestdagenBedrag(prijsCents: number, locale = "nl"): string {
+  return new Intl.NumberFormat(locale === "de" ? "de-DE" : locale === "en" ? "en-NL" : "nl-NL", {
     style: "currency",
     currency: "EUR",
-  }).format(product.prijsCents / 100);
-  return `${bedrag} · ${product.eenheid}`;
+  }).format(prijsCents / 100);
+}
+
+export function feestdagenPrijs(product: FeestdagenProduct, locale = "nl"): string {
+  return `${feestdagenBedrag(product.prijsCents, locale)} · ${product.eenheid}`;
 }
 
 export function gerelateerdeFeestdagenProducten(product: FeestdagenProduct): FeestdagenProduct[] {

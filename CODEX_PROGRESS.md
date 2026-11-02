@@ -2,6 +2,12 @@
 
 Laatst bijgewerkt: 2 november 2026, Europe/Amsterdam
 
+## Afronding schaalselectie en vertalingen — lokaal gereed
+
+- Gerelateerde schaalroutes behouden nu alle geselecteerde families via de bestaande URL-helper. Alle twaalf productdetails hebben een gedeelde EN/DE tekstlaag; bedragen, inhoud en allergenen behouden. Gevelteksten voorbereid in drie talen.
+- Volledige gerelateerde-route gereproduceerd en hersteld; 36 gerenderde pagina’s en 9 mobiele taal/familiecombinaties gecontroleerd. Gerichte tests en beide builds geslaagd.
+- Volgende stap: PR/CI, Cloudflare en live reproductie. Details: `docs/afronding-schaalselectie-vertalingen.md`.
+
 ## Derde verbeteringsronde — live afgerond
 
 - Compacte visschalenpagina met foto vóór formaatkeuze en URL-behoud per familie; detailteruglink en formaten delen één mapping van twaalf bestaande producten.
