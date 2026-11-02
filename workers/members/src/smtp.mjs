@@ -51,6 +51,11 @@ export function makeMessage({ from, to, subject, text, html, listUnsubscribeUrl 
     `Subject: ${encodedHeader(subject)}`,
     `Date: ${new Date().toUTCString()}`,
     `Message-ID: <${crypto.randomUUID()}@${domain}>`,
+    // These are automated account messages, not marketing. The explicit
+    // headers help mailbox providers classify them without adding an
+    // unsubscribe footer to transactional mail.
+    "Auto-Submitted: auto-generated",
+    "X-Auto-Response-Suppress: All",
     "MIME-Version: 1.0",
     ...listUnsubscribeHeaders(listUnsubscribeUrl),
     `Content-Type: multipart/alternative; boundary=\"${boundary}\"`,
