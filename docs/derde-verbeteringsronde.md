@@ -21,7 +21,7 @@ Branch: `codex/shop-round-three`. Uitgangspunt: `ae6d7aa` na de tweede live ontw
 - Chrome: fotovergrootvenster met Enter geopend en Escape gesloten. Familieankers liggen na scroll onder vaste header (kop rond y150, headeronderkant rond y104).
 - Chrome: kabeljauw zoeken → detail → terug bewaart zoekterm en ‘1 product’.
 - Chrome: homepage, visschalen, schaal-detail en kibbeling bij echte CSS-breedtes 390,1440,360,1366: geen horizontale overflow. Kibbeling toont prijsfallback. EN/DE overzicht geen overflow.
-- Voorbeeldmeting vóór wijziging op live 390×844, previewbalk zichtbaar: eerste schaalfoto y929. Lokaal na: y560 zonder previewbalk. Definitieve livemeting volgt bij publicatie.
+- Voorbeeldmeting vóór wijziging op live 390×844, previewbalk zichtbaar: eerste schaalfoto y929. Lokaal na: y560 zonder previewbalk. Na publicatie op exact 390×844 inclusief previewbalk: y607 (322 px eerder).
 - Barbecue/gourmet: 13 selectiekaarten, geen family-variant; oorspronkelijke presentatie behouden. Referentiescreenshot vóór/na opgeslagen.
 - Geen aanvragen, bestellingen, registraties of e-mails verstuurd. Accounts, backend, Wallet en toegangsbeveiliging niet gewijzigd.
 
@@ -31,4 +31,17 @@ Gevel Herenstraat, echte toonbank/contactpersoon, actuele teamfoto, woensdagkraa
 
 ## Publicatie
 
-Lokale Next-productiebuild, TypeScript, gerichte ESLint, inhoudscontrole en build-targetcontrole geslaagd. Ook de Cloudflare/Vinext-build slaagt. PR/publicatie volgen. Bewijsbestanden staan in `../design-preview/round-three/`.
+Lokale Next-productiebuild, TypeScript, gerichte ESLint, inhoudscontrole en build-targetcontrole geslaagd. Ook de Cloudflare/Vinext-build slaagt. PR #71 is samengevoegd als `c4573f89ad6503076905fcb5de4e201e523231d8`. Cloudflare site-Worker `2eb3e9ab` staat op **100% Ready**. GitHub Content integrity en Build site geslaagd; Codex-review zonder bevindingen. Sourcery bereikte zijn weeklimiet en is niet als geslaagde review meegeteld. Bewijsbestanden staan in `../design-preview/round-three/`.
+
+## Definitieve livecontrole
+
+- Chrome op schaapsvishandel.nl: homepage, visschalen, klassieke schaal 8–10 en kibbeling op 390×844, 1440×900, 360×844 en 1366×900. Alle 16 combinaties zonder horizontale overflow; `live-evidence.json` bevat echte DOM-metingen.
+- Eerste foto op 390×844: y607 met previewbalk, voorheen y929. Screenshot `visschalen-mobile-after.png`.
+- Klassiek 8–10 plus luxe 10–14 en hapjes 6–10 gekozen: detail → browser Terug → herladen behoudt alle drie. Detailwissel naar klassiek 3–5 en zichtbare teruglink behoudt de andere families en landt op #schalen-klassiek.
+- Familieanker klassiek: kop y150, vaste header onderkant y110. Lokale controle van alle drie ankers al geslaagd.
+- Kabeljauw zoeken → detail → browser Terug: zoekterm kabeljauw en 1 product behouden.
+- Homepage toont zes producten, bestaande familiequote, witte locaties/studenten en lichtblauwe visschalen/familie. Alle acht homepagebeelden geladen.
+- Kibbeling toont Prijs op aanvraag; productbeeld daadwerkelijk geladen. Barbecue/gourmet behoudt 2+3+8=13 kaarten zonder family-variant. Geen consolefouten in de gecontroleerde live navigatie.
+- Voor-/na-overzicht: `../design-preview/round-three/overzicht.html`. Geen betaalde diensten geactiveerd en geen externe formulieren verzonden.
+
+Alle acht eisen van deze derde ronde zijn uitgevoerd. Echte identiteitfoto’s blijven de hierboven genoemde aanlevering; tijdelijke beelden zijn eerlijk beschreven.

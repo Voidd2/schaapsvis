@@ -2,12 +2,13 @@
 
 Laatst bijgewerkt: 2 november 2026, Europe/Amsterdam
 
-## Derde verbeteringsronde — lokale controles afgerond
+## Derde verbeteringsronde — live afgerond
 
 - Compacte visschalenpagina met foto vóór formaatkeuze en URL-behoud per familie; detailteruglink en formaten delen één mapping van twaalf bestaande producten.
 - Homepage wit/lichtblauw, vaste prijzen versus maatwerk in NL/EN/DE, prijsfallback/bijschriften, eigen gevel-fallback en Europe/Amsterdam-status uitgevoerd.
 - 12 varianten + 65 tijdzonecases slagen; Chrome terug/herladen/formaatwissel, kabeljauwzoekterugroute en vier breedtes gecontroleerd. Eerste schaalfoto lokaal y560 tegenover live vóór y929.
-- Volgende stap: Cloudflare-build, PR en echte livepublicatie controleren. Overzicht: `docs/derde-verbeteringsronde.md`. Geen backend-/accountwijzigingen of transacties.
+- PR #71 samengevoegd als `c4573f8`; Cloudflare site-Worker `2eb3e9ab` staat op 100% Ready. Alle CI-controles slagen. Live 390×844 inclusief previewbalk begint eerste foto op y607 (voorheen y929). Vier pagina’s × vier breedtes zonder overflow; formaatkeuzes, detailterugroute, herladen en kabeljauwzoekterugroute live bevestigd.
+- Alle acht eisen afgerond. Voor-/na-overzicht: `../design-preview/round-three/overzicht.html`; bewijs per eis: `docs/derde-verbeteringsronde.md`. Eigen foto’s blijven een externe aanlevering. Geen backend-/accountwijzigingen of transacties.
 
 ## Tweede verbeteringsronde — live afgerond
 
