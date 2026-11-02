@@ -1,6 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
+import { useInteractive } from "@/lib/use-interactive";
 import Link from "next/link";
 import Image from "next/image";
 import { Search, ArrowUpRight, MessageCircle, SlidersHorizontal } from "lucide-react";
@@ -43,6 +44,7 @@ const featuredSlugs = ["kabeljauwfilet", "lekkerbek", "zeebaarsfilet", "creuse-o
 const stapleSlugs = new Set(["varlaks-zalm", "kibbeling", "lekkerbek", "haring", "broodje-haring", "kabeljauwfilet", "zeebaarsfilet"]);
 
 export function AssortimentFilter({ localized }: { localized: Product[] }) {
+  const interactive = useInteractive();
   const locale = useLocale();
   const c = copy[locale as keyof typeof copy] ?? copy.nl;
   const params = useSearchParams();
@@ -74,11 +76,11 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
     <section className="collection-browse" aria-labelledby="browse-title">
       <div className="collection-section-heading"><div><p className="kapitaal">{c.count}</p><h2 id="browse-title">{c.browse}</h2></div><p>{c.browseSub}</p></div>
       <div className="collection-tools">
-        <label className="collection-search"><Search size={20} aria-hidden="true" /><span className="sr-only">{c.search}</span><input type="search" placeholder={c.search} value={query} onChange={e => updateFilter({zoek:e.target.value, aantal:"14"})} /></label>
-        <label className="collection-sort"><SlidersHorizontal size={17} aria-hidden="true" /><span className="sr-only">{c.popular}</span><select value={sort} onChange={e => updateFilter({sortering:e.target.value, aantal:"14"})}><option value="popular">{c.popular}</option><option value="az">{c.az}</option></select></label>
+        <label className="collection-search"><Search size={20} aria-hidden="true" /><span className="sr-only">{c.search}</span><input disabled={!interactive} type="search" placeholder={c.search} value={query} onChange={e => updateFilter({zoek:e.target.value, aantal:"14"})} /></label>
+        <label className="collection-sort"><SlidersHorizontal size={17} aria-hidden="true" /><span className="sr-only">{c.popular}</span><select disabled={!interactive} value={sort} onChange={e => updateFilter({sortering:e.target.value, aantal:"14"})}><option value="popular">{c.popular}</option><option value="az">{c.az}</option></select></label>
       </div>
       <div className="collection-tabs" role="group" aria-label={c.browse}>{["all", ...categories].map((id, i) =>
-        <button key={id} onClick={() => updateFilter({categorie:id, aantal:"14"})} aria-pressed={category === id} className={category === id ? "active" : ""}>{i === 0 ? c.all : c.categories[i - 1]}</button>)}</div>
+        <button disabled={!interactive} key={id} onClick={() => updateFilter({categorie:id, aantal:"14"})} aria-pressed={category === id} className={category === id ? "active" : ""}>{i === 0 ? c.all : c.categories[i - 1]}</button>)}</div>
       <p className="collection-photo-note">{c.photoNote}</p>
       <p className="collection-count" role="status">{found.length} {found.length === 1 ? c.singular : c.count}</p>
     </section>
@@ -124,7 +126,7 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
           </div>
         </article>;
       })}</div>
-      {rows.length > visibleRows.length && <button type="button" className="collection-load-more" aria-controls="collection-results-list" onClick={() => updateFilter({aantal:String(visibleCount + 18)})}>{c.more}</button>}
+      {rows.length > visibleRows.length && <button disabled={!interactive} type="button" className="collection-load-more" aria-controls="collection-results-list" onClick={() => updateFilter({aantal:String(visibleCount + 18)})}>{c.more}</button>}
       {!found.length && <div className="collection-empty"><p>{c.empty}</p><a className="knop knop-rood" href={bestelContact(locale).href}>{bestelContact(locale).label}</a></div>}
     </section>
   </div>;
