@@ -102,6 +102,7 @@ export default async function BezoekOnsPage({
       />
 
       <PaginaKop
+        className="locations-page-heading"
         kruimels={[{ naam: BEDRIJF.naamKort, href: `/${locale}` }, { naam: nav("locaties") }]}
         label={BEDRIJF.adres.plaats}
         titel={t("title")}
@@ -184,7 +185,7 @@ export default async function BezoekOnsPage({
                   href={plek.maps}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm font-semibold underline underline-offset-4 whitespace-nowrap"
+                  className="knop knop-lijn"
                   style={{ color: "var(--navy)" }}
                 >
                   {g("route")} &rarr;

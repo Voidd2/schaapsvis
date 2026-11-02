@@ -73,7 +73,6 @@ export default async function AssortimentPage({ params }: { params: Promise<{ lo
             <Link href={`/${locale}/visschalen`} className="collection-text-link">{c.platter}<ArrowUpRight size={17} aria-hidden="true" /></Link>
             <Link href={`/${locale}/barbecue-gourmet`} className="collection-text-link">{bbq("assortimentLink")}<ArrowUpRight size={17} aria-hidden="true" /></Link>
           </div>
-          <p className="collection-heritage">Leiden · {locale === "nl" ? "Sinds" : locale === "de" ? "Seit" : "Since"} 1938</p>
         </div>
         <figure className="collection-hero-image">
           <Link href={`/${locale}/assortiment/varlaks-zalm`} aria-label={locale === "de" ? "Produktinformationen zu VÅRLAKS-Lachs ansehen" : locale === "en" ? "View VÅRLAKS salmon product information" : "Bekijk de productinformatie over VÅRLAKS-zalm"}>
@@ -82,8 +81,8 @@ export default async function AssortimentPage({ params }: { params: Promise<{ lo
         </figure>
       </div>
     </header>
-    <aside className="collection-policy"><div className="section-wrap"><div><strong>{c.policy}</strong><p>{c.policySub}</p></div><a href={wa.href}><MessageCircle size={19} aria-hidden="true" />{wa.label}<ArrowUpRight size={17} aria-hidden="true" /></a></div></aside>
     <div id="assortiment"><AssortimentFilter localized={gesorteerdAssortiment.map(p => localizeProduct(p, locale))} /></div>
+    <aside className="collection-policy"><div className="section-wrap"><div><strong>{c.policy}</strong><p>{c.policySub}</p></div><a href={wa.href}><MessageCircle size={19} aria-hidden="true" />{wa.label}<ArrowUpRight size={17} aria-hidden="true" /></a></div></aside>
     <Sectie grond="zand"><div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
       <div><p className="kapitaal">{bbq("assortimentLink")}</p><h2 className="text-2xl md:text-3xl mt-2">{bbq("assortimentHeading")}</h2><p className="max-w-2xl mt-3 text-[#4d6370]">{bbq("assortimentIntro")}</p></div>
       <Link href={`/${locale}/barbecue-gourmet`} className="knop knop-rood shrink-0">{bbq("assortimentLink")}<ArrowUpRight size={17} aria-hidden="true" /></Link>

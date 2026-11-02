@@ -49,14 +49,6 @@ export default async function FeestdagenPage({ params }: { params: Promise<{ loc
   const contact = bestelContact(locale, c.title);
 
   return <>
-    <FeestdagenUitgelicht
-      locale={locale}
-      label={c.featuredLabel}
-      title={c.featuredTitle}
-      hint={c.featuredHint}
-      linkLabel={c.featuredLink}
-      products={FEESTDAGEN_PRODUCTEN}
-    />
     <PaginaKop
       kruimels={[{ naam: c.home, href: `/${locale}` }, { naam: c.title }]}
       label={c.label}
@@ -66,11 +58,17 @@ export default async function FeestdagenPage({ params }: { params: Promise<{ loc
         { label: c.ask, href: contact.href, extern: true },
         { label: c.gifts, href: `/${locale}/relatiegeschenken`, soort: "lijn" },
       ]}
-      zijkant={<div className="overflow-hidden rounded-2xl border border-white/20 shadow-xl">
-        <Image src="/images/dirks/visschotel-luxe-8-10-pers.webp" alt="Luxe visschotel voor de feestdagen" width={1200} height={800} priority className="aspect-[4/3] w-full object-cover" />
-      </div>}
-      uitgelijnd="boven"
+      className="festive-page-heading"
     />
+    <FeestdagenUitgelicht
+      locale={locale}
+      label={c.featuredLabel}
+      title={c.featuredTitle}
+      hint={c.featuredHint}
+      linkLabel={c.featuredLink}
+      products={FEESTDAGEN_PRODUCTEN}
+    />
+
 
     <Sectie grond="papier" id="mogelijkheden">
       <Kop label={c.categories} titel={c.categoriesTitle} intro={c.categoriesIntro} />

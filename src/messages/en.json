@@ -11,7 +11,8 @@
     "locaties": "Find Us",
     "contact": "Contact",
     "bestellen": "Order seafood platters",
-    "bezorgen": "Delivery"
+    "bezorgen": "Delivery",
+    "studentenkorting": "Student discount"
   },
   "meta": {
     "homeTitle": "Fishmonger in Leiden since 1938 | Schaap’s Vishandel",
@@ -57,9 +58,18 @@
     "assortimentIntro": "Browse our seafood barbecue packs, gourmet selections, skewers and fish parcels. Discuss your choice directly with us on WhatsApp.",
     "faqHeading": "Questions about seafood for barbecue and gourmet",
     "faq": [
-      { "v": "How do I enquire about a barbecue pack or gourmet selection?", "a": "Choose a product on this page and tap its WhatsApp button. We will discuss your choice and confirm availability, contents and price before preparing anything." },
-      { "v": "Can I order individual seafood skewers?", "a": "Yes. The selection includes salmon, tuna and prawn skewers, among other options. A salmon skewer costs €4 each. Message us on WhatsApp with your choice and we will discuss the options." },
-      { "v": "Can I customise my selection?", "a": "Tell us what you have in mind on WhatsApp. We will discuss what combination is possible and agree the contents and price with you in advance." }
+      {
+        "v": "How do I enquire about a barbecue pack or gourmet selection?",
+        "a": "Choose a product on this page and tap its WhatsApp button. We will discuss your choice and confirm availability, contents and price before preparing anything."
+      },
+      {
+        "v": "Can I order individual seafood skewers?",
+        "a": "Yes. The selection includes salmon, tuna and prawn skewers, among other options. A salmon skewer costs €4 each. Message us on WhatsApp with your choice and we will discuss the options."
+      },
+      {
+        "v": "Can I customise my selection?",
+        "a": "Tell us what you have in mind on WhatsApp. We will discuss what combination is possible and agree the contents and price with you in advance."
+      }
     ],
     "slotTitle": "Let’s choose what suits your table",
     "slotText": "Tell us what the occasion is and which products appeal to you. We will discuss the options on WhatsApp and agree the selection and price with you in advance."
@@ -267,8 +277,8 @@
   },
   "home": {
     "eyebrow": "Herenstraat 48, Leiden · since 1938",
-    "kop": "Fresh fish, chosen with care. Since 1938.",
-    "inleiding": "For four generations, we have helped people in Leiden choose good fish and get honest advice. Gerrit Schaap started in 1938; today Aldert is here to help. Visit our fish shop on Herenstraat, find us at the Leiden markets or stop by Hoogvliet in Voorschoten on Fridays.",
+    "kop": "Good fish. Simply Schaap’s.",
+    "inleiding": "Four generations of good fish and personal advice. Visit us in Leiden at Herenstraat and the market, or in Voorschoten on Fridays. Since 1938.",
     "knopBestellen": "Order",
     "knopVisschaal": "Build a platter",
     "feit1Kop": "Delivery",
@@ -317,7 +327,7 @@
     "routeLink": "Directions",
     "heroBijschrift": "Smoked salmon, sliced by hand",
     "visschaalBijschrift": "Dutch shrimp — peeled by hand",
-    "knopVandaag": "Explore our fish range",
+    "knopVandaag": "Explore our range",
     "pijlerLabel": "What we are known for",
     "pijlerKop": "Three things people come for",
     "pijlerGebakkenKop": "Fried fish",
@@ -446,8 +456,8 @@
   },
   "visschaal": {
     "eyebrow": "Drinks · birthday · Christmas",
-    "kop": "Seafood platters for parties and events",
-    "inleiding": "Looking for a seafood platter in Leiden for a birthday, drinks, reception or company event? Browse our platters and photos. We will help choose fish to suit your tastes, guest numbers and occasion. We average around €17.50 per person; enquire on WhatsApp.",
+    "kop": "Seafood platters to share.",
+    "inleiding": "Choose classic, deluxe or bite-sized. Compare sizes and full prices, then discuss your order with us on WhatsApp.",
     "per100": "per 100 g",
     "perStuk": "per {eenheid}",
     "seizoen": "{periode}",
@@ -515,7 +525,8 @@
     "extrasKop": "Want an addition or premium fish?",
     "extrasUitleg": "Tell us on WhatsApp which fish you would like on your platter. Additions or premium fish may increase the price; we will agree the final price with you beforehand.",
     "extrasEerstSchaal": "Discuss any additions with us on WhatsApp.",
-    "extrasRegel": ""
+    "extrasRegel": "",
+    "maatwerkRichtbedrag": "A custom platter for a party or event? Allow around €17.50 per person as a guide. The listed platters below each have their own full product price."
   },
   "bestel": {
     "eyebrow": "Order",
@@ -669,5 +680,3 @@
     "gratisWeegvis": "Fresh fish is settled by weight. If your order comes to more than {bedrag}, delivery is free — we agree the price with you in advance."
   }
 }
-
-

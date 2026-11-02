@@ -11,7 +11,8 @@
     "locaties": "Locaties",
     "contact": "Contact",
     "bestellen": "Visschalen bestellen",
-    "bezorgen": "Bezorgen"
+    "bezorgen": "Bezorgen",
+    "studentenkorting": "Studentenkorting"
   },
   "meta": {
     "homeTitle": "Viswinkel Leiden sinds 1938 | Schaap’s Vishandel",
@@ -57,9 +58,18 @@
     "assortimentIntro": "Bekijk onze barbecuepakketten, visgourmet, losse spiesjes en vispakketjes. U bespreekt uw keuze rechtstreeks met ons via WhatsApp.",
     "faqHeading": "Veelgestelde vragen over vis voor barbecue en gourmet",
     "faq": [
-      { "v": "Hoe vraag ik een barbecuepakket of gourmetselectie aan?", "a": "Kies een product op deze pagina en klik op de WhatsApp-knop. We bespreken uw keuze en bevestigen de beschikbaarheid, samenstelling en prijs voordat we iets klaarmaken." },
-      { "v": "Kan ik losse visspiesjes bestellen?", "a": "Ja. U vindt hier onder meer zalm-, tonijn- en gambaspiesjes. Een zalmspies kost € 4 per stuk. Stuur ons via WhatsApp uw keuze en we bespreken de mogelijkheden." },
-      { "v": "Kan ik mijn selectie aanpassen?", "a": "Vertel ons via WhatsApp wat u in gedachten heeft. We bespreken samen welke samenstelling mogelijk is en spreken de inhoud en prijs vooraf af." }
+      {
+        "v": "Hoe vraag ik een barbecuepakket of gourmetselectie aan?",
+        "a": "Kies een product op deze pagina en klik op de WhatsApp-knop. We bespreken uw keuze en bevestigen de beschikbaarheid, samenstelling en prijs voordat we iets klaarmaken."
+      },
+      {
+        "v": "Kan ik losse visspiesjes bestellen?",
+        "a": "Ja. U vindt hier onder meer zalm-, tonijn- en gambaspiesjes. Een zalmspies kost € 4 per stuk. Stuur ons via WhatsApp uw keuze en we bespreken de mogelijkheden."
+      },
+      {
+        "v": "Kan ik mijn selectie aanpassen?",
+        "a": "Vertel ons via WhatsApp wat u in gedachten heeft. We bespreken samen welke samenstelling mogelijk is en spreken de inhoud en prijs vooraf af."
+      }
     ],
     "slotTitle": "Samen kiezen we wat bij uw tafel past",
     "slotText": "Vertel ons voor welke gelegenheid u vis zoekt en welke producten u aanspreken. Via WhatsApp bespreken we de mogelijkheden en spreken we de samenstelling en prijs vooraf met u af."
@@ -267,8 +277,8 @@
   },
   "home": {
     "eyebrow": "Herenstraat 48, Leiden · sinds 1938",
-    "kop": "Verse vis in Leiden. Met zorg gekozen, sinds 1938.",
-    "inleiding": "Al vier generaties helpen we Leidenaren aan goede vis en eerlijk advies. Gerrit Schaap begon in 1938; vandaag staat Aldert voor u klaar. Bezoek onze viswinkel aan de Herenstraat, ontmoet ons op de Leidse markt of kom vrijdag langs bij Hoogvliet in Voorschoten.",
+    "kop": "Goede vis. Gewoon Schaap’s.",
+    "inleiding": "Al vier generaties goede vis en persoonlijk advies. U vindt ons in Leiden aan de Herenstraat en op de markt, en op vrijdag in Voorschoten. Sinds 1938.",
     "knopBestellen": "Bestellen",
     "knopVisschaal": "Visschaal samenstellen",
     "feit1Kop": "Bezorgen",
@@ -317,7 +327,7 @@
     "routeLink": "Route",
     "heroBijschrift": "Gerookte zalm, van het mes gesneden",
     "visschaalBijschrift": "Hollandse garnalen — met de hand gepeld",
-    "knopVandaag": "Ontdek ons assortiment",
+    "knopVandaag": "Bekijk het assortiment",
     "pijlerLabel": "Waar we bekend om staan",
     "pijlerKop": "Drie dingen waar mensen voor komen",
     "pijlerGebakkenKop": "Gebakken vis",
@@ -446,8 +456,8 @@
   },
   "visschaal": {
     "eyebrow": "Borrel · verjaardag · kerst",
-    "kop": "Visschalen voor borrels en evenementen",
-    "inleiding": "Een visschaal voor een verjaardag, borrel, receptie of bedrijfsfeest in Leiden? Bekijk onze schalen en foto’s. We denken graag met u mee over uw favoriete vis, het aantal gasten en de gelegenheid. De gemiddelde prijs ligt rond € 17,50 per persoon; vraag uw visschaal aan via WhatsApp.",
+    "kop": "Visschalen om te delen.",
+    "inleiding": "Kies klassiek, luxe of hapjes. Bekijk de formaten en volledige prijzen en bespreek uw bestelling met ons via WhatsApp.",
     "per100": "per 100 g",
     "perStuk": "per {eenheid}",
     "seizoen": "{periode}",
@@ -515,7 +525,8 @@
     "extrasKop": "Iets extra’s of een luxe vissoort?",
     "extrasUitleg": "Vertel ons via WhatsApp wat u op de schaal wilt. We kunnen bijvoorbeeld extra of duurdere vissoorten toevoegen; daardoor kan de prijs hoger worden. We spreken de definitieve prijs altijd vooraf met u af.",
     "extrasEerstSchaal": "Bespreek extra wensen via WhatsApp.",
-    "extrasRegel": ""
+    "extrasRegel": "",
+    "maatwerkRichtbedrag": "Maatwerk voor een feest of evenement? Als richtbedrag rekenen we circa € 17,50 per persoon. De vaste uitvoeringen hieronder hebben hun eigen volledige productprijs."
   },
   "bestel": {
     "eyebrow": "Bestellen",
@@ -669,5 +680,3 @@
     "gratisWeegvis": "Verse vis rekenen we op gewicht af. Komt uw bestelling boven {bedrag} uit, dan vervalt de bezorging — de prijs spreken we vooraf met u af."
   }
 }
-
-

@@ -11,7 +11,8 @@
     "locaties": "Uns finden",
     "contact": "Kontakt",
     "bestellen": "Fischplatten bestellen",
-    "bezorgen": "Lieferung"
+    "bezorgen": "Lieferung",
+    "studentenkorting": "Studentenrabatt"
   },
   "meta": {
     "homeTitle": "Fischgeschäft in Leiden seit 1938 | Schaap’s Vishandel",
@@ -57,9 +58,18 @@
     "assortimentIntro": "Sehen Sie sich unsere Grillpakete, Fisch-Gourmetauswahl, Spieße und Fischpäckchen an. Besprechen Sie Ihre Auswahl direkt mit uns per WhatsApp.",
     "faqHeading": "Häufige Fragen zu Fisch für Grill und Gourmet",
     "faq": [
-      { "v": "Wie frage ich ein Grillpaket oder eine Gourmetauswahl an?", "a": "Wählen Sie ein Produkt auf dieser Seite und tippen Sie auf die WhatsApp-Schaltfläche. Wir besprechen Ihre Auswahl und bestätigen Verfügbarkeit, Inhalt und Preis, bevor wir etwas vorbereiten." },
-      { "v": "Kann ich einzelne Fischspieße bestellen?", "a": "Ja. Die Auswahl umfasst unter anderem Lachs-, Thunfisch- und Garnelenspieße. Ein Lachsspieß kostet 4 € pro Stück. Schreiben Sie uns Ihre Auswahl per WhatsApp, dann besprechen wir die Möglichkeiten." },
-      { "v": "Kann ich meine Auswahl anpassen?", "a": "Teilen Sie uns per WhatsApp Ihre Wünsche mit. Wir besprechen, welche Zusammenstellung möglich ist, und stimmen Inhalt und Preis vorher mit Ihnen ab." }
+      {
+        "v": "Wie frage ich ein Grillpaket oder eine Gourmetauswahl an?",
+        "a": "Wählen Sie ein Produkt auf dieser Seite und tippen Sie auf die WhatsApp-Schaltfläche. Wir besprechen Ihre Auswahl und bestätigen Verfügbarkeit, Inhalt und Preis, bevor wir etwas vorbereiten."
+      },
+      {
+        "v": "Kann ich einzelne Fischspieße bestellen?",
+        "a": "Ja. Die Auswahl umfasst unter anderem Lachs-, Thunfisch- und Garnelenspieße. Ein Lachsspieß kostet 4 € pro Stück. Schreiben Sie uns Ihre Auswahl per WhatsApp, dann besprechen wir die Möglichkeiten."
+      },
+      {
+        "v": "Kann ich meine Auswahl anpassen?",
+        "a": "Teilen Sie uns per WhatsApp Ihre Wünsche mit. Wir besprechen, welche Zusammenstellung möglich ist, und stimmen Inhalt und Preis vorher mit Ihnen ab."
+      }
     ],
     "slotTitle": "Gemeinsam finden wir die passende Auswahl",
     "slotText": "Erzählen Sie uns, für welchen Anlass Sie Fisch suchen und welche Produkte Sie ansprechen. Wir besprechen die Möglichkeiten per WhatsApp und stimmen Auswahl und Preis vorher mit Ihnen ab."
@@ -267,8 +277,8 @@
   },
   "home": {
     "eyebrow": "Herenstraat 48, Leiden · seit 1938",
-    "kop": "Frischer Fisch, mit Sorgfalt ausgewählt. Seit 1938.",
-    "inleiding": "Seit vier Generationen helfen wir den Menschen in Leiden mit gutem Fisch und ehrlicher Beratung. Gerrit Schaap fing 1938 an; heute ist Aldert für Sie da. Besuchen Sie unser Fischgeschäft in der Herenstraat, treffen Sie uns auf dem Leidener Markt oder kommen Sie freitags bei Hoogvliet in Voorschoten vorbei.",
+    "kop": "Guter Fisch. Einfach Schaap’s.",
+    "inleiding": "Vier Generationen guter Fisch und persönliche Beratung. Besuchen Sie uns in Leiden an der Herenstraat und auf dem Markt oder freitags in Voorschoten. Seit 1938.",
     "knopBestellen": "Bestellen",
     "knopVisschaal": "Fischplatte zusammenstellen",
     "feit1Kop": "Lieferung",
@@ -317,7 +327,7 @@
     "routeLink": "Route",
     "heroBijschrift": "Räucherlachs, von Hand geschnitten",
     "visschaalBijschrift": "Nordseekrabben — von Hand gepult",
-    "knopVandaag": "Unser Fischsortiment entdecken",
+    "knopVandaag": "Sortiment ansehen",
     "pijlerLabel": "Wofür man uns kennt",
     "pijlerKop": "Drei Dinge, für die man zu uns kommt",
     "pijlerGebakkenKop": "Gebackener Fisch",
@@ -446,8 +456,8 @@
   },
   "visschaal": {
     "eyebrow": "Umtrunk · Geburtstag · Weihnachten",
-    "kop": "Fischplatten für Feiern und Veranstaltungen",
-    "inleiding": "Suchen Sie eine Fischplatte in Leiden für einen Geburtstag, Empfang oder eine Firmenfeier? Sehen Sie sich unsere Platten und Fotos an. Wir beraten Sie gern zu Fischsorten, Gästezahl und Anlass. Im Durchschnitt rechnen wir mit etwa 17,50 € pro Person; fragen Sie per WhatsApp an.",
+    "kop": "Fischplatten zum Teilen.",
+    "inleiding": "Wählen Sie klassisch, deluxe oder Häppchen. Vergleichen Sie Größen und Gesamtpreise und besprechen Sie Ihre Bestellung per WhatsApp.",
     "per100": "pro 100 g",
     "perStuk": "pro {eenheid}",
     "seizoen": "{periode}",
@@ -515,7 +525,8 @@
     "extrasKop": "Ergänzung oder Edelfisch gewünscht?",
     "extrasUitleg": "Teilen Sie uns per WhatsApp mit, welchen Fisch Sie auf Ihrer Platte möchten. Ergänzungen oder Edelfisch können den Preis erhöhen; den Endpreis vereinbaren wir vorher.",
     "extrasEerstSchaal": "Besprechen Sie Ergänzungen mit uns per WhatsApp.",
-    "extrasRegel": ""
+    "extrasRegel": "",
+    "maatwerkRichtbedrag": "Eine individuelle Platte für eine Feier? Rechnen Sie als Richtwert mit etwa 17,50 € pro Person. Die festen Ausführungen unten haben jeweils ihren eigenen Gesamtpreis."
   },
   "bestel": {
     "eyebrow": "Bestellen",
@@ -669,5 +680,3 @@
     "gratisWeegvis": "Frischen Fisch rechnen wir nach Gewicht ab. Kommt Ihre Bestellung über {bedrag}, entfällt die Liefergebühr — den Preis vereinbaren wir vorher mit Ihnen."
   }
 }
-
-

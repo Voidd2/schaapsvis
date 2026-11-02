@@ -7,8 +7,7 @@ import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { SelectieAanvraag } from "./SelectieAanvraag";
 import { paginaMetadata, kruimelSchema, vraagSchema } from "@/lib/seo";
 import { bestelContact } from "@/lib/bestel-contact";
-import { BEDRIJF, euro } from "@/lib/bedrijf";
-import { VANAF_BEDRAG } from "@/lib/visschaal";
+import { BEDRIJF } from "@/lib/bedrijf";
 import { GEMEENTEN } from "@/lib/bezorging";
 
 export async function generateMetadata({
@@ -80,13 +79,14 @@ export default async function VisschalenPage({
           { label: t("schaalKop"), href: "#samenstellen" },
           { label: g("whatsapp"), href: bestelContact(locale, nav("visschalen")).href, extern: true, soort: "lijn" },
         ]}
-        cijfer={{ label: t("gemiddeld"), waarde: euro(VANAF_BEDRAG), onder: t("perSchaal") }}
       />
 
       {/* ── Samenstellen ──────────────────────────────────────────────────── */}
       <Sectie grond="papier" id="samenstellen">
         <SelectieAanvraag locale={locale} showSpecial={false} showBarbecue={false} showPlatters />
       </Sectie>
+
+      <aside className="section-wrap pb-8 text-sm"><p className="border-t pt-5 border-[var(--linen)]">{t("maatwerkRichtbedrag")}</p></aside>
 
       {/* ── Praktisch ─────────────────────────────────────────────────────── */}
       <Sectie grond="zand">

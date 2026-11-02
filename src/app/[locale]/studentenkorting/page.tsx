@@ -115,7 +115,7 @@ export default async function StudentenkortingPage({ params }: { params: Promise
   const c = copy[locale as keyof typeof copy];
 
   return (
-    <div>
+    <div className="student-page">
       <section className="fresh-hero">
         <div className="section-wrap fresh-hero-grid">
           <div>
@@ -123,7 +123,7 @@ export default async function StudentenkortingPage({ params }: { params: Promise
             <h1>{c.heading}</h1>
             <p className="fresh-intro">{c.intro}</p>
             <div className="flex flex-wrap gap-3 mt-7" aria-label={locale === "nl" ? "Producten met korting" : locale === "de" ? "Produkte mit Rabatt" : "Discounted categories"}>
-              {c.categories.map((category) => <span key={category} className="rounded-full border border-white/30 px-4 py-2 text-sm font-semibold">10% · {category}</span>)}
+              {c.categories.map((category) => <span key={category} className="student-offer"><strong>10%</strong><span>{category}</span></span>)}
             </div>
             <Link href={`/${locale}/account`} className="knop knop-rood mt-7 inline-flex">{c.account} →</Link>
           </div>
@@ -151,8 +151,7 @@ export default async function StudentenkortingPage({ params }: { params: Promise
             <h2>{c.card}</h2>
             <p className="mt-3 max-w-xl leading-relaxed">{c.cardText}</p>
           </div>
-          <div className="relative overflow-hidden rounded-3xl bg-[#073d56] p-7 text-white shadow-xl sm:p-9" aria-label={c.cardExample}>
-            <div className="absolute -right-16 -top-20 h-64 w-64 rounded-full border-[36px] border-white/5" aria-hidden="true" />
+          <div className="relative overflow-hidden rounded-3xl bg-[var(--navy-dark)] p-7 text-white shadow-xl sm:p-9" aria-label={c.cardExample}>
             <div className="relative">
               <div className="flex items-start justify-between gap-4">
                 <div>
