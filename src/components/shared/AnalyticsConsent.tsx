@@ -60,7 +60,7 @@ export function AnalyticsConsent({ locale }: { locale: string }) {
   }
 
   if (choice) {
-    return <button type="button" onClick={reopenSettings} className="fixed bottom-3 left-3 z-[79] rounded-full border border-sky-200 bg-white px-4 py-2 text-sm font-semibold text-sky-900 shadow-lg hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-700 sm:bottom-5 sm:left-5">
+    return <button type="button" onClick={reopenSettings} className="cookie-settings-trigger fixed bottom-3 left-3 z-[79] rounded-full border border-sky-200 bg-white px-4 py-2 text-sm font-semibold text-sky-900 shadow-lg hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-700 sm:bottom-5 sm:left-5">
       {copy.settings}
     </button>;
   }

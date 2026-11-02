@@ -43,6 +43,8 @@ Laatst bijgewerkt: 2 november 2026, Europe/Amsterdam
 
 ## Eerstvolgende werkpakketten
 
+- 2 november: ontwerp op `codex/coherent-shop-design` uitgevoerd met behoud van het palet. Homepage, menu, assortiment, gegroepeerde visschalen, feestdagenvolgorde, locaties en studententypografie bijgewerkt. Details en controles: `docs/ontwerpafspraken.md`. Publicatiebewijs wordt na Cloudflare-uitrol toegevoegd. Recente gebruikerskeuze: Wallet-activering uitstellen, volledige accountacceptatietest aan het einde.
+
 1. Voer voor de studentenpas nog één acceptatietest uit op een echt iOS-toestel: normale Safari, PWA-installatie, uitloggen/intrekken en opnieuw aanmelden. De server-, database- en browsertests zijn afgerond; deze fysieke apparaattest kan alleen met een eigenaarstoestel worden afgetekend.
 2. Laat een beheerder vanaf het toegestane account én vertrouwde netwerk de live beveiligingspagina openen en één gecontroleerde intrek-/herstelactie uitvoeren. De onbevoegde route is al aantoonbaar fail-closed getest.
 3. Google Wallet issuer/serviceaccount en Generic Pass Class door de eigenaar aanmaken, de vier vereiste waarden als Cloudflare-vars/secrets instellen en één echte installatie- en intrekkingstest uitvoeren.

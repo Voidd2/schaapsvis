@@ -64,7 +64,7 @@ export function WinkelStatus() {
         }}
       />
       <span>
-        <span className="hidden sm:inline">{t("winkel")}: </span>
+        <span className="inline">{t("winkel")}: </span>
         <strong style={{ color: "rgba(250,246,239,0.95)", fontWeight: 600 }}>{zin}</strong>
       </span>
     </span>

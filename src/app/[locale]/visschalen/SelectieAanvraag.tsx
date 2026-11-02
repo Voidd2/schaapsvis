@@ -12,7 +12,7 @@ const TEKST = {
     prijs: "Prijs", stuk: "per stuk", vraag: "Vraag via WhatsApp", details: "Bekijk product", foto: "Bekijk de schaal als inspiratie voor uw eigen samenstelling.", open: "Vergroot foto", sluiten: "Sluiten", vorige: "Vorige foto", volgende: "Volgende foto", teller: "Foto {current} van {total}",
     schaalBeschrijving: (naam: string) => `Bekijk ${naam} van dichtbij. De foto geeft een duidelijk beeld van deze schaal; de definitieve samenstelling stemmen we vooraf met u af.`,
     productBeschrijving: (naam: string) => `Bekijk ${naam} van dichtbij. De foto toont dit product als inspiratie; de samenstelling en beschikbaarheid bevestigen we vooraf.`,
-    visschalen: "Visschalen voor borrel, feest en evenement", visschalenIntro: "Bekijk de vaste uitvoeringen met hun volledige prijs. Via ‘Bekijk product’ ziet u de samenstelling, het formaat en de allergenen. Beschikbaarheid en eventuele aanpassingen bevestigen we vooraf via WhatsApp.",
+    visschalen: "Kies uw visschaal", visschalenIntro: "Alle formaten met volledige prijs. Bekijk per schaal de samenstelling en allergenen.",
     waarschuwing: "Voor mensen met coeliakie stemmen we de glutenvrije visschaal en werkwijze vooraf via WhatsApp af. Op onze vaste glutenvrije dag garanderen we ook glutenvrije kibbeling en gebakken garnalen; app ons vooraf om de eerstvolgende dag te bevestigen.",
     bericht: "Hallo Schaap’s Vishandel, ik wil graag informeren naar", bevestig: "Kunt u de beschikbaarheid en mogelijkheden bevestigen?",
   },
@@ -73,7 +73,11 @@ export function SelectieAanvraag({ locale, showSpecial = true, showBarbecue = tr
     {showPlatters && <section id="visschaal-inspiratie">
       <h2 className="text-[1.8rem] mb-2">{t.visschalen}</h2>
       <p className="max-w-3xl mb-8 text-[#4d6370]">{t.visschalenIntro}</p>
-      <Kaarten items={DIRKS_VISSCHALEN.filter((item) => feestdagenProduct(item.slug)?.categorie === "visschalen")} locale={taal} photoCaption={photoCaption} />
+      <nav className="bbq-category-links mb-8" aria-label={t.visschalen}>{["klassiek", "luxe", "hapjes"].map((group, i) => <a href={`#schalen-${group}`} key={group}>{(taal === "nl" ? ["Klassiek", "Luxe", "Hapjesschalen"] : taal === "de" ? ["Klassisch", "Deluxe", "Häppchenplatten"] : ["Classic", "Deluxe", "Bite-sized"])[i]}</a>)}</nav>
+      {["klassiek", "luxe", "hapjes"].map((group, i) => <section className="platter-family" id={`schalen-${group}`} key={group}>
+        <h3>{(taal === "nl" ? ["Klassieke visschalen", "Luxe visschalen", "Hapjesschalen"] : taal === "de" ? ["Klassische Fischplatten", "Deluxe Fischplatten", "Häppchenplatten"] : ["Classic seafood platters", "Deluxe seafood platters", "Bite-sized platters"])[i]}</h3>
+        <Kaarten items={DIRKS_VISSCHALEN.filter(item => feestdagenProduct(item.slug)?.categorie === "visschalen" && (item.slug.includes("luxe") ? "luxe" : item.slug.includes("hapjes") ? "hapjes" : "klassiek") === group)} locale={taal} photoCaption={photoCaption} />
+      </section>)}
       <p className="mt-6 max-w-3xl text-sm text-[#4d6370]">{t.waarschuwing}</p>
     </section>}
     {showSpecial && <section id="bijzondere-visschalen">
