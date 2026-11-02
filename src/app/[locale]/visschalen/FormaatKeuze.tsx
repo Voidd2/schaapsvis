@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useInteractive } from "@/lib/use-interactive";
 import { SelectieGalerij, type SelectieGalerijKaart } from "./SelectieGalerij";
 
 export function FormaatKeuze({ id, title, description, label, kaarten, tekst }: {
@@ -9,12 +10,13 @@ export function FormaatKeuze({ id, title, description, label, kaarten, tekst }: 
   tekst: { open: string; close: string; previous: string; next: string; counter: string };
 }) {
   const [slug, setSlug] = useState(kaarten[0].slug);
+  const interactive = useInteractive();
   const kaart = kaarten.find(item => item.slug === slug) ?? kaarten[0];
   return <section className="platter-choice" id={id} aria-labelledby={`${id}-title`}>
     <h3 id={`${id}-title`}>{title}</h3>
     <p className="platter-choice-description">{description}</p>
     <label className="platter-size" htmlFor={`${id}-size`}>{label}
-      <select id={`${id}-size`} value={kaart.slug} onChange={event => setSlug(event.target.value)}>
+      <select id={`${id}-size`} disabled={!interactive} value={kaart.slug} onChange={event => setSlug(event.target.value)}>
         {kaarten.map(item => <option key={item.slug} value={item.slug}>{item.formaat}</option>)}
       </select>
     </label>
