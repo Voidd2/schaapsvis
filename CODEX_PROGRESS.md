@@ -2,11 +2,11 @@
 
 Laatst bijgewerkt: 2 november 2026, Europe/Amsterdam
 
-## Visschalen: uitleg en maatwerkaanvraag — publicatie voorbereiden
+## Visschalen: uitleg en maatwerkaanvraag — live afgerond
 
 - Gedeelde fotovermelding en familie-altteksten, vaste totaalprijs per schaal met personenbereik, aparte compacte WhatsApp-aanvraag en drie stappen in NL/EN/DE.
 - Alle twaalf variantkeuzes en 36 gerenderde details tegen de productbron gecontroleerd; terug/herladen behoudt de drie keuzes. Formulier mobiel/desktop, datum, optionele velden en concept gecontroleerd zonder iets te verzenden.
-- Next-build, TypeScript, ESLint, inhouds- en shopchecks geslaagd. Cloudflare-build en publicatie volgen. Bewijs per eis: `docs/visschalen-uitleg-en-maatwerk.md`.
+- Next- en Cloudflare-build, TypeScript, ESLint, inhouds- en shopchecks geslaagd. PR #73 samengevoegd als `345e6a0`; Codex-review zonder bevindingen. Site-Worker `fd4d198c` en leden-Worker `9bb08db0` beide 100% Ready. Live formulier/concept, €73,50 voor 3–5, maatwerkterugroute, mobiele fotovergroting en leden-healthcheck gecontroleerd. Alle vijf eisen afgerond. Bewijs per eis: `docs/visschalen-uitleg-en-maatwerk.md`.
 
 ## Afronding schaalselectie en vertalingen — live afgerond
 
