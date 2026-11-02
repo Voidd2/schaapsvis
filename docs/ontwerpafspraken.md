@@ -24,5 +24,5 @@ PR #68 is samengevoegd als `2c5ffadcba8c7945687b39eb93e347c1cf9aa8ad`. Cloudflar
 ## Nog aan te leveren / feitelijke tegenstrijdigheid
 
 - Eigen beelden ontbreken in de beeldregistratie voor de gevel Herenstraat, team/toonbank, historische familie/winkel en de drie kramen (Botermarkt, De Waag, Hoogvliet Voorschoten). Geen vervangende zaak of familie verzonnen.
-- Bestaande metatekst `meta.bezoekDesc` en het wachtwoordscherm noemen maandag als winkeldag; het locatieoverzicht zegt dinsdag t/m zaterdag. Openingstijden en metadata in deze ontwerpronde niet stilzwijgend gewijzigd.
+- Opgelost in ronde twee na bevestiging door Lucas: maandag gesloten, dinsdag–zaterdag open. Locatieoverzicht, footer, wachtwoordscherm, metadata en schema gebruiken de centrale winkeluren. Zie `tweede-verbeteringsronde.md` voor uitvoering en live bewijs.
 - Accountvoorwaarden, backend, routes, productgegevens en toegangsbeveiliging behouden. Wallet-activering blijft uitgesteld volgens de recentste gebruikerskeuze.

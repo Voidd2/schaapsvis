@@ -45,4 +45,12 @@ Voor-/na-screenshots en de twaalf waargenomen formaatkeuzes staan lokaal in `../
 - Gewone producten: Kibbeling, Kabeljauwfilet en Haring; Haring toont €2,50 per stuk. Productnaam in elke WhatsApp-link gecontroleerd.
 - TypeScript, ESLint, inhoudscontrole, Next-productiebuild en Cloudflare/Vinext-build slagen.
 
-Publicatie wordt hieronder toegevoegd na verificatie van de echte Cloudflare-uitrol.
+## Publicatie en live controle
+
+PR #69 is samengevoegd als `488b0f685fb9228b58bb8c900438a5701a223963`. De live controle vond daarnaast dat te vroege invoer vóór clientactivatie verloren kon gaan. PR #70 (`f549649d292d4713efc228bad8064e67ace9b4ec`) houdt filter- en formaatbediening kort uitgeschakeld totdat de handlers actief zijn; URL-resultaten blijven direct servergerenderd. De GitHub-build en Cloudflare-previewbuild slagen.
+
+Cloudflare account Schaapsvis, site-Worker `schaapsvis`, toont definitieve versie **`68822bfc` — 100% Ready**. Op `https://schaapsvishandel.nl` zijn zoekopdracht → product → terug, categorie Verse vis + A–Z + Toon meer → product → terug (25 producten), de drie schaalkeuzes en de prijswisseling naar luxe 8–10 (€125,50) gecontroleerd. De Engelse locatiepagina toont de centrale uren, Tuesday–Saturday in metadata en Tuesday–Friday plus Saturday in schema.org. Geen consolefouten op de gecontroleerde live routes.
+
+Ook gecontroleerd: een gedeelde zoeklink geeft direct servergerenderd `1 product` (NL/EN), `1 Produkt` (DE) en een duidelijke nulresultatenweergave. Het locatie-anker blijft onder de vaste header zichtbaar. De fotovergroter sluit met Escape en herstelt focus. Er zijn geen echte aanvragen, bestellingen, registraties of e-mails verstuurd.
+
+Het lokale klikbare voor-/na-overzicht is `../design-preview/round-two/overzicht.html` (pad vanuit de repository).
