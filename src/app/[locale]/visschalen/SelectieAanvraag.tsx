@@ -2,6 +2,7 @@ import { DIRKS_BARBECUE, DIRKS_VISSCHALEN, selectieNaam, type SelectieItem } fro
 import { euro, whatsappLink } from "@/lib/bedrijf";
 import { SelectieGalerij } from "./SelectieGalerij";
 import { FormaatKeuze } from "./FormaatKeuze";
+import { PLATTER_FAMILIES, platterFamilies, platterLabels } from "@/lib/platter-families";
 import { feestdagenProduct } from "@/lib/feestdagen-producten";
 
 const TEKST = {
@@ -25,7 +26,7 @@ const TEKST = {
     prijs: "Price", stuk: "each", vraag: "Ask on WhatsApp", details: "View product", foto: "Use this platter as inspiration for your own selection.", open: "Enlarge photo", sluiten: "Close", vorige: "Previous photo", volgende: "Next photo", teller: "Photo {current} of {total}",
     schaalBeschrijving: (naam: string) => `See ${naam} up close. The photo gives a clear view of this platter; we agree the final selection with you in advance.`,
     productBeschrijving: (naam: string) => `See ${naam} up close. The photo shows this product as inspiration; we confirm the contents and availability in advance.`,
-    visschalen: "Seafood platters for parties and events", visschalenIntro: "Explore the listed platters with their full price. ‘View product’ shows contents, size and allergens. We confirm availability and any changes with you on WhatsApp.",
+    visschalen: "Choose your seafood platter", visschalenIntro: "Explore the listed platters with their full price. ‘View product’ shows contents, size and allergens. We confirm availability and any changes with you on WhatsApp.",
     waarschuwing: "For guests with coeliac disease, we agree the gluten-free platter and handling with you in advance on WhatsApp. On our regular gluten-free day, we also guarantee gluten-free kibbeling and fried prawns; message us to confirm the next date.",
     bericht: "Hello Schaap’s Vishandel, I would like to ask about", bevestig: "Could you confirm availability and the options?",
   },
@@ -37,7 +38,7 @@ const TEKST = {
     prijs: "Preis", stuk: "pro Stück", vraag: "Per WhatsApp anfragen", details: "Produkt ansehen", foto: "Lassen Sie sich von dieser Platte für Ihre eigene Auswahl inspirieren.", open: "Foto vergrößern", sluiten: "Schließen", vorige: "Vorheriges Foto", volgende: "Nächstes Foto", teller: "Foto {current} von {total}",
     schaalBeschrijving: (naam: string) => `Sehen Sie ${naam} aus der Nähe. Das Foto zeigt diese Platte deutlich; die endgültige Zusammenstellung stimmen wir vorher mit Ihnen ab.`,
     productBeschrijving: (naam: string) => `Sehen Sie ${naam} aus der Nähe. Das Foto dient als Inspiration; Inhalt und Verfügbarkeit bestätigen wir vorher.`,
-    visschalen: "Fischplatten für Feiern und Veranstaltungen", visschalenIntro: "Entdecken Sie die festen Ausführungen mit vollständigem Preis. Unter ‘Produkt ansehen’ finden Sie Inhalt, Größe und Allergene. Verfügbarkeit und Änderungen bestätigen wir per WhatsApp.",
+    visschalen: "Wählen Sie Ihre Fischplatte", visschalenIntro: "Entdecken Sie die festen Ausführungen mit vollständigem Preis. Unter ‘Produkt ansehen’ finden Sie Inhalt, Größe und Allergene. Verfügbarkeit und Änderungen bestätigen wir per WhatsApp.",
     waarschuwing: "Für Gäste mit Zöliakie stimmen wir die glutenfreie Fischplatte und die Zubereitung vorab per WhatsApp ab. An unserem festen glutenfreien Tag garantieren wir außerdem glutenfreien Kibbeling und gebratene Garnelen; schreiben Sie uns, um den nächsten Termin zu bestätigen.",
     bericht: "Hallo Schaap’s Vishandel, ich möchte fragen nach", bevestig: "Können Sie Verfügbarkeit und Möglichkeiten bestätigen?",
   },
@@ -53,6 +54,7 @@ function maakKaarten({ items, locale, showPrice = true, photoCaption }: KaartPro
         : `${t.bericht} ${naam}. ${t.bevestig}`;
       return {
         slug: item.slug,
+        prijs: item.prijs,
         formaat: `${item.personenVan}–${item.personenTot} ${locale === "nl" ? "personen" : locale === "de" ? "Personen" : "people"}`,
         naam,
         foto: item.foto,
@@ -79,14 +81,13 @@ export function SelectieAanvraag({ locale, showSpecial = true, showBarbecue = tr
   return <div className="space-y-14">
     {showPlatters && <section id="visschaal-inspiratie">
       <h2 className="text-[1.8rem] mb-2">{t.visschalen}</h2>
-      <p className="max-w-3xl mb-8 text-[#4d6370]">{t.visschalenIntro}</p>
       <div className="platter-choices">
-      {(["klassiek", "luxe", "hapjes"] as const).map((group, i) => <FormaatKeuze
-        key={group} id={`schalen-${group}`}
+      {PLATTER_FAMILIES.map((group, i) => <FormaatKeuze
+        key={group} id={`schalen-${group}`} family={group} locale={taal}
         title={(taal === "nl" ? ["Klassieke visschaal", "Luxe visschaal", "Hapjesschaal"] : taal === "de" ? ["Klassische Fischplatte", "Deluxe Fischplatte", "Häppchenplatte"] : ["Classic seafood platter", "Deluxe seafood platter", "Seafood bites platter"])[i]}
         description={(taal === "nl" ? ["Zalmsalade, gerookte vis en garnalen, feestelijk opgemaakt.", "Een rijke selectie met onder andere tonijn, zalm, paling en garnalen.", "Kleine vishapjes, zalmwraps en garnalen om samen te delen."] : taal === "de" ? ["Lachssalat, Räucherfisch und Garnelen, festlich angerichtet.", "Eine reichhaltige Auswahl mit Thunfisch, Lachs, Aal und Garnelen.", "Kleine Fischhäppchen, Lachs-Wraps und Garnelen zum Teilen."] : ["Salmon salad, smoked fish and prawns, arranged for your occasion.", "A generous selection including tuna, salmon, eel and prawns.", "Seafood bites, salmon wraps and prawns to share."])[i]}
         label={taal === "nl" ? "Kies het formaat" : taal === "de" ? "Größe wählen" : "Choose a size"}
-        kaarten={maakKaarten({items:DIRKS_VISSCHALEN.filter(item => item.groep === group && feestdagenProduct(item.slug)?.categorie === "visschalen"), locale:taal, photoCaption})}
+        kaarten={maakKaarten({items:platterFamilies[group], locale:taal, photoCaption: photoCaption ?? platterLabels[taal].caption}).map(card => ({...card, detailsLabel:platterLabels[taal].details}))}
         tekst={{open:t.open, close:t.sluiten, previous:t.vorige, next:t.volgende, counter:t.teller}}
       />)}
       </div>

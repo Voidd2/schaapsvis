@@ -30,3 +30,12 @@ Product-, recept- en blogafbeeldingen zijn al aanwezig; losse vervangingsfoto's 
 ## Waar foto's worden gekoppeld
 
 Alle vaste fotoplekken staan in `src/lib/beeld.ts`. Zodra een winkel- of locatiebeeld is goedgekeurd en onder `public/images/` staat, krijgt het daar een eigen lokaal bestandspad en passende alt-tekst. De pagina gebruikt de foto dan automatisch; externe afbeeldingsservers worden niet rechtstreeks aangeroepen.
+
+## Aansluiting na de derde verbeteringsronde (2 november 2026)
+
+- `BEELD.winkelGevel`: zodra `bestand` een goedgekeurde eigen gevel bevat, vervangt die automatisch de zalmfoto bovenaan de homepage. Vul tegelijk `alt` en `bijschrift` passend bij de werkelijk aangeleverde foto in. Zonder gevel blijft de huidige zalm met het correcte gerechtbijschrift staan. Dezelfde gevelregistratie wordt gebruikt bij de locaties.
+- `BEELD.historie1938`: uitsluitend een passende historische opname voor het familieblok op de homepage en de historische tijdlijn. Bevestig de datering en pas alt-tekst/vertalingen aan als het jaar anders is. Zonder beeld blijven verhaal, quote en verticale lijn volledig intact.
+- `BEELD.historieNu`: aparte bestaande registratie voor een **actuele teamfoto**, aangesloten bij ‘Vandaag’ op Ons verhaal. Niet invullen bij historie1938. `achterDeToonbank` is de aparte persoonlijke contactfoto. Dit zijn geen automatische homepage-plaatsingen.
+- `marktWoensdag`, `marktZaterdag`, `marktVoorschoten`: de eigen kramen met herkenbare omgeving; de locatiekaarten blijven zonder foto's gewoon bruikbaar.
+- Een aangeleverde gevel/teamfoto wordt niet automatisch een social-shareafbeelding. Toonbank- en blogplaatsingen worden afzonderlijk op de bedoelde pagina gecontroleerd; de huidige homepage toont zes productfoto's, geen toonbankblok.
+- Nog nodig: gevel, echte toonbank/contactpersoon, huidig team, drie kramen en historische opname. Lever originelen liefst minimaal 1200 × 800 px met ruimte voor uitsnede. Geen AI-beelden voor deze identiteit.

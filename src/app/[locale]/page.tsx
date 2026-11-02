@@ -11,7 +11,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { Sectie, Kop } from "@/components/ui/Sectie";
 import { PaginaSlot } from "@/components/ui/PaginaKop";
 import { Beeld } from "@/components/ui/Beeld";
-import { heeftBeeld } from "@/lib/beeld";
+import { heeftBeeld, homepageHeroBeeld } from "@/lib/beeld";
 
 import { paginaMetadata } from "@/lib/seo";
 import { BEDRIJF, type VerkooppuntId } from "@/lib/bedrijf";
@@ -72,6 +72,8 @@ export default async function HomePage({
   const nav = await getTranslations({ locale, namespace: "nav" });
   const g = await getTranslations({ locale, namespace: "gedeeld" });
 
+  const heroBeeld = homepageHeroBeeld(locale);
+
   return (
     <div className="home-page">
       <JsonLd locale={locale} />
@@ -105,8 +107,8 @@ export default async function HomePage({
           {/* De winkel zelf, zodra die foto er is. Geen close-up van vis: die
               heeft elke vishandel, een gevel aan de Herenstraat niet. */}
           <div className="home-hero-image-wrap">
-            <Image src="/images/recepten/zalm-citroen-dille.webp" alt={locale === "nl" ? "Zalm uit de oven met citroen en dille" : locale === "de" ? "Ofenlachs mit Zitrone und Dill" : "Oven-baked salmon with lemon and dill"} width={1400} height={933} sizes="(max-width: 800px) 100vw, 50vw" className="home-hero-image" fetchPriority="high" />
-            <span className="home-hero-image-label">{locale === "nl" ? "Aan tafel · zalm met citroen en dille" : locale === "de" ? "Serviervorschlag · Lachs mit Zitrone und Dill" : "Serving idea · salmon with lemon and dill"}</span>
+            <Image src={heroBeeld.src} alt={heroBeeld.alt} width={1400} height={933} sizes="(max-width: 800px) 100vw, 50vw" className="home-hero-image" fetchPriority="high" />
+            <span className="home-hero-image-label">{heroBeeld.caption}</span>
           </div>
         </div>
       </section>
@@ -171,7 +173,7 @@ export default async function HomePage({
         </div>
       </Sectie>
 
-      <Sectie grond="zand">
+      <Sectie grond="wit">
         <Kop label={h("locatiesLabel")} titel={h("locatiesKop")} />
         <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8">
           {localLocations(locale).map((punt) => (

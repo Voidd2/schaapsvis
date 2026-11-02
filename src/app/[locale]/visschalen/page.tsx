@@ -1,9 +1,10 @@
+import { connection } from "next/server";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
-import { Sectie, Kop, Vragen } from "@/components/ui/Sectie";
-import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
+import { Sectie, Kop, Vragen, Kruimels } from "@/components/ui/Sectie";
+import { PaginaSlot } from "@/components/ui/PaginaKop";
 import { SelectieAanvraag } from "./SelectieAanvraag";
 import { paginaMetadata, kruimelSchema, vraagSchema } from "@/lib/seo";
 import { bestelContact } from "@/lib/bestel-contact";
@@ -30,6 +31,7 @@ export default async function VisschalenPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
+  await connection();
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "visschaal" });
   const g = await getTranslations({ locale, namespace: "gedeeld" });
@@ -41,12 +43,7 @@ export default async function VisschalenPage({
     "@context": "https://schema.org",
     "@type": "Service",
     name: locale === "de" ? "Fischplatten für Veranstaltungen in Leiden" : locale === "en" ? "Seafood platters for events in Leiden" : "Visschalen voor evenementen in Leiden",
-    description:
-      locale === "de"
-        ? `Fischplatten für Veranstaltungen in Leiden. Wir rechnen durchschnittlich mit etwa 17,50 € pro Person und beraten Sie per WhatsApp zu Auswahl und Anlass.`
-        : locale === "en"
-        ? `Seafood platters for events in Leiden. We average around €17.50 per person and advise on selections for each occasion via WhatsApp.`
-          : `Visschalen voor evenementen in Leiden. We rekenen gemiddeld circa € 17,50 per persoon en denken via WhatsApp mee over smaak en gelegenheid.`,
+    description: vragen[0].a,
     serviceType: locale === "de" ? "Fischplatten für Feiern und Veranstaltungen" : locale === "en" ? "Seafood platters for parties and events" : "Visschalen voor borrels en evenementen",
     provider: { "@id": `${BEDRIJF.domein}/#winkel` },
     areaServed: GEMEENTEN.map((x) => ({ "@type": "City", name: x.naam })),
@@ -66,20 +63,16 @@ export default async function VisschalenPage({
         ]}
       />
 
-      <PaginaKop
-        className="platter-page-heading"
-        kruimels={[
-          { naam: BEDRIJF.naamKort, href: `/${locale}` },
-          { naam: nav("visschalen") },
-        ]}
-        label={t("eyebrow")}
-        titel={t("kop")}
-        intro={t("inleiding")}
-        knoppen={[
-          { label: t("schaalKop"), href: "#samenstellen" },
-          { label: g("whatsapp"), href: bestelContact(locale, nav("visschalen")).href, extern: true, soort: "lijn" },
-        ]}
-      />
+      <section className="platter-intro section-wrap">
+        <Kruimels items={[{ naam: BEDRIJF.naamKort, href: `/${locale}` }, { naam: nav("visschalen") }]} />
+        <p className="kapitaal mb-3">{t("eyebrow")}</p>
+        <h1>{t("kop")}</h1>
+        <p className="platter-intro-text">{t("inleiding")}</p>
+        <nav className="platter-family-links" aria-label={t("schaalKop")}>
+          {(["klassiek", "luxe", "hapjes"] as const).map((family, i) => <a key={family} href={`#schalen-${family}`}>{(locale === "de" ? ["Klassisch", "Deluxe", "Häppchen"] : locale === "en" ? ["Classic", "Deluxe", "Bites"] : ["Klassiek", "Luxe", "Hapjes"])[i]} ↓</a>)}
+        </nav>
+        <a className="platter-advice-link" href={bestelContact(locale, nav("visschalen")).href} target="_blank" rel="noopener noreferrer">{t("adviesLink")}</a>
+      </section>
 
       {/* ── Samenstellen ──────────────────────────────────────────────────── */}
       <Sectie grond="papier" id="samenstellen">
@@ -113,10 +106,9 @@ export default async function VisschalenPage({
       </Sectie>
 
       <PaginaSlot
-        titel={t("kop")}
+        titel={t("hulpKop")}
         tekst={t("schaalUitleg")}
         knoppen={[
-          { label: t("schaalKop"), href: "#samenstellen" },
           {
             label: g("whatsapp"),
             href: bestelContact(locale,nav("visschalen")).href,
