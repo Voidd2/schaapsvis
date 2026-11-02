@@ -490,7 +490,18 @@ async function sendMail(env, to, subject, text, htmlBody, options = {}) {
     const smtp = await import("./smtp-worker.mjs");
     return smtp.sendSmtpMail(env, { to, subject, text, html: htmlBody, ...options });
   }
+
   return env.EMAIL.send({ from: env.MAIL_FROM, to, subject, text, html: htmlBody, ...options });
+}
+
+// Keep the two registration messages separate (each address gets only the
+// code it needs), but avoid delivering them in the same SMTP burst. A short
+// gap is friendlier to shared-host reputation and mailbox threading rules.
+async function sendVerificationPair(env, { email, schoolEmail, copy, locale, personalCode, schoolCode, validity }) {
+  const transactionalText = (intro, code) => `${intro}\n${code}\n${validity}\n\nSchaap’s Vishandel · Leiden · sinds 1938.`;
+  await sendMail(env, email, copy.verifySubject, transactionalText(copy.verifyIntro, personalCode), verificationCodeEmail(locale, copy.verifySubject, copy.verifyIntro, personalCode, validity));
+  await new Promise((resolve) => setTimeout(resolve, 1500));
+  await sendMail(env, schoolEmail, copy.schoolVerifySubject, transactionalText(copy.schoolVerifyIntro, schoolCode), verificationCodeEmail(locale, copy.schoolVerifySubject, copy.schoolVerifyIntro, schoolCode, validity));
 }
 
 async function issueEmailToken(env, { userId = null, email = null, purpose, ttlMs = EMAIL_TOKEN_MS }) {
@@ -910,10 +921,7 @@ async function register(request, env) {
   const schoolCode = await issueVerificationCode(env, { userId, email: schoolEmail, purpose: "verify_school" });
   try {
     const validity = locale === "nl" ? "De code is 10 minuten geldig." : locale === "de" ? "Der Code ist 10 Minuten gültig." : "The code is valid for 10 minutes.";
-    await Promise.all([
-      sendMail(env, email, copy.verifySubject, `${copy.verifyIntro}\n${personalCode}\n${validity}`, verificationCodeEmail(locale, copy.verifySubject, copy.verifyIntro, personalCode, validity)),
-      sendMail(env, schoolEmail, copy.schoolVerifySubject, `${copy.schoolVerifyIntro}\n${schoolCode}\n${validity}`, verificationCodeEmail(locale, copy.schoolVerifySubject, copy.schoolVerifyIntro, schoolCode, validity)),
-    ]);
+    await sendVerificationPair(env, { email, schoolEmail, copy, locale, personalCode, schoolCode, validity });
   } catch {
     return json({ error: "verification_email_failed", message: copy.verificationFailed }, 503);
   }
@@ -1002,10 +1010,7 @@ async function resendVerification(request, env) {
         const personalCode = await issueVerificationCode(env, { userId: user.id, email: user.email, purpose: "verify_email" });
         const schoolCode = await issueVerificationCode(env, { userId: user.id, email: user.school_email, purpose: "verify_school" });
         const validity = locale === "nl" ? "De code is 10 minuten geldig." : locale === "de" ? "Der Code ist 10 Minuten gültig." : "The code is valid for 10 minutes.";
-        await Promise.all([
-          sendMail(env, user.email, copy.verifySubject, `${copy.verifyIntro}\n${personalCode}\n${validity}`, verificationCodeEmail(locale, copy.verifySubject, copy.verifyIntro, personalCode, validity)),
-          sendMail(env, user.school_email, copy.schoolVerifySubject, `${copy.schoolVerifyIntro}\n${schoolCode}\n${validity}`, verificationCodeEmail(locale, copy.schoolVerifySubject, copy.schoolVerifyIntro, schoolCode, validity)),
-        ]);
+        await sendVerificationPair(env, { email: user.email, schoolEmail: user.school_email, copy, locale, personalCode, schoolCode, validity });
       } else {
         const token = await issueEmailToken(env, { userId: user.id, email: user.email, purpose: "verify_email" });
         const link = emailUrl(env, "/api/members/verify", token, locale);
