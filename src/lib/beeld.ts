@@ -28,6 +28,7 @@ export interface Beeldplek {
   alt: string;
   /** Visible caption describing the actual owner photo, when used in the hero. */
   bijschrift?: string;
+  vertalingen?: Partial<Record<"en" | "de", { alt: string; bijschrift: string }>>;
   verhouding: Verhouding;
   /** Intern label voor een nog ontbrekende eigenaarfoto. */
   terugval: string;
@@ -59,6 +60,10 @@ export const BEELD = {
     bestand: "",
     alt: "De winkel van Schaap's Vishandel aan de Herenstraat 48 in Leiden",
     bijschrift: "Onze winkel · Herenstraat 48, Leiden",
+    vertalingen: {
+      en: { alt: "Schaap’s Vishandel shop at Herenstraat 48 in Leiden", bijschrift: "Our shop · Herenstraat 48, Leiden" },
+      de: { alt: "Das Geschäft von Schaap’s Vishandel an der Herenstraat 48 in Leiden", bijschrift: "Unser Geschäft · Herenstraat 48, Leiden" },
+    },
     verhouding: "liggend",
     terugval: "Herenstraat 48, Leiden",
   },
@@ -211,7 +216,10 @@ export function ontbrekendeBeelden(): BeeldNaam[] {
 /** The storefront takes over only when a real owner image has been registered. */
 export function homepageHeroBeeld(locale: string) {
   const gevel = BEELD.winkelGevel;
-  if (gevel.bestand) return { src: gevel.bestand, alt: gevel.alt, caption: gevel.bijschrift };
+  if (gevel.bestand) {
+    const copy = locale === "en" || locale === "de" ? gevel.vertalingen[locale] : gevel;
+    return { src: gevel.bestand, alt: copy.alt, caption: copy.bijschrift };
+  }
   const copy = locale === "de"
     ? ["Ofenlachs mit Zitrone und Dill", "Serviervorschlag · Lachs mit Zitrone und Dill"]
     : locale === "en"

@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { euro } from "@/lib/bedrijf";
+import { feestdagenBedrag } from "@/lib/feestdagen-producten";
 import { selectedPlatter, platterSelectionParams, platterDetailHref, type PlatterFamily } from "@/lib/platter-families";
 import { useInteractive } from "@/lib/use-interactive";
 import { SelectieGalerij, type SelectieGalerijKaart } from "./SelectieGalerij";
@@ -28,7 +28,7 @@ export function FormaatKeuze({ id, family, locale, title, description, label, ka
     <SelectieGalerij kaarten={[kaart]} tekst={tekst} family={{ description, sizeControl:
       <label className="platter-size" htmlFor={`${id}-size`}>{label}
         <select id={`${id}-size`} disabled={!interactive} value={kaart.slug} onChange={event => selectSize(event.target.value)}>
-          {kaarten.map(item => <option key={item.slug} value={item.slug}>{item.formaat} · {euro(item.prijs)}</option>)}
+          {kaarten.map(item => <option key={item.slug} value={item.slug}>{item.formaat} · {feestdagenBedrag(Math.round(item.prijs * 100), locale)}</option>)}
         </select>
       </label>
     }} />

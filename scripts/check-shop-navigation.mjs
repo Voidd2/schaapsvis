@@ -42,6 +42,75 @@ for (const item of all) {
   assert.equal(selectedPlatter(family, back.searchParams).slug, item.slug);
   if (family !== "luxe") assert.equal(back.searchParams.get("luxe"), "visschotel-luxe-10-14-pers");
 }
+// Related-product navigation must carry the other two family choices.
+const originalSelection = "klassiek=visschotel-groot-8-10-pers&luxe=visschotel-luxe-10-14-pers&hapjes=visschotel-hapjes-6-10-pers&utm_source=folder";
+const relatedDetail = new URL(platterDetailHref("en", "visschotel-klein-3-5-pers", originalSelection), "https://example.test");
+const relatedBack = new URL(platterOverviewHref("en", "visschotel-klein-3-5-pers", relatedDetail.search), "https://example.test");
+assert.equal(relatedBack.searchParams.get("klassiek"), "visschotel-klein-3-5-pers");
+assert.equal(relatedBack.searchParams.get("luxe"), "visschotel-luxe-10-14-pers");
+assert.equal(relatedBack.searchParams.get("hapjes"), "visschotel-hapjes-6-10-pers");
+assert.equal(relatedBack.searchParams.get("utm_source"), "folder");
+assert.equal(relatedBack.hash, "#schalen-klassiek");
+assert.equal(platterDetailHref("de", "salade-trio", originalSelection), "/de/feestdagen/salade-trio");
+
+const { localizedPlatterProduct } = load("src/lib/platter-product-text.ts");
+const { feestdagenBedrag, feestdagenPrijs } = load("src/lib/feestdagen-producten.ts");
+const allergens = {
+  en: { Vis: "Fish", Schaaldieren: "Crustaceans", Gluten: "Gluten", Ei: "Egg", Mosterd: "Mustard", Soja: "Soy", Selderij: "Celery", Melk: "Milk", Sesam: "Sesame" },
+  de: { Vis: "Fisch", Schaaldieren: "Krebstiere", Gluten: "Gluten", Ei: "Ei", Mosterd: "Senf", Soja: "Soja", Selderij: "Sellerie", Melk: "Milch", Sesam: "Sesam" },
+};
+for (const source of FEESTDAGEN_PRODUCTEN.filter(p => p.categorie === "visschalen")) {
+  assert.equal(localizedPlatterProduct(source, "nl"), source);
+  for (const locale of ["en", "de"]) {
+    const translated = localizedPlatterProduct(source, locale);
+    for (const field of ["slug", "prijsCents", "afbeelding", "categorie"]) assert.equal(translated[field], source[field]);
+    for (const field of ["naam", "intro", "formaat", "besteltermijn", "eenheid"]) assert.notEqual(translated[field], source[field], `${source.slug}/${locale}/${field}`);
+    assert.deepEqual(translated.naam.match(/\d+/g), source.naam.match(/\d+/g));
+    assert.deepEqual(translated.formaat.match(/\d+/g), source.formaat.match(/\d+/g));
+    assert.deepEqual(translated.allergenen, source.allergenen.map(item => allergens[locale][item]));
+    assert.equal(translated.samenstelling.length, source.samenstelling.length);
+    for (let i = 0; i < source.samenstelling.length; i++) assert.notEqual(translated.samenstelling[i], source.samenstelling[i]);
+    assert.equal(translated.eenheid, locale === "en" ? "each" : "pro Stück");
+    assert.ok(feestdagenPrijs(translated, locale).startsWith(feestdagenBedrag(source.prijsCents, locale)));
+  }
+}
+for (const source of FEESTDAGEN_PRODUCTEN.filter(p => p.categorie !== "visschalen")) assert.equal(localizedPlatterProduct(source, "de"), source);
+
+if (process.env.PLATTER_DETAIL_EVIDENCE) {
+  const rows = JSON.parse(fs.readFileSync(process.env.PLATTER_DETAIL_EVIDENCE, "utf8"));
+  assert.equal(rows.length, 36);
+  assert.equal(new Set(rows.map(r => `${r.locale}/${r.slug}`)).size, 36);
+  for (const row of rows) {
+    const product = localizedPlatterProduct(FEESTDAGEN_PRODUCTEN.find(p => p.slug === row.slug), row.locale);
+    assert.equal(row.name, product.naam);
+    assert.equal(row.alt, product.naam);
+    assert.ok(row.title.includes(product.naam));
+    assert.equal(row.description, product.intro);
+    assert.equal(row.schema.name, product.naam);
+    assert.equal(row.schema.description, product.intro);
+    assert.equal(row.schema.offers.price, (product.prijsCents / 100).toFixed(2));
+    for (const text of [product.intro, product.formaat, product.besteltermijn, ...product.samenstelling, ...product.allergenen]) assert.ok(row.text.includes(text), `${row.locale}/${row.slug}: ${text}`);
+    const price = feestdagenBedrag(product.prijsCents, row.locale);
+    assert.ok(row.text.includes(feestdagenPrijs(product, row.locale)));
+    assert.ok(row.option.includes(price));
+    const message = new URL(row.whatsapp).searchParams.get("text");
+    assert.ok(message.includes(product.naam));
+    assert.ok(message.includes(feestdagenPrijs(product, row.locale)));
+    for (const link of row.related) {
+      const url = new URL(link.href, "https://example.test");
+      const slug = url.pathname.split("/").at(-1);
+      const related = localizedPlatterProduct(FEESTDAGEN_PRODUCTEN.find(p => p.slug === slug), row.locale);
+      assert.ok(link.text.includes(related.naam));
+      assert.ok(link.text.includes(feestdagenPrijs(related, row.locale)));
+      if (platterFamily(slug) !== "luxe") assert.equal(url.searchParams.get("luxe"), "visschotel-luxe-10-14-pers");
+      if (platterFamily(slug) !== "hapjes") assert.equal(url.searchParams.get("hapjes"), "visschotel-hapjes-6-10-pers");
+    }
+    if (row.locale !== "nl") assert.doesNotMatch(row.text, /per stuk|Schaap’s selectie|Huisgemaakte|vooraf bestellen|Ovale schaal|Een klassieke|Een luxe/);
+    assert.ok(row.scrollWidth <= row.width);
+  }
+  console.log("36 rendered details verified: translations, canonical amounts, ingredients/allergens, metadata, schema, images, related links and WhatsApp.");
+}
+
 const polluted = new URLSearchParams("klassiek=visschotel-luxe-8-10-pers&luxe=unknown&hapjes=https://evil.test");
 for (const family of Object.keys(platterFamilies)) {
   assert.equal(selectedPlatter(family, polluted).slug, platterFamilies[family][0].slug);
@@ -100,6 +169,13 @@ assert.equal(homepageHeroBeeld("nl").src, "/images/recepten/zalm-citroen-dille.w
 assert.match(homepageHeroBeeld("en").caption, /salmon/);
 Object.assign(BEELD.winkelGevel, { bestand: "/images/test-owner-front.webp", alt: "Werkelijk aangeleverde gevel", bijschrift: "Onze eigen winkel" });
 assert.deepEqual(homepageHeroBeeld("nl"), { src: "/images/test-owner-front.webp", alt: "Werkelijk aangeleverde gevel", caption: "Onze eigen winkel" });
+for (const locale of ["en", "de"]) {
+  const hero = homepageHeroBeeld(locale);
+  assert.equal(hero.src, "/images/test-owner-front.webp");
+  assert.equal(hero.alt, originalGevel.vertalingen[locale].alt);
+  assert.equal(hero.caption, originalGevel.vertalingen[locale].bijschrift);
+  assert.notEqual(hero.alt, BEELD.winkelGevel.alt);
+}
 Object.assign(BEELD.winkelGevel, originalGevel);
 assert.equal(BEELD.historie1938.bestand, originalHistory);
 assert.notEqual(BEELD.historieNu.alt, BEELD.historie1938.alt);
