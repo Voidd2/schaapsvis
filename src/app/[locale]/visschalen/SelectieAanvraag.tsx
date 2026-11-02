@@ -1,6 +1,7 @@
 import { DIRKS_BARBECUE, DIRKS_VISSCHALEN, selectieNaam, type SelectieItem } from "@/lib/dirks-selectie";
 import { euro, whatsappLink } from "@/lib/bedrijf";
-import { SelectieGalerij, type SelectieGalerijKaart } from "./SelectieGalerij";
+import { SelectieGalerij } from "./SelectieGalerij";
+import { FormaatKeuze } from "./FormaatKeuze";
 import { feestdagenProduct } from "@/lib/feestdagen-producten";
 
 const TEKST = {
@@ -42,15 +43,17 @@ const TEKST = {
   },
 } as const;
 
-function Kaarten({ items, locale, showPrice = true, photoCaption }: { items: SelectieItem[]; locale: keyof typeof TEKST; showPrice?: boolean; photoCaption?: string }) {
+type KaartProps = { items: SelectieItem[]; locale: keyof typeof TEKST; showPrice?: boolean; photoCaption?: string };
+function maakKaarten({ items, locale, showPrice = true, photoCaption }: KaartProps) {
   const t = TEKST[locale];
-  const kaarten: SelectieGalerijKaart[] = items.map((item) => {
+  return items.map((item) => {
       const naam = selectieNaam(item.slug, locale);
       const bericht = showPrice
         ? `${t.bericht} ${naam} (${t.prijs.toLowerCase()} ${euro(item.prijs)}${item.perStuk ? ` ${t.stuk}` : ""}). ${t.bevestig}`
         : `${t.bericht} ${naam}. ${t.bevestig}`;
       return {
         slug: item.slug,
+        formaat: `${item.personenVan}–${item.personenTot} ${locale === "nl" ? "personen" : locale === "de" ? "Personen" : "people"}`,
         naam,
         foto: item.foto,
         fotoBijschrift: photoCaption ?? t.foto,
@@ -62,7 +65,11 @@ function Kaarten({ items, locale, showPrice = true, photoCaption }: { items: Sel
         detailsLabel: feestdagenProduct(item.slug) ? t.details : undefined,
       };
     });
-  return <SelectieGalerij kaarten={kaarten} tekst={{ open: t.open, close: t.sluiten, previous: t.vorige, next: t.volgende, counter: t.teller }} />;
+  }
+
+function Kaarten(props: KaartProps) {
+  const t = TEKST[props.locale];
+  return <SelectieGalerij kaarten={maakKaarten(props)} tekst={{ open: t.open, close: t.sluiten, previous: t.vorige, next: t.volgende, counter: t.teller }} />;
 }
 
 export function SelectieAanvraag({ locale, showSpecial = true, showBarbecue = true, showPlatters = false, heading, intro, photoCaption }: { locale: string; showSpecial?: boolean; showBarbecue?: boolean; showPlatters?: boolean; heading?: string; intro?: string; photoCaption?: string }) {
@@ -73,11 +80,16 @@ export function SelectieAanvraag({ locale, showSpecial = true, showBarbecue = tr
     {showPlatters && <section id="visschaal-inspiratie">
       <h2 className="text-[1.8rem] mb-2">{t.visschalen}</h2>
       <p className="max-w-3xl mb-8 text-[#4d6370]">{t.visschalenIntro}</p>
-      <nav className="bbq-category-links mb-8" aria-label={t.visschalen}>{["klassiek", "luxe", "hapjes"].map((group, i) => <a href={`#schalen-${group}`} key={group}>{(taal === "nl" ? ["Klassiek", "Luxe", "Hapjesschalen"] : taal === "de" ? ["Klassisch", "Deluxe", "Häppchenplatten"] : ["Classic", "Deluxe", "Bite-sized"])[i]}</a>)}</nav>
-      {["klassiek", "luxe", "hapjes"].map((group, i) => <section className="platter-family" id={`schalen-${group}`} key={group}>
-        <h3>{(taal === "nl" ? ["Klassieke visschalen", "Luxe visschalen", "Hapjesschalen"] : taal === "de" ? ["Klassische Fischplatten", "Deluxe Fischplatten", "Häppchenplatten"] : ["Classic seafood platters", "Deluxe seafood platters", "Bite-sized platters"])[i]}</h3>
-        <Kaarten items={DIRKS_VISSCHALEN.filter(item => feestdagenProduct(item.slug)?.categorie === "visschalen" && (item.slug.includes("luxe") ? "luxe" : item.slug.includes("hapjes") ? "hapjes" : "klassiek") === group)} locale={taal} photoCaption={photoCaption} />
-      </section>)}
+      <div className="platter-choices">
+      {(["klassiek", "luxe", "hapjes"] as const).map((group, i) => <FormaatKeuze
+        key={group} id={`schalen-${group}`}
+        title={(taal === "nl" ? ["Klassieke visschaal", "Luxe visschaal", "Hapjesschaal"] : taal === "de" ? ["Klassische Fischplatte", "Deluxe Fischplatte", "Häppchenplatte"] : ["Classic seafood platter", "Deluxe seafood platter", "Seafood bites platter"])[i]}
+        description={(taal === "nl" ? ["Zalmsalade, gerookte vis en garnalen, feestelijk opgemaakt.", "Een rijke selectie met onder andere tonijn, zalm, paling en garnalen.", "Kleine vishapjes, zalmwraps en garnalen om samen te delen."] : taal === "de" ? ["Lachssalat, Räucherfisch und Garnelen, festlich angerichtet.", "Eine reichhaltige Auswahl mit Thunfisch, Lachs, Aal und Garnelen.", "Kleine Fischhäppchen, Lachs-Wraps und Garnelen zum Teilen."] : ["Salmon salad, smoked fish and prawns, arranged for your occasion.", "A generous selection including tuna, salmon, eel and prawns.", "Seafood bites, salmon wraps and prawns to share."])[i]}
+        label={taal === "nl" ? "Kies het formaat" : taal === "de" ? "Größe wählen" : "Choose a size"}
+        kaarten={maakKaarten({items:DIRKS_VISSCHALEN.filter(item => item.groep === group && feestdagenProduct(item.slug)?.categorie === "visschalen"), locale:taal, photoCaption})}
+        tekst={{open:t.open, close:t.sluiten, previous:t.vorige, next:t.volgende, counter:t.teller}}
+      />)}
+      </div>
       <p className="mt-6 max-w-3xl text-sm text-[#4d6370]">{t.waarschuwing}</p>
     </section>}
     {showSpecial && <section id="bijzondere-visschalen">

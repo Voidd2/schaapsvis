@@ -1,14 +1,13 @@
 export type Location = "winkel" | "markt" | "voorschoten";
 
-interface OpeningHour {
+export interface OpeningHour {
   days: number[]; // 0=zo, 1=ma, ..., 6=za
   open: string; // "08:30"
   close: string; // "17:30"
 }
 
-// ← AANPASSEN naar de exacte openingstijden. Deze tijden staan óók in de
-// schema.org-gegevens (src/lib/seo.ts) en op de pagina "Bezoek ons"; die drie
-// moeten met elkaar overeenkomen, anders leest Google een tegenstrijdigheid.
+// Centrale bron voor status, locatiepagina, footer, metadata en schema.org.
+// Lucas bevestigde op 2 november 2026: maandag gesloten, dinsdag–zaterdag open.
 export const openingHours: Record<Location, OpeningHour[]> = {
   winkel: [
     { days: [2, 3, 4, 5], open: "09:00", close: "18:00" }, // di–vr (maandag gesloten)
@@ -22,6 +21,31 @@ export const openingHours: Record<Location, OpeningHour[]> = {
     { days: [5], open: "08:00", close: "17:30" }, // vr — bij Hoogvliet
   ],
 };
+
+const dayNames = {
+  nl: ["Zondag", "Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag"],
+  en: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+  de: ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"],
+};
+
+export function openingRows(location: Location, locale: string) {
+  const names = dayNames[locale === "en" || locale === "de" ? locale : "nl"];
+  return openingHours[location].map(slot => ({
+    days: slot.days,
+    label: slot.days.length > 1 ? `${names[slot.days[0]]}–${names[slot.days.at(-1)!]}` : names[slot.days[0]],
+    time: `${slot.open}–${slot.close}`,
+  }));
+}
+
+export function openingSummary(location: Location, locale: string) {
+  return openingRows(location, locale).map(row => `${row.label} ${row.time}`).join(" · ");
+}
+
+export function shopDayRange(locale: string) {
+  const names = dayNames[locale === "en" || locale === "de" ? locale : "nl"];
+  const days = openingHours.winkel.flatMap(slot => slot.days);
+  return `${names[days[0]]}–${names[days.at(-1)!]}`;
+}
 
 /**
  * De status als gegevens, niet als zin.

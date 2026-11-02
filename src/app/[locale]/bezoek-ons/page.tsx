@@ -1,10 +1,11 @@
+import { openingRows, shopDayRange } from "@/lib/openingHours";
 import { bestelContact } from "@/lib/bestel-contact";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
-import { Sectie } from "@/components/ui/Sectie";
-import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
+import { Kruimels, Sectie } from "@/components/ui/Sectie";
+import { PaginaSlot } from "@/components/ui/PaginaKop";
 import { paginaMetadata, kruimelSchema } from "@/lib/seo";
 import { BEDRIJF, ADRES_REGEL, VERKOOPPUNTEN } from "@/lib/bedrijf";
 import { heeftBeeld } from "@/lib/beeld";
@@ -31,7 +32,7 @@ export async function generateMetadata({
     locale,
     pad: "/bezoek-ons",
     title: t("bezoekTitle"),
-    description: t("bezoekDesc"),
+    description: t("bezoekDesc", {winkeldagen:shopDayRange(locale)}),
   });
 }
 
@@ -51,11 +52,7 @@ const PLEKKEN = [
     id: "winkel",
     adres: ADRES_REGEL,
     /** Dagen als [sleutel van de dag, tijd]. "gesloten" krijgt zijn eigen sleutel. */
-    dagen: [
-      ["diVr", "09:00 – 18:00"],
-      ["za", "09:00 – 17:00"],
-      ["zoMa", null],
-    ],
+    dagen: [], // Winkeluren komen uit openingHours.ts.
     telefoon: true,
     maps: BEDRIJF.maps.route,
   },
@@ -101,26 +98,13 @@ export default async function BezoekOnsPage({
         ])}
       />
 
-      <PaginaKop
-        className="locations-page-heading"
-        kruimels={[{ naam: BEDRIJF.naamKort, href: `/${locale}` }, { naam: nav("locaties") }]}
-        label={BEDRIJF.adres.plaats}
-        titel={t("title")}
-        intro={t("sub")}
-        knoppen={[
-          { label: nav("visschalen"), href: `/${locale}/visschalen` },
-          {
-            label: g("bellen", { nummer: BEDRIJF.telefoon.weergave }),
-            href: `tel:${BEDRIJF.telefoon.e164}`,
-            extern: true,
-            soort: "lijn",
-          },
-        ]}
-      />
-
+      <section className="locations-intro section-wrap">
+        <Kruimels items={[{naam:BEDRIJF.naamKort,href:`/${locale}`},{naam:nav("locaties")}]} />
+        <p className="kapitaal mb-3">{BEDRIJF.adres.plaats}</p>
+        <h1>{t("title")}</h1>
       <nav
         aria-label={locale === "de" ? "Standort auswählen" : locale === "en" ? "Choose a location" : "Kies een locatie"}
-        className="section-wrap py-4"
+        className="py-5"
       >
         <ul className="flex flex-wrap gap-2">
           {PLEKKEN.map((plek) => (
@@ -132,9 +116,11 @@ export default async function BezoekOnsPage({
           ))}
         </ul>
       </nav>
+      <p>{locale === "nl" ? "Kies uw locatie voor openingstijden en de route." : locale === "de" ? "Wählen Sie Ihren Standort für Öffnungszeiten und Anfahrt." : "Choose your location for opening hours and directions."}</p>
+      </section>
 
       {/* ── De plekken ────────────────────────────────────────────────────── */}
-      <Sectie grond="papier">
+      <Sectie grond="papier" id="locatieoverzicht">
         <ul className="grid lg:grid-cols-2 gap-6">
           {PLEKKEN.map((plek) => (
             <li
@@ -159,10 +145,10 @@ export default async function BezoekOnsPage({
 
               <div>
                 <dl className="text-[0.95rem]">
-                  {plek.dagen.map(([dag, tijd]) => (
+                  {(plek.id === "winkel" ? [...openingRows("winkel", locale).map(row => [row.label, row.time]), [p("zoMa"), null]] : plek.dagen.map(([dag,tijd]) => [p(dag),tijd])).map(([dag, tijd]) => (
                     <div key={dag} className="flex flex-wrap gap-x-3 py-0.5">
                       <dt style={{ color: "var(--ink)", fontWeight: 600, minWidth: "11rem" }}>
-                        {p(dag)}
+                        {dag}
                       </dt>
                       <dd className="bedrag" style={{ color: "var(--charcoal)" }}>
                         {tijd ?? p("gesloten")}
@@ -170,18 +156,15 @@ export default async function BezoekOnsPage({
                     </div>
                   ))}
                 </dl>
-                <p className="text-[0.92rem] mt-2 leading-relaxed" style={{ color: "var(--charcoal)" }}>
-                  {p(`${plek.id}Toelichting`)}
-                </p>
+
               </div>
 
-              <div className="flex flex-col gap-2 md:items-end">
+              <div className="flex flex-wrap items-center gap-4">
                 <a
                   href={plek.maps}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="knop knop-lijn"
-                  style={{ color: "var(--navy)" }}
+                  className="knop knop-navy"
                 >
                   {g("route")} &rarr;
                 </a>
@@ -195,6 +178,9 @@ export default async function BezoekOnsPage({
                   </a>
                 )}
               </div>
+                <p className="text-[0.92rem] mt-2 leading-relaxed" style={{ color: "var(--charcoal)" }}>
+                  {p(`${plek.id}Toelichting`)}
+                </p>
             </li>
           ))}
         </ul>

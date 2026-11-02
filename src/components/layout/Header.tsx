@@ -137,7 +137,7 @@ export function Header() {
             </span>
           </Link>
 
-          <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="hidden xl:flex items-center justify-end gap-x-2 text-[0.86rem]">
+          <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="hidden min-[1440px]:flex items-center justify-end gap-x-2 text-[0.86rem]">
             {primaryLinks.map(({ href, label }, index) => {
               const children = href === p("/assortiment") ? productLinks : href === p("/ons-verhaal") ? storyLinks : [];
               return <div key={href} className="nav-theme">
@@ -151,11 +151,11 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-3 shrink-0">
-            <div className="hidden xl:block" style={{ color: "var(--charcoal)" }}>
+            <div className="hidden min-[1440px]:block" style={{ color: "var(--charcoal)" }}>
               <LanguageSwitcher />
             </div>
 
-            <details className="hidden xl:block relative">
+            <details className="hidden min-[1440px]:block relative">
               <summary
                 className="cursor-pointer list-none whitespace-nowrap border px-2.5 py-2 text-sm font-semibold rounded-md hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                 style={{ color: "var(--navy)", borderColor: "var(--linen)" }}
@@ -179,7 +179,7 @@ export function Header() {
               </div>
             </details>
 
-            <details className="hidden xl:block relative">
+            <details className="hidden min-[1440px]:block relative">
               <summary
                 className="cursor-pointer list-none whitespace-nowrap border px-2.5 py-2 text-sm font-semibold rounded-md hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                 style={{ color: "var(--navy)", borderColor: "var(--linen)" }}
@@ -214,7 +214,7 @@ export function Header() {
             <button
               type="button"
               ref={menuButton}
-              className="xl:hidden p-2 -mr-2 rounded-md transition-colors hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+              className="min-[1440px]:hidden p-2 -mr-2 rounded-md transition-colors hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
               style={{ color: "var(--navy)" }}
               onClick={() => setOpen(!open)}
               aria-expanded={open}
@@ -230,7 +230,7 @@ export function Header() {
         {open && (
           <div
             id="mobile-navigation"
-            className="xl:hidden max-h-[calc(100dvh-6.4rem)] overflow-y-auto overscroll-contain"
+            className="min-[1440px]:hidden max-h-[calc(100dvh-6.4rem)] overflow-y-auto overscroll-contain"
             style={{ backgroundColor: "var(--cream)", borderTop: "1px solid var(--linen)" }}
           >
             <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="max-w-7xl 2xl:max-w-[90rem] mx-auto px-4 py-2">
