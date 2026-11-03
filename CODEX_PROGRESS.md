@@ -4,6 +4,8 @@ Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 
 ## Studenten-eindcontrole en QR-renderfout
 
+- PR90 live: main8407edc, Cloudflare df337971 Ready/100%, build9575e9c6-52e2-444b-b04e-f14510ec31a0. Build245/Member147 groen. Zes extra controles met de werkelijke live sitebestanden en volledig onderschepte API slagen; leden-health200/ok. Zie docs/studenten-eindcontrole-2026-11-03.md voor bewijs per eis en resterende echte apparaat/account/mailacceptatie. Geen echte mails of aanvragen verstuurd.
+
 - De uitgestelde eindcontrole vond een echte UI-regressie: de handgeschreven versie1-L-encoder accepteerde17 bytes, terwijl de leden-Worker lange ondertekende SVQ1-tokens uitgeeft. De pas crashte zodra de QR-respons arriveerde. Vervangen door lokale qrcode1.5.4 met automatische capaciteit, foutcorrectie M en een grotere QR. Serverondertekening, vervaltijd, database en authenticatie blijven gelijk. Het oorspronkelijke logo vervangt de letters SV op de pas.
 - Onafhankelijke jsQR-decoder leest korte code, productiegetrouw SVQ1-token en500-byte-payload exact terug. Zes Chromegevallen NL/EN/DE op390/1440px controleren registratie, twee codes, directe login, Utrecht/MBO-aanvraag zonder upload, pas/naam/logo/korte code, daadwerkelijke SVG-decodering, verborgen Wallet en uitloggen. Alle API-verzoeken onderschept; nul echte verzendingen. Backend- en SMTP-integratietests, TypeScript en gerichte ESLint slagen. Bewijs naast de repo: design-preview/student-final. Publicatiecontrole volgt.
 - Wallet-activering is door de eigenaar uitgesteld en is geen huidig uitvoeringswerk. Fysieke iOS-installatie, echte nieuwe mailontvangst na de laatste mailwijziging en beheerintrek/herstel met het echte account blijven afzonderlijke acceptatiepunten; lokale tests bewijzen die niet.
@@ -137,8 +139,7 @@ Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 
 1. Voer voor de studentenpas nog één acceptatietest uit op een echt iOS-toestel: normale Safari, PWA-installatie, uitloggen/intrekken en opnieuw aanmelden. De server-, database- en browsertests zijn afgerond; deze fysieke apparaattest kan alleen met een eigenaarstoestel worden afgetekend.
 2. Laat een beheerder vanaf het toegestane account én vertrouwde netwerk de live beveiligingspagina openen en één gecontroleerde intrek-/herstelactie uitvoeren. De onbevoegde route is al aantoonbaar fail-closed getest.
-3. Google Wallet issuer/serviceaccount en Generic Pass Class door de eigenaar aanmaken, de vier vereiste waarden als Cloudflare-vars/secrets instellen en één echte installatie- en intrekkingstest uitvoeren.
-4. Apple Wallet activeren zodra het Apple Developer-account, Pass Type ID, certificaat, privésleutel en WWDR-certificaat beschikbaar zijn; daarna APNs-updatepush en één echte installatie- en intrekkingstest uitvoeren. De servercode en het updateprotocol staan klaar; de exacte eigenaarstappen staan in `docs/wallet-integratieplan.md`.
+3. Google en Apple Wallet-activering zijn op verzoek van de eigenaar uitgesteld; geen accounts, certificaten of abonnementen aanmaken. De eerdere voorbereidingen blijven bewaard in `docs/wallet-integratieplan.md` en zijn geen huidig uitvoeringswerk.
 
 ## Model- en tokenkeuze
 
