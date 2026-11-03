@@ -87,13 +87,13 @@ try {
 
   const routes=["","assortiment","assortiment/kabeljauwfilet","visschalen","feestdagen","relatiegeschenken","account","bezoek-ons","ons-verhaal","recepten","blog","bestellen"];
   const matrix=[];
-  for(const width of [360,390,768,1024,1366,1440,1728,1920]) {
-    await page.setViewportSize({width,height:width<768?844:1080});
+  for(const width of [360,375,390,430,768,820,1024,1180,1280,1366,1440,1728,1920]) {
+    await page.setViewportSize({width,height:width<768?844:width===820?1180:width===1180?820:1080});
     for(const route of routes) {
       await page.goto(origin+"/nl/"+route); await page.locator("h1").waitFor();
       const sizes=await page.evaluate(()=>({viewport:innerWidth,scroll:document.documentElement.scrollWidth,canvas:Math.round(document.querySelector(".section-wrap,.site-container")?.getBoundingClientRect().width??0)}));
       matrix.push({width,route,...sizes}); assert.ok(sizes.scroll<=sizes.viewport+1,`Overflow ${route} at ${width}: ${sizes.scroll}`);
-      if((width===1920&&!route)||(width===390&&["","visschalen","feestdagen","account"].includes(route))) { await page.waitForFunction(() => [...document.querySelectorAll("main img")].filter(i=>{const r=i.getBoundingClientRect();return r.width>0 && r.height>0 && r.top<innerHeight && r.bottom>0;}).every(i=>i.complete && i.naturalWidth>0)); await page.locator("main img").evaluateAll(async images => Promise.all(images.filter(i=>{const r=i.getBoundingClientRect();return r.width>0 && r.top<innerHeight && r.bottom>0;}).map(i=>i.decode()))); await page.screenshot({path:path.join(output,`${route||"home"}-after-${width}.jpg`)}); }
+      if((width===1920&&!route)||(width===390&&["","visschalen","feestdagen","account"].includes(route))||(width===820&&["","visschalen","bezoek-ons","account"].includes(route))||(width===1180&&["","visschalen"].includes(route))) { await page.waitForFunction(() => [...document.querySelectorAll("main img")].filter(i=>{const r=i.getBoundingClientRect();return r.width>0 && r.height>0 && r.top<innerHeight && r.bottom>0;}).every(i=>i.complete && i.naturalWidth>0)); await page.locator("main img").evaluateAll(async images => Promise.all(images.filter(i=>{const r=i.getBoundingClientRect();return r.width>0 && r.top<innerHeight && r.bottom>0;}).map(i=>i.decode()))); await page.screenshot({path:path.join(output,`${route||"home"}-after-${width}.jpg`)}); }
     }
     console.log("Layout",width,"12 routes passed");
   }
@@ -102,7 +102,7 @@ try {
   await expect(page.locator("#mobile-navigation")).toBeVisible();
   await menu.press("Escape"); await expect(page.locator("#mobile-navigation")).toHaveCount(0); await expect(menu).toBeFocused();
   await menu.click(); await page.locator("h1").click({force:true}); await expect(page.locator("#mobile-navigation")).toHaveCount(0);
-  results.push("Mobile menu toggle, Escape/focus and outside click; 96 route/width combinations without horizontal overflow.");
+  results.push("Mobile menu toggle, Escape/focus and outside click; 156 route/width combinations without horizontal overflow.");
   // Same routes in EN/DE plus the new content; touch uses an independent browser context.
   for (const locale of ["en","de"]) {
     for (const route of ["visschalen","feestdagen","account","ons-verhaal","recepten/haringsalade-appel-biet","recepten/haring-komkommer-borrelhapjes","recepten/makreel-aardappel-ovenschotel","blog/visgeschenk-geven-koelen-en-afhalen"]) {
