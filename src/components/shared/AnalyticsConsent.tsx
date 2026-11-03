@@ -38,7 +38,8 @@ export function AnalyticsConsent({ locale }: { locale: string }) {
       if (!(anchor instanceof HTMLAnchorElement)) return;
       const target = new URL(anchor.href);
       // Drafts may contain wishes/allergies: record only the destination path.
-      send("link_click", pathname, target.origin + target.pathname);
+      target.search = ""; target.hash = "";
+      send("link_click", pathname, target.href);
     };
     document.addEventListener("click", onClick, { capture: true });
     return () => document.removeEventListener("click", onClick, { capture: true });
