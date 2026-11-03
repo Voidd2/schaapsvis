@@ -48,7 +48,7 @@ De bestaande krab-, zalm- en tonijnsaladefoto's komen uit `public/images/dirks`;
 
 ## Bewijs en controles
 
-- Gerichte ESLint, TypeScript, Next-productiebuild met 560 routes, inhoudscontrole en shop/integriteitschecks geslaagd.
+- Gerichte ESLint, TypeScript, Next-productiebuild met 560 routes, Cloudflare/Vite-build, inhoudscontrole en shop/integriteitschecks geslaagd.
 - Nieuwe domeinchecks: zes hoofdkeuzes, 23 behouden routes, prijzen/foto's in drie talen, alle vertaalde samenstellingen/allergenen aanwezig, hoeveelheden, ongeprijsde extra's, verdeelwens, opgeslagen waarden.
 - Chrome: kleine schaal ×2 (€119) + luxe trio klein (€15,99) + krabsalade = bekend subtotaal €134,99. Detail openen, teruggaan en herladen bewaren selectie en aantallen.
 - Chrome: grote klassieke schaal toevoegen, verdeelwens aanvinken en 24 december kiezen: prijs onveranderd door verdelen, datum/verdeeluitleg zichtbaar in het echte WhatsApp-linkconcept.
@@ -67,4 +67,6 @@ De bestaande krab-, zalm- en tonijnsaladefoto's komen uit `public/images/dirks`;
 
 ## Publicatie
 
-Branch: `codex/platters-delicatessen-catalog`. PR en daadwerkelijke Cloudflare-uitrol worden na de laatste controles hieronder vastgelegd; een lokale build is geen live-bewijs.
+Branch: `codex/platters-delicatessen-catalog`. [PR #75](https://github.com/Voidd2/schaapsvis/pull/75) samengevoegd als `f2b11f07f62bce2934bc2e072d57fab2ab490e02`. GitHub Build site #227 geslaagd; Codex-review afgerond zonder bevindingen. Cloudflare toont site-Worker `610dd007` en leden-Worker `a0d3fa61` op **100% Ready**, beide gekoppeld aan deze commit.
+
+Live Chrome-controle op schaapsvishandel.nl bevestigt zes hoofdkaarten, beide nieuwe pagina-indelingen, aanvraag van twee kleine schalen + luxe trio + krab-mangowens met €134,99 bekend subtotaal, detail/terugnavigatie en dezelfde selectie op Feestdagen. Alle vier saladebeelden laden, inclusief de geoptimaliseerde illustratieve WebP. De echte WhatsApp-link bevat het verwachte concept; niet geopend of verzonden. De testselectie is daarna via de minknoppen leeggemaakt. De leden-healthcheck geeft `{"status":"ok"}`. Live screenshots staan naast de lokale controlebeelden in `../design-preview/catalog-rebuild/`.
