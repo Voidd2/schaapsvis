@@ -25,6 +25,7 @@
     "next-intl": "^4.9.1",
     "next-seo": "^7.2.0",
     "passmint": "0.7.0",
+    "qrcode": "1.5.4",
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "react-server-dom-webpack": "19.3.1",
@@ -35,6 +36,7 @@
     "@tailwindcss/postcss": "^4",
     "@tailwindcss/vite": "4.2.4",
     "@types/node": "^20",
+    "@types/qrcode": "1.5.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "6.1.2",
@@ -43,6 +45,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
     "fflate": "0.8.3",
+    "jsqr": "1.4.0",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vite": "8.3.4"

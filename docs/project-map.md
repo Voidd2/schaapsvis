@@ -18,6 +18,8 @@ Deze kaart is de korte ingang voor vervolgwerk. De code en actuele Cloudflare-st
 
 ## Bewezen status
 
+- Actuele vervolgstatus staat bovenaan `CODEX_PROGRESS.md`. De historische mailnotitie hieronder is ingehaald door `docs/email-bezorging-audit.md`: echte Gmail-headers bevestigden SPF/DKIM/DMARC PASS en een resetmail kwam in Postvak IN. Dit bewijst niet dat iedere nieuwe registratiemail na latere mailwijzigingen in de inbox komt. Wallet-activering is op eigenaarsverzoek uitgesteld; niet opnieuw als open implementatie oppakken.
+
 - Op 1 november 2026 is PR #61 samengevoegd en door Cloudflare gebouwd: leden-Worker `4b09794c` en site-Worker `fdbe4698` stonden op Ready. De live healthcheck gaf `{"status":"ok"}`. Preview-D1 bevat migraties 0013 t/m 0017 en productie-D1 bevat aantoonbaar 0017.
 - De studentenpasbeveiliging is live met herroepbare langlopende sessies, willekeurige gehashte installatiekenmerken, uitlegbare risicosignalen, auditlog, extra verificatie en eenmalige dynamische QR-codes. De live beheerroute weigert zonder toegestaan account én netwerk terecht met `forbidden`.
 

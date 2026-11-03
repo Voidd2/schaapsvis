@@ -1,97 +1,107 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-// Local-only UI regression; API calls are intercepted and no account or proof is sent.
+// UI acceptance. Every API request is intercepted; no mail or account is sent.
 const { chromium } = require('playwright');
 const assert = require('node:assert/strict');
-const origin = process.argv[2] || 'http://localhost:3011';
-if (!/^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(origin)) throw new Error('Local origin required');
-const agreedTerms = {
-  nl: ['Nederlandse en internationale studenten', 'hele assortiment', 'studiejaar geldig', 'nieuw bewijs nodig'],
-  en: ['Dutch and international students', 'entire range', 'one academic year', 'new proof is then required'],
-  de: ['niederländische und internationale Studierende', 'gesamte Sortiment', 'Studienjahr gültig', 'neuer Nachweis erforderlich'],
-};
-
+const jsQR = require('jsqr');
+const fs = require('node:fs/promises');
+const path = require('node:path');
+const origin = process.argv[2] || 'http://127.0.0.1:3038';
+if (!/^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(origin) && !(process.env.STUDENT_TEST_LIVE_READONLY === '1' && origin === 'https://schaapsvishandel.nl')) throw new Error('Local origin or explicitly enabled read-only production assets required');
+const output = process.env.STUDENT_TEST_OUTPUT;
+const user = { id: 'local-student', name: 'Test Student', email: 'student@example.test' };
+const application = { status: 'approved', education_level: 'mbo', institution: 'Test school', study_city: 'Utrecht', submitted_at: '2026-11-01T10:00:00Z' };
+const pass = { displayCode: 'SV-TEST12', issuedAt: '2026-11-01T10:00:00Z', expiresAt: '2027-11-01T10:00:00Z' };
+const qrPayload = Buffer.from(JSON.stringify({ p: '11111111-2222-4333-8444-555555555555', e: 1800000000000, n: 'aBcDeFgHiJkL' })).toString('base64url');
+const qrToken = `SVQ1.${qrPayload}.${'a'.repeat(43)}`;
 (async () => {
-  const browser = await chromium.launch({ headless: true, ...(process.env.BROWSER_EXECUTABLE ? { executablePath: process.env.BROWSER_EXECUTABLE } : { channel: 'chrome' }) });
-  const results = [];
-  try {
-    for (const locale of ['nl', 'en', 'de']) {
-      const guest = await browser.newPage();
-      await guest.route('**/api/members/me', route => route.fulfill({ json: { user: null } }));
-      await guest.goto(`${origin}/${locale}/account`, { waitUntil: 'networkidle' });
-      await guest.getByRole('tab').nth(1).click();
-      const marketing = guest.locator('input[name="marketingConsent"]');
-      assert.equal(await marketing.count(), 1, `${locale}: optional email-offer consent`);
-      assert.equal(await marketing.isChecked(), false, `${locale}: marketing consent starts unchecked`);
-      assert.equal(await marketing.evaluate(input => input.required), false, `${locale}: marketing consent is optional`);
-      await guest.close();
-
-      const passView = await browser.newPage({ viewport: { width: 390, height: 844 } });
-      const passUser = { id: 'local-pass-user', name: 'Student Example', email: 'student@example.test' };
-      await passView.route('**/api/members/me', route => route.fulfill({ json: {
-        user: passUser,
-        studentApplication: { status: 'approved', education_level: 'hbo', institution: 'Hogeschool Leiden', submitted_at: '2026-10-18T10:00:00.000Z' },
-        discountPass: { code: 'svpass.example', issuedAt: '2026-10-18T10:00:00.000Z', expiresAt: '2027-10-18T10:00:00.000Z' },
-      } }));
-      await passView.route('**/api/members/newsletter/start', route => route.fulfill({ json: { draftToken: 'local-newsletter-draft' } }));
-      await passView.goto(`${origin}/${locale}/account`, { waitUntil: 'networkidle' });
-      const passCode = passView.locator('code').filter({ hasText: 'svpass.example' });
-      await passCode.waitFor();
-      assert.equal(await passView.locator('a.fixed[aria-label]').count(), 0, `${locale}: floating WhatsApp button does not cover account pass`);
-      const passBounds = await passCode.boundingBox();
-      assert.ok(passBounds && passBounds.x >= 0 && passBounds.x + passBounds.width <= 390, `${locale}: pass code fits mobile width`);
-      const footerColors = await passView.locator('footer').evaluate(footer => ({
-        title: footer.querySelector('h2').classList.contains('text-white'),
-        intro: footer.querySelector('h2 + p').classList.contains('text-slate-200'),
-        email: footer.querySelector('input[name="email"]') !== null,
-        button: footer.querySelector('button[type="submit"]').classList.contains('bg-white') && footer.querySelector('button[type="submit"]').classList.contains('text-slate-900'),
-      }));
-      assert.deepEqual(footerColors, { title: true, intro: true, email: true, button: true }, `${locale}: newsletter footer uses high-contrast text and button on the dark background`);
-      await passView.locator('footer input[name="email"]').fill('newsletter@example.test');
-      const newsletterNext = { nl: 'Verder', en: 'Continue', de: 'Weiter' }[locale];
-      await passView.getByRole('button', { name: newsletterNext }).click();
-      const newsletterConsent = passView.locator('footer input[name="consent"]');
-      await newsletterConsent.waitFor();
-      assert.equal(await newsletterConsent.evaluate(input => input.required), true, `${locale}: explicit newsletter consent is required to subscribe`);
-      assert.equal(await newsletterConsent.evaluate(input => input.parentElement.classList.contains('text-slate-200')), true, `${locale}: newsletter consent remains readable on the dark footer`);
-      await passView.close();
-
-      const student = await browser.newPage();
-      const user = { id: 'local-test-user', name: 'Test Student', email: 'student@example.test' };
-      await student.route('**/api/members/me', route => route.fulfill({ json: { user, studentApplication: null } }));
-      let proofRequest = '';
-      await student.route('**/api/members/student-application', async route => {
-        assert.equal(route.request().method(), 'POST', `${locale}: application uses POST`);
-        proofRequest = route.request().postDataBuffer()?.toString('latin1') ?? '';
-        await route.fulfill({ json: { ok: true } });
-      });
-      const failures = [];
-      student.on('pageerror', error => failures.push(error.message));
-      await student.goto(`${origin}/${locale}/account`, { waitUntil: 'networkidle' });
-      const form = student.locator('form').filter({ has: student.locator('input[type="file"]') });
-      await form.waitFor();
-      const terms = await form.locator('div p').textContent();
-      const normalizedTerms = (terms ?? '').normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
-      for (const term of agreedTerms[locale]) assert.ok(normalizedTerms.includes(term.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase()), `${locale}: published student discount terms include "${term}"`);
-      assert.equal(await form.locator('input[type="file"]').count(), 1, `${locale}: proof upload`);
-      assert.equal(await form.locator('select[name="educationLevel"] option[value="mbo"]').count(), 1, `${locale}: MBO eligible`);
-      assert.equal(await form.locator('select[name="educationLevel"] option[value="hbo"]').count(), 1, `${locale}: HBO eligible`);
-      assert.equal(await form.locator('select[name="educationLevel"] option[value="wo"]').count(), 1, `${locale}: WO eligible`);
-      assert.equal(await form.locator('input[name="studiesInLeiden"]').evaluate(input => input.required), true, `${locale}: Leiden study required`);
-      assert.equal(await form.locator('input[name="proofConsent"]').evaluate(input => input.required), true, `${locale}: proof consent required`);
-      await form.locator('input[name="institution"]').fill('Hogeschool Leiden');
-      await form.locator('select[name="educationLevel"]').selectOption('mbo');
-      await form.locator('input[name="studiesInLeiden"]').check();
-      await form.locator('input[name="proofConsent"]').check();
-      await form.locator('input[type="file"]').setInputFiles({ name: 'studiebewijs.pdf', mimeType: 'application/pdf', buffer: Buffer.from('%PDF-1.4 local-only-test') });
-      await form.locator('button[type="submit"]').click();
-      await student.getByRole('status').last().waitFor();
-      assert.ok(proofRequest.includes('name="proofConsent"') && proofRequest.includes('true'), `${locale}: proof-consent sent`);
-      assert.ok(proofRequest.includes('name="studiesInLeiden"') && proofRequest.includes('true'), `${locale}: Leiden study confirmation sent`);
-      assert.ok(proofRequest.includes('filename="studiebewijs.pdf"'), `${locale}: proof attached to request`);
-      assert.deepEqual(failures, [], `${locale}: browser errors`);
-      results.push({ locale, guestRegistration: 'optional email consent', studentApplication: 'required Leiden/MBO+ and proof consent; upload UI submits multipart', browserErrors: failures.length });
-      await student.close();
+ const browser = await chromium.launch({ headless: true, ...(process.env.BROWSER_EXECUTABLE ? { executablePath: process.env.BROWSER_EXECUTABLE } : { channel: 'chrome' }) });
+ const results = [];
+ if (output) await fs.mkdir(output, { recursive: true });
+ try {
+  for (const locale of ['nl', 'en', 'de']) for (const width of [390, 1440]) {
+   const context = await browser.newContext({ viewport: { width, height: 900 } });
+   if (origin.startsWith('http:') && process.env.STUDENT_TEST_SITE_TOKEN) await context.addCookies([{ name: 'sv_access', value: process.env.STUDENT_TEST_SITE_TOKEN, url: origin }]);
+   const page = await context.newPage(), errors = [], unexpected = [], posts = [];
+   let state = { user: null };
+   page.on('pageerror', e => errors.push(e.message));
+   await context.route('**/*', async route => {
+    const request = route.request(), url = new URL(request.url()), endpoint = url.pathname;
+    if (url.origin !== origin) return route.abort();
+    if (endpoint.startsWith('/api/')) {
+     if (endpoint === '/api/members/me') return route.fulfill({ status: state.user ? 200 : 401, json: state });
+     if (endpoint === '/api/members/pass/qr') return route.fulfill({ json: { value: qrToken } });
+     if (request.method() === 'POST') {
+      posts.push({ endpoint, body: request.postData() });
+      if (endpoint === '/api/members/register') return route.fulfill({ json: { ok: true } });
+      if (endpoint === '/api/members/verify-codes') { state = { user, studentApplication: null }; return route.fulfill({ json: { ok: true } }); }
+      if (endpoint === '/api/members/student-application') { state = { user, studentApplication: { ...application, status: 'pending' } }; return route.fulfill({ json: { ok: true } }); }
+      if (endpoint === '/api/members/logout') { state = { user: null }; return route.fulfill({ json: { ok: true } }); }
+      if (endpoint === '/api/members/newsletter/start') return route.fulfill({ json: { draftToken: 'local-draft' } });
+     }
+     unexpected.push(`${request.method()} ${endpoint}`);
+     return route.fulfill({ status: 501, json: { error: 'unmocked-request' } });
     }
-    console.log(JSON.stringify(results));
-  } finally { await browser.close(); }
+    if (!['GET', 'HEAD'].includes(request.method())) { unexpected.push(request.method()); return route.abort(); }
+    return route.continue();
+   });
+   await page.goto(`${origin}/${locale}/account`, { waitUntil: 'networkidle' });
+   await page.getByRole('tab').nth(1).click();
+   const registration = page.locator('form').filter({ has: page.locator('input[name="firstName"]') });
+   const consent = registration.locator('input[name="marketingConsent"]');
+   assert.equal(await consent.isChecked(), false); assert.equal(await consent.evaluate(e => e.required), false);
+   for (const [name, value] of Object.entries({ firstName: 'Test', lastName: 'Student', email: user.email, schoolEmail: 'student@school.example.test', password: 'local-test-password-only' })) await registration.locator(`input[name="${name}"]`).fill(value);
+   await consent.check(); await registration.locator('button[type="submit"]').click();
+   const verification = page.locator('form').filter({ has: page.locator('input[name="personalCode"]') });
+   await verification.locator('input[name="personalCode"]').fill('123456');
+   await verification.locator('input[name="schoolCode"]').fill('654321'); await verification.locator('button').click();
+   const form = page.locator('form').filter({ has: page.locator('input[name="studyCity"]') }); await form.waitFor();
+   assert.equal(new URL(page.url()).pathname, `/${locale}/account`, 'No login redirect after verification');
+   assert.equal(await page.locator('input[type="file"],input[name="studiesInLeiden"],input[name="proofConsent"]').count(), 0);
+   assert.equal(await form.locator('input[name="studyCity"]').evaluate(e => e.required), true);
+   for (const level of ['mbo', 'hbo', 'wo']) assert.equal(await form.locator(`option[value="${level}"]`).count(), 1);
+   await form.locator('input[name="institution"]').fill('Test school'); await form.locator('input[name="studyCity"]').fill('Utrecht');
+   await form.locator('select[name="educationLevel"]').selectOption('mbo'); await form.locator('button[type="submit"]').click();
+   await form.waitFor({ state: 'detached' });
+   const submitted = posts.find(p => p.endpoint.endsWith('/student-application')).body;
+   assert.match(submitted, /name="studyCity"\r\n\r\nUtrecht/); assert.doesNotMatch(submitted, /filename=|proofConsent|studiesInLeiden/);
+   assert.deepEqual(posts.slice(0, 3).map(p => p.endpoint), ['/api/members/register', '/api/members/verify-codes', '/api/members/student-application']);
+   const payload = JSON.parse(posts[0].body); assert.equal(payload.firstName, 'Test'); assert.equal(payload.lastName, 'Student'); assert.equal(payload.marketingConsent, true);
+   state = { user, studentApplication: application, discountPass: pass, wallet: { apple: { available: false }, google: { available: false } } };
+   await page.reload({ waitUntil: 'networkidle' });
+   await page.locator('code').filter({ hasText: pass.displayCode }).waitFor(); await page.locator('main svg[role="img"]').waitFor();
+   const logo = page.locator('main img[alt="Schaap\'s Vis"]'); await logo.evaluate(e => e.decode());
+   assert.equal(await page.locator('form[action*="/wallet/"]').count(), 0, 'Deferred Wallet buttons hidden');
+   assert.equal(await page.locator('a.fixed[aria-label]').count(), 0);
+   assert.ok((await page.locator('main').innerText()).includes(user.name));
+   assert.doesNotMatch(await page.locator('main').innerText(), /SVQ1\.|svpass\.|spaarpunten|loyalty points|Treuepunkte/);
+   const bounds = await logo.boundingBox(); assert.equal(bounds.width, bounds.height); assert.ok(bounds.width >= 64 && bounds.width <= 72);
+   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false);
+   const pixels = await page.locator('main svg[role="img"]').evaluate(async svg => {
+    const image = new Image();
+    const source = svg.cloneNode(true); source.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    const url = URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(source)], { type: 'image/svg+xml' }));
+    try {
+     image.src = url; await image.decode();
+     const canvas = document.createElement('canvas'); canvas.width = canvas.height = 192;
+     const ctx = canvas.getContext('2d'); ctx.drawImage(image, 0, 0, 192, 192);
+     return Array.from(ctx.getImageData(0, 0, 192, 192).data);
+    } finally { URL.revokeObjectURL(url); }
+   });
+   assert.equal(jsQR(new Uint8ClampedArray(pixels), 192, 192)?.data, qrToken, 'Rendered SVG decodes to complete token');
+   const reject = page.getByRole('button', { name: { nl: 'Weigeren', en: 'Reject', de: 'Ablehnen' }[locale], exact: true });
+   if (await reject.count()) await reject.click();
+   await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+   if (output) await page.screenshot({ path: path.join(output, `student-pass-${locale}-${width}.png`), fullPage: true });
+   await page.locator('footer input[name="email"]').fill('newsletter@example.test'); await page.locator('footer button[type="submit"]').click();
+   const newsletterConsent = page.locator('footer input[name="consent"]'); await newsletterConsent.waitFor();
+   assert.equal(await newsletterConsent.evaluate(e => e.required), true); assert.equal(await newsletterConsent.isChecked(), false);
+   await page.getByRole('button', { name: { nl: 'Uitloggen', en: 'Log out', de: 'Abmelden' }[locale], exact: true }).click();
+   await page.getByRole('tab').first().waitFor();
+   assert.deepEqual(unexpected, []); assert.deepEqual(errors, []);
+   results.push({ locale, width, registration: 'separate names; optional offers', verification: 'automatic login; same page', application: 'Utrecht/MBO; no upload', pass: 'name, original logo, short code, QR', wallet: 'hidden', logout: 'passed', realSubmissions: 0 });
+   await context.close();
+  }
+  if (output) await fs.writeFile(path.join(output, 'student-portal-acceptance.json'), JSON.stringify(results, null, 2));
+  console.log(JSON.stringify(results));
+ } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

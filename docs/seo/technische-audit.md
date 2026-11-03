@@ -131,7 +131,7 @@ Bewijs buiten Git: `live-release.json`, twintig `live-*.png`, `live-home-390-vie
 ## Nog open, in volgorde
 
 1. Publicatie afgerond: PR #81, commit `b13dfee`, siteversie `b3f74852`, Ready/100%. Twintig live route/schermcombinaties geslaagd. Het slot blijft aan. Aanvullend: PR83 en externe GitHub-slotcontrole geslaagd; zie actuele vervolgstatus bovenaan.
-2. Eigenaar: primaire telefoon, afwijkende dinsdagopening, juiste Google Bedrijfsprofielgegevens en drie gerechtfoto’s bevestigen; zie [NAP](nap-controle.md) en [recepten](recepten-matrix.md).
+2. Telefoon en dinsdagopening zijn bevestigd en verwerkt in PR86: bellen0715124810, WhatsApp0624811678, dinsdag09:00. Overige Google Bedrijfsprofielgegevens en drie echte gerechtfoto’s blijven eigenaarafhankelijk; zie [NAP](nap-controle.md) en [recepten](recepten-matrix.md).
 3. Search Console: huidige Google-aanmelding toont **“Je hebt geen toegang tot deze property”** voor `sc-domain:schaapsvishandel.nl`. Geen zoekprestaties of indexeringsdata beschikbaar. Toegang regelen vóór lancering; geen nieuwe betaalde dienst nodig.
 4. Edge-meting uitgevoerd: mobiele Lighthouse-homepage81, toegankelijkheid100, best-practices100, LCP4,83s, CLS0, TBT3ms. Mobiele LCP blijft optimalisatieruimte; dit is geen veld-CWV-goedkeuring. Catalogusfoto’s zijn inmiddels geoptimaliseerd in PR83; rendervertraging/veld-CWV na publieke lancering beoordelen met representatieve gebruikersdata.
 5. Eigenaar: actuele etiketten bij High Seas/gerookte zalm en overige partijen. Drie onbewezen ASC-badges/claims zijn voorlopig verwijderd; dit betekent niet dat de producten ongecertificeerd zijn. Ingrediënten en voedingswaarden zijn niet gewijzigd. Zie de redactionele controle hieronder.
