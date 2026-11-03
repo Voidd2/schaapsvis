@@ -89,6 +89,15 @@ assert(server.message.includes("Content-Type: text/html; charset=UTF-8"));
 assert(server.message.includes("=?UTF-8?B?"));
 assert(!server.message.includes("test-secret"), "the SMTP password must never appear in message data");
 
+function decodedSender(message) {
+  const fromLines = message.split("\r\n").filter((line) => line.startsWith("From: "));
+  assert.equal(fromLines.length, 1, "exactly one visible sender header");
+  const match = fromLines[0].match(/^From: =\?UTF-8\?B\?([^?]+)\?= <([^<>]+)>$/);
+  assert(match, "display name must be encoded separately from the single mailbox");
+  return { name: Buffer.from(match[1], "base64").toString("utf8"), address: match[2] };
+}
+assert.deepEqual(decodedSender(server.message), { name: "Schaap’s Vishandel – Accounts", address: "schaapsv@schaapsvishandel.nl" });
+
 const campaignMessage = makeMessage({
   from: "schaapsv@schaapsvishandel.nl",
   to: "customer@example.test",
@@ -99,6 +108,8 @@ const campaignMessage = makeMessage({
 });
 assert.match(campaignMessage.body, /List-Unsubscribe: <https:\/\/schaapsvishandel\.nl\/api\/members\/newsletter\/unsubscribe-one-click\?token=test-token>/);
 assert.match(campaignMessage.body, /List-Unsubscribe-Post: List-Unsubscribe=One-Click/);
+assert.deepEqual(decodedSender(campaignMessage.body), { name: "Schaap’s Vishandel – Aanbiedingen", address: "schaapsv@schaapsvishandel.nl" });
+assert.equal(campaignMessage.from, "schaapsv@schaapsvishandel.nl", "the SMTP envelope remains the authenticated mailbox");
 assert.throws(() => makeMessage({ from: "schaapsv@schaapsvishandel.nl", to: "customer@example.test", subject: "Test", text: "Test", html: "<p>Test</p>", listUnsubscribeUrl: "http://example.test/unsubscribe" }), /invalid-list-unsubscribe-url/);
 
 server.greeted = false;
