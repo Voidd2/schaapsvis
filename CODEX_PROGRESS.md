@@ -2,12 +2,12 @@
 
 Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 
-## Kwaliteitsronde na PR #76 — implementatie en controles
+## Kwaliteitsronde na PR #76 — live afgerond
 
 - Eigen branch `codex/quality-after-76`, basis `2d671a1`. Mandje hersteld met inleesbarrière, validatie en eenmalige migratie naar tabbladsessie; dropdowns sluiten bij buitenklik/Escape/navigatie/resize en zijn wederzijds uitsluitend.
 - Gedeeld 1536px-canvas, laptopnavigatie op twee rijen, drie geschenken na hoofdschalen, rustiger account, Amsterdam-datumcontrole. Bestaande prijs/foto/auth/backend behouden.
 - Beeldplan alleen server-gevalideerde besloten preview; historie2018, historieblog zonder misleidend productbeeld. SEO-skill, matrix, 3 recepten en 1 blog in NL/EN/DE; sitemapdatums gecorrigeerd.
-- Definitief lokaal: 96 pagina/breedte-combinaties + 16 EN/DE-routes; accountmenu/focus, opslag/herladen/verwijderen, catalogus/detail/terug, modaal, datum en touch geslaagd. Besloten media/slot/noindex getest. TypeScript, gerichte ESLint, content/shopchecks, Next-build (572 routes) en Cloudflare-build geslaagd. Screenshots opgeslagen. PR en echte Cloudflare-release worden nog gecontroleerd.
+- Definitief lokaal: 96 pagina/breedte-combinaties + 16 EN/DE-routes; accountmenu/focus, opslag/herladen/verwijderen, catalogus/detail/terug, modaal, datum en touch geslaagd. Besloten media/slot/noindex getest. TypeScript, gerichte ESLint, content/shopchecks, Next-build (572 routes) en Cloudflare-build geslaagd. Screenshots opgeslagen. PR #77 samengevoegd als `67875df`; GitHub groen en Codex zonder bevindingen. Cloudflare site `7ccc829e` en leden `af50a880` beide 100% Ready. Live canvas/dropdown/account/geschenken/herladen/datum gecontroleerd; testlijst weer leeg. API-health ok; anoniem slot/robots/lege sitemap behouden.
 - Zie `docs/kwaliteit-na-76.md`, `docs/beeldplan.md` en `../design-preview/quality-76/`. Geen berichten of registraties verzonden; geen geld uitgegeven.
 
 ## Visschalen & delicatessen — herbouw live afgerond
