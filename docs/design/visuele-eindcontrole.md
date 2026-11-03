@@ -32,3 +32,7 @@ De eerste recept-vooropname gebruikte een bestaande redirect naar de receptenind
 ## Resterende visuele controle
 
 Na PR-review en merge: echte Cloudflare-output naast de screenshots controleren. Onderhoud de lange catalogus met bestaande content; geen nieuwe kaartfoto’s, porties of vrijere ingrediëntenclaims toevoegen. Eigen bedrijfsfoto’s en ontbrekende gerechtbeelden blijven eigenaarsinput.
+
+## Live na PR #81
+
+Siteversie b3f74852 (main b13dfee) Ready/100%. Twintig live controles op390/1440px: geen overflow of pageerrors. Live screenshots en Lighthouse-mobielrapport staan naast de repo in design-preview/master-audit; het overzicht linkt ze. Geen formulieren verzonden. Live mobiele Lighthouse: performance81, accessibility100, best-practices100; LCP4,83s blijft een aandachtspunt, geen veld-CWV-certificering.

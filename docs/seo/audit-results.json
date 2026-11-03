@@ -1,7 +1,7 @@
 {
   "date": "2026-11-03",
   "base": "b60f56e",
-  "productionPublished": false,
+  "productionPublished": true,
   "next": {
     "pagesChecked": 507,
     "internalLinksChecked": 519,
@@ -2172,5 +2172,34 @@
     "status": 301,
     "preservesPathAndQuery": true,
     "previousHttpWwwStatus": 522
+  },
+  "release": {
+    "pr": 81,
+    "commit": "b13dfee90df8904eaca52b3e73984e1341ec32dd",
+    "worker": "schaapsvis",
+    "version": "b3f74852-fc47-402c-8888-cfd7c5824fdc",
+    "traffic": 100,
+    "status": "Ready",
+    "build": "7e670b3c-f859-4c18-9e99-9d02d8dc57d8",
+    "siteRemainsLocked": true,
+    "anonymousOutsideAllowlist": "Not independently verified live; local closed profiles pass, external web fetch unavailable",
+    "membersHealth": "ok",
+    "liveChecks": 20,
+    "pageErrors": [],
+    "submissions": 0,
+    "lighthouse": {
+      "url": "https://schaapsvishandel.nl/nl",
+      "version": "13.6.0",
+      "profile": "mobile simulated throttling, live Cloudflare, owner network",
+      "scores": {
+        "performance": 81,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 69
+      },
+      "lcpMs": 4825.894,
+      "cls": 0,
+      "tbtMs": 3
+    }
   }
 }
