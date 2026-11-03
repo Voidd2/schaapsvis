@@ -2,6 +2,11 @@
 
 Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 
+## Eigen logo als favicon en footerbadge
+
+- Nieuwe eigenaarupload ongewijzigd bewaard als public/images/brand/schaapsvis-logo-original.png. Afgeleide browsericonen32/192px, Apple180px en ICO; oude favicon.svg blijft hetzelfde logo tonen. Footerbadge88px met vaste afmetingen en lazy loading, bestaande tekstheader behouden.
+- Alleen de exacte icoonpaden zijn bereikbaar buiten het sitewachtwoord; geen bredere asset- of authenticatie-uitzondering. Gerichte ESLint, typegen/TypeScript en inhoudscontrole slagen. Browser- en publicatiebewijs volgt.
+
 ## Masteraudit SEO en afwerking — vervolgcontrole en PR #81
 
 - Eigenaar bevestigt 3 november: WhatsApp 06 2481 1678, belnummer van Google Maps, dinsdag 09:00. Maps rechtstreeks geopend: 071 512 4810 bij Herenstraat 48. PR86 samengevoegd als 70bc65e; siteversie 7b95e527 Ready/100%, Cloudflare-build267042a9-8988-4e2d-b574-6c80c6411752. Build240/Content70, inhoud/winkel en9 geïsoleerde contactcases groen. Tien live route/breedtecombinaties: alle tel-links naar +31715124810, alle WhatsApp-links naar31624811678, schema/contactmetadata NL/EN/DE correct, geen overflow/pageerrors/verzendingen. Dinsdag09:00 stond al correct. Screenshots en live-contact-confirmed.json naast de repo. NAP-keuze is afgerond; externe gidsen, overige GBP-velden, etiketten, gerechtfoto's en GSC-toegang blijven eigenaarafhankelijk.

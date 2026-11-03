@@ -6,8 +6,12 @@ export const metadata: Metadata = {
   description:
     "Schaap’s Vishandel is een viswinkel in Leiden sinds 1938. Bekijk ons assortiment, recepten, openingstijden en de locaties van onze winkel en marktkramen.",
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: [
+      { url: "/schaapsvis-icon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/images/brand/schaapsvis-logo-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: { url: "/schaapsvis-apple-touch-icon.png", sizes: "180x180", type: "image/png" },
   },
 };
 

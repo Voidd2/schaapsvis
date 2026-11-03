@@ -88,8 +88,8 @@ export function Header() {
 
   const isActief = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
-  // Liefst de liggende variant; anders de ronde badge; anders alleen de naam.
-  const logo = BEELD.logoLiggend.bestand || BEELD.logoBadge.bestand;
+  // Houd de brede woordnaam in de header; de ronde badge staat in de footer.
+  const logo = BEELD.logoLiggend.bestand;
 
   return (
     <div ref={headerRoot} className="site-header sticky top-0 z-50" onClick={event => {

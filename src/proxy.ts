@@ -28,7 +28,11 @@ function altijdToegestaan(pathname: string): boolean {
     // De bestanden waarmee de browser dat scherm tekent.
     pathname.startsWith("/_next/") ||
     pathname.startsWith("/_vercel/") ||
-    pathname === "/favicon.ico"
+    pathname === "/favicon.ico" ||
+    pathname === "/favicon.svg" ||
+    pathname === "/schaapsvis-icon-32.png" ||
+    pathname === "/schaapsvis-apple-touch-icon.png" ||
+    pathname === "/images/brand/schaapsvis-logo-192.png"
   );
 }
 
