@@ -2,6 +2,12 @@
 
 Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 
+## Studenten-eindcontrole en QR-renderfout
+
+- De uitgestelde eindcontrole vond een echte UI-regressie: de handgeschreven versie1-L-encoder accepteerde17 bytes, terwijl de leden-Worker lange ondertekende SVQ1-tokens uitgeeft. De pas crashte zodra de QR-respons arriveerde. Vervangen door lokale qrcode1.5.4 met automatische capaciteit, foutcorrectie M en een grotere QR. Serverondertekening, vervaltijd, database en authenticatie blijven gelijk. Het oorspronkelijke logo vervangt de letters SV op de pas.
+- Onafhankelijke jsQR-decoder leest korte code, productiegetrouw SVQ1-token en500-byte-payload exact terug. Zes Chromegevallen NL/EN/DE op390/1440px controleren registratie, twee codes, directe login, Utrecht/MBO-aanvraag zonder upload, pas/naam/logo/korte code, daadwerkelijke SVG-decodering, verborgen Wallet en uitloggen. Alle API-verzoeken onderschept; nul echte verzendingen. Backend- en SMTP-integratietests, TypeScript en gerichte ESLint slagen. Bewijs naast de repo: design-preview/student-final. Publicatiecontrole volgt.
+- Wallet-activering is door de eigenaar uitgesteld en is geen huidig uitvoeringswerk. Fysieke iOS-installatie, echte nieuwe mailontvangst na de laatste mailwijziging en beheerintrek/herstel met het echte account blijven afzonderlijke acceptatiepunten; lokale tests bewijzen die niet.
+
 ## Eigen logo als favicon en footerbadge
 
 - Nieuwe eigenaarupload ongewijzigd bewaard als public/images/brand/schaapsvis-logo-original.png. Afgeleide browsericonen32/192px, Apple180px en ICO; oude favicon.svg blijft hetzelfde logo tonen. Footerbadge88px met vaste afmetingen en lazy loading, bestaande tekstheader behouden.

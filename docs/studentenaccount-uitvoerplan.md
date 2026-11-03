@@ -137,6 +137,8 @@ medewerker.
 
 ## Fase 3 — Apple Wallet en Google Wallet
 
+**Actuele scope (eigenaar, 2 november 2026): uitgesteld.** Activeer geen issuer, abonnement of certificaten. De bestaande browserpas, herroepbare sessies en opslaan op het beginscherm zijn de huidige oplossing. Onderstaande informatie blijft als later naslagwerk behouden.
+
 Wallet is haalbaar, maar niet alleen een vormgevingswijziging. Beide platformen
 vereisen een uitgeversconfiguratie en ondertekende passen.
 

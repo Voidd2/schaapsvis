@@ -21,6 +21,7 @@ on:
       - "tailwind.config.*"
       - "scripts/check-content-integrity.mjs"
       - "scripts/check-shop-navigation.mjs"
+      - "scripts/check-pass-qr.mjs"
       - ".github/workflows/build-validation.yml"
   push:
     branches: [main]
@@ -43,6 +44,7 @@ on:
       - "tailwind.config.*"
       - "scripts/check-content-integrity.mjs"
       - "scripts/check-shop-navigation.mjs"
+      - "scripts/check-pass-qr.mjs"
       - ".github/workflows/build-validation.yml"
 
 permissions:
@@ -73,6 +75,7 @@ jobs:
       - run: npm ci
       - run: npm run check:content
       - run: node scripts/check-shop-navigation.mjs
+      - run: node scripts/check-pass-qr.mjs
       - run: node scripts/check-build-target.mjs
       - run: node scripts/build-static-images.mjs --check
       - run: npm run build
