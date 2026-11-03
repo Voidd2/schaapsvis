@@ -2265,5 +2265,197 @@
       ]
     ],
     "measurement": "Same unthrottled isolated Chrome route check before/after; bytes, not speed percentage or field CWV"
+  },
+  "previewHosts": {
+    "date": "2026-11-03T18:34:50Z",
+    "run": 41695047443,
+    "job": 126123239847,
+    "sourceCommit": "c852159bfc6d6623754fc8be93ddb14c142e3ebb",
+    "results": [
+      {
+        "origin": "https://schaapsvishandel.nl",
+        "checks": [
+          {
+            "route": "/nl",
+            "status": 200,
+            "passwordGate": true,
+            "noindex": true,
+            "noStore": true
+          },
+          {
+            "route": "/en/assortiment",
+            "status": 200,
+            "passwordGate": true,
+            "noindex": true,
+            "noStore": true
+          },
+          {
+            "route": "/de/feestdagen",
+            "status": 200,
+            "passwordGate": true,
+            "noindex": true,
+            "noStore": true
+          },
+          {
+            "route": "/nl/account",
+            "status": 200,
+            "passwordGate": true,
+            "noindex": true,
+            "noStore": true
+          },
+          {
+            "route": "/nl/beheer/start",
+            "status": 200,
+            "passwordGate": true,
+            "noindex": true,
+            "noStore": true
+          }
+        ],
+        "ancillary": {
+          "/robots.txt": "disallow-all",
+          "/sitemap.xml": "empty-xml"
+        },
+        "cookies": false,
+        "formSubmissions": 0
+      },
+      {
+        "origin": "https://schaapsvis.schaapsvis.workers.dev",
+        "checks": [
+          {
+            "route": "/nl",
+            "status": 200,
+            "passwordGate": true,
+            "noindex": true,
+            "noStore": true
+          },
+          {
+            "route": "/en/assortiment",
+            "status": 200,
+            "passwordGate": true,
+            "noindex": true,
+            "noStore": true
+          },
+          {
+            "route": "/de/feestdagen",
+            "status": 200,
+            "passwordGate": true,
+            "noindex": true,
+            "noStore": true
+          },
+          {
+            "route": "/nl/account",
+            "status": 200,
+            "passwordGate": true,
+            "noindex": true,
+            "noStore": true
+          },
+          {
+            "route": "/nl/beheer/start",
+            "status": 200,
+            "passwordGate": true,
+            "noindex": true,
+            "noStore": true
+          }
+        ],
+        "ancillary": {
+          "/robots.txt": "disallow-all",
+          "/sitemap.xml": "empty-xml"
+        },
+        "cookies": false,
+        "formSubmissions": 0
+      },
+      {
+        "origin": "https://schaapsvis.vercel.app",
+        "checks": [
+          {
+            "route": "/nl",
+            "status": 200,
+            "passwordGate": true,
+            "noindex": true,
+            "noStore": true
+          },
+          {
+            "route": "/en/assortiment",
+            "status": 200,
+            "passwordGate": true,
+            "noindex": true,
+            "noStore": true
+          },
+          {
+            "route": "/de/feestdagen",
+            "status": 200,
+            "passwordGate": true,
+            "noindex": true,
+            "noStore": true
+          },
+          {
+            "route": "/nl/account",
+            "status": 200,
+            "passwordGate": true,
+            "noindex": true,
+            "noStore": true
+          },
+          {
+            "route": "/nl/beheer/start",
+            "status": 200,
+            "passwordGate": true,
+            "noindex": true,
+            "noStore": true
+          }
+        ],
+        "ancillary": {
+          "/robots.txt": "disallow-all",
+          "/sitemap.xml": "empty-xml"
+        },
+        "cookies": false,
+        "formSubmissions": 0
+      },
+      {
+        "origin": "https://schaapsvis-9sai.vercel.app",
+        "checks": [
+          {
+            "route": "/nl",
+            "status": 200,
+            "passwordGate": true,
+            "noindex": true,
+            "noStore": true
+          },
+          {
+            "route": "/en/assortiment",
+            "status": 200,
+            "passwordGate": true,
+            "noindex": true,
+            "noStore": true
+          },
+          {
+            "route": "/de/feestdagen",
+            "status": 200,
+            "passwordGate": true,
+            "noindex": true,
+            "noStore": true
+          },
+          {
+            "route": "/nl/account",
+            "status": 200,
+            "passwordGate": true,
+            "noindex": true,
+            "noStore": true
+          },
+          {
+            "route": "/nl/beheer/start",
+            "status": 200,
+            "passwordGate": true,
+            "noindex": true,
+            "noStore": true
+          }
+        ],
+        "ancillary": {
+          "/robots.txt": "legacy-password-gate",
+          "/sitemap.xml": "legacy-password-gate"
+        },
+        "cookies": false,
+        "formSubmissions": 0
+      }
+    ]
   }
 }

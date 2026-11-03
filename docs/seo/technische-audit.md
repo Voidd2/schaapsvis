@@ -27,6 +27,8 @@ De nieuwe CI-job `locked-site` herhaalt dit met uitsluitend GET-verzoeken. Repos
 
 ## Scorecard
 
+Aanvulling C2, PR85: [externe controle](https://github.com/Voidd2/schaapsvis/actions/runs/41695047443) van 3 november18:34UTC slaagt voor vijf routes op ieder van vier bekende hosts: hoofddomein, `schaapsvis.schaapsvis.workers.dev`, `schaapsvis.vercel.app` en `schaapsvis-9sai.vercel.app`. Zonder cookies: wachtwoordformulier, noindex/no-store en geen publiek JSON-LD. De eerste drie hosts geven robots Disallow en een lege XML-sitemap. Het verouderde 9sai-project herschrijft ook robots en sitemap naar het afgeschermde noindex-wachtwoordscherm. Dit is geen geldig robotsbestand, maar er lekt geen productinhoud of sitemap. Geen oude deployment omgezet of beveiliging gewijzigd om de test te laten slagen. Ruwe compacte resultaten: `design-preview/master-audit/preview-host-proof.json` naast de repo. Dit bewijs omvat deze vier bekende hostnamen, niet elk ooit gegenereerd deploymentadres.
+
 | Onderdeel | Status | Bewijs / beperking |
 |---|---|---|
 | Crawlbaarheid | Gecontroleerd en goed | 507 sitemaproutes, 519 interne doelen en 153 lokale beeldbestanden op Next én lokale Cloudflare/Vinext-runtime. Geen kapotte doelen. |
