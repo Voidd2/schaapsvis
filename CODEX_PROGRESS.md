@@ -2,13 +2,14 @@
 
 Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 
-## Bestelproces vaste visschalen — lokaal gereed, publicatie volgt
+## Bestelproces vaste visschalen — live afgerond
 
 - Branch `codex/catalog-cart-simplification`, basis `ac05aac`. Eén gedeelde toegankelijke mand-drawer; oude split verwijderd/migreert weg; vaste details zonder formaatdropdown; 23 routes/12 schalen/prijzen/foto’s behouden; trio klein/groot NL/EN/DE.
 - Maatwerk met visvoorkeuren, presentatie, hoeveelheid/bakjes, apart allergieveld en Amsterdam-datumvalidatie. Vrije tekst alleen in geheugen; klikstatistieken zonder query/fragment.
 - Playwright A–J geslaagd, 18 catalogus/detail-breedtecombinaties plus bestaande 96 regressiecombinaties en 16 EN/DE-routes. Geen berichten of echte aanvragen. Next 572 routes, Cloudflare-build, gerichte ESLint, shop- en inhoudscontrole geslaagd.
 - Mapping vijf gewenste formaten en bewijs: `docs/bestelproces-vaste-visschalen.md`. Verse-visfunctie alleen roadmap. Eén illustratief klein-fotoconcept in `../design-preview/cart-79/`, nog niet live; eerst eigenaarbeoordeling.
-- Volgende stap: PR/CI/review, merge, echte Cloudflare-versie en live winkelmandroute controleren en hier vastleggen.
+- PR #79 na expliciet publicatieakkoord samengevoegd als `be86bed`. GitHub-build groen, Codex-review op de hoofdwijziging zonder bevindingen. Cloudflare siteversie `0342b64f` staat 100% Ready (1m 6s). Live €147 voor twee middelgrote, gedeeld mandje op Feestdagen, kleine detail zonder dropdown en €59,50 bevestigd; testselectie weer leeg. Leden-health ok, robots Disallow en lege sitemap behouden. Geen berichten verzonden.
+- Visueel opleveroverzicht inclusief voor/na, WhatsApp-demonstraties en oude/nieuwe conceptfoto: `../design-preview/cart-79/overzicht.html`. Vijf nieuwe personenformaten blijven te bevestigen; de conceptfoto wacht op eigenaarbeoordeling.
 
 ## Kwaliteitsronde na PR #76 — live afgerond
 
