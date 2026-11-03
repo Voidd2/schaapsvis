@@ -2,9 +2,16 @@
 
 Laatst bijgewerkt: 4 november 2026, Europe/Amsterdam
 
+## Statistieken en rapportbronnen
+
+- PR #101 gepubliceerd als `92f3b21`; Build257/Member157 groen, Codex-review zonder bevindingen. Cloudflare site `474ad18c` en leden `316dc564` beide 100% Ready.
+- Eigen analytics nu aan in productie, uitsluitend na cookie-toestemming. Dashboard heeft 7/30/90 dagen, totalen, daggrafiek/tabel, top-pagina's en klikdoelen. WhatsApp/bellen/e-mail zonder inhoud/contactgegevens; private bestelroutes nu ook server-side uitgesloten. Aggregatie vóór ranglijstlimieten, geen afgekapt totaal boven 2.000 rijen. NL/EN/DE en privacytekst bijgewerkt.
+- Live test: weigeren → nul tellers; accepteren → homepage + Feestdagen + interne klik zichtbaar; beheerverversing telt niet. Gehele site blijft besloten. Screenshot: `../design-preview/analytics/live-dashboard.png`. Lokale synthetische data zijn niet naar productie verstuurd.
+- GSC en Cloudflare via correcte directe rapportlinks vanuit beheer. Dit is geen automatische externe API-import: daarvoor is aparte beperkte API-autorisatie nodig. Bestaande GSC-rapporten werken; nog geen ingediende sitemap (pas bij publieke lancering). Cloudflare Web Analytics sluit EU-bezoekers uit; ongewijzigd, geen extra tracker toegevoegd. De eigen D1-meting werkt wel na toestemming. Details en bronmomentopname: `docs/statistieken-2026-11-04.md`.
+
 ## Beheernavigatie, sessiegegevens en catalogusbediening
 
-- Gepubliceerd via PR #100 als `3b83ab0`. GitHub Build255 en Member155 geslaagd; Codex-review zonder bevindingen. Cloudflare site `dbf93012` en leden `5ac07517` beide Ready, 100% verkeer. Live Chrome bevestigt navigatie Studentenaanvragen → Pasbeveiliging → Statistieken, correcte actieve pagina, uitleg bij de drie historische sessies zonder apparaat en cadeau-ideeën via de nieuwe Visschalen-knop. Geen consolefouten op de gecontroleerde catalogus. Bewijs buiten Git: `../design-preview/admin-navigation/live-admin.png` en `live-gifts.png`. Analytics staat nog uit; deze wijziging activeert geen bezoekersprofilering.
+- Gepubliceerd via PR #100 als `3b83ab0`. GitHub Build255 en Member155 geslaagd; Codex-review zonder bevindingen. Cloudflare site `dbf93012` en leden `5ac07517` beide Ready, 100% verkeer. Live Chrome bevestigt navigatie Studentenaanvragen → Pasbeveiliging → Statistieken, correcte actieve pagina, uitleg bij de drie historische sessies zonder apparaat en cadeau-ideeën via de nieuwe Visschalen-knop. Geen consolefouten op de gecontroleerde catalogus. Bewijs buiten Git: `../design-preview/admin-navigation/live-admin.png` en `live-gifts.png`. Analytics stond bij PR #100 nog uit; de opvolgende PR #101 activeert uitsluitend de bestaande toestemmingsmeting.
 
 - Gedeeld NL/EN/DE-beheermenu toegevoegd aan alle beheerpagina’s, met actieve pagina, statistieken, aanvragen, pasbeveiliging, e-mailaanbiedingen, klantaccounts en terug naar de website. Dubbele losse navigatieregels verwijderd.
 - Desktopgroepen zijn over hun volledige label klikbaar en toetsenbordbedienbaar. Recepten staat zelfstandig; Visschalen bevat Feestdagen en Relatiegeschenken; Assortiment bevat barbecue/gourmet en herkomst. Mobiel gebruikt dezelfde indeling. Visschalen heeft grote sectieknoppen en bestaande cadeau-ideeën; product-/mandknoppen en hoeveelheidsbediening vergroot. Geen prijzen, foto's, routes of toegangsregels gewijzigd.

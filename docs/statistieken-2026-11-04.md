@@ -21,7 +21,9 @@ Chromecontrole 4 november:
 - Regressies: totalen boven 2.000 rijen, datumgrenzen, nul-dagen, oude/nieuwe WhatsApp-labels, autorisatie, private routes en URL-sanitizing.
 - TypeScript/Next-productiebuild, Cloudflare/Vite-build, gerichte ESLint en contentintegriteit slagen.
 - Lokale browsercontrole met uitsluitend synthetische data: volle grafiek/ranglijsten, 403 verwijdert eerdere cijfers, lege/uitgeschakelde toestand en periodekeuze. Fixture alleen buiten Git in design-preview/analytics.
-- Live uitrol en meting: nog te controleren.
+- Live gepubliceerd via PR #101, main `92f3b21`. GitHub Build257 en Member157 groen, Codex-review zonder bevindingen. Cloudflare site `474ad18c` en leden `316dc564` beide 100% Ready.
+- Live Chrome: server meldt meting actief; na weigeren en homepagebezoek blijft het dashboard op 0. Na accepteren zijn homepage, Feestdagen en de klik homepage → Feestdagen geregistreerd. Het dashboard toont daarnaast één weergave van Visschalen uit een andere open context; deze is niet aan een persoon toegeschreven. Verversen van beheer verhoogt de tellers niet. Geen consolefouten.
+- Screenshot buiten Git: `../design-preview/analytics/live-dashboard.png`. Browserviewport hersteld; lokale fixture/testserver gestopt. Er zijn geen berichten verstuurd.
 
 Bronnen voor eventueel latere API-uitbreiding:
 - https://developers.google.com/webmaster-tools/v1/prereqs
