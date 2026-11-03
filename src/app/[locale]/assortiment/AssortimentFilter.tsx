@@ -3,7 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { useInteractive } from "@/lib/use-interactive";
 import Link from "next/link";
-import Image from "next/image";
+import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
 import { Search, ArrowUpRight, MessageCircle, SlidersHorizontal } from "lucide-react";
 import { useLocale } from "next-intl";
 import type { Product, Categorie } from "@/lib/assortiment-data";

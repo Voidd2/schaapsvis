@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { products, getVoeding, getSeizoen, CATEGORIE_KLEUR } from "@/lib/assortiment-data";

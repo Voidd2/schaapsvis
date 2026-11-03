@@ -180,5 +180,2189 @@
         "bytes": 118154
       }
     ]
+  },
+  "/images/assortiment-internet/ansjovis-commons.webp": {
+    "sha256": "154b3b3d05b0ee04bd783259aef210f85b49d9486cd38ff90b83db0294641fd6",
+    "originalBytes": 425524,
+    "variants": [
+      {
+        "src": "/images/responsive/ansjovis-commons-154b3b3d05b0-320.webp",
+        "width": 320,
+        "bytes": 22142
+      },
+      {
+        "src": "/images/responsive/ansjovis-commons-154b3b3d05b0-640.webp",
+        "width": 640,
+        "bytes": 67360
+      },
+      {
+        "src": "/images/responsive/ansjovis-commons-154b3b3d05b0-960.webp",
+        "width": 960,
+        "bytes": 121644
+      },
+      {
+        "src": "/images/responsive/ansjovis-commons-154b3b3d05b0-1280.webp",
+        "width": 1280,
+        "bytes": 177866
+      }
+    ]
+  },
+  "/images/assortiment-internet/blacktiger-garnalen.jpg": {
+    "sha256": "9659599210b65391d4b217b1cd53d08f028d2c5d8f26b23e90e5a4bd3f90af12",
+    "originalBytes": 321245,
+    "variants": [
+      {
+        "src": "/images/responsive/blacktiger-garnalen-9659599210b6-320.webp",
+        "width": 320,
+        "bytes": 6368
+      },
+      {
+        "src": "/images/responsive/blacktiger-garnalen-9659599210b6-640.webp",
+        "width": 640,
+        "bytes": 32978
+      },
+      {
+        "src": "/images/responsive/blacktiger-garnalen-9659599210b6-960.webp",
+        "width": 960,
+        "bytes": 106078
+      },
+      {
+        "src": "/images/responsive/blacktiger-garnalen-9659599210b6-1280.webp",
+        "width": 1280,
+        "bytes": 232544
+      }
+    ]
+  },
+  "/images/assortiment-internet/gamba-spiesen.jpg": {
+    "sha256": "65356f4fdb7a30b73ac1487f744fab088af06e32aca542a6046677da2c1b3050",
+    "originalBytes": 152298,
+    "variants": [
+      {
+        "src": "/images/responsive/gamba-spiesen-65356f4fdb7a-320.webp",
+        "width": 320,
+        "bytes": 11644
+      },
+      {
+        "src": "/images/responsive/gamba-spiesen-65356f4fdb7a-640.webp",
+        "width": 640,
+        "bytes": 29948
+      },
+      {
+        "src": "/images/responsive/gamba-spiesen-65356f4fdb7a-960.webp",
+        "width": 960,
+        "bytes": 52234
+      },
+      {
+        "src": "/images/responsive/gamba-spiesen-65356f4fdb7a-1280.webp",
+        "width": 1280,
+        "bytes": 79238
+      }
+    ]
+  },
+  "/images/assortiment-internet/gamba-tempura.jpg": {
+    "sha256": "0ef3149c697fb57c39de8b8d3feadf7ac49e8e88069b2f2614a31b1b50042f23",
+    "originalBytes": 236117,
+    "variants": [
+      {
+        "src": "/images/responsive/gamba-tempura-0ef3149c697f-320.webp",
+        "width": 320,
+        "bytes": 16118
+      },
+      {
+        "src": "/images/responsive/gamba-tempura-0ef3149c697f-640.webp",
+        "width": 640,
+        "bytes": 47466
+      },
+      {
+        "src": "/images/responsive/gamba-tempura-0ef3149c697f-960.webp",
+        "width": 960,
+        "bytes": 87434
+      },
+      {
+        "src": "/images/responsive/gamba-tempura-0ef3149c697f-1280.webp",
+        "width": 1280,
+        "bytes": 132120
+      }
+    ]
+  },
+  "/images/assortiment-internet/gebakken-ansjovis.jpg": {
+    "sha256": "f4c923984cd99358dc044d66cf639513e5e3827c499ad75111472e6f08c8803b",
+    "originalBytes": 283260,
+    "variants": [
+      {
+        "src": "/images/responsive/gebakken-ansjovis-f4c923984cd9-320.webp",
+        "width": 320,
+        "bytes": 12898
+      },
+      {
+        "src": "/images/responsive/gebakken-ansjovis-f4c923984cd9-640.webp",
+        "width": 640,
+        "bytes": 35484
+      },
+      {
+        "src": "/images/responsive/gebakken-ansjovis-f4c923984cd9-960.webp",
+        "width": 960,
+        "bytes": 87716
+      },
+      {
+        "src": "/images/responsive/gebakken-ansjovis-f4c923984cd9-1280.webp",
+        "width": 1280,
+        "bytes": 178076
+      }
+    ]
+  },
+  "/images/assortiment-internet/tarbot-ecomare.jpg": {
+    "sha256": "580776eaba4c8ae20fb643b0d312da7e9ce87b57331a4e9ba68895b0b7b77391",
+    "originalBytes": 498741,
+    "variants": [
+      {
+        "src": "/images/responsive/tarbot-ecomare-580776eaba4c-320.webp",
+        "width": 320,
+        "bytes": 7218
+      },
+      {
+        "src": "/images/responsive/tarbot-ecomare-580776eaba4c-640.webp",
+        "width": 640,
+        "bytes": 30698
+      },
+      {
+        "src": "/images/responsive/tarbot-ecomare-580776eaba4c-960.webp",
+        "width": 960,
+        "bytes": 78020
+      },
+      {
+        "src": "/images/responsive/tarbot-ecomare-580776eaba4c-1280.webp",
+        "width": 1280,
+        "bytes": 141230
+      }
+    ]
+  },
+  "/images/assortiment-internet/tilapiafilet-serving-commons.jpg": {
+    "sha256": "e743ff98cf3d03b4a14968ac45d5ddcf8e936cdfdd0db9138e23389a6aca0cbc",
+    "originalBytes": 338671,
+    "variants": [
+      {
+        "src": "/images/responsive/tilapiafilet-serving-commons-e743ff98cf3d-320.webp",
+        "width": 320,
+        "bytes": 22522
+      },
+      {
+        "src": "/images/responsive/tilapiafilet-serving-commons-e743ff98cf3d-640.webp",
+        "width": 640,
+        "bytes": 72120
+      },
+      {
+        "src": "/images/responsive/tilapiafilet-serving-commons-e743ff98cf3d-960.webp",
+        "width": 960,
+        "bytes": 141240
+      },
+      {
+        "src": "/images/responsive/tilapiafilet-serving-commons-e743ff98cf3d-1280.webp",
+        "width": 1280,
+        "bytes": 226974
+      }
+    ]
+  },
+  "/images/assortiment-internet/verse-heilbot-body-commons.webp": {
+    "sha256": "54c7bf8bc567f995bc1bd0d4f2a72e379d46c82986a9fcf0d85aac02a2543bd3",
+    "originalBytes": 378056,
+    "variants": [
+      {
+        "src": "/images/responsive/verse-heilbot-body-commons-54c7bf8bc567-320.webp",
+        "width": 320,
+        "bytes": 14754
+      },
+      {
+        "src": "/images/responsive/verse-heilbot-body-commons-54c7bf8bc567-640.webp",
+        "width": 640,
+        "bytes": 56168
+      },
+      {
+        "src": "/images/responsive/verse-heilbot-body-commons-54c7bf8bc567-960.webp",
+        "width": 960,
+        "bytes": 118678
+      },
+      {
+        "src": "/images/responsive/verse-heilbot-body-commons-54c7bf8bc567-1280.webp",
+        "width": 1280,
+        "bytes": 179826
+      }
+    ]
+  },
+  "/images/assortiment-internet/wijting-commons.jpg": {
+    "sha256": "4b428901006484173b756b8b6b76b42560b3850351d8ad13a657d018b193820a",
+    "originalBytes": 205593,
+    "variants": [
+      {
+        "src": "/images/responsive/wijting-commons-4b4289010064-320.webp",
+        "width": 320,
+        "bytes": 3446
+      },
+      {
+        "src": "/images/responsive/wijting-commons-4b4289010064-640.webp",
+        "width": 640,
+        "bytes": 11804
+      },
+      {
+        "src": "/images/responsive/wijting-commons-4b4289010064-960.webp",
+        "width": 960,
+        "bytes": 26688
+      },
+      {
+        "src": "/images/responsive/wijting-commons-4b4289010064-1280.webp",
+        "width": 1280,
+        "bytes": 45578
+      }
+    ]
+  },
+  "/images/dirks/bokking.webp": {
+    "sha256": "cb4d6c7168c16d2b2d5629c76958a52d8f977048b79de9738f98bc171ed1cc1b",
+    "originalBytes": 125050,
+    "variants": [
+      {
+        "src": "/images/responsive/bokking-cb4d6c7168c1-320.webp",
+        "width": 320,
+        "bytes": 9822
+      },
+      {
+        "src": "/images/responsive/bokking-cb4d6c7168c1-640.webp",
+        "width": 640,
+        "bytes": 26356
+      },
+      {
+        "src": "/images/responsive/bokking-cb4d6c7168c1-960.webp",
+        "width": 960,
+        "bytes": 46376
+      },
+      {
+        "src": "/images/responsive/bokking-cb4d6c7168c1-1280.webp",
+        "width": 1280,
+        "bytes": 65530
+      }
+    ]
+  },
+  "/images/dirks/broodje-haring.webp": {
+    "sha256": "2bd7397cdc26249ed667976d7cde81f15c63cd8b741ed897203d1d5094b16911",
+    "originalBytes": 118716,
+    "variants": [
+      {
+        "src": "/images/responsive/broodje-haring-2bd7397cdc26-320.webp",
+        "width": 320,
+        "bytes": 7396
+      },
+      {
+        "src": "/images/responsive/broodje-haring-2bd7397cdc26-640.webp",
+        "width": 640,
+        "bytes": 21454
+      },
+      {
+        "src": "/images/responsive/broodje-haring-2bd7397cdc26-960.webp",
+        "width": 960,
+        "bytes": 39892
+      },
+      {
+        "src": "/images/responsive/broodje-haring-2bd7397cdc26-1280.webp",
+        "width": 1280,
+        "bytes": 56842
+      }
+    ]
+  },
+  "/images/dirks/dorade-ca-450-gram.webp": {
+    "sha256": "b0c8c5348dcb3adee443894bf151610bdf35b25f533c8a9e62265d14c2f7eeb0",
+    "originalBytes": 168676,
+    "variants": [
+      {
+        "src": "/images/responsive/dorade-ca-450-gram-b0c8c5348dcb-320.webp",
+        "width": 320,
+        "bytes": 9948
+      },
+      {
+        "src": "/images/responsive/dorade-ca-450-gram-b0c8c5348dcb-640.webp",
+        "width": 640,
+        "bytes": 31166
+      },
+      {
+        "src": "/images/responsive/dorade-ca-450-gram-b0c8c5348dcb-960.webp",
+        "width": 960,
+        "bytes": 58610
+      },
+      {
+        "src": "/images/responsive/dorade-ca-450-gram-b0c8c5348dcb-1280.webp",
+        "width": 1280,
+        "bytes": 85598
+      }
+    ]
+  },
+  "/images/dirks/dorade-filet-ca-2-x-125-gram.webp": {
+    "sha256": "1e635cf2312e7060d9e53aea92792911c597b2e892091484dfb0aea3ef71d201",
+    "originalBytes": 153222,
+    "variants": [
+      {
+        "src": "/images/responsive/dorade-filet-ca-2-x-125-gram-1e635cf2312e-320.webp",
+        "width": 320,
+        "bytes": 11368
+      },
+      {
+        "src": "/images/responsive/dorade-filet-ca-2-x-125-gram-1e635cf2312e-640.webp",
+        "width": 640,
+        "bytes": 32286
+      },
+      {
+        "src": "/images/responsive/dorade-filet-ca-2-x-125-gram-1e635cf2312e-960.webp",
+        "width": 960,
+        "bytes": 58616
+      },
+      {
+        "src": "/images/responsive/dorade-filet-ca-2-x-125-gram-1e635cf2312e-1280.webp",
+        "width": 1280,
+        "bytes": 82638
+      }
+    ]
+  },
+  "/images/dirks/fines-de-claires.webp": {
+    "sha256": "f6d6f5a6e1f346f3be07c719c04f89419d8f38bf5cca49bf12b500237542e9e2",
+    "originalBytes": 166586,
+    "variants": [
+      {
+        "src": "/images/responsive/fines-de-claires-f6d6f5a6e1f3-320.webp",
+        "width": 320,
+        "bytes": 15694
+      },
+      {
+        "src": "/images/responsive/fines-de-claires-f6d6f5a6e1f3-640.webp",
+        "width": 640,
+        "bytes": 41100
+      },
+      {
+        "src": "/images/responsive/fines-de-claires-f6d6f5a6e1f3-960.webp",
+        "width": 960,
+        "bytes": 69006
+      },
+      {
+        "src": "/images/responsive/fines-de-claires-f6d6f5a6e1f3-1280.webp",
+        "width": 1280,
+        "bytes": 96780
+      }
+    ]
+  },
+  "/images/dirks/gambas-gekookt.webp": {
+    "sha256": "1c35b0b4c2d923683985d5313b61e73457c576753fd94f21d44c2bcc09f24980",
+    "originalBytes": 94754,
+    "variants": [
+      {
+        "src": "/images/responsive/gambas-gekookt-1c35b0b4c2d9-320.webp",
+        "width": 320,
+        "bytes": 8340
+      },
+      {
+        "src": "/images/responsive/gambas-gekookt-1c35b0b4c2d9-640.webp",
+        "width": 640,
+        "bytes": 21072
+      },
+      {
+        "src": "/images/responsive/gambas-gekookt-1c35b0b4c2d9-960.webp",
+        "width": 960,
+        "bytes": 36394
+      },
+      {
+        "src": "/images/responsive/gambas-gekookt-1c35b0b4c2d9-1280.webp",
+        "width": 1280,
+        "bytes": 50402
+      }
+    ]
+  },
+  "/images/dirks/garnalen-kroket.webp": {
+    "sha256": "411ea261293bbf60ec2db3057dc064cea52313c013f7e4b30943ee5b9e339715",
+    "originalBytes": 186902,
+    "variants": [
+      {
+        "src": "/images/responsive/garnalen-kroket-411ea261293b-320.webp",
+        "width": 320,
+        "bytes": 11920
+      },
+      {
+        "src": "/images/responsive/garnalen-kroket-411ea261293b-640.webp",
+        "width": 640,
+        "bytes": 35394
+      },
+      {
+        "src": "/images/responsive/garnalen-kroket-411ea261293b-960.webp",
+        "width": 960,
+        "bytes": 64776
+      },
+      {
+        "src": "/images/responsive/garnalen-kroket-411ea261293b-1280.webp",
+        "width": 1280,
+        "bytes": 94258
+      }
+    ]
+  },
+  "/images/dirks/gebakken-inktvisringen.webp": {
+    "sha256": "e10920c6e38e1e7452b4ba25718beba95c381c50fad32fa5c2ddee678cd71596",
+    "originalBytes": 205612,
+    "variants": [
+      {
+        "src": "/images/responsive/gebakken-inktvisringen-e10920c6e38e-320.webp",
+        "width": 320,
+        "bytes": 13420
+      },
+      {
+        "src": "/images/responsive/gebakken-inktvisringen-e10920c6e38e-640.webp",
+        "width": 640,
+        "bytes": 39524
+      },
+      {
+        "src": "/images/responsive/gebakken-inktvisringen-e10920c6e38e-960.webp",
+        "width": 960,
+        "bytes": 72330
+      },
+      {
+        "src": "/images/responsive/gebakken-inktvisringen-e10920c6e38e-1280.webp",
+        "width": 1280,
+        "bytes": 104644
+      }
+    ]
+  },
+  "/images/dirks/gegrilde-tonijn.webp": {
+    "sha256": "0a602c6cc0761dd152802c161a78cdd8dc42e28d8d398d26570c0729b88258ed",
+    "originalBytes": 123318,
+    "variants": [
+      {
+        "src": "/images/responsive/gegrilde-tonijn-0a602c6cc076-320.webp",
+        "width": 320,
+        "bytes": 8842
+      },
+      {
+        "src": "/images/responsive/gegrilde-tonijn-0a602c6cc076-640.webp",
+        "width": 640,
+        "bytes": 25438
+      },
+      {
+        "src": "/images/responsive/gegrilde-tonijn-0a602c6cc076-960.webp",
+        "width": 960,
+        "bytes": 46382
+      },
+      {
+        "src": "/images/responsive/gegrilde-tonijn-0a602c6cc076-1280.webp",
+        "width": 1280,
+        "bytes": 65920
+      }
+    ]
+  },
+  "/images/dirks/gerookte-wilde-zalm.webp": {
+    "sha256": "dccdcfc10dc62e7e2f426dee3096a43084569248e4447e5737415cc2884b7b48",
+    "originalBytes": 132626,
+    "variants": [
+      {
+        "src": "/images/responsive/gerookte-wilde-zalm-dccdcfc10dc6-320.webp",
+        "width": 320,
+        "bytes": 9590
+      },
+      {
+        "src": "/images/responsive/gerookte-wilde-zalm-dccdcfc10dc6-640.webp",
+        "width": 640,
+        "bytes": 28092
+      },
+      {
+        "src": "/images/responsive/gerookte-wilde-zalm-dccdcfc10dc6-960.webp",
+        "width": 960,
+        "bytes": 50290
+      },
+      {
+        "src": "/images/responsive/gerookte-wilde-zalm-dccdcfc10dc6-1280.webp",
+        "width": 1280,
+        "bytes": 71442
+      }
+    ]
+  },
+  "/images/dirks/gerookte-zalmfilet.webp": {
+    "sha256": "1c0afa4c311e58a09e44b5cb83f384e0f8b2f4b3b939028e83ca4214b607e8ef",
+    "originalBytes": 140974,
+    "variants": [
+      {
+        "src": "/images/responsive/gerookte-zalmfilet-1c0afa4c311e-320.webp",
+        "width": 320,
+        "bytes": 9956
+      },
+      {
+        "src": "/images/responsive/gerookte-zalmfilet-1c0afa4c311e-640.webp",
+        "width": 640,
+        "bytes": 28894
+      },
+      {
+        "src": "/images/responsive/gerookte-zalmfilet-1c0afa4c311e-960.webp",
+        "width": 960,
+        "bytes": 52374
+      },
+      {
+        "src": "/images/responsive/gerookte-zalmfilet-1c0afa4c311e-1280.webp",
+        "width": 1280,
+        "bytes": 73390
+      }
+    ]
+  },
+  "/images/dirks/gerookte-zalmsnippers.webp": {
+    "sha256": "a91282a8f3763156c0dc3f73be8cb975ed8489838028d6bdfa97167e4937251c",
+    "originalBytes": 122620,
+    "variants": [
+      {
+        "src": "/images/responsive/gerookte-zalmsnippers-a91282a8f376-320.webp",
+        "width": 320,
+        "bytes": 9426
+      },
+      {
+        "src": "/images/responsive/gerookte-zalmsnippers-a91282a8f376-640.webp",
+        "width": 640,
+        "bytes": 26746
+      },
+      {
+        "src": "/images/responsive/gerookte-zalmsnippers-a91282a8f376-960.webp",
+        "width": 960,
+        "bytes": 48104
+      },
+      {
+        "src": "/images/responsive/gerookte-zalmsnippers-a91282a8f376-1280.webp",
+        "width": 1280,
+        "bytes": 67954
+      }
+    ]
+  },
+  "/images/dirks/gourmet-schotel-3-4-pers.webp": {
+    "sha256": "948dc8c7cc1cfb17d4a0f38fa9307580cd82a3600fee7c53acb0538a43a9c14f",
+    "originalBytes": 155568,
+    "variants": [
+      {
+        "src": "/images/responsive/gourmet-schotel-3-4-pers-948dc8c7cc1c-320.webp",
+        "width": 320,
+        "bytes": 12660
+      },
+      {
+        "src": "/images/responsive/gourmet-schotel-3-4-pers-948dc8c7cc1c-640.webp",
+        "width": 640,
+        "bytes": 34888
+      },
+      {
+        "src": "/images/responsive/gourmet-schotel-3-4-pers-948dc8c7cc1c-960.webp",
+        "width": 960,
+        "bytes": 61698
+      },
+      {
+        "src": "/images/responsive/gourmet-schotel-3-4-pers-948dc8c7cc1c-1280.webp",
+        "width": 1280,
+        "bytes": 86468
+      }
+    ]
+  },
+  "/images/dirks/gourmet-trio-1-persoon.webp": {
+    "sha256": "994c95d234367fb0f603ddd36981bffcbd9ea9d34ef879f3e6e3e643c8731942",
+    "originalBytes": 122902,
+    "variants": [
+      {
+        "src": "/images/responsive/gourmet-trio-1-persoon-994c95d23436-320.webp",
+        "width": 320,
+        "bytes": 10974
+      },
+      {
+        "src": "/images/responsive/gourmet-trio-1-persoon-994c95d23436-640.webp",
+        "width": 640,
+        "bytes": 29980
+      },
+      {
+        "src": "/images/responsive/gourmet-trio-1-persoon-994c95d23436-960.webp",
+        "width": 960,
+        "bytes": 51174
+      },
+      {
+        "src": "/images/responsive/gourmet-trio-1-persoon-994c95d23436-1280.webp",
+        "width": 1280,
+        "bytes": 70544
+      }
+    ]
+  },
+  "/images/dirks/gourmetschotel-5-6-pers.webp": {
+    "sha256": "01d73944ee9f212778fe9e94688616b30337cc7b57c1c9f7c88e8f1f17c21dfa",
+    "originalBytes": 180288,
+    "variants": [
+      {
+        "src": "/images/responsive/gourmetschotel-5-6-pers-01d73944ee9f-320.webp",
+        "width": 320,
+        "bytes": 13276
+      },
+      {
+        "src": "/images/responsive/gourmetschotel-5-6-pers-01d73944ee9f-640.webp",
+        "width": 640,
+        "bytes": 38558
+      },
+      {
+        "src": "/images/responsive/gourmetschotel-5-6-pers-01d73944ee9f-960.webp",
+        "width": 960,
+        "bytes": 69660
+      },
+      {
+        "src": "/images/responsive/gourmetschotel-5-6-pers-01d73944ee9f-1280.webp",
+        "width": 1280,
+        "bytes": 97768
+      }
+    ]
+  },
+  "/images/dirks/heilbotfilet.webp": {
+    "sha256": "0a7aa97972c3c8e5d3a2f1152ac76f07fd9acc7e78f33f2491b3567937fe8c08",
+    "originalBytes": 117844,
+    "variants": [
+      {
+        "src": "/images/responsive/heilbotfilet-0a7aa97972c3-320.webp",
+        "width": 320,
+        "bytes": 8954
+      },
+      {
+        "src": "/images/responsive/heilbotfilet-0a7aa97972c3-640.webp",
+        "width": 640,
+        "bytes": 25486
+      },
+      {
+        "src": "/images/responsive/heilbotfilet-0a7aa97972c3-960.webp",
+        "width": 960,
+        "bytes": 44818
+      },
+      {
+        "src": "/images/responsive/heilbotfilet-0a7aa97972c3-1280.webp",
+        "width": 1280,
+        "bytes": 62632
+      }
+    ]
+  },
+  "/images/dirks/kokkels.webp": {
+    "sha256": "026464da3d14f798636b2e180360590d27670516d84371fb886c9531ed1d342f",
+    "originalBytes": 163898,
+    "variants": [
+      {
+        "src": "/images/responsive/kokkels-026464da3d14-320.webp",
+        "width": 320,
+        "bytes": 12172
+      },
+      {
+        "src": "/images/responsive/kokkels-026464da3d14-640.webp",
+        "width": 640,
+        "bytes": 34348
+      },
+      {
+        "src": "/images/responsive/kokkels-026464da3d14-960.webp",
+        "width": 960,
+        "bytes": 62142
+      },
+      {
+        "src": "/images/responsive/kokkels-026464da3d14-1280.webp",
+        "width": 1280,
+        "bytes": 88816
+      }
+    ]
+  },
+  "/images/dirks/krabsalade.webp": {
+    "sha256": "d3313c712e981aba62b7a466ee161e7106f8dde82cfca5140ec9f9b03bdef0d5",
+    "originalBytes": 94428,
+    "variants": [
+      {
+        "src": "/images/responsive/krabsalade-d3313c712e98-320.webp",
+        "width": 320,
+        "bytes": 8394
+      },
+      {
+        "src": "/images/responsive/krabsalade-d3313c712e98-640.webp",
+        "width": 640,
+        "bytes": 21358
+      },
+      {
+        "src": "/images/responsive/krabsalade-d3313c712e98-960.webp",
+        "width": 960,
+        "bytes": 37158
+      },
+      {
+        "src": "/images/responsive/krabsalade-d3313c712e98-1280.webp",
+        "width": 1280,
+        "bytes": 51466
+      }
+    ]
+  },
+  "/images/dirks/kreeft-levend.webp": {
+    "sha256": "59a5facad9068b3f3306c497e470460a95a447d90f425897df570785086f288c",
+    "originalBytes": 119516,
+    "variants": [
+      {
+        "src": "/images/responsive/kreeft-levend-59a5facad906-320.webp",
+        "width": 320,
+        "bytes": 9960
+      },
+      {
+        "src": "/images/responsive/kreeft-levend-59a5facad906-640.webp",
+        "width": 640,
+        "bytes": 26366
+      },
+      {
+        "src": "/images/responsive/kreeft-levend-59a5facad906-960.webp",
+        "width": 960,
+        "bytes": 46572
+      },
+      {
+        "src": "/images/responsive/kreeft-levend-59a5facad906-1280.webp",
+        "width": 1280,
+        "bytes": 64290
+      }
+    ]
+  },
+  "/images/dirks/lekkerbek.webp": {
+    "sha256": "6bc05c8535bdadabb6a6f0c98d7bb3bc8fa6c4b11cd540466f42a1fc84ad9fac",
+    "originalBytes": 202058,
+    "variants": [
+      {
+        "src": "/images/responsive/lekkerbek-6bc05c8535bd-320.webp",
+        "width": 320,
+        "bytes": 11322
+      },
+      {
+        "src": "/images/responsive/lekkerbek-6bc05c8535bd-640.webp",
+        "width": 640,
+        "bytes": 34798
+      },
+      {
+        "src": "/images/responsive/lekkerbek-6bc05c8535bd-960.webp",
+        "width": 960,
+        "bytes": 65170
+      },
+      {
+        "src": "/images/responsive/lekkerbek-6bc05c8535bd-1280.webp",
+        "width": 1280,
+        "bytes": 96522
+      }
+    ]
+  },
+  "/images/dirks/luxe-trio-klein.webp": {
+    "sha256": "f0095d0ab49a544d65da3073cf28b10710c136f272848603a2c1afdf34eec30e",
+    "originalBytes": 155250,
+    "variants": [
+      {
+        "src": "/images/responsive/luxe-trio-klein-f0095d0ab49a-320.webp",
+        "width": 320,
+        "bytes": 10762
+      },
+      {
+        "src": "/images/responsive/luxe-trio-klein-f0095d0ab49a-640.webp",
+        "width": 640,
+        "bytes": 29630
+      },
+      {
+        "src": "/images/responsive/luxe-trio-klein-f0095d0ab49a-960.webp",
+        "width": 960,
+        "bytes": 53602
+      },
+      {
+        "src": "/images/responsive/luxe-trio-klein-f0095d0ab49a-1280.webp",
+        "width": 1280,
+        "bytes": 76366
+      }
+    ]
+  },
+  "/images/dirks/luxe-vistrio.webp": {
+    "sha256": "4f15218dfc662ee181ca899529a826870da944a3a87ccb8d40f24ee176ab8d89",
+    "originalBytes": 152774,
+    "variants": [
+      {
+        "src": "/images/responsive/luxe-vistrio-4f15218dfc66-320.webp",
+        "width": 320,
+        "bytes": 10272
+      },
+      {
+        "src": "/images/responsive/luxe-vistrio-4f15218dfc66-640.webp",
+        "width": 640,
+        "bytes": 28368
+      },
+      {
+        "src": "/images/responsive/luxe-vistrio-4f15218dfc66-960.webp",
+        "width": 960,
+        "bytes": 50686
+      },
+      {
+        "src": "/images/responsive/luxe-vistrio-4f15218dfc66-1280.webp",
+        "width": 1280,
+        "bytes": 75144
+      }
+    ]
+  },
+  "/images/dirks/noorse-garnalen.webp": {
+    "sha256": "6235345c2fe6bae1f86adf6ff8cb7834d3178d023c3b9295845937a9f30911e2",
+    "originalBytes": 99846,
+    "variants": [
+      {
+        "src": "/images/responsive/noorse-garnalen-6235345c2fe6-320.webp",
+        "width": 320,
+        "bytes": 8234
+      },
+      {
+        "src": "/images/responsive/noorse-garnalen-6235345c2fe6-640.webp",
+        "width": 640,
+        "bytes": 21224
+      },
+      {
+        "src": "/images/responsive/noorse-garnalen-6235345c2fe6-960.webp",
+        "width": 960,
+        "bytes": 37806
+      },
+      {
+        "src": "/images/responsive/noorse-garnalen-6235345c2fe6-1280.webp",
+        "width": 1280,
+        "bytes": 52318
+      }
+    ]
+  },
+  "/images/dirks/pijlinktvis.webp": {
+    "sha256": "c93159917420c764066746282b1038f9d167bb605e63807f017ca69752f69b1e",
+    "originalBytes": 106216,
+    "variants": [
+      {
+        "src": "/images/responsive/pijlinktvis-c93159917420-320.webp",
+        "width": 320,
+        "bytes": 8140
+      },
+      {
+        "src": "/images/responsive/pijlinktvis-c93159917420-640.webp",
+        "width": 640,
+        "bytes": 22966
+      },
+      {
+        "src": "/images/responsive/pijlinktvis-c93159917420-960.webp",
+        "width": 960,
+        "bytes": 40364
+      },
+      {
+        "src": "/images/responsive/pijlinktvis-c93159917420-1280.webp",
+        "width": 1280,
+        "bytes": 57696
+      }
+    ]
+  },
+  "/images/dirks/rode-poon.webp": {
+    "sha256": "156ed2b096c3bd92ae7a523efe7af3253e88489ed86dbe555c6be1a656530f75",
+    "originalBytes": 117040,
+    "variants": [
+      {
+        "src": "/images/responsive/rode-poon-156ed2b096c3-320.webp",
+        "width": 320,
+        "bytes": 7508
+      },
+      {
+        "src": "/images/responsive/rode-poon-156ed2b096c3-640.webp",
+        "width": 640,
+        "bytes": 22510
+      },
+      {
+        "src": "/images/responsive/rode-poon-156ed2b096c3-960.webp",
+        "width": 960,
+        "bytes": 41608
+      },
+      {
+        "src": "/images/responsive/rode-poon-156ed2b096c3-1280.webp",
+        "width": 1280,
+        "bytes": 58932
+      }
+    ]
+  },
+  "/images/dirks/roodbaars.webp": {
+    "sha256": "adb48df92911d33c0c41298bb1579e02949e94989fb723572fedc152796f42f7",
+    "originalBytes": 155504,
+    "variants": [
+      {
+        "src": "/images/responsive/roodbaars-adb48df92911-320.webp",
+        "width": 320,
+        "bytes": 9562
+      },
+      {
+        "src": "/images/responsive/roodbaars-adb48df92911-640.webp",
+        "width": 640,
+        "bytes": 29318
+      },
+      {
+        "src": "/images/responsive/roodbaars-adb48df92911-960.webp",
+        "width": 960,
+        "bytes": 55376
+      },
+      {
+        "src": "/images/responsive/roodbaars-adb48df92911-1280.webp",
+        "width": 1280,
+        "bytes": 79174
+      }
+    ]
+  },
+  "/images/dirks/salade-trio.webp": {
+    "sha256": "113069f0dea58a721296c21e4b4e48a6e8b898d9ec21e253e9bc80453400ca56",
+    "originalBytes": 145988,
+    "variants": [
+      {
+        "src": "/images/responsive/salade-trio-113069f0dea5-320.webp",
+        "width": 320,
+        "bytes": 11050
+      },
+      {
+        "src": "/images/responsive/salade-trio-113069f0dea5-640.webp",
+        "width": 640,
+        "bytes": 30450
+      },
+      {
+        "src": "/images/responsive/salade-trio-113069f0dea5-960.webp",
+        "width": 960,
+        "bytes": 53502
+      },
+      {
+        "src": "/images/responsive/salade-trio-113069f0dea5-1280.webp",
+        "width": 1280,
+        "bytes": 75930
+      }
+    ]
+  },
+  "/images/dirks/sardines.webp": {
+    "sha256": "130e5f6818869f77ca7d8f8604f7d224e109786fdfce7d90aea5b0ca1aeb1ae1",
+    "originalBytes": 96100,
+    "variants": [
+      {
+        "src": "/images/responsive/sardines-130e5f681886-320.webp",
+        "width": 320,
+        "bytes": 7224
+      },
+      {
+        "src": "/images/responsive/sardines-130e5f681886-640.webp",
+        "width": 640,
+        "bytes": 20416
+      },
+      {
+        "src": "/images/responsive/sardines-130e5f681886-960.webp",
+        "width": 960,
+        "bytes": 36688
+      },
+      {
+        "src": "/images/responsive/sardines-130e5f681886-1280.webp",
+        "width": 1280,
+        "bytes": 52220
+      }
+    ]
+  },
+  "/images/dirks/scheermessen.webp": {
+    "sha256": "3569b7105194e28e10174a64c54626184fad4fc13657ed6bda9299e59835e650",
+    "originalBytes": 146654,
+    "variants": [
+      {
+        "src": "/images/responsive/scheermessen-3569b7105194-320.webp",
+        "width": 320,
+        "bytes": 11878
+      },
+      {
+        "src": "/images/responsive/scheermessen-3569b7105194-640.webp",
+        "width": 640,
+        "bytes": 32412
+      },
+      {
+        "src": "/images/responsive/scheermessen-3569b7105194-960.webp",
+        "width": 960,
+        "bytes": 56848
+      },
+      {
+        "src": "/images/responsive/scheermessen-3569b7105194-1280.webp",
+        "width": 1280,
+        "bytes": 79168
+      }
+    ]
+  },
+  "/images/dirks/schol.webp": {
+    "sha256": "a680fabcbfc6335418d94f1199f6e6bc6adac0267a036740dfd6968495b8534d",
+    "originalBytes": 216806,
+    "variants": [
+      {
+        "src": "/images/responsive/schol-a680fabcbfc6-320.webp",
+        "width": 320,
+        "bytes": 11658
+      },
+      {
+        "src": "/images/responsive/schol-a680fabcbfc6-640.webp",
+        "width": 640,
+        "bytes": 38390
+      },
+      {
+        "src": "/images/responsive/schol-a680fabcbfc6-960.webp",
+        "width": 960,
+        "bytes": 74694
+      },
+      {
+        "src": "/images/responsive/schol-a680fabcbfc6-1280.webp",
+        "width": 1280,
+        "bytes": 110186
+      }
+    ]
+  },
+  "/images/dirks/tarbotfilet.webp": {
+    "sha256": "786d62937d9a315b5e702a09d27d43c0866b48ce73c31f0dd72151aec2b0ff59",
+    "originalBytes": 133242,
+    "variants": [
+      {
+        "src": "/images/responsive/tarbotfilet-786d62937d9a-320.webp",
+        "width": 320,
+        "bytes": 10582
+      },
+      {
+        "src": "/images/responsive/tarbotfilet-786d62937d9a-640.webp",
+        "width": 640,
+        "bytes": 29378
+      },
+      {
+        "src": "/images/responsive/tarbotfilet-786d62937d9a-960.webp",
+        "width": 960,
+        "bytes": 51230
+      },
+      {
+        "src": "/images/responsive/tarbotfilet-786d62937d9a-1280.webp",
+        "width": 1280,
+        "bytes": 71788
+      }
+    ]
+  },
+  "/images/dirks/tonijn-sashimi-ongesneden.webp": {
+    "sha256": "4a644d26f3a146027f966a5dc8f713c596362ef291819170aebd09a3df1cf455",
+    "originalBytes": 97280,
+    "variants": [
+      {
+        "src": "/images/responsive/tonijn-sashimi-ongesneden-4a644d26f3a1-320.webp",
+        "width": 320,
+        "bytes": 6440
+      },
+      {
+        "src": "/images/responsive/tonijn-sashimi-ongesneden-4a644d26f3a1-640.webp",
+        "width": 640,
+        "bytes": 17316
+      },
+      {
+        "src": "/images/responsive/tonijn-sashimi-ongesneden-4a644d26f3a1-960.webp",
+        "width": 960,
+        "bytes": 31744
+      },
+      {
+        "src": "/images/responsive/tonijn-sashimi-ongesneden-4a644d26f3a1-1280.webp",
+        "width": 1280,
+        "bytes": 45562
+      }
+    ]
+  },
+  "/images/dirks/tonijnfilet.webp": {
+    "sha256": "35f248ddb01c6a23f279cd5e777b4d8127ca9c8ef808bd4d88d551126f95905f",
+    "originalBytes": 150050,
+    "variants": [
+      {
+        "src": "/images/responsive/tonijnfilet-35f248ddb01c-320.webp",
+        "width": 320,
+        "bytes": 8434
+      },
+      {
+        "src": "/images/responsive/tonijnfilet-35f248ddb01c-640.webp",
+        "width": 640,
+        "bytes": 25746
+      },
+      {
+        "src": "/images/responsive/tonijnfilet-35f248ddb01c-960.webp",
+        "width": 960,
+        "bytes": 50022
+      },
+      {
+        "src": "/images/responsive/tonijnfilet-35f248ddb01c-1280.webp",
+        "width": 1280,
+        "bytes": 72742
+      }
+    ]
+  },
+  "/images/dirks/tonijnsalade.webp": {
+    "sha256": "3b9586a019bf5c3c90546544c0ce9f6441677bbdff90cf63b95ef9388ac25874",
+    "originalBytes": 89838,
+    "variants": [
+      {
+        "src": "/images/responsive/tonijnsalade-3b9586a019bf-320.webp",
+        "width": 320,
+        "bytes": 7822
+      },
+      {
+        "src": "/images/responsive/tonijnsalade-3b9586a019bf-640.webp",
+        "width": 640,
+        "bytes": 19796
+      },
+      {
+        "src": "/images/responsive/tonijnsalade-3b9586a019bf-960.webp",
+        "width": 960,
+        "bytes": 34702
+      },
+      {
+        "src": "/images/responsive/tonijnsalade-3b9586a019bf-1280.webp",
+        "width": 1280,
+        "bytes": 49092
+      }
+    ]
+  },
+  "/images/dirks/vispotje-1-persoon.webp": {
+    "sha256": "5c325e57b5700751501e48ad869a235ea46c866f9ae2c99bf38fcef31f9af9a0",
+    "originalBytes": 128884,
+    "variants": [
+      {
+        "src": "/images/responsive/vispotje-1-persoon-5c325e57b570-320.webp",
+        "width": 320,
+        "bytes": 10956
+      },
+      {
+        "src": "/images/responsive/vispotje-1-persoon-5c325e57b570-640.webp",
+        "width": 640,
+        "bytes": 29296
+      },
+      {
+        "src": "/images/responsive/vispotje-1-persoon-5c325e57b570-960.webp",
+        "width": 960,
+        "bytes": 50958
+      },
+      {
+        "src": "/images/responsive/vispotje-1-persoon-5c325e57b570-1280.webp",
+        "width": 1280,
+        "bytes": 72004
+      }
+    ]
+  },
+  "/images/dirks/visschotel-groot-8-10-pers.webp": {
+    "sha256": "5a2df379159ffec981179965baf665d0f3fa4c0643b0afb08e009b8ac8d38c05",
+    "originalBytes": 237240,
+    "variants": [
+      {
+        "src": "/images/responsive/visschotel-groot-8-10-pers-5a2df379159f-320.webp",
+        "width": 320,
+        "bytes": 17576
+      },
+      {
+        "src": "/images/responsive/visschotel-groot-8-10-pers-5a2df379159f-640.webp",
+        "width": 640,
+        "bytes": 50778
+      },
+      {
+        "src": "/images/responsive/visschotel-groot-8-10-pers-5a2df379159f-960.webp",
+        "width": 960,
+        "bytes": 89314
+      },
+      {
+        "src": "/images/responsive/visschotel-groot-8-10-pers-5a2df379159f-1280.webp",
+        "width": 1280,
+        "bytes": 128164
+      }
+    ]
+  },
+  "/images/dirks/visschotel-hapjes-2-3-pers.webp": {
+    "sha256": "015b2dd127c43d7ab917aaef9f0e10bad5ae84d06493218cfd515f94291ea0cf",
+    "originalBytes": 205250,
+    "variants": [
+      {
+        "src": "/images/responsive/visschotel-hapjes-2-3-pers-015b2dd127c4-320.webp",
+        "width": 320,
+        "bytes": 14944
+      },
+      {
+        "src": "/images/responsive/visschotel-hapjes-2-3-pers-015b2dd127c4-640.webp",
+        "width": 640,
+        "bytes": 42500
+      },
+      {
+        "src": "/images/responsive/visschotel-hapjes-2-3-pers-015b2dd127c4-960.webp",
+        "width": 960,
+        "bytes": 76934
+      },
+      {
+        "src": "/images/responsive/visschotel-hapjes-2-3-pers-015b2dd127c4-1280.webp",
+        "width": 1280,
+        "bytes": 108754
+      }
+    ]
+  },
+  "/images/dirks/visschotel-hapjes-3-5-pers.webp": {
+    "sha256": "015b2dd127c43d7ab917aaef9f0e10bad5ae84d06493218cfd515f94291ea0cf",
+    "originalBytes": 205250,
+    "variants": [
+      {
+        "src": "/images/responsive/visschotel-hapjes-3-5-pers-015b2dd127c4-320.webp",
+        "width": 320,
+        "bytes": 14944
+      },
+      {
+        "src": "/images/responsive/visschotel-hapjes-3-5-pers-015b2dd127c4-640.webp",
+        "width": 640,
+        "bytes": 42500
+      },
+      {
+        "src": "/images/responsive/visschotel-hapjes-3-5-pers-015b2dd127c4-960.webp",
+        "width": 960,
+        "bytes": 76934
+      },
+      {
+        "src": "/images/responsive/visschotel-hapjes-3-5-pers-015b2dd127c4-1280.webp",
+        "width": 1280,
+        "bytes": 108754
+      }
+    ]
+  },
+  "/images/dirks/visschotel-hapjes-6-10-pers.webp": {
+    "sha256": "97c494cbbe14fab04e3fdb2922f33c1d76ba0fb3d9573e146fca5565f7ae583e",
+    "originalBytes": 237334,
+    "variants": [
+      {
+        "src": "/images/responsive/visschotel-hapjes-6-10-pers-97c494cbbe14-320.webp",
+        "width": 320,
+        "bytes": 17884
+      },
+      {
+        "src": "/images/responsive/visschotel-hapjes-6-10-pers-97c494cbbe14-640.webp",
+        "width": 640,
+        "bytes": 51200
+      },
+      {
+        "src": "/images/responsive/visschotel-hapjes-6-10-pers-97c494cbbe14-960.webp",
+        "width": 960,
+        "bytes": 89752
+      },
+      {
+        "src": "/images/responsive/visschotel-hapjes-6-10-pers-97c494cbbe14-1280.webp",
+        "width": 1280,
+        "bytes": 127396
+      }
+    ]
+  },
+  "/images/dirks/visschotel-klein-2-3-pers.webp": {
+    "sha256": "ef0b89bd294619f1cac67c278b16149a53496e91eacf9c84a9245031e7c1d72c",
+    "originalBytes": 193688,
+    "variants": [
+      {
+        "src": "/images/responsive/visschotel-klein-2-3-pers-ef0b89bd2946-320.webp",
+        "width": 320,
+        "bytes": 14236
+      },
+      {
+        "src": "/images/responsive/visschotel-klein-2-3-pers-ef0b89bd2946-640.webp",
+        "width": 640,
+        "bytes": 40976
+      },
+      {
+        "src": "/images/responsive/visschotel-klein-2-3-pers-ef0b89bd2946-960.webp",
+        "width": 960,
+        "bytes": 72448
+      },
+      {
+        "src": "/images/responsive/visschotel-klein-2-3-pers-ef0b89bd2946-1280.webp",
+        "width": 1280,
+        "bytes": 104222
+      }
+    ]
+  },
+  "/images/dirks/visschotel-klein-3-5-pers.webp": {
+    "sha256": "ef0b89bd294619f1cac67c278b16149a53496e91eacf9c84a9245031e7c1d72c",
+    "originalBytes": 193688,
+    "variants": [
+      {
+        "src": "/images/responsive/visschotel-klein-3-5-pers-ef0b89bd2946-320.webp",
+        "width": 320,
+        "bytes": 14236
+      },
+      {
+        "src": "/images/responsive/visschotel-klein-3-5-pers-ef0b89bd2946-640.webp",
+        "width": 640,
+        "bytes": 40976
+      },
+      {
+        "src": "/images/responsive/visschotel-klein-3-5-pers-ef0b89bd2946-960.webp",
+        "width": 960,
+        "bytes": 72448
+      },
+      {
+        "src": "/images/responsive/visschotel-klein-3-5-pers-ef0b89bd2946-1280.webp",
+        "width": 1280,
+        "bytes": 104222
+      }
+    ]
+  },
+  "/images/dirks/visschotel-luxe-10-14-pers.webp": {
+    "sha256": "47293fd38c1d9b9191f04e1e822a2fd2019af69b035abaf57c0fa12be7a44bea",
+    "originalBytes": 188174,
+    "variants": [
+      {
+        "src": "/images/responsive/visschotel-luxe-10-14-pers-47293fd38c1d-320.webp",
+        "width": 320,
+        "bytes": 13384
+      },
+      {
+        "src": "/images/responsive/visschotel-luxe-10-14-pers-47293fd38c1d-640.webp",
+        "width": 640,
+        "bytes": 38926
+      },
+      {
+        "src": "/images/responsive/visschotel-luxe-10-14-pers-47293fd38c1d-960.webp",
+        "width": 960,
+        "bytes": 68488
+      },
+      {
+        "src": "/images/responsive/visschotel-luxe-10-14-pers-47293fd38c1d-1280.webp",
+        "width": 1280,
+        "bytes": 97378
+      }
+    ]
+  },
+  "/images/dirks/visschotel-luxe-2-3-pers.webp": {
+    "sha256": "45f6d25735dbfe239548ed0d826a2d1c18faba90d32f5a8b349eb696be8e897e",
+    "originalBytes": 209498,
+    "variants": [
+      {
+        "src": "/images/responsive/visschotel-luxe-2-3-pers-45f6d25735db-320.webp",
+        "width": 320,
+        "bytes": 14448
+      },
+      {
+        "src": "/images/responsive/visschotel-luxe-2-3-pers-45f6d25735db-640.webp",
+        "width": 640,
+        "bytes": 41888
+      },
+      {
+        "src": "/images/responsive/visschotel-luxe-2-3-pers-45f6d25735db-960.webp",
+        "width": 960,
+        "bytes": 76740
+      },
+      {
+        "src": "/images/responsive/visschotel-luxe-2-3-pers-45f6d25735db-1280.webp",
+        "width": 1280,
+        "bytes": 109636
+      }
+    ]
+  },
+  "/images/dirks/visschotel-luxe-3-5-pers.webp": {
+    "sha256": "45f6d25735dbfe239548ed0d826a2d1c18faba90d32f5a8b349eb696be8e897e",
+    "originalBytes": 209498,
+    "variants": [
+      {
+        "src": "/images/responsive/visschotel-luxe-3-5-pers-45f6d25735db-320.webp",
+        "width": 320,
+        "bytes": 14448
+      },
+      {
+        "src": "/images/responsive/visschotel-luxe-3-5-pers-45f6d25735db-640.webp",
+        "width": 640,
+        "bytes": 41888
+      },
+      {
+        "src": "/images/responsive/visschotel-luxe-3-5-pers-45f6d25735db-960.webp",
+        "width": 960,
+        "bytes": 76740
+      },
+      {
+        "src": "/images/responsive/visschotel-luxe-3-5-pers-45f6d25735db-1280.webp",
+        "width": 1280,
+        "bytes": 109636
+      }
+    ]
+  },
+  "/images/dirks/visschotel-luxe-5-8-pers.webp": {
+    "sha256": "11bf247451b536ea2001479f5cf11076cbd865737db68e95acab3479d18b6012",
+    "originalBytes": 262766,
+    "variants": [
+      {
+        "src": "/images/responsive/visschotel-luxe-5-8-pers-11bf247451b5-320.webp",
+        "width": 320,
+        "bytes": 18250
+      },
+      {
+        "src": "/images/responsive/visschotel-luxe-5-8-pers-11bf247451b5-640.webp",
+        "width": 640,
+        "bytes": 53058
+      },
+      {
+        "src": "/images/responsive/visschotel-luxe-5-8-pers-11bf247451b5-960.webp",
+        "width": 960,
+        "bytes": 96692
+      },
+      {
+        "src": "/images/responsive/visschotel-luxe-5-8-pers-11bf247451b5-1280.webp",
+        "width": 1280,
+        "bytes": 138048
+      }
+    ]
+  },
+  "/images/dirks/visschotel-luxe-8-10-pers.webp": {
+    "sha256": "11bf247451b536ea2001479f5cf11076cbd865737db68e95acab3479d18b6012",
+    "originalBytes": 262766,
+    "variants": [
+      {
+        "src": "/images/responsive/visschotel-luxe-8-10-pers-11bf247451b5-320.webp",
+        "width": 320,
+        "bytes": 18250
+      },
+      {
+        "src": "/images/responsive/visschotel-luxe-8-10-pers-11bf247451b5-640.webp",
+        "width": 640,
+        "bytes": 53058
+      },
+      {
+        "src": "/images/responsive/visschotel-luxe-8-10-pers-11bf247451b5-960.webp",
+        "width": 960,
+        "bytes": 96692
+      },
+      {
+        "src": "/images/responsive/visschotel-luxe-8-10-pers-11bf247451b5-1280.webp",
+        "width": 1280,
+        "bytes": 138048
+      }
+    ]
+  },
+  "/images/dirks/visschotel-middel-5-8-pers.webp": {
+    "sha256": "5a2df379159ffec981179965baf665d0f3fa4c0643b0afb08e009b8ac8d38c05",
+    "originalBytes": 237240,
+    "variants": [
+      {
+        "src": "/images/responsive/visschotel-middel-5-8-pers-5a2df379159f-320.webp",
+        "width": 320,
+        "bytes": 17576
+      },
+      {
+        "src": "/images/responsive/visschotel-middel-5-8-pers-5a2df379159f-640.webp",
+        "width": 640,
+        "bytes": 50778
+      },
+      {
+        "src": "/images/responsive/visschotel-middel-5-8-pers-5a2df379159f-960.webp",
+        "width": 960,
+        "bytes": 89314
+      },
+      {
+        "src": "/images/responsive/visschotel-middel-5-8-pers-5a2df379159f-1280.webp",
+        "width": 1280,
+        "bytes": 128164
+      }
+    ]
+  },
+  "/images/dirks/vissoep.webp": {
+    "sha256": "bf9ed8210a108b8b6e96ff935bf054147aed3ff9fa92962d6c513e5ffbbdd777",
+    "originalBytes": 77510,
+    "variants": [
+      {
+        "src": "/images/responsive/vissoep-bf9ed8210a10-320.webp",
+        "width": 320,
+        "bytes": 6662
+      },
+      {
+        "src": "/images/responsive/vissoep-bf9ed8210a10-640.webp",
+        "width": 640,
+        "bytes": 17956
+      },
+      {
+        "src": "/images/responsive/vissoep-bf9ed8210a10-960.webp",
+        "width": 960,
+        "bytes": 31328
+      },
+      {
+        "src": "/images/responsive/vissoep-bf9ed8210a10-1280.webp",
+        "width": 1280,
+        "bytes": 43688
+      }
+    ]
+  },
+  "/images/dirks/wakame.webp": {
+    "sha256": "38b199d23d45dc4a653cc15ff586be54b6f73294b55711d70aa76239cedf3ae1",
+    "originalBytes": 115582,
+    "variants": [
+      {
+        "src": "/images/responsive/wakame-38b199d23d45-320.webp",
+        "width": 320,
+        "bytes": 8346
+      },
+      {
+        "src": "/images/responsive/wakame-38b199d23d45-640.webp",
+        "width": 640,
+        "bytes": 22342
+      },
+      {
+        "src": "/images/responsive/wakame-38b199d23d45-960.webp",
+        "width": 960,
+        "bytes": 39100
+      },
+      {
+        "src": "/images/responsive/wakame-38b199d23d45-1280.webp",
+        "width": 1280,
+        "bytes": 54810
+      }
+    ]
+  },
+  "/images/dirks/wilde-zalmfilet.webp": {
+    "sha256": "a6a6daf8e7525c7d113cf18e4367ba8a55caae0446889da6904c2fa58db02c30",
+    "originalBytes": 130078,
+    "variants": [
+      {
+        "src": "/images/responsive/wilde-zalmfilet-a6a6daf8e752-320.webp",
+        "width": 320,
+        "bytes": 9740
+      },
+      {
+        "src": "/images/responsive/wilde-zalmfilet-a6a6daf8e752-640.webp",
+        "width": 640,
+        "bytes": 27144
+      },
+      {
+        "src": "/images/responsive/wilde-zalmfilet-a6a6daf8e752-960.webp",
+        "width": 960,
+        "bytes": 47588
+      },
+      {
+        "src": "/images/responsive/wilde-zalmfilet-a6a6daf8e752-1280.webp",
+        "width": 1280,
+        "bytes": 67188
+      }
+    ]
+  },
+  "/images/dirks/zalm-sashimi-ongesneden.webp": {
+    "sha256": "8a76da1be4c298bbee9efee78846e2dd16126070e9da6be779f871e057c144e9",
+    "originalBytes": 100462,
+    "variants": [
+      {
+        "src": "/images/responsive/zalm-sashimi-ongesneden-8a76da1be4c2-320.webp",
+        "width": 320,
+        "bytes": 7942
+      },
+      {
+        "src": "/images/responsive/zalm-sashimi-ongesneden-8a76da1be4c2-640.webp",
+        "width": 640,
+        "bytes": 20564
+      },
+      {
+        "src": "/images/responsive/zalm-sashimi-ongesneden-8a76da1be4c2-960.webp",
+        "width": 960,
+        "bytes": 35964
+      },
+      {
+        "src": "/images/responsive/zalm-sashimi-ongesneden-8a76da1be4c2-1280.webp",
+        "width": 1280,
+        "bytes": 50776
+      }
+    ]
+  },
+  "/images/dirks/zalmsalade.webp": {
+    "sha256": "e1af23b54452ae85bf95dec9758d3655c9397edb51e126be2d455fa3db1f60a9",
+    "originalBytes": 86086,
+    "variants": [
+      {
+        "src": "/images/responsive/zalmsalade-e1af23b54452-320.webp",
+        "width": 320,
+        "bytes": 8108
+      },
+      {
+        "src": "/images/responsive/zalmsalade-e1af23b54452-640.webp",
+        "width": 640,
+        "bytes": 20570
+      },
+      {
+        "src": "/images/responsive/zalmsalade-e1af23b54452-960.webp",
+        "width": 960,
+        "bytes": 34086
+      },
+      {
+        "src": "/images/responsive/zalmsalade-e1af23b54452-1280.webp",
+        "width": 1280,
+        "bytes": 48230
+      }
+    ]
+  },
+  "/images/dirks/zalmsashimi.webp": {
+    "sha256": "4e60039bb652351c99bd6728f18098937b9f79c19ac2259ac0ce641aeb70e6e6",
+    "originalBytes": 141288,
+    "variants": [
+      {
+        "src": "/images/responsive/zalmsashimi-4e60039bb652-320.webp",
+        "width": 320,
+        "bytes": 11382
+      },
+      {
+        "src": "/images/responsive/zalmsashimi-4e60039bb652-640.webp",
+        "width": 640,
+        "bytes": 31510
+      },
+      {
+        "src": "/images/responsive/zalmsashimi-4e60039bb652-960.webp",
+        "width": 960,
+        "bytes": 54726
+      },
+      {
+        "src": "/images/responsive/zalmsashimi-4e60039bb652-1280.webp",
+        "width": 1280,
+        "bytes": 77284
+      }
+    ]
+  },
+  "/images/dirks/zalmslaatje-de-luxe.webp": {
+    "sha256": "f8ccbbdb21ada3fbd6344f26b3bf19d1e866efeaa00af7ac5677fd3f66fc98dc",
+    "originalBytes": 158478,
+    "variants": [
+      {
+        "src": "/images/responsive/zalmslaatje-de-luxe-f8ccbbdb21ad-320.webp",
+        "width": 320,
+        "bytes": 11940
+      },
+      {
+        "src": "/images/responsive/zalmslaatje-de-luxe-f8ccbbdb21ad-640.webp",
+        "width": 640,
+        "bytes": 33514
+      },
+      {
+        "src": "/images/responsive/zalmslaatje-de-luxe-f8ccbbdb21ad-960.webp",
+        "width": 960,
+        "bytes": 58628
+      },
+      {
+        "src": "/images/responsive/zalmslaatje-de-luxe-f8ccbbdb21ad-1280.webp",
+        "width": 1280,
+        "bytes": 84034
+      }
+    ]
+  },
+  "/images/dirks/zeebaars-ca-500-gram.webp": {
+    "sha256": "b06d05f1424445bc488b6ebde12edebee056698a49e13d00e79b05b83c48c8aa",
+    "originalBytes": 127424,
+    "variants": [
+      {
+        "src": "/images/responsive/zeebaars-ca-500-gram-b06d05f14244-320.webp",
+        "width": 320,
+        "bytes": 8254
+      },
+      {
+        "src": "/images/responsive/zeebaars-ca-500-gram-b06d05f14244-640.webp",
+        "width": 640,
+        "bytes": 25386
+      },
+      {
+        "src": "/images/responsive/zeebaars-ca-500-gram-b06d05f14244-960.webp",
+        "width": 960,
+        "bytes": 46660
+      },
+      {
+        "src": "/images/responsive/zeebaars-ca-500-gram-b06d05f14244-1280.webp",
+        "width": 1280,
+        "bytes": 65438
+      }
+    ]
+  },
+  "/images/dirks/zeebaarsfilet-ca-2-x-110-gram.webp": {
+    "sha256": "efc35ddaf9f29a799131bd77c4472851f2cf3da7b824ac9f6d8c3616c05d6241",
+    "originalBytes": 145126,
+    "variants": [
+      {
+        "src": "/images/responsive/zeebaarsfilet-ca-2-x-110-gram-efc35ddaf9f2-320.webp",
+        "width": 320,
+        "bytes": 10966
+      },
+      {
+        "src": "/images/responsive/zeebaarsfilet-ca-2-x-110-gram-efc35ddaf9f2-640.webp",
+        "width": 640,
+        "bytes": 31276
+      },
+      {
+        "src": "/images/responsive/zeebaarsfilet-ca-2-x-110-gram-efc35ddaf9f2-960.webp",
+        "width": 960,
+        "bytes": 56310
+      },
+      {
+        "src": "/images/responsive/zeebaarsfilet-ca-2-x-110-gram-efc35ddaf9f2-1280.webp",
+        "width": 1280,
+        "bytes": 77800
+      }
+    ]
+  },
+  "/images/dirks/zeekraal.webp": {
+    "sha256": "18f79a8a17ec1e4bae1f91c34cf427970fb170ec6036123bf9275ab5eb6eaf8c",
+    "originalBytes": 91788,
+    "variants": [
+      {
+        "src": "/images/responsive/zeekraal-18f79a8a17ec-320.webp",
+        "width": 320,
+        "bytes": 9058
+      },
+      {
+        "src": "/images/responsive/zeekraal-18f79a8a17ec-640.webp",
+        "width": 640,
+        "bytes": 22840
+      },
+      {
+        "src": "/images/responsive/zeekraal-18f79a8a17ec-960.webp",
+        "width": 960,
+        "bytes": 37914
+      },
+      {
+        "src": "/images/responsive/zeekraal-18f79a8a17ec-1280.webp",
+        "width": 1280,
+        "bytes": 52228
+      }
+    ]
+  },
+  "/images/dirks/zeeuwse-mosselen.webp": {
+    "sha256": "f8fda2ef3ba8e7ffd7c4cf5ecb85535db9e228973587af205a1a83c43736e1b6",
+    "originalBytes": 118344,
+    "variants": [
+      {
+        "src": "/images/responsive/zeeuwse-mosselen-f8fda2ef3ba8-320.webp",
+        "width": 320,
+        "bytes": 11020
+      },
+      {
+        "src": "/images/responsive/zeeuwse-mosselen-f8fda2ef3ba8-640.webp",
+        "width": 640,
+        "bytes": 28210
+      },
+      {
+        "src": "/images/responsive/zeeuwse-mosselen-f8fda2ef3ba8-960.webp",
+        "width": 960,
+        "bytes": 47846
+      },
+      {
+        "src": "/images/responsive/zeeuwse-mosselen-f8fda2ef3ba8-1280.webp",
+        "width": 1280,
+        "bytes": 66550
+      }
+    ]
+  },
+  "/images/editorial/bot-serveervoorbeeld.webp": {
+    "sha256": "68f9484dffaa14c7a5eae9284f5c52214b6616763ea9e3d027e0a5478170d4c7",
+    "originalBytes": 360068,
+    "variants": [
+      {
+        "src": "/images/responsive/bot-serveervoorbeeld-68f9484dffaa-320.webp",
+        "width": 320,
+        "bytes": 13324
+      },
+      {
+        "src": "/images/responsive/bot-serveervoorbeeld-68f9484dffaa-640.webp",
+        "width": 640,
+        "bytes": 49306
+      },
+      {
+        "src": "/images/responsive/bot-serveervoorbeeld-68f9484dffaa-960.webp",
+        "width": 960,
+        "bytes": 101734
+      },
+      {
+        "src": "/images/responsive/bot-serveervoorbeeld-68f9484dffaa-1280.webp",
+        "width": 1280,
+        "bytes": 155364
+      }
+    ]
+  },
+  "/images/editorial/creuse-oesters-serveervoorbeeld.png": {
+    "sha256": "64be6fd345fc91a294e415b2f715ea506a7efc08d6b2e285826e70894dd5483a",
+    "originalBytes": 2959306,
+    "variants": [
+      {
+        "src": "/images/responsive/creuse-oesters-serveervoorbeeld-64be6fd345fc-320.webp",
+        "width": 320,
+        "bytes": 21608
+      },
+      {
+        "src": "/images/responsive/creuse-oesters-serveervoorbeeld-64be6fd345fc-640.webp",
+        "width": 640,
+        "bytes": 68184
+      },
+      {
+        "src": "/images/responsive/creuse-oesters-serveervoorbeeld-64be6fd345fc-960.webp",
+        "width": 960,
+        "bytes": 127614
+      },
+      {
+        "src": "/images/responsive/creuse-oesters-serveervoorbeeld-64be6fd345fc-1280.webp",
+        "width": 1280,
+        "bytes": 193870
+      }
+    ]
+  },
+  "/images/editorial/gambakroketten-eigen-product.png": {
+    "sha256": "5ab116d72dc8ed142c2ee8108e3d3eb79cec1baedfa105e45e6048e273633153",
+    "originalBytes": 2410563,
+    "variants": [
+      {
+        "src": "/images/responsive/gambakroketten-eigen-product-5ab116d72dc8-320.webp",
+        "width": 320,
+        "bytes": 13990
+      },
+      {
+        "src": "/images/responsive/gambakroketten-eigen-product-5ab116d72dc8-640.webp",
+        "width": 640,
+        "bytes": 48406
+      },
+      {
+        "src": "/images/responsive/gambakroketten-eigen-product-5ab116d72dc8-960.webp",
+        "width": 960,
+        "bytes": 94968
+      },
+      {
+        "src": "/images/responsive/gambakroketten-eigen-product-5ab116d72dc8-1280.webp",
+        "width": 1280,
+        "bytes": 146238
+      }
+    ]
+  },
+  "/images/editorial/gebakken-mosselen-serveervoorbeeld.webp": {
+    "sha256": "80bf7c129c3e29500a445695aa8fa48274c09bcb1b8c18fffffb8fe7d85fd803",
+    "originalBytes": 315898,
+    "variants": [
+      {
+        "src": "/images/responsive/gebakken-mosselen-serveervoorbeeld-80bf7c129c3e-320.webp",
+        "width": 320,
+        "bytes": 17586
+      },
+      {
+        "src": "/images/responsive/gebakken-mosselen-serveervoorbeeld-80bf7c129c3e-640.webp",
+        "width": 640,
+        "bytes": 56952
+      },
+      {
+        "src": "/images/responsive/gebakken-mosselen-serveervoorbeeld-80bf7c129c3e-960.webp",
+        "width": 960,
+        "bytes": 104070
+      },
+      {
+        "src": "/images/responsive/gebakken-mosselen-serveervoorbeeld-80bf7c129c3e-1280.webp",
+        "width": 1280,
+        "bytes": 153564
+      }
+    ]
+  },
+  "/images/editorial/gerookte-forel-heel-serveervoorbeeld.webp": {
+    "sha256": "289215ff7104cb6e7b65ce2c7568c33046dbec2cbe762ad16d5d4db1f2d76237",
+    "originalBytes": 253428,
+    "variants": [
+      {
+        "src": "/images/responsive/gerookte-forel-heel-serveervoorbeeld-289215ff7104-320.webp",
+        "width": 320,
+        "bytes": 14052
+      },
+      {
+        "src": "/images/responsive/gerookte-forel-heel-serveervoorbeeld-289215ff7104-640.webp",
+        "width": 640,
+        "bytes": 46618
+      },
+      {
+        "src": "/images/responsive/gerookte-forel-heel-serveervoorbeeld-289215ff7104-960.webp",
+        "width": 960,
+        "bytes": 90732
+      },
+      {
+        "src": "/images/responsive/gerookte-forel-heel-serveervoorbeeld-289215ff7104-1280.webp",
+        "width": 1280,
+        "bytes": 131784
+      }
+    ]
+  },
+  "/images/editorial/gerookte-forelfilet-serveervoorbeeld.webp": {
+    "sha256": "66376ac65b181981704302e9979b5b11f7c9d75d1b336e9652665172502c668e",
+    "originalBytes": 280266,
+    "variants": [
+      {
+        "src": "/images/responsive/gerookte-forelfilet-serveervoorbeeld-66376ac65b18-320.webp",
+        "width": 320,
+        "bytes": 19770
+      },
+      {
+        "src": "/images/responsive/gerookte-forelfilet-serveervoorbeeld-66376ac65b18-640.webp",
+        "width": 640,
+        "bytes": 64138
+      },
+      {
+        "src": "/images/responsive/gerookte-forelfilet-serveervoorbeeld-66376ac65b18-960.webp",
+        "width": 960,
+        "bytes": 117646
+      },
+      {
+        "src": "/images/responsive/gerookte-forelfilet-serveervoorbeeld-66376ac65b18-1280.webp",
+        "width": 1280,
+        "bytes": 172832
+      }
+    ]
+  },
+  "/images/editorial/gerookte-heilbot-serveervoorbeeld.webp": {
+    "sha256": "f417e74fd6cbd799724478365cc9162329c432ec5c45c9b096c155123e8a9bac",
+    "originalBytes": 153950,
+    "variants": [
+      {
+        "src": "/images/responsive/gerookte-heilbot-serveervoorbeeld-f417e74fd6cb-320.webp",
+        "width": 320,
+        "bytes": 11000
+      },
+      {
+        "src": "/images/responsive/gerookte-heilbot-serveervoorbeeld-f417e74fd6cb-640.webp",
+        "width": 640,
+        "bytes": 31942
+      },
+      {
+        "src": "/images/responsive/gerookte-heilbot-serveervoorbeeld-f417e74fd6cb-960.webp",
+        "width": 960,
+        "bytes": 57612
+      },
+      {
+        "src": "/images/responsive/gerookte-heilbot-serveervoorbeeld-f417e74fd6cb-1280.webp",
+        "width": 1280,
+        "bytes": 81978
+      }
+    ]
+  },
+  "/images/editorial/gerookte-kipper-serveervoorbeeld.webp": {
+    "sha256": "afd2256a619edd545fa41f4db5437ce9b8cc9cfeef80d6bfe783b85445d4effd",
+    "originalBytes": 372288,
+    "variants": [
+      {
+        "src": "/images/responsive/gerookte-kipper-serveervoorbeeld-afd2256a619e-320.webp",
+        "width": 320,
+        "bytes": 17692
+      },
+      {
+        "src": "/images/responsive/gerookte-kipper-serveervoorbeeld-afd2256a619e-640.webp",
+        "width": 640,
+        "bytes": 58030
+      },
+      {
+        "src": "/images/responsive/gerookte-kipper-serveervoorbeeld-afd2256a619e-960.webp",
+        "width": 960,
+        "bytes": 110722
+      },
+      {
+        "src": "/images/responsive/gerookte-kipper-serveervoorbeeld-afd2256a619e-1280.webp",
+        "width": 1280,
+        "bytes": 168594
+      }
+    ]
+  },
+  "/images/editorial/gerookte-sprotfilet-serveervoorbeeld.webp": {
+    "sha256": "f73a1951fcfc2e800327aa3806395cc73ad57ce635fae907849faba60681766e",
+    "originalBytes": 268198,
+    "variants": [
+      {
+        "src": "/images/responsive/gerookte-sprotfilet-serveervoorbeeld-f73a1951fcfc-320.webp",
+        "width": 320,
+        "bytes": 13258
+      },
+      {
+        "src": "/images/responsive/gerookte-sprotfilet-serveervoorbeeld-f73a1951fcfc-640.webp",
+        "width": 640,
+        "bytes": 43860
+      },
+      {
+        "src": "/images/responsive/gerookte-sprotfilet-serveervoorbeeld-f73a1951fcfc-960.webp",
+        "width": 960,
+        "bytes": 85430
+      },
+      {
+        "src": "/images/responsive/gerookte-sprotfilet-serveervoorbeeld-f73a1951fcfc-1280.webp",
+        "width": 1280,
+        "bytes": 129792
+      }
+    ]
+  },
+  "/images/editorial/gerookte-zalmmoot-eigen-product.png": {
+    "sha256": "aab630bc36d64f297f8e82436c141d982dfd03a9bd61748c73480ce0100ec557",
+    "originalBytes": 2243704,
+    "variants": [
+      {
+        "src": "/images/responsive/gerookte-zalmmoot-eigen-product-aab630bc36d6-320.webp",
+        "width": 320,
+        "bytes": 15462
+      },
+      {
+        "src": "/images/responsive/gerookte-zalmmoot-eigen-product-aab630bc36d6-640.webp",
+        "width": 640,
+        "bytes": 46682
+      },
+      {
+        "src": "/images/responsive/gerookte-zalmmoot-eigen-product-aab630bc36d6-960.webp",
+        "width": 960,
+        "bytes": 84584
+      },
+      {
+        "src": "/images/responsive/gerookte-zalmmoot-eigen-product-aab630bc36d6-1280.webp",
+        "width": 1280,
+        "bytes": 126104
+      }
+    ]
+  },
+  "/images/editorial/schar-serveervoorbeeld.webp": {
+    "sha256": "9aae3c3462883fc15754e10c11fc0fdd673d334669046ba03153864fb7319500",
+    "originalBytes": 440010,
+    "variants": [
+      {
+        "src": "/images/responsive/schar-serveervoorbeeld-9aae3c346288-320.webp",
+        "width": 320,
+        "bytes": 14714
+      },
+      {
+        "src": "/images/responsive/schar-serveervoorbeeld-9aae3c346288-640.webp",
+        "width": 640,
+        "bytes": 57066
+      },
+      {
+        "src": "/images/responsive/schar-serveervoorbeeld-9aae3c346288-960.webp",
+        "width": 960,
+        "bytes": 118642
+      },
+      {
+        "src": "/images/responsive/schar-serveervoorbeeld-9aae3c346288-1280.webp",
+        "width": 1280,
+        "bytes": 187586
+      }
+    ]
+  },
+  "/images/editorial/surimisalade-serveervoorbeeld.webp": {
+    "sha256": "e921d106426545b3c852b78ef479ccc952ac86d195caae4dc4abd52683319a8a",
+    "originalBytes": 167800,
+    "variants": [
+      {
+        "src": "/images/responsive/surimisalade-serveervoorbeeld-e921d1064265-320.webp",
+        "width": 320,
+        "bytes": 12892
+      },
+      {
+        "src": "/images/responsive/surimisalade-serveervoorbeeld-e921d1064265-640.webp",
+        "width": 640,
+        "bytes": 34458
+      },
+      {
+        "src": "/images/responsive/surimisalade-serveervoorbeeld-e921d1064265-960.webp",
+        "width": 960,
+        "bytes": 60452
+      },
+      {
+        "src": "/images/responsive/surimisalade-serveervoorbeeld-e921d1064265-1280.webp",
+        "width": 1280,
+        "bytes": 85176
+      }
+    ]
+  },
+  "/images/editorial/victoriabaars-serveervoorbeeld.webp": {
+    "sha256": "59f4be04828d4928a2e2a45efbe209a696a4533359c59da4a6beaa015bac69a1",
+    "originalBytes": 228852,
+    "variants": [
+      {
+        "src": "/images/responsive/victoriabaars-serveervoorbeeld-59f4be04828d-320.webp",
+        "width": 320,
+        "bytes": 9998
+      },
+      {
+        "src": "/images/responsive/victoriabaars-serveervoorbeeld-59f4be04828d-640.webp",
+        "width": 640,
+        "bytes": 32748
+      },
+      {
+        "src": "/images/responsive/victoriabaars-serveervoorbeeld-59f4be04828d-960.webp",
+        "width": 960,
+        "bytes": 64420
+      },
+      {
+        "src": "/images/responsive/victoriabaars-serveervoorbeeld-59f4be04828d-1280.webp",
+        "width": 1280,
+        "bytes": 97286
+      }
+    ]
+  },
+  "/images/editorial/wijtingfilet-serveervoorbeeld.webp": {
+    "sha256": "09cf1997807fd7d11b15cb22b03884d064e2512a6c7fe898fdc006ca656a7109",
+    "originalBytes": 240376,
+    "variants": [
+      {
+        "src": "/images/responsive/wijtingfilet-serveervoorbeeld-09cf1997807f-320.webp",
+        "width": 320,
+        "bytes": 11294
+      },
+      {
+        "src": "/images/responsive/wijtingfilet-serveervoorbeeld-09cf1997807f-640.webp",
+        "width": 640,
+        "bytes": 36336
+      },
+      {
+        "src": "/images/responsive/wijtingfilet-serveervoorbeeld-09cf1997807f-960.webp",
+        "width": 960,
+        "bytes": 70080
+      },
+      {
+        "src": "/images/responsive/wijtingfilet-serveervoorbeeld-09cf1997807f-1280.webp",
+        "width": 1280,
+        "bytes": 105970
+      }
+    ]
+  },
+  "/images/producten-hd/kabeljauwfilet.webp": {
+    "sha256": "4a7248dde3247afb98ebbf0b1d90c928fc60b0347bebd2fae7b0089e68b55a24",
+    "originalBytes": 114058,
+    "variants": [
+      {
+        "src": "/images/responsive/kabeljauwfilet-4a7248dde324-320.webp",
+        "width": 320,
+        "bytes": 3280
+      },
+      {
+        "src": "/images/responsive/kabeljauwfilet-4a7248dde324-640.webp",
+        "width": 640,
+        "bytes": 9616
+      },
+      {
+        "src": "/images/responsive/kabeljauwfilet-4a7248dde324-960.webp",
+        "width": 960,
+        "bytes": 18046
+      },
+      {
+        "src": "/images/responsive/kabeljauwfilet-4a7248dde324-1280.webp",
+        "width": 1280,
+        "bytes": 27746
+      }
+    ]
+  },
+  "/images/producten-hd/sprot-garitzko.jpg": {
+    "sha256": "778a51a58cab06609edfa21b37c4f9b45641a966aba94da6d186201b01259bda",
+    "originalBytes": 617691,
+    "variants": [
+      {
+        "src": "/images/responsive/sprot-garitzko-778a51a58cab-320.webp",
+        "width": 320,
+        "bytes": 10606
+      },
+      {
+        "src": "/images/responsive/sprot-garitzko-778a51a58cab-640.webp",
+        "width": 640,
+        "bytes": 37004
+      },
+      {
+        "src": "/images/responsive/sprot-garitzko-778a51a58cab-960.webp",
+        "width": 960,
+        "bytes": 74512
+      },
+      {
+        "src": "/images/responsive/sprot-garitzko-778a51a58cab-1280.webp",
+        "width": 1280,
+        "bytes": 129126
+      }
+    ]
+  },
+  "/images/recepten/gravlaks.webp": {
+    "sha256": "6127c2017ad47b58bf8ddfa781e51f1785f58918ca7630aaf14b2e8f9f2d6591",
+    "originalBytes": 257608,
+    "variants": [
+      {
+        "src": "/images/responsive/gravlaks-6127c2017ad4-320.webp",
+        "width": 320,
+        "bytes": 16300
+      },
+      {
+        "src": "/images/responsive/gravlaks-6127c2017ad4-640.webp",
+        "width": 640,
+        "bytes": 57138
+      },
+      {
+        "src": "/images/responsive/gravlaks-6127c2017ad4-960.webp",
+        "width": 960,
+        "bytes": 111334
+      },
+      {
+        "src": "/images/responsive/gravlaks-6127c2017ad4-1280.webp",
+        "width": 1280,
+        "bytes": 168440
+      }
+    ]
   }
 }
