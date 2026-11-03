@@ -67,4 +67,8 @@ De eigenaar moet dit voorstel beoordelen voordat het een productbeeld vervangt. 
 
 ## Publicatie
 
-Branch `codex/catalog-cart-simplification`, basis `ac05aac` (na PR #77/#78). PR en echte Cloudflare-versie worden na merge hieronder geregistreerd. Niet afgeleid uit een Vercel-build. Accountbackend, routes en site-toegangsbeveiliging zijn niet aangepast.
+[PR #79](https://github.com/Voidd2/schaapsvis/pull/79), branch `codex/catalog-cart-simplification`, is na expliciet publicatieakkoord samengevoegd als `be86beda1167b3df4405d079003104f0f03a31ac`. Laatste branch-build GitHub #232 geslaagd. Codex-review van de hoofdwijziging `fb95491` had geen bevindingen; de daaropvolgende kleine wijziging behoudt telefoonlinkprotocollen bij het verwijderen van querytekst.
+
+Cloudflare site `schaapsvis`: versie `0342b64f`, **100% Ready**, build 1m 6s, commit `be86bed`. Op de echte site in Chrome bevestigd: twee middelgrote schalen €147,00, correcte directe WhatsApp-conceptlink (niet geopend/verzonden), selectie behouden op Feestdagen, kleine vaste detail €59,50 zonder formaatselect, testmand na afloop leeg. `/api/members/health` geeft `{"status":"ok"}`; robots `Disallow: /`, sitemap leeg. Een cookie-loze aanvraag vanaf het lokale netwerk is geen bewijs van publieke toegankelijkheid omdat dit netwerk op de bestaande IP-allowlist kan staan. Auth/backend en toegangsconfiguratie zijn niet gewijzigd.
+
+[Live screenshot](../../design-preview/cart-79/live-cart.png). [Visueel opleveroverzicht](../../design-preview/cart-79/overzicht.html) bundelt voor/na, demonstraties en fotoconcept. De mobiele breedtes zijn daadwerkelijk met geïsoleerde Playwright/Chrome getest; het live screenshot gebruikt het gewone desktopvenster.
