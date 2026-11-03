@@ -9,7 +9,7 @@ Basis: main `2d671a1`. Branch `codex/quality-after-76`. Geen aanvullend auditbes
 - `/bestellen` toont de oude maatwerkaanvraag. De nog aanwezige provider/paneel waren niet verwijderd. Voorheen ging opgeslagen inhoud verloren. Nu wordt deze eerst ingelezen en pas daarna teruggeschreven. Bestaande localStorage-selecties worden één keer na succesvolle opslag naar het tabblad overgezet; bewust lege sessionStorage wint boven oude gegevens. Een nieuw tabblad krijgt geen meegedeelde mutaties; gegevens worden nooit op de server of aan klantaccounts gekoppeld. Bij gedupliceerde tabbladen kan de browser initieel een kopie maken, daarna zijn ze onafhankelijk. Gedeelde apparatuur vereist zoals steeds zelf leegmaken/sluiten, het systeem identificeert geen personen achter één browser.
 - Oude verse-visregels zijn weer zichtbaar op `/bestellen`, inclusief verwijderen/leegmaken; niet stilzwijgend weg uit WhatsApp-concept. Oude maatwerkprijzen worden niet met canonieke nieuwe productprijzen gemengd. Beide overzichten wijzen bij bestaande oude inhoud expliciet naar elkaar. Geen grote data- of bestelmigratie.
 
-## Auditstatus (implementatie; releasebewijs volgt)
+## Auditstatus (opgelost / gecontroleerd en goed; zie releasebewijs onderaan)
 
 | Bevinding | Status / bewijs |
 |---|---|
@@ -56,7 +56,7 @@ Geen nieuwe medische claim of houdbaarheidsgarantie; productspecifiek advies bij
 
 Playwright: `scripts/check-quality-browser.mjs`, geïsoleerde lokale Chrome, geen persoonlijke browserdata; externe requests en alle niet-GET-aanvragen geblokkeerd. Vooraf gebouwde site op localhost:3035, uitsluitend lokaal SITE_PUBLIC=launch-approved. Productie-instellingen blijven intact.
 
-Eerste volledige matrix: 12 routes × 8 breedtes = 96; 360/390/768/1024/1366/1440/1728/1920. Geen horizontale overflow of pageerrors. Dropdown, toetsenbord/focus, mobielmenu, oude opslag, nieuwe lijst, fotovergroting, datum en terugroute geslaagd. Verdere screenshot-/touch-/taalcontrole en releasebewijs worden hieronder aangevuld.
+Eerste volledige matrix: 12 routes × 8 breedtes = 96; 360/390/768/1024/1366/1440/1728/1920. Geen horizontale overflow of pageerrors. Dropdown, toetsenbord/focus, mobielmenu, oude opslag, nieuwe lijst, fotovergroting, datum en terugroute geslaagd. De definitieve screenshot-/touch-/taalcontrole en het releasebewijs staan hieronder.
 
 Screenshots en machineleesbaar bewijs: `../design-preview/quality-76/`. Geen echte aanvragen, WhatsApp-berichten, e-mails of registraties verstuurd.
 ## Definitieve lokale controles — 3 november 2026
@@ -73,4 +73,18 @@ Bewijsbestanden in `../design-preview/quality-76/`:
 - `home-after-390.jpg`, `visschalen-after-390.jpg`, `feestdagen-after-390.jpg`, `account-after-390.jpg`.
 - `account-dropdown-open.jpg`, `account-dropdown-outside-closed.jpg`, `legacy-cart-restored.jpg`, `owner-media-plan.jpg`, `browser-results.json`.
 
-Nog aan te leveren door eigenaar: authentieke media volgens beeldplan. De voorbereide plaatsen en veilige publieke fallback zijn afgerond. Publicatie/Cloudflare-bewijs volgt na PR-controle.
+Nog aan te leveren door eigenaar: authentieke media volgens beeldplan. De voorbereide plaatsen en veilige publieke fallback zijn afgerond. Publicatie en Cloudflare zijn hieronder bevestigd.
+
+## Publicatie en live bewijs — afgerond
+
+- PR [#77](https://github.com/Voidd2/schaapsvis/pull/77) samengevoegd als `67875df361520dfd8e4ed389b92c3dd13d72f7ce`.
+- GitHub Build site en Content integrity: success. Codex-review op `42bc23f`: afgerond zonder bevindingen.
+- Cloudflare account Schaapsvis: siteversie `7ccc829e`, **100% Ready**, build 54 s; ledenversie `af50a880`, **100% Ready**, build 55 s. Beide tonen de bovenstaande main-commit. Dit is gecontroleerd in het Cloudflare-dashboard via Chrome, niet afgeleid uit Vercel.
+- Live homepage: CSS-viewport 1920, canvas 1536; besloten beeldplan zichtbaar. Accountmenu geopend en na buitenklik nul open dropdowns. Screenshots `live-account-dropdown-open.png` en `live-home-after-1920.png`.
+- Live account: bestaande leden-API levert het vereenvoudigde inlogformulier, secundaire herstelacties en studenteninformatie; geen account aangemaakt of ingelogd. `/api/members/health`: HTTP 200, `status: ok`.
+- Live Feestdagen: drie cadeaukaarten onmiddellijk na ‘Zes schalen, volop keuze’; namen/inhoud uit relatiegeschenken, alle drie ‘Prijs na overleg’. Screenshot `live-holiday-gifts.png`.
+- Live catalogus: één kleine schaal toegevoegd, herladen en €59,50/hoeveelheid 1 teruggezien. Datum in 2020 met toetsenbord bevestigd: melding en nul WhatsApp-links. Datum en testselectie daarna via de bediening gewist; lijst weer leeg. Niets verzonden.
+- Anonieme live toegang blijft de binnenkort-pagina tonen; geen eigenaarplan. Robots `Disallow: /`, sitemap leeg. Geen toegangsinstellingen gewijzigd.
+- Aanvullende lokale filtercontrole: zoeken ‘kabeljauw’, A–Z kiezen en herladen behoudt zoek-/sorteerwaarden en toont Kabeljauwfilet.
+
+Alle uitvoerbare eisen van deze kwaliteitsronde zijn opgelost of gecontroleerd en goed. Alleen het daadwerkelijk aanleveren van authentieke beelden blijft bij de eigenaar; de voorbereiding, labels, formaten en publieke fallback zijn gereed. Geen geld uitgegeven, echte aanvragen, registraties of e-mails verstuurd.
