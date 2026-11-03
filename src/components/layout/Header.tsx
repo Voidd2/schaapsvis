@@ -63,6 +63,7 @@ export function Header() {
     { href: p("/feestdagen"), label: locale === "de" ? "Festtage" : locale === "en" ? "Festive season" : "Feestdagen" },
     { href: p("/assortiment"), label: t("assortiment") },
     { href: p("/visschalen"), label: t("visschalen") },
+    { href: p("/varlaks"), label: locale === "de" ? "VÅRLAKS-Lachs" : locale === "en" ? "VÅRLAKS salmon" : "VÅRLAKS-zalm" },
     { href: p("/studentenkorting"), label: t("studentenkorting") },
     { href: p("/recepten"), label: t("recepten") },
     { href: p("/bezoek-ons"), label: t("locaties") },
@@ -70,7 +71,6 @@ export function Header() {
   const productLinks = [
     { href: p("/barbecue-gourmet"), label: "Barbecue & gourmet" },
     { href: p("/biologische-vis"), label: locale === "nl" ? "Biologische vis & herkomst" : locale === "de" ? "Biofisch & Herkunft" : "Organic fish & origins" },
-    { href: p("/varlaks"), label: "VÅRLAKS" },
   ];
   const platterLinks = [
     { href: p("/feestdagen"), label: primaryLinks[0].label },

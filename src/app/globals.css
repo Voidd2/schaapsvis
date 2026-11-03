@@ -979,11 +979,57 @@ summary::-webkit-details-marker {
 
 /* Shared wide canvas; reading columns remain deliberately limited. */
 .site-container > p, .section-wrap > p { max-width: 72ch; }
-@media (min-width:1280px) and (max-width:1599px) {
+@media (min-width:1280px) {
  .site-header-row { flex-wrap:wrap; gap:6px 24px; }
  .site-header-row > nav { order:3; flex-basis:100%; justify-content:flex-start; border-top:1px solid var(--linen); padding-top:5px; }
 }
 .site-header details[open] { z-index:60; }
+/* VÅRLAKS has its own landing page, with the shop's existing colours and type. */
+.varlaks-page { color:var(--navy-dark); }
+.varlaks-split { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:center; gap:clamp(28px,5vw,72px); }
+.varlaks-hero, .varlaks-contact { background:var(--navy-dark); color:white; padding-block:clamp(36px,5vw,72px); }
+.varlaks-hero .kapitaal, .varlaks-contact .kapitaal { color:#b8ddeb; }
+.varlaks-hero h1 { margin:20px 0 24px; color:white; }
+.varlaks-wordmark { display:block; font:600 clamp(1rem,1.5vw,1.25rem) var(--font-body); letter-spacing:.24em; margin-bottom:18px; }
+.varlaks-headline { display:block; font:700 clamp(2.25rem,3.5vw,3.75rem)/1.08 var(--font-display); letter-spacing:-.025em; white-space:pre-line; text-wrap:balance; }
+.varlaks-lead { max-width:48ch; font-size:1.1rem; line-height:1.75; color:#e5f0f4; }
+.varlaks-page figure img { width:100%; object-fit:cover; border-radius:10px; aspect-ratio:4/3; }
+.varlaks-page figcaption { font-size:.85rem; line-height:1.5; margin-top:10px; }
+.varlaks-hero figcaption { color:#d5e7ee; }
+.varlaks-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:24px; }
+.varlaks-actions .knop { min-height:52px; white-space:normal; text-align:center; }
+.varlaks-primary { background:white; color:var(--navy-dark); border:1px solid white; }
+.varlaks-primary:hover { background:#e5f0f4; color:var(--navy-dark); }
+.varlaks-secondary { border:1px solid #8eb9cb; color:white; background:transparent; }
+.varlaks-secondary:hover { background:#ffffff16; color:white; }
+.varlaks-text-link { display:inline-flex; align-items:center; min-height:48px; margin-top:12px; text-decoration:underline; text-underline-offset:4px; font-weight:600; }
+.varlaks-facts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; padding-block:28px; border-bottom:1px solid var(--linen); }
+.varlaks-facts > div + div { border-left:1px solid var(--linen); padding-left:24px; }
+.varlaks-facts strong { display:block; font-size:1.05rem; margin-bottom:6px; }
+.varlaks-facts p { font-size:.95rem; line-height:1.6; }
+.varlaks-section { padding-block:clamp(40px,5vw,72px); }
+.varlaks-page h2 { font:700 clamp(1.8rem,2.5vw,2.6rem)/1.2 var(--font-display); margin:12px 0 20px; color:inherit; }
+.varlaks-page section p { line-height:1.8; max-width:65ch; }
+.varlaks-origin-photos { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px 28px; padding-bottom:56px; }
+.varlaks-origin-photos figure img { aspect-ratio:3/2; }
+.varlaks-origin-photos figcaption { font-weight:600; }
+.varlaks-origin-photos > p { grid-column:1/-1; font-size:.85rem; }
+.varlaks-cooking { background:var(--sand); padding-block:48px; }
+.varlaks-faq { max-width:920px; }
+.varlaks-faq details { border-bottom:1px solid var(--linen); }
+.varlaks-faq summary { cursor:pointer; padding:20px 0; font-size:1.1rem; font-weight:600; }
+.varlaks-faq details p, .varlaks-faq details ul { padding-bottom:22px; }
+.varlaks-faq li a { display:inline-flex; align-items:center; min-height:48px; text-decoration:underline; text-underline-offset:4px; }
+.varlaks-contact .varlaks-actions { margin-top:0; }
+.varlaks-contact-note { margin-top:20px; color:#d5e7ee; font-size:.95rem; }
+@media(max-width:800px) {
+ .varlaks-split, .varlaks-facts, .varlaks-origin-photos { grid-template-columns:minmax(0,1fr); }
+ .varlaks-facts { gap:18px; }
+ .varlaks-facts > div + div { border-left:0; padding-left:0; border-top:1px solid var(--linen); padding-top:18px; }
+ .varlaks-hero .varlaks-actions .knop { flex:1 1 180px; }
+ .varlaks-origin-photos { gap:24px; }
+ .varlaks-origin-photos figure img { aspect-ratio:4/3; }
+}
 .seafood-card-body > h3 { min-height:2.6em; }
 .seafood-card-body > p:not(.seafood-price) { flex:1; }
 .seafood-price { font-variant-numeric:tabular-nums; }
