@@ -5,7 +5,8 @@ Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 ## Herkenbare inhoud van aanbiedingen
 
 - Vervolgcontrole van het studentenuitvoerplan vond dat campagnes in de HTML nog het label ACCOUNT kregen. De gedeelde template onderscheidt nu accountberichten en aanbiedingen; de bestaande Nederlandstalige campagnes tonen AANBIEDINGEN. EN/DE-labels zijn opgenomen voor gelokaliseerd templategebruik.
-- Volledige leden- en SMTP-tests slagen: verificatie houdt ACCOUNT, campagnes tonen AANBIEDINGEN en de bestaande afmeldroutes blijven werken. Geen echte berichten verzonden. Uitrolbewijs volgt; dit is geen bewijs van herstelde inboxplaatsing.
+- Volledige leden- en SMTP-tests slagen: verificatie houdt ACCOUNT, campagnes tonen AANBIEDINGEN en de bestaande afmeldroutes blijven werken. PR98 gepubliceerd als `6917034`, Build253/run41727118189 en Member153/run41727118305 groen, Codex-review zonder bevindingen. Cloudflare leden `9e29d388` en site `fc0d5396` Ready/100%; health HTTP200/status ok.
+- Nieuwe expliciete toestemming voor één testmail verbruikt op 3 november 22:11:06 UTC: SMTP geaccepteerd, Gmail om22:11:07 in **Spam**. Gewijzigde afzendernaam en Unicode-onderwerp correct zichtbaar, SPF/DKIM/DMARC alle PASS. Onafhankelijke Python MIME-parser rapporteert geen defects en exacte terugdecodering. Geen Gmail-labels veranderd. Test lokaal via Knoth met actuele bron-MIME/template, geen volledige Worker-registratie. Bewijs buiten Git: `../design-preview/student-admin/mail-after-header-fix/` (EML, guard/report, Gmail-screenshots). Geen verdere verzending zonder nieuw akkoord; geen bericht aan Knoth.
 - Volgende acceptatie vereist externe input: fysieke iOS/beginscherm- en kassascancontrole, een opnieuw toegestane echte mailcontrole, actuele eigenaarfoto's/etiketten en GSC/GBP-toegang. Knoth uitsluitend als lokaal concept; Wallet blijft uitgesteld en de publieke sitepoort blijft gesloten.
 
 ## Herkenbare mailafzender
