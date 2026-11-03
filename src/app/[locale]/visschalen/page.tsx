@@ -8,7 +8,9 @@ import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
 import { Sectie, Kop, Vragen, Kruimels } from "@/components/ui/Sectie";
 import { PaginaSlot } from "@/components/ui/PaginaKop";
-import { SelectieAanvraag } from "./SelectieAanvraag";
+import { SeafoodCatalog } from "@/components/catalog/SeafoodCatalog";
+import { RequestListLink } from "@/components/catalog/RequestControls";
+import { catalogText } from "@/lib/catalog-copy";
 import { paginaMetadata, kruimelSchema, vraagSchema } from "@/lib/seo";
 import { bestelContact } from "@/lib/bestel-contact";
 import { BEDRIJF } from "@/lib/bedrijf";
@@ -40,6 +42,7 @@ export default async function VisschalenPage({
   const g = await getTranslations({ locale, namespace: "gedeeld" });
   const nav = await getTranslations({ locale, namespace: "nav" });
 
+  const catalog = catalogText(locale);
   const presentation = platterPresentation(locale);
   const vragen = t.raw("faq") as { v: string; a: string }[];
 
@@ -70,18 +73,13 @@ export default async function VisschalenPage({
       <section className="platter-intro section-wrap">
         <Kruimels items={[{ naam: BEDRIJF.naamKort, href: `/${locale}` }, { naam: nav("visschalen") }]} />
         <p className="kapitaal mb-3">{t("eyebrow")}</p>
-        <h1>{t("kop")}</h1>
-        <p className="platter-intro-text">{t("inleiding")}</p>
-        <nav className="platter-family-links" aria-label={t("schaalKop")}>
-          {(["klassiek", "luxe", "hapjes"] as const).map((family, i) => <a key={family} href={`#schalen-${family}`}>{(locale === "de" ? ["Klassisch", "Deluxe", "Häppchen"] : locale === "en" ? ["Classic", "Deluxe", "Bites"] : ["Klassiek", "Luxe", "Hapjes"])[i]} ↓</a>)}
+        <h1>{catalog.title}</h1>
+        <p className="platter-intro-text">{catalog.intro}</p>
+        <nav className="catalog-intro-links" aria-label={catalog.title}>
+          <a href="#visschalen">{catalog.platters} ↓</a><a href="#gourmet">{catalog.gourmet} ↓</a><a href="#maatwerk">{catalog.custom}</a><RequestListLink locale={locale} />
         </nav>
-        <a className="platter-advice-link" href={bestelContact(locale, nav("visschalen")).href} target="_blank" rel="noopener noreferrer">{t("adviesLink")}</a>
       </section>
-
-      {/* ── Samenstellen ──────────────────────────────────────────────────── */}
-      <Sectie grond="papier" id="samenstellen">
-        <SelectieAanvraag locale={locale} showSpecial={false} showBarbecue={false} showPlatters />
-      </Sectie>
+      <SeafoodCatalog locale={locale} />
 
       <Sectie grond="zand" id="maatwerk">
         <Kop titel={presentation.custom} intro={inquiryText(locale).intro} />

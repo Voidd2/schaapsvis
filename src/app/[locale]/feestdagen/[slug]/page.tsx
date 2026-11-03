@@ -4,7 +4,9 @@ import { Suspense } from "react";
 import { connection } from "next/server";
 import { PlatterNavigation } from "@/components/PlatterNavigation";
 import { platterFamily, platterLabels, platterOverviewHref, platterDetailHref } from "@/lib/platter-families";
-import { localizedPlatterProduct } from "@/lib/platter-product-text";
+import { catalogProduct } from "@/lib/seafood-catalog";
+import { ProductQuantity, RequestSummary, CatalogBackLink } from "@/components/catalog/RequestControls";
+import { catalogText } from "@/lib/catalog-copy";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,7 +16,6 @@ import { Schema } from "@/components/Schema";
 import { PaginaSlot } from "@/components/ui/PaginaKop";
 import { Kop, Sectie } from "@/components/ui/Sectie";
 import { BEDRIJF } from "@/lib/bedrijf";
-import { bestelContact } from "@/lib/bestel-contact";
 import {
   FEESTDAGEN_PRODUCTEN,
   feestdagenProduct,
@@ -57,7 +58,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!["nl", "en", "de"].includes(locale)) notFound();
   const source = feestdagenProduct(slug);
   if (!source) notFound();
-  const product = localizedPlatterProduct(source, locale);
+  const product = catalogProduct(source.slug, locale);
   return paginaMetadata({
     locale,
     pad: `/feestdagen/${product.slug}`,
@@ -72,22 +73,23 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
   if (!["nl", "en", "de"].includes(locale)) notFound();
   const source = feestdagenProduct(slug);
   if (!source) notFound();
-  const product = localizedPlatterProduct(source, locale);
+  const product = catalogProduct(source.slug, locale);
   const taal = locale === "en" || locale === "de" ? locale : "nl";
   const t = LABELS[taal];
   const family = platterFamily(slug);
   const note = family ? platterPresentation(locale).confirmation : t.note;
   // Render incoming selection context on the server too: the back link must
   // retain other families even before this page's JavaScript has loaded.
+  const incoming = await searchParams;
+  const origin = incoming.catalog === "feestdagen" ? "feestdagen" : incoming.catalog === "visschalen" ? "visschalen" : null;
   const selection = new URLSearchParams();
   if (family) {
     await connection();
-    for (const [key, value] of Object.entries(await searchParams)) {
+    for (const [key, value] of Object.entries(incoming)) {
       for (const entry of Array.isArray(value) ? value : value === undefined ? [] : [value]) selection.append(key, entry);
     }
   }
-  const contact = bestelContact(locale, `${product.naam} (${platterPrice(product, locale)})`);
-  const related = gerelateerdeFeestdagenProducten(source).map(item => localizedPlatterProduct(item, locale));
+  const related = gerelateerdeFeestdagenProducten(source).map(item => catalogProduct(item.slug, locale));
   const url = `${BEDRIJF.domein}/${locale}/feestdagen/${product.slug}`;
   const productSchema = {
     "@context": "https://schema.org",
@@ -114,7 +116,8 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
       { naam: product.naam, pad: `/feestdagen/${product.slug}` },
     ])]} />
 
-    {family && <div className="section-wrap pt-6"><Suspense fallback={<Link className="platter-back-link" href={platterOverviewHref(locale, slug, selection.toString())}>{platterLabels[taal].back}</Link>}><PlatterNavigation locale={taal} slug={slug} mode="back" /></Suspense></div>}
+    {origin && <div className="section-wrap pt-6"><CatalogBackLink locale={locale} origin={origin} /></div>}
+    {family && !origin && <div className="section-wrap pt-6"><Suspense fallback={<Link className="platter-back-link" href={platterOverviewHref(locale, slug, selection.toString())}>{platterLabels[taal].back}</Link>}><PlatterNavigation locale={taal} slug={slug} mode="back" /></Suspense></div>}
     <section className="bg-[#f7f3ec]">
       <div className="mx-auto grid max-w-7xl gap-9 px-4 py-8 md:px-8 md:py-14 lg:grid-cols-[1.08fr_.92fr] lg:gap-14">
         <figure><div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white shadow-sm">
@@ -134,11 +137,13 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
           {family && <Suspense fallback={null}><PlatterNavigation locale={taal} slug={slug} mode="size" /></Suspense>}
           <p className="mt-5 text-sm leading-6 text-[#527080]">{note}</p>
           {family && <Link className="mt-4 underline underline-offset-4" href={platterOverviewHref(locale, slug, selection.toString()).replace(/#.*$/, "#maatwerk")}>{platterPresentation(locale).custom}</Link>}
-          <a href={contact.href} target="_blank" rel="noopener noreferrer" className="knop knop-rood mt-7 w-full sm:w-fit">{t.order}</a>
+          <ProductQuantity key={slug} slug={slug} locale={locale} />
+          <a href="#aanvraag" className="knop knop-rood mt-7 w-full sm:w-fit">{catalogText(locale).listLink} ↓</a>
         </div>
       </div>
     </section>
 
+    <div className="section-wrap py-8"><RequestSummary locale={locale} /></div>
     <Sectie grond="papier">
       <div className="grid gap-10 lg:grid-cols-[1fr_.85fr] lg:gap-16">
         <div>
@@ -169,7 +174,7 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
       <Kop label={t.season} titel={t.related} intro={t.relatedIntro} />
       <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {related.map((item) => <li key={item.slug} className="overflow-hidden rounded-xl bg-white shadow-sm">
-          <Link href={platterDetailHref(locale, item.slug, selection.toString())} className="group block h-full">
+          <Link href={origin ? `/${locale}/feestdagen/${item.slug}?catalog=${origin}` : platterDetailHref(locale, item.slug, selection.toString())} className="group block h-full">
             <div className="relative aspect-[4/3] overflow-hidden bg-[#eaf7fc]">
               <Image src={item.afbeelding} alt={platterPhotoAlt(item, locale)} fill sizes="(max-width: 640px) 100vw, 33vw" className="object-cover transition duration-500 group-hover:scale-[1.035]" />
             </div>
@@ -185,7 +190,7 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
     </Sectie>
 
     <PaginaSlot titel={product.naam} tekst={note} knoppen={[
-      { label: t.order, href: contact.href, extern: true },
+      { label: catalogText(locale).listLink, href: "#aanvraag" },
       { label: t.season, href: `/${locale}/feestdagen`, soort: "lijn" },
     ]} />
   </>;
