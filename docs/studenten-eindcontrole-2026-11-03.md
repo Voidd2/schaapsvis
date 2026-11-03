@@ -14,7 +14,7 @@ PR90 herstelt een gereproduceerde crash: de QR-encoder accepteerde17 bytes, de h
 | QR-capaciteit | CI decodeert korte code, productiegetrouw ondertekend formaat en500-byte-payload. Oude encoder faalt aantoonbaar op de normale API-waarde. |
 | Beveiliging/intrekken | Bestaande backendintegratietests voor herroepbare sessies, verlopen/hergebruikte QR, beheer/netwerk en fraudesignalen slagen. Dit vervangt geen fysieke kassascan. |
 | Uitloggen en Wallet | Uitloggen toont login; ongeconfigureerde Walletknoppen blijven verborgen. Wallet-activering is uitgesteld door eigenaar. |
-| E-mail | SMTP-simulatie STARTTLS/PLAIN/UTF-8 slaagt. Bestaande echte Gmail-authenticatiebewijzen staan in email-bezorging-audit.md. Geen nieuwe echte testmail verzonden. |
+| E-mail | SMTP-simulatie STARTTLS/PLAIN/UTF-8 slaagt. Eén nieuwe goedgekeurde Knoth-test met actuele MIME/template ontvangen in Gmail Spam, SPF/DKIM/DMARC PASS. Geen bewijs van betrouwbare inboxplaatsing of volledige Worker-registratiestroom. Zie email-bezorging-audit.md. |
 
 Gerichte ESLint, TypeScript, inhoudscontrole en backend/SMTP-tests slagen. GitHub Build245/run41717594451 en Member147/run41717594315 zijn groen, inclusief Next- en Cloudflare-build, QR-decodering en externe slotcontrole. De eerste CI-poging wees een ontbrekende optionele SWC-peer in de npm12-lockfile aan; opnieuw vastgelegd met npm10, daarna npm-ci-dry-run en CI groen.
 
@@ -38,6 +38,12 @@ De codecontrole vond daarnaast een verkeerde studentenmelding: een geschorste pa
 PR92 is gepubliceerd als main3a1ba27e32a83a276e29af21e74aaf845aec35d0. GitHub Build247/run41720766667 (inclusief externe sitepoort) slaagt en Codex-review heeft geen bevindingen. Cloudflare toont cf5fec4d als actieve versie en Ready59s; build93fd4368-4537-4e3b-9726-6aa47c20e188 hoort bij dezelfde maincommit. TypeScript, gerichte ESLint en zes lokale plus zes live-assetflows slagen. Bewijs in `../design-preview/student-inactive/` en `live-assets/`: JSON en screenshots met uitsluitend synthetische testdata. De echte sitebestanden zijn gebruikt, maar alle API-verzoeken onderschept; geen claim van een geslaagde echte intrekactie. De eigenaar is om de fysieke telefooncontrole gevraagd.
 
 1. Fysiek iOS-toestel: Safari, beginscherminstallatie, opnieuw openen, uitloggen/intrekken en opnieuw aanmelden. Een desktopemulatie is geen bewijs hiervan.
-2. Echte eigenaar/beheeracceptatie met een gecontroleerde teststudent: intrekken/herstellen en kassascan. Niet uitvoeren op willekeurige klantaccounts.
+2. Fysieke kassascan. Echte eigenaar/beheerintrek en herstel zijn inmiddels gecontroleerd zoals hieronder beschreven. Niet uitvoeren op willekeurige klantaccounts.
 3. Nieuwe werkelijke registratie-mailontvangst na de laatste mailwijziging. Eerdere SPF/DKIM/DMARC PASS en inboxontvangst zijn geen garantie voor toekomstige inboxplaatsing.
 4. Publieke lancering blijft afzonderlijk besluit; site blijft gesloten. Eigenaarinput voor echte foto's, actuele productetiketten, overige GBP-gegevens en Search Console-toegang blijft staan in de SEO-audit. Geen betaalde Walletactivering nodig voor de huidige scope.
+
+### Aanvulling 3 november, 21:34 UTC: echte beheerintrek/herstel afgerond
+
+Met de toegestane geïsoleerde browser en het bestaande beheeraccount is uitsluitend de bekende eigenaarstestpas tijdelijk geschorst en hersteld. De geschorste status bleef bestaan na een volledige reload en de pas stond in het blokkadefilter. Een verse login bevestigde daarna actief en afwezig uit het blokkadefilter; vervolgens is uitgelogd. Er waren vooraf nul actieve teststudent-sessies en nul open waarschuwingen; daarom is dit geen nieuwe test van sessie-intrekking. Geen andere student, verificatieverzoek, campagne of instelling gewijzigd.
+
+De testharness liep na herstel aanvankelijk op een verkeerde verwachting vast: de actieve pas was terecht niet meer zichtbaar onder het nog geselecteerde blokkadefilter. Cleanup bevestigde herstel; een afzonderlijke read-only vervolgtest met verse login slaagde. Rapporten behouden deze harnessfout. Artefacten buiten Git: `../design-preview/student-admin/admin-acceptance.json`, `admin-restored-check.json` en `restored-pass.png` met afgeschermde persoonsgegevens. De fysieke telefoon-/kassascan is hiermee niet bewezen.

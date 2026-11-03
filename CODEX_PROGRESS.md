@@ -2,6 +2,14 @@
 
 Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 
+## Echte beheeractie en eenmalige mailcontrole — 22:40 CET
+
+- De eerdere Chrome-dialoogblokkade is opgelost met de toegestane geïsoleerde browsertest. Alleen de bestaande eigenaarstestpas tijdelijk geblokkeerd en hersteld. Blokkade bleef na herladen bestaan en het blokkadefilter toonde de pas. Nieuwe aanmelding bevestigde daarna actief en afwezig uit het blokkadefilter. Beheersessies uitgelogd; geen andere studenten gewijzigd of verificatiemails via beheer verstuurd.
+- De testharness verwachtte na herstel ten onrechte een actieve pas in het nog geselecteerde blokkadefilter. Herstel is daarna afzonderlijk read-only gecontroleerd. Bewijs buiten Git: `../design-preview/student-admin/admin-acceptance.json`, `admin-restored-check.json`, `restored-pass.png`.
+- Eén nieuw expliciet goedgekeurd testbericht via bestaande Knoth STARTTLS met de actuele project-MIME en HTML-template: SMTP accepteerde het om 21:38:42 UTC. Gmail ontving het in **Spam**, ondanks SPF/DKIM/DMARC PASS. Geen DNS, secrets, abonnementen of appcode veranderd. De toestemming voor deze ene mail is verbruikt; niet automatisch opnieuw sturen.
+- Dit bewijst Knoth-bezorging met de actuele opmaak, niet de volledige Worker-registratiestroom of betrouwbare inboxplaatsing. Gmail noemt overeenkomst met eerder als spam herkende berichten; de precieze oorzaak is onbekend. Mailacceptatie blijft open; zie `docs/email-bezorging-audit.md`.
+- Resterend: fysieke iOS/beginschermcontrole, fysieke kassascan, mailacceptatie en de eerder vastgelegde eigenaarinput/lanceringsbeslissing. Herhaal voltooide beheer- of bouwtests niet zonder nieuwe aanleiding.
+
 ## Geblokkeerde en verlopen studentenpas onderscheiden
 
 - Echte eigenaarstoegang tot studentenbeheer bevestigd. Native bevestigingsdialoog blokkeert de Chrome-extensie; intrekken/herstellen daarom nog niet afgetekend. Verse tab bevestigt dat de bekende testpas actief is gebleven. Geen mails of aanvragen verstuurd.
@@ -143,7 +151,7 @@ Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 - 2 november: ontwerpronde via PR #68 samengevoegd als `2c5ffad`. Site-Worker `5cf0b65f` is 100% Ready; nieuwe homepage en navigatie op schaapsvishandel.nl bevestigd. Homepage, menu, assortiment, gegroepeerde visschalen, feestdagenvolgorde, locaties en studententypografie behouden het bestaande palet. Details, screenshots en controles: `docs/ontwerpafspraken.md`. Recente gebruikerskeuze: Wallet-activering uitstellen, volledige accountacceptatietest aan het einde.
 
 1. Voer voor de studentenpas nog één acceptatietest uit op een echt iOS-toestel: normale Safari, PWA-installatie, uitloggen/intrekken en opnieuw aanmelden. De server-, database- en browsertests zijn afgerond; deze fysieke apparaattest kan alleen met een eigenaarstoestel worden afgetekend.
-2. Laat een beheerder vanaf het toegestane account én vertrouwde netwerk de live beveiligingspagina openen en één gecontroleerde intrek-/herstelactie uitvoeren. De onbevoegde route is al aantoonbaar fail-closed getest.
+2. Echte intrek-/herstelactie op de eigenaarstestpas is op 3 november afgetekend; de fysieke kassascan blijft open. De onbevoegde route is al aantoonbaar fail-closed getest.
 3. Google en Apple Wallet-activering zijn op verzoek van de eigenaar uitgesteld; geen accounts, certificaten of abonnementen aanmaken. De eerdere voorbereidingen blijven bewaard in `docs/wallet-integratieplan.md` en zijn geen huidig uitvoeringswerk.
 
 ## Model- en tokenkeuze
