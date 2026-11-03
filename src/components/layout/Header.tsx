@@ -22,17 +22,40 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
 
+  const headerRoot = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    if (!open) return;
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setOpen(false);
-        menuButton.current?.focus();
-      }
+    const root = headerRoot.current;
+    if (!root) return;
+    const close = (restore = false) => {
+      const active = root.querySelector<HTMLDetailsElement>("details[open]");
+      if (active) { active.open = false; if (restore) active.querySelector("summary")?.focus(); }
+      setOpen(false);
+      if (restore && open) menuButton.current?.focus();
     };
-    document.addEventListener("keydown", closeOnEscape);
-    return () => document.removeEventListener("keydown", closeOnEscape);
+    const outside = (event: PointerEvent) => {
+      const target = event.target as Node;
+      if (!root.contains(target)) close();
+      else root.querySelectorAll<HTMLDetailsElement>("details[open]").forEach(menu => { if (!menu.contains(target)) menu.open = false; });
+    };
+    const escape = (event: KeyboardEvent) => { if (event.key === "Escape") close(true); };
+    const closeOnResize = () => close();
+    const toggle = (event: Event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLDetailsElement) || !target.open) return;
+      root.querySelectorAll<HTMLDetailsElement>("details[open]").forEach(other => { if (other !== target) other.open = false; });
+    };
+    window.addEventListener("resize", closeOnResize);
+    document.addEventListener("pointerdown", outside);
+    document.addEventListener("keydown", escape);
+    root.addEventListener("toggle", toggle, true);
+    return () => { window.removeEventListener("resize", closeOnResize); document.removeEventListener("pointerdown", outside); document.removeEventListener("keydown", escape); root.removeEventListener("toggle", toggle, true); };
   }, [open]);
+  useEffect(() => {
+    // Browser back and route changes close every navigation surface.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setOpen(false);
+    headerRoot.current?.querySelectorAll<HTMLDetailsElement>("details[open]").forEach(menu => { menu.open = false; });
+  }, [pathname]);
 
   const p = (pad: string) => `/${locale}${pad}`;
 
@@ -69,12 +92,9 @@ export function Header() {
   const logo = BEELD.logoLiggend.bestand || BEELD.logoBadge.bestand;
 
   return (
-    <div className="sticky top-0 z-50" onKeyDown={event => {
-      if (event.key !== "Escape") return;
-      const details = (event.target as HTMLElement).closest("details");
-      if (details) { details.open = false; details.querySelector("summary")?.focus(); }
-    }} onClick={event => {
+    <div ref={headerRoot} className="site-header sticky top-0 z-50" onClick={event => {
       if (!(event.target as HTMLElement).closest("a")) return;
+      setOpen(false);
       event.currentTarget.querySelectorAll("details[open]").forEach(details => details.removeAttribute("open"));
     }}>
       {/* ── Informatiebalk ──────────────────────────────────────────────── */}
@@ -82,7 +102,7 @@ export function Header() {
         className="text-[0.72rem] tracking-wide"
         style={{ backgroundColor: "var(--navy-dark)", color: "rgba(250,246,239,0.72)" }}
       >
-        <div className="max-w-7xl 2xl:max-w-[90rem] mx-auto px-4 h-8 flex items-center justify-between gap-4">
+        <div className="site-container h-8 flex items-center justify-between gap-4">
           <span className="hidden sm:inline">{ADRES_REGEL}</span>
           <WinkelStatus />
           <a
@@ -98,7 +118,7 @@ export function Header() {
       <header
         style={{ backgroundColor: "var(--cream)", borderBottom: "1px solid var(--linen)" }}
       >
-        <div className="max-w-7xl 2xl:max-w-[90rem] mx-auto px-4 flex items-center justify-between gap-3 lg:gap-6 min-h-[4.4rem] py-2">
+        <div className="site-header-row site-container flex items-center justify-between gap-3 lg:gap-6 min-h-[4.4rem] py-2">
           <Link href={p("")} className="min-w-0 leading-none flex items-center gap-3">
             {/* Het ronde logo, zodra de eigenaar het aanlevert. Klein gehouden:
                 een grote badge in de kop duwt de navigatie van de rand en maakt
@@ -137,7 +157,7 @@ export function Header() {
             </span>
           </Link>
 
-          <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="hidden min-[1440px]:flex items-center justify-end gap-x-2 text-[0.86rem]">
+          <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="hidden min-[1280px]:flex items-center justify-end gap-x-2 text-[0.86rem]">
             {primaryLinks.map(({ href, label }, index) => {
               const children = href === p("/assortiment") ? productLinks : href === p("/ons-verhaal") ? storyLinks : [];
               return <div key={href} className="nav-theme">
@@ -151,11 +171,11 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-3 shrink-0">
-            <div className="hidden min-[1440px]:block" style={{ color: "var(--charcoal)" }}>
+            <div className="hidden min-[1280px]:block" style={{ color: "var(--charcoal)" }}>
               <LanguageSwitcher />
             </div>
 
-            <details className="hidden min-[1440px]:block relative">
+            <details className="hidden min-[1280px]:block relative">
               <summary
                 className="cursor-pointer list-none whitespace-nowrap border px-2.5 py-2 text-sm font-semibold rounded-md hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                 style={{ color: "var(--navy)", borderColor: "var(--linen)" }}
@@ -179,7 +199,7 @@ export function Header() {
               </div>
             </details>
 
-            <details className="hidden min-[1440px]:block relative">
+            <details className="hidden min-[1280px]:block relative">
               <summary
                 className="cursor-pointer list-none whitespace-nowrap border px-2.5 py-2 text-sm font-semibold rounded-md hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                 style={{ color: "var(--navy)", borderColor: "var(--linen)" }}
@@ -214,7 +234,7 @@ export function Header() {
             <button
               type="button"
               ref={menuButton}
-              className="min-[1440px]:hidden p-2 -mr-2 rounded-md transition-colors hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+              className="min-[1280px]:hidden p-2 -mr-2 rounded-md transition-colors hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
               style={{ color: "var(--navy)" }}
               onClick={() => setOpen(!open)}
               aria-expanded={open}
@@ -230,10 +250,10 @@ export function Header() {
         {open && (
           <div
             id="mobile-navigation"
-            className="min-[1440px]:hidden max-h-[calc(100dvh-6.4rem)] overflow-y-auto overscroll-contain"
+            className="min-[1280px]:hidden max-h-[calc(100dvh-6.4rem)] overflow-y-auto overscroll-contain"
             style={{ backgroundColor: "var(--cream)", borderTop: "1px solid var(--linen)" }}
           >
-            <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="max-w-7xl 2xl:max-w-[90rem] mx-auto px-4 py-2">
+            <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="site-container py-2">
               {primaryLinks.map(({ href, label }, index) => <div key={href}>
                 <Link href={href} onClick={() => setOpen(false)} aria-current={isActief(href) ? "page" : undefined} className={`mobile-main-link ${index === 0 ? "nav-season" : ""}`}>{label}</Link>
                 {(href === p("/assortiment") ? productLinks : href === p("/ons-verhaal") ? storyLinks : []).map(link => <Link className="mobile-sub-link" key={link.href} href={link.href} onClick={() => setOpen(false)}>{link.label} →</Link>)}

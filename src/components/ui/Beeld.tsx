@@ -93,6 +93,7 @@ marktWoensdag:["Schaap’s fish stall at Leiden’s Wednesday market","Schaap’
 marktVoorschoten:["Schaap’s fish stall by Hoogvliet in Voorschoten","Schaap’s Fischstand bei Hoogvliet in Voorschoten"],
 historie1938:["Schaap’s Vishandel in Leiden around its founding in 1938","Schaap’s Vishandel in Leiden um die Gründung 1938"],
 historie1960:["Schaap’s Vishandel, Leiden, in the 1960s","Schaap’s Vishandel in Leiden in den 1960er Jahren"],
+historie2018:["Schaap’s Vishandel in 2018","Schaap’s Vishandel im Jahr 2018"],
 historie1980:["Schaap’s Vishandel, Leiden, in the 1980s","Schaap’s Vishandel in Leiden in den 1980er Jahren"],
 historie2000:["Aldert Haasnoot at Schaap’s Vishandel in Leiden","Aldert Haasnoot bei Schaap’s Vishandel in Leiden"],
 historieNu:["The team at Schaap’s Vishandel, Leiden, today","Das heutige Team von Schaap’s Vishandel in Leiden"],

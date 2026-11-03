@@ -8,13 +8,14 @@ import {
   useContext,
   useEffect,
   useMemo,
-  useRef,
   useState,
   type ReactNode,
 } from "react";
 import {
   bewaarMandje,
   bewaarSamenstelling,
+  leesMandje,
+  leesSamenstelling,
   type MandjeRegel,
 } from "@/lib/mandje";
 import { LEGE_SAMENSTELLING, type Samenstelling } from "@/lib/visschaal";
@@ -43,32 +44,32 @@ const Context = createContext<WinkelwagenWaarde | null>(null);
  *
  * Eén plek waar staat wat iemand wil bestellen, zodat de knop rechtsboven, het
  * paneel en het bestelformulier hetzelfde weten. Alles staat ook in
- * `localStorage`: wie de configurator invult, een dag later terugkomt en dan pas
- * bestelt, hoeft niet opnieuw te beginnen.
+ * `sessionStorage`: navigeren en herladen in dit tabblad behouden de selectie.
+ * Er worden geen klantgegevens of serverbestellingen opgehaald.
  */
 export function WinkelwagenProvider({ children }: { children: ReactNode }) {
   const [regels, setRegels] = useState<MandjeRegel[]>([]);
   const [samenstelling, setSamenstelling] = useState<Samenstelling>(LEGE_SAMENSTELLING);
   const [open, zetOpen] = useState(false);
-  const geladen = useRef(false);
+  const [geladen, setGeladen] = useState(false);
 
   // De opslag bestaat op de server niet, dus dit kan pas na de eerste render.
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setRegels([]);
-    setSamenstelling(LEGE_SAMENSTELLING);
-    geladen.current = true;
+    setRegels(leesMandje());
+    setSamenstelling(leesSamenstelling());
+    setGeladen(true);
   }, []);
 
   useEffect(() => {
-    if (!geladen.current) return;
+    if (!geladen) return;
     bewaarMandje(regels);
-  }, [regels]);
+  }, [regels, geladen]);
 
   useEffect(() => {
-    if (!geladen.current) return;
+    if (!geladen) return;
     bewaarSamenstelling(samenstelling);
-  }, [samenstelling]);
+  }, [samenstelling, geladen]);
 
   const verwijder = useCallback((slug: string) => {
     setRegels((vorige) => vorige.filter((r) => r.slug !== slug));

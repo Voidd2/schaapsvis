@@ -23,7 +23,8 @@ const basis = BEDRIJF.domein;
  *    verwijzingen naar die talen. Verwijzen naar een Duitse versie die er niet
  *    is, kost je de koppeling tussen de versies die er wél zijn.
  */
-const LAATSTE_WIJZIGING = new Date("2026-09-29");
+// Route content changed in this release; unknown dates are omitted rather than invented.
+const CONTENT_DATES: Record<string, string> = Object.fromEntries(["", "/visschalen", "/feestdagen", "/relatiegeschenken", "/ons-verhaal", "/blog", "/recepten"].map(route => [route, "2026-11-03"]));
 
 /** Pagina's die in nl, en én de bestaan. */
 const MEERTALIG: {
@@ -81,7 +82,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const taal of LOCALES) {
       regels.push({
         url: `${basis}/${taal}${pad}`,
-        lastModified: gewijzigd ?? LAATSTE_WIJZIGING,
+        lastModified: CONTENT_DATES[pad] ? new Date(CONTENT_DATES[pad]) : gewijzigd,
         changeFrequency: frequentie,
         priority: prioriteit,
         alternates,
@@ -93,7 +94,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const product of products) {
     const pad = `/assortiment/${product.slug}`;
     for (const taal of LOCALES) {
-      regels.push({url: `${basis}/${taal}${pad}`, lastModified: new Date("2026-09-29"), changeFrequency: "monthly", priority: 0.65, alternates: meertaligeAlternates(pad), images: productPhoto(product) ? [basis + productPhoto(product)!.src] : undefined});
+      regels.push({url: `${basis}/${taal}${pad}`, changeFrequency: "monthly", priority: 0.65, alternates: meertaligeAlternates(pad), images: productPhoto(product) ? [basis + productPhoto(product)!.src] : undefined});
     }
   }
 
@@ -103,7 +104,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const taal of LOCALES) {
       regels.push({
         url: `${basis}/${taal}${pad}`,
-        lastModified: new Date("2026-11-02"),
+        lastModified: new Date("2026-11-03"),
         changeFrequency: "weekly",
         priority: 0.72,
         alternates: meertaligeAlternates(pad),
@@ -115,12 +116,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // ── Volledig vertaalde artikelen en recepten ─────────────────────────────
   for (const post of blogPosts) {
     const pad = `/blog/${post.slug}`;
-    for (const taal of LOCALES) regels.push({url:`${basis}/${taal}${pad}`,lastModified:new Date("2026-09-29"),changeFrequency:"yearly",priority:0.5,alternates:meertaligeAlternates(pad),images:[basis + post.fotoUrl]});
+    for (const taal of LOCALES) regels.push({url:`${basis}/${taal}${pad}`,lastModified:new Date(post.bijgewerkt ?? post.datum),changeFrequency:"yearly",priority:0.5,alternates:meertaligeAlternates(pad),images:post.fotoUrl ? [basis + post.fotoUrl] : undefined});
   }
 
   for (const recept of recepten) {
     const pad = `/recepten/${recept.slug}`;
-    for (const taal of LOCALES) regels.push({url:`${basis}/${taal}${pad}`,lastModified:new Date("2026-09-29"),changeFrequency:"yearly",priority:0.5,alternates:meertaligeAlternates(pad),images:recept.fotoUrl ? [basis + recept.fotoUrl] : undefined});
+    for (const taal of LOCALES) regels.push({url:`${basis}/${taal}${pad}`,lastModified:recept.bijgewerkt ? new Date(recept.bijgewerkt) : undefined,changeFrequency:"yearly",priority:0.5,alternates:meertaligeAlternates(pad),images:recept.fotoUrl ? [basis + recept.fotoUrl] : undefined});
   }
 
   return regels;

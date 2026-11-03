@@ -249,3 +249,23 @@ Object.assign(BEELD.winkelGevel, originalGevel);
 assert.equal(BEELD.historie1938.bestand, originalHistory);
 assert.notEqual(BEELD.historieNu.alt, BEELD.historie1938.alt);
 console.log(`Shop checks passed: 12 variants, URL round trips/fallbacks, ${scenarios.length * 5} timezone/boundary cases.`);
+
+// Real old-cart helpers: add -> reload/read -> remove -> reload, malformed storage and separate sessions.
+const storage = () => { const values = new Map(); return {getItem:k=>values.get(k)??null,setItem:(k,v)=>values.set(k,String(v)),removeItem:k=>values.delete(k)}; };
+globalThis.localStorage=storage(); globalThis.sessionStorage=storage();
+const cart=load("src/lib/mandje.ts");
+localStorage.setItem(cart.MANDJE_OPSLAG, JSON.stringify([null,{slug:"removed"},{slug:"kabeljauwfilet",hoeveelheid:"500 gram"},{slug:"kabeljauwfilet"},{slug:"haring",hoeveelheid:42}]));
+assert.equal(cart.leesMandje().length,2); assert.equal(cart.leesMandje()[0].hoeveelheid,"500 gram"); assert.equal(cart.leesMandje()[1].hoeveelheid,"");
+assert.equal(localStorage.getItem(cart.MANDJE_OPSLAG),null);
+cart.bewaarMandje([cart.maakRegel("haring")]); assert.equal(cart.leesMandje()[0].slug,"haring");
+cart.bewaarMandje([]); assert.deepEqual(cart.leesMandje(),[]);
+localStorage.setItem(cart.MANDJE_OPSLAG,JSON.stringify([{slug:"haring"}])); assert.deepEqual(cart.leesMandje(),[]); // deliberate empty beats stale legacy
+localStorage.removeItem(cart.MANDJE_OPSLAG); globalThis.sessionStorage=storage(); assert.deepEqual(cart.leesMandje(),[]);
+const dates=load("src/lib/pickup-date.ts");
+assert.equal(dates.amsterdamToday(new Date("2026-11-03T23:30:00Z")),"2026-11-04");
+assert.equal(dates.amsterdamToday(new Date("2026-07-03T22:30:00Z")),"2026-07-04");
+assert.equal(dates.validPickupDate("2026-11-03",new Date("2026-11-03T23:30:00Z")),false);
+assert.equal(dates.validPickupDate("2026-11-04",new Date("2026-11-03T23:30:00Z")),true);
+assert.equal(dates.calendarDate("2027-02-29"),false); assert.equal(dates.calendarDate("2028-02-29"),true);
+assert.equal(dates.validPickupDate(""),true);
+console.log("Legacy cart migration/reload/removal/session isolation and Amsterdam pickup-date boundaries passed.");

@@ -1,3 +1,4 @@
+import { QUALITY_RECIPES } from "./quality-recipes";
 export type ReceptTag =
   | "Snel"
   | "Met de kids"
@@ -8,6 +9,7 @@ export type ReceptTag =
 
 export type Recept = {
   slug: string;
+  bijgewerkt?: string;
   title: string;
   subtitle: string;
   tijd: string;
@@ -477,6 +479,7 @@ const receptenOrigineel: Recept[] = [
 ];
 
 export const recepten: Recept[] = [
+  ...QUALITY_RECIPES,
   ...receptenOrigineel,
   ...receptenPraktisch,
 ].map((recept) => ({ ...recept, fotoUrl: RECEPT_FOTOS[recept.slug] ?? recept.fotoUrl }));

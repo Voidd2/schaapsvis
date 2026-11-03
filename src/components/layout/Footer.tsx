@@ -1,6 +1,5 @@
 import { openingSummary } from "@/lib/openingHours";
 import Link from "next/link";
-import { bestelContact } from "@/lib/bestel-contact";
 import { useTranslations, useLocale } from "next-intl";
 import { NewsletterSignup } from "@/components/shared/NewsletterSignup";
 import { BEDRIJF } from "@/lib/bedrijf";
@@ -43,7 +42,6 @@ export function Footer() {
     {
       kop: nav("assortiment"),
       links: [
-        { href: bestelContact(locale).href, label: bestelContact(locale).label },
         { href: p("/feestdagen"), label: locale === "de" ? "Festtage 2026" : locale === "en" ? "Festive season 2026" : "Feestdagen 2026" },
         { href: p("/relatiegeschenken"), label: locale === "de" ? "Firmengeschenke" : locale === "en" ? "Business gifts" : "Relatiegeschenken" },
         { href: p("/visschalen"), label: nav("visschalen") },
@@ -57,12 +55,9 @@ export function Footer() {
       links: [
         { href: p("/ons-verhaal"), label: nav("verhaal") },
         { href: p("/biologische-vis"), label: nav("betereVis") },
-        { href: p("/varlaks"), label: nav("varlaks") },
         { href: p("/studentenkorting"), label: locale === "de" ? "Studentenrabatt" : locale === "en" ? "Student discount" : "Studentenkorting" },
         { href: p("/account"), label: locale === "de" ? "Studentenkonto" : locale === "en" ? "Student account" : "Studentenaccount" },
-        { href: p("/account/klant"), label: locale === "de" ? "Kundenkonto" : locale === "en" ? "Customer account" : "Klantaccount" },
         { href: p("/recepten"), label: nav("recepten") },
-        { href: p("/viskalender"), label: nav("viswijzer") },
         { href: p("/blog"), label: nav("blog") },
         { href: p("/beeldverantwoording"), label: locale === "de" ? "Bildnachweise" : locale === "en" ? "Image credits" : "Beeldverantwoording" },
       ],
@@ -72,9 +67,6 @@ export function Footer() {
       links: [
         { href: p("/bezoek-ons"), label: nav("locaties") },
         { href: p("/contact"), label: nav("contact") },
-        { href: p("/viswinkel-leiden"), label: locale === "de" ? "Fischgeschäft Leiden" : locale === "en" ? "Fish shop Leiden" : "Viswinkel Leiden" },
-        { href: p("/marktkraam-leiden"), label: locale === "de" ? "Marktstand Leiden" : locale === "en" ? "Market stall Leiden" : "Marktkraam Leiden" },
-        { href: p("/viswinkel-voorschoten"), label: locale === "nl" ? "Marktkraam Voorschoten" : locale === "de" ? "Marktstand Voorschoten" : "Market stall Voorschoten" },
         { href: p("/too-good-to-go"), label: "Too Good To Go" },
       ],
     },
@@ -82,7 +74,7 @@ export function Footer() {
 
   return (
     <footer style={{ backgroundColor: "var(--navy-dark)", color: "rgba(250,246,239,0.75)" }}>
-      <div className="max-w-6xl mx-auto px-4 py-9 grid gap-8 md:grid-cols-[1.1fr_1fr] lg:grid-cols-[1fr_1fr_20rem]">
+      <div className="site-container py-9 grid gap-8 md:grid-cols-[1.1fr_1fr] lg:grid-cols-[1fr_1fr_20rem]">
         {/* ── Waar we zijn ──────────────────────────────────────────────── */}
         <div>
           {/* De ronde badge klein terug laten komen: herkenbaar, zonder dat de
@@ -160,7 +152,7 @@ export function Footer() {
         aria-label={t("kopPaginas")}
         style={{ borderTop: "1px solid rgba(250,246,239,0.14)" }}
       >
-        <div className="max-w-6xl mx-auto px-4 py-7 grid gap-8 sm:grid-cols-3">
+        <div className="site-container py-7 grid gap-8 sm:grid-cols-3">
           {groepen.map((groep) => (
             <div key={groep.kop}>
               <p className="kapitaal kapitaal-licht mb-3 text-sm tracking-[0.12em]">{groep.kop}</p>
@@ -182,7 +174,7 @@ export function Footer() {
       {/* ── Onderrand ────────────────────────────────────────────────────── */}
       <div style={{ borderTop: "1px solid rgba(250,246,239,0.14)" }}>
         <div
-          className="max-w-6xl mx-auto px-4 py-4 text-sm leading-6 flex flex-wrap gap-x-6 gap-y-2 justify-between"
+          className="site-container py-4 text-sm leading-6 flex flex-wrap gap-x-6 gap-y-2 justify-between"
           style={{ opacity: 0.72 }}
         >
           <span>
