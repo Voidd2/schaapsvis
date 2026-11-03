@@ -15,6 +15,7 @@ on:
       - "workers/**"
       - "scripts/build.mjs"
       - "scripts/check-build-target.mjs"
+      - "scripts/build-static-images.mjs"
       - "tsconfig.json"
       - "postcss.config.*"
       - "tailwind.config.*"
@@ -36,6 +37,7 @@ on:
       - "workers/**"
       - "scripts/build.mjs"
       - "scripts/check-build-target.mjs"
+      - "scripts/build-static-images.mjs"
       - "tsconfig.json"
       - "postcss.config.*"
       - "tailwind.config.*"
@@ -60,6 +62,7 @@ jobs:
       - run: npm run check:content
       - run: node scripts/check-shop-navigation.mjs
       - run: node scripts/check-build-target.mjs
+      - run: node scripts/build-static-images.mjs --check
       - run: npm run build
       - run: npm run build:cloudflare
 

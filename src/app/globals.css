@@ -724,7 +724,7 @@ summary::-webkit-details-marker {
   .nav-main-link:hover,.nav-main-link[aria-current="page"] { color: var(--navy); text-decoration: underline; text-underline-offset: 6px; }
   .nav-season { background: #b32632; color: white; border-radius: 4px; padding-inline: 12px; }
   .nav-season:hover,.nav-season[aria-current="page"] { color: white; }
-  .nav-disclosure summary { list-style: none; cursor: pointer; padding: 12px 5px; color: var(--navy); }
+  .nav-disclosure summary { list-style: none; cursor: pointer; min-width: 28px; min-height: 44px; text-align: center; padding: 12px 5px; color: var(--navy); }
   .nav-disclosure summary::-webkit-details-marker { display: none; }
   .nav-popover { position: absolute; top: 100%; left: 0; width: 235px; background: var(--cream); border: 1px solid var(--linen); padding: 8px; box-shadow: 0 8px 20px #06435f14; }
   .nav-popover a { display: block; padding: 12px; color: var(--navy); font-size: 1rem; }
@@ -1042,7 +1042,7 @@ body:has(#mobile-navigation) .catalog-cart-trigger { visibility: hidden; }
 }
 
 /* Master audit: readable supporting text, existing blue palette. */
-.kapitaal { font-size: .8rem; letter-spacing: .14em; }
+.kapitaal { font-size: .8rem; letter-spacing: .14em; color: var(--navy); }
 .kapitaal-licht { color: #c9e5ef; }
 .collection-category,.favorite-heading p { font-size: .8rem; color: #496875; }
 .collection-description { font-size: 1rem; color: #496875; }

@@ -43,15 +43,17 @@ try {
   await page.setViewportSize({width:390,height:844});
   for(const locale of ['nl','en','de']){
    const copy=JSON.parse(await fs.readFile(`src/messages/${locale}.json`,'utf8')).contactPage;
-   await page.goto(origin+`/${locale}/contact`);
+   await page.goto(origin+`/${locale}/contact`,{waitUntil:'networkidle'});
    const form=page.locator('form').filter({has:page.locator('textarea')});
    await form.getByLabel(copy.nameLabel,{exact:true}).fill('Local audit');
    await form.getByLabel(copy.messageLabel,{exact:true}).fill('Not sent');
    assert.equal(await form.evaluate(f=>f.checkValidity()),false);
    await form.getByLabel(copy.emailLabel,{exact:true}).fill('audit@example.invalid');
+   await page.waitForFunction(()=>document.querySelector('input[type="tel"]')?.required===false);
    assert.equal(await form.evaluate(f=>f.checkValidity()),true);
    await form.getByLabel(copy.emailLabel,{exact:true}).fill('');
    await form.getByLabel(copy.phoneLabel,{exact:true}).fill('+31 6 1234 5678');
+   await page.waitForFunction(()=>document.querySelector('input[type="email"]')?.required===false);
    assert.equal(await form.evaluate(f=>f.checkValidity()),true);
    await form.getByLabel(copy.phoneLabel,{exact:true}).fill('invalid phone');
    await form.getByRole('button',{name:copy.send,exact:true}).click();

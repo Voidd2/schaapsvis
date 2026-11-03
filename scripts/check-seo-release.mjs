@@ -43,6 +43,8 @@ await Promise.all(Array.from({length: concurrency}, async () => {
     const response = await fetch(origin + path, {redirect:'manual'});
     const html = await response.text();
     const problems = [];
+    const head=html.match(/<head\b[^>]*>([\s\S]*?)<\/head>/i)?.[1]||'';
+    if(!/name="description" content="[^"]+"/.test(head))problems.push('Description missing from initial document head');
     if (response.status !== 200) problems.push('HTTP ' + response.status);
     if (response.headers.get('x-robots-tag')?.includes('noindex')) problems.push('Header noindex');
     if (!/<title>[^<]+<\/title>/.test(html)) problems.push('Missing title');
@@ -106,7 +108,11 @@ await Promise.all(Array.from({length: concurrency}, async () => {
       }
     }
     if (problems.length) failures.push({path, problems});
-    pageResults.push({path, status:response.status, language, title, description, canonical, alternates, h1Count:(html.match(/<h1\b/g)||[]).length, problems});
+    // Keep the outline for editorial review. Dialog/aside headings need human context;
+    // do not blindly fail valid pages merely because a level is skipped.
+    const contentHtml=html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,'').match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1]||'';
+    const headings=[...contentHtml.matchAll(/<h([1-6])\b[^>]*>([\s\S]*?)<\/h\1>/gi)].map(m=>({level:Number(m[1]),text:m[2].replace(/<[^>]*>/g,'').trim()}));
+    pageResults.push({path, status:response.status, language, title, description, canonical, alternates, headings, h1Count:(html.match(/<h1\b/g)||[]).length, problems});
     pagesChecked++;
   }
 }));

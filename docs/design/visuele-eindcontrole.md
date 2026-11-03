@@ -19,7 +19,9 @@ Acht templates: homepage, assortiment, visschalen, feestdagen, bezoek-ons, vast 
 
 72 combinaties plus één vergrote-tekst/reflowtest. Geen horizontale overflow, kapotte geladen beelden of JavaScript-pageerrors in de laatste matrix. Aanvullend: contactvalidatie in NL/EN/DE; alle vijf ankers; bestaande mand-/focus-/Escape-/taal-/opslagtests. Er is niets verzonden.
 
-**Zoombeperking:** de geautomatiseerde test vergroot tekst tot200% bij683px reflow; dat is niet identiek aan echte Chrome-browserzoom200%. Die afzonderlijke handmatige controle blijft open. Ook is dit geen volledige WCAG-certificering of contrastcontrole van iedere mogelijke toestand.
+**Echte zoom aanvullend uitgevoerd:** `check-browser-zoom.mjs` gebruikt een nieuw geïsoleerd Chrome-profiel met echte pagezoom200% (DPR2, venster1366px, CSS-viewport675px, rootfont ongewijzigd17px). Acht templates slagen zonder overflow/pageerrors; fysieke-viewportbeelden via CDP staan in `zoom/`. De oude CSS-tekstvergroting is slechts een extra reflowtest. Geen volledige WCAG-certificering geclaimd.
+
+Lighthouse13.6.0 op de gebouwde Cloudflare-runtime: home, assortiment, visschalen en contact op mobiel/desktop na correcties allemaal accessibility100. Gevonden en verholpen: lichte kapitaallabels/kruimels/sociallinks, 18px-brede menu-uitklappers (nu28px), afwijkende toegankelijke namen van Bellen/fotolabels. Voor schermlezers blijven de zichtbare fotolabels behouden. Meetbeperkingen en prestaties staan in de technische audit.
 
 ## Screenshots
 

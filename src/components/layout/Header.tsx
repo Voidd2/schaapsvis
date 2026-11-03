@@ -226,7 +226,7 @@ export function Header() {
             <a
               href={`tel:${BEDRIJF.telefoon.e164}`}
               className="sm:hidden knop knop-rood !py-2.5 !px-3.5 !text-[0.8rem]"
-              aria-label={`${locale === "de" ? "Anrufen" : locale === "en" ? "Call" : "Bel"} ${BEDRIJF.telefoon.weergave}`}
+              aria-label={`${locale === "de" ? "Anrufen" : locale === "en" ? "Call" : "Bellen"} ${BEDRIJF.telefoon.weergave}`}
             >
               {locale === "de" ? "Anrufen" : locale === "en" ? "Call" : "Bellen"}
             </a>

@@ -2,15 +2,19 @@
 
 Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 
-## Masteraudit SEO en afwerking — gereed voor PR-review
+## Masteraudit SEO en afwerking — vervolgcontrole en PR #81
 
 - Basis main `b60f56e` na #79/#80; eigen branch `codex/master-seo-design-audit`, geen oude auditbranch overgenomen.
 - Contactantwoordkanaal client/server, echte recept/blog404, onbewezen voorraad/bezorgschema verwijderd, preview-noindex, contrast/leesbaarheid/footerreflow en vijf feestdagenankers. Homepagefavorieten via responsive Image; foto's/prijzen/porties/auth behouden.
 - Next- en Cloudflare-build, TypeScript, ESLint, content/shopchecks, negen geïsoleerde contactcases en mandacceptatie A–J slagen. Next én lokale Cloudflare:507 pagina's/519 linkdoelen/153 beelden, geen fouten; negen waarschuwingen voor drie ontbrekende gerechtfoto's. Beide runtimes ook met slotprofiel getest.
 - Browser:72 pagina/schermcombinaties + tekstvergroting, NL/EN/DE contact, vijf ankers; geen pageerrors/overflow/berichten. Externe Schema.org-codevalidatie 0 fouten/waarschuwingen; Google9 geldige onderdelen met niet-kritieke meldingen.
 - Bewijs en scope: `docs/seo/technische-audit.md`, `docs/design/visuele-eindcontrole.md`, acht auditdocumenten plus inventaris/resultaten; screenshots/voor-na `../design-preview/master-audit/overzicht.html`. SEO-skill bijgewerkt.
-- PR #81 geopend: https://github.com/Voidd2/schaapsvis/pull/81 (codecommit `efc662d`; GitHub Build site en Content integrity groen). Cloudflare-browser home/contact/feestdagen slaagt; beeldverkleining is nog niet geconfigureerd in Vinext. De gemeten besparing geldt alleen voor Next; gratis build-time variantstrategie of later goedgekeurde optimizer is P2-vervolg.
-- Open: echte browserzoom200% en Lighthouse/veldmeting; GSC-toegang geweigerd voor huidige Google-aanmelding; eigenaar bevestigt NAP-afwijkingen en drie gerechtfoto's. Productie is niet geopend/gepubliceerd. Na PR-review eventuele merge, juiste Cloudflare-commit/Ready en livecontrole. Geen leden-Worker/secrets/DNS gewijzigd, geen geld uitgegeven.
+- PR #81: https://github.com/Voidd2/schaapsvis/pull/81. Eerste codecommit `efc662d` had groene CI en Codex-review zonder bevindingen; nieuwe vervolgwijzigingen moeten opnieuw door CI/review.
+- Gratis build-time beeldvarianten uitgevoerd: 28 WebP’s van zeven ongewijzigde homepagefoto’s. Next én Cloudflare-browser laden101.092 bytes mobiel/251.948 desktop i.p.v.6.965.315 bytes originelen (98,5%/96,4% minder beeldbytes). Manifest/SHA/dimensies gecontroleerd, CI-check toegevoegd. Geen nieuwe dienst of dependency nodig in het project.
+- Echte Chromezoom200% op acht templates geslaagd. Nieuwe Cloudflare-matrix73 controles, drie talen contact, vijf ankers zonder fouten of verzendingen. Lighthouse13.6.0 vier templates × mobiel/desktop: accessibility100, best-practices100; performance72–76 mobiel/92–94 desktop. Mobiele veld-LCP is niet bewezen. Kruimelcontrast, fotolabelnamen, Bellen-label en menu-raakvlak gecorrigeerd; hero eager/high-priority.
+- Metadata staat met `htmlLimitedBots` nu in initiële HEAD op beide runtimes. Crawl test dit. Alle507 headingoutlines gecontroleerd zonder niveausprongen; description-overlap beoordeeld. Receptmetadata noemt de gelokaliseerde gerechtnaam, echte productvarianten blijven apart.
+- Nieuwe Next/Cloudflare-builds, TypeScript, ESLint, inhoud/shopchecks en mandacceptatie A–J slagen. Beschadigd lokaal gegenereerd `.next/dev/types`-bestand apart gezet en opnieuw gegenereerd; geen sourcefout. Definitieve crawls/slotresultaten in audit-results.json; ruwe logs/screenshots/Lighthouse buiten repo in master-audit.
+- Open: volledige redactionele claim-/EN/DE-controle, performance op echte edge na deploy, requirementmatrix en publicatiebewijs. GSC-toegang ontbreekt; eigenaar bevestigt NAP-afwijkingen en drie gerechtfoto’s. Productie niet geopend/gepubliceerd. Geen leden-Worker/secrets/DNS gewijzigd, geen geld uitgegeven. Volgende uitvoering begint bij deze open punten, herhaalt geslaagde tests alleen na relevante wijzigingen.
 
 ## Bestelproces vaste visschalen — live afgerond
 

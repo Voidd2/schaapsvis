@@ -98,7 +98,7 @@ export function Footer() {
               {BEDRIJF.telefoon.weergave}
             </a>
           </address>
-          <div className="flex gap-4 mt-3 text-sm" style={{ opacity: 0.65 }}>
+          <div className="flex gap-4 mt-3 text-sm" style={{ opacity: 0.9 }}>
             <a
               href={BEDRIJF.socials.facebook}
               target="_blank"
@@ -175,7 +175,7 @@ export function Footer() {
       <div style={{ borderTop: "1px solid rgba(250,246,239,0.14)" }}>
         <div
           className="site-container py-4 text-sm leading-6 flex flex-wrap gap-x-6 gap-y-2 justify-between"
-          style={{ opacity: 0.72 }}
+          style={{ opacity: 0.9 }}
         >
           <span>
             &copy; {jaar} {BEDRIJF.naam} &middot;{" "}

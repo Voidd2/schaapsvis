@@ -9,7 +9,7 @@ export function CatalogPhoto({ src, alt, name, locale, platter }: { src: string;
   const open = locale === "en" ? "Enlarge photo" : locale === "de" ? "Foto vergrößern" : "Vergroot foto";
   const close = locale === "en" ? "Close" : locale === "de" ? "Schließen" : "Sluiten";
   return <>
-    <button type="button" className="seafood-photo" aria-label={`${open}: ${name}`} disabled={!ready} onClick={() => dialog.current?.showModal()}>
+    <button type="button" className="seafood-photo" aria-label={`${platter ? `${t.photoLabel} — ` : ""}${open}: ${name}`} disabled={!ready} onClick={() => dialog.current?.showModal()}>
       <Image src={src} alt={alt} width={900} height={675} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
       <span>{platter ? t.photoLabel : open} <span aria-hidden="true"> ⌕</span></span>
     </button>

@@ -11,16 +11,16 @@ Deze ronde levert de aangetoonde P0-correcties en belangrijkste P1-verbeteringen
 | Canonicals | Gecontroleerd en goed | Eén eigen productiecanonical per sitemaproute, queryparameters uitgesloten. Domeinredirects live na merge opnieuw controleren. |
 | Hreflang | Gecontroleerd en goed | NL/EN/DE en x-default verwijzen wederkerig naar bestaande canonieke routes. HTML-taal klopt. |
 | Sitemap | Gecontroleerd en goed | 507 publieke canonieke routes; account, beheer en bestellen uitgesloten. Datums niet op verzoekmoment gezet. |
-| Metadata | Gecontroleerd en goed | Titels, descriptions, OG en Twitter aanwezig; geen exacte dubbelen of titels boven de ingestelde 75-tekenwaarschuwing. Semantisch bijna identieke teksten nog redactioneel beoordelen. |
-| HTML / headings | Gecontroleerd en goed | Eén H1 per sitemaproute; product-/inhoudslinks en JSON-LD staan in server-HTML. Geen volledige handmatige headingaudit van 507 pagina’s geclaimd. |
+| Metadata | Gecorrigeerd | Titels, descriptions, OG en Twitter aanwezig. Metadata staat nu ook in de initiële documentkop op Vinext. Receptdescription noemt het gerecht in NL/EN/DE. Overlapkandidaten beoordeeld; echte productvarianten blijven apart. |
+| HTML / headings | Gecontroleerd en goed | 507 server-HTML-outlines: één H1, geen overgeslagen niveaus; inhoud/links/JSON-LD server-side aanwezig. Geen volledige handmatige redactionele keuring van 507 pagina’s geclaimd. |
 | Structured data | Gecorrigeerd | Onbewezen voorraad en generiek bezorggebied verwijderd. FAQ-emissie verwijderd, zichtbare antwoorden behouden. Externe codevalidatie geldig; zie afzonderlijk rapport. |
 | Interne links / redirects | Gecorrigeerd | Niet-bestaande recepten/blogs geven nu 404. Twaalf onbekende detailroutes, oude Duitse route en negen bezorgredirects gecontroleerd. Bestaande routes behouden. |
 | Lokale SEO | Wacht op eigenaar | Externe telefoon- en dinsdagtijdverschillen vastgelegd. Geen bedrijfsgegevens geraden; huidige centrale bron behouden. |
 | Contentkwaliteit | Gecontroleerd / nog open | Inventaris van 67 producten, 23 vaste feestdagenproducten, 40 recepten en 19 blogs. Gerichte paginarollen vastgelegd; geen massale nieuwe content. Uitputtende redactionele herbeoordeling blijft vervolgwerk. |
 | Image SEO | Gecorrigeerd / wacht op eigenaar | Homepagefavorieten via responsive Image; foto’s ongewijzigd. Drie recepten missen een gerechtfoto, negen taalwaarschuwingen blijven terecht zichtbaar. |
-| Performance | Gecorrigeerd / nog open | Gemeten transferreductie homepage onder Next; Cloudflare verkleint nog niet. Lab is geen veldmeting; geen Lighthouse- of INP-score verzonnen. Zie hieronder. |
+| Performance | Gecorrigeerd / nog open | Gratis statische homepagevarianten werken ook op Cloudflare: 98,5% minder beeldbytes mobiel. Lighthouse mobiel72–76/desktop92–94; geen veldmeting. Zie meetcondities hieronder. |
 | Mobiel / tablet / desktop | Gecontroleerd en goed | Acht templates op negen gevraagde afmetingen; formulier, mandje, ankers en taalbediening getest. |
-| Toegankelijkheid | Gecorrigeerd / nog open | Hoofdknopcontrast, ondersteunende tekst en footerreflow verbeterd. Vergroting van tekst getest; echte 200% browserzoom en volledige WCAG-audit nog open. |
+| Toegankelijkheid | Gecorrigeerd | Echte Chrome200%-zoom op acht templates. Vier templates × mobiel/desktop scoren100 in Lighthouse-accessibility na correcties aan contrast, menu-raakvlakken en toegankelijke namen. Geen WCAG-certificering. |
 
 ## Gevonden fouten en uitgevoerde correcties
 
@@ -36,6 +36,11 @@ Deze ronde levert de aangetoonde P0-correcties en belangrijkste P1-verbeteringen
 | Middel | Homepage laadde twee zware oorspronkelijke favoriete productbeelden | Bestaande beelden via responsive Next Image; circa 7,37 MB naar 0,62 MB mobiel in lokale meting. |
 | Laag | Lange feestdagenpagina had geen compacte categorieoriëntatie | Vijf vertaalde ankerlinks, 44px bediening en scroll-margin. |
 | Laag | Kleine categorieën/bijschriften/acties | Grotere, donkerdere ondersteunende tekst met behoud van hiërarchie. |
+| Middel | Vinext liet description buiten de documentkop staan | `htmlLimitedBots: /.*/` schakelt metadata-streaming uit; lokale contentmetadata staat nu direct in HEAD. Crawl controleert dit expliciet. |
+| Middel | Cloudflare viel bij Next Image terug op zware originelen | 28 lokale WebP-varianten van zeven bestaande homepagefoto’s; browser kiest via picture/srcset. Originele SHA256 gecontroleerd; geen betaalde beeldservice. |
+| Middel | Smalle menu-uitklappers en te lichte kruimelpaden | Minimaal28px breed/44px hoog, donker-kruimeltekst opacity0,85. |
+| Laag | Zichtbare fotolabels en mobiele beltekst kwamen niet overeen met de toegankelijke naam | Aria-label bevat nu het zichtbare label in alle talen. |
+| Laag | Korte receptdescriptions maakten ongerelateerde gerechten nauwelijks onderscheidbaar | Lokale zichtbare gerechtnaam vóór de bestaande ondertitel; geen nieuwe voedingsclaim. |
 
 De gevraagde Bitter-koppen en absolute reviewdatums waren op de actuele main al aanwezig. Daarom niet opnieuw herschreven. Reviewauteurs, beoordelingen, prijzen, porties, ingrediënten, foto's, studenten- en accountlogica zijn niet aangepast. Er zijn geen echte aanvragen of berichten verstuurd.
 
@@ -63,15 +68,34 @@ De meetmethode registreert LCP en layoutverschuivingen, maar is **geen Lighthous
 
 De aanvullende mobiele browsercontrole op de gebouwde Cloudflare-runtime slaagt op home/contact/feestdagen (geladen beelden en geen pageerrors). Daarbij is vastgesteld dat `/_next/image` met302 naar het oorspronkelijke bestand doorverwijst: de huidige `vinext()`-configuratie heeft geen optimizeradapter. De geïnstalleerde `vinext/dist/image/image-adapters-virtual.d.ts` en `vinext/dist/check.js` bevestigen dat een IMAGES-binding alleen niet voldoende is. **De 91,6% besparing geldt voor Next, niet als bewezen Cloudflare-winst.**
 
-Geen betaalde adapter/dienst geactiveerd. P2-vervolg: kies een kostenvrije build-time variantstrategie voor bestaande beelden, of configureer pas na kostencontrole de runtime-optimizer; meet daarna de echte Cloudflare-bytes opnieuw. Originele beelden en links behouden. Ruw bewijs: `cf-browser.json` en de lokale previewlog naast de repository.
+Dit runtimeverschil is inmiddels voor de homepage opgelost met kostenvrije build-time varianten (`build-static-images.mjs`, manifest en `StaticResponsiveImage`). Zeven originele foto’s leveren28 WebP-bestanden. SHA256 bewaakt ongewijzigde originelen; CI controleert manifest, resolutie en bestanden. De Cloudflare-browser laadt alleen de gekozen varianten: **101.092 bytes mobiel390, 251.948 bytes desktop1440**, tegenover6.965.315 bytes aan dezelfde zeven originelen (**98,5% / 96,4% minder beeldbytes**). Dit betreft beeldbestanden, niet de totale pagina. Bewijs: `static-images-cloudflare.json`; geen betaalde adapter geactiveerd.
+
+### Lighthouse en echte zoom, aanvullende ronde
+
+Lighthouse13.6.0 CLI, geïnstalleerd buiten de repo; Chrome headless, lokale gebouwde Cloudflare-runtime, mobiele standaard simulatie en desktop preset. HTML/JSON-rapporten: `../design-preview/master-audit/lh-final-*.report.*`. Lokale server zonder productiecompressie; CPU- en andere lokale activiteit kunnen timing beïnvloeden. Geen CrUX/INP-veldresultaat.
+
+| Template | Performance mobiel / desktop | Gesimuleerde LCP mobiel / desktop | CLS mobiel / desktop |
+|---|---|---|---|
+| Home | 76 / 94 | 6,49s / 1,60s | 0 / 0 |
+| Assortiment | 73 / 92 | 9,43s / 1,82s | 0 / 0 |
+| Visschalen | 72 / 94 | 12,68s / 1,67s | 0,044 / 0,010 |
+| Contact | 75 / 93 | 8,17s / 1,72s | 0 / 0 |
+
+Alle acht audits: accessibility100 en best-practices100. SEO92 door productiecanonical versus de lokale testhost, niet door een foutieve productiecanonical; de eigen507-routecontrole valideert canonical/hreflang tegen het echte domein. Back-forward-cache beperkt door huidige frameworkverbindingen. Hero nu eager/high-priority en direct vindbaar in HTML. Restpunten: gedeelde CSS/JS en prestaties op de echte edge, vóór publieke lancering opnieuw meten. Een voldoende mobiele veld-LCP is dus **niet bewezen**.
+
+Echte Chrome-pagezoom200% via nieuw geïsoleerd testprofiel: DPR2, fysiek1366px venster, CSS-viewport675px inclusief scrollbar, ongewijzigd17px rootfont. Acht templates zonder overflow of pageerrors; CDP-screenshots in `zoom/`. Dit vervangt de eerdere beperking van alleen CSS-tekstvergroting.
+
+### Heading- en descriptioncontrole
+
+Alle507 server-outlines bevatten headings, geen sprongen in niveau. Per taal metadata-overlapkandidaten gezocht met token-Jaccard>0,70 (geen SEO-score): kleine/grote trio’s, zalm/tonijn en schaalformaten delen terecht feitelijke samenstellingswoorden. Hun prijzen/hoeveelheden en eigen routes blijven behouden. De generieke EN/DE-taglines voor zalmsalade/schol zijn verholpen door de gerechtnaam in alle receptdescriptions op te nemen. Ruw besluitbewijs: `editorial-outline-review.json`. Dit vervangt geen volledige voedselveiligheids- of vertaalreview.
 
 ## Nog open, in volgorde
 
 1. PR review en na goedgekeurde merge de echte Cloudflare-commit, Ready-status, afscherming en representatieve live routes bevestigen. Deze audit opent productie niet.
 2. Eigenaar: primaire telefoon, afwijkende dinsdagopening, juiste Google Bedrijfsprofielgegevens en drie gerechtfoto’s bevestigen; zie [NAP](nap-controle.md) en [recepten](recepten-matrix.md).
 3. Search Console: huidige Google-aanmelding toont **“Je hebt geen toegang tot deze property”** voor `sc-domain:schaapsvishandel.nl`. Geen zoekprestaties of indexeringsdata beschikbaar. Toegang regelen vóór lancering; geen nieuwe betaalde dienst nodig.
-4. Cloudflare-beeldvarianten: zie het aangetoonde adapterverschil hierboven. Daarna Lighthouse onder reproduceerbare mobiele throttling, echte browserzoom200%, uitgebreidere toegankelijkheidscontrole en diagnose van incidentele layoutverschuivingen. Geen misleidende CWV-goedkeuring geven op localhost.
-5. Redactionele vervolgcontrole: semantische description-overlap, volledige headinghiërarchie, elke voedings-/herkomstclaim en alle EN/DE hoofdteksten. Matrix is inventaris en prioritering, geen culinair certificaat.
+4. Performance op de echte edge opnieuw meten na deploy; mobiel lab is nog onvoldoende bewijs voor goede veld-LCP. Lokale beeldvarianten, Lighthouse en echte browserzoom zijn uitgevoerd. Geen misleidende CWV-goedkeuring geven op localhost.
+5. Redactionele vervolgcontrole: elke voedings-/herkomstclaim en alle EN/DE hoofdteksten. Metadata-overlap en headinghiërarchie zijn aanvullend gecontroleerd. Matrix blijft inventaris en prioritering, geen culinair certificaat.
 6. Na openbare lancering de [checklist](lancering-checklist.md) en het [90-dagenplan](monitoring-90-dagen.md) uitvoeren. Het slot blijft tot afzonderlijk eigenaarsbesluit aan.
 
 ## Onderzoeksbronnen
@@ -83,6 +107,7 @@ De specifieke schema-, lokale bron- en concurrentiebevindingen staan in [structu
 ## Gewijzigde bestanden
 
 - `.agents/skills/schaaps-seo/SKILL.md`
+- `.github/workflows/build-validation.yml`
 - `CODEX_PROGRESS.md`
 - `docs/design/visuele-eindcontrole.md`
 - `docs/seo/audit-results.json`
@@ -95,10 +120,42 @@ De specifieke schema-, lokale bron- en concurrentiebevindingen staan in [structu
 - `docs/seo/route-inventory.csv`
 - `docs/seo/structured-data.md`
 - `docs/seo/technische-audit.md`
+- `next.config.ts`
+- `public/images/responsive/coquilles-vlees-895f3886eda1-1280.webp`
+- `public/images/responsive/coquilles-vlees-895f3886eda1-320.webp`
+- `public/images/responsive/coquilles-vlees-895f3886eda1-640.webp`
+- `public/images/responsive/coquilles-vlees-895f3886eda1-960.webp`
+- `public/images/responsive/haring-98f6369c0585-1280.webp`
+- `public/images/responsive/haring-98f6369c0585-320.webp`
+- `public/images/responsive/haring-98f6369c0585-640.webp`
+- `public/images/responsive/haring-98f6369c0585-960.webp`
+- `public/images/responsive/hollandse-garnalen-solt-935777210211-1280.webp`
+- `public/images/responsive/hollandse-garnalen-solt-935777210211-320.webp`
+- `public/images/responsive/hollandse-garnalen-solt-935777210211-640.webp`
+- `public/images/responsive/hollandse-garnalen-solt-935777210211-960.webp`
+- `public/images/responsive/kibbeling-schaapstray-86e128880cb1-1280.webp`
+- `public/images/responsive/kibbeling-schaapstray-86e128880cb1-320.webp`
+- `public/images/responsive/kibbeling-schaapstray-86e128880cb1-640.webp`
+- `public/images/responsive/kibbeling-schaapstray-86e128880cb1-960.webp`
+- `public/images/responsive/scholfilet-8e3ada79b862-1280.webp`
+- `public/images/responsive/scholfilet-8e3ada79b862-320.webp`
+- `public/images/responsive/scholfilet-8e3ada79b862-640.webp`
+- `public/images/responsive/scholfilet-8e3ada79b862-960.webp`
+- `public/images/responsive/varlaks-zalm-rauw-ai-541621dcf5fc-1280.webp`
+- `public/images/responsive/varlaks-zalm-rauw-ai-541621dcf5fc-320.webp`
+- `public/images/responsive/varlaks-zalm-rauw-ai-541621dcf5fc-640.webp`
+- `public/images/responsive/varlaks-zalm-rauw-ai-541621dcf5fc-960.webp`
+- `public/images/responsive/zalm-citroen-dille-2f1ea1f890f5-1280.webp`
+- `public/images/responsive/zalm-citroen-dille-2f1ea1f890f5-320.webp`
+- `public/images/responsive/zalm-citroen-dille-2f1ea1f890f5-640.webp`
+- `public/images/responsive/zalm-citroen-dille-2f1ea1f890f5-960.webp`
 - `scripts/audit-content-data.mjs`
 - `scripts/audit-design-browser.mjs`
 - `scripts/audit-lab-performance.mjs`
+- `scripts/build-static-images.mjs`
+- `scripts/check-browser-zoom.mjs`
 - `scripts/check-seo-release.mjs`
+- `scripts/check-static-images-browser.mjs`
 - `src/app/[locale]/barbecue-gourmet/page.tsx`
 - `src/app/[locale]/bezorgen/[gemeente]/page.tsx`
 - `src/app/[locale]/bezorgen/page.tsx`
@@ -115,12 +172,15 @@ De specifieke schema-, lokale bron- en concurrentiebevindingen staan in [structu
 - `src/app/api/bericht/route.ts`
 - `src/app/globals.css`
 - `src/components/LocalLandingPage.tsx`
+- `src/components/StaticResponsiveImage.tsx`
+- `src/components/catalog/CatalogPhoto.tsx`
 - `src/components/catalog/SeafoodCatalog.tsx`
 - `src/components/layout/Footer.tsx`
 - `src/components/layout/Header.tsx`
 - `src/components/ui/Sectie.tsx`
 - `src/lib/contact-validation.ts`
 - `src/lib/seo.ts`
+- `src/lib/static-image-variants.json`
 - `src/messages/de.json`
 - `src/messages/en.json`
 - `src/messages/nl.json`

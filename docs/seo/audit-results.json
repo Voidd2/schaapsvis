@@ -1714,5 +1714,330 @@
     ],
     "errors": []
   },
-  "imageOptimizationCaveat": "Transfer savings measured on Next only. Current Vinext config lacks optimizer adapter; Cloudflare local image requests redirect to original assets. No paid adapter enabled."
+  "imageOptimizationCaveat": "Transfer savings measured on Next only. Current Vinext config lacks optimizer adapter; Cloudflare local image requests redirect to original assets. No paid adapter enabled.",
+  "cloudflare": {
+    "pagesChecked": 507,
+    "internalLinksChecked": 519,
+    "imagesChecked": 153,
+    "recipesWithDishImage": 111,
+    "deliveryRedirectsChecked": 9,
+    "publicRobots": true,
+    "failures": [],
+    "warnings": [
+      {
+        "path": "/nl/recepten/haringsalade-appel-biet",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/en/recepten/haringsalade-appel-biet",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/de/recepten/haringsalade-appel-biet",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/nl/recepten/haring-komkommer-borrelhapjes",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/en/recepten/haring-komkommer-borrelhapjes",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/de/recepten/haring-komkommer-borrelhapjes",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/nl/recepten/makreel-aardappel-ovenschotel",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/en/recepten/makreel-aardappel-ovenschotel",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/de/recepten/makreel-aardappel-ovenschotel",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      }
+    ]
+  },
+  "staticImages": {
+    "origin": "http://localhost:3037",
+    "results": [
+      {
+        "width": 390,
+        "chosen": [
+          {
+            "src": "/images/responsive/zalm-citroen-dille-2f1ea1f890f5-640.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/varlaks-zalm-rauw-ai-541621dcf5fc-320.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/kibbeling-schaapstray-86e128880cb1-320.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/hollandse-garnalen-solt-935777210211-320.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/scholfilet-8e3ada79b862-320.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/coquilles-vlees-895f3886eda1-320.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/haring-98f6369c0585-320.webp",
+            "loaded": true
+          }
+        ],
+        "bytes": 101092,
+        "originalBytes": 6965315,
+        "reductionPercent": 98.5,
+        "errors": []
+      },
+      {
+        "width": 1440,
+        "chosen": [
+          {
+            "src": "/images/responsive/zalm-citroen-dille-2f1ea1f890f5-960.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/varlaks-zalm-rauw-ai-541621dcf5fc-640.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/kibbeling-schaapstray-86e128880cb1-640.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/hollandse-garnalen-solt-935777210211-640.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/scholfilet-8e3ada79b862-640.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/coquilles-vlees-895f3886eda1-640.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/haring-98f6369c0585-640.webp",
+            "loaded": true
+          }
+        ],
+        "bytes": 251948,
+        "originalBytes": 6965315,
+        "reductionPercent": 96.4,
+        "errors": []
+      }
+    ]
+  },
+  "actualBrowserZoom": {
+    "results": [
+      {
+        "route": "/nl",
+        "outer": 1366,
+        "inner": 675,
+        "dpr": 2,
+        "scroll": 675,
+        "rootFont": "17px"
+      },
+      {
+        "route": "/nl/assortiment",
+        "outer": 1366,
+        "inner": 675,
+        "dpr": 2,
+        "scroll": 675,
+        "rootFont": "17px"
+      },
+      {
+        "route": "/nl/visschalen",
+        "outer": 1366,
+        "inner": 675,
+        "dpr": 2,
+        "scroll": 675,
+        "rootFont": "17px"
+      },
+      {
+        "route": "/nl/feestdagen",
+        "outer": 1366,
+        "inner": 675,
+        "dpr": 2,
+        "scroll": 675,
+        "rootFont": "17px"
+      },
+      {
+        "route": "/nl/bezoek-ons",
+        "outer": 1366,
+        "inner": 675,
+        "dpr": 2,
+        "scroll": 675,
+        "rootFont": "17px"
+      },
+      {
+        "route": "/nl/contact",
+        "outer": 1366,
+        "inner": 675,
+        "dpr": 2,
+        "scroll": 675,
+        "rootFont": "17px"
+      },
+      {
+        "route": "/nl/feestdagen/visschotel-klein-3-5-pers",
+        "outer": 1366,
+        "inner": 675,
+        "dpr": 2,
+        "scroll": 675,
+        "rootFont": "17px"
+      },
+      {
+        "route": "/nl/recepten/zalm-citroen-dille",
+        "outer": 1366,
+        "inner": 675,
+        "dpr": 2,
+        "scroll": 675,
+        "rootFont": "17px"
+      }
+    ],
+    "errors": []
+  },
+  "lighthouse": [
+    {
+      "file": "lh-final-assortiment-desktop.report.json",
+      "categories": {
+        "performance": 0.92,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 0.92
+      },
+      "lcpMs": 1821.9826854003395,
+      "cls": 0,
+      "environment": "Local Cloudflare build, simulated throttling; not field CWV. Canonical points to production, not localhost."
+    },
+    {
+      "file": "lh-final-assortiment-mobile.report.json",
+      "categories": {
+        "performance": 0.73,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 0.92
+      },
+      "lcpMs": 9432.634998429543,
+      "cls": 0,
+      "environment": "Local Cloudflare build, simulated throttling; not field CWV. Canonical points to production, not localhost."
+    },
+    {
+      "file": "lh-final-contact-desktop.report.json",
+      "categories": {
+        "performance": 0.93,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 0.92
+      },
+      "lcpMs": 1714.7386335181595,
+      "cls": 0,
+      "environment": "Local Cloudflare build, simulated throttling; not field CWV. Canonical points to production, not localhost."
+    },
+    {
+      "file": "lh-final-contact-mobile.report.json",
+      "categories": {
+        "performance": 0.75,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 0.92
+      },
+      "lcpMs": 8169.133074516221,
+      "cls": 0,
+      "environment": "Local Cloudflare build, simulated throttling; not field CWV. Canonical points to production, not localhost."
+    },
+    {
+      "file": "lh-final-home-desktop.report.json",
+      "categories": {
+        "performance": 0.94,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 0.92
+      },
+      "lcpMs": 1600.0136303873524,
+      "cls": 0,
+      "environment": "Local Cloudflare build, simulated throttling; not field CWV. Canonical points to production, not localhost."
+    },
+    {
+      "file": "lh-final-home-mobile.report.json",
+      "categories": {
+        "performance": 0.76,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 0.92
+      },
+      "lcpMs": 6490.999,
+      "cls": 0,
+      "environment": "Local Cloudflare build, simulated throttling; not field CWV. Canonical points to production, not localhost."
+    },
+    {
+      "file": "lh-final-visschalen-desktop.report.json",
+      "categories": {
+        "performance": 0.94,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 0.92
+      },
+      "lcpMs": 1666.5048000000002,
+      "cls": 0.01023068403319661,
+      "environment": "Local Cloudflare build, simulated throttling; not field CWV. Canonical points to production, not localhost."
+    },
+    {
+      "file": "lh-final-visschalen-mobile.report.json",
+      "categories": {
+        "performance": 0.72,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 0.92
+      },
+      "lcpMs": 12679.22230879046,
+      "cls": 0.04443583847559303,
+      "environment": "Local Cloudflare build, simulated throttling; not field CWV. Canonical points to production, not localhost."
+    }
+  ],
+  "headingReview": {
+    "pages": 507,
+    "outlines": 507,
+    "skippedLevels": [],
+    "comparison": "Token-set Jaccard > 0.70 within each language; candidate detection, not a semantic quality score",
+    "decisions": [
+      {
+        "pages": "zalm-sashimi-ongesneden / tonijn-sashimi-ongesneden",
+        "decision": "Retain: different fish, separate actual products; shared preparation words are factual."
+      },
+      {
+        "pages": "luxe-trio-klein / luxe-vistrio",
+        "decision": "Retain: same composition, different size/price; do not invent a different recipe."
+      },
+      {
+        "pages": "visschotel-klein-2-3-pers / visschotel-klein-3-5-pers",
+        "decision": "Retain: separately selectable fixed variants with different portions/price."
+      },
+      {
+        "pages": "zomerse-zalmsalade / gegrilde-schol (EN/DE)",
+        "decision": "Fix: recipe description now includes visible localized dish title before tagline; applied consistently to NL/EN/DE."
+      }
+    ]
+  },
+  "cloudflareLockedFinal": {
+    "profile": "locked",
+    "failures": []
+  },
+  "nextLockedFinal": {
+    "profile": "locked",
+    "failures": []
+  }
 }

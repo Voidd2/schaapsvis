@@ -1,0 +1,184 @@
+{
+  "/images/editorial/varlaks-zalm-rauw-ai.webp": {
+    "sha256": "541621dcf5fca6363b5a80b2cf4e798665d4503f9fa293d103bc1068251aad3f",
+    "originalBytes": 174212,
+    "variants": [
+      {
+        "src": "/images/responsive/varlaks-zalm-rauw-ai-541621dcf5fc-320.webp",
+        "width": 320,
+        "bytes": 14672
+      },
+      {
+        "src": "/images/responsive/varlaks-zalm-rauw-ai-541621dcf5fc-640.webp",
+        "width": 640,
+        "bytes": 46454
+      },
+      {
+        "src": "/images/responsive/varlaks-zalm-rauw-ai-541621dcf5fc-960.webp",
+        "width": 960,
+        "bytes": 82048
+      },
+      {
+        "src": "/images/responsive/varlaks-zalm-rauw-ai-541621dcf5fc-1280.webp",
+        "width": 1280,
+        "bytes": 121122
+      }
+    ]
+  },
+  "/images/editorial/kibbeling-schaapstray.png": {
+    "sha256": "86e128880cb134e250f5ea6bb0f32ec31e065a9f2c069829c16a42e202e337e0",
+    "originalBytes": 2082153,
+    "variants": [
+      {
+        "src": "/images/responsive/kibbeling-schaapstray-86e128880cb1-320.webp",
+        "width": 320,
+        "bytes": 12710
+      },
+      {
+        "src": "/images/responsive/kibbeling-schaapstray-86e128880cb1-640.webp",
+        "width": 640,
+        "bytes": 38764
+      },
+      {
+        "src": "/images/responsive/kibbeling-schaapstray-86e128880cb1-960.webp",
+        "width": 960,
+        "bytes": 73624
+      },
+      {
+        "src": "/images/responsive/kibbeling-schaapstray-86e128880cb1-1280.webp",
+        "width": 1280,
+        "bytes": 113532
+      }
+    ]
+  },
+  "/images/assortiment-internet/hollandse-garnalen-solt.jpeg": {
+    "sha256": "935777210211f6b9ae739f0a6f74a8fd069afa90e0abc4e7b76557106bd32f77",
+    "originalBytes": 4290014,
+    "variants": [
+      {
+        "src": "/images/responsive/hollandse-garnalen-solt-935777210211-320.webp",
+        "width": 320,
+        "bytes": 11718
+      },
+      {
+        "src": "/images/responsive/hollandse-garnalen-solt-935777210211-640.webp",
+        "width": 640,
+        "bytes": 33876
+      },
+      {
+        "src": "/images/responsive/hollandse-garnalen-solt-935777210211-960.webp",
+        "width": 960,
+        "bytes": 63850
+      },
+      {
+        "src": "/images/responsive/hollandse-garnalen-solt-935777210211-1280.webp",
+        "width": 1280,
+        "bytes": 106404
+      }
+    ]
+  },
+  "/images/dirks/scholfilet.webp": {
+    "sha256": "8e3ada79b862f430589b1260b0d9981dcba05bda8a0b7111e187cfe349ce71ec",
+    "originalBytes": 100126,
+    "variants": [
+      {
+        "src": "/images/responsive/scholfilet-8e3ada79b862-320.webp",
+        "width": 320,
+        "bytes": 9114
+      },
+      {
+        "src": "/images/responsive/scholfilet-8e3ada79b862-640.webp",
+        "width": 640,
+        "bytes": 23668
+      },
+      {
+        "src": "/images/responsive/scholfilet-8e3ada79b862-960.webp",
+        "width": 960,
+        "bytes": 40470
+      },
+      {
+        "src": "/images/responsive/scholfilet-8e3ada79b862-1280.webp",
+        "width": 1280,
+        "bytes": 55744
+      }
+    ]
+  },
+  "/images/dirks/coquilles-vlees.webp": {
+    "sha256": "895f3886eda1f289eb1aac7582dd069668317667040f0319d1dc7a50bb3d0ee2",
+    "originalBytes": 68832,
+    "variants": [
+      {
+        "src": "/images/responsive/coquilles-vlees-895f3886eda1-320.webp",
+        "width": 320,
+        "bytes": 5880
+      },
+      {
+        "src": "/images/responsive/coquilles-vlees-895f3886eda1-640.webp",
+        "width": 640,
+        "bytes": 14802
+      },
+      {
+        "src": "/images/responsive/coquilles-vlees-895f3886eda1-960.webp",
+        "width": 960,
+        "bytes": 25272
+      },
+      {
+        "src": "/images/responsive/coquilles-vlees-895f3886eda1-1280.webp",
+        "width": 1280,
+        "bytes": 35492
+      }
+    ]
+  },
+  "/images/dirks/haring.webp": {
+    "sha256": "98f6369c05859e638b7bc2617d0e4546ffdd1c24188396b1c0ba2f195ba15007",
+    "originalBytes": 63744,
+    "variants": [
+      {
+        "src": "/images/responsive/haring-98f6369c0585-320.webp",
+        "width": 320,
+        "bytes": 5700
+      },
+      {
+        "src": "/images/responsive/haring-98f6369c0585-640.webp",
+        "width": 640,
+        "bytes": 14332
+      },
+      {
+        "src": "/images/responsive/haring-98f6369c0585-960.webp",
+        "width": 960,
+        "bytes": 25376
+      },
+      {
+        "src": "/images/responsive/haring-98f6369c0585-1280.webp",
+        "width": 1280,
+        "bytes": 34944
+      }
+    ]
+  },
+  "/images/recepten/zalm-citroen-dille.webp": {
+    "sha256": "2f1ea1f890f53ff09908b4bada7dee3e0528f4dc6c0a80985741358e3f0dfeb9",
+    "originalBytes": 186234,
+    "variants": [
+      {
+        "src": "/images/responsive/zalm-citroen-dille-2f1ea1f890f5-320.webp",
+        "width": 320,
+        "bytes": 13900
+      },
+      {
+        "src": "/images/responsive/zalm-citroen-dille-2f1ea1f890f5-640.webp",
+        "width": 640,
+        "bytes": 41298
+      },
+      {
+        "src": "/images/responsive/zalm-citroen-dille-2f1ea1f890f5-960.webp",
+        "width": 960,
+        "bytes": 80052
+      },
+      {
+        "src": "/images/responsive/zalm-citroen-dille-2f1ea1f890f5-1280.webp",
+        "width": 1280,
+        "bytes": 118154
+      }
+    ]
+  }
+}

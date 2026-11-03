@@ -1,5 +1,5 @@
 import { PlatterPhotoNote } from "@/components/PlatterPhotoNote";
-import Image from "next/image";
+import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { localLocations } from "@/lib/local-pages-copy";
@@ -108,7 +108,7 @@ export default async function HomePage({
           {/* De winkel zelf, zodra die foto er is. Geen close-up van vis: die
               heeft elke vishandel, een gevel aan de Herenstraat niet. */}
           <div className="home-hero-image-wrap">
-            <Image src={heroBeeld.src} alt={heroBeeld.alt} width={1400} height={933} sizes="(max-width: 800px) 100vw, 50vw" className="home-hero-image" fetchPriority="high" />
+            <Image src={heroBeeld.src} alt={heroBeeld.alt} width={1400} height={933} sizes="(max-width: 800px) 100vw, 50vw" className="home-hero-image" loading="eager" fetchPriority="high" />
             <span className="home-hero-image-label">{heroBeeld.caption}</span>
           </div>
         </div>
