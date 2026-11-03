@@ -39,7 +39,7 @@ export function SeafoodCatalog({ locale, festive = false }: Props) {
     {festive && <Featured {...props} />}
     <section id="visschalen" className="seafood-section" aria-labelledby="main-platters-title">
       <div className="catalog-heading"><h2 id="main-platters-title">{t.platters}</h2><p>{t.platterIntro}</p></div>
-      <p className="catalog-example-note"><strong>{platterPresentation(locale).photoLabel}.</strong> {platterPresentation(locale).photoText}</p>
+      <p className="catalog-example-note"><strong>{platterPresentation(locale).photoLabel}.</strong> {locale === "en" ? "The photo is an example; the quantity varies with the selected platter." : locale === "de" ? "Das Foto ist ein Beispiel; die Menge richtet sich nach der gewählten Platte." : "De foto is een voorbeeld; de hoeveelheid verschilt per schaal."}</p>
       <div className="seafood-grid">{MAIN_PLATTERS.map(slug => <ProductCard key={slug} {...props} slug={slug} />)}</div>
     </section>
     {festive && <GiftIdeas locale={locale} />}
