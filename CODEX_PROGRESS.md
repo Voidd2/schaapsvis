@@ -5,7 +5,8 @@ Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 ## Eigen logo als favicon en footerbadge
 
 - Nieuwe eigenaarupload ongewijzigd bewaard als public/images/brand/schaapsvis-logo-original.png. Afgeleide browsericonen32/192px, Apple180px en ICO; oude favicon.svg blijft hetzelfde logo tonen. Footerbadge88px met vaste afmetingen en lazy loading, bestaande tekstheader behouden.
-- Alleen de exacte icoonpaden zijn bereikbaar buiten het sitewachtwoord; geen bredere asset- of authenticatie-uitzondering. Gerichte ESLint, typegen/TypeScript en inhoudscontrole slagen. Browser- en publicatiebewijs volgt.
+- Alleen de exacte icoonpaden zijn bereikbaar buiten het sitewachtwoord; geen bredere asset- of authenticatie-uitzondering. Gerichte ESLint, typegen/TypeScript en inhoudscontrole slagen. GitHub Build242/run41714649863: Next/Cloudflare-build en externe slotcontrole geslaagd.
+- PR88 samengevoegd als 5b8d781; Cloudflare a45bb9ca Ready/100%, build876703bb-0024-4bbb-a54e-5d85646e1efd. Vijf live icoonbestanden komen overeen met de bron (SVG alleen LF/CRLF genormaliseerd). Geisoleerde Chromecontrole lokaal en live op390/1440px: icoonmetadata correct, footerlogo88x88 geladen, geen overflow of pageerrors. Lokaal gesloten profiel houdt pagina en oorspronkelijke bronfoto afgeschermd. Geen berichten/formulieren verstuurd. Bewijs: ../design-preview/master-audit/brand-icons-live.json en logo-live-390.png/logo-live-1440.png. Werkelijk toevoegen op een fysieke telefoon is niet getest.
 
 ## Masteraudit SEO en afwerking — vervolgcontrole en PR #81
 
