@@ -13,6 +13,8 @@ Momentopname: 3 november 2026. Geen externe vermeldingen gewijzigd. Centrale web
 
 ## Eigenaarslijst
 
+Publicatiebewijs: [PR86](https://github.com/Voidd2/schaapsvis/pull/86), main `70bc65e`, Cloudflare-siteversie `7b95e527` Ready/100%. GitHub Build240 en Content70 slagen. Tien live route/schermcombinaties op390/1440px bevestigen alle bel- en WhatsApp-links, bedrijfs-schema en de drie contacttalen. Geen telefoongesprekken, berichten of profielwijzigingen uitgevoerd. Resultaten/screenshots: `design-preview/master-audit/live-contact-confirmed.json` naast de repo.
+
 1. Afgerond: belnummer071 512 4810 volgens Maps en eigenaarsinstructie; WhatsApp06 2481 1678.
 2. Afgerond: eigenaar bevestigt dinsdag09:00; maandag blijft gesloten. De afwijkende externe dinsdagvermelding moet nog worden gecorrigeerd door de bronhouder.
 3. Controleer het Google Bedrijfsprofiel met dezelfde naam/adresgegevens, aparte feestdagentijden en website op de canonieke https-host.
