@@ -504,11 +504,12 @@ body:has(#mobile-navigation) .sv-whatsapp { opacity: 0; visibility: hidden; poin
   }
 
   .knop-rood {
-    background-color: var(--rood);
+    /* Gebruik bestaand donkerblauw voor voldoende tekstcontrast. */
+    background-color: var(--rood-dark);
     color: #fff;
   }
   .knop-rood:hover {
-    background-color: var(--rood-dark);
+    background-color: var(--navy);
   }
 
   .knop-navy {
@@ -988,7 +989,7 @@ summary::-webkit-details-marker {
 @media(max-width:639px) { .seafood-card-body > h3 { min-height:0; } }
 
 /* A single catalogue basket, shared across overview and fixed product routes. */
-.catalog-help { font-size: .95rem; line-height: 1.65; margin: 16px 0 24px; }
+.catalog-help { font-size: 1.0625rem; line-height: 1.65; margin: 16px 0 24px; }
 .catalog-help a { text-decoration: underline; text-underline-offset: 3px; font-weight: 600; }
 .catalog-cart-trigger { position: fixed; right: 22px; bottom: max(22px, env(safe-area-inset-bottom)); z-index: 70; width: 60px; height: 60px; display: grid; place-items: center; border-radius: 50%; background: var(--navy); color: white; box-shadow: 0 4px 18px #063f5933; border: 2px solid white; cursor: pointer; }
 .catalog-cart-count { position: absolute; top: -6px; right: -5px; min-width: 25px; padding: 2px 5px; border-radius: 20px; background: #a61f2b; color: white; font-size: 13px; line-height: 20px; font-weight: 700; border: 2px solid white; }
@@ -1040,3 +1041,6 @@ body:has(#mobile-navigation) .catalog-cart-trigger { visibility: hidden; }
  .cart-heading h2 { font-size: 1.45rem; }
  .product-detail-heading .kapitaal { display: none; }
 }
+
+/* Voorbereidingstermijn bij een gewenste afhaling vandaag. */
+.request-leadtime-note { padding: 12px 14px; border-left: 4px solid var(--navy); background: var(--sand); color: var(--ink); font-size: 1rem; line-height: 1.55; }
