@@ -88,7 +88,11 @@ export function proxy(request: NextRequest) {
   }
 
   // Normale meertalige routing voor bezoekers mét toegang (of als de site open is).
-  return intlMiddleware(request);
+  const response = intlMiddleware(request);
+  // Even an authorised preview visitor must not expose indexable preview HTML.
+  // This only changes crawler instructions; the access decision above is unchanged.
+  if (opSlot) response.headers.set("X-Robots-Tag", "noindex, nofollow");
+  return response;
 }
 
 /**

@@ -5,7 +5,7 @@ import { Schema } from "@/components/Schema";
 import { JsonLd } from "@/components/JsonLd";
 import { Sectie, Vragen } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
-import { paginaMetadata, kruimelSchema, vraagSchema } from "@/lib/seo";
+import { paginaMetadata, kruimelSchema } from "@/lib/seo";
 import { bestelContact } from "@/lib/bestel-contact";
 import { BEDRIJF } from "@/lib/bedrijf";
 import { calendarCopy, localizedCalendar } from "@/lib/calendar-localization";
@@ -23,7 +23,7 @@ export default async function ViskalenderPage({params}:Props){
  const index=Number(new Intl.DateTimeFormat("nl-NL",{month:"numeric",timeZone:"Europe/Amsterdam"}).format(new Date()))-1;
  const source=locale==="en"?"https://www.mosselen.nl/en/mussel-info/season/":locale==="de"?"https://www.mosselen.nl/de/muschel-info/saison/":"https://www.mosselen.nl/nl/mosselinfo/seizoen/";
  return <>
-  <JsonLd locale={locale}/><Schema data={[vraagSchema(c.questions),kruimelSchema(locale,[{naam:BEDRIJF.naamKort,pad:"/"},{naam:c.name,pad:"/viskalender"}])]}/>
+  <JsonLd locale={locale}/><Schema data={[kruimelSchema(locale,[{naam:BEDRIJF.naamKort,pad:"/"},{naam:c.name,pad:"/viskalender"}])]}/>
   <PaginaKop kruimels={[{naam:BEDRIJF.naamKort,href:`/${locale}`},{naam:c.name}]} label={c.label} titel={c.title} intro={c.intro} knoppen={[{label:bestelContact(locale).label,href:bestelContact(locale).href,extern:true},{label:c.range,href:`/${locale}/assortiment`,soort:"lijn"}]} feiten={[{label:c.mussels,waarde:c.musselSeason},{label:c.herring,waarde:c.herringSeason},{label:c.supply,waarde:c.ask}]}/>
   <DezeMaand locale={locale} maandIndex={index}/>
   <MaandStrip maanden={months.map(m=>({naam:m.naam,afkorting:m.afkorting}))} maandIndex={index} label={c.months}/>

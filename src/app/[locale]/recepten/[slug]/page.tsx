@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { permanentRedirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ReceptTools } from "@/components/recepten/ReceptTools";
 import { ReceptFoto } from "@/components/recepten/ReceptFoto";
@@ -20,12 +20,15 @@ export async function generateMetadata({params}:Props):Promise<Metadata>{
  const r=localizeRecipe(raw,locale);
  const shortTitleSuffix=locale==="en"?"Fish recipe from Schaap’s":locale==="de"?"Fischrezept von Schaap’s":"Visrecept van Schaap’s";
  const title=r.title.length<30?`${r.title} | ${shortTitleSuffix}`:`${r.title} | Schaap’s Vis`;
- const meta=paginaMetadata({locale,pad:`/recepten/${slug}`,title,description:r.subtitle.slice(0,160),image:r.fotoUrl||"/og-image.png"});
+ // Short taglines alone can describe unrelated dishes; keep the recipe identity
+ // in the snippet in every language, using the same visible title and subtitle.
+ const description=`${r.title}. ${r.subtitle}`.slice(0,160);
+ const meta=paginaMetadata({locale,pad:`/recepten/${slug}`,title,description,image:r.fotoUrl||"/og-image.png"});
  return {...meta,keywords:r.seoKeywords,openGraph:{...meta.openGraph,type:"article"}};
 }
 export default async function RecipeDetail({params}:Props){
  const {slug,locale}=await params,raw=recepten.find(r=>r.slug===slug);
- if(!raw)permanentRedirect(`/${locale}/recepten`);
+ if(!raw)notFound();
  const r=localizeRecipe(raw,locale),c=recipeCopy(locale),image=localizedRecipeImage(r),contact=bestelContact(locale);
  const schema={"@context":"https://schema.org","@type":"Recipe",name:r.title,description:r.subtitle,image:r.fotoUrl?[`${BEDRIJF.domein}${r.fotoUrl}`]:undefined,recipeYield:r.porties?`${r.porties} ${c.people}`:undefined,totalTime:receptDuur(raw.tijd),inLanguage:locale==="en"?"en-GB":locale==="de"?"de-DE":"nl-NL",url:`${BEDRIJF.domein}/${locale}/recepten/${slug}`,recipeCategory:c.category,recipeCuisine:r.keuken??c.dutch,keywords:r.seoKeywords,recipeIngredient:[...r.vanSchaap,...r.vanSupermarkt],recipeInstructions:r.bereidingswijze.map((text,i)=>({"@type":"HowToStep",position:i+1,text})),author:{"@type":"Organization",name:BEDRIJF.naam,url:BEDRIJF.domein}};
  return <>

@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { BEDRIJF } from "@/lib/bedrijf";
+import { validContact } from "@/lib/contact-validation";
 
 /**
  * Berichten van het contactformulier.
@@ -21,15 +22,17 @@ function tekst(waarde: unknown, max: number): string {
 }
 
 export async function POST(request: NextRequest) {
-  let body: { naam?: string; email?: string; bericht?: string };
+  let body: { naam?: string; email?: string; telefoon?: string; bericht?: string };
   try {
     body = await request.json();
+    if (!body || typeof body !== "object" || Array.isArray(body)) throw new Error("Invalid body");
   } catch {
     return NextResponse.json({ fout: "Onleesbare aanvraag" }, { status: 400 });
   }
 
   const naam = tekst(body.naam, 120);
   const email = tekst(body.email, 160);
+  const telefoon = tekst(body.telefoon, 40);
   const bericht = tekst(body.bericht, 4000);
 
   if (!naam || !bericht) {
@@ -37,6 +40,10 @@ export async function POST(request: NextRequest) {
       { fout: "Vul in ieder geval uw naam en uw bericht in." },
       { status: 400 }
     );
+  }
+
+  if (!validContact(email, telefoon)) {
+    return NextResponse.json({ fout: "Vul een geldig e-mailadres of telefoonnummer in zodat we kunnen antwoorden." }, { status: 400 });
   }
 
   const webhook = process.env.BESTELLING_WEBHOOK_URL;
@@ -57,6 +64,7 @@ export async function POST(request: NextRequest) {
         type: "BERICHT VIA DE SITE",
         naam,
         email: email || "(niet opgegeven)",
+        telefoon: telefoon || "(niet opgegeven)",
         bericht,
         _subject: `Bericht via de site — ${naam}`,
       }),

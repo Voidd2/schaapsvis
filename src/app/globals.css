@@ -504,11 +504,11 @@ body:has(#mobile-navigation) .sv-whatsapp { opacity: 0; visibility: hidden; poin
   }
 
   .knop-rood {
-    background-color: var(--rood);
+    background-color: var(--rood-dark);
     color: #fff;
   }
   .knop-rood:hover {
-    background-color: var(--rood-dark);
+    background-color: var(--navy);
   }
 
   .knop-navy {
@@ -724,7 +724,7 @@ summary::-webkit-details-marker {
   .nav-main-link:hover,.nav-main-link[aria-current="page"] { color: var(--navy); text-decoration: underline; text-underline-offset: 6px; }
   .nav-season { background: #b32632; color: white; border-radius: 4px; padding-inline: 12px; }
   .nav-season:hover,.nav-season[aria-current="page"] { color: white; }
-  .nav-disclosure summary { list-style: none; cursor: pointer; padding: 12px 5px; color: var(--navy); }
+  .nav-disclosure summary { list-style: none; cursor: pointer; min-width: 28px; min-height: 44px; text-align: center; padding: 12px 5px; color: var(--navy); }
   .nav-disclosure summary::-webkit-details-marker { display: none; }
   .nav-popover { position: absolute; top: 100%; left: 0; width: 235px; background: var(--cream); border: 1px solid var(--linen); padding: 8px; box-shadow: 0 8px 20px #06435f14; }
   .nav-popover a { display: block; padding: 12px; color: var(--navy); font-size: 1rem; }
@@ -1040,3 +1040,23 @@ body:has(#mobile-navigation) .catalog-cart-trigger { visibility: hidden; }
  .cart-heading h2 { font-size: 1.45rem; }
  .product-detail-heading .kapitaal { display: none; }
 }
+
+/* Master audit: readable supporting text, existing blue palette. */
+.kapitaal { font-size: .8rem; letter-spacing: .14em; color: var(--navy); }
+.kapitaal-licht { color: #c9e5ef; }
+.collection-category,.favorite-heading p { font-size: .8rem; color: #496875; }
+.collection-description { font-size: 1rem; color: #496875; }
+.collection-count,.collection-photo-note { font-size: .95rem; color: #496875; }
+.favorite-caption,.collection-hero-image figcaption { font-size: .8rem; background: #06435f; padding: 5px 8px; }
+.collection-item-actions > a { font-size: .95rem; }
+.collection-item-actions > a:first-child { color: #496875; }
+.collection-bbq-photos figcaption { font-size: .9rem; color: #496875; }
+.knop:focus-visible { outline: 3px solid var(--navy-dark); outline-offset: 4px; }
+.catalog-section-links { display: flex; flex-wrap: wrap; gap: 8px; padding-block: 16px; }
+.catalog-section-links a { min-height: 44px; display: inline-flex; align-items: center; padding: 8px 16px; border: 1px solid var(--linen); border-radius: 6px; color: var(--navy); font-weight: 600; }
+.catalog-section-links a:hover,.catalog-section-links a:focus-visible { background: var(--pale-blue, #eaf7fc); }
+.seafood-section { scroll-margin-top: 8rem; }
+
+.footer-groups { grid-template-columns: repeat(auto-fit, minmax(min(100%, 18em), 1fr)); }
+.footer-link-list { grid-template-columns: repeat(auto-fit, minmax(min(100%, 10em), 1fr)); }
+.footer-link-list a { overflow-wrap: anywhere; }

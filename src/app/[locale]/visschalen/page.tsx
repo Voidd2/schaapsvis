@@ -11,7 +11,7 @@ import { PaginaSlot } from "@/components/ui/PaginaKop";
 import { SeafoodCatalog } from "@/components/catalog/SeafoodCatalog";
 import { CatalogHelp } from "@/components/catalog/CatalogHelp";
 import { catalogText } from "@/lib/catalog-copy";
-import { paginaMetadata, kruimelSchema, vraagSchema } from "@/lib/seo";
+import { paginaMetadata, kruimelSchema } from "@/lib/seo";
 import { bestelContact } from "@/lib/bestel-contact";
 import { BEDRIJF } from "@/lib/bedrijf";
 import { GEMEENTEN } from "@/lib/bezorging";
@@ -62,7 +62,6 @@ export default async function VisschalenPage({
       <Schema
         data={[
           productSchema,
-          vraagSchema(vragen),
           kruimelSchema(locale, [
             { naam: BEDRIJF.naamKort, pad: "/" },
             { naam: nav("visschalen"), pad: "/visschalen" },

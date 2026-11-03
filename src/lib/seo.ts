@@ -122,13 +122,6 @@ export function winkelSchema(locale: string) {
     paymentAccepted: "Cash, Debit card, Maestro, V Pay",
     openingHoursSpecification: OPENINGSTIJDEN,
     sameAs: [BEDRIJF.socials.facebook, BEDRIJF.socials.instagram, BEDRIJF.maps.profiel],
-    // Elke gemeente waar we bezorgen apart benoemen: zo weet Google dat deze
-    // winkel ook relevant is voor iemand die in Wassenaar zoekt.
-    areaServed: GEMEENTEN.map((g) => ({
-      "@type": "City",
-      name: g.naam,
-      address: { "@type": "PostalAddress", addressLocality: g.naam, addressCountry: "NL" },
-    })),
     knowsLanguage: ["nl", "en", "de"],
   };
 }
@@ -212,19 +205,6 @@ export function kruimelSchema(
       position: i + 1,
       name: k.naam,
       item: `${BEDRIJF.domein}/${locale}${k.pad === "/" ? "" : k.pad}`,
-    })),
-  };
-}
-
-/** Vraag-en-antwoordblok. Wordt uitgelezen door zowel Google als AI-antwoorden. */
-export function vraagSchema(vragen: { v: string; a: string }[]) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: vragen.map((q) => ({
-      "@type": "Question",
-      name: q.v,
-      acceptedAnswer: { "@type": "Answer", text: q.a },
     })),
   };
 }

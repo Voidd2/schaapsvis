@@ -90,7 +90,7 @@ export function Kop({
   );
 }
 
-/** Vraag-en-antwoordlijst. Ook los bruikbaar, altijd samen met vraagSchema(). */
+/** Vraag-en-antwoordlijst. Ook los bruikbaar; geen rich-resultbelofte. */
 export function Vragen({
   vragen,
   donker = false,
@@ -148,7 +148,7 @@ export function Kruimels({
     <nav
       aria-label={items.find(i => i.href)?.href?.startsWith("/de") ? "Brotkrümelnavigation" : items.find(i => i.href)?.href?.startsWith("/en") ? "Breadcrumbs" : "Kruimelpad"}
       className="text-xs mb-6"
-      style={{ color: donker ? "rgba(250,246,239,0.6)" : "var(--grijs)" }}
+      style={{ color: donker ? "rgba(250,246,239,0.85)" : "var(--grijs)" }}
     >
       {items.map((item, i) => (
         <span key={item.naam}>

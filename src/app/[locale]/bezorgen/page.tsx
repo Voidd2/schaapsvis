@@ -6,7 +6,7 @@ import { Schema } from "@/components/Schema";
 import { Sectie, Kop, Vragen } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { PostcodeCheck } from "@/components/bezorgen/PostcodeCheck";
-import { paginaMetadata, kruimelSchema, vraagSchema } from "@/lib/seo";
+import { paginaMetadata, kruimelSchema } from "@/lib/seo";
 import { BEDRIJF, euro, whatsappLink } from "@/lib/bedrijf";
 import { BEZORGING, GEMEENTEN, kostenVoor, bezorgdagenTekst } from "@/lib/bezorging";
 
@@ -44,7 +44,6 @@ export default async function BezorgenPage({
       <JsonLd locale={locale} />
       <Schema
         data={[
-          vraagSchema(vragen),
           kruimelSchema(locale, [
             { naam: BEDRIJF.naamKort, pad: "/" },
             { naam: nav("bezorgen"), pad: "/bezorgen" },

@@ -1,5 +1,5 @@
 import { PlatterPhotoNote } from "@/components/PlatterPhotoNote";
-import Image from "next/image";
+import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { localLocations } from "@/lib/local-pages-copy";
@@ -108,7 +108,7 @@ export default async function HomePage({
           {/* De winkel zelf, zodra die foto er is. Geen close-up van vis: die
               heeft elke vishandel, een gevel aan de Herenstraat niet. */}
           <div className="home-hero-image-wrap">
-            <Image src={heroBeeld.src} alt={heroBeeld.alt} width={1400} height={933} sizes="(max-width: 800px) 100vw, 50vw" className="home-hero-image" fetchPriority="high" />
+            <Image src={heroBeeld.src} alt={heroBeeld.alt} width={1400} height={933} sizes="(max-width: 800px) 100vw, 50vw" className="home-hero-image" loading="eager" fetchPriority="high" />
             <span className="home-hero-image-label">{heroBeeld.caption}</span>
           </div>
         </div>
@@ -130,12 +130,12 @@ export default async function HomePage({
                   <Link href={`/${locale}/assortiment/${p.slug}`} className="home-product-card block group">
                     {/* Geen kader en geen eigen achtergrond: de uitsnede staat
                         al op wit, dus zo lijkt de vis op de pagina te liggen. */}
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <Image
                       src={photo.src}
                       alt={photo.alt}
                       width={1400}
                       height={933}
+                      sizes="(max-width: 639px) 50vw, (max-width: 1536px) 33vw, 480px"
                       loading="lazy"
                       className="w-full aspect-[3/2] object-contain transition-transform duration-300 group-hover:scale-[1.02]"
                     />

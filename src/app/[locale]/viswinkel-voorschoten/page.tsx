@@ -5,7 +5,7 @@ import { Schema } from "@/components/Schema";
 import { JsonLd } from "@/components/JsonLd";
 import { Sectie, Vragen } from "@/components/ui/Sectie";
 import { PaginaSlot } from "@/components/ui/PaginaKop";
-import { paginaMetadata, kruimelSchema, vraagSchema } from "@/lib/seo";
+import { paginaMetadata, kruimelSchema } from "@/lib/seo";
 import { BEDRIJF, VERKOOPPUNTEN } from "@/lib/bedrijf";
 import { bestelContact } from "@/lib/bestel-contact";
 import { blogPosts } from "@/lib/blog";
@@ -61,7 +61,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   };
   return <>
     <JsonLd locale={locale} />
-    <Schema data={[localSchema, vraagSchema(FAQ), kruimelSchema(locale, [{ naam: BEDRIJF.naamKort, pad: "/" }, { naam: t("Viswinkel Voorschoten"), pad: "/viswinkel-voorschoten" }])]} />
+    <Schema data={[localSchema, kruimelSchema(locale, [{ naam: BEDRIJF.naamKort, pad: "/" }, { naam: t("Viswinkel Voorschoten"), pad: "/viswinkel-voorschoten" }])]} />
     <header className="fresh-hero"><div className="section-wrap fresh-hero-grid">
       <div><p className="kapitaal">{t("Schaap’s Vishandel · sinds 1938")}</p><h1>{t("Visboer Voorschoten: elke vrijdag bij Hoogvliet")}</h1><p className="fresh-intro">{t("Goede vis, persoonlijk advies en duidelijke prijzen. Probeer onze viskraam op vrijdag: van verse zalm voor het avondeten tot krokante kibbeling met ravigotesaus en haring met uitjes.")}</p><div className="mt-6 rounded-xl border border-sky-200 bg-white p-5"><p className="font-semibold text-lg">{t("Elke vrijdag · 08:00–17:30")}</p><p className="mt-1">{t("Parkeerplaats Hoogvliet · Veurseweg 18")}<br />{t("2252 AA Voorschoten")}</p><p className="mt-3 text-sm">{t("Ook aan het einde van de middag nog vis halen voor het avondeten.")}</p></div><div className="flex flex-wrap gap-3 mt-6"><a className="knop knop-rood" href={kraam.mapsUrl} target="_blank" rel="noopener noreferrer">{t("Route naar Hoogvliet")}</a><Link className="knop knop-lijn" href={`/${locale}/assortiment`}>{t("Bekijk ons visassortiment")}</Link></div></div>
       <Image src="/images/editorial/kibbeling-schaapstray.png" alt={t("Bakje krokante kibbeling met ravigotesaus — bij onze viskraam in Voorschoten")} width={1400} height={933} sizes="(max-width: 800px) 100vw, 50vw" fetchPriority="high" className="rounded-2xl" />

@@ -7,7 +7,7 @@ import { Schema } from "@/components/Schema";
 import { Sectie, Kop, Vragen } from "@/components/ui/Sectie";
 import { PaginaKop, PaginaSlot } from "@/components/ui/PaginaKop";
 import { PostcodeCheck } from "@/components/bezorgen/PostcodeCheck";
-import { paginaMetadata, alternates, kruimelSchema, vraagSchema, LOCALES } from "@/lib/seo";
+import { paginaMetadata, alternates, kruimelSchema, LOCALES } from "@/lib/seo";
 import { BEDRIJF, euro, whatsappLink } from "@/lib/bedrijf";
 import {
   BEZORGING,
@@ -97,7 +97,6 @@ export default async function GemeentePage({
       <JsonLd locale={locale} />
       <Schema
         data={[
-          vraagSchema(vragen),
           kruimelSchema(locale, [
             { naam: BEDRIJF.naamKort, pad: "/" },
             { naam: nav("bezorgen"), pad: "/bezorgen" },

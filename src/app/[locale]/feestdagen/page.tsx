@@ -32,9 +32,12 @@ export default async function FeestdagenPage({ params }: { params: Promise<{ loc
       <div><p className="kapitaal">{c.label}</p><h1>{c.title}</h1><p>{t.festiveIntro}</p>
         <div className="catalog-intro-links"><a className="knop knop-rood" href="#visschalen">{t.browse} →</a></div>
       </div>
-      <figure><Image src="/images/editorial/feestschaal-voorbeeld.webp" alt={locale === "en" ? "Festive seafood platter, serving suggestion" : locale === "de" ? "Festliche Fischplatte als Servierbeispiel" : "Feestelijke visschaal als serveervoorbeeld"} width={1200} height={800} priority /><figcaption>{locale === "en" ? "Festive serving suggestion" : locale === "de" ? "Festlicher Serviervorschlag" : "Feestelijk serveervoorbeeld"}</figcaption></figure>
+      <figure><Image src="/images/editorial/feestschaal-voorbeeld.webp" alt={locale === "en" ? "Festive seafood platter, serving suggestion" : locale === "de" ? "Festliche Fischplatte als Servierbeispiel" : "Feestelijke visschaal als serveervoorbeeld"} width={1200} height={800} sizes="(max-width: 767px) 100vw, 50vw" priority /><figcaption>{locale === "en" ? "Festive serving suggestion" : locale === "de" ? "Festlicher Serviervorschlag" : "Feestelijk serveervoorbeeld"}</figcaption></figure>
     </section>
     <div className="section-wrap"><div className="festive-practical"><div><CalendarDays aria-hidden="true" /><div><h2>{t.orderTitle}</h2><p>{t.orderText}</p></div></div><div><Store aria-hidden="true" /><div><h2>{t.pickupTitle}</h2><p>{t.pickupText}</p></div></div></div></div>
+    <nav className="catalog-section-links section-wrap" aria-label={locale === "en" ? "Holiday categories" : locale === "de" ? "Festtagskategorien" : "Feestdagencategorieën"}>
+      {[["visschalen", locale === "en" ? "Seafood platters" : locale === "de" ? "Fischplatten" : "Visschalen"], ["gourmet", t.gourmet], ["geschenken", t.gifts], ["delicatessen", t.delicacies], ["salades", locale === "en" ? "Salads" : locale === "de" ? "Salate" : "Salades"]].map(([id,label]) => <a key={id} href={`#${id}`}>{label}</a>)}
+    </nav>
     <div className="section-wrap"><CatalogHelp locale={locale} /></div>
       <SeafoodCatalog locale={locale} festive />
     <Sectie grond="zand"><div className="catalog-gift-link"><div><h2>{t.gifts}</h2><p>{t.giftText}</p></div><Link className="knop knop-lijn" href={`/${locale}/relatiegeschenken`}>{c.giftLink} →</Link></div></Sectie>

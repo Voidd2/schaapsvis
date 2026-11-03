@@ -2,6 +2,22 @@
 
 Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 
+## Masteraudit SEO en afwerking — vervolgcontrole en PR #81
+
+- Basis main `b60f56e` na #79/#80; eigen branch `codex/master-seo-design-audit`, geen oude auditbranch overgenomen.
+- Contactantwoordkanaal client/server, echte recept/blog404, onbewezen voorraad/bezorgschema verwijderd, preview-noindex, contrast/leesbaarheid/footerreflow en vijf feestdagenankers. Homepagefavorieten via responsive Image; foto's/prijzen/porties/auth behouden.
+- Next- en Cloudflare-build, TypeScript, ESLint, content/shopchecks, negen geïsoleerde contactcases en mandacceptatie A–J slagen. Next én lokale Cloudflare:507 pagina's/519 linkdoelen/153 beelden, geen fouten; negen waarschuwingen voor drie ontbrekende gerechtfoto's. Beide runtimes ook met slotprofiel getest.
+- Browser:72 pagina/schermcombinaties + tekstvergroting, NL/EN/DE contact, vijf ankers; geen pageerrors/overflow/berichten. Externe Schema.org-codevalidatie 0 fouten/waarschuwingen; Google9 geldige onderdelen met niet-kritieke meldingen.
+- Bewijs en scope: `docs/seo/technische-audit.md`, `docs/design/visuele-eindcontrole.md`, acht auditdocumenten plus inventaris/resultaten; screenshots/voor-na `../design-preview/master-audit/overzicht.html`. SEO-skill bijgewerkt.
+- PR #81: https://github.com/Voidd2/schaapsvis/pull/81. Eerste codecommit `efc662d` had groene CI en Codex-review zonder bevindingen; nieuwe vervolgwijzigingen moeten opnieuw door CI/review.
+- Gratis build-time beeldvarianten uitgevoerd: 28 WebP’s van zeven ongewijzigde homepagefoto’s. Next én Cloudflare-browser laden101.092 bytes mobiel/251.948 desktop i.p.v.6.965.315 bytes originelen (98,5%/96,4% minder beeldbytes). Manifest/SHA/dimensies gecontroleerd, CI-check toegevoegd. Geen nieuwe dienst of dependency nodig in het project.
+- Echte Chromezoom200% op acht templates geslaagd. Nieuwe Cloudflare-matrix73 controles, drie talen contact, vijf ankers zonder fouten of verzendingen. Lighthouse13.6.0 vier templates × mobiel/desktop: accessibility100, best-practices100; performance72–76 mobiel/92–94 desktop. Mobiele veld-LCP is niet bewezen. Kruimelcontrast, fotolabelnamen, Bellen-label en menu-raakvlak gecorrigeerd; hero eager/high-priority.
+- Metadata staat met `htmlLimitedBots` nu in initiële HEAD op beide runtimes. Crawl test dit. Alle507 headingoutlines gecontroleerd zonder niveausprongen; description-overlap beoordeeld. Receptmetadata noemt de gelokaliseerde gerechtnaam, echte productvarianten blijven apart.
+- Nieuwe Next/Cloudflare-builds, TypeScript, ESLint, inhoud/shopchecks en mandacceptatie A–J slagen. Beschadigd lokaal gegenereerd `.next/dev/types`-bestand apart gezet en opnieuw gegenereerd; geen sourcefout. Definitieve crawls/slotresultaten in audit-results.json; ruwe logs/screenshots/Lighthouse buiten repo in master-audit.
+- Redactionele ronde afgerond: 67 productbeschrijvingen geïnventariseerd, 23 vaste producten/40 recepten/19 blogs gekoppeld; NL/EN/DE-localizers en aantallen getest. Oude EN/DE-schaalblog en richtbedragen gecorrigeerd. Drie onbewezen ASC-badges wachten op actueel etiket; ingrediënten/voedingswaarden/prijzen/foto’s ongewijzigd vergeleken met basis. Requirementmatrix A–L toegevoegd. Next/Cloudflare-builds en volledige Cloudflare-crawl opnieuw geslaagd.
+- Live HTTP-www gaf 522. De bestaande Cloudflare-www-regel matcht nu beide protocollen; 301 naar HTTPS-hoofddomein behoudt pad en query, live getest. Geen DNS/secrets/leden-Worker gewijzigd. Tijdelijke lokale SITE_PUBLIC-binding opgeruimd.
+- Open: definitieve PR81-CI/merge, exacte Cloudflare-commit/Ready, live zichtbare wijzigingen en edge-performance. GSC-toegang ontbreekt; eigenaar bevestigt NAP-afwijkingen, actuele certificeringsetiketten en drie gerechtfoto’s. Productieslot blijft aan; geen geld uitgegeven.
+
 ## Bestelproces vaste visschalen — live afgerond
 
 - Branch `codex/catalog-cart-simplification`, basis `ac05aac`. Eén gedeelde toegankelijke mand-drawer; oude split verwijderd/migreert weg; vaste details zonder formaatdropdown; 23 routes/12 schalen/prijzen/foto’s behouden; trio klein/groot NL/EN/DE.

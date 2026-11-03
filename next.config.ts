@@ -5,6 +5,9 @@ import assortmentDecisions from "./src/lib/assortiment-besluiten.json";
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
+  // Our metadata comes from local content: emit it in the initial head for
+  // every user agent, including Vinext clients that do not hoist streamed tags.
+  htmlLimitedBots: /.*/,
   // Alle afbeeldingen worden lokaal in /public geserveerd — geen externe
   // remotePatterns meer (geen hotlinks naar concurrenten of stockfoto's).
   async redirects() {

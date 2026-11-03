@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { permanentRedirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { blogPosts,getBlogPost } from "@/lib/blog";
 import { localizeBlog } from "@/lib/blog-localization";
 import { blogCopy,blogCategory } from "@/lib/blog-copy";
 import { localizeRecipe } from "@/lib/recipe-localization";
 import { recepten } from "@/lib/recepten";
-import { paginaMetadata,kruimelSchema,vraagSchema } from "@/lib/seo";
+import { paginaMetadata,kruimelSchema } from "@/lib/seo";
 import { bestelContact } from "@/lib/bestel-contact";
 import { Schema } from "@/components/Schema";
 import { Sectie,Vragen } from "@/components/ui/Sectie";
@@ -21,12 +21,12 @@ export async function generateMetadata({params}:Props):Promise<Metadata>{
  return {...meta,keywords:p.seoKeywords,openGraph:{...meta.openGraph,type:"article"}};
 }
 export default async function BlogDetail({params}:Props){
- const {slug,locale}=await params,raw=getBlogPost(slug);if(!raw)permanentRedirect(`/${locale}/blog`);
+ const {slug,locale}=await params,raw=getBlogPost(slug);if(!raw)notFound();
  const p=localizeBlog(raw,locale),c=blogCopy(locale),contact=bestelContact(locale),stall=p.regio==="Voorschoten"?VERKOOPPUNTEN.find(v=>v.id==="voorschoten"):undefined;
  const markets=(p.verkooppunten??[]).flatMap(id=>{const v=VERKOOPPUNTEN.find(v=>v.id===id);return v?[v]:[];});
  const related=(p.gerelateerdeRecepten??[]).flatMap(slug=>{const r=recepten.find(r=>r.slug===slug);return r?[localizeRecipe(r,locale)]:[];});
  const schema={"@context":"https://schema.org","@type":"Article",headline:p.title,description:p.excerpt,image:p.fotoUrl ? [`${BEDRIJF.domein}${p.fotoUrl}`] : undefined,datePublished:p.datum,dateModified:p.bijgewerkt??p.datum,mainEntityOfPage:`${BEDRIJF.domein}/${locale}/blog/${slug}`,inLanguage:locale==="en"?"en-GB":locale==="de"?"de-DE":"nl-NL",author:{"@type":"Organization",name:BEDRIJF.naam,url:BEDRIJF.domein},publisher:{"@type":"Organization",name:BEDRIJF.naam}};
- return <><Schema data={[schema,kruimelSchema(locale,[{naam:BEDRIJF.naamKort,pad:"/"},{naam:c.blog,pad:"/blog"},{naam:p.title,pad:`/blog/${slug}`}])]} />{p.vragen?.length?<Schema data={vraagSchema(p.vragen)} />:null}
+ return <><Schema data={[schema,kruimelSchema(locale,[{naam:BEDRIJF.naamKort,pad:"/"},{naam:c.blog,pad:"/blog"},{naam:p.title,pad:`/blog/${slug}`}])]} />
  <PaginaKop kruimels={[{naam:BEDRIJF.naamKort,href:`/${locale}`},{naam:c.blog,href:`/${locale}/blog`},{naam:p.title}]} label={`${blogCategory(p.categorie,locale)} · ${p.datumLabel} · ${p.leestijd}`} titel={p.title} intro={p.excerpt} />
  <Sectie grond="papier" smal><p className="mb-5 text-sm">{c.by} <Link className="underline" href={`/${locale}/ons-verhaal`}>Schaap’s Vishandel</Link> · {c.since}</p>
  {stall&&<aside className="rounded-xl p-5 mb-8 border border-sky-100" style={{background:"var(--lichtblauw)"}}><p className="font-semibold mb-2">{c.friday}</p><p>{c.help} <Link className="underline font-semibold" href={`/${locale}/viswinkel-voorschoten`}>{c.location} →</Link></p></aside>}

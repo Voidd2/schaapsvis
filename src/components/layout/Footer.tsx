@@ -98,7 +98,7 @@ export function Footer() {
               {BEDRIJF.telefoon.weergave}
             </a>
           </address>
-          <div className="flex gap-4 mt-3 text-sm" style={{ opacity: 0.65 }}>
+          <div className="flex gap-4 mt-3 text-sm" style={{ opacity: 0.9 }}>
             <a
               href={BEDRIJF.socials.facebook}
               target="_blank"
@@ -152,11 +152,11 @@ export function Footer() {
         aria-label={t("kopPaginas")}
         style={{ borderTop: "1px solid rgba(250,246,239,0.14)" }}
       >
-        <div className="site-container py-7 grid gap-8 sm:grid-cols-3">
+        <div className="site-container footer-groups py-7 grid gap-8">
           {groepen.map((groep) => (
             <div key={groep.kop}>
               <p className="kapitaal kapitaal-licht mb-3 text-sm tracking-[0.12em]">{groep.kop}</p>
-              <ul className="footer-link-list grid grid-cols-2 gap-x-4 gap-y-2 text-base md:grid-cols-1" style={{ opacity: 0.88 }}>
+              <ul className="footer-link-list grid gap-x-4 gap-y-2 text-base" style={{ opacity: 0.88 }}>
                 {groep.links.map(({ href, label }) => (
                   <li key={href}>
                     <Link href={href} className="hover:text-white transition-colors">
@@ -175,7 +175,7 @@ export function Footer() {
       <div style={{ borderTop: "1px solid rgba(250,246,239,0.14)" }}>
         <div
           className="site-container py-4 text-sm leading-6 flex flex-wrap gap-x-6 gap-y-2 justify-between"
-          style={{ opacity: 0.72 }}
+          style={{ opacity: 0.9 }}
         >
           <span>
             &copy; {jaar} {BEDRIJF.naam} &middot;{" "}

@@ -19,8 +19,8 @@ export const BLOG_TRANSLATIONS:Record<string,{en:BlogTranslation;de:BlogTranslat
  de:{title:"Nordseegarnelen: klein, fein und voller Geschmack",excerpt:"Nordseegarnelen sind klein und schmecken süßlich und salzig. Lesen Sie über den Unterschied zu großen Garnelen, Verarbeitung und MSC-Zertifizierung.",photo:"Nordseegarnelen",sections:[{alineas:["Die Nordseegarnele, Crangon crangon, ist nicht dieselbe Art wie eine große tropische Garnele. Sie ist klein und im Wasser graubraun; beim Kochen ändert sie ihre Farbe. Der süßlich-salzige Geschmack passt zu Toast, Cocktail oder einem einfachen Salat."]},{kop:"Vom Fang auf Ihren Teller",alineas:["Herkunft und Verarbeitung gehören zur konkreten Lieferung. Fragen Sie uns nach Lieferant, Fanggebiet und der Art, wie die angebotenen Garnelen geschält wurden.","Unsere Rezepte verwenden geschälte, bereits gekochte Garnelen. Gekühlt halten und kurz vor dem Servieren hinzufügen; langes Mitkochen schadet der Struktur."]},{kop:"MSC-zertifiziert",alineas:["Wir bieten MSC-zertifizierte Nordseegarnelen an. MSC steht für nachhaltigen Wildfang und Rückverfolgbarkeit, nicht für Bio. Prüfen Sie beim Kauf die Informationen des konkreten Produkts.","Fragen Sie per WhatsApp nach der aktuellen Verfügbarkeit, wenn Sie Garnelen für ein bestimmtes Gericht oder größere Mengen möchten. Wir besprechen gern die Möglichkeiten."]}]}
  },
  "marktdag-in-leiden-achter-de-kraam": {
- en:{title:"Market day in Leiden: behind the fish stall",excerpt:"We visit Leiden’s market every Wednesday and Saturday. Here is what goes into preparing the stall and helping customers choose their fish.",photo:"Herring roll with chopped onion, a familiar market favourite",sections:[{alineas:["Leiden’s market has been our second home for years. We set up our stall every Wednesday and Saturday. Behind a herring roll or a portion of kibbeling is a morning of preparation."]},{kop:"Before the first customers",alineas:["On market days, fish must be loaded, ice prepared and frying oil brought to temperature. Then we arrange the counter so customers can choose their fish and ask questions."]},{kop:"Why the market is different from the shop",alineas:["At the market, things move faster and feel more direct. You see the fish, smell fried kibbeling and hear conversations at the stall. For many customers, visiting is part of their weekly shopping.","Want to collect a seafood platter at the market? Agree the location, date and time beforehand and obtain confirmation. A message does not automatically mean everything is ready or that there will be no wait."]},{kop:"Three places, one quality",alineas:["Our Herenstraat shop opens Tuesday to Saturday. We visit Leiden’s market on Wednesdays and Saturdays, and Hoogvliet in Voorschoten on Fridays. See the locations page for times and directions; Wednesday’s landmark is different from Saturday’s."]}]},
- de:{title:"Markttag in Leiden: ein Blick hinter den Stand",excerpt:"Jeden Mittwoch und Samstag sind wir auf dem Leidener Markt. Was zur Vorbereitung des Stands gehört und wie wir bei der Fischwahl helfen.",photo:"Matjesbrötchen mit Zwiebeln, ein vertrauter Marktklassiker",sections:[{alineas:["Der Leidener Markt ist seit Jahren unser zweites Zuhause. Jeden Mittwoch und Samstag bauen wir unseren Stand auf. Hinter einem Matjesbrötchen oder einer Portion Kibbeling steckt ein Morgen voller Vorbereitung."]},{kop:"Vor den ersten Kunden",alineas:["An Markttagen muss Fisch geladen, Eis vorbereitet und das Frittieröl erhitzt werden. Danach richten wir die Theke ein, damit Kunden ihren Fisch auswählen und Fragen stellen können."]},{kop:"Warum der Markt anders ist als das Geschäft",alineas:["Am Markt geht es schneller und direkter zu. Sie sehen den Fisch, riechen die frittierten Kibbeling und hören die Gespräche am Stand. Für viele Kunden gehört der Besuch zum wöchentlichen Einkauf.","Möchten Sie eine Fischplatte am Markt abholen? Vereinbaren Sie Standort, Datum und Zeit vorher mit uns und lassen Sie es bestätigen. Eine Nachricht bedeutet nicht automatisch, dass alles bereitsteht oder keine Wartezeit entsteht."]},{kop:"Drei Orte, eine Qualität",alineas:["Unser Geschäft an der Herenstraat öffnet von Dienstag bis Samstag. Mittwochs und samstags stehen wir auf dem Leidener Markt, freitags bei Hoogvliet in Voorschoten. Auf der Standortseite finden Sie Zeiten und Anfahrt; der Orientierungspunkt am Mittwoch ist ein anderer als am Samstag."]}]}
+ en:{title:"Market day in Leiden: behind the fish stall",excerpt:"We visit Leiden’s market every Wednesday and Saturday. Here is what goes into preparing the stall and helping customers choose their fish.",photo:"Herring roll with chopped onion, a familiar market favourite",sections:[{alineas:["Leiden’s market has been our second home for years. We set up our stall every Wednesday and Saturday. Behind a herring roll or a portion of kibbeling is a morning of preparation."]},{kop:"Before the first customers",alineas:["On market days, fish must be loaded, ice prepared and frying oil brought to temperature. Then we arrange the counter so customers can choose their fish and ask questions."]},{kop:"Why the market is different from the shop",alineas:["At the market, things move faster and feel more direct. You see the fish, smell fried kibbeling and hear conversations at the stall. For many customers, visiting is part of their weekly shopping.","Want to collect a seafood platter at the market? Agree the location, date and time beforehand and obtain confirmation. A message does not automatically mean everything is ready or that there will be no wait. For a bespoke platter, approximately €17.50 per person is a guide; extras may increase the price. Standard platters have their own price per platter."]},{kop:"Three places, one quality",alineas:["Our Herenstraat shop opens Tuesday to Saturday. We visit Leiden’s market on Wednesdays and Saturdays, and Hoogvliet in Voorschoten on Fridays. See the locations page for times and directions; Wednesday’s landmark is different from Saturday’s."]}]},
+ de:{title:"Markttag in Leiden: ein Blick hinter den Stand",excerpt:"Jeden Mittwoch und Samstag sind wir auf dem Leidener Markt. Was zur Vorbereitung des Stands gehört und wie wir bei der Fischwahl helfen.",photo:"Matjesbrötchen mit Zwiebeln, ein vertrauter Marktklassiker",sections:[{alineas:["Der Leidener Markt ist seit Jahren unser zweites Zuhause. Jeden Mittwoch und Samstag bauen wir unseren Stand auf. Hinter einem Matjesbrötchen oder einer Portion Kibbeling steckt ein Morgen voller Vorbereitung."]},{kop:"Vor den ersten Kunden",alineas:["An Markttagen muss Fisch geladen, Eis vorbereitet und das Frittieröl erhitzt werden. Danach richten wir die Theke ein, damit Kunden ihren Fisch auswählen und Fragen stellen können."]},{kop:"Warum der Markt anders ist als das Geschäft",alineas:["Am Markt geht es schneller und direkter zu. Sie sehen den Fisch, riechen die frittierten Kibbeling und hören die Gespräche am Stand. Für viele Kunden gehört der Besuch zum wöchentlichen Einkauf.","Möchten Sie eine Fischplatte am Markt abholen? Vereinbaren Sie Standort, Datum und Zeit vorher mit uns und lassen Sie es bestätigen. Eine Nachricht bedeutet nicht automatisch, dass alles bereitsteht oder keine Wartezeit entsteht. Für eine individuelle Platte sind etwa 17,50 € pro Person ein Richtwert; Extras können den Preis erhöhen. Feste Ausführungen haben einen eigenen Preis pro Platte."]},{kop:"Drei Orte, eine Qualität",alineas:["Unser Geschäft an der Herenstraat öffnet von Dienstag bis Samstag. Mittwochs und samstags stehen wir auf dem Leidener Markt, freitags bei Hoogvliet in Voorschoten. Auf der Standortseite finden Sie Zeiten und Anfahrt; der Orientierungspunkt am Mittwoch ist ein anderer als am Samstag."]}]}
  },
  "waar-koop-je-biologische-vis-in-leiden": {
  en:{title:"Organic fish in Leiden: what should you look for?",excerpt:"Looking for organic fish? Check the product’s certification, ask about origin and discuss current availability with your fishmonger.",photo:"Serving suggestion: salmon in a fresh salad",sections:[{kop:"Look at the product, not just the story",alineas:["Organic farming, ASC and MSC are different designations. A sustainable story about a farmer does not itself prove a particular fillet is certified organic. Ask for the information belonging to that product."]},{kop:"Our VÅRLAKS salmon",alineas:["At Schaap’s Vishandel we sell VÅRLAKS salmon. The supplier describes northern Norwegian origins, family businesses and traceability. Ask us about the current origin and certification of the delivery at our counter."]},{kop:"Ask about current availability",alineas:["Visit Herenstraat 48 in Leiden, Tuesday to Saturday, or send a WhatsApp message beforehand. Tell us which fish you want and whether organic certification is important to you. We will discuss what we can offer. Please arrange seafood platters with us via WhatsApp."]}]},
@@ -93,19 +93,117 @@ export const BLOG_TRANSLATIONS:Record<string,{en:BlogTranslation;de:BlogTranslat
  ],questions:[{v:"Bis wann bekomme ich freitags Fisch in Voorschoten?",a:"Unser Stand bei Hoogvliet ist freitags von 08:00 bis 17:30 geöffnet. Die Verfügbarkeit eines bestimmten Produkts können Sie vorher per WhatsApp erfragen."},{v:"Welcher Fisch passt zu einem einfachen Abendessen?",a:"Ein frisches Filet im Ofenpäckchen, Ofenlachs oder Kabeljau aus der Pfanne sind drei Möglichkeiten. Wählen Sie das Rezept und besprechen Sie Portionen und aktuelles Angebot am Stand."},{v:"Kann ich Lachs für Voorschoten vorab anfragen?",a:"Fragen Sie per WhatsApp nach Verfügbarkeit und nennen Sie Personenzahl und Abholwunsch. Eine Nachricht ist keine bestätigte Bestellung; Möglichkeiten und Preis stimmen wir mit Ihnen ab."}]}
  },
  "visschaal-borrel-voorschoten": {
- en:{title:"Choosing a seafood platter for a gathering in Voorschoten",excerpt:"Planning a party or birthday in Voorschoten? Choose a seafood platter around your guests, budget and preferences. Read what to arrange with us beforehand.",photo:"Example of a generous seafood platter with smoked fish, shrimp and salads",sections:[
- {kop:"Start with the occasion, not just the photo",alineas:["Choosing a seafood platter in Voorschoten starts with your plans. Will it be shared snacks alongside bread, cheese and other dishes, or the main part of the meal? Guest numbers alone do not determine the right quantity. Tell us how you intend to serve the platter.","At Schaap’s Vishandel, choose a drinks platter, family platter or party platter as a starting point. Photos are serving examples, not an exact picture of what you receive. Your platter can be considerably larger and filled according to your budget and wishes. Discuss special requests beforehand; a photo is not a stock guarantee."]},
- {kop:"How many guests are joining?",alineas:["Our drinks platter is intended for about four to six people, the family platter for eight to ten and the party platter for twelve to sixteen. Treat this as an initial guide. A long gathering with small bites needs a different quantity from a platter replacing a main course.","Tell us whether children are joining, what other food you will offer and whether some guests do not want fish or shellfish. We can discuss a suitable arrangement. Do not choose solely by platter name: the rest of your menu matters just as much."]},
- {kop:"Smoked fish, shrimp or a combination?",alineas:["A mixed sharing platter might include smoked salmon, mackerel, herring bites, shrimp and salads. The larger examples also show eel, prawns or oysters. Available fish and your preferences determine a suitable combination. Ask about the current contents if a particular item is important to you.","Guests who mainly enjoy smoked fish need not have the same platter as a group asking for shrimp. Optional extras help tailor the selection. Tell us if you want certain items served separately so we can discuss whether and how this can be done."]},
- {kop:"Agree budget and price in advance",alineas:["The online configurator shows starting prices and indicative charges for extras. The final price may vary with quantity, contents and special requests. We confirm the final amount before preparing the platter; do not treat an example photo as a fixed package with an unchangeable price.","If you have a budget for the whole gathering, tell us the amount, guest numbers and favourite products. This is more useful than simply asking for a large platter. Seafood platters are arranged with us via WhatsApp. Discuss individual fish products or other requests with us on WhatsApp."]},
- {kop:"Collection for your gathering in Voorschoten",alineas:["Our fish stall is in the Hoogvliet car park in Voorschoten every Friday from 08:00 to 17:30. Arrange collection there with us in advance. An online request does not automatically mean a platter is ready at every location or time. Date, collection point and availability must be confirmed together.","Plan a few days ahead and contact us earlier around busy holidays. State the occasion, desired time, guest numbers, budget and any allergies. Do not assume allergen-free preparation: explain your needs so we can discuss options and limitations."]}
- ],questions:[{v:"Can I choose a seafood platter for Voorschoten online?",a:"Please arrange your seafood platter with us on WhatsApp. The average price is €17.50 per person; we will help you choose for your event."},{v:"Will my platter look exactly like the photo?",a:"No. The photo is an example. Size and contents are tailored to your guests, budget and wishes; your platter can be larger and your choices can change the price."},{v:"Can I collect a platter at Hoogvliet on Friday?",a:"Ask beforehand and obtain confirmation from us. Our Voorschoten stall is at Hoogvliet on Fridays from 08:00 to 17:30; collection of a specific platter is by arrangement."}]},
- de:{title:"Eine Fischplatte für Ihre Feier in Voorschoten wählen",excerpt:"Eine Feier oder ein Geburtstag in Voorschoten? Wählen Sie eine Fischplatte passend zu Gästen, Budget und Vorlieben. Was Sie vorher mit uns abstimmen können.",photo:"Beispiel einer großzügigen Fischplatte mit Räucherfisch, Garnelen und Salaten",sections:[
- {kop:"Mit dem Anlass beginnen, nicht nur mit dem Foto",alineas:["Die Wahl einer Fischplatte in Voorschoten beginnt bei Ihren Plänen. Sind es Häppchen neben Brot, Käse und anderen Speisen oder soll der Fisch den Hauptteil der Mahlzeit bilden? Die Gästezahl allein bestimmt nicht die passende Menge. Erzählen Sie uns, wie Sie die Platte servieren möchten.","Bei Schaap’s Vishandel können Sie eine kleine Platte, Familienplatte oder Festplatte als Ausgangspunkt wählen. Die Fotos zeigen Servierbeispiele, nicht genau das, was Sie erhalten. Die tatsächliche Platte kann deutlich größer sein und wird passend zu Budget und Wünschen gefüllt. Besondere Wünsche vorher besprechen; ein Foto ist keine Verfügbarkeitsgarantie."]},
- {kop:"Wie viele Gäste essen mit?",alineas:["Unsere kleine Platte ist für etwa vier bis sechs Personen gedacht, die Familienplatte für acht bis zehn und die Festplatte für zwölf bis sechzehn. Das ist eine erste Orientierung. Ein langer Abend mit kleinen Häppchen braucht andere Mengen als eine Platte, die das Hauptgericht ersetzt.","Sagen Sie uns, ob Kinder mitessen, welche anderen Speisen Sie anbieten und ob einzelne Gäste keinen Fisch oder keine Schalentiere möchten. Gemeinsam finden wir eine passende Zusammenstellung. Wählen Sie nicht nur nach dem Namen der Platte: Ihr übriges Menü ist ebenso wichtig."]},
- {kop:"Räucherfisch, Garnelen oder eine Mischung?",alineas:["Eine gemischte Platte kann Räucherlachs, Makrele, Matjeshäppchen, Garnelen und Salate enthalten. Die größeren Beispiele zeigen auch Aal, große Garnelen oder Austern. Verfügbarer Fisch und Ihre Wünsche bestimmen die passende Kombination. Fragen Sie nach der aktuellen Zusammenstellung, wenn ein bestimmter Bestandteil wichtig ist.","Gäste, die vor allem Räucherfisch mögen, brauchen nicht dieselbe Platte wie eine Gruppe mit einer Vorliebe für Garnelen. Wählbare Extras helfen bei der Anpassung. Teilen Sie auch mit, wenn bestimmte Produkte separat serviert werden sollen, damit wir die Umsetzung besprechen können."]},
- {kop:"Budget und Preis vorher abstimmen",alineas:["Der Online-Konfigurator zeigt Startpreise und ungefähre Kosten für Extras. Der Endpreis kann sich durch Menge, Zusammenstellung und besondere Wünsche ändern. Wir bestätigen den endgültigen Betrag vor der Zubereitung; ein Beispielbild ist kein festes Paket mit unveränderlichem Preis.","Haben Sie ein Budget für die gesamte Feier? Nennen Sie Betrag, Gästezahl und Lieblingsprodukte. Das hilft mehr als die bloße Bitte um eine große Platte. Fischplatten stimmen Sie mit uns per WhatsApp ab. Einzelnen Fisch und andere Wünsche besprechen wir per WhatsApp."]},
- {kop:"Abholung für Ihre Feier in Voorschoten",alineas:["Unser Fischstand steht freitags von 08:00 bis 17:30 auf dem Hoogvliet-Parkplatz in Voorschoten. Möchten Sie dort eine Platte abholen, vereinbaren Sie dies vorher mit uns. Eine Online-Anfrage bedeutet nicht automatisch, dass eine Platte an jedem Ort zu jeder Zeit bereitsteht. Datum, Abholort und Verfügbarkeit müssen gemeinsam bestätigt werden.","Planen Sie einige Tage voraus und melden Sie sich vor stark besuchten Feiertagen früher. Nennen Sie Anlass, Wunschtermin, Personenzahl, Budget und eventuelle Allergien. Gehen Sie nicht von allergenfreier Zubereitung aus: Erklären Sie Ihren Bedarf, damit wir Möglichkeiten und Grenzen besprechen können."]}
- ],questions:[{v:"Kann ich eine Fischplatte für Voorschoten online auswählen?",a:"Fischplatten stimmen Sie mit uns per WhatsApp ab. Der Durchschnittspreis liegt bei 17,50 € pro Person; wir beraten Sie gern passend zu Ihren Wünschen und Ihrem Anlass."},{v:"Sieht meine Fischplatte genau wie auf dem Foto aus?",a:"Nein. Das Foto ist ein Beispiel. Größe und Inhalt werden auf Gäste, Budget und Wünsche abgestimmt; Ihre Platte kann größer sein und die Auswahl kann den Preis verändern."},{v:"Kann ich eine Fischplatte freitags bei Hoogvliet abholen?",a:"Fragen Sie vorher an und lassen Sie es von uns bestätigen. Unser Stand steht freitags von 08:00 bis 17:30 bei Hoogvliet in Voorschoten; eine bestimmte Platte wird nach Vereinbarung abgeholt."}]}
- }
+  "en": {
+    "title": "Choosing a seafood platter for a gathering in Voorschoten",
+    "excerpt": "Planning a party or birthday in Voorschoten? Choose a seafood platter around your guests, budget and preferences. Read what to arrange with us beforehand.",
+    "photo": "Example of a seafood platter with smoked fish, shrimp and salads",
+    "sections": [
+      {
+        "kop": "Start with the occasion, not just the photo",
+        "alineas": [
+          "Choosing a seafood platter in Voorschoten starts with your plans. Will it be shared snacks alongside bread, cheese and other dishes, or the main part of the meal? Guest numbers alone do not determine the right quantity. Tell us how you intend to serve the platter.",
+          "At Schaap’s Vishandel we help you choose a platter for your guests and occasion. For a bespoke platter, approximately €17.50 per person is a guide, not a fixed total. Standard platters have their own price per platter. Photos show presentation examples; discuss your preferences with us on WhatsApp."
+        ]
+      },
+      {
+        "kop": "How many guests are joining?",
+        "alineas": [
+          "The quantity depends on guest numbers and what else you serve. Tell us whether the platter is for drinks, lunch or dinner so we can advise on a suitable amount.",
+          "Tell us whether children are joining, what other food you will offer and whether some guests do not want fish or shellfish. We can discuss a suitable arrangement. Do not choose solely by platter name: the rest of your menu matters too."
+        ]
+      },
+      {
+        "kop": "Smoked fish, shrimp or a combination?",
+        "alineas": [
+          "For a bespoke mixed platter, discuss the fish, shrimp and salads you enjoy. Tell us about particular preferences or a special occasion on WhatsApp so we can help you choose.",
+          "A group that loves smoked fish need not choose the same bespoke platter as guests who prefer shrimp. Mention any extras or items you would like served separately so we can discuss what is possible."
+        ]
+      },
+      {
+        "kop": "Agree budget and price in advance",
+        "alineas": [
+          "For a bespoke platter, approximately €17.50 per person is a guide. Standard platters use the displayed price per platter. Extras or more expensive fish may increase a bespoke price. Contact us on WhatsApp to discuss your preferences and occasion.",
+          "If you have a budget for the whole gathering, tell us the amount, guest numbers and favourite products. This is more useful than simply asking for a large platter. Arrange a platter with us on WhatsApp; we can also discuss individual fish products and other requests."
+        ]
+      },
+      {
+        "kop": "Collection for your gathering in Voorschoten",
+        "alineas": [
+          "For a party, birthday or other occasion, contact us on WhatsApp to discuss your preferred platter. We agree contents, any extras, price and collection personally.",
+          "Tell us the occasion and guest numbers, and mention dietary needs straight away so we can discuss how to accommodate them."
+        ]
+      }
+    ],
+    "questions": [
+      {
+        "v": "What does a seafood platter cost?",
+        "a": "For a bespoke platter, approximately €17.50 per person is a guide, not a fixed total. Standard platters have their own price per platter. Extras may increase a bespoke price; discuss your preferences and occasion with us on WhatsApp."
+      },
+      {
+        "v": "Can I help choose the contents?",
+        "a": "Yes, for a bespoke platter tell us what you enjoy and the occasion on WhatsApp. We will discuss the possibilities."
+      },
+      {
+        "v": "How do I enquire about a seafood platter?",
+        "a": "Send us your preferences and occasion on WhatsApp. We discuss contents, price and collection. The order is only final after your agreement."
+      }
+    ]
+  },
+  "de": {
+    "title": "Eine Fischplatte für Ihre Feier in Voorschoten wählen",
+    "excerpt": "Eine Feier oder ein Geburtstag in Voorschoten? Wählen Sie eine Fischplatte passend zu Gästen, Budget und Vorlieben. Was Sie vorher mit uns abstimmen können.",
+    "photo": "Beispiel einer Fischplatte mit Räucherfisch, Garnelen und Salaten",
+    "sections": [
+      {
+        "kop": "Mit dem Anlass beginnen, nicht nur mit dem Foto",
+        "alineas": [
+          "Die Wahl einer Fischplatte in Voorschoten beginnt bei Ihren Plänen. Sind es Häppchen neben Brot, Käse und anderen Speisen oder soll der Fisch den Hauptteil der Mahlzeit bilden? Die Gästezahl allein bestimmt nicht die passende Menge. Erzählen Sie uns, wie Sie die Platte servieren möchten.",
+          "Bei Schaap’s Vishandel helfen wir Ihnen bei der Auswahl für Ihre Gäste und Ihren Anlass. Für eine individuelle Platte sind etwa 17,50 € pro Person ein Richtwert, kein fester Gesamtpreis. Feste Ausführungen haben einen eigenen Preis pro Platte. Fotos zeigen Servierbeispiele; besprechen Sie Ihre Wünsche per WhatsApp mit uns."
+        ]
+      },
+      {
+        "kop": "Wie viele Gäste essen mit?",
+        "alineas": [
+          "Die passende Menge hängt von der Gästezahl und den weiteren Speisen ab. Sagen Sie uns, ob die Platte für einen Umtrunk, ein Mittagessen oder eine Hauptmahlzeit gedacht ist. Wir beraten Sie zur Menge.",
+          "Sagen Sie uns, ob Kinder mitessen, welche anderen Speisen Sie anbieten und ob einzelne Gäste keinen Fisch oder keine Schalentiere möchten. Gemeinsam finden wir eine passende Zusammenstellung. Wählen Sie nicht nur nach dem Namen: Ihr übriges Menü ist ebenso wichtig."
+        ]
+      },
+      {
+        "kop": "Räucherfisch, Garnelen oder eine Mischung?",
+        "alineas": [
+          "Für eine individuell zusammengestellte Platte besprechen wir, welchen Fisch, welche Garnelen und Salate Sie mögen. Nennen Sie uns besondere Vorlieben oder den Anlass per WhatsApp.",
+          "Gäste mit einer Vorliebe für Räucherfisch müssen nicht dieselbe individuelle Platte wählen wie eine Gruppe, die Garnelen bevorzugt. Teilen Sie gewünschte Extras oder separat servierte Produkte mit, damit wir die Möglichkeiten besprechen können."
+        ]
+      },
+      {
+        "kop": "Budget und Preis vorher abstimmen",
+        "alineas": [
+          "Für eine individuelle Platte sind etwa 17,50 € pro Person ein Richtwert. Bei festen Ausführungen gilt der angezeigte Preis pro Platte. Extras oder teurere Fischsorten können den individuellen Preis erhöhen. Besprechen Sie Wünsche und Anlass mit uns per WhatsApp.",
+          "Haben Sie ein Budget für die gesamte Feier? Nennen Sie Betrag, Gästezahl und Lieblingsprodukte. Das hilft mehr als die bloße Bitte um eine große Platte. Fischplatten stimmen Sie mit uns per WhatsApp ab; auch einzelnen Fisch und andere Wünsche können wir dort besprechen."
+        ]
+      },
+      {
+        "kop": "Abholung für Ihre Feier in Voorschoten",
+        "alineas": [
+          "Für eine Feier, einen Geburtstag oder einen anderen Anlass besprechen Sie Ihre gewünschte Platte mit uns per WhatsApp. Inhalt, Extras, Preis und Abholung stimmen wir persönlich ab.",
+          "Nennen Sie Anlass und Gästezahl und teilen Sie besondere Ernährungsbedürfnisse gleich mit, damit wir die Möglichkeiten besprechen können."
+        ]
+      }
+    ],
+    "questions": [
+      {
+        "v": "Was kostet eine Fischplatte?",
+        "a": "Für eine individuelle Platte sind etwa 17,50 € pro Person ein Richtwert, kein fester Gesamtpreis. Feste Ausführungen haben einen eigenen Preis pro Platte. Extras können den individuellen Preis erhöhen; besprechen Sie Wünsche und Anlass mit uns per WhatsApp."
+      },
+      {
+        "v": "Kann ich die Zusammenstellung mitbestimmen?",
+        "a": "Ja, bei einer individuellen Platte nennen Sie uns per WhatsApp Ihre Vorlieben und den Anlass. Wir besprechen die Möglichkeiten."
+      },
+      {
+        "v": "Wie frage ich eine Fischplatte an?",
+        "a": "Schicken Sie uns Wünsche und Anlass per WhatsApp. Wir besprechen Inhalt, Preis und Abholung. Erst nach Ihrer Zustimmung ist die Bestellung verbindlich."
+      }
+    ]
+  }
+}
 };

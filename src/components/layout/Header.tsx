@@ -99,15 +99,15 @@ export function Header() {
     }}>
       {/* ── Informatiebalk ──────────────────────────────────────────────── */}
       <div
-        className="text-[0.72rem] tracking-wide"
+        className="text-[0.8rem] tracking-wide"
         style={{ backgroundColor: "var(--navy-dark)", color: "rgba(250,246,239,0.72)" }}
       >
-        <div className="site-container h-8 flex items-center justify-between gap-4">
+        <div className="site-container min-h-8 py-1 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
           <span className="hidden sm:inline">{ADRES_REGEL}</span>
           <WinkelStatus />
           <a
             href={`tel:${BEDRIJF.telefoon.e164}`}
-            className="hidden sm:inline hover:text-white transition-colors"
+            className="hidden sm:inline whitespace-nowrap hover:text-white transition-colors"
           >
             {BEDRIJF.telefoon.weergave}
           </a>
@@ -226,7 +226,7 @@ export function Header() {
             <a
               href={`tel:${BEDRIJF.telefoon.e164}`}
               className="sm:hidden knop knop-rood !py-2.5 !px-3.5 !text-[0.8rem]"
-              aria-label={`${locale === "de" ? "Anrufen" : locale === "en" ? "Call" : "Bel"} ${BEDRIJF.telefoon.weergave}`}
+              aria-label={`${locale === "de" ? "Anrufen" : locale === "en" ? "Call" : "Bellen"} ${BEDRIJF.telefoon.weergave}`}
             >
               {locale === "de" ? "Anrufen" : locale === "en" ? "Call" : "Bellen"}
             </a>
@@ -259,7 +259,7 @@ export function Header() {
                 {(href === p("/assortiment") ? productLinks : href === p("/ons-verhaal") ? storyLinks : []).map(link => <Link className="mobile-sub-link" key={link.href} href={link.href} onClick={() => setOpen(false)}>{link.label} →</Link>)}
               </div>)}
 
-              <p className="pt-5 pb-1 text-[0.68rem] font-bold uppercase tracking-[0.18em]" style={{ color: "var(--gold)" }}>
+              <p className="pt-5 pb-1 text-[0.8rem] font-bold uppercase tracking-[0.18em]" style={{ color: "var(--gold)" }}>
                 {accountLabel}
               </p>
               {accountLinks.map(({ href, label }) => (
@@ -268,7 +268,7 @@ export function Header() {
                 </Link>
               ))}
 
-              <p className="pt-5 pb-1 text-[0.68rem] font-bold uppercase tracking-[0.18em]" style={{ color: "var(--gold)" }}>
+              <p className="pt-5 pb-1 text-[0.8rem] font-bold uppercase tracking-[0.18em]" style={{ color: "var(--gold)" }}>
                 {moreLabel}
               </p>
               {extraLinks.map(({ href, label }) => (

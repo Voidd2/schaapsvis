@@ -216,6 +216,8 @@
     "formTitle": "Nachricht senden",
     "nameLabel": "Name",
     "emailLabel": "E-Mail-Adresse",
+    "phoneLabel": "Telefonnummer",
+    "replyRequired": "Geben Sie eine gültige E-Mail-Adresse oder Telefonnummer an, damit wir antworten können.",
     "messageLabel": "Nachricht",
     "send": "Nachricht senden",
     "infoTitle": "Kontaktdaten",

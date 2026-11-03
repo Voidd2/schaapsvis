@@ -1,0 +1,2176 @@
+{
+  "date": "2026-11-03",
+  "base": "b60f56e",
+  "productionPublished": false,
+  "next": {
+    "pagesChecked": 507,
+    "internalLinksChecked": 519,
+    "imagesChecked": 153,
+    "recipesWithDishImage": 111,
+    "deliveryRedirectsChecked": 9,
+    "publicRobots": true,
+    "failures": [],
+    "warnings": [
+      {
+        "path": "/nl/recepten/haringsalade-appel-biet",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/en/recepten/haringsalade-appel-biet",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/de/recepten/haringsalade-appel-biet",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/nl/recepten/haring-komkommer-borrelhapjes",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/en/recepten/haring-komkommer-borrelhapjes",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/de/recepten/haring-komkommer-borrelhapjes",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/nl/recepten/makreel-aardappel-ovenschotel",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/en/recepten/makreel-aardappel-ovenschotel",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/de/recepten/makreel-aardappel-ovenschotel",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      }
+    ]
+  },
+  "cloudflareLocal": {
+    "pagesChecked": 507,
+    "internalLinksChecked": 519,
+    "imagesChecked": 153,
+    "recipesWithDishImage": 111,
+    "deliveryRedirectsChecked": 9,
+    "publicRobots": true,
+    "failures": [],
+    "warnings": [
+      {
+        "path": "/nl/recepten/haringsalade-appel-biet",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/en/recepten/haringsalade-appel-biet",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/de/recepten/haringsalade-appel-biet",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/nl/recepten/haring-komkommer-borrelhapjes",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/en/recepten/haring-komkommer-borrelhapjes",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/de/recepten/haring-komkommer-borrelhapjes",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/nl/recepten/makreel-aardappel-ovenschotel",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/en/recepten/makreel-aardappel-ovenschotel",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/de/recepten/makreel-aardappel-ovenschotel",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      }
+    ]
+  },
+  "lockedNext": {
+    "profile": "locked",
+    "failures": []
+  },
+  "lockedCloudflare": {
+    "profile": "locked",
+    "failures": []
+  },
+  "browser": {
+    "results": [
+      {
+        "route": "/nl",
+        "width": 360,
+        "height": 800,
+        "status": 200,
+        "scrollWidth": 360,
+        "h1": "Goede vis. Gewoon Schaapâ€™s.",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/assortiment",
+        "width": 360,
+        "height": 800,
+        "status": 200,
+        "scrollWidth": 360,
+        "h1": "Ons assortiment.",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/visschalen",
+        "width": 360,
+        "height": 800,
+        "status": 200,
+        "scrollWidth": 360,
+        "h1": "Visschalen & delicatessen",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/feestdagen",
+        "width": 360,
+        "height": 800,
+        "status": 200,
+        "scrollWidth": 360,
+        "h1": "Feestdagen 2026",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/bezoek-ons",
+        "width": 360,
+        "height": 800,
+        "status": 200,
+        "scrollWidth": 360,
+        "h1": "Waar u ons vindt",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/feestdagen/visschotel-klein-3-5-pers",
+        "width": 360,
+        "height": 800,
+        "status": 200,
+        "scrollWidth": 360,
+        "h1": "Klassieke middelgrote visschaal Â· 3â€“5 personen",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/recepten/zalm-citroen-dille",
+        "width": 360,
+        "height": 800,
+        "status": 200,
+        "scrollWidth": 360,
+        "h1": "Zalm in de oven met citroen en dille",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/contact",
+        "width": 360,
+        "height": 800,
+        "status": 200,
+        "scrollWidth": 360,
+        "h1": "Contact",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl",
+        "width": 390,
+        "height": 844,
+        "status": 200,
+        "scrollWidth": 390,
+        "h1": "Goede vis. Gewoon Schaapâ€™s.",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/assortiment",
+        "width": 390,
+        "height": 844,
+        "status": 200,
+        "scrollWidth": 390,
+        "h1": "Ons assortiment.",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/visschalen",
+        "width": 390,
+        "height": 844,
+        "status": 200,
+        "scrollWidth": 390,
+        "h1": "Visschalen & delicatessen",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/feestdagen",
+        "width": 390,
+        "height": 844,
+        "status": 200,
+        "scrollWidth": 390,
+        "h1": "Feestdagen 2026",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/bezoek-ons",
+        "width": 390,
+        "height": 844,
+        "status": 200,
+        "scrollWidth": 390,
+        "h1": "Waar u ons vindt",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/feestdagen/visschotel-klein-3-5-pers",
+        "width": 390,
+        "height": 844,
+        "status": 200,
+        "scrollWidth": 390,
+        "h1": "Klassieke middelgrote visschaal Â· 3â€“5 personen",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/recepten/zalm-citroen-dille",
+        "width": 390,
+        "height": 844,
+        "status": 200,
+        "scrollWidth": 390,
+        "h1": "Zalm in de oven met citroen en dille",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/contact",
+        "width": 390,
+        "height": 844,
+        "status": 200,
+        "scrollWidth": 390,
+        "h1": "Contact",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl",
+        "width": 430,
+        "height": 932,
+        "status": 200,
+        "scrollWidth": 430,
+        "h1": "Goede vis. Gewoon Schaapâ€™s.",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/assortiment",
+        "width": 430,
+        "height": 932,
+        "status": 200,
+        "scrollWidth": 430,
+        "h1": "Ons assortiment.",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/visschalen",
+        "width": 430,
+        "height": 932,
+        "status": 200,
+        "scrollWidth": 430,
+        "h1": "Visschalen & delicatessen",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/feestdagen",
+        "width": 430,
+        "height": 932,
+        "status": 200,
+        "scrollWidth": 430,
+        "h1": "Feestdagen 2026",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/bezoek-ons",
+        "width": 430,
+        "height": 932,
+        "status": 200,
+        "scrollWidth": 430,
+        "h1": "Waar u ons vindt",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/feestdagen/visschotel-klein-3-5-pers",
+        "width": 430,
+        "height": 932,
+        "status": 200,
+        "scrollWidth": 430,
+        "h1": "Klassieke middelgrote visschaal Â· 3â€“5 personen",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/recepten/zalm-citroen-dille",
+        "width": 430,
+        "height": 932,
+        "status": 200,
+        "scrollWidth": 430,
+        "h1": "Zalm in de oven met citroen en dille",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/contact",
+        "width": 430,
+        "height": 932,
+        "status": 200,
+        "scrollWidth": 430,
+        "h1": "Contact",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl",
+        "width": 768,
+        "height": 1024,
+        "status": 200,
+        "scrollWidth": 768,
+        "h1": "Goede vis. Gewoon Schaapâ€™s.",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/assortiment",
+        "width": 768,
+        "height": 1024,
+        "status": 200,
+        "scrollWidth": 768,
+        "h1": "Ons assortiment.",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/visschalen",
+        "width": 768,
+        "height": 1024,
+        "status": 200,
+        "scrollWidth": 768,
+        "h1": "Visschalen & delicatessen",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/feestdagen",
+        "width": 768,
+        "height": 1024,
+        "status": 200,
+        "scrollWidth": 768,
+        "h1": "Feestdagen 2026",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/bezoek-ons",
+        "width": 768,
+        "height": 1024,
+        "status": 200,
+        "scrollWidth": 768,
+        "h1": "Waar u ons vindt",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/feestdagen/visschotel-klein-3-5-pers",
+        "width": 768,
+        "height": 1024,
+        "status": 200,
+        "scrollWidth": 768,
+        "h1": "Klassieke middelgrote visschaal Â· 3â€“5 personen",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/recepten/zalm-citroen-dille",
+        "width": 768,
+        "height": 1024,
+        "status": 200,
+        "scrollWidth": 768,
+        "h1": "Zalm in de oven met citroen en dille",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/contact",
+        "width": 768,
+        "height": 1024,
+        "status": 200,
+        "scrollWidth": 768,
+        "h1": "Contact",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl",
+        "width": 820,
+        "height": 1180,
+        "status": 200,
+        "scrollWidth": 820,
+        "h1": "Goede vis. Gewoon Schaapâ€™s.",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/assortiment",
+        "width": 820,
+        "height": 1180,
+        "status": 200,
+        "scrollWidth": 820,
+        "h1": "Ons assortiment.",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/visschalen",
+        "width": 820,
+        "height": 1180,
+        "status": 200,
+        "scrollWidth": 820,
+        "h1": "Visschalen & delicatessen",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/feestdagen",
+        "width": 820,
+        "height": 1180,
+        "status": 200,
+        "scrollWidth": 820,
+        "h1": "Feestdagen 2026",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/bezoek-ons",
+        "width": 820,
+        "height": 1180,
+        "status": 200,
+        "scrollWidth": 820,
+        "h1": "Waar u ons vindt",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/feestdagen/visschotel-klein-3-5-pers",
+        "width": 820,
+        "height": 1180,
+        "status": 200,
+        "scrollWidth": 820,
+        "h1": "Klassieke middelgrote visschaal Â· 3â€“5 personen",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/recepten/zalm-citroen-dille",
+        "width": 820,
+        "height": 1180,
+        "status": 200,
+        "scrollWidth": 820,
+        "h1": "Zalm in de oven met citroen en dille",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/contact",
+        "width": 820,
+        "height": 1180,
+        "status": 200,
+        "scrollWidth": 820,
+        "h1": "Contact",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl",
+        "width": 1180,
+        "height": 820,
+        "status": 200,
+        "scrollWidth": 1180,
+        "h1": "Goede vis. Gewoon Schaapâ€™s.",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/assortiment",
+        "width": 1180,
+        "height": 820,
+        "status": 200,
+        "scrollWidth": 1180,
+        "h1": "Ons assortiment.",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/visschalen",
+        "width": 1180,
+        "height": 820,
+        "status": 200,
+        "scrollWidth": 1180,
+        "h1": "Visschalen & delicatessen",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/feestdagen",
+        "width": 1180,
+        "height": 820,
+        "status": 200,
+        "scrollWidth": 1180,
+        "h1": "Feestdagen 2026",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/bezoek-ons",
+        "width": 1180,
+        "height": 820,
+        "status": 200,
+        "scrollWidth": 1180,
+        "h1": "Waar u ons vindt",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/feestdagen/visschotel-klein-3-5-pers",
+        "width": 1180,
+        "height": 820,
+        "status": 200,
+        "scrollWidth": 1180,
+        "h1": "Klassieke middelgrote visschaal Â· 3â€“5 personen",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/recepten/zalm-citroen-dille",
+        "width": 1180,
+        "height": 820,
+        "status": 200,
+        "scrollWidth": 1180,
+        "h1": "Zalm in de oven met citroen en dille",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/contact",
+        "width": 1180,
+        "height": 820,
+        "status": 200,
+        "scrollWidth": 1180,
+        "h1": "Contact",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl",
+        "width": 1366,
+        "height": 768,
+        "status": 200,
+        "scrollWidth": 1366,
+        "h1": "Goede vis. Gewoon Schaapâ€™s.",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/assortiment",
+        "width": 1366,
+        "height": 768,
+        "status": 200,
+        "scrollWidth": 1366,
+        "h1": "Ons assortiment.",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/visschalen",
+        "width": 1366,
+        "height": 768,
+        "status": 200,
+        "scrollWidth": 1366,
+        "h1": "Visschalen & delicatessen",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/feestdagen",
+        "width": 1366,
+        "height": 768,
+        "status": 200,
+        "scrollWidth": 1366,
+        "h1": "Feestdagen 2026",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/bezoek-ons",
+        "width": 1366,
+        "height": 768,
+        "status": 200,
+        "scrollWidth": 1366,
+        "h1": "Waar u ons vindt",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/feestdagen/visschotel-klein-3-5-pers",
+        "width": 1366,
+        "height": 768,
+        "status": 200,
+        "scrollWidth": 1366,
+        "h1": "Klassieke middelgrote visschaal Â· 3â€“5 personen",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/recepten/zalm-citroen-dille",
+        "width": 1366,
+        "height": 768,
+        "status": 200,
+        "scrollWidth": 1366,
+        "h1": "Zalm in de oven met citroen en dille",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/contact",
+        "width": 1366,
+        "height": 768,
+        "status": 200,
+        "scrollWidth": 1366,
+        "h1": "Contact",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl",
+        "width": 1440,
+        "height": 900,
+        "status": 200,
+        "scrollWidth": 1440,
+        "h1": "Goede vis. Gewoon Schaapâ€™s.",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/assortiment",
+        "width": 1440,
+        "height": 900,
+        "status": 200,
+        "scrollWidth": 1440,
+        "h1": "Ons assortiment.",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/visschalen",
+        "width": 1440,
+        "height": 900,
+        "status": 200,
+        "scrollWidth": 1440,
+        "h1": "Visschalen & delicatessen",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/feestdagen",
+        "width": 1440,
+        "height": 900,
+        "status": 200,
+        "scrollWidth": 1440,
+        "h1": "Feestdagen 2026",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/bezoek-ons",
+        "width": 1440,
+        "height": 900,
+        "status": 200,
+        "scrollWidth": 1440,
+        "h1": "Waar u ons vindt",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/feestdagen/visschotel-klein-3-5-pers",
+        "width": 1440,
+        "height": 900,
+        "status": 200,
+        "scrollWidth": 1440,
+        "h1": "Klassieke middelgrote visschaal Â· 3â€“5 personen",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/recepten/zalm-citroen-dille",
+        "width": 1440,
+        "height": 900,
+        "status": 200,
+        "scrollWidth": 1440,
+        "h1": "Zalm in de oven met citroen en dille",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/contact",
+        "width": 1440,
+        "height": 900,
+        "status": 200,
+        "scrollWidth": 1440,
+        "h1": "Contact",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl",
+        "width": 1920,
+        "height": 1080,
+        "status": 200,
+        "scrollWidth": 1920,
+        "h1": "Goede vis. Gewoon Schaapâ€™s.",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/assortiment",
+        "width": 1920,
+        "height": 1080,
+        "status": 200,
+        "scrollWidth": 1920,
+        "h1": "Ons assortiment.",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/visschalen",
+        "width": 1920,
+        "height": 1080,
+        "status": 200,
+        "scrollWidth": 1920,
+        "h1": "Visschalen & delicatessen",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/feestdagen",
+        "width": 1920,
+        "height": 1080,
+        "status": 200,
+        "scrollWidth": 1920,
+        "h1": "Feestdagen 2026",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/bezoek-ons",
+        "width": 1920,
+        "height": 1080,
+        "status": 200,
+        "scrollWidth": 1920,
+        "h1": "Waar u ons vindt",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/feestdagen/visschotel-klein-3-5-pers",
+        "width": 1920,
+        "height": 1080,
+        "status": 200,
+        "scrollWidth": 1920,
+        "h1": "Klassieke middelgrote visschaal Â· 3â€“5 personen",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/recepten/zalm-citroen-dille",
+        "width": 1920,
+        "height": 1080,
+        "status": 200,
+        "scrollWidth": 1920,
+        "h1": "Zalm in de oven met citroen en dille",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "route": "/nl/contact",
+        "width": 1920,
+        "height": 1080,
+        "status": 200,
+        "scrollWidth": 1920,
+        "h1": "Contact",
+        "font": "fontKop, \"fontKop Fallback\", Bitter, Georgia, \"Times New Roman\", serif",
+        "brokenImages": [],
+        "button": [
+          {
+            "background": "rgb(8, 117, 163)",
+            "color": "rgb(255, 255, 255)"
+          }
+        ]
+      },
+      {
+        "check": "200% text enlargement with 683px reflow",
+        "width": 683,
+        "scrollWidth": 683
+      }
+    ],
+    "errors": [],
+    "blockedWrites": 0
+  },
+  "performance": {
+    "environment": "Unthrottled localhost, headless installed Chrome, fresh context per sample; no real-user INP or field data",
+    "rows": [
+      {
+        "path": "/nl",
+        "width": 390,
+        "sample": 1,
+        "lcp": 964,
+        "cls": 0,
+        "shifts": [],
+        "domContentLoaded": 827.2999999523163,
+        "transferBytes": 621738,
+        "requests": 40
+      },
+      {
+        "path": "/nl",
+        "width": 390,
+        "sample": 2,
+        "lcp": 1016,
+        "cls": 0,
+        "shifts": [],
+        "domContentLoaded": 843.7000000476837,
+        "transferBytes": 621746,
+        "requests": 40
+      },
+      {
+        "path": "/nl",
+        "width": 390,
+        "sample": 3,
+        "lcp": 968,
+        "cls": 0,
+        "shifts": [],
+        "domContentLoaded": 809.7999999523163,
+        "transferBytes": 621747,
+        "requests": 40
+      },
+      {
+        "path": "/nl/assortiment",
+        "width": 390,
+        "sample": 1,
+        "lcp": 1084,
+        "cls": 0,
+        "shifts": [],
+        "domContentLoaded": 818.5,
+        "transferBytes": 562776,
+        "requests": 40
+      },
+      {
+        "path": "/nl/assortiment",
+        "width": 390,
+        "sample": 2,
+        "lcp": 1104,
+        "cls": 0,
+        "shifts": [],
+        "domContentLoaded": 840.2000000476837,
+        "transferBytes": 562781,
+        "requests": 40
+      },
+      {
+        "path": "/nl/assortiment",
+        "width": 390,
+        "sample": 3,
+        "lcp": 1108,
+        "cls": 0,
+        "shifts": [],
+        "domContentLoaded": 802.7000000476837,
+        "transferBytes": 562779,
+        "requests": 40
+      },
+      {
+        "path": "/nl/feestdagen",
+        "width": 390,
+        "sample": 1,
+        "lcp": 1012,
+        "cls": 0.04420056980056981,
+        "shifts": [
+          {
+            "value": 0.04420056980056981,
+            "time": 1127.2999999523163,
+            "nodes": [
+              {
+                "tag": "BUTTON",
+                "class": "catalog-cart-trigger",
+                "previous": {
+                  "x": 291,
+                  "y": 805,
+                  "width": 99,
+                  "height": 95,
+                  "top": 805,
+                  "right": 390,
+                  "bottom": 900,
+                  "left": 291
+                },
+                "current": {
+                  "x": 291,
+                  "y": 117,
+                  "width": 99,
+                  "height": 110,
+                  "top": 117,
+                  "right": 390,
+                  "bottom": 227,
+                  "left": 291
+                }
+              }
+            ]
+          }
+        ],
+        "domContentLoaded": 856.0999999046326,
+        "transferBytes": 421780,
+        "requests": 25
+      },
+      {
+        "path": "/nl/feestdagen",
+        "width": 390,
+        "sample": 2,
+        "lcp": 944,
+        "cls": 0.04420056980056981,
+        "shifts": [
+          {
+            "value": 0.04420056980056981,
+            "time": 1073.5,
+            "nodes": [
+              {
+                "tag": "BUTTON",
+                "class": "catalog-cart-trigger",
+                "previous": {
+                  "x": 291,
+                  "y": 805,
+                  "width": 99,
+                  "height": 95,
+                  "top": 805,
+                  "right": 390,
+                  "bottom": 900,
+                  "left": 291
+                },
+                "current": {
+                  "x": 291,
+                  "y": 117,
+                  "width": 99,
+                  "height": 110,
+                  "top": 117,
+                  "right": 390,
+                  "bottom": 227,
+                  "left": 291
+                }
+              }
+            ]
+          }
+        ],
+        "domContentLoaded": 863.2000000476837,
+        "transferBytes": 421785,
+        "requests": 25
+      },
+      {
+        "path": "/nl/feestdagen",
+        "width": 390,
+        "sample": 3,
+        "lcp": 1000,
+        "cls": 0.04420056980056981,
+        "shifts": [
+          {
+            "value": 0.04420056980056981,
+            "time": 1110.5,
+            "nodes": [
+              {
+                "tag": "BUTTON",
+                "class": "catalog-cart-trigger",
+                "previous": {
+                  "x": 291,
+                  "y": 805,
+                  "width": 99,
+                  "height": 95,
+                  "top": 805,
+                  "right": 390,
+                  "bottom": 900,
+                  "left": 291
+                },
+                "current": {
+                  "x": 291,
+                  "y": 117,
+                  "width": 99,
+                  "height": 110,
+                  "top": 117,
+                  "right": 390,
+                  "bottom": 227,
+                  "left": 291
+                }
+              }
+            ]
+          }
+        ],
+        "domContentLoaded": 853.8000001907349,
+        "transferBytes": 421787,
+        "requests": 25
+      },
+      {
+        "path": "/nl",
+        "width": 1440,
+        "sample": 1,
+        "lcp": 1008,
+        "cls": 0,
+        "shifts": [],
+        "domContentLoaded": 782.1000001430511,
+        "transferBytes": 741815,
+        "requests": 52
+      },
+      {
+        "path": "/nl",
+        "width": 1440,
+        "sample": 2,
+        "lcp": 940,
+        "cls": 0,
+        "shifts": [],
+        "domContentLoaded": 752.1000001430511,
+        "transferBytes": 741811,
+        "requests": 52
+      },
+      {
+        "path": "/nl",
+        "width": 1440,
+        "sample": 3,
+        "lcp": 960,
+        "cls": 0,
+        "shifts": [],
+        "domContentLoaded": 792.5,
+        "transferBytes": 741812,
+        "requests": 52
+      },
+      {
+        "path": "/nl/assortiment",
+        "width": 1440,
+        "sample": 1,
+        "lcp": 976,
+        "cls": 0,
+        "shifts": [],
+        "domContentLoaded": 837.2000000476837,
+        "transferBytes": 722648,
+        "requests": 61
+      },
+      {
+        "path": "/nl/assortiment",
+        "width": 1440,
+        "sample": 2,
+        "lcp": 976,
+        "cls": 0,
+        "shifts": [],
+        "domContentLoaded": 831.7999999523163,
+        "transferBytes": 722651,
+        "requests": 61
+      },
+      {
+        "path": "/nl/assortiment",
+        "width": 1440,
+        "sample": 3,
+        "lcp": 1004,
+        "cls": 0,
+        "shifts": [],
+        "domContentLoaded": 817.0999999046326,
+        "transferBytes": 722644,
+        "requests": 61
+      },
+      {
+        "path": "/nl/feestdagen",
+        "width": 1440,
+        "sample": 1,
+        "lcp": 588,
+        "cls": 0.008672270447530864,
+        "shifts": [
+          {
+            "value": 0.008672270447530864,
+            "time": 747.5,
+            "nodes": [
+              {
+                "tag": "BUTTON",
+                "class": "catalog-cart-trigger",
+                "previous": {
+                  "x": 1331,
+                  "y": 795,
+                  "width": 109,
+                  "height": 105,
+                  "top": 795,
+                  "right": 1440,
+                  "bottom": 900,
+                  "left": 1331
+                },
+                "current": {
+                  "x": 1331,
+                  "y": 117,
+                  "width": 109,
+                  "height": 114,
+                  "top": 117,
+                  "right": 1440,
+                  "bottom": 231,
+                  "left": 1331
+                }
+              }
+            ]
+          }
+        ],
+        "domContentLoaded": 473.09999990463257,
+        "transferBytes": 560268,
+        "requests": 46
+      },
+      {
+        "path": "/nl/feestdagen",
+        "width": 1440,
+        "sample": 2,
+        "lcp": 952,
+        "cls": 0.008672270447530864,
+        "shifts": [
+          {
+            "value": 0.008672270447530864,
+            "time": 1077.6999998092651,
+            "nodes": [
+              {
+                "tag": "BUTTON",
+                "class": "catalog-cart-trigger",
+                "previous": {
+                  "x": 1331,
+                  "y": 795,
+                  "width": 109,
+                  "height": 105,
+                  "top": 795,
+                  "right": 1440,
+                  "bottom": 900,
+                  "left": 1331
+                },
+                "current": {
+                  "x": 1331,
+                  "y": 117,
+                  "width": 109,
+                  "height": 114,
+                  "top": 117,
+                  "right": 1440,
+                  "bottom": 231,
+                  "left": 1331
+                }
+              }
+            ]
+          }
+        ],
+        "domContentLoaded": 763.0999999046326,
+        "transferBytes": 560271,
+        "requests": 46
+      },
+      {
+        "path": "/nl/feestdagen",
+        "width": 1440,
+        "sample": 3,
+        "lcp": 972,
+        "cls": 0.008672270447530864,
+        "shifts": [
+          {
+            "value": 0.008672270447530864,
+            "time": 1101.9000000953674,
+            "nodes": [
+              {
+                "tag": "BUTTON",
+                "class": "catalog-cart-trigger",
+                "previous": {
+                  "x": 1331,
+                  "y": 795,
+                  "width": 109,
+                  "height": 105,
+                  "top": 795,
+                  "right": 1440,
+                  "bottom": 900,
+                  "left": 1331
+                },
+                "current": {
+                  "x": 1331,
+                  "y": 117,
+                  "width": 109,
+                  "height": 114,
+                  "top": 117,
+                  "right": 1440,
+                  "bottom": 231,
+                  "left": 1331
+                }
+              }
+            ]
+          }
+        ],
+        "domContentLoaded": 817.7000000476837,
+        "transferBytes": 560268,
+        "requests": 46
+      }
+    ]
+  },
+  "externalValidators": {
+    "schemaOrg": {
+      "errors": 0,
+      "warnings": 0,
+      "items": 6
+    },
+    "googleRichResults": {
+      "validItems": 9,
+      "nonCriticalWarnings": true,
+      "mode": "combined code extract; not live crawl"
+    }
+  },
+  "cloudflareBrowser": {
+    "results": [
+      {
+        "route": "/nl",
+        "status": 200,
+        "images": [
+          {
+            "src": "http://localhost:3037/_next/image?url=%2Fimages%2Fassortiment-internet%2Fhollandse-garnalen-solt.jpeg&w=256&q=75",
+            "width": 4168
+          },
+          {
+            "src": "http://localhost:3037/_next/image?url=%2Fimages%2Fdirks%2Fscholfilet.webp&w=256&q=75",
+            "width": 1218
+          },
+          {
+            "src": "http://localhost:3037/_next/image?url=%2Fimages%2Fdirks%2Fcoquilles-vlees.webp&w=256&q=75",
+            "width": 1218
+          },
+          {
+            "src": "http://localhost:3037/_next/image?url=%2Fimages%2Fdirks%2Fharing.webp&w=256&q=75",
+            "width": 1218
+          },
+          {
+            "src": "http://localhost:3037/images/dirks/visschotel-hapjes-3-5-pers.webp",
+            "width": 1600
+          }
+        ]
+      },
+      {
+        "route": "/nl/contact",
+        "status": 200,
+        "images": []
+      },
+      {
+        "route": "/nl/feestdagen",
+        "status": 200,
+        "images": [
+          {
+            "src": "http://localhost:3037/_next/image?url=%2Fimages%2Fdirks%2Fzalmslaatje-de-luxe.webp&w=640&q=75",
+            "width": 975
+          }
+        ]
+      }
+    ],
+    "errors": []
+  },
+  "imageOptimizationCaveat": "Transfer savings measured on Next only. Current Vinext config lacks optimizer adapter; Cloudflare local image requests redirect to original assets. No paid adapter enabled.",
+  "cloudflare": {
+    "pagesChecked": 507,
+    "internalLinksChecked": 519,
+    "imagesChecked": 153,
+    "recipesWithDishImage": 111,
+    "deliveryRedirectsChecked": 9,
+    "publicRobots": true,
+    "failures": [],
+    "warnings": [
+      {
+        "path": "/nl/recepten/haringsalade-appel-biet",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/en/recepten/haringsalade-appel-biet",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/de/recepten/haringsalade-appel-biet",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/nl/recepten/haring-komkommer-borrelhapjes",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/en/recepten/haring-komkommer-borrelhapjes",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/de/recepten/haring-komkommer-borrelhapjes",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/nl/recepten/makreel-aardappel-ovenschotel",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/en/recepten/makreel-aardappel-ovenschotel",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/de/recepten/makreel-aardappel-ovenschotel",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      }
+    ]
+  },
+  "staticImages": {
+    "origin": "http://localhost:3037",
+    "results": [
+      {
+        "width": 390,
+        "chosen": [
+          {
+            "src": "/images/responsive/zalm-citroen-dille-2f1ea1f890f5-640.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/varlaks-zalm-rauw-ai-541621dcf5fc-320.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/kibbeling-schaapstray-86e128880cb1-320.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/hollandse-garnalen-solt-935777210211-320.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/scholfilet-8e3ada79b862-320.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/coquilles-vlees-895f3886eda1-320.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/haring-98f6369c0585-320.webp",
+            "loaded": true
+          }
+        ],
+        "bytes": 101092,
+        "originalBytes": 6965315,
+        "reductionPercent": 98.5,
+        "errors": []
+      },
+      {
+        "width": 1440,
+        "chosen": [
+          {
+            "src": "/images/responsive/zalm-citroen-dille-2f1ea1f890f5-960.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/varlaks-zalm-rauw-ai-541621dcf5fc-640.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/kibbeling-schaapstray-86e128880cb1-640.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/hollandse-garnalen-solt-935777210211-640.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/scholfilet-8e3ada79b862-640.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/coquilles-vlees-895f3886eda1-640.webp",
+            "loaded": true
+          },
+          {
+            "src": "/images/responsive/haring-98f6369c0585-640.webp",
+            "loaded": true
+          }
+        ],
+        "bytes": 251948,
+        "originalBytes": 6965315,
+        "reductionPercent": 96.4,
+        "errors": []
+      }
+    ]
+  },
+  "actualBrowserZoom": {
+    "results": [
+      {
+        "route": "/nl",
+        "outer": 1366,
+        "inner": 675,
+        "dpr": 2,
+        "scroll": 675,
+        "rootFont": "17px"
+      },
+      {
+        "route": "/nl/assortiment",
+        "outer": 1366,
+        "inner": 675,
+        "dpr": 2,
+        "scroll": 675,
+        "rootFont": "17px"
+      },
+      {
+        "route": "/nl/visschalen",
+        "outer": 1366,
+        "inner": 675,
+        "dpr": 2,
+        "scroll": 675,
+        "rootFont": "17px"
+      },
+      {
+        "route": "/nl/feestdagen",
+        "outer": 1366,
+        "inner": 675,
+        "dpr": 2,
+        "scroll": 675,
+        "rootFont": "17px"
+      },
+      {
+        "route": "/nl/bezoek-ons",
+        "outer": 1366,
+        "inner": 675,
+        "dpr": 2,
+        "scroll": 675,
+        "rootFont": "17px"
+      },
+      {
+        "route": "/nl/contact",
+        "outer": 1366,
+        "inner": 675,
+        "dpr": 2,
+        "scroll": 675,
+        "rootFont": "17px"
+      },
+      {
+        "route": "/nl/feestdagen/visschotel-klein-3-5-pers",
+        "outer": 1366,
+        "inner": 675,
+        "dpr": 2,
+        "scroll": 675,
+        "rootFont": "17px"
+      },
+      {
+        "route": "/nl/recepten/zalm-citroen-dille",
+        "outer": 1366,
+        "inner": 675,
+        "dpr": 2,
+        "scroll": 675,
+        "rootFont": "17px"
+      }
+    ],
+    "errors": []
+  },
+  "lighthouse": [
+    {
+      "file": "lh-final-assortiment-desktop.report.json",
+      "categories": {
+        "performance": 0.92,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 0.92
+      },
+      "lcpMs": 1821.9826854003395,
+      "cls": 0,
+      "environment": "Local Cloudflare build, simulated throttling; not field CWV. Canonical points to production, not localhost."
+    },
+    {
+      "file": "lh-final-assortiment-mobile.report.json",
+      "categories": {
+        "performance": 0.73,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 0.92
+      },
+      "lcpMs": 9432.634998429543,
+      "cls": 0,
+      "environment": "Local Cloudflare build, simulated throttling; not field CWV. Canonical points to production, not localhost."
+    },
+    {
+      "file": "lh-final-contact-desktop.report.json",
+      "categories": {
+        "performance": 0.93,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 0.92
+      },
+      "lcpMs": 1714.7386335181595,
+      "cls": 0,
+      "environment": "Local Cloudflare build, simulated throttling; not field CWV. Canonical points to production, not localhost."
+    },
+    {
+      "file": "lh-final-contact-mobile.report.json",
+      "categories": {
+        "performance": 0.75,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 0.92
+      },
+      "lcpMs": 8169.133074516221,
+      "cls": 0,
+      "environment": "Local Cloudflare build, simulated throttling; not field CWV. Canonical points to production, not localhost."
+    },
+    {
+      "file": "lh-final-home-desktop.report.json",
+      "categories": {
+        "performance": 0.94,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 0.92
+      },
+      "lcpMs": 1600.0136303873524,
+      "cls": 0,
+      "environment": "Local Cloudflare build, simulated throttling; not field CWV. Canonical points to production, not localhost."
+    },
+    {
+      "file": "lh-final-home-mobile.report.json",
+      "categories": {
+        "performance": 0.76,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 0.92
+      },
+      "lcpMs": 6490.999,
+      "cls": 0,
+      "environment": "Local Cloudflare build, simulated throttling; not field CWV. Canonical points to production, not localhost."
+    },
+    {
+      "file": "lh-final-visschalen-desktop.report.json",
+      "categories": {
+        "performance": 0.94,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 0.92
+      },
+      "lcpMs": 1666.5048000000002,
+      "cls": 0.01023068403319661,
+      "environment": "Local Cloudflare build, simulated throttling; not field CWV. Canonical points to production, not localhost."
+    },
+    {
+      "file": "lh-final-visschalen-mobile.report.json",
+      "categories": {
+        "performance": 0.72,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 0.92
+      },
+      "lcpMs": 12679.22230879046,
+      "cls": 0.04443583847559303,
+      "environment": "Local Cloudflare build, simulated throttling; not field CWV. Canonical points to production, not localhost."
+    }
+  ],
+  "headingReview": {
+    "pages": 507,
+    "outlines": 507,
+    "skippedLevels": [],
+    "comparison": "Token-set Jaccard > 0.70 within each language; candidate detection, not a semantic quality score",
+    "decisions": [
+      {
+        "pages": "zalm-sashimi-ongesneden / tonijn-sashimi-ongesneden",
+        "decision": "Retain: different fish, separate actual products; shared preparation words are factual."
+      },
+      {
+        "pages": "luxe-trio-klein / luxe-vistrio",
+        "decision": "Retain: same composition, different size/price; do not invent a different recipe."
+      },
+      {
+        "pages": "visschotel-klein-2-3-pers / visschotel-klein-3-5-pers",
+        "decision": "Retain: separately selectable fixed variants with different portions/price."
+      },
+      {
+        "pages": "zomerse-zalmsalade / gegrilde-schol (EN/DE)",
+        "decision": "Fix: recipe description now includes visible localized dish title before tagline; applied consistently to NL/EN/DE."
+      }
+    ]
+  },
+  "cloudflareLockedFinal": {
+    "profile": "locked",
+    "failures": []
+  },
+  "nextLockedFinal": {
+    "profile": "locked",
+    "failures": []
+  },
+  "editorialCloudflare": {
+    "pagesChecked": 507,
+    "internalLinksChecked": 519,
+    "imagesChecked": 153,
+    "failures": [],
+    "warnings": [
+      {
+        "path": "/nl/recepten/haringsalade-appel-biet",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/en/recepten/haringsalade-appel-biet",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/de/recepten/haringsalade-appel-biet",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/nl/recepten/haring-komkommer-borrelhapjes",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/en/recepten/haring-komkommer-borrelhapjes",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/de/recepten/haring-komkommer-borrelhapjes",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/nl/recepten/makreel-aardappel-ovenschotel",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/en/recepten/makreel-aardappel-ovenschotel",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/de/recepten/makreel-aardappel-ovenschotel",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      }
+    ]
+  },
+  "protectedContent": {
+    "base": "b60f56e1553ab7c7f162bc1707820d64e97f3b06",
+    "products": 67,
+    "unchanged": [
+      "prices",
+      "portions",
+      "ingredients",
+      "allergens",
+      "availability",
+      "product image sources",
+      "nutrition",
+      "season advice",
+      "23 festive variants",
+      "catalog mapping"
+    ],
+    "liveHosts": [
+      {
+        "url": "http://schaapsvishandel.nl/nl",
+        "status": 301,
+        "location": "https://schaapsvishandel.nl/nl",
+        "robots": null,
+        "server": "cloudflare",
+        "passwordPage": false,
+        "sitemapCount": 0
+      },
+      {
+        "url": "http://www.schaapsvishandel.nl/nl",
+        "status": 301,
+        "location": "https://schaapsvishandel.nl/nl",
+        "robots": null,
+        "server": "cloudflare",
+        "passwordPage": false,
+        "sitemapCount": 0
+      },
+      {
+        "url": "https://www.schaapsvishandel.nl/nl",
+        "status": 301,
+        "location": "https://schaapsvishandel.nl/nl",
+        "robots": null,
+        "server": "cloudflare",
+        "passwordPage": false,
+        "sitemapCount": 0
+      },
+      {
+        "url": "https://schaapsvishandel.nl/nl/",
+        "status": 308,
+        "location": "/nl",
+        "robots": null,
+        "server": "cloudflare",
+        "passwordPage": false,
+        "sitemapCount": 0
+      },
+      {
+        "url": "https://schaapsvishandel.nl/robots.txt",
+        "status": 200,
+        "location": null,
+        "robots": null,
+        "server": "cloudflare",
+        "passwordPage": false,
+        "sitemapCount": 0,
+        "robotsText": "User-Agent: *\nDisallow: /\n\n"
+      },
+      {
+        "url": "https://schaapsvishandel.nl/sitemap.xml",
+        "status": 200,
+        "location": null,
+        "robots": null,
+        "server": "cloudflare",
+        "passwordPage": false,
+        "sitemapCount": 0
+      },
+      {
+        "url": "https://schaapsvis.schaapsvis.workers.dev/nl",
+        "status": 200,
+        "location": null,
+        "robots": null,
+        "server": "cloudflare",
+        "passwordPage": false,
+        "sitemapCount": 0
+      }
+    ]
+  },
+  "redirectFix": {
+    "rule": "www naar hoofdsite",
+    "match": "http.host eq www.schaapsvishandel.nl",
+    "status": 301,
+    "preservesPathAndQuery": true,
+    "previousHttpWwwStatus": 522
+  }
+}

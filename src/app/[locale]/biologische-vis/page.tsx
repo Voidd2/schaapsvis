@@ -6,7 +6,7 @@ import { BEDRIJF } from "@/lib/bedrijf";
 import { products } from "@/lib/assortiment-data";
 import { localizeProduct } from "@/lib/product-localization";
 import { productPhoto } from "@/lib/product-beeld";
-import { paginaMetadata, kruimelSchema, vraagSchema } from "@/lib/seo";
+import { paginaMetadata, kruimelSchema } from "@/lib/seo";
 import { VarlaksFilm } from "@/components/shared/VarlaksFilm";
 import { bestelContact } from "@/lib/bestel-contact";
 const copy={
@@ -57,7 +57,7 @@ export default async function Page({params}:{params:Promise<{locale:string}>}){
  const vragen = [{ v: c.cert, a: c.certintro + " " + c.biotext + " " + c.asctext + " " + c.msctext }, { v: c.contact + "?", a: c.note }];
  return <>
  <Schema data={kruimelSchema(locale, [{ naam: BEDRIJF.naamKort, pad: "/" }, { naam: c.title.replace("\n", " "), pad: "/biologische-vis" }])} />
- <Schema data={vraagSchema(vragen)} />
+
  <header className="fresh-hero"><div className="section-wrap fresh-hero-grid"><div><p className="kapitaal">{c.label}</p><h1>{c.title}</h1><p className="fresh-intro">{c.intro}</p><a className="knop knop-rood mt-7" href={bestelContact(locale).href}>{c.contact}</a></div><figure><Image width={1400} height={1050} sizes="(max-width: 800px) 100vw, 50vw" src="/images/editorial/varlaks-zalm-rauw-ai.webp" alt={locale === "de" ? "Rohes frisches Lachsfilet auf Eis mit Zitrone und Dill" : locale === "en" ? "Raw fresh salmon fillet on ice with lemon and dill" : "Rauwe verse zalmfilet op ijs met citroen en dille"} fetchPriority="high"/></figure></div></header>
  <section className="story-section section-wrap"><div className="story-grid"><div><p className="kapitaal">{locale === "de" ? "VÅRLAKS · Nordnorwegen" : locale === "nl" ? "VÅRLAKS · Noord-Noorwegen" : "VÅRLAKS · Northern Norway"}</p><h2>{c.supplier}</h2><p>{c.story}</p><p>{c.story2}</p><a className="underline text-sm font-semibold" href="https://varlaks.no/" target="_blank" rel="noopener noreferrer">{c.source} ↗</a></div><VarlaksFilm locale={locale}/></div></section>
  <section className="section-wrap py-16 md:py-20"><div className="mb-8 flex flex-wrap items-end justify-between gap-3"><h2 className="text-3xl md:text-4xl">{journey.heading}</h2><p className="kapitaal">{journey.credit}</p></div><div className="grid gap-6 md:grid-cols-3">{journey.items.map((item)=><figure key={item.image} className="overflow-hidden rounded-2xl border border-sky-100 bg-white"><Image src={`/images/varlaks/${item.image}`} alt={item.alt} width={600} height={600} sizes="(max-width: 768px) 100vw, 33vw" className="aspect-[4/3] w-full object-cover"/><figcaption className="p-5"><h3 className="mb-2 text-xl">{item.title}</h3><p className="text-sm leading-relaxed">{item.text}</p></figcaption></figure>)}</div></section>

@@ -135,7 +135,7 @@ export const products: Product[] = [
   {
     "slug": "tarbotfilet",
     "naam": "Tarbotfilet",
-    "desc": "Vers gefileerde tarbot. Stevig van structuur met een rijke, boterachtiger smaak — weinig bereiding nodig.",
+    "desc": "Vers gefileerde tarbot. Stevig van structuur met een rijke, boterachtige smaak — weinig bereiding nodig.",
     "categorie": "verse-vis",
     "ingredienten": "Tarbot (Psetta maxima) [VIS]. Geen toegevoegde stoffen.",
     "bevat": [
@@ -191,7 +191,7 @@ export const products: Product[] = [
   {
     "slug": "roodbaars",
     "naam": "Roodbaars",
-    "desc": "Roodbaars (Sebastes marinus) uit de koude Noord-Atlantische Oceaan. Stevig, smaakvol rood vlees — heerlijk gegrild of in de oven.",
+    "desc": "Roodbaars (Sebastes marinus) uit de koude Noord-Atlantische Oceaan. Stevig, smaakvol visvlees — heerlijk gegrild of in de oven.",
     "categorie": "verse-vis",
     "photo": "/images/producten-hd/roodbaars.webp",
     "ingredienten": "Roodbaars (Sebastes marinus) [VIS]. Geen toegevoegde stoffen.",
@@ -242,9 +242,8 @@ export const products: Product[] = [
   {
     "slug": "gerookte-zalm-high-seas",
     "naam": "Gerookte Zalm — High Seas",
-    "desc": "Dun gesneden, koudgerookte Atlantische zalm (Salmo salar) uit Noorwegen, gerookt door W.G. den Heijer & Zn. in Scheveningen. De zalm is ASC-gecertificeerd: lekker op toast, bij een brunch of in een salade.",
+    "desc": "Dun gesneden, koudgerookte Atlantische zalm (Salmo salar) van High Seas, gerookt door W.G. den Heijer & Zn. Lekker op toast, bij een brunch of in een salade. Vraag naar de herkomst en certificering op de actuele verpakking.",
     "categorie": "gerookte-vis",
-    "badge": "ASC",
     "omega3": true,
     "bestelId": "zalm-gerookt",
     "photo": "/images/producten-hd/gerookte-zalm-high-seas.webp",
@@ -306,7 +305,7 @@ export const products: Product[] = [
   {
     "slug": "gerookte-heilbot",
     "naam": "Gerookte Heilbotfilet",
-    "desc": "Fijnmazig, vet gerookt heilbotvlees (Hippoglossus hippoglossus) — bijna boterarchtig van textuur. Een echte delicatesse op een borrelplank.",
+    "desc": "Fijnmazig, vet gerookt heilbotvlees (Hippoglossus hippoglossus) — bijna boterachtig van textuur. Een echte delicatesse op een borrelplank.",
     "categorie": "gerookte-vis",
     "photo": "/images/producten-hd/gerookte-heilbot.webp",
     "ingredienten": "Heilbot (Hippoglossus hippoglossus) [VIS], zout, rook.",
@@ -403,7 +402,7 @@ export const products: Product[] = [
   {
     "slug": "kokkels",
     "naam": "Kokkels",
-    "desc": "Verse Zeeuwse kokkels (Cerastoderma edule) — een Hollands borrelhapje bij uitstek. Zout, zeers en vol van smaak.",
+    "desc": "Verse Zeeuwse kokkels (Cerastoderma edule) — een Hollands borrelhapje bij uitstek. Zilt en vol van smaak.",
     "categorie": "schaal-schelp",
     "photo": "/images/producten-hd/kokkels.webp",
     "ingredienten": "Kokkels (Cerastoderma edule) [WEEKDIEREN], zout, azijn.",
@@ -415,7 +414,7 @@ export const products: Product[] = [
   {
     "slug": "coquilles",
     "naam": "Coquilles",
-    "desc": "Verse coquilles (Pecten maximus) — mals en licht zoet van smaak. Binnen 2 minuten klaar in de pan. Ideaal als voorgerecht of borrelschotel.",
+    "desc": "Verse coquilles (Pecten maximus) — mals en licht zoet van smaak. Lekker kort gebakken in een hete pan. Ideaal als voorgerecht of borrelschotel.",
     "categorie": "schaal-schelp",
     "photo": "/images/producten-hd/coquilles.webp",
     "ingredienten": "Coquilles (Pecten maximus) [WEEKDIEREN].",
@@ -574,9 +573,8 @@ export const products: Product[] = [
   {
     "slug": "gerookte-zalm-snippers",
     "naam": "Gerookte Zalm Snippers",
-    "desc": "Smaakvolle snippers van koudgerookte Atlantische zalm van High Seas, gerookt door W.G. den Heijer & Zn. in Scheveningen. De zalm is ASC-gecertificeerd. Lekker door pasta, op toast of door roerei.",
+    "desc": "Smaakvolle snippers van koudgerookte Atlantische zalm van High Seas, gerookt door W.G. den Heijer & Zn. Lekker door pasta, op toast of door roerei. Vraag naar de herkomst en certificering op de actuele verpakking.",
     "categorie": "gerookte-vis",
-    "badge": "ASC",
     "omega3": true,
     "photo": "/images/producten-hd/gerookte-zalm-snippers.webp",
     "ingredienten": "Atlantische zalm (Salmo salar) [VIS], zout, rook.",
@@ -732,9 +730,8 @@ export const products: Product[] = [
   {
     "slug": "gerookte-zalmmoot",
     "naam": "Warm Gerookte Zalmmoot",
-    "desc": "Een stevige moot warmgerookte Atlantische zalmfilet (Salmo salar), met een volle rooksmaak. Direct te eten of kort warm te serveren met aardappelen en groenten. ASC-gecertificeerd.",
+    "desc": "Een stevige moot warmgerookte Atlantische zalmfilet (Salmo salar), met een volle rooksmaak. Direct te eten of kort warm te serveren met aardappelen en groenten. Vraag naar de certificering op de actuele verpakking.",
     "categorie": "gerookte-vis",
-    "badge": "ASC",
     "omega3": true,
     "ingredienten": "Atlantische zalm (Salmo salar) [VIS], zout, rook.",
     "bevat": [

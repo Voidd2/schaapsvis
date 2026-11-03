@@ -3,11 +3,13 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { BEDRIJF } from "@/lib/bedrijf";
+import { validContact } from "@/lib/contact-validation";
 
 export function ContactFormulier() {
   const t = useTranslations("contactPage");
   const [naam, setNaam] = useState("");
   const [email, setEmail] = useState("");
+  const [telefoon, setTelefoon] = useState("");
   const [bericht, setBericht] = useState("");
   const [status, setStatus] = useState<"invullen" | "versturen" | "gelukt" | "mislukt">(
     "invullen"
@@ -17,12 +19,15 @@ export function ContactFormulier() {
   async function verstuur(e: React.FormEvent) {
     e.preventDefault();
     if (!naam.trim() || !bericht.trim()) return;
+    if (!validContact(email, telefoon)) {
+      setFout(t("replyRequired")); setStatus("mislukt"); return;
+    }
     setStatus("versturen");
     try {
       const antwoord = await fetch("/api/bericht", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ naam, email, bericht }),
+        body: JSON.stringify({ naam, email, telefoon, bericht }),
       });
       const data = (await antwoord.json()) as { ok?: boolean; fout?: string };
       if (!antwoord.ok || !data.ok) {
@@ -55,6 +60,7 @@ export function ContactFormulier() {
           value={naam}
           onChange={(e) => setNaam(e.target.value)}
           className="veld"
+          maxLength={120}
           required
         />
       </label>
@@ -67,8 +73,19 @@ export function ContactFormulier() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="veld"
+          maxLength={160}
+          required={!telefoon.trim()}
+          aria-describedby="contact-reply-help"
         />
       </label>
+
+      <label className="block">
+        <span className="veld-label">{t("phoneLabel")}</span>
+        <input type="tel" autoComplete="tel" value={telefoon}
+          onChange={(e) => setTelefoon(e.target.value)} className="veld" maxLength={40}
+          required={!email.trim()} aria-describedby="contact-reply-help" />
+      </label>
+      <p id="contact-reply-help" className="text-sm leading-relaxed">{t("replyRequired")}</p>
 
       <label className="block">
         <span className="veld-label">{t("messageLabel")}</span>
@@ -77,6 +94,7 @@ export function ContactFormulier() {
           value={bericht}
           onChange={(e) => setBericht(e.target.value)}
           className="veld resize-none"
+          maxLength={4000}
           required
         />
       </label>
@@ -90,7 +108,7 @@ export function ContactFormulier() {
       </button>
 
       {status === "mislukt" && (
-        <div className="p-4" style={{ border: "1px solid var(--rood)" }}>
+        <div role="alert" className="p-4" style={{ border: "1px solid var(--rood)" }}>
           <p className="font-semibold mb-1" style={{ color: "var(--rood)" }}>
             {t("mislukt")}
           </p>

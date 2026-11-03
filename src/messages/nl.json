@@ -216,6 +216,8 @@
     "formTitle": "Stuur een bericht",
     "nameLabel": "Naam",
     "emailLabel": "E-mailadres",
+    "phoneLabel": "Telefoonnummer",
+    "replyRequired": "Vul een geldig e-mailadres of telefoonnummer in zodat we u kunnen antwoorden.",
     "messageLabel": "Bericht",
     "send": "Bericht versturen",
     "infoTitle": "Contactgegevens",
