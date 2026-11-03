@@ -27,6 +27,8 @@ De nieuwe CI-job `locked-site` herhaalt dit met uitsluitend GET-verzoeken. Repos
 
 ## Scorecard
 
+Actuele aanvulling PR86: de eigenaar heeft dinsdag09:00 en WhatsApp06 2481 1678 bevestigd en gekozen voor het Google Maps-belnummer. Rechtstreeks Maps-bewijs:071 512 4810. Deze scheiding staat live (main70bc65e, site7b95e527 Ready/100%); tien NL/EN/DE route/schermchecks slagen. NAP-keuze is daarmee afgerond. Externe gidsvermeldingen zijn niet gewijzigd; resterende eigenaargegevens en etiketten blijven apart vermeld. Zie [NAP-controle](nap-controle.md).
+
 Aanvulling C2, PR85: [externe controle](https://github.com/Voidd2/schaapsvis/actions/runs/41695047443) van 3 november18:34UTC slaagt voor vijf routes op ieder van vier bekende hosts: hoofddomein, `schaapsvis.schaapsvis.workers.dev`, `schaapsvis.vercel.app` en `schaapsvis-9sai.vercel.app`. Zonder cookies: wachtwoordformulier, noindex/no-store en geen publiek JSON-LD. De eerste drie hosts geven robots Disallow en een lege XML-sitemap. Het verouderde 9sai-project herschrijft ook robots en sitemap naar het afgeschermde noindex-wachtwoordscherm. Dit is geen geldig robotsbestand, maar er lekt geen productinhoud of sitemap. Geen oude deployment omgezet of beveiliging gewijzigd om de test te laten slagen. Ruwe compacte resultaten: `design-preview/master-audit/preview-host-proof.json` naast de repo. Dit bewijs omvat deze vier bekende hostnamen, niet elk ooit gegenereerd deploymentadres.
 
 | Onderdeel | Status | Bewijs / beperking |
@@ -40,7 +42,7 @@ Aanvulling C2, PR85: [externe controle](https://github.com/Voidd2/schaapsvis/act
 | HTML / headings | Gecontroleerd en goed | 507 server-HTML-outlines: één H1, geen overgeslagen niveaus; inhoud/links/JSON-LD server-side aanwezig. Geen volledige handmatige redactionele keuring van 507 pagina’s geclaimd. |
 | Structured data | Gecorrigeerd | Onbewezen voorraad en generiek bezorggebied verwijderd. FAQ-emissie verwijderd, zichtbare antwoorden behouden. Externe codevalidatie geldig; zie afzonderlijk rapport. |
 | Interne links / redirects | Gecorrigeerd | Niet-bestaande recepten/blogs geven nu 404. Twaalf onbekende detailroutes, oude Duitse route en negen bezorgredirects gecontroleerd. Bestaande routes behouden. |
-| Lokale SEO | Wacht op eigenaar | Externe telefoon- en dinsdagtijdverschillen vastgelegd. Geen bedrijfsgegevens geraden; huidige centrale bron behouden. |
+| Lokale SEO | Gecorrigeerd / deels eigenaar | Eigenaar bevestigt dinsdag09:00 en aparte WhatsApp; Maps-belnummer071 512 4810 rechtstreeks gecontroleerd en in PR86 verwerkt. Afwijkende externe gidsen en overige GBP-velden nog bijwerken. |
 | Contentkwaliteit | Gecorrigeerd / wacht op eigenaar | Broninventaris van 67 producten, 23 vaste producten, 40 recepten en 19 blogs uitgebreid met inhoud, intentie, beeld, allergenen en links. Productcopy en oude EN/DE-schaalblog gecorrigeerd. Actuele leveranciersetiketten blijven nodig; geen culinair of certificeringsbewijs geclaimd. |
 | Image SEO | Gecorrigeerd / wacht op eigenaar | 91 bestaande bronnen hebben364 responsive varianten; foto’s en originele vergroting behouden. Drie recepten missen een gerechtfoto, negen taalwaarschuwingen blijven terecht zichtbaar. |
 | Performance | Gecorrigeerd / nog open | PR83: mobiele assortimentresources78,5% lager in dezelfde live test. Historische Lighthouse-metingen hieronder; veldmetingen pas na publieke lancering. Zie meetcondities hieronder. |
