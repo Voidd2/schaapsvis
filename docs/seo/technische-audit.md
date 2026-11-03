@@ -89,12 +89,24 @@ Echte Chrome-pagezoom200% via nieuw geïsoleerd testprofiel: DPR2, fysiek1366px 
 
 Alle507 server-outlines bevatten headings, geen sprongen in niveau. Per taal metadata-overlapkandidaten gezocht met token-Jaccard>0,70 (geen SEO-score): kleine/grote trio’s, zalm/tonijn en schaalformaten delen terecht feitelijke samenstellingswoorden. Hun prijzen/hoeveelheden en eigen routes blijven behouden. De generieke EN/DE-taglines voor zalmsalade/schol zijn verholpen door de gerechtnaam in alle receptdescriptions op te nemen. Ruw besluitbewijs: `editorial-outline-review.json`. Dit vervangt geen volledige voedselveiligheids- of vertaalreview.
 
+## Publicatie en live eindcontrole
+
+PR [#81](https://github.com/Voidd2/schaapsvis/pull/81) is samengevoegd als `b13dfee90df8904eaca52b3e73984e1341ec32dd`. GitHub Build site236 en Content integrity69 slaagden op de volledige PR-head `d4b3f46`. De squashboodschap bevatte een oudere documentatievermelding `[skip ci]`, waardoor de eerste main-build werd overgeslagen. Dezelfde main-commit is handmatig opnieuw gebouwd in Cloudflare (build `7e670b3c-f859-4c18-9e99-9d02d8dc57d8`). Site-Worker `schaapsvis` staat als versie `b3f74852-fc47-402c-8888-cfd7c5824fdc` op **Ready, 100% verkeer**. Geen leden-Workerbron, database, secret of toegang ingesteld/veranderd.
+
+Twintig live controles: tien routes op390px en1440px, waaronder home, assortiment, visschalen, feestdagen, locaties, contact, vast product, recept en EN/DE-blog. Status200, één H1, eigen canonical, description in HEAD, noindex en geen overflow/pageerrors. Onbekend recept404; leden-health200/ok. Contact heeft telefoonveld; EN/DE-blog verwijst niet meer naar de oude configurator; alle zeven homepagebeelden gebruiken de responsive bestanden. Geen aanvragen verzonden.
+
+Live robots Disallow, sitemap leeg en wachtwoordformulier bereikbaar. De browser draait op het vertrouwde eigenaarsnetwerk: een geslaagde inhoudscontrole bewijst niet zelfstandig de blokkade buiten die allowlist. De lokale tests zonder toegang slagen; de externe webfetch kon de site niet ophalen en geldt niet als bewijs.
+
+Lighthouse13.6.0 op de echte mobiele homepage: performance81, accessibility100, best-practices100, SEO69. De expliciete noindex/robotsblokkade verklaart de crawlbaarheidsaftrek; die is bewust behouden. LCP4,83s, CLS0, TBT3ms. Dit is één gesimuleerde mobiele labmeting, geen echte INP of veld-CWV. Ongethrottelde Chrome-observaties (niet vergelijkbaar met Lighthouse) gaven home LCP936/760ms en CLS0 op mobiel/desktop; HTML wordt op de edge met zstd gecomprimeerd. Assortiment laadde in die observatie circa4,94/5,65MB resources: verdere catalogusbeeldoptimalisatie blijft nuttig.
+
+Bewijs buiten Git: `live-release.json`, twintig `live-*.png`, `live-home-390-viewport.png`, `live-home-1440-viewport.png`, `lh-live-home-mobile.report.html/json`; bereikbaar via het bijgewerkte voor/na-overzicht.
+
 ## Nog open, in volgorde
 
-1. PR review en na goedgekeurde merge de echte Cloudflare-commit, Ready-status, afscherming en representatieve live routes bevestigen. Deze audit opent productie niet.
+1. Publicatie afgerond: PR #81, commit `b13dfee`, siteversie `b3f74852`, Ready/100%. Twintig live route/schermcombinaties geslaagd. Het slot blijft aan. Een externe controle zonder cookie én buiten het vertrouwde netwerk blijft vóór openbare lancering gewenst; lokale slotprofielen zijn bewezen.
 2. Eigenaar: primaire telefoon, afwijkende dinsdagopening, juiste Google Bedrijfsprofielgegevens en drie gerechtfoto’s bevestigen; zie [NAP](nap-controle.md) en [recepten](recepten-matrix.md).
 3. Search Console: huidige Google-aanmelding toont **“Je hebt geen toegang tot deze property”** voor `sc-domain:schaapsvishandel.nl`. Geen zoekprestaties of indexeringsdata beschikbaar. Toegang regelen vóór lancering; geen nieuwe betaalde dienst nodig.
-4. Performance op de echte edge opnieuw meten na deploy; mobiel lab is nog onvoldoende bewijs voor goede veld-LCP. Lokale beeldvarianten, Lighthouse en echte browserzoom zijn uitgevoerd. Geen misleidende CWV-goedkeuring geven op localhost.
+4. Edge-meting uitgevoerd: mobiele Lighthouse-homepage81, toegankelijkheid100, best-practices100, LCP4,83s, CLS0, TBT3ms. Mobiele LCP blijft optimalisatieruimte; dit is geen veld-CWV-goedkeuring. Vervolg: rendervertraging en overige zware catalogusfoto’s onderzoeken met representatieve gebruikersdata.
 5. Eigenaar: actuele etiketten bij High Seas/gerookte zalm en overige partijen. Drie onbewezen ASC-badges/claims zijn voorlopig verwijderd; dit betekent niet dat de producten ongecertificeerd zijn. Ingrediënten en voedingswaarden zijn niet gewijzigd. Zie de redactionele controle hieronder.
 6. Na openbare lancering de [checklist](lancering-checklist.md) en het [90-dagenplan](monitoring-90-dagen.md) uitvoeren. Het slot blijft tot afzonderlijk eigenaarsbesluit aan.
 
@@ -132,20 +144,20 @@ Een vergelijking met basiscommit `b60f56e` bewijst dat alle67 beschermde product
 | B1–B2 research | Primaire Google/Schema-bronnen in structured-data/lancering/monitoring; drie lokale/concurrerende site-indelingen in keyword-map. Geen ranking/volume verzonnen. |
 | C1 routes | 507 publieke routes en519 doelen geïnventariseerd; private/account/API/oude routes apart in testprofielen, niet in sitemap. |
 | C2 slot/indexatie | Next en Vinext lokale gesloten/openbare simulatie geslaagd; expliciete preview-noindex toegevoegd. Live slot blijft releasevoorwaarde. |
-| C3–C6 canonical/taal/meta/HTML |507 echte HTML-responses op beide runtimes: canonicals/hreflang/HEAD/taal/H1 en outline; kopievarianten bewust behouden. Live hostgedrag afzonderlijk controleren. |
+| C3–C6 canonical/taal/meta/HTML |507 echte HTML-responses op beide runtimes: canonicals/hreflang/HEAD/taal/H1 en outline; kopievarianten bewust behouden. Live HTTP/HTTPS-www, pad/query en slashredirect gecontroleerd. |
 | C7 schema | Externe validators en bronprijsvergelijking; onbewezen stock/areaServed/FAQ-emissie weg. Drie Recipe-beelden wachten op eigenaar. |
 | C8–C9 sitemap/redirect |507 publieke canonicals; gesloten sitemap leeg; oude bezorg-, recept- en aliasroutes getest; onbekende details404. Geen bestaande redirect verwijderd. |
 | D1–D4 lokaal | NAP-verschillen met bronlinks en eigenaarsacties; afzonderlijke locatie-intenties en links in keyword-map. Geen GBP-wijzigingen zonder eigenaar. |
 | E1–E4 inhoud | Uitgebreide broninventaris, redactionele correcties hierboven,40-receptenmatrix en keywordmap met contentgaten/commerciële waarde/eigenaarsinput. |
 | F1 beelden | Bestaande foto's behouden;28 WebP-varianten/7homebeelden, SHA/dimensies en browserselectie bewezen op Next/Vinext. |
-| F2 prestaties | Vier templates×twee Lighthouseprofielen; beeldbytes98,5%/96,4% lager. Edge- en echte veld-CWV nog niet bewezen. |
+| F2 prestaties | Vier templates×twee Lighthouseprofielen; beeldbytes98,5%/96,4% lager. Edge-Lighthouse uitgevoerd (mobiel81); echte veld-CWV nog niet beschikbaar. |
 | F3 serverHTML | Publicsim-crawls op beide runtimes; metadata direct in HEAD. |
 | G schermen/interactie |72 combinaties+teksttest,8 echte200%-zoom; mand A–J, focus/modal/filter/taal/formulier; geen echte verzending. |
-| H1–H3 automatisering | Bestaande scripts uitgebreid,9 geïsoleerde handlercases en twee indexeringsprofielen; CI groen op9559e06, nieuwe copy opnieuw testen. |
+| H1–H3 automatisering | Bestaande scripts uitgebreid,9 geïsoleerde handlercases en twee indexeringsprofielen; CI Build236 en Content69 groen op d4b3f46, inclusief laatste copy en beide builds. |
 | I documenten/skill | Acht gevraagde documenten, inventaris/resultaatbestanden en project-SEO-skill aanwezig; geen llms.txt toegevoegd. |
 | J monitoring | GSC-account heeft geen propertytoegang; 90-dagenplan en eigenaarstappen staan klaar. Geen data verzonnen. |
 | K prioritering | Aangetoonde P0/P1-fouten eerst, daarna beelden/performance en inhoud; geen groot redesign. |
-| L oplevering | PR81 en voor/na-overzicht klaar; na merge nog juiste Cloudflarecommit/Ready en livebewijzen vastleggen. Eigenaarafhankelijkheden expliciet behouden. |
+| L oplevering | PR81 samengevoegd, Cloudflarecommit/Ready en20 livecontroles vastgelegd. Voor/na en livebeelden aanwezig; eigenaarafhankelijkheden expliciet behouden. |
 
 ## Onderzoeksbronnen
 
