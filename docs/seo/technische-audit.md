@@ -8,7 +8,7 @@ Deze ronde levert de aangetoonde P0-correcties en belangrijkste P1-verbeteringen
 |---|---|---|
 | Crawlbaarheid | Gecontroleerd en goed | 507 sitemaproutes, 519 interne doelen en 153 lokale beeldbestanden op Next én lokale Cloudflare/Vinext-runtime. Geen kapotte doelen. |
 | Indexeerbaarheid | Gecorrigeerd | Besloten profiel: slot, noindex, robots Disallow, lege sitemap. Extra noindex-header voor toegelaten previewbezoekers. Publieke simulatie uitsluitend lokaal. |
-| Canonicals | Gecontroleerd en goed | Eén eigen productiecanonical per sitemaproute, queryparameters uitgesloten. Domeinredirects live na merge opnieuw controleren. |
+| Canonicals | Gecontroleerd en goed | Eén eigen productiecanonical per sitemaproute, queryparameters uitgesloten. Live HTTP/HTTPS-www naar HTTPS-hoofddomein gecontroleerd, met behoud van pad en query. |
 | Hreflang | Gecontroleerd en goed | NL/EN/DE en x-default verwijzen wederkerig naar bestaande canonieke routes. HTML-taal klopt. |
 | Sitemap | Gecontroleerd en goed | 507 publieke canonieke routes; account, beheer en bestellen uitgesloten. Datums niet op verzoekmoment gezet. |
 | Metadata | Gecorrigeerd | Titels, descriptions, OG en Twitter aanwezig. Metadata staat nu ook in de initiële documentkop op Vinext. Receptdescription noemt het gerecht in NL/EN/DE. Overlapkandidaten beoordeeld; echte productvarianten blijven apart. |
@@ -16,7 +16,7 @@ Deze ronde levert de aangetoonde P0-correcties en belangrijkste P1-verbeteringen
 | Structured data | Gecorrigeerd | Onbewezen voorraad en generiek bezorggebied verwijderd. FAQ-emissie verwijderd, zichtbare antwoorden behouden. Externe codevalidatie geldig; zie afzonderlijk rapport. |
 | Interne links / redirects | Gecorrigeerd | Niet-bestaande recepten/blogs geven nu 404. Twaalf onbekende detailroutes, oude Duitse route en negen bezorgredirects gecontroleerd. Bestaande routes behouden. |
 | Lokale SEO | Wacht op eigenaar | Externe telefoon- en dinsdagtijdverschillen vastgelegd. Geen bedrijfsgegevens geraden; huidige centrale bron behouden. |
-| Contentkwaliteit | Gecontroleerd / nog open | Inventaris van 67 producten, 23 vaste feestdagenproducten, 40 recepten en 19 blogs. Gerichte paginarollen vastgelegd; geen massale nieuwe content. Uitputtende redactionele herbeoordeling blijft vervolgwerk. |
+| Contentkwaliteit | Gecorrigeerd / wacht op eigenaar | Broninventaris van 67 producten, 23 vaste producten, 40 recepten en 19 blogs uitgebreid met inhoud, intentie, beeld, allergenen en links. Productcopy en oude EN/DE-schaalblog gecorrigeerd. Actuele leveranciersetiketten blijven nodig; geen culinair of certificeringsbewijs geclaimd. |
 | Image SEO | Gecorrigeerd / wacht op eigenaar | Homepagefavorieten via responsive Image; foto’s ongewijzigd. Drie recepten missen een gerechtfoto, negen taalwaarschuwingen blijven terecht zichtbaar. |
 | Performance | Gecorrigeerd / nog open | Gratis statische homepagevarianten werken ook op Cloudflare: 98,5% minder beeldbytes mobiel. Lighthouse mobiel72–76/desktop92–94; geen veldmeting. Zie meetcondities hieronder. |
 | Mobiel / tablet / desktop | Gecontroleerd en goed | Acht templates op negen gevraagde afmetingen; formulier, mandje, ankers en taalbediening getest. |
@@ -95,8 +95,57 @@ Alle507 server-outlines bevatten headings, geen sprongen in niveau. Per taal met
 2. Eigenaar: primaire telefoon, afwijkende dinsdagopening, juiste Google Bedrijfsprofielgegevens en drie gerechtfoto’s bevestigen; zie [NAP](nap-controle.md) en [recepten](recepten-matrix.md).
 3. Search Console: huidige Google-aanmelding toont **“Je hebt geen toegang tot deze property”** voor `sc-domain:schaapsvishandel.nl`. Geen zoekprestaties of indexeringsdata beschikbaar. Toegang regelen vóór lancering; geen nieuwe betaalde dienst nodig.
 4. Performance op de echte edge opnieuw meten na deploy; mobiel lab is nog onvoldoende bewijs voor goede veld-LCP. Lokale beeldvarianten, Lighthouse en echte browserzoom zijn uitgevoerd. Geen misleidende CWV-goedkeuring geven op localhost.
-5. Redactionele vervolgcontrole: elke voedings-/herkomstclaim en alle EN/DE hoofdteksten. Metadata-overlap en headinghiërarchie zijn aanvullend gecontroleerd. Matrix blijft inventaris en prioritering, geen culinair certificaat.
+5. Eigenaar: actuele etiketten bij High Seas/gerookte zalm en overige partijen. Drie onbewezen ASC-badges/claims zijn voorlopig verwijderd; dit betekent niet dat de producten ongecertificeerd zijn. Ingrediënten en voedingswaarden zijn niet gewijzigd. Zie de redactionele controle hieronder.
 6. Na openbare lancering de [checklist](lancering-checklist.md) en het [90-dagenplan](monitoring-90-dagen.md) uitvoeren. Het slot blijft tot afzonderlijk eigenaarsbesluit aan.
+
+## Aanvullende controle vóór publicatie
+
+De redactionele wijzigingen zijn opnieuw gebouwd onder Next (572 routes) en Cloudflare. De nieuwe volledige Cloudflare-crawl controleerde 507 pagina’s, 519 linkdoelen en 153 beelden zonder fouten, met dezelfde negen bekende fotowaarschuwingen. De twee ongewijzigde Voorschoten-artikelen behouden hun oorspronkelijke wijzigingsdatum. TypeScript, inhoudscontrole en echte NL/EN/DE-localizers slagen.
+
+Live bleek HTTP-www een 522 te geven: de bestaande redirectregel matchte alleen HTTPS-www. In Cloudflare is uitsluitend die bestaande regel aangepast naar host `www.schaapsvishandel.nl`, met 301 naar het HTTPS-hoofddomein en behoud van pad/query. HTTP en HTTPS, taalpad en twee queryparameters zijn daarna read-only gecontroleerd. DNS, sitevariabelen, secrets en leden-Worker zijn niet gewijzigd. De tijdelijke lokale SITE_PUBLIC-testbinding is verwijderd. Robots blijft Disallow en de live sitemap leeg.
+
+## Redactionele controle en grenzen van het bewijs
+
+De broninventaris bevat nu per assortimentproduct naam, beschrijving, categorie/koopintentie, beschikbaarheid, werkelijk gekoppeld beeld, allergenen, certificaatvraag en receptkoppelingen. Voor alle 23 vaste producten zijn naam, prijs, inhoudsaantal, allergenen, formaat en beeld opgenomen. Voor alle 19 blogs staan intentie, data, H2's, recepten en bron-/interne links vast. De echte localizers van alle producten, recepten en blogs zijn voor NL/EN/DE uitgevoerd; ontbrekende inhoud en onjuiste paragraaf-/stapaantallen laten de controle falen.
+
+Handmatig gevonden en gecorrigeerd: roodbaars had onterecht rood vlees; drie spellingfouten (tarbot/heilbot/kokkels); coquilles beloofden universeel twee minuten; tonijn miste in EN/DE de Nederlandse waarschuwing voor rauwe bereiding. De EN/DE-blog over een borrel in Voorschoten beschreef oude niet-bestaande schaalgroepen, personenformaten en een configurator met vanafprijzen. Die beschrijving is vervangen door het huidige onderscheid vaste uitvoering/maatwerk, met het bestaande €17,50 uitsluitend als richtbedrag. Twee daadwerkelijk gewijzigde blogs krijgen wijzigingsdatum 3 november; andere datums blijven behouden.
+
+De 40 recepten zijn in de bron vergeleken op numerieke ingrediënten/stappen in EN/DE: verschillen als `4` tegenover `four`/`vier` zijn gelijkwaardig, geen geconstateerde afwijking in hoeveelheden. Dit is geen proefkoken of garantie dat elke taalkundige nuance perfect is. Blogs blijven onderscheiden naar bezoek, bereiding, portie, herkomst en bewaren; geen nieuwe SEO-URL's toegevoegd.
+
+Bronnen gecontroleerd op 3 november:
+
+- [HANOS roodbaars](https://www.hanos.nl/nl/product/roodbaars-800-1500-gr-38001220): de rode buitenkant rechtvaardigt geen claim over rood visvlees; de fout is verwijderd.
+- [Voedingscentrum veilig met vis](https://www.voedingscentrum.nl/nl/thema/5xveilig/vis.aspx): ondersteunt koeling op4°C, hygiëne, volledig verhitten en extra aandacht voor kwetsbare groepen. De bestaande bewaar-/rauwadviesartikelen verwijzen hiernaar. Geen nieuwe medische belofte toegevoegd.
+- [VÅRLAKS](https://varlaks.no/): leverancier beschrijft Noord-Noorse familiebedrijven en traceerbaarheid. Dit is geen bewijs van BIO voor de specifieke levering; huidige voorzichtige uitleg behouden.
+- [SOLT](https://www.soltmen.com/onze-regels/): beschrijft verwerking/pellen en MSC-garnalenvisserij. Een actuele productpartij blijft aan etiket/leveranciersinformatie gebonden.
+- Voor de drie gerookte-zalmproducten is geen actueel ASC-partijbewijs gevonden. De badges en stellige certificeringszinnen zijn weg; de tekst vraagt naar de actuele verpakking. Eigenaar kan gecontroleerde certificering later terugplaatsen. Geen ingrediënten/allergenen gewijzigd.
+
+Een vergelijking met basiscommit `b60f56e` bewijst dat alle67 beschermde productvelden (behalve beschrijving/badge), prijzenbestand, 23 feestdagenproducten, catalogusmapping, beeldmapping, voedingswaarden en seizoensadvies gelijk zijn. Bewijs: `editorial-protected-live.json` naast de repo. Voor exacte voedingswaarden en herkomst per levering is een etiket nodig; bestaande gemiddelde voedingsinformatie blijft als indicatief benoemd.
+
+## Dekking per eis uit de opdracht
+
+| Eis | Uitkomst en bewijs |
+|---|---|
+| A1–A2 merk en typografie | Bestaand palet, Bitter/Source Sans en1536px behouden; gevraagde grote koppen waren correct. Kleine teksten verbeterd; visuele-eindcontrole + screenshots. |
+| A3–A4 contrast/uitlijning | Contrast5,14:1/hover7,43:1, kruimels en footers verbeterd;8 Lighthouse-a11y100-tests en echte200%-zoom. Geen volledige WCAG-certificering. |
+| A5 hoofdtemplates/contact/reviews | Acht templates×negen formaten; vijf feestdagenankers, client/server antwoordkanaal; bestaande absolute reviewdatums behouden. |
+| B1–B2 research | Primaire Google/Schema-bronnen in structured-data/lancering/monitoring; drie lokale/concurrerende site-indelingen in keyword-map. Geen ranking/volume verzonnen. |
+| C1 routes | 507 publieke routes en519 doelen geïnventariseerd; private/account/API/oude routes apart in testprofielen, niet in sitemap. |
+| C2 slot/indexatie | Next en Vinext lokale gesloten/openbare simulatie geslaagd; expliciete preview-noindex toegevoegd. Live slot blijft releasevoorwaarde. |
+| C3–C6 canonical/taal/meta/HTML |507 echte HTML-responses op beide runtimes: canonicals/hreflang/HEAD/taal/H1 en outline; kopievarianten bewust behouden. Live hostgedrag afzonderlijk controleren. |
+| C7 schema | Externe validators en bronprijsvergelijking; onbewezen stock/areaServed/FAQ-emissie weg. Drie Recipe-beelden wachten op eigenaar. |
+| C8–C9 sitemap/redirect |507 publieke canonicals; gesloten sitemap leeg; oude bezorg-, recept- en aliasroutes getest; onbekende details404. Geen bestaande redirect verwijderd. |
+| D1–D4 lokaal | NAP-verschillen met bronlinks en eigenaarsacties; afzonderlijke locatie-intenties en links in keyword-map. Geen GBP-wijzigingen zonder eigenaar. |
+| E1–E4 inhoud | Uitgebreide broninventaris, redactionele correcties hierboven,40-receptenmatrix en keywordmap met contentgaten/commerciële waarde/eigenaarsinput. |
+| F1 beelden | Bestaande foto's behouden;28 WebP-varianten/7homebeelden, SHA/dimensies en browserselectie bewezen op Next/Vinext. |
+| F2 prestaties | Vier templates×twee Lighthouseprofielen; beeldbytes98,5%/96,4% lager. Edge- en echte veld-CWV nog niet bewezen. |
+| F3 serverHTML | Publicsim-crawls op beide runtimes; metadata direct in HEAD. |
+| G schermen/interactie |72 combinaties+teksttest,8 echte200%-zoom; mand A–J, focus/modal/filter/taal/formulier; geen echte verzending. |
+| H1–H3 automatisering | Bestaande scripts uitgebreid,9 geïsoleerde handlercases en twee indexeringsprofielen; CI groen op9559e06, nieuwe copy opnieuw testen. |
+| I documenten/skill | Acht gevraagde documenten, inventaris/resultaatbestanden en project-SEO-skill aanwezig; geen llms.txt toegevoegd. |
+| J monitoring | GSC-account heeft geen propertytoegang; 90-dagenplan en eigenaarstappen staan klaar. Geen data verzonnen. |
+| K prioritering | Aangetoonde P0/P1-fouten eerst, daarna beelden/performance en inhoud; geen groot redesign. |
+| L oplevering | PR81 en voor/na-overzicht klaar; na merge nog juiste Cloudflarecommit/Ready en livebewijzen vastleggen. Eigenaarafhankelijkheden expliciet behouden. |
 
 ## Onderzoeksbronnen
 
@@ -178,7 +227,13 @@ De specifieke schema-, lokale bron- en concurrentiebevindingen staan in [structu
 - `src/components/layout/Footer.tsx`
 - `src/components/layout/Header.tsx`
 - `src/components/ui/Sectie.tsx`
+- `src/lib/assortiment-data.ts`
+- `src/lib/blog-corrections.ts`
+- `src/lib/blog-translations.ts`
+- `src/lib/blog-voorschoten.ts`
+- `src/lib/blog.ts`
 - `src/lib/contact-validation.ts`
+- `src/lib/product-translations.ts`
 - `src/lib/seo.ts`
 - `src/lib/static-image-variants.json`
 - `src/messages/de.json`

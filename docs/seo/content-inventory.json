@@ -508,6 +508,22 @@
     {
       "slug": "kabeljauwfilet",
       "name": "Kabeljauwfilet",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Verse kabeljauwfilet, zorgvuldig gefileerd en ontgraat. Ideaal om te bakken, stomen of pocheren.",
+      "availability": "dagelijks",
+      "image": "/images/producten-hd/kabeljauwfilet.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "romige-vissoep",
         "kabeljauw-zeekraal-venkel",
@@ -520,11 +536,43 @@
     {
       "slug": "schol",
       "name": "Schol",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Hollandse schol (Pleuronectes platessa), een Noordzeeplatvis met stevig, mild smakend vlees.",
+      "availability": "dagelijks",
+      "image": "/images/dirks/schol.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "scholfilet",
       "name": "Scholfilet",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Verse scholfilet, ontgraat en schoongemaakt. Licht van smaak, perfect om snel te bakken in boter.",
+      "availability": "dagelijks",
+      "image": "/images/dirks/scholfilet.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "gegrilde-schol",
         "gebakken-schol-tomaat-olijven",
@@ -534,11 +582,43 @@
     {
       "slug": "zeebaars",
       "name": "Zeebaars",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Europese zeebaars (Dicentrarchus labrax), heel of als filet. Stevig wit vlees met een rijke, volle smaak — uitstekend op de grill.",
+      "availability": "shop-often-cart-request",
+      "image": "/images/dirks/zeebaars-ca-500-gram.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "zeebaarsfilet",
       "name": "Zeebaarsfilet",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Verse zeebaarsfilet, perfect gefileerd. Lekker op de huid gebakken met een scheutje olijfolie en citroen.",
+      "availability": "shop-and-cart-usually",
+      "image": "/images/dirks/zeebaarsfilet-ca-2-x-110-gram.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "vispakketje-oven-groenten"
       ]
@@ -546,11 +626,43 @@
     {
       "slug": "dorade",
       "name": "Dorade",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Dorade (Sparus aurata), ook wel goudbrasem. Sappig, smaakvol vlees — ideaal om heel te grillen of in de oven te bereiden.",
+      "availability": "shop-always",
+      "image": "/images/dirks/dorade-ca-450-gram.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "dorade-filet",
       "name": "Dorade Filet",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Verse dorade filet, soepel van structuur met een licht zoete smaak. Snel klaar in de pan.",
+      "availability": "request",
+      "image": "/images/dirks/dorade-filet-ca-2-x-125-gram.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "vispakketje-oven-groenten"
       ]
@@ -558,11 +670,43 @@
     {
       "slug": "tarbot",
       "name": "Tarbot",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "De tarbot (Psetta maxima) geldt als de meest prestigieuze platvis van de Noordzee. Vast, smaakvol vlees — een echte delicatesse voor feestelijke gelegenheden.",
+      "availability": "request",
+      "image": "/images/assortiment-internet/tarbot-ecomare.jpg",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "tarbotfilet",
       "name": "Tarbotfilet",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Vers gefileerde tarbot. Stevig van structuur met een rijke, boterachtige smaak — weinig bereiding nodig.",
+      "availability": "request",
+      "image": "/images/dirks/tarbotfilet.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "vispakketje-oven-groenten"
       ]
@@ -570,11 +714,43 @@
     {
       "slug": "wijting",
       "name": "Wijting",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Wijting (Merlangius merlangus) is een fijne witte vis met delicaat, mals vlees. Snel klaar en makkelijk te bereiden — lekker gebakken in de pan.",
+      "availability": "sometimes-request",
+      "image": "/images/assortiment-internet/wijting-commons.jpg",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "wijtingfilet",
       "name": "Wijtingfilet",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Gefileerde wijting — dun, mals en snel klaar. Lekker gebakken in de pan of bereid in de oven.",
+      "availability": "request",
+      "image": "/images/editorial/wijtingfilet-serveervoorbeeld.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "gebakken-wijting-citroen",
         "vispakketje-oven-groenten",
@@ -584,21 +760,85 @@
     {
       "slug": "rode-poon",
       "name": "Rode Poon",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Rode poon (Trigla lucerna) met zijn opvallende rode vinnen. Vast, zacht wit vlees dat uitstekend gebakken of gegrild kan worden.",
+      "availability": "request",
+      "image": "/images/dirks/rode-poon.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "schar",
       "name": "Schar",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Schar (Limanda limanda), een kleinere platvis uit de Noordzee. Mager, licht van smaak en betaalbaar — een onderschatte klassieke Hollandse vis.",
+      "availability": "request",
+      "image": "/images/editorial/schar-serveervoorbeeld.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "roodbaars",
       "name": "Roodbaars",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Roodbaars (Sebastes marinus) uit de koude Noord-Atlantische Oceaan. Stevig, smaakvol visvlees — heerlijk gegrild of in de oven.",
+      "availability": "request",
+      "image": "/images/dirks/roodbaars.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "haring",
       "name": "Haring",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Hollandse Nieuwe haring (Clupea harengus) — gevlinderd of op het broodje. Een Hollandse klassieker, een van de rijkste omega-3 bronnen in ons assortiment.",
+      "availability": "dagelijks",
+      "image": "/images/dirks/haring.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "haringsalade-appel-biet",
         "haring-komkommer-borrelhapjes",
@@ -608,6 +848,22 @@
     {
       "slug": "varlaks-zalm",
       "name": "Verse Zalm — VÅRLAKS",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Atlantische zalm (Salmo salar) van VÅRLAKS uit Noord-Noorwegen. De leverancier beschrijft samenwerking met familiebedrijven en traceerbaarheid van ei tot eindproduct. Vraag ons naar het keurmerk op de huidige verpakking.",
+      "availability": "dagelijks",
+      "image": "/images/editorial/varlaks-zalm-rauw-ai.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": "VÅRLAKS",
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "zalm-citroen-dille",
         "gravlaks",
@@ -619,6 +875,22 @@
     {
       "slug": "tonijnfilet",
       "name": "Tonijnfilet",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Verse tonijnfilet (Thunnus albacares) — stevig, rood visvlees met een volle smaak. Lekker gegrild of gebakken. Voor rauwe bereidingen gelden aparte veiligheidsmaatregelen.",
+      "availability": "always",
+      "image": "/images/dirks/tonijnfilet.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "tonijnsteak-grillen-sesam",
         "pasta-verse-tonijn-tomaat",
@@ -628,6 +900,22 @@
     {
       "slug": "gerookte-zalm-high-seas",
       "name": "Gerookte Zalm — High Seas",
+      "category": "gerookte-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Dun gesneden, koudgerookte Atlantische zalm (Salmo salar) van High Seas, gerookt door W.G. den Heijer & Zn. Lekker op toast, bij een brunch of in een salade. Vraag naar de herkomst en certificering op de actuele verpakking.",
+      "availability": "dagelijks",
+      "image": "/images/dirks/gerookte-zalmfilet.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": true,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "zomerse-zalmsalade",
         "pasta-gerookte-zalm-roomsaus",
@@ -637,6 +925,22 @@
     {
       "slug": "gerookte-wilde-zalm",
       "name": "Gerookte Wilde Zalm",
+      "category": "gerookte-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Koud gerookte wilde zalm (Oncorhynchus spp.) uit Alaska — dieper van smaak dan kweekzalm. Een echte delicatesse voor bijzondere gelegenheden.",
+      "availability": "quality",
+      "image": "/images/dirks/gerookte-wilde-zalm.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "zomerse-zalmsalade",
         "pasta-gerookte-zalm-roomsaus",
@@ -646,36 +950,149 @@
     {
       "slug": "gravad-lax",
       "name": "Gravad Lax",
+      "category": "gerookte-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Zalm gepekeld met zout, suiker en dille. Verkrijgbaar wanneer de rokerij goede kwaliteit kan leveren; neem contact op voor de actuele voorraad of een aanvraag.",
+      "availability": "smokehouse-quality",
+      "image": "/images/recepten/gravlaks.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "gerookte-bokking",
       "name": "Gerookte Bokking",
+      "category": "gerookte-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Warm gerookte haring (Clupea harengus) — een eeuwenoud Hollands product. Volle, rokerige smaak. Zowel heel als als bosje bokking verkrijgbaar.",
+      "availability": "always",
+      "image": "/images/dirks/bokking.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "gerookte-forelfilet",
       "name": "Gerookte Forelfilet",
+      "category": "gerookte-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Warm gerookte forelfilet (Oncorhynchus mykiss) — delicaat, mild rokerig en rijk van smaak. Heerlijk op een broodje of in een salade.",
+      "availability": "request",
+      "image": "/images/editorial/gerookte-forelfilet-serveervoorbeeld.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "gerookte-heilbot",
       "name": "Gerookte Heilbotfilet",
+      "category": "gerookte-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Fijnmazig, vet gerookt heilbotvlees (Hippoglossus hippoglossus) — bijna boterachtig van textuur. Een echte delicatesse op een borrelplank.",
+      "availability": "shop-often",
+      "image": "/images/editorial/gerookte-heilbot-serveervoorbeeld.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "gerookte-kipper",
       "name": "Gerookte Kipper",
+      "category": "gerookte-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Traditioneel gerookte haring, gespleten en koud gerookt. De kipper is een van de oudste conserveringsmethoden voor vis.",
+      "availability": "always",
+      "image": "/images/editorial/gerookte-kipper-serveervoorbeeld.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "bosje-sprot",
       "name": "Bosje Sprot",
+      "category": "gerookte-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Gerookte sprot (Sprattus sprattus) — kleine vette visjes met een intense, rokerige smaak. Uitstekend als borrelhapje of op donker brood.",
+      "availability": "request",
+      "image": "/images/producten-hd/sprot-garitzko.jpg",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "hollandse-garnalen",
       "name": "Hollandse Garnalen — SOLT",
+      "category": "schaal-schelp",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Hollandse garnalen (Crangon crangon) uit de Noordzee, gepeld en geleverd via SOLT. Deze garnalen zijn MSC-gecertificeerd. De kleine, zachte garnalen zijn heerlijk op toast, in een garnalencocktail of door een salade.",
+      "availability": "dagelijks",
+      "image": "/images/assortiment-internet/hollandse-garnalen-solt.jpeg",
+      "allergens": [
+        "SCHAALDIEREN",
+        "SULFIET"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": "MSC",
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "garnalensalade-pompoen",
         "witlof-garnalen-oesterzwam",
@@ -687,21 +1104,85 @@
     {
       "slug": "noorse-garnalen",
       "name": "Noorse Garnalen",
+      "category": "schaal-schelp",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Noorse garnalen (Pandalus borealis) uit de koude Noord-Atlantische Oceaan — gepeld en direct klaar voor gebruik. Klein, zoet en mals van smaak.",
+      "availability": "dagelijks",
+      "image": "/images/dirks/noorse-garnalen.webp",
+      "allergens": [
+        "SCHAALDIEREN"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "gekookte-gambas",
       "name": "Gekookte Gamba's (Crevettes)",
+      "category": "schaal-schelp",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Voorgekookte en gekoelde gamba's — direct klaar om te eten. Heerlijk bij een borrel met dipsaus of in een salade.",
+      "availability": "sometimes",
+      "image": "/images/dirks/gambas-gekookt.webp",
+      "allergens": [
+        "SCHAALDIEREN"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "zeeuwse-mosselen",
       "name": "Zeeuwse Mosselen",
+      "category": "schaal-schelp",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Verse Zeeuwse mosselen (Mytilus edulis) — gekweekt in de Zeeuwse wateren. Het Zeeuwse mosselseizoen loopt meestal van juli tot april. De start en beschikbaarheid kunnen per jaar verschillen.",
+      "availability": "request",
+      "image": "/images/dirks/zeeuwse-mosselen.webp",
+      "allergens": [
+        "WEEKDIEREN"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "creuse-oesters",
       "name": "Creuse Oesters",
+      "category": "schaal-schelp",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Franse creuse oesters (Crassostrea gigas) — zout, fris en romig van smaak. Wij leveren per dozijn. Vraag naar de maat van de dag.",
+      "availability": "always",
+      "image": "/images/editorial/creuse-oesters-serveervoorbeeld.png",
+      "allergens": [
+        "WEEKDIEREN"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "oesters-sjalottenazijn"
       ]
@@ -709,46 +1190,202 @@
     {
       "slug": "kokkels",
       "name": "Kokkels",
+      "category": "schaal-schelp",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Verse Zeeuwse kokkels (Cerastoderma edule) — een Hollands borrelhapje bij uitstek. Zilt en vol van smaak.",
+      "availability": "shop-sometimes-or-request",
+      "image": "/images/dirks/kokkels.webp",
+      "allergens": [
+        "WEEKDIEREN"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "coquilles",
       "name": "Coquilles",
+      "category": "schaal-schelp",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Verse coquilles (Pecten maximus) — mals en licht zoet van smaak. Lekker kort gebakken in een hete pan. Ideaal als voorgerecht of borrelschotel.",
+      "availability": "usually",
+      "image": "/images/dirks/coquilles-vlees.webp",
+      "allergens": [
+        "WEEKDIEREN"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "inktvis",
       "name": "Inktvis",
+      "category": "schaal-schelp",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Inktvis voor uw eigen bereiding, uitsluitend op aanvraag. Geef uw wensen en gewenste ophaallocatie op tijd door.",
+      "availability": "request",
+      "image": "/images/dirks/pijlinktvis.webp",
+      "allergens": [
+        "WEEKDIEREN"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "scheermessen",
       "name": "Scheermessen",
+      "category": "schaal-schelp",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Verse scheermessen (Ensis directus) — een bijzondere Noordzee-delicatesse. Snel te bereiden en heerlijk met look en peterselie.",
+      "availability": "request-bunch",
+      "image": "/images/dirks/scheermessen.webp",
+      "allergens": [
+        "WEEKDIEREN"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "zalmsalade",
       "name": "Zalmsalade",
+      "category": "vissalades",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Huisgemaakte zalmsalade van verse zalm, mayonaise, ui en kruiden. Heerlijk op brood of als borrelhapje.",
+      "availability": "dagelijks",
+      "image": "/images/dirks/zalmsalade.webp",
+      "allergens": [
+        "VIS",
+        "EIEREN",
+        "MOSTERD"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "krabsalade",
       "name": "Krabsalade",
+      "category": "vissalades",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Verse krabsalade met surimi of echte krab, romige mayonaise en lenteui. Fris en smaakvol.",
+      "availability": "dagelijks",
+      "image": "/images/dirks/krabsalade.webp",
+      "allergens": [
+        "VIS",
+        "SCHAALDIEREN",
+        "EIEREN",
+        "MOSTERD"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "tonijnsalade",
       "name": "Tonijnsalade",
+      "category": "vissalades",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Klassieke tonijnsalade van tonijn uit blik, verse mayonaise, ui en augurk. Veelzijdig op brood of als snack.",
+      "availability": "dagelijks",
+      "image": "/images/dirks/tonijnsalade.webp",
+      "allergens": [
+        "VIS",
+        "EIEREN",
+        "MOSTERD"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "zeewiersalade",
       "name": "Zeewiersalade (Wakame)",
+      "category": "vissalades",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Frisse wakame zeewiersalade met sesamolie en sojasaus — een Japanse klassieker die uitstekend past bij gerookte vis.",
+      "availability": "dagelijks",
+      "image": "/images/dirks/wakame.webp",
+      "allergens": [
+        "SOJA",
+        "GLUTEN",
+        "SESAMZAAD"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "kibbeling",
       "name": "Kibbeling",
+      "category": "bereid",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Knapperig gebakken stukjes pollak in een luchtig, goudbruin beslag. Onze kibbeling maken we van pollak; lekker met ravigotesaus.",
+      "availability": "dagelijks",
+      "image": "/images/editorial/kibbeling-schaapstray.png",
+      "allergens": [
+        "VIS",
+        "GLUTEN (tarwe)",
+        "EIEREN",
+        "MOSTERD"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "kibbeling-bakken",
         "kibbeling-ravigotesaus-salade"
@@ -757,6 +1394,23 @@
     {
       "slug": "lekkerbek",
       "name": "Lekkerbek",
+      "category": "bereid",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Lekkerbek van heekfilet, gebakken in een luchtig, knapperig beslag. Heerlijk warm uit de winkel of van onze marktkraam.",
+      "availability": "dagelijks",
+      "image": "/images/dirks/lekkerbek.webp",
+      "allergens": [
+        "VIS",
+        "GLUTEN (tarwe)"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "lekkerbek-koolsalade"
       ]
@@ -764,6 +1418,24 @@
     {
       "slug": "broodje-haring",
       "name": "Broodje Haring",
+      "category": "bereid",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Rauwe Hollandse Nieuwe haring op een zacht broodje met fijngehakte ui en knapperige augurk. Een van de voedzaamste producten in ons assortiment.",
+      "availability": "dagelijks",
+      "image": "/images/dirks/broodje-haring.webp",
+      "allergens": [
+        "VIS",
+        "GLUTEN (tarwe)",
+        "MOSTERD"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "broodje-haring-uitjes"
       ]
@@ -771,6 +1443,24 @@
     {
       "slug": "vissoep",
       "name": "Vissoep",
+      "category": "bereid",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Vissoep uit onze viswinkel in Leiden. Wilt u de soep op de markt of bij Hoogvliet ophalen? Geef dit op tijd door, dan bespreken we wat mogelijk is.",
+      "availability": "shop-only",
+      "image": "/images/dirks/vissoep.webp",
+      "allergens": [
+        "VIS",
+        "SELDERIJ",
+        "kan MELK bevatten"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "vissoep-rouille-croutons"
       ]
@@ -778,11 +1468,45 @@
     {
       "slug": "vispotje",
       "name": "Vispotje",
+      "category": "bereid",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Een romig stoofpotje met verse stukken vis in een rijke saus. Ideaal als uitgebreid tussendoortje of lichte maaltijd. De vissoort wisselt met het seizoen.",
+      "availability": "dagelijks",
+      "image": "/images/dirks/vispotje-1-persoon.webp",
+      "allergens": [
+        "VIS",
+        "MELK",
+        "SELDERIJ"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "gerookte-zalm-snippers",
       "name": "Gerookte Zalm Snippers",
+      "category": "gerookte-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Smaakvolle snippers van koudgerookte Atlantische zalm van High Seas, gerookt door W.G. den Heijer & Zn. Lekker door pasta, op toast of door roerei. Vraag naar de herkomst en certificering op de actuele verpakking.",
+      "availability": "always",
+      "image": "/images/dirks/gerookte-zalmsnippers.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": true,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "zomerse-zalmsalade",
         "pasta-gerookte-zalm-roomsaus",
@@ -792,6 +1516,22 @@
     {
       "slug": "fine-de-claire-oesters",
       "name": "Fine de Claire Oesters",
+      "category": "schaal-schelp",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Franse Fine de Claire oesters (Crassostrea gigas) uit Marennes-Oléron, IGP-beschermd. Mild en licht nootachtig — rijpen na in de kleirijke claires. Per dozijn.",
+      "availability": "oyster-choice",
+      "image": "/images/dirks/fines-de-claires.webp",
+      "allergens": [
+        "WEEKDIEREN"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": "IGP",
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "oesters-sjalottenazijn"
       ]
@@ -799,51 +1539,217 @@
     {
       "slug": "surimisalade",
       "name": "Surimisalade",
+      "category": "vissalades",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Frisse, romige salade van surimi met huisgemaakte dressing. Lekker op brood of als borrelhapje.",
+      "availability": "dagelijks",
+      "image": "/images/editorial/surimisalade-serveervoorbeeld.webp",
+      "allergens": [
+        "VIS",
+        "EIEREN",
+        "MOSTERD"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "garnalenkroketten",
       "name": "Garnalenkroketten",
+      "category": "bereid",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Ambachtelijke kroketten met een romige vulling van Hollandse garnalen. Knapperig gefrituurd — een klassieke borrel- of lunchsnack.",
+      "availability": "sometimes",
+      "image": "/images/dirks/garnalen-kroket.webp",
+      "allergens": [
+        "SCHAALDIEREN",
+        "GLUTEN (tarwe)",
+        "MELK",
+        "EIEREN"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "calamares",
       "name": "Calamares (Inktvisringen)",
+      "category": "bereid",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Knapperig gefrituurde inktvisringen in een luchtig beslag. Heerlijk met een knoflook- of aioli-dip — zo van de borrelplank.",
+      "availability": "dagelijks",
+      "image": "/images/dirks/gebakken-inktvisringen.webp",
+      "allergens": [
+        "WEEKDIEREN",
+        "GLUTEN (tarwe)"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "verse-heilbot",
       "name": "Verse Heilbot",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Heilbot (Hippoglossus hippoglossus), de grootste platvis van de noordelijke zeeën. Fijn, boterzacht wit vlees — een echte delicatesse, mals en mager.",
+      "availability": "op bestelling",
+      "image": "/images/assortiment-internet/verse-heilbot-body-commons.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "hele-kreeft",
       "name": "Levende Kreeft",
+      "category": "schaal-schelp",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Levende kreeft, uitsluitend op aanvraag. We nemen een levend dier alleen voor een aanvraag mee, zodat het niet onverkocht blijft. Bespreek uw gewenste datum en ophaallocatie vooraf met ons.",
+      "availability": "live-request",
+      "image": "/images/dirks/kreeft-levend.webp",
+      "allergens": [
+        "SCHAALDIEREN"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "gerookte-forel-heel",
       "name": "Gerookte Forel (heel)",
+      "category": "gerookte-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Hele warm gerookte forel (Oncorhynchus mykiss) — mild rokerig, sappig en direct klaar om te eten. Heerlijk met een frisse mierikswortelsaus.",
+      "availability": "request",
+      "image": "/images/editorial/gerookte-forel-heel-serveervoorbeeld.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "bot",
       "name": "Bot",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Bot (Platichthys flesus) — een Hollandse platvis uit de kust- en riviermondingen. Mager, betaalbaar en licht van smaak; heerlijk gebakken.",
+      "availability": "request",
+      "image": "/images/editorial/bot-serveervoorbeeld.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "sardines",
       "name": "Verse Sardines",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Verse sardines (Sardina pilchardus) — kleine, vette visjes boordevol omega-3. Op de grill met wat zeezout en citroen een mediterrane traktatie.",
+      "availability": "rare-request",
+      "image": "/images/dirks/sardines.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "ansjovis",
       "name": "Verse Ansjovis",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Verse ansjovis (Engraulis encrasicolus) — klein, vet en vol van smaak. Kort gebakken of gemarineerd (boquerones) een echte delicatesse.",
+      "availability": "request",
+      "image": "/images/assortiment-internet/ansjovis-commons.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "tilapiafilet",
       "name": "Tilapiafilet",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Tilapiafilet (Oreochromis niloticus) — mild, mager en graatvrij wit visvlees. Neutraal van smaak en dankbaar in currygerechten of gepaneerd.",
+      "availability": "always",
+      "image": "/images/assortiment-internet/tilapiafilet-serving-commons.jpg",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "vispakketje-oven-groenten"
       ]
@@ -851,6 +1757,22 @@
     {
       "slug": "victoriabaars",
       "name": "Victoriabaarsfilet",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Victoriabaars / nijlbaars (Lates niloticus) — een grote zoetwatervis met stevige, witte filets zonder graat. Houdt goed zijn vorm bij bakken of stoven.",
+      "availability": "op bestelling",
+      "image": "/images/editorial/victoriabaars-serveervoorbeeld.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "vispakketje-oven-groenten"
       ]
@@ -858,31 +1780,131 @@
     {
       "slug": "gerookte-zalmmoot",
       "name": "Warm Gerookte Zalmmoot",
+      "category": "gerookte-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Een stevige moot warmgerookte Atlantische zalmfilet (Salmo salar), met een volle rooksmaak. Direct te eten of kort warm te serveren met aardappelen en groenten. Vraag naar de certificering op de actuele verpakking.",
+      "availability": "dagelijks",
+      "image": "/images/editorial/gerookte-zalmmoot-eigen-product.png",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": true,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "gerookte-sprotfilet",
       "name": "Gerookte Sprotfilet",
+      "category": "gerookte-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Fijne, ontgraten filetjes van gerookte sprot (Sprattus sprattus) — intens rokerig en zilt. Heerlijk op donker brood of door een aardappelsalade.",
+      "availability": "shop-often",
+      "image": "/images/editorial/gerookte-sprotfilet-serveervoorbeeld.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "gamba-spiesen",
       "name": "Gambaspiesen",
+      "category": "schaal-schelp",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Spiesjes van grote gamba's (Penaeus vannamei), kant-en-klaar om te grillen of te bakken. Ideaal voor de barbecue of een borrelplank.",
+      "availability": "unavailable",
+      "image": "/images/assortiment-internet/gamba-spiesen.jpg",
+      "allergens": [
+        "SCHAALDIEREN"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "gamba-tempura",
       "name": "Gamba Tempura",
+      "category": "bereid",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Gamba's in een luchtig tempurabeslag, knapperig gefrituurd. Direct van de frituur het lekkerst, met een zoetzure dip.",
+      "availability": "unavailable",
+      "image": "/images/assortiment-internet/gamba-tempura.jpg",
+      "allergens": [
+        "SCHAALDIEREN",
+        "GLUTEN (tarwe)"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "gebakken-mosselen",
       "name": "Gebakken Mosselen",
+      "category": "bereid",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Gepaneerde en gebakken mosseltjes — knapperig van buiten, zacht van binnen. Een geliefde snack met knoflooksaus.",
+      "availability": "always",
+      "image": "/images/editorial/gebakken-mosselen-serveervoorbeeld.webp",
+      "allergens": [
+        "WEEKDIEREN",
+        "GLUTEN (tarwe)",
+        "EIEREN",
+        "MOSTERD"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "wilde-zalmfilet",
       "name": "Wilde Zalmfilet — ongerookt",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Wilde Pacifische zalm (Oncorhynchus spp.) — dieper van kleur en smaak dan kweekzalm, iets steviger van structuur. Een puur, natuurlijk product.",
+      "availability": "op bestelling",
+      "image": "/images/dirks/wilde-zalmfilet.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "vispakketje-oven-groenten"
       ]
@@ -890,6 +1912,22 @@
     {
       "slug": "heilbotfilet",
       "name": "Heilbotfilet",
+      "category": "verse-vis",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Gefileerde heilbot (Hippoglossus hippoglossus) — boterzacht, mager wit vlees zonder graat. Een luxe platvis, mooi gepocheerd of uit de oven.",
+      "availability": "always",
+      "image": "/images/dirks/heilbotfilet.webp",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": [
         "vispakketje-oven-groenten"
       ]
@@ -897,313 +1935,986 @@
     {
       "slug": "gamba-kroketten",
       "name": "Gambakroketten",
+      "category": "bereid",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Romige kroketten gevuld met gamba's — knapperig gefrituurd. Een luxe variant op de klassieke garnalenkroket.",
+      "availability": "unavailable",
+      "image": "/images/editorial/gambakroketten-eigen-product.png",
+      "allergens": [
+        "SCHAALDIEREN",
+        "GLUTEN (tarwe)",
+        "MELK",
+        "EIEREN"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "blacktiger-garnalen",
       "name": "Black Tiger Garnalen",
+      "category": "schaal-schelp",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Black Tiger-garnalen met stevig vlees en een volle smaak. Lekker om zelf te bakken of te grillen. Vraag naar de actuele maat, uitvoering en voorraad.",
+      "availability": "current",
+      "image": "/images/assortiment-internet/blacktiger-garnalen.jpg",
+      "allergens": [
+        "SCHAALDIEREN"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "gebakken-ansjovis",
       "name": "Gebakken Ansjovis",
+      "category": "bereid",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Kleine gebakken ansjovisjes hebben we vaak in de winkel. Ze zijn op hun best gefrituurd: lekker krokant als hartige snack. Verse ansjovis is een apart product en alleen op aanvraag verkrijgbaar.",
+      "availability": "shop-often",
+      "image": "/images/assortiment-internet/gebakken-ansjovis.jpg",
+      "allergens": [
+        "VIS"
+      ],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     },
     {
       "slug": "zeekraal",
       "name": "Verse Zeekraal",
+      "category": "zeegroenten",
+      "intent": "product information, preparation and local enquiry",
+      "description": "Verse zeekraal om zelf te bereiden, bijvoorbeeld kort gebakken bij vis. We verkopen zeekraal als groente, niet als kant-en-klare zeekraalsalade.",
+      "availability": "current",
+      "image": "/images/dirks/zeekraal.webp",
+      "allergens": [],
+      "ingredientsPresent": true,
+      "certificateLabel": null,
+      "ownerCertificateNeeded": false,
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ],
       "recipes": []
     }
   ],
   "festive": [
     {
       "slug": "zalmslaatje-de-luxe",
+      "name": "Zalmslaatje de luxe",
       "priceCents": 1599,
       "image": "/images/dirks/zalmslaatje-de-luxe.webp",
-      "category": "delicatessen"
+      "category": "delicatessen",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "Vier bolletjes zalmsalade met gerookte vis en garnalen. Geschikt als lunch voor één of als voorgerecht om te delen.",
+      "compositionItems": 5,
+      "allergens": [
+        "Vis",
+        "Schaaldieren",
+        "Ei",
+        "Mosterd",
+        "Gluten",
+        "Soja",
+        "Melk",
+        "Selderij"
+      ],
+      "format": null
     },
     {
       "slug": "visschotel-klein-2-3-pers",
+      "name": "Visschotel klein 2-3 pers.",
       "priceCents": 5950,
       "image": "/images/dirks/visschotel-klein-2-3-pers.webp",
-      "category": "visschalen"
+      "category": "visschalen",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "Een klassieke visschotel voor twee tot drie personen, opgebouwd rond zalmsalade, garnalen en gerookte vis.",
+      "compositionItems": 5,
+      "allergens": [
+        "Vis",
+        "Schaaldieren",
+        "Gluten",
+        "Ei",
+        "Mosterd",
+        "Soja",
+        "Selderij",
+        "Melk"
+      ],
+      "format": "Ovale schaal van circa 34 × 25 cm."
     },
     {
       "slug": "visschotel-klein-3-5-pers",
+      "name": "Visschotel klein 3-5 pers.",
       "priceCents": 7350,
       "image": "/images/dirks/visschotel-klein-3-5-pers.webp",
-      "category": "visschalen"
+      "category": "visschalen",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "Een klassieke visschotel voor drie tot vijf personen met zalmsalade, garnalen en gerookte vis.",
+      "compositionItems": 5,
+      "allergens": [
+        "Vis",
+        "Schaaldieren",
+        "Gluten",
+        "Ei",
+        "Mosterd",
+        "Soja",
+        "Selderij",
+        "Melk"
+      ],
+      "format": "Ovale schaal van circa 44 × 30 cm."
     },
     {
       "slug": "visschotel-middel-5-8-pers",
+      "name": "Visschotel middel 5-8 pers.",
       "priceCents": 9850,
       "image": "/images/dirks/visschotel-middel-5-8-pers.webp",
-      "category": "visschalen"
+      "category": "visschalen",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "Een rijk gevulde klassieke visschotel voor vijf tot acht personen.",
+      "compositionItems": 5,
+      "allergens": [
+        "Vis",
+        "Schaaldieren",
+        "Gluten",
+        "Ei",
+        "Mosterd",
+        "Soja",
+        "Selderij",
+        "Melk"
+      ],
+      "format": "Ovale schaal van circa 44 × 30 cm."
     },
     {
       "slug": "visschotel-groot-8-10-pers",
+      "name": "Visschotel groot 8-10 pers.",
       "priceCents": 11550,
       "image": "/images/dirks/visschotel-groot-8-10-pers.webp",
-      "category": "visschalen"
+      "category": "visschalen",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "Een royale klassieke visschotel voor een groter gezelschap van acht tot tien personen.",
+      "compositionItems": 5,
+      "allergens": [
+        "Vis",
+        "Schaaldieren",
+        "Gluten",
+        "Ei",
+        "Mosterd",
+        "Soja",
+        "Selderij",
+        "Melk"
+      ],
+      "format": "Ovale schaal van circa 54 × 34 cm."
     },
     {
       "slug": "visschotel-luxe-2-3-pers",
+      "name": "Visschotel luxe 2-3 pers.",
       "priceCents": 6950,
       "image": "/images/dirks/visschotel-luxe-2-3-pers.webp",
-      "category": "visschalen"
+      "category": "visschalen",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "Een luxe visschotel voor twee tot drie personen, met onder meer tonijn, gerookte vis en garnalen.",
+      "compositionItems": 6,
+      "allergens": [
+        "Vis",
+        "Schaaldieren",
+        "Gluten",
+        "Ei",
+        "Mosterd",
+        "Soja",
+        "Selderij",
+        "Melk",
+        "Sesam"
+      ],
+      "format": "Ovale schaal van circa 34 × 25 cm."
     },
     {
       "slug": "visschotel-luxe-3-5-pers",
+      "name": "Visschotel luxe 3-5 pers.",
       "priceCents": 8450,
       "image": "/images/dirks/visschotel-luxe-3-5-pers.webp",
-      "category": "visschalen"
+      "category": "visschalen",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "Een luxe visschotel voor drie tot vijf personen met een brede selectie gerookte en bereide vis.",
+      "compositionItems": 6,
+      "allergens": [
+        "Vis",
+        "Schaaldieren",
+        "Gluten",
+        "Ei",
+        "Mosterd",
+        "Soja",
+        "Selderij",
+        "Melk",
+        "Sesam"
+      ],
+      "format": "Ovale schaal van circa 44 × 30 cm."
     },
     {
       "slug": "visschotel-luxe-5-8-pers",
+      "name": "Visschotel luxe 5-8 pers.",
       "priceCents": 10950,
       "image": "/images/dirks/visschotel-luxe-5-8-pers.webp",
-      "category": "visschalen"
+      "category": "visschalen",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "Een luxe visschotel voor vijf tot acht personen met tonijn, zalm, paling en garnalen.",
+      "compositionItems": 6,
+      "allergens": [
+        "Vis",
+        "Schaaldieren",
+        "Gluten",
+        "Ei",
+        "Mosterd",
+        "Soja",
+        "Selderij",
+        "Melk",
+        "Sesam"
+      ],
+      "format": "Ovale schaal van circa 44 × 30 cm."
     },
     {
       "slug": "visschotel-luxe-8-10-pers",
+      "name": "Visschotel luxe 8-10 pers.",
       "priceCents": 12550,
       "image": "/images/dirks/visschotel-luxe-8-10-pers.webp",
-      "category": "visschalen"
+      "category": "visschalen",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "Een royale luxe visschotel voor acht tot tien personen, feestelijk opgemaakt voor de hele tafel.",
+      "compositionItems": 6,
+      "allergens": [
+        "Vis",
+        "Schaaldieren",
+        "Gluten",
+        "Ei",
+        "Mosterd",
+        "Soja",
+        "Selderij",
+        "Melk",
+        "Sesam"
+      ],
+      "format": "Ovale schaal van circa 54 × 34 cm."
     },
     {
       "slug": "visschotel-luxe-10-14-pers",
+      "name": "Visschotel luxe 10-14 pers.",
       "priceCents": 16000,
       "image": "/images/dirks/visschotel-luxe-10-14-pers.webp",
-      "category": "visschalen"
+      "category": "visschalen",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "De grootste luxe visschotel uit de selectie, bedoeld voor tien tot veertien personen.",
+      "compositionItems": 6,
+      "allergens": [
+        "Vis",
+        "Schaaldieren",
+        "Gluten",
+        "Ei",
+        "Mosterd",
+        "Soja",
+        "Selderij",
+        "Melk",
+        "Sesam"
+      ],
+      "format": "Ronde schaal van circa 47 cm doorsnee."
     },
     {
       "slug": "visschotel-hapjes-2-3-pers",
+      "name": "Visschotel hapjes 2-3 pers.",
       "priceCents": 5350,
       "image": "/images/dirks/visschotel-hapjes-2-3-pers.webp",
-      "category": "visschalen"
+      "category": "visschalen",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "Een visschotel met kleine hapjes voor twee tot drie personen, ideaal voor een borrel.",
+      "compositionItems": 5,
+      "allergens": [
+        "Vis",
+        "Schaaldieren",
+        "Gluten",
+        "Melk"
+      ],
+      "format": "Ovale schaal van circa 44 × 30 cm."
     },
     {
       "slug": "visschotel-hapjes-3-5-pers",
+      "name": "Visschotel hapjes 3-5 pers.",
       "priceCents": 6750,
       "image": "/images/dirks/visschotel-hapjes-3-5-pers.webp",
-      "category": "visschalen"
+      "category": "visschalen",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "Een gevarieerde hapjesschotel met vis en garnalen voor drie tot vijf personen.",
+      "compositionItems": 5,
+      "allergens": [
+        "Vis",
+        "Schaaldieren",
+        "Gluten",
+        "Melk"
+      ],
+      "format": "Ovale schaal van circa 44 × 30 cm."
     },
     {
       "slug": "visschotel-hapjes-6-10-pers",
+      "name": "Visschotel hapjes 6-10 pers.",
       "priceCents": 8550,
       "image": "/images/dirks/visschotel-hapjes-6-10-pers.webp",
-      "category": "visschalen"
+      "category": "visschalen",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "Een grote hapjesschotel voor zes tot tien personen, geschikt voor feest en borrel.",
+      "compositionItems": 5,
+      "allergens": [
+        "Vis",
+        "Schaaldieren",
+        "Gluten",
+        "Melk"
+      ],
+      "format": "Ovale schaal van circa 54 × 34 cm."
     },
     {
       "slug": "gourmet-trio-1-persoon",
+      "name": "Gourmet trio 1 persoon",
       "priceCents": 1899,
       "image": "/images/dirks/gourmet-trio-1-persoon.webp",
-      "category": "gourmet"
+      "category": "gourmet",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "Een gourmettrio voor één persoon met drie soorten gemarineerde vis.",
+      "compositionItems": 3,
+      "allergens": [
+        "Vis",
+        "Melk",
+        "Mosterd"
+      ],
+      "format": null
     },
     {
       "slug": "gourmet-schotel-3-4-pers",
+      "name": "Gourmet schotel 3-4 pers.",
       "priceCents": 5899,
       "image": "/images/dirks/gourmet-schotel-3-4-pers.webp",
-      "category": "gourmet"
+      "category": "gourmet",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "Een complete visgourmetschotel voor drie tot vier personen.",
+      "compositionItems": 6,
+      "allergens": [
+        "Vis",
+        "Schaaldieren",
+        "Melk",
+        "Mosterd"
+      ],
+      "format": null
     },
     {
       "slug": "gourmetschotel-5-6-pers",
+      "name": "Gourmetschotel 5-6 pers.",
       "priceCents": 7699,
       "image": "/images/dirks/gourmetschotel-5-6-pers.webp",
-      "category": "gourmet"
+      "category": "gourmet",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "Een ruime visgourmetschotel voor vijf tot zes personen.",
+      "compositionItems": 6,
+      "allergens": [
+        "Vis",
+        "Schaaldieren",
+        "Melk",
+        "Mosterd"
+      ],
+      "format": null
     },
     {
       "slug": "zalmsashimi",
+      "name": "Zalmsashimi",
       "priceCents": 999,
       "image": "/images/dirks/zalmsashimi.webp",
-      "category": "delicatessen"
+      "category": "delicatessen",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "Dun gesneden zalmsashimi met een gekruide rand, zeewiersalade en sojasaus.",
+      "compositionItems": 4,
+      "allergens": [
+        "Vis",
+        "Sesam",
+        "Melk",
+        "Ei",
+        "Soja",
+        "Gluten"
+      ],
+      "format": null
     },
     {
       "slug": "gegrilde-tonijn",
+      "name": "Gegrilde tonijn",
       "priceCents": 999,
       "image": "/images/dirks/gegrilde-tonijn.webp",
-      "category": "delicatessen"
+      "category": "delicatessen",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "Kort gegrilde geelvintonijn met een gekruide korst en soja-sesamdressing.",
+      "compositionItems": 3,
+      "allergens": [
+        "Vis",
+        "Sesam",
+        "Soja",
+        "Gluten"
+      ],
+      "format": null
     },
     {
       "slug": "zalm-sashimi-ongesneden",
+      "name": "Zalm sashimi ongesneden",
       "priceCents": 650,
       "image": "/images/dirks/zalm-sashimi-ongesneden.webp",
-      "category": "delicatessen"
+      "category": "delicatessen",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "Een ongesneden blok verse zalm om zelf als sashimi of voor sushi te snijden.",
+      "compositionItems": 1,
+      "allergens": [
+        "Vis"
+      ],
+      "format": null
     },
     {
       "slug": "tonijn-sashimi-ongesneden",
+      "name": "Tonijn sashimi ongesneden",
       "priceCents": 949,
       "image": "/images/dirks/tonijn-sashimi-ongesneden.webp",
-      "category": "delicatessen"
+      "category": "delicatessen",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "Een ongesneden blok geelvintonijn om zelf als sashimi of voor sushi te snijden.",
+      "compositionItems": 1,
+      "allergens": [
+        "Vis"
+      ],
+      "format": null
     },
     {
       "slug": "luxe-trio-klein",
+      "name": "Luxe vistrio klein",
       "priceCents": 1599,
       "image": "/images/dirks/luxe-trio-klein.webp",
-      "category": "delicatessen"
+      "category": "delicatessen",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "Een klein luxe trio van Hollandse garnalen, gerookte paling en gerookte zalm.",
+      "compositionItems": 5,
+      "allergens": [
+        "Schaaldieren",
+        "Vis",
+        "Ei",
+        "Mosterd",
+        "Melk"
+      ],
+      "format": null
     },
     {
       "slug": "luxe-vistrio",
+      "name": "Luxe vistrio groot",
       "priceCents": 3199,
       "image": "/images/dirks/luxe-vistrio.webp",
-      "category": "delicatessen"
+      "category": "delicatessen",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "Een royaal luxe trio van Hollandse garnalen, gerookte paling en gerookte zalm.",
+      "compositionItems": 5,
+      "allergens": [
+        "Schaaldieren",
+        "Vis",
+        "Ei",
+        "Mosterd",
+        "Melk"
+      ],
+      "format": null
     },
     {
       "slug": "salade-trio",
+      "name": "Salade trio",
       "priceCents": 1199,
       "image": "/images/dirks/salade-trio.webp",
-      "category": "delicatessen"
+      "category": "delicatessen",
+      "intent": "fixed product contents, total price and enquiry",
+      "description": "Drie salades in één verpakking voor brood, toast of de borreltafel.",
+      "compositionItems": 3,
+      "allergens": [
+        "Vis",
+        "Ei",
+        "Mosterd",
+        "Soja",
+        "Selderij",
+        "Schaaldieren",
+        "Gluten"
+      ],
+      "format": null
     }
   ],
   "blogs": [
     {
       "slug": "visgeschenk-geven-koelen-en-afhalen",
       "title": "Een visgeschenk geven: van afhalen tot koelkast",
+      "intent": "Zo plant u een gekoeld visgeschenk voor familie, collega’s of relaties: inhoud, vervoer, overdracht en bewaaradvies.",
       "published": "2026-11-03",
       "modified": null,
-      "recipes": []
+      "headings": [
+        "Begin bij de ontvanger",
+        "Spreek inhoud en afhalen samen af",
+        "Houd de reis kort en koud",
+        "Bij een team werkt een afhaalmoment beter",
+        "Allergieën en kwetsbare gasten"
+      ],
+      "recipes": [],
+      "links": [
+        "/relatiegeschenken",
+        "/bezoek-ons"
+      ],
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ]
     },
     {
       "slug": "kibbeling-voorschoten-vrijdag",
       "title": "Kibbeling in Voorschoten: zo maakt u er een maaltijd van",
+      "intent": "Kibbeling in Voorschoten halen? Kom vrijdag bij Hoogvliet. Ontdek wat erbij past, waarom we ravigotesaus kiezen en hoe u uw maaltijd handig plant.",
       "published": "2026-09-28",
       "modified": null,
+      "headings": [
+        "Kibbeling halen op vrijdag bij Hoogvliet",
+        "Ravigotesaus bij de kibbeling",
+        "Drie manieren om kibbeling op tafel te zetten",
+        "Plan het halen rond uw etenstijd"
+      ],
       "recipes": [
         "kibbeling-ravigotesaus-salade",
         "lekkerbek-koolsalade"
+      ],
+      "links": [
+        "/viswinkel-voorschoten",
+        "/assortiment/kibbeling",
+        "/blog/kibbeling-vs-lekkerbek-het-verschil",
+        "/blog/vis-avondeten-voorschoten"
+      ],
+      "locales": [
+        "nl",
+        "en",
+        "de"
       ]
     },
     {
       "slug": "vis-avondeten-voorschoten",
       "title": "Vis voor het avondeten in Voorschoten: drie ideeën",
+      "intent": "Vrijdag vis halen in Voorschoten voor het avondeten? Kies een ovenpakketje, zalm of kabeljauw. Onze kraam bij Hoogvliet is open van 08:00 tot 17:30.",
       "published": "2026-09-28",
       "modified": null,
+      "headings": [
+        "Van de viskraam naar uw vrijdagavondeten",
+        "Idee 1: een vispakketje met groenten",
+        "Idee 2: zalm uit de oven met bijgerechten",
+        "Idee 3: kabeljauw in de pan",
+        "Neem verse vis gekoeld mee naar huis"
+      ],
       "recipes": [
         "vispakketje-oven-groenten",
         "zalm-citroen-dille",
         "gebakken-kabeljauw-botersaus"
+      ],
+      "links": [
+        "/viswinkel-voorschoten",
+        "/assortiment/varlaks-zalm",
+        "/blog/hoeveel-vis-per-persoon",
+        "/viskalender",
+        "https://www.voedingscentrum.nl/nl/thema/5xveilig/vis.aspx"
+      ],
+      "locales": [
+        "nl",
+        "en",
+        "de"
       ]
     },
     {
       "slug": "visschaal-borrel-voorschoten",
       "title": "Een visschaal voor uw borrel in Voorschoten kiezen",
+      "intent": "Een borrel of verjaardag in Voorschoten? Kies een visschaal op basis van uw gasten, budget en voorkeuren. Lees wat u vooraf met ons kunt afstemmen.",
       "published": "2026-09-28",
-      "modified": null,
-      "recipes": []
+      "modified": "2026-11-03",
+      "headings": [
+        "Begin bij de gelegenheid, niet alleen bij de foto",
+        "Hoeveel gasten eten er mee?",
+        "Gerookte vis, garnalen of een combinatie?",
+        "Budget en prijs vooraf afstemmen",
+        "Ophalen voor uw borrel in Voorschoten"
+      ],
+      "recipes": [],
+      "links": [
+        "/visschalen",
+        "/viswinkel-voorschoten",
+        "/blog/hoeveel-vis-per-persoon",
+        "/assortiment"
+      ],
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ]
     },
     {
       "slug": "zalm-bakken-pan-of-oven",
       "title": "Zalm bakken: kiest u de pan of de oven?",
+      "intent": "Een krokante buitenkant of liever de oven het werk laten doen? Zo kiest u de bereiding die bij uw zalm en uw avond past.",
       "published": "2026-09-28",
       "modified": null,
+      "headings": [
+        "De pan: als u graag een gebakken korstje wilt",
+        "De oven: handig wanneer u meer porties maakt",
+        "Verse of gerookte zalm?",
+        "Uw zalm in Leiden uitzoeken"
+      ],
       "recipes": [
         "zalm-citroen-dille",
         "teriyaki-zalm-rijst",
         "pasta-gerookte-zalm-roomsaus"
+      ],
+      "links": [
+        "/assortiment/varlaks-zalm",
+        "/bezoek-ons"
+      ],
+      "locales": [
+        "nl",
+        "en",
+        "de"
       ]
     },
     {
       "slug": "hoeveel-vis-per-persoon",
       "title": "Hoeveel vis per persoon? Zo kiest u uw porties",
+      "intent": "Lunch, hoofdgerecht of een borrel: de juiste hoeveelheid hangt af van uw menu. Met deze vragen maakt u het kiezen een stuk makkelijker.",
       "published": "2026-09-28",
       "modified": null,
+      "headings": [
+        "Begin bij de rol van de vis",
+        "Een hele vis is niet hetzelfde als een filet",
+        "Volg voor een gerecht het boodschappenlijstje",
+        "Een visschaal voor een borrel of feest"
+      ],
       "recipes": [
         "gebakken-kabeljauw-botersaus",
         "zalm-citroen-dille"
+      ],
+      "links": [
+        "/visschalen",
+        "/assortiment"
+      ],
+      "locales": [
+        "nl",
+        "en",
+        "de"
       ]
     },
     {
       "slug": "viskalender-welke-vis-in-welk-seizoen",
       "title": "De viskalender: welke vis is wanneer het lekkerst?",
+      "intent": "Vis heeft seizoenen, net als groente en fruit. Ontdek ideeën per seizoen en vraag naar de actuele aanvoer en prijzen van deze week.",
       "published": "2026-06-01",
       "modified": null,
-      "recipes": []
+      "headings": [
+        "Lente (maart – mei)",
+        "Zomer (juni – augustus)",
+        "Herfst (september – november)",
+        "Winter (december – februari)"
+      ],
+      "recipes": [],
+      "links": [
+        "/assortiment",
+        "https://wa.me/31624811678?text=Hallo%20Schaap's%20Vishandel%2C%20ik%20zoek%20een%20visproduct.%20Kunnen%20jullie%20met%20mij%20kijken%20wat%20mogelijk%20is%3F"
+      ],
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ]
     },
     {
       "slug": "hollandse-nieuwe-waarom-juni-haring-anders-smaakt",
       "title": "Hollandse Nieuwe: waarom juni-haring anders smaakt",
+      "intent": "Elk jaar in juni verwelkomt Nederland de nieuwe haring. Wat maakt Hollandse Nieuwe bijzonder? Zijn zachte, romige structuur.",
       "published": "2026-06-08",
       "modified": "2026-09-29",
-      "recipes": []
+      "headings": [
+        "Vol van smaak op het juiste moment",
+        "Zo eet u hem"
+      ],
+      "recipes": [],
+      "links": [
+        "https://wa.me/31624811678?text=Hallo%20Schaap's%20Vishandel%2C%20ik%20zoek%20een%20visproduct.%20Kunnen%20jullie%20met%20mij%20kijken%20wat%20mogelijk%20is%3F",
+        "/blog/viskalender-welke-vis-in-welk-seizoen"
+      ],
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ]
     },
     {
       "slug": "sinds-1938-de-geschiedenis-van-schaaps-vis",
       "title": "Sinds 1938: generaties vis op de Herenstraat",
+      "intent": "Van Gerrit Schaap die in 1938 zijn viswinkel opende tot vandaag: de geschiedenis van een Leids begrip, verteld in vijf hoofdstukken.",
       "published": "2026-05-15",
       "modified": "2026-11-03",
-      "recipes": []
+      "headings": [
+        "1938 — Gerrit Schaap begint",
+        "1957 — De familie Haasnoot neemt over",
+        "2009 — De derde generatie",
+        "2018 — Tachtig jaar herinneringen",
+        "Vandaag — klaar voor de vierde generatie"
+      ],
+      "recipes": [],
+      "links": [
+        "/ons-verhaal",
+        "/bezoek-ons"
+      ],
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ]
     },
     {
       "slug": "wilde-zalm-vs-kweekzalm-waarom-wij-varlaks-kiezen",
       "title": "Wilde zalm of kweekzalm? Begin bij de herkomst",
+      "intent": "Wildvangst en kweek vertellen ieder een ander verhaal. Vraag naar de specifieke herkomst en kies daarna de zalm die bij uw gerecht past.",
       "published": "2026-04-20",
       "modified": "2026-09-29",
+      "headings": [
+        "Niet elke wilde vis of kweekvis is hetzelfde",
+        "Waarom we VÅRLAKS aanbieden",
+        "Van filet naar gerecht"
+      ],
       "recipes": [
         "zalm-citroen-dille"
+      ],
+      "links": [
+        "https://varlaks.no/",
+        "/biologische-vis"
+      ],
+      "locales": [
+        "nl",
+        "en",
+        "de"
       ]
     },
     {
       "slug": "waarom-staat-makreel-op-rood",
       "title": "Waarom staat makreel op rood? Een eerlijk verhaal",
+      "intent": "Good Fish wijzigde in april 2025 het advies voor Noordoost-Atlantische makreel. Herkomst en vangstmethode tellen mee bij het beoordelen van een specifiek product.",
       "published": "2026-03-10",
       "modified": "2026-09-29",
-      "recipes": []
+      "headings": [
+        "Wat is er aan de hand?",
+        "Wat betekent dat aan onze toonbank?",
+        "Uw keuze maken"
+      ],
+      "recipes": [],
+      "links": [
+        "/biologische-vis",
+        "https://www.goodfish.nl/nl/makreel-overbevist-en-vanaf-vandaag-in-het-rood-op-de-viswijzer/"
+      ],
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ]
     },
     {
       "slug": "kibbeling-vs-lekkerbek-het-verschil",
       "title": "Kibbeling vs. lekkerbek: wat is eigenlijk het verschil?",
+      "intent": "Beide goudbruin gebakken, beide onweerstaanbaar. Maar kibbeling en lekkerbek zijn écht twee verschillende dingen. Een korte les visboerologie.",
       "published": "2026-02-14",
       "modified": "2026-09-29",
-      "recipes": []
+      "headings": [
+        "Kibbeling: stukjes",
+        "Lekkerbek: een hele filet van heek",
+        "Welke kiest u?"
+      ],
+      "recipes": [],
+      "links": [
+        "https://wa.me/31624811678?text=Hallo%20Schaap's%20Vishandel%2C%20ik%20zoek%20een%20visproduct.%20Kunnen%20jullie%20met%20mij%20kijken%20wat%20mogelijk%20is%3F",
+        "/assortiment"
+      ],
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ]
     },
     {
       "slug": "de-echte-hollandse-garnaal",
       "title": "De échte Hollandse garnaal is klein, grijs en geweldig",
+      "intent": "De Hollandse garnaal is klein en heeft een zoete, zilte smaak. Lees over het verschil met grote garnalen, verwerking en MSC-certificering.",
       "published": "2026-01-20",
       "modified": "2026-09-29",
-      "recipes": []
+      "headings": [
+        "Van vangst tot uw bord",
+        "MSC-gecertificeerd"
+      ],
+      "recipes": [],
+      "links": [
+        "/biologische-vis",
+        "https://wa.me/31624811678?text=Hallo%20Schaap's%20Vishandel%2C%20ik%20zoek%20een%20visproduct.%20Kunnen%20jullie%20met%20mij%20kijken%20wat%20mogelijk%20is%3F"
+      ],
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ]
     },
     {
       "slug": "marktdag-in-leiden-achter-de-kraam",
       "title": "Marktdag in Leiden: een kijkje achter de kraam",
+      "intent": "Elke woensdag en zaterdag staan we op de Leidse markt. Wat komt daar eigenlijk bij kijken? Een dag mee achter de vistoonbank — van 5 uur 's ochtends tot de laatste haring.",
       "published": "2026-05-02",
-      "modified": "2026-09-29",
-      "recipes": []
+      "modified": "2026-11-03",
+      "headings": [
+        "Voor de eerste klanten",
+        "Waarom de markt anders is dan de winkel",
+        "Drie plekken, één kwaliteit"
+      ],
+      "recipes": [],
+      "links": [
+        "/bezoek-ons",
+        "https://wa.me/31624811678?text=Hallo%20Schaap's%20Vishandel%2C%20ik%20zoek%20een%20visproduct.%20Kunnen%20jullie%20met%20mij%20kijken%20wat%20mogelijk%20is%3F"
+      ],
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ]
     },
     {
       "slug": "waar-koop-je-biologische-vis-in-leiden",
       "title": "Biologische vis in Leiden: waar let u op?",
+      "intent": "Zoekt u biologische vis? Kijk naar het keurmerk van het product, vraag naar de herkomst en bespreek de actuele beschikbaarheid met uw viswinkel.",
       "published": "2026-06-15",
       "modified": "2026-09-28",
-      "recipes": []
+      "headings": [
+        "Kijk naar het product, niet alleen naar het verhaal",
+        "Onze VÅRLAKS-zalm",
+        "Vraag naar de actuele beschikbaarheid"
+      ],
+      "recipes": [],
+      "links": [
+        "/biologische-vis",
+        "/varlaks",
+        "/assortiment"
+      ],
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ]
     },
     {
       "slug": "wat-betekenen-msc-asc-en-het-eu-bio-logo",
       "title": "BIO, ASC en MSC: wat betekenen de viskeurmerken?",
+      "intent": "Biologisch, verantwoorde kweek en duurzame wildvangst zijn niet hetzelfde. Zo leest u de aanduidingen bij uw vis.",
       "published": "2026-06-10",
       "modified": "2026-09-28",
-      "recipes": []
+      "headings": [
+        "Drie aanduidingen, verschillende vragen",
+        "Biologische kweek",
+        "ASC en MSC",
+        "Zo helpen wij u kiezen"
+      ],
+      "recipes": [],
+      "links": [
+        "/biologische-vis",
+        "/varlaks",
+        "/assortiment"
+      ],
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ]
     },
     {
       "slug": "is-biologische-zalm-gezonder-omega-3",
       "title": "Biologische zalm en omega-3: wat vertelt een keurmerk?",
+      "intent": "Een keurmerk over kweek is geen persoonlijke gezondheidsbelofte. Houd herkomst, certificering en voedingsinformatie uit elkaar.",
       "published": "2026-06-12",
       "modified": "2026-09-28",
-      "recipes": []
+      "headings": [
+        "Herkomst is een andere vraag dan voedingswaarde",
+        "Geen gezondheidsbeloftes",
+        "De zalm kiezen die bij uw gerecht past"
+      ],
+      "recipes": [],
+      "links": [
+        "/varlaks",
+        "/biologische-vis"
+      ],
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ]
     },
     {
       "slug": "verse-vis-bewaren-en-bereiden-tips",
       "title": "Verse vis bewaren en bereiden: de tips van de visboer",
+      "intent": "Verse vis is heerlijk, maar ook kwetsbaar. Met een paar simpele regels haalt u thuis het beste uit uw aankoop. Onze belangrijkste tips over bewaren, invriezen en bereiden.",
       "published": "2026-06-14",
       "modified": "2026-09-29",
-      "recipes": []
+      "headings": [
+        "Versheid en veiligheid zijn niet hetzelfde",
+        "Bewaren in de koelkast",
+        "Invriezen en ontdooien",
+        "Gaarheid controleren",
+        "Extra aandacht voor kwetsbare groepen"
+      ],
+      "recipes": [],
+      "links": [
+        "/assortiment",
+        "/viskalender",
+        "https://www.voedingscentrum.nl/nl/thema/5xveilig/vis.aspx",
+        "https://www.voedingscentrum.nl/encyclopedie/vis.aspx"
+      ],
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ]
     },
     {
       "slug": "echt-gerookte-vis-vs-kunstmatige-rooksmaak",
       "title": "Gerookte vis en rookaroma: wat is het verschil?",
+      "intent": "Roken en toegevoegd rookaroma zijn verschillende bereidingswijzen. Lees het etiket en vraag hoe uw product is gemaakt.",
       "published": "2026-06-16",
       "modified": "2026-09-29",
-      "recipes": []
+      "headings": [
+        "Koud en warm roken",
+        "Toegevoegd rookaroma",
+        "Zo krijgt u duidelijkheid",
+        "Gerookte vis bij Schaap’s"
+      ],
+      "recipes": [],
+      "links": [
+        "/assortiment",
+        "/biologische-vis"
+      ],
+      "locales": [
+        "nl",
+        "en",
+        "de"
+      ]
     }
   ]
 }

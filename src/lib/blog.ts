@@ -700,7 +700,7 @@ export const blogPosts: BlogPost[] = [QUALITY_BLOG, ...VOORSCHOTEN_ARTIKELEN, ..
   const wijziging = BIJGEWERKTE_ARTIKELEN[post.slug];
   const beeld = blogBeelden[post.slug] ?? { src: post.fotoUrl, alt: post.fotoAlt };
   return { ...post, ...wijziging, fotoUrl: beeld.src, fotoAlt: beeld.alt, secties: (wijziging?.secties ?? post.secties).map(s => ({ ...s, alineas: s.alineas.map(a => a.replaceAll("maandag t/m zaterdag", "dinsdag t/m zaterdag")) })), ...(wijziging ? { bijgewerkt: "2026-09-28", datumLabel: "Bijgewerkt 28 september 2026" } : {}) };
-})].map(post => BLOG_CORRECTIONS[post.slug] ? { ...post, ...BLOG_CORRECTIONS[post.slug], bijgewerkt: post.slug === "sinds-1938-de-geschiedenis-van-schaaps-vis" ? "2026-11-03" : "2026-09-29", datumLabel: post.slug === "sinds-1938-de-geschiedenis-van-schaaps-vis" ? "Bijgewerkt 3 november 2026" : "Bijgewerkt 29 september 2026" } : post);
+})].map(post => BLOG_CORRECTIONS[post.slug] ? { ...post, ...BLOG_CORRECTIONS[post.slug], bijgewerkt: ["sinds-1938-de-geschiedenis-van-schaaps-vis", "marktdag-in-leiden-achter-de-kraam"].includes(post.slug) ? "2026-11-03" : "2026-09-29", datumLabel: ["sinds-1938-de-geschiedenis-van-schaaps-vis", "marktdag-in-leiden-achter-de-kraam"].includes(post.slug) ? "Bijgewerkt 3 november 2026" : "Bijgewerkt 29 september 2026" } : post);
 
 export function getBlogPost(slug: string): BlogPost | undefined {
   return blogPosts.find((p) => p.slug === slug);

@@ -2039,5 +2039,138 @@
   "nextLockedFinal": {
     "profile": "locked",
     "failures": []
+  },
+  "editorialCloudflare": {
+    "pagesChecked": 507,
+    "internalLinksChecked": 519,
+    "imagesChecked": 153,
+    "failures": [],
+    "warnings": [
+      {
+        "path": "/nl/recepten/haringsalade-appel-biet",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/en/recepten/haringsalade-appel-biet",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/de/recepten/haringsalade-appel-biet",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/nl/recepten/haring-komkommer-borrelhapjes",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/en/recepten/haring-komkommer-borrelhapjes",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/de/recepten/haring-komkommer-borrelhapjes",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/nl/recepten/makreel-aardappel-ovenschotel",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/en/recepten/makreel-aardappel-ovenschotel",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      },
+      {
+        "path": "/de/recepten/makreel-aardappel-ovenschotel",
+        "issue": "No prepared-dish image; not eligible for Recipe rich results"
+      }
+    ]
+  },
+  "protectedContent": {
+    "base": "b60f56e1553ab7c7f162bc1707820d64e97f3b06",
+    "products": 67,
+    "unchanged": [
+      "prices",
+      "portions",
+      "ingredients",
+      "allergens",
+      "availability",
+      "product image sources",
+      "nutrition",
+      "season advice",
+      "23 festive variants",
+      "catalog mapping"
+    ],
+    "liveHosts": [
+      {
+        "url": "http://schaapsvishandel.nl/nl",
+        "status": 301,
+        "location": "https://schaapsvishandel.nl/nl",
+        "robots": null,
+        "server": "cloudflare",
+        "passwordPage": false,
+        "sitemapCount": 0
+      },
+      {
+        "url": "http://www.schaapsvishandel.nl/nl",
+        "status": 301,
+        "location": "https://schaapsvishandel.nl/nl",
+        "robots": null,
+        "server": "cloudflare",
+        "passwordPage": false,
+        "sitemapCount": 0
+      },
+      {
+        "url": "https://www.schaapsvishandel.nl/nl",
+        "status": 301,
+        "location": "https://schaapsvishandel.nl/nl",
+        "robots": null,
+        "server": "cloudflare",
+        "passwordPage": false,
+        "sitemapCount": 0
+      },
+      {
+        "url": "https://schaapsvishandel.nl/nl/",
+        "status": 308,
+        "location": "/nl",
+        "robots": null,
+        "server": "cloudflare",
+        "passwordPage": false,
+        "sitemapCount": 0
+      },
+      {
+        "url": "https://schaapsvishandel.nl/robots.txt",
+        "status": 200,
+        "location": null,
+        "robots": null,
+        "server": "cloudflare",
+        "passwordPage": false,
+        "sitemapCount": 0,
+        "robotsText": "User-Agent: *\nDisallow: /\n\n"
+      },
+      {
+        "url": "https://schaapsvishandel.nl/sitemap.xml",
+        "status": 200,
+        "location": null,
+        "robots": null,
+        "server": "cloudflare",
+        "passwordPage": false,
+        "sitemapCount": 0
+      },
+      {
+        "url": "https://schaapsvis.schaapsvis.workers.dev/nl",
+        "status": 200,
+        "location": null,
+        "robots": null,
+        "server": "cloudflare",
+        "passwordPage": false,
+        "sitemapCount": 0
+      }
+    ]
+  },
+  "redirectFix": {
+    "rule": "www naar hoofdsite",
+    "match": "http.host eq www.schaapsvishandel.nl",
+    "status": 301,
+    "preservesPathAndQuery": true,
+    "previousHttpWwwStatus": 522
   }
 }
