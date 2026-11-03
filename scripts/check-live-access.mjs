@@ -1,7 +1,13 @@
 // Read-only check from a GitHub-hosted runner, outside the owner's IP allowlist.
 // The site intentionally remains private until a separate launch decision.
 import assert from 'node:assert/strict';
-const origin='https://schaapsvishandel.nl';
+const origins=[
+ 'https://schaapsvishandel.nl',
+ 'https://schaapsvis.schaapsvis.workers.dev',
+ 'https://schaapsvis.vercel.app',
+ 'https://schaapsvis-9sai.vercel.app',
+];
+for(const origin of origins){
 const checks=[];
 for(const route of ['/nl','/en/assortiment','/de/feestdagen','/nl/account','/nl/beheer/start']){
  const response=await fetch(origin+route,{redirect:'manual',headers:{'User-Agent':'Schaapsvis-locked-site-check'},signal:AbortSignal.timeout(20000)});
@@ -17,3 +23,4 @@ for(const route of ['/nl','/en/assortiment','/de/feestdagen','/nl/account','/nl/
 const robots=await fetch(origin+'/robots.txt');assert.equal(robots.status,200);assert.match(await robots.text(),/Disallow:\s*\//);
 const sitemap=await fetch(origin+'/sitemap.xml');assert.equal(sitemap.status,200);assert.ok(!(await sitemap.text()).includes('<loc>'));
 console.log(JSON.stringify({origin,checks,robotsBlocked:true,sitemapEmpty:true,cookies:false,formSubmissions:0}));
+}

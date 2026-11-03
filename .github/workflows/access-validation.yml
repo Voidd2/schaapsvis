@@ -1,0 +1,27 @@
+name: Check private site hosts
+
+on:
+  pull_request:
+    paths:
+      - "scripts/check-live-access.mjs"
+      - ".github/workflows/access-validation.yml"
+  push:
+    branches: [main]
+    paths:
+      - "scripts/check-live-access.mjs"
+      - ".github/workflows/access-validation.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  locked-hosts:
+    if: vars.SITE_PUBLIC != 'launch-approved'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/check-live-access.mjs
