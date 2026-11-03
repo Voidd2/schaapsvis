@@ -18,7 +18,7 @@ Deze ronde levert de aangetoonde P0-correcties en belangrijkste P1-verbeteringen
 | Lokale SEO | Wacht op eigenaar | Externe telefoon- en dinsdagtijdverschillen vastgelegd. Geen bedrijfsgegevens geraden; huidige centrale bron behouden. |
 | Contentkwaliteit | Gecontroleerd / nog open | Inventaris van 67 producten, 23 vaste feestdagenproducten, 40 recepten en 19 blogs. Gerichte paginarollen vastgelegd; geen massale nieuwe content. Uitputtende redactionele herbeoordeling blijft vervolgwerk. |
 | Image SEO | Gecorrigeerd / wacht op eigenaar | Homepagefavorieten via responsive Image; foto’s ongewijzigd. Drie recepten missen een gerechtfoto, negen taalwaarschuwingen blijven terecht zichtbaar. |
-| Performance | Gecorrigeerd / nog open | Gemeten transferreductie homepage. Lab is geen veldmeting; geen Lighthouse- of INP-score verzonnen. Zie hieronder. |
+| Performance | Gecorrigeerd / nog open | Gemeten transferreductie homepage onder Next; Cloudflare verkleint nog niet. Lab is geen veldmeting; geen Lighthouse- of INP-score verzonnen. Zie hieronder. |
 | Mobiel / tablet / desktop | Gecontroleerd en goed | Acht templates op negen gevraagde afmetingen; formulier, mandje, ankers en taalbediening getest. |
 | Toegankelijkheid | Gecorrigeerd / nog open | Hoofdknopcontrast, ondersteunende tekst en footerreflow verbeterd. Vergroting van tekst getest; echte 200% browserzoom en volledige WCAG-audit nog open. |
 
@@ -55,16 +55,22 @@ Compact bewijs en route-inventaris staan ook in `audit-results.json` en `route-i
 
 ## Performance: wat de cijfers wel en niet zeggen
 
-Achttien metingen per ronde: drie samples op home/assortiment/feestdagen, mobiel390 en desktop1440, verse browsercontext, installed Chrome, localhost zonder netwerk-/CPU-throttling. De homepage ging mobiel van circa 7,37 MB naar 0,62 MB en desktop van 7,39 MB naar 0,74 MB aan resource-transfers. Geen originele foto vervangen.
+Achttien metingen per ronde: drie samples op home/assortiment/feestdagen, mobiel390 en desktop1440, verse browsercontext, installed Chrome, localhost zonder netwerk-/CPU-throttling. Onder Next ging de homepage mobiel van circa 7,37 MB naar 0,62 MB en desktop van 7,39 MB naar 0,74 MB aan resource-transfers. Geen originele foto vervangen.
 
 De meetmethode registreert LCP en layoutverschuivingen, maar is **geen Lighthouse**, geen echte INP en geen CrUX/GSC-veldmeting. Cold-start en gelijktijdige builds/crawls kunnen lokale timing beïnvloeden. De ruwe samples zijn bewaard; geen mediaan presenteren als garantie voor gebruikers. Een herhaling met layoutattributie gaf homepage/assortiment CLS 0 en feestdagen 0,044 mobiel / 0,009 desktop; de mobiele verschuiving is de bestaande mandknop die plaatsmaakt voor de cookiekeuzebanner. LCP-mediannen in deze laatste localhostronde: home 968/960 ms, assortiment 1104/976 ms, feestdagen 1000/952 ms (mobiel/desktop). Dat is geen bewijs van veldprestaties. De eerdere incidentele hogere uitschieters waren niet reproduceerbaar; herbeoordelen bij geïsoleerde Lighthouse-meting na deploy.
+
+### Belangrijk runtimeverschil bij beelden
+
+De aanvullende mobiele browsercontrole op de gebouwde Cloudflare-runtime slaagt op home/contact/feestdagen (geladen beelden en geen pageerrors). Daarbij is vastgesteld dat `/_next/image` met302 naar het oorspronkelijke bestand doorverwijst: de huidige `vinext()`-configuratie heeft geen optimizeradapter. De geïnstalleerde `vinext/dist/image/image-adapters-virtual.d.ts` en `vinext/dist/check.js` bevestigen dat een IMAGES-binding alleen niet voldoende is. **De 91,6% besparing geldt voor Next, niet als bewezen Cloudflare-winst.**
+
+Geen betaalde adapter/dienst geactiveerd. P2-vervolg: kies een kostenvrije build-time variantstrategie voor bestaande beelden, of configureer pas na kostencontrole de runtime-optimizer; meet daarna de echte Cloudflare-bytes opnieuw. Originele beelden en links behouden. Ruw bewijs: `cf-browser.json` en de lokale previewlog naast de repository.
 
 ## Nog open, in volgorde
 
 1. PR review en na goedgekeurde merge de echte Cloudflare-commit, Ready-status, afscherming en representatieve live routes bevestigen. Deze audit opent productie niet.
 2. Eigenaar: primaire telefoon, afwijkende dinsdagopening, juiste Google Bedrijfsprofielgegevens en drie gerechtfoto’s bevestigen; zie [NAP](nap-controle.md) en [recepten](recepten-matrix.md).
 3. Search Console: huidige Google-aanmelding toont **“Je hebt geen toegang tot deze property”** voor `sc-domain:schaapsvishandel.nl`. Geen zoekprestaties of indexeringsdata beschikbaar. Toegang regelen vóór lancering; geen nieuwe betaalde dienst nodig.
-4. Lighthouse onder reproduceerbare mobiele throttling, echte browserzoom200%, uitgebreidere toegankelijkheidscontrole en diagnose van incidentele layoutverschuivingen. Geen misleidende CWV-goedkeuring geven op localhost.
+4. Cloudflare-beeldvarianten: zie het aangetoonde adapterverschil hierboven. Daarna Lighthouse onder reproduceerbare mobiele throttling, echte browserzoom200%, uitgebreidere toegankelijkheidscontrole en diagnose van incidentele layoutverschuivingen. Geen misleidende CWV-goedkeuring geven op localhost.
 5. Redactionele vervolgcontrole: semantische description-overlap, volledige headinghiërarchie, elke voedings-/herkomstclaim en alle EN/DE hoofdteksten. Matrix is inventaris en prioritering, geen culinair certificaat.
 6. Na openbare lancering de [checklist](lancering-checklist.md) en het [90-dagenplan](monitoring-90-dagen.md) uitvoeren. Het slot blijft tot afzonderlijk eigenaarsbesluit aan.
 

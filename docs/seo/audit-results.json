@@ -1667,5 +1667,52 @@
       "nonCriticalWarnings": true,
       "mode": "combined code extract; not live crawl"
     }
-  }
+  },
+  "cloudflareBrowser": {
+    "results": [
+      {
+        "route": "/nl",
+        "status": 200,
+        "images": [
+          {
+            "src": "http://localhost:3037/_next/image?url=%2Fimages%2Fassortiment-internet%2Fhollandse-garnalen-solt.jpeg&w=256&q=75",
+            "width": 4168
+          },
+          {
+            "src": "http://localhost:3037/_next/image?url=%2Fimages%2Fdirks%2Fscholfilet.webp&w=256&q=75",
+            "width": 1218
+          },
+          {
+            "src": "http://localhost:3037/_next/image?url=%2Fimages%2Fdirks%2Fcoquilles-vlees.webp&w=256&q=75",
+            "width": 1218
+          },
+          {
+            "src": "http://localhost:3037/_next/image?url=%2Fimages%2Fdirks%2Fharing.webp&w=256&q=75",
+            "width": 1218
+          },
+          {
+            "src": "http://localhost:3037/images/dirks/visschotel-hapjes-3-5-pers.webp",
+            "width": 1600
+          }
+        ]
+      },
+      {
+        "route": "/nl/contact",
+        "status": 200,
+        "images": []
+      },
+      {
+        "route": "/nl/feestdagen",
+        "status": 200,
+        "images": [
+          {
+            "src": "http://localhost:3037/_next/image?url=%2Fimages%2Fdirks%2Fzalmslaatje-de-luxe.webp&w=640&q=75",
+            "width": 975
+          }
+        ]
+      }
+    ],
+    "errors": []
+  },
+  "imageOptimizationCaveat": "Transfer savings measured on Next only. Current Vinext config lacks optimizer adapter; Cloudflare local image requests redirect to original assets. No paid adapter enabled."
 }
