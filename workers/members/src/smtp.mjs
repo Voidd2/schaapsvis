@@ -26,7 +26,25 @@ export function stuffSmtpData(body) {
 
 function encodedHeader(value) {
   const clean = String(value || "").replace(/[\r\n]/g, " ");
-  return /^[\x20-\x7e]*$/.test(clean) ? clean : `=?UTF-8?B?${utf8Base64(clean)}?=`;
+  if (/^[\x20-\x7e]*$/.test(clean) && clean.length <= 67) return clean;
+  // RFC 2047: encoded words <=75 chars, their physical lines <=76.
+  // 39 UTF-8 bytes yield <=64 chars including the wrapper, leaving room
+  // for "Subject: ". Split at code points, never inside a UTF-8 sequence.
+  const chunks = [];
+  let chunk = "";
+  let byteLength = 0;
+  for (const character of clean) {
+    const size = encoder.encode(character).length;
+    if (byteLength + size > 39) {
+      chunks.push(chunk);
+      chunk = "";
+      byteLength = 0;
+    }
+    chunk += character;
+    byteLength += size;
+  }
+  if (chunk) chunks.push(chunk);
+  return chunks.map((part) => `=?UTF-8?B?${utf8Base64(part)}?=`).join("\r\n ");
 }
 
 function listUnsubscribeHeaders(value) {
@@ -49,7 +67,7 @@ export function makeMessage({ from, to, subject, text, html, listUnsubscribeUrl 
   // changing the authenticated mailbox or letting user input form a header.
   const senderName = listUnsubscribeUrl ? "Schaap’s Vishandel – Aanbiedingen" : "Schaap’s Vishandel – Accounts";
   const body = [
-    `From: ${encodedHeader(senderName)} <${fromAddress}>`,
+    `From: ${encodedHeader(senderName)}\r\n <${fromAddress}>`,
     `To: ${toAddress}`,
     `Subject: ${encodedHeader(subject)}`,
     `Date: ${new Date().toUTCString()}`,

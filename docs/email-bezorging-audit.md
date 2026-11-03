@@ -18,9 +18,19 @@ Vervolg: laat Knoth de uitgaande wachtrij, bounces en gedeelde IP-reputatie onde
 
 ### Afzenderherkenning na de nieuwe test
 
+PR95: main a9f0143, Cloudflare leden8f697caa en sitea720cb6d beide Ready/100%; Build249/Member149 groen, Codex-review zonder bevindingen.
+
 De SMTP-berichten krijgen twee vaste, correct UTF-8-gecodeerde zichtbare afzendernamen: `Schaap’s Vishandel – Accounts` voor transactionele berichten en `Schaap’s Vishandel – Aanbiedingen` voor campagnes met de bestaande afmeldheaders. Het mailboxadres, SMTP-envelope, authenticatie en Reply-gedrag blijven gelijk. De namen bevatten geen klantinvoer of onderwerptekst. Dit vult het herkenningspunt uit het uitvoerplan in; het is geen bewezen remedie tegen Spam. De nieuwe naam is uitsluitend lokaal getest, niet met een nieuwe echte verzending.
 
 De SMTP-test decodeert beide From-headers, controleert één afzender en het ongewijzigde envelope-adres. STARTTLS-, UTF-8-, afmeldheader- en volledige ledenintegratietests slagen. Google vraagt om consistente, duidelijke afzenderidentiteit en noemt gedeelde IP-reputatie als afzonderlijk bezorgingsrisico: [officiële verzendrichtlijnen, gecontroleerd 3 november](https://support.google.com/mail/answer/81126?hl=en).
+
+### Gevonden fout in eigen headers
+
+Na de opdracht om eerst eigen oorzaken te onderzoeken is de huidige MIME-uitvoer rechtstreeks gemeten. Het werkelijke Nederlandse verificatieonderwerp levert één encoded-word van92 tekens en een Subject-regel van101 tekens. RFC2047 begrenst dit tot respectievelijk75 en76. De herkenbare From-naam uit PR95 geeft een regel van93 tekens en moet eveneens worden gevouwen. Zie [RFC2047 §2](https://www.rfc-editor.org/rfc/rfc2047).
+
+De encoder wordt gecorrigeerd: maximaal39 UTF-8-bytes per woord, alleen splitsen tussen volledige Unicode-codepunten, continuation lines met CRLF+spatie. Ook lange ASCII-onderwerpen worden veilig gecodeerd en gevouwen. Het mailboxadres verhuist naar een continuation line zonder envelope- of authenticatiewijziging. De test decodeert elk woord met een strikte UTF-8-decoder en vergelijkt de volledige tekst, inclusief lange onderwerpen, NL/EN/DE, emoji/CJK en een poging tot headerinjectie.
+
+Dit is een aangetoonde interoperabiliteitsfout in onze code. De laatste ontvangen test had een kort ASCII-onderwerp en nog geen displaynaam; deze fout bewijst dus niet de oorzaak van zijn Spam-classificatie. Geen nieuwe mail gestuurd. De eigenaar heeft het supportbericht geweigerd; het concept blijft uitsluitend lokaal buiten Git in `../design-preview/student-admin/knoth-mailonderzoek-concept.md`.
 
 De Knoth-mailserver is correct gekoppeld en de drie belangrijkste controles
 slagen bij Gmail:
