@@ -4,7 +4,7 @@ Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 
 ## Masteraudit SEO en afwerking — vervolgcontrole en PR #81
 
-- Vervolg beeldperformance op `codex/catalog-image-performance`: 91 bestaande bronnen/364 lokale varianten, catalogus/detailkaarten aangesloten; originele schaalfotovergroting behouden. Twaalf Cloudflare-browsercombinaties slagen: circa95% minder gekozen assortimentbeeldbytes en80% bij schalen, geen totale paginaversnellingsclaim. Cloudflare-build/typegen/tsc/lint/content/winkelchecks groen. Zie `docs/seo/catalogus-beeldoptimalisatie.md`; GitHub/Next-build en live uitrol nog af te ronden.
+- PR83 live afgerond: 91 bronnen/364 varianten; originele fotovergroting behouden. Main d10e4f9, Cloudflare 18603304 Ready/100%. Build239 groen, twaalf lokale beeldcombinaties en twintig live checks geslaagd. Mobiele assortimentresources 4.939.382 → 1.059.949 B (78,5% minder in dezelfde test). Externe GitHub-run zonder cookies bevestigt slot/noindex/no-store/robots/lege sitemap op vijf routes. Zie docs/seo/catalogus-beeldoptimalisatie.md. Geen geld of echte aanvragen; tijdelijke lokale publieke binding verwijderd.
 
 - Basis main `b60f56e` na #79/#80; eigen branch `codex/master-seo-design-audit`, geen oude auditbranch overgenomen.
 - Contactantwoordkanaal client/server, echte recept/blog404, onbewezen voorraad/bezorgschema verwijderd, preview-noindex, contrast/leesbaarheid/footerreflow en vijf feestdagenankers. Homepagefavorieten via responsive Image; foto's/prijzen/porties/auth behouden.
@@ -20,7 +20,7 @@ Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 - Live HTTP-www gaf 522. De bestaande Cloudflare-www-regel matcht nu beide protocollen; 301 naar HTTPS-hoofddomein behoudt pad en query, live getest. Geen DNS/secrets/leden-Worker gewijzigd. Tijdelijke lokale SITE_PUBLIC-binding opgeruimd.
 - PR81 afgerond en live: CI Build236/Content69 groen op d4b3f46; merge b13dfee. Cloudflare sloeg de squashboodschap met oudere [skip ci] over; dezelfde commit via Retry build uitgevoerd. Siteversie b3f74852-fc47-402c-8888-cfd7c5824fdc staat Ready/100%. Twintig live checks geslaagd, noindex/canonical/HEAD/404/nieuwe copy/beelden bevestigd, leden-health ok. Geen aanvragen verzonden.
 - Live Lighthouse mobiel: performance81, accessibility100, best-practices100, SEO69 door bewust indexeringsslot; LCP4,83s, CLS0, TBT3ms. Geen veld-CWV/INP-claim. Catalogusbeeldbytes en mobiele rendervertraging zijn toekomstige optimalisatieruimte.
-- Masteraudit en uitvoerbare correcties opgeleverd. Eigenaarafhankelijk: primaire telefoon/dinsdagtijd/GBP, actuele keurmerketiketten, drie gerechtfoto’s en GSC-toegang. Externe slotcontrole buiten de IP-allowlist vóór openbare lancering; lokale slotprofielen slagen. De site is niet openbaar gemaakt. Alle bewijslinks en requirementmatrix staan in docs/seo/technische-audit.md en het voor/na-overzicht. Geen geld uitgegeven.
+- Masteraudit en uitvoerbare correcties opgeleverd. Eigenaarafhankelijk: primaire telefoon/dinsdagtijd/GBP, actuele keurmerketiketten, drie gerechtfoto’s en GSC-toegang. Externe slotcontrole buiten de IP-allowlist is inmiddels geslaagd via GitHub Build239; vóór een latere openbare lancering opnieuw volgens de checklist. De site is niet openbaar gemaakt. Alle bewijslinks en requirementmatrix staan in docs/seo/technische-audit.md en het voor/na-overzicht. Geen geld uitgegeven.
 
 ## Bestelproces vaste visschalen — live afgerond
 
