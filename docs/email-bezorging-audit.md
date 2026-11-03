@@ -2,6 +2,18 @@
 
 Gecontroleerd op 28 oktober 2026 aan de hand van DNS en echte Gmail-ontvangsten.
 
+## Nieuwe bezorgcontrole — 3 november 2026, 21:38 UTC
+
+De eigenaar gaf toestemming voor precies één nieuw testbericht. Dat is éénmaal verstuurd via Knoth (`khsm1.khsmserver1.nl:587`, geverifieerde STARTTLS) met de huidige `actionEmail`-template en `makeMessage`-MIME uit de projectbron. Geen echte accountaanmaak, code, campagne, tracking of wijziging aan productie-instellingen. SMTP accepteerde het om 21:38:42 UTC; Gmail ontving het om 21:38:44 UTC.
+
+**Resultaat: Spam, niet Postvak IN.** Het originele Gmail-bericht toont SPF PASS voor 91.220.37.174, DKIM PASS met domein schaapsvishandel.nl en selector x, en DMARC PASS. Beide transportdelen gebruikten TLS 1.3. De huidige Auto-Submitted- en X-Auto-Response-Suppress-headers zijn aanwezig; HTML en platte tekst zijn correct ontvangen. Gmail meldt dat het bericht lijkt op eerder als spam geïdentificeerde berichten. Dit bewijst geen afzonderlijke oorzaak zoals IP-reputatie of inhoud: Gmail geeft die uitsplitsing hier niet.
+
+Deze test gebruikt de bestaande mailserver vanaf de lokale machine; hij bewijst niet dat een volledige registratie vanuit de Cloudflare Worker nu is doorlopen. Betrouwbare inboxplaatsing is niet afgetekend. De ene toestemming is verbruikt; niet opnieuw verzenden zonder akkoord. Er zijn geen Gmail-filters aangemaakt of labels verplaatst om de uitkomst te veranderen.
+
+Bewijs buiten Git: `../design-preview/student-admin/delivery-attempt.json`, `delivery-test.eml`, `mail-spam-proof.png` en `mail-auth-proof.png`. Geen volledige headers, privé-adressen of geheimen in Git.
+
+Vervolg: laat Knoth de uitgaande wachtrij, bounces en gedeelde IP-reputatie onderzoeken met de bestaande afzender en het bovenstaande tijdstip; daarvoor is nog geen supportbericht verstuurd. Een ander lokaal afzenderadres of strengere DMARC-policy is op basis van deze PASS-resultaten geen bewezen oplossing. Een volgende volledige registratie-/inboxtest vraagt nieuwe verzendtoestemming en moet de oorspronkelijke classificatie vastleggen voordat iemand het bericht als Geen spam markeert.
+
 ## Conclusie
 
 De Knoth-mailserver is correct gekoppeld en de drie belangrijkste controles
