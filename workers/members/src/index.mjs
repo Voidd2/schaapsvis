@@ -169,18 +169,18 @@ function escapeHtml(value) {
 }
 
 const EMAIL_PRESENTATION = {
-  nl: { account: "ACCOUNT", codeHint: "Neem deze code niet over in een ander bericht. De code verloopt automatisch.", footer: "Dit is een automatisch accountbericht van Schaap’s Vishandel, Leiden · sinds 1938." },
-  en: { account: "ACCOUNT", codeHint: "Do not copy this code into another message. It expires automatically.", footer: "This is an automated account message from Schaap’s Vishandel, Leiden · since 1938." },
-  de: { account: "KONTO", codeHint: "Übernehmen Sie diesen Code nicht in eine andere Nachricht. Er läuft automatisch ab.", footer: "Dies ist eine automatische Kontonachricht von Schaap’s Vishandel, Leiden · seit 1938." },
+  nl: { account: "ACCOUNT", offers: "AANBIEDINGEN", codeHint: "Neem deze code niet over in een ander bericht. De code verloopt automatisch.", footer: "Dit is een automatisch accountbericht van Schaap’s Vishandel, Leiden · sinds 1938." },
+  en: { account: "ACCOUNT", offers: "OFFERS", codeHint: "Do not copy this code into another message. It expires automatically.", footer: "This is an automated account message from Schaap’s Vishandel, Leiden · since 1938." },
+  de: { account: "KONTO", offers: "ANGEBOTE", codeHint: "Übernehmen Sie diesen Code nicht in eine andere Nachricht. Er läuft automatisch ab.", footer: "Dies ist eine automatische Kontonachricht von Schaap’s Vishandel, Leiden · seit 1938." },
 };
 
-function brandedEmail({ locale = "nl", title, intro, contentHtml = "", buttonUrl = "", buttonLabel = "", footer = "" }) {
+function brandedEmail({ locale = "nl", title, intro, contentHtml = "", buttonUrl = "", buttonLabel = "", footer = "", category = "account" }) {
   const language = localeFrom(locale);
   const presentation = EMAIL_PRESENTATION[language];
   const action = buttonUrl && buttonLabel
     ? `<p style="margin:26px 0"><a href="${escapeHtml(buttonUrl)}" style="display:inline-block;background:#087fa8;color:#fff;text-decoration:none;font-weight:800;padding:13px 20px;border-radius:9px">${escapeHtml(buttonLabel)}</a></p>`
     : "";
-  return `<!doctype html><html lang="${language}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"></head><body style="margin:0;background:#eefaff;color:#102f42;font:16px/1.55 Arial,sans-serif"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#eefaff;padding:24px 12px"><tr><td align="center"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:620px;background:#fff;border:1px solid #b9e3f0;border-radius:18px;overflow:hidden"><tr><td style="background:#075c7c;color:#fff;padding:24px 30px"><div style="font:800 24px Georgia,serif">Schaap’s Vishandel</div><div style="font-size:11px;letter-spacing:.22em;margin-top:4px">LEIDEN · SINDS 1938</div></td></tr><tr><td style="padding:32px 30px"><div style="color:#087fa8;font-size:11px;font-weight:800;letter-spacing:.2em">${presentation.account}</div><h1 style="font:800 30px/1.15 Georgia,serif;margin:10px 0 16px;color:#102f42">${escapeHtml(title)}</h1><p style="margin:0 0 18px;color:#496273">${escapeHtml(intro)}</p>${contentHtml}${action}</td></tr><tr><td style="border-top:1px solid #d7eef5;padding:18px 30px;color:#627987;font-size:12px">${escapeHtml(footer || presentation.footer)}</td></tr></table></td></tr></table></body></html>`;
+  return `<!doctype html><html lang="${language}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"></head><body style="margin:0;background:#eefaff;color:#102f42;font:16px/1.55 Arial,sans-serif"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#eefaff;padding:24px 12px"><tr><td align="center"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:620px;background:#fff;border:1px solid #b9e3f0;border-radius:18px;overflow:hidden"><tr><td style="background:#075c7c;color:#fff;padding:24px 30px"><div style="font:800 24px Georgia,serif">Schaap’s Vishandel</div><div style="font-size:11px;letter-spacing:.22em;margin-top:4px">LEIDEN · SINDS 1938</div></td></tr><tr><td style="padding:32px 30px"><div style="color:#087fa8;font-size:11px;font-weight:800;letter-spacing:.2em">${category === "offers" ? presentation.offers : presentation.account}</div><h1 style="font:800 30px/1.15 Georgia,serif;margin:10px 0 16px;color:#102f42">${escapeHtml(title)}</h1><p style="margin:0 0 18px;color:#496273">${escapeHtml(intro)}</p>${contentHtml}${action}</td></tr><tr><td style="border-top:1px solid #d7eef5;padding:18px 30px;color:#627987;font-size:12px">${escapeHtml(footer || presentation.footer)}</td></tr></table></td></tr></table></body></html>`;
 }
 
 function verificationCodeEmail(locale, subject, intro, code, validity) {
@@ -209,6 +209,7 @@ function campaignEmail(subject, bodyText, unsubscribeUrl) {
   return brandedEmail({
     locale: "nl",
     title: subject,
+    category: "offers",
     intro: "Speciaal voor klanten van Schaap’s Vishandel.",
     contentHtml: `<div style="color:#102f42">${paragraphs}</div><p style="margin:26px 0 0;color:#627987;font-size:12px">U ontvangt dit bericht omdat u zich heeft aangemeld voor e-maildeals. <a href="${escapeHtml(unsubscribeUrl)}" style="color:#075c7c">Afmelden</a>.</p>`,
     footer: "Schaap’s Vishandel · Herenstraat 48, Leiden",

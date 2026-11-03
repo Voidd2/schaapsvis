@@ -2,6 +2,12 @@
 
 Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 
+## Herkenbare inhoud van aanbiedingen
+
+- Vervolgcontrole van het studentenuitvoerplan vond dat campagnes in de HTML nog het label ACCOUNT kregen. De gedeelde template onderscheidt nu accountberichten en aanbiedingen; de bestaande Nederlandstalige campagnes tonen AANBIEDINGEN. EN/DE-labels zijn opgenomen voor gelokaliseerd templategebruik.
+- Volledige leden- en SMTP-tests slagen: verificatie houdt ACCOUNT, campagnes tonen AANBIEDINGEN en de bestaande afmeldroutes blijven werken. Geen echte berichten verzonden. Uitrolbewijs volgt; dit is geen bewijs van herstelde inboxplaatsing.
+- Volgende acceptatie vereist externe input: fysieke iOS/beginscherm- en kassascancontrole, een opnieuw toegestane echte mailcontrole, actuele eigenaarfoto's/etiketten en GSC/GBP-toegang. Knoth uitsluitend als lokaal concept; Wallet blijft uitgesteld en de publieke sitepoort blijft gesloten.
+
 ## Herkenbare mailafzender
 
 - PR95 gepubliceerd als a9f0143: vaste SMTP-afzendernamen `Schaap’s Vishandel – Accounts` en `Schaap’s Vishandel – Aanbiedingen`, met dezelfde geauthenticeerde mailbox. Build249/Member149 groen en Codex-review zonder bevindingen. Cloudflare leden8f697caa en sitea720cb6d beide Ready/100%. Geen nieuwe echte mail verstuurd; inboxacceptatie blijft open.
