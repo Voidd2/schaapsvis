@@ -2,6 +2,10 @@
 
 Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 
+## Herkenbare mailafzender
+
+- Open eis uit het studentenuitvoerplan verwerkt in SMTP: vaste namen `Schaap’s Vishandel – Accounts` en `Schaap’s Vishandel – Aanbiedingen`, met dezelfde geauthenticeerde mailbox. UTF-8-header, scheiding van displaynaam/mailbox en bestaand campaign-afmelden lokaal getest; SMTP- en volledige ledenintegratietests slagen. Geen nieuwe echte mail verstuurd; inboxacceptatie blijft open. Publicatie wordt afzonderlijk gecontroleerd.
+
 ## Echte beheeractie en eenmalige mailcontrole — 22:40 CET
 
 - De eerdere Chrome-dialoogblokkade is opgelost met de toegestane geïsoleerde browsertest. Alleen de bestaande eigenaarstestpas tijdelijk geblokkeerd en hersteld. Blokkade bleef na herladen bestaan en het blokkadefilter toonde de pas. Nieuwe aanmelding bevestigde daarna actief en afwezig uit het blokkadefilter. Beheersessies uitgelogd; geen andere studenten gewijzigd of verificatiemails via beheer verstuurd.

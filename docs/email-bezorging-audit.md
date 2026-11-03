@@ -16,6 +16,12 @@ Vervolg: laat Knoth de uitgaande wachtrij, bounces en gedeelde IP-reputatie onde
 
 ## Conclusie
 
+### Afzenderherkenning na de nieuwe test
+
+De SMTP-berichten krijgen twee vaste, correct UTF-8-gecodeerde zichtbare afzendernamen: `Schaap’s Vishandel – Accounts` voor transactionele berichten en `Schaap’s Vishandel – Aanbiedingen` voor campagnes met de bestaande afmeldheaders. Het mailboxadres, SMTP-envelope, authenticatie en Reply-gedrag blijven gelijk. De namen bevatten geen klantinvoer of onderwerptekst. Dit vult het herkenningspunt uit het uitvoerplan in; het is geen bewezen remedie tegen Spam. De nieuwe naam is uitsluitend lokaal getest, niet met een nieuwe echte verzending.
+
+De SMTP-test decodeert beide From-headers, controleert één afzender en het ongewijzigde envelope-adres. STARTTLS-, UTF-8-, afmeldheader- en volledige ledenintegratietests slagen. Google vraagt om consistente, duidelijke afzenderidentiteit en noemt gedeelde IP-reputatie als afzonderlijk bezorgingsrisico: [officiële verzendrichtlijnen, gecontroleerd 3 november](https://support.google.com/mail/answer/81126?hl=en).
+
 De Knoth-mailserver is correct gekoppeld en de drie belangrijkste controles
 slagen bij Gmail:
 

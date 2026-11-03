@@ -45,8 +45,11 @@ export function makeMessage({ from, to, subject, text, html, listUnsubscribeUrl 
   const toAddress = mailbox(to);
   const boundary = `sv-${crypto.randomUUID()}`;
   const domain = fromAddress.split("@").at(-1);
+  // Fixed identities distinguish account mail from opted-in offers without
+  // changing the authenticated mailbox or letting user input form a header.
+  const senderName = listUnsubscribeUrl ? "Schaap’s Vishandel – Aanbiedingen" : "Schaap’s Vishandel – Accounts";
   const body = [
-    `From: ${fromAddress}`,
+    `From: ${encodedHeader(senderName)} <${fromAddress}>`,
     `To: ${toAddress}`,
     `Subject: ${encodedHeader(subject)}`,
     `Date: ${new Date().toUTCString()}`,
