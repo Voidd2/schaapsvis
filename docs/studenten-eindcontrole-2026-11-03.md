@@ -29,6 +29,12 @@ Gerichte ESLint, TypeScript, inhoudscontrole en backend/SMTP-tests slagen. GitHu
 
 ## Nog niet afgetekend
 
+### Aanvullende beheercontrole en passtatus
+
+Het bestaande eigenaaraccount bereikt het echte beveiligingsoverzicht vanaf het toegestane netwerk. De bekende teststudent staat actief, zonder actieve sessies of open waarschuwingen. De Chrome-extensie liep vast bij de native bevestigingsdialoog voor tijdelijk blokkeren; daarom is intrekken/herstellen niet afgetekend. Een nieuwe tab heeft daarna opnieuw de actieve status bevestigd. Er is geen nieuwe registratie, verificatieverzoek of e-mail verstuurd. Geen persoonsgegevens of toegangscodes opgenomen in dit verslag.
+
+De codecontrole vond daarnaast een verkeerde studentenmelding: een geschorste pas toonde de tekst voor een verlopen pas en een nieuwe aanvraag die de server weigert. De UI onderscheidt deze situaties nu in NL/EN/DE: blokkade geeft uitleg over de eventuele controle en contact met de winkel, zonder heraanvraag of QR; een verlopen pas houdt de verlengingsmogelijkheid. De kaartkop kan op mobiel afbreken. Het bestaande geïsoleerde browserscript controleert beide statussen op 390 en 1440px. Serverbeleid en database blijven gelijk.
+
 1. Fysiek iOS-toestel: Safari, beginscherminstallatie, opnieuw openen, uitloggen/intrekken en opnieuw aanmelden. Een desktopemulatie is geen bewijs hiervan.
 2. Echte eigenaar/beheeracceptatie met een gecontroleerde teststudent: intrekken/herstellen en kassascan. Niet uitvoeren op willekeurige klantaccounts.
 3. Nieuwe werkelijke registratie-mailontvangst na de laatste mailwijziging. Eerdere SPF/DKIM/DMARC PASS en inboxontvangst zijn geen garantie voor toekomstige inboxplaatsing.
