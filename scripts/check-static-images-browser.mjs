@@ -17,7 +17,7 @@ try{
   for(let y=0;y<height;y+=700){await page.evaluate(y=>scrollTo(0,y),y);await page.waitForTimeout(80);}
   await page.waitForLoadState('networkidle');
   const chosen=await page.locator('picture img').evaluateAll(images=>images.map(i=>({src:new URL(i.currentSrc).pathname,loaded:i.complete&&i.naturalWidth>0})));
-  assert.equal(chosen.length,7);assert.equal(errors.length,0);
+  assert.equal(chosen.length,8);assert.equal(errors.length,0);
   let bytes=0,originalBytes=0;
   for(const image of chosen){assert.ok(image.loaded);const v=byPath.get(image.src);assert.ok(v,image.src);bytes+=v.bytes;originalBytes+=v.originalBytes;}
   assert.ok(!requests.some(p=>p in manifest),'Browser must not also download the original photos');

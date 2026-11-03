@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { StaticResponsiveImage } from "@/components/StaticResponsiveImage";
 import { useRef } from "react";
 import { useInteractive } from "@/lib/use-interactive";
 import { platterPresentation } from "@/lib/platter-presentation";
@@ -10,7 +11,7 @@ export function CatalogPhoto({ src, alt, name, locale, platter }: { src: string;
   const close = locale === "en" ? "Close" : locale === "de" ? "Schließen" : "Sluiten";
   return <>
     <button type="button" className="seafood-photo" aria-label={`${platter ? `${t.photoLabel} — ` : ""}${open}: ${name}`} disabled={!ready} onClick={() => dialog.current?.showModal()}>
-      <Image src={src} alt={alt} width={900} height={675} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+      <StaticResponsiveImage src={src} alt={alt} width={900} height={675} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
       <span>{platter ? t.photoLabel : open} <span aria-hidden="true"> ⌕</span></span>
     </button>
     <dialog ref={dialog} className="catalog-photo-dialog" aria-label={name} onClick={event => { if (event.target === event.currentTarget) dialog.current?.close(); }}>

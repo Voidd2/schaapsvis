@@ -8,7 +8,7 @@ import { catalogProduct } from "@/lib/seafood-catalog";
 import { ProductQuantity, CatalogBackLink } from "@/components/catalog/RequestControls";
 import { CatalogHelp } from "@/components/catalog/CatalogHelp";
 import type { Metadata } from "next";
-import Image from "next/image";
+import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/JsonLd";

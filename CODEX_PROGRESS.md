@@ -4,6 +4,8 @@ Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 
 ## Masteraudit SEO en afwerking — vervolgcontrole en PR #81
 
+- Vervolg beeldperformance op `codex/catalog-image-performance`: 91 bestaande bronnen/364 lokale varianten, catalogus/detailkaarten aangesloten; originele schaalfotovergroting behouden. Twaalf Cloudflare-browsercombinaties slagen: circa95% minder gekozen assortimentbeeldbytes en80% bij schalen, geen totale paginaversnellingsclaim. Cloudflare-build/typegen/tsc/lint/content/winkelchecks groen. Zie `docs/seo/catalogus-beeldoptimalisatie.md`; GitHub/Next-build en live uitrol nog af te ronden.
+
 - Basis main `b60f56e` na #79/#80; eigen branch `codex/master-seo-design-audit`, geen oude auditbranch overgenomen.
 - Contactantwoordkanaal client/server, echte recept/blog404, onbewezen voorraad/bezorgschema verwijderd, preview-noindex, contrast/leesbaarheid/footerreflow en vijf feestdagenankers. Homepagefavorieten via responsive Image; foto's/prijzen/porties/auth behouden.
 - Next- en Cloudflare-build, TypeScript, ESLint, content/shopchecks, negen geïsoleerde contactcases en mandacceptatie A–J slagen. Next én lokale Cloudflare:507 pagina's/519 linkdoelen/153 beelden, geen fouten; negen waarschuwingen voor drie ontbrekende gerechtfoto's. Beide runtimes ook met slotprofiel getest.

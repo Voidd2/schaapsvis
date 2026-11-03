@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { connection } from "next/server";
-import Image from "next/image";
+import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { ArrowUpRight, MessageCircle } from "lucide-react";

@@ -1,6 +1,7 @@
 "use client";
 import { useLocale } from "next-intl";
 import { BEELD, type BeeldNaam, type Verhouding } from "@/lib/beeld";
+import { StaticResponsiveImage } from "@/components/StaticResponsiveImage";
 
 /**
  * Een beeldvlak op de site.
@@ -54,13 +55,13 @@ export function Beeld({
       }}
     >
       {plek.bestand ? (
-        /* eslint-disable-next-line @next/next/no-img-element */
-        <img
+        <StaticResponsiveImage
           src={plek.bestand}
           alt={alt}
           className={`w-full h-full ${vullend ? "object-cover" : "object-contain p-5"}`}
           width={plekkeMaten[verhouding ?? plek.verhouding][0]}
           height={plekkeMaten[verhouding ?? plek.verhouding][1]}
+          sizes="(max-width: 800px) 100vw, 50vw"
           loading={prioriteit ? "eager" : "lazy"}
           fetchPriority={prioriteit ? "high" : undefined}
         />

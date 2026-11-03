@@ -6,7 +6,7 @@ import crypto from 'node:crypto';
 import assert from 'node:assert/strict';
 import sharp from 'sharp';
 
-const sources = [
+const sources = [...new Set([
  '/images/editorial/varlaks-zalm-rauw-ai.webp',
  '/images/editorial/kibbeling-schaapstray.png',
  '/images/assortiment-internet/hollandse-garnalen-solt.jpeg',
@@ -14,7 +14,8 @@ const sources = [
  '/images/dirks/coquilles-vlees.webp',
  '/images/dirks/haring.webp',
  '/images/recepten/zalm-citroen-dille.webp',
-];
+ ...JSON.parse(await fs.readFile('src/lib/catalog-image-sources.json','utf8')),
+])];
 const manifestPath='src/lib/static-image-variants.json';
 const check=process.argv.includes('--check');
 const existing=check?JSON.parse(await fs.readFile(manifestPath,'utf8')):null;
