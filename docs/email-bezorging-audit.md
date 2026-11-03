@@ -16,6 +16,10 @@ De eigenaar wil voorlopig alleen intern onderzoek; Knoth is niet benaderd. Een e
 
 ## Conclusie
 
+### Inhoud van campagnes herkenbaar houden
+
+De vervolgaudit vond een resterend verwarrend label: de gedeelde HTML-template plaatste ACCOUNT boven aanbiedingen. De template heeft nu een expliciete categorie; campagnes tonen AANBIEDINGEN en verificatie/reset behouden hun accountlabel. Afmeldlink, adres, toestemming, verzending en SMTP-identiteit blijven gelijk. De ledenintegratietest controleert dit in dezelfde registratie- en campagnestroom. Ook de SMTP-tests slagen. Geen echte campagne of nieuwe testmail verstuurd; dit bewijst geen verandering in Gmail-classificatie.
+
 ### Afzenderherkenning na de nieuwe test
 
 PR95: main a9f0143, Cloudflare leden8f697caa en sitea720cb6d beide Ready/100%; Build249/Member149 groen, Codex-review zonder bevindingen.

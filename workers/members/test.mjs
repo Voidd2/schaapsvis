@@ -284,6 +284,7 @@ assert.match(sentEmails[registrationEmailOffset].text, /\b\d{6}\b/);
 assert.match(sentEmails[registrationEmailOffset + 1].text, /\b\d{6}\b/);
 assert.match(sentEmails[registrationEmailOffset].html, /Schaap’s Vishandel/);
 assert.match(sentEmails[registrationEmailOffset].html, /background:#075c7c/);
+assert.match(sentEmails[registrationEmailOffset].html, />ACCOUNT<\/div>/, "verification retains its account label");
 assert.notEqual(sentEmails[registrationEmailOffset].to, sentEmails[registrationEmailOffset + 1].to, "personal and school emails must be different");
 const registeredName = sqlite.prepare("SELECT first_name, last_name, full_name FROM users WHERE email='student@example.test'").get();
 assert.equal(registeredName.first_name, "Test");
@@ -774,6 +775,8 @@ assert.equal(sqlite.prepare("SELECT status FROM newsletter_campaigns WHERE id=?"
 const marketingEmail = sentEmails.findLast((message) => message.to === "deals@example.test");
 assert.match(marketingEmail.html, /Speciaal voor klanten van Schaap’s Vishandel/);
 assert.match(marketingEmail.html, /Herenstraat 48, Leiden/);
+assert.match(marketingEmail.html, />AANBIEDINGEN<\/div>/, "campaign is visibly labeled as offers");
+assert.doesNotMatch(marketingEmail.html, />ACCOUNT<\/div>/, "campaign does not impersonate an account notification");
 assert.match(marketingEmail.listUnsubscribeUrl, /\/api\/members\/newsletter\/unsubscribe-one-click\?token=/);
 const oneClickEmail = sentEmails.findLast((message) => message.to === "staged-deals@example.test");
 const oneClickUrl = new URL(oneClickEmail.listUnsubscribeUrl);
