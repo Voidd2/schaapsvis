@@ -90,7 +90,7 @@ assert(server.message.includes("=?UTF-8?B?"));
 assert(!server.message.includes("test-secret"), "the SMTP password must never appear in message data");
 
 function decodedSender(message) {
-  const fromLines = message.split("\r\n").filter((line) => line.startsWith("From: "));
+  const fromLines = message.replace(/\r\n[ \t]+/g, " ").split("\r\n").filter((line) => line.startsWith("From: "));
   assert.equal(fromLines.length, 1, "exactly one visible sender header");
   const match = fromLines[0].match(/^From: =\?UTF-8\?B\?([^?]+)\?= <([^<>]+)>$/);
   assert(match, "display name must be encoded separately from the single mailbox");
@@ -110,6 +110,28 @@ assert.match(campaignMessage.body, /List-Unsubscribe: <https:\/\/schaapsvishande
 assert.match(campaignMessage.body, /List-Unsubscribe-Post: List-Unsubscribe=One-Click/);
 assert.deepEqual(decodedSender(campaignMessage.body), { name: "Schaap’s Vishandel – Aanbiedingen", address: "schaapsv@schaapsvishandel.nl" });
 assert.equal(campaignMessage.from, "schaapsv@schaapsvishandel.nl", "the SMTP envelope remains the authenticated mailbox");
+
+// Exercise actual multilingual subjects, long campaign subjects and UTF-8
+// boundaries. Decode each word independently so split byte sequences fail.
+for (const subject of [
+  "Bevestig uw persoonlijke e-mailadres — Schaap's Vishandel",
+  "Verify your personal email — Schaap's Vishandel",
+  "Private E-Mail bestätigen — Schaap's Vishandel",
+  "Vis voor de feestdagen ".repeat(12),
+  "🐟é漢".repeat(40),
+  "A".repeat(250),
+  "Test\r\nBcc: nobody@example.test",
+]) {
+  const message = makeMessage({ from: "schaapsv@schaapsvishandel.nl", to: "customer@example.test", subject, text: "Test", html: "<p>Test</p>" }).body;
+  const header = message.split("\r\n\r\n")[0];
+  const subjectHeader = header.match(/^Subject: ([^\r\n]*(?:\r\n[ \t][^\r\n]*)*)/m)[1];
+  const words = [...subjectHeader.matchAll(/=\?UTF-8\?B\?([^?]+)\?=/g)];
+  for (const word of words) assert(word[0].length <= 75, "RFC 2047 encoded-word length");
+  for (const line of header.split("\r\n").filter((line) => line.includes("=?UTF-8?B?"))) assert(line.length <= 76, "RFC 2047 encoded header line length");
+  const decoded = words.length ? words.map((word) => new TextDecoder("utf-8", { fatal: true }).decode(Buffer.from(word[1], "base64"))).join("") : subjectHeader;
+  assert.equal(decoded, subject.replace(/[\r\n]/g, " "), "folding preserves the exact subject without breaking Unicode");
+  assert(!/^Bcc:/m.test(header), "subject cannot inject another header");
+}
 assert.throws(() => makeMessage({ from: "schaapsv@schaapsvishandel.nl", to: "customer@example.test", subject: "Test", text: "Test", html: "<p>Test</p>", listUnsubscribeUrl: "http://example.test/unsubscribe" }), /invalid-list-unsubscribe-url/);
 
 server.greeted = false;

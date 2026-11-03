@@ -4,7 +4,13 @@ Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 
 ## Herkenbare mailafzender
 
-- Open eis uit het studentenuitvoerplan verwerkt in SMTP: vaste namen `Schaap’s Vishandel – Accounts` en `Schaap’s Vishandel – Aanbiedingen`, met dezelfde geauthenticeerde mailbox. UTF-8-header, scheiding van displaynaam/mailbox en bestaand campaign-afmelden lokaal getest; SMTP- en volledige ledenintegratietests slagen. Geen nieuwe echte mail verstuurd; inboxacceptatie blijft open. Publicatie wordt afzonderlijk gecontroleerd.
+- PR95 gepubliceerd als a9f0143: vaste SMTP-afzendernamen `Schaap’s Vishandel – Accounts` en `Schaap’s Vishandel – Aanbiedingen`, met dezelfde geauthenticeerde mailbox. Build249/Member149 groen en Codex-review zonder bevindingen. Cloudflare leden8f697caa en sitea720cb6d beide Ready/100%. Geen nieuwe echte mail verstuurd; inboxacceptatie blijft open.
+
+## Eigen mailformaat verder onderzocht
+
+- Eigenaar wil geen contact met Knoth; supportconcept uitsluitend bewaard. Geen supportmail of nieuwe testmail verstuurd.
+- Reproductie vond een eigen RFC2047-fout: het Nederlandse verificatieonderwerp bevatte één encoded-word van92 tekens (maximaal75); de headerregel101 (maximaal76 bij encoded-words). De nieuwe From-regel uit PR95 was93 tekens en moet eveneens gevouwen worden. Dit verklaart niet zelfstandig de Spam-uitkomst van de eerdere ASCII-testmail.
+- Headerencoder splitst nu op Unicode-codepuntgrenzen in39 UTF-8-bytes en vouwt met CRLF+spatie; het ongewijzigde mailboxadres staat op een continuation line. Tests dekken NL/EN/DE, lange aanbiedingen, emoji/CJK, exacte terugdecodering en headerinjectie. SMTP- en volledige ledenintegratietests slagen; publicatie volgt.
 
 ## Echte beheeractie en eenmalige mailcontrole — 22:40 CET
 
