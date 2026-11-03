@@ -5,7 +5,7 @@ Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 ## Geblokkeerde en verlopen studentenpas onderscheiden
 
 - Echte eigenaarstoegang tot studentenbeheer bevestigd. Native bevestigingsdialoog blokkeert de Chrome-extensie; intrekken/herstellen daarom nog niet afgetekend. Verse tab bevestigt dat de bekende testpas actief is gebleven. Geen mails of aanvragen verstuurd.
-- UI-fout gevonden: geschorste pas toonde verlopen-tekst en een door de server geweigerde heraanvraag. Gerichte correctie in NL/EN/DE met mobiele kaartkop; tests voor geschorst/verlopen toegevoegd aan de bestaande zes geïsoleerde browserflows. Controle/publicatie nog in uitvoering. Geen API-, database- of toegangsbeleidswijziging.
+- UI-fout opgelost: geschorste pas toonde verlopen-tekst en een door de server geweigerde heraanvraag. NL/EN/DE met mobiele kaartkop; zes lokale en zes live-assetbrowserflows slagen, inclusief geschorst/verlopen. TypeScript en gerichte ESLint groen. PR92 samengevoegd als3a1ba27; Build247/run41720766667 groen, Codex-review zonder bevindingen. Cloudflare cf5fec4d Ready59s/actieve versie, build93fd4368-4537-4e3b-9726-6aa47c20e188. Geen API-, database- of toegangsbeleidswijziging. Bewijs: ../design-preview/student-inactive, waaronder live-assets/student-portal-acceptance.json en screenshots. Echte telefooncontrole aan eigenaar gevraagd; niet vervangen door emulatie.
 
 ## Studenten-eindcontrole en QR-renderfout
 
