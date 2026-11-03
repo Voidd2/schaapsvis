@@ -1,0 +1,66 @@
+import Image from "next/image";
+import { Suspense } from "react";
+import Link from "next/link";
+import { catalogProduct, MAIN_PLATTERS, GOURMET, DELICACIES, FEATURED, SECONDARY, SALAD_REQUESTS, languageIndex } from "@/lib/seafood-catalog";
+import { catalogText } from "@/lib/catalog-copy";
+import { platterPhotoAlt, platterPrice, platterPresentation } from "@/lib/platter-presentation";
+import { ProductQuantity, RequestSummary, LegacyCatalogSelection } from "./RequestControls";
+import { CatalogPhoto } from "./CatalogPhoto";
+
+type Props = { locale: string; festive?: boolean };
+function ProductCard({ slug, locale, festive, featured = false }: Props & { slug: string; featured?: boolean }) {
+  const product = catalogProduct(slug, locale), t = catalogText(locale), isPlatter = product.categorie === "visschalen";
+  const href = `/${locale}/feestdagen/${slug}?catalog=${festive ? "feestdagen" : "visschalen"}`;
+  const legacyAnchor = slug === MAIN_PLATTERS[0] ? "schalen-klassiek" : slug === MAIN_PLATTERS[3] ? "schalen-luxe" : slug === MAIN_PLATTERS[4] ? "schalen-hapjes" : undefined;
+  return <article id={legacyAnchor} className={`seafood-card${featured ? " seafood-featured-card" : ""}`} data-catalog-card={slug}>
+    <CatalogPhoto src={product.afbeelding} alt={platterPhotoAlt(product, locale)} name={product.naam} locale={locale} platter={isPlatter} />
+    <div className="seafood-card-body">
+      <h3><Link href={href}>{product.naam}</Link></h3>
+      <p>{product.intro}</p>
+      <p className="seafood-price">{platterPrice(product, locale)}</p>
+      <Link className="seafood-detail" href={href}>{t.view} →</Link>
+      <ProductQuantity slug={slug} locale={locale} />
+    </div>
+  </article>;
+}
+function Featured(props: Props) {
+  const t = catalogText(props.locale);
+  return <section className="seafood-featured" aria-label={t.favorites}>
+    <div className="seafood-featured-title"><p className="kapitaal">{t.favoriteLabel}</p><h2>{t.favorites}</h2><span aria-hidden="true">— ◇ —</span></div>
+    <ProductCard {...props} slug={FEATURED} featured />
+  </section>;
+}
+export function SeafoodCatalog({ locale, festive = false }: Props) {
+  const t = catalogText(locale), props = { locale, festive };
+  return <div className="seafood-catalog section-wrap">
+    <Suspense fallback={null}><LegacyCatalogSelection locale={locale} /></Suspense>
+    {festive && <Featured {...props} />}
+    <section id="visschalen" className="seafood-section" aria-labelledby="main-platters-title">
+      <div className="catalog-heading"><h2 id="main-platters-title">{t.platters}</h2><p>{t.platterIntro}</p></div>
+      <p className="catalog-example-note"><strong>{platterPresentation(locale).photoLabel}.</strong> {platterPresentation(locale).photoText}</p>
+      <div className="seafood-grid">{MAIN_PLATTERS.map(slug => <ProductCard key={slug} {...props} slug={slug} />)}</div>
+    </section>
+    {!festive && <Featured {...props} />}
+    {[{ id: "gourmet", title: t.gourmet, intro: t.gourmetIntro, products: GOURMET }, { id: "delicatessen", title: t.delicacies, intro: t.delicaciesIntro, products: DELICACIES }].map(section => <section key={section.id} id={section.id} className="seafood-section">
+      <div className="catalog-heading"><h2>{section.title}</h2><p>{section.intro}</p></div>
+      <div className="seafood-grid">{section.products.map(slug => <ProductCard key={slug} {...props} slug={slug} />)}</div>
+    </section>)}
+    <section id="salades" className="seafood-salads seafood-section">
+      <div className="catalog-heading"><h2>{t.salads}</h2><p>{t.saladIntro}</p></div>
+      <div className="seafood-salad-grid">{SALAD_REQUESTS.map(salad => <article key={salad.slug}>
+        <Image src={salad.image} alt={`${salad.productSlug ? t.saladPhoto : t.illustration}: ${salad.names[languageIndex(locale)]}`} width={600} height={450} sizes="(max-width: 640px) 50vw, 25vw" />
+        <small>{salad.productSlug ? t.saladPhoto : t.illustration}</small>
+        <h3>{salad.names[languageIndex(locale)]}</h3><p className="seafood-price">{t.unknown}</p>
+        {!salad.productSlug && <p className="request-muted">{t.saladPending}</p>}
+        {salad.productSlug && <Link className="seafood-detail" href={`/${locale}/assortiment/${salad.productSlug}`}>{t.view} →</Link>}
+        <ProductQuantity slug={salad.slug} locale={locale} />
+      </article>)}</div>
+      <p className="request-muted mt-5">{t.saladNote}</p>
+    </section>
+    <details className="catalog-secondary"><summary>{t.more}</summary><p>{t.moreIntro}</p>
+      <div className="seafood-grid">{SECONDARY.map(slug => <ProductCard key={slug} {...props} slug={slug} />)}</div>
+    </details>
+    <RequestSummary locale={locale} />
+    <div className="catalog-custom-banner"><div><h2>{t.custom}</h2><p>{locale === "en" ? "A larger group or a different selection? Tell us your wishes." : locale === "de" ? "Eine größere Runde oder andere Zusammenstellung? Nennen Sie uns Ihre Wünsche." : "Een groter gezelschap of een andere samenstelling? Vertel ons uw wensen."}</p></div><Link className="knop knop-lijn-licht" href={festive ? `/${locale}/visschalen#maatwerk` : "#maatwerk"}>{t.custom} →</Link></div>
+  </div>;
+}

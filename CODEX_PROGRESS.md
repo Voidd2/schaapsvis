@@ -1,6 +1,13 @@
 # Schaap's Vishandel — voortgang
 
-Laatst bijgewerkt: 2 november 2026, Europe/Amsterdam
+Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
+
+## Visschalen & delicatessen — herbouw in afronding
+
+- Branch `codex/platters-delicatessen-catalog`: zes hoofdschalen, favoriet, gourmet, delicatessen, vier ongeprijsde saladewensen en één gedeelde aanvraaglijst op beide overzichten en details. Bestaande 23 routes, twaalf schalen en canonieke prijzen behouden; luxe blijft 10–14 / €160.
+- NL/EN/DE, desktop/mobiel, hoeveelheden/bedragen, detail/terug/herladen, datum, verdeelwens en maatwerkconcept gecontroleerd zonder verzending. Fotovergroting/Escape/focus en geen overflow bevestigd.
+- Next-build (560 routes), TypeScript, gerichte ESLint, content- en shopchecks geslaagd. Definitieve Cloudflare-build, PR/CI en live-uitrol nog te bevestigen.
+- Bewijs, ontbrekende eigenaargegevens en beeldprompt: `docs/visschalen-delicatessen-herbouw.md`. Screenshots: `../design-preview/catalog-rebuild/`.
 
 ## Visschalen: uitleg en maatwerkaanvraag — live afgerond
 

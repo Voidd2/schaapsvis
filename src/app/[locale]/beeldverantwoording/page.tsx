@@ -55,7 +55,7 @@ export default async function BeeldverantwoordingPage({ params }: Props) {
     const photo = productPhoto(localized, lang);
     return photo?.credit ? [{ name: localized.naam, credit: photo.credit }] : [];
   });
-  const feestEntries = FEESTDAGEN_PRODUCTEN.map((product) => ({
+  const feestEntries = [...FEESTDAGEN_PRODUCTEN, ...["krabsalade", "zalmsalade", "tonijnsalade"].map(slug => ({ slug, naam: localizedProduct(slug, lang)?.naam ?? slug }))].map((product) => ({
     name: product.naam,
     credit: {
       author: "Dirks Vishandel",

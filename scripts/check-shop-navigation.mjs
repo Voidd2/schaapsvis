@@ -77,12 +77,14 @@ for (const source of FEESTDAGEN_PRODUCTEN.filter(p => p.categorie === "visschale
 }
 for (const source of FEESTDAGEN_PRODUCTEN.filter(p => p.categorie !== "visschalen")) assert.equal(localizedPlatterProduct(source, "de"), source);
 
+const { catalogProduct, MAIN_PLATTERS, GOURMET, DELICACIES, SECONDARY, SALAD_REQUESTS } = load("src/lib/seafood-catalog.ts");
+
 if (process.env.PLATTER_DETAIL_EVIDENCE) {
   const rows = JSON.parse(fs.readFileSync(process.env.PLATTER_DETAIL_EVIDENCE, "utf8"));
   assert.equal(rows.length, 36);
   assert.equal(new Set(rows.map(r => `${r.locale}/${r.slug}`)).size, 36);
   for (const row of rows) {
-    const product = localizedPlatterProduct(FEESTDAGEN_PRODUCTEN.find(p => p.slug === row.slug), row.locale);
+    const product = catalogProduct(row.slug, row.locale);
     assert.equal(row.name, product.naam);
     assert.equal(row.alt, platterPhotoAlt(product, row.locale));
     assert.ok(row.title.includes(product.naam));
@@ -94,13 +96,11 @@ if (process.env.PLATTER_DETAIL_EVIDENCE) {
     const price = feestdagenBedrag(product.prijsCents, row.locale);
     assert.ok(row.text.includes(platterPrice(product, row.locale)));
     assert.ok(row.option.includes(price));
-    const message = new URL(row.whatsapp).searchParams.get("text");
-    assert.ok(message.includes(product.naam));
-    assert.ok(message.includes(platterPrice(product, row.locale)));
+    assert.ok(row.requestLink?.endsWith("#aanvraag"), "Detail leads to shared enquiry");
     for (const link of row.related) {
       const url = new URL(link.href, "https://example.test");
       const slug = url.pathname.split("/").at(-1);
-      const related = localizedPlatterProduct(FEESTDAGEN_PRODUCTEN.find(p => p.slug === slug), row.locale);
+      const related = catalogProduct(slug, row.locale);
       assert.ok(link.text.includes(related.naam));
       assert.ok(link.text.includes(platterPrice(related, row.locale)));
       if (platterFamily(slug) !== "luxe") assert.equal(url.searchParams.get("luxe"), "visschotel-luxe-10-14-pers");
@@ -111,6 +111,41 @@ if (process.env.PLATTER_DETAIL_EVIDENCE) {
   }
   console.log("36 rendered details verified: translations, canonical amounts, ingredients/allergens, metadata, schema, images, related links and WhatsApp.");
 }
+
+const { normalizeRequest, requestTotal, requestMessage } = load("src/lib/catalog-request.ts");
+assert.equal(MAIN_PLATTERS.length, 6);
+assert.equal(new Set([...MAIN_PLATTERS, ...GOURMET, ...DELICACIES, ...SECONDARY, "zalmslaatje-de-luxe"]).size, FEESTDAGEN_PRODUCTEN.length);
+assert.deepEqual(MAIN_PLATTERS.map(slug => FEESTDAGEN_PRODUCTEN.find(p => p.slug === slug).prijsCents), [5950,7350,9850,16000,6750,8550]);
+for (const locale of ["nl","en","de"]) for (const source of FEESTDAGEN_PRODUCTEN) {
+  const localized = catalogProduct(source.slug, locale);
+  assert.equal(localized.prijsCents, source.prijsCents);
+  assert.equal(localized.afbeelding, source.afbeelding);
+  assert.equal(localized.samenstelling.length, source.samenstelling.length);
+  assert.equal(localized.allergenen.length, source.allergenen.length);
+  assert.ok(fs.existsSync(path.join("public", localized.afbeelding)));
+  if(source.slug === "visschotel-luxe-10-14-pers") assert.match(localized.naam, /10–14/);
+}
+for (const salad of SALAD_REQUESTS) assert.ok(fs.existsSync(path.join("public", salad.image)));
+assert.equal(new Set(SALAD_REQUESTS.map(s => s.image)).size, 4);
+const request = {items:{"visschotel-middel-5-8-pers":{quantity:2,split:false}},date:""};
+assert.deepEqual(requestTotal(request), {cents:19700,incomplete:false});
+request.items["luxe-trio-klein"] = {quantity:1,split:false};
+assert.deepEqual(requestTotal(request), {cents:21299,incomplete:false});
+request.items["extra-zalmsalade"] = {quantity:2,split:false};
+assert.deepEqual(requestTotal(request), {cents:21299,incomplete:true});
+request.items["visschotel-middel-5-8-pers"].split = true;
+assert.deepEqual(requestTotal(request), {cents:21299,incomplete:true});
+for(const locale of ["nl","en","de"]) {
+  const draft = requestMessage({...request,date:"2026-12-24"},locale);
+  assert.ok(draft.includes(feestdagenBedrag(21299,locale)));
+  assert.ok(draft.includes("2026"));
+  assert.ok(draft.includes(catalogProduct("luxe-trio-klein",locale).naam));
+  assert.ok(draft.includes("5–8"));
+}
+assert.deepEqual(normalizeRequest({items:{unknown:{quantity:1},"luxe-trio-klein":{quantity:1.5},"extra-zalmsalade":{quantity:-1}},date:"bad"}),{items:{},date:""});
+assert.deepEqual(normalizeRequest(JSON.parse(JSON.stringify(request))),request);
+assert.equal(normalizeRequest({items:{"luxe-trio-klein":{quantity:1,split:true}},date:""}).items["luxe-trio-klein"].split,false);
+console.log("Shared catalogue checks passed: 6 main choices, all 23 preserved routes, 3 languages, canonical totals, unknown salads, split wishes and storage validation.");
 
 const { inquiryText, platterInquiryMessage } = load("src/lib/platter-inquiry.ts");
 const { whatsappLink } = load("src/lib/bedrijf.ts");
