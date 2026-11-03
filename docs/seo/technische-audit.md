@@ -172,15 +172,15 @@ Een vergelijking met basiscommit `b60f56e` bewijst dat alle67 beschermde product
 | C8–C9 sitemap/redirect |507 publieke canonicals; gesloten sitemap leeg; oude bezorg-, recept- en aliasroutes getest; onbekende details404. Geen bestaande redirect verwijderd. |
 | D1–D4 lokaal | NAP-verschillen met bronlinks en eigenaarsacties; afzonderlijke locatie-intenties en links in keyword-map. Geen GBP-wijzigingen zonder eigenaar. |
 | E1–E4 inhoud | Uitgebreide broninventaris, redactionele correcties hierboven,40-receptenmatrix en keywordmap met contentgaten/commerciële waarde/eigenaarsinput. |
-| F1 beelden | Bestaande foto's behouden;28 WebP-varianten/7homebeelden, SHA/dimensies en browserselectie bewezen op Next/Vinext. |
+| F1 beelden | Bestaande foto's behouden; sinds PR83 364 WebP-varianten/91 bronnen. SHA/dimensies, browserselectie en originele schaalvergroting gecontroleerd; twaalf lokale beeldcombinaties en twintig livechecks. |
 | F2 prestaties | Vier templates×twee Lighthouseprofielen; beeldbytes98,5%/96,4% lager. Edge-Lighthouse uitgevoerd (mobiel81); echte veld-CWV nog niet beschikbaar. |
 | F3 serverHTML | Publicsim-crawls op beide runtimes; metadata direct in HEAD. |
 | G schermen/interactie |72 combinaties+teksttest,8 echte200%-zoom; mand A–J, focus/modal/filter/taal/formulier; geen echte verzending. |
-| H1–H3 automatisering | Bestaande scripts uitgebreid,9 geïsoleerde handlercases en twee indexeringsprofielen; CI Build236 en Content69 groen op d4b3f46, inclusief laatste copy en beide builds. |
+| H1–H3 automatisering | Bestaande scripts uitgebreid,9 geïsoleerde handlercases en twee indexeringsprofielen; CI Build236/Content69 voor de audit en Build239 voor beeldoptimalisatie groen. Externe slotcontrole toegevoegd. |
 | I documenten/skill | Acht gevraagde documenten, inventaris/resultaatbestanden en project-SEO-skill aanwezig; geen llms.txt toegevoegd. |
 | J monitoring | GSC-account heeft geen propertytoegang; 90-dagenplan en eigenaarstappen staan klaar. Geen data verzonnen. |
 | K prioritering | Aangetoonde P0/P1-fouten eerst, daarna beelden/performance en inhoud; geen groot redesign. |
-| L oplevering | PR81 samengevoegd, Cloudflarecommit/Ready en20 livecontroles vastgelegd. Voor/na en livebeelden aanwezig; eigenaarafhankelijkheden expliciet behouden. |
+| L oplevering | PR81 en PR83 samengevoegd, Cloudflarecommit/Ready en20 livecontroles per ronde vastgelegd. Voor/na en livebeelden aanwezig; eigenaarafhankelijkheden expliciet behouden. |
 
 ## Onderzoeksbronnen
 
