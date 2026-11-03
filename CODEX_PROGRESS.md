@@ -2,11 +2,12 @@
 
 Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 
-## Visschalen & delicatessen — herbouw in afronding
+## Visschalen & delicatessen — herbouw live afgerond
 
 - Branch `codex/platters-delicatessen-catalog`: zes hoofdschalen, favoriet, gourmet, delicatessen, vier ongeprijsde saladewensen en één gedeelde aanvraaglijst op beide overzichten en details. Bestaande 23 routes, twaalf schalen en canonieke prijzen behouden; luxe blijft 10–14 / €160.
 - NL/EN/DE, desktop/mobiel, hoeveelheden/bedragen, detail/terug/herladen, datum, verdeelwens en maatwerkconcept gecontroleerd zonder verzending. Fotovergroting/Escape/focus en geen overflow bevestigd.
-- Next-build (560 routes), TypeScript, gerichte ESLint, content- en shopchecks geslaagd. Definitieve Cloudflare-build, PR/CI en live-uitrol nog te bevestigen.
+- Next-build (560 routes), Cloudflare-build, TypeScript, gerichte ESLint, content- en shopchecks geslaagd. PR #75 samengevoegd als `f2b11f0`; GitHub-build groen en Codex-review zonder bevindingen. Site-Worker `610dd007` en leden-Worker `a0d3fa61` beide 100% Ready.
+- Live op schaapsvishandel.nl: zes kaarten, €134,99 bekend subtotaal voor twee kleine schalen + trio, ongeprijsde krab-mangowens, detail/terug/Feestdagen behouden selectie; alle vier saladebeelden laden. Leden-healthcheck `{"status":"ok"}`. Testselectie daarna via de bediening leeggemaakt, niets verzonden.
 - Bewijs, ontbrekende eigenaargegevens en beeldprompt: `docs/visschalen-delicatessen-herbouw.md`. Screenshots: `../design-preview/catalog-rebuild/`.
 
 ## Visschalen: uitleg en maatwerkaanvraag — live afgerond
