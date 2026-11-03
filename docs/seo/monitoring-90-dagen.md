@@ -1,6 +1,8 @@
 # Eerste 90 dagen na openbare lancering
 
-Search Console is daadwerkelijk geopend op 3 november 2026: de huidige Google-aanmelding heeft geen toegang tot de domeinproperty schaapsvishandel.nl. Er is daarom geen Search Console-export of CrUX-veldrapport voor deze uitvoering. Geen prestatiecijfers verzonnen. De klok begint bij publieke lancering, niet bij de besloten ontwikkeldeploy.
+Search Console-toegang is op 3 november 2026 na herstel door de eigenaar opnieuw gecontroleerd en werkt voor de domeinproperty schaapsvishandel.nl. Open voortaan https://search.google.com/search-console?resource_id=sc-domain%3Aschaapsvishandel.nl via de bestaande Chrome-aanmelding. De eerdere melding van ontbrekende toegang is achterhaald.
+
+Het overzicht toont 201 zoekklikken (periode niet gecontroleerd), 12 geïndexeerde en 79 niet-geïndexeerde pagina's, een aanbeveling dat de homepage niet geïndexeerd is, en geen Core Web Vitals-gegevens voor mobiel/desktop. Dit is een eerste overzicht, geen volledige export of nieuwe SEO-audit; oorzaken en meetperiode moeten per rapport worden gecontroleerd. Geen toegangsbeveiliging of indexeringsinstelling gewijzigd. De 90-dagenklok begint bij publieke lancering, niet bij de besloten ontwikkeldeploy. Search Console meet zoekprestaties, niet Gmail-bezorging.
 
 | Moment | Controle | Beslissing / eigenaar |
 |---|---|---|

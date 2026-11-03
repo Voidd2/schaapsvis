@@ -1,3 +1,4 @@
+import { clientDeviceInfo } from "./device-info.mjs";
 import { Pass, SigningMaterial } from "passmint";
 import { APPLE_WALLET_ICON_2X } from "./wallet-assets.mjs";
 
@@ -698,33 +699,6 @@ function normalizedClientLabel(value, fallback = "Onbekend") {
   return (cleaned || fallback).slice(0, 80);
 }
 
-function clientDeviceInfo(request) {
-  const ua = String(request.headers.get("User-Agent") || "");
-  const mobileHint = String(request.headers.get("Sec-CH-UA-Mobile") || "");
-  const accessContext = request.headers.get("X-SV-App-Context") === "standalone" ? "standalone" : "browser";
-  const isTablet = /iPad|Tablet|PlayBook|Silk/i.test(ua) || (/Android/i.test(ua) && !/Mobile/i.test(ua));
-  const isPhone = mobileHint === "?1" || /iPhone|iPod|Android.*Mobile|Windows Phone/i.test(ua);
-  const deviceType = isTablet ? "tablet" : isPhone ? "smartphone" : ua ? "desktop" : "unknown";
-  const operatingSystem = /iPhone|iPad|iPod/i.test(ua) ? "iOS/iPadOS"
-    : /Android/i.test(ua) ? "Android"
-      : /Windows/i.test(ua) ? "Windows"
-        : /Mac OS X|Macintosh/i.test(ua) ? "macOS"
-          : /Linux/i.test(ua) ? "Linux" : "Onbekend";
-  const browser = /Edg\//i.test(ua) ? "Edge"
-    : /CriOS|Chrome\//i.test(ua) ? "Chrome"
-      : /FxiOS|Firefox\//i.test(ua) ? "Firefox"
-        : /Safari\//i.test(ua) ? "Safari" : "Onbekend";
-  // Browsers usually withhold a trustworthy model. Store it only when a
-  // standardized client hint is explicitly supplied, never infer it.
-  const modelHint = request.headers.get("Sec-CH-UA-Model");
-  return {
-    deviceType,
-    operatingSystem: normalizedClientLabel(operatingSystem),
-    browser: normalizedClientLabel(browser),
-    deviceModel: modelHint ? normalizedClientLabel(modelHint.replace(/^"|"$/g, ""), "") || null : null,
-    accessContext,
-  };
-}
 
 async function securitySettings(env) {
   const row = await env.DB.prepare(`SELECT new_device_warning_count,new_device_window_days,concurrent_device_minutes,qr_issue_limit,qr_check_limit FROM security_settings WHERE id=1`).first();

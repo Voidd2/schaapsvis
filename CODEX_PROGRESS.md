@@ -2,6 +2,25 @@
 
 Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 
+## Beheernavigatie, sessiegegevens en catalogusbediening
+
+- Gedeeld NL/EN/DE-beheermenu toegevoegd aan alle beheerpagina’s, met actieve pagina, statistieken, aanvragen, pasbeveiliging, e-mailaanbiedingen, klantaccounts en terug naar de website. Dubbele losse navigatieregels verwijderd.
+- Desktopgroepen zijn over hun volledige label klikbaar en toetsenbordbedienbaar. Recepten staat zelfstandig; Visschalen bevat Feestdagen en Relatiegeschenken; Assortiment bevat barbecue/gourmet en herkomst. Mobiel gebruikt dezelfde indeling. Visschalen heeft grote sectieknoppen en bestaande cadeau-ideeën; product-/mandknoppen en hoeveelheidsbediening vergroot. Geen prijzen, foto's, routes of toegangsregels gewijzigd.
+- Bestaande apparaatregistratie gekoppeld aan de zichtbare sessiekaarten: apparaattype, browser, besturingssysteem, beschikbare modelhint, context en tijdstippen. Oude sessies zonder opgeslagen apparaat worden eerlijk toegelicht. UA-herkenning verfijnd voor Edge op iOS/Android, Samsung Internet, Opera en ChromeOS; geen ruwe UA of hardwarefingerprint opgeslagen. Geen migratie nodig.
+- Lokale controles: ledenintegratietests inclusief 8 browserfixtures en databasekoppeling bij login, SMTP-test zonder echte mail, inhoudscontrole, catalogus/selectiebehoud, QR, build-target, gerichte ESLint, Next- en Cloudflare-build. Chrome: hele desktopknop opent submenu; mobiele menu-indeling en 54px catalogusknoppen; alle vijf beheerbestemmingen en EN/DE gecontroleerd. Lokale beheer-API is niet gekoppeld aan productie; geen aanvragen, e-mails of beheeracties uitgevoerd. Publicatiebewijs volgt na uitrol.
+
+## Nieuwe mailboxen gecontroleerd
+
+- Vervolg op expliciet verzoek van de eigenaar: op 3 november 22:31 UTC exact één testmail per nieuwe mailbox naar het bekende Gmail-testadres gestuurd. Beide SMTP-geaccepteerd en in Gmail als **Spam** waargenomen. De nieuwe mailboxnaam alleen loste het dus in deze test niet op. Beide gebruikten dezelfde actuele transactionele projecttemplate, zonder account, campagne of inschrijving aan te maken. Dit is geen volledige Worker-registratie- of marketingcampagnetest. Bewijs: ../design-preview/student-admin/new-mailbox-delivery/ (twee EML's, sendguards, IDs en gmail-results.png). Geen labels/filters gewijzigd; deze twee verzendingen zijn uitgevoerd, niet automatisch herhalen.
+
+- Eigenaar heeft account@schaapsvishandel.nl en aanbiedingen@schaapsvishandel.nl aangemaakt. Op 3 november 22:29 UTC beide via khsm1.khsmserver1.nl:587 getest met certificaatvalidatie, TLS1.3 en AUTH PLAIN: SMTP235 voor aanmelding en SMTP250 voor eigen MAIL FROM. Daarna RSET/QUIT; geen RCPT of DATA, nul berichten verzonden.
+- Technisch bruikbaar als afzonderlijke SMTP-afzenders. Website is hiermee nog niet omgeschakeld: huidige sendMail gebruikt één SMTP-configuratie. Koppeling vereist aparte campagnecredentials/selectie en versleutelde Worker-secrets; bestaande beheeridentiteit moet gelijk blijven. Inboxplaatsing is met deze no-send test niet bewezen. Geen nieuwe abonnementen, DNS-wijzigingen of wachtwoorden in Git. Geschoond bewijs buiten Git: ../design-preview/student-admin/check-new-mailboxes.json.
+
+## Search Console-toegang hersteld
+
+- Na bericht van de eigenaar de bestaande Chrome-aanmelding read-only gecontroleerd: domeinproperty schaapsvishandel.nl is nu toegankelijk. De eerdere GSC-toegangsblokkade is vervallen; zie docs/seo/monitoring-90-dagen.md voor URL en eerste overzicht. Geen instellingen of publieke toegang veranderd.
+- Mail blijft een afzonderlijk open punt: laatste echte test Spam ondanks SPF/DKIM/DMARC PASS en correct gedecodeerde headers. Exacte classificatieoorzaak niet bekend; Search Console lost e-mailreputatie niet op. Geen nieuwe testmail of bericht aan Knoth verstuurd.
+
 ## Herkenbare inhoud van aanbiedingen
 
 - Vervolgcontrole van het studentenuitvoerplan vond dat campagnes in de HTML nog het label ACCOUNT kregen. De gedeelde template onderscheidt nu accountberichten en aanbiedingen; de bestaande Nederlandstalige campagnes tonen AANBIEDINGEN. EN/DE-labels zijn opgenomen voor gelokaliseerd templategebruik.
