@@ -5,15 +5,14 @@ import { connection } from "next/server";
 import { PlatterNavigation } from "@/components/PlatterNavigation";
 import { platterFamily, platterLabels, platterOverviewHref, platterDetailHref } from "@/lib/platter-families";
 import { catalogProduct } from "@/lib/seafood-catalog";
-import { ProductQuantity, RequestSummary, CatalogBackLink } from "@/components/catalog/RequestControls";
-import { catalogText } from "@/lib/catalog-copy";
+import { ProductQuantity, CatalogBackLink } from "@/components/catalog/RequestControls";
+import { CatalogHelp } from "@/components/catalog/CatalogHelp";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
-import { PaginaSlot } from "@/components/ui/PaginaKop";
 import { Kop, Sectie } from "@/components/ui/Sectie";
 import { BEDRIJF } from "@/lib/bedrijf";
 import {
@@ -119,31 +118,31 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
     {origin && <div className="section-wrap pt-6"><CatalogBackLink locale={locale} origin={origin} /></div>}
     {family && !origin && <div className="section-wrap pt-6"><Suspense fallback={<Link className="platter-back-link" href={platterOverviewHref(locale, slug, selection.toString())}>{platterLabels[taal].back}</Link>}><PlatterNavigation locale={taal} slug={slug} mode="back" /></Suspense></div>}
     <section className="bg-[#f7f3ec]">
-      <div className="mx-auto grid max-w-7xl gap-9 px-4 py-8 md:px-8 md:py-14 lg:grid-cols-[1.08fr_.92fr] lg:gap-14">
-        <figure><div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white shadow-sm">
+      <div className="section-wrap product-detail-grid">
+        <figure className="product-detail-photo"><div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white shadow-sm">
           <Image src={product.afbeelding} alt={platterPhotoAlt(product, locale)} fill priority sizes="(max-width: 1024px) 100vw, 58vw" className={family ? "object-contain" : "object-cover"} />
         </div>{family && <figcaption className="mt-3"><PlatterPhotoNote locale={locale} /></figcaption>}</figure>
-        <div className="flex flex-col justify-center">
+        <div className="product-detail-heading">
           <nav aria-label="Breadcrumb" className="mb-6 text-sm text-[#527080]">
             <Link href={`/${locale}`}>{t.home}</Link> <span aria-hidden="true">/</span> <Link href={`/${locale}/feestdagen`}>{t.season}</Link>
           </nav>
           <p className="kapitaal mb-3">{t.season} · {t.selection}</p>
           <h1 className="text-[2.4rem] leading-[1.04] sm:text-[3.4rem]">{product.naam}</h1>
-          <p className="mt-5 max-w-xl text-[1.08rem] leading-8 text-[#38515e]">{product.intro}</p>
           <div className="mt-7 border-y border-[#bfd6df] py-5">
             <p className="text-xs font-bold uppercase tracking-[.17em] text-[#527080]">{t.price}</p>
             <p className="mt-1 text-2xl font-bold text-[#a61f2b]">{platterPrice(product, locale)}</p>
           </div>
-          {family && <Suspense fallback={null}><PlatterNavigation locale={taal} slug={slug} mode="size" /></Suspense>}
+        </div>
+        <div className="product-detail-actions">
+          <p className="max-w-xl text-[1.08rem] leading-8 text-[#38515e]">{product.intro}</p>
           <p className="mt-5 text-sm leading-6 text-[#527080]">{note}</p>
           {family && <Link className="mt-4 underline underline-offset-4" href={platterOverviewHref(locale, slug, selection.toString()).replace(/#.*$/, "#maatwerk")}>{platterPresentation(locale).custom}</Link>}
           <ProductQuantity key={slug} slug={slug} locale={locale} />
-          <a href="#aanvraag" className="knop knop-rood mt-7 w-full sm:w-fit">{catalogText(locale).listLink} ↓</a>
+          <CatalogHelp locale={locale} />
         </div>
       </div>
     </section>
 
-    <div className="section-wrap py-8"><RequestSummary locale={locale} /></div>
     <Sectie grond="papier">
       <div className="grid gap-10 lg:grid-cols-[1fr_.85fr] lg:gap-16">
         <div>
@@ -189,9 +188,5 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
       </ul>
     </Sectie>
 
-    <PaginaSlot titel={product.naam} tekst={note} knoppen={[
-      { label: catalogText(locale).listLink, href: "#aanvraag" },
-      { label: t.season, href: `/${locale}/feestdagen`, soort: "lijn" },
-    ]} />
   </>;
 }

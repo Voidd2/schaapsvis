@@ -36,7 +36,10 @@ export function AnalyticsConsent({ locale }: { locale: string }) {
     const onClick = (event: MouseEvent) => {
       const anchor = (event.target as HTMLElement | null)?.closest("a[href]");
       if (!(anchor instanceof HTMLAnchorElement)) return;
-      send("link_click", pathname, anchor.href);
+      const target = new URL(anchor.href);
+      // Drafts may contain wishes/allergies: record only the destination path.
+      target.search = ""; target.hash = "";
+      send("link_click", pathname, target.href);
     };
     document.addEventListener("click", onClick, { capture: true });
     return () => document.removeEventListener("click", onClick, { capture: true });
@@ -65,7 +68,7 @@ export function AnalyticsConsent({ locale }: { locale: string }) {
     </button>;
   }
 
-  return <aside aria-label={copy.title} className="fixed inset-x-3 bottom-3 z-[80] mx-auto flex max-w-4xl flex-col gap-4 rounded-2xl border border-sky-200 bg-white p-5 shadow-xl sm:flex-row sm:items-center sm:justify-between sm:p-6">
+  return <aside aria-label={copy.title} className="cookie-choice-banner fixed inset-x-3 bottom-3 z-[80] mx-auto flex max-w-4xl flex-col gap-4 rounded-2xl border border-sky-200 bg-white p-5 shadow-xl sm:flex-row sm:items-center sm:justify-between sm:p-6">
     <div>
       <h2 className="font-display text-xl font-bold text-slate-900">{copy.title}</h2>
       <p className="mt-1 text-base leading-7 text-slate-700">{copy.message} <Link className="font-semibold text-sky-900 underline underline-offset-4" href={`/${locale}/privacyverklaring`}>{copy.privacy}</Link>.</p>

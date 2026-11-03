@@ -9,7 +9,7 @@ import { Schema } from "@/components/Schema";
 import { Sectie, Kop, Vragen, Kruimels } from "@/components/ui/Sectie";
 import { PaginaSlot } from "@/components/ui/PaginaKop";
 import { SeafoodCatalog } from "@/components/catalog/SeafoodCatalog";
-import { RequestListLink } from "@/components/catalog/RequestControls";
+import { CatalogHelp } from "@/components/catalog/CatalogHelp";
 import { catalogText } from "@/lib/catalog-copy";
 import { paginaMetadata, kruimelSchema, vraagSchema } from "@/lib/seo";
 import { bestelContact } from "@/lib/bestel-contact";
@@ -76,9 +76,10 @@ export default async function VisschalenPage({
         <h1>{catalog.title}</h1>
         <p className="platter-intro-text">{catalog.intro}</p>
         <nav className="catalog-intro-links" aria-label={catalog.title}>
-          <a href="#visschalen">{catalog.platters} ↓</a><a href="#gourmet">{catalog.gourmet} ↓</a><a href="#maatwerk">{catalog.custom}</a><RequestListLink locale={locale} />
+          <a href="#visschalen">{catalog.platters} ↓</a><a href="#gourmet">{catalog.gourmet} ↓</a><a href="#maatwerk">{catalog.custom}</a>
         </nav>
       </section>
+      <div className="section-wrap"><CatalogHelp locale={locale} /></div>
       <SeafoodCatalog locale={locale} />
 
       <Sectie grond="zand" id="maatwerk">

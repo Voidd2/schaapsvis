@@ -2,6 +2,14 @@
 
 Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 
+## Bestelproces vaste visschalen — lokaal gereed, publicatie volgt
+
+- Branch `codex/catalog-cart-simplification`, basis `ac05aac`. Eén gedeelde toegankelijke mand-drawer; oude split verwijderd/migreert weg; vaste details zonder formaatdropdown; 23 routes/12 schalen/prijzen/foto’s behouden; trio klein/groot NL/EN/DE.
+- Maatwerk met visvoorkeuren, presentatie, hoeveelheid/bakjes, apart allergieveld en Amsterdam-datumvalidatie. Vrije tekst alleen in geheugen; klikstatistieken zonder query/fragment.
+- Playwright A–J geslaagd, 18 catalogus/detail-breedtecombinaties plus bestaande 96 regressiecombinaties en 16 EN/DE-routes. Geen berichten of echte aanvragen. Next 572 routes, Cloudflare-build, gerichte ESLint, shop- en inhoudscontrole geslaagd.
+- Mapping vijf gewenste formaten en bewijs: `docs/bestelproces-vaste-visschalen.md`. Verse-visfunctie alleen roadmap. Eén illustratief klein-fotoconcept in `../design-preview/cart-79/`, nog niet live; eerst eigenaarbeoordeling.
+- Volgende stap: PR/CI/review, merge, echte Cloudflare-versie en live winkelmandroute controleren en hier vastleggen.
+
 ## Kwaliteitsronde na PR #76 — live afgerond
 
 - Eigen branch `codex/quality-after-76`, basis `2d671a1`. Mandje hersteld met inleesbarrière, validatie en eenmalige migratie naar tabbladsessie; dropdowns sluiten bij buitenklik/Escape/navigatie/resize en zijn wederzijds uitsluitend.

@@ -11,7 +11,10 @@ function subscribe(listener: () => void) {
   if (!snapshot.ready) {
     let saved: unknown;
     try { saved = JSON.parse(sessionStorage.getItem(key) ?? "null"); } catch { /* Storage can be unavailable; keep an in-memory list. */ }
-    snapshot = { ...normalizeRequest(saved), ready: true };
+    const clean = normalizeRequest(saved);
+    snapshot = { items: clean.items, date: clean.date, ready: true };
+    // Migrate older split flags away; never restore or persist free-text wishes.
+    try { sessionStorage.setItem(key, JSON.stringify({ items: clean.items, date: clean.date })); } catch { /* Storage optional. */ }
   }
   return () => { listeners.delete(listener); };
 }

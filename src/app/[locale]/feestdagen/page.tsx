@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { CalendarDays, Store } from "lucide-react";
 import { Kop, Sectie, Vragen } from "@/components/ui/Sectie";
 import { SeafoodCatalog } from "@/components/catalog/SeafoodCatalog";
-import { RequestListLink } from "@/components/catalog/RequestControls";
+import { CatalogHelp } from "@/components/catalog/CatalogHelp";
 import { catalogText } from "@/lib/catalog-copy";
 import { feestdagenCopy } from "@/lib/feestdagen";
 import { paginaMetadata } from "@/lib/seo";
@@ -30,12 +30,13 @@ export default async function FeestdagenPage({ params }: { params: Promise<{ loc
   return <>
     <section className="festive-catalog-hero section-wrap">
       <div><p className="kapitaal">{c.label}</p><h1>{c.title}</h1><p>{t.festiveIntro}</p>
-        <div className="catalog-intro-links"><a className="knop knop-rood" href="#visschalen">{t.browse} →</a><RequestListLink locale={locale} /></div>
+        <div className="catalog-intro-links"><a className="knop knop-rood" href="#visschalen">{t.browse} →</a></div>
       </div>
       <figure><Image src="/images/editorial/feestschaal-voorbeeld.webp" alt={locale === "en" ? "Festive seafood platter, serving suggestion" : locale === "de" ? "Festliche Fischplatte als Servierbeispiel" : "Feestelijke visschaal als serveervoorbeeld"} width={1200} height={800} priority /><figcaption>{locale === "en" ? "Festive serving suggestion" : locale === "de" ? "Festlicher Serviervorschlag" : "Feestelijk serveervoorbeeld"}</figcaption></figure>
     </section>
     <div className="section-wrap"><div className="festive-practical"><div><CalendarDays aria-hidden="true" /><div><h2>{t.orderTitle}</h2><p>{t.orderText}</p></div></div><div><Store aria-hidden="true" /><div><h2>{t.pickupTitle}</h2><p>{t.pickupText}</p></div></div></div></div>
-    <SeafoodCatalog locale={locale} festive />
+    <div className="section-wrap"><CatalogHelp locale={locale} /></div>
+      <SeafoodCatalog locale={locale} festive />
     <Sectie grond="zand"><div className="catalog-gift-link"><div><h2>{t.gifts}</h2><p>{t.giftText}</p></div><Link className="knop knop-lijn" href={`/${locale}/relatiegeschenken`}>{c.giftLink} →</Link></div></Sectie>
     <Sectie grond="papier" smal><Kop label={c.practicalLabel} titel={c.practicalTitle} /><Vragen vragen={c.practical.map(([v,a])=>({v,a}))} /></Sectie>
   </>;

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { catalogProduct, MAIN_PLATTERS, GOURMET, DELICACIES, FEATURED, SECONDARY, SALAD_REQUESTS, languageIndex } from "@/lib/seafood-catalog";
 import { catalogText } from "@/lib/catalog-copy";
 import { platterPhotoAlt, platterPrice, platterPresentation } from "@/lib/platter-presentation";
-import { ProductQuantity, RequestSummary, LegacyCatalogSelection } from "./RequestControls";
+import { ProductQuantity, LegacyCatalogSelection } from "./RequestControls";
 import { CatalogPhoto } from "./CatalogPhoto";
 
 import { giftCopy } from "@/lib/gift-copy";
@@ -63,7 +63,6 @@ export function SeafoodCatalog({ locale, festive = false }: Props) {
     <details className="catalog-secondary"><summary>{t.more}</summary><p>{t.moreIntro}</p>
       <div className="seafood-grid">{SECONDARY.map(slug => <ProductCard key={slug} {...props} slug={slug} />)}</div>
     </details>
-    <RequestSummary locale={locale} />
     <div className="catalog-custom-banner"><div><h2>{t.custom}</h2><p>{locale === "en" ? "A larger group or a different selection? Tell us your wishes." : locale === "de" ? "Eine größere Runde oder andere Zusammenstellung? Nennen Sie uns Ihre Wünsche." : "Een groter gezelschap of een andere samenstelling? Vertel ons uw wensen."}</p></div><Link className="knop knop-lijn-licht" href={festive ? `/${locale}/visschalen#maatwerk` : "#maatwerk"}>{t.custom} →</Link></div>
   </div>;
 }
