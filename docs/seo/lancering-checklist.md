@@ -15,6 +15,7 @@ De site blijft besloten. Deze lijst is geen toestemming om `SITE_PUBLIC` of secr
 - Cloudflare-account Schaapsvis: site-Worker `schaapsvis`, daadwerkelijke gedeployde main-SHA, Ready en verkeerspercentage vastleggen. GitHub of Vercel alleen is onvoldoende.
 - Controleer homepage, contact, feestdagen, één Product en Recipe live; canonical/hreflang/HTML-taal en noindex bij besloten toegang.
 - Test zonder cookie én buiten de IP-allowlist. Robots blokkeert alles, sitemap leeg. Test van hetzelfde vertrouwde netwerk bewijst de anonieme blokkade niet.
+- `Check private site hosts` controleert hoofddomein, workers.dev en beide bekende Vercel-hosts vanaf GitHub. Het verouderde 9sai-project houdt ook crawler-endpoints achter een noindex-wachtwoordscherm; documenteer dit afzonderlijk, noem dat geen geldig robotsbestand. Voeg nieuwe bekende previewhosts expliciet toe aan de controle. Geen willekeurige oude deployment-URL's als bewezen beschermd presenteren.
 - Controleer www/http/apex/trailing slash zonder DNS of beveiliging onnodig te wijzigen.
 - Controleer leden-health alleen lezen; geen leden-Worker of databasewijzigingen nodig voor deze ronde.
 

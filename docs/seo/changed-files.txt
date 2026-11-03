@@ -1,4 +1,5 @@
 .agents/skills/schaaps-seo/SKILL.md
+.github/workflows/access-validation.yml
 .github/workflows/build-validation.yml
 CODEX_PROGRESS.md
 docs/design/visuele-eindcontrole.md
