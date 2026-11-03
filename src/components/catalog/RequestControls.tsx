@@ -44,6 +44,7 @@ export function RequestSummary({ locale }: { locale: string }) {
   const state = useCatalogRequest(), t = catalogText(locale), c = cartText(locale), total = requestTotal(state), entries = Object.entries(state.items);
   const today = usePickupToday();
   const dateOK = !state.date || (!!today && validPickupDate(state.date));
+  const sameDayAdvance = !!today && state.date === today && entries.some(([slug]) => Boolean(feestdagenProduct(slug)?.besteltermijn));
   const message = requestMessage(state, locale);
   return <div className="cart-content">
     {legacy.aantal > 0 && <p className="request-muted mb-5">{locale === "en" ? "You also have an earlier, separate selection." : locale === "de" ? "Sie haben auch eine frühere, separate Auswahl." : "U heeft ook een eerdere, afzonderlijke selectie."} <Link className="underline" href={`/${locale}/bestellen`}>{locale === "en" ? "Review it here" : locale === "de" ? "Hier ansehen" : "Bekijk die hier"} →</Link></p>}
@@ -61,6 +62,7 @@ export function RequestSummary({ locale }: { locale: string }) {
       })}</ul>
       <label className="request-date">{t.date}<input type="date" min={today || undefined} aria-invalid={!dateOK} aria-describedby={!dateOK ? "pickup-error" : undefined} value={state.date} onChange={event => updateCatalogRequest(current => ({ ...current, date: event.target.value }))} /><small>{t.dateHint}</small></label>
       {!dateOK && <p id="pickup-error" role="alert" className="text-red-800 mt-3">{c.dateError}</p>}
+      {sameDayAdvance && <p role="status" className="request-leadtime-note mt-3">{c.sameDayNotice}</p>}
       <label className="cart-wishes">{c.wishes}<textarea rows={3} maxLength={1000} value={state.wishes ?? ""} placeholder={c.placeholder} onChange={event => updateCatalogRequest(current => ({ ...current, wishes: event.target.value }))} /></label>
       {state.wishes?.trim() && <p className="request-muted">{c.wishNote}</p>}
       <div className="cart-checkout">
