@@ -4,6 +4,8 @@ Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 
 ## Masteraudit SEO en afwerking — vervolgcontrole en PR #81
 
+- Eigenaar bevestigt3 november: WhatsApp06 2481 1678, belnummer van Google Maps, dinsdag09:00. Maps rechtstreeks geopend:071 512 4810 bij Herenstraat48. Branch codex/confirmed-contact-details scheidt tel:-links/schema van WhatsApp, werkt NL/EN/DE-contactmetadata en formulierfouten bij. Inhoud/winkel en9 geïsoleerde contactcases groen; geen echte berichten. Publicatiebewijs volgt na CI en Cloudflare.
+
 - Aanvullende externe previewcontrole PR85: GitHub-run41695047443/job126123239847 op c852159 slaagt (3 november18:34UTC). Hoofddomein, workers.dev en beide Vercel-hosts: twintig routes tonen slot/noindex/no-store zonder cookies. Actuele hosts robots Disallow/lege XML-sitemap; het oude 9sai-project schermt ook die twee routes af met het noindex-wachtwoordscherm. Geen openbare productinhoud aangetroffen; geen runtime/secrets gewijzigd. Nieuwe smalle CI-workflow voorkomt een volledige appbuild bij alleen een controlemutatie. Primaire telefoon en dinsdagtijd expliciet aan eigenaar gevraagd; overige eigenaar-/GSC-/beeldinput blijft open.
 
 - PR83 live afgerond: 91 bronnen/364 varianten; originele fotovergroting behouden. Main d10e4f9, Cloudflare 18603304 Ready/100%. Build239 groen, twaalf lokale beeldcombinaties en twintig live checks geslaagd. Mobiele assortimentresources 4.939.382 → 1.059.949 B (78,5% minder in dezelfde test). Externe GitHub-run zonder cookies bevestigt slot/noindex/no-store/robots/lege sitemap op vijf routes. Zie docs/seo/catalogus-beeldoptimalisatie.md. Geen geld of echte aanvragen; tijdelijke lokale publieke binding verwijderd.
