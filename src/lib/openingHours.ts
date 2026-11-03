@@ -8,6 +8,7 @@ export interface OpeningHour {
 
 // Centrale bron voor status, locatiepagina, footer, metadata en schema.org.
 // Lucas bevestigde op 2 november 2026: maandag gesloten, dinsdag–zaterdag open.
+// Op 3 november bevestigde Lucas specifiek dinsdagopening om 09:00.
 export const openingHours: Record<Location, OpeningHour[]> = {
   winkel: [
     { days: [2, 3, 4, 5], open: "09:00", close: "18:00" }, // di–vr (maandag gesloten)

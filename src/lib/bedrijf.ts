@@ -37,12 +37,13 @@ export const BEDRIJF = {
   geo: { lat: 52.1517798, lng: 4.4891644 },
 
   telefoon: {
-    weergave: "+31 6 2481 1678",
+    // Google Maps-profiel gecontroleerd op 3 november 2026; eigenaar kiest dit belnummer.
+    weergave: "071 512 4810",
     /** E.164 — voor tel:-links en schema.org. */
-    e164: "+31624811678",
+    e164: "+31715124810",
   },
 
-  /** Zelfde nummer, zonder plus — voor wa.me-links. */
+  /** Apart WhatsApp-nummer, door eigenaar bevestigd op 3 november 2026. */
   whatsapp: "31624811678",
 
   /** EIGENAAR: vul hier je e-mailadres in; zolang dit null is toont de site geen e-mail. */

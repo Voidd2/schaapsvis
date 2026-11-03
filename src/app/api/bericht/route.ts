@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
   if (!webhook) {
     return NextResponse.json(
       {
-        fout: `Het formulier staat nog niet aangesloten. Bel of app ons op ${BEDRIJF.telefoon.weergave}.`,
+        fout: `Het formulier staat nog niet aangesloten. Bel ons op ${BEDRIJF.telefoon.weergave} of gebruik de WhatsApp-knop op de contactpagina.`,
       },
       { status: 503 }
     );
@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
   } catch {
     return NextResponse.json(
       {
-        fout: `We konden uw bericht niet doorzetten. Bel of app ons op ${BEDRIJF.telefoon.weergave}.`,
+        fout: `We konden uw bericht niet doorzetten. Bel ons op ${BEDRIJF.telefoon.weergave} of gebruik de WhatsApp-knop op de contactpagina.`,
       },
       { status: 502 }
     );
