@@ -2,6 +2,10 @@
 
 Bijgewerkt op 3 november 2026 aan de hand van DNS, echte Gmail-ontvangsten en de SMTP-broncode.
 
+## Nieuwe mailboxen — test 22:31 UTC
+
+Op expliciet verzoek één mail vanaf account@schaapsvishandel.nl en één vanaf aanbiedingen@schaapsvishandel.nl naar het bestaande Gmail-testadres gestuurd. Beide authenticeren via Knoth STARTTLS en zijn SMTP-geaccepteerd; Gmail toont beide als **Spam**. Dezelfde actuele transactionele projecttemplate is gebruikt om de mailboxwissel te controleren, geen echte reclamecampagne of volledige Worker-registratie. Geen labels/filters veranderd; geen bericht aan Knoth. Afzonderlijke authenticatieheaders van deze twee mails zijn niet opnieuw uitgelezen; de eerdere PASS-resultaten mogen niet als nieuwe meting worden voorgesteld. Deze test toont dat de nieuwe mailboxnamen alleen het probleem hier niet oplossen; de doorslaggevende Gmail-classificatieoorzaak blijft onbekend. Bewijs buiten Git: ../design-preview/student-admin/new-mailbox-delivery/. De twee toegestane verzendingen zijn uitgevoerd en mogen niet automatisch worden herhaald.
+
 ## Hercontrole na correcties — 3 november 2026, 22:11 UTC
 
 Na nieuwe expliciete toestemming is precies één testmail verstuurd met de actuele bron-MIME en actionEmail-template, via dezelfde Knoth STARTTLS-verbinding vanaf de lokale machine. SMTP accepteerde het om22:11:06 UTC; Gmail ontving het om22:11:07. De toestemming is hiermee verbruikt. Er is niets naar Knoth gestuurd en geen Gmail-filter of label gewijzigd.

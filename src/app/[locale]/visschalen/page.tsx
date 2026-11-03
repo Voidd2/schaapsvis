@@ -75,7 +75,7 @@ export default async function VisschalenPage({
         <h1>{catalog.title}</h1>
         <p className="platter-intro-text">{catalog.intro}</p>
         <nav className="catalog-intro-links" aria-label={catalog.title}>
-          <a href="#visschalen">{catalog.platters} ↓</a><a href="#gourmet">{catalog.gourmet} ↓</a><a href="#maatwerk">{catalog.custom}</a>
+          <a className="knop knop-navy" href="#visschalen">{catalog.platters} ↓</a><a className="knop knop-lijn" href="#gourmet">{catalog.gourmet} ↓</a><a className="knop knop-lijn" href="#geschenken">{locale === "de" ? "Geschenke" : locale === "en" ? "Gifts" : "Geschenken"} ↓</a><a className="knop knop-lijn" href="#maatwerk">{catalog.custom}</a>
         </nav>
       </section>
       <div className="section-wrap"><CatalogHelp locale={locale} /></div>

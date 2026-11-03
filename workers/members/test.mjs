@@ -4,6 +4,23 @@ import { readFile } from "node:fs/promises";
 import { DatabaseSync } from "node:sqlite";
 import { unzipSync } from "fflate";
 import memberWorker from "./src/index.mjs";
+import { clientDeviceInfo } from "./src/device-info.mjs";
+
+for (const [ua, browser, os, deviceType] of [
+  ["Mozilla/5.0 (Windows NT 10.0) Chrome/142.0 Safari/537.36 Edg/142.0", "Edge", "Windows", "desktop"],
+  ["Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) Safari/604.1 EdgiOS/142.0", "Edge", "iOS/iPadOS", "smartphone"],
+  ["Mozilla/5.0 (Linux; Android 15; Mobile) Chrome/142.0 Safari/537.36 SamsungBrowser/28.0", "Samsung Internet", "Android", "smartphone"],
+  ["Mozilla/5.0 (Linux; Android 15) Chrome/142.0 Safari/537.36", "Chrome", "Android", "tablet"],
+  ["Mozilla/5.0 (X11; CrOS x86_64 16000) Chrome/142.0 Safari/537.36", "Chrome", "ChromeOS", "desktop"],
+  ["Mozilla/5.0 (Windows NT 10.0) Chrome/142.0 Safari/537.36 OPR/110.0", "Opera", "Windows", "desktop"],
+  ["Mozilla/5.0 (iPad; CPU OS 18_0 like Mac OS X) Version/18.0 Safari/604.1", "Safari", "iOS/iPadOS", "tablet"],
+  ["Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) FxiOS/120.0 Safari/604.1", "Firefox", "iOS/iPadOS", "smartphone"],
+]) {
+  const info = clientDeviceInfo(new Request("https://example.test", { headers: { "User-Agent": ua } }));
+  assert.deepEqual([info.browser, info.operatingSystem, info.deviceType], [browser, os, deviceType], "browser-specific tokens take precedence over compatibility labels");
+  assert.equal(info.deviceModel, null, "hardware models are not fabricated from the user agent");
+}
+assert.equal(clientDeviceInfo(new Request("https://example.test")).deviceType, "unknown", "absent client metadata is not invented");
 
 const testBase64url = (bytes) => Buffer.from(bytes).toString("base64url");
 async function testHmac(secret, value) {
@@ -346,6 +363,7 @@ assert.equal(reusedCodes.status, 400, "verification codes are single-use");
 
 const login = await call("/api/members/login", {
   method: "POST",
+  headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0) Chrome/142.0 Safari/537.36 Edg/142.0" },
   body: { email: "student@example.test", password: "correct horse battery" },
 });
 assert.equal(login.status, 200);
@@ -353,6 +371,7 @@ assert.doesNotMatch(login.headers.get("Set-Cookie"), /Domain=/i, "sessions use h
 assert.match(login.headers.get("Set-Cookie") || "", /Max-Age=31536000/, "member and device cookies can survive browser restarts for up to one year");
 const sessionCookie = responseCookie(login, "sv_member");
 const longSession = sqlite.prepare("SELECT device_id,last_seen_at,absolute_expires_at FROM sessions WHERE user_id=(SELECT id FROM users WHERE email='student@example.test') ORDER BY created_at DESC LIMIT 1").get();
+assert.deepEqual({...sqlite.prepare("SELECT browser,operating_system,device_type FROM member_devices WHERE id=?").get(longSession.device_id)}, {browser:"Edge",operating_system:"Windows",device_type:"desktop"}, "real login persists coarse client labels linked to its session");
 assert.ok(longSession.device_id, "login associates the server-side session with a random installation record");
 assert.ok(longSession.last_seen_at && longSession.absolute_expires_at, "long-lived sessions retain sliding and absolute expiry metadata");
 assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM member_devices WHERE user_id=(SELECT id FROM users WHERE email='student@example.test')").get().count >= 1, true, "a recognized member device is stored without a raw browser fingerprint");

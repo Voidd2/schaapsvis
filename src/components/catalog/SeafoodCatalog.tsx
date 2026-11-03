@@ -60,6 +60,7 @@ export function SeafoodCatalog({ locale, festive = false }: Props) {
       </article>)}</div>
       <p className="request-muted mt-5">{t.saladNote}</p>
     </section>
+    {!festive && <GiftIdeas locale={locale} />}
     <details className="catalog-secondary"><summary>{t.more}</summary><p>{t.moreIntro}</p>
       <div className="seafood-grid">{SECONDARY.map(slug => <ProductCard key={slug} {...props} slug={slug} />)}</div>
     </details>

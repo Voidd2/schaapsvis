@@ -64,23 +64,25 @@ export function Header() {
     { href: p("/assortiment"), label: t("assortiment") },
     { href: p("/visschalen"), label: t("visschalen") },
     { href: p("/studentenkorting"), label: t("studentenkorting") },
-    { href: p("/ons-verhaal"), label: t("verhaal") },
+    { href: p("/recepten"), label: t("recepten") },
     { href: p("/bezoek-ons"), label: t("locaties") },
   ];
   const productLinks = [
     { href: p("/barbecue-gourmet"), label: "Barbecue & gourmet" },
-    { href: p("/recepten"), label: t("recepten") },
-  ];
-  const storyLinks = [
     { href: p("/biologische-vis"), label: locale === "nl" ? "Biologische vis & herkomst" : locale === "de" ? "Biofisch & Herkunft" : "Organic fish & origins" },
     { href: p("/varlaks"), label: "VÅRLAKS" },
   ];
+  const platterLinks = [
+    { href: p("/feestdagen"), label: primaryLinks[0].label },
+    { href: p("/relatiegeschenken"), label: locale === "de" ? "Firmengeschenke" : locale === "en" ? "Business gifts" : "Relatiegeschenken" },
+  ];
+  const childrenFor = (href: string) => href === p("/assortiment") ? productLinks : href === p("/visschalen") ? platterLinks : [];
   const accountLinks = [
     { href: p("/account"), label: locale === "de" ? "Studentenkonto" : locale === "en" ? "Student account" : "Studentenaccount" },
     { href: p("/account/klant"), label: locale === "de" ? "Kundenkonto" : locale === "en" ? "Customer account" : "Klantaccount" },
   ];
   const extraLinks = [
-    { href: p("/relatiegeschenken"), label: locale === "de" ? "Firmengeschenke" : locale === "en" ? "Business gifts" : "Relatiegeschenken" },
+    { href: p("/ons-verhaal"), label: t("verhaal") },
     { href: p("/contact"), label: t("contact") },
   ];
   const accountLabel = locale === "de" ? "Konto" : "Account";
@@ -159,13 +161,12 @@ export function Header() {
 
           <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="hidden min-[1280px]:flex items-center justify-end gap-x-2 text-[0.86rem]">
             {primaryLinks.map(({ href, label }, index) => {
-              const children = href === p("/assortiment") ? productLinks : href === p("/ons-verhaal") ? storyLinks : [];
+              const children = childrenFor(href);
               return <div key={href} className="nav-theme">
-                <Link href={href} aria-current={isActief(href) ? "page" : undefined} className={`nav-main-link ${index === 0 ? "nav-season" : ""}`}>{label}</Link>
-                {children.length > 0 && <details className="nav-disclosure">
-                  <summary aria-label={`${label}: ${moreLabel}`}><span aria-hidden>⌄</span></summary>
-                  <div className="nav-popover">{children.map(link => <Link key={link.href} href={link.href}>{link.label}</Link>)}</div>
-                </details>}
+                {children.length > 0 ? <details className="nav-disclosure">
+                  <summary className="nav-main-link" data-active={isActief(href) || children.some(link => isActief(link.href)) ? "true" : undefined}>{label}<span aria-hidden>⌄</span></summary>
+                  <div className="nav-popover"><Link className="nav-overview-link" href={href} aria-current={pathname === href ? "page" : undefined}>{locale === "de" ? "Alle anzeigen:" : locale === "en" ? "Explore:" : "Bekijk:"} {label}</Link>{children.map(link => <Link key={link.href} href={link.href} aria-current={pathname === link.href ? "page" : undefined}>{link.label}</Link>)}</div>
+                </details> : <Link href={href} aria-current={isActief(href) ? "page" : undefined} className={`nav-main-link ${index === 0 ? "nav-season" : ""}`}>{label}</Link>}
               </div>;
             })}
           </nav>
@@ -256,7 +257,7 @@ export function Header() {
             <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="site-container py-2">
               {primaryLinks.map(({ href, label }, index) => <div key={href}>
                 <Link href={href} onClick={() => setOpen(false)} aria-current={isActief(href) ? "page" : undefined} className={`mobile-main-link ${index === 0 ? "nav-season" : ""}`}>{label}</Link>
-                {(href === p("/assortiment") ? productLinks : href === p("/ons-verhaal") ? storyLinks : []).map(link => <Link className="mobile-sub-link" key={link.href} href={link.href} onClick={() => setOpen(false)}>{link.label} →</Link>)}
+                {childrenFor(href).map(link => <Link className="mobile-sub-link" key={link.href} href={link.href} onClick={() => setOpen(false)}>{link.label} →</Link>)}
               </div>)}
 
               <p className="pt-5 pb-1 text-[0.8rem] font-bold uppercase tracking-[0.18em]" style={{ color: "var(--gold)" }}>
