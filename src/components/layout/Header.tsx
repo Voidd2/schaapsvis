@@ -63,7 +63,7 @@ export function Header() {
     { href: p("/feestdagen"), label: locale === "de" ? "Festtage" : locale === "en" ? "Festive season" : "Feestdagen" },
     { href: p("/assortiment"), label: t("assortiment") },
     { href: p("/visschalen"), label: t("visschalen") },
-    { href: p("/studentenkorting"), label: t("studentenkorting") },
+    { href: p("/contact"), label: t("contact") },
     { href: p("/ons-verhaal"), label: t("verhaal") },
     { href: p("/bezoek-ons"), label: t("locaties") },
   ];
@@ -81,7 +81,7 @@ export function Header() {
   ];
   const extraLinks = [
     { href: p("/relatiegeschenken"), label: locale === "de" ? "Firmengeschenke" : locale === "en" ? "Business gifts" : "Relatiegeschenken" },
-    { href: p("/contact"), label: t("contact") },
+    { href: p("/studentenkorting"), label: t("studentenkorting") },
   ];
   const accountLabel = locale === "de" ? "Konto" : "Account";
   const moreLabel = locale === "de" ? "Mehr" : locale === "en" ? "More" : "Meer";
@@ -99,7 +99,7 @@ export function Header() {
     }}>
       {/* ── Informatiebalk ──────────────────────────────────────────────── */}
       <div
-        className="text-[0.72rem] tracking-wide"
+        className="text-[0.84rem] tracking-wide"
         style={{ backgroundColor: "var(--navy-dark)", color: "rgba(250,246,239,0.72)" }}
       >
         <div className="site-container h-8 flex items-center justify-between gap-4">
@@ -157,7 +157,7 @@ export function Header() {
             </span>
           </Link>
 
-          <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="hidden min-[1280px]:flex items-center justify-end gap-x-2 text-[0.86rem]">
+          <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="hidden min-[1280px]:flex items-center justify-end gap-x-2 text-[0.95rem]">
             {primaryLinks.map(({ href, label }, index) => {
               const children = href === p("/assortiment") ? productLinks : href === p("/ons-verhaal") ? storyLinks : [];
               return <div key={href} className="nav-theme">
