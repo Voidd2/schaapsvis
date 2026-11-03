@@ -2,6 +2,11 @@
 
 Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 
+## Geblokkeerde en verlopen studentenpas onderscheiden
+
+- Echte eigenaarstoegang tot studentenbeheer bevestigd. Native bevestigingsdialoog blokkeert de Chrome-extensie; intrekken/herstellen daarom nog niet afgetekend. Verse tab bevestigt dat de bekende testpas actief is gebleven. Geen mails of aanvragen verstuurd.
+- UI-fout gevonden: geschorste pas toonde verlopen-tekst en een door de server geweigerde heraanvraag. Gerichte correctie in NL/EN/DE met mobiele kaartkop; tests voor geschorst/verlopen toegevoegd aan de bestaande zes geïsoleerde browserflows. Controle/publicatie nog in uitvoering. Geen API-, database- of toegangsbeleidswijziging.
+
 ## Studenten-eindcontrole en QR-renderfout
 
 - PR90 live: main8407edc, Cloudflare df337971 Ready/100%, build9575e9c6-52e2-444b-b04e-f14510ec31a0. Build245/Member147 groen. Zes extra controles met de werkelijke live sitebestanden en volledig onderschepte API slagen; leden-health200/ok. Zie docs/studenten-eindcontrole-2026-11-03.md voor bewijs per eis en resterende echte apparaat/account/mailacceptatie. Geen echte mails of aanvragen verstuurd.

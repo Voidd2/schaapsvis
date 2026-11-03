@@ -71,6 +71,7 @@ const translations = {
     pending: "Uw aanvraag wacht op beoordeling. U krijgt uw pas zodra deze is goedgekeurd.",
     approved: "Uw aanvraag is goedgekeurd. Toon deze pas bij de kassa.",
     expired: "Uw studentenpas is verlopen. U kunt met uw bevestigde schoolmail opnieuw een aanvraag indienen.",
+    suspended: "Uw studentenpas is tijdelijk geblokkeerd en geeft nu geen recht op korting. Volg een eventuele controle hierboven of neem contact op met de winkel. Een nieuwe aanvraag is niet nodig.",
     rejected: "Uw vorige aanvraag is afgewezen. U kunt opnieuw aanvragen.",
     pass: "Digitale studentenpas",
     passCode: "Laat deze code door een medewerker controleren",
@@ -131,6 +132,7 @@ const translations = {
     pending: "Your application is awaiting review. Your pass will appear after approval.",
     approved: "Your application is approved. Show this pass at the counter.",
     expired: "Your student pass has expired. You can apply again using your verified school email.",
+    suspended: "Your student pass is temporarily blocked and cannot be used for a discount. Follow any verification steps above or contact the shop. You do not need to submit a new application.",
     rejected: "Your previous application was declined. You can apply again.",
     pass: "Digital student pass",
     passCode: "Ask a staff member to verify this code",
@@ -186,6 +188,7 @@ const translations = {
     pending: "Ihr Antrag wird geprüft. Nach der Freigabe erscheint Ihr Rabattpass.",
     approved: "Ihr Antrag wurde genehmigt. Zeigen Sie diesen Pass an der Theke vor.",
     expired: "Ihr Studentenpass ist abgelaufen. Sie können mit Ihrer bestätigten Schul-E-Mail erneut einen Antrag stellen.",
+    suspended: "Ihr Studentenpass ist vorübergehend gesperrt und kann derzeit nicht für einen Rabatt genutzt werden. Folgen Sie gegebenenfalls der Prüfung oben oder kontaktieren Sie das Geschäft. Ein neuer Antrag ist nicht nötig.",
     rejected: "Ihr vorheriger Antrag wurde abgelehnt. Sie können erneut beantragen.",
     pass: "Digitaler Studentenpass",
     passCode: "Lassen Sie diesen Code vom Personal prüfen",
@@ -507,11 +510,11 @@ export function AccountPortal({ locale }: { locale: string }) {
                 </form>}
               </div>
             )}
-            {data.studentApplication?.status === "approved" && !data.discountPass && data.inactivePass && <div className="overflow-hidden rounded-3xl border-2 border-slate-300 bg-slate-100 p-7 text-slate-700 shadow-sm sm:p-10"><div className="flex items-start justify-between gap-4"><div><p className="text-xs font-bold uppercase tracking-[0.24em]">Schaap&apos;s Vishandel</p><p className="mt-2 font-display text-3xl font-bold">{data.user.name}</p></div><span className="rounded-full bg-slate-800 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white">{data.inactivePass.status === "suspended" ? (language === "nl" ? "Tijdelijk geblokkeerd" : language === "de" ? "Vorübergehend gesperrt" : "Temporarily blocked") : (language === "nl" ? "Ongeldig" : language === "de" ? "Ungültig" : "Invalid")}</span></div><p className="mt-8 text-5xl font-bold opacity-50">10%</p>{data.inactivePass.displayCode && <code className="mt-6 block rounded-lg bg-white p-3 text-center font-mono text-lg font-bold tracking-[0.12em]">{data.inactivePass.displayCode}</code>}<p className="mt-4 text-sm">{t.expired}</p></div>}
+            {data.studentApplication?.status === "approved" && !data.discountPass && data.inactivePass && <div className="overflow-hidden rounded-3xl border-2 border-slate-300 bg-slate-100 p-7 text-slate-700 shadow-sm sm:p-10"><div className="flex flex-wrap items-start justify-between gap-4"><div><p className="text-xs font-bold uppercase tracking-[0.24em]">Schaap&apos;s Vishandel</p><p className="mt-2 font-display text-3xl font-bold">{data.user.name}</p></div><span className="rounded-full bg-slate-800 px-3 py-1 text-xs font-bold uppercase tracking-widest text-white">{data.inactivePass.status === "suspended" ? (language === "nl" ? "Tijdelijk geblokkeerd" : language === "de" ? "Vorübergehend gesperrt" : "Temporarily blocked") : (language === "nl" ? "Ongeldig" : language === "de" ? "Ungültig" : "Invalid")}</span></div><p className="mt-8 text-5xl font-bold opacity-50">10%</p>{data.inactivePass.displayCode && <code className="mt-6 block rounded-lg bg-white p-3 text-center font-mono text-lg font-bold tracking-[0.12em]">{data.inactivePass.displayCode}</code>}<p className="mt-4 text-sm">{data.inactivePass.status === "suspended" ? t.suspended : t.expired}</p></div>}
             {data.studentApplication?.status === "approved" && !data.discountPass && !data.inactivePass && <p className="rounded-xl border border-amber-300 bg-amber-50 p-5">{t.expired}</p>}
             {data.studentApplication?.status === "rejected" && <p className="rounded-xl border border-rose-200 bg-rose-50 p-5">{t.rejected}</p>}
 
-            {!data.isAdmin && data.studentApplication?.status !== "pending" && (data.studentApplication?.status !== "approved" || !data.discountPass) && (
+            {!data.isAdmin && data.inactivePass?.status !== "suspended" && data.studentApplication?.status !== "pending" && (data.studentApplication?.status !== "approved" || !data.discountPass) && (
               <form onSubmit={applyForDiscount} className="space-y-5 rounded-2xl border border-sky-200 bg-white p-6 shadow-sm sm:p-8">
                 <div><h2 className="font-display text-2xl font-bold text-slate-900">{t.studentTitle}</h2><p className="mt-2 text-sm leading-relaxed text-slate-700">{t.studentInfo}</p></div>
                 <label className="block text-sm font-medium">{t.institution}<input name="institution" required maxLength={180} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>
