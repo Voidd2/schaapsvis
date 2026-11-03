@@ -2,6 +2,18 @@
 
 Bijgewerkt op 3 november 2026 aan de hand van DNS, echte Gmail-ontvangsten en de SMTP-broncode.
 
+## Hercontrole na correcties — 3 november 2026, 22:11 UTC
+
+Na nieuwe expliciete toestemming is precies één testmail verstuurd met de actuele bron-MIME en actionEmail-template, via dezelfde Knoth STARTTLS-verbinding vanaf de lokale machine. SMTP accepteerde het om22:11:06 UTC; Gmail ontving het om22:11:07. De toestemming is hiermee verbruikt. Er is niets naar Knoth gestuurd en geen Gmail-filter of label gewijzigd.
+
+**Resultaat opnieuw Spam.** De zichtbare afzender is correct `Schaap’s Vishandel – Accounts`; het lange Unicode-onderwerp is correct teruggedecodeerd. Gmail geeft opnieuw SPF, DKIM en DMARC PASS en noemt overeenkomst met eerder als spam herkende berichten. Dit sluit de gevonden headerfout als enige verklaring uit, maar bewijst geen precieze alternatieve oorzaak. De transportheaders tonen circa één seconde tussen Knoth en Gmail; de langere tijd sinds de Date-header is voorbereiding vóór verzending, geen zeven minuten wachtrijvertraging.
+
+De onafhankelijke Python MIME-parser controleerde vóór verzending zonder defects: één From, één Subject, exacte Unicode-terugdecodering en beide tekst/HTML-delen. Deze test bewijst transport en weergave van het huidige mailformaat, niet een volledige registratie vanuit de productie-Worker of betrouwbare inboxplaatsing. Geen willekeurige DNS-, afzenderadres- of reputatiewijzigingen uitvoeren op basis van deze ene classificatie.
+
+PR98 staat live als `6917034`: Build253/Member153 geslaagd en Codex-review zonder bevindingen; Cloudflare leden `9e29d388`, site `fc0d5396` beide Ready/100%, health HTTP200/status ok. Het aanbodlabel is uitsluitend via de geïsoleerde campagnetest gecontroleerd; er is geen echte reclamecampagne verzonden.
+
+Bewijs uitsluitend lokaal buiten Git in `../design-preview/student-admin/mail-after-header-fix/`: `delivery-attempt.json`, `delivery-test.eml`, `gmail-spam.png` en `gmail-auth.png`. Het supportconcept blijft lokaal. De resterende mailacceptatie is niet voltooid.
+
 ## Nieuwe bezorgcontrole — 3 november 2026, 21:38 UTC
 
 De eigenaar gaf toestemming voor precies één nieuw testbericht. Dat is éénmaal verstuurd via Knoth (`khsm1.khsmserver1.nl:587`, geverifieerde STARTTLS) met de huidige `actionEmail`-template en `makeMessage`-MIME uit de projectbron. Geen echte accountaanmaak, code, campagne, tracking of wijziging aan productie-instellingen. SMTP accepteerde het om 21:38:42 UTC; Gmail ontving het om 21:38:44 UTC.
