@@ -2,6 +2,29 @@
 
 Deze ronde levert de aangetoonde P0-correcties en belangrijkste P1-verbeteringen. Dit is geen verklaring dat alle SEO, toegankelijkheid of live Core Web Vitals volledig afgerond zijn. Basis: `b60f56e` (main na PR #79/#80), eigen branch `codex/master-seo-design-audit`. Productgegevens en het besloten karakter blijven behouden.
 
+## Live vervolg PR #83 — 3 november 2026
+
+[PR83](https://github.com/Voidd2/schaapsvis/pull/83) is samengevoegd als `d10e4f9238c30d93ee45ce74b3b7967d9343893a`. Cloudflare-build `b9ea130a-fa31-4625-ba20-ba8ce77d791b` is Ready; siteversie `18603304` bedient 100% van het verkeer. Geen leden-Worker, database, secrets of toegang aangepast. De tijdelijke lokale publieke binding is verwijderd.
+
+GitHub Build239 op main slaagt, inclusief Next/Cloudflare-build, content/shop- en beeldintegriteit. Twaalf lokale beeld-browsercombinaties en twintig live route/schermcombinaties slagen; geen pageerrors, overflow of verzonden aanvragen. Originele schaalfotovergroting blijft behouden. Livebewijs: `design-preview/master-audit/live-release-catalog.json`, baseline `live-release.json` en twintig screenshots naast de repo.
+
+Dezelfde ongethrottelde Chrome-routecontrole vóór en na, met verse contexten op het vertrouwde netwerk, meet onderstaande geladen resources. Dit zijn bytes gedurende die test, geen snelheidspercentage, volledige download van elk verborgen product of veld-CWV.
+
+| Pagina | Breedte | Vóór PR83 | Na PR83 | Minder resources |
+|---|---:|---:|---:|---:|
+| Homepage | 390 | 842.628 B | 689.752 B | 18,1% |
+| Assortiment | 390 | 4.939.382 B | 1.059.949 B | 78,5% |
+| Visschalen | 390 | 1.068.787 B | 586.395 B | 45,1% |
+| Homepage | 1440 | 1.134.907 B | 1.016.317 B | 10,4% |
+| Assortiment | 1440 | 5.652.724 B | 1.396.287 B | 75,3% |
+| Visschalen | 1440 | 2.096.147 B | 991.862 B | 52,7% |
+
+### Onafhankelijke controle van het sitewachtwoord
+
+GitHub-hosted Ubuntu, zonder cookies/secrets: vijf routes (NL-home, EN-assortiment, DE-feestdagen, account, beheer) tonen het wachtwoordformulier en noindex/no-store; robots blokkeert en sitemap is leeg. [Build239](https://github.com/Voidd2/schaapsvis/actions/runs/41692559624), job126114601503, 18:19:06 UTC, geslaagd. Ook de PR-run slaagde. Deze run startte tijdens de uitrol; het bewijs betreft het live slot, niet een verklaring over de exacte runtimeversie op die seconde. Authenticatie wijzigde niet in PR83.
+
+De nieuwe CI-job `locked-site` herhaalt dit met uitsluitend GET-verzoeken. Repositoryvariabele `SITE_PUBLIC=launch-approved` stopt alleen deze gesloten-siteverwachting bij een apart goedgekeurde openbare lancering en opent de site zelf niet. Actuele eigenaargegevens en veldmetingen blijven afzonderlijke open punten; de eerdere Lighthouse-cijfers zijn van PR81, niet opnieuw gemeten voor PR83.
+
 ## Scorecard
 
 | Onderdeel | Status | Bewijs / beperking |
@@ -17,8 +40,8 @@ Deze ronde levert de aangetoonde P0-correcties en belangrijkste P1-verbeteringen
 | Interne links / redirects | Gecorrigeerd | Niet-bestaande recepten/blogs geven nu 404. Twaalf onbekende detailroutes, oude Duitse route en negen bezorgredirects gecontroleerd. Bestaande routes behouden. |
 | Lokale SEO | Wacht op eigenaar | Externe telefoon- en dinsdagtijdverschillen vastgelegd. Geen bedrijfsgegevens geraden; huidige centrale bron behouden. |
 | Contentkwaliteit | Gecorrigeerd / wacht op eigenaar | Broninventaris van 67 producten, 23 vaste producten, 40 recepten en 19 blogs uitgebreid met inhoud, intentie, beeld, allergenen en links. Productcopy en oude EN/DE-schaalblog gecorrigeerd. Actuele leveranciersetiketten blijven nodig; geen culinair of certificeringsbewijs geclaimd. |
-| Image SEO | Gecorrigeerd / wacht op eigenaar | Homepagefavorieten via responsive Image; foto’s ongewijzigd. Drie recepten missen een gerechtfoto, negen taalwaarschuwingen blijven terecht zichtbaar. |
-| Performance | Gecorrigeerd / nog open | Gratis statische homepagevarianten werken ook op Cloudflare: 98,5% minder beeldbytes mobiel. Lighthouse mobiel72–76/desktop92–94; geen veldmeting. Zie meetcondities hieronder. |
+| Image SEO | Gecorrigeerd / wacht op eigenaar | 91 bestaande bronnen hebben364 responsive varianten; foto’s en originele vergroting behouden. Drie recepten missen een gerechtfoto, negen taalwaarschuwingen blijven terecht zichtbaar. |
+| Performance | Gecorrigeerd / nog open | PR83: mobiele assortimentresources78,5% lager in dezelfde live test. Historische Lighthouse-metingen hieronder; veldmetingen pas na publieke lancering. Zie meetcondities hieronder. |
 | Mobiel / tablet / desktop | Gecontroleerd en goed | Acht templates op negen gevraagde afmetingen; formulier, mandje, ankers en taalbediening getest. |
 | Toegankelijkheid | Gecorrigeerd | Echte Chrome200%-zoom op acht templates. Vier templates × mobiel/desktop scoren100 in Lighthouse-accessibility na correcties aan contrast, menu-raakvlakken en toegankelijke namen. Geen WCAG-certificering. |
 
@@ -103,10 +126,10 @@ Bewijs buiten Git: `live-release.json`, twintig `live-*.png`, `live-home-390-vie
 
 ## Nog open, in volgorde
 
-1. Publicatie afgerond: PR #81, commit `b13dfee`, siteversie `b3f74852`, Ready/100%. Twintig live route/schermcombinaties geslaagd. Het slot blijft aan. Een externe controle zonder cookie én buiten het vertrouwde netwerk blijft vóór openbare lancering gewenst; lokale slotprofielen zijn bewezen.
+1. Publicatie afgerond: PR #81, commit `b13dfee`, siteversie `b3f74852`, Ready/100%. Twintig live route/schermcombinaties geslaagd. Het slot blijft aan. Aanvullend: PR83 en externe GitHub-slotcontrole geslaagd; zie actuele vervolgstatus bovenaan.
 2. Eigenaar: primaire telefoon, afwijkende dinsdagopening, juiste Google Bedrijfsprofielgegevens en drie gerechtfoto’s bevestigen; zie [NAP](nap-controle.md) en [recepten](recepten-matrix.md).
 3. Search Console: huidige Google-aanmelding toont **“Je hebt geen toegang tot deze property”** voor `sc-domain:schaapsvishandel.nl`. Geen zoekprestaties of indexeringsdata beschikbaar. Toegang regelen vóór lancering; geen nieuwe betaalde dienst nodig.
-4. Edge-meting uitgevoerd: mobiele Lighthouse-homepage81, toegankelijkheid100, best-practices100, LCP4,83s, CLS0, TBT3ms. Mobiele LCP blijft optimalisatieruimte; dit is geen veld-CWV-goedkeuring. Vervolg: rendervertraging en overige zware catalogusfoto’s onderzoeken met representatieve gebruikersdata.
+4. Edge-meting uitgevoerd: mobiele Lighthouse-homepage81, toegankelijkheid100, best-practices100, LCP4,83s, CLS0, TBT3ms. Mobiele LCP blijft optimalisatieruimte; dit is geen veld-CWV-goedkeuring. Catalogusfoto’s zijn inmiddels geoptimaliseerd in PR83; rendervertraging/veld-CWV na publieke lancering beoordelen met representatieve gebruikersdata.
 5. Eigenaar: actuele etiketten bij High Seas/gerookte zalm en overige partijen. Drie onbewezen ASC-badges/claims zijn voorlopig verwijderd; dit betekent niet dat de producten ongecertificeerd zijn. Ingrediënten en voedingswaarden zijn niet gewijzigd. Zie de redactionele controle hieronder.
 6. Na openbare lancering de [checklist](lancering-checklist.md) en het [90-dagenplan](monitoring-90-dagen.md) uitvoeren. Het slot blijft tot afzonderlijk eigenaarsbesluit aan.
 
@@ -167,88 +190,4 @@ De specifieke schema-, lokale bron- en concurrentiebevindingen staan in [structu
 
 ## Gewijzigde bestanden
 
-- `.agents/skills/schaaps-seo/SKILL.md`
-- `.github/workflows/build-validation.yml`
-- `CODEX_PROGRESS.md`
-- `docs/design/visuele-eindcontrole.md`
-- `docs/seo/audit-results.json`
-- `docs/seo/content-inventory.json`
-- `docs/seo/keyword-map.md`
-- `docs/seo/lancering-checklist.md`
-- `docs/seo/monitoring-90-dagen.md`
-- `docs/seo/nap-controle.md`
-- `docs/seo/recepten-matrix.md`
-- `docs/seo/route-inventory.csv`
-- `docs/seo/structured-data.md`
-- `docs/seo/technische-audit.md`
-- `next.config.ts`
-- `public/images/responsive/coquilles-vlees-895f3886eda1-1280.webp`
-- `public/images/responsive/coquilles-vlees-895f3886eda1-320.webp`
-- `public/images/responsive/coquilles-vlees-895f3886eda1-640.webp`
-- `public/images/responsive/coquilles-vlees-895f3886eda1-960.webp`
-- `public/images/responsive/haring-98f6369c0585-1280.webp`
-- `public/images/responsive/haring-98f6369c0585-320.webp`
-- `public/images/responsive/haring-98f6369c0585-640.webp`
-- `public/images/responsive/haring-98f6369c0585-960.webp`
-- `public/images/responsive/hollandse-garnalen-solt-935777210211-1280.webp`
-- `public/images/responsive/hollandse-garnalen-solt-935777210211-320.webp`
-- `public/images/responsive/hollandse-garnalen-solt-935777210211-640.webp`
-- `public/images/responsive/hollandse-garnalen-solt-935777210211-960.webp`
-- `public/images/responsive/kibbeling-schaapstray-86e128880cb1-1280.webp`
-- `public/images/responsive/kibbeling-schaapstray-86e128880cb1-320.webp`
-- `public/images/responsive/kibbeling-schaapstray-86e128880cb1-640.webp`
-- `public/images/responsive/kibbeling-schaapstray-86e128880cb1-960.webp`
-- `public/images/responsive/scholfilet-8e3ada79b862-1280.webp`
-- `public/images/responsive/scholfilet-8e3ada79b862-320.webp`
-- `public/images/responsive/scholfilet-8e3ada79b862-640.webp`
-- `public/images/responsive/scholfilet-8e3ada79b862-960.webp`
-- `public/images/responsive/varlaks-zalm-rauw-ai-541621dcf5fc-1280.webp`
-- `public/images/responsive/varlaks-zalm-rauw-ai-541621dcf5fc-320.webp`
-- `public/images/responsive/varlaks-zalm-rauw-ai-541621dcf5fc-640.webp`
-- `public/images/responsive/varlaks-zalm-rauw-ai-541621dcf5fc-960.webp`
-- `public/images/responsive/zalm-citroen-dille-2f1ea1f890f5-1280.webp`
-- `public/images/responsive/zalm-citroen-dille-2f1ea1f890f5-320.webp`
-- `public/images/responsive/zalm-citroen-dille-2f1ea1f890f5-640.webp`
-- `public/images/responsive/zalm-citroen-dille-2f1ea1f890f5-960.webp`
-- `scripts/audit-content-data.mjs`
-- `scripts/audit-design-browser.mjs`
-- `scripts/audit-lab-performance.mjs`
-- `scripts/build-static-images.mjs`
-- `scripts/check-browser-zoom.mjs`
-- `scripts/check-seo-release.mjs`
-- `scripts/check-static-images-browser.mjs`
-- `src/app/[locale]/barbecue-gourmet/page.tsx`
-- `src/app/[locale]/bezorgen/[gemeente]/page.tsx`
-- `src/app/[locale]/bezorgen/page.tsx`
-- `src/app/[locale]/biologische-vis/page.tsx`
-- `src/app/[locale]/blog/[slug]/page.tsx`
-- `src/app/[locale]/contact/ContactFormulier.tsx`
-- `src/app/[locale]/feestdagen/[slug]/page.tsx`
-- `src/app/[locale]/feestdagen/page.tsx`
-- `src/app/[locale]/page.tsx`
-- `src/app/[locale]/recepten/[slug]/page.tsx`
-- `src/app/[locale]/viskalender/page.tsx`
-- `src/app/[locale]/visschalen/page.tsx`
-- `src/app/[locale]/viswinkel-voorschoten/page.tsx`
-- `src/app/api/bericht/route.ts`
-- `src/app/globals.css`
-- `src/components/LocalLandingPage.tsx`
-- `src/components/StaticResponsiveImage.tsx`
-- `src/components/catalog/CatalogPhoto.tsx`
-- `src/components/catalog/SeafoodCatalog.tsx`
-- `src/components/layout/Footer.tsx`
-- `src/components/layout/Header.tsx`
-- `src/components/ui/Sectie.tsx`
-- `src/lib/assortiment-data.ts`
-- `src/lib/blog-corrections.ts`
-- `src/lib/blog-translations.ts`
-- `src/lib/blog-voorschoten.ts`
-- `src/lib/blog.ts`
-- `src/lib/contact-validation.ts`
-- `src/lib/product-translations.ts`
-- `src/lib/seo.ts`
-- `src/lib/static-image-variants.json`
-- `src/messages/de.json`
-- `src/messages/en.json`
-- `src/messages/nl.json`
-- `src/proxy.ts`
+De volledige lijst ten opzichte van basis `b60f56e`, inclusief alle gegenereerde beeldvarianten en deze rapportage, staat in [changed-files.txt](changed-files.txt). Historische meetresultaten hierboven blijven gelabeld per ronde.

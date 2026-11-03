@@ -2201,5 +2201,69 @@
       "cls": 0,
       "tbtMs": 3
     }
+  },
+  "catalogRelease": {
+    "pr": 83,
+    "commit": "d10e4f9238c30d93ee45ce74b3b7967d9343893a",
+    "worker": "schaapsvis",
+    "versionShort": "18603304",
+    "build": "b9ea130a-fa31-4625-ba20-ba8ce77d791b",
+    "status": "Ready",
+    "traffic": 100,
+    "sources": 91,
+    "variants": 364,
+    "localBrowserChecks": 12,
+    "liveChecks": 20,
+    "submissions": 0,
+    "externalLock": {
+      "run": 41692559624,
+      "job": 126114601503,
+      "timeUtc": "2026-11-03T18:19:06Z",
+      "success": true,
+      "cookies": false,
+      "routes": 5,
+      "robotsBlocked": true,
+      "sitemapEmpty": true,
+      "scope": "Live gate during deployment; auth unchanged. No exact runtime version claim."
+    },
+    "liveResourceBytes": [
+      [
+        "/nl",
+        390,
+        842628,
+        689752
+      ],
+      [
+        "/nl/assortiment",
+        390,
+        4939382,
+        1059949
+      ],
+      [
+        "/nl/visschalen",
+        390,
+        1068787,
+        586395
+      ],
+      [
+        "/nl",
+        1440,
+        1134907,
+        1016317
+      ],
+      [
+        "/nl/assortiment",
+        1440,
+        5652724,
+        1396287
+      ],
+      [
+        "/nl/visschalen",
+        1440,
+        2096147,
+        991862
+      ]
+    ],
+    "measurement": "Same unthrottled isolated Chrome route check before/after; bytes, not speed percentage or field CWV"
   }
 }
