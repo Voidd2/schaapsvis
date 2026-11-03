@@ -1,7 +1,8 @@
 "use client";
 
+import { Suspense } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useLocale } from "next-intl";
 
 const TALEN = [
@@ -19,9 +20,18 @@ const TALEN = [
  * elke taalversie wél gevonden en gekoppeld — samen met de hreflang-gegevens
  * per pagina is dat de basis om in alle drie de talen te ranken.
  */
-export function LanguageSwitcher({ licht = false }: { licht?: boolean }) {
+export function LanguageSwitcher(props: { licht?: boolean }) {
+  return <Suspense fallback={null}><LanguageLinks {...props} /></Suspense>;
+}
+function LanguageLinks({ licht = false }: { licht?: boolean }) {
   const pathname = usePathname();
   const huidige = useLocale();
+  const source = useSearchParams(), safe = new URLSearchParams();
+  for (const key of ["categorie", "category", "vis", "tag", "seizoen", "tijd", "sortering", "aantal", "klassiek", "luxe", "hapjes", "catalog"]) {
+    const value = source.get(key);
+    if (value && /^[a-zA-Z0-9_-]{1,90}$/.test(value)) safe.set(key, value);
+  }
+  const context = safe.size ? `?${safe}` : "";
 
   const paden = pathname.split("/");
 
@@ -42,7 +52,7 @@ export function LanguageSwitcher({ licht = false }: { licht?: boolean }) {
               </span>
             ) : (
               <Link
-                href={href}
+                href={href + context}
                 hrefLang={code}
                 lang={code}
                 title={naam}

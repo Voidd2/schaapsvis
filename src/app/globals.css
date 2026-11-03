@@ -200,7 +200,7 @@ body:has(#mobile-navigation) .sv-whatsapp { opacity: 0; visibility: hidden; poin
 }
 
 /* Lichte, fotografische collectiepagina's. */
-.section-wrap { max-width: 1200px; margin-inline: auto; padding-inline: 24px; }
+.section-wrap, .site-container { width: 100%; max-width: 1536px; margin-inline: auto; padding-inline: clamp(20px, 3vw, 40px); }
 .fresh-hero { background: #effaff; padding: 64px 0; }
 .fresh-hero-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 64px; }
 .fresh-hero h1 { font-family: var(--font-body); font-weight: 650; font-size: clamp(2.5rem,5vw,4.75rem); line-height: 1.05; letter-spacing: -.045em; white-space: pre-line; margin: 18px 0 24px; color: var(--navy-dark); }
@@ -973,3 +973,19 @@ summary::-webkit-details-marker {
  .festive-catalog-hero { grid-template-columns:1fr; gap:24px; padding-block:28px; }
  .festive-practical { grid-template-columns:1fr; padding:22px; }
 }
+
+/* Shared wide canvas; reading columns remain deliberately limited. */
+.site-container > p, .section-wrap > p { max-width: 72ch; }
+@media (min-width:1280px) and (max-width:1599px) {
+ .site-header-row { flex-wrap:wrap; gap:6px 24px; }
+ .site-header-row > nav { order:3; flex-basis:100%; justify-content:flex-start; border-top:1px solid var(--linen); padding-top:5px; }
+}
+.site-header details[open] { z-index:60; }
+.seafood-card-body > h3 { min-height:2.6em; }
+.seafood-card-body > p:not(.seafood-price) { flex:1; }
+.seafood-price { font-variant-numeric:tabular-nums; }
+.catalog-gifts { background:var(--sand); padding:clamp(20px,3vw,36px); border-radius:16px; }
+.catalog-gifts img { width:100%; aspect-ratio:3/2; object-fit:cover; border-radius:8px; }
+.catalog-gifts h3 { margin-top:14px; font-size:1.25rem; }
+.catalog-gifts p { margin-top:8px; }
+@media(max-width:639px) { .seafood-card-body > h3 { min-height:0; } }

@@ -1,3 +1,4 @@
+import { calendarDate, validPickupDate } from "./pickup-date";
 import { feestdagenProduct, feestdagenBedrag } from "./feestdagen-producten";
 import { catalogProduct, SALAD_REQUESTS, languageIndex } from "./seafood-catalog";
 import { platterSizeLabel } from "./platter-families";
@@ -15,7 +16,7 @@ export function normalizeRequest(raw: unknown): CatalogRequest {
     if (!line || !Number.isInteger(line.quantity) || line.quantity < 1 || line.quantity > 99) continue;
     result.items[slug] = { quantity: line.quantity, split: line.split === true && supportsSplit(slug) };
   }
-  if (typeof value.date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value.date) && !Number.isNaN(Date.parse(value.date))) result.date = value.date;
+  if (typeof value.date === "string" && calendarDate(value.date)) result.date = value.date;
   return result;
 }
 export function requestTotal(request: CatalogRequest) {
@@ -36,5 +37,5 @@ export function requestMessage(request: CatalogRequest, locale: string) {
     const product = catalogProduct(slug, locale);
     return `${product.naam}\n${source.categorie === "visschalen" ? `${platterSizeLabel(slug, locale)} ${t.perPlatter}\n${t.fullPlatters}` : `${t.qty} (${source.eenheid === "per 100 gram" ? t.grams : product.eenheid})`}: ${line.quantity}\n${feestdagenBedrag(source.prijsCents, locale)} × ${line.quantity} = ${feestdagenBedrag(source.prijsCents * line.quantity, locale)}${line.split ? `\n${t.split}. ${t.splitNote}` : ""}`;
   });
-  return [t.greeting, ...lines, `${total.incomplete ? t.subtotal : t.total}: ${feestdagenBedrag(total.cents, locale)}`, ...(total.incomplete ? [t.extrasNote] : []), ...(clean.date ? [`${t.date}: ${new Intl.DateTimeFormat(locale === "en" ? "en-GB" : locale === "de" ? "de-DE" : "nl-NL", {dateStyle:"long",timeZone:"UTC"}).format(new Date(`${clean.date}T12:00:00Z`))}`] : [t.pickup]), t.note].join("\n\n");
+  return [t.greeting, ...lines, `${total.incomplete ? t.subtotal : t.total}: ${feestdagenBedrag(total.cents, locale)}`, ...(total.incomplete ? [t.extrasNote] : []), ...(clean.date && validPickupDate(clean.date) ? [`${t.date}: ${new Intl.DateTimeFormat(locale === "en" ? "en-GB" : locale === "de" ? "de-DE" : "nl-NL", {dateStyle:"long",timeZone:"UTC"}).format(new Date(`${clean.date}T12:00:00Z`))}`] : [t.pickup]), t.note].join("\n\n");
 }

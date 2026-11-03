@@ -24,6 +24,23 @@ import {
 export const MANDJE_OPSLAG = "sv_bestelling_v2";
 export const SCHAAL_OPSLAG = "sv_visschaal_v3";
 
+/** Anonymous selections belong to this tab, never to an account or server session.
+ * Move legacy device-local selections once, only after session storage succeeds.
+ * Keeping the old value on failure avoids destroying an existing selection.
+ */
+function readSelection(key: string): string | null {
+  try {
+    const current = sessionStorage.getItem(key);
+    if (current !== null) return current;
+    const legacy = localStorage.getItem(key);
+    if (legacy !== null) {
+      sessionStorage.setItem(key, legacy);
+      localStorage.removeItem(key);
+    }
+    return legacy;
+  } catch { return null; }
+}
+
 export interface MandjeRegel {
   slug: string;
   naam: string;
@@ -54,21 +71,18 @@ export function maakRegel(slug: string): MandjeRegel | null {
 /** Wat er in de opslag staat, ontdaan van producten die niet meer bestaan. */
 export function leesMandje(): MandjeRegel[] {
   try {
-    const rauw = localStorage.getItem(MANDJE_OPSLAG);
+    const rauw = readSelection(MANDJE_OPSLAG);
     if (!rauw) return [];
-    const gelezen = JSON.parse(rauw) as {
-      slug: string;
-      hoeveelheid?: string;
-      snijwijze?: string;
-    }[];
-    return gelezen
-      .map((r) => {
-        const basis = maakRegel(r.slug);
-        return basis
-          ? { ...basis, hoeveelheid: r.hoeveelheid ?? "", snijwijze: r.snijwijze ?? "" }
-          : null;
-      })
-      .filter((r): r is MandjeRegel => r !== null);
+    const gelezen: unknown = JSON.parse(rauw);
+    if (!Array.isArray(gelezen)) return [];
+    const gezien = new Set<string>();
+    return gelezen.flatMap((r): MandjeRegel[] => {
+      if (!r || typeof r !== "object" || typeof r.slug !== "string" || gezien.has(r.slug)) return [];
+      const basis = maakRegel(r.slug);
+      if (!basis) return [];
+      gezien.add(r.slug);
+      return [{ ...basis, hoeveelheid: typeof r.hoeveelheid === "string" ? r.hoeveelheid.slice(0, 120) : "", snijwijze: typeof r.snijwijze === "string" ? r.snijwijze.slice(0, 120) : "" }];
+    });
   } catch {
     return [];
   }
@@ -76,7 +90,7 @@ export function leesMandje(): MandjeRegel[] {
 
 export function bewaarMandje(regels: MandjeRegel[]) {
   try {
-    localStorage.setItem(
+    sessionStorage.setItem(
       MANDJE_OPSLAG,
       JSON.stringify(
         regels.map((r) => ({
@@ -105,7 +119,7 @@ export function bewaarMandje(regels: MandjeRegel[]) {
  */
 export function leesSamenstelling(): Samenstelling {
   try {
-    const rauw = localStorage.getItem(SCHAAL_OPSLAG);
+    const rauw = readSelection(SCHAAL_OPSLAG);
     if (!rauw) return LEGE_SAMENSTELLING;
     const gelezen = JSON.parse(rauw) as Partial<Samenstelling>;
     const schaal =
@@ -122,7 +136,7 @@ export function leesSamenstelling(): Samenstelling {
 
 export function bewaarSamenstelling(samen: Samenstelling) {
   try {
-    localStorage.setItem(SCHAAL_OPSLAG, JSON.stringify(samen));
+    sessionStorage.setItem(SCHAAL_OPSLAG, JSON.stringify(samen));
   } catch {
     /* geen opslag beschikbaar */
   }

@@ -137,6 +137,14 @@ export const BEELD = {
     verhouding: "liggend",
     terugval: "1960",
   },
+  historie2018: {
+    waar: "Ons verhaal — tijdlijn 2018",
+    wat: "Een echte foto uit 2018 bij het bijbehorende tijdlijnmoment; jaartal en personen eerst laten bevestigen.",
+    bestand: "",
+    alt: "Schaap’s Vishandel in 2018",
+    verhouding: "liggend",
+    terugval: "Foto uit 2018 aanleveren",
+  },
   historie1980: {
     waar: "Ons verhaal, bij 1980",
     wat: "De zaak, de kraam of het gezin in de jaren tachtig.",

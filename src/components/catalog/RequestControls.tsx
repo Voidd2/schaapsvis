@@ -1,4 +1,7 @@
 "use client";
+import { useEffect, useState } from "react";
+import { amsterdamToday, validPickupDate } from "@/lib/pickup-date";
+import { useWinkelwagen } from "@/components/winkel/Winkelwagen";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { PLATTER_FAMILIES, selectedPlatter, platterDetailHref } from "@/lib/platter-families";
@@ -44,10 +47,22 @@ export function LegacyCatalogSelection({ locale }: { locale: string }) {
 }
 
 export function RequestSummary({ locale }: { locale: string }) {
+  const legacy = useWinkelwagen();
   const state = useCatalogRequest(), t = catalogText(locale), total = requestTotal(state), entries = Object.entries(state.items);
+  const [today, setToday] = useState("");
+  useEffect(() => {
+    const refresh = () => setToday(amsterdamToday());
+    refresh();
+    const timer = window.setInterval(refresh, 30000);
+    window.addEventListener("focus", refresh);
+    return () => { window.clearInterval(timer); window.removeEventListener("focus", refresh); };
+  }, []);
+  const dateOK = !state.date || (!!today && validPickupDate(state.date));
+  const dateError = locale === "en" ? "Choose today or a later date, or leave the date open." : locale === "de" ? "Wählen Sie heute oder ein späteres Datum, oder lassen Sie den Termin offen." : "Kies vandaag of een latere datum, of laat de datum nog open.";
   const message = requestMessage(state, locale);
   return <section id="aanvraag" className="catalog-request-summary" aria-labelledby="request-title">
     <div className="catalog-heading"><h2 id="request-title">{t.list}</h2><p>{t.keep}</p></div>
+    {legacy.aantal > 0 && <p className="request-muted mb-5">{locale === "en" ? "You also have an earlier, separate selection." : locale === "de" ? "Sie haben auch eine frühere, separate Auswahl." : "U heeft ook een eerdere, afzonderlijke selectie."} <Link className="underline" href={`/${locale}/bestellen`}>{locale === "en" ? "Review it here" : locale === "de" ? "Hier ansehen" : "Bekijk die hier"} →</Link></p>}
     {!entries.length ? <p>{t.empty}</p> : <>
       <ul className="request-lines">{entries.map(([slug, line]) => {
         const product = feestdagenProduct(slug), salad = SALAD_REQUESTS.find(s => s.slug === slug);
@@ -62,8 +77,9 @@ export function RequestSummary({ locale }: { locale: string }) {
       <p className="request-muted mt-4">{t.fullNote}</p>
       <p className="request-total" aria-live="polite">{total.incomplete ? t.subtotal : t.total}: <strong>{feestdagenBedrag(total.cents, locale)}</strong></p>
       {total.incomplete && <p className="request-muted">{t.extrasNote}</p>}
-      <label className="request-date">{t.date}<input type="date" value={state.date} onChange={event => updateCatalogRequest(current => ({ ...current, date: event.target.value }))} /><small>{t.dateHint}</small></label>
-      <a className="knop knop-navy mt-5" href={whatsappLink(message)} target="_blank" rel="noopener noreferrer">{t.whatsapp}</a>
+      <label className="request-date">{t.date}<input type="date" min={today || undefined} aria-invalid={!dateOK} aria-describedby={!dateOK ? "pickup-error" : undefined} value={state.date} onChange={event => updateCatalogRequest(current => ({ ...current, date: event.target.value }))} /><small>{t.dateHint}</small></label>
+      {!dateOK && <p id="pickup-error" role="alert" className="text-red-800 mt-3">{dateError}</p>}
+      {dateOK ? <a className="knop knop-navy mt-5" href={whatsappLink(message)} target="_blank" rel="noopener noreferrer">{t.whatsapp}</a> : <button disabled className="knop knop-navy mt-5 opacity-50">{t.whatsapp}</button>}
       <p className="request-muted mt-3">{t.note}</p>
       <details className="mt-4"><summary>{t.draft}</summary><p className="request-draft" data-catalog-draft>{message}</p></details>
     </>}

@@ -433,7 +433,7 @@ export function AccountPortal({ locale }: { locale: string }) {
     } finally { setBusy(false); }
   }
 
-  if (!data) return <div className="section-wrap py-20"><p role="status">…</p></div>;
+  if (!data) return <div className="section-wrap py-20"><p role="status">{language === "en" ? "Loading your account…" : language === "de" ? "Konto wird geladen…" : "Uw account wordt geladen…"}</p></div>;
 
   return (
     <div className="section-wrap py-12 md:py-16">
@@ -533,7 +533,7 @@ export function AccountPortal({ locale }: { locale: string }) {
               <button type="submit" disabled={busy} className="text-sm font-semibold text-sky-800 underline underline-offset-4">{t.resend}</button>
             </form>
             {message && <p role="status" aria-live="polite" className={`mt-4 text-sm ${success ? "text-emerald-800" : "text-red-800"}`}>{message}</p>}
-          </section> : <section className="mt-10 grid gap-8 md:grid-cols-2">
+          </section> : <section className="mt-10 grid gap-8">
             <div className="rounded-2xl border border-sky-200 bg-white p-6 shadow-sm sm:p-8">
               <div className="mb-6 flex gap-2" role="tablist" aria-label={t.title}>
                 <button type="button" role="tab" aria-selected={mode === "login"} onClick={() => { setMode("login"); setMessage(""); }} className={`rounded-full px-4 py-2 text-sm font-semibold ${mode === "login" ? "bg-sky-800 text-white" : "bg-sky-50 text-sky-900"}`}>{t.login}</button>
@@ -545,14 +545,14 @@ export function AccountPortal({ locale }: { locale: string }) {
                 {mode === "register" && <label className="block text-sm font-medium">{t.schoolEmail}<input name="schoolEmail" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>}
                 <label className="block text-sm font-medium">{t.password}<input name="password" type="password" required minLength={12} maxLength={128} autoComplete={mode === "register" ? "new-password" : "current-password"} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>
                 {mode === "register" && <label className="flex items-start gap-2 text-sm leading-relaxed"><input type="checkbox" name="marketingConsent" className="mt-1 size-4 shrink-0 accent-sky-700" /><span>{t.optionalOffers}</span></label>}
-                <button type="submit" disabled={busy} className="knop knop-navy w-full disabled:opacity-60">{busy ? "…" : mode === "login" ? t.login : t.register}</button>
+                <button type="submit" disabled={busy} className="knop knop-navy w-full disabled:opacity-60">{busy ? (language === "en" ? "Please wait…" : language === "de" ? "Bitte warten…" : "Even geduld…") : mode === "login" ? t.login : t.register}</button>
               </form>
-              {mode === "login" && <form onSubmit={requestMagicLogin} className="mt-5 space-y-2"><label className="block text-xs font-medium text-slate-600">{t.email}<input name="email" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2" /></label><button className="text-sm font-semibold text-sky-800 underline underline-offset-4">{t.magicLogin}</button></form>}
-              <form onSubmit={requestPasswordReset} className="mt-5 space-y-2"><label className="block text-xs font-medium text-slate-600">{t.email}<input name="email" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2" /></label><button className="text-sm font-semibold text-sky-800 underline underline-offset-4">{t.reset}</button></form>
+              {mode === "login" && <details className="mt-5"><summary className="text-sm font-semibold text-sky-800">{t.magicLogin}</summary><form onSubmit={requestMagicLogin} className="mt-5 space-y-2"><label className="block text-xs font-medium text-slate-600">{t.email}<input name="email" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2" /></label><button disabled={busy} className="text-sm font-semibold text-sky-800 underline underline-offset-4">{t.magicLogin}</button></form></details>}
+              <details className="mt-5"><summary className="text-sm font-semibold text-sky-800">{t.reset}</summary><form onSubmit={requestPasswordReset} className="mt-5 space-y-2"><label className="block text-xs font-medium text-slate-600">{t.email}<input name="email" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2" /></label><button disabled={busy} className="text-sm font-semibold text-sky-800 underline underline-offset-4">{t.reset}</button></form></details>
               {message === t.resend && <form onSubmit={resendVerification} className="mt-3 space-y-2"><label className="block text-xs font-medium text-slate-600">{t.email}<input name="email" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2" /></label><button className="text-sm font-semibold text-sky-800 underline underline-offset-4">{t.resend}</button></form>}
               {message && <p role="status" aria-live="polite" className={`mt-4 text-sm ${success ? "text-emerald-800" : "text-red-800"}`}>{message}</p>}
             </div>
-            <aside className="rounded-2xl bg-sky-50 p-6 sm:p-8"><h2 className="font-display text-2xl font-bold text-slate-900">{t.studentTitle}</h2><p className="mt-3 leading-relaxed text-slate-700">{t.studentInfo}</p><p className="mt-5 text-sm leading-relaxed text-slate-600">{t.optionalOffers}</p></aside>
+            <aside className="rounded-2xl bg-sky-50 p-6 sm:p-8"><h2 className="font-display text-2xl font-bold text-slate-900">{t.studentTitle}</h2><p className="mt-3 leading-relaxed text-slate-700">{t.studentInfo}</p><p className="mt-5 text-sm leading-relaxed text-slate-600">{language === "en" ? "This portal is for students. Regular customer accounts are not active yet." : language === "de" ? "Dieses Portal ist für Studierende. Reguläre Kundenkonten sind noch nicht aktiv." : "Dit portaal is voor studenten. Gewone klantaccounts zijn nog niet actief."}</p></aside>
           </section>
         )}
         <p className="mt-8 text-sm text-slate-600"><a className="font-semibold text-sky-800 underline underline-offset-4" href={`/${language}/privacyverklaring`}>{t.privacy}</a></p>

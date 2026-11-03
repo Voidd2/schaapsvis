@@ -80,7 +80,7 @@ export function PaginaKop({
 
   return (
     <section style={{ backgroundColor: "var(--navy)" }} className={`pt-10 pb-14 md:pt-12 md:pb-18 ${className}`}>
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="site-container">
         <Kruimels donker items={kruimels} />
 
         <div

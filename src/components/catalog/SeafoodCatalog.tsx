@@ -7,6 +7,8 @@ import { platterPhotoAlt, platterPrice, platterPresentation } from "@/lib/platte
 import { ProductQuantity, RequestSummary, LegacyCatalogSelection } from "./RequestControls";
 import { CatalogPhoto } from "./CatalogPhoto";
 
+import { giftCopy } from "@/lib/gift-copy";
+
 type Props = { locale: string; festive?: boolean };
 function ProductCard({ slug, locale, festive, featured = false }: Props & { slug: string; featured?: boolean }) {
   const product = catalogProduct(slug, locale), t = catalogText(locale), isPlatter = product.categorie === "visschalen";
@@ -40,6 +42,7 @@ export function SeafoodCatalog({ locale, festive = false }: Props) {
       <p className="catalog-example-note"><strong>{platterPresentation(locale).photoLabel}.</strong> {platterPresentation(locale).photoText}</p>
       <div className="seafood-grid">{MAIN_PLATTERS.map(slug => <ProductCard key={slug} {...props} slug={slug} />)}</div>
     </section>
+    {festive && <GiftIdeas locale={locale} />}
     {!festive && <Featured {...props} />}
     {[{ id: "gourmet", title: t.gourmet, intro: t.gourmetIntro, products: GOURMET }, { id: "delicatessen", title: t.delicacies, intro: t.delicaciesIntro, products: DELICACIES }].map(section => <section key={section.id} id={section.id} className="seafood-section">
       <div className="catalog-heading"><h2>{section.title}</h2><p>{section.intro}</p></div>
@@ -63,4 +66,9 @@ export function SeafoodCatalog({ locale, festive = false }: Props) {
     <RequestSummary locale={locale} />
     <div className="catalog-custom-banner"><div><h2>{t.custom}</h2><p>{locale === "en" ? "A larger group or a different selection? Tell us your wishes." : locale === "de" ? "Eine größere Runde oder andere Zusammenstellung? Nennen Sie uns Ihre Wünsche." : "Een groter gezelschap of een andere samenstelling? Vertel ons uw wensen."}</p></div><Link className="knop knop-lijn-licht" href={festive ? `/${locale}/visschalen#maatwerk` : "#maatwerk"}>{t.custom} →</Link></div>
   </div>;
+}
+
+function GiftIdeas({ locale }: { locale:string }) {
+ const c = giftCopy(locale);
+ return <section className="catalog-gifts seafood-section" aria-labelledby="gift-title"><div className="catalog-heading"><h2 id="gift-title">{c.options}</h2><p>{c.note}</p></div><div className="seafood-grid">{[0,2,3].map(index => { const [name, description, image, alt] = c.items[index]; return <article key={name}><Image src={image} alt={alt} width={600} height={400} sizes="(max-width:640px) 100vw, 33vw" /><h3>{name}</h3><p>{description}</p><p className="seafood-price">{c.priceNote}</p><Link className="seafood-detail" href={`/${locale}/relatiegeschenken#geschenk-${index}`}>{c.view} →</Link></article>; })}</div></section>;
 }

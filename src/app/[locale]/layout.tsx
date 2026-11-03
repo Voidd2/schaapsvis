@@ -1,3 +1,4 @@
+import { OwnerMediaGuide } from "@/components/layout/OwnerMediaGuide";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
@@ -111,6 +112,7 @@ export default async function LocaleLayout({
               footer={<Footer />}
               extras={<WhatsAppButton />}
             >
+              {isPreview && <OwnerMediaGuide />}
               {children}
             </Chrome>
           </WinkelwagenProvider>

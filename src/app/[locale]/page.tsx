@@ -80,7 +80,7 @@ export default async function HomePage({
       <JsonLd locale={locale} />
 
       <section className="home-hero" style={{ backgroundColor: "var(--cream)" }}>
-        <div className="max-w-6xl mx-auto px-4 grid lg:grid-cols-[1.02fr_0.98fr] gap-10 lg:gap-16 items-center py-8 md:py-12">
+        <div className="site-container grid lg:grid-cols-[1.02fr_0.98fr] gap-10 lg:gap-16 items-center py-8 md:py-12">
           <div>
             <div className="home-hero-kicker mb-5">
               <span className="home-hero-dot" aria-hidden />

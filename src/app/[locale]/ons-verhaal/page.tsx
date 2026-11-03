@@ -38,7 +38,7 @@ const TIJDLIJN = [
   { jaar: "1938", titel: "t1title", tekst: "t1text", citaat: null, beeld: "historie1938" },
   { jaar: "1957", titel: "t2title", tekst: "t2text", citaat: null, beeld: "historie1960" },
   { jaar: "2009", titel: "t3title", tekst: "t3text", citaat: "t3quote", beeld: "historie2000" },
-  { jaar: "2018", titel: "t4title", tekst: "t4text", citaat: "t4quote", beeld: "historie1980" },
+  { jaar: "2018", titel: "t4title", tekst: "t4text", citaat: "t4quote", beeld: "historie2018" },
   { jaar: "Nu", titel: "t5title", tekst: "t5text", citaat: null, beeld: "historieNu" },
 ] as const satisfies readonly {
   jaar: string;
@@ -95,7 +95,7 @@ export default async function OnsVerhaalPage({
           1960 doet meer voor de geloofwaardigheid dan twintig keer "sinds 1938"
           in de tekst — daarom heeft elk punt hier zijn eigen plek. */}
       <Sectie grond="papier">
-        <Kop label="Vier generaties" titel="De tijdlijn" als="h2" />
+        <Kop label={locale === "en" ? "Four generations" : locale === "de" ? "Vier Generationen" : "Vier generaties"} titel={locale === "en" ? "Our timeline" : locale === "de" ? "Unsere Geschichte" : "De tijdlijn"} als="h2" />
         <ol style={{ borderTop: "1px solid var(--linen)" }}>
           {TIJDLIJN.map((punt) => (
             <li

@@ -42,7 +42,7 @@ export function Sectie({
       }}
       className="py-16 md:py-24"
     >
-      <div className={`mx-auto px-4 ${smal ? "max-w-3xl" : "max-w-6xl"}`}>{children}</div>
+      <div className={`${smal ? "mx-auto px-4 max-w-3xl" : "site-container"}`}>{children}</div>
     </section>
   );
 }
