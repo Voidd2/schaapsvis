@@ -20,6 +20,8 @@ De site blijft besloten. Deze lijst is geen toestemming om `SITE_PUBLIC` of secr
 
 ## Openbaar maken: afzonderlijk eigenaarsbesluit
 
+- De GitHub-job `locked-site` controleert de besloten live site zonder cookies vanaf een extern runnernetwerk. Zet uitsluitend bij de goedgekeurde openbare lancering ook de repositoryvariabele `SITE_PUBLIC=launch-approved` om deze besloten-verwachting uit te schakelen. Deze CI-variabele opent de website niet; runtime-publicatie blijft een afzonderlijke handeling.
+
 - Bevestig NAP, echte beelden, productwaarheid, contactafhandeling en juridische teksten.
 - Pas dan de bestaande publicatieprocedure gebruiken. Controleer robots/sitemap opnieuw op runtime, geen aanname vanuit de build.
 - GSC domeinproperty bevestigen; publieke sitemap indienen; representatieve product-, locatie-, recept- en artikelpagina’s inspecteren.

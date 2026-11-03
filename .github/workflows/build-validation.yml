@@ -49,6 +49,18 @@ permissions:
   contents: read
 
 jobs:
+  locked-site:
+    # Set the repository variable only as part of the owner's explicit public
+    # launch procedure; it does not change the site's runtime access controls.
+    if: vars.SITE_PUBLIC != 'launch-approved'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/check-live-access.mjs
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 20
