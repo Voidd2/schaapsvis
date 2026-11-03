@@ -290,7 +290,7 @@ export const FEESTDAGEN_PRODUCTEN: readonly FeestdagenProduct[] = [
   },
   {
     slug: "luxe-trio-klein",
-    naam: "Luxe trio klein",
+    naam: "Luxe vistrio klein",
     prijsCents: 1599,
     eenheid: "per stuk",
     afbeelding: "/images/dirks/luxe-trio-klein.webp",
@@ -301,7 +301,7 @@ export const FEESTDAGEN_PRODUCTEN: readonly FeestdagenProduct[] = [
   },
   {
     slug: "luxe-vistrio",
-    naam: "Luxe vistrio",
+    naam: "Luxe vistrio groot",
     prijsCents: 3199,
     eenheid: "per stuk",
     afbeelding: "/images/dirks/luxe-vistrio.webp",

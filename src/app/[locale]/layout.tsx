@@ -9,6 +9,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Chrome } from "@/components/layout/Chrome";
 import { WinkelwagenProvider } from "@/components/winkel/Winkelwagen";
+import { CatalogCart } from "@/components/catalog/CatalogCart";
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
 import { AnalyticsConsent } from "@/components/shared/AnalyticsConsent";
 import { cookies } from "next/headers";
@@ -110,7 +111,7 @@ export default async function LocaleLayout({
             <Chrome
               header={<Header />}
               footer={<Footer />}
-              extras={<WhatsAppButton />}
+              extras={<><WhatsAppButton /><CatalogCart /></>}
             >
               {isPreview && <OwnerMediaGuide />}
               {children}

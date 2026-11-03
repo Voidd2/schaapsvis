@@ -143,28 +143,28 @@ for(const locale of ["nl","en","de"]) {
   assert.ok(draft.includes("5–8"));
 }
 assert.deepEqual(normalizeRequest({items:{unknown:{quantity:1},"luxe-trio-klein":{quantity:1.5},"extra-zalmsalade":{quantity:-1}},date:"bad"}),{items:{},date:""});
-assert.deepEqual(normalizeRequest(JSON.parse(JSON.stringify(request))),request);
-assert.equal(normalizeRequest({items:{"luxe-trio-klein":{quantity:1,split:true}},date:""}).items["luxe-trio-klein"].split,false);
-console.log("Shared catalogue checks passed: 6 main choices, all 23 preserved routes, 3 languages, canonical totals, unknown salads, split wishes and storage validation.");
+assert.deepEqual(normalizeRequest(JSON.parse(JSON.stringify(request))), {items:Object.fromEntries(Object.entries(request.items).map(([slug,line])=>[slug,{quantity:line.quantity}])), date:""});
+assert.equal(normalizeRequest({items:{"luxe-trio-klein":{quantity:1,split:true}},date:""}).items["luxe-trio-klein"].split,undefined);
+console.log("Shared catalogue checks passed: 6 main choices, all 23 preserved routes, 3 languages, canonical totals, unknown salads, legacy split removal and storage validation.");
 
 const { inquiryText, platterInquiryMessage } = load("src/lib/platter-inquiry.ts");
 const { whatsappLink } = load("src/lib/bedrijf.ts");
 for (const locale of ["nl", "en", "de"]) {
   const t = inquiryText(locale);
-  const emptyOptional = { preference: "advies", people: "8", use: "advies", date: "2026-12-24", dateUnknown: true, budget: "  ", wishes: "  " };
+  const emptyOptional = { kind: "advice", fish: [], excluded: "", presentation: "advice", people: "8", amount: "", date: "2099-12-24", dateUnknown: true, budget: "  ", remarks: "  ", allergies: "" };
   const basic = platterInquiryMessage(locale, emptyOptional);
   assert.ok(basic.includes(`${t.people}: 8`));
   assert.ok(basic.includes(t.unknown));
-  assert.ok(!basic.includes("2026"));
+  assert.ok(!basic.includes("2099"));
   assert.ok(!basic.includes(t.budgetMessage));
-  assert.ok(!basic.includes(t.wishesMessage));
-  const full = platterInquiryMessage(locale, { ...emptyOptional, preference: "eigen", use: "maaltijd", dateUnknown: false, budget: "125.50", wishes: "Graag zalm & paling\nAllergie: sesam?" });
-  assert.ok(full.includes(t.preferences.eigen));
-  assert.ok(full.includes(t.uses.maaltijd));
-  assert.ok(full.includes("2026"));
+  assert.ok(!basic.includes(t.remarksMessage));
+  const full = platterInquiryMessage(locale, { ...emptyOptional, kind: "luxury", fish: ["salmon","eel"], presentation: "platter", dateUnknown: false, budget: "125.50", remarks: "Graag zalm & paling", allergies: "sesam?" });
+  assert.ok(full.includes(t.kinds.luxury));
+  assert.ok(full.includes(t.presentations.platter));
+  assert.ok(full.includes("2099"));
   assert.ok(!full.includes(t.unknown));
   assert.ok(full.includes(`${t.budgetMessage}: € 125.50`));
-  assert.ok(full.includes("Graag zalm & paling\nAllergie: sesam?"));
+  assert.ok(full.includes("Graag zalm & paling") && full.includes(`${t.allergiesMessage}: sesam?`));
   assert.ok(full.includes(t.note));
   assert.ok(!full.includes("1004")); // Never multiply the budget by the guest count.
   const link = new URL(whatsappLink(full));
