@@ -55,6 +55,7 @@
       "vars": {
         "SMTP_DIAGNOSTICS": "off",
         "MEMBERS_ENABLED": "on",
+        "ANALYTICS_ENABLED": "on",
         "SITE_ORIGIN": "https://schaapsvishandel.nl",
         "MAIL_FROM": "schaapsv@schaapsvishandel.nl",
         "SMTP_HOST": "khsm1.khsmserver1.nl",

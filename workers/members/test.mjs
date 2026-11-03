@@ -4,6 +4,7 @@ import { readFile } from "node:fs/promises";
 import { DatabaseSync } from "node:sqlite";
 import { unzipSync } from "fflate";
 import memberWorker from "./src/index.mjs";
+import { analyticsReport as buildAnalyticsReport, publicAnalyticsPath, analyticsTarget } from "./src/analytics.mjs";
 import { clientDeviceInfo } from "./src/device-info.mjs";
 
 for (const [ua, browser, os, deviceType] of [
@@ -148,7 +149,7 @@ const db = {
     }
     sqlite.exec("BEGIN");
     try {
-      const results = statements.map((statement) => statement.run());
+      const results = statements.map((statement) => /^\s*SELECT/i.test(statement.sql) ? statement.all() : statement.run());
       sqlite.exec("COMMIT");
       return results;
     } catch (error) {
@@ -394,7 +395,13 @@ assert.match(await (await call(`${magicUrl.pathname}${magicUrl.search}`)).text()
 assert.equal((await call("/api/members/admin/analytics?days=7", { cookie: sessionCookie, headers: { "CF-Connecting-IP": "198.51.100.5" } })).status, 403, "admin analytics requires the server-side IP allowlist");
 const analyticsReport = await call("/api/members/admin/analytics?days=7", { cookie: sessionCookie });
 assert.equal(analyticsReport.status, 200, "allowlisted admin can view aggregate analytics");
-assert.equal((await analyticsReport.json()).rows.length, 2);
+const reportBody = await analyticsReport.json();
+assert.equal(reportBody.enabled, true);
+assert.equal(reportBody.summary.views, 1);
+assert.equal(reportBody.summary.clicks, 1);
+assert.equal(reportBody.daily.length, 7);
+assert.equal(reportBody.pages.length, 2);
+assert.equal((await call("/api/members/admin/analytics")).status, 403, "anonymous reports remain inaccessible");
 assert.equal((await call("/api/members/admin/customers")).status, 403, "customer listing rejects anonymous requests");
 assert.equal((await call("/api/members/admin/customers", { cookie: sessionCookie, headers: { "CF-Connecting-IP": "198.51.100.5" } })).status, 403, "customer listing requires the server-side IP allowlist");
 const managedCustomerId = "123e4567-e89b-12d3-a456-426614174000";
@@ -961,3 +968,29 @@ assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM security_events WHERE
 
 console.log("Account worker integration tests passed: long-lived revocable sessions, device recognition, dynamic QR security, manual verification, student passes, email and campaign flows.");
 
+
+// Exercise real SQLite aggregation with more rows than the former 2,000 cap.
+sqlite.exec("DELETE FROM site_analytics_daily");
+const seedAnalytics = sqlite.prepare("INSERT INTO site_analytics_daily VALUES (?,?,?,?,?,?)");
+for (let i = 0; i < 2501; i++) seedAnalytics.run("2026-11-04", "page_view", `/nl/product-${i}`, "", 2, "2026-11-04T12:00:00Z");
+seedAnalytics.run("2026-11-03", "link_click", "/nl", "contact:whatsapp", 4, "2026-11-03T12:00:00Z");
+seedAnalytics.run("2026-11-03", "link_click", "/nl", "external:wa.me", 3, "2026-11-03T12:00:00Z");
+seedAnalytics.run("2026-11-03", "link_click", "/nl", "contact:phone", 5, "2026-11-03T12:00:00Z");
+seedAnalytics.run("2026-10-28", "page_view", "/nl", "", 99, "2026-10-28T12:00:00Z");
+seedAnalytics.run("2026-11-05", "page_view", "/nl", "", 99, "2026-11-05T12:00:00Z");
+const fullAnalytics = await buildAnalyticsReport(env, 7, new Date("2026-11-04T15:00:00Z"));
+assert.equal(fullAnalytics.summary.views, 5002, "totals include every row but exclude dates outside the selected range");
+assert.equal(fullAnalytics.summary.whatsapp, 7, "old and new WhatsApp destinations contribute to one contact total");
+assert.equal(fullAnalytics.summary.phone, 5);
+assert.equal(fullAnalytics.pages.length, 30, "only rankings are limited");
+assert.equal(fullAnalytics.daily.length, 7);
+assert.equal(fullAnalytics.daily[0].views, 0, "missing days are filled with zero");
+assert.equal(fullAnalytics.daily.reduce((sum, day) => sum + day.views, 0), fullAnalytics.summary.views);
+assert.equal((await buildAnalyticsReport({ ...env, ANALYTICS_ENABLED: "off" }, 7)).enabled, false);
+for (const path of ["/nl/account", "/en/beheer/start", "/de/bestellen", "/nl/assortiment?email=private", "/nl/person@example.test", "/nl/%62eheer"]) assert.equal(publicAnalyticsPath(path), "");
+assert.equal(publicAnalyticsPath("/nl/visschalen/"), "/nl/visschalen");
+assert.equal(analyticsTarget("https://wa.me/31600000000?text=allergie", env.SITE_ORIGIN), "contact:whatsapp");
+assert.equal(analyticsTarget("mailto:private@example.test?body=private", env.SITE_ORIGIN), "contact:email");
+assert.equal(analyticsTarget("tel:+31600000000", env.SITE_ORIGIN), "contact:phone");
+assert.equal(analyticsTarget("javascript:alert(1)", env.SITE_ORIGIN), "");
+console.log("Analytics aggregation, date boundaries and privacy checks passed.");

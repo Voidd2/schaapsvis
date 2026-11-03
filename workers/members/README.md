@@ -21,7 +21,7 @@ Deze Worker is de serverkant voor algemene accounts, e-mailbevestiging, wachtwoo
 1. Houd de website en account-API achter de bestaande site-access-gate. De leden-API staat aan voor de besloten preview; bezoekers zonder site-unlock-cookie of het vertrouwde eigenaar-IP worden door de Worker geweigerd.
 2. Test met een gecontroleerd persoonlijk en schooladres de volledige registratie en beoordeling. De volledige stroom is op 27 oktober 2026 door de eigenaar doorlopen; controleer na iedere mailwijziging opnieuw aflevering en spamplaatsing. Deel of log geen mailboxwachtwoord, verificatiecode of echte gebruikersgegevens.
 3. Controleer privacyverklaring, verwerkingsverantwoordelijke, grondslagen, verwerkers, bewaartermijnen en verwijderprocedure vóór publieke registratie.
-4. Houd `ANALYTICS_ENABLED` uit totdat privacytekst en toestemming definitief zijn goedgekeurd. Statistieken zijn geaggregeerd en bevatten geen individuele funnels of exacte uitvalmomenten.
+4. `ANALYTICS_ENABLED=on` is op verzoek van de eigenaar voor productie vastgelegd; preview blijft standaard uit. De privacytekst en cookiekeuze beschrijven de meting. Statistieken zijn geaggregeerd en bevatten geen individuele funnels of exacte uitvalmomenten.
 5. Houd bewijsbuckets privé; activeer geen `r2.dev`-URL of custom domain. R2-limieten in de Worker zijn geen harde accountbrede maandelijkse factuurstop. Zie [Cloudflare R2-jurisdicties](https://developers.cloudflare.com/r2/reference/data-location/#jurisdictional-restrictions) en [Wrangler R2-commando's](https://developers.cloudflare.com/r2/reference/data-location/).
 
 ## Lokale checks

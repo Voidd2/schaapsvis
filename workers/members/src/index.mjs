@@ -1,3 +1,4 @@
+import { publicAnalyticsPath, analyticsTarget, analyticsReport } from "./analytics.mjs";
 import { clientDeviceInfo } from "./device-info.mjs";
 import { Pass, SigningMaterial } from "passmint";
 import { APPLE_WALLET_ICON_2X } from "./wallet-assets.mjs";
@@ -580,22 +581,6 @@ async function requireAdmin(request, env) {
   return user;
 }
 
-function publicAnalyticsPath(value) {
-  if (typeof value !== "string" || value.length > 180 || !/^\/(nl|en|de)(?:\/[^?#]*)?$/.test(value)) return "";
-  const path = value.replace(/\/{2,}/g, "/").replace(/\/$/, "") || "/nl";
-  if (/^\/(nl|en|de)\/(account|beheer|studentenkorting|kortingsbon)(?:\/|$)/.test(path)) return "";
-  return path;
-}
-
-function analyticsTarget(value, origin) {
-  if (typeof value !== "string" || value.length > 500) return "";
-  try {
-    const url = new URL(value, origin);
-    if (url.origin !== origin) return `external:${url.hostname.toLowerCase()}`.slice(0, 180);
-    return publicAnalyticsPath(url.pathname);
-  } catch { return ""; }
-}
-
 async function collectAnalytics(request, env) {
   if (env.ANALYTICS_ENABLED !== "on" || !sameOrigin(request, env)) return json({ error: "analytics_unavailable" }, 503);
   const body = await readJson(request);
@@ -621,9 +606,7 @@ async function adminAnalytics(request, env) {
   if (!admin) return json({ error: "forbidden" }, 403);
   const daysValue = Number(new URL(request.url).searchParams.get("days") || 30);
   const days = Number.isInteger(daysValue) ? Math.min(90, Math.max(1, daysValue)) : 30;
-  const since = new Date(Date.now() - (days - 1) * 86_400_000).toISOString().slice(0, 10);
-  const rows = await env.DB.prepare(`SELECT day, event, path, target, count FROM site_analytics_daily WHERE day >= ? ORDER BY day DESC, count DESC LIMIT 2000`).bind(since).all();
-  return json({ since, days, rows: rows.results || [] });
+  return json(await analyticsReport(env, days));
 }
 
 async function adminCustomers(request, env) {
