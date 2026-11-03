@@ -2,6 +2,12 @@
 
 Laatst bijgewerkt: 4 november 2026, Europe/Amsterdam
 
+## Zelfstandige VÅRLAKS-landingspagina
+
+- PR #102 gepubliceerd als `a5a1b43`; Build259 groen, Codex-review zonder bevindingen. Cloudflare site `396d1958` Ready/100%. Live `/nl/varlaks` met nieuw hoofdmenu-item en vier geladen foto's bevestigd.
+- VÅRLAKS-zalm rechtstreeks in desktop- en mobielmenu, eigen NL/EN/DE-landingspagina met herkomst, leveranciersfilm, recept, FAQ en grote bezoek-/adviesknoppen. Bestaande route behouden voor toekomstige advertenties en QR-codes; niets gelanceerd en website blijft besloten.
+- Officiële bron noemt ASC, geen biologische certificering bevestigd: geen biologische verkoopclaim toegevoegd. Bestaande AI-beelden herkenbaar gelabeld. Details, controles en screenshotlocatie in `docs/varlaks-landingspagina.md`.
+
 ## Statistieken en rapportbronnen
 
 - PR #101 gepubliceerd als `92f3b21`; Build257/Member157 groen, Codex-review zonder bevindingen. Cloudflare site `474ad18c` en leden `316dc564` beide 100% Ready.

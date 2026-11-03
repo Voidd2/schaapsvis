@@ -18,4 +18,6 @@ Toestemming voor leveranciersbeelden is al vastgelegd in `docs/afbeeldingsbronne
 - Inhoudscontrole, catalogus-/navigatiechecks, gerichte ESLint, Next-build (572 pagina's), Cloudflare/Vite-build en `git diff --check`: geslaagd.
 - Chrome lokaal: NL desktop, EN/DE mobiel, eigen menu-item, FAQ, canonical en linkbestemmingen gecontroleerd. Vier bestaande beelden laden; Vimeo laadt niet voor een afspeelklik. Knoppen minimaal 52px; mobiele inhoud 388px breed zonder horizontale overflow.
 - WhatsApp uitsluitend als link/concept gecontroleerd; geen bericht of aanvraag verstuurd.
-- Live uitrol en bewijs worden na publicatie hieronder vastgelegd.
+- PR #102 samengevoegd als `a5a1b43`; GitHub Build259 geslaagd, Codex-review zonder bevindingen. Cloudflare siteversie `396d1958` Ready en 100% verkeer.
+- Live Chrome op `https://schaapsvishandel.nl/nl/varlaks`: zelfstandig hoofdmenu-item, nieuwe introductie, vier geladen beelden, juiste canonical en besloten-previewmelding bevestigd. Bewijs buiten Git: `../design-preview/varlaks/live-landing.png`.
+- Mobiele DOM-/maatcontrole geslaagd op 388px en 468px inhoudsbreedte; mobiele screenshots liepen tegen een Chrome-capturetimeout aan. Desktopopmaak is wel visueel gecontroleerd en vastgelegd. Geen claim van een geslaagde mobiele screenshotcontrole.
