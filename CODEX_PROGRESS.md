@@ -10,7 +10,8 @@ Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 
 - Eigenaar wil geen contact met Knoth; supportconcept uitsluitend bewaard. Geen supportmail of nieuwe testmail verstuurd.
 - Reproductie vond een eigen RFC2047-fout: het Nederlandse verificatieonderwerp bevatte één encoded-word van92 tekens (maximaal75); de headerregel101 (maximaal76 bij encoded-words). De nieuwe From-regel uit PR95 was93 tekens en moet eveneens gevouwen worden. Dit verklaart niet zelfstandig de Spam-uitkomst van de eerdere ASCII-testmail.
-- Headerencoder splitst nu op Unicode-codepuntgrenzen in39 UTF-8-bytes en vouwt met CRLF+spatie; het ongewijzigde mailboxadres staat op een continuation line. Tests dekken NL/EN/DE, lange aanbiedingen, emoji/CJK, exacte terugdecodering en headerinjectie. SMTP- en volledige ledenintegratietests slagen; publicatie volgt.
+- Headerencoder splitst nu op Unicode-codepuntgrenzen in 39 UTF-8-bytes en vouwt met CRLF+spatie; het ongewijzigde mailboxadres staat op een continuation line. Tests dekken NL/EN/DE, lange aanbiedingen, emoji/CJK, exacte terugdecodering en headerinjectie. SMTP- en volledige ledenintegratietests slagen.
+- PR96 gepubliceerd als `2dd048b`: Build251/run41725790173 en Member151/run41725790169 groen, Codex-review zonder bevindingen. Cloudflare leden `a8a2b2e9` Ready41s/100%, site `3b8085d3` Ready1m1s/100%; leden-health HTTP200/status ok. Geen echte verzending na deze correctie; betrouwbare inboxplaatsing blijft open. Het Knoth-concept staat uitsluitend lokaal buiten Git in `../design-preview/student-admin/knoth-mailonderzoek-concept.md`.
 
 ## Echte beheeractie en eenmalige mailcontrole — 22:40 CET
 

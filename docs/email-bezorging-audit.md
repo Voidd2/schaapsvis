@@ -1,6 +1,6 @@
 # E-mailbezorging — audit en vervolgstappen
 
-Gecontroleerd op 28 oktober 2026 aan de hand van DNS en echte Gmail-ontvangsten.
+Bijgewerkt op 3 november 2026 aan de hand van DNS, echte Gmail-ontvangsten en de SMTP-broncode.
 
 ## Nieuwe bezorgcontrole — 3 november 2026, 21:38 UTC
 
@@ -12,7 +12,7 @@ Deze test gebruikt de bestaande mailserver vanaf de lokale machine; hij bewijst 
 
 Bewijs buiten Git: `../design-preview/student-admin/delivery-attempt.json`, `delivery-test.eml`, `mail-spam-proof.png` en `mail-auth-proof.png`. Geen volledige headers, privé-adressen of geheimen in Git.
 
-Vervolg: laat Knoth de uitgaande wachtrij, bounces en gedeelde IP-reputatie onderzoeken met de bestaande afzender en het bovenstaande tijdstip; daarvoor is nog geen supportbericht verstuurd. Een ander lokaal afzenderadres of strengere DMARC-policy is op basis van deze PASS-resultaten geen bewezen oplossing. Een volgende volledige registratie-/inboxtest vraagt nieuwe verzendtoestemming en moet de oorspronkelijke classificatie vastleggen voordat iemand het bericht als Geen spam markeert.
+De eigenaar wil voorlopig alleen intern onderzoek; Knoth is niet benaderd. Een eventueel later serveronderzoek blijft een concept. Een ander lokaal afzenderadres of strengere DMARC-policy is op basis van deze PASS-resultaten geen bewezen oplossing. Een volgende volledige registratie-/inboxtest vraagt nieuwe verzendtoestemming en moet de oorspronkelijke classificatie vastleggen voordat iemand het bericht als Geen spam markeert.
 
 ## Conclusie
 
@@ -28,7 +28,9 @@ De SMTP-test decodeert beide From-headers, controleert één afzender en het ong
 
 Na de opdracht om eerst eigen oorzaken te onderzoeken is de huidige MIME-uitvoer rechtstreeks gemeten. Het werkelijke Nederlandse verificatieonderwerp levert één encoded-word van92 tekens en een Subject-regel van101 tekens. RFC2047 begrenst dit tot respectievelijk75 en76. De herkenbare From-naam uit PR95 geeft een regel van93 tekens en moet eveneens worden gevouwen. Zie [RFC2047 §2](https://www.rfc-editor.org/rfc/rfc2047).
 
-De encoder wordt gecorrigeerd: maximaal39 UTF-8-bytes per woord, alleen splitsen tussen volledige Unicode-codepunten, continuation lines met CRLF+spatie. Ook lange ASCII-onderwerpen worden veilig gecodeerd en gevouwen. Het mailboxadres verhuist naar een continuation line zonder envelope- of authenticatiewijziging. De test decodeert elk woord met een strikte UTF-8-decoder en vergelijkt de volledige tekst, inclusief lange onderwerpen, NL/EN/DE, emoji/CJK en een poging tot headerinjectie.
+De encoder is gecorrigeerd: maximaal 39 UTF-8-bytes per woord, alleen splitsen tussen volledige Unicode-codepunten, continuation lines met CRLF+spatie. Ook lange ASCII-onderwerpen worden veilig gecodeerd en gevouwen. Het mailboxadres verhuist naar een continuation line zonder envelope- of authenticatiewijziging. De test decodeert elk woord met een strikte UTF-8-decoder en vergelijkt de volledige tekst, inclusief lange onderwerpen, NL/EN/DE, emoji/CJK en een poging tot headerinjectie.
+
+PR96 is live als `2dd048b`: Build251 en Member151 geslaagd, Codex-review zonder bevindingen. Cloudflare leden `a8a2b2e9` en site `3b8085d3` beide Ready/100%; de leden-healthroute geeft HTTP200/status ok. Geen nieuwe echte mail verstuurd na deze wijzigingen.
 
 Dit is een aangetoonde interoperabiliteitsfout in onze code. De laatste ontvangen test had een kort ASCII-onderwerp en nog geen displaynaam; deze fout bewijst dus niet de oorzaak van zijn Spam-classificatie. Geen nieuwe mail gestuurd. De eigenaar heeft het supportbericht geweigerd; het concept blijft uitsluitend lokaal buiten Git in `../design-preview/student-admin/knoth-mailonderzoek-concept.md`.
 
@@ -81,6 +83,6 @@ of mailserverwijziging uit te voeren.
 3. Gebruik bij voldoende volume Google Postmaster Tools voor reputatie-inzicht.
 4. Verhoog DMARC pas van `p=none` naar `quarantine` wanneer rapportages aantonen
    dat alle legitieme verzenders structureel SPF- of DKIM-uitlijning halen.
-5. Overweeg later herkenbare afzendernamen (bijvoorbeeld `Schaap's account` en
-   `Schaap's aanbiedingen`); een ander lokaal adres is vooral voor herkenning,
-   niet als technische spamoplossing.
+5. De herkenbare afzendernamen zijn inmiddels ingevoerd; controleer bij een
+   volgende toegestane echte ontvangst de weergave. Een ander lokaal adres
+   blijft vooral voor herkenning, niet als bewezen technische spamoplossing.
