@@ -216,6 +216,8 @@
     "formTitle": "Send a message",
     "nameLabel": "Name",
     "emailLabel": "Email address",
+    "phoneLabel": "Phone number",
+    "replyRequired": "Enter a valid email address or phone number so we can reply.",
     "messageLabel": "Message",
     "send": "Send message",
     "infoTitle": "Contact details",

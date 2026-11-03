@@ -90,7 +90,7 @@ export function Kop({
   );
 }
 
-/** Vraag-en-antwoordlijst. Ook los bruikbaar, altijd samen met vraagSchema(). */
+/** Vraag-en-antwoordlijst. Ook los bruikbaar; geen rich-resultbelofte. */
 export function Vragen({
   vragen,
   donker = false,

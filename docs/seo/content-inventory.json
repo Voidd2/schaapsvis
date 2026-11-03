@@ -1,0 +1,1209 @@
+{
+  "recipes": [
+    {
+      "slug": "haringsalade-appel-biet",
+      "title": "Haringsalade met appel en biet",
+      "product": "haring",
+      "otherProducts": [],
+      "photo": null,
+      "portions": 4,
+      "time": "15 min",
+      "ingredients": 7,
+      "steps": 4,
+      "modified": "2026-11-03"
+    },
+    {
+      "slug": "haring-komkommer-borrelhapjes",
+      "title": "Haring-komkommerhapjes",
+      "product": "haring",
+      "otherProducts": [],
+      "photo": null,
+      "portions": 4,
+      "time": "15 min",
+      "ingredients": 7,
+      "steps": 4,
+      "modified": "2026-11-03"
+    },
+    {
+      "slug": "makreel-aardappel-ovenschotel",
+      "title": "Ovenschotel met makreel en prei",
+      "product": null,
+      "otherProducts": [],
+      "photo": null,
+      "portions": 4,
+      "time": "45 min",
+      "ingredients": 8,
+      "steps": 5,
+      "modified": "2026-11-03"
+    },
+    {
+      "slug": "zomerse-zalmsalade",
+      "title": "Zomerse zalmsalade",
+      "product": "gerookte-zalm-high-seas",
+      "otherProducts": [
+        "gerookte-zalm-snippers",
+        "gerookte-wilde-zalm"
+      ],
+      "photo": "/images/recepten/zomerse-zalmsalade.webp",
+      "portions": 4,
+      "time": "15 min",
+      "ingredients": 10,
+      "steps": 5,
+      "modified": null
+    },
+    {
+      "slug": "zalm-citroen-dille",
+      "title": "Zalm in de oven met citroen en dille",
+      "product": "varlaks-zalm",
+      "otherProducts": [],
+      "photo": "/images/recepten/zalm-citroen-dille.webp",
+      "portions": 4,
+      "time": "20 min",
+      "ingredients": 6,
+      "steps": 5,
+      "modified": null
+    },
+    {
+      "slug": "kibbeling-bakken",
+      "title": "Kibbeling thuis bakken",
+      "product": "kibbeling",
+      "otherProducts": [],
+      "photo": "/images/recepten/kibbeling-bakken.webp",
+      "portions": 4,
+      "time": "40 min",
+      "ingredients": 8,
+      "steps": 6,
+      "modified": null
+    },
+    {
+      "slug": "gravlaks",
+      "title": "Gravlaks van Varlaks zalm",
+      "product": "varlaks-zalm",
+      "otherProducts": [],
+      "photo": "/images/recepten/gravlaks.webp",
+      "portions": 6,
+      "time": "48 uur (+ 25 min bereiding)",
+      "ingredients": 11,
+      "steps": 7,
+      "modified": null
+    },
+    {
+      "slug": "romige-vissoep",
+      "title": "Romige vissoep",
+      "product": "kabeljauwfilet",
+      "otherProducts": [],
+      "photo": "/images/recepten/romige-vissoep.webp",
+      "portions": 4,
+      "time": "45 min",
+      "ingredients": 12,
+      "steps": 6,
+      "modified": null
+    },
+    {
+      "slug": "gegrilde-schol",
+      "title": "Gebakken scholfilet met groene kruiden",
+      "product": "scholfilet",
+      "otherProducts": [],
+      "photo": "/images/recepten/gegrilde-schol.webp",
+      "portions": 4,
+      "time": "20 min",
+      "ingredients": 7,
+      "steps": 5,
+      "modified": null
+    },
+    {
+      "slug": "kabeljauw-zeekraal-venkel",
+      "title": "Kabeljauw met zeekraal en venkel",
+      "product": "kabeljauwfilet",
+      "otherProducts": [],
+      "photo": "/images/recepten/kabeljauw-zeekraal-venkel.webp",
+      "portions": 4,
+      "time": "30 min",
+      "ingredients": 5,
+      "steps": 5,
+      "modified": null
+    },
+    {
+      "slug": "garnalensalade-pompoen",
+      "title": "Hollandse garnalensalade met geroosterde pompoen",
+      "product": "hollandse-garnalen",
+      "otherProducts": [],
+      "photo": "/images/recepten/garnalensalade-pompoen.webp",
+      "portions": 4,
+      "time": "40 min",
+      "ingredients": 10,
+      "steps": 5,
+      "modified": null
+    },
+    {
+      "slug": "gebakken-schol-tomaat-olijven",
+      "title": "Gebakken schol met tomaat en olijven",
+      "product": "scholfilet",
+      "otherProducts": [],
+      "photo": "/images/recepten/gebakken-schol-tomaat-olijven.webp",
+      "portions": 4,
+      "time": "25 min",
+      "ingredients": 10,
+      "steps": 4,
+      "modified": null
+    },
+    {
+      "slug": "roggebrood-paling-appelsalsa",
+      "title": "Roggebrood met paling en appelsalsa",
+      "product": null,
+      "otherProducts": [],
+      "photo": "/images/recepten/roggebrood-paling-appelsalsa-v2.webp",
+      "portions": 4,
+      "time": "10 min",
+      "ingredients": 7,
+      "steps": 4,
+      "modified": null
+    },
+    {
+      "slug": "krabsalade-avocado",
+      "title": "Surimisalade met avocado",
+      "product": null,
+      "otherProducts": [],
+      "photo": "/images/recepten/krabsalade-avocado.webp",
+      "portions": 4,
+      "time": "20 min",
+      "ingredients": 11,
+      "steps": 4,
+      "modified": null
+    },
+    {
+      "slug": "witlof-garnalen-oesterzwam",
+      "title": "Witlof-oesterzwamsalade met Hollandse garnalen",
+      "product": "hollandse-garnalen",
+      "otherProducts": [],
+      "photo": "/images/recepten/witlof-garnalen-oesterzwam.webp",
+      "portions": 4,
+      "time": "20 min",
+      "ingredients": 11,
+      "steps": 5,
+      "modified": null
+    },
+    {
+      "slug": "pasta-gerookte-zalm-roomsaus",
+      "title": "Pasta met gerookte zalm en roomsaus",
+      "product": "gerookte-zalm-high-seas",
+      "otherProducts": [
+        "gerookte-zalm-snippers",
+        "gerookte-wilde-zalm"
+      ],
+      "photo": "/images/recepten/pasta-gerookte-zalm-roomsaus.webp",
+      "portions": 4,
+      "time": "20 min",
+      "ingredients": 9,
+      "steps": 6,
+      "modified": null
+    },
+    {
+      "slug": "gebakken-kabeljauw-botersaus",
+      "title": "Gebakken kabeljauw met citroen-botersaus",
+      "product": "kabeljauwfilet",
+      "otherProducts": [],
+      "photo": "/images/recepten/gebakken-kabeljauw-botersaus-v2.webp",
+      "portions": 4,
+      "time": "30 min",
+      "ingredients": 9,
+      "steps": 5,
+      "modified": null
+    },
+    {
+      "slug": "gebakken-wijting-citroen",
+      "title": "Gebakken wijting met citroen en peterselie",
+      "product": "wijtingfilet",
+      "otherProducts": [],
+      "photo": "/images/recepten/gebakken-wijting-citroen.webp",
+      "portions": 4,
+      "time": "30 min",
+      "ingredients": 8,
+      "steps": 5,
+      "modified": null
+    },
+    {
+      "slug": "tonijnsteak-grillen-sesam",
+      "title": "Gegrilde tonijnsteak met sesam en sojadip",
+      "product": "tonijnfilet",
+      "otherProducts": [],
+      "photo": "/images/recepten/tonijnsteak-grillen-sesam.webp",
+      "portions": 4,
+      "time": "25 min",
+      "ingredients": 9,
+      "steps": 5,
+      "modified": null
+    },
+    {
+      "slug": "gestoomde-makreel-puree",
+      "title": "Gestoomde makreel met aardappelpuree en spinazie",
+      "product": null,
+      "otherProducts": [],
+      "photo": "/images/recepten/gestoomde-makreel-puree.webp",
+      "portions": 4,
+      "time": "30 min",
+      "ingredients": 9,
+      "steps": 5,
+      "modified": null
+    },
+    {
+      "slug": "snelle-viscurry-kabeljauw",
+      "title": "Snelle viscurry met kabeljauw",
+      "product": "kabeljauwfilet",
+      "otherProducts": [],
+      "photo": "/images/recepten/snelle-viscurry-kabeljauw.webp",
+      "portions": 4,
+      "time": "25 min",
+      "ingredients": 10,
+      "steps": 6,
+      "modified": null
+    },
+    {
+      "slug": "poke-bowl-verse-zalm",
+      "title": "Poké bowl met verse zalm",
+      "product": "varlaks-zalm",
+      "otherProducts": [],
+      "photo": "/images/recepten/poke-bowl-verse-zalm.webp",
+      "portions": 2,
+      "time": "35 min",
+      "ingredients": 8,
+      "steps": 5,
+      "modified": null
+    },
+    {
+      "slug": "teriyaki-zalm-rijst",
+      "title": "Teriyaki-zalm met rijst en broccoli",
+      "product": "varlaks-zalm",
+      "otherProducts": [],
+      "photo": "/images/recepten/teriyaki-zalm-rijst.webp",
+      "portions": 4,
+      "time": "20 min",
+      "ingredients": 8,
+      "steps": 5,
+      "modified": null
+    },
+    {
+      "slug": "pasta-verse-tonijn-tomaat",
+      "title": "Pasta met verse tonijn, tomaat en olijven",
+      "product": "tonijnfilet",
+      "otherProducts": [],
+      "photo": "/images/recepten/pasta-verse-tonijn-tomaat.webp",
+      "portions": 4,
+      "time": "25 min",
+      "ingredients": 9,
+      "steps": 5,
+      "modified": null
+    },
+    {
+      "slug": "broodje-haring-uitjes",
+      "title": "Broodje Hollandse Nieuwe met uitjes",
+      "product": "haring",
+      "otherProducts": [
+        "broodje-haring"
+      ],
+      "photo": "/images/recepten/broodje-haring-uitjes.webp",
+      "portions": 4,
+      "time": "5 min",
+      "ingredients": 4,
+      "steps": 4,
+      "modified": null
+    },
+    {
+      "slug": "kibbeling-ravigotesaus-salade",
+      "title": "Kibbeling met zelfgemaakte ravigotesaus en frisse salade",
+      "product": "kibbeling",
+      "otherProducts": [],
+      "photo": "/images/recepten/kibbeling-ravigotesaus-salade.webp",
+      "portions": 4,
+      "time": "15 min",
+      "ingredients": 10,
+      "steps": 4,
+      "modified": null
+    },
+    {
+      "slug": "lekkerbek-koolsalade",
+      "title": "Lekkerbek met frisse koolsalade en remoulade",
+      "product": "lekkerbek",
+      "otherProducts": [],
+      "photo": "/images/recepten/lekkerbek-koolsalade.webp",
+      "portions": 4,
+      "time": "30 min",
+      "ingredients": 10,
+      "steps": 6,
+      "modified": null
+    },
+    {
+      "slug": "vissoep-rouille-croutons",
+      "title": "Rijke vissoep met rouille en croutons",
+      "product": "vissoep",
+      "otherProducts": [],
+      "photo": "/images/recepten/vissoep-rouille-croutons.webp",
+      "portions": 4,
+      "time": "15 min",
+      "ingredients": 7,
+      "steps": 5,
+      "modified": null
+    },
+    {
+      "slug": "hollandse-garnalencocktail",
+      "title": "Hollandse garnalencocktail",
+      "product": "hollandse-garnalen",
+      "otherProducts": [],
+      "photo": "/images/recepten/hollandse-garnalencocktail.webp",
+      "portions": 4,
+      "time": "15 min",
+      "ingredients": 7,
+      "steps": 5,
+      "modified": null
+    },
+    {
+      "slug": "toast-gerookte-paling",
+      "title": "Toast met gerookte paling en mierikswortelcrème",
+      "product": null,
+      "otherProducts": [],
+      "photo": "/images/recepten/toast-gerookte-paling-v2.webp",
+      "portions": 4,
+      "time": "10 min",
+      "ingredients": 7,
+      "steps": 4,
+      "modified": null
+    },
+    {
+      "slug": "kabeljauw-oven-tomaat-olijven",
+      "title": "Kabeljauw uit de oven met tomaat en olijven",
+      "product": "kabeljauwfilet",
+      "otherProducts": [],
+      "photo": "/images/recepten/kabeljauw-oven-tomaat-olijven-v2.webp",
+      "portions": 4,
+      "time": "40 min",
+      "ingredients": 9,
+      "steps": 6,
+      "modified": null
+    },
+    {
+      "slug": "vispakketje-oven-groenten",
+      "title": "Vispakketje uit de oven met groenten",
+      "product": "kabeljauwfilet",
+      "otherProducts": [
+        "scholfilet",
+        "zeebaarsfilet",
+        "dorade-filet",
+        "tarbotfilet",
+        "wijtingfilet",
+        "tilapiafilet",
+        "victoriabaars",
+        "wilde-zalmfilet",
+        "heilbotfilet"
+      ],
+      "photo": "/images/recepten/vispakketje-oven-groenten.webp",
+      "portions": 4,
+      "time": "40 min",
+      "ingredients": 8,
+      "steps": 7,
+      "modified": null
+    },
+    {
+      "slug": "zalm-traybake-groenten",
+      "title": "Zalm-traybake met geroosterde groenten",
+      "product": "varlaks-zalm",
+      "otherProducts": [],
+      "photo": "/images/recepten/zalm-traybake-groenten-v2.webp",
+      "portions": 4,
+      "time": "50 min",
+      "ingredients": 10,
+      "steps": 6,
+      "modified": null
+    },
+    {
+      "slug": "makreelsalade-brood",
+      "title": "Huisgemaakte makreelsalade voor op brood",
+      "product": null,
+      "otherProducts": [],
+      "photo": "/images/recepten/makreelsalade-brood.webp",
+      "portions": 4,
+      "time": "10 min",
+      "ingredients": 8,
+      "steps": 4,
+      "modified": null
+    },
+    {
+      "slug": "viskoekjes-wijting",
+      "title": "Viskoekjes van wijting met citroenmayo",
+      "product": "wijtingfilet",
+      "otherProducts": [],
+      "photo": "/images/recepten/viskoekjes-wijting.webp",
+      "portions": 4,
+      "time": "50 min",
+      "ingredients": 10,
+      "steps": 7,
+      "modified": null
+    },
+    {
+      "slug": "oesters-sjalottenazijn",
+      "title": "Oesters klassiek met sjalottenazijn",
+      "product": "fine-de-claire-oesters",
+      "otherProducts": [
+        "creuse-oesters"
+      ],
+      "photo": "/images/recepten/oesters-sjalottenazijn.webp",
+      "portions": 4,
+      "time": "15 min",
+      "ingredients": 8,
+      "steps": 5,
+      "modified": null
+    },
+    {
+      "slug": "gerookte-zalm-rolletjes-roomkaas",
+      "title": "Gerookte zalmrolletjes met roomkaas en dille",
+      "product": "gerookte-zalm-high-seas",
+      "otherProducts": [
+        "gerookte-zalm-snippers",
+        "gerookte-wilde-zalm"
+      ],
+      "photo": "/images/recepten/gerookte-zalm-rolletjes-roomkaas.webp",
+      "portions": 4,
+      "time": "45 min",
+      "ingredients": 9,
+      "steps": 6,
+      "modified": null
+    },
+    {
+      "slug": "tonijntartaar-avocado",
+      "title": "Tonijntartaar met avocado en sesam",
+      "product": "tonijnfilet",
+      "otherProducts": [],
+      "photo": "/images/recepten/tonijntartaar-avocado.webp",
+      "portions": 4,
+      "time": "20 min",
+      "ingredients": 8,
+      "steps": 5,
+      "modified": null
+    },
+    {
+      "slug": "toast-hollandse-garnalen-avocado",
+      "title": "Toast met Hollandse garnalen en avocado",
+      "product": "hollandse-garnalen",
+      "otherProducts": [],
+      "photo": "/images/recepten/toast-hollandse-garnalen-avocado.webp",
+      "portions": 4,
+      "time": "15 min",
+      "ingredients": 9,
+      "steps": 5,
+      "modified": null
+    },
+    {
+      "slug": "garnalensalade",
+      "title": "Zelfgemaakte garnalensalade met citroen en bieslook",
+      "product": "hollandse-garnalen",
+      "otherProducts": [],
+      "photo": "/images/recepten/garnalensalade.webp",
+      "portions": 4,
+      "time": "15 min",
+      "ingredients": 8,
+      "steps": 4,
+      "modified": null
+    }
+  ],
+  "products": [
+    {
+      "slug": "kabeljauwfilet",
+      "name": "Kabeljauwfilet",
+      "recipes": [
+        "romige-vissoep",
+        "kabeljauw-zeekraal-venkel",
+        "gebakken-kabeljauw-botersaus",
+        "snelle-viscurry-kabeljauw",
+        "kabeljauw-oven-tomaat-olijven",
+        "vispakketje-oven-groenten"
+      ]
+    },
+    {
+      "slug": "schol",
+      "name": "Schol",
+      "recipes": []
+    },
+    {
+      "slug": "scholfilet",
+      "name": "Scholfilet",
+      "recipes": [
+        "gegrilde-schol",
+        "gebakken-schol-tomaat-olijven",
+        "vispakketje-oven-groenten"
+      ]
+    },
+    {
+      "slug": "zeebaars",
+      "name": "Zeebaars",
+      "recipes": []
+    },
+    {
+      "slug": "zeebaarsfilet",
+      "name": "Zeebaarsfilet",
+      "recipes": [
+        "vispakketje-oven-groenten"
+      ]
+    },
+    {
+      "slug": "dorade",
+      "name": "Dorade",
+      "recipes": []
+    },
+    {
+      "slug": "dorade-filet",
+      "name": "Dorade Filet",
+      "recipes": [
+        "vispakketje-oven-groenten"
+      ]
+    },
+    {
+      "slug": "tarbot",
+      "name": "Tarbot",
+      "recipes": []
+    },
+    {
+      "slug": "tarbotfilet",
+      "name": "Tarbotfilet",
+      "recipes": [
+        "vispakketje-oven-groenten"
+      ]
+    },
+    {
+      "slug": "wijting",
+      "name": "Wijting",
+      "recipes": []
+    },
+    {
+      "slug": "wijtingfilet",
+      "name": "Wijtingfilet",
+      "recipes": [
+        "gebakken-wijting-citroen",
+        "vispakketje-oven-groenten",
+        "viskoekjes-wijting"
+      ]
+    },
+    {
+      "slug": "rode-poon",
+      "name": "Rode Poon",
+      "recipes": []
+    },
+    {
+      "slug": "schar",
+      "name": "Schar",
+      "recipes": []
+    },
+    {
+      "slug": "roodbaars",
+      "name": "Roodbaars",
+      "recipes": []
+    },
+    {
+      "slug": "haring",
+      "name": "Haring",
+      "recipes": [
+        "haringsalade-appel-biet",
+        "haring-komkommer-borrelhapjes",
+        "broodje-haring-uitjes"
+      ]
+    },
+    {
+      "slug": "varlaks-zalm",
+      "name": "Verse Zalm — VÅRLAKS",
+      "recipes": [
+        "zalm-citroen-dille",
+        "gravlaks",
+        "poke-bowl-verse-zalm",
+        "teriyaki-zalm-rijst",
+        "zalm-traybake-groenten"
+      ]
+    },
+    {
+      "slug": "tonijnfilet",
+      "name": "Tonijnfilet",
+      "recipes": [
+        "tonijnsteak-grillen-sesam",
+        "pasta-verse-tonijn-tomaat",
+        "tonijntartaar-avocado"
+      ]
+    },
+    {
+      "slug": "gerookte-zalm-high-seas",
+      "name": "Gerookte Zalm — High Seas",
+      "recipes": [
+        "zomerse-zalmsalade",
+        "pasta-gerookte-zalm-roomsaus",
+        "gerookte-zalm-rolletjes-roomkaas"
+      ]
+    },
+    {
+      "slug": "gerookte-wilde-zalm",
+      "name": "Gerookte Wilde Zalm",
+      "recipes": [
+        "zomerse-zalmsalade",
+        "pasta-gerookte-zalm-roomsaus",
+        "gerookte-zalm-rolletjes-roomkaas"
+      ]
+    },
+    {
+      "slug": "gravad-lax",
+      "name": "Gravad Lax",
+      "recipes": []
+    },
+    {
+      "slug": "gerookte-bokking",
+      "name": "Gerookte Bokking",
+      "recipes": []
+    },
+    {
+      "slug": "gerookte-forelfilet",
+      "name": "Gerookte Forelfilet",
+      "recipes": []
+    },
+    {
+      "slug": "gerookte-heilbot",
+      "name": "Gerookte Heilbotfilet",
+      "recipes": []
+    },
+    {
+      "slug": "gerookte-kipper",
+      "name": "Gerookte Kipper",
+      "recipes": []
+    },
+    {
+      "slug": "bosje-sprot",
+      "name": "Bosje Sprot",
+      "recipes": []
+    },
+    {
+      "slug": "hollandse-garnalen",
+      "name": "Hollandse Garnalen — SOLT",
+      "recipes": [
+        "garnalensalade-pompoen",
+        "witlof-garnalen-oesterzwam",
+        "hollandse-garnalencocktail",
+        "toast-hollandse-garnalen-avocado",
+        "garnalensalade"
+      ]
+    },
+    {
+      "slug": "noorse-garnalen",
+      "name": "Noorse Garnalen",
+      "recipes": []
+    },
+    {
+      "slug": "gekookte-gambas",
+      "name": "Gekookte Gamba's (Crevettes)",
+      "recipes": []
+    },
+    {
+      "slug": "zeeuwse-mosselen",
+      "name": "Zeeuwse Mosselen",
+      "recipes": []
+    },
+    {
+      "slug": "creuse-oesters",
+      "name": "Creuse Oesters",
+      "recipes": [
+        "oesters-sjalottenazijn"
+      ]
+    },
+    {
+      "slug": "kokkels",
+      "name": "Kokkels",
+      "recipes": []
+    },
+    {
+      "slug": "coquilles",
+      "name": "Coquilles",
+      "recipes": []
+    },
+    {
+      "slug": "inktvis",
+      "name": "Inktvis",
+      "recipes": []
+    },
+    {
+      "slug": "scheermessen",
+      "name": "Scheermessen",
+      "recipes": []
+    },
+    {
+      "slug": "zalmsalade",
+      "name": "Zalmsalade",
+      "recipes": []
+    },
+    {
+      "slug": "krabsalade",
+      "name": "Krabsalade",
+      "recipes": []
+    },
+    {
+      "slug": "tonijnsalade",
+      "name": "Tonijnsalade",
+      "recipes": []
+    },
+    {
+      "slug": "zeewiersalade",
+      "name": "Zeewiersalade (Wakame)",
+      "recipes": []
+    },
+    {
+      "slug": "kibbeling",
+      "name": "Kibbeling",
+      "recipes": [
+        "kibbeling-bakken",
+        "kibbeling-ravigotesaus-salade"
+      ]
+    },
+    {
+      "slug": "lekkerbek",
+      "name": "Lekkerbek",
+      "recipes": [
+        "lekkerbek-koolsalade"
+      ]
+    },
+    {
+      "slug": "broodje-haring",
+      "name": "Broodje Haring",
+      "recipes": [
+        "broodje-haring-uitjes"
+      ]
+    },
+    {
+      "slug": "vissoep",
+      "name": "Vissoep",
+      "recipes": [
+        "vissoep-rouille-croutons"
+      ]
+    },
+    {
+      "slug": "vispotje",
+      "name": "Vispotje",
+      "recipes": []
+    },
+    {
+      "slug": "gerookte-zalm-snippers",
+      "name": "Gerookte Zalm Snippers",
+      "recipes": [
+        "zomerse-zalmsalade",
+        "pasta-gerookte-zalm-roomsaus",
+        "gerookte-zalm-rolletjes-roomkaas"
+      ]
+    },
+    {
+      "slug": "fine-de-claire-oesters",
+      "name": "Fine de Claire Oesters",
+      "recipes": [
+        "oesters-sjalottenazijn"
+      ]
+    },
+    {
+      "slug": "surimisalade",
+      "name": "Surimisalade",
+      "recipes": []
+    },
+    {
+      "slug": "garnalenkroketten",
+      "name": "Garnalenkroketten",
+      "recipes": []
+    },
+    {
+      "slug": "calamares",
+      "name": "Calamares (Inktvisringen)",
+      "recipes": []
+    },
+    {
+      "slug": "verse-heilbot",
+      "name": "Verse Heilbot",
+      "recipes": []
+    },
+    {
+      "slug": "hele-kreeft",
+      "name": "Levende Kreeft",
+      "recipes": []
+    },
+    {
+      "slug": "gerookte-forel-heel",
+      "name": "Gerookte Forel (heel)",
+      "recipes": []
+    },
+    {
+      "slug": "bot",
+      "name": "Bot",
+      "recipes": []
+    },
+    {
+      "slug": "sardines",
+      "name": "Verse Sardines",
+      "recipes": []
+    },
+    {
+      "slug": "ansjovis",
+      "name": "Verse Ansjovis",
+      "recipes": []
+    },
+    {
+      "slug": "tilapiafilet",
+      "name": "Tilapiafilet",
+      "recipes": [
+        "vispakketje-oven-groenten"
+      ]
+    },
+    {
+      "slug": "victoriabaars",
+      "name": "Victoriabaarsfilet",
+      "recipes": [
+        "vispakketje-oven-groenten"
+      ]
+    },
+    {
+      "slug": "gerookte-zalmmoot",
+      "name": "Warm Gerookte Zalmmoot",
+      "recipes": []
+    },
+    {
+      "slug": "gerookte-sprotfilet",
+      "name": "Gerookte Sprotfilet",
+      "recipes": []
+    },
+    {
+      "slug": "gamba-spiesen",
+      "name": "Gambaspiesen",
+      "recipes": []
+    },
+    {
+      "slug": "gamba-tempura",
+      "name": "Gamba Tempura",
+      "recipes": []
+    },
+    {
+      "slug": "gebakken-mosselen",
+      "name": "Gebakken Mosselen",
+      "recipes": []
+    },
+    {
+      "slug": "wilde-zalmfilet",
+      "name": "Wilde Zalmfilet — ongerookt",
+      "recipes": [
+        "vispakketje-oven-groenten"
+      ]
+    },
+    {
+      "slug": "heilbotfilet",
+      "name": "Heilbotfilet",
+      "recipes": [
+        "vispakketje-oven-groenten"
+      ]
+    },
+    {
+      "slug": "gamba-kroketten",
+      "name": "Gambakroketten",
+      "recipes": []
+    },
+    {
+      "slug": "blacktiger-garnalen",
+      "name": "Black Tiger Garnalen",
+      "recipes": []
+    },
+    {
+      "slug": "gebakken-ansjovis",
+      "name": "Gebakken Ansjovis",
+      "recipes": []
+    },
+    {
+      "slug": "zeekraal",
+      "name": "Verse Zeekraal",
+      "recipes": []
+    }
+  ],
+  "festive": [
+    {
+      "slug": "zalmslaatje-de-luxe",
+      "priceCents": 1599,
+      "image": "/images/dirks/zalmslaatje-de-luxe.webp",
+      "category": "delicatessen"
+    },
+    {
+      "slug": "visschotel-klein-2-3-pers",
+      "priceCents": 5950,
+      "image": "/images/dirks/visschotel-klein-2-3-pers.webp",
+      "category": "visschalen"
+    },
+    {
+      "slug": "visschotel-klein-3-5-pers",
+      "priceCents": 7350,
+      "image": "/images/dirks/visschotel-klein-3-5-pers.webp",
+      "category": "visschalen"
+    },
+    {
+      "slug": "visschotel-middel-5-8-pers",
+      "priceCents": 9850,
+      "image": "/images/dirks/visschotel-middel-5-8-pers.webp",
+      "category": "visschalen"
+    },
+    {
+      "slug": "visschotel-groot-8-10-pers",
+      "priceCents": 11550,
+      "image": "/images/dirks/visschotel-groot-8-10-pers.webp",
+      "category": "visschalen"
+    },
+    {
+      "slug": "visschotel-luxe-2-3-pers",
+      "priceCents": 6950,
+      "image": "/images/dirks/visschotel-luxe-2-3-pers.webp",
+      "category": "visschalen"
+    },
+    {
+      "slug": "visschotel-luxe-3-5-pers",
+      "priceCents": 8450,
+      "image": "/images/dirks/visschotel-luxe-3-5-pers.webp",
+      "category": "visschalen"
+    },
+    {
+      "slug": "visschotel-luxe-5-8-pers",
+      "priceCents": 10950,
+      "image": "/images/dirks/visschotel-luxe-5-8-pers.webp",
+      "category": "visschalen"
+    },
+    {
+      "slug": "visschotel-luxe-8-10-pers",
+      "priceCents": 12550,
+      "image": "/images/dirks/visschotel-luxe-8-10-pers.webp",
+      "category": "visschalen"
+    },
+    {
+      "slug": "visschotel-luxe-10-14-pers",
+      "priceCents": 16000,
+      "image": "/images/dirks/visschotel-luxe-10-14-pers.webp",
+      "category": "visschalen"
+    },
+    {
+      "slug": "visschotel-hapjes-2-3-pers",
+      "priceCents": 5350,
+      "image": "/images/dirks/visschotel-hapjes-2-3-pers.webp",
+      "category": "visschalen"
+    },
+    {
+      "slug": "visschotel-hapjes-3-5-pers",
+      "priceCents": 6750,
+      "image": "/images/dirks/visschotel-hapjes-3-5-pers.webp",
+      "category": "visschalen"
+    },
+    {
+      "slug": "visschotel-hapjes-6-10-pers",
+      "priceCents": 8550,
+      "image": "/images/dirks/visschotel-hapjes-6-10-pers.webp",
+      "category": "visschalen"
+    },
+    {
+      "slug": "gourmet-trio-1-persoon",
+      "priceCents": 1899,
+      "image": "/images/dirks/gourmet-trio-1-persoon.webp",
+      "category": "gourmet"
+    },
+    {
+      "slug": "gourmet-schotel-3-4-pers",
+      "priceCents": 5899,
+      "image": "/images/dirks/gourmet-schotel-3-4-pers.webp",
+      "category": "gourmet"
+    },
+    {
+      "slug": "gourmetschotel-5-6-pers",
+      "priceCents": 7699,
+      "image": "/images/dirks/gourmetschotel-5-6-pers.webp",
+      "category": "gourmet"
+    },
+    {
+      "slug": "zalmsashimi",
+      "priceCents": 999,
+      "image": "/images/dirks/zalmsashimi.webp",
+      "category": "delicatessen"
+    },
+    {
+      "slug": "gegrilde-tonijn",
+      "priceCents": 999,
+      "image": "/images/dirks/gegrilde-tonijn.webp",
+      "category": "delicatessen"
+    },
+    {
+      "slug": "zalm-sashimi-ongesneden",
+      "priceCents": 650,
+      "image": "/images/dirks/zalm-sashimi-ongesneden.webp",
+      "category": "delicatessen"
+    },
+    {
+      "slug": "tonijn-sashimi-ongesneden",
+      "priceCents": 949,
+      "image": "/images/dirks/tonijn-sashimi-ongesneden.webp",
+      "category": "delicatessen"
+    },
+    {
+      "slug": "luxe-trio-klein",
+      "priceCents": 1599,
+      "image": "/images/dirks/luxe-trio-klein.webp",
+      "category": "delicatessen"
+    },
+    {
+      "slug": "luxe-vistrio",
+      "priceCents": 3199,
+      "image": "/images/dirks/luxe-vistrio.webp",
+      "category": "delicatessen"
+    },
+    {
+      "slug": "salade-trio",
+      "priceCents": 1199,
+      "image": "/images/dirks/salade-trio.webp",
+      "category": "delicatessen"
+    }
+  ],
+  "blogs": [
+    {
+      "slug": "visgeschenk-geven-koelen-en-afhalen",
+      "title": "Een visgeschenk geven: van afhalen tot koelkast",
+      "published": "2026-11-03",
+      "modified": null,
+      "recipes": []
+    },
+    {
+      "slug": "kibbeling-voorschoten-vrijdag",
+      "title": "Kibbeling in Voorschoten: zo maakt u er een maaltijd van",
+      "published": "2026-09-28",
+      "modified": null,
+      "recipes": [
+        "kibbeling-ravigotesaus-salade",
+        "lekkerbek-koolsalade"
+      ]
+    },
+    {
+      "slug": "vis-avondeten-voorschoten",
+      "title": "Vis voor het avondeten in Voorschoten: drie ideeën",
+      "published": "2026-09-28",
+      "modified": null,
+      "recipes": [
+        "vispakketje-oven-groenten",
+        "zalm-citroen-dille",
+        "gebakken-kabeljauw-botersaus"
+      ]
+    },
+    {
+      "slug": "visschaal-borrel-voorschoten",
+      "title": "Een visschaal voor uw borrel in Voorschoten kiezen",
+      "published": "2026-09-28",
+      "modified": null,
+      "recipes": []
+    },
+    {
+      "slug": "zalm-bakken-pan-of-oven",
+      "title": "Zalm bakken: kiest u de pan of de oven?",
+      "published": "2026-09-28",
+      "modified": null,
+      "recipes": [
+        "zalm-citroen-dille",
+        "teriyaki-zalm-rijst",
+        "pasta-gerookte-zalm-roomsaus"
+      ]
+    },
+    {
+      "slug": "hoeveel-vis-per-persoon",
+      "title": "Hoeveel vis per persoon? Zo kiest u uw porties",
+      "published": "2026-09-28",
+      "modified": null,
+      "recipes": [
+        "gebakken-kabeljauw-botersaus",
+        "zalm-citroen-dille"
+      ]
+    },
+    {
+      "slug": "viskalender-welke-vis-in-welk-seizoen",
+      "title": "De viskalender: welke vis is wanneer het lekkerst?",
+      "published": "2026-06-01",
+      "modified": null,
+      "recipes": []
+    },
+    {
+      "slug": "hollandse-nieuwe-waarom-juni-haring-anders-smaakt",
+      "title": "Hollandse Nieuwe: waarom juni-haring anders smaakt",
+      "published": "2026-06-08",
+      "modified": "2026-09-29",
+      "recipes": []
+    },
+    {
+      "slug": "sinds-1938-de-geschiedenis-van-schaaps-vis",
+      "title": "Sinds 1938: generaties vis op de Herenstraat",
+      "published": "2026-05-15",
+      "modified": "2026-11-03",
+      "recipes": []
+    },
+    {
+      "slug": "wilde-zalm-vs-kweekzalm-waarom-wij-varlaks-kiezen",
+      "title": "Wilde zalm of kweekzalm? Begin bij de herkomst",
+      "published": "2026-04-20",
+      "modified": "2026-09-29",
+      "recipes": [
+        "zalm-citroen-dille"
+      ]
+    },
+    {
+      "slug": "waarom-staat-makreel-op-rood",
+      "title": "Waarom staat makreel op rood? Een eerlijk verhaal",
+      "published": "2026-03-10",
+      "modified": "2026-09-29",
+      "recipes": []
+    },
+    {
+      "slug": "kibbeling-vs-lekkerbek-het-verschil",
+      "title": "Kibbeling vs. lekkerbek: wat is eigenlijk het verschil?",
+      "published": "2026-02-14",
+      "modified": "2026-09-29",
+      "recipes": []
+    },
+    {
+      "slug": "de-echte-hollandse-garnaal",
+      "title": "De échte Hollandse garnaal is klein, grijs en geweldig",
+      "published": "2026-01-20",
+      "modified": "2026-09-29",
+      "recipes": []
+    },
+    {
+      "slug": "marktdag-in-leiden-achter-de-kraam",
+      "title": "Marktdag in Leiden: een kijkje achter de kraam",
+      "published": "2026-05-02",
+      "modified": "2026-09-29",
+      "recipes": []
+    },
+    {
+      "slug": "waar-koop-je-biologische-vis-in-leiden",
+      "title": "Biologische vis in Leiden: waar let u op?",
+      "published": "2026-06-15",
+      "modified": "2026-09-28",
+      "recipes": []
+    },
+    {
+      "slug": "wat-betekenen-msc-asc-en-het-eu-bio-logo",
+      "title": "BIO, ASC en MSC: wat betekenen de viskeurmerken?",
+      "published": "2026-06-10",
+      "modified": "2026-09-28",
+      "recipes": []
+    },
+    {
+      "slug": "is-biologische-zalm-gezonder-omega-3",
+      "title": "Biologische zalm en omega-3: wat vertelt een keurmerk?",
+      "published": "2026-06-12",
+      "modified": "2026-09-28",
+      "recipes": []
+    },
+    {
+      "slug": "verse-vis-bewaren-en-bereiden-tips",
+      "title": "Verse vis bewaren en bereiden: de tips van de visboer",
+      "published": "2026-06-14",
+      "modified": "2026-09-29",
+      "recipes": []
+    },
+    {
+      "slug": "echt-gerookte-vis-vs-kunstmatige-rooksmaak",
+      "title": "Gerookte vis en rookaroma: wat is het verschil?",
+      "published": "2026-06-16",
+      "modified": "2026-09-29",
+      "recipes": []
+    }
+  ]
+}

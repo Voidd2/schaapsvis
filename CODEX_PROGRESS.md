@@ -2,6 +2,15 @@
 
 Laatst bijgewerkt: 3 november 2026, Europe/Amsterdam
 
+## Masteraudit SEO en afwerking — gereed voor PR-review
+
+- Basis main `b60f56e` na #79/#80; eigen branch `codex/master-seo-design-audit`, geen oude auditbranch overgenomen.
+- Contactantwoordkanaal client/server, echte recept/blog404, onbewezen voorraad/bezorgschema verwijderd, preview-noindex, contrast/leesbaarheid/footerreflow en vijf feestdagenankers. Homepagefavorieten via responsive Image; foto's/prijzen/porties/auth behouden.
+- Next- en Cloudflare-build, TypeScript, ESLint, content/shopchecks, negen geïsoleerde contactcases en mandacceptatie A–J slagen. Next én lokale Cloudflare:507 pagina's/519 linkdoelen/153 beelden, geen fouten; negen waarschuwingen voor drie ontbrekende gerechtfoto's. Beide runtimes ook met slotprofiel getest.
+- Browser:72 pagina/schermcombinaties + tekstvergroting, NL/EN/DE contact, vijf ankers; geen pageerrors/overflow/berichten. Externe Schema.org-codevalidatie 0 fouten/waarschuwingen; Google9 geldige onderdelen met niet-kritieke meldingen.
+- Bewijs en scope: `docs/seo/technische-audit.md`, `docs/design/visuele-eindcontrole.md`, acht auditdocumenten plus inventaris/resultaten; screenshots/voor-na `../design-preview/master-audit/overzicht.html`. SEO-skill bijgewerkt.
+- Open: echte browserzoom200% en Lighthouse/veldmeting; GSC-toegang geweigerd voor huidige Google-aanmelding; eigenaar bevestigt NAP-afwijkingen en drie gerechtfoto's. Productie is niet geopend/gepubliceerd. Na PR-review eventuele merge, juiste Cloudflare-commit/Ready en livecontrole. Geen leden-Worker/secrets/DNS gewijzigd, geen geld uitgegeven.
+
 ## Bestelproces vaste visschalen — live afgerond
 
 - Branch `codex/catalog-cart-simplification`, basis `ac05aac`. Eén gedeelde toegankelijke mand-drawer; oude split verwijderd/migreert weg; vaste details zonder formaatdropdown; 23 routes/12 schalen/prijzen/foto’s behouden; trio klein/groot NL/EN/DE.

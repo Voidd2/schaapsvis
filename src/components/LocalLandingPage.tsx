@@ -6,7 +6,7 @@ import { Sectie, Vragen } from "./ui/Sectie";
 import { PaginaKop, PaginaSlot } from "./ui/PaginaKop";
 import { localLocations, localPageCopy, localUI, type LocalPageKind } from "@/lib/local-pages-copy";
 import { BEDRIJF } from "@/lib/bedrijf";
-import { kruimelSchema, vraagSchema } from "@/lib/seo";
+import { kruimelSchema } from "@/lib/seo";
 import { bestelContact } from "@/lib/bestel-contact";
 import { localizedProduct } from "@/lib/product-localization";
 
@@ -14,7 +14,7 @@ export function LocalLandingPage({kind,locale}:{kind:LocalPageKind;locale:string
  const c=localPageCopy(kind,locale),u=localUI(locale),app=kind==="too-good-to-go",locations=localLocations(locale).filter(p=>kind!=="marktkraam-leiden"||p.id!=="winkel");
  const appUrl=locale==="en"?"https://www.toogoodtogo.com/en":locale==="de"?"https://www.toogoodtogo.com/de":"https://www.toogoodtogo.com/nl";
  const fish=[{slug:"kibbeling",src:"/images/editorial/kibbeling-schaapstray.png"},{slug:"haring",src:"/images/editorial/hollandse-nieuwe-uitjes.webp"},{slug:"varlaks-zalm",src:"/images/editorial/zalm.webp"}];
- return <><JsonLd locale={locale}/><Schema data={[vraagSchema(c.questions),kruimelSchema(locale,[{naam:BEDRIJF.naamKort,pad:"/"},{naam:c.name,pad:`/${kind}`}])]}/>
+ return <><JsonLd locale={locale}/><Schema data={[kruimelSchema(locale,[{naam:BEDRIJF.naamKort,pad:"/"},{naam:c.name,pad:`/${kind}`}])]}/>
   <PaginaKop kruimels={[{naam:BEDRIJF.naamKort,href:`/${locale}`},{naam:c.name}]} label={app?"Too Good To Go · Leiden":u.since} titel={c.title} intro={c.intro} knoppen={app?[{label:u.app,href:appUrl,extern:true},{label:u.shop,href:`/${locale}/bezoek-ons`,soort:"lijn"}]:[{label:u.range,href:`/${locale}/assortiment`},{label:bestelContact(locale).label,href:bestelContact(locale).href,extern:true,soort:"lijn"}]}/>
   <Sectie smal><h2 className="text-3xl mb-6">{c.heading}</h2><div className="lees">{c.paragraphs.map(p=><p key={p}>{p}</p>)}</div><div className="flex flex-wrap gap-5 mt-7"><Link className="underline" href={`/${locale}/biologische-vis`}>{u.cert}</Link>{!app&&<><Link className="underline" href={`/${locale}/recepten`}>{u.recipes}</Link><Link className="underline" href={`/${locale}/viskalender`}>{u.calendar}</Link></>}</div></Sectie>
   {!app&&<Sectie grond="zand"><h2 className="text-3xl mb-7">{u.fish}</h2><div className="grid md:grid-cols-3 gap-6">{fish.map(f=>{const p=localizedProduct(f.slug,locale)!;return <article className="recipe-card" key={f.slug}><Link href={`/${locale}/assortiment/${f.slug}`}><Image src={f.src} alt={`${p.naam} — ${u.serving}`} width={1200} height={800} sizes="(max-width:768px) 100vw,33vw" className="w-full aspect-[3/2] object-cover"/><div className="recipe-card-body"><h3 className="text-xl mb-3">{p.naam}</h3><p>{p.desc}</p></div></Link></article>;})}</div></Sectie>}

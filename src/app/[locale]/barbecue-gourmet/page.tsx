@@ -8,7 +8,7 @@ import { Sectie, Kop, Kruimels, Vragen } from "@/components/ui/Sectie";
 import { BEDRIJF } from "@/lib/bedrijf";
 import { bestelContact } from "@/lib/bestel-contact";
 import { DIRKS_BARBECUE, selectieNaam } from "@/lib/dirks-selectie";
-import { kruimelSchema, paginaMetadata, vraagSchema } from "@/lib/seo";
+import { kruimelSchema, paginaMetadata } from "@/lib/seo";
 import { SelectieAanvraag } from "../visschalen/SelectieAanvraag";
 
 export async function generateMetadata({
@@ -48,7 +48,6 @@ export default async function BarbecueGourmetPage({
             { naam: nav("assortiment"), pad: "/assortiment" },
             { naam: t("crumb"), pad: "/barbecue-gourmet" },
           ]),
-          vraagSchema(vragen),
           {
             "@context": "https://schema.org",
             "@type": "ItemList",

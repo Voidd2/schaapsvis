@@ -130,12 +130,12 @@ export default async function HomePage({
                   <Link href={`/${locale}/assortiment/${p.slug}`} className="home-product-card block group">
                     {/* Geen kader en geen eigen achtergrond: de uitsnede staat
                         al op wit, dus zo lijkt de vis op de pagina te liggen. */}
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <Image
                       src={photo.src}
                       alt={photo.alt}
                       width={1400}
                       height={933}
+                      sizes="(max-width: 639px) 50vw, (max-width: 1536px) 33vw, 480px"
                       loading="lazy"
                       className="w-full aspect-[3/2] object-contain transition-transform duration-300 group-hover:scale-[1.02]"
                     />

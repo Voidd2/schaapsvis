@@ -102,7 +102,6 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
       "@type": "Offer",
       priceCurrency: "EUR",
       price: (product.prijsCents / 100).toFixed(2),
-      availability: "https://schema.org/LimitedAvailability",
       url,
     },
   };
