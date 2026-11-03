@@ -79,16 +79,15 @@ export function Footer() {
         <div>
           {/* De ronde badge klein terug laten komen: herkenbaar, zonder dat de
               voet een reclamebord wordt. */}
-          {BEELD.logoBadge.bestand && (
-            /* eslint-disable-next-line @next/next/no-img-element */
+          {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={BEELD.logoBadge.bestand}
               alt={BEDRIJF.naam}
-              width={64}
-              height={64}
-              className="h-16 w-16 object-contain mb-4"
+              width={88}
+              height={88}
+              loading="lazy"
+              className="h-[88px] w-[88px] object-contain mb-4 rounded-md bg-white p-1"
             />
-          )}
           <address className="not-italic text-base leading-relaxed" style={{ opacity: 0.9 }}>
             <span style={{ color: "var(--cream)", fontWeight: 600 }}>{BEDRIJF.naam}</span>
             <br />
