@@ -1,5 +1,10 @@
 # Schaap's Vishandel — voortgang
 
+## Verzorgde accountmails — 5 november 2026
+
+- Gedeelde mailpresentatie in `workers/members/src/email-templates.mjs`: bestaand rond logo, donkerblauw/zachtblauw/goud, ruime koppen, duidelijke code en grote actieknop met fallbacklink. NL/EN/DE; adres en antwoordhulp in footer. Geen tracking, accountregels of transport gewijzigd; campagnes blijven uit.
+- Account- en SMTP-tests en productie-dry-run geslaagd. Lokale Chrome-preview op desktop/smal scherm gecontroleerd; logo publiek bereikbaar, geen overflow, knop circa54px. Geen echte mail verstuurd. Details: `docs/accountmail-vormgeving.md`. Publicatie nog te bevestigen.
+
 ## Cloudflare-accountmail — 5 november 2026
 
 - Eigenaar koos Cloudflare voor account-/verificatiemails; reclame later via een andere dienst. Lijst en expliciete toestemmingen behouden.

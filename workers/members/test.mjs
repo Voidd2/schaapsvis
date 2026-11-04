@@ -6,6 +6,20 @@ import { unzipSync } from "fflate";
 import memberWorker from "./src/index.mjs";
 import { analyticsReport as buildAnalyticsReport, publicAnalyticsPath, analyticsTarget } from "./src/analytics.mjs";
 import { clientDeviceInfo } from "./src/device-info.mjs";
+import { actionEmail, verificationCodeEmail } from "./src/email-templates.mjs";
+
+// Rendering must preserve single-use links without interpreting user content.
+for (const [locale, codeLabel, linkLabel] of [["nl", "Uw verificatiecode", "Werkt de knop niet?"], ["en", "Your verification code", "Button not working?"], ["de", "Ihr Bestätigungscode", "Die Schaltfläche funktioniert nicht?"]]) {
+  const link = "https://example.test/reset?token=fixture-only&locale=" + locale;
+  const rendered = actionEmail(locale, '<img src=x onerror="bad">', 'A & B', 'Reset <now>', link);
+  assert.ok(rendered.includes(`lang="${locale}"`));
+  assert.ok(rendered.includes(linkLabel));
+  assert.equal(rendered.split('href="' + link.replace('&', '&amp;') + '"').length - 1, 2, "button and fallback keep the same escaped token link");
+  assert.ok(rendered.includes('&lt;img src=x onerror=&quot;bad&quot;&gt;'), "mail text remains escaped");
+  assert.ok(rendered.includes('A &amp; B'));
+  assert.ok(rendered.includes('https://schaapsvishandel.nl/images/brand/schaapsvis-logo-192.png'), "logo uses the existing public gate exception");
+  assert.ok(verificationCodeEmail(locale, 'Verification', 'Enter the code', '012345', '10 min').includes(codeLabel));
+}
 
 for (const [ua, browser, os, deviceType] of [
   ["Mozilla/5.0 (Windows NT 10.0) Chrome/142.0 Safari/537.36 Edg/142.0", "Edge", "Windows", "desktop"],
@@ -851,7 +865,7 @@ const oneClickResult = await call(`${oneClickUrl.pathname}${oneClickUrl.search}`
 });
 assert.equal(oneClickResult.status, 204, "mail clients can unsubscribe with the RFC 8058 one-click request without a browser session");
 assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='staged-deals@example.test'").get().status, "unsubscribed");
-const unsubscribeUrl = marketingEmail.html.match(/https:\/\/[^\"]+/)[0];
+const unsubscribeUrl = marketingEmail.html.match(/href="(https:\/\/[^"]+\/newsletter\/unsubscribe\?[^"]+)"/)[1].replaceAll("&amp;", "&");
 const unsubscribe = new URL(unsubscribeUrl);
 const unsubscribePage = await call(`${unsubscribe.pathname}${unsubscribe.search}`, { headers: { "Accept-Language": "de-DE,de;q=0.9,en;q=0.8" } });
 assert.equal(unsubscribePage.status, 200);
