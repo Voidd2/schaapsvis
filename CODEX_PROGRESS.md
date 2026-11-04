@@ -1,5 +1,10 @@
 # Schaap's Vishandel — voortgang
 
+## Persoonlijke accountmails — 5 november 2026
+
+- Verificatie, reset, inloglinks en beveiligingsmails gebruiken de opgeslagen voornaam (oude/beheeraccounts: volledige naam; anders neutraal). Zowel HTML als tekstversie bevatten website, privacyverklaring en de bestaande studentvoorwaarden. Nieuwe ankerlink `studentenkorting#voorwaarden`, NL/EN/DE. Geen accountregels, transport, campagne-instellingen of database gewijzigd.
+- Ledenintegratietests met naam-/escaping-/fallbackcontroles, SMTP-test, contentcontrole en productie-dry-run geslaagd. Chrome-preview op desktop en 400px zonder overflow; Duitse reset en Nederlandse verificatie gecontroleerd. Geen echte mail verzonden. Details: `docs/accountmail-vormgeving.md`. Publicatie volgt na CI/review.
+
 ## Verzorgde accountmails — 5 november 2026
 
 - Gedeelde mailpresentatie in `workers/members/src/email-templates.mjs`: bestaand rond logo, donkerblauw/zachtblauw/goud, ruime koppen, duidelijke code en grote actieknop met fallbacklink. NL/EN/DE; adres en antwoordhulp in footer. Geen tracking, accountregels of transport gewijzigd; campagnes blijven uit.

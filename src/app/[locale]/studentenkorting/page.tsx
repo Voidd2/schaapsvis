@@ -173,7 +173,7 @@ export default async function StudentenkortingPage({ params }: { params: Promise
         <div className="student-actions"><Link href={registerHref} className="knop knop-navy">{c.account} →</Link></div>
       </div>
     </section>
-    <section className="section-wrap student-section student-eligibility" aria-labelledby="student-eligible-heading">
+    <section id="voorwaarden" className="section-wrap student-section student-eligibility" aria-labelledby="student-eligible-heading">
       <div><p className="kapitaal">{c.eyebrow}</p><h2 id="student-eligible-heading">{l.eligible}</h2><ul className="student-checks">{l.checks.map(item => <li key={item}>{item}</li>)}</ul><p>{l.exclusion}</p></div>
       <div className="student-pass-explanation"><h2>{c.card}</h2><p>{c.cardText}</p>
         <div className="student-example-pass" aria-label={l.sample}>

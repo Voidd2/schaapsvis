@@ -1,4 +1,4 @@
-import { actionEmail, verificationCodeEmail, campaignEmail } from "./email-templates.mjs";
+import { actionEmail, verificationCodeEmail, campaignEmail, accountEmailText } from "./email-templates.mjs";
 import { publicAnalyticsPath, analyticsTarget, analyticsReport } from "./analytics.mjs";
 import { clientDeviceInfo } from "./device-info.mjs";
 import { Pass, SigningMaterial } from "passmint";
@@ -473,16 +473,16 @@ async function sendMail(env, to, subject, text, htmlBody, options = {}) {
 // Keep the two registration messages separate (each address gets only the
 // code it needs), but avoid delivering them in the same SMTP burst. A short
 // gap is friendlier to shared-host reputation and mailbox threading rules.
-async function sendVerificationPair(env, { email, schoolEmail, copy, locale, personalCode, schoolCode, validity }) {
-  const transactionalText = (intro, code) => `${intro}\n${code}\n${validity}\n\nSchaap’s Vishandel · Leiden · sinds 1938.`;
+async function sendVerificationPair(env, { email, schoolEmail, copy, locale, personalCode, schoolCode, validity, recipient }) {
+  const transactionalText = (intro, code) => accountEmailText(locale, `${intro}\n${code}\n${validity}`, recipient);
   const personal = await Promise.allSettled([
-    sendMail(env, email, copy.verifySubject, transactionalText(copy.verifyIntro, personalCode), verificationCodeEmail(locale, copy.verifySubject, copy.verifyIntro, personalCode, validity)),
+    sendMail(env, email, copy.verifySubject, transactionalText(copy.verifyIntro, personalCode), verificationCodeEmail(locale, copy.verifySubject, copy.verifyIntro, personalCode, validity, recipient)),
   ]);
   if (mailTransport(env) === "smtp") {
     await new Promise((resolve) => setTimeout(resolve, 1500));
   }
   const school = await Promise.allSettled([
-    sendMail(env, schoolEmail, copy.schoolVerifySubject, transactionalText(copy.schoolVerifyIntro, schoolCode), verificationCodeEmail(locale, copy.schoolVerifySubject, copy.schoolVerifyIntro, schoolCode, validity)),
+    sendMail(env, schoolEmail, copy.schoolVerifySubject, transactionalText(copy.schoolVerifyIntro, schoolCode), verificationCodeEmail(locale, copy.schoolVerifySubject, copy.schoolVerifyIntro, schoolCode, validity, recipient)),
   ]);
   if (personal[0].status === "rejected" || school[0].status === "rejected") throw new Error("verification-email-failed");
 }
@@ -689,7 +689,10 @@ async function recordSecurityEvent(env, { userId, deviceId = null, eventType, se
     const adminEmail = String(env.ADMIN_EMAILS || "").split(",").map((value) => normalizeEmail(value)).find(Boolean);
     if (adminEmail) {
       const securityUrl = `${env.SITE_ORIGIN}/nl/beheer/beveiliging`;
-      try { await sendMail(env, adminEmail, "Nieuw hoog beveiligingssignaal studentenpas", `${reason}\nBekijk het beveiligingsoverzicht: ${securityUrl}`, actionEmail("nl", "Nieuw beveiligingssignaal", reason, "Open beveiligingsoverzicht", securityUrl)); }
+      try {
+        const recipient = await env.DB.prepare("SELECT first_name, full_name FROM users WHERE email=? AND account_status='active'").bind(adminEmail).first();
+        await sendMail(env, adminEmail, "Nieuw hoog beveiligingssignaal studentenpas", accountEmailText("nl", `${reason}\nBekijk het beveiligingsoverzicht: ${securityUrl}`, recipient), actionEmail("nl", "Nieuw beveiligingssignaal", reason, "Open beveiligingsoverzicht", securityUrl, "", recipient));
+      }
       catch { /* The dashboard remains the durable notification source. */ }
     }
   }
@@ -859,7 +862,7 @@ async function register(request, env) {
   const schoolCode = await issueVerificationCode(env, { userId, email: schoolEmail, purpose: "verify_school" });
   try {
     const validity = locale === "nl" ? "De code is 10 minuten geldig." : locale === "de" ? "Der Code ist 10 Minuten gültig." : "The code is valid for 10 minutes.";
-    await sendVerificationPair(env, { email, schoolEmail, copy, locale, personalCode, schoolCode, validity });
+    await sendVerificationPair(env, { email, schoolEmail, copy, locale, personalCode, schoolCode, validity, recipient: { first_name: firstName, full_name: name } });
   } catch {
     return json({ error: "verification_email_failed", message: copy.verificationFailed }, 503);
   }
@@ -923,7 +926,7 @@ async function registerAdministrator(request, env) {
   const link = emailUrl(env, "/api/members/verify", token, locale);
   const copy = ACCOUNT_COPY[locale];
   try {
-    await sendMail(env, email, copy.verifySubject, `${copy.verifyLinkIntro}\n${link}`, actionEmail(locale, copy.verifySubject, copy.verifyLinkIntro, copy.verifyButton, link));
+    await sendMail(env, email, copy.verifySubject, accountEmailText(locale, `${copy.verifyLinkIntro}\n${link}`, name), actionEmail(locale, copy.verifySubject, copy.verifyLinkIntro, copy.verifyButton, link, "", name));
   } catch {
     return json({ error: "verification_email_failed" }, 503);
   }
@@ -939,7 +942,7 @@ async function resendVerification(request, env) {
   const email = normalizeEmail(body?.email);
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
   if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "verify-resend", ip, email || "invalid", 12, 4, 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
-  const user = email ? await env.DB.prepare(`SELECT id, email, school_email FROM users WHERE email = ? AND (email_verified_at IS NULL OR school_email_verified_at IS NULL) AND account_status = 'active'`).bind(email).first() : null;
+  const user = email ? await env.DB.prepare(`SELECT id, email, school_email, first_name, full_name FROM users WHERE email = ? AND (email_verified_at IS NULL OR school_email_verified_at IS NULL) AND account_status = 'active'`).bind(email).first() : null;
   if (user) {
     const time = nowIso();
     await env.DB.prepare(`UPDATE email_tokens SET used_at = ? WHERE user_id = ? AND purpose IN ('verify_email','verify_school') AND used_at IS NULL`).bind(time, user.id).run();
@@ -948,11 +951,11 @@ async function resendVerification(request, env) {
         const personalCode = await issueVerificationCode(env, { userId: user.id, email: user.email, purpose: "verify_email" });
         const schoolCode = await issueVerificationCode(env, { userId: user.id, email: user.school_email, purpose: "verify_school" });
         const validity = locale === "nl" ? "De code is 10 minuten geldig." : locale === "de" ? "Der Code ist 10 Minuten gültig." : "The code is valid for 10 minutes.";
-        await sendVerificationPair(env, { email: user.email, schoolEmail: user.school_email, copy, locale, personalCode, schoolCode, validity });
+        await sendVerificationPair(env, { email: user.email, schoolEmail: user.school_email, copy, locale, personalCode, schoolCode, validity, recipient: user });
       } else {
         const token = await issueEmailToken(env, { userId: user.id, email: user.email, purpose: "verify_email" });
         const link = emailUrl(env, "/api/members/verify", token, locale);
-        await sendMail(env, user.email, copy.verifySubject, `${copy.verifyLinkIntro}\n${link}`, actionEmail(locale, copy.verifySubject, copy.verifyLinkIntro, copy.verifyButton, link));
+        await sendMail(env, user.email, copy.verifySubject, accountEmailText(locale, `${copy.verifyLinkIntro}\n${link}`, user), actionEmail(locale, copy.verifySubject, copy.verifyLinkIntro, copy.verifyButton, link, "", user));
       }
     } catch {
       return json({ error: "verification_email_failed" }, 503);
@@ -1061,14 +1064,14 @@ async function requestMagicLogin(request, env) {
   const locale = localeFrom(body?.locale);
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
   if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "magic-login", ip, email || "invalid", 12, 4, 60 * 60 * 1000)) return json({ ok: true }, 202);
-  const user = email ? await env.DB.prepare(`SELECT id,email FROM users WHERE email=? AND account_status='active' AND email_verified_at IS NOT NULL`).bind(email).first() : null;
+  const user = email ? await env.DB.prepare(`SELECT id,email,first_name,full_name FROM users WHERE email=? AND account_status='active' AND email_verified_at IS NOT NULL`).bind(email).first() : null;
   if (user) {
     await env.DB.prepare(`UPDATE member_login_tokens SET used_at=? WHERE user_id=? AND used_at IS NULL`).bind(nowIso(), user.id).run();
     const token = await issueMagicLoginToken(env, user.id);
     const link = emailUrl(env, "/api/members/magic-login/confirm", token, locale);
     const subject = locale === "de" ? "Einmalig bei Schaap’s anmelden" : locale === "en" ? "Sign in to Schaap’s once" : "Eenmalig inloggen bij Schaap’s";
     const intro = locale === "de" ? "Dieser sichere Link meldet Sie einmalig an und ist 15 Minuten gültig." : locale === "en" ? "This secure one-time sign-in link is valid for 15 minutes." : "Deze veilige eenmalige inloglink is 15 minuten geldig.";
-    try { await sendMail(env, user.email, subject, `${intro}\n${link}`, actionEmail(locale, subject, intro, locale === "de" ? "Anmelden" : locale === "en" ? "Sign in" : "Inloggen", link)); } catch { /* Keep the generic response. */ }
+    try { await sendMail(env, user.email, subject, accountEmailText(locale, `${intro}\n${link}`, user), actionEmail(locale, subject, intro, locale === "de" ? "Anmelden" : locale === "en" ? "Sign in" : "Inloggen", link, "", user)); } catch { /* Keep the generic response. */ }
   }
   return json({ ok: true }, 202);
 }
@@ -1527,13 +1530,13 @@ async function requestPasswordReset(request, env) {
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
   if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "reset", ip, email || "invalid", 15, 5, 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
   if (email) {
-    const user = await env.DB.prepare(`SELECT id FROM users WHERE email = ? AND email_verified_at IS NOT NULL AND account_status = 'active'`).bind(email).first();
+    const user = await env.DB.prepare(`SELECT id, first_name, full_name FROM users WHERE email = ? AND email_verified_at IS NOT NULL AND account_status = 'active'`).bind(email).first();
     if (user) {
       const token = await issueEmailToken(env, { userId: user.id, email, purpose: "password_reset" });
       const link = emailUrl(env, "/api/members/password-reset/confirm", token, locale);
       try {
         const note = locale === "nl" ? "De link is één uur geldig. Heeft u dit niet aangevraagd? Negeer deze e-mail." : locale === "de" ? "Der Link ist eine Stunde gültig. Wenn Sie dies nicht angefordert haben, ignorieren Sie diese E-Mail." : "The link is valid for one hour. If you did not request this, ignore this email.";
-        await sendMail(env, email, copy.resetSubject, `${copy.resetIntro}\n${link}\n${note}`, actionEmail(locale, copy.resetSubject, copy.resetIntro, copy.resetButton, link, note));
+        await sendMail(env, email, copy.resetSubject, accountEmailText(locale, `${copy.resetIntro}\n${link}\n${note}`, user), actionEmail(locale, copy.resetSubject, copy.resetIntro, copy.resetButton, link, note, user));
       } catch { /* Keep the response identical for existing and unknown addresses. */ }
     }
   }
@@ -1719,7 +1722,7 @@ async function adminSecurityAction(request, env, userId) {
   const body = await readJson(request);
   const action = String(body?.action || "");
   const now = nowIso();
-  const student = await env.DB.prepare(`SELECT u.id,u.email,u.school_email,u.school_email_verified_at,u.full_name FROM users u WHERE u.id=? AND EXISTS (SELECT 1 FROM student_applications a WHERE a.user_id=u.id AND a.status='approved')`).bind(userId).first();
+  const student = await env.DB.prepare(`SELECT u.id,u.email,u.school_email,u.school_email_verified_at,u.first_name,u.full_name FROM users u WHERE u.id=? AND EXISTS (SELECT 1 FROM student_applications a WHERE a.user_id=u.id AND a.status='approved')`).bind(userId).first();
   if (!student) return json({ error: "student_not_found" }, 404);
 
   if (action === "event_marked_safe") {
@@ -1770,7 +1773,7 @@ async function adminSecurityAction(request, env, userId) {
     const accountUrl = `${env.SITE_ORIGIN}/nl/account`;
     const methodText = method === "email_code" ? `Gebruik deze eenmalige code in uw account: ${code}` : method === "student_status" ? `Bevestig opnieuw dat u toegang heeft tot uw schoolmail met deze code: ${code}` : "Neem uw studentenpas mee voor controle bij onze viskraam of winkel.";
     const verificationEmail = method === "student_status" ? student.school_email : student.email;
-    try { await sendMail(env, verificationEmail, "Extra controle van uw studentenpas", `Er is een extra controle nodig. Reden: ${reason}\n${methodText}\n${accountUrl}`, actionEmail("nl", "Extra controle van uw studentenpas", `Er is een extra controle nodig. ${methodText}`, "Naar uw account", accountUrl)); }
+    try { await sendMail(env, verificationEmail, "Extra controle van uw studentenpas", accountEmailText("nl", `Er is een extra controle nodig. Reden: ${reason}\n${methodText}\n${accountUrl}`, student), actionEmail("nl", "Extra controle van uw studentenpas", `Er is een extra controle nodig. ${methodText}`, "Naar uw account", accountUrl, "", student)); }
     catch { /* The in-account request remains visible and can be resent later. */ }
     await securityAudit(env, admin.id, userId, "verification_requested", { verificationId: id, detail: { method, passPolicy } });
   } else if (action === "verification_completed" || action === "verification_cancelled") {
