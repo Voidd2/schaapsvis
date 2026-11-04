@@ -3,102 +3,131 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { paginaMetadata } from "@/lib/seo";
+import { BEDRIJF } from "@/lib/bedrijf";
+import { BEELD } from "@/lib/beeld";
+import { openingSummary } from "@/lib/openingHours";
+import { siteOpSlot } from "@/lib/siteAccess";
 
 const copy = {
   nl: {
-    title: "10% studentenkorting | Schaap's Vis",
+    title: "10% studentenkorting in Leiden | Schaap's Vis",
     description:
       "Nederlandse en internationale mbo-, hbo- en wo-studenten krijgen na goedkeuring 10% korting op het hele assortiment van Schaap's Vishandel.",
     eyebrow: "Voor Nederlandse én internationale studenten",
-    heading: "Student? Eet lekker mee.",
+    heading: "Student in de buurt? Pak 10% korting.",
     intro:
-      "Studeer je aan het mbo, hbo of de universiteit? Nederlandse en internationale studenten krijgen na goedkeuring 10% korting op het hele assortiment van Schaap's Vishandel.",
+      "Van kibbeling tussendoor tot verse zalm voor het avondeten. Als mbo-, hbo- of wo-student krijg je na goedkeuring 10% korting op het hele assortiment bij Schaap’s in Leiden.",
     categories: ["Op het hele assortiment"],
-    condition: "Voor wie is de korting?",
-    conditionText:
-      "Voor Nederlandse en internationale studenten met een bevestigde schoolmail die een MBO-, HBO- of WO-opleiding volgen; middelbare scholieren vallen buiten de actie. De opleiding hoeft niet in Leiden te zijn. Na goedkeuring geldt de korting op het hele assortiment en is deze niet te combineren met andere acties.",
     card: "Je digitale studentenpas",
     cardText:
-      "Na goedkeuring verschijnt je persoonlijke pas in je account. De pas is één studiejaar geldig; daarna vraag je met je bevestigde schoolmail opnieuw aan. Het accountportaal wordt nu in een besloten preview getest.",
-    cardExample: "Voorbeeld · na beoordeling beschikbaar in je account",
+      "Na goedkeuring staat je persoonlijke pas in je account. Open de pas op je telefoon en laat hem vóór het afrekenen zien. De pas is één studiejaar geldig; daarna vraag je met je bevestigde schoolmail opnieuw aan.",
     steps: "Zo werkt aanmelden",
     step1: "Maak een account met je persoonlijke e-mailadres, je schoolmail en een sterk wachtwoord.",
     step2: "Vul de twee aparte verificatiecodes in die we naar beide adressen sturen. Daarna ben je direct ingelogd en vul je onderwijsinstelling, opleidingsniveau en studiestad in.",
-    step3: "We beoordelen je aanvraag handmatig. Na goedkeuring verschijnt je digitale kortingspas in je account.",
-    privacy: "Aanmelden is op dit moment alleen beschikbaar in de met wachtwoord afgeschermde preview. We testen de e-mailbezorging en privacy-informatie voordat registratie voor iedereen opengaat. Een bevestigde schoolmail is voldoende; we vragen geen inschrijvingsbewijs. Aanbiedingen per e-mail zijn vrijwillig, staan los van de korting en kun je altijd afmelden.",
-    weekly: "Regelmatig iets nieuws proeven",
-    weeklyText:
-      "Meld je apart en vrijwillig aan voor nieuws en aanbiedingen speciaal voor Schaap’s-klanten. Soms delen we ook een groepsaanbieding voor studentenverenigingen. We sturen alleen een bericht wanneer er iets leuks te delen is. Deze aanbiedingen zijn niet te combineren met de studentenkorting of andere acties.",
-    status: "De website is nog niet publiek geopend. Registratie gaat pas open voor iedereen nadat e-mailbezorging, privacy-informatie en bewaartermijnen zijn gecontroleerd.",
-    account: "Bekijk accountpagina",
+    step3: "Dien je aanvraag in. We beoordelen deze handmatig. Na goedkeuring verschijnt je digitale kortingspas in je account.",
+    account: "Vraag studentenkorting aan",
     home: "Bekijk ons assortiment",
     alt: "Versgebakken kibbeling met citroen en saus",
-    photoAlt: "Hollandse nieuwe haring met uitjes",
     privacyPage: "Lees de privacyinformatie",
   },
   en: {
-    title: "10% student discount | Schaap's Vis",
+    title: "10% student discount in Leiden | Schaap's Vis",
     description:
       "Dutch and international MBO, HBO and university students receive 10% off the entire Schaap's Vishandel range after approval.",
     eyebrow: "For Dutch and international students",
-    heading: "Are you a student? Eat well with us.",
+    heading: "Student nearby? Get 10% off.",
     intro:
-      "Studying at MBO, HBO or university level? Dutch and international students receive 10% off the entire Schaap's Vishandel range after approval.",
+      "From kibbeling between lectures to fresh salmon for dinner. MBO, HBO and university students receive 10% off the entire range at Schaap’s in Leiden after approval.",
     categories: ["On the entire range"],
-    condition: "Who is eligible?",
-    conditionText:
-      "For Dutch and international students with a verified school email who attend an MBO, HBO or university programme; secondary-school pupils are not eligible. The programme does not have to be in Leiden. Once approved, the discount applies to the entire range and cannot be combined with other offers.",
     card: "Your digital student pass",
     cardText:
-      "Once approved, your personal pass will appear in your account. It is valid for one academic year; afterwards you apply again using your verified school email. The account portal is currently being tested in a restricted preview.",
-    cardExample: "Preview · available in your account after approval",
+      "Once approved, your personal pass appears in your account. Open it on your phone and show it before paying. It is valid for one academic year; afterwards you apply again using your verified school email.",
     steps: "How to apply",
     step1: "Create an account with your personal email, school email and a strong password.",
     step2: "Enter the two separate verification codes sent to both addresses. You are then signed in automatically and enter your institution, education level and study city.",
-    step3: "We review each application manually. Once approved, your digital discount pass appears in your account.",
-    privacy:
-      "Registration is currently available only in the password-protected preview. We are testing email delivery and privacy information before opening registration to everyone. A verified school email is sufficient; no enrolment document is requested. Email offers are optional, separate from the discount, and can be cancelled at any time.",
-    weekly: "Discover something new from time to time",
-    weeklyText:
-      "Sign up separately and voluntarily for news and offers especially for Schaap’s customers. From time to time, we may also share a group offer for student associations. We will email only when there is something worth sharing. These offers cannot be combined with the student discount or other promotions.",
-    status: "The website is not publicly open yet. Registration will open to everyone after email delivery, privacy information and retention periods have been checked.",
-    account: "Open your account",
+    step3: "Submit your application. We review it manually. Once approved, your digital discount pass appears in your account.",
+    account: "Apply for your student discount",
     home: "Explore our range",
     alt: "Freshly fried kibbeling with lemon and sauce",
-    photoAlt: "Dutch herring served with onions",
     privacyPage: "Read the privacy information",
   },
   de: {
-    title: "10 % Studentenrabatt | Schaap's Vis",
+    title: "10 % Studentenrabatt in Leiden | Schaap's Vis",
     description:
       "Niederländische und internationale MBO-, HBO- und Hochschulstudierende erhalten nach Freigabe 10 % Rabatt auf das gesamte Sortiment von Schaap's Vishandel.",
     eyebrow: "Für niederländische und internationale Studierende",
-    heading: "Du studierst? Iss gut bei uns.",
+    heading: "Sie studieren? Sichern Sie sich 10 % Rabatt.",
     intro:
-      "Studieren Sie auf MBO-, HBO- oder Universitätsniveau? Niederländische und internationale Studierende erhalten nach Freigabe 10 % Rabatt auf das gesamte Sortiment von Schaap's Vishandel.",
+      "Von Kibbeling für zwischendurch bis zu frischem Lachs zum Abendessen. MBO-, HBO- und Hochschulstudierende erhalten nach Freigabe 10 % Rabatt auf das gesamte Sortiment bei Schaap’s in Leiden.",
     categories: ["Auf das gesamte Sortiment"],
-    condition: "Wer kann den Rabatt erhalten?",
-    conditionText:
-      "Für niederländische und internationale Studierende mit bestätigter Schul-E-Mail in einem MBO-, HBO- oder Hochschulstudium; Schülerinnen und Schüler weiterführender Schulen sind ausgeschlossen. Das Studium muss nicht in Leiden sein. Nach Freigabe gilt der Rabatt für das gesamte Sortiment und ist nicht mit anderen Aktionen kombinierbar.",
     card: "Ihr digitaler Studentenausweis",
     cardText:
-      "Nach der Freigabe erscheint Ihr persönlicher Pass im Konto. Er ist ein Studienjahr gültig; danach beantragen Sie ihn mit Ihrer bestätigten Schul-E-Mail erneut. Das Kontenportal wird derzeit in einer geschützten Vorschau getestet.",
-    cardExample: "Vorschau · nach der Prüfung in Ihrem Konto verfügbar",
+      "Nach der Freigabe erscheint Ihr persönlicher Pass im Konto. Öffnen Sie ihn auf Ihrem Smartphone und zeigen Sie ihn vor dem Bezahlen vor. Er gilt ein Studienjahr; danach beantragen Sie ihn mit Ihrer bestätigten Schul-E-Mail erneut.",
     steps: "So funktioniert die Anmeldung",
     step1: "Erstellen Sie ein Konto mit Ihrer privaten E-Mail-Adresse, Schul-E-Mail und einem sicheren Passwort.",
     step2: "Geben Sie die zwei separaten Bestätigungscodes ein, die wir an beide Adressen senden. Danach sind Sie automatisch angemeldet und tragen Einrichtung, Ausbildungsniveau und Studienort ein.",
-    step3: "Wir prüfen jeden Antrag manuell. Nach der Freigabe erscheint Ihr digitaler Rabattpass im Konto.",
-    privacy:
-      "Die Anmeldung ist derzeit nur in der passwortgeschützten Vorschau verfügbar. Wir testen E-Mail-Zustellung und Datenschutzinformationen, bevor wir die Registrierung für alle öffnen. Eine bestätigte Schul-E-Mail genügt; ein Studiennachweis wird nicht verlangt. E-Mail-Angebote sind freiwillig, vom Rabatt getrennt und jederzeit abbestellbar.",
-    weekly: "Ab und zu etwas Neues entdecken",
-    weeklyText:
-      "Melden Sie sich separat und freiwillig für Neuigkeiten und Angebote speziell für Schaap’s-Kunden an. Gelegentlich teilen wir auch ein Gruppenangebot für Studierendenvereine. Wir schreiben nur, wenn es etwas Schönes zu teilen gibt. Diese Angebote sind nicht mit dem Studentenrabatt oder anderen Aktionen kombinierbar.",
-    status: "Die Website ist noch nicht öffentlich geöffnet. Die Registrierung wird erst für alle freigeschaltet, wenn E-Mail-Zustellung, Datenschutzinformationen und Aufbewahrungsfristen geprüft sind.",
-    account: "Kontoseite öffnen",
+    step3: "Senden Sie Ihren Antrag ab. Wir prüfen ihn manuell. Nach der Freigabe erscheint Ihr digitaler Rabattpass im Konto.",
+    account: "Studentenrabatt beantragen",
     home: "Sortiment entdecken",
     alt: "Frisch frittierte Kibbeling mit Zitrone und Sauce",
-    photoAlt: "Holländischer neuer Hering mit Zwiebeln",
     privacyPage: "Datenschutzhinweise lesen",
+  },
+} as const;
+
+const landing = {
+  nl: {
+    local: "Schaap’s Vishandel · Leiden sinds 1938", login: "Al een account? Log in", how: "Hoe werkt het?",
+    fine: "Na goedkeuring · niet te combineren met andere acties", preview: "Besloten preview: aanmelden wordt momenteel getest. De actie is nog niet publiek geopend.",
+    benefits: ["10% op het hele assortiment", "Ook als je buiten Leiden studeert", "Digitale pas op je telefoon"],
+    stepTitles: ["Maak je account", "Bevestig je e-mails", "Vraag je pas aan"],
+    ready: "Houd je privé- én schoolmail bij de hand. Log later altijd in met je privé-e-mailadres.",
+    eligible: "Voor wie is het?", checks: ["Mbo-, hbo- en wo-studenten", "Nederlandse én internationale studenten", "Een privé-e-mailadres en een aparte schoolmail die je kunt bevestigen"],
+    exclusion: "Middelbare scholieren vallen buiten de actie. Je opleiding hoeft niet in Leiden te zijn. Je aanvraag wordt persoonlijk beoordeeld.",
+    sample: "Voorbeeldpas · niet geldig als kortingsbewijs", holder: "Jouw naam", passHint: "Je echte pas bevat je naam en een controlecode. Open altijd de actuele pas in je account.",
+    faq: "Nog even dit", questions: [
+      ["Moet ik een inschrijvingsbewijs uploaden?", "Nee. Je bevestigde schoolmail gebruiken we als bewijs. Bij je aanvraag vul je wel je onderwijsinstelling, opleidingsniveau en studiestad in."],
+      ["Krijg ik meteen korting na het aanmelden?", "Je aanvraag wordt eerst handmatig beoordeeld. Pas na goedkeuring kun je de digitale pas laten zien en de 10% korting gebruiken. De korting is niet te combineren met andere acties."],
+      ["Moet ik aanbiedingen per e-mail ontvangen?", "Nee. Je kiest apart of je aanbiedingen wilt ontvangen. Dit is vrijwillig, heeft geen invloed op je studentenkorting en je kunt je altijd afmelden."],
+      ["Waarmee log ik later in?", "Met je privé-e-mailadres, niet je schoolmail. Je schoolmail gebruik je om te bevestigen dat je student bent. Zie je de verificatiemail niet? Controleer ook je spammap."],
+    ],
+    visit: "Tussen college en avondeten: kom langs", visitText: "Je vindt ons aan de Herenstraat en op de Leidse markt. Bekijk de locatie en openingstijden die bij je dag passen.",
+    directions: "Route naar de winkel", locations: "Winkel & marktkramen", final: "Klaar voor jouw studentenpas?", finalText: "Maak je account, bevestig beide e-mailadressen en dien je aanvraag in. Na goedkeuring staat je pas klaar.",
+  },
+  en: {
+    local: "Schaap’s Vishandel · Leiden since 1938", login: "Already have an account? Sign in", how: "How does it work?",
+    fine: "After approval · cannot be combined with other offers", preview: "Restricted preview: registration is being tested. The offer is not publicly available yet.",
+    benefits: ["10% off the entire range", "Also if you study outside Leiden", "A digital pass on your phone"],
+    stepTitles: ["Create your account", "Verify your emails", "Apply for your pass"],
+    ready: "Have your personal and school email ready. Always use your personal email to sign in later.",
+    eligible: "Who can apply?", checks: ["MBO, HBO and university students", "Dutch and international students", "A personal email and a separate school email you can verify"],
+    exclusion: "Secondary-school pupils are not eligible. You do not have to study in Leiden. Each application is reviewed personally.",
+    sample: "Example pass · not valid for a discount", holder: "Your name", passHint: "Your real pass includes your name and a verification code. Always open the current pass in your account.",
+    faq: "Good to know", questions: [
+      ["Do I need to upload proof of enrolment?", "No. We use your verified school email as proof. Your application still asks for your institution, education level and study city."],
+      ["Do I get the discount as soon as I register?", "We review your application manually first. Only after approval can you show your digital pass and use the 10% discount. It cannot be combined with other offers."],
+      ["Do I have to receive email offers?", "No. You choose separately whether to receive offers. This is optional, does not affect your student discount, and you can unsubscribe at any time."],
+      ["Which email do I use to sign in?", "Use your personal email, not your school email. Your school email confirms your student status. If you cannot find the verification email, check your spam folder too."],
+    ],
+    visit: "Between lectures and dinner: drop by", visitText: "Find us on Herenstraat and at Leiden’s market. Choose the location and opening hours that fit your day.",
+    directions: "Directions to the shop", locations: "Shop & market stalls", final: "Ready for your student pass?", finalText: "Create your account, verify both email addresses and submit your application. Your pass will be ready after approval.",
+  },
+  de: {
+    local: "Schaap’s Vishandel · Leiden seit 1938", login: "Schon ein Konto? Anmelden", how: "Wie funktioniert es?",
+    fine: "Nach Freigabe · nicht mit anderen Aktionen kombinierbar", preview: "Geschützte Vorschau: Die Anmeldung wird getestet. Die Aktion ist noch nicht öffentlich verfügbar.",
+    benefits: ["10 % auf das gesamte Sortiment", "Auch beim Studium außerhalb Leidens", "Digitaler Pass auf dem Smartphone"],
+    stepTitles: ["Konto erstellen", "E-Mails bestätigen", "Pass beantragen"],
+    ready: "Halten Sie Ihre private und Ihre Schul-E-Mail bereit. Melden Sie sich später immer mit Ihrer privaten E-Mail an.",
+    eligible: "Wer kann teilnehmen?", checks: ["MBO-, HBO- und Hochschulstudierende", "Niederländische und internationale Studierende", "Eine private und eine separate bestätigbare Schul-E-Mail-Adresse"],
+    exclusion: "Schülerinnen und Schüler weiterführender Schulen sind ausgeschlossen. Sie müssen nicht in Leiden studieren. Jeder Antrag wird persönlich geprüft.",
+    sample: "Beispielpass · kein gültiger Rabattnachweis", holder: "Ihr Name", passHint: "Ihr echter Pass enthält Ihren Namen und einen Prüfcode. Öffnen Sie immer den aktuellen Pass in Ihrem Konto.",
+    faq: "Gut zu wissen", questions: [
+      ["Muss ich einen Studiennachweis hochladen?", "Nein. Ihre bestätigte Schul-E-Mail dient als Nachweis. Im Antrag geben Sie Ihre Einrichtung, Ihr Ausbildungsniveau und Ihren Studienort an."],
+      ["Erhalte ich den Rabatt sofort nach der Anmeldung?", "Wir prüfen Ihren Antrag zunächst manuell. Erst nach Freigabe können Sie Ihren digitalen Pass zeigen und 10 % Rabatt erhalten. Der Rabatt ist nicht mit anderen Aktionen kombinierbar."],
+      ["Muss ich E-Mail-Angebote erhalten?", "Nein. Sie entscheiden separat, ob Sie Angebote erhalten möchten. Dies ist freiwillig, beeinflusst Ihren Studentenrabatt nicht und kann jederzeit abbestellt werden."],
+      ["Mit welcher E-Mail melde ich mich an?", "Mit Ihrer privaten E-Mail, nicht Ihrer Schul-E-Mail. Die Schul-E-Mail bestätigt Ihren Studierendenstatus. Prüfen Sie auch den Spamordner, falls die Bestätigungsmail fehlt."],
+    ],
+    visit: "Zwischen Vorlesung und Abendessen: kommen Sie vorbei", visitText: "Sie finden uns in der Herenstraat und auf dem Leidener Markt. Wählen Sie den passenden Standort und die passenden Öffnungszeiten.",
+    directions: "Route zum Geschäft", locations: "Geschäft & Marktstände", final: "Bereit für Ihren Studentenpass?", finalText: "Erstellen Sie Ihr Konto, bestätigen Sie beide E-Mail-Adressen und senden Sie den Antrag ab. Nach Freigabe ist Ihr Pass verfügbar.",
   },
 } as const;
 
@@ -114,92 +143,50 @@ export default async function StudentenkortingPage({ params }: { params: Promise
   if (!(locale in copy)) notFound();
   const c = copy[locale as keyof typeof copy];
 
-  return (
-    <div className="student-page">
-      <section className="fresh-hero">
-        <div className="section-wrap fresh-hero-grid">
-          <div>
-            <p className="kapitaal">{c.eyebrow}</p>
-            <h1>{c.heading}</h1>
-            <p className="fresh-intro">{c.intro}</p>
-            <div className="flex flex-wrap gap-3 mt-7" aria-label={locale === "nl" ? "Producten met korting" : locale === "de" ? "Produkte mit Rabatt" : "Discounted categories"}>
-              {c.categories.map((category) => <span key={category} className="student-offer"><strong>10%</strong><span>{category}</span></span>)}
-            </div>
-            <Link href={`/${locale}/account`} className="knop knop-rood mt-7 inline-flex">{c.account} →</Link>
-          </div>
-          <figure className="relative overflow-hidden rounded-2xl min-h-[280px]">
-            <Image src="/images/editorial/kibbeling-schaapstray.png" alt={c.alt} fill sizes="(max-width: 800px) 100vw, 50vw" className="object-cover" priority />
-          </figure>
+  const l = landing[locale as keyof typeof landing];
+  const registerHref = `/${locale}/account?mode=register`;
+  const loginHref = `/${locale}/account`;
+  return <div className="student-page student-landing">
+    <section className="fresh-hero">
+      <div className="section-wrap fresh-hero-grid">
+        <div>
+          <p className="kapitaal">{l.local}</p>
+          <h1>{c.heading}</h1>
+          <p className="fresh-intro">{c.intro}</p>
+          <p className="student-offer"><strong>10%</strong><span>{c.categories[0]}</span></p>
+          <p className="student-fine">{l.fine}</p>
+          <div className="student-actions"><Link href={registerHref} className="knop knop-rood">{c.account} →</Link><a href="#aanmelden" className="knop knop-lijn">{l.how} ↓</a></div>
+          <Link href={loginHref} className="student-login">{l.login} →</Link>
+          {siteOpSlot() && <p className="student-preview">{l.preview}</p>}
         </div>
-      </section>
-
-      <section className="story-section section-wrap">
-        <div className="grid gap-12 md:grid-cols-[1fr_0.8fr] items-center">
-          <div>
-            <p className="kapitaal">{locale === "nl" ? "Eerlijke voorwaarden" : locale === "de" ? "Klare Bedingungen" : "Clear eligibility"}</p>
-            <h2>{c.condition}</h2>
-            <p className="max-w-2xl leading-relaxed">{c.conditionText}</p>
-          </div>
-          <Image src="/images/editorial/hollandse-nieuwe-uitjes.webp" alt={c.photoAlt} width={1000} height={667} sizes="(max-width: 768px) 100vw, 40vw" className="w-full rounded-2xl object-cover" />
-        </div>
-      </section>
-
-      <section className="section-wrap py-12 md:py-16">
-        <div className="grid gap-8 md:grid-cols-2 md:items-center">
-          <div>
-            <p className="kapitaal">{locale === "nl" ? "Na goedkeuring" : locale === "de" ? "Nach der Freigabe" : "After approval"}</p>
-            <h2>{c.card}</h2>
-            <p className="mt-3 max-w-xl leading-relaxed">{c.cardText}</p>
-          </div>
-          <div className="relative overflow-hidden rounded-3xl bg-[var(--navy-dark)] p-7 text-white shadow-xl sm:p-9" aria-label={c.cardExample}>
-            <div className="relative">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.24em] text-sky-200">Schaap&apos;s Vishandel</p>
-                  <p className="mt-2 text-sm text-sky-100">LEIDEN · SINDS 1938</p>
-                </div>
-                <span className="rounded-full border border-white/25 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em]">Student</span>
-              </div>
-              <div className="mt-10 flex items-end justify-between gap-4">
-                <div>
-                  <p className="text-sm text-sky-100">{c.card}</p>
-                  <p className="mt-1 text-5xl font-bold tracking-tight">10%</p>
-                </div>
-                <p className="max-w-36 text-right text-sm leading-relaxed text-sky-100">{c.categories.join(" · ")}</p>
-              </div>
-              <p className="mt-8 border-t border-white/20 pt-4 text-xs text-sky-100">{c.cardExample}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="fresh-contact">
-        <div className="section-wrap">
-          <p className="kapitaal">{locale === "nl" ? "Na de start van het accountportaal" : locale === "de" ? "Nach Start des Kontobereichs" : "When the account area opens"}</p>
-          <h2>{c.steps}</h2>
-          <ol className="mt-8 grid gap-5 md:grid-cols-3">
-            {[c.step1, c.step2, c.step3].map((step, index) => (
-              <li key={step} className="rounded-2xl border border-sky-200 bg-white p-6">
-                <span className="mb-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-sky-100 font-semibold text-sky-900">{index + 1}</span>
-                <p className="leading-relaxed">{step}</p>
-              </li>
-            ))}
-          </ol>
-          <p className="mt-7 max-w-4xl text-sm leading-relaxed text-slate-600">{c.privacy}</p>
-          <a href={`/${locale}/privacyverklaring`} className="mt-2 inline-block text-sm font-semibold underline underline-offset-4">{c.privacyPage} →</a>
-          <p className="mt-6 rounded-xl border border-sky-200 bg-sky-50 px-5 py-4 font-semibold">{c.status} <a className="ml-2 underline underline-offset-4" href={`/${locale}/account`}>{c.account} →</a></p>
-        </div>
-      </section>
-
-      <section className="story-section section-wrap">
-        <div className="max-w-3xl">
-          <p className="kapitaal">{locale === "nl" ? "Vrijwillig, nooit verplicht" : locale === "de" ? "Freiwillig, niemals verpflichtend" : "Optional, never required"}</p>
-          <h2>{c.weekly}</h2>
-          <p className="leading-relaxed">{c.weeklyText}</p>
-          <a href={`/${locale}/assortiment`} className="knop knop-lijn mt-6">{c.home} →</a>
-        </div>
-      </section>
-    </div>
-  );
+        <figure className="relative overflow-hidden rounded-2xl min-h-[280px]">
+          <Image src="/images/editorial/kibbeling-schaapstray.png" alt={c.alt} fill sizes="(max-width: 800px) 100vw, 50vw" className="object-cover" priority />
+        </figure>
+      </div>
+    </section>
+    <ul className="section-wrap student-benefits">{l.benefits.map(item => <li key={item}><span aria-hidden="true">✓</span>{item}</li>)}</ul>
+    <section id="aanmelden" className="student-section student-steps" aria-labelledby="student-steps-heading">
+      <div className="section-wrap">
+        <p className="kapitaal">{c.eyebrow}</p><h2 id="student-steps-heading">{c.steps}</h2>
+        <p className="student-ready">{l.ready}</p>
+        <ol className="student-step-grid">{[c.step1,c.step2,c.step3].map((step,index) => <li key={step}><span className="student-step-number" aria-hidden="true">{index+1}</span><h3>{l.stepTitles[index]}</h3><p>{step}</p></li>)}</ol>
+        <div className="student-actions"><Link href={registerHref} className="knop knop-navy">{c.account} →</Link></div>
+      </div>
+    </section>
+    <section className="section-wrap student-section student-eligibility" aria-labelledby="student-eligible-heading">
+      <div><p className="kapitaal">{c.eyebrow}</p><h2 id="student-eligible-heading">{l.eligible}</h2><ul className="student-checks">{l.checks.map(item => <li key={item}>{item}</li>)}</ul><p>{l.exclusion}</p></div>
+      <div className="student-pass-explanation"><h2>{c.card}</h2><p>{c.cardText}</p>
+        <div className="student-example-pass" aria-label={l.sample}>
+          <div className="student-pass-brand"><Image src={BEELD.logoBadge.bestand} alt="Schaap’s Vishandel" width={64} height={64}/><span>Schaap’s Vishandel<small>Leiden · {BEDRIJF.opgericht}</small></span></div>
+          <div className="student-pass-value"><strong>10%</strong><span>{c.categories[0]}</span></div><p>{l.holder}</p><p className="student-pass-sample">{l.sample}</p>
+        </div><p className="student-fine">{l.passHint}</p>
+      </div>
+    </section>
+    <section className="student-section student-local" aria-labelledby="student-local-heading"><div className="section-wrap student-local-grid">
+      <div><p className="kapitaal">{l.local}</p><h2 id="student-local-heading">{l.visit}</h2><p>{l.visitText}</p><div className="student-actions"><Link className="knop knop-navy" href={`/${locale}/bezoek-ons`}>{l.locations} →</Link><Link className="knop knop-lijn" href={`/${locale}/assortiment`}>{c.home} →</Link></div></div>
+      <div className="student-shop"><h3>{BEDRIJF.adres.straat}, {BEDRIJF.adres.plaats}</h3><p>{openingSummary("winkel",locale)}</p><a className="knop knop-lijn" href={BEDRIJF.maps.route} target="_blank" rel="noopener noreferrer">{l.directions} ↗</a></div>
+    </div></section>
+    <section className="section-wrap student-section student-faq" aria-labelledby="student-faq-heading"><h2 id="student-faq-heading">{l.faq}</h2>{l.questions.map(([q,a]) => <details key={q}><summary>{q}</summary><p>{a}</p></details>)}<Link className="student-login" href={`/${locale}/privacyverklaring`}>{c.privacyPage} →</Link></section>
+    <section className="student-section student-final"><div className="section-wrap"><h2>{l.final}</h2><p>{l.finalText}</p><div className="student-actions"><Link className="knop knop-rood" href={registerHref}>{c.account} →</Link><Link className="knop knop-lijn" href={loginHref}>{l.login} →</Link></div><p className="student-fine">{l.fine}</p></div></section>
+  </div>;
 }
-

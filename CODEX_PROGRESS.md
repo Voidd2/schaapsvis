@@ -2,6 +2,10 @@
 
 Laatst bijgewerkt: 4 november 2026, Europe/Amsterdam
 
+## Studentenkorting als advertentielandingspagina
+
+- Nieuwe NL/EN/DE-opbouw met duidelijk 10%-aanbod, voorwaarden, aanmeldstappen, voorbeeldpas/logo, lokale bezoekinformatie, FAQ en herhaalde aanvraagknop. Aanvraaglink opent alleen het bestaande registratietabblad; normale accountlinks blijven login. Geen account-/mail-/kortingsregels veranderd. Lokale read-only browsertest, inhoud/lint en Next/Vite-builds geslaagd; details in `docs/studentenkorting-landingspagina.md`. Publicatie nog te controleren.
+
 ## Zelfstandige VÅRLAKS-landingspagina
 
 - Lokale campagnevervolgronde gepubliceerd via PR #103 als `0f353ad`: Leiden sinds 1938 nadrukkelijk in intro en verhaal, drie Leidse locaties met centrale openingstijden/routeknoppen en Voorschoten apart op de pagina. NL/EN/DE, mobiel 390px zonder overflow en knoppen vanaf 52px gecontroleerd; Next/Vite-builds, gerichte checks en Build261 geslaagd; Codex-review zonder bevindingen. Cloudflare `0a32e34d` 100% Ready, nieuwe inhoud op Workers-URL én .nl live bevestigd. Onderzoek, claimbeperking en toekomstige advertentie-/meetkeuzes: `docs/varlaks-lokale-advertenties.md`. Screenshot buiten Git: `../design-preview/varlaks/live-local-locations.png`.

@@ -213,12 +213,12 @@ const translations = {
   },
 } as const;
 
-export function AccountPortal({ locale }: { locale: string }) {
+export function AccountPortal({ locale, initialMode = "login" }: { locale: string; initialMode?: "login" | "register" }) {
   const language = locale in translations ? locale as keyof typeof translations : "nl";
   const t = translations[language];
   const [data, setData] = useState<MemberData | null>(null);
   const [apiAvailable, setApiAvailable] = useState(false);
-  const [mode, setMode] = useState<"login" | "register">("login");
+  const [mode, setMode] = useState<"login" | "register">(initialMode);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
