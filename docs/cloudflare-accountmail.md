@@ -41,7 +41,11 @@ Een andere verzender garandeert geen Gmail-inboxplaatsing.
   worden herkend. Dit is nog geen bewijs van echte aflevering.
 - Het nieuwe verzenddomein toont Sending status Enabled en DNS Configured.
 - Cloudflare/Vinext-build en inhoudscontrole zijn eveneens geslaagd.
-- Productie-uitrol en een echte bezorgtest: nog af te tekenen.
+- PR #105 / merge `8aa4b91`: GitHub Build265 en Member159 geslaagd, Codex-review zonder bevindingen. Cloudflare site `adca3ad8` 100% Ready en ledenbuild `c781e815` Ready. Na de tijdelijke diagnostische instellingen is ledenversie `fe1ac418` 100% Ready met diagnostiek weer uit.
+- De ene expliciet toegestane test vanuit de echte productie-leden-Worker gaf HTTP202 op 5 november 2026 om 00:18 CET. Gmail plaatste deze in **Inbox**, bezorgd na 5 seconden. SPF PASS (104.30.16.173), DKIM PASS voor berichten.schaapsvishandel.nl en DMARC PASS. Cloudflare toont 1/200 dagquotum en 100% aflevering. De daglimiet is de actuele onboardinglimiet; dit is geen maandelijkse kostenstop.
+- Geen account/inschrijving aangemaakt en geen Gmail-labels gewijzigd. De diagnostische mail gebruikt een eenvoudige testinhoud met historische tekst “SMTP-bezorgtest”, maar de ontvangen headers bewijzen Cloudflare-transport. Dit is geen volledige registratiestroomtest en geen garantie voor alle toekomstige berichten.
+- Live instellingen gecontroleerd: Cloudflare-provider, EMAIL-binding, campagnes uit en `SMTP_DIAGNOSTICS=off`. Het tijdelijke testadres is bij uitgeschakelde diagnostiek inert; een volgende configdeploy verwijdert die niet in Git opgenomen variabele. Geen extra mail versturen zonder nieuw akkoord.
+- Bewijs buiten Git: `../design-preview/cloudflare-email/gmail-inbox.png`, `gmail-authentication.png`, `sending-live.png`; lokale sendguard voorkomt onbedoelde herhaling van deze test.
 
 ## DNS en terugval
 

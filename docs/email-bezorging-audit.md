@@ -1,6 +1,14 @@
 # E-mailbezorging — audit en vervolgstappen
 
-Bijgewerkt op 3 november 2026 aan de hand van DNS, echte Gmail-ontvangsten en de SMTP-broncode.
+Bijgewerkt op 5 november 2026 aan de hand van DNS, echte Gmail-ontvangsten en de mailbroncode.
+
+## Cloudflare — 5 november 2026, 00:18 CET
+
+Na expliciete keuze en betaald-planakkoord is productie overgezet op Cloudflare Email Sending (PR #105, `8aa4b91`). Afzender `account@berichten.schaapsvishandel.nl`; Knoth blijft inkomende mail afhandelen. De bestaande root-MX/SPF/DMARC/DKIM zijn behouden. Reclameverzending en wachtrij staan uit, inschrijvingen blijven bestaan.
+
+De ene nieuw toegestane test is vanuit de echte productie-leden-Worker verstuurd, HTTP202. Gmail toont **Inbox**, bezorgd na 5 seconden, SPF/DKIM/DMARC **PASS**; verzend-IP `104.30.16.173`. Geen filters/labels gewijzigd en geen account aangemaakt. Diagnostiek staat weer uit. Testtoestemming verbruikt; niet automatisch herhalen.
+
+Dit is bewijs van succesvolle Cloudflare-bezorging van de diagnostische test. De eenvoudige inhoud is niet identiek aan de volledige registratie-template; één Inbox-resultaat garandeert geen toekomstige inboxplaatsing en bewijst niet precies waarom Knoth-tests Spam waren. Details, productieversies en bewijsbestanden: `cloudflare-accountmail.md`. Historische resultaten hieronder blijven relevant als vergelijking.
 
 ## Nieuwe mailboxen — test 22:31 UTC
 

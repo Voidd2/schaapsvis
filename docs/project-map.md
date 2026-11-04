@@ -6,7 +6,7 @@ Deze kaart is de korte ingang voor vervolgwerk. De code en actuele Cloudflare-st
 
 - **Website:** Next.js 16 met vinext, pagina's in `src/app/[locale]/`, gedeeld materiaal in `src/components/` en `src/lib/`. Worker `schaapsvis` beheert `schaapsvishandel.nl`; configuratie staat in `cloudflare.config.ts`.
 - **Leden en studenten:** Worker `schaapsvis-members` ontvangt `/api/members/*`. Bron: `workers/members/src/index.mjs`; configuratie: `workers/members/wrangler.jsonc`; productiedatabase: D1 `schaapsvis-members`; historisch studentbewijs: private EU-R2-bucket. Schema: `migrations/0001` t/m `0017`.
-- **Mail:** de leden-Worker gebruikt Knoth SMTP op poort 587. De host en gebruikersnaam staan in de Worker-config; het wachtwoord en de auth-sleutels staan uitsluitend als Cloudflare-secrets. Knoth blijft domeinregistrar en mailboxprovider; Cloudflare beheert DNS en hosting.
+- **Mail:** productie gebruikt sinds PR #105 Cloudflare Email Sending via de EMAIL-binding, vanaf `account@berichten.schaapsvishandel.nl`, met antwoorden naar de zakelijke Knoth-mailbox. Campagneverzending staat uit; inschrijvingen/toestemming blijven behouden voor een latere marketingdienst. Knoth blijft inkomende mailboxprovider en SMTP-configuratie blijft alleen voor expliciete rollback/preview behouden. Auth-sleutels en bestaande SMTP-wachtwoorden blijven secrets. Details en echte Gmail-Inbox-test van 5 november: `docs/cloudflare-accountmail.md`.
 - **Toegang:** de website is nog met een sitewachtwoord afgeschermd. De leden-API controleert daarnaast de sitecookie of het vertrouwde eigenaar-IP. Openbare registratie is nog geen goedgekeurde livegang.
 
 ## Vaststaande productkeuzes

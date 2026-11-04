@@ -6,10 +6,12 @@
 - Workers Paid na expliciet checkout-akkoord geactiveerd ($5/maand plus meerverbruik). Verzenddomein `berichten.schaapsvishandel.nl` toont Enabled / DNS Configured. Root-onboarding met p=reject is door auto-review geblokkeerd; veilig alternatief wijzigt alleen een nieuw subdomein.
 - Branch `codex/cloudflare-account-email`: expliciete providerkeuze, herkenbare accountafzender, geen automatische SMTP-fallback, campagneverzending en cron gepauzeerd met NL/EN/DE-beheeruitleg. Accounts/consents/afmeldingen behouden, geen migratie.
 - Leden- en SMTP-tests, TypeScript, gerichte ESLint, contentcontrole, Next-build (572 pagina’s), Cloudflare-build en Wrangler production dry-run geslaagd. Details: `docs/cloudflare-accountmail.md`.
-- Nog te doen: commit/PR, productie-uitrol, live mailcontrole en inboxbewijs. Toestemming voor één nieuwe testmail gevraagd; nog geen echte mail verzonden.
+- PR #105 samengevoegd als `8aa4b91`; GitHub Build265/Member159 geslaagd en Codex-review zonder bevindingen. Cloudflare site `adca3ad8` 100% Ready; ledenbuild `c781e815` Ready, na tijdelijke testinstellingen ledenversie `fe1ac418` 100% Ready.
+- De ene expliciet toegestane testmail is op 5 november 00:18 CET vanuit de echte productie-leden-Worker via Cloudflare verstuurd (HTTP202). Gmail: **Inbox**, bezorgd na 5 seconden, SPF/DKIM/DMARC alle PASS, verzend-IP `104.30.16.173`. Geen account of inschrijving aangemaakt, geen Gmail-labels aangepast. Testtoestemming verbruikt; niet opnieuw verzenden. Dit bewijst de providerroute, niet een volledige nieuwe registratie of gegarandeerde toekomstige inboxplaatsing.
+- Live `MAIL_TRANSPORT=cloudflare`, `NEWSLETTER_DELIVERY_ENABLED=off`, EMAIL-binding aanwezig. `SMTP_DIAGNOSTICS` direct na de ene test teruggezet op `off`; tijdelijk testadres blijft inert totdat een volgende configdeploy het verwijdert. Knoth root-MX/SPF/DMARC/DKIM gecontroleerd en behouden. Bewijs buiten Git: `../design-preview/cloudflare-email/` (gmail-inbox.png, gmail-authentication.png, sending-live.png).
 - Google Postmaster-domein is geverifieerd; nog onvoldoende volume voor reputatierapport.
 
-Laatst bijgewerkt: 4 november 2026, Europe/Amsterdam
+Laatst bijgewerkt: 5 november 2026, Europe/Amsterdam
 
 ## Studentenkorting als advertentielandingspagina
 
