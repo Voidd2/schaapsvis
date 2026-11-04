@@ -39,4 +39,5 @@ De bestaande eigen statistieken tellen na toestemming paginaweergaven en linkkli
 
 - Inhoudscontrole, catalogus-/navigatiechecks, gerichte ESLint, Next-build (572 pagina's), Cloudflare/Vite-build en `git diff --check` geslaagd. Vite heeft de bekende niet-blokkerende sourcemap-/configwaarschuwingen.
 - Chrome: drie desktopkolommen; op 390px inhoudsbreedte één kolom zonder horizontale overflow; routeknoppen minimaal 52px. NL/EN/DE-locaties, dagen, tijden en linkdoelen gecontroleerd. Geen WhatsApp-bericht verstuurd.
-- Publicatiebewijs volgt na de Cloudflare-uitrol.
+- PR #103 samengevoegd als `0f353ad`; GitHub Build261 geslaagd, Codex-review afgerond zonder bevindingen. Cloudflare siteversie `0a32e34d` staat op 100% Ready.
+- Nieuwe inhoud op zowel `schaapsvis.schaapsvis.workers.dev/nl/varlaks` als `schaapsvishandel.nl/nl/varlaks` in Chrome bevestigd. Canonical wijst naar het .nl-domein; besloten toegang behouden. Screenshot: `../design-preview/varlaks/live-local-locations.png`.
