@@ -4,6 +4,7 @@ Laatst bijgewerkt: 4 november 2026, Europe/Amsterdam
 
 ## Zelfstandige VÅRLAKS-landingspagina
 
+- Lokale campagnevervolgronde: Leiden sinds 1938 nadrukkelijk in intro en verhaal, drie Leidse locaties met centrale openingstijden/routeknoppen en Voorschoten apart op de pagina. NL/EN/DE, mobiel 390px zonder overflow en knoppen vanaf 52px gecontroleerd; Next/Vite-builds en gerichte checks geslaagd. Onderzoek, claimbeperking en toekomstige advertentie-/meetkeuzes: `docs/varlaks-lokale-advertenties.md`. Publicatie nog te verifiëren.
 - PR #102 gepubliceerd als `a5a1b43`; Build259 groen, Codex-review zonder bevindingen. Cloudflare site `396d1958` Ready/100%. Live `/nl/varlaks` met nieuw hoofdmenu-item en vier geladen foto's bevestigd.
 - VÅRLAKS-zalm rechtstreeks in desktop- en mobielmenu, eigen NL/EN/DE-landingspagina met herkomst, leveranciersfilm, recept, FAQ en grote bezoek-/adviesknoppen. Bestaande route behouden voor toekomstige advertenties en QR-codes; niets gelanceerd en website blijft besloten.
 - Officiële bron noemt ASC, geen biologische certificering bevestigd: geen biologische verkoopclaim toegevoegd. Bestaande AI-beelden herkenbaar gelabeld. Details, controles en screenshotlocatie in `docs/varlaks-landingspagina.md`.
