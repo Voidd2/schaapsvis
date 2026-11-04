@@ -3,7 +3,8 @@
 ## Verzorgde accountmails — 5 november 2026
 
 - Gedeelde mailpresentatie in `workers/members/src/email-templates.mjs`: bestaand rond logo, donkerblauw/zachtblauw/goud, ruime koppen, duidelijke code en grote actieknop met fallbacklink. NL/EN/DE; adres en antwoordhulp in footer. Geen tracking, accountregels of transport gewijzigd; campagnes blijven uit.
-- Account- en SMTP-tests en productie-dry-run geslaagd. Lokale Chrome-preview op desktop/smal scherm gecontroleerd; logo publiek bereikbaar, geen overflow, knop circa54px. Geen echte mail verstuurd. Details: `docs/accountmail-vormgeving.md`. Publicatie nog te bevestigen.
+- Account- en SMTP-tests en productie-dry-run geslaagd. Lokale Chrome-preview op desktop/smal scherm gecontroleerd; logo publiek bereikbaar, geen overflow, knop circa 54px. Geen echte mail verstuurd. Details: `docs/accountmail-vormgeving.md`.
+- Gepubliceerd via PR #106 / `3a76654`; Build267 en Member161 geslaagd, Codex-review zonder bevindingen. Cloudflare leden `9212717d` en site `1e80625c` beide 100% Ready; live leden-health HTTP200/status ok. Nieuwe accountmails gebruiken deze template. Geen nieuwe inbox- of volledige mailclienttest uitgevoerd; screenshots tonen lokale voorbeeldmails met fictieve code/link.
 
 ## Cloudflare-accountmail — 5 november 2026
 

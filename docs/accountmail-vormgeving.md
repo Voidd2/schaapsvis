@@ -31,4 +31,7 @@ en Duitse reset. Geen horizontale overflow op smalle weergave; actieknop circa
 
 Geen nieuwe echte mail verzonden. De Inbox/PASS-test van PR #105 bewijst het
 Cloudflare-transport vóór deze vormgevingswijziging, niet deze nieuwe HTML-layout.
-Publicatiebewijs wordt na de productie-uitrol bovenaan CODEX_PROGRESS.md vastgelegd.
+Gepubliceerd via PR #106 als `3a76654`: Build267 en Member161 geslaagd,
+Codex-review zonder bevindingen. Cloudflare leden `9212717d` en site `1e80625c`
+beide 100% Ready; live leden-health HTTP200/status ok. Het ontwerp geldt voor
+volgende mails; reeds ontvangen berichten veranderen niet.
