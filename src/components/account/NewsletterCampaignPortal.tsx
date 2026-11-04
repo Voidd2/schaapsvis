@@ -4,7 +4,13 @@ import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 
 type Campaign = { id: string; subject: string; audience: "all" | "students"; status: "draft" | "queued" | "sent" | "partial_failure"; recipient_count: number; sent_count: number; failed_count: number; created_at: string };
-type Data = { campaigns: Campaign[]; subscriberCount: number; studentSubscriberCount: number; subscriberRegions?: { region_tag: string | null; count: number }[] };
+type Data = { campaigns: Campaign[]; subscriberCount: number; studentSubscriberCount: number; deliveryEnabled?: boolean; subscriberRegions?: { region_tag: string | null; count: number }[] };
+
+const pausedCopy = {
+  nl: "We verzamelen alvast inschrijvingen en bewaren concepten. Reclame versturen staat uit; daarvoor koppelen we later een aparte marketingdienst. Account- en verificatiemails blijven afzonderlijk werken.",
+  en: "We are collecting subscriptions and keeping drafts. Campaign sending is off; a separate marketing service will be connected later. Account and verification emails continue separately.",
+  de: "Wir sammeln bereits Anmeldungen und speichern Entwürfe. Der Werbeversand ist ausgeschaltet; später wird ein separater Marketingdienst angebunden. Konto- und Bestätigungs-E-Mails funktionieren unabhängig davon.",
+};
 
 const copy = {
   nl: { title: "Aanbiedingen per e-mail", intro: "Maak een concept en verstuur het alleen wanneer u daar zelf bewust voor kiest. Alleen bevestigde inschrijvers ontvangen de mail; iedere mail bevat een afmeldlink.", subject: "Onderwerp", body: "Aanbieding en voorwaarden", save: "Concept opslaan", send: "Stuur naar ingeschreven klanten", confirm: "Deze e-mail wordt verstuurd naar alle bevestigde inschrijvers. Doorgaan?", count: "bevestigde inschrijvers", drafts: "Campagnes", loading: "Gegevens laden…", forbidden: "Geen beheerderstoegang.", empty: "Nog geen campagnes.", fail: "Opslaan of versturen lukte niet.", saved: "Concept opgeslagen.", queued: "Campagne in de verzendwachtrij.", draft: "Concept", queuedStatus: "Wordt verzonden", sent: "Verzonden", partial: "Verzonden met fouten", sentCount: "verzonden", failedCount: "mislukt" },
@@ -78,6 +84,7 @@ export function NewsletterCampaignPortal({ locale }: { locale: string }) {
   }
 
   async function send(campaign: Campaign) {
+    if (!data?.deliveryEnabled) { setMessage(pausedCopy[language]); return; }
     if (!window.confirm(campaign.audience === "students" ? audienceText.confirmStudents : t.confirm)) return;
     setBusy(true);
     setMessage("");
@@ -95,7 +102,7 @@ export function NewsletterCampaignPortal({ locale }: { locale: string }) {
       <div className="mx-auto max-w-4xl">
         <p className="kapitaal">Schaap&apos;s Vishandel · beheer</p>
         <h1 className="font-display text-4xl font-bold text-slate-900">{t.title}</h1>
-        <p className="mt-3 max-w-3xl leading-relaxed text-slate-700">{t.intro}</p>
+        <p className="mt-3 max-w-3xl leading-relaxed text-slate-700">{data?.deliveryEnabled ? t.intro : pausedCopy[language]}</p>
         {data === null ? <p className="mt-8">{t.loading}</p> : forbidden ? <div role="alert" className="mt-8 rounded-xl bg-amber-50 p-5"><p>{t.forbidden}</p><a href={`/${language}/beheer/start`} className="mt-3 inline-block font-semibold text-sky-800 underline underline-offset-4">{language === "de" ? "Verwaltungskonto aktivieren" : language === "en" ? "Activate admin account" : "Beheeraccount activeren"} →</a></div> : (
           <>
             <div className="mt-6 rounded-lg bg-sky-50 p-4 text-sm font-semibold text-sky-950">
@@ -113,7 +120,7 @@ export function NewsletterCampaignPortal({ locale }: { locale: string }) {
               {data.campaigns.length === 0 ? <p className="mt-4 text-slate-600">{t.empty}</p> : <ul className="mt-4 divide-y divide-sky-100 rounded-xl border border-sky-100 bg-white">
                 {data.campaigns.map((campaign) => <li key={campaign.id} className="flex flex-wrap items-center justify-between gap-4 p-4">
                   <div><p className="font-semibold text-slate-900">{campaign.subject}</p><p className="mt-1 text-sm text-slate-600">{campaign.audience === "students" ? audienceText.students : audienceText.all} · {campaign.status === "draft" ? t.draft : campaign.status === "queued" ? t.queuedStatus : campaign.status === "sent" ? t.sent : t.partial} · {campaign.sent_count}/{campaign.recipient_count} {t.sentCount}{campaign.failed_count ? ` · ${campaign.failed_count} ${t.failedCount}` : ""}</p></div>
-                  {campaign.status === "draft" && <button type="button" disabled={busy || !(campaign.audience === "students" ? data.studentSubscriberCount : data.subscriberCount)} onClick={() => void send(campaign)} className="knop knop-lijn">{t.send}</button>}
+                  {campaign.status === "draft" && data.deliveryEnabled && <button type="button" disabled={busy || !(campaign.audience === "students" ? data.studentSubscriberCount : data.subscriberCount)} onClick={() => void send(campaign)} className="knop knop-lijn">{t.send}</button>}
                 </li>)}
               </ul>}
             </section>

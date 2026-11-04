@@ -7,14 +7,18 @@
   "vars": {
     "MEMBERS_ENABLED": "off",
     "SITE_ORIGIN": "https://schaapsvishandel.nl",
+    "MAIL_TRANSPORT": "smtp",
+    "NEWSLETTER_DELIVERY_ENABLED": "off",
     "MAIL_FROM": "schaapsv@schaapsvishandel.nl",
     "SMTP_HOST": "khsm1.khsmserver1.nl",
     "SMTP_HELO_NAME": "mail.schaapsvishandel.nl",
     "SMTP_PORT": "587",
     "SMTP_USERNAME": "schaapsv",
   },
-  // D1 en private R2 staan per omgeving in de EU. Mail gebruikt de bestaande
-  // DirectAdmin-mailbox. SMTP_PASSWORD en de auth-secrets staan als versleutelde
+  // D1 en private R2 staan per omgeving in de EU. Productie gebruikt Cloudflare
+  // Email Sending na domeinverificatie. Knoth blijft de inkomende mailboxhost.
+  // SMTP-gegevens blijven bewaard voor expliciete rollback; geen automatische fallback.
+  // SMTP_PASSWORD en de auth-secrets staan als versleutelde
   // Cloudflare secrets; stel ze lokaal alleen met aparte testwaarden in.
   // Google Wallet blijft verborgen totdat GOOGLE_WALLET_ISSUER_ID,
   // GOOGLE_WALLET_CLASS_ID en GOOGLE_WALLET_SERVICE_ACCOUNT_EMAIL als vars en
@@ -33,6 +37,8 @@
         "SMTP_DIAGNOSTICS": "off",
         "MEMBERS_ENABLED": "off",
         "SITE_ORIGIN": "https://preview.schaapsvishandel.nl",
+        "MAIL_TRANSPORT": "smtp",
+        "NEWSLETTER_DELIVERY_ENABLED": "off",
         "MAIL_FROM": "schaapsv@schaapsvishandel.nl",
         "SMTP_HOST": "khsm1.khsmserver1.nl",
         "SMTP_HELO_NAME": "mail.schaapsvishandel.nl",
@@ -57,7 +63,10 @@
         "MEMBERS_ENABLED": "on",
         "ANALYTICS_ENABLED": "on",
         "SITE_ORIGIN": "https://schaapsvishandel.nl",
-        "MAIL_FROM": "schaapsv@schaapsvishandel.nl",
+        "MAIL_TRANSPORT": "cloudflare",
+        "NEWSLETTER_DELIVERY_ENABLED": "off",
+        "MAIL_FROM": "account@berichten.schaapsvishandel.nl",
+        "MAIL_REPLY_TO": "schaapsv@schaapsvishandel.nl",
         "SMTP_HOST": "khsm1.khsmserver1.nl",
         "SMTP_HELO_NAME": "mail.schaapsvishandel.nl",
         "SMTP_PORT": "587",
@@ -65,6 +74,7 @@
         "ADMIN_EMAILS": "schaapsv@schaapsvishandel.nl",
         "ADMIN_IPS": "212.120.114.226,2001:4860:7:61f::f5",
       },
+      "send_email": [{ "name": "EMAIL", "allowed_sender_addresses": ["account@berichten.schaapsvishandel.nl"] }],
       "d1_databases": [
         { "binding": "DB", "database_name": "schaapsvis-members", "database_id": "cc7d01e2-914c-407d-b08f-269c85e67dc2", "migrations_dir": "../../migrations" }
       ],

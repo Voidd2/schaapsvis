@@ -2,7 +2,15 @@
 
 Deze Worker is de serverkant voor algemene accounts, e-mailbevestiging, wachtwoordherstel, studentenaanvragen, beoordeling, de kortingspas en expliciete inschrijving voor e-mailaanbiedingen. De site blijft eigenaar van de pagina's; de Worker verwerkt de gevoelige gegevens.
 
-## Huidige status
+## Mailmigratie — 5 november 2026
+
+Cloudflare Email Sending is geactiveerd op `berichten.schaapsvishandel.nl`. De
+nieuwe productieconfig selecteert expliciet `MAIL_TRANSPORT=cloudflare`; Knoth
+blijft inkomende mailboxhost en expliciete rollbackmogelijkheid. Campagneverzending
+staat standaard uit; inschrijvingen en afmeldingen blijven werken. Actuele
+uitrol-/bezorgstatus en rollback staan in `../../docs/cloudflare-accountmail.md`.
+
+## Historische basisstatus
 
 - Gecontroleerd op 26 oktober 2026 in account **Schaapsvis**: `schaapsvis-members` is gedeployed op de productieroute `schaapsvishandel.nl/api/members/*`. De website zelf blijft een besloten preview; bezoekers zonder geldige toegang zien de binnenkort-pagina.
 - Productie `MEMBERS_ENABLED=on` is bedoeld voor deze afgeschermde preview. De Worker eist daarnaast de site-unlock-cookie of het door Cloudflare vastgestelde IP op de allowlist; bezoekers kunnen niet alleen door de API-URL te kennen registreren. Zet de toegangspoort niet open als onderdeel van deze preview.
@@ -10,7 +18,7 @@ Deze Worker is de serverkant voor algemene accounts, e-mailbevestiging, wachtwoo
 - Cloudflare bevat de mailhost `khsm1.khsmserver1.nl`, poort 587, mailboxgebruiker `schaapsv` en een versleuteld `SMTP_PASSWORD`; ook auth-, ondertekenings- en site-access-secrets zijn ingesteld. Een rechtstreekse testmail via Knoth is op 27 oktober 2026 bij de eigenaar in Gmail aangekomen, maar in Spam geplaatst. Die dag bevestigde een no-send controle vanuit de gedeployde Worker de SMTP-aanmelding (`status: authenticated`, HTTP 200). De tijdelijke diagnostiek staat weer uit. Een volledige registratiemail is nog niet getest.
 - Beheerdermail en IP-allowlist zijn ingesteld voor `schaapsv@schaapsvishandel.nl` en de door de eigenaar opgegeven IP-adressen. De beheer-API blijft bovendien achter de site-access-gate.
 - De aparte Worker `schaapsvis-members-preview` met eigen D1/R2 bestaat nog, maar `preview.schaapsvishandel.nl` heeft geen DNS-record en die Worker staat uit. De actieve besloten preview gebruikt daarom de hoofdsitehost, zoals de eigenaar heeft toegestaan.
-- De Worker begrenst bewijsopslag per omgeving tot 4 GB, 400.000 uploads en 4 miljoen bewijslezingen per maand (plus daglimieten van 10.000 uploads en 50.000 lezingen). Dit zijn applicatielimieten, geen harde accountbrede factuurstop. Cloudflare biedt hier geen harde limiet van €10 per maand. De Worker Paid-upgrade is niet geactiveerd.
+- De Worker begrenst bewijsopslag per omgeving tot 4 GB, 400.000 uploads en 4 miljoen bewijslezingen per maand (plus daglimieten van 10.000 uploads en 50.000 lezingen). Dit zijn applicatielimieten, geen harde accountbrede factuurstop. Cloudflare biedt hier geen harde limiet van €10 per maand. De Worker Paid-upgrade is op 5 november 2026 na expliciet checkout-akkoord geactiveerd.
 - Studentbewijs wordt na beoordeling verwijderd; bij een fout probeert de cron dit opnieuw. Er is geen automatische bewaartermijn voor aanvraagmetadata vastgesteld. Laat echte openbare registratie daarom dicht totdat de privacyinformatie, bewaartermijnen en daadwerkelijke e-mailaflevering zijn bevestigd.
 - Login-, wachtwoordreset-, bevestigingsmail- en nieuwsbriefverzoeken hebben afzonderlijke limieten per IP-adres en per e-mailadres. Accountgerichte tellers zijn HMAC-gehasht met `AUTH_PEPPER`.
 - De nieuwsbrief-cron blijft alleen actief zolang `MEMBERS_ENABLED=on`; alleen adressen met een afzonderlijk vastgelegde expliciete inschrijving mogen campagnes ontvangen. Er wordt geen extra bevestigingsmail meer gestuurd. De toestemming voor marketing blijft vrijwillig en los van studentenkorting.
