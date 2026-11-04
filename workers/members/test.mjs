@@ -6,7 +6,7 @@ import { unzipSync } from "fflate";
 import memberWorker from "./src/index.mjs";
 import { analyticsReport as buildAnalyticsReport, publicAnalyticsPath, analyticsTarget } from "./src/analytics.mjs";
 import { clientDeviceInfo } from "./src/device-info.mjs";
-import { actionEmail, verificationCodeEmail } from "./src/email-templates.mjs";
+import { actionEmail, verificationCodeEmail, accountEmailText } from "./src/email-templates.mjs";
 
 // Rendering must preserve single-use links without interpreting user content.
 for (const [locale, codeLabel, linkLabel] of [["nl", "Uw verificatiecode", "Werkt de knop niet?"], ["en", "Your verification code", "Button not working?"], ["de", "Ihr Bestätigungscode", "Die Schaltfläche funktioniert nicht?"]]) {
@@ -20,6 +20,24 @@ for (const [locale, codeLabel, linkLabel] of [["nl", "Uw verificatiecode", "Werk
   assert.ok(rendered.includes('https://schaapsvishandel.nl/images/brand/schaapsvis-logo-192.png'), "logo uses the existing public gate exception");
   assert.ok(verificationCodeEmail(locale, 'Verification', 'Enter the code', '012345', '10 min').includes(codeLabel));
 }
+
+for (const [locale, salutation] of [["nl", "Beste"], ["en", "Hello"], ["de", "Guten Tag"]]) {
+  const recipient = { first_name: "  Anne-Marie  José ", full_name: "Other name" };
+  const mail = verificationCodeEmail(locale, "Verification", "Code", "012345", "10 min", recipient);
+  assert.ok(mail.includes(`${salutation} Anne-Marie José,`), "keep compound names and accents");
+  const text = accountEmailText(locale, "Code: 012345", recipient);
+  assert.ok(text.startsWith(`${salutation} Anne-Marie José,\n\n`));
+  for (const path of [`/${locale}/privacyverklaring`, `/${locale}/studentenkorting#voorwaarden`]) {
+    assert.ok(mail.includes(`href="https://schaapsvishandel.nl${path}"`));
+    assert.ok(text.includes(`https://schaapsvishandel.nl${path}`));
+  }
+}
+assert.ok(accountEmailText("nl", "Body", { first_name: " ", full_name: "Legacy Name" }).startsWith("Beste Legacy Name,"));
+assert.ok(accountEmailText("nl", "Body", null).startsWith("Hallo,"), "missing names have a neutral greeting");
+assert.ok(accountEmailText("nl", "Body", "A\r\nB").startsWith("Beste A B,"), "control characters cannot alter the greeting structure");
+const unsafeNameMail = actionEmail("nl", "Title", "Body", "Open", "https://example.test", "", { first_name: '<img src=x onerror="bad">' });
+assert.ok(unsafeNameMail.includes('Beste &lt;img src=x onerror=&quot;bad&quot;&gt;,'));
+assert.ok(!unsafeNameMail.includes('<img src=x'), "names are escaped as text, never rendered as HTML");
 
 for (const [ua, browser, os, deviceType] of [
   ["Mozilla/5.0 (Windows NT 10.0) Chrome/142.0 Safari/537.36 Edg/142.0", "Edge", "Windows", "desktop"],
@@ -308,6 +326,7 @@ const sentBeforeRetry = sentEmails.length;
 const retryDelivery = await call("/api/members/verify/resend", { method: "POST", body: { email: "retry@example.test", locale: "en" } });
 assert.equal(retryDelivery.status, 202, "unverified users can recover from a transient initial mail failure");
 assert.equal(sentEmails.length, sentBeforeRetry + 2, "resend delivers fresh codes to both addresses after the transport recovers");
+assert.ok(sentEmails.at(-1).text.startsWith("Hello Retry Test,"), "legacy resend uses the stored full name");
 assert.deepEqual(sentEmails.at(-1).from, { email: env.MAIL_FROM, name: "Schaap’s Vishandel – Accounts" }, "Cloudflare keeps the recognizable account sender");
 assert.equal(sentEmails.at(-1).replyTo, env.MAIL_FROM);
 assert.equal(sentEmails.at(-1).headers["Auto-Submitted"], "auto-generated");
@@ -331,6 +350,10 @@ const registration = await call("/api/members/register", {
 assert.equal(registration.status, 202);
 assert.equal(sentEmails.length, sentBeforeRegistration + 2, "registration sends separate verification codes to both addresses");
 const registrationEmailOffset = sentBeforeRegistration;
+for (const mail of sentEmails.slice(registrationEmailOffset)) {
+  assert.ok(mail.text.startsWith("Hello Test,"));
+  assert.ok(mail.html.includes("Hello Test,"), "both personal and school mail use the collected first name");
+}
 assert.match(sentEmails[registrationEmailOffset].text, /\b\d{6}\b/);
 assert.match(sentEmails[registrationEmailOffset + 1].text, /\b\d{6}\b/);
 assert.match(sentEmails[registrationEmailOffset].html, /Schaap’s Vishandel/);
@@ -413,6 +436,7 @@ assert.equal((await call("/api/members/me", { cookie: sessionCookie })).status, 
 const magicMailOffset = sentEmails.length;
 assert.equal((await call("/api/members/magic-login", { method: "POST", body: { email: "student@example.test", locale: "nl" } })).status, 202, "a verified student can request a generic one-time sign-in response");
 assert.equal(sentEmails.length, magicMailOffset + 1, "the existing mail transport sends one magic sign-in link");
+assert.ok(sentEmails.at(-1).text.startsWith("Beste Test,"));
 const magicLink = sentEmails.at(-1).text.match(/https:\/\/[^\s]+/)?.[0];
 assert.ok(magicLink, "magic sign-in email contains a secure link");
 const magicUrl = new URL(magicLink);
@@ -589,6 +613,7 @@ assert.equal((await call(`/api/members/admin/security/${securityStudent.id}`, { 
 const securityMailOffset = sentEmails.length;
 assert.equal((await call(`/api/members/admin/security/${securityStudent.id}`, { method: "POST", cookie: sessionCookie, body: { action: "verification_requested", method: "email_code", reason: "Onverwachte apparaatwissel handmatig controleren", passPolicy: "keep_active" } })).status, 200, "an administrator can request a one-time email verification without automatically blocking the pass");
 assert.equal(sentEmails.length, securityMailOffset + 1, "the verification request sends one clear transactional email");
+assert.ok(sentEmails.at(-1).text.startsWith("Beste Test,"));
 const securityCode = sentEmails.at(-1).text.match(/\b(\d{6})\b/)?.[1];
 assert.ok(securityCode, "the one-time security code is delivered through the existing mail transport");
 assert.equal((await (await call("/api/members/me", { cookie: sessionCookie })).json()).securityVerification.method, "email_code", "the pending request is visible in the student's account");
@@ -899,9 +924,11 @@ await memberWorker.scheduled({}, env, { waitUntil(promise) { job = promise; } })
 await job;
 assert.equal(sqlite.prepare("SELECT status FROM newsletter_campaigns WHERE id=?").get(quotaCampaignId).status, "sent", "queued delivery resumes when quota is available");
 
-const resetRequest = await call("/api/members/password-reset", { method: "POST", body: { email: "student@example.test", locale: "en" } });
+const resetRequest = await call("/api/members/password-reset", { method: "POST", body: { email: "student@example.test", locale: "en", firstName: "Untrusted request name" } });
 assert.equal(resetRequest.status, 202);
 assert.equal(sentEmails.at(-1).subject, "Reset your password");
+assert.ok(sentEmails.at(-1).text.startsWith("Hello Test,"), "reset uses the stored name, not arbitrary request fields");
+assert.ok(sentEmails.at(-1).html.includes("Hello Test,"));
 const resetUrl = new URL(sentEmails.at(-1).text.match(/https:\/\/[^\s]+/)[0]);
 assert.equal(resetUrl.searchParams.get("locale"), "en");
 const resetPage = await call(`${resetUrl.pathname}${resetUrl.search}`);
@@ -967,6 +994,7 @@ const ownerMailOffset = sentEmails.length;
 assert.equal((await call("/api/members/admin/register", { method: "POST", body: ownerDetails })).status, 202, "owner can start a dedicated account without a school address");
 assert.equal(sentEmails.length, ownerMailOffset + 1, "owner receives one verification email at the allowlisted business address");
 assert.equal(sentEmails.at(-1).to, ownerDetails.email);
+assert.ok(sentEmails.at(-1).text.startsWith("Hello Shop Owner,"), "admin verification uses the owner's name");
 assert.match(sentEmails.at(-1).text, /Click below to verify the email address/, "link-based owner mail does not introduce a missing verification code");
 assert.doesNotMatch(sentEmails.at(-1).text, /verification code/i, "link-based owner mail is distinct from student code mail");
 const firstOwnerVerificationUrl = new URL(sentEmails.at(-1).text.match(/https:\/\/[^\s]+/)[0]);

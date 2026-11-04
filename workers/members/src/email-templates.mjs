@@ -8,8 +8,27 @@ const COPY = {
 };
 const languageFor = (locale) => Object.hasOwn(COPY, locale) ? locale : "nl";
 const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+const FOOTER_LINKS = {
+  nl: { privacy: "Privacyverklaring", terms: "Voorwaarden studentenkorting", greeting: "Beste", generic: "Hallo," },
+  en: { privacy: "Privacy policy", terms: "Student discount terms", greeting: "Hello", generic: "Hello," },
+  de: { privacy: "Datenschutzerklärung", terms: "Bedingungen für den Studentenrabatt", greeting: "Guten Tag", generic: "Guten Tag," },
+};
 
-function brandedEmail({ locale = "nl", title, intro, contentHtml = "", buttonUrl = "", buttonLabel = "", footer = "", category = "account" }) {
+function greeting(locale, recipient) {
+  const copy = FOOTER_LINKS[languageFor(locale)];
+  const clean = (value) => typeof value === "string" ? value.replace(/[\u0000-\u001f\u007f]/g, " ").replace(/\s+/g, " ").trim().slice(0, 140) : "";
+  const name = typeof recipient === "string" ? clean(recipient) : clean(recipient?.first_name) || clean(recipient?.full_name);
+  return name ? `${copy.greeting} ${name},` : copy.generic;
+}
+
+// Keep text-only clients just as personal and usable as the HTML version.
+export function accountEmailText(locale, body, recipient = "") {
+  const language = languageFor(locale);
+  const copy = FOOTER_LINKS[language];
+  return `${greeting(language, recipient)}\n\n${body}\n\nSchaap’s Vishandel · Herenstraat 48 · 2313 AL Leiden\n${COPY[language].website}: ${BRAND_ORIGIN}/${language}\n${copy.privacy}: ${BRAND_ORIGIN}/${language}/privacyverklaring\n${copy.terms}: ${BRAND_ORIGIN}/${language}/studentenkorting#voorwaarden`;
+}
+
+function brandedEmail({ locale = "nl", title, intro, contentHtml = "", buttonUrl = "", buttonLabel = "", footer = "", category = "account", recipient = "" }) {
   const language = languageFor(locale);
   const copy = COPY[language];
   const url = escapeHtml(buttonUrl);
@@ -23,7 +42,6 @@ function brandedEmail({ locale = "nl", title, intro, contentHtml = "", buttonUrl
 <html lang="${language}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no,date=no,address=no,email=no"><title>${escapeHtml(title)}</title>
 <style>@media only screen and (max-width:480px){.email-outer{padding:16px 8px!important}.email-pad{padding-left:24px!important;padding-right:24px!important}.email-name{font-size:22px!important}.email-logo{width:64px!important;height:64px!important}.email-title{font-size:28px!important}.email-code{font-size:30px!important;letter-spacing:4px!important}}</style></head>
 <body style="margin:0;padding:0;background:#eef5f8;color:#173b4c;font:16px/1.65 Arial,Helvetica,sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%">
-<div style="display:none;font-size:1px;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all">${escapeHtml(intro)}</div>
 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" bgcolor="#eef5f8" style="background:#eef5f8"><tr><td class="email-outer" align="center" style="padding:32px 16px">
 <!--[if mso]><table role="presentation" width="600" align="center" cellpadding="0" cellspacing="0"><tr><td><![endif]-->
 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" bgcolor="#ffffff" style="width:100%;max-width:600px;background:#ffffff;border:1px solid #d4e4eb;border-radius:16px;border-spacing:0;table-layout:fixed">
@@ -34,28 +52,30 @@ function brandedEmail({ locale = "nl", title, intro, contentHtml = "", buttonUrl
 <tr><td class="email-pad" style="padding:32px 36px 36px">
 <div style="font:700 11px/18px Arial,sans-serif;letter-spacing:2px;color:#075c7c">${category === "offers" ? copy.offers : copy.account}</div>
 <h1 class="email-title" style="margin:12px 0 20px;font:700 32px/1.2 Georgia,'Times New Roman',serif;color:#08445b">${escapeHtml(title)}</h1>
+<p style="margin:0 0 14px;font-size:16px;line-height:27px;color:#355566;overflow-wrap:anywhere">${escapeHtml(greeting(language, recipient))}</p>
 <p style="margin:0 0 22px;font-size:16px;line-height:27px;color:#355566">${escapeHtml(intro)}</p>
 ${contentHtml}${action}
 </td></tr>
 <tr><td class="email-pad" bgcolor="#f3f8fa" style="padding:22px 36px;background:#f3f8fa;border-top:3px solid #bdab88;border-radius:0 0 16px 16px">
 <p style="margin:0 0 12px;font-size:14px;line-height:23px;color:#355566">${copy.help}</p>
 <p style="margin:0;font-size:13px;line-height:22px;color:#496273"><strong style="color:#08445b">Schaap’s Vishandel</strong><br>Herenstraat 48 · 2313 AL Leiden<br><a href="${BRAND_ORIGIN}/${language}" style="color:#075c7c;text-decoration:underline">${copy.website}</a></p>
+<p style="margin:8px 0 0;font-size:13px;line-height:24px"><a href="${BRAND_ORIGIN}/${language}/privacyverklaring" style="color:#075c7c;text-decoration:underline">${FOOTER_LINKS[language].privacy}</a><br><a href="${BRAND_ORIGIN}/${language}/studentenkorting#voorwaarden" style="color:#075c7c;text-decoration:underline">${FOOTER_LINKS[language].terms}</a></p>
 <p style="margin:16px 0 0;font-size:12px;line-height:20px;color:#496273">${escapeHtml(footer || copy.footer)}</p>
 </td></tr></table>
 <!--[if mso]></td></tr></table><![endif]-->
 </td></tr></table></body></html>`;
 }
 
-export function verificationCodeEmail(locale, subject, intro, code, validity) {
+export function verificationCodeEmail(locale, subject, intro, code, validity, recipient = "") {
   const language = languageFor(locale);
   const copy = COPY[language];
-  return brandedEmail({ locale: language, title: subject, intro,
+  return brandedEmail({ locale: language, title: subject, intro, recipient,
     contentHtml: `<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:26px 0 22px;table-layout:fixed"><tr><td align="center" bgcolor="#edf6fa" style="padding:22px 12px;background:#edf6fa;border:1px solid #c9e2ed;border-radius:10px"><div style="font-size:13px;font-weight:700;color:#355566">${copy.code}</div><div class="email-code" style="margin-top:8px;font:700 36px/1.4 'Courier New',monospace;letter-spacing:6px;color:#08445b">${escapeHtml(code)}</div></td></tr></table><p style="margin:0;color:#355566;font-size:15px;line-height:25px">${escapeHtml(validity)}</p><p style="margin:10px 0 0;color:#496273;font-size:13px;line-height:22px">${copy.codeHint}</p>`,
   });
 }
 
-export function actionEmail(locale, subject, intro, buttonLabel, buttonUrl, note = "") {
-  return brandedEmail({ locale, title: subject, intro, buttonUrl, buttonLabel,
+export function actionEmail(locale, subject, intro, buttonLabel, buttonUrl, note = "", recipient = "") {
+  return brandedEmail({ locale, title: subject, intro, buttonUrl, buttonLabel, recipient,
     contentHtml: note ? `<p style="margin:0;color:#496273;font-size:14px;line-height:23px">${escapeHtml(note)}</p>` : "",
   });
 }
