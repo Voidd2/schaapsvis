@@ -3,7 +3,8 @@
 ## Persoonlijke accountmails — 5 november 2026
 
 - Verificatie, reset, inloglinks en beveiligingsmails gebruiken de opgeslagen voornaam (oude/beheeraccounts: volledige naam; anders neutraal). Zowel HTML als tekstversie bevatten website, privacyverklaring en de bestaande studentvoorwaarden. Nieuwe ankerlink `studentenkorting#voorwaarden`, NL/EN/DE. Geen accountregels, transport, campagne-instellingen of database gewijzigd.
-- Ledenintegratietests met naam-/escaping-/fallbackcontroles, SMTP-test, contentcontrole en productie-dry-run geslaagd. Chrome-preview op desktop en 400px zonder overflow; Duitse reset en Nederlandse verificatie gecontroleerd. Geen echte mail verzonden. Details: `docs/accountmail-vormgeving.md`. Publicatie volgt na CI/review.
+- Ledenintegratietests met naam-/escaping-/fallbackcontroles, SMTP-test, contentcontrole en productie-dry-run geslaagd. Chrome-preview op desktop en 400px zonder overflow; Duitse reset en Nederlandse verificatie gecontroleerd. Geen echte mail verzonden. Details: `docs/accountmail-vormgeving.md`.
+- PR #107 gepubliceerd als `d72b267`: Build269 en Member163 geslaagd, Codex-review zonder bevindingen. Cloudflare leden `0c9a17d2` en site `2e3c5576` beide 100% Ready. Leden-health HTTP200/status ok; privacyroute en nieuw voorwaardenanker live gecontroleerd. Voorbeeld met fictieve naam/code buiten Git: `../design-preview/cloudflare-email/personal-verification.png`. Inboxplaatsing van deze wijziging niet opnieuw getest.
 
 ## Verzorgde accountmails — 5 november 2026
 

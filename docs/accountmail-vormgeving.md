@@ -49,9 +49,14 @@ benoemde link naar de bestaande voorwaarden voor studentenkorting. Het anker
 `studentenkorting#voorwaarden` opent de bestaande voorwaarden; er zijn geen
 algemene voorwaarden verzonnen. De dubbele verborgen intro is verwijderd.
 
-Tests controleren namen, accents/compound names, lege en historische namen,
+Tests controleren namen, accenten/samengestelde namen, lege en historische namen,
 HTML-escaping, locale-links en opgeslagen namen bij reset/resend/inloggen.
 Personalisatie is geen garantie tegen spam: Google benadrukt authenticatie,
 reputatie en spamklachten, niet de aanwezigheid van de voornaam.
 Bron: https://support.google.com/mail/answer/81126?hl=en.
 Geen nieuwe echte testmail verstuurd; de eerdere Inbox-test blijft afzonderlijk.
+
+Gepubliceerd via PR #107 / `d72b267`; Build269 en Member163 geslaagd, review
+zonder bevindingen. Cloudflare leden `0c9a17d2` en site `2e3c5576` 100% Ready.
+Health HTTP200 en live privacy-/voorwaardenbestemmingen gecontroleerd.
+Lokale Nederlandse voorbeeldmail: `../design-preview/cloudflare-email/personal-verification.png`.
