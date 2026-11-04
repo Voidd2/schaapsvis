@@ -17,8 +17,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return { ...paginaMetadata({ locale, pad: "/account", title, description }), robots: { index: false, follow: false } };
 }
 
-export default async function AccountPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function AccountPage({ params, searchParams }: { params: Promise<{ locale: string }>; searchParams: Promise<{ mode?: string | string[] }> }) {
   const { locale } = await params;
   if (!locales.includes(locale as (typeof locales)[number])) notFound();
-  return <AccountPortal locale={locale} />;
+  const initialMode = (await searchParams).mode === "register" ? "register" : "login";
+  return <AccountPortal key={initialMode} locale={locale} initialMode={initialMode} />;
 }
