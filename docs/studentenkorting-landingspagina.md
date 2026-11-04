@@ -18,9 +18,9 @@ De oude pagina had een algemene kop, een vage accountknop en verspreide voorwaar
 
 ## Validatie
 
-- Contentintegriteit, gerichte ESLint, Next-build (572 pagina's), Cloudflare/Vite-build en diff-check geslaagd. Daarna uitsluitend ongebruikte vertaalvelden verwijderd en stap 3 verduidelijkt; inhoud/lint opnieuw geslaagd, definitieve GitHub-build volgt.
+- Contentintegriteit, gerichte ESLint, Next-build (572 pagina's), Cloudflare/Vite-build en diff-check geslaagd. Na de laatste tekstcorrectie ook GitHub Build263 geslaagd; Codex-review op definitieve PR-head `56ba34e` afgerond zonder bevindingen.
 - Chrome: CTA → geselecteerd Account maken; terugschakelen naar Inloggen; gewone account-URL → geselecteerd Inloggen. Getest met lokale read-only fixture die alleen anoniem `{user:null}` teruggeeft; iedere niet-GET geweigerd. Niets aangemaakt, verzonden of aan productie gekoppeld.
-- NL/EN/DE-inhoud bekeken; NL en DE op 390px zonder horizontale overflow, CTA's minimaal 52px. Vrijwillige nieuwsbrief-FAQ opent met juiste uitleg. Lokale screenshotcapture had een browser-timeout; live visueel bewijs volgt na publicatie.
+- NL/EN/DE-inhoud bekeken; NL en DE op 390px zonder horizontale overflow, CTA's minimaal 52px. Vrijwillige nieuwsbrief-FAQ opent met juiste uitleg. Desktopopmaak visueel bekeken in Chrome; bewijs buiten Git: `../design-preview/student-landing/live-page.png`.
 
 ## Vóór echte advertenties
 
@@ -30,4 +30,6 @@ Mogelijke advertentietekst: “Student in Leiden? Ontdek 10% korting op het hele
 
 ## Publicatie
 
-Volgt na GitHub-controle en Cloudflare-uitrol.
+- PR #104 samengevoegd als `b76a036`; Cloudflare-versie `6c192cfa` Ready met 100% verkeer.
+- Nieuwe kop en drie aanvraaglinks op Workers én hoofddomein bevestigd. Op het hoofddomein ook definitieve stap-3-tekst, previewmelding, geladen afbeeldingen en canonical naar `.nl` gecontroleerd.
+- Live CTA opent `/nl/account?mode=register`. De reeds ingelogde beheerder blijft terecht zijn account zien; niet uitgelogd of aangepast. De anonieme registratietab is hierboven afzonderlijk lokaal gecontroleerd. Geen echte aanvraag of mail verstuurd.

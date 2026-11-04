@@ -4,7 +4,7 @@ Laatst bijgewerkt: 4 november 2026, Europe/Amsterdam
 
 ## Studentenkorting als advertentielandingspagina
 
-- Nieuwe NL/EN/DE-opbouw met duidelijk 10%-aanbod, voorwaarden, aanmeldstappen, voorbeeldpas/logo, lokale bezoekinformatie, FAQ en herhaalde aanvraagknop. Aanvraaglink opent alleen het bestaande registratietabblad; normale accountlinks blijven login. Geen account-/mail-/kortingsregels veranderd. Lokale read-only browsertest, inhoud/lint en Next/Vite-builds geslaagd; details in `docs/studentenkorting-landingspagina.md`. Publicatie nog te controleren.
+- Gepubliceerd via PR #104 als `b76a036`, Cloudflare `6c192cfa` 100% Ready. Nieuwe NL/EN/DE-opbouw met duidelijk 10%-aanbod, voorwaarden, aanmeldstappen, voorbeeldpas/logo, lokale bezoekinformatie, FAQ en herhaalde aanvraagknop. Aanvraaglink opent alleen het bestaande registratietabblad; normale accountlinks blijven login. Geen account-/mail-/kortingsregels veranderd. Lokale read-only browsertest, inhoud/lint, Next/Vite-builds en Build263 geslaagd; Codex-review zonder bevindingen. Inhoud op Workers en hoofddomein bevestigd. Live CTA bewaart bestaande beheersessie; anonieme tab lokaal getest zonder aanvragen/mails. Details: `docs/studentenkorting-landingspagina.md`; screenshot buiten Git: `../design-preview/student-landing/live-page.png`.
 
 ## Zelfstandige VÅRLAKS-landingspagina
 
