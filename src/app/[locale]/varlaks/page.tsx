@@ -5,15 +5,18 @@ import { paginaMetadata, kruimelSchema } from "@/lib/seo";
 import { BEDRIJF } from "@/lib/bedrijf";
 import { bestelContact } from "@/lib/bestel-contact";
 import { VarlaksFilm } from "@/components/shared/VarlaksFilm";
+import { VarlaksLocations } from "@/components/shared/VarlaksLocations";
 import { Schema } from "@/components/Schema";
 
 const translations = {
   nl: {
     title: "VÅRLAKS-zalm in Leiden | Herkomst & bereiding",
     headline: "Uit het hoge noorden.\nBij ons in Leiden.",
-    intro: "Maak kennis met onze VÅRLAKS-zalm uit Noord-Noorwegen. Voor een mooie filet in de pan, een ovengerecht om te delen of een bijzonder diner thuis. Wij helpen u kiezen.",
-    eyebrow: "Onze zalm · Schaap’s Vishandel Leiden",
-    storyTitle: "Een zalm met een herkomstverhaal",
+    intro: "Al sinds 1938 helpen we Leidenaren aan goede vis. Ontdek onze VÅRLAKS-zalm uit Noord-Noorwegen, met een verhaal over de herkomst en persoonlijk advies aan de toonbank.",
+    eyebrow: "Schaap’s Vishandel · Leiden sinds 1938",
+    nearby: "Herenstraat · Botermarkt · Aalmarkt bij de Waag",
+    storyTitle: "Vertrouwd in Leiden. Met oog voor morgen.",
+    mission: "Wij willen dat u niet alleen een mooie filet ziet, maar ook weet waar uw vis vandaan komt. Daarom geven we het verhaal achter onze zalm een plek naast ons advies over smaak, porties en bereiding. Zo willen we, als Leidse vishandel sinds 1938, helpen om bewuster vis te kiezen.",
     story: "VÅRLAKS werkt met familiebedrijven in Noord-Noorwegen, boven de poolcirkel. De leverancier beschrijft de zalm als volledig traceerbaar van ei tot eindproduct. Dat verhaal en de smaak zijn waarom wij deze zalm graag in onze toonbank leggen.",
     journey: "Van kwekerij tot aan tafel",
     farm: "Familiebedrijven in Noord-Noorwegen",
@@ -30,7 +33,7 @@ const translations = {
     product: "Bekijk onze VÅRLAKS-zalm",
     recipe: "Bekijk een zalmrecept",
     ask: "Vraag ons om advies",
-    visit: "Kom langs in Leiden",
+    visit: "Bekijk onze Leidse locaties",
     local: "Persoonlijk advies aan de toonbank",
     localText: "Over de hoeveelheid, het snijden en de bereiding.",
     availability: "VÅRLAKS-zalm hoort bij ons vaste assortiment. Kom langs aan de Herenstraat of vraag ons om advies over de hoeveelheid en bereiding. Voor een groter gezelschap of een specifieke snit bespreken we graag uw wensen.",
@@ -57,9 +60,11 @@ const translations = {
   en: {
     title: "VÅRLAKS salmon in Leiden | Origin & cooking",
     headline: "From the far north.\nHere in Leiden.",
-    intro: "Discover our VÅRLAKS salmon from Northern Norway. For a fillet in the pan, an oven dish to share or a special dinner at home. We are happy to help you choose.",
-    eyebrow: "Our salmon · Schaap’s Fishmonger Leiden",
-    storyTitle: "Salmon with a story of origin",
+    intro: "Helping people in Leiden choose good fish since 1938. Discover our VÅRLAKS salmon from Northern Norway, with a story about its origin and personal advice at the counter.",
+    eyebrow: "Schaap’s Vishandel · In Leiden since 1938",
+    nearby: "Herenstraat · Botermarkt · Aalmarkt by De Waag",
+    storyTitle: "At home in Leiden. Looking ahead.",
+    mission: "We want you to see more than a lovely fillet: we want you to know where your fish comes from. That is why we share the story behind our salmon alongside advice on flavour, portions and cooking. As a Leiden fishmonger since 1938, we want to help people make more informed choices about fish.",
     story: "VÅRLAKS works with family businesses in Northern Norway, above the Arctic Circle. The supplier describes its salmon as traceable from egg to finished product. That story and its flavour are why we like to have this salmon at our counter.",
     journey: "From farm to table",
     farm: "Family businesses in Northern Norway",
@@ -76,7 +81,7 @@ const translations = {
     product: "Explore our VÅRLAKS salmon",
     recipe: "Explore a salmon recipe",
     ask: "Ask us for advice",
-    visit: "Visit us in Leiden",
+    visit: "Find our Leiden locations",
     local: "Personal advice at the counter",
     localText: "On portions, cuts and cooking.",
     availability: "VÅRLAKS salmon is part of our regular range. Visit us on Herenstraat or ask us for advice on portions and cooking. For a larger gathering or a particular cut, we are happy to discuss your wishes.",
@@ -103,9 +108,11 @@ const translations = {
   de: {
     title: "VÅRLAKS-Lachs in Leiden | Herkunft & Zubereitung",
     headline: "Aus dem hohen Norden.\nBei uns in Leiden.",
-    intro: "Entdecken Sie unseren VÅRLAKS-Lachs aus Nordnorwegen. Als Filet aus der Pfanne, Ofengericht zum Teilen oder für ein besonderes Abendessen zu Hause. Wir beraten Sie gern.",
-    eyebrow: "Unser Lachs · Schaap’s Vishandel Leiden",
-    storyTitle: "Lachs mit einer Herkunftsgeschichte",
+    intro: "Seit 1938 helfen wir den Menschen in Leiden, guten Fisch auszuwählen. Entdecken Sie unseren VÅRLAKS-Lachs aus Nordnorwegen mit seiner Herkunftsgeschichte und persönlicher Beratung an der Fischtheke.",
+    eyebrow: "Schaap’s Vishandel · In Leiden seit 1938",
+    nearby: "Herenstraat · Botermarkt · Aalmarkt bei De Waag",
+    storyTitle: "In Leiden verwurzelt. Den Blick nach vorn.",
+    mission: "Wir möchten, dass Sie nicht nur ein schönes Filet sehen, sondern auch wissen, woher Ihr Fisch kommt. Deshalb erzählen wir die Geschichte unseres Lachses und beraten zu Geschmack, Portionen und Zubereitung. Als Leidener Fischgeschäft seit 1938 möchten wir so eine bewusstere Auswahl von Fisch ermöglichen.",
     story: "VÅRLAKS arbeitet mit Familienbetrieben in Nordnorwegen oberhalb des Polarkreises. Der Anbieter beschreibt seinen Lachs als vom Ei bis zum Endprodukt rückverfolgbar. Diese Geschichte und der Geschmack sind Gründe, warum wir diesen Lachs gern in unserer Fischtheke anbieten.",
     journey: "Von der Farm bis auf den Tisch",
     farm: "Familienbetriebe in Nordnorwegen",
@@ -122,7 +129,7 @@ const translations = {
     product: "Unseren VÅRLAKS-Lachs ansehen",
     recipe: "Ein Lachsrezept ansehen",
     ask: "Lassen Sie sich beraten",
-    visit: "Besuchen Sie uns in Leiden",
+    visit: "Unsere Standorte in Leiden",
     local: "Persönliche Beratung an der Fischtheke",
     localText: "Zu Mengen, Zuschnitten und Zubereitung.",
     availability: "VÅRLAKS-Lachs gehört zu unserem festen Sortiment. Besuchen Sie uns in der Herenstraat oder fragen Sie nach Mengen und Zubereitung. Für größere Gesellschaften oder einen bestimmten Zuschnitt besprechen wir gern Ihre Wünsche.",
@@ -184,7 +191,8 @@ export default async function VarlaksPage({ params }: { params: Promise<{ locale
           <p className="kapitaal">{c.eyebrow}</p>
           <h1><span className="varlaks-wordmark">VÅRLAKS</span><span className="varlaks-headline">{c.headline}</span></h1>
           <p className="varlaks-lead">{c.intro}</p>
-          <div className="varlaks-actions"><Link className="knop varlaks-primary" href={`/${lang}/bezoek-ons`}>{c.visit} →</Link><a className="knop varlaks-secondary" href={ask.href}>{c.ask} ↗</a></div>
+          <p className="varlaks-nearby">{c.nearby}</p>
+          <div className="varlaks-actions"><a className="knop varlaks-primary" href="#locaties">{c.visit} ↓</a><a className="knop varlaks-secondary" href={ask.href}>{c.ask} ↗</a></div>
           <Link className="varlaks-text-link" href={`/${lang}/assortiment/varlaks-zalm`}>{c.product} →</Link>
         </div>
         <figure>
@@ -194,9 +202,10 @@ export default async function VarlaksPage({ params }: { params: Promise<{ locale
       </div>
     </header>
     <div className="section-wrap varlaks-facts">{facts.map(([title, text]) => <div key={title}><strong>{title}</strong><p>{text}</p></div>)}</div>
+    <VarlaksLocations locale={lang} />
     <section className="section-wrap varlaks-section varlaks-split" aria-labelledby="varlaks-origin">
       <div>
-        <p className="kapitaal">{c.journey}</p><h2 id="varlaks-origin">{c.storyTitle}</h2><p>{c.story}</p>
+        <p className="kapitaal">{c.eyebrow}</p><h2 id="varlaks-origin">{c.storyTitle}</h2><p>{c.mission}</p><p className="mt-5">{c.story}</p>
         <a className="varlaks-text-link" href="https://varlaks.no/retail/" target="_blank" rel="noopener noreferrer">{c.source} ↗</a>
       </div>
       <div><p className="kapitaal mb-3">{c.films}</p><VarlaksFilm locale={lang} /></div>
@@ -221,8 +230,8 @@ export default async function VarlaksPage({ params }: { params: Promise<{ locale
     </section>
     <section className="varlaks-contact" aria-labelledby="varlaks-contact">
       <div className="section-wrap varlaks-split">
-        <div><p className="kapitaal">{c.local}</p><h2 id="varlaks-contact">{c.contactTitle}</h2><p>{c.availability}</p></div>
-        <div><div className="varlaks-actions"><a className="knop varlaks-primary" href={ask.href}>{c.ask} ↗</a><Link className="knop varlaks-secondary" href={`/${lang}/bezoek-ons`}>{c.visit} →</Link></div><p className="varlaks-contact-note">{c.contactNote}</p></div>
+        <div><p className="kapitaal">{c.eyebrow}</p><h2 id="varlaks-contact">{c.contactTitle}</h2><p>{c.availability}</p></div>
+        <div><div className="varlaks-actions"><a className="knop varlaks-primary" href={ask.href}>{c.ask} ↗</a><a className="knop varlaks-secondary" href="#locaties">{c.visit} ↑</a></div><p className="varlaks-contact-note">{c.contactNote}</p></div>
       </div>
     </section>
   </div>;
