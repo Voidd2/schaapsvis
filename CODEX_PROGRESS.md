@@ -1,5 +1,14 @@
 # Schaap's Vishandel — voortgang
 
+## Cloudflare-accountmail — 5 november 2026
+
+- Eigenaar koos Cloudflare voor account-/verificatiemails; reclame later via een andere dienst. Lijst en expliciete toestemmingen behouden.
+- Workers Paid na expliciet checkout-akkoord geactiveerd ($5/maand plus meerverbruik). Verzenddomein `berichten.schaapsvishandel.nl` toont Enabled / DNS Configured. Root-onboarding met p=reject is door auto-review geblokkeerd; veilig alternatief wijzigt alleen een nieuw subdomein.
+- Branch `codex/cloudflare-account-email`: expliciete providerkeuze, herkenbare accountafzender, geen automatische SMTP-fallback, campagneverzending en cron gepauzeerd met NL/EN/DE-beheeruitleg. Accounts/consents/afmeldingen behouden, geen migratie.
+- Leden- en SMTP-tests, TypeScript, gerichte ESLint, contentcontrole, Next-build (572 pagina’s), Cloudflare-build en Wrangler production dry-run geslaagd. Details: `docs/cloudflare-accountmail.md`.
+- Nog te doen: commit/PR, productie-uitrol, live mailcontrole en inboxbewijs. Toestemming voor één nieuwe testmail gevraagd; nog geen echte mail verzonden.
+- Google Postmaster-domein is geverifieerd; nog onvoldoende volume voor reputatierapport.
+
 Laatst bijgewerkt: 4 november 2026, Europe/Amsterdam
 
 ## Studentenkorting als advertentielandingspagina

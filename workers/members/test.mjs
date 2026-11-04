@@ -272,6 +272,16 @@ assert.equal(missingSmtpPasswordRegistration.status, 503, "registration refuses 
 assert.equal(sentEmails.length, sentBeforeMissingSmtpPassword, "an incomplete SMTP transport never falls back to another mail provider");
 delete env.SMTP_HOST;
 delete env.SMTP_USERNAME;
+env.MAIL_TRANSPORT = "invalid-provider";
+assert.equal((await call("/api/members/register", { method: "POST", body: {} })).status, 503, "unknown mail providers fail closed");
+env.MAIL_TRANSPORT = "cloudflare";
+env.SMTP_HOST = "old-smtp.example.test";
+env.SMTP_USERNAME = "old-mailbox";
+env.SMTP_PASSWORD = "test-only-retained-secret";
+const mailBinding = env.EMAIL;
+delete env.EMAIL;
+assert.equal((await call("/api/members/register", { method: "POST", body: {} })).status, 503, "Cloudflare without its binding must not fall back to retained SMTP credentials");
+env.EMAIL = mailBinding;
 simulateMailFailure = true;
 const failedDeliveryRegistration = await call("/api/members/register", {
   method: "POST",
@@ -284,6 +294,15 @@ const sentBeforeRetry = sentEmails.length;
 const retryDelivery = await call("/api/members/verify/resend", { method: "POST", body: { email: "retry@example.test", locale: "en" } });
 assert.equal(retryDelivery.status, 202, "unverified users can recover from a transient initial mail failure");
 assert.equal(sentEmails.length, sentBeforeRetry + 2, "resend delivers fresh codes to both addresses after the transport recovers");
+assert.deepEqual(sentEmails.at(-1).from, { email: env.MAIL_FROM, name: "Schaap’s Vishandel – Accounts" }, "Cloudflare keeps the recognizable account sender");
+assert.equal(sentEmails.at(-1).replyTo, env.MAIL_FROM);
+assert.equal(sentEmails.at(-1).headers["Auto-Submitted"], "auto-generated");
+assert.equal(sentEmails.at(-1).headers["X-Auto-Response-Suppress"], "All");
+assert.ok(!sentEmails.at(-1).headers["Content-Type"], "Cloudflare generates MIME headers itself");
+delete env.MAIL_TRANSPORT;
+delete env.SMTP_HOST;
+delete env.SMTP_USERNAME;
+delete env.SMTP_PASSWORD;
 const oversizedRegistration = await call("/api/members/register", {
   method: "POST",
   body: { email: "oversized@example.test", name: "x".repeat(40_000), password: "correct horse battery" },
@@ -767,10 +786,31 @@ const studentDraft = await call("/api/members/admin/newsletter-campaigns", {
 });
 assert.equal(studentDraft.status, 201);
 const studentCampaignId = (await studentDraft.json()).id;
+const subscribersBeforePause = sqlite.prepare("SELECT * FROM newsletter_subscriptions ORDER BY email").all();
+assert.equal((await call(`/api/members/admin/newsletter-campaigns/${studentCampaignId}/send`, { method: "POST", cookie: sessionCookie })).status, 503, "campaign delivery is disabled unless explicitly enabled");
+assert.equal((await (await call("/api/members/admin/newsletter-campaigns", { cookie: sessionCookie })).json()).deliveryEnabled, false);
+env.MAIL_TRANSPORT = "cloudflare";
+env.NEWSLETTER_DELIVERY_ENABLED = "on";
+assert.equal((await call(`/api/members/admin/newsletter-campaigns/${studentCampaignId}/send`, { method: "POST", cookie: sessionCookie })).status, 503, "Cloudflare account transport cannot be enabled for marketing");
+assert.equal(sqlite.prepare("SELECT status FROM newsletter_campaigns WHERE id=?").get(studentCampaignId).status, "draft", "blocked sends do not mutate drafts");
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM newsletter_deliveries WHERE campaign_id=?").get(studentCampaignId).count, 0);
+assert.deepEqual(sqlite.prepare("SELECT * FROM newsletter_subscriptions ORDER BY email").all(), subscribersBeforePause, "pausing marketing preserves subscriptions and consent evidence");
+delete env.MAIL_TRANSPORT; // Legacy test binding simulates the previously supported campaign transport.
 const studentQueue = await call(`/api/members/admin/newsletter-campaigns/${studentCampaignId}/send`, { method: "POST", cookie: sessionCookie });
 assert.equal((await studentQueue.json()).recipientCount, 1, "a student campaign excludes ordinary subscribers");
 assert.equal(sqlite.prepare("SELECT email FROM newsletter_deliveries WHERE campaign_id=?").get(studentCampaignId).email, "student@example.test");
 let studentJob;
+const queuedBeforePause = sqlite.prepare("SELECT * FROM newsletter_deliveries WHERE campaign_id=?").get(studentCampaignId);
+const sentBeforePause = sentEmails.length;
+for (const mode of ["cloudflare", "paused"]) {
+  if (mode === "cloudflare") env.MAIL_TRANSPORT = "cloudflare";
+  else { delete env.MAIL_TRANSPORT; env.NEWSLETTER_DELIVERY_ENABLED = "off"; }
+  await memberWorker.scheduled({}, env, { waitUntil(promise) { studentJob = promise; } });
+  await studentJob;
+  assert.equal(sentEmails.length, sentBeforePause, "paused campaigns send no emails");
+  assert.deepEqual(sqlite.prepare("SELECT * FROM newsletter_deliveries WHERE campaign_id=?").get(studentCampaignId), queuedBeforePause, "paused cron does not claim or consume queued delivery attempts");
+}
+env.NEWSLETTER_DELIVERY_ENABLED = "on";
 await memberWorker.scheduled({}, env, { waitUntil(promise) { studentJob = promise; } });
 await studentJob;
 assert.equal(sqlite.prepare("SELECT status FROM newsletter_deliveries WHERE campaign_id=?").get(studentCampaignId).status, "sent");

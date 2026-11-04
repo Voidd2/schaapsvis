@@ -478,22 +478,42 @@ async function rateLimitIdentity(db, pepper, scope, ip, identity, ipLimit, ident
   return ipAllowed && identityAllowed;
 }
 
+function mailTransport(env) {
+  // Explicit selection wins over retained SMTP secrets during migration/rollback.
+  if (env.MAIL_TRANSPORT) return env.MAIL_TRANSPORT;
+  return env.SMTP_HOST || env.SMTP_USERNAME || env.SMTP_PASSWORD ? "smtp" : "legacy-binding";
+}
+
+function newsletterDeliveryEnabled(env) {
+  return env.NEWSLETTER_DELIVERY_ENABLED === "on" && mailTransport(env) !== "cloudflare";
+}
+
 function isMailConfigured(env) {
-  const smtpSelected = Boolean(env.SMTP_HOST || env.SMTP_USERNAME || env.SMTP_PASSWORD);
-  if (smtpSelected) {
+  const transport = mailTransport(env);
+  if (transport === "smtp") {
     return Boolean(env.MAIL_FROM && env.SMTP_HOST && env.SMTP_USERNAME && env.SMTP_PASSWORD);
   }
-  return Boolean(env.MAIL_FROM && env.EMAIL);
+  return ["cloudflare", "legacy-binding"].includes(transport) && Boolean(env.MAIL_FROM && typeof env.EMAIL?.send === "function");
 }
 
 async function sendMail(env, to, subject, text, htmlBody, options = {}) {
   if (!isMailConfigured(env)) throw new Error("mail-not-configured");
-  const smtpSelected = Boolean(env.SMTP_HOST || env.SMTP_USERNAME || env.SMTP_PASSWORD);
-  if (smtpSelected) {
+  const transport = mailTransport(env);
+  if (transport === "smtp") {
     const smtp = await import("./smtp-worker.mjs");
     return smtp.sendSmtpMail(env, { to, subject, text, html: htmlBody, ...options });
   }
 
+  if (transport === "cloudflare") {
+    // Email Sending is for transactional mail. Never route a campaign here.
+    if (options.listUnsubscribeUrl) throw new Error("campaign_delivery_disabled");
+    return env.EMAIL.send({
+      from: { email: env.MAIL_FROM, name: "Schaap’s Vishandel – Accounts" },
+      to, subject, text, html: htmlBody,
+      replyTo: env.MAIL_REPLY_TO || env.MAIL_FROM,
+      headers: { "Auto-Submitted": "auto-generated", "X-Auto-Response-Suppress": "All" },
+    });
+  }
   return env.EMAIL.send({ from: env.MAIL_FROM, to, subject, text, html: htmlBody, ...options });
 }
 
@@ -505,7 +525,7 @@ async function sendVerificationPair(env, { email, schoolEmail, copy, locale, per
   const personal = await Promise.allSettled([
     sendMail(env, email, copy.verifySubject, transactionalText(copy.verifyIntro, personalCode), verificationCodeEmail(locale, copy.verifySubject, copy.verifyIntro, personalCode, validity)),
   ]);
-  if (env.SMTP_HOST || env.SMTP_USERNAME || env.SMTP_PASSWORD) {
+  if (mailTransport(env) === "smtp") {
     await new Promise((resolve) => setTimeout(resolve, 1500));
   }
   const school = await Promise.allSettled([
@@ -2103,7 +2123,7 @@ async function adminNewsletterCampaigns(request, env) {
       AND p.status='active' AND p.revoked_at IS NULL AND p.expires_at>? AND a.status='approved'
   )`).bind(nowIso()).first();
   const subscriberRegions = await env.DB.prepare(`SELECT region_tag, COUNT(*) AS count FROM newsletter_subscriptions WHERE status = 'subscribed' GROUP BY region_tag ORDER BY region_tag`).all();
-  return json({ campaigns: campaigns.results || [], subscriberCount: Number(subscriberCount?.count || 0), studentSubscriberCount: Number(studentSubscriberCount?.count || 0), subscriberRegions: subscriberRegions.results || [] });
+  return json({ campaigns: campaigns.results || [], subscriberCount: Number(subscriberCount?.count || 0), studentSubscriberCount: Number(studentSubscriberCount?.count || 0), subscriberRegions: subscriberRegions.results || [], deliveryEnabled: newsletterDeliveryEnabled(env) });
 }
 
 async function createNewsletterCampaign(request, env) {
@@ -2132,6 +2152,7 @@ async function sendNewsletterCampaign(request, env, campaignId) {
   if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
   const admin = await requireAdmin(request, env);
   if (!admin) return json({ error: "forbidden" }, 403);
+  if (!newsletterDeliveryEnabled(env)) return json({ error: "campaign_delivery_disabled" }, 503);
   const campaign = await env.DB.prepare(`SELECT id, status, audience FROM newsletter_campaigns WHERE id = ?`).bind(campaignId).first();
   if (!campaign || campaign.status !== "draft") return json({ error: "campaign_not_draft" }, 409);
   const queuedAt = nowIso();
@@ -2212,7 +2233,7 @@ async function checkSmtpAuthentication(request, env) {
 }
 
 async function processNewsletterDeliveries(env) {
-  if (!isMailConfigured(env) || !env.SITE_ORIGIN) return;
+  if (!newsletterDeliveryEnabled(env) || !isMailConfigured(env) || !env.SITE_ORIGIN) return;
   const now = new Date();
   const nowText = now.toISOString();
   const staleBefore = new Date(now.getTime() - 10 * 60 * 1000).toISOString();
