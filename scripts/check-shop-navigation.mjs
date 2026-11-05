@@ -22,6 +22,29 @@ function load(file) {
 }
 const { platterFamilies, platterFamily, selectedPlatter, platterSelectionParams, platterDetailHref, platterOverviewHref } = load("src/lib/platter-families.ts");
 const { FEESTDAGEN_PRODUCTEN } = load("src/lib/feestdagen-producten.ts");
+const { giftRequestLink, giftRequestCopy } = load("src/lib/gift-request.ts");
+for (const locale of ["nl", "en", "de"]) {
+  const t = giftRequestCopy(locale);
+  const draft = { product: "Gift test", kind: "trio", size: 1, fish: [0, 1, 3], wishes: "  " };
+  const url = new URL(giftRequestLink(locale, draft));
+  assert.equal(url.origin, "https://wa.me");
+  const message = url.searchParams.get("text");
+  assert.ok(message.includes(t.choices[3]));
+  assert.ok(!message.includes(t.choices[2]));
+  assert.ok(!message.includes(t.wishesLine + ":"));
+  assert.ok(!message.includes(t.sizeLine + ":"));
+  for (const fish of [[0, 1], [0, 1, 2, 3], [0, 0, 1], [0, 1, 99]]) assert.equal(giftRequestLink(locale, { ...draft, fish }), null);
+  for (let size = 0; size < 3; size++) {
+    const packageMessage = new URL(giftRequestLink(locale, { ...draft, kind: "package", size })).searchParams.get("text");
+    assert.ok(packageMessage.includes(t.sizes[size]));
+    assert.ok(!packageMessage.includes(t.fishLine + ":"));
+  }
+  const wishes = "Extra kaart & verpakking? #test\nGraag bespreken.";
+  const custom = new URL(giftRequestLink(locale, { ...draft, kind: "custom", wishes }));
+  assert.ok(custom.searchParams.get("text").includes(wishes));
+  assert.equal(custom.hash, "");
+  assert.ok(custom.searchParams.get("text").includes(t.note));
+}
 assert.deepEqual(Object.values(platterFamilies).map(items => items.length), [4, 5, 3]);
 const all = Object.values(platterFamilies).flat();
 assert.equal(new Set(all.map(item => item.slug)).size, 12);

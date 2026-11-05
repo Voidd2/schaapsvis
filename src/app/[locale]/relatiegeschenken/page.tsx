@@ -1,4 +1,6 @@
-import Image from "next/image";
+import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
+import { GiftRequest } from "@/components/catalog/GiftRequest";
+import { giftRequestCopy } from "@/lib/gift-request";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -13,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   if (!["nl", "en", "de"].includes(locale)) notFound();
   const c = copy(locale);
-  return paginaMetadata({ locale, pad: "/relatiegeschenken", title: `${c.title} | Schaap’s Vishandel`, description: c.intro, image: "/images/editorial/schaaps-relatiegeschenk-zalmpakket-v1.png" });
+  return paginaMetadata({ locale, pad: "/relatiegeschenken", title: `${c.title} | Schaap’s Vishandel`, description: c.intro, image: "/images/editorial/schaaps-vispakket-v2.webp" });
 }
 
 export default async function RelatiegeschenkenPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -21,14 +23,15 @@ export default async function RelatiegeschenkenPage({ params }: { params: Promis
   if (!["nl", "en", "de"].includes(locale)) notFound();
   const c = copy(locale);
   const contact = bestelContact(locale, c.title);
+  const requestCopy = giftRequestCopy(locale);
   return <>
-    <PaginaKop kruimels={[{ naam: c.home, href: `/${locale}` }, { naam: c.feast, href: `/${locale}/feestdagen` }, { naam: c.title }]} label={c.label} titel={c.title} intro={c.intro} knoppen={[{ label: c.ask, href: contact.href, extern: true }, { label: c.back, href: `/${locale}/feestdagen`, soort: "lijn" }]} zijkant={<div className="overflow-hidden rounded-2xl border border-white/20 shadow-xl"><Image src="/images/editorial/schaaps-relatiegeschenk-zalmpakket-v1.png" alt={c.items[0][3]} width={1536} height={1024} priority className="aspect-[3/2] w-full object-cover" /></div>} uitgelijnd="boven" />
+    <PaginaKop kruimels={[{ naam: c.home, href: `/${locale}` }, { naam: c.feast, href: `/${locale}/feestdagen` }, { naam: c.title }]} label={c.label} titel={c.title} intro={c.intro} knoppen={[{ label: c.ask, href: contact.href, extern: true }, { label: c.back, href: `/${locale}/feestdagen`, soort: "lijn" }]} zijkant={<div className="overflow-hidden rounded-2xl border border-white/20 shadow-xl"><Image src="/images/editorial/schaaps-vispakket-v2.webp" alt={c.items[0][3]} width={1536} height={1024} priority className="aspect-[3/2] w-full object-cover" /></div>} uitgelijnd="boven" />
     <Sectie grond="papier" id="mogelijkheden">
       <Kop label={c.options} titel={c.optionsTitle} intro={c.note} />
-      <ul className="grid grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-8 sm:gap-x-6 sm:gap-y-10">
+      <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-8 sm:gap-x-6 sm:gap-y-10">
         {c.items.map(([titel, tekst, beeld, alt, detail], index) => <li id={`geschenk-${index}`} key={titel} className="group flex min-w-0 flex-col overflow-hidden rounded-lg border bg-white" style={{ borderColor: "var(--linen)" }}>
           <div className="overflow-hidden"><Image src={beeld} alt={alt} width={1000} height={700} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.035]" /></div>
-          <div className="flex flex-1 flex-col p-4 sm:p-6"><p className="kapitaal mb-2">{String(index + 1).padStart(2, "0")}</p><h2 className="text-[1.05rem] leading-tight sm:text-[1.35rem]">{titel}</h2><p className="mt-2 hidden leading-relaxed sm:block" style={{ color: "var(--charcoal)" }}>{tekst}</p><p className="mt-3 text-[0.78rem] font-bold sm:text-sm" style={{ color: "#a61f2b" }}>{c.priceNote} · {detail}</p><a href={contact.href} className="mt-auto inline-block pt-4 text-[0.78rem] font-semibold underline underline-offset-4 sm:text-sm" style={{ color: "var(--navy)" }}>{c.view} →</a></div>
+          <div className="flex flex-1 flex-col p-4 sm:p-6"><p className="kapitaal mb-2">{String(index + 1).padStart(2, "0")}</p><h2 className="text-[1.05rem] leading-tight sm:text-[1.35rem]">{titel}</h2><p className="mt-2 leading-relaxed" style={{ color: "var(--charcoal)" }}>{tekst}</p><p className="mt-3 text-[0.78rem] font-bold sm:text-sm" style={{ color: "#a61f2b" }}>{c.priceNote} · {detail}</p>{[0, 2, 3].includes(index) ? <><p className="mt-3 text-sm">{index === 2 ? requestCopy.trioExample : requestCopy.example}</p><GiftRequest locale={locale} product={titel} kind={index === 0 ? "package" : index === 2 ? "trio" : "custom"} /></> : <a href={bestelContact(locale, titel).href} className="knop knop-lijn mt-4">{c.view} →</a>}</div>
         </li>)}
       </ul>
       <div className="mt-10 flex flex-wrap items-center justify-between gap-4 rounded-xl px-5 py-5 sm:px-7" style={{ backgroundColor: "#eaf7fc" }}><p className="max-w-2xl font-semibold" style={{ color: "var(--navy-dark)" }}>{c.note}</p><Link href={`/${locale}/feestdagen`} className="knop knop-lijn">{c.back}</Link></div>

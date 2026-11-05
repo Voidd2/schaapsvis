@@ -7,6 +7,7 @@ import { platterFamily, platterLabels, platterOverviewHref, platterDetailHref } 
 import { catalogProduct } from "@/lib/seafood-catalog";
 import { ProductQuantity, CatalogBackLink } from "@/components/catalog/RequestControls";
 import { CatalogHelp } from "@/components/catalog/CatalogHelp";
+import { giftRequestCopy } from "@/lib/gift-request";
 import type { Metadata } from "next";
 import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
 import Link from "next/link";
@@ -137,6 +138,7 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
           <p className="mt-5 text-sm leading-6 text-[#527080]">{note}</p>
           {family && <Link className="mt-4 underline underline-offset-4" href={platterOverviewHref(locale, slug, selection.toString()).replace(/#.*$/, "#maatwerk")}>{platterPresentation(locale).custom}</Link>}
           <ProductQuantity key={slug} slug={slug} locale={locale} />
+          {["luxe-trio-klein", "luxe-vistrio"].includes(slug) && <div className="mt-5 rounded-xl border border-[#bfd6df] bg-white p-5"><p className="mb-3 text-sm leading-6">{giftRequestCopy(locale).customTrioNote}</p><Link className="knop knop-lijn" href={`/${locale}/relatiegeschenken#geschenk-2`}>{giftRequestCopy(locale).customTrio} →</Link></div>}
           <CatalogHelp locale={locale} />
         </div>
       </div>

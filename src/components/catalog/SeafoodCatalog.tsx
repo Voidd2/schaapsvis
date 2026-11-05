@@ -8,6 +8,8 @@ import { ProductQuantity, LegacyCatalogSelection } from "./RequestControls";
 import { CatalogPhoto } from "./CatalogPhoto";
 
 import { giftCopy } from "@/lib/gift-copy";
+import { giftRequestCopy } from "@/lib/gift-request";
+import { GiftRequest } from "./GiftRequest";
 
 type Props = { locale: string; festive?: boolean };
 function ProductCard({ slug, locale, festive, featured = false }: Props & { slug: string; featured?: boolean }) {
@@ -22,6 +24,7 @@ function ProductCard({ slug, locale, festive, featured = false }: Props & { slug
       <p className="seafood-price">{platterPrice(product, locale)}</p>
       <Link className="seafood-detail" href={href}>{t.view} →</Link>
       <ProductQuantity slug={slug} locale={locale} />
+      {["luxe-trio-klein", "luxe-vistrio"].includes(slug) && <Link className="seafood-detail mt-3" href="#geschenken">{giftRequestCopy(locale).customTrio} →</Link>}
     </div>
   </article>;
 }
@@ -69,6 +72,6 @@ export function SeafoodCatalog({ locale, festive = false }: Props) {
 }
 
 function GiftIdeas({ locale }: { locale:string }) {
- const c = giftCopy(locale);
- return <section id="geschenken" className="catalog-gifts seafood-section" aria-labelledby="gift-title"><div className="catalog-heading"><h2 id="gift-title">{c.options}</h2><p>{c.note}</p></div><div className="seafood-grid">{[0,2,3].map(index => { const [name, description, image, alt] = c.items[index]; return <article key={name}><Image src={image} alt={alt} width={600} height={400} sizes="(max-width:640px) 100vw, 33vw" /><h3>{name}</h3><p>{description}</p><p className="seafood-price">{c.priceNote}</p><Link className="seafood-detail" href={`/${locale}/relatiegeschenken#geschenk-${index}`}>{c.view} →</Link></article>; })}</div></section>;
+ const c = giftCopy(locale), t = giftRequestCopy(locale);
+ return <section id="geschenken" className="catalog-gifts seafood-section" aria-labelledby="gift-title"><div className="catalog-heading"><h2 id="gift-title">{c.options}</h2><p>{c.note}</p></div><div className="seafood-grid">{[0,2,3].map(index => { const [name, description, image, alt] = c.items[index]; return <article key={name}><Image src={image} alt={alt} width={1200} height={800} sizes="(max-width:640px) 100vw, 33vw" /><p className="mt-2 text-sm">{index === 2 ? t.trioExample : t.example}</p><h3>{name}</h3><p>{description}</p><p className="seafood-price">{c.priceNote}</p><GiftRequest locale={locale} product={name} kind={index === 0 ? "package" : index === 2 ? "trio" : "custom"} /></article>; })}</div></section>;
 }
