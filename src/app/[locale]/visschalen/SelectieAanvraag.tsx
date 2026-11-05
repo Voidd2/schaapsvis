@@ -6,6 +6,8 @@ import { PLATTER_FAMILIES, platterFamilies, platterLabels } from "@/lib/platter-
 import { platterPhotoAlt, platterPresentation, platterPrice } from "@/lib/platter-presentation";
 import { localizedPlatterProduct } from "@/lib/platter-product-text";
 import { feestdagenBedrag, feestdagenProduct } from "@/lib/feestdagen-producten";
+import { catalogProduct } from "@/lib/seafood-catalog";
+import { gourmetPortionText } from "@/lib/gourmet-pricing";
 
 const TEKST = {
   nl: {
@@ -54,8 +56,9 @@ function maakKaarten({ items, locale, showPrice = true, photoCaption }: KaartPro
       const isPlatter = product?.categorie === "visschalen";
       const naam = isPlatter ? localizedPlatterProduct(product, locale).naam : selectieNaam(item.slug, locale);
       const bedrag = isPlatter ? feestdagenBedrag(product.prijsCents, locale) : euro(item.prijs);
+      const unit = item.per100g ? (locale === "de" ? " pro 100 g" : " per 100 g") : item.perStuk ? ` ${t.stuk}` : "";
       const bericht = showPrice
-        ? `${t.bericht} ${naam} (${t.prijs.toLowerCase()} ${bedrag}${item.perStuk ? ` ${t.stuk}` : ""}). ${t.bevestig}`
+        ? `${t.bericht} ${naam} (${t.prijs.toLowerCase()} ${bedrag}${unit}). ${t.bevestig}`
         : `${t.bericht} ${naam}. ${t.bevestig}`;
       return {
         slug: item.slug,
@@ -66,8 +69,8 @@ function maakKaarten({ items, locale, showPrice = true, photoCaption }: KaartPro
         fotoBijschrift: isPlatter ? platterPresentation(locale).photoText : photoCaption ?? t.foto,
         fotoAlt: isPlatter ? platterPhotoAlt(product, locale) : undefined,
         fotoLabel: isPlatter ? platterPresentation(locale).photoLabel : undefined,
-        beschrijving: isPlatter ? platterPresentation(locale).photoText : showPrice ? t.productBeschrijving(naam) : t.schaalBeschrijving(naam),
-        prijsTekst: isPlatter ? platterPrice(product, locale) : showPrice ? `${t.prijs} ${bedrag}${item.perStuk ? ` ${t.stuk}` : ""}` : undefined,
+        beschrijving: product?.categorie === "gourmet" ? gourmetPortionText(item.slug, locale) : isPlatter ? platterPresentation(locale).photoText : showPrice ? t.productBeschrijving(naam) : t.schaalBeschrijving(naam),
+        prijsTekst: product?.categorie === "gourmet" ? platterPrice(catalogProduct(item.slug, locale), locale) : isPlatter ? platterPrice(product, locale) : showPrice ? `${t.prijs} ${bedrag}${unit}` : undefined,
         whatsappHref: whatsappLink(bericht),
         whatsappLabel: t.vraag,
         detailsHref: feestdagenProduct(item.slug) ? `/${locale}/feestdagen/${item.slug}` : undefined,

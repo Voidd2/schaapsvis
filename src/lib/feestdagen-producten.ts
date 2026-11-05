@@ -1,3 +1,5 @@
+import { gourmetPriceCents } from "./gourmet-pricing";
+
 export type FeestdagenCategorie = "visschalen" | "gourmet" | "delicatessen";
 
 export type FeestdagenProduct = {
@@ -212,8 +214,8 @@ export const FEESTDAGEN_PRODUCTEN: readonly FeestdagenProduct[] = [
   {
     slug: "gourmet-trio-1-persoon",
     naam: "Gourmet trio 1 persoon",
-    prijsCents: 1899,
-    eenheid: "per stuk",
+    prijsCents: gourmetPriceCents("gourmet-trio-1-persoon"),
+    eenheid: "per schaal",
     afbeelding: "/images/dirks/gourmet-trio-1-persoon.webp",
     categorie: "gourmet",
     intro: "Een gourmettrio voor één persoon met drie soorten gemarineerde vis.",
@@ -223,24 +225,24 @@ export const FEESTDAGEN_PRODUCTEN: readonly FeestdagenProduct[] = [
   {
     slug: "gourmet-schotel-3-4-pers",
     naam: "Gourmet schotel 3-4 pers.",
-    prijsCents: 5899,
-    eenheid: "per stuk",
+    prijsCents: gourmetPriceCents("gourmet-schotel-3-4-pers"),
+    eenheid: "per schaal",
     afbeelding: "/images/dirks/gourmet-schotel-3-4-pers.webp",
     categorie: "gourmet",
-    intro: "Een complete visgourmetschotel voor drie tot vier personen.",
-    samenstelling: ["Tonijn", "Zalm", "Kabeljauw", "Garnalen", "Vis van het moment", "Verschillende marinades"],
+    intro: "Een visgourmetschotel van 1 kg met zalm, tonijn, kabeljauw en garnalen voor drie tot vier personen.",
+    samenstelling: ["300 gram zalm", "200 gram tonijn", "300 gram kabeljauw", "200 gram garnalen", "Verschillende marinades"],
     allergenen: ["Vis", "Schaaldieren", "Melk", "Mosterd"],
     besteltermijn: "Minimaal één dag vooraf bestellen.",
   },
   {
     slug: "gourmetschotel-5-6-pers",
     naam: "Gourmetschotel 5-6 pers.",
-    prijsCents: 7699,
-    eenheid: "per stuk",
+    prijsCents: gourmetPriceCents("gourmetschotel-5-6-pers"),
+    eenheid: "per schaal",
     afbeelding: "/images/dirks/gourmetschotel-5-6-pers.webp",
     categorie: "gourmet",
-    intro: "Een ruime visgourmetschotel voor vijf tot zes personen.",
-    samenstelling: ["Tonijn", "Zalm", "Kabeljauw", "Garnalen", "Vis van het moment", "Verschillende marinades"],
+    intro: "Een visgourmetschotel van 1,5 kg met zalm, tonijn, kabeljauw en garnalen voor vijf tot zes personen.",
+    samenstelling: ["450 gram zalm", "300 gram tonijn", "450 gram kabeljauw", "300 gram garnalen", "Verschillende marinades"],
     allergenen: ["Vis", "Schaaldieren", "Melk", "Mosterd"],
     besteltermijn: "Minimaal één dag vooraf bestellen.",
   },

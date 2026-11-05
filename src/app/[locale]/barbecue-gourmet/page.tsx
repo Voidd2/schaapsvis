@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GourmetRequest } from "@/components/catalog/GourmetRequest";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
@@ -107,6 +108,10 @@ export default async function BarbecueGourmetPage({
           intro={t("selectieIntro")}
           photoCaption={t("photoCaption")}
         />
+      </Sectie>
+
+      <Sectie grond="zand" smal>
+        <GourmetRequest locale={locale} />
       </Sectie>
 
       <Sectie grond="zand" smal>

@@ -1,6 +1,7 @@
 import offers from "../data/dirks-offers-2026-09-29.json";
 import { siteLanguage } from "./language";
 import { feestdagenProduct } from "./feestdagen-producten";
+import { GOURMET_RETAIL_CENTS_PER_100G, LOOSE_GOURMET_FISH_INDEX } from "./gourmet-pricing";
 
 export type SelectieGroep = "borrelbox" | "klassiek" | "luxe" | "hapjes" | "bijzonder" | "barbecue" | "gourmet" | "los";
 export type SelectieItem = {
@@ -14,6 +15,7 @@ export type SelectieItem = {
   personenTot?: number;
   alleenAanvraag?: boolean;
   perStuk?: boolean;
+  per100g?: boolean;
 };
 
 const groeps: Record<string, SelectieGroep> = {
@@ -74,13 +76,15 @@ export const DIRKS_SELECTIE: SelectieItem[] = offers.offers.map((offer) => {
   if (!groep || !titel) throw new Error(`Ontbrekende catalogustekst: ${offer.slug}`);
   const bereik = personen(offer.slug);
   const actueelFeestproduct = feestdagenProduct(offer.slug);
+  const fishIndex = LOOSE_GOURMET_FISH_INDEX[offer.slug];
   return {
     slug: offer.slug,
     groep,
     naam: actueelFeestproduct?.naam ?? titel[0],
     foto: `/images/dirks/${offer.slug}.webp`,
-    prijs: actueelFeestproduct ? actueelFeestproduct.prijsCents / 100 : offer.targetCents / 100,
+    prijs: actueelFeestproduct ? actueelFeestproduct.prijsCents / 100 : fishIndex !== undefined ? GOURMET_RETAIL_CENTS_PER_100G[fishIndex] / 100 : offer.targetCents / 100,
     bronPrijs: offer.sourceCents / 100,
+    per100g: fishIndex !== undefined,
     personenVan: bereik?.[0],
     personenTot: bereik?.[1],
     alleenAanvraag: offer.slug === "visschotel-glutenvrij-1-persoon" || offer.slug === "visschotel-kreeft",

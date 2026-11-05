@@ -37,6 +37,7 @@ export function platterPresentation(locale: string) {
 
 export function platterPhotoAlt(product: FeestdagenProduct, locale: string) {
   const family = platterFamily(product.slug);
+  if (product.categorie === "gourmet") return `${platterPresentation(locale).photoLabel}: ${product.naam}`;
   return family ? platterPresentation(locale).photoAlt[family] : product.naam;
 }
 

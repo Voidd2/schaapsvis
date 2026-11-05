@@ -10,10 +10,13 @@ import { CatalogPhoto } from "./CatalogPhoto";
 import { giftCopy } from "@/lib/gift-copy";
 import { giftRequestCopy } from "@/lib/gift-request";
 import { GiftRequest } from "./GiftRequest";
+import { GourmetRequest } from "./GourmetRequest";
+import { gourmetRequestCopy } from "@/lib/gourmet-request";
+import { gourmetPortionText } from "@/lib/gourmet-pricing";
 
 type Props = { locale: string; festive?: boolean };
 function ProductCard({ slug, locale, festive, featured = false }: Props & { slug: string; featured?: boolean }) {
-  const product = catalogProduct(slug, locale), t = catalogText(locale), isPlatter = product.categorie === "visschalen";
+  const product = catalogProduct(slug, locale), t = catalogText(locale), isPlatter = product.categorie === "visschalen" || product.categorie === "gourmet";
   const href = `/${locale}/feestdagen/${slug}?catalog=${festive ? "feestdagen" : "visschalen"}`;
   const legacyAnchor = slug === MAIN_PLATTERS[0] ? "schalen-klassiek" : slug === MAIN_PLATTERS[3] ? "schalen-luxe" : slug === MAIN_PLATTERS[4] ? "schalen-hapjes" : undefined;
   return <article id={legacyAnchor} className={`seafood-card${featured ? " seafood-featured-card" : ""}`} data-catalog-card={slug}>
@@ -21,9 +24,11 @@ function ProductCard({ slug, locale, festive, featured = false }: Props & { slug
     <div className="seafood-card-body">
       <h3><Link href={href}>{product.naam}</Link></h3>
       <p>{product.intro}</p>
+      {product.categorie === "gourmet" && <p className="text-sm">{gourmetPortionText(slug, locale)}</p>}
       <p className="seafood-price">{platterPrice(product, locale)}</p>
       <Link className="seafood-detail" href={href}>{t.view} →</Link>
       <ProductQuantity slug={slug} locale={locale} />
+      {product.categorie === "gourmet" && <a className="knop knop-lijn mt-4 min-h-12 whitespace-normal" href="#gourmet-samenstellen">{gourmetRequestCopy(locale).title} →</a>}
       {["luxe-trio-klein", "luxe-vistrio"].includes(slug) && <Link className="seafood-detail mt-3" href="#geschenken">{giftRequestCopy(locale).customTrio} →</Link>}
     </div>
   </article>;
@@ -50,6 +55,7 @@ export function SeafoodCatalog({ locale, festive = false }: Props) {
     {[{ id: "gourmet", title: t.gourmet, intro: t.gourmetIntro, products: GOURMET }, { id: "delicatessen", title: t.delicacies, intro: t.delicaciesIntro, products: DELICACIES }].map(section => <section key={section.id} id={section.id} className="seafood-section">
       <div className="catalog-heading"><h2>{section.title}</h2><p>{section.intro}</p></div>
       <div className="seafood-grid">{section.products.map(slug => <ProductCard key={slug} {...props} slug={slug} />)}</div>
+      {section.id === "gourmet" && <GourmetRequest locale={locale} />}
     </section>)}
     <section id="salades" className="seafood-salads seafood-section">
       <div className="catalog-heading"><h2>{t.salads}</h2><p>{t.saladIntro}</p></div>
