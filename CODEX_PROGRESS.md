@@ -1,5 +1,12 @@
 # Schaap's Vishandel — voortgang
 
+## Visgeschenken: nieuwe beelden en keuzes — 5 november 2026
+
+- Twee nieuwe geoptimaliseerde AI-voorbeeldbeelden met het vernieuwde logo: vispakket met gerookte zalm/paling/makreel en pakket op maat. Luxe vistrio gebruikt het bestaande drievaksbakje. Oude beelden behouden.
+- Klein/middel/groot en exact drie soorten uit Hollandse garnalen, gerookte paling, zalm en makreel als persoonlijke aanvraag op Visschalen, Feestdagen en Relatiegeschenken, volledig NL/EN/DE. Optionele wensen, geen automatische verzending of offerte. Vaste trio-producten en prijzen behouden; maatwerkprijs na overleg.
+- Catalogus-/inhoudscontrole, gerichte lint, Next-build inclusief TypeScript en Cloudflare-build geslaagd. Desktop en 390px, Duitse/Engelse tekst, keuzevalidatie en geladen beelden gecontroleerd. Geen WhatsApp-bericht of echte aanvraag verstuurd.
+- PR #109 / `652b766` gepubliceerd; Build273 geslaagd, Codex-review zonder bevindingen. Cloudflare site `97292724` en leden `199aa2f6` beide 100% Ready. Live formulieren en alle drie beelden bevestigd. Screenshot: `../design-preview/gifts/live-cadeaukaarten.png`. Beelden, prompts en bewijs: `docs/visgeschenken-2026-11-05.md`.
+
 ## Goedgekeurd vernieuwd logo — 5 november 2026
 
 - Eigenaar koos het opnieuw getekende ronde logo en vroeg toepassing op website en mails. Master: `public/images/brand/schaapsvis-logo-v2.png`; eerdere originele bron behouden. Bestaand exportscript maakt site-/mailbadge, favicons, Apple-touch-icoon en bestaande Wallet-assets vanuit deze ene bron.
