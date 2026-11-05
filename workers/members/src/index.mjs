@@ -1224,7 +1224,7 @@ async function issueGoogleWalletPass(request, env) {
     genericType: "GENERIC_LOYALTY_CARD",
     hexBackgroundColor: "#075c7c",
     logo: {
-      sourceUri: { uri: `${env.SITE_ORIGIN}/og-image.png` },
+      sourceUri: { uri: `${env.SITE_ORIGIN}/images/brand/schaapsvis-logo-192.png?v=2` },
       contentDescription: localized(text.title),
     },
     cardTitle: localized(text.title),

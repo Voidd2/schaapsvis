@@ -1,6 +1,6 @@
 // Presentation only: no delivery, tracking, account state or token generation.
 const BRAND_ORIGIN = "https://schaapsvishandel.nl";
-const LOGO_URL = `${BRAND_ORIGIN}/images/brand/schaapsvis-logo-192.png`;
+const LOGO_URL = `${BRAND_ORIGIN}/images/brand/schaapsvis-logo-192.png?v=2`;
 const COPY = {
   nl: { account: "ACCOUNT", offers: "AANBIEDINGEN", heritage: "LEIDEN · SINDS 1938", code: "Uw verificatiecode", codeHint: "Deel deze code met niemand. De code verloopt automatisch.", fallback: "Werkt de knop niet? Open deze link:", help: "Een vraag? Antwoord gerust op deze e-mail.", website: "Naar onze website", footer: "Dit is een automatisch accountbericht van Schaap’s Vishandel." },
   en: { account: "ACCOUNT", offers: "OFFERS", heritage: "LEIDEN · SINCE 1938", code: "Your verification code", codeHint: "Do not share this code with anyone. It expires automatically.", fallback: "Button not working? Open this link:", help: "Have a question? Simply reply to this email.", website: "Visit our website", footer: "This is an automated account message from Schaap’s Vishandel." },
