@@ -8,6 +8,9 @@ import { catalogProduct } from "@/lib/seafood-catalog";
 import { ProductQuantity, CatalogBackLink } from "@/components/catalog/RequestControls";
 import { CatalogHelp } from "@/components/catalog/CatalogHelp";
 import { giftRequestCopy } from "@/lib/gift-request";
+import { GourmetRequest } from "@/components/catalog/GourmetRequest";
+import { gourmetRequestCopy } from "@/lib/gourmet-request";
+import { gourmetPortionText } from "@/lib/gourmet-pricing";
 import type { Metadata } from "next";
 import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
 import Link from "next/link";
@@ -121,7 +124,7 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
       <div className="section-wrap product-detail-grid">
         <figure className="product-detail-photo"><div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white shadow-sm">
           <Image src={product.afbeelding} alt={platterPhotoAlt(product, locale)} fill priority sizes="(max-width: 1024px) 100vw, 58vw" className={family ? "object-contain" : "object-cover"} />
-        </div>{family && <figcaption className="mt-3"><PlatterPhotoNote locale={locale} /></figcaption>}</figure>
+        </div>{(family || product.categorie === "gourmet") && <figcaption className="mt-3"><PlatterPhotoNote locale={locale} /></figcaption>}</figure>
         <div className="product-detail-heading">
           <nav aria-label="Breadcrumb" className="mb-6 text-sm text-[#527080]">
             <Link href={`/${locale}`}>{t.home}</Link> <span aria-hidden="true">/</span> <Link href={`/${locale}/feestdagen`}>{t.season}</Link>
@@ -135,15 +138,18 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
         </div>
         <div className="product-detail-actions">
           <p className="max-w-xl text-[1.08rem] leading-8 text-[#38515e]">{product.intro}</p>
+          {product.categorie === "gourmet" && <p className="mt-3 font-semibold">{gourmetPortionText(slug, locale)}</p>}
           <p className="mt-5 text-sm leading-6 text-[#527080]">{note}</p>
           {family && <Link className="mt-4 underline underline-offset-4" href={platterOverviewHref(locale, slug, selection.toString()).replace(/#.*$/, "#maatwerk")}>{platterPresentation(locale).custom}</Link>}
           <ProductQuantity key={slug} slug={slug} locale={locale} />
+          {product.categorie === "gourmet" && <a className="knop knop-lijn mt-4 min-h-12 whitespace-normal" href="#gourmet-samenstellen">{gourmetRequestCopy(locale).title} →</a>}
           {["luxe-trio-klein", "luxe-vistrio"].includes(slug) && <div className="mt-5 rounded-xl border border-[#bfd6df] bg-white p-5"><p className="mb-3 text-sm leading-6">{giftRequestCopy(locale).customTrioNote}</p><Link className="knop knop-lijn" href={`/${locale}/relatiegeschenken#geschenk-2`}>{giftRequestCopy(locale).customTrio} →</Link></div>}
           <CatalogHelp locale={locale} />
         </div>
       </div>
     </section>
 
+    {product.categorie === "gourmet" && <div className="section-wrap"><GourmetRequest locale={locale} /></div>}
     <Sectie grond="papier">
       <div className="grid gap-10 lg:grid-cols-[1fr_.85fr] lg:gap-16">
         <div>

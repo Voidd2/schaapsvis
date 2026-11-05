@@ -22,8 +22,8 @@ export const languageIndex = (locale: string) => locale === "en" ? 1 : locale ==
 const extraCopy: Record<string, { name: readonly [string, string]; intro: readonly [string, string] }> = {
   "zalmslaatje-de-luxe": { name: ["Deluxe salmon salad", "Lachssalat de luxe"], intro: ["Four scoops of salmon salad with smoked fish and prawns. A lunch for one or a starter to share.", "Vier Kugeln Lachssalat mit Räucherfisch und Garnelen. Als Mittagessen für eine Person oder Vorspeise zum Teilen."] },
   "gourmet-trio-1-persoon": { name: ["Gourmet trio for 1 person", "Gourmet-Trio für 1 Person"], intro: ["A tabletop grilling trio for one with three types of marinated fish.", "Ein Tischgrill-Trio für eine Person mit drei marinierten Fischsorten."] },
-  "gourmet-schotel-3-4-pers": { name: ["Gourmet platter for 3–4 people", "Gourmetplatte für 3–4 Personen"], intro: ["A complete seafood tabletop grilling platter for three to four people.", "Eine komplette Fisch-Tischgrillplatte für drei bis vier Personen."] },
-  "gourmetschotel-5-6-pers": { name: ["Gourmet platter for 5–6 people", "Gourmetplatte für 5–6 Personen"], intro: ["A generous seafood tabletop grilling platter for five to six people.", "Eine großzügige Fisch-Tischgrillplatte für fünf bis sechs Personen."] },
+  "gourmet-schotel-3-4-pers": { name: ["Gourmet platter for 3–4 people", "Gourmetplatte für 3–4 Personen"], intro: ["A 1 kg tabletop grilling platter with salmon, tuna, cod and prawns for three to four people.", "Eine 1-kg-Tischgrillplatte mit Lachs, Thunfisch, Kabeljau und Garnelen für drei bis vier Personen."] },
+  "gourmetschotel-5-6-pers": { name: ["Gourmet platter for 5–6 people", "Gourmetplatte für 5–6 Personen"], intro: ["A 1.5 kg tabletop grilling platter with salmon, tuna, cod and prawns for five to six people.", "Eine 1,5-kg-Tischgrillplatte mit Lachs, Thunfisch, Kabeljau und Garnelen für fünf bis sechs Personen."] },
   "luxe-trio-klein": { name: ["Small luxury seafood trio", "Kleines Luxus-Fischtrio"], intro: ["A small trio of Dutch shrimp, smoked eel and smoked salmon.", "Ein kleines Trio aus Nordseegarnelen, Räucheraal und Räucherlachs."] },
   "luxe-vistrio": { name: ["Large luxury seafood trio", "Großes Luxus-Fischtrio"], intro: ["A generous trio of Dutch shrimp, smoked eel and smoked salmon.", "Ein großzügiges Trio aus Nordseegarnelen, Räucheraal und Räucherlachs."] },
   "salade-trio": { name: ["Salad trio", "Salat-Trio"], intro: ["Three salads in one pack for bread, toast or sharing over drinks.", "Drei Salate in einer Verpackung für Brot, Toast oder eine gesellige Runde."] },
@@ -33,6 +33,8 @@ const extraCopy: Record<string, { name: readonly [string, string]; intro: readon
   "tonijn-sashimi-ongesneden": { name: ["Uncut tuna sashimi", "Thunfisch-Sashimi am Stück"], intro: ["An uncut piece of yellowfin tuna to slice yourself for sashimi or sushi.", "Ein Stück Gelbflossenthunfisch zum Selbstschneiden für Sashimi oder Sushi."] },
 };
 const ingredientText: Record<string, readonly [string, string]> = {
+  "300 gram zalm": ["300 g salmon", "300 g Lachs"], "200 gram tonijn": ["200 g tuna", "200 g Thunfisch"], "300 gram kabeljauw": ["300 g cod", "300 g Kabeljau"], "200 gram garnalen": ["200 g prawns", "200 g Garnelen"],
+  "450 gram zalm": ["450 g salmon", "450 g Lachs"], "300 gram tonijn": ["300 g tuna", "300 g Thunfisch"], "450 gram kabeljauw": ["450 g cod", "450 g Kabeljau"], "300 gram garnalen": ["300 g prawns", "300 g Garnelen"],
   "Huisgemaakte zalmsalade": ["House-made salmon salad", "Hausgemachter Lachssalat"], "Hollandse garnalen": ["Dutch shrimp", "Nordseegarnelen"], "Gerookte zalm": ["Smoked salmon", "Räucherlachs"], "Gerookte paling": ["Smoked eel", "Räucheraal"], "Garnituur": ["Garnish", "Garnitur"],
   "100 gram kabeljauw met botermarinade": ["100 g cod in butter marinade", "100 g Kabeljau in Buttermarinade"], "100 gram zalm met pestomarinade": ["100 g salmon in pesto marinade", "100 g Lachs in Pestomarinade"], "100 gram tonijn met piri-pirimarinade": ["100 g tuna in piri-piri marinade", "100 g Thunfisch in Piri-Piri-Marinade"],
   "Tonijn": ["Tuna", "Thunfisch"], "Zalm": ["Salmon", "Lachs"], "Kabeljauw": ["Cod", "Kabeljau"], "Garnalen": ["Prawns", "Garnelen"], "Vis van het moment": ["Seasonal fish", "Fisch je nach Angebot"], "Verschillende marinades": ["Various marinades", "Verschiedene Marinaden"],
@@ -52,6 +54,7 @@ export function catalogProduct(slug: string, locale: string): FeestdagenProduct 
     const translate = (text: string) => { const value = ingredientText[text]?.[i - 1]; if (!value) throw new Error(`Missing catalogue translation: ${text}`); return value; };
     product = { ...source, naam: copy.name[i - 1], intro: copy.intro[i - 1], samenstelling: source.samenstelling.map(translate), allergenen: source.allergenen.map(translate), eenheid: source.eenheid === "per 100 gram" ? (i === 1 ? "per 100 g" : "pro 100 g") : source.eenheid === "per set" ? (i === 1 ? "per set" : "pro Set") : source.eenheid.includes("90 gram") ? (i === 1 ? "per tub (approx. 90 g)" : "pro Schale (ca. 90 g)") : (i === 1 ? "each" : "pro Stück"), besteltermijn: source.besteltermijn ? (i === 1 ? "Order at least one day in advance." : "Mindestens einen Tag im Voraus bestellen.") : undefined };
   }
+  if (product.categorie === "gourmet") product = { ...product, eenheid: i === 1 ? "per platter" : i === 2 ? "pro Platte" : "per schaal" };
   return commercialNames[slug] ? { ...product, naam: commercialNames[slug][i] } : product;
 }
 

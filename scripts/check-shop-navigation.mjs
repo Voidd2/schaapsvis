@@ -22,6 +22,43 @@ function load(file) {
 }
 const { platterFamilies, platterFamily, selectedPlatter, platterSelectionParams, platterDetailHref, platterOverviewHref } = load("src/lib/platter-families.ts");
 const { FEESTDAGEN_PRODUCTEN } = load("src/lib/feestdagen-producten.ts");
+const { gourmetRequestLink, gourmetRequestCopy, GOURMET_RETAIL_CENTS_PER_100G } = load("src/lib/gourmet-request.ts");
+assert.deepEqual(GOURMET_RETAIL_CENTS_PER_100G, [350, 350, 350, 275]);
+const { GOURMET_PORTIONS, gourmetPriceCents } = load("src/lib/gourmet-pricing.ts");
+const gourmetSelection = load("src/lib/dirks-selectie.ts").DIRKS_SELECTIE;
+for (const [slug, weight, price] of [["gourmet-trio-1-persoon", 300, 1550], ["gourmet-schotel-3-4-pers", 1000, 4250], ["gourmetschotel-5-6-pers", 1500, 6250]]) {
+  assert.equal(GOURMET_PORTIONS[slug].grams.reduce((sum, grams) => sum + grams, 0), weight);
+  assert.equal(gourmetPriceCents(slug), price);
+  const product = FEESTDAGEN_PRODUCTEN.find(p => p.slug === slug);
+  assert.equal(product.prijsCents, price);
+  assert.equal(gourmetSelection.find(item => item.slug === slug).prijs * 100, price);
+  assert.equal(product.eenheid, "per schaal");
+  assert.equal(product.samenstelling.reduce((sum, line) => sum + Number(line.match(/^(\d+) gram/)?.[1] ?? 0), 0), weight);
+  assert.ok(GOURMET_PORTIONS[slug].preparationCents >= 500 && GOURMET_PORTIONS[slug].preparationCents <= 1500);
+}
+for (const slug of ["gourmetstukjes-zalm", "gourmetstukjes-tonijn", "gourmet-stukjes-kabeljauw"]) {
+  const item = gourmetSelection.find(item => item.slug === slug);
+  assert.equal(item.prijs, 3.5);
+  assert.equal(item.per100g, true);
+}
+for (const locale of ["nl", "en", "de"]) {
+  const t = gourmetRequestCopy(locale);
+  const request = { people: "6", fish: [0, 3], date: "", wishes: "  " };
+  const url = new URL(gourmetRequestLink(locale, request)), message = url.searchParams.get("text");
+  assert.equal(url.origin, "https://wa.me");
+  assert.ok(message.includes(`${t.people}: 6`));
+  assert.ok(message.includes(t.choices[0]) && message.includes(t.choices[3]));
+  assert.ok(!message.includes(t.choices[1]));
+  assert.ok(!message.includes(t.wishesLine + ":"));
+  assert.ok(message.includes(t.dateUnknown) && message.includes(t.closing));
+  for (const people of ["", "0", "-1", "2.5", "abc", "201", "Infinity"]) assert.equal(gourmetRequestLink(locale, { ...request, people }), null);
+  for (const fish of [[], [4], [-1], [0.5], [0, 99]]) assert.equal(gourmetRequestLink(locale, { ...request, fish }), null);
+  for (const date of ["2026-02-30", "tomorrow", "2026-13-01"]) assert.equal(gourmetRequestLink(locale, { ...request, date }), null);
+  const extra = new URL(gourmetRequestLink(locale, { ...request, date: "2026-12-24", wishes: "  Meer zalm & geen saus? #test\nAdvies graag  " }));
+  assert.equal([...extra.searchParams.keys()].join(), "text");
+  assert.ok(extra.searchParams.get("text").includes("24-12-2026"));
+  assert.ok(extra.searchParams.get("text").includes("Meer zalm & geen saus? #test\nAdvies graag"));
+}
 const { giftRequestLink, giftRequestCopy } = load("src/lib/gift-request.ts");
 for (const locale of ["nl", "en", "de"]) {
   const t = giftRequestCopy(locale);
