@@ -4,7 +4,8 @@
 
 - Eigenaar koos het opnieuw getekende ronde logo en vroeg toepassing op website en mails. Master: `public/images/brand/schaapsvis-logo-v2.png`; eerdere originele bron behouden. Bestaand exportscript maakt site-/mailbadge, favicons, Apple-touch-icoon en bestaande Wallet-assets vanuit deze ene bron.
 - Gedeelde badge bijgewerkt voor footer, studentenpas en landingspagina; compacte badge ook in header en binnenkort-scherm. E-mailtemplates en gestructureerde bedrijfslogo's gebruiken dezelfde versie. `?v=2` voorkomt oude beeldcache zonder routes/toegangsregels te wijzigen. Wallet blijft uitgeschakeld; alleen reeds bestaande assets vernieuwd.
-- Accounttests, content-/catalogus-/QR-controles en gerichte lint geslaagd. Visuele controle en publicatiebewijs volgen.
+- Account-/SMTP-tests, content-/catalogus-/QR-controles en gerichte lint geslaagd. Lokale desktopkop visueel en mobiele kop op 390px zonder overflow gecontroleerd; Duitse kop eveneens zonder overflow. Logo laadt en bestaande bediening behouden.
+- PR #108 / `a8f42c7` gepubliceerd; Build271 en Member165 geslaagd, Codex-review zonder bevindingen. Cloudflare site `27559105` en leden `a27b4270` beide 100% Ready. Publieke logo-URL HTTP200/image/png en SHA256 gelijk aan nieuwe export; leden-health HTTP200/status ok. Live screenshot: `../design-preview/brand/live-website-new-logo.png`. Geen echte e-mail verzonden; toekomstige mails gebruiken nieuwe bron, weergave van bestaande mails hangt af van mailclientcache.
 
 ## Persoonlijke accountmails — 5 november 2026
 
