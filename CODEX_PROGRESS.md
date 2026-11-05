@@ -1,5 +1,12 @@
 # Schaap's Vishandel — voortgang
 
+## Visgourmet: eigen prijzen en samenstellen — 6 november 2026
+
+- Eigenaar machtigde keuze van logische porties/prijzen na concurrentonderzoek. Nieuwe vaste uitvoeringen: 300 g / €15,50; 1 kg voor 3–4 / €42,50; 1,5 kg voor 5–6 / €62,50. Netto vis/garnalen, schaal en bereiding inbegrepen; zonder bijgerechten. Berekening, exacte verdeling en bronnen: `docs/visgourmet-prijzen-2026-11-05.md`.
+- Gedeelde prijsbron voor catalogus, productdetail, winkelmand en BBQ-selectie. Losse gourmetvis €3,50/100 g. Foto's behouden als voorbeeldopmaak. NL/EN/DE-samenstelhulp op Visschalen, Feestdagen, Barbecue & gourmet en gourmetdetails: personen, soorten, optionele datum/wensen; uitsluitend WhatsApp-concept, geen automatische offerte/verzending.
+- Catalogus-/inhoudstests, gerichte lint, Next/TypeScript (572 pagina's) en Cloudflare-build geslaagd. Lokale desktop/390px, Duitse detailpagina en formuliervalidatie gecontroleerd. Geen echte aanvraag of bericht verstuurd.
+- PR #110 samengevoegd als `e8db183`; Build275 geslaagd en Codex-review zonder bevindingen. Cloudflare site `a4df2189` en leden `beeeec23` beide 100% Ready. Live hoofddomein toont alle drie bedragen/gewichten en de werkende samenstelbediening; detail 3–4 toont 300 g zalm, 200 g tonijn, 300 g kabeljauw en 200 g garnalen. Screenshots buiten Git: `../design-preview/gourmet/live-gourmet.png` en `live-samenstellen.png`. Accounts/toegang ongewijzigd.
+
 ## Visgeschenken: nieuwe beelden en keuzes — 5 november 2026
 
 - Twee nieuwe geoptimaliseerde AI-voorbeeldbeelden met het vernieuwde logo: vispakket met gerookte zalm/paling/makreel en pakket op maat. Luxe vistrio gebruikt het bestaande drievaksbakje. Oude beelden behouden.

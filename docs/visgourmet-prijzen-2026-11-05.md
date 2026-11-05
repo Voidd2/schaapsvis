@@ -33,3 +33,12 @@ Gedeeld formulier op Visschalen, Feestdagen, Barbecue & gourmet en de drie gourm
 ## Controle
 
 Gerichte tests dekken retailberekening, netto gewichten, canonieke catalogusprijzen, ongeldige aantallen/viskeuzes/datums, lege optionele velden en speciale tekens in alle drie talen. Bestaande schaalvarianten/cart/routes blijven onderdeel van de projectcontrole. Geen echte aanvraag of WhatsApp-bericht versturen tijdens UI-controle.
+
+## Publicatiebewijs — 6 november 2026
+
+- `check-shop-navigation`, `check-content-integrity`, gerichte ESLint en `git diff --check` geslaagd. Next/TypeScript-build (572 pagina's) en Cloudflare Vite-build geslaagd.
+- Lokale Chrome-formuliervalidatie, Duitse productdetailpagina en mobiele opmaak op 390 px zonder horizontale overflow gecontroleerd. Conceptberichtopbouw in alle talen getest zonder WhatsApp-bericht of echte aanvraag te versturen.
+- [PR #110](https://github.com/Voidd2/schaapsvis/pull/110), merge `e8db183736e4bc4b3f6536bddcf11e8b08ff07fc`; GitHub Build275 succesvol, Codex-review zonder bevindingen.
+- Cloudflare-dashboard in account Schaapsvis: siteversie `a4df2189`, ledenversie `beeeec23`, beide Ready en 100% actief bij dezelfde merge.
+- Live `https://schaapsvishandel.nl/nl/visschalen#gourmet` bevestigt €15,50/300 g, €42,50/1 kg en €62,50/1,5 kg. Samenstelknop na hydratie actief. Detail `gourmet-schotel-3-4-pers?catalog=visschalen` bevestigt prijs, exacte verdeling, voorbeeldfoto-uitleg en terugroute.
+- Bewijs buiten Git: `../design-preview/gourmet/live-gourmet.png` en `live-samenstellen.png`. Geen wijzigingen aan toegang, accounts of koude visschaalprijzen.
