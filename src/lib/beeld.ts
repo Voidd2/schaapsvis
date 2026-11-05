@@ -37,9 +37,9 @@ export interface Beeldplek {
 export const BEELD = {
   /* ── Het logo ──────────────────────────────────────────────────────────── */
   logoBadge: {
-    waar: "Homepage, Ons verhaal en de voet",
-    wat: "Het ronde Schaap's Vis-logo zoals het op de gevel en de kraam staat, vrijstaand op wit of transparant (PNG of SVG).",
-    bestand: "/images/brand/schaapsvis-logo-192.png",
+    waar: "Paginakop, voet en studentenpas",
+    wat: "Het door de eigenaar goedgekeurde vernieuwde ronde Schaap's Vis-logo op wit.",
+    bestand: "/images/brand/schaapsvis-logo-192.png?v=2",
     alt: "Logo van Schaap's Vishandel in Leiden, sinds 1938",
     verhouding: "vierkant",
     terugval: "Schaap's Vis",

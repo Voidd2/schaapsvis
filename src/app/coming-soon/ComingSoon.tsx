@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { shopDayRange } from "@/lib/openingHours";
 import { BEDRIJF } from "@/lib/bedrijf";
+import { BEELD } from "@/lib/beeld";
 
 type Lang = "nl" | "en" | "de";
 
@@ -122,8 +123,9 @@ export function ComingSoon({ error = null }: { error?: "wrong" | "setup" | null 
         </div>
 
         <div className="text-center">
-          {/* Het woordmerk, niet een plaatje: dit scherm moet ook staan als er
-              verder niets van de site geladen mag worden. */}
+          {/* The brand image is already public; the rest of the site stays locked. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={BEELD.logoBadge.bestand} alt="Schaap’s Vis — Leiden" width={96} height={96} className="mx-auto mb-5 rounded-full bg-white" />
           <p
             className="mb-8 text-[2rem] md:text-[2.4rem] leading-none"
             style={{ fontFamily: "var(--font-display)", color: "var(--cream)", fontWeight: 700 }}

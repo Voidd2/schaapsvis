@@ -1,5 +1,11 @@
 # Schaap's Vishandel — voortgang
 
+## Goedgekeurd vernieuwd logo — 5 november 2026
+
+- Eigenaar koos het opnieuw getekende ronde logo en vroeg toepassing op website en mails. Master: `public/images/brand/schaapsvis-logo-v2.png`; eerdere originele bron behouden. Bestaand exportscript maakt site-/mailbadge, favicons, Apple-touch-icoon en bestaande Wallet-assets vanuit deze ene bron.
+- Gedeelde badge bijgewerkt voor footer, studentenpas en landingspagina; compacte badge ook in header en binnenkort-scherm. E-mailtemplates en gestructureerde bedrijfslogo's gebruiken dezelfde versie. `?v=2` voorkomt oude beeldcache zonder routes/toegangsregels te wijzigen. Wallet blijft uitgeschakeld; alleen reeds bestaande assets vernieuwd.
+- Accounttests, content-/catalogus-/QR-controles en gerichte lint geslaagd. Visuele controle en publicatiebewijs volgen.
+
 ## Persoonlijke accountmails — 5 november 2026
 
 - Verificatie, reset, inloglinks en beveiligingsmails gebruiken de opgeslagen voornaam (oude/beheeraccounts: volledige naam; anders neutraal). Zowel HTML als tekstversie bevatten website, privacyverklaring en de bestaande studentvoorwaarden. Nieuwe ankerlink `studentenkorting#voorwaarden`, NL/EN/DE. Geen accountregels, transport, campagne-instellingen of database gewijzigd.

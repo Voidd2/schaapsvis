@@ -654,7 +654,7 @@ const walletJwt = walletLocation.split("/").at(-1);
 const walletClaims = JSON.parse(Buffer.from(walletJwt.split(".")[1], "base64url").toString("utf8"));
 const walletObject = walletClaims.payload.genericObjects[0];
 assert.equal(walletObject.header.defaultValue.value, "Test Student", "Wallet pass shows the account holder's full name");
-assert.equal(walletObject.logo.sourceUri.uri, `${env.SITE_ORIGIN}/og-image.png`, "Wallet pass includes Schaap's public brand image");
+assert.equal(walletObject.logo.sourceUri.uri, `${env.SITE_ORIGIN}/images/brand/schaapsvis-logo-192.png?v=2`, "Wallet pass includes the current public logo, not a social-sharing banner");
 assert.equal(walletObject.barcode.value, pass.displayCode, "Wallet QR uses the same short staff verification code");
 assert.equal(walletObject.subheader.defaultValue.value, "10% studentenkorting", "Wallet pass states the correct discount");
 assert.equal(sqlite.prepare("SELECT platform FROM student_wallet_passes WHERE pass_id=(SELECT id FROM student_passes WHERE display_code=?)").get(pass.displayCode).platform, "google", "issued Wallet objects are recorded against the internal student pass");

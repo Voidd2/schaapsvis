@@ -90,8 +90,7 @@ export function Header() {
 
   const isActief = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
-  // Houd de brede woordnaam in de header; de ronde badge staat in de footer.
-  const logo = BEELD.logoLiggend.bestand;
+  const logo = BEELD.logoBadge.bestand;
 
   return (
     <div ref={headerRoot} className="site-header sticky top-0 z-50" onClick={event => {
@@ -121,10 +120,7 @@ export function Header() {
         style={{ backgroundColor: "var(--cream)", borderBottom: "1px solid var(--linen)" }}
       >
         <div className="site-header-row site-container flex items-center justify-between gap-3 lg:gap-6 min-h-[4.4rem] py-2">
-          <Link href={p("")} className="min-w-0 leading-none flex items-center gap-3">
-            {/* Het ronde logo, zodra de eigenaar het aanlevert. Klein gehouden:
-                een grote badge in de kop duwt de navigatie van de rand en maakt
-                de site ouderwets in plaats van herkenbaar. */}
+          <Link href={p("")} className="min-w-0 leading-none flex items-center gap-2 sm:gap-3">
             {logo && (
               /* eslint-disable-next-line @next/next/no-img-element */
               <img
@@ -133,20 +129,20 @@ export function Header() {
                 aria-hidden
                 width={48}
                 height={48}
-                className="h-11 w-11 sm:h-12 sm:w-12 shrink-0 object-contain"
+                className="h-10 w-10 sm:h-12 sm:w-12 shrink-0 rounded-full bg-white object-contain"
               />
             )}
             <span className="min-w-0">
               {/* Op een smal scherm moet de naam wijken voor de belknop en het
                   menu — anders wordt de hamburger van de rand geduwd. */}
               <span
-                className="block text-[1.25rem] sm:text-[1.45rem] lg:text-[1.65rem] leading-none whitespace-nowrap"
+                className="block max-[400px]:max-w-[7rem] text-[1.05rem] sm:text-[1.45rem] lg:text-[1.65rem] leading-tight min-[401px]:whitespace-nowrap"
                 style={{ fontFamily: "var(--font-display)", color: "var(--navy)", fontWeight: 700 }}
               >
                 Schaap&rsquo;s Vishandel
               </span>
               <span
-                className="block text-[0.55rem] sm:text-[0.62rem] mt-1 whitespace-nowrap"
+                className="hidden min-[401px]:block text-[0.55rem] sm:text-[0.62rem] mt-1 whitespace-nowrap"
                 style={{
                   color: "var(--gold)",
                   letterSpacing: "0.22em",
