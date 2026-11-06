@@ -22,6 +22,8 @@ Prompt pakket: 'Preserve navy box, exact Schaap’s lid logo, marble, daylight, 
 
 Prompt maatwerk: 'Preserve composition, navy gift box, ribbon, exact logo on cream card, salmon, shrimp, toast, salad, linen and daylight. Replace ONLY dark eel strips in vacuum packet with broad flat elongated tapered ivory/pale-pink skinless hand-filleted eel, smooth pearly flesh and delicate central seam. No leathery skin, orange salmon belly or whole fish. Keep sealed packaging, 3:2 photo, no new text or price.'
 
+Validatie/publicatie: catalogus- en inhoudstests, gerichte ESLint, Next/TypeScript en Cloudflare-build geslaagd; desktop en 390px met keuze- en bedragvalidatie gecontroleerd. PR #111 / `2568658`, Build277 geslaagd, Codex-review zonder bevindingen. Cloudflare site `fa84e793` en leden `0c1234e6` beide 100% Ready. Nieuwe foto en interactieve inhoud/cadeaubon op hoofddomein bevestigd. Geen bericht verstuurd. Bewijsbeeld: `../design-preview/gifts/live-filets-gewichten.jpg`.
+
 De historische uitvoering hieronder beschrijft de eerdere versie; 'geen hoeveelheden' en v2-beelden zijn met deze ronde vervangen.
 
 ## Uitvoering
