@@ -1,5 +1,11 @@
 # Schaap's Vishandel — voortgang
 
+## Visgeschenken: filets, gewichten en cadeaubon — 6 november 2026
+
+- Nieuwe AI-voorbeeldbeelden v3: lichte nette palingfilets en makreelfilet zonder huid, logo behouden. Ook maatwerkbeeld gecorrigeerd. Referenties en prompts: `docs/visgeschenken-2026-11-05.md`.
+- Voorgestelde netto pakketinhoud: Klein 300 g, Middel 500 g, Groot 800 g; alleen Groot bevat 100 g gerookte zalmbuikjes. Volledige verdeling zichtbaar bij formaatkeuze, NL/EN/DE. Inhoud/gewicht/prijs persoonlijk te bevestigen.
+- Optionele cadeaubon met zelfgekozen bedrag bij alle drie cadeau-aanvragen. Alleen opgenomen in WhatsApp-concept indien aangevinkt en geldig; geen betaling, opslag of automatische verzending.
+- Catalogus-/inhoudstests, gerichte ESLint, Next/TypeScript en Cloudflare-build geslaagd. Chrome groottekeuze en ongeldige bedragmelding gecontroleerd; IAB 390px zonder overflow, cadeaubon aan/uit werkt. Chrome screenshots waren blanco; IAB toont correcte mobiele opmaak. Geen echte aanvraag verstuurd. Publicatie volgt.
 ## Visgourmet: eigen prijzen en samenstellen — 6 november 2026
 
 - Eigenaar machtigde keuze van logische porties/prijzen na concurrentonderzoek. Nieuwe vaste uitvoeringen: 300 g / €15,50; 1 kg voor 3–4 / €42,50; 1,5 kg voor 5–6 / €62,50. Netto vis/garnalen, schaal en bereiding inbegrepen; zonder bijgerechten. Berekening, exacte verdeling en bronnen: `docs/visgourmet-prijzen-2026-11-05.md`.
