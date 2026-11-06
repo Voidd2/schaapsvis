@@ -59,7 +59,11 @@ for (const locale of ["nl", "en", "de"]) {
   assert.ok(extra.searchParams.get("text").includes("24-12-2026"));
   assert.ok(extra.searchParams.get("text").includes("Meer zalm & geen saus? #test\nAdvies graag"));
 }
-const { giftRequestLink, giftRequestCopy } = load("src/lib/gift-request.ts");
+const { giftRequestLink, giftRequestCopy, giftPackageContents, giftVoucherCents, GIFT_PACKAGE_GRAMS } = load("src/lib/gift-request.ts");
+assert.deepEqual(GIFT_PACKAGE_GRAMS.map(items => items.reduce((sum, grams) => sum + grams, 0)), [300, 500, 800]);
+assert.deepEqual(GIFT_PACKAGE_GRAMS.map(items => items[3]), [0, 0, 100]);
+for (const [input, cents] of [["25", 2500], ["25,50", 2550], ["25.50", 2550], ["0,01", 1], [" 100 ", 10000]]) assert.equal(giftVoucherCents(input), cents);
+for (const input of ["", "0", "-10", "NaN", "Infinity", "1e3", "25.555", "1,000.00", "abc", "1000000"]) assert.equal(giftVoucherCents(input), null);
 for (const locale of ["nl", "en", "de"]) {
   const t = giftRequestCopy(locale);
   const draft = { product: "Gift test", kind: "trio", size: 1, fish: [0, 1, 3], wishes: "  " };
@@ -75,6 +79,19 @@ for (const locale of ["nl", "en", "de"]) {
     const packageMessage = new URL(giftRequestLink(locale, { ...draft, kind: "package", size })).searchParams.get("text");
     assert.ok(packageMessage.includes(t.sizes[size]));
     assert.ok(!packageMessage.includes(t.fishLine + ":"));
+    const contents = giftPackageContents(locale, size);
+    for (const line of contents.lines) assert.ok(packageMessage.includes(line));
+    assert.ok(packageMessage.includes(`${t.total}: ${contents.total} g`));
+    assert.equal(packageMessage.includes(t.packageFish[3]), size === 2);
+    assert.ok(!packageMessage.includes(t.voucherLine));
+  }
+  for (const kind of ["package", "trio", "custom"]) {
+    const withVoucher = new URL(giftRequestLink(locale, { ...draft, kind, voucher: true, voucherAmount: "37,50" })).searchParams.get("text");
+    assert.ok(withVoucher.includes(`${t.voucherLine}:`));
+    assert.ok(withVoucher.includes(locale === "en" ? "37.50" : "37,50"));
+    assert.equal(giftRequestLink(locale, { ...draft, kind, voucher: true, voucherAmount: "-1" }), null);
+    const unchecked = new URL(giftRequestLink(locale, { ...draft, kind, voucher: false, voucherAmount: "37,50" })).searchParams.get("text");
+    assert.ok(!unchecked.includes(t.voucherLine));
   }
   const wishes = "Extra kaart & verpakking? #test\nGraag bespreken.";
   const custom = new URL(giftRequestLink(locale, { ...draft, kind: "custom", wishes }));

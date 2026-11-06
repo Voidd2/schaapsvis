@@ -1,5 +1,29 @@
 # Visgeschenken — 5 november 2026
 
+## Filets, gewichten en cadeaubon — 6 november 2026
+
+De eigenaar vroeg nette gefileerde vis in de beelden, een mooiere palingfilet, gewichten per pakket en een optionele cadeaubon met eigen bedrag. De onderstaande hoeveelheden zijn voorgestelde netto visgewichten, geen bestaande bewezen productspecificatie; daarom toont de site expliciet 'Voorgestelde inhoud' en persoonlijke bevestiging. Prijzen blijven na overleg.
+
+| Pakket | Gerookte zalmfilet | Palingfilet | Makreelfilet zonder huid | Gerookte zalmbuikjes | Totaal circa |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Klein | 150 g | 75 g | 75 g | — | 300 g |
+| Middel | 200 g | 150 g | 150 g | — | 500 g |
+| Groot | 300 g | 200 g | 200 g | 100 g | 800 g |
+
+De geselecteerde samenstelling en het totaal gaan mee in het WhatsApp-concept. Zalmbuikjes alleen in Groot. Een apart aanvinkvak maakt een zelfgekozen positief eurobedrag mogelijk, ook bij het trio en pakket op maat. Komma/punt en maximaal twee decimalen worden ondersteund; uitvinken laat het bedrag volledig weg. Geen cadeaubon uitgegeven, saldo aangemaakt, betaling of bericht verstuurd: eerst persoonlijk afstemmen. Vrije tekst blijft buiten de website-URL/opslag. NL/EN/DE en bestaande contactnummer/routes behouden.
+
+Referenties voor het filetbeeld: [Jan van As, palingfilet in tray](https://www.janvanas.nl/nl_NL/p/spakenburg-palingfilet-gerookt-500-gr-zav/3309/), [Boschypaling, handgefileerde paling](https://boschypaling.nl/product/gerookte-palingfilet/) en [Boel, gerookte makreelfilet zonder vel](https://vishandelboel-shop.be/index.php/product/gerookte-makreelfilet-zonder-vel/). Alleen anatomie/presentatie als referentie; geen externe productfoto gekopieerd naar de site.
+
+Twee gerichte edits via ingebouwde image_gen, daarna uitsluitend verkleind naar 1200×800 WebP. Oude v2-assets behouden. Nieuwe bronnen:
+- `public/images/editorial/schaaps-vispakket-v3.webp`
+- `public/images/editorial/schaaps-maatwerkpakket-v3.webp`
+
+Prompt pakket: 'Preserve navy box, exact Schaap’s lid logo, marble, daylight, gold ribbon, blue linen, angle and 3:2 framing. Keep thin overlapping cold-smoked salmon slices. Replace dark eel strips with premium hand-filleted smoked eel: broad flat gently tapered ivory/pale-pink smooth pearly flesh, fine central seam, neatly parallel, no brown skin or salmon belly. Replace skin-on mackerel with skinless boneless smoked mackerel loins, ivory beige flaky flesh and subtle central line. Individually sealed clear food-safe packs. Medium package only; no belly, weights or prices.'
+
+Prompt maatwerk: 'Preserve composition, navy gift box, ribbon, exact logo on cream card, salmon, shrimp, toast, salad, linen and daylight. Replace ONLY dark eel strips in vacuum packet with broad flat elongated tapered ivory/pale-pink skinless hand-filleted eel, smooth pearly flesh and delicate central seam. No leathery skin, orange salmon belly or whole fish. Keep sealed packaging, 3:2 photo, no new text or price.'
+
+De historische uitvoering hieronder beschrijft de eerdere versie; 'geen hoeveelheden' en v2-beelden zijn met deze ronde vervangen.
+
 ## Uitvoering
 
 - Gedeelde cadeaukaarten op Visschalen en Feestdagen en de bestaande Relatiegeschenken-pagina gebruiken twee nieuwe geoptimaliseerde beelden. De naam is **Schaap’s vispakket**, omdat naast zalm ook paling en eventueel makreel worden aangeboden. Klein, middel en groot zijn aanvraagkeuzes; er zijn geen hoeveelheden of prijzen verzonnen.
