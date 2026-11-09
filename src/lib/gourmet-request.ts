@@ -18,8 +18,8 @@ const copy = {
   nl: {
     title: "Stel uw visgourmet zelf samen", intro: "Kies de vis voor uw gezelschap en vul per soort het gewenste gewicht in.",
     people: "Aantal personen", fish: "Kies uw vis", unit: "per 100 g", grams: "Gewicht in gram",
-    packaging: "Hoe wilt u uw vis meekrijgen?", standard: "Standaardbakjes", premium: "Luxe verpakking", free: "gratis",
-    tiers: "Tot en met 500 g € 5 · tot en met 1.500 g € 10 · daarboven € 15",
+    packaging: "Hoe wilt u uw vis meekrijgen?", standard: "Standaardbakjes", premium: "Schaal of verpakking op maat", free: "gratis",
+    customNote: "Eventuele meerprijs in overleg via WhatsApp.",
     summary: "Uw visgourmet", empty: "Kies een vissoort om uw samenstelling te bekijken.", invalid: "Vul voor elke gekozen soort een heel aantal gram boven nul in.",
     subtotal: "Vis", weight: "Totaalgewicht", total: "Totaal", date: "Gewenste afhaaldatum (optioneel)",
     wishes: "Wensen of allergieën (optioneel)", placeholder: "Bijvoorbeeld een voorkeur voor marinade",
@@ -29,8 +29,8 @@ const copy = {
   en: {
     title: "Create your own seafood gourmet platter", intro: "Choose your seafood and enter the weight you would like for each variety.",
     people: "Number of people", fish: "Choose your seafood", unit: "per 100 g", grams: "Weight in grams",
-    packaging: "How would you like it packed?", standard: "Standard tubs", premium: "Presentation packaging", free: "free",
-    tiers: "Up to 500 g €5 · up to 1,500 g €10 · above 1,500 g €15",
+    packaging: "How would you like it packed?", standard: "Standard tubs", premium: "Custom platter or packaging", free: "free",
+    customNote: "Any extra cost is agreed via WhatsApp.",
     summary: "Your seafood selection", empty: "Choose a variety to see your selection.", invalid: "Enter a positive whole number of grams for each variety.",
     subtotal: "Seafood", weight: "Total weight", total: "Total", date: "Preferred collection date (optional)",
     wishes: "Preferences or allergies (optional)", placeholder: "For example, a preferred marinade",
@@ -40,8 +40,8 @@ const copy = {
   de: {
     title: "Fisch-Gourmetplatte selbst zusammenstellen", intro: "Wählen Sie Ihre Fischsorten und geben Sie für jede Sorte das gewünschte Gewicht ein.",
     people: "Personenzahl", fish: "Fischsorten wählen", unit: "pro 100 g", grams: "Gewicht in Gramm",
-    packaging: "Wie möchten Sie Ihren Fisch verpackt haben?", standard: "Standardschalen", premium: "Geschenkverpackung", free: "kostenlos",
-    tiers: "Bis 500 g 5 € · bis 1.500 g 10 € · über 1.500 g 15 €",
+    packaging: "Wie möchten Sie Ihren Fisch verpackt haben?", standard: "Standardschalen", premium: "Individuelle Platte oder Verpackung", free: "kostenlos",
+    customNote: "Einen möglichen Aufpreis vereinbaren wir per WhatsApp.",
     summary: "Ihre Fischauswahl", empty: "Wählen Sie eine Fischsorte, um Ihre Zusammenstellung zu sehen.", invalid: "Geben Sie für jede gewählte Sorte ein positives Gewicht in ganzen Gramm ein.",
     subtotal: "Fisch", weight: "Gesamtgewicht", total: "Gesamtpreis", date: "Gewünschter Abholtermin (optional)",
     wishes: "Wünsche oder Allergien (optional)", placeholder: "Zum Beispiel Ihre bevorzugte Marinade",
@@ -70,9 +70,7 @@ export function gourmetQuote(portions: Portions, packaging: Packaging) {
     subtotal += cents;
   }
   if (!lines.length || lines.length !== Object.keys(portions).length) return null;
-  const premiumFee = grams <= 500 ? 500 : grams <= 1500 ? 1000 : 1500;
-  const fee = packaging === "premium" ? premiumFee : 0;
-  return { lines, grams, subtotal, fee, premiumFee, total: subtotal + fee };
+  return { lines, grams, subtotal, total: packaging === "standard" ? subtotal : null };
 }
 
 export function gourmetRequestLink(locale: string, request: Request): string | null {
@@ -84,7 +82,7 @@ export function gourmetRequestLink(locale: string, request: Request): string | n
   const lines = [t.greeting, `${t.people}: ${people}`,
     ...quote.lines.map(({ fish, weight, cents }) => `${fish[lang]} · ${weight} g · ${money(fish.rate)} ${t.unit} · ${money(cents)}`),
     `${t.weight}: ${quote.grams} g`, `${t.subtotal}: ${money(quote.subtotal)}`,
-    `${t[request.packaging]}: ${money(quote.fee)}`, `${t.total}: ${money(quote.total)}`,
+    quote.total === null ? `${t.premium} · ${t.customNote}` : `${t.standard} · ${t.free} · ${t.total}: ${money(quote.total)}`,
     request.date ? `${t.date.replace(/ \(.*\)$/, "")}: ${request.date.split("-").reverse().join("-")}` : t.dateUnknown,
   ];
   if (request.wishes.trim()) lines.push(`${t.wishes.replace(/ \(.*\)$/, "")}: ${request.wishes.trim().slice(0, 700)}`);

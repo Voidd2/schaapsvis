@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, useState, type FormEvent } from "react";
-import { giftRequestCopy, giftRequestLink, giftQuote, packagingNote, giftVoucherCents, type GiftRequest as Request } from "@/lib/gift-request";
+import { giftRequestCopy, giftRequestLink, giftQuote, giftVoucherCents, type GiftRequest as Request } from "@/lib/gift-request";
 import { feestdagenBedrag } from "@/lib/feestdagen-producten";
 import { PACKAGE_EXTRAS } from "@/lib/gift-pricing";
 import { useInteractive } from "@/lib/use-interactive";
@@ -56,7 +56,7 @@ export function GiftRequest({ locale, product, kind }: { locale: string; product
     {kind !== "custom" && <div className="gift-price-summary" aria-live="polite">
       {quote ? <>
         <div className="flex flex-wrap items-baseline justify-between gap-2"><strong>{t.price}</strong><strong className="text-2xl tabular-nums">{money(quote.price)}</strong></div>
-        <p>{packagingNote(locale)}</p>
+        <p>{t.packaging}</p>
         <ul className="my-3 space-y-1">{quote.lines.map(line => <li key={line}>{line}</li>)}</ul>
         <p className="font-semibold">{t.total}: {quote.total} g</p>
         {voucherCents !== null && <p className="mt-3 border-t pt-2 font-bold">{t.grandTotal}: {money(quote.price + voucherCents)}</p>}
@@ -66,6 +66,6 @@ export function GiftRequest({ locale, product, kind }: { locale: string; product
     <textarea id={`${id}-wishes`} value={wishes} onChange={event => setWishes(event.target.value)} maxLength={700} rows={2} placeholder={t.placeholder} className="mt-2 w-full rounded-lg border border-[#bfd6df] bg-white p-3 text-base" />
     {error && <p role="alert" className="mt-2 font-semibold text-[#a61f2b]">{voucher && giftVoucherCents(voucherAmount) === null ? t.voucherError : t.error}</p>}
     <button type="submit" disabled={!ready} className="knop knop-navy mt-3 min-h-12 w-full whitespace-normal">{t.button} →</button>
-    <p className="mt-3 text-sm leading-6">{t.note}</p>
+    <p className="mt-3 text-sm leading-6">{kind === "custom" || wishes.trim() ? t.customCost : t.note}</p>
   </form>;
 }

@@ -41,10 +41,10 @@ for (const slug of ["gourmetstukjes-zalm", "gourmetstukjes-tonijn", "gourmet-stu
   assert.equal(item.prijs, 3.5);
   assert.equal(item.per100g, true);
 }
-for (const [grams, fee] of [[1,500],[500,500],[501,1000],[1500,1000],[1501,1500]]) {
+for (const grams of [1,500,501,1500,1501]) {
   const portions = { salmon: String(grams) };
-  assert.equal(gourmetQuote(portions,"premium").fee, fee);
-  assert.equal(gourmetQuote(portions,"standard").fee, 0);
+  assert.equal(gourmetQuote(portions,"premium").total, null);
+  assert.equal(gourmetQuote(portions,"standard").total, Math.round(grams * 350 / 100));
 }
 for (const portions of [{},{unknown:"100"},{salmon:""},{salmon:"0"},{salmon:"-1"},{salmon:"2.5"},{salmon:"1e3"}]) {
   assert.equal(gourmetQuote(portions,"standard"), null);
@@ -60,6 +60,8 @@ for (const locale of ["nl", "en", "de"]) {
   assert.ok(message.includes(t.standard) && message.includes("350 g") && message.includes("250 g"));
   assert.ok(message.includes(locale === "en" ? "11.75" : "11,75"));
   assert.ok(message.includes(t.dateUnknown));
+  const custom = new URL(gourmetRequestLink(locale, { ...request, packaging: "premium" })).searchParams.get("text");
+  assert.ok(custom.includes(t.customNote) && !custom.includes(t.total + ":"));
   for (const people of ["", "0", "-1", "2.5", "abc", "201", "Infinity"]) assert.equal(gourmetRequestLink(locale, { ...request, people }), null);
   for (const date of ["2026-02-30", "tomorrow", "2026-13-01"]) assert.equal(gourmetRequestLink(locale, { ...request, date }), null);
   const extra = new URL(gourmetRequestLink(locale, { ...request, date: "2026-12-24", wishes: "  Meer zalm & geen saus? #test\nAdvies graag  " }));
@@ -69,14 +71,14 @@ for (const locale of ["nl", "en", "de"]) {
 }
 const { giftRequestLink, giftRequestCopy, giftPackageContents, giftVoucherCents, GIFT_PACKAGE_GRAMS } = load("src/lib/gift-request.ts");
 const { trioPriceCents, packagePriceCents } = load("src/lib/gift-pricing.ts");
-assert.deepEqual([0, 1, 2].map(i => trioPriceCents(i)), [1146, 1594, 2042]);
-assert.deepEqual([0, 1, 2].map(i => packagePriceCents(i)), [2151, 3458, 5000]);
-assert.equal(packagePriceCents(0, [0, 1]), 3246);
+assert.deepEqual([0, 1, 2].map(i => trioPriceCents(i)), [926, 1389, 1852]);
+assert.deepEqual([0, 1, 2].map(i => packagePriceCents(i)), [1976, 3333, 4950]);
+assert.equal(packagePriceCents(0, [0, 1]), 3121);
 assert.equal(packagePriceCents(1, [0, 0]), null);
-assert.equal(trioPriceCents(1, [0, 1, 3]), 1534);
+assert.equal(trioPriceCents(1, [0, 1, 3]), 1329);
 const giftDraft = giftRequestLink("nl", { kind: "package", product: "Test", size: 0, extras: [0, 1], fish: [], wishes: "", voucher: true, voucherAmount: "10" });
 const pricedText = new URL(giftDraft).searchParams.get("text");
-for (const value of ["500 g", "32,46", "42,46", "100 g Gravad lax", "100 g Hollandse garnalen"]) assert.ok(pricedText.includes(value));
+for (const value of ["500 g", "31,21", "41,21", "100 g Gravad lax", "100 g Hollandse garnalen"]) assert.ok(pricedText.includes(value));
 assert.deepEqual(GIFT_PACKAGE_GRAMS.map(items => items.reduce((sum, grams) => sum + grams, 0)), [300, 500, 800]);
 assert.deepEqual(GIFT_PACKAGE_GRAMS.map(items => items[3]), [0, 0, 100]);
 for (const [input, cents] of [["25", 2500], ["25,50", 2550], ["25.50", 2550], ["0,01", 1], [" 100 ", 10000]]) assert.equal(giftVoucherCents(input), cents);
@@ -224,14 +226,14 @@ assert.equal(new Set(SALAD_REQUESTS.map(s => s.image)).size, 4);
 const request = {items:{"visschotel-middel-5-8-pers":{quantity:2,split:false}},date:""};
 assert.deepEqual(requestTotal(request), {cents:19700,incomplete:false});
 request.items["luxe-trio-klein"] = {quantity:1,split:false};
-assert.deepEqual(requestTotal(request), {cents:20846,incomplete:false});
+assert.deepEqual(requestTotal(request), {cents:20626,incomplete:false});
 request.items["extra-zalmsalade"] = {quantity:2,split:false};
-assert.deepEqual(requestTotal(request), {cents:20846,incomplete:true});
+assert.deepEqual(requestTotal(request), {cents:20626,incomplete:true});
 request.items["visschotel-middel-5-8-pers"].split = true;
-assert.deepEqual(requestTotal(request), {cents:20846,incomplete:true});
+assert.deepEqual(requestTotal(request), {cents:20626,incomplete:true});
 for(const locale of ["nl","en","de"]) {
   const draft = requestMessage({...request,date:"2026-12-24"},locale);
-  assert.ok(draft.includes(feestdagenBedrag(20846,locale)));
+  assert.ok(draft.includes(feestdagenBedrag(20626,locale)));
   assert.ok(draft.includes("2026"));
   assert.ok(draft.includes(catalogProduct("luxe-trio-klein",locale).naam));
   assert.ok(draft.includes("5–8"));
