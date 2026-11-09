@@ -450,6 +450,15 @@ const magicDeviceCookie = responseCookie(magicConfirm, "sv_device");
 assert.ok(magicSessionCookie && magicDeviceCookie, "magic login creates both a revocable session and a random installation cookie");
 assert.match(await (await call(`${magicUrl.pathname}${magicUrl.search}`)).text(), /verlopen/i, "one-time sign-in links cannot be reused after confirmation");
 assert.equal((await call("/api/members/admin/analytics?days=7", { cookie: sessionCookie, headers: { "CF-Connecting-IP": "198.51.100.5" } })).status, 403, "admin analytics requires the server-side IP allowlist");
+{
+  const excluded = "192.0.2.12";
+  env.ANALYTICS_EXCLUDED_IP_HASH = await testDigest(excluded);
+  for (const event of ["page_view","link_click"]) {
+    assert.equal((await call("/api/members/analytics",{method:"POST",headers:{"CF-Connecting-IP":excluded},body:{consent:true,event,path:"/nl/contact",target:"tel:+31710000000"}})).status,202);
+  }
+  assert.equal(sqlite.prepare("SELECT COUNT(*) AS n FROM site_analytics_daily WHERE path='/nl/contact'").get().n,0);
+  delete env.ANALYTICS_EXCLUDED_IP_HASH;
+}
 const analyticsReport = await call("/api/members/admin/analytics?days=7", { cookie: sessionCookie });
 assert.equal(analyticsReport.status, 200, "allowlisted admin can view aggregate analytics");
 const reportBody = await analyticsReport.json();
@@ -836,6 +845,59 @@ assert.equal(subscription.status, 202);
 assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='deals@example.test'").get().status, "subscribed");
 assert.equal(sqlite.prepare("SELECT region_tag FROM newsletter_subscriptions WHERE email='deals@example.test'").get().region_tag, "leiden", "newsletter stores the subscriber's chosen local-area tag");
 
+{
+  const email = "document-route@example.test", headers = {"CF-Connecting-IP":"198.51.100.71"};
+  const before = sentEmails.length;
+  assert.equal((await call("/api/members/register",{method:"POST",headers,body:{email,proofMethod:"document",firstName:"Alex",lastName:"Test",password:"sample-password-long",marketingConsent:true}})).status,202);
+  assert.equal(sentEmails.length,before+1);
+  assert.equal(sentEmails.at(-1).to,email);
+  assert.equal((await call("/api/members/verify/resend",{method:"POST",headers,body:{email}})).status,202);
+  const personalCode = sentEmails.at(-1).text.match(/\b\d{6}\b/)[0];
+  const verified = await call("/api/members/verify-codes",{method:"POST",headers,body:{email,personalCode}});
+  assert.equal(verified.status,200);
+  const cookie = responseCookie(verified,"sv_member");
+  assert.equal((await (await call("/api/members/me",{cookie,headers})).json()).proofMethod,"document");
+  assert.equal(sqlite.prepare("SELECT school_email_verified_at FROM users WHERE email=?").get(email).school_email_verified_at,null);
+  assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email=?").get(email).status,"subscribed");
+  const form = new FormData();
+  for (const [key,value] of Object.entries({institution:"University",studyCity:"Leiden",educationLevel:"wo",proofConsent:"true"})) form.set(key,value);
+  const apply = () => call("/api/members/student-application",{method:"POST",headers,cookie,body:form});
+  assert.equal((await apply()).status,400);
+  form.set("proof",new Blob(["bad signature"],{type:"application/pdf"}),"not-a-proof.pdf");
+  assert.equal((await apply()).status,400);
+  form.set("proof",new Blob(["%PDF-1.4\nsynthetic test only"],{type:"application/pdf"}),"proof.pdf");
+  assert.equal((await apply()).status,202);
+  const stored=sqlite.prepare("SELECT a.* FROM student_applications a JOIN users u ON a.user_id=u.id WHERE u.email=?").get(email);
+  assert.equal(stored.eligibility_method,"uploaded-proof");assert.ok(objects.has(stored.proof_object_key));
+  const proofPath="/api/members/admin/student-applications/"+stored.id+"/proof";
+  assert.equal((await call(proofPath,{cookie})).status,403);
+  const reviewed=await call(proofPath,{cookie:sessionCookie});
+  assert.equal(reviewed.status,200);assert.equal(reviewed.headers.get("Content-Type"),"application/pdf");
+  const decision=await call(proofPath.replace("/proof","/decision"),{method:"POST",cookie:sessionCookie,body:{decision:"rejected"}});
+  assert.equal(decision.status,200);assert.equal((await decision.json()).proofDeleted,true);
+  assert.equal(objects.has(stored.proof_object_key),false);
+  assert.equal((await call(proofPath,{cookie:sessionCookie})).status,404);
+  const directory="/api/members/admin/email-addresses";
+  assert.equal((await call(directory,{method:"POST",body:{}})).status,403);
+  assert.equal((await call(directory,{method:"POST",cookie,body:{}})).status,403);
+  for (let i=0;i<105;i++) sqlite.prepare("INSERT INTO newsletter_subscriptions(email,status,consent_text_version,consented_at,source,created_at,updated_at) VALUES (?,'unsubscribed','test',?,'test',?,?)")
+    .run(`directory-${i}@example.test`,"2026-10-01","2026-10-01","2026-10-01");
+  const addresses=[];
+  let after="";
+  do {
+    const resp=await call(directory,{method:"POST",cookie:sessionCookie,body:{after}});
+    assert.equal(resp.status,200);
+    const page=await resp.json();addresses.push(...page.emails);after=page.next;
+  } while(after);
+  assert.ok(addresses.length>100);
+  assert.equal(addresses.find(row=>row.email==="directory-99@example.test").marketing,"unsubscribed");
+  sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email LIKE 'directory-%@example.test'").run();
+  assert.equal(new Set(addresses.map(row=>row.email)).size,addresses.length);
+  assert.equal(addresses.find(row=>row.email===email).marketing,"subscribed");
+  assert.equal(addresses.find(row=>row.email==="deals@example.test").has_account,0);
+  assert.ok(!addresses.some(row=>row.email==="student@university.example.test"));
+  sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(email);
+}
 assert.equal((await call("/api/members/admin/newsletter-campaigns", { method: "POST", cookie: sessionCookie, body: { subject: "Missing audience", body: "Test" } })).status, 400, "campaign creation requires an explicit audience");
 const studentSubscription = await call("/api/members/newsletter/subscribe", {
   method: "POST", cookie: sessionCookie, body: { email: "student@example.test", consent: true, locale: "nl", regionTag: "leiden" },

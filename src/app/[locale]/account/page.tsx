@@ -10,10 +10,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   if (!locales.includes(locale as (typeof locales)[number])) notFound();
   const title = locale === "de" ? "Konto und Studentenrabatt" : locale === "en" ? "Account and student discount" : "Account en studentenkorting";
   const description = locale === "de"
-    ? "Erstellen Sie ein Konto bei Schaap's Vishandel und beantragen Sie den Studentenrabatt mit Ihrer bestätigten Schul-E-Mail."
+    ? "Erstellen Sie ein Konto bei Schaap's Vishandel und beantragen Sie den Studentenrabatt mit Ihrer Hochschul-E-Mail oder einem aktuellen Studiennachweis."
     : locale === "en"
-      ? "Create a Schaap's Vishandel account and apply for the student discount using your verified school email."
-      : "Maak een account bij Schaap's Vishandel en vraag studentenkorting aan met uw bevestigde schoolmail.";
+      ? "Create a Schaap's Vishandel account and apply for the student discount with your school email or current proof of enrolment."
+      : "Maak een account bij Schaap's Vishandel en vraag studentenkorting aan met uw schoolmail of een actueel inschrijvingsbewijs.";
   return { ...paginaMetadata({ locale, pad: "/account", title, description }), robots: { index: false, follow: false } };
 }
 
