@@ -69,7 +69,12 @@ if (!["127.0.0.1", "localhost"].includes(url.hostname)) throw new Error("Use a l
       });
       for (const route of ["/nl/visschalen", "/nl/feestdagen", "/nl/feestdagen/" + slug + "?catalog=visschalen"]) {
         await tab.goto(new URL(route, url).href, { waitUntil: "networkidle" });
-        await tab.getByRole("link", { name: /Telefonisch bestellen/ }).first().waitFor();
+        const product = route.includes("?") ? tab.locator("main .product-detail-actions") : tab.locator('[data-catalog-card="' + slug + '"]');
+        const orderLink = product.getByRole("link", { name: "Bestellen via WhatsApp", exact: true });
+        await orderLink.waitFor();
+        const draft = new URL(await orderLink.getAttribute("href"));
+        assert.equal(draft.origin + draft.pathname, "https://wa.me/31624811678");
+        assert.match(draft.searchParams.get("text"), /3[–-]5 personen/);
         assert.equal(await tab.locator("main h1").count(), 1);
         assert.equal(await tab.locator("html#__next_error__").count(), 0);
         assert.ok((await tab.locator("main").innerText()).includes("73,50"), route);
@@ -77,10 +82,24 @@ if (!["127.0.0.1", "localhost"].includes(url.hostname)) throw new Error("Use a l
       }
       await tab.goto(new URL("/nl/bestellen", url).href, { waitUntil: "networkidle" });
       await tab.getByText("Het winkelmandje kon niet laden.", {exact:false}).waitFor();
-      assert.equal(await tab.locator('main a[href^="tel:"]').count(), 1);
+      const checkoutLink = new URL(await tab.getByRole("link", { name: "Bestellen via WhatsApp", exact: true }).getAttribute("href"));
+      assert.equal(checkoutLink.origin + checkoutLink.pathname, "https://wa.me/31624811678");
+      assert.match(checkoutLink.searchParams.get("text"), /visschaal bestellen/);
+      assert.equal(await tab.locator('main a[href^="tel:"]').count(), 0);
       for (const name of ["Productkeuze", "CatalogPhoto", "Bestelomgeving"]) assert.ok(blocked.has(name), name);
-      console.log("Blocked in the same browser:", [...blocked].join(", "), "— catalogues, photos, prices and phone ordering remain available.");
+      console.log("Blocked in the same browser:", [...blocked].join(", "), "— catalogues, photos, prices and WhatsApp order drafts remain available.");
       await broken.close();
+      const plain = await browser.newContext({ javaScriptEnabled: false });
+      await plain.route("**/*", r => new URL(r.request().url()).origin === url.origin && r.request().method() === "GET" ? r.continue() : r.abort());
+      const noJS = await plain.newPage();
+      for (const [locale, label] of [["nl", "Bestellen via WhatsApp"], ["en", "Order via WhatsApp"], ["de", "Per WhatsApp bestellen"]]) {
+        await noJS.goto(new URL("/" + locale + "/visschalen", url).href);
+        const card = noJS.locator('[data-catalog-card="' + slug + '"]');
+        const draft = new URL(await card.getByRole("link", { name: label, exact: true }).getAttribute("href"));
+        assert.equal(draft.origin + draft.pathname, "https://wa.me/31624811678");
+        assert.ok(draft.searchParams.get("text").includes(await card.locator("h3").innerText()));
+      }
+      await plain.close();
     }
   } finally { await browser.close(); }
 })().catch(e => { console.error(e); process.exitCode = 1; });
