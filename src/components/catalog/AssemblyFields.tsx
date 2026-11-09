@@ -1,3 +1,4 @@
+import { cartText } from "@/lib/cart-copy";
 import { assemblyQuote, boxLabel, byAgreement, deluxeSalads, fishCounter, language, saladCounter, unit, type Assembly, type CounterItem } from "@/lib/counter-selection";
 import { feestdagenBedrag } from "@/lib/feestdagen-producten";
 import { GIFT_BOX, packagePriceCents, STANDARD_FISH_TRIO } from "@/lib/gift-pricing";
@@ -52,16 +53,17 @@ export function AssemblySummary({mode,locale,data}:{mode:Assembly;locale:string;
     : <p>{["Vul uw keuze in om de prijs te zien.","Complete your selection to see the price.","Treffen Sie Ihre Auswahl, um den Preis zu sehen."][i]}</p>}</div>;
 }
 
-export function AssemblyForm({mode,locale,product,slug,live,onEdit}:{mode:Assembly;locale:string;product:string;slug?:string;live?:URLSearchParams;onEdit?:(form:HTMLFormElement)=>void}) {
+export function AssemblyForm({mode,locale,product,slug,live,onEdit,onAdd,ready,error}:{mode:Assembly;locale:string;product:string;slug?:string;live?:URLSearchParams;onEdit?:(form:HTMLFormElement)=>void;onAdd?:(form:HTMLFormElement)=>void;ready?:boolean;error?:boolean}) {
   const i = language(locale);
   return <details className="native-composer"><summary>{mode === "deluxe-salad" || mode === "salad-trio" ? ["Kies uw salades","Choose your salads","Salate auswählen"][i]
     : mode === "fish-trio" || mode === "gift-trio" ? ["Stel uw vistrio samen","Create your fish trio","Fischtrio zusammenstellen"][i]
     : ["Stel uw cadeaupakket samen","Create your gift package","Geschenkpaket zusammenstellen"][i]}</summary>
-    <form aria-label={product} className="native-composer-form" action="/api/samenstellen" method="post" target="_blank" rel="noopener noreferrer" onChange={onEdit && (e=>onEdit(e.currentTarget))}>
+    <form aria-label={product} className="native-composer-form" action="/api/samenstellen" method="post" target="_blank" rel="noopener noreferrer" onSubmit={onAdd && (event => { event.preventDefault(); onAdd(event.currentTarget); })} onChange={onEdit && (e=>onEdit(e.currentTarget))}>
       <input type="hidden" name="kind" value="assembly"/><input type="hidden" name="mode" value={mode}/><input type="hidden" name="locale" value={locale}/>
       {slug && <input type="hidden" name="slug" value={slug}/>}
       <AssemblyFields mode={mode} locale={locale}/>
       {live && <AssemblySummary mode={mode} locale={locale} data={live}/>}
-      <button type="submit" className="knop knop-navy">{["Bekijk mijn WhatsApp-concept","Review my WhatsApp draft","WhatsApp-Entwurf ansehen"][i]} →</button>
+      {error && <p role="alert">{cartText(locale).invalidChoice}</p>}
+      <button type="submit" disabled={!!onAdd && !ready} className="knop knop-navy">{onAdd ? cartText(locale).add : ["Aanvraag zonder winkelwagen bekijken","Review request without the basket","Anfrage ohne Warenkorb prüfen"][i]}</button>
     </form></details>;
 }

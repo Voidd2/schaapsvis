@@ -52,6 +52,6 @@ function NativeComposer({locale,kind}: Props) {
   return <form action="/api/samenstellen" method="post" target="_blank" rel="noopener noreferrer" className="native-composer-form">
     <input type="hidden" name="locale" value={locale} /><input type="hidden" name="kind" value={kind} />
     {kind === "gourmet" ? <GourmetFields locale={locale} /> : <PlatterFields locale={locale} />}
-    <button className="knop knop-navy" type="submit">{["Bekijk mijn WhatsApp-concept","Review my WhatsApp draft","WhatsApp-Entwurf ansehen"][language(locale)]} →</button>
+    <button className="knop knop-navy" type="submit">{["Aanvraag zonder winkelwagen bekijken","Review request without the basket","Anfrage ohne Warenkorb prüfen"][language(locale)]} →</button>
   </form>;
 }

@@ -272,11 +272,11 @@ export const FEESTDAGEN_PRODUCTEN: readonly FeestdagenProduct[] = [
   {
     slug: "zalm-sashimi-ongesneden",
     naam: "Zalm sashimi ongesneden",
-    prijsCents: 650,
+    prijsCents: 375,
     eenheid: "per 100 gram",
     afbeelding: "/images/dirks/zalm-sashimi-ongesneden.webp",
     categorie: "delicatessen",
-    intro: "Een ongesneden blok verse zalm om zelf als sashimi of voor sushi te snijden.",
+    intro: "Voor sashimi selecteren we een mooi, gelijkmatig stuk zalmfilet. We verwijderen de huid en snijden de vetranden weg. U betaalt alleen voor het schoongemaakte stuk en snijdt het thuis zelf in plakjes.",
     samenstelling: ["Verse zalm"],
     allergenen: ["Vis"],
   },

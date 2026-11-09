@@ -10,6 +10,7 @@ import { catalogProduct, languageIndex } from "@/lib/seafood-catalog";
 import { feestdagenProduct, feestdagenBedrag } from "@/lib/feestdagen-producten";
 import { requestMessage, requestTotal } from "@/lib/catalog-request";
 import { useCatalogRequest, updateCatalogRequest } from "@/lib/catalog-request-store";
+import { selectionQuote } from "@/lib/cart-selection";
 import { saladLine } from "@/lib/salad-extras";
 import { whatsappLink } from "@/lib/bedrijf";
 
@@ -43,10 +44,15 @@ export function RequestSummary({ locale, hasPreviousSelection }: { locale: strin
   const state = useCatalogRequest(), t = catalogText(locale), c = cartText(locale), total = requestTotal(state), entries = Object.entries(state.items);
   const today = usePickupToday();
   const dateOK = !state.date || (!!today && validPickupDate(state.date));
+  const selections = state.selections ?? [];
+  const checkoutReady = dateOK && !selections.some(row => row.needsNote);
+  function restoreNote(id: string, note: string) {
+    updateCatalogRequest(current => ({ ...current, selections: current.selections?.map(row => row.id === id ? { ...row, note, needsNote: false } : row) }));
+  }
   const message = requestMessage(state, locale);
   return <div className="cart-content">
     {hasPreviousSelection && <p className="request-muted mb-5">{locale === "en" ? "You also have an earlier, separate selection." : locale === "de" ? "Sie haben auch eine frühere, separate Auswahl." : "U heeft ook een eerdere, afzonderlijke selectie."} <Link className="underline" href={`/${locale}/bestellen`}>{locale === "en" ? "Review it here" : locale === "de" ? "Hier ansehen" : "Bekijk die hier"} →</Link></p>}
-    {!entries.length ? <p className="cart-empty">{t.empty}</p> : <>
+    {!entries.length && !selections.length ? <p className="cart-empty">{t.empty}</p> : <>
       <ul className="cart-lines">{entries.map(([slug, line]) => {
         const product = feestdagenProduct(slug), localized = product ? catalogProduct(slug, locale) : null, salad = saladLine(slug);
         const cents = product?.prijsCents ?? salad?.cents;
@@ -58,6 +64,24 @@ export function RequestSummary({ locale, hasPreviousSelection }: { locale: strin
           <div className="cart-line-bottom"><button type="button" className="cart-remove" aria-label={`${t.remove}: ${name}`} onClick={() => updateCatalogRequest(current => { const items = { ...current.items }; delete items[slug]; return { ...current, items }; })}>{t.remove}</button>
             <strong data-line-total>{cents != null ? feestdagenBedrag(cents * line.quantity, locale) : t.unknown}</strong></div>
         </li>;
+      })}{selections.map(row => {
+        const quote = selectionQuote(new URLSearchParams(row.options), locale)!;
+        return <li key={row.id} data-cart-selection>
+          <h3>{quote.title}</h3>
+          <ul className="cart-ingredients">{quote.lines.map((line, index) => <li key={index}>{line}</li>)}</ul>
+          {row.note && <p className="whitespace-pre-wrap">{row.note}</p>}
+          {row.needsNote && <form className="cart-wishes" onSubmit={event => {
+            event.preventDefault();
+            const note = String(new FormData(event.currentTarget).get("note") ?? "").trim();
+            if (note) restoreNote(row.id, note);
+          }}>
+            <p>{c.lostNote}</p><label>{c.noteLabel}<textarea name="note" required maxLength={2400} /></label>
+            <button type="submit" className="knop knop-lijn">{c.saveNote}</button>
+            <button type="button" className="cart-remove" onClick={() => restoreNote(row.id, "")}>{c.noNote}</button>
+          </form>}
+          <div className="cart-line-bottom"><button type="button" className="cart-remove" aria-label={t.remove + ": " + quote.title} onClick={() => updateCatalogRequest(current => ({ ...current, selections: current.selections?.filter(item => item.id !== row.id) }))}>{t.remove}</button>
+            <strong data-line-total>{quote.incomplete && !quote.cents ? t.unknown : feestdagenBedrag(quote.cents, locale)}</strong></div>
+        </li>;
       })}</ul>
       <label className="request-date">{t.date}<input type="date" min={today || undefined} aria-invalid={!dateOK} aria-describedby={!dateOK ? "pickup-error" : undefined} value={state.date} onChange={event => updateCatalogRequest(current => ({ ...current, date: event.target.value }))} /><small>{t.dateHint}</small></label>
       {!dateOK && <p id="pickup-error" role="alert" className="text-red-800 mt-3">{c.dateError}</p>}
@@ -66,7 +90,7 @@ export function RequestSummary({ locale, hasPreviousSelection }: { locale: strin
       <div className="cart-checkout">
         <p className="request-total" aria-live="polite">{c.subtotal}: <strong>{feestdagenBedrag(total.cents, locale)}</strong></p>
         {total.incomplete && <p className="request-muted">{c.unconfirmed}</p>}
-        {dateOK ? <a className="knop knop-navy cart-submit" href={whatsappLink(message)} target="_blank" rel="noopener noreferrer">{c.request}</a> : <button disabled className="knop knop-navy cart-submit opacity-50">{c.request}</button>}
+        {checkoutReady ? <a className="knop knop-navy cart-submit" href={whatsappLink(message)} target="_blank" rel="noopener noreferrer">{c.request}</a> : <button disabled className="knop knop-navy cart-submit opacity-50">{c.request}</button>}
         <p className="request-muted">{c.note}</p>
         <details><summary>{c.preview}</summary><p className="request-draft" data-catalog-draft>{message}</p></details>
       </div>
