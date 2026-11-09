@@ -4,14 +4,14 @@ import { WhatsAppBestelknop } from "./WhatsAppBestelknop";
 import { BedieningSlot } from "./BedieningSlot";
 import { ProductQuantity as Quantity, LegacyCatalogSelection as Selection } from "./Productkeuze";
 import { DeliTrio as Trio } from "./DeliTrio";
+import { ComposerSlot } from "./NativeComposer";
 
 export function ProductQuantity({ product, ...props }: { product: string; slug: string; locale: string }) {
   const link = <WhatsAppBestelknop locale={props.locale} product={product} />;
   return <><BedieningSlot fallback={link}><Quantity {...props} /></BedieningSlot><noscript>{link}</noscript></>;
 }
 export function DeliTrio(props: { slug: string; locale: string; product: string }) {
-  const link = <WhatsAppBestelknop locale={props.locale} product={props.product} />;
-  return <><BedieningSlot fallback={link}><Trio {...props} /></BedieningSlot><noscript>{link}</noscript></>;
+  return <ComposerSlot {...props} kind="deli"><Trio {...props} /></ComposerSlot>;
 }
 export function LegacyCatalogSelection({ locale }: { locale: string }) {
   return <BedieningSlot><Selection locale={locale} /></BedieningSlot>;

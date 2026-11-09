@@ -1,12 +1,13 @@
 import type { ComponentProps } from "react";
 import { BedieningSlot } from "./BedieningSlot";
-import { CatalogHelp } from "./CatalogHelp";
+import { ComposerSlot } from "./NativeComposer";
 import { CatalogPhoto as Photo } from "./CatalogPhoto";
 import { GiftRequest as Gift } from "./GiftRequest";
 import { GourmetRequest as Gourmet } from "./GourmetRequest";
 import { PlatterInquiry as Inquiry } from "../PlatterInquiry";
 import { StaticResponsiveImage } from "../StaticResponsiveImage";
 import { platterPresentation } from "@/lib/platter-presentation";
+import { gourmetRequestCopy } from "@/lib/gourmet-request";
 
 // The catalogue, photos and contact links are useful without these optional JS modules.
 export function CatalogPhoto(props: ComponentProps<typeof Photo>) {
@@ -20,11 +21,16 @@ export function CatalogPhoto(props: ComponentProps<typeof Photo>) {
 }
 
 export function GiftRequest(props: ComponentProps<typeof Gift>) {
-  return <BedieningSlot fallback={<CatalogHelp locale={props.locale} />}><Gift {...props} /></BedieningSlot>;
+  return <ComposerSlot {...props}><Gift {...props} /></ComposerSlot>;
 }
 export function GourmetRequest(props: ComponentProps<typeof Gourmet>) {
-  return <BedieningSlot fallback={<CatalogHelp locale={props.locale} />}><Gourmet {...props} /></BedieningSlot>;
+  return <details id="gourmet-samenstellen" className="native-composer scroll-mt-48">
+    <summary>{gourmetRequestCopy(props.locale).title}</summary>
+    <div id="gourmet-keuzes" className="scroll-mt-48">
+      <ComposerSlot {...props} kind="gourmet"><Gourmet {...props} /></ComposerSlot>
+    </div>
+  </details>;
 }
 export function PlatterInquiry(props: ComponentProps<typeof Inquiry>) {
-  return <BedieningSlot fallback={<CatalogHelp locale={props.locale} />}><Inquiry {...props} /></BedieningSlot>;
+  return <ComposerSlot {...props} kind="platter"><Inquiry {...props} /></ComposerSlot>;
 }

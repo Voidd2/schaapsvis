@@ -54,8 +54,9 @@ export function SeafoodCatalog({ locale, festive = false }: Props) {
     {!festive && <Featured {...props} />}
     {[{ id: "gourmet", title: t.gourmet, intro: t.gourmetIntro, products: GOURMET }, { id: "delicatessen", title: t.delicacies, intro: t.delicaciesIntro, products: DELICACIES }].map(section => <section key={section.id} id={section.id} className="seafood-section">
       <div className="catalog-heading"><h2>{section.title}</h2><p>{section.intro}</p></div>
+      {section.id === "gourmet" && <GourmetRequest locale={locale} />}
       <div className="seafood-grid">{section.products.map(slug => <ProductCard key={slug} {...props} slug={slug} />)}</div>
-      {section.id === "gourmet" && <><GourmetRequest locale={locale} /><Link className="inline-block mt-4 underline" href={`/${locale}/blog/welke-vis-voor-gourmet`}>{locale==="nl"?"Welke vis past in een gourmetpannetje?":locale==="en"?"Which fish work in a tabletop grill pan?":"Welcher Fisch passt ins Tischgrillpfännchen?"} →</Link></>}
+      {section.id === "gourmet" && <><Link className="inline-block mt-4 underline" href={`/${locale}/blog/welke-vis-voor-gourmet`}>{locale==="nl"?"Welke vis past in een gourmetpannetje?":locale==="en"?"Which fish work in a tabletop grill pan?":"Welcher Fisch passt ins Tischgrillpfännchen?"} →</Link></>}
     </section>)}
     <section id="salades" className="seafood-salads seafood-section">
       <div className="catalog-heading"><h2>{t.salads}</h2><p>{t.saladIntro}</p></div>
