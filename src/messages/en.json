@@ -328,6 +328,13 @@
     "reviewLabel": "Google",
     "reviewKop": "What customers write",
     "reviewAlle": "Read all {aantal} reviews",
+    "feestSlot": {
+      "titel": "Ready for the holidays?",
+      "tekst": "Order a seafood platter or barbecue pack ahead of the holidays. Prefer fresh fish? Tell us on WhatsApp what you’d like and when you’d like to collect it.",
+      "vis": "Fresh fish via WhatsApp",
+      "barbecue": "Barbecue packs",
+      "bericht": "Hi Schaap’s Vishandel! I’m looking for … for a holiday meal for … people. Could I order it in advance and collect it on …?"
+    },
     "locatiesKop": "Where to find us",
     "winkelRoute": "Directions to the shop",
     "winkelUren": "Shop opening hours",
