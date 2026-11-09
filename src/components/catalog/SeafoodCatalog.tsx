@@ -52,7 +52,7 @@ export function SeafoodCatalog({ locale, festive = false }: Props) {
           <header className="platter-card-heading"><h3>{tier.names[i]}</h3>
             <p className="seafood-price">{feestdagenBedrag(tier.rate,locale)} {servingCopy.per[i]}</p>
           </header>
-          <Image src={tier.photo} alt={platterPresentation(locale).photoLabel} width={900} height={600} sizes="(max-width:700px) 100vw, 50vw" />
+          <Image src={tier.photo} alt={tier.photoAlt[i]} width={900} height={600} sizes="(max-width:700px) 100vw, 50vw" />
           <div className="seafood-card-body">
             <p>{new Intl.ListFormat(locale).format(tier.fish.map(id => platterIngredients[id][i]))}.</p>
             <CustomAssembly locale={locale} mode={mode} product={tier.names[i]} />
