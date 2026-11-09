@@ -63,7 +63,7 @@ export function Header() {
     { href: p("/feestdagen"), label: locale === "de" ? "Festtage" : locale === "en" ? "Festive season" : "Feestdagen" },
     { href: p("/assortiment"), label: t("assortiment") },
     { href: p("/visschalen"), label: t("visschalen") },
-    { href: p("/varlaks"), label: locale === "de" ? "VÅRLAKS-Lachs" : locale === "en" ? "VÅRLAKS salmon" : "VÅRLAKS-zalm" },
+    { href: p("/varlaks#film"), label: locale === "de" ? "VÅRLAKS-Lachs" : locale === "en" ? "VÅRLAKS salmon" : "VÅRLAKS-zalm" },
     { href: p("/studentenkorting"), label: t("studentenkorting") },
     { href: p("/recepten"), label: t("recepten") },
     { href: p("/bezoek-ons"), label: t("locaties") },
@@ -88,7 +88,10 @@ export function Header() {
   const accountLabel = locale === "de" ? "Konto" : "Account";
   const moreLabel = locale === "de" ? "Mehr" : locale === "en" ? "More" : "Meer";
 
-  const isActief = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+  const isActief = (href: string) => {
+    const path = href.split("#")[0];
+    return pathname === path || pathname.startsWith(`${path}/`);
+  };
 
   const logo = BEELD.logoBadge.bestand;
 

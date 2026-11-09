@@ -7,6 +7,11 @@ import assert from 'node:assert/strict';
 import sharp from 'sharp';
 
 const sources = [...new Set([
+ '/images/schaaps/winkel-herenstraat.webp',
+ '/images/schaaps/aldert-overname.webp',
+ '/images/schaaps/schaaps-viskraam.webp',
+ '/images/schaaps/haringkraam-aan-het-water.webp',
+ '/images/schaaps/toonbank-marktkraam.webp',
  '/images/editorial/varlaks-zalm-rauw-ai.webp',
  '/images/editorial/kibbeling-schaapstray.png',
  '/images/editorial/feestschaal-voorbeeld.webp',

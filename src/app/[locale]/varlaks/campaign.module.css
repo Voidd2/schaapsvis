@@ -8,9 +8,8 @@
 .hero h1 { color:white; font:700 clamp(2.6rem,4.75vw,5.15rem)/1.03 var(--font-display); letter-spacing:-.045em; margin:0; }
 .hero h1 em { display:block; color:var(--mint); font-weight:500; }
 .lead { max-width:39ch; margin:1.2rem 0 1rem; color:#ecf2f5; font-size:clamp(1rem,1.25vw,1.18rem); }
-.price { display:inline-flex; flex-wrap:wrap; gap:.4rem 1rem; align-items:baseline; min-height:44px; padding:.45rem 0; font-weight:700; color:white; font-variant-numeric:tabular-nums; }
-.price span,.inlineLink { text-decoration:underline; text-underline-offset:.24em; }
-.price span { font-size:.94rem; font-weight:500; color:#e2f4ef; }
+.price { margin:.5rem 0; font-weight:700; color:white; font-variant-numeric:tabular-nums; }
+.inlineLink { text-decoration:underline; text-underline-offset:.24em; }
 .actions { display:flex; flex-wrap:wrap; gap:.65rem; margin:.9rem 0 .3rem; }
 .primary,.secondary,.filmLink { display:inline-flex; justify-content:center; align-items:center; min-height:48px; padding:.7rem 1.05rem; border-radius:.35rem; font:650 1rem/1.35 var(--font-body); text-align:center; }
 .primary { background:var(--mint); color:var(--sea); }
@@ -93,3 +92,6 @@
   .heroPhoto { order:0; }
   .heroCopy { padding-top:22px; }
 }
+
+.filmSection { scroll-margin-top:10.5rem; }
+@media(max-width:800px) { .filmSection { scroll-margin-top:7rem; } }

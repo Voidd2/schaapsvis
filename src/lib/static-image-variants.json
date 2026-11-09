@@ -1,4 +1,134 @@
 {
+  "/images/schaaps/winkel-herenstraat.webp": {
+    "sha256": "e62168bee3926efc3ae9159c64d2c54cb2e563eb81e1f0126f0ebe6beef65780",
+    "originalBytes": 266670,
+    "variants": [
+      {
+        "src": "/images/responsive/winkel-herenstraat-e62168bee392-320.webp",
+        "width": 320,
+        "bytes": 17280
+      },
+      {
+        "src": "/images/responsive/winkel-herenstraat-e62168bee392-640.webp",
+        "width": 640,
+        "bytes": 60874
+      },
+      {
+        "src": "/images/responsive/winkel-herenstraat-e62168bee392-960.webp",
+        "width": 960,
+        "bytes": 121188
+      },
+      {
+        "src": "/images/responsive/winkel-herenstraat-e62168bee392-1280.webp",
+        "width": 1280,
+        "bytes": 189728
+      }
+    ]
+  },
+  "/images/schaaps/aldert-overname.webp": {
+    "sha256": "2b7d97931dd5fbc69f0a77858a255d4aa0a84538d8c658d4f64fd2601a3f6389",
+    "originalBytes": 208584,
+    "variants": [
+      {
+        "src": "/images/responsive/aldert-overname-2b7d97931dd5-320.webp",
+        "width": 320,
+        "bytes": 16006
+      },
+      {
+        "src": "/images/responsive/aldert-overname-2b7d97931dd5-640.webp",
+        "width": 640,
+        "bytes": 47008
+      },
+      {
+        "src": "/images/responsive/aldert-overname-2b7d97931dd5-960.webp",
+        "width": 960,
+        "bytes": 80512
+      },
+      {
+        "src": "/images/responsive/aldert-overname-2b7d97931dd5-1280.webp",
+        "width": 1280,
+        "bytes": 114536
+      }
+    ]
+  },
+  "/images/schaaps/schaaps-viskraam.webp": {
+    "sha256": "feeff81afd3b66e15bd759d7e07559e3cddf9490690623a81fe8149cf8a7e2f1",
+    "originalBytes": 272614,
+    "variants": [
+      {
+        "src": "/images/responsive/schaaps-viskraam-feeff81afd3b-320.webp",
+        "width": 320,
+        "bytes": 18488
+      },
+      {
+        "src": "/images/responsive/schaaps-viskraam-feeff81afd3b-640.webp",
+        "width": 640,
+        "bytes": 57676
+      },
+      {
+        "src": "/images/responsive/schaaps-viskraam-feeff81afd3b-960.webp",
+        "width": 960,
+        "bytes": 106174
+      },
+      {
+        "src": "/images/responsive/schaaps-viskraam-feeff81afd3b-1280.webp",
+        "width": 1280,
+        "bytes": 151822
+      }
+    ]
+  },
+  "/images/schaaps/haringkraam-aan-het-water.webp": {
+    "sha256": "1b69d3379cf3e10611c54674c0385352d820de1860d37f2909ebe8656fede8c3",
+    "originalBytes": 249052,
+    "variants": [
+      {
+        "src": "/images/responsive/haringkraam-aan-het-water-1b69d3379cf3-320.webp",
+        "width": 320,
+        "bytes": 17802
+      },
+      {
+        "src": "/images/responsive/haringkraam-aan-het-water-1b69d3379cf3-640.webp",
+        "width": 640,
+        "bytes": 53518
+      },
+      {
+        "src": "/images/responsive/haringkraam-aan-het-water-1b69d3379cf3-960.webp",
+        "width": 960,
+        "bytes": 97902
+      },
+      {
+        "src": "/images/responsive/haringkraam-aan-het-water-1b69d3379cf3-1280.webp",
+        "width": 1280,
+        "bytes": 137762
+      }
+    ]
+  },
+  "/images/schaaps/toonbank-marktkraam.webp": {
+    "sha256": "d0e64dbd8db69fc2c95e039dde23f0a5c7582e6437810afb916b1caa5115b949",
+    "originalBytes": 352008,
+    "variants": [
+      {
+        "src": "/images/responsive/toonbank-marktkraam-d0e64dbd8db6-320.webp",
+        "width": 320,
+        "bytes": 22090
+      },
+      {
+        "src": "/images/responsive/toonbank-marktkraam-d0e64dbd8db6-640.webp",
+        "width": 640,
+        "bytes": 71152
+      },
+      {
+        "src": "/images/responsive/toonbank-marktkraam-d0e64dbd8db6-960.webp",
+        "width": 960,
+        "bytes": 135808
+      },
+      {
+        "src": "/images/responsive/toonbank-marktkraam-d0e64dbd8db6-1280.webp",
+        "width": 1280,
+        "bytes": 195252
+      }
+    ]
+  },
   "/images/editorial/varlaks-zalm-rauw-ai.webp": {
     "sha256": "541621dcf5fca6363b5a80b2cf4e798665d4503f9fa293d103bc1068251aad3f",
     "originalBytes": 174212,

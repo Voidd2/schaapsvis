@@ -2,7 +2,7 @@ export const questionsCopy = {
   nl: {
     questions: "Veelgestelde vragen over onze zalm",
     organicQuestion: "Is VÅRLAKS-zalm biologisch?",
-    organicAnswer: "VÅRLAKS noemt op de eigen website ASC-certificering. ASC is geen biologisch keurmerk. We hebben geen bevestiging van biologische certificering voor onze VÅRLAKS-zalm en bieden deze daarom niet als biologische zalm aan. Vraag in de winkel gerust naar het etiket en de herkomst.",
+    organicAnswer: "VÅRLAKS noemt op de eigen website ASC-certificering. ASC is geen biologisch keurmerk. We hebben geen bevestiging van biologische certificering voor onze VÅRLAKS-zalm en bieden deze daarom niet als biologische zalm aan. Aan de toonbank vertellen we u graag meer over de kwekers.",
     preparationQuestion: "Hoe kan ik de zalm bereiden?",
     preparationAnswer: "Zalm leent zich goed voor de pan en de oven. Citroen en dille zijn een mooie combinatie. Bekijk ons recept of vertel ons wat u wilt maken; dan adviseren we over een passende portie en bereiding.",
     orderQuestion: "Kan ik zalm voor een diner aanvragen?",
@@ -17,7 +17,7 @@ export const questionsCopy = {
   en: {
     questions: "Questions about our salmon",
     organicQuestion: "Is VÅRLAKS salmon organic?",
-    organicAnswer: "VÅRLAKS states ASC certification on its website. ASC is not an organic certification. We have no confirmation of organic certification for our VÅRLAKS salmon, so we do not offer it as organic salmon. Feel free to ask us about the label and origin in store.",
+    organicAnswer: "VÅRLAKS states ASC certification on its website. ASC is not an organic certification. We have no confirmation of organic certification for our VÅRLAKS salmon, so we do not offer it as organic salmon. Ask us about the farmers when you visit the counter.",
     preparationQuestion: "How can I cook the salmon?",
     preparationAnswer: "Salmon works well in a pan or in the oven. Lemon and dill make a lovely pairing. Explore our recipe or tell us what you are cooking; we can advise on portions and preparation.",
     orderQuestion: "Can I enquire about salmon for a dinner party?",
@@ -32,7 +32,7 @@ export const questionsCopy = {
   de: {
     questions: "Häufige Fragen zu unserem Lachs",
     organicQuestion: "Ist VÅRLAKS-Lachs biologisch?",
-    organicAnswer: "VÅRLAKS nennt auf seiner Website eine ASC-Zertifizierung. ASC ist kein Bio-Siegel. Für unseren VÅRLAKS-Lachs liegt uns keine Bestätigung einer Bio-Zertifizierung vor; deshalb bieten wir ihn nicht als Bio-Lachs an. Fragen Sie uns im Geschäft gern nach dem Etikett und der Herkunft.",
+    organicAnswer: "VÅRLAKS nennt auf seiner Website eine ASC-Zertifizierung. ASC ist kein Bio-Siegel. Für unseren VÅRLAKS-Lachs liegt uns keine Bestätigung einer Bio-Zertifizierung vor; deshalb bieten wir ihn nicht als Bio-Lachs an. An der Theke erzählen wir Ihnen gern mehr über die Züchter.",
     preparationQuestion: "Wie kann ich den Lachs zubereiten?",
     preparationAnswer: "Lachs eignet sich gut für Pfanne und Ofen. Zitrone und Dill passen wunderbar dazu. Entdecken Sie unser Rezept oder erzählen Sie uns, was Sie kochen möchten. Wir beraten Sie zu Portionen und Zubereitung.",
     orderQuestion: "Kann ich Lachs für ein Abendessen anfragen?",

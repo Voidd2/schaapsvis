@@ -1,5 +1,6 @@
 "use client";
 
+import { productHref } from "@/lib/product-href";
 import { useSearchParams } from "next/navigation";
 import { useInteractive } from "@/lib/use-interactive";
 import Link from "next/link";
@@ -83,7 +84,7 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
       </div>
       <div className="collection-tabs" role="group" aria-label={c.browse}>{["all", ...categories].map((id, i) =>
         <button disabled={!interactive} key={id} onClick={() => updateFilter({categorie:id, aantal:"14"})} aria-pressed={category === id} className={category === id ? "active" : ""}>{i === 0 ? c.all : c.categories[i - 1]}</button>)}</div>
-      <details className="product-directory"><summary>{locale === "de" ? "Alle Produkte nach Kategorie" : locale === "en" ? "All products by category" : "Alle producten per categorie"}</summary><div>{categories.map((cat,i)=><section key={cat}><h3>{c.categories[i]}</h3><ul>{localized.filter(p=>p.categorie===cat).map(p=><li key={p.slug}><Link prefetch={false} href={`/${locale}/assortiment/${p.slug}`}>{p.naam}</Link></li>)}</ul></section>)}</div></details>
+      <details className="product-directory"><summary>{locale === "de" ? "Alle Produkte nach Kategorie" : locale === "en" ? "All products by category" : "Alle producten per categorie"}</summary><div>{categories.map((cat,i)=><section key={cat}><h3>{c.categories[i]}</h3><ul>{localized.filter(p=>p.categorie===cat).map(p=><li key={p.slug}><Link prefetch={false} href={productHref(locale, p.slug)}>{p.naam}</Link></li>)}</ul></section>)}</div></details>
       <p className="collection-photo-note">{c.photoNote}</p>
       <p className="collection-count" role="status">{found.length} {found.length === 1 ? c.singular : c.count}</p>
     </section>
@@ -93,12 +94,12 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
       <div className="favorite-grid">{featured.map((p, i) => {
         const photo = productPhoto(p,locale)!;
         return <article key={p.slug} className="favorite-card">
-          <Link href={`/${locale}/assortiment/${p.slug}`} className="favorite-image">
+          <Link href={productHref(locale, p.slug)} className="favorite-image">
             <Image src={photo.src} width={700} height={500} sizes="(max-width: 700px) 100vw, 33vw"
               alt={photo.alt} className={photo.editorial ? "editorial" : ""} />
             <span className="favorite-number">0{i + 1}</span>
           </Link>
-          <div className="favorite-heading"><div><p>{c.categories[categories.indexOf(p.categorie)]}</p><h3><Link href={`/${locale}/assortiment/${p.slug}`}>{p.naam}</Link></h3></div><ArrowUpRight size={22} aria-hidden="true" /></div>
+          <div className="favorite-heading"><div><p>{c.categories[categories.indexOf(p.categorie)]}</p><h3><Link href={productHref(locale, p.slug)}>{p.naam}</Link></h3></div><ArrowUpRight size={22} aria-hidden="true" /></div>
           <p className="text-sm font-semibold mb-3">{productAvailability(p,locale).label}</p>
           {p.slug === "creuse-oesters" && <a href={bestelContact(locale, p.naam).href} className="collection-whatsapp"><MessageCircle size={16} aria-hidden="true" />{locale === "nl" ? "Grotere bestelling? App ons" : locale === "de" ? "Größere Bestellung? Schreiben Sie uns" : "Larger order? Message us"}</a>}
         </article>;
@@ -112,14 +113,14 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
         const platter = ["visschaal", "feestschotel"].includes(p.slug);
         return <article id={`product-${p.slug}`} key={p.slug} className="collection-item">
           <div className="collection-item-main">
-            {photo && <Link href={`/${locale}/assortiment/${p.slug}`} tabIndex={-1} className="collection-thumb"><Image src={photo.src} alt={photo.alt} width={800} height={570} sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 1100px) 45vw, 30vw" className={`${photo.editorial ? "editorial" : ""} ${photo.whole ? "whole-product" : ""}`} /></Link>}
-            <div className="collection-item-copy"><p className="collection-category">{c.categories[categories.indexOf(p.categorie)]}</p><h3><Link href={`/${locale}/assortiment/${p.slug}`}>{p.naam}</Link></h3><p className="collection-description">{p.desc}</p></div>
+            {photo && <Link href={productHref(locale, p.slug)} tabIndex={-1} className="collection-thumb"><Image src={photo.src} alt={photo.alt} width={800} height={570} sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 1100px) 45vw, 30vw" className={`${photo.editorial ? "editorial" : ""} ${photo.whole ? "whole-product" : ""}`} /></Link>}
+            <div className="collection-item-copy"><p className="collection-category">{c.categories[categories.indexOf(p.categorie)]}</p><h3><Link href={productHref(locale, p.slug)}>{p.naam}</Link></h3><p className="collection-description">{p.desc}</p></div>
           </div>
           <div className={`collection-item-stock mt-3 mb-3 text-sm leading-relaxed ${stock.unavailable?"text-rose-700":"text-slate-700"}`} data-stock={p.beschikbaar}>
             <p className="font-semibold">{stock.label}</p>
           </div>
           <div className="collection-item-actions">
-            <Link href={`/${locale}/assortiment/${p.slug}`}>{c.detail}<ArrowUpRight size={14} aria-hidden="true" /></Link>
+            <Link href={productHref(locale, p.slug)}>{c.detail}<ArrowUpRight size={14} aria-hidden="true" /></Link>
             {platter ? <Link href={`/${locale}/visschalen`}>{locale === "nl" ? "Visschaal samenstellen" : locale === "de" ? "Fischplatte zusammenstellen" : "Create a seafood platter"}</Link>
               : (p.slug === "creuse-oesters" || p.slug === "fine-de-claire-oesters")
                 ? <a href={bestelContact(locale, p.naam).href} className="collection-whatsapp"><MessageCircle size={15} aria-hidden="true" />{locale === "nl" ? "Grotere bestelling? App ons" : locale === "de" ? "Größere Bestellung? Schreiben Sie uns" : "Larger order? Message us"}</a>

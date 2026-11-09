@@ -22,7 +22,7 @@ import { receptBeeld } from "@/lib/recepten";
 import { paginaMetadata, kruimelSchema } from "@/lib/seo";
 
 type Props = {params: Promise<{locale: string; slug: string}>};
-export function generateStaticParams() { return products.map(p => ({slug: p.slug})); }
+export function generateStaticParams() { return products.filter(p => p.slug !== "varlaks-zalm").map(p => ({slug: p.slug})); }
 function metaSnippet(value: string, max = 160) {
   const text = value.replace(/\s+/g, " ").trim();
   if (text.length <= max) return text;
@@ -100,11 +100,10 @@ export default async function ProductDetailPage({params}: Props) {
         </div>
         <div className="flex flex-wrap items-center gap-4 product-intro-actions">
           <a href={bestelContact(lang, product.naam).href} className="knop knop-navy">{lang === "nl" ? "Vraag naar dit product" : lang === "de" ? "Nach diesem Produkt fragen" : "Ask about this product"}</a>
-          {slug === "varlaks-zalm" && <Link href={`/${lang}/varlaks`} className="knop knop-lijn">{c.salmon}</Link>}
           <Link href={`/${lang}/bezoek-ons`} className="font-semibold underline underline-offset-4">{lang === "nl" ? "Openingstijden en route" : lang === "de" ? "Öffnungszeiten und Anfahrt" : "Opening hours and directions"} →</Link>
         </div>
         <p className="mt-5 pl-5" style={{borderLeft:`2px solid ${availability.unavailable?"#be123c":"var(--navy)"}`}}>{availability.note}</p>
-        {isSalmon && <Link href={`/${lang}/varlaks`} className="block mt-6 pl-5" style={{borderLeft:"2px solid var(--seafoam)"}}><p className="kapitaal mb-2">{c.alternative}</p><p className="font-semibold underline">{c.salmon}</p><p className="text-sm mt-2 leading-relaxed">{c.salmonNote}</p></Link>}
+        {isSalmon && <Link href={`/${lang}/varlaks#film`} className="block mt-6 pl-5" style={{borderLeft:"2px solid var(--seafoam)"}}><p className="kapitaal mb-2">{c.alternative}</p><p className="font-semibold underline">{c.salmon}</p><p className="text-sm mt-2 leading-relaxed">{c.salmonNote}</p></Link>}
         {reading.map(p=><Link key={p.slug} href={`/${lang}/blog/${p.slug}`} className="block mt-4 underline">{p.title} →</Link>)}
         {["lekkerbek","kibbeling"].includes(slug) && <Link className="block mt-4 underline" href={`/${lang}/blog/kibbeling-vs-lekkerbek-het-verschil`}>{lang==="nl"?"Wat is het verschil tussen kibbeling en lekkerbek?":lang==="en"?"How do kibbeling and lekkerbek differ?":"Was unterscheidet Kibbeling und Lekkerbek?"} →</Link>}
         {seizoen && <div className="mt-7 pl-5" style={{borderLeft:"2px solid var(--seafoam)"}}><p><strong>{c.season}:</strong> {seizoen}</p></div>}

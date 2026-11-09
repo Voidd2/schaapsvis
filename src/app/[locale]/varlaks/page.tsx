@@ -36,17 +36,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function VarlaksPage({ params }: Props) {
   const lang = language((await params).locale);
   const c = campaign[lang], q = questionsCopy[lang];
-  const product = "/" + lang + "/assortiment/varlaks-zalm";
   const ask = bestelContact(lang, c.heading);
   const questions = [[q.organicQuestion,q.organicAnswer], [q.preparationQuestion,q.preparationAnswer], [q.orderQuestion,q.orderAnswer]];
   return <div className={styles.page}>
     <Schema data={kruimelSchema(lang, [{ naam: BEDRIJF.naamKort, pad: "/" }, { naam: "VÅRLAKS", pad: "/varlaks" }])} />
+    <Schema data={{ "@context":"https://schema.org", "@type":"Product", name:c.heading,
+      brand:{ "@type":"Brand", name:"VÅRLAKS" }, description:c.intro,
+      image:BEDRIJF.domein + base + "zalmfilet-1200.webp", url:`${BEDRIJF.domein}/${lang}/varlaks` }} />
     <header className={styles.hero}>
       <div className={styles.heroCopy}>
         <p className={styles.eyebrow}>{c.since}</p>
         <h1>{c.heading}<em>{c.place}</em></h1>
         <p className={styles.lead}>{c.intro}</p>
-        <Link className={styles.price} href={product}>{formatPrijs(PRIJZEN["varlaks-zalm"],lang)} <span>{c.product} ↗</span></Link>
+        <p className={styles.price}>{formatPrijs(PRIJZEN["varlaks-zalm"], lang)}</p>
         <div className={styles.actions}>
           <a className={styles.primary} href={BEDRIJF.maps.route} target="_blank" rel="noopener noreferrer">{c.directions} →</a>
           <a className={styles.secondary} href={ask.href}>{c.ask}</a>

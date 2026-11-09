@@ -1,3 +1,4 @@
+import { productHref } from "@/lib/product-href";
 import Link from "next/link";
 import { connection } from "next/server";
 import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
@@ -60,7 +61,7 @@ export default async function AssortimentPage({ params }: { params: Promise<{ lo
       numberOfItems: gesorteerdAssortiment.length + DIRKS_BARBECUE.length,
       itemListElement: [...gesorteerdAssortiment.map((p, i) => ({
         "@type": "ListItem", position: i + 1, name: localizeProduct(p, locale).naam,
-        url: `${BEDRIJF.domein}/${locale}/assortiment/${p.slug}`,
+        url: BEDRIJF.domein + productHref(locale, p.slug).split("#")[0],
       })), ...DIRKS_BARBECUE.map((item, i) => ({
         "@type": "ListItem", position: gesorteerdAssortiment.length + i + 1,
         name: selectieNaam(item.slug, locale),
@@ -78,7 +79,7 @@ export default async function AssortimentPage({ params }: { params: Promise<{ lo
           </div>
         </div>
         <figure className="collection-hero-image">
-          <Link href={`/${locale}/assortiment/varlaks-zalm`} aria-label={locale === "de" ? "Produktinformationen zu VÅRLAKS-Lachs ansehen" : locale === "en" ? "View VÅRLAKS salmon product information" : "Bekijk de productinformatie over VÅRLAKS-zalm"}>
+          <Link href={productHref(locale, "varlaks-zalm")} aria-label={locale === "de" ? "Produktinformationen zu VÅRLAKS-Lachs ansehen" : locale === "en" ? "View VÅRLAKS salmon product information" : "Bekijk de productinformatie over VÅRLAKS-zalm"}>
             <Image width={1200} height={836} sizes="(max-width: 800px) 100vw, 50vw" src="/images/varlaks/zalmfilet-1200.webp" alt={locale === "de" ? "Zwei frische VÅRLAKS-Lachsfilets" : locale === "en" ? "Two fresh VÅRLAKS salmon fillets" : "Twee verse VÅRLAKS-zalmfilets"} priority />
           </Link>
         </figure>

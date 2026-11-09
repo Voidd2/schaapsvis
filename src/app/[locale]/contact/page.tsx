@@ -72,8 +72,8 @@ export default async function ContactPage({
 
             {/* Iemand achter de toonbank naast het telefoonnummer: bellen wordt
                 makkelijker als je ziet wie er opneemt. */}
-            <div className="max-w-[16rem] mb-7">
-              <Beeld naam="achterDeToonbank" verhouding="vierkant" streep="var(--navy)" />
+            <div className="max-w-md mb-7">
+              <Beeld naam="achterDeToonbank" verhouding="liggend" streep="var(--navy)" />
             </div>
 
             <dl>
