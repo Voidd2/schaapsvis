@@ -1,3 +1,4 @@
+import { trioPriceCents, TRIO_GRAMS } from "./gift-pricing";
 import { gourmetPriceCents } from "./gourmet-pricing";
 
 export type FeestdagenCategorie = "visschalen" | "gourmet" | "delicatessen";
@@ -290,28 +291,17 @@ export const FEESTDAGEN_PRODUCTEN: readonly FeestdagenProduct[] = [
     samenstelling: ["Geelvintonijn"],
     allergenen: ["Vis"],
   },
-  {
-    slug: "luxe-trio-klein",
-    naam: "Luxe vistrio klein",
-    prijsCents: 1599,
+  ...TRIO_GRAMS.map((grams, size): FeestdagenProduct => ({
+    slug: ["luxe-trio-klein", "luxe-trio-middel", "luxe-vistrio"][size],
+    naam: "Luxe vistrio " + ["klein", "middel", "groot"][size],
+    prijsCents: trioPriceCents(size)!,
     eenheid: "per stuk",
-    afbeelding: "/images/dirks/luxe-trio-klein.webp",
+    afbeelding: size === 0 ? "/images/dirks/luxe-trio-klein.webp" : "/images/dirks/luxe-vistrio.webp",
     categorie: "delicatessen",
-    intro: "Een klein luxe trio van Hollandse garnalen, gerookte paling en gerookte zalm.",
-    samenstelling: ["Circa 40 gram Hollandse garnalen", "Circa 40 gram gerookte paling", "Circa 40 gram gerookte zalm", "Cocktailsaus", "Mosterd-dillesaus"],
+    intro: `Drie vakjes met elk circa ${grams} g: Hollandse garnalen, gerookte paling en gerookte zalm. Inclusief opmaak en verpakking.`,
+    samenstelling: ["Hollandse garnalen", "gerookte paling", "gerookte zalm"].map(fish => `Circa ${grams} gram ${fish}`).concat(["Cocktailsaus", "Mosterd-dillesaus"]),
     allergenen: ["Schaaldieren", "Vis", "Ei", "Mosterd", "Melk"],
-  },
-  {
-    slug: "luxe-vistrio",
-    naam: "Luxe vistrio groot",
-    prijsCents: 3199,
-    eenheid: "per stuk",
-    afbeelding: "/images/dirks/luxe-vistrio.webp",
-    categorie: "delicatessen",
-    intro: "Een royaal luxe trio van Hollandse garnalen, gerookte paling en gerookte zalm.",
-    samenstelling: ["Circa 80 gram Hollandse garnalen", "Circa 80 gram gerookte paling", "Circa 80 gram gerookte zalm", "Cocktailsaus", "Mosterd-dillesaus"],
-    allergenen: ["Schaaldieren", "Vis", "Ei", "Mosterd", "Melk"],
-  },
+  })),
   {
     slug: "salade-trio",
     naam: "Salade trio",

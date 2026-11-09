@@ -1189,3 +1189,29 @@ body:has(#mobile-navigation) .catalog-cart-trigger { visibility: hidden; }
 .admin-workspace > main,.admin-workspace > .section-wrap:not(.admin-navigation) { padding-top:32px; }
 @media(max-width:900px) { .admin-navigation nav { grid-template-columns:repeat(2,minmax(0,1fr)); } .admin-navigation nav a { justify-content:flex-start; } }
 @media(max-width:520px) { .catalog-intro-links { display:grid; grid-template-columns:1fr; } .catalog-intro-links .knop { width:100%; justify-content:space-between; } .admin-navigation nav { grid-template-columns:1fr; } }
+
+.holiday-cover {
+  background: linear-gradient(110deg, #fff7e9, #fffcf6 56%, #f6ede4);
+  border-block: 1px solid #ecddc8;
+  border-radius: 0 0 1.25rem 1.25rem;
+  padding-inline: clamp(1rem, 3vw, 3rem);
+}
+.holiday-cover .catalog-intro-links { display: flex; flex-wrap: wrap; gap: .75rem; }
+.holiday-cover figure { margin: 0; }
+.holiday-cover img { box-shadow: 0 10px 24px rgb(43 39 28 / 12%); }
+.catalog-gifts .seafood-grid > article {
+  background: white;
+  border: 1px solid #d6e3e6;
+  border-radius: 1rem;
+  padding: clamp(.85rem, 1.6vw, 1.4rem);
+  min-width: 0;
+}
+.gift-price-summary {
+  background: #edf6f8;
+  border-left: 3px solid #176079;
+  padding: 1rem;
+  border-radius: .5rem;
+  margin-block: 1rem;
+  font-size: .94rem;
+  color: #124359;
+}
