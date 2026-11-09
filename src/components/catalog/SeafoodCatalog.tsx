@@ -4,6 +4,8 @@ import Link from "next/link";
 import { catalogProduct, MAIN_PLATTERS, GOURMET, DELICACIES, FEATURED, SECONDARY, SALAD_REQUESTS, languageIndex } from "@/lib/seafood-catalog";
 import { catalogText } from "@/lib/catalog-copy";
 import { platterPhotoAlt, platterPrice, platterPresentation } from "@/lib/platter-presentation";
+import { isDeliTrio } from "@/lib/deli-trio";
+import { DeliTrio } from "@/components/catalog/DeliTrio";
 import { ProductQuantity, LegacyCatalogSelection } from "./RequestControls";
 import { CatalogPhoto } from "./CatalogPhoto";
 
@@ -27,9 +29,8 @@ function ProductCard({ slug, locale, festive, featured = false }: Props & { slug
       {product.categorie === "gourmet" && <p className="text-sm">{gourmetPortionText(slug, locale)}</p>}
       <p className="seafood-price">{platterPrice(product, locale)}</p>
       <Link className="seafood-detail" href={href}>{t.view} →</Link>
-      <ProductQuantity slug={slug} locale={locale} />
+      {isDeliTrio(slug) ? <DeliTrio key={slug} locale={locale} slug={slug} product={product.naam} /> : <ProductQuantity slug={slug} locale={locale} />}
       {product.categorie === "gourmet" && <a className="knop knop-lijn mt-4 min-h-12 whitespace-normal" href="#gourmet-samenstellen">{gourmetRequestCopy(locale).title} →</a>}
-      {["luxe-trio-klein", "luxe-trio-middel", "luxe-vistrio"].includes(slug) && <Link className="seafood-detail mt-3" href="#geschenken">{giftRequestCopy(locale).customTrio} →</Link>}
     </div>
   </article>;
 }
