@@ -18,12 +18,14 @@ export const platterMenu = {
   "standard-platter": {
     names: ["Standaard visschaal", "Standard seafood platter", "Standard-Fischplatte"],
     rate: 1650, fish: ["flakes", "herring-fish", "mackerel", "northern", "house-salmon"],
-    anchor: "schalen-klassiek", photo: "/images/dirks/visschotel-klein-2-3-pers.webp",
+    anchor: "schalen-klassiek", photo: "/images/editorial/visschaal-standaard-zalmsalade.webp",
+    photoAlt: ["Standaardschaal met zalmsalade, zalmsnippers en roze Noorse garnalen naast haring en makreel.", "Standard platter with salmon salad, salmon trimmings and pink Norwegian prawns alongside herring and mackerel.", "Standardplatte mit Lachssalat, Lachsstückchen und rosa norwegischen Garnelen neben Hering und Makrele."],
   },
   "deluxe-platter": {
     names: ["Luxe visschaal", "Deluxe seafood platter", "Deluxe-Fischplatte"],
     rate: 1850, fish: ["eel", "shrimp", "salmon", "mackerel", "herring-fish"],
-    anchor: "schalen-luxe", photo: "/images/dirks/visschotel-luxe-10-14-pers.webp",
+    anchor: "schalen-luxe", photo: "/images/editorial/visschaal-luxe-gerookte-paling.webp",
+    photoAlt: ["Luxe schaal met lange palingfilets, plakken gerookte zalm en kleine Hollandse garnalen naast haring en makreel.", "Deluxe platter with long eel fillets, slices of smoked salmon and small Dutch brown shrimp alongside herring and mackerel.", "Deluxe-Platte mit langen Aalfilets, Räucherlachsscheiben und kleinen Nordseegarnelen neben Hering und Makrele."],
   },
 } as const;
 export const platterIngredients: Record<string, readonly string[]> = {
