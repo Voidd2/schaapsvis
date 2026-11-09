@@ -5,7 +5,7 @@ import { deliDraft, deliGroups, deliLanguage, deliQuote, initialSlots, type Slot
 import { feestdagenBedrag } from "@/lib/feestdagen-producten";
 import { giftRequestCopy } from "@/lib/gift-request";
 import { useInteractive } from "@/lib/use-interactive";
-import { ProductQuantity } from "./RequestControls";
+import { ProductQuantity } from "./Productkeuze";
 
 const copy = [
   { title: "Stel uw eigen trio samen", intro: "Kies voor elk vakje vis of salade en vul het gewicht in.", slot: "Vakje", grams: "Gram", option: "Kies een soort", groups: ["Vis", "Salades"], incomplete: "Vul alle drie de vakjes in voor uw totaalprijs.", other: "Andere wensen of allergieën?" },

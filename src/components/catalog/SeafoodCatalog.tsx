@@ -7,8 +7,7 @@ import { SALAD_PORTION_CENTS } from "@/lib/salad-extras";
 import { catalogText } from "@/lib/catalog-copy";
 import { platterPhotoAlt, platterPrice, platterPresentation } from "@/lib/platter-presentation";
 import { isDeliTrio } from "@/lib/deli-trio";
-import { DeliTrio } from "@/components/catalog/DeliTrio";
-import { ProductQuantity, LegacyCatalogSelection } from "./RequestControls";
+import { DeliTrio, ProductQuantity, LegacyCatalogSelection } from "./RequestControls";
 import { CatalogPhoto } from "./CatalogPhoto";
 
 import { giftCopy } from "@/lib/gift-copy";

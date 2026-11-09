@@ -16,7 +16,7 @@ if (!["127.0.0.1", "localhost"].includes(url.hostname)) throw new Error("Use a l
     await ctx.route("**/*", r => {
       const u = new URL(r.request().url());
       if (u.origin !== url.origin || r.request().method() !== "GET") return r.abort();
-      if (/\/Winkelwagen-[^/]+\.js$/.test(u.pathname) ||
+      if (/\/(?:Winkelwagen|RequestControls)-[^/]+\.js$/.test(u.pathname) ||
           (editorial && /\/(?:CatalogCart|mandje)-[^/]+\.js$/.test(u.pathname))) {
         forbidden.push(u.pathname);
         return r.abort("blockedbyclient");
@@ -52,7 +52,30 @@ if (!["127.0.0.1", "localhost"].includes(url.hostname)) throw new Error("Use a l
     assert.deepEqual(errors, []);
     // The router may prefetch linked catalogues. Their blocked requests must
     // not prevent the current information page or its menu from working.
-    assert.ok(!forbidden.some(path => /\/Winkelwagen-/.test(path)), "No requests for the obsolete basket entry");
+    assert.ok(!forbidden.some(path => /\/(?:Winkelwagen|RequestControls)-/.test(path)), "No obsolete shared shopping entry");
     console.log("Information pages hydrate; checkout opens; catalogue selection survives a route change.");
+
+    // Exercise the *current* Cloudflare module failing, not just a stale URL.
+    if (process.argv.includes("--cloudflare")) {
+      const broken = await browser.newContext();
+      const tab = await broken.newPage();
+      let blocks = 0;
+      await broken.route("**/*", r => {
+        const u = new URL(r.request().url());
+        if (u.origin !== url.origin || r.request().method() !== "GET") return r.abort();
+        if (/\/Productkeuze-[^/]+\.js$/.test(u.pathname)) { blocks++; return r.abort("blockedbyclient"); }
+        return r.continue();
+      });
+      for (const route of ["/nl/visschalen", "/nl/feestdagen", "/nl/feestdagen/" + slug + "?catalog=visschalen"]) {
+        await tab.goto(new URL(route, url).href, { waitUntil: "networkidle" });
+        await tab.getByRole("link", { name: /Telefonisch bestellen/ }).first().waitFor();
+        assert.equal(await tab.locator("main h1").count(), 1);
+        assert.equal(await tab.locator("html#__next_error__").count(), 0);
+        assert.ok((await tab.locator("main").innerText()).includes("73,50"), route);
+      }
+      assert.ok(blocks > 0);
+      console.log("Current Cloudflare product module blocked: both catalogues, product details, prices and telephone fallback still available.");
+      await broken.close();
+    }
   } finally { await browser.close(); }
 })().catch(e => { console.error(e); process.exitCode = 1; });
