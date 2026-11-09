@@ -1100,7 +1100,10 @@ summary::-webkit-details-marker {
 .varlaks-nearby { margin-top:16px; font-size:.95rem; color:#d5e7ee; line-height:1.6; }
 .varlaks-locations { background:var(--sand); padding-block:clamp(32px,4vw,56px); scroll-margin-top:220px; }
 .varlaks-locations-intro { margin-bottom:26px; }
-.varlaks-location-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
+.varlaks-location-grid { display:grid; grid-template-columns:minmax(0,1fr); gap:16px; }
+.varlaks-storefront { overflow:hidden; border:1px solid var(--linen); border-radius:12px; background:white; }
+.varlaks-storefront-photo { display:block; width:100%; height:auto; filter:contrast(.94) brightness(1.14); }
+.varlaks-storefront > .varlaks-location-card { border:0; }
 .varlaks-location-card { display:flex; flex-direction:column; padding:24px; background:white; border:1px solid var(--linen); border-radius:12px; }
 .varlaks-location-card h3, .varlaks-extra-location h3 { font:700 1.35rem/1.3 var(--font-display); margin-bottom:12px; }
 .varlaks-location-card ul { margin-top:18px; }
@@ -1342,16 +1345,18 @@ body:has(#mobile-navigation) .catalog-cart-trigger { visibility: hidden; }
   .product-intro-title h1 { font-size:clamp(2.35rem,3.4vw,3.8rem); line-height:1.08; letter-spacing:-.035em; }
   .product-intro-copy { max-width:62ch; }
 }
-@media(min-width:900px) {
-  .varlaks-location-grid { grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:1rem; }
-  .varlaks-location-card { padding:clamp(18px,2vw,32px); border-radius:6px; }
-  .varlaks-location-card:first-child { grid-row:span 2; }
-  .varlaks-location-card:first-child ul { max-width:34rem; }
-  .varlaks-location-card:not(:first-child) { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:0 1rem; align-content:center; }
-  .varlaks-location-card:not(:first-child) > :is(h3,p,ul) { grid-column:1; }
-  .varlaks-location-card:not(:first-child) > :is(p,ul) { margin:0; }
-  .varlaks-location-card:not(:first-child) li { justify-content:flex-start; }
-  .varlaks-location-card:not(:first-child) .knop { grid-column:2; grid-row:1/4; align-self:center; margin:0; }
+@media(min-width:700px) {
+  .varlaks-location-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .varlaks-storefront { grid-column:1/-1; display:grid; grid-template-columns:1.05fr 1fr; align-items:center; }
+  .varlaks-storefront-view { margin:clamp(16px,2vw,28px) 0 clamp(16px,2vw,28px) clamp(16px,2vw,28px); overflow:hidden; border-radius:6px; }
+  .varlaks-location-card { padding:clamp(18px,2vw,32px); }
+}
+@media(min-width:1200px) {
+  .varlaks-location-grid { grid-template-columns:minmax(0,2.2fr) minmax(0,1fr); }
+  .varlaks-storefront { grid-column:1; grid-row:span 2; }
+  .varlaks-location-grid > .varlaks-location-card { justify-content:center; }
+  .varlaks-location-grid > .varlaks-location-card :is(p,ul) { margin:0; }
+  .varlaks-location-grid > .varlaks-location-card .knop { margin-top:.75rem; }
 }
 
 .tier-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(1rem,3vw,2.5rem); align-items:start; }
