@@ -9,6 +9,7 @@ import { VarlaksLocations } from "@/components/shared/VarlaksLocations";
 import { BedieningSlot } from "@/components/catalog/BedieningSlot";
 import { Schema } from "@/components/Schema";
 import { campaign } from "./campaign";
+import { SupplierCertificates } from "./SupplierCertificates";
 import { questionsCopy, sources } from "./questions";
 import styles from "./campaign.module.css";
 
@@ -66,6 +67,7 @@ export default async function VarlaksPage({ params }: Props) {
         <p className={styles.eyebrow}>{c.why}</p><h2 id="varlaks-origin">{c.originTitle}</h2>
         <p>{c.story}</p>
         <ul>{c.proof.map(reason => <li key={reason}>{reason}</li>)}</ul>
+        <SupplierCertificates locale={lang}/>
         <a className={styles.inlineLink} href="https://varlaks.no/#why-choose-varlaks" target="_blank" rel="noopener noreferrer">{c.source} ↗</a>
       </div>
     </section>
