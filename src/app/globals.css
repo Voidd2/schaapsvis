@@ -1294,6 +1294,20 @@ body:has(#mobile-navigation) .catalog-cart-trigger { visibility: hidden; }
 .platter-directory summary::after,.product-directory summary::after {content:"";width:.55rem;height:.55rem;border-right:2px solid;border-bottom:2px solid;transform:rotate(45deg);margin-top:-.25rem}
 .platter-directory[open] summary::after,.product-directory[open] summary::after {transform:rotate(225deg);margin-top:.25rem}
 
+.home-visit { display:grid; gap:1.25rem 3rem; align-items:start; }
+.home-visit-details { border-top:1px solid var(--linen); }
+.home-visit-details details { border-bottom:1px solid var(--linen); }
+.home-visit-details summary { display:flex; justify-content:space-between; align-items:center; gap:1rem; min-height:3.25rem; padding:.6rem .25rem; cursor:pointer; font-weight:650; }
+.home-visit-details summary::after { content:""; width:.55rem; height:.55rem; margin:-.25rem .3rem 0 0; border:solid currentColor; border-width:0 2px 2px 0; transform:rotate(45deg); flex:none; }
+.home-visit-details details[open] > summary::after { transform:rotate(225deg); margin-top:.25rem; }
+.home-visit-details .shop-week { margin-top:0; }
+.home-visit-link { display:inline-flex; align-items:center; gap:.35rem; min-height:44px; color:var(--navy); text-decoration:underline; text-underline-offset:.2em; }
+.home-visit-markets { padding-bottom:.5rem; }
+.home-visit-markets li { display:grid; justify-items:start; padding:.5rem .25rem 0; }
+@media (min-width: 48rem) {
+  .home-visit { grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+}
+
 /* The same daily timetable is used at the counter, in page headers and in the footer. */
 .shop-week { margin-block:.7rem; max-width:25rem; font-variant-numeric:tabular-nums; }
 .shop-week > div { display:flex; flex-wrap:wrap; justify-content:space-between; gap:.25rem 1rem; padding-block:.27rem; border-bottom:1px solid color-mix(in srgb,currentColor 18%,transparent); }
