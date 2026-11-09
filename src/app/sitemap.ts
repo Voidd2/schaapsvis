@@ -40,6 +40,7 @@ const MEERTALIG: {
 
   { pad: "/visschalen", prioriteit: 0.95, frequentie: "weekly" as const },
   { pad: "/feestdagen", prioriteit: 0.95, frequentie: "weekly" as const, gewijzigd: new Date("2026-10-30") },
+  { pad: "/feestdagen/verse-vis", prioriteit: 0.8, frequentie: "weekly" as const },
   { pad: "/relatiegeschenken", prioriteit: 0.8, frequentie: "weekly" as const, gewijzigd: new Date("2026-10-30") },
 
   { pad: "/assortiment", prioriteit: 0.9, frequentie: "weekly" as const },

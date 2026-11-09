@@ -1,7 +1,7 @@
 "use client";
 
 import { productHref } from "@/lib/product-href";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useInteractive } from "@/lib/use-interactive";
 import Link from "next/link";
 import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
@@ -11,6 +11,7 @@ import type { Product, Categorie } from "@/lib/assortiment-data";
 import { productPhoto } from "@/lib/product-beeld";
 import { matchesQuery } from "@/lib/search";
 import { bestelContact } from "@/lib/bestel-contact";
+import { holidayFishWhatsApp } from "@/lib/feestdagen-verse-vis";
 import { productAvailability } from "@/lib/product-availability";
 
 const copy = {
@@ -44,11 +45,12 @@ const categories: Categorie[] = ["verse-vis", "gerookte-vis", "schaal-schelp", "
 const featuredSlugs = ["kabeljauwfilet", "lekkerbek", "zeebaarsfilet", "creuse-oesters"];
 const stapleSlugs = new Set(["varlaks-zalm", "kibbeling", "lekkerbek", "haring", "broodje-haring", "kabeljauwfilet", "zeebaarsfilet"]);
 
-export function AssortimentFilter({ localized }: { localized: Product[] }) {
+export function AssortimentFilter({ localized, holiday = false }: { localized: Product[]; holiday?: boolean }) {
   const interactive = useInteractive();
   const locale = useLocale();
   const c = copy[locale as keyof typeof copy] ?? copy.nl;
   const params = useSearchParams();
+  const pathname = usePathname();
   const requestedCategory = params.get("categorie") ?? "all";
   const category = categories.includes(requestedCategory as Categorie) ? requestedCategory : "all";
   const query = params.get("zoek") ?? "";
@@ -68,7 +70,7 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
   const found = localized.filter(p =>
     (category === "all" || p.categorie === category) && (!query || matchesQuery(p, query)));
   if (sort === "az") found.sort((a, b) => a.naam.localeCompare(b.naam, locale));
-  const showFeatured = category === "all" && !query.trim() && sort === "popular";
+  const showFeatured = !holiday && category === "all" && !query.trim() && sort === "popular";
   const featured = featuredSlugs.map(slug => localized.find(p => p.slug === slug)!);
   const rows = showFeatured ? found.filter(p => !featuredSlugs.includes(p.slug)) : found;
   const visibleRows = rows.slice(0, visibleCount);
@@ -121,7 +123,8 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
           </div>
           <div className="collection-item-actions">
             <Link href={productHref(locale, p.slug)}>{c.detail}<ArrowUpRight size={14} aria-hidden="true" /></Link>
-            {platter ? <Link href={`/${locale}/visschalen`}>{locale === "nl" ? "Visschaal samenstellen" : locale === "de" ? "Fischplatte zusammenstellen" : "Create a seafood platter"}</Link>
+            {holiday ? (!stock.unavailable && <a href={holidayFishWhatsApp(locale, p.naam)} className="collection-whatsapp"><MessageCircle size={15} aria-hidden="true" />{bestelContact(locale).label}</a>)
+              : platter ? <Link href={`/${locale}/visschalen`}>{locale === "nl" ? "Visschaal samenstellen" : locale === "de" ? "Fischplatte zusammenstellen" : "Create a seafood platter"}</Link>
               : (p.slug === "creuse-oesters" || p.slug === "fine-de-claire-oesters")
                 ? <a href={bestelContact(locale, p.naam).href} className="collection-whatsapp"><MessageCircle size={15} aria-hidden="true" />{locale === "nl" ? "Grotere bestelling? App ons" : locale === "de" ? "Größere Bestellung? Schreiben Sie uns" : "Larger order? Message us"}</a>
                 : !stapleSlugs.has(p.slug) && !["always", "dagelijks"].includes(p.beschikbaar ?? "")
@@ -130,8 +133,8 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
           </div>
         </article>;
       })}</div>
-      {rows.length > visibleRows.length && <a className="collection-load-more" href={`/${locale}/assortiment?${moreParams}#product-${rows[visibleRows.length].slug}`}>{c.more} ↓</a>}
-      {!found.length && <div className="collection-empty"><p>{c.empty}</p><a className="knop knop-rood" href={bestelContact(locale).href}>{bestelContact(locale).label}</a></div>}
+      {rows.length > visibleRows.length && <a className="collection-load-more" href={`${pathname}?${moreParams}#product-${rows[visibleRows.length].slug}`}>{c.more} ↓</a>}
+      {!found.length && <div className="collection-empty"><p>{c.empty}</p><a className="knop knop-rood" href={holiday ? holidayFishWhatsApp(locale) : bestelContact(locale).href}>{bestelContact(locale).label}</a></div>}
     </section>
   </div>;
 }
