@@ -95,7 +95,7 @@ marktZaterdag:["Schaap’s fish stall on Aalmarkt near De Waag, Leiden","Schaap�
 marktWoensdag:["Schaap’s fish stall at Leiden’s Wednesday market","Schaap’s Fischstand auf dem Leidener Mittwochsmarkt"],
 marktVoorschoten:["Schaap’s fish stall by Hoogvliet in Voorschoten","Schaap’s Fischstand bei Hoogvliet in Voorschoten"],
 historie1938:["Schaap’s Vishandel in Leiden around its founding in 1938","Schaap’s Vishandel in Leiden um die Gründung 1938"],
-nelInDeWinkel:["Nel behind the counter in a blue apron and red neckerchief","Nel mit blauer Schürze und rotem Halstuch hinter der Theke"],
+nelInDeWinkel:["Aldert Haasnoot on the left behind the counter, with his mother Nel on the right in a blue apron","Aldert Haasnoot links hinter der Theke, rechts seine Mutter Nel in blauer Schürze"],
 historie2018:["Schaap’s Vishandel in 2018","Schaap’s Vishandel im Jahr 2018"],
 historie1980:["Schaap’s Vishandel, Leiden, in the 1980s","Schaap’s Vishandel in Leiden in den 1980er Jahren"],
 historie2000:["Aldert Haasnoot in his red apron at the counter when he took over the shop in 2009", "Aldert Haasnoot mit roter Schürze an der Theke bei der Übernahme des Geschäfts 2009"],
