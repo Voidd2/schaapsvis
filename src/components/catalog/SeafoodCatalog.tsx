@@ -15,7 +15,6 @@ import { giftCopy } from "@/lib/gift-copy";
 import { giftRequestCopy } from "@/lib/gift-request";
 import { GiftRequest } from "./GiftRequest";
 import { GourmetRequest } from "./GourmetRequest";
-import { gourmetRequestCopy } from "@/lib/gourmet-request";
 import { gourmetPortionText } from "@/lib/gourmet-pricing";
 
 type Props = { locale: string; festive?: boolean };
@@ -32,7 +31,6 @@ function ProductCard({ slug, locale, festive, featured = false }: Props & { slug
       <p className="seafood-price">{platterPrice(product, locale)}</p>
       <Link className="seafood-detail" href={href}>{t.view} →</Link>
       {isDeliTrio(slug) ? <DeliTrio key={slug} locale={locale} slug={slug} product={product.naam} /> : <ProductQuantity slug={slug} locale={locale} />}
-      {product.categorie === "gourmet" && <a className="knop knop-lijn mt-4 min-h-12 whitespace-normal" href="#gourmet-samenstellen">{gourmetRequestCopy(locale).title} →</a>}
     </div>
   </article>;
 }
