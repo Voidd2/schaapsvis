@@ -23,7 +23,7 @@ function Photo({ name, alt, hero = false }: { name: "zalmfilet" | "noord-noorweg
   // eslint-disable-next-line @next/next/no-img-element
   return <img src={base + name + "-640.webp"} alt={alt} width={640} height={hero ? 446 : 428}
     srcSet={widths.map(w => base + name + "-" + w + ".webp " + w + "w").join(", ")}
-    sizes={wide ? "(min-width: 1350px) 1280px, 100vw" : "(max-width: 740px) 100vw, 52vw"}
+    sizes={wide ? "(max-width: 740px) 100vw, 60vw" : "(max-width: 740px) 100vw, 52vw"}
     fetchPriority={hero ? "high" : "auto"} loading={hero ? "eager" : "lazy"} decoding="async" />;
 }
 
@@ -82,10 +82,12 @@ export default async function VarlaksPage({ params }: Props) {
       <div><p className={styles.eyebrow}>{c.serving}</p><h2 id="varlaks-cooking">{c.dish}</h2><p>{c.cooking}</p>
         <Link className={styles.inlineLink} href={"/" + lang + "/recepten/zalm-citroen-dille"}>{c.recipe} →</Link></div>
     </section>
-    <section className="section-wrap varlaks-section varlaks-faq" aria-labelledby="varlaks-questions">
+    <section className={styles.faq} aria-labelledby="varlaks-questions">
       <h2 id="varlaks-questions">{q.questions}</h2>
-      {questions.map(([question,answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}
-      <details><summary>{q.sources}</summary><ul>{sources.map(([url,key]) => <li key={url}><a href={url} target="_blank" rel="noopener noreferrer">{q[key]} ↗</a></li>)}</ul></details>
+      <div>
+        {questions.map(([question,answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}
+        <details><summary>{q.sources}</summary><ul>{sources.map(([url,key]) => <li key={url}><a href={url} target="_blank" rel="noopener noreferrer">{q[key]} ↗</a></li>)}</ul></details>
+      </div>
     </section>
   </div>;
 }

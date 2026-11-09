@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { paginaMetadata } from "@/lib/seo";
 import { BEDRIJF } from "@/lib/bedrijf";
 import { BEELD } from "@/lib/beeld";
-import { openingSummary } from "@/lib/openingHours";
+import { ShopHours } from "@/components/shared/ShopHours";
 import { siteOpSlot } from "@/lib/siteAccess";
 
 const copy = {
@@ -184,7 +184,7 @@ export default async function StudentenkortingPage({ params }: { params: Promise
     </section>
     <section className="student-section student-local" aria-labelledby="student-local-heading"><div className="section-wrap student-local-grid">
       <div><p className="kapitaal">{l.local}</p><h2 id="student-local-heading">{l.visit}</h2><p>{l.visitText}</p><div className="student-actions"><Link className="knop knop-navy" href={`/${locale}/bezoek-ons`}>{l.locations} →</Link><Link className="knop knop-lijn" href={`/${locale}/assortiment`}>{c.home} →</Link></div></div>
-      <div className="student-shop"><h3>{BEDRIJF.adres.straat}, {BEDRIJF.adres.plaats}</h3><p>{openingSummary("winkel",locale)}</p><a className="knop knop-lijn" href={BEDRIJF.maps.route} target="_blank" rel="noopener noreferrer">{l.directions} ↗</a></div>
+      <div className="student-shop"><h3>{BEDRIJF.adres.straat}, {BEDRIJF.adres.plaats}</h3><ShopHours locale={locale} /><a className="knop knop-lijn" href={BEDRIJF.maps.route} target="_blank" rel="noopener noreferrer">{l.directions} ↗</a></div>
     </div></section>
     <section className="section-wrap student-section student-faq" aria-labelledby="student-faq-heading"><h2 id="student-faq-heading">{l.faq}</h2>{l.questions.map(([q,a]) => <details key={q}><summary>{q}</summary><p>{a}</p></details>)}<Link className="student-login" href={`/${locale}/privacyverklaring`}>{c.privacyPage} →</Link></section>
     <section className="student-section student-final"><div className="section-wrap"><h2>{l.final}</h2><p>{l.finalText}</p><div className="student-actions"><Link className="knop knop-rood" href={registerHref}>{c.account} →</Link><Link className="knop knop-lijn" href={loginHref}>{l.login} →</Link></div><p className="student-fine">{l.fine}</p></div></section>

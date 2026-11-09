@@ -81,7 +81,7 @@ export default async function ProductDetailPage({params}: Props) {
   const productSchema = {"@context":"https://schema.org", "@type":"Product", name:product.naam, description:product.desc, category, brand:{"@type":"Brand", name:BEDRIJF.naam}, image:photo ? `${BEDRIJF.domein}${photo.src}` : undefined, url:`${BEDRIJF.domein}/${lang}/assortiment/${slug}`};
   return <>
     <Schema data={[productSchema, kruimelSchema(lang, [{naam:BEDRIJF.naamKort,pad:"/"},{naam:c.range,pad:"/assortiment"},{naam:product.naam,pad:`/assortiment/${slug}`}])]} />
-    <Sectie grond="papier" id="product-overzicht"><div className="mx-auto max-w-6xl">
+    <Sectie grond="papier" id="product-overzicht"><div className="product-shell mx-auto max-w-6xl">
       <Kruimels items={[{naam:BEDRIJF.naamKort,href:`/${lang}`},{naam:c.range,href:`/${lang}/assortiment`},{naam:product.naam}]} />
       <div className={`product-intro ${photo ? "" : "product-intro-no-photo"}`}>
       <div className="product-intro-title">
@@ -90,7 +90,7 @@ export default async function ProductDetailPage({params}: Props) {
         {prijs && <p className="product-price mt-2"><strong>{formatPrijs(prijs,lang)}</strong></p>}
       </div>
       {photo && <figure className="product-intro-figure"><div className="product-intro-image" style={{borderBottom:`3px solid ${CATEGORIE_KLEUR[product.categorie]}`}}>
-        <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 800px) calc(100vw - 32px), 550px" priority className={photo.editorial && !photo.whole ? "object-cover" : "object-contain"} />
+        <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 800px) calc(100vw - 32px), (max-width: 1500px) 45vw, 680px" priority className={photo.editorial && !photo.whole ? "object-cover" : "object-contain"} />
       </div>{photo.caption && <figcaption className="mt-3 text-sm text-[var(--grijs)]">{photo.caption}</figcaption>}</figure>}
       <div className="product-intro-copy">
         <p className="text-lg leading-relaxed mb-5">{product.desc}</p>

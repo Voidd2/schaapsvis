@@ -48,7 +48,7 @@ export const questionsCopy = {
 
 
 export const sources = [
-  ["https://www.freshlyfish.nl/onze-vissers/varlaks-johannes-korf/", "source1"],
+  ["https://varlaks.no/#why-choose-varlaks", "source1"],
   ["https://urkseafood.nl/blog/nieuws/varlaks-en-plus-bundelen-krachten-voor-premium-zalm-van-topkwaliteit/", "source2"],
   ["https://www.plus.nl/goed-eten/kwaliteit/duurzame-zalm", "source3"],
   ["https://dijkshoornvisspecialiteiten.nl/wp-content/uploads/2021/12/varlaks-flyer-nederlands.pdf", "source4"],

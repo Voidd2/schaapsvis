@@ -6,7 +6,7 @@ import { AnalyticsConsent } from "@/components/shared/AnalyticsConsent";
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
 import { ADRES_REGEL, BEDRIJF } from "@/lib/bedrijf";
 import { BEELD } from "@/lib/beeld";
-import { openingSummary } from "@/lib/openingHours";
+import { ShopHours } from "@/components/shared/ShopHours";
 import { FooterPanel } from "./FooterPanel";
 import styles from "./footer.module.css";
 
@@ -81,8 +81,8 @@ export function Footer() {
 
         <FooterPanel title={t("kopTijden")}>
           <dl className={styles.hours}>
+            <div><dt>{t("winkel")}</dt><dd><ShopHours locale={locale} /></dd></div>
             {[
-              [t("winkel"), openingSummary("winkel", locale)],
               [t("markt"), t("marktTijden")],
               [t("voorschoten"), t("voorschotenTijden")],
             ].map(([place, hours]) => (

@@ -103,7 +103,7 @@
   },
   "verhaalPage": {
     "heroTitle": "From Gerrit Schaap to the fourth generation",
-    "heroSub": "A Leiden institution — founded in 1938",
+    "heroSub": "Gerrit Schaap opened his fish business in Leiden in 1938. Four generations later, you can still find our family behind the counter on Herenstraat and at the market.",
     "intro": "For almost ninety years, a small, cosy fish shop on Herenstraat in Leiden has fed, delighted and connected generations of Leiden residents. Schaap's Vishandel is not just a shop — it is a piece of Leiden history.",
     "t1title": "The beginning",
     "t1text": "Gerrit Schaap opens his fish shop at Herenstraat 48 in Leiden. At a time when fish truly came fresh from the boat and every Leiden resident had their own fishmonger, Gerrit lays the foundation for what would grow into a city institution.",
@@ -212,7 +212,7 @@
   },
   "contactPage": {
     "title": "Contact",
-    "sub": "Calling is quickest — we are usually behind the counter. WhatsApp or email works too.",
+    "sub": "Looking to reserve fish? Message us on WhatsApp with the fish, quantity and day you have in mind. You can also ask what’s on the counter.",
     "formTitle": "Send a message",
     "nameLabel": "Name",
     "emailLabel": "Email address",
@@ -282,7 +282,7 @@
   "home": {
     "eyebrow": "Herenstraat 48, Leiden · since 1938",
     "kop": "Good fish. Simply Schaap’s.",
-    "inleiding": "Four generations of good fish and personal advice. Visit us in Leiden at Herenstraat and the market, or in Voorschoten on Fridays.",
+    "inleiding": "Pick up a herring with onions, a salmon fillet for supper or a seafood platter to share. Find us at our Herenstraat shop and at the market.",
     "knopBestellen": "Order",
     "knopVisschaal": "Build a platter",
     "feit1Kop": "Delivery",

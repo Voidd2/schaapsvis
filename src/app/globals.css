@@ -197,7 +197,7 @@ body:has(#mobile-navigation) .sv-whatsapp { opacity: 0; visibility: hidden; poin
 }
 
 /* Lichte, fotografische collectiepagina's. */
-.section-wrap, .site-container { width: 100%; max-width: 1536px; margin-inline: auto; padding-inline: clamp(20px, 3vw, 40px); }
+.section-wrap, .site-container { width: 100%; max-width: 1720px; margin-inline: auto; padding-inline: clamp(20px, 3vw, 40px); }
 .fresh-hero { background: #effaff; padding: 64px 0; }
 .fresh-hero-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 64px; }
 .fresh-hero h1 { font-family: var(--font-body); font-weight: 650; font-size: clamp(2.5rem,5vw,4.75rem); line-height: 1.05; letter-spacing: -.045em; white-space: pre-line; margin: 18px 0 24px; color: var(--navy-dark); }
@@ -1289,3 +1289,49 @@ body:has(#mobile-navigation) .catalog-cart-trigger { visibility: hidden; }
 .platter-directory summary,.product-directory summary {width:fit-content;max-width:100%;display:flex;align-items:center;gap:.8rem;padding:.55rem 1rem;border:1px solid #9bbbc9;border-radius:6px;background:white;min-height:44px}
 .platter-directory summary::after,.product-directory summary::after {content:"";width:.55rem;height:.55rem;border-right:2px solid;border-bottom:2px solid;transform:rotate(45deg);margin-top:-.25rem}
 .platter-directory[open] summary::after,.product-directory[open] summary::after {transform:rotate(225deg);margin-top:.25rem}
+
+/* The same daily timetable is used at the counter, in page headers and in the footer. */
+.shop-week { margin-block:.7rem; max-width:25rem; font-variant-numeric:tabular-nums; }
+.shop-week > div { display:flex; flex-wrap:wrap; justify-content:space-between; gap:.25rem 1rem; padding-block:.27rem; border-bottom:1px solid color-mix(in srgb,currentColor 18%,transparent); }
+.shop-week dd { white-space:nowrap; font-weight:650; }
+.shop-page-heading,.shop-page-end { background:#102f45; color:#f2f8f7; }
+.shop-page-heading .shop-week { width:100%; }
+.shop-page-heading h1,.shop-section-title :is(h1,h2) { text-wrap:balance; letter-spacing:-.035em; }
+.shop-page-heading .kapitaal-licht,.shop-page-end .kapitaal-licht { color:#afe2d6; }
+.shop-page-end-inner p { max-width:62ch; }
+.varlaks-location-card li + li { border-top:1px solid #dbe7e9; }
+@media(min-width:801px) {
+  .shop-page-heading { background:linear-gradient(104deg,#102f45 42%,#154b5b); }
+  .shop-page-heading h1 { font-size:clamp(2.65rem,4.3vw,4.8rem); line-height:1.04; max-width:25ch; }
+  .shop-section-title h2 { font-size:clamp(2rem,2.9vw,3.15rem); }
+  .shop-page-end-inner { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:clamp(30px,7vw,110px); align-items:center; }
+  .shop-page-end-inner p { margin-bottom:0; }
+  .home-hero,.collection-hero { background-image:linear-gradient(105deg,#f5f7f2 58%,#e4efeb); }
+  .home-hero > .site-container,.collection-hero-grid { grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:clamp(32px,6vw,100px); }
+  .home-hero > .site-container { padding-block:clamp(20px,3vw,48px); }
+  .home-hero h1,.collection-hero h1,.fresh-hero h1 { font-size:clamp(2.65rem,4.2vw,4.8rem); line-height:1.04; letter-spacing:-.045em; text-wrap:balance; }
+  .home-hero-image-wrap { padding:0; border:0; }
+  .home-hero-image,.collection-hero-image img { aspect-ratio:1.85; border-radius:5px; }
+  .collection-hero-grid { padding-block:clamp(25px,3vw,50px); }
+  .collection-intro,.platter-intro-text { max-width:54ch; }
+  .fresh-hero-grid { gap:clamp(32px,5vw,84px); }
+  .fresh-hero figure img { border-radius:5px; }
+  .platter-intro { padding-block:clamp(22px,2.5vw,40px) .85rem; }
+  .platter-intro h1,.festive-catalog-hero h1 { font-size:clamp(2.7rem,4.3vw,4.8rem); letter-spacing:-.045em; }
+  #product-overzicht { padding-block:clamp(28px,3.5vw,56px); }
+  #product-overzicht .product-shell { max-width:90rem; }
+  .product-intro { column-gap:clamp(36px,5vw,80px); }
+  .product-intro-title h1 { font-size:clamp(2.35rem,3.4vw,3.8rem); line-height:1.08; letter-spacing:-.035em; }
+  .product-intro-copy { max-width:62ch; }
+}
+@media(min-width:900px) {
+  .varlaks-location-grid { grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:1rem; }
+  .varlaks-location-card { padding:clamp(18px,2vw,32px); border-radius:6px; }
+  .varlaks-location-card:first-child { grid-row:span 2; }
+  .varlaks-location-card:first-child ul { max-width:34rem; }
+  .varlaks-location-card:not(:first-child) { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:0 1rem; align-content:center; }
+  .varlaks-location-card:not(:first-child) > :is(h3,p,ul) { grid-column:1; }
+  .varlaks-location-card:not(:first-child) > :is(p,ul) { margin:0; }
+  .varlaks-location-card:not(:first-child) li { justify-content:flex-start; }
+  .varlaks-location-card:not(:first-child) .knop { grid-column:2; grid-row:1/4; align-self:center; margin:0; }
+}

@@ -64,7 +64,7 @@ export function Kop({
 }) {
   const Titel = als;
   return (
-    <div className={`${gecentreerd ? "text-center mx-auto" : ""} max-w-3xl mb-9`}>
+    <div className={`shop-section-title ${gecentreerd ? "text-center mx-auto" : ""} max-w-3xl mb-9`}>
       {label && (
         <p className={`kapitaal ${donker ? "kapitaal-licht" : ""} mb-3`}>{label}</p>
       )}

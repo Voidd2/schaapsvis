@@ -216,7 +216,7 @@ export const products: Product[] = [
   {
     "slug": "varlaks-zalm",
     "naam": "Verse Zalm — VÅRLAKS",
-    "desc": "Atlantische zalm (Salmo salar) van VÅRLAKS uit Noord-Noorwegen. De leverancier beschrijft samenwerking met familiebedrijven en traceerbaarheid van ei tot eindproduct. Vraag ons naar het keurmerk op de huidige verpakking.",
+    "desc": "Een stevige filet met een volle zalmsmaak, afkomstig van ASC-gecertificeerde familiekwekerijen in Noord-Noorwegen. Wij snijden uw portie aan de toonbank.",
     "categorie": "verse-vis",
     "badge": "VÅRLAKS",
     "omega3": true,

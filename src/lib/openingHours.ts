@@ -31,11 +31,11 @@ const dayNames = {
 
 export function openingRows(location: Location, locale: string) {
   const names = dayNames[locale === "en" || locale === "de" ? locale : "nl"];
-  return openingHours[location].map(slot => ({
-    days: slot.days,
-    label: slot.days.length > 1 ? `${names[slot.days[0]]}–${names[slot.days.at(-1)!]}` : names[slot.days[0]],
+  return openingHours[location].flatMap(slot => slot.days.map(day => ({
+    day,
+    label: names[day],
     time: `${slot.open}–${slot.close}`,
-  }));
+  })));
 }
 
 export function openingSummary(location: Location, locale: string) {
