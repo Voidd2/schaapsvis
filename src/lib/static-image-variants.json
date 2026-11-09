@@ -1,4 +1,30 @@
 {
+  "/images/schaaps/oesters-in-de-winkel.webp": {
+    "sha256": "04fe01e3f56b0fea3bfff45ccfde408d4da658eb20cab0a1c38cf8cb024ada8a",
+    "originalBytes": 320038,
+    "variants": [
+      {
+        "src": "/images/responsive/oesters-in-de-winkel-04fe01e3f56b-320.webp",
+        "width": 320,
+        "bytes": 21248
+      },
+      {
+        "src": "/images/responsive/oesters-in-de-winkel-04fe01e3f56b-640.webp",
+        "width": 640,
+        "bytes": 62688
+      },
+      {
+        "src": "/images/responsive/oesters-in-de-winkel-04fe01e3f56b-960.webp",
+        "width": 960,
+        "bytes": 113492
+      },
+      {
+        "src": "/images/responsive/oesters-in-de-winkel-04fe01e3f56b-1280.webp",
+        "width": 1280,
+        "bytes": 167492
+      }
+    ]
+  },
   "/images/schaaps/winkel-herenstraat.webp": {
     "sha256": "e62168bee3926efc3ae9159c64d2c54cb2e563eb81e1f0126f0ebe6beef65780",
     "originalBytes": 266670,

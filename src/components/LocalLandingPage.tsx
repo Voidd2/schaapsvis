@@ -27,7 +27,12 @@ export function LocalLandingPage({kind,locale}:{kind:LocalPageKind;locale:string
   {!app&&<Sectie grond="zand"><h2 className="text-3xl mb-7">{u.fish}</h2><div className="grid md:grid-cols-3 gap-6">{fish.map(f=>{const p=localizedProduct(f.slug,locale)!;return <article className="recipe-card" key={f.slug}><Link href={productHref(locale, f.slug)}><Image src={f.src} alt={`${p.naam} — ${u.serving}`} width={1200} height={800} sizes="(max-width:768px) 100vw,33vw" className="w-full aspect-[3/2] object-cover"/><div className="recipe-card-body"><h3 className="text-xl mb-3">{p.naam}</h3><p>{p.desc}</p></div></Link></article>;})}</div></Sectie>}
   {app&&c.steps&&<Sectie grond="zand"><h2 className="text-3xl mb-7">{u.steps}</h2><ol className="grid md:grid-cols-3 gap-8">{c.steps.map(([title,text],i)=><li key={title} className="border-t-2 border-sky-700 pt-5"><p className="kapitaal mb-3">{u.step} {i+1}</p><h3 className="text-xl mb-3">{title}</h3><p>{text}</p></li>)}</ol></Sectie>}
 
-  <Sectie smal grond="zand"><h2 className="text-3xl mb-6">{u.questions}</h2><Vragen vragen={c.questions}/></Sectie>
+  <Sectie smal={kind !== "viswinkel-leiden"} grond="zand">
+    <div className={kind === "viswinkel-leiden" ? "grid items-start gap-8 lg:grid-cols-2 lg:gap-14" : undefined}>
+      <div><h2 className="text-3xl mb-6">{u.questions}</h2><Vragen vragen={c.questions}/></div>
+      {kind === "viswinkel-leiden" && <Beeld naam="oestersInDeWinkel" verhouding="liggend" streep="var(--navy)" />}
+    </div>
+  </Sectie>
   <PaginaSlot titel={app?u.shop:u.budget} tekst={u.policy} knoppen={[{label:bestelContact(locale).label,href:bestelContact(locale).href,extern:true},{label:u.platter,href:`/${locale}/visschalen`,soort:"lijn"}]}/>
  </>;
 }

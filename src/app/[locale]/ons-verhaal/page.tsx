@@ -36,8 +36,8 @@ export async function generateMetadata({
  */
 const TIJDLIJN = [
   { jaar: "1938", titel: "t1title", tekst: "t1text", citaat: null, beeld: "historie1938" },
-  { jaar: "1957", titel: "t2title", tekst: "t2text", citaat: null, beeld: "historie1960" },
-  { jaar: "2009", titel: "t3title", tekst: "t3text", citaat: "t3quote", beeld: "historie2000" },
+  { jaar: "1957", titel: "t2title", tekst: "t2text", citaat: null, beeld: "nelInDeWinkel", bijschrift: "nelFoto" },
+  { jaar: "2009", titel: "t3title", tekst: "t3text", citaat: "t3quote", beeld: "historie2000", bijschrift: "overnameFoto" },
   { jaar: "2018", titel: "t4title", tekst: "t4text", citaat: "t4quote", beeld: "historie2018" },
   { jaar: "Nu", titel: "t5title", tekst: "t5text", citaat: null, beeld: "historieNu" },
 ] as const satisfies readonly {
@@ -46,6 +46,7 @@ const TIJDLIJN = [
   tekst: string;
   citaat: string | null;
   beeld: BeeldNaam;
+  bijschrift?: "nelFoto" | "overnameFoto";
 }[];
 
 export default async function OnsVerhaalPage({
@@ -99,8 +100,9 @@ export default async function OnsVerhaalPage({
         <ol style={{ borderTop: "1px solid var(--linen)" }}>
           {TIJDLIJN.map((punt) => (
             <li
+              id={punt.beeld === "nelInDeWinkel" ? "cor-en-nel" : undefined}
               key={punt.jaar === "Nu" ? (locale === "de" ? "Heute" : locale === "en" ? "Today" : "Nu") : punt.jaar}
-              className={`grid md:grid-cols-[7rem_1fr] ${heeftBeeld(punt.beeld) ? "lg:grid-cols-[7rem_1fr_18rem]" : ""} gap-x-10 gap-y-4 py-8`}
+              className={`scroll-mt-44 grid md:grid-cols-[7rem_1fr] ${heeftBeeld(punt.beeld) ? "lg:grid-cols-[7rem_1fr_18rem]" : ""} gap-x-10 gap-y-4 py-8`}
               style={{ borderBottom: "1px solid var(--linen)" }}
             >
               <p
@@ -118,10 +120,10 @@ export default async function OnsVerhaalPage({
                   </blockquote>
                 )}
               </div>
-              {punt.beeld === "historie2000" ? (
-                <figure>
+              {"bijschrift" in punt ? (
+                <figure className="md:col-start-2 lg:col-start-3 lg:row-start-1">
                   <Beeld naam={punt.beeld} verhouding="liggend" streep="var(--sand-diep)" />
-                  <figcaption className="mt-2 text-sm">{t("overnameFoto")}</figcaption>
+                  <figcaption className="mt-2 text-sm">{t(punt.bijschrift)}</figcaption>
                 </figure>
               ) : <Beeld naam={punt.beeld} verhouding="liggend" streep="var(--sand-diep)" />}
             </li>
