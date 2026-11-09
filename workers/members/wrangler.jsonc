@@ -61,6 +61,7 @@
       "vars": {
         "SMTP_DIAGNOSTICS": "off",
         "MEMBERS_ENABLED": "on",
+        "SITE_PUBLIC": "launch-approved",
         "ANALYTICS_ENABLED": "on",
         "ANALYTICS_EXCLUDED_IP_HASH": "UKlirXGSsnmgd47sUza3Wi7OI9AnMQPCtPYO14sDN60",
         "SITE_ORIGIN": "https://schaapsvishandel.nl",
