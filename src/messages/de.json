@@ -103,7 +103,7 @@
   },
   "verhaalPage": {
     "heroTitle": "Von Gerrit Schaap bis zur vierten Generation",
-    "heroSub": "Ein Leidener Original — gegründet 1938",
+    "heroSub": "1938 gründete Gerrit Schaap seinen Fischhandel in Leiden. Vier Generationen später steht unsere Familie noch immer in der Herenstraat und auf dem Markt hinter der Theke.",
     "intro": "Seit mehr als seit 1938 steht in der Herenstraat in Leiden ein kleines, gemütliches Fischgeschäft, das Generationen von Leidener Bürgern ernährt, erfreut und verbunden hat.",
     "t1title": "Der Anfang",
     "t1text": "Gerrit Schaap eröffnet seinen Fischhandel in der Herenstraat 48 in Leiden. In einer Zeit, als Fisch wirklich frisch vom Boot kam, legt Gerrit den Grundstein für das, was zu einer Stadtinstitution werden sollte.",
@@ -212,7 +212,7 @@
   },
   "contactPage": {
     "title": "Kontakt",
-    "sub": "Anrufen geht am schnellsten — wir stehen meistens hinter der Theke. WhatsApp oder E-Mail geht auch.",
+    "sub": "Möchten Sie Fisch reservieren? Schreiben Sie uns per WhatsApp, welchen Fisch Sie möchten, wie viel und an welchem Tag Sie vorbeikommen. Wir beantworten auch Fragen zum Angebot.",
     "formTitle": "Nachricht senden",
     "nameLabel": "Name",
     "emailLabel": "E-Mail-Adresse",
@@ -282,7 +282,7 @@
   "home": {
     "eyebrow": "Herenstraat 48, Leiden · seit 1938",
     "kop": "Guter Fisch. Einfach Schaap’s.",
-    "inleiding": "Vier Generationen guter Fisch und persönliche Beratung. Besuchen Sie uns in Leiden an der Herenstraat und auf dem Markt oder freitags in Voorschoten.",
+    "inleiding": "Ein Hering mit Zwiebeln auf die Hand, ein Lachsfilet fürs Abendessen oder eine Fischplatte für Ihre Gäste. Sie finden uns in der Herenstraat und auf dem Markt.",
     "knopBestellen": "Bestellen",
     "knopVisschaal": "Fischplatte zusammenstellen",
     "feit1Kop": "Lieferung",

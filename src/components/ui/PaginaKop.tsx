@@ -79,7 +79,7 @@ export function PaginaKop({
   ) : null;
 
   return (
-    <section style={{ backgroundColor: "var(--navy)" }} className={`pt-10 pb-14 md:pt-12 md:pb-18 ${className}`}>
+    <section className={`shop-page-heading pt-10 pb-14 md:pt-12 md:pb-18 ${className}`}>
       <div className="site-container">
         <Kruimels donker items={kruimels} />
 
@@ -179,16 +179,18 @@ export function PaginaSlot({
   knoppen: KopKnop[];
 }) {
   return (
-    <section style={{ backgroundColor: "var(--navy)" }} className="py-14 md:py-20">
-      <div className="max-w-3xl mx-auto px-4">
-        <h2 className="text-[1.9rem] md:text-[2.3rem] mb-4" style={{ color: "var(--cream)" }}>
-          {titel}
-        </h2>
-        {tekst && (
-          <p className="mb-8 leading-relaxed" style={{ color: "rgba(250,246,239,0.8)" }}>
-            {tekst}
-          </p>
-        )}
+    <section className="shop-page-end py-14 md:py-20">
+      <div className="site-container shop-page-end-inner">
+        <div>
+          <h2 className="text-[1.9rem] md:text-[2.3rem] mb-4" style={{ color: "var(--cream)" }}>
+            {titel}
+          </h2>
+          {tekst && (
+            <p className="mb-8 leading-relaxed" style={{ color: "rgba(250,246,239,0.8)" }}>
+              {tekst}
+            </p>
+          )}
+        </div>
         <div className="flex flex-wrap gap-3">
           {knoppen.map((knop) => {
             const klasse = `knop ${knop.soort === "lijn" ? "knop-lijn-licht" : "knop-rood"}`;

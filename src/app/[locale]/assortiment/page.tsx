@@ -16,24 +16,24 @@ import { DIRKS_BARBECUE, selectieNaam } from "@/lib/dirks-selectie";
 
 const copy = {
   nl: {
-    label: "Schaap’s Vishandel · Leiden", title: "Ons assortiment.",
-    intro: "Van een mooie zalmfilet tot vers gebakken kibbeling. Goede vis voor aan tafel, bij de borrel of gewoon tussendoor.",
+    label: "Schaap’s Vishandel · Leiden", title: "Vis uit onze Leidse toonbank",
+    intro: "Een stukje zalm voor de pan, kibbeling voor onderweg of een schaal om te delen. Kies uw vis en bekijk de prijs en portie.",
     browse: "Ontdek het assortiment", platter: "Bekijk visschalen",
-    policy: "Visschalen en barbecue op aanvraag via WhatsApp.", policySub: "Stel samen met ons iets samen dat past bij uw gezelschap en gelegenheid. We bespreken uw wensen persoonlijk.",
+    policy: "Visschalen en barbecue op aanvraag via WhatsApp.", policySub: "Vertel ons met hoeveel u aan tafel gaat. We helpen u de soorten en hoeveelheid kiezen.",
     question: "Iets in gedachten?", note: "Een bepaalde vis, een speciale wens of iets wat u hier niet ziet? App ons gerust. We bespreken de mogelijkheden en beschikbaarheid met u.",
     image: "Zalm met citroen en dille",
   },
   en: {
-    label: "Schaap’s Vishandel · Leiden", title: "Our fish selection.",
-    intro: "From a beautiful salmon fillet to freshly fried kibbeling. Good fish for dinner, sharing or a little treat.",
+    label: "Schaap’s Vishandel · Leiden", title: "From our fish counter in Leiden",
+    intro: "Salmon for the pan, kibbeling to go, or a platter to share. Choose your fish and check the price and portion.",
     browse: "Explore our range", platter: "View seafood platters",
     policy: "Seafood platters and barbecue selections by WhatsApp request.", policySub: "We can help you put together a selection to suit your guests and occasion. Tell us what you have in mind.",
     question: "Something in mind?", note: "A particular fish, a special request or something you can't find here? Ask us on WhatsApp about availability and options.",
     image: "Salmon with lemon and dill",
   },
   de: {
-    label: "Schaap’s Vishandel · Leiden", title: "Unser Sortiment.",
-    intro: "Vom schönen Lachsfilet bis zum frisch gebackenen Kibbeling. Guter Fisch zum Abendessen, zum Teilen oder für zwischendurch.",
+    label: "Schaap’s Vishandel · Leiden", title: "Aus unserer Fischtheke in Leiden",
+    intro: "Lachs für die Pfanne, Kibbeling auf die Hand oder eine Platte zum Teilen. Wählen Sie Ihren Fisch und sehen Sie Preis und Portion.",
     browse: "Sortiment entdecken", platter: "Fischplatten ansehen",
     policy: "Fischplatten und Grillauswahl auf Anfrage per WhatsApp.", policySub: "Wir stellen gemeinsam eine Auswahl für Ihre Gäste und Ihren Anlass zusammen. Erzählen Sie uns von Ihren Wünschen.",
     question: "Einen besonderen Wunsch?", note: "Ein bestimmter Fisch, ein besonderer Wunsch oder etwas, das Sie hier nicht finden? Fragen Sie uns per WhatsApp nach Verfügbarkeit und Möglichkeiten.",
@@ -72,13 +72,14 @@ export default async function AssortimentPage({ params }: { params: Promise<{ lo
         <div className="collection-hero-copy">
           <p className="kapitaal">{c.label}</p><h1>{c.title}</h1><p className="collection-intro">{c.intro}</p>
           <div className="collection-hero-actions">
+            <a className="knop knop-navy" href="#assortiment">{c.browse} ↓</a>
             <Link href={`/${locale}/visschalen`} className="collection-text-link">{c.platter}<ArrowUpRight size={17} aria-hidden="true" /></Link>
             <Link href={`/${locale}/barbecue-gourmet`} className="collection-text-link">{bbq("assortimentLink")}<ArrowUpRight size={17} aria-hidden="true" /></Link>
           </div>
         </div>
         <figure className="collection-hero-image">
           <Link href={`/${locale}/assortiment/varlaks-zalm`} aria-label={locale === "de" ? "Produktinformationen zu VÅRLAKS-Lachs ansehen" : locale === "en" ? "View VÅRLAKS salmon product information" : "Bekijk de productinformatie over VÅRLAKS-zalm"}>
-            <Image width={1400} height={1050} sizes="(max-width: 800px) 100vw, 50vw" src="/images/editorial/varlaks-zalm-rauw-ai.webp" alt={locale === "de" ? "Rohes frisches Lachsfilet auf Eis mit Zitrone und Dill" : locale === "en" ? "Raw fresh salmon fillet on ice with lemon and dill" : "Rauwe verse zalmfilet op ijs met citroen en dille"} priority />
+            <Image width={1200} height={836} sizes="(max-width: 800px) 100vw, 50vw" src="/images/varlaks/zalmfilet-1200.webp" alt={locale === "de" ? "Zwei frische VÅRLAKS-Lachsfilets" : locale === "en" ? "Two fresh VÅRLAKS salmon fillets" : "Twee verse VÅRLAKS-zalmfilets"} priority />
           </Link>
         </figure>
       </div>

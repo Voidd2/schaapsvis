@@ -1,3 +1,4 @@
+import { ShopHours } from "@/components/shared/ShopHours";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
@@ -53,14 +54,10 @@ export default async function ContactPage({
         titel={t("title")}
         intro={t("sub")}
         knoppen={[
+          { label: g("whatsapp"), href: bestelContact(locale).href, extern: true },
           {
             label: g("bellen", { nummer: BEDRIJF.telefoon.weergave }),
             href: `tel:${BEDRIJF.telefoon.e164}`,
-            extern: true,
-          },
-          {
-            label: g("whatsapp"),
-            href: bestelContact(locale).href,
             extern: true,
             soort: "lijn",
           },
@@ -136,18 +133,8 @@ export default async function ContactPage({
               >
                 <dt className="kapitaal mb-2">{t("openLabel")}</dt>
                 <dd className="text-[0.95rem]" style={{ color: "var(--charcoal)" }}>
-                  {[
-                    [p("diVr"), "09:00 – 18:00"],
-                    [p("za"), "09:00 – 17:00"],
-                    [p("zoMa"), p("gesloten")],
-                  ].map(([dag, tijd]) => (
-                    <span key={dag} className="flex flex-wrap gap-x-3 py-0.5">
-                      <span style={{ minWidth: "11rem", fontWeight: 600, color: "var(--ink)" }}>
-                        {dag}
-                      </span>
-                      <span className="bedrag">{tijd}</span>
-                    </span>
-                  ))}
+                  <ShopHours locale={locale} />
+                  <p>{p("zoMa")} · {p("gesloten")}</p>
                   <Link
                     href={`/${locale}/bezoek-ons`}
                     className="inline-block mt-3 text-sm font-semibold underline underline-offset-4"

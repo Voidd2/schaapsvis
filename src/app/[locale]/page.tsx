@@ -1,3 +1,4 @@
+import { ShopHours } from "@/components/shared/ShopHours";
 import { PlatterPhotoNote } from "@/components/PlatterPhotoNote";
 import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
 import Link from "next/link";
@@ -189,9 +190,7 @@ export default async function HomePage({
                 <br />
                 {punt.plaats}
               </p>
-              <p className="text-sm mt-1" style={{ color: "var(--grijs)" }}>
-                {punt.dagen}
-              </p>
+              {punt.id === "winkel" ? <ShopHours locale={locale} /> : <p className="text-sm mt-1">{punt.dagen}</p>}
               <a
                 href={punt.mapsUrl}
                 target="_blank"

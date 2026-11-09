@@ -5,24 +5,24 @@ import { openingRows } from "@/lib/openingHours";
 const copy = {
   nl: {
     eyebrow: "Schaap’s Vishandel · Leiden sinds 1938",
-    title: "Ook bij u in de buurt in Leiden",
-    intro: "U vindt ons in de Herenstraat en op de Leidse markt. Kies de plek en dag die u uitkomen. We helpen u graag met een mooie portie zalm en advies voor thuis.",
+    title: "Zalm halen in Leiden",
+    intro: "Loop binnen aan de Herenstraat. Liever naar de markt? Woensdag staan we op de Botermarkt, zaterdag bij de Waag.",
     shop: "Viswinkel Herenstraat", wednesday: "Woensdag · Botermarkt", saturday: "Zaterdag · bij de Waag",
     route: "Plan uw route", routeTo: "Plan uw route naar", near: "bij", closed: "Zondag en maandag gesloten",
     extra: "Ook in Voorschoten", parking: "Parkeerplaats", all: "Alle locatiegegevens", note: "Voor een specifieke snit of een grotere hoeveelheid: vraag ons vooraf wat mogelijk is.",
   },
   en: {
     eyebrow: "Schaap’s Vishandel · In Leiden since 1938",
-    title: "Find us near you in Leiden",
-    intro: "Visit our shop on Herenstraat or our stalls at Leiden’s market. Choose the place and day that suit you. We are happy to help with salmon portions and cooking advice.",
+    title: "Where to buy our salmon in Leiden",
+    intro: "Visit our Herenstraat shop or find us at Botermarkt on Wednesdays and by De Waag on Saturdays.",
     shop: "Herenstraat fish shop", wednesday: "Wednesday · Botermarkt", saturday: "Saturday · by De Waag",
     route: "Get directions", routeTo: "Get directions to", near: "by", closed: "Closed on Sunday and Monday",
     extra: "Also in Voorschoten", parking: "Car park", all: "All location details", note: "For a particular cut or larger quantity, please ask us in advance about the options.",
   },
   de: {
     eyebrow: "Schaap’s Vishandel · In Leiden seit 1938",
-    title: "Auch in Ihrer Nähe in Leiden",
-    intro: "Besuchen Sie unser Geschäft in der Herenstraat oder unsere Stände auf dem Leidener Markt. Wählen Sie den passenden Ort und Tag. Wir beraten Sie gern zu Lachsportionen und zur Zubereitung.",
+    title: "Hier bekommen Sie unseren Lachs in Leiden",
+    intro: "Besuchen Sie uns in der Herenstraat. Auf dem Markt finden Sie uns mittwochs am Botermarkt und samstags bei der Waag.",
     shop: "Fischgeschäft Herenstraat", wednesday: "Mittwoch · Botermarkt", saturday: "Samstag · bei De Waag",
     route: "Route planen", routeTo: "Route planen nach", near: "bei", closed: "Sonntags und montags geschlossen",
     extra: "Auch in Voorschoten", parking: "Parkplatz", all: "Alle Standortinformationen", note: "Fragen Sie uns bei einem bestimmten Zuschnitt oder einer größeren Menge vorab nach den Möglichkeiten.",
@@ -33,8 +33,8 @@ export function VarlaksLocations({ locale }: { locale: keyof typeof copy }) {
   const c = copy[locale];
   const places: { id: VerkooppuntId; title: string; hours: ReturnType<typeof openingRows> }[] = [
     { id: "winkel", title: c.shop, hours: openingRows("winkel", locale) },
-    { id: "markt-woensdag", title: c.wednesday, hours: openingRows("markt", locale).filter(row => row.days.includes(3)) },
-    { id: "markt", title: c.saturday, hours: openingRows("markt", locale).filter(row => row.days.includes(6)) },
+    { id: "markt-woensdag", title: c.wednesday, hours: openingRows("markt", locale).filter(row => row.day === 3) },
+    { id: "markt", title: c.saturday, hours: openingRows("markt", locale).filter(row => row.day === 6) },
   ];
   const voorschoten = VERKOOPPUNTEN.find(point => point.id === "voorschoten")!;
   return <section id="locaties" className="varlaks-locations" aria-labelledby="varlaks-locations-title">
