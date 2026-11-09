@@ -5,9 +5,10 @@ import { connection } from "next/server";
 import { PlatterNavigation } from "@/components/PlatterNavigation";
 import { platterFamily, platterLabels, platterOverviewHref, platterDetailHref } from "@/lib/platter-families";
 import { catalogProduct } from "@/lib/seafood-catalog";
+import { isDeliTrio } from "@/lib/deli-trio";
+import { DeliTrio } from "@/components/catalog/DeliTrio";
 import { ProductQuantity, CatalogBackLink } from "@/components/catalog/RequestControls";
 import { CatalogHelp } from "@/components/catalog/CatalogHelp";
-import { giftRequestCopy } from "@/lib/gift-request";
 import { GourmetRequest } from "@/components/catalog/GourmetRequest";
 import { gourmetRequestCopy } from "@/lib/gourmet-request";
 import { gourmetPortionText } from "@/lib/gourmet-pricing";
@@ -141,9 +142,8 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
           {product.categorie === "gourmet" && <p className="mt-3 font-semibold">{gourmetPortionText(slug, locale)}</p>}
           <p className="mt-5 text-sm leading-6 text-[#527080]">{note}</p>
           {family && <Link className="mt-4 underline underline-offset-4" href={platterOverviewHref(locale, slug, selection.toString()).replace(/#.*$/, "#maatwerk")}>{platterPresentation(locale).custom}</Link>}
-          <ProductQuantity key={slug} slug={slug} locale={locale} />
+          {isDeliTrio(slug) ? <DeliTrio key={slug} locale={locale} slug={slug} product={product.naam} /> : <ProductQuantity key={slug} slug={slug} locale={locale} />}
           {product.categorie === "gourmet" && <a className="knop knop-lijn mt-4 min-h-12 whitespace-normal" href="#gourmet-samenstellen">{gourmetRequestCopy(locale).title} →</a>}
-          {["luxe-trio-klein", "luxe-trio-middel", "luxe-vistrio"].includes(slug) && <div className="mt-5 rounded-xl border border-[#bfd6df] bg-white p-5"><p className="mb-3 text-sm leading-6">{giftRequestCopy(locale).customTrioNote}</p><Link className="knop knop-lijn" href={`/${locale}/relatiegeschenken#geschenk-2`}>{giftRequestCopy(locale).customTrio} →</Link></div>}
           <CatalogHelp locale={locale} />
         </div>
       </div>

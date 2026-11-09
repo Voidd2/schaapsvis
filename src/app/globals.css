@@ -1215,3 +1215,5 @@ body:has(#mobile-navigation) .catalog-cart-trigger { visibility: hidden; }
   font-size: .94rem;
   color: #124359;
 }
+
+.seafood-grid:has(.deli-trio details[open]) { align-items: start; }

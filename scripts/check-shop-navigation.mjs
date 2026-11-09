@@ -70,6 +70,20 @@ for (const locale of ["nl", "en", "de"]) {
   assert.ok(extra.searchParams.get("text").includes("Meer zalm & geen saus? #test\nAdvies graag"));
 }
 const { giftRequestLink, giftRequestCopy, giftPackageContents, giftVoucherCents, GIFT_PACKAGE_GRAMS } = load("src/lib/gift-request.ts");
+const { initialSlots, deliQuote, deliDraft } = load("src/lib/deli-trio.ts");
+for (const [slug, expected] of [["luxe-trio-klein",926],["luxe-trio-middel",1389],["luxe-vistrio",1852]]) {
+  assert.equal(deliQuote(initialSlots(slug)).cents, expected);
+}
+const customTrio = [{choice:"eel",grams:"45"}, {choice:"wasabi",grams:"80"}, {choice:"herring",grams:"100"}];
+assert.equal(deliQuote(customTrio).cents, 969);
+assert.equal(deliQuote(initialSlots("salade-trio")), null);
+for (const grams of ["", "-2", "0", "2.5", "1e8"]) assert.equal(deliQuote([...customTrio.slice(0,2),{choice:"eel",grams}]),null);
+for (const locale of ["nl","en","de"]) {
+  const draft = new URL(deliDraft(locale, "Trio", customTrio, "Extra dille"));
+  assert.equal(draft.origin, "https://wa.me");
+  const message = draft.searchParams.get("text");
+  for(const part of ["45 g","80 g","225 g","Extra dille", locale==="en" ? "9.69" : "9,69"]) assert.ok(message.includes(part));
+}
 const { trioPriceCents, packagePriceCents } = load("src/lib/gift-pricing.ts");
 assert.deepEqual([0, 1, 2].map(i => trioPriceCents(i)), [926, 1389, 1852]);
 assert.deepEqual([0, 1, 2].map(i => packagePriceCents(i)), [1976, 3333, 4950]);
