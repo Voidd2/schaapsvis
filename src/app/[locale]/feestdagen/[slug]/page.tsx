@@ -2,7 +2,7 @@ import { PlatterPhotoNote } from "@/components/PlatterPhotoNote";
 import { platterPhotoAlt, platterPresentation, platterPrice } from "@/lib/platter-presentation";
 import { connection } from "next/server";
 import { platterFamily, platterLabels, platterOverviewHref, platterDetailHref } from "@/lib/platter-families";
-import { catalogProduct } from "@/lib/seafood-catalog";
+import { catalogProduct, legacyTrioSlugs } from "@/lib/seafood-catalog";
 import { isDeliTrio } from "@/lib/deli-trio";
 import { DeliTrio, ProductQuantity, CatalogBackLink } from "@/components/catalog/RequestControls";
 import { CatalogHelp } from "@/components/catalog/CatalogHelp";
@@ -11,7 +11,7 @@ import { gourmetPortionText } from "@/lib/gourmet-pricing";
 import type { Metadata } from "next";
 import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
 import { Kop, Sectie } from "@/components/ui/Sectie";
@@ -82,6 +82,7 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
   // retain other families even before this page's JavaScript has loaded.
   const incoming = await searchParams;
   const origin = incoming.catalog === "feestdagen" ? "feestdagen" : incoming.catalog === "visschalen" ? "visschalen" : null;
+  if (legacyTrioSlugs.includes(slug)) permanentRedirect(`/${locale}/feestdagen/luxe-trio-klein${origin ? "?catalog=" + origin : ""}`);
   const selection = new URLSearchParams();
   if (family) {
     await connection();
@@ -89,7 +90,7 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
       for (const entry of Array.isArray(value) ? value : value === undefined ? [] : [value]) selection.append(key, entry);
     }
   }
-  const related = gerelateerdeFeestdagenProducten(source).map(item => catalogProduct(item.slug, locale));
+  const related = gerelateerdeFeestdagenProducten(source).filter(item => !legacyTrioSlugs.includes(item.slug)).map(item => catalogProduct(item.slug, locale));
   const url = `${BEDRIJF.domein}/${locale}/feestdagen/${product.slug}`;
   const productSchema = {
     "@context": "https://schema.org",
@@ -138,7 +139,7 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
           {product.categorie === "gourmet" && <p className="mt-3 font-semibold">{gourmetPortionText(slug, locale)}</p>}
           <p className="mt-5 text-sm leading-6 text-[#527080]">{note}</p>
           {family && <Link className="mt-4 underline underline-offset-4" href={platterOverviewHref(locale, slug, selection.toString()).replace(/#.*$/, "#maatwerk")}>{platterPresentation(locale).custom}</Link>}
-          {isDeliTrio(slug) ? <DeliTrio key={slug} locale={locale} slug={slug} product={product.naam} /> : <ProductQuantity product={product.naam} key={slug} slug={slug} locale={locale} />}
+          {isDeliTrio(slug) || slug === "zalmslaatje-de-luxe" ? <DeliTrio key={slug} locale={locale} slug={slug} product={product.naam} /> : <ProductQuantity product={product.naam} key={slug} slug={slug} locale={locale} />}
           <CatalogHelp locale={locale} />
         </div>
       </div>

@@ -1,8 +1,10 @@
 import { calendarDate } from "./pickup-date";
+import { language, platterFish, saladCounter, weightQuote } from "./counter-selection";
+import { feestdagenBedrag } from "./feestdagen-producten";
 export const inquiryCopy = {
   nl: {
-    intro: "Een schaal, alleen luxe vis of losse salades? Vertel ons wat u zoekt. We bespreken uw wensen, de samenstelling en de prijs persoonlijk.",
-    kind: "Wat wilt u graag bestellen?", kinds: { platter: "Een mooie samengestelde visschaal", luxury: "Alleen luxe vissoorten", salads: "Alleen verschillende vissalades", mixed: "Een combinatie van vis en salades", advice: "Ik weet het nog niet, graag advies" },
+    intro: "Kies uw vis en salades en vul per soort het gewicht in. De prijs voor bijzondere opmaak spreken we vooraf af.",
+    kind: "Wat wilt u op uw visschaal?", kinds: { platter: "Een mooie samengestelde visschaal", luxury: "Alleen luxe vissoorten", salads: "Alleen verschillende vissalades", mixed: "Een combinatie van vis en salades", advice: "Ik weet het nog niet, graag advies" },
     fish: "Welke vissoorten wilt u graag? (optioneel)", fishes: { salmon: "Gerookte zalm", eel: "Gerookte paling", shrimp: "Hollandse garnalen", mackerel: "Makreel", tuna: "Tonijn", other: "Andere vissoort" }, fishNote: "Dit zijn uw voorkeuren. We bevestigen de beschikbaarheid persoonlijk.",
     excluded: "Welke vissoorten liever niet? (optioneel)", excludedPlaceholder: "Bijvoorbeeld geen paling, liever extra zalm.",
     presentation: "Hoe wilt u het gepresenteerd hebben?", presentations: { platter: "Mooi opgemaakt op een schaal", tubs: "Liever apart in bakjes", advice: "Graag advies" },
@@ -13,7 +15,7 @@ export const inquiryCopy = {
   },
   en: {
     intro: "A platter, luxury fish only or individual salads? Tell us what you are looking for. We discuss your wishes, contents and price personally.",
-    kind: "What would you like to order?", kinds: { platter: "An arranged seafood platter", luxury: "Luxury fish only", salads: "A selection of seafood salads only", mixed: "A combination of fish and salads", advice: "I am not sure yet; advice please" },
+    kind: "What would you like on your platter?", kinds: { platter: "An arranged seafood platter", luxury: "Luxury fish only", salads: "A selection of seafood salads only", mixed: "A combination of fish and salads", advice: "I am not sure yet; advice please" },
     fish: "Which fish would you like? (optional)", fishes: { salmon: "Smoked salmon", eel: "Smoked eel", shrimp: "Dutch shrimp", mackerel: "Mackerel", tuna: "Tuna", other: "Another fish" }, fishNote: "These are your preferences. We confirm availability personally.",
     excluded: "Any fish you would rather leave out? (optional)", excludedPlaceholder: "For example no eel; extra salmon instead.",
     presentation: "How would you like it presented?", presentations: { platter: "Arranged on a platter", tubs: "Separately in tubs", advice: "Advice please" },
@@ -24,7 +26,7 @@ export const inquiryCopy = {
   },
   de: {
     intro: "Eine Platte, nur Edelfisch oder einzelne Salate? Nennen Sie uns Ihre Wünsche. Zusammenstellung und Preis besprechen wir persönlich.",
-    kind: "Was möchten Sie gerne bestellen?", kinds: { platter: "Eine schön angerichtete Fischplatte", luxury: "Nur edle Fischsorten", salads: "Nur verschiedene Fischsalate", mixed: "Eine Kombination aus Fisch und Salaten", advice: "Ich bin noch unsicher, bitte beraten Sie mich" },
+    kind: "Was möchten Sie auf Ihrer Fischplatte?", kinds: { platter: "Eine schön angerichtete Fischplatte", luxury: "Nur edle Fischsorten", salads: "Nur verschiedene Fischsalate", mixed: "Eine Kombination aus Fisch und Salaten", advice: "Ich bin noch unsicher, bitte beraten Sie mich" },
     fish: "Welche Fischsorten wünschen Sie? (optional)", fishes: { salmon: "Räucherlachs", eel: "Räucheraal", shrimp: "Nordseegarnelen", mackerel: "Makrele", tuna: "Thunfisch", other: "Andere Fischsorte" }, fishNote: "Dies sind Ihre Wünsche. Die Verfügbarkeit bestätigen wir persönlich.",
     excluded: "Welche Fischsorten möchten Sie nicht? (optional)", excludedPlaceholder: "Zum Beispiel kein Aal, lieber mehr Lachs.",
     presentation: "Wie möchten Sie es angerichtet haben?", presentations: { platter: "Schön auf einer Platte angerichtet", tubs: "Lieber einzeln in Schälchen", advice: "Bitte beraten Sie mich" },
@@ -35,6 +37,7 @@ export const inquiryCopy = {
   },
 } as const;
 export type PlatterInquiry = {
+  weights?: Record<string,string>;
   kind: keyof typeof inquiryCopy.nl.kinds;
   fish: (keyof typeof inquiryCopy.nl.fishes)[];
   excluded: string; presentation: keyof typeof inquiryCopy.nl.presentations;
@@ -42,6 +45,17 @@ export type PlatterInquiry = {
   budget: string; remarks: string; allergies: string;
 };
 export function inquiryText(locale: string) { return inquiryCopy[locale === "en" || locale === "de" ? locale : "nl"]; }
+export function platterWeightLines(locale:string,kind:PlatterInquiry["kind"], weights:Record<string,string>) {
+  const data = new URLSearchParams();
+  for (const [id,grams] of Object.entries(weights)) { data.append("fish",id); data.set("weight-"+id,grams); }
+  const quote = weightQuote(data,kind === "salads" ? saladCounter : [...platterFish,...saladCounter],locale);
+  if (!quote || !quote.lines.length) return quote ? [] : null;
+  const label = ["Subtotaal geprijsde ingrediënten","Priced ingredients subtotal","Zwischensumme der bepreisten Zutaten"][language(locale)];
+  return [...quote.lines,`${label}: ${feestdagenBedrag(quote.cents,locale)} · ${quote.grams} g`];
+}
+export function readPlatterWeights(data:Pick<URLSearchParams,"get"|"getAll">) {
+  return Object.fromEntries(data.getAll("fish").map(id => [id,data.get("weight-"+id) ?? "100"]));
+}
 /** Draft only; no storage, URL mutation, portion assumptions or calculated quote. */
 export function platterInquiryMessage(locale: string, v: PlatterInquiry) {
   const t = inquiryText(locale), salads = v.kind === "salads";
@@ -49,6 +63,7 @@ export function platterInquiryMessage(locale: string, v: PlatterInquiry) {
     ? new Intl.DateTimeFormat(locale === "en" ? "en-GB" : locale === "de" ? "de-DE" : "nl-NL", { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${v.date}T12:00:00Z`)) : t.unknown;
   const optional = (label:string, value:string) => value.trim() ? [`${label}: ${value.trim()}`] : [];
   return [t.greeting, "", `${t.kind}: ${t.kinds[v.kind]}`,
+    ...(v.weights ? platterWeightLines(locale,v.kind,v.weights) ?? [] : []),
     ...(!salads && v.fish.length ? [`${t.fishMessage}: ${[...new Set(v.fish)].map(f => t.fishes[f]).join(", ")}`] : []),
     ...(!salads ? optional(t.excludedMessage, v.excluded) : []),
     `${t.presentation}: ${t.presentations[v.presentation]}`,

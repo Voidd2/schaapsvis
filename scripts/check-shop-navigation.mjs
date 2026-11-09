@@ -187,7 +187,7 @@ for (const source of FEESTDAGEN_PRODUCTEN.filter(p => p.categorie === "visschale
 }
 for (const source of FEESTDAGEN_PRODUCTEN.filter(p => p.categorie !== "visschalen")) assert.equal(localizedPlatterProduct(source, "de"), source);
 
-const { catalogProduct, MAIN_PLATTERS, GOURMET, DELICACIES, SECONDARY, SALAD_REQUESTS } = load("src/lib/seafood-catalog.ts");
+const { catalogProduct, MAIN_PLATTERS, GOURMET, DELICACIES, SECONDARY, SALAD_REQUESTS, legacyTrioSlugs } = load("src/lib/seafood-catalog.ts");
 
 if (process.env.PLATTER_DETAIL_EVIDENCE) {
   const rows = JSON.parse(fs.readFileSync(process.env.PLATTER_DETAIL_EVIDENCE, "utf8"));
@@ -224,7 +224,7 @@ if (process.env.PLATTER_DETAIL_EVIDENCE) {
 
 const { normalizeRequest, requestTotal, requestMessage } = load("src/lib/catalog-request.ts");
 assert.equal(MAIN_PLATTERS.length, 6);
-assert.equal(new Set([...MAIN_PLATTERS, ...GOURMET, ...DELICACIES, ...SECONDARY, "zalmslaatje-de-luxe"]).size, FEESTDAGEN_PRODUCTEN.length);
+assert.equal(new Set([...MAIN_PLATTERS, ...GOURMET, ...DELICACIES, ...SECONDARY, ...legacyTrioSlugs, "zalmslaatje-de-luxe"]).size, FEESTDAGEN_PRODUCTEN.length);
 assert.deepEqual(MAIN_PLATTERS.map(slug => FEESTDAGEN_PRODUCTEN.find(p => p.slug === slug).prijsCents), [5950,7350,9850,16000,6750,8550]);
 for (const locale of ["nl","en","de"]) for (const source of FEESTDAGEN_PRODUCTEN) {
   const localized = catalogProduct(source.slug, locale);
@@ -246,14 +246,14 @@ for (const salad of SALAD_REQUESTS) {
 const request = {items:{"visschotel-middel-5-8-pers":{quantity:2,split:false}},date:""};
 assert.deepEqual(requestTotal(request), {cents:19700,incomplete:false});
 request.items["luxe-trio-klein"] = {quantity:1,split:false};
-assert.deepEqual(requestTotal(request), {cents:20626,incomplete:false});
+assert.deepEqual(requestTotal(request), {cents:21299,incomplete:false});
 request.items["extra-zalmsalade"] = {quantity:2,split:false};
-assert.deepEqual(requestTotal(request), {cents:20626,incomplete:true});
+assert.deepEqual(requestTotal(request), {cents:21299,incomplete:true});
 request.items["visschotel-middel-5-8-pers"].split = true;
-assert.deepEqual(requestTotal(request), {cents:20626,incomplete:true});
+assert.deepEqual(requestTotal(request), {cents:21299,incomplete:true});
 for(const locale of ["nl","en","de"]) {
   const draft = requestMessage({...request,date:"2026-12-24"},locale);
-  assert.ok(draft.includes(feestdagenBedrag(20626,locale)));
+  assert.ok(draft.includes(feestdagenBedrag(21299,locale)));
   assert.ok(draft.includes("2026"));
   assert.ok(draft.includes(catalogProduct("luxe-trio-klein",locale).naam));
   assert.ok(draft.includes("5–8"));

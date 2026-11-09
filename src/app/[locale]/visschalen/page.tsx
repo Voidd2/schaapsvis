@@ -79,12 +79,13 @@ export default async function VisschalenPage({
         <nav className="catalog-intro-links composer-shortcuts" aria-label={catalog.title}>
           <a className="knop knop-navy" href="#maatwerk">{locale === "en" ? "Create a fish platter" : locale === "de" ? "Fischplatte zusammenstellen" : "Visschaal samenstellen"}</a>
           <a className="knop knop-lijn" href="#gourmet-keuzes">{locale === "en" ? "Create a gourmet platter" : locale === "de" ? "Gourmetplatte zusammenstellen" : "Visgourmet samenstellen"}</a>
+          <a className="knop knop-lijn" href="#geschenken">{locale === "en" ? "Create a gift package" : locale === "de" ? "Geschenkpaket zusammenstellen" : "Cadeaupakket samenstellen"}</a>
+          <a className="knop knop-lijn" href="#delicatessen">{locale === "en" ? "Choose a fish or salad trio" : locale === "de" ? "Fisch- oder Salattrio wählen" : "Vis- of saladetrio kiezen"}</a>
         </nav>
         <div className="platter-browse">
           <details className="platter-directory"><summary>{locale === "en" ? "Platter sizes" : locale === "de" ? "Plattengrößen" : "Formaten bekijken"}</summary>
             <ul className="platter-sizes">{MAIN_PLATTERS.map((slug,i)=><li key={slug}><a href={i===0?"#schalen-klassiek":i===3?"#schalen-luxe":i===4?"#schalen-hapjes":"#"+slug}>{catalogProduct(slug,locale).naam} ↓</a></li>)}</ul>
           </details>
-          <a href="#geschenken">{locale === "de" ? "Geschenke" : locale === "en" ? "Gifts" : "Geschenken"} ↓</a>
         </div>
       </section>
       <SeafoodCatalog locale={locale} />

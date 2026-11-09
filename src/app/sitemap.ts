@@ -5,6 +5,7 @@ import { blogPosts } from "@/lib/blog";
 import { products } from "@/lib/assortiment-data";
 import { recepten } from "@/lib/recepten";
 import { productPhoto } from "@/lib/product-beeld";
+import { legacyTrioSlugs } from "@/lib/seafood-catalog";
 import { FEESTDAGEN_PRODUCTEN } from "@/lib/feestdagen-producten";
 
 import { BEDRIJF } from "@/lib/bedrijf";
@@ -102,6 +103,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // ── Feestdagenproducten ──────────────────────────────────────────────────
   for (const product of FEESTDAGEN_PRODUCTEN) {
+    if (legacyTrioSlugs.includes(product.slug)) continue;
     const pad = `/feestdagen/${product.slug}`;
     for (const taal of LOCALES) {
       regels.push({

@@ -903,6 +903,11 @@ summary::-webkit-details-marker {
 .composer-fish-row { align-self:start; border:1px solid #bfd6df; border-radius:.5rem; background:white; }
 .composer-fish-row label { display:block; padding:.65rem; cursor:pointer; }
 .composer-fish-row small { margin-left:1.7rem; }
+.counter-picker { min-width:0; }
+.counter-picker legend { margin-bottom:.5rem; font-weight:650; }
+.counter-picker input[type="checkbox"] { width:1.2rem; height:1.2rem; margin-right:.5rem; accent-color:#075b82; }
+.counter-picker .composer-weight input { display:block; max-width:12rem; }
+.composer-fish-row:has(input:checked) { border-color:#075b82; }
 @supports selector(:has(*)) {
   .composer-fish-row:not(:has(:checked)) .composer-weight,
   .native-composer-form:not(:has(option[value=salads]:checked)) .composer-for-salad,

@@ -1,4 +1,4 @@
-import { trioPriceCents } from "./gift-pricing";
+import { STANDARD_FISH_TRIO } from "./gift-pricing";
 import { feestdagenBedrag } from "./feestdagen-producten";
 import type { Locale } from "@/lib/seo";
 
@@ -35,7 +35,7 @@ const COPY = {
     featuredHint: "Swipe om meer te bekijken",
     featuredLink: "Naar de mogelijkheden",
     items: [
-      ["Luxe vistrio", "Hollandse garnalen, gerookte paling en zalm in drie vakjes. Kies klein, middel of groot.", "/images/dirks/luxe-trio-klein.webp", "Luxe vistrio in een drievaksbakje", "/feestdagen/luxe-trio-klein", feestdagenBedrag(trioPriceCents(0)!, "nl") + " · 120 g"],
+      ["Luxe vistrio", "Hollandse garnalen, gerookte paling en zalm in drie vakjes. Kies drie vissoorten en voeg naar wens extra vis toe.", "/images/dirks/luxe-trio-klein.webp", "Luxe vistrio in een drievaksbakje", "/feestdagen/luxe-trio-klein", feestdagenBedrag(STANDARD_FISH_TRIO, "nl") + " · 120 g"],
       ["Feestelijke visschalen", "Een complete schaal voor borrel, brunch of diner. We stellen de inhoud samen op basis van gezelschap, smaak en budget.", "/images/editorial/feestschaal-voorbeeld.webp", "Voorbeeld van een feestelijke visschaal", "/visschalen", "gemiddeld ca. € 17,50 p.p."],
       ["Gourmet met vis", "Vis voor aan tafel, afgestemd op het aantal personen. Bekijk de voorbeelden en vraag naar de mogelijkheden.", "/images/barbecue-gourmet-hero.webp", "Gourmetselectie met verschillende vissoorten", "/barbecue-gourmet", "prijs na samenstelling"],
       ["Gerookte zalm", "Mooi als voorgerecht, op brood of als onderdeel van een feestelijke schaal. Vraag naar porties en beschikbaarheid.", "/images/editorial/gerookte-zalm-serveervoorbeeld.png", "Gerookte zalm als serveersuggestie", "/assortiment/gerookte-zalm-high-seas", "richtprijs € 3,25 per 100 g"],
@@ -69,7 +69,7 @@ const COPY = {
   en: {
     home: "Home", label: "December at Schaap’s", title: "Festive season 2026", intro: "From a festive seafood platter to smoked salmon, oysters and fish for gourmet dining: explore the options and arrange your order with us in good time.", ask: "Discuss your order", gifts: "Business gifts", categories: "For your table", categoriesTitle: "Choose what suits your celebration", categoriesIntro: "Explore the full selection with its listed version and price. We always confirm availability, collection and any changes in advance.", featuredLabel: "December highlights", featuredTitle: "Festive favourites", featuredHint: "Swipe to see more", featuredLink: "Explore the options",
     items: [
-      ["Luxury fish trio", "Dutch shrimp, smoked eel and salmon in three compartments. Choose small, medium or large.", "/images/dirks/luxe-trio-klein.webp", "Seafood trio in a three-compartment tray", "/feestdagen/luxe-trio-klein", feestdagenBedrag(trioPriceCents(0)!, "en") + " · 120 g"],
+      ["Luxury fish trio", "Dutch shrimp, smoked eel and salmon in three compartments. Choose three varieties and add extra fish if desired.", "/images/dirks/luxe-trio-klein.webp", "Seafood trio in a three-compartment tray", "/feestdagen/luxe-trio-klein", feestdagenBedrag(STANDARD_FISH_TRIO, "en") + " · 120 g"],
       ["Festive seafood platters", "A complete platter for drinks, brunch or dinner, tailored to your guests, taste and budget.", "/images/editorial/feestschaal-voorbeeld.webp", "Example festive seafood platter", "/visschalen", "average approx. €17.50 p.p."],
       ["Fish gourmet selection", "Fish for tabletop cooking, matched to your number of guests. Ask us what is possible.", "/images/barbecue-gourmet-hero.webp", "Fish gourmet selection", "/barbecue-gourmet", "price after consultation"],
       ["Smoked salmon", "For a starter, on bread or as part of a festive platter. Ask about portions and availability.", "/images/editorial/gerookte-zalm-serveervoorbeeld.png", "Smoked salmon serving suggestion", "/assortiment/gerookte-zalm-high-seas", "guide price €3.25 per 100 g"],
@@ -85,7 +85,7 @@ const COPY = {
   de: {
     home: "Startseite", label: "Dezember bei Schaap’s", title: "Festtage 2026", intro: "Von festlichen Fischplatten bis Räucherlachs, Austern und einer Gourmet-Auswahl: Entdecken Sie die Möglichkeiten und stimmen Sie Ihre Bestellung rechtzeitig mit uns ab.", ask: "Bestellung besprechen", gifts: "Firmengeschenke", categories: "Für Ihre Tafel", categoriesTitle: "Passend zu Ihrem Fest", categoriesIntro: "Entdecken Sie die vollständige Auswahl mit Ausführung und Preis. Verfügbarkeit, Abholung und Änderungen bestätigen wir immer vorab.", featuredLabel: "Im Dezember empfohlen", featuredTitle: "Festliche Favoriten", featuredHint: "Wischen für weitere Ideen", featuredLink: "Möglichkeiten ansehen",
     items: [
-      ["Luxus-Fischtrio", "Nordseegarnelen, Räucheraal und Lachs in drei Fächern. In drei Größen erhältlich.", "/images/dirks/luxe-trio-klein.webp", "Fischtrio in einer Dreifachschale", "/feestdagen/luxe-trio-klein", feestdagenBedrag(trioPriceCents(0)!, "de") + " · 120 g"],
+      ["Luxus-Fischtrio", "Nordseegarnelen, Räucheraal und Lachs in drei Fächern. Drei Sorten frei wählen und auf Wunsch Fisch ergänzen.", "/images/dirks/luxe-trio-klein.webp", "Fischtrio in einer Dreifachschale", "/feestdagen/luxe-trio-klein", feestdagenBedrag(STANDARD_FISH_TRIO, "de") + " · 120 g"],
       ["Festliche Fischplatten", "Eine komplette Platte für Empfang, Brunch oder Abendessen, abgestimmt auf Gäste, Geschmack und Budget.", "/images/editorial/feestschaal-voorbeeld.webp", "Beispiel einer festlichen Fischplatte", "/visschalen", "durchschnittlich ca. € 17,50 p.P."],
       ["Fisch für Gourmet", "Fisch für den Tischgrill, abgestimmt auf die Personenzahl. Fragen Sie nach den Möglichkeiten.", "/images/barbecue-gourmet-hero.webp", "Gourmet-Auswahl mit Fisch", "/barbecue-gourmet", "Preis nach Zusammenstellung"],
       ["Räucherlachs", "Als Vorspeise, auf Brot oder auf einer festlichen Platte. Fragen Sie nach Portionen und Verfügbarkeit.", "/images/editorial/gerookte-zalm-serveervoorbeeld.png", "Serviervorschlag mit Räucherlachs", "/assortiment/gerookte-zalm-high-seas", "Richtpreis € 3,25 pro 100 g"],

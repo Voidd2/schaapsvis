@@ -4,9 +4,10 @@ import { localizedPlatterProduct } from "./platter-product-text";
 // Merchandising only: canonical prices, portions, photos and routes stay in the catalogue.
 export const MAIN_PLATTERS = ["visschotel-klein-2-3-pers", "visschotel-klein-3-5-pers", "visschotel-middel-5-8-pers", "visschotel-luxe-10-14-pers", "visschotel-hapjes-3-5-pers", "visschotel-hapjes-6-10-pers"] as const;
 export const GOURMET = ["gourmet-trio-1-persoon", "gourmet-schotel-3-4-pers", "gourmetschotel-5-6-pers"] as const;
-export const DELICACIES = ["luxe-trio-klein", "luxe-trio-middel", "luxe-vistrio", "salade-trio"] as const;
+export const DELICACIES = ["luxe-trio-klein", "salade-trio"] as const;
 export const FEATURED = "zalmslaatje-de-luxe";
-export const SECONDARY = FEESTDAGEN_PRODUCTEN.filter(p => ![...MAIN_PLATTERS, ...GOURMET, ...DELICACIES, FEATURED].includes(p.slug)).map(p => p.slug);
+export const legacyTrioSlugs = ["luxe-trio-middel", "luxe-vistrio"];
+export const SECONDARY = FEESTDAGEN_PRODUCTEN.filter(p => ![...MAIN_PLATTERS, ...GOURMET, ...DELICACIES, ...legacyTrioSlugs, FEATURED].includes(p.slug)).map(p => p.slug);
 type Trio = readonly [string, string, string];
 const commercialNames: Record<string, Trio> = {
   "visschotel-klein-2-3-pers": ["Klassieke kleine visschaal · 2–3 personen", "Small classic platter · 2–3 people", "Kleine klassische Fischplatte · 2–3 Personen"],
@@ -24,7 +25,7 @@ const extraCopy: Record<string, { name: readonly [string, string]; intro: readon
   "gourmet-trio-1-persoon": { name: ["Gourmet trio for 1 person", "Gourmet-Trio für 1 Person"], intro: ["A tabletop grilling trio for one with three types of marinated fish.", "Ein Tischgrill-Trio für eine Person mit drei marinierten Fischsorten."] },
   "gourmet-schotel-3-4-pers": { name: ["Gourmet platter for 3–4 people", "Gourmetplatte für 3–4 Personen"], intro: ["A 1 kg tabletop grilling platter with salmon, tuna, cod and prawns for three to four people.", "Eine 1-kg-Tischgrillplatte mit Lachs, Thunfisch, Kabeljau und Garnelen für drei bis vier Personen."] },
   "gourmetschotel-5-6-pers": { name: ["Gourmet platter for 5–6 people", "Gourmetplatte für 5–6 Personen"], intro: ["A 1.5 kg tabletop grilling platter with salmon, tuna, cod and prawns for five to six people.", "Eine 1,5-kg-Tischgrillplatte mit Lachs, Thunfisch, Kabeljau und Garnelen für fünf bis sechs Personen."] },
-  "luxe-trio-klein": { name: ["Small luxury seafood trio", "Kleines Luxus-Fischtrio"], intro: ["Three compartments with about 40 g each of Dutch shrimp, smoked eel and smoked salmon. Presentation and packaging included.", "Drei Fächer mit je ca. 40 g Nordseegarnelen, Räucheraal und Räucherlachs. Anrichten und Verpackung inklusive."] },
+  "luxe-trio-klein": { name: ["Luxury seafood trio", "Luxus-Fischtrio"], intro: ["Choose three varieties, about 40 g each. Add extra fish in 100 g portions.", "Wählen Sie drei Sorten zu je ca. 40 g. Zusätzlicher Fisch je 100 g."] },
   "luxe-trio-middel": { name: ["Medium luxury seafood trio", "Mittleres Luxus-Fischtrio"], intro: ["Three compartments with about 60 g each of Dutch shrimp, smoked eel and smoked salmon. Presentation and packaging included.", "Drei Fächer mit je ca. 60 g Nordseegarnelen, Räucheraal und Räucherlachs. Anrichten und Verpackung inklusive."] },
   "luxe-vistrio": { name: ["Large luxury seafood trio", "Großes Luxus-Fischtrio"], intro: ["Three compartments with about 80 g each of Dutch shrimp, smoked eel and smoked salmon. Presentation and packaging included.", "Drei Fächer mit je ca. 80 g Nordseegarnelen, Räucheraal und Räucherlachs. Anrichten und Verpackung inklusive."] },
   "salade-trio": { name: ["Salad trio", "Salat-Trio"], intro: ["Three salads in one pack for bread, toast or sharing over drinks.", "Drei Salate in einer Verpackung für Brot, Toast oder eine gesellige Runde."] },
