@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { validPickupDate } from "@/lib/pickup-date";
 import { usePickupToday } from "@/lib/use-pickup-date";
-import { useWinkelwagen } from "@/components/winkel/Winkelwagen";
 import { PLATTER_FAMILIES, selectedPlatter, platterDetailHref } from "@/lib/platter-families";
 import { catalogText } from "@/lib/catalog-copy";
 import { cartText } from "@/lib/cart-copy";
@@ -40,14 +39,13 @@ export function LegacyCatalogSelection({ locale }: { locale: string }) {
 }
 
 /** The single shared panel content. Wishes stay in memory, never in page URLs/storage. */
-export function RequestSummary({ locale }: { locale: string }) {
-  const legacy = useWinkelwagen();
+export function RequestSummary({ locale, hasPreviousSelection }: { locale: string; hasPreviousSelection: boolean }) {
   const state = useCatalogRequest(), t = catalogText(locale), c = cartText(locale), total = requestTotal(state), entries = Object.entries(state.items);
   const today = usePickupToday();
   const dateOK = !state.date || (!!today && validPickupDate(state.date));
   const message = requestMessage(state, locale);
   return <div className="cart-content">
-    {legacy.aantal > 0 && <p className="request-muted mb-5">{locale === "en" ? "You also have an earlier, separate selection." : locale === "de" ? "Sie haben auch eine frühere, separate Auswahl." : "U heeft ook een eerdere, afzonderlijke selectie."} <Link className="underline" href={`/${locale}/bestellen`}>{locale === "en" ? "Review it here" : locale === "de" ? "Hier ansehen" : "Bekijk die hier"} →</Link></p>}
+    {hasPreviousSelection && <p className="request-muted mb-5">{locale === "en" ? "You also have an earlier, separate selection." : locale === "de" ? "Sie haben auch eine frühere, separate Auswahl." : "U heeft ook een eerdere, afzonderlijke selectie."} <Link className="underline" href={`/${locale}/bestellen`}>{locale === "en" ? "Review it here" : locale === "de" ? "Hier ansehen" : "Bekijk die hier"} →</Link></p>}
     {!entries.length ? <p className="cart-empty">{t.empty}</p> : <>
       <ul className="cart-lines">{entries.map(([slug, line]) => {
         const product = feestdagenProduct(slug), localized = product ? catalogProduct(slug, locale) : null, salad = saladLine(slug);

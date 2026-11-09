@@ -8,8 +8,6 @@ import { routing } from "@/i18n/routing";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Chrome } from "@/components/layout/Chrome";
-import { WinkelwagenProvider } from "@/components/winkel/Winkelwagen";
-import { CatalogCart } from "@/components/catalog/CatalogCart";
 import { cookies } from "next/headers";
 import { ACCESS_COOKIE, heeftGeldigeSiteToegang, siteOpSlot } from "@/lib/siteAccess";
 import { BEDRIJF } from "@/lib/bedrijf";
@@ -103,18 +101,10 @@ export default async function LocaleLayout({
           <a href="#inhoud" className="sv-skip">
             {locale === "en" ? "Skip to content" : locale === "de" ? "Zum Inhalt springen" : "Naar de inhoud"}
           </a>
-          {/* De winkelwagen leeft boven de kop en de voet: hij moet dezelfde
-              inhoud kennen op de winkelsite én in de webshop. */}
-          <WinkelwagenProvider>
-            <Chrome
-              header={<Header />}
-              footer={<Footer />}
-              extras={<CatalogCart />}
-            >
-              {isPreview && <OwnerMediaGuide />}
-              {children}
-            </Chrome>
-          </WinkelwagenProvider>
+          <Chrome header={<Header />} footer={<Footer />}>
+            {isPreview && <OwnerMediaGuide />}
+            {children}
+          </Chrome>
         </NextIntlClientProvider>
       </body>
     </html>

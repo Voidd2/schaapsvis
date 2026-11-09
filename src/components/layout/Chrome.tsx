@@ -2,9 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
-import { ShopHeader } from "./ShopHeader";
-import { ShopFooter } from "./ShopFooter";
-import { WinkelwagenPaneel } from "@/components/winkel/WinkelwagenPaneel";
 
 /**
  * Welke jas de site aan heeft.
@@ -20,36 +17,22 @@ import { WinkelwagenPaneel } from "@/components/winkel/WinkelwagenPaneel";
 export function Chrome({
   header,
   footer,
-  extras,
   children,
 }: {
   header: ReactNode;
   footer: ReactNode;
-  /** Onder meer de winkelmand voor aanvragen op de winkelsite. */
-  extras: ReactNode;
   children: ReactNode;
 }) {
   const pathname = usePathname() ?? "";
   const inWebshop = /^\/(nl|en|de)\/bestellen(\/|$)/.test(pathname);
 
-  if (inWebshop) {
-    return (
-      <>
-        <ShopHeader />
-        <main id="inhoud" className="flex-1">{children}</main>
-        <ShopFooter />
-        <WinkelwagenPaneel />
-      </>
-    );
-  }
+  if (inWebshop) return children;
 
   return (
     <>
       {header}
       <main id="inhoud" className="flex-1">{children}</main>
       {footer}
-      {extras}
-      <WinkelwagenPaneel />
     </>
   );
 }
