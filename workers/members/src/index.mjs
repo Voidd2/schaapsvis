@@ -31,7 +31,7 @@ const ACCOUNT_COPY = {
     newsletterSubject: "Bevestig uw e-maildeals", newsletterIntro: "Bevestig dat Schaap's Vishandel u e-maildeals mag sturen.", newsletterButton: "E-maildeals bevestigen", newsletterTitle: "E-maildeals bevestigen", newsletterExpiredTitle: "Aanmeldlink verlopen", newsletterExpired: "Deze link is al gebruikt of verlopen.",
     unsubscribeTitle: "Afmelden voor e-maildeals", unsubscribeIntro: "U ontvangt daarna geen aanbiedingen per e-mail meer.", unsubscribeButton: "Afmelden", unsubscribeExpiredTitle: "Afmeldlink verlopen", unsubscribeExpired: "Deze afmeldlink is verlopen.", unsubscribeDoneTitle: "Afgemeld", unsubscribeDone: "U ontvangt geen e-maildeals meer van Schaap's Vishandel.",
     newsletterConfirmedSubject: "U ontvangt nu aanbiedingen van Schaap's Vishandel", newsletterConfirmedIntro: "Bedankt voor uw bevestiging. U ontvangt onze aanbiedingen wanneer we iets moois te delen hebben.", unsubscribeLink: "Afmelden voor e-maildeals",
-    registrationGeneric: "Als dit een nieuw account is, ontvangt u twee codes: één op uw persoonlijke e-mailadres en één op uw schoolmail.", invalidRegistration: "Vul uw naam en twee verschillende geldige e-mailadressen in. Kies een wachtwoord van 12 tot 128 tekens.", verificationFailed: "Uw account is aangemaakt, maar een of beide e-mails konden niet worden verstuurd. Vraag de codes opnieuw aan.", resendGeneric: "Als er een onbevestigd account bij dit adres hoort, sturen we de verificatiecodes opnieuw.", resetGeneric: "Als er een account bij dit adres hoort, ontvangt u een e-mail.", alreadySubscribed: "U bent al aangemeld.", newsletterCheck: "Controleer uw e-mail om uw aanmelding te bevestigen.",
+    registrationGeneric: "Bij een nieuw account ontvangt u een code op uw privé-e-mailadres. Heeft u een schooladres opgegeven, dan krijgt u daar ook een code.", invalidRegistration: "Vul uw naam, een geldig privé-e-mailadres en een wachtwoord van 12 tot 128 tekens in. Geef bij de schoolmailroute ook uw aparte schooladres op.", verificationFailed: "Uw account is aangemaakt, maar een of beide e-mails konden niet worden verstuurd. Vraag de codes opnieuw aan.", resendGeneric: "Als er een onbevestigd account bij dit adres hoort, sturen we de verificatiecodes opnieuw.", resetGeneric: "Als er een account bij dit adres hoort, ontvangt u een e-mail.", alreadySubscribed: "U bent al aangemeld.", newsletterCheck: "Controleer uw e-mail om uw aanmelding te bevestigen.",
   },
   en: {
     verifySubject: "Verify your personal email — Schaap's Vishandel", verifyIntro: "Your personal verification code for your Schaap's account is:", verifyLinkIntro: "Click below to verify the email address for your Schaap's account.", schoolVerifySubject: "Verify your school email — Schaap's Vishandel", schoolVerifyIntro: "Your verification code for your school email address is:", verifyButton: "Verify email address", verifyExpiredTitle: "Verification link expired", verifyExpired: "Request a new verification email from your account.", usedExpired: "This link has already been used or has expired.",
@@ -39,7 +39,7 @@ const ACCOUNT_COPY = {
     newsletterSubject: "Confirm your email offers", newsletterIntro: "Confirm that Schaap's Vishandel may send you email offers.", newsletterButton: "Confirm email offers", newsletterTitle: "Confirm email offers", newsletterExpiredTitle: "Subscription link expired", newsletterExpired: "This link has already been used or has expired.",
     unsubscribeTitle: "Unsubscribe from email offers", unsubscribeIntro: "You will no longer receive offers by email.", unsubscribeButton: "Unsubscribe", unsubscribeExpiredTitle: "Unsubscribe link expired", unsubscribeExpired: "This unsubscribe link has expired.", unsubscribeDoneTitle: "Unsubscribed", unsubscribeDone: "You will no longer receive email offers from Schaap's Vishandel.",
     newsletterConfirmedSubject: "You are subscribed to offers from Schaap's Vishandel", newsletterConfirmedIntro: "Thanks for confirming. You will hear from us when we have something worth sharing.", unsubscribeLink: "Unsubscribe from email offers",
-    registrationGeneric: "If this is a new account, we will send two codes: one to your personal email and one to your school email.", invalidRegistration: "Enter your name and two different valid email addresses. Choose a password of 12 to 128 characters.", verificationFailed: "Your account was created, but one or both emails could not be sent. Request new codes.", resendGeneric: "If this address belongs to an unverified account, we will resend the verification codes.", resetGeneric: "If an account exists for this address, you will receive an email.", alreadySubscribed: "You are already subscribed.", newsletterCheck: "Check your email to confirm your subscription.",
+    registrationGeneric: "For a new account, we send a code to your personal email. If you entered a school email, we send a code there too.", invalidRegistration: "Enter your name, a valid personal email and a password of 12 to 128 characters. For the school email route, add your separate school email.", verificationFailed: "Your account was created, but one or both emails could not be sent. Request new codes.", resendGeneric: "If this address belongs to an unverified account, we will resend the verification codes.", resetGeneric: "If an account exists for this address, you will receive an email.", alreadySubscribed: "You are already subscribed.", newsletterCheck: "Check your email to confirm your subscription.",
   },
   de: {
     verifySubject: "Private E-Mail bestätigen — Schaap's Vishandel", verifyIntro: "Ihr persönlicher Bestätigungscode für Ihr Schaap's-Konto lautet:", verifyLinkIntro: "Klicken Sie unten, um die E-Mail-Adresse für Ihr Schaap's-Konto zu bestätigen.", schoolVerifySubject: "Schul-E-Mail bestätigen — Schaap's Vishandel", schoolVerifyIntro: "Ihr Bestätigungscode für Ihre Schul-E-Mail-Adresse lautet:", verifyButton: "E-Mail-Adresse bestätigen", verifyExpiredTitle: "Bestätigungslink abgelaufen", verifyExpired: "Fordern Sie in Ihrem Konto eine neue Bestätigungs-E-Mail an.", usedExpired: "Dieser Link wurde bereits verwendet oder ist abgelaufen.",
@@ -47,7 +47,7 @@ const ACCOUNT_COPY = {
     newsletterSubject: "E-Mail-Angebote bestätigen", newsletterIntro: "Bestätigen Sie, dass Schaap's Vishandel Ihnen E-Mail-Angebote senden darf.", newsletterButton: "E-Mail-Angebote bestätigen", newsletterTitle: "E-Mail-Angebote bestätigen", newsletterExpiredTitle: "Anmeldelink abgelaufen", newsletterExpired: "Dieser Link wurde bereits verwendet oder ist abgelaufen.",
     unsubscribeTitle: "E-Mail-Angebote abbestellen", unsubscribeIntro: "Sie erhalten danach keine Angebote per E-Mail mehr.", unsubscribeButton: "Abbestellen", unsubscribeExpiredTitle: "Abmeldelink abgelaufen", unsubscribeExpired: "Dieser Abmeldelink ist abgelaufen.", unsubscribeDoneTitle: "Abgemeldet", unsubscribeDone: "Sie erhalten keine E-Mail-Angebote mehr von Schaap's Vishandel.",
     newsletterConfirmedSubject: "Sie erhalten jetzt Angebote von Schaap's Vishandel", newsletterConfirmedIntro: "Vielen Dank für Ihre Bestätigung. Sie hören von uns, wenn wir etwas Schönes zu teilen haben.", unsubscribeLink: "E-Mail-Angebote abbestellen",
-    registrationGeneric: "Wenn dies ein neues Konto ist, senden wir zwei Codes: einen an Ihre private E-Mail und einen an Ihre Schul-E-Mail.", invalidRegistration: "Geben Sie Ihren Namen und zwei verschiedene gültige E-Mail-Adressen ein. Das Passwort muss 12 bis 128 Zeichen lang sein.", verificationFailed: "Ihr Konto wurde erstellt, aber eine oder beide E-Mails konnten nicht gesendet werden. Fordern Sie neue Codes an.", resendGeneric: "Wenn diese Adresse zu einem unbestätigten Konto gehört, senden wir die Bestätigungscodes erneut.", resetGeneric: "Wenn es ein Konto zu dieser Adresse gibt, erhalten Sie eine E-Mail.", alreadySubscribed: "Sie haben den E-Mail-Angeboten bereits zugestimmt.", newsletterCheck: "Prüfen Sie Ihre E-Mails, um die Anmeldung zu bestätigen.",
+    registrationGeneric: "Bei einem neuen Konto erhalten Sie einen Code an Ihre private E-Mail-Adresse. Wenn Sie eine Hochschuladresse angegeben haben, erhalten Sie dort ebenfalls einen Code.", invalidRegistration: "Geben Sie Ihren Namen, eine gültige private E-Mail und ein Passwort mit 12 bis 128 Zeichen ein. Für den Hochschul-E-Mail-Nachweis benötigen Sie eine separate Hochschuladresse.", verificationFailed: "Ihr Konto wurde erstellt, aber eine oder beide E-Mails konnten nicht gesendet werden. Fordern Sie neue Codes an.", resendGeneric: "Wenn diese Adresse zu einem unbestätigten Konto gehört, senden wir die Bestätigungscodes erneut.", resetGeneric: "Wenn es ein Konto zu dieser Adresse gibt, erhalten Sie eine E-Mail.", alreadySubscribed: "Sie haben den E-Mail-Angeboten bereits zugestimmt.", newsletterCheck: "Prüfen Sie Ihre E-Mails, um die Anmeldung zu bestätigen.",
   },
 };
 
@@ -478,6 +478,10 @@ async function sendVerificationPair(env, { email, schoolEmail, copy, locale, per
   const personal = await Promise.allSettled([
     sendMail(env, email, copy.verifySubject, transactionalText(copy.verifyIntro, personalCode), verificationCodeEmail(locale, copy.verifySubject, copy.verifyIntro, personalCode, validity, recipient)),
   ]);
+  if (!schoolEmail) {
+    if (personal[0].status === "rejected") throw new Error("verification-email-failed");
+    return;
+  }
   if (mailTransport(env) === "smtp") {
     await new Promise((resolve) => setTimeout(resolve, 1500));
   }
@@ -516,7 +520,7 @@ async function sessionUser(request, env) {
   if (!token) return null;
   const tokenHash = await digest(token);
   const row = await env.DB.prepare(`
-    SELECT u.id, u.email, u.full_name, u.email_verified_at, u.account_status,
+    SELECT u.id, u.email, u.full_name, u.school_email, u.email_verified_at, u.account_status,
       s.revoked_at AS session_revoked_at, s.expires_at AS session_expires_at,
       s.absolute_expires_at, s.last_seen_at, s.device_id
     FROM sessions s JOIN users u ON u.id = s.user_id
@@ -564,6 +568,7 @@ async function collectAnalytics(request, env) {
   if (body.event === "link_click" && !target) return json({ error: "invalid_target" }, 400);
   if (!env.AUTH_PEPPER) return json({ error: "analytics_unavailable" }, 503);
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  if (env.ANALYTICS_EXCLUDED_IP_HASH && await digest(ip) === env.ANALYTICS_EXCLUDED_IP_HASH) return json({ok:true}, 202);
   const key = await hmac(env.AUTH_PEPPER, `analytics:ip:${ip}`);
   if (!await rateLimit(env.DB, key, 240, 15 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
   const date = new Date().toISOString().slice(0, 10);
@@ -580,6 +585,24 @@ async function adminAnalytics(request, env) {
   const daysValue = Number(new URL(request.url).searchParams.get("days") || 30);
   const days = Number.isInteger(daysValue) ? Math.min(90, Math.max(1, daysValue)) : 30;
   return json(await analyticsReport(env, days));
+}
+
+async function adminEmailAddresses(request, env) {
+  if (!sameOrigin(request, env) || !await requireAdmin(request, env)) return json({error:"forbidden"}, 403);
+  const body = await readJson(request);
+  const after = body?.after ?? "";
+  if (typeof after !== "string" || after.length > 254) return json({error:"invalid_cursor"}, 400);
+  const rows = await env.DB.prepare(`
+    WITH addresses AS (
+      SELECT email FROM users WHERE account_status IN ('active','locked') AND email > ?
+      UNION SELECT email FROM newsletter_subscriptions WHERE email > ?
+    )
+    SELECT a.email, u.id IS NOT NULL AS has_account, COALESCE(n.status,'not-subscribed') AS marketing
+    FROM addresses a LEFT JOIN users u ON u.email=a.email AND u.account_status IN ('active','locked')
+    LEFT JOIN newsletter_subscriptions n ON n.email=a.email
+    ORDER BY a.email COLLATE NOCASE LIMIT 101`).bind(after,after).all();
+  const emails = (rows.results || []).slice(0,100);
+  return json({emails, next:rows.results?.length > 100 ? emails.at(-1).email : null});
 }
 
 async function adminCustomers(request, env) {
@@ -832,7 +855,8 @@ async function register(request, env) {
   const locale = localeFrom(body?.locale);
   const copy = ACCOUNT_COPY[locale];
   const email = normalizeEmail(body?.email);
-  const schoolEmail = normalizeEmail(body?.schoolEmail);
+  const documentRoute = body?.proofMethod === "document" && !body?.schoolEmail;
+  const schoolEmail = documentRoute ? null : normalizeEmail(body?.schoolEmail);
   const firstName = typeof body?.firstName === "string" ? body.firstName.trim().replace(/\s+/g, " ").slice(0, 60) : "";
   const lastName = typeof body?.lastName === "string" ? body.lastName.trim().replace(/\s+/g, " ").slice(0, 80) : "";
   // Accept the previous single-name payload during the two-Worker rollout so
@@ -840,7 +864,7 @@ async function register(request, env) {
   const legacyName = typeof body?.name === "string" ? body.name.trim().replace(/\s+/g, " ").slice(0, 120) : "";
   const name = firstName && lastName ? `${firstName} ${lastName}` : legacyName;
   const password = typeof body?.password === "string" ? body.password : "";
-  if (!email || !schoolEmail || email === schoolEmail || name.length < 2 || (!legacyName && (!firstName || !lastName)) || password.length < 12 || password.length > 128) {
+  if (!email || (!documentRoute && !schoolEmail) || email === schoolEmail || name.length < 2 || ((documentRoute || !legacyName) && (!firstName || !lastName)) || password.length < 12 || password.length > 128) {
     return json({ error: "invalid_input", message: copy.invalidRegistration }, 400);
   }
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
@@ -859,7 +883,7 @@ async function register(request, env) {
   if (!inserted.meta?.changes) return json({ ok: true, message: copy.registrationGeneric }, 202);
 
   const personalCode = await issueVerificationCode(env, { userId, email, purpose: "verify_email" });
-  const schoolCode = await issueVerificationCode(env, { userId, email: schoolEmail, purpose: "verify_school" });
+  const schoolCode = schoolEmail ? await issueVerificationCode(env, { userId, email: schoolEmail, purpose: "verify_school" }) : null;
   try {
     const validity = locale === "nl" ? "De code is 10 minuten geldig." : locale === "de" ? "Der Code ist 10 Minuten gültig." : "The code is valid for 10 minutes.";
     await sendVerificationPair(env, { email, schoolEmail, copy, locale, personalCode, schoolCode, validity, recipient: { first_name: firstName, full_name: name } });
@@ -869,12 +893,13 @@ async function register(request, env) {
 
   if (body.marketingConsent === true) {
     try {
+      const version = "student-personal-offers-2026-11";
       const consentAt = nowIso();
       await env.DB.batch([
         env.DB.prepare(`INSERT INTO consent_events (id, user_id, consent_type, granted, text_version, source, recorded_at) VALUES (?, ?, 'marketing_email', 1, ?, 'account-registration', ?)`)
-          .bind(crypto.randomUUID(), userId, NEWSLETTER_CONSENT_VERSION, consentAt),
+          .bind(crypto.randomUUID(), userId, version, consentAt),
         env.DB.prepare(`INSERT INTO newsletter_subscriptions (email, user_id, status, consent_text_version, consented_at, source, created_at, updated_at) VALUES (?, ?, 'pending', ?, ?, 'account-registration', ?, ?) ON CONFLICT(email) DO UPDATE SET user_id=excluded.user_id, status='pending', consent_text_version=excluded.consent_text_version, consented_at=excluded.consented_at, confirmed_at=NULL, unsubscribed_at=NULL, source=excluded.source, updated_at=excluded.updated_at`)
-          .bind(email, userId, NEWSLETTER_CONSENT_VERSION, consentAt, consentAt, consentAt),
+          .bind(email, userId, version, consentAt, consentAt, consentAt),
       ]);
     } catch {
       // Optional marketing consent must never make a successfully created
@@ -942,14 +967,14 @@ async function resendVerification(request, env) {
   const email = normalizeEmail(body?.email);
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
   if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "verify-resend", ip, email || "invalid", 12, 4, 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
-  const user = email ? await env.DB.prepare(`SELECT id, email, school_email, first_name, full_name FROM users WHERE email = ? AND (email_verified_at IS NULL OR school_email_verified_at IS NULL) AND account_status = 'active'`).bind(email).first() : null;
+  const user = email ? await env.DB.prepare(`SELECT id, email, school_email, first_name, full_name FROM users WHERE email = ? AND (email_verified_at IS NULL OR (school_email IS NOT NULL AND school_email_verified_at IS NULL)) AND account_status = 'active'`).bind(email).first() : null;
   if (user) {
     const time = nowIso();
     await env.DB.prepare(`UPDATE email_tokens SET used_at = ? WHERE user_id = ? AND purpose IN ('verify_email','verify_school') AND used_at IS NULL`).bind(time, user.id).run();
     try {
-      if (user.school_email) {
+      if (user.school_email || user.first_name) {
         const personalCode = await issueVerificationCode(env, { userId: user.id, email: user.email, purpose: "verify_email" });
-        const schoolCode = await issueVerificationCode(env, { userId: user.id, email: user.school_email, purpose: "verify_school" });
+        const schoolCode = user.school_email ? await issueVerificationCode(env, { userId: user.id, email: user.school_email, purpose: "verify_school" }) : null;
         const validity = locale === "nl" ? "De code is 10 minuten geldig." : locale === "de" ? "Der Code ist 10 Minuten gültig." : "The code is valid for 10 minutes.";
         await sendVerificationPair(env, { email: user.email, schoolEmail: user.school_email, copy, locale, personalCode, schoolCode, validity, recipient: user });
       } else {
@@ -973,17 +998,17 @@ async function verifyRegistrationCodes(request, env) {
   const schoolCode = typeof body?.schoolCode === "string" ? body.schoolCode.trim() : "";
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
   if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "verify-codes", ip, email || "invalid", 20, 8, 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
-  if (!email || !/^\d{6}$/.test(personalCode) || !/^\d{6}$/.test(schoolCode)) return json({ error: "invalid_codes" }, 400);
+  if (!email || !/^\d{6}$/.test(personalCode)) return json({ error: "invalid_codes" }, 400);
   const user = await env.DB.prepare(`SELECT id, email, school_email FROM users WHERE email = ? AND account_status = 'active'`).bind(email).first();
-  if (!user?.school_email || user.email === user.school_email) return json({ error: "invalid_codes" }, 400);
+  if (!user || (user.school_email && (!/^\d{6}$/.test(schoolCode) || user.email === user.school_email))) return json({ error: "invalid_codes" }, 400);
   const [personal, school] = await Promise.all([
     env.DB.prepare(`SELECT token_hash FROM email_tokens WHERE user_id=? AND email=? AND purpose='verify_email' AND token_hash=? AND used_at IS NULL AND expires_at>?`).bind(user.id, user.email, await hmac(env.AUTH_PEPPER, `verification-code:${user.id}:verify_email:${personalCode}`), nowIso()).first(),
-    env.DB.prepare(`SELECT token_hash FROM email_tokens WHERE user_id=? AND email=? AND purpose='verify_school' AND token_hash=? AND used_at IS NULL AND expires_at>?`).bind(user.id, user.school_email, await hmac(env.AUTH_PEPPER, `verification-code:${user.id}:verify_school:${schoolCode}`), nowIso()).first(),
+    user.school_email ? env.DB.prepare(`SELECT token_hash FROM email_tokens WHERE user_id=? AND email=? AND purpose='verify_school' AND token_hash=? AND used_at IS NULL AND expires_at>?`).bind(user.id, user.school_email, await hmac(env.AUTH_PEPPER, `verification-code:${user.id}:verify_school:${schoolCode}`), nowIso()).first() : null,
   ]);
-  if (!personal || !school) return json({ error: "invalid_codes" }, 400);
+  if (!personal || (user.school_email && !school)) return json({ error: "invalid_codes" }, 400);
   const time = nowIso();
   await env.DB.batch([
-    env.DB.prepare(`UPDATE users SET email_verified_at=COALESCE(email_verified_at, ?), school_email_verified_at=COALESCE(school_email_verified_at, ?), updated_at=? WHERE id=?`).bind(time, time, time, user.id),
+    env.DB.prepare(`UPDATE users SET email_verified_at=COALESCE(email_verified_at, ?), school_email_verified_at=CASE WHEN school_email IS NOT NULL THEN COALESCE(school_email_verified_at, ?) ELSE NULL END, updated_at=? WHERE id=?`).bind(time, time, time, user.id),
     env.DB.prepare(`UPDATE email_tokens SET used_at=? WHERE user_id=? AND purpose IN ('verify_email','verify_school') AND used_at IS NULL`).bind(time, user.id),
     env.DB.prepare(`UPDATE newsletter_subscriptions SET status='subscribed', confirmed_at=COALESCE(confirmed_at, ?), unsubscribed_at=NULL, updated_at=? WHERE user_id=? AND email=? AND source='account-registration' AND status='pending'`).bind(time, time, user.id, user.email),
   ]);
@@ -1130,6 +1155,7 @@ async function me(request, env) {
   return json({
     user: { id: user.id, name: user.full_name, email: user.email },
     isAdmin,
+    proofMethod: user.school_email ? "school-email" : "document",
     studentApplication: application || null,
     securityVerification: verification || null,
     discountPass,
@@ -1588,7 +1614,7 @@ function proofMime(file) {
 async function validProofBytes(file, mime) {
   const head = new Uint8Array(await file.slice(0, 12).arrayBuffer());
   if (mime === "application/pdf") return decoder.decode(head.slice(0, 5)) === "%PDF-";
-  if (mime === "image/png") return head[0] === 0x89 && decoder.decode(head.slice(1, 4)) === "PNG";
+  if (mime === "image/png") return [137,80,78,71,13,10,26,10].every((byte,i) => head[i] === byte);
   if (mime === "image/jpeg") return head[0] === 0xff && head[1] === 0xd8 && head[2] === 0xff;
   return false;
 }
@@ -1598,12 +1624,13 @@ async function submitStudentApplication(request, env) {
   const user = await sessionUser(request, env);
   if (!user) return json({ error: "authentication_required" }, 401);
   const verifiedAddresses = await env.DB.prepare(`SELECT school_email, school_email_verified_at FROM users WHERE id=?`).bind(user.id).first();
-  if (!verifiedAddresses?.school_email || !verifiedAddresses.school_email_verified_at) return json({ error: "student_emails_unverified" }, 403);
+  const upload = !verifiedAddresses?.school_email;
+  if (!upload && !verifiedAddresses.school_email_verified_at) return json({ error: "student_emails_unverified" }, 403);
   if (!env.AUTH_PEPPER) return json({ error: "application_unavailable" }, 503);
   const applicationLimitKey = await hmac(env.AUTH_PEPPER, `student-application:${user.id}`);
   if (!await rateLimit(env.DB, applicationLimitKey, 4, 24 * 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
-  const parsed = await readLimitedFormData(request, 64_000);
-  if (parsed.tooLarge) return json({ error: "form_too_large" }, 413);
+  const parsed = await readLimitedFormData(request, upload ? MAX_PROOF_BYTES + 64_000 : 64_000);
+  if (parsed.tooLarge) return json({ error: upload ? "file_too_large" : "form_too_large" }, 413);
   if (!parsed.form) return json({ error: "invalid_form" }, 400);
   const form = parsed.form;
   const institution = String(form.get("institution") || "").trim().slice(0, 180);
@@ -1612,6 +1639,11 @@ async function submitStudentApplication(request, env) {
   if (!institution || !studyCity || !["mbo", "hbo", "wo"].includes(level)) {
     return json({ error: "invalid_application", message: "Controleer uw onderwijsinstelling, opleidingsniveau en studiestad." }, 400);
   }
+  if (upload && !env.STUDENT_PROOFS) return json({ error: "proof_storage_unavailable" }, 503);
+  const file = form.get("proof");
+  const mime = proofMime(file);
+  if (upload && (form.get("proofConsent") !== "true" || !mime || !await validProofBytes(file,mime))) return json({error:"invalid_proof"}, 400);
+  if (!upload && file) return json({error:"unexpected_proof"}, 400);
   const existing = await env.DB.prepare(`SELECT status FROM student_applications WHERE user_id = ? ORDER BY submitted_at DESC LIMIT 1`).bind(user.id).first();
   if (existing?.status === "pending") return json({ error: "application_exists" }, 409);
   if (existing?.status === "approved") {
@@ -1621,11 +1653,65 @@ async function submitStudentApplication(request, env) {
 
   const id = crypto.randomUUID();
   const submittedAt = nowIso();
+  if (upload) return saveUploadedProof(env, { id, user, institution, level, studyCity, file, mime, submittedAt });
   try {
     await env.DB.prepare(`INSERT INTO student_applications (id, user_id, institution, education_level, study_city, eligibility_method, proof_object_key, proof_mime_type, proof_consent_version, proof_consent_at, status, submitted_at)
       VALUES (?, ?, ?, ?, ?, 'verified-school-email', NULL, 'application/pdf', 'not-applicable-school-email-v1', ?, 'pending', ?)`)
       .bind(id, user.id, institution, level, studyCity, submittedAt, submittedAt).run();
   } catch {
+    return json({ error: "application_unavailable" }, 503);
+  }
+  return json({ ok: true, status: "pending" }, 202);
+}
+
+async function saveUploadedProof(env, { id, user, institution, level, studyCity, file, mime, submittedAt }) {
+  const objectKey = `student-proofs/${user.id}/${id}`;
+  let reserved = false;
+  try {
+    reserved = await reserveProofObject(env, objectKey, file.size);
+  } catch {
+    return json({ error: "proof_storage_unavailable" }, 503);
+  }
+  if (!reserved) return json({ error: "proof_storage_capacity_reached" }, 429);
+  try {
+    if (!await allowProofOperation(env, "put")) {
+      await releaseProofObject(env, objectKey);
+      return json({ error: "proof_storage_usage_limit_reached" }, 429);
+    }
+  } catch {
+    try { await releaseProofObject(env, objectKey); } catch { /* Keep a conservative reservation if D1 cannot release it. */ }
+    return json({ error: "proof_storage_unavailable" }, 503);
+  }
+  try {
+    // Persist a cleanup handle before R2 can receive any bytes. If the later
+    // D1 transaction fails and immediate R2 deletion also fails, cron can retry.
+    await env.DB.prepare(`INSERT INTO student_proof_cleanup_queue (object_key, application_id, queued_at) VALUES (?, ?, ?)`).bind(objectKey, id, submittedAt).run();
+    await env.STUDENT_PROOFS.put(objectKey, file.stream(), { httpMetadata: { contentType: mime, cacheControl: "private, no-store" } });
+    await env.DB.prepare(`UPDATE student_proof_cleanup_queue SET queued_at=? WHERE object_key=?`).bind(nowIso(), objectKey).run();
+    const results = await env.DB.batch([
+      env.DB.prepare(`INSERT INTO student_applications (id, user_id, institution, education_level, study_city, eligibility_method, proof_object_key, proof_mime_type, proof_consent_version, proof_consent_at, status, submitted_at)
+        SELECT ?, ?, ?, ?, ?, 'uploaded-proof', ?, ?, ?, ?, 'pending', ?
+        WHERE EXISTS (SELECT 1 FROM student_proof_cleanup_queue WHERE object_key=?)`)
+        .bind(id, user.id, institution, level, studyCity, objectKey, mime, PROOF_CONSENT_VERSION, submittedAt, submittedAt, objectKey),
+      env.DB.prepare(`INSERT INTO consent_events (id, user_id, consent_type, granted, text_version, source, recorded_at)
+        SELECT ?, ?, 'student_proof_processing', 1, ?, 'student-application', ?
+        WHERE EXISTS (SELECT 1 FROM student_applications WHERE id=? AND user_id=?)`)
+        .bind(crypto.randomUUID(), user.id, PROOF_CONSENT_VERSION, submittedAt, id, user.id),
+      env.DB.prepare(`DELETE FROM student_proof_cleanup_queue WHERE object_key=?`).bind(objectKey),
+    ]);
+    if (Number(results?.[0]?.meta?.changes || 0) !== 1) throw new Error("proof cleanup reservation expired");
+  } catch {
+    try {
+      const linked = await env.DB.prepare(`SELECT 1 AS present FROM student_applications WHERE id=? AND proof_object_key=?`).bind(id, objectKey).first();
+      // A D1 batch can have committed even if its response was lost. Never
+      // delete an object that is already referenced by a saved application.
+      if (linked) return json({ ok: true, status: "pending" }, 202);
+      await deleteStudentProof(env, objectKey);
+      await env.DB.prepare(`DELETE FROM student_proof_cleanup_queue WHERE object_key=?`).bind(objectKey).run();
+    } catch {
+      // If D1 is unavailable, keep the queue row and object rather than risk
+      // deleting a proof whose application transaction may have committed.
+    }
     return json({ error: "application_unavailable" }, 503);
   }
   return json({ ok: true, status: "pending" }, 202);
@@ -2385,6 +2471,7 @@ const memberWorker = {
     const securityStudentMatch = path.match(/^\/api\/members\/admin\/security\/([0-9a-f-]{36})$/i);
     if (securityStudentMatch && method === "GET") return adminSecurityStudent(request, env, securityStudentMatch[1]);
     if (securityStudentMatch && method === "POST") return adminSecurityAction(request, env, securityStudentMatch[1]);
+    if (path === "/api/members/admin/email-addresses" && method === "POST") return adminEmailAddresses(request, env);
     if (path === "/api/members/admin/customers" && method === "GET") return adminCustomers(request, env);
     const customerStatusMatch = path.match(/^\/api\/members\/admin\/customers\/([0-9a-f-]{36})\/status$/i);
     if (customerStatusMatch && method === "POST") return adminCustomerStatus(request, env, customerStatusMatch[1]);

@@ -135,18 +135,11 @@ Gezichts- en identiteitsfoto's zijn bewust niet geïmplementeerd.
 - De formele bewaartermijn voor aanvraagmetadata en procedure voor inzage/verwijdering.
 - De uiteindelijke privacyverklaring, verantwoordelijke beoordelaars en geverifieerde afzender.
 
-Een goedgekeurde pas geeft 10% korting op het hele assortiment en is één studiejaar geldig; daarna kan de student via een opnieuw bevestigde schoolmail verlenging aanvragen.
+Een goedgekeurde pas geeft 10% korting op het hele assortiment en is één studiejaar geldig; daarna kan de student verlenging aanvragen met schoolmail of inschrijvingsbewijs.
 
-## Lokale voortgang 21 oktober 2026
+## Studentenaanmelding en beheer (9 november 2026)
 
-De accountregistratie vraagt persoonlijk e-mailadres + schoolmail + wachtwoord.
-Twee afzonderlijke 6-cijferige codes moeten binnen 10 minuten worden ingevoerd;
-codes worden HMAC-gehasht, zijn eenmalig en rate limits begrenzen raden. De
-studentenaanvraag endpoint eist server-side dat beide adressen bevestigd zijn.
-Migraties 0006-0008 horen bij deze wijzigingen. De volledige lokale
-migratiereeks loopt inmiddels door t/m 0017. Preview en productie zijn
-gecontroleerd t/m 0017; pas de volledige reeks ook toe op iedere nieuw
-aangemaakte testomgeving.
+De studentenregistratie vraagt het persoonlijke e-mailadres en een wachtwoord. Bij de schoolmailroute bevestigt de student twee codes. Zonder schoolmail bevestigt de student één persoonlijke code en uploadt daarna een actueel inschrijvingsbewijs (PDF, JPG of PNG, maximaal 8 MB). Beide routes vragen onderwijsinstelling, opleidingsniveau en studiestad. Bewijsuploads gebruiken de afgeschermde R2-bucket, opslaglimieten en verwijderwachtrij. Alleen apart gegeven reclametoestemming geldt voor het persoonlijke adres. Het beheeronderdeel E-mailadressen toont de account- en nieuwsbriefadressen met hun toestemmingsstatus. Migraties tot en met 0017 zijn vereist. De verificatiecodes zijn eenmalig, worden HMAC-gehasht en verlopen na tien minuten.
 
 De klanteninschrijving bewaart eerst tijdelijk een e-maildraft, daarna kiest
 de klant regio en geeft apart expliciet toestemming. Alleen dubbelbevestigde

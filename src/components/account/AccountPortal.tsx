@@ -23,6 +23,7 @@ type StudentApplication = {
 type MemberData = {
   user: Member | null;
   isAdmin?: boolean;
+  proofMethod?: "document" | "school-email";
   studentApplication?: StudentApplication | null;
   securityVerification?: { id: string; method: "email_code" | "student_status" | "in_person"; reason: string; pass_policy: "keep_active" | "suspend"; expires_at?: string | null } | null;
   discountPass?: { displayCode: string; issuedAt: string; expiresAt: string | null } | null;
@@ -49,10 +50,20 @@ const translations = {
     password: "Wachtwoord (minimaal 12 tekens)",
     personalCode: "Code uit uw persoonlijke e-mail",
     schoolCode: "Code uit uw schoolmail",
-    verifyCodes: "E-mailadressen bevestigen",
+    verifyCodes: "E-mail bevestigen",
     verificationHelp: "Vul beide codes in. Ze zijn 10 minuten geldig. Kijk ook in Ongewenste e-mail als u geen bericht ziet.",
     invalidCodes: "De codes zijn onjuist of verlopen. Vraag nieuwe codes aan en probeer opnieuw.",
-    optionalOffers: "Ja, ik wil aanbiedingen per e-mail ontvangen, soms ook voor studentengroepen of verenigingen. Mijn inschrijving wordt direct actief en ik kan me via iedere e-mail afmelden.",
+    method: "Hoe toont u uw inschrijving aan?",
+    byEmail: "Met mijn schoolmail",
+    byDocument: "Ik heb geen schoolmail en gebruik een inschrijvingsbewijs",
+    uploadLater: "Na bevestiging van uw privé-e-mail uploadt u het bewijs in uw account.",
+    personalHelp: "Vul de code uit uw privé-e-mail in. Deze is 10 minuten geldig.",
+    proof: "Inschrijvingsbewijs",
+    proofHelp: "Upload een actueel inschrijvingsbewijs van uw opleiding of DUO. Laat alleen uw naam, onderwijsinstelling en studiejaar of inschrijfperiode zichtbaar. Maak BSN, adres, bedragen en andere gegevens onleesbaar.",
+    file: "Bestand (PDF, JPG of PNG, maximaal 8 MB)",
+    proofConsent: "Ik geef toestemming om dit bewijs voor mijn aanvraag te beoordelen. Na de beoordeling wordt het verwijderd.",
+    badFile: "Kies een geldig PDF-, JPG- of PNG-bestand van maximaal 8 MB en geef toestemming voor de beoordeling.",
+    optionalOffers: "Ja, ik wil kortingsbonnen per e-mail op mijn privé-e-mailadres ontvangen. Dit is vrijwillig. Afmelden kan in elke kortingsmail.",
     send: "Verder",
     logout: "Uitloggen",
     reset: "Wachtwoord vergeten? Stuur een resetlink",
@@ -60,7 +71,7 @@ const translations = {
     magicSent: "Als er een bevestigd account bij dit adres hoort, ontvangt u een eenmalige inloglink.",
     resend: "Nieuwe verificatiecodes sturen",
     studentTitle: "Studentenkorting aanvragen",
-    studentInfo: "De 10% korting geldt voor Nederlandse en internationale studenten met een bevestigde schoolmail die een MBO-, HBO- of WO-opleiding volgen; middelbare school is uitgesloten. Na goedkeuring geldt de korting voor het hele assortiment. De korting is niet te combineren met andere acties. De pas is één studiejaar geldig.",
+    studentInfo: "De 10% korting geldt voor Nederlandse en internationale studenten die een MBO-, HBO- of WO-opleiding volgen; middelbare school is uitgesloten. Na goedkeuring geldt de korting voor het hele assortiment. De korting is niet te combineren met andere acties. De pas is één studiejaar geldig.",
     institution: "Onderwijsinstelling",
     studyCity: "Stad van uw opleiding",
     level: "Opleidingsniveau",
@@ -70,7 +81,7 @@ const translations = {
     apply: "Aanvraag indienen",
     pending: "Uw aanvraag wacht op beoordeling. U krijgt uw pas zodra deze is goedgekeurd.",
     approved: "Uw aanvraag is goedgekeurd. Toon deze pas bij de kassa.",
-    expired: "Uw studentenpas is verlopen. U kunt met uw bevestigde schoolmail opnieuw een aanvraag indienen.",
+    expired: "Uw studentenpas is verlopen. U kunt met een actueel studentenbewijs opnieuw een aanvraag indienen.",
     suspended: "Uw studentenpas is tijdelijk geblokkeerd en geeft nu geen recht op korting. Volg een eventuele controle hierboven of neem contact op met de winkel. Een nieuwe aanvraag is niet nodig.",
     rejected: "Uw vorige aanvraag is afgewezen. U kunt opnieuw aanvragen.",
     pass: "Digitale studentenpas",
@@ -111,17 +122,27 @@ const translations = {
     password: "Password (at least 12 characters)",
     personalCode: "Code from your personal email",
     schoolCode: "Code from your school email",
-    verifyCodes: "Verify both email addresses",
+    verifyCodes: "Verify your email",
     verificationHelp: "Enter both codes. They are valid for 10 minutes. Check your spam folder if you do not see the messages.",
     invalidCodes: "The codes are incorrect or expired. Request new codes and try again.",
-    optionalOffers: "Yes, I would like to receive email offers, occasionally including offers for student groups or associations. My subscription starts immediately and I can unsubscribe from every email.",
+    method: "How will you prove enrolment?",
+    byEmail: "With my school email",
+    byDocument: "I have no school email and will use proof of enrolment",
+    uploadLater: "After verifying your personal email, upload the document in your account.",
+    personalHelp: "Enter the code sent to your personal email. It is valid for 10 minutes.",
+    proof: "Proof of enrolment",
+    proofHelp: "Upload a current enrolment document from your institution or DUO. Show only your name, institution and academic year or enrolment period. Hide your BSN, address, financial details and other information.",
+    file: "File (PDF, JPG or PNG, up to 8 MB)",
+    proofConsent: "I agree to this document being reviewed for my application. It will be deleted after review.",
+    badFile: "Choose a valid PDF, JPG or PNG up to 8 MB and consent to review.",
+    optionalOffers: "Yes, send discount vouchers to my personal email. This is optional. I can unsubscribe in any offers email.",
     send: "Continue",
     logout: "Log out",
     reset: "Forgot your password? Send a reset link",
     magicLogin: "Sign in by email without a password", magicSent: "If a verified account exists for this address, you will receive a one-time sign-in link.",
     resend: "Resend verification codes",
     studentTitle: "Apply for the student discount",
-    studentInfo: "The 10% discount is for Dutch and international students with a verified school email who attend an MBO, HBO or university programme; secondary school is not eligible. After approval, it applies to the entire range and cannot be combined with other offers. The pass is valid for one academic year.",
+    studentInfo: "The 10% discount is for Dutch and international students who attend an MBO, HBO or university programme; secondary school is not eligible. After approval, it applies to the entire range and cannot be combined with other offers. The pass is valid for one academic year.",
     institution: "Educational institution",
     studyCity: "City where you study",
     level: "Education level",
@@ -131,7 +152,7 @@ const translations = {
     apply: "Submit application",
     pending: "Your application is awaiting review. Your pass will appear after approval.",
     approved: "Your application is approved. Show this pass at the counter.",
-    expired: "Your student pass has expired. You can apply again using your verified school email.",
+    expired: "Your student pass has expired. You can apply again with current proof of enrolment.",
     suspended: "Your student pass is temporarily blocked and cannot be used for a discount. Follow any verification steps above or contact the shop. You do not need to submit a new application.",
     rejected: "Your previous application was declined. You can apply again.",
     pass: "Digital student pass",
@@ -167,17 +188,27 @@ const translations = {
     password: "Passwort (mindestens 12 Zeichen)",
     personalCode: "Code aus Ihrer privaten E-Mail",
     schoolCode: "Code aus Ihrer Schul-E-Mail",
-    verifyCodes: "Beide E-Mail-Adressen bestätigen",
+    verifyCodes: "E-Mail bestätigen",
     verificationHelp: "Geben Sie beide Codes ein. Sie sind 10 Minuten gültig. Prüfen Sie auch den Spamordner, falls die Nachrichten fehlen.",
     invalidCodes: "Die Codes sind falsch oder abgelaufen. Fordern Sie neue Codes an und versuchen Sie es erneut.",
-    optionalOffers: "Ja, ich möchte E-Mail-Angebote erhalten, gelegentlich auch für Studierendengruppen oder -vereine. Die Anmeldung wird sofort aktiv; ich kann mich über jede E-Mail abmelden.",
+    method: "Wie weisen Sie Ihre Einschreibung nach?",
+    byEmail: "Mit meiner Hochschul-E-Mail",
+    byDocument: "Ich habe keine Hochschul-E-Mail und nutze einen Studiennachweis",
+    uploadLater: "Nach Bestätigung Ihrer privaten E-Mail laden Sie den Nachweis im Konto hoch.",
+    personalHelp: "Geben Sie den Code aus Ihrer privaten E-Mail ein. Er ist 10 Minuten gültig.",
+    proof: "Immatrikulationsbescheinigung",
+    proofHelp: "Laden Sie einen aktuellen Nachweis Ihrer Einrichtung oder von DUO hoch. Sichtbar sein sollen nur Name, Einrichtung und Studienjahr oder Einschreibezeitraum. Schwärzen Sie BSN, Anschrift, Beträge und andere Angaben.",
+    file: "Datei (PDF, JPG oder PNG, maximal 8 MB)",
+    proofConsent: "Ich stimme der Prüfung dieses Nachweises für meinen Antrag zu. Nach der Prüfung wird er gelöscht.",
+    badFile: "Wählen Sie eine gültige PDF-, JPG- oder PNG-Datei bis 8 MB und stimmen Sie der Prüfung zu.",
+    optionalOffers: "Ja, ich möchte Rabattgutscheine an meine private E-Mail-Adresse erhalten. Dies ist freiwillig. Ich kann mich in jeder Angebotsmail abmelden.",
     send: "Weiter",
     logout: "Abmelden",
     reset: "Passwort vergessen? Link zum Zurücksetzen senden",
     magicLogin: "Ohne Passwort per E-Mail anmelden", magicSent: "Wenn für diese Adresse ein bestätigtes Konto besteht, erhalten Sie einen einmaligen Anmeldelink.",
     resend: "Neue Bestätigungscodes senden",
     studentTitle: "Studentenrabatt beantragen",
-    studentInfo: "Der Rabatt von 10 % gilt für niederländische und internationale Studierende mit bestätigter Schul-E-Mail in einer MBO-, HBO- oder Hochschulausbildung; weiterführende Schulen sind ausgeschlossen. Nach Freigabe gilt er für das gesamte Sortiment und ist nicht mit anderen Aktionen kombinierbar. Der Pass ist ein Studienjahr gültig.",
+    studentInfo: "Der Rabatt von 10 % gilt für niederländische und internationale Studierende in einer MBO-, HBO- oder Hochschulausbildung; weiterführende Schulen sind ausgeschlossen. Nach Freigabe gilt er für das gesamte Sortiment und ist nicht mit anderen Aktionen kombinierbar. Der Pass ist ein Studienjahr gültig.",
     institution: "Bildungseinrichtung",
     studyCity: "Studienort",
     level: "Ausbildungsniveau",
@@ -187,7 +218,7 @@ const translations = {
     apply: "Antrag einreichen",
     pending: "Ihr Antrag wird geprüft. Nach der Freigabe erscheint Ihr Rabattpass.",
     approved: "Ihr Antrag wurde genehmigt. Zeigen Sie diesen Pass an der Theke vor.",
-    expired: "Ihr Studentenpass ist abgelaufen. Sie können mit Ihrer bestätigten Schul-E-Mail erneut einen Antrag stellen.",
+    expired: "Ihr Studentenpass ist abgelaufen. Sie können mit aktuellem Studiennachweis erneut einen Antrag stellen.",
     suspended: "Ihr Studentenpass ist vorübergehend gesperrt und kann derzeit nicht für einen Rabatt genutzt werden. Folgen Sie gegebenenfalls der Prüfung oben oder kontaktieren Sie das Geschäft. Ein neuer Antrag ist nicht nötig.",
     rejected: "Ihr vorheriger Antrag wurde abgelehnt. Sie können erneut beantragen.",
     pass: "Digitaler Studentenpass",
@@ -222,6 +253,7 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
+  const [documentRoute,setDocumentRoute] = useState(false);
   const [verificationPending, setVerificationPending] = useState(false);
   const [verificationEmail, setVerificationEmail] = useState("");
   const [dynamicQr, setDynamicQr] = useState("");
@@ -293,6 +325,7 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
       if (mode === "register") {
         body.firstName = fields.get("firstName");
         body.lastName = fields.get("lastName");
+        body.proofMethod = documentRoute ? "document" : "school-email";
         body.schoolEmail = fields.get("schoolEmail");
         body.marketingConsent = fields.get("marketingConsent") === "on";
       }
@@ -315,7 +348,7 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
       }
       if (mode === "register") {
         setSuccess(true);
-        setMessage(t.accountCreated);
+        setMessage(documentRoute ? t.personalHelp : t.accountCreated);
         setVerificationEmail(String(fields.get("email") || "").trim().toLowerCase());
         setVerificationPending(true);
         setMode("login");
@@ -400,8 +433,10 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
     try {
       const response = await fetch("/api/members/verify/resend", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, locale: language }) });
       if (!response.ok) throw new Error("verification-unavailable");
+      setVerificationEmail(email.trim().toLowerCase());
+      setVerificationPending(true);
       setSuccess(true);
-      setMessage(t.accountCreated);
+      setMessage(documentRoute ? t.personalHelp : t.accountCreated);
     } catch {
       setSuccess(false);
       setMessage(t.genericError);
@@ -426,8 +461,14 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
     setBusy(true);
     setMessage("");
     try {
+      const proof = fields.get("proof");
+      if (proof instanceof File && proof.size > 8 * 1024 * 1024) { setSuccess(false); setMessage(t.badFile); return; }
       const response = await fetch("/api/members/student-application", { method: "POST", body: fields, credentials: "same-origin" });
-      if (!response.ok) throw new Error("application-failed");
+      if (!response.ok) {
+        const {error} = await response.json().catch(() => ({}));
+        if (error === "invalid_proof" || error === "file_too_large") {setSuccess(false); setMessage(t.badFile); return;}
+        throw new Error("application-failed");
+      }
       await refresh();
       form.reset();
       setSuccess(true);
@@ -460,7 +501,7 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
               <h2 className="font-display text-2xl font-bold text-slate-900">{language === "nl" ? "Beheer" : language === "de" ? "Verwaltung" : "Administration"}</h2>
               <div className="mt-4 flex flex-wrap gap-x-6 gap-y-3">
                 <a href={`/${language}/beheer/studenten`} className="font-semibold text-sky-800 underline underline-offset-4">{language === "nl" ? "Studentaanvragen" : language === "de" ? "Studentenanträge" : "Student applications"} →</a>
-                <a href={`/${language}/beheer/emaildeals`} className="font-semibold text-sky-800 underline underline-offset-4">{language === "nl" ? "E-mailcampagnes" : language === "de" ? "E-Mail-Kampagnen" : "Email campaigns"} →</a>
+                <a href={`/${language}/beheer/emailadressen`} className="font-semibold text-sky-800 underline underline-offset-4">{language === "nl" ? "E-mailadressen" : language === "de" ? "E-Mail-Adressen" : "Email addresses"} →</a>
                 <a href={`/${language}/beheer/klanten`} className="font-semibold text-sky-800 underline underline-offset-4">{language === "nl" ? "Klantaccounts" : language === "de" ? "Kundenkonten" : "Customer accounts"} →</a>
                 <a href={`/${language}/beheer/overzicht`} className="font-semibold text-sky-800 underline underline-offset-4">{language === "nl" ? "Website-statistieken" : language === "de" ? "Website-Statistiken" : "Website analytics"} →</a>
                 <a href={`/${language}/beheer/beveiliging`} className="font-semibold text-sky-800 underline underline-offset-4">{language === "nl" ? "Studentenpas Beveiliging" : language === "de" ? "Studentenpass-Sicherheit" : "Student pass security"} →</a>
@@ -520,6 +561,11 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
                 <label className="block text-sm font-medium">{t.institution}<input name="institution" required maxLength={180} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>
                 <label className="block text-sm font-medium">{t.studyCity}<input name="studyCity" required maxLength={120} autoComplete="address-level2" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>
                 <label className="block text-sm font-medium">{t.level}<select name="educationLevel" required defaultValue="" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5"><option value="" disabled>{t.level}</option><option value="mbo">{t.mbo}</option><option value="hbo">{t.hbo}</option><option value="wo">{t.wo}</option></select></label>
+                {data.proofMethod === "document" && <fieldset className="space-y-3 rounded-xl bg-sky-50 p-4">
+                  <legend className="font-semibold">{t.proof}</legend><p className="text-sm">{t.proofHelp}</p>
+                  <label className="block text-sm font-medium">{t.file}<input type="file" name="proof" accept="application/pdf,image/jpeg,image/png" required className="mt-2 block w-full"/></label>
+                  <label className="flex gap-2 text-sm"><input type="checkbox" name="proofConsent" value="true" required/>{t.proofConsent}</label>
+                </fieldset>}
                 <button type="submit" disabled={busy} className="knop knop-navy disabled:opacity-60">{t.apply}</button>
               </form>
             )}
@@ -527,10 +573,11 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
         ) : (
           verificationPending ? <section className="mt-10 max-w-xl rounded-2xl border border-sky-200 bg-white p-6 shadow-sm sm:p-8">
             <h2 className="font-display text-2xl font-bold text-slate-900">{t.verifyCodes}</h2>
-            <p className="mt-3 text-sm leading-relaxed text-slate-700">{t.verificationHelp}<br /><span className="font-semibold">{verificationEmail}</span></p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-700">{documentRoute ? t.personalHelp : t.verificationHelp}<br /><span className="font-semibold">{verificationEmail}</span></p>
+            <label className="mt-4 flex gap-2"><input type="checkbox" checked={documentRoute} onChange={e=>setDocumentRoute(e.target.checked)}/>{t.byDocument}</label>
             <form onSubmit={verifyBothAddresses} className="mt-6 space-y-4">
               <label className="block text-sm font-medium">{t.personalCode}<input name="personalCode" type="text" inputMode="numeric" pattern="[0-9]{6}" autoComplete="one-time-code" required maxLength={6} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5 tracking-[.3em]" /></label>
-              <label className="block text-sm font-medium">{t.schoolCode}<input name="schoolCode" type="text" inputMode="numeric" pattern="[0-9]{6}" autoComplete="one-time-code" required maxLength={6} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5 tracking-[.3em]" /></label>
+              {!documentRoute && <label className="block text-sm font-medium">{t.schoolCode}<input name="schoolCode" type="text" inputMode="numeric" pattern="[0-9]{6}" autoComplete="one-time-code" required maxLength={6} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5 tracking-[.3em]" /></label>}
               <button type="submit" disabled={busy} className="knop knop-navy w-full disabled:opacity-60">{busy ? "…" : t.verifyCodes}</button>
             </form>
             <form onSubmit={resendVerification} className="mt-4">
@@ -547,9 +594,15 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
               <form onSubmit={submitAuth} className="space-y-4">
                 {mode === "register" && <div className="grid gap-4 sm:grid-cols-2"><label className="block text-sm font-medium">{t.firstName}<input name="firstName" required minLength={1} maxLength={60} autoComplete="given-name" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label><label className="block text-sm font-medium">{t.lastName}<input name="lastName" required minLength={1} maxLength={80} autoComplete="family-name" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label></div>}
                 <label className="block text-sm font-medium">{t.email}<input name="email" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>
-                {mode === "register" && <label className="block text-sm font-medium">{t.schoolEmail}<input name="schoolEmail" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>}
+                {mode === "register" && <label className="block text-sm font-medium">{t.method}
+                  <select className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" value={documentRoute ? "document" : "school-email"} onChange={e=>setDocumentRoute(e.target.value === "document")}>
+                    <option value="school-email">{t.byEmail}</option><option value="document">{t.byDocument}</option>
+                  </select>
+                </label>}
+                {mode === "register" && documentRoute && <p className="text-sm">{t.uploadLater}</p>}
+                {mode === "register" && !documentRoute && <label className="block text-sm font-medium">{t.schoolEmail}<input name="schoolEmail" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>}
                 <label className="block text-sm font-medium">{t.password}<input name="password" type="password" required minLength={12} maxLength={128} autoComplete={mode === "register" ? "new-password" : "current-password"} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>
-                {mode === "register" && <label className="flex items-start gap-2 text-sm leading-relaxed"><input type="checkbox" name="marketingConsent" className="mt-1 size-4 shrink-0 accent-sky-700" /><span>{t.optionalOffers}</span></label>}
+                {mode === "register" && <label className="flex items-start gap-2 text-sm leading-relaxed"><input type="checkbox" name="marketingConsent" className="mt-1 size-4 shrink-0 accent-sky-700" /><span>{t.optionalOffers} <a className="underline" href={`/${language}/privacyverklaring#emailaanbiedingen`}>{t.privacy}</a></span></label>}
                 <button type="submit" disabled={busy} className="knop knop-navy w-full disabled:opacity-60">{busy ? (language === "en" ? "Please wait…" : language === "de" ? "Bitte warten…" : "Even geduld…") : mode === "login" ? t.login : t.register}</button>
               </form>
               {mode === "login" && <details className="mt-5"><summary className="text-sm font-semibold text-sky-800">{t.magicLogin}</summary><form onSubmit={requestMagicLogin} className="mt-5 space-y-2"><label className="block text-xs font-medium text-slate-600">{t.email}<input name="email" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2" /></label><button disabled={busy} className="text-sm font-semibold text-sky-800 underline underline-offset-4">{t.magicLogin}</button></form></details>}
