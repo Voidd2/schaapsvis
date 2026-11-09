@@ -1,4 +1,4 @@
-import { PlatterInquiry } from "@/components/PlatterInquiry";
+import { PlatterInquiry } from "@/components/catalog/CatalogEnhancements";
 import { inquiryText } from "@/lib/platter-inquiry";
 import { platterPresentation } from "@/lib/platter-presentation";
 import { connection } from "next/server";

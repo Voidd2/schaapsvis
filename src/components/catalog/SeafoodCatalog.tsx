@@ -8,12 +8,10 @@ import { catalogText } from "@/lib/catalog-copy";
 import { platterPhotoAlt, platterPrice, platterPresentation } from "@/lib/platter-presentation";
 import { isDeliTrio } from "@/lib/deli-trio";
 import { DeliTrio, ProductQuantity, LegacyCatalogSelection } from "./RequestControls";
-import { CatalogPhoto } from "./CatalogPhoto";
+import { CatalogPhoto, GiftRequest, GourmetRequest } from "./CatalogEnhancements";
 
 import { giftCopy } from "@/lib/gift-copy";
 import { giftRequestCopy } from "@/lib/gift-request";
-import { GiftRequest } from "./GiftRequest";
-import { GourmetRequest } from "./GourmetRequest";
 import { gourmetPortionText } from "@/lib/gourmet-pricing";
 
 type Props = { locale: string; festive?: boolean };

@@ -1,14 +1,12 @@
 import { PlatterPhotoNote } from "@/components/PlatterPhotoNote";
 import { platterPhotoAlt, platterPresentation, platterPrice } from "@/lib/platter-presentation";
-import { Suspense } from "react";
 import { connection } from "next/server";
-import { PlatterNavigation } from "@/components/PlatterNavigation";
 import { platterFamily, platterLabels, platterOverviewHref, platterDetailHref } from "@/lib/platter-families";
 import { catalogProduct } from "@/lib/seafood-catalog";
 import { isDeliTrio } from "@/lib/deli-trio";
 import { DeliTrio, ProductQuantity, CatalogBackLink } from "@/components/catalog/RequestControls";
 import { CatalogHelp } from "@/components/catalog/CatalogHelp";
-import { GourmetRequest } from "@/components/catalog/GourmetRequest";
+import { GourmetRequest } from "@/components/catalog/CatalogEnhancements";
 import { gourmetPortionText } from "@/lib/gourmet-pricing";
 import type { Metadata } from "next";
 import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
@@ -118,7 +116,7 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
     ])]} />
 
     {origin && <div className="section-wrap pt-6"><CatalogBackLink locale={locale} origin={origin} /></div>}
-    {family && !origin && <div className="section-wrap pt-6"><Suspense fallback={<Link className="platter-back-link" href={platterOverviewHref(locale, slug, selection.toString())}>{platterLabels[taal].back}</Link>}><PlatterNavigation locale={taal} slug={slug} mode="back" /></Suspense></div>}
+    {family && !origin && <div className="section-wrap pt-6"><Link className="platter-back-link" href={platterOverviewHref(locale, slug, selection.toString())}>{platterLabels[taal].back}</Link></div>}
     <section className="bg-[#f7f3ec]">
       <div className="section-wrap product-detail-grid">
         <figure className="product-detail-photo"><div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white shadow-sm">

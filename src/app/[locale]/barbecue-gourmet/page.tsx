@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { GourmetRequest } from "@/components/catalog/GourmetRequest";
+import { GourmetRequest } from "@/components/catalog/CatalogEnhancements";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
