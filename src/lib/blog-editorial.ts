@@ -46,7 +46,7 @@ export const NIEUWE_ARTIKELEN: BlogPost[] = [
     "gerelateerdeLinks": [
       {
         "label": "Onze VÅRLAKS-zalm",
-        "href": "/assortiment/varlaks-zalm"
+        "href": "/varlaks#film"
       },
       {
         "label": "Openingstijden en route",

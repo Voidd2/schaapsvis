@@ -310,7 +310,7 @@ export const counterGuides: BlogPost[] = [
       },
       {
         "label": "varlaks zalm",
-        "href": "/assortiment/varlaks-zalm"
+        "href": "/varlaks#film"
       }
     ],
     "seoKeywords": "Welke stukjes vis houden vorm in vissoep?"

@@ -57,7 +57,7 @@ export const BEELD = {
   winkelGevel: {
     waar: "Homepage (de grote foto bovenaan) en Bezoek ons",
     wat: "De winkel van buiten, met de gevel en het uithangbord herkenbaar. Liefst met daglicht en een stukje Herenstraat erbij.",
-    bestand: "",
+    bestand: "/images/schaaps/winkel-herenstraat.webp",
     alt: "De winkel van Schaap's Vishandel aan de Herenstraat 48 in Leiden",
     bijschrift: "Onze winkel · Herenstraat 48, Leiden",
     vertalingen: {
@@ -78,8 +78,8 @@ export const BEELD = {
   achterDeToonbank: {
     waar: "Contact, naast het telefoonnummer",
     wat: "Iemand van de zaak achter de toonbank, gewoon aan het werk. Geen poseren. Dit maakt bellen persoonlijker.",
-    bestand: "",
-    alt: "Achter de toonbank bij Schaap's Vishandel in Leiden",
+    bestand: "/images/schaaps/toonbank-marktkraam.webp",
+    alt: "Onze viskraam met de toonbank vol vis op ijs",
     verhouding: "vierkant",
     terugval: "Wij staan klaar",
   },
@@ -93,6 +93,14 @@ export const BEELD = {
   },
 
   /* ── De kramen ─────────────────────────────────────────────────────────── */
+  haringkraam: {
+    waar: "Marktkraam Leiden",
+    wat: "Haringverkoop aan het water op de Leidse markt.",
+    bestand: "/images/schaaps/haringkraam-aan-het-water.webp",
+    alt: "De haringkraam van Schaap’s aan het water op de Leidse markt",
+    verhouding: "liggend",
+    terugval: "Haring op de Leidse markt",
+  },
   marktZaterdag: {
     waar: "Bezoek ons en Marktkramen",
     wat: "De kraam op de Aalmarkt, met de Waag herkenbaar op de achtergrond. Zo weet iemand waar hij moet zoeken.",
@@ -156,16 +164,16 @@ export const BEELD = {
   historie2000: {
     waar: "Ons verhaal, bij 2000–2009",
     wat: "Aldert Haasnoot in de winkel, rond de tijd dat hij de zaak overnam.",
-    bestand: "",
-    alt: "Aldert Haasnoot in de winkel van Schaap's Vishandel in Leiden",
+    bestand: "/images/schaaps/aldert-overname.webp",
+    alt: "Aldert Haasnoot in zijn rode schort achter de toonbank bij de overname in 2009",
     verhouding: "liggend",
     terugval: "2009",
   },
   historieNu: {
     waar: "Ons verhaal, bij Vandaag — actuele teamfoto, nooit als historische foto",
     wat: "De zaak zoals hij er nu bij staat, met het team erbij.",
-    bestand: "",
-    alt: "Het team van Schaap's Vishandel in Leiden vandaag",
+    bestand: "/images/schaaps/schaaps-viskraam.webp",
+    alt: "Klanten voor de viskraam van Schaap’s op de Leidse markt",
     verhouding: "liggend",
     terugval: "Vandaag",
   },

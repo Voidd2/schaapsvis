@@ -66,13 +66,10 @@ if(!/^http:\/\/(localhost|127\.0\.0\.1):/.test(origin))throw new Error('Local se
    assert.ok(await salmonSkewer.locator('a[href^="https://wa.me/31624811678"]').count(),'Salmon skewer is WhatsApp-only '+locale);
    assert.equal(await barbecue.locator('form').count(),0,'Barbecue/gourmet is not an online order form '+locale);
    await page.goto(origin+'/'+locale+'/assortiment',{waitUntil:'networkidle'});
-   const product=page.locator('a[href="/'+locale+'/assortiment/varlaks-zalm"]').first();
-   for(let attempt=0;attempt<5&&!(await product.count());attempt++){
-    const loadMore=page.locator('.collection-load-more');
-    if(!(await loadMore.isVisible()))break;
-    await loadMore.click();
-   }
-   await product.click();await page.waitForURL('**/'+locale+'/assortiment/varlaks-zalm');await page.waitForLoadState('networkidle');
+   await page.locator(".product-directory summary").click();
+   const product=page.locator('.product-directory a[href="/'+locale+'/varlaks#film"]');
+   await product.click();await page.waitForURL('**/'+locale+'/varlaks#film');
+   await page.waitForFunction(()=>{const film=document.getElementById("film")?.getBoundingClientRect();return film && film.top<innerHeight && film.bottom>0;});
    const image=page.locator('main img').first();
    await image.scrollIntoViewIfNeeded();await image.evaluate(img=>img.decode());
    assert.ok(await image.getAttribute('alt'),'Product photo description '+locale);

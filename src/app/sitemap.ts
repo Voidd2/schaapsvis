@@ -95,6 +95,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // ── Productpagina's ──────────────────────────────────────────────────────
   for (const product of products) {
+    if (product.slug === "varlaks-zalm") continue; // The campaign page is its canonical product page.
     const pad = `/assortiment/${product.slug}`;
     for (const taal of LOCALES) {
       regels.push({url: `${basis}/${taal}${pad}`, changeFrequency: "monthly", priority: 0.65, alternates: meertaligeAlternates(pad), images: productPhoto(product) ? [basis + productPhoto(product)!.src] : undefined});

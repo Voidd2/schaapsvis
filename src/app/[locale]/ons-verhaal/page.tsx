@@ -118,7 +118,12 @@ export default async function OnsVerhaalPage({
                   </blockquote>
                 )}
               </div>
-              <Beeld naam={punt.beeld} verhouding="liggend" streep="var(--sand-diep)" />
+              {punt.beeld === "historie2000" ? (
+                <figure>
+                  <Beeld naam={punt.beeld} verhouding="liggend" streep="var(--sand-diep)" />
+                  <figcaption className="mt-2 text-sm">{t("overnameFoto")}</figcaption>
+                </figure>
+              ) : <Beeld naam={punt.beeld} verhouding="liggend" streep="var(--sand-diep)" />}
             </li>
           ))}
         </ol>

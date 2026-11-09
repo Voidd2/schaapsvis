@@ -78,7 +78,7 @@ export const VOORSCHOTEN_ARTIKELEN: BlogPost[] = [
     gerelateerdeRecepten: ["vispakketje-oven-groenten", "zalm-citroen-dille", "gebakken-kabeljauw-botersaus"],
     gerelateerdeLinks: [
       { label: "Visboer Voorschoten: vrijdag bij Hoogvliet", href: "/viswinkel-voorschoten" },
-      { label: "Onze VÅRLAKS-zalm", href: "/assortiment/varlaks-zalm" },
+      { label: "Onze VÅRLAKS-zalm", href: "/varlaks#film" },
       { label: "Hoeveel vis per persoon?", href: "/blog/hoeveel-vis-per-persoon" },
       { label: "Wat is nu in het seizoen?", href: "/viskalender" },
       { label: "Voedingscentrum: veilig kopen en bewaren van vis", href: "https://www.voedingscentrum.nl/nl/thema/5xveilig/vis.aspx" }

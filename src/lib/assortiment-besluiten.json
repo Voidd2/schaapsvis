@@ -71,8 +71,8 @@
   "aliases": {
     "kabeljauw": "/assortiment/kabeljauwfilet",
     "kabeljauwhaas": "/assortiment/kabeljauwfilet",
-    "zalmfilet": "/assortiment/varlaks-zalm",
-    "zalmmoot": "/assortiment/varlaks-zalm",
+    "zalmfilet": "/varlaks#film",
+    "zalmmoot": "/varlaks#film",
     "franse-gambas": "/assortiment/blacktiger-garnalen",
     "tijgergarnalen": "/assortiment/blacktiger-garnalen",
     "zeekraalsalade": "/assortiment/zeekraal",

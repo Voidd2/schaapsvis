@@ -221,7 +221,7 @@ const bestaandePosts: BlogPost[] = [
     ],
     gerelateerdeRecepten: ["varlaks-uit-de-oven"],
     gerelateerdeLinks: [
-      { label: "Het volledige Varlaks-verhaal", href: "/varlaks" },
+      { label: "Het volledige Varlaks-verhaal", href: "/varlaks#film" },
       { label: "Lees meer over viskeurmerken", href: "/biologische-vis" },
     ],
     seoKeywords:
@@ -411,7 +411,7 @@ const bestaandePosts: BlogPost[] = [
     leestijd: "5 min",
     categorie: "Duurzaam",
     fotoUrl: "/images/scene-zalm.svg",
-    fotoAlt: "Zalm als serveersuggestie; controleer het keurmerk op de verpakking van het product",
+    fotoAlt: "Serveersuggestie met zalm",
     secties: [
       {
         alineas: [
@@ -429,13 +429,13 @@ const bestaandePosts: BlogPost[] = [
         kop: "VÅRLAKS-zalm en ASC",
         alineas: [
           "VÅRLAKS vermeldt dat zijn zalm ASC-gecertificeerd is en afkomstig is van familiebedrijven in Noord-Noorwegen. ASC staat voor verantwoorde aquacultuur; het is niet hetzelfde als biologische certificering.",
-          "Wij noemen deze zalm daarom niet biologisch zonder bewijs dat de specifieke levering ook een biologische certificering draagt. Vraag ons naar de actuele herkomst, beschikbaarheid en informatie op de verpakking.",
+          "Wij noemen deze zalm daarom niet biologisch zonder bewijs dat de specifieke levering ook een biologische certificering draagt. Vraag ons naar de actuele herkomst en beschikbaarheid aan de toonbank.",
         ],
       },
       {
         kop: "En de rest van het assortiment?",
         alineas: [
-          "Onze Hollandse garnalen dragen het MSC-keurmerk; VÅRLAKS vermeldt ASC-certificering voor zijn zalm. Een keurmerk geldt alleen voor het product en de levering waarop het is vermeld. Vraag ons wat er op dit moment beschikbaar is en welke informatie bij de verpakking hoort.",
+          "Onze Hollandse garnalen dragen het MSC-keurmerk; VÅRLAKS vermeldt ASC-certificering voor zijn zalm. Een keurmerk geldt alleen voor het product en de levering waarop het is vermeld. Aan de toonbank vertellen we u welke vis er vandaag ligt en waar die vandaan komt.",
         ],
       },
       {
@@ -447,7 +447,7 @@ const bestaandePosts: BlogPost[] = [
     ],
     gerelateerdeLinks: [
       { label: "BIO, ASC en MSC uitgelegd", href: "/biologische-vis" },
-      { label: "Meer over VÅRLAKS-zalm", href: "/varlaks" },
+      { label: "Meer over VÅRLAKS-zalm", href: "/varlaks#film" },
       { label: "Bekijk het assortiment", href: "/assortiment" },
     ],
     seoKeywords:
@@ -504,7 +504,7 @@ const bestaandePosts: BlogPost[] = [
     ],
     gerelateerdeLinks: [
       { label: "BIO, ASC en MSC uitgelegd", href: "/biologische-vis" },
-      { label: "Meer over VÅRLAKS-zalm", href: "/varlaks" },
+      { label: "Meer over VÅRLAKS-zalm", href: "/varlaks#film" },
       { label: "Bekijk het assortiment", href: "/assortiment" },
     ],
     seoKeywords:
@@ -562,7 +562,7 @@ const bestaandePosts: BlogPost[] = [
       },
     ],
     gerelateerdeLinks: [
-      { label: "Het volledige Varlaks-verhaal", href: "/varlaks" },
+      { label: "Het volledige Varlaks-verhaal", href: "/varlaks#film" },
       { label: "Lees meer over viskeurmerken", href: "/biologische-vis" },
     ],
     seoKeywords:

@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
   // remotePatterns meer (geen hotlinks naar concurrenten of stockfoto's).
   async redirects() {
     return [
+      ...["nl", "en", "de"].map(locale => ({
+        source: `/${locale}/assortiment/varlaks-zalm`,
+        destination: `/${locale}/varlaks#film`,
+        permanent: true,
+      })),
       // Only aliases/recipes with a real replacement redirect. Other removed
       // products return a genuine 404 and are excluded from the sitemap.
       ...["nl", "en", "de"].flatMap(locale => Object.entries(assortmentDecisions.aliases).map(([slug,destination]) => ({

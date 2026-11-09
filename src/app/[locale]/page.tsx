@@ -1,3 +1,4 @@
+import { productHref } from "@/lib/product-href";
 import { ShopHours } from "@/components/shared/ShopHours";
 import { PlatterPhotoNote } from "@/components/PlatterPhotoNote";
 import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
@@ -123,7 +124,7 @@ export default async function HomePage({
               if(!photo) return null;
               return (
                 <li key={slug}>
-                  <Link href={`/${locale}/assortiment/${p.slug}`} className="home-product-card block group">
+                  <Link href={productHref(locale, p.slug)} className="home-product-card block group">
                     {/* Geen kader en geen eigen achtergrond: de uitsnede staat
                         al op wit, dus zo lijkt de vis op de pagina te liggen. */}
                     <Image

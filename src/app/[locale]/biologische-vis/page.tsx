@@ -1,3 +1,4 @@
+import { productHref } from "@/lib/product-href";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -86,7 +87,7 @@ export default async function Page({ params }: PageProps) {
                   <p className={styles.kicker}>{item.origin}</p>
                   <h3>{item.title}</h3>
                   <p>{item.body}</p>
-                  <Link className={styles.textLink} href={`/${locale}/assortiment/${item.slug}`}>{item.link}<ArrowRight size={17} aria-hidden="true" /></Link>
+                  <Link className={styles.textLink} href={productHref(locale, item.slug)}>{item.link}<ArrowRight size={17} aria-hidden="true" /></Link>
                   {item.story && <a className={styles.source} href={item.story.href}>{item.story.label} ↗</a>}
                 </div>
               </article>
@@ -99,7 +100,7 @@ export default async function Page({ params }: PageProps) {
         <div>
           <h2>{c.story}</h2>
           <p>{c.storyText}</p>
-          <Link className={styles.textLink} href={`/${locale}/varlaks`}>{c.landing}<ArrowRight size={17} aria-hidden="true" /></Link>
+          <Link className={styles.textLink} href={productHref(locale, "varlaks-zalm")}>{c.landing}<ArrowRight size={17} aria-hidden="true" /></Link>
           <a className={styles.source} href="https://varlaks.no/retail/">{c.supplier} ↗</a>
         </div>
         <VarlaksFilm locale={locale} poster="/images/varlaks/from-egg-to-plate-4.jpg.webp" />
