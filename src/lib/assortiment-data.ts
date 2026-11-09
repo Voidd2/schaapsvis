@@ -838,8 +838,8 @@ export const products: Product[] = [
   },
   {
     "slug": "gebakken-ansjovis",
-    "naam": "Gebakken Ansjovis",
-    "desc": "Kleine gebakken ansjovisjes hebben we vaak in de winkel. Ze zijn op hun best gefrituurd: lekker krokant als hartige snack. Verse ansjovis is een apart product en alleen op aanvraag verkrijgbaar.",
+    "naam": "Gefrituurde ansjovis",
+    "desc": "We frituren de kleine ansjovisjes tot ze een dun, krokant korstje hebben. Lekker uit het bakje, met een kneepje citroen.",
     "categorie": "bereid",
     "ingredienten": "Ansjovis [VIS]. Vraag naar de ingrediënten en allergenen van de bereiding.",
     "bevat": [

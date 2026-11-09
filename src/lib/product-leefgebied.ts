@@ -181,9 +181,9 @@ const RANGE: Record<string, RangeCopy> = {
     de: "Schwertmuscheln sind längliche Muscheln. Die Amerikanische Schwertmuschel (Ensis leei, häufig auch Ensis directus genannt) kommt inzwischen an Teilen der Nordseeküste vor; fragen Sie beim Kauf nach der Herkunft der jeweiligen Partie.",
   },
   "gebakken-ansjovis": {
-    nl: "Ansjovis is een kleine, pelagische zoutwatervis. De Europese ansjovis (Engraulis encrasicolus) komt voor in de noordoostelijke Atlantische Oceaan en de Middellandse Zee; bij dit product gaat het om een gebakken bereiding.",
-    en: "Anchovy is a small pelagic saltwater fish. European anchovy (Engraulis encrasicolus) occurs in the northeastern Atlantic and Mediterranean; this product is served fried.",
-    de: "Sardellen sind kleine, pelagische Meeresfische. Die Europäische Sardelle (Engraulis encrasicolus) kommt im nordöstlichen Atlantik und im Mittelmeer vor; dieses Produkt wird gebraten angeboten.",
+    nl: "De Europese ansjovis (Engraulis encrasicolus) is een kleine zeevis die in scholen zwemt in de noordoostelijke Atlantische Oceaan en de Middellandse Zee.",
+    en: "The European anchovy (Engraulis encrasicolus) is a small sea fish that swims in schools in the northeastern Atlantic and the Mediterranean.",
+    de: "Die Europäische Sardelle (Engraulis encrasicolus) ist ein kleiner Meeresfisch, der im nordöstlichen Atlantik und im Mittelmeer in Schwärmen lebt.",
   },
   zeekraal: {
     nl: "Zeekraal is een zilte kustplant, geen vis. De eetbare scheuten groeien op kwelders en in andere zoute kustgebieden; de herkomst van onze verse zeekraal kan per partij verschillen.",

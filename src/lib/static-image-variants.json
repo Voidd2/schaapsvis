@@ -441,32 +441,6 @@
       }
     ]
   },
-  "/images/assortiment-internet/gebakken-ansjovis.jpg": {
-    "sha256": "f4c923984cd99358dc044d66cf639513e5e3827c499ad75111472e6f08c8803b",
-    "originalBytes": 283260,
-    "variants": [
-      {
-        "src": "/images/responsive/gebakken-ansjovis-f4c923984cd9-320.webp",
-        "width": 320,
-        "bytes": 12898
-      },
-      {
-        "src": "/images/responsive/gebakken-ansjovis-f4c923984cd9-640.webp",
-        "width": 640,
-        "bytes": 35484
-      },
-      {
-        "src": "/images/responsive/gebakken-ansjovis-f4c923984cd9-960.webp",
-        "width": 960,
-        "bytes": 87716
-      },
-      {
-        "src": "/images/responsive/gebakken-ansjovis-f4c923984cd9-1280.webp",
-        "width": 1280,
-        "bytes": 178076
-      }
-    ]
-  },
   "/images/assortiment-internet/tarbot-ecomare.jpg": {
     "sha256": "580776eaba4c8ae20fb643b0d312da7e9ce87b57331a4e9ba68895b0b7b77391",
     "originalBytes": 498741,
@@ -2180,6 +2154,32 @@
         "src": "/images/responsive/gebakken-mosselen-serveervoorbeeld-80bf7c129c3e-1280.webp",
         "width": 1280,
         "bytes": 153564
+      }
+    ]
+  },
+  "/images/editorial/gefrituurde-ansjovis.webp": {
+    "sha256": "43301b8c6386efd40104aa637c97fcc2bd698461d1a55c2aea8cd16c0dfc1548",
+    "originalBytes": 267654,
+    "variants": [
+      {
+        "src": "/images/responsive/gefrituurde-ansjovis-43301b8c6386-320.webp",
+        "width": 320,
+        "bytes": 11942
+      },
+      {
+        "src": "/images/responsive/gefrituurde-ansjovis-43301b8c6386-640.webp",
+        "width": 640,
+        "bytes": 37050
+      },
+      {
+        "src": "/images/responsive/gefrituurde-ansjovis-43301b8c6386-960.webp",
+        "width": 960,
+        "bytes": 70854
+      },
+      {
+        "src": "/images/responsive/gefrituurde-ansjovis-43301b8c6386-1280.webp",
+        "width": 1280,
+        "bytes": 108056
       }
     ]
   },
