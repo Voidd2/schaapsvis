@@ -675,32 +675,6 @@
       }
     ]
   },
-  "/images/dirks/gambas-gekookt.webp": {
-    "sha256": "1c35b0b4c2d923683985d5313b61e73457c576753fd94f21d44c2bcc09f24980",
-    "originalBytes": 94754,
-    "variants": [
-      {
-        "src": "/images/responsive/gambas-gekookt-1c35b0b4c2d9-320.webp",
-        "width": 320,
-        "bytes": 8340
-      },
-      {
-        "src": "/images/responsive/gambas-gekookt-1c35b0b4c2d9-640.webp",
-        "width": 640,
-        "bytes": 21072
-      },
-      {
-        "src": "/images/responsive/gambas-gekookt-1c35b0b4c2d9-960.webp",
-        "width": 960,
-        "bytes": 36394
-      },
-      {
-        "src": "/images/responsive/gambas-gekookt-1c35b0b4c2d9-1280.webp",
-        "width": 1280,
-        "bytes": 50402
-      }
-    ]
-  },
   "/images/dirks/garnalen-kroket.webp": {
     "sha256": "411ea261293bbf60ec2db3057dc064cea52313c013f7e4b30943ee5b9e339715",
     "originalBytes": 186902,
