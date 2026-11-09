@@ -7,20 +7,21 @@ import { useWinkelwagen } from "@/components/winkel/Winkelwagen";
 import { PLATTER_FAMILIES, selectedPlatter, platterDetailHref } from "@/lib/platter-families";
 import { catalogText } from "@/lib/catalog-copy";
 import { cartText } from "@/lib/cart-copy";
-import { catalogProduct, SALAD_REQUESTS, languageIndex } from "@/lib/seafood-catalog";
+import { catalogProduct, languageIndex } from "@/lib/seafood-catalog";
 import { feestdagenProduct, feestdagenBedrag } from "@/lib/feestdagen-producten";
 import { requestMessage, requestTotal } from "@/lib/catalog-request";
 import { useCatalogRequest, updateCatalogRequest } from "@/lib/catalog-request-store";
+import { saladLine } from "@/lib/salad-extras";
 import { whatsappLink } from "@/lib/bedrijf";
 
 export function ProductQuantity({ slug, locale }: { slug: string; locale: string }) {
   const state = useCatalogRequest(), t = catalogText(locale), c = cartText(locale), line = state.items[slug];
-  const product = feestdagenProduct(slug), salad = SALAD_REQUESTS.find(s => s.slug === slug);
+  const product = feestdagenProduct(slug), salad = saladLine(slug);
   const name = product ? catalogProduct(slug, locale).naam : salad!.names[languageIndex(locale)];
   function set(quantity: number) { updateCatalogRequest(current => ({ ...current, items: { ...current.items, [slug]: { quantity } } })); }
   return <div className="request-product-controls" data-request-product={slug}>
     {!line ? <button type="button" className="request-add" disabled={!state.ready} onClick={() => set(1)} aria-label={`${c.add}: ${name}`}>+ {c.add}</button> : <div className="request-quantity" role="group" aria-label={`${t.qty}: ${name}`}>
-      <span>{product?.categorie === "visschalen" ? t.fullPlatters : product?.eenheid === "per 100 gram" ? t.grams : t.qty}</span>
+      <span>{product?.categorie === "visschalen" ? t.fullPlatters : product?.eenheid === "per 100 gram" || salad?.cents != null ? t.grams : t.qty}</span>
       <button type="button" onClick={() => set(line.quantity - 1)} aria-label={`${t.less}: ${name}`}>−</button>
       <output aria-label={`${t.qty}: ${name}`}>{line.quantity}</output>
       <button type="button" disabled={line.quantity >= 99} onClick={() => set(line.quantity + 1)} aria-label={`${t.moreQty}: ${name}`}>+</button>
@@ -49,14 +50,15 @@ export function RequestSummary({ locale }: { locale: string }) {
     {legacy.aantal > 0 && <p className="request-muted mb-5">{locale === "en" ? "You also have an earlier, separate selection." : locale === "de" ? "Sie haben auch eine frühere, separate Auswahl." : "U heeft ook een eerdere, afzonderlijke selectie."} <Link className="underline" href={`/${locale}/bestellen`}>{locale === "en" ? "Review it here" : locale === "de" ? "Hier ansehen" : "Bekijk die hier"} →</Link></p>}
     {!entries.length ? <p className="cart-empty">{t.empty}</p> : <>
       <ul className="cart-lines">{entries.map(([slug, line]) => {
-        const product = feestdagenProduct(slug), localized = product ? catalogProduct(slug, locale) : null, salad = SALAD_REQUESTS.find(s => s.slug === slug);
+        const product = feestdagenProduct(slug), localized = product ? catalogProduct(slug, locale) : null, salad = saladLine(slug);
+        const cents = product?.prijsCents ?? salad?.cents;
         const name = localized?.naam ?? salad!.names[languageIndex(locale)];
         return <li key={slug} data-cart-line={slug}>
           <h3>{name}</h3>
-          <p className="cart-unit">{product ? `${feestdagenBedrag(product.prijsCents, locale)} ${product.categorie === "visschalen" ? t.perPlatter : localized!.eenheid}` : `${t.unknown} · ${t.containers}`}</p>
+          <p className="cart-unit">{product ? `${feestdagenBedrag(product.prijsCents, locale)} ${product.categorie === "visschalen" ? t.perPlatter : localized!.eenheid}` : salad?.cents != null ? `${feestdagenBedrag(salad.cents, locale)} / 100 g` : `${t.unknown} · ${t.containers}`}</p>
           <ProductQuantity slug={slug} locale={locale} />
           <div className="cart-line-bottom"><button type="button" className="cart-remove" aria-label={`${t.remove}: ${name}`} onClick={() => updateCatalogRequest(current => { const items = { ...current.items }; delete items[slug]; return { ...current, items }; })}>{t.remove}</button>
-            <strong data-line-total>{product ? feestdagenBedrag(product.prijsCents * line.quantity, locale) : t.unknown}</strong></div>
+            <strong data-line-total>{cents != null ? feestdagenBedrag(cents * line.quantity, locale) : t.unknown}</strong></div>
         </li>;
       })}</ul>
       <label className="request-date">{t.date}<input type="date" min={today || undefined} aria-invalid={!dateOK} aria-describedby={!dateOK ? "pickup-error" : undefined} value={state.date} onChange={event => updateCatalogRequest(current => ({ ...current, date: event.target.value }))} /><small>{t.dateHint}</small></label>

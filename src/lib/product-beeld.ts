@@ -1,3 +1,4 @@
+import { SALAD_REQUESTS } from "./salad-extras";
 import type { Product } from "./assortiment-data";
 const dirksPhotoMap: Record<string,string> = {
   "schol": "schol",
@@ -386,6 +387,11 @@ function accessiblePhotoAlt(value:string):string {
   .trim();
 }
 export function productPhoto(product:Product,locale="nl"):ProductPhoto|null{
+ const salad = SALAD_REQUESTS.find(item => item.productSlug === product.slug);
+ if (salad) {
+   const i = locale === "en" ? 1 : locale === "de" ? 2 : 0;
+   return { src: salad.image, alt: salad.names[i], caption: ["AI-serveervoorbeeld", "AI serving suggestion", "KI-Serviervorschlag"][i], editorial: true, whole: false };
+ }
  const source=dirksPhotoMap[product.slug as keyof typeof dirksPhotoMap];
  if(source && product.slug !== "kibbeling"){
   const l=locale==="de"?"de":locale==="en"?"en":"nl";

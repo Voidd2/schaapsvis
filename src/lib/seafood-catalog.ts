@@ -60,10 +60,4 @@ export function catalogProduct(slug: string, locale: string): FeestdagenProduct 
   return commercialNames[slug] ? { ...product, naam: commercialNames[slug][i] } : product;
 }
 
-// These are enquiry wishes, NOT priced SKUs. No inferred portion, recipe or allergens.
-export const SALAD_REQUESTS = [
-  { slug: "extra-krabsalade", names: ["Krabsalade", "Crab salad", "Krabbensalat"], image: "/images/dirks/krabsalade.webp", productSlug: "krabsalade" },
-  { slug: "extra-krab-mangosalade", names: ["Krab-mangosalade", "Crab and mango salad", "Krabben-Mango-Salat"], image: "/images/editorial/krab-mango-illustratief.webp", productSlug: null },
-  { slug: "extra-zalmsalade", names: ["Zalmsalade", "Salmon salad", "Lachssalat"], image: "/images/dirks/zalmsalade.webp", productSlug: "zalmsalade" },
-  { slug: "extra-tonijnsalade", names: ["Tonijnsalade", "Tuna salad", "Thunfischsalat"], image: "/images/dirks/tonijnsalade.webp", productSlug: "tonijnsalade" },
-] as const;
+export { SALAD_REQUESTS } from "./salad-extras";
