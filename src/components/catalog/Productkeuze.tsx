@@ -51,6 +51,7 @@ export function RequestSummary({ locale, hasPreviousSelection }: { locale: strin
   }
   const message = requestMessage(state, locale);
   return <div className="cart-content">
+    {state.reselect && <p className="request-muted mb-4" role="status">{["Het aanbod is gewijzigd. Kies uw vervallen schaal of geschenk opnieuw.", "Our range has changed. Please choose a replacement for your discontinued platter or gift.", "Unser Angebot hat sich geändert. Bitte wählen Sie Ihre entfallene Platte oder Ihr Geschenk erneut."][languageIndex(locale)]} <a className="underline" href={`/${locale}/visschalen#maatwerk`}>{t.platters} →</a></p>}
     {hasPreviousSelection && <p className="request-muted mb-5">{locale === "en" ? "You also have an earlier, separate selection." : locale === "de" ? "Sie haben auch eine frühere, separate Auswahl." : "U heeft ook een eerdere, afzonderlijke selectie."} <Link className="underline" href={`/${locale}/bestellen`}>{locale === "en" ? "Review it here" : locale === "de" ? "Hier ansehen" : "Bekijk die hier"} →</Link></p>}
     {!entries.length && !selections.length ? <p className="cart-empty">{t.empty}</p> : <>
       <ul className="cart-lines">{entries.map(([slug, line]) => {

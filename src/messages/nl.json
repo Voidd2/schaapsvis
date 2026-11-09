@@ -38,7 +38,7 @@
     "bezorgenPlaatsTitle": "Verse vis bezorgen in {plaats} | Vishandel uit Leiden | Schaap's Vis",
     "bezorgenPlaatsDesc": "Verse vis en visschalen laten bezorgen in {plaats}? Schaap's Vishandel uit Leiden rijdt {dagen} langs. Bestellen tot 12:00 de dag ervoor, betalen bij de deur of straks online.",
     "visschalenTitle": "Visschalen Leiden voor borrels en evenementen | Schaap's",
-    "visschalenDesc": "Visschalen in Leiden: kies klassiek, luxe of hapjes met een vaste totaalprijs per formaat. Maatwerk in overleg, met circa € 17,50 per persoon als richtbedrag.",
+    "visschalenDesc": "De standaard visschaal kost € 16,50 per persoon en de luxe visschaal € 18,50. Extra producten betaalt u tegen winkelprijs.",
     "barbecueTitle": "Vis voor barbecue en gourmet in Leiden | Schaap’s Vishandel",
     "barbecueDesc": "Visbarbecuepakketten, visgourmet en losse visspiesjes in Leiden. Bekijk de selectie en bespreek uw keuze rechtstreeks via WhatsApp met Schaap’s Vishandel."
   },
@@ -465,7 +465,7 @@
   "visschaal": {
     "eyebrow": "Borrel · verjaardag · kerst",
     "kop": "Visschalen om te delen.",
-    "inleiding": "Kies klassiek, luxe of hapjes. Bekijk het formaat, de samenstelling en de prijs.",
+    "inleiding": "De standaard visschaal kost € 16,50 per persoon en de luxe visschaal € 18,50. Extra producten betaalt u tegen winkelprijs.",
     "per100": "per 100 g",
     "perStuk": "per {eenheid}",
     "seizoen": "{periode}",
@@ -473,8 +473,8 @@
     "niksGekozen": "Kies hierboven een schaal en geef het aantal personen op.",
     "gewichtRegel": "{gewicht} extra",
     "personenRegel": "Voor {personen} personen",
-    "vergelijking": "Alleen voor maatwerk gebruiken we circa € 17,50 per persoon als richtbedrag. De prijs van een vaste uitvoering geldt voor het hele gekozen formaat.",
-    "voorlopig": "Alleen voor maatwerk gebruiken we circa € 17,50 per persoon als richtbedrag. De prijs van een vaste uitvoering geldt voor het hele gekozen formaat.",
+    "vergelijking": "De standaard visschaal kost € 16,50 per persoon en de luxe visschaal € 18,50. Extra producten betaalt u tegen winkelprijs.",
+    "voorlopig": "De standaard visschaal kost € 16,50 per persoon en de luxe visschaal € 18,50. Extra producten betaalt u tegen winkelprijs.",
     "hoeveelKop": "Hoeveel heb ik nodig?",
     "hoeveelTekst": "Reken {borrel} gram per persoon als er ook ander eten is, en {maaltijd} gram als de schaal de maaltijd is.",
     "wissen": "Alles wissen",
@@ -488,15 +488,15 @@
     "faq": [
       {
         "v": "Wat kost een visschaal?",
-        "a": "De prijs staat bij de gekozen schaal en geldt voor het hele genoemde formaat. Voor een schaal op maat gebruiken we circa € 17,50 per persoon als richtbedrag. We bespreken de samenstelling en bevestigen het bedrag vooraf."
+        "a": "De standaard visschaal kost € 16,50 per persoon en de luxe visschaal € 18,50. Extra producten betaalt u tegen winkelprijs."
       },
       {
         "v": "Hoeveel personen kan ik met een schaal doen?",
-        "a": "Bij ieder formaat ziet u voor hoeveel personen de schaal is bedoeld. Twijfelt u of dat past bij een maaltijd of borrel? Bespreek uw gezelschap en wensen met ons via WhatsApp."
+        "a": "Geef het aantal personen op. Wij kiezen een kleine, middelgrote of grote schaal en verdelen de vis zo nodig over meerdere schalen."
       },
       {
         "v": "Kan ik de schaal aanpassen?",
-        "a": "Voor een andere samenstelling kunt u een aparte maatwerkaanvraag doen. De vaste uitvoeringen houden hun vermelde samenstelling. We bespreken de mogelijkheden en prijs van maatwerk vooraf."
+        "a": "Ja. In de samensteller kunt u vis omruilen voor dezelfde winkelwaarde. Wie extra vis wil, kiest het product en het gewicht."
       },
       {
         "v": "Hoe lang van tevoren moet ik bestellen?",
@@ -515,7 +515,7 @@
         "a": "Gebruik de maatwerkaanvraag voor uw wensen. We bespreken wat mogelijk is en maken een voorstel. Pas na uw akkoord spreken we de bestelling definitief af."
       }
     ],
-    "vergelijkingKort": "Alleen voor maatwerk gebruiken we circa € 17,50 per persoon als richtbedrag. De prijs van een vaste uitvoering geldt voor het hele gekozen formaat.",
+    "vergelijkingKort": "De standaard visschaal kost € 16,50 per persoon en de luxe visschaal € 18,50. Extra producten betaalt u tegen winkelprijs.",
     "perSchaal": "per persoon",
     "stap1": "Stap 1",
     "stap2": "Stap 2",
@@ -526,7 +526,7 @@
     "startbedrag": "Gemiddelde richtprijs: circa {bedrag}",
     "aantalPersonen": "Voor hoeveel personen?",
     "gemiddeld": "Gemiddeld",
-    "gemiddeldePrijs": "Maatwerk: richtbedrag circa € 17,50 per persoon",
+    "gemiddeldePrijs": "De standaard visschaal kost € 16,50 per persoon en de luxe visschaal € 18,50. Extra producten betaalt u tegen winkelprijs.",
     "watErOpLigt": "Wat erop ligt",
     "kiesSchaal": "Kies deze schaal",
     "gekozen": "Gekozen — klik om te wisselen",
@@ -534,7 +534,7 @@
     "extrasUitleg": "Vertel ons via WhatsApp wat u op de schaal wilt. We kunnen bijvoorbeeld extra of duurdere vissoorten toevoegen; daardoor kan de prijs hoger worden. We spreken de definitieve prijs altijd vooraf met u af.",
     "extrasEerstSchaal": "Bespreek extra wensen via WhatsApp.",
     "extrasRegel": "",
-    "maatwerkRichtbedrag": "Alleen voor maatwerk gebruiken we circa € 17,50 per persoon als richtbedrag. De prijs van een vaste uitvoering geldt voor het hele gekozen formaat.",
+    "maatwerkRichtbedrag": "De standaard visschaal kost € 16,50 per persoon en de luxe visschaal € 18,50. Extra producten betaalt u tegen winkelprijs.",
     "hulpKop": "Hulp bij kiezen?",
     "adviesLink": "Advies nodig? App ons."
   },

@@ -104,6 +104,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // ── Feestdagenproducten ──────────────────────────────────────────────────
   for (const product of FEESTDAGEN_PRODUCTEN) {
+    if (product.categorie === "visschalen") continue;
     if (legacyTrioSlugs.includes(product.slug)) continue;
     const pad = `/feestdagen/${product.slug}`;
     for (const taal of LOCALES) {

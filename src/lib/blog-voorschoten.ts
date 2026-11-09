@@ -94,7 +94,7 @@ export const VOORSCHOTEN_ARTIKELEN: BlogPost[] = [
     secties: [
       { kop: "Begin bij de gelegenheid, niet alleen bij de foto", alineas: [
         "Een visschaal voor een borrel in Voorschoten kiezen begint bij uw plannen. Gaat het om hapjes naast brood, kaas en andere gerechten, of wilt u dat de vis het belangrijkste deel van de maaltijd is? Met alleen het aantal gasten is de juiste hoeveelheid nog niet duidelijk. Vertel daarom ook hoe u de schaal gaat serveren.",
-        "Bij Schaap’s Vishandel denken we graag met u mee over een visschaal die past bij uw smaak, gezelschap en gelegenheid. Voor maatwerk is circa € 17,50 per persoon een richtbedrag, geen vaste totaalprijs. Vaste uitvoeringen hebben een eigen prijs per schaal. De afbeeldingen tonen verschillende visschalen; via WhatsApp bespreekt u met ons wat u lekker vindt en hoe we de schaal kunnen samenstellen."
+        "Bij Schaap’s Vishandel denken we graag met u mee over een visschaal die past bij uw smaak, gezelschap en gelegenheid. De standaard visschaal kost € 16,50 per persoon en de luxe visschaal € 18,50. Extra producten betaalt u tegen winkelprijs."
       ] },
       { kop: "Hoeveel gasten eten er mee?", alineas: [
         "Hoeveel vis u nodig heeft, hangt af van het aantal gasten en van wat u verder serveert. Vertel ons of de schaal bedoeld is voor een borrel, lunch of maaltijd; dan denken we mee over een passende hoeveelheid.",
@@ -105,7 +105,7 @@ export const VOORSCHOTEN_ARTIKELEN: BlogPost[] = [
         "Een gezelschap dat vooral gerookte vis lekker vindt, hoeft niet dezelfde schaal te krijgen als een groep die juist om garnalen vraagt. De mogelijkheid om extra’s te kiezen helpt daarbij. Geef ook door wanneer u bepaalde producten apart wilt laten serveren, zodat we kunnen bespreken of en hoe dat uitvoerbaar is."
       ] },
       { kop: "Budget en prijs vooraf afstemmen", alineas: [
-        "Voor maatwerk is circa € 17,50 per persoon een richtbedrag. Voor vaste uitvoeringen geldt de getoonde prijs per schaal. Extra’s of duurdere vissoorten kunnen de prijs verhogen. Neem via WhatsApp contact op; we denken graag met u mee over uw wensen en gelegenheid.",
+        "De standaard visschaal kost € 16,50 per persoon en de luxe visschaal € 18,50. Extra producten betaalt u tegen winkelprijs.",
         "Heeft u een budget voor de hele borrel? Vertel ons dat bedrag, het aantal gasten en uw favoriete producten. Dat geeft meer houvast dan alleen vragen om een grote schaal. Visschalen stelt u met ons samen via WhatsApp. Voor losse vis of andere verzoeken bespreken we de mogelijkheden via WhatsApp."
       ] },
       { kop: "Ophalen voor uw borrel in Voorschoten", alineas: [
@@ -114,7 +114,7 @@ export const VOORSCHOTEN_ARTIKELEN: BlogPost[] = [
       ] }
     ],
     vragen: [
-      { v: "Wat kost een visschaal?", a: "Voor maatwerk is circa € 17,50 per persoon een richtbedrag, geen vaste totaalprijs. Vaste uitvoeringen hebben een eigen prijs per schaal. Extra’s of duurdere vissoorten kunnen de prijs verhogen; neem via WhatsApp contact op, dan denken we mee over uw wensen en gelegenheid." },
+      { v: "Wat kost een visschaal?", a: "De standaard visschaal kost € 16,50 per persoon en de luxe visschaal € 18,50. Extra producten betaalt u tegen winkelprijs." },
       { v: "Kan ik zelf meedenken over de samenstelling?", a: "Ja, we denken graag met u mee. Vertel via WhatsApp wat u lekker vindt en voor welke gelegenheid de schaal is." },
       { v: "Hoe vraag ik een visschaal aan?", a: "Stuur ons een WhatsApp-bericht met uw voorkeuren en voor welke gelegenheid de schaal is. We bespreken samenstelling, prijs en afhalen. Pas na uw akkoord is de bestelling definitief." }
     ],

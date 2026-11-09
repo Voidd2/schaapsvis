@@ -11,7 +11,7 @@ function persist() {
   const selections = snapshot.selections?.map(({ id, options, note, needsNote }) => ({
     id, options, ...(note || needsNote ? { needsNote: true } : {}),
   }));
-  try { sessionStorage.setItem(key, JSON.stringify({ items: snapshot.items, date: snapshot.date, selections })); } catch { /* Storage optional. */ }
+  try { sessionStorage.setItem(key, JSON.stringify({ items: snapshot.items, reselect: snapshot.reselect, date: snapshot.date, selections })); } catch { /* Storage optional. */ }
 }
 function subscribe(listener: () => void) {
   listeners.add(listener);
@@ -19,7 +19,7 @@ function subscribe(listener: () => void) {
     let saved: unknown;
     try { saved = JSON.parse(sessionStorage.getItem(key) ?? "null"); } catch { /* Storage can be unavailable; keep an in-memory list. */ }
     const clean = normalizeRequest(saved);
-    snapshot = { items: clean.items, date: clean.date, selections: clean.selections?.map(line => ({ id: line.id, options: line.options, needsNote: line.needsNote })), ready: true };
+    snapshot = { items: clean.items, reselect:clean.reselect, date: clean.date, selections: clean.selections?.map(line => ({ id: line.id, options: line.options, needsNote: line.needsNote })), ready: true };
     // Migrate older split flags away; never restore or persist free-text wishes.
     persist();
   }
@@ -44,7 +44,7 @@ export function addCartSelection(data: URLSearchParams, locale: string, note = "
   if (!snapshot.ready || !selectionQuote(data, locale)) return false;
   const options = cartOptions(data);
   if (!selectionQuote(new URLSearchParams(options), locale)) return false;
-  updateCatalogRequest(current => ({ ...current, selections: [
+  updateCatalogRequest(current => ({ ...current, reselect:false, selections: [
     ...(current.selections ?? []), { id: crypto.randomUUID(), options, note },
   ] }));
   pendingCartOpen = true;

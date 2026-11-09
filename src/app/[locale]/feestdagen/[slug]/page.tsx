@@ -58,6 +58,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!["nl", "en", "de"].includes(locale)) notFound();
   const source = feestdagenProduct(slug);
   if (!source) notFound();
+  if (source.categorie === "visschalen") permanentRedirect(`/${locale}/visschalen#${slug.includes("-luxe-") ? "schalen-luxe" : "schalen-klassiek"}`);
   const product = catalogProduct(source.slug, locale);
   return paginaMetadata({
     locale,
@@ -73,6 +74,7 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
   if (!["nl", "en", "de"].includes(locale)) notFound();
   const source = feestdagenProduct(slug);
   if (!source) notFound();
+  if (source.categorie === "visschalen") permanentRedirect(`/${locale}/visschalen#${slug.includes("-luxe-") ? "schalen-luxe" : "schalen-klassiek"}`);
   const product = catalogProduct(source.slug, locale);
   const taal = locale === "en" || locale === "de" ? locale : "nl";
   const t = LABELS[taal];
@@ -90,7 +92,7 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
       for (const entry of Array.isArray(value) ? value : value === undefined ? [] : [value]) selection.append(key, entry);
     }
   }
-  const related = gerelateerdeFeestdagenProducten(source).filter(item => !legacyTrioSlugs.includes(item.slug)).map(item => catalogProduct(item.slug, locale));
+  const related = gerelateerdeFeestdagenProducten(source).filter(item => item.categorie !== "visschalen" && !legacyTrioSlugs.includes(item.slug)).map(item => catalogProduct(item.slug, locale));
   const url = `${BEDRIJF.domein}/${locale}/feestdagen/${product.slug}`;
   const productSchema = {
     "@context": "https://schema.org",

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { VisschaalAanvraag } from "./VisschaalAanvraag";
+import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
 import { Sectie } from "@/components/ui/Sectie";
@@ -36,10 +36,10 @@ export default async function BestellenPage({
   const g = await getTranslations({ locale, namespace: "gedeeld" });
 
   const aanvraagIntro = {
-    nl: "We rekenen gemiddeld op ongeveer € 17,50 per persoon. Vertel ons via WhatsApp voor hoeveel gasten en welke gelegenheid de visschaal is; we denken graag mee over wat u lekker vindt.",
-    en: "As a guide, we average around €17.50 per person. Tell us on WhatsApp how many guests and what occasion the platter is for; we are happy to help choose a selection.",
-    de: "Als Richtwert rechnen wir im Durchschnitt mit etwa 17,50 € pro Person. Teilen Sie uns per WhatsApp Gästezahl und Anlass mit; wir beraten Sie gern zur Auswahl.",
-  };
+    "nl": "De standaard visschaal kost € 16,50 per persoon en de luxe visschaal € 18,50. Extra producten betaalt u tegen winkelprijs.",
+    "en": "The standard seafood platter costs €16.50 per person and the deluxe platter €18.50. Extras are charged at shop prices.",
+    "de": "Die Standard-Fischplatte kostet 16,50 € pro Person, die Deluxe-Fischplatte 18,50 €. Extras berechnen wir zum Ladenpreis."
+};
 
   return (
     <>
@@ -55,7 +55,7 @@ export default async function BestellenPage({
         kruimels={[{ naam: BEDRIJF.naamKort, href: `/${locale}` }, { naam: nav("bestellen") }]}
         label={t("eyebrow")}
         titel={t("kop")}
-        intro={process.env.BESTELLING_WEBHOOK_URL ? t("inleiding") : (aanvraagIntro[locale as keyof typeof aanvraagIntro] ?? aanvraagIntro.nl)}
+        intro={aanvraagIntro[locale as keyof typeof aanvraagIntro] ?? aanvraagIntro.nl}
         feiten={[
           { label: g("bezorgen"), waarde: bezorgdagenTekst(locale) },
           {
@@ -67,7 +67,7 @@ export default async function BestellenPage({
       />
 
       <Sectie grond="papier">
-        <VisschaalAanvraag />
+        <Link className="knop knop-navy" href={`/${locale}/visschalen#maatwerk`}>{locale === "de" ? "Fischplatte zusammenstellen" : locale === "en" ? "Build your seafood platter" : "Stel uw visschaal samen"} →</Link>
       </Sectie>
 
       <PaginaSlot

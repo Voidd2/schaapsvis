@@ -1,9 +1,11 @@
+import { isPlatterMode, platterMenu } from "@/lib/platter-menu";
+import { language } from "@/lib/counter-selection";
 import { whatsappLink } from "@/lib/bedrijf";
 import { gourmetFish, gourmetRequestLink, type Portions } from "@/lib/gourmet-request";
 import { inquiryText, platterInquiryMessage, platterWeightLines, readPlatterWeights, type PlatterInquiry } from "@/lib/platter-inquiry";
 import { assemblyLink, delicacyMode } from "@/lib/counter-selection";
 import { catalogProduct } from "@/lib/seafood-catalog";
-import { deliDraft, isDeliTrio } from "@/lib/deli-trio";
+import { isDeliTrio } from "@/lib/deli-trio";
 import { giftRequestLink } from "@/lib/gift-request";
 import { giftCopy } from "@/lib/gift-copy";
 import { validPickupDate } from "@/lib/pickup-date";
@@ -17,8 +19,10 @@ function draft(data: URLSearchParams, locale: string) {
   if (!validPickupDate(date)) return null;
   if (kind === "assembly") {
     const mode = field("mode");
-    if (mode === "gift-trio" || mode === "custom" || mode === "package") {
-      const name = giftCopy(locale).items[mode === "package" ? 0 : mode === "gift-trio" ? 2 : 3][0];
+    if (isPlatterMode(mode)) return assemblyLink(mode, locale, platterMenu[mode].names[language(locale)], data);
+    if (mode === "package") return null;
+    if (mode === "gift-trio" || mode === "custom") {
+      const name = giftCopy(locale).items[mode === "gift-trio" ? 1 : 2][0];
       return assemblyLink(mode,locale,name,data);
     }
     const slug = field("slug");
@@ -49,13 +53,11 @@ function draft(data: URLSearchParams, locale: string) {
   if (kind === "deli") {
     const slug = field("slug");
     if (!isDeliTrio(slug)) return null;
-    const slots = [0,1,2].map(i => ({choice:field(`choice${i}`),grams:field(`grams${i}`)}));
-    return deliDraft(locale,catalogProduct(slug,locale).naam,slots,wishes);
+    return assemblyLink(delicacyMode(slug),locale,catalogProduct(slug,locale).naam,data);
   }
-  if (kind !== "package" && kind !== "trio" && kind !== "custom") return null;
+  if (kind !== "custom") return null;
   const size = field("size");
-  if (kind !== "custom" && !/^[012]$/.test(size)) return null;
-  const product = giftCopy(locale).items[{package:0,trio:2,custom:3}[kind]][0];
+  const product = giftCopy(locale).items[2][0];
   const indexes = (name: string) => data.getAll(name).map(value => /^\d$/.test(value) ? Number(value) : -1);
   return giftRequestLink(locale,{kind,product,size:Number(size),fish:indexes("fish"),extras:indexes("extra"),
     wishes,voucher:!!field("voucher"),voucherAmount:field("voucher")});

@@ -1,6 +1,6 @@
-import { COUNTER_RATES, GIFT_BOX, STANDARD_FISH_TRIO, TRIO_GRAMS } from "./gift-pricing";
-import { giftPackageContents, giftVoucherCents, giftRequestCopy } from "./gift-request";
-import { packagePriceCents } from "./gift-pricing";
+import { isPlatterMode, platterMenu, platterIngredients, servingCopy, type PlatterMode } from "./platter-menu";
+import { COUNTER_RATES, GIFT_BOX, STANDARD_FISH_TRIO, FISH_TRIO_PORTION, SALAD_TRIO_PORTION } from "./gift-pricing";
+import { giftVoucherCents, giftRequestCopy } from "./gift-request";
 import { SALAD_PORTION_CENTS } from "./salad-extras";
 import { PRIJZEN } from "./prijzen";
 import { feestdagenBedrag } from "./feestdagen-producten";
@@ -15,6 +15,12 @@ export const fishCounter: CounterItem[] = [
   {id:"mackerel",names:["Gerookte makreelfilet","Smoked mackerel fillet","Räuchermakrelenfilet"],rate:COUNTER_RATES.mackerel},
   {id:"gravlax",names:["Gravad lax met dille","Dill-cured gravlax","Graved Lachs mit Dill"],rate:Math.round(PRIJZEN["gravad-lax"].euro * 10)},
   {id:"belly",names:["Gerookte zalmbuikjes","Smoked salmon belly","Geräucherte Lachsbauchstreifen"],rate:COUNTER_RATES.belly},
+];
+export const trioChoices = fishCounter.filter(item => ["salmon", "eel", "shrimp", "mackerel"].includes(item.id));
+export const platterExtras: CounterItem[] = [
+  ...fishCounter,
+  {id:"flakes", names:platterIngredients.flakes, rate:350},
+  {id:"northern", names:platterIngredients.northern, rate:350},
 ];
 export const saladCounter: CounterItem[] = [
   {id:"crab",names:["Krabsalade","Crab salad","Krabbensalat"],rate:SALAD_PORTION_CENTS},
@@ -50,37 +56,49 @@ export function weightQuote(data: Values, items: CounterItem[], locale:string, s
   return {lines,cents,grams,unpriced};
 }
 
-export type Assembly = "fish-trio" | "salad-trio" | "deluxe-salad" | "package" | "gift-trio" | "custom";
+export type Assembly = PlatterMode | "fish-trio" | "salad-trio" | "deluxe-salad" | "package" | "gift-trio" | "custom";
 export function delicacyMode(slug:string): Assembly {
   if (slug === "zalmslaatje-de-luxe") return "deluxe-salad";
   return slug === "salade-trio" ? "salad-trio" : "fish-trio";
 }
 export function assemblyQuote(mode:Assembly, locale:string, data: Values) {
+  if (mode === "package") return null;
   const lang = language(locale), money = (v:number) => feestdagenBedrag(v,locale);
-  const size = data.get("size") ?? "own";
+  if (isPlatterMode(mode)) {
+    const tier = platterMenu[mode];
+    const people = Number(data.get("people"));
+    if (!Number.isSafeInteger(people) || people < 1 || people > 9999) return null;
+    const extras = weightQuote(data, [...platterExtras, ...saladCounter], locale);
+    if (!extras) return null;
+    const base = tier.rate * people;
+    const lines = [`${people} × ${money(tier.rate)} ${servingCopy.per[lang]} = ${money(base)}`];
+    for (const id of tier.fish) {
+      const replacement = data.get("swap-" + id) || id;
+      const item = platterIngredients[id][lang];
+      if (replacement === id) lines.push(item);
+      else if (replacement === "shop") lines.push(item + " → " + servingCopy.shopChoice[lang]);
+      else if (Object.hasOwn(platterIngredients, replacement)) lines.push(item + " → " + platterIngredients[replacement][lang]);
+      else return null;
+    }
+    return {lines: [...lines, ...extras.lines], total: base + extras.cents};
+  }
   const fishTrio = mode === "fish-trio" || mode === "gift-trio";
   const salad = mode === "salad-trio" || mode === "deluxe-salad";
-  const gift = mode === "package" || mode === "custom" || mode === "gift-trio";
+  const gift = mode === "custom" || fishTrio;
   const extras = weightQuote(data,salad ? saladCounter : fishCounter,locale,fishTrio || salad ? 100 : 1);
   if (!extras) return null;
   const lines: string[] = [];
   let total = extras.cents;
   if (fishTrio || salad) {
-    const items = mode === "deluxe-salad" ? deluxeSalads : salad ? saladCounter : fishCounter;
+    const items = mode === "deluxe-salad" ? deluxeSalads : salad ? saladCounter : trioChoices;
     const required = mode === "deluxe-salad" ? 1 : 3;
     const ids = Array.from({length:required},(_,i) => data.get("choice"+i));
-    if (new Set(ids).size !== required) return null;
+    if (fishTrio && new Set(ids).size !== required) return null;
     const choices = ids.map(id => items.find(item => item.id === id));
     if (choices.some(item => !item)) return null;
-    const base = mode === "salad-trio" ? 1199 : STANDARD_FISH_TRIO;
-    lines.push(choices.map(item => item!.names[lang]).join(", ") + (fishTrio ? ` · 3 × ${TRIO_GRAMS[0]} g` : "") + " · " + money(base));
+    const base = fishTrio ? STANDARD_FISH_TRIO : mode === "salad-trio" ? 1199 : 1599;
+    lines.push(choices.map(item => item!.names[lang]).join(", ") + (fishTrio ? ` · 3 × ${FISH_TRIO_PORTION} g` : mode === "salad-trio" ? ` · 3 × ${SALAD_TRIO_PORTION} g` : "") + " · " + money(base));
     total += base;
-  } else if (mode === "package" && size !== "own") {
-    if (!/^[012]$/.test(size)) return null;
-    const contents = giftPackageContents(locale,Number(size))!;
-    const base = packagePriceCents(Number(size))!;
-    total += base;
-    lines.push(giftRequestCopy(locale).sizes[Number(size)] + " · " + money(base), ...contents.lines);
   } else if (!extras.grams) return null;
   lines.push(...extras.lines);
   if (gift) {

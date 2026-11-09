@@ -38,7 +38,7 @@
     "bezorgenPlaatsTitle": "Fresh fish delivery in {plaats} | Fishmonger from Leiden | Schaap's Vis",
     "bezorgenPlaatsDesc": "Want fresh fish or a seafood platter delivered in {plaats}? Schaap's Vishandel from Leiden drives out {dagen}. Order by 12:00 the day before and pay at the door, or online soon.",
     "visschalenTitle": "Seafood platters in Leiden for parties and events | Schaap's",
-    "visschalenDesc": "Seafood platters in Leiden: classic, deluxe or bites with a fixed total price per size. Bespoke platters by arrangement, using around €17.50 per person as a guide.",
+    "visschalenDesc": "The standard seafood platter costs €16.50 per person and the deluxe platter €18.50. Extras are charged at shop prices.",
     "barbecueTitle": "Seafood for barbecue and gourmet in Leiden | Schaap’s Vishandel",
     "barbecueDesc": "Seafood barbecue packs, gourmet selections and individual skewers in Leiden. Browse the range and discuss your choice directly with Schaap’s Vishandel on WhatsApp."
   },
@@ -465,7 +465,7 @@
   "visschaal": {
     "eyebrow": "Drinks · birthday · Christmas",
     "kop": "Seafood platters to share.",
-    "inleiding": "Choose classic, deluxe or bites. Explore the size, contents and price.",
+    "inleiding": "The standard seafood platter costs €16.50 per person and the deluxe platter €18.50. Extras are charged at shop prices.",
     "per100": "per 100 g",
     "perStuk": "per {eenheid}",
     "seizoen": "{periode}",
@@ -473,8 +473,8 @@
     "niksGekozen": "Choose a platter above and select the number of people.",
     "gewichtRegel": "{gewicht} extra",
     "personenRegel": "For {personen} people",
-    "vergelijking": "Only bespoke platters use around €17.50 per person as a guide. The price of a fixed version applies to the whole selected size.",
-    "voorlopig": "Only bespoke platters use around €17.50 per person as a guide. The price of a fixed version applies to the whole selected size.",
+    "vergelijking": "The standard seafood platter costs €16.50 per person and the deluxe platter €18.50. Extras are charged at shop prices.",
+    "voorlopig": "The standard seafood platter costs €16.50 per person and the deluxe platter €18.50. Extras are charged at shop prices.",
     "hoeveelKop": "How much do I need?",
     "hoeveelTekst": "Count on {borrel} grams per person if there is other food too, and {maaltijd} grams if the platter is the meal.",
     "wissen": "Clear all",
@@ -488,15 +488,15 @@
     "faq": [
       {
         "v": "What does a seafood platter cost?",
-        "a": "The price shown applies to the whole stated platter size. For a bespoke platter, we use around €17.50 per person as a guide. We discuss the contents and confirm the amount in advance."
+        "a": "The standard seafood platter costs €16.50 per person and the deluxe platter €18.50. Extras are charged at shop prices."
       },
       {
         "v": "How many people does a platter feed?",
-        "a": "Each size shows how many people it serves. Unsure whether it suits a meal or drinks? Tell us about your group and wishes on WhatsApp."
+        "a": "Enter your guest count. We choose small, medium or large platters and use several if needed."
       },
       {
         "v": "Can I change the platter?",
-        "a": "For different contents, please make a separate bespoke enquiry. Fixed selections retain their listed contents. We discuss bespoke options and pricing in advance."
+        "a": "Yes. In the builder you can swap fish for the same retail value and add extra fish by weight."
       },
       {
         "v": "How far in advance should I order?",
@@ -515,7 +515,7 @@
         "a": "Use the bespoke enquiry to tell us your wishes. We discuss what is possible and make a proposal. We finalise the order only after you agree."
       }
     ],
-    "vergelijkingKort": "Only bespoke platters use around €17.50 per person as a guide. The price of a fixed version applies to the whole selected size.",
+    "vergelijkingKort": "The standard seafood platter costs €16.50 per person and the deluxe platter €18.50. Extras are charged at shop prices.",
     "perSchaal": "per person",
     "stap1": "Step 1",
     "stap2": "Step 2",
@@ -526,7 +526,7 @@
     "startbedrag": "Average guide price: around {bedrag}",
     "aantalPersonen": "How many people?",
     "gemiddeld": "Average",
-    "gemiddeldePrijs": "Bespoke platters: guide price around €17.50 per person",
+    "gemiddeldePrijs": "The standard seafood platter costs €16.50 per person and the deluxe platter €18.50. Extras are charged at shop prices.",
     "watErOpLigt": "What is on it",
     "kiesSchaal": "Choose this platter",
     "gekozen": "Chosen — click to switch",
@@ -534,7 +534,7 @@
     "extrasUitleg": "Tell us on WhatsApp which fish you would like on your platter. Additions or premium fish may increase the price; we will agree the final price with you beforehand.",
     "extrasEerstSchaal": "Discuss any additions with us on WhatsApp.",
     "extrasRegel": "",
-    "maatwerkRichtbedrag": "Only bespoke platters use around €17.50 per person as a guide. The price of a fixed version applies to the whole selected size.",
+    "maatwerkRichtbedrag": "The standard seafood platter costs €16.50 per person and the deluxe platter €18.50. Extras are charged at shop prices.",
     "hulpKop": "Help choosing?",
     "adviesLink": "Need advice? Message us."
   },

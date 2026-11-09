@@ -1,5 +1,3 @@
-import { PlatterInquiry } from "@/components/catalog/CatalogEnhancements";
-import { inquiryText } from "@/lib/platter-inquiry";
 import { platterPresentation } from "@/lib/platter-presentation";
 import { connection } from "next/server";
 import type { Metadata } from "next";
@@ -8,7 +6,6 @@ import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
 import { Sectie, Kop, Vragen, Kruimels } from "@/components/ui/Sectie";
 import { PaginaSlot } from "@/components/ui/PaginaKop";
-import { catalogProduct, MAIN_PLATTERS } from "@/lib/seafood-catalog";
 import { SeafoodCatalog } from "@/components/catalog/SeafoodCatalog";
 import { CatalogHelp } from "@/components/catalog/CatalogHelp";
 import { catalogText } from "@/lib/catalog-copy";
@@ -79,23 +76,13 @@ export default async function VisschalenPage({
         <nav className="catalog-intro-links composer-shortcuts" aria-label={catalog.title}>
           <a className="knop knop-navy" href="#maatwerk">{locale === "en" ? "Create a fish platter" : locale === "de" ? "Fischplatte zusammenstellen" : "Visschaal samenstellen"}</a>
           <a className="knop knop-lijn" href="#gourmet-keuzes">{locale === "en" ? "Create a gourmet platter" : locale === "de" ? "Gourmetplatte zusammenstellen" : "Visgourmet samenstellen"}</a>
-          <a className="knop knop-lijn" href="#geschenken">{locale === "en" ? "Create a gift package" : locale === "de" ? "Geschenkpaket zusammenstellen" : "Cadeaupakket samenstellen"}</a>
+          <a className="knop knop-lijn" href="#geschenken">{locale === "en" ? "Seafood gifts" : locale === "de" ? "Fischgeschenke" : "Cadeau-ideeën"}</a>
           <a className="knop knop-lijn" href="#delicatessen">{locale === "en" ? "Choose a fish or salad trio" : locale === "de" ? "Fisch- oder Salattrio wählen" : "Vis- of saladetrio kiezen"}</a>
         </nav>
-        <div className="platter-browse">
-          <details className="platter-directory"><summary>{locale === "en" ? "Platter sizes" : locale === "de" ? "Plattengrößen" : "Formaten bekijken"}</summary>
-            <ul className="platter-sizes">{MAIN_PLATTERS.map((slug,i)=><li key={slug}><a href={i===0?"#schalen-klassiek":i===3?"#schalen-luxe":i===4?"#schalen-hapjes":"#"+slug}>{catalogProduct(slug,locale).naam} ↓</a></li>)}</ul>
-          </details>
-        </div>
       </section>
       <SeafoodCatalog locale={locale} />
       <div className="section-wrap"><CatalogHelp locale={locale} /></div>
 
-      <Sectie grond="zand" id="maatwerk">
-        <Kop titel={presentation.custom} intro={inquiryText(locale).intro} />
-        <PlatterInquiry locale={locale} />
-        <p className="mt-6 max-w-3xl text-sm leading-relaxed">{t("maatwerkRichtbedrag")}</p>
-      </Sectie>
       <Sectie grond="papier">
         <Kop titel={presentation.stepsTitle} />
         <ol className="grid gap-6 md:grid-cols-3">{presentation.steps.map((step, i) => <li key={step} className="border-t border-[var(--linen)] pt-4"><strong className="mr-3">{i + 1}.</strong>{step}</li>)}</ol>

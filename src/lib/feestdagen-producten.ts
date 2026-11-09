@@ -1,4 +1,4 @@
-import { STANDARD_FISH_TRIO, trioPriceCents, TRIO_GRAMS } from "./gift-pricing";
+import { STANDARD_FISH_TRIO, FISH_TRIO_PORTION, trioPriceCents, TRIO_GRAMS } from "./gift-pricing";
 import { gourmetPriceCents } from "./gourmet-pricing";
 
 export type FeestdagenCategorie = "visschalen" | "gourmet" | "delicatessen";
@@ -298,8 +298,8 @@ export const FEESTDAGEN_PRODUCTEN: readonly FeestdagenProduct[] = [
     eenheid: "per stuk",
     afbeelding: size === 0 ? "/images/dirks/luxe-trio-klein.webp" : "/images/dirks/luxe-vistrio.webp",
     categorie: "delicatessen",
-    intro: size === 0 ? "Kies drie vissoorten, elk circa 40 g. Extra vis voegt u per 100 g toe." : `Drie vakjes met elk circa ${grams} g: Hollandse garnalen, gerookte paling en gerookte zalm. Inclusief opmaak en verpakking.`,
-    samenstelling: ["Hollandse garnalen", "gerookte paling", "gerookte zalm"].map(fish => `Circa ${grams} gram ${fish}`).concat(["Cocktailsaus", "Mosterd-dillesaus"]),
+    intro: size === 0 ? "Kies drie soorten van elk circa 80 g. Het drievaksbakje en de opmaak zijn inbegrepen. Voor een cadeau kunt u een cadeaubon toevoegen." : `Drie vakjes met elk circa ${grams} g: Hollandse garnalen, gerookte paling en gerookte zalm. Inclusief opmaak en verpakking.`,
+    samenstelling: ["Hollandse garnalen", "gerookte paling", "gerookte zalm"].map(fish => `Circa ${size === 0 ? FISH_TRIO_PORTION : grams} gram ${fish}`).concat(["Cocktailsaus", "Mosterd-dillesaus"]),
     allergenen: ["Schaaldieren", "Vis", "Ei", "Mosterd", "Melk"],
   })),
   {
@@ -309,8 +309,8 @@ export const FEESTDAGEN_PRODUCTEN: readonly FeestdagenProduct[] = [
     eenheid: "per stuk",
     afbeelding: "/images/dirks/salade-trio.webp",
     categorie: "delicatessen",
-    intro: "Drie salades in één verpakking voor brood, toast of de borreltafel.",
-    samenstelling: ["Zalm-eiersalade", "Makreelsalade", "Seafoodsalade"],
+    intro: "Kies zelf de salade voor elk van de drie vakjes, circa 120 g per vakje.",
+    samenstelling: ["Drie salades naar keuze, circa 120 g per vakje"],
     allergenen: ["Vis", "Ei", "Mosterd", "Soja", "Selderij", "Schaaldieren", "Gluten"],
   },
 ] as const;

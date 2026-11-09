@@ -6,12 +6,14 @@ import { catalogText } from "./catalog-copy";
 import { cartText } from "./cart-copy";
 import { saladLine } from "./salad-extras";
 export type RequestLine = { quantity: number };
-export type CatalogRequest = { items: Record<string, RequestLine>; date: string; selections?: CartSelection[]; wishes?: string };
+export type CatalogRequest = { items: Record<string, RequestLine>; reselect?: boolean; date: string; selections?: CartSelection[]; wishes?: string };
 export function normalizeRequest(raw: unknown): CatalogRequest {
   const result: CatalogRequest = { items: {}, date: "" };
   if (!raw || typeof raw !== "object") return result;
   const value = raw as Partial<CatalogRequest>;
+  if (value.reselect === true) result.reselect = true;
   if (value.items && typeof value.items === "object") for (const [slug, line] of Object.entries(value.items)) {
+    if (feestdagenProduct(slug)?.categorie === "visschalen") { result.reselect = true; continue; }
     if (!feestdagenProduct(slug) && !saladLine(slug)) continue;
     if (!line || !Number.isInteger(line.quantity) || line.quantity < 1 || line.quantity > 99) continue;
     // Whitelist fields: legacy split flags are intentionally discarded.
@@ -23,7 +25,7 @@ export function normalizeRequest(raw: unknown): CatalogRequest {
       if (!entry || typeof entry.id !== "string" || !/^[a-zA-Z0-9-]{1,64}$/.test(entry.id) || ids.has(entry.id)) continue;
       if (typeof entry.options !== "string" || entry.options.length > 8000) continue;
       const options = cartOptions(new URLSearchParams(entry.options));
-      if (!selectionQuote(new URLSearchParams(options), "nl")) continue;
+      if (!selectionQuote(new URLSearchParams(options), "nl")) { result.reselect = true; continue; }
       const note = typeof entry.note === "string" ? entry.note.trim().slice(0, 2400) : "";
       (result.selections ??= []).push({ id: entry.id, options, ...(note ? { note } : {}), ...(entry.needsNote ? { needsNote: true } : {}) });
       ids.add(entry.id);
