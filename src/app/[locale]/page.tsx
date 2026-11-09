@@ -17,8 +17,7 @@ import { Beeld } from "@/components/ui/Beeld";
 import { heeftBeeld, homepageHeroBeeld } from "@/lib/beeld";
 
 import { paginaMetadata } from "@/lib/seo";
-import { BEDRIJF, type VerkooppuntId } from "@/lib/bedrijf";
-import type { BeeldNaam } from "@/lib/beeld";
+import { BEDRIJF } from "@/lib/bedrijf";
 import { products } from "@/lib/assortiment-data";
 import { googleReviews, googleRating, googleReviewCount, googleMapsUrl, localizeReview } from "@/lib/reviews";
 
@@ -49,21 +48,6 @@ const UITGELICHT = [
   "haring",
 ];
 
-/** Welke foto bij welk verkooppunt hoort. Zie `src/lib/beeld.ts`. */
-const BEELD_PER_PUNT: Partial<Record<VerkooppuntId, BeeldNaam>> = {
-  winkel: "winkelGevel",
-  markt: "marktZaterdag",
-  "markt-woensdag": "marktWoensdag",
-  voorschoten: "marktVoorschoten",
-};
-
-const LOCATIE_PAGINA: Record<VerkooppuntId, string> = {
-  winkel: "/viswinkel-leiden",
-  markt: "/marktkraam-leiden",
-  "markt-woensdag": "/marktkraam-leiden",
-  voorschoten: "/viswinkel-voorschoten",
-};
-
 export default async function HomePage({
   params,
 }: {
@@ -76,6 +60,9 @@ export default async function HomePage({
   const g = await getTranslations({ locale, namespace: "gedeeld" });
 
   const heroBeeld = homepageHeroBeeld(locale);
+  const locations = localLocations(locale);
+  const markets = (["markt-woensdag", "voorschoten", "markt"] as const)
+    .flatMap(id => locations.filter(location => location.id === id));
 
   return (
     <div className="home-page">
@@ -172,60 +159,41 @@ export default async function HomePage({
         </div>
       </Sectie>
 
-      <Sectie grond="wit">
-        <Kop label={h("locatiesLabel")} titel={h("locatiesKop")} />
-        <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8">
-          {localLocations(locale).map((punt) => (
-            <li key={punt.id}>
-              {BEELD_PER_PUNT[punt.id] && (
-                <Beeld
-                  naam={BEELD_PER_PUNT[punt.id]!}
-                  verhouding="liggend"
-                  streep="var(--navy)"
-                  klasse="mb-4"
-                />
-              )}
-              <h3 className="text-[1.2rem] mb-1">{punt.naam}</h3>
-              <p style={{ color: "var(--charcoal)" }}>
-                {punt.adres}
-                <br />
-                {punt.plaats}
-              </p>
-              {punt.id === "winkel" ? <ShopHours locale={locale} /> : <p className="text-sm mt-1">{punt.dagen}</p>}
-              <a
-                href={punt.mapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block mt-2 text-sm font-semibold underline underline-offset-4"
-                style={{ color: "var(--navy)" }}
-              >
-                {h("routeLink")} &rarr;
-              </a>
-              <Link
-                href={`/${locale}${LOCATIE_PAGINA[punt.id]}`}
-                className="block mt-3 font-semibold underline underline-offset-4"
-              >
-                {punt.id === "voorschoten"
-                  ? locale === "nl"
-                    ? "Visboer Voorschoten: vrijdag bij Hoogvliet"
-                    : locale === "de"
-                      ? "Fischstand in Voorschoten: freitags bei Hoogvliet"
-                      : "Fish stall in Voorschoten: Fridays at Hoogvliet"
-                  : locale === "nl"
-                    ? "Bekijk deze locatie"
-                    : locale === "de"
-                      ? "Standort ansehen"
-                      : "Explore this location"} →
+      <Sectie grond="wit" id="locaties">
+        <div className="home-visit">
+          <div>
+            <h2 className="text-[1.85rem] md:text-[2.5rem] leading-tight">{h("locatiesKop")}</h2>
+            <p className="mt-2">{BEDRIJF.adres.straat}, {BEDRIJF.adres.plaats}</p>
+            <a href={BEDRIJF.maps.route} className="knop knop-navy mt-4">
+              {h("winkelRoute")} <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <div className="home-visit-details">
+            <details>
+              <summary>{h("winkelUren")}</summary>
+              <ShopHours locale={locale} />
+              <Link className="home-visit-link" href={`/${locale}/viswinkel-leiden`}>
+                {h("winkelPagina")} <span aria-hidden="true">→</span>
               </Link>
-            </li>
-          ))}
-        </ul>
-        <p className="mt-8 pt-6" style={{ borderTop: "1px solid var(--linen)", color: "var(--charcoal)" }}>
-          <a href={`tel:${BEDRIJF.telefoon.e164}`} className="font-semibold underline underline-offset-4" style={{ color: "var(--navy)" }}>
-            {g("bellen", { nummer: BEDRIJF.telefoon.weergave })}
-          </a>{" "}&middot;{" "}
-          <Link href={`/${locale}/bezoek-ons`} className="underline underline-offset-4">{nav("locaties")}</Link>
-        </p>
+            </details>
+            <details>
+              <summary>{h("marktdagen")}</summary>
+              <ul className="home-visit-markets">
+                {markets.map(punt => (
+                  <li key={punt.id}>
+                    <strong>{punt.dagen}</strong>
+                    <Link
+                      className="home-visit-link"
+                      href={`/${locale}/${punt.id === "voorschoten" ? "viswinkel-voorschoten" : "marktkraam-leiden"}`}
+                    >
+                      {`${punt.adres}, ${punt.plaats}`} <span aria-hidden="true">→</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          </div>
+        </div>
       </Sectie>
 
       {/* ── Sinds 1938 ────────────────────────────────────────────────────── */}

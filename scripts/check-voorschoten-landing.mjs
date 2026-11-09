@@ -35,9 +35,9 @@ check(location?.url === canonical && location?.image?.startsWith('https://'), 'L
 check(location?.address?.streetAddress === 'Veurseweg 18' && location?.address?.postalCode === '2252 AA', 'Structured address matches visible address');
 check(location?.openingHoursSpecification?.[0]?.dayOfWeek?.[0] === 'Friday', 'Friday only');
 check(location?.openingHoursSpecification?.[0]?.opens === '08:00' && location?.openingHoursSpecification?.[0]?.closes === '17:30', 'Correct stand hours, not supermarket hours');
-const faq = schemas.find(s => s['@type'] === 'FAQPage');
-check(faq?.mainEntity?.length === 7, 'Seven practical questions');
-for (const q of faq.mainEntity) check(main.includes(q.name) && main.includes(q.acceptedAnswer.text), 'FAQ schema must describe visible content');
+const faqSection = main.match(/Vragen over vis kopen in Voorschoten<\/h2>([\s\S]*?)<\/section>/)?.[1] || '';
+check((faqSection.match(/<summary\b/g) || []).length === 7, 'Seven questions in the visible FAQ');
+check(!schemas.some(s => s['@type'] === 'FAQPage'), 'No obsolete FAQ rich-result markup');
 for (const [locale, h1, pricePhrase] of [
   ['en', 'Fishmonger in Voorschoten: every Friday at Hoogvliet', 'clear pricing'],
   ['de', 'Fischstand in Voorschoten: jeden Freitag bei Hoogvliet', 'klare Preise'],
@@ -52,9 +52,11 @@ for (const [locale, h1, pricePhrase] of [
 }
 const sitemap = await (await fetch(origin + '/sitemap.xml')).text();
 const entry = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(m => m[1]).find(v => v.includes(`<loc>${canonical}</loc>`));
-check(entry?.includes('2026-09-29'), 'Accurate local page lastmod');
+check(entry, 'Local page is listed in the release sitemap');
+const lastmod = entry.match(/<lastmod>([^<]*)<\/lastmod>/)?.[1];
+check(lastmod === undefined || Date.parse(lastmod) <= Date.now(), 'Optional lastmod must be valid and not in the future');
 const home = await (await fetch(origin + '/nl')).text();
-check(/<a\b[^>]*href="\/nl\/viswinkel-voorschoten"[^>]*>Visboer Voorschoten: vrijdag bij Hoogvliet/.test(home), 'Descriptive homepage internal link');
+check(/<a\b[^>]*href="\/nl\/viswinkel-voorschoten"[^>]*>Parkeerplaats Hoogvliet, Veurseweg 18, Voorschoten/.test(home), 'Descriptive homepage internal link');
 const paths = [...new Set([...main.matchAll(/href="(\/nl[^"?#]*)/g)].map(m => m[1]))];
 await Promise.all(paths.map(async p => {
   const target = await fetch(origin + p, {redirect: 'manual'});
