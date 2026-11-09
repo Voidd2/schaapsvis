@@ -7,7 +7,6 @@ import { notFound } from "next/navigation";
 import { localLocations } from "@/lib/local-pages-copy";
 import { localizeProduct } from "@/lib/product-localization";
 import { productPhoto } from "@/lib/product-beeld";
-import { bestelContact } from "@/lib/bestel-contact";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
@@ -17,7 +16,7 @@ import { Beeld } from "@/components/ui/Beeld";
 import { heeftBeeld, homepageHeroBeeld } from "@/lib/beeld";
 
 import { paginaMetadata } from "@/lib/seo";
-import { BEDRIJF } from "@/lib/bedrijf";
+import { BEDRIJF, whatsappLink } from "@/lib/bedrijf";
 import { products } from "@/lib/assortiment-data";
 import { googleReviews, googleRating, googleReviewCount, googleMapsUrl, localizeReview } from "@/lib/reviews";
 
@@ -57,7 +56,6 @@ export default async function HomePage({
   if (!["nl", "en", "de"].includes(locale)) notFound();
   const h = await getTranslations({ locale, namespace: "home" });
   const nav = await getTranslations({ locale, namespace: "nav" });
-  const g = await getTranslations({ locale, namespace: "gedeeld" });
 
   const heroBeeld = homepageHeroBeeld(locale);
   const locations = localLocations(locale);
@@ -261,12 +259,12 @@ export default async function HomePage({
       </Sectie>
 
       <PaginaSlot
-        titel={g("slotTitel")}
-        tekst={g("slotTekst")}
+        titel={h("feestSlot.titel")}
+        tekst={h("feestSlot.tekst")}
         knoppen={[
           { label: nav("visschalen"), href: `/${locale}/visschalen` },
-          { ...bestelContact(locale), extern: true, soort: "lijn" },
-          { label: nav("locaties"), href: `/${locale}/bezoek-ons`, soort: "lijn" },
+          { label: h("feestSlot.vis"), href: whatsappLink(h("feestSlot.bericht")), extern: true, soort: "lijn" },
+          { label: h("feestSlot.barbecue"), href: `/${locale}/barbecue-gourmet#barbecue`, soort: "lijn" },
         ]}
       />
     </div>

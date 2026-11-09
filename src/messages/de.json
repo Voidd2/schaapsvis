@@ -328,6 +328,13 @@
     "reviewLabel": "Google",
     "reviewKop": "Was Kunden schreiben",
     "reviewAlle": "Alle {aantal} Bewertungen lesen",
+    "feestSlot": {
+      "titel": "Bereit für die Festtage?",
+      "tekst": "Bestellen Sie Ihre Fischplatte oder Ihr Grillpaket schon jetzt für die Festtage. Lieber frischer Fisch? Schreiben Sie uns per WhatsApp, was Sie suchen und wann Sie es abholen möchten.",
+      "vis": "Frischer Fisch per WhatsApp",
+      "barbecue": "Grillpakete",
+      "bericht": "Hallo Schaap’s Vishandel! Für die Festtage suche ich … für … Personen. Kann ich das schon jetzt vorbestellen und am … abholen?"
+    },
     "locatiesKop": "Wo Sie uns antreffen",
     "winkelRoute": "Route zum Geschäft",
     "winkelUren": "Öffnungszeiten des Geschäfts",

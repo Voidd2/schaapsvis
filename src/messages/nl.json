@@ -328,6 +328,13 @@
     "reviewLabel": "Google",
     "reviewKop": "Wat klanten schrijven",
     "reviewAlle": "Alle {aantal} beoordelingen lezen",
+    "feestSlot": {
+      "titel": "Klaar voor de feestdagen?",
+      "tekst": "Bestel alvast een visschaal of barbecueset voor uw feesttafel. Liever verse vis? App ons wat u zoekt en wanneer u het wilt afhalen.",
+      "vis": "Verse vis via WhatsApp",
+      "barbecue": "Barbecuesets",
+      "bericht": "Hoi Schaap’s Vishandel! Voor de feestdagen ben ik op zoek naar … voor … personen. Kan ik dit alvast bestellen en op … afhalen?"
+    },
     "locatiesKop": "Waar u ons treft",
     "winkelRoute": "Route naar de winkel",
     "winkelUren": "Openingstijden winkel",
