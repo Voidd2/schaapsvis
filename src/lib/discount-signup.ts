@@ -1,5 +1,8 @@
 const copy = {
   nl: {
+    offerTitle: "Ontvang korting bij Schaap’s",
+    offerIntro: "Ontvang ongeveer één keer per week een e-mail met kortingsbonnen voor vis uit onze toonbank.",
+    offerSubmit: "Ja, stuur mij kortingsmails", closeOffer: "Sluiten",
     title: "Aanmelden Voor Kortingen!",
     intro: "Ontvang regelmatig kortingsbonnen per e-mail voor producten uit het assortiment van Schaap’s Vishandel.",
     email: "Uw e-mailadres", consent: "Ja, ik wil kortingsbonnen van Schaap’s Vishandel per e-mail ontvangen.",
@@ -12,6 +15,9 @@ const copy = {
     js: "Zet JavaScript aan om u aan te melden.",
   },
   en: {
+    offerTitle: "Get discounts at Schaap’s",
+    offerIntro: "About once a week, we’ll email you discount vouchers for fish from our counter.",
+    offerSubmit: "Yes, email me discounts", closeOffer: "Close",
     title: "Sign Up for Discounts!", intro: "Get regular discount vouchers by email for products from Schaap’s Vishandel.",
     email: "Your email address", consent: "Yes, I would like to receive discount vouchers from Schaap’s Vishandel by email.",
     submit: "Sign me up", sending: "Signing up…", privacy: "How we use your email address",
@@ -22,6 +28,9 @@ const copy = {
     photo: "The fish counter at Schaap’s market stall", js: "Enable JavaScript to sign up.",
   },
   de: {
+    offerTitle: "Rabatte bei Schaap’s erhalten",
+    offerIntro: "Etwa einmal pro Woche erhalten Sie per E-Mail Rabattgutscheine für Fisch aus unserer Theke.",
+    offerSubmit: "Ja, ich möchte Rabatt-E-Mails", closeOffer: "Schließen",
     title: "Für Rabatte anmelden!", intro: "Erhalten Sie regelmäßig Rabattgutscheine für Produkte aus dem Sortiment von Schaap’s Vishandel per E-Mail.",
     email: "Ihre E-Mail-Adresse", consent: "Ja, ich möchte Rabattgutscheine von Schaap’s Vishandel per E-Mail erhalten.",
     submit: "Jetzt anmelden", sending: "Anmeldung läuft…", privacy: "So verwenden wir Ihre E-Mail-Adresse",
