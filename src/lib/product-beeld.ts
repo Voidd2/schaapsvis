@@ -16,7 +16,6 @@ const dirksPhotoMap: Record<string,string> = {
   "gerookte-wilde-zalm": "gerookte-wilde-zalm",
   "gerookte-bokking": "bokking",
   "noorse-garnalen": "noorse-garnalen",
-  "gekookte-gambas": "gambas-gekookt",
   "zeeuwse-mosselen": "zeeuwse-mosselen",
   "kokkels": "kokkels",
   "coquilles": "coquilles-vlees",

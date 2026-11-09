@@ -366,18 +366,6 @@ export const products: Product[] = [
     "beschikbaar": "dagelijks"
   },
   {
-    "slug": "gekookte-gambas",
-    "naam": "Gekookte Gamba's (Crevettes)",
-    "desc": "Voorgekookte en gekoelde gamba's — direct klaar om te eten. Heerlijk bij een borrel met dipsaus of in een salade.",
-    "categorie": "schaal-schelp",
-    "photo": "/images/producten-hd/gekookte-gambas.webp",
-    "ingredienten": "Gamba's (Penaeus spp.) [SCHAALDIEREN], water, zout.",
-    "bevat": [
-      "SCHAALDIEREN"
-    ],
-    "beschikbaar": "sometimes"
-  },
-  {
     "slug": "zeeuwse-mosselen",
     "naam": "Zeeuwse Mosselen",
     "desc": "Verse Zeeuwse mosselen (Mytilus edulis) — gekweekt in de Zeeuwse wateren. Het Zeeuwse mosselseizoen loopt meestal van juli tot april. De start en beschikbaarheid kunnen per jaar verschillen.",
@@ -908,7 +896,7 @@ const VOEDING_MAP: Record<string, keyof typeof VOEDING_PROFIELEN> = {
   "gerookte-bokking": "gerookte-vis", "gerookte-kipper": "gerookte-vis", "bosje-sprot": "gerookte-vis",
   "gerookte-forelfilet": "gerookte-vis", "gerookte-forel-heel": "gerookte-vis", "gerookte-heilbot": "gerookte-vis",
   "hollandse-garnalen": "garnaal", "noorse-garnalen": "garnaal",
-  "franse-gambas": "gamba", "gekookte-gambas": "gamba", tijgergarnalen: "gamba",
+  "franse-gambas": "gamba", tijgergarnalen: "gamba",
   "zeeuwse-mosselen": "mossel", "creuse-oesters": "oester", "fine-de-claire-oesters": "oester",
   kokkels: "schelp", coquilles: "schelp", scheermessen: "schelp", vongole: "schelp", wulken: "schelp",
   krabklauwen: "schaaldier", "hele-krab": "schaaldier", langoustines: "schaaldier", "hele-kreeft": "schaaldier",
