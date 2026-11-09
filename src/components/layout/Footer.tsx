@@ -1,28 +1,21 @@
-import { openingSummary } from "@/lib/openingHours";
 import Link from "next/link";
-import { useTranslations, useLocale } from "next-intl";
+import { ArrowUpRight, Phone } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { NewsletterSignup } from "@/components/shared/NewsletterSignup";
-import { BEDRIJF } from "@/lib/bedrijf";
+import { AnalyticsConsent } from "@/components/shared/AnalyticsConsent";
+import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
+import { ADRES_REGEL, BEDRIJF } from "@/lib/bedrijf";
 import { BEELD } from "@/lib/beeld";
+import { openingSummary } from "@/lib/openingHours";
+import { FooterPanel } from "./FooterPanel";
+import styles from "./footer.module.css";
 
-
-/**
- * De footer.
- *
- * Kort gehouden. Hij besloeg eerst een half scherm: een nieuwsbriefblok over de
- * volle breedte, daaronder vier kolommen met elf links, en daaronder nog een
- * balk. Wie zover scrollt zoekt het adres, de tijden of één pagina — niet een
- * tweede navigatie. Nu: drie kolommen, één regel links, klaar.
- *
- * De gemeentelinks blijven staan. Die zijn geen sier: ze zijn de interne weg
- * naar /bezorgen/wassenaar en dergelijke, en dat is precies waarop gezocht wordt.
- */
 export function Footer() {
   const t = useTranslations("footer");
   const nav = useTranslations("nav");
+  const shared = useTranslations("gedeeld");
   const locale = useLocale();
   const p = (pad: string) => `/${locale}${pad}`;
-
   const jaar = new Date().getFullYear();
   const cityGuideUrl = process.env.CITYGUIDE_URL?.replace(/\/$/, "");
   const cityGuideCopy = {
@@ -31,13 +24,6 @@ export function Footer() {
     de: "Schaap's Vis auf der Leidener Marktroute entdecken",
   }[locale] ?? "Ontdek Schaap's Vis in de wandelroute langs de Leidse markt";
 
-  /**
-   * Drie groepjes in plaats van één rij van zestien links.
-   *
-   * De gemeentelinks staan apart onderaan, klein. Ze moeten blijven — daar komt
-   * het zoekverkeer op "vis bezorgen Wassenaar" binnen — maar tussen de gewone
-   * navigatie maakten ze van de voet een lijst die eruitziet als SEO-vulling.
-   */
   const groepen = [
     {
       kop: nav("assortiment"),
@@ -47,7 +33,6 @@ export function Footer() {
         { href: p("/visschalen"), label: nav("visschalen") },
         { href: p("/assortiment"), label: nav("assortiment") },
         { href: p("/aanbiedingen"), label: locale === "de" ? "Kundenangebote" : locale === "en" ? "Customer offers" : "Aanbiedingen voor klanten" },
-
       ],
     },
     {
@@ -73,114 +58,70 @@ export function Footer() {
   ];
 
   return (
-    <footer style={{ backgroundColor: "var(--navy-dark)", color: "rgba(250,246,239,0.75)" }}>
-      <div className="site-container py-9 grid gap-8 md:grid-cols-[1.1fr_1fr] lg:grid-cols-[1fr_1fr_20rem]">
-        {/* ── Waar we zijn ──────────────────────────────────────────────── */}
-        <div>
-          {/* De ronde badge klein terug laten komen: herkenbaar, zonder dat de
-              voet een reclamebord wordt. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={BEELD.logoBadge.bestand}
-              alt={BEDRIJF.naam}
-              width={88}
-              height={88}
-              loading="lazy"
-              className="h-[88px] w-[88px] object-contain mb-4 rounded-md bg-white p-1"
-            />
-          <address className="not-italic text-base leading-relaxed" style={{ opacity: 0.9 }}>
-            <span style={{ color: "var(--cream)", fontWeight: 600 }}>{BEDRIJF.naam}</span>
-            <br />
-            {BEDRIJF.adres.straat}, {BEDRIJF.adres.postcode} {BEDRIJF.adres.plaats}
-            <br />
-            <a href={`tel:${BEDRIJF.telefoon.e164}`} className="hover:text-white transition-colors">
-              {BEDRIJF.telefoon.weergave}
-            </a>
-          </address>
-          <div className="flex gap-4 mt-3 text-sm" style={{ opacity: 0.9 }}>
-            <a
-              href={BEDRIJF.socials.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition-colors underline underline-offset-4"
-            >
-              Facebook
-            </a>
-            <a
-              href={BEDRIJF.socials.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition-colors underline underline-offset-4"
-            >
-              Instagram
-            </a>
+    <footer className={styles.footer}>
+      <div className={`site-container ${styles.grid}`}>
+        <address className={styles.contact}>
+          <div className={styles.identity}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={BEELD.logoBadge.bestand} width={58} height={58} alt="" loading="lazy" />
+            <div>
+              <strong>{BEDRIJF.naam}</strong>
+              <a className={styles.address} href={BEDRIJF.maps.route} aria-label={`${shared("route")} · ${ADRES_REGEL}`}>
+                {ADRES_REGEL}<ArrowUpRight size={15} aria-hidden="true" />
+              </a>
+            </div>
           </div>
-          {cityGuideUrl && (
-            <a
-              href={`${cityGuideUrl}/${locale}/leiden/schaapsvishandel`}
-              className="mt-4 inline-block text-sm underline underline-offset-4 hover:text-white transition-colors"
-            >
-              {cityGuideCopy}
+          <div className={styles.contactActions}>
+            <a className={styles.phone} href={`tel:${BEDRIJF.telefoon.e164}`} aria-label={shared("bellen", { nummer: BEDRIJF.telefoon.weergave })}>
+              <Phone size={16} aria-hidden="true" />{BEDRIJF.telefoon.weergave}
             </a>
-          )}
-        </div>
+            <WhatsAppButton />
+          </div>
+        </address>
 
-        {/* ── Wanneer we er zijn ────────────────────────────────────────── */}
-        <dl className="text-base leading-relaxed space-y-3 md:text-lg" style={{ opacity: 0.9 }}>
-          {[
-            [t("winkel"), openingSummary("winkel", locale)],
-            [t("markt"), t("marktTijden")],
-            [t("voorschoten"), t("voorschotenTijden")],
-          ].map(([wat, wanneer]) => (
-            <div key={wat} className="flex flex-wrap gap-x-2">
-              <dt style={{ color: "var(--cream)", fontWeight: 600 }}>{wat}</dt>
-              <dd>{wanneer}</dd>
-            </div>
-          ))}
-        </dl>
+        <FooterPanel title={t("kopTijden")}>
+          <dl className={styles.hours}>
+            {[
+              [t("winkel"), openingSummary("winkel", locale)],
+              [t("markt"), t("marktTijden")],
+              [t("voorschoten"), t("voorschotenTijden")],
+            ].map(([place, hours]) => (
+              <div key={place}><dt>{place}</dt><dd>{hours}</dd></div>
+            ))}
+          </dl>
+          <p className={styles.payment}>{t("betalen")}</p>
+        </FooterPanel>
 
-        {/* ── Nieuwsbrief ───────────────────────────────────────────────── */}
-        <div>
-          <p className="kapitaal kapitaal-licht mb-2 text-sm tracking-[0.12em]">{locale === "de" ? "Rabatte und Neuigkeiten" : locale === "en" ? "Offers and news" : "Kortingen en nieuws"}</p>
+        <FooterPanel title={t("kopNieuwsbrief")}>
           <NewsletterSignup compact locale={locale} />
-        </div>
-      </div>
+        </FooterPanel>
 
-      {/* ── De pagina's, gegroepeerd ─────────────────────────────────────── */}
-      <nav
-        aria-label={t("kopPaginas")}
-        style={{ borderTop: "1px solid rgba(250,246,239,0.14)" }}
-      >
-        <div className="site-container footer-groups py-7 grid gap-8">
-          {groepen.map((groep) => (
-            <div key={groep.kop}>
-              <p className="kapitaal kapitaal-licht mb-3 text-sm tracking-[0.12em]">{groep.kop}</p>
-              <ul className="footer-link-list grid gap-x-4 gap-y-2 text-base" style={{ opacity: 0.88 }}>
-                {groep.links.map(({ href, label }) => (
-                  <li key={href}>
-                    <Link href={href} className="hover:text-white transition-colors">
-                      {label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+        <div className={styles.directory}>
+          <FooterPanel title={t("kopPaginas")}>
+            <nav className={styles.groups} aria-label={t("kopPaginas")}>
+              {groepen.map((groep) => (
+                <div key={groep.kop}>
+                  <h2>{groep.kop}</h2>
+                  <ul>
+                    {groep.links.map(({ href, label }) => <li key={href}><Link href={href}>{label}</Link></li>)}
+                  </ul>
+                </div>
+              ))}
+            </nav>
+            <div className={styles.socials}>
+              <a href={BEDRIJF.socials.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
+              <a href={BEDRIJF.socials.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+              {cityGuideUrl && <a href={`${cityGuideUrl}/${locale}/leiden/schaapsvishandel`}>{cityGuideCopy}</a>}
             </div>
-          ))}
+          </FooterPanel>
         </div>
 
-      </nav>
-
-      {/* ── Onderrand ────────────────────────────────────────────────────── */}
-      <div style={{ borderTop: "1px solid rgba(250,246,239,0.14)" }}>
-        <div
-          className="site-container py-4 text-sm leading-6 flex flex-wrap gap-x-6 gap-y-2 justify-between"
-          style={{ opacity: 0.9 }}
-        >
-          <span>
-            &copy; {jaar} {BEDRIJF.naam} &middot;{" "}
-            {t("opgericht", { jaar: BEDRIJF.opgericht, oprichter: BEDRIJF.oprichter })}
-          </span>
-          <span>{t("betalen")}</span>
+        <div className={styles.bottom}>
+          <small>© {jaar} {BEDRIJF.naam}<span> · {t("opgericht", { jaar: BEDRIJF.opgericht, oprichter: BEDRIJF.oprichter })}</span></small>
+          <div className={styles.privacy}>
+            <Link href={p("/privacyverklaring")}>{t("privacy")}</Link>
+            <AnalyticsConsent locale={locale} />
+          </div>
         </div>
       </div>
     </footer>

@@ -25,7 +25,7 @@ export function Chrome({
 }: {
   header: ReactNode;
   footer: ReactNode;
-  /** Dingen die alleen op de winkelsite horen, zoals de WhatsApp-knop. */
+  /** Onder meer de winkelmand voor aanvragen op de winkelsite. */
   extras: ReactNode;
   children: ReactNode;
 }) {
