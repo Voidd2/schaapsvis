@@ -1,6 +1,7 @@
 import { whatsappLink } from "@/lib/bedrijf";
 import { gourmetFish, gourmetRequestLink, type Portions } from "@/lib/gourmet-request";
-import { inquiryText, platterInquiryMessage, type PlatterInquiry } from "@/lib/platter-inquiry";
+import { inquiryText, platterInquiryMessage, platterWeightLines, readPlatterWeights, type PlatterInquiry } from "@/lib/platter-inquiry";
+import { assemblyLink, delicacyMode } from "@/lib/counter-selection";
 import { catalogProduct } from "@/lib/seafood-catalog";
 import { deliDraft, isDeliTrio } from "@/lib/deli-trio";
 import { giftRequestLink } from "@/lib/gift-request";
@@ -14,6 +15,16 @@ function draft(data: URLSearchParams, locale: string) {
   const kind = field("kind");
   const people = field("people"), date = field("date"), wishes = field("wishes");
   if (!validPickupDate(date)) return null;
+  if (kind === "assembly") {
+    const mode = field("mode");
+    if (mode === "gift-trio" || mode === "custom" || mode === "package") {
+      const name = giftCopy(locale).items[mode === "package" ? 0 : mode === "gift-trio" ? 2 : 3][0];
+      return assemblyLink(mode,locale,name,data);
+    }
+    const slug = field("slug");
+    if ((!isDeliTrio(slug) && slug !== "zalmslaatje-de-luxe") || mode !== delicacyMode(slug)) return null;
+    return assemblyLink(delicacyMode(slug),locale,catalogProduct(slug,locale).naam,data);
+  }
   if (kind === "gourmet") {
     const packaging = field("packaging");
     if (packaging !== "standard" && packaging !== "premium") return null;
@@ -27,11 +38,12 @@ function draft(data: URLSearchParams, locale: string) {
     const selection = field("selection") as PlatterInquiry["kind"];
     const presentation = field("presentation") as PlatterInquiry["presentation"];
     if (!Object.hasOwn(t.kinds, selection) || !Object.hasOwn(t.presentations, presentation)) return null;
-    if (selection === "salads" ? !field("amount") : !/^[1-9]\d*$/.test(people)) return null;
+    const weights = readPlatterWeights(data);
+    const weightLines = platterWeightLines(locale,selection,weights);
+    if (!weightLines || (selection === "salads" ? !field("amount") && !weightLines.length : !/^[1-9]\d*$/.test(people))) return null;
     const budget = field("budget");
     if (budget && !/^\d+(?:[.,]\d{1,2})?$/.test(budget)) return null;
-    const fish = data.getAll("fish").filter((id): id is PlatterInquiry["fish"][number] => Object.hasOwn(t.fishes,id));
-    return whatsappLink(platterInquiryMessage(locale, {kind:selection, fish, excluded:field("excluded"), presentation,
+    return whatsappLink(platterInquiryMessage(locale, {kind:selection, weights, fish:[], excluded:field("excluded"), presentation,
       people, amount:field("amount"), date, dateUnknown:!date, budget, remarks:wishes, allergies:field("allergies")}));
   }
   if (kind === "deli") {

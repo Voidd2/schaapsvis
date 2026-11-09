@@ -6,6 +6,9 @@ export const GIFT_PACKAGE_GRAMS = [[150, 75, 75, 0], [200, 150, 150, 0], [300, 2
 
 // Counter prices in cents per 100 g, including the shop’s smoked salmon belly rate.
 const shrimp = 795, eel = 850, salmon = 595, mackerel = 495, belly = 275;
+export const COUNTER_RATES = { shrimp, eel, salmon, mackerel, belly };
+export const STANDARD_FISH_TRIO = 1599;
+export const GIFT_BOX = 395;
 const gravlaxPerKg = Math.round(PRIJZEN["gravad-lax"].euro * 100);
 export const PACKAGE_EXTRAS = [packedRate(Math.round(gravlaxPerKg / 10)), packedRate(shrimp)] as const;
 export const trioRates = [shrimp, eel, salmon, mackerel].map(packedRate);

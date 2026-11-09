@@ -1,4 +1,4 @@
-import { trioPriceCents, TRIO_GRAMS } from "./gift-pricing";
+import { STANDARD_FISH_TRIO, trioPriceCents, TRIO_GRAMS } from "./gift-pricing";
 import { gourmetPriceCents } from "./gourmet-pricing";
 
 export type FeestdagenCategorie = "visschalen" | "gourmet" | "delicatessen";
@@ -293,12 +293,12 @@ export const FEESTDAGEN_PRODUCTEN: readonly FeestdagenProduct[] = [
   },
   ...TRIO_GRAMS.map((grams, size): FeestdagenProduct => ({
     slug: ["luxe-trio-klein", "luxe-trio-middel", "luxe-vistrio"][size],
-    naam: "Luxe vistrio " + ["klein", "middel", "groot"][size],
-    prijsCents: trioPriceCents(size)!,
+    naam: size === 0 ? "Luxe vistrio" : "Luxe vistrio " + ["klein", "middel", "groot"][size],
+    prijsCents: size === 0 ? STANDARD_FISH_TRIO : trioPriceCents(size)!,
     eenheid: "per stuk",
     afbeelding: size === 0 ? "/images/dirks/luxe-trio-klein.webp" : "/images/dirks/luxe-vistrio.webp",
     categorie: "delicatessen",
-    intro: `Drie vakjes met elk circa ${grams} g: Hollandse garnalen, gerookte paling en gerookte zalm. Inclusief opmaak en verpakking.`,
+    intro: size === 0 ? "Kies drie vissoorten, elk circa 40 g. Extra vis voegt u per 100 g toe." : `Drie vakjes met elk circa ${grams} g: Hollandse garnalen, gerookte paling en gerookte zalm. Inclusief opmaak en verpakking.`,
     samenstelling: ["Hollandse garnalen", "gerookte paling", "gerookte zalm"].map(fish => `Circa ${grams} gram ${fish}`).concat(["Cocktailsaus", "Mosterd-dillesaus"]),
     allergenen: ["Schaaldieren", "Vis", "Ei", "Mosterd", "Melk"],
   })),

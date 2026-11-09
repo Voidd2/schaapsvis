@@ -33,15 +33,24 @@ async function verifyComposers(ctx, tab) {
   const platter = tab.locator("#maatwerk form:visible");
   await platter.locator('[name="people"]').fill("6");
   await platter.locator('[name="fish"][value="eel"]').check();
-  await review(platter, ["Gerookte paling","6"]);
+  await platter.locator('[name="weight-eel"]').fill("150");
+  await review(platter, ["Gerookte paling","150 g","8,50","12,75"]);
   const trio = await openPanel(tab.locator('[data-catalog-card="luxe-trio-klein"]'));
   await trio.locator('[name="choice0"]').selectOption("mackerel");
-  await trio.locator('[name="grams0"]').fill("125");
-  await review(trio, ["makreelfilet","125 g"]);
+  await trio.getByRole("checkbox",{name:"Gerookte paling",exact:true}).check();
+  await review(trio, ["makreelfilet","3 × 40 g","15,99","100 g","8,50","24,49"]);
+  const salads = await openPanel(tab.locator('[data-catalog-card="salade-trio"]'));
+  await salads.locator('[name="choice0"]').selectOption("spicy");
+  await review(salads, ["Pikante tonijnsalade","11,99"]);
+  const luxe = await openPanel(tab.locator('[data-catalog-card="zalmslaatje-de-luxe"]'));
+  await luxe.locator('[name="choice0"]').selectOption("wasabi");
+  await review(luxe, ["Zalm-wasabisalade","15,99"]);
   const gift = await openPanel(tab.locator("#geschenken article").first());
-  await gift.locator('[name="size"]').selectOption("2");
-  await gift.locator('[name="voucher"]').fill("15");
-  await review(gift, ["Groot","15,00"]);
+  await gift.locator('[name="fish"][value="salmon"]').check();
+  await gift.locator('[name="weight-salmon"]').fill("200");
+  await review(gift, ["200 g","Zonder cadeaudoos","11,90"]);
+  await gift.locator('[name="box"]').check();
+  await review(gift, ["200 g","Cadeaudoos","3,95","15,85"]);
 }
 
 function isLocalPreview(req) {
@@ -83,6 +92,17 @@ function isLocalPreview(req) {
     }
     editorial = false;
     await visit("/nl/visschalen");
+    const platterEditor = p.locator("#maatwerk form:visible");
+    await platterEditor.getByRole("checkbox",{name:"Gerookte zalm",exact:true}).check();
+    await platterEditor.locator('[name="weight-salmon"]').fill("200");
+    assert.match(await platterEditor.locator('[aria-live="polite"]').innerText(), /11,90/);
+    const giftEditor = p.locator("#geschenken article").first().locator("details:visible");
+    await giftEditor.locator("summary").click();
+    await giftEditor.getByRole("checkbox",{name:"Gerookte paling",exact:true}).check();
+    await giftEditor.locator('[name="box"]').check();
+    assert.match(await giftEditor.locator('[aria-live="polite"]').innerText(), /12,45/);
+    await giftEditor.locator('[name="box"]').uncheck();
+    assert.match(await giftEditor.locator('[aria-live="polite"]').innerText(), /8,50/);
     const slug = "visschotel-klein-3-5-pers";
     await p.locator('[data-catalog-card="' + slug + '"] .request-add').click();
     await visit("/nl/feestdagen");
@@ -101,13 +121,13 @@ function isLocalPreview(req) {
 
     // Exercise the *current* Cloudflare module failing, not just a stale URL.
     if (process.argv.includes("--cloudflare")) {
-      const broken = await browser.newContext();
+      const broken = await browser.newContext({ reducedMotion: "reduce" });
       const tab = await broken.newPage();
       const blocked = new Set();
       await broken.route("**/*", r => {
         const u = new URL(r.request().url());
         if (!isLocalPreview(r.request())) return r.abort();
-        const match = u.pathname.match(/\/(Productkeuze|CatalogPhoto|CatalogCart|GourmetRequest|GiftRequest|PlatterInquiry|Bestelomgeving)-[^/]+\.js$/);
+        const match = u.pathname.match(/\/(Productkeuze|CatalogPhoto|CatalogCart|GourmetRequest|LiveAssemblyForm|PlatterInquiry|Bestelomgeving)-[^/]+\.js$/);
         if (match) { blocked.add(match[1]); return r.abort("blockedbyclient"); }
         return r.continue();
       });
@@ -134,7 +154,7 @@ function isLocalPreview(req) {
       console.log("Blocked in the same browser:", [...blocked].join(", "), "— catalogues, photos, prices and WhatsApp order drafts remain available.");
       await verifyComposers(broken,tab);
       await broken.close();
-      const plain = await browser.newContext({ javaScriptEnabled: false });
+      const plain = await browser.newContext({ javaScriptEnabled: false, reducedMotion: "reduce" });
       await plain.route("**/*", r => isLocalPreview(r.request()) ? r.continue() : r.abort());
       const noJS = await plain.newPage();
       for (const [locale, label] of [["nl", "Bestellen via WhatsApp"], ["en", "Order via WhatsApp"], ["de", "Per WhatsApp bestellen"]]) {

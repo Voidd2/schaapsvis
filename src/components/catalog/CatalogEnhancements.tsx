@@ -2,7 +2,8 @@ import type { ComponentProps } from "react";
 import { BedieningSlot } from "./BedieningSlot";
 import { ComposerSlot } from "./NativeComposer";
 import { CatalogPhoto as Photo } from "./CatalogPhoto";
-import { GiftRequest as Gift } from "./GiftRequest";
+import { CustomAssembly } from "./CustomAssembly";
+import type { GiftRequest as GiftValues } from "@/lib/gift-request";
 import { GourmetRequest as Gourmet } from "./GourmetRequest";
 import { PlatterInquiry as Inquiry } from "../PlatterInquiry";
 import { StaticResponsiveImage } from "../StaticResponsiveImage";
@@ -20,8 +21,8 @@ export function CatalogPhoto(props: ComponentProps<typeof Photo>) {
   </a>}><Photo {...props} /></BedieningSlot>;
 }
 
-export function GiftRequest(props: ComponentProps<typeof Gift>) {
-  return <ComposerSlot {...props}><Gift {...props} /></ComposerSlot>;
+export function GiftRequest({locale,kind,product}:{locale:string;kind:GiftValues["kind"];product:string}) {
+  return <CustomAssembly locale={locale} product={product} mode={kind === "trio" ? "gift-trio" : kind}/>;
 }
 export function GourmetRequest(props: ComponentProps<typeof Gourmet>) {
   return <details id="gourmet-samenstellen" className="native-composer scroll-mt-48">
