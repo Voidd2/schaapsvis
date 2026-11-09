@@ -7,6 +7,7 @@ const copy = {
     intro: "Persoonlijke accountadressen en adressen uit het kortingsformulier. De status geeft aan wie kortingsmails mag ontvangen.",
     address: "E-mailadres",
     offers: "Kortingsmails",
+    campaign: "VÅRLAKS-pop-up",
     subscribed: "Toestemming gegeven",
     pending: "Wacht op bevestiging",
     unsubscribed: "Afgemeld",
@@ -23,6 +24,7 @@ const copy = {
     intro: "Personal account and discount signup addresses. The status shows who can receive marketing emails.",
     address: "Email address",
     offers: "Marketing emails",
+    campaign: "VÅRLAKS pop-up",
     subscribed: "Opted in",
     pending: "Awaiting confirmation",
     unsubscribed: "Unsubscribed",
@@ -39,6 +41,7 @@ const copy = {
     intro: "Private Kontoadressen und Anmeldungen für Rabatte. Der Status zeigt, wer Angebotsmails erhalten darf.",
     address: "E-Mail-Adresse",
     offers: "Angebotsmails",
+    campaign: "VÅRLAKS-Pop-up",
     subscribed: "Eingewilligt",
     pending: "Bestätigung ausstehend",
     unsubscribed: "Abgemeldet",
@@ -54,6 +57,8 @@ const copy = {
 type Entry = {
   email: string;
   marketing: "subscribed" | "pending" | "unsubscribed" | "not-subscribed";
+  source: string | null;
+  marketing_at: string | null;
 };
 const statusLabel = {
   subscribed: "subscribed",
@@ -113,7 +118,10 @@ export function EmailDirectory({ locale }: { locale: string }) {
             {entries.map(row => (
               <tr key={row.email} className="border-t">
                 <td className="break-all py-3 pr-3">{row.email}</td>
-                <td>{t[statusLabel[row.marketing]]}</td>
+                <td className="py-3">{t[statusLabel[row.marketing]]}
+                  {row.source === "varlaks-popup" && <small className="block">{t.campaign}</small>}
+                  {row.marketing_at && <time className="block text-sm" dateTime={row.marketing_at}>{new Intl.DateTimeFormat(locale, {dateStyle:"medium", timeStyle:"short", timeZone:"Europe/Amsterdam"}).format(new Date(row.marketing_at))}</time>}
+                </td>
               </tr>
             ))}
           </tbody>

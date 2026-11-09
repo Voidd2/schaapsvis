@@ -18,6 +18,7 @@ export function DiscountSignup({ locale, varlaksOffer = false }: {locale: string
         method: "POST", credentials: "same-origin", headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
           email: form.get("email"), locale, form: varlaksOffer ? "varlaks" : "discounts",
+          ...(varlaksOffer && { consentVersion: "varlaks-weekly-offers-v2" }),
           // The offer's submit button explicitly requests marketing emails.
           consent: varlaksOffer || form.get("consent") === "on",
         }),
@@ -43,7 +44,7 @@ export function DiscountSignup({ locale, varlaksOffer = false }: {locale: string
         {state === "error" || state === "limited" ? <p role="alert">{state === "limited" ? t.limited : t.retry}</p> : null}
       </form>
       <noscript><style>{".discount-signup form{display:none}"}</style><p>{t.js}</p></noscript>
-      <p className="discount-privacy">{t.unsubscribe} <Link href={`/${locale}/privacyverklaring#emailaanbiedingen`}>{t.privacy}</Link></p>
+      <p className="discount-privacy">{varlaksOffer ? t.offerUnsubscribe : t.unsubscribe} <Link href={`/${locale}/privacyverklaring#emailaanbiedingen`}>{varlaksOffer ? t.offerPrivacy : t.privacy}</Link></p>
     </>}
   </div>;
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { DiscountSignup } from "@/components/shared/DiscountSignup";
 import { discountSignupCopy } from "@/lib/discount-signup";
@@ -17,6 +17,8 @@ function alreadyShown() {
 
 export function VarlaksDiscountOffer({ locale }: { locale: string }) {
   const dialog = useRef<HTMLDialogElement>(null);
+  const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const copy = discountSignupCopy(locale);
 
   useEffect(() => {
@@ -36,7 +38,7 @@ export function VarlaksDiscountOffer({ locale }: { locale: string }) {
           schedule();
           return;
         }
-        element.showModal();
+        setOpen(true);
         shownOnThisPage = true;
         try { localStorage.setItem(shownKey, "1"); } catch { /* Still once during this page session. */ }
       }, location.hash === "#film" ? 10000 : 5000);
@@ -52,10 +54,46 @@ export function VarlaksDiscountOffer({ locale }: { locale: string }) {
     };
   }, []);
 
-  return <dialog ref={dialog} className={styles.offerDialog} aria-label={copy.offerTitle}>
-    <button type="button" className={styles.offerClose} aria-label={copy.closeOffer} onClick={() => dialog.current?.close()}>
+  useEffect(() => {
+    const element = dialog.current;
+    if (!open || !element) return;
+    const previousFocus = document.activeElement;
+    const observer = new ResizeObserver(position);
+    let frame = 0;
+    function position() {
+      const banner = document.querySelector(".cookie-choice-banner");
+      const offset = banner ? window.innerHeight - banner.getBoundingClientRect().top : 0;
+      element?.style.setProperty("--cookie-space", Math.max(0, offset) + "px");
+      if (banner) observer.observe(banner);
+    }
+    function afterChoice() { frame = requestAnimationFrame(position); }
+    function onEscape(event: KeyboardEvent) {
+      if (event.key === "Escape" && !document.querySelector("dialog:modal")) setOpen(false);
+    }
+    position();
+    window.addEventListener("resize", position);
+    window.addEventListener("sv-analytics-consent-change", afterChoice);
+    document.addEventListener("keydown", onEscape);
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+      window.removeEventListener("resize", position);
+      window.removeEventListener("sv-analytics-consent-change", afterChoice);
+      document.removeEventListener("keydown", onEscape);
+      if (element.contains(document.activeElement) && previousFocus instanceof HTMLElement && previousFocus.isConnected) {
+        previousFocus.focus({ preventScroll: true });
+      }
+    };
+  }, [open]);
+
+  return <dialog ref={dialog} open={open} data-expanded={expanded || undefined} className={styles.offerDialog} aria-label={copy.offerTitle}>
+    <button type="button" className={styles.offerClose} aria-label={copy.closeOffer} onClick={() => setOpen(false)}>
       <X size={22} aria-hidden="true" />
     </button>
+    <button type="button" className={styles.offerInvite} onClick={() => {
+      setExpanded(true);
+      requestAnimationFrame(() => dialog.current?.querySelector("input")?.focus({ preventScroll: true }));
+    }}>{copy.offerTitle} <span aria-hidden="true">→</span></button>
     <DiscountSignup locale={locale} varlaksOffer />
   </dialog>;
 }
