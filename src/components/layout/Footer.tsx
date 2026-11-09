@@ -1,3 +1,4 @@
+import { discountSignupCopy } from "@/lib/discount-signup";
 import Link from "next/link";
 import { ArrowUpRight, Phone } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
@@ -32,7 +33,7 @@ export function Footer() {
         { href: p("/relatiegeschenken"), label: locale === "de" ? "Firmengeschenke" : locale === "en" ? "Business gifts" : "Relatiegeschenken" },
         { href: p("/visschalen"), label: nav("visschalen") },
         { href: p("/assortiment"), label: nav("assortiment") },
-        { href: p("/aanbiedingen"), label: locale === "de" ? "Kundenangebote" : locale === "en" ? "Customer offers" : "Aanbiedingen voor klanten" },
+        { href: p("/aanbiedingen"), label: discountSignupCopy(locale).title },
       ],
     },
     {

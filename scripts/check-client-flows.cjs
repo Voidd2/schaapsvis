@@ -17,7 +17,7 @@ if(!/^http:\/\/(localhost|127\.0\.0\.1):/.test(origin))throw new Error('Local se
    const mobileMenu=page.locator('button[aria-controls="mobile-navigation"]');
    assert.ok(await mobileMenu.isVisible(),'Mobile navigation toggle '+locale);
    await mobileMenu.click();
-   for(const path of ['/biologische-vis','/studentenkorting','/visschalen','/account','/account/klant','/ons-verhaal','/contact']){
+   for(const path of ['/biologische-vis','/studentenkorting','/visschalen','/account','/aanbiedingen','/ons-verhaal','/contact']){
     assert.equal(await page.locator('#mobile-navigation a[href="/'+locale+path+'"]').count(),1,'Mobile menu destination '+locale+path);
    }
    await mobileMenu.click();
@@ -30,11 +30,11 @@ if(!/^http:\/\/(localhost|127\.0\.0\.1):/.test(origin))throw new Error('Local se
    }
    const desktopMenu=page.locator('button[aria-controls="mobile-navigation"]');
    assert.equal(await desktopMenu.isVisible(),false,'Mobile navigation toggle is hidden on desktop '+locale);
-   const desktopAccount=page.locator('header details').first();
+   const desktopAccount=page.locator('header details').filter({has:page.locator('a[href="/'+locale+'/aanbiedingen"]')});
    const accountSummary=desktopAccount.locator('summary');
    assert.ok(await accountSummary.isVisible(),'Desktop account menu '+locale);
    await accountSummary.click();
-   assert.ok(await desktopAccount.locator('a[href="/'+locale+'/account/klant"]').isVisible(),'Desktop menu exposes customer account '+locale);
+   assert.ok(await desktopAccount.locator('a[href="/'+locale+'/aanbiedingen"]').isVisible(),'Desktop menu exposes discount signup '+locale);
    await accountSummary.click();
    await page.setViewportSize({width:390,height:844});
    await page.goto(origin+'/'+locale+'/visschalen',{waitUntil:'networkidle'});
