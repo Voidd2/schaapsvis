@@ -5,6 +5,50 @@ const { chromium } = require("playwright");
 const url = new URL(process.argv[2] || "http://127.0.0.1:3518");
 if (!["127.0.0.1", "localhost"].includes(url.hostname)) throw new Error("Use a local test site.");
 
+async function verifyComposers(ctx, tab) {
+  await tab.goto(new URL("/nl/visschalen",url).href);
+  async function review(panel, expected) {
+    const opened = ctx.waitForEvent("page");
+    await panel.getByRole("button", {name:/WhatsApp-concept/}).click();
+    const result = await opened;
+    const href = await result.getByRole("link",{name:"Open WhatsApp"}).getAttribute("href");
+    const link = new URL(href);
+    assert.equal(link.origin + link.pathname,"https://wa.me/31624811678");
+    const message = link.searchParams.get("text");
+    for (const part of expected) assert.ok(message.includes(part), part);
+    await result.close();
+  }
+  async function openPanel(locator) {
+    const panel = locator.locator("details.native-composer:visible").first();
+    await panel.locator("summary").waitFor();
+    if (await panel.getAttribute("open") === null) await panel.locator("summary").click();
+    return panel;
+  }
+  await tab.locator('a[href="#gourmet-keuzes"]').click();
+  const gourmet = tab.locator("#gourmet-keuzes form:visible");
+  await gourmet.locator('[name="people"]').fill("4");
+  await gourmet.locator('[name="fish"][value="salmon"]').check();
+  await gourmet.locator('[name="salmon"]').fill("400");
+  await review(gourmet, ["Zalm", "400 g", "14,00"]);
+  const platter = tab.locator("#maatwerk form:visible");
+  await platter.locator('[name="people"]').fill("6");
+  await platter.locator('[name="fish"][value="eel"]').check();
+  await review(platter, ["Gerookte paling","6"]);
+  const trio = await openPanel(tab.locator('[data-catalog-card="luxe-trio-klein"]'));
+  await trio.locator('[name="choice0"]').selectOption("mackerel");
+  await trio.locator('[name="grams0"]').fill("125");
+  await review(trio, ["makreelfilet","125 g"]);
+  const gift = await openPanel(tab.locator("#geschenken article").first());
+  await gift.locator('[name="size"]').selectOption("2");
+  await gift.locator('[name="voucher"]').fill("15");
+  await review(gift, ["Groot","15,00"]);
+}
+
+function isLocalPreview(req) {
+  const u = new URL(req.url());
+  return u.origin === url.origin && (req.method() === "GET" || (u.pathname === "/api/samenstellen" && req.method() === "POST"));
+}
+
 (async () => {
   const browser = await chromium.launch({ channel: "chrome" });
   try {
@@ -62,7 +106,7 @@ if (!["127.0.0.1", "localhost"].includes(url.hostname)) throw new Error("Use a l
       const blocked = new Set();
       await broken.route("**/*", r => {
         const u = new URL(r.request().url());
-        if (u.origin !== url.origin || r.request().method() !== "GET") return r.abort();
+        if (!isLocalPreview(r.request())) return r.abort();
         const match = u.pathname.match(/\/(Productkeuze|CatalogPhoto|CatalogCart|GourmetRequest|GiftRequest|PlatterInquiry|Bestelomgeving)-[^/]+\.js$/);
         if (match) { blocked.add(match[1]); return r.abort("blockedbyclient"); }
         return r.continue();
@@ -88,9 +132,10 @@ if (!["127.0.0.1", "localhost"].includes(url.hostname)) throw new Error("Use a l
       assert.equal(await tab.locator('main a[href^="tel:"]').count(), 0);
       for (const name of ["Productkeuze", "CatalogPhoto", "Bestelomgeving"]) assert.ok(blocked.has(name), name);
       console.log("Blocked in the same browser:", [...blocked].join(", "), "— catalogues, photos, prices and WhatsApp order drafts remain available.");
+      await verifyComposers(broken,tab);
       await broken.close();
       const plain = await browser.newContext({ javaScriptEnabled: false });
-      await plain.route("**/*", r => new URL(r.request().url()).origin === url.origin && r.request().method() === "GET" ? r.continue() : r.abort());
+      await plain.route("**/*", r => isLocalPreview(r.request()) ? r.continue() : r.abort());
       const noJS = await plain.newPage();
       for (const [locale, label] of [["nl", "Bestellen via WhatsApp"], ["en", "Order via WhatsApp"], ["de", "Per WhatsApp bestellen"]]) {
         await noJS.goto(new URL("/" + locale + "/visschalen", url).href);
@@ -99,6 +144,7 @@ if (!["127.0.0.1", "localhost"].includes(url.hostname)) throw new Error("Use a l
         assert.equal(draft.origin + draft.pathname, "https://wa.me/31624811678");
         assert.ok(draft.searchParams.get("text").includes(await card.locator("h3").innerText()));
       }
+      await verifyComposers(plain,noJS);
       await plain.close();
     }
   } finally { await browser.close(); }

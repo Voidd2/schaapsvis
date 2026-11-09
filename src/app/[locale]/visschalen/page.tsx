@@ -73,11 +73,19 @@ export default async function VisschalenPage({
       <section className="platter-intro section-wrap">
         <Kruimels items={[{ naam: BEDRIJF.naamKort, href: `/${locale}` }, { naam: nav("visschalen") }]} />
         
+        <p className="kapitaal mb-3">{t("eyebrow")}</p>
         <h1>{catalog.title}</h1>
-        <p className="platter-intro-text">{locale==="nl"?"Kies uw schaal op aantal personen. Elke prijs geldt voor de hele schaal.":locale==="en"?"Choose a platter by group size. Each price is for the whole platter.":"Wählen Sie nach Personenzahl. Jeder Preis gilt für die ganze Platte."}</p>
-        <details className="platter-directory"><summary>{locale === "de" ? "Kategorie wählen" : locale === "en" ? "Choose a category" : "Kies een categorie"}</summary><nav className="catalog-intro-links" aria-label={catalog.title}>
-          <a className="knop knop-navy" href="#visschalen">{catalog.platters} ↓</a><a className="knop knop-lijn" href="#gourmet">{catalog.gourmet} ↓</a><a className="knop knop-lijn" href="#geschenken">{locale === "de" ? "Geschenke" : locale === "en" ? "Gifts" : "Geschenken"} ↓</a><a className="knop knop-lijn" href="#maatwerk">{catalog.custom}</a>
-        </nav><ul className="platter-sizes">{MAIN_PLATTERS.map((slug,i)=><li key={slug}><a href={i===0?"#schalen-klassiek":i===3?"#schalen-luxe":i===4?"#schalen-hapjes":"#"+slug}>{catalogProduct(slug,locale).naam} ↓</a></li>)}</ul></details>
+        <p className="platter-intro-text">{catalog.intro}</p>
+        <nav className="catalog-intro-links composer-shortcuts" aria-label={catalog.title}>
+          <a className="knop knop-navy" href="#maatwerk">{locale === "en" ? "Create a fish platter" : locale === "de" ? "Fischplatte zusammenstellen" : "Visschaal samenstellen"}</a>
+          <a className="knop knop-lijn" href="#gourmet-keuzes">{locale === "en" ? "Create a gourmet platter" : locale === "de" ? "Gourmetplatte zusammenstellen" : "Visgourmet samenstellen"}</a>
+        </nav>
+        <div className="platter-browse">
+          <details className="platter-directory"><summary>{locale === "en" ? "Platter sizes" : locale === "de" ? "Plattengrößen" : "Formaten bekijken"}</summary>
+            <ul className="platter-sizes">{MAIN_PLATTERS.map((slug,i)=><li key={slug}><a href={i===0?"#schalen-klassiek":i===3?"#schalen-luxe":i===4?"#schalen-hapjes":"#"+slug}>{catalogProduct(slug,locale).naam} ↓</a></li>)}</ul>
+          </details>
+          <a href="#geschenken">{locale === "de" ? "Geschenke" : locale === "en" ? "Gifts" : "Geschenken"} ↓</a>
+        </div>
       </section>
       <SeafoodCatalog locale={locale} />
       <div className="section-wrap"><CatalogHelp locale={locale} /></div>

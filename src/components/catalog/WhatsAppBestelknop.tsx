@@ -6,5 +6,5 @@ export function WhatsAppBestelknop({ locale, product }: { locale: string; produc
     : locale === "de"
     ? ["Per WhatsApp bestellen", product ? `Hallo Schaap’s Vishandel, ich möchte Folgendes bestellen: ${product}. Wann kann ich es abholen?` : "Hallo Schaap’s Vishandel, ich möchte eine Fischplatte bestellen. Wann ist eine Abholung möglich?"]
     : ["Bestellen via WhatsApp", product ? `Hallo Schaap’s Vishandel, ik wil graag bestellen: ${product}. Wanneer kan ik dit ophalen?` : "Hallo Schaap’s Vishandel, ik wil graag een visschaal bestellen. Kunnen we een afhaalmoment afspreken?"];
-  return <a className="knop knop-navy" href={whatsappLink(message)} target="_blank" rel="noopener noreferrer">{label}</a>;
+  return <a className={product ? "knop knop-lijn" : "knop knop-navy"} href={whatsappLink(message)} target="_blank" rel="noopener noreferrer">{label}</a>;
 }
