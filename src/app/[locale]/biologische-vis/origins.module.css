@@ -1,0 +1,154 @@
+.page {
+  --line: #ccdde0;
+  --muted: #3f606a;
+  color: var(--navy-dark);
+  background: white;
+}
+.page h1, .page h2, .page h3 { color: inherit; text-wrap: balance; }
+.page h2 { font-size: clamp(1.75rem, 3vw, 2.65rem); }
+.page p { line-height: 1.6; }
+.hero, .section {
+  width: min(100% - clamp(40px, 7vw, 112px), 1336px);
+  margin-inline: auto;
+}
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  margin-top: clamp(16px, 2.5vw, 38px);
+  background: #073e50;
+  color: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.heroCopy {
+  padding: clamp(32px, 4.5vw, 74px);
+  align-self: center;
+}
+.kicker {
+  font-size: .82rem;
+  font-weight: 650;
+  letter-spacing: .065em;
+}
+.heroCopy .kicker { color: #c1e1dc; }
+.hero h1 {
+  font-size: clamp(2.6rem, 4.4vw, 4.5rem);
+  line-height: 1.07;
+  letter-spacing: -.035em;
+  margin: .27em 0 .35em;
+}
+.intro { font-size: clamp(1rem, 1.45vw, 1.2rem); max-width: 46ch; color: #f1f8f9; }
+.heroButton, .textLink, .source, .address, .heroPhoto figcaption {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+}
+.heroButton {
+  margin-top: 1.45rem;
+  min-height: 48px;
+  width: fit-content;
+  background: white;
+  color: #073e50;
+  padding: .65rem 1.1rem;
+  border-radius: 6px;
+  font-weight: 650;
+}
+.heroButton:hover { background: #dcf1ef; }
+.page a:focus-visible, .page summary:focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
+.heroButton:focus-visible { outline-color: white !important; }
+.heroPhoto { position: relative; min-height: 295px; }
+.heroPhoto img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 43%;
+}
+.heroPhoto figcaption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 42px clamp(15px, 2vw, 30px) 16px;
+  background: linear-gradient(transparent, rgb(9 31 39 / 90%));
+  color: white;
+  font-size: .9rem;
+  flex-wrap: wrap;
+}
+.heroPhoto figcaption span { margin-inline-start: auto; font-size: .8rem; }
+.section { padding-block: clamp(36px, 4.5vw, 70px); scroll-margin-top: 10rem; }
+.sectionHead, .actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.25rem; }
+.sectionHead { justify-content: space-between; margin-bottom: 1.4rem; }
+.labelGrid, .products, .story, .advice { display: grid; gap: clamp(18px, 2vw, 34px); }
+.labelGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 1.6rem 0 .45rem; }
+.label {
+  background: #f0f5ee;
+  border-top: 3px solid #55815d;
+  padding: clamp(18px, 2vw, 30px);
+  display: flex;
+  flex-direction: column;
+}
+.label:nth-child(2) { background: #ecf5f4; border-color: #3f8282; }
+.label:nth-child(3) { background: #edf3f8; border-color: #426c92; }
+.label h3 { font-size: 1.28rem; margin-bottom: .6rem; }
+.label h3 span {
+  display: block;
+  font: 650 clamp(2.1rem, 2.8vw, 2.8rem)/1 var(--font-body);
+  letter-spacing: -.045em;
+  margin-bottom: .7rem;
+}
+.label p, .product p:not(.kicker), .story p, .advice p:not(.address) { color: var(--muted); }
+.source, .textLink { min-height: 44px; width: fit-content; text-decoration: underline; text-underline-offset: .23em; }
+.source { font-size: .92rem; }
+.label .source { margin-top: auto; }
+.textLink { font-weight: 650; }
+.textLink:hover, .source:hover { color: #086780; }
+.counter { background: #f4f7f6; border-block: 1px solid #e0e9e6; }
+.products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.product { background: white; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); }
+.product figure { position: relative; }
+.product img { width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; }
+.product figcaption { position: absolute; bottom: 0; right: 0; padding: 4px 10px; background: #073e50; color: white; font-size: .8rem; border-top-left-radius: 6px; }
+.product figcaption a { display: inline-block; padding-block: 4px; text-decoration: underline; text-underline-offset: 2px; }
+.product > div { padding: clamp(18px, 2vw, 30px); }
+.product .source { margin-inline-start: 1rem; }
+.product .kicker { color: #356a70; }
+.product h3 { font-size: clamp(1.35rem, 1.8vw, 1.75rem); margin-block: .4rem .7rem; overflow-wrap: anywhere; }
+.product .textLink, .story .textLink { margin-top: .4rem; }
+.story { grid-template-columns: .9fr 1.1fr; align-items: center; column-gap: clamp(28px, 5vw, 80px); }
+.story p, .visit > p:not(.address) { max-width: 51ch; margin-top: 1rem; }
+.story .source { display: flex; }
+.story :global(.supplier-film) { border-radius: 8px; }
+.story :global(.supplier-film) button { position: relative; isolation: isolate; background: #073e50; gap: .45rem; }
+.story :global(.supplier-film) button img { position: absolute; inset: 0; height: 100%; width: 100%; object-fit: cover; object-position: center 53%; opacity: .34; z-index: -1; }
+.advice { grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+.advice details { border-bottom: 1px solid var(--line); }
+.advice summary { display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-height: 52px; padding-block: 12px; font-weight: 650; cursor: pointer; list-style: none; }
+.advice summary::-webkit-details-marker { display: none; }
+.advice summary svg { flex-shrink: 0; }
+.advice details[open] svg { transform: rotate(180deg); }
+.advice details p { max-width: 58ch; padding-bottom: 1rem; }
+.advice h2 { margin-bottom: .65rem; }
+.visit { background: #edf6f7; border-radius: 8px; padding: clamp(20px, 2.5vw, 36px); }
+.address { font-weight: 600; }
+.actions { margin-top: 1rem; }
+@media (max-width: 760px) {
+  .hero, .story, .advice { grid-template-columns: 1fr; }
+  .heroCopy { padding: 26px; }
+  .heroPhoto { min-height: 0; aspect-ratio: 2; }
+  .labelGrid { grid-template-columns: 1fr; gap: .85rem; }
+  .label { padding: 17px 20px 6px; }
+  .label h3 span { display: inline-block; margin: 0 .7rem 0 0; font-size: 1.55rem; }
+  .heroPhoto figcaption { gap: .35rem; }
+  .advice { gap: 2rem; }
+}
+@media (max-width: 680px) {
+  .products { grid-template-columns: 1fr; }
+  .product img { aspect-ratio: 3 / 2; }
+  .product .source { display: flex; margin-inline-start: 0; }
+  .heroCopy { padding: 24px 20px; }
+  .hero h1 { font-size: clamp(2.05rem, 8vw, 2.6rem); }
+  .heroPhoto { aspect-ratio: 1.8; }
+  .heroPhoto img { object-position: center 24%; }
+  .heroPhoto figcaption { font-size: .8rem; }
+  .heroPhoto figcaption span { display: block; flex-basis: 100%; margin-left: 1.4rem; }
+  .sectionHead { align-items: flex-start; gap: 0; flex-direction: column; }
+}
