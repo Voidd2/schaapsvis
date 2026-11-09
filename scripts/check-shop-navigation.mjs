@@ -87,12 +87,12 @@ for (const locale of ["nl","en","de"]) {
 const { trioPriceCents, packagePriceCents } = load("src/lib/gift-pricing.ts");
 assert.deepEqual([0, 1, 2].map(i => trioPriceCents(i)), [926, 1389, 1852]);
 assert.deepEqual([0, 1, 2].map(i => packagePriceCents(i)), [1976, 3333, 4950]);
-assert.equal(packagePriceCents(0, [0, 1]), 3121);
+assert.equal(packagePriceCents(0, [0, 1]), 3171);
 assert.equal(packagePriceCents(1, [0, 0]), null);
 assert.equal(trioPriceCents(1, [0, 1, 3]), 1329);
 const giftDraft = giftRequestLink("nl", { kind: "package", product: "Test", size: 0, extras: [0, 1], fish: [], wishes: "", voucher: true, voucherAmount: "10" });
 const pricedText = new URL(giftDraft).searchParams.get("text");
-for (const value of ["500 g", "31,21", "41,21", "100 g Gravad lax", "100 g Hollandse garnalen"]) assert.ok(pricedText.includes(value));
+for (const value of ["500 g", "31,71", "41,71", "100 g Gravad lax", "100 g Hollandse garnalen"]) assert.ok(pricedText.includes(value));
 assert.deepEqual(GIFT_PACKAGE_GRAMS.map(items => items.reduce((sum, grams) => sum + grams, 0)), [300, 500, 800]);
 assert.deepEqual(GIFT_PACKAGE_GRAMS.map(items => items[3]), [0, 0, 100]);
 for (const [input, cents] of [["25", 2500], ["25,50", 2550], ["25.50", 2550], ["0,01", 1], [" 100 ", 10000]]) assert.equal(giftVoucherCents(input), cents);
@@ -223,9 +223,7 @@ if (process.env.PLATTER_DETAIL_EVIDENCE) {
 }
 
 const { normalizeRequest, requestTotal, requestMessage } = load("src/lib/catalog-request.ts");
-assert.equal(MAIN_PLATTERS.length, 6);
-assert.equal(new Set([...MAIN_PLATTERS, ...GOURMET, ...DELICACIES, ...SECONDARY, ...legacyTrioSlugs, "zalmslaatje-de-luxe"]).size, FEESTDAGEN_PRODUCTEN.length);
-assert.deepEqual(MAIN_PLATTERS.map(slug => FEESTDAGEN_PRODUCTEN.find(p => p.slug === slug).prijsCents), [5950,7350,9850,16000,6750,8550]);
+assert.ok(SECONDARY.every(slug => FEESTDAGEN_PRODUCTEN.find(p => p.slug === slug)?.categorie !== "visschalen"));
 for (const locale of ["nl","en","de"]) for (const source of FEESTDAGEN_PRODUCTEN) {
   const localized = catalogProduct(source.slug, locale);
   assert.equal(localized.prijsCents, source.prijsCents);
@@ -235,33 +233,37 @@ for (const locale of ["nl","en","de"]) for (const source of FEESTDAGEN_PRODUCTEN
   assert.ok(fs.existsSync(path.join("public", localized.afbeelding)));
   if(source.slug === "visschotel-luxe-10-14-pers") assert.match(localized.naam, /10–14/);
 }
-for (const salad of SALAD_REQUESTS) assert.ok(fs.existsSync(path.join("public", salad.image)));
-assert.equal(new Set(SALAD_REQUESTS.map(s => s.image)).size, 4);
+for (const salad of SALAD_REQUESTS.filter(s => s.image)) assert.ok(fs.existsSync(path.join("public", salad.image)));
+assert.equal(new Set(SALAD_REQUESTS.filter(s => s.image).map(s => s.image)).size, 4);
 for (const salad of SALAD_REQUESTS) {
   const portions = {items:{[salad.slug]:{quantity:2}},date:""};
-  assert.deepEqual(requestTotal(portions), {cents:700,incomplete:false});
+  assert.deepEqual(requestTotal(portions), {cents:2*salad.cents,incomplete:false});
   assert.match(requestMessage(portions,"nl"), /2 × 100 g/);
-  assert.match(requestMessage(portions,"nl"), /7,00/);
+  assert.ok(requestMessage(portions,"nl").includes(feestdagenBedrag(2*salad.cents)));
 }
-const request = {items:{"visschotel-middel-5-8-pers":{quantity:2,split:false}},date:""};
-assert.deepEqual(requestTotal(request), {cents:19700,incomplete:false});
-request.items["luxe-trio-klein"] = {quantity:1,split:false};
-assert.deepEqual(requestTotal(request), {cents:21299,incomplete:false});
-request.items["extra-zalmsalade"] = {quantity:2,split:false};
-assert.deepEqual(requestTotal(request), {cents:21299,incomplete:true});
-request.items["visschotel-middel-5-8-pers"].split = true;
-assert.deepEqual(requestTotal(request), {cents:21299,incomplete:true});
-for(const locale of ["nl","en","de"]) {
-  const draft = requestMessage({...request,date:"2026-12-24"},locale);
-  assert.ok(draft.includes(feestdagenBedrag(21299,locale)));
-  assert.ok(draft.includes("2026"));
-  assert.ok(draft.includes(catalogProduct("luxe-trio-klein",locale).naam));
-  assert.ok(draft.includes("5–8"));
+const { cartOptions, selectionQuote } = load("src/lib/cart-selection.ts");
+const sample = new URLSearchParams({kind:"assembly", mode:"standard-platter", people:"2", "swap-herring-fish":"mackerel", fish:"eel", "weight-eel":"100"});
+const request = {items:{"extra-krabsalade-100g":{quantity:1}},selections:[{id:"test",options:cartOptions(sample)}],date:""};
+assert.equal(selectionQuote(sample,"nl").cents,4150);
+assert.deepEqual(requestTotal(request), {cents:4500,incomplete:false});
+assert.match(requestMessage(request,"nl"), /Haring → Makreelfilet/);
+sample.set("mode","deluxe-platter"); sample.set("people","10");
+assert.equal(selectionQuote(sample,"nl").cents,19350);
+sample.set("people","0"); assert.equal(selectionQuote(sample,"nl"), null);
+assert.deepEqual(normalizeRequest({items:{"visschotel-middel-5-8-pers":{quantity:2}}}), {items:{}, date:"", reselect:true});
+const trio = new URLSearchParams({kind:"assembly",mode:"fish-trio",slug:"luxe-trio-klein",choice0:"eel",choice1:"shrimp",choice2:"salmon",fish:"gravlax","weight-gravlax":"100",voucher:"10"});
+assert.equal(selectionQuote(trio,"nl").cents,3245);
+trio.set("choice0","gravlax"); assert.equal(selectionQuote(trio,"nl"),null);
+assert.equal(selectionQuote(new URLSearchParams({kind:"assembly",mode:"package",size:"1"}),"nl"),null);
+const salads = new URLSearchParams({kind:"assembly",mode:"salad-trio",slug:"salade-trio",choice0:"mango",choice1:"mango",choice2:"wasabi"});
+for (const locale of ["nl","en","de"]) {
+  assert.equal(selectionQuote(salads,locale).cents,1199);
+  assert.match(selectionQuote(salads,locale).lines[0], /3 × 120 g/);
 }
 assert.deepEqual(normalizeRequest({items:{unknown:{quantity:1},"luxe-trio-klein":{quantity:1.5},"extra-zalmsalade":{quantity:-1}},date:"bad"}),{items:{},date:""});
-assert.deepEqual(normalizeRequest(JSON.parse(JSON.stringify(request))), {items:Object.fromEntries(Object.entries(request.items).map(([slug,line])=>[slug,{quantity:line.quantity}])), date:""});
+assert.deepEqual(normalizeRequest(JSON.parse(JSON.stringify(request))), request);
 assert.equal(normalizeRequest({items:{"luxe-trio-klein":{quantity:1,split:true}},date:""}).items["luxe-trio-klein"].split,undefined);
-console.log("Shared catalogue checks passed: 6 main choices, original routes and new medium trio, 3 languages, canonical totals, unknown salads, legacy split removal and storage validation.");
+console.log("Catalogue checks passed: per-person platters, equal-value swaps, weighed extras, salad tubs, gift trio and voucher, retired items and storage.");
 
 const { inquiryText, platterInquiryMessage } = load("src/lib/platter-inquiry.ts");
 const { whatsappLink } = load("src/lib/bedrijf.ts");

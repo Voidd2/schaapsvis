@@ -388,9 +388,9 @@ function accessiblePhotoAlt(value:string):string {
 }
 export function productPhoto(product:Product,locale="nl"):ProductPhoto|null{
  const salad = SALAD_REQUESTS.find(item => item.productSlug === product.slug);
- if (salad) {
+ if (salad?.image) {
    const i = locale === "en" ? 1 : locale === "de" ? 2 : 0;
-   return { src: salad.image, alt: salad.names[i], caption: ["AI-serveervoorbeeld", "AI serving suggestion", "KI-Serviervorschlag"][i], editorial: true, whole: false };
+   return { src: salad.image, alt: salad.names[i], caption: ["Serveervoorbeeld", "Serving suggestion", "Serviervorschlag"][i], editorial: true, whole: false };
  }
  const source=dirksPhotoMap[product.slug as keyof typeof dirksPhotoMap];
  if(source && product.slug !== "kibbeling"){

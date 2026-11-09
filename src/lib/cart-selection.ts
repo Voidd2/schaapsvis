@@ -1,3 +1,4 @@
+import { isPlatterMode, platterIngredients, platterMenu, platterModes } from "./platter-menu";
 import { assemblyQuote, byAgreement, delicacyMode, language, platterFish, saladCounter, weightQuote, type Assembly } from "./counter-selection";
 import { isDeliTrio } from "./deli-trio";
 import { feestdagenBedrag } from "./feestdagen-producten";
@@ -17,7 +18,7 @@ type Quote = { title: string; lines: string[]; cents: number; incomplete: boolea
 // Only option codes and numeric values enter session storage. User-entered notes stay in memory.
 const optionCodes = new Set<string>([
   "assembly", "gourmet", "platter", "fish-trio", "salad-trio", "deluxe-salad", "package", "gift-trio", "custom",
-  "own", "yes", "standard", "premium", "luxury", "salads", "mixed", "advice", "tubs", "house-salmon",
+  "shop", ...platterModes, ...Object.keys(platterIngredients), "own", "yes", "standard", "premium", "luxury", "salads", "mixed", "advice", "tubs", "house-salmon",
   ...platterFish.map(f => f.id), ...saladCounter.map(f => f.id), ...gourmetFish.map(f => f.id),
 ]);
 export function cartOptions(data: URLSearchParams) {
@@ -25,6 +26,7 @@ export function cartOptions(data: URLSearchParams) {
   for (const [key, value] of data) {
     if (key === "slug" && (isDeliTrio(value) || value === "zalmslaatje-de-luxe")) options.set(key, value);
     if (/^(kind|mode|selection|presentation|packaging|choice[0-2]|box|fish)$/.test(key) && optionCodes.has(value)) options.append(key, value);
+    if (key.startsWith("swap-") && Object.hasOwn(platterIngredients,key.slice(5)) && (value === "shop" || Object.hasOwn(platterIngredients,value))) options.set(key,value);
     if (key === "size" && /^(own|[012])$/.test(value)) options.set(key, value);
     if ((key === "budget" || key === "voucher") && /^\d{1,8}(?:[.,]\d{1,2})?$/.test(value)) options.set(key, value);
     if ((key === "people" || key.startsWith("weight-") && optionCodes.has(key.slice(7))) && /^\d{1,6}$/.test(value)) options.set(key, value);
@@ -36,7 +38,11 @@ export function selectionQuote(data: URLSearchParams, locale: string): Quote | n
   const kind = data.get("kind"), money = (cents: number) => feestdagenBedrag(cents, locale);
   if (kind === "assembly") {
     const mode = data.get("mode") as Assembly, slug = data.get("slug") ?? "";
-    const giftIndex = mode === "package" ? 0 : mode === "gift-trio" ? 2 : mode === "custom" ? 3 : null;
+    if (isPlatterMode(mode)) {
+      const quote = assemblyQuote(mode,locale,data);
+      return quote && { title:platterMenu[mode].names[language(locale)], lines:quote.lines, cents:quote.total, incomplete:false };
+    }
+    const giftIndex = mode === "gift-trio" ? 1 : mode === "custom" ? 2 : null;
     if (giftIndex === null && (!(isDeliTrio(slug) || slug === "zalmslaatje-de-luxe") || mode !== delicacyMode(slug))) return null;
     const quote = assemblyQuote(mode, locale, data);
     if (!quote) return null;

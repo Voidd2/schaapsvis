@@ -26,7 +26,7 @@ export const PRIJZEN: Record<string, Prijs> = {
   heek: { euro: 18.95, eenheid: "per kg" },
 
   // Gerookte vis
-  "gravad-lax": { euro: 29.95, eenheid: "per kg" },
+  "gravad-lax": { euro: 35, eenheid: "per kg" },
   "gerookte-bokking": { euro: 1.95, eenheid: "per stuk" },
   "bosje-sprot": { euro: 4.25, eenheid: "per bosje" },
   "gerookte-kipper": { euro: 1.65, eenheid: "per stuk" },

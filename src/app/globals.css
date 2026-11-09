@@ -1353,3 +1353,12 @@ body:has(#mobile-navigation) .catalog-cart-trigger { visibility: hidden; }
   .varlaks-location-card:not(:first-child) li { justify-content:flex-start; }
   .varlaks-location-card:not(:first-child) .knop { grid-column:2; grid-row:1/4; align-self:center; margin:0; }
 }
+
+.tier-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(1rem,3vw,2.5rem); align-items:start; }
+.tier-card { scroll-margin-top:9rem; }
+.tier-card > img { width:100%; height:auto; aspect-ratio:2.45; object-fit:contain; background:#faf9f6; }
+.menu-options { border-top:1px solid var(--linen); }
+.native-composer-form .menu-options > summary { display:list-item; list-style:disclosure-closed inside; padding:.75rem 0; }
+.native-composer-form .menu-options[open] > summary { list-style-type:disclosure-open; }
+.menu-options > label { display:block; margin-top:.65rem; }
+@media(max-width:700px) { .tier-grid { grid-template-columns:minmax(0,1fr); } }

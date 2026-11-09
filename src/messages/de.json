@@ -38,7 +38,7 @@
     "bezorgenPlaatsTitle": "Frischen Fisch liefern lassen in {plaats} | Fischhändler aus Leiden",
     "bezorgenPlaatsDesc": "Frischen Fisch oder eine Fischplatte in {plaats} liefern lassen? Schaap's Vishandel aus Leiden fährt {dagen} raus. Bestellung bis 12:00 Uhr am Vortag, Zahlung an der Tür oder demnächst online.",
     "visschalenTitle": "Fischplatten in Leiden für Feiern und Veranstaltungen | Schaap's",
-    "visschalenDesc": "Fischplatten in Leiden: klassisch, Deluxe oder Häppchen mit festem Gesamtpreis je Größe. Individuelle Platten nach Absprache, mit etwa 17,50 € pro Person als Richtbetrag.",
+    "visschalenDesc": "Die Standard-Fischplatte kostet 16,50 € pro Person, die Deluxe-Fischplatte 18,50 €. Extras berechnen wir zum Ladenpreis.",
     "barbecueTitle": "Fisch für Grill und Gourmet in Leiden | Schaap’s Vishandel",
     "barbecueDesc": "Fisch-Grillpakete, Gourmetauswahl und einzelne Fischspieße in Leiden. Sehen Sie sich unser Angebot an und besprechen Sie Ihre Wünsche direkt per WhatsApp mit Schaap’s Vishandel."
   },
@@ -465,7 +465,7 @@
   "visschaal": {
     "eyebrow": "Umtrunk · Geburtstag · Weihnachten",
     "kop": "Fischplatten zum Teilen.",
-    "inleiding": "Wählen Sie klassisch, Deluxe oder Häppchen. Entdecken Sie Größe, Zusammenstellung und Preis.",
+    "inleiding": "Die Standard-Fischplatte kostet 16,50 € pro Person, die Deluxe-Fischplatte 18,50 €. Extras berechnen wir zum Ladenpreis.",
     "per100": "pro 100 g",
     "perStuk": "pro {eenheid}",
     "seizoen": "{periode}",
@@ -473,8 +473,8 @@
     "niksGekozen": "Wählen Sie oben eine Platte und die Personenzahl.",
     "gewichtRegel": "{gewicht} extra",
     "personenRegel": "Für {personen} Personen",
-    "vergelijking": "Nur für individuelle Platten verwenden wir etwa 17,50 € pro Person als Richtbetrag. Der Preis einer festen Ausführung gilt für die gesamte gewählte Größe.",
-    "voorlopig": "Nur für individuelle Platten verwenden wir etwa 17,50 € pro Person als Richtbetrag. Der Preis einer festen Ausführung gilt für die gesamte gewählte Größe.",
+    "vergelijking": "Die Standard-Fischplatte kostet 16,50 € pro Person, die Deluxe-Fischplatte 18,50 €. Extras berechnen wir zum Ladenpreis.",
+    "voorlopig": "Die Standard-Fischplatte kostet 16,50 € pro Person, die Deluxe-Fischplatte 18,50 €. Extras berechnen wir zum Ladenpreis.",
     "hoeveelKop": "Wie viel brauche ich?",
     "hoeveelTekst": "Rechnen Sie mit {borrel} Gramm pro Person, wenn es auch anderes Essen gibt, und {maaltijd} Gramm, wenn die Platte die Mahlzeit ist.",
     "wissen": "Alles löschen",
@@ -488,15 +488,15 @@
     "faq": [
       {
         "v": "Was kostet eine Fischplatte?",
-        "a": "Der angezeigte Preis gilt für die gesamte Platte in der genannten Größe. Nur für eine individuelle Platte verwenden wir etwa 17,50 € pro Person als Richtbetrag. Wir besprechen die Zusammenstellung und bestätigen den Betrag im Voraus."
+        "a": "Die Standard-Fischplatte kostet 16,50 € pro Person, die Deluxe-Fischplatte 18,50 €. Extras berechnen wir zum Ladenpreis."
       },
       {
         "v": "Für wie viele Personen reicht eine Platte?",
-        "a": "Bei jeder Größe sehen Sie, für wie viele Personen die Platte gedacht ist. Unsicher, ob sie als Mahlzeit oder zum Umtrunk passt? Besprechen Sie Ihre Gruppe und Wünsche mit uns per WhatsApp."
+        "a": "Geben Sie die Gästezahl an. Wir wählen kleine, mittlere oder große Platten und verteilen den Fisch bei Bedarf auf mehrere."
       },
       {
         "v": "Kann ich die Platte anpassen?",
-        "a": "Für eine andere Zusammenstellung können Sie eine separate individuelle Anfrage stellen. Feste Ausführungen behalten die angegebenen Inhalte. Möglichkeiten und Preis einer individuellen Platte besprechen wir vorab."
+        "a": "Ja. Sie können Fisch zum gleichen Ladenwert tauschen und zusätzlichen Fisch nach Gewicht wählen."
       },
       {
         "v": "Wie lange im Voraus soll ich bestellen?",
@@ -515,7 +515,7 @@
         "a": "Nutzen Sie die individuelle Anfrage für Ihre Wünsche. Wir besprechen die Möglichkeiten und machen einen Vorschlag. Erst nach Ihrer Zustimmung vereinbaren wir die Bestellung verbindlich."
       }
     ],
-    "vergelijkingKort": "Nur für individuelle Platten verwenden wir etwa 17,50 € pro Person als Richtbetrag. Der Preis einer festen Ausführung gilt für die gesamte gewählte Größe.",
+    "vergelijkingKort": "Die Standard-Fischplatte kostet 16,50 € pro Person, die Deluxe-Fischplatte 18,50 €. Extras berechnen wir zum Ladenpreis.",
     "perSchaal": "pro Person",
     "stap1": "Schritt 1",
     "stap2": "Schritt 2",
@@ -526,7 +526,7 @@
     "startbedrag": "Durchschnittlicher Richtpreis: etwa {bedrag}",
     "aantalPersonen": "Für wie viele Personen?",
     "gemiddeld": "Durchschnittlich",
-    "gemiddeldePrijs": "Individuelle Platten: Richtbetrag etwa 17,50 € pro Person",
+    "gemiddeldePrijs": "Die Standard-Fischplatte kostet 16,50 € pro Person, die Deluxe-Fischplatte 18,50 €. Extras berechnen wir zum Ladenpreis.",
     "watErOpLigt": "Was darauf liegt",
     "kiesSchaal": "Diese Platte wählen",
     "gekozen": "Gewählt — zum Wechseln klicken",
@@ -534,7 +534,7 @@
     "extrasUitleg": "Teilen Sie uns per WhatsApp mit, welchen Fisch Sie auf Ihrer Platte möchten. Ergänzungen oder Edelfisch können den Preis erhöhen; den Endpreis vereinbaren wir vorher.",
     "extrasEerstSchaal": "Besprechen Sie Ergänzungen mit uns per WhatsApp.",
     "extrasRegel": "",
-    "maatwerkRichtbedrag": "Nur für individuelle Platten verwenden wir etwa 17,50 € pro Person als Richtbetrag. Der Preis einer festen Ausführung gilt für die gesamte gewählte Größe.",
+    "maatwerkRichtbedrag": "Die Standard-Fischplatte kostet 16,50 € pro Person, die Deluxe-Fischplatte 18,50 €. Extras berechnen wir zum Ladenpreis.",
     "hulpKop": "Hilfe bei der Auswahl?",
     "adviesLink": "Beratung gewünscht? Schreiben Sie uns."
   },
