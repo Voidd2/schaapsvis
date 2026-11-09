@@ -258,14 +258,8 @@ const INTERNET_BEELDEN: Record<string, InternetPhoto> = {
     "kind": "serving",
   },
   "blacktiger-garnalen": {
-    "src": "/images/assortiment-internet/blacktiger-garnalen.jpg",
-    "kind": "product",
-    "credit": {
-      "author": "Almandine; Epipelagic (ruler removal)",
-      "source": "https://commons.wikimedia.org/wiki/File:Penaeus_monodon.jpg",
-      "license": "CC BY-SA 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
-    }
+    "src": "/images/schaaps/gepelde-black-tiger-garnalen.webp",
+    "kind": "product"
   },
   "hollandse-garnalen": {
     "src": "/images/assortiment-internet/hollandse-garnalen-solt.jpeg",
@@ -415,6 +409,7 @@ export function productPhoto(product:Product,locale="nl"):ProductPhoto|null{
   const labels={nl:{product:"product",serving:"gerecht",species:"vissoort"},en:{product:"product",serving:"dish",species:"fish species"},de:{product:"Produkt",serving:"Gericht",species:"Fischart"}}[l];
   const captions={nl:{product:"Productfoto.",serving:"Serveersuggestie.",species:"De vissoort in beeld."},en:{product:"Product photo.",serving:"Serving suggestion.",species:"The fish shown."},de:{product:"Produktfoto.",serving:"Serviervorschlag.",species:"Die abgebildete Fischart."}}[l];
   const subjects:Record<string,Record<string,string>>={
+   "blacktiger-garnalen":{nl:"Gepelde Black Tiger-garnalen op een witte achtergrond",en:"Peeled black tiger prawns on a white background",de:"Geschälte Black-Tiger-Garnelen auf weißem Hintergrund"},
    "hollandse-garnalen":{nl:"Verpakkingen SOLT Hollandse garnalen met zichtbaar MSC-keurmerk",en:"SOLT Dutch brown shrimp packages with the MSC logo visible",de:"SOLT-Packungen mit Nordseegarnelen und sichtbarem MSC-Zeichen"},
    kabeljauwwangen:{nl:"Koppen van kabeljauw, waaruit de wangen worden gesneden",en:"Cod heads, from which the cheeks are cut",de:"Kabeljauköpfe, aus denen die Backen geschnitten werden"},
    zeebrasemfilet:{nl:"Hele zeebrasem (Pagellus bogaraveo), vóór het fileren",en:"Whole blackspot seabream (Pagellus bogaraveo), before filleting",de:"Ganze Graubarschbrasse (Pagellus bogaraveo), vor dem Filetieren"},

@@ -363,29 +363,29 @@
       }
     ]
   },
-  "/images/assortiment-internet/blacktiger-garnalen.jpg": {
-    "sha256": "9659599210b65391d4b217b1cd53d08f028d2c5d8f26b23e90e5a4bd3f90af12",
-    "originalBytes": 321245,
+  "/images/schaaps/gepelde-black-tiger-garnalen.webp": {
+    "sha256": "4563d622c6ba227f6fabc1cf34e163acbaffe696ecc5319157ea3c5e17af31c9",
+    "originalBytes": 130890,
     "variants": [
       {
-        "src": "/images/responsive/blacktiger-garnalen-9659599210b6-320.webp",
+        "src": "/images/responsive/gepelde-black-tiger-garnalen-4563d622c6ba-320.webp",
         "width": 320,
-        "bytes": 6368
+        "bytes": 3972
       },
       {
-        "src": "/images/responsive/blacktiger-garnalen-9659599210b6-640.webp",
+        "src": "/images/responsive/gepelde-black-tiger-garnalen-4563d622c6ba-640.webp",
         "width": 640,
-        "bytes": 32978
+        "bytes": 12076
       },
       {
-        "src": "/images/responsive/blacktiger-garnalen-9659599210b6-960.webp",
+        "src": "/images/responsive/gepelde-black-tiger-garnalen-4563d622c6ba-960.webp",
         "width": 960,
-        "bytes": 106078
+        "bytes": 26398
       },
       {
-        "src": "/images/responsive/blacktiger-garnalen-9659599210b6-1280.webp",
+        "src": "/images/responsive/gepelde-black-tiger-garnalen-4563d622c6ba-1280.webp",
         "width": 1280,
-        "bytes": 232544
+        "bytes": 41626
       }
     ]
   },
