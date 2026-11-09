@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowRight, ChevronDown, MapPin } from "lucide-react";
 import { Schema } from "@/components/Schema";
+import { StaticResponsiveImage } from "@/components/StaticResponsiveImage";
 import { VarlaksFilm } from "@/components/shared/VarlaksFilm";
 import { BEDRIJF } from "@/lib/bedrijf";
 import { bestelContact } from "@/lib/bestel-contact";
@@ -34,8 +35,8 @@ export default async function Page({ params }: PageProps) {
   const c = copy(locale);
   const contact = bestelContact(locale);
   const examples = [
-    { slug: "varlaks-zalm", title: c.salmon, origin: c.salmonOrigin, body: c.salmonText, link: c.salmonLink, image: "/images/varlaks/from-egg-to-plate-3.jpg.webp", alt: c.salmonAlt, width: 600, height: 600 },
-    { slug: "hollandse-garnalen", title: c.shrimp, origin: c.shrimpOrigin, body: c.shrimpText, link: c.shrimpLink, image: "/images/producten-hd/hollandse-garnalen.webp", alt: c.shrimpAlt, width: 612, height: 408 },
+    { slug: "varlaks-zalm", title: c.salmon, origin: c.salmonOrigin, body: c.salmonText, link: c.salmonLink, image: "/images/varlaks/from-egg-to-plate-3.jpg.webp", alt: c.salmonAlt, width: 600, height: 600, credit: c.credit },
+    { slug: "hollandse-garnalen", title: c.shrimp, origin: c.shrimpOrigin, body: c.shrimpText, link: c.shrimpLink, image: "/images/assortiment-internet/hollandse-garnalen-solt.jpeg", alt: c.shrimpAlt, width: 5472, height: 3648, credit: c.shrimpCredit, creditUrl: "https://www.dulkhaasnoot.nl/onze-producten/hollandse-garnalen/", story: { label: c.shrimpStory, href: "https://www.soltmen.com/ons-avontuur/" } },
   ];
   return (
     <div className={styles.page}>
@@ -77,12 +78,16 @@ export default async function Page({ params }: PageProps) {
           <div className={styles.products}>
             {examples.map((item) => (
               <article className={styles.product} key={item.slug}>
-                <Image src={item.image} alt={item.alt} width={item.width} height={item.height} sizes="(max-width: 680px) 100vw, (max-width: 1100px) 45vw, 18vw" />
+                <figure>
+                  <StaticResponsiveImage src={item.image} alt={item.alt} width={item.width} height={item.height} sizes="(max-width: 680px) 100vw, (max-width: 1440px) 46vw, 654px" />
+                  <figcaption>{item.creditUrl ? <a href={item.creditUrl}>{item.credit}</a> : item.credit}</figcaption>
+                </figure>
                 <div>
                   <p className={styles.kicker}>{item.origin}</p>
                   <h3>{item.title}</h3>
                   <p>{item.body}</p>
                   <Link className={styles.textLink} href={`/${locale}/assortiment/${item.slug}`}>{item.link}<ArrowRight size={17} aria-hidden="true" /></Link>
+                  {item.story && <a className={styles.source} href={item.story.href}>{item.story.label} ↗</a>}
                 </div>
               </article>
             ))}

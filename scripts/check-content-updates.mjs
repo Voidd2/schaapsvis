@@ -51,7 +51,7 @@ for (const locale of ['nl', 'en', 'de']) {
   assert(!platters.main.includes('www.dirksvishandel.nl'), `${locale}: competitor URL exposed in page`);
   const bio = await page(`/${locale}/biologische-vis`);
   const bioPhotos = photos(bio.main);
-  for (const image of ['/images/varlaks/from-egg-to-plate-2.jpg.webp', '/images/varlaks/from-egg-to-plate-3.jpg.webp', '/images/varlaks/from-egg-to-plate-4.jpg.webp', '/images/producten-hd/hollandse-garnalen.webp']) {
+  for (const image of ['/images/varlaks/from-egg-to-plate-2.jpg.webp', '/images/varlaks/from-egg-to-plate-3.jpg.webp', '/images/varlaks/from-egg-to-plate-4.jpg.webp', '/images/assortiment-internet/hollandse-garnalen-solt.jpeg']) {
     assert(bioPhotos.includes(image), `${locale}: missing locally hosted BIO/ASC/MSC image ${image}`);
   }
   assert(!/href="[^"\s]*\/visschalen/.test(bio.main), `${locale}: unrelated platter link on organic page`);
