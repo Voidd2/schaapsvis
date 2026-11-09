@@ -9,7 +9,7 @@ async function verifyComposers(ctx, tab) {
   await tab.goto(new URL("/nl/visschalen",url).href);
   async function review(panel, expected) {
     const opened = ctx.waitForEvent("page");
-    await panel.getByRole("button", {name:/WhatsApp-concept/}).click();
+    await panel.getByRole("button", {name:/Aanvraag zonder winkelwagen bekijken/}).click();
     const result = await opened;
     const href = await result.getByRole("link",{name:"Open WhatsApp"}).getAttribute("href");
     const link = new URL(href);
@@ -109,6 +109,25 @@ function isLocalPreview(req) {
     await p.locator(".catalog-cart-trigger").click();
     assert.ok(await p.locator("#catalog-cart").isVisible());
     assert.match(await p.locator('[data-cart-line="' + slug + '"]').innerText(), /73,50/);
+    await p.keyboard.press("Escape");
+    // A configured trio and a weighed product share one WhatsApp request.
+    await visit("/nl/feestdagen/salade-trio");
+    const composer = p.locator("main .native-composer:visible").first();
+    await composer.locator("summary").click();
+    await composer.locator('[name="choice0"]').selectOption("spicy");
+    await composer.getByRole("button", {name:"Voeg toe aan winkelwagen",exact:true}).click();
+    await p.locator("#catalog-cart[open]").waitFor();
+    assert.equal(ctx.pages().length, 1);
+    assert.match(await p.locator("[data-cart-selection]").innerText(), /Pikante tonijnsalade/);
+    await p.keyboard.press("Escape");
+    await visit("/nl/feestdagen/zalm-sashimi-ongesneden");
+    await p.locator(".product-detail-actions .request-add").click();
+    await p.getByRole("button", {name:"Meer: Zalm sashimi ongesneden",exact:true}).first().click();
+    await p.locator(".catalog-cart-trigger").click();
+    const checkout = new URL(await p.locator("#catalog-cart .cart-submit").getAttribute("href"));
+    assert.equal(checkout.origin + checkout.pathname, "https://wa.me/31624811678");
+    const order = checkout.searchParams.get("text");
+    for (const part of ["Pikante tonijnsalade", "11,99", "2 × 100 g Zalm sashimi ongesneden", "7,50", "92,99"]) assert.ok(order.includes(part),part);
     await p.keyboard.press("Escape");
     await visit("/nl/bestellen");
     await p.locator("header button").click();

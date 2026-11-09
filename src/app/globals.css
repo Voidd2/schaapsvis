@@ -1149,6 +1149,10 @@ body:has(#mobile-navigation) .catalog-cart-trigger { visibility: hidden; }
 .cart-lines { list-style: none; padding: 0; }
 .cart-lines > li { padding: 22px 0; border-bottom: 1px solid var(--linen); }
 .cart-lines h3 { font-size: 1.2rem; line-height: 1.4; }
+.cart-ingredients { margin-block:.55rem; color:var(--charcoal); }
+.cart-ingredients li { padding-block:.15rem; overflow-wrap:anywhere; }
+.cart-lines .cart-wishes { margin-block:.75rem; }
+
 .cart-unit { margin: 6px 0; font-size: .95rem; }
 .cart-line-bottom { display: flex; justify-content: space-between; gap: 18px; align-items: center; margin-top: 8px; }
 .cart-remove { min-height: 44px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }

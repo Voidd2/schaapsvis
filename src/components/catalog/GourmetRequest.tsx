@@ -1,18 +1,19 @@
 "use client";
 
 import { useId, useState, type FormEvent } from "react";
-import { gourmetFish, gourmetLanguage, gourmetQuote, gourmetRequestCopy, gourmetRequestLink, type Packaging, type Portions } from "@/lib/gourmet-request";
+import { gourmetFish, gourmetLanguage, gourmetQuote, gourmetRequestCopy, type Packaging, type Portions } from "@/lib/gourmet-request";
 import { feestdagenBedrag } from "@/lib/feestdagen-producten";
-import { useInteractive } from "@/lib/use-interactive";
+import { addCartSelection, useCatalogRequest } from "@/lib/catalog-request-store";
+import { cartText } from "@/lib/cart-copy";
 
 export function GourmetRequest({ locale }: { locale: string }) {
   const t = gourmetRequestCopy(locale), lang = gourmetLanguage(locale), id = useId();
   const money = (cents: number) => feestdagenBedrag(cents, locale);
-  const ready = useInteractive();
+  const { ready } = useCatalogRequest();
+  const c = cartText(locale);
   const [people, setPeople] = useState("");
   const [portions, setPortions] = useState<Portions>({});
   const [packaging, setPackaging] = useState<Packaging>("standard");
-  const [date, setDate] = useState("");
   const [wishes, setWishes] = useState("");
   const [error, setError] = useState(false);
   const quote = gourmetQuote(portions, packaging);
@@ -28,9 +29,12 @@ export function GourmetRequest({ locale }: { locale: string }) {
   }
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const href = gourmetRequestLink(locale, { people, portions, packaging, date, wishes });
-    if (href) window.location.assign(href);
-    else setError(true);
+    const data = new URLSearchParams({ kind: "gourmet", people, packaging });
+    for (const [fish, grams] of Object.entries(portions)) {
+      data.append("fish", fish);
+      data.set("weight-" + fish, grams);
+    }
+    setError(!addCartSelection(data, locale, wishes));
   }
 
   const field = "mt-2 min-h-12 w-full rounded-lg border border-[#bfd6df] bg-white p-3 text-base";
@@ -66,8 +70,6 @@ export function GourmetRequest({ locale }: { locale: string }) {
             </label>)}
           </div>
         </fieldset>
-        <label htmlFor={`${id}-date`} className="mt-5 block font-semibold">{t.date}</label>
-        <input id={`${id}-date`} type="date" value={date} onChange={e => setDate(e.target.value)} className={field} />
         <label htmlFor={`${id}-wishes`} className="mt-5 block font-semibold">{t.wishes}</label>
         <textarea id={`${id}-wishes`} value={wishes} onChange={e => setWishes(e.target.value)} maxLength={700} rows={2} placeholder={t.placeholder} className={field} />
       </div>
@@ -82,8 +84,8 @@ export function GourmetRequest({ locale }: { locale: string }) {
             {quote.total !== null && <div className="flex justify-between gap-3 border-t pt-3 text-lg font-bold"><dt>{t.total}</dt><dd>{money(quote.total)}</dd></div>}
           </dl>
         </> : <p>{hasSelection ? t.invalid : t.empty}</p>}</div>
-        {error && !quote && <p role="alert" className="mt-3 font-semibold text-[#a61f2b]">{hasSelection ? t.invalid : t.empty}</p>}
-        <button type="submit" disabled={!ready} className="knop knop-navy mt-4 min-h-12 w-full whitespace-normal">{t.button} →</button>
+        {error && <p role="alert" className="mt-3 font-semibold text-[#a61f2b]">{hasSelection ? c.invalidChoice : t.empty}</p>}
+        <button type="submit" disabled={!ready} className="knop knop-navy mt-4 min-h-12 w-full whitespace-normal">{c.add}</button>
         <p className="mt-3 text-sm leading-6">{t.note}</p>
       </aside>
     </form>

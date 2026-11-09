@@ -8,7 +8,7 @@ export function WhatsAppButton() {
   const locale = useLocale();
   const pathname = usePathname() ?? "";
   // Keep the fixed chat shortcut clear of passcodes, uploads and staff forms.
-  if (/^\/(nl|en|de)\/(account|beheer|visschalen|feestdagen)(\/|$)/.test(pathname)) return null;
+  if (/^\/(nl|en|de)\/(account|beheer|visschalen|feestdagen|relatiegeschenken|barbecue-gourmet)(\/|$)/.test(pathname)) return null;
   return (
     <a
       href={`https://wa.me/${BEDRIJF.whatsapp}`}
