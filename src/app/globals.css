@@ -1211,6 +1211,7 @@ body:has(#mobile-navigation) .catalog-cart-trigger { visibility: hidden; }
 
 .seafood-grid:has(.deli-trio details[open]) { align-items: start; }
 
+.collection-search input {color:#173e50}
 .collection-search input::placeholder {color:#465f6c;opacity:1}
 .collection-load-more {display:flex;width:fit-content;align-items:center}
 .collection-item[id] {scroll-margin-top:9rem}
