@@ -10,7 +10,6 @@ import { DeliTrio } from "@/components/catalog/DeliTrio";
 import { ProductQuantity, CatalogBackLink } from "@/components/catalog/RequestControls";
 import { CatalogHelp } from "@/components/catalog/CatalogHelp";
 import { GourmetRequest } from "@/components/catalog/GourmetRequest";
-import { gourmetRequestCopy } from "@/lib/gourmet-request";
 import { gourmetPortionText } from "@/lib/gourmet-pricing";
 import type { Metadata } from "next";
 import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
@@ -143,7 +142,6 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
           <p className="mt-5 text-sm leading-6 text-[#527080]">{note}</p>
           {family && <Link className="mt-4 underline underline-offset-4" href={platterOverviewHref(locale, slug, selection.toString()).replace(/#.*$/, "#maatwerk")}>{platterPresentation(locale).custom}</Link>}
           {isDeliTrio(slug) ? <DeliTrio key={slug} locale={locale} slug={slug} product={product.naam} /> : <ProductQuantity key={slug} slug={slug} locale={locale} />}
-          {product.categorie === "gourmet" && <a className="knop knop-lijn mt-4 min-h-12 whitespace-normal" href="#gourmet-samenstellen">{gourmetRequestCopy(locale).title} →</a>}
           <CatalogHelp locale={locale} />
         </div>
       </div>

@@ -34,8 +34,12 @@ export function GourmetRequest({ locale }: { locale: string }) {
   }
 
   const field = "mt-2 min-h-12 w-full rounded-lg border border-[#bfd6df] bg-white p-3 text-base";
-  return <section id="gourmet-samenstellen" aria-labelledby={`${id}-title`} className="mt-10 scroll-mt-48 rounded-2xl border border-[#bfd6df] bg-[#eef9fd] p-5 sm:p-8">
-    <h2 id={`${id}-title`} className="text-[1.8rem] leading-tight">{t.title}</h2>
+  return <details id="gourmet-samenstellen" className="group mt-6 scroll-mt-48 rounded-xl border border-[#bfd6df] bg-[#eef9fd]">
+    <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 rounded-xl px-5 py-4 font-bold text-[#075b82] hover:bg-[#e4f3f9] focus-visible:outline-2 focus-visible:outline-offset-2 [&::-webkit-details-marker]:hidden">
+      {t.title}
+      <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" className="shrink-0 group-open:rotate-180"><path d="m5 8 5 5 5-5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+    </summary>
+    <div className="border-t border-[#bfd6df] px-5 pb-5 sm:px-8 sm:pb-8">
     <p className="mt-3 max-w-3xl">{t.intro}</p>
     <form onSubmit={submit} aria-label={t.title} className="mt-6 grid items-start gap-6 lg:grid-cols-[1.35fr_1fr]">
       <div>
@@ -88,5 +92,6 @@ export function GourmetRequest({ locale }: { locale: string }) {
         <p className="mt-3 text-sm leading-6">{t.note}</p>
       </aside>
     </form>
-  </section>;
+    </div>
+  </details>;
 }
