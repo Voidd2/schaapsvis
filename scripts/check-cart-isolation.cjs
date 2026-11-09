@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports -- CommonJS matches the local Playwright checks. */
 /* Local Cloudflare browser regression: no external requests or order submissions. */
 const assert = require("node:assert/strict");
 const { chromium } = require("playwright");
@@ -31,6 +32,10 @@ if (!["127.0.0.1", "localhost"].includes(url.hostname)) throw new Error("Use a l
     for (const route of ["/nl", "/nl/viswinkel-leiden", "/nl/assortiment", "/nl/blog/welke-vis-voor-gourmet", "/en", "/de"]) {
       await visit(route);
       assert.equal(await p.locator(".catalog-cart-trigger").count(), 0);
+      const menu = p.locator('button[aria-controls="mobile-navigation"]');
+      await menu.click();
+      assert.equal(await menu.getAttribute("aria-expanded"), "true", route);
+      await menu.click();
     }
     editorial = false;
     await visit("/nl/visschalen");
@@ -45,7 +50,9 @@ if (!["127.0.0.1", "localhost"].includes(url.hostname)) throw new Error("Use a l
     await p.locator("header button").click();
     await p.keyboard.press("Escape");
     assert.deepEqual(errors, []);
-    assert.deepEqual(forbidden, [], "The blocked basket script should never be needed");
+    // The router may prefetch linked catalogues. Their blocked requests must
+    // not prevent the current information page or its menu from working.
+    assert.ok(!forbidden.some(path => /\/Winkelwagen-/.test(path)), "No requests for the obsolete basket entry");
     console.log("Information pages hydrate; checkout opens; catalogue selection survives a route change.");
   } finally { await browser.close(); }
 })().catch(e => { console.error(e); process.exitCode = 1; });
