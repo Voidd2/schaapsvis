@@ -5,7 +5,7 @@ import { useLocale } from "next-intl";
 import { ShoppingBasket, X } from "lucide-react";
 import { useCatalogRequest } from "@/lib/catalog-request-store";
 import { cartText } from "@/lib/cart-copy";
-import { RequestSummary } from "./RequestControls";
+import { RequestSummary } from "./Productkeuze";
 import { leesMandje, leesSamenstelling } from "@/lib/mandje";
 export function CatalogCart() {
   const pathname = usePathname(), locale = useLocale();
