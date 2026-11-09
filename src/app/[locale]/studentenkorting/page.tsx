@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -160,7 +160,7 @@ export default async function StudentenkortingPage({ params }: { params: Promise
           {siteOpSlot() && <p className="student-preview">{l.preview}</p>}
         </div>
         <figure className="relative overflow-hidden rounded-2xl min-h-[280px]">
-          <Image src="/images/editorial/kibbeling-schaapstray.png" alt={c.alt} fill sizes="(max-width: 800px) 100vw, 50vw" className="object-cover" priority />
+          <Image src="/images/editorial/kibbeling-schaapstray.png" alt={c.alt} fill sizes="(max-width: 800px) 100vw, 50vw" className="object-cover" loading="eager" fetchPriority="high" />
         </figure>
       </div>
     </section>

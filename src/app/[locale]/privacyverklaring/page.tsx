@@ -109,7 +109,7 @@ export default async function PrivacyverklaringPage({ params }: { params: Promis
   const c = copy[locale as keyof typeof copy];
 
   return (
-    <div className="section-wrap max-w-4xl py-12 md:py-16">
+    <div className="section-wrap wrap-anywhere max-w-4xl py-12 md:py-16">
       <p className="kapitaal">{c.eyebrow}</p>
       <h1 className="font-display text-4xl font-bold text-slate-900">{c.title}</h1>
       <p className="mt-5 rounded-xl border border-amber-300 bg-amber-50 p-5 text-sm leading-relaxed text-amber-950">{c.intro}</p>

@@ -9,6 +9,8 @@ import sharp from 'sharp';
 const sources = [...new Set([
  '/images/editorial/varlaks-zalm-rauw-ai.webp',
  '/images/editorial/kibbeling-schaapstray.png',
+ '/images/editorial/feestschaal-voorbeeld.webp',
+ '/images/editorial/schaaps-vispakket-v3.webp',
  '/images/assortiment-internet/hollandse-garnalen-solt.jpeg',
  '/images/dirks/scholfilet.webp',
  '/images/dirks/coquilles-vlees.webp',

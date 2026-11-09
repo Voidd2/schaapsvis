@@ -1,3 +1,5 @@
+import { headers } from "next/headers";
+import { isWorkerPreview } from "@/lib/preview-host";
 import { MetadataRoute } from "next";
 import { blogPosts } from "@/lib/blog";
 import { products } from "@/lib/assortiment-data";
@@ -24,7 +26,7 @@ const basis = BEDRIJF.domein;
  *    is, kost je de koppeling tussen de versies die er wél zijn.
  */
 // Route content changed in this release; unknown dates are omitted rather than invented.
-const CONTENT_DATES: Record<string, string> = Object.fromEntries(["", "/visschalen", "/feestdagen", "/relatiegeschenken", "/ons-verhaal", "/blog", "/recepten"].map(route => [route, "2026-11-03"]));
+const CONTENT_DATES: Record<string, string> = Object.fromEntries(["", "/visschalen", "/feestdagen", "/relatiegeschenken", "/assortiment", "/studentenkorting", "/bezoek-ons", "/viswinkel-leiden", "/blog", "/recepten"].map(route => [route, "2026-11-09"]));
 
 /** Pagina's die in nl, en én de bestaan. */
 const MEERTALIG: {
@@ -69,10 +71,10 @@ function meertaligeAlternates(pad: string) {
 // sitemap staan nadat de site is opengezet.
 export const dynamic = "force-dynamic";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Staat het slot erop, dan valt er niets te indexeren. De proxy houdt een
   // crawler hier sowieso weg; dit is het tweede slot.
-  if (siteOpSlot()) return [];
+  if (siteOpSlot() || isWorkerPreview((await headers()).get("host"))) return [];
 
   const regels: MetadataRoute.Sitemap = [];
 

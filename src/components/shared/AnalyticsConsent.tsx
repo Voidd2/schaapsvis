@@ -47,10 +47,10 @@ export function AnalyticsConsent({ locale }: { locale: string }) {
 
   if (choice === "unknown") return null;
   const copy = locale === "de"
-    ? { title: "Ihre Cookie-Auswahl", message: "Notwendige Cookies sorgen dafür, dass die Website richtig funktioniert. Mit Ihrer Zustimmung helfen uns einfache Statistiken, die Website zu verbessern.", yes: "Akzeptieren", no: "Ablehnen", privacy: "Mehr erfahren", settings: "Cookie-Einstellungen" }
+    ? { title: "Ihre Cookie-Auswahl", message: "Ihr Konto nutzt notwendige Cookies. Dürfen wir auch zusammengefasste Besuchsstatistiken erfassen?", yes: "Akzeptieren", no: "Ablehnen", privacy: "Mehr erfahren", settings: "Cookie-Einstellungen" }
     : locale === "en"
-      ? { title: "Your cookie choice", message: "Necessary cookies keep the website working properly. With your permission, simple statistics help us improve the website.", yes: "Accept", no: "Reject", privacy: "Read more", settings: "Cookie settings" }
-      : { title: "Uw cookiekeuze", message: "Noodzakelijke cookies zorgen dat de website goed werkt. Met uw toestemming helpen eenvoudige statistieken ons om de website te verbeteren.", yes: "Accepteren", no: "Weigeren", privacy: "Lees hier meer", settings: "Cookie-instellingen" };
+      ? { title: "Your cookie choice", message: "Your account uses necessary cookies. May we also collect aggregate visitor statistics?", yes: "Accept", no: "Reject", privacy: "Read more", settings: "Cookie settings" }
+      : { title: "Uw cookiekeuze", message: "Voor uw account gebruiken we noodzakelijke cookies. Mogen we ook geaggregeerde bezoekstatistieken bijhouden?", yes: "Accepteren", no: "Weigeren", privacy: "Lees hier meer", settings: "Cookie-instellingen" };
 
   function choose(value: "accepted" | "declined") {
     window.localStorage.setItem(CONSENT_KEY, value);

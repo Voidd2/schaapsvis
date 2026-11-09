@@ -2364,5 +2364,52 @@
         "bytes": 168440
       }
     ]
+  },
+  "/images/editorial/feestschaal-voorbeeld.webp": {
+    "sha256": "48da0055c3318447888327d50056aa80c936061fc4dec0598c2048a391045b0b",
+    "originalBytes": 471456,
+    "variants": [
+      {
+        "src": "/images/responsive/feestschaal-voorbeeld-48da0055c331-320.webp",
+        "width": 320,
+        "bytes": 21486
+      },
+      {
+        "src": "/images/responsive/feestschaal-voorbeeld-48da0055c331-640.webp",
+        "width": 640,
+        "bytes": 70306
+      },
+      {
+        "src": "/images/responsive/feestschaal-voorbeeld-48da0055c331-960.webp",
+        "width": 960,
+        "bytes": 133396
+      },
+      {
+        "src": "/images/responsive/feestschaal-voorbeeld-48da0055c331-1280.webp",
+        "width": 1280,
+        "bytes": 198608
+      }
+    ]
+  },
+  "/images/editorial/schaaps-vispakket-v3.webp": {
+    "sha256": "d5400da93c91b824af555d6679056c47b4809f7acf66ed88c2fd5a633fa80059",
+    "originalBytes": 165684,
+    "variants": [
+      {
+        "src": "/images/responsive/schaaps-vispakket-v3-d5400da93c91-320.webp",
+        "width": 320,
+        "bytes": 12656
+      },
+      {
+        "src": "/images/responsive/schaaps-vispakket-v3-d5400da93c91-640.webp",
+        "width": 640,
+        "bytes": 36962
+      },
+      {
+        "src": "/images/responsive/schaaps-vispakket-v3-d5400da93c91-960.webp",
+        "width": 960,
+        "bytes": 66430
+      }
+    ]
   }
 }

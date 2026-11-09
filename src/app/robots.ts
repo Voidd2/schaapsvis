@@ -1,3 +1,5 @@
+import { headers } from "next/headers";
+import { isWorkerPreview } from "@/lib/preview-host";
 import { MetadataRoute } from "next";
 import { siteOpSlot } from "@/lib/siteAccess";
 
@@ -7,7 +9,7 @@ import { siteOpSlot } from "@/lib/siteAccess";
 // Google.
 export const dynamic = "force-dynamic";
 
-export default function robots(): MetadataRoute.Robots {
+export default async function robots(): Promise<MetadataRoute.Robots> {
   // Twee redenen om alles te weren: de site staat achter het slot, of dit is
   // een preview-deploy. Zo'n voorbeeld-adres mag nooit in Google terechtkomen —
   // dat wordt een tweede versie van de site die met de echte concurreert.
@@ -16,7 +18,7 @@ export default function robots(): MetadataRoute.Robots {
   // proxy zet er het wachtwoordscherm voor. Dit blijft staan als tweede slot,
   // voor het geval iemand die uitzondering ooit versoepelt.
   const preview = process.env.VERCEL_ENV === "preview";
-  if (siteOpSlot() || preview) {
+  if (siteOpSlot() || isWorkerPreview((await headers()).get("host")) || preview) {
     return {
       rules: [{ userAgent: "*", disallow: "/" }],
     };

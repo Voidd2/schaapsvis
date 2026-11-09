@@ -99,3 +99,25 @@ export function getLocationStatus(location: Location, nu = new Date()): Location
 
   return { isOpen: false, soort: "onbekend" };
 }
+
+// Upcoming ordinary opening day; use the Amsterdam calendar, also around DST.
+export function scheduledCounters(now: Date) {
+  const parts = amsterdamClock.formatToParts(now);
+  const part = (key: Intl.DateTimeFormatPartTypes) => parts.find(p=>p.type===key)!.value;
+  const weekday=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(part("weekday"));
+  const time=part("hour")+":"+part("minute");
+  for(let offset=0;offset<8;offset++){
+    const day=(weekday+offset)%7, hours:Record<string,string>={};
+    for(const id of ["winkel","markt","voorschoten"] as const){
+      const slot=openingHours[id].find(s=>s.days.includes(day));
+      if(slot && (offset>0 || time<slot.close)) hours[id==="markt" && day===3?"markt-woensdag":id]=slot.open+"–"+slot.close;
+    }
+    if(Object.keys(hours).length) {
+      // Noon UTC stays on the intended Amsterdam calendar date across clock changes.
+      const iso=new Intl.DateTimeFormat("sv-SE",{timeZone:"Europe/Amsterdam"}).format(now);
+      const date=new Date(iso+"T12:00:00Z");date.setUTCDate(date.getUTCDate()+offset);
+      return {ids:Object.keys(hours),hours,date,today:offset===0};
+    }
+  }
+  throw new Error("Opening hours contain no trading day");
+}

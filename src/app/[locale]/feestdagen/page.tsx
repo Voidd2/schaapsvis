@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -32,7 +32,7 @@ export default async function FeestdagenPage({ params }: { params: Promise<{ loc
       <div><p className="kapitaal">{c.label}</p><h1>{c.title}</h1><p>{t.festiveIntro}</p>
         <div className="catalog-intro-links"><a className="knop knop-rood" href="#visschalen">{t.browse} →</a><a className="knop knop-lijn" href="#geschenken">{t.gifts} ↓</a></div>
       </div>
-      <figure><Image src="/images/editorial/feestschaal-voorbeeld.webp" alt={locale === "en" ? "Festive seafood platter, serving suggestion" : locale === "de" ? "Festliche Fischplatte als Servierbeispiel" : "Feestelijke visschaal als serveervoorbeeld"} width={1200} height={800} sizes="(max-width: 767px) 100vw, 50vw" priority /><figcaption>{locale === "en" ? "Festive serving suggestion" : locale === "de" ? "Festlicher Serviervorschlag" : "Feestelijk serveervoorbeeld"}</figcaption></figure>
+      <figure><Image src="/images/editorial/feestschaal-voorbeeld.webp" alt={locale === "en" ? "Festive seafood platter, serving suggestion" : locale === "de" ? "Festliche Fischplatte als Servierbeispiel" : "Feestelijke visschaal als serveervoorbeeld"} width={1200} height={800} sizes="(max-width: 767px) 100vw, 50vw" loading="eager" fetchPriority="high" /><figcaption>{locale === "en" ? "Festive serving suggestion" : locale === "de" ? "Festlicher Serviervorschlag" : "Feestelijk serveervoorbeeld"}</figcaption></figure>
     </section>
     <div className="section-wrap"><div className="festive-practical"><div><CalendarDays aria-hidden="true" /><div><h2>{t.orderTitle}</h2><p>{t.orderText}</p></div></div><div><Store aria-hidden="true" /><div><h2>{t.pickupTitle}</h2><p>{t.pickupText}</p></div></div></div></div>
     <nav className="catalog-section-links section-wrap" aria-label={locale === "en" ? "Holiday categories" : locale === "de" ? "Festtagskategorien" : "Feestdagencategorieën"}>

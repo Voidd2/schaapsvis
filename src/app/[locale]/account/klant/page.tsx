@@ -51,7 +51,7 @@ export default async function CustomerAccountPage({ params }: { params: Promise<
   if (!(locale in copy)) notFound();
   const c = copy[locale as keyof typeof copy];
 
-  return <main className="section-wrap max-w-4xl py-14 md:py-20">
+  return <section className="section-wrap max-w-4xl py-14 md:py-20">
     <p className="kapitaal">{c.eyebrow}</p>
     <h1 className="mt-3 font-display text-4xl font-bold text-slate-900 md:text-5xl">{c.heading}</h1>
     <p className="mt-5 max-w-3xl text-lg leading-relaxed text-slate-700">{c.intro}</p>
@@ -63,5 +63,5 @@ export default async function CustomerAccountPage({ params }: { params: Promise<
       {c.contact} {" "}
       <a className="font-semibold text-sky-800 underline underline-offset-4" href={`https://wa.me/31624811678?text=${encodeURIComponent("Hallo Schaap’s Vishandel, ik heb een vraag over mijn account.")}`}>WhatsApp →</a>
     </p>
-  </main>;
+  </section>;
 }

@@ -36,6 +36,8 @@ function altijdToegestaan(pathname: string): boolean {
   );
 }
 
+import { isWorkerPreview } from "./lib/preview-host";
+
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -95,7 +97,7 @@ export function proxy(request: NextRequest) {
   const response = intlMiddleware(request);
   // Even an authorised preview visitor must not expose indexable preview HTML.
   // This only changes crawler instructions; the access decision above is unchanged.
-  if (opSlot) response.headers.set("X-Robots-Tag", "noindex, nofollow");
+  if (opSlot || isWorkerPreview(request.nextUrl.hostname)) response.headers.set("X-Robots-Tag", "noindex, nofollow");
   return response;
 }
 
