@@ -237,6 +237,12 @@ for (const locale of ["nl","en","de"]) for (const source of FEESTDAGEN_PRODUCTEN
 }
 for (const salad of SALAD_REQUESTS) assert.ok(fs.existsSync(path.join("public", salad.image)));
 assert.equal(new Set(SALAD_REQUESTS.map(s => s.image)).size, 4);
+for (const salad of SALAD_REQUESTS) {
+  const portions = {items:{[salad.slug]:{quantity:2}},date:""};
+  assert.deepEqual(requestTotal(portions), {cents:700,incomplete:false});
+  assert.match(requestMessage(portions,"nl"), /2 × 100 g/);
+  assert.match(requestMessage(portions,"nl"), /7,00/);
+}
 const request = {items:{"visschotel-middel-5-8-pers":{quantity:2,split:false}},date:""};
 assert.deepEqual(requestTotal(request), {cents:19700,incomplete:false});
 request.items["luxe-trio-klein"] = {quantity:1,split:false};

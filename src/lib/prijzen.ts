@@ -1,3 +1,4 @@
+import { SALAD_PORTION_CENTS } from "./salad-extras";
 // Richtprijzen (indicatief) per product-slug.
 // ─────────────────────────────────────────────────────────────────────────────
 // Gepubliceerde bedragen gelden per genoemde eenheid. Alleen producten met een
@@ -14,6 +15,8 @@ export interface Prijs {
 }
 
 export const PRIJZEN: Record<string, Prijs> = {
+  krabsalade: { euro: SALAD_PORTION_CENTS / 100, eenheid: "per 100 g" },
+  tonijnsalade: { euro: SALAD_PORTION_CENTS / 100, eenheid: "per 100 g" },
   // Verse vis
   haring: { euro: 2.5, eenheid: "per stuk" },
   "broodje-haring": { euro: 3.0, eenheid: "per stuk" },
@@ -42,6 +45,7 @@ export function getPrijs(slug: string): Prijs | undefined {
 // "€ 24,95 per kg" — Nederlands decimaalteken.
 export function formatPrijs(p: Prijs, locale = "nl"): string {
   const units: Record<string, [string, string]> = {
+    "per 100 g": ["per 100 g", "pro 100 g"],
     "per stuk": ["each", "pro Stück"], "per kg": ["per kg", "pro kg"], "per bosje": ["per bunch", "pro Bündel"],
     "per dozijn (12 st.)": ["per dozen (12)", "pro Dutzend (12 Stück)"], "per stuk (±500 g)": ["each (approx. 500 g)", "pro Stück (ca. 500 g)"],
     "per stuk (±300 g)": ["each (approx. 300 g)", "pro Stück (ca. 300 g)"], "per stuk (200 g)": ["each (200 g)", "pro Stück (200 g)"],

@@ -2,6 +2,8 @@ import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveIma
 import { Suspense } from "react";
 import Link from "next/link";
 import { catalogProduct, MAIN_PLATTERS, GOURMET, DELICACIES, FEATURED, SECONDARY, SALAD_REQUESTS, languageIndex } from "@/lib/seafood-catalog";
+import { feestdagenBedrag } from "@/lib/feestdagen-producten";
+import { SALAD_PORTION_CENTS } from "@/lib/salad-extras";
 import { catalogText } from "@/lib/catalog-copy";
 import { platterPhotoAlt, platterPrice, platterPresentation } from "@/lib/platter-presentation";
 import { isDeliTrio } from "@/lib/deli-trio";
@@ -61,10 +63,9 @@ export function SeafoodCatalog({ locale, festive = false }: Props) {
     <section id="salades" className="seafood-salads seafood-section">
       <div className="catalog-heading"><h2>{t.salads}</h2><p>{t.saladIntro}</p></div>
       <div className="seafood-salad-grid">{SALAD_REQUESTS.map(salad => <article key={salad.slug}>
-        <Image src={salad.image} alt={`${salad.productSlug ? t.saladPhoto : t.illustration}: ${salad.names[languageIndex(locale)]}`} width={600} height={450} sizes="(max-width: 640px) 50vw, 25vw" />
-        <small>{salad.productSlug ? t.saladPhoto : t.illustration}</small>
-        <h3>{salad.names[languageIndex(locale)]}</h3><p className="seafood-price">{t.unknown}</p>
-        {!salad.productSlug && <p className="request-muted">{t.saladPending}</p>}
+        <Image src={salad.image} alt={`${t.saladPhoto}: ${salad.names[languageIndex(locale)]}`} width={600} height={450} sizes="(max-width: 640px) 50vw, 25vw" />
+        <small>{t.saladPhoto}</small>
+        <h3>{salad.names[languageIndex(locale)]}</h3><p className="seafood-price">{feestdagenBedrag(SALAD_PORTION_CENTS, locale)} / 100 g</p>
         {salad.productSlug && <Link className="seafood-detail" href={`/${locale}/assortiment/${salad.productSlug}`}>{t.view} →</Link>}
         <ProductQuantity slug={salad.slug} locale={locale} />
       </article>)}</div>

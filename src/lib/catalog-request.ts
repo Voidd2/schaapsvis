@@ -1,8 +1,9 @@
 import { calendarDate, validPickupDate } from "./pickup-date";
 import { feestdagenProduct, feestdagenBedrag } from "./feestdagen-producten";
-import { catalogProduct, SALAD_REQUESTS, languageIndex } from "./seafood-catalog";
+import { catalogProduct, languageIndex } from "./seafood-catalog";
 import { catalogText } from "./catalog-copy";
 import { cartText } from "./cart-copy";
+import { saladLine } from "./salad-extras";
 export type RequestLine = { quantity: number };
 export type CatalogRequest = { items: Record<string, RequestLine>; date: string; wishes?: string };
 export function normalizeRequest(raw: unknown): CatalogRequest {
@@ -10,7 +11,7 @@ export function normalizeRequest(raw: unknown): CatalogRequest {
   if (!raw || typeof raw !== "object") return result;
   const value = raw as Partial<CatalogRequest>;
   if (value.items && typeof value.items === "object") for (const [slug, line] of Object.entries(value.items)) {
-    if (!feestdagenProduct(slug) && !SALAD_REQUESTS.some(s => s.slug === slug)) continue;
+    if (!feestdagenProduct(slug) && !saladLine(slug)) continue;
     if (!line || !Number.isInteger(line.quantity) || line.quantity < 1 || line.quantity > 99) continue;
     // Whitelist fields: legacy split flags are intentionally discarded.
     result.items[slug] = { quantity: line.quantity };
@@ -24,7 +25,8 @@ export function requestTotal(request: CatalogRequest) {
   let cents = 0, incomplete = !!clean.wishes?.trim();
   for (const [slug, line] of Object.entries(clean.items)) {
     const product = feestdagenProduct(slug);
-    if (product) cents += product.prijsCents * line.quantity;
+    const price = product?.prijsCents ?? saladLine(slug)?.cents;
+    if (price != null) cents += price * line.quantity;
     else incomplete = true;
   }
   return { cents, incomplete };
@@ -33,7 +35,10 @@ export function requestMessage(request: CatalogRequest, locale: string) {
   const clean = normalizeRequest(request), t = catalogText(locale), c = cartText(locale), total = requestTotal(clean);
   const lines = Object.entries(clean.items).map(([slug, line]) => {
     const source = feestdagenProduct(slug);
-    if (!source) { const salad = SALAD_REQUESTS.find(s => s.slug === slug)!; return `${line.quantity}× ${salad.names[languageIndex(locale)]} (${t.containers}) — ${t.unknown}`; }
+    if (!source) {
+      const salad = saladLine(slug)!;
+      if (salad.cents !== null) return `${line.quantity} × 100 g ${salad.names[languageIndex(locale)]} · ${feestdagenBedrag(salad.cents * line.quantity, locale)}`;
+      return `${line.quantity}× ${salad.names[languageIndex(locale)]} (${t.containers}) — ${t.unknown}`; }
     const product = catalogProduct(slug, locale);
     return `${line.quantity}× ${product.naam}\n${feestdagenBedrag(source.prijsCents, locale)} ${source.categorie === "visschalen" ? t.perPlatter : product.eenheid} = ${feestdagenBedrag(source.prijsCents * line.quantity, locale)}`;
   });
