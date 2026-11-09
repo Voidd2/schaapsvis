@@ -1,4 +1,4 @@
-import { isPlatterMode, platterMenu, platterIngredients, servingCopy, type PlatterMode } from "./platter-menu";
+import { eelChoices, EXTRA_EEL_CENTS, extraEelGrams, isPlatterMode, platterMenu, platterIngredients, servingCopy, type PlatterMode } from "./platter-menu";
 import { COUNTER_RATES, GIFT_BOX, STANDARD_FISH_TRIO, FISH_TRIO_PORTION, SALAD_TRIO_PORTION } from "./gift-pricing";
 import { giftVoucherCents, giftRequestCopy } from "./gift-request";
 import { SALAD_PORTION_CENTS } from "./salad-extras";
@@ -80,7 +80,14 @@ export function assemblyQuote(mode:Assembly, locale:string, data: Values) {
       else if (Object.hasOwn(platterIngredients, replacement)) lines.push(item + " → " + platterIngredients[replacement][lang]);
       else return null;
     }
-    return {lines: [...lines, ...extras.lines], total: base + extras.cents};
+    const eelChoice = data.get("eelChoice") ?? "regular";
+    if (!Object.hasOwn(eelChoices, eelChoice)) return null;
+    if (eelChoice === "redistribute") lines.push(servingCopy.eelSwap[lang]);
+    if (eelChoice === "extra") {
+      lines.push(`${eelChoices.extra[lang]} · ≈ ${extraEelGrams} g · +${money(EXTRA_EEL_CENTS)} ${servingCopy.groupPrice[lang]}`);
+    }
+    const eelCharge = eelChoice === "extra" ? EXTRA_EEL_CENTS : 0;
+    return {lines: [...lines, ...extras.lines], total: base + eelCharge + extras.cents};
   }
   const fishTrio = mode === "fish-trio" || mode === "gift-trio";
   const salad = mode === "salad-trio" || mode === "deluxe-salad";

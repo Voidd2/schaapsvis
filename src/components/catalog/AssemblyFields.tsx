@@ -1,4 +1,4 @@
-import { isPlatterMode, platterMenu, platterIngredients, servingCopy, type PlatterMode } from "@/lib/platter-menu";
+import { eelChoices, EXTRA_EEL_CENTS, isPlatterMode, platterMenu, platterIngredients, servingCopy, type PlatterMode } from "@/lib/platter-menu";
 import { cartText } from "@/lib/cart-copy";
 import { assemblyQuote, boxLabel, byAgreement, deluxeSalads, fishCounter, trioChoices, platterExtras, language, saladCounter, unit, type Assembly, type CounterItem } from "@/lib/counter-selection";
 import { feestdagenBedrag } from "@/lib/feestdagen-producten";
@@ -23,6 +23,13 @@ function PlatterFields({mode, locale}: {mode:PlatterMode; locale:string}) {
   return <>
     <label>{servingCopy.people[i]}
       <input type="number" inputMode="numeric" min="1" max="9999" name="people" defaultValue="2" required />
+    </label>
+    <label>{servingCopy.eel[i]}
+      <select name="eelChoice" defaultValue="regular">
+        <option value="regular">{eelChoices.regular[i]}</option>
+        <option value="redistribute">{eelChoices.redistribute[i]}</option>
+        <option value="extra">{eelChoices.extra[i]} (+{feestdagenBedrag(EXTRA_EEL_CENTS, locale)})</option>
+      </select>
     </label>
     <details className="menu-options inquiry-wide">
       <summary>{servingCopy.swap[i]}</summary>

@@ -1,4 +1,4 @@
-import { isPlatterMode, platterIngredients, platterMenu, platterModes } from "./platter-menu";
+import { eelChoices, isPlatterMode, platterIngredients, platterMenu, platterModes } from "./platter-menu";
 import { assemblyQuote, byAgreement, delicacyMode, language, platterFish, saladCounter, weightQuote, type Assembly } from "./counter-selection";
 import { isDeliTrio } from "./deli-trio";
 import { feestdagenBedrag } from "./feestdagen-producten";
@@ -27,6 +27,7 @@ export function cartOptions(data: URLSearchParams) {
     if (key === "slug" && (isDeliTrio(value) || value === "zalmslaatje-de-luxe")) options.set(key, value);
     if (/^(kind|mode|selection|presentation|packaging|choice[0-2]|box|fish)$/.test(key) && optionCodes.has(value)) options.append(key, value);
     if (key.startsWith("swap-") && Object.hasOwn(platterIngredients,key.slice(5)) && (value === "shop" || Object.hasOwn(platterIngredients,value))) options.set(key,value);
+    if (key === "eelChoice" && Object.hasOwn(eelChoices, value)) options.set(key, value);
     if (key === "size" && /^(own|[012])$/.test(value)) options.set(key, value);
     if ((key === "budget" || key === "voucher") && /^\d{1,8}(?:[.,]\d{1,2})?$/.test(value)) options.set(key, value);
     if ((key === "people" || key.startsWith("weight-") && optionCodes.has(key.slice(7))) && /^\d{1,6}$/.test(value)) options.set(key, value);
