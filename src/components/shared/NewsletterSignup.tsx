@@ -17,7 +17,7 @@ const copy = {
     sending: "Versturen…",
     sent: "U bent aangemeld. We sturen alleen iets als we echt een leuke aanbieding of nieuwtje hebben.",
     error: "Aanmelden lukt nu niet. Probeer het later opnieuw.",
-    privacy: "Voorlopige privacyinformatie",
+    privacy: "Privacyverklaring",
   },
   en: {
     title: "Offers in your inbox",
@@ -32,7 +32,7 @@ const copy = {
     sending: "Sending…",
     sent: "You are subscribed. We will only email when we have a worthwhile offer or update.",
     error: "We could not sign you up right now. Please try again later.",
-    privacy: "Preliminary privacy information",
+    privacy: "Privacy notice",
   },
   de: {
     title: "Angebote in Ihrem Postfach",
@@ -47,7 +47,7 @@ const copy = {
     sending: "Wird gesendet…",
     sent: "Sie sind angemeldet. Wir schreiben nur, wenn es ein lohnendes Angebot oder Neuigkeiten gibt.",
     error: "Die Anmeldung ist gerade nicht möglich. Bitte versuchen Sie es später erneut.",
-    privacy: "Vorläufige Datenschutzhinweise",
+    privacy: "Datenschutzhinweise",
   },
 } as const;
 

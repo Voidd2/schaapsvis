@@ -1,6 +1,6 @@
 import { bindings, defineConfig, defineWorker } from "cf/config";
 
-export default defineConfig(({ mode }) => ({
+export default defineConfig(() => ({
   worker: defineWorker({
     name: "schaapsvis",
     entrypoint: "vinext/server/fetch-handler",
@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => ({
     ],
     domains: ["schaapsvishandel.nl"],
     // Keep the existing Worker and version preview URLs reachable for QA.
-    // Site content remains gated by the runtime password/access secrets.
+    // Preview hostnames keep their own access gate in the request proxy.
     workersDev: true,
     previewUrls: true,
     observability: {
@@ -29,10 +29,7 @@ export default defineConfig(({ mode }) => ({
     env: {
       ASSETS: bindings.assets(),
       IMAGES: bindings.images(),
-      // Only local Vite development is public for page-by-page QA. A production
-      // or deployed preview build gets no SITE_PUBLIC binding and stays locked
-      // unless the owner explicitly configures its runtime variables/secrets.
-      ...(mode === "development" ? { SITE_PUBLIC: bindings.text("launch-approved") } : {}),
+      SITE_PUBLIC: bindings.text("launch-approved"),
     },
   }),
 }));

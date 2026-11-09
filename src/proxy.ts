@@ -41,7 +41,10 @@ import { isWorkerPreview } from "./lib/preview-host";
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const opSlot = siteOpSlot();
+  const opSlot = siteOpSlot() || isWorkerPreview(request.nextUrl.hostname) || isWorkerPreview(request.headers.get("host"));
+  if (!opSlot && pathname === "/coming-soon" && request.headers.get("host") === "schaapsvishandel.nl") {
+    return NextResponse.redirect(new URL("/nl", "https://schaapsvishandel.nl"));
+  }
   const heeftToegang = heeftGeldigeSiteToegang(request.cookies.get(ACCESS_COOKIE)?.value);
   // Trust only the active platform's client-IP header, never a browser-supplied
   // X-Forwarded-For value. On Cloudflare Workers, CF-Connecting-IP is added by
@@ -97,7 +100,7 @@ export function proxy(request: NextRequest) {
   const response = intlMiddleware(request);
   // Even an authorised preview visitor must not expose indexable preview HTML.
   // This only changes crawler instructions; the access decision above is unchanged.
-  if (opSlot || isWorkerPreview(request.nextUrl.hostname)) response.headers.set("X-Robots-Tag", "noindex, nofollow");
+  if (opSlot) response.headers.set("X-Robots-Tag", "noindex, nofollow");
   return response;
 }
 

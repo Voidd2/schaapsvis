@@ -1,8 +1,7 @@
 // Read-only check from a GitHub-hosted runner, outside the owner's IP allowlist.
-// The site intentionally remains private until a separate launch decision.
+// The production domain is public. Alternate deployment hosts stay private.
 import assert from 'node:assert/strict';
 const origins=[
- 'https://schaapsvishandel.nl',
  'https://schaapsvis.schaapsvis.workers.dev',
  'https://schaapsvis.vercel.app',
  'https://schaapsvis-9sai.vercel.app',
@@ -41,4 +40,36 @@ for(const route of ['/robots.txt','/sitemap.xml']){
  }
 }
 console.log(JSON.stringify({origin,checks,ancillary,cookies:false,formSubmissions:0}));
+}
+
+if (!process.argv.includes('--previews-only')) {
+  const origin = 'https://schaapsvishandel.nl';
+  async function checkPublic() {
+    for (const route of ['/nl', '/nl/varlaks', '/en/assortiment', '/de/feestdagen']) {
+      const res = await fetch(origin + route, {redirect:'manual',signal:AbortSignal.timeout(15000)});
+      assert.equal(res.status, 200, route);
+      assert.doesNotMatch(res.headers.get('x-robots-tag') || '', /noindex/, route);
+      const body = await res.text();
+      assert.doesNotMatch(body, /action="\/api\/unlock"/, route);
+      assert.match(body, /<h1\b[^>]*>/i, route);
+      assert.ok(body.includes('href="'+origin+route+'"'), route+' canonical URL');
+    }
+    const robots = await (await fetch(origin+'/robots.txt')).text();
+    assert.match(robots, /^Allow:\s*\/\s*$/mi);
+    assert.doesNotMatch(robots, /^Disallow:\s*\/\s*$/mi);
+    assert.ok((await (await fetch(origin+'/sitemap.xml')).text()).includes(origin+'/nl/varlaks</loc>'));
+    for (const [path, status] of [['/me',401],['/admin/student-applications',403]]) {
+      const res = await fetch(origin+'/api/members'+path, {redirect:'manual'});
+      assert.equal(res.status, status, path);
+    }
+  }
+  // The GitHub runner can start before the Cloudflare production build.
+  for (let attempt = 0; ; attempt++) {
+    try { await checkPublic(); break; }
+    catch (error) {
+      if (attempt >= 20) throw error;
+      await new Promise(resolve => setTimeout(resolve, 15000));
+    }
+  }
+  console.log('Public pages, crawl controls and member/admin access verified without cookies.');
 }

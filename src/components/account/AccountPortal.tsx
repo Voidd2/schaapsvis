@@ -102,7 +102,7 @@ const translations = {
     expiry: "Geldig tot",
     appleWallet: "Toevoegen aan Apple Wallet",
     googleWallet: "Toevoegen aan Google Wallet",
-    privacy: "Lees de voorlopige privacyinformatie over accounts, schoolmailverificatie en e-maildeals.",
+    privacy: "Lees hoe wij uw gegevens gebruiken.",
     securityTitle: "Extra controle nodig",
     securityIntro: "Een beheerder heeft om een aanvullende controle gevraagd. Dit is geen beschuldiging; hieronder staat de concrete reden.",
     securityCode: "Eenmalige code uit uw e-mail",
@@ -173,7 +173,7 @@ const translations = {
     expiry: "Valid until",
     appleWallet: "Add to Apple Wallet",
     googleWallet: "Add to Google Wallet",
-    privacy: "Read the preliminary privacy information about accounts, school-email verification and email offers.",
+    privacy: "Read how we use your data.",
     securityTitle: "Extra verification required", securityIntro: "An administrator requested an additional check. This is not an accusation; the concrete reason is shown below.", securityCode: "One-time code from your email", securityVerify: "Verify code", securitySchool: "Check your school email and follow the instructions to reconfirm your student status.", securityPerson: "Bring your student pass to our shop or stall. A staff member will complete the check.",
   },
   de: {
@@ -239,7 +239,7 @@ const translations = {
     expiry: "Gültig bis",
     appleWallet: "Zu Apple Wallet hinzufügen",
     googleWallet: "Zu Google Wallet hinzufügen",
-    privacy: "Lesen Sie die vorläufigen Datenschutzhinweise zu Konto, Schul-E-Mail-Bestätigung und E-Mail-Angeboten.",
+    privacy: "Lesen Sie, wie wir Ihre Daten verwenden.",
     securityTitle: "Zusätzliche Prüfung erforderlich", securityIntro: "Ein Administrator hat eine zusätzliche Prüfung angefordert. Dies ist keine Beschuldigung; der konkrete Grund steht unten.", securityCode: "Einmaliger Code aus Ihrer E-Mail", securityVerify: "Code prüfen", securitySchool: "Prüfen Sie Ihre Schul-E-Mail und folgen Sie den Hinweisen, um Ihren Studierendenstatus erneut zu bestätigen.", securityPerson: "Bringen Sie Ihren Studentenpass in unser Geschäft oder zum Stand. Ein Mitarbeiter schließt die Prüfung ab.",
   },
 } as const;
