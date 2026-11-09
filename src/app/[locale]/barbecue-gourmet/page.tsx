@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { GourmetRequest } from "@/components/catalog/CatalogEnhancements";
+import { GourmetOrderLink } from "@/components/catalog/CatalogEnhancements";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
@@ -78,9 +78,7 @@ export default async function BarbecueGourmetPage({
             <h1>{t("title")}</h1>
             <p className="collection-intro">{t("intro")}</p>
             <div className="collection-hero-actions">
-              <a className="knop knop-rood" href={contact.href} target="_blank" rel="noopener noreferrer">
-                {contact.label}
-              </a>
+              <GourmetOrderLink locale={locale} className="knop knop-rood"/>
               <a className="collection-text-link" href="#barbecue-gourmet">
                 {t("browse")} <span aria-hidden="true">→</span>
               </a>
@@ -111,7 +109,7 @@ export default async function BarbecueGourmetPage({
       </Sectie>
 
       <Sectie grond="zand" smal>
-        <GourmetRequest locale={locale} />
+        <div id="gourmet-samenstellen"><GourmetOrderLink locale={locale} /></div>
       </Sectie>
 
       <Sectie grond="zand" smal>

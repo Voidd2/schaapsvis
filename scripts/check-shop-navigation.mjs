@@ -23,10 +23,13 @@ function load(file) {
 const { platterFamilies, platterFamily, selectedPlatter, platterSelectionParams, platterDetailHref, platterOverviewHref } = load("src/lib/platter-families.ts");
 const { FEESTDAGEN_PRODUCTEN } = load("src/lib/feestdagen-producten.ts");
 const { gourmetRequestLink, gourmetRequestCopy, gourmetQuote, gourmetFish } = load("src/lib/gourmet-request.ts");
-assert.deepEqual(gourmetFish.slice(0, 4).map(f => f.rate), [350, 350, 350, 275]);
-const { GOURMET_PORTIONS, gourmetPriceCents } = load("src/lib/gourmet-pricing.ts");
+assert.ok(!gourmetFish.some(fish => fish.id === "plaice"));
+const { GOURMET_PORTIONS, gourmetPriceCents, gourmetRates } = load("src/lib/gourmet-pricing.ts");
+assert.equal(gourmetRates.halibut,300);
+assert.equal(gourmetRates.tuna,500);
+assert.equal(gourmetRates["black-tigers"],250);
 const gourmetSelection = load("src/lib/dirks-selectie.ts").DIRKS_SELECTIE;
-for (const [slug, weight, price] of [["gourmet-trio-1-persoon", 300, 1550], ["gourmet-schotel-3-4-pers", 1000, 4250], ["gourmetschotel-5-6-pers", 1500, 6250]]) {
+for (const [slug, weight, price] of [["gourmet-trio-1-persoon", 300, 1200], ["gourmet-schotel-3-4-pers", 1000, 3600], ["gourmetschotel-5-6-pers", 1500, 5400]]) {
   assert.equal(GOURMET_PORTIONS[slug].grams.reduce((sum, grams) => sum + grams, 0), weight);
   assert.equal(gourmetPriceCents(slug), price);
   const product = FEESTDAGEN_PRODUCTEN.find(p => p.slug === slug);
@@ -34,34 +37,34 @@ for (const [slug, weight, price] of [["gourmet-trio-1-persoon", 300, 1550], ["go
   assert.equal(gourmetSelection.find(item => item.slug === slug).prijs * 100, price);
   assert.equal(product.eenheid, "per schaal");
   assert.equal(product.samenstelling.reduce((sum, line) => sum + Number(line.match(/^(\d+) gram/)?.[1] ?? 0), 0), weight);
-  assert.ok(GOURMET_PORTIONS[slug].preparationCents >= 500 && GOURMET_PORTIONS[slug].preparationCents <= 1500);
 }
 for (const slug of ["gourmetstukjes-zalm", "gourmetstukjes-tonijn", "gourmet-stukjes-kabeljauw"]) {
   const item = gourmetSelection.find(item => item.slug === slug);
-  assert.equal(item.prijs, 3.5);
+  assert.equal(item.prijs, slug === "gourmetstukjes-tonijn" ? 5 : 3.5);
   assert.equal(item.per100g, true);
 }
 for (const grams of [1,500,501,1500,1501]) {
   const portions = { salmon: String(grams) };
-  assert.equal(gourmetQuote(portions,"premium").total, null);
-  assert.equal(gourmetQuote(portions,"standard").total, Math.round(grams * 350 / 100));
+  assert.equal(gourmetQuote(portions,["salmon"]).marinadeCents, Math.round(grams * 25 / 100));
+  assert.equal(gourmetQuote(portions).total, Math.round(grams * 350 / 100));
 }
 for (const portions of [{},{unknown:"100"},{salmon:""},{salmon:"0"},{salmon:"-1"},{salmon:"2.5"},{salmon:"1e3"}]) {
-  assert.equal(gourmetQuote(portions,"standard"), null);
+  assert.equal(gourmetQuote(portions), null);
 }
 for (const locale of ["nl", "en", "de"]) {
   const t = gourmetRequestCopy(locale);
   const request = { people: "6", portions: {salmon:"250", seabass:"100"}, packaging:"standard", date:"", wishes:"  " };
   const url = new URL(gourmetRequestLink(locale, request)), message = url.searchParams.get("text");
   assert.equal(url.origin, "https://wa.me");
-  const q = gourmetQuote(request.portions, request.packaging);
+  const q = gourmetQuote(request.portions);
   assert.equal(q.grams,350);
   assert.equal(q.total,1175);
   assert.ok(message.includes(t.standard) && message.includes("350 g") && message.includes("250 g"));
   assert.ok(message.includes(locale === "en" ? "11.75" : "11,75"));
   assert.ok(message.includes(t.dateUnknown));
-  const custom = new URL(gourmetRequestLink(locale, { ...request, packaging: "premium" })).searchParams.get("text");
-  assert.ok(custom.includes(t.customNote) && !custom.includes(t.total + ":"));
+  const seasoned = new URL(gourmetRequestLink(locale,{...request,marinated:["seabass"]})).searchParams.get("text");
+  assert.ok(seasoned.includes(t.marinated) && seasoned.includes(t.plain));
+  assert.ok(seasoned.includes(locale === "en" ? "12.00" : "12,00"));
   for (const people of ["", "0", "-1", "2.5", "abc", "201", "Infinity"]) assert.equal(gourmetRequestLink(locale, { ...request, people }), null);
   for (const date of ["2026-02-30", "tomorrow", "2026-13-01"]) assert.equal(gourmetRequestLink(locale, { ...request, date }), null);
   const extra = new URL(gourmetRequestLink(locale, { ...request, date: "2026-12-24", wishes: "  Meer zalm & geen saus? #test\nAdvies graag  " }));
@@ -242,6 +245,11 @@ for (const salad of SALAD_REQUESTS) {
   assert.ok(requestMessage(portions,"nl").includes(feestdagenBedrag(2*salad.cents)));
 }
 const { cartOptions, selectionQuote } = load("src/lib/cart-selection.ts");
+const grill = new URLSearchParams({kind:"gourmet", people:"2", packaging:"standard", "weight-tuna":"150", "weight-halibut":"200"});
+grill.append("fish","halibut"); grill.append("fish","tuna"); grill.append("marinade","halibut");
+assert.equal(selectionQuote(new URLSearchParams(cartOptions(grill)),"nl").cents,1400);
+grill.append("fish","plaice"); grill.set("weight-plaice","100");
+assert.equal(selectionQuote(new URLSearchParams(cartOptions(grill)),"nl"),null);
 const sample = new URLSearchParams({kind:"assembly", mode:"standard-platter", people:"2", "swap-herring-fish":"mackerel", fish:"eel", "weight-eel":"100"});
 const request = {items:{"extra-krabsalade-100g":{quantity:1}},selections:[{id:"test",options:cartOptions(sample)}],date:""};
 assert.equal(selectionQuote(sample,"nl").cents,4150);

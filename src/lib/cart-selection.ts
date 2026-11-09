@@ -1,9 +1,9 @@
 import { eelChoices, isPlatterMode, platterIngredients, platterMenu, platterModes } from "./platter-menu";
-import { assemblyQuote, byAgreement, delicacyMode, language, platterFish, saladCounter, weightQuote, type Assembly } from "./counter-selection";
+import { assemblyQuote, delicacyMode, language, platterFish, saladCounter, weightQuote, type Assembly } from "./counter-selection";
 import { isDeliTrio } from "./deli-trio";
 import { feestdagenBedrag } from "./feestdagen-producten";
 import { giftCopy } from "./gift-copy";
-import { gourmetFish, gourmetLanguage, gourmetQuote, gourmetRequestCopy } from "./gourmet-request";
+import { gourmetFish, gourmetLines, gourmetQuote, gourmetRequestCopy } from "./gourmet-request";
 import { inquiryText } from "./platter-inquiry";
 import { catalogProduct } from "./seafood-catalog";
 
@@ -17,7 +17,7 @@ type Quote = { title: string; lines: string[]; cents: number; incomplete: boolea
 
 // Only option codes and numeric values enter session storage. User-entered notes stay in memory.
 const optionCodes = new Set<string>([
-  "assembly", "gourmet", "platter", "fish-trio", "salad-trio", "deluxe-salad", "package", "gift-trio", "custom",
+  "plaice", "whiting", "prawns", "assembly", "gourmet", "platter", "fish-trio", "salad-trio", "deluxe-salad", "package", "gift-trio", "custom",
   "shop", ...platterModes, ...Object.keys(platterIngredients), "own", "yes", "standard", "premium", "luxury", "salads", "mixed", "advice", "tubs", "house-salmon",
   ...platterFish.map(f => f.id), ...saladCounter.map(f => f.id), ...gourmetFish.map(f => f.id),
 ]);
@@ -27,6 +27,7 @@ export function cartOptions(data: URLSearchParams) {
     if (key === "slug" && (isDeliTrio(value) || value === "zalmslaatje-de-luxe")) options.set(key, value);
     if (/^(kind|mode|selection|presentation|packaging|choice[0-2]|box|fish)$/.test(key) && optionCodes.has(value)) options.append(key, value);
     if (key.startsWith("swap-") && Object.hasOwn(platterIngredients,key.slice(5)) && (value === "shop" || Object.hasOwn(platterIngredients,value))) options.set(key,value);
+    if (key === "marinade" && gourmetFish.some(fish => fish.id === value)) options.append(key, value);
     if (key === "eelChoice" && Object.hasOwn(eelChoices, value)) options.set(key, value);
     if (key === "size" && /^(own|[012])$/.test(value)) options.set(key, value);
     if ((key === "budget" || key === "voucher") && /^\d{1,8}(?:[.,]\d{1,2})?$/.test(value)) options.set(key, value);
@@ -52,15 +53,14 @@ export function selectionQuote(data: URLSearchParams, locale: string): Quote | n
   }
   const fish = data.getAll("fish"), people = data.get("people") || "";
   if (kind === "gourmet") {
-    const packaging = data.get("packaging");
-    if (!/^[1-9]\d*$/.test(people) || Number(people) > 200 || (packaging !== "standard" && packaging !== "premium")) return null;
+    if (!/^[1-9]\d*$/.test(people) || Number(people) > 200 || data.get("packaging") !== "standard") return null;
     const portions = Object.fromEntries(fish.map(id => [id, data.get("weight-" + id) ?? ""]));
-    const quote = gourmetQuote(portions, packaging);
+    const quote = gourmetQuote(portions, data.getAll("marinade"));
     if (!quote) return null;
-    const t = gourmetRequestCopy(locale), lang = gourmetLanguage(locale);
-    return { title: ["Visgourmet op maat","Custom seafood gourmet platter","Gourmetplatte nach Wunsch"][language(locale)],
-      lines: [t.people + ": " + people, ...quote.lines.map(row => row.fish[lang] + " · " + row.weight + " g · " + money(row.cents)),
-        t[packaging] + " · " + (quote.total === null ? byAgreement(locale) : t.free)], cents: quote.subtotal, incomplete: quote.total === null };
+    const t = gourmetRequestCopy(locale);
+    return { title: t.summary,
+      lines: [t.people + ": " + people, ...gourmetLines(quote, locale), t.standard + " · " + t.free],
+      cents: quote.total, incomplete: false };
   }
   if (kind !== "platter") return null;
   const t = inquiryText(locale);

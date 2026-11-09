@@ -1,3 +1,4 @@
+import { GourmetOrderLink } from "@/components/catalog/CatalogEnhancements";
 import { platterPresentation } from "@/lib/platter-presentation";
 import { connection } from "next/server";
 import type { Metadata } from "next";
@@ -75,7 +76,7 @@ export default async function VisschalenPage({
         <p className="platter-intro-text">{catalog.intro}</p>
         <nav className="catalog-intro-links composer-shortcuts" aria-label={catalog.title}>
           <a className="knop knop-navy" href="#maatwerk">{locale === "en" ? "Create a fish platter" : locale === "de" ? "Fischplatte zusammenstellen" : "Visschaal samenstellen"}</a>
-          <a className="knop knop-lijn" href="#gourmet-keuzes">{locale === "en" ? "Create a gourmet platter" : locale === "de" ? "Gourmetplatte zusammenstellen" : "Visgourmet samenstellen"}</a>
+          <GourmetOrderLink locale={locale} className="knop knop-lijn"/>
           <a className="knop knop-lijn" href="#geschenken">{locale === "en" ? "Seafood gifts" : locale === "de" ? "Fischgeschenke" : "Cadeau-ideeën"}</a>
           <a className="knop knop-lijn" href="#delicatessen">{locale === "en" ? "Choose a fish or salad trio" : locale === "de" ? "Fisch- oder Salattrio wählen" : "Vis- of saladetrio kiezen"}</a>
         </nav>

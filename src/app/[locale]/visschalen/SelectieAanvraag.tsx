@@ -1,3 +1,5 @@
+import { gourmetOrderHref } from "@/lib/gourmet-pricing";
+import { gourmetRequestCopy } from "@/lib/gourmet-request";
 import { DIRKS_BARBECUE, DIRKS_VISSCHALEN, selectieNaam, type SelectieItem } from "@/lib/dirks-selectie";
 import { euro, whatsappLink } from "@/lib/bedrijf";
 import { SelectieGalerij } from "./SelectieGalerij";
@@ -71,8 +73,9 @@ function maakKaarten({ items, locale, showPrice = true, photoCaption }: KaartPro
         fotoLabel: isPlatter ? platterPresentation(locale).photoLabel : undefined,
         beschrijving: product?.categorie === "gourmet" ? gourmetPortionText(item.slug, locale) : isPlatter ? platterPresentation(locale).photoText : showPrice ? t.productBeschrijving(naam) : t.schaalBeschrijving(naam),
         prijsTekst: product?.categorie === "gourmet" ? platterPrice(catalogProduct(item.slug, locale), locale) : isPlatter ? platterPrice(product, locale) : showPrice ? `${t.prijs} ${bedrag}${unit}` : undefined,
+        orderHref: product?.categorie === "gourmet" ? gourmetOrderHref(locale, item.slug) : undefined,
         whatsappHref: whatsappLink(bericht),
-        whatsappLabel: t.vraag,
+        whatsappLabel: product?.categorie === "gourmet" ? gourmetRequestCopy(locale).order : t.vraag,
         detailsHref: feestdagenProduct(item.slug) ? `/${locale}/feestdagen/${item.slug}` : undefined,
         detailsLabel: feestdagenProduct(item.slug) ? t.details : undefined,
       };

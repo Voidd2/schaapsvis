@@ -8,7 +8,7 @@ import { catalogText } from "@/lib/catalog-copy";
 import { platterPhotoAlt, platterPrice, platterPresentation } from "@/lib/platter-presentation";
 import { isDeliTrio } from "@/lib/deli-trio";
 import { DeliTrio, ProductQuantity } from "./RequestControls";
-import { CatalogPhoto, GiftRequest, GourmetRequest } from "./CatalogEnhancements";
+import { CatalogPhoto, GiftRequest, GourmetOrderLink } from "./CatalogEnhancements";
 
 import { giftCopy } from "@/lib/gift-copy";
 import { giftRequestCopy } from "@/lib/gift-request";
@@ -28,7 +28,7 @@ function ProductCard({ slug, locale, festive, featured = false }: Props & { slug
       {product.categorie === "gourmet" && <p className="text-sm">{gourmetPortionText(slug, locale)}</p>}
       {!isPlatter && <p className="seafood-price">{platterPrice(product, locale)}</p>}
       <Link className="seafood-detail" href={href}>{t.view} →</Link>
-      {isDeliTrio(slug) || slug === "zalmslaatje-de-luxe" ? <DeliTrio key={slug} locale={locale} slug={slug} product={product.naam} /> : <ProductQuantity product={product.naam} slug={slug} locale={locale} />}
+      {product.categorie === "gourmet" ? <GourmetOrderLink locale={locale} slug={slug} /> : isDeliTrio(slug) || slug === "zalmslaatje-de-luxe" ? <DeliTrio key={slug} locale={locale} slug={slug} product={product.naam} /> : <ProductQuantity product={product.naam} slug={slug} locale={locale} />}
     </div>
   </article>;
 }
@@ -65,7 +65,7 @@ export function SeafoodCatalog({ locale, festive = false }: Props) {
     {!festive && <Featured {...props} />}
     {[{ id: "gourmet", title: t.gourmet, intro: t.gourmetIntro, products: GOURMET }, { id: "delicatessen", title: t.delicacies, intro: t.delicaciesIntro, products: DELICACIES }].map(section => <section key={section.id} id={section.id} className="seafood-section">
       <div className="catalog-heading"><h2>{section.title}</h2><p>{section.intro}</p></div>
-      {section.id === "gourmet" && <GourmetRequest locale={locale} />}
+      {section.id === "gourmet" && <div id="gourmet-samenstellen" className="mb-5"><span id="gourmet-keuzes"/><GourmetOrderLink locale={locale}/></div>}
       <div className="seafood-grid">{section.products.map(slug => <ProductCard key={slug} {...props} slug={slug} />)}</div>
       {section.id === "gourmet" && <><Link className="inline-block mt-4 underline" href={`/${locale}/blog/welke-vis-voor-gourmet`}>{locale==="nl"?"Welke vis past in een gourmetpannetje?":locale==="en"?"Which fish work in a tabletop grill pan?":"Welcher Fisch passt ins Tischgrillpfännchen?"} →</Link></>}
     </section>)}
