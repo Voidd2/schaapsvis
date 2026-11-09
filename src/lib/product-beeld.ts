@@ -267,16 +267,6 @@ const INTERNET_BEELDEN: Record<string, InternetPhoto> = {
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
     }
   },
-  "gebakken-ansjovis": {
-    "src": "/images/assortiment-internet/gebakken-ansjovis.jpg",
-    "kind": "serving",
-    "credit": {
-      "author": "E4024",
-      "source": "https://commons.wikimedia.org/wiki/File:Hamsi_tava_-_roka.jpg",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
-    }
-  },
   "hollandse-garnalen": {
     "src": "/images/assortiment-internet/hollandse-garnalen-solt.jpeg",
     "kind": "product",
@@ -299,6 +289,7 @@ const INTERNET_BEELDEN: Record<string, InternetPhoto> = {
 
 // Product-matched photos, with attribution wherever an external license requires it.
 const PRODUCT_BEELDEN: Record<string, Pick<ProductPhoto, "src" | "alt" | "credit" | "caption">> = {
+  "gebakken-ansjovis": { src: "/images/editorial/gefrituurde-ansjovis.webp", alt: "Gefrituurde ansjovis met een partje citroen in een kartonnen bakje" },
   "gerookte-zalm-high-seas": { src: "/images/editorial/gerookte-zalm-serveervoorbeeld.png", alt: "Gerookte zalm op een schaal met dille — serveerinspiratie" },
   "gerookte-kipper": { src: "/images/editorial/gerookte-kipper-serveervoorbeeld.webp", alt: "Gerookte kippers met brood en citroen — serveervoorbeeld" },
   "gebakken-mosselen": { src: "/images/editorial/gebakken-mosselen-serveervoorbeeld.webp", alt: "Gebakken mosselen met citroen en peterselie — serveervoorbeeld" },
@@ -349,6 +340,7 @@ function sourcePhoto(product: Product): ProductPhoto | null {
   return product.photo ? { src: product.photo, editorial: false, whole: true, alt: product.naam } : null;
 }
 const ALTS:Record<string,readonly[string,string,string]>={
+ "gebakken-ansjovis":["Gefrituurde ansjovis met een partje citroen in een kartonnen bakje","Deep-fried anchovies with a lemon wedge in a cardboard tray","Frittierte Sardellen mit einer Zitronenspalte in einer Pappschale"],
  "gerookte-forelfilet":["Gerookte forelfilet met dille en citroen — serveersuggestie","Smoked trout fillet with dill and lemon — serving suggestion","Geräuchertes Forellenfilet mit Dill und Zitrone — Serviervorschlag"],
 "krabsalade":["Romige krabsalade met lente-ui — serveersuggestie","Creamy crab salad with spring onion, serving suggestion","Cremiger Krabbensalat mit Frühlingszwiebeln, Serviervorschlag"],
 "noorse-garnalen":["Gepelde Noorse garnalen met citroen — serveersuggestie","Peeled northern shrimp with lemon, serving suggestion","Geschälte nordische Garnelen mit Zitrone, Serviervorschlag"],
@@ -439,6 +431,7 @@ export function productPhoto(product:Product,locale="nl"):ProductPhoto|null{
  const photo=sourcePhoto(product);if(!photo)return null;
  if(["krabsalade","tonijnsalade","zalmsalade"].includes(product.slug))photo.caption=locale==="en"?"Salad serving suggestion.":locale==="de"?"Serviervorschlag für Fischsalat.":"Serveersuggestie voor vissalade.";
  const captionBySlug:Record<string,Record<string,string>>={
+  "gebakken-ansjovis":{nl:"Serveersuggestie.",en:"Serving suggestion.",de:"Serviervorschlag."},
   "gerookte-kipper":{nl:"Gerookte kipper met brood.",en:"Smoked kipper with bread.",de:"Räucherkipper mit Brot."},
   "gebakken-mosselen":{nl:"Gebakken mosselen met citroen en peterselie.",en:"Fried mussels with lemon and parsley.",de:"Gebratene Miesmuscheln mit Zitrone und Petersilie."},
   "gerookte-heilbot":{nl:"Gerookte heilbot met dille en citroen.",en:"Smoked halibut with dill and lemon.",de:"Räucherheilbutt mit Dill und Zitrone."},
