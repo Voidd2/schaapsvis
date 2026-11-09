@@ -1,7 +1,8 @@
 const copy = {
   nl: {
-    offerTitle: "Ontvang korting bij Schaap’s",
-    offerIntro: "Ontvang ongeveer één keer per week een e-mail met kortingsbonnen voor vis uit onze toonbank.",
+    offerTitle: "Een visje met korting?",
+    offerIntro: "We mailen u ongeveer één keer per week kortingsbonnen voor uw volgende bezoek aan Schaap’s.",
+    offerPrivacy: "Privacy", offerUnsubscribe: "Afmelden kan in elke mail.",
     offerSubmit: "Ja, stuur mij kortingsmails", closeOffer: "Sluiten",
     title: "Aanmelden Voor Kortingen!",
     intro: "Ontvang regelmatig kortingsbonnen per e-mail voor producten uit het assortiment van Schaap’s Vishandel.",
@@ -15,8 +16,9 @@ const copy = {
     js: "Zet JavaScript aan om u aan te melden.",
   },
   en: {
-    offerTitle: "Get discounts at Schaap’s",
-    offerIntro: "About once a week, we’ll email you discount vouchers for fish from our counter.",
+    offerTitle: "Fish for a little less?",
+    offerIntro: "About once a week, we’ll email you vouchers for your next visit to Schaap’s.",
+    offerPrivacy: "Privacy", offerUnsubscribe: "Unsubscribe in any email.",
     offerSubmit: "Yes, email me discounts", closeOffer: "Close",
     title: "Sign Up for Discounts!", intro: "Get regular discount vouchers by email for products from Schaap’s Vishandel.",
     email: "Your email address", consent: "Yes, I would like to receive discount vouchers from Schaap’s Vishandel by email.",
@@ -28,8 +30,9 @@ const copy = {
     photo: "The fish counter at Schaap’s market stall", js: "Enable JavaScript to sign up.",
   },
   de: {
-    offerTitle: "Rabatte bei Schaap’s erhalten",
-    offerIntro: "Etwa einmal pro Woche erhalten Sie per E-Mail Rabattgutscheine für Fisch aus unserer Theke.",
+    offerTitle: "Lust auf Fisch mit Rabatt?",
+    offerIntro: "Etwa einmal pro Woche schicken wir Ihnen Rabattgutscheine für Ihren nächsten Besuch bei Schaap’s per E-Mail.",
+    offerPrivacy: "Datenschutz", offerUnsubscribe: "Abmeldung in jeder E-Mail möglich.",
     offerSubmit: "Ja, ich möchte Rabatt-E-Mails", closeOffer: "Schließen",
     title: "Für Rabatte anmelden!", intro: "Erhalten Sie regelmäßig Rabattgutscheine für Produkte aus dem Sortiment von Schaap’s Vishandel per E-Mail.",
     email: "Ihre E-Mail-Adresse", consent: "Ja, ich möchte Rabattgutscheine von Schaap’s Vishandel per E-Mail erhalten.",

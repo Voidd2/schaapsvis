@@ -820,14 +820,29 @@ assert.equal((await expiredPassCheck.json()).valid, false, "the expired former p
   assert.equal(sqlite.prepare("SELECT region_tag FROM newsletter_subscriptions WHERE email=?").get(email).region_tag, "leiden");
   sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(email);
 
-  const offer = { email: "varlaks-visitor@example.test", form: "varlaks" };
+  const offer = { email: "varlaks-visitor@example.test", form: "varlaks", consentVersion: "varlaks-weekly-offers-v2" };
   assert.equal((await subscribe(offer)).status, 400);
+  const mailFrom = env.MAIL_FROM;
+  env.MAIL_FROM = "";
   assert.equal((await subscribe({ ...offer, consent: true })).status, 202);
+  env.MAIL_FROM = mailFrom;
   const popupEntry = sqlite.prepare("SELECT * FROM newsletter_subscriptions WHERE email=?").get(offer.email);
   assert.equal(popupEntry.status, "subscribed");
   assert.equal(popupEntry.source, "varlaks-popup");
-  assert.equal(popupEntry.consent_text_version, "varlaks-weekly-offers-v1");
-  assert.ok(popupEntry.consented_at);
+  assert.equal(popupEntry.consent_text_version, "varlaks-weekly-offers-v2");
+  assert.ok(popupEntry.consented_at && popupEntry.confirmed_at);
+  assert.equal((await subscribe({email: offer.email.toUpperCase(), consent: true})).status, 202);
+  assert.deepEqual(sqlite.prepare("SELECT * FROM newsletter_subscriptions WHERE email=?").get(offer.email), popupEntry, "retry via another form preserves the original consent");
+  sqlite.prepare("UPDATE newsletter_subscriptions SET status='unsubscribed', unsubscribed_at=updated_at WHERE email=?").run(offer.email);
+  assert.equal((await subscribe(offer)).status, 400);
+  assert.equal((await subscribe({ ...offer, consent: true })).status, 202);
+  assert.equal(sqlite.prepare("SELECT unsubscribed_at FROM newsletter_subscriptions WHERE email=?").get(offer.email).unsubscribed_at, null);
+  const retryEmail = "varlaks-retry@example.test";
+  simulateApplicationCommitFailure = true;
+  assert.equal((await subscribe({...offer, email: retryEmail, consent:true})).status, 503);
+  assert.equal(sqlite.prepare("SELECT COUNT(*) AS n FROM newsletter_subscriptions WHERE email=?").get(retryEmail).n, 0);
+  assert.equal((await subscribe({...offer, email: retryEmail, consent:true})).status, 202);
+  sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(retryEmail);
   sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(offer.email);
 }
 const signupStart = await call("/api/members/newsletter/start", { method: "POST", body: { email: "staged-deals@example.test" } });
