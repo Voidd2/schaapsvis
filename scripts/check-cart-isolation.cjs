@@ -24,12 +24,13 @@ async function verifyComposers(ctx, tab) {
     if (await panel.getAttribute("open") === null) await panel.locator("summary").click();
     return panel;
   }
-  await tab.locator('a[href="#gourmet-keuzes"]').click();
-  const gourmet = tab.locator("#gourmet-keuzes form:visible");
+  await tab.locator('a[href="/nl/gourmetschotel"]').first().click();
+  const gourmet = tab.locator(".gourmet-builder");
   await gourmet.locator('[name="people"]').fill("4");
   await gourmet.locator('[name="fish"][value="salmon"]').check();
-  await gourmet.locator('[name="salmon"]').fill("400");
+  await gourmet.locator('[name="weight-salmon"]').fill("400");
   await review(gourmet, ["Zalm", "400 g", "14,00"]);
+  await tab.goto(new URL("/nl/visschalen",url).href);
   const platter = tab.locator("#maatwerk form:visible");
   await platter.locator('[name="people"]').fill("6");
   await platter.locator('[name="fish"][value="eel"]').check();

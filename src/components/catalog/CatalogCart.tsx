@@ -9,7 +9,7 @@ import { RequestSummary } from "./Productkeuze";
 import { leesMandje, leesSamenstelling } from "@/lib/mandje";
 export function CatalogCart() {
   const pathname = usePathname(), locale = useLocale();
-  if (!/^\/(nl|en|de)\/(visschalen|feestdagen|barbecue-gourmet|relatiegeschenken)(\/|$)/.test(pathname)) return null;
+  if (!/^\/(nl|en|de)\/(visschalen|feestdagen|gourmetschotel|barbecue-gourmet|relatiegeschenken)(\/|$)/.test(pathname)) return null;
   return <CartPanel key={pathname} locale={locale} />;
 }
 function CartPanel({ locale }: { locale:string }) {

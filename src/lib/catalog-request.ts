@@ -13,7 +13,8 @@ export function normalizeRequest(raw: unknown): CatalogRequest {
   const value = raw as Partial<CatalogRequest>;
   if (value.reselect === true) result.reselect = true;
   if (value.items && typeof value.items === "object") for (const [slug, line] of Object.entries(value.items)) {
-    if (feestdagenProduct(slug)?.categorie === "visschalen") { result.reselect = true; continue; }
+    const category = feestdagenProduct(slug)?.categorie;
+    if (category === "visschalen" || category === "gourmet") { result.reselect = true; continue; }
     if (!feestdagenProduct(slug) && !saladLine(slug)) continue;
     if (!line || !Number.isInteger(line.quantity) || line.quantity < 1 || line.quantity > 99) continue;
     // Whitelist fields: legacy split flags are intentionally discarded.

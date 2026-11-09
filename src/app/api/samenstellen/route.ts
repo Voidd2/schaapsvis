@@ -30,12 +30,12 @@ function draft(data: URLSearchParams, locale: string) {
     return assemblyLink(delicacyMode(slug),locale,catalogProduct(slug,locale).naam,data);
   }
   if (kind === "gourmet") {
-    const packaging = field("packaging");
-    if (packaging !== "standard" && packaging !== "premium") return null;
-    const portions: Portions = {};
+    if (field("packaging") !== "standard") return null;
     const selected = data.getAll("fish");
-    for (const fish of gourmetFish) if (selected.includes(fish.id)) portions[fish.id] = field(fish.id);
-    return gourmetRequestLink(locale, { people, date, wishes, packaging, portions });
+    if (selected.some(id => !gourmetFish.some(fish => fish.id === id))) return null;
+    const portions: Portions = Object.fromEntries(selected.map(id => [id, field("weight-" + id) || field(id)]));
+    const marinated = data.getAll("marinade").filter(id => selected.includes(id));
+    return gourmetRequestLink(locale, { people, date, wishes, portions, marinated });
   }
   if (kind === "platter") {
     const t = inquiryText(locale);

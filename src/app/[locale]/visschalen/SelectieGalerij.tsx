@@ -13,6 +13,7 @@ export type SelectieGalerijKaart = {
   fotoLabel?: string;
   beschrijving: string;
   prijsTekst?: string;
+  orderHref?: string;
   whatsappHref: string;
   whatsappLabel: string;
   detailsHref?: string;
@@ -128,7 +129,7 @@ export function SelectieGalerij({ kaarten, tekst, family }: { kaarten: SelectieG
           {item.prijsTekst && <p className={family ? "platter-total-price" : "mb-5 text-[#4d6370]"}>{item.prijsTekst}</p>}
           <div className="mt-auto grid gap-2">
             {!family && item.detailsHref && item.detailsLabel && <Link className="knop knop-lijn" href={item.detailsHref}>{item.detailsLabel}</Link>}
-            <a className="knop knop-rood" target="_blank" rel="noopener noreferrer" href={item.whatsappHref}>{item.whatsappLabel}</a>
+            {item.orderHref ? <Link className="knop knop-rood" href={item.orderHref}>{item.whatsappLabel}</Link> : <a className="knop knop-rood" target="_blank" rel="noopener noreferrer" href={item.whatsappHref}>{item.whatsappLabel}</a>}
             {family && item.detailsHref && <Link className="platter-details-link" href={item.detailsHref}>{item.detailsLabel}</Link>}
           </div>
         </div>

@@ -1362,3 +1362,40 @@ body:has(#mobile-navigation) .catalog-cart-trigger { visibility: hidden; }
 .native-composer-form .menu-options[open] > summary { list-style-type:disclosure-open; }
 .menu-options > label { display:block; margin-top:.65rem; }
 @media(max-width:700px) { .tier-grid { grid-template-columns:minmax(0,1fr); } }
+
+.gourmet-order-page { max-width:78rem; padding-block:1.5rem 4rem; }
+.gourmet-order-header { display:grid; grid-template-columns:minmax(0,1fr) minmax(12rem,22rem); gap:2rem; align-items:center; margin-bottom:2rem; background:var(--sand); border-radius:12px; overflow:hidden; }
+.gourmet-order-header > div { padding:clamp(1.2rem,3vw,2.5rem); }
+.gourmet-order-header h1 { font-size:clamp(2rem,4vw,3.25rem); line-height:1.08; }
+.gourmet-order-header p { margin-top:.65rem; max-width:55ch; }
+.gourmet-order-header img { width:100%; height:100%; object-fit:cover; max-height:15rem; }
+.gourmet-builder { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(16rem,1fr); gap:clamp(1rem,3vw,2.5rem); align-items:start; }
+.gourmet-selections { display:grid; gap:1.25rem; min-width:0; }
+.gourmet-selections fieldset { min-width:0; }
+.gourmet-selections legend,.gourmet-people,.gourmet-wishes { font-weight:650; }
+.gourmet-selections input[type=number],.gourmet-wishes textarea { display:block; margin-top:.35rem; min-height:44px; border:1px solid #99b9c9; border-radius:6px; padding:.45rem .7rem; background:white; }
+.gourmet-selections input[type=number] { width:7rem; }
+.gourmet-wishes textarea { width:100%; font-weight:400; }
+.gourmet-fish-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.65rem; margin-top:.6rem; align-items:start; }
+.gourmet-fish { border:1px solid #bed3dd; border-radius:9px; min-width:0; }
+.gourmet-fish:has(.gourmet-toggle input:checked) { border-color:var(--navy); }
+.gourmet-toggle,.gourmet-marinade { display:flex; align-items:center; gap:.7rem; min-height:48px; cursor:pointer; }
+.gourmet-toggle { padding:.8rem; }
+.gourmet-builder small { display:block; font-size:.88rem; }
+.gourmet-builder input[type=checkbox] { width:1.2rem; height:1.2rem; flex:none; accent-color:var(--navy); }
+.gourmet-fish-options { padding:.7rem .8rem; background:var(--sand); border-radius:0 0 9px 9px; }
+.gourmet-fish:not(:has(.gourmet-toggle input:checked)) .gourmet-fish-options { display:none; }
+.gourmet-marinade { margin-top:.6rem; }
+.gourmet-summary { position:sticky; top:10rem; background:var(--sand); border-radius:12px; padding:clamp(1rem,2vw,1.6rem); }
+.gourmet-summary h2 { font-size:1.55rem; margin-bottom:.75rem; }
+.gourmet-summary li,.gourmet-summary dl > div { display:flex; gap:1rem; justify-content:space-between; padding:.45rem 0; }
+.gourmet-summary li,.gourmet-total { border-top:1px solid #c3d9e3; }
+.gourmet-summary dd,.gourmet-summary strong { white-space:nowrap; }
+.gourmet-total { font-size:1.16rem; font-weight:700; }
+.gourmet-add { width:100%; margin-top:1rem; }
+@media(max-width:760px) {
+  .gourmet-order-header,.gourmet-builder { grid-template-columns:minmax(0,1fr); }
+  .gourmet-order-header img { display:none; }
+  .gourmet-summary { position:static; }
+}
+@media(max-width:520px) { .gourmet-fish-list { grid-template-columns:minmax(0,1fr); } }

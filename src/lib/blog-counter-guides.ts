@@ -28,7 +28,7 @@ export const counterGuides: BlogPost[] = [
     "gerelateerdeLinks": [
       {
         "label": "Stel uw gourmet samen",
-        "href": "/feestdagen#gourmet-samenstellen"
+        "href": "/gourmetschotel"
       },
       {
         "label": "Hoeveel vis per persoon?",

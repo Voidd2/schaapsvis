@@ -6,7 +6,7 @@ import { catalogProduct, legacyTrioSlugs } from "@/lib/seafood-catalog";
 import { isDeliTrio } from "@/lib/deli-trio";
 import { DeliTrio, ProductQuantity, CatalogBackLink } from "@/components/catalog/RequestControls";
 import { CatalogHelp } from "@/components/catalog/CatalogHelp";
-import { GourmetRequest } from "@/components/catalog/CatalogEnhancements";
+import { GourmetOrderLink } from "@/components/catalog/CatalogEnhancements";
 import { gourmetPortionText } from "@/lib/gourmet-pricing";
 import type { Metadata } from "next";
 import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
@@ -140,13 +140,12 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
           <p className="max-w-xl text-[1.08rem] leading-8 text-[#38515e]">{product.intro}</p>
           {product.categorie === "gourmet" && <p className="mt-3 font-semibold">{gourmetPortionText(slug, locale)}</p>}
           <p className="mt-5 text-sm leading-6 text-[#527080]">{note}</p>
-          {isDeliTrio(slug) || slug === "zalmslaatje-de-luxe" ? <DeliTrio key={slug} locale={locale} slug={slug} product={product.naam} /> : <ProductQuantity product={product.naam} key={slug} slug={slug} locale={locale} />}
+          {product.categorie === "gourmet" ? <GourmetOrderLink locale={locale} slug={slug}/> : isDeliTrio(slug) || slug === "zalmslaatje-de-luxe" ? <DeliTrio key={slug} locale={locale} slug={slug} product={product.naam} /> : <ProductQuantity product={product.naam} key={slug} slug={slug} locale={locale} />}
           <CatalogHelp locale={locale} />
         </div>
       </div>
     </section>
 
-    {product.categorie === "gourmet" && <div className="section-wrap"><GourmetRequest locale={locale} /></div>}
     <Sectie grond="papier">
       <div className="grid gap-10 lg:grid-cols-[1fr_.85fr] lg:gap-16">
         <div>

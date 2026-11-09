@@ -43,6 +43,7 @@ const MEERTALIG: {
   { pad: "/relatiegeschenken", prioriteit: 0.8, frequentie: "weekly" as const, gewijzigd: new Date("2026-10-30") },
 
   { pad: "/assortiment", prioriteit: 0.9, frequentie: "weekly" as const },
+  { pad: "/gourmetschotel", prioriteit: 0.8, frequentie: "monthly" as const },
   { pad: "/barbecue-gourmet", prioriteit: 0.8, frequentie: "monthly" as const, gewijzigd: new Date("2026-10-21") },
   { pad: "/bezoek-ons", prioriteit: 0.85, frequentie: "monthly" as const },
   { pad: "/biologische-vis", prioriteit: 0.8, frequentie: "monthly" as const },

@@ -1,93 +1,94 @@
 "use client";
 
-import { useId, useState, type FormEvent } from "react";
-import { gourmetFish, gourmetLanguage, gourmetQuote, gourmetRequestCopy, type Packaging, type Portions } from "@/lib/gourmet-request";
+import { useState, type FormEvent } from "react";
+import { gourmetDefaults, gourmetFish, gourmetLanguage, gourmetQuote, gourmetRequestCopy, type Portions } from "@/lib/gourmet-request";
+import { gourmetRates, MARINADE_CENTS_PER_100G } from "@/lib/gourmet-pricing";
 import { feestdagenBedrag } from "@/lib/feestdagen-producten";
 import { addCartSelection, useCatalogRequest } from "@/lib/catalog-request-store";
 import { cartText } from "@/lib/cart-copy";
 
-export function GourmetRequest({ locale }: { locale: string }) {
-  const t = gourmetRequestCopy(locale), lang = gourmetLanguage(locale), id = useId();
-  const money = (cents: number) => feestdagenBedrag(cents, locale);
-  const { ready } = useCatalogRequest();
-  const c = cartText(locale);
-  const [people, setPeople] = useState("");
-  const [portions, setPortions] = useState<Portions>({});
-  const [packaging, setPackaging] = useState<Packaging>("standard");
-  const [wishes, setWishes] = useState("");
-  const [error, setError] = useState(false);
-  const quote = gourmetQuote(portions, packaging);
-  const hasSelection = Object.keys(portions).length > 0;
-  function changePortion(key: keyof Portions, grams?: string) {
-    setError(false);
-    setPortions(current => {
-      const next = { ...current };
-      if (grams === undefined) delete next[key];
-      else next[key] = grams;
-      return next;
-    });
+function readSelection(form: HTMLFormElement) {
+  const values = new FormData(form);
+  const selected = new Set(values.getAll("fish"));
+  const portions: Portions = {};
+  const marinated: string[] = [];
+  for (const fish of gourmetFish) {
+    if (!selected.has(fish.id)) continue;
+    const weight = form.elements.namedItem("weight-" + fish.id) as HTMLInputElement;
+    portions[fish.id] = weight.value;
+    const toggle = form.querySelector<HTMLInputElement>(`input[name="marinade"][value="${fish.id}"]`);
+    if (toggle?.checked) marinated.push(fish.id);
   }
+  return {portions, marinated};
+}
+
+export function GourmetRequest({locale, preset}: {locale:string; preset:string}) {
+  const t = gourmetRequestCopy(locale), lang = gourmetLanguage(locale);
+  const money = (cents: number) => feestdagenBedrag(cents, locale);
+  const initial = gourmetDefaults(preset);
+  const [selection,setSelection] = useState({portions:initial.portions, marinated:[] as string[]});
+  const [error,setError] = useState(false);
+  const { ready } = useCatalogRequest();
+  const quote = gourmetQuote(selection.portions,selection.marinated);
+
   function submit(event: FormEvent<HTMLFormElement>) {
+    if (!ready) return;
     event.preventDefault();
-    const data = new URLSearchParams({ kind: "gourmet", people, packaging });
-    for (const [fish, grams] of Object.entries(portions)) {
-      data.append("fish", fish);
-      data.set("weight-" + fish, grams);
+    const form = event.currentTarget;
+    const values = new FormData(form);
+    const { portions, marinated } = readSelection(form);
+    const data = new URLSearchParams({kind:"gourmet", packaging:"standard", people:String(values.get("people") ?? "")});
+    for (const [id,weight] of Object.entries(portions)) {
+      data.append("fish",id);
+      data.set("weight-" + id,weight);
     }
-    setError(!addCartSelection(data, locale, wishes));
+    for (const id of marinated) data.append("marinade",id);
+    setError(!addCartSelection(data,locale,String(values.get("wishes") ?? "")));
   }
 
-  const field = "mt-2 min-h-12 w-full rounded-lg border border-[#bfd6df] bg-white p-3 text-base";
-  return <div className="border-t border-[#bfd6df] px-5 pb-5 sm:px-8 sm:pb-8">
-    <p className="mt-3 max-w-3xl">{t.intro}</p>
-    <form onSubmit={submit} aria-label={t.title} className="mt-6 grid items-start gap-6 lg:grid-cols-[1.35fr_1fr]">
-      <div>
-        <label htmlFor={`${id}-people`} className="block font-semibold">{t.people}</label>
-        <input id={`${id}-people`} type="number" min={1} max={200} step={1} required inputMode="numeric" value={people} onChange={e => setPeople(e.target.value)} className={field} />
-        <fieldset className="mt-5"><legend className="font-semibold">{t.fish}</legend>
-          <div className="mt-2 grid items-start gap-2 sm:grid-cols-2">
-            {gourmetFish.map(fish => {
-              const weight = portions[fish.id], selected = weight !== undefined, name = fish[lang];
-              return <div key={fish.id} className={`rounded-lg border bg-white ${selected ? "border-[#075b82]" : "border-[#bfd6df]"}`}>
-                <label className="flex min-h-14 cursor-pointer items-center gap-3 p-3">
-                  <input type="checkbox" className="h-5 w-5 shrink-0 accent-[#075b82]" aria-label={name} checked={selected} onChange={e => changePortion(fish.id, e.target.checked ? "100" : undefined)} />
-                  <span><strong className="block">{name}</strong><span className="text-sm">{money(fish.rate)} {t.unit}</span></span>
-                </label>
-                {selected && <label className="block px-3 pb-3 text-sm">{t.grams}<span className="sr-only"> · {name}</span>
-                  <input required type="number" min="1" step="1" inputMode="numeric" className={field} value={weight} onChange={e => changePortion(fish.id, e.target.value)} />
-                </label>}
-              </div>;
-            })}
-          </div>
-        </fieldset>
-        <fieldset className="mt-5"><legend className="font-semibold">{t.packaging}</legend>
-          <div className="mt-2 grid gap-2">
-            {(["standard", "premium"] as const).map(option => <label key={option} className="flex min-h-12 cursor-pointer items-start gap-3 rounded-lg border border-[#bfd6df] bg-white p-3">
-              <input className="mt-1 h-5 w-5 shrink-0 accent-[#075b82]" type="radio" name={`${id}-pack`} checked={packaging === option} onChange={() => setPackaging(option)} />
-              <span><strong>{t[option]}</strong>{option === "standard" ? ` · ${t.free}` : ""}
-                {option === "premium" && <small className="mt-1 block">{t.customNote}</small>}
-              </span>
-            </label>)}
-          </div>
-        </fieldset>
-        <label htmlFor={`${id}-wishes`} className="mt-5 block font-semibold">{t.wishes}</label>
-        <textarea id={`${id}-wishes`} value={wishes} onChange={e => setWishes(e.target.value)} maxLength={700} rows={2} placeholder={t.placeholder} className={field} />
-      </div>
-      <aside className="min-w-0 rounded-xl bg-white p-5 sm:p-6 lg:sticky lg:top-48">
-        <h3 className="text-xl">{t.summary}</h3>
-        <div aria-live="polite" className="mt-4">{quote ? <>
-          <ul className="divide-y divide-[#d9e7ee]">{quote.lines.map(({ fish, weight, cents }) => <li key={fish.id} className="flex flex-wrap justify-between gap-1 py-2"><span>{fish[lang]} · {weight} g</span><strong>{money(cents)}</strong></li>)}</ul>
-          <dl className="mt-3 space-y-2 border-t border-[#bfd6df] pt-3">
-            <div className="flex justify-between gap-3"><dt>{t.weight}</dt><dd>{quote.grams} g</dd></div>
-            <div className="flex justify-between gap-3"><dt>{t.subtotal}</dt><dd>{money(quote.subtotal)}</dd></div>
-            <div className="flex flex-wrap justify-between gap-x-3"><dt>{t[packaging]}</dt><dd>{quote.total === null ? t.customNote : t.free}</dd></div>
-            {quote.total !== null && <div className="flex justify-between gap-3 border-t pt-3 text-lg font-bold"><dt>{t.total}</dt><dd>{money(quote.total)}</dd></div>}
-          </dl>
-        </> : <p>{hasSelection ? t.invalid : t.empty}</p>}</div>
-        {error && <p role="alert" className="mt-3 font-semibold text-[#a61f2b]">{hasSelection ? c.invalidChoice : t.empty}</p>}
-        <button type="submit" disabled={!ready} className="knop knop-navy mt-4 min-h-12 w-full whitespace-normal">{c.add}</button>
-        <p className="mt-3 text-sm leading-6">{t.note}</p>
-      </aside>
-    </form>
-  </div>;
+  return <form className="gourmet-builder" aria-label={t.title} action="/api/samenstellen" method="post" target="_blank"
+    onSubmit={submit} onChange={event=>{setSelection(readSelection(event.currentTarget));setError(false);}}>
+    <input type="hidden" name="kind" value="gourmet"/><input type="hidden" name="locale" value={locale}/>
+    <input type="hidden" name="packaging" value="standard"/>
+    <div className="gourmet-selections">
+      <label className="gourmet-people">{t.people}<input name="people" type="number" inputMode="numeric" required min="1" max="200" defaultValue={initial.people}/></label>
+      <fieldset><legend>{t.fish}</legend>
+        <div className="gourmet-fish-list">{gourmetFish.map(fish=>{
+          const name = fish[lang];
+          const disabled = ready && selection.portions[fish.id] === undefined;
+          return <div className="gourmet-fish" key={fish.id}>
+            <label className="gourmet-toggle">
+              <input type="checkbox" name="fish" value={fish.id} defaultChecked={initial.portions[fish.id] !== undefined} aria-label={name}/>
+              <span><strong>{name}</strong><small>{money(gourmetRates[fish.id])} {t.unit}</small></span>
+            </label>
+            <div className="gourmet-fish-options">
+              <label>{t.grams}<span className="sr-only"> · {name}</span>
+                <input type="number" inputMode="numeric" min="1" max="100000" step="1" disabled={disabled} name={"weight-"+fish.id} defaultValue={initial.portions[fish.id] ?? "100"}/>
+              </label>
+              <label className="gourmet-marinade"><input type="checkbox" name="marinade" value={fish.id} disabled={disabled}/>
+                <span>{t.marinated}<span className="sr-only"> · {name}</span><small>+{money(MARINADE_CENTS_PER_100G)} {t.unit}</small></span>
+              </label>
+            </div>
+          </div>;
+        })}</div>
+      </fieldset>
+      <label className="gourmet-wishes">{t.wishes}<textarea name="wishes" rows={2} maxLength={700} /></label>
+    </div>
+    <aside className="gourmet-summary">
+      <h2>{t.summary}</h2>
+      <div className="gourmet-live" aria-live="polite">{quote ? <>
+        <ul>{quote.lines.map(({fish,weight,cents,seasoned})=><li key={fish.id}><span>{fish[lang]} · {weight} g<small>{seasoned ? t.marinated : t.plain}</small></span><strong>{money(cents)}</strong></li>)}</ul>
+        <dl><div><dt>{t.weight}</dt><dd>{quote.grams} g</dd></div>
+          <div><dt>{t.subtotal}</dt><dd>{money(quote.fishCents)}</dd></div>
+          <div><dt>{t.marinade}</dt><dd>{money(quote.marinadeCents)}</dd></div>
+          <div><dt>{t.standard}</dt><dd>{t.free}</dd></div>
+          <div className="gourmet-total"><dt>{t.total}</dt><dd>{money(quote.total)}</dd></div>
+        </dl>
+      </> : <p>{Object.keys(selection.portions).length ? t.invalid : t.empty}</p>}</div>
+      {error && <p role="alert">{cartText(locale).invalidChoice}</p>}
+      <button className="knop knop-navy gourmet-add" type="submit">{cartText(locale).add}</button>
+      <noscript><style>{".gourmet-live,.gourmet-add{display:none}"}</style><button type="submit" className="knop knop-navy">{["Aanvraag zonder winkelwagen bekijken","Review request without the basket","Anfrage ohne Warenkorb prüfen"][locale === "en" ? 1 : locale === "de" ? 2 : 0]}</button></noscript>
+      <p className="mt-3 text-sm">{t.note}</p>
+    </aside>
+  </form>;
 }
