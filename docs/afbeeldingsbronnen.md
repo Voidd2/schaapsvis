@@ -6,6 +6,8 @@ Bronnen van externe foto's die lokaal in `public/images/` zijn opgeslagen. De si
 
 De eigenaar heeft op 17 oktober 2026 bevestigd dat afbeeldingen van VÅRLAKS voor de site gebruikt mogen worden.
 
+Op de VÅRLAKS-landingspagina komen de filet (`zalmfilet`, poster 6), de kweker (`kweker-met-zalm`, poster 2) en het gerecht (`zalm-aan-tafel`, poster 3) uit het aangeleverde bestand *Varlaks 32x50 7 posters*. Het fjordlandschap (`noord-noorwegen`) komt uit de Nederlandse flyer, pagina 1. De vier foto's staan lokaal als WebP in `public/images/varlaks/`, met de ingesloten drukprofielen omgerekend naar sRGB.
+
 | Bestand | Originele bron | Gebruik |
 | --- | --- | --- |
 | `public/images/varlaks/from-egg-to-plate-2.jpg.webp` | https://varlaks.no/wp-content/uploads/2025/01/from-egg-to-plate-2.jpg.webp | Medewerker bij een netkweeklocatie; herkomstverhaal biologische-vispagina |
