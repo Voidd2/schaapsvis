@@ -827,8 +827,8 @@ export const products: Product[] = [
   },
   {
     "slug": "blacktiger-garnalen",
-    "naam": "Black Tiger Garnalen",
-    "desc": "Black Tiger-garnalen met stevig vlees en een volle smaak. Lekker om zelf te bakken of te grillen. Vraag naar de actuele maat, uitvoering en voorraad.",
+    "naam": "Gepelde Black Tiger-garnalen",
+    "desc": "Onze Black Tiger-garnalen zijn al gepeld. Bak ze kort in de pan of leg ze op de grill. Soms hebben we ze ook ongepeld. Vraag ons via WhatsApp of ze er zijn.",
     "categorie": "schaal-schelp",
     "ingredienten": "Black Tiger-garnalen [SCHAALDIEREN]. Vraag naar de actuele ingrediënten en allergenen op de verpakking.",
     "bevat": [

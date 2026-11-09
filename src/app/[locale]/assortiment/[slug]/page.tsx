@@ -12,7 +12,7 @@ import { getPrijs, formatPrijs } from "@/lib/prijzen";
 import { Schema } from "@/components/Schema";
 import { Kruimels, Sectie } from "@/components/ui/Sectie";
 import { PaginaSlot } from "@/components/ui/PaginaKop";
-import { BEDRIJF } from "@/lib/bedrijf";
+import { BEDRIJF, whatsappLink } from "@/lib/bedrijf";
 import { recepten } from "@/lib/recepten";
 import { localizeRecipe } from "@/lib/recipe-localization";
 import { recipeLabel } from "@/lib/recipe-copy";
@@ -52,6 +52,16 @@ export default async function ProductDetailPage({params}: Props) {
   const c = productCopy(lang), category = CATEGORY_NAMES[lang][product.categorie], photo = productPhoto(product,lang), voeding = getVoeding(slug);
   const seizoen = productNote(getSeizoen(slug), lang), prijs = getPrijs(slug);
   const availability = productAvailability(product,lang);
+  const enquiry = slug === "blacktiger-garnalen"
+    ? {
+        nl: { label: "App ons voor ongepelde garnalen", href: whatsappLink("Hallo, hebben jullie op dit moment ongepelde Black Tiger-garnalen?") },
+        en: { label: "Ask about shell-on prawns on WhatsApp", href: whatsappLink("Hello, do you have shell-on black tiger prawns in stock at the moment?") },
+        de: { label: "Per WhatsApp nach Garnelen mit Schale fragen", href: whatsappLink("Hallo, haben Sie zurzeit ungeschälte Black-Tiger-Garnelen vorrätig?") },
+      }[lang]
+    : {
+        label: { nl: "Vraag naar dit product", en: "Ask about this product", de: "Nach diesem Produkt fragen" }[lang],
+        href: bestelContact(lang, product.naam).href,
+      };
   const isPlatter = ["visschaal", "feestschotel"].includes(slug), isSalmon = !product.highlight && /zalm|lax/.test(slug);
   const action = {label: isPlatter ? c.platter : bestelContact(lang).label, href: isPlatter ? `/${lang}/visschalen` : bestelContact(lang, product.naam).href, extern: !isPlatter};
   const ownRecipes = recepten.filter(r => r.hoofdproduct === slug).map(r => localizeRecipe(r,lang));
@@ -99,7 +109,7 @@ export default async function ProductDetailPage({params}: Props) {
           {!prijs && <p className="product-price"><span className="kapitaal mr-2">{c.price}</span><strong>{c.dailyPrice}</strong></p>}
         </div>
         <div className="flex flex-wrap items-center gap-4 product-intro-actions">
-          <a href={bestelContact(lang, product.naam).href} className="knop knop-navy">{lang === "nl" ? "Vraag naar dit product" : lang === "de" ? "Nach diesem Produkt fragen" : "Ask about this product"}</a>
+          <a href={enquiry.href} className="knop knop-navy">{enquiry.label}</a>
           <Link href={`/${lang}/bezoek-ons`} className="font-semibold underline underline-offset-4">{lang === "nl" ? "Openingstijden en route" : lang === "de" ? "Öffnungszeiten und Anfahrt" : "Opening hours and directions"} →</Link>
         </div>
         <p className="mt-5 pl-5" style={{borderLeft:`2px solid ${availability.unavailable?"#be123c":"var(--navy)"}`}}>{availability.note}</p>
