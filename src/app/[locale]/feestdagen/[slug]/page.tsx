@@ -138,7 +138,7 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
           {product.categorie === "gourmet" && <p className="mt-3 font-semibold">{gourmetPortionText(slug, locale)}</p>}
           <p className="mt-5 text-sm leading-6 text-[#527080]">{note}</p>
           {family && <Link className="mt-4 underline underline-offset-4" href={platterOverviewHref(locale, slug, selection.toString()).replace(/#.*$/, "#maatwerk")}>{platterPresentation(locale).custom}</Link>}
-          {isDeliTrio(slug) ? <DeliTrio key={slug} locale={locale} slug={slug} product={product.naam} /> : <ProductQuantity key={slug} slug={slug} locale={locale} />}
+          {isDeliTrio(slug) ? <DeliTrio key={slug} locale={locale} slug={slug} product={product.naam} /> : <ProductQuantity product={product.naam} key={slug} slug={slug} locale={locale} />}
           <CatalogHelp locale={locale} />
         </div>
       </div>

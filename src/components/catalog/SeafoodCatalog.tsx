@@ -29,7 +29,7 @@ function ProductCard({ slug, locale, festive, featured = false }: Props & { slug
       {product.categorie === "gourmet" && <p className="text-sm">{gourmetPortionText(slug, locale)}</p>}
       {!isPlatter && <p className="seafood-price">{platterPrice(product, locale)}</p>}
       <Link className="seafood-detail" href={href}>{t.view} →</Link>
-      {isDeliTrio(slug) ? <DeliTrio key={slug} locale={locale} slug={slug} product={product.naam} /> : <ProductQuantity slug={slug} locale={locale} />}
+      {isDeliTrio(slug) ? <DeliTrio key={slug} locale={locale} slug={slug} product={product.naam} /> : <ProductQuantity product={product.naam} slug={slug} locale={locale} />}
     </div>
   </article>;
 }
@@ -64,7 +64,7 @@ export function SeafoodCatalog({ locale, festive = false }: Props) {
         <small>{t.saladPhoto}</small>
         <h3>{salad.names[languageIndex(locale)]}</h3><p className="seafood-price">{feestdagenBedrag(SALAD_PORTION_CENTS, locale)} / 100 g</p>
         {salad.productSlug && <Link className="seafood-detail" href={`/${locale}/assortiment/${salad.productSlug}`}>{t.view} →</Link>}
-        <ProductQuantity slug={salad.slug} locale={locale} />
+        <ProductQuantity product={salad.names[languageIndex(locale)]} slug={salad.slug} locale={locale} />
       </article>)}</div>
       <p className="request-muted mt-5">{t.saladNote}</p>
     </section>
