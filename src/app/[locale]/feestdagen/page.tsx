@@ -9,6 +9,7 @@ import { SeafoodCatalog } from "@/components/catalog/SeafoodCatalog";
 import { CatalogHelp } from "@/components/catalog/CatalogHelp";
 import { catalogText } from "@/lib/catalog-copy";
 import { feestdagenCopy } from "@/lib/feestdagen";
+import { holidayFishCopy } from "@/lib/feestdagen-verse-vis";
 import { paginaMetadata } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -31,7 +32,9 @@ export default async function FeestdagenPage({ params }: { params: Promise<{ loc
   return <>
     <section className="festive-catalog-hero holiday-cover section-wrap">
       <div><p className="kapitaal">{c.label}</p><h1>{c.title}</h1><p>{t.festiveIntro}</p>
-        <div className="catalog-intro-links"><a className="knop knop-rood" href="#visschalen">{t.browse} →</a><a className="knop knop-lijn" href="#geschenken">{t.gifts} ↓</a>
+        <div className="catalog-intro-links"><a className="knop knop-rood" href="#visschalen">{t.browse} →</a>
+          <Link className="knop knop-navy" href={`/${locale}/feestdagen/verse-vis`}>{holidayFishCopy(locale).entry} →</Link>
+          <a className="knop knop-lijn" href="#geschenken">{t.gifts} ↓</a>
           <GourmetOrderLink locale={locale} className="knop knop-lijn"/>
         </div>
       </div>
