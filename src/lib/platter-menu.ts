@@ -1,3 +1,13 @@
+import { COUNTER_RATES } from "./gift-pricing";
+
+export const EXTRA_EEL_CENTS = 1000;
+export const extraEelGrams = Math.round(100 * EXTRA_EEL_CENTS / COUNTER_RATES.eel);
+export const eelChoices = {
+  regular: ["Gewone verdeling", "Usual selection", "Übliche Zusammenstellung"],
+  redistribute: ["Meer paling binnen de schaalprijs", "More eel within the platter price", "Mehr Aal zum gleichen Plattenpreis"],
+  extra: ["Extra paling", "Additional eel", "Zusätzlicher Aal"],
+} as const;
+
 export const platterModes = ["standard-platter", "deluxe-platter"] as const;
 export type PlatterMode = typeof platterModes[number];
 export function isPlatterMode(mode: string): mode is PlatterMode {
@@ -30,6 +40,9 @@ export const servingCopy = {
   per: ["per persoon", "per person", "pro Person"],
   people: ["Aantal personen", "Number of people", "Personenzahl"],
   edit: ["Stel deze visschaal samen", "Build this platter", "Diese Platte zusammenstellen"],
+  eel: ["Gerookte paling", "Smoked eel", "Räucheraal"],
+  groupPrice: ["voor het hele gezelschap", "for the whole group", "für die gesamte Gruppe"],
+  eelSwap: ["Meer gerookte paling en minder andere vis, binnen de schaalprijs", "More smoked eel and less of the other fish, within the platter price", "Mehr Räucheraal und weniger anderer Fisch zum gleichen Plattenpreis"],
   swap: ["Vis omruilen", "Swap ingredients", "Zutaten tauschen"],
   swapNote: ["Wilt u iets weglaten? Kies een vervanger. We passen de hoeveelheid aan zodat u dezelfde winkelwaarde krijgt.", "Choose a replacement for anything you would like to leave out. We adjust the quantity to match its shop value.", "Wählen Sie für jede unerwünschte Zutat einen Ersatz. Wir passen die Menge an den gleichen Ladenwert an."],
   shopChoice: ["Laat de viswinkel een vervanger kiezen", "Let the shop choose a replacement", "Das Geschäft wählt den Ersatz"],

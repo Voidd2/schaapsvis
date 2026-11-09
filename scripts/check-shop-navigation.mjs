@@ -251,6 +251,21 @@ sample.set("mode","deluxe-platter"); sample.set("people","10");
 assert.equal(selectionQuote(sample,"nl").cents,19350);
 sample.set("people","0"); assert.equal(selectionQuote(sample,"nl"), null);
 assert.deepEqual(normalizeRequest({items:{"visschotel-middel-5-8-pers":{quantity:2}}}), {items:{}, date:"", reselect:true});
+for (const [mode, people, base] of [["standard-platter", "2", 3300], ["deluxe-platter", "10", 18500]]) {
+  const platter = new URLSearchParams({kind:"assembly", mode, people});
+  for (const [choice, cents] of [["regular", base], ["redistribute", base], ["extra", base + 1000]]) {
+    platter.set("eelChoice", choice);
+    const options = cartOptions(platter);
+    assert.equal(new URLSearchParams(options).get("eelChoice"), choice);
+    const cart = {items:{}, selections:[{id:"paling", options}], date:""};
+    assert.equal(requestTotal(cart).cents, cents);
+    const message = requestMessage(cart, "nl");
+    if (choice === "extra") assert.match(message, /Extra paling.*118 g.*10,00.*hele gezelschap/);
+    if (choice === "redistribute") assert.match(message, /Meer gerookte paling en minder andere vis/);
+  }
+  platter.set("eelChoice","invalid");
+  assert.equal(selectionQuote(platter,"nl"), null);
+}
 const trio = new URLSearchParams({kind:"assembly",mode:"fish-trio",slug:"luxe-trio-klein",choice0:"eel",choice1:"shrimp",choice2:"salmon",fish:"gravlax","weight-gravlax":"100",voucher:"10"});
 assert.equal(selectionQuote(trio,"nl").cents,3245);
 trio.set("choice0","gravlax"); assert.equal(selectionQuote(trio,"nl"),null);
