@@ -1399,3 +1399,24 @@ body:has(#mobile-navigation) .catalog-cart-trigger { visibility: hidden; }
   .gourmet-summary { position:static; }
 }
 @media(max-width:520px) { .gourmet-fish-list { grid-template-columns:minmax(0,1fr); } }
+
+.discount-landing { padding-block:clamp(1.25rem,4vw,4rem); max-width:78rem; }
+.discount-panel { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr); background:var(--sand); border-radius:1rem; overflow:hidden; }
+.discount-content { padding:clamp(1.25rem,4vw,3.75rem); }
+.discount-content h1 { max-width:15ch; font-size:clamp(2.15rem,4vw,3.6rem); line-height:1.07; }
+.discount-intro { margin-top:1rem; max-width:45ch; font-size:1.12rem; line-height:1.5; }
+.discount-panel img { width:100%; height:100%; object-fit:cover; object-position:45% center; }
+.discount-signup { margin-top:1.5rem; max-width:31rem; }
+.discount-signup form { display:grid; gap:.9rem; }
+.discount-email { font-weight:650; }
+.discount-email input { display:block; width:100%; min-height:46px; background:white; color:var(--ink); border:1px solid #8dacbc; border-radius:.45rem; margin-top:.4rem; padding:.55rem .75rem; }
+.discount-consent { display:flex; gap:.65rem; align-items:flex-start; cursor:pointer; }
+.discount-consent input { flex:none; width:1.2rem; height:1.2rem; margin-top:.18rem; accent-color:var(--navy); }
+.discount-privacy { margin-top:.85rem; font-size:.9rem; }
+.discount-privacy a { text-decoration:underline; text-underline-offset:.15em; }
+.discount-signup h2 { font-size:1.5rem; margin-bottom:.4rem; }
+.discount-signup [role=alert] { color:#9d1c2c; }
+@media(max-width:760px) {
+  .discount-panel { grid-template-columns:minmax(0,1fr); }
+  .discount-panel img { max-height:12rem; }
+}

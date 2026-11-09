@@ -787,6 +787,30 @@ assert.equal((await renewedCheck.json()).valid, true, "the renewed pass verifies
 const expiredPassCheck = await call("/api/members/admin/pass/verify", { method: "POST", cookie: sessionCookie, body: { code: pass.displayCode } });
 assert.equal((await expiredPassCheck.json()).valid, false, "the expired former pass cannot be used after renewal");
 
+// The discount landing page needs only an email address and explicit permission.
+{
+  const email = "discount-landing@example.test";
+  const subscribe = (extra = {}) => call("/api/members/newsletter/subscribe", {
+    method: "POST", headers: { "CF-Connecting-IP": "203.0.113.92" },
+    body: { email, form: "discounts", locale: "nl", ...extra },
+  });
+  assert.equal((await subscribe()).status, 400);
+  assert.equal((await subscribe({consent: true, regionTag: "invalid"})).status, 400);
+  assert.equal(sqlite.prepare("SELECT COUNT(*) AS n FROM newsletter_subscriptions WHERE email=?").get(email).n, 0);
+  assert.equal((await subscribe({consent: true})).status, 202);
+  const entry = sqlite.prepare("SELECT * FROM newsletter_subscriptions WHERE email=?").get(email);
+  assert.equal(entry.status, "subscribed");
+  assert.equal(entry.source, "discount-form");
+  assert.equal(entry.consent_text_version, "discount-vouchers-2026-11");
+  assert.ok(entry.consented_at);
+  assert.equal(entry.region_tag, null);
+  assert.equal(entry.user_id, null);
+  assert.equal(sqlite.prepare("SELECT COUNT(*) AS n FROM users WHERE email=?").get(email).n, 0);
+  sqlite.prepare("UPDATE newsletter_subscriptions SET region_tag='leiden' WHERE email=?").run(email);
+  assert.equal((await subscribe({consent: true})).status, 202);
+  assert.equal(sqlite.prepare("SELECT region_tag FROM newsletter_subscriptions WHERE email=?").get(email).region_tag, "leiden");
+  sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(email);
+}
 const signupStart = await call("/api/members/newsletter/start", { method: "POST", body: { email: "staged-deals@example.test" } });
 assert.equal(signupStart.status, 201, "email-first signup stores a short-lived draft immediately");
 const signupState = await signupStart.json();

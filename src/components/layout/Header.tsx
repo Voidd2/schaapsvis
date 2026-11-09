@@ -1,4 +1,5 @@
 "use client";
+import { discountSignupCopy } from "@/lib/discount-signup";
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -79,13 +80,13 @@ export function Header() {
   const childrenFor = (href: string) => href === p("/assortiment") ? productLinks : href === p("/visschalen") ? platterLinks : [];
   const accountLinks = [
     { href: p("/account"), label: locale === "de" ? "Studentenkonto" : locale === "en" ? "Student account" : "Studentenaccount" },
-    { href: p("/account/klant"), label: locale === "de" ? "Kundenkonto" : locale === "en" ? "Customer account" : "Klantaccount" },
+    { href: p("/aanbiedingen"), label: discountSignupCopy(locale).title },
   ];
   const extraLinks = [
     { href: p("/ons-verhaal"), label: t("verhaal") },
     { href: p("/contact"), label: t("contact") },
   ];
-  const accountLabel = locale === "de" ? "Konto" : "Account";
+  const accountLabel = locale === "de" ? "Rabatte" : locale === "en" ? "Discounts" : "Kortingen";
   const moreLabel = locale === "de" ? "Mehr" : locale === "en" ? "More" : "Meer";
 
   const isActief = (href: string) => {
