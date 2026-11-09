@@ -1,5 +1,5 @@
 import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
-import { GiftRequest } from "@/components/catalog/GiftRequest";
+import { GiftRequest } from "@/components/catalog/CatalogEnhancements";
 import { giftRequestCopy } from "@/lib/gift-request";
 import Link from "next/link";
 import { notFound } from "next/navigation";

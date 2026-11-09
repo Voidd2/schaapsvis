@@ -59,11 +59,12 @@ if (!["127.0.0.1", "localhost"].includes(url.hostname)) throw new Error("Use a l
     if (process.argv.includes("--cloudflare")) {
       const broken = await browser.newContext();
       const tab = await broken.newPage();
-      let blocks = 0;
+      const blocked = new Set();
       await broken.route("**/*", r => {
         const u = new URL(r.request().url());
         if (u.origin !== url.origin || r.request().method() !== "GET") return r.abort();
-        if (/\/Productkeuze-[^/]+\.js$/.test(u.pathname)) { blocks++; return r.abort("blockedbyclient"); }
+        const match = u.pathname.match(/\/(Productkeuze|CatalogPhoto|CatalogCart|GourmetRequest|GiftRequest|PlatterInquiry|Bestelomgeving)-[^/]+\.js$/);
+        if (match) { blocked.add(match[1]); return r.abort("blockedbyclient"); }
         return r.continue();
       });
       for (const route of ["/nl/visschalen", "/nl/feestdagen", "/nl/feestdagen/" + slug + "?catalog=visschalen"]) {
@@ -72,9 +73,13 @@ if (!["127.0.0.1", "localhost"].includes(url.hostname)) throw new Error("Use a l
         assert.equal(await tab.locator("main h1").count(), 1);
         assert.equal(await tab.locator("html#__next_error__").count(), 0);
         assert.ok((await tab.locator("main").innerText()).includes("73,50"), route);
+        if (!route.includes("?")) assert.ok(await tab.locator("a.seafood-photo[href] img").first().isVisible(), route);
       }
-      assert.ok(blocks > 0);
-      console.log("Current Cloudflare product module blocked: both catalogues, product details, prices and telephone fallback still available.");
+      await tab.goto(new URL("/nl/bestellen", url).href, { waitUntil: "networkidle" });
+      await tab.getByText("Het winkelmandje kon niet laden.", {exact:false}).waitFor();
+      assert.equal(await tab.locator('main a[href^="tel:"]').count(), 1);
+      for (const name of ["Productkeuze", "CatalogPhoto", "Bestelomgeving"]) assert.ok(blocked.has(name), name);
+      console.log("Blocked in the same browser:", [...blocked].join(", "), "— catalogues, photos, prices and phone ordering remain available.");
       await broken.close();
     }
   } finally { await browser.close(); }
