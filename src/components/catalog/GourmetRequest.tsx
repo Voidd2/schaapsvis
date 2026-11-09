@@ -61,8 +61,8 @@ export function GourmetRequest({ locale }: { locale: string }) {
           <div className="mt-2 grid gap-2">
             {(["standard", "premium"] as const).map(option => <label key={option} className="flex min-h-12 cursor-pointer items-start gap-3 rounded-lg border border-[#bfd6df] bg-white p-3">
               <input className="mt-1 h-5 w-5 shrink-0 accent-[#075b82]" type="radio" name={`${id}-pack`} checked={packaging === option} onChange={() => setPackaging(option)} />
-              <span><strong>{t[option]}</strong>{option === "standard" ? ` · ${t.free}` : quote && ` · +${money(quote.premiumFee)}`}
-                {option === "premium" && <small className="mt-1 block">{t.tiers}</small>}
+              <span><strong>{t[option]}</strong>{option === "standard" ? ` · ${t.free}` : ""}
+                {option === "premium" && <small className="mt-1 block">{t.customNote}</small>}
               </span>
             </label>)}
           </div>
@@ -76,7 +76,12 @@ export function GourmetRequest({ locale }: { locale: string }) {
         <h3 className="text-xl">{t.summary}</h3>
         <div aria-live="polite" className="mt-4">{quote ? <>
           <ul className="divide-y divide-[#d9e7ee]">{quote.lines.map(({ fish, weight, cents }) => <li key={fish.id} className="flex flex-wrap justify-between gap-1 py-2"><span>{fish[lang]} · {weight} g</span><strong>{money(cents)}</strong></li>)}</ul>
-          <dl className="mt-3 border-t border-[#bfd6df] pt-3">{[[t.weight, `${quote.grams} g`], [t.subtotal, money(quote.subtotal)], [t[packaging], money(quote.fee)], [t.total, money(quote.total)]].map(([label, value]) => <div key={label} className="flex justify-between gap-2 py-1 last:mt-2 last:border-t last:pt-3 last:text-lg last:font-bold"><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+          <dl className="mt-3 space-y-2 border-t border-[#bfd6df] pt-3">
+            <div className="flex justify-between gap-3"><dt>{t.weight}</dt><dd>{quote.grams} g</dd></div>
+            <div className="flex justify-between gap-3"><dt>{t.subtotal}</dt><dd>{money(quote.subtotal)}</dd></div>
+            <div className="flex flex-wrap justify-between gap-x-3"><dt>{t[packaging]}</dt><dd>{quote.total === null ? t.customNote : t.free}</dd></div>
+            {quote.total !== null && <div className="flex justify-between gap-3 border-t pt-3 text-lg font-bold"><dt>{t.total}</dt><dd>{money(quote.total)}</dd></div>}
+          </dl>
         </> : <p>{hasSelection ? t.invalid : t.empty}</p>}</div>
         {error && !quote && <p role="alert" className="mt-3 font-semibold text-[#a61f2b]">{hasSelection ? t.invalid : t.empty}</p>}
         <button type="submit" disabled={!ready} className="knop knop-navy mt-4 min-h-12 w-full whitespace-normal">{t.button} →</button>
