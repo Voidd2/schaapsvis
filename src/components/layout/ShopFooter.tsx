@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { BEDRIJF, ADRES_REGEL, euro } from "@/lib/bedrijf";
+import { AnalyticsConsent } from "@/components/shared/AnalyticsConsent";
 import { BEZORGING, bezorgdagenTekst } from "@/lib/bezorging";
 
 /**
@@ -41,6 +42,7 @@ export function ShopFooter() {
           &larr; {t("terugNaarSite")}
         </Link>
       </div>
+      <AnalyticsConsent locale={locale} />
     </footer>
   );
 }

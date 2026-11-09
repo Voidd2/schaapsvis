@@ -1,0 +1,106 @@
+.footer {
+  --footer-line: #3b697b;
+  background: var(--navy-dark);
+  color: #e0edf0;
+}
+.grid { display: grid; padding-block: 20px 8px; }
+.contact { font-style: normal; padding-bottom: 16px; }
+.identity, .address, .contactActions, .phone, .privacy, .socials {
+  display: flex;
+  align-items: center;
+}
+.identity { gap: 14px; }
+.identity img { flex: none; width: 52px; height: 52px; border-radius: 50%; background: white; }
+.identity strong { display: block; font: 700 1.3rem/1.2 var(--font-display); color: white; }
+.address { width: fit-content; min-height: 44px; gap: 4px; text-decoration: underline; text-underline-offset: 3px; }
+.address svg, .phone svg { flex: none; }
+.contactActions { flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.phone, .contactActions :global(.sv-whatsapp) {
+  min-height: 44px;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+.phone { background: #fff; color: var(--navy-dark); border: 1px solid white; }
+.phone:hover { background: #e1eff2; }
+.panel { border-top: 1px solid var(--footer-line); min-width: 0; }
+.panel > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+  gap: 12px;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  list-style: none;
+}
+.panel > summary::-webkit-details-marker { display: none; }
+.panel > summary svg { flex: none; color: #c2e0e6; }
+.panel[open] > summary svg { transform: rotate(180deg); }
+.panelBody { padding-block: 2px 16px; }
+.hours { display: grid; gap: 10px; }
+.hours dt { font-weight: 600; color: white; }
+.payment { font-size: .9rem; margin-top: 10px; }
+.groups { display: grid; gap: 18px; }
+.groups h2 { color: #fff; font: 600 1rem/1.4 var(--font-body); }
+.groups ul { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 14px; }
+.groups li a, .socials a, .privacy > a { display: inline-flex; align-items: center; min-height: 44px; }
+.groups li a { overflow-wrap: anywhere; }
+.groups a:hover, .address:hover, .socials a:hover, .privacy > a:hover { color: #fff; text-decoration: underline; }
+.socials, .privacy { gap: 0 16px; flex-wrap: wrap; }
+.socials { margin-top: 8px; }
+.socials a, .privacy > a { text-decoration: underline; text-underline-offset: 3px; }
+.bottom { border-top: 1px solid var(--footer-line); padding-block: 10px 0; font-size: .9rem; }
+.bottom small { display: block; font-size: inherit; }
+.privacy :global(.cookie-settings-trigger) {
+  position: static;
+  min-height: 44px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  box-shadow: none;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  z-index: auto;
+}
+.footer a:focus-visible, .footer summary:focus-visible, .footer button:focus-visible {
+  outline: 3px solid #ffcf73;
+  outline-offset: 2px;
+}
+@media (max-width: 767px) {
+  .contactActions :global(.sv-whatsapp) {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    border: 1px solid #80a6b4;
+    background: transparent;
+    color: white;
+    box-shadow: none;
+    transform: none;
+    z-index: auto;
+  }
+  .contactActions :global(.sv-whatsapp) svg { width: 18px; height: 18px; }
+  .bottom small span { display: none; }
+}
+@media (min-width: 768px) {
+  .grid { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px clamp(24px, 4vw, 70px); padding-block: 32px 12px; }
+  .contact { padding: 0; }
+  .identity { flex-wrap: wrap; }
+  .identity img { width: 60px; height: 60px; }
+  .contactActions :global(.sv-whatsapp) { padding: 0; border-radius: 50%; }
+  .directory, .bottom { grid-column: 1 / -1; }
+  .grid > .panel { border-top: none; }
+  .panel > summary { font: 700 1.18rem/1.3 var(--font-display); }
+  .panelBody { padding-bottom: 0; }
+  .groups { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .groups h2 { margin-block: 4px; }
+  .groups li a { min-height: 32px; }
+  .bottom { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 2px 70px 0 0; }
+}

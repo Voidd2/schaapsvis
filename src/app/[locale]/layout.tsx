@@ -10,8 +10,6 @@ import { Footer } from "@/components/layout/Footer";
 import { Chrome } from "@/components/layout/Chrome";
 import { WinkelwagenProvider } from "@/components/winkel/Winkelwagen";
 import { CatalogCart } from "@/components/catalog/CatalogCart";
-import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
-import { AnalyticsConsent } from "@/components/shared/AnalyticsConsent";
 import { cookies } from "next/headers";
 import { ACCESS_COOKIE, heeftGeldigeSiteToegang, siteOpSlot } from "@/lib/siteAccess";
 import { BEDRIJF } from "@/lib/bedrijf";
@@ -111,13 +109,12 @@ export default async function LocaleLayout({
             <Chrome
               header={<Header />}
               footer={<Footer />}
-              extras={<><WhatsAppButton /><CatalogCart /></>}
+              extras={<CatalogCart />}
             >
               {isPreview && <OwnerMediaGuide />}
               {children}
             </Chrome>
           </WinkelwagenProvider>
-          <AnalyticsConsent locale={locale} />
         </NextIntlClientProvider>
       </body>
     </html>

@@ -92,6 +92,8 @@ const qrToken = `SVQ1.${qrPayload}.${'a'.repeat(43)}`;
    if (await reject.count()) await reject.click();
    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
    if (output) await page.screenshot({ path: path.join(output, `student-pass-${locale}-${width}.png`), fullPage: true });
+   const newsletterPanel = page.locator('footer details').filter({ has: page.locator('input[name="email"]') });
+   if (!(await newsletterPanel.evaluate(panel => panel.open))) await newsletterPanel.locator('summary').click();
    await page.locator('footer input[name="email"]').fill('newsletter@example.test'); await page.locator('footer button[type="submit"]').click();
    const newsletterConsent = page.locator('footer input[name="consent"]'); await newsletterConsent.waitFor();
    assert.equal(await newsletterConsent.evaluate(e => e.required), true); assert.equal(await newsletterConsent.isChecked(), false);
