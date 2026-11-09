@@ -92,10 +92,11 @@ export default async function ProductDetailPage({params}: Props) {
         <p className="text-lg leading-relaxed mb-5">{product.desc}</p>
         <div className="mb-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
           <p><span className="kapitaal mr-2">{c.available}</span><strong>{availability.label}</strong></p>
-          <p className="product-price"><span className="kapitaal mr-2">{c.price}</span><strong>{prijs ? `${formatPrijs(prijs,lang)} — ${c.guidePrice}` : lang === "en" ? "Price on request" : lang === "de" ? "Preis auf Anfrage" : "Prijs op aanvraag"}</strong></p>
+          <p className="product-price"><span className="kapitaal mr-2">{c.price}</span><strong>{prijs ? formatPrijs(prijs,lang) : c.dailyPrice}</strong></p>
         </div>
         <div className="flex flex-wrap items-center gap-4 product-intro-actions">
           <a href={bestelContact(lang, product.naam).href} className="knop knop-navy">{lang === "nl" ? "Vraag naar dit product" : lang === "de" ? "Nach diesem Produkt fragen" : "Ask about this product"}</a>
+          {slug === "varlaks-zalm" && <Link href={`/${lang}/varlaks`} className="knop knop-lijn">{c.salmon}</Link>}
           <Link href={`/${lang}/bezoek-ons`} className="font-semibold underline underline-offset-4">{lang === "nl" ? "Openingstijden en route" : lang === "de" ? "Öffnungszeiten und Anfahrt" : "Opening hours and directions"} →</Link>
         </div>
         <p className="mt-5 pl-5" style={{borderLeft:`2px solid ${availability.unavailable?"#be123c":"var(--navy)"}`}}>{availability.note}</p>

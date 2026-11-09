@@ -18,6 +18,7 @@ export const PRIJZEN: Record<string, Prijs> = {
   krabsalade: { euro: SALAD_PORTION_CENTS / 100, eenheid: "per 100 g" },
   tonijnsalade: { euro: SALAD_PORTION_CENTS / 100, eenheid: "per 100 g" },
   // Verse vis
+  "varlaks-zalm": { euro: 3.5, eenheid: "per 100 g" },
   haring: { euro: 2.5, eenheid: "per stuk" },
   "broodje-haring": { euro: 3.0, eenheid: "per stuk" },
   dorade: { euro: 7.45, eenheid: "per stuk (±500 g)" },
