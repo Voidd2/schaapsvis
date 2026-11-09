@@ -2,9 +2,9 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { paginaMetadata, kruimelSchema } from "@/lib/seo";
 import { BEDRIJF } from "@/lib/bedrijf";
-import { PRIJZEN, formatPrijs } from "@/lib/prijzen";
 import { bestelContact } from "@/lib/bestel-contact";
 import { VarlaksFilm } from "@/components/shared/VarlaksFilm";
+import { VarlaksDiscountOffer } from "./VarlaksDiscountOffer";
 import { VarlaksLocations } from "@/components/shared/VarlaksLocations";
 import { BedieningSlot } from "@/components/catalog/BedieningSlot";
 import { Schema } from "@/components/Schema";
@@ -48,7 +48,6 @@ export default async function VarlaksPage({ params }: Props) {
         <p className={styles.eyebrow}>{c.since}</p>
         <h1>{c.heading}<em>{c.place}</em></h1>
         <p className={styles.lead}>{c.intro}</p>
-        <p className={styles.price}>{formatPrijs(PRIJZEN["varlaks-zalm"], lang)}</p>
         <div className={styles.actions}>
           <a className={styles.primary} href={BEDRIJF.maps.route} target="_blank" rel="noopener noreferrer">{c.directions} →</a>
           <a className={styles.secondary} href={ask.href}>{c.ask}</a>
@@ -74,7 +73,9 @@ export default async function VarlaksPage({ params }: Props) {
     <section id="film" className={styles.filmSection} aria-labelledby="varlaks-film-heading">
       <div><p className={styles.eyebrow}>VÅRLAKS · Film</p><h2 id="varlaks-film-heading">{c.filmTitle}</h2><p>{c.filmText}</p></div>
       <div className={styles.player}><BedieningSlot fallback={<a className={styles.primary} href="https://vimeo.com/932791452">{c.vimeo} ↗</a>}>
-        <VarlaksFilm locale={lang} poster={base + "kweker-met-zalm.webp"}/>
+        <VarlaksFilm locale={lang} poster={base + "kweker-met-zalm.webp"}>
+          <VarlaksDiscountOffer locale={lang}/>
+        </VarlaksFilm>
       </BedieningSlot></div>
     </section>
 

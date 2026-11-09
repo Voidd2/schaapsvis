@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 
-export function VarlaksFilm({ locale, poster }: { locale: string; poster?: string }) {
+export function VarlaksFilm({ locale, poster, children }: { locale: string; poster?: string; children?: ReactNode }) {
   const [play, setPlay] = useState(false);
   const copy = {
     en: { label: "Watch the VÅRLAKS brand film", note: "Vimeo loads only after you press play.", link: "Open film on Vimeo" },
@@ -27,6 +27,7 @@ export function VarlaksFilm({ locale, poster }: { locale: string; poster?: strin
         )}
       </div>
       <a href="https://vimeo.com/932791452" target="_blank" rel="noopener noreferrer" className="inline-block text-sm underline mt-3">{c.link} ↗</a>
+      {!play && children}
     </div>
   );
 }

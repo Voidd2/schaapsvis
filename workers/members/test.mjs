@@ -819,6 +819,16 @@ assert.equal((await expiredPassCheck.json()).valid, false, "the expired former p
   assert.equal((await subscribe({consent: true})).status, 202);
   assert.equal(sqlite.prepare("SELECT region_tag FROM newsletter_subscriptions WHERE email=?").get(email).region_tag, "leiden");
   sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(email);
+
+  const offer = { email: "varlaks-visitor@example.test", form: "varlaks" };
+  assert.equal((await subscribe(offer)).status, 400);
+  assert.equal((await subscribe({ ...offer, consent: true })).status, 202);
+  const popupEntry = sqlite.prepare("SELECT * FROM newsletter_subscriptions WHERE email=?").get(offer.email);
+  assert.equal(popupEntry.status, "subscribed");
+  assert.equal(popupEntry.source, "varlaks-popup");
+  assert.equal(popupEntry.consent_text_version, "varlaks-weekly-offers-v1");
+  assert.ok(popupEntry.consented_at);
+  sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(offer.email);
 }
 const signupStart = await call("/api/members/newsletter/start", { method: "POST", body: { email: "staged-deals@example.test" } });
 assert.equal(signupStart.status, 201, "email-first signup stores a short-lived draft immediately");
