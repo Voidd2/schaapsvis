@@ -8,6 +8,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
 import { Sectie, Kop, Vragen, Kruimels } from "@/components/ui/Sectie";
 import { PaginaSlot } from "@/components/ui/PaginaKop";
+import { catalogProduct, MAIN_PLATTERS } from "@/lib/seafood-catalog";
 import { SeafoodCatalog } from "@/components/catalog/SeafoodCatalog";
 import { CatalogHelp } from "@/components/catalog/CatalogHelp";
 import { catalogText } from "@/lib/catalog-copy";
@@ -71,15 +72,15 @@ export default async function VisschalenPage({
 
       <section className="platter-intro section-wrap">
         <Kruimels items={[{ naam: BEDRIJF.naamKort, href: `/${locale}` }, { naam: nav("visschalen") }]} />
-        <p className="kapitaal mb-3">{t("eyebrow")}</p>
+        
         <h1>{catalog.title}</h1>
-        <p className="platter-intro-text">{catalog.intro}</p>
-        <nav className="catalog-intro-links" aria-label={catalog.title}>
+        <p className="platter-intro-text">{locale==="nl"?"Kies uw schaal op aantal personen. Elke prijs geldt voor de hele schaal.":locale==="en"?"Choose a platter by group size. Each price is for the whole platter.":"Wählen Sie nach Personenzahl. Jeder Preis gilt für die ganze Platte."}</p>
+        <details className="platter-directory"><summary>{locale === "de" ? "Kategorie wählen" : locale === "en" ? "Choose a category" : "Kies een categorie"}</summary><nav className="catalog-intro-links" aria-label={catalog.title}>
           <a className="knop knop-navy" href="#visschalen">{catalog.platters} ↓</a><a className="knop knop-lijn" href="#gourmet">{catalog.gourmet} ↓</a><a className="knop knop-lijn" href="#geschenken">{locale === "de" ? "Geschenke" : locale === "en" ? "Gifts" : "Geschenken"} ↓</a><a className="knop knop-lijn" href="#maatwerk">{catalog.custom}</a>
-        </nav>
+        </nav><ul className="platter-sizes">{MAIN_PLATTERS.map((slug,i)=><li key={slug}><a href={i===0?"#schalen-klassiek":i===3?"#schalen-luxe":i===4?"#schalen-hapjes":"#"+slug}>{catalogProduct(slug,locale).naam} ↓</a></li>)}</ul></details>
       </section>
-      <div className="section-wrap"><CatalogHelp locale={locale} /></div>
       <SeafoodCatalog locale={locale} />
+      <div className="section-wrap"><CatalogHelp locale={locale} /></div>
 
       <Sectie grond="zand" id="maatwerk">
         <Kop titel={presentation.custom} intro={inquiryText(locale).intro} />

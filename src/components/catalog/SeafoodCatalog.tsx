@@ -22,13 +22,15 @@ function ProductCard({ slug, locale, festive, featured = false }: Props & { slug
   const product = catalogProduct(slug, locale), t = catalogText(locale), isPlatter = product.categorie === "visschalen" || product.categorie === "gourmet";
   const href = `/${locale}/feestdagen/${slug}?catalog=${festive ? "feestdagen" : "visschalen"}`;
   const legacyAnchor = slug === MAIN_PLATTERS[0] ? "schalen-klassiek" : slug === MAIN_PLATTERS[3] ? "schalen-luxe" : slug === MAIN_PLATTERS[4] ? "schalen-hapjes" : undefined;
-  return <article id={legacyAnchor} className={`seafood-card${featured ? " seafood-featured-card" : ""}`} data-catalog-card={slug}>
+  return <article id={legacyAnchor ?? slug} className={`seafood-card${featured ? " seafood-featured-card" : ""}`} data-catalog-card={slug}>
+    {isPlatter && <header className="platter-card-heading"><h3><Link href={href}>{product.naam}</Link></h3><p className="seafood-price">{platterPrice(product, locale)}</p></header>}
     <CatalogPhoto src={product.afbeelding} alt={platterPhotoAlt(product, locale)} name={product.naam} locale={locale} platter={isPlatter} />
     <div className="seafood-card-body">
-      <h3><Link href={href}>{product.naam}</Link></h3>
+      {isPlatter && <p className="text-sm">{platterPresentation(locale).photoText}</p>}
+      {!isPlatter && <h3><Link href={href}>{product.naam}</Link></h3>}
       <p>{product.intro}</p>
       {product.categorie === "gourmet" && <p className="text-sm">{gourmetPortionText(slug, locale)}</p>}
-      <p className="seafood-price">{platterPrice(product, locale)}</p>
+      {!isPlatter && <p className="seafood-price">{platterPrice(product, locale)}</p>}
       <Link className="seafood-detail" href={href}>{t.view} →</Link>
       {isDeliTrio(slug) ? <DeliTrio key={slug} locale={locale} slug={slug} product={product.naam} /> : <ProductQuantity slug={slug} locale={locale} />}
     </div>
@@ -47,8 +49,8 @@ export function SeafoodCatalog({ locale, festive = false }: Props) {
     <Suspense fallback={null}><LegacyCatalogSelection locale={locale} /></Suspense>
     {festive && <Featured {...props} />}
     <section id="visschalen" className="seafood-section" aria-labelledby="main-platters-title">
-      <div className="catalog-heading"><h2 id="main-platters-title">{t.platters}</h2><p>{t.platterIntro}</p></div>
-      <p className="catalog-example-note"><strong>{platterPresentation(locale).photoLabel}.</strong> {platterPresentation(locale).photoText}</p>
+      <div className="catalog-heading"><h2 id="main-platters-title">{t.platters}</h2>{festive && <p>{t.platterIntro}</p>}</div>
+
       <div className="seafood-grid">{MAIN_PLATTERS.map(slug => <ProductCard key={slug} {...props} slug={slug} />)}</div>
     </section>
     {festive && <GiftIdeas locale={locale} />}
@@ -56,7 +58,7 @@ export function SeafoodCatalog({ locale, festive = false }: Props) {
     {[{ id: "gourmet", title: t.gourmet, intro: t.gourmetIntro, products: GOURMET }, { id: "delicatessen", title: t.delicacies, intro: t.delicaciesIntro, products: DELICACIES }].map(section => <section key={section.id} id={section.id} className="seafood-section">
       <div className="catalog-heading"><h2>{section.title}</h2><p>{section.intro}</p></div>
       <div className="seafood-grid">{section.products.map(slug => <ProductCard key={slug} {...props} slug={slug} />)}</div>
-      {section.id === "gourmet" && <GourmetRequest locale={locale} />}
+      {section.id === "gourmet" && <><GourmetRequest locale={locale} /><Link className="inline-block mt-4 underline" href={`/${locale}/blog/welke-vis-voor-gourmet`}>{locale==="nl"?"Welke vis past in een gourmetpannetje?":locale==="en"?"Which fish work in a tabletop grill pan?":"Welcher Fisch passt ins Tischgrillpfännchen?"} →</Link></>}
     </section>)}
     <section id="salades" className="seafood-salads seafood-section">
       <div className="catalog-heading"><h2>{t.salads}</h2><p>{t.saladIntro}</p></div>

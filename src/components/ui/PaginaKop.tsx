@@ -86,7 +86,7 @@ export function PaginaKop({
         <div
           className={
             heeftZijkant
-              ? `grid lg:grid-cols-[1.3fr_0.7fr] gap-10 lg:gap-16 ${
+              ? `grid grid-cols-[minmax(0,1fr)] lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)] gap-10 lg:gap-16 ${
                   uitgelijnd === "boven" ? "items-start" : "items-end"
                 }`
               : ""
@@ -95,7 +95,7 @@ export function PaginaKop({
           <div>
             {label && <p className="kapitaal kapitaal-licht mb-4">{label}</p>}
             <h1
-              className="text-[2.2rem] md:text-[3.2rem] leading-[1.07] mb-5"
+              className="wrap-anywhere text-[2.2rem] md:text-[3.2rem] leading-[1.07] mb-5"
               style={{ color: "var(--cream)" }}
             >
               {titel}

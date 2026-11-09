@@ -80,13 +80,13 @@ export default async function HomePage({
       <JsonLd locale={locale} />
 
       <section className="home-hero" style={{ backgroundColor: "var(--cream)" }}>
-        <div className="site-container grid lg:grid-cols-[1.02fr_0.98fr] gap-10 lg:gap-16 items-center py-8 md:py-12">
+        <div className="site-container grid md:grid-cols-[1.02fr_0.98fr] gap-10 lg:gap-16 items-center py-8 md:py-12">
           <div>
             <div className="home-hero-kicker mb-5">
               <span className="home-hero-dot" aria-hidden />
               <p className="kapitaal">{h("eyebrow")}</p>
             </div>
-            <h1 className="text-[2.3rem] md:text-[3.4rem] leading-[1.08] mb-6">{h("kop")}</h1>
+            <h1 className="text-[2.3rem] md:text-[3.4rem] leading-[1.08] mb-6">{locale === "nl" ? "Schaap’s Vishandel in Leiden" : locale === "de" ? "Schaap’s Fischgeschäft in Leiden" : "Schaap’s fish shop in Leiden"}</h1>
             <p
               className="text-[1.1rem] leading-relaxed max-w-xl mb-8"
               style={{ color: "var(--charcoal)" }}
@@ -94,14 +94,9 @@ export default async function HomePage({
               {h("inleiding")}
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link href={`/${locale}/assortiment`} className="knop knop-navy">
-                {h("knopVandaag")}
-              </Link>
-              <Link href={`/${locale}/visschalen`} className="knop knop-lijn">
-                {locale === "nl" ? "Bekijk onze visschalen" : nav("visschalen")}
-              </Link>
+              <Link href={`/${locale}/bezoek-ons`} className="knop knop-navy">{locale === "nl" ? "Route en openingstijden" : locale === "de" ? "Anfahrt und Öffnungszeiten" : "Directions and opening hours"} →</Link>
+              <Link href={`/${locale}/assortiment`} className="knop knop-lijn">{h("knopVandaag")}</Link>
             </div>
-            <Link href={`/${locale}/bezoek-ons`} className="home-visit-link">{locale === "nl" ? "Winkel, marktdagen & openingstijden" : locale === "de" ? "Geschäft, Märkte & Öffnungszeiten" : "Shop, markets & opening hours"} →</Link>
 
           </div>
 

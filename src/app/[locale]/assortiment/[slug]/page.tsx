@@ -6,6 +6,8 @@ import { products, getVoeding, getSeizoen, CATEGORIE_KLEUR } from "@/lib/assorti
 import { localizedProduct, CATEGORY_NAMES, siteLanguage } from "@/lib/product-localization";
 import { productCopy, productNote } from "@/lib/product-copy";
 import { productAvailability } from "@/lib/product-availability";
+import { counterGuides } from "@/lib/blog-counter-guides";
+import { localizeBlog } from "@/lib/blog-localization";
 import { getPrijs, formatPrijs } from "@/lib/prijzen";
 import { Schema } from "@/components/Schema";
 import { Kruimels, Sectie } from "@/components/ui/Sectie";
@@ -73,6 +75,7 @@ export default async function ProductDetailPage({params}: Props) {
     .filter((r): r is (typeof recepten)[number] => Boolean(r))
     .map(r => localizeRecipe(r, lang));
   const recipeIdeas = [...new Map([...ownRecipes, ...suitableRecipes, ...curatedRecipes].map(r => [r.slug, r])).values()].slice(0, 4);
+  const reading=counterGuides.filter(p=>p.gerelateerdeLinks?.some(link=>link.href==="/assortiment/"+slug)).map(p=>localizeBlog(p,lang));
   const nutritionRows = voeding ? [[c.energy, `${voeding.kcal} kcal / ${voeding.kj} kJ`], [c.fat, `${voeding.vet} g`], [c.saturated, `${voeding.verzadigd} g`], [c.carbs, `${voeding.koolhydraten} g`], [c.sugars, `${voeding.suikers} g`], [c.protein, `${voeding.eiwit} g`], [c.salt, `${voeding.zout} g`]] : [];
   // Informational catalogue: no unverified stock status or online-sale offers.
   const productSchema = {"@context":"https://schema.org", "@type":"Product", name:product.naam, description:product.desc, category, brand:{"@type":"Brand", name:BEDRIJF.naam}, image:photo ? `${BEDRIJF.domein}${photo.src}` : undefined, url:`${BEDRIJF.domein}/${lang}/assortiment/${slug}`};
@@ -84,6 +87,7 @@ export default async function ProductDetailPage({params}: Props) {
       <div className="product-intro-title">
         <p className="kapitaal mb-2">{[category,product.badge,product.omega3?"Omega-3":null].filter(Boolean).join(" · ")}</p>
         <h1 className="text-3xl md:text-4xl leading-tight" style={{color:"var(--navy-dark)"}}>{product.naam}</h1>
+        {prijs && <p className="product-price mt-2"><strong>{formatPrijs(prijs,lang)}</strong></p>}
       </div>
       {photo && <figure className="product-intro-figure"><div className="product-intro-image" style={{borderBottom:`3px solid ${CATEGORIE_KLEUR[product.categorie]}`}}>
         <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 800px) calc(100vw - 32px), 550px" priority className={photo.editorial && !photo.whole ? "object-cover" : "object-contain"} />
@@ -92,7 +96,7 @@ export default async function ProductDetailPage({params}: Props) {
         <p className="text-lg leading-relaxed mb-5">{product.desc}</p>
         <div className="mb-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
           <p><span className="kapitaal mr-2">{c.available}</span><strong>{availability.label}</strong></p>
-          <p className="product-price"><span className="kapitaal mr-2">{c.price}</span><strong>{prijs ? formatPrijs(prijs,lang) : c.dailyPrice}</strong></p>
+          {!prijs && <p className="product-price"><span className="kapitaal mr-2">{c.price}</span><strong>{c.dailyPrice}</strong></p>}
         </div>
         <div className="flex flex-wrap items-center gap-4 product-intro-actions">
           <a href={bestelContact(lang, product.naam).href} className="knop knop-navy">{lang === "nl" ? "Vraag naar dit product" : lang === "de" ? "Nach diesem Produkt fragen" : "Ask about this product"}</a>
@@ -101,6 +105,8 @@ export default async function ProductDetailPage({params}: Props) {
         </div>
         <p className="mt-5 pl-5" style={{borderLeft:`2px solid ${availability.unavailable?"#be123c":"var(--navy)"}`}}>{availability.note}</p>
         {isSalmon && <Link href={`/${lang}/varlaks`} className="block mt-6 pl-5" style={{borderLeft:"2px solid var(--seafoam)"}}><p className="kapitaal mb-2">{c.alternative}</p><p className="font-semibold underline">{c.salmon}</p><p className="text-sm mt-2 leading-relaxed">{c.salmonNote}</p></Link>}
+        {reading.map(p=><Link key={p.slug} href={`/${lang}/blog/${p.slug}`} className="block mt-4 underline">{p.title} →</Link>)}
+        {["lekkerbek","kibbeling"].includes(slug) && <Link className="block mt-4 underline" href={`/${lang}/blog/kibbeling-vs-lekkerbek-het-verschil`}>{lang==="nl"?"Wat is het verschil tussen kibbeling en lekkerbek?":lang==="en"?"How do kibbeling and lekkerbek differ?":"Was unterscheidet Kibbeling und Lekkerbek?"} →</Link>}
         {seizoen && <div className="mt-7 pl-5" style={{borderLeft:"2px solid var(--seafoam)"}}><p><strong>{c.season}:</strong> {seizoen}</p></div>}
       </div>
       </div>

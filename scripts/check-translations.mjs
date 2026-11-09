@@ -13,7 +13,7 @@ for(const l of locales){
  for(const r of recipes)try{const t=translatedRecipes.localizeRecipe(r,l);check(!t.hoofdproduct||products.products.some(p=>p.slug===t.hoofdproduct),`Missing recipe product ${r.slug}`);pages.push({path:`/${l}/recepten/${r.slug}`,title:t.title,texts:[t.subtitle,t.verhaal,...t.vanSchaap,...t.vanSupermarkt,...t.bereidingswijze],schema:'Recipe'});}catch(e){errors.push(e.message);}
  for(const b of blogs)try{const t=translatedBlogs.localizeBlog(b,l);for(const slug of b.gerelateerdeRecepten??[])check(recipes.some(r=>r.slug===slug),`Missing blog recipe ${b.slug}: ${slug}`);pages.push({path:`/${l}/blog/${b.slug}`,title:t.title,texts:[t.excerpt,...t.secties.flatMap(s=>[s.kop,...s.alineas]),...(t.vragen??[]).flatMap(q=>[q.v,q.a])].filter(Boolean),schema:'Article'});}catch(e){errors.push(e.message);}
  const months=load('calendar-localization').localizedCalendar(l);check(months.length===12,`Calendar ${l}`);pages.push({path:`/${l}/viskalender`,texts:months.flatMap(m=>[m.naam,m.tekst,m.hoogtepunt,...m.vis.map(v=>v.naam)])});
- for(const kind of ['viswinkel-leiden','marktkraam-leiden','too-good-to-go']){const c=load('local-pages-copy').localPageCopy(kind,l);pages.push({path:`/${l}/${kind}`,title:c.title,texts:[c.intro,c.heading,...c.paragraphs,...c.questions.flatMap(q=>[q.v,q.a])]});}
+ for(const kind of ['viswinkel-leiden','marktkraam-leiden','too-good-to-go']){const c=load('local-pages-copy').localPageCopy(kind,l);pages.push({path:`/${l}/${kind}`,title:c.title,texts:[...(kind==="viswinkel-leiden"?[]:[c.intro]),c.heading,...c.paragraphs,...c.questions.flatMap(q=>[q.v,q.a])]});}
  const customerAccount={
   nl:{title:'Een klantaccount komt eraan.',texts:['We bereiden een klantaccount voor waarmee u later bestellingen, bezorging en spaarpunten kunt beheren. Inloggen en registreren zijn nog niet beschikbaar; we activeren dit pas als de accountservice en opslag goed zijn ingericht.','Bekijk ons assortiment','Student? Naar het studentenaccount →']},
   en:{title:'A customer account is coming.',texts:['We are preparing a customer account where you can manage orders, delivery and loyalty points in the future. Sign-in and registration are not available yet; we will enable them only after the account service and storage are properly configured.','Explore our range','Student? Go to the student account →']},
@@ -30,29 +30,16 @@ for(const l of locales){
 // Every message key must exist in all languages; placeholders must match.
 const messages=Object.fromEntries(locales.map(l=>[l,JSON.parse(fs.readFileSync(`src/messages/${l}.json`,'utf8'))]));
 const platters=load('visschaal'),photos=load('product-beeld'),selection=load('dirks-selectie');
-function componentConstant(name){
- const file='src/app/[locale]/visschalen/SelectieAanvraag.tsx';
- const source=ts.createSourceFile(file,fs.readFileSync(file,'utf8'),ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX);
- for(const statement of source.statements){
-  if(!ts.isVariableStatement(statement))continue;
-  for(const declaration of statement.declarationList.declarations){
-   if(declaration.name.getText(source)===name&&declaration.initializer){
-    const transpiledModule={exports:{}};
-    const code=ts.transpile(`module.exports=${declaration.initializer.getText(source)};`,{target:ts.ScriptTarget.ES2022});
-    new Function('module',code)(transpiledModule);
-    return transpiledModule.exports;
-   }
-  }
- }
- throw new Error(`Missing component copy constant ${name}`);
-}
-const platterPageText=componentConstant('TEKST'),ownPlatterNames=componentConstant('EIGEN_SCHAAL_NAMEN');
+const catalog=load('seafood-catalog'),festive=load('feestdagen-producten'),pricing=load('gourmet-pricing');
 check(selection.DIRKS_SELECTIE.length===30,'Incomplete platter/BBQ selection');
 check(selection.DIRKS_VISSCHALEN.length===17,'Incomplete seafood platter selection');
 check(selection.DIRKS_BARBECUE.length===13,'Incomplete BBQ/gourmet selection');
 for(const item of selection.DIRKS_SELECTIE){
  check(fs.existsSync(`public${item.foto}`),`Missing local photo ${item.slug}`);
- check(item.slug==='zalmspies'?item.prijs===4:Math.round(item.bronPrijs*90)===Math.round(item.prijs*100),`Price calculation ${item.slug}`);
+ const source=festive.feestdagenProduct(item.slug);
+ const loose=pricing.LOOSE_GOURMET_FISH_INDEX[item.slug];
+ const expected=source?.prijsCents ?? (loose!==undefined?pricing.GOURMET_RETAIL_CENTS_PER_100G[loose]:item.slug==='zalmspies'?400:Math.round(item.bronPrijs*90));
+ check(Math.round(item.prijs*100)===expected,`Retail price ${item.slug}`);
  check(!item.slug.startsWith('vleesschotel-'),`Meat platter included ${item.slug}`);
 }
 for(const l of locales){
@@ -62,8 +49,8 @@ for(const l of locales){
   for(const key of [item.id,item.toelichting&&`toelichting_${item.id}`,item.perStuk&&`eenheid_${item.perStuk}`,item.seizoen&&`seizoen_${item.seizoen}`].filter(Boolean))check(!!items[key],`Missing platter item ${l}/${key}`);
  }
  for(const group of platters.GROEP_VOLGORDE)for(const prefix of ['groep_','uitleg_'])check(!!items[prefix+group],`Missing platter group ${l}/${group}`);
- const pageCopy=platterPageText[l];
- const texts=[messages[l].visschaal.kop,messages[l].visschaal.inleiding,messages[l].visschaal.gemiddeld,messages[l].visschaal.perSchaal,pageCopy.visschalen,pageCopy.visschalenIntro,pageCopy.waarschuwing,pageCopy.vraag,pageCopy.foto,...Object.values(ownPlatterNames).map(names=>names[l]),...selection.DIRKS_VISSCHALEN.map(item=>selection.selectieNaam(item.slug,l))];
+ const copy=load('catalog-copy').catalogText(l);
+ const texts=[copy.title,copy.platters,...catalog.MAIN_PLATTERS.map(slug=>catalog.catalogProduct(slug,l).naam)];
  const homeTexts=[...load('local-pages-copy').localLocations(l).flatMap(p=>[p.naam,p.adres,p.dagen]),...load('reviews').googleReviews.slice(0,3).map(r=>load('reviews').localizeReview(r,l).text)];
  for(const suffix of ['','/visschalen','/assortiment','/bezoek-ons','/biologische-vis','/varlaks','/ons-verhaal','/contact','/recepten','/blog','/viswinkel-voorschoten'])pages.push({path:`/${l}${suffix}`,texts:suffix==='/visschalen'?texts:suffix===''?homeTexts:[]});
  for(const p of products.products){const t=translatedProducts.localizeProduct(p,l),photo=photos.productPhoto(t,l);if(photo)check(!!photo.alt,`Missing image description ${l}/${p.slug}`);}

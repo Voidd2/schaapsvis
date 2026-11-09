@@ -72,6 +72,8 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
   const rows = showFeatured ? found.filter(p => !featuredSlugs.includes(p.slug)) : found;
   const visibleRows = rows.slice(0, visibleCount);
 
+  const moreParams = new URLSearchParams(params.toString());
+  moreParams.set("aantal", String(Math.min(visibleCount + 18, rows.length)));
   return <div className="collection section-wrap">
     <section className="collection-browse" aria-labelledby="browse-title">
       <div className="collection-section-heading"><div><p className="kapitaal">{c.count}</p><h2 id="browse-title">{c.browse}</h2></div><p>{c.browseSub}</p></div>
@@ -81,6 +83,7 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
       </div>
       <div className="collection-tabs" role="group" aria-label={c.browse}>{["all", ...categories].map((id, i) =>
         <button disabled={!interactive} key={id} onClick={() => updateFilter({categorie:id, aantal:"14"})} aria-pressed={category === id} className={category === id ? "active" : ""}>{i === 0 ? c.all : c.categories[i - 1]}</button>)}</div>
+      <details className="product-directory"><summary>{locale === "de" ? "Alle Produkte nach Kategorie" : locale === "en" ? "All products by category" : "Alle producten per categorie"}</summary><div>{categories.map((cat,i)=><section key={cat}><h3>{c.categories[i]}</h3><ul>{localized.filter(p=>p.categorie===cat).map(p=><li key={p.slug}><Link prefetch={false} href={`/${locale}/assortiment/${p.slug}`}>{p.naam}</Link></li>)}</ul></section>)}</div></details>
       <p className="collection-photo-note">{c.photoNote}</p>
       <p className="collection-count" role="status">{found.length} {found.length === 1 ? c.singular : c.count}</p>
     </section>
@@ -107,7 +110,7 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
         const photo = productPhoto(p,locale);
         const stock = productAvailability(p,locale);
         const platter = ["visschaal", "feestschotel"].includes(p.slug);
-        return <article key={p.slug} className="collection-item">
+        return <article id={`product-${p.slug}`} key={p.slug} className="collection-item">
           <div className="collection-item-main">
             {photo && <Link href={`/${locale}/assortiment/${p.slug}`} tabIndex={-1} className="collection-thumb"><Image src={photo.src} alt={photo.alt} width={800} height={570} sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 1100px) 45vw, 30vw" className={`${photo.editorial ? "editorial" : ""} ${photo.whole ? "whole-product" : ""}`} /></Link>}
             <div className="collection-item-copy"><p className="collection-category">{c.categories[categories.indexOf(p.categorie)]}</p><h3><Link href={`/${locale}/assortiment/${p.slug}`}>{p.naam}</Link></h3><p className="collection-description">{p.desc}</p></div>
@@ -126,7 +129,7 @@ export function AssortimentFilter({ localized }: { localized: Product[] }) {
           </div>
         </article>;
       })}</div>
-      {rows.length > visibleRows.length && <button disabled={!interactive} type="button" className="collection-load-more" aria-controls="collection-results-list" onClick={() => updateFilter({aantal:String(visibleCount + 18)})}>{c.more}</button>}
+      {rows.length > visibleRows.length && <a className="collection-load-more" href={`/${locale}/assortiment?${moreParams}#product-${rows[visibleRows.length].slug}`}>{c.more} ↓</a>}
       {!found.length && <div className="collection-empty"><p>{c.empty}</p><a className="knop knop-rood" href={bestelContact(locale).href}>{bestelContact(locale).label}</a></div>}
     </section>
   </div>;

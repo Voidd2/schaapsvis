@@ -7,6 +7,7 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig: NextConfig = {
   // Our metadata comes from local content: emit it in the initial head for
   // every user agent, including Vinext clients that do not hoist streamed tags.
+  images: { localPatterns: [{ pathname: "/**", search: "" }, { pathname: "/images/brand/schaapsvis-logo-192.png", search: "?v=2" }] },
   htmlLimitedBots: /.*/,
   // Alle afbeeldingen worden lokaal in /public geserveerd — geen externe
   // remotePatterns meer (geen hotlinks naar concurrenten of stockfoto's).
@@ -56,6 +57,7 @@ const nextConfig: NextConfig = {
       { source: "/openingstijden", destination: "/nl/bezoek-ons", permanent: true },
       { source: "/winkel", destination: "/nl/bezoek-ons", permanent: true },
       { source: "/locatie", destination: "/nl/bezoek-ons", permanent: true },
+      { source: "/blog/kibbeling-vs-lekkerbek-het-verschil", destination: "/nl/blog/kibbeling-vs-lekkerbek-het-verschil", permanent: true },
       { source: "/nieuws", destination: "/nl/blog", permanent: true },
     ];
   },

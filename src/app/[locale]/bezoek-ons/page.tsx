@@ -1,4 +1,6 @@
-import { openingRows, shopDayRange } from "@/lib/openingHours";
+import { connection } from "next/server";
+import { localLocations } from "@/lib/local-pages-copy";
+import { scheduledCounters, openingRows, shopDayRange } from "@/lib/openingHours";
 import { bestelContact } from "@/lib/bestel-contact";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
@@ -86,6 +88,10 @@ export default async function BezoekOnsPage({
   const nav = await getTranslations({ locale, namespace: "nav" });
   const g = await getTranslations({ locale, namespace: "gedeeld" });
 
+  await connection();
+  const visit=scheduledCounters(new Date());
+  const counters=localLocations(locale).filter(p=>visit.ids.includes(p.id));
+  const day=new Intl.DateTimeFormat(locale,{weekday:"long",timeZone:"Europe/Amsterdam"}).format(visit.date);
   const p = await getTranslations({ locale, namespace: "plekken" });
 
   return (
@@ -102,6 +108,7 @@ export default async function BezoekOnsPage({
         <Kruimels items={[{naam:BEDRIJF.naamKort,href:`/${locale}`},{naam:nav("locaties")}]} />
         <p className="kapitaal mb-3">{BEDRIJF.adres.plaats}</p>
         <h1>{t("title")}</h1>
+      <div className="today-counters"><h2>{visit.today?(locale==="en"?"Today":locale==="de"?"Heute":"Vandaag"):(locale==="en"?"Next opening":locale==="de"?"Nächste Öffnung":"Eerstvolgende opening")} · {day}</h2>{counters.map(p=><a key={p.id} href={p.mapsUrl} aria-label={`${p.naam}: ${p.adres}, Google Maps`}><strong>{p.naam}</strong><span>{p.adres} · {visit.hours[p.id]}</span><span>Google Maps ↗</span></a>)}</div>
       <nav
         aria-label={locale === "de" ? "Standort auswählen" : locale === "en" ? "Choose a location" : "Kies een locatie"}
         className="py-5"
@@ -121,7 +128,7 @@ export default async function BezoekOnsPage({
 
       {/* ── De plekken ────────────────────────────────────────────────────── */}
       <Sectie grond="papier" id="locatieoverzicht">
-        <ul className="grid lg:grid-cols-2 gap-6">
+        <ul className="grid md:grid-cols-2 gap-6">
           {PLEKKEN.map((plek) => (
             <li
               key={plek.id}

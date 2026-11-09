@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   if (!["nl", "en", "de"].includes(locale)) notFound();
   const c = copy(locale);
-  return paginaMetadata({ locale, pad: "/relatiegeschenken", title: `${c.title} | Schaap’s Vishandel`, description: c.intro, image: "/images/editorial/schaaps-vispakket-v2.webp" });
+  return paginaMetadata({ locale, pad: "/relatiegeschenken", title: `${c.title} | Schaap’s Vishandel`, description: c.intro, image: "/images/editorial/schaaps-vispakket-v3.webp" });
 }
 
 export default async function RelatiegeschenkenPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -25,7 +25,7 @@ export default async function RelatiegeschenkenPage({ params }: { params: Promis
   const contact = bestelContact(locale, c.title);
   const requestCopy = giftRequestCopy(locale);
   return <>
-    <PaginaKop kruimels={[{ naam: c.home, href: `/${locale}` }, { naam: c.feast, href: `/${locale}/feestdagen` }, { naam: c.title }]} label={c.label} titel={c.title} intro={c.intro} knoppen={[{ label: c.ask, href: contact.href, extern: true }, { label: c.back, href: `/${locale}/feestdagen`, soort: "lijn" }]} zijkant={<div className="overflow-hidden rounded-2xl border border-white/20 shadow-xl"><Image src="/images/editorial/schaaps-vispakket-v2.webp" alt={c.items[0][3]} width={1536} height={1024} priority className="aspect-[3/2] w-full object-cover" /></div>} uitgelijnd="boven" />
+    <PaginaKop kruimels={[{ naam: c.home, href: `/${locale}` }, { naam: c.feast, href: `/${locale}/feestdagen` }, { naam: c.title }]} label={c.label} titel={c.title} intro={c.intro} knoppen={[{ label: c.ask, href: contact.href, extern: true }, { label: c.back, href: `/${locale}/feestdagen`, soort: "lijn" }]} zijkant={<div className="overflow-hidden rounded-2xl border border-white/20 shadow-xl"><Image src="/images/editorial/schaaps-vispakket-v3.webp" alt={c.items[0][3]} width={1536} height={1024} sizes="(max-width: 1023px) 100vw, 36vw" loading="eager" fetchPriority="high" className="aspect-[3/2] w-full object-cover" /></div>} uitgelijnd="boven" />
     <Sectie grond="papier" id="mogelijkheden">
       <Kop label={c.options} titel={c.optionsTitle} intro={c.note} />
       <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-8 sm:gap-x-6 sm:gap-y-10">
