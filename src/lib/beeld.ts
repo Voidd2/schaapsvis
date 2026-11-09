@@ -147,11 +147,11 @@ export const BEELD = {
   },
   nelInDeWinkel: {
     waar: "Ons verhaal, in de periode van Cor en Nel",
-    wat: "Familiefoto van Nel achter de toonbank toen zij de zaak met haar man Cor runde.",
+    wat: "Familiefoto van Aldert met zijn moeder Nel, uit de tijd dat zijn ouders Nel en Cor Haasnoot de zaak runden.",
     bestand: "/images/schaaps/nel-achter-de-toonbank.webp",
-    alt: "Nel met een blauw schort en een rode halsdoek achter de toonbank",
+    alt: "Aldert Haasnoot links achter de toonbank, met rechts zijn moeder Nel in een blauw schort",
     verhouding: "liggend",
-    terugval: "Nel in de winkel",
+    terugval: "Aldert met zijn moeder Nel in de winkel",
   },
   historie2018: {
     waar: "Ons verhaal — tijdlijn 2018",
