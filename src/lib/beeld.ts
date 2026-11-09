@@ -75,6 +75,14 @@ export const BEELD = {
     verhouding: "liggend",
     terugval: "De toonbank",
   },
+  oestersInDeWinkel: {
+    waar: "Viswinkel Leiden, bij de vragen aan de toonbank",
+    wat: "Een medewerker laat een oester zien in de winkel.",
+    bestand: "/images/schaaps/oesters-in-de-winkel.webp",
+    alt: "Een medewerker achter de vistoonbank laat een oester en een kistje oesters zien",
+    verhouding: "liggend",
+    terugval: "Aan de toonbank",
+  },
   achterDeToonbank: {
     waar: "Contact, naast het telefoonnummer",
     wat: "Iemand van de zaak achter de toonbank, gewoon aan het werk. Geen poseren. Dit maakt bellen persoonlijker.",
@@ -137,13 +145,13 @@ export const BEELD = {
     verhouding: "liggend",
     terugval: "1938",
   },
-  historie1960: {
-    waar: "Ons verhaal, bij 1957–1960",
-    wat: "Cor Haasnoot, de winkel of de markt in de jaren vijftig of zestig.",
-    bestand: "",
-    alt: "Schaap's Vishandel in Leiden in de jaren zestig",
+  nelInDeWinkel: {
+    waar: "Ons verhaal, in de periode van Cor en Nel",
+    wat: "Familiefoto van Nel achter de toonbank toen zij de zaak met haar man Cor runde.",
+    bestand: "/images/schaaps/nel-achter-de-toonbank.webp",
+    alt: "Nel met een blauw schort en een rode halsdoek achter de toonbank",
     verhouding: "liggend",
-    terugval: "1960",
+    terugval: "Nel in de winkel",
   },
   historie2018: {
     waar: "Ons verhaal — tijdlijn 2018",
