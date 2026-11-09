@@ -22,8 +22,8 @@ function load(file) {
 }
 const { platterFamilies, platterFamily, selectedPlatter, platterSelectionParams, platterDetailHref, platterOverviewHref } = load("src/lib/platter-families.ts");
 const { FEESTDAGEN_PRODUCTEN } = load("src/lib/feestdagen-producten.ts");
-const { gourmetRequestLink, gourmetRequestCopy, GOURMET_RETAIL_CENTS_PER_100G } = load("src/lib/gourmet-request.ts");
-assert.deepEqual(GOURMET_RETAIL_CENTS_PER_100G, [350, 350, 350, 275]);
+const { gourmetRequestLink, gourmetRequestCopy, gourmetQuote, gourmetFish } = load("src/lib/gourmet-request.ts");
+assert.deepEqual(gourmetFish.slice(0, 4).map(f => f.rate), [350, 350, 350, 275]);
 const { GOURMET_PORTIONS, gourmetPriceCents } = load("src/lib/gourmet-pricing.ts");
 const gourmetSelection = load("src/lib/dirks-selectie.ts").DIRKS_SELECTIE;
 for (const [slug, weight, price] of [["gourmet-trio-1-persoon", 300, 1550], ["gourmet-schotel-3-4-pers", 1000, 4250], ["gourmetschotel-5-6-pers", 1500, 6250]]) {
@@ -41,18 +41,26 @@ for (const slug of ["gourmetstukjes-zalm", "gourmetstukjes-tonijn", "gourmet-stu
   assert.equal(item.prijs, 3.5);
   assert.equal(item.per100g, true);
 }
+for (const [grams, fee] of [[1,500],[500,500],[501,1000],[1500,1000],[1501,1500]]) {
+  const portions = { salmon: String(grams) };
+  assert.equal(gourmetQuote(portions,"premium").fee, fee);
+  assert.equal(gourmetQuote(portions,"standard").fee, 0);
+}
+for (const portions of [{},{unknown:"100"},{salmon:""},{salmon:"0"},{salmon:"-1"},{salmon:"2.5"},{salmon:"1e3"}]) {
+  assert.equal(gourmetQuote(portions,"standard"), null);
+}
 for (const locale of ["nl", "en", "de"]) {
   const t = gourmetRequestCopy(locale);
-  const request = { people: "6", fish: [0, 3], date: "", wishes: "  " };
+  const request = { people: "6", portions: {salmon:"250", seabass:"100"}, packaging:"standard", date:"", wishes:"  " };
   const url = new URL(gourmetRequestLink(locale, request)), message = url.searchParams.get("text");
   assert.equal(url.origin, "https://wa.me");
-  assert.ok(message.includes(`${t.people}: 6`));
-  assert.ok(message.includes(t.choices[0]) && message.includes(t.choices[3]));
-  assert.ok(!message.includes(t.choices[1]));
-  assert.ok(!message.includes(t.wishesLine + ":"));
-  assert.ok(message.includes(t.dateUnknown) && message.includes(t.closing));
+  const q = gourmetQuote(request.portions, request.packaging);
+  assert.equal(q.grams,350);
+  assert.equal(q.total,1175);
+  assert.ok(message.includes(t.standard) && message.includes("350 g") && message.includes("250 g"));
+  assert.ok(message.includes(locale === "en" ? "11.75" : "11,75"));
+  assert.ok(message.includes(t.dateUnknown));
   for (const people of ["", "0", "-1", "2.5", "abc", "201", "Infinity"]) assert.equal(gourmetRequestLink(locale, { ...request, people }), null);
-  for (const fish of [[], [4], [-1], [0.5], [0, 99]]) assert.equal(gourmetRequestLink(locale, { ...request, fish }), null);
   for (const date of ["2026-02-30", "tomorrow", "2026-13-01"]) assert.equal(gourmetRequestLink(locale, { ...request, date }), null);
   const extra = new URL(gourmetRequestLink(locale, { ...request, date: "2026-12-24", wishes: "  Meer zalm & geen saus? #test\nAdvies graag  " }));
   assert.equal([...extra.searchParams.keys()].join(), "text");
