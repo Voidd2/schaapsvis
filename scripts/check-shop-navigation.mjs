@@ -60,6 +60,15 @@ for (const locale of ["nl", "en", "de"]) {
   assert.ok(extra.searchParams.get("text").includes("Meer zalm & geen saus? #test\nAdvies graag"));
 }
 const { giftRequestLink, giftRequestCopy, giftPackageContents, giftVoucherCents, GIFT_PACKAGE_GRAMS } = load("src/lib/gift-request.ts");
+const { trioPriceCents, packagePriceCents } = load("src/lib/gift-pricing.ts");
+assert.deepEqual([0, 1, 2].map(i => trioPriceCents(i)), [1146, 1594, 2042]);
+assert.deepEqual([0, 1, 2].map(i => packagePriceCents(i)), [2151, 3458, 5000]);
+assert.equal(packagePriceCents(0, [0, 1]), 3246);
+assert.equal(packagePriceCents(1, [0, 0]), null);
+assert.equal(trioPriceCents(1, [0, 1, 3]), 1534);
+const giftDraft = giftRequestLink("nl", { kind: "package", product: "Test", size: 0, extras: [0, 1], fish: [], wishes: "", voucher: true, voucherAmount: "10" });
+const pricedText = new URL(giftDraft).searchParams.get("text");
+for (const value of ["500 g", "32,46", "42,46", "100 g Gravad lax", "100 g Hollandse garnalen"]) assert.ok(pricedText.includes(value));
 assert.deepEqual(GIFT_PACKAGE_GRAMS.map(items => items.reduce((sum, grams) => sum + grams, 0)), [300, 500, 800]);
 assert.deepEqual(GIFT_PACKAGE_GRAMS.map(items => items[3]), [0, 0, 100]);
 for (const [input, cents] of [["25", 2500], ["25,50", 2550], ["25.50", 2550], ["0,01", 1], [" 100 ", 10000]]) assert.equal(giftVoucherCents(input), cents);
@@ -73,7 +82,7 @@ for (const locale of ["nl", "en", "de"]) {
   assert.ok(message.includes(t.choices[3]));
   assert.ok(!message.includes(t.choices[2]));
   assert.ok(!message.includes(t.wishesLine + ":"));
-  assert.ok(!message.includes(t.sizeLine + ":"));
+  assert.ok(message.includes(t.sizeLine + ": " + t.sizes[1]));
   for (const fish of [[0, 1], [0, 1, 2, 3], [0, 0, 1], [0, 1, 99]]) assert.equal(giftRequestLink(locale, { ...draft, fish }), null);
   for (let size = 0; size < 3; size++) {
     const packageMessage = new URL(giftRequestLink(locale, { ...draft, kind: "package", size })).searchParams.get("text");
@@ -207,14 +216,14 @@ assert.equal(new Set(SALAD_REQUESTS.map(s => s.image)).size, 4);
 const request = {items:{"visschotel-middel-5-8-pers":{quantity:2,split:false}},date:""};
 assert.deepEqual(requestTotal(request), {cents:19700,incomplete:false});
 request.items["luxe-trio-klein"] = {quantity:1,split:false};
-assert.deepEqual(requestTotal(request), {cents:21299,incomplete:false});
+assert.deepEqual(requestTotal(request), {cents:20846,incomplete:false});
 request.items["extra-zalmsalade"] = {quantity:2,split:false};
-assert.deepEqual(requestTotal(request), {cents:21299,incomplete:true});
+assert.deepEqual(requestTotal(request), {cents:20846,incomplete:true});
 request.items["visschotel-middel-5-8-pers"].split = true;
-assert.deepEqual(requestTotal(request), {cents:21299,incomplete:true});
+assert.deepEqual(requestTotal(request), {cents:20846,incomplete:true});
 for(const locale of ["nl","en","de"]) {
   const draft = requestMessage({...request,date:"2026-12-24"},locale);
-  assert.ok(draft.includes(feestdagenBedrag(21299,locale)));
+  assert.ok(draft.includes(feestdagenBedrag(20846,locale)));
   assert.ok(draft.includes("2026"));
   assert.ok(draft.includes(catalogProduct("luxe-trio-klein",locale).naam));
   assert.ok(draft.includes("5–8"));
@@ -222,7 +231,7 @@ for(const locale of ["nl","en","de"]) {
 assert.deepEqual(normalizeRequest({items:{unknown:{quantity:1},"luxe-trio-klein":{quantity:1.5},"extra-zalmsalade":{quantity:-1}},date:"bad"}),{items:{},date:""});
 assert.deepEqual(normalizeRequest(JSON.parse(JSON.stringify(request))), {items:Object.fromEntries(Object.entries(request.items).map(([slug,line])=>[slug,{quantity:line.quantity}])), date:""});
 assert.equal(normalizeRequest({items:{"luxe-trio-klein":{quantity:1,split:true}},date:""}).items["luxe-trio-klein"].split,undefined);
-console.log("Shared catalogue checks passed: 6 main choices, all 23 preserved routes, 3 languages, canonical totals, unknown salads, legacy split removal and storage validation.");
+console.log("Shared catalogue checks passed: 6 main choices, original routes and new medium trio, 3 languages, canonical totals, unknown salads, legacy split removal and storage validation.");
 
 const { inquiryText, platterInquiryMessage } = load("src/lib/platter-inquiry.ts");
 const { whatsappLink } = load("src/lib/bedrijf.ts");

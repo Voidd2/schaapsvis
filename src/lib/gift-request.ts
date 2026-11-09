@@ -1,11 +1,13 @@
 import { whatsappLink } from "./bedrijf";
 import { feestdagenBedrag } from "./feestdagen-producten";
 
-// Suggested net fish weights per gift, not packaging weight or a quotation.
-export const GIFT_PACKAGE_GRAMS = [[150, 75, 75, 0], [200, 150, 150, 0], [300, 200, 200, 100]] as const;
+import { GIFT_PACKAGE_GRAMS, PACKAGE_EXTRAS, PACKAGING_CENTS, TRIO_GRAMS, packagePriceCents, trioPriceCents } from "./gift-pricing";
+export { GIFT_PACKAGE_GRAMS } from "./gift-pricing";
 
 const COPY = {
   nl: {
+    format: "Formaat", extras: "Extra vis per 100 g", extraFish: ["Gravad lax met dille","Hollandse garnalen"],
+    price: "Prijs voor uw keuze", packaging: "Inclusief opmaak en verpakking", grandTotal: "Totaal met cadeaubon", chooseThree: "Kies drie soorten om de prijs te zien.", availability: "Gravad lax is afhankelijk van het aanbod van de rokerij.",
     size: "Kies uw pakket", sizes: ["Klein", "Middel", "Groot"],
     contents: "Voorgestelde inhoud", total: "Totaal circa", net: "Netto visgewicht, zonder verpakking. We bevestigen inhoud, gewicht en prijs persoonlijk.",
     packageFish: ["Gerookte zalmfilet", "Gerookte palingfilet", "Gerookte makreelfilet zonder huid", "Gerookte zalmbuikjes"],
@@ -21,6 +23,8 @@ const COPY = {
     customTrio: "Liever zelf drie soorten kiezen?", customTrioNote: "Vraag een eigen trio aan met garnalen, paling, zalm of makreel. Hiervoor bevestigen we de prijs apart.",
   },
   en: {
+    format: "Size", extras: "Add 100 g of fish", extraFish: ["Dill-cured gravlax","Dutch shrimp"],
+    price: "Your selection", packaging: "Presentation and packaging included", grandTotal: "Total with gift voucher", chooseThree: "Choose three varieties to see the price.", availability: "Gravlax is subject to availability from our smokehouse.",
     size: "Choose your package", sizes: ["Small", "Medium", "Large"],
     contents: "Suggested contents", total: "Approximate total", net: "Net fish weight, excluding packaging. We confirm contents, weight and price personally.",
     packageFish: ["Smoked salmon fillet", "Smoked eel fillet", "Skinless smoked mackerel fillet", "Smoked salmon belly strips"],
@@ -36,6 +40,8 @@ const COPY = {
     customTrio: "Prefer to choose your own three varieties?", customTrioNote: "Request a custom trio with shrimp, eel, salmon or mackerel. We confirm its price separately.",
   },
   de: {
+    format: "Größe", extras: "Je 100 g Fisch dazu", extraFish: ["Graved Lachs mit Dill","Nordseegarnelen"],
+    price: "Preis Ihrer Auswahl", packaging: "Anrichten und Verpackung inklusive", grandTotal: "Gesamt mit Gutschein", chooseThree: "Wählen Sie drei Sorten, um den Preis zu sehen.", availability: "Graved Lachs ist je nach Angebot der Räucherei erhältlich.",
     size: "Paketgröße wählen", sizes: ["Klein", "Mittel", "Groß"],
     contents: "Vorgeschlagener Inhalt", total: "Insgesamt ca.", net: "Nettofischgewicht ohne Verpackung. Inhalt, Gewicht und Preis bestätigen wir persönlich.",
     packageFish: ["Räucherlachsfilet", "Räucheraalfilet", "Räuchermakrelenfilet ohne Haut", "Geräucherte Lachsbauchstreifen"],
@@ -53,7 +59,7 @@ const COPY = {
 } as const;
 
 export function giftRequestCopy(locale: string) { return COPY[locale === "en" || locale === "de" ? locale : "nl"]; }
-export type GiftRequest = { product: string; kind: "package" | "trio" | "custom"; size: number; fish: number[]; wishes: string; voucher?: boolean; voucherAmount?: string };
+export type GiftRequest = { product: string; kind: "package" | "trio" | "custom"; size: number; fish: number[]; wishes: string; extras?: number[]; voucher?: boolean; voucherAmount?: string };
 
 export function giftVoucherCents(value: string): number | null {
   const text = value.trim();
@@ -69,21 +75,49 @@ export function giftPackageContents(locale: string, size: number) {
   return { total: grams.reduce<number>((sum, value) => sum + value, 0), lines: grams.flatMap((weight, index) => weight ? [`${weight} g ${t.packageFish[index]}`] : []) };
 }
 
+export function giftQuote(locale: string, request: Pick<GiftRequest, "kind" | "size" | "fish" | "extras">) {
+  const { kind, size, fish, extras = [] } = request;
+  const t = giftRequestCopy(locale);
+  if (kind === "custom") return null;
+  const price = kind === "trio" ? trioPriceCents(size, fish) : packagePriceCents(size, extras);
+  if (price === null) return null;
+  if (kind === "trio") {
+    const grams = TRIO_GRAMS[size];
+    return { price, total: 3 * grams, lines: fish.map(i => `${grams} g ${t.choices[i]}`) };
+  }
+  const base = giftPackageContents(locale, size)!;
+  return {
+    price,
+    total: base.total + extras.length * 100,
+    lines: [...base.lines, ...extras.map(i => `100 g ${t.extraFish[i]} (+${feestdagenBedrag(PACKAGE_EXTRAS[i], locale)})`)],
+  };
+}
+
+export function packagingNote(locale: string) {
+  return `${giftRequestCopy(locale).packaging} (${feestdagenBedrag(PACKAGING_CENTS, locale)})`;
+}
+
 /** No page query string, storage, quote or automatic send: only a WhatsApp draft. */
 export function giftRequestLink(locale: string, request: GiftRequest): string | null {
   const t = giftRequestCopy(locale);
-  const selected = [...new Set(request.fish)].filter(index => Number.isInteger(index) && index >= 0 && index < t.choices.length);
-  if (request.kind === "trio" && selected.length !== 3) return null;
-  if (request.kind === "package" && (!Number.isInteger(request.size) || request.size < 0 || request.size >= t.sizes.length)) return null;
+  const quote = giftQuote(locale, request);
+  if (request.kind !== "custom" && !quote) return null;
   const voucherCents = request.voucher ? giftVoucherCents(request.voucherAmount ?? "") : null;
   if (request.voucher && voucherCents === null) return null;
   const lines = [t.greeting, request.product];
-  if (request.kind === "package") {
-    const contents = giftPackageContents(locale, request.size)!;
-    lines.push(`${t.sizeLine}: ${t.sizes[request.size]}`, `${t.contents}: ${contents.lines.join(", ")}`, `${t.total}: ${contents.total} g`);
+  if (quote) {
+    const contentLabel = request.kind === "trio" ? t.fishLine : t.contents;
+    lines.push(
+      `${t.sizeLine}: ${t.sizes[request.size]}`,
+      `${contentLabel}: ${quote.lines.join(", ")}`,
+      `${t.total}: ${quote.total} g`,
+      `${t.price}: ${feestdagenBedrag(quote.price, locale)} · ${packagingNote(locale)}`,
+    );
   }
-  if (request.kind === "trio") lines.push(`${t.fishLine}: ${selected.map(index => t.choices[index]).join(", ")}`);
-  if (voucherCents !== null) lines.push(`${t.voucherLine}: ${feestdagenBedrag(voucherCents, locale)}`);
+  if (voucherCents !== null) {
+    lines.push(`${t.voucherLine}: ${feestdagenBedrag(voucherCents, locale)}`);
+    if (quote) lines.push(`${t.grandTotal}: ${feestdagenBedrag(quote.price + voucherCents, locale)}`);
+  }
   const wishes = request.wishes.trim().slice(0, 700);
   if (wishes) lines.push(`${t.wishesLine}: ${wishes}`);
   lines.push(t.note);

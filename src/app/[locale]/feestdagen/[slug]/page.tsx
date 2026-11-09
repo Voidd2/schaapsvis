@@ -143,7 +143,7 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
           {family && <Link className="mt-4 underline underline-offset-4" href={platterOverviewHref(locale, slug, selection.toString()).replace(/#.*$/, "#maatwerk")}>{platterPresentation(locale).custom}</Link>}
           <ProductQuantity key={slug} slug={slug} locale={locale} />
           {product.categorie === "gourmet" && <a className="knop knop-lijn mt-4 min-h-12 whitespace-normal" href="#gourmet-samenstellen">{gourmetRequestCopy(locale).title} →</a>}
-          {["luxe-trio-klein", "luxe-vistrio"].includes(slug) && <div className="mt-5 rounded-xl border border-[#bfd6df] bg-white p-5"><p className="mb-3 text-sm leading-6">{giftRequestCopy(locale).customTrioNote}</p><Link className="knop knop-lijn" href={`/${locale}/relatiegeschenken#geschenk-2`}>{giftRequestCopy(locale).customTrio} →</Link></div>}
+          {["luxe-trio-klein", "luxe-trio-middel", "luxe-vistrio"].includes(slug) && <div className="mt-5 rounded-xl border border-[#bfd6df] bg-white p-5"><p className="mb-3 text-sm leading-6">{giftRequestCopy(locale).customTrioNote}</p><Link className="knop knop-lijn" href={`/${locale}/relatiegeschenken#geschenk-2`}>{giftRequestCopy(locale).customTrio} →</Link></div>}
           <CatalogHelp locale={locale} />
         </div>
       </div>

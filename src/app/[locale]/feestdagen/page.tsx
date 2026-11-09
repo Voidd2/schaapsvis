@@ -28,9 +28,9 @@ export default async function FeestdagenPage({ params }: { params: Promise<{ loc
   if (!["nl", "en", "de"].includes(locale)) notFound();
   const c = feestdagenCopy(locale), t = catalogText(locale);
   return <>
-    <section className="festive-catalog-hero section-wrap">
+    <section className="festive-catalog-hero holiday-cover section-wrap">
       <div><p className="kapitaal">{c.label}</p><h1>{c.title}</h1><p>{t.festiveIntro}</p>
-        <div className="catalog-intro-links"><a className="knop knop-rood" href="#visschalen">{t.browse} →</a></div>
+        <div className="catalog-intro-links"><a className="knop knop-rood" href="#visschalen">{t.browse} →</a><a className="knop knop-lijn" href="#geschenken">{t.gifts} ↓</a></div>
       </div>
       <figure><Image src="/images/editorial/feestschaal-voorbeeld.webp" alt={locale === "en" ? "Festive seafood platter, serving suggestion" : locale === "de" ? "Festliche Fischplatte als Servierbeispiel" : "Feestelijke visschaal als serveervoorbeeld"} width={1200} height={800} sizes="(max-width: 767px) 100vw, 50vw" priority /><figcaption>{locale === "en" ? "Festive serving suggestion" : locale === "de" ? "Festlicher Serviervorschlag" : "Feestelijk serveervoorbeeld"}</figcaption></figure>
     </section>
