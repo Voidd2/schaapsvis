@@ -39,7 +39,7 @@ const hapjes = [
   "Zalmwraps en surimi",
   "Gerookte en warmgerookte zalm",
   "Makreel, pepermakreel en brado",
-  "Rivierkreeftstaartjes en gerookte paling",
+  "Rivierkreeftstaarten en gerookte paling",
 ] as const;
 
 const schotelAllergenen = ["Vis", "Schaaldieren", "Gluten", "Ei", "Mosterd", "Soja", "Selderij", "Melk"] as const;

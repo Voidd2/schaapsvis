@@ -65,7 +65,7 @@ const phrases: Record<string, Translation> = {
   "Grote en roze garnalen": ["Large prawns and pink prawns", "Große Garnelen und rosa Garnelen"],
   "Zalmwraps en surimi": ["Salmon wraps and surimi", "Lachs-Wraps und Surimi"],
   "Makreel, pepermakreel en brado": ["Mackerel, peppered mackerel and brado", "Makrele, Pfeffermakrele und Brado"],
-  "Rivierkreeftstaartjes en gerookte paling": ["Crayfish tails and smoked eel", "Flusskrebsschwänze und geräucherter Aal"],
+  "Rivierkreeftstaarten en gerookte paling": ["Crayfish tails and smoked eel", "Flusskrebsschwänze und geräucherter Aal"],
   "Vis": ["Fish", "Fisch"],
   "Schaaldieren": ["Crustaceans", "Krebstiere"],
   "Gluten": ["Gluten", "Gluten"],

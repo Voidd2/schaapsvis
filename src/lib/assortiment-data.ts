@@ -329,7 +329,7 @@ export const products: Product[] = [
   {
     "slug": "bosje-sprot",
     "naam": "Bosje Sprot",
-    "desc": "Gerookte sprot (Sprattus sprattus) — kleine vette visjes met een intense, rokerige smaak. Uitstekend als borrelhapje of op donker brood.",
+    "desc": "Gerookte sprot (Sprattus sprattus) is een kleine, vette vis met een uitgesproken rooksmaak. Lekker bij de borrel of op donker brood.",
     "categorie": "gerookte-vis",
     "photo": "/images/producten-hd/bosje-sprot.webp",
     "ingredienten": "Sprot (Sprattus sprattus) [VIS], zout, rook.",
@@ -672,7 +672,7 @@ export const products: Product[] = [
   {
     "slug": "sardines",
     "naam": "Verse Sardines",
-    "desc": "Verse sardines (Sardina pilchardus) — kleine, vette visjes boordevol omega-3. Op de grill met wat zeezout en citroen een mediterrane traktatie.",
+    "desc": "Verse sardines (Sardina pilchardus) zijn kleine, vette vissen die van nature rijk zijn aan omega-3. Lekker van de grill met zeezout en citroen.",
     "categorie": "verse-vis",
     "omega3": true,
     "ingredienten": "Sardines (Sardina pilchardus) [VIS]. Geen toegevoegde stoffen.",
@@ -730,7 +730,7 @@ export const products: Product[] = [
   {
     "slug": "gerookte-sprotfilet",
     "naam": "Gerookte Sprotfilet",
-    "desc": "Fijne, ontgraten filetjes van gerookte sprot (Sprattus sprattus) — intens rokerig en zilt. Heerlijk op donker brood of door een aardappelsalade.",
+    "desc": "Filets van gerookte sprot (Sprattus sprattus), zonder graten en met een zilte rooksmaak. Lekker op donker brood of door een aardappelsalade.",
     "categorie": "gerookte-vis",
     "ingredienten": "Sprot (Sprattus sprattus) [VIS], zout, rook.",
     "bevat": [
@@ -764,7 +764,7 @@ export const products: Product[] = [
   {
     "slug": "gebakken-mosselen",
     "naam": "Gebakken Mosselen",
-    "desc": "Gepaneerde en gebakken mosseltjes — knapperig van buiten, zacht van binnen. Een geliefde snack met knoflooksaus.",
+    "desc": "Gepaneerde en gebakken mosselen, knapperig van buiten en zacht van binnen. Lekker met knoflooksaus.",
     "categorie": "bereid",
     "ingredienten": "Mosselen (Mytilus edulis) [WEEKDIEREN], paneermeel/TARWEBLOEM [GLUTEN], EIEREN, plantaardige olie. Knoflooksaus: mayonaise (EIEREN, MOSTERD). Bereid in frituurvet.",
     "bevat": [
@@ -827,7 +827,7 @@ export const products: Product[] = [
   {
     "slug": "gebakken-ansjovis",
     "naam": "Gefrituurde ansjovis",
-    "desc": "We frituren de kleine ansjovisjes tot ze een dun, krokant korstje hebben. Lekker uit het bakje, met een kneepje citroen.",
+    "desc": "De ansjovis krijgt bij het frituren een dunne, krokante korst. Lekker met wat citroen.",
     "categorie": "bereid",
     "ingredienten": "Ansjovis [VIS]. Vraag naar de ingrediënten en allergenen van de bereiding.",
     "bevat": [
