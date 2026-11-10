@@ -25,7 +25,7 @@ function draft(data: URLSearchParams, locale: string) {
     return assemblyLink(delicacyMode(slug),locale,catalogProduct(slug,locale).naam,data);
   }
   if (kind === "gourmet") {
-    if (field("packaging") !== "standard") return null;
+    if (data.has("packaging") && field("packaging") !== "standard") return null;
     const selected = data.getAll("fish");
     if (selected.some(id => !gourmetFish.some(fish => fish.id === id))) return null;
     const portions: Portions = Object.fromEntries(selected.map(id => [id, field("weight-" + id) || field(id)]));

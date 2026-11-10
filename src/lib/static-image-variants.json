@@ -2593,5 +2593,221 @@
         "bytes": 167832
       }
     ]
+  },
+  "/images/editorial/salade-pikante-tonijn-toonbank.webp": {
+    "sha256": "45e7665e2ebf7baad58ea41800e3d979ec5490510578c9ce3a4e208e1ca091fd",
+    "originalBytes": 132538,
+    "variants": [
+      {
+        "src": "/images/responsive/salade-pikante-tonijn-toonbank-45e7665e2ebf-320.webp",
+        "width": 320,
+        "bytes": 16710
+      },
+      {
+        "src": "/images/responsive/salade-pikante-tonijn-toonbank-45e7665e2ebf-640.webp",
+        "width": 640,
+        "bytes": 50246
+      },
+      {
+        "src": "/images/responsive/salade-pikante-tonijn-toonbank-45e7665e2ebf-960.webp",
+        "width": 960,
+        "bytes": 112368
+      }
+    ]
+  },
+  "/images/editorial/salade-haring-mosterd-toonbank.webp": {
+    "sha256": "e80cdf6ab3ff705a36ab0155ff0ec8ee7b1db90c557a1e2ecc8e2bc33a52f168",
+    "originalBytes": 119694,
+    "variants": [
+      {
+        "src": "/images/responsive/salade-haring-mosterd-toonbank-e80cdf6ab3ff-320.webp",
+        "width": 320,
+        "bytes": 14914
+      },
+      {
+        "src": "/images/responsive/salade-haring-mosterd-toonbank-e80cdf6ab3ff-640.webp",
+        "width": 640,
+        "bytes": 43650
+      },
+      {
+        "src": "/images/responsive/salade-haring-mosterd-toonbank-e80cdf6ab3ff-960.webp",
+        "width": 960,
+        "bytes": 103340
+      }
+    ]
+  },
+  "/images/editorial/gourmet-trio-studio.webp": {
+    "sha256": "f0cc3bbdc915eecbdda82bf8f473e93ebee499555d36b02c81270411ab236cc8",
+    "originalBytes": 81694,
+    "variants": [
+      {
+        "src": "/images/responsive/gourmet-trio-studio-f0cc3bbdc915-320.webp",
+        "width": 320,
+        "bytes": 6670
+      },
+      {
+        "src": "/images/responsive/gourmet-trio-studio-f0cc3bbdc915-640.webp",
+        "width": 640,
+        "bytes": 19216
+      },
+      {
+        "src": "/images/responsive/gourmet-trio-studio-f0cc3bbdc915-960.webp",
+        "width": 960,
+        "bytes": 35234
+      },
+      {
+        "src": "/images/responsive/gourmet-trio-studio-f0cc3bbdc915-1280.webp",
+        "width": 1280,
+        "bytes": 66164
+      }
+    ]
+  },
+  "/images/editorial/gourmet-3-4-studio.webp": {
+    "sha256": "93d84f2510bee890c5cee342aa8908b9afd4bd913df5afb4e166093f1d6d0e17",
+    "originalBytes": 113674,
+    "variants": [
+      {
+        "src": "/images/responsive/gourmet-3-4-studio-93d84f2510be-320.webp",
+        "width": 320,
+        "bytes": 8768
+      },
+      {
+        "src": "/images/responsive/gourmet-3-4-studio-93d84f2510be-640.webp",
+        "width": 640,
+        "bytes": 27028
+      },
+      {
+        "src": "/images/responsive/gourmet-3-4-studio-93d84f2510be-960.webp",
+        "width": 960,
+        "bytes": 49004
+      },
+      {
+        "src": "/images/responsive/gourmet-3-4-studio-93d84f2510be-1280.webp",
+        "width": 1280,
+        "bytes": 96336
+      }
+    ]
+  },
+  "/images/editorial/gourmet-5-6-studio.webp": {
+    "sha256": "aad1815a3f74a433b34c6565c9e5a88151cb0d47d0d9135ba40afb7b245a3cce",
+    "originalBytes": 143370,
+    "variants": [
+      {
+        "src": "/images/responsive/gourmet-5-6-studio-aad1815a3f74-320.webp",
+        "width": 320,
+        "bytes": 11840
+      },
+      {
+        "src": "/images/responsive/gourmet-5-6-studio-aad1815a3f74-640.webp",
+        "width": 640,
+        "bytes": 35942
+      },
+      {
+        "src": "/images/responsive/gourmet-5-6-studio-aad1815a3f74-960.webp",
+        "width": 960,
+        "bytes": 63302
+      },
+      {
+        "src": "/images/responsive/gourmet-5-6-studio-aad1815a3f74-1280.webp",
+        "width": 1280,
+        "bytes": 121908
+      }
+    ]
+  },
+  "/images/editorial/gourmet-zalm-naturel.webp": {
+    "sha256": "abffd1c1ffb526b4b0abfa4044ef7649f3926c676fef0251338eadf73450a027",
+    "originalBytes": 56858,
+    "variants": [
+      {
+        "src": "/images/responsive/gourmet-zalm-naturel-abffd1c1ffb5-320.webp",
+        "width": 320,
+        "bytes": 7424
+      },
+      {
+        "src": "/images/responsive/gourmet-zalm-naturel-abffd1c1ffb5-640.webp",
+        "width": 640,
+        "bytes": 21002
+      },
+      {
+        "src": "/images/responsive/gourmet-zalm-naturel-abffd1c1ffb5-960.webp",
+        "width": 960,
+        "bytes": 45356
+      }
+    ]
+  },
+  "/images/editorial/gourmet-tonijn-naturel.webp": {
+    "sha256": "cbc15bd15d5e8709f31b57b93a75a9828ff125eda0e7c5ae17aa242f1aba6c70",
+    "originalBytes": 60618,
+    "variants": [
+      {
+        "src": "/images/responsive/gourmet-tonijn-naturel-cbc15bd15d5e-320.webp",
+        "width": 320,
+        "bytes": 6202
+      },
+      {
+        "src": "/images/responsive/gourmet-tonijn-naturel-cbc15bd15d5e-640.webp",
+        "width": 640,
+        "bytes": 20070
+      },
+      {
+        "src": "/images/responsive/gourmet-tonijn-naturel-cbc15bd15d5e-960.webp",
+        "width": 960,
+        "bytes": 50414
+      }
+    ]
+  },
+  "/images/editorial/gourmet-kabeljauw-naturel.webp": {
+    "sha256": "ee346ebd013e06465171f624525c7e9c92faee8ef2bc273230d408eb236cf487",
+    "originalBytes": 27812,
+    "variants": [
+      {
+        "src": "/images/responsive/gourmet-kabeljauw-naturel-ee346ebd013e-320.webp",
+        "width": 320,
+        "bytes": 3758
+      },
+      {
+        "src": "/images/responsive/gourmet-kabeljauw-naturel-ee346ebd013e-640.webp",
+        "width": 640,
+        "bytes": 10462
+      },
+      {
+        "src": "/images/responsive/gourmet-kabeljauw-naturel-ee346ebd013e-960.webp",
+        "width": 960,
+        "bytes": 20528
+      }
+    ]
+  },
+  "/images/editorial/gourmet-heilbot-naturel.webp": {
+    "sha256": "2e357b97802369035f59080610978e078dea6e1ce631d5dce01e46a7cd7e4b40",
+    "originalBytes": 4978,
+    "variants": [
+      {
+        "src": "/images/responsive/gourmet-heilbot-naturel-2e357b978023-320.webp",
+        "width": 320,
+        "bytes": 4440
+      }
+    ]
+  },
+  "/images/editorial/gourmet-zeebaars-naturel.webp": {
+    "sha256": "cb12519fbc582688fcbd358758c01606166ffd3ad1b8c667a14d04ac72195fd1",
+    "originalBytes": 10328,
+    "variants": [
+      {
+        "src": "/images/responsive/gourmet-zeebaars-naturel-cb12519fbc58-320.webp",
+        "width": 320,
+        "bytes": 9524
+      }
+    ]
+  },
+  "/images/editorial/gourmet-inktvisringen-naturel.webp": {
+    "sha256": "ad84ed7aed71c1a8d63934f1502950d1c257f9ff80417dfa6cb532ff3ce97a80",
+    "originalBytes": 4254,
+    "variants": [
+      {
+        "src": "/images/responsive/gourmet-inktvisringen-naturel-ad84ed7aed71-320.webp",
+        "width": 320,
+        "bytes": 3620
+      }
+    ]
   }
 }

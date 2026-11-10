@@ -1,7 +1,7 @@
 import offers from "../data/dirks-offers-2026-09-29.json";
 import { siteLanguage } from "./language";
 import { feestdagenProduct } from "./feestdagen-producten";
-import { GOURMET_RETAIL_CENTS_PER_100G, LOOSE_GOURMET_FISH_INDEX } from "./gourmet-pricing";
+import { GOURMET_RETAIL_CENTS_PER_100G, gourmetFishPhotos, LOOSE_GOURMET_FISH_INDEX, presetFish } from "./gourmet-pricing";
 
 export type SelectieGroep = "borrelbox" | "klassiek" | "luxe" | "hapjes" | "bijzonder" | "barbecue" | "gourmet" | "los";
 export type SelectieItem = {
@@ -81,7 +81,7 @@ export const DIRKS_SELECTIE: SelectieItem[] = offers.offers.map((offer) => {
     slug: offer.slug,
     groep,
     naam: actueelFeestproduct?.naam ?? titel[0],
-    foto: `/images/dirks/${offer.slug}.webp`,
+    foto: actueelFeestproduct?.afbeelding ?? (fishIndex !== undefined ? gourmetFishPhotos[presetFish[fishIndex]] : `/images/dirks/${offer.slug}.webp`),
     prijs: actueelFeestproduct ? actueelFeestproduct.prijsCents / 100 : fishIndex !== undefined ? GOURMET_RETAIL_CENTS_PER_100G[fishIndex] / 100 : offer.targetCents / 100,
     bronPrijs: offer.sourceCents / 100,
     per100g: fishIndex !== undefined,

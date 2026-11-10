@@ -2,7 +2,8 @@
 
 import { useState, type FormEvent } from "react";
 import { gourmetDefaults, gourmetFish, gourmetLanguage, gourmetQuote, gourmetRequestCopy, type Portions } from "@/lib/gourmet-request";
-import { gourmetRates, MARINADE_CENTS_PER_100G } from "@/lib/gourmet-pricing";
+import { gourmetFishPhotos, gourmetRates, MARINADE_CENTS_PER_100G } from "@/lib/gourmet-pricing";
+import { StaticResponsiveImage } from "@/components/StaticResponsiveImage";
 import { feestdagenBedrag } from "@/lib/feestdagen-producten";
 import { addCartSelection, useCatalogRequest } from "@/lib/catalog-request-store";
 import { cartText } from "@/lib/cart-copy";
@@ -37,7 +38,7 @@ export function GourmetRequest({locale, preset}: {locale:string; preset:string})
     const form = event.currentTarget;
     const values = new FormData(form);
     const { portions, marinated } = readSelection(form);
-    const data = new URLSearchParams({kind:"gourmet", packaging:"standard", people:String(values.get("people") ?? "")});
+    const data = new URLSearchParams({kind:"gourmet", people:String(values.get("people") ?? "")});
     for (const [id,weight] of Object.entries(portions)) {
       data.append("fish",id);
       data.set("weight-" + id,weight);
@@ -49,7 +50,6 @@ export function GourmetRequest({locale, preset}: {locale:string; preset:string})
   return <form className="gourmet-builder" aria-label={t.title} action="/api/samenstellen" method="post" target="_blank"
     onSubmit={submit} onChange={event=>{setSelection(readSelection(event.currentTarget));setError(false);}}>
     <input type="hidden" name="kind" value="gourmet"/><input type="hidden" name="locale" value={locale}/>
-    <input type="hidden" name="packaging" value="standard"/>
     <div className="gourmet-selections">
       <label className="gourmet-people">{t.people}<input name="people" type="number" inputMode="numeric" required min="1" max="200" defaultValue={initial.people}/></label>
       <fieldset><legend>{t.fish}</legend>
@@ -60,6 +60,7 @@ export function GourmetRequest({locale, preset}: {locale:string; preset:string})
             <label className="gourmet-toggle">
               <input type="checkbox" name="fish" value={fish.id} defaultChecked={initial.portions[fish.id] !== undefined} aria-label={name}/>
               <span><strong>{name}</strong><small>{money(gourmetRates[fish.id])} {t.unit}</small></span>
+              <StaticResponsiveImage src={gourmetFishPhotos[fish.id]} alt="" width={120} height={80} sizes="88px" />
             </label>
             <div className="gourmet-fish-options">
               <label>{t.grams}<span className="sr-only"> · {name}</span>
@@ -81,7 +82,6 @@ export function GourmetRequest({locale, preset}: {locale:string; preset:string})
         <dl><div><dt>{t.weight}</dt><dd>{quote.grams} g</dd></div>
           <div><dt>{t.subtotal}</dt><dd>{money(quote.fishCents)}</dd></div>
           <div><dt>{t.marinade}</dt><dd>{money(quote.marinadeCents)}</dd></div>
-          <div><dt>{t.standard}</dt><dd>{t.free}</dd></div>
           <div className="gourmet-total"><dt>{t.total}</dt><dd>{money(quote.total)}</dd></div>
         </dl>
       </> : <p>{Object.keys(selection.portions).length ? t.invalid : t.empty}</p>}</div>

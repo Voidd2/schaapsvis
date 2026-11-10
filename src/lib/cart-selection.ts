@@ -52,13 +52,13 @@ export function selectionQuote(data: URLSearchParams, locale: string): Quote | n
   }
   const fish = data.getAll("fish"), people = data.get("people") || "";
   if (kind === "gourmet") {
-    if (!/^[1-9]\d*$/.test(people) || Number(people) > 200 || data.get("packaging") !== "standard") return null;
+    if (!/^[1-9]\d*$/.test(people) || Number(people) > 200 || (data.has("packaging") && data.get("packaging") !== "standard")) return null;
     const portions = Object.fromEntries(fish.map(id => [id, data.get("weight-" + id) ?? ""]));
     const quote = gourmetQuote(portions, data.getAll("marinade"));
     if (!quote) return null;
     const t = gourmetRequestCopy(locale);
     return { title: t.summary,
-      lines: [t.people + ": " + people, ...gourmetLines(quote, locale), t.standard + " · " + t.free],
+      lines: [t.people + ": " + people, ...gourmetLines(quote, locale)],
       cents: quote.total, incomplete: false };
   }
   if (kind !== "platter") return null;

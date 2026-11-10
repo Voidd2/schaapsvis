@@ -59,7 +59,8 @@ for (const locale of ["nl", "en", "de"]) {
   const q = gourmetQuote(request.portions);
   assert.equal(q.grams,350);
   assert.equal(q.total,1175);
-  assert.ok(message.includes(t.standard) && message.includes("350 g") && message.includes("250 g"));
+  assert.ok(message.includes("350 g") && message.includes("250 g"));
+  assert.doesNotMatch(message, /bakjes|tubs|Standardschalen/i);
   assert.ok(message.includes(locale === "en" ? "11.75" : "11,75"));
   assert.ok(message.includes(t.dateUnknown));
   const seasoned = new URL(gourmetRequestLink(locale,{...request,marinated:["seabass"]})).searchParams.get("text");
@@ -237,8 +238,8 @@ for (const locale of ["nl","en","de"]) for (const source of FEESTDAGEN_PRODUCTEN
   assert.ok(fs.existsSync(path.join("public", localized.afbeelding)));
   if(source.slug === "visschotel-luxe-10-14-pers") assert.match(localized.naam, /10–14/);
 }
-for (const salad of SALAD_REQUESTS.filter(s => s.image)) assert.ok(fs.existsSync(path.join("public", salad.image)));
-assert.equal(new Set(SALAD_REQUESTS.filter(s => s.image).map(s => s.image)).size, 4);
+for (const salad of SALAD_REQUESTS) assert.ok(salad.image && fs.existsSync(path.join("public", salad.image)), salad.slug);
+assert.equal(new Set(SALAD_REQUESTS.map(s => s.image)).size, SALAD_REQUESTS.length);
 for (const salad of SALAD_REQUESTS) {
   const portions = {items:{[salad.slug]:{quantity:2}},date:""};
   assert.deepEqual(requestTotal(portions), {cents:2*salad.cents,incomplete:false});
@@ -248,6 +249,8 @@ for (const salad of SALAD_REQUESTS) {
 const { cartOptions, selectionQuote } = load("src/lib/cart-selection.ts");
 const grill = new URLSearchParams({kind:"gourmet", people:"2", packaging:"standard", "weight-tuna":"150", "weight-halibut":"200"});
 grill.append("fish","halibut"); grill.append("fish","tuna"); grill.append("marinade","halibut");
+assert.equal(selectionQuote(new URLSearchParams(cartOptions(grill)),"nl").cents,1400);
+grill.delete("packaging");
 assert.equal(selectionQuote(new URLSearchParams(cartOptions(grill)),"nl").cents,1400);
 grill.append("fish","plaice"); grill.set("weight-plaice","100");
 assert.equal(selectionQuote(new URLSearchParams(cartOptions(grill)),"nl"),null);

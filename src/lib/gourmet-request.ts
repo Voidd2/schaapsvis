@@ -14,10 +14,8 @@ export const gourmetFish = [
 
 const copy = {
   nl: {
-    order: "Bestel gourmetschotel", title: "Stel uw gourmetschotel samen", intro: "Kies per soort het gewicht voor uw hele gezelschap. We verpakken de vis in gewone bakjes.", marinade: "Marinade", plain: "Zonder marinade", marinated: "Met marinade",
+    order: "Bestel gourmetschotel", title: "Stel uw gourmetschotel samen", intro: "Kies uw vis voor het gourmetpannetje en vul per soort het gewicht in. U betaalt de winkelprijs en ziet direct het totaal.", marinade: "Marinade", plain: "Zonder marinade", marinated: "Met marinade",
     people: "Aantal personen", fish: "Kies uw vis", unit: "per 100 g", grams: "Gewicht in gram",
-    packaging: "Hoe wilt u uw vis meekrijgen?", standard: "Standaardbakjes", premium: "Schaal of verpakking op maat", free: "gratis",
-    customNote: "Eventuele meerprijs in overleg via WhatsApp.",
     summary: "Uw visgourmet", empty: "Kies een vissoort om uw samenstelling te bekijken.", invalid: "Vul voor elke gekozen soort een heel aantal gram boven nul in.",
     subtotal: "Vis", weight: "Totaalgewicht", total: "Totaal", date: "Gewenste afhaaldatum (optioneel)",
     wishes: "Wensen of allergieën (optioneel)", placeholder: "Bijvoorbeeld een allergie of een wens voor de bereiding",
@@ -25,10 +23,8 @@ const copy = {
     greeting: "Hallo Schaap’s Vishandel, ik wil graag deze visgourmet bespreken.", dateUnknown: "Afhaaldatum nog af te spreken",
   },
   en: {
-    order: "Order a seafood gourmet platter", title: "Build your seafood gourmet platter", intro: "Choose the total weight of each variety for your group. We pack the seafood in standard tubs.", marinade: "Marinade", plain: "Without marinade", marinated: "With marinade",
+    order: "Order a seafood gourmet platter", title: "Build your seafood gourmet platter", intro: "Pick your seafood for the tabletop grill and choose the weight of each variety. See your total at our fish-counter prices.", marinade: "Marinade", plain: "Without marinade", marinated: "With marinade",
     people: "Number of people", fish: "Choose your seafood", unit: "per 100 g", grams: "Weight in grams",
-    packaging: "How would you like it packed?", standard: "Standard tubs", premium: "Custom platter or packaging", free: "free",
-    customNote: "Any extra cost is agreed via WhatsApp.",
     summary: "Your seafood selection", empty: "Choose a variety to see your selection.", invalid: "Enter a positive whole number of grams for each variety.",
     subtotal: "Seafood", weight: "Total weight", total: "Total", date: "Preferred collection date (optional)",
     wishes: "Preferences or allergies (optional)", placeholder: "For example, an allergy or preparation request",
@@ -36,10 +32,8 @@ const copy = {
     greeting: "Hello Schaap’s Vishandel, I would like to discuss this seafood selection.", dateUnknown: "Collection date to be agreed",
   },
   de: {
-    order: "Gourmetplatte bestellen", title: "Gourmetplatte zusammenstellen", intro: "Wählen Sie je Sorte das Gesamtgewicht für Ihre Gruppe. Wir verpacken den Fisch in regulären Schalen.", marinade: "Marinade", plain: "Ohne Marinade", marinated: "Mit Marinade",
+    order: "Gourmetplatte bestellen", title: "Gourmetplatte zusammenstellen", intro: "Wählen Sie die Sorten für Ihren Tischgrill und geben Sie jeweils das Gewicht an. Den Gesamtpreis zu unseren Ladenpreisen sehen Sie sofort.", marinade: "Marinade", plain: "Ohne Marinade", marinated: "Mit Marinade",
     people: "Personenzahl", fish: "Fischsorten wählen", unit: "pro 100 g", grams: "Gewicht in Gramm",
-    packaging: "Wie möchten Sie Ihren Fisch verpackt haben?", standard: "Standardschalen", premium: "Individuelle Platte oder Verpackung", free: "kostenlos",
-    customNote: "Einen möglichen Aufpreis vereinbaren wir per WhatsApp.",
     summary: "Ihre Fischauswahl", empty: "Wählen Sie eine Fischsorte, um Ihre Zusammenstellung zu sehen.", invalid: "Geben Sie für jede gewählte Sorte ein positives Gewicht in ganzen Gramm ein.",
     subtotal: "Fisch", weight: "Gesamtgewicht", total: "Gesamtpreis", date: "Gewünschter Abholtermin (optional)",
     wishes: "Wünsche oder Allergien (optional)", placeholder: "Zum Beispiel eine Allergie oder ein Wunsch zur Zubereitung",
@@ -97,7 +91,7 @@ export function gourmetRequestLink(locale: string, request: Request): string | n
   if (request.date && (!/^\d{4}-\d{2}-\d{2}$/.test(request.date) || !Number.isFinite(Date.parse(request.date)) || new Date(request.date).toISOString().slice(0, 10) !== request.date)) return null;
   const lines = [t.greeting, `${t.people}: ${people}`,
     ...gourmetLines(quote,locale),
-    `${t.weight}: ${quote.grams} g`, `${t.standard} · ${t.free}`, `${t.total}: ${money(quote.total)}`,
+    `${t.weight}: ${quote.grams} g`, `${t.total}: ${money(quote.total)}`,
     request.date ? `${t.date.replace(/ \(.*\)$/, "")}: ${request.date.split("-").reverse().join("-")}` : t.dateUnknown,
   ];
   if (request.wishes.trim()) lines.push(`${t.wishes.replace(/ \(.*\)$/, "")}: ${request.wishes.trim().slice(0, 700)}`);

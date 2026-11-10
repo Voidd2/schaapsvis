@@ -8,8 +8,8 @@ export const counterGuides: BlogPost[] = [
     "datumLabel": "9 november 2026",
     "leestijd": "2 min",
     "categorie": "Visweetjes",
-    "fotoUrl": "/images/dirks/gourmet-schotel-3-4-pers.webp",
-    "fotoAlt": "Gourmetschaal met verschillende soorten vis",
+    "fotoUrl": "/images/editorial/gourmet-3-4-studio.webp",
+    "fotoAlt": "Stukjes zalm, tonijn en kabeljauw met gepelde garnalen op een witte ondergrond",
     "secties": [
       {
         "kop": "Met twee of vier soorten",

@@ -4,6 +4,15 @@ export const gourmetRates = {
   halibut: 300, seabass: 300, squid: 275,
 } as const;
 export const MARINADE_CENTS_PER_100G = 25;
+export const gourmetFishPhotos: Record<keyof typeof gourmetRates, string> = {
+  salmon: "/images/editorial/gourmet-zalm-naturel.webp",
+  tuna: "/images/editorial/gourmet-tonijn-naturel.webp",
+  cod: "/images/editorial/gourmet-kabeljauw-naturel.webp",
+  "black-tigers": "/images/schaaps/gepelde-black-tiger-garnalen.webp",
+  halibut: "/images/editorial/gourmet-heilbot-naturel.webp",
+  seabass: "/images/editorial/gourmet-zeebaars-naturel.webp",
+  squid: "/images/editorial/gourmet-inktvisringen-naturel.webp",
+};
 export const presetFish = ["salmon", "tuna", "cod", "black-tigers"] as const;
 export const GOURMET_RETAIL_CENTS_PER_100G = presetFish.map(id => gourmetRates[id]);
 export const LOOSE_GOURMET_FISH_INDEX: Record<string, number> = { "gourmetstukjes-zalm": 0, "gourmetstukjes-tonijn": 1, "gourmet-stukjes-kabeljauw": 2 };
@@ -23,9 +32,10 @@ export function gourmetPortionText(slug: string, locale: string) {
   if (!portion) return "";
   const grams = portion.grams.reduce<number>((sum, weight) => sum + weight, 0);
   const weight = grams === 1000 ? "1 kg" : grams === 1500 ? (locale === "en" ? "1.5 kg" : "1,5 kg") : `${grams} g`;
-  return locale === "en" ? `${weight} of seafood in standard tubs. Choose the weight and marinade for each variety.`
-    : locale === "de" ? `${weight} Fisch und Meeresfrüchte in Standardschalen. Gewicht und Marinade je Sorte wählbar.`
-    : `${weight} aan vis in standaardbakjes. Gewicht en marinade kiest u per soort.`;
+  const surcharge = new Intl.NumberFormat(locale, { style: "currency", currency: "EUR" }).format(MARINADE_CENTS_PER_100G / 100);
+  return locale === "en" ? `${weight} of seafood. Adjust the weight per variety. Optional marinade adds ${surcharge} per 100 g of the selected variety.`
+    : locale === "de" ? `${weight} Fischauswahl. Gewicht je Sorte anpassbar. Auf Wunsch mit Marinade für zusätzlich ${surcharge} pro 100 g der gewählten Sorte.`
+    : `${weight} vis naar keuze. Pas het gewicht per soort aan. Marinade kost ${surcharge} extra per 100 g van de gekozen soort.`;
 }
 
 export function gourmetOrderHref(locale: string, slug = "") {
