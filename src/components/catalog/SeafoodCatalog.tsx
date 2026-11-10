@@ -8,7 +8,7 @@ import { catalogText } from "@/lib/catalog-copy";
 import { platterPhotoAlt, platterPrice, platterPresentation } from "@/lib/platter-presentation";
 import { isDeliTrio } from "@/lib/deli-trio";
 import { DeliTrio, ProductQuantity } from "./RequestControls";
-import { CatalogPhoto, GiftRequest, GourmetOrderLink } from "./CatalogEnhancements";
+import { CatalogPhoto, GourmetOrderLink } from "./CatalogEnhancements";
 
 import { giftCopy } from "@/lib/gift-copy";
 import { giftRequestCopy } from "@/lib/gift-request";
@@ -88,6 +88,16 @@ export function SeafoodCatalog({ locale, festive = false }: Props) {
 }
 
 function GiftIdeas({ locale }: { locale:string }) {
- const c = giftCopy(locale), t = giftRequestCopy(locale);
- return <section id="geschenken" className="catalog-gifts seafood-section" aria-labelledby="gift-title"><div className="catalog-heading"><h2 id="gift-title">{c.options}</h2><p>{c.note}</p></div><div className="seafood-grid">{[1,2].map(index => { const [name, description, image, alt] = c.items[index]; return <article key={name}><Image src={image} alt={alt} width={1200} height={800} sizes="(max-width:640px) 100vw, 33vw" /><p className="mt-2 text-sm">{index === 1 ? t.trioExample : t.example}</p><h3>{name}</h3><p>{description}</p>{index === 1 && <p className="seafood-price">{feestdagenBedrag(catalogProduct("luxe-trio-klein",locale).prijsCents,locale)}</p>}<GiftRequest locale={locale} product={name} kind={index === 1 ? "trio" : "custom"} /></article>; })}</div></section>;
+  const c = giftCopy(locale);
+  const [name, description, image, alt] = c.items.trio;
+  return <section id="geschenken" className="catalog-gifts seafood-section" aria-labelledby="gift-title">
+    <div className="catalog-heading"><h2 id="gift-title">{c.options}</h2><p>{c.note}</p></div>
+    <div className="seafood-grid"><article>
+      <Image src={image} alt={alt} width={1200} height={800} sizes="(max-width:640px) 100vw, 33vw" />
+      <p className="mt-2 text-sm">{giftRequestCopy(locale).trioExample}</p>
+      <h3>{name}</h3><p>{description}</p>
+      <p className="seafood-price">{feestdagenBedrag(catalogProduct("luxe-trio-klein",locale).prijsCents,locale)}</p>
+      <CustomAssembly locale={locale} product={name} mode="gift-trio" />
+    </article></div>
+  </section>;
 }

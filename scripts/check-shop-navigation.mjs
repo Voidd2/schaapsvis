@@ -121,7 +121,7 @@ for (const locale of ["nl", "en", "de"]) {
     assert.equal(packageMessage.includes(t.packageFish[3]), size === 2);
     assert.ok(!packageMessage.includes(t.voucherLine));
   }
-  for (const kind of ["package", "trio", "custom"]) {
+  for (const kind of ["package", "trio"]) {
     const withVoucher = new URL(giftRequestLink(locale, { ...draft, kind, voucher: true, voucherAmount: "37,50" })).searchParams.get("text");
     assert.ok(withVoucher.includes(`${t.voucherLine}:`));
     assert.ok(withVoucher.includes(locale === "en" ? "37.50" : "37,50"));
@@ -130,10 +130,11 @@ for (const locale of ["nl", "en", "de"]) {
     assert.ok(!unchecked.includes(t.voucherLine));
   }
   const wishes = "Extra kaart & verpakking? #test\nGraag bespreken.";
-  const custom = new URL(giftRequestLink(locale, { ...draft, kind: "custom", wishes }));
-  assert.ok(custom.searchParams.get("text").includes(wishes));
-  assert.equal(custom.hash, "");
-  assert.ok(custom.searchParams.get("text").includes(t.note));
+  assert.equal(giftRequestLink(locale, { ...draft, kind: "custom", wishes }), null);
+  const gift = new URL(giftRequestLink(locale, { ...draft, wishes }));
+  assert.ok(gift.searchParams.get("text").includes(wishes));
+  assert.equal(gift.hash, "");
+  assert.ok(gift.searchParams.get("text").includes(t.note));
 }
 assert.deepEqual(Object.values(platterFamilies).map(items => items.length), [4, 5, 3]);
 const all = Object.values(platterFamilies).flat();
@@ -278,6 +279,13 @@ const trio = new URLSearchParams({kind:"assembly",mode:"fish-trio",slug:"luxe-tr
 assert.equal(selectionQuote(trio,"nl").cents,3245);
 trio.set("choice0","gravlax"); assert.equal(selectionQuote(trio,"nl"),null);
 assert.equal(selectionQuote(new URLSearchParams({kind:"assembly",mode:"package",size:"1"}),"nl"),null);
+const removedGift = new URLSearchParams({kind:"assembly",mode:"custom",fish:"eel","weight-eel":"100",box:"yes"});
+assert.equal(selectionQuote(removedGift,"nl"),null);
+assert.equal(selectionQuote(new URLSearchParams(cartOptions(removedGift)),"nl"),null);
+const giftTrio = new URLSearchParams({kind:"assembly",mode:"gift-trio",choice0:"eel",choice1:"shrimp",choice2:"salmon"});
+const restoredGifts = normalizeRequest({selections:[{id:"old",options:removedGift.toString()},{id:"trio",options:giftTrio.toString()}]});
+assert.deepEqual(restoredGifts.selections.map(line=>line.id),["trio"]);
+assert.equal(restoredGifts.reselect,true);
 const salads = new URLSearchParams({kind:"assembly",mode:"salad-trio",slug:"salade-trio",choice0:"mango",choice1:"mango",choice2:"wasabi"});
 for (const locale of ["nl","en","de"]) {
   assert.equal(selectionQuote(salads,locale).cents,1199);

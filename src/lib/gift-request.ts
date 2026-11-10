@@ -59,7 +59,7 @@ const COPY = {
 } as const;
 
 export function giftRequestCopy(locale: string) { return COPY[locale === "en" || locale === "de" ? locale : "nl"]; }
-export type GiftRequest = { product: string; kind: "package" | "trio" | "custom"; size: number; fish: number[]; wishes: string; extras?: number[]; voucher?: boolean; voucherAmount?: string };
+export type GiftRequest = { product: string; kind: "package" | "trio"; size: number; fish: number[]; wishes: string; extras?: number[]; voucher?: boolean; voucherAmount?: string };
 
 export function giftVoucherCents(value: string): number | null {
   const text = value.trim();
@@ -78,7 +78,7 @@ export function giftPackageContents(locale: string, size: number) {
 export function giftQuote(locale: string, request: Pick<GiftRequest, "kind" | "size" | "fish" | "extras">) {
   const { kind, size, fish, extras = [] } = request;
   const t = giftRequestCopy(locale);
-  if (kind === "custom") return null;
+  if (kind !== "trio" && kind !== "package") return null;
   const price = kind === "trio" ? trioPriceCents(size, fish) : packagePriceCents(size, extras);
   if (price === null) return null;
   if (kind === "trio") {
@@ -97,26 +97,23 @@ export function giftQuote(locale: string, request: Pick<GiftRequest, "kind" | "s
 export function giftRequestLink(locale: string, request: GiftRequest): string | null {
   const t = giftRequestCopy(locale);
   const quote = giftQuote(locale, request);
-  if (request.kind !== "custom" && !quote) return null;
+  if (!quote) return null;
   const voucherCents = request.voucher ? giftVoucherCents(request.voucherAmount ?? "") : null;
   if (request.voucher && voucherCents === null) return null;
-  const lines = [t.greeting, request.product];
-  if (quote) {
-    const contentLabel = request.kind === "trio" ? t.fishLine : t.contents;
-    lines.push(
-      `${t.sizeLine}: ${t.sizes[request.size]}`,
-      `${contentLabel}: ${quote.lines.join(", ")}`,
-      `${t.total}: ${quote.total} g`,
-      `${t.price}: ${feestdagenBedrag(quote.price, locale)} · ${t.packaging}`,
-    );
-  }
+  const contentLabel = request.kind === "trio" ? t.fishLine : t.contents;
+  const lines = [t.greeting, request.product,
+    `${t.sizeLine}: ${t.sizes[request.size]}`,
+    `${contentLabel}: ${quote.lines.join(", ")}`,
+    `${t.total}: ${quote.total} g`,
+    `${t.price}: ${feestdagenBedrag(quote.price, locale)} · ${t.packaging}`,
+  ];
   if (voucherCents !== null) {
     lines.push(`${t.voucherLine}: ${feestdagenBedrag(voucherCents, locale)}`);
-    if (quote) lines.push(`${t.grandTotal}: ${feestdagenBedrag(quote.price + voucherCents, locale)}`);
+    lines.push(`${t.grandTotal}: ${feestdagenBedrag(quote.price + voucherCents, locale)}`);
   }
   const wishes = request.wishes.trim().slice(0, 700);
   if (wishes) lines.push(`${t.wishesLine}: ${wishes}`);
-  if (request.kind === "custom" || wishes) lines.push(t.customCost);
+  if (wishes) lines.push(t.customCost);
   lines.push(t.note);
   return whatsappLink(lines.join("\n"));
 }
