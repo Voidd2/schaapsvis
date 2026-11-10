@@ -17,9 +17,9 @@ const COPY = {
 export const productCopy = (locale: string) => {
   const copy = COPY[siteLanguage(locale)];
   const salmonNote = {
-    nl: "Lees over de kwekers, herkomst en traceerbaarheid van ei tot eindproduct.",
-    en: "Read about the farming families, origin and traceability from egg to finished product.",
-    de: "Erfahren Sie mehr über Familienbetriebe, Herkunft und Rückverfolgbarkeit vom Ei bis zum Endprodukt.",
+    nl: "Ontdek waar onze zalm vandaan komt en hoe u de herkomst tot aan de kwekerij kunt volgen.",
+    en: "Discover where our salmon comes from and how it can be traced back to the farm.",
+    de: "Erfahren Sie, woher unser Lachs kommt und wie er sich bis zur Zucht zurückverfolgen lässt.",
   }[siteLanguage(locale)];
   return { ...copy, salmonNote };
 };

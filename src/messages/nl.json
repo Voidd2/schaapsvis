@@ -88,7 +88,7 @@
   "varlaksHighlight": {
     "title": "VÅRLAKS — ASC-gecertificeerde zalm uit Noorwegen",
     "bullet1": "Geen antibiotica, geen GMO, geen hormonen",
-    "bullet2": "Familieboerderijen boven de poolcirkel in Noorwegen",
+    "bullet2": "Een familiebedrijf boven de poolcirkel in Noorwegen",
     "bullet3": "Volledig traceerbaar van eitje tot filet",
     "link": "Lees meer over Varlaks →"
   },
@@ -125,12 +125,12 @@
   "varlaksPage": {
     "heroTitle": "VÅRLAKS-zalm uit Noord-Noorwegen",
     "heroSub": "Onze VÅRLAKS-zalm is ASC-gecertificeerd en komt uit Noord-Noorwegen, boven de poolcirkel.",
-    "story": "We hadden al jaren een goed assortiment. Maar toen we Varlaks leerden kennen, wisten we dat dit iets anders was. Geen groot bedrijf, geen anonieme kwekerij — maar kleinschalige familieboerderijen boven de poolcirkel in Noorwegen, waar de zalm gewoon de ruimte krijgt om op te groeien. Langzaam, in schoon water, zonder shortcuts. Dat proef je. De structuur is steviger, de smaak puurder. Geen toevoegingen die de smaak maskeren — want die zijn er simpelweg niet. We zijn trots dat we dit bij Schaap's Vis kunnen aanbieden. Kom langs en proef het verschil.",
+    "story": "Onze VÅRLAKS-zalm komt van een familiebedrijf in Noord-Noorwegen. Daar groeit de zalm op in het koude water van de fjord.",
     "featuresTitle": "Wat maakt Varlaks bijzonder?",
     "f1title": "Boven de Poolcirkel gekweekt",
     "f1text": "De zalm groeit op in ijskoude, zuurstofrijke wateren van Noord-Noorwegen. De stroming van koud bergwater houdt het water puur en schoon — ideale omstandigheden voor zalm die langzaam en natuurlijk opgroeit.",
-    "f2title": "Familieboerderijen, geen industrie",
-    "f2text": "Varlaks werkt uitsluitend met zorgvuldig geselecteerde familiebedrijven. Elk jaar worden de boerderijen persoonlijk bezocht om kwaliteit en duurzaamheid te garanderen. Van eitje tot eindproduct — volledig traceerbaar.",
+    "f2title": "Een familiebedrijf in Noord-Noorwegen",
+    "f2text": "Onze zalm is van ei tot filet te volgen, tot aan de kwekerij boven de poolcirkel.",
     "f3title": "Geen antibiotica, geen GMO, geen hormonen",
     "f3text": "Dankzij de lage bezetting en de zuivere omgeving hebben antibiotica simpelweg geen plek in dit kweekconcept. De zalm groeit op met natuurlijk voer, veel ruimte en geen chemische toevoegingen.",
     "f4title": "Volledig traceerbaar",
@@ -148,8 +148,8 @@
         "d": "Boven de poolcirkel, bij Bodø. Koud, schoon en zuurstofrijk water — een van de weinige plekken waar zalm langzaam mag groeien."
       },
       {
-        "t": "Wenberg en Edelfarm",
-        "d": "Twee familiebedrijven: Wenberg Fiskeoppdrett in Fauske en Edelfarm in Saltdal. Weinig vis per kooi, geen grootschalige industrie."
+        "t": "De kwekerij",
+        "d": "Een familiebedrijf kweekt onze zalm in het koude fjordwater van Noord-Noorwegen."
       },
       {
         "t": "ASC-gecertificeerd",
@@ -196,7 +196,7 @@
     "feitHerkomstLabel": "Herkomst",
     "feitHerkomstWaarde": "Skjerstadfjorden, Noorwegen",
     "feitKeurmerkLabel": "Keurmerk",
-    "feitKeurmerkWaarde": "ASC (volgens VÅRLAKS)",
+    "feitKeurmerkWaarde": "ASC",
     "feitTeKoopLabel": "Te koop",
     "feitTeKoopWaarde": "Winkel, markt, Voorschoten",
     "bestelKnop": "Varlaks bestellen",
@@ -264,7 +264,7 @@
     "cert4": "Keurmerken per product",
     "cert4desc": "Een keurmerk zegt iets over de productiemethode of visserij. BIO, ASC en MSC zijn verschillende keurmerken.",
     "varlaksTitle": "VÅRLAKS — zalm met ASC-keurmerk",
-    "varlaksText": "Onze VÅRLAKS-zalm komt van familiekwekers in Noord-Noorwegen en draagt het ASC-keurmerk voor verantwoorde viskweek.",
+    "varlaksText": "Onze VÅRLAKS-zalm komt van een familiebedrijf in Noord-Noorwegen en draagt het ASC-keurmerk voor verantwoorde viskweek.",
     "varlaksLink": "Lees het volledige Varlaks verhaal →",
     "listTitle": "Onze duurzame keuzes",
     "listSub": "In ons assortiment: VÅRLAKS-zalm met ASC en Hollandse garnalen met MSC. We werken eraan om verantwoorde kweek met meer vissoorten verder te ontwikkelen.",
@@ -340,7 +340,7 @@
     "assortimentAantalEen": "{aantal} soort",
     "biologischLabel": "Herkomst",
     "biologischKop": "Trots op onze VÅRLAKS-zalm",
-    "biologischTekst": "Onze VÅRLAKS-zalm komt van ASC-gecertificeerde kwekerijen in Noord-Noorwegen. Onze Hollandse garnalen dragen het MSC-keurmerk voor duurzame wildvangst. Aan de toonbank vertellen we u graag waar uw vis vandaan komt.",
+    "biologischTekst": "Onze VÅRLAKS-zalm uit Noord-Noorwegen draagt het ASC-keurmerk voor verantwoorde viskweek. Onze Hollandse garnalen uit de Noordzee dragen het MSC-keurmerk voor duurzame wildvangst.",
     "biologischLink": "Over onze herkomst",
     "varlaksLink": "Over Varlaks zalm",
     "reviewLabel": "Google",

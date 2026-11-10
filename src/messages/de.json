@@ -88,7 +88,7 @@
   "varlaksHighlight": {
     "title": "VÅRLAKS — ASC-zertifizierter Lachs aus Norwegen",
     "bullet1": "Keine Antibiotika, kein GMO, keine Hormone",
-    "bullet2": "Familienbetriebe oberhalb des Polarkreises in Norwegen",
+    "bullet2": "Ein Familienbetrieb nördlich des Polarkreises in Norwegen",
     "bullet3": "Vollständig rückverfolgbar vom Ei bis zur Filete",
     "link": "Mehr über Varlaks →"
   },
@@ -124,13 +124,13 @@
   },
   "varlaksPage": {
     "heroTitle": "VÅRLAKS-Lachs aus Nordnorwegen",
-    "heroSub": "Laut VÅRLAKS ist dieser Lachs ASC-zertifiziert. Fragen Sie uns nach aktueller Herkunft, Zertifizierung und Verfügbarkeit des Lachses in der Theke.",
-    "story": "Wir hatten bereits ein gutes Sortiment. Aber als wir Varlaks kennenlernten, wussten wir, dass dies etwas anderes war. Kein großes Unternehmen, keine anonyme Fischfarm — sondern kleine Familienbetriebe oberhalb des Polarkreises in Norwegen, wo der Lachs einfach den Platz bekommt, um aufzuwachsen. Langsam, in sauberem Wasser, ohne Abkürzungen. Das schmeckt man.",
+    "heroSub": "Unser VÅRLAKS-Lachs ist ASC-zertifiziert und stammt aus Nordnorwegen, nördlich des Polarkreises.",
+    "story": "Unser VÅRLAKS-Lachs stammt aus einem Familienbetrieb in Nordnorwegen. Dort wächst der Lachs im kalten Wasser des Fjords auf.",
     "featuresTitle": "Was macht Varlaks besonders?",
     "f1title": "Aufgezogen oberhalb des Polarkreises",
     "f1text": "Der Lachs wächst in den eiskalten, sauerstoffreichen Gewässern Nordnorwegens auf. Ideale Bedingungen für Lachs, der langsam und natürlich aufwächst.",
-    "f2title": "Familienbetriebe, keine Industrie",
-    "f2text": "Varlaks arbeitet ausschließlich mit sorgfältig ausgewählten Familienbetrieben. Jedes Jahr werden die Höfe persönlich besucht. Vom Ei bis zum Endprodukt — vollständig rückverfolgbar.",
+    "f2title": "Ein Familienbetrieb in Nordnorwegen",
+    "f2text": "Unser Lachs lässt sich vom Ei bis zum Filet und bis zur Zucht nördlich des Polarkreises zurückverfolgen.",
     "f3title": "Ohne Antibiotika, ohne GMO, ohne Hormone",
     "f3text": "Dank der geringen Besatzdichte und der reinen Umgebung haben Antibiotika in diesem Zuchtkonzept keinen Platz. Der Lachs wächst mit natürlichem Futter und ohne chemische Zusätze auf.",
     "f4title": "Vollständig rückverfolgbar",
@@ -148,8 +148,8 @@
         "d": "Nördlich des Polarkreises bei Bodø. Kaltes, sauberes, sauerstoffreiches Wasser — einer der wenigen Orte, an denen Lachs langsam wachsen darf."
       },
       {
-        "t": "Wenberg und Edelfarm",
-        "d": "Zwei Familienbetriebe: Wenberg Fiskeoppdrett in Fauske und Edelfarm in Saltdal. Wenig Fisch pro Netzgehege, keine Großindustrie."
+        "t": "Die Lachszucht",
+        "d": "Ein Familienbetrieb züchtet unseren Lachs im kalten Fjordwasser Nordnorwegens."
       },
       {
         "t": "ASC-zertifiziert",
@@ -196,7 +196,7 @@
     "feitHerkomstLabel": "Herkunft",
     "feitHerkomstWaarde": "Skjerstadfjord, Norwegen",
     "feitKeurmerkLabel": "Zertifikat",
-    "feitKeurmerkWaarde": "ASC (laut VÅRLAKS)",
+    "feitKeurmerkWaarde": "ASC",
     "feitTeKoopLabel": "Erhältlich",
     "feitTeKoopWaarde": "Laden, Markt, Voorschoten",
     "bestelKnop": "Varlaks bestellen",
@@ -264,7 +264,7 @@
     "cert4": "Siegel gelten für bestimmte Produkte",
     "cert4desc": "Ein Siegel sagt etwas über die Produktionsweise oder Fischerei aus. Bio, ASC und MSC sind unterschiedliche Standards.",
     "varlaksTitle": "VÅRLAKS — Lachs mit ASC-Zertifizierung",
-    "varlaksText": "Unser VÅRLAKS-Lachs stammt aus Familienbetrieben in Nordnorwegen und trägt das ASC-Siegel für verantwortungsvolle Fischzucht.",
+    "varlaksText": "Unser VÅRLAKS-Lachs stammt aus einem Familienbetrieb in Nordnorwegen und trägt das ASC-Siegel für verantwortungsvolle Fischzucht.",
     "varlaksLink": "Die vollständige Varlaks-Geschichte lesen →",
     "listTitle": "Unsere nachhaltigen Fischauswahl",
     "listSub": "Unser Sortiment umfasst VÅRLAKS-Lachs mit ASC und holländische Nordseegarnelen mit MSC. Wir möchten verantwortungsvolle Zucht für weitere Fischarten entwickeln.",
@@ -340,7 +340,7 @@
     "assortimentAantalEen": "{aantal} Sorte",
     "biologischLabel": "Herkunft",
     "biologischKop": "Stolz auf unseren VÅRLAKS-Lachs",
-    "biologischTekst": "Unser VÅRLAKS-Lachs kommt von ASC-zertifizierten Zuchtbetrieben in Nordnorwegen. Unsere Nordseegarnelen tragen das MSC-Siegel für nachhaltigen Wildfang. An der Theke erzählen wir Ihnen gern, woher Ihr Fisch kommt.",
+    "biologischTekst": "Unser VÅRLAKS-Lachs aus Nordnorwegen trägt das ASC-Siegel für verantwortungsvolle Fischzucht. Unsere Nordseegarnelen tragen das MSC-Siegel für nachhaltigen Wildfang.",
     "biologischLink": "Über die Herkunft",
     "varlaksLink": "Über Varlaks-Lachs",
     "reviewLabel": "Google",

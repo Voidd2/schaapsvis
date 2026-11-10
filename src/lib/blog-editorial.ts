@@ -121,7 +121,7 @@ export const BIJGEWERKTE_ARTIKELEN: Record<string, Partial<BlogPost>> = {
       {
         "kop": "Onze VÅRLAKS-zalm",
         "alineas": [
-          "Onze VÅRLAKS-zalm komt van familiekwekers in Noord-Noorwegen en heeft het ASC-keurmerk. De kwekers meten regelmatig de waterkwaliteit. De herkomst van de zalm is van ei tot filet te volgen."
+          "Onze VÅRLAKS-zalm komt van een familiebedrijf in Noord-Noorwegen en heeft het ASC-keurmerk. De kwekers meten regelmatig de waterkwaliteit. De herkomst van de zalm is van ei tot filet te volgen."
         ]
       },
       {
@@ -137,27 +137,27 @@ export const BIJGEWERKTE_ARTIKELEN: Record<string, Partial<BlogPost>> = {
     "excerpt": "Biologisch, verantwoorde kweek en duurzame wildvangst zijn niet hetzelfde. Zo leest u de aanduidingen bij uw vis.",
     "secties": [
       {
-        "kop": "Drie aanduidingen, verschillende vragen",
+        "kop": "De keurmerken op uw vis",
         "alineas": [
-          "Wilt u biologische vis, verantwoord gekweekte vis of duurzame wildvangst? Dat zijn verschillende wensen. Kijk welk keurmerk werkelijk bij het gekozen product hoort en vraag uitleg wanneer een aanduiding niet duidelijk is."
+          "Het etiket vertelt u hoe de vis is gekweekt of gevangen. BIO hoort bij biologische kweek, ASC bij verantwoorde kweek en MSC bij duurzame wildvangst."
         ]
       },
       {
         "kop": "Biologische kweek",
         "alineas": [
-          "Biologisch gaat over gecertificeerde kweek volgens biologische regels. Een herkomstverhaal of de naam van een leverancier vervangt die certificering niet. Vraag bij ons welke biologische producten momenteel beschikbaar zijn."
+          "Het Europese biokeurmerk voor vis geldt voor kweekvis. Het stelt onder meer eisen aan het voer en aan de ruimte die de vissen krijgen."
         ]
       },
       {
         "kop": "ASC en MSC",
         "alineas": [
-          "ASC gaat over verantwoorde aquacultuur; MSC over duurzame wildvangst en traceerbaarheid in de keten. ASC is niet hetzelfde als een biologische certificering. Ook MSC is geen biologisch keurmerk."
+          "Bij ASC wordt de kwekerij onafhankelijk gecontroleerd op onder meer waterkwaliteit, visgezondheid en werkomstandigheden. Bij MSC beoordelen controleurs het visbestand, de gevolgen van de vangst voor ander zeeleven en het beheer van de visserij."
         ]
       },
       {
-        "kop": "Zo helpen wij u kiezen",
+        "kop": "Onze zalm en garnalen",
         "alineas": [
-          "Aan onze toonbank of via WhatsApp bespreken we herkomst, beschikbaarheid en de informatie bij het specifieke product. Op onze biologische-vispagina vindt u de verschillen overzichtelijk naast elkaar."
+          "Onze VÅRLAKS-zalm komt van een ASC-gecertificeerd familiebedrijf in Noord-Noorwegen. Onze Hollandse garnalen worden in de Noordzee gevangen en dragen het MSC-keurmerk."
         ]
       }
     ]
@@ -199,7 +199,7 @@ export const BIJGEWERKTE_ARTIKELEN: Record<string, Partial<BlogPost>> = {
       {
         "kop": "Waarom we VÅRLAKS aanbieden",
         "alineas": [
-          "Onze VÅRLAKS-zalm groeit op bij familiekwekers in Noord-Noorwegen. Het ASC-keurmerk staat voor verantwoorde kweek. In de film ziet u de fjorden waar de kwekers werken."
+          "Onze VÅRLAKS-zalm groeit op bij een familiebedrijf in Noord-Noorwegen. Het ASC-keurmerk staat voor verantwoorde kweek. In de film ziet u de fjorden waar de kwekers werken."
         ]
       },
       {
