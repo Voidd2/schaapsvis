@@ -1,6 +1,7 @@
 "use client";
 import { Fragment, useEffect, useState } from "react";
 import { SignupVisitDetails } from "./SignupVisitDetails";
+import { signupSourceLabel } from "@/lib/signup-source";
 
 const copy = {
   nl: {
@@ -13,13 +14,7 @@ const copy = {
     changed: "Deze inschrijving is intussen gewijzigd. Bekijk de actuele gegevens en probeer het opnieuw.",
     removeError: "Verwijderen is niet gelukt. Probeer het opnieuw.",
     offers: "Kortingsmails",
-    source: "Inschrijfbron", unknown: "Bron niet vastgelegd", accountOnly: "Account zonder kortingsinschrijving",
-    sources: {
-      "varlaks-popup": "Pop-up op de VÅRLAKS-pagina", "locations-popup": "Pop-up op de locatiepagina",
-      "discount-form": "Kortingspagina · Aanmelden voor kortingen", "newsletter-form": "Nieuwsbriefformulier",
-      "account-registration": "Bij het aanmaken van een account", account: "Formulier tijdens ingelogd bezoek",
-      footer: "Nieuwsbrief onderaan de pagina",
-    },
+    source: "Inschrijfbron",
     subscribed: "Toestemming gegeven",
     pending: "Wacht op bevestiging",
     unsubscribed: "Afgemeld",
@@ -41,13 +36,7 @@ const copy = {
     changed: "This entry has changed. Review the latest details and try again.",
     removeError: "Could not remove this entry. Please try again.",
     offers: "Marketing emails",
-    source: "Signup source", unknown: "Source not recorded", accountOnly: "Account without a discount signup",
-    sources: {
-      "varlaks-popup": "VÅRLAKS page pop-up", "locations-popup": "Locations page pop-up",
-      "discount-form": "Discount signup page", "newsletter-form": "Newsletter form",
-      "account-registration": "During account registration", account: "Form during a signed-in visit",
-      footer: "Newsletter in the page footer",
-    },
+    source: "Signup source",
     subscribed: "Opted in",
     pending: "Awaiting confirmation",
     unsubscribed: "Unsubscribed",
@@ -69,13 +58,7 @@ const copy = {
     changed: "Dieser Eintrag wurde inzwischen geändert. Prüfen Sie die aktuellen Angaben und versuchen Sie es erneut.",
     removeError: "Der Eintrag konnte nicht entfernt werden. Bitte versuchen Sie es erneut.",
     offers: "Angebotsmails",
-    source: "Anmeldequelle", unknown: "Quelle nicht erfasst", accountOnly: "Konto ohne Rabatt-Anmeldung",
-    sources: {
-      "varlaks-popup": "Pop-up auf der VÅRLAKS-Seite", "locations-popup": "Pop-up auf der Standortseite",
-      "discount-form": "Anmeldeseite für Rabatte", "newsletter-form": "Newsletterformular",
-      "account-registration": "Bei der Kontoerstellung", account: "Formular während eines angemeldeten Besuchs",
-      footer: "Newsletter am Seitenende",
-    },
+    source: "Anmeldequelle",
     subscribed: "Eingewilligt",
     pending: "Bestätigung ausstehend",
     unsubscribed: "Abgemeldet",
@@ -102,13 +85,6 @@ const statusLabel = {
   unsubscribed: "unsubscribed",
   "not-subscribed": "noConsent",
 } as const;
-
-function signupSource(row: Entry, t: typeof copy.nl) {
-  if (!row.source && row.has_account && row.marketing === "not-subscribed") return t.accountOnly;
-  if (row.source?.startsWith("footer:/")) return `${t.sources.footer} · ${row.source.slice(7)}`;
-  if (row.source && Object.hasOwn(t.sources, row.source)) return t.sources[row.source as keyof typeof t.sources];
-  return t.unknown;
-}
 
 export function EmailDirectory({ locale }: { locale: string }) {
   const t = copy[locale === "de" || locale === "en" ? locale : "nl"];
@@ -191,7 +167,7 @@ export function EmailDirectory({ locale }: { locale: string }) {
             {entries.map(row => (
               <Fragment key={row.email}><tr className="border-t">
                 <td className="break-all py-3 pr-3"><button type="button" className="min-h-11 text-left text-sky-800 underline underline-offset-4" aria-expanded={opened===row.email} onClick={()=>setOpened(opened===row.email ? null : row.email)}>{row.email}</button></td>
-                <td className="break-words py-3 pr-3">{signupSource(row, t)}</td>
+                <td className="break-words py-3 pr-3">{signupSourceLabel(row.source, locale, Boolean(row.has_account) && row.marketing === "not-subscribed")}</td>
                 <td className="py-3">{t[statusLabel[row.marketing]]}
                   {row.marketing_at && <time className="block text-sm" dateTime={row.marketing_at}>{new Intl.DateTimeFormat(locale, {dateStyle:"medium", timeStyle:"short", timeZone:"Europe/Amsterdam"}).format(new Date(row.marketing_at))}</time>}
                 </td>
