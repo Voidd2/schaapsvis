@@ -1,4 +1,5 @@
 import { actionEmail, verificationCodeEmail, campaignEmail, accountEmailText } from "./email-templates.mjs";
+import { validPopupMeasurement, popupExposure, countNewPopupSubscription, popupReport } from "./popup-experiment.mjs";
 import { publicAnalyticsPath, analyticsTarget, analyticsReport } from "./analytics.mjs";
 import { clientDeviceInfo } from "./device-info.mjs";
 import { Pass, SigningMaterial } from "passmint";
@@ -579,12 +580,31 @@ async function collectAnalytics(request, env) {
   return json({ ok: true }, 202);
 }
 
+async function mayMeasurePopup(request, env, measurement) {
+  if (env.ANALYTICS_ENABLED !== "on" || !validPopupMeasurement(measurement)) return false;
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  return !env.ANALYTICS_EXCLUDED_IP_HASH || await digest(ip) !== env.ANALYTICS_EXCLUDED_IP_HASH;
+}
+
+async function collectPopupStage(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  const body = await readJson(request);
+  if (!validPopupMeasurement(body?.measurement) || !["shown","filled"].includes(body?.stage)) return json({ error: "invalid_event" }, 400);
+  if (!await mayMeasurePopup(request, env, body.measurement)) return json({ ok: true }, 202);
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  const key = await hmac(env.AUTH_PEPPER, `analytics:ip:${ip}`);
+  if (!await rateLimit(env.DB, key, 240, 15 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
+  await popupExposure(env.DB, body.measurement, nowIso().slice(0,10), body.stage === "filled").run();
+  return json({ ok: true }, 202);
+}
+
 async function adminAnalytics(request, env) {
   const admin = await requireAdmin(request, env);
   if (!admin) return json({ error: "forbidden" }, 403);
   const daysValue = Number(new URL(request.url).searchParams.get("days") || 30);
   const days = Number.isInteger(daysValue) ? Math.min(90, Math.max(1, daysValue)) : 30;
-  return json(await analyticsReport(env, days));
+  const report = await analyticsReport(env, days);
+  return json({ ...report, popup: await popupReport(env.DB, report.since, report.until) });
 }
 
 async function adminEmailAddresses(request, env) {
@@ -2052,7 +2072,7 @@ async function subscribeNewsletter(request, env) {
   const varlaksOffer = body?.form === "varlaks";
   // Already-open tabs may still submit the original offer's wording.
   const offerVersion = body?.consentVersion ?? "varlaks-weekly-offers-v1";
-  if (varlaksOffer && !["varlaks-weekly-offers-v1", "varlaks-weekly-offers-v2"].includes(offerVersion)) return json({ error: "consent_required" }, 400);
+  if (varlaksOffer && !["varlaks-weekly-offers-v1", "varlaks-weekly-offers-v2", "varlaks-weekly-offers-v3"].includes(offerVersion)) return json({ error: "consent_required" }, 400);
   const regionTag = body?.regionTag ?? null;
   const draftToken = typeof body?.draftToken === "string" ? body.draftToken : "";
   const validRegion = (discountsForm || varlaksOffer) && regionTag === null || ["leiden", "voorschoten", "wassenaar", "leidschendam", "regio-071", "elders"].includes(regionTag);
@@ -2078,6 +2098,15 @@ async function subscribeNewsletter(request, env) {
       WHERE newsletter_subscriptions.status!='subscribed' OR newsletter_subscriptions.confirmed_at IS NULL`)
       .bind(email, version, at, at, source, at, at),
   ];
+  const measurement = body?.measurement;
+  const recordConversion = varlaksOffer && offerVersion === "varlaks-weekly-offers-v3" && await mayMeasurePopup(request, env, measurement);
+  const metrics = [];
+  if (recordConversion) {
+    metrics.push(
+      popupExposure(env.DB, measurement, at.slice(0,10), true),
+      countNewPopupSubscription(env.DB, measurement, email),
+    );
+  }
   if (userId || regionTag) {
     statements.push(env.DB.prepare(`UPDATE newsletter_subscriptions SET user_id=COALESCE(?,user_id),
       region_tag=COALESCE(?,region_tag), updated_at=? WHERE email=?`).bind(userId, regionTag, at, email));
@@ -2086,7 +2115,14 @@ async function subscribeNewsletter(request, env) {
   statements.push(env.DB.prepare(`SELECT 1 AS saved FROM newsletter_subscriptions WHERE email=?
     AND status='subscribed' AND confirmed_at IS NOT NULL AND unsubscribed_at IS NULL`).bind(email));
   try {
-    const results = await env.DB.batch(statements);
+    let results;
+    try {
+      results = await env.DB.batch([...metrics, ...statements]);
+    } catch (error) {
+      // A missing analytics table must never prevent a signup during a rollout.
+      if (!metrics.length || !String(error).includes("varlaks_popup_v1")) throw error;
+      results = await env.DB.batch(statements);
+    }
     if (!results.at(-1)?.results?.[0]?.saved) return json({ error: "newsletter_unavailable" }, 503);
   } catch {
     return json({ error: "newsletter_unavailable" }, 503);
@@ -2398,6 +2434,7 @@ async function cleanupAnalytics(env) {
   const cutoff = new Date(Date.now() - 395 * 86_400_000).toISOString().slice(0, 10);
   try {
     await env.DB.prepare(`DELETE FROM site_analytics_daily WHERE day < ?`).bind(cutoff).run();
+    await env.DB.prepare("DELETE FROM varlaks_popup_v1 WHERE day < ?").bind(new Date(Date.now() - 90 * 86400000).toISOString().slice(0,10)).run();
     await env.DB.prepare(`DELETE FROM auth_rate_limits WHERE updated_at < ?`).bind(new Date(Date.now() - 30 * 86_400_000).toISOString()).run();
   } catch { /* A later scheduled run retries retention cleanup. */ }
 }
@@ -2481,6 +2518,7 @@ const memberWorker = {
     // public launch flag is set, require the site's own unlock cookie or its
     // platform-trusted owner-IP allowlist before exposing any account endpoint.
     if (!siteAccessAllowed(request, env)) return json({ error: "site_access_required" }, 403);
+    if (path === "/api/members/analytics/varlaks-popup" && method === "POST") return collectPopupStage(request, env);
     if (path === "/api/members/analytics" && method === "POST") return collectAnalytics(request, env);
     if (path === "/api/members/register" && method === "POST") return register(request, env);
     if (path === "/api/members/admin/register" && method === "POST") return registerAdministrator(request, env);

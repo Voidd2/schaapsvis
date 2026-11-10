@@ -2,9 +2,12 @@
 
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
+import { recordPopupStage, type PopupMeasurement } from "@/lib/varlaks-popup";
 import { discountSignupCopy } from "@/lib/discount-signup";
 
-export function DiscountSignup({ locale, varlaksOffer = false }: {locale: string; varlaksOffer?: boolean}) {
+type Offer = { headline: string; getMeasurement: () => PopupMeasurement | null };
+export function DiscountSignup({ locale, offer }: { locale: string; offer?: Offer }) {
+  const varlaksOffer = Boolean(offer);
   const t = discountSignupCopy(locale);
   const [state, setState] = useState<"idle" | "sending" | "success" | "error" | "limited">("idle");
 
@@ -18,7 +21,7 @@ export function DiscountSignup({ locale, varlaksOffer = false }: {locale: string
         method: "POST", credentials: "same-origin", headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
           email: form.get("email"), locale, form: varlaksOffer ? "varlaks" : "discounts",
-          ...(varlaksOffer && { consentVersion: "varlaks-weekly-offers-v2" }),
+          ...(varlaksOffer && { consentVersion: "varlaks-weekly-offers-v3", measurement: offer?.getMeasurement() }),
           // The offer's submit button explicitly requests marketing emails.
           consent: varlaksOffer || form.get("consent") === "on",
         }),
@@ -34,10 +37,14 @@ export function DiscountSignup({ locale, varlaksOffer = false }: {locale: string
       <div><h2 tabIndex={-1} ref={node => { node?.focus(); }}>{t.success}</h2><p>{t.next}</p></div>
       <Link href={`/${locale}/assortiment`} className="collection-text-link">{t.range} →</Link>
     </div> : <>
-      {varlaksOffer && <><h2>{t.offerTitle}</h2><p>{t.offerIntro}</p></>}
-      <form onSubmit={subscribe} method="post" aria-label={varlaksOffer ? t.offerTitle : t.title}>
+      {offer && <><h2>{offer.headline}</h2><p>{t.offerIntro}</p></>}
+      <form onSubmit={subscribe} method="post" aria-label={offer?.headline ?? t.title}>
         <label className="discount-email">{t.email}
-          <input required name="email" type="email" autoComplete="email" maxLength={254} disabled={state === "sending"} />
+          <input required name="email" type="email" autoComplete="email" maxLength={254} onBlur={event => {
+            if (!event.currentTarget.value || !event.currentTarget.validity.valid) return;
+            const measurement = offer?.getMeasurement();
+            if (measurement) recordPopupStage(measurement, "filled");
+          }} disabled={state === "sending"} />
         </label>
         {!varlaksOffer && <label className="discount-consent"><input name="consent" type="checkbox" required disabled={state === "sending"} /><span>{t.consent}</span></label>}
         <button className="knop knop-navy" type="submit" disabled={state === "sending"}>{state === "sending" ? t.sending : varlaksOffer ? t.offerSubmit : t.submit}</button>
