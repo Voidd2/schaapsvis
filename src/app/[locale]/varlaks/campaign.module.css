@@ -10,11 +10,9 @@
 .lead { max-width:39ch; margin:1.2rem 0 1rem; color:#ecf2f5; font-size:clamp(1rem,1.25vw,1.18rem); }
 .inlineLink { text-decoration:underline; text-underline-offset:.24em; }
 .actions { display:flex; flex-wrap:wrap; gap:.65rem; margin:.9rem 0 .3rem; }
-.primary,.secondary,.filmLink { display:inline-flex; justify-content:center; align-items:center; min-height:48px; padding:.7rem 1.05rem; border-radius:.35rem; font:650 1rem/1.35 var(--font-body); text-align:center; }
+.primary,.filmLink { display:inline-flex; justify-content:center; align-items:center; min-height:48px; padding:.7rem 1.05rem; border-radius:.35rem; font:650 1rem/1.35 var(--font-body); text-align:center; }
 .primary { background:var(--mint); color:var(--sea); }
 .primary:hover { background:#d4f1e6; }
-.secondary { color:white; border:1px solid #92b0bd; }
-.secondary:hover { background:#1f435c; }
 .inlineLink { display:inline-flex; align-items:center; min-height:44px; color:inherit; font-weight:600; }
 .heroPhoto,.landscape { position:relative; overflow:hidden; min-width:0; }
 .heroPhoto > img,.landscape img { width:100%; height:100%; position:absolute; inset:0; object-fit:cover; }
@@ -61,7 +59,7 @@
   .lead { margin:.85rem 0 .35rem; }
   .actions { margin-top:.5rem; }
   .heroPhoto { order:-1; min-height:0; aspect-ratio:2.4; }
-  .hero .actions { display:grid; grid-template-columns:1.15fr 1fr; }
+  .hero .actions { display:grid; }
   .hero .actions a { padding-inline:.55rem; }
   .origin { padding-inline:var(--gutter); gap:1.6rem; }
   .originCopy { padding:0; }

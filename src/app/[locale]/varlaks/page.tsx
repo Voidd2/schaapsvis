@@ -50,11 +50,10 @@ export default async function VarlaksPage({ params }: Props) {
     <header className={styles.hero}>
       <div className={styles.heroCopy}>
         <p className={styles.eyebrow}>{c.since}</p>
-        <h1>{c.heading}<em>{c.place}</em></h1>
+        <h1>{c.heading} <em>{c.place}</em></h1>
         <p className={styles.lead}>{c.intro}</p>
         <div className={styles.actions}>
-          <a className={styles.primary} href={BEDRIJF.maps.route} target="_blank" rel="noopener noreferrer">{c.directions} →</a>
-          <a className={styles.secondary} href="#locaties">{c.markets} ↓</a>
+          <a className={styles.primary} href="#locaties">{c.locations}</a>
         </div>
       </div>
       <div className={styles.heroPhoto}>

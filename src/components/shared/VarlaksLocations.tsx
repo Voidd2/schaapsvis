@@ -5,7 +5,7 @@ import { openingRows } from "@/lib/openingHours";
 const copy = {
   nl: {
     eyebrow: "Schaap’s Vishandel · Leiden sinds 1938",
-    title: "Zalm halen in Leiden en Voorschoten",
+    title: "Zalm halen in Voorschoten en Leiden",
     intro: "U vindt ons in de winkel aan de Herenstraat. Op woensdag staan we op de Botermarkt in Leiden, op vrijdag op het parkeerterrein bij Hoogvliet in Voorschoten en op zaterdag bij de Waag in Leiden.",
     shop: "Viswinkel Herenstraat", wednesday: "Woensdag · Botermarkt", saturday: "Zaterdag · bij de Waag",
     route: "Plan uw route", routeTo: "Plan uw route naar", near: "bij", closed: "Zondag en maandag gesloten",
@@ -13,7 +13,7 @@ const copy = {
   },
   en: {
     eyebrow: "Schaap’s Vishandel · In Leiden since 1938",
-    title: "Where to buy our salmon in Leiden and Voorschoten",
+    title: "Where to buy our salmon in Voorschoten and Leiden",
     intro: "Visit our Herenstraat shop or find our stall at Botermarkt in Leiden on Wednesdays, in the Hoogvliet car park in Voorschoten on Fridays and by De Waag in Leiden on Saturdays.",
     shop: "Herenstraat fish shop", wednesday: "Wednesday · Botermarkt", saturday: "Saturday · by De Waag",
     route: "Get directions", routeTo: "Get directions to", near: "by", closed: "Closed on Sunday and Monday",
@@ -21,7 +21,7 @@ const copy = {
   },
   de: {
     eyebrow: "Schaap’s Vishandel · In Leiden seit 1938",
-    title: "Unser Lachs in Leiden und Voorschoten",
+    title: "Unser Lachs in Voorschoten und Leiden",
     intro: "Besuchen Sie unseren Laden in der Herenstraat. Mittwochs finden Sie uns am Botermarkt in Leiden, freitags auf dem Parkplatz bei Hoogvliet in Voorschoten und samstags bei der Waag in Leiden.",
     shop: "Fischgeschäft Herenstraat", wednesday: "Mittwoch · Botermarkt", saturday: "Samstag · bei De Waag",
     route: "Route planen", routeTo: "Route planen nach", near: "bei", closed: "Sonntags und montags geschlossen",
