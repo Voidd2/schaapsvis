@@ -152,16 +152,19 @@ Een goedgekeurde pas geeft 10% korting op het hele assortiment en is één studi
 
 De studentenregistratie vraagt het persoonlijke e-mailadres en een wachtwoord. Bij de schoolmailroute bevestigt de student twee codes. Zonder schoolmail bevestigt de student één persoonlijke code en uploadt daarna een actueel inschrijvingsbewijs (PDF, JPG of PNG, maximaal 8 MB). Beide routes vragen onderwijsinstelling, opleidingsniveau en studiestad. Bewijsuploads gebruiken de afgeschermde R2-bucket, opslaglimieten en verwijderwachtrij. Alleen apart gegeven reclametoestemming geldt voor het persoonlijke adres. Het beheeronderdeel E-mailadressen toont de account- en nieuwsbriefadressen met hun toestemmingsstatus. Migraties tot en met 0017 zijn vereist. De verificatiecodes zijn eenmalig, worden HMAC-gehasht en verlopen na tien minuten.
 
-Na ‘Verder’ bewaart de klanteninschrijving eerst tijdelijk een e-maildraft.
-Een regiokeuze werkt ditzelfde record direct bij via `PATCH /api/members/newsletter/draft`.
-Hiervoor is het willekeurige drafttoken nodig; het endpoint wijzigt geen bestaande
-nieuwsbriefinschrijving en verstuurt geen mail. Bij toestemming en ‘Schrijf mij in’
-wordt de gekozen regio bij de actieve inschrijving opgeslagen en de draft verwijderd.
-Drafts verlopen na 30 minuten en worden door scheduled cleanup verwijderd;
-een regiowijziging verlengt deze termijn niet. Migratie `0021_newsletter_draft_region.sql`
-voegt alleen de regiokolom aan de tijdelijke tabel toe. Regio-tags: Leiden, Voorschoten, Wassenaar,
-Leidschendam, elders in regio 071 en elders. Leeftijd/geboortedatum wordt niet
-verzameld.
+De nieuwsbriefknop ‘Schrijf mij in’ slaat het e-mailadres meteen als actieve
+inschrijving op, zonder verificatie- of welkomstmail en zonder tijdelijke draft.
+De toestemmingsversie is `footer-email-signup-v2`; een regiokeuze is optioneel.
+De inschrijving blijft behouden als de bezoeker vertrekt of geen regio kiest.
+`PATCH /api/members/newsletter/preferences` slaat latere regiokeuzes op met een
+ondertekend token uit diezelfde inschrijving. Het bewerkt alleen de regio en
+kan een afgemeld adres niet opnieuw activeren. Alleen dit bewerktoken verloopt
+na 24 uur; het e-mailadres en de inschrijving niet. Elke reclamemail bevat een
+afmeldlink in HTML en tekst, plus de afmeldheader voor mailprogramma’s.
+De oudere start/draft-endpoints blijven alleen voor reeds geopende oude
+formulieren bestaan. Hun cleanup raakt geen nieuwsbriefinschrijvingen.
+Regio-tags: Leiden, Voorschoten, Wassenaar, Leidschendam, elders in regio 071
+en elders. Leeftijd/geboortedatum wordt niet verzameld.
 
 Klaviyo is nog niet gekoppeld. Bij een latere koppeling blijven bevestigde
 toestemming en afmelding in deze Worker leidend. De site-, account- en
