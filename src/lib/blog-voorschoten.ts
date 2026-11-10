@@ -5,17 +5,17 @@ export const VOORSCHOTEN_ARTIKELEN: BlogPost[] = [
   {
     slug: "kibbeling-voorschoten-vrijdag",
     title: "Kibbeling in Voorschoten: zo maakt u er een maaltijd van",
-    excerpt: "Kibbeling in Voorschoten halen? Kom vrijdag bij Hoogvliet. Ontdek wat erbij past, waarom we ravigotesaus kiezen en hoe u uw maaltijd handig plant.",
+    excerpt: "Kibbeling in Voorschoten halen? Kom vrijdag bij Hoogvliet. Ontdek wat erbij past, uit welke sauzen u kunt kiezen en hoe u uw maaltijd handig plant.",
     datum: "2026-09-28", datumLabel: "28 september 2026", leestijd: "4 min", categorie: "Visweetjes", regio: "Voorschoten",
     fotoUrl: "/images/recepten/kibbeling-bakken.webp", fotoAlt: "Krokante kibbeling met citroen en saus als maaltijdinspiratie",
-    seoKeywords: "kibbeling Voorschoten, gebakken vis Voorschoten, kibbeling ravigotesaus",
+    seoKeywords: "kibbeling Voorschoten, gebakken vis Voorschoten, saus bij kibbeling",
     secties: [
       { kop: "Kibbeling halen op vrijdag bij Hoogvliet", alineas: [
         "Kibbeling in Voorschoten halen en daarna niet meer uitgebreid koken? Op vrijdag staat Schaap’s Vishandel van 08:30 tot 17:30 op de parkeerplaats bij Hoogvliet. U kunt er gebakken vis halen tijdens uw boodschappen of aan het einde van de middag iets meenemen voor thuis. Het is onze wekelijkse kraam, niet een winkel die elke dag in Voorschoten open is.",
         "Voor een lunch heeft u iets anders nodig dan voor een avondmaaltijd met het hele gezin. Vertel aan de kraam met hoeveel mensen u eet en wat u erbij wilt serveren. Dan kunnen we meedenken over een passende hoeveelheid."
       ] },
-      { kop: "Ravigotesaus bij de kibbeling", alineas: [
-        "Bij onze kibbeling hoort ravigotesaus. De frisse, kruidige saus past bij de krokante buitenkant van de vis. Neem de saus apart wanneer u zelf wilt bepalen hoeveel u gebruikt. Zo kunt u thuis ook een deel zonder saus serveren als iemand dat liever heeft.",
+      { kop: "Welke saus bij de kibbeling?", alineas: [
+        "Bij onze kibbeling kiest u uit Ravigotte-, Knoflook- of cocktailsaus. Liever zelf dippen? Neem de saus er apart bij.",
         "Kibbeling en lekkerbek zijn niet dezelfde portie gebakken vis. Onze kibbeling maken we van pollak in kleinere stukken; onze lekkerbek is een gebakken heekfilet in beslag. Wat u kiest hangt af van uw voorkeur en hoe u het wilt eten. Bekijk onze uitleg over het verschil als u twijfelt."
       ] },
       { kop: "Drie manieren om kibbeling op tafel te zetten", alineas: [
@@ -30,7 +30,7 @@ export const VOORSCHOTEN_ARTIKELEN: BlogPost[] = [
     ],
     vragen: [
       { v: "Waar kan ik vrijdag kibbeling halen in Voorschoten?", a: "Bij Schaap’s Vishandel op de parkeerplaats bij Hoogvliet, vrijdag van 08:30 tot 17:30." },
-      { v: "Welke saus serveren jullie bij kibbeling?", a: "Ravigotesaus. Geef uw voorkeur door aan de kraam; we bespreken graag wat mogelijk is." },
+      { v: "Welke saus serveren jullie bij kibbeling?", a: "Ravigotte-, Knoflook- of cocktailsaus." },
       { v: "Kan ik losse kibbeling online bestellen?", a: "Kibbeling haalt u op vrijdag direct bij onze verkoopwagen bij Hoogvliet." }
     ],
     gerelateerdeRecepten: ["kibbeling-ravigotesaus-salade", "lekkerbek-koolsalade"],

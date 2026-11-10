@@ -491,10 +491,10 @@ export const products: Product[] = [
   {
     "slug": "kibbeling",
     "naam": "Kibbeling",
-    "desc": "Onze kibbeling maken we van stukjes pollak in een luchtig beslag. We bakken ze goudbruin en serveren er ravigotesaus bij.",
+    "desc": "Onze kibbeling maken we van stukjes pollak in een luchtig beslag. We bakken ze goudbruin en serveren ze met Ravigotte-, Knoflook- of cocktailsaus naar keuze.",
     "categorie": "bereid",
     "bestelId": "kibbeling-pollak",
-    "ingredienten": "Pollak [VIS], TARWEBLOEM, water, zout, rijsmiddel (E450, E500), plantaardige olie. Bereid in frituurvet. Ravigotesaus apart verkrijgbaar; vraag naar de actuele ingrediënten en allergenen van de saus.",
+    "ingredienten": "Pollak [VIS], TARWEBLOEM, water, zout, rijsmiddel (E450, E500), plantaardige olie. Bereid in frituurvet. De sauzen zijn apart verkrijgbaar. Vraag naar de ingrediënten en allergenen van de saus die u kiest.",
     "bevat": [
       "VIS",
       "GLUTEN (tarwe)",
