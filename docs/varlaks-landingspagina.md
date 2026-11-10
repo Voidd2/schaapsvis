@@ -21,3 +21,10 @@ Toestemming voor leveranciersbeelden is al vastgelegd in `docs/afbeeldingsbronne
 - PR #102 samengevoegd als `a5a1b43`; GitHub Build259 geslaagd, Codex-review zonder bevindingen. Cloudflare siteversie `396d1958` Ready en 100% verkeer.
 - Live Chrome op `https://schaapsvishandel.nl/nl/varlaks`: zelfstandig hoofdmenu-item, nieuwe introductie, vier geladen beelden, juiste canonical en besloten-previewmelding bevestigd. Bewijs buiten Git: `../design-preview/varlaks/live-landing.png`.
 - Mobiele DOM-/maatcontrole geslaagd op 388px en 468px inhoudsbreedte; mobiele screenshots liepen tegen een Chrome-capturetimeout aan. Desktopopmaak is wel visueel gecontroleerd en vastgelegd. Geen claim van een geslaagde mobiele screenshotcontrole.
+
+
+## Hercontrole keurmerken — 10 november 2026
+
+- [VÅRLAKS voor retailers](https://varlaks.no/retail/) bevestigt ASC voor het merk. De [certificatenpagina](https://norwegianseafood.com/certification/) noemt daarnaast EU BIO op leveranciersniveau.
+- [Skal, Nederlandse vestiging](https://norwegianseafood.com/wp-content/uploads/2025/09/NL-BIO-01.528-0006405.2025.002.pdf): op blad 2 staat biologische zalm, maar geen VÅRLAKS-artikel of partij. [Debio, Noorse vestiging](https://norwegianseafood.com/wp-content/uploads/2026/10/Bio-Norwegian-Seafood-AS.pdf): distributie/export van zowel biologische als niet-biologische aquacultuurproducten. Geen van beide documenten legt de koppeling met een levering aan de winkel.
+- Publiceer geen biologische claim voor deze filet zonder bewijs voor het geleverde artikel/de partij (bijvoorbeeld een bijbehorende leverbon met bio-aanduiding en controlecode); zie de [RVO-uitleg voor biologische productreclame](https://www.rvo.nl/onderwerpen/biologisch-ondernemen/communiceren/regels). De zeven merkposters en de NL-flyer vermelden ASC. Op de eigen winkelfoto met de oesters staat wél een groene poster met ‘biologisch gekweekt’; de uitsnede op de locatiepagina toont alleen de medewerker en de toonbank.
