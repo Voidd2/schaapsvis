@@ -163,6 +163,7 @@ sqlite.exec(studentPassSecurityMigration);
 sqlite.exec(otherEducationMigration);
 sqlite.exec(await readFile(new URL("../../migrations/0018_varlaks_popup.sql", import.meta.url), "utf8"));
 sqlite.exec(await readFile(new URL("../../migrations/0019_signup_visits.sql", import.meta.url), "utf8"));
+sqlite.exec(await readFile(new URL("../../migrations/0021_newsletter_draft_region.sql", import.meta.url), "utf8"));
 let simulateApplicationCommitFailure = false;
 let decisionReadBarrier = null;
 
@@ -999,6 +1000,26 @@ assert.equal(sqlite.prepare("SELECT email FROM newsletter_signup_drafts WHERE to
   return Buffer.from(bytes).toString("base64url");
 })()).email, "staged-deals@example.test", "email is persisted before the region and marketing-consent step");
 assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM newsletter_subscriptions WHERE email='staged-deals@example.test'").get().count, 0, "a saved draft is not an active or pending marketing subscription");
+const draftHash=await testDigest(signupState.draftToken);
+const originalExpiry=sqlite.prepare("SELECT expires_at FROM newsletter_signup_drafts WHERE token_hash=?").get(draftHash).expires_at;
+const mailsBeforeRegion=sentEmails.length;
+const saveDraftRegion=(regionTag,token=signupState.draftToken)=>call("/api/members/newsletter/draft",{method:"PATCH",body:{draftToken:token,regionTag}});
+assert.equal((await call("/api/members/newsletter/draft",{method:"PATCH",omitOrigin:true,body:{draftToken:signupState.draftToken,regionTag:"leiden"}})).status,403);
+assert.equal((await saveDraftRegion("invalid-region")).status,400);
+assert.equal((await saveDraftRegion("leiden","not-a-draft-token")).status,400);
+assert.equal((await saveDraftRegion("leiden","x".repeat(43))).status,410);
+for (const region of ["leiden","voorschoten"]) {
+  assert.equal((await saveDraftRegion(region)).status,200);
+  assert.equal(sqlite.prepare("SELECT region_tag FROM newsletter_signup_drafts WHERE token_hash=?").get(draftHash).region_tag,region,"each choice immediately updates the same draft");
+}
+assert.equal(sqlite.prepare("SELECT expires_at FROM newsletter_signup_drafts WHERE token_hash=?").get(draftHash).expires_at,originalExpiry,"changing area does not extend temporary storage");
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM newsletter_signup_drafts WHERE token_hash=?").get(draftHash).count,1);
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM newsletter_subscriptions WHERE email='staged-deals@example.test'").get().count,0,"selecting an area never grants marketing consent");
+assert.equal(sentEmails.length,mailsBeforeRegion,"draft updates send no mail");
+sqlite.prepare("UPDATE newsletter_signup_drafts SET expires_at='2000-01-01T00:00:00Z' WHERE token_hash=?").run(draftHash);
+assert.equal((await saveDraftRegion("wassenaar")).status,410,"expired drafts cannot be updated");
+assert.equal(sqlite.prepare("SELECT region_tag FROM newsletter_signup_drafts WHERE token_hash=?").get(draftHash).region_tag,"voorschoten");
+sqlite.prepare("UPDATE newsletter_signup_drafts SET expires_at=? WHERE token_hash=?").run(originalExpiry,draftHash);
 const stagedFinish = await call("/api/members/newsletter/subscribe", {
   method: "POST", headers: {Referer:env.SITE_ORIGIN + "/nl/bezoek-ons?ad=private#locatie-voorschoten"},
   body: { form:"footer", email: "staged-deals@example.test", draftToken: signupState.draftToken, consent: true, locale: "nl", regionTag: "regio-071" },
@@ -1017,6 +1038,8 @@ for (const [i, ref] of [env.SITE_ORIGIN + "/nl/kortingsbon/private-code", "https
 assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM newsletter_signup_drafts WHERE email='staged-deals@example.test'").get().count, 0, "completed signup removes its temporary draft");
 assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='staged-deals@example.test'").get().status, "subscribed", "explicit form consent activates the subscription without another email");
 assert.equal(sqlite.prepare("SELECT region_tag FROM newsletter_subscriptions WHERE email='staged-deals@example.test'").get().region_tag, "regio-071", "region tag is attached after explicit consent");
+assert.equal((await saveDraftRegion("leiden")).status,410,"completed draft cannot change an active subscription");
+assert.equal(sqlite.prepare("SELECT region_tag FROM newsletter_subscriptions WHERE email='staged-deals@example.test'").get().region_tag,"regio-071","the submitted choice is authoritative");
 assert.equal((await call("/api/members/newsletter/subscribe", { method: "POST", body: { email: "staged-deals@example.test", draftToken: signupState.draftToken, consent: true, regionTag: "regio-071" } })).status, 410, "signup continuation tokens are one-use");
 
 const subscription = await call("/api/members/newsletter/subscribe", {

@@ -2297,6 +2297,27 @@ async function startNewsletterSignup(request, env) {
   return json({ ok: true, draftToken: token, expiresAt: expires }, 201);
 }
 
+async function updateNewsletterDraft(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  if (!env.DB || !env.AUTH_PEPPER || !env.SITE_ORIGIN) return json({ error: "newsletter_unavailable" }, 503);
+  const body = await readJson(request);
+  const token = body?.draftToken;
+  const region = body?.regionTag;
+  if (typeof token !== "string" || !/^[A-Za-z0-9_-]{43}$/.test(token) ||
+      !["leiden", "voorschoten", "wassenaar", "leidschendam", "regio-071", "elders"].includes(region)) {
+    return json({ error: "invalid_draft" }, 400);
+  }
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "newsletter-draft-region", ip, token, 120, 30, 60 * 60 * 1000)) {
+    return json({ error: "rate_limited" }, 429);
+  }
+  // The unguessable draft token only grants access to this temporary record.
+  // Never alter an existing subscription or extend retention before completion.
+  const saved = await env.DB.prepare(`UPDATE newsletter_signup_drafts SET region_tag=?
+    WHERE token_hash=? AND expires_at>? RETURNING region_tag`).bind(region, await digest(token), nowIso()).first();
+  return saved ? json({ ok: true }) : json({ error: "signup_expired" }, 410);
+}
+
 async function newsletterConfirmPage(request, env) {
   const locale = requestLocale(request);
   const copy = ACCOUNT_COPY[locale];
@@ -2717,6 +2738,7 @@ const memberWorker = {
     if (path === "/api/members/admin/newsletter-campaigns" && method === "GET") return adminNewsletterCampaigns(request, env);
     if (path === "/api/members/admin/newsletter-campaigns" && method === "POST") return createNewsletterCampaign(request, env);
     if (path === "/api/members/newsletter/start" && method === "POST") return startNewsletterSignup(request, env);
+    if (path === "/api/members/newsletter/draft" && method === "PATCH") return updateNewsletterDraft(request, env);
     if (path === "/api/members/newsletter/subscribe" && method === "POST") return subscribeNewsletter(request, env);
     if (path === "/api/members/newsletter/confirm" && method === "GET") return newsletterConfirmPage(request, env);
     if (path === "/api/members/newsletter/confirm" && method === "POST") return confirmNewsletter(request, env);

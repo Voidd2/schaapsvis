@@ -150,10 +150,14 @@ Een goedgekeurde pas geeft 10% korting op het hele assortiment en is één studi
 
 De studentenregistratie vraagt het persoonlijke e-mailadres en een wachtwoord. Bij de schoolmailroute bevestigt de student twee codes. Zonder schoolmail bevestigt de student één persoonlijke code en uploadt daarna een actueel inschrijvingsbewijs (PDF, JPG of PNG, maximaal 8 MB). Beide routes vragen onderwijsinstelling, opleidingsniveau en studiestad. Bewijsuploads gebruiken de afgeschermde R2-bucket, opslaglimieten en verwijderwachtrij. Alleen apart gegeven reclametoestemming geldt voor het persoonlijke adres. Het beheeronderdeel E-mailadressen toont de account- en nieuwsbriefadressen met hun toestemmingsstatus. Migraties tot en met 0017 zijn vereist. De verificatiecodes zijn eenmalig, worden HMAC-gehasht en verlopen na tien minuten.
 
-De klanteninschrijving bewaart eerst tijdelijk een e-maildraft, daarna kiest
-de klant regio en geeft apart expliciet toestemming. Alleen dubbelbevestigde
-subscriptions worden verzonden. Drafts verlopen na 30 minuten en worden door
-scheduled cleanup verwijderd. Regio-tags: Leiden, Voorschoten, Wassenaar,
+Na ‘Verder’ bewaart de klanteninschrijving eerst tijdelijk een e-maildraft.
+Een regiokeuze werkt ditzelfde record direct bij via `PATCH /api/members/newsletter/draft`.
+Hiervoor is het willekeurige drafttoken nodig; het endpoint wijzigt geen bestaande
+nieuwsbriefinschrijving en verstuurt geen mail. Bij toestemming en ‘Schrijf mij in’
+wordt de gekozen regio bij de actieve inschrijving opgeslagen en de draft verwijderd.
+Drafts verlopen na 30 minuten en worden door scheduled cleanup verwijderd;
+een regiowijziging verlengt deze termijn niet. Migratie `0021_newsletter_draft_region.sql`
+voegt alleen de regiokolom aan de tijdelijke tabel toe. Regio-tags: Leiden, Voorschoten, Wassenaar,
 Leidschendam, elders in regio 071 en elders. Leeftijd/geboortedatum wordt niet
 verzameld.
 
