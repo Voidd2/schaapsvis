@@ -19,7 +19,7 @@ import { DIRKS_BARBECUE, selectieNaam } from "@/lib/dirks-selectie";
 const copy = {
   nl: {
     label: "Schaap’s Vishandel · Leiden", title: "Vis uit onze Leidse toonbank",
-    intro: "Een stukje zalm voor de pan, kibbeling voor onderweg of een haring met uitjes. Kies uw vis en bekijk de prijs en portie.",
+    intro: "Van verse vis en gerookte paling tot Hollandse garnalen en gebakken kibbeling. Bekijk ons assortiment en ontdek wat er bij ons in de toonbank ligt.",
     browse: "Ontdek het assortiment", platter: "Bekijk visschalen",
     policy: "Visschalen en barbecue op aanvraag via WhatsApp.", policySub: "Vertel ons met hoeveel u aan tafel gaat. We helpen u de soorten en hoeveelheid kiezen.",
     question: "Iets in gedachten?", note: "Een bepaalde vis, een speciale wens of iets wat u hier niet ziet? App ons gerust. We bespreken de mogelijkheden en beschikbaarheid met u.",
@@ -27,7 +27,7 @@ const copy = {
   },
   en: {
     label: "Schaap’s Vishandel · Leiden", title: "From our fish counter in Leiden",
-    intro: "Salmon for the pan, kibbeling to go, or herring with onions. Choose your fish and check the price and portion.",
+    intro: "Explore our fish counter, from fresh fish and smoked eel to Dutch brown shrimp and freshly fried kibbeling.",
     browse: "Explore our range", platter: "View seafood platters",
     policy: "Seafood platters and barbecue selections by WhatsApp request.", policySub: "We can help you put together a selection to suit your guests and occasion. Tell us what you have in mind.",
     question: "Something in mind?", note: "A particular fish, a special request or something you can't find here? Ask us on WhatsApp about availability and options.",
@@ -35,7 +35,7 @@ const copy = {
   },
   de: {
     label: "Schaap’s Vishandel · Leiden", title: "Aus unserer Fischtheke in Leiden",
-    intro: "Lachs für die Pfanne, Kibbeling auf die Hand oder ein Hering mit Zwiebeln. Wählen Sie Ihren Fisch und sehen Sie Preis und Portion.",
+    intro: "Entdecken Sie unsere Fischtheke mit frischem Fisch, geräuchertem Aal, Nordseegarnelen und frisch frittiertem Kibbeling.",
     browse: "Sortiment entdecken", platter: "Fischplatten ansehen",
     policy: "Fischplatten und Grillauswahl auf Anfrage per WhatsApp.", policySub: "Wir stellen gemeinsam eine Auswahl für Ihre Gäste und Ihren Anlass zusammen. Erzählen Sie uns von Ihren Wünschen.",
     question: "Einen besonderen Wunsch?", note: "Ein bestimmter Fisch, ein besonderer Wunsch oder etwas, das Sie hier nicht finden? Fragen Sie uns per WhatsApp nach Verfügbarkeit und Möglichkeiten.",

@@ -8,7 +8,6 @@ import { productCopy, productNote } from "@/lib/product-copy";
 import { productAvailability } from "@/lib/product-availability";
 import { counterGuides } from "@/lib/blog-counter-guides";
 import { localizeBlog } from "@/lib/blog-localization";
-import { getPrijs, formatPrijs, priceQuantity } from "@/lib/prijzen";
 import { Schema } from "@/components/Schema";
 import { Kruimels, Sectie } from "@/components/ui/Sectie";
 import { PaginaSlot } from "@/components/ui/PaginaKop";
@@ -50,7 +49,7 @@ export default async function ProductDetailPage({params}: Props) {
   const lang = siteLanguage(locale), product = localizedProduct(slug, lang);
   if (!product) notFound();
   const c = productCopy(lang), category = CATEGORY_NAMES[lang][product.categorie], photo = productPhoto(product,lang), voeding = getVoeding(slug);
-  const seizoen = productNote(getSeizoen(slug), lang), prijs = getPrijs(slug);
+  const seizoen = productNote(getSeizoen(slug), lang);
   const availability = productAvailability(product,lang);
   const enquiry = slug === "blacktiger-garnalen"
     ? {
@@ -89,33 +88,14 @@ export default async function ProductDetailPage({params}: Props) {
   const nutritionRows = voeding ? [[c.energy, `${voeding.kcal} kcal / ${voeding.kj} kJ`], [c.fat, `${voeding.vet} g`], [c.saturated, `${voeding.verzadigd} g`], [c.carbs, `${voeding.koolhydraten} g`], [c.sugars, `${voeding.suikers} g`], [c.protein, `${voeding.eiwit} g`], [c.salt, `${voeding.zout} g`]] : [];
   // Informational catalogue: no unverified stock status or online-sale offers.
   const url = `${BEDRIJF.domein}/${lang}/assortiment/${slug}`;
-  const quantity = prijs && priceQuantity(prijs, lang);
-  const pageDetails = {
+  const productSchema = {
     "@context": "https://schema.org",
+    "@type": "WebPage", inLanguage: lang,
     name: product.naam,
     description: product.desc,
     image: photo ? BEDRIJF.domein + photo.src : undefined,
     url,
   };
-  const productSchema = prijs && !prijs.vanaf && quantity && !availability.unavailable ? {
-    ...pageDetails,
-    "@type": "Product",
-    category,
-    offers: {
-      "@type": "Offer",
-      name: formatPrijs(prijs, lang),
-      price: prijs.euro,
-      priceCurrency: "EUR",
-      priceSpecification: {
-        "@type": "UnitPriceSpecification",
-        price: prijs.euro,
-        priceCurrency: "EUR",
-        referenceQuantity: { "@type": "QuantitativeValue", ...quantity },
-      },
-      seller: { "@type": "Organization", name: BEDRIJF.naam },
-      url,
-    },
-  } : { ...pageDetails, "@type": "WebPage", inLanguage: lang };
   return <>
     <Schema data={[productSchema, kruimelSchema(lang, [{naam:BEDRIJF.naamKort,pad:"/"},{naam:c.range,pad:"/assortiment"},{naam:product.naam,pad:`/assortiment/${slug}`}])]} />
     <Sectie grond="papier" id="product-overzicht"><div className="product-shell mx-auto max-w-6xl">
@@ -124,7 +104,6 @@ export default async function ProductDetailPage({params}: Props) {
       <div className="product-intro-title">
         <p className="kapitaal mb-2">{[category,product.badge,product.omega3?"Omega-3":null].filter(Boolean).join(" · ")}</p>
         <h1 className="text-3xl md:text-4xl leading-tight" style={{color:"var(--navy-dark)"}}>{product.naam}</h1>
-        {prijs && <p className="product-price mt-2"><strong>{formatPrijs(prijs,lang)}</strong></p>}
       </div>
       {photo && <figure className="product-intro-figure"><div className="product-intro-image" style={{borderBottom:`3px solid ${CATEGORIE_KLEUR[product.categorie]}`}}>
         <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 800px) calc(100vw - 32px), (max-width: 1500px) 45vw, 680px" priority className={photo.editorial && !photo.whole ? "object-cover" : "object-contain"} />
@@ -133,13 +112,12 @@ export default async function ProductDetailPage({params}: Props) {
         <p className="text-lg leading-relaxed mb-5">{product.desc}</p>
         <div className="mb-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
           <p><span className="kapitaal mr-2">{c.available}</span><strong>{availability.label}</strong></p>
-          {!prijs && <p className="product-price"><span className="kapitaal mr-2">{c.price}</span><strong>{c.dailyPrice}</strong></p>}
         </div>
         <div className="flex flex-wrap items-center gap-4 product-intro-actions">
-          <a href={enquiry.href} className="knop knop-navy">{enquiry.label}</a>
-          <Link href={`/${lang}/bezoek-ons`} className="font-semibold underline underline-offset-4">{lang === "nl" ? "Openingstijden en route" : lang === "de" ? "Öffnungszeiten und Anfahrt" : "Opening hours and directions"} →</Link>
+          {!availability.regular && <a href={enquiry.href} className="knop knop-navy">{enquiry.label}</a>}
+          <Link href={`/${lang}/bezoek-ons`} className={availability.regular ? "knop knop-navy" : "font-semibold underline underline-offset-4"}>{c.hours} →</Link>
         </div>
-        <p className="mt-5 pl-5" style={{borderLeft:`2px solid ${availability.unavailable?"#be123c":"var(--navy)"}`}}>{availability.note}</p>
+        {availability.note && <p className="mt-5 pl-5" style={{borderLeft:`2px solid ${availability.unavailable?"#be123c":"var(--navy)"}`}}>{availability.note}</p>}
         {isSalmon && <Link href={`/${lang}/varlaks#film`} className="block mt-6 pl-5" style={{borderLeft:"2px solid var(--seafoam)"}}><p className="kapitaal mb-2">{c.alternative}</p><p className="font-semibold underline">{c.salmon}</p><p className="text-sm mt-2 leading-relaxed">{c.salmonNote}</p></Link>}
         {reading.map(p=><Link key={p.slug} href={`/${lang}/blog/${p.slug}`} className="block mt-4 underline">{p.title} →</Link>)}
         {["lekkerbek","kibbeling"].includes(slug) && <Link className="block mt-4 underline" href={`/${lang}/blog/kibbeling-vs-lekkerbek-het-verschil`}>{lang==="nl"?"Wat is het verschil tussen kibbeling en lekkerbek?":lang==="en"?"How do kibbeling and lekkerbek differ?":"Was unterscheidet Kibbeling und Lekkerbek?"} →</Link>}
@@ -149,14 +127,15 @@ export default async function ProductDetailPage({params}: Props) {
     </div></Sectie>
     <Sectie grond="zand"><div className="mx-auto max-w-3xl">
       <h2 className="text-2xl mb-3">{c.nutrition}</h2>{voeding?<><p className="kapitaal mb-4">{c.per100}</p><table className="w-full"><tbody>{nutritionRows.map(([label,value],i)=><tr key={label} className="border-b border-sky-100"><th scope="row" className={`py-2.5 text-left font-normal ${[2,4].includes(i)?"pl-6":""}`}>{label}</th><td className="py-2.5 text-right">{value}</td></tr>)}</tbody></table><p className="text-sm mt-3">{c.nutritionNote}</p></>:<p>{c.nutritionRequest}</p>}
-      {prijs && <p className="text-sm mt-6">{formatPrijs(prijs,lang)} — {c.priceNote}</p>}
       <div className="mt-8 border-t border-sky-100 pt-7"><h2 className="text-xl mb-3">{c.ingredients}</h2><p className="mb-4 leading-relaxed">{product.ingredienten}</p>{product.bevat.length>0 && <p className="kapitaal mb-4">{c.contains}: {product.bevat.join(" · ")}</p>}<p className="text-sm leading-relaxed">{c.allergenNote}</p></div>
     </div></Sectie>
     <Sectie grond="papier"><div className="mx-auto max-w-5xl"><p className="kapitaal mb-2">{c.inspiration}</p><h2 className="text-2xl mb-3">{c.cooking}</h2><p className="mb-6">{c.ideas}</p>
       {recipeIdeas.length > 0 ? <div className="mb-8"><h3 className="text-xl mb-3">{c.recipes}</h3><ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{recipeIdeas.map(r=>{const image=receptBeeld(r);return <li key={r.slug} className="overflow-hidden rounded-xl border border-sky-100 bg-white"><Link href={`/${lang}/recepten/${r.slug}`} className="block h-full"><div className="relative aspect-[3/2] w-full bg-sky-50">{image.src&&<Image src={image.src} alt={image.alt} fill sizes="(max-width: 640px) 100vw, 30vw" className="object-cover" />}</div><div className="p-4"><span className="font-semibold underline">{r.title}</span><p className="text-sm mt-2">{r.tijd} · {recipeLabel(r.moeilijkheid,lang)}</p></div></Link></li>})}</ul></div> : <p className="mb-4">{c.noRecipe}</p>}
       <Link href={`/${lang}/recepten`} className="underline font-semibold">{c.recipes} →</Link><p className="mt-3">{c.recipesNote}</p>
     </div></Sectie>
-    <PaginaSlot titel={`${c.looking} ${lang === "de" ? product.naam : product.naam.toLowerCase()}?`} tekst={c.orderNote} knoppen={[action,{label:c.hours,href:`/${lang}/bezoek-ons`,soort:"lijn"},{label:BEDRIJF.telefoon.weergave,href:`tel:${BEDRIJF.telefoon.e164}`,extern:true,soort:"lijn"}]} />
+    {availability.regular
+      ? <PaginaSlot titel={c.hours} tekst={lang==="nl" ? "Bezoek onze winkel in Leiden of onze verkoopwagen in Leiden en Voorschoten." : lang==="en" ? "Visit our shop in Leiden or our mobile fish shop in Leiden and Voorschoten." : "Besuchen Sie unser Geschäft in Leiden oder unseren Verkaufswagen in Leiden und Voorschoten."} knoppen={[{label:c.hours,href:`/${lang}/bezoek-ons`}]} />
+      : <PaginaSlot titel={`${c.looking} ${lang === "de" ? product.naam : product.naam.toLowerCase()}?`} tekst={c.orderNote} knoppen={[action,{label:c.hours,href:`/${lang}/bezoek-ons`,soort:"lijn"},{label:BEDRIJF.telefoon.weergave,href:`tel:${BEDRIJF.telefoon.e164}`,extern:true,soort:"lijn"}]} />}
   </>;
 }
 

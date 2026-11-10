@@ -24,19 +24,19 @@ const revisions:Record<string,Revision>={
   },
   "de-echte-hollandse-garnaal": {
     "heading": [
-      "De bakjes van SOLT",
-      "Our SOLT packs",
-      "Unsere Packungen von SOLT"
+      "Hollandse garnalen aan de toonbank",
+      "Dutch brown shrimp at our counter",
+      "Nordseegarnelen an unserer Theke"
     ],
     "text": [
-      "Op de toonbank herkent u de Hollandse garnalen aan het SOLT-etiket. Achter SOLT staan vijf vissers uit Zoutkamp, met familiebanden in de visserij. Hun verhaal verbindt Zoutkamp met de haven van Lauwersoog. Op de verpakking vindt u het MSC-keurmerk voor de wildvangst.",
-      "Look for the SOLT label on the packs at our counter. Behind SOLT are five fishermen from Zoutkamp with family ties to fishing. Their story links Zoutkamp with the port of Lauwersoog. The pack carries the MSC mark for wild-caught seafood.",
-      "An unserer Theke erkennen Sie die Nordseegarnelen am SOLT-Etikett. Hinter SOLT stehen fünf Fischer aus Zoutkamp mit familiären Wurzeln in der Fischerei. Ihre Geschichte verbindet Zoutkamp mit dem Hafen von Lauwersoog. Auf der Packung steht das MSC-Siegel für Wildfang."
+      "Onze Hollandse garnalen komen van vijf vissers uit Zoutkamp. Hun verhaal verbindt Zoutkamp met de haven van Lauwersoog. Op de verpakking vindt u het MSC-keurmerk voor de wildvangst.",
+      "Our Dutch brown shrimp come from five fishers in Zoutkamp. Their story links Zoutkamp with the port of Lauwersoog. The pack carries the MSC mark for wild-caught seafood.",
+      "Unsere Nordseegarnelen stammen von fünf Fischern aus Zoutkamp. Ihre Geschichte verbindet Zoutkamp mit dem Hafen von Lauwersoog. Auf der Packung steht das MSC-Siegel für Wildfang."
     ],
     "links": [
       [
         "https://www.soltmen.com/ons-avontuur/",
-        "Lees het verhaal van SOLT"
+        "Lees het verhaal van de vissers"
       ],
       [
         "/assortiment/hollandse-garnalen",
@@ -44,9 +44,9 @@ const revisions:Record<string,Revision>={
       ]
     ],
     "photo": [
-      "Bakjes Hollandse garnalen van SOLT",
-      "Packs of SOLT Dutch brown shrimp",
-      "Packungen mit Nordseegarnelen von SOLT"
+      "Bakjes Hollandse garnalen",
+      "Packs of Dutch brown shrimp",
+      "Packungen mit Nordseegarnelen"
     ]
   },
   "hoeveel-vis-per-persoon": {

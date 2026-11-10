@@ -213,7 +213,7 @@ export default async function HomePage({
 
       <section className="home-student"><div className="section-wrap">
         <strong className="home-student-discount">10<span>%</span></strong>
-        <div><p className="kapitaal">{nav("studentenkorting")}</p><h2>{locale === "nl" ? "Student? Eet lekker mee." : locale === "de" ? "Du studierst? Iss gut bei uns." : "Student? Eat well with us."}</h2><p>{locale === "nl" ? "Na goedkeuring korting op het hele assortiment. Bekijk de voorwaarden en vraag je studentenpas aan." : locale === "de" ? "Nach Freigabe Rabatt auf das gesamte Sortiment. Bedingungen ansehen und Studentenpass beantragen." : "After approval, enjoy a discount on the entire range. See the conditions and apply for your student pass."}</p></div>
+        <div><p className="kapitaal">{nav("studentenkorting")}</p><h2>{locale === "nl" ? "Ben jij mbo-, hbo- of wo-student?" : locale === "de" ? "Studierst du an einer MBO, HBO oder Universität?" : "Are you an MBO, HBO or university student?"}</h2><p>{locale === "nl" ? "Vraag je studentenpas aan en krijg na goedkeuring 10% korting op het hele assortiment." : locale === "de" ? "Beantrage deinen Studentenpass und erhalte nach der Freigabe 10 % Rabatt auf das gesamte Sortiment." : "Apply for your student pass and get 10% off our entire range once approved."}</p></div>
         <Link href={`/${locale}/studentenkorting`} className="knop knop-navy">{nav("studentenkorting")} →</Link>
       </div></section>
       {/* ── Beoordelingen ─────────────────────────────────────────────────── */}

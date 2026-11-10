@@ -22,9 +22,9 @@
     "varlaksTitle": "VÅRLAKS salmon from Norway | Schaap's Vishandel Leiden",
     "varlaksDesc": "Discover VÅRLAKS salmon from Northern Norway, its brand film and origin information. Ask us about ASC certification and current availability.",
     "assortimentTitle": "Fish selection Leiden: salmon, herring & kibbeling | Schaap's",
-    "assortimentDesc": "Explore fresh fish, kibbeling, herring and VÅRLAKS salmon at our fish counter in Leiden. Ask us what’s available today.",
-    "bezoekTitle": "Leiden fish shop and Friday fish stall in Voorschoten | Schaap’s",
-    "bezoekDesc": "Find our fish stall at Hoogvliet, Veurseweg 18 in Voorschoten, every Friday. Get directions and opening hours for the stall, our shop and our markets in Leiden.",
+    "assortimentDesc": "Explore fresh and smoked fish, Dutch brown shrimp, herring and kibbeling at Schaap’s in Leiden and Voorschoten.",
+    "bezoekTitle": "Leiden fish shop and Friday mobile fish shop in Voorschoten | Schaap’s",
+    "bezoekDesc": "Find our mobile fish shop at Hoogvliet, Veurseweg 18 in Voorschoten, every Friday. Get directions and opening hours for the stall, our shop and our markets in Leiden.",
     "contactTitle": "Contact Schaap's Vis Leiden | +31 71 512 4810 | Fish Shop Herenstraat",
     "contactDesc": "Contact Schaap's Vis Leiden. Call +31 71 512 4810 or WhatsApp +31 6 2481 1678. Herenstraat 48, 2313 AL Leiden.",
     "bestellenTitle": "Order a seafood platter in Leiden | Schaap's Vishandel",
@@ -209,11 +209,11 @@
     "note": "Please arrange seafood platters with us via WhatsApp. Looking for other fish? Send us a WhatsApp message to discuss the options."
   },
   "bezoekPage": {
-    "viskarAlt": "Customers at the counter of Schaap’s blue and white fish stall",
-    "viskarBijschrift": "Our fish stall",
+    "viskarAlt": "Customers at the counter of Schaap’s blue and white mobile fish shop",
+    "viskarBijschrift": "Our mobile fish shop",
     "title": "Fresh fish at Hoogvliet every Friday",
     "brand": "Schaap’s Vishandel · Voorschoten",
-    "sub": "Pick up some crispy kibbeling, a herring with onions or salmon for dinner. You’ll find our fish stall in the Hoogvliet car park.",
+    "sub": "Our mobile fish shop is in the Hoogvliet car park in Voorschoten every Friday. We sell fresh fish, herring and freshly fried kibbeling.",
     "route": "Directions to Hoogvliet",
     "other": "Find us in Leiden",
     "contact": "Ask us on WhatsApp",
@@ -227,7 +227,7 @@
     "rangeTitle": "Looking for a particular fish?",
     "rangeIntro": "Browse our range or ask us what’s available on the day you plan to visit.",
     "range": "Browse our fish",
-    "details": "More about our Voorschoten fish stall",
+    "details": "More about our Voorschoten mobile fish shop",
     "call": "Call the shop"
   },
   "contactPage": {
@@ -302,7 +302,7 @@
   "home": {
     "eyebrow": "Herenstraat 48, Leiden · since 1938",
     "kop": "Good fish. Simply Schaap’s.",
-    "inleiding": "Pick up a herring with onions for the road or a salmon fillet for supper. Find us at our Herenstraat shop and at the market.",
+    "inleiding": "Your fishmonger since 1938. We select our fish for its quality and are happy to help you at our Herenstraat shop and at the market.",
     "knopBestellen": "Order",
     "knopVisschaal": "Build a platter",
     "feit1Kop": "Delivery",

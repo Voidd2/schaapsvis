@@ -69,9 +69,9 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     <header className="fresh-hero"><div className="section-wrap fresh-hero-grid">
       <div><p className="kapitaal">{t("Schaap’s Vishandel · sinds 1938")}</p><h1>{t("Visboer Voorschoten: elke vrijdag bij Hoogvliet")}</h1><p className="fresh-intro">{t("Goede vis, persoonlijk advies en duidelijke prijzen. Probeer onze viskraam op vrijdag: van verse zalm voor het avondeten tot krokante kibbeling met ravigotesaus en haring met uitjes.")}</p><div className="mt-6 rounded-xl border border-sky-200 bg-white p-5"><p className="font-semibold text-lg">{t("Elke vrijdag · 08:30–17:30")}</p><p className="mt-1">{t("Parkeerplaats Hoogvliet · Veurseweg 18")}<br />{t("2252 AA Voorschoten")}</p><p className="mt-3 text-sm">{t("Ook aan het einde van de middag nog vis halen voor het avondeten.")}</p></div><div className="flex flex-wrap gap-3 mt-6"><a className="knop knop-rood" href={kraam.mapsUrl} target="_blank" rel="noopener noreferrer">{t("Route naar Hoogvliet")}</a><Link className="knop knop-lijn" href={`/${locale}/assortiment`}>{t("Bekijk ons visassortiment")}</Link></div></div>
       <figure>
-        <StaticResponsiveImage src={viskarFoto} alt={t("Klanten aan de toonbank van de blauw-witte viskar van Schaap’s")} width={1600} height={900}
+        <StaticResponsiveImage src={viskarFoto} alt={t("Klanten aan de toonbank van de blauw-witte verkoopwagen van Schaap’s")} width={1600} height={900}
           sizes="(max-width: 800px) 100vw, 50vw" loading="eager" fetchPriority="high" />
-        <figcaption>{t("Onze viskar")}</figcaption>
+        <figcaption>{t("Onze verkoopwagen")}</figcaption>
       </figure>
     </div></header>
     <Sectie grond="papier"><div className="grid md:grid-cols-[1.2fr_0.8fr] gap-10 items-start">

@@ -409,7 +409,7 @@ export function productPhoto(product:Product,locale="nl"):ProductPhoto|null{
   const captions={nl:{product:"Productfoto.",serving:"Serveersuggestie.",species:"De vissoort in beeld."},en:{product:"Product photo.",serving:"Serving suggestion.",species:"The fish shown."},de:{product:"Produktfoto.",serving:"Serviervorschlag.",species:"Die abgebildete Fischart."}}[l];
   const subjects:Record<string,Record<string,string>>={
    "blacktiger-garnalen":{nl:"Gepelde Black Tiger-garnalen op een witte achtergrond",en:"Peeled black tiger prawns on a white background",de:"Geschälte Black-Tiger-Garnelen auf weißem Hintergrund"},
-   "hollandse-garnalen":{nl:"Verpakkingen SOLT Hollandse garnalen met zichtbaar MSC-keurmerk",en:"SOLT Dutch brown shrimp packages with the MSC logo visible",de:"SOLT-Packungen mit Nordseegarnelen und sichtbarem MSC-Zeichen"},
+   "hollandse-garnalen":{nl:"Bakjes Hollandse garnalen met het MSC-keurmerk",en:"Dutch brown shrimp packs with the MSC logo visible",de:"Packungen mit Nordseegarnelen und sichtbarem MSC-Zeichen"},
    kabeljauwwangen:{nl:"Koppen van kabeljauw, waaruit de wangen worden gesneden",en:"Cod heads, from which the cheeks are cut",de:"Kabeljauköpfe, aus denen die Backen geschnitten werden"},
    zeebrasemfilet:{nl:"Hele zeebrasem (Pagellus bogaraveo), vóór het fileren",en:"Whole blackspot seabream (Pagellus bogaraveo), before filleting",de:"Ganze Graubarschbrasse (Pagellus bogaraveo), vor dem Filetieren"},
    "zeekraalsalade":{nl:"Verse zeekraal, het hoofdingrediënt van zeekraalsalade",en:"Fresh samphire, the main ingredient of samphire salad",de:"Frischer Queller, die Hauptzutat von Quellersalat"},

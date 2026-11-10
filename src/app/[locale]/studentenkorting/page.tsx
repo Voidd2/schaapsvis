@@ -14,9 +14,9 @@ const copy = {
     description:
       "Nederlandse en internationale mbo-, hbo- en wo-studenten krijgen na goedkeuring 10% korting op het hele assortiment van Schaap's Vishandel.",
     eyebrow: "Voor Nederlandse én internationale studenten",
-    heading: "Student in de buurt? Pak 10% korting.",
+    heading: "10% studentenkorting op het hele assortiment",
     intro:
-      "Van kibbeling tussendoor tot verse zalm voor het avondeten. Als mbo-, hbo- of wo-student krijg je na goedkeuring 10% korting op het hele assortiment bij Schaap’s in Leiden.",
+      "Volg jij een mbo-, hbo- of wo-opleiding? Vraag je studentenpas aan. Na goedkeuring krijg je bij Schaap’s 10% korting op het hele assortiment.",
     categories: ["Op het hele assortiment"],
     card: "Je digitale studentenpas",
     cardText:
@@ -35,9 +35,9 @@ const copy = {
     description:
       "Dutch and international MBO, HBO and university students receive 10% off the entire Schaap's Vishandel range after approval.",
     eyebrow: "For Dutch and international students",
-    heading: "Student nearby? Get 10% off.",
+    heading: "10% student discount on our entire range",
     intro:
-      "From kibbeling between lectures to fresh salmon for dinner. MBO, HBO and university students receive 10% off the entire range at Schaap’s in Leiden after approval.",
+      "Are you an MBO, HBO or university student? Apply for your student pass. Once approved, you get 10% off our entire range.",
     categories: ["On the entire range"],
     card: "Your digital student pass",
     cardText:
@@ -56,9 +56,9 @@ const copy = {
     description:
       "Niederländische und internationale MBO-, HBO- und Hochschulstudierende erhalten nach Freigabe 10 % Rabatt auf das gesamte Sortiment von Schaap's Vishandel.",
     eyebrow: "Für niederländische und internationale Studierende",
-    heading: "Sie studieren? Sichern Sie sich 10 % Rabatt.",
+    heading: "10 % Studentenrabatt auf das gesamte Sortiment",
     intro:
-      "Von Kibbeling für zwischendurch bis zu frischem Lachs zum Abendessen. MBO-, HBO- und Hochschulstudierende erhalten nach Freigabe 10 % Rabatt auf das gesamte Sortiment bei Schaap’s in Leiden.",
+      "Studierst du an einer MBO, HBO oder Universität? Beantrage deinen Studentenpass. Nach der Freigabe erhältst du 10 % Rabatt auf unser gesamtes Sortiment.",
     categories: ["Auf das gesamte Sortiment"],
     card: "Ihr digitaler Studentenausweis",
     cardText:
@@ -153,14 +153,13 @@ export default async function StudentenkortingPage({ params }: { params: Promise
           <p className="kapitaal">{l.local}</p>
           <h1>{c.heading}</h1>
           <p className="fresh-intro">{c.intro}</p>
-          <p className="student-offer"><strong>10%</strong><span>{c.categories[0]}</span></p>
           <p className="student-fine">{l.fine}</p>
           <div className="student-actions"><Link href={registerHref} className="knop knop-rood">{c.account} →</Link><a href="#aanmelden" className="knop knop-lijn">{l.how} ↓</a></div>
           <Link href={loginHref} className="student-login">{l.login} →</Link>
           {siteOpSlot() && <p className="student-preview">{l.preview}</p>}
         </div>
-        <figure className="relative overflow-hidden rounded-2xl min-h-[280px]">
-          <Image src="/images/editorial/kibbeling-schaapstray.png" alt={c.alt} fill sizes="(max-width: 800px) 100vw, 50vw" className="object-cover" loading="eager" fetchPriority="high" />
+        <figure className="student-kibbeling">
+          <Image src="/images/editorial/kibbeling-schaapstray.png" alt={c.alt} width={1402} height={1122} sizes="(max-width: 800px) 100vw, 50vw" loading="eager" fetchPriority="high" />
         </figure>
       </div>
     </section>

@@ -336,14 +336,14 @@ const bestaandePosts: BlogPost[] = [
       {
         kop: "Van Waddenzee tot uw boterham",
         alineas: [
-          "Onze Hollandse garnalen komen van SOLT, een coöperatie van vijf garnalenvissers uit Zoutkamp — een dorp waar al sinds 1620 op garnalen wordt gevist. De boten (herkenbaar aan de letters 'ZK' op de boeg) vissen op de Waddenzee en Noordzee met bokkennetten.",
+          "Onze Hollandse garnalen komen van een coöperatie van vijf garnalenvissers uit Zoutkamp — een dorp waar al sinds 1620 op garnalen wordt gevist. De boten (herkenbaar aan de letters 'ZK' op de boeg) vissen op de Waddenzee en Noordzee met bokkennetten.",
           "Het mooiste detail: de garnalen worden direct aan boord in zeewater gekookt. Verser kan technisch niet. Daarna worden ze in Lauwersoog machinaal gepeld — alles binnen Nederland, van vangst tot klaar product.",
         ],
       },
       {
         kop: "MSC-gecertificeerd",
         alineas: [
-          "De SOLT-vissers werken MSC-gecertificeerd en gebruiken roller-chain systemen in plaats van traditionele klossenpezen, waardoor de zeebodem minder wordt beroerd. De Hollandse garnaal staat daarmee als groene keuze te boek.",
+          "De vissers werken MSC-gecertificeerd en gebruiken roller-chain systemen in plaats van traditionele klossenpezen, waardoor de zeebodem minder wordt beroerd. De Hollandse garnaal staat daarmee als groene keuze te boek.",
           "Let op: verse Hollandse garnalen zijn bij ons op aanvraag verkrijgbaar — bel of mail even van tevoren, dan zorgen wij dat ze er zijn.",
         ],
       },
@@ -353,7 +353,7 @@ const bestaandePosts: BlogPost[] = [
       { ...bestelContact("nl") },
     ],
     seoKeywords:
-      "hollandse garnalen, noordzeegarnalen, crangon crangon, garnalen leiden, hollandse garnalen kopen, solt garnalen",
+      "hollandse garnalen, noordzeegarnalen, crangon crangon, garnalen leiden, hollandse garnalen kopen",
   },
   {
     slug: "marktdag-in-leiden-achter-de-kraam",
@@ -687,7 +687,7 @@ const blogBeelden: Record<string, { src: string; alt: string }> = {
   "viskalender-welke-vis-in-welk-seizoen": { src: "/images/recepten/gebakken-schol-tomaat-olijven.webp", alt: "Gebakken schol met tomaat en olijven" },
   "hollandse-nieuwe-waarom-juni-haring-anders-smaakt": { src: "/images/editorial/hollandse-nieuwe-uitjes.webp", alt: "Hollandse Nieuwe met fijngesneden uitjes en augurk op een wit bord" },
   "kibbeling-vs-lekkerbek-het-verschil": { src: "/images/editorial/kibbeling-schaapstray.png", alt: "Bakje krokante kibbeling met ravigotesaus" },
-  "de-echte-hollandse-garnaal": { src: "/images/assortiment-internet/hollandse-garnalen-solt.jpeg", alt: "Bakjes Hollandse garnalen van SOLT op de toonbank" },
+  "de-echte-hollandse-garnaal": { src: "/images/assortiment-internet/hollandse-garnalen-solt.jpeg", alt: "Bakjes Hollandse garnalen op de toonbank" },
   "sinds-1938-de-geschiedenis-van-schaaps-vis": { src: "", alt: "" },
   "wilde-zalm-vs-kweekzalm-waarom-wij-varlaks-kiezen": { src: "/images/editorial/zalm.webp", alt: "Verse zalmfilet met citroen en dille" },
   "waarom-staat-makreel-op-rood": { src: "/images/recepten/makreelsalade-brood.webp", alt: "Makreelsalade op brood" },

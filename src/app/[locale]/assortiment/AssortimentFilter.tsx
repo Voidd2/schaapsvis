@@ -19,21 +19,21 @@ const copy = {
     all: "Alles", search: "Welke vis zoekt u?", popular: "Favorieten eerst", az: "Naam A–Z", more: "Toon meer producten",
     detail: "Productinformatie", singular: "product", count: "producten", empty: "Geen producten gevonden. Probeer een andere zoekterm of vraag het ons via WhatsApp.",
     favorites: "Begin met onze favorieten", favoritesSub: "Een paar vertrouwde keuzes uit onze toonbank.",
-    browse: "Het hele assortiment", browseSub: "Kijk rustig rond. Voor beschikbaarheid en uw wensen helpen we u graag via WhatsApp.", photoNote: "Bekijk per product de beschikbaarheid, voedingsinformatie en passende recepten.",
+    browse: "Het hele assortiment", browseSub: "Bekijk alle producten of kies een categorie.", photoNote: "Bekijk per product de beschikbaarheid, voedingsinformatie en passende recepten.",
     categories: ["Verse vis", "Gerookte vis", "Schaal- & schelpdieren", "Vissalades", "Bereid & snacks", "Zeegroenten"],
   },
   en: {
     all: "All", search: "Which fish are you looking for?", popular: "Favourites first", az: "Name A–Z", more: "Show more products",
     detail: "Product information", singular: "product", count: "products", empty: "No products found. Try another search or ask us on WhatsApp.",
     favorites: "Start with our favourites", favoritesSub: "A few familiar favourites from our fish counter.",
-    browse: "Explore our full range", browseSub: "Take a look around. Ask us on WhatsApp about availability and your wishes.", photoNote: "See availability, nutrition information and recipe ideas on each product page.",
+    browse: "Explore our full range", browseSub: "Browse all products or choose a category.", photoNote: "See availability, nutrition information and recipe ideas on each product page.",
     categories: ["Fresh fish", "Smoked fish", "Shellfish", "Fish salads", "Prepared & snacks", "Sea vegetables"],
   },
   de: {
     all: "Alle", search: "Welchen Fisch suchen Sie?", popular: "Favoriten zuerst", az: "Name A–Z", more: "Weitere Produkte anzeigen",
     detail: "Produktinformationen", singular: "Produkt", count: "Produkte", empty: "Keine Produkte gefunden. Versuchen Sie einen anderen Suchbegriff oder fragen Sie uns per WhatsApp.",
     favorites: "Unsere Favoriten entdecken", favoritesSub: "Einige bewährte Favoriten aus unserer Fischtheke.",
-    browse: "Das gesamte Sortiment", browseSub: "Schauen Sie sich in Ruhe um. Fragen zu Verfügbarkeit und Wünschen beantworten wir gerne per WhatsApp.", photoNote: "Auf jeder Produktseite finden Sie Verfügbarkeit, Nährwertangaben und passende Rezeptideen.",
+    browse: "Das gesamte Sortiment", browseSub: "Entdecken Sie alle Produkte oder wählen Sie eine Kategorie.", photoNote: "Auf jeder Produktseite finden Sie Verfügbarkeit, Nährwertangaben und passende Rezeptideen.",
     categories: ["Frischer Fisch", "Räucherfisch", "Schalentiere", "Fischsalate", "Zubereitet & Snacks", "Meeresgemüse"],
   },
 };
@@ -127,7 +127,7 @@ export function AssortimentFilter({ localized, holiday = false }: { localized: P
               : platter ? <Link href={`/${locale}/visschalen`}>{locale === "nl" ? "Visschaal samenstellen" : locale === "de" ? "Fischplatte zusammenstellen" : "Create a seafood platter"}</Link>
               : (p.slug === "creuse-oesters" || p.slug === "fine-de-claire-oesters")
                 ? <a href={bestelContact(locale, p.naam).href} className="collection-whatsapp"><MessageCircle size={15} aria-hidden="true" />{locale === "nl" ? "Grotere bestelling? App ons" : locale === "de" ? "Größere Bestellung? Schreiben Sie uns" : "Larger order? Message us"}</a>
-                : !stapleSlugs.has(p.slug) && !["always", "dagelijks"].includes(p.beschikbaar ?? "")
+                : !stapleSlugs.has(p.slug) && !stock.regular
                   ? <a href={bestelContact(locale, p.naam).href} className="collection-whatsapp"><MessageCircle size={15} aria-hidden="true" />{bestelContact(locale).label}</a>
                   : null}
           </div>
