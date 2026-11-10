@@ -1,4 +1,5 @@
 "use client";
+import { visitAtSignup, signupVisitComplete } from "@/lib/signup-visit";
 
 import { useCallback, useEffect, useState } from "react";
 import type { FormEvent } from "react";
@@ -322,11 +323,13 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
     setSuccess(false);
     try {
       const body: Record<string, unknown> = { email: fields.get("email"), password: fields.get("password"), locale: language };
+      const visit = mode === "register" && fields.get("marketingConsent") === "on" ? visitAtSignup(true) : undefined;
       if (mode === "register") {
         body.firstName = fields.get("firstName");
         body.lastName = fields.get("lastName");
         body.proofMethod = documentRoute ? "document" : "school-email";
         body.schoolEmail = fields.get("schoolEmail");
+        body.visit = visit;
         body.marketingConsent = fields.get("marketingConsent") === "on";
         if (body.marketingConsent) body.marketingConsentVersion = "student-weekly-v1";
       }
@@ -348,6 +351,7 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
         throw new Error("request-failed");
       }
       if (mode === "register") {
+        signupVisitComplete(visit);
         setSuccess(true);
         setMessage(documentRoute ? t.personalHelp : t.accountCreated);
         setVerificationEmail(String(fields.get("email") || "").trim().toLowerCase());

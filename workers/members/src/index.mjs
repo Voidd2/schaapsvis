@@ -718,7 +718,7 @@ async function visitChoice(request, env, action) {
   return json({ok:true});
 }
 
-async function signupVisitStatement(request, env, visit, email, at) {
+async function signupVisitStatement(request, env, visit, email, at, newAccountId = null) {
   if (env.ANALYTICS_ENABLED !== "on" || visit?.version !== visitConsentVersion || !isVisitToken(visit.token) || !isCaptureId(visit.captureId) || !Array.isArray(visit.pages)) return null;
   const ip = request.headers.get("CF-Connecting-IP");
   if (!ip || !/^[\da-f:.]{3,45}$/i.test(ip) || (env.ANALYTICS_EXCLUDED_IP_HASH && await digest(ip) === env.ANALYTICS_EXCLUDED_IP_HASH)) return null;
@@ -728,8 +728,22 @@ async function signupVisitStatement(request, env, visit, email, at) {
   // Executed immediately before the first subscription insert in the same transaction.
   return env.DB.prepare(`UPDATE signup_visits SET email=?, signup_at=?, capture_id=?, ip=?, city=?, pages=?
     WHERE token_hash=? AND consent_version=? AND email IS NULL AND expires_at>?
-    AND NOT EXISTS(SELECT 1 FROM newsletter_subscriptions WHERE email=?)`)
-    .bind(email, at, visit.captureId, ip, city, JSON.stringify(pages), await digest(visit.token), visitConsentVersion, at, email);
+    AND NOT EXISTS(SELECT 1 FROM newsletter_subscriptions WHERE email=?)
+    AND (? IS NULL OR EXISTS(SELECT 1 FROM users WHERE id=? AND email=?))`)
+    .bind(email, at, visit.captureId, ip, city, JSON.stringify(pages), await digest(visit.token), visitConsentVersion, at, email,
+      newAccountId,newAccountId,email);
+}
+
+async function adminCustomerDetails(request, env, id) {
+  if (!sameOrigin(request,env) || !await requireAdmin(request,env)) return json({error:"forbidden"},403);
+  const [person,applications] = await env.DB.batch([
+    env.DB.prepare(`SELECT email,school_email,email_verified_at,school_email_verified_at FROM users
+      WHERE id=? AND account_status IN ('active','locked')`).bind(id),
+    env.DB.prepare(`SELECT institution,education_level,study_city,eligibility_method,status,submitted_at,reviewed_at
+      FROM student_applications WHERE user_id=? ORDER BY submitted_at DESC,id DESC`).bind(id),
+  ]);
+  if (!person.results?.[0]) return json({error:"customer_not_found"},404);
+  return json({person:person.results[0],applications:applications.results || []});
 }
 
 async function adminCustomers(request, env) {
@@ -753,14 +767,15 @@ async function adminCustomers(request, env) {
   const result = await env.DB.prepare(`
     SELECT u.id, u.full_name, u.email, u.email_verified_at IS NOT NULL AS email_verified, u.account_status, u.created_at,
       COALESCE(n.status, 'not-subscribed') AS newsletter_status,
-      (SELECT p.status FROM student_passes p WHERE p.user_id = u.id ORDER BY p.issued_at DESC LIMIT 1) AS student_pass_status
+      (SELECT CASE WHEN p.status='active' AND p.expires_at IS NOT NULL AND p.expires_at<=? THEN 'expired' ELSE p.status END
+       FROM student_passes p WHERE p.user_id = u.id ORDER BY p.issued_at DESC LIMIT 1) AS student_pass_status
     FROM users u
     LEFT JOIN newsletter_subscriptions n ON n.email = u.email
     WHERE u.account_status IN ('active', 'locked')
       AND (? IS NULL OR u.created_at < ? OR (u.created_at = ? AND u.id < ?))
     ORDER BY u.created_at DESC, u.id DESC
     LIMIT 101
-  `).bind(cursor?.createdAt ?? null, cursor?.createdAt ?? null, cursor?.createdAt ?? null, cursor?.id ?? "").all();
+  `).bind(nowIso(),cursor?.createdAt ?? null, cursor?.createdAt ?? null, cursor?.createdAt ?? null, cursor?.id ?? "").all();
   const rows = result.results || [];
   const hasMore = rows.length > 100;
   const customers = rows.slice(0, 100);
@@ -1009,6 +1024,8 @@ async function register(request, env) {
   ];
   if (body.marketingConsent === true) {
     const version = body.marketingConsentVersion === "student-weekly-v1" ? "student-weekly-v1" : "student-personal-offers-2026-11";
+    const visit = await signupVisitStatement(request,env,body.visit,email,created,userId);
+    if (visit) statements.push(visit);
     // Only a newly inserted account has this ID. A repeated signup cannot grant consent on another user's behalf.
     statements.push(
       env.DB.prepare(`INSERT INTO consent_events (id, user_id, consent_type, granted, text_version, source, recorded_at)
@@ -2691,6 +2708,8 @@ const memberWorker = {
     if (path === "/api/members/admin/email-addresses" && method === "DELETE") return removeDirectoryEmail(request, env);
     if (path === "/api/members/admin/signup-visit" && method === "POST") return adminSignupVisit(request, env);
     if (path === "/api/members/admin/customers" && method === "GET") return adminCustomers(request, env);
+    const customerDetails = path.match(/^\/api\/members\/admin\/customers\/([a-f0-9-]{36})\/details$/i);
+    if (customerDetails && method === "POST") return adminCustomerDetails(request,env,customerDetails[1]);
     const customerStatusMatch = path.match(/^\/api\/members\/admin\/customers\/([0-9a-f-]{36})\/status$/i);
     if (customerStatusMatch && method === "POST") return adminCustomerStatus(request, env, customerStatusMatch[1]);
     if (path === "/api/members/admin/pass/verify" && method === "POST") return verifyPass(request, env);

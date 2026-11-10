@@ -496,6 +496,13 @@ assert.equal(customerPage.hasMore, false);
 assert.equal(customerPage.nextCursor, null);
 assert.ok(customerRows.every((row) => !("password_hash" in row)), "customer directory never returns password hashes");
 assert.ok(customerRows.every((row) => !("school_email" in row)), "customer directory omits school email addresses");
+const customerDetailsPath = id => `/api/members/admin/customers/${id}/details`;
+assert.equal((await call(customerDetailsPath(managedCustomerId),{method:"POST"})).status,403);
+assert.equal((await call(customerDetailsPath(managedCustomerId),{method:"POST",cookie:sessionCookie,headers:{"CF-Connecting-IP":"198.51.100.5"}})).status,403);
+assert.equal((await call(customerDetailsPath(crypto.randomUUID()),{method:"POST",cookie:sessionCookie})).status,404);
+const emptyDetails=await (await call(customerDetailsPath(managedCustomerId),{method:"POST",cookie:sessionCookie})).json();
+assert.equal(emptyDetails.person.school_email,null);
+assert.deepEqual(emptyDetails.applications,[]);
 assert.equal((await call("/api/members/admin/customers?cursor=not-a-cursor", { cookie: sessionCookie })).status, 400, "invalid pagination cursors are rejected");
 const lockedCustomer = await call(`/api/members/admin/customers/${managedCustomerId}/status`, { method: "POST", cookie: sessionCookie, body: { status: "locked" } });
 assert.equal(lockedCustomer.status, 200, "allowlisted administrator can suspend a customer account");
@@ -553,6 +560,11 @@ const application = (await queue.json()).applications[0];
 assert.equal(application.email, "student@example.test");
 assert.equal(application.school_email, "student@university.example.test", "reviewers can inspect the verified school address before approval");
 assert.equal(application.study_city, "Alphen aan den Rijn");
+const studentDetail=await (await call(customerDetailsPath(customerRows.find(row=>row.email===application.email).id),{method:"POST",cookie:sessionCookie})).json();
+assert.equal(studentDetail.person.school_email, application.school_email);
+assert.ok(studentDetail.person.email_verified_at && studentDetail.person.school_email_verified_at);
+assert.equal(studentDetail.applications[0].status,"pending");
+assert.equal(studentDetail.applications[0].institution,application.institution);
 assert.equal(application.has_proof, 0, "new applications tell the admin UI there is no proof link");
 const decision = await call(`/api/members/admin/student-applications/${application.id}/decision`, {
   method: "POST", cookie: sessionCookie, body: { decision: "approved" },
