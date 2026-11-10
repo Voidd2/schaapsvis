@@ -4,6 +4,8 @@ import { paginaMetadata, kruimelSchema } from "@/lib/seo";
 import { BEDRIJF } from "@/lib/bedrijf";
 import { bestelContact } from "@/lib/bestel-contact";
 import { VarlaksFilm } from "@/components/shared/VarlaksFilm";
+import { StaticResponsiveImage } from "@/components/StaticResponsiveImage";
+import { BEELD } from "@/lib/beeld";
 import { VarlaksDiscountOffer } from "./VarlaksDiscountOffer";
 import { VarlaksLocations } from "@/components/shared/VarlaksLocations";
 import { BedieningSlot } from "@/components/catalog/BedieningSlot";
@@ -73,12 +75,17 @@ export default async function VarlaksPage({ params }: Props) {
     </section>
 
     <section id="film" className={styles.filmSection} aria-labelledby="varlaks-film-heading">
-      <div><p className={styles.eyebrow}>VÅRLAKS · Film</p><h2 id="varlaks-film-heading">{c.filmTitle}</h2><p>{c.filmText}</p></div>
+      <div className={styles.filmIntro}><p className={styles.eyebrow}>VÅRLAKS · Film</p><h2 id="varlaks-film-heading">{c.filmTitle}</h2><p>{c.filmText}</p></div>
       <div className={styles.player}><BedieningSlot fallback={<a className={styles.primary} href="https://vimeo.com/932791452">{c.vimeo} ↗</a>}>
         <VarlaksFilm locale={lang} poster={base + "kweker-met-zalm.webp"}>
           <VarlaksDiscountOffer locale={lang}/>
         </VarlaksFilm>
       </BedieningSlot></div>
+      <figure className={styles.stall}>
+        <StaticResponsiveImage src={BEELD.historieNu.bestand} alt={c.stallAlt}
+          width={1600} height={900} sizes="(max-width: 430px) 90vw, (max-width: 740px) 384px, (max-width: 1100px) 36vw, 384px" />
+        <figcaption>{c.stallCaption}</figcaption>
+      </figure>
     </section>
 
     <VarlaksLocations locale={lang}/>
