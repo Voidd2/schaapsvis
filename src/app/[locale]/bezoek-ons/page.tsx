@@ -10,7 +10,8 @@ import { Kruimels, Sectie } from "@/components/ui/Sectie";
 import { PaginaSlot } from "@/components/ui/PaginaKop";
 import { paginaMetadata, kruimelSchema } from "@/lib/seo";
 import { BEDRIJF, ADRES_REGEL, VERKOOPPUNTEN } from "@/lib/bedrijf";
-import { heeftBeeld } from "@/lib/beeld";
+import { BEELD, heeftBeeld } from "@/lib/beeld";
+import { StaticResponsiveImage } from "@/components/StaticResponsiveImage";
 
 import { Beeld } from "@/components/ui/Beeld";
 import type { BeeldNaam } from "@/lib/beeld";
@@ -108,22 +109,37 @@ export default async function BezoekOnsPage({
         <Kruimels items={[{naam:BEDRIJF.naamKort,href:`/${locale}`},{naam:nav("locaties")}]} />
         <p className="kapitaal mb-3">{BEDRIJF.adres.plaats}</p>
         <h1>{t("title")}</h1>
-      <div className="today-counters"><h2>{visit.today?(locale==="en"?"Today":locale==="de"?"Heute":"Vandaag"):(locale==="en"?"Next opening":locale==="de"?"Nächste Öffnung":"Eerstvolgende opening")} · {day}</h2>{counters.map(p=><a key={p.id} href={p.mapsUrl} aria-label={`${p.naam}: ${p.adres}, Google Maps`}><strong>{p.naam}</strong><span>{p.adres} · {visit.hours[p.id]}</span><span>Google Maps ↗</span></a>)}</div>
-      <nav
-        aria-label={locale === "de" ? "Standort auswählen" : locale === "en" ? "Choose a location" : "Kies een locatie"}
-        className="py-5"
-      >
-        <ul className="flex flex-wrap gap-2">
-          {PLEKKEN.map((plek) => (
-            <li key={plek.id}>
-              <a className="location-jump" href={`#locatie-${plek.id}`}>
-                {p(`${plek.id}Naam`)}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-      <p>{locale === "nl" ? "Kies uw locatie voor openingstijden en de route." : locale === "de" ? "Wählen Sie Ihren Standort für Öffnungszeiten und Anfahrt." : "Choose your location for opening hours and directions."}</p>
+        <div className="grid gap-5 md:grid-cols-[3fr_2fr] md:items-center md:gap-8">
+          <div>
+            <div className="today-counters"><h2>{visit.today?(locale==="en"?"Today":locale==="de"?"Heute":"Vandaag"):(locale==="en"?"Next opening":locale==="de"?"Nächste Öffnung":"Eerstvolgende opening")} · {day}</h2>{counters.map(p=><a key={p.id} href={p.mapsUrl} aria-label={`${p.naam}: ${p.adres}, Google Maps`}><strong>{p.naam}</strong><span>{p.adres} · {visit.hours[p.id]}</span><span>Google Maps ↗</span></a>)}</div>
+            <nav
+              aria-label={locale === "de" ? "Standort auswählen" : locale === "en" ? "Choose a location" : "Kies een locatie"}
+              className="py-5"
+            >
+              <ul className="flex flex-wrap gap-2">
+                {PLEKKEN.map((plek) => (
+                  <li key={plek.id}>
+                    <a className="location-jump" href={`#locatie-${plek.id}`}>
+                      {p(`${plek.id}Naam`)}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <p>{locale === "nl" ? "Kies uw locatie voor openingstijden en de route." : locale === "de" ? "Wählen Sie Ihren Standort für Öffnungszeiten und Anfahrt." : "Choose your location for opening hours and directions."}</p>
+          </div>
+          <figure>
+            <StaticResponsiveImage
+              src={BEELD.historieNu.bestand}
+              alt={t("viskarAlt")}
+              width={1600}
+              height={900}
+              sizes="(max-width: 767px) 95vw, (max-width: 1720px) 38vw, 644px"
+              className="h-auto w-full rounded-lg"
+            />
+            <figcaption className="mt-2 text-sm">{t("viskarBijschrift")}</figcaption>
+          </figure>
+        </div>
       </section>
 
       {/* ── De plekken ────────────────────────────────────────────────────── */}
