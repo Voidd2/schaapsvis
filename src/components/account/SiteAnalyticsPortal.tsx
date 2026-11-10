@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import { BarChart3, MousePointer2, MessageCircle, Phone, Search, Cloud, ExternalLink, RefreshCw } from "lucide-react";
 import { PopupExperimentReport, type PopupRow } from "./PopupExperimentReport";
 import { analyticsCopy } from "./analytics-copy";
+import { VisitorJourneyReport, type JourneyReportData } from "./VisitorJourneyReport";
 
 type Day = { day: string; views: number; clicks: number };
 type Report = {
+ journeys?: JourneyReportData;
  popup?: PopupRow[];
  locationsPopup?: PopupRow[];
  enabled: boolean; since: string; until: string; generatedAt: string;
@@ -55,6 +57,7 @@ export function SiteAnalyticsPortal({ locale }: { locale: string }) {
   </div>
   {loading ? <p role="status" className={panel}>{c.loading}</p> : error ? <div role="alert" className={`${panel} bg-amber-50`}><p>{error}</p><button onClick={reload} type="button" className="knop knop-lijn mt-4">{c.refresh}</button></div> : report && <>
    <div className="mb-5 flex flex-wrap items-center justify-between gap-3 text-sm"><strong className={`rounded-full px-4 py-2 ${report.enabled ? "bg-emerald-50 text-emerald-900" : "bg-amber-50 text-amber-900"}`}>{report.enabled ? c.active : c.inactive}</strong><span>{date(report.since)} – {date(report.until)} · UTC</span></div>
+   {report.journeys && <VisitorJourneyReport report={report.journeys} locale={language}/>}
    <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">{[
     { key:"views", title:c.views, icon:BarChart3 }, { key:"clicks", title:c.clicks, icon:MousePointer2 }, { key:"whatsapp", title:c.whatsapp, icon:MessageCircle }, { key:"phone", title:c.phone, icon:Phone },
    ].map(({key,title,icon:Icon}) => <section key={key} className={`${panel} min-w-0`}><Icon className="text-sky-800" size={23} aria-hidden /><h2 className="mt-4 font-body text-base font-semibold">{title}</h2><p className="mt-2 text-3xl font-bold tabular-nums text-sky-950">{number.format(report.summary[key as "views"|"clicks"|"whatsapp"|"phone"])}</p></section>)}</div>

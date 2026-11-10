@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 import { SignupFacebookFollow } from "./SignupFacebookFollow";
 import { signupVisitComplete, visitAtSignup } from "@/lib/signup-visit";
+import { recordJourneyStep } from "@/lib/visitor-journey.mjs";
 
 const copy = {
   nl: {
@@ -77,6 +78,7 @@ export function NewsletterSignup({ compact = false, locale = "nl" }: { compact?:
   const [savingRegion, setSavingRegion] = useState(false);
 
   function restartExpiredSignup() {
+    recordJourneyStep("signupError");
     setDraftToken("");
     setStep("email");
     setMessage(t.expired);
@@ -92,7 +94,8 @@ export function NewsletterSignup({ compact = false, locale = "nl" }: { compact?:
       });
       if (response.status === 410) { restartExpiredSignup(); return; }
       if (!response.ok || (await response.json()).ok !== true) throw new Error("draft-update-unavailable");
-    } catch { setMessage(t.regionError); }
+      recordJourneyStep("regionSelected");
+    } catch { recordJourneyStep("signupError"); setMessage(t.regionError); }
     finally { setSavingRegion(false); }
   }
 
@@ -113,10 +116,12 @@ export function NewsletterSignup({ compact = false, locale = "nl" }: { compact?:
       if (!result.draftToken) throw new Error("newsletter-draft-unavailable");
       setDraftEmail(email);
       setDraftToken(result.draftToken);
+      recordJourneyStep("draftSaved");
       setStep("preferences");
     } catch {
       setSuccess(false);
       setMessage(t.error);
+      recordJourneyStep("signupError");
     } finally {
       setBusy(false);
     }
@@ -139,6 +144,7 @@ export function NewsletterSignup({ compact = false, locale = "nl" }: { compact?:
       if (response.status === 410) { restartExpiredSignup(); return; }
       if (!response.ok || (await response.json()).ok !== true) throw new Error("newsletter-unavailable");
       signupVisitComplete(visit);
+      recordJourneyStep("subscribed");
       try { localStorage.setItem("sv-discounts-subscribed", "1"); } catch { /* Storage is optional. */ }
       setSuccess(true);
       setMessage(t.sent);
@@ -146,6 +152,7 @@ export function NewsletterSignup({ compact = false, locale = "nl" }: { compact?:
     } catch {
       setSuccess(false);
       setMessage(t.error);
+      recordJourneyStep("signupError");
     } finally {
       setBusy(false);
     }
@@ -162,14 +169,14 @@ export function NewsletterSignup({ compact = false, locale = "nl" }: { compact?:
         <h2 className={`font-display text-2xl font-bold ${headingColor}`}>{t.title}</h2>
         <p className={`mt-2 text-base leading-7 ${introColor}`}>{t.intro}</p>
       </div>
-      {step === "email" ? <form onSubmit={continueSignup} className="space-y-3">
+      {step === "email" ? <form data-newsletter-form="footer" onSubmit={continueSignup} className="space-y-3">
         <label className={`block text-base font-medium ${labelColor}`}>
           {t.email}
           <input name="email" type="email" required autoComplete="email" maxLength={254} defaultValue={draftEmail} disabled={busy || success} className="mt-1 block w-full rounded-lg border border-sky-200 bg-white px-3 py-2.5 text-base text-slate-900 outline-none focus:border-sky-700 focus:ring-2 focus:ring-sky-100 disabled:opacity-70" />
         </label>
         <p className={`text-sm leading-6 ${privacyColor}`}>{t.draftPrivacy}</p>
         <button type="submit" disabled={busy || success} className={`${buttonStyle} disabled:cursor-not-allowed disabled:opacity-60`}>{busy ? t.sending : t.next}</button>
-      </form> : <form onSubmit={finishSignup} className="space-y-3">
+      </form> : <form data-newsletter-form="footer" onSubmit={finishSignup} className="space-y-3">
         <p className={`text-base font-semibold ${labelColor}`}>{draftEmail}</p>
         <label className={`block text-base font-medium ${labelColor}`}>
           {t.region}
