@@ -2228,7 +2228,7 @@ async function subscribeNewsletter(request, env) {
   const discountsForm = body?.form === "discounts";
   // Older open discount forms did not send a version and only mentioned vouchers.
   const discountVersion = body?.consentVersion ?? "discount-vouchers-2026-11";
-  if (discountsForm && !["discount-vouchers-2026-11", "discount-vouchers-and-advertising-v1"].includes(discountVersion)) {
+  if (discountsForm && !["discount-vouchers-2026-11", "discount-vouchers-and-advertising-v1", "discount-news-and-offers-v2"].includes(discountVersion)) {
     return json({ error: "consent_required" }, 400);
   }
   const varlaksOffer = body?.form === "varlaks";
@@ -2236,8 +2236,8 @@ async function subscribeNewsletter(request, env) {
   const popupOffer = varlaksOffer || locationsOffer;
   // Already-open tabs may still submit the original offer's wording.
   const offerVersion = body?.consentVersion ?? "varlaks-weekly-offers-v1";
-  if (varlaksOffer && !["varlaks-weekly-offers-v1", "varlaks-weekly-offers-v2", "varlaks-weekly-offers-v3"].includes(offerVersion)) return json({ error: "consent_required" }, 400);
-  if (locationsOffer && offerVersion !== "locations-weekly-offers-v1") return json({ error: "consent_required" }, 400);
+  if (varlaksOffer && !["varlaks-weekly-offers-v1", "varlaks-weekly-offers-v2", "varlaks-weekly-offers-v3", "varlaks-news-and-offers-v4"].includes(offerVersion)) return json({ error: "consent_required" }, 400);
+  if (locationsOffer && !["locations-weekly-offers-v1", "locations-news-and-offers-v2"].includes(offerVersion)) return json({ error: "consent_required" }, 400);
   const regionTag = body?.regionTag ?? null;
   const draftToken = typeof body?.draftToken === "string" ? body.draftToken : "";
   const validRegion = (discountsForm || popupOffer) && regionTag === null || ["leiden", "voorschoten", "wassenaar", "leidschendam", "regio-071", "elders"].includes(regionTag);
@@ -2265,7 +2265,7 @@ async function subscribeNewsletter(request, env) {
       .bind(email, version, at, at, source, at, at),
   ];
   const measurement = body?.measurement;
-  const supportsMeasurement = locationsOffer || (varlaksOffer && offerVersion === "varlaks-weekly-offers-v3");
+  const supportsMeasurement = locationsOffer || (varlaksOffer && ["varlaks-weekly-offers-v3", "varlaks-news-and-offers-v4"].includes(offerVersion));
   const recordConversion = supportsMeasurement && await mayMeasurePopup(request, env, measurement);
   const metrics = [];
   const visitStatement = await signupVisitStatement(request,env,body.visit,email,at);

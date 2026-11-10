@@ -1,6 +1,8 @@
 import { siteLanguage } from "./language";
 const TEXT:Record<string,readonly[string,string]> = {
 "Bon laden…":["Loading voucher…","Gutschein wird geladen…"],
+"Geen actieve kortingsactie":["No current discount offer","Keine aktive Rabattaktion"],
+"Er is op dit moment geen kortingsactie actief. Via onze nieuwsbrief houden we u op de hoogte van nieuws en toekomstige aanbiedingen.":["There is no discount offer running at the moment. Our newsletter keeps you informed about news and future offers.","Zurzeit gibt es keine aktive Rabattaktion. Unser Newsletter informiert Sie über Neuigkeiten und zukünftige Angebote."],
 "Ongeldige bon":["Invalid voucher","Ungültiger Gutschein"],
 "Deze kortingslink is niet (meer) geldig. Volg onze nieuwsbrief voor nieuwe acties.":["This voucher link is no longer valid. Follow our Facebook page for new offers.","Dieser Gutscheinlink ist nicht mehr gültig. Folgen Sie unserer Facebook-Seite für neue Angebote."],
 "Bon verlopen":["Voucher expired","Gutschein abgelaufen"],

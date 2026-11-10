@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { recordPopupStage, type PopupExperiment, type PopupMeasurement } from "@/lib/discount-popup";
-import { discountConsentVersion, discountSignupCopy } from "@/lib/discount-signup";
+import { discountConsentVersion, discountSignupCopy, popupConsentVersions } from "@/lib/discount-signup";
 import { SignupFacebookFollow } from "./SignupFacebookFollow";
 import { signupVisitComplete, visitAtSignup } from "@/lib/signup-visit";
 import { recordJourneyStep } from "@/lib/visitor-journey.mjs";
@@ -25,7 +25,7 @@ export function DiscountSignup({ locale, offer }: { locale: string; offer?: Offe
         body: JSON.stringify({
           email: form.get("email"), locale, form: offer?.experiment ?? "discounts", visit,
           ...(offer
-            ? { consentVersion: offer.experiment === "locations" ? "locations-weekly-offers-v1" : "varlaks-weekly-offers-v3", measurement: offer.getMeasurement() }
+            ? { consentVersion: popupConsentVersions[offer.experiment], measurement: offer.getMeasurement() }
             : { consentVersion: discountConsentVersion }),
           // The offer's submit button explicitly requests marketing emails.
           consent: Boolean(offer) || form.get("consent") === "on",
