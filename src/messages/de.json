@@ -232,7 +232,7 @@
   },
   "contactPage": {
     "title": "Kontakt",
-    "sub": "Möchten Sie Fisch reservieren? Schreiben Sie uns per WhatsApp, welchen Fisch Sie möchten, wie viel und an welchem Tag Sie vorbeikommen. Wir beantworten auch Fragen zum Angebot.",
+    "sub": "Möchten Sie Fisch reservieren? Schreiben Sie uns per WhatsApp, welchen Fisch Sie möchten, wie viel und an welchem Tag Sie vorbeikommen.",
     "formTitle": "Nachricht senden",
     "nameLabel": "Name",
     "emailLabel": "E-Mail-Adresse",
@@ -334,7 +334,7 @@
     "verhaalLink": "Die ganze Geschichte lesen",
     "assortimentLabel": "In der Theke",
     "assortimentKop": "Was heute da ist",
-    "assortimentTekst": "Von VÅRLAKS-Lachs und holländischen Garnelen bis zu frischem Fisch und Gebratenem: Entdecken Sie unser Angebot. Die Verfügbarkeit richtet sich nach dem Tagesangebot. Suchen Sie etwas Bestimmtes? Schreiben Sie uns per WhatsApp – wir helfen Ihnen gern.",
+    "assortimentTekst": "Von VÅRLAKS-Lachs und holländischen Garnelen bis zu frischem Fisch und Gebratenem: Entdecken Sie unser Angebot.",
     "assortimentLink": "Das ganze Sortiment",
     "assortimentAantal": "{aantal} Sorten",
     "assortimentAantalEen": "{aantal} Sorte",

@@ -1,7 +1,5 @@
 import { publicLink } from "@/lib/seasonal-availability";
 import Link from "next/link";
-import { useLocale } from "next-intl";
-import { bestelContact } from "@/lib/bestel-contact";
 import type { ReactNode } from "react";
 import { Kruimels } from "./Sectie";
 
@@ -166,13 +164,6 @@ export function PaginaKop({
   );
 }
 
-/**
- * De afsluiting van een pagina.
- *
- * Elke pagina hoort uit te komen bij één van de drie dingen die we willen:
- * een visschaal samenstellen, verse vis bestellen, of langskomen. Daarom staat
- * dit blok onderaan élke pagina, in dezelfde vorm.
- */
 export function PaginaSlot({
   titel,
   tekst,
@@ -182,14 +173,7 @@ export function PaginaSlot({
   tekst?: string;
   knoppen: KopKnop[];
 }) {
-  const locale = useLocale();
-  if (knoppen.some(link => !publicLink(link))) {
-    const copy = locale === "en" ? ["What’s at the counter today?", "Ask us what’s fresh or visit our shop in Leiden.", "Directions and opening hours"]
-      : locale === "de" ? ["Was gibt es heute an der Theke?", "Fragen Sie nach unserem Tagesangebot oder besuchen Sie uns in Leiden.", "Anfahrt und Öffnungszeiten"]
-      : ["Wat ligt er vandaag in de toonbank?", "App ons voor de vis van vandaag of kom langs in de Herenstraat.", "Route en openingstijden"];
-    [titel, tekst] = copy;
-    knoppen = [{ ...bestelContact(locale), extern: true }, { label: copy[2], href: `/${locale}/bezoek-ons`, soort: "lijn" }];
-  }
+  if (knoppen.some(link => !publicLink(link))) return null;
   return (
     <section className="shop-page-end py-14 md:py-20">
       <div className="site-container shop-page-end-inner">

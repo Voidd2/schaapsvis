@@ -20,8 +20,8 @@ export function localizePlatter(s:Schaal,locale:string):Schaal{
   const item=DIRKS_VISSCHALEN.find(x=>x.slug===s.id);
   if(!item)throw new Error("Missing platter "+s.id);
   const omschrijving=l==="en"
-    ? item.groep==="borrelbox"?"A seafood box for sharing. We agree the exact selection and presentation with you.":item.groep==="hapjes"?"Small seafood bites to share. Ask us about today's selection.":item.groep==="luxe"?"A more generous seafood selection for a special occasion. Contents depend on your wishes and fresh supply.":"A platter of fish and seafood. Tell us what you would like on it."
-    : item.groep==="borrelbox"?"Eine Fischbox zum Teilen. Inhalt und Präsentation stimmen wir mit Ihnen ab.":item.groep==="hapjes"?"Kleine Fischhäppchen zum Teilen. Fragen Sie nach der aktuellen Auswahl.":item.groep==="luxe"?"Eine großzügigere Fischauswahl für besondere Anlässe. Der Inhalt richtet sich nach Ihren Wünschen und der frischen Lieferung.":"Eine Platte mit Fisch und Meeresfrüchten. Sagen Sie uns, was Sie gern darauf hätten.";
+    ? item.groep==="borrelbox"?"A seafood box for sharing. We agree the exact selection and presentation with you.":item.groep==="hapjes"?"Small seafood bites to share.":item.groep==="luxe"?"A more generous seafood selection for a special occasion. Contents depend on your wishes and fresh supply.":"A platter of fish and seafood. Tell us what you would like on it."
+    : item.groep==="borrelbox"?"Eine Fischbox zum Teilen. Inhalt und Präsentation stimmen wir mit Ihnen ab.":item.groep==="hapjes"?"Kleine Fischhäppchen zum Teilen.":item.groep==="luxe"?"Eine großzügigere Fischauswahl für besondere Anlässe. Der Inhalt richtet sich nach Ihren Wünschen und der frischen Lieferung.":"Eine Platte mit Fisch und Meeresfrüchten. Sagen Sie uns, was Sie gern darauf hätten.";
   return {...s,naam:selectieNaam(s.id,locale),omschrijving};
 }
 export function platterName(id:string,locale:string):string|undefined{const l=siteLanguage(locale);if(l==="nl")return undefined;return COPY[id]?.[l==="en"?0:1].naam ?? (DIRKS_VISSCHALEN.some(x=>x.slug===id)?selectieNaam(id,locale):undefined);}

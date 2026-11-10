@@ -102,7 +102,7 @@ export const SCHALEN: Schaal[] = [
     omschrijving: item.groep === "borrelbox"
       ? "Een box met vis voor een borrel. De precieze samenstelling en presentatie stemmen we met u af."
       : item.groep === "hapjes"
-        ? "Kleine vishapjes om samen te delen. Vraag naar de invulling van de dag."
+        ? "Kleine vishapjes om samen te delen."
         : item.groep === "luxe"
           ? "Een ruimere, feestelijke visselectie. De inhoud hangt af van uw wensen en de verse aanvoer."
           : "Een schaal met een selectie van vis en zeevruchten. We bespreken wat u erop wilt hebben.",

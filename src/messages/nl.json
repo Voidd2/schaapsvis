@@ -232,7 +232,7 @@
   },
   "contactPage": {
     "title": "Contact",
-    "sub": "Wilt u vis reserveren? Stuur ons via WhatsApp welke vis u zoekt, hoeveel u wilt en wanneer u langskomt. Ook voor een vraag over de toonbank kunt u ons appen.",
+    "sub": "Wilt u vis reserveren? Stuur ons via WhatsApp welke vis u zoekt, hoeveel u wilt en wanneer u langskomt.",
     "formTitle": "Stuur een bericht",
     "nameLabel": "Naam",
     "emailLabel": "E-mailadres",
@@ -334,7 +334,7 @@
     "verhaalLink": "Lees het hele verhaal",
     "assortimentLabel": "In de toonbank",
     "assortimentKop": "Wat er ligt",
-    "assortimentTekst": "Van VÅRLAKS-zalm en Hollandse garnalen tot verse vis en iets uit de pan: bekijk wat we verkopen. De aanvoer wisselt. Zoekt u iets specifieks? Stuur ons een WhatsApp-bericht; we kijken graag met u mee.",
+    "assortimentTekst": "Van VÅRLAKS-zalm en Hollandse garnalen tot verse vis en iets uit de pan: bekijk wat we verkopen.",
     "assortimentLink": "Het hele assortiment",
     "assortimentAantal": "{aantal} soorten",
     "assortimentAantalEen": "{aantal} soort",
