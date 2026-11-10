@@ -64,6 +64,9 @@
 .certificates > a { margin:.35rem 0; }
 .filmSection { background:var(--sea); color:white; display:grid; grid-template-columns:.85fr 1.15fr; align-items:center; gap:clamp(24px,5vw,70px); padding:clamp(28px,4vw,64px) var(--gutter); }
 .player { min-width:0; }
+.stall { width:100%; max-width:24rem; margin:0; }
+.stall img { width:100%; height:auto; display:block; border-radius:.35rem; }
+.stall figcaption { margin-top:.5rem; color:#dfebef; font-size:.95rem; }
 .player :global(.supplier-film) { border-radius:.35rem; }
 .player :global(.supplier-film button) { position:relative; isolation:isolate; justify-content:flex-end; align-items:flex-start; text-align:left; gap:.25rem; background:#152f45; }
 .player :global(.supplier-film button img) { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 40%; z-index:-2; }
@@ -108,8 +111,10 @@
   .origin { margin:0; padding:clamp(40px,5vw,80px) var(--rail); background:#f8f7f2; }
   .originCopy { max-width:45rem; }
   .landscape { border-radius:4px; }
-  .filmSection { padding-inline:var(--rail); }
-  .player { width:100%; max-width:54rem; }
+  .filmSection { padding-inline:var(--rail); grid-template-areas:"intro player" "stall player"; row-gap:1.25rem; }
+  .filmIntro { grid-area:intro; align-self:end; }
+  .stall { grid-area:stall; align-self:start; }
+  .player { grid-area:player; width:100%; max-width:54rem; }
   .page :global(.varlaks-locations > .section-wrap) { padding-inline:var(--rail); max-width:none; }
   .serving { display:grid; grid-template-columns:var(--rail) minmax(0,.82fr) minmax(0,1.18fr); align-items:center; }
   .serving > div { width:auto; grid-column:2; grid-row:1; padding:clamp(36px,4.8vw,76px) var(--gutter) clamp(36px,4.8vw,76px) 0; }
