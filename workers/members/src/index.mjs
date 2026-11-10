@@ -679,10 +679,10 @@ async function adminSignupVisit(request, env) {
   if (body.action === "erase") {
     await env.DB.prepare("DELETE FROM signup_visits WHERE email=?").bind(email).run();
   }
-  const region = await env.DB.prepare("SELECT region_tag FROM newsletter_subscriptions WHERE email=?").bind(email).first();
+  const subscription = await env.DB.prepare("SELECT region_tag, source FROM newsletter_subscriptions WHERE email=?").bind(email).first();
   const visit = await env.DB.prepare("SELECT granted_at, signup_at, ip, city, pages FROM signup_visits WHERE email=? AND expires_at>?")
     .bind(email, nowIso()).first();
-  return json({region:region?.region_tag ?? null, visit:visit ? {...visit, pages:JSON.parse(visit.pages)} : null});
+  return json({source:subscription?.source ?? null, region:subscription?.region_tag ?? null, visit:visit ? {...visit, pages:JSON.parse(visit.pages)} : null});
 }
 
 const isVisitToken = value => typeof value === "string" && /^[A-Za-z0-9_-]{43}$/.test(value);

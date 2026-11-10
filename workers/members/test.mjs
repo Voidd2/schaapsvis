@@ -958,7 +958,9 @@ assert.equal((await expiredPassCheck.json()).valid, false, "the expired former p
   const signup=()=>call("/api/members/newsletter/subscribe",{method:"POST",headers,cf:{city:"Voorschoten"},body:{email,form:"discounts",consent:true,visit}});
   assert.equal((await signup()).status,202);
   assert.equal((await call("/api/members/admin/signup-visit",{method:"POST",body:{email}})).status,403);
-  const personal=(await (await details()).json()).visit;
+  const initialDetails=await (await details()).json();
+  assert.equal(initialDetails.source,"discount-form","signup source is independent of personal visit data");
+  const personal=initialDetails.visit;
   assert.equal(personal.ip,headers["CF-Connecting-IP"]);
   assert.equal(personal.city,"Voorschoten");
   assert.deepEqual(personal.pages,["/nl/varlaks","/nl/aanbiedingen"]);
@@ -968,7 +970,9 @@ assert.equal((await expiredPassCheck.json()).valid, false, "the expired former p
   assert.deepEqual((await (await details()).json()).visit.pages,[...personal.pages,next.path]);
   assert.equal((await action("forget",{token:grant.token})).status,200);
   await Promise.all([action("page",next), signup()]);
-  assert.equal((await (await details()).json()).visit,null);
+  const forgottenDetails=await (await details()).json();
+  assert.equal(forgottenDetails.visit,null);
+  assert.equal(forgottenDetails.source,"discount-form","forgetting a visit preserves the signup source");
   const another=await (await action("grant",{version,consent:true})).json();
   visit.token=another.token;
   await signup();
@@ -979,7 +983,9 @@ assert.equal((await expiredPassCheck.json()).valid, false, "the expired former p
   visit.token=renewed.token;
   assert.equal((await signup()).status,202);
   sqlite.prepare("UPDATE signup_visits SET expires_at='2000-01-01T00:00:00Z' WHERE email=?").run(email);
-  assert.equal((await (await details()).json()).visit,null);
+  const expiredDetails=await (await details()).json();
+  assert.equal(expiredDetails.visit,null);
+  assert.equal(expiredDetails.source,"discount-form","expired visits do not hide the signup source");
   sqlite.prepare("UPDATE newsletter_subscriptions SET status='unsubscribed' WHERE email=?").run(email);
   assert.equal(sqlite.prepare("SELECT 1 FROM signup_visits WHERE email=?").get(email),undefined);
   sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(email);
