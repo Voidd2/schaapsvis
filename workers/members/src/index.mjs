@@ -2226,6 +2226,9 @@ async function subscribeNewsletter(request, env) {
   const copy = ACCOUNT_COPY[locale];
   const email = normalizeEmail(body?.email);
   const discountsForm = body?.form === "discounts";
+  const footerForm = body?.form === "footer";
+  const directFooter = footerForm && body?.consentVersion === "footer-email-signup-v2";
+  if (footerForm && body?.consentVersion && ![NEWSLETTER_CONSENT_VERSION, "footer-email-signup-v2"].includes(body.consentVersion)) return json({ error: "consent_required" }, 400);
   // Older open discount forms did not send a version and only mentioned vouchers.
   const discountVersion = body?.consentVersion ?? "discount-vouchers-2026-11";
   if (discountsForm && !["discount-vouchers-2026-11", "discount-vouchers-and-advertising-v1", "discount-news-and-offers-v2"].includes(discountVersion)) {
@@ -2240,7 +2243,7 @@ async function subscribeNewsletter(request, env) {
   if (locationsOffer && !["locations-weekly-offers-v1", "locations-news-and-offers-v2"].includes(offerVersion)) return json({ error: "consent_required" }, 400);
   const regionTag = body?.regionTag ?? null;
   const draftToken = typeof body?.draftToken === "string" ? body.draftToken : "";
-  const validRegion = (discountsForm || popupOffer) && regionTag === null || ["leiden", "voorschoten", "wassenaar", "leidschendam", "regio-071", "elders"].includes(regionTag);
+  const validRegion = (discountsForm || popupOffer || directFooter) && regionTag === null || ["leiden", "voorschoten", "wassenaar", "leidschendam", "regio-071", "elders"].includes(regionTag);
   if (!email || body?.consent !== true || !validRegion) return json({ error: "consent_required" }, 400);
   if (draftToken) {
     const draft = await env.DB.prepare(`SELECT email FROM newsletter_signup_drafts WHERE token_hash=? AND expires_at>?`).bind(await digest(draftToken), nowIso()).first();
@@ -2250,7 +2253,7 @@ async function subscribeNewsletter(request, env) {
   if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "newsletter", ip, email, 12, 4, 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
   const at = nowIso();
   const user = await sessionUser(request, env);
-  const version = popupOffer ? offerVersion : discountsForm ? discountVersion : NEWSLETTER_CONSENT_VERSION;
+  const version = popupOffer ? offerVersion : discountsForm ? discountVersion : directFooter ? "footer-email-signup-v2" : NEWSLETTER_CONSENT_VERSION;
   const source = popupOffer ? `${body.form}-popup` : discountsForm ? "discount-form" :
     body.form === "footer" ? footerSignupSource(request) : user ? "account" : "newsletter-form";
   const userId = user?.email === email ? user.id : null;
@@ -2280,8 +2283,9 @@ async function subscribeNewsletter(request, env) {
       region_tag=COALESCE(?,region_tag), updated_at=? WHERE email=?`).bind(userId, regionTag, at, email));
   }
   if (draftToken) statements.push(env.DB.prepare(`DELETE FROM newsletter_signup_drafts WHERE token_hash=?`).bind(await digest(draftToken)));
-  statements.push(env.DB.prepare(`SELECT 1 AS saved FROM newsletter_subscriptions WHERE email=?
+  statements.push(env.DB.prepare(`SELECT 1 AS saved, consented_at FROM newsletter_subscriptions WHERE email=?
     AND status='subscribed' AND confirmed_at IS NOT NULL AND unsubscribed_at IS NULL`).bind(email));
+  let preferencesToken;
   try {
     let results;
     try {
@@ -2293,10 +2297,39 @@ async function subscribeNewsletter(request, env) {
       results = await env.DB.batch(statements);
     }
     if (!results.at(-1)?.results?.[0]?.saved) return json({ error: "newsletter_unavailable" }, 503);
+    if (directFooter) {
+      // Only this editing capability expires; the subscription has no expiry.
+      const payload = base64url(encoder.encode(JSON.stringify({ email, consentedAt: results.at(-1).results[0].consented_at, expires: Date.now() + 24 * 60 * 60 * 1000 })));
+      preferencesToken = `${payload}.${await hmac(env.AUTH_PEPPER, `newsletter-preferences:${payload}`)}`;
+    }
   } catch {
     return json({ error: "newsletter_unavailable" }, 503);
   }
-  return json({ ok: true, message: copy.alreadySubscribed }, 202);
+  return json({ ok: true, message: copy.alreadySubscribed, ...(preferencesToken ? {preferencesToken} : {}) }, 202);
+}
+
+async function updateNewsletterPreferences(request, env) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  if (!env.DB || !env.AUTH_PEPPER) return json({ error: "newsletter_unavailable" }, 503);
+  const body = await readJson(request);
+  const token = body?.preferencesToken;
+  const region = body?.regionTag;
+  if (typeof token !== "string" || token.length > 2048 || !["leiden", "voorschoten", "wassenaar", "leidschendam", "regio-071", "elders"].includes(region)) return json({ error: "invalid_preferences" }, 400);
+  let grant;
+  try {
+    const [payload, signature, extra] = token.split(".");
+    if (extra !== undefined || !payload || !safeEqual(signature, await hmac(env.AUTH_PEPPER, `newsletter-preferences:${payload}`))) throw new Error("invalid-token");
+    grant = JSON.parse(new TextDecoder().decode(fromBase64url(payload)));
+    if (!normalizeEmail(grant.email) || typeof grant.consentedAt !== "string" || !Number.isFinite(grant.expires) || grant.expires <= Date.now()) throw new Error("expired-token");
+  } catch { return json({ error: "preferences_expired" }, 410); }
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "newsletter-preferences", ip, grant.email, 120, 30, 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
+  // An old region choice can never reactivate an unsubscribed address or edit
+  // a new subscription made after it was unsubscribed/deleted.
+  const saved = await env.DB.prepare(`UPDATE newsletter_subscriptions SET region_tag=?, updated_at=?
+    WHERE email=? AND consented_at=? AND status='subscribed' AND unsubscribed_at IS NULL RETURNING email`)
+    .bind(region, nowIso(), grant.email, grant.consentedAt).first();
+  return saved ? json({ ok: true }) : json({ error: "preferences_expired" }, 410);
 }
 
 async function startNewsletterSignup(request, env) {
@@ -2759,6 +2792,7 @@ const memberWorker = {
     if (path === "/api/members/admin/newsletter-campaigns" && method === "POST") return createNewsletterCampaign(request, env);
     if (path === "/api/members/newsletter/start" && method === "POST") return startNewsletterSignup(request, env);
     if (path === "/api/members/newsletter/draft" && method === "PATCH") return updateNewsletterDraft(request, env);
+    if (path === "/api/members/newsletter/preferences" && method === "PATCH") return updateNewsletterPreferences(request, env);
     if (path === "/api/members/newsletter/subscribe" && method === "POST") return subscribeNewsletter(request, env);
     if (path === "/api/members/newsletter/confirm" && method === "GET") return newsletterConfirmPage(request, env);
     if (path === "/api/members/newsletter/confirm" && method === "POST") return confirmNewsletter(request, env);

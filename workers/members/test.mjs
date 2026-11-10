@@ -1021,6 +1021,57 @@ assert.equal((await expiredPassCheck.json()).valid, false, "the expired former p
   assert.equal(sqlite.prepare("SELECT 1 FROM signup_visits WHERE email=?").get(email),undefined);
   sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(email);
 }
+// The first footer submit is a complete subscription. Optional preferences must
+// never determine retention, send mail or undo an unsubscribe.
+{
+  const email = "direct-footer@example.test";
+  const headers = {"CF-Connecting-IP":"203.0.113.198",Referer:env.SITE_ORIGIN+"/nl/contact?private=query"};
+  const subscribe = (extra={}) => call("/api/members/newsletter/subscribe", {method:"POST",headers,
+    body:{form:"footer",email,consent:true,consentVersion:"footer-email-signup-v2",...extra}});
+  const before = sentEmails.length;
+  assert.equal((await subscribe({consent:false})).status,400);
+  assert.equal((await subscribe({consentVersion:"unknown"})).status,400);
+  const response = await subscribe();
+  assert.equal(response.status,202);
+  const {preferencesToken} = await response.json();
+  assert.ok(preferencesToken);
+  const row = () => sqlite.prepare("SELECT * FROM newsletter_subscriptions WHERE email=?").get(email);
+  assert.equal(row().status,"subscribed");
+  assert.equal(row().region_tag,null,"no city is required for a completed subscription");
+  assert.equal(row().source,"footer:/nl/contact");
+  assert.equal(row().consent_text_version,"footer-email-signup-v2");
+  assert.ok(row().confirmed_at && row().consented_at);
+  assert.equal(sqlite.prepare("SELECT COUNT(*) AS n FROM newsletter_signup_drafts WHERE email=?").get(email).n,0);
+  const original = {...row()};
+  assert.equal((await subscribe()).status,202);
+  assert.deepEqual({...row()},original,"a retry does not duplicate or reset the existing subscription");
+  const preferences = (regionTag,token=preferencesToken) => call("/api/members/newsletter/preferences",{method:"PATCH",headers,body:{preferencesToken:token,regionTag}});
+  assert.equal((await call("/api/members/newsletter/preferences",{method:"PATCH",omitOrigin:true,body:{preferencesToken,regionTag:"leiden"}})).status,403);
+  assert.equal((await preferences("invalid")).status,400);
+  assert.equal((await preferences("leiden",preferencesToken+"x")).status,410);
+  for (const region of ["leiden","voorschoten"]) {
+    assert.equal((await preferences(region)).status,200);
+    assert.equal(row().region_tag,region);
+  }
+  const expiredPayload=Buffer.from(JSON.stringify({email,consentedAt:original.consented_at,expires:Date.now()-1})).toString("base64url");
+  const expiredToken=`${expiredPayload}.${await testHmac(env.AUTH_PEPPER,`newsletter-preferences:${expiredPayload}`)}`;
+  assert.equal((await preferences("wassenaar",expiredToken)).status,410);
+  assert.equal(row().status,"subscribed","an expired editing token does not expire or remove the email subscription");
+  sqlite.prepare("INSERT INTO newsletter_signup_drafts(token_hash,email,created_at,expires_at) VALUES (?,?,?,?)")
+    .run("expired-legacy-draft",email,"2000-01-01T00:00:00Z","2000-01-01T00:30:00Z");
+  let cleanup;
+  await memberWorker.scheduled({}, {...env,MEMBERS_ENABLED:"off"}, {waitUntil(task){cleanup=task;}});
+  await cleanup;
+  assert.equal(row().status,"subscribed","30-minute legacy cleanup never deletes the active email subscription");
+  assert.equal(sqlite.prepare("SELECT COUNT(*) AS n FROM newsletter_signup_drafts WHERE email=?").get(email).n,0);
+  sqlite.prepare("UPDATE newsletter_subscriptions SET status='unsubscribed',unsubscribed_at=? WHERE email=?").run(new Date().toISOString(),email);
+  assert.equal((await preferences("leiden")).status,410);
+  assert.equal(row().status,"unsubscribed","a delayed city update cannot undo an unsubscribe");
+  assert.equal(row().region_tag,"voorschoten");
+  assert.equal(sentEmails.length,before,"signup and city updates send no verification, welcome or discount email");
+  sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(email);
+}
+
 const signupStart = await call("/api/members/newsletter/start", { method: "POST", body: { email: "staged-deals@example.test" } });
 assert.equal(signupStart.status, 201, "email-first signup stores a short-lived draft immediately");
 const signupState = await signupStart.json();
@@ -1240,6 +1291,11 @@ assert.match(marketingEmail.html, />AANBIEDINGEN<\/div>/, "campaign is visibly l
 assert.doesNotMatch(marketingEmail.html, />ACCOUNT<\/div>/, "campaign does not impersonate an account notification");
 assert.match(marketingEmail.listUnsubscribeUrl, /\/api\/members\/newsletter\/unsubscribe-one-click\?token=/);
 const oneClickEmail = sentEmails.findLast((message) => message.to === "staged-deals@example.test");
+for (const message of [marketingEmail,oneClickEmail]) {
+  assert.match(message.text,/Afmelden: https:\/\/[^\s]+\/newsletter\/unsubscribe\?token=/,"every campaign has a plain-text unsubscribe link");
+  assert.match(message.html,/href="https:\/\/[^\"]+\/newsletter\/unsubscribe\?token=/,"every campaign has a visible unsubscribe link");
+  assert.ok(message.listUnsubscribeUrl,"every campaign also supports mail-client unsubscribe");
+}
 const oneClickUrl = new URL(oneClickEmail.listUnsubscribeUrl);
 const oneClickResult = await call(`${oneClickUrl.pathname}${oneClickUrl.search}`, {
   method: "POST", body: "List-Unsubscribe=One-Click", contentType: "application/x-www-form-urlencoded", omitOrigin: true,

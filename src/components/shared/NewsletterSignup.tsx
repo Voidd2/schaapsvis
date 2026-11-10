@@ -11,13 +11,9 @@ const copy = {
     title: "Nieuws en aanbiedingen in uw inbox",
     intro: "Schrijf u in voor nieuws, aanbiedingen en kortingsmails van Schaap’s Vis.",
     email: "Uw e-mailadres",
-    next: "Verder",
-    region: "Waar woont u of haalt u meestal vis?",
+    region: "Waar woont u of haalt u meestal vis? (optioneel)",
     regions: { leiden: "Leiden", voorschoten: "Voorschoten", wassenaar: "Wassenaar", leidschendam: "Leidschendam", "regio-071": "Ergens anders in regio 071", elders: "Elders" },
-    consent: "Ja, ik wil e-maildeals ontvangen. Ik kan mij altijd weer afmelden.",
-    draftPrivacy: "Na ‘Verder’ bewaren we uw e-mailadres en gekozen regio maximaal 30 minuten terwijl u dit afrondt. Na uw duidelijke toestemming wordt de inschrijving direct actief.",
-    regionError: "Uw regiokeuze kon nog niet worden opgeslagen. U kunt uw inschrijving hieronder alsnog afronden.",
-    expired: "Deze voorlopige inschrijving is verlopen. Klik op ‘Verder’ om opnieuw te beginnen.",
+    regionError: "Uw regio kon niet worden opgeslagen. Uw inschrijving is wel gelukt.",
     submit: "Schrijf mij in",
     sending: "Versturen…",
     sent: "U bent aangemeld. We sturen alleen iets als we echt een leuke aanbieding of nieuwtje hebben.",
@@ -28,13 +24,9 @@ const copy = {
     title: "News and offers in your inbox",
     intro: "Sign up for news, offers and discount emails from Schaap’s Vis.",
     email: "Your email address",
-    next: "Continue",
-    region: "Where do you live or usually shop with us?",
+    region: "Where do you live or usually shop with us? (optional)",
     regions: { leiden: "Leiden", voorschoten: "Voorschoten", wassenaar: "Wassenaar", leidschendam: "Leidschendam", "regio-071": "Elsewhere in the 071 area", elders: "Elsewhere" },
-    consent: "Yes, I want to receive email offers. I can unsubscribe at any time.",
-    draftPrivacy: "After ‘Continue’, we keep your email and chosen area for up to 30 minutes while you finish signing up. Your subscription becomes active immediately after your clear consent.",
-    regionError: "Your area could not be saved yet. You can still complete your signup below.",
-    expired: "This signup draft has expired. Click ‘Continue’ to start again.",
+    regionError: "Your area could not be saved. You are still subscribed.",
     submit: "Sign me up",
     sending: "Sending…",
     sent: "You are subscribed. We will only email when we have a worthwhile offer or update.",
@@ -45,13 +37,9 @@ const copy = {
     title: "Neuigkeiten und Angebote in Ihrem Postfach",
     intro: "Melden Sie sich für Neuigkeiten, Angebote und Rabatt-E-Mails von Schaap’s Vis an.",
     email: "Ihre E-Mail-Adresse",
-    next: "Weiter",
-    region: "Wo wohnen Sie oder kaufen Sie meistens bei uns ein?",
+    region: "Wo wohnen Sie oder kaufen Sie meistens bei uns ein? (optional)",
     regions: { leiden: "Leiden", voorschoten: "Voorschoten", wassenaar: "Wassenaar", leidschendam: "Leidschendam", "regio-071": "Anderswo in der Region 071", elders: "Anderswo" },
-    consent: "Ja, ich möchte E-Mail-Angebote erhalten. Ich kann mich jederzeit abmelden.",
-    draftPrivacy: "Nach ‘Weiter’ speichern wir Ihre E-Mail-Adresse und gewählte Region bis zu 30 Minuten, während Sie die Anmeldung abschließen. Nach Ihrer eindeutigen Einwilligung wird die Anmeldung sofort aktiv.",
-    regionError: "Ihre Region konnte noch nicht gespeichert werden. Sie können die Anmeldung unten trotzdem abschließen.",
-    expired: "Diese vorläufige Anmeldung ist abgelaufen. Klicken Sie auf ‘Weiter’, um erneut zu beginnen.",
+    regionError: "Ihre Region konnte nicht gespeichert werden. Sie bleiben angemeldet.",
     submit: "Jetzt anmelden",
     sending: "Wird gesendet…",
     sent: "Sie sind angemeldet. Wir schreiben nur, wenn es ein lohnendes Angebot oder Neuigkeiten gibt.",
@@ -66,134 +54,80 @@ export function NewsletterSignup({ compact = false, locale = "nl" }: { compact?:
   const headingColor = compact ? "text-white" : "text-slate-900";
   const introColor = compact ? "text-slate-200" : "text-slate-600";
   const labelColor = compact ? "text-slate-100" : "text-slate-800";
-  const consentColor = compact ? "text-slate-200" : "text-slate-700";
   const privacyColor = compact ? "text-slate-200" : "text-slate-600";
   const buttonStyle = compact ? "knop bg-white text-slate-900 hover:bg-sky-100" : "knop knop-navy";
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
-  const [step, setStep] = useState<"email" | "preferences">("email");
-  const [draftEmail, setDraftEmail] = useState("");
-  const [draftToken, setDraftToken] = useState("");
+  const [preferencesToken, setPreferencesToken] = useState("");
   const [savingRegion, setSavingRegion] = useState(false);
-
-  function restartExpiredSignup() {
-    recordJourneyStep("signupError");
-    setDraftToken("");
-    setStep("email");
-    setMessage(t.expired);
-  }
 
   async function saveRegion(regionTag: string) {
     setSavingRegion(true);
     setMessage("");
     try {
-      const response = await fetch("/api/members/newsletter/draft", {
+      const response = await fetch("/api/members/newsletter/preferences", {
         method: "PATCH", headers: { "Content-Type": "application/json" }, credentials: "same-origin",
-        body: JSON.stringify({ draftToken, regionTag }),
+        body: JSON.stringify({ preferencesToken, regionTag }),
       });
-      if (response.status === 410) { restartExpiredSignup(); return; }
-      if (!response.ok || (await response.json()).ok !== true) throw new Error("draft-update-unavailable");
+      if (!response.ok || (await response.json()).ok !== true) throw new Error("preferences-unavailable");
       recordJourneyStep("regionSelected");
     } catch { recordJourneyStep("signupError"); setMessage(t.regionError); }
     finally { setSavingRegion(false); }
   }
 
-  async function continueSignup(event: FormEvent<HTMLFormElement>) {
+  async function subscribe(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (busy) return;
     setBusy(true);
     setMessage("");
     const email = String(new FormData(event.currentTarget).get("email") || "").trim().toLowerCase();
     try {
-      const response = await fetch("/api/members/newsletter/start", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "same-origin",
-        body: JSON.stringify({ email }),
-      });
-      if (!response.ok) throw new Error("newsletter-unavailable");
-      const result = await response.json() as { draftToken?: string };
-      if (!result.draftToken) throw new Error("newsletter-draft-unavailable");
-      setDraftEmail(email);
-      setDraftToken(result.draftToken);
-      recordJourneyStep("draftSaved");
-      setStep("preferences");
-    } catch {
-      setSuccess(false);
-      setMessage(t.error);
-      recordJourneyStep("signupError");
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  async function finishSignup(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (savingRegion) return;
-    setBusy(true);
-    setMessage("");
-    const form = new FormData(event.currentTarget);
-    try {
       const visit = visitAtSignup();
       const response = await fetch("/api/members/newsletter/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "same-origin",
-        body: JSON.stringify({ form: "footer", email: draftEmail, draftToken, consent: form.get("consent") === "on", locale: language, regionTag: form.get("regionTag"), visit }),
+        method: "POST", headers: { "Content-Type": "application/json" }, credentials: "same-origin",
+        body: JSON.stringify({ email, form: "footer", consent: true, consentVersion: "footer-email-signup-v2", locale: language, visit }),
       });
-      if (response.status === 410) { restartExpiredSignup(); return; }
-      if (!response.ok || (await response.json()).ok !== true) throw new Error("newsletter-unavailable");
+      if (!response.ok) throw new Error("newsletter-unavailable");
+      const result = await response.json() as { ok?: boolean; preferencesToken?: string };
+      if (result.ok !== true) throw new Error("newsletter-unavailable");
       signupVisitComplete(visit);
       recordJourneyStep("subscribed");
       try { localStorage.setItem("sv-discounts-subscribed", "1"); } catch { /* Storage is optional. */ }
+      setPreferencesToken(result.preferencesToken ?? "");
       setSuccess(true);
-      setMessage(t.sent);
-      setDraftToken("");
     } catch {
-      setSuccess(false);
       setMessage(t.error);
       recordJourneyStep("signupError");
-    } finally {
-      setBusy(false);
-    }
+    } finally { setBusy(false); }
   }
 
-  if (success) return <div className={compact ? "text-slate-100" : "text-slate-900"}>
-    <p role="status" tabIndex={-1} ref={node => { node?.focus({preventScroll:true}); }}>{message}</p>
+  if (success) return <div className={`space-y-4 ${compact ? "text-slate-100" : "text-slate-900"}`}>
+    <p role="status" tabIndex={-1} ref={node => { node?.focus({preventScroll:true}); }}>{t.sent}</p>
+    {preferencesToken && <label className={`block text-base font-medium ${labelColor}`}>
+      {t.region}
+      <select name="regionTag" disabled={savingRegion} defaultValue="" onChange={event => void saveRegion(event.target.value)} className="mt-1 block w-full rounded-lg border border-sky-200 bg-white px-3 py-2.5 text-base text-slate-900 outline-none focus:border-sky-700 focus:ring-2 focus:ring-sky-100 disabled:opacity-70">
+        <option value="" disabled>—</option>
+        {Object.entries(t.regions).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+      </select>
+    </label>}
+    {message && <p role="status" className="text-sm">{message}</p>}
     <SignupFacebookFollow locale={language} compact={compact} />
   </div>;
 
-  return (
-    <div className={compact ? "space-y-3" : "max-w-xl space-y-4"}>
-      <div>
-        <h2 className={`font-display text-2xl font-bold ${headingColor}`}>{t.title}</h2>
-        <p className={`mt-2 text-base leading-7 ${introColor}`}>{t.intro}</p>
-      </div>
-      {step === "email" ? <form data-newsletter-form="footer" onSubmit={continueSignup} className="space-y-3">
-        <label className={`block text-base font-medium ${labelColor}`}>
-          {t.email}
-          <input name="email" type="email" required autoComplete="email" maxLength={254} defaultValue={draftEmail} disabled={busy || success} className="mt-1 block w-full rounded-lg border border-sky-200 bg-white px-3 py-2.5 text-base text-slate-900 outline-none focus:border-sky-700 focus:ring-2 focus:ring-sky-100 disabled:opacity-70" />
-        </label>
-        <p className={`text-sm leading-6 ${privacyColor}`}>{t.draftPrivacy}</p>
-        <button type="submit" disabled={busy || success} className={`${buttonStyle} disabled:cursor-not-allowed disabled:opacity-60`}>{busy ? t.sending : t.next}</button>
-      </form> : <form data-newsletter-form="footer" onSubmit={finishSignup} className="space-y-3">
-        <p className={`text-base font-semibold ${labelColor}`}>{draftEmail}</p>
-        <label className={`block text-base font-medium ${labelColor}`}>
-          {t.region}
-          <select name="regionTag" required disabled={busy || success || savingRegion} defaultValue="" onChange={event => void saveRegion(event.target.value)} className="mt-1 block w-full rounded-lg border border-sky-200 bg-white px-3 py-2.5 text-base text-slate-900 outline-none focus:border-sky-700 focus:ring-2 focus:ring-sky-100 disabled:opacity-70">
-            <option value="" disabled>—</option>
-            {Object.entries(t.regions).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
-          </select>
-        </label>
-        <label className={`flex items-start gap-2 text-base leading-7 ${consentColor}`}>
-          <input name="consent" type="checkbox" required disabled={busy || success} className="mt-1 size-4 shrink-0 accent-sky-700" />
-          <span>{t.consent}</span>
-        </label>
-        {!success && <button type="submit" disabled={busy || savingRegion} className={`${buttonStyle} disabled:cursor-not-allowed disabled:opacity-60`}>{busy ? t.sending : t.submit}</button>}
-      </form>}
-      <p className={`text-sm ${privacyColor}`}><a className="underline underline-offset-4" href={`/${language}/privacyverklaring`}>{t.privacy}</a></p>
-      {message && <p role="status" aria-live="polite" className={`text-sm ${success ? (compact ? "text-emerald-200" : "text-emerald-800") : (compact ? "text-rose-200" : "text-red-800")}`}>{message}</p>}
+  return <div className={compact ? "space-y-3" : "max-w-xl space-y-4"}>
+    <div>
+      <h2 className={`font-display text-2xl font-bold ${headingColor}`}>{t.title}</h2>
+      <p className={`mt-2 text-base leading-7 ${introColor}`}>{t.intro}</p>
     </div>
-  );
+    <form data-newsletter-form="footer" onSubmit={subscribe} className="space-y-3">
+      <label className={`block text-base font-medium ${labelColor}`}>
+        {t.email}
+        <input name="email" type="email" required autoComplete="email" maxLength={254} disabled={busy} className="mt-1 block w-full rounded-lg border border-sky-200 bg-white px-3 py-2.5 text-base text-slate-900 outline-none focus:border-sky-700 focus:ring-2 focus:ring-sky-100 disabled:opacity-70" />
+      </label>
+      <button type="submit" disabled={busy} className={`${buttonStyle} disabled:cursor-not-allowed disabled:opacity-60`}>{busy ? t.sending : t.submit}</button>
+    </form>
+    <p className={`text-sm ${privacyColor}`}><a className="underline underline-offset-4" href={`/${language}/privacyverklaring`}>{t.privacy}</a></p>
+    {message && <p role="status" aria-live="polite" className={`text-sm ${compact ? "text-rose-200" : "text-red-800"}`}>{message}</p>}
+  </div>;
 }
-
