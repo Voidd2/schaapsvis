@@ -157,7 +157,7 @@ const bestaandePosts: BlogPost[] = [
       {
         kop: "2009 — De derde generatie",
         alineas: [
-          "In 2009 neemt de derde generatie het roer officieel over. De winkel gaat mee de eenentwintigste eeuw in — maar de sfeer blijft zoals Leidenaren hem koesteren: persoonlijk, gezellig, eerlijk. 'Mensen komen hier niet alleen voor de vis, maar ook voor een praatje', klinkt het achter de toonbank. 'Het is hier soms net een dorpskroeg.'",
+          "In 2009 neemt de derde generatie het roer officieel over. De winkel gaat mee de eenentwintigste eeuw in — maar de sfeer blijft zoals Leidenaren hem koesteren: persoonlijk, gezellig, eerlijk. 'Mensen komen hier niet alleen voor de vis, maar ook voor een praatje', klinkt het achter de toonbank. 'Het is hier soms net een ontmoetingsplek in de buurt.'",
         ],
       },
       {
@@ -702,7 +702,7 @@ const sourcePosts: BlogPost[] = [...counterGuides, QUALITY_BLOG, ...VOORSCHOTEN_
   const wijziging = BIJGEWERKTE_ARTIKELEN[post.slug];
   const beeld = blogBeelden[post.slug] ?? { src: post.fotoUrl, alt: post.fotoAlt };
   return { ...post, ...wijziging, fotoUrl: beeld.src, fotoAlt: beeld.alt, secties: (wijziging?.secties ?? post.secties).map(s => ({ ...s, alineas: s.alineas.map(a => a.replaceAll("maandag t/m zaterdag", "dinsdag t/m zaterdag")) })), ...(wijziging ? { bijgewerkt: "2026-09-28", datumLabel: "Bijgewerkt 28 september 2026" } : {}) };
-})].map(post => BLOG_CORRECTIONS[post.slug] ? { ...post, ...BLOG_CORRECTIONS[post.slug], bijgewerkt: ["sinds-1938-de-geschiedenis-van-schaaps-vis", "marktdag-in-leiden-achter-de-kraam"].includes(post.slug) ? "2026-11-03" : "2026-09-29", datumLabel: ["sinds-1938-de-geschiedenis-van-schaaps-vis", "marktdag-in-leiden-achter-de-kraam"].includes(post.slug) ? "Bijgewerkt 3 november 2026" : "Bijgewerkt 29 september 2026" } : post);
+})].map(post => BLOG_CORRECTIONS[post.slug] ? { ...post, ...BLOG_CORRECTIONS[post.slug], bijgewerkt: post.slug === "sinds-1938-de-geschiedenis-van-schaaps-vis" ? "2026-11-10" : post.slug === "marktdag-in-leiden-achter-de-kraam" ? "2026-11-03" : "2026-09-29", datumLabel: post.slug === "sinds-1938-de-geschiedenis-van-schaaps-vis" ? "Bijgewerkt 10 november 2026" : post.slug === "marktdag-in-leiden-achter-de-kraam" ? "Bijgewerkt 3 november 2026" : "Bijgewerkt 29 september 2026" } : post);
 
 export const blogPosts=sourcePosts.map(p=>reviseCounterPost(p,0));
 export function getSourcePost(slug:string){return sourcePosts.find(p=>p.slug===slug);}

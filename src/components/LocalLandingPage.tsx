@@ -30,7 +30,7 @@ export function LocalLandingPage({kind,locale}:{kind:LocalPageKind;locale:string
   <Sectie smal={kind !== "viswinkel-leiden"} grond="zand">
     <div className={kind === "viswinkel-leiden" ? "grid items-start gap-8 lg:grid-cols-2 lg:gap-14" : undefined}>
       <div><h2 className="text-3xl mb-6">{u.questions}</h2><Vragen vragen={c.questions}/></div>
-      {kind === "viswinkel-leiden" && <Beeld naam="oestersInDeWinkel" verhouding="liggend" streep="var(--navy)" />}
+      {kind === "viswinkel-leiden" && <Beeld naam="oestersInDeWinkel" verhouding="liggend" klasse="[&_img]:origin-right [&_img]:scale-150" streep="var(--navy)" />}
     </div>
   </Sectie>
   <PaginaSlot titel={app?u.shop:u.budget} tekst={u.policy} knoppen={[{label:bestelContact(locale).label,href:bestelContact(locale).href,extern:true},{label:u.platter,href:`/${locale}/visschalen`,soort:"lijn"}]}/>

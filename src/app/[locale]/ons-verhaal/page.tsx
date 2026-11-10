@@ -109,11 +109,11 @@ export default async function OnsVerhaalPage({
                 className="text-[1.6rem] leading-none pt-1"
                 style={{ fontFamily: "var(--font-display)", color: "var(--gold)" }}
               >
-                {punt.jaar}
+                {punt.jaar === "Nu" ? (locale === "de" ? "Heute" : locale === "en" ? "Today" : "Nu") : punt.jaar}
               </p>
               <div className="lees">
                 <h3 className="text-[1.3rem] mb-2">{t(punt.titel)}</h3>
-                <p style={{ color: "var(--charcoal)" }}>{t(punt.tekst)}</p>
+                {t(punt.tekst).split("\n\n").map((alinea, index) => <p key={index} className={index ? "mt-4" : undefined} style={{ color: "var(--charcoal)" }}>{alinea}</p>)}
                 {punt.citaat && (
                   <blockquote className="citaat mt-5 text-[1.1rem]">
                     {t(punt.citaat)}
