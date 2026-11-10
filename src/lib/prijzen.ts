@@ -62,3 +62,11 @@ export function formatPrijs(p: Prijs, locale = "nl"): string {
   return `${p.vanaf ? (locale === "en" ? "from " : locale === "de" ? "ab " : "vanaf ") : ""}€ ${amount} ${unit}`;
 }
 
+/** Retail offers must describe the same portion as the displayed counter price. */
+export function priceQuantity(prijs: Prijs, locale: string) {
+  if (prijs.eenheid === "per 100 g") return { value: 100, unitCode: "GRM" };
+  if (prijs.eenheid === "per kg") return { value: 1, unitCode: "KGM" };
+  if (prijs.eenheid === "per dozijn (12 st.)") return { value: 12, unitCode: "H87" };
+  if (prijs.eenheid.startsWith("per stuk")) return { value: 1, unitCode: "H87" };
+  if (prijs.eenheid === "per bosje") return { value: 1, unitText: locale === "en" ? "bunch" : locale === "de" ? "Bündel" : "bosje" };
+}
