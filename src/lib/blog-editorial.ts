@@ -121,7 +121,7 @@ export const BIJGEWERKTE_ARTIKELEN: Record<string, Partial<BlogPost>> = {
       {
         "kop": "Onze VÅRLAKS-zalm",
         "alineas": [
-          "Bij Schaap’s Vishandel verkopen we VÅRLAKS-zalm. De leverancier beschrijft de herkomst in Noord-Noorwegen, familiebedrijven en traceerbaarheid. Vraag ons naar de actuele herkomst en certificering van de levering die in onze toonbank ligt."
+          "Onze VÅRLAKS-zalm komt van familiekwekers in Noord-Noorwegen en heeft het ASC-keurmerk. De kwekers meten regelmatig de waterkwaliteit. De herkomst van de zalm is van ei tot filet te volgen."
         ]
       },
       {
@@ -199,7 +199,7 @@ export const BIJGEWERKTE_ARTIKELEN: Record<string, Partial<BlogPost>> = {
       {
         "kop": "Waarom we VÅRLAKS aanbieden",
         "alineas": [
-          "VÅRLAKS beschrijft zalm uit Noord-Noorwegen van familiebedrijven, met traceerbaarheid van ei tot bord. Meer informatie en de presentatiefilm vindt u op de website van de leverancier. Een actuele productcertificering vraagt u bij ons na."
+          "Onze VÅRLAKS-zalm groeit op bij familiekwekers in Noord-Noorwegen. Het ASC-keurmerk staat voor verantwoorde kweek. In de film ziet u de fjorden waar de kwekers werken."
         ]
       },
       {

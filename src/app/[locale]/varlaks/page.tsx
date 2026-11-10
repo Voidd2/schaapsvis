@@ -38,7 +38,7 @@ export default async function VarlaksPage({ params }: Props) {
   const lang = language((await params).locale);
   const c = campaign[lang], q = questionsCopy[lang];
   const ask = bestelContact(lang, c.heading);
-  const questions = [[q.organicQuestion,q.organicAnswer], [q.preparationQuestion,q.preparationAnswer], [q.orderQuestion,q.orderAnswer]];
+  const questions = [[q.certification.q,q.certification.a], [q.preparationQuestion,q.preparationAnswer], [q.orderQuestion,q.orderAnswer]];
   return <div className={styles.page}>
     <Schema data={kruimelSchema(lang, [{ naam: BEDRIJF.naamKort, pad: "/" }, { naam: "VÅRLAKS", pad: "/varlaks" }])} />
     <Schema data={{ "@context":"https://schema.org", "@type":"Product", name:c.heading,
