@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { SignupFacebookFollow } from "./SignupFacebookFollow";
+import { signupVisitComplete, visitAtSignup } from "@/lib/signup-visit";
 
 const copy = {
   nl: {
@@ -100,13 +101,15 @@ export function NewsletterSignup({ compact = false, locale = "nl" }: { compact?:
     setMessage("");
     const form = new FormData(event.currentTarget);
     try {
+      const visit = visitAtSignup();
       const response = await fetch("/api/members/newsletter/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "same-origin",
-        body: JSON.stringify({ form: "footer", email: draftEmail, draftToken, consent: form.get("consent") === "on", locale: language, regionTag: form.get("regionTag") }),
+        body: JSON.stringify({ form: "footer", email: draftEmail, draftToken, consent: form.get("consent") === "on", locale: language, regionTag: form.get("regionTag"), visit }),
       });
       if (!response.ok || (await response.json()).ok !== true) throw new Error("newsletter-unavailable");
+      signupVisitComplete(visit);
       try { localStorage.setItem("sv-discounts-subscribed", "1"); } catch { /* Storage is optional. */ }
       setSuccess(true);
       setMessage(t.sent);

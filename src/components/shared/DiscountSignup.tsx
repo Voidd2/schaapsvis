@@ -5,6 +5,7 @@ import { useState, type FormEvent } from "react";
 import { recordPopupStage, type PopupExperiment, type PopupMeasurement } from "@/lib/discount-popup";
 import { discountConsentVersion, discountSignupCopy } from "@/lib/discount-signup";
 import { SignupFacebookFollow } from "./SignupFacebookFollow";
+import { signupVisitComplete, visitAtSignup } from "@/lib/signup-visit";
 
 type Offer = { experiment: PopupExperiment; headline: string; getMeasurement: () => PopupMeasurement | null };
 export function DiscountSignup({ locale, offer }: { locale: string; offer?: Offer }) {
@@ -17,10 +18,11 @@ export function DiscountSignup({ locale, offer }: { locale: string; offer?: Offe
     const form = new FormData(event.currentTarget);
     setState("sending");
     try {
+      const visit = visitAtSignup();
       const response = await fetch("/api/members/newsletter/subscribe", {
         method: "POST", credentials: "same-origin", headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
-          email: form.get("email"), locale, form: offer?.experiment ?? "discounts",
+          email: form.get("email"), locale, form: offer?.experiment ?? "discounts", visit,
           ...(offer
             ? { consentVersion: offer.experiment === "locations" ? "locations-weekly-offers-v1" : "varlaks-weekly-offers-v3", measurement: offer.getMeasurement() }
             : { consentVersion: discountConsentVersion }),
@@ -30,6 +32,7 @@ export function DiscountSignup({ locale, offer }: { locale: string; offer?: Offe
       });
       if (response.status === 429) { setState("limited"); return; }
       if (!response.ok || (await response.json()).ok !== true) throw new Error("signup");
+      signupVisitComplete(visit);
       try { localStorage.setItem("sv-discounts-subscribed", "1"); } catch { /* Storage is optional. */ }
       setState("success");
     } catch { setState("error"); }

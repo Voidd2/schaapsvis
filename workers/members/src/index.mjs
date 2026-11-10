@@ -1,6 +1,7 @@
 import { actionEmail, verificationCodeEmail, campaignEmail, accountEmailText } from "./email-templates.mjs";
 import { validPopupMeasurement, popupExposure, countNewPopupSubscription, popupReport } from "./popup-experiment.mjs";
 import { publicAnalyticsPath, analyticsTarget, analyticsReport } from "./analytics.mjs";
+import { signupVisitPath, maxVisitPages, visitConsentVersion, visitMinutes } from "../../../src/lib/signup-visit-path.mjs";
 import { clientDeviceInfo } from "./device-info.mjs";
 import { Pass, SigningMaterial } from "passmint";
 import { APPLE_WALLET_ICON_2X } from "./wallet-assets.mjs";
@@ -627,6 +628,67 @@ async function adminEmailAddresses(request, env) {
     ORDER BY a.email COLLATE NOCASE LIMIT 101`).bind(after,after).all();
   const emails = (rows.results || []).slice(0,100);
   return json({emails, next:rows.results?.length > 100 ? emails.at(-1).email : null});
+}
+
+async function adminSignupVisit(request, env) {
+  if (!sameOrigin(request, env) || !await requireAdmin(request, env)) return json({error:"forbidden"}, 403);
+  const body = await readJson(request);
+  const email = normalizeEmail(body?.email);
+  if (!email) return json({error:"invalid_email"}, 400);
+  if (body.action === "erase") {
+    await env.DB.prepare("DELETE FROM signup_visits WHERE email=?").bind(email).run();
+  }
+  const region = await env.DB.prepare("SELECT region_tag FROM newsletter_subscriptions WHERE email=?").bind(email).first();
+  const visit = await env.DB.prepare("SELECT granted_at, signup_at, ip, city, pages FROM signup_visits WHERE email=? AND expires_at>?")
+    .bind(email, nowIso()).first();
+  return json({region:region?.region_tag ?? null, visit:visit ? {...visit, pages:JSON.parse(visit.pages)} : null});
+}
+
+const isVisitToken = value => typeof value === "string" && /^[A-Za-z0-9_-]{43}$/.test(value);
+const isCaptureId = value => typeof value === "string" && /^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(value);
+
+async function visitChoice(request, env, action) {
+  if (!sameOrigin(request, env)) return json({error:"origin"}, 403);
+  const body = await readJson(request);
+  if (action === "forget") {
+    if (!isVisitToken(body?.token)) return json({error:"invalid_token"}, 400);
+    await env.DB.prepare("DELETE FROM signup_visits WHERE token_hash=?").bind(await digest(body.token)).run();
+    return json({ok:true});
+  }
+  if (body?.version !== visitConsentVersion || body.consent !== true || env.ANALYTICS_ENABLED !== "on") return json({error:"consent_required"}, 400);
+  const ip = request.headers.get("CF-Connecting-IP") || "";
+  if (!ip || (env.ANALYTICS_EXCLUDED_IP_HASH && await digest(ip) === env.ANALYTICS_EXCLUDED_IP_HASH)) return json({ok:true});
+  if (action === "grant") {
+    const key = await hmac(env.AUTH_PEPPER, `signup-visit:${ip}`);
+    if (!await rateLimit(env.DB,key,60,3600000)) return json({error:"rate_limited"},429);
+    const token = await randomToken();
+    const expires = new Date(Date.now() + 30 * 86400000).toISOString();
+    await env.DB.prepare("INSERT INTO signup_visits(token_hash,consent_version,granted_at,expires_at) VALUES(?,?,?,?)")
+      .bind(await digest(token), visitConsentVersion, nowIso(), expires).run();
+    return json({ok:true, token, expires});
+  }
+  const path = signupVisitPath(body.path);
+  if (!path || !isVisitToken(body.token) || !isCaptureId(body.captureId)) return json({error:"invalid_visit"},400);
+  // Updates cannot recreate a revoked grant. A later visit from this browser cannot extend the window.
+  await env.DB.prepare(`UPDATE signup_visits SET pages=json_insert(
+        CASE WHEN json_array_length(pages)>=? THEN json_remove(pages,'$[0]') ELSE pages END,'$[#]',?)
+      WHERE token_hash=? AND capture_id=? AND signup_at>? AND expires_at>? AND COALESCE(json_extract(pages,'$[#-1]'),'')!=?`)
+    .bind(maxVisitPages,path,await digest(body.token),body.captureId,new Date(Date.now()-visitMinutes*60000).toISOString(),nowIso(),path).run();
+  return json({ok:true});
+}
+
+async function signupVisitStatement(request, env, visit, email, at) {
+  if (env.ANALYTICS_ENABLED !== "on" || visit?.version !== visitConsentVersion || !isVisitToken(visit.token) || !isCaptureId(visit.captureId) || !Array.isArray(visit.pages)) return null;
+  const ip = request.headers.get("CF-Connecting-IP");
+  if (!ip || !/^[\da-f:.]{3,45}$/i.test(ip) || (env.ANALYTICS_EXCLUDED_IP_HASH && await digest(ip) === env.ANALYTICS_EXCLUDED_IP_HASH)) return null;
+  const pages = visit.pages.slice(-maxVisitPages).map(signupVisitPath).filter(Boolean);
+  if (!pages.length) return null;
+  const city = typeof request.cf?.city === "string" ? request.cf.city.trim().slice(0,100) || null : null;
+  // Executed immediately before the first subscription insert in the same transaction.
+  return env.DB.prepare(`UPDATE signup_visits SET email=?, signup_at=?, capture_id=?, ip=?, city=?, pages=?
+    WHERE token_hash=? AND consent_version=? AND email IS NULL AND expires_at>?
+    AND NOT EXISTS(SELECT 1 FROM newsletter_subscriptions WHERE email=?)`)
+    .bind(email, at, visit.captureId, ip, city, JSON.stringify(pages), await digest(visit.token), visitConsentVersion, at, email);
 }
 
 async function adminCustomers(request, env) {
@@ -2129,6 +2191,7 @@ async function subscribeNewsletter(request, env) {
   const supportsMeasurement = locationsOffer || (varlaksOffer && offerVersion === "varlaks-weekly-offers-v3");
   const recordConversion = supportsMeasurement && await mayMeasurePopup(request, env, measurement);
   const metrics = [];
+  const visitStatement = await signupVisitStatement(request,env,body.visit,email,at);
   if (recordConversion) {
     metrics.push(
       popupExposure(env.DB, body.form, measurement, at.slice(0,10), true),
@@ -2145,10 +2208,11 @@ async function subscribeNewsletter(request, env) {
   try {
     let results;
     try {
-      results = await env.DB.batch([...metrics, ...statements]);
+      results = await env.DB.batch([...metrics, ...(visitStatement ? [visitStatement] : []), ...statements]);
     } catch (error) {
       // A missing analytics table must never prevent a signup during a rollout.
-      if (!metrics.length || !String(error).includes("varlaks_popup_v1")) throw error;
+      if (!(metrics.length && String(error).includes("varlaks_popup_v1")) &&
+          !(visitStatement && String(error).includes("no such table: signup_visits"))) throw error;
       results = await env.DB.batch(statements);
     }
     if (!results.at(-1)?.results?.[0]?.saved) return json({ error: "newsletter_unavailable" }, 503);
@@ -2529,6 +2593,7 @@ const memberWorker = {
       const enabled = env.MEMBERS_ENABLED === "on";
       return json({ status: enabled ? "ok" : "disabled" }, enabled ? 200 : 503);
     }
+    if (path === "/api/members/signup-visit/forget" && method === "POST") return visitChoice(request,env,"forget");
     if (env.MEMBERS_ENABLED !== "on") return json({ error: "members_disabled" }, 503);
     if (path === "/api/members/newsletter/unsubscribe" && method === "GET") return unsubscribePage(request, env);
     if (path === "/api/members/newsletter/unsubscribe" && method === "POST") return unsubscribeNewsletter(request, env);
@@ -2549,6 +2614,8 @@ const memberWorker = {
     if (path === "/api/members/analytics/varlaks-popup" && method === "POST") return collectPopupStage(request, env, "varlaks");
     if (path === "/api/members/analytics/locations-popup" && method === "POST") return collectPopupStage(request, env, "locations");
     if (path === "/api/members/analytics" && method === "POST") return collectAnalytics(request, env);
+    if (path === "/api/members/signup-visit/grant" && method === "POST") return visitChoice(request,env,"grant");
+    if (path === "/api/members/signup-visit/page" && method === "POST") return visitChoice(request,env,"page");
     if (path === "/api/members/register" && method === "POST") return register(request, env);
     if (path === "/api/members/admin/register" && method === "POST") return registerAdministrator(request, env);
     if (path === "/api/members/verify/resend" && method === "POST") return resendVerification(request, env);
@@ -2580,6 +2647,7 @@ const memberWorker = {
     if (securityStudentMatch && method === "GET") return adminSecurityStudent(request, env, securityStudentMatch[1]);
     if (securityStudentMatch && method === "POST") return adminSecurityAction(request, env, securityStudentMatch[1]);
     if (path === "/api/members/admin/email-addresses" && method === "POST") return adminEmailAddresses(request, env);
+    if (path === "/api/members/admin/signup-visit" && method === "POST") return adminSignupVisit(request, env);
     if (path === "/api/members/admin/customers" && method === "GET") return adminCustomers(request, env);
     const customerStatusMatch = path.match(/^\/api\/members\/admin\/customers\/([0-9a-f-]{36})\/status$/i);
     if (customerStatusMatch && method === "POST") return adminCustomerStatus(request, env, customerStatusMatch[1]);
@@ -2602,6 +2670,7 @@ const memberWorker = {
     // Privacy cleanup keeps running even while the account features are off.
     // Newsletter delivery remains inert until the owner deliberately enables it.
     const tasks = [cleanupReviewedStudentProofs(env), cleanupOrphanStudentProofs(env), cleanupNewsletterDrafts(env)];
+    if (env.DB) tasks.push(env.DB.prepare("DELETE FROM signup_visits WHERE expires_at<=?").bind(nowIso()).run());
     const scheduledAt = new Date(_controller?.scheduledTime || Date.now());
     if (scheduledAt.getUTCHours() === 2 && scheduledAt.getUTCMinutes() === 0) tasks.push(cleanupAnalytics(env), cleanupSecurityRecords(env));
     if (env.MEMBERS_ENABLED === "on") tasks.push(processNewsletterDeliveries(env));
