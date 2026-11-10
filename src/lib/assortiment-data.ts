@@ -548,9 +548,9 @@ export const products: Product[] = [
   {
     "slug": "vispotje",
     "naam": "Vispotje",
-    "desc": "Een romig stoofpotje met verse stukken vis in een rijke saus. Ideaal als uitgebreid tussendoortje of lichte maaltijd. De vissoort wisselt met het seizoen.",
+    "desc": "Stukken verse vis in een romige saus. Zet het vispotje 20 minuten in de oven op 180 °C.",
     "categorie": "bereid",
-    "ingredienten": "Verse vis (wisselend) [VIS], kookroom [MELK], ui, wortel, SELDERIJ, kruiden, zout, peper.",
+    "ingredienten": "Verse vis [VIS], kookroom [MELK], ui, wortel, SELDERIJ, kruiden, zout, peper.",
     "bevat": [
       "VIS",
       "MELK",
