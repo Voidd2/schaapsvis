@@ -41,7 +41,6 @@ export default async function VarlaksPage({ params }: Props) {
   const storefront = BEELD.winkelGevel;
   const shopCopy = lang === "nl" ? storefront : storefront.vertalingen[lang];
   const locationPhotoSizes = "(max-width: 460px) 90vw, (max-width: 740px) 416px, min(34vw, 416px)";
-  const questions = [[q.certification.q,q.certification.a], [q.preparationQuestion,q.preparationAnswer]];
   return <div className={styles.page}>
     <Schema data={kruimelSchema(lang, [{ naam: BEDRIJF.naamKort, pad: "/" }, { naam: "VÅRLAKS", pad: "/varlaks" }])} />
     <Schema data={{ "@context":"https://schema.org", "@type":"WebPage", name:c.title,
@@ -104,7 +103,11 @@ export default async function VarlaksPage({ params }: Props) {
     <section className={styles.faq} aria-labelledby="varlaks-questions">
       <h2 id="varlaks-questions">{q.questions}</h2>
       <div>
-        {questions.map(([question,answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}
+        <details><summary>{q.certification.q}</summary><p>{q.certification.a}</p></details>
+        <Link className={styles.recipeShortcut} href={`/${lang}/recepten?vis=zalm#lijst`}>
+          <span>{q.preparationQuestion}</span>
+          <span>{q.salmonRecipes} <span aria-hidden="true">→</span></span>
+        </Link>
         <details><summary>{q.sources}</summary><ul>{sources.map(([url,key]) => <li key={url}><a href={url} target="_blank" rel="noopener noreferrer">{q[key]} ↗</a></li>)}</ul></details>
       </div>
     </section>
