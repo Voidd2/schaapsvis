@@ -921,9 +921,20 @@ assert.equal(sqlite.prepare("SELECT email FROM newsletter_signup_drafts WHERE to
 })()).email, "staged-deals@example.test", "email is persisted before the region and marketing-consent step");
 assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM newsletter_subscriptions WHERE email='staged-deals@example.test'").get().count, 0, "a saved draft is not an active or pending marketing subscription");
 const stagedFinish = await call("/api/members/newsletter/subscribe", {
-  method: "POST", body: { email: "staged-deals@example.test", draftToken: signupState.draftToken, consent: true, locale: "nl", regionTag: "regio-071" },
+  method: "POST", headers: {Referer:env.SITE_ORIGIN + "/nl/bezoek-ons?ad=private#locatie-voorschoten"},
+  body: { form:"footer", email: "staged-deals@example.test", draftToken: signupState.draftToken, consent: true, locale: "nl", regionTag: "regio-071" },
 });
 assert.equal(stagedFinish.status, 202);
+assert.equal(sqlite.prepare("SELECT source FROM newsletter_subscriptions WHERE email=?").get("staged-deals@example.test").source, "footer:/nl/bezoek-ons");
+for (const [i, ref] of [env.SITE_ORIGIN + "/nl/kortingsbon/private-code", "https://external.example/nl/varlaks", null].entries()) {
+  const email = `footer-private-${i}@example.test`;
+  const response = await call("/api/members/newsletter/subscribe", {method:"POST",
+    headers:{"CF-Connecting-IP":"203.0.113.211", ...(ref ? {Referer:ref} : {})},
+    body:{form:"footer", consent:true, email, regionTag:"leiden"}});
+  assert.equal(response.status, 202);
+  assert.equal(sqlite.prepare("SELECT source FROM newsletter_subscriptions WHERE email=?").get(email).source, "footer");
+  sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(email);
+}
 assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM newsletter_signup_drafts WHERE email='staged-deals@example.test'").get().count, 0, "completed signup removes its temporary draft");
 assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='staged-deals@example.test'").get().status, "subscribed", "explicit form consent activates the subscription without another email");
 assert.equal(sqlite.prepare("SELECT region_tag FROM newsletter_subscriptions WHERE email='staged-deals@example.test'").get().region_tag, "regio-071", "region tag is attached after explicit consent");

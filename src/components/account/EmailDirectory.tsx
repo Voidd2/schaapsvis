@@ -7,7 +7,13 @@ const copy = {
     intro: "Persoonlijke accountadressen en adressen uit het kortingsformulier. De status geeft aan wie kortingsmails mag ontvangen.",
     address: "E-mailadres",
     offers: "Kortingsmails",
-    campaign: "VÅRLAKS-pop-up", locations: "Pop-up locatiepagina",
+    source: "Inschrijfbron", unknown: "Bron niet vastgelegd", accountOnly: "Account zonder kortingsinschrijving",
+    sources: {
+      "varlaks-popup": "Pop-up op de VÅRLAKS-pagina", "locations-popup": "Pop-up op de locatiepagina",
+      "discount-form": "Kortingspagina · Aanmelden voor kortingen", "newsletter-form": "Nieuwsbriefformulier",
+      "account-registration": "Bij het aanmaken van een account", account: "Formulier tijdens ingelogd bezoek",
+      footer: "Nieuwsbrief onderaan de pagina",
+    },
     subscribed: "Toestemming gegeven",
     pending: "Wacht op bevestiging",
     unsubscribed: "Afgemeld",
@@ -24,7 +30,13 @@ const copy = {
     intro: "Personal account and discount signup addresses. The status shows who can receive marketing emails.",
     address: "Email address",
     offers: "Marketing emails",
-    campaign: "VÅRLAKS pop-up", locations: "Locations popup",
+    source: "Signup source", unknown: "Source not recorded", accountOnly: "Account without a discount signup",
+    sources: {
+      "varlaks-popup": "VÅRLAKS page pop-up", "locations-popup": "Locations page pop-up",
+      "discount-form": "Discount signup page", "newsletter-form": "Newsletter form",
+      "account-registration": "During account registration", account: "Form during a signed-in visit",
+      footer: "Newsletter in the page footer",
+    },
     subscribed: "Opted in",
     pending: "Awaiting confirmation",
     unsubscribed: "Unsubscribed",
@@ -41,7 +53,13 @@ const copy = {
     intro: "Private Kontoadressen und Anmeldungen für Rabatte. Der Status zeigt, wer Angebotsmails erhalten darf.",
     address: "E-Mail-Adresse",
     offers: "Angebotsmails",
-    campaign: "VÅRLAKS-Pop-up", locations: "Popup der Standortseite",
+    source: "Anmeldequelle", unknown: "Quelle nicht erfasst", accountOnly: "Konto ohne Rabatt-Anmeldung",
+    sources: {
+      "varlaks-popup": "Pop-up auf der VÅRLAKS-Seite", "locations-popup": "Pop-up auf der Standortseite",
+      "discount-form": "Anmeldeseite für Rabatte", "newsletter-form": "Newsletterformular",
+      "account-registration": "Bei der Kontoerstellung", account: "Formular während eines angemeldeten Besuchs",
+      footer: "Newsletter am Seitenende",
+    },
     subscribed: "Eingewilligt",
     pending: "Bestätigung ausstehend",
     unsubscribed: "Abgemeldet",
@@ -56,6 +74,7 @@ const copy = {
 };
 type Entry = {
   email: string;
+  has_account: number;
   marketing: "subscribed" | "pending" | "unsubscribed" | "not-subscribed";
   source: string | null;
   marketing_at: string | null;
@@ -66,6 +85,13 @@ const statusLabel = {
   unsubscribed: "unsubscribed",
   "not-subscribed": "noConsent",
 } as const;
+
+function signupSource(row: Entry, t: typeof copy.nl) {
+  if (!row.source && row.has_account && row.marketing === "not-subscribed") return t.accountOnly;
+  if (row.source?.startsWith("footer:/")) return `${t.sources.footer} · ${row.source.slice(7)}`;
+  if (row.source && Object.hasOwn(t.sources, row.source)) return t.sources[row.source as keyof typeof t.sources];
+  return t.unknown;
+}
 
 export function EmailDirectory({ locale }: { locale: string }) {
   const t = copy[locale === "de" || locale === "en" ? locale : "nl"];
@@ -113,14 +139,13 @@ export function EmailDirectory({ locale }: { locale: string }) {
       <p className="my-4">{t.intro}</p>
       {entries.length > 0 && (
         <table className="w-full text-left">
-          <thead><tr><th scope="col">{t.address}</th><th scope="col">{t.offers}</th></tr></thead>
+          <thead><tr><th scope="col">{t.address}</th><th scope="col">{t.source}</th><th scope="col">{t.offers}</th></tr></thead>
           <tbody>
             {entries.map(row => (
               <tr key={row.email} className="border-t">
                 <td className="break-all py-3 pr-3">{row.email}</td>
+                <td className="break-words py-3 pr-3">{signupSource(row, t)}</td>
                 <td className="py-3">{t[statusLabel[row.marketing]]}
-                  {row.source === "varlaks-popup" && <small className="block">{t.campaign}</small>}
-                  {row.source === "locations-popup" && <small className="block">{t.locations}</small>}
                   {row.marketing_at && <time className="block text-sm" dateTime={row.marketing_at}>{new Intl.DateTimeFormat(locale, {dateStyle:"medium", timeStyle:"short", timeZone:"Europe/Amsterdam"}).format(new Date(row.marketing_at))}</time>}
                 </td>
               </tr>

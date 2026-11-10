@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { recordPopupStage, type PopupExperiment, type PopupMeasurement } from "@/lib/discount-popup";
 import { discountSignupCopy } from "@/lib/discount-signup";
+import { SignupFacebookFollow } from "./SignupFacebookFollow";
 
 type Offer = { experiment: PopupExperiment; headline: string; getMeasurement: () => PopupMeasurement | null };
 export function DiscountSignup({ locale, offer }: { locale: string; offer?: Offer }) {
@@ -35,6 +36,7 @@ export function DiscountSignup({ locale, offer }: { locale: string; offer?: Offe
   return <div className="discount-signup">
     {state === "success" ? <div>
       <div><h2 tabIndex={-1} ref={node => { node?.focus(); }}>{t.success}</h2><p>{t.next}</p></div>
+      <SignupFacebookFollow locale={locale} />
       <Link href={`/${locale}/assortiment`} className="collection-text-link">{t.range} →</Link>
     </div> : <>
       {offer && <><h2>{offer.headline}</h2><p>{t.offerIntro}</p></>}

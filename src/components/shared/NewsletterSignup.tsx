@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { FormEvent } from "react";
+import { SignupFacebookFollow } from "./SignupFacebookFollow";
 
 const copy = {
   nl: {
@@ -103,9 +104,10 @@ export function NewsletterSignup({ compact = false, locale = "nl" }: { compact?:
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "same-origin",
-        body: JSON.stringify({ email: draftEmail, draftToken, consent: form.get("consent") === "on", locale: language, regionTag: form.get("regionTag") }),
+        body: JSON.stringify({ form: "footer", email: draftEmail, draftToken, consent: form.get("consent") === "on", locale: language, regionTag: form.get("regionTag") }),
       });
-      if (!response.ok) throw new Error("newsletter-unavailable");
+      if (!response.ok || (await response.json()).ok !== true) throw new Error("newsletter-unavailable");
+      try { localStorage.setItem("sv-discounts-subscribed", "1"); } catch { /* Storage is optional. */ }
       setSuccess(true);
       setMessage(t.sent);
       setDraftToken("");
@@ -116,6 +118,11 @@ export function NewsletterSignup({ compact = false, locale = "nl" }: { compact?:
       setBusy(false);
     }
   }
+
+  if (success) return <div className={compact ? "text-slate-100" : "text-slate-900"}>
+    <p role="status" tabIndex={-1} ref={node => { node?.focus({preventScroll:true}); }}>{message}</p>
+    <SignupFacebookFollow locale={language} compact={compact} />
+  </div>;
 
   return (
     <div className={compact ? "space-y-3" : "max-w-xl space-y-4"}>
