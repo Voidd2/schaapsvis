@@ -759,6 +759,7 @@ summary::-webkit-details-marker {
   .student-offer > span { max-width: 180px; line-height: 1.3; }
   .student-page .fresh-hero h1 { margin-block: 14px; }
   .student-page .fresh-hero figure { border-radius: 6px; }
+  .student-page .student-kibbeling img { display:block; width:100%; height:auto; aspect-ratio:auto; object-fit:contain; }
   .student-page .story-section h2,.student-page .section-wrap h2 { margin-top: 12px; font-size: clamp(1.6rem,3vw,2.4rem); }
   .nav-theme { display: flex; align-items: center; position: relative; }
   .nav-main-link { display: flex; align-items: center; justify-content:center; gap:8px; min-height:48px; padding:10px 8px; border-radius:6px; color:var(--charcoal); white-space:nowrap; font-weight:600; }
@@ -793,7 +794,6 @@ summary::-webkit-details-marker {
     .home-hero-kicker { margin-bottom: 12px; }
     .student-page .fresh-hero-grid { gap: 24px; }
     .student-page .fresh-intro { font-size: 1rem; line-height: 1.6; }
-    .student-page .fresh-hero figure { min-height: 220px; }
   }
   @media (max-width:600px) {
     .collection-browse .collection-section-heading { margin-bottom: 12px; }

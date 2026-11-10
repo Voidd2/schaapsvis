@@ -340,8 +340,8 @@ export const products: Product[] = [
   },
   {
     "slug": "hollandse-garnalen",
-    "naam": "Hollandse Garnalen — SOLT",
-    "desc": "Hollandse garnalen (Crangon crangon) uit de Noordzee, gepeld en geleverd via SOLT. Deze garnalen zijn MSC-gecertificeerd. De kleine, zachte garnalen zijn heerlijk op toast, in een garnalencocktail of door een salade.",
+    "naam": "Hollandse garnalen",
+    "desc": "Hollandse garnalen (Crangon crangon) uit de Noordzee, gepeld. Deze garnalen zijn MSC-gecertificeerd. De kleine, zachte garnalen zijn heerlijk op toast, in een garnalencocktail of door een salade.",
     "categorie": "schaal-schelp",
     "badge": "MSC",
     "bestelId": "garnalen-hollands",
@@ -491,7 +491,7 @@ export const products: Product[] = [
   {
     "slug": "kibbeling",
     "naam": "Kibbeling",
-    "desc": "Knapperig gebakken stukjes pollak in een luchtig, goudbruin beslag. Onze kibbeling maken we van pollak; lekker met ravigotesaus.",
+    "desc": "Onze kibbeling maken we van stukjes pollak in een luchtig beslag. We bakken ze goudbruin en serveren er ravigotesaus bij.",
     "categorie": "bereid",
     "bestelId": "kibbeling-pollak",
     "ingredienten": "Pollak [VIS], TARWEBLOEM, water, zout, rijsmiddel (E450, E500), plantaardige olie. Bereid in frituurvet. Ravigotesaus apart verkrijgbaar; vraag naar de actuele ingrediënten en allergenen van de saus.",

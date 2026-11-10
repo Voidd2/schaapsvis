@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { paginaMetadata, kruimelSchema } from "@/lib/seo";
 import { BEDRIJF } from "@/lib/bedrijf";
-import { bestelContact } from "@/lib/bestel-contact";
 import { VarlaksFilm } from "@/components/shared/VarlaksFilm";
 import { StaticResponsiveImage } from "@/components/StaticResponsiveImage";
 import { BEELD } from "@/lib/beeld";
@@ -42,8 +41,7 @@ export default async function VarlaksPage({ params }: Props) {
   const storefront = BEELD.winkelGevel;
   const shopCopy = lang === "nl" ? storefront : storefront.vertalingen[lang];
   const locationPhotoSizes = "(max-width: 460px) 90vw, (max-width: 740px) 416px, min(34vw, 416px)";
-  const ask = bestelContact(lang, c.heading);
-  const questions = [[q.certification.q,q.certification.a], [q.preparationQuestion,q.preparationAnswer], [q.orderQuestion,q.orderAnswer]];
+  const questions = [[q.certification.q,q.certification.a], [q.preparationQuestion,q.preparationAnswer]];
   return <div className={styles.page}>
     <Schema data={kruimelSchema(lang, [{ naam: BEDRIJF.naamKort, pad: "/" }, { naam: "VÅRLAKS", pad: "/varlaks" }])} />
     <Schema data={{ "@context":"https://schema.org", "@type":"WebPage", name:c.title,
@@ -56,9 +54,8 @@ export default async function VarlaksPage({ params }: Props) {
         <p className={styles.lead}>{c.intro}</p>
         <div className={styles.actions}>
           <a className={styles.primary} href={BEDRIJF.maps.route} target="_blank" rel="noopener noreferrer">{c.directions} →</a>
-          <a className={styles.secondary} href={ask.href}>{c.ask}</a>
+          <a className={styles.secondary} href="#locaties">{c.markets} ↓</a>
         </div>
-        <a className={styles.inlineLink} href="#locaties">{c.markets} ↓</a>
       </div>
       <div className={styles.heroPhoto}>
         <Photo name="zalmfilet" alt={c.fileAlt} hero />
@@ -72,6 +69,7 @@ export default async function VarlaksPage({ params }: Props) {
         <p className={styles.eyebrow}>{c.why}</p><h2 id="varlaks-origin">{c.originTitle}</h2>
         <p>{c.story}</p>
         <ul>{c.proof.map(reason => <li key={reason}>{reason}</li>)}</ul>
+        <p>{c.originClosing}</p>
         <SupplierCertificates locale={lang}/>
         <a className={styles.inlineLink} href="https://varlaks.no/#why-choose-varlaks" target="_blank" rel="noopener noreferrer">{c.source} ↗</a>
       </div>
