@@ -138,11 +138,11 @@ export function AnalyticsConsent({ locale }: { locale: string }) {
         <label><input type="checkbox" checked={general} onChange={e=>setGeneral(e.target.checked)} /> {options.general}</label>
         <label><input type="checkbox" checked={personal} aria-describedby="visit-choice-description" onChange={e=>setPersonal(e.target.checked)} /> {options.personal}</label>
         <p id="visit-choice-description" className="text-sm">{options.detail}</p>
-      </div> : <button type="button" className="underline" onClick={()=>{setEditing(true);setCustom(true);}}>{options.choices}</button>}
+      </div> : <button type="button" className="underline" onClick={reopenSettings}>{options.choices}</button>}
       {failed && <p role="alert">{options.error}</p>}
     </div>
     <div className="flex shrink-0 flex-wrap gap-2"><button type="button" disabled={busy} className="knop knop-lijn min-w-28" onClick={() => choose("declined")}>{copy.no}</button>
-      <button type="button" disabled={busy} className="knop knop-navy min-w-28" onClick={() => custom ? choose(general ? "accepted" : "declined",personal) : choose("accepted")}>{custom ? options.save : copy.yes}</button></div>
+      <button type="button" disabled={busy} className="knop knop-navy min-w-28" onClick={() => custom ? choose(general ? "accepted" : "declined",personal) : choose("accepted",sharesVisit())}>{custom ? options.save : copy.yes}</button></div>
   </aside>;
 }
 
