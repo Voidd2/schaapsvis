@@ -471,7 +471,7 @@ const receptenOrigineel: Recept[] = [
       "Besprenkel met de dressing en serveer direct.",
     ],
     verhaal:
-      "Hollandse garnalen hebben zo'n puur, zoet smaakje — ze hoeven weinig. De oesterzwammen worden knapperig gebakken en vormen een mooie tegenhanger. Dit is een lunch die er feestelijk uitziet maar in 20 minuten klaar staat.",
+      "Hollandse garnalen hebben van nature een lichtzoete smaak. De knapperig gebakken oesterzwammen passen daar goed bij. Deze feestelijke lunch staat in 20 minuten op tafel.",
     seoKeywords:
       "witlof garnalen salade, oesterzwam salade garnalen, hollandse garnalen recept",
     porties: 4,
