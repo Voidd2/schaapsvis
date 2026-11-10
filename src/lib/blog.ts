@@ -292,7 +292,7 @@ const bestaandePosts: BlogPost[] = [
       {
         kop: "Kibbeling: stukjes",
         alineas: [
-          "Onze kibbeling maken we van pollak: stukjes vis in beslag, goudbruin gebakken. Lekker met ravigottesaus. Voor lekkerbek gebruiken we heek, geen pollak.",
+          "Onze kibbeling maken we van pollak: stukjes vis in beslag, goudbruin gebakken. U kiest uit Ravigotte-, Knoflook- of cocktailsaus. Voor lekkerbek gebruiken we heek, geen pollak.",
         ],
       },
       {
@@ -304,7 +304,7 @@ const bestaandePosts: BlogPost[] = [
       {
         kop: "Welke kiest u?",
         alineas: [
-          "Kibbeling is ideaal om te delen (of niet te delen — wij oordelen niet) en perfect met een bakje ravigotesaus. De lekkerbek is een maaltijd op zich, lekker op een broodje of met friet. Voedingstechnisch ontlopen ze elkaar weinig: beide rond de 220–235 kcal per 100 gram, eiwitrijk, en de vis zelf is mager — het beslag maakt het smullen.",
+          "Kibbeling is ideaal om te delen (of niet te delen — wij oordelen niet) en lekker met de saus van uw keuze. De lekkerbek is een maaltijd op zich, lekker op een broodje of met friet. Voedingstechnisch ontlopen ze elkaar weinig: beide rond de 220–235 kcal per 100 gram, eiwitrijk, en de vis zelf is mager — het beslag maakt het smullen.",
           "Pro-tip: bestel uw kibbeling vooruit voor drukke zaterdagen. Dan ligt hij vers gebakken voor u klaar.",
         ],
       },
