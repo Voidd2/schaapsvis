@@ -150,6 +150,7 @@ sqlite.exec(studentWalletPassesMigration);
 sqlite.exec(appleWalletUpdatesMigration);
 sqlite.exec(studentPassSecurityMigration);
 sqlite.exec(await readFile(new URL("../../migrations/0018_varlaks_popup.sql", import.meta.url), "utf8"));
+sqlite.exec(await readFile(new URL("../../migrations/0019_signup_visits.sql", import.meta.url), "utf8"));
 let simulateApplicationCommitFailure = false;
 let decisionReadBarrier = null;
 
@@ -225,7 +226,7 @@ const env = {
   },
 };
 
-async function call(path, { method = "GET", body, cookie = "", contentType, headers: extraHeaders = {}, omitOrigin = false } = {}) {
+async function call(path, { method = "GET", body, cookie = "", contentType, headers: extraHeaders = {}, omitOrigin = false, cf } = {}) {
   const headers = new Headers({ "CF-Connecting-IP": "203.0.113.10" });
   if (!omitOrigin) headers.set("Origin", env.SITE_ORIGIN);
   for (const [name, value] of Object.entries(extraHeaders)) headers.set(name, value);
@@ -236,7 +237,9 @@ async function call(path, { method = "GET", body, cookie = "", contentType, head
     headers.set("Content-Type", "application/json");
     requestBody = JSON.stringify(body);
   }
-  return memberWorker.fetch(new Request(`${env.SITE_ORIGIN}${path}`, { method, headers, body: requestBody }), env);
+  const request = new Request(`${env.SITE_ORIGIN}${path}`, { method, headers, body: requestBody });
+  if (cf) Object.defineProperty(request,"cf",{value:cf});
+  return memberWorker.fetch(request, env);
 }
 
 function responseCookie(response, name) {
@@ -917,6 +920,45 @@ assert.equal((await expiredPassCheck.json()).valid, false, "the expired former p
   assert.equal((await subscribe({...offer, email: retryEmail, consent:true})).status, 202);
   sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(retryEmail);
   sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(offer.email);
+}
+{
+  const version="signup-visit-v1", email="visit-fixture@example.test";
+  const headers={"CF-Connecting-IP":"203.0.113.218"};
+  const action=(kind,body)=>call("/api/members/signup-visit/"+kind,{method:"POST",headers,body});
+  const details=()=>call("/api/members/admin/signup-visit",{method:"POST",cookie:sessionCookie,body:{email}});
+  assert.equal((await action("grant",{version})).status,400);
+  assert.equal((await call("/api/members/signup-visit/grant",{method:"POST",omitOrigin:true,body:{version,consent:true}})).status,403);
+  const grant=await (await action("grant",{version,consent:true})).json();
+  assert.ok(grant.token);
+  const visit={version,token:grant.token,captureId:crypto.randomUUID(),pages:["/nl/varlaks","/nl/beheer/start","/nl/account?token=x","/nl/aanbiedingen"]};
+  const signup=()=>call("/api/members/newsletter/subscribe",{method:"POST",headers,cf:{city:"Voorschoten"},body:{email,form:"discounts",consent:true,visit}});
+  assert.equal((await signup()).status,202);
+  assert.equal((await call("/api/members/admin/signup-visit",{method:"POST",body:{email}})).status,403);
+  const personal=(await (await details()).json()).visit;
+  assert.equal(personal.ip,headers["CF-Connecting-IP"]);
+  assert.equal(personal.city,"Voorschoten");
+  assert.deepEqual(personal.pages,["/nl/varlaks","/nl/aanbiedingen"]);
+  const next={version,consent:true,token:grant.token,captureId:visit.captureId,path:"/nl/recepten"};
+  await action("page",{...next,captureId:crypto.randomUUID(),path:"/nl/contact"});
+  await action("page",next);
+  assert.deepEqual((await (await details()).json()).visit.pages,[...personal.pages,next.path]);
+  assert.equal((await action("forget",{token:grant.token})).status,200);
+  await Promise.all([action("page",next), signup()]);
+  assert.equal((await (await details()).json()).visit,null);
+  const another=await (await action("grant",{version,consent:true})).json();
+  visit.token=another.token;
+  await signup();
+  assert.equal((await (await details()).json()).visit,null,"re-entering someone else's subscribed email cannot attach another visit");
+  await action("forget",{token:another.token});
+  sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(email);
+  const renewed=await (await action("grant",{version,consent:true})).json();
+  visit.token=renewed.token;
+  assert.equal((await signup()).status,202);
+  sqlite.prepare("UPDATE signup_visits SET expires_at='2000-01-01T00:00:00Z' WHERE email=?").run(email);
+  assert.equal((await (await details()).json()).visit,null);
+  sqlite.prepare("UPDATE newsletter_subscriptions SET status='unsubscribed' WHERE email=?").run(email);
+  assert.equal(sqlite.prepare("SELECT 1 FROM signup_visits WHERE email=?").get(email),undefined);
+  sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(email);
 }
 const signupStart = await call("/api/members/newsletter/start", { method: "POST", body: { email: "staged-deals@example.test" } });
 assert.equal(signupStart.status, 201, "email-first signup stores a short-lived draft immediately");

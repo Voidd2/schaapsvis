@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { SignupVisitDetails } from "./SignupVisitDetails";
 
 const copy = {
   nl: {
@@ -96,6 +97,7 @@ function signupSource(row: Entry, t: typeof copy.nl) {
 export function EmailDirectory({ locale }: { locale: string }) {
   const t = copy[locale === "de" || locale === "en" ? locale : "nl"];
   const [entries, setEntries] = useState<Entry[]>([]);
+  const [opened,setOpened] = useState<string|null>(null);
   const [after, setAfter] = useState("");
   const [next, setNext] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
@@ -142,13 +144,13 @@ export function EmailDirectory({ locale }: { locale: string }) {
           <thead><tr><th scope="col">{t.address}</th><th scope="col">{t.source}</th><th scope="col">{t.offers}</th></tr></thead>
           <tbody>
             {entries.map(row => (
-              <tr key={row.email} className="border-t">
-                <td className="break-all py-3 pr-3">{row.email}</td>
+              <Fragment key={row.email}><tr className="border-t">
+                <td className="break-all py-3 pr-3"><button type="button" className="min-h-11 text-left text-sky-800 underline underline-offset-4" aria-expanded={opened===row.email} onClick={()=>setOpened(opened===row.email ? null : row.email)}>{row.email}</button></td>
                 <td className="break-words py-3 pr-3">{signupSource(row, t)}</td>
                 <td className="py-3">{t[statusLabel[row.marketing]]}
                   {row.marketing_at && <time className="block text-sm" dateTime={row.marketing_at}>{new Intl.DateTimeFormat(locale, {dateStyle:"medium", timeStyle:"short", timeZone:"Europe/Amsterdam"}).format(new Date(row.marketing_at))}</time>}
                 </td>
-              </tr>
+              </tr>{opened===row.email && <tr><td colSpan={3}><SignupVisitDetails email={row.email} locale={locale}/></td></tr>}</Fragment>
             ))}
           </tbody>
         </table>
