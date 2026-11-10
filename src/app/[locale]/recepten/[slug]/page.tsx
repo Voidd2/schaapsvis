@@ -1,4 +1,6 @@
 import { productHref } from "@/lib/product-href";
+import { getProduct } from "@/lib/assortiment-data";
+import { productAvailability } from "@/lib/product-availability";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -31,6 +33,9 @@ export default async function RecipeDetail({params}:Props){
  const {slug,locale}=await params,raw=recepten.find(r=>r.slug===slug);
  if(!raw)notFound();
  const r=localizeRecipe(raw,locale),c=recipeCopy(locale),image=localizedRecipeImage(r),contact=bestelContact(locale);
+ const fish = raw.hoofdproduct ? getProduct(raw.hoofdproduct) : undefined;
+ const inRegularRange = fish && productAvailability(fish, locale).regular;
+ const fishLink = inRegularRange ? { label: c.hours, href: `/${locale}/bezoek-ons` } : contact;
  const schema={"@context":"https://schema.org","@type":"Recipe",name:r.title,description:r.subtitle,image:r.fotoUrl?[`${BEDRIJF.domein}${r.fotoUrl}`]:undefined,recipeYield:r.porties?`${r.porties} ${c.people}`:undefined,totalTime:receptDuur(raw.tijd),inLanguage:locale==="en"?"en-GB":locale==="de"?"de-DE":"nl-NL",url:`${BEDRIJF.domein}/${locale}/recepten/${slug}`,recipeCategory:c.category,recipeCuisine:r.keuken??c.dutch,keywords:r.seoKeywords,recipeIngredient:[...r.vanSchaap,...r.vanSupermarkt],recipeInstructions:r.bereidingswijze.map((text,i)=>({"@type":"HowToStep",position:i+1,text})),author:{"@type":"Organization",name:BEDRIJF.naam,url:BEDRIJF.domein}};
  return <>
  <Schema data={[schema,kruimelSchema(locale,[{naam:BEDRIJF.naamKort,pad:"/"},{naam:c.recipes,pad:"/recepten"},{naam:r.title,pad:`/recepten/${slug}`}])]} />
@@ -45,7 +50,7 @@ export default async function RecipeDetail({params}:Props){
  <p className="mt-8 text-sm"><span className="kapitaal">{recipeLabel(r.moeilijkheid,locale)}</span> {recipeDifficultyNote(r.moeilijkheid,locale)}</p>
  </div><div>
  {r.hoofdproduct&&<Link className="inline-block mb-5 underline font-semibold" href={productHref(locale, r.hoofdproduct)}>{c.more} →</Link>}
- <div id="ingredienten" className="pt-4 scroll-mt-28" style={{borderTop:"2px solid var(--navy)"}}><p className="kapitaal mb-3">{c.shop}</p><ul className="mb-5">{r.vanSchaap.map(item=><li key={item} className="py-2 border-b border-sky-100">{item}</li>)}</ul><p className="text-sm mb-4">{c.checkAvailability}</p><a href={contact.href} className="knop knop-navy">{contact.label}</a></div>
+ <div id="ingredienten" className="pt-4 scroll-mt-28" style={{borderTop:"2px solid var(--navy)"}}><p className="kapitaal mb-3">{c.shop}</p><ul className="mb-5">{r.vanSchaap.map(item=><li key={item} className="py-2 border-b border-sky-100">{item}</li>)}</ul>{!inRegularRange && <p className="text-sm mb-4">{c.checkAvailability}</p>}<a href={fishLink.href} className="knop knop-navy">{fishLink.label}</a></div>
  <div className="mt-10 pt-4 border-t-2 border-sky-100"><p className="kapitaal mb-3">{c.market}</p><ul>{r.vanSupermarkt.map(item=><li key={item} className="py-2 border-b border-sky-100">{item}</li>)}</ul></div>
  </div></div><Link href={`/${locale}/recepten`} className="inline-block mt-12 font-semibold underline underline-offset-4">← {c.back}</Link></Sectie>
  <PaginaSlot titel={c.slot} tekst={c.policy} knoppen={[{label:contact.label,href:contact.href,extern:true},{label:c.platter,href:`/${locale}/visschalen`,soort:"lijn"},{label:BEDRIJF.telefoon.weergave,href:`tel:${BEDRIJF.telefoon.e164}`,extern:true,soort:"lijn"}]} />

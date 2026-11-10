@@ -12,7 +12,7 @@ export const VOORSCHOTEN_ARTIKELEN: BlogPost[] = [
     secties: [
       { kop: "Kibbeling halen op vrijdag bij Hoogvliet", alineas: [
         "Kibbeling in Voorschoten halen en daarna niet meer uitgebreid koken? Op vrijdag staat Schaap’s Vishandel van 08:30 tot 17:30 op de parkeerplaats bij Hoogvliet. U kunt er gebakken vis halen tijdens uw boodschappen of aan het einde van de middag iets meenemen voor thuis. Het is onze wekelijkse kraam, niet een winkel die elke dag in Voorschoten open is.",
-        "Voor een lunch heeft u iets anders nodig dan voor een avondmaaltijd met het hele gezin. Vertel aan de kraam met hoeveel mensen u eet en wat u erbij wilt serveren. Dan kunnen we meedenken over een passende hoeveelheid. Wilt u een specifiek product of een grotere hoeveelheid? Vraag vooraf via WhatsApp naar de mogelijkheden; de aanvoer en beschikbaarheid verschillen."
+        "Voor een lunch heeft u iets anders nodig dan voor een avondmaaltijd met het hele gezin. Vertel aan de kraam met hoeveel mensen u eet en wat u erbij wilt serveren. Dan kunnen we meedenken over een passende hoeveelheid."
       ] },
       { kop: "Ravigotesaus bij de kibbeling", alineas: [
         "Bij onze kibbeling hoort ravigotesaus. De frisse, kruidige saus past bij de krokante buitenkant van de vis. Neem de saus apart wanneer u zelf wilt bepalen hoeveel u gebruikt. Zo kunt u thuis ook een deel zonder saus serveren als iemand dat liever heeft.",
@@ -25,13 +25,13 @@ export const VOORSCHOTEN_ARTIKELEN: BlogPost[] = [
       ] },
       { kop: "Plan het halen rond uw etenstijd", alineas: [
         "Een krokant korstje is het prettigst wanneer u gebakken vis kort na aankoop eet. Moet u nog uitgebreid boodschappen doen, houd daar dan rekening mee in uw volgorde. Wilt u liever op uw eigen tijd koken? Een verse filet voor in de pan of oven kan beter bij uw planning passen dan kant-en-klare gebakken vis.",
-        "Onze vrijdaguren lopen tot 17:30. Dat maakt de kraam ook een optie voor wie pas later in de middag tijd heeft. Voorraad is niet gegarandeerd tot sluitingstijd: vraag vooraf naar beschikbaarheid als u voor een bepaald product komt. Voor andere dagen vindt u onze winkel in Leiden en de overige verkooppunten bij de locaties."
+        "Onze vrijdaguren lopen tot 17:30. Dat maakt de kraam ook een optie voor wie pas later in de middag tijd heeft. Voor andere dagen vindt u onze winkel in Leiden en de overige verkooppunten bij de locaties."
       ] }
     ],
     vragen: [
-      { v: "Waar kan ik vrijdag kibbeling halen in Voorschoten?", a: "Bij Schaap’s Vishandel op de parkeerplaats bij Hoogvliet, vrijdag van 08:30 tot 17:30. Vraag naar de actuele beschikbaarheid." },
+      { v: "Waar kan ik vrijdag kibbeling halen in Voorschoten?", a: "Bij Schaap’s Vishandel op de parkeerplaats bij Hoogvliet, vrijdag van 08:30 tot 17:30." },
       { v: "Welke saus serveren jullie bij kibbeling?", a: "Ravigotesaus. Geef uw voorkeur door aan de kraam; we bespreken graag wat mogelijk is." },
-      { v: "Kan ik losse kibbeling online bestellen?", a: "Nee, visschalen vraagt u bij ons aan via WhatsApp. Voor kibbeling of andere vis kunt u via WhatsApp vragen naar beschikbaarheid en mogelijkheden." }
+      { v: "Kan ik losse kibbeling online bestellen?", a: "Kibbeling haalt u op vrijdag direct bij onze verkoopwagen bij Hoogvliet." }
     ],
     gerelateerdeRecepten: ["kibbeling-ravigotesaus-salade", "lekkerbek-koolsalade"],
     gerelateerdeLinks: [
@@ -63,17 +63,17 @@ export const VOORSCHOTEN_ARTIKELEN: BlogPost[] = [
       ] },
       { kop: "Idee 3: kabeljauw in de pan", alineas: [
         "Kabeljauw met citroen-botersaus is een optie wanneer u graag zelf in de pan kookt. In ons recept voor vier personen gebruiken we vier filets van elk 150 gram, met bijgerechten. Dat is een voorbeeld voor dat gerecht, geen vaste regel voor ieder menu of elke eetlust.",
-        "Maak de aardappelen en groenten eerst klaar of plan ze zo dat alles tegelijk op tafel kan. Dep de filet droog voordat u gaat bakken en keer de vis voorzichtig. Vraag ons gerust welk formaat geschikt is voor de pan die u gebruikt. Is kabeljauw niet beschikbaar, bespreek dan een passend alternatief en of u de bereiding moet aanpassen."
+        "Maak de aardappelen en groenten eerst klaar of plan ze zo dat alles tegelijk op tafel kan. Dep de filet droog voordat u gaat bakken en keer de vis voorzichtig. Vraag ons gerust welk formaat geschikt is voor de pan die u gebruikt."
       ] },
       { kop: "Neem verse vis gekoeld mee naar huis", alineas: [
         "Rond uw boodschappen zo af dat verse vis niet lang ongekoeld onderweg is. Het Voedingscentrum adviseert een koeltas voor het vervoer en om de vis thuis snel gekoeld op te bergen. Onverpakte verse vis van de visboer eet u volgens dat advies bij voorkeur op de dag van aankoop; bij verpakte vis volgt u de te-gebruiken-tot-datum.",
-        "Bespreek bij aankoop wanneer u wilt koken en volg de bewaarinformatie bij uw product. Wilt u zeker weten of uw voorkeursvis er vrijdag is? Stuur via WhatsApp welke vis u zoekt, voor hoeveel personen en dat het om Voorschoten gaat. We kijken wat mogelijk is. Visschalen stelt u met ons samen via WhatsApp."
+        "Bespreek bij aankoop wanneer u wilt koken en volg de bewaarinformatie bij uw product. Visschalen stelt u met ons samen via WhatsApp."
       ] }
     ],
     vragen: [
-      { v: "Tot hoe laat kan ik vrijdag vis halen in Voorschoten?", a: "Onze kraam bij Hoogvliet is vrijdag open tot 17:30, vanaf 08:30. Beschikbaarheid van een bepaald product kunt u vooraf via WhatsApp navragen." },
-      { v: "Welke vis is handig voor een eenvoudig avondeten?", a: "Een verse filet voor een ovenpakketje, zalm uit de oven of kabeljauw uit de pan zijn drie mogelijkheden. Kies het recept en bespreek de porties en actuele aanvoer aan de kraam." },
-      { v: "Kan ik zalm vooraf aanvragen voor Voorschoten?", a: "Vraag via WhatsApp naar de beschikbaarheid en vermeld het aantal personen en uw ophaalwens. Een bericht is geen bevestigde bestelling; we stemmen de mogelijkheden en prijs met u af." }
+      { v: "Tot hoe laat kan ik vrijdag vis halen in Voorschoten?", a: "Onze kraam bij Hoogvliet is vrijdag open tot 17:30, vanaf 08:30." },
+      { v: "Welke vis is handig voor een eenvoudig avondeten?", a: "Een verse filet voor een ovenpakketje, zalm uit de oven of kabeljauw uit de pan zijn drie mogelijkheden. Kies het recept en bespreek de porties aan de kraam." },
+      { v: "Waar haal ik vrijdag verse zalm in Voorschoten?", a: "Bij onze verkoopwagen op de parkeerplaats van Hoogvliet, Veurseweg 18. Onze VÅRLAKS-zalm hoort bij het vaste assortiment." }
     ],
     gerelateerdeRecepten: ["vispakketje-oven-groenten", "zalm-citroen-dille", "gebakken-kabeljauw-botersaus"],
     gerelateerdeLinks: [

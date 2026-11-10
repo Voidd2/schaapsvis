@@ -107,7 +107,7 @@ export const GEMEENTEN: Gemeente[] = [
       "Zuidwest",
     ],
     intro:
-      "Onze eigen stad. De winkel staat op de Herenstraat, dus in Leiden is de vis vaak binnen een half uur na het inpakken bij u aan de deur.",
+      "Onze eigen stad. De winkel staat in de Herenstraat, dus in Leiden is de vis vaak binnen een half uur na het inpakken bij u aan de deur.",
   },
   {
     slug: "leiderdorp",

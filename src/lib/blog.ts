@@ -127,7 +127,7 @@ const bestaandePosts: BlogPost[] = [
   {
     slug: "sinds-1938-de-geschiedenis-van-schaaps-vis",
     bijgewerkt: "2026-11-03",
-    title: "Sinds 1938: vier generaties vis op de Herenstraat",
+    title: "Sinds 1938: vier generaties vis in de Herenstraat",
     excerpt:
       "Van Gerrit Schaap die in 1938 zijn viswinkel opende tot vandaag: de geschiedenis van een Leids begrip, verteld in vijf hoofdstukken.",
     datum: "2026-05-15",
@@ -139,7 +139,7 @@ const bestaandePosts: BlogPost[] = [
     secties: [
       {
         alineas: [
-          "Wie op de Herenstraat in Leiden loopt, ruikt het al voor hij het ziet: verse vis, gebakken kibbeling, gerookte makreel. Op nummer 48 zit al sinds 1938 dezelfde viswinkel. Dit is het verhaal van een zaak die generaties Leidenaren heeft gevoed.",
+          "Wie in de Herenstraat in Leiden loopt, ruikt het al voor hij het ziet: verse vis, gebakken kibbeling, gerookte makreel. Op nummer 48 zit al sinds 1938 dezelfde viswinkel. Dit is het verhaal van een zaak die generaties Leidenaren heeft gevoed.",
         ],
       },
       {
@@ -169,7 +169,7 @@ const bestaandePosts: BlogPost[] = [
       {
         kop: "Vandaag — klaar voor de vierde generatie",
         alineas: [
-          "Naast de winkel op de Herenstraat staat het team tegenwoordig ook op de Leidse markt (woensdag en zaterdag) en bij Hoogvliet in Voorschoten (vrijdag). Het assortiment is gegroeid, de website is er bijgekomen — maar het hart van de zaak is onveranderd: verse vis, eerlijk advies en een goed gesprek.",
+          "Naast de winkel in de Herenstraat staat het team tegenwoordig ook op de Leidse markt (woensdag en zaterdag) en bij Hoogvliet in Voorschoten (vrijdag). Het assortiment is gegroeid, de website is er bijgekomen — maar het hart van de zaak is onveranderd: verse vis, eerlijk advies en een goed gesprek.",
         ],
       },
     ],
@@ -344,7 +344,7 @@ const bestaandePosts: BlogPost[] = [
         kop: "MSC-gecertificeerd",
         alineas: [
           "De vissers werken MSC-gecertificeerd en gebruiken roller-chain systemen in plaats van traditionele klossenpezen, waardoor de zeebodem minder wordt beroerd. De Hollandse garnaal staat daarmee als groene keuze te boek.",
-          "Let op: verse Hollandse garnalen zijn bij ons op aanvraag verkrijgbaar — bel of mail even van tevoren, dan zorgen wij dat ze er zijn.",
+          "Hollandse garnalen horen bij ons vaste assortiment.",
         ],
       },
     ],
@@ -390,7 +390,7 @@ const bestaandePosts: BlogPost[] = [
       {
         kop: "Drie plekken, één kwaliteit",
         alineas: [
-          "Winkel op de Herenstraat (dinsdag t/m zaterdag), markt Leiden (woensdag + zaterdag), en vrijdags bij Hoogvliet in Voorschoten. Zelfde vis, zelfde mensen, zelfde verhalen. Tot ziens bij de kraam!",
+          "Winkel in de Herenstraat (dinsdag t/m zaterdag), markt Leiden (woensdag + zaterdag), en vrijdags bij Hoogvliet in Voorschoten. Zelfde vis, zelfde mensen, zelfde verhalen. Tot ziens bij de kraam!",
         ],
       },
     ],
@@ -670,7 +670,7 @@ const bestaandePosts: BlogPost[] = [
         kop: "Bij Schaap's: echt gerookt",
         alineas: [
           "Onze gerookte producten zijn écht gerookt, niet met aroma opgeleukt. Onze gerookte zalm (High Seas) komt via W.G. Den Heijer & Zn uit Scheveningen en wordt in Urk boven hout gerookt — ASC-gecertificeerd. Onze bokking en andere gerookte klassiekers volgen dezelfde eerlijke route: vis, zout en rook, meer niet.",
-          "Kom gerust langs op de Herenstraat of op de markt en proef het verschil. Wilt u meer weten over hoe wij duurzaamheid en eerlijkheid combineren? Lees dan onze pagina over biologische en duurzame vis.",
+          "Kom gerust langs in de Herenstraat of op de markt en proef het verschil. Wilt u meer weten over hoe wij duurzaamheid en eerlijkheid combineren? Lees dan onze pagina over biologische en duurzame vis.",
         ],
       },
     ],

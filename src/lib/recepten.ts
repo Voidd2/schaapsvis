@@ -289,7 +289,7 @@ const receptenOrigineel: Recept[] = [
     tags: ["Gezond", "Bijzonder"],
     fotoLabel: "Gebakken kabeljauw met zeekraal en venkel",
     vanSchaap: [
-      "4 kabeljauwfilets met vel van 150 g — vraag naar beschikbaarheid",
+      "4 kabeljauwfilets met vel van 150 g",
     ],
     vanSupermarkt: [
       "250 g zeekraal",

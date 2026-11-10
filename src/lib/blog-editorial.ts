@@ -181,7 +181,7 @@ export const BIJGEWERKTE_ARTIKELEN: Record<string, Partial<BlogPost>> = {
       {
         "kop": "De zalm kiezen die bij uw gerecht past",
         "alineas": [
-          "Verse filet voor de oven, gerookte zalm voor een salade of pasta: kies de vis die bij uw gerecht past. Vraag bij aankoop naar beschikbaarheid, herkomst en actuele productinformatie."
+          "Verse filet voor de oven, gerookte zalm voor een salade of pasta: kies de vis die bij uw gerecht past."
         ]
       }
     ]
@@ -205,7 +205,7 @@ export const BIJGEWERKTE_ARTIKELEN: Record<string, Partial<BlogPost>> = {
       {
         "kop": "Van filet naar gerecht",
         "alineas": [
-          "Wilt u zalm bakken, in de oven bereiden of gerookt verwerken? Onze recepten helpen u kiezen. Stuur ons een WhatsApp-bericht voor de actuele beschikbaarheid; visschalen vraagt u bij ons aan via WhatsApp."
+          "Wilt u zalm bakken, in de oven bereiden of gerookt verwerken? Onze recepten helpen u kiezen."
         ]
       }
     ],
