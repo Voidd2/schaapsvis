@@ -17,7 +17,7 @@ type Quote = { title: string; lines: string[]; cents: number; incomplete: boolea
 
 // Only option codes and numeric values enter session storage. User-entered notes stay in memory.
 const optionCodes = new Set<string>([
-  "plaice", "whiting", "prawns", "assembly", "gourmet", "platter", "fish-trio", "salad-trio", "deluxe-salad", "package", "gift-trio", "custom",
+  "plaice", "whiting", "prawns", "assembly", "gourmet", "platter", "fish-trio", "salad-trio", "deluxe-salad", "gift-trio",
   "shop", ...platterModes, ...Object.keys(platterIngredients), "own", "yes", "standard", "premium", "luxury", "salads", "mixed", "advice", "tubs", "house-salmon",
   ...platterFish.map(f => f.id), ...saladCounter.map(f => f.id), ...gourmetFish.map(f => f.id),
 ]);
@@ -44,11 +44,10 @@ export function selectionQuote(data: URLSearchParams, locale: string): Quote | n
       const quote = assemblyQuote(mode,locale,data);
       return quote && { title:platterMenu[mode].names[language(locale)], lines:quote.lines, cents:quote.total, incomplete:false };
     }
-    const giftIndex = mode === "gift-trio" ? 1 : mode === "custom" ? 2 : null;
-    if (giftIndex === null && (!(isDeliTrio(slug) || slug === "zalmslaatje-de-luxe") || mode !== delicacyMode(slug))) return null;
+    if (mode !== "gift-trio" && (!(isDeliTrio(slug) || slug === "zalmslaatje-de-luxe") || mode !== delicacyMode(slug))) return null;
     const quote = assemblyQuote(mode, locale, data);
     if (!quote) return null;
-    const title = giftIndex !== null ? giftCopy(locale).items[giftIndex][0] : catalogProduct(slug, locale).naam;
+    const title = mode === "gift-trio" ? giftCopy(locale).items.trio[0] : catalogProduct(slug, locale).naam;
     return { title, lines: quote.lines, cents: quote.total, incomplete: false };
   }
   const fish = data.getAll("fish"), people = data.get("people") || "";

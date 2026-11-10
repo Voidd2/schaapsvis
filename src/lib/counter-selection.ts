@@ -56,13 +56,12 @@ export function weightQuote(data: Values, items: CounterItem[], locale:string, s
   return {lines,cents,grams,unpriced};
 }
 
-export type Assembly = PlatterMode | "fish-trio" | "salad-trio" | "deluxe-salad" | "package" | "gift-trio" | "custom";
+export type Assembly = PlatterMode | "fish-trio" | "salad-trio" | "deluxe-salad" | "gift-trio";
 export function delicacyMode(slug:string): Assembly {
   if (slug === "zalmslaatje-de-luxe") return "deluxe-salad";
   return slug === "salade-trio" ? "salad-trio" : "fish-trio";
 }
 export function assemblyQuote(mode:Assembly, locale:string, data: Values) {
-  if (mode === "package") return null;
   const lang = language(locale), money = (v:number) => feestdagenBedrag(v,locale);
   if (isPlatterMode(mode)) {
     const tier = platterMenu[mode];
@@ -91,24 +90,22 @@ export function assemblyQuote(mode:Assembly, locale:string, data: Values) {
   }
   const fishTrio = mode === "fish-trio" || mode === "gift-trio";
   const salad = mode === "salad-trio" || mode === "deluxe-salad";
-  const gift = mode === "custom" || fishTrio;
-  const extras = weightQuote(data,salad ? saladCounter : fishCounter,locale,fishTrio || salad ? 100 : 1);
+  if (!fishTrio && !salad) return null;
+  const extras = weightQuote(data,salad ? saladCounter : fishCounter,locale,100);
   if (!extras) return null;
   const lines: string[] = [];
   let total = extras.cents;
-  if (fishTrio || salad) {
-    const items = mode === "deluxe-salad" ? deluxeSalads : salad ? saladCounter : trioChoices;
-    const required = mode === "deluxe-salad" ? 1 : 3;
-    const ids = Array.from({length:required},(_,i) => data.get("choice"+i));
-    if (fishTrio && new Set(ids).size !== required) return null;
-    const choices = ids.map(id => items.find(item => item.id === id));
-    if (choices.some(item => !item)) return null;
-    const base = fishTrio ? STANDARD_FISH_TRIO : mode === "salad-trio" ? 1199 : 1599;
-    lines.push(choices.map(item => item!.names[lang]).join(", ") + (fishTrio ? ` · 3 × ${FISH_TRIO_PORTION} g` : mode === "salad-trio" ? ` · 3 × ${SALAD_TRIO_PORTION} g` : "") + " · " + money(base));
-    total += base;
-  } else if (!extras.grams) return null;
+  const items = mode === "deluxe-salad" ? deluxeSalads : salad ? saladCounter : trioChoices;
+  const required = mode === "deluxe-salad" ? 1 : 3;
+  const ids = Array.from({length:required},(_,i) => data.get("choice"+i));
+  if (fishTrio && new Set(ids).size !== required) return null;
+  const choices = ids.map(id => items.find(item => item.id === id));
+  if (choices.some(item => !item)) return null;
+  const base = fishTrio ? STANDARD_FISH_TRIO : mode === "salad-trio" ? 1199 : 1599;
+  lines.push(choices.map(item => item!.names[lang]).join(", ") + (fishTrio ? ` · 3 × ${FISH_TRIO_PORTION} g` : mode === "salad-trio" ? ` · 3 × ${SALAD_TRIO_PORTION} g` : "") + " · " + money(base));
+  total += base;
   lines.push(...extras.lines);
-  if (gift) {
+  if (fishTrio) {
     const box = data.get("box") === "yes";
     lines.push(box ? boxLabel(locale) + " · " + money(GIFT_BOX) : ["Zonder cadeaudoos","Without gift box","Ohne Geschenkbox"][lang]);
     if (box) total += GIFT_BOX;

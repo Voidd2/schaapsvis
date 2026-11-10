@@ -6,7 +6,6 @@ import { inquiryText, platterInquiryMessage, platterWeightLines, readPlatterWeig
 import { assemblyLink, delicacyMode } from "@/lib/counter-selection";
 import { catalogProduct } from "@/lib/seafood-catalog";
 import { isDeliTrio } from "@/lib/deli-trio";
-import { giftRequestLink } from "@/lib/gift-request";
 import { giftCopy } from "@/lib/gift-copy";
 import { validPickupDate } from "@/lib/pickup-date";
 import { readBoundedBody } from "@/lib/read-bounded-body";
@@ -20,11 +19,7 @@ function draft(data: URLSearchParams, locale: string) {
   if (kind === "assembly") {
     const mode = field("mode");
     if (isPlatterMode(mode)) return assemblyLink(mode, locale, platterMenu[mode].names[language(locale)], data);
-    if (mode === "package") return null;
-    if (mode === "gift-trio" || mode === "custom") {
-      const name = giftCopy(locale).items[mode === "gift-trio" ? 1 : 2][0];
-      return assemblyLink(mode,locale,name,data);
-    }
+    if (mode === "gift-trio") return assemblyLink(mode, locale, giftCopy(locale).items.trio[0], data);
     const slug = field("slug");
     if ((!isDeliTrio(slug) && slug !== "zalmslaatje-de-luxe") || mode !== delicacyMode(slug)) return null;
     return assemblyLink(delicacyMode(slug),locale,catalogProduct(slug,locale).naam,data);
@@ -55,12 +50,7 @@ function draft(data: URLSearchParams, locale: string) {
     if (!isDeliTrio(slug)) return null;
     return assemblyLink(delicacyMode(slug),locale,catalogProduct(slug,locale).naam,data);
   }
-  if (kind !== "custom") return null;
-  const size = field("size");
-  const product = giftCopy(locale).items[2][0];
-  const indexes = (name: string) => data.getAll(name).map(value => /^\d$/.test(value) ? Number(value) : -1);
-  return giftRequestLink(locale,{kind,product,size:Number(size),fish:indexes("fish"),extras:indexes("extra"),
-    wishes,voucher:!!field("voucher"),voucherAmount:field("voucher")});
+  return null;
 }
 
 const copy = {

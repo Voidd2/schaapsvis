@@ -2,8 +2,6 @@ import type { ComponentProps } from "react";
 import { BedieningSlot } from "./BedieningSlot";
 import { ComposerSlot } from "./NativeComposer";
 import { CatalogPhoto as Photo } from "./CatalogPhoto";
-import { CustomAssembly } from "./CustomAssembly";
-import type { GiftRequest as GiftValues } from "@/lib/gift-request";
 import Link from "next/link";
 import { gourmetOrderHref } from "@/lib/gourmet-pricing";
 import { PlatterInquiry as Inquiry } from "../PlatterInquiry";
@@ -22,9 +20,6 @@ export function CatalogPhoto(props: ComponentProps<typeof Photo>) {
   </a>}><Photo {...props} /></BedieningSlot>;
 }
 
-export function GiftRequest({locale,kind,product}:{locale:string;kind:GiftValues["kind"];product:string}) {
-  return <CustomAssembly locale={locale} product={product} mode={kind === "trio" ? "gift-trio" : kind}/>;
-}
 export function GourmetOrderLink({locale, slug, className = "knop knop-navy"}: {locale:string; slug?:string; className?:string}) {
   return <Link className={className} href={gourmetOrderHref(locale,slug)}>{gourmetRequestCopy(locale).order}</Link>;
 }
