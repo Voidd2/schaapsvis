@@ -533,8 +533,8 @@ export const products: Product[] = [
   },
   {
     "slug": "vissoep",
-    "naam": "Vissoep",
-    "desc": "Vissoep uit onze viswinkel in Leiden. Wilt u de soep op de markt of bij Hoogvliet ophalen? Geef dit op tijd door, dan bespreken we wat mogelijk is.",
+    "naam": "Huisgemaakte vissoep",
+    "desc": "We maken onze vissoep zelf, met verse vis en groenten. U vindt de soep in onze viswinkel in Leiden. Wilt u de soep op de markt of bij Hoogvliet ophalen? Geef dit op tijd door, dan bespreken we wat mogelijk is.",
     "categorie": "bereid",
     "bestelId": "vissoep",
     "ingredienten": "Verse vis (wisselend) [VIS], water, ui, wortel, SELDERIJ, prei, aardappel, kruiden, zout. Kan room [MELK] bevatten.",
