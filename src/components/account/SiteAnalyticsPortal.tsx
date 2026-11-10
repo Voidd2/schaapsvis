@@ -1,10 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import { BarChart3, MousePointer2, MessageCircle, Phone, Search, Cloud, ExternalLink, RefreshCw } from "lucide-react";
+import { PopupExperimentReport, type PopupRow } from "./PopupExperimentReport";
 import { analyticsCopy } from "./analytics-copy";
 
 type Day = { day: string; views: number; clicks: number };
 type Report = {
+ popup?: PopupRow[];
  enabled: boolean; since: string; until: string; generatedAt: string;
  summary: { views: number; clicks: number; whatsapp: number; phone: number; lastEventAt: string | null };
  daily: Day[]; pages: { path: string; views: number; clicks: number }[];
@@ -55,6 +57,7 @@ export function SiteAnalyticsPortal({ locale }: { locale: string }) {
    <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">{[
     { key:"views", title:c.views, icon:BarChart3 }, { key:"clicks", title:c.clicks, icon:MousePointer2 }, { key:"whatsapp", title:c.whatsapp, icon:MessageCircle }, { key:"phone", title:c.phone, icon:Phone },
    ].map(({key,title,icon:Icon}) => <section key={key} className={`${panel} min-w-0`}><Icon className="text-sky-800" size={23} aria-hidden /><h2 className="mt-4 font-body text-base font-semibold">{title}</h2><p className="mt-2 text-3xl font-bold tabular-nums text-sky-950">{number.format(report.summary[key as "views"|"clicks"|"whatsapp"|"phone"])}</p></section>)}</div>
+   {report.popup && <PopupExperimentReport rows={report.popup} locale={language} />}
    {!report.summary.views && !report.summary.clicks ? <p className="mt-5 rounded-xl bg-sky-50 p-5">{c.none}</p> : <>
     <section className={`${panel} mt-6`}><h2 className="text-2xl">{c.trend}</h2><p className="mt-2 text-sm">{language === "nl" ? "Sinds 9 november 2026 tellen nieuwe bezoeken en klikken vanaf het uitgesloten IP-adres niet mee." : language === "en" ? "Since 9 November 2026, new views and clicks from the excluded shop IP are omitted." : "Seit dem 9. November 2026 werden neue Aufrufe und Klicks von der ausgeschlossenen IP nicht gezählt."}</p><div className="mt-3 flex flex-wrap gap-5 text-sm"><span><span className="mr-2 inline-block h-3 w-3 bg-sky-800" />{c.views}</span><span><span className="mr-2 inline-block h-3 w-3 bg-amber-500" />{c.clicks}</span></div>
      <div className="mt-6 flex h-44 items-end gap-0.5 border-b border-sky-200" aria-hidden="true">{report.daily.map(day => <div key={day.day} className="flex h-full min-w-0 flex-1 items-end gap-px" title={`${day.day}: ${day.views} / ${day.clicks}`}><span className="flex-1 rounded-t bg-sky-800" style={{height:`${day.views/peak*100}%`}} /><span className="flex-1 rounded-t bg-amber-500" style={{height:`${day.clicks/peak*100}%`}} /></div>)}</div>

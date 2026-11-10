@@ -149,6 +149,7 @@ sqlite.exec(studentPassDisplayCodeMigration);
 sqlite.exec(studentWalletPassesMigration);
 sqlite.exec(appleWalletUpdatesMigration);
 sqlite.exec(studentPassSecurityMigration);
+sqlite.exec(await readFile(new URL("../../migrations/0018_varlaks_popup.sql", import.meta.url), "utf8"));
 let simulateApplicationCommitFailure = false;
 let decisionReadBarrier = null;
 
@@ -827,6 +828,41 @@ assert.equal((await expiredPassCheck.json()).valid, false, "the expired former p
   assert.equal(sqlite.prepare("SELECT region_tag FROM newsletter_subscriptions WHERE email=?").get(email).region_tag, "leiden");
   sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(email);
 
+  {
+    const measurement = { consent:true, variant:"b", id:crypto.randomUUID() };
+    const stage = (step, data=measurement, ip="203.0.113.171") => call("/api/members/analytics/varlaks-popup", {method:"POST",headers:{"CF-Connecting-IP":ip},body:{stage:step,measurement:data}});
+    const signup = (address, data=measurement) => call("/api/members/newsletter/subscribe", {method:"POST",headers:{"CF-Connecting-IP":"203.0.113.172"},body:{form:"varlaks",consent:true,email:address,consentVersion:"varlaks-weekly-offers-v3",measurement:data}});
+    const row = () => sqlite.prepare("SELECT filled,acquired FROM varlaks_popup_v1 WHERE exposure=?").get(measurement.id);
+    assert.equal((await stage("filled")).status,202);
+    assert.equal((await stage("shown")).status,202);
+    assert.equal((await stage("acquired")).status,400);
+    assert.equal((await stage("shown",{...measurement,consent:false})).status,400);
+    assert.deepEqual({...row()},{filled:1,acquired:0});
+    simulateApplicationCommitFailure=true;
+    assert.equal((await signup("popup-ab@example.test")).status,503);
+    assert.equal(row().acquired,0);
+    assert.equal((await signup("popup-ab@example.test")).status,202);
+    assert.equal(row().acquired,1);
+    const again={...measurement,id:crypto.randomUUID(),variant:"a"};
+    assert.equal((await signup("POPUP-AB@example.test",again)).status,202);
+    assert.equal(sqlite.prepare("SELECT acquired FROM varlaks_popup_v1 WHERE exposure=?").get(again.id).acquired,0);
+    const shopMeasurement = {...measurement,id:crypto.randomUUID()};
+    env.ANALYTICS_EXCLUDED_IP_HASH = await testDigest("203.0.113.172");
+    assert.equal((await stage("shown",shopMeasurement,"203.0.113.172")).status,202);
+    assert.equal((await signup("ab-shop@example.test",shopMeasurement)).status,202);
+    assert.equal(sqlite.prepare("SELECT 1 FROM varlaks_popup_v1 WHERE exposure=?").get(shopMeasurement.id),undefined);
+    delete env.ANALYTICS_EXCLUDED_IP_HASH;
+    sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run("ab-shop@example.test");
+    const { popupReport } = await import("./src/popup-experiment.mjs");
+    const today = new Date().toISOString().slice(0,10);
+    const rows = await popupReport(env.DB,today,today);
+    assert.deepEqual({...rows[0]}, {variant:"a",shown:1,filled:1,acquired:0});
+    assert.deepEqual({...rows[1]}, {variant:"b",shown:1,filled:1,acquired:1});
+    const noConsent={...measurement,id:crypto.randomUUID(),consent:false};
+    assert.equal((await signup("popup-private@example.test",noConsent)).status,202);
+    assert.equal(sqlite.prepare("SELECT 1 FROM varlaks_popup_v1 WHERE exposure=?").get(noConsent.id),undefined);
+    sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email IN (?,?)").run("popup-ab@example.test","popup-private@example.test");
+  }
   const offer = { email: "varlaks-visitor@example.test", form: "varlaks", consentVersion: "varlaks-weekly-offers-v2" };
   assert.equal((await subscribe(offer)).status, 400);
   const mailFrom = env.MAIL_FROM;
