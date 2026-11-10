@@ -75,6 +75,8 @@
 .faq details { border-bottom:1px solid #c4d2d2; }
 .faq details:first-child { border-top:1px solid #c4d2d2; }
 .faq summary { cursor:pointer; padding:1.1rem 0; font-weight:650; }
+.recipeShortcut { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.25rem 1rem; padding:1.1rem 0; border-bottom:1px solid #c4d2d2; font-weight:650; }
+.recipeShortcut > span:last-child { text-decoration:underline; text-underline-offset:.24em; }
 .faq details p,.faq details ul { padding:0 0 1.2rem; max-width:65ch; }
 .faq li a { display:inline-flex; align-items:center; min-height:44px; text-decoration:underline; }
 
