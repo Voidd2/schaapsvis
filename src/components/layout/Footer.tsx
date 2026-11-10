@@ -1,3 +1,4 @@
+import { publicLink } from "@/lib/seasonal-availability";
 import { discountSignupCopy } from "@/lib/discount-signup";
 import Link from "next/link";
 import { ArrowUpRight, Phone } from "lucide-react";
@@ -104,7 +105,7 @@ export function Footer() {
                 <div key={groep.kop}>
                   <h2>{groep.kop}</h2>
                   <ul>
-                    {groep.links.map(({ href, label }) => <li key={href}><Link href={href}>{label}</Link></li>)}
+                    {groep.links.filter(publicLink).map(({ href, label }) => <li key={href}><Link href={href}>{label}</Link></li>)}
                   </ul>
                 </div>
               ))}

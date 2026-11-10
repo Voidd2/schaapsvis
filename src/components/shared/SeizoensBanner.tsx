@@ -1,3 +1,4 @@
+import { seasonalCatalogOpen } from "@/lib/seasonal-availability";
 import Link from "next/link";
 import { aanbiedingVanDeWeek } from "@/lib/aanbieding";
 
@@ -15,7 +16,7 @@ export function SeizoensBanner({ locale }: { locale: string }) {
   const handmatigAanbod = locale === "nl" ? aanbiedingVanDeWeek : null;
   const titel = handmatigAanbod?.titel ?? teksten.titel;
   const tekst = handmatigAanbod?.tekst ?? teksten.tekst;
-  const isFeestseizoen = m >= 9;
+  const isFeestseizoen = seasonalCatalogOpen && m >= 9;
   const cta = isFeestseizoen
     ? { label: teksten.feest, href: `/${locale}/feestdagen` }
     : { label: teksten.assortiment, href: `/${locale}/assortiment` };

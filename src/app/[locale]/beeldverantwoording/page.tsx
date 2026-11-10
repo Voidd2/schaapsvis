@@ -1,3 +1,4 @@
+import { seasonalCatalogOpen } from "@/lib/seasonal-availability";
 import type { Metadata } from "next";
 import { products } from "@/lib/assortiment-data";
 import { localizedProduct } from "@/lib/product-localization";
@@ -55,7 +56,7 @@ export default async function BeeldverantwoordingPage({ params }: Props) {
     const photo = productPhoto(localized, lang);
     return photo?.credit ? [{ name: localized.naam, credit: photo.credit }] : [];
   });
-  const feestEntries = [...FEESTDAGEN_PRODUCTEN, ...["krabsalade", "zalmsalade", "tonijnsalade"].map(slug => ({ slug, naam: localizedProduct(slug, lang)?.naam ?? slug }))].map((product) => ({
+  const feestEntries = [...(seasonalCatalogOpen ? FEESTDAGEN_PRODUCTEN : []), ...["krabsalade", "zalmsalade", "tonijnsalade"].map(slug => ({ slug, naam: localizedProduct(slug, lang)?.naam ?? slug }))].map((product) => ({
     name: product.naam,
     credit: {
       author: "Dirks Vishandel",

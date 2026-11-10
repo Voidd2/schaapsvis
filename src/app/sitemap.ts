@@ -1,3 +1,4 @@
+import { seasonalCatalogOpen, seasonalPathPaused } from "@/lib/seasonal-availability";
 import { headers } from "next/headers";
 import { isWorkerPreview } from "@/lib/preview-host";
 import { MetadataRoute } from "next";
@@ -83,6 +84,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // ── Vaste pagina's, in alle drie de talen ────────────────────────────────
   for (const { pad, prioriteit, frequentie, gewijzigd } of MEERTALIG) {
+    if (seasonalPathPaused(pad)) continue;
     const alternates = meertaligeAlternates(pad);
     for (const taal of LOCALES) {
       regels.push({
@@ -105,7 +107,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   // ── Feestdagenproducten ──────────────────────────────────────────────────
-  for (const product of FEESTDAGEN_PRODUCTEN) {
+  for (const product of seasonalCatalogOpen ? FEESTDAGEN_PRODUCTEN : []) {
     if (product.categorie === "visschalen") continue;
     if (legacyTrioSlugs.includes(product.slug)) continue;
     const pad = `/feestdagen/${product.slug}`;

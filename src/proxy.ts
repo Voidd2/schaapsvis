@@ -1,3 +1,4 @@
+import { seasonalPathPaused } from "@/lib/seasonal-availability";
 import createMiddleware from "next-intl/middleware";
 import { NextResponse, type NextRequest } from "next/server";
 import { routing } from "./i18n/routing";
@@ -73,6 +74,13 @@ export function proxy(request: NextRequest) {
     res.headers.set("X-Robots-Tag", "noindex, nofollow");
     res.headers.set("Cache-Control", "no-store, must-revalidate");
     return res;
+  }
+
+  if (seasonalPathPaused(pathname)) {
+    const locale = pathname.match(/^\/(nl|en|de)(?:\/|$)/i)?.[1].toLowerCase() ?? "nl";
+    const response = NextResponse.redirect(new URL(`/${locale}/assortiment`, request.url), 307);
+    response.headers.set("Cache-Control", "no-store");
+    return response;
   }
 
   // The legacy /admin product editor only persisted to browser localStorage.

@@ -1,3 +1,4 @@
+import { seasonalCatalogOpen } from "@/lib/seasonal-availability";
 import { productHref } from "@/lib/product-href";
 import { ShopHours } from "@/components/shared/ShopHours";
 import { PlatterPhotoNote } from "@/components/PlatterPhotoNote";
@@ -138,7 +139,7 @@ export default async function HomePage({
           </ul>
       </Sectie>
       {/* ── Visschalen ────────────────────────────────────────────────────── */}
-      <Sectie grond="zand">
+      {seasonalCatalogOpen && <Sectie grond="zand">
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-center">
           <div className="order-2 lg:order-1">
             <Beeld naam="schaalBorrel" verhouding="liggend" streep="var(--navy)" />
@@ -155,7 +156,7 @@ export default async function HomePage({
             <div className="mt-5 flex flex-wrap gap-5"><Link href={`/${locale}/feestdagen`} className="season-link">{locale === "nl" ? "Feestdagen" : locale === "de" ? "Festtage" : "Festive season"} →</Link><Link href={`/${locale}/barbecue-gourmet`} className="collection-text-link">Barbecue & gourmet →</Link></div>
           </div>
         </div>
-      </Sectie>
+      </Sectie>}
 
       <Sectie grond="wit" id="locaties">
         <div className="home-visit">

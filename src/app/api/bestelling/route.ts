@@ -1,3 +1,4 @@
+import { seasonalCatalogOpen } from "@/lib/seasonal-availability";
 import { NextResponse } from "next/server";
 import { BEDRIJF } from "@/lib/bedrijf";
 
@@ -6,6 +7,7 @@ import { BEDRIJF } from "@/lib/bedrijf";
  * an automated order or payment before the shop agrees contents and price.
  */
 export async function POST() {
+  if (!seasonalCatalogOpen) return Response.json({ fout: "Deze bestelmogelijkheid is tijdelijk gesloten." }, { status: 503, headers: { "Cache-Control": "no-store" } });
   const bericht = encodeURIComponent(
     "Hallo Schaap’s Vishandel, ik wil graag een visschaal aanvragen. Kunt u met mij meedenken over de samenstelling en de definitieve prijs?"
   );
