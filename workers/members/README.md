@@ -43,6 +43,8 @@ uitrol-/bezorgstatus en rollback staan in `../../docs/cloudflare-accountmail.md`
 
 ## Lokale checks
 
+De nieuwsbriefteksten nodigen uit voor nieuws, aanbiedingen en kortingsmails; inschrijving belooft geen directe bon, vaste verzenddag of bon voor het volgende bezoek. Nieuwe toestemmingsversies zijn `discount-news-and-offers-v2`, `varlaks-news-and-offers-v4` en `locations-news-and-offers-v2`. Oudere open formulieren blijven hun oorspronkelijke versie opslaan. Campagneverzending blijft uit; aanmelden start geen mailing.
+
 ```powershell
 npm run check:members
 npx wrangler d1 migrations apply schaapsvis-members-preview --config workers/members/wrangler.jsonc --env preview --local --persist-to workers/members/.wrangler-preview

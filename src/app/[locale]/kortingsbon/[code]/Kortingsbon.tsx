@@ -5,7 +5,7 @@ import { useLocale } from "next-intl";
 import { couponText, couponNotice } from "@/lib/coupon-copy";
 import type { KortingsCampagne } from "@/lib/kortingsbonnen";
 
-type Status = "laden" | "idle" | "actief" | "verlopen" | "ongeldig";
+type Status = "laden" | "idle" | "actief" | "verlopen" | "ongeldig" | "inactief";
 
 export function Kortingsbon({ code, bon }: { code: string; bon: KortingsCampagne }) {
   const locale = useLocale();
@@ -26,7 +26,7 @@ export function Kortingsbon({ code, bon }: { code: string; bon: KortingsCampagne
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     if (!code || code.length < 3) return setStatus("ongeldig");
-    if (!bon.actief) return setStatus("verlopen");
+    if (!bon.actief) return setStatus("inactief");
     const rem = leesResterend();
     if (rem === null) setStatus("idle");
     else if (rem > 0) { setResterend(rem); setStatus("actief"); }
@@ -67,6 +67,15 @@ export function Kortingsbon({ code, bon }: { code: string; bon: KortingsCampagne
 
         {status === "laden" && (
           <p className="opacity-60">{t("Bon laden…")}</p>
+        )}
+
+        {status === "inactief" && (
+          <div className="bg-white p-8" style={{ color: "var(--charcoal)" }}>
+            <h1 className="text-2xl font-bold mb-3" style={{ color: "var(--navy)", fontFamily: "var(--font-display)" }}>
+              {t("Geen actieve kortingsactie")}
+            </h1>
+            <p className="text-sm opacity-70">{t("Er is op dit moment geen kortingsactie actief. Via onze nieuwsbrief houden we u op de hoogte van nieuws en toekomstige aanbiedingen.")}</p>
+          </div>
         )}
 
         {status === "ongeldig" && (

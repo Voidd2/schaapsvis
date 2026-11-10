@@ -10,9 +10,9 @@ const varlaksHeadlines = {
 };
 
 const locationsHeadlines = {
-  nl: { a: "Onze visaanbiedingen in uw mailbox?", b: "Een kortingsbon voor uw volgende bezoek?" },
-  en: { a: "Our fish offers in your inbox?", b: "A voucher for your next visit?" },
-  de: { a: "Unsere Fischangebote per E-Mail?", b: "Ein Rabattgutschein für Ihren nächsten Besuch?" },
+  nl: { a: "Onze visaanbiedingen in uw mailbox?", b: "Nieuws en kortingsmails van Schaap’s Vis ontvangen?" },
+  en: { a: "Our fish offers in your inbox?", b: "News and discount emails from Schaap’s Vis?" },
+  de: { a: "Unsere Fischangebote per E-Mail?", b: "Neuigkeiten und Rabatt-E-Mails von Schaap’s Vis erhalten?" },
 };
 
 export function popupHeadline(experiment: PopupExperiment, locale: string, variant: PopupVariant) {

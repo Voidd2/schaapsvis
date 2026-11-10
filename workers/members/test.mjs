@@ -866,6 +866,33 @@ assert.equal((await expiredPassCheck.json()).valid, false, "the expired former p
   assert.equal(sqlite.prepare("SELECT consent_text_version FROM newsletter_subscriptions WHERE email=?").get(email).consent_text_version, advertisingVersion);
   sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(email);
 
+  // New signup wording promises news and offers, not an immediate voucher.
+  // Save its exact consent version, preserve popup conversion counts and send no mail.
+  for (const [form, consentVersion] of [
+    ["discounts", "discount-news-and-offers-v2"],
+    ["varlaks", "varlaks-news-and-offers-v4"],
+    ["locations", "locations-news-and-offers-v2"],
+  ]) {
+    const address = `${form}-news-offers@example.test`;
+    const measurement = { consent:true, variant:"b", id:crypto.randomUUID() };
+    const mailCount = sentEmails.length;
+    const signup = consent => call("/api/members/newsletter/subscribe", {
+      method:"POST", headers:{"CF-Connecting-IP":"203.0.113.199"},
+      body:{email:address, form, consentVersion, consent, measurement},
+    });
+    assert.equal((await signup(false)).status,400);
+    assert.equal((await signup(true)).status,202);
+    const subscription = sqlite.prepare("SELECT status, consent_text_version FROM newsletter_subscriptions WHERE email=?").get(address);
+    assert.deepEqual({...subscription}, {status:"subscribed", consent_text_version:consentVersion});
+    assert.equal(sentEmails.length,mailCount,"signing up does not send a voucher or start a campaign");
+    if (form !== "discounts") {
+      const exposure = form === "locations" ? `locations:${measurement.id}` : measurement.id;
+      assert.equal(sqlite.prepare("SELECT acquired FROM varlaks_popup_v1 WHERE exposure=?").get(exposure).acquired,1);
+      sqlite.prepare("DELETE FROM varlaks_popup_v1 WHERE exposure=?").run(exposure);
+    }
+    sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(address);
+  }
+
   {
     const measurement = { consent:true, variant:"b", id:crypto.randomUUID() };
     const stage = (step, data=measurement, ip="203.0.113.171") => call("/api/members/analytics/varlaks-popup", {method:"POST",headers:{"CF-Connecting-IP":ip},body:{stage:step,measurement:data}});

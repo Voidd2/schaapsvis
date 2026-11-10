@@ -17,7 +17,8 @@ export interface KortingsCampagne {
 }
 
 export const actieveBon: KortingsCampagne = {
-  actief: true,
+  // Campaigns start only when the owner chooses to launch an offer.
+  actief: false,
   id: "welkom-2026",
   titel: "10% korting op verse vis",
   tekst:

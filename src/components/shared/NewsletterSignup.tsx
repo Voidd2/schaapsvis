@@ -8,8 +8,8 @@ import { recordJourneyStep } from "@/lib/visitor-journey.mjs";
 
 const copy = {
   nl: {
-    title: "Korting in uw inbox",
-    intro: "Schrijf u in voor de nieuwsbrief en ontvang regelmatig kortingen en nieuws van Schaap’s in uw mail.",
+    title: "Nieuws en aanbiedingen in uw inbox",
+    intro: "Schrijf u in voor nieuws, aanbiedingen en kortingsmails van Schaap’s Vis.",
     email: "Uw e-mailadres",
     next: "Verder",
     region: "Waar woont u of haalt u meestal vis?",
@@ -25,8 +25,8 @@ const copy = {
     privacy: "Privacyverklaring",
   },
   en: {
-    title: "Offers in your inbox",
-    intro: "Sign up for the newsletter and receive regular offers and news from Schaap’s by email.",
+    title: "News and offers in your inbox",
+    intro: "Sign up for news, offers and discount emails from Schaap’s Vis.",
     email: "Your email address",
     next: "Continue",
     region: "Where do you live or usually shop with us?",
@@ -42,8 +42,8 @@ const copy = {
     privacy: "Privacy notice",
   },
   de: {
-    title: "Angebote in Ihrem Postfach",
-    intro: "Abonnieren Sie den Newsletter und erhalten Sie regelmäßig Angebote und Neuigkeiten von Schaap’s per E-Mail.",
+    title: "Neuigkeiten und Angebote in Ihrem Postfach",
+    intro: "Melden Sie sich für Neuigkeiten, Angebote und Rabatt-E-Mails von Schaap’s Vis an.",
     email: "Ihre E-Mail-Adresse",
     next: "Weiter",
     region: "Wo wohnen Sie oder kaufen Sie meistens bei uns ein?",
