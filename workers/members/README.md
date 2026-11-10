@@ -2,6 +2,15 @@
 
 Deze Worker is de serverkant voor algemene accounts, e-mailbevestiging, wachtwoordherstel, studentenaanvragen, beoordeling, de kortingspas en expliciete inschrijving voor e-mailaanbiedingen. De site blijft eigenaar van de pagina's; de Worker verwerkt de gevoelige gegevens.
 
+## Account hervatten en ander opleidingsniveau
+
+- Een herhaalde registratie met een bestaand privé- of schooladres geeft HTTP 409 `account_exists`. Het oorspronkelijke account en wachtwoord blijven intact; er wordt geen extra mail verstuurd. De site verwijst naar inloggen en wachtwoordherstel.
+- Een geldig wachtwoord voor een nog onbevestigd account geeft `email_unverified` met de opgeslagen bewijsroute. De site opent daarmee de juiste verificatievelden. Pas na verificatie ontstaat een ingelogde sessie. Nieuwe codes worden op verzoek verstuurd.
+- Wachtwoordherstel werkt ook voor actieve, onbevestigde accounts. Het bevestigt de e-mailadressen niet en omzeilt de studentencontrole niet.
+- Opleidingsniveau `other` vereist een toelichting van 2–120 tekens, opgeslagen als `education_level_other` en zichtbaar in beide beheerschermen. De aanvraag blijft in afwachting van beoordeling.
+- Pas migratie `0020_student_education_other.sql` toe vóór uitrol van deze Worker. Zij behoudt de bestaande aanvragen, pasverwijzingen en auditverwijzingen. De bestaande Cloudflare-build voert D1-migraties vóór de productie-uitrol uit.
+- `node workers/members/test.mjs` test beide bewijsroutes met tijdelijke data en opgevangen e-mails. `scripts/check-student-portal-flows.cjs` controleert de schermen met onderschepte API-verzoeken; er worden geen echte accounts of mails gemaakt.
+
 ## Mailmigratie — 5 november 2026
 
 Cloudflare Email Sending is geactiveerd op `berichten.schaapsvishandel.nl`. De

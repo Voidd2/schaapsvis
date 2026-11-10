@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { checkStudentRecovery } from "./student-recovery-tests.mjs";
 import { generateKeyPairSync } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { DatabaseSync } from "node:sqlite";
@@ -91,6 +92,7 @@ const studentPassDisplayCodeMigration = await readFile(new URL("../../migrations
 const studentWalletPassesMigration = await readFile(new URL("../../migrations/0015_student_wallet_passes.sql", import.meta.url), "utf8");
 const appleWalletUpdatesMigration = await readFile(new URL("../../migrations/0016_apple_wallet_updates.sql", import.meta.url), "utf8");
 const studentPassSecurityMigration = await readFile(new URL("../../migrations/0017_student_pass_security.sql", import.meta.url), "utf8");
+const otherEducationMigration = await readFile(new URL("../../migrations/0020_student_education_other.sql", import.meta.url), "utf8");
 const pemFixture = async (name, label) => {
   const der = (await readFile(new URL(`./test-fixtures/apple/${name}.der.b64.txt`, import.meta.url), "utf8")).trim();
   return `-----BEGIN ${label}-----\n${der.match(/.{1,64}/g).join("\n")}\n-----END ${label}-----`;
@@ -130,6 +132,15 @@ assert.equal(upgradeDb.prepare("SELECT display_code FROM student_passes WHERE id
 assert.equal(upgradeDb.prepare("SELECT COUNT(*) AS count FROM student_wallet_passes").get().count, 0, "wallet migration preserves passes and starts with an empty issuance ledger");
 assert.equal(upgradeDb.prepare("SELECT COUNT(*) AS count FROM apple_wallet_registrations").get().count, 0, "Apple Wallet update migration starts without device registrations");
 assert.equal(upgradeDb.prepare("SELECT new_device_warning_count FROM security_settings WHERE id=1").get().new_device_warning_count, 3, "security migration installs conservative configurable defaults");
+upgradeDb.exec("INSERT INTO admin_audit_log (id,reviewer_user_id,action,application_id,occurred_at) VALUES ('legacy-audit','legacy-user','application_approved','legacy-application','2026-10-02')");
+const beforeUpgrade = {};
+for (const table of ['users','student_applications','student_passes','admin_audit_log']) beforeUpgrade[table] = upgradeDb.prepare('SELECT * FROM '+table).all().map(row => ({...row}));
+upgradeDb.exec("BEGIN");
+upgradeDb.exec(otherEducationMigration);
+upgradeDb.exec("COMMIT");
+for (const [table, rows] of Object.entries(beforeUpgrade)) assert.deepEqual(upgradeDb.prepare('SELECT * FROM '+table).all().map(({education_level_other,...row}) => ({...row})), rows, 'education migration preserves every existing row and reference');
+assert.deepEqual(upgradeDb.prepare('PRAGMA foreign_key_check').all(), []);
+assert.throws(() => upgradeDb.prepare("UPDATE student_applications SET education_level='other' WHERE id='legacy-application'").run(), /CHECK constraint failed/);
 upgradeDb.close();
 const sqlite = new DatabaseSync(":memory:");
 sqlite.exec(schema);
@@ -149,6 +160,7 @@ sqlite.exec(studentPassDisplayCodeMigration);
 sqlite.exec(studentWalletPassesMigration);
 sqlite.exec(appleWalletUpdatesMigration);
 sqlite.exec(studentPassSecurityMigration);
+sqlite.exec(otherEducationMigration);
 sqlite.exec(await readFile(new URL("../../migrations/0018_varlaks_popup.sql", import.meta.url), "utf8"));
 sqlite.exec(await readFile(new URL("../../migrations/0019_signup_visits.sql", import.meta.url), "utf8"));
 let simulateApplicationCommitFailure = false;
@@ -401,8 +413,8 @@ const duplicateRegistration = await call("/api/members/register", {
   method: "POST", headers: { "CF-Connecting-IP": "198.51.100.60" },
   body: { email: "consented@example.test", schoolEmail: "different@university.example.test", name: "Consented Student", password: "correct horse battery", locale: "en", marketingConsent: true },
 });
-assert.equal(duplicateRegistration.status, 202);
-assert.deepEqual(await duplicateRegistration.json(), consentedRegistrationResponse, "an existing account gets the same response as a new student account");
+assert.equal(duplicateRegistration.status, 409);
+assert.equal((await duplicateRegistration.json()).error, "account_exists", "duplicate signup explicitly directs users to their existing account");
 const unknownAccountLogin = await call("/api/members/login", {
   method: "POST",
   body: { email: "unknown@example.test", password: "correct horse battery" },
@@ -1241,6 +1253,8 @@ resetForm.set("passwordConfirm", "updated secure password");
 const resetResult = await call(resetUrl.pathname, { method: "POST", body: resetForm });
 assert.equal(resetResult.status, 303);
 assert.equal(resetResult.headers.get("Location"), "https://schaapsvishandel.nl/en/account?password-reset=1");
+
+await checkStudentRecovery({ call, sqlite, sentEmails, responseCookie });
 
 env.MEMBERS_ENABLED = "on";
 const diagnosticDisabled = await call("/api/members/admin/smtp-test", { method: "POST" });

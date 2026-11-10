@@ -8,7 +8,8 @@ type Application = {
   institution: string;
   study_city?: string | null;
   has_proof?: number;
-  education_level: "mbo" | "hbo" | "wo";
+  education_level: "mbo" | "hbo" | "wo" | "other";
+  education_level_other?: string | null;
   submitted_at: string;
   full_name: string;
   email: string;
@@ -125,7 +126,7 @@ export function StudentReviewPortal({ locale }: { locale: string }) {
               <li key={application.id} className="rounded-2xl border border-sky-200 bg-white p-5 shadow-sm sm:p-7">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div><h2 className="font-display text-2xl font-bold text-slate-900">{application.full_name}</h2><p className="text-sm text-slate-600">{application.email}</p></div>
-                  <span className="rounded-full bg-sky-50 px-3 py-1 text-xs font-bold uppercase tracking-widest text-sky-900">{application.education_level === "mbo" ? t.menu : application.education_level === "hbo" ? t.levelHbo : t.levelWo}</span>
+                  <span className="rounded-full bg-sky-50 px-3 py-1 text-xs font-bold uppercase tracking-widest text-sky-900">{application.education_level === "other" ? application.education_level_other : application.education_level === "mbo" ? t.menu : application.education_level === "hbo" ? t.levelHbo : t.levelWo}</span>
                 </div>
                 <p className="mt-4">{application.institution}</p>
                 {application.school_email && <p className="mt-1 text-sm text-slate-600">{t.schoolEmail}: <strong>{application.school_email}</strong></p>}
