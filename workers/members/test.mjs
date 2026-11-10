@@ -828,6 +828,13 @@ assert.equal((await expiredPassCheck.json()).valid, false, "the expired former p
   assert.equal(sqlite.prepare("SELECT region_tag FROM newsletter_subscriptions WHERE email=?").get(email).region_tag, "leiden");
   sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(email);
 
+  const advertisingVersion = "discount-vouchers-and-advertising-v1";
+  assert.equal((await subscribe({consentVersion:advertisingVersion, consent:false})).status, 400);
+  assert.equal((await subscribe({consentVersion:"unknown", consent:true})).status, 400);
+  assert.equal((await subscribe({consentVersion:advertisingVersion, consent:true})).status, 202);
+  assert.equal(sqlite.prepare("SELECT consent_text_version FROM newsletter_subscriptions WHERE email=?").get(email).consent_text_version, advertisingVersion);
+  sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(email);
+
   {
     const measurement = { consent:true, variant:"b", id:crypto.randomUUID() };
     const stage = (step, data=measurement, ip="203.0.113.171") => call("/api/members/analytics/varlaks-popup", {method:"POST",headers:{"CF-Connecting-IP":ip},body:{stage:step,measurement:data}});

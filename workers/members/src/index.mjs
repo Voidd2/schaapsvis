@@ -2087,6 +2087,11 @@ async function subscribeNewsletter(request, env) {
   const copy = ACCOUNT_COPY[locale];
   const email = normalizeEmail(body?.email);
   const discountsForm = body?.form === "discounts";
+  // Older open discount forms did not send a version and only mentioned vouchers.
+  const discountVersion = body?.consentVersion ?? "discount-vouchers-2026-11";
+  if (discountsForm && !["discount-vouchers-2026-11", "discount-vouchers-and-advertising-v1"].includes(discountVersion)) {
+    return json({ error: "consent_required" }, 400);
+  }
   const varlaksOffer = body?.form === "varlaks";
   const locationsOffer = body?.form === "locations";
   const popupOffer = varlaksOffer || locationsOffer;
@@ -2106,7 +2111,7 @@ async function subscribeNewsletter(request, env) {
   if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "newsletter", ip, email, 12, 4, 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
   const at = nowIso();
   const user = await sessionUser(request, env);
-  const version = popupOffer ? offerVersion : discountsForm ? "discount-vouchers-2026-11" : NEWSLETTER_CONSENT_VERSION;
+  const version = popupOffer ? offerVersion : discountsForm ? discountVersion : NEWSLETTER_CONSENT_VERSION;
   const source = popupOffer ? `${body.form}-popup` : discountsForm ? "discount-form" :
     body.form === "footer" ? footerSignupSource(request) : user ? "account" : "newsletter-form";
   const userId = user?.email === email ? user.id : null;
