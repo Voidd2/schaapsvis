@@ -87,7 +87,7 @@ const landing = {
     faq: "Nog even dit", questions: [
       ["Moet ik een inschrijvingsbewijs uploaden?", "Alleen als je geen schoolmail hebt. Gebruik bijvoorbeeld een DUO-inschrijvingsbewijs met je naam, opleiding en studiejaar. Maak je BSN en financiële gegevens onleesbaar. Bij je aanvraag vul je wel je onderwijsinstelling, opleidingsniveau en studiestad in."],
       ["Krijg ik meteen korting na het aanmelden?", "Je aanvraag wordt eerst handmatig beoordeeld. Pas na goedkeuring kun je de digitale pas laten zien en de 10% korting gebruiken. De korting is niet te combineren met andere acties."],
-      ["Moet ik aanbiedingen per e-mail ontvangen?", "Nee. Je kiest apart of je kortingsmails op je privé-e-mailadres wilt ontvangen. Dit is vrijwillig, heeft geen invloed op je studentenkorting en je kunt je altijd afmelden."],
+      ["Hoe vaak krijg ik kortingsmails van Schaap’s?", "Als je je aanmeldt voor kortingsmails, krijg je af en toe een aanbieding op je privé-e-mailadres, maximaal één per week. Je kunt je in elke mail afmelden. Je pas blijft geldig."],
       ["Waarmee log ik later in?", "Met je privé-e-mailadres, niet je schoolmail. Je schoolmail gebruik je om te bevestigen dat je student bent. Zie je de verificatiemail niet? Controleer ook je spammap."],
     ],
     visit: "Tussen college en avondeten: kom langs", visitText: "Je vindt ons aan de Herenstraat en op de Leidse markt. Bekijk de locatie en openingstijden die bij je dag passen.",
@@ -105,7 +105,7 @@ const landing = {
     faq: "Good to know", questions: [
       ["Do I need to upload proof of enrolment?", "Only if you have no school email. You can use proof from DUO showing your name, institution and academic year. Hide your BSN and financial details. Your application still asks for your institution, education level and study city."],
       ["Do I get the discount as soon as I register?", "We review your application manually first. Only after approval can you show your digital pass and use the 10% discount. It cannot be combined with other offers."],
-      ["Do I have to receive email offers?", "No. You choose separately whether to receive offers at your personal email. This is optional, does not affect your student discount, and you can unsubscribe at any time."],
+      ["How often will Schaap’s email me offers?", "If you sign up for offers, we’ll send them to your personal email address at most once a week. You can unsubscribe in any email and keep your pass."],
       ["Which email do I use to sign in?", "Use your personal email, not your school email. Your school email confirms your student status. If you cannot find the verification email, check your spam folder too."],
     ],
     visit: "Between lectures and dinner: drop by", visitText: "Find us on Herenstraat and at Leiden’s market. Choose the location and opening hours that fit your day.",
@@ -123,7 +123,7 @@ const landing = {
     faq: "Gut zu wissen", questions: [
       ["Muss ich einen Studiennachweis hochladen?", "Nur ohne Hochschul-E-Mail. Ein aktueller DUO-Nachweis mit Name, Einrichtung und Studienjahr genügt. Schwärzen Sie BSN und Finanzdaten. Im Antrag geben Sie Ihre Einrichtung, Ihr Ausbildungsniveau und Ihren Studienort an."],
       ["Erhalte ich den Rabatt sofort nach der Anmeldung?", "Wir prüfen Ihren Antrag zunächst manuell. Erst nach Freigabe können Sie Ihren digitalen Pass zeigen und 10 % Rabatt erhalten. Der Rabatt ist nicht mit anderen Aktionen kombinierbar."],
-      ["Muss ich E-Mail-Angebote erhalten?", "Nein. Sie entscheiden separat, ob Sie Angebote an Ihre private E-Mail erhalten möchten. Dies ist freiwillig, beeinflusst Ihren Studentenrabatt nicht und kann jederzeit abbestellt werden."],
+      ["Wie oft schickt Schaap’s mir Angebote?", "Wenn Sie sich für Angebote anmelden, erhalten Sie diese höchstens einmal pro Woche an Ihre private E-Mail-Adresse. Sie können sich in jeder E-Mail abmelden. Ihr Pass bleibt gültig."],
       ["Mit welcher E-Mail melde ich mich an?", "Mit Ihrer privaten E-Mail, nicht Ihrer Schul-E-Mail. Die Schul-E-Mail bestätigt Ihren Studierendenstatus. Prüfen Sie auch den Spamordner, falls die Bestätigungsmail fehlt."],
     ],
     visit: "Zwischen Vorlesung und Abendessen: kommen Sie vorbei", visitText: "Sie finden uns in der Herenstraat und auf dem Leidener Markt. Wählen Sie den passenden Standort und die passenden Öffnungszeiten.",
