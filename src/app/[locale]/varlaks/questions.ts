@@ -3,8 +3,7 @@ import { varlaksCertification } from "@/lib/varlaks-certification";
 export const questionsCopy = {
   nl: {
     questions: "Veelgestelde vragen over onze zalm",
-    organicQuestion: "Is VÅRLAKS-zalm biologisch?",
-    organicAnswer: varlaksCertification.nl,
+    certification: varlaksCertification.nl,
     preparationQuestion: "Hoe kan ik de zalm bereiden?",
     preparationAnswer: "Zalm leent zich goed voor de pan en de oven. Citroen en dille zijn een mooie combinatie. Bekijk ons recept of vertel ons wat u wilt maken; dan adviseren we over een passende portie en bereiding.",
     orderQuestion: "Kan ik zalm voor een diner aanvragen?",
@@ -18,8 +17,7 @@ export const questionsCopy = {
   },
   en: {
     questions: "Questions about our salmon",
-    organicQuestion: "Is VÅRLAKS salmon organic?",
-    organicAnswer: varlaksCertification.en,
+    certification: varlaksCertification.en,
     preparationQuestion: "How can I cook the salmon?",
     preparationAnswer: "Salmon works well in a pan or in the oven. Lemon and dill make a lovely pairing. Explore our recipe or tell us what you are cooking; we can advise on portions and preparation.",
     orderQuestion: "Can I enquire about salmon for a dinner party?",
@@ -33,8 +31,7 @@ export const questionsCopy = {
   },
   de: {
     questions: "Häufige Fragen zu unserem Lachs",
-    organicQuestion: "Ist VÅRLAKS-Lachs biologisch?",
-    organicAnswer: varlaksCertification.de,
+    certification: varlaksCertification.de,
     preparationQuestion: "Wie kann ich den Lachs zubereiten?",
     preparationAnswer: "Lachs eignet sich gut für Pfanne und Ofen. Zitrone und Dill passen wunderbar dazu. Entdecken Sie unser Rezept oder erzählen Sie uns, was Sie kochen möchten. Wir beraten Sie zu Portionen und Zubereitung.",
     orderQuestion: "Kann ich Lachs für ein Abendessen anfragen?",

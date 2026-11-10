@@ -22,7 +22,7 @@ export const origins = {
     story: "Een kijkje bij de zalmkweker", storyText: "Hoe volgt u een zalm terug naar de kwekerij? Bij VÅRLAKS is volgens de leverancier elke partij van ei tot filet te volgen. In de film ziet u waar de kwekers werken.",
     landing: "Meer over onze VÅRLAKS-zalm", supplier: "Naar de leverancier",
     faq: "Vragen aan de toonbank", questions: [
-      { q: "Is jullie VÅRLAKS-zalm biologisch?", a: varlaksCertification.nl },
+      varlaksCertification.nl,
       { q: "Kan wildgevangen vis biologisch zijn?", a: "Het Europese biokeurmerk voor vis geldt voor kweekvis. Bij wildvangst kunt u bijvoorbeeld letten op het MSC-keurmerk." },
     ],
     visit: "Kom langs in Leiden", invitation: "Vertel ons welke vis u op het oog heeft. Wij vertellen u graag waar de vis vandaan komt en helpen u kiezen aan de toonbank.",
@@ -49,7 +49,7 @@ export const origins = {
     story: "Meet the salmon farmers", storyText: "How do you trace a salmon back to its farm? VÅRLAKS says it can follow each batch from egg to fillet. The film takes you to the waters where the farmers work.",
     landing: "More about our VÅRLAKS salmon", supplier: "Visit the supplier",
     faq: "Questions at the counter", questions: [
-      { q: "Is your VÅRLAKS salmon organic?", a: varlaksCertification.en },
+      varlaksCertification.en,
       { q: "Can wild-caught fish be organic?", a: "The EU organic label for fish applies to farmed fish. For wild-caught fish, look for a fisheries label such as MSC." },
     ],
     visit: "Visit us in Leiden", invitation: "Tell us which fish you have in mind. We can tell you where the fish comes from and help you choose at the counter.",
@@ -76,7 +76,7 @@ export const origins = {
     story: "Zu Besuch bei den Lachszüchtern", storyText: "Wie lässt sich ein Lachs bis zur Zuchtfarm zurückverfolgen? VÅRLAKS kann nach eigenen Angaben jede Charge vom Ei bis zum Filet verfolgen. Der Film zeigt, wo die Züchter arbeiten.",
     landing: "Mehr über unseren VÅRLAKS-Lachs", supplier: "Zur Website des Lieferanten",
     faq: "Fragen an der Fischtheke", questions: [
-      { q: "Ist Ihr VÅRLAKS-Lachs Bio?", a: varlaksCertification.de },
+      varlaksCertification.de,
       { q: "Kann wild gefangener Fisch Bio sein?", a: "Das EU-Biosiegel für Fisch gilt für Zuchtfisch. Bei Wildfang können Sie beispielsweise auf das MSC-Siegel achten." },
     ],
     visit: "Besuchen Sie uns in Leiden", invitation: "Welchen Fisch möchten Sie zubereiten? Wir erklären Ihnen gern, woher der Fisch kommt, und beraten Sie an der Theke.",

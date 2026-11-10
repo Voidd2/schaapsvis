@@ -428,7 +428,7 @@ const bestaandePosts: BlogPost[] = [
       {
         kop: "VÅRLAKS-zalm en ASC",
         alineas: [
-          "VÅRLAKS vermeldt dat zijn zalm ASC-gecertificeerd is en afkomstig is van familiebedrijven in Noord-Noorwegen. ASC staat voor verantwoorde aquacultuur; het is niet hetzelfde als biologische certificering.",
+          "VÅRLAKS vermeldt dat zijn zalm ASC-gecertificeerd is en afkomstig is van familiebedrijven in Noord-Noorwegen. Bij de ASC-controle tellen de waterkwaliteit en het welzijn van de zalm mee.",
           "Wij noemen deze zalm daarom niet biologisch zonder bewijs dat de specifieke levering ook een biologische certificering draagt. Vraag ons naar de actuele herkomst en beschikbaarheid aan de toonbank.",
         ],
       },
@@ -479,7 +479,7 @@ const bestaandePosts: BlogPost[] = [
       {
         kop: "ASC — verantwoorde kweek",
         alineas: [
-          "ASC, de Aquaculture Stewardship Council, is een keurmerk voor verantwoorde aquacultuur. Onze VÅRLAKS-zalm is ASC-gecertificeerd. ASC is niet hetzelfde als biologische certificering.",
+          "ASC, de Aquaculture Stewardship Council, is een keurmerk voor verantwoorde aquacultuur. De kwekerijen waar onze VÅRLAKS-zalm opgroeit, worden onafhankelijk gecontroleerd op onder meer waterkwaliteit en viswelzijn.",
         ],
       },
       {
@@ -498,7 +498,7 @@ const bestaandePosts: BlogPost[] = [
         kop: "Zelf checken: de VISwijzer",
         alineas: [
           "Wilt u een product beoordelen? Kijk op de verpakking naar het keurmerk, de productnaam, certificaat- of licentienummer en herkomst. Vraag de viswinkel om actuele informatie als iets niet duidelijk is.",
-          "Bij Schaap's Vishandel is onze VÅRLAKS-zalm ASC-gecertificeerd en zijn onze Hollandse garnalen MSC-gecertificeerd. We noemen een product alleen biologisch als het daarvoor gecertificeerd is.",
+          "Bij Schaap's Vishandel is onze VÅRLAKS-zalm ASC-gecertificeerd en zijn onze Hollandse garnalen MSC-gecertificeerd.",
         ],
       },
     ],

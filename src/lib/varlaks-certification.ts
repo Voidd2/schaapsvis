@@ -1,6 +1,15 @@
 /** Product FAQ shared by the campaign and the guide to fish labels. */
 export const varlaksCertification = {
-  "nl": "VÅRLAKS bevestigt dat zijn zalm ASC-gecertificeerd is. ASC stelt eisen aan onder meer de waterkwaliteit en het welzijn van de vissen. Dat is een ander keurmerk dan biologisch. Wij verkopen deze zalm daarom niet als biologische zalm.",
-  "en": "VÅRLAKS confirms that its salmon is ASC certified. ASC sets requirements for water quality and fish welfare. Organic certification is separate. We do not sell this salmon as organic.",
-  "de": "VÅRLAKS bestätigt die ASC-Zertifizierung seines Lachses. ASC stellt unter anderem Anforderungen an die Wasserqualität und das Wohl der Fische. Bio ist eine eigene Zertifizierung. Wir verkaufen diesen Lachs deshalb nicht als Bio-Lachs."
+  "nl": {
+    "q": "Welk keurmerk heeft VÅRLAKS-zalm?",
+    "a": "Onze VÅRLAKS-zalm draagt het ASC-keurmerk voor verantwoorde viskweek. De familiekwekers in Noord-Noorwegen meten regelmatig de waterkwaliteit. Onafhankelijke controleurs beoordelen ook hoe de kwekers voor de gezondheid en het welzijn van de zalm zorgen."
+  },
+  "en": {
+    "q": "Which certification does VÅRLAKS salmon have?",
+    "a": "Our VÅRLAKS salmon is ASC certified for responsible fish farming. The family farms in northern Norway regularly test the water quality. Independent auditors also check how the farmers care for the health and welfare of their salmon."
+  },
+  "de": {
+    "q": "Welches Siegel trägt VÅRLAKS-Lachs?",
+    "a": "Unser VÅRLAKS-Lachs trägt das ASC-Siegel für verantwortungsvolle Fischzucht. Die Familienbetriebe in Nordnorwegen prüfen regelmäßig die Wasserqualität. Unabhängige Prüfer kontrollieren auch, wie die Züchter für die Gesundheit und das Wohl der Lachse sorgen."
+  }
 } as const;
