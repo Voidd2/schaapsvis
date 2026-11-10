@@ -611,6 +611,14 @@ async function adminAnalytics(request, env) {
   return json({ ...report, popup, locationsPopup });
 }
 
+// Removing an address from marketing must not remove a login or a student pass.
+// A fresh, explicit newsletter signup can list the address again.
+const listedAccount = `u.account_status IN ('active','locked') AND NOT EXISTS (
+  SELECT 1 FROM consent_events e WHERE e.user_id=u.id AND e.consent_type='marketing_email'
+  AND e.source='admin-email-directory' AND e.granted=0)`;
+const directoryRevision = `CASE WHEN n.email IS NOT NULL THEN 'subscription:' || n.updated_at
+  WHEN ${listedAccount} THEN 'account:' || u.created_at END`;
+
 async function adminEmailAddresses(request, env) {
   if (!sameOrigin(request, env) || !await requireAdmin(request, env)) return json({error:"forbidden"}, 403);
   const body = await readJson(request);
@@ -618,16 +626,49 @@ async function adminEmailAddresses(request, env) {
   if (typeof after !== "string" || after.length > 254) return json({error:"invalid_cursor"}, 400);
   const rows = await env.DB.prepare(`
     WITH addresses AS (
-      SELECT email FROM users WHERE account_status IN ('active','locked') AND email > ?
+      SELECT u.email FROM users u WHERE ${listedAccount} AND u.email > ?
       UNION SELECT email FROM newsletter_subscriptions WHERE email > ?
     )
     SELECT a.email, u.id IS NOT NULL AS has_account, COALESCE(n.status,'not-subscribed') AS marketing,
-      n.source, CASE WHEN n.status='unsubscribed' THEN n.unsubscribed_at ELSE n.consented_at END AS marketing_at
+      n.source, ${directoryRevision} AS revision,
+      CASE WHEN n.status='unsubscribed' THEN n.unsubscribed_at ELSE n.consented_at END AS marketing_at
     FROM addresses a LEFT JOIN users u ON u.email=a.email AND u.account_status IN ('active','locked')
     LEFT JOIN newsletter_subscriptions n ON n.email=a.email
     ORDER BY a.email COLLATE NOCASE LIMIT 101`).bind(after,after).all();
   const emails = (rows.results || []).slice(0,100);
   return json({emails, next:rows.results?.length > 100 ? emails.at(-1).email : null});
+}
+
+async function removeDirectoryEmail(request, env) {
+  if (!sameOrigin(request,env) || !await requireAdmin(request,env)) return json({error:"forbidden"},403);
+  const body = await readJson(request);
+  const email = normalizeEmail(body?.email);
+  const revision = body?.revision;
+  if (!email || typeof revision !== "string" || !revision || revision.length > 80) return json({error:"invalid_target"},400);
+
+  // Check the version seen by the administrator inside the same transaction as
+  // the removal. An old tab or a retried request cannot erase a new signup.
+  const current = `SELECT t.email, ${directoryRevision} AS revision FROM (SELECT ? AS email) t
+    LEFT JOIN users u ON u.email=t.email LEFT JOIN newsletter_subscriptions n ON n.email=t.email`;
+  const matched = `SELECT email FROM (${current}) WHERE revision=?`;
+  const remove = (table, condition="") => env.DB.prepare(
+    `DELETE FROM ${table} WHERE email IN (${matched}) ${condition}`
+  ).bind(email,revision);
+
+  const [snapshot] = await env.DB.batch([
+    env.DB.prepare(current).bind(email),
+    remove("newsletter_signup_drafts"),
+    remove("newsletter_deliveries"),
+    remove("email_tokens","AND purpose IN ('newsletter_confirm','newsletter_unsubscribe')"),
+    env.DB.prepare(`INSERT INTO consent_events (id,user_id,consent_type,granted,text_version,source,recorded_at)
+      SELECT ?,u.id,'marketing_email',0,'directory-removal-v1','admin-email-directory',?
+      FROM users u WHERE u.email IN (${matched}) AND ${listedAccount}`).bind(crypto.randomUUID(),nowIso(),email,revision),
+    // The subscription's foreign key also clears its personal signup visit.
+    remove("newsletter_subscriptions"),
+  ]);
+  const found = snapshot.results?.[0]?.revision;
+  if (found && found !== revision) return json({error:"entry_changed"},409);
+  return json({ok:true});
 }
 
 async function adminSignupVisit(request, env) {
@@ -2647,6 +2688,7 @@ const memberWorker = {
     if (securityStudentMatch && method === "GET") return adminSecurityStudent(request, env, securityStudentMatch[1]);
     if (securityStudentMatch && method === "POST") return adminSecurityAction(request, env, securityStudentMatch[1]);
     if (path === "/api/members/admin/email-addresses" && method === "POST") return adminEmailAddresses(request, env);
+    if (path === "/api/members/admin/email-addresses" && method === "DELETE") return removeDirectoryEmail(request, env);
     if (path === "/api/members/admin/signup-visit" && method === "POST") return adminSignupVisit(request, env);
     if (path === "/api/members/admin/customers" && method === "GET") return adminCustomers(request, env);
     const customerStatusMatch = path.match(/^\/api\/members\/admin\/customers\/([0-9a-f-]{36})\/status$/i);

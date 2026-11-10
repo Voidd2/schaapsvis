@@ -7,6 +7,11 @@ const copy = {
     title: "E-mailadressen",
     intro: "Persoonlijke accountadressen en adressen uit het kortingsformulier. De status geeft aan wie kortingsmails mag ontvangen.",
     address: "E-mailadres",
+    remove: "Verwijder uit e-maillijst", removing: "Verwijderen…", removed: "Verwijderd uit de e-maillijst.",
+    confirmRemoval: "Verwijder dit adres uit de e-maillijst, inclusief de kortingsinschrijving en eventuele bezoekgegevens?",
+    accountKept: "Het gekoppelde account en een eventuele studentenpas blijven bestaan.",
+    changed: "Deze inschrijving is intussen gewijzigd. Bekijk de actuele gegevens en probeer het opnieuw.",
+    removeError: "Verwijderen is niet gelukt. Probeer het opnieuw.",
     offers: "Kortingsmails",
     source: "Inschrijfbron", unknown: "Bron niet vastgelegd", accountOnly: "Account zonder kortingsinschrijving",
     sources: {
@@ -30,6 +35,11 @@ const copy = {
     title: "Email addresses",
     intro: "Personal account and discount signup addresses. The status shows who can receive marketing emails.",
     address: "Email address",
+    remove: "Remove from email list", removing: "Removing…", removed: "Removed from the email list.",
+    confirmRemoval: "Remove this address from the email list, including the discount subscription and any visit data?",
+    accountKept: "The linked account and any student pass will stay active according to their current status.",
+    changed: "This entry has changed. Review the latest details and try again.",
+    removeError: "Could not remove this entry. Please try again.",
     offers: "Marketing emails",
     source: "Signup source", unknown: "Source not recorded", accountOnly: "Account without a discount signup",
     sources: {
@@ -53,6 +63,11 @@ const copy = {
     title: "E-Mail-Adressen",
     intro: "Private Kontoadressen und Anmeldungen für Rabatte. Der Status zeigt, wer Angebotsmails erhalten darf.",
     address: "E-Mail-Adresse",
+    remove: "Aus E-Mail-Liste entfernen", removing: "Wird entfernt…", removed: "Aus der E-Mail-Liste entfernt.",
+    confirmRemoval: "Diese Adresse mit der Rabattanmeldung und etwaigen Besuchsdaten aus der E-Mail-Liste entfernen?",
+    accountKept: "Das zugehörige Konto und ein etwaiger Studierendenausweis bleiben bestehen.",
+    changed: "Dieser Eintrag wurde inzwischen geändert. Prüfen Sie die aktuellen Angaben und versuchen Sie es erneut.",
+    removeError: "Der Eintrag konnte nicht entfernt werden. Bitte versuchen Sie es erneut.",
     offers: "Angebotsmails",
     source: "Anmeldequelle", unknown: "Quelle nicht erfasst", accountOnly: "Konto ohne Rabatt-Anmeldung",
     sources: {
@@ -78,6 +93,7 @@ type Entry = {
   has_account: number;
   marketing: "subscribed" | "pending" | "unsubscribed" | "not-subscribed";
   source: string | null;
+  revision: string;
   marketing_at: string | null;
 };
 const statusLabel = {
@@ -98,6 +114,8 @@ export function EmailDirectory({ locale }: { locale: string }) {
   const t = copy[locale === "de" || locale === "en" ? locale : "nl"];
   const [entries, setEntries] = useState<Entry[]>([]);
   const [opened,setOpened] = useState<string|null>(null);
+  const [removing,setRemoving] = useState<string|null>(null);
+  const [notice,setNotice] = useState("");
   const [after, setAfter] = useState("");
   const [next, setNext] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
@@ -135,10 +153,37 @@ export function EmailDirectory({ locale }: { locale: string }) {
     return () => controller.abort();
   }, [after, attempt]);
 
+  async function removeEntry(row: Entry) {
+    const confirmation = [row.email, t.confirmRemoval, row.has_account ? t.accountKept : ""].filter(Boolean).join("\n\n");
+    if (removing || !window.confirm(confirmation)) return;
+    setRemoving(row.email);
+    setNotice("");
+    try {
+      const response = await fetch("/api/members/admin/email-addresses", {
+        method:"DELETE", credentials:"same-origin", cache:"no-store", headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({email:row.email,revision:row.revision}),
+      });
+      if (response.status === 409) {
+        setNotice(t.changed);
+        setOpened(null);
+        setStatus("loading");
+        setAfter("");
+        setAttempt(n=>n+1);
+        return;
+      }
+      if (!response.ok || (await response.json()).ok !== true) throw new Error("remove_failed");
+      setEntries(previous=>previous.filter(entry=>entry.email !== row.email));
+      setOpened(null);
+      setNotice(t.removed);
+    } catch { setNotice(t.removeError); }
+    finally { setRemoving(null); }
+  }
+
   return (
     <section className="section-wrap py-10">
       <h1 className="text-3xl">{t.title}</h1>
       <p className="my-4">{t.intro}</p>
+      <p role="status">{notice}</p>
       {entries.length > 0 && (
         <table className="w-full text-left">
           <thead><tr><th scope="col">{t.address}</th><th scope="col">{t.source}</th><th scope="col">{t.offers}</th></tr></thead>
@@ -150,7 +195,12 @@ export function EmailDirectory({ locale }: { locale: string }) {
                 <td className="py-3">{t[statusLabel[row.marketing]]}
                   {row.marketing_at && <time className="block text-sm" dateTime={row.marketing_at}>{new Intl.DateTimeFormat(locale, {dateStyle:"medium", timeStyle:"short", timeZone:"Europe/Amsterdam"}).format(new Date(row.marketing_at))}</time>}
                 </td>
-              </tr>{opened===row.email && <tr><td colSpan={3}><SignupVisitDetails email={row.email} locale={locale}/></td></tr>}</Fragment>
+              </tr>{opened===row.email && <tr><td colSpan={3}>
+                <SignupVisitDetails email={row.email} locale={locale}/>
+                <button type="button" className="knop knop-lijn mb-4" disabled={!row.revision || Boolean(removing) || status!=="ready"} onClick={()=>removeEntry(row)}>
+                  {removing===row.email ? t.removing : t.remove}
+                </button>
+              </td></tr>}</Fragment>
             ))}
           </tbody>
         </table>
@@ -162,7 +212,7 @@ export function EmailDirectory({ locale }: { locale: string }) {
         <button className="knop knop-lijn" onClick={() => { setStatus("loading"); setAttempt(n => n + 1); }}>{t.retry}</button>
       )}
       {status === "ready" && next && (
-        <button className="knop knop-lijn mt-4" onClick={() => { setStatus("loading"); setAfter(next); }}>{t.more}</button>
+        <button className="knop knop-lijn mt-4" disabled={Boolean(removing)} onClick={() => { setStatus("loading"); setAfter(next); }}>{t.more}</button>
       )}
     </section>
   );
