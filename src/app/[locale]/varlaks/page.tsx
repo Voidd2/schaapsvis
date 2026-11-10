@@ -40,7 +40,7 @@ export default async function VarlaksPage({ params }: Props) {
   const c = campaign[lang], q = questionsCopy[lang];
   const storefront = BEELD.winkelGevel;
   const shopCopy = lang === "nl" ? storefront : storefront.vertalingen[lang];
-  const locationPhotoSizes = "(max-width: 460px) 90vw, (max-width: 740px) 416px, min(34vw, 416px)";
+  const locationPhotoSizes = "(max-width: 740px) 90vw, min(45vw, 800px)";
   return <div className={styles.page}>
     <Schema data={kruimelSchema(lang, [{ naam: BEDRIJF.naamKort, pad: "/" }, { naam: "VÅRLAKS", pad: "/varlaks" }])} />
     <Schema data={{ "@context":"https://schema.org", "@type":"WebPage", name:c.title,
@@ -53,6 +53,7 @@ export default async function VarlaksPage({ params }: Props) {
         <p className={styles.lead}>{c.intro}</p>
         <div className={styles.actions}>
           <a className={styles.primary} href="#locaties">{c.locations}</a>
+          <a className={styles.videoAction} href="#film"><span aria-hidden="true">▶</span>{c.video}</a>
         </div>
       </div>
       <div className={styles.heroPhoto}>
@@ -80,7 +81,9 @@ export default async function VarlaksPage({ params }: Props) {
           <DiscountOfferPopup locale={lang} experiment="varlaks" />
         </VarlaksFilm>
       </BedieningSlot></div>
-      <div className={styles.locationPhotos}>
+    </section>
+
+    <div className={styles.locationPhotos}>
         <figure>
           <StaticResponsiveImage src={storefront.bestand} alt={shopCopy.alt} className={styles.storefront}
             width={1320} height={984} sizes={locationPhotoSizes} />
@@ -91,8 +94,7 @@ export default async function VarlaksPage({ params }: Props) {
             width={1600} height={900} sizes={locationPhotoSizes} />
           <figcaption>{c.stallCaption}</figcaption>
         </figure>
-      </div>
-    </section>
+    </div>
 
     <VarlaksLocations locale={lang}/>
     <section className={styles.serving} aria-labelledby="varlaks-cooking">
