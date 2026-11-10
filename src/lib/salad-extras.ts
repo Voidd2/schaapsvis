@@ -4,8 +4,8 @@ export const SALAD_REQUESTS = [
   { slug: "extra-krab-mangosalade-100g", names: ["Krab-mangosalade", "Crab and mango salad", "Krabben-Mango-Salat"], cents: SALAD_PORTION_CENTS, image: "/images/editorial/salade-krab-mango-toonbank.webp", productSlug: null },
   { slug: "extra-zalm-wasabisalade-100g", names: ["Zalm-wasabisalade", "Salmon and wasabi spread", "Lachs-Wasabi-Salat"], cents: SALAD_PORTION_CENTS, image: "/images/editorial/salade-zalm-wasabi-toonbank.webp", productSlug: null },
   { slug: "extra-tonijnsalade-100g", names: ["Tonijnsalade", "Tuna salad", "Thunfischsalat"], cents: SALAD_PORTION_CENTS, image: "/images/editorial/salade-tonijn-toonbank.webp", productSlug: "tonijnsalade" },
-  { slug: "extra-pikante-tonijnsalade-100g", names: ["Pikante tonijnsalade", "Spicy tuna salad", "Pikanter Thunfischsalat"], cents: SALAD_PORTION_CENTS, image: null, productSlug: null },
-  { slug: "extra-haring-mosterdsalade-100g", names: ["Haring-mosterdsalade", "Herring and mustard salad", "Herings-Senf-Salat"], cents: 250, image: null, productSlug: null },
+  { slug: "extra-pikante-tonijnsalade-100g", names: ["Pikante tonijnsalade", "Spicy tuna salad", "Pikanter Thunfischsalat"], cents: SALAD_PORTION_CENTS, image: "/images/editorial/salade-pikante-tonijn-toonbank.webp", productSlug: null },
+  { slug: "extra-haring-mosterdsalade-100g", names: ["Haring-mosterdsalade", "Herring and mustard salad", "Herings-Senf-Salat"], cents: 250, image: "/images/editorial/salade-haring-mosterd-toonbank.webp", productSlug: null },
 ] as const;
 
 

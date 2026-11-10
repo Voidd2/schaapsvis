@@ -20,9 +20,9 @@ function ProductCard({ slug, locale, festive, featured = false }: Props & { slug
   const href = `/${locale}/feestdagen/${slug}?catalog=${festive ? "feestdagen" : "visschalen"}`;
   return <article id={slug} className={`seafood-card${featured ? " seafood-featured-card" : ""}`} data-catalog-card={slug}>
     {isPlatter && <header className="platter-card-heading"><h3><Link href={href}>{product.naam}</Link></h3><p className="seafood-price">{platterPrice(product, locale)}</p></header>}
-    <CatalogPhoto src={product.afbeelding} alt={platterPhotoAlt(product, locale)} name={product.naam} locale={locale} platter={isPlatter} />
+    <CatalogPhoto src={product.afbeelding} alt={platterPhotoAlt(product, locale)} name={product.naam} locale={locale} platter={product.categorie === "visschalen"} />
     <div className="seafood-card-body">
-      {isPlatter && <p className="text-sm">{platterPresentation(locale).photoText}</p>}
+      {product.categorie === "visschalen" && <p className="text-sm">{platterPresentation(locale).photoText}</p>}
       {!isPlatter && <h3><Link href={href}>{product.naam}</Link></h3>}
       <p>{product.intro}</p>
       {product.categorie === "gourmet" && <p className="text-sm">{gourmetPortionText(slug, locale)}</p>}

@@ -24,7 +24,7 @@ export async function generateMetadata({
     pad: "/barbecue-gourmet",
     title: t("barbecueTitle"),
     description: t("barbecueDesc"),
-    image: "/images/barbecue-gourmet-hero.webp",
+    image: "/images/editorial/gourmet-3-4-studio.webp",
   });
 }
 
@@ -86,7 +86,7 @@ export default async function BarbecueGourmetPage({
           </div>
           <figure className="collection-hero-image">
             <Image
-              src="/images/barbecue-gourmet-hero.webp"
+              src="/images/editorial/gourmet-3-4-studio.webp"
               alt={t("heroImageAlt")}
               width={1600}
               height={1067}

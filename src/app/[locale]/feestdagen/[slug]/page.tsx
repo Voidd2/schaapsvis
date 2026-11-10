@@ -124,7 +124,7 @@ export default async function FeestdagenProductPage({ params, searchParams }: Pr
       <div className="section-wrap product-detail-grid">
         <figure className="product-detail-photo"><div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white shadow-sm">
           <Image src={product.afbeelding} alt={platterPhotoAlt(product, locale)} fill priority sizes="(max-width: 1024px) 100vw, 58vw" className={family ? "object-contain" : "object-cover"} />
-        </div>{(family || product.categorie === "gourmet") && <figcaption className="mt-3"><PlatterPhotoNote locale={locale} /></figcaption>}</figure>
+        </div>{family && <figcaption className="mt-3"><PlatterPhotoNote locale={locale} /></figcaption>}</figure>
         <div className="product-detail-heading">
           <nav aria-label="Breadcrumb" className="mb-6 text-sm text-[#527080]">
             <Link href={`/${locale}`}>{t.home}</Link> <span aria-hidden="true">/</span> <Link href={`/${locale}/feestdagen`}>{t.season}</Link>
