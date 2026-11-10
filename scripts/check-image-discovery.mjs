@@ -15,5 +15,5 @@ assert((await verification.text()).trim()==='google-site-verification: googlee89
 const robots=await(await fetch(origin+'/robots.txt')).text();
 for(const bot of ['Googlebot','Bingbot','OAI-SearchBot','Claude-SearchBot','PerplexityBot'])assert(robots.includes(bot),'Crawler policy: '+bot);
 const llms=await(await fetch(origin+'/llms.txt')).text();
-assert(llms.includes('Friday 08:00–17:30')&&llms.includes('Veurseweg 18'),'LLM guide local information');
+assert(llms.includes('Friday 08:30–17:30')&&llms.includes('Veurseweg 18'),'LLM guide local information');
 console.log(JSON.stringify({imageSitemapEntries:images.length,uniqueSourceImages:checked,searchConsoleHtml:true,crawlerPolicies:5,llmsGuide:true,failures:0}));

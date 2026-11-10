@@ -83,12 +83,12 @@ assert(calendar.main.includes('Deze maand'), 'Server-rendered current month');
 const home = await page('/nl');
 assert(!/href="\/nl\/viskalender"/.test(home.html.split('</header>')[0]), 'Calendar stays out of the compact header navigation');
 const local = await page('/nl/viswinkel-voorschoten');
-assert(local.main.includes('08:00') && local.main.includes('17:30'), 'Voorschoten opening hours');
+assert(local.main.includes('08:30') && local.main.includes('17:30'), 'Voorschoten opening hours');
 assert(local.main.includes('vrijdag') && local.main.includes('Hoogvliet'), 'Voorschoten weekly stall information');
 const schemas = [...local.html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].flatMap(m => {
   const parsed = JSON.parse(m[1]); return Array.isArray(parsed) ? parsed : [parsed];
 });
 const stall = schemas.find(s => s['@id']?.endsWith('#kraam-voorschoten'));
-assert(stall?.openingHoursSpecification?.[0]?.opens === '08:00' && stall?.openingHoursSpecification?.[0]?.closes === '17:30', 'Voorschoten schema hours');
+assert(stall?.openingHoursSpecification?.[0]?.opens === '08:30' && stall?.openingHoursSpecification?.[0]?.closes === '17:30', 'Voorschoten schema hours');
 console.log(JSON.stringify({checks, blogPhotos: blogPhotos.length, uniqueBlogPhotos: new Set(blogPhotos).size, failures}, null, 2));
 if (failures.length) process.exitCode = 1;
