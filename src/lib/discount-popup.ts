@@ -1,3 +1,5 @@
+import { analyticsConsentKey } from "./journey-shared.mjs";
+
 export type PopupVariant = "a" | "b";
 export type PopupExperiment = "varlaks" | "locations";
 export type PopupMeasurement = { consent: true; id: string; variant: PopupVariant };
@@ -19,7 +21,7 @@ export function popupHeadline(experiment: PopupExperiment, locale: string, varia
 }
 
 export function allowsPopupAnalytics() {
-  try { return localStorage.getItem("sv-analytics-consent-v1") === "accepted"; }
+  try { return localStorage.getItem(analyticsConsentKey) === "accepted"; }
   catch { return false; }
 }
 

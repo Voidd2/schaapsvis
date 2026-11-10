@@ -166,3 +166,38 @@ toestemming en afmelding in deze Worker leidend. De site-, account- en
 studenten-Workers zijn gedeployed; klantaccounts voor bezorging en spaarpunten
 blijven toekomstige ontwikkeling.
 
+## Bezoekoverzicht (10 november 2026)
+
+`/<taal>/beheer/overzicht` combineert bestaande dagtotalen met bezoekroutes en
+nieuwsbriefstappen. Migratie `0022_visitor_journeys.sql` is vereist vóór deployment
+van de members Worker. `POST /api/members/analytics/visits` accepteert alleen de
+nieuwe expliciete meettoestemming (`sv-analytics-consent-v2`, `journey-v1`). Een
+eerdere weigering blijft geldig; een oude acceptatie vereist een nieuwe keuze.
+Het bestaande aparte opt-in voor aan een e-mailadres gekoppelde bezoeken blijft
+afzonderlijk. De nieuwe tabel wordt nergens aan accounts of e-mailadressen gekoppeld.
+
+Elke tabsessie gebruikt een willekeurig UUID, serverzijdig HMAC-gehasht. Snapshots
+hebben een oplopend volgnummer: hartslagen, herhalingen en late verzoeken leveren
+geen dubbele bezoeken op. Toegestane openbare paginapaden (maximaal 50), categorie
+van herkomst, linktellingen, zichtbare tijd en ja/nee-stappen worden bijgehouden.
+Geen formulierwaarden, volledige referrers, querystrings, IP-adressen of namen in
+deze tabel. IP-rate-limits en de bestaande winkelnetwerkuitsluiting gelden wel.
+Een sessie vernieuwt na 30 minuten zonder activiteit of uiterlijk na vier uur.
+Actieve zichtbare tabs sturen elke 15 seconden een heartbeat; verborgen tabs niet.
+Tijd is een schatting; een sluitmoment is niet betrouwbaar waarneembaar.
+
+Rapporten omvatten maximaal 30 dagen, 100 recente routes en totalen voor alle
+gemeten bezoeken in de periode. Een kort bezoek: na 30 minuten geen nieuw signaal,
+één pagina, minder dan 10 seconden en geen gemeten klik, e-mailstap of contact.
+Conversie betekent geslaagde formulierinschrijving (kan een bestaand adres zijn),
+niet een bestelling. Ontbrekende toestemming, blokkades en netwerkverlies leveren
+geen bekende telling van niet-gemeten bezoeken op. `utm_source=facebook` of een
+Facebook-referrer herkent de bron; ontbrekende herkomst blijft direct/onbekend.
+
+Records verlopen na 30 dagen, worden meteen uit rapporten gefilterd en dagelijks
+verwijderd. Intrekken via Cookie-instellingen wist het huidige tabrecord via
+`POST /api/members/analytics/visits/forget`; een tombstone blokkeert late updates.
+Een browserwachtrij probeert mislukte verwijdering opnieuw. Adminrapporten houden
+de bestaande sessie-, rol- en netwerkcontrole. Tests staan in `journey-tests.mjs`
+en draaien mee met `node workers/members/test.mjs`.
+

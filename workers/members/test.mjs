@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { checkStudentRecovery } from "./student-recovery-tests.mjs";
+import { checkJourneys } from "./journey-tests.mjs";
 import { generateKeyPairSync } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { DatabaseSync } from "node:sqlite";
@@ -164,6 +165,7 @@ sqlite.exec(otherEducationMigration);
 sqlite.exec(await readFile(new URL("../../migrations/0018_varlaks_popup.sql", import.meta.url), "utf8"));
 sqlite.exec(await readFile(new URL("../../migrations/0019_signup_visits.sql", import.meta.url), "utf8"));
 sqlite.exec(await readFile(new URL("../../migrations/0021_newsletter_draft_region.sql", import.meta.url), "utf8"));
+sqlite.exec(await readFile(new URL("../../migrations/0022_visitor_journeys.sql", import.meta.url), "utf8"));
 let simulateApplicationCommitFailure = false;
 let decisionReadBarrier = null;
 
@@ -491,6 +493,7 @@ assert.equal(reportBody.summary.views, 1);
 assert.equal(reportBody.summary.clicks, 1);
 assert.equal(reportBody.daily.length, 7);
 assert.equal(reportBody.pages.length, 2);
+await checkJourneys({call,sqlite,env,sessionCookie,testDigest});
 assert.equal((await call("/api/members/admin/analytics")).status, 403, "anonymous reports remain inaccessible");
 assert.equal((await call("/api/members/admin/customers")).status, 403, "customer listing rejects anonymous requests");
 assert.equal((await call("/api/members/admin/customers", { cookie: sessionCookie, headers: { "CF-Connecting-IP": "198.51.100.5" } })).status, 403, "customer listing requires the server-side IP allowlist");

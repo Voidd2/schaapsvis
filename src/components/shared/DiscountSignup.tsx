@@ -6,6 +6,7 @@ import { recordPopupStage, type PopupExperiment, type PopupMeasurement } from "@
 import { discountConsentVersion, discountSignupCopy } from "@/lib/discount-signup";
 import { SignupFacebookFollow } from "./SignupFacebookFollow";
 import { signupVisitComplete, visitAtSignup } from "@/lib/signup-visit";
+import { recordJourneyStep } from "@/lib/visitor-journey.mjs";
 
 type Offer = { experiment: PopupExperiment; headline: string; getMeasurement: () => PopupMeasurement | null };
 export function DiscountSignup({ locale, offer }: { locale: string; offer?: Offer }) {
@@ -30,12 +31,13 @@ export function DiscountSignup({ locale, offer }: { locale: string; offer?: Offe
           consent: Boolean(offer) || form.get("consent") === "on",
         }),
       });
-      if (response.status === 429) { setState("limited"); return; }
+      if (response.status === 429) { recordJourneyStep("signupError"); setState("limited"); return; }
       if (!response.ok || (await response.json()).ok !== true) throw new Error("signup");
       signupVisitComplete(visit);
+      recordJourneyStep("subscribed");
       try { localStorage.setItem("sv-discounts-subscribed", "1"); } catch { /* Storage is optional. */ }
       setState("success");
-    } catch { setState("error"); }
+    } catch { recordJourneyStep("signupError"); setState("error"); }
   }
 
   return <div className="discount-signup">
@@ -45,7 +47,7 @@ export function DiscountSignup({ locale, offer }: { locale: string; offer?: Offe
       <Link href={`/${locale}/assortiment`} className="collection-text-link">{t.range} →</Link>
     </div> : <>
       {offer && <><h2>{offer.headline}</h2><p>{t.offerIntro}</p></>}
-      <form onSubmit={subscribe} method="post" aria-label={offer?.headline ?? t.title}>
+      <form data-newsletter-form={offer?.experiment ?? "discounts"} onSubmit={subscribe} method="post" aria-label={offer?.headline ?? t.title}>
         <label className="discount-email">{t.email}
           <input required name="email" type="email" autoComplete="email" maxLength={254} onBlur={event => {
             if (!event.currentTarget.value || !event.currentTarget.validity.valid) return;

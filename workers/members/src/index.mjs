@@ -1,6 +1,8 @@
 import { actionEmail, verificationCodeEmail, campaignEmail, accountEmailText } from "./email-templates.mjs";
 import { validPopupMeasurement, popupExposure, countNewPopupSubscription, popupReport } from "./popup-experiment.mjs";
 import { publicAnalyticsPath, analyticsTarget, analyticsReport } from "./analytics.mjs";
+import { storeJourney, forgetJourney, journeyReport } from "./journeys.mjs";
+import { validJourneyId, journeySnapshot } from "../../../src/lib/journey-shared.mjs";
 import { signupVisitPath, maxVisitPages, visitConsentVersion, visitMinutes } from "../../../src/lib/signup-visit-path.mjs";
 import { clientDeviceInfo } from "./device-info.mjs";
 import { Pass, SigningMaterial } from "passmint";
@@ -608,7 +610,23 @@ async function adminAnalytics(request, env) {
   const [popup, locationsPopup] = await Promise.all(
     ["varlaks", "locations"].map(experiment => popupReport(env.DB, report.since, report.until, experiment))
   );
-  return json({ ...report, popup, locationsPopup });
+  const journeys = await journeyReport(env, days);
+  return json({ ...report, popup, locationsPopup, journeys });
+}
+
+async function collectJourney(request, env, forget = false) {
+  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  if (!env.DB || !env.AUTH_PEPPER) return json({ error: "analytics_unavailable" }, 503);
+  const body = await readJson(request);
+  if (!validJourneyId(body?.id)) return json({ error: "invalid_visit" }, 400);
+  if (!forget && (env.ANALYTICS_ENABLED !== "on" || !journeySnapshot(body))) return json({ error: "invalid_visit" }, 400);
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  if (!forget && env.ANALYTICS_EXCLUDED_IP_HASH && await digest(ip) === env.ANALYTICS_EXCLUDED_IP_HASH) return json({ ok: true, excluded: true }, 202);
+  if (!await rateLimit(env.DB, await hmac(env.AUTH_PEPPER, `journey:ip:${ip}`), 600, 15*60*1000)) return json({ error: "rate_limited" }, 429);
+  const hash = await hmac(env.AUTH_PEPPER, `journey:${body.id}`);
+  if (forget) await forgetJourney(env, hash);
+  else await storeJourney(env, hash, body);
+  return json({ ok: true }, 202);
 }
 
 // Removing an address from marketing must not remove a login or a student pass.
@@ -2674,6 +2692,7 @@ const memberWorker = {
       return json({ status: enabled ? "ok" : "disabled" }, enabled ? 200 : 503);
     }
     if (path === "/api/members/signup-visit/forget" && method === "POST") return visitChoice(request,env,"forget");
+    if (path === "/api/members/analytics/visits/forget" && method === "POST") return collectJourney(request,env,true);
     if (env.MEMBERS_ENABLED !== "on") return json({ error: "members_disabled" }, 503);
     if (path === "/api/members/newsletter/unsubscribe" && method === "GET") return unsubscribePage(request, env);
     if (path === "/api/members/newsletter/unsubscribe" && method === "POST") return unsubscribeNewsletter(request, env);
@@ -2694,6 +2713,7 @@ const memberWorker = {
     if (path === "/api/members/analytics/varlaks-popup" && method === "POST") return collectPopupStage(request, env, "varlaks");
     if (path === "/api/members/analytics/locations-popup" && method === "POST") return collectPopupStage(request, env, "locations");
     if (path === "/api/members/analytics" && method === "POST") return collectAnalytics(request, env);
+    if (path === "/api/members/analytics/visits" && method === "POST") return collectJourney(request,env);
     if (path === "/api/members/signup-visit/grant" && method === "POST") return visitChoice(request,env,"grant");
     if (path === "/api/members/signup-visit/page" && method === "POST") return visitChoice(request,env,"page");
     if (path === "/api/members/register" && method === "POST") return register(request, env);
@@ -2755,6 +2775,7 @@ const memberWorker = {
     // Newsletter delivery remains inert until the owner deliberately enables it.
     const tasks = [cleanupReviewedStudentProofs(env), cleanupOrphanStudentProofs(env), cleanupNewsletterDrafts(env)];
     if (env.DB) tasks.push(env.DB.prepare("DELETE FROM signup_visits WHERE expires_at<=?").bind(nowIso()).run());
+    if (env.DB) tasks.push(env.DB.prepare("DELETE FROM visitor_journeys WHERE expires_at<=?").bind(nowIso()).run());
     const scheduledAt = new Date(_controller?.scheduledTime || Date.now());
     if (scheduledAt.getUTCHours() === 2 && scheduledAt.getUTCMinutes() === 0) tasks.push(cleanupAnalytics(env), cleanupSecurityRecords(env));
     if (env.MEMBERS_ENABLED === "on") tasks.push(processNewsletterDeliveries(env));

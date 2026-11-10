@@ -4,10 +4,12 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { flushVisitErasures, recordVisitPage, setVisitChoice, sharesVisit, visitChanged } from "@/lib/signup-visit";
+import { analyticsConsentKey, analyticsConsentEvent } from "@/lib/journey-shared.mjs";
+import { observeJourney, revokeJourney, flushJourneyErasures } from "@/lib/visitor-journey.mjs";
 
-const CONSENT_KEY = "sv-analytics-consent-v1";
+const CONSENT_KEY = analyticsConsentKey;
 const PRIVATE_PATH = /^\/(nl|en|de)\/(account|beheer|studentenkorting|kortingsbon|bestellen)(\/|$)/;
-const CONSENT_EVENT = "sv-analytics-consent-change";
+const CONSENT_EVENT = analyticsConsentEvent;
 
 function subscribeConsent(onChange: () => void) {
   window.addEventListener("storage", onChange);
@@ -18,13 +20,14 @@ function subscribeConsent(onChange: () => void) {
   };
 }
 function readConsent() {
-  try { return window.localStorage.getItem(CONSENT_KEY) || ""; } catch { return ""; }
+  try { return window.localStorage.getItem(CONSENT_KEY) || (window.localStorage.getItem("sv-analytics-consent-v1") === "declined" ? "declined" : ""); } catch { return ""; }
 }
 
 function send(event: "page_view" | "link_click", path: string, target?: string) {
   // Re-check consent at the moment of transmission. A document-level click
   // listener can run before React removes it after the visitor revokes consent.
-  if (window.localStorage.getItem(CONSENT_KEY) !== "accepted" || !path || PRIVATE_PATH.test(path)) return;
+  try { if (localStorage.getItem(CONSENT_KEY) !== "accepted") return; } catch { return; }
+  if (!path || PRIVATE_PATH.test(path)) return;
   const body = JSON.stringify({ consent: true, event, path, ...(target ? { target } : {}) });
   void fetch("/api/members/analytics", { method: "POST", headers: { "Content-Type": "application/json" }, body, credentials: "same-origin", keepalive: true }).catch(() => undefined);
 }
@@ -38,6 +41,13 @@ export function AnalyticsConsent({ locale }: { locale: string }) {
   const [personal,setPersonal] = useState(false);
   const [busy,setBusy] = useState(false);
   const [failed,setFailed] = useState(false);
+
+  useEffect(() => {
+    if (choice === "declined") revokeJourney();
+    const stop = observeJourney(pathname);
+    window.addEventListener("online", flushJourneyErasures);
+    return () => { stop(); window.removeEventListener("online", flushJourneyErasures); };
+  }, [choice, pathname]);
 
   useEffect(() => {
     const record = () => recordVisitPage(pathname);
@@ -71,21 +81,21 @@ export function AnalyticsConsent({ locale }: { locale: string }) {
 
   if (choice === "unknown") return null;
   const copy = locale === "de"
-    ? { title: "Ihre Cookie-Auswahl", message: "Ihr Konto nutzt notwendige Cookies. Dürfen wir auch zusammengefasste Besuchsstatistiken erfassen?", yes: "Akzeptieren", no: "Ablehnen", privacy: "Mehr erfahren", settings: "Cookie-Einstellungen" }
+    ? { title: "Ihre Cookie-Auswahl", message: "Dürfen wir Herkunft, besuchte öffentliche Seiten, sichtbare Besuchsdauer und Newsletter-Schritte messen? Das Besuchsprotokoll enthält keine Namen oder E-Mail-Adressen und bleibt höchstens 30 Tage gespeichert. Notwendige Kontocookies funktionieren auch ohne diese Einwilligung.", yes: "Akzeptieren", no: "Ablehnen", privacy: "Mehr erfahren", settings: "Cookie-Einstellungen" }
     : locale === "en"
-      ? { title: "Your cookie choice", message: "Your account uses necessary cookies. May we also collect aggregate visitor statistics?", yes: "Accept", no: "Reject", privacy: "Read more", settings: "Cookie settings" }
-      : { title: "Uw cookiekeuze", message: "Voor uw account gebruiken we noodzakelijke cookies. Mogen we ook geaggregeerde bezoekstatistieken bijhouden?", yes: "Accepteren", no: "Weigeren", privacy: "Lees hier meer", settings: "Cookie-instellingen" };
+      ? { title: "Your cookie choice", message: "May we measure traffic source, public pages visited, visible visit time and newsletter steps? Visit records contain no names or email addresses and are kept for up to 30 days. Necessary account cookies work without this permission.", yes: "Accept", no: "Reject", privacy: "Read more", settings: "Cookie settings" }
+      : { title: "Uw cookiekeuze", message: "Mogen we de herkomst, bezochte openbare pagina’s, zichtbare bezoektijd en nieuwsbriefstappen meten? Dit bezoekoverzicht bevat geen namen of e-mailadressen en wordt maximaal 30 dagen bewaard. Noodzakelijke accountcookies werken ook zonder deze toestemming.", yes: "Accepteren", no: "Weigeren", privacy: "Lees hier meer", settings: "Cookie-instellingen" };
 
   const options = locale === "en" ? {
-    choices:"Choose settings", general:"Aggregate statistics", personal:"Share my visit when I sign up",
+    choices:"Choose settings", general:"Visit statistics and newsletter steps", personal:"Share my visit when I sign up",
     detail:"If I sign up for offers, Schaap’s may link my public page visits in this tab, IP address and approximate city to the email I enter to understand which products and areas attract subscribers. Stored for up to 30 days. Withdraw and erase via cookie settings.",
     save:"Save choices",error:"Your choice could not be confirmed. Check your connection and try again."
   } : locale === "de" ? {
-    choices:"Auswahl anpassen", general:"Zusammengefasste Statistiken", personal:"Meinen Besuch bei der Anmeldung teilen",
+    choices:"Auswahl anpassen", general:"Besuchsstatistiken und Newsletter-Schritte", personal:"Meinen Besuch bei der Anmeldung teilen",
     detail:"Bei der Anmeldung für Angebote darf Schaap’s besuchte öffentliche Seiten in diesem Tab, IP-Adresse und ungefähren Ort meiner angegebenen E-Mail-Adresse zuordnen, um das Interesse an Produkten und die Herkunft der Anmeldungen zu verstehen. Höchstens 30 Tage. Widerruf und Löschung über die Cookie-Einstellungen.",
     save:"Auswahl speichern",error:"Ihre Auswahl konnte nicht bestätigt werden. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut."
   } : {
-    choices:"Keuze aanpassen", general:"Algemene bezoekstatistieken", personal:"Mijn bezoek delen als ik me inschrijf",
+    choices:"Keuze aanpassen", general:"Bezoekstatistieken en nieuwsbriefstappen", personal:"Mijn bezoek delen als ik me inschrijf",
     detail:"Als ik me aanmeld voor aanbiedingen, mag Schaap’s mijn bezochte openbare pagina’s in dit tabblad, IP-adres en geschatte plaats koppelen aan het ingevulde e-mailadres. Zo ziet de winkel welke producten interesse wekken en uit welke plaatsen inschrijvingen komen. Maximaal 30 dagen. Intrekken en wissen kan via Cookie-instellingen.",
     save:"Keuze opslaan",error:"Uw keuze kon niet worden bevestigd. Controleer uw verbinding en probeer het opnieuw."
   };
@@ -97,6 +107,8 @@ export function AnalyticsConsent({ locale }: { locale: string }) {
     setPersonal(share);
     try {
       window.localStorage.setItem(CONSENT_KEY, value);
+      window.localStorage.setItem("sv-analytics-consent-v1", value);
+      if (value === "declined") revokeJourney();
       window.dispatchEvent(new Event(CONSENT_EVENT));
       await setVisitChoice(share);
       setEditing(false);

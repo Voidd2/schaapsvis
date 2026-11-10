@@ -5,6 +5,8 @@ on:
     paths:
       - "workers/members/**"
       - "migrations/**"
+      - "src/lib/*journey*.mjs"
+      - "src/lib/signup-visit-path.mjs"
       - "package.json"
       - "package-lock.json"
       - ".github/workflows/member-worker-tests.yml"
@@ -14,6 +16,8 @@ on:
     paths:
       - "workers/members/**"
       - "migrations/**"
+      - "src/lib/*journey*.mjs"
+      - "src/lib/signup-visit-path.mjs"
       - "package.json"
       - "package-lock.json"
       - ".github/workflows/member-worker-tests.yml"
