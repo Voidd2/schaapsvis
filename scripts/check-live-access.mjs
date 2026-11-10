@@ -1,6 +1,7 @@
 // Read-only check from a GitHub-hosted runner, outside the owner's IP allowlist.
 // The production domain is public. Alternate deployment hosts stay private.
 import assert from 'node:assert/strict';
+import { seasonalCatalogOpen, seasonalPathPaused } from '../src/lib/seasonal-availability.ts';
 const origins=[
  'https://schaapsvis.schaapsvis.workers.dev',
  'https://schaapsvis.vercel.app',
@@ -45,7 +46,7 @@ console.log(JSON.stringify({origin,checks,ancillary,cookies:false,formSubmission
 if (!process.argv.includes('--previews-only')) {
   const origin = 'https://schaapsvishandel.nl';
   async function checkPublic() {
-    for (const route of ['/nl', '/nl/varlaks', '/en/assortiment', '/de/feestdagen']) {
+    for (const route of ['/nl', '/nl/varlaks', '/en/assortiment', '/de/bezoek-ons']) {
       const res = await fetch(origin + route, {redirect:'manual',signal:AbortSignal.timeout(15000)});
       assert.equal(res.status, 200, route);
       assert.doesNotMatch(res.headers.get('x-robots-tag') || '', /noindex/, route);
@@ -57,7 +58,16 @@ if (!process.argv.includes('--previews-only')) {
     const robots = await (await fetch(origin+'/robots.txt')).text();
     assert.match(robots, /^Allow:\s*\/\s*$/mi);
     assert.doesNotMatch(robots, /^Disallow:\s*\/\s*$/mi);
-    assert.ok((await (await fetch(origin+'/sitemap.xml')).text()).includes(origin+'/nl/varlaks</loc>'));
+    const sitemap = await (await fetch(origin+'/sitemap.xml')).text();
+    assert.ok(sitemap.includes(origin+'/nl/varlaks</loc>'));
+    if (!seasonalCatalogOpen) {
+      for (const [, url] of sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)) assert.ok(!seasonalPathPaused(new URL(url).pathname), url);
+      for (const route of ['/de/feestdagen', '/nl/feestdagen/verse-vis', '/en/barbecue-gourmet', '/nl/gourmetschotel', '/en/visschalen', '/nl/relatiegeschenken']) {
+        const res = await fetch(origin+route, { redirect:'manual', signal:AbortSignal.timeout(15000) });
+        assert.equal(res.status, 307, route);
+        assert.equal(new URL(res.headers.get('location'), origin).pathname, route.slice(0,3)+'/assortiment', route);
+      }
+    }
     for (const [path, status] of [['/me',401],['/admin/student-applications',403]]) {
       const res = await fetch(origin+'/api/members'+path, {redirect:'manual'});
       assert.equal(res.status, status, path);

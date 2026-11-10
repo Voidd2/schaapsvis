@@ -1,4 +1,6 @@
 "use client";
+import { publicLink } from "@/lib/seasonal-availability";
+
 import { discountSignupCopy } from "@/lib/discount-signup";
 
 import Link from "next/link";
@@ -77,7 +79,7 @@ export function Header() {
     { href: p("/feestdagen"), label: primaryLinks[0].label },
     { href: p("/relatiegeschenken"), label: locale === "de" ? "Firmengeschenke" : locale === "en" ? "Business gifts" : "Relatiegeschenken" },
   ];
-  const childrenFor = (href: string) => href === p("/assortiment") ? productLinks : href === p("/visschalen") ? platterLinks : [];
+  const childrenFor = (href: string) => href === p("/assortiment") ? productLinks.filter(publicLink) : href === p("/visschalen") ? platterLinks.filter(publicLink) : [];
   const accountLinks = [
     { href: p("/account"), label: locale === "de" ? "Studentenkonto" : locale === "en" ? "Student account" : "Studentenaccount" },
     { href: p("/aanbiedingen"), label: discountSignupCopy(locale).title },
@@ -160,13 +162,13 @@ export function Header() {
           </Link>
 
           <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="hidden min-[1280px]:flex items-center justify-end gap-x-2 text-[0.86rem]">
-            {primaryLinks.map(({ href, label }, index) => {
+            {primaryLinks.filter(publicLink).map(({ href, label }) => {
               const children = childrenFor(href);
               return <div key={href} className="nav-theme">
                 {children.length > 0 ? <details className="nav-disclosure">
                   <summary className="nav-main-link" data-active={isActief(href) || children.some(link => isActief(link.href)) ? "true" : undefined}>{label}<span aria-hidden>⌄</span></summary>
                   <div className="nav-popover"><Link className="nav-overview-link" href={href} aria-current={pathname === href ? "page" : undefined}>{locale === "de" ? "Alle anzeigen:" : locale === "en" ? "Explore:" : "Bekijk:"} {label}</Link>{children.map(link => <Link key={link.href} href={link.href} aria-current={pathname === link.href ? "page" : undefined}>{link.label}</Link>)}</div>
-                </details> : <Link href={href} aria-current={isActief(href) ? "page" : undefined} className={`nav-main-link ${index === 0 ? "nav-season" : ""}`}>{label}</Link>}
+                </details> : <Link href={href} aria-current={isActief(href) ? "page" : undefined} className={`nav-main-link ${href === p("/feestdagen") ? "nav-season" : ""}`}>{label}</Link>}
               </div>;
             })}
           </nav>
@@ -255,8 +257,8 @@ export function Header() {
             style={{ backgroundColor: "var(--cream)", borderTop: "1px solid var(--linen)" }}
           >
             <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="site-container py-2">
-              {primaryLinks.map(({ href, label }, index) => <div key={href}>
-                <Link href={href} onClick={() => setOpen(false)} aria-current={isActief(href) ? "page" : undefined} className={`mobile-main-link ${index === 0 ? "nav-season" : ""}`}>{label}</Link>
+              {primaryLinks.filter(publicLink).map(({ href, label }) => <div key={href}>
+                <Link href={href} onClick={() => setOpen(false)} aria-current={isActief(href) ? "page" : undefined} className={`mobile-main-link ${href === p("/feestdagen") ? "nav-season" : ""}`}>{label}</Link>
                 {childrenFor(href).map(link => <Link className="mobile-sub-link" key={link.href} href={link.href} onClick={() => setOpen(false)}>{link.label} →</Link>)}
               </div>)}
 

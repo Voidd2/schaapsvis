@@ -1,3 +1,4 @@
+import { seasonalCatalogOpen } from "@/lib/seasonal-availability";
 import { isPlatterMode, platterMenu } from "@/lib/platter-menu";
 import { language } from "@/lib/counter-selection";
 import { whatsappLink } from "@/lib/bedrijf";
@@ -60,6 +61,7 @@ const copy = {
 };
 const escape = (s: string) => s.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");
 export async function POST(request: Request) {
+  if (!seasonalCatalogOpen) return Response.json({ fout: "Deze bestelmogelijkheid is tijdelijk gesloten." }, { status: 503, headers: { "Cache-Control": "no-store" } });
   const headers = {"Cache-Control":"private, no-store", "Referrer-Policy":"no-referrer", "X-Robots-Tag":"noindex, nofollow"};
   if (!request.headers.get("content-type")?.startsWith("application/x-www-form-urlencoded")) return new Response(null,{status:415,headers});
   if (Number(request.headers.get("content-length")) > 32768) return new Response(null,{status:413,headers});

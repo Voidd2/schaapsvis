@@ -1,3 +1,4 @@
+import { publicLink } from "@/lib/seasonal-availability";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
@@ -30,7 +31,7 @@ export default async function ViskalenderPage({params}:Props){
   <div className="section-wrap py-12 grid md:grid-cols-2 gap-7">{months.map((m,i)=><article key={m.naam} id={`maand-${i}`} className="scroll-mt-44 overflow-hidden rounded-2xl border border-sky-100 bg-white">
    <Image src={m.foto.src} alt={m.foto.alt} width={1200} height={800} sizes="(max-width: 768px) 100vw, 50vw" className="w-full aspect-[16/9] object-cover"/>
    <div className="p-6 md:p-8"><p className="kapitaal mb-3">{m.seizoen}</p><h2 className="text-[2rem] md:text-[2.6rem] leading-none mb-4">{m.naam}</h2><p className="text-xl mb-5" style={{fontFamily:"var(--font-display)",color:"var(--navy)"}}>{m.hoogtepunt}</p><p className="lees">{m.tekst}</p>
-    <div className="flex flex-wrap gap-5 mt-6 mb-8">{m.links.map(l=><Link key={l.href} href={l.href} className="font-semibold underline underline-offset-4">{l.label} →</Link>)}</div>
+    <div className="flex flex-wrap gap-5 mt-6 mb-8">{m.links.filter(publicLink).map(l=><Link key={l.href} href={l.href} className="font-semibold underline underline-offset-4">{l.label} →</Link>)}</div>
     <p className="kapitaal mb-3">{c.what}</p><ul className="border-t border-sky-100">{m.vis.map(v=><li key={v.naam} className="flex justify-between gap-4 py-3 border-b border-sky-100"><span>{v.naam}</span>{v.keurmerk&&<span className="kapitaal" style={{color:"var(--seafoam)"}}>{v.keurmerk}</span>}</li>)}</ul>
    </div></article>)}</div>
   <Sectie grond="zand" smal><h2 className="text-2xl mb-6">{c.faq}</h2><Vragen vragen={c.questions}/><p className="mt-6 text-sm">{c.source}: <a className="underline" href={source} target="_blank" rel="noopener noreferrer">Mosselen. Zo uit Zeeland</a>. {c.disclaimer}</p></Sectie>
