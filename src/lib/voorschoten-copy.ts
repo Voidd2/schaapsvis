@@ -53,7 +53,7 @@ const TEXT:Record<string,readonly[string,string]>={
  "Hollandse klassiekers voor op brood, bij de lunch of als voorgerecht. Vraag wat er verkrijgbaar is.":["Dutch classics for sandwiches, lunch or a starter. Ask what is available.","Niederländische Klassiker auf Brot, zum Mittagessen oder als Vorspeise. Fragen Sie, was erhältlich ist."],
  "Bakje krokante kibbeling met ravigotesaus":["Box of crispy kibbeling with ravigote sauce","Schale mit knusprigem Kibbeling und Ravigotesauce"],
  "Klanten aan de toonbank van de blauw-witte viskar van Schaap’s":["Customers at the counter of Schaap’s blue and white fish stall","Kunden an der Theke des blau-weißen Fischwagens von Schaap’s"],
- "Onze viskar op de Leidse markt.":["Our fish stall at Leiden market.","Unser Fischwagen auf dem Leidener Markt."],
+ "Onze viskar":["Our fish stall","Unser Fischwagen"],
  "Hollandse haring met uitjes en augurk":["Dutch herring with onions and gherkins","Niederländischer Matjes mit Zwiebeln und Gewürzgurken"],
  "Zalm en verse filet voor het avondeten":["Salmon and fresh fillets for dinner","Lachs und frisches Filet fürs Abendessen"],
  "Vertel ons wat u wilt koken. We helpen kiezen welke vis en hoeveel porties bij uw gerecht passen.":["Tell us what you want to cook. We can help choose the fish and number of portions to suit your dish.","Sagen Sie uns, was Sie kochen möchten. Wir helfen bei der Auswahl von Fisch und Portionsmenge für Ihr Gericht."],

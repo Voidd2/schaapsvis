@@ -1,224 +1,139 @@
-import { connection } from "next/server";
-import { localLocations } from "@/lib/local-pages-copy";
-import { scheduledCounters, openingRows, shopDayRange } from "@/lib/openingHours";
-import { bestelContact } from "@/lib/bestel-contact";
 import type { Metadata } from "next";
+import Link from "next/link";
+import { connection } from "next/server";
 import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
-import { Kruimels, Sectie } from "@/components/ui/Sectie";
-import { PaginaSlot } from "@/components/ui/PaginaKop";
-import { paginaMetadata, kruimelSchema } from "@/lib/seo";
-import { BEDRIJF, ADRES_REGEL, VERKOOPPUNTEN } from "@/lib/bedrijf";
-import { BEELD, heeftBeeld } from "@/lib/beeld";
 import { StaticResponsiveImage } from "@/components/StaticResponsiveImage";
+import { Kruimels } from "@/components/ui/Sectie";
+import { PaginaSlot } from "@/components/ui/PaginaKop";
+import { BEELD } from "@/lib/beeld";
+import { ADRES_REGEL, BEDRIJF, whatsappLink } from "@/lib/bedrijf";
+import { bestelContact } from "@/lib/bestel-contact";
+import { localLocations } from "@/lib/local-pages-copy";
+import { openingRows, scheduledCounters } from "@/lib/openingHours";
+import { kruimelSchema, paginaMetadata } from "@/lib/seo";
+import styles from "./visit.module.css";
 
-import { Beeld } from "@/components/ui/Beeld";
-import type { BeeldNaam } from "@/lib/beeld";
+type Props = { params: Promise<{ locale: string }> };
 
-/** Welke foto bij welke plek hoort. Zie `src/lib/beeld.ts`. */
-const BEELD_PER_PLEK: Record<string, BeeldNaam> = {
-  winkel: "winkelGevel",
-  zaterdag: "marktZaterdag",
-  woensdag: "marktWoensdag",
-  voorschoten: "marktVoorschoten",
-};
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
   return paginaMetadata({
     locale,
     pad: "/bezoek-ons",
     title: t("bezoekTitle"),
-    description: t("bezoekDesc", {winkeldagen:shopDayRange(locale)}),
+    description: t("bezoekDesc"),
+    image: BEELD.historieNu.bestand,
   });
 }
 
-/**
- * Waar je ons vindt.
- *
- * De plekken staan onder elkaar als een dienstregeling: adres, dagen, tijden,
- * route. Dat leest sneller dan vier kaarten met een cijfer in een rondje, en
- * het is precies wat iemand zoekt die wil weten of we er vanmiddag staan.
- *
- * De openingstijden staan hier in gewone tekst én in de schema.org-gegevens van
- * `JsonLd`. Ze moeten met elkaar overeenkomen — Google leest allebei, en een
- * verschil telt als een fout.
- */
-const PLEKKEN = [
-  {
-    id: "winkel",
-    adres: ADRES_REGEL,
-    /** Dagen als [sleutel van de dag, tijd]. "gesloten" krijgt zijn eigen sleutel. */
-    dagen: [], // Winkeluren komen uit openingHours.ts.
-    telefoon: true,
-    maps: BEDRIJF.maps.route,
-  },
-  {
-    id: "zaterdag",
-    dagen: [["za", "08:30 – 17:00"]],
-    telefoon: false,
-    maps: VERKOOPPUNTEN.find(punt => punt.id === "markt")!.mapsUrl,
-  },
-  {
-    id: "woensdag",
-    dagen: [["wo", "08:30 – 17:00"]],
-    telefoon: false,
-    maps: VERKOOPPUNTEN.find(punt => punt.id === "markt-woensdag")!.mapsUrl,
-  },
-  {
-    id: "voorschoten",
-    dagen: [["vr", "08:00 – 17:30"]],
-    telefoon: false,
-    maps: VERKOOPPUNTEN.find(punt => punt.id === "voorschoten")!.mapsUrl,
-  },
-] as const;
-
-export default async function BezoekOnsPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function BezoekOnsPage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "bezoekPage" });
   const nav = await getTranslations({ locale, namespace: "nav" });
-  const g = await getTranslations({ locale, namespace: "gedeeld" });
-
+  const places = await getTranslations({ locale, namespace: "plekken" });
+  const locations = localLocations(locale);
+  const stall = locations.find(point => point.id === "voorschoten")!;
+  const shop = locations.find(point => point.id === "winkel")!;
+  const markets = [
+    { id: "woensdag", point: locations.find(point => point.id === "markt-woensdag")!, day: 3 },
+    { id: "zaterdag", point: locations.find(point => point.id === "markt")!, day: 6 },
+  ];
+  const marketHours = openingRows("markt", locale);
+  const mapsRoute = new URL("https://www.google.com/maps/dir/");
+  mapsRoute.search = new URLSearchParams({
+    api: "1",
+    destination: `Hoogvliet, ${stall.straat}, ${stall.postcode} ${stall.plaats}`,
+  }).toString();
   await connection();
-  const visit=scheduledCounters(new Date());
-  const counters=localLocations(locale).filter(p=>visit.ids.includes(p.id));
-  const day=new Intl.DateTimeFormat(locale,{weekday:"long",timeZone:"Europe/Amsterdam"}).format(visit.date);
-  const p = await getTranslations({ locale, namespace: "plekken" });
+  const visit = scheduledCounters(new Date());
+  const weekday = new Intl.DateTimeFormat(locale, { weekday: "long", timeZone: "Europe/Amsterdam" }).format(visit.date);
+  const breadcrumbs = [{ naam: BEDRIJF.naamKort, pad: "/" }, { naam: nav("locaties"), pad: "/bezoek-ons" }];
+  const storefront = BEELD.winkelGevel;
+  const shopAlt = locale === "de" || locale === "en" ? storefront.vertalingen[locale].alt : storefront.alt;
 
-  return (
-    <>
-      <JsonLd locale={locale} />
-      <Schema
-        data={kruimelSchema(locale, [
-          { naam: BEDRIJF.naamKort, pad: "/" },
-          { naam: nav("locaties"), pad: "/bezoek-ons" },
-        ])}
-      />
-
-      <section className="locations-intro section-wrap">
-        <Kruimels items={[{naam:BEDRIJF.naamKort,href:`/${locale}`},{naam:nav("locaties")}]} />
-        <p className="kapitaal mb-3">{BEDRIJF.adres.plaats}</p>
-        <h1>{t("title")}</h1>
-        <div className="grid gap-5 md:grid-cols-[3fr_2fr] md:items-center md:gap-8">
-          <div>
-            <div className="today-counters"><h2>{visit.today?(locale==="en"?"Today":locale==="de"?"Heute":"Vandaag"):(locale==="en"?"Next opening":locale==="de"?"Nächste Öffnung":"Eerstvolgende opening")} · {day}</h2>{counters.map(p=><a key={p.id} href={p.mapsUrl} aria-label={`${p.naam}: ${p.adres}, Google Maps`}><strong>{p.naam}</strong><span>{p.adres} · {visit.hours[p.id]}</span><span>Google Maps ↗</span></a>)}</div>
-            <nav
-              aria-label={locale === "de" ? "Standort auswählen" : locale === "en" ? "Choose a location" : "Kies een locatie"}
-              className="py-5"
-            >
-              <ul className="flex flex-wrap gap-2">
-                {PLEKKEN.map((plek) => (
-                  <li key={plek.id}>
-                    <a className="location-jump" href={`#locatie-${plek.id}`}>
-                      {p(`${plek.id}Naam`)}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-            <p>{locale === "nl" ? "Kies uw locatie voor openingstijden en de route." : locale === "de" ? "Wählen Sie Ihren Standort für Öffnungszeiten und Anfahrt." : "Choose your location for opening hours and directions."}</p>
+  return <>
+    <JsonLd locale={locale} />
+    <Schema data={kruimelSchema(locale, breadcrumbs)} />
+    <section id="locatie-voorschoten" className={styles.hero} aria-labelledby="visit-title">
+      <div className={`section-wrap ${styles.heroGrid}`}>
+        <div>
+          <Kruimels items={[{ naam: BEDRIJF.naamKort, href: `/${locale}` }, { naam: nav("locaties") }]} />
+          <p className="kapitaal">{t("brand")}</p>
+          <h1 id="visit-title">{t("title")}</h1>
+          <p className={styles.intro}>{t("sub")}</p>
+          <div className={styles.address}>
+            {openingRows("voorschoten", locale).map(row => <strong key={row.day}>{row.label} · {row.time}</strong>)}
+            <span>{stall.straat}, {stall.postcode} {stall.plaats}</span>
           </div>
-          <figure>
-            <StaticResponsiveImage
-              src={BEELD.historieNu.bestand}
-              alt={t("viskarAlt")}
-              width={1600}
-              height={900}
-              sizes="(max-width: 767px) 95vw, (max-width: 1720px) 38vw, 644px"
-              className="h-auto w-full rounded-lg"
-            />
-            <figcaption className="mt-2 text-sm">{t("viskarBijschrift")}</figcaption>
-          </figure>
+          <div className={styles.actions}>
+            <a className="knop knop-navy" href={mapsRoute.href}>{t("route")} ↗</a>
+            <a className="knop knop-lijn" href={whatsappLink(t("message"))}>{t("contact")}</a>
+          </div>
+          <div className={styles.moreLinks}>
+            <a className={styles.textLink} href="#locatieoverzicht">{t("other")} ↓</a>
+            <Link className={styles.textLink} href={`/${locale}/viswinkel-voorschoten`}>{t("details")} →</Link>
+          </div>
         </div>
-      </section>
+        <figure className={styles.stallPhoto}>
+          <StaticResponsiveImage src={BEELD.historieNu.bestand} alt={t("viskarAlt")}
+            width={1600} height={900} loading="eager" fetchPriority="high"
+            sizes="(max-width: 799px) 100vw, (max-width: 1720px) 48vw, 790px" />
+          <figcaption>{t("viskarBijschrift")}</figcaption>
+        </figure>
+      </div>
+    </section>
 
-      {/* ── De plekken ────────────────────────────────────────────────────── */}
-      <Sectie grond="papier" id="locatieoverzicht">
-        <ul className="grid md:grid-cols-2 gap-6">
-          {PLEKKEN.map((plek) => (
-            <li
-              key={plek.id}
-              id={`locatie-${plek.id}`}
-              className="location-card flex flex-col gap-5 p-7"
-              style={{ border: "1px solid #d4e8f2", borderRadius: "14px", background: "#f0f8fc" }}
-            >
-              {/* Een foto per plek. De kraam bij de Waag ziet er anders uit dan
-                  die op de parkeerplaats bij Hoogvliet — met een foto weet
-                  iemand waar hij naar moet zoeken. */}
-              {heeftBeeld(BEELD_PER_PLEK[plek.id]) && (
-                <Beeld naam={BEELD_PER_PLEK[plek.id]} verhouding="liggend" streep="var(--navy)" />
-              )}
+    <section className={styles.schedule} aria-labelledby="visit-next">
+      <div className={`section-wrap ${styles.scheduleGrid}`}>
+        <h2 id="visit-next">{t(visit.today ? "today" : "next")} · {weekday}</h2>
+        <ul>{locations.filter(point => visit.ids.includes(point.id)).map(point =>
+          <li key={point.id}>
+            <a href={point.mapsUrl}><strong>{point.naam}</strong><span>{point.adres} · {visit.hours[point.id]} ↗</span></a>
+          </li>
+        )}</ul>
+      </div>
+    </section>
 
-              <div>
-                <h2 className="text-[1.35rem] mb-1">{p(`${plek.id}Naam`)}</h2>
-                <p className="text-[0.95rem]" style={{ color: "var(--grijs)" }}>
-                  {"adres" in plek ? plek.adres : p(`${plek.id}Adres`)}
-                </p>
-              </div>
+    <section id="locatieoverzicht" className={`section-wrap ${styles.locations}`} aria-labelledby="visit-leiden">
+      <h2 id="visit-leiden">{t("leiden")}</h2>
+      <div className={styles.locationsGrid}>
+        <article id="locatie-winkel" className={styles.card}>
+          <div className={styles.shopHeading}>
+            <div><h3>{t("shop")}</h3><p>{ADRES_REGEL}</p></div>
+            <StaticResponsiveImage src={storefront.bestand} alt={shopAlt} width={1320} height={984}
+              sizes="(max-width: 799px) 80px, 160px" className={styles.storePhoto} />
+          </div>
+          <dl className={styles.hours}>
+            {openingRows("winkel", locale).map(row =>
+              <div key={row.day}><dt>{row.label}</dt><dd>{row.time}</dd></div>
+            )}
+            <div><dt>{places("zoMa")}</dt><dd>{places("gesloten")}</dd></div>
+          </dl>
+          <div className={styles.actions}>
+            <a href={shop.mapsUrl} className="knop knop-navy">{t("directions")} ↗</a>
+            <a href={`tel:${BEDRIJF.telefoon.e164}`} className={styles.textLink}>{t("call")}</a>
+          </div>
+        </article>
+        <article className={styles.card}>
+          <h3>{t("market")}</h3>
+          {markets.map(({ id, point, day }) => {
+            const hours = marketHours.find(row => row.day === day)!;
+            return <div id={`locatie-${id}`} key={id} className={styles.market}>
+              <h4>{hours.label} · {hours.time}</h4>
+              <p>{point.adres}, {point.plaats}</p>
+              <a className={styles.textLink} href={point.mapsUrl} aria-label={`${t("directions")} · ${point.adres}`}>{t("directions")} ↗</a>
+            </div>;
+          })}
+        </article>
+      </div>
+    </section>
 
-              <div>
-                <dl className="text-[0.95rem]">
-                  {(plek.id === "winkel" ? [...openingRows("winkel", locale).map(row => [row.label, row.time]), [p("zoMa"), null]] : plek.dagen.map(([dag,tijd]) => [p(dag),tijd])).map(([dag, tijd]) => (
-                    <div key={dag} className="flex flex-wrap gap-x-3 py-0.5">
-                      <dt style={{ color: "var(--ink)", fontWeight: 600, minWidth: "11rem" }}>
-                        {dag}
-                      </dt>
-                      <dd className="bedrag" style={{ color: "var(--charcoal)" }}>
-                        {tijd ?? p("gesloten")}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-
-              </div>
-
-              <div className="flex flex-wrap items-center gap-4">
-                <a
-                  href={plek.maps}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="knop knop-navy"
-                >
-                  {g("route")} &rarr;
-                </a>
-                {plek.telefoon && (
-                  <a
-                    href={`tel:${BEDRIJF.telefoon.e164}`}
-                    className="text-sm whitespace-nowrap"
-                    style={{ color: "var(--grijs)" }}
-                  >
-                    {BEDRIJF.telefoon.weergave}
-                  </a>
-                )}
-              </div>
-                <p className="text-[0.92rem] mt-2 leading-relaxed" style={{ color: "var(--charcoal)" }}>
-                  {p(`${plek.id}Toelichting`)}
-                </p>
-            </li>
-          ))}
-        </ul>
-      </Sectie>
-
-      <PaginaSlot
-        titel={nav("visschalen")}
-        tekst={locale === "nl" ? "Visschalen vraagt u bij ons aan via WhatsApp. Zoekt u andere vis? Stuur ons een WhatsApp-bericht, dan kijken we wat mogelijk is." : locale === "de" ? "Fischplatten stimmen Sie mit uns per WhatsApp ab. Für andere Produkte kontaktieren Sie uns ebenfalls über WhatsApp." : "Please arrange seafood platters with us via WhatsApp. For other products, contact us on WhatsApp."}
-        knoppen={[
-          { label: nav("visschalen"), href: `/${locale}/visschalen` },
-          { ...bestelContact(locale), extern: true, soort: "lijn" },
-
-        ]}
-      />
-
-    </>
-  );
+    <PaginaSlot titel={t("rangeTitle")} tekst={t("rangeIntro")} knoppen={[
+      { label: t("range"), href: `/${locale}/assortiment` },
+      { ...bestelContact(locale), extern: true, soort: "lijn" },
+    ]} />
+  </>;
 }

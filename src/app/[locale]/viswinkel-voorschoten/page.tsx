@@ -71,7 +71,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       <figure>
         <StaticResponsiveImage src={viskarFoto} alt={t("Klanten aan de toonbank van de blauw-witte viskar van Schaap’s")} width={1600} height={900}
           sizes="(max-width: 800px) 100vw, 50vw" loading="eager" fetchPriority="high" />
-        <figcaption>{t("Onze viskar op de Leidse markt.")}</figcaption>
+        <figcaption>{t("Onze viskar")}</figcaption>
       </figure>
     </div></header>
     <Sectie grond="papier"><div className="grid md:grid-cols-[1.2fr_0.8fr] gap-10 items-start">
