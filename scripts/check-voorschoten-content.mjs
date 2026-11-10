@@ -22,7 +22,7 @@ for (const post of posts) {
   assert(hub.includes(path), `${path}: absent from local hub`);
   assert(sitemap.includes(path), `${path}: absent from sitemap`);
   assert(main.includes('/nl/viswinkel-voorschoten'), `${path}: no backlink to local hub`);
-  assert(main.includes('08:00') && main.includes('17:30'), `${path}: local hours missing`);
+  assert(main.includes('08:30') && main.includes('17:30'), `${path}: local hours missing`);
   assert((main.match(/<h1\b/g) || []).length === 1, `${path}: H1 count`);
   assert(main.includes(post.fotoUrl.replaceAll('/', '%2F')) || main.includes(post.fotoUrl), `${path}: missing photo`);
   const schemas = [...html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].flatMap(m => JSON.parse(m[1]));

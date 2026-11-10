@@ -131,7 +131,7 @@ export const VERKOOPPUNTEN: Verkooppunt[] = [
     straat: "Veurseweg 18",
     postcode: "2252 AA",
     plaats: "Voorschoten",
-    dagen: "vrijdag 08:00–17:30",
+    dagen: "vrijdag 08:30–17:30",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Hoogvliet+Veurseweg+18+2252+AA+Voorschoten",
   },
 ];

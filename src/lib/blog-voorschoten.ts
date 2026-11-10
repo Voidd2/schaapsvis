@@ -11,7 +11,7 @@ export const VOORSCHOTEN_ARTIKELEN: BlogPost[] = [
     seoKeywords: "kibbeling Voorschoten, gebakken vis Voorschoten, kibbeling ravigotesaus",
     secties: [
       { kop: "Kibbeling halen op vrijdag bij Hoogvliet", alineas: [
-        "Kibbeling in Voorschoten halen en daarna niet meer uitgebreid koken? Op vrijdag staat Schaap’s Vishandel van 08:00 tot 17:30 op de parkeerplaats bij Hoogvliet. U kunt er gebakken vis halen tijdens uw boodschappen of aan het einde van de middag iets meenemen voor thuis. Het is onze wekelijkse kraam, niet een winkel die elke dag in Voorschoten open is.",
+        "Kibbeling in Voorschoten halen en daarna niet meer uitgebreid koken? Op vrijdag staat Schaap’s Vishandel van 08:30 tot 17:30 op de parkeerplaats bij Hoogvliet. U kunt er gebakken vis halen tijdens uw boodschappen of aan het einde van de middag iets meenemen voor thuis. Het is onze wekelijkse kraam, niet een winkel die elke dag in Voorschoten open is.",
         "Voor een lunch heeft u iets anders nodig dan voor een avondmaaltijd met het hele gezin. Vertel aan de kraam met hoeveel mensen u eet en wat u erbij wilt serveren. Dan kunnen we meedenken over een passende hoeveelheid. Wilt u een specifiek product of een grotere hoeveelheid? Vraag vooraf via WhatsApp naar de mogelijkheden; de aanvoer en beschikbaarheid verschillen."
       ] },
       { kop: "Ravigotesaus bij de kibbeling", alineas: [
@@ -29,7 +29,7 @@ export const VOORSCHOTEN_ARTIKELEN: BlogPost[] = [
       ] }
     ],
     vragen: [
-      { v: "Waar kan ik vrijdag kibbeling halen in Voorschoten?", a: "Bij Schaap’s Vishandel op de parkeerplaats bij Hoogvliet, vrijdag van 08:00 tot 17:30. Vraag naar de actuele beschikbaarheid." },
+      { v: "Waar kan ik vrijdag kibbeling halen in Voorschoten?", a: "Bij Schaap’s Vishandel op de parkeerplaats bij Hoogvliet, vrijdag van 08:30 tot 17:30. Vraag naar de actuele beschikbaarheid." },
       { v: "Welke saus serveren jullie bij kibbeling?", a: "Ravigotesaus. Geef uw voorkeur door aan de kraam; we bespreken graag wat mogelijk is." },
       { v: "Kan ik losse kibbeling online bestellen?", a: "Nee, visschalen vraagt u bij ons aan via WhatsApp. Voor kibbeling of andere vis kunt u via WhatsApp vragen naar beschikbaarheid en mogelijkheden." }
     ],
@@ -44,13 +44,13 @@ export const VOORSCHOTEN_ARTIKELEN: BlogPost[] = [
   {
     slug: "vis-avondeten-voorschoten",
     title: "Vis voor het avondeten in Voorschoten: drie ideeën",
-    excerpt: "Vrijdag vis halen in Voorschoten voor het avondeten? Kies een ovenpakketje, zalm of kabeljauw. Onze kraam bij Hoogvliet is open van 08:00 tot 17:30.",
+    excerpt: "Vrijdag vis halen in Voorschoten voor het avondeten? Kies een ovenpakketje, zalm of kabeljauw. Onze kraam bij Hoogvliet is open van 08:30 tot 17:30.",
     datum: "2026-09-28", datumLabel: "28 september 2026", leestijd: "4 min", categorie: "Visweetjes", regio: "Voorschoten",
     fotoUrl: "/images/recepten/vispakketje-oven-groenten.webp", fotoAlt: "Bereid vispakketje met groenten voor een avondmaaltijd",
     seoKeywords: "verse vis Voorschoten, vis avondeten Voorschoten, zalm Voorschoten",
     secties: [
       { kop: "Van de viskraam naar uw vrijdagavondeten", alineas: [
-        "Wilt u vrijdag vis voor het avondeten halen in Voorschoten? Bij Schaap’s Vishandel op de parkeerplaats bij Hoogvliet kunt u van 08:00 tot 17:30 terecht. U hoeft niet eerst een ingewikkeld menu te bedenken: kies hoe u wilt koken, hoeveel tijd u heeft en voor hoeveel mensen u eten maakt. Met die informatie kunnen we u helpen een passende filet uit te zoeken.",
+        "Wilt u vrijdag vis voor het avondeten halen in Voorschoten? Bij Schaap’s Vishandel op de parkeerplaats bij Hoogvliet kunt u van 08:30 tot 17:30 terecht. U hoeft niet eerst een ingewikkeld menu te bedenken: kies hoe u wilt koken, hoeveel tijd u heeft en voor hoeveel mensen u eten maakt. Met die informatie kunnen we u helpen een passende filet uit te zoeken.",
         "De drie ideeën hieronder verschillen in bereiding, niet alleen in de vissoort. Een pakketje is handig als u groenten en vis samen wilt bereiden. Zalm past bij een eenvoudige ovenschaal. Kabeljauw kunt u in de pan bakken met bijgerechten. Bekijk vóór het boodschappen doen het volledige recept, zodat ook de groenten en andere ingrediënten in huis zijn."
       ] },
       { kop: "Idee 1: een vispakketje met groenten", alineas: [
@@ -71,7 +71,7 @@ export const VOORSCHOTEN_ARTIKELEN: BlogPost[] = [
       ] }
     ],
     vragen: [
-      { v: "Tot hoe laat kan ik vrijdag vis halen in Voorschoten?", a: "Onze kraam bij Hoogvliet is vrijdag open tot 17:30, vanaf 08:00. Beschikbaarheid van een bepaald product kunt u vooraf via WhatsApp navragen." },
+      { v: "Tot hoe laat kan ik vrijdag vis halen in Voorschoten?", a: "Onze kraam bij Hoogvliet is vrijdag open tot 17:30, vanaf 08:30. Beschikbaarheid van een bepaald product kunt u vooraf via WhatsApp navragen." },
       { v: "Welke vis is handig voor een eenvoudig avondeten?", a: "Een verse filet voor een ovenpakketje, zalm uit de oven of kabeljauw uit de pan zijn drie mogelijkheden. Kies het recept en bespreek de porties en actuele aanvoer aan de kraam." },
       { v: "Kan ik zalm vooraf aanvragen voor Voorschoten?", a: "Vraag via WhatsApp naar de beschikbaarheid en vermeld het aantal personen en uw ophaalwens. Een bericht is geen bevestigde bestelling; we stemmen de mogelijkheden en prijs met u af." }
     ],

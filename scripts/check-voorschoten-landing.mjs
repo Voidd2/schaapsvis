@@ -18,7 +18,7 @@ check(html.includes('name="description" content="Visboer Voorschoten?'), 'Local 
 check(html.includes(`property="og:url" content="${canonical}"`), 'Social canonical');
 check((main.match(/<h1\b/g) || []).length === 1, 'Exactly one H1');
 const hero = main.match(/<header\b[^>]*class="fresh-hero"[\s\S]*?<\/header>/)?.[0] || '';
-for (const text of ['Visboer Voorschoten', 'Hoogvliet', '08:00', '17:30', 'Veurseweg 18', '2252 AA', 'duidelijke prijzen']) {
+for (const text of ['Visboer Voorschoten', 'Hoogvliet', '08:30', '17:30', 'Veurseweg 18', '2252 AA', 'duidelijke prijzen']) {
   check(hero.includes(text), `Hero missing ${text}`);
 }
 check(main.includes('prijs voordat u beslist'), 'Price is made clear before purchase');
@@ -34,7 +34,7 @@ check(location?.['@type'] === 'GroceryStore', 'Specific local business schema');
 check(location?.url === canonical && location?.image?.startsWith('https://'), 'Local schema URL and image');
 check(location?.address?.streetAddress === 'Veurseweg 18' && location?.address?.postalCode === '2252 AA', 'Structured address matches visible address');
 check(location?.openingHoursSpecification?.[0]?.dayOfWeek?.[0] === 'Friday', 'Friday only');
-check(location?.openingHoursSpecification?.[0]?.opens === '08:00' && location?.openingHoursSpecification?.[0]?.closes === '17:30', 'Correct stand hours, not supermarket hours');
+check(location?.openingHoursSpecification?.[0]?.opens === '08:30' && location?.openingHoursSpecification?.[0]?.closes === '17:30', 'Correct stand hours, not supermarket hours');
 const faqSection = main.match(/Vragen over vis kopen in Voorschoten<\/h2>([\s\S]*?)<\/section>/)?.[1] || '';
 check((faqSection.match(/<summary\b/g) || []).length === 7, 'Seven questions in the visible FAQ');
 check(!schemas.some(s => s['@type'] === 'FAQPage'), 'No obsolete FAQ rich-result markup');
