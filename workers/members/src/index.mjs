@@ -739,7 +739,7 @@ async function adminCustomerDetails(request, env, id) {
   const [person,applications] = await env.DB.batch([
     env.DB.prepare(`SELECT email,school_email,email_verified_at,school_email_verified_at FROM users
       WHERE id=? AND account_status IN ('active','locked')`).bind(id),
-    env.DB.prepare(`SELECT institution,education_level,study_city,eligibility_method,status,submitted_at,reviewed_at
+    env.DB.prepare(`SELECT institution,education_level,education_level_other,study_city,eligibility_method,status,submitted_at,reviewed_at
       FROM student_applications WHERE user_id=? ORDER BY submitted_at DESC,id DESC`).bind(id),
   ]);
   if (!person.results?.[0]) return json({error:"customer_not_found"},404);
@@ -1016,7 +1016,7 @@ async function register(request, env) {
   const created = nowIso();
   const passwordDigest = await passwordHash(password, env.AUTH_PEPPER);
   const schoolTaken = await env.DB.prepare(`SELECT 1 AS present FROM users WHERE school_email = ? AND account_status != 'deleted' LIMIT 1`).bind(schoolEmail).first();
-  if (schoolTaken) return json({ ok: true, message: copy.registrationGeneric }, 202);
+  if (schoolTaken) return json({ error: "account_exists" }, 409);
   const statements = [
     env.DB.prepare(`INSERT INTO users (id, email, school_email, full_name, first_name, last_name, password_hash, created_at, updated_at)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT DO NOTHING`)
@@ -1042,7 +1042,7 @@ async function register(request, env) {
   try {
     [inserted] = await env.DB.batch(statements);
   } catch { return json({ error: "registration_unavailable" }, 503); }
-  if (!inserted.meta?.changes) return json({ ok: true, message: copy.registrationGeneric }, 202);
+  if (!inserted.meta?.changes) return json({ error: "account_exists" }, 409);
 
   const personalCode = await issueVerificationCode(env, { userId, email, purpose: "verify_email" });
   const schoolCode = schoolEmail ? await issueVerificationCode(env, { userId, email: schoolEmail, purpose: "verify_school" }) : null;
@@ -1212,13 +1212,13 @@ async function login(request, env) {
     });
     return json({ error: "rate_limited" }, 429);
   }
-  const user = await env.DB.prepare(`SELECT id, email, password_hash, email_verified_at, account_status FROM users WHERE email = ?`).bind(email).first();
+  const user = await env.DB.prepare(`SELECT id, email, school_email, school_email_verified_at, password_hash, email_verified_at, account_status FROM users WHERE email = ?`).bind(email).first();
   // Always pay the PBKDF2 cost, including for missing or inactive accounts, to
   // avoid exposing account existence through login response timing.
   const passwordMatches = await verifyPassword(password, user?.password_hash || DUMMY_PASSWORD_HASH, env.AUTH_PEPPER);
   const valid = Boolean(user && user.account_status === "active" && passwordMatches);
   if (!valid) return json({ error: "invalid_credentials" }, 401);
-  if (!user.email_verified_at) return json({ error: "email_unverified", message: "Bevestig eerst uw e-mailadres." }, 403);
+  if (!user.email_verified_at || (user.school_email && !user.school_email_verified_at)) return json({ error: "email_unverified", proofMethod: user.school_email ? "school-email" : "document" }, 403);
   const session = await createSession(env, user.id, request);
   return jsonWithCookies({ ok: true }, [sessionCookie(session.token), ...(session.device.setCookie ? [deviceCookie(session.device.installationToken)] : [])]);
 }
@@ -1281,7 +1281,7 @@ async function me(request, env) {
   const clientIp = String(request.headers.get("CF-Connecting-IP") || "").trim().toLowerCase();
   const isAdmin = allowedEmails.includes(user.email.toLowerCase()) && Boolean(clientIp && allowedIps.includes(clientIp));
   const [application, pass, verification] = await Promise.all([
-    env.DB.prepare(`SELECT status, education_level, institution, study_city, submitted_at, reviewed_at FROM student_applications WHERE user_id = ? ORDER BY submitted_at DESC LIMIT 1`).bind(user.id).first(),
+    env.DB.prepare(`SELECT status, education_level, education_level_other, institution, study_city, submitted_at, reviewed_at FROM student_applications WHERE user_id = ? ORDER BY submitted_at DESC LIMIT 1`).bind(user.id).first(),
     env.DB.prepare(`SELECT p.id,p.status,p.display_code,p.issued_at,p.expires_at,p.revoked_at,a.status AS application_status FROM student_passes p LEFT JOIN student_applications a ON a.id=p.application_id AND a.user_id=p.user_id WHERE p.user_id=? ORDER BY p.issued_at DESC LIMIT 1`).bind(user.id).first(),
     env.DB.prepare(`SELECT id,method,reason,pass_policy,expires_at,created_at FROM security_verification_requests WHERE user_id=? AND status='pending' ORDER BY created_at DESC LIMIT 1`).bind(user.id).first(),
   ]);
@@ -1705,7 +1705,7 @@ async function requestPasswordReset(request, env) {
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
   if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "reset", ip, email || "invalid", 15, 5, 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
   if (email) {
-    const user = await env.DB.prepare(`SELECT id, first_name, full_name FROM users WHERE email = ? AND email_verified_at IS NOT NULL AND account_status = 'active'`).bind(email).first();
+    const user = await env.DB.prepare(`SELECT id, first_name, full_name FROM users WHERE email = ? AND account_status = 'active'`).bind(email).first();
     if (user) {
       const token = await issueEmailToken(env, { userId: user.id, email, purpose: "password_reset" });
       const link = emailUrl(env, "/api/members/password-reset/confirm", token, locale);
@@ -1784,8 +1784,9 @@ async function submitStudentApplication(request, env) {
   const form = parsed.form;
   const institution = String(form.get("institution") || "").trim().slice(0, 180);
   const level = String(form.get("educationLevel") || "");
+  const otherLevel = level === "other" ? String(form.get("educationLevelOther") || "").trim().replace(/\s+/g, " ") : null;
   const studyCity = String(form.get("studyCity") || "").trim().replace(/\s+/g, " ").slice(0, 120);
-  if (!institution || !studyCity || !["mbo", "hbo", "wo"].includes(level)) {
+  if (!institution || !studyCity || !["mbo", "hbo", "wo", "other"].includes(level) || (level === "other" && (!otherLevel || otherLevel.length < 2 || otherLevel.length > 120))) {
     return json({ error: "invalid_application", message: "Controleer uw onderwijsinstelling, opleidingsniveau en studiestad." }, 400);
   }
   if (upload && !env.STUDENT_PROOFS) return json({ error: "proof_storage_unavailable" }, 503);
@@ -1802,18 +1803,18 @@ async function submitStudentApplication(request, env) {
 
   const id = crypto.randomUUID();
   const submittedAt = nowIso();
-  if (upload) return saveUploadedProof(env, { id, user, institution, level, studyCity, file, mime, submittedAt });
+  if (upload) return saveUploadedProof(env, { id, user, institution, level, otherLevel, studyCity, file, mime, submittedAt });
   try {
-    await env.DB.prepare(`INSERT INTO student_applications (id, user_id, institution, education_level, study_city, eligibility_method, proof_object_key, proof_mime_type, proof_consent_version, proof_consent_at, status, submitted_at)
-      VALUES (?, ?, ?, ?, ?, 'verified-school-email', NULL, 'application/pdf', 'not-applicable-school-email-v1', ?, 'pending', ?)`)
-      .bind(id, user.id, institution, level, studyCity, submittedAt, submittedAt).run();
+    await env.DB.prepare(`INSERT INTO student_applications (id, user_id, institution, education_level, education_level_other, study_city, eligibility_method, proof_object_key, proof_mime_type, proof_consent_version, proof_consent_at, status, submitted_at)
+      VALUES (?, ?, ?, ?, ?, ?, 'verified-school-email', NULL, 'application/pdf', 'not-applicable-school-email-v1', ?, 'pending', ?)`)
+      .bind(id, user.id, institution, level, otherLevel, studyCity, submittedAt, submittedAt).run();
   } catch {
     return json({ error: "application_unavailable" }, 503);
   }
   return json({ ok: true, status: "pending" }, 202);
 }
 
-async function saveUploadedProof(env, { id, user, institution, level, studyCity, file, mime, submittedAt }) {
+async function saveUploadedProof(env, { id, user, institution, level, otherLevel, studyCity, file, mime, submittedAt }) {
   const objectKey = `student-proofs/${user.id}/${id}`;
   let reserved = false;
   try {
@@ -1838,10 +1839,10 @@ async function saveUploadedProof(env, { id, user, institution, level, studyCity,
     await env.STUDENT_PROOFS.put(objectKey, file.stream(), { httpMetadata: { contentType: mime, cacheControl: "private, no-store" } });
     await env.DB.prepare(`UPDATE student_proof_cleanup_queue SET queued_at=? WHERE object_key=?`).bind(nowIso(), objectKey).run();
     const results = await env.DB.batch([
-      env.DB.prepare(`INSERT INTO student_applications (id, user_id, institution, education_level, study_city, eligibility_method, proof_object_key, proof_mime_type, proof_consent_version, proof_consent_at, status, submitted_at)
-        SELECT ?, ?, ?, ?, ?, 'uploaded-proof', ?, ?, ?, ?, 'pending', ?
+      env.DB.prepare(`INSERT INTO student_applications (id, user_id, institution, education_level, education_level_other, study_city, eligibility_method, proof_object_key, proof_mime_type, proof_consent_version, proof_consent_at, status, submitted_at)
+        SELECT ?, ?, ?, ?, ?, ?, 'uploaded-proof', ?, ?, ?, ?, 'pending', ?
         WHERE EXISTS (SELECT 1 FROM student_proof_cleanup_queue WHERE object_key=?)`)
-        .bind(id, user.id, institution, level, studyCity, objectKey, mime, PROOF_CONSENT_VERSION, submittedAt, submittedAt, objectKey),
+        .bind(id, user.id, institution, level, otherLevel, studyCity, objectKey, mime, PROOF_CONSENT_VERSION, submittedAt, submittedAt, objectKey),
       env.DB.prepare(`INSERT INTO consent_events (id, user_id, consent_type, granted, text_version, source, recorded_at)
         SELECT ?, ?, 'student_proof_processing', 1, ?, 'student-application', ?
         WHERE EXISTS (SELECT 1 FROM student_applications WHERE id=? AND user_id=?)`)
@@ -1869,7 +1870,7 @@ async function saveUploadedProof(env, { id, user, institution, level, studyCity,
 async function adminQueue(request, env) {
   const admin = await requireAdmin(request, env);
   if (!admin) return json({ error: "forbidden" }, 403);
-  const rows = await env.DB.prepare(`SELECT a.id, a.institution, a.education_level, a.study_city, a.submitted_at, a.proof_object_key IS NOT NULL AS has_proof, u.full_name, u.email, u.school_email FROM student_applications a JOIN users u ON u.id=a.user_id WHERE a.status='pending' ORDER BY a.submitted_at ASC LIMIT 100`).all();
+  const rows = await env.DB.prepare(`SELECT a.id, a.institution, a.education_level, a.education_level_other, a.study_city, a.submitted_at, a.proof_object_key IS NOT NULL AS has_proof, u.full_name, u.email, u.school_email FROM student_applications a JOIN users u ON u.id=a.user_id WHERE a.status='pending' ORDER BY a.submitted_at ASC LIMIT 100`).all();
   return json({ applications: rows.results || [] });
 }
 

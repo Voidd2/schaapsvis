@@ -1,7 +1,7 @@
 "use client";
 import { visitAtSignup, signupVisitComplete } from "@/lib/signup-visit";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import { PassQrCode } from "./PassQrCode";
 import Image from "next/image";
@@ -15,7 +15,8 @@ type Member = {
 
 type StudentApplication = {
   status: "pending" | "approved" | "rejected";
-  education_level: "mbo" | "hbo" | "wo";
+  education_level: "mbo" | "hbo" | "wo" | "other";
+  education_level_other?: string | null;
   institution: string;
   study_city?: string | null;
   submitted_at: string;
@@ -40,6 +41,15 @@ function appContextHeaders(json = false) {
 
 const translations = {
   nl: {
+    other: "Anders",
+    otherLevel: "Welk opleidingsniveau volgt u?",
+    existingAccount: "Er bestaat al een account met dit privé- of school-e-mailadres. Log in met uw oorspronkelijke privé-e-mailadres en wachtwoord, of stel uw wachtwoord opnieuw in.",
+    resumeVerification: "Uw account bestaat al. Rond hieronder de e-mailbevestiging af. Zijn uw codes verlopen? Vraag dan nieuwe codes aan.",
+    verificationLater: "U kunt later verdergaan door in te loggen met uw privé-e-mailadres en het wachtwoord dat u heeft gekozen.",
+    backToLogin: "Terug naar inloggen",
+    resetPassword: "Wachtwoord opnieuw instellen",
+    invalidLogin: "Het e-mailadres of wachtwoord klopt niet. Probeer het opnieuw of stel uw wachtwoord opnieuw in.",
+    rateLimited: "Te veel pogingen. Probeer het later opnieuw.",
     title: "Uw Schaap's account",
     intro: "Maak een account aan, bekijk uw studentenaanvraag en toon na goedkeuring uw kortingspas in de winkel.",
     login: "Inloggen",
@@ -112,6 +122,15 @@ const translations = {
     securityPerson: "Neem uw studentenpas mee naar onze winkel of kraam. Een medewerker rondt de controle daarna af.",
   },
   en: {
+    other: "Other",
+    otherLevel: "What is your level of education?",
+    existingAccount: "An account already exists with this personal or school email. Sign in with your original personal email and password, or reset your password.",
+    resumeVerification: "Your account already exists. Complete email verification below. If your codes have expired, request new ones.",
+    verificationLater: "You can continue later by signing in with your personal email and the password you chose.",
+    backToLogin: "Back to sign in",
+    resetPassword: "Reset password",
+    invalidLogin: "The email or password is incorrect. Try again or reset your password.",
+    rateLimited: "Too many attempts. Please try again later.",
     title: "Your Schaap's account",
     intro: "Create an account, check your student application and show your discount pass in store after approval.",
     login: "Log in",
@@ -178,6 +197,15 @@ const translations = {
     securityTitle: "Extra verification required", securityIntro: "An administrator requested an additional check. This is not an accusation; the concrete reason is shown below.", securityCode: "One-time code from your email", securityVerify: "Verify code", securitySchool: "Check your school email and follow the instructions to reconfirm your student status.", securityPerson: "Bring your student pass to our shop or stall. A staff member will complete the check.",
   },
   de: {
+    other: "Andere",
+    otherLevel: "Welches Bildungsniveau haben Sie?",
+    existingAccount: "Mit dieser privaten oder Hochschul-E-Mail-Adresse besteht bereits ein Konto. Melden Sie sich mit Ihrer ursprünglichen privaten E-Mail-Adresse und Ihrem Passwort an oder setzen Sie Ihr Passwort zurück.",
+    resumeVerification: "Ihr Konto besteht bereits. Schließen Sie unten die E-Mail-Bestätigung ab. Sind Ihre Codes abgelaufen? Fordern Sie neue Codes an.",
+    verificationLater: "Sie können später fortfahren, indem Sie sich mit Ihrer privaten E-Mail-Adresse und dem gewählten Passwort anmelden.",
+    backToLogin: "Zurück zur Anmeldung",
+    resetPassword: "Passwort zurücksetzen",
+    invalidLogin: "Die E-Mail-Adresse oder das Passwort ist falsch. Versuchen Sie es erneut oder setzen Sie Ihr Passwort zurück.",
+    rateLimited: "Zu viele Versuche. Bitte versuchen Sie es später erneut.",
     title: "Ihr Schaap's-Konto",
     intro: "Erstellen Sie ein Konto, verfolgen Sie Ihren Studentenantrag und zeigen Sie nach der Freigabe Ihren Rabattpass im Geschäft.",
     login: "Anmelden",
@@ -258,6 +286,15 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
   const [verificationPending, setVerificationPending] = useState(false);
   const [verificationEmail, setVerificationEmail] = useState("");
   const [dynamicQr, setDynamicQr] = useState("");
+  const [educationLevel, setEducationLevel] = useState("");
+  const [authEmail, setAuthEmail] = useState("");
+  const [accountExists, setAccountExists] = useState(false);
+  const [resetOpen, setResetOpen] = useState(false);
+  const resetEmailInput = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (resetOpen) resetEmailInput.current?.focus();
+  }, [resetOpen]);
 
   const refresh = useCallback(async () => {
     try {
@@ -340,8 +377,22 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
         body: JSON.stringify(body),
       });
       if (!response.ok) {
-        const result = await response.json().catch(() => ({})) as { error?: string };
-        if (result.error === "email_unverified") throw new Error("unverified");
+        const result = await response.json().catch(() => ({})) as { error?: string; proofMethod?: "document" | "school-email" };
+        if (result.error === "email_unverified") {
+          setVerificationEmail(String(fields.get("email") || "").trim().toLowerCase());
+          setDocumentRoute(result.proofMethod === "document");
+          setVerificationPending(true);
+          setAccountExists(false);
+          setSuccess(true);
+          setMessage(t.resumeVerification);
+          return;
+        }
+        if (result.error === "account_exists") {
+          setAccountExists(true);
+          return;
+        }
+        if (result.error === "rate_limited") { setMessage(t.rateLimited); return; }
+        if (mode === "login" && result.error === "invalid_credentials") { setMessage(t.invalidLogin); return; }
         if (mode === "register" && result.error === "verification_email_failed") {
           setVerificationEmail(String(fields.get("email") || "").trim().toLowerCase());
           setVerificationPending(true);
@@ -362,8 +413,7 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
         setMessage("");
       }
     } catch (error) {
-      setMessage(error instanceof Error && error.message === "unverified" ? t.resend
-        : error instanceof Error && error.message === "verification-email-failed" ? t.verificationDeliveryFailed
+      setMessage(error instanceof Error && error.message === "verification-email-failed" ? t.verificationDeliveryFailed
         : t.genericError);
       setSuccess(false);
     } finally {
@@ -565,7 +615,8 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
                 <div><h2 className="font-display text-2xl font-bold text-slate-900">{t.studentTitle}</h2><p className="mt-2 text-sm leading-relaxed text-slate-700">{t.studentInfo}</p></div>
                 <label className="block text-sm font-medium">{t.institution}<input name="institution" required maxLength={180} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>
                 <label className="block text-sm font-medium">{t.studyCity}<input name="studyCity" required maxLength={120} autoComplete="address-level2" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>
-                <label className="block text-sm font-medium">{t.level}<select name="educationLevel" required defaultValue="" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5"><option value="" disabled>{t.level}</option><option value="mbo">{t.mbo}</option><option value="hbo">{t.hbo}</option><option value="wo">{t.wo}</option></select></label>
+                <label className="block text-sm font-medium">{t.level}<select name="educationLevel" required value={educationLevel} onChange={event => setEducationLevel(event.target.value)} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5"><option value="" disabled>{t.level}</option><option value="mbo">{t.mbo}</option><option value="hbo">{t.hbo}</option><option value="wo">{t.wo}</option><option value="other">{t.other}</option></select></label>
+                {educationLevel === "other" && <label className="block text-sm font-medium">{t.otherLevel}<input name="educationLevelOther" required minLength={2} maxLength={120} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>}
                 {data.proofMethod === "document" && <fieldset className="space-y-3 rounded-xl bg-sky-50 p-4">
                   <legend className="font-semibold">{t.proof}</legend><p className="text-sm">{t.proofHelp}</p>
                   <label className="block text-sm font-medium">{t.file}<input type="file" name="proof" accept="application/pdf,image/jpeg,image/png" required className="mt-2 block w-full"/></label>
@@ -579,7 +630,7 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
           verificationPending ? <section className="mt-10 max-w-xl rounded-2xl border border-sky-200 bg-white p-6 shadow-sm sm:p-8">
             <h2 className="font-display text-2xl font-bold text-slate-900">{t.verifyCodes}</h2>
             <p className="mt-3 text-sm leading-relaxed text-slate-700">{documentRoute ? t.personalHelp : t.verificationHelp}<br /><span className="font-semibold">{verificationEmail}</span></p>
-            <label className="mt-4 flex gap-2"><input type="checkbox" checked={documentRoute} onChange={e=>setDocumentRoute(e.target.checked)}/>{t.byDocument}</label>
+            <p className="mt-4 text-sm text-slate-700">{t.verificationLater}</p>
             <form onSubmit={verifyBothAddresses} className="mt-6 space-y-4">
               <label className="block text-sm font-medium">{t.personalCode}<input name="personalCode" type="text" inputMode="numeric" pattern="[0-9]{6}" autoComplete="one-time-code" required maxLength={6} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5 tracking-[.3em]" /></label>
               {!documentRoute && <label className="block text-sm font-medium">{t.schoolCode}<input name="schoolCode" type="text" inputMode="numeric" pattern="[0-9]{6}" autoComplete="one-time-code" required maxLength={6} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5 tracking-[.3em]" /></label>}
@@ -589,16 +640,18 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
               <input type="hidden" name="email" value={verificationEmail} />
               <button type="submit" disabled={busy} className="text-sm font-semibold text-sky-800 underline underline-offset-4">{t.resend}</button>
             </form>
+            <button type="button" disabled={busy} onClick={() => { setVerificationPending(false); setAuthEmail(verificationEmail); setMode("login"); setMessage(""); }} className="mt-5 text-sm font-semibold text-sky-800 underline underline-offset-4">{t.backToLogin}</button>
             {message && <p role="status" aria-live="polite" className={`mt-4 text-sm ${success ? "text-emerald-800" : "text-red-800"}`}>{message}</p>}
           </section> : <section className="mt-10 grid gap-8">
             <div className="rounded-2xl border border-sky-200 bg-white p-6 shadow-sm sm:p-8">
               <div className="mb-6 flex gap-2" role="tablist" aria-label={t.title}>
                 <button type="button" role="tab" aria-selected={mode === "login"} onClick={() => { setMode("login"); setMessage(""); }} className={`rounded-full px-4 py-2 text-sm font-semibold ${mode === "login" ? "bg-sky-800 text-white" : "bg-sky-50 text-sky-900"}`}>{t.login}</button>
-                <button type="button" role="tab" aria-selected={mode === "register"} onClick={() => { setMode("register"); setMessage(""); }} className={`rounded-full px-4 py-2 text-sm font-semibold ${mode === "register" ? "bg-sky-800 text-white" : "bg-sky-50 text-sky-900"}`}>{t.register}</button>
+                <button type="button" role="tab" aria-selected={mode === "register"} onClick={() => { setMode("register"); setAccountExists(false); setMessage(""); }} className={`rounded-full px-4 py-2 text-sm font-semibold ${mode === "register" ? "bg-sky-800 text-white" : "bg-sky-50 text-sky-900"}`}>{t.register}</button>
               </div>
               <form onSubmit={submitAuth} className="space-y-4">
+                {accountExists && <div role="alert" className="rounded-xl bg-amber-50 p-4 text-sm text-slate-800"><p>{t.existingAccount}</p><div className="mt-3 flex flex-wrap gap-4"><button type="button" onClick={() => { setMode("login"); setMessage(""); setAccountExists(false); }} className="font-semibold text-sky-800 underline">{t.login}</button><button type="button" onClick={() => { setMode("login"); setResetOpen(true); setMessage(""); }} className="font-semibold text-sky-800 underline">{t.resetPassword}</button></div></div>}
                 {mode === "register" && <div className="grid gap-4 sm:grid-cols-2"><label className="block text-sm font-medium">{t.firstName}<input name="firstName" required minLength={1} maxLength={60} autoComplete="given-name" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label><label className="block text-sm font-medium">{t.lastName}<input name="lastName" required minLength={1} maxLength={80} autoComplete="family-name" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label></div>}
-                <label className="block text-sm font-medium">{t.email}<input name="email" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>
+                <label className="block text-sm font-medium">{t.email}<input name="email" type="email" required maxLength={254} autoComplete="email" value={authEmail} onChange={event => { setAuthEmail(event.target.value); setAccountExists(false); }} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>
                 {mode === "register" && <label className="block text-sm font-medium">{t.method}
                   <select className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" value={documentRoute ? "document" : "school-email"} onChange={e=>setDocumentRoute(e.target.value === "document")}>
                     <option value="school-email">{t.byEmail}</option><option value="document">{t.byDocument}</option>
@@ -606,13 +659,12 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
                 </label>}
                 {mode === "register" && documentRoute && <p className="text-sm">{t.uploadLater}</p>}
                 {mode === "register" && !documentRoute && <label className="block text-sm font-medium">{t.schoolEmail}<input name="schoolEmail" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>}
-                <label className="block text-sm font-medium">{t.password}<input name="password" type="password" required minLength={12} maxLength={128} autoComplete={mode === "register" ? "new-password" : "current-password"} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>
+                <label className="block text-sm font-medium">{t.password}<input key={mode} name="password" type="password" required minLength={12} maxLength={128} autoComplete={mode === "register" ? "new-password" : "current-password"} className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2.5" /></label>
                 {mode === "register" && <label className="flex items-start gap-2 text-sm leading-relaxed"><input type="checkbox" name="marketingConsent" className="mt-1 size-4 shrink-0 accent-sky-700" /><span>{t.optionalOffers} <a className="underline" href={`/${language}/privacyverklaring#emailaanbiedingen`}>{t.privacy}</a></span></label>}
                 <button type="submit" disabled={busy} className="knop knop-navy w-full disabled:opacity-60">{busy ? (language === "en" ? "Please wait…" : language === "de" ? "Bitte warten…" : "Even geduld…") : mode === "login" ? t.login : t.register}</button>
               </form>
               {mode === "login" && <details className="mt-5"><summary className="text-sm font-semibold text-sky-800">{t.magicLogin}</summary><form onSubmit={requestMagicLogin} className="mt-5 space-y-2"><label className="block text-xs font-medium text-slate-600">{t.email}<input name="email" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2" /></label><button disabled={busy} className="text-sm font-semibold text-sky-800 underline underline-offset-4">{t.magicLogin}</button></form></details>}
-              <details className="mt-5"><summary className="text-sm font-semibold text-sky-800">{t.reset}</summary><form onSubmit={requestPasswordReset} className="mt-5 space-y-2"><label className="block text-xs font-medium text-slate-600">{t.email}<input name="email" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2" /></label><button disabled={busy} className="text-sm font-semibold text-sky-800 underline underline-offset-4">{t.reset}</button></form></details>
-              {message === t.resend && <form onSubmit={resendVerification} className="mt-3 space-y-2"><label className="block text-xs font-medium text-slate-600">{t.email}<input name="email" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2" /></label><button className="text-sm font-semibold text-sky-800 underline underline-offset-4">{t.resend}</button></form>}
+              <details className="mt-5" open={resetOpen} onToggle={event => setResetOpen(event.currentTarget.open)}><summary className="text-sm font-semibold text-sky-800">{t.reset}</summary><form onSubmit={requestPasswordReset} className="mt-5 space-y-2"><label className="block text-xs font-medium text-slate-600">{t.email}<input ref={resetEmailInput} defaultValue={authEmail} key={authEmail} name="email" type="email" required maxLength={254} autoComplete="email" className="mt-1 block w-full rounded-lg border border-sky-200 px-3 py-2" /></label><button disabled={busy} className="text-sm font-semibold text-sky-800 underline underline-offset-4">{t.reset}</button></form></details>
               {message && <p role="status" aria-live="polite" className={`mt-4 text-sm ${success ? "text-emerald-800" : "text-red-800"}`}>{message}</p>}
             </div>
             <aside className="rounded-2xl bg-sky-50 p-6 sm:p-8"><h2 className="font-display text-2xl font-bold text-slate-900">{t.studentTitle}</h2><p className="mt-3 leading-relaxed text-slate-700">{t.studentInfo}</p><p className="mt-5 text-sm leading-relaxed text-slate-600">{language === "en" ? "This portal is for students. Regular customer accounts are not active yet." : language === "de" ? "Dieses Portal ist für Studierende. Reguläre Kundenkonten sind noch nicht aktiv." : "Dit portaal is voor studenten. Gewone klantaccounts zijn nog niet actief."}</p></aside>

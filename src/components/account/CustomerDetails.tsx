@@ -10,7 +10,7 @@ const labels = {
 };
 type Details = {
   person:{email:string;school_email:string|null;email_verified_at:string|null;school_email_verified_at:string|null};
-  applications:{institution:string;education_level:string;study_city:string;eligibility_method:string;submitted_at:string;reviewed_at:string|null;status:"pending"|"approved"|"rejected"}[];
+  applications:{institution:string;education_level:string;education_level_other?:string|null;study_city:string;eligibility_method:string;submitted_at:string;reviewed_at:string|null;status:"pending"|"approved"|"rejected"}[];
 };
 
 export function CustomerDetails({id,name,locale,onClose}:{id:string;name:string;locale:string;onClose:()=>void}) {
@@ -52,7 +52,7 @@ export function CustomerDetails({id,name,locale,onClose}:{id:string;name:string;
         <section className="my-5 border-t border-sky-100 pt-3"><h3 className="text-lg">{t.applications}</h3>
           {result.applications.length===0 ? <p>{t.none}</p> : <ul>{result.applications.map((a,index)=><li key={index} className="mt-2">
             <p><strong>{t[a.status]}</strong> · {dates.format(new Date(a.submitted_at))}</p>
-            <p>{[a.institution,a.education_level?.toUpperCase(),a.study_city].filter(Boolean).join(" · ")}</p>
+            <p>{[a.institution,(a.education_level_other || a.education_level?.toUpperCase()),a.study_city].filter(Boolean).join(" · ")}</p>
             <p>{a.eligibility_method==="verified-school-email" ? t.schoolProof : t.document}</p>
             {a.reviewed_at && <p>{t.reviewed} · {dates.format(new Date(a.reviewed_at))}</p>}
           </li>)}</ul>}
