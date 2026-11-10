@@ -450,7 +450,7 @@ export const receptenPraktisch: Recept[] = [
     porties: 4,
     seizoen: "Jaarrond — garnalen op hun best in voor- en najaar",
     fotoLabel: "Garnalencocktail in glas met cocktailsaus",
-    vanSchaap: ["300 g gepelde, gekookte Hollandse garnalen — vraag naar de actuele beschikbaarheid"],
+    vanSchaap: ["300 g gepelde, gekookte Hollandse garnalen"],
     vanSupermarkt: [
       "¼ ijsbergsla",
       "5 el mayonaise + 2 el ketchup",
@@ -796,7 +796,7 @@ export const receptenPraktisch: Recept[] = [
     porties: 4,
     seizoen: "Jaarrond — garnalen op hun best in voor- en najaar",
     fotoLabel: "Toast met avocado en Hollandse garnalen",
-    vanSchaap: ["200 g gepelde, gekookte Hollandse garnalen — vraag naar de actuele beschikbaarheid"],
+    vanSchaap: ["200 g gepelde, gekookte Hollandse garnalen"],
     vanSupermarkt: [
       "4 sneden zuurdesembrood",
       "2 avocado's",
@@ -831,7 +831,7 @@ export const receptenPraktisch: Recept[] = [
     seizoen: "Jaarrond",
     fotoLabel: "Garnalensalade in een kom met citroen en verse kruiden",
     vanSchaap: [
-      "250 g gepelde, gekookte Hollandse garnalen — vraag naar de actuele voorraad"
+      "250 g gepelde, gekookte Hollandse garnalen"
     ],
     vanSupermarkt: [
       "2 el mayonaise",

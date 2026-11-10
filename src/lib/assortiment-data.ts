@@ -203,11 +203,11 @@ export const products: Product[] = [
   {
     "slug": "haring",
     "naam": "Haring",
-    "desc": "Hollandse Nieuwe haring (Clupea harengus) — gevlinderd of op het broodje. Een Hollandse klassieker, een van de rijkste omega-3 bronnen in ons assortiment.",
+    "desc": "Dagelijks vers gesneden.",
     "categorie": "verse-vis",
     "omega3": true,
     "photo": "/images/producten-hd/haring.webp",
-    "ingredienten": "Haring (Clupea harengus) [VIS]. Geen toegevoegde stoffen. Rauwe haring, conform EU parasietenverordening voorbehandeld.",
+    "ingredienten": "Haring [VIS].",
     "bevat": [
       "VIS"
     ],
@@ -282,10 +282,10 @@ export const products: Product[] = [
   {
     "slug": "gerookte-bokking",
     "naam": "Gerookte Bokking",
-    "desc": "Warm gerookte haring (Clupea harengus) — een eeuwenoud Hollands product. Volle, rokerige smaak. Zowel heel als als bosje bokking verkrijgbaar.",
+    "desc": "Warm gerookte haring — een eeuwenoud Hollands product. Volle, rokerige smaak. Zowel heel als als bosje bokking verkrijgbaar.",
     "categorie": "gerookte-vis",
     "photo": "/images/producten-hd/gerookte-bokking.webp",
-    "ingredienten": "Haring (Clupea harengus) [VIS], zout, rook.",
+    "ingredienten": "Haring [VIS], zout, rook.",
     "bevat": [
       "VIS"
     ],
@@ -320,7 +320,7 @@ export const products: Product[] = [
     "desc": "Traditioneel gerookte haring, gespleten en koud gerookt. De kipper is een van de oudste conserveringsmethoden voor vis.",
     "categorie": "gerookte-vis",
     "photo": "/images/producten-hd/gerookte-kipper.webp",
-    "ingredienten": "Haring (Clupea harengus) [VIS], zout, rook.",
+    "ingredienten": "Haring [VIS], zout, rook.",
     "bevat": [
       "VIS"
     ],
@@ -379,7 +379,7 @@ export const products: Product[] = [
   {
     "slug": "creuse-oesters",
     "naam": "Creuse Oesters",
-    "desc": "Franse creuse oesters (Crassostrea gigas) — zout, fris en romig van smaak. Wij leveren per dozijn. Vraag naar de maat van de dag.",
+    "desc": "Franse creuse oesters (Crassostrea gigas) — zout, fris en romig van smaak. Verkrijgbaar per dozijn. De maat kan per levering verschillen.",
     "categorie": "schaal-schelp",
     "ingredienten": "Oesters (Crassostrea gigas) [WEEKDIEREN].",
     "bevat": [
@@ -519,11 +519,11 @@ export const products: Product[] = [
   {
     "slug": "broodje-haring",
     "naam": "Broodje Haring",
-    "desc": "Rauwe Hollandse Nieuwe haring op een zacht broodje met fijngehakte ui en knapperige augurk. Een van de voedzaamste producten in ons assortiment.",
+    "desc": "Haring op een zacht broodje met fijngehakte ui en knapperige augurk.",
     "categorie": "bereid",
     "omega3": true,
     "bestelId": "haring",
-    "ingredienten": "HARING (Clupea harengus) [VIS], broodrol (TARWEBLOEM, gist, water, zout) [GLUTEN], ui, augurk (komkommer, azijn, suiker, MOSTERD), zout.",
+    "ingredienten": "HARING [VIS], broodrol (TARWEBLOEM, gist, water, zout) [GLUTEN], ui, augurk (komkommer, azijn, suiker, MOSTERD), zout.",
     "bevat": [
       "VIS",
       "GLUTEN (tarwe)",

@@ -26,7 +26,7 @@ const SPECIES: Record<string, readonly [string, string]> = {
   "Dicentrarchus labrax": ["Sea bass", "Wolfsbarsch"], "Sparus aurata": ["Gilthead sea bream", "Dorade"], "Scophthalmus rhombus": ["Brill", "Glattbutt"],
   "Psetta maxima": ["Turbot", "Steinbutt"], "Merluccius merluccius": ["Hake", "Seehecht"], "Melanogrammus aeglefinus": ["Haddock", "Schellfisch"],
   "Merlangius merlangus": ["Whiting", "Wittling"], "Trigla lucerna": ["Tub gurnard", "Roter Knurrhahn"], "Limanda limanda": ["Dab", "Kliesche"],
-  "Sebastes marinus": ["Redfish", "Rotbarsch"], "Clupea harengus": ["Herring", "Hering"], "Salmo salar": ["Atlantic salmon", "Atlantischer Lachs"],
+  "Sebastes marinus": ["Redfish", "Rotbarsch"], "Haring": ["Herring", "Hering"], "Salmo salar": ["Atlantic salmon", "Atlantischer Lachs"],
   "Oncorhynchus mykiss": ["Rainbow trout", "Regenbogenforelle"], "Thunnus albacares": ["Yellowfin tuna", "Gelbflossenthun"], "Lophius piscatorius": ["Monkfish", "Seeteufel"],
   "Oncorhynchus spp.": ["Wild Pacific salmon", "Pazifischer Wildlachs"], "Hippoglossus hippoglossus": ["Halibut", "Heilbutt"], "Sprattus sprattus": ["Sprat", "Sprotte"],
   "Crangon crangon": ["Brown shrimp", "Nordseegarnelen"], "Pandalus borealis": ["Northern prawns", "Nordische Garnelen"],
@@ -51,7 +51,7 @@ const TAILS: Record<string, readonly [string, string]> = {
   ", kruiden, olie.": [", herbs, oil.", ", Kräuter, Öl."],
   ", water, zout, zuurteregelaar.": [", water, salt, acidity regulator.", ", Wasser, Salz, Säureregulator."],
   ", zonnebloemolie, zout, rook.": [", sunflower oil, salt, smoke.", ", Sonnenblumenöl, Salz, Rauch."],
-  ". Geen toegevoegde stoffen. Rauwe haring, conform EU parasietenverordening voorbehandeld.": [". No added ingredients. Raw herring, pre-treated in accordance with EU parasite-control requirements.", ". Keine zugesetzten Zutaten. Roher Hering, nach den EU-Vorgaben zur Parasitenkontrolle vorbehandelt."],
+
   ", zout. Kan conserveermiddel E223 bevatten [SULFIET].": [", salt. May contain preservative E223 [SULPHITES].", ", Salz. Kann das Konservierungsmittel E223 [SULFITE] enthalten."],
   ", zout. Kan conserveermiddel (E221) bevatten.": [", salt. May contain preservative E221 (sulphites).", ", Salz. Kann das Konservierungsmittel E221 (Sulfite) enthalten."],
   ", zout, suiker, dille.": [", salt, sugar, dill.", ", Salz, Zucker, Dill."],
@@ -67,7 +67,7 @@ const PREPARED: Record<string, readonly [string, string]> = {
   zeewiersalade: ["Wakame seaweed (Undaria pinnatifida), sesame oil, SOY sauce (water, soya beans [SOYA], wheat [GLUTEN], salt), vinegar, sugar, sesame seeds [SESAME].", "Wakame-Algen (Undaria pinnatifida), Sesamöl, SOJAsauce (Wasser, Sojabohnen [SOJA], Weizen [GLUTEN], Salz), Essig, Zucker, Sesamsamen [SESAM]."],
   kibbeling: ["Pollak [FISH], WHEAT FLOUR, water, salt, raising agents (E450, E500), vegetable oil. Deep-fried. Ravigote sauce available separately; ask about its ingredients and allergens.", "Pollak [FISCH], WEIZENMEHL, Wasser, Salz, Backtriebmittel (E450, E500), Pflanzenöl. Frittiert. Ravigotesauce separat erhältlich; fragen Sie nach Zutaten und Allergenen."],
   lekkerbek: ["Hake [FISH], WHEAT FLOUR, water, salt, raising agent, vegetable oil. Deep-fried.", "Seehecht [FISCH], WEIZENMEHL, Wasser, Salz, Backtriebmittel, Pflanzenöl. Frittiert."],
-  "broodje-haring": ["HERRING (Clupea harengus) [FISH], bread roll (WHEAT FLOUR, yeast, water, salt) [GLUTEN], onion, gherkin (cucumber, vinegar, sugar, MUSTARD), salt.", "HERING (Clupea harengus) [FISCH], Brötchen (WEIZENMEHL, Hefe, Wasser, Salz) [GLUTEN], Zwiebel, Gewürzgurke (Gurke, Essig, Zucker, SENF), Salz."],
+  "broodje-haring": ["HERRING [FISH], bread roll (WHEAT FLOUR, yeast, water, salt) [GLUTEN], onion, gherkin (cucumber, vinegar, sugar, MUSTARD), salt.", "HERING [FISCH], Brötchen (WEIZENMEHL, Hefe, Wasser, Salz) [GLUTEN], Zwiebel, Gewürzgurke (Gurke, Essig, Zucker, SENF), Salz."],
   vissoep: ["Fresh fish (varies) [FISH], water, onion, carrot, CELERY, leek, potato, herbs, salt. May contain cream [MILK].", "Frischer Fisch (wechselnd) [FISCH], Wasser, Zwiebel, Karotte, SELLERIE, Lauch, Kartoffel, Kräuter, Salz. Kann Sahne [MILCH] enthalten."],
   vispotje: ["Fresh fish (varies) [FISH], cooking cream [MILK], onion, carrot, CELERY, herbs, salt, pepper.", "Frischer Fisch (wechselnd) [FISCH], Kochsahne [MILCH], Zwiebel, Karotte, SELLERIE, Kräuter, Salz, Pfeffer."],
   surimisalade: ["Surimi (white fish [FISH], starch, sugar), mayonnaise (sunflower oil, EGGS, vinegar, MUSTARD), onion, herbs, salt. May contain CRUSTACEANS and SOYA.", "Surimi (Weißfisch [FISCH], Stärke, Zucker), Mayonnaise (Sonnenblumenöl, EIER, Essig, SENF), Zwiebel, Kräuter, Salz. Kann KREBSTIERE und SOJA enthalten."],
@@ -86,9 +86,10 @@ export function translatedIngredients(product: Product, lang: SiteLanguage): str
   const index = lang === "en" ? 0 : 1;
   if (PREPARED[product.slug]) return PREPARED[product.slug][index];
   const match = product.ingredienten.match(/^(.*?)\s*\[(VIS|SCHAALDIEREN|WEEKDIEREN)\]([\s\S]+)$/);
-  const scientific = match?.[1].match(/\(([^)]+)\)/)?.[1] ?? match?.[1].trim();
-  if (!match || !scientific || !SPECIES[scientific] || !TAILS[match[3]]) throw new Error(`Missing ingredients translation: ${product.slug}`);
-  return `${SPECIES[scientific][index]} (${scientific}) [${allergenLabel(match[2], lang)}]${TAILS[match[3]][index]}`;
+  const scientific = match?.[1].match(/\(([^)]+)\)/)?.[1];
+  const species = scientific ?? match?.[1].trim();
+  if (!match || !species || !SPECIES[species] || !TAILS[match[3]]) throw new Error(`Missing ingredients translation: ${product.slug}`);
+  return `${SPECIES[species][index]}${scientific ? ` (${scientific})` : ""} [${allergenLabel(match[2], lang)}]${TAILS[match[3]][index]}`;
 }
 export function localizeProduct(product: Product, locale: string): Product {
   const lang = siteLanguage(locale);
