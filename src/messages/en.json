@@ -232,7 +232,7 @@
   },
   "contactPage": {
     "title": "Contact",
-    "sub": "Looking to reserve fish? Message us on WhatsApp with the fish, quantity and day you have in mind. You can also ask what’s on the counter.",
+    "sub": "Looking to reserve fish? Message us on WhatsApp with the fish, quantity and day you have in mind.",
     "formTitle": "Send a message",
     "nameLabel": "Name",
     "emailLabel": "Email address",
@@ -334,7 +334,7 @@
     "verhaalLink": "Read the whole story",
     "assortimentLabel": "At the counter",
     "assortimentKop": "What is in today",
-    "assortimentTekst": "From VÅRLAKS salmon and Dutch brown shrimp to fresh fish and something from the fryer: explore what we offer. Availability changes with the day’s supply. Looking for something specific? Message us on WhatsApp and we will be happy to help.",
+    "assortimentTekst": "From VÅRLAKS salmon and Dutch brown shrimp to fresh fish and something from the fryer: explore what we offer.",
     "assortimentLink": "See the full range",
     "assortimentAantal": "{aantal} kinds",
     "assortimentAantalEen": "{aantal} kind",

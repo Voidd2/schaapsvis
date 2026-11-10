@@ -61,8 +61,7 @@ export default async function ProductDetailPage({params}: Props) {
         label: { nl: "Vraag naar dit product", en: "Ask about this product", de: "Nach diesem Produkt fragen" }[lang],
         href: bestelContact(lang, product.naam).href,
       };
-  const isPlatter = ["visschaal", "feestschotel"].includes(slug), isSalmon = !product.highlight && /zalm|lax/.test(slug);
-  const action = {label: isPlatter ? c.platter : bestelContact(lang).label, href: isPlatter ? `/${lang}/visschalen` : bestelContact(lang, product.naam).href, extern: !isPlatter};
+  const isSalmon = !product.highlight && /zalm|lax/.test(slug);
   const ownRecipes = recepten.filter(r => r.hoofdproduct === slug).map(r => localizeRecipe(r,lang));
   const suitableRecipes = recepten.filter(r => r.geschiktVoor?.includes(slug)).map(r => localizeRecipe(r,lang));
   const recipeIdeasByProduct: Record<string, string[]> = {
@@ -133,9 +132,7 @@ export default async function ProductDetailPage({params}: Props) {
       {recipeIdeas.length > 0 ? <div className="mb-8"><h3 className="text-xl mb-3">{c.recipes}</h3><ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{recipeIdeas.map(r=>{const image=receptBeeld(r);return <li key={r.slug} className="overflow-hidden rounded-xl border border-sky-100 bg-white"><Link href={`/${lang}/recepten/${r.slug}`} className="block h-full"><div className="relative aspect-[3/2] w-full bg-sky-50">{image.src&&<Image src={image.src} alt={image.alt} fill sizes="(max-width: 640px) 100vw, 30vw" className="object-cover" />}</div><div className="p-4"><span className="font-semibold underline">{r.title}</span><p className="text-sm mt-2">{r.tijd} · {recipeLabel(r.moeilijkheid,lang)}</p></div></Link></li>})}</ul></div> : <p className="mb-4">{c.noRecipe}</p>}
       <Link href={`/${lang}/recepten`} className="underline font-semibold">{c.recipes} →</Link><p className="mt-3">{c.recipesNote}</p>
     </div></Sectie>
-    {availability.regular
-      ? <PaginaSlot titel={c.hours} tekst={lang==="nl" ? "Bezoek onze winkel in Leiden of onze verkoopwagen in Leiden en Voorschoten." : lang==="en" ? "Visit our shop in Leiden or our mobile fish shop in Leiden and Voorschoten." : "Besuchen Sie unser Geschäft in Leiden oder unseren Verkaufswagen in Leiden und Voorschoten."} knoppen={[{label:c.hours,href:`/${lang}/bezoek-ons`}]} />
-      : <PaginaSlot titel={`${c.looking} ${lang === "de" ? product.naam : product.naam.toLowerCase()}?`} tekst={c.orderNote} knoppen={[action,{label:c.hours,href:`/${lang}/bezoek-ons`,soort:"lijn"},{label:BEDRIJF.telefoon.weergave,href:`tel:${BEDRIJF.telefoon.e164}`,extern:true,soort:"lijn"}]} />}
+    {availability.regular && <PaginaSlot titel={c.hours} tekst={lang==="nl" ? "Bezoek onze winkel in Leiden of onze verkoopwagen in Leiden en Voorschoten." : lang==="en" ? "Visit our shop in Leiden or our mobile fish shop in Leiden and Voorschoten." : "Besuchen Sie unser Geschäft in Leiden oder unseren Verkaufswagen in Leiden und Voorschoten."} knoppen={[{label:c.hours,href:`/${lang}/bezoek-ons`}]} />}
   </>;
 }
 

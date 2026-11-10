@@ -34,7 +34,7 @@ export const viskalenderData: MaandData[] = [
         "naam": "Mosselen"
       }
     ],
-    "tekst": "Skrei komt doorgaans van januari tot april uit Noorwegen. Kabeljauw past bij warme ovengerechten; mosselen en oesters zijn ook in de winter een mooie keuze. Vraag ons wat er vandaag beschikbaar is.",
+    "tekst": "Skrei komt doorgaans van januari tot april uit Noorwegen. Kabeljauw past bij warme ovengerechten; mosselen en oesters zijn ook in de winter een mooie keuze.",
     "hoogtepunt": "Winterse kabeljauw, skrei en schelpdieren",
     "foto": {
       "src": "/images/recepten/gebakken-kabeljauw-botersaus-v2.webp",
@@ -138,7 +138,7 @@ export const viskalenderData: MaandData[] = [
         "keurmerk": "MSC"
       }
     ],
-    "tekst": "In april loopt het gebruikelijke seizoen van Zeeuwse bodemcultuurmosselen af. Het exacte einde verschilt per oogst. Kies voor verse filet met voorjaarsgroenten of Hollandse garnalen en vraag naar de mooiste aanvoer.",
+    "tekst": "In april loopt het gebruikelijke seizoen van Zeeuwse bodemcultuurmosselen af. Het exacte einde verschilt per oogst. Kies voor verse filet met voorjaarsgroenten of Hollandse garnalen.",
     "hoogtepunt": "Lichter koken met verse vis",
     "foto": {
       "src": "/images/recepten/kabeljauw-zeekraal-venkel.webp",
@@ -350,7 +350,7 @@ export const viskalenderData: MaandData[] = [
         "naam": "Wijting"
       }
     ],
-    "tekst": "Kabeljauw en wijting lenen zich voor een ovenschotel of stoof. Ook een pan mosselen past bij een herfstavond. De kalender geeft inspiratie, geen voorraadgarantie: vraag ons welke filet vandaag het mooist is.",
+    "tekst": "Kabeljauw en wijting lenen zich voor een ovenschotel of stoof. Ook een pan mosselen past bij een herfstavond.",
     "hoogtepunt": "Warme ovengerechten en visstoof",
     "foto": {
       "src": "/images/recepten/kabeljauw-oven-tomaat-olijven-v2.webp",

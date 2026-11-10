@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { bestelContact } from "@/lib/bestel-contact";
 import { calendarCopy, localizedCalendar } from "@/lib/calendar-localization";
 
 /**
@@ -41,12 +40,8 @@ export function DezeMaand({ locale, maandIndex }: { locale: string; maandIndex: 
           <p className="lees" style={{ color: "var(--charcoal)" }}>
             {maand.tekst}
           </p>
-          <p className="lees mt-4 text-[0.95rem]" style={{ color: "var(--charcoal)" }}>
-            {c.availability}
-          </p>
           <div className="flex flex-wrap gap-3 mt-6">
-            <a href={bestelContact(locale).href} className="knop knop-rood">{bestelContact(locale).label}</a>
-            <a href={`#maand-${nu}`} className="knop knop-lijn">
+            <a href={`#maand-${nu}`} className="knop knop-rood">
               {c.allAbout} {maand.naam}
             </a>
           </div>
