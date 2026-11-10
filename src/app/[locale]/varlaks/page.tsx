@@ -39,6 +39,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function VarlaksPage({ params }: Props) {
   const lang = language((await params).locale);
   const c = campaign[lang], q = questionsCopy[lang];
+  const storefront = BEELD.winkelGevel;
+  const shopCopy = lang === "nl" ? storefront : storefront.vertalingen[lang];
+  const locationPhotoSizes = "(max-width: 460px) 90vw, (max-width: 740px) 416px, min(34vw, 416px)";
   const ask = bestelContact(lang, c.heading);
   const questions = [[q.certification.q,q.certification.a], [q.preparationQuestion,q.preparationAnswer], [q.orderQuestion,q.orderAnswer]];
   return <div className={styles.page}>
@@ -81,11 +84,18 @@ export default async function VarlaksPage({ params }: Props) {
           <DiscountOfferPopup locale={lang} experiment="varlaks" />
         </VarlaksFilm>
       </BedieningSlot></div>
-      <figure className={styles.stall}>
-        <StaticResponsiveImage src={BEELD.historieNu.bestand} alt={c.stallAlt}
-          width={1600} height={900} sizes="(max-width: 430px) 90vw, (max-width: 740px) 384px, (max-width: 1100px) 36vw, 384px" />
-        <figcaption>{c.stallCaption}</figcaption>
-      </figure>
+      <div className={styles.locationPhotos}>
+        <figure>
+          <StaticResponsiveImage src={storefront.bestand} alt={shopCopy.alt} className={styles.storefront}
+            width={1320} height={984} sizes={locationPhotoSizes} />
+          <figcaption>{shopCopy.bijschrift}</figcaption>
+        </figure>
+        <figure>
+          <StaticResponsiveImage src={BEELD.historieNu.bestand} alt={c.stallAlt}
+            width={1600} height={900} sizes={locationPhotoSizes} />
+          <figcaption>{c.stallCaption}</figcaption>
+        </figure>
+      </div>
     </section>
 
     <VarlaksLocations locale={lang}/>

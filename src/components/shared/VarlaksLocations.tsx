@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { StaticResponsiveImage } from "@/components/StaticResponsiveImage";
-import { BEELD } from "@/lib/beeld";
 import { BEDRIJF, VERKOOPPUNTEN, type VerkooppuntId } from "@/lib/bedrijf";
 import { openingRows } from "@/lib/openingHours";
 
@@ -33,7 +31,6 @@ const copy = {
 
 export function VarlaksLocations({ locale }: { locale: keyof typeof copy }) {
   const c = copy[locale];
-  const storefront = BEELD.winkelGevel;
   const places: { id: VerkooppuntId; title: string; hours: ReturnType<typeof openingRows> }[] = [
     { id: "winkel", title: c.shop, hours: openingRows("winkel", locale) },
     { id: "markt-woensdag", title: c.wednesday, hours: openingRows("markt", locale).filter(row => row.day === 3) },
@@ -47,28 +44,13 @@ export function VarlaksLocations({ locale }: { locale: keyof typeof copy }) {
       <p className="varlaks-locations-intro">{c.intro}</p>
       <div className="varlaks-location-grid">{places.map(place => {
         const point = VERKOOPPUNTEN.find(item => item.id === place.id)!;
-        const information = <>
+        return <article key={place.id} className="varlaks-location-card">
           <h3>{place.title}</h3>
           <p>{point.adres.replace(", bij ", `, ${c.near} `).replace("Parkeerplaats", c.parking)}<br />{place.id === "winkel" ? `${BEDRIJF.adres.postcode} ` : ""}{point.plaats}</p>
           <ul>{place.hours.map(row => <li key={row.label}><span>{row.label}</span><strong>{row.time}</strong></li>)}</ul>
           {place.id === "winkel" && <p className="varlaks-location-closed">{c.closed}</p>}
           <a className="knop knop-navy" href={point.mapsUrl} target="_blank" rel="noopener noreferrer" aria-label={`${c.routeTo} ${place.title}`}>{c.route} ↗</a>
-        </>;
-        if (place.id === "winkel") {
-          return <article key={place.id} className="varlaks-storefront">
-            <div className="varlaks-storefront-view">
-              <StaticResponsiveImage
-                src={storefront.bestand}
-                alt={locale === "nl" ? storefront.alt : storefront.vertalingen[locale].alt}
-                width={1320} height={984}
-                sizes="(max-width: 699px) 100vw, (max-width: 1199px) 47vw, 34vw"
-                className="varlaks-storefront-photo"
-              />
-            </div>
-            <div className="varlaks-location-card">{information}</div>
-          </article>;
-        }
-        return <article key={place.id} className="varlaks-location-card">{information}</article>;
+        </article>;
       })}</div>
       <div className="varlaks-location-notes"><Link href={`/${locale}/bezoek-ons`}>{c.all} →</Link></div>
     </div>
