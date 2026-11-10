@@ -1,6 +1,7 @@
 import { productHref } from "@/lib/product-href";
 import Link from "next/link";
 import Image from "next/image";
+import { StaticResponsiveImage } from "@/components/StaticResponsiveImage";
 import type { Metadata } from "next";
 import { Schema } from "@/components/Schema";
 import { JsonLd } from "@/components/JsonLd";
@@ -13,13 +14,15 @@ import { blogPosts } from "@/lib/blog";
 import { localizeBlog } from "@/lib/blog-localization";
 import { voorschotenText } from "@/lib/voorschoten-copy";
 
+const viskarFoto = "/images/schaaps/schaaps-viskraam.webp";
+
 export async function generateMetadata({params}:{params:Promise<{locale:string}>}): Promise<Metadata> {
   const {locale}=await params;
   const t=(text:string)=>voorschotenText(text,locale);
   return paginaMetadata({
     locale, pad: "/viswinkel-voorschoten",
     title: t("Visboer Voorschoten bij Hoogvliet op vrijdag | Schaap’s"),
-    image: "/images/editorial/kibbeling-schaapstray.png",
+    image: viskarFoto,
     description: t("Visboer Voorschoten? Schaap’s staat elke vrijdag bij Hoogvliet, Veurseweg 18. Verse vis, haring en kibbeling in Voorschoten. Bekijk adres, openingstijden en route."),
   });
 }
@@ -54,7 +57,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     description: t("Wekelijkse viskraam op de parkeerplaats bij Hoogvliet in Voorschoten, elke vrijdag van 08:00 tot 17:30."),
     url: `${BEDRIJF.domein}/${locale}/viswinkel-voorschoten`,
     telephone: BEDRIJF.telefoon.e164,
-    image: `${BEDRIJF.domein}/images/editorial/kibbeling-schaapstray.png`,
+    image: BEDRIJF.domein + viskarFoto,
     address: { "@type": "PostalAddress", streetAddress: kraam.straat, postalCode: kraam.postcode, addressLocality: "Voorschoten", addressRegion: "Zuid-Holland", addressCountry: "NL" },
     hasMap: kraam.mapsUrl,
     parentOrganization: { "@id": `${BEDRIJF.domein}/#organisatie` },
@@ -65,7 +68,11 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     <Schema data={[localSchema, kruimelSchema(locale, [{ naam: BEDRIJF.naamKort, pad: "/" }, { naam: t("Viswinkel Voorschoten"), pad: "/viswinkel-voorschoten" }])]} />
     <header className="fresh-hero"><div className="section-wrap fresh-hero-grid">
       <div><p className="kapitaal">{t("Schaap’s Vishandel · sinds 1938")}</p><h1>{t("Visboer Voorschoten: elke vrijdag bij Hoogvliet")}</h1><p className="fresh-intro">{t("Goede vis, persoonlijk advies en duidelijke prijzen. Probeer onze viskraam op vrijdag: van verse zalm voor het avondeten tot krokante kibbeling met ravigotesaus en haring met uitjes.")}</p><div className="mt-6 rounded-xl border border-sky-200 bg-white p-5"><p className="font-semibold text-lg">{t("Elke vrijdag · 08:00–17:30")}</p><p className="mt-1">{t("Parkeerplaats Hoogvliet · Veurseweg 18")}<br />{t("2252 AA Voorschoten")}</p><p className="mt-3 text-sm">{t("Ook aan het einde van de middag nog vis halen voor het avondeten.")}</p></div><div className="flex flex-wrap gap-3 mt-6"><a className="knop knop-rood" href={kraam.mapsUrl} target="_blank" rel="noopener noreferrer">{t("Route naar Hoogvliet")}</a><Link className="knop knop-lijn" href={`/${locale}/assortiment`}>{t("Bekijk ons visassortiment")}</Link></div></div>
-      <Image src="/images/editorial/kibbeling-schaapstray.png" alt={t("Bakje krokante kibbeling met ravigotesaus — bij onze viskraam in Voorschoten")} width={1400} height={933} sizes="(max-width: 800px) 100vw, 50vw" fetchPriority="high" className="rounded-2xl" />
+      <figure>
+        <StaticResponsiveImage src={viskarFoto} alt={t("Klanten aan de toonbank van de blauw-witte viskar van Schaap’s")} width={1600} height={900}
+          sizes="(max-width: 800px) 100vw, 50vw" loading="eager" fetchPriority="high" />
+        <figcaption>{t("Onze viskar op de Leidse markt.")}</figcaption>
+      </figure>
     </div></header>
     <Sectie grond="papier"><div className="grid md:grid-cols-[1.2fr_0.8fr] gap-10 items-start">
       <div><p className="kapitaal mb-3">{t("Vis voor uw vrijdagavond")}</p><h2 className="text-3xl mb-5">{t("Van boodschappen naar een goed avondeten")}</h2><div className="lees"><p>{t("Zoekt u een viswinkel in Voorschoten? Onze wekelijkse kraam staat op de parkeerplaats bij Hoogvliet. U hoeft niet vroeg op de dag te komen: tot 17:30 kunt u nog vis uitzoeken voor de avond.")}</p><p>{t("Zalm uit de oven, gebakken kabeljauw of een snelle maaltijd met kibbeling: vertel ons wat u van plan bent. We denken mee over porties, bereiding en wat er vandaag het mooist ligt.")}</p><p>{t("Op andere dagen bent u welkom in onze")} <Link className="underline" href={`/${locale}/viswinkel-leiden`}>{t("viswinkel in Leiden")}</Link>{t(". Bekijk de")} <Link className="underline" href={`/${locale}/bezoek-ons`}>{t("locaties en openingstijden")}</Link> {t("voor alle verkooppunten.")}</p></div></div>
