@@ -6,7 +6,7 @@ import { bestelContact } from "@/lib/bestel-contact";
 import { VarlaksFilm } from "@/components/shared/VarlaksFilm";
 import { StaticResponsiveImage } from "@/components/StaticResponsiveImage";
 import { BEELD } from "@/lib/beeld";
-import { VarlaksDiscountOffer } from "./VarlaksDiscountOffer";
+import { DiscountOfferPopup } from "@/components/shared/DiscountOfferPopup";
 import { VarlaksLocations } from "@/components/shared/VarlaksLocations";
 import { BedieningSlot } from "@/components/catalog/BedieningSlot";
 import { Schema } from "@/components/Schema";
@@ -78,7 +78,7 @@ export default async function VarlaksPage({ params }: Props) {
       <div className={styles.filmIntro}><p className={styles.eyebrow}>VÅRLAKS · Film</p><h2 id="varlaks-film-heading">{c.filmTitle}</h2><p>{c.filmText}</p></div>
       <div className={styles.player}><BedieningSlot fallback={<a className={styles.primary} href="https://vimeo.com/932791452">{c.vimeo} ↗</a>}>
         <VarlaksFilm locale={lang} poster={base + "kweker-met-zalm.webp"}>
-          <VarlaksDiscountOffer locale={lang}/>
+          <DiscountOfferPopup locale={lang} experiment="varlaks" />
         </VarlaksFilm>
       </BedieningSlot></div>
       <figure className={styles.stall}>

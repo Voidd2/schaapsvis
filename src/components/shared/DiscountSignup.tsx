@@ -2,12 +2,11 @@
 
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
-import { recordPopupStage, type PopupMeasurement } from "@/lib/varlaks-popup";
+import { recordPopupStage, type PopupExperiment, type PopupMeasurement } from "@/lib/discount-popup";
 import { discountSignupCopy } from "@/lib/discount-signup";
 
-type Offer = { headline: string; getMeasurement: () => PopupMeasurement | null };
+type Offer = { experiment: PopupExperiment; headline: string; getMeasurement: () => PopupMeasurement | null };
 export function DiscountSignup({ locale, offer }: { locale: string; offer?: Offer }) {
-  const varlaksOffer = Boolean(offer);
   const t = discountSignupCopy(locale);
   const [state, setState] = useState<"idle" | "sending" | "success" | "error" | "limited">("idle");
 
@@ -20,14 +19,15 @@ export function DiscountSignup({ locale, offer }: { locale: string; offer?: Offe
       const response = await fetch("/api/members/newsletter/subscribe", {
         method: "POST", credentials: "same-origin", headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
-          email: form.get("email"), locale, form: varlaksOffer ? "varlaks" : "discounts",
-          ...(varlaksOffer && { consentVersion: "varlaks-weekly-offers-v3", measurement: offer?.getMeasurement() }),
+          email: form.get("email"), locale, form: offer?.experiment ?? "discounts",
+          ...(offer && { consentVersion: offer.experiment === "locations" ? "locations-weekly-offers-v1" : "varlaks-weekly-offers-v3", measurement: offer.getMeasurement() }),
           // The offer's submit button explicitly requests marketing emails.
-          consent: varlaksOffer || form.get("consent") === "on",
+          consent: Boolean(offer) || form.get("consent") === "on",
         }),
       });
       if (response.status === 429) { setState("limited"); return; }
       if (!response.ok || (await response.json()).ok !== true) throw new Error("signup");
+      try { localStorage.setItem("sv-discounts-subscribed", "1"); } catch { /* Storage is optional. */ }
       setState("success");
     } catch { setState("error"); }
   }
@@ -43,15 +43,15 @@ export function DiscountSignup({ locale, offer }: { locale: string; offer?: Offe
           <input required name="email" type="email" autoComplete="email" maxLength={254} onBlur={event => {
             if (!event.currentTarget.value || !event.currentTarget.validity.valid) return;
             const measurement = offer?.getMeasurement();
-            if (measurement) recordPopupStage(measurement, "filled");
+            if (offer && measurement) recordPopupStage(offer.experiment, measurement, "filled");
           }} disabled={state === "sending"} />
         </label>
-        {!varlaksOffer && <label className="discount-consent"><input name="consent" type="checkbox" required disabled={state === "sending"} /><span>{t.consent}</span></label>}
-        <button className="knop knop-navy" type="submit" disabled={state === "sending"}>{state === "sending" ? t.sending : varlaksOffer ? t.offerSubmit : t.submit}</button>
+        {!offer && <label className="discount-consent"><input name="consent" type="checkbox" required disabled={state === "sending"} /><span>{t.consent}</span></label>}
+        <button className="knop knop-navy" type="submit" disabled={state === "sending"}>{state === "sending" ? t.sending : offer ? t.offerSubmit : t.submit}</button>
         {state === "error" || state === "limited" ? <p role="alert">{state === "limited" ? t.limited : t.retry}</p> : null}
       </form>
       <noscript><style>{".discount-signup form{display:none}"}</style><p>{t.js}</p></noscript>
-      <p className="discount-privacy">{varlaksOffer ? t.offerUnsubscribe : t.unsubscribe} <Link href={`/${locale}/privacyverklaring#emailaanbiedingen`}>{varlaksOffer ? t.offerPrivacy : t.privacy}</Link></p>
+      <p className="discount-privacy">{offer ? t.offerUnsubscribe : t.unsubscribe} <Link href={`/${locale}/privacyverklaring#emailaanbiedingen`}>{offer ? t.offerPrivacy : t.privacy}</Link></p>
     </>}
   </div>;
 }

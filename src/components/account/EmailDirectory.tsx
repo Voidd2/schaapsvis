@@ -7,7 +7,7 @@ const copy = {
     intro: "Persoonlijke accountadressen en adressen uit het kortingsformulier. De status geeft aan wie kortingsmails mag ontvangen.",
     address: "E-mailadres",
     offers: "Kortingsmails",
-    campaign: "VÅRLAKS-pop-up",
+    campaign: "VÅRLAKS-pop-up", locations: "Pop-up locatiepagina",
     subscribed: "Toestemming gegeven",
     pending: "Wacht op bevestiging",
     unsubscribed: "Afgemeld",
@@ -24,7 +24,7 @@ const copy = {
     intro: "Personal account and discount signup addresses. The status shows who can receive marketing emails.",
     address: "Email address",
     offers: "Marketing emails",
-    campaign: "VÅRLAKS pop-up",
+    campaign: "VÅRLAKS pop-up", locations: "Locations popup",
     subscribed: "Opted in",
     pending: "Awaiting confirmation",
     unsubscribed: "Unsubscribed",
@@ -41,7 +41,7 @@ const copy = {
     intro: "Private Kontoadressen und Anmeldungen für Rabatte. Der Status zeigt, wer Angebotsmails erhalten darf.",
     address: "E-Mail-Adresse",
     offers: "Angebotsmails",
-    campaign: "VÅRLAKS-Pop-up",
+    campaign: "VÅRLAKS-Pop-up", locations: "Popup der Standortseite",
     subscribed: "Eingewilligt",
     pending: "Bestätigung ausstehend",
     unsubscribed: "Abgemeldet",
@@ -120,6 +120,7 @@ export function EmailDirectory({ locale }: { locale: string }) {
                 <td className="break-all py-3 pr-3">{row.email}</td>
                 <td className="py-3">{t[statusLabel[row.marketing]]}
                   {row.source === "varlaks-popup" && <small className="block">{t.campaign}</small>}
+                  {row.source === "locations-popup" && <small className="block">{t.locations}</small>}
                   {row.marketing_at && <time className="block text-sm" dateTime={row.marketing_at}>{new Intl.DateTimeFormat(locale, {dateStyle:"medium", timeStyle:"short", timeZone:"Europe/Amsterdam"}).format(new Date(row.marketing_at))}</time>}
                 </td>
               </tr>

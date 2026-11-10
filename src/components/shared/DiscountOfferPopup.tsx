@@ -1,28 +1,27 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { allowsPopupAnalytics, popupHeadline, recordPopupStage, type PopupMeasurement, type PopupVariant } from "@/lib/varlaks-popup";
+import { allowsPopupAnalytics, popupHeadline, recordPopupStage, type PopupExperiment, type PopupMeasurement, type PopupVariant } from "@/lib/discount-popup";
 import { X } from "lucide-react";
 import { DiscountSignup } from "@/components/shared/DiscountSignup";
 import { discountSignupCopy } from "@/lib/discount-signup";
-import styles from "./campaign.module.css";
+import styles from "./DiscountOfferPopup.module.css";
 
-const shownKey = "sv-varlaks-discount-shown";
-let shownOnThisPage = false;
+const shownInSession = new Set<PopupExperiment>();
 
-function alreadyShown() {
-  if (shownOnThisPage) return true;
-  try { return localStorage.getItem(shownKey) === "1"; }
+function alreadyShown(experiment: PopupExperiment) {
+  if (shownInSession.has(experiment)) return true;
+  try { return localStorage.getItem(`sv-${experiment}-discount-shown`) === "1" || localStorage.getItem("sv-discounts-subscribed") === "1"; }
   catch { return false; }
 }
 
-export function VarlaksDiscountOffer({ locale }: { locale: string }) {
+export function DiscountOfferPopup({ locale, experiment }: { locale: string; experiment: PopupExperiment }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [variant, setVariant] = useState<PopupVariant>("a");
   const measurement = useRef<PopupMeasurement | null>(null);
-  const headline = popupHeadline(locale, variant);
+  const headline = popupHeadline(experiment, locale, variant);
   function getMeasurement(): PopupMeasurement | null {
     if (!open || !allowsPopupAnalytics() || document.hidden || !dialog.current?.open) return null;
     return measurement.current ??= { consent: true, id: crypto.randomUUID(), variant };
@@ -31,16 +30,16 @@ export function VarlaksDiscountOffer({ locale }: { locale: string }) {
 
   useEffect(() => {
     const element = dialog.current;
-    if (!element || alreadyShown()) return;
+    if (!element || alreadyShown(experiment)) return;
     let timer: number;
 
     function schedule() {
       window.clearTimeout(timer);
-      if (document.hidden || alreadyShown()) return;
+      if (document.hidden || alreadyShown(experiment)) return;
       // Give people arriving via the film link a chance to start watching.
       // Starting the embedded film unmounts this offer and cancels its timer.
       timer = window.setTimeout(() => {
-        if (!element?.isConnected || document.hidden || alreadyShown()) return;
+        if (!element?.isConnected || document.hidden || alreadyShown(experiment)) return;
         if (document.fullscreenElement || document.querySelector("dialog[open]") ||
             document.activeElement?.matches("input, textarea, select, #film button")) {
           schedule();
@@ -48,9 +47,9 @@ export function VarlaksDiscountOffer({ locale }: { locale: string }) {
         }
         setVariant(crypto.getRandomValues(new Uint8Array(1))[0] < 128 ? "a" : "b");
         setOpen(true);
-        shownOnThisPage = true;
-        try { localStorage.setItem(shownKey, "1"); } catch { /* Still once during this page session. */ }
-      }, location.hash === "#film" ? 10000 : 5000);
+        shownInSession.add(experiment);
+        try { localStorage.setItem(`sv-${experiment}-discount-shown`, "1"); } catch { /* Still once during this page session. */ }
+      }, experiment === "locations" ? 8000 : location.hash === "#film" ? 10000 : 5000);
     }
 
     schedule();
@@ -61,7 +60,7 @@ export function VarlaksDiscountOffer({ locale }: { locale: string }) {
       document.removeEventListener("visibilitychange", schedule);
       window.removeEventListener("hashchange", schedule);
     };
-  }, []);
+  }, [experiment]);
 
   useEffect(() => {
     const element = dialog.current;
@@ -69,7 +68,7 @@ export function VarlaksDiscountOffer({ locale }: { locale: string }) {
     const recordShown = () => {
       if (!document.hidden && element.getBoundingClientRect().height > 0 && allowsPopupAnalytics()) {
         measurement.current ??= { consent: true, id: crypto.randomUUID(), variant };
-        recordPopupStage(measurement.current, "shown");
+        recordPopupStage(experiment, measurement.current, "shown");
       }
     };
     recordShown();
@@ -106,7 +105,7 @@ export function VarlaksDiscountOffer({ locale }: { locale: string }) {
         previousFocus.focus({ preventScroll: true });
       }
     };
-  }, [open, variant]);
+  }, [open, variant, experiment]);
 
   return <dialog ref={dialog} open={open} data-expanded={expanded || undefined} className={styles.offerDialog} aria-label={headline}>
     <button type="button" className={styles.offerClose} aria-label={copy.closeOffer} onClick={() => setOpen(false)}>
@@ -116,6 +115,6 @@ export function VarlaksDiscountOffer({ locale }: { locale: string }) {
       setExpanded(true);
       requestAnimationFrame(() => dialog.current?.querySelector("input")?.focus({ preventScroll: true }));
     }}>{headline} <span aria-hidden="true">→</span></button>
-    <DiscountSignup locale={locale} offer={{ headline, getMeasurement }} />
+    <DiscountSignup locale={locale} offer={{ experiment, headline, getMeasurement }} />
   </dialog>;
 }

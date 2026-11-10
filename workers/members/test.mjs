@@ -855,9 +855,32 @@ assert.equal((await expiredPassCheck.json()).valid, false, "the expired former p
     sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run("ab-shop@example.test");
     const { popupReport } = await import("./src/popup-experiment.mjs");
     const today = new Date().toISOString().slice(0,10);
-    const rows = await popupReport(env.DB,today,today);
+    const rows = await popupReport(env.DB,today,today,"varlaks");
     assert.deepEqual({...rows[0]}, {variant:"a",shown:1,filled:1,acquired:0});
     assert.deepEqual({...rows[1]}, {variant:"b",shown:1,filled:1,acquired:1});
+    // The location test must stay independent, even if a UUID is reused across pages.
+    const locationsStage = step => call("/api/members/analytics/locations-popup", {
+      method:"POST", headers:{"CF-Connecting-IP":"203.0.113.181"}, body:{stage:step, measurement},
+    });
+    const locationEmail = "locations-offer@example.test";
+    const locationSignup = (extra = {}) => call("/api/members/newsletter/subscribe", {
+      method:"POST", headers:{"CF-Connecting-IP":"203.0.113.182"},
+      body:{form:"locations", email:locationEmail, consent:true, consentVersion:"locations-weekly-offers-v1", measurement, ...extra},
+    });
+    assert.equal((await locationSignup({consentVersion:"varlaks-weekly-offers-v3"})).status,400);
+    assert.equal((await locationSignup({consent:false})).status,400);
+    assert.equal((await locationsStage("shown")).status,202);
+    assert.equal((await locationsStage("filled")).status,202);
+    assert.equal((await locationSignup()).status,202);
+    assert.equal((await locationSignup({measurement:again})).status,202);
+    assert.equal((await locationSignup({email:"locations-private@example.test",measurement:null})).status,202);
+    assert.deepEqual({...sqlite.prepare("SELECT status, source, consent_text_version FROM newsletter_subscriptions WHERE email=?").get(locationEmail)},
+      {status:"subscribed",source:"locations-popup",consent_text_version:"locations-weekly-offers-v1"});
+    assert.deepEqual(await popupReport(env.DB,today,today,"varlaks"),rows);
+    assert.deepEqual((await popupReport(env.DB,today,today,"locations")).map(row=>({...row})),[
+      {variant:"a",shown:1,filled:1,acquired:0}, {variant:"b",shown:1,filled:1,acquired:1},
+    ]);
+    sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email IN (?,?)").run(locationEmail,"locations-private@example.test");
     const noConsent={...measurement,id:crypto.randomUUID(),consent:false};
     assert.equal((await signup("popup-private@example.test",noConsent)).status,202);
     assert.equal(sqlite.prepare("SELECT 1 FROM varlaks_popup_v1 WHERE exposure=?").get(noConsent.id),undefined);

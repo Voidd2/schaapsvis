@@ -5,6 +5,8 @@ import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
 import { StaticResponsiveImage } from "@/components/StaticResponsiveImage";
+import { DiscountOfferPopup } from "@/components/shared/DiscountOfferPopup";
+import { BedieningSlot } from "@/components/catalog/BedieningSlot";
 import { Kruimels } from "@/components/ui/Sectie";
 import { PaginaSlot } from "@/components/ui/PaginaKop";
 import { BEELD } from "@/lib/beeld";
@@ -56,6 +58,7 @@ export default async function BezoekOnsPage({ params }: Props) {
 
   return <>
     <JsonLd locale={locale} />
+    <BedieningSlot><DiscountOfferPopup locale={locale} experiment="locations" /></BedieningSlot>
     <Schema data={kruimelSchema(locale, breadcrumbs)} />
     <section id="locatie-voorschoten" className={styles.hero} aria-labelledby="visit-title">
       <div className={`section-wrap ${styles.heroGrid}`}>
