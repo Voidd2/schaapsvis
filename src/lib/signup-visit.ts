@@ -83,12 +83,16 @@ export function recordVisitPage(pathname:string) {
   } catch { /* Optional measurements must not interrupt browsing. */ }
 }
 
-export function visitAtSignup() {
+export function visitAtSignup(atAccountRegistration = false) {
   try {
     const grant = readGrant();
-    if (!grant || !signupVisitPath(window.location.pathname)) return;
-    recordVisitPage(window.location.pathname);
-    return {token:grant.token,captureId:crypto.randomUUID(),version:visitConsentVersion,pages:trailFor(grant).pages};
+    if (!grant) return;
+    if (signupVisitPath(window.location.pathname)) recordVisitPage(window.location.pathname);
+    else if (!atAccountRegistration) return;
+    // Account and student forms remain private. Only use previously shared shop pages.
+    const pages = trailFor(grant).pages;
+    if (!pages.length) return;
+    return {token:grant.token,captureId:crypto.randomUUID(),version:visitConsentVersion,pages};
   } catch { return; }
 }
 

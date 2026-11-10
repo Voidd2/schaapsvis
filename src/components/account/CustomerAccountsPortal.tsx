@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { CustomerDetails } from "./CustomerDetails";
 
 type Customer = {
   id: string;
@@ -20,6 +21,7 @@ export function CustomerAccountsPortal({ locale }: { locale: string }) {
   const [cursor, setCursor] = useState<string | null>(null);
   const [hasMore, setHasMore] = useState(false);
   const [search, setSearch] = useState("");
+  const [selected,setSelected] = useState<Customer|null>(null);
   const [loading, setLoading] = useState(true);
   const [busyId, setBusyId] = useState("");
   const [error, setError] = useState("");
@@ -27,7 +29,7 @@ export function CustomerAccountsPortal({ locale }: { locale: string }) {
 
   const copy = locale === "en"
     ? {
-        title: "Customer accounts", intro: "View customer account status and marketing consent. Passwords, school email addresses and student proof are not shown here.",
+        title: "Customer accounts", intro: "Select a name or email address to see the email addresses, student applications and any shared visit details.",
         name: "Name", email: "Email", verified: "Email verified", notVerified: "Not verified", created: "Account created",
         account: "Account", active: "Active", locked: "Locked", newsletter: "Email offers", pass: "Student discount",
         subscribed: "Subscribed", pending: "Confirmation pending", unsubscribed: "Unsubscribed", noSubscription: "Not subscribed",
@@ -40,7 +42,7 @@ export function CustomerAccountsPortal({ locale }: { locale: string }) {
       }
     : locale === "de"
       ? {
-          title: "Kundenkonten", intro: "Kontostatus und Einwilligung für E-Mail-Angebote ansehen. Passwörter, Schul-E-Mail-Adressen und Studentennachweise werden hier nicht angezeigt.",
+          title: "Kundenkonten", intro: "Wählen Sie einen Namen oder eine E-Mail-Adresse, um Adressen, Anträge und gegebenenfalls freigegebene Besuchsdaten zu sehen.",
           name: "Name", email: "E-Mail", verified: "E-Mail bestätigt", notVerified: "Nicht bestätigt", created: "Konto erstellt",
           account: "Konto", active: "Aktiv", locked: "Gesperrt", newsletter: "E-Mail-Angebote", pass: "Studentenrabatt",
           subscribed: "Abonniert", pending: "Bestätigung ausstehend", unsubscribed: "Abgemeldet", noSubscription: "Nicht angemeldet",
@@ -52,7 +54,7 @@ export function CustomerAccountsPortal({ locale }: { locale: string }) {
           confirmRestore: "Dieses Kundenkonto wiederherstellen? Der Kunde muss sich erneut anmelden.", yes: "Ja", no: "Nein",
         }
       : {
-          title: "Klantaccounts", intro: "Bekijk accountstatus en toestemming voor e-maildeals. Wachtwoorden, schoolmailadressen en studentbewijs zijn hier niet zichtbaar.",
+          title: "Klantaccounts", intro: "Klik op een naam of e-mailadres voor de privémail, schoolmail, studentenaanvragen en eventuele gedeelde bezoekgegevens.",
           name: "Naam", email: "E-mail", verified: "E-mail bevestigd", notVerified: "Niet bevestigd", created: "Account aangemaakt",
           account: "Account", active: "Actief", locked: "Geblokkeerd", newsletter: "E-maildeals", pass: "Studentenkorting",
           subscribed: "Aangemeld", pending: "Bevestiging open", unsubscribed: "Afgemeld", noSubscription: "Niet aangemeld",
@@ -135,8 +137,7 @@ export function CustomerAccountsPortal({ locale }: { locale: string }) {
 
   const newsletterLabel = (status: string) => status === "subscribed" ? copy.subscribed
     : status === "pending" ? copy.pending : status === "unsubscribed" ? copy.unsubscribed : copy.noSubscription;
-  const passLabel = (status: string | null) => status === "approved" ? copy.approved
-    : status === "rejected" ? copy.rejected : copy.noPass;
+  const passLabel = (status: string | null) => status === "active" ? copy.active : copy.noPass;
 
   return <main className="section-wrap max-w-6xl py-12 md:py-16">
     <p className="kapitaal">Schaap’s Vishandel · intern</p>
@@ -154,8 +155,8 @@ export function CustomerAccountsPortal({ locale }: { locale: string }) {
           {[copy.name, copy.email, copy.verified, copy.created, copy.account, copy.newsletter, copy.pass, ""].map((heading, index) => <th className="px-4 py-3 font-semibold" key={heading || index}>{heading}</th>)}
         </tr></thead>
         <tbody>{visible.map((customer) => <tr className="border-t border-sky-100 align-top" key={customer.id}>
-          <th className="px-4 py-4 font-semibold">{customer.full_name}</th>
-          <td className="px-4 py-4">{customer.email}</td>
+          <th scope="row" className="px-4 py-4 font-semibold"><button type="button" aria-haspopup="dialog" className="text-left text-sky-800 underline" onClick={()=>setSelected(customer)}>{customer.full_name}</button></th>
+          <td className="px-4 py-4"><button type="button" aria-haspopup="dialog" className="text-left text-sky-800 underline" onClick={()=>setSelected(customer)}>{customer.email}</button></td>
           <td className="px-4 py-4">{customer.email_verified ? copy.verified : copy.notVerified}</td>
           <td className="px-4 py-4">{new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(new Date(customer.created_at))}</td>
           <td className="px-4 py-4">{customer.account_status === "active" ? copy.active : copy.locked}</td>
@@ -165,6 +166,7 @@ export function CustomerAccountsPortal({ locale }: { locale: string }) {
         </tr>)}</tbody>
       </table>
     </div>}
+    {selected && <CustomerDetails key={selected.id} id={selected.id} name={selected.full_name} locale={locale} onClose={()=>setSelected(null)} />}
     {hasMore && <button className="mt-5 rounded-lg bg-sky-700 px-5 py-3 font-semibold text-white disabled:opacity-60" disabled={loading || !cursor} onClick={() => { setLoading(true); void loadPage(cursor, true); }} type="button">{loading ? copy.loading : copy.more}</button>}
   </main>;
 }
