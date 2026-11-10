@@ -1,0 +1,59 @@
+.hero {
+  background: #eff7f7;
+  color: var(--navy-dark);
+  padding-block: clamp(1.25rem, 3vw, 3rem);
+}
+.heroGrid, .locationsGrid { display: grid; gap: clamp(1.25rem, 3.5vw, 4rem); }
+.hero h1 {
+  max-width: 18ch;
+  margin-block: .45rem .75rem;
+  font-size: clamp(2.22rem, 4.4vw, 4.6rem);
+  line-height: 1.04;
+  text-wrap: balance;
+}
+.intro { max-width: 51ch; line-height: 1.55; }
+.address { display: grid; gap: .16rem; margin-block: 1.1rem; padding-left: .85rem; border-left: 3px solid #2b746f; }
+.address strong { font-size: 1.17rem; font-variant-numeric: tabular-nums; }
+.actions, .moreLinks { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem .8rem; }
+.moreLinks { margin-top: .35rem; gap: 0 1.1rem; }
+.textLink { display: inline-flex; align-items: center; min-height: 44px; color: var(--navy); font-weight: 600; text-decoration: underline; text-underline-offset: .2em; }
+.stallPhoto { margin: 0; }
+.stallPhoto img { display: block; width: 100%; height: auto; border-radius: .6rem; }
+.stallPhoto figcaption { margin-top: .45rem; font-size: .94rem; color: #334d59; }
+.schedule { padding-block: 1rem; color: white; background: #11354b; }
+.scheduleGrid, .schedule ul { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 2.25rem; }
+.schedule h2 { font-size: 1.22rem; margin: 0; color: white; }
+.schedule ul { list-style: none; margin: 0; padding: 0; }
+.schedule a { display: grid; align-content: center; min-height: 44px; color: white; }
+.schedule a span { text-decoration: underline; text-underline-offset: .2em; font-size: .94rem; }
+.locations { padding-block: clamp(2rem, 4vw, 4rem); }
+.locations h2 { margin-bottom: 1.15rem; font-size: clamp(1.85rem, 3vw, 2.8rem); line-height: 1.12; }
+.locationsGrid { gap: 1.25rem; }
+.card { padding: clamp(1.1rem, 2vw, 2rem); border: 1px solid #c9dce4; border-radius: .65rem; }
+.card h3 { font-size: 1.5rem; margin-bottom: .25rem; }
+.shopHeading { display: flex; justify-content: space-between; align-items: center; gap: .75rem; }
+.storePhoto { width: clamp(5rem, 11vw, 10rem); height: auto; border-radius: .35rem; }
+.hours { margin: .85rem 0; }
+.hours div { display: flex; justify-content: space-between; border-top: 1px solid #d9e5e9; padding-block: .22rem; gap: .7rem; }
+.hours dd { margin: 0; font-variant-numeric: tabular-nums; }
+.market { border-top: 1px solid #d9e5e9; margin-top: 1rem; padding-top: 1rem; }
+.market h4 { font-size: 1.13rem; margin: 0 0 .25rem; }
+.hero, .locations, .card, .market { scroll-margin-top: 8rem; }
+@media (max-width: 799px) {
+  .heroGrid { gap: .5rem; }
+  .heroGrid > div { display: contents; }
+  .heroGrid nav { margin-bottom: .15rem; }
+  .heroGrid h1 { margin: 0 0 .25rem; }
+  .stallPhoto { order: 1; }
+  .stallPhoto img { max-height: 15rem; object-fit: cover; }
+  .address { order: 2; margin: .25rem 0; }
+  .heroGrid .actions { order: 3; }
+  .heroGrid .actions a { padding-inline: .85rem; }
+  .intro { order: 4; margin-top: .4rem; }
+  .moreLinks { order: 5; margin-top: 0; }
+}
+@media (min-width: 800px) {
+  .heroGrid { grid-template-columns: 1.02fr 1fr; align-items: center; }
+  .locationsGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hero, .locations, .card, .market { scroll-margin-top: 10rem; }
+}
