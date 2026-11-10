@@ -876,11 +876,29 @@ async function register(request, env) {
   const passwordDigest = await passwordHash(password, env.AUTH_PEPPER);
   const schoolTaken = await env.DB.prepare(`SELECT 1 AS present FROM users WHERE school_email = ? AND account_status != 'deleted' LIMIT 1`).bind(schoolEmail).first();
   if (schoolTaken) return json({ ok: true, message: copy.registrationGeneric }, 202);
+  const statements = [
+    env.DB.prepare(`INSERT INTO users (id, email, school_email, full_name, first_name, last_name, password_hash, created_at, updated_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT DO NOTHING`)
+      .bind(userId, email, schoolEmail, name, firstName || null, lastName || null, passwordDigest, created, created),
+  ];
+  if (body.marketingConsent === true) {
+    const version = body.marketingConsentVersion === "student-weekly-v1" ? "student-weekly-v1" : "student-personal-offers-2026-11";
+    // Only a newly inserted account has this ID. A repeated signup cannot grant consent on another user's behalf.
+    statements.push(
+      env.DB.prepare(`INSERT INTO consent_events (id, user_id, consent_type, granted, text_version, source, recorded_at)
+        SELECT ?, id, 'marketing_email', 1, ?, 'account-registration', ? FROM users WHERE id=?`)
+        .bind(crypto.randomUUID(), version, created, userId),
+      env.DB.prepare(`INSERT INTO newsletter_subscriptions (email, user_id, status, consent_text_version, consented_at, source, created_at, updated_at)
+        SELECT email, id, 'pending', ?, ?, 'account-registration', ?, ? FROM users WHERE id=?
+        ON CONFLICT(email) DO UPDATE SET user_id=excluded.user_id, status='pending', consent_text_version=excluded.consent_text_version,
+          consented_at=excluded.consented_at, confirmed_at=NULL, unsubscribed_at=NULL, source=excluded.source, updated_at=excluded.updated_at
+        WHERE newsletter_subscriptions.status!='subscribed'`).bind(version, created, created, created, userId),
+    );
+  }
   let inserted;
   try {
-    inserted = await env.DB.prepare(`INSERT INTO users (id, email, school_email, full_name, first_name, last_name, password_hash, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(email) DO NOTHING`)
-      .bind(userId, email, schoolEmail, name, firstName || null, lastName || null, passwordDigest, created, created).run();
-  } catch { return json({ ok: true, message: copy.registrationGeneric }, 202); }
+    [inserted] = await env.DB.batch(statements);
+  } catch { return json({ error: "registration_unavailable" }, 503); }
   if (!inserted.meta?.changes) return json({ ok: true, message: copy.registrationGeneric }, 202);
 
   const personalCode = await issueVerificationCode(env, { userId, email, purpose: "verify_email" });
@@ -892,21 +910,6 @@ async function register(request, env) {
     return json({ error: "verification_email_failed", message: copy.verificationFailed }, 503);
   }
 
-  if (body.marketingConsent === true) {
-    try {
-      const version = "student-personal-offers-2026-11";
-      const consentAt = nowIso();
-      await env.DB.batch([
-        env.DB.prepare(`INSERT INTO consent_events (id, user_id, consent_type, granted, text_version, source, recorded_at) VALUES (?, ?, 'marketing_email', 1, ?, 'account-registration', ?)`)
-          .bind(crypto.randomUUID(), userId, version, consentAt),
-        env.DB.prepare(`INSERT INTO newsletter_subscriptions (email, user_id, status, consent_text_version, consented_at, source, created_at, updated_at) VALUES (?, ?, 'pending', ?, ?, 'account-registration', ?, ?) ON CONFLICT(email) DO UPDATE SET user_id=excluded.user_id, status='pending', consent_text_version=excluded.consent_text_version, consented_at=excluded.consented_at, confirmed_at=NULL, unsubscribed_at=NULL, source=excluded.source, updated_at=excluded.updated_at WHERE newsletter_subscriptions.status!='subscribed'`)
-          .bind(email, userId, version, consentAt, consentAt, consentAt),
-      ]);
-    } catch {
-      // Optional marketing consent must never make a successfully created
-      // account look like a failed registration.
-    }
-  }
   return json({ ok: true, message: copy.registrationGeneric }, 202);
 }
 
@@ -2310,6 +2313,7 @@ async function processNewsletterDeliveries(env) {
   const now = new Date();
   const nowText = now.toISOString();
   const staleBefore = new Date(now.getTime() - 10 * 60 * 1000).toISOString();
+  const weekAgo = new Date(now.getTime() - 7 * 86_400_000).toISOString();
   const pending = await env.DB.prepare(`
     SELECT d.campaign_id, d.email, d.attempts, c.subject, c.body_text, c.audience
     FROM newsletter_deliveries d JOIN newsletter_campaigns c ON c.id=d.campaign_id
@@ -2321,12 +2325,20 @@ async function processNewsletterDeliveries(env) {
   `).bind(nowText, staleBefore).all();
 
   for (const delivery of pending.results || []) {
-    const claimed = await env.DB.prepare(`UPDATE newsletter_deliveries SET status='sending', attempts=attempts+1, claimed_at=? WHERE campaign_id=? AND email=? AND attempts < 5 AND ((status='pending' AND next_attempt_at <= ?) OR (status='sending' AND claimed_at <= ?)) RETURNING attempts`)
-      .bind(nowText, delivery.campaign_id, delivery.email, nowText, staleBefore).first();
+    // Serialize campaign sends to each address so simultaneous campaigns respect the weekly limit.
+    const claimed = await env.DB.prepare(`UPDATE newsletter_deliveries SET status='sending', attempts=attempts+1, claimed_at=?
+      WHERE campaign_id=? AND email=? AND attempts < 5 AND ((status='pending' AND next_attempt_at <= ?) OR (status='sending' AND claimed_at <= ?))
+      AND NOT EXISTS (SELECT 1 FROM newsletter_deliveries other WHERE other.email=newsletter_deliveries.email
+        AND other.campaign_id!=newsletter_deliveries.campaign_id AND other.status='sending' AND other.claimed_at>?)
+      RETURNING attempts`).bind(nowText, delivery.campaign_id, delivery.email, nowText, staleBefore, staleBefore).first();
     if (!claimed) continue;
     try {
-      const subscription = await env.DB.prepare(`SELECT status FROM newsletter_subscriptions WHERE email = ?`).bind(delivery.email).first();
-      if (subscription?.status !== "subscribed") {
+      const subscription = await env.DB.prepare(`SELECT n.status,
+        (n.source='account-registration' OR EXISTS (SELECT 1 FROM student_passes p WHERE p.user_id=n.user_id)
+          OR EXISTS (SELECT 1 FROM consent_events e WHERE e.user_id=n.user_id AND e.text_version='student-weekly-v1' AND e.granted=1))
+        AND EXISTS (SELECT 1 FROM newsletter_deliveries d WHERE d.email=n.email AND d.status='sent' AND d.sent_at>?) AS weekly_limit_reached
+        FROM newsletter_subscriptions n WHERE n.email=?`).bind(weekAgo, delivery.email).first();
+      if (subscription?.status !== "subscribed" || subscription.weekly_limit_reached) {
         await env.DB.prepare(`UPDATE newsletter_deliveries SET status='suppressed', claimed_at=NULL WHERE campaign_id=? AND email=?`)
           .bind(delivery.campaign_id, delivery.email).run();
         continue;
@@ -2359,7 +2371,7 @@ async function processNewsletterDeliveries(env) {
         { listUnsubscribeUrl: oneClickUrl },
       );
       await env.DB.batch([
-        env.DB.prepare(`UPDATE newsletter_deliveries SET status='sent', sent_at=?, claimed_at=NULL, last_error=NULL WHERE campaign_id=? AND email=?`).bind(nowText, delivery.campaign_id, delivery.email),
+        env.DB.prepare(`UPDATE newsletter_deliveries SET status='sent', sent_at=?, claimed_at=NULL, last_error=NULL WHERE campaign_id=? AND email=?`).bind(nowIso(), delivery.campaign_id, delivery.email),
         env.DB.prepare(`UPDATE newsletter_campaigns SET sent_count=sent_count+1 WHERE id=?`).bind(delivery.campaign_id),
       ]);
     } catch (error) {

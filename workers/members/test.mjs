@@ -366,11 +366,18 @@ assert.equal(registeredName.last_name, "Student");
 assert.equal(registeredName.full_name, "Test Student", "registration stores first and last name separately while retaining the display name");
 assert.equal(sqlite.prepare("SELECT COUNT(*) AS count FROM newsletter_subscriptions WHERE email='student@example.test'").get().count, 0, "account creation does not subscribe to marketing by default");
 const consentedMailOffset = sentEmails.length;
-const consentedRegistration = await call("/api/members/register", {
+const registerWithOffers = () => call("/api/members/register", {
   method: "POST", headers: { "CF-Connecting-IP": "198.51.100.60" },
-  body: { email: "consented@example.test", schoolEmail: "consented@university.example.test", name: "Consented Student", password: "correct horse battery", locale: "en", marketingConsent: true },
+  body: { email: "consented@example.test", schoolEmail: "consented@university.example.test", name: "Consented Student", password: "correct horse battery", locale: "en", marketingConsent: true, marketingConsentVersion: "student-weekly-v1" },
 });
+simulateApplicationCommitFailure = true;
+assert.equal((await registerWithOffers()).status, 503);
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS n FROM users WHERE email='consented@example.test'").get().n, 0);
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS n FROM newsletter_subscriptions WHERE email='consented@example.test'").get().n, 0);
+assert.equal(sentEmails.length, consentedMailOffset);
+const consentedRegistration = await registerWithOffers();
 assert.equal(consentedRegistration.status, 202);
+assert.equal(sqlite.prepare("SELECT consent_text_version FROM newsletter_subscriptions WHERE email='consented@example.test'").get().consent_text_version, "student-weekly-v1");
 const consentedRegistrationResponse = await consentedRegistration.json();
 assert.equal(sentEmails.length, consentedMailOffset + 2, "student opt-in sends only the two necessary verification codes");
 assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email='consented@example.test'").get().status, "pending", "student opt-in activates only after the personal email is verified");
@@ -964,6 +971,23 @@ env.NEWSLETTER_DELIVERY_ENABLED = "on";
 await memberWorker.scheduled({}, env, { waitUntil(promise) { studentJob = promise; } });
 await studentJob;
 assert.equal(sqlite.prepare("SELECT status FROM newsletter_deliveries WHERE campaign_id=?").get(studentCampaignId).status, "sent");
+{
+  // General offers and student-only offers share one weekly allowance.
+  const lastMail = sqlite.prepare("UPDATE newsletter_deliveries SET sent_at=? WHERE campaign_id=? AND email='student@example.test'");
+  const queueForStudent = async () => {
+    const id=crypto.randomUUID();
+    sqlite.prepare(`INSERT INTO newsletter_campaigns(id,subject,body_text,audience,created_by,created_at,status)
+      SELECT ?, 'Weekly cap', 'Test', 'all', created_by, created_at, 'queued' FROM newsletter_campaigns WHERE id=?`).run(id, studentCampaignId);
+    sqlite.prepare("INSERT INTO newsletter_deliveries(campaign_id,email,next_attempt_at) VALUES (?,'student@example.test',?)").run(id,new Date().toISOString());
+    await memberWorker.scheduled({}, env, {waitUntil(promise) {studentJob=promise;}});
+    await studentJob;
+    return sqlite.prepare("SELECT status FROM newsletter_deliveries WHERE campaign_id=?").get(id).status;
+  };
+  assert.equal(await queueForStudent(), "suppressed");
+  lastMail.run(new Date(Date.now()-8*86400000).toISOString(),studentCampaignId);
+  assert.equal(await queueForStudent(), "sent");
+  sqlite.prepare("UPDATE newsletter_deliveries SET sent_at='2000-01-01T00:00:00.000Z' WHERE email='student@example.test' AND status='sent'").run();
+}
 const expiryDraft = await call("/api/members/admin/newsletter-campaigns", {
   method: "POST", cookie: sessionCookie, body: { subject: "Verlopen studentenactie", body: "Dit mag niet aankomen.", audience: "students" },
 });

@@ -63,7 +63,7 @@ const translations = {
     file: "Bestand (PDF, JPG of PNG, maximaal 8 MB)",
     proofConsent: "Ik geef toestemming om dit bewijs voor mijn aanvraag te beoordelen. Na de beoordeling wordt het verwijderd.",
     badFile: "Kies een geldig PDF-, JPG- of PNG-bestand van maximaal 8 MB en geef toestemming voor de beoordeling.",
-    optionalOffers: "Ja, ik wil kortingsbonnen per e-mail op mijn privé-e-mailadres ontvangen. Dit is vrijwillig. Afmelden kan in elke kortingsmail.",
+    optionalOffers: "Ja, Schaap’s mag mij af en toe kortingsbonnen sturen op mijn privé-e-mailadres, maximaal één keer per week. Ik kan me in elke mail afmelden.",
     send: "Verder",
     logout: "Uitloggen",
     reset: "Wachtwoord vergeten? Stuur een resetlink",
@@ -135,7 +135,7 @@ const translations = {
     file: "File (PDF, JPG or PNG, up to 8 MB)",
     proofConsent: "I agree to this document being reviewed for my application. It will be deleted after review.",
     badFile: "Choose a valid PDF, JPG or PNG up to 8 MB and consent to review.",
-    optionalOffers: "Yes, send discount vouchers to my personal email. This is optional. I can unsubscribe in any offers email.",
+    optionalOffers: "Yes, Schaap’s may email me occasional discount vouchers at my personal address, at most once a week. I can unsubscribe in any email.",
     send: "Continue",
     logout: "Log out",
     reset: "Forgot your password? Send a reset link",
@@ -201,7 +201,7 @@ const translations = {
     file: "Datei (PDF, JPG oder PNG, maximal 8 MB)",
     proofConsent: "Ich stimme der Prüfung dieses Nachweises für meinen Antrag zu. Nach der Prüfung wird er gelöscht.",
     badFile: "Wählen Sie eine gültige PDF-, JPG- oder PNG-Datei bis 8 MB und stimmen Sie der Prüfung zu.",
-    optionalOffers: "Ja, ich möchte Rabattgutscheine an meine private E-Mail-Adresse erhalten. Dies ist freiwillig. Ich kann mich in jeder Angebotsmail abmelden.",
+    optionalOffers: "Ja, Schaap’s darf mir gelegentlich Rabattgutscheine an meine private E-Mail-Adresse schicken, höchstens einmal pro Woche. Ich kann mich in jeder E-Mail abmelden.",
     send: "Weiter",
     logout: "Abmelden",
     reset: "Passwort vergessen? Link zum Zurücksetzen senden",
@@ -328,6 +328,7 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
         body.proofMethod = documentRoute ? "document" : "school-email";
         body.schoolEmail = fields.get("schoolEmail");
         body.marketingConsent = fields.get("marketingConsent") === "on";
+        if (body.marketingConsent) body.marketingConsentVersion = "student-weekly-v1";
       }
       const response = await fetch(`/api/members/${mode}`, {
         method: "POST",
