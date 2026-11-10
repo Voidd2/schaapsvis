@@ -2064,6 +2064,21 @@ async function verifyPass(request, env) {
   return json({ valid: true, name: pass.full_name, displayCode: pass.display_code, expiresAt: pass.expires_at, discountPercent: 10, eligibleProducts: ["assortiment"] });
 }
 
+// The footer is shared by public pages and private account routes. Only keep
+// known public paths; never persist query strings, fragments or account links.
+function footerSignupSource(request) {
+  try {
+    const ref = new URL(request.headers.get("Referer"));
+    if (ref.origin !== new URL(request.url).origin) return "footer";
+    const path = ref.pathname.replace(/\/$/, "");
+    if (/^\/(?:nl|en|de)(?:\/(?:aanbiedingen|assortiment|beeldverantwoording|bezoek-ons|bezorgen|biologische-vis|blog|contact|frischer-fisch-leiden|marktkraam-leiden|ons-verhaal|privacyverklaring|recepten|studentenkorting|too-good-to-go|varlaks|viskalender|viswinkel-leiden|viswinkel-voorschoten))?$/.test(path)
+        || /^\/(?:nl|en|de)\/(?:assortiment|blog|recepten|bezorgen)\/[a-z0-9][a-z0-9-]{0,99}$/.test(path)) {
+      return `footer:${path}`;
+    }
+  } catch { /* A browser may omit the referrer. */ }
+  return "footer";
+}
+
 async function subscribeNewsletter(request, env) {
   if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
   if (!env.DB || !env.AUTH_PEPPER || !env.SITE_ORIGIN) return json({ error: "newsletter_unavailable" }, 503);
@@ -2092,7 +2107,8 @@ async function subscribeNewsletter(request, env) {
   const at = nowIso();
   const user = await sessionUser(request, env);
   const version = popupOffer ? offerVersion : discountsForm ? "discount-vouchers-2026-11" : NEWSLETTER_CONSENT_VERSION;
-  const source = popupOffer ? `${body.form}-popup` : discountsForm ? "discount-form" : user ? "account" : "newsletter-form";
+  const source = popupOffer ? `${body.form}-popup` : discountsForm ? "discount-form" :
+    body.form === "footer" ? footerSignupSource(request) : user ? "account" : "newsletter-form";
   const userId = user?.email === email ? user.id : null;
   const statements = [
     env.DB.prepare(`INSERT INTO newsletter_subscriptions
