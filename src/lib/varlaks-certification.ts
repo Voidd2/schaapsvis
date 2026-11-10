@@ -2,14 +2,14 @@
 export const varlaksCertification = {
   "nl": {
     "q": "Welk keurmerk heeft VÅRLAKS-zalm?",
-    "a": "Onze VÅRLAKS-zalm draagt het ASC-keurmerk voor verantwoorde viskweek. De familiekwekers in Noord-Noorwegen meten regelmatig de waterkwaliteit. Onafhankelijke controleurs beoordelen ook hoe de kwekers voor de gezondheid en het welzijn van de zalm zorgen."
+    "a": "Onze VÅRLAKS-zalm draagt het ASC-keurmerk voor verantwoorde viskweek. Op de kwekerij in Noord-Noorwegen wordt de waterkwaliteit regelmatig gemeten. Onafhankelijke controleurs beoordelen ook de gezondheid van de zalm en de werkomstandigheden op de kwekerij."
   },
   "en": {
     "q": "Which certification does VÅRLAKS salmon have?",
-    "a": "Our VÅRLAKS salmon is ASC certified for responsible fish farming. The family farms in northern Norway regularly test the water quality. Independent auditors also check how the farmers care for the health and welfare of their salmon."
+    "a": "Our VÅRLAKS salmon is ASC certified for responsible fish farming. The farm in northern Norway regularly tests its water quality. Independent auditors also check salmon health and working conditions on the farm."
   },
   "de": {
     "q": "Welches Siegel trägt VÅRLAKS-Lachs?",
-    "a": "Unser VÅRLAKS-Lachs trägt das ASC-Siegel für verantwortungsvolle Fischzucht. Die Familienbetriebe in Nordnorwegen prüfen regelmäßig die Wasserqualität. Unabhängige Prüfer kontrollieren auch, wie die Züchter für die Gesundheit und das Wohl der Lachse sorgen."
+    "a": "Unser VÅRLAKS-Lachs trägt das ASC-Siegel für verantwortungsvolle Fischzucht. Der Familienbetrieb in Nordnorwegen prüft regelmäßig die Wasserqualität. Unabhängige Prüfer kontrollieren auch die Gesundheit der Lachse und die Arbeitsbedingungen im Betrieb."
   }
 } as const;

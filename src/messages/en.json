@@ -88,7 +88,7 @@
   "varlaksHighlight": {
     "title": "VÅRLAKS — ASC-certified salmon from Norway",
     "bullet1": "No antibiotics, no GMO, no hormones",
-    "bullet2": "Family farms above the Arctic Circle in Norway",
+    "bullet2": "A family farm above the Arctic Circle in Norway",
     "bullet3": "Fully traceable from egg to fillet",
     "link": "Read more about Varlaks →"
   },
@@ -124,13 +124,13 @@
   },
   "varlaksPage": {
     "heroTitle": "VÅRLAKS salmon from northern Norway",
-    "heroSub": "VÅRLAKS states that its salmon is ASC-certified. Ask us about the current origin, certification and availability of the salmon at our counter.",
-    "story": "We already had a good range. But when we discovered Varlaks, we knew this was something different. Not a large company, not an anonymous farm — but small-scale family farms above the Arctic Circle in Norway, where the salmon simply have the space to grow. Slowly, in clean water, without shortcuts. You can taste it. The texture is firmer, the flavour purer. No additives to mask the taste — because there simply aren't any. We are proud to offer this at Schaap's Vis. Come and taste the difference.",
+    "heroSub": "Our VÅRLAKS salmon is ASC certified and comes from northern Norway, above the Arctic Circle.",
+    "story": "Our VÅRLAKS salmon comes from a family farm in northern Norway, where the salmon grow in the cold water of the fjord.",
     "featuresTitle": "What makes Varlaks special?",
     "f1title": "Raised above the Arctic Circle",
     "f1text": "The salmon grow in the ice-cold, oxygen-rich waters of northern Norway. The current of cold mountain water keeps the water pure and clean — ideal conditions for salmon that grow slowly and naturally.",
-    "f2title": "Family farms, not industry",
-    "f2text": "Varlaks works exclusively with carefully selected family businesses. Farms are visited personally each year to guarantee quality and sustainability. From egg to end product — fully traceable.",
+    "f2title": "A family farm in northern Norway",
+    "f2text": "Our salmon can be traced from egg to fillet, right back to the farm above the Arctic Circle.",
     "f3title": "No antibiotics, no GMO, no hormones",
     "f3text": "Thanks to low stocking density and the pure environment, antibiotics simply have no place in this farming concept. The salmon grow with natural feed, plenty of space and no chemical additives.",
     "f4title": "Fully traceable",
@@ -148,8 +148,8 @@
         "d": "Above the Arctic Circle near Bodø. Cold, clean, oxygen-rich water — one of the few places where salmon is allowed to grow slowly."
       },
       {
-        "t": "Wenberg and Edelfarm",
-        "d": "Two family businesses: Wenberg Fiskeoppdrett in Fauske and Edelfarm in Saltdal. Few fish per pen, not large-scale industry."
+        "t": "The farm",
+        "d": "A family farm raises our salmon in the cold fjord waters of northern Norway."
       },
       {
         "t": "ASC certified",
@@ -196,7 +196,7 @@
     "feitHerkomstLabel": "Origin",
     "feitHerkomstWaarde": "Skjerstadfjorden, Norway",
     "feitKeurmerkLabel": "Certification",
-    "feitKeurmerkWaarde": "ASC (according to VÅRLAKS)",
+    "feitKeurmerkWaarde": "ASC",
     "feitTeKoopLabel": "Available at",
     "feitTeKoopWaarde": "Shop, market, Voorschoten",
     "bestelKnop": "Order Varlaks",
@@ -264,7 +264,7 @@
     "cert4": "Labels belong to specific products",
     "cert4desc": "A label says something about a production method or fishery. BIO, ASC and MSC are different standards.",
     "varlaksTitle": "VÅRLAKS — salmon with ASC certification",
-    "varlaksText": "Our VÅRLAKS salmon comes from family farms in northern Norway and is ASC certified for responsible fish farming.",
+    "varlaksText": "Our VÅRLAKS salmon comes from a family farm in northern Norway and carries the ASC label for responsible fish farming.",
     "varlaksLink": "Read the full Varlaks story →",
     "listTitle": "Our sustainable choices",
     "listSub": "Our range includes VÅRLAKS salmon with ASC and Dutch brown shrimp with MSC. We hope to develop responsible farming for more fish species.",
@@ -340,7 +340,7 @@
     "assortimentAantalEen": "{aantal} kind",
     "biologischLabel": "Where it comes from",
     "biologischKop": "Proud of our VÅRLAKS salmon",
-    "biologischTekst": "Our VÅRLAKS salmon comes from ASC-certified farms in northern Norway. Our Dutch brown shrimp carry the MSC label for sustainable wild fishing. Ask us at the counter where your fish comes from.",
+    "biologischTekst": "Our VÅRLAKS salmon from northern Norway carries the ASC label for responsible fish farming. Our Dutch brown shrimp from the North Sea carry the MSC label for sustainable wild fishing.",
     "biologischLink": "About sourcing",
     "varlaksLink": "About Varlaks salmon",
     "reviewLabel": "Google",

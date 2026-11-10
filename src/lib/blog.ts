@@ -213,7 +213,7 @@ const bestaandePosts: BlogPost[] = [
       {
         kop: "Waarom Varlaks anders is",
         alineas: [
-          "Onze Varlaks zalm groeit op in het Skjerstadfjord in Noord-Noorwegen, bij twee familiebedrijven: Wenberg Fiskeoppdrett en Edelfarm. Lage dichtheid, ijskoud helder water, geen antibiotica, geen GMO. De kleur komt van Panaferd-AX — natuurlijk astaxanthine, hetzelfde stofje dat wilde zalm uit zijn voedsel haalt, niet de synthetische variant.",
+          "Onze Varlaks zalm groeit op in het Skjerstadfjord in Noord-Noorwegen, bij een familiebedrijf. Lage dichtheid, ijskoud helder water, geen antibiotica, geen GMO. De kleur komt van Panaferd-AX — natuurlijk astaxanthine, hetzelfde stofje dat wilde zalm uit zijn voedsel haalt, niet de synthetische variant.",
           "Zeeluis wordt er niet met chemicaliën bestreden maar met een laser: camera's spotten de luis en een laserpuls schakelt hem uit, zonder de vis te raken. Het klinkt als science fiction, het is gewoon Noorse nuchterheid.",
           "Het resultaat proeft u: steviger van structuur, puurder van smaak. Kom langs en vergelijk zelf.",
         ],
@@ -428,7 +428,7 @@ const bestaandePosts: BlogPost[] = [
       {
         kop: "VÅRLAKS-zalm en ASC",
         alineas: [
-          "VÅRLAKS vermeldt dat zijn zalm ASC-gecertificeerd is en afkomstig is van familiebedrijven in Noord-Noorwegen. Bij de ASC-controle tellen de waterkwaliteit en het welzijn van de zalm mee.",
+          "Onze VÅRLAKS-zalm komt van een ASC-gecertificeerd familiebedrijf in Noord-Noorwegen. Bij de ASC-controle tellen de waterkwaliteit en het welzijn van de zalm mee.",
           "Wij noemen deze zalm daarom niet biologisch zonder bewijs dat de specifieke levering ook een biologische certificering draagt. Vraag ons naar de actuele herkomst en beschikbaarheid aan de toonbank.",
         ],
       },
@@ -479,7 +479,7 @@ const bestaandePosts: BlogPost[] = [
       {
         kop: "ASC — verantwoorde kweek",
         alineas: [
-          "ASC, de Aquaculture Stewardship Council, is een keurmerk voor verantwoorde aquacultuur. De kwekerijen waar onze VÅRLAKS-zalm opgroeit, worden onafhankelijk gecontroleerd op onder meer waterkwaliteit en viswelzijn.",
+          "ASC, de Aquaculture Stewardship Council, is een keurmerk voor verantwoorde aquacultuur. De kwekerij waar onze VÅRLAKS-zalm opgroeit, wordt onafhankelijk gecontroleerd op onder meer waterkwaliteit en viswelzijn.",
         ],
       },
       {
