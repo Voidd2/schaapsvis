@@ -41,8 +41,8 @@ export default async function VarlaksPage({ params }: Props) {
   const questions = [[q.certification.q,q.certification.a], [q.preparationQuestion,q.preparationAnswer], [q.orderQuestion,q.orderAnswer]];
   return <div className={styles.page}>
     <Schema data={kruimelSchema(lang, [{ naam: BEDRIJF.naamKort, pad: "/" }, { naam: "VÅRLAKS", pad: "/varlaks" }])} />
-    <Schema data={{ "@context":"https://schema.org", "@type":"Product", name:c.heading,
-      brand:{ "@type":"Brand", name:"VÅRLAKS" }, description:c.intro,
+    <Schema data={{ "@context":"https://schema.org", "@type":"WebPage", name:c.title,
+      inLanguage:lang, description:c.intro,
       image:BEDRIJF.domein + base + "zalmfilet-1200.webp", url:`${BEDRIJF.domein}/${lang}/varlaks` }} />
     <header className={styles.hero}>
       <div className={styles.heroCopy}>

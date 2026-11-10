@@ -8,7 +8,7 @@ import { productCopy, productNote } from "@/lib/product-copy";
 import { productAvailability } from "@/lib/product-availability";
 import { counterGuides } from "@/lib/blog-counter-guides";
 import { localizeBlog } from "@/lib/blog-localization";
-import { getPrijs, formatPrijs } from "@/lib/prijzen";
+import { getPrijs, formatPrijs, priceQuantity } from "@/lib/prijzen";
 import { Schema } from "@/components/Schema";
 import { Kruimels, Sectie } from "@/components/ui/Sectie";
 import { PaginaSlot } from "@/components/ui/PaginaKop";
@@ -88,7 +88,34 @@ export default async function ProductDetailPage({params}: Props) {
   const reading=counterGuides.filter(p=>p.gerelateerdeLinks?.some(link=>link.href==="/assortiment/"+slug)).map(p=>localizeBlog(p,lang));
   const nutritionRows = voeding ? [[c.energy, `${voeding.kcal} kcal / ${voeding.kj} kJ`], [c.fat, `${voeding.vet} g`], [c.saturated, `${voeding.verzadigd} g`], [c.carbs, `${voeding.koolhydraten} g`], [c.sugars, `${voeding.suikers} g`], [c.protein, `${voeding.eiwit} g`], [c.salt, `${voeding.zout} g`]] : [];
   // Informational catalogue: no unverified stock status or online-sale offers.
-  const productSchema = {"@context":"https://schema.org", "@type":"Product", name:product.naam, description:product.desc, category, brand:{"@type":"Brand", name:BEDRIJF.naam}, image:photo ? `${BEDRIJF.domein}${photo.src}` : undefined, url:`${BEDRIJF.domein}/${lang}/assortiment/${slug}`};
+  const url = `${BEDRIJF.domein}/${lang}/assortiment/${slug}`;
+  const quantity = prijs && priceQuantity(prijs, lang);
+  const pageDetails = {
+    "@context": "https://schema.org",
+    name: product.naam,
+    description: product.desc,
+    image: photo ? BEDRIJF.domein + photo.src : undefined,
+    url,
+  };
+  const productSchema = prijs && !prijs.vanaf && quantity && !availability.unavailable ? {
+    ...pageDetails,
+    "@type": "Product",
+    category,
+    offers: {
+      "@type": "Offer",
+      name: formatPrijs(prijs, lang),
+      price: prijs.euro,
+      priceCurrency: "EUR",
+      priceSpecification: {
+        "@type": "UnitPriceSpecification",
+        price: prijs.euro,
+        priceCurrency: "EUR",
+        referenceQuantity: { "@type": "QuantitativeValue", ...quantity },
+      },
+      seller: { "@type": "Organization", name: BEDRIJF.naam },
+      url,
+    },
+  } : { ...pageDetails, "@type": "WebPage", inLanguage: lang };
   return <>
     <Schema data={[productSchema, kruimelSchema(lang, [{naam:BEDRIJF.naamKort,pad:"/"},{naam:c.range,pad:"/assortiment"},{naam:product.naam,pad:`/assortiment/${slug}`}])]} />
     <Sectie grond="papier" id="product-overzicht"><div className="product-shell mx-auto max-w-6xl">
