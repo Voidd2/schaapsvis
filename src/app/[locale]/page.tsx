@@ -74,7 +74,7 @@ export default async function HomePage({
               <span className="home-hero-dot" aria-hidden />
               <p className="kapitaal">{h("eyebrow")}</p>
             </div>
-            <h1 className="text-[2.3rem] md:text-[3.4rem] leading-[1.08] mb-6">{locale === "nl" ? "Schaap’s Vishandel in Leiden" : locale === "de" ? "Schaap’s Fischgeschäft in Leiden" : "Schaap’s fish shop in Leiden"}</h1>
+            <h1 className="text-[2.3rem] md:text-[3.4rem] leading-[1.08] mb-6">{locale === "nl" ? "Schaap’s Vishandel in Leiden en Voorschoten" : locale === "de" ? "Schaap’s Fischgeschäft in Leiden und Voorschoten" : "Schaap’s fish shop in Leiden and Voorschoten"}</h1>
             <p
               className="text-[1.1rem] leading-relaxed max-w-xl mb-8"
               style={{ color: "var(--charcoal)" }}

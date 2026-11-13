@@ -10,7 +10,7 @@ import { BedieningSlot } from "@/components/catalog/BedieningSlot";
 import { Kruimels } from "@/components/ui/Sectie";
 import { PaginaSlot } from "@/components/ui/PaginaKop";
 import { BEELD } from "@/lib/beeld";
-import { ADRES_REGEL, BEDRIJF, whatsappLink } from "@/lib/bedrijf";
+import { ADRES_REGEL, BEDRIJF } from "@/lib/bedrijf";
 import { bestelContact } from "@/lib/bestel-contact";
 import { localLocations } from "@/lib/local-pages-copy";
 import { openingRows, scheduledCounters } from "@/lib/openingHours";
@@ -60,32 +60,57 @@ export default async function BezoekOnsPage({ params }: Props) {
     <JsonLd locale={locale} />
     <BedieningSlot><DiscountOfferPopup locale={locale} experiment="locations" /></BedieningSlot>
     <Schema data={kruimelSchema(locale, breadcrumbs)} />
-    <section id="locatie-voorschoten" className={styles.hero} aria-labelledby="visit-title">
-      <div className={`section-wrap ${styles.heroGrid}`}>
-        <div>
+    <section id="locatieoverzicht" className={styles.hero} aria-labelledby="visit-title">
+      <div className="section-wrap">
+        <div className={styles.heading}>
           <Kruimels items={[{ naam: BEDRIJF.naamKort, href: `/${locale}` }, { naam: nav("locaties") }]} />
           <p className="kapitaal">{t("brand")}</p>
           <h1 id="visit-title">{t("title")}</h1>
           <p className={styles.intro}>{t("sub")}</p>
-          <div className={styles.address}>
-            {openingRows("voorschoten", locale).map(row => <strong key={row.day}>{row.label} · {row.time}</strong>)}
-            <span>{stall.straat}, {stall.postcode} {stall.plaats}</span>
-          </div>
-          <div className={styles.actions}>
-            <a className="knop knop-navy" href={mapsRoute.href}>{t("route")} ↗</a>
-            <a className="knop knop-lijn" href={whatsappLink(t("message"))}>{t("contact")}</a>
-          </div>
-          <div className={styles.moreLinks}>
-            <a className={styles.textLink} href="#locatieoverzicht">{t("other")} ↓</a>
-            <Link className={styles.textLink} href={`/${locale}/viswinkel-voorschoten`}>{t("details")} →</Link>
-          </div>
+          <nav className={styles.locationNav} aria-label={nav("locaties")}>
+            <a href="#locatie-winkel" className="knop knop-lijn">{t("shopLink")} ↓</a>
+            <a href="#locatie-voorschoten" className="knop knop-lijn">{t("stallLink")} ↓</a>
+          </nav>
         </div>
-        <figure className={styles.stallPhoto}>
-          <StaticResponsiveImage src={BEELD.historieNu.bestand} alt={t("viskarAlt")}
-            width={1600} height={900} loading="eager" fetchPriority="high"
-            sizes="(max-width: 799px) 100vw, (max-width: 1720px) 48vw, 790px" />
-          <figcaption>{t("viskarBijschrift")}</figcaption>
-        </figure>
+        <div className={styles.locationsGrid}>
+          <article id="locatie-winkel" className={styles.locationCard} aria-labelledby="shop-title">
+            <StaticResponsiveImage src={storefront.bestand} alt={shopAlt} width={1320} height={984}
+              sizes="(max-width: 799px) 100vw, (max-width: 1720px) 48vw, 790px"
+              className={styles.locationPhoto} loading="eager" fetchPriority="high" />
+            <div className={styles.cardBody}>
+              <h2 id="shop-title">{t("shop")}</h2>
+              <p>{ADRES_REGEL}</p>
+              <dl className={styles.hours}>
+                {openingRows("winkel", locale).map(row =>
+                  <div key={row.day}><dt>{row.label}</dt><dd>{row.time}</dd></div>
+                )}
+                <div><dt>{places("zoMa")}</dt><dd>{places("gesloten")}</dd></div>
+              </dl>
+              <div className={styles.actions}>
+                <a href={shop.mapsUrl} className="knop knop-navy">{t("shopRoute")} ↗</a>
+                <a href={`tel:${BEDRIJF.telefoon.e164}`} className={styles.textLink}>{t("call")}</a>
+              </div>
+            </div>
+          </article>
+          <article id="locatie-voorschoten" className={styles.locationCard} aria-labelledby="stall-title">
+            <StaticResponsiveImage src={BEELD.historieNu.bestand} alt={t("viskarAlt")}
+              width={1600} height={900} loading="eager"
+              sizes="(max-width: 799px) 100vw, (max-width: 1720px) 48vw, 790px"
+              className={styles.locationPhoto} />
+            <div className={styles.cardBody}>
+              <h2 id="stall-title">{t("stall")}</h2>
+              <p>{stall.straat}, {stall.postcode} {stall.plaats}</p>
+              <p className={styles.stallIntro}>{t("stallIntro")}</p>
+              <div className={styles.address}>
+                {openingRows("voorschoten", locale).map(row => <strong key={row.day}>{row.label} · {row.time}</strong>)}
+              </div>
+              <div className={styles.actions}>
+                <a className="knop knop-navy" href={mapsRoute.href}>{t("route")} ↗</a>
+              </div>
+              <Link className={styles.textLink} href={`/${locale}/viswinkel-voorschoten`}>{t("details")} →</Link>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -100,37 +125,17 @@ export default async function BezoekOnsPage({ params }: Props) {
       </div>
     </section>
 
-    <section id="locatieoverzicht" className={`section-wrap ${styles.locations}`} aria-labelledby="visit-leiden">
-      <h2 id="visit-leiden">{t("leiden")}</h2>
+    <section className={`section-wrap ${styles.locations}`} aria-labelledby="visit-markets">
+      <h2 id="visit-markets">{t("market")}</h2>
       <div className={styles.locationsGrid}>
-        <article id="locatie-winkel" className={styles.card}>
-          <div className={styles.shopHeading}>
-            <div><h3>{t("shop")}</h3><p>{ADRES_REGEL}</p></div>
-            <StaticResponsiveImage src={storefront.bestand} alt={shopAlt} width={1320} height={984}
-              sizes="(max-width: 799px) 80px, 160px" className={styles.storePhoto} />
-          </div>
-          <dl className={styles.hours}>
-            {openingRows("winkel", locale).map(row =>
-              <div key={row.day}><dt>{row.label}</dt><dd>{row.time}</dd></div>
-            )}
-            <div><dt>{places("zoMa")}</dt><dd>{places("gesloten")}</dd></div>
-          </dl>
-          <div className={styles.actions}>
-            <a href={shop.mapsUrl} className="knop knop-navy">{t("directions")} ↗</a>
-            <a href={`tel:${BEDRIJF.telefoon.e164}`} className={styles.textLink}>{t("call")}</a>
-          </div>
-        </article>
-        <article className={styles.card}>
-          <h3>{t("market")}</h3>
-          {markets.map(({ id, point, day }) => {
-            const hours = marketHours.find(row => row.day === day)!;
-            return <div id={`locatie-${id}`} key={id} className={styles.market}>
-              <h4>{hours.label} · {hours.time}</h4>
-              <p>{point.adres}, {point.plaats}</p>
-              <a className={styles.textLink} href={point.mapsUrl} aria-label={`${t("directions")} · ${point.adres}`}>{t("directions")} ↗</a>
-            </div>;
-          })}
-        </article>
+        {markets.map(({ id, point, day }) => {
+          const hours = marketHours.find(row => row.day === day)!;
+          return <article id={`locatie-${id}`} key={id} className={styles.card}>
+            <h3>{hours.label} · {hours.time}</h3>
+            <p>{point.adres}, {point.plaats}</p>
+            <a className={styles.textLink} href={point.mapsUrl} aria-label={`${t("directions")} · ${point.adres}`}>{t("directions")} ↗</a>
+          </article>;
+        })}
       </div>
     </section>
 
