@@ -69,10 +69,11 @@ export default async function VarlaksPage({ params }: Props) {
         <p>{c.story}</p>
         <ul>{c.proof.map(reason => <li key={reason}>{reason}</li>)}</ul>
         <p>{c.originClosing}</p>
-        <SupplierCertificates locale={lang}/>
         <a className={styles.inlineLink} href="https://varlaks.no/#why-choose-varlaks" target="_blank" rel="noopener noreferrer">{c.source} ↗</a>
       </div>
     </section>
+
+    <SupplierCertificates locale={lang}/>
 
     <section id="film" className={styles.filmSection} aria-labelledby="varlaks-film-heading">
       <div className={styles.filmIntro}><p className={styles.eyebrow}>VÅRLAKS · Film</p><h2 id="varlaks-film-heading">{c.filmTitle}</h2><p>{c.filmText}</p></div>

@@ -1,4 +1,4 @@
-import styles from "./campaign.module.css";
+import styles from "./certificates.module.css";
 
 const supplierIndex = "https://norwegianseafood.com/certification/";
 const ascDocuments = [
@@ -16,59 +16,101 @@ const ascDocuments = [
 
 const copy = {
   nl: {
-    title: "Certificaten van de leverancier",
-    intro: "VÅRLAKS is een zalmmerk van Norwegian Seafood Group. De groep publiceert de volgende documenten over de herkomst en verwerking van vis.",
-    asc: "Met deze ketencertificaten tonen de leveranciers aan hoe zij ASC-gecertificeerde vis gescheiden houden en de herkomst kunnen terugvolgen.",
+    eyebrow: "Van kwekerij tot verwerking",
+    title: "Wat betekenen de keurmerken?",
+    intro: "Onze VÅRLAKS-zalm draagt het ASC-keurmerk. Dit vertellen de keurmerken en certificaten van onze leverancier Norwegian Seafood Group over de kweek, herkomst en verwerking.",
+    ascTitle: "Verantwoorde viskweek",
+    asc: "ASC stelt eisen aan de waterkwaliteit, de gezondheid van de zalm en de werkomstandigheden op de kwekerij. De ASC-ketencertificaten van onze leverancier borgen de traceerbaarheid van de gecertificeerde vis.",
+    ascAlt: "Een VÅRLAKS-medewerker bij de zalmkwekerij op het water",
     register: "Controleer een certificaatnummer bij ASC",
-    gap: "Het ketencertificaat van Norwegian Seafood Europe B.V. in Urk omvat onder meer de opslag, verwerking en verpakking van Atlantische zalm.",
-    gapLink: "Bekijk de GLOBALG.A.P.-certificaten",
-    ifs: "Het IFS Food-certificaat voor de locatie in Urk gaat over voedselveiligheid bij onder meer het fileren, portioneren en verpakken van zalm.",
-    ifsLink: "Bekijk het IFS Food-certificaat",
+    gapTitle: "Traceerbare herkomst",
+    gap: "Onze leverancier is GLOBALG.A.P. Chain of Custody-gecertificeerd. De herkomst van gecertificeerde vis wordt vastgelegd. Bij opslag, verwerking en verpakking blijft deze vis herkenbaar en gescheiden van niet-gecertificeerde vis.",
+    gapAlt: "Zalmfilets verpakt in een herkenbare VÅRLAKS-transportbak",
+    gapLink: "GLOBALG.A.P. Chain of Custody (PDF)",
+    ifsTitle: "Voedselveiligheid",
+    ifs: "Onze leverancier heeft het IFS Food-certificaat voor de verwerking van zalm. Dit betekent controles op hygiëne, voedselveiligheid en kwaliteit bij het fileren, portioneren en verpakken.",
+    ifsAlt: "Zalmfilets op de controleband in de verwerking, foto van VÅRLAKS",
+    ifsLink: "IFS Food (PDF)",
+    documents: "Bekijk de certificaten",
+    credit: "Foto’s: VÅRLAKS",
     index: "Alle certificaten bij Norwegian Seafood Group",
   },
   en: {
-    title: "Supplier certificates",
-    intro: "VÅRLAKS is a salmon brand of Norwegian Seafood Group. The group publishes the following documents on seafood sourcing and processing.",
-    asc: "These chain of custody certificates cover how the suppliers keep ASC-certified seafood separate and trace it back to its source.",
+    eyebrow: "From farming to processing",
+    title: "What do the certifications mean?",
+    intro: "Our VÅRLAKS salmon is ASC certified. Here is what the certifications held by our supplier Norwegian Seafood Group tell you about farming, origin and processing.",
+    ascTitle: "Responsible fish farming",
+    asc: "ASC sets requirements for water quality, salmon health and working conditions on the farm. Our supplier’s ASC Chain of Custody certificates safeguard the traceability of certified seafood.",
+    ascAlt: "A VÅRLAKS employee at the salmon farm on the water",
     register: "Check a certificate number with ASC",
-    gap: "The chain of custody certificate for Norwegian Seafood Europe B.V. in Urk covers the storage, processing and packing of Atlantic salmon.",
-    gapLink: "View the GLOBALG.A.P. certificates",
-    ifs: "The IFS Food certificate for the Urk site covers food safety in activities including filleting, portioning and packing salmon.",
-    ifsLink: "View the IFS Food certificate",
+    gapTitle: "Traceable origin",
+    gap: "Our supplier is GLOBALG.A.P. Chain of Custody certified. The origin of certified seafood is recorded. During storage, processing and packing, it remains identifiable and separate from non-certified seafood.",
+    gapAlt: "Salmon fillets packed in a clearly marked VÅRLAKS transport box",
+    gapLink: "GLOBALG.A.P. Chain of Custody (PDF)",
+    ifsTitle: "Food safety",
+    ifs: "Our supplier holds IFS Food certification for salmon processing. This covers checks on hygiene, food safety and quality during filleting, portioning and packing.",
+    ifsAlt: "Salmon fillets on the inspection line during processing, photo by VÅRLAKS",
+    ifsLink: "IFS Food (PDF)",
+    documents: "View the certificates",
+    credit: "Photos: VÅRLAKS",
     index: "All certificates at Norwegian Seafood Group",
   },
   de: {
-    title: "Zertifikate des Lieferanten",
-    intro: "VÅRLAKS ist eine Lachsmarke der Norwegian Seafood Group. Die Gruppe veröffentlicht die folgenden Dokumente zur Herkunft und Verarbeitung von Fisch.",
-    asc: "Diese Lieferkettenzertifikate belegen, wie die Lieferanten ASC-zertifizierten Fisch getrennt halten und bis zu seiner Herkunft zurückverfolgen können.",
+    eyebrow: "Von der Zucht bis zur Verarbeitung",
+    title: "Was bedeuten die Zertifizierungen?",
+    intro: "Unser VÅRLAKS-Lachs trägt das ASC-Siegel. Das sagen die Zertifizierungen unseres Lieferanten Norwegian Seafood Group über Zucht, Herkunft und Verarbeitung aus.",
+    ascTitle: "Verantwortungsvolle Fischzucht",
+    asc: "ASC stellt Anforderungen an die Wasserqualität, die Gesundheit der Lachse und die Arbeitsbedingungen in der Zucht. Die ASC-Lieferkettenzertifikate unseres Lieferanten sichern die Rückverfolgbarkeit von zertifiziertem Fisch.",
+    ascAlt: "Ein VÅRLAKS-Mitarbeiter an der Lachszucht auf dem Wasser",
     register: "Zertifikatsnummer bei ASC prüfen",
-    gap: "Das Lieferkettenzertifikat für Norwegian Seafood Europe B.V. in Urk umfasst unter anderem die Lagerung, Verarbeitung und Verpackung von Atlantischem Lachs.",
-    gapLink: "GLOBALG.A.P.-Zertifikate ansehen",
-    ifs: "Das IFS-Food-Zertifikat für den Standort Urk betrifft die Lebensmittelsicherheit unter anderem beim Filetieren, Portionieren und Verpacken von Lachs.",
-    ifsLink: "IFS-Food-Zertifikat ansehen",
+    gapTitle: "Rückverfolgbare Herkunft",
+    gap: "Unser Lieferant ist GLOBALG.A.P. Chain of Custody-zertifiziert. Die Herkunft von zertifiziertem Fisch wird dokumentiert. Bei Lagerung, Verarbeitung und Verpackung bleibt er eindeutig erkennbar und von nicht zertifiziertem Fisch getrennt.",
+    gapAlt: "Lachsfilets in einer deutlich gekennzeichneten VÅRLAKS-Transportbox",
+    gapLink: "GLOBALG.A.P. Chain of Custody (PDF)",
+    ifsTitle: "Lebensmittelsicherheit",
+    ifs: "Unser Lieferant besitzt das IFS-Food-Zertifikat für die Lachsverarbeitung. Dazu gehören Kontrollen von Hygiene, Lebensmittelsicherheit und Qualität beim Filetieren, Portionieren und Verpacken.",
+    ifsAlt: "Lachsfilets auf dem Kontrollband in der Verarbeitung, Foto von VÅRLAKS",
+    ifsLink: "IFS Food (PDF)",
+    documents: "Zertifikate ansehen",
+    credit: "Fotos: VÅRLAKS",
     index: "Alle Zertifikate der Norwegian Seafood Group",
   },
 };
 
 export function SupplierCertificates({ locale }: { locale: keyof typeof copy }) {
   const t = copy[locale];
-  return <details className={styles.certificates} id="certificaten">
-    <summary>{t.title}</summary>
-    <p>{t.intro}</p>
-    <dl>
-      <dt>ASC Chain of Custody</dt>
-      <dd>
-        <p>{t.asc}</p>
-        {ascDocuments.map(doc => <a key={doc.code} href={doc.href}>
-          {doc.holder} · {doc.code} (PDF)
-        </a>)}
-        <a href="https://asc-aqua.org/find-a-supplier/">{t.register}</a>
-      </dd>
-      <dt>GLOBALG.A.P. Chain of Custody</dt>
-      <dd><p>{t.gap}</p><a href={supplierIndex + "#global-g-a-p"}>{t.gapLink}</a></dd>
-      <dt>IFS Food</dt>
-      <dd><p>{t.ifs}</p><a href={supplierIndex + "#ifs-food"}>{t.ifsLink}</a></dd>
-    </dl>
-    <a href={supplierIndex}>{t.index}</a>
-  </details>;
+  const cards = [
+    { key: "asc", label: "ASC", title: t.ascTitle, text: t.asc, image: "from-egg-to-plate-2.jpg.webp", alt: t.ascAlt, width: 600, height: 600 },
+    { key: "gap", label: "GLOBALG.A.P. Chain of Custody", title: t.gapTitle, text: t.gap, image: "from-egg-to-plate-3.jpg.webp", alt: t.gapAlt, width: 600, height: 600 },
+    { key: "ifs", label: "IFS Food", title: t.ifsTitle, text: t.ifs, image: "kwaliteitscontrole.webp", alt: t.ifsAlt, width: 1920, height: 1310 },
+  ];
+  return <section className={styles.certificates} id="certificaten" aria-labelledby="varlaks-certificates-heading">
+    <header className={styles.intro}>
+      <p className={styles.eyebrow}>{t.eyebrow}</p>
+      <h2 id="varlaks-certificates-heading">{t.title}</h2>
+      <p>{t.intro}</p>
+    </header>
+    <div className={styles.grid}>
+      {cards.map(card => <article className={styles.card} key={card.key} aria-labelledby={`certificate-${card.key}`}>
+        {/* Local supplier photos; no runtime image service needed on Cloudflare. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={`/images/varlaks/${card.image}`} alt={card.alt} width={card.width} height={card.height} loading="lazy" decoding="async" />
+        <div className={styles.body}>
+          <p className={styles.label}>{card.label}</p>
+          <h3 id={`certificate-${card.key}`}>{card.title}</h3>
+          <p>{card.text}</p>
+          <details>
+            <summary>{t.documents}</summary>
+            {card.key === "asc" ? <>
+              {ascDocuments.map(doc => <a key={doc.code} href={doc.href}>{doc.holder} · {doc.code} (PDF)</a>)}
+              <a href="https://asc-aqua.org/find-a-supplier/">{t.register}</a>
+            </> : card.key === "gap" ?
+              <a href="https://norwegianseafood.com/wp-content/uploads/2026/08/Norwegian-Seafood-Europe-B.V.-GLOBALG.A.P.-26-27-2.pdf">{t.gapLink}</a> :
+              <a href="https://norwegianseafood.com/wp-content/uploads/2025/12/SGS_IFS-Food-V8_NL17819942732_EN.pdf">{t.ifsLink}</a>}
+          </details>
+        </div>
+      </article>)}
+    </div>
+    <footer className={styles.footer}><span>{t.credit}</span><a href={supplierIndex}>{t.index} ↗</a></footer>
+  </section>;
 }

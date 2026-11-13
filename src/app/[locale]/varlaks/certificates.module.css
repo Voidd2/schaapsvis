@@ -1,0 +1,29 @@
+.certificates { background:#eef6f3; padding:clamp(32px,5vw,72px) var(--rail,var(--gutter)); scroll-margin-top:10.5rem; }
+.intro { max-width:60rem; margin-bottom:clamp(24px,3vw,40px); }
+.intro > p:last-child { max-width:72ch; }
+.eyebrow { color:#176a67; font-weight:700; font-size:.76rem; letter-spacing:.13em; text-transform:uppercase; margin-bottom:1rem; }
+.grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(20px,2.2vw,36px); }
+.card { min-width:0; display:flex; flex-direction:column; background:white; border:1px solid #c6dcd4; border-radius:.6rem; overflow:hidden; }
+.card > img { display:block; width:100%; height:auto; aspect-ratio:16/10; object-fit:cover; }
+.card:first-child > img { object-position:center 20%; }
+.card:last-child > img { object-position:center bottom; }
+.body { padding:clamp(20px,2vw,30px); display:flex; flex-direction:column; flex:1; }
+.body .label { margin:0 0 .6rem; color:#176a67; font-weight:700; font-size:.9rem; line-height:1.4; }
+.body h3 { font:700 clamp(1.6rem,2.2vw,2.2rem)/1.15 var(--font-display); letter-spacing:-.025em; color:var(--sea); margin:0 0 .85rem; overflow-wrap:anywhere; }
+.body > p:last-of-type { margin:0 0 1.25rem; }
+.body details { margin-top:auto; border-top:1px solid #dbe5e2; }
+.body summary { padding:.85rem 0; min-height:44px; cursor:pointer; font-weight:650; text-underline-offset:.2em; }
+.body summary:hover { text-decoration:underline; }
+.certificates a { display:inline-flex; align-items:center; min-height:44px; font-weight:600; text-decoration:underline; text-underline-offset:.2em; overflow-wrap:anywhere; }
+.body details a { display:flex; margin-bottom:.4rem; }
+.footer { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:.5rem 2rem; margin-top:1rem; font-size:.88rem; }
+.footer > span { color:#4c6269; }
+@media(max-width:999px) {
+  .grid { grid-template-columns:1fr; }
+  .body h3 { font-size:1.8rem; }
+}
+@media(min-width:600px) and (max-width:999px) {
+  .card { display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); }
+  .card > img { height:100%; aspect-ratio:auto; }
+}
+@media(max-width:800px) { .certificates { scroll-margin-top:7rem; } }
