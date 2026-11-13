@@ -13,6 +13,9 @@ Op de VÅRLAKS-landingspagina komen de filet (`zalmfilet`, poster 6), de kweker 
 | `public/images/varlaks/from-egg-to-plate-2.jpg.webp` | https://varlaks.no/wp-content/uploads/2025/01/from-egg-to-plate-2.jpg.webp | Medewerker bij een netkweeklocatie; herkomstverhaal biologische-vispagina |
 | `public/images/varlaks/from-egg-to-plate-3.jpg.webp` | https://varlaks.no/wp-content/uploads/2025/01/from-egg-to-plate-3.jpg.webp | VÅRLAKS-zalmfilets in transportbak; product/traceerbaarheid |
 | `public/images/varlaks/from-egg-to-plate-4.jpg.webp` | https://varlaks.no/wp-content/uploads/2025/01/from-egg-to-plate-4.jpg.webp | Zalmbereiding als serveersuggestie; geen foto van eigen bereiding |
+| `public/images/varlaks/kwaliteitscontrole.webp` | https://varlaks.no/wp-content/uploads/2025/10/1.jpg.webp | Bestaande VÅRLAKS-foto van zalmfilets op de controleband, bij de uitleg over voedselveiligheid. Ongewijzigd lokaal opgeslagen; bron gecontroleerd op 13 november 2026. |
+
+De drie fotokaarten op de VÅRLAKS-pagina tonen kweek, traceerbare herkomst en voedselveiligheid. De foto's illustreren het onderwerp; ze zijn geen keurmerklogo of bewijs van een specifieke gecertificeerde locatie. De documenten blijven apart bereikbaar. Op 13 november 2026 gecontroleerd: [certificatenoverzicht van Norwegian Seafood Group](https://norwegianseafood.com/certification/), [GLOBALG.A.P. Chain of Custody](https://globalgap.org/what-we-offer/solutions/chain-of-custody/) en [ASC Chain of Custody](https://asc-aqua.org/business/chain-of-custody-standard/). IFS Food betreft de verwerking door de leverancier; GLOBALG.A.P. CoC betreft identificatie, scheiding en traceerbaarheid van gecertificeerde vis.
 
 ## Tilapia
 
