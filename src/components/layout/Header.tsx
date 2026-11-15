@@ -73,7 +73,6 @@ export function Header() {
   ];
   const productLinks = [
     { href: p("/barbecue-gourmet"), label: "Barbecue & gourmet" },
-    { href: p("/biologische-vis"), label: locale === "nl" ? "Biologische vis & herkomst" : locale === "de" ? "Biofisch & Herkunft" : "Organic fish & origins" },
   ];
   const platterLinks = [
     { href: p("/feestdagen"), label: primaryLinks[0].label },

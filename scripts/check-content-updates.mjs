@@ -49,14 +49,9 @@ for (const locale of ['nl', 'en', 'de']) {
   }
   assert((platters.main.match(/<figcaption/g) || []).length >= 20, `${locale}: example captions missing`);
   assert(!platters.main.includes('www.dirksvishandel.nl'), `${locale}: competitor URL exposed in page`);
-  const bio = await page(`/${locale}/biologische-vis`);
-  const bioPhotos = photos(bio.main);
-  for (const image of ['/images/varlaks/from-egg-to-plate-2.jpg.webp', '/images/varlaks/from-egg-to-plate-3.jpg.webp', '/images/varlaks/from-egg-to-plate-4.jpg.webp', '/images/assortiment-internet/hollandse-garnalen-solt.jpeg']) {
-    assert(bioPhotos.includes(image), `${locale}: missing locally hosted BIO/ASC/MSC image ${image}`);
-  }
-  assert(!/href="[^"\s]*\/visschalen/.test(bio.main), `${locale}: unrelated platter link on organic page`);
-  assert(bio.main.includes('MSC') && bio.main.includes('/assortiment/hollandse-garnalen'), `${locale}: MSC shrimp missing`);
-  assert(bio.main.includes('VÅRLAKS'), `${locale}: salmon story missing`);
+  const retired = await fetch(origin + `/${locale}/biologische-vis`, {redirect: 'manual'});
+  assert(retired.status === 308, `${locale}: retired origins page redirects permanently`);
+  assert(new URL(retired.headers.get('location'), origin).pathname === `/${locale}/varlaks`, `${locale}: redirect keeps the language`);
 }
 const blog = await page('/nl/blog');
 const sitemap = await page('/sitemap.xml');

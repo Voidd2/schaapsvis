@@ -215,8 +215,8 @@ export const BIJGEWERKTE_ARTIKELEN: Record<string, Partial<BlogPost>> = {
         "href": "https://varlaks.no/"
       },
       {
-        "label": "Biologische vis en keurmerken",
-        "href": "/biologische-vis"
+        "label": "VÅRLAKS-zalm: herkomst en certificaten",
+        "href": "/varlaks#certificaten"
       }
     ]
   }

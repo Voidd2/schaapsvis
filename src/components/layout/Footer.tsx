@@ -41,7 +41,7 @@ export function Footer() {
       kop: nav("verhaal"),
       links: [
         { href: p("/ons-verhaal"), label: nav("verhaal") },
-        { href: p("/biologische-vis"), label: nav("betereVis") },
+        { href: p("/varlaks"), label: locale === "de" ? "VÅRLAKS-Lachs" : locale === "en" ? "VÅRLAKS salmon" : "VÅRLAKS-zalm" },
         { href: p("/studentenkorting"), label: locale === "de" ? "Studentenrabatt" : locale === "en" ? "Student discount" : "Studentenkorting" },
         { href: p("/account"), label: locale === "de" ? "Studentenkonto" : locale === "en" ? "Student account" : "Studentenaccount" },
         { href: p("/recepten"), label: nav("recepten") },
