@@ -17,7 +17,7 @@ if(!/^http:\/\/(localhost|127\.0\.0\.1):/.test(origin))throw new Error('Local se
    const mobileMenu=page.locator('button[aria-controls="mobile-navigation"]');
    assert.ok(await mobileMenu.isVisible(),'Mobile navigation toggle '+locale);
    await mobileMenu.click();
-   for(const path of ['/biologische-vis','/studentenkorting','/visschalen','/account','/aanbiedingen','/ons-verhaal','/contact']){
+   for(const path of ['/varlaks#film','/studentenkorting','/visschalen','/account','/aanbiedingen','/ons-verhaal','/contact']){
     assert.equal(await page.locator('#mobile-navigation a[href="/'+locale+path+'"]').count(),1,'Mobile menu destination '+locale+path);
    }
    await mobileMenu.click();
@@ -25,7 +25,7 @@ if(!/^http:\/\/(localhost|127\.0\.0\.1):/.test(origin))throw new Error('Local se
    await page.goto(origin+'/'+locale,{waitUntil:'networkidle'});
    assert.equal(await page.locator('body').evaluate(el=>el.scrollWidth<=window.innerWidth+1),true,'Homepage desktop overflow '+locale);
    const desktopNav=page.locator('header nav').first();
-   for(const path of ['/assortiment','/barbecue-gourmet','/biologische-vis','/studentenkorting','/visschalen','/recepten','/bezoek-ons']){
+   for(const path of ['/assortiment','/barbecue-gourmet','/varlaks#film','/studentenkorting','/visschalen','/recepten','/bezoek-ons']){
     assert.ok(await desktopNav.locator('a[href="/'+locale+path+'"]').isVisible(),'Desktop top navigation '+locale+path);
    }
    const desktopMenu=page.locator('button[aria-controls="mobile-navigation"]');

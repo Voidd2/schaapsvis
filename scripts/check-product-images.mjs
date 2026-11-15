@@ -59,12 +59,12 @@ for (const asset of assets) {
 }
 if (origin) for (const locale of ['nl', 'en', 'de']) {
   try {
-    const response = await fetch(`${origin}/${locale}/biologische-vis`);
+    const response = await fetch(`${origin}/${locale}/varlaks`);
     const html = await response.text();
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     for (const image of varlaksImages) if (!html.includes(image)) throw new Error(`Supplier image not rendered: ${image}`);
     if (html.includes('varlaks.no/wp-content/uploads')) throw new Error('Supplier image is hotlinked instead of hosted locally');
-  } catch (error) { failures.push({locale, page:'biologische-vis', error:String(error)}); }
+  } catch (error) { failures.push({locale, page:'varlaks', error:String(error)}); }
 }
 const queue = origin ? products.flatMap(p => ['nl', 'en', 'de'].map(locale => ({p, locale}))) : [];
 const recipePaths = new Set();

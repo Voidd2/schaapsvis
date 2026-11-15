@@ -222,7 +222,7 @@ const bestaandePosts: BlogPost[] = [
     gerelateerdeRecepten: ["varlaks-uit-de-oven"],
     gerelateerdeLinks: [
       { label: "Het volledige Varlaks-verhaal", href: "/varlaks#film" },
-      { label: "Lees meer over viskeurmerken", href: "/biologische-vis" },
+      { label: "VÅRLAKS-zalm: herkomst en certificaten", href: "/varlaks#certificaten" },
     ],
     seoKeywords:
       "wilde zalm vs kweekzalm, kweekzalm kwaliteit, varlaks zalm, zalm kopen leiden, ASC zalm Noorwegen",
@@ -266,7 +266,7 @@ const bestaandePosts: BlogPost[] = [
       },
     ],
     gerelateerdeLinks: [
-      { label: "Onze biologische vis-pagina", href: "/biologische-vis" },
+      { label: "VÅRLAKS-zalm: herkomst en certificaten", href: "/varlaks#certificaten" },
       { label: "VISwijzer op goodfish.nl", href: "https://www.goodfish.nl" },
     ],
     seoKeywords:
@@ -349,7 +349,7 @@ const bestaandePosts: BlogPost[] = [
       },
     ],
     gerelateerdeLinks: [
-      { label: "Lees meer op onze biologische vis-pagina", href: "/biologische-vis" },
+      { label: "VÅRLAKS-zalm: herkomst en certificaten", href: "/varlaks#certificaten" },
       { ...bestelContact("nl") },
     ],
     seoKeywords:
@@ -446,7 +446,7 @@ const bestaandePosts: BlogPost[] = [
       },
     ],
     gerelateerdeLinks: [
-      { label: "BIO, ASC en MSC uitgelegd", href: "/biologische-vis" },
+      { label: "VÅRLAKS-zalm: herkomst en certificaten", href: "/varlaks#certificaten" },
       { label: "Meer over VÅRLAKS-zalm", href: "/varlaks#film" },
       { label: "Bekijk het assortiment", href: "/assortiment" },
     ],
@@ -503,7 +503,7 @@ const bestaandePosts: BlogPost[] = [
       },
     ],
     gerelateerdeLinks: [
-      { label: "BIO, ASC en MSC uitgelegd", href: "/biologische-vis" },
+      { label: "VÅRLAKS-zalm: herkomst en certificaten", href: "/varlaks#certificaten" },
       { label: "Meer over VÅRLAKS-zalm", href: "/varlaks#film" },
       { label: "Bekijk het assortiment", href: "/assortiment" },
     ],
@@ -563,7 +563,7 @@ const bestaandePosts: BlogPost[] = [
     ],
     gerelateerdeLinks: [
       { label: "Het volledige Varlaks-verhaal", href: "/varlaks#film" },
-      { label: "Lees meer over viskeurmerken", href: "/biologische-vis" },
+      { label: "VÅRLAKS-zalm: herkomst en certificaten", href: "/varlaks#certificaten" },
     ],
     seoKeywords:
       "is biologische zalm gezonder, zalm omega 3, omega 3 vette vis, viskeurmerk uitleg, voedingswaarde zalm",
@@ -676,7 +676,7 @@ const bestaandePosts: BlogPost[] = [
     ],
     gerelateerdeLinks: [
       { label: "Bekijk onze gerookte vis", href: "/assortiment" },
-      { label: "Meer over biologische & duurzame vis", href: "/biologische-vis" },
+      { label: "VÅRLAKS-zalm: herkomst en certificaten", href: "/varlaks#certificaten" },
     ],
     seoKeywords:
       "echt gerookte vis, gerookte vis vs kunstmatige rooksmaak, ambachtelijk gerookte vis leiden, gerookte zalm leiden, echt gerookte vis kopen, rookaroma",

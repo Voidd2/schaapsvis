@@ -48,11 +48,16 @@ const nextConfig: NextConfig = {
         permanent: true,
       })),
       { source: "/bezorgen/:pad*", destination: "/nl/visschalen", permanent: true },
-      // ── "Eerlijke Vis" is geherpositioneerd naar "Biologische Vis" ──
-      { source: "/nl/eerlijke-vis", destination: "/nl/biologische-vis", permanent: true },
-      { source: "/en/eerlijke-vis", destination: "/en/biologische-vis", permanent: true },
-      { source: "/de/eerlijke-vis", destination: "/de/biologische-vis", permanent: true },
-      { source: "/eerlijke-vis", destination: "/nl/biologische-vis", permanent: true },
+      // Herkomst en certificaten staan voortaan op de VÅRLAKS-pagina.
+      ...["nl", "en", "de"].flatMap((locale) =>
+        ["biologische-vis", "eerlijke-vis"].map((slug) => ({
+          source: `/${locale}/${slug}`,
+          destination: `/${locale}/varlaks`,
+          permanent: true,
+        })),
+      ),
+      { source: "/biologische-vis", destination: "/nl/varlaks", permanent: true },
+      { source: "/eerlijke-vis", destination: "/nl/varlaks", permanent: true },
 
       // ── Oude (pre-rebuild) URL's → nieuwe structuur ──
       // Definitieve lijst: exporteer "Pagina's" uit Google Search Console.

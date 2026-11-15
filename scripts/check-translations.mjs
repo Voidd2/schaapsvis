@@ -48,7 +48,7 @@ for(const l of locales){
  const copy=load('catalog-copy').catalogText(l);
  const texts=[copy.title,copy.platters,...catalog.MAIN_PLATTERS.map(slug=>catalog.catalogProduct(slug,l).naam)];
  const homeTexts=[...load('local-pages-copy').localLocations(l).flatMap(p=>[p.naam,p.adres,p.dagen]),...load('reviews').googleReviews.slice(0,3).map(r=>load('reviews').localizeReview(r,l).text)];
- for(const suffix of ['','/visschalen','/assortiment','/bezoek-ons','/biologische-vis','/varlaks','/ons-verhaal','/contact','/recepten','/blog','/viswinkel-voorschoten'])pages.push({path:`/${l}${suffix}`,texts:suffix==='/visschalen'?texts:suffix===''?homeTexts:[]});
+ for(const suffix of ['','/visschalen','/assortiment','/bezoek-ons','/varlaks','/ons-verhaal','/contact','/recepten','/blog','/viswinkel-voorschoten'])pages.push({path:`/${l}${suffix}`,texts:suffix==='/visschalen'?texts:suffix===''?homeTexts:[]});
  for(const p of products.products){const t=translatedProducts.localizeProduct(p,l),photo=photos.productPhoto(t,l);if(photo)check(!!photo.alt,`Missing image description ${l}/${p.slug}`);}
 }
 for(const p of products.products){

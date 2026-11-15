@@ -57,9 +57,6 @@ if (origin) for (const locale of ['nl', 'en', 'de']) {
       assert.ok(html.includes(photo.credit.source), `${locale}/${slug}: catalogue attribution`);
       assert.ok(detail.includes(photo.credit.licenseUrl), `${locale}/${slug}: detail license`);
       assert.ok(!detail.includes('/images/editorial/schol-v2.webp'), 'Rejected synthetic plaice must not return');
-      const bio = await (await fetch(`${origin}/${locale}/biologische-vis`)).text();
-      assert.ok(bio.includes(photo.src) || bio.includes(encodeURIComponent(photo.src)), `${locale}: biological page photo`);
-      assert.ok(bio.includes(photo.credit.source), `${locale}: biological page attribution`);
     }
   }
   await browser.close();

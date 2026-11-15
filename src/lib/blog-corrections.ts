@@ -35,7 +35,7 @@ export const BLOG_CORRECTIONS:Record<string,Partial<BlogPost>>={
  {kop:"Wat is er aan de hand?",alineas:["De waarschuwing van Good Fish uit april 2025 gaat over overbevissing en het ontbreken van gezamenlijke vangstafspraken.","Controleer de actuele VISwijzer voor de specifieke visserij in plaats van aan te nemen dat elke makreel dezelfde beoordeling heeft."]},
  {kop:"Wat betekent dat aan onze toonbank?",alineas:["Wij bieden makreel aan, maar presenteren deze niet automatisch als duurzaam.","Vraag naar certificering en alternatieven. Alleen een productnaam bewijst geen milieubeoordeling."]},
  {kop:"Uw keuze maken",alineas:["Gebruik de actuele viswijzer en bespreek de mogelijkheden met ons. Kies voor controleerbare certificering of herkomst in plaats van een algemene claim."]}
- ],gerelateerdeLinks:[{label:"Biologische vis en keurmerken",href:"/biologische-vis"},{label:"Good Fish: achtergrond van het makreeladvies",href:"https://www.goodfish.nl/nl/makreel-overbevist-en-vanaf-vandaag-in-het-rood-op-de-viswijzer/"}]},
+ ],gerelateerdeLinks:[{label:"VÅRLAKS-zalm: herkomst en certificaten",href:"/varlaks#certificaten"},{label:"Good Fish: achtergrond van het makreeladvies",href:"https://www.goodfish.nl/nl/makreel-overbevist-en-vanaf-vandaag-in-het-rood-op-de-viswijzer/"}]},
  "wilde-zalm-vs-kweekzalm-waarom-wij-varlaks-kiezen":{gerelateerdeRecepten:["zalm-citroen-dille"]},
  "kibbeling-vs-lekkerbek-het-verschil":{secties:[
  {alineas:["Aan de toonbank krijgen we regelmatig de vraag wat het verschil is tussen kibbeling en lekkerbek. Hieronder leggen we uit wat u krijgt en hoe u een keuze maakt."]},

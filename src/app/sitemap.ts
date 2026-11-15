@@ -48,7 +48,6 @@ const MEERTALIG: {
   { pad: "/gourmetschotel", prioriteit: 0.8, frequentie: "monthly" as const },
   { pad: "/barbecue-gourmet", prioriteit: 0.8, frequentie: "monthly" as const, gewijzigd: new Date("2026-10-21") },
   { pad: "/bezoek-ons", prioriteit: 0.85, frequentie: "monthly" as const },
-  { pad: "/biologische-vis", prioriteit: 0.8, frequentie: "monthly" as const },
   { pad: "/varlaks", prioriteit: 0.8, frequentie: "monthly" as const },
   { pad: "/ons-verhaal", prioriteit: 0.7, frequentie: "yearly" as const },
   { pad: "/contact", prioriteit: 0.6, frequentie: "yearly" as const },
