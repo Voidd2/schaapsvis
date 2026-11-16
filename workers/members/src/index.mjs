@@ -583,8 +583,8 @@ async function collectAnalytics(request, env) {
   return json({ ok: true }, 202);
 }
 
-async function mayMeasurePopup(request, env, measurement) {
-  if (env.ANALYTICS_ENABLED !== "on" || !validPopupMeasurement(measurement)) return false;
+async function mayMeasurePopup(request, env, measurement, experiment) {
+  if (env.ANALYTICS_ENABLED !== "on" || !validPopupMeasurement(measurement, experiment)) return false;
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
   return !env.ANALYTICS_EXCLUDED_IP_HASH || await digest(ip) !== env.ANALYTICS_EXCLUDED_IP_HASH;
 }
@@ -592,8 +592,8 @@ async function mayMeasurePopup(request, env, measurement) {
 async function collectPopupStage(request, env, experiment) {
   if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
   const body = await readJson(request);
-  if (!validPopupMeasurement(body?.measurement) || !["shown","filled"].includes(body?.stage)) return json({ error: "invalid_event" }, 400);
-  if (!await mayMeasurePopup(request, env, body.measurement)) return json({ ok: true }, 202);
+  if (!validPopupMeasurement(body?.measurement, experiment) || !["shown","filled"].includes(body?.stage)) return json({ error: "invalid_event" }, 400);
+  if (!await mayMeasurePopup(request, env, body.measurement, experiment)) return json({ ok: true }, 202);
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
   const key = await hmac(env.AUTH_PEPPER, `analytics:ip:${ip}`);
   if (!await rateLimit(env.DB, key, 240, 15 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
@@ -607,11 +607,11 @@ async function adminAnalytics(request, env) {
   const daysValue = Number(new URL(request.url).searchParams.get("days") || 30);
   const days = Number.isInteger(daysValue) ? Math.min(90, Math.max(1, daysValue)) : 30;
   const report = await analyticsReport(env, days);
-  const [popup, locationsPopup] = await Promise.all(
-    ["varlaks", "locations"].map(experiment => popupReport(env.DB, report.since, report.until, experiment))
+  const [popup, locationsPopup, sitewidePopup] = await Promise.all(
+    ["varlaks", "locations", "sitewide"].map(experiment => popupReport(env.DB, report.since, report.until, experiment))
   );
   const journeys = await journeyReport(env, days);
-  return json({ ...report, popup, locationsPopup, journeys });
+  return json({ ...report, popup, locationsPopup, sitewidePopup, journeys });
 }
 
 async function collectJourney(request, env, forget = false) {
@@ -2236,11 +2236,13 @@ async function subscribeNewsletter(request, env) {
   }
   const varlaksOffer = body?.form === "varlaks";
   const locationsOffer = body?.form === "locations";
-  const popupOffer = varlaksOffer || locationsOffer;
+  const sitewideOffer = body?.form === "sitewide";
+  const popupOffer = varlaksOffer || locationsOffer || sitewideOffer;
   // Already-open tabs may still submit the original offer's wording.
   const offerVersion = body?.consentVersion ?? "varlaks-weekly-offers-v1";
   if (varlaksOffer && !["varlaks-weekly-offers-v1", "varlaks-weekly-offers-v2", "varlaks-weekly-offers-v3", "varlaks-news-and-offers-v4"].includes(offerVersion)) return json({ error: "consent_required" }, 400);
   if (locationsOffer && !["locations-weekly-offers-v1", "locations-news-and-offers-v2"].includes(offerVersion)) return json({ error: "consent_required" }, 400);
+  if (sitewideOffer && offerVersion !== "sitewide-news-and-offers-v1") return json({ error: "consent_required" }, 400);
   const regionTag = body?.regionTag ?? null;
   const draftToken = typeof body?.draftToken === "string" ? body.draftToken : "";
   const validRegion = (discountsForm || popupOffer || directFooter) && regionTag === null || ["leiden", "voorschoten", "wassenaar", "leidschendam", "regio-071", "elders"].includes(regionTag);
@@ -2268,8 +2270,8 @@ async function subscribeNewsletter(request, env) {
       .bind(email, version, at, at, source, at, at),
   ];
   const measurement = body?.measurement;
-  const supportsMeasurement = locationsOffer || (varlaksOffer && ["varlaks-weekly-offers-v3", "varlaks-news-and-offers-v4"].includes(offerVersion));
-  const recordConversion = supportsMeasurement && await mayMeasurePopup(request, env, measurement);
+  const supportsMeasurement = locationsOffer || sitewideOffer || (varlaksOffer && ["varlaks-weekly-offers-v3", "varlaks-news-and-offers-v4"].includes(offerVersion));
+  const recordConversion = supportsMeasurement && await mayMeasurePopup(request, env, measurement, body.form);
   const metrics = [];
   const visitStatement = await signupVisitStatement(request,env,body.visit,email,at);
   if (recordConversion) {
@@ -2292,7 +2294,7 @@ async function subscribeNewsletter(request, env) {
       results = await env.DB.batch([...metrics, ...(visitStatement ? [visitStatement] : []), ...statements]);
     } catch (error) {
       // A missing analytics table must never prevent a signup during a rollout.
-      if (!(metrics.length && String(error).includes("varlaks_popup_v1")) &&
+    if (!(metrics.length && (String(error).includes("varlaks_popup_v1") || String(error).includes("sitewide_popup_v1"))) &&
           !(visitStatement && String(error).includes("no such table: signup_visits"))) throw error;
       results = await env.DB.batch(statements);
     }
@@ -2658,6 +2660,7 @@ async function cleanupAnalytics(env) {
   try {
     await env.DB.prepare(`DELETE FROM site_analytics_daily WHERE day < ?`).bind(cutoff).run();
     await env.DB.prepare("DELETE FROM varlaks_popup_v1 WHERE day < ?").bind(new Date(Date.now() - 90 * 86400000).toISOString().slice(0,10)).run();
+    await env.DB.prepare("DELETE FROM sitewide_popup_v1 WHERE day < ?").bind(new Date(Date.now() - 90 * 86400000).toISOString().slice(0,10)).run();
     await env.DB.prepare(`DELETE FROM auth_rate_limits WHERE updated_at < ?`).bind(new Date(Date.now() - 30 * 86_400_000).toISOString()).run();
   } catch { /* A later scheduled run retries retention cleanup. */ }
 }
@@ -2745,6 +2748,7 @@ const memberWorker = {
     if (!siteAccessAllowed(request, env)) return json({ error: "site_access_required" }, 403);
     if (path === "/api/members/analytics/varlaks-popup" && method === "POST") return collectPopupStage(request, env, "varlaks");
     if (path === "/api/members/analytics/locations-popup" && method === "POST") return collectPopupStage(request, env, "locations");
+    if (path === "/api/members/analytics/sitewide-popup" && method === "POST") return collectPopupStage(request, env, "sitewide");
     if (path === "/api/members/analytics" && method === "POST") return collectAnalytics(request, env);
     if (path === "/api/members/analytics/visits" && method === "POST") return collectJourney(request,env);
     if (path === "/api/members/signup-visit/grant" && method === "POST") return visitChoice(request,env,"grant");
