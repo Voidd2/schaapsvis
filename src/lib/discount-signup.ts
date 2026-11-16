@@ -4,7 +4,7 @@ export const popupConsentVersions = { locations: "locations-news-and-offers-v2",
 const copy = {
   nl: {
     offerIntro: "Meld u aan voor nieuws, aanbiedingen en kortingsmails van Schaap’s Vis en blijf op de hoogte.",
-    popupImageAlt: "Hollandse Nieuwe met uitjes en augurk",
+    popupImageAlt: "Kind proeft een vis",
     offerPrivacy: "Privacy", offerUnsubscribe: "Afmelden kan in elke mail.",
     offerSubmit: "Houd mij op de hoogte", closeOffer: "Sluiten",
     title: "Nieuws en aanbiedingen van Schaap’s Vis",
@@ -20,7 +20,7 @@ const copy = {
   },
   en: {
     offerIntro: "Sign up for news, offers and discount emails from Schaap’s Vis and stay up to date.",
-    popupImageAlt: "Hollandse Nieuwe with onions and pickles",
+    popupImageAlt: "A child tasting fish",
     offerPrivacy: "Privacy", offerUnsubscribe: "Unsubscribe in any email.",
     offerSubmit: "Keep me informed", closeOffer: "Close",
     title: "News and offers from Schaap’s Vis", intro: "Sign up for news, offers and discount emails from Schaap’s Vis and stay up to date.",
@@ -34,7 +34,7 @@ const copy = {
   },
   de: {
     offerIntro: "Melden Sie sich für Neuigkeiten, Angebote und Rabatt-E-Mails von Schaap’s Vis an und bleiben Sie informiert.",
-    popupImageAlt: "Hollandse Nieuwe mit Zwiebeln und Gewürzgurken",
+    popupImageAlt: "Ein Kind probiert Fisch",
     offerPrivacy: "Datenschutz", offerUnsubscribe: "Abmeldung in jeder E-Mail möglich.",
     offerSubmit: "Auf dem Laufenden bleiben", closeOffer: "Schließen",
     title: "Neuigkeiten und Angebote von Schaap’s Vis", intro: "Melden Sie sich für Neuigkeiten, Angebote und Rabatt-E-Mails von Schaap’s Vis an und bleiben Sie informiert.",
