@@ -8,6 +8,7 @@ import { routing } from "@/i18n/routing";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Chrome } from "@/components/layout/Chrome";
+import { DiscountOfferPopup } from "@/components/shared/DiscountOfferPopup";
 import { cookies } from "next/headers";
 import { ACCESS_COOKIE, heeftGeldigeSiteToegang, siteOpSlot } from "@/lib/siteAccess";
 import { BEDRIJF } from "@/lib/bedrijf";
@@ -104,6 +105,7 @@ export default async function LocaleLayout({
           <Chrome header={<Header />} footer={<Footer />}>
             {isPreview && <OwnerMediaGuide />}
             {children}
+            {!isPreview && <DiscountOfferPopup locale={locale} experiment="sitewide" />}
           </Chrome>
         </NextIntlClientProvider>
       </body>

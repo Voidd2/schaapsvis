@@ -8,7 +8,7 @@ import { SignupFacebookFollow } from "./SignupFacebookFollow";
 import { signupVisitComplete, visitAtSignup } from "@/lib/signup-visit";
 import { recordJourneyStep } from "@/lib/visitor-journey.mjs";
 
-type Offer = { experiment: PopupExperiment; headline: string; getMeasurement: () => PopupMeasurement | null };
+type Offer = { experiment: PopupExperiment; headline: string; intro?: string; getMeasurement: () => PopupMeasurement | null };
 export function DiscountSignup({ locale, offer }: { locale: string; offer?: Offer }) {
   const t = discountSignupCopy(locale);
   const [state, setState] = useState<"idle" | "sending" | "success" | "error" | "limited">("idle");
@@ -46,7 +46,7 @@ export function DiscountSignup({ locale, offer }: { locale: string; offer?: Offe
       <SignupFacebookFollow locale={locale} />
       <Link href={`/${locale}/assortiment`} className="collection-text-link">{t.range} →</Link>
     </div> : <>
-      {offer && <><h2>{offer.headline}</h2><p>{t.offerIntro}</p></>}
+      {offer && <><h2>{offer.headline}</h2>{offer.intro ? <p>{offer.intro}</p> : null}</>}
       <form data-newsletter-form={offer?.experiment ?? "discounts"} onSubmit={subscribe} method="post" aria-label={offer?.headline ?? t.title}>
         <label className="discount-email">{t.email}
           <input required name="email" type="email" autoComplete="email" maxLength={254} onBlur={event => {

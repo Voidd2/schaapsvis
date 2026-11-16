@@ -1,8 +1,25 @@
 import { analyticsConsentKey } from "./journey-shared.mjs";
 
-export type PopupVariant = "a" | "b";
-export type PopupExperiment = "varlaks" | "locations";
+export type PopupVariant = "a" | "b" | "c";
+export type PopupExperiment = "varlaks" | "locations" | "sitewide";
 export type PopupMeasurement = { consent: true; id: string; variant: PopupVariant };
+const sitewideHeadlines = {
+  nl: {
+    a: "Nieuws en aanbiedingen van Schaap’s Vis in uw inbox.",
+    b: "Blijf op de hoogte van Schaap’s Vis met nieuws en kortingsmails.",
+    c: "Schrijf u in voor nieuws, acties en aanbiedingen van Schaap’s Vis.",
+  },
+  en: {
+    a: "News and offers from Schaap’s Vis in your inbox.",
+    b: "Stay up to date with Schaap’s Vis through news and offer emails.",
+    c: "Sign up for news, promotions and offers from Schaap’s Vis.",
+  },
+  de: {
+    a: "Neuigkeiten und Angebote von Schaap’s Vis in Ihrem Postfach.",
+    b: "Bleiben Sie mit Neuigkeiten und Angebots-E-Mails von Schaap’s Vis auf dem Laufenden.",
+    c: "Melden Sie sich für Neuigkeiten, Aktionen und Angebote von Schaap’s Vis an.",
+  },
+};
 const varlaksHeadlines = {
   nl: { a: "Leuke kortingen van Schaapsvis in uw mailbox?", b: "Op de hoogte blijven van kortingen en nieuws van Schaapsvis?" },
   en: { a: "Fancy Schaapsvis discounts in your inbox?", b: "Want to hear about Schaapsvis discounts and shop news?" },
@@ -16,8 +33,9 @@ const locationsHeadlines = {
 };
 
 export function popupHeadline(experiment: PopupExperiment, locale: string, variant: PopupVariant) {
+  if (experiment === "sitewide") return sitewideHeadlines[locale === "en" || locale === "de" ? locale : "nl"][variant];
   const headlines = experiment === "locations" ? locationsHeadlines : varlaksHeadlines;
-  return headlines[locale === "en" || locale === "de" ? locale : "nl"][variant];
+  return headlines[locale === "en" || locale === "de" ? locale : "nl"][variant as "a" | "b"];
 }
 
 export function allowsPopupAnalytics() {

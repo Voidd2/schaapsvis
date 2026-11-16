@@ -163,6 +163,7 @@ sqlite.exec(appleWalletUpdatesMigration);
 sqlite.exec(studentPassSecurityMigration);
 sqlite.exec(otherEducationMigration);
 sqlite.exec(await readFile(new URL("../../migrations/0018_varlaks_popup.sql", import.meta.url), "utf8"));
+sqlite.exec(await readFile(new URL("../../migrations/0023_sitewide_popup.sql", import.meta.url), "utf8"));
 sqlite.exec(await readFile(new URL("../../migrations/0019_signup_visits.sql", import.meta.url), "utf8"));
 sqlite.exec(await readFile(new URL("../../migrations/0021_newsletter_draft_region.sql", import.meta.url), "utf8"));
 sqlite.exec(await readFile(new URL("../../migrations/0022_visitor_journeys.sql", import.meta.url), "utf8"));
@@ -872,6 +873,7 @@ assert.equal((await expiredPassCheck.json()).valid, false, "the expired former p
     ["discounts", "discount-news-and-offers-v2"],
     ["varlaks", "varlaks-news-and-offers-v4"],
     ["locations", "locations-news-and-offers-v2"],
+    ["sitewide", "sitewide-news-and-offers-v1"],
   ]) {
     const address = `${form}-news-offers@example.test`;
     const measurement = { consent:true, variant:"b", id:crypto.randomUUID() };
@@ -887,8 +889,10 @@ assert.equal((await expiredPassCheck.json()).valid, false, "the expired former p
     assert.equal(sentEmails.length,mailCount,"signing up does not send a voucher or start a campaign");
     if (form !== "discounts") {
       const exposure = form === "locations" ? `locations:${measurement.id}` : measurement.id;
-      assert.equal(sqlite.prepare("SELECT acquired FROM varlaks_popup_v1 WHERE exposure=?").get(exposure).acquired,1);
-      sqlite.prepare("DELETE FROM varlaks_popup_v1 WHERE exposure=?").run(exposure);
+      const table = form === "sitewide" ? "sitewide_popup_v1" : "varlaks_popup_v1";
+      const key = form === "sitewide" ? `sitewide:${measurement.id}` : exposure;
+      assert.equal(sqlite.prepare(`SELECT acquired FROM ${table} WHERE exposure=?`).get(key).acquired,1);
+      sqlite.prepare(`DELETE FROM ${table} WHERE exposure=?`).run(key);
     }
     sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(address);
   }
@@ -945,6 +949,17 @@ assert.equal((await expiredPassCheck.json()).valid, false, "the expired former p
     assert.deepEqual((await popupReport(env.DB,today,today,"locations")).map(row=>({...row})),[
       {variant:"a",shown:1,filled:1,acquired:0}, {variant:"b",shown:1,filled:1,acquired:1},
     ]);
+    const sitewideMeasurement={consent:true,variant:"c",id:crypto.randomUUID()};
+    const sitewideStage=step=>call("/api/members/analytics/sitewide-popup",{method:"POST",headers:{"CF-Connecting-IP":"203.0.113.183"},body:{stage:step,measurement:sitewideMeasurement}});
+    const sitewideSignup=()=>call("/api/members/newsletter/subscribe",{method:"POST",headers:{"CF-Connecting-IP":"203.0.113.184"},body:{form:"sitewide",email:"sitewide-popup@example.test",consent:true,consentVersion:"sitewide-news-and-offers-v1",measurement:sitewideMeasurement}});
+    assert.equal((await sitewideStage("shown")).status,202);
+    assert.equal((await sitewideStage("filled")).status,202);
+    assert.equal((await sitewideSignup()).status,202);
+    assert.deepEqual((await popupReport(env.DB,today,today,"sitewide")).map(row=>({...row})),[
+      {variant:"a",shown:0,filled:0,acquired:0},{variant:"b",shown:0,filled:0,acquired:0},{variant:"c",shown:1,filled:1,acquired:1},
+    ]);
+    sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email='sitewide-popup@example.test'").run();
+    sqlite.prepare("DELETE FROM sitewide_popup_v1 WHERE exposure=?").run(`sitewide:${sitewideMeasurement.id}`);
     sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email IN (?,?)").run(locationEmail,"locations-private@example.test");
     const noConsent={...measurement,id:crypto.randomUUID(),consent:false};
     assert.equal((await signup("popup-private@example.test",noConsent)).status,202);
