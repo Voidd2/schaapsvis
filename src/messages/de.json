@@ -16,15 +16,15 @@
   },
   "meta": {
     "homeTitle": "Schaap’s Fischgeschäft in Leiden und Voorschoten | Seit 1938",
-    "homeDesc": "Frischer Fisch und Räucherfisch von Schaap’s Vishandel in Leiden und Voorschoten. Besuchen Sie unser Geschäft, den Verkaufswagen bei Hoogvliet oder die Leidener Marktstände.",
+    "homeDesc": "Frischer Fisch und Räucherfisch von Schaap’s Vishandel in Leiden und Voorschoten. Besuchen Sie unser Geschäft, den Fischstand bei Hoogvliet oder die Leidener Marktstände.",
     "verhaalTitle": "Die Geschichte von Schaap's Vis Leiden | Fischhandel seit 1938",
     "verhaalDesc": "Von Gerrit Schaap 1938 bis Aldert Haasnoot heute — fast neunzig Jahre Leidener Handwerk, vier Generationen, eine Adresse: Herenstraat 48, Leiden.",
     "varlaksTitle": "VÅRLAKS-Lachs aus Norwegen | Schaap's Vishandel Leiden",
     "varlaksDesc": "Entdecken Sie VÅRLAKS-Lachs aus Nordnorwegen, den Markenfilm und Informationen zur Herkunft. Fragen Sie nach ASC-Zertifizierung und aktueller Verfügbarkeit.",
     "assortimentTitle": "Fischsortiment Leiden: Lachs, Hering & Kibbeling | Schaap's",
     "assortimentDesc": "Entdecken Sie Frischfisch, Räucherfisch, Nordseegarnelen, Hering und Kibbeling bei Schaap’s in Leiden und Voorschoten.",
-    "bezoekTitle": "Fischgeschäft Leiden und Verkaufswagen in Voorschoten | Schaap’s",
-    "bezoekDesc": "Unser Fischgeschäft liegt in der Herenstraat 48 in Leiden. Freitags steht unser Verkaufswagen bei Hoogvliet in Voorschoten. Alle Adressen, Öffnungszeiten und Anfahrten.",
+    "bezoekTitle": "Fischgeschäft Leiden, Leidener Märkte & Fischstand Voorschoten | Schaap’s",
+    "bezoekDesc": "Besuchen Sie unser Fischgeschäft in der Herenstraat 48 in Leiden, unseren Mittwochsstand am Botermarkt, den Samstagsstand bei De Waag und freitags unseren Fischstand bei Hoogvliet in Voorschoten.",
     "contactTitle": "Kontakt Schaap's Vis Leiden | +31 71 512 4810",
     "contactDesc": "Kontaktieren Sie Schaap's Vis Leiden. Telefon: +31 71 512 4810. WhatsApp: +31 6 2481 1678. Herenstraat 48, 2313 AL Leiden.",
     "bestellenTitle": "Fischplatte bestellen in Leiden | Schaap's Vishandel",
@@ -209,10 +209,10 @@
     "note": "Fischplatten stimmen Sie mit uns per WhatsApp ab. Für andere Fischprodukte schreiben Sie uns ebenfalls; wir besprechen gerne die Möglichkeiten."
   },
   "bezoekPage": {
-    "viskarAlt": "Kunden an der Theke des blau-weißen Verkaufswagens von Schaap’s",
+    "viskarAlt": "Kunden an der Theke des blau-weißen Fischstands von Schaap’s",
     "title": "Unsere Standorte in Leiden und Voorschoten",
     "brand": "Schaap’s Vishandel · seit 1938",
-    "sub": "Besuchen Sie unser Fischgeschäft in der Herenstraat in Leiden oder unseren Verkaufswagen bei Hoogvliet in Voorschoten. Mittwochs und samstags finden Sie uns auch auf dem Leidener Markt.",
+    "sub": "Besuchen Sie unser Fischgeschäft in der Herenstraat in Leiden oder unseren Fischstand bei Hoogvliet in Voorschoten. Mittwochs und samstags finden Sie uns auch auf dem Leidener Markt.",
     "route": "Route zu Hoogvliet",
     "today": "Heute",
     "next": "Nächste Öffnung",
@@ -222,13 +222,14 @@
     "rangeTitle": "Suchen Sie einen bestimmten Fisch?",
     "rangeIntro": "Von frischem Fisch und Hering bis zu goldbraunem Kibbeling: Entdecken Sie unser Sortiment.",
     "range": "Zum Fischsortiment",
-    "details": "Mehr über den Verkaufswagen in Voorschoten",
+    "details": "Mehr über den Fischstand in Voorschoten",
     "call": "Im Geschäft anrufen",
     "shopLink": "Fischgeschäft in Leiden",
     "shopRoute": "Anfahrt zum Fischgeschäft",
     "stall": "Bei Hoogvliet in Voorschoten",
     "stallLink": "Bei Hoogvliet in Voorschoten",
-    "stallIntro": "Unser Verkaufswagen steht jeden Freitag auf dem Parkplatz bei Hoogvliet. Bei uns finden Sie frischen Fisch, Hering, gebackenen Fisch und leckere Fischbrötchen."
+    "stallPhotoLabel": "Parkplatz bei Hoogvliet",
+    "stallIntro": "Unser Fischstand steht jeden Freitag auf dem Parkplatz bei Hoogvliet. Bei uns finden Sie frischen Fisch, Hering, gebackenen Fisch und leckere Fischbrötchen."
   },
   "contactPage": {
     "title": "Kontakt",

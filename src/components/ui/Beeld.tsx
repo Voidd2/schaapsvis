@@ -86,6 +86,7 @@ const ALT:Record<BeeldNaam,readonly [string,string]> = {
 logoBadge:["Schaap’s Vishandel logo, Leiden, since 1938","Logo von Schaap’s Vishandel in Leiden, seit 1938"],
 logoLiggend:["Schaap’s Vishandel, Leiden","Schaap’s Vishandel, Leiden"],
 winkelGevel:["Schaap’s fish shop at Herenstraat 48, Leiden","Schaap’s Fischgeschäft an der Herenstraat 48 in Leiden"],
+hoogvlietVoorschoten:["Front of Hoogvliet at Veurseweg 18 in Voorschoten; our fish stall is in the car park","Vorderseite von Hoogvliet am Veurseweg 18 in Voorschoten; unser Fischstand steht auf dem Parkplatz"],
 toonbank:["Fresh cod from our range","Frischer Kabeljau aus unserem Sortiment"],
 oestersInDeWinkel:["A member of staff shows an oyster and a box of oysters at the fish counter","Ein Mitarbeiter zeigt an der Fischtheke eine Auster und eine Kiste mit Austern"],
 achterDeToonbank:["Fish displayed on ice at our market stall", "Fisch auf Eis an unserem Marktstand"],
