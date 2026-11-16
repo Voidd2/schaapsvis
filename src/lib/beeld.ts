@@ -67,6 +67,18 @@ export const BEELD = {
     verhouding: "liggend",
     terugval: "Herenstraat 48, Leiden",
   },
+  hoogvlietVoorschoten: {
+    waar: "Bezoek ons, bij de vrijdaglocatie in Voorschoten",
+    wat: "De echte voorgevel van Hoogvliet aan de Veurseweg. Houd de winkel herkenbaar en toon een deel van de parkeerplaats.",
+    bestand: "/images/schaaps/hoogvliet-voorschoten.webp",
+    alt: "Voorkant van Hoogvliet aan de Veurseweg 18 in Voorschoten; onze viskraam staat op de parkeerplaats",
+    vertalingen: {
+      en: { alt: "Front of Hoogvliet at Veurseweg 18 in Voorschoten; our fish stall is in the car park", bijschrift: "Hoogvliet in Voorschoten · our Friday fish stall is in the car park" },
+      de: { alt: "Vorderseite von Hoogvliet am Veurseweg 18 in Voorschoten; unser Fischstand steht auf dem Parkplatz", bijschrift: "Hoogvliet in Voorschoten · unser Fischstand steht freitags auf dem Parkplatz" },
+    },
+    verhouding: "liggend",
+    terugval: "Hoogvliet in Voorschoten",
+  },
   toonbank: {
     waar: "Homepage en Contact",
     wat: "De toonbank met vis erop, van dichtbij. Dit is de belangrijkste foto van de hele site: hier ziet iemand wat hij koopt.",

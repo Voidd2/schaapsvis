@@ -9,6 +9,7 @@ import sharp from 'sharp';
 const sources = [...new Set([
  '/images/schaaps/oesters-in-de-winkel.webp',
  '/images/schaaps/winkel-herenstraat.webp',
+ '/images/schaaps/hoogvliet-voorschoten.webp',
  '/images/schaaps/aldert-overname.webp',
  '/images/schaaps/schaaps-viskraam.webp',
  '/images/schaaps/haringkraam-aan-het-water.webp',

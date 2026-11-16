@@ -16,15 +16,15 @@
   },
   "meta": {
     "homeTitle": "Schaap’s Vishandel in Leiden en Voorschoten | Sinds 1938",
-    "homeDesc": "Verse en gerookte vis bij Schaap’s Vishandel in Leiden en Voorschoten. Bezoek onze viswinkel, verkoopwagen bij de Hoogvliet of de markten in Leiden.",
+    "homeDesc": "Verse en gerookte vis bij Schaap’s Vishandel in Leiden en Voorschoten. Bezoek onze viswinkel, viskraam bij de Hoogvliet of de markten in Leiden.",
     "verhaalTitle": "Het Verhaal van Schaap's Vis Leiden | Sinds 1938 de Visboer van Leiden",
     "verhaalDesc": "Van Gerrit Schaap in 1938 tot Aldert Haasnoot vandaag — bijna negentig jaar Leids vakmanschap, vier generaties, één adres: Herenstraat 48, Leiden.",
     "varlaksTitle": "VÅRLAKS-zalm uit Noorwegen | Schaap's Vishandel Leiden",
     "varlaksDesc": "Ontdek de VÅRLAKS-zalm uit Noord-Noorwegen, de presentatiefilm en herkomstinformatie. Vraag ons naar ASC-certificering en actuele beschikbaarheid.",
     "assortimentTitle": "Visassortiment Leiden: zalm, haring en kibbeling | Schaap's",
     "assortimentDesc": "Ontdek verse vis, gerookte vis, Hollandse garnalen, haring en kibbeling in het assortiment van Schaap’s Vishandel in Leiden en Voorschoten.",
-    "bezoekTitle": "Viswinkel Leiden en verkoopwagen bij de Hoogvliet in Voorschoten | Schaap’s",
-    "bezoekDesc": "Vind onze viswinkel aan de Herenstraat 48 in Leiden en onze verkoopwagen op vrijdag bij de Hoogvliet in Voorschoten. Bekijk alle adressen, openingstijden en routes.",
+    "bezoekTitle": "Viswinkel Leiden, Leidse markten & viskraam Voorschoten | Schaap’s",
+    "bezoekDesc": "Bezoek onze viswinkel aan de Herenstraat 48 in Leiden, onze woensdagmarkt op de Botermarkt, zaterdagmarkt bij De Waag en vrijdagkraam bij Hoogvliet in Voorschoten.",
     "contactTitle": "Contact Schaap's Vis Leiden | 071 512 4810 | Viswinkel Herenstraat",
     "contactDesc": "Neem contact op met Schaap's Vis Leiden. Bel 071 512 4810 of WhatsApp +31 6 2481 1678. Herenstraat 48, 2313 AL Leiden.",
     "bestellenTitle": "Visschaal bestellen in Leiden | Schaap's Vishandel",
@@ -209,10 +209,10 @@
     "note": "Visschalen vraagt u bij ons aan via WhatsApp. Zoekt u andere vis? Stuur ons een WhatsApp-bericht; we kijken graag wat mogelijk is."
   },
   "bezoekPage": {
-    "viskarAlt": "Klanten aan de toonbank van de blauw-witte verkoopwagen van Schaap’s",
+    "viskarAlt": "Klanten aan de toonbank van de blauw-witte viskraam van Schaap’s",
     "title": "Onze locaties in Leiden en Voorschoten",
     "brand": "Schaap’s Vishandel · sinds 1938",
-    "sub": "Bezoek onze viswinkel aan de Herenstraat in Leiden of onze verkoopwagen bij de Hoogvliet in Voorschoten. Ook op woensdag en zaterdag vindt u ons op de markt in Leiden.",
+    "sub": "Bezoek onze viswinkel aan de Herenstraat in Leiden of onze viskraam bij de Hoogvliet in Voorschoten. Ook op woensdag en zaterdag vindt u ons op de markt in Leiden.",
     "route": "Route naar de Hoogvliet",
     "today": "Vandaag",
     "next": "Eerstvolgende opening",
@@ -222,13 +222,14 @@
     "rangeTitle": "Welke vis zoekt u?",
     "rangeIntro": "Van verse vis en haring tot gebakken kibbeling: ontdek ons assortiment.",
     "range": "Bekijk het assortiment",
-    "details": "Meer over de verkoopwagen in Voorschoten",
+    "details": "Meer over de viskraam in Voorschoten",
     "call": "Bel de winkel",
     "shopLink": "Viswinkel in Leiden",
     "shopRoute": "Route naar de viswinkel",
     "stall": "Bij de Hoogvliet in Voorschoten",
     "stallLink": "Bij de Hoogvliet in Voorschoten",
-    "stallIntro": "Elke vrijdag staat onze verkoopwagen op de parkeerplaats bij de Hoogvliet. U kunt bij ons terecht voor verse vis, haring, gebakken vis en heerlijke broodjes."
+    "stallPhotoLabel": "Parkeerplaats bij Hoogvliet",
+    "stallIntro": "Elke vrijdag staat onze viskraam op de parkeerplaats bij de Hoogvliet. U kunt bij ons terecht voor verse vis, haring, gebakken vis en heerlijke broodjes."
   },
   "contactPage": {
     "title": "Contact",

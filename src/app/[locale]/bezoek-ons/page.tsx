@@ -5,8 +5,6 @@ import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/JsonLd";
 import { Schema } from "@/components/Schema";
 import { StaticResponsiveImage } from "@/components/StaticResponsiveImage";
-import { DiscountOfferPopup } from "@/components/shared/DiscountOfferPopup";
-import { BedieningSlot } from "@/components/catalog/BedieningSlot";
 import { Kruimels } from "@/components/ui/Sectie";
 import { PaginaSlot } from "@/components/ui/PaginaKop";
 import { BEELD } from "@/lib/beeld";
@@ -54,11 +52,12 @@ export default async function BezoekOnsPage({ params }: Props) {
   const weekday = new Intl.DateTimeFormat(locale, { weekday: "long", timeZone: "Europe/Amsterdam" }).format(visit.date);
   const breadcrumbs = [{ naam: BEDRIJF.naamKort, pad: "/" }, { naam: nav("locaties"), pad: "/bezoek-ons" }];
   const storefront = BEELD.winkelGevel;
+  const voorschotenPhoto = BEELD.hoogvlietVoorschoten;
   const shopAlt = locale === "de" || locale === "en" ? storefront.vertalingen[locale].alt : storefront.alt;
+  const stallAlt = locale === "de" || locale === "en" ? voorschotenPhoto.vertalingen[locale].alt : voorschotenPhoto.alt;
 
   return <>
     <JsonLd locale={locale} />
-    <BedieningSlot><DiscountOfferPopup locale={locale} experiment="locations" /></BedieningSlot>
     <Schema data={kruimelSchema(locale, breadcrumbs)} />
     <section id="locatieoverzicht" className={styles.hero} aria-labelledby="visit-title">
       <div className="section-wrap">
@@ -93,10 +92,13 @@ export default async function BezoekOnsPage({ params }: Props) {
             </div>
           </article>
           <article id="locatie-voorschoten" className={styles.locationCard} aria-labelledby="stall-title">
-            <StaticResponsiveImage src={BEELD.historieNu.bestand} alt={t("viskarAlt")}
-              width={1600} height={900} loading="eager"
-              sizes="(max-width: 799px) 100vw, (max-width: 1720px) 48vw, 790px"
-              className={styles.locationPhoto} />
+            <div className={styles.photoFrame}>
+              <StaticResponsiveImage src={voorschotenPhoto.bestand} alt={stallAlt}
+                width={1600} height={1200} loading="eager"
+                sizes="(max-width: 799px) 100vw, (max-width: 1720px) 48vw, 790px"
+                className={`${styles.locationPhoto} ${styles.stallPhoto}`} />
+              <span className={styles.photoBadge}>{t("stallPhotoLabel")}</span>
+            </div>
             <div className={styles.cardBody}>
               <h2 id="stall-title">{t("stall")}</h2>
               <p>{stall.straat}, {stall.postcode} {stall.plaats}</p>
