@@ -15,7 +15,7 @@
  * └───────────────────────────────────────────────────────────────────────────┘
  */
 
-export type Verhouding = "vierkant" | "liggend" | "portret" | "breed" | "video";
+export type Verhouding = "vierkant" | "liggend" | "portret" | "breed";
 
 export interface Beeldplek {
   /** Waar de foto op de site terechtkomt. */
