@@ -15,7 +15,7 @@
  * └───────────────────────────────────────────────────────────────────────────┘
  */
 
-export type Verhouding = "vierkant" | "liggend" | "portret" | "breed";
+export type Verhouding = "vierkant" | "liggend" | "portret" | "breed" | "video";
 
 export interface Beeldplek {
   /** Waar de foto op de site terechtkomt. */
@@ -117,7 +117,7 @@ export const BEELD = {
     waar: "Marktkraam Leiden",
     wat: "Haringverkoop aan het water op de Leidse markt.",
     bestand: "/images/schaaps/haringkraam-aan-het-water.webp",
-    alt: "De haringkraam van Schaap’s aan het water op de Leidse markt",
+    alt: "De viskraam van Schaap’s aan het water op de Leidse markt, met de haringsnijder achter de toonbank",
     verhouding: "liggend",
     terugval: "Haring op de Leidse markt",
   },
