@@ -18,6 +18,7 @@ const VERHOUDING: Record<Verhouding, string> = {
   liggend: "aspect-[4/3]",
   portret: "aspect-[3/4]",
   breed: "aspect-[16/6]",
+  video: "aspect-video",
 };
 
 export function Beeld({
@@ -80,6 +81,7 @@ const plekkeMaten: Record<Verhouding, readonly [number, number]> = {
   liggend: [1200, 900],
   portret: [900, 1200],
   breed: [1600, 600],
+  video: [1600, 900],
 };
 
 const ALT:Record<BeeldNaam,readonly [string,string]> = {
@@ -91,7 +93,7 @@ toonbank:["Fresh cod from our range","Frischer Kabeljau aus unserem Sortiment"],
 oestersInDeWinkel:["A member of staff shows an oyster and a box of oysters at the fish counter","Ein Mitarbeiter zeigt an der Fischtheke eine Auster und eine Kiste mit Austern"],
 achterDeToonbank:["Fish displayed on ice at our market stall", "Fisch auf Eis an unserem Marktstand"],
 gebakkenVis:["Crispy kibbeling with sauce","Knuspriger Kibbeling mit Sauce"],
-haringkraam:["Schaap’s herring stall by the water at Leiden market","Schaap’s Heringsstand am Wasser auf dem Leidener Markt"],
+haringkraam:["Schaap’s fish stall by the water at Leiden market, with the herring cutter behind the counter","Schaap’s Fischstand am Wasser auf dem Leidener Markt, mit dem Heringsschneider hinter der Theke"],
 marktZaterdag:["Schaap’s fish stall on Aalmarkt near De Waag, Leiden","Schaap’s Fischstand am Aalmarkt bei De Waag in Leiden"],
 marktWoensdag:["Schaap’s fish stall at Leiden’s Wednesday market","Schaap’s Fischstand auf dem Leidener Mittwochsmarkt"],
 marktVoorschoten:["Schaap’s fish stall by Hoogvliet in Voorschoten","Schaap’s Fischstand bei Hoogvliet in Voorschoten"],
