@@ -18,7 +18,6 @@ const VERHOUDING: Record<Verhouding, string> = {
   liggend: "aspect-[4/3]",
   portret: "aspect-[3/4]",
   breed: "aspect-[16/6]",
-  video: "aspect-video",
 };
 
 export function Beeld({
@@ -81,7 +80,6 @@ const plekkeMaten: Record<Verhouding, readonly [number, number]> = {
   liggend: [1200, 900],
   portret: [900, 1200],
   breed: [1600, 600],
-  video: [1600, 900],
 };
 
 const ALT:Record<BeeldNaam,readonly [string,string]> = {
