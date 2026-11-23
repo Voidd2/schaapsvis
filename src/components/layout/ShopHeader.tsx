@@ -37,7 +37,7 @@ export function ShopHeader() {
       <header style={{ backgroundColor: "var(--navy)" }}>
         <div className="max-w-6xl mx-auto px-4 h-[4.4rem] flex items-center justify-between gap-3">
           <div className="flex items-baseline gap-4 min-w-0">
-            <Link href={`/${locale}/bestellen`} className="min-w-0 leading-none">
+            <a href={`/${locale}`} className="min-w-0 leading-none">
               <span
                 className="block text-[1.15rem] sm:text-[1.35rem] leading-none whitespace-nowrap"
                 style={{ fontFamily: "var(--font-display)", color: "var(--cream)", fontWeight: 700 }}
@@ -45,7 +45,7 @@ export function ShopHeader() {
                 Schaap&rsquo;s Vishandel
               </span>
               <span className="kapitaal kapitaal-licht">{t("webshop")}</span>
-            </Link>
+            </a>
           </div>
 
           <div className="flex items-center gap-3">
