@@ -50,7 +50,7 @@ export function DiscountOfferPopup({ locale, experiment, enabled = true }: { loc
       if (document.hidden || excludedPath.test(pathname) || alreadyShown(experiment)) return;
       timer = window.setTimeout(() => {
         if (!element?.isConnected || document.hidden || excludedPath.test(pathname) || alreadyShown(experiment)) return;
-        if (document.fullscreenElement || document.querySelector("dialog[open]") ||
+        if (document.fullscreenElement || document.querySelector('dialog[open], .cookie-choice-banner[data-customizing], .cookie-choice-banner[aria-busy="true"]') ||
             document.activeElement?.matches("input, textarea, select, #film button")) {
           schedule();
           return;

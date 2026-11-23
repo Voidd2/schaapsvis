@@ -1,0 +1,8 @@
+@media (max-width: 720px) {
+  .directory, .directory tbody, .directory tr, .directory td { display: block; }
+  .directory thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .entry { padding-block: .65rem; }
+  .entry td { padding: .2rem 0; }
+  .entry [data-label] { display: grid; grid-template-columns: minmax(7rem, 40%) 1fr; gap: .6rem; }
+  .entry [data-label]::before { content: attr(data-label); font-weight: 600; }
+}

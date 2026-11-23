@@ -1,7 +1,8 @@
 "use client";
 import { Fragment, useEffect, useState } from "react";
 import { SignupVisitDetails } from "./SignupVisitDetails";
-import { signupSourceLabel } from "@/lib/signup-source";
+import { signupRegionLabel, signupSourceLabel, trafficSourceLabel } from "@/lib/signup-source";
+import styles from "./EmailDirectory.module.css";
 
 const copy = {
   nl: {
@@ -14,8 +15,9 @@ const copy = {
     changed: "Deze inschrijving is intussen gewijzigd. Bekijk de actuele gegevens en probeer het opnieuw.",
     removeError: "Verwijderen is niet gelukt. Probeer het opnieuw.",
     offers: "Kortingsmails",
-    source: "Inschrijfbron",
-    subscribed: "Toestemming gegeven",
+    source: "Inschrijfformulier",
+    traffic: "Verkeersbron", city: "Plaats of regio", estimate: "IP-schatting", reported: "Zelf opgegeven", missing: "Niet vastgelegd",
+    subscribed: "Toestemming voor e-mail",
     pending: "Wacht op bevestiging",
     unsubscribed: "Afgemeld",
     noConsent: "Geen toestemming",
@@ -36,8 +38,9 @@ const copy = {
     changed: "This entry has changed. Review the latest details and try again.",
     removeError: "Could not remove this entry. Please try again.",
     offers: "Marketing emails",
-    source: "Signup source",
-    subscribed: "Opted in",
+    source: "Signup form",
+    traffic: "Traffic source", city: "City or area", estimate: "IP estimate", reported: "Self-reported", missing: "Not recorded",
+    subscribed: "Email consent given",
     pending: "Awaiting confirmation",
     unsubscribed: "Unsubscribed",
     noConsent: "No consent",
@@ -58,8 +61,9 @@ const copy = {
     changed: "Dieser Eintrag wurde inzwischen geändert. Prüfen Sie die aktuellen Angaben und versuchen Sie es erneut.",
     removeError: "Der Eintrag konnte nicht entfernt werden. Bitte versuchen Sie es erneut.",
     offers: "Angebotsmails",
-    source: "Anmeldequelle",
-    subscribed: "Eingewilligt",
+    source: "Anmeldeformular",
+    traffic: "Zugriffsquelle", city: "Ort oder Region", estimate: "IP-Schätzung", reported: "Selbst angegeben", missing: "Nicht erfasst",
+    subscribed: "Einwilligung für E-Mails",
     pending: "Bestätigung ausstehend",
     unsubscribed: "Abgemeldet",
     noConsent: "Keine Einwilligung",
@@ -76,6 +80,9 @@ type Entry = {
   has_account: number;
   marketing: "subscribed" | "pending" | "unsubscribed" | "not-subscribed";
   source: string | null;
+  traffic_source: string | null;
+  visit_city: string | null;
+  region_tag: string | null;
   revision: string;
   marketing_at: string | null;
 };
@@ -161,18 +168,23 @@ export function EmailDirectory({ locale }: { locale: string }) {
       <p className="my-4">{t.intro}</p>
       <p role="status">{notice}</p>
       {entries.length > 0 && (
-        <table className="w-full text-left">
-          <thead><tr><th scope="col">{t.address}</th><th scope="col">{t.source}</th><th scope="col">{t.offers}</th></tr></thead>
+        <table className={`w-full text-left ${styles.directory}`}>
+          <thead><tr><th scope="col">{t.address}</th><th scope="col">{t.traffic}</th><th scope="col">{t.city}</th><th scope="col">{t.offers}</th></tr></thead>
           <tbody>
             {entries.map(row => (
-              <Fragment key={row.email}><tr className="border-t">
-                <td className="break-all py-3 pr-3"><button type="button" className="min-h-11 text-left text-sky-800 underline underline-offset-4" aria-expanded={opened===row.email} onClick={()=>setOpened(opened===row.email ? null : row.email)}>{row.email}</button></td>
-                <td className="break-words py-3 pr-3">{signupSourceLabel(row.source, locale, Boolean(row.has_account) && row.marketing === "not-subscribed")}</td>
-                <td className="py-3">{t[statusLabel[row.marketing]]}
-                  {row.marketing_at && <time className="block text-sm" dateTime={row.marketing_at}>{new Intl.DateTimeFormat(locale, {dateStyle:"medium", timeStyle:"short", timeZone:"Europe/Amsterdam"}).format(new Date(row.marketing_at))}</time>}
+              <Fragment key={row.email}><tr className={`border-t ${styles.entry}`}>
+                <td className="break-words py-3 pr-3"><button type="button" className="min-h-11 break-all text-left text-sky-800 underline underline-offset-4" aria-expanded={opened===row.email} onClick={()=>setOpened(opened===row.email ? null : row.email)}>{row.email}</button>
+                  <small className="block">{t.source} · {signupSourceLabel(row.source, locale, Boolean(row.has_account) && row.marketing === "not-subscribed")}</small>
                 </td>
-              </tr>{opened===row.email && <tr><td colSpan={3}>
-                <SignupVisitDetails email={row.email} locale={locale}/>
+                <td data-label={t.traffic} className="py-3 pr-3">{trafficSourceLabel(row.traffic_source, locale)}</td>
+                <td data-label={t.city} className="py-3 pr-3"><span>{row.visit_city || signupRegionLabel(row.region_tag, locale) || t.missing}
+                  {(row.visit_city || row.region_tag) && <small className="block">{row.visit_city ? t.estimate : t.reported}</small>}</span></td>
+                <td data-label={t.offers} className="py-3"><span>{t[statusLabel[row.marketing]]}
+                  {row.marketing_at && <time className="block text-sm" dateTime={row.marketing_at}>{new Intl.DateTimeFormat(locale, {dateStyle:"medium", timeStyle:"short", timeZone:"Europe/Amsterdam"}).format(new Date(row.marketing_at))}</time>}
+                </span></td>
+              </tr>{opened===row.email && <tr><td colSpan={4}>
+                <SignupVisitDetails email={row.email} locale={locale} accountOnly={Boolean(row.has_account) && row.marketing === "not-subscribed"}
+                  onErase={()=>setEntries(entries=>entries.map(entry=>entry.email === row.email ? {...entry,visit_city:null,traffic_source:null} : entry))}/>
                 <button type="button" className="knop knop-lijn mb-4" disabled={!row.revision || Boolean(removing) || status!=="ready"} onClick={()=>removeEntry(row)}>
                   {removing===row.email ? t.removing : t.remove}
                 </button>

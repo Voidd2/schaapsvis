@@ -2,8 +2,8 @@ import { actionEmail, verificationCodeEmail, campaignEmail, accountEmailText } f
 import { validPopupMeasurement, popupExposure, countNewPopupSubscription, popupReport } from "./popup-experiment.mjs";
 import { publicAnalyticsPath, analyticsTarget, analyticsReport } from "./analytics.mjs";
 import { storeJourney, forgetJourney, journeyReport } from "./journeys.mjs";
-import { validJourneyId, journeySnapshot } from "../../../src/lib/journey-shared.mjs";
-import { signupVisitPath, maxVisitPages, visitConsentVersion, visitMinutes } from "../../../src/lib/signup-visit-path.mjs";
+import { validJourneyId, journeySnapshot, journeySources } from "../../../src/lib/journey-shared.mjs";
+import { signupVisitPath, maxVisitPages, legacyVisitConsentVersion, visitConsentVersion, visitMinutes } from "../../../src/lib/signup-visit-path.mjs";
 import { clientDeviceInfo } from "./device-info.mjs";
 import { Pass, SigningMaterial } from "passmint";
 import { APPLE_WALLET_ICON_2X } from "./wallet-assets.mjs";
@@ -648,11 +648,12 @@ async function adminEmailAddresses(request, env) {
       UNION SELECT email FROM newsletter_subscriptions WHERE email > ?
     )
     SELECT a.email, u.id IS NOT NULL AS has_account, COALESCE(n.status,'not-subscribed') AS marketing,
-      n.source, ${directoryRevision} AS revision,
+      n.source, n.region_tag, v.city AS visit_city, v.traffic_source, ${directoryRevision} AS revision,
       CASE WHEN n.status='unsubscribed' THEN n.unsubscribed_at ELSE n.consented_at END AS marketing_at
     FROM addresses a LEFT JOIN users u ON u.email=a.email AND u.account_status IN ('active','locked')
     LEFT JOIN newsletter_subscriptions n ON n.email=a.email
-    ORDER BY a.email COLLATE NOCASE LIMIT 101`).bind(after,after).all();
+    LEFT JOIN signup_visits v ON v.email=n.email AND v.expires_at>?
+    ORDER BY a.email COLLATE NOCASE LIMIT 101`).bind(after,after,nowIso()).all();
   const emails = (rows.results || []).slice(0,100);
   return json({emails, next:rows.results?.length > 100 ? emails.at(-1).email : null});
 }
@@ -698,12 +699,13 @@ async function adminSignupVisit(request, env) {
     await env.DB.prepare("DELETE FROM signup_visits WHERE email=?").bind(email).run();
   }
   const subscription = await env.DB.prepare("SELECT region_tag, source FROM newsletter_subscriptions WHERE email=?").bind(email).first();
-  const visit = await env.DB.prepare("SELECT granted_at, signup_at, ip, city, pages FROM signup_visits WHERE email=? AND expires_at>?")
+  const visit = await env.DB.prepare("SELECT granted_at, signup_at, ip, city, pages, traffic_source, entry_path, signup_path FROM signup_visits WHERE email=? AND expires_at>?")
     .bind(email, nowIso()).first();
   return json({source:subscription?.source ?? null, region:subscription?.region_tag ?? null, visit:visit ? {...visit, pages:JSON.parse(visit.pages)} : null});
 }
 
 const isVisitToken = value => typeof value === "string" && /^[A-Za-z0-9_-]{43}$/.test(value);
+const supportsVisitVersion = version => version === visitConsentVersion || version === legacyVisitConsentVersion;
 const isCaptureId = value => typeof value === "string" && /^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(value);
 
 async function visitChoice(request, env, action) {
@@ -714,41 +716,55 @@ async function visitChoice(request, env, action) {
     await env.DB.prepare("DELETE FROM signup_visits WHERE token_hash=?").bind(await digest(body.token)).run();
     return json({ok:true});
   }
-  if (body?.version !== visitConsentVersion || body.consent !== true || env.ANALYTICS_ENABLED !== "on") return json({error:"consent_required"}, 400);
+  if (!supportsVisitVersion(body?.version) || body.consent !== true || env.ANALYTICS_ENABLED !== "on") return json({error:"consent_required"}, 400);
   const ip = request.headers.get("CF-Connecting-IP") || "";
   if (!ip || (env.ANALYTICS_EXCLUDED_IP_HASH && await digest(ip) === env.ANALYTICS_EXCLUDED_IP_HASH)) return json({ok:true});
   if (action === "grant") {
     const key = await hmac(env.AUTH_PEPPER, `signup-visit:${ip}`);
     if (!await rateLimit(env.DB,key,60,3600000)) return json({error:"rate_limited"},429);
+    if (body.version === visitConsentVersion && isVisitToken(body.previousToken)) {
+      const hash = await digest(body.previousToken);
+      const at = nowIso();
+      // Only a new, explicit choice upgrades an unused grant. An existing signup keeps its original scope and expiry.
+      const [,existing] = await env.DB.batch([
+        env.DB.prepare("UPDATE signup_visits SET consent_version=?, granted_at=? WHERE token_hash=? AND consent_version=? AND expires_at>? AND email IS NULL")
+          .bind(visitConsentVersion,at,hash,legacyVisitConsentVersion,at),
+        env.DB.prepare("SELECT consent_version, expires_at FROM signup_visits WHERE token_hash=? AND expires_at>?").bind(hash,at),
+      ]);
+      const grant = existing.results?.[0];
+      if (grant) return json({ok:true, token:body.previousToken, version:grant.consent_version, expires:grant.expires_at});
+    }
     const token = await randomToken();
     const expires = new Date(Date.now() + 30 * 86400000).toISOString();
     await env.DB.prepare("INSERT INTO signup_visits(token_hash,consent_version,granted_at,expires_at) VALUES(?,?,?,?)")
-      .bind(await digest(token), visitConsentVersion, nowIso(), expires).run();
-    return json({ok:true, token, expires});
+      .bind(await digest(token), body.version, nowIso(), expires).run();
+    return json({ok:true, token, version:body.version, expires});
   }
   const path = signupVisitPath(body.path);
   if (!path || !isVisitToken(body.token) || !isCaptureId(body.captureId)) return json({error:"invalid_visit"},400);
   // Updates cannot recreate a revoked grant. A later visit from this browser cannot extend the window.
   await env.DB.prepare(`UPDATE signup_visits SET pages=json_insert(
         CASE WHEN json_array_length(pages)>=? THEN json_remove(pages,'$[0]') ELSE pages END,'$[#]',?)
-      WHERE token_hash=? AND capture_id=? AND signup_at>? AND expires_at>? AND COALESCE(json_extract(pages,'$[#-1]'),'')!=?`)
-    .bind(maxVisitPages,path,await digest(body.token),body.captureId,new Date(Date.now()-visitMinutes*60000).toISOString(),nowIso(),path).run();
+      WHERE token_hash=? AND consent_version=? AND capture_id=? AND signup_at>? AND expires_at>? AND COALESCE(json_extract(pages,'$[#-1]'),'')!=?`)
+    .bind(maxVisitPages,path,await digest(body.token),body.version,body.captureId,new Date(Date.now()-visitMinutes*60000).toISOString(),nowIso(),path).run();
   return json({ok:true});
 }
 
 async function signupVisitStatement(request, env, visit, email, at, newAccountId = null) {
-  if (env.ANALYTICS_ENABLED !== "on" || visit?.version !== visitConsentVersion || !isVisitToken(visit.token) || !isCaptureId(visit.captureId) || !Array.isArray(visit.pages)) return null;
+  if (env.ANALYTICS_ENABLED !== "on" || !supportsVisitVersion(visit?.version) || !isVisitToken(visit.token) || !isCaptureId(visit.captureId) || !Array.isArray(visit.pages)) return null;
   const ip = request.headers.get("CF-Connecting-IP");
   if (!ip || !/^[\da-f:.]{3,45}$/i.test(ip) || (env.ANALYTICS_EXCLUDED_IP_HASH && await digest(ip) === env.ANALYTICS_EXCLUDED_IP_HASH)) return null;
   const pages = visit.pages.slice(-maxVisitPages).map(signupVisitPath).filter(Boolean);
-  if (!pages.length) return null;
+  const entryPath = signupVisitPath(visit.entryPath) || null;
+  const trafficSource = visit.version === visitConsentVersion && entryPath && journeySources.includes(visit.trafficSource) ? visit.trafficSource : null;
+  const signupPath = signupVisitPath(visit.signupPath) || null;
   const city = typeof request.cf?.city === "string" ? request.cf.city.trim().slice(0,100) || null : null;
   // Executed immediately before the first subscription insert in the same transaction.
-  return env.DB.prepare(`UPDATE signup_visits SET email=?, signup_at=?, capture_id=?, ip=?, city=?, pages=?
+  return env.DB.prepare(`UPDATE signup_visits SET email=?, signup_at=?, capture_id=?, ip=?, city=?, pages=?, entry_path=?, traffic_source=?, signup_path=?
     WHERE token_hash=? AND consent_version=? AND email IS NULL AND expires_at>?
-    AND NOT EXISTS(SELECT 1 FROM newsletter_subscriptions WHERE email=?)
+    AND NOT EXISTS(SELECT 1 FROM newsletter_subscriptions WHERE email=? AND status!='unsubscribed')
     AND (? IS NULL OR EXISTS(SELECT 1 FROM users WHERE id=? AND email=?))`)
-    .bind(email, at, visit.captureId, ip, city, JSON.stringify(pages), await digest(visit.token), visitConsentVersion, at, email,
+    .bind(email, at, visit.captureId, ip, city, JSON.stringify(pages), entryPath, trafficSource, signupPath, await digest(visit.token), visit.version, at, email,
       newAccountId,newAccountId,email);
 }
 
@@ -2210,8 +2226,7 @@ function footerSignupSource(request) {
     const ref = new URL(request.headers.get("Referer"));
     if (ref.origin !== new URL(request.url).origin) return "footer";
     const path = ref.pathname.replace(/\/$/, "");
-    if (/^\/(?:nl|en|de)(?:\/(?:aanbiedingen|assortiment|beeldverantwoording|bezoek-ons|bezorgen|biologische-vis|blog|contact|frischer-fisch-leiden|marktkraam-leiden|ons-verhaal|privacyverklaring|recepten|studentenkorting|too-good-to-go|varlaks|viskalender|viswinkel-leiden|viswinkel-voorschoten))?$/.test(path)
-        || /^\/(?:nl|en|de)\/(?:assortiment|blog|recepten|bezorgen)\/[a-z0-9][a-z0-9-]{0,99}$/.test(path)) {
+    if (signupVisitPath(path) || /^\/(nl|en|de)\/(beeldverantwoording|privacyverklaring|studentenkorting)$/.test(path)) {
       return `footer:${path}`;
     }
   } catch { /* A browser may omit the referrer. */ }

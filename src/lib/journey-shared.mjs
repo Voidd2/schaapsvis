@@ -7,13 +7,7 @@ export const journeySources = ["facebook", "instagram", "google", "bing", "newsl
 export const journeyIdleMs = 30 * 60 * 1000;
 export const journeyMaxMs = 4 * 60 * 60 * 1000;
 export const journeyMaxPages = 50;
-export function journeyPath(value) {
-  const standard = signupVisitPath(value);
-  if (standard) return standard;
-  if (typeof value !== "string" || value.length > 150) return "";
-  const path = value.replace(/\/$/, "");
-  return /^\/(nl|en|de)\/(barbecue-gourmet|gourmetschotel|relatiegeschenken|visschalen|feestdagen)$/.test(path) || /^\/(nl|en|de)\/feestdagen\/[a-z0-9][a-z0-9-]{0,99}$/.test(path) ? path : "";
-}
+export const journeyPath = signupVisitPath;
 
 export function journeySource(href, referrer, origin) {
   try {
@@ -26,7 +20,7 @@ export function journeySource(href, referrer, origin) {
     const host = ref.hostname.toLowerCase();
     if (host === "facebook.com" || host.endsWith(".facebook.com") || host === "fb.com") return "facebook";
     if (host === "instagram.com" || host.endsWith(".instagram.com")) return "instagram";
-    if (/^(www\.)?google\.[a-z.]{2,10}$/.test(host)) return "google";
+    if (/^(www\.)?google\.(com|cat|[a-z]{2}|(co|com)\.[a-z]{2})$/.test(host)) return "google";
     if (host === "bing.com" || host.endsWith(".bing.com")) return "bing";
     return "other";
   } catch { return "direct_unknown"; }

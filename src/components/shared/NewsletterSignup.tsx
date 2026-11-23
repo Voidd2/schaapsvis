@@ -58,7 +58,7 @@ export function NewsletterSignup({ compact = false, locale = "nl" }: { compact?:
     setMessage("");
     const email = String(new FormData(event.currentTarget).get("email") || "").trim().toLowerCase();
     try {
-      const visit = visitAtSignup();
+      const visit = await visitAtSignup();
       const response = await fetch("/api/members/newsletter/subscribe", {
         method: "POST", headers: { "Content-Type": "application/json" }, credentials: "same-origin",
         body: JSON.stringify({ email, form: "footer", consent: true, consentVersion: "footer-email-signup-v2", locale: language, visit }),
