@@ -2,9 +2,8 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 import { ChevronDown } from "lucide-react";
-import styles from "./footer.module.css";
 
-export function FooterPanel({ title, children }: { title: string; children: ReactNode }) {
+export function FooterPanel({ title, children, className }: { title: string; children: ReactNode; className: string }) {
   const ref = useRef<HTMLDetailsElement>(null);
 
   useEffect(() => {
@@ -18,9 +17,9 @@ export function FooterPanel({ title, children }: { title: string; children: Reac
   }, []);
 
   return (
-    <details ref={ref} className={styles.panel}>
+    <details ref={ref} className={className}>
       <summary>{title}<ChevronDown size={18} aria-hidden="true" /></summary>
-      <div className={styles.panelBody}>{children}</div>
+      <div>{children}</div>
     </details>
   );
 }

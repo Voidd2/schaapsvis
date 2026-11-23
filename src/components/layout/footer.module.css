@@ -39,7 +39,7 @@
 .panel > summary::-webkit-details-marker { display: none; }
 .panel > summary svg { flex: none; color: #c2e0e6; }
 .panel[open] > summary svg { transform: rotate(180deg); }
-.panelBody { padding-block: 2px 16px; }
+.panel > div { padding-block: 2px 16px; }
 .hours { display: grid; gap: 10px; }
 .hours dt { font-weight: 600; color: white; }
 .payment { font-size: .9rem; margin-top: 10px; }
@@ -98,7 +98,7 @@
   .directory, .bottom { grid-column: 1 / -1; }
   .grid > .panel { border-top: none; }
   .panel > summary { font: 700 1.18rem/1.3 var(--font-display); }
-  .panelBody { padding-bottom: 0; }
+  .panel > div { padding-bottom: 0; }
   .groups { grid-template-columns: repeat(3,minmax(0,1fr)); }
   .groups h2 { margin-block: 4px; }
   .groups li a { min-height: 32px; }

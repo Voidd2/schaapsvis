@@ -40,6 +40,8 @@ export default async function VarlaksPage({ params }: Props) {
   const c = campaign[lang], q = questionsCopy[lang];
   const storefront = BEELD.winkelGevel;
   const shopCopy = lang === "nl" ? storefront : storefront.vertalingen[lang];
+  const stall = BEELD.marktVoorschoten;
+  const stallCopy = lang === "nl" ? stall : stall.vertalingen[lang];
   const locationPhotoSizes = "(max-width: 740px) 90vw, min(45vw, 800px)";
   return <div className={styles.page}>
     <Schema data={kruimelSchema(lang, [{ naam: BEDRIJF.naamKort, pad: "/" }, { naam: "VÅRLAKS", pad: "/varlaks" }])} />
@@ -91,9 +93,9 @@ export default async function VarlaksPage({ params }: Props) {
           <figcaption>{shopCopy.bijschrift}</figcaption>
         </figure>
         <figure>
-          <StaticResponsiveImage src={BEELD.historieNu.bestand} alt={c.stallAlt}
+          <StaticResponsiveImage src={stall.bestand} alt={stallCopy.alt}
             width={1600} height={900} sizes={locationPhotoSizes} />
-          <figcaption>{c.stallCaption}</figcaption>
+          <figcaption>{stallCopy.bijschrift}</figcaption>
         </figure>
     </div>
 

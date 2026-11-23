@@ -81,7 +81,7 @@ export function Footer() {
           </div>
         </address>
 
-        <FooterPanel title={t("kopTijden")}>
+        <FooterPanel className={styles.panel} title={t("kopTijden")}>
           <dl className={styles.hours}>
             <div><dt>{t("winkel")}</dt><dd><ShopHours locale={locale} /></dd></div>
             {[
@@ -94,12 +94,12 @@ export function Footer() {
           <p className={styles.payment}>{t("betalen")}</p>
         </FooterPanel>
 
-        <FooterPanel title={t("kopNieuwsbrief")}>
+        <FooterPanel className={styles.panel} title={t("kopNieuwsbrief")}>
           <NewsletterSignup compact locale={locale} />
         </FooterPanel>
 
         <div className={styles.directory}>
-          <FooterPanel title={t("kopPaginas")}>
+          <FooterPanel className={styles.panel} title={t("kopPaginas")}>
             <nav className={styles.groups} aria-label={t("kopPaginas")}>
               {groepen.map((groep) => (
                 <div key={groep.kop}>

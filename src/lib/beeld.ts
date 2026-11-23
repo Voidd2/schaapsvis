@@ -28,11 +28,20 @@ export interface Beeldplek {
   alt: string;
   /** Visible caption describing the actual owner photo, when used in the hero. */
   bijschrift?: string;
-  vertalingen?: Partial<Record<"en" | "de", { alt: string; bijschrift: string }>>;
+  vertalingen?: Partial<Record<"en" | "de", { alt: string; bijschrift?: string }>>;
   verhouding: Verhouding;
   /** Intern label voor een nog ontbrekende eigenaarfoto. */
   terugval: string;
 }
+
+const standplaatsVoorschoten = {
+  alt: "De viskraam van Schaap’s op de parkeerplaats bij Hoogvliet in Voorschoten",
+  bijschrift: "Onze viskraam",
+  vertalingen: {
+    en: { alt: "Schaap’s fish stall in the Hoogvliet car park in Voorschoten", bijschrift: "Our fish stall" },
+    de: { alt: "Der Fischstand von Schaap’s auf dem Parkplatz bei Hoogvliet in Voorschoten", bijschrift: "Unser Fischstand" },
+  },
+};
 
 export const BEELD = {
   /* ── Het logo ──────────────────────────────────────────────────────────── */
@@ -69,13 +78,9 @@ export const BEELD = {
   },
   hoogvlietVoorschoten: {
     waar: "Bezoek ons, bij de vrijdaglocatie in Voorschoten",
-    wat: "De echte voorgevel van Hoogvliet aan de Veurseweg. Houd de winkel herkenbaar en toon een deel van de parkeerplaats.",
-    bestand: "/images/schaaps/hoogvliet-voorschoten.webp",
-    alt: "Voorkant van Hoogvliet aan de Veurseweg 18 in Voorschoten; onze viskraam staat op de parkeerplaats",
-    vertalingen: {
-      en: { alt: "Front of Hoogvliet at Veurseweg 18 in Voorschoten; our fish stall is in the car park", bijschrift: "Hoogvliet in Voorschoten · our Friday fish stall is in the car park" },
-      de: { alt: "Vorderseite von Hoogvliet am Veurseweg 18 in Voorschoten; unser Fischstand steht auf dem Parkplatz", bijschrift: "Hoogvliet in Voorschoten · unser Fischstand steht freitags auf dem Parkplatz" },
-    },
+    wat: "Overzicht van de viskraam en de parkeerplaats bij Hoogvliet.",
+    bestand: "/images/schaaps/parkeerplaats-viskraam-voorschoten.webp",
+    ...standplaatsVoorschoten,
     verhouding: "liggend",
     terugval: "Hoogvliet in Voorschoten",
   },
@@ -86,6 +91,18 @@ export const BEELD = {
     alt: "Verse kabeljauw uit het assortiment",
     verhouding: "liggend",
     terugval: "De toonbank",
+  },
+  winkelToonbank: {
+    waar: "Viswinkel Leiden",
+    wat: "Verse vis in de vitrine van de winkel aan de Herenstraat.",
+    bestand: "/images/schaaps/toonbank-herenstraat-leiden.webp",
+    alt: "Hele vissen en visfilets in de toonbank aan de Herenstraat in Leiden",
+    vertalingen: {
+      en: { alt: "Whole fish and fish fillets in the display counter at Herenstraat in Leiden" },
+      de: { alt: "Ganze Fische und Fischfilets in der Theke an der Herenstraat in Leiden" },
+    },
+    verhouding: "liggend",
+    terugval: "Onze toonbank",
   },
   oestersInDeWinkel: {
     waar: "Viswinkel Leiden, bij de vragen aan de toonbank",
@@ -140,8 +157,8 @@ export const BEELD = {
   marktVoorschoten: {
     waar: "Bezoek ons, Marktkramen en Viswinkel Voorschoten",
     wat: "De kraam op de parkeerplaats bij Hoogvliet in Voorschoten.",
-    bestand: "",
-    alt: "De viskraam van Schaap's bij Hoogvliet in Voorschoten",
+    bestand: "/images/schaaps/viskraam-hoogvliet-voorschoten.webp",
+    ...standplaatsVoorschoten,
     verhouding: "liggend",
     terugval: "Bij Hoogvliet, Voorschoten",
   },

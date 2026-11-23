@@ -1,5 +1,7 @@
 import { siteLanguage } from "./language";
 const TEXT:Record<string,readonly[string,string]>={
+ "Haring en oesters in de toonbank van de viskraam":["Herring and oysters in the fish stall’s display counter","Hering und Austern in der Theke des Fischstands"],
+ "VÅRLAKS-zalm":["VÅRLAKS salmon","VÅRLAKS-Lachs"],
  "Schaap’s Vishandel · sinds 1938":["Schaap’s Vishandel · since 1938","Schaap’s Vishandel · seit 1938"],
  "Visboer Voorschoten: elke vrijdag bij Hoogvliet":["Fishmonger in Voorschoten: every Friday at Hoogvliet","Fischstand in Voorschoten: jeden Freitag bei Hoogvliet"],
  "Goede vis, persoonlijk advies en duidelijke prijzen. Probeer onze viskraam op vrijdag: van verse zalm voor het avondeten tot krokante kibbeling en haring met uitjes.":["Good fish, personal advice and clear pricing. Visit our Friday fish stall: from fresh salmon for dinner to crispy kibbeling and herring with onions.","Guter Fisch, persönliche Beratung und klare Preise. Besuchen Sie freitags unseren Fischstand: von frischem Lachs fürs Abendessen bis zu knusprigem Kibbeling und Matjes mit Zwiebeln."],

@@ -5,7 +5,7 @@ const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const origin=process.env.AUDIT_ORIGIN||'http://localhost:3037';
 assert.match(origin,/^http:\/\/(localhost|127\.0\.0\.1):\d+$/);
 const manifest=JSON.parse(await fs.readFile('src/lib/static-image-variants.json','utf8'));
-const byPath=new Map(Object.entries(manifest).flatMap(([original,m])=>m.variants.map(v=>[v.src,{...v,original,originalBytes:m.originalBytes}])));
+const byPath=new Map(Object.entries(manifest).flatMap(([original,m])=>[...m.variants,...(m.heroAvif ?? [])].map(v=>[v.src,{...v,original,originalBytes:m.originalBytes}])));
 const browser=await chromium.launch({channel:'chrome',headless:true}),results=[];
 try{
  for(const width of [390,1440]){

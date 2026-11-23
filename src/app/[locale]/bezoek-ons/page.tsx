@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     pad: "/bezoek-ons",
     title: t("bezoekTitle"),
     description: t("bezoekDesc"),
-    image: BEELD.historieNu.bestand,
+    image: BEELD.winkelGevel.bestand,
   });
 }
 
@@ -77,7 +77,7 @@ export default async function BezoekOnsPage({ params }: Props) {
               sizes="(max-width: 799px) 100vw, (max-width: 1720px) 48vw, 790px"
               className={styles.locationPhoto} loading="eager" fetchPriority="high" />
             <div className={styles.cardBody}>
-              <h2 id="shop-title">{t("shop")}</h2>
+              <h2 id="shop-title"><Link className={styles.headingLink} href={`/${locale}/viswinkel-leiden`}>{t("shop")}</Link></h2>
               <p>{ADRES_REGEL}</p>
               <dl className={styles.hours}>
                 {openingRows("winkel", locale).map(row =>
@@ -94,7 +94,7 @@ export default async function BezoekOnsPage({ params }: Props) {
           <article id="locatie-voorschoten" className={styles.locationCard} aria-labelledby="stall-title">
             <div className={styles.photoFrame}>
               <StaticResponsiveImage src={voorschotenPhoto.bestand} alt={stallAlt}
-                width={1600} height={1200} loading="eager"
+                width={1104} height={621} loading="lazy"
                 sizes="(max-width: 799px) 100vw, (max-width: 1720px) 48vw, 790px"
                 className={`${styles.locationPhoto} ${styles.stallPhoto}`} />
               <span className={styles.photoBadge}>{t("stallPhotoLabel")}</span>
@@ -128,7 +128,7 @@ export default async function BezoekOnsPage({ params }: Props) {
     </section>
 
     <section className={`section-wrap ${styles.locations}`} aria-labelledby="visit-markets">
-      <h2 id="visit-markets">{t("market")}</h2>
+      <h2 id="visit-markets"><Link className={styles.headingLink} href={`/${locale}/marktkraam-leiden`}>{t("market")}</Link></h2>
       <div className={styles.locationsGrid}>
         {markets.map(({ id, point, day }) => {
           const hours = marketHours.find(row => row.day === day)!;
