@@ -9,6 +9,7 @@ import { productPhoto } from "@/lib/product-beeld";
 import { legacyTrioSlugs } from "@/lib/seafood-catalog";
 import { FEESTDAGEN_PRODUCTEN } from "@/lib/feestdagen-producten";
 
+import { BEELD } from "@/lib/beeld";
 import { BEDRIJF } from "@/lib/bedrijf";
 import { LOCALES } from "@/lib/seo";
 import { siteOpSlot } from "@/lib/siteAccess";
@@ -28,7 +29,18 @@ const basis = BEDRIJF.domein;
  *    is, kost je de koppeling tussen de versies die er wél zijn.
  */
 // Route content changed in this release; unknown dates are omitted rather than invented.
-const CONTENT_DATES: Record<string, string> = Object.fromEntries(["", "/visschalen", "/feestdagen", "/relatiegeschenken", "/assortiment", "/studentenkorting", "/bezoek-ons", "/viswinkel-leiden", "/blog", "/recepten"].map(route => [route, "2026-11-09"]));
+const CONTENT_DATES: Record<string, string> = Object.fromEntries(["", "/visschalen", "/feestdagen", "/relatiegeschenken", "/assortiment", "/studentenkorting", "/blog", "/recepten"].map(route => [route, "2026-11-09"]));
+
+const locatieBeelden: Record<string, string[]> = {
+  "/bezoek-ons": [BEELD.winkelGevel.bestand, BEELD.hoogvlietVoorschoten.bestand],
+  "/viswinkel-leiden": [BEELD.winkelToonbank.bestand],
+  "/viswinkel-voorschoten": [
+    BEELD.marktVoorschoten.bestand,
+    "/images/schaaps/haring-oesters-viskraam-voorschoten.webp",
+    "/images/schaaps/varlaks-viskraam-voorschoten.webp",
+  ],
+  "/varlaks": ["/images/varlaks/zalmfilet-1200.webp", BEELD.marktVoorschoten.bestand],
+};
 
 /** Pagina's die in nl, en én de bestaan. */
 const MEERTALIG: {
@@ -47,15 +59,15 @@ const MEERTALIG: {
   { pad: "/assortiment", prioriteit: 0.9, frequentie: "weekly" as const },
   { pad: "/gourmetschotel", prioriteit: 0.8, frequentie: "monthly" as const },
   { pad: "/barbecue-gourmet", prioriteit: 0.8, frequentie: "monthly" as const, gewijzigd: new Date("2026-10-21") },
-  { pad: "/bezoek-ons", prioriteit: 0.85, frequentie: "monthly" as const },
-  { pad: "/varlaks", prioriteit: 0.8, frequentie: "monthly" as const },
+  { pad: "/bezoek-ons", gewijzigd: new Date("2026-11-23"), prioriteit: 0.85, frequentie: "monthly" as const },
+  { pad: "/varlaks", gewijzigd: new Date("2026-11-23"), prioriteit: 0.8, frequentie: "monthly" as const },
   { pad: "/ons-verhaal", prioriteit: 0.7, frequentie: "yearly" as const },
   { pad: "/contact", prioriteit: 0.6, frequentie: "yearly" as const },
   { pad: "/recepten", prioriteit: 0.6, frequentie: "monthly" as const },
   { pad: "/blog", prioriteit: 0.6, frequentie: "monthly" as const },
   { pad: "/viskalender", prioriteit: 0.6, frequentie: "monthly" as const },
-  { pad: "/viswinkel-voorschoten", prioriteit: 0.8, frequentie: "monthly" as const },
-  { pad: "/viswinkel-leiden", prioriteit: 0.8, frequentie: "monthly" as const },
+  { pad: "/viswinkel-voorschoten", gewijzigd: new Date("2026-11-23"), prioriteit: 0.8, frequentie: "monthly" as const },
+  { pad: "/viswinkel-leiden", gewijzigd: new Date("2026-11-23"), prioriteit: 0.8, frequentie: "monthly" as const },
   { pad: "/studentenkorting", prioriteit: 0.6, frequentie: "monthly" as const },
   { pad: "/aanbiedingen", prioriteit: 0.6, frequentie: "monthly" as const },
   { pad: "/marktkraam-leiden", prioriteit: 0.7, frequentie: "monthly" as const },
@@ -92,6 +104,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: frequentie,
         priority: prioriteit,
         alternates,
+        images: locatieBeelden[pad]?.map(src => basis + src),
       });
     }
   }

@@ -49,6 +49,133 @@
         "width": 1280,
         "bytes": 189728
       }
+    ],
+    "heroAvif": [
+      {
+        "src": "/images/responsive/winkel-herenstraat-home-e62168bee392-400.avif",
+        "width": 400,
+        "bytes": 12936
+      },
+      {
+        "src": "/images/responsive/winkel-herenstraat-home-e62168bee392-640.avif",
+        "width": 640,
+        "bytes": 27547
+      },
+      {
+        "src": "/images/responsive/winkel-herenstraat-home-e62168bee392-800.avif",
+        "width": 800,
+        "bytes": 39708
+      },
+      {
+        "src": "/images/responsive/winkel-herenstraat-home-e62168bee392-960.avif",
+        "width": 960,
+        "bytes": 52950
+      },
+      {
+        "src": "/images/responsive/winkel-herenstraat-home-e62168bee392-1280.avif",
+        "width": 1280,
+        "bytes": 79623
+      }
+    ]
+  },
+  "/images/schaaps/viskraam-hoogvliet-voorschoten.webp": {
+    "sha256": "b5b671c502bfede3cd7346acf70cd1e7531b85b60abb0df618f8b53ec807c4a5",
+    "originalBytes": 492366,
+    "variants": [
+      {
+        "src": "/images/responsive/viskraam-hoogvliet-voorschoten-b5b671c502bf-320.webp",
+        "width": 320,
+        "bytes": 16298
+      },
+      {
+        "src": "/images/responsive/viskraam-hoogvliet-voorschoten-b5b671c502bf-640.webp",
+        "width": 640,
+        "bytes": 64560
+      },
+      {
+        "src": "/images/responsive/viskraam-hoogvliet-voorschoten-b5b671c502bf-960.webp",
+        "width": 960,
+        "bytes": 138016
+      },
+      {
+        "src": "/images/responsive/viskraam-hoogvliet-voorschoten-b5b671c502bf-1280.webp",
+        "width": 1280,
+        "bytes": 221304
+      }
+    ]
+  },
+  "/images/schaaps/parkeerplaats-viskraam-voorschoten.webp": {
+    "sha256": "463feb44fabdc5f6a6a018902e7f1e8bd052d58f05a480fac2160c47a9c5217b",
+    "originalBytes": 223558,
+    "variants": [
+      {
+        "src": "/images/responsive/parkeerplaats-viskraam-voorschoten-463feb44fabd-320.webp",
+        "width": 320,
+        "bytes": 13294
+      },
+      {
+        "src": "/images/responsive/parkeerplaats-viskraam-voorschoten-463feb44fabd-640.webp",
+        "width": 640,
+        "bytes": 53770
+      },
+      {
+        "src": "/images/responsive/parkeerplaats-viskraam-voorschoten-463feb44fabd-960.webp",
+        "width": 960,
+        "bytes": 113206
+      }
+    ]
+  },
+  "/images/schaaps/haring-oesters-viskraam-voorschoten.webp": {
+    "sha256": "24fe13062bda477fe21e23177026917f9aa9f07042f3963e5a36758967c7c08e",
+    "originalBytes": 198174,
+    "variants": [
+      {
+        "src": "/images/responsive/haring-oesters-viskraam-voorschoten-24fe13062bda-320.webp",
+        "width": 320,
+        "bytes": 24720
+      },
+      {
+        "src": "/images/responsive/haring-oesters-viskraam-voorschoten-24fe13062bda-640.webp",
+        "width": 640,
+        "bytes": 80920
+      }
+    ]
+  },
+  "/images/schaaps/varlaks-viskraam-voorschoten.webp": {
+    "sha256": "7f3c8b48735d0e6a5004d2f5f5f01b67cf802731003cab43c6a5fdb7f6f71d0e",
+    "originalBytes": 137470,
+    "variants": [
+      {
+        "src": "/images/responsive/varlaks-viskraam-voorschoten-7f3c8b48735d-320.webp",
+        "width": 320,
+        "bytes": 19172
+      },
+      {
+        "src": "/images/responsive/varlaks-viskraam-voorschoten-7f3c8b48735d-640.webp",
+        "width": 640,
+        "bytes": 51800
+      }
+    ]
+  },
+  "/images/schaaps/toonbank-herenstraat-leiden.webp": {
+    "sha256": "258edbd4a8e11b22525165c3163138c2692bd9b68112156e51e918dfd65c263a",
+    "originalBytes": 223084,
+    "variants": [
+      {
+        "src": "/images/responsive/toonbank-herenstraat-leiden-258edbd4a8e1-320.webp",
+        "width": 320,
+        "bytes": 15868
+      },
+      {
+        "src": "/images/responsive/toonbank-herenstraat-leiden-258edbd4a8e1-640.webp",
+        "width": 640,
+        "bytes": 51202
+      },
+      {
+        "src": "/images/responsive/toonbank-herenstraat-leiden-258edbd4a8e1-960.webp",
+        "width": 960,
+        "bytes": 91958
+      }
     ]
   },
   "/images/schaaps/hoogvliet-voorschoten.webp": {

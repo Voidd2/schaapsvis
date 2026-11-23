@@ -9,6 +9,11 @@ import sharp from 'sharp';
 const sources = [...new Set([
  '/images/schaaps/oesters-in-de-winkel.webp',
  '/images/schaaps/winkel-herenstraat.webp',
+ '/images/schaaps/viskraam-hoogvliet-voorschoten.webp',
+ '/images/schaaps/parkeerplaats-viskraam-voorschoten.webp',
+ '/images/schaaps/haring-oesters-viskraam-voorschoten.webp',
+ '/images/schaaps/varlaks-viskraam-voorschoten.webp',
+ '/images/schaaps/toonbank-herenstraat-leiden.webp',
  '/images/schaaps/hoogvliet-voorschoten.webp',
  '/images/schaaps/aldert-overname.webp',
  '/images/schaaps/schaaps-viskraam.webp',
@@ -48,7 +53,23 @@ for(const src of sources){
   assert.equal(image.format,'webp',output);
   variants.push({src:url,width,bytes:bytes.length});
  }
- manifest[src]={sha256:hash,originalBytes:original.length,variants};
+ const entry={sha256:hash,originalBytes:original.length,variants};
+ if(src === '/images/schaaps/winkel-herenstraat.webp'){
+  // The homepage shows a landscape crop. Encode only its visible pixels for the LCP image.
+  entry.heroAvif=[];
+  for(const width of [400,640,800,960,1280].filter(w=>w<=metadata.width)){
+   const height=Math.round(width*9/16);
+   const url=`/images/responsive/winkel-herenstraat-home-${hash.slice(0,12)}-${width}.avif`;
+   const output='public'+url;
+   if(!check) await sharp(original).resize(width,height,{fit:'cover'}).avif({quality:49,effort:6}).toFile(output);
+   const bytes=await fs.readFile(output), image=await sharp(bytes).metadata();
+   assert.equal(image.width,width,output);
+   assert.equal(image.height,height,output);
+   assert.equal(image.compression,'av1',output);
+   entry.heroAvif.push({src:url,width,bytes:bytes.length});
+  }
+ }
+ manifest[src]=entry;
 }
 if(check) assert.deepEqual(manifest,existing,'Regenerate variants after changing source photos');
 else await fs.writeFile(manifestPath,JSON.stringify(manifest,null,2)+'\n');

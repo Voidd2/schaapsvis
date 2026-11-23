@@ -91,7 +91,7 @@ export default async function HomePage({
           {/* De winkel zelf, zodra die foto er is. Geen close-up van vis: die
               heeft elke vishandel, een gevel aan de Herenstraat niet. */}
           <div className="home-hero-image-wrap">
-            <Image src={heroBeeld.src} alt={heroBeeld.alt} width={1400} height={933} sizes="(max-width: 800px) 100vw, 50vw" className="home-hero-image" loading="eager" fetchPriority="high" />
+            <Image storefrontHero src={heroBeeld.src} alt={heroBeeld.alt} width={1280} height={720} sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1720px) 48vw, 810px" className="home-hero-image" loading="eager" fetchPriority="high" />
             <span className="home-hero-image-label">{heroBeeld.caption}</span>
           </div>
         </div>
