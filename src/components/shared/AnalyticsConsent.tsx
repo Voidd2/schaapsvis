@@ -130,19 +130,23 @@ export function AnalyticsConsent({ locale }: { locale: string }) {
     </button>;
   }
 
-  return <aside aria-label={copy.title} className="cookie-choice-banner fixed inset-x-3 bottom-3 z-[80] mx-auto flex max-h-[85dvh] max-w-4xl flex-col gap-4 overflow-y-auto rounded-2xl border border-sky-200 bg-white p-5 shadow-xl sm:flex-row sm:items-center sm:justify-between sm:p-6">
-    <div>
+  return <aside aria-label={copy.title} aria-busy={busy} data-customizing={custom || undefined} className="cookie-choice-banner fixed inset-x-3 bottom-3 z-[80] mx-auto flex max-h-[85dvh] max-w-4xl flex-col gap-3 rounded-2xl border border-sky-200 bg-white p-5 shadow-xl sm:p-6">
+    <div className="min-h-0 overflow-y-auto">
       <h2 className="font-display text-xl font-bold text-slate-900">{copy.title}</h2>
-      <p className="mt-1 text-base leading-7 text-slate-700">{copy.message} <Link className="font-semibold text-sky-900 underline underline-offset-4" href={`/${locale}/privacyverklaring`}>{copy.privacy}</Link>.</p>
-      {custom ? <div className="mt-3 grid gap-2">
-        <label><input type="checkbox" checked={general} onChange={e=>setGeneral(e.target.checked)} /> {options.general}</label>
-        <label><input type="checkbox" checked={personal} aria-describedby="visit-choice-description" onChange={e=>setPersonal(e.target.checked)} /> {options.personal}</label>
-        <p id="visit-choice-description" className="text-sm">{options.detail}</p>
-      </div> : <button type="button" className="underline" onClick={reopenSettings}>{options.choices}</button>}
+      <div className="mt-2 grid gap-3 sm:grid-cols-2 sm:gap-5">
+        <div>{custom ? <label className="font-semibold"><input type="checkbox" checked={general} aria-describedby="general-choice-description" onChange={e=>setGeneral(e.target.checked)} /> {options.general}</label> : <strong>{options.general}</strong>}
+          <p id="general-choice-description" className="mt-1 text-sm">{copy.message}</p></div>
+        <div>{custom ? <label className="font-semibold"><input type="checkbox" checked={personal} aria-describedby="visit-choice-description" onChange={e=>setPersonal(e.target.checked)} /> {options.personal}</label> : <strong>{options.personal}</strong>}
+          <p id="visit-choice-description" className="mt-1 text-sm">{options.detail}</p></div>
+      </div>
       {failed && <p role="alert">{options.error}</p>}
     </div>
-    <div className="flex shrink-0 flex-wrap gap-2"><button type="button" disabled={busy} className="knop knop-lijn min-w-28" onClick={() => choose("declined")}>{copy.no}</button>
-      <button type="button" disabled={busy} className="knop knop-navy min-w-28" onClick={() => custom ? choose(general ? "accepted" : "declined",personal) : choose("accepted",sharesVisit())}>{custom ? options.save : copy.yes}</button></div>
+    <div className="flex shrink-0 flex-wrap items-center gap-3">
+      <button type="button" disabled={busy} className="knop knop-lijn min-w-32" onClick={() => choose("declined")}>{copy.no}</button>
+      <button type="button" disabled={busy} className="knop knop-lijn min-w-32" onClick={() => custom ? choose(general ? "accepted" : "declined",personal) : choose("accepted",true)}>{custom ? options.save : copy.yes}</button>
+      {!custom && <button type="button" className="underline" onClick={reopenSettings}>{options.choices}</button>}
+      <Link className="underline" href={`/${locale}/privacyverklaring#inschrijfbezoek`}>{copy.privacy}</Link>
+    </div>
   </aside>;
 }
 

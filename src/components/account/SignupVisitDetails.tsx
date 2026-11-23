@@ -1,52 +1,102 @@
 "use client";
-import {useEffect,useState} from "react";
-import { signupSourceLabel } from "@/lib/signup-source";
+
+import { useEffect, useState } from "react";
+import { signupRegionLabel, signupSourceLabel, trafficSourceLabel } from "@/lib/signup-source";
 
 const copy = {
-  nl:{title:"Herkomst en bezoek rond de inschrijving",source:"Inschrijfbron",sourceNote:"De inschrijfbron geeft aan via welk formulier het adres is aangemeld. Dat is niet noodzakelijk de eerste bezochte pagina.",region:"Zelf opgegeven regio",city:"Geschatte plaats op basis van IP",ip:"IP-adres bij inschrijving",pages:"Bezochte pagina’s, in volgorde",at:"Ingeschreven",empty:"Geen persoonlijke bezoekroute beschikbaar. Deze wordt alleen bij afzonderlijke toestemming vastgelegd en maximaal 30 dagen bewaard. Niet vastgelegde, verlopen of gewiste routes kunnen niet achteraf worden getoond.",missing:"Onbekend",loading:"Herkomstgegevens laden…",error:"Laden mislukt. Probeer het opnieuw.",retry:"Opnieuw proberen",erase:"Bezoekgegevens wissen",confirm:"De persoonlijke bezoekgegevens voor dit adres wissen?",other:"Elders",area:"Overig regio 071"},
-  en:{title:"Signup source and visit",source:"Signup source",sourceNote:"The signup source identifies the form used to register the address. It is not necessarily the first page visited.",region:"Self-reported area",city:"Estimated city based on IP",ip:"IP address at signup",pages:"Pages in the order visited",at:"Signed up",empty:"No personal visit history is available. It is recorded only with separate consent and kept for up to 30 days. Visits that were not recorded, have expired or were erased cannot be shown retrospectively.",missing:"Unknown",loading:"Loading signup details…",error:"Could not load. Please try again.",retry:"Try again",erase:"Erase visit data",confirm:"Erase the personal visit data for this address?",other:"Elsewhere",area:"Elsewhere in area 071"},
-  de:{title:"Anmeldequelle und Besuch",source:"Anmeldequelle",sourceNote:"Die Anmeldequelle zeigt, über welches Formular die Adresse angemeldet wurde. Das ist nicht unbedingt die zuerst besuchte Seite.",region:"Selbst angegebene Region",city:"Anhand der IP geschätzter Ort",ip:"IP-Adresse bei der Anmeldung",pages:"Besuchte Seiten in zeitlicher Reihenfolge",at:"Angemeldet",empty:"Kein persönlicher Besuchsverlauf verfügbar. Er wird nur mit gesonderter Einwilligung erfasst und höchstens 30 Tage gespeichert. Nicht erfasste, abgelaufene oder gelöschte Verläufe können nachträglich nicht angezeigt werden.",missing:"Unbekannt",loading:"Anmeldeinformationen werden geladen…",error:"Laden fehlgeschlagen. Bitte erneut versuchen.",retry:"Erneut versuchen",erase:"Besuchsdaten löschen",confirm:"Persönliche Besuchsdaten für diese Adresse löschen?",other:"Andernorts",area:"Übriges Gebiet 071"}
+  nl: {
+    title: "Herkomst van de inschrijving", form: "Inschrijfformulier", traffic: "Verkeersbron",
+    entry: "Eerste gemeten openbare pagina", signupPage: "Pagina van inschrijving", region: "Zelf opgegeven regio",
+    city: "Geschatte plaats op basis van IP", ip: "IP-adres bij inschrijving", pages: "Bezochte openbare pagina’s",
+    at: "Ingeschreven", missing: "Niet vastgelegd", empty: "Voor deze inschrijving is geen gedeeld bezoek bewaard. Eerdere verkeersbronnen en plaatsen zijn daardoor onbekend.",
+    note: "De plaats is een schatting van het gebruikte netwerk.", loading: "Herkomstgegevens laden…",
+    error: "Laden mislukt. Probeer het opnieuw.", retry: "Opnieuw proberen", erase: "Bezoekgegevens wissen",
+    confirm: "De persoonlijke bezoekgegevens voor dit adres wissen?",
+  },
+  en: {
+    title: "Where this signup came from", form: "Signup form", traffic: "Traffic source", entry: "First recorded public page",
+    signupPage: "Signup page", region: "Self-reported area", city: "Estimated city based on IP", ip: "IP address at signup",
+    pages: "Public pages visited", at: "Signed up", missing: "Not recorded",
+    empty: "No shared visit is on file for this signup. Its past traffic source and estimated city are unknown.",
+    note: "The city is an estimate for the network used.", loading: "Loading signup details…",
+    error: "Could not load. Please try again.", retry: "Try again", erase: "Erase visit data", confirm: "Erase the personal visit data for this address?",
+  },
+  de: {
+    title: "Herkunft der Anmeldung", form: "Anmeldeformular", traffic: "Zugriffsquelle", entry: "Erste erfasste öffentliche Seite",
+    signupPage: "Seite der Anmeldung", region: "Selbst angegebene Region", city: "Anhand der IP geschätzter Ort", ip: "IP-Adresse bei der Anmeldung",
+    pages: "Besuchte öffentliche Seiten", at: "Angemeldet", missing: "Nicht erfasst",
+    empty: "Zu dieser Anmeldung liegt kein geteilter Besuch vor. Die damalige Zugriffsquelle und der geschätzte Ort sind unbekannt.",
+    note: "Der Ort wird anhand des verwendeten Netzes geschätzt.", loading: "Anmeldeinformationen werden geladen…",
+    error: "Laden fehlgeschlagen. Bitte erneut versuchen.", retry: "Erneut versuchen", erase: "Besuchsdaten löschen", confirm: "Persönliche Besuchsdaten für diese Adresse löschen?",
+  },
 };
-type Details = {source:string|null;region:string|null;visit:null|{ip:string;city:string|null;signup_at:string;pages:string[]}};
 
-async function load(email:string, signal?:AbortSignal, action?:string):Promise<Details> {
-  const response = await fetch("/api/members/admin/signup-visit",{method:"POST",headers:{"Content-Type":"application/json"},credentials:"same-origin",cache:"no-store",body:JSON.stringify({email,action}),signal});
+type Details = {
+  source: string | null;
+  region: string | null;
+  visit: null | {
+    ip: string; city: string | null; signup_at: string; pages: string[];
+    traffic_source?: string | null; entry_path?: string | null; signup_path?: string | null;
+  };
+};
+
+async function load(email: string, signal?: AbortSignal, action?: "erase"): Promise<Details> {
+  const response = await fetch("/api/members/admin/signup-visit", {
+    method: "POST", headers: {"Content-Type":"application/json"}, credentials: "same-origin",
+    cache: "no-store", body: JSON.stringify({email,action}), signal,
+  });
   if (!response.ok) throw new Error("visit_details_unavailable");
   return response.json();
 }
 
-export function SignupVisitDetails({email,locale}:{email:string;locale:string}) {
-  const t = copy[locale==="de" || locale==="en" ? locale : "nl"];
-  const [data,setData] = useState<Details|null>(null);
+type Props = {email: string; locale: string; accountOnly?: boolean; onErase?: () => void};
+
+export function SignupVisitDetails({email,locale,accountOnly,onErase}: Props) {
+  const t = copy[locale === "de" || locale === "en" ? locale : "nl"];
+  const [data,setData] = useState<Details | null>(null);
   const [error,setError] = useState(false);
   const [attempt,retry] = useState(0);
-  useEffect(()=>{
-    const controller=new AbortController();
+  useEffect(() => {
+    const controller = new AbortController();
     setData(null);
     setError(false);
-    load(email,controller.signal).then(result=>{if (!controller.signal.aborted) setData(result);})
-      .catch(()=>{if (!controller.signal.aborted) setError(true);});
-    return ()=>controller.abort();
-  },[email,attempt]);
+    load(email,controller.signal).then(result => {if (!controller.signal.aborted) setData(result);})
+      .catch(() => {if (!controller.signal.aborted) setError(true);});
+    return () => controller.abort();
+  }, [email,attempt]);
+
   async function erase() {
     if (!window.confirm(t.confirm)) return;
-    try {setData(await load(email,undefined,"erase"));} catch {setError(true);}
+    try {
+      setData(await load(email,undefined,"erase"));
+      onErase?.();
+    } catch {setError(true);}
   }
-  const region = data?.region;
+
+  const visit = data?.visit;
+  const region = signupRegionLabel(data?.region,locale);
+  const footerPath = data?.source?.startsWith("footer:/") ? data.source.slice(7) : null;
+  const signupPath = visit?.signup_path || footerPath;
   return <section className="my-2 rounded-lg bg-sky-50 p-4">
     <h2 className="text-lg">{t.title}</h2>
-    {error ? <p role="alert">{t.error} <button type="button" className="underline" onClick={()=>{setError(false);retry(n=>n+1);}}>{t.retry}</button></p> : !data ? <p role="status">{t.loading}</p> : <>
-      <p className="mt-2"><strong>{t.source}</strong> · {signupSourceLabel(data.source,locale)}</p>
-      <p className="text-sm">{t.sourceNote}</p>
-      {region && <p className="mt-2"><strong>{t.region}</strong> · {region==="elders" ? t.other : region==="regio-071" ? t.area : region[0].toUpperCase()+region.slice(1)}</p>}
-      {data.visit ? <>
-        <p>{locale==="en" ? "This is the browser visit in which this email was entered. The estimated city refers to the network used." : locale==="de" ? "Angezeigt wird der Besuch, bei dem diese Adresse eingegeben wurde. Der geschätzte Ort bezieht sich auf das verwendete Netz." : "Dit is het bezoek waarin het adres is ingevuld. De geschatte plaats hoort bij het gebruikte netwerk."}</p>
-        <p><strong>{t.at}</strong> · {new Intl.DateTimeFormat(locale,{dateStyle:"medium",timeStyle:"short",timeZone:"Europe/Amsterdam"}).format(new Date(data.visit.signup_at))}</p>
-        <p><strong>{t.ip}</strong> · <span className="break-all">{data.visit.ip}</span></p>
-        <p><strong>{t.city}</strong> · {data.visit.city || t.missing}</p>
-        <h3 className="mt-3 font-semibold">{t.pages}</h3><ol className="list-decimal pl-6">{data.visit.pages.map((page,index)=><li className="break-all" key={index}>{page}</li>)}</ol>
-        <button type="button" className="mt-3 underline" onClick={erase}>{t.erase}</button>
-      </> : <p className="mt-3 max-w-3xl text-sm">{t.empty}</p>}
-    </>}
+    {error ? <p role="alert">{t.error} <button type="button" className="underline" onClick={()=>retry(n=>n+1)}>{t.retry}</button></p> :
+      !data ? <p role="status">{t.loading}</p> : <>
+        <dl className="mt-3 grid gap-x-5 gap-y-2 sm:grid-cols-[max-content_1fr]">
+          <dt className="font-semibold">{t.form}</dt><dd>{signupSourceLabel(footerPath ? "footer" : data.source,locale,accountOnly)}</dd>
+          {signupPath && <><dt className="font-semibold">{t.signupPage}</dt><dd className="break-all">{signupPath}</dd></>}
+          {region && <><dt className="font-semibold">{t.region}</dt><dd>{region}</dd></>}
+          {visit && <>
+            <dt className="font-semibold">{t.traffic}</dt><dd>{trafficSourceLabel(visit.traffic_source,locale)}</dd>
+            <dt className="font-semibold">{t.city}</dt><dd>{visit.city || t.missing}{visit.city && <small className="block">{t.note}</small>}</dd>
+            <dt className="font-semibold">{t.entry}</dt><dd className="break-all">{visit.entry_path || t.missing}</dd>
+            <dt className="font-semibold">{t.at}</dt><dd><time dateTime={visit.signup_at}>{new Intl.DateTimeFormat(locale,{dateStyle:"medium",timeStyle:"short",timeZone:"Europe/Amsterdam"}).format(new Date(visit.signup_at))}</time></dd>
+            <dt className="font-semibold">{t.ip}</dt><dd className="break-all">{visit.ip}</dd>
+          </>}
+        </dl>
+        {visit ? <>
+          {visit.pages.length > 0 && <><h3 className="mt-3 font-semibold">{t.pages}</h3><ol className="list-decimal pl-6">{visit.pages.map((page,index)=><li className="break-all" key={index}>{page}</li>)}</ol></>}
+          <button type="button" className="mt-3 underline" onClick={erase}>{t.erase}</button>
+        </> : <p className="mt-3 max-w-3xl text-sm">{t.empty}</p>}
+      </>}
   </section>;
 }

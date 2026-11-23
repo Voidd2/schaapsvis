@@ -19,7 +19,7 @@ export function DiscountSignup({ locale, offer }: { locale: string; offer?: Offe
     const form = new FormData(event.currentTarget);
     setState("sending");
     try {
-      const visit = visitAtSignup();
+      const visit = await visitAtSignup();
       const response = await fetch("/api/members/newsletter/subscribe", {
         method: "POST", credentials: "same-origin", headers: {"Content-Type": "application/json"},
         body: JSON.stringify({

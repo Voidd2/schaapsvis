@@ -15,6 +15,8 @@ export async function checkJourneys({call,sqlite,env,sessionCookie,testDigest}) 
     ["/nl?utm_source=fb","","facebook"],
     ["/nl?utm_source=private@example.test","https://l.facebook.com/private?q=secret","facebook"],
     ["/nl","https://www.google.nl/search?q=private","google"],
+    ["/en","https://www.google.co.uk/search","google"],
+    ["/nl","https://google.example.nl/","other"],
     ["/nl","https://www.instagram.com/secret","instagram"],
     ["/nl","https://facebook.com.attacker.test/","other"],
     ["/nl","https://schaapsvishandel.nl/nl/account","direct_unknown"],

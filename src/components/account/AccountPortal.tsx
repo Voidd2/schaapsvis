@@ -360,7 +360,7 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
     setSuccess(false);
     try {
       const body: Record<string, unknown> = { email: fields.get("email"), password: fields.get("password"), locale: language };
-      const visit = mode === "register" && fields.get("marketingConsent") === "on" ? visitAtSignup(true) : undefined;
+      const visit = mode === "register" && fields.get("marketingConsent") === "on" ? await visitAtSignup() : undefined;
       if (mode === "register") {
         body.firstName = fields.get("firstName");
         body.lastName = fields.get("lastName");

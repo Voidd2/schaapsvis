@@ -167,6 +167,7 @@ sqlite.exec(await readFile(new URL("../../migrations/0023_sitewide_popup.sql", i
 sqlite.exec(await readFile(new URL("../../migrations/0019_signup_visits.sql", import.meta.url), "utf8"));
 sqlite.exec(await readFile(new URL("../../migrations/0021_newsletter_draft_region.sql", import.meta.url), "utf8"));
 sqlite.exec(await readFile(new URL("../../migrations/0022_visitor_journeys.sql", import.meta.url), "utf8"));
+sqlite.exec(await readFile(new URL("../../migrations/0024_signup_visit_origin.sql", import.meta.url), "utf8"));
 let simulateApplicationCommitFailure = false;
 let decisionReadBarrier = null;
 
@@ -1009,6 +1010,7 @@ assert.equal((await expiredPassCheck.json()).valid, false, "the expired former p
   const personal=initialDetails.visit;
   assert.equal(personal.ip,headers["CF-Connecting-IP"]);
   assert.equal(personal.city,"Voorschoten");
+  assert.equal(personal.traffic_source,null,"a legacy choice does not cover acquisition channels");
   assert.deepEqual(personal.pages,["/nl/varlaks","/nl/aanbiedingen"]);
   const next={version,consent:true,token:grant.token,captureId:visit.captureId,path:"/nl/recepten"};
   await action("page",{...next,captureId:crypto.randomUUID(),path:"/nl/contact"});
@@ -1034,6 +1036,54 @@ assert.equal((await expiredPassCheck.json()).valid, false, "the expired former p
   assert.equal(expiredDetails.source,"discount-form","expired visits do not hide the signup source");
   sqlite.prepare("UPDATE newsletter_subscriptions SET status='unsubscribed' WHERE email=?").run(email);
   assert.equal(sqlite.prepare("SELECT 1 FROM signup_visits WHERE email=?").get(email),undefined);
+  sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(email);
+}
+{
+  let email = "origin-check@example.test";
+  const version = "signup-visit-v2";
+  const headers = {"CF-Connecting-IP":"203.0.113.124"};
+  const consent = (action,body) => call("/api/members/signup-visit/"+action,{method:"POST",headers,body});
+  const grant = async (v=version, previousToken) => (await (await consent("grant",{version:v,consent:true,previousToken})).json()).token;
+  const read = async () => (await (await call("/api/members/admin/signup-visit",{method:"POST",cookie:sessionCookie,body:{email}})).json()).visit;
+  const row = async () => (await (await call("/api/members/admin/email-addresses",{method:"POST",cookie:sessionCookie,body:{after:email.slice(0,-1)}})).json()).emails.find(row=>row.email===email);
+  const subscribe = (visit) => call("/api/members/newsletter/subscribe",{method:"POST",headers,cf:{city:"Leiden"},body:{
+    email,form:"sitewide",consent:true,consentVersion:"sitewide-news-and-offers-v1",visit,
+  }});
+  const fields = {version,captureId:crypto.randomUUID(),entryPath:"/nl/varlaks",trafficSource:"google",signupPath:"/nl/feestdagen/kerst",pages:["/nl/varlaks","/nl/account?token=private","/nl/feestdagen/kerst"]};
+  // Email consent alone adds a subscriber without any visit or geographically inferred data.
+  assert.equal((await subscribe()).status,202);
+  assert.equal(await read(),null);
+  assert.equal((await row()).traffic_source,null);
+  assert.equal((await row()).visit_city,null);
+  assert.equal((await row()).source,"sitewide-popup");
+  sqlite.prepare("UPDATE newsletter_subscriptions SET status='unsubscribed' WHERE email=?").run(email);
+  const legacy = await grant("signup-visit-v1");
+  await subscribe({...fields,token:legacy});
+  assert.equal(await read(),null,"a new payload cannot expand an earlier consent grant");
+  sqlite.prepare("UPDATE newsletter_subscriptions SET status='unsubscribed' WHERE email=?").run(email);
+  const token = await grant(version,legacy);
+  assert.equal(token,legacy,"fresh consent can upgrade an unused grant");
+  await subscribe({...fields,token});
+  const stored = await read();
+  assert.deepEqual([stored.traffic_source,stored.entry_path,stored.signup_path,stored.city],["google","/nl/varlaks","/nl/feestdagen/kerst","Leiden"]);
+  assert.deepEqual(stored.pages,["/nl/varlaks","/nl/feestdagen/kerst"]);
+  assert.deepEqual([(await row()).traffic_source,(await row()).visit_city],["google","Leiden"]);
+  assert.equal(Object.hasOwn(await row(),"ip"),false);
+  await consent("page",{...fields,token,consent:true,path:"/nl/bezoek-ons"});
+  assert.deepEqual([(await read()).entry_path,(await read()).signup_path],["/nl/varlaks","/nl/feestdagen/kerst"]);
+  await subscribe({...fields,token:await grant(),trafficSource:"bing"});
+  assert.equal((await read()).traffic_source,"google","a duplicate signup cannot overwrite an existing visitor");
+  await consent("forget",{token});
+  assert.equal((await row()).traffic_source,null);
+  assert.equal((await row()).visit_city,null);
+  sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(email);
+  email = "origin-private@example.test";
+  await subscribe({...fields,token:await grant(),pages:[],entryPath:"/nl/account",signupPath:"/nl/beheer",trafficSource:"https://private.example/sensitive"});
+  const privateVisit = await read();
+  assert.deepEqual([privateVisit.city,privateVisit.entry_path,privateVisit.traffic_source,privateVisit.signup_path],["Leiden",null,null,null]);
+  sqlite.prepare("UPDATE signup_visits SET expires_at='2000-01-01' WHERE email=?").run(email);
+  assert.equal(await read(),null);
+  assert.equal((await row()).visit_city,null);
   sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(email);
 }
 // The first footer submit is a complete subscription. Optional preferences must
