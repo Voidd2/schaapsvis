@@ -6,9 +6,9 @@ const origin = process.argv[2] || 'http://localhost:3011';
 if (!/^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(origin)) throw new Error('Local origin required');
 
 const copy = {
-  nl: { name: 'Teststudent', approve: 'Goedkeuren', saved: 'Beslissing opgeslagen', more: 'Meer adressen laden', consent: 'Toestemming gegeven', verify: 'Kortingspas controleren', code: 'Pascode', check: 'Controleren', holder: 'Pas staat op naam van', eligible: 'Geldig voor', wholeRange: 'het hele assortiment', invalid: 'Pas ongeldig of verlopen' },
-  en: { name: 'Teststudent', approve: 'Approve', saved: 'Decision saved', more: 'Load more addresses', consent: 'Opted in', verify: 'Verify discount pass', code: 'Pass code', check: 'Verify', holder: 'Pass issued to', eligible: 'Eligible products', wholeRange: 'the entire range', invalid: 'Pass is invalid or expired' },
-  de: { name: 'Teststudent', approve: 'Genehmigen', saved: 'Entscheidung gespeichert', more: 'Weitere Adressen laden', consent: 'Eingewilligt', verify: 'Rabattpass prüfen', code: 'Passcode', check: 'Prüfen', holder: 'Pass ausgestellt für', eligible: 'Gültig für', wholeRange: 'das gesamte Sortiment', invalid: 'Pass ungültig oder abgelaufen' },
+  nl: { name: 'Teststudent', approve: 'Goedkeuren', saved: 'Beslissing opgeslagen', more: 'Meer adressen laden', consent: 'Toestemming voor e-mail', verify: 'Kortingspas controleren', code: 'Pascode', check: 'Controleren', holder: 'Pas staat op naam van', eligible: 'Geldig voor', wholeRange: 'het hele assortiment', invalid: 'Pas ongeldig of verlopen' },
+  en: { name: 'Teststudent', approve: 'Approve', saved: 'Decision saved', more: 'Load more addresses', consent: 'Email consent given', verify: 'Verify discount pass', code: 'Pass code', check: 'Verify', holder: 'Pass issued to', eligible: 'Eligible products', wholeRange: 'the entire range', invalid: 'Pass is invalid or expired' },
+  de: { name: 'Teststudent', approve: 'Genehmigen', saved: 'Entscheidung gespeichert', more: 'Weitere Adressen laden', consent: 'Einwilligung für E-Mails', verify: 'Rabattpass prüfen', code: 'Passcode', check: 'Prüfen', holder: 'Pass ausgestellt für', eligible: 'Gültig für', wholeRange: 'das gesamte Sortiment', invalid: 'Pass ungültig oder abgelaufen' },
 };
 
 (async () => {
@@ -74,13 +74,15 @@ const copy = {
         const { after } = route.request().postDataJSON();
         const emails = after
           ? [{ email: 'two@example.test', marketing: 'unsubscribed' }]
-          : [{ email: 'one@example.test', marketing: 'subscribed' }];
+          : [{ email: 'one@example.test', marketing: 'subscribed', source: 'sitewide-popup', visit_city: 'Leiden', traffic_source: null }];
         await route.fulfill({ json: { emails, next: after ? null : 'one@example.test' } });
       });
       await page.goto(`${origin}/${locale}/beheer/emailadressen`, { waitUntil: 'networkidle' });
-      await page.getByRole('row').filter({ hasText: 'one@example.test' }).getByText(t.consent).waitFor();
+      const firstSignup = page.getByRole('row').filter({ hasText: 'one@example.test' });
+      await firstSignup.getByText(t.consent).waitFor();
+      await firstSignup.getByRole('cell').filter({ hasText: 'Leiden' }).waitFor();
       await page.getByRole('button', { name: t.more }).click();
-      await page.getByRole('cell', { name: 'two@example.test' }).waitFor();
+      await page.getByRole('button', { name: 'two@example.test', exact: true }).waitFor();
       assert.deepEqual(errors, [], `${locale}: browser errors`);
       outcomes.push({ locale, studentDecision: 'approved and removed from pending queue', emailDirectory: 'guarded, paginated and consent labelled', browserErrors: errors.length });
       await page.close();
