@@ -130,7 +130,7 @@ export function AnalyticsConsent({ locale }: { locale: string }) {
     </button>;
   }
 
-  return <aside aria-label={copy.title} aria-busy={busy} data-customizing={custom || undefined} className="cookie-choice-banner fixed inset-x-3 bottom-3 z-[80] mx-auto flex max-h-[85dvh] max-w-4xl flex-col gap-3 rounded-2xl border border-sky-200 bg-white p-5 shadow-xl sm:p-6">
+  return <aside aria-label={copy.title} aria-busy={busy} data-customizing={custom || undefined} className="cookie-choice-banner fixed inset-x-3 bottom-3 z-[80] mx-auto flex max-h-[85dvh] max-w-4xl flex-col gap-3 rounded-2xl border border-sky-200 bg-white p-5 text-slate-900 shadow-xl sm:p-6">
     <div className="min-h-0 overflow-y-auto">
       <h2 className="font-display text-xl font-bold text-slate-900">{copy.title}</h2>
       <div className="mt-2 grid gap-3 sm:grid-cols-2 sm:gap-5">
