@@ -125,7 +125,7 @@ export function Header() {
         style={{ backgroundColor: "var(--cream)", borderBottom: "1px solid var(--linen)" }}
       >
         <div className="site-header-row site-container flex items-center justify-between gap-3 lg:gap-6 min-h-[4.4rem] py-2">
-          <Link href={p("")} className="min-w-0 leading-none flex items-center gap-2 sm:gap-3">
+          <a href={p("")} className="min-w-0 leading-none flex items-center gap-2 sm:gap-3">
             {logo && (
               /* eslint-disable-next-line @next/next/no-img-element */
               <img
@@ -158,7 +158,7 @@ export function Header() {
                 Leiden &middot; {locale === "de" ? "seit" : locale === "en" ? "since" : "sinds"} 1938
               </span>
             </span>
-          </Link>
+          </a>
 
           <nav aria-label={locale === "de" ? "Hauptnavigation" : locale === "en" ? "Main navigation" : "Hoofdnavigatie"} className="hidden min-[1280px]:flex items-center justify-end gap-x-2 text-[0.86rem]">
             {primaryLinks.filter(publicLink).map(({ href, label }) => {
