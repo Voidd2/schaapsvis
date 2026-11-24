@@ -1,0 +1,26 @@
+{
+  "nl": {
+    "offer": "Met je studentenpas krijg je elke woensdag 10% korting op het hele assortiment bij onze kraam op de Botermarkt in Leiden.",
+    "pass": "Elke woensdag op de Botermarkt in Leiden",
+    "conditions": "Geldig op het hele assortiment. Niet te combineren met andere acties.",
+    "market": "Woensdagmarkt op de Botermarkt",
+    "hours": "Woensdag",
+    "future": "Als er marktdagen bijkomen, vind je de nieuwe dagen op deze pagina."
+  },
+  "en": {
+    "offer": "Your student pass gives you 10% off our entire range every Wednesday at our stall on the Botermarkt in Leiden.",
+    "pass": "Every Wednesday at the Botermarkt in Leiden",
+    "conditions": "Valid on our entire range. Cannot be combined with other offers.",
+    "market": "Wednesday market on the Botermarkt",
+    "hours": "Wednesday",
+    "future": "If we add any market days, you’ll find them on this page."
+  },
+  "de": {
+    "offer": "Mit deinem Studentenpass bekommst du jeden Mittwoch 10 % Rabatt auf unser gesamtes Sortiment an unserem Stand auf dem Botermarkt in Leiden.",
+    "pass": "Jeden Mittwoch auf dem Botermarkt in Leiden",
+    "conditions": "Gültig für unser gesamtes Sortiment. Nicht mit anderen Aktionen kombinierbar.",
+    "market": "Mittwochsmarkt auf dem Botermarkt",
+    "hours": "Mittwoch",
+    "future": "Wenn weitere Markttage hinzukommen, findest du sie auf dieser Seite."
+  }
+}

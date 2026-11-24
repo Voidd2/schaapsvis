@@ -5,7 +5,8 @@ import { generateKeyPairSync } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { DatabaseSync } from "node:sqlite";
 import { unzipSync } from "fflate";
-import memberWorker from "./src/index.mjs";
+import { reviewMailSchema } from "./src/student-review-store.mjs";
+import memberWorker, { studentMarketDay } from "./src/index.mjs";
 import { analyticsReport as buildAnalyticsReport, publicAnalyticsPath, analyticsTarget } from "./src/analytics.mjs";
 import { clientDeviceInfo } from "./src/device-info.mjs";
 import { actionEmail, verificationCodeEmail, accountEmailText } from "./src/email-templates.mjs";
@@ -168,6 +169,9 @@ sqlite.exec(await readFile(new URL("../../migrations/0019_signup_visits.sql", im
 sqlite.exec(await readFile(new URL("../../migrations/0021_newsletter_draft_region.sql", import.meta.url), "utf8"));
 sqlite.exec(await readFile(new URL("../../migrations/0022_visitor_journeys.sql", import.meta.url), "utf8"));
 sqlite.exec(await readFile(new URL("../../migrations/0024_signup_visit_origin.sql", import.meta.url), "utf8"));
+const reviewMailMigration = await readFile(new URL("../../migrations/0025_student_decision_mail.sql", import.meta.url), "utf8");
+assert.equal(reviewMailMigration.replace(/^--[^\n]*\n/, "").trim().replace(/\r\n/g,"\n"), reviewMailSchema.join(";\n") + ";");
+// Start on the previous production schema. Worker bootstrap and the release migration may run in either order.
 let simulateApplicationCommitFailure = false;
 let decisionReadBarrier = null;
 
@@ -584,11 +588,27 @@ assert.ok(studentDetail.person.email_verified_at && studentDetail.person.school_
 assert.equal(studentDetail.applications[0].status,"pending");
 assert.equal(studentDetail.applications[0].institution,application.institution);
 assert.equal(application.has_proof, 0, "new applications tell the admin UI there is no proof link");
+// An application already pending at rollout has no notification row or saved language.
+sqlite.prepare("DELETE FROM student_review_mail WHERE application_id=?").run(application.id);
+const approvalMailOffset = sentEmails.length;
 const decision = await call(`/api/members/admin/student-applications/${application.id}/decision`, {
   method: "POST", cookie: sessionCookie, body: { decision: "approved" },
 });
 assert.equal(decision.status, 200);
-assert.equal((await decision.json()).proofDeleted, true, "proof-free applications need no cleanup retry");
+const decisionResult = await decision.json();
+assert.equal(decisionResult.proofDeleted, true, "proof-free applications need no cleanup retry");
+assert.equal(decisionResult.mailStatus, "sent");
+assert.equal(sentEmails.length, approvalMailOffset + 1);
+assert.equal(sentEmails.at(-1).to, application.email);
+assert.match(sentEmails.at(-1).subject, /studentenpas.*goedgekeurd/);
+assert.match(sentEmails.at(-1).html, /Open je studentenpas/);
+assert.match(sentEmails.at(-1).text, /woensdag.*Botermarkt/);
+assert.match(sentEmails.at(-1).html, /\/nl\/account#studentenpas/);
+assert.equal((await call(`/api/members/admin/student-applications/${application.id}/decision`, {method:"POST", cookie:sessionCookie, body:{decision:"approved"}})).status, 409);
+assert.equal(sentEmails.length, approvalMailOffset + 1, "repeated approval cannot send a second mail");
+for (const [date, eligible] of [["2026-11-24T22:59:00Z", false], ["2026-11-24T23:00:00Z", true], ["2026-11-25T23:00:00Z", false], ["2026-06-02T22:00:00Z", true], ["2026-11-28T11:00:00Z", false]]) {
+  assert.equal(studentMarketDay(new Date(date)), eligible, date);
+}
 const account = await call("/api/members/me", { cookie: sessionCookie });
 const accountData = await account.json();
 const pass = accountData.discountPass;
@@ -623,6 +643,8 @@ const legacyPermanentCode = `${legacyPassId}.${await testHmac(env.PASS_SIGNING_K
 assert.equal((await (await call("/api/members/admin/pass/verify", { method: "POST", cookie: sessionCookie, body: { code: legacyPermanentCode } })).json()).valid, false, "permanently reusable legacy signed pass codes are no longer accepted");
 const shortPassCheck = await call("/api/members/admin/pass/verify", { method: "POST", cookie: sessionCookie, body: { code: pass.displayCode.toLowerCase() } });
 const shortVerifiedPass = await shortPassCheck.json();
+assert.equal(shortVerifiedPass.redeemableToday, studentMarketDay());
+assert.equal(shortVerifiedPass.discountPercent, studentMarketDay() ? 10 : 0);
 assert.equal(shortVerifiedPass.valid, true, "staff can verify the short display code case-insensitively");
 assert.equal(shortVerifiedPass.name, "Test Student", "short-code lookup returns the pass holder name");
 assert.deepEqual(shortVerifiedPass.eligibleProducts, ["assortiment"], "student discount applies to the entire assortment");
@@ -1210,7 +1232,7 @@ assert.equal(sqlite.prepare("SELECT region_tag FROM newsletter_subscriptions WHE
   assert.equal(sqlite.prepare("SELECT school_email_verified_at FROM users WHERE email=?").get(email).school_email_verified_at,null);
   assert.equal(sqlite.prepare("SELECT status FROM newsletter_subscriptions WHERE email=?").get(email).status,"subscribed");
   const form = new FormData();
-  for (const [key,value] of Object.entries({institution:"University",studyCity:"Leiden",educationLevel:"wo",proofConsent:"true"})) form.set(key,value);
+  for (const [key,value] of Object.entries({institution:"University",studyCity:"Leiden",educationLevel:"wo",proofConsent:"true",locale:"en"})) form.set(key,value);
   const apply = () => call("/api/members/student-application",{method:"POST",headers,cookie,body:form});
   assert.equal((await apply()).status,400);
   form.set("proof",new Blob(["bad signature"],{type:"application/pdf"}),"not-a-proof.pdf");
@@ -1223,8 +1245,25 @@ assert.equal(sqlite.prepare("SELECT region_tag FROM newsletter_subscriptions WHE
   assert.equal((await call(proofPath,{cookie})).status,403);
   const reviewed=await call(proofPath,{cookie:sessionCookie});
   assert.equal(reviewed.status,200);assert.equal(reviewed.headers.get("Content-Type"),"application/pdf");
+  const beforeReview = sentEmails.length;
+  simulateMailFailure = true;
   const decision=await call(proofPath.replace("/proof","/decision"),{method:"POST",cookie:sessionCookie,body:{decision:"rejected"}});
-  assert.equal(decision.status,200);assert.equal((await decision.json()).proofDeleted,true);
+  assert.equal(decision.status,200);
+  const rejectionResult = await decision.json();
+  assert.equal(rejectionResult.proofDeleted,true);
+  assert.equal(rejectionResult.mailStatus,"queued");
+  simulateMailFailure = false;
+  const reviewedId = proofPath.split("/").at(-2);
+  sqlite.prepare("UPDATE student_review_mail SET due_at=? WHERE application_id=?").run(new Date(0).toISOString(),reviewedId);
+  const cronJobs = [];
+  for (let index=0; index<2; index++) await memberWorker.scheduled({}, env, {waitUntil: promise => cronJobs.push(promise)});
+  await Promise.all(cronJobs);
+  assert.equal(sentEmails.length,beforeReview+1,"concurrent cron invocations retry only once");
+  assert.ok(sqlite.prepare("SELECT sent_at FROM student_review_mail WHERE application_id=?").get(reviewedId).sent_at);
+  sqlite.exec(reviewMailMigration);
+  assert.equal(sentEmails.at(-1).to, email);
+  assert.match(sentEmails.at(-1).text,/apply again/);
+  assert.match(sentEmails.at(-1).html,/lang="en"/);
   assert.equal(objects.has(stored.proof_object_key),false);
   assert.equal((await call(proofPath,{cookie:sessionCookie})).status,404);
   const directory="/api/members/admin/email-addresses";

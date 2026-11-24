@@ -1,3 +1,5 @@
+import studentMarket from "../../../src/lib/student-market.json" with { type: "json" };
+
 // Presentation only: no delivery, tracking, account state or token generation.
 const BRAND_ORIGIN = "https://schaapsvishandel.nl";
 const LOGO_URL = `${BRAND_ORIGIN}/images/brand/schaapsvis-logo-192.png?v=2`;
@@ -78,6 +80,38 @@ export function actionEmail(locale, subject, intro, buttonLabel, buttonUrl, note
   return brandedEmail({ locale, title: subject, intro, buttonUrl, buttonLabel, recipient,
     contentHtml: note ? `<p style="margin:0;color:#496273;font-size:14px;line-height:23px">${escapeHtml(note)}</p>` : "",
   });
+}
+
+const reviewCopy = {
+  nl: {
+    approved: ["Je studentenpas bij Schaap’s is goedgekeurd", "Je aanvraag is goedgekeurd. Je digitale studentenpas staat klaar in je account.", "Open je studentenpas"],
+    rejected: ["Je aanvraag voor studentenkorting bij Schaap’s", "We hebben je aanvraag beoordeeld. We kunnen je op basis van deze aanvraag geen studentenpas geven. Je kunt in je account een nieuwe aanvraag indienen.", "Bekijk je account"],
+    show: "Laat je pas op je telefoon zien voordat je afrekent.",
+  },
+  en: {
+    approved: ["Your Schaap’s student pass is ready", "Your application has been approved. Your digital student pass is ready in your account.", "Open your student pass"],
+    rejected: ["Your Schaap’s student discount application", "We’ve reviewed your application. We’re unable to issue a pass based on this application. You can apply again from your account.", "View your account"],
+    show: "Show the pass on your phone before you pay.",
+  },
+  de: {
+    approved: ["Dein Studentenpass bei Schaap’s ist freigegeben", "Dein Antrag wurde genehmigt. Dein digitaler Studentenpass liegt jetzt in deinem Konto bereit.", "Studentenpass öffnen"],
+    rejected: ["Dein Antrag auf Studentenrabatt bei Schaap’s", "Wir haben deinen Antrag geprüft. Auf dieser Grundlage können wir dir keinen Studentenpass ausstellen. In deinem Konto kannst du einen neuen Antrag einreichen.", "Konto öffnen"],
+    show: "Zeige deinen Pass vor dem Bezahlen auf deinem Smartphone.",
+  },
+};
+
+export function studentDecisionEmail(locale, decision, recipient, origin) {
+  const language = languageFor(locale);
+  const copy = reviewCopy[language];
+  const [subject, intro, button] = copy[decision];
+  const approved = decision === "approved";
+  const note = approved ? `${studentMarket[language].offer} ${copy.show}` : "";
+  const url = new URL(`/${language}/account${approved ? "#studentenpas" : ""}`, origin).href;
+  return {
+    subject,
+    text: accountEmailText(language, [intro, note, button + " ➝ " + url].filter(Boolean).join("\n\n"), recipient),
+    html: actionEmail(language, subject, intro, button, url, note, recipient),
+  };
 }
 
 export function campaignEmail(subject, bodyText, unsubscribeUrl) {

@@ -9,7 +9,7 @@ import { productPhoto } from "@/lib/product-beeld";
 import { legacyTrioSlugs } from "@/lib/seafood-catalog";
 import { FEESTDAGEN_PRODUCTEN } from "@/lib/feestdagen-producten";
 
-import { BEELD } from "@/lib/beeld";
+import { BEELD, kraamGalerij } from "@/lib/beeld";
 import { BEDRIJF } from "@/lib/bedrijf";
 import { LOCALES } from "@/lib/seo";
 import { siteOpSlot } from "@/lib/siteAccess";
@@ -37,8 +37,7 @@ const locatieBeelden: Record<string, string[]> = {
   "/viswinkel-leiden": [BEELD.winkelToonbank.bestand],
   "/viswinkel-voorschoten": [
     BEELD.marktVoorschoten.bestand,
-    "/images/schaaps/haring-viskraam-voorschoten.webp",
-    "/images/schaaps/varlaks-viskraam-voorschoten.webp",
+    ...kraamGalerij.map(foto => foto.bestand),
   ],
   "/varlaks": ["/images/varlaks/zalmfilet-1200.webp", BEELD.marktVoorschoten.bestand],
 };

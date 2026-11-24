@@ -48,7 +48,7 @@ export const BEELD = {
   logoBadge: {
     waar: "Paginakop, voet en studentenpas",
     wat: "Het door de eigenaar goedgekeurde vernieuwde ronde Schaap's Vis-logo op wit.",
-    bestand: "/images/brand/schaapsvis-logo-192.png?v=2",
+    bestand: "/images/brand/schaapsvis-logo-192.webp",
     alt: "Logo van Schaap's Vishandel in Leiden, sinds 1938",
     verhouding: "vierkant",
     terugval: "Schaap's Vis",
@@ -105,7 +105,7 @@ export const BEELD = {
     terugval: "Onze toonbank",
   },
   kraamToonbank: {
-    waar: "Homepage, boven de uitgelichte producten",
+    waar: "Homepage en de fotogalerij van de viskraam in Voorschoten",
     wat: "De toonbank met haring, oesters en salades in de viskraam in Voorschoten.",
     bestand: "/images/schaaps/haring-oesters-viskraam-voorschoten.webp",
     alt: "Haring en oesters in de toonbank van de viskraam",
@@ -266,6 +266,11 @@ export const BEELD = {
 } as const satisfies Record<string, Beeldplek>;
 
 export type BeeldNaam = keyof typeof BEELD;
+
+export const kraamGalerij = [
+  { ...BEELD.kraamToonbank, breedte: 870, hoogte: 580 },
+  { ...standplaatsVoorschoten, bestand: "/images/schaaps/vrijdag-bij-de-viskraam.webp", breedte: 822, hoogte: 548 },
+] as const;
 
 /** Pure data check, safe to call from server and client components. */
 export function heeftBeeld(naam: BeeldNaam): boolean {

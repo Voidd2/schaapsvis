@@ -1,5 +1,6 @@
 import { seasonalCatalogOpen } from "@/lib/seasonal-availability";
 import { productHref } from "@/lib/product-href";
+import studentMarket from "@/lib/student-market.json";
 import { ShopHours } from "@/components/shared/ShopHours";
 import { PlatterPhotoNote } from "@/components/PlatterPhotoNote";
 import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
@@ -110,7 +111,7 @@ export default async function HomePage({
           </div>
           <div className="home-counter-photo">
             <Image src={toonbank.bestand} alt={toonbankAlt} width={870} height={580}
-              sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1720px) 56vw, 960px" loading="lazy" />
+              sizes="auto, (max-width: 767px) calc(100vw - 40px), (max-width: 1720px) 56vw, 960px" loading="lazy" />
           </div>
         </header>
           <ul className="home-products grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-8">
@@ -129,7 +130,7 @@ export default async function HomePage({
                       alt={photo.alt}
                       width={1400}
                       height={933}
-                      sizes="(max-width: 639px) 50vw, (max-width: 1536px) 33vw, 480px"
+                      sizes="auto, (max-width: 639px) calc((100vw - 58px) / 2), (max-width: 1720px) 31vw, 535px"
                       loading="lazy"
                       className="w-full aspect-[3/2] object-contain transition-transform duration-300 group-hover:scale-[1.02]"
                     />
@@ -224,7 +225,7 @@ export default async function HomePage({
 
       <section className="home-student"><div className="section-wrap">
         <strong className="home-student-discount">10<span>%</span></strong>
-        <div><p className="kapitaal">{nav("studentenkorting")}</p><h2>{locale === "nl" ? "Ben jij mbo-, hbo- of wo-student?" : locale === "de" ? "Studierst du an einer MBO, HBO oder Universität?" : "Are you an MBO, HBO or university student?"}</h2><p>{locale === "nl" ? "Vraag je studentenpas aan en krijg na goedkeuring 10% korting op het hele assortiment." : locale === "de" ? "Beantrage deinen Studentenpass und erhalte nach der Freigabe 10 % Rabatt auf das gesamte Sortiment." : "Apply for your student pass and get 10% off our entire range once approved."}</p></div>
+        <div><p className="kapitaal">{nav("studentenkorting")}</p><h2>{locale === "nl" ? "Ben jij mbo-, hbo- of wo-student?" : locale === "de" ? "Studierst du an einer MBO, HBO oder Universität?" : "Are you an MBO, HBO or university student?"}</h2><p>{studentMarket[locale as keyof typeof studentMarket].offer}</p></div>
         <Link href={`/${locale}/studentenkorting`} className="knop knop-navy">{nav("studentenkorting")} →</Link>
       </div></section>
       {/* ── Beoordelingen ─────────────────────────────────────────────────── */}

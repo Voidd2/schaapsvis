@@ -1,4 +1,4 @@
-import { actionEmail, verificationCodeEmail, campaignEmail, accountEmailText } from "./email-templates.mjs";
+import { actionEmail, verificationCodeEmail, campaignEmail, accountEmailText, studentDecisionEmail } from "./email-templates.mjs";
 import { validPopupMeasurement, popupExposure, countNewPopupSubscription, popupReport } from "./popup-experiment.mjs";
 import { publicAnalyticsPath, analyticsTarget, analyticsReport } from "./analytics.mjs";
 import { storeJourney, forgetJourney, journeyReport } from "./journeys.mjs";
@@ -6,6 +6,8 @@ import { validJourneyId, journeySnapshot, journeySources } from "../../../src/li
 import { signupVisitPath, maxVisitPages, legacyVisitConsentVersion, visitConsentVersion, visitMinutes } from "../../../src/lib/signup-visit-path.mjs";
 import { clientDeviceInfo } from "./device-info.mjs";
 import { Pass, SigningMaterial } from "passmint";
+import { ensureReviewMail } from "./student-review-store.mjs";
+import studentMarket from "../../../src/lib/student-market.json" with { type: "json" };
 import { APPLE_WALLET_ICON_2X } from "./wallet-assets.mjs";
 
 const COOKIE = "sv_member";
@@ -1420,10 +1422,10 @@ async function issueGoogleWalletPass(request, env) {
   const locale = requestLocale(request);
   const language = locale === "de" ? "de-DE" : locale === "en" ? "en-GB" : "nl-NL";
   const text = locale === "de"
-    ? { title: "Schaap’s Vishandel", discount: "10 % Studentenrabatt", discountBody: "Auf das gesamte Sortiment; nicht mit anderen Aktionen kombinierbar", valid: "Gültig bis", code: "Prüfcode", locations: "Standorte ansehen" }
+    ? { title: "Schaap’s Vishandel", discount: "10 % Studentenrabatt", valid: "Gültig bis", code: "Prüfcode", locations: "Standorte ansehen" }
     : locale === "en"
-      ? { title: "Schaap’s Vishandel", discount: "10% student discount", discountBody: "On the entire range; cannot be combined with other offers", valid: "Valid until", code: "Verification code", locations: "View locations" }
-      : { title: "Schaap’s Vishandel", discount: "10% studentenkorting", discountBody: "Op het hele assortiment; niet combineerbaar met andere acties", valid: "Geldig tot", code: "Controlecode", locations: "Bekijk locaties" };
+      ? { title: "Schaap’s Vishandel", discount: "10% student discount", valid: "Valid until", code: "Verification code", locations: "View locations" }
+      : { title: "Schaap’s Vishandel", discount: "10% studentenkorting", valid: "Geldig tot", code: "Controlecode", locations: "Bekijk locaties" };
   const localized = (value) => ({ defaultValue: { language, value } });
   const externalId = `${config.issuerId}.${pass.id}`;
   const genericObject = {
@@ -1441,12 +1443,12 @@ async function issueGoogleWalletPass(request, env) {
     subheader: localized(text.discount),
     barcode: { type: "QR_CODE", value: displayCode, alternateText: displayCode },
     textModulesData: [
-      { id: "discount", header: text.discount, body: text.discountBody },
+      { id: "discount", header: text.discount, body: `${studentMarket[locale].pass}. ${studentMarket[locale].conditions}` },
       { id: "code", header: text.code, body: displayCode },
       ...(pass.expires_at ? [{ id: "validity", header: text.valid, body: pass.expires_at.slice(0, 10) }] : []),
     ],
     linksModuleData: { uris: [
-      { id: "locations", uri: `${env.SITE_ORIGIN}/${locale}/bezoek-ons`, description: text.locations },
+      { id: "locations", uri: `${env.SITE_ORIGIN}/${locale}/studentenkorting#marktdag`, description: studentMarket[locale].market },
       { id: "account", uri: `${env.SITE_ORIGIN}/${locale}/account`, description: text.title },
     ] },
     ...(pass.expires_at ? { validTimeInterval: { end: { date: pass.expires_at } } } : {}),
@@ -1483,10 +1485,10 @@ async function issueGoogleWalletPass(request, env) {
 
 function appleWalletText(locale) {
   return locale === "de"
-    ? { description: "Digitaler Studentenrabatt", student: "Student", discount: "Rabatt", discountValue: "10 %", holder: "Name", valid: "Gültig bis", code: "Prüfcode", terms: "10 % auf das gesamte Sortiment; nicht mit anderen Aktionen kombinierbar", locations: "Standorte" }
+    ? { description: "Digitaler Studentenrabatt", student: "Student", discount: "Rabatt", discountValue: "10 %", holder: "Name", valid: "Gültig bis", code: "Prüfcode", locations: "Standorte" }
     : locale === "en"
-      ? { description: "Digital student discount pass", student: "Student", discount: "Discount", discountValue: "10%", holder: "Name", valid: "Valid until", code: "Verification code", terms: "10% on the entire range; cannot be combined with other offers", locations: "Locations" }
-      : { description: "Digitale studentenpas", student: "Student", discount: "Korting", discountValue: "10%", holder: "Naam", valid: "Geldig tot", code: "Controlecode", terms: "10% op het hele assortiment; niet combineerbaar met andere acties", locations: "Locaties" };
+      ? { description: "Digital student discount pass", student: "Student", discount: "Discount", discountValue: "10%", holder: "Name", valid: "Valid until", code: "Verification code", locations: "Locations" }
+      : { description: "Digitale studentenpas", student: "Student", discount: "Korting", discountValue: "10%", holder: "Naam", valid: "Geldig tot", code: "Controlecode", locations: "Locaties" };
 }
 
 async function buildAppleWalletPackage(env, config, pass, locale) {
@@ -1520,8 +1522,9 @@ async function buildAppleWalletPackage(env, config, pass, locale) {
     .primaryField({ key: "discount", label: text.discount, value: text.discountValue })
     .secondaryField({ key: "holder", label: text.holder, value: pass.full_name })
     .auxiliaryField({ key: "code", label: text.code, value: displayCode })
-    .backField({ key: "terms", label: text.discount, value: text.terms })
-    .backField({ key: "locations", label: text.locations, value: `${env.SITE_ORIGIN}/${locale}/bezoek-ons`, dataDetectorTypes: ["link"] });
+    .secondaryField({ key: "market", label: text.locations, value: studentMarket[locale].pass })
+    .backField({ key: "terms", label: text.discount, value: `${studentMarket[locale].pass}. ${studentMarket[locale].conditions}` })
+    .backField({ key: "locations", label: text.locations, value: `${env.SITE_ORIGIN}/${locale}/studentenkorting#marktdag`, dataDetectorTypes: ["link"] });
   if (pass.expires_at) builder.auxiliaryField({ key: "valid", label: text.valid, value: pass.expires_at, dateStyle: "medium", timeStyle: "none" });
   return { signed: await builder.sign(material), authenticationToken, displayCode, active };
 }
@@ -1816,6 +1819,7 @@ async function submitStudentApplication(request, env) {
   if (parsed.tooLarge) return json({ error: upload ? "file_too_large" : "form_too_large" }, 413);
   if (!parsed.form) return json({ error: "invalid_form" }, 400);
   const form = parsed.form;
+  const mailLocale = requestLocale(request, form.get("locale"));
   const institution = String(form.get("institution") || "").trim().slice(0, 180);
   const level = String(form.get("educationLevel") || "");
   const otherLevel = level === "other" ? String(form.get("educationLevelOther") || "").trim().replace(/\s+/g, " ") : null;
@@ -1835,20 +1839,24 @@ async function submitStudentApplication(request, env) {
     if (!currentPass?.expires_at || currentPass.expires_at > nowIso()) return json({ error: "application_exists" }, 409);
   }
 
+  await ensureReviewMail(env.DB);
   const id = crypto.randomUUID();
   const submittedAt = nowIso();
-  if (upload) return saveUploadedProof(env, { id, user, institution, level, otherLevel, studyCity, file, mime, submittedAt });
+  if (upload) return saveUploadedProof(env, { id, user, institution, level, otherLevel, studyCity, file, mime, submittedAt, mailLocale });
   try {
-    await env.DB.prepare(`INSERT INTO student_applications (id, user_id, institution, education_level, education_level_other, study_city, eligibility_method, proof_object_key, proof_mime_type, proof_consent_version, proof_consent_at, status, submitted_at)
-      VALUES (?, ?, ?, ?, ?, ?, 'verified-school-email', NULL, 'application/pdf', 'not-applicable-school-email-v1', ?, 'pending', ?)`)
-      .bind(id, user.id, institution, level, otherLevel, studyCity, submittedAt, submittedAt).run();
+    await env.DB.batch([
+      env.DB.prepare(`INSERT INTO student_applications (id, user_id, institution, education_level, education_level_other, study_city, eligibility_method, proof_object_key, proof_mime_type, proof_consent_version, proof_consent_at, status, submitted_at)
+        VALUES (?, ?, ?, ?, ?, ?, 'verified-school-email', NULL, 'application/pdf', 'not-applicable-school-email-v1', ?, 'pending', ?)`)
+        .bind(id, user.id, institution, level, otherLevel, studyCity, submittedAt, submittedAt),
+      env.DB.prepare("INSERT INTO student_review_mail(application_id,locale) VALUES (?,?)").bind(id, mailLocale),
+    ]);
   } catch {
     return json({ error: "application_unavailable" }, 503);
   }
   return json({ ok: true, status: "pending" }, 202);
 }
 
-async function saveUploadedProof(env, { id, user, institution, level, otherLevel, studyCity, file, mime, submittedAt }) {
+async function saveUploadedProof(env, { id, user, institution, level, otherLevel, studyCity, file, mime, submittedAt, mailLocale }) {
   const objectKey = `student-proofs/${user.id}/${id}`;
   let reserved = false;
   try {
@@ -1877,6 +1885,7 @@ async function saveUploadedProof(env, { id, user, institution, level, otherLevel
         SELECT ?, ?, ?, ?, ?, ?, 'uploaded-proof', ?, ?, ?, ?, 'pending', ?
         WHERE EXISTS (SELECT 1 FROM student_proof_cleanup_queue WHERE object_key=?)`)
         .bind(id, user.id, institution, level, otherLevel, studyCity, objectKey, mime, PROOF_CONSENT_VERSION, submittedAt, submittedAt, objectKey),
+      env.DB.prepare("INSERT INTO student_review_mail(application_id,locale) SELECT id,? FROM student_applications WHERE id=?").bind(mailLocale, id),
       env.DB.prepare(`INSERT INTO consent_events (id, user_id, consent_type, granted, text_version, source, recorded_at)
         SELECT ?, ?, 'student_proof_processing', 1, ?, 'student-application', ?
         WHERE EXISTS (SELECT 1 FROM student_applications WHERE id=? AND user_id=?)`)
@@ -2135,9 +2144,15 @@ async function adminDecision(request, env, applicationId) {
   const passCode = passId && env.PASS_SIGNING_KEY ? `${passId}.${await hmac(env.PASS_SIGNING_KEY, passId)}` : null;
   const displayCode = passId && env.PASS_SIGNING_KEY ? await passDisplayCode(env.PASS_SIGNING_KEY, passId) : null;
   if (decision === "approved" && !passCode) return json({ error: "pass_signing_unavailable" }, 503);
+  await ensureReviewMail(env.DB);
   const statements = [
     env.DB.prepare(`UPDATE student_applications SET status = ?, reviewed_at = ?, reviewed_by = ?, reviewer_note = ? WHERE id = ? AND status = 'pending'`)
       .bind(decision, time, admin.id, String(body?.note || "").trim().slice(0, 500) || null, applicationId),
+    env.DB.prepare(`INSERT INTO student_review_mail(application_id,due_at)
+      SELECT id,? FROM student_applications WHERE id=? AND status=? AND reviewed_by=? AND reviewed_at=?
+      ON CONFLICT(application_id) DO UPDATE SET due_at=excluded.due_at
+      WHERE student_review_mail.sent_at IS NULL AND student_review_mail.due_at IS NULL`)
+      .bind(time, applicationId, decision, admin.id, time),
   ];
   if (passId && passCode && displayCode) statements.push(env.DB.prepare(`INSERT INTO student_passes (id, user_id, application_id, public_code_hash, display_code, status, issued_at, expires_at) SELECT ?, user_id, id, ?, ?, 'active', ?, ? FROM student_applications WHERE id = ? AND status = 'approved' AND reviewed_by = ? AND reviewed_at = ?`)
     .bind(passId, await digest(passCode), displayCode, time, expiresAt, applicationId, admin.id, time));
@@ -2161,7 +2176,51 @@ async function adminDecision(request, env, applicationId) {
       proofDeleted = true;
     } catch { /* Keep the key private so an admin can retry cleanup; never grant access after review. */ }
   }
-  return json({ ok: true, decision, proofDeleted });
+  // A committed decision and pass survive mail outages. Cron resumes outstanding deliveries.
+  const mailStatus = await deliverStudentDecision(env, applicationId).catch(() => "queued");
+  return json({ ok: true, decision, proofDeleted, mailStatus });
+}
+
+async function deliverStudentDecision(env, applicationId) {
+  const now = nowIso();
+  const lease = new Date(Date.now() + 10 * 60_000).toISOString();
+  const claim = await env.DB.prepare(`UPDATE student_review_mail
+    SET due_at=?, attempts=attempts+1
+    WHERE application_id=? AND due_at<=? AND sent_at IS NULL
+    RETURNING locale, attempts`).bind(lease, applicationId, now).first();
+  if (!claim) {
+    const row = await env.DB.prepare("SELECT sent_at FROM student_review_mail WHERE application_id=?").bind(applicationId).first();
+    return row?.sent_at ? "sent" : "queued";
+  }
+  const recipient = await env.DB.prepare(`SELECT u.email, u.first_name, u.full_name, a.status FROM student_applications a JOIN users u ON u.id=a.user_id
+    WHERE a.id=? AND u.email_verified_at IS NOT NULL AND u.account_status='active'
+    AND NOT EXISTS (SELECT 1 FROM student_applications newer WHERE newer.user_id=a.user_id AND newer.submitted_at>a.submitted_at)`).bind(applicationId).first();
+  if (!recipient) {
+    await env.DB.prepare("UPDATE student_review_mail SET due_at=NULL WHERE application_id=? AND due_at=?").bind(applicationId, lease).run();
+    return "unavailable";
+  }
+  const mail = studentDecisionEmail(claim.locale, recipient.status, recipient, env.SITE_ORIGIN);
+  try {
+    await sendMail(env, recipient.email, mail.subject, mail.text, mail.html);
+  } catch {
+    const minutes = Math.min(360, 2 ** Math.min(claim.attempts, 9));
+    const retryAt = new Date(Date.now() + minutes * 60_000).toISOString();
+    await env.DB.prepare("UPDATE student_review_mail SET due_at=? WHERE application_id=? AND due_at=?").bind(retryAt, applicationId, lease).run();
+    return "queued";
+  }
+  await env.DB.prepare("UPDATE student_review_mail SET sent_at=?, due_at=NULL WHERE application_id=? AND due_at=?").bind(nowIso(), applicationId, lease).run();
+  return "sent";
+}
+
+async function retryStudentDecisions(env) {
+  await ensureReviewMail(env.DB);
+  const due = await env.DB.prepare("SELECT application_id FROM student_review_mail WHERE due_at<=? ORDER BY due_at LIMIT 10").bind(nowIso()).all();
+  for (const row of due.results) await deliverStudentDecision(env, row.application_id);
+}
+
+const marketWeekday = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Amsterdam", weekday: "short" });
+export function studentMarketDay(date = new Date()) {
+  return marketWeekday.format(date) === "Wed";
 }
 
 async function verifyPass(request, env) {
@@ -2216,7 +2275,8 @@ async function verifyPass(request, env) {
   }
   const valid = pass?.status === "active" && !pass.revoked_at && pass.application_status === "approved" && (!pass.expires_at || pass.expires_at > nowIso());
   if (!valid) return json({ valid: false });
-  return json({ valid: true, name: pass.full_name, displayCode: pass.display_code, expiresAt: pass.expires_at, discountPercent: 10, eligibleProducts: ["assortiment"] });
+  const redeemableToday = studentMarketDay();
+  return json({ valid: true, redeemableToday, name: pass.full_name, displayCode: pass.display_code, expiresAt: pass.expires_at, discountPercent: redeemableToday ? 10 : 0, eligibleProducts: ["assortiment"] });
 }
 
 // The footer is shared by public pages and private account routes. Only keep
@@ -2831,7 +2891,7 @@ const memberWorker = {
     if (env.DB) tasks.push(env.DB.prepare("DELETE FROM visitor_journeys WHERE expires_at<=?").bind(nowIso()).run());
     const scheduledAt = new Date(_controller?.scheduledTime || Date.now());
     if (scheduledAt.getUTCHours() === 2 && scheduledAt.getUTCMinutes() === 0) tasks.push(cleanupAnalytics(env), cleanupSecurityRecords(env));
-    if (env.MEMBERS_ENABLED === "on") tasks.push(processNewsletterDeliveries(env));
+    if (env.MEMBERS_ENABLED === "on") tasks.push(processNewsletterDeliveries(env), retryStudentDecisions(env));
     context.waitUntil(Promise.allSettled(tasks));
   },
 };
