@@ -64,7 +64,7 @@ export default async function Page({ params }: Props) {
           </div>
           <div className={styles.heroMedia}>
             <StaticResponsiveImage src={BEELD.historieNu.bestand} alt={labels.overview} width={1600} height={900}
-            sizes="(max-width: 760px) 100vw, (max-width: 1450px) 52vw, 720px" className={styles.heroPhoto} loading="eager" fetchPriority="high" />
+            sizes="(max-width: 900px) 100vw, (max-width: 1450px) 52vw, 720px" className={styles.heroPhoto} loading="eager" fetchPriority="high" />
           </div>
         </div>
       </div>
@@ -77,7 +77,7 @@ export default async function Page({ params }: Props) {
           const friday = place.id === "voorschoten";
           return <article key={place.id} className={friday ? styles.friday : styles.leiden}>
             {friday && <StaticResponsiveImage src={fridayPhoto.bestand} alt={lang === "nl" ? fridayPhoto.alt : fridayPhoto.vertalingen[lang].alt}
-              width={1600} height={900} sizes="(max-width: 760px) 100vw, (max-width: 1450px) 40vw, 550px" className={styles.fridayPhoto} loading="lazy" />}
+              width={1600} height={900} sizes="(max-width: 900px) 100vw, (max-width: 1450px) 40vw, 550px" className={styles.fridayPhoto} loading="lazy" />}
             <div className={styles.placeBody}>
               <p className={styles.hours}><Clock3 size={16} aria-hidden="true" />{place.dagen}</p>
               <h3>{place.naam}</h3>
@@ -96,7 +96,7 @@ export default async function Page({ params }: Props) {
       <div className={`${styles.wrap} ${styles.storyGrid}`}>
         <div className={styles.storyMedia}>
           <StaticResponsiveImage src={BEELD.haringkraam.bestand} alt={labels.herring} width={1600} height={900}
-          sizes="(max-width: 760px) 100vw, (max-width: 1450px) 48vw, 660px" className={styles.storyPhoto} loading="lazy" />
+          sizes="(max-width: 900px) 100vw, (max-width: 1450px) 48vw, 660px" className={styles.storyPhoto} loading="lazy" />
         </div>
         <div>
           <h2 id="market-days">{copy.heading}</h2>

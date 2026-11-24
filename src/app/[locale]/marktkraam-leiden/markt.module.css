@@ -91,7 +91,7 @@
 .product:hover h3, .product:focus-visible h3 { text-decoration: underline; text-underline-offset: 4px; }
 .faq { border-top: 1px solid #cde0e7; }
 .faqGrid { display: grid; grid-template-columns: minmax(0,.65fr) minmax(0,1.35fr); gap: clamp(20px, 4vw, 60px); }
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .hero { padding-top: 12px; }
   .hero nav { margin-bottom: 12px; }
   .heroGrid, .schedule, .storyGrid, .faqGrid { grid-template-columns: minmax(0, 1fr); }
