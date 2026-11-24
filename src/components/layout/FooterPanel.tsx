@@ -11,7 +11,8 @@ export function FooterPanel({ title, children, className }: { title: string; chi
     function setLayout() {
       if (ref.current) ref.current.open = wide.matches;
     }
-    setLayout();
+    // On mobile, a visitor may already have opened the native disclosure.
+    if (wide.matches) setLayout();
     wide.addEventListener("change", setLayout);
     return () => wide.removeEventListener("change", setLayout);
   }, []);
