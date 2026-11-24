@@ -3,13 +3,42 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { flushVisitErasures, recordVisitPage, setVisitChoice, sharesVisit, visitChanged } from "@/lib/signup-visit";
+import { flushVisitErasures, recordVisitPage, setVisitChoice, sharedVisitVersion, visitChanged } from "@/lib/signup-visit";
+import { visitConsentVersion } from "@/lib/signup-visit-path.mjs";
+import { signupVisitNotice } from "@/lib/signup-visit-notice";
 import { analyticsConsentKey, analyticsConsentEvent } from "@/lib/journey-shared.mjs";
 import { observeJourney, revokeJourney, flushJourneyErasures } from "@/lib/visitor-journey.mjs";
 
 const CONSENT_KEY = analyticsConsentKey;
 const PRIVATE_PATH = /^\/(nl|en|de)\/(account|beheer|studentenkorting|kortingsbon|bestellen)(\/|$)/;
 const CONSENT_EVENT = analyticsConsentEvent;
+
+const cookieCopy = {
+  nl: {
+    title: "Uw cookiekeuze", settings: "Cookie-instellingen", privacy: "Privacyverklaring",
+    yes: "Alles accepteren", no: "Weigeren", choices: "Keuze aanpassen", save: "Keuze opslaan",
+    general: "Bezoekstatistieken en nieuwsbriefstappen",
+    message: "Mogen we de herkomst, bezochte openbare pagina’s, zichtbare bezoektijd en nieuwsbriefstappen meten?",
+    personal: "Mijn bezoek delen als ik me inschrijf",
+    error: "Uw keuze kon niet worden bevestigd. Controleer uw verbinding en probeer het opnieuw.",
+  },
+  en: {
+    title: "Your cookie choice", settings: "Cookie settings", privacy: "Privacy policy",
+    yes: "Accept all", no: "Reject", choices: "Choose settings", save: "Save choices",
+    general: "Visit statistics and newsletter steps",
+    message: "May we measure traffic source, public pages visited, visible visit time and newsletter steps?",
+    personal: "Share my visit when I sign up",
+    error: "Your choice could not be confirmed. Check your connection and try again.",
+  },
+  de: {
+    title: "Ihre Cookie-Auswahl", settings: "Cookie-Einstellungen", privacy: "Datenschutzerklärung",
+    yes: "Alle akzeptieren", no: "Ablehnen", choices: "Auswahl anpassen", save: "Auswahl speichern",
+    general: "Besuchsstatistiken und Newsletter-Schritte",
+    message: "Dürfen wir Herkunft, besuchte öffentliche Seiten, sichtbare Besuchsdauer und Newsletter-Schritte messen?",
+    personal: "Meinen Besuch bei der Anmeldung teilen",
+    error: "Ihre Auswahl konnte nicht bestätigt werden. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  },
+} as const;
 
 function subscribeConsent(onChange: () => void) {
   window.addEventListener("storage", onChange);
@@ -80,27 +109,11 @@ export function AnalyticsConsent({ locale }: { locale: string }) {
   }, [choice, pathname]);
 
   if (choice === "unknown") return null;
-  const copy = locale === "de"
-    ? { title: "Ihre Cookie-Auswahl", message: "Dürfen wir Herkunft, besuchte öffentliche Seiten, sichtbare Besuchsdauer und Newsletter-Schritte messen? Das Besuchsprotokoll enthält keine Namen oder E-Mail-Adressen und bleibt höchstens 30 Tage gespeichert. Notwendige Kontocookies funktionieren auch ohne diese Einwilligung.", yes: "Akzeptieren", no: "Ablehnen", privacy: "Mehr erfahren", settings: "Cookie-Einstellungen" }
-    : locale === "en"
-      ? { title: "Your cookie choice", message: "May we measure traffic source, public pages visited, visible visit time and newsletter steps? Visit records contain no names or email addresses and are kept for up to 30 days. Necessary account cookies work without this permission.", yes: "Accept", no: "Reject", privacy: "Read more", settings: "Cookie settings" }
-      : { title: "Uw cookiekeuze", message: "Mogen we de herkomst, bezochte openbare pagina’s, zichtbare bezoektijd en nieuwsbriefstappen meten? Dit bezoekoverzicht bevat geen namen of e-mailadressen en wordt maximaal 30 dagen bewaard. Noodzakelijke accountcookies werken ook zonder deze toestemming.", yes: "Accepteren", no: "Weigeren", privacy: "Lees hier meer", settings: "Cookie-instellingen" };
+  const language = locale === "en" || locale === "de" ? locale : "nl";
+  const copy = cookieCopy[language];
+  const notice = signupVisitNotice[language];
 
-  const options = locale === "en" ? {
-    choices:"Choose settings", general:"Visit statistics and newsletter steps", personal:"Share my visit when I sign up",
-    detail:"If I sign up for offers, Schaap’s may link my public page visits in this tab, IP address and approximate city to the email I enter to understand which products and areas attract subscribers. Stored for up to 30 days. Withdraw and erase via cookie settings.",
-    save:"Save choices",error:"Your choice could not be confirmed. Check your connection and try again."
-  } : locale === "de" ? {
-    choices:"Auswahl anpassen", general:"Besuchsstatistiken und Newsletter-Schritte", personal:"Meinen Besuch bei der Anmeldung teilen",
-    detail:"Bei der Anmeldung für Angebote darf Schaap’s besuchte öffentliche Seiten in diesem Tab, IP-Adresse und ungefähren Ort meiner angegebenen E-Mail-Adresse zuordnen, um das Interesse an Produkten und die Herkunft der Anmeldungen zu verstehen. Höchstens 30 Tage. Widerruf und Löschung über die Cookie-Einstellungen.",
-    save:"Auswahl speichern",error:"Ihre Auswahl konnte nicht bestätigt werden. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut."
-  } : {
-    choices:"Keuze aanpassen", general:"Bezoekstatistieken en nieuwsbriefstappen", personal:"Mijn bezoek delen als ik me inschrijf",
-    detail:"Als ik me aanmeld voor aanbiedingen, mag Schaap’s mijn bezochte openbare pagina’s in dit tabblad, IP-adres en geschatte plaats koppelen aan het ingevulde e-mailadres. Zo ziet de winkel welke producten interesse wekken en uit welke plaatsen inschrijvingen komen. Maximaal 30 dagen. Intrekken en wissen kan via Cookie-instellingen.",
-    save:"Keuze opslaan",error:"Uw keuze kon niet worden bevestigd. Controleer uw verbinding en probeer het opnieuw."
-  };
-
-  async function choose(value: "accepted" | "declined", share = false) {
+  async function choose(value: "accepted" | "declined", share: boolean) {
     setBusy(true);
     setFailed(false);
     setGeneral(value === "accepted");
@@ -110,7 +123,7 @@ export function AnalyticsConsent({ locale }: { locale: string }) {
       window.localStorage.setItem("sv-analytics-consent-v1", value);
       if (value === "declined") revokeJourney();
       window.dispatchEvent(new Event(CONSENT_EVENT));
-      await setVisitChoice(share);
+      await setVisitChoice(share, visitConsentVersion);
       setEditing(false);
       setCustom(false);
     } catch { setEditing(true); setFailed(true); }
@@ -118,8 +131,9 @@ export function AnalyticsConsent({ locale }: { locale: string }) {
   }
 
   function reopenSettings() {
-    setPersonal(sharesVisit());
+    setPersonal(sharedVisitVersion() === visitConsentVersion);
     setGeneral(choice === "accepted");
+    setFailed(false);
     setCustom(true);
     setEditing(true);
   }
@@ -130,22 +144,37 @@ export function AnalyticsConsent({ locale }: { locale: string }) {
     </button>;
   }
 
-  return <aside aria-label={copy.title} aria-busy={busy} data-customizing={custom || undefined} className="cookie-choice-banner fixed inset-x-3 bottom-3 z-[80] mx-auto flex max-h-[85dvh] max-w-4xl flex-col gap-3 rounded-2xl border border-sky-200 bg-white p-5 text-slate-900 shadow-xl sm:p-6">
+  return <aside aria-label={copy.title} aria-busy={busy} data-customizing={custom || undefined} className="cookie-choice-banner fixed inset-x-3 bottom-3 z-[80] mx-auto flex max-h-[85dvh] max-w-3xl flex-col gap-3 rounded-2xl border border-sky-200 bg-white p-5 text-slate-900 shadow-xl">
     <div className="min-h-0 overflow-y-auto">
       <h2 className="font-display text-xl font-bold text-slate-900">{copy.title}</h2>
-      <div className="mt-2 grid gap-3 sm:grid-cols-2 sm:gap-5">
-        <div>{custom ? <label className="font-semibold"><input type="checkbox" checked={general} aria-describedby="general-choice-description" onChange={e=>setGeneral(e.target.checked)} /> {options.general}</label> : <strong>{options.general}</strong>}
-          <p id="general-choice-description" className="mt-1 text-sm">{copy.message}</p></div>
-        <div>{custom ? <label className="font-semibold"><input type="checkbox" checked={personal} aria-describedby="visit-choice-description" onChange={e=>setPersonal(e.target.checked)} /> {options.personal}</label> : <strong>{options.personal}</strong>}
-          <p id="visit-choice-description" className="mt-1 text-sm">{options.detail}</p></div>
-      </div>
-      {failed && <p role="alert">{options.error}</p>}
+      {custom ? (
+        <div className="mt-1">
+          <label className="flex min-h-11 items-center gap-2 font-semibold">
+            <input type="checkbox" checked={general} onChange={e => setGeneral(e.target.checked)} />
+            {copy.general}
+          </label>
+          <label className="flex min-h-11 items-center gap-2 font-semibold">
+            <input type="checkbox" checked={personal} aria-describedby="visit-choice-description"
+              onChange={e => setPersonal(e.target.checked)} />
+            {copy.personal}
+          </label>
+          <p id="visit-choice-description" className="text-sm">{notice.linking}</p>
+        </div>
+      ) : (
+        <div className="mt-1 space-y-1 text-sm">
+          <p>{copy.message}</p>
+          <p>{notice.signup} {notice.linking}</p>
+        </div>
+      )}
+      {failed && <p role="alert">{copy.error}</p>}
     </div>
-    <div className="flex shrink-0 flex-wrap items-center gap-3">
-      <button type="button" disabled={busy} className="knop knop-lijn min-w-32" onClick={() => choose("declined")}>{copy.no}</button>
-      <button type="button" disabled={busy} className="knop knop-lijn min-w-32" onClick={() => custom ? choose(general ? "accepted" : "declined",personal) : choose("accepted",true)}>{custom ? options.save : copy.yes}</button>
-      {!custom && <button type="button" className="underline" onClick={reopenSettings}>{options.choices}</button>}
-      <Link className="underline" href={`/${locale}/privacyverklaring#inschrijfbezoek`}>{copy.privacy}</Link>
+    <div className="flex shrink-0 flex-wrap items-center gap-x-5 gap-y-1">
+      <div className="grid w-full grid-cols-2 gap-2 sm:w-auto">
+        <button type="button" disabled={busy} className="knop knop-lijn" onClick={() => choose("declined", false)}>{copy.no}</button>
+        <button type="button" disabled={busy} className="knop knop-lijn" onClick={() => custom ? choose(general ? "accepted" : "declined", personal) : choose("accepted", true)}>{custom ? copy.save : copy.yes}</button>
+      </div>
+      {!custom && <button type="button" disabled={busy} className="min-h-8 text-sm underline" onClick={reopenSettings}>{copy.choices}</button>}
+      <Link className="inline-flex min-h-8 items-center text-sm underline" href={`/${locale}/privacyverklaring#inschrijfbezoek`}>{copy.privacy}</Link>
     </div>
   </aside>;
 }
