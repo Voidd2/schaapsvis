@@ -581,7 +581,7 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
             {data.studentApplication?.status === "approved" && data.discountPass && (
               <div id="studentenpas" className="scroll-mt-36 overflow-hidden rounded-3xl bg-gradient-to-br from-[#073d56] via-[#075c7c] to-[#0792b8] p-4 text-white shadow-xl sm:p-10">
                 <div className="flex flex-wrap items-start justify-between gap-4">
-                  <div className="flex min-w-0 items-center gap-3"><Image src={BEELD.logoBadge.bestand} alt="Schaap's Vis" width={64} height={64} unoptimized className="size-11 shrink-0 rounded-lg bg-white p-1 object-contain sm:size-16" /><div className="min-w-0"><p className="text-xs font-bold uppercase tracking-[0.18em] text-sky-200">Schaap&apos;s Vishandel</p><p className="mt-2 text-xs tracking-[0.12em] text-sky-100">LEIDEN · SINDS 1938</p></div></div>
+                  <div className="flex min-w-0 items-center gap-3"><Image src={BEELD.logoBadge.bestand} alt="Schaap's Vis" width={64} height={64} unoptimized className="size-16 shrink-0 rounded-lg bg-white p-1 object-contain" /><div className="min-w-0"><p className="text-xs font-bold uppercase tracking-[0.18em] text-sky-200">Schaap&apos;s Vishandel</p><p className="mt-2 text-xs tracking-[0.12em] text-sky-100">LEIDEN · SINDS 1938</p></div></div>
                   <span className="hidden rounded-full border border-white/30 px-3 py-1 text-xs font-bold uppercase tracking-widest sm:inline-block">Student</span>
                 </div>
                 <div className="mt-4 grid items-end gap-4 sm:mt-8 sm:grid-cols-[1fr_auto] sm:gap-7">
