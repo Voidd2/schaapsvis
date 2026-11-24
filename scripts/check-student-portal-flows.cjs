@@ -8,9 +8,9 @@ const path = require('node:path');
 const origin = process.argv[2] || 'http://127.0.0.1:3038';
 if (!/^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(origin) && !(process.env.STUDENT_TEST_LIVE_READONLY === '1' && origin === 'https://schaapsvishandel.nl')) throw new Error('Local origin or explicitly enabled read-only production assets required');
 const output = process.env.STUDENT_TEST_OUTPUT;
-const user = { id: 'local-student', name: 'Test Student', email: 'student@example.test' };
+const user = { id: 'local-student', name: 'Sam Voorbeeld', email: 'student@example.test' };
 const application = { status: 'approved', education_level: 'mbo', institution: 'Test school', study_city: 'Utrecht', submitted_at: '2026-11-01T10:00:00Z' };
-const pass = { displayCode: 'SV-TEST12', issuedAt: '2026-11-01T10:00:00Z', expiresAt: '2027-11-01T10:00:00Z' };
+const pass = { displayCode: 'SV-TEST-DEMO', issuedAt: '2026-11-01T10:00:00Z', expiresAt: '2027-11-01T10:00:00Z' };
 const qrPayload = Buffer.from(JSON.stringify({ p: '11111111-2222-4333-8444-555555555555', e: 1800000000000, n: 'aBcDeFgHiJkL' })).toString('base64url');
 const qrToken = `SVQ1.${qrPayload}.${'a'.repeat(43)}`;
 (async () => {
@@ -21,6 +21,7 @@ const qrToken = `SVQ1.${qrPayload}.${'a'.repeat(43)}`;
   for (const locale of ['nl', 'en', 'de']) for (const width of [390, 1440]) {
    const context = await browser.newContext({ viewport: { width, height: 900 } });
    if (origin.startsWith('http:') && process.env.STUDENT_TEST_SITE_TOKEN) await context.addCookies([{ name: 'sv_access', value: process.env.STUDENT_TEST_SITE_TOKEN, url: origin }]);
+   await context.addInitScript(() => localStorage.setItem("sv-discounts-subscribed","1"));
    const page = await context.newPage(), errors = [], unexpected = [], posts = [];
    let state = { user: null }, duplicate = true, proofMethod = "school-email";
    page.on('pageerror', e => errors.push(e.message));
@@ -38,7 +39,7 @@ const qrToken = `SVQ1.${qrPayload}.${'a'.repeat(43)}`;
       if (endpoint === '/api/members/verify-codes') { state = { user, studentApplication: null }; return route.fulfill({ json: { ok: true } }); }
       if (endpoint === '/api/members/student-application') { state = { user, studentApplication: { ...application, status: 'pending' } }; return route.fulfill({ json: { ok: true } }); }
       if (endpoint === '/api/members/logout') { state = { user: null }; return route.fulfill({ json: { ok: true } }); }
-      if (endpoint === '/api/members/newsletter/start') return route.fulfill({ json: { draftToken: 'local-draft' } });
+      if (endpoint === '/api/members/newsletter/subscribe') return route.fulfill({ json: { ok: true } });
      }
      unexpected.push(`${request.method()} ${endpoint}`);
      return route.fulfill({ status: 501, json: { error: 'unmocked-request' } });
@@ -99,6 +100,7 @@ const qrToken = `SVQ1.${qrPayload}.${'a'.repeat(43)}`;
    assert.equal(await form.evaluate(e=>e.checkValidity()),false,'Other requires a description');
    await other.fill('International diploma');
    await form.locator('button[type="submit"]').click();
+   if (output && locale === 'nl' && width === 390) await page.locator('main').screenshot({path:path.join(output,'aanvraag-ingediend.png')});
    await form.waitFor({ state: 'detached' });
    const submitted = posts.find(p => p.endpoint.endsWith('/student-application')).body;
    assert.match(submitted, /name="studyCity"\r\n\r\nUtrecht/); assert.match(submitted, /name="educationLevelOther"\r\n\r\nInternational diploma/); assert.doesNotMatch(submitted, /filename=|proofConsent|studiesInLeiden/);
@@ -108,33 +110,32 @@ const qrToken = `SVQ1.${qrPayload}.${'a'.repeat(43)}`;
    await page.reload({ waitUntil: 'networkidle' });
    await page.locator('code').filter({ hasText: pass.displayCode }).waitFor(); await page.locator('main svg[role="img"]').waitFor();
    const logo = page.locator('main img[alt="Schaap\'s Vis"]'); await logo.evaluate(e => e.decode());
+   assert.match(await page.locator('#studentenpas').innerText(), /Botermarkt/);
    assert.equal(await page.locator('form[action*="/wallet/"]').count(), 0, 'Deferred Wallet buttons hidden');
    assert.equal(await page.locator('a.fixed[aria-label]').count(), 0);
    assert.ok((await page.locator('main').innerText()).includes(user.name));
    assert.doesNotMatch(await page.locator('main').innerText(), /SVQ1\.|svpass\.|spaarpunten|loyalty points|Treuepunkte/);
    const bounds = await logo.boundingBox(); assert.equal(bounds.width, bounds.height); assert.ok(bounds.width >= 64 && bounds.width <= 72);
    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false);
-   const pixels = await page.locator('main svg[role="img"]').evaluate(async svg => {
-    const image = new Image();
-    const source = svg.cloneNode(true); source.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-    const url = URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(source)], { type: 'image/svg+xml' }));
-    try {
-     image.src = url; await image.decode();
-     const canvas = document.createElement('canvas'); canvas.width = canvas.height = 192;
-     const ctx = canvas.getContext('2d'); ctx.drawImage(image, 0, 0, 192, 192);
-     return Array.from(ctx.getImageData(0, 0, 192, 192).data);
-    } finally { URL.revokeObjectURL(url); }
-   });
-   assert.equal(jsQR(new Uint8ClampedArray(pixels), 192, 192)?.data, qrToken, 'Rendered SVG decodes to complete token');
+   const cookieChoice = page.getByRole("button", { name: {nl:"Weigeren",en:"Reject",de:"Ablehnen"}[locale], exact: true });
+   if (await cookieChoice.isVisible()) await cookieChoice.click();
+   const qrImage = await page.locator('#studentenpas svg[role="img"]').screenshot();
+   const { data: pixels, info } = await require('sharp')(qrImage).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+   assert.equal(jsQR(new Uint8ClampedArray(pixels), info.width, info.height)?.data, qrToken, 'On-screen QR decodes to the complete token');
    const reject = page.getByRole('button', { name: { nl: 'Weigeren', en: 'Reject', de: 'Ablehnen' }[locale], exact: true });
    if (await reject.count()) await reject.click();
    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
-   if (output) await page.screenshot({ path: path.join(output, `student-pass-${locale}-${width}.png`), fullPage: true });
+   if (output && locale === "nl") {
+    await page.locator("#studentenpas").screenshot({path:path.join(output, `studentenpas-${width}.png`)});
+    await page.locator("main").screenshot({path:path.join(output, `studentenaccount-${width}.png`)});
+   }
    const newsletterPanel = page.locator('footer details').filter({ has: page.locator('input[name="email"]') });
    if (!(await newsletterPanel.evaluate(panel => panel.open))) await newsletterPanel.locator('summary').click();
    await page.locator('footer input[name="email"]').fill('newsletter@example.test'); await page.locator('footer button[type="submit"]').click();
-   const newsletterConsent = page.locator('footer input[name="consent"]'); await newsletterConsent.waitFor();
-   assert.equal(await newsletterConsent.evaluate(e => e.required), true); assert.equal(await newsletterConsent.isChecked(), false);
+   await page.locator('footer form[data-newsletter-form="footer"]').waitFor({state:'detached'});
+   const footerSignup = JSON.parse(posts.findLast(post => post.endpoint.endsWith('/newsletter/subscribe')).body);
+   assert.equal(footerSignup.consentVersion, 'footer-email-signup-v2');
+   assert.equal(footerSignup.email, 'newsletter@example.test');
    state = { user, studentApplication: application, discountPass: null, inactivePass: { ...pass, status: 'suspended' } };
    await page.reload({ waitUntil: 'networkidle' });
    const blockedText = { nl: 'Uw studentenpas is tijdelijk geblokkeerd', en: 'Your student pass is temporarily blocked', de: 'Ihr Studentenpass ist vorübergehend gesperrt' }[locale];
@@ -143,7 +144,7 @@ const qrToken = `SVQ1.${qrPayload}.${'a'.repeat(43)}`;
    assert.equal(await page.locator('main svg[role="img"]').count(), 0, 'Blocked pass must not show a QR');
    assert.doesNotMatch(await page.locator('main').innerText(), /Uw studentenpas is verlopen|Your student pass has expired|Ihr Studentenpass ist abgelaufen/);
    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false);
-   if (output) await page.screenshot({ path: path.join(output, `student-suspended-${locale}-${width}.png`), fullPage: true });
+   if (output && locale === "nl" && width === 390) await page.locator("main").screenshot({ path: path.join(output, "geblokkeerde-voorbeeldpas.png") });
    state = { ...state, inactivePass: { ...pass, status: 'expired' } };
    await page.reload({ waitUntil: 'networkidle' });
    await page.locator('input[name="studyCity"]').waitFor();

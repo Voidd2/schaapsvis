@@ -1,5 +1,6 @@
 "use client";
 
+import studentMarket from "@/lib/student-market.json";
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 
@@ -22,7 +23,13 @@ const copy = {
   de: { title: "Studentenanträge", intro: "Nur Administratoren auf der Serverfreigabeliste können diese Anträge sehen.", campaigns: "E-Mail-Angebote verwalten", loading: "Anträge werden geladen…", forbidden: "Kein Administratorzugriff. Melden Sie sich mit einem freigegebenen Administratorkonto an.", none: "Es sind keine Anträge offen.", city: "Studienort", schoolEmail: "Bestätigte Schul-E-Mail", proof: "Studiennachweis ansehen", approve: "Genehmigen", reject: "Ablehnen", note: "Notiz (optional)", done: "Entscheidung gespeichert.", cleanupNeeded: "Die Entscheidung wurde gespeichert, aber der Nachweis konnte nicht gelöscht werden. Bitte versuchen Sie es erneut.", cleanup: "Nachweis erneut löschen", fail: "Das hat nicht funktioniert. Aktualisieren Sie die Seite und versuchen Sie es erneut.", verify: "Rabattpass prüfen", code: "Passcode", check: "Prüfen", valid: "Gültiger Pass", invalid: "Pass ungültig oder abgelaufen", holder: "Pass ausgestellt für", discount: "Rabatt", eligible: "Gültig für", kibbeling: "Kibbeling", herring: "Hering", herringSandwich: "Heringsbrötchen", drinks: "Getränke", wholeRange: "das gesamte Sortiment", menu: "MBO", levelHbo: "HBO", levelWo: "Universität" },
 } as const;
 
-type VerifiedPass = { valid: boolean; name?: string; displayCode?: string; expiresAt?: string | null; discountPercent?: number; eligibleProducts?: string[] };
+const messages = {
+  nl: { sent: "De student is per e-mail op de hoogte gebracht.", queued: "De mail staat klaar voor een nieuwe verzendpoging.", unavailable: "Deze student heeft geen bereikbaar, bevestigd account.", outside: "Geldige pas · vandaag geen studentenkorting" },
+  en: { sent: "The decision email has been sent to the student.", queued: "The email is queued for another delivery attempt.", unavailable: "This student has no active, verified account.", outside: "Valid pass · no student discount today" },
+  de: { sent: "Die E-Mail zur Entscheidung wurde versandt.", queued: "Ein erneuter Versand der E-Mail ist vorgemerkt.", unavailable: "Für diese Person gibt es kein aktives, bestätigtes Konto.", outside: "Gültiger Pass · heute kein Studentenrabatt" },
+} as const;
+
+type VerifiedPass = { valid: boolean; redeemableToday?: boolean; name?: string; displayCode?: string; expiresAt?: string | null; discountPercent?: number; eligibleProducts?: string[] };
 const ELIGIBLE_LABEL: Record<string, keyof typeof copy.nl> = {
   assortiment: "wholeRange",
 };
@@ -77,9 +84,10 @@ export function StudentReviewPortal({ locale }: { locale: string }) {
         body: JSON.stringify({ decision, note: fields.get("note") }),
       });
       if (!response.ok) throw new Error("decision-failed");
-      const result = await response.json() as { proofDeleted?: boolean };
+      const result = await response.json() as { proofDeleted?: boolean; mailStatus?: "sent" | "queued" | "unavailable" };
       setCleanupApplicationId(result.proofDeleted ? "" : application.id);
-      setMessage(result.proofDeleted ? t.done : t.cleanupNeeded);
+      const delivery = result.mailStatus ? messages[language][result.mailStatus] : "";
+      setMessage([result.proofDeleted ? t.done : t.cleanupNeeded, delivery].filter(Boolean).join(" "));
       await reload();
     } catch { setMessage(t.fail); }
     finally { setBusy(""); }
@@ -152,7 +160,8 @@ export function StudentReviewPortal({ locale }: { locale: string }) {
             <h2 className="font-display text-2xl font-bold text-slate-900">{t.verify}</h2>
             <div className="mt-4 flex flex-wrap gap-3"><input value={code} onChange={(event) => { setCode(event.target.value); setPassResult(null); }} required maxLength={160} aria-label={t.code} placeholder={t.code} className="min-w-64 flex-1 rounded-lg border border-sky-200 px-3 py-2.5" /><button disabled={busy === "pass"} className="knop knop-navy">{t.check}</button></div>
             {passResult && !passResult.valid && <p role="status" className="mt-4 font-semibold text-red-800">{t.invalid}</p>}
-            {passResult?.valid && <div role="status" className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-950"><p className="font-bold">{t.valid}</p>{passResult.name && <p className="mt-2">{t.holder}: <strong>{passResult.name}</strong></p>}<p className="mt-1">{t.discount}: <strong>{passResult.discountPercent ?? 10}%</strong></p>{passResult.eligibleProducts?.length ? <p className="mt-1">{t.eligible}: <strong>{passResult.eligibleProducts.map((item) => item in ELIGIBLE_LABEL ? t[ELIGIBLE_LABEL[item]] : null).filter(Boolean).join(", ")}</strong></p> : null}</div>}
+            {passResult?.valid && passResult.redeemableToday === false && <div role="status" className="mt-4 rounded-xl border border-amber-300 bg-amber-50 p-4 text-amber-950"><p className="font-bold">{messages[language].outside}</p><p>{studentMarket[language].pass}</p></div>}
+            {passResult?.valid && passResult.redeemableToday !== false && <div role="status" className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-950"><p className="font-bold">{t.valid}</p><p>{studentMarket[language].pass}</p>{passResult.name && <p className="mt-2">{t.holder}: <strong>{passResult.name}</strong></p>}<p className="mt-1">{t.discount}: <strong>{passResult.discountPercent ?? 10}%</strong></p>{passResult.eligibleProducts?.length ? <p className="mt-1">{t.eligible}: <strong>{passResult.eligibleProducts.map((item) => item in ELIGIBLE_LABEL ? t[ELIGIBLE_LABEL[item]] : null).filter(Boolean).join(", ")}</strong></p> : null}</div>}
           </form>
         )}
         {message && <p role="status" className="mt-5 rounded-lg bg-sky-50 p-4 text-sm">{message}</p>}

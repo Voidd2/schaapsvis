@@ -9,6 +9,16 @@ import sharp from 'sharp';
 const counterPhotos = [
  '/images/schaaps/haring-oesters-viskraam-voorschoten.webp',
  '/images/schaaps/haring-viskraam-voorschoten.webp',
+ '/images/schaaps/vrijdag-bij-de-viskraam.webp',
+];
+const homepagePhotos = [
+ '/images/schaaps/haring-oesters-viskraam-voorschoten.webp',
+ '/images/varlaks/zalmfilet-1200.webp',
+ '/images/editorial/kibbeling-schaapstray.png',
+ '/images/assortiment-internet/hollandse-garnalen-solt.jpeg',
+ '/images/dirks/scholfilet.webp',
+ '/images/dirks/coquilles-vlees.webp',
+ '/images/dirks/haring.webp',
 ];
 const sources = [...new Set([
  '/images/schaaps/oesters-in-de-winkel.webp',
@@ -33,9 +43,18 @@ const sources = [...new Set([
  '/images/dirks/haring.webp',
  '/images/recepten/zalm-citroen-dille.webp',
  ...JSON.parse(await fs.readFile('src/lib/catalog-image-sources.json','utf8')),
+ ...homepagePhotos,
 ])];
 const manifestPath='src/lib/static-image-variants.json';
 const check=process.argv.includes('--check');
+for (const source of ['public/images/brand/schaapsvis-logo-192.png', 'public/images/newsletter-signup-popup.png']) {
+  const output = source.replace(/\.png$/, '.webp');
+  if (!check) await sharp(source).webp({quality:84,effort:6}).toFile(output);
+  const [input, result] = await Promise.all([sharp(source).metadata(), sharp(output).metadata()]);
+  assert.equal(result.width, input.width, output);
+  assert.equal(result.height, input.height, output);
+  assert.equal(result.format, 'webp', output);
+}
 const existing=check?JSON.parse(await fs.readFile(manifestPath,'utf8')):null;
 const manifest={};
 for(const src of sources){
@@ -59,6 +78,21 @@ for(const src of sources){
   variants.push({src:url,width,bytes:bytes.length});
  }
  const entry={sha256:hash,originalBytes:original.length,variants};
+ if (homepagePhotos.includes(src)) {
+   entry.avif = [];
+   const maxWidth = Math.min(metadata.width, 1280);
+   const avifWidths = [240, 320, 400, 480, 640, 768, 960].filter(w => w < maxWidth).concat(maxWidth);
+   for (const width of avifWidths) {
+     const url = `/images/responsive/${path.parse(src).name}-q48-${hash.slice(0,12)}-${width}.avif`;
+     const output = 'public' + url;
+     if (!check) await sharp(original).rotate().resize({width}).avif({quality:48,effort:5}).toFile(output);
+     const bytes = await fs.readFile(output);
+     const image = await sharp(bytes).metadata();
+     assert.equal(image.width, width, output);
+     assert.equal(image.compression, 'av1', output);
+     entry.avif.push({src:url,width,bytes:bytes.length});
+   }
+ }
  if(src === '/images/schaaps/winkel-herenstraat.webp'){
   // The homepage shows a landscape crop. Encode only its visible pixels for the LCP image.
   entry.heroAvif=[];

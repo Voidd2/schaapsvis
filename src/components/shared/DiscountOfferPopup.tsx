@@ -101,7 +101,7 @@ export function DiscountOfferPopup({ locale, experiment, enabled = true }: { loc
   return <dialog ref={dialog} className={styles.offerDialog} aria-label={headline} onClose={() => setOpen(false)}>
     <div className={styles.offerImageFrame}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className={styles.offerImage} src="/images/newsletter-signup-popup.png" alt={copy.popupImageAlt} width={852} height={480} />
+      {open && <img className={styles.offerImage} src="/images/newsletter-signup-popup.webp" alt={copy.popupImageAlt} width={852} height={480} />}
       <button type="button" className={styles.offerClose} aria-label={copy.closeOffer} onClick={() => setOpen(false)}>
         <X size={22} aria-hidden="true" />
       </button>

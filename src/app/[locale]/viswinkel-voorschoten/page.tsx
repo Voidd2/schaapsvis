@@ -1,4 +1,3 @@
-import { productHref } from "@/lib/product-href";
 import Link from "next/link";
 import Image from "next/image";
 import { StaticResponsiveImage } from "@/components/StaticResponsiveImage";
@@ -13,7 +12,7 @@ import { bestelContact } from "@/lib/bestel-contact";
 import { blogPosts } from "@/lib/blog";
 import { localizeBlog } from "@/lib/blog-localization";
 import { voorschotenText } from "@/lib/voorschoten-copy";
-import { BEELD } from "@/lib/beeld";
+import { BEELD, kraamGalerij } from "@/lib/beeld";
 
 const kraamFoto = BEELD.marktVoorschoten;
 
@@ -36,18 +35,11 @@ const FAQNL = [
   { v: "Wat kost verse vis bij jullie kraam?", a: "De prijs hangt af van de vissoort en hoeveelheid. Vraag ons bij de kraam of vooraf via WhatsApp; we noemen de prijs voordat u beslist." },
 ];
 
-const AANBOD = [
-  { title: "Kibbeling voor de lunch of mee naar huis", text: "Goudbruin gebakken kibbeling met Ravigotte-, Knoflook- of cocktailsaus naar keuze.", src: "/images/editorial/kibbeling-schaapstray.png", alt: "Bakje krokante kibbeling met ravigotesaus", slug: "kibbeling" },
-  { title: "Haring en Hollandse garnalen", text: "Hollandse klassiekers voor op brood, bij de lunch, als vooraf of tussendoortje.", src: "/images/schaaps/haring-viskraam-voorschoten.webp", alt: "Haring", slug: "haring" },
-  { title: "Zalm en verse filet voor het avondeten", text: "Vertel ons wat u wilt koken. We helpen kiezen welke vis en hoeveel porties bij uw gerecht passen.", src: "/images/schaaps/varlaks-viskraam-voorschoten.webp", alt: "VÅRLAKS-zalm", slug: "varlaks-zalm" },
-];
-
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t=(text:string)=>voorschotenText(text,locale);
   const fotoTaal = locale === "en" || locale === "de" ? kraamFoto.vertalingen[locale] : kraamFoto;
   const FAQ=FAQNL.map(q=>({v:t(q.v),a:t(q.a)}));
-  const aanbod=AANBOD.map(p=>({...p,title:t(p.title),text:t(p.text),alt:t(p.alt)}));
   const kraam = VERKOOPPUNTEN.find(p => p.id === "voorschoten")!;
   const contact = bestelContact(locale);
   const localSchema = {
@@ -92,18 +84,16 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     </div></Sectie>
     <Sectie grond="papier"><div className="grid md:grid-cols-3 gap-7"><div><p className="kapitaal mb-3">{t("Prijs vooraf bespreken")}</p><h2 className="text-2xl mb-3">{t("Kies wat bij uw budget past")}</h2><p className="leading-relaxed">{t("Vertel ons voor hoeveel mensen u vis zoekt. We denken graag mee over de vissoorten, adviseren u over de juiste hoeveelheid en spreken de prijs vooraf met u af.")}</p></div><div id="verse-vis" className="scroll-mt-32 md:scroll-mt-48"><p className="kapitaal mb-3">{t("Goede kwaliteit")}</p><h2 className="text-2xl mb-3">{t("Vis met aandacht uitgezocht")}</h2><p className="leading-relaxed">{t("Elke vrijdag vindt u bij ons verse kabeljauw, zalm en oesters. De andere vissoorten wisselen per week. We kopen alleen vis in als de kwaliteit goed is.")}</p><Link className="inline-block mt-4 underline" href={`/${locale}/varlaks#certificaten`}>{t("VÅRLAKS-zalm en certificaten →")}</Link></div><div><p className="kapitaal mb-3">{t("Persoonlijk advies")}</p><h2 className="text-2xl mb-3">{t("Zoekt u iets speciaals?")}</h2><p className="leading-relaxed">{t("Stuur ons uw wensen via WhatsApp en vermeld dat u vrijdag in Voorschoten wilt ophalen. We bespreken wat mogelijk is, de hoeveelheid en de prijs. Visschalen vraagt u bij ons aan via WhatsApp.")}</p><a className="inline-block mt-4 underline font-semibold" href={contact.href}>{t("Vraag via WhatsApp →")}</a></div></div></Sectie>
     <Sectie grond="zand">
-      <h2 id="assortiment-viskraam" className="text-3xl mb-7 scroll-mt-28">{t("Wat haalt u bij onze viskraam?")}</h2>
-      <div className="grid md:grid-cols-3 gap-6">
-        {aanbod.map(p => (
-          <article key={p.slug} id={`viskraam-${p.slug}`} className="recipe-card">
-            <StaticResponsiveImage src={p.src} alt={p.alt} width={1200} height={800}
-              sizes="(max-width: 768px) 100vw, 33vw" className="w-full aspect-[3/2] object-cover" />
-            <div className="recipe-card-body">
-              <h3 className="text-xl mb-3">{p.title}</h3>
-              <p className="leading-relaxed mb-5">{p.text}</p>
-              <Link className="underline font-semibold" href={productHref(locale, p.slug)}>{t("Bekijk de vis →")}</Link>
-            </div>
-          </article>
+      <h2 id="assortiment-viskraam" className="text-3xl mb-7">{t("Wat haalt u bij onze viskraam?")}</h2>
+      <div id="viskraam-haring" className="grid gap-4 sm:grid-cols-2 lg:gap-6">
+        {kraamGalerij.map(foto => (
+          <figure key={foto.bestand} className="min-w-0">
+            <StaticResponsiveImage src={foto.bestand}
+              alt={locale === "en" || locale === "de" ? foto.vertalingen[locale].alt : foto.alt}
+              width={foto.breedte} height={foto.hoogte} loading="lazy"
+              sizes="auto, (max-width: 639px) calc(100vw - 40px), (max-width: 1720px) 47vw, 810px"
+              className="block w-full h-auto rounded-xl" />
+          </figure>
         ))}
       </div>
       <p className="mt-7 max-w-3xl">{t("Het aanbod wisselt met de vangst en levering. Bekijk het")} <Link className="underline" href={`/${locale}/assortiment`}>{t("assortiment")}</Link>{t(", onze")} <Link className="underline" href={`/${locale}/viskalender`}>{t("viskalender")}</Link> {t("of de")} <Link className="underline" href={`/${locale}/recepten`}>{t("visrecepten")}</Link> {t("voor inspiratie.")}</p>

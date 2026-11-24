@@ -1,4 +1,6 @@
 "use client";
+
+import studentMarket from "@/lib/student-market.json";
 import { visitAtSignup, signupVisitComplete } from "@/lib/signup-visit";
 
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -82,7 +84,7 @@ const translations = {
     magicSent: "Als er een bevestigd account bij dit adres hoort, ontvangt u een eenmalige inloglink.",
     resend: "Nieuwe verificatiecodes sturen",
     studentTitle: "Studentenkorting aanvragen",
-    studentInfo: "De 10% korting geldt voor Nederlandse en internationale studenten die een MBO-, HBO- of WO-opleiding volgen; middelbare school is uitgesloten. Na goedkeuring geldt de korting voor het hele assortiment. De korting is niet te combineren met andere acties. De pas is één studiejaar geldig.",
+    studentInfo: "De 10% korting geldt voor Nederlandse en internationale studenten die een MBO-, HBO- of WO-opleiding volgen; middelbare school is uitgesloten. Na goedkeuring geldt de korting op woensdag bij onze kraam op de Botermarkt in Leiden voor het hele assortiment. De korting is niet te combineren met andere acties. De pas is één studiejaar geldig.",
     institution: "Onderwijsinstelling",
     studyCity: "Stad van uw opleiding",
     level: "Opleidingsniveau",
@@ -90,7 +92,7 @@ const translations = {
     hbo: "HBO",
     wo: "Universiteit (WO)",
     apply: "Aanvraag indienen",
-    pending: "Uw aanvraag wacht op beoordeling. U krijgt uw pas zodra deze is goedgekeurd.",
+    pending: "Uw aanvraag wacht op beoordeling. U ontvangt de uitslag op uw privé-e-mailadres.",
     approved: "Uw aanvraag is goedgekeurd. Toon deze pas bij de kassa.",
     expired: "Uw studentenpas is verlopen. U kunt met een actueel studentenbewijs opnieuw een aanvraag indienen.",
     suspended: "Uw studentenpas is tijdelijk geblokkeerd en geeft nu geen recht op korting. Volg een eventuele controle hierboven of neem contact op met de winkel. Een nieuwe aanvraag is niet nodig.",
@@ -100,7 +102,6 @@ const translations = {
     qrLabel: "QR-code van uw studentenpas",
     qrRefreshing: "Beveiligde QR-code vernieuwen…",
     holder: "Studentenpas van",
-    discount: "10% korting op het hele assortiment · niet combineerbaar met andere acties",
     unavailable: "De accountomgeving wordt nog gekoppeld. Probeer het later opnieuw.",
     accountCreated: "We sturen één code naar uw privé-e-mailadres en één naar uw schoolmail. Controleer zo nodig ook Ongewenste e-mail.",
     verificationFailed: "Uw account is aangemaakt, maar een of beide e-mails konden niet worden verstuurd. Vraag de codes opnieuw aan.",
@@ -162,7 +163,7 @@ const translations = {
     magicLogin: "Sign in by email without a password", magicSent: "If a verified account exists for this address, you will receive a one-time sign-in link.",
     resend: "Resend verification codes",
     studentTitle: "Apply for the student discount",
-    studentInfo: "The 10% discount is for Dutch and international students who attend an MBO, HBO or university programme; secondary school is not eligible. After approval, it applies to the entire range and cannot be combined with other offers. The pass is valid for one academic year.",
+    studentInfo: "The 10% discount is for Dutch and international students who attend an MBO, HBO or university programme; secondary school is not eligible. Once approved, you can use it on Wednesdays at our stall on the Botermarkt in Leiden. It applies to the entire range and cannot be combined with other offers. The pass is valid for one academic year.",
     institution: "Educational institution",
     studyCity: "City where you study",
     level: "Education level",
@@ -170,7 +171,7 @@ const translations = {
     hbo: "HBO",
     wo: "University",
     apply: "Submit application",
-    pending: "Your application is awaiting review. Your pass will appear after approval.",
+    pending: "Your application is awaiting review. We will email the decision to your personal address.",
     approved: "Your application is approved. Show this pass at the counter.",
     expired: "Your student pass has expired. You can apply again with current proof of enrolment.",
     suspended: "Your student pass is temporarily blocked and cannot be used for a discount. Follow any verification steps above or contact the shop. You do not need to submit a new application.",
@@ -180,7 +181,6 @@ const translations = {
     qrLabel: "QR code for your student pass",
     qrRefreshing: "Refreshing secure QR code…",
     holder: "Student pass for",
-    discount: "10% off the entire range · cannot be combined with other offers",
     unavailable: "The account area is still being connected. Please try again later.",
     accountCreated: "We will send one code to your personal email and one to your school email. Check your spam folder if needed.",
     verificationFailed: "Your account was created, but one or both emails could not be sent. Request new codes.",
@@ -237,7 +237,7 @@ const translations = {
     magicLogin: "Ohne Passwort per E-Mail anmelden", magicSent: "Wenn für diese Adresse ein bestätigtes Konto besteht, erhalten Sie einen einmaligen Anmeldelink.",
     resend: "Neue Bestätigungscodes senden",
     studentTitle: "Studentenrabatt beantragen",
-    studentInfo: "Der Rabatt von 10 % gilt für niederländische und internationale Studierende in einer MBO-, HBO- oder Hochschulausbildung; weiterführende Schulen sind ausgeschlossen. Nach Freigabe gilt er für das gesamte Sortiment und ist nicht mit anderen Aktionen kombinierbar. Der Pass ist ein Studienjahr gültig.",
+    studentInfo: "Der Rabatt von 10 % gilt für niederländische und internationale Studierende in einer MBO-, HBO- oder Hochschulausbildung; weiterführende Schulen sind ausgeschlossen. Nach der Freigabe gilt er mittwochs an unserem Stand auf dem Botermarkt in Leiden für das gesamte Sortiment. Er ist nicht mit anderen Aktionen kombinierbar. Der Pass ist ein Studienjahr gültig.",
     institution: "Bildungseinrichtung",
     studyCity: "Studienort",
     level: "Ausbildungsniveau",
@@ -245,7 +245,7 @@ const translations = {
     hbo: "HBO",
     wo: "Universität",
     apply: "Antrag einreichen",
-    pending: "Ihr Antrag wird geprüft. Nach der Freigabe erscheint Ihr Rabattpass.",
+    pending: "Ihr Antrag wird geprüft. Sie erhalten das Ergebnis an Ihre private E-Mail-Adresse.",
     approved: "Ihr Antrag wurde genehmigt. Zeigen Sie diesen Pass an der Theke vor.",
     expired: "Ihr Studentenpass ist abgelaufen. Sie können mit aktuellem Studiennachweis erneut einen Antrag stellen.",
     suspended: "Ihr Studentenpass ist vorübergehend gesperrt und kann derzeit nicht für einen Rabatt genutzt werden. Folgen Sie gegebenenfalls der Prüfung oben oder kontaktieren Sie das Geschäft. Ein neuer Antrag ist nicht nötig.",
@@ -255,7 +255,6 @@ const translations = {
     qrLabel: "QR-Code Ihres Studentenpasses",
     qrRefreshing: "Sicheren QR-Code aktualisieren…",
     holder: "Studentenpass für",
-    discount: "10 % Rabatt auf das gesamte Sortiment · nicht mit anderen Aktionen kombinierbar",
     unavailable: "Der Kontobereich wird noch angebunden. Bitte versuchen Sie es später erneut.",
     accountCreated: "Wir senden einen Code an Ihre private E-Mail und einen an Ihre Schul-E-Mail. Prüfen Sie bei Bedarf auch den Spamordner.",
     verificationFailed: "Ihr Konto wurde erstellt, aber eine oder beide E-Mails konnten nicht gesendet werden. Fordern Sie neue Codes an.",
@@ -295,6 +294,12 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
   useEffect(() => {
     if (resetOpen) resetEmailInput.current?.focus();
   }, [resetOpen]);
+
+  useEffect(() => {
+    if (data?.discountPass && window.location.hash === "#studentenpas") {
+      document.getElementById("studentenpas")?.scrollIntoView({ block: "start" });
+    }
+  }, [data?.discountPass]);
 
   const refresh = useCallback(async () => {
     try {
@@ -516,6 +521,7 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
     setBusy(true);
     setMessage("");
     try {
+      fields.set("locale", language);
       const proof = fields.get("proof");
       if (proof instanceof File && proof.size > 8 * 1024 * 1024) { setSuccess(false); setMessage(t.badFile); return; }
       const response = await fetch("/api/members/student-application", { method: "POST", body: fields, credentials: "same-origin" });
@@ -573,7 +579,7 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
 
             {data.studentApplication?.status === "pending" && <p className="rounded-xl border border-amber-300 bg-amber-50 p-5">{t.pending}</p>}
             {data.studentApplication?.status === "approved" && data.discountPass && (
-              <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-[#073d56] via-[#075c7c] to-[#0792b8] p-7 text-white shadow-xl sm:p-10">
+              <div id="studentenpas" className="scroll-mt-36 overflow-hidden rounded-3xl bg-gradient-to-br from-[#073d56] via-[#075c7c] to-[#0792b8] p-7 text-white shadow-xl sm:p-10">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div className="flex min-w-0 items-center gap-3"><Image src={BEELD.logoBadge.bestand} alt="Schaap's Vis" width={64} height={64} unoptimized className="size-16 shrink-0 rounded-lg bg-white p-1 object-contain" /><div className="min-w-0"><p className="text-xs font-bold uppercase tracking-[0.18em] text-sky-200">Schaap&apos;s Vishandel</p><p className="mt-2 text-xs tracking-[0.12em] text-sky-100">LEIDEN · SINDS 1938</p></div></div>
                   <span className="rounded-full border border-white/30 px-3 py-1 text-xs font-bold uppercase tracking-widest">Student</span>
@@ -583,7 +589,8 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
                     <p className="text-xs font-bold uppercase tracking-[0.18em] text-sky-200">{t.holder}</p>
                     <p className="mt-1 font-display text-3xl font-bold">{data.user.name}</p>
                     <p className="mt-7 text-6xl font-bold tracking-tight">10<span className="text-4xl">%</span></p>
-                    <p className="mt-3 max-w-64 text-sm leading-relaxed text-sky-100">{t.discount}</p>
+                    <p className="mt-3 font-semibold text-white">{studentMarket[language].pass}</p>
+                    <p className="mt-2 max-w-72 text-sm leading-relaxed text-sky-100">{studentMarket[language].conditions}</p>
                   </div>
                   {dynamicQr ? <PassQrCode value={dynamicQr} label={t.qrLabel} /> : <div role="status" className="grid size-40 place-items-center rounded-xl bg-white/95 p-4 text-center text-sm font-semibold text-sky-950">{t.qrRefreshing}</div>}
                 </div>

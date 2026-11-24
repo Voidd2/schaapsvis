@@ -144,6 +144,43 @@
         "width": 870,
         "bytes": 159666
       }
+    ],
+    "avif": [
+      {
+        "src": "/images/responsive/haring-oesters-viskraam-voorschoten-q48-24fe13062bda-240.avif",
+        "width": 240,
+        "bytes": 10133
+      },
+      {
+        "src": "/images/responsive/haring-oesters-viskraam-voorschoten-q48-24fe13062bda-320.avif",
+        "width": 320,
+        "bytes": 16565
+      },
+      {
+        "src": "/images/responsive/haring-oesters-viskraam-voorschoten-q48-24fe13062bda-400.avif",
+        "width": 400,
+        "bytes": 23994
+      },
+      {
+        "src": "/images/responsive/haring-oesters-viskraam-voorschoten-q48-24fe13062bda-480.avif",
+        "width": 480,
+        "bytes": 32036
+      },
+      {
+        "src": "/images/responsive/haring-oesters-viskraam-voorschoten-q48-24fe13062bda-640.avif",
+        "width": 640,
+        "bytes": 49396
+      },
+      {
+        "src": "/images/responsive/haring-oesters-viskraam-voorschoten-q48-24fe13062bda-768.avif",
+        "width": 768,
+        "bytes": 63621
+      },
+      {
+        "src": "/images/responsive/haring-oesters-viskraam-voorschoten-q48-24fe13062bda-870.avif",
+        "width": 870,
+        "bytes": 97581
+      }
     ]
   },
   "/images/schaaps/haring-viskraam-voorschoten.webp": {
@@ -159,6 +196,27 @@
         "src": "/images/responsive/haring-viskraam-voorschoten-e50f3207adaa-408.webp",
         "width": 408,
         "bytes": 26524
+      }
+    ]
+  },
+  "/images/schaaps/vrijdag-bij-de-viskraam.webp": {
+    "sha256": "43bf444126b7a236b239a1d4a5421c5fd37d31a47816810a669fec52ba1f1e8b",
+    "originalBytes": 151630,
+    "variants": [
+      {
+        "src": "/images/responsive/vrijdag-bij-de-viskraam-43bf444126b7-320.webp",
+        "width": 320,
+        "bytes": 16638
+      },
+      {
+        "src": "/images/responsive/vrijdag-bij-de-viskraam-43bf444126b7-640.webp",
+        "width": 640,
+        "bytes": 59704
+      },
+      {
+        "src": "/images/responsive/vrijdag-bij-de-viskraam-43bf444126b7-822.webp",
+        "width": 822,
+        "bytes": 115064
       }
     ]
   },
@@ -379,6 +437,48 @@
         "width": 1280,
         "bytes": 113532
       }
+    ],
+    "avif": [
+      {
+        "src": "/images/responsive/kibbeling-schaapstray-q48-86e128880cb1-240.avif",
+        "width": 240,
+        "bytes": 5197
+      },
+      {
+        "src": "/images/responsive/kibbeling-schaapstray-q48-86e128880cb1-320.avif",
+        "width": 320,
+        "bytes": 7724
+      },
+      {
+        "src": "/images/responsive/kibbeling-schaapstray-q48-86e128880cb1-400.avif",
+        "width": 400,
+        "bytes": 11133
+      },
+      {
+        "src": "/images/responsive/kibbeling-schaapstray-q48-86e128880cb1-480.avif",
+        "width": 480,
+        "bytes": 14303
+      },
+      {
+        "src": "/images/responsive/kibbeling-schaapstray-q48-86e128880cb1-640.avif",
+        "width": 640,
+        "bytes": 22233
+      },
+      {
+        "src": "/images/responsive/kibbeling-schaapstray-q48-86e128880cb1-768.avif",
+        "width": 768,
+        "bytes": 29195
+      },
+      {
+        "src": "/images/responsive/kibbeling-schaapstray-q48-86e128880cb1-960.avif",
+        "width": 960,
+        "bytes": 39587
+      },
+      {
+        "src": "/images/responsive/kibbeling-schaapstray-q48-86e128880cb1-1280.avif",
+        "width": 1280,
+        "bytes": 56165
+      }
     ]
   },
   "/images/editorial/feestschaal-voorbeeld.webp": {
@@ -452,6 +552,48 @@
         "width": 1280,
         "bytes": 106404
       }
+    ],
+    "avif": [
+      {
+        "src": "/images/responsive/hollandse-garnalen-solt-q48-935777210211-240.avif",
+        "width": 240,
+        "bytes": 4807
+      },
+      {
+        "src": "/images/responsive/hollandse-garnalen-solt-q48-935777210211-320.avif",
+        "width": 320,
+        "bytes": 6917
+      },
+      {
+        "src": "/images/responsive/hollandse-garnalen-solt-q48-935777210211-400.avif",
+        "width": 400,
+        "bytes": 9152
+      },
+      {
+        "src": "/images/responsive/hollandse-garnalen-solt-q48-935777210211-480.avif",
+        "width": 480,
+        "bytes": 11672
+      },
+      {
+        "src": "/images/responsive/hollandse-garnalen-solt-q48-935777210211-640.avif",
+        "width": 640,
+        "bytes": 17754
+      },
+      {
+        "src": "/images/responsive/hollandse-garnalen-solt-q48-935777210211-768.avif",
+        "width": 768,
+        "bytes": 22544
+      },
+      {
+        "src": "/images/responsive/hollandse-garnalen-solt-q48-935777210211-960.avif",
+        "width": 960,
+        "bytes": 30502
+      },
+      {
+        "src": "/images/responsive/hollandse-garnalen-solt-q48-935777210211-1280.avif",
+        "width": 1280,
+        "bytes": 47055
+      }
     ]
   },
   "/images/dirks/scholfilet.webp": {
@@ -477,6 +619,48 @@
         "src": "/images/responsive/scholfilet-8e3ada79b862-1280.webp",
         "width": 1280,
         "bytes": 55744
+      }
+    ],
+    "avif": [
+      {
+        "src": "/images/responsive/scholfilet-q48-8e3ada79b862-240.avif",
+        "width": 240,
+        "bytes": 3118
+      },
+      {
+        "src": "/images/responsive/scholfilet-q48-8e3ada79b862-320.avif",
+        "width": 320,
+        "bytes": 4734
+      },
+      {
+        "src": "/images/responsive/scholfilet-q48-8e3ada79b862-400.avif",
+        "width": 400,
+        "bytes": 6315
+      },
+      {
+        "src": "/images/responsive/scholfilet-q48-8e3ada79b862-480.avif",
+        "width": 480,
+        "bytes": 7867
+      },
+      {
+        "src": "/images/responsive/scholfilet-q48-8e3ada79b862-640.avif",
+        "width": 640,
+        "bytes": 11459
+      },
+      {
+        "src": "/images/responsive/scholfilet-q48-8e3ada79b862-768.avif",
+        "width": 768,
+        "bytes": 14581
+      },
+      {
+        "src": "/images/responsive/scholfilet-q48-8e3ada79b862-960.avif",
+        "width": 960,
+        "bytes": 19284
+      },
+      {
+        "src": "/images/responsive/scholfilet-q48-8e3ada79b862-1280.avif",
+        "width": 1280,
+        "bytes": 26166
       }
     ]
   },
@@ -504,6 +688,48 @@
         "width": 1280,
         "bytes": 35492
       }
+    ],
+    "avif": [
+      {
+        "src": "/images/responsive/coquilles-vlees-q48-895f3886eda1-240.avif",
+        "width": 240,
+        "bytes": 2390
+      },
+      {
+        "src": "/images/responsive/coquilles-vlees-q48-895f3886eda1-320.avif",
+        "width": 320,
+        "bytes": 3121
+      },
+      {
+        "src": "/images/responsive/coquilles-vlees-q48-895f3886eda1-400.avif",
+        "width": 400,
+        "bytes": 3898
+      },
+      {
+        "src": "/images/responsive/coquilles-vlees-q48-895f3886eda1-480.avif",
+        "width": 480,
+        "bytes": 4747
+      },
+      {
+        "src": "/images/responsive/coquilles-vlees-q48-895f3886eda1-640.avif",
+        "width": 640,
+        "bytes": 6583
+      },
+      {
+        "src": "/images/responsive/coquilles-vlees-q48-895f3886eda1-768.avif",
+        "width": 768,
+        "bytes": 7876
+      },
+      {
+        "src": "/images/responsive/coquilles-vlees-q48-895f3886eda1-960.avif",
+        "width": 960,
+        "bytes": 10007
+      },
+      {
+        "src": "/images/responsive/coquilles-vlees-q48-895f3886eda1-1280.avif",
+        "width": 1280,
+        "bytes": 13343
+      }
     ]
   },
   "/images/dirks/haring.webp": {
@@ -529,6 +755,48 @@
         "src": "/images/responsive/haring-98f6369c0585-1280.webp",
         "width": 1280,
         "bytes": 34944
+      }
+    ],
+    "avif": [
+      {
+        "src": "/images/responsive/haring-q48-98f6369c0585-240.avif",
+        "width": 240,
+        "bytes": 2158
+      },
+      {
+        "src": "/images/responsive/haring-q48-98f6369c0585-320.avif",
+        "width": 320,
+        "bytes": 2941
+      },
+      {
+        "src": "/images/responsive/haring-q48-98f6369c0585-400.avif",
+        "width": 400,
+        "bytes": 3787
+      },
+      {
+        "src": "/images/responsive/haring-q48-98f6369c0585-480.avif",
+        "width": 480,
+        "bytes": 4778
+      },
+      {
+        "src": "/images/responsive/haring-q48-98f6369c0585-640.avif",
+        "width": 640,
+        "bytes": 6801
+      },
+      {
+        "src": "/images/responsive/haring-q48-98f6369c0585-768.avif",
+        "width": 768,
+        "bytes": 8290
+      },
+      {
+        "src": "/images/responsive/haring-q48-98f6369c0585-960.avif",
+        "width": 960,
+        "bytes": 10731
+      },
+      {
+        "src": "/images/responsive/haring-q48-98f6369c0585-1280.avif",
+        "width": 1280,
+        "bytes": 14720
       }
     ]
   },
@@ -2981,6 +3249,69 @@
         "src": "/images/responsive/gourmet-inktvisringen-naturel-ad84ed7aed71-320.webp",
         "width": 320,
         "bytes": 3620
+      }
+    ]
+  },
+  "/images/varlaks/zalmfilet-1200.webp": {
+    "sha256": "c5626b21efa6fe98fade52247914cf4c785afc28d4a4d89ca959763a5d50d993",
+    "originalBytes": 109888,
+    "variants": [
+      {
+        "src": "/images/responsive/zalmfilet-1200-c5626b21efa6-320.webp",
+        "width": 320,
+        "bytes": 9318
+      },
+      {
+        "src": "/images/responsive/zalmfilet-1200-c5626b21efa6-640.webp",
+        "width": 640,
+        "bytes": 31658
+      },
+      {
+        "src": "/images/responsive/zalmfilet-1200-c5626b21efa6-960.webp",
+        "width": 960,
+        "bytes": 57270
+      }
+    ],
+    "avif": [
+      {
+        "src": "/images/responsive/zalmfilet-1200-q48-c5626b21efa6-240.avif",
+        "width": 240,
+        "bytes": 2273
+      },
+      {
+        "src": "/images/responsive/zalmfilet-1200-q48-c5626b21efa6-320.avif",
+        "width": 320,
+        "bytes": 3855
+      },
+      {
+        "src": "/images/responsive/zalmfilet-1200-q48-c5626b21efa6-400.avif",
+        "width": 400,
+        "bytes": 5470
+      },
+      {
+        "src": "/images/responsive/zalmfilet-1200-q48-c5626b21efa6-480.avif",
+        "width": 480,
+        "bytes": 7424
+      },
+      {
+        "src": "/images/responsive/zalmfilet-1200-q48-c5626b21efa6-640.avif",
+        "width": 640,
+        "bytes": 12125
+      },
+      {
+        "src": "/images/responsive/zalmfilet-1200-q48-c5626b21efa6-768.avif",
+        "width": 768,
+        "bytes": 16698
+      },
+      {
+        "src": "/images/responsive/zalmfilet-1200-q48-c5626b21efa6-960.avif",
+        "width": 960,
+        "bytes": 23375
+      },
+      {
+        "src": "/images/responsive/zalmfilet-1200-q48-c5626b21efa6-1200.avif",
+        "width": 1200,
+        "bytes": 39271
       }
     ]
   }
