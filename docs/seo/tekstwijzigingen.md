@@ -1,5 +1,18 @@
 # Tekstwijzigingen voor lokale vindbaarheid
 
+## 24 november 2026 · Beeld op de marktpagina
+
+De [marktpagina](https://schaapsvishandel.nl/nl/marktkraam-leiden) gebruikt de bestaande paginakop, inleiding, locatiegegevens, productteksten, links en vragen. Alleen de beschrijvingen voor schermlezers bij de twee nieuwe foto's zijn aangepast of toegevoegd.
+
+| Foto | Taal | Vorige beeldbeschrijving | Huidige beeldbeschrijving |
+| --- | --- | --- | --- |
+| Viskraam bij Hoogvliet | NL | Nieuwe foto op deze pagina | De viskraam van Schaap’s op de parkeerplaats bij Hoogvliet in Voorschoten |
+| Viskraam bij Hoogvliet | EN | Nieuwe foto op deze pagina | Schaap’s fish stall in the Hoogvliet car park in Voorschoten |
+| Viskraam bij Hoogvliet | DE | Nieuwe foto op deze pagina | Der Fischstand von Schaap’s auf dem Parkplatz bei Hoogvliet in Voorschoten |
+| Zalm uit de kraam | NL | Verse Zalm — VÅRLAKS — Serveersuggestie | Zalmfilets in de viskraam |
+| Zalm uit de kraam | EN | Fresh salmon — VÅRLAKS — Serving suggestion | Salmon fillets at the fish stall |
+| Zalm uit de kraam | DE | Frischer Lachs — VÅRLAKS — Serviervorschlag | Lachsfilets am Fischstand |
+
 ## 24 november 2026
 
 Onderstaande wijzigingen maken de winkel en de twee marktdagen in Leiden en de vrijdagkraam in Voorschoten rechtstreeks bereikbaar. De paginakoppen en zoektitels zijn in deze ronde behouden. Voor volgende wijzigingen komt een nieuwe datum bovenaan.

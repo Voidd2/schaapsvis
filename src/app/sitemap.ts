@@ -43,7 +43,7 @@ const locatieBeelden: Record<string, string[]> = {
   "": [BEELD.winkelGevel.bestand, BEELD.kraamToonbank.bestand],
   "/bezoek-ons": [BEELD.winkelGevel.bestand, BEELD.hoogvlietVoorschoten.bestand],
   "/viswinkel-leiden": [BEELD.winkelToonbank.bestand],
-  "/marktkraam-leiden": [BEELD.historieNu.bestand, BEELD.haringkraam.bestand],
+  "/marktkraam-leiden": [BEELD.historieNu.bestand, BEELD.haringkraam.bestand, BEELD.marktVoorschoten.bestand],
   "/viswinkel-voorschoten": [
     BEELD.marktVoorschoten.bestand,
     vrijdagKraamFoto.bestand,
