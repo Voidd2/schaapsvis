@@ -14,7 +14,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { Sectie, Kop } from "@/components/ui/Sectie";
 import { PaginaSlot } from "@/components/ui/PaginaKop";
 import { Beeld } from "@/components/ui/Beeld";
-import { heeftBeeld, homepageHeroBeeld } from "@/lib/beeld";
+import { BEELD, heeftBeeld, homepageHeroBeeld } from "@/lib/beeld";
 
 import { paginaMetadata } from "@/lib/seo";
 import { BEDRIJF, whatsappLink } from "@/lib/bedrijf";
@@ -59,6 +59,8 @@ export default async function HomePage({
   const nav = await getTranslations({ locale, namespace: "nav" });
 
   const heroBeeld = homepageHeroBeeld(locale);
+  const toonbank = BEELD.kraamToonbank;
+  const toonbankAlt = locale === "en" || locale === "de" ? toonbank.vertalingen[locale].alt : toonbank.alt;
   const locations = localLocations(locale);
   const markets = (["markt-woensdag", "voorschoten", "markt"] as const)
     .flatMap(id => locations.filter(location => location.id === id));
@@ -98,10 +100,19 @@ export default async function HomePage({
       </section>
 
       <Sectie grond="wit">
-        <div className="flex flex-wrap items-end justify-between gap-5 mb-7">
-          <Kop label={h("assortimentLabel")} titel={locale === "nl" ? "Geliefd aan onze toonbank" : locale === "de" ? "Beliebt an unserer Fischtheke" : "Fish counter favourites"} />
-          <Link href={`/${locale}/assortiment`} className="collection-text-link">{h("assortimentLink")} →</Link>
-        </div>
+        <header id="aan-de-toonbank" className="home-counter-banner">
+          <div className="home-counter-intro">
+            <p className="kapitaal kapitaal-licht">{h("assortimentLabel")}</p>
+            <h2>{locale === "nl" ? "Geliefd aan onze toonbank" : locale === "de" ? "Beliebt an unserer Fischtheke" : "Fish counter favourites"}</h2>
+            <Link href={`/${locale}/assortiment`} className="home-counter-link">
+              {h("assortimentLink")} <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+          <div className="home-counter-photo">
+            <Image src={toonbank.bestand} alt={toonbankAlt} width={870} height={580}
+              sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1720px) 56vw, 960px" loading="lazy" />
+          </div>
+        </header>
           <ul className="home-products grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-8">
             {UITGELICHT.map((slug) => {
               const bron = products.find((x) => x.slug === slug);

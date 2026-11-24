@@ -104,6 +104,18 @@ export const BEELD = {
     verhouding: "liggend",
     terugval: "Onze toonbank",
   },
+  kraamToonbank: {
+    waar: "Homepage, boven de uitgelichte producten",
+    wat: "De toonbank met haring, oesters en salades in de viskraam in Voorschoten.",
+    bestand: "/images/schaaps/haring-oesters-viskraam-voorschoten.webp",
+    alt: "Haring en oesters in de toonbank van de viskraam",
+    vertalingen: {
+      en: { alt: "Herring and oysters in the fish stall’s display counter" },
+      de: { alt: "Hering und Austern in der Theke des Fischstands" },
+    },
+    verhouding: "liggend",
+    terugval: "Onze toonbank",
+  },
   oestersInDeWinkel: {
     waar: "Viswinkel Leiden, bij de vragen aan de toonbank",
     wat: "Een medewerker laat een oester zien in de winkel.",
