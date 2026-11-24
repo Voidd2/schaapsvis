@@ -59,7 +59,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     <JsonLd locale={locale} />
     <Schema data={[localSchema, kruimelSchema(locale, [{ naam: BEDRIJF.naamKort, pad: "/" }, { naam: t("Viswinkel Voorschoten"), pad: "/viswinkel-voorschoten" }])]} />
     <header className="fresh-hero"><div className="section-wrap fresh-hero-grid">
-      <div><p className="kapitaal">{t("Schaap’s Vishandel · sinds 1938")}</p><h1>{t("Visboer Voorschoten: elke vrijdag bij Hoogvliet")}</h1><p className="fresh-intro">{t("Goede vis, persoonlijk advies en duidelijke prijzen. Probeer onze viskraam op vrijdag: van verse zalm voor het avondeten tot krokante kibbeling en haring met uitjes.")}</p><div className="mt-6 rounded-xl border border-sky-200 bg-white p-5"><p className="font-semibold text-lg">{t("Elke vrijdag · 08:30–17:30")}</p><p className="mt-1">{t("Parkeerplaats Hoogvliet · Veurseweg 18")}<br />{t("2252 AA Voorschoten")}</p><p className="mt-3 text-sm">{t("Ook aan het einde van de middag nog vis halen voor het avondeten.")}</p></div><div className="flex flex-wrap gap-3 mt-6"><a className="knop knop-rood" href={kraam.mapsUrl} target="_blank" rel="noopener noreferrer">{t("Route naar Hoogvliet")}</a><Link className="knop knop-lijn" href={`/${locale}/assortiment`}>{t("Bekijk ons visassortiment")}</Link></div></div>
+      <div><p className="kapitaal">{t("Schaap’s Vishandel · sinds 1938")}</p><h1>{t("Visboer Voorschoten: elke vrijdag bij Hoogvliet")}</h1><p className="fresh-intro">{t("Bij onze viskraam haalt u haring met uitjes, een portie warme kibbeling of verse zalm om thuis te bereiden.")}</p><div className="mt-6 rounded-xl border border-sky-200 bg-white p-5"><p className="font-semibold text-lg">{t("Elke vrijdag · 08:30–17:30")}</p><p className="mt-1">{t("Parkeerplaats Hoogvliet · Veurseweg 18")}<br />{t("2252 AA Voorschoten")}</p><p className="mt-3 text-sm">{t("Ook aan het einde van de middag nog vis halen voor het avondeten.")}</p></div><div className="flex flex-wrap gap-3 mt-6"><a className="knop knop-rood" href={kraam.mapsUrl} target="_blank" rel="noopener noreferrer">{t("Route naar Hoogvliet")}</a><Link className="knop knop-lijn" href={`/${locale}/assortiment`}>{t("Bekijk ons visassortiment")}</Link></div></div>
       <figure>
         <StaticResponsiveImage src={kraamFoto.bestand} alt={fotoTaal.alt} width={1600} height={900}
           sizes="(max-width: 800px) 100vw, 50vw" loading="eager" fetchPriority="high" />
@@ -74,9 +74,8 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           <p>{t("Zoekt u een viswinkel in Voorschoten? Onze wekelijkse viskraam staat op vrijdag op de parkeerplaats bij de Hoogvliet. Tot 17.30 uur kunt u bij ons terecht voor verse vis, gebakken vis en heerlijke broodjes.")}</p>
           <p>{t("Zalm uit de oven, gebakken kabeljauw of een snelle maaltijd met kibbeling? Vertel ons wat u wilt maken! We denken graag met u mee over de juiste porties, de bereiding en welke vis het beste bij uw maaltijd past.")}</p>
           <p>
-            {t("Op andere dagen bent u van harte welkom in onze")} <Link className="underline" href={`/${locale}/viswinkel-leiden`}>{t("viswinkel in Leiden")}</Link>{" "}
-            {t("of op de woensdag of zaterdag markt in Leiden centrum. Bekijk de")} <Link className="underline" href={`/${locale}/bezoek-ons`}>{t("locaties en openingstijden")}</Link>{" "}
-            {t("voor al onze verkooppunten.")}
+            {t("In Leiden vindt u onze")} <Link className="underline" href={`/${locale}/viswinkel-leiden`}>{t("viswinkel aan de Herenstraat 48")}</Link>.{" "}
+            {t("Op woensdag en zaterdag staan we ook op de")} <Link className="underline" href={`/${locale}/marktkraam-leiden`}>{t("Leidse markt")}</Link>.
           </p>
         </div>
       </div>

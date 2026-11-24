@@ -43,6 +43,7 @@ const locatieBeelden: Record<string, string[]> = {
   "": [BEELD.winkelGevel.bestand, BEELD.kraamToonbank.bestand],
   "/bezoek-ons": [BEELD.winkelGevel.bestand, BEELD.hoogvlietVoorschoten.bestand],
   "/viswinkel-leiden": [BEELD.winkelToonbank.bestand],
+  "/marktkraam-leiden": [BEELD.historieNu.bestand, BEELD.haringkraam.bestand],
   "/viswinkel-voorschoten": [
     BEELD.marktVoorschoten.bestand,
     vrijdagKraamFoto.bestand,
@@ -70,7 +71,7 @@ const MEERTALIG: {
   { pad: "/bezoek-ons", gewijzigd: new Date("2026-11-23"), prioriteit: 0.85, frequentie: "monthly" as const },
   { pad: "/varlaks", gewijzigd: new Date("2026-11-23"), prioriteit: 0.8, frequentie: "monthly" as const },
   { pad: "/ons-verhaal", prioriteit: 0.7, frequentie: "yearly" as const },
-  { pad: "/contact", prioriteit: 0.6, frequentie: "yearly" as const },
+  { pad: "/contact", gewijzigd: new Date("2026-11-24"), prioriteit: 0.6, frequentie: "yearly" as const },
   { pad: "/recepten", prioriteit: 0.6, frequentie: "monthly" as const },
   { pad: "/blog", prioriteit: 0.6, frequentie: "monthly" as const },
   { pad: "/viskalender", gewijzigd: new Date("2026-11-24"), prioriteit: 0.6, frequentie: "monthly" as const },
@@ -78,8 +79,8 @@ const MEERTALIG: {
   { pad: "/viswinkel-leiden", gewijzigd: new Date("2026-11-24"), prioriteit: 0.8, frequentie: "monthly" as const },
   { pad: "/studentenkorting", gewijzigd: new Date("2026-11-24"), prioriteit: 0.6, frequentie: "monthly" as const },
   { pad: "/aanbiedingen", prioriteit: 0.6, frequentie: "monthly" as const },
-  { pad: "/marktkraam-leiden", prioriteit: 0.7, frequentie: "monthly" as const },
-  { pad: "/too-good-to-go", prioriteit: 0.5, frequentie: "monthly" as const },
+  { pad: "/marktkraam-leiden", gewijzigd: new Date("2026-11-24"), prioriteit: 0.7, frequentie: "monthly" as const },
+  { pad: "/too-good-to-go", gewijzigd: new Date("2026-11-24"), prioriteit: 0.5, frequentie: "monthly" as const },
 ];
 
 

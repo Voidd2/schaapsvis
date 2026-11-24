@@ -83,12 +83,12 @@ export function Footer() {
 
         <FooterPanel className={styles.panel} title={t("kopTijden")}>
           <dl className={styles.hours}>
-            <div><dt>{t("winkel")}</dt><dd><ShopHours locale={locale} /></dd></div>
+            <div><dt><Link prefetch={false} href={p("/viswinkel-leiden")}>{t("winkel")}</Link></dt><dd><ShopHours locale={locale} /></dd></div>
             {[
-              [t("markt"), t("marktTijden")],
-              [t("voorschoten"), t("voorschotenTijden")],
-            ].map(([place, hours]) => (
-              <div key={place}><dt>{place}</dt><dd>{hours}</dd></div>
+              ["/marktkraam-leiden", t("markt"), t("marktTijden")],
+              ["/viswinkel-voorschoten", t("voorschoten"), t("voorschotenTijden")],
+            ].map(([path, place, hours]) => (
+              <div key={path}><dt><Link prefetch={false} href={p(path)}>{place}</Link></dt><dd>{hours}</dd></div>
             ))}
           </dl>
           <p className={styles.payment}>{t("betalen")}</p>
