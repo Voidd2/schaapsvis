@@ -579,24 +579,24 @@ export function AccountPortal({ locale, initialMode = "login" }: { locale: strin
 
             {data.studentApplication?.status === "pending" && <p className="rounded-xl border border-amber-300 bg-amber-50 p-5">{t.pending}</p>}
             {data.studentApplication?.status === "approved" && data.discountPass && (
-              <div id="studentenpas" className="scroll-mt-36 overflow-hidden rounded-3xl bg-gradient-to-br from-[#073d56] via-[#075c7c] to-[#0792b8] p-7 text-white shadow-xl sm:p-10">
+              <div id="studentenpas" className="scroll-mt-36 overflow-hidden rounded-3xl bg-gradient-to-br from-[#073d56] via-[#075c7c] to-[#0792b8] p-4 text-white shadow-xl sm:p-10">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div className="flex min-w-0 items-center gap-3"><Image src={BEELD.logoBadge.bestand} alt="Schaap's Vis" width={64} height={64} unoptimized className="size-16 shrink-0 rounded-lg bg-white p-1 object-contain" /><div className="min-w-0"><p className="text-xs font-bold uppercase tracking-[0.18em] text-sky-200">Schaap&apos;s Vishandel</p><p className="mt-2 text-xs tracking-[0.12em] text-sky-100">LEIDEN · SINDS 1938</p></div></div>
-                  <span className="rounded-full border border-white/30 px-3 py-1 text-xs font-bold uppercase tracking-widest">Student</span>
+                  <span className="hidden rounded-full border border-white/30 px-3 py-1 text-xs font-bold uppercase tracking-widest sm:inline-block">Student</span>
                 </div>
-                <div className="mt-8 grid items-end gap-7 sm:grid-cols-[1fr_auto]">
+                <div className="mt-4 grid items-end gap-4 sm:mt-8 sm:grid-cols-[1fr_auto] sm:gap-7">
                   <div>
                     <p className="text-xs font-bold uppercase tracking-[0.18em] text-sky-200">{t.holder}</p>
-                    <p className="mt-1 font-display text-3xl font-bold">{data.user.name}</p>
-                    <p className="mt-7 text-6xl font-bold tracking-tight">10<span className="text-4xl">%</span></p>
-                    <p className="mt-3 font-semibold text-white">{studentMarket[language].pass}</p>
+                    <p className="mt-1 font-display text-2xl font-bold sm:text-3xl">{data.user.name}</p>
+                    <p className="mt-3 text-4xl font-bold tracking-tight sm:mt-7 sm:text-6xl">10<span className="text-2xl sm:text-4xl">%</span></p>
+                    <p className="mt-2 font-semibold text-white sm:mt-3">{studentMarket[language].pass}</p>
                     <p className="mt-2 max-w-72 text-sm leading-relaxed text-sky-100">{studentMarket[language].conditions}</p>
                   </div>
                   {dynamicQr ? <PassQrCode value={dynamicQr} label={t.qrLabel} /> : <div role="status" className="grid size-40 place-items-center rounded-xl bg-white/95 p-4 text-center text-sm font-semibold text-sky-950">{t.qrRefreshing}</div>}
                 </div>
-                <p className="mt-8 border-t border-white/20 pt-4 text-xs uppercase tracking-widest text-sky-100">{t.passCode}</p>
-                <code className="mt-2 block rounded-lg bg-black/20 p-3 text-center font-mono text-xl font-bold tracking-[0.14em]">{data.discountPass.displayCode}</code>
-                <p className="mt-4 text-xs text-sky-100">{t.date}: {new Date(data.discountPass.issuedAt).toLocaleDateString(language)}{data.discountPass.expiresAt && <> · {t.expiry}: {new Date(data.discountPass.expiresAt).toLocaleDateString(language)}</>}</p>
+                <p className="mt-4 border-t border-white/20 pt-2 text-xs uppercase tracking-widest text-sky-100 sm:mt-8 sm:pt-4">{t.passCode}</p>
+                <code className="mt-2 block rounded-lg bg-black/20 px-3 py-2 text-center font-mono text-xl font-bold tracking-[0.14em] sm:py-3">{data.discountPass.displayCode}</code>
+                <p className="mt-2 text-xs text-sky-100 sm:mt-4">{t.date}: {new Date(data.discountPass.issuedAt).toLocaleDateString(language)}{data.discountPass.expiresAt && <> · {t.expiry}: {new Date(data.discountPass.expiresAt).toLocaleDateString(language)}</>}</p>
               </div>
             )}
             {data.studentApplication?.status === "approved" && data.discountPass && (data.wallet?.apple?.available || data.wallet?.google?.available) && (

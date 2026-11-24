@@ -29,7 +29,7 @@ const basis = BEDRIJF.domein;
  *    is, kost je de koppeling tussen de versies die er wél zijn.
  */
 // Route content changed in this release; unknown dates are omitted rather than invented.
-const CONTENT_DATES: Record<string, string> = Object.fromEntries(["/visschalen", "/feestdagen", "/relatiegeschenken", "/assortiment", "/studentenkorting", "/blog", "/recepten"].map(route => [route, "2026-11-09"]));
+const CONTENT_DATES: Record<string, string> = Object.fromEntries(["/visschalen", "/feestdagen", "/relatiegeschenken", "/assortiment", "/blog", "/recepten"].map(route => [route, "2026-11-09"]));
 
 const locatieBeelden: Record<string, string[]> = {
   "": [BEELD.winkelGevel.bestand, BEELD.kraamToonbank.bestand],
@@ -68,7 +68,7 @@ const MEERTALIG: {
   { pad: "/viskalender", prioriteit: 0.6, frequentie: "monthly" as const },
   { pad: "/viswinkel-voorschoten", gewijzigd: new Date("2026-11-24"), prioriteit: 0.8, frequentie: "monthly" as const },
   { pad: "/viswinkel-leiden", gewijzigd: new Date("2026-11-23"), prioriteit: 0.8, frequentie: "monthly" as const },
-  { pad: "/studentenkorting", prioriteit: 0.6, frequentie: "monthly" as const },
+  { pad: "/studentenkorting", gewijzigd: new Date("2026-11-24"), prioriteit: 0.6, frequentie: "monthly" as const },
   { pad: "/aanbiedingen", prioriteit: 0.6, frequentie: "monthly" as const },
   { pad: "/marktkraam-leiden", prioriteit: 0.7, frequentie: "monthly" as const },
   { pad: "/too-good-to-go", prioriteit: 0.5, frequentie: "monthly" as const },
