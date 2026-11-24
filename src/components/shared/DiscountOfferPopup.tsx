@@ -10,7 +10,7 @@ import styles from "./DiscountOfferPopup.module.css";
 
 const shownInSession = new Set<PopupExperiment>();
 const popupCooldownMs = 7 * 24 * 60 * 60 * 1000;
-const excludedPath = /\/(?:account|beheer|studentenkorting|kortingsbon|bestellen)(?:\/|$)/;
+const excludedPath = /\/(?:account|beheer|studentenkorting|kortingsbon|bestellen|privacyverklaring)(?:\/|$)/;
 
 function alreadyShown(experiment: PopupExperiment) {
   if (shownInSession.has(experiment)) return true;
