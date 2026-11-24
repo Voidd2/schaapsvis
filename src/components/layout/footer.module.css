@@ -42,6 +42,7 @@
 .panel > div { padding-block: 2px 16px; }
 .hours { display: grid; gap: 10px; }
 .hours dt { font-weight: 600; color: white; }
+.hours dt a { display: inline-block; padding-block: 3px; text-decoration: underline; text-underline-offset: 3px; }
 .payment { font-size: .9rem; margin-top: 10px; }
 .groups { display: grid; gap: 18px; }
 .groups h2 { color: #fff; font: 600 1rem/1.4 var(--font-body); }

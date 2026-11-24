@@ -34,6 +34,7 @@ export default async function ContactPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "contactPage" });
+  const visit = await getTranslations({ locale, namespace: "bezoekPage" });
   const nav = await getTranslations({ locale, namespace: "nav" });
   const g = await getTranslations({ locale, namespace: "gedeeld" });
   const p = await getTranslations({ locale, namespace: "plekken" });
@@ -136,11 +137,11 @@ export default async function ContactPage({
                   <ShopHours locale={locale} />
                   <p>{p("zoMa")} · {p("gesloten")}</p>
                   <Link
-                    href={`/${locale}/bezoek-ons`}
+                    href={`/${locale}/viswinkel-leiden`}
                     className="inline-block mt-3 text-sm font-semibold underline underline-offset-4"
                     style={{ color: "var(--navy)" }}
                   >
-                    {nav("locaties")} &rarr;
+                    {visit("shopLink")} &rarr;
                   </Link>
                 </dd>
               </div>

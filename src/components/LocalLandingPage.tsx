@@ -70,14 +70,14 @@ export function LocalLandingPage({kind,locale}:{kind:LocalPageKind;locale:string
   <PaginaKop kruimels={[{naam:BEDRIJF.naamKort,href:`/${locale}`},{naam:c.name}]} label={app?"Too Good To Go · Leiden":u.since} titel={c.title} intro={c.intro} zijkant={c.shop && shop ? <div className="min-w-0">
     <address className="font-semibold not-italic">{shop.adres}, {shop.postcode} {shop.plaats}</address>
     <ShopHours locale={locale} />
-  </div> : undefined} knoppen={kind==="viswinkel-leiden" && shop ? [{label:u.route,href:shop.mapsUrl,extern:true},{label:BEDRIJF.telefoon.weergave,href:`tel:${BEDRIJF.telefoon.e164}`,extern:true,soort:"lijn"}] : app?[{label:u.app,href:appUrl,extern:true},{label:u.shop,href:`/${locale}/bezoek-ons`,soort:"lijn"}]:[{label:u.range,href:`/${locale}/assortiment`},{label:bestelContact(locale).label,href:bestelContact(locale).href,extern:true,soort:"lijn"}]}/>
+  </div> : undefined} knoppen={kind==="viswinkel-leiden" && shop ? [{label:u.route,href:shop.mapsUrl,extern:true},{label:BEDRIJF.telefoon.weergave,href:`tel:${BEDRIJF.telefoon.e164}`,extern:true,soort:"lijn"}] : app?[{label:u.app,href:appUrl,extern:true},{label:u.shop,href:`/${locale}/viswinkel-leiden`,soort:"lijn"}]:[{label:u.range,href:`/${locale}/assortiment`},{label:bestelContact(locale).label,href:bestelContact(locale).href,extern:true,soort:"lijn"}]}/>
   {kind !== "viswinkel-leiden" && locatieKaarten}
   <Sectie smal={app}><div className={app ? "" : "grid items-center gap-8 lg:grid-cols-2 lg:gap-14"}>
     {!app && (kind === "marktkraam-leiden" ? (
       <div className="relative aspect-video w-full overflow-hidden border-b-2 border-[var(--sand-diep)]" role="group" aria-label={locale === "en" ? "Photos of our Leiden market stall" : locale === "de" ? "Fotos von unserem Leidener Marktstand" : "Foto’s van onze marktkraam in Leiden"}>
-        <Image src="/images/schaaps/schaaps-viskraam.webp" alt={marktFotoAlt.kraam} fill sizes="(max-width: 800px) 100vw, 50vw" className="object-cover" />
+        <Image src={BEELD.historieNu.bestand} alt={marktFotoAlt.kraam} fill sizes="(max-width: 800px) 100vw, 50vw" className="object-cover" />
         <div className="absolute inset-y-0 right-0 w-[38%] overflow-hidden border-l-4 border-white shadow-lg">
-          <Image src="/images/schaaps/haringkraam-aan-het-water.webp" alt={marktFotoAlt.snijden} fill sizes="(max-width: 800px) 38vw, 19vw" className="object-cover" style={{ objectPosition: "64% 56%" }} />
+          <Image src={BEELD.haringkraam.bestand} alt={marktFotoAlt.snijden} fill sizes="(max-width: 800px) 38vw, 19vw" className="object-cover" style={{ objectPosition: "64% 56%" }} />
         </div>
       </div>
     ) : <div id="toonbank" className="scroll-mt-28"><StaticResponsiveImage src={toonbank.bestand}
