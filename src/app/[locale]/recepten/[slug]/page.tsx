@@ -25,7 +25,9 @@ export async function generateMetadata({params}:Props):Promise<Metadata>{
  const title=r.title.length<30?`${r.title} | ${shortTitleSuffix}`:`${r.title} | Schaap’s Vis`;
  // Short taglines alone can describe unrelated dishes; keep the recipe identity
  // in the snippet in every language, using the same visible title and subtitle.
- const description=`${r.title}. ${r.subtitle}`.slice(0,160);
+ const description = locale === "nl" && slug === "teriyaki-zalm-rijst"
+   ? "Maak teriyaki-zalm met rijst en broccoli in 20 minuten. Bekijk het recept voor vier personen met sojasaus, honing, knoflook en gember bij Schaap’s Vishandel."
+   : `${r.title}. ${r.subtitle}`.slice(0,160);
  const meta=paginaMetadata({locale,pad:`/recepten/${slug}`,title,description,image:r.fotoUrl||"/og-image.png"});
  return {...meta,keywords:r.seoKeywords,openGraph:{...meta.openGraph,type:"article"}};
 }

@@ -140,3 +140,20 @@ Onderstaande wijzigingen maken de winkel en de twee marktdagen in Leiden en de v
 ### Beeld en sitemap
 
 De deelafbeelding voor de Leidse marktpagina is gewijzigd van een bakje kibbeling naar de foto met klanten voor de viskraam. De afbeeldingssitemap vermeldt bij deze pagina ook de bestaande foto van de haringsnijder aan het water. Dit geldt voor alle drie de talen. Beide foto's staan al op de pagina zelf.
+
+
+## 24 november 2026 — Bing-zoekresultaatbeschrijvingen
+
+Alleen de Nederlandse meta descriptions zijn aangepast.
+
+### Viskalender
+
+- Was — Welke vis is in het seizoen? Bekijk onze viskalender per maand met foto’s, kooktips en recepten.
+- Is — Welke vis is in het seizoen? Bekijk de viskalender van Schaap’s Vishandel in Leiden met vissoorten per maand, foto’s, kooktips en bijpassende recepten.
+- Reden — Bing meldt een te korte beschrijving. De nieuwe tekst noemt afzender en concrete pagina-inhoud.
+
+### Teriyaki-zalm met rijst
+
+- Was — Teriyaki-zalm met rijst en broccoli. Plakkerig-zoete glazuurlaag, klaar in 20 minuten
+- Is — Maak teriyaki-zalm met rijst en broccoli in 20 minuten. Bekijk het recept voor vier personen met sojasaus, honing, knoflook en gember bij Schaap’s Vishandel.
+- Reden — Bing meldt een te korte beschrijving. Ingrediënten, porties en tijd volgen het bestaande recept.
