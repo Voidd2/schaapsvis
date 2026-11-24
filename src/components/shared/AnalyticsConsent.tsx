@@ -2,10 +2,9 @@
 
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
 import { flushVisitErasures, recordVisitPage, setVisitChoice, sharedVisitVersion, visitChanged } from "@/lib/signup-visit";
 import { visitConsentVersion } from "@/lib/signup-visit-path.mjs";
-import { signupVisitNotice } from "@/lib/signup-visit-notice";
+import { cookiePolicyLabel } from "@/lib/signup-visit-notice";
 import { analyticsConsentKey, analyticsConsentEvent } from "@/lib/journey-shared.mjs";
 import { observeJourney, revokeJourney, flushJourneyErasures } from "@/lib/visitor-journey.mjs";
 
@@ -15,26 +14,29 @@ const CONSENT_EVENT = analyticsConsentEvent;
 
 const cookieCopy = {
   nl: {
-    title: "Uw cookiekeuze", settings: "Cookie-instellingen", privacy: "Privacyverklaring",
+    title: "Cookies bij Schaap’s", settings: "Cookie-instellingen",
     yes: "Alles accepteren", no: "Weigeren", choices: "Keuze aanpassen", save: "Keuze opslaan",
     general: "Bezoekstatistieken en nieuwsbriefstappen",
-    message: "Mogen we de herkomst, bezochte openbare pagina’s, zichtbare bezoektijd en nieuwsbriefstappen meten?",
+    message: "Mogen we meten hoe u onze website gebruikt en uw bezoek koppelen aan uw nieuwsbriefinschrijving?",
+    withdraw: "U kunt uw toestemming altijd intrekken via Cookie-instellingen.",
     personal: "Mijn bezoek delen als ik me inschrijf",
     error: "Uw keuze kon niet worden bevestigd. Controleer uw verbinding en probeer het opnieuw.",
   },
   en: {
-    title: "Your cookie choice", settings: "Cookie settings", privacy: "Privacy policy",
+    title: "Cookies at Schaap’s", settings: "Cookie settings",
     yes: "Accept all", no: "Reject", choices: "Choose settings", save: "Save choices",
     general: "Visit statistics and newsletter steps",
-    message: "May we measure traffic source, public pages visited, visible visit time and newsletter steps?",
+    message: "May we measure how you use our website and link your visit to your newsletter signup?",
+    withdraw: "You can withdraw your consent at any time in Cookie settings.",
     personal: "Share my visit when I sign up",
     error: "Your choice could not be confirmed. Check your connection and try again.",
   },
   de: {
-    title: "Ihre Cookie-Auswahl", settings: "Cookie-Einstellungen", privacy: "Datenschutzerklärung",
+    title: "Cookies bei Schaap’s", settings: "Cookie-Einstellungen",
     yes: "Alle akzeptieren", no: "Ablehnen", choices: "Auswahl anpassen", save: "Auswahl speichern",
     general: "Besuchsstatistiken und Newsletter-Schritte",
-    message: "Dürfen wir Herkunft, besuchte öffentliche Seiten, sichtbare Besuchsdauer und Newsletter-Schritte messen?",
+    message: "Dürfen wir messen, wie Sie unsere Website nutzen, und Ihren Besuch mit Ihrer Newsletter-Anmeldung verknüpfen?",
+    withdraw: "Sie können Ihre Einwilligung jederzeit unter „Cookie-Einstellungen“ widerrufen.",
     personal: "Meinen Besuch bei der Anmeldung teilen",
     error: "Ihre Auswahl konnte nicht bestätigt werden. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
   },
@@ -111,7 +113,7 @@ export function AnalyticsConsent({ locale }: { locale: string }) {
   if (choice === "unknown") return null;
   const language = locale === "en" || locale === "de" ? locale : "nl";
   const copy = cookieCopy[language];
-  const notice = signupVisitNotice[language];
+  const policyPath = `/${language}/privacyverklaring`;
 
   async function choose(value: "accepted" | "declined", share: boolean) {
     setBusy(true);
@@ -138,7 +140,7 @@ export function AnalyticsConsent({ locale }: { locale: string }) {
     setEditing(true);
   }
 
-  if (choice && !editing && !busy) {
+  if ((choice || pathname === policyPath) && !editing && !busy) {
     return <button type="button" onClick={reopenSettings} className="cookie-settings-trigger fixed bottom-3 left-3 z-[79] rounded-full border border-sky-200 bg-white px-4 py-2 text-sm font-semibold text-sky-900 shadow-lg hover:bg-sky-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-700 sm:bottom-5 sm:left-5">
       {copy.settings}
     </button>;
@@ -147,23 +149,21 @@ export function AnalyticsConsent({ locale }: { locale: string }) {
   return <aside aria-label={copy.title} aria-busy={busy} data-customizing={custom || undefined} className="cookie-choice-banner fixed inset-x-3 bottom-3 z-[80] mx-auto flex max-h-[85dvh] max-w-3xl flex-col gap-3 rounded-2xl border border-sky-200 bg-white p-5 text-slate-900 shadow-xl">
     <div className="min-h-0 overflow-y-auto">
       <h2 className="font-display text-xl font-bold text-slate-900">{copy.title}</h2>
-      {custom ? (
+      <div className="mt-1 space-y-1 text-sm">
+        <p>{copy.message}</p>
+        <p>{copy.withdraw}</p>
+      </div>
+      {custom && (
         <div className="mt-1">
           <label className="flex min-h-11 items-center gap-2 font-semibold">
             <input type="checkbox" checked={general} onChange={e => setGeneral(e.target.checked)} />
             {copy.general}
           </label>
           <label className="flex min-h-11 items-center gap-2 font-semibold">
-            <input type="checkbox" checked={personal} aria-describedby="visit-choice-description"
+            <input type="checkbox" checked={personal}
               onChange={e => setPersonal(e.target.checked)} />
             {copy.personal}
           </label>
-          <p id="visit-choice-description" className="text-sm">{notice.linking}</p>
-        </div>
-      ) : (
-        <div className="mt-1 space-y-1 text-sm">
-          <p>{copy.message}</p>
-          <p>{notice.signup} {notice.linking}</p>
         </div>
       )}
       {failed && <p role="alert">{copy.error}</p>}
@@ -174,7 +174,10 @@ export function AnalyticsConsent({ locale }: { locale: string }) {
         <button type="button" disabled={busy} className="knop knop-lijn" onClick={() => custom ? choose(general ? "accepted" : "declined", personal) : choose("accepted", true)}>{custom ? copy.save : copy.yes}</button>
       </div>
       {!custom && <button type="button" disabled={busy} className="min-h-8 text-sm underline" onClick={reopenSettings}>{copy.choices}</button>}
-      <Link className="inline-flex min-h-8 items-center text-sm underline" href={`/${locale}/privacyverklaring#inschrijfbezoek`}>{copy.privacy}</Link>
+      <a className="inline-flex min-h-8 items-center text-sm underline" href={`${policyPath}#cookiebeleid`}
+        onClick={() => { setEditing(false); setCustom(false); }}>
+        {cookiePolicyLabel[language]}
+      </a>
     </div>
   </aside>;
 }

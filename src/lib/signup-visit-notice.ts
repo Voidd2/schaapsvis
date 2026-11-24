@@ -1,3 +1,9 @@
+export const cookiePolicyLabel = {
+  nl: "Cookiebeleid",
+  en: "Cookie policy",
+  de: "Cookie-Richtlinie",
+} as const;
+
 export const signupVisitNotice = {
   nl: {
     signup: "Schrijft u zich in voor onze nieuwsbrief?",
