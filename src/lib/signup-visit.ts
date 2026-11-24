@@ -7,13 +7,14 @@ const TRAIL = "sv-signup-visit-tab";
 const ERASE = "sv-forget-visit:";
 export const visitChanged = "sv-signup-visit-change";
 type Grant = {token:string; expires:string; version:string};
+type VisitChoice = Omit<Grant, "token"> & {token?:string; selectedVersion?:string};
 type Trail = {token:string; pages:string[]; last:number; linkedUntil:number; captureId?:string; entryPath?:string; trafficSource?:string};
 let pendingGrant: Promise<void> | undefined;
 
-function readGrant(): Grant | null {
+function readChoice(): VisitChoice | null {
   try {
     const grant = JSON.parse(localStorage.getItem(GRANT) || "null");
-    if (grant?.token && Date.parse(grant.expires) > Date.now()) {
+    if (grant && Date.parse(grant.expires) > Date.now()) {
       const version = grant.version ?? legacyVisitConsentVersion;
       if (version === legacyVisitConsentVersion || version === visitConsentVersion) return {...grant,version};
     }
@@ -21,7 +22,15 @@ function readGrant(): Grant | null {
   } catch { /* Storage can be disabled. */ }
   return null;
 }
-export function sharesVisit() { return Boolean(readGrant()); }
+function readGrant(): Grant | null {
+  const choice = readChoice();
+  return choice?.token ? {...choice, token:choice.token} : null;
+}
+
+export function sharedVisitVersion() {
+  const choice = readChoice();
+  return choice?.selectedVersion ?? choice?.version ?? null;
+}
 
 async function post(action:string, data:object) {
   const response = await fetch("/api/members/signup-visit/"+action, {method:"POST",credentials:"same-origin",
@@ -62,8 +71,13 @@ async function obtainGrant(old: Grant | null, requestedVersion: string) {
   localStorage.setItem(INTENT,intent);
   const grant = await post("grant",{consent:true,version:requestedVersion,previousToken:old?.token});
   if (!grant.token) {
-    if (localStorage.getItem(INTENT) === intent) localStorage.removeItem(INTENT);
-    return; // Shop network is excluded.
+    if (localStorage.getItem(INTENT) === intent) {
+      // Remember the choice on excluded networks without creating a measurable visit.
+      const choice = old ?? {version:requestedVersion, expires:new Date(Date.now() + 30 * 86400000).toISOString()};
+      localStorage.setItem(GRANT, JSON.stringify({...choice, selectedVersion:requestedVersion}));
+      localStorage.removeItem(INTENT);
+    }
+    return;
   }
   if (localStorage.getItem(INTENT) !== intent) {
     // Two tabs can reconfirm the same unused legacy token. Only erase it if neither choice still uses it.
@@ -73,7 +87,7 @@ async function obtainGrant(old: Grant | null, requestedVersion: string) {
     return;
   }
   if (old && old.version !== grant.version) sessionStorage.removeItem(TRAIL);
-  localStorage.setItem(GRANT, JSON.stringify({token:grant.token, expires:grant.expires, version:grant.version}));
+  localStorage.setItem(GRANT, JSON.stringify({token:grant.token, expires:grant.expires, version:grant.version, selectedVersion:requestedVersion}));
   localStorage.removeItem(INTENT);
   window.dispatchEvent(new Event(visitChanged));
 }
