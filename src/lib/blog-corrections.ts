@@ -39,7 +39,7 @@ export const BLOG_CORRECTIONS:Record<string,Partial<BlogPost>>={
  "wilde-zalm-vs-kweekzalm-waarom-wij-varlaks-kiezen":{gerelateerdeRecepten:["zalm-citroen-dille"]},
  "kibbeling-vs-lekkerbek-het-verschil":{secties:[
  {alineas:["Aan de toonbank krijgen we regelmatig de vraag wat het verschil is tussen kibbeling en lekkerbek. Hieronder leggen we uit wat u krijgt en hoe u een keuze maakt."]},
- {kop:"Kibbeling: stukjes",alineas:["Onze kibbeling maken we van pollak: stukjes vis in beslag, goudbruin gebakken. U kiest uit Ravigotte-, Knoflook- of cocktailsaus. Voor lekkerbek gebruiken we heek, geen pollak."]},
+ {kop:"Kibbeling: stukjes",alineas:["Voor onze kibbeling halen we stukjes vis door beslag en bakken we ze goudbruin. U kiest uit Ravigotte-, Knoflook- of cocktailsaus."]},
  {kop:"Lekkerbek: een hele filet van heek",alineas:["Onze lekkerbek is een heekfilet in beslag, goudbruin gebakken. U krijgt een hele filet in plaats van de kleine stukjes van kibbeling."]},
  {kop:"Welke kiest u?",alineas:["Kibbeling is makkelijk om te delen. Lekkerbek is handig op een broodje of als onderdeel van een maaltijd. Voedingswaarden verschillen met de vis, het beslag en de portie; de gegevens bij onze producten zijn indicatief.","Komt u voor een grotere hoeveelheid op een drukke dag? Vraag vooraf via WhatsApp naar de mogelijkheden. Uw bericht is geen bevestigde bestelling of garantie dat iets klaarstaat."]}
  ]},

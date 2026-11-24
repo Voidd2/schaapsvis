@@ -1,11 +1,12 @@
 import type { BlogPost } from "./blog";
-type Revision={intro?:string[];heading?:string[];text?:string[];photo?:string[];links:string[][]};
+type Revision={updated?:string;intro?:string[];heading?:string[];text?:string[];photo?:string[];links:string[][]};
 const revisions:Record<string,Revision>={
   "kibbeling-vs-lekkerbek-het-verschil": {
+    updated: "2026-11-24",
     "intro": [
-      "Kibbeling bestaat bij Schaap’s uit stukjes pollak in beslag. Een lekkerbek is één hele heekfilet in een krokant jasje.",
-      "At Schaap’s, kibbeling is battered pollack in bite-sized pieces. A lekkerbek is one whole hake fillet in a crisp coating.",
-      "Bei Schaap’s besteht Kibbeling aus kleinen Seelachsstücken im Backteig. Ein Lekkerbek ist ein ganzes Seehechtfilet in knuspriger Hülle."
+      "Kibbeling bestaat bij Schaap’s uit stukjes vis in beslag. Een lekkerbek is één hele heekfilet in een krokant jasje.",
+      "At Schaap’s, we dip bite-sized pieces of fish in batter and fry them to make kibbeling. A lekkerbek is one whole hake fillet in a crisp coating.",
+      "Bei Schaap’s besteht Kibbeling aus kleinen Fischstücken im Backteig. Ein Lekkerbek ist ein ganzes Seehechtfilet in knuspriger Hülle."
     ],
     "links": [
       [
@@ -85,5 +86,8 @@ export function reviseCounterPost(post:BlogPost, index:number):BlogPost {
  const u=revisions[post.slug]; if(!u)return post;
  const links=[...(post.gerelateerdeLinks??[])];
  if(index===0)for(const [href,label] of u.links)if(!links.some(l=>l.href===href))links.push({href,label});
- return {...post,bijgewerkt:"2026-11-09",datumLabel:["Bijgewerkt 9 november 2026","Updated 9 November 2026","Aktualisiert am 9. November 2026"][index],gerelateerdeLinks:links,fotoAlt:u.photo?.[index]??post.fotoAlt,excerpt:u.intro?.[index]??post.excerpt,secties:u.heading&&u.text?[...post.secties,{kop:u.heading[index],alineas:[u.text[index]]}]:post.secties};
+ const bijgewerkt = u.updated ?? "2026-11-09";
+ const date = new Intl.DateTimeFormat(["nl-NL", "en-GB", "de-DE"][index], {day:"numeric", month:"long", year:"numeric", timeZone:"UTC"}).format(new Date(bijgewerkt));
+ const datumLabel = ["Bijgewerkt", "Updated", "Aktualisiert am"][index] + " " + date;
+ return {...post,bijgewerkt,datumLabel,gerelateerdeLinks:links,fotoAlt:u.photo?.[index]??post.fotoAlt,excerpt:u.intro?.[index]??post.excerpt,secties:u.heading&&u.text?[...post.secties,{kop:u.heading[index],alineas:[u.text[index]]}]:post.secties};
 }
