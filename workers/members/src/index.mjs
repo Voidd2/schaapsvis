@@ -2300,7 +2300,9 @@ async function subscribeNewsletter(request, env) {
   const locale = localeFrom(body?.locale);
   const copy = ACCOUNT_COPY[locale];
   const email = normalizeEmail(body?.email);
+  const newsletterLanding = body?.form === "newsletter-landing";
   const discountsForm = body?.form === "discounts";
+  if (newsletterLanding && body?.consentVersion !== "newsletter-landing-news-and-offers-v1") return json({ error: "consent_required" }, 400);
   const footerForm = body?.form === "footer";
   const directFooter = footerForm && body?.consentVersion === "footer-email-signup-v2";
   if (footerForm && body?.consentVersion && ![NEWSLETTER_CONSENT_VERSION, "footer-email-signup-v2"].includes(body.consentVersion)) return json({ error: "consent_required" }, 400);
@@ -2320,7 +2322,7 @@ async function subscribeNewsletter(request, env) {
   if (sitewideOffer && offerVersion !== "sitewide-news-and-offers-v1") return json({ error: "consent_required" }, 400);
   const regionTag = body?.regionTag ?? null;
   const draftToken = typeof body?.draftToken === "string" ? body.draftToken : "";
-  const validRegion = (discountsForm || popupOffer || directFooter) && regionTag === null || ["leiden", "voorschoten", "wassenaar", "leidschendam", "regio-071", "elders"].includes(regionTag);
+  const validRegion = (newsletterLanding || discountsForm || popupOffer || directFooter) && regionTag === null || ["leiden", "voorschoten", "wassenaar", "leidschendam", "regio-071", "elders"].includes(regionTag);
   if (!email || body?.consent !== true || !validRegion) return json({ error: "consent_required" }, 400);
   if (draftToken) {
     const draft = await env.DB.prepare(`SELECT email FROM newsletter_signup_drafts WHERE token_hash=? AND expires_at>?`).bind(await digest(draftToken), nowIso()).first();
@@ -2330,8 +2332,8 @@ async function subscribeNewsletter(request, env) {
   if (!await rateLimitIdentity(env.DB, env.AUTH_PEPPER, "newsletter", ip, email, 12, 4, 60 * 60 * 1000)) return json({ error: "rate_limited" }, 429);
   const at = nowIso();
   const user = await sessionUser(request, env);
-  const version = popupOffer ? offerVersion : discountsForm ? discountVersion : directFooter ? "footer-email-signup-v2" : NEWSLETTER_CONSENT_VERSION;
-  const source = popupOffer ? `${body.form}-popup` : discountsForm ? "discount-form" :
+  const version = newsletterLanding ? body.consentVersion : popupOffer ? offerVersion : discountsForm ? discountVersion : directFooter ? "footer-email-signup-v2" : NEWSLETTER_CONSENT_VERSION;
+  const source = newsletterLanding ? "newsletter-landing" : popupOffer ? `${body.form}-popup` : discountsForm ? "discount-form" :
     body.form === "footer" ? footerSignupSource(request) : user ? "account" : "newsletter-form";
   const userId = user?.email === email ? user.id : null;
   const statements = [

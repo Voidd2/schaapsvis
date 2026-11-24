@@ -1,4 +1,5 @@
 export const discountConsentVersion = "discount-news-and-offers-v2";
+export const newsletterLandingConsentVersion = "newsletter-landing-news-and-offers-v1";
 export const popupConsentVersions = { locations: "locations-news-and-offers-v2", varlaks: "varlaks-news-and-offers-v4", sitewide: "sitewide-news-and-offers-v1" } as const;
 
 const copy = {
@@ -6,7 +7,7 @@ const copy = {
     offerIntro: "Meld u aan voor nieuws, aanbiedingen en kortingsmails van Schaap’s Vis en blijf op de hoogte.",
     popupImageAlt: "Kind proeft een vis",
     offerPrivacy: "Privacy", offerUnsubscribe: "Afmelden kan in elke mail.",
-    offerSubmit: "Houd mij op de hoogte", closeOffer: "Sluiten",
+    landingSubmit: "Stuur mij de aanbiedingen", offerSubmit: "Houd mij op de hoogte", closeOffer: "Sluiten",
     title: "Nieuws en aanbiedingen van Schaap’s Vis",
     intro: "Meld u aan voor nieuws, aanbiedingen en kortingsmails van Schaap’s Vis en blijf op de hoogte.",
     email: "Uw e-mailadres", consent: "Ja, ik wil nieuws, reclame en kortingsmails van Schaap’s Vis ontvangen.",
@@ -22,7 +23,7 @@ const copy = {
     offerIntro: "Sign up for news, offers and discount emails from Schaap’s Vis and stay up to date.",
     popupImageAlt: "A child tasting fish",
     offerPrivacy: "Privacy", offerUnsubscribe: "Unsubscribe in any email.",
-    offerSubmit: "Keep me informed", closeOffer: "Close",
+    landingSubmit: "Email me the offers", offerSubmit: "Keep me informed", closeOffer: "Close",
     title: "News and offers from Schaap’s Vis", intro: "Sign up for news, offers and discount emails from Schaap’s Vis and stay up to date.",
     email: "Your email address", consent: "Yes, I would like to receive news, promotional and discount emails from Schaap’s Vis.",
     submit: "Sign me up", sending: "Signing up…", privacy: "How we use your email address",
@@ -36,7 +37,7 @@ const copy = {
     offerIntro: "Melden Sie sich für Neuigkeiten, Angebote und Rabatt-E-Mails von Schaap’s Vis an und bleiben Sie informiert.",
     popupImageAlt: "Ein Kind probiert Fisch",
     offerPrivacy: "Datenschutz", offerUnsubscribe: "Abmeldung in jeder E-Mail möglich.",
-    offerSubmit: "Auf dem Laufenden bleiben", closeOffer: "Schließen",
+    landingSubmit: "Angebote per E-Mail erhalten", offerSubmit: "Auf dem Laufenden bleiben", closeOffer: "Schließen",
     title: "Neuigkeiten und Angebote von Schaap’s Vis", intro: "Melden Sie sich für Neuigkeiten, Angebote und Rabatt-E-Mails von Schaap’s Vis an und bleiben Sie informiert.",
     email: "Ihre E-Mail-Adresse", consent: "Ja, ich möchte Neuigkeiten, Werbung und Rabatt-E-Mails von Schaap’s Vis erhalten.",
     submit: "Jetzt anmelden", sending: "Anmeldung läuft…", privacy: "So verwenden wir Ihre E-Mail-Adresse",
