@@ -89,6 +89,7 @@ winkelGevel:["Schaap’s fish shop at Herenstraat 48, Leiden","Schaap’s Fischg
 hoogvlietVoorschoten:[BEELD.hoogvlietVoorschoten.vertalingen.en.alt, BEELD.hoogvlietVoorschoten.vertalingen.de.alt],
 toonbank:["Fresh cod from our range","Frischer Kabeljau aus unserem Sortiment"],
 winkelToonbank:[BEELD.winkelToonbank.vertalingen.en.alt, BEELD.winkelToonbank.vertalingen.de.alt],
+kraamToonbank:[BEELD.kraamToonbank.vertalingen.en.alt, BEELD.kraamToonbank.vertalingen.de.alt],
 oestersInDeWinkel:["A member of staff shows an oyster and a box of oysters at the fish counter","Ein Mitarbeiter zeigt an der Fischtheke eine Auster und eine Kiste mit Austern"],
 achterDeToonbank:["Fish displayed on ice at our market stall", "Fisch auf Eis an unserem Marktstand"],
 gebakkenVis:["Crispy kibbeling with sauce","Knuspriger Kibbeling mit Sauce"],

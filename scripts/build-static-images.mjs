@@ -6,12 +6,16 @@ import crypto from 'node:crypto';
 import assert from 'node:assert/strict';
 import sharp from 'sharp';
 
+const counterPhotos = [
+ '/images/schaaps/haring-oesters-viskraam-voorschoten.webp',
+ '/images/schaaps/haring-viskraam-voorschoten.webp',
+];
 const sources = [...new Set([
  '/images/schaaps/oesters-in-de-winkel.webp',
  '/images/schaaps/winkel-herenstraat.webp',
  '/images/schaaps/viskraam-hoogvliet-voorschoten.webp',
  '/images/schaaps/parkeerplaats-viskraam-voorschoten.webp',
- '/images/schaaps/haring-oesters-viskraam-voorschoten.webp',
+ ...counterPhotos,
  '/images/schaaps/varlaks-viskraam-voorschoten.webp',
  '/images/schaaps/toonbank-herenstraat-leiden.webp',
  '/images/schaaps/hoogvliet-voorschoten.webp',
@@ -40,6 +44,7 @@ for(const src of sources){
  const metadata=await sharp(original).metadata();
  const widths=[320,640,960,1280].filter(w=>w<=metadata.width);
  if(!widths.length) widths.push(metadata.width);
+ if(counterPhotos.includes(src) && widths.at(-1) < metadata.width) widths.push(metadata.width);
  const variants=[];
  for(const width of widths){
   const url=`/images/responsive/${path.parse(src).name}-${hash.slice(0,12)}-${width}.webp`;

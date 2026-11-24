@@ -29,14 +29,15 @@ const basis = BEDRIJF.domein;
  *    is, kost je de koppeling tussen de versies die er wél zijn.
  */
 // Route content changed in this release; unknown dates are omitted rather than invented.
-const CONTENT_DATES: Record<string, string> = Object.fromEntries(["", "/visschalen", "/feestdagen", "/relatiegeschenken", "/assortiment", "/studentenkorting", "/blog", "/recepten"].map(route => [route, "2026-11-09"]));
+const CONTENT_DATES: Record<string, string> = Object.fromEntries(["/visschalen", "/feestdagen", "/relatiegeschenken", "/assortiment", "/studentenkorting", "/blog", "/recepten"].map(route => [route, "2026-11-09"]));
 
 const locatieBeelden: Record<string, string[]> = {
+  "": [BEELD.winkelGevel.bestand, BEELD.kraamToonbank.bestand],
   "/bezoek-ons": [BEELD.winkelGevel.bestand, BEELD.hoogvlietVoorschoten.bestand],
   "/viswinkel-leiden": [BEELD.winkelToonbank.bestand],
   "/viswinkel-voorschoten": [
     BEELD.marktVoorschoten.bestand,
-    "/images/schaaps/haring-oesters-viskraam-voorschoten.webp",
+    "/images/schaaps/haring-viskraam-voorschoten.webp",
     "/images/schaaps/varlaks-viskraam-voorschoten.webp",
   ],
   "/varlaks": ["/images/varlaks/zalmfilet-1200.webp", BEELD.marktVoorschoten.bestand],
@@ -49,7 +50,7 @@ const MEERTALIG: {
   frequentie: "weekly" | "monthly" | "yearly";
   gewijzigd?: Date;
 }[] = [
-  { pad: "", prioriteit: 1.0, frequentie: "weekly" as const },
+  { pad: "", gewijzigd: new Date("2026-11-24"), prioriteit: 1.0, frequentie: "weekly" as const },
 
   { pad: "/visschalen", prioriteit: 0.95, frequentie: "weekly" as const },
   { pad: "/feestdagen", prioriteit: 0.95, frequentie: "weekly" as const, gewijzigd: new Date("2026-10-30") },
@@ -66,7 +67,7 @@ const MEERTALIG: {
   { pad: "/recepten", prioriteit: 0.6, frequentie: "monthly" as const },
   { pad: "/blog", prioriteit: 0.6, frequentie: "monthly" as const },
   { pad: "/viskalender", prioriteit: 0.6, frequentie: "monthly" as const },
-  { pad: "/viswinkel-voorschoten", gewijzigd: new Date("2026-11-23"), prioriteit: 0.8, frequentie: "monthly" as const },
+  { pad: "/viswinkel-voorschoten", gewijzigd: new Date("2026-11-24"), prioriteit: 0.8, frequentie: "monthly" as const },
   { pad: "/viswinkel-leiden", gewijzigd: new Date("2026-11-23"), prioriteit: 0.8, frequentie: "monthly" as const },
   { pad: "/studentenkorting", prioriteit: 0.6, frequentie: "monthly" as const },
   { pad: "/aanbiedingen", prioriteit: 0.6, frequentie: "monthly" as const },

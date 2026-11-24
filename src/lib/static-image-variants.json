@@ -138,6 +138,27 @@
         "src": "/images/responsive/haring-oesters-viskraam-voorschoten-24fe13062bda-640.webp",
         "width": 640,
         "bytes": 80920
+      },
+      {
+        "src": "/images/responsive/haring-oesters-viskraam-voorschoten-24fe13062bda-870.webp",
+        "width": 870,
+        "bytes": 159666
+      }
+    ]
+  },
+  "/images/schaaps/haring-viskraam-voorschoten.webp": {
+    "sha256": "e50f3207adaa38e81206346976b85b4053f1a3e27e2a5b0301ec56ace9943d44",
+    "originalBytes": 41056,
+    "variants": [
+      {
+        "src": "/images/responsive/haring-viskraam-voorschoten-e50f3207adaa-320.webp",
+        "width": 320,
+        "bytes": 15644
+      },
+      {
+        "src": "/images/responsive/haring-viskraam-voorschoten-e50f3207adaa-408.webp",
+        "width": 408,
+        "bytes": 26524
       }
     ]
   },
