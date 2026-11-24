@@ -29,7 +29,15 @@ const basis = BEDRIJF.domein;
  *    is, kost je de koppeling tussen de versies die er wél zijn.
  */
 // Route content changed in this release; unknown dates are omitted rather than invented.
-const CONTENT_DATES: Record<string, string> = Object.fromEntries(["/visschalen", "/feestdagen", "/relatiegeschenken", "/assortiment", "/blog", "/recepten"].map(route => [route, "2026-11-09"]));
+const CONTENT_DATES: Record<string, string> = {
+  "/visschalen": "2026-11-09",
+  "/feestdagen": "2026-11-09",
+  "/relatiegeschenken": "2026-11-09",
+  "/recepten": "2026-11-09",
+  "/assortiment": "2026-11-24",
+  "/assortiment/kibbeling": "2026-11-24",
+  "/blog": "2026-11-24",
+};
 
 const locatieBeelden: Record<string, string[]> = {
   "": [BEELD.winkelGevel.bestand, BEELD.kraamToonbank.bestand],
@@ -65,7 +73,7 @@ const MEERTALIG: {
   { pad: "/contact", prioriteit: 0.6, frequentie: "yearly" as const },
   { pad: "/recepten", prioriteit: 0.6, frequentie: "monthly" as const },
   { pad: "/blog", prioriteit: 0.6, frequentie: "monthly" as const },
-  { pad: "/viskalender", prioriteit: 0.6, frequentie: "monthly" as const },
+  { pad: "/viskalender", gewijzigd: new Date("2026-11-24"), prioriteit: 0.6, frequentie: "monthly" as const },
   { pad: "/viswinkel-voorschoten", gewijzigd: new Date("2026-11-24"), prioriteit: 0.8, frequentie: "monthly" as const },
   { pad: "/viswinkel-leiden", gewijzigd: new Date("2026-11-24"), prioriteit: 0.8, frequentie: "monthly" as const },
   { pad: "/studentenkorting", gewijzigd: new Date("2026-11-24"), prioriteit: 0.6, frequentie: "monthly" as const },
@@ -114,7 +122,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     if (product.slug === "varlaks-zalm") continue; // The campaign page is its canonical product page.
     const pad = `/assortiment/${product.slug}`;
     for (const taal of LOCALES) {
-      regels.push({url: `${basis}/${taal}${pad}`, changeFrequency: "monthly", priority: 0.65, alternates: meertaligeAlternates(pad), images: productPhoto(product) ? [basis + productPhoto(product)!.src] : undefined});
+      regels.push({url: `${basis}/${taal}${pad}`, lastModified: CONTENT_DATES[pad] ? new Date(CONTENT_DATES[pad]) : undefined, changeFrequency: "monthly", priority: 0.65, alternates: meertaligeAlternates(pad), images: productPhoto(product) ? [basis + productPhoto(product)!.src] : undefined});
     }
   }
 

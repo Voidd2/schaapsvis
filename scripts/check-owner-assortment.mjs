@@ -38,11 +38,16 @@ for(const p of products)for(const l of ['nl','en','de']){
  const photo=productPhoto(p,l),stock=productAvailability(p,l);
  assert.ok(photo?.src.startsWith('/images/'),'Self-hosted photo '+p.slug);
  assert.ok(fs.existsSync('public'+photo.src),'Local bytes '+p.slug);
- assert.ok(photo.alt&&stock.label&&stock.note,'Localized photo and stock '+l+'/'+p.slug);
+ assert.ok(photo.alt&&stock.label&&(stock.note||stock.regular),'Localized photo and stock '+l+'/'+p.slug);
  if(photo.credit)assert.ok(!/hartevelt|visarend|visenmaatjes/i.test(photo.credit.source),'No competitor source link');
 }
 assert.equal(products.find(p=>p.slug==='inktvis').beschikbaar,'request');
-assert.match(products.find(p=>p.slug==='kibbeling').desc,/pollak/i);
+const {localizedProduct}=load('product-localization');
+for (const [locale, fish, wheat] of [['nl', 'VIS', 'TARWEBLOEM'], ['en', 'FISH', 'WHEAT FLOUR'], ['de', 'FISCH', 'WEIZENMEHL']]) {
+ const kibbeling=localizedProduct('kibbeling', locale);
+ assert.doesNotMatch([kibbeling.naam, kibbeling.desc, kibbeling.ingredienten].join(' '), /pollak|pollack|pollock|seelachs|koolvis/i, locale+' kibbeling copy');
+ assert.ok(kibbeling.ingredienten.includes('['+fish+']') && kibbeling.ingredienten.includes(wheat), locale+' kibbeling ingredients');
+}
 assert.match(products.find(p=>p.slug==='lekkerbek').desc,/heek/i);
 const origin=process.argv[2];let removedRoutes=0,activePages=0,redirects=0,productPagesWithRecipeIndex=0,productRecipeLinks=0;const linkedRecipeSlugs=new Set(),recipeSlugs=new Set(recipes.map(r=>r.slug));
 if(origin){

@@ -14,7 +14,7 @@ const LEIDEN = {
     paragraphs: ["Aan de toonbank vindt u kabeljauwfilet, VÅRLAKS-zalm uit Noord-Noorwegen en oesters. Vertel ons wat u wilt maken en voor hoeveel personen. We snijden de zalm voor u op maat en geven graag advies over de bereiding."],
     shop: {
       lunchHeading: "Haring, kibbeling en lekkerbek",
-      lunchText: "Onze haring snijden we elke dag. Neem hem los mee of op een broodje met ui en augurk. Voor een warme lunch bakken we kibbeling van stukjes pollak. Een lekkerbek is een hele filet van heek.",
+      lunchText: "Onze haring snijden we elke dag. Neem hem los mee of op een broodje met ui en augurk. Onze kibbeling bakken we goudbruin in een luchtig beslag. Een lekkerbek is een hele filet van heek.",
       marketsHeading: "Woensdag en zaterdag op de Leidse markt",
       marketsLink: "Bekijk onze marktkraam in Leiden",
       guideLink: "Het verschil tussen kibbeling en lekkerbek",
@@ -36,7 +36,7 @@ const LEIDEN = {
     paragraphs: ["At the counter you’ll find cod fillets, VÅRLAKS salmon from northern Norway and oysters. Tell us what you’re cooking and how many people are coming to dinner. We’ll cut the salmon to the size you need and share our cooking tips."],
     shop: {
       lunchHeading: "Herring, kibbeling and lekkerbek",
-      lunchText: "We cut our herring every day. Take it on its own or in a roll with onion and pickles. For a hot lunch, try our kibbeling, bite-sized pieces of battered pollack. A lekkerbek is a whole hake fillet.",
+      lunchText: "We cut our herring every day. Take it on its own or in a roll with onion and pickles. We fry our kibbeling in a light batter until golden. A lekkerbek is a whole hake fillet.",
       marketsHeading: "At Leiden market on Wednesdays and Saturdays",
       marketsLink: "Find our stall at Leiden market",
       guideLink: "The difference between kibbeling and lekkerbek",
@@ -58,7 +58,7 @@ const LEIDEN = {
     paragraphs: ["An unserer Theke finden Sie Kabeljaufilet, VÅRLAKS-Lachs aus Nordnorwegen und Austern. Erzählen Sie uns, was Sie kochen möchten und für wie viele Personen. Wir schneiden den Lachs passend zu und geben Ihnen Tipps für die Zubereitung."],
     shop: {
       lunchHeading: "Hering, Kibbeling und Lekkerbek",
-      lunchText: "Unseren Hering schneiden wir jeden Tag frisch. Sie bekommen ihn pur oder im Brötchen mit Zwiebeln und Gewürzgurke. Für ein warmes Mittagessen backen wir Kibbeling aus kleinen Pollackstücken. Ein Lekkerbek ist ein ganzes Seehechtfilet.",
+      lunchText: "Unseren Hering schneiden wir jeden Tag frisch. Sie bekommen ihn pur oder im Brötchen mit Zwiebeln und Gewürzgurke. Unseren Kibbeling backen wir in einem leichten Teig goldbraun aus. Ein Lekkerbek ist ein ganzes Seehechtfilet.",
       marketsHeading: "Mittwochs und samstags auf dem Leidener Markt",
       marketsLink: "Unser Fischstand auf dem Leidener Markt",
       guideLink: "Der Unterschied zwischen Kibbeling und Lekkerbek",

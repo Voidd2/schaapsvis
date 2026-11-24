@@ -292,7 +292,7 @@ const bestaandePosts: BlogPost[] = [
       {
         kop: "Kibbeling: stukjes",
         alineas: [
-          "Onze kibbeling maken we van pollak: stukjes vis in beslag, goudbruin gebakken. U kiest uit Ravigotte-, Knoflook- of cocktailsaus. Voor lekkerbek gebruiken we heek, geen pollak.",
+          "Voor onze kibbeling halen we stukjes vis door beslag en bakken we ze goudbruin. U kiest uit Ravigotte-, Knoflook- of cocktailsaus.",
         ],
       },
       {
@@ -314,7 +314,7 @@ const bestaandePosts: BlogPost[] = [
       { label: "Bekijk de voedingswaarden", href: "/assortiment" },
     ],
     seoKeywords:
-      "verschil kibbeling lekkerbek, kibbeling leiden, lekkerbek leiden, kibbeling pollak, kibbeling ravigottesaus",
+      "verschil kibbeling lekkerbek, kibbeling leiden, lekkerbek leiden, kibbeling ravigottesaus",
   },
   {
     slug: "de-echte-hollandse-garnaal",

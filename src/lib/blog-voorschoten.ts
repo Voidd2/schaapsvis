@@ -4,9 +4,10 @@ import type { BlogPost } from "./blog";
 export const VOORSCHOTEN_ARTIKELEN: BlogPost[] = [
   {
     slug: "kibbeling-voorschoten-vrijdag",
+    bijgewerkt: "2026-11-24",
     title: "Kibbeling in Voorschoten: zo maakt u er een maaltijd van",
     excerpt: "Kibbeling in Voorschoten halen? Kom vrijdag bij Hoogvliet. Ontdek wat erbij past, uit welke sauzen u kunt kiezen en hoe u uw maaltijd handig plant.",
-    datum: "2026-09-28", datumLabel: "28 september 2026", leestijd: "4 min", categorie: "Visweetjes", regio: "Voorschoten",
+    datum: "2026-09-28", datumLabel: "Bijgewerkt 24 november 2026", leestijd: "4 min", categorie: "Visweetjes", regio: "Voorschoten",
     fotoUrl: "/images/recepten/kibbeling-bakken.webp", fotoAlt: "Krokante kibbeling met citroen en saus als maaltijdinspiratie",
     seoKeywords: "kibbeling Voorschoten, gebakken vis Voorschoten, saus bij kibbeling",
     secties: [
@@ -16,7 +17,7 @@ export const VOORSCHOTEN_ARTIKELEN: BlogPost[] = [
       ] },
       { kop: "Welke saus bij de kibbeling?", alineas: [
         "Bij onze kibbeling kiest u uit Ravigotte-, Knoflook- of cocktailsaus. Liever zelf dippen? Neem de saus er apart bij.",
-        "Kibbeling en lekkerbek zijn niet dezelfde portie gebakken vis. Onze kibbeling maken we van pollak in kleinere stukken; onze lekkerbek is een gebakken heekfilet in beslag. Wat u kiest hangt af van uw voorkeur en hoe u het wilt eten. Bekijk onze uitleg over het verschil als u twijfelt."
+        "Kibbeling en lekkerbek zijn niet dezelfde portie gebakken vis. Voor onze kibbeling gebruiken we kleine stukjes vis. Onze lekkerbek is een gebakken heekfilet in beslag. Wat u kiest hangt af van uw voorkeur en hoe u het wilt eten. Bekijk onze uitleg over het verschil als u twijfelt."
       ] },
       { kop: "Drie manieren om kibbeling op tafel te zetten", alineas: [
         "Voor een snelle lunch: serveer de kibbeling met brood, wat komkommer en de saus apart. U hoeft daarvoor geen tweede warm gerecht te maken. Het werkt ook wanneer niet iedereen aan tafel dezelfde hoeveelheid wil eten.",

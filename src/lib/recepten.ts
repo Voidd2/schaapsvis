@@ -131,6 +131,7 @@ const receptenOrigineel: Recept[] = [
   },
   {
     slug: "kibbeling-bakken",
+    bijgewerkt: "2026-11-24",
     hoofdproduct: "kibbeling",
     title: "Kibbeling thuis bakken",
     subtitle: "Knapperig van buiten, mals van binnen — het frituren doet een volwassene",
@@ -141,7 +142,7 @@ const receptenOrigineel: Recept[] = [
     ],
     fotoLabel: "Goudbruin gebakken kibbeling met witte saus",
     vanSchaap: [
-      "800 g rauwe pollakfilet, zonder graten — vraag vooraf naar de mogelijkheden",
+      "800 g stevige witvisfilet, zonder graten",
     ],
     vanSupermarkt: [
       "150 g bloem + 2 el extra om de vis te bestuiven",
@@ -163,7 +164,7 @@ const receptenOrigineel: Recept[] = [
     verhaal: "Zelf kibbeling maken begint met rauwe visfilet en een koud beslag. Dep de vis goed droog en bak in kleine porties, zodat het korstje krokant blijft. Laat het frituren aan een volwassene over; kinderen kunnen op veilige afstand helpen met het beslag.",
     highlight: "200g p.p. aanbevolen",
     seoKeywords:
-      "kibbeling recept thuis, kibbeling bakken, pollak kibbeling",
+      "kibbeling recept thuis, kibbeling bakken",
     porties: 4,
   },
   {

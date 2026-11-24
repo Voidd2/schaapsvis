@@ -65,7 +65,7 @@ const PREPARED: Record<string, readonly [string, string]> = {
   krabsalade: ["Crab / surimi [FISH, CRUSTACEANS], mayonnaise (EGGS, MUSTARD), spring onion, salt, paprika.", "Krabben / Surimi [FISCH, KREBSTIERE], Mayonnaise (EIER, SENF), Frühlingszwiebel, Salz, Paprika."],
   tonijnsalade: ["Tuna (Thunnus albacares) [FISH], mayonnaise (EGGS, MUSTARD), onion, gherkin, salt, pepper.", "Thunfisch (Thunnus albacares) [FISCH], Mayonnaise (EIER, SENF), Zwiebel, Gewürzgurke, Salz, Pfeffer."],
   zeewiersalade: ["Wakame seaweed (Undaria pinnatifida), sesame oil, SOY sauce (water, soya beans [SOYA], wheat [GLUTEN], salt), vinegar, sugar, sesame seeds [SESAME].", "Wakame-Algen (Undaria pinnatifida), Sesamöl, SOJAsauce (Wasser, Sojabohnen [SOJA], Weizen [GLUTEN], Salz), Essig, Zucker, Sesamsamen [SESAM]."],
-  kibbeling: ["Pollak [FISH], WHEAT FLOUR, water, salt, raising agents (E450, E500), vegetable oil. Deep-fried. Sauces are available separately. Ask about the ingredients and allergens in your chosen sauce.", "Pollak [FISCH], WEIZENMEHL, Wasser, Salz, Backtriebmittel (E450, E500), Pflanzenöl. Frittiert. Die Saucen sind separat erhältlich. Fragen Sie nach den Zutaten und Allergenen der gewählten Sauce."],
+  kibbeling: ["Fish fillet [FISH], WHEAT FLOUR, water, salt, raising agents (E450, E500), vegetable oil. Deep-fried. Sauces are available separately. Ask about the ingredients and allergens in your chosen sauce.", "Fischfilet [FISCH], WEIZENMEHL, Wasser, Salz, Backtriebmittel (E450, E500), Pflanzenöl. Frittiert. Die Saucen sind separat erhältlich. Fragen Sie nach den Zutaten und Allergenen der gewählten Sauce."],
   lekkerbek: ["Hake [FISH], WHEAT FLOUR, water, salt, raising agent, vegetable oil. Deep-fried.", "Seehecht [FISCH], WEIZENMEHL, Wasser, Salz, Backtriebmittel, Pflanzenöl. Frittiert."],
   "broodje-haring": ["HERRING [FISH], bread roll (WHEAT FLOUR, yeast, water, salt) [GLUTEN], onion, gherkin (cucumber, vinegar, sugar, MUSTARD), salt.", "HERING [FISCH], Brötchen (WEIZENMEHL, Hefe, Wasser, Salz) [GLUTEN], Zwiebel, Gewürzgurke (Gurke, Essig, Zucker, SENF), Salz."],
   vissoep: ["Fresh fish (varies) [FISH], water, onion, carrot, CELERY, leek, potato, herbs, salt. May contain cream [MILK].", "Frischer Fisch (wechselnd) [FISCH], Wasser, Zwiebel, Karotte, SELLERIE, Lauch, Kartoffel, Kräuter, Salz. Kann Sahne [MILCH] enthalten."],
@@ -93,11 +93,13 @@ export function translatedIngredients(product: Product, lang: SiteLanguage): str
 }
 export function localizeProduct(product: Product, locale: string): Product {
   const lang = siteLanguage(locale);
-  if (lang === "nl") return product;
+  const catalogueProduct = { ...product };
+  delete catalogueProduct.bestelId;
+  if (lang === "nl") return catalogueProduct;
   const t = PRODUCT_TRANSLATIONS[product.slug];
   if (!t) throw new Error(`Missing product translation: ${product.slug}`);
   const index = lang === "en" ? 0 : 2;
-  return {...product, naam: t[index], desc: t[index + 1], ingredienten: translatedIngredients(product, lang), bevat: product.bevat.map(a => allergenLabel(a, lang)), badge: product.badge === "Biologisch" ? (lang === "en" ? "Organic" : "Bio") : product.badge};
+  return {...catalogueProduct, naam: t[index], desc: t[index + 1], ingredienten: translatedIngredients(product, lang), bevat: product.bevat.map(a => allergenLabel(a, lang)), badge: product.badge === "Biologisch" ? (lang === "en" ? "Organic" : "Bio") : product.badge};
 }
 export function localizedProduct(slug: string, locale: string) {
   const product = getProduct(slug);
