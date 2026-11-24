@@ -2,6 +2,7 @@ const copy = {
   nl: {
     unknown: "Bron niet vastgelegd", accountOnly: "Account zonder kortingsinschrijving",
     sources: {
+      "newsletter-landing": "Advertentiepagina voor de nieuwsbrief",
       "sitewide-popup": "Nieuwsbriefpop-up op de website",
       "varlaks-popup": "Pop-up op de VÅRLAKS-pagina", "locations-popup": "Pop-up op de locatiepagina",
       "discount-form": "Kortingspagina · Aanmelden voor kortingen", "newsletter-form": "Nieuwsbriefformulier",
@@ -12,6 +13,7 @@ const copy = {
   en: {
     unknown: "Source not recorded", accountOnly: "Account without a discount signup",
     sources: {
+      "newsletter-landing": "Newsletter ad landing page",
       "sitewide-popup": "Website newsletter pop-up",
       "varlaks-popup": "VÅRLAKS page pop-up", "locations-popup": "Locations page pop-up",
       "discount-form": "Discount signup page", "newsletter-form": "Newsletter form",
@@ -22,6 +24,7 @@ const copy = {
   de: {
     unknown: "Quelle nicht erfasst", accountOnly: "Konto ohne Rabatt-Anmeldung",
     sources: {
+      "newsletter-landing": "Anzeigenseite für den Newsletter",
       "sitewide-popup": "Newsletter-Popup auf der Website",
       "varlaks-popup": "Pop-up auf der VÅRLAKS-Seite", "locations-popup": "Pop-up auf der Standortseite",
       "discount-form": "Anmeldeseite für Rabatte", "newsletter-form": "Newsletterformular",

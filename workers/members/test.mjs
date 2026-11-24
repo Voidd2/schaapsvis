@@ -1108,6 +1108,33 @@ assert.equal((await expiredPassCheck.json()).valid, false, "the expired former p
   assert.equal((await row()).visit_city,null);
   sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(email);
 }
+// The campaign page uses explicit single opt-in and keeps the original acquisition source on retries.
+{
+  const email = "newsletter-landing@example.test";
+  const headers = { "CF-Connecting-IP": "203.0.113.235" };
+  const subscribe = (extra = {}) => call("/api/members/newsletter/subscribe", { method: "POST", headers,
+    body: { form: "newsletter-landing", locale: "nl", email, consent: true, consentVersion: "newsletter-landing-news-and-offers-v1", ...extra } });
+  const row = () => sqlite.prepare("SELECT * FROM newsletter_subscriptions WHERE email=?").get(email);
+  const sentBefore = sentEmails.length;
+  assert.equal((await subscribe({ consent: false })).status, 400);
+  assert.equal((await subscribe({ consentVersion: undefined })).status, 400);
+  assert.equal((await subscribe({ consentVersion: "discount-news-and-offers-v2" })).status, 400);
+  assert.equal(row(), undefined);
+  const response = await subscribe();
+  assert.equal(response.status, 202);
+  assert.equal((await response.json()).ok, true);
+  const original = row();
+  assert.equal(original.status, "subscribed");
+  assert.ok(original.consented_at && original.confirmed_at);
+  assert.equal(original.consent_text_version, "newsletter-landing-news-and-offers-v1");
+  assert.equal(original.source, "newsletter-landing");
+  assert.equal(original.region_tag, null);
+  assert.equal((await subscribe()).status, 202);
+  assert.deepEqual(row(), original);
+  assert.equal(sentEmails.length, sentBefore);
+  sqlite.prepare("DELETE FROM newsletter_subscriptions WHERE email=?").run(email);
+}
+
 // The first footer submit is a complete subscription. Optional preferences must
 // never determine retention, send mail or undo an unsubscribe.
 {

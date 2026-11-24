@@ -10,7 +10,7 @@ import styles from "./DiscountOfferPopup.module.css";
 
 const shownInSession = new Set<PopupExperiment>();
 const popupCooldownMs = 7 * 24 * 60 * 60 * 1000;
-const excludedPath = /\/(?:account|beheer|studentenkorting|kortingsbon|bestellen|privacyverklaring)(?:\/|$)/;
+const excludedPath = /\/(?:account|beheer|studentenkorting|kortingsbon|bestellen|nieuwsbrief|privacyverklaring)(?:\/|$)/;
 
 function alreadyShown(experiment: PopupExperiment) {
   if (shownInSession.has(experiment)) return true;
@@ -98,6 +98,7 @@ export function DiscountOfferPopup({ locale, experiment, enabled = true }: { loc
     };
   }, [open, variant, experiment]);
 
+  if (excludedPath.test(pathname)) return null;
   return <dialog ref={dialog} className={styles.offerDialog} aria-label={headline} onClose={() => setOpen(false)}>
     <div className={styles.offerImageFrame}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
