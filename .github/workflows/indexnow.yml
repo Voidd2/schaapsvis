@@ -1,0 +1,23 @@
+name: Notify IndexNow after publication
+on:
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: Published canonical URLs, separated by spaces or commas
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify published pages and submit
+        env:
+          PUBLISHED_URLS: ${{ inputs.urls }}
+        run: node scripts/submit-indexnow.mjs "$PUBLISHED_URLS"

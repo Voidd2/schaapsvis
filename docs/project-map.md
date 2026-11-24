@@ -57,3 +57,5 @@ Gerichte tests staan in de hoofd-README. Run niet de volledige sitebuild voor ee
 2. Gebruik `rg` op route, component- of foutnaam en open daarna alleen de directe aanroepers. Cloudflare-status wordt pas bekeken als de lokale code of deploystatus daar aanleiding toe geeft.
 3. Draai de kleinste passende controle: `npm run check:members` voor accounts/mail, `npm run check:content` voor assortiment/recepten en alleen een volledige Next- plus Cloudflare-build wanneer componenten, routes of runtimecode wijzigen.
 4. Controleer livegang altijd in deze vaste volgorde: GitHub `main`-SHA, Worker `schaapsvis-members`, Worker `schaapsvis`, echte domeinroute. Zo wordt Vercel niet ten onrechte als bewijs voor Cloudflare gebruikt.
+
+Bing-controle, IndexNow-publicatiestap, nulmeting en terugdraaiinstructies staan in docs/seo/bing-wijzigingen-2026-11-24.md. Houd tekstwijzigingen bij in docs/seo/tekstwijzigingen.md en vergelijk gelijke perioden vóór een terugdraaiing.
