@@ -9,7 +9,7 @@ import { productPhoto } from "@/lib/product-beeld";
 import { legacyTrioSlugs } from "@/lib/seafood-catalog";
 import { FEESTDAGEN_PRODUCTEN } from "@/lib/feestdagen-producten";
 
-import { BEELD, kraamGalerij } from "@/lib/beeld";
+import { BEELD, vrijdagKraamFoto } from "@/lib/beeld";
 import { BEDRIJF } from "@/lib/bedrijf";
 import { LOCALES } from "@/lib/seo";
 import { siteOpSlot } from "@/lib/siteAccess";
@@ -37,7 +37,7 @@ const locatieBeelden: Record<string, string[]> = {
   "/viswinkel-leiden": [BEELD.winkelToonbank.bestand],
   "/viswinkel-voorschoten": [
     BEELD.marktVoorschoten.bestand,
-    ...kraamGalerij.map(foto => foto.bestand),
+    vrijdagKraamFoto.bestand,
   ],
   "/varlaks": ["/images/varlaks/zalmfilet-1200.webp", BEELD.marktVoorschoten.bestand],
 };
@@ -67,7 +67,7 @@ const MEERTALIG: {
   { pad: "/blog", prioriteit: 0.6, frequentie: "monthly" as const },
   { pad: "/viskalender", prioriteit: 0.6, frequentie: "monthly" as const },
   { pad: "/viswinkel-voorschoten", gewijzigd: new Date("2026-11-24"), prioriteit: 0.8, frequentie: "monthly" as const },
-  { pad: "/viswinkel-leiden", gewijzigd: new Date("2026-11-23"), prioriteit: 0.8, frequentie: "monthly" as const },
+  { pad: "/viswinkel-leiden", gewijzigd: new Date("2026-11-24"), prioriteit: 0.8, frequentie: "monthly" as const },
   { pad: "/studentenkorting", gewijzigd: new Date("2026-11-24"), prioriteit: 0.6, frequentie: "monthly" as const },
   { pad: "/aanbiedingen", prioriteit: 0.6, frequentie: "monthly" as const },
   { pad: "/marktkraam-leiden", prioriteit: 0.7, frequentie: "monthly" as const },

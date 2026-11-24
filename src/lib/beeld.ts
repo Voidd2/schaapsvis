@@ -105,7 +105,7 @@ export const BEELD = {
     terugval: "Onze toonbank",
   },
   kraamToonbank: {
-    waar: "Homepage en de fotogalerij van de viskraam in Voorschoten",
+    waar: "Banner op de homepage",
     wat: "De toonbank met haring, oesters en salades in de viskraam in Voorschoten.",
     bestand: "/images/schaaps/haring-oesters-viskraam-voorschoten.webp",
     alt: "Haring en oesters in de toonbank van de viskraam",
@@ -267,10 +267,9 @@ export const BEELD = {
 
 export type BeeldNaam = keyof typeof BEELD;
 
-export const kraamGalerij = [
-  { ...BEELD.kraamToonbank, breedte: 870, hoogte: 580 },
-  { ...standplaatsVoorschoten, bestand: "/images/schaaps/vrijdag-bij-de-viskraam.webp", breedte: 822, hoogte: 548 },
-] as const;
+export const vrijdagKraamFoto = {
+  ...standplaatsVoorschoten, bestand: "/images/schaaps/vrijdag-bij-de-viskraam.webp", breedte: 822, hoogte: 548,
+} as const;
 
 /** Pure data check, safe to call from server and client components. */
 export function heeftBeeld(naam: BeeldNaam): boolean {

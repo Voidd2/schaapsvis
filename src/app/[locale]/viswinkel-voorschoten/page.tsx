@@ -12,7 +12,7 @@ import { bestelContact } from "@/lib/bestel-contact";
 import { blogPosts } from "@/lib/blog";
 import { localizeBlog } from "@/lib/blog-localization";
 import { voorschotenText } from "@/lib/voorschoten-copy";
-import { BEELD, kraamGalerij } from "@/lib/beeld";
+import { BEELD, vrijdagKraamFoto } from "@/lib/beeld";
 
 const kraamFoto = BEELD.marktVoorschoten;
 
@@ -82,21 +82,29 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       </div>
       <aside className="rounded-2xl p-7" style={{ background: "var(--lichtblauw)" }}><h2 className="text-xl mb-4">{t("Waar en wanneer?")}</h2><dl className="space-y-4"><div><dt className="kapitaal">{t("Locatie")}</dt><dd>{kraam.adres}<br />{kraam.postcode} {kraam.plaats}</dd></div><div><dt className="kapitaal">{t("Open")}</dt><dd>{t("Elke vrijdag 08:30–17:30")}</dd></div><div><dt className="kapitaal">{t("Een vraag?")}</dt><dd><a className="underline" href={`tel:${BEDRIJF.telefoon.e164}`}>{BEDRIJF.telefoon.weergave}</a></dd></div></dl><a className="knop knop-lijn mt-6" href={kraam.mapsUrl} target="_blank" rel="noopener noreferrer">{t("Bekijk de route →")}</a></aside>
     </div></Sectie>
-    <Sectie grond="papier"><div className="grid md:grid-cols-3 gap-7"><div><p className="kapitaal mb-3">{t("Prijs vooraf bespreken")}</p><h2 className="text-2xl mb-3">{t("Kies wat bij uw budget past")}</h2><p className="leading-relaxed">{t("Vertel ons voor hoeveel mensen u vis zoekt. We denken graag mee over de vissoorten, adviseren u over de juiste hoeveelheid en spreken de prijs vooraf met u af.")}</p></div><div id="verse-vis" className="scroll-mt-32 md:scroll-mt-48"><p className="kapitaal mb-3">{t("Goede kwaliteit")}</p><h2 className="text-2xl mb-3">{t("Vis met aandacht uitgezocht")}</h2><p className="leading-relaxed">{t("Elke vrijdag vindt u bij ons verse kabeljauw, zalm en oesters. De andere vissoorten wisselen per week. We kopen alleen vis in als de kwaliteit goed is.")}</p><Link className="inline-block mt-4 underline" href={`/${locale}/varlaks#certificaten`}>{t("VÅRLAKS-zalm en certificaten →")}</Link></div><div><p className="kapitaal mb-3">{t("Persoonlijk advies")}</p><h2 className="text-2xl mb-3">{t("Zoekt u iets speciaals?")}</h2><p className="leading-relaxed">{t("Stuur ons uw wensen via WhatsApp en vermeld dat u vrijdag in Voorschoten wilt ophalen. We bespreken wat mogelijk is, de hoeveelheid en de prijs. Visschalen vraagt u bij ons aan via WhatsApp.")}</p><a className="inline-block mt-4 underline font-semibold" href={contact.href}>{t("Vraag via WhatsApp →")}</a></div></div></Sectie>
     <Sectie grond="zand">
-      <h2 id="assortiment-viskraam" className="text-3xl mb-7">{t("Wat haalt u bij onze viskraam?")}</h2>
-      <div id="viskraam-haring" className="grid gap-4 sm:grid-cols-2 lg:gap-6">
-        {kraamGalerij.map(foto => (
-          <figure key={foto.bestand} className="min-w-0">
-            <StaticResponsiveImage src={foto.bestand}
-              alt={locale === "en" || locale === "de" ? foto.vertalingen[locale].alt : foto.alt}
-              width={foto.breedte} height={foto.hoogte} loading="lazy"
-              sizes="auto, (max-width: 639px) calc(100vw - 40px), (max-width: 1720px) 47vw, 810px"
-              className="block w-full h-auto rounded-xl" />
-          </figure>
-        ))}
+      <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
+        <div className="grid gap-8">
+          <div>
+            <p className="kapitaal mb-3">{t("Prijs vooraf bespreken")}</p>
+            <h2 className="text-2xl mb-3">{t("Kies wat bij uw budget past")}</h2>
+            <p className="leading-relaxed">{t("Vertel ons voor hoeveel mensen u vis zoekt. We denken graag mee over de vissoorten, adviseren u over de juiste hoeveelheid en spreken de prijs vooraf met u af.")}</p>
+          </div>
+          <div>
+            <p className="kapitaal mb-3">{t("Persoonlijk advies")}</p>
+            <h2 className="text-2xl mb-3">{t("Zoekt u iets speciaals?")}</h2>
+            <p className="leading-relaxed">{t("Stuur ons uw wensen via WhatsApp en vermeld dat u vrijdag in Voorschoten wilt ophalen. We bespreken wat mogelijk is, de hoeveelheid en de prijs. Visschalen vraagt u bij ons aan via WhatsApp.")}</p>
+            <a className="inline-block mt-4 underline font-semibold" href={contact.href}>{t("Vraag via WhatsApp →")}</a>
+          </div>
+        </div>
+        <figure id="assortiment-viskraam" className="min-w-0">
+          <StaticResponsiveImage src={vrijdagKraamFoto.bestand}
+            alt={locale === "en" || locale === "de" ? vrijdagKraamFoto.vertalingen[locale].alt : vrijdagKraamFoto.alt}
+            width={vrijdagKraamFoto.breedte} height={vrijdagKraamFoto.hoogte} loading="lazy"
+            sizes="auto, (max-width: 1023px) 100vw, (max-width: 1720px) 47vw, 810px"
+            className="block w-full h-auto rounded-xl" />
+        </figure>
       </div>
-      <p className="mt-7 max-w-3xl">{t("Het aanbod wisselt met de vangst en levering. Bekijk het")} <Link className="underline" href={`/${locale}/assortiment`}>{t("assortiment")}</Link>{t(", onze")} <Link className="underline" href={`/${locale}/viskalender`}>{t("viskalender")}</Link> {t("of de")} <Link className="underline" href={`/${locale}/recepten`}>{t("visrecepten")}</Link> {t("voor inspiratie.")}</p>
     </Sectie>
     <Sectie grond="papier"><p className="kapitaal mb-3">{t("Voor uw vrijdag in Voorschoten")}</p><h2 className="text-3xl mb-6">{t("Van vis uitzoeken naar iets lekkers op tafel")}</h2><p className="max-w-3xl mb-7 leading-relaxed">{t("Praktische tips voor een snelle maaltijd, vis uit de oven of een borrel met gasten. Zo kunt u gericht boodschappen doen en uw wensen met ons bespreken.")}</p><div className="grid md:grid-cols-3 gap-6">{blogPosts.filter(p => p.regio === "Voorschoten").map(p=>localizeBlog(p,locale)).map(post => <article key={post.slug} className="recipe-card"><Image src={post.fotoUrl} alt={post.fotoAlt} width={1200} height={800} sizes="(max-width: 768px) 100vw, 33vw" className="w-full aspect-[3/2] object-cover" /><div className="recipe-card-body"><h3 className="text-xl mb-3"><Link className="hover:underline" href={`/${locale}/blog/${post.slug}`}>{post.title}</Link></h3><p className="leading-relaxed mb-4">{post.excerpt}</p><Link className="underline font-semibold" href={`/${locale}/blog/${post.slug}`}>{t("Lees de tips →")}</Link></div></article>)}</div></Sectie>
     <Sectie grond="papier" smal><h2 id="veelgestelde-vragen" className="text-3xl mb-6 scroll-mt-32 md:scroll-mt-48">{t("Vragen over vis kopen in Voorschoten")}</h2><Vragen vragen={FAQ} /></Sectie>

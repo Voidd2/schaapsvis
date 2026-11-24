@@ -175,17 +175,19 @@ export default async function HomePage({
           <div>
             <h2 className="text-[1.85rem] md:text-[2.5rem] leading-tight">{h("locatiesKop")}</h2>
             <p className="mt-2">{BEDRIJF.adres.straat}, {BEDRIJF.adres.plaats}</p>
-            <a href={BEDRIJF.maps.route} className="knop knop-navy mt-4">
-              {h("winkelRoute")} <span aria-hidden="true">↗</span>
-            </a>
+            <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+              <a href={BEDRIJF.maps.route} className="knop knop-navy">
+                {h("winkelRoute")} <span aria-hidden="true">↗</span>
+              </a>
+              <Link className="home-visit-link" href={`/${locale}/viswinkel-leiden`}>
+                {h("winkelPagina")} <span aria-hidden="true">→</span>
+              </Link>
+            </div>
           </div>
           <div className="home-visit-details">
             <details>
               <summary>{h("winkelUren")}</summary>
               <ShopHours locale={locale} />
-              <Link className="home-visit-link" href={`/${locale}/viswinkel-leiden`}>
-                {h("winkelPagina")} <span aria-hidden="true">→</span>
-              </Link>
             </details>
             <details>
               <summary>{h("marktdagen")}</summary>
