@@ -1,5 +1,9 @@
 # Tekstwijzigingen voor lokale vindbaarheid
 
+## 26 november 2026 · Toonbankfoto beter zichtbaar
+
+Geen tekstwijzigingen. De bestaande echte toonbankfoto op de homepage wordt volledig in zijn oorspronkelijke 3:2-verhouding getoond, zonder de eerdere uitsnede. Op desktop krijgt de foto 5/8 van de bannerbreedte; de kop wordt iets kleiner. Op mobiel blijft de foto boven de tekst, nu zonder afsnijden. Geldt voor NL, EN en DE. Terugdraaien: revert de commit van branch `codex/toonbank-banner-26-nov`.
+
 ## 26 november 2026 · Direct naar de locaties
 
 Toegevoegd bij persoonlijk advies op het assortiment en bij openingstijden op reguliere productpagina's. Bestaande koppen, productteksten en homepage-intro blijven behouden.

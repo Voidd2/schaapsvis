@@ -111,7 +111,7 @@ export default async function HomePage({
           </div>
           <div className="home-counter-photo">
             <Image src={toonbank.bestand} alt={toonbankAlt} width={870} height={580}
-              sizes="auto, (max-width: 767px) calc(100vw - 40px), (max-width: 1720px) 56vw, 960px" loading="lazy" />
+              sizes="auto, (max-width: 767px) calc(100vw - 40px), (max-width: 1720px) 63vw, 1050px" loading="lazy" />
           </div>
         </header>
           <ul className="home-products grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-8">
