@@ -5,7 +5,8 @@
 // Zowel de homepage (reviewsectie) als de structured data (JSON-LD) lezen
 // hiervandaan, dus ze lopen nooit meer uit elkaar.
 // Belangrijk: alleen ECHTE reviews — niets verzinnen (SEO- én vertrouwensrisico).
-// Bron: Google Maps, uitgelezen 15 juli 2026.
+// Reviews: Google Maps, uitgelezen 15 juli 2026.
+// Totaalscore en aantal: Google Bedrijfsprofiel Leiden, gecontroleerd 26 november 2026.
 // ─────────────────────────────────────────────────────────────────────────────
 
 export interface GoogleReview {
@@ -16,8 +17,8 @@ export interface GoogleReview {
   text: string;          // volledige reviewtekst
 }
 
-export const googleRating = "4.6";
-export const googleReviewCount = "116";
+export const googleRating = "4.7";
+export const googleReviewCount = "123";
 
 export const googleMapsUrl =
   "https://www.google.com/maps/place/Schaap%27s+Vishandel/@52.1517798,4.4891644,17z/data=!4m6!3m5!1s0x47c5c68b327c5b31:0xb364be6e52553f5!8m2!3d52.1517798!4d4.4891644!16s%2Fg%2F1ptw4b069";

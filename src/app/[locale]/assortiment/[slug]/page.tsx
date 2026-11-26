@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LocationLinks } from "@/components/LocationLinks";
 import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -116,6 +117,7 @@ export default async function ProductDetailPage({params}: Props) {
           {!availability.regular && <a href={enquiry.href} className="knop knop-navy">{enquiry.label}</a>}
           <Link href={`/${lang}/bezoek-ons`} className={availability.regular ? "knop knop-navy" : "font-semibold underline underline-offset-4"}>{c.hours} →</Link>
         </div>
+        {availability.regular && <LocationLinks locale={lang} />}
         {availability.note && <p className="mt-5 pl-5" style={{borderLeft:`2px solid ${availability.unavailable?"#be123c":"var(--navy)"}`}}>{availability.note}</p>}
         {isSalmon && <Link href={`/${lang}/varlaks#film`} className="block mt-6 pl-5" style={{borderLeft:"2px solid var(--seafoam)"}}><p className="kapitaal mb-2">{c.alternative}</p><p className="font-semibold underline">{c.salmon}</p><p className="text-sm mt-2 leading-relaxed">{c.salmonNote}</p></Link>}
         {reading.map(p=><Link key={p.slug} href={`/${lang}/blog/${p.slug}`} className="block mt-4 underline">{p.title} →</Link>)}

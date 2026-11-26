@@ -1,6 +1,7 @@
 import { seasonalCatalogOpen } from "@/lib/seasonal-availability";
 import { productHref } from "@/lib/product-href";
 import Link from "next/link";
+import { LocationLinks } from "@/components/LocationLinks";
 import { connection } from "next/server";
 import { StaticResponsiveImage as Image } from "@/components/StaticResponsiveImage";
 import type { Metadata } from "next";
@@ -93,6 +94,6 @@ export default async function AssortimentPage({ params }: { params: Promise<{ lo
       <div><p className="kapitaal">{bbq("assortimentLink")}</p><h2 className="text-2xl md:text-3xl mt-2">{bbq("assortimentHeading")}</h2><p className="max-w-2xl mt-3 text-[#4d6370]">{bbq("assortimentIntro")}</p></div>
       <Link href={`/${locale}/barbecue-gourmet`} className="knop knop-rood shrink-0">{bbq("assortimentLink")}<ArrowUpRight size={17} aria-hidden="true" /></Link>
     </div></Sectie></>}
-    <section className="collection-contact"><div className="section-wrap"><div><p className="kapitaal">{locale === "nl" ? "Persoonlijk advies" : locale === "de" ? "Persönliche Beratung" : "Personal advice"}</p><h2>{c.question}</h2><p>{c.note}</p></div><a className="knop knop-rood" href={wa.href}><MessageCircle size={19} aria-hidden="true" />{wa.label}</a></div></section>
+    <section className="collection-contact"><div className="section-wrap"><div><p className="kapitaal">{locale === "nl" ? "Persoonlijk advies" : locale === "de" ? "Persönliche Beratung" : "Personal advice"}</p><h2>{c.question}</h2><p>{c.note}</p><LocationLinks locale={locale} /></div><a className="knop knop-rood" href={wa.href}><MessageCircle size={19} aria-hidden="true" />{wa.label}</a></div></section>
   </>;
 }
