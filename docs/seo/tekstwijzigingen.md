@@ -1,5 +1,23 @@
 # Tekstwijzigingen voor lokale vindbaarheid
 
+## 26 november 2026 · Direct naar de locaties
+
+Toegevoegd bij persoonlijk advies op het assortiment en bij openingstijden op reguliere productpagina's. Bestaande koppen, productteksten en homepage-intro blijven behouden.
+
+| Taal | Nieuwe link naar Leiden | Nieuwe link naar Voorschoten | Toegankelijke naam linkgroep |
+|---|---|---|---|
+| NL | Viswinkel Leiden · Herenstraat 48 → | Viskraam bij Hoogvliet in Voorschoten · vrijdag → | Onze locaties |
+| EN | Fish shop in Leiden · Herenstraat 48 → | Fish stall at Hoogvliet in Voorschoten · Fridays → | Our locations |
+| DE | Fischgeschäft Leiden · Herenstraat 48 → | Fischstand bei Hoogvliet in Voorschoten · freitags → | Unsere Standorte |
+
+De links openen de bestaande locatiepagina in dezelfde taal. Ze geven geen voorraadgarantie voor individuele producten. Bestaande artikelen bevatten al locatielinks.
+
+**Google-score op de site:** 4,6 / 116 reviews → 4,7 / 123 reviews. Gecontroleerd in het Leidse Google Bedrijfsprofiel op 26 november 2026. Geen reviewtekst herschreven.
+
+**Printbare reviewkaarten (los bestand, niet op de site):** “Hoe was uw bezoek?”, “Deel uw ervaring op Google.”, “Scan de QR-code om een review te schrijven.” Met locatie “Viswinkel Leiden · Herenstraat 48” of “Viskraam Voorschoten · bij Hoogvliet”.
+
+Geen bedrijfsprofieltekst aangepast; de gecontroleerde adres-, website- en openingstijdvelden waren al correct. Onderzoek, uitgangsmeting en rollback staan in `lokale-seo-2026-11-26.md`.
+
 ## 24 november 2026 · Beeld op de marktpagina
 
 De [marktpagina](https://schaapsvishandel.nl/nl/marktkraam-leiden) gebruikt de bestaande paginakop, inleiding, locatiegegevens, productteksten, links en vragen. Alleen de beschrijvingen voor schermlezers bij de twee nieuwe foto's zijn aangepast of toegevoegd.

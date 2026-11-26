@@ -6,6 +6,15 @@ import { ACCESS_COOKIE, heeftGeldigeSiteToegang, heeftToegestaanIp, ipVanVertrou
 
 const intlMiddleware = createMiddleware(routing);
 
+// These public legacy URLs have a fixed Dutch destination (locale detection is off).
+// Keep this scoped: seasonal redirects and account/API routes remain temporary.
+const permanentPublicPaths: Record<string, string> = {
+  "/": "/nl",
+  "/viswinkel-leiden": "/nl/viswinkel-leiden",
+  "/viswinkel-voorschoten": "/nl/viswinkel-voorschoten",
+  "/marktkraam-leiden": "/nl/marktkraam-leiden",
+};
+
 /**
  * Wat er ook achter het slot bereikbaar moet blijven.
  *
@@ -74,6 +83,15 @@ export function proxy(request: NextRequest) {
     res.headers.set("X-Robots-Tag", "noindex, nofollow");
     res.headers.set("Cache-Control", "no-store, must-revalidate");
     return res;
+  }
+
+  if (!opSlot && (request.method === "GET" || request.method === "HEAD")) {
+    const destination = permanentPublicPaths[pathname];
+    if (destination) {
+      const url = request.nextUrl.clone();
+      url.pathname = destination;
+      return NextResponse.redirect(url, 308);
+    }
   }
 
   if (seasonalPathPaused(pathname)) {
